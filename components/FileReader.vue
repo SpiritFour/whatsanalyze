@@ -17,19 +17,6 @@
     </h1>
 
     <input type="file" id="uploadmytextfile" @change="requestUploadFile" />
-
-    <div v-if="chatStruct">
-      <textarea style="height: 600px" v-model="chatStruct['date']"></textarea>
-
-      <textarea
-        style="height: 600px"
-        v-model="chatStruct['message']"
-      ></textarea>
-
-      <textarea style="height: 600px" v-model="chatStruct['name']"></textarea>
-
-      <textarea style="height: 600px" v-model="chatStruct['time']"></textarea>
-    </div>
   </div>
 </template>
 
@@ -50,6 +37,7 @@ export default {
     }
   },
   methods: {
+    // TODO: REFACRURE
     makeStruct(names) {
       var names = names.split(" ");
       var count = names.length;
@@ -60,6 +48,7 @@ export default {
       }
       return constructor;
     },
+    // TODO: REFACRURE &
     createStruct(content) {
       // Message can be in these formats: https://docs.google.com/spreadsheets/d/1mZCE_tFelvqmLh0vIt7vMjU1OYB0etuhwXRl3Fzv6k8/edit#gid=0
       // variables give the index ralative to the start of the message to seperate the data in the next functions
@@ -164,6 +153,7 @@ export default {
 
       return struct;
     },
+
     dragOver() {
       this.isDragging = true;
     },
@@ -193,6 +183,7 @@ export default {
             this.textSource = f.target.result;
             this.isDragging = false;
             // convert data
+            // TODO: Convert and emit
             this.chatStruct = this.createStruct(this.textSource);
 
             console.log(this.chatStruct);

@@ -1,6 +1,6 @@
 <template>
   <v-content>
-    <drop />
+    <file-reader />
   </v-content>
 </template>
 
