@@ -3,9 +3,7 @@
     <file-reader />
 
     {{ hund }}
-    <div @click="updateHund()" class="helo">
-      UPDATE
-    </div>
+    <div class="helo" @click="updateHund()">UPDATE</div>
   </v-content>
 </template>
 
@@ -17,13 +15,13 @@ export default {
     },
     updateHund() {
       this.renameHund("Hans");
-    }
+    },
   },
   data() {
     return {
-      hund: "Paul"
+      hund: "Paul",
     };
-  }
+  },
 };
 </script>
 

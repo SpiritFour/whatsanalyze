@@ -28,13 +28,13 @@ export default {
       isDragging: false,
       wrongFile: false,
       textSource: null,
-      chatStruct: null
+      chatStruct: null,
     };
   },
   computed: {
     getClasses() {
       return { isDragging: this.isDragging };
-    }
+    },
   },
   methods: {
     // TODO: REFACRURE
@@ -178,7 +178,7 @@ export default {
         // allows text only
         if (file.type.indexOf("text/") >= 0) {
           var reader = new FileReader();
-          reader.onload = f => {
+          reader.onload = (f) => {
             this.textSource = f.target.result;
             this.isDragging = false;
             // convert data
@@ -196,8 +196,8 @@ export default {
           this.isDragging = false;
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -216,11 +216,6 @@ export default {
   transition: background-color 0.2s ease-in-out;
 
   font-family: sans-serif;
-}
-
-.isDragging {
-  background-color: #999;
-  border-color: #fff;
 }
 
 textarea {
