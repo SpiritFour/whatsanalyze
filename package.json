@@ -23,7 +23,6 @@
   "dependencies": {
     "chart.js": "^2.9.4",
     "core-js": "^3.8.3",
-    "husky": "4.2.3",
     "dataframe-js": "^1.4.4",
     "npm": "^7.5.4",
     "nuxt": "^2.14.12",
@@ -35,6 +34,7 @@
     "@vue/test-utils": "^1.1.2",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^26.6.3",
+    "husky": "4.2.3",
     "eslint": "^7.20.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-vue": "^7.6.0",
