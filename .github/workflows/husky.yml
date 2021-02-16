@@ -29,5 +29,5 @@ jobs:
         run: npm install -g yarn
       - name: install dependencies
         run: yarn install
-      - run: prettier --write .
-      - run: eslint .
+      - run: yarn run prettier --write .
+      - run: yarn run eslint .
