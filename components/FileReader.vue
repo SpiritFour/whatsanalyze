@@ -96,8 +96,7 @@ export default {
             content.length - 1
           );
         } else {
-          temp = content.substring(
-            indexArray[i] + messageStartIndexArray[i], indexArray[i + 1]
+          temp = content.substring(indexArray[i] + messageStartIndexArray[i], indexArray[i + 1]
           );
         }
 
