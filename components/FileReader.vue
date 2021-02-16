@@ -89,16 +89,16 @@ export default {
       var nameLengthArray = [];
       var temp = "";
 
-      for (var i = 0; i < indexArray.length; i++) {
-        if (i == indexArray.length - 1) {
+      for (var j = 0; j < indexArray.length; j++) {
+        if (j == indexArray.length - 1) {
           temp = content.substring(
-            indexArray[i] + messageStartIndexArray[i],
+            indexArray[j] + messageStartIndexArray[j],
             content.length - 1
           );
         } else {
           temp = content.substring(
-            indexArray[i] + messageStartIndexArray[i],
-            indexArray[i + 1]
+            indexArray[j] + messageStartIndexArray[j],
+            indexArray[j + 1]
           );
         }
 
@@ -106,25 +106,25 @@ export default {
         match = reD.exec(temp);
 
         if (match != null) {
-          nameLengthArray[i] = match.index;
+          nameLengthArray[j] = match.index;
           // update name
-          nameArray[i] = temp.substring(0, match.index);
+          nameArray[j] = temp.substring(0, match.index);
         } else {
-          nameLengthArray[i] = 0;
+          nameLengthArray[j] = 0;
           // update name
-          nameArray[i] = "ER: NO NAME FOUND";
+          nameArray[j] = "ER: NO NAME FOUND";
         }
 
         // fill array // +2 gets rid of ": " before the start of the message
-        if (i == indexArray.length - 1) {
-          messageArray[i] = content.substring(
-            indexArray[i] + messageStartIndexArray[i] + nameLengthArray[i] + 2,
+        if (j == indexArray.length - 1) {
+          messageArray[j] = content.substring(
+            indexArray[j] + messageStartIndexArray[j] + nameLengthArray[j] + 2,
             content.length
           );
         } else {
-          messageArray[i] = content.substring(
-            indexArray[i] + messageStartIndexArray[i] + nameLengthArray[i] + 2,
-            indexArray[i + 1]
+          messageArray[j] = content.substring(
+            indexArray[j] + messageStartIndexArray[j] + nameLengthArray[j] + 2,
+            indexArray[j + 1]
           );
         }
       }
