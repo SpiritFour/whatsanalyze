@@ -12,8 +12,9 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
-    "npm": "^7.5.4",
+    "dataframe-js": "^1.4.4",
     "nuxt": "^2.14.12",
+    "npm": "^7.5.4",
     "push-dir": "^0.4.1"
   },
   "devDependencies": {
@@ -25,3 +26,4 @@
     "vue-jest": "^3.0.4"
   }
 }
+
