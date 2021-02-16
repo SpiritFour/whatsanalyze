@@ -11,11 +11,13 @@
     "deploy": "nuxt generate && push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
+    "chart.js": "^2.9.4",
     "core-js": "^3.8.3",
     "dataframe-js": "^1.4.4",
-    "nuxt": "^2.14.12",
     "npm": "^7.5.4",
-    "push-dir": "^0.4.1"
+    "nuxt": "^2.14.12",
+    "push-dir": "^0.4.1",
+    "vue-chartjs": "^3.5.1"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.11.3",
@@ -26,4 +28,3 @@
     "vue-jest": "^3.0.4"
   }
 }
-
