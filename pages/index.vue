@@ -1,34 +1,48 @@
 <template>
   <v-content>
-    <file-reader />
-
-    {{ hund }}
-    <div class="helo" @click="updateHund()">UPDATE</div>
+    <FileHandler />
+    <BarChart />
   </v-content>
 </template>
 
 <script>
+import DataFrame from "dataframe-js";
 export default {
-  methods: {
-    renameHund(name) {
-      this.hund = name;
-    },
-    updateHund() {
-      this.renameHund("Hans");
-    },
-  },
   data() {
     return {
-      hund: "Paul",
+      isStripeLoaded: false,
+    };
+  },
+  methods: {
+    test() {
+      const df = new DataFrame(
+        [
+          { c1: 1, c2: 6 },
+          { c4: 1, c3: 2 },
+        ],
+        ["c1", "c2", "c3", "c4"]
+      );
+      console.log(df);
+    },
+  },
+  head() {
+    return {
+      title: "Payment Page - My awesome project",
+      script: [
+        {
+          hid: "stripe",
+          src: "https://gmousse.github.io/dataframe-js/dist/dataframe.js",
+          defer: true,
+          // Changed after script load
+          callback: () => {
+            this.isStripeLoaded = true;
+            this.test();
+          },
+        },
+      ],
     };
   },
 };
 </script>
 
-<style>
-.helo {
-  background-color: aliceblue;
-  color: black;
-  border-radius: 10px;
-}
-</style>
+<style></style>

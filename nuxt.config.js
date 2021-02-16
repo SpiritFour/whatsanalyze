@@ -6,10 +6,6 @@ export default {
 
   // Target: https://go.nuxtjs.dev/config-target
   target: "static",
-  // the website root is /<repository-name>.
-  router: {
-    base: "/best-chat-analyzer/",
-  },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
