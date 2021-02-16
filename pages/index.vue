@@ -1,36 +1,16 @@
 <template>
   <v-content>
-    <file-reader />
-
-    {{ hund }}
-    <div @click="updateHund()" class="helo">
-      UPDATE
-    </div>
+    <FileHandler />
   </v-content>
 </template>
 
 <script>
 export default {
-  methods: {
-    renameHund(name) {
-      this.hund = name;
-    },
-    updateHund() {
-      this.renameHund("Hans");
-    }
-  },
+  methods: {},
   data() {
-    return {
-      hund: "Paul"
-    };
+    return {};
   }
 };
 </script>
 
-<style>
-.helo {
-  background-color: aliceblue;
-  color: black;
-  border-radius: 10px;
-}
-</style>
+<style></style>
