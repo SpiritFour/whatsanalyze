@@ -91,7 +91,8 @@ export default {
 
       for (var i = 0; i < indexArray.length; i++) {
         if (i == indexArray.length - 1) {
-          temp = content.substring(indexArray[i] + messageStartIndexArray[i],content.length - 1
+          temp = content.substring(
+            indexArray[i] + messageStartIndexArray[i],content.length - 1
           );
         } else {
           temp = content.substring(indexArray[i] + messageStartIndexArray[i], indexArray[i + 1]
