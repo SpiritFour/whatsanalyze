@@ -6,9 +6,9 @@ export default {
   mounted() {
     this.renderChart([10, 20, 30, 40, 50, 60, 70], {
       barPercentage: 0.5,
-      barThickness: 6
+      barThickness: 6,
     });
-  }
+  },
 };
 </script>
 

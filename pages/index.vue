@@ -10,7 +10,7 @@ import DataFrame from "dataframe-js";
 export default {
   data() {
     return {
-      isStripeLoaded: false
+      isStripeLoaded: false,
     };
   },
   methods: {
@@ -18,12 +18,12 @@ export default {
       const df = new DataFrame(
         [
           { c1: 1, c2: 6 },
-          { c4: 1, c3: 2 }
+          { c4: 1, c3: 2 },
         ],
         ["c1", "c2", "c3", "c4"]
       );
       console.log(df);
-    }
+    },
   },
   head() {
     return {
@@ -37,11 +37,11 @@ export default {
           callback: () => {
             this.isStripeLoaded = true;
             this.test();
-          }
-        }
-      ]
+          },
+        },
+      ],
     };
-  }
+  },
 };
 </script>
 
