@@ -18,7 +18,9 @@
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown",
     "*.{js,vue}": "eslint --cache --fix",
-    "*.{js,css,md,vue}": "prettier --write"
+    "*.{js,css,md,vue}": "prettier --write",
+    "*.js": "eslint --cache --fix",
+    "*.{js,css,md}": "prettier --write"
   },
   "dependencies": {
     "core-js": "^3.8.3",
