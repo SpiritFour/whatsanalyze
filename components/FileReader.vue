@@ -153,7 +153,6 @@ export default {
 
       return struct;
     },
-
     dragOver() {
       this.isDragging = true;
     },

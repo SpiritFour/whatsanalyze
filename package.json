@@ -7,11 +7,14 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "test": "jest"
+    "test": "jest",
+    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
     "core-js": "^3.8.3",
-    "nuxt": "^2.14.12"
+    "npm": "^7.5.4",
+    "nuxt": "^2.14.12",
+    "push-dir": "^0.4.1"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.11.3",
