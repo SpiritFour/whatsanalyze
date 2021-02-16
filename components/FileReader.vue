@@ -39,7 +39,7 @@ export default {
   methods: {
     // TODO: REFACRURE
     makeStruct(names) {
-      var names = names.split(" ");
+      names = names.split(" ");
       var count = names.length;
       function constructor() {
         for (var i = 0; i < count; i++) {
@@ -89,12 +89,16 @@ export default {
       var nameLengthArray = [];
       var temp = "";
 
-      for (var i = 0; i < indexArray.length; i++) {
+      for (i = 0; i < indexArray.length; i++) {
         if (i == indexArray.length - 1) {
-          temp = content.substring(indexArray[i] + messageStartIndexArray[i],content.length - 1
+          temp = content.substring(
+            indexArray[i] + messageStartIndexArray[i],
+            content.length - 1
           );
         } else {
-          temp = content.substring(indexArray[i] + messageStartIndexArray[i], indexArray[i + 1]
+          temp = content.substring(
+            indexArray[i] + messageStartIndexArray[i],
+            indexArray[i + 1]
           );
         }
 
@@ -129,7 +133,7 @@ export default {
       // e.g. announcments when people get added to groups, security change etc
       var delArray = [];
       var a = 0;
-      for (var i = 0; i < nameArray.length; i++) {
+      for (i = 0; i < nameArray.length; i++) {
         if (nameArray[i] == "ER: NO NAME FOUND") {
           // no ":" found. Delete this line
           delArray[a] = i;
@@ -137,7 +141,7 @@ export default {
         }
       }
 
-      for (var i = 0; i < a; i++) {
+      for (i = 0; i < a; i++) {
         messageArray.splice(delArray[i] - i, 1);
         nameArray.splice(delArray[i] - i, 1);
         timeArray.splice(delArray[i] - i, 1);
