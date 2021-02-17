@@ -1,0 +1,4 @@
+.nuxt
+*.md
+node_modules
+coverage

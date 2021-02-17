@@ -33,12 +33,12 @@ export default {
   computed: {
     getClasses() {
       return { isDragging: this.isDragging };
-    }
+    },
   },
   methods: {
     // TODO: REFACRURE
     makeStruct(names) {
-      var names = names.split(" ");
+      names = names.split(" ");
       var count = names.length;
       function constructor() {
         for (var i = 0; i < count; i++) {
@@ -88,7 +88,7 @@ export default {
       var nameLengthArray = [];
       var temp = "";
 
-      for (var i = 0; i < indexArray.length; i++) {
+      for (i = 0; i < indexArray.length; i++) {
         if (i == indexArray.length - 1) {
           temp = content.substring(
             indexArray[i] + messageStartIndexArray[i],
@@ -132,7 +132,7 @@ export default {
       // e.g. announcments when people get added to groups, security change etc
       var delArray = [];
       var a = 0;
-      for (var i = 0; i < nameArray.length; i++) {
+      for (i = 0; i < nameArray.length; i++) {
         if (nameArray[i] == "ER: NO NAME FOUND") {
           // no ":" found. Delete this line
           delArray[a] = i;
@@ -140,7 +140,7 @@ export default {
         }
       }
 
-      for (var i = 0; i < a; i++) {
+      for (i = 0; i < a; i++) {
         messageArray.splice(delArray[i] - i, 1);
         nameArray.splice(delArray[i] - i, 1);
         timeArray.splice(delArray[i] - i, 1);
@@ -175,7 +175,7 @@ export default {
         // allows text only
         if (file.type.indexOf("text/") >= 0) {
           var reader = new FileReader();
-          reader.onload = f => {
+          reader.onload = (f) => {
             this.textSource = f.target.result;
             this.isDragging = false;
             // convert data
@@ -191,8 +191,8 @@ export default {
           this.isDragging = false;
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -211,11 +211,6 @@ export default {
   transition: background-color 0.2s ease-in-out;
 
   font-family: sans-serif;
-}
-
-.isDragging {
-  background-color: #999;
-  border-color: #fff;
 }
 
 textarea {
