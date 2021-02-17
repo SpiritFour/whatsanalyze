@@ -1,8 +1,6 @@
 <template>
   <v-main>
-    <h1>Whatsanalyse</h1>
     <Content :page="page" />
-
     <FileHandler />
     <BarChart />
     <LineChart />

@@ -1,6 +1,7 @@
 <template>
   <v-app>
-    <v-main>
+    <Header />
+    <v-main style="margin-top: 6em">
       <v-container>
         <nuxt />
       </v-container>
