@@ -1,9 +1,35 @@
 <template>
-  <v-content>
+  <v-main>
+    <h1>Whatsanalyse</h1>
+    <Content :page="page" />
+
     <FileHandler />
-  </v-content>
+    <BarChart />
+    <LineChart />
+    <RadarChart />
+    <DonughtChart />
+  </v-main>
 </template>
 
-<script></script>
+<script>
+import DataFrame from "dataframe-js";
+export default {
+  async asyncData({ $content }) {
+    const page = await $content("home").fetch();
+    console.log(page);
+    return {
+      page,
+    };
+  },
+
+  data() {
+    return {
+      isStripeLoaded: false,
+    };
+  },
+  methods: {
+  },
+};
+</script>
 
 <style></style>

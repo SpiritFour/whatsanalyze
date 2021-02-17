@@ -21,6 +21,7 @@
     "*.{js,css,md,vue}": "prettier --write"
   },
   "dependencies": {
+    "@nuxt/content": "^1.13.1",
     "chart.js": "^2.9.4",
     "core-js": "^3.8.3",
     "dataframe-js": "^1.4.4",

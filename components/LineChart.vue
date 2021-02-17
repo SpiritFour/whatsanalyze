@@ -1,8 +1,8 @@
 <script>
-import { Bar } from "vue-chartjs";
+import { Line } from "vue-chartjs";
 
 export default {
-  extends: Bar,
+  extends: Line,
   props: {
     chartdata: {
       type: Object,
@@ -12,13 +12,14 @@ export default {
           datasets: [
             {
               label: "Person 1",
-              backgroundColor: "rgba(255, 99, 132, 1)",
-              borderColor: "rgba(255, 99, 132, 0.1)",
+              backgroundColor: "rgba(255, 99, 132, 0.1)",
+              borderColor: "rgba(255, 99, 132, 1)",
               data: [60, 10]
             },
             {
               label: "Person 2",
-              backgroundColor: "rgba(75, 192, 192, 1)",
+              backgroundColor: "rgba(75, 192, 192, 0.1)",
+              borderColor: "rgba(75, 192, 192, 1)",
               data: [40, 70]
             }
           ]

@@ -58,11 +58,9 @@ export default {
     },
     process(files) {
       this.wrongFile = false;
-
       // allows only 1 file
       if (files.length === 1) {
         let file = files[0];
-
         // allows text only
         if (file.type.indexOf("text/") >= 0) {
           var reader = new FileReader();
