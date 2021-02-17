@@ -42,8 +42,8 @@
   left: 0;
   height: 5em;
   top: 0;
-  background: $red;
-  color: $white;
+  background: $c-red;
+  color: $c-white;
 }
 .foot {
   padding: 1em;
@@ -51,8 +51,8 @@
   width: 100vw;
   height: 5em;
   bottom: 0;
-  background: $red;
-  color: $white;
+  background: $c-red;
+  color: $c-white;
 }
 
 h1,
