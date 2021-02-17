@@ -4,7 +4,6 @@
   </v-content>
 </template>
 
-<script>
-</script>
+<script></script>
 
 <style></style>

@@ -17,13 +17,12 @@
     </h1>
 
     <input type="file" id="uploadmytextfile" @change="requestUploadFile" />
-    <h3>{{messages}}</h3>
+    <h3>{{ messages }}</h3>
   </div>
 </template>
 
 <script>
-
-import { parseString } from 'whatsapp-chat-parser';
+import { parseString } from "whatsapp-chat-parser";
 
 export default {
   name: "DropAnImage",
@@ -33,16 +32,15 @@ export default {
       wrongFile: false,
       textSource: null,
       chatStruct: null,
-      messages: []
+      messages: [],
     };
   },
   computed: {
     getClasses() {
       return { isDragging: this.isDragging };
-    }
+    },
   },
   methods: {
-
     dragOver() {
       this.isDragging = true;
     },
@@ -68,10 +66,12 @@ export default {
         // allows text only
         if (file.type.indexOf("text/") >= 0) {
           var reader = new FileReader();
-          reader.onload = f => {
+          reader.onload = (f) => {
             this.textSource = f.target.result;
             this.isDragging = false;
-            parseString(this.textSource).then(messages => this.messages = messages)
+            parseString(this.textSource).then(
+              (messages) => (this.messages = messages)
+            );
           };
           // this is the method to read a text file content
           reader.readAsText(file);
@@ -81,8 +81,8 @@ export default {
           this.isDragging = false;
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -102,7 +102,6 @@ export default {
 
   font-family: sans-serif;
 }
-
 
 textarea {
   width: 100%;
