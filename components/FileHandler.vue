@@ -67,9 +67,9 @@ export default {
           reader.onload = (f) => {
             this.textSource = f.target.result;
             this.isDragging = false;
-            parseString(this.textSource).then(
-              (messages) => (this.messages = messages)
-            );
+            parseString(this.textSource)
+              .then((messages) => (this.messages = messages))
+              .then(() => this.$emit("new_messages", this.messages));
           };
           // this is the method to read a text file content
           reader.readAsText(file);
@@ -80,6 +80,14 @@ export default {
         }
       }
     },
+  },
+  mounted() {
+    // console.log( this.$content('chat_example').fetch())
+    fetch("/chat_example.txt")
+      .then((response) => response.text())
+      .then(parseString)
+      .then((messages) => (this.messages = messages))
+      .then(() => this.$emit("new_messages", this.messages));
   },
 };
 </script>

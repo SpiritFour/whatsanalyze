@@ -1,17 +1,19 @@
 <template>
   <v-main>
-    <h1>Whatsanalyse</h1>
+    <div class="text-h1">Whatsanalyse</div>
     <Content :page="page" />
 
-    <FileHandler />
+    <FileHandler @new_messages="messages = $event" />
     <BarChart />
-    <LineChart />
+    <LineChart :chartdata="chat2frequencies(messages)" />
     <RadarChart />
     <DonughtChart />
   </v-main>
 </template>
 
 <script>
+import { chat2frequencies } from "~/functions/transformChatData";
+
 export default {
   async asyncData({ $content }) {
     const page = await $content("home").fetch();
@@ -24,9 +26,10 @@ export default {
   data() {
     return {
       isStripeLoaded: false,
+      messages: [],
     };
   },
-  methods: {},
+  methods: { chat2frequencies },
 };
 </script>
 
