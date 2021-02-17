@@ -21,6 +21,7 @@
     "*.{js,css,md,vue}": "prettier --write"
   },
   "dependencies": {
+    "@nuxt/content": "^1.13.1",
     "chart.js": "^2.9.4",
     "core-js": "^3.8.3",
     "dataframe-js": "^1.4.4",
@@ -34,10 +35,10 @@
     "@vue/test-utils": "^1.1.2",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^26.6.3",
-    "husky": "4.2.3",
     "eslint": "^7.20.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-vue": "^7.6.0",
+    "husky": "4.2.3",
     "jest": "^26.6.3",
     "lint-staged": "^10.5.4",
     "prettier": "2.2.1",
