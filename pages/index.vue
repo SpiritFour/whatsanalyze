@@ -1,18 +1,27 @@
 <template>
-  <v-content>
+  <v-main>
+    <h1>Whatsanalyse</h1>
+    <Content :page="page" />
+
     <FileHandler />
     <BarChart />
     <LineChart />
     <RadarChart />
     <DonughtChart />
-  </v-content>
+  </v-main>
 </template>
 
 <script>
 import DataFrame from "dataframe-js";
-import DonughtChart from "~/components/DonughtChart.vue";
+
 export default {
-  components: { DonughtChart },
+  async asyncData({ $content }) {
+    const page = await $content("home").fetch();
+    console.log(page);
+    return {
+      page,
+    };
+  },
   data() {
     return {
       isStripeLoaded: false,
