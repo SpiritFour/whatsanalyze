@@ -48,7 +48,11 @@ export default {
       },
     },
   },
-
+  watch: {
+    chartdata: function () {
+      this.renderChart(this.chartdata, this.options);
+    },
+  },
   mounted() {
     this.renderChart(this.chartdata, this.options);
   },
