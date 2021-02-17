@@ -12,10 +12,10 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
-    "dataframe-js": "^1.4.4",
-    "nuxt": "^2.14.12",
     "npm": "^7.5.4",
-    "push-dir": "^0.4.1"
+    "nuxt": "^2.14.12",
+    "push-dir": "^0.4.1",
+    "whatsapp-chat-parser": "^3.1.0"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.11.3",
@@ -26,4 +26,3 @@
     "vue-jest": "^3.0.4"
   }
 }
-
