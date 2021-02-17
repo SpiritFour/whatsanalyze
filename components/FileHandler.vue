@@ -22,13 +22,12 @@
 
 <script>
 export default {
-  name: "DropAnImage",
   data() {
     return {
       isDragging: false,
       wrongFile: false,
       textSource: null,
-      chatStruct: null,
+      chatData: null
     };
   },
   computed: {
@@ -170,11 +169,9 @@ export default {
     },
     process(files) {
       this.wrongFile = false;
-
       // allows only 1 file
       if (files.length === 1) {
         let file = files[0];
-
         // allows text only
         if (file.type.indexOf("text/") >= 0) {
           var reader = new FileReader();
@@ -183,11 +180,9 @@ export default {
             this.isDragging = false;
             // convert data
             // TODO: Convert and emit
-            this.chatStruct = this.createStruct(this.textSource);
-
-            console.log(this.chatStruct);
+            this.chatData = this.createStruct(this.textSource);
+            console.log(this.chatData);
           };
-
           // this is the method to read a text file content
           reader.readAsText(file);
         } else {

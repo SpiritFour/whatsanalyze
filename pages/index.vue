@@ -2,6 +2,9 @@
   <v-content>
     <FileHandler />
     <BarChart />
+    <LineChart />
+    <RadarChart />
+    <DonughtChart />
   </v-content>
 </template>
 
