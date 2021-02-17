@@ -1,5 +1,5 @@
 <template>
-  <article>
+  <article style="padding-top: 1em; padding-bottom: 2em">
     <h1>{{ page.title }}</h1>
     <nuxt-content :document="page" />
   </article>
