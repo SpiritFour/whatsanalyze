@@ -12488,6 +12488,11 @@ webpackbar@^4.0.0:
     text-table "^0.2.0"
     wrap-ansi "^6.0.0"
 
+whatsapp-chat-parser@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/whatsapp-chat-parser/-/whatsapp-chat-parser-3.1.0.tgz#723e23ff832aa6583db803e9dea5ce187199162d"
+  integrity sha512-xZ8qX7HfsqgEsZvMuDEA8lCRV6ZtCvzdrzrPh8hgOn1QDGdElXtaGBd7PgCsu9IzSdRYgHNTydg6Nt+dWYU0FQ==
+
 whatwg-encoding@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/whatwg-encoding/-/whatwg-encoding-1.0.5.tgz"
