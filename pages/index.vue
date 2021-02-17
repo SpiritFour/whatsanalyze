@@ -10,9 +10,7 @@
 
 <script>
 import DataFrame from "dataframe-js";
-import DonughtChart from "~/components/DonughtChart.vue";
 export default {
-  components: { DonughtChart },
   data() {
     return {
       isStripeLoaded: false,
