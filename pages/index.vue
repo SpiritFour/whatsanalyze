@@ -2,12 +2,17 @@
   <v-content>
     <FileHandler />
     <BarChart />
+    <LineChart />
+    <RadarChart />
+    <DonughtChart />
   </v-content>
 </template>
 
 <script>
 import DataFrame from "dataframe-js";
+import DonughtChart from "~/components/DonughtChart.vue";
 export default {
+  components: { DonughtChart },
   data() {
     return {
       isStripeLoaded: false
