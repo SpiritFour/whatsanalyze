@@ -1,37 +1,36 @@
 <template>
   <v-app>
-    <div class="nav">
-      <h1>
-        <img
-          src="@/assets/images/chat-24px.svg"
-          height="40px"
-          alt="chat icon"
-          style="vertical-align: bottom"
-        />
-        WhatsAnalyse
-      </h1>
-      <h4>- The Chat Visualization Tool</h4>
+    <v-main style="overflow: auto; margin-bottom: 6em">
+      <div class="nav">
+        <h1>
+          <img
+            src="@/assets/images/chat-24px.svg"
+            height="40px"
+            alt="chat icon"
+            style="vertical-align: bottom"
+          />
+          WhatsAnalyse
+        </h1>
+        <h4>- The Chat Visualization Tool</h4>
 
-      <!-- Menu items -->
-      <!-- <span style="float: right; margin-right: 15vw; vertical-align: bottom; margin-top: 0.66em">
+        <!-- Menu items -->
+        <!-- <span style="float: right; margin-right: 15vw; vertical-align: bottom; margin-top: 0.66em">
              <h3>link1</h3>
              <h3>link2</h3>
              <h3>link3</h3>
         </span> -->
-    </div>
-
-    <v-main style="margin: 6em 0; overflow: auto">
-      <v-container>
+      </div>
+      <v-container style="margin-top: 6em">
         <nuxt />
       </v-container>
     </v-main>
 
-    <v-footer absolute app class="footer">
+    <div class="foot" style="text-align: center">
       <h3>
         WhatsAnalyse
         <span>&copy; {{ new Date().getFullYear() }}</span>
       </h3>
-    </v-footer>
+    </div>
   </v-app>
 </template>
 
@@ -43,6 +42,15 @@
   left: 0;
   height: 5em;
   top: 0;
+  background: $red;
+  color: $white;
+}
+.foot {
+  padding: 1em;
+  position: absolute;
+  width: 100vw;
+  height: 5em;
+  bottom: 0;
   background: $red;
   color: $white;
 }
