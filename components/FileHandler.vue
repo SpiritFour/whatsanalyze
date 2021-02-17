@@ -41,13 +41,14 @@ export default {
     },
   },
   methods: {
+    // add absolute and personal id to each entry of the data structure
     extendDataStructure(messages) {
       let authors = {};
       messages.forEach(function (object, index) {
         if (!(object.author in authors)) authors[object.author] = 0;
         else authors[object.author] += 1;
-        object.absolute_counter = index;
-        object.personal_counter = authors[object.author];
+        object.absolute_id = index;
+        object.personal_id = authors[object.author];
       });
       return messages;
     },
