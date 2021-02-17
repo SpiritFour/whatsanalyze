@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import DataFrame from "dataframe-js";
 export default {
   async asyncData({ $content }) {
     const page = await $content("home").fetch();
@@ -27,8 +26,7 @@ export default {
       isStripeLoaded: false,
     };
   },
-  methods: {
-  },
+  methods: {},
 };
 </script>
 
