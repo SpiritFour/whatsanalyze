@@ -2,24 +2,18 @@
   <v-main>
     <Content :page="page" class="main-el" />
 
-    <FileHandler @new_messages="messages = $event" />
-    <BarChart :chartdata="funFacts(messages)" />
-    <DonughtChart :chartdata="shareOfSpeech(messages)" />
+    <FileHandler @new_messages="chat_ = new Chat($event)" />
+    <DonughtChart :chartdata="chat_" />
     <RadarChart />
   </v-main>
 </template>
 
 <script>
-import {
-  chat2frequencies,
-  funFacts,
-  shareOfSpeech,
-} from "~/functions/transformChatData";
+import { Chat } from "~/functions/transformChatData";
 
 export default {
   async asyncData({ $content }) {
     const page = await $content("home").fetch();
-    console.log(page);
     return {
       page,
     };
@@ -28,10 +22,10 @@ export default {
   data() {
     return {
       isStripeLoaded: false,
-      messages: [],
+      chat_: new Chat(),
     };
   },
-  methods: { chat2frequencies, funFacts, shareOfSpeech },
+  methods: { Chat },
 };
 </script>
 
