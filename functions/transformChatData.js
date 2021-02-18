@@ -16,6 +16,25 @@ function totalNumberOfWords(chat_object) {
 
 // Find hapax legomenons, a word or an expression that occurs only once within the context.
 function uniqueWords(chat_object) {
+  function singleOccurrence(value) {
+    return value[1] == 1;
+  }
+
+  let distribution = _sorted_freq_array(chat_object);
+  return distribution.filter(singleOccurrence);
+}
+
+function match_emojys(chat_object) {
+  const regexpEmojiPresentation = /\p{Emoji_Presentation}/gu;
+  function isEmoji(value) {
+    return value[0].match(regexpEmojiPresentation);
+  }
+  let distribution = _sorted_freq_array(chat_object);
+
+  return distribution.filter(isEmoji);
+}
+
+function _sorted_freq_array(chat_object) {
   const message_string = chat_object.reduce(
     (n, { message }) => n + " " + message,
     " "
@@ -25,12 +44,17 @@ function uniqueWords(chat_object) {
   message_array.map(function (item) {
     distribution[item] = (distribution[item] || 0) + 1;
   });
-  return { fix: 1 };
-  /*
-  return Object.fromEntries(
-    Object.entries(distribution).filter(([k, v]) => v === 1)
+  let sorted_distribution = Object.entries(distribution).sort(
+    (a, b) => b[1] - a[1]
   );
-  */
+  return sorted_distribution;
+}
+
+function get_longest_message(chat_object) {
+  const longestMessage = Math.max(
+    ...chat_object.map((object) => object.message.length)
+  );
+  return longestMessage;
 }
 
 function getMessagesPerPerson(chat_object) {
@@ -67,11 +91,11 @@ var d = {
 };
 
 export function shareOfSpeech(chat_object) {
-  var data = getMessagesPerPerson(chat_object);
+  let data = getMessagesPerPerson(chat_object);
   let values = Object.values(data);
-  let values_lenght = [];
+  let values_length = [];
   values.forEach(function (value) {
-    values_lenght.push(value.length);
+    values_length.push(value.length);
   });
   return {
     labels: Object.keys(data).slice(1),
@@ -79,16 +103,25 @@ export function shareOfSpeech(chat_object) {
       {
         label: "Share of Speech",
         backgroundColor: ["rgba(75, 192, 192, 1)", "rgba(255, 99, 132, 1)"],
-        data: values_lenght.slice(1),
+        data: values_length.slice(1),
       },
     ],
   };
 }
 
 export function funFacts(chat_object) {
+  // 100,000 words equals a novel
   let number_of_words = totalNumberOfWords(chat_object);
+  // words only used once in the complete chat ( hapax legomenons )
   let unique_words = uniqueWords(chat_object);
-  console.log(Object.keys(unique_words), number_of_words);
+  // number of different words used in this chat
+  let different_words = _sorted_freq_array(chat_object).length;
+  // used emojis sorted
+  let sorted_emojys = match_emojys(chat_object);
+  // longest message in the chat
+  let longest_message = get_longest_message(chat_object);
+
+  console.log(longest_message, different_words, sorted_emojys);
   return {
     labels: ["UnFun Facts"],
     datasets: [
@@ -96,7 +129,7 @@ export function funFacts(chat_object) {
         label: "Unique words used in this chat",
         backgroundColor: "rgba(255, 99, 132, 1)",
         borderColor: "rgba(255, 99, 132, 0.1)",
-        data: [Object.keys(unique_words).length],
+        data: [unique_words.length],
       },
       {
         label: "Total Number of Words you typed",
