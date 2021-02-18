@@ -1,5 +1,7 @@
 <template>
   <v-main>
+    <Content :page="page" class="main-el" />
+  
     <FileHandler @new_messages="messages = $event" id="drop" />
     <BarChart :chartdata="funFacts(messages)" />
     <DonughtChart :chartdata="shareOfSpeech(messages)" />
@@ -33,7 +35,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style >
 .main-el {
   margin-top: 1em;
   margin-bottom: 1em;
