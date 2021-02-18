@@ -6,7 +6,7 @@ export default {
   props: {
     chartdata: {
       type: Object,
-      default: function() {
+      default: function () {
         return {
           labels: ["Moritz", "Paul"],
           datasets: [
@@ -14,29 +14,34 @@ export default {
               label: "Donught 1",
               backgroundColor: [
                 "rgba(75, 192, 192, 1)",
-                "rgba(255, 99, 132, 1)"
+                "rgba(255, 99, 132, 1)",
               ],
-              data: [60, 10]
-            }
-          ]
+              data: [60, 10],
+            },
+          ],
         };
-      }
+      },
     },
     options: {
       type: Object,
-      default: function() {
+      default: function () {
         return {
           responsive: true,
           maintainAspectRatio: false,
           legend: {
-            position: "bottom"
-          }
+            position: "bottom",
+          },
         };
-      }
-    }
+      },
+    },
+  },
+  watch: {
+    chartdata: function () {
+      this.renderChart(this.chartdata, this.options);
+    },
   },
   mounted() {
     this.renderChart(this.chartdata, this.options);
-  }
+  },
 };
 </script>

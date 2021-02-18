@@ -4,15 +4,18 @@
     <Content :page="page" />
 
     <FileHandler @new_messages="messages = $event" />
-    <BarChart />
-    <LineChart :chartdata="chat2frequencies(messages)" />
+    <BarChart :chartdata="funFacts(messages)" />
+    <DonughtChart :chartdata="shareOfSpeech(messages)" />
     <RadarChart />
-    <DonughtChart />
   </v-main>
 </template>
 
 <script>
-import { chat2frequencies } from "~/functions/transformChatData";
+import {
+  chat2frequencies,
+  funFacts,
+  shareOfSpeech,
+} from "~/functions/transformChatData";
 
 export default {
   async asyncData({ $content }) {
@@ -29,7 +32,7 @@ export default {
       messages: [],
     };
   },
-  methods: { chat2frequencies },
+  methods: { chat2frequencies, funFacts, shareOfSpeech },
 };
 </script>
 

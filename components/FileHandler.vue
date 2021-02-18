@@ -17,7 +17,6 @@
     </h1>
 
     <input type="file" id="uploadmytextfile" @change="requestUploadFile" />
-    <h3>{{ messages }}</h3>
   </div>
 </template>
 
