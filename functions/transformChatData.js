@@ -202,16 +202,19 @@ export class Chat {
 
     // iterate over persons
     var datasets = this.messagesPerPerson.map((person) => {
-      var hist_info = new Array(x_axis.length).fill(0);
-      person.messages.forEach(
-        (message) =>
-          (hist_info[x_axis.indexOf(message.date.toDateString())] += 1)
-      );
+      var hist_info = {};
+      person.messages.forEach((message) => {
+        var ds = message.date.toDateString();
+        hist_info[ds] = (hist_info[ds] || 0) + 1;
+      });
+
       return {
         label: person.name,
         backgroundColor: person.color,
         borderColor: person.color,
-        data: hist_info,
+        data: Object.entries(hist_info).map((entry) => {
+          return { x: entry[0], y: entry[1] };
+        }),
       };
     });
 
