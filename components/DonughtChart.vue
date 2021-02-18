@@ -9,12 +9,11 @@ export default {
   },
   watch: {
     chartdata: function () {
-      if (this.chartdata) {
-        let a = this.chartdata.getShareOfSpeech();
-        console.log(a);
-        this.renderChart(this.chartdata.getShareOfSpeech(), this.options);
-      }
+      this.renderChart(this.chartdata.getShareOfSpeech(), this.options);
     },
+  },
+  mounted() {
+    this.renderChart(this.chartdata.getShareOfSpeech(), this.options);
   },
 };
 </script>

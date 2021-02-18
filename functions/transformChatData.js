@@ -1,3 +1,5 @@
+import { chatColors } from "~/functions/colors";
+
 export class Chat {
   static remove_named_messages(chatObject, name = "system") {
     return chatObject.filter(
@@ -108,16 +110,20 @@ export class Chat {
   }
 
   constructor(chatObject = []) {
+    // this one is the complete input
     this.chatObject = chatObject;
+    // here we remove messages (i.e. system messages)
     this.filterdChatObject = Chat.remove_named_messages(chatObject);
-    this._sortedFreqDict = null;
+    // frequencies for all words in chat (excluding system)
+    this._sortedFreqList = null;
+    // here we have the messages per person, also adding colors to them
     this._messagesPerPerson = null;
   }
 
   get sortedFreqDict() {
-    if (this._sortedFreqDict) return this._sortedFreqDict;
-    this._sortedFreqDict = this._getSortedFreqDict();
-    return this._sortedFreqDict;
+    if (this._sortedFreqList) return this._sortedFreqList;
+    this._sortedFreqList = this._getSortedFreqDict();
+    return this._sortedFreqList;
   }
 
   _getSortedFreqDict() {
@@ -131,23 +137,26 @@ export class Chat {
   }
 
   _getMessagesPerPerson() {
-    // todo also add colors
-    return Chat.getMessagesPerPerson(this.filterdChatObject);
+    let persons = Chat.getMessagesPerPerson(this.filterdChatObject);
+    let enrichedPersons = [];
+    Object.keys(persons).map((name, idx) => {
+      enrichedPersons.push({
+        name: name,
+        color: chatColors[idx % chatColors.length],
+        messages: persons[name],
+      });
+    });
+    return enrichedPersons;
   }
 
   getShareOfSpeech() {
-    let values = Object.values(this.messagesPerPerson);
-    let valueLength = [];
-    values.forEach(function (value) {
-      valueLength.push(value.length);
-    });
     return {
-      labels: Object.keys(this.messagesPerPerson),
+      labels: this.messagesPerPerson.map((person) => person.name),
       datasets: [
         {
           label: "Share of Speech",
-          backgroundColor: ["rgba(75, 192, 192, 1)", "rgba(255, 99, 132, 1)"],
-          data: valueLength,
+          backgroundColor: this.messagesPerPerson.map((person) => person.color),
+          data: this.messagesPerPerson.map((person) => person.messages.length),
         },
       ],
     };
