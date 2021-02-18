@@ -98,13 +98,13 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .drop {
   width: 100%;
-  height: 10vh;
-  background-color: #eee;
+  height: 20vh;
+  background-color: $c-blue-accent;
   border: 10px solid #eee;
-
+  color: $c-white;
   display: flex;
   align-items: center;
   justify-content: center;
