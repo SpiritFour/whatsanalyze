@@ -9,7 +9,7 @@
       <FileHandler @new_messages="chat_ = new Chat($event)" />
     </div>
 
-    <div v-show="!isShowingCharts" class="explainer-container">
+    <div class="explainer-container">
       <div>
         <h2 style="font-size: 3em">How it works</h2>
         <div class="explainer-list">
@@ -123,7 +123,7 @@
 
     <Content :page="page" class="main-el mt-15" />
 
-    <div v-show="isShowingCharts">
+    <div v-show="isShowingChats">
       <DonughtChart :chartdata="chat_" />
     </div>
   </v-main>
@@ -143,7 +143,7 @@ export default {
 
   data() {
     return {
-      isShowingCharts: false,
+      isShowingChats: false,
       isStripeLoaded: false,
       chat_: new Chat(),
     };
