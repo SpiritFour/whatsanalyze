@@ -4,6 +4,7 @@
 
     <FileHandler @new_messages="chat_ = new Chat($event)" />
     <DonughtChart :chartdata="chat_" />
+    <BarChart :chartdata="chat_" :hour="true" />
     <RadarChart />
   </v-main>
 </template>

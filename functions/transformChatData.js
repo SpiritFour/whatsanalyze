@@ -109,6 +109,14 @@ export class Chat {
     };
   }
 
+  static hourlyDataFromChat(messages) {
+    let hours = new Array(24).fill(0);
+    messages.map((message) => {
+      hours[message.date.getHours()] += 1;
+    });
+    return hours;
+  }
+
   constructor(chatObject = []) {
     // this one is the complete input
     this.chatObject = chatObject;
@@ -159,6 +167,19 @@ export class Chat {
           data: this.messagesPerPerson.map((person) => person.messages.length),
         },
       ],
+    };
+  }
+
+  getHourlyData() {
+    return {
+      labels: [...Array(24).keys()],
+      datasets: this.messagesPerPerson.map((person) => {
+        return {
+          label: person.name,
+          backgroundColor: person.color,
+          data: Chat.hourlyDataFromChat(person.messages),
+        };
+      }),
     };
   }
 }
