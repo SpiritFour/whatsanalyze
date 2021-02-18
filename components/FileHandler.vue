@@ -76,10 +76,20 @@ export default {
             parseString(this.textSource)
               .then((messages) => (this.messages = messages))
               .then(() => this.$emit("new_messages", this.messages));
+            this.$gtag.event("file-parsed", {
+              event_category: "home",
+              event_label: "lead",
+              value: "1",
+            });
           };
           // this is the method to read a text file content
           reader.readAsText(file);
         } else {
+          this.$gtag.event("file-error", {
+            event_category: "home",
+            event_label: "lead",
+            value: "0",
+          });
           this.wrongFile = true;
           this.textSource = null;
           this.isDragging = false;

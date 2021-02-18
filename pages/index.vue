@@ -46,7 +46,20 @@
         insights into your communication.</span
       >
       <br />
-      <v-btn to="#drop" color="#07bc4c" style="color: white" class="my-5">
+
+      <v-btn
+        to="#drop"
+        @click="
+          $gtag.event('click-cta', {
+            event_category: 'home',
+            event_label: 'lead',
+            value: '1',
+          })
+        "
+        color="#07bc4c"
+        style="color: white"
+        class="my-5"
+      >
         Analyse my chat</v-btn
       >
     </div>
@@ -73,7 +86,6 @@ export default {
       page,
     };
   },
-
   data() {
     return {
       isStripeLoaded: false,
