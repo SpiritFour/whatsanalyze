@@ -5,7 +5,7 @@
 
     <div>
       <ol>
-        <li v-for="heading in page.toc" :key="heading">
+        <li v-for="heading in page.toc" :key="heading.id">
           <a :href="'#' + heading.id">
             {{ heading.text }}
           </a>

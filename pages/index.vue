@@ -6,7 +6,7 @@
       <p>No data is sent to a server and will never be saved.</p>
 
       <br />
-      <FileHandler @new_messages="messages = $event" />
+      <FileHandler @new_messages="chat_ = new Chat($event)" />
     </div>
 
     <div v-show="!isShowingCharts" class="explainer-container">
@@ -73,9 +73,7 @@
     <Content :page="page" class="main-el mt-15" />
 
     <div v-show="!isShowingCharts">
-      <BarChart :chartdata="funFacts(messages)" />
-      <DonughtChart :chartdata="shareOfSpeech(messages)" />
-      <RadarChart />
+      <DonughtChart :chartdata="chat_" />
     </div>
   </v-main>
 </template>
