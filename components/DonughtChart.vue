@@ -1,47 +1,20 @@
 <script>
 import { Doughnut } from "vue-chartjs";
+import { Chat } from "~/functions/transformChatData";
 
 export default {
   extends: Doughnut,
   props: {
-    chartdata: {
-      type: Object,
-      default: function () {
-        return {
-          labels: ["Moritz", "Paul"],
-          datasets: [
-            {
-              label: "Donught 1",
-              backgroundColor: [
-                "rgba(75, 192, 192, 1)",
-                "rgba(255, 99, 132, 1)",
-              ],
-              data: [60, 10],
-            },
-          ],
-        };
-      },
-    },
-    options: {
-      type: Object,
-      default: function () {
-        return {
-          responsive: true,
-          maintainAspectRatio: false,
-          legend: {
-            position: "bottom",
-          },
-        };
-      },
-    },
+    chartdata: new Chat(),
   },
   watch: {
     chartdata: function () {
-      this.renderChart(this.chartdata, this.options);
+      if (this.chartdata) {
+        let a = this.chartdata.getShareOfSpeech();
+        console.log(a);
+        this.renderChart(this.chartdata.getShareOfSpeech(), this.options);
+      }
     },
-  },
-  mounted() {
-    this.renderChart(this.chartdata, this.options);
   },
 };
 </script>
