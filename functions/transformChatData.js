@@ -117,6 +117,14 @@ export class Chat {
     return hours;
   }
 
+  static dailyDataFromChat(messages) {
+    let hours = new Array(7).fill(0);
+    messages.map((message) => {
+      hours[message.date.getDay()] += 1;
+    });
+    return hours;
+  }
+
   constructor(chatObject = []) {
     // this one is the complete input
     this.chatObject = chatObject;
@@ -178,6 +186,26 @@ export class Chat {
           label: person.name,
           backgroundColor: person.color,
           data: Chat.hourlyDataFromChat(person.messages),
+        };
+      }),
+    };
+  }
+  getDailyData() {
+    return {
+      labels: [
+        "Montag",
+        "Dienstag",
+        "Mittwoch",
+        "Donnerstag",
+        "Freitag",
+        "Samstag",
+        "Sonntag",
+      ],
+      datasets: this.messagesPerPerson.map((person) => {
+        return {
+          label: person.name,
+          backgroundColor: person.color,
+          data: Chat.dailyDataFromChat(person.messages),
         };
       }),
     };

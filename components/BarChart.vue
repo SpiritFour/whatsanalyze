@@ -6,6 +6,8 @@ export default {
   extends: Bar,
   props: {
     chartdata: new Chat(),
+    // eslint-disable-next-line vue/require-prop-type-constructor
+    hourly: true,
     options: {
       type: Object,
       default: function () {
@@ -30,12 +32,20 @@ export default {
   },
   watch: {
     chartdata: function () {
-      this.renderChart(this.chartdata.getHourlyData(), this.options);
+      if (this.hourly) {
+        this.renderChart(this.chartdata.getHourlyData(), this.options);
+      } else {
+        this.renderChart(this.chartdata.getDailyData(), this.options);
+      }
     },
   },
 
   mounted() {
-    this.renderChart(this.chartdata.getHourlyData(), this.options);
+    if (this.hourly) {
+      this.renderChart(this.chartdata.getHourlyData(), this.options);
+    } else {
+      this.renderChart(this.chartdata.getDailyData(), this.options);
+    }
   },
 };
 </script>

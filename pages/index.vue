@@ -74,7 +74,8 @@
 
     <div v-show="!isShowingCharts">
       <DonughtChart :chartdata="chat_" />
-      <BarChart :chartdata="chat_" :hour="true" />
+      <BarChart :chartdata="chat_" :hourly="true" />
+      <BarChart :chartdata="chat_" :hourly="false" />
     </div>
   </v-main>
 </template>
