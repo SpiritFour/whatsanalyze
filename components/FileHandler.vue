@@ -6,11 +6,6 @@
     @dragleave.prevent="dragLeave"
     @drop.prevent="drop($event)"
   >
-    <textarea
-      style="height: 600px"
-      v-model="textSource"
-      v-if="textSource"
-    ></textarea>
     <h1 v-if="wrongFile">Wrong file type</h1>
     <h1 v-if="!textSource && !isDragging && !wrongFile">
       Drop <label for="uploadmytextfile">(or pick)</label> a text file
@@ -40,6 +35,18 @@ export default {
     },
   },
   methods: {
+    // add absolute and personal id to each entry of the data structure
+    extendDataStructure(messages) {
+      let authors = {};
+      messages.forEach(function (object, index) {
+        if (!(object.author in authors)) authors[object.author] = 0;
+        else authors[object.author] += 1;
+        object.absolute_id = index;
+        object.personal_id = authors[object.author];
+      });
+      return messages;
+    },
+
     dragOver() {
       this.isDragging = true;
     },
@@ -94,7 +101,7 @@ export default {
 <style scoped>
 .drop {
   width: 100%;
-  height: 100%;
+  height: 10vh;
   background-color: #eee;
   border: 10px solid #eee;
 

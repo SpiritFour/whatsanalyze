@@ -1,4 +1,5 @@
 import colors from "vuetify/es5/util/colors";
+// import sass from "sass-loader";
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -9,8 +10,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: "%s - chat-analyzer-nuxt",
-    title: "chat-analyzer-nuxt",
+    titleTemplate: "Whats Analyze - The What's App Chat Analyzer",
+    title: "Whats Analyze - The What's App Chat Analyzer",
     htmlAttrs: {
       lang: "en",
     },
@@ -42,6 +43,7 @@ export default {
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
+    treeShake: true,
     customVariables: ["~/assets/variables.scss"],
     theme: {
       dark: false,
@@ -60,5 +62,12 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    extend(config, { isDev }) {
+      // Sets webpack's mode to development if `isDev` is true.
+      if (isDev) {
+        config.mode = "development";
+      }
+    },
+  },
 };

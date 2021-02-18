@@ -1,7 +1,6 @@
 <template>
   <v-main>
-    <div class="text-h1">Whatsanalyse</div>
-    <Content :page="page" />
+    <Content :page="page" class="main-el" />
 
     <FileHandler @new_messages="messages = $event" />
     <BarChart :chartdata="funFacts(messages)" />
@@ -36,4 +35,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.main-el {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+</style>
