@@ -1,17 +1,21 @@
 <template>
   <v-main>
-    <h1>Whatsanalyse</h1>
-    <Content :page="page" />
+    <Content :page="page" class="main-el" />
 
-    <FileHandler />
-    <BarChart />
-    <LineChart />
+    <FileHandler @new_messages="messages = $event" />
+    <BarChart :chartdata="funFacts(messages)" />
+    <DonughtChart :chartdata="shareOfSpeech(messages)" />
     <RadarChart />
-    <DonughtChart />
   </v-main>
 </template>
 
 <script>
+import {
+  chat2frequencies,
+  funFacts,
+  shareOfSpeech,
+} from "~/functions/transformChatData";
+
 export default {
   async asyncData({ $content }) {
     const page = await $content("home").fetch();
@@ -24,10 +28,16 @@ export default {
   data() {
     return {
       isStripeLoaded: false,
+      messages: [],
     };
   },
-  methods: {},
+  methods: { chat2frequencies, funFacts, shareOfSpeech },
 };
 </script>
 
-<style></style>
+<style>
+.main-el {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+</style>

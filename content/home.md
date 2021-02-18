@@ -1,6 +1,6 @@
 ---
-title: Introduction
-description: Learn how to use @nuxt/content.
+title: How to export your chat data?
+description: Learn how to use Whats Analyse
 ---
 
 # How to Analyse your WhatsApp Chat
@@ -63,4 +63,4 @@ Exporting your complete chat history is easy
 
 Exporting your chat history is not supported on whatsapp web as of 2021 this will be updated when this function becomes available. Please use your connected phone and export your chat directly on the phone as described in 1: iOS and 2: Android. 
 
-	
+

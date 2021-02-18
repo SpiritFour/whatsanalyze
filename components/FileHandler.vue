@@ -6,18 +6,12 @@
     @dragleave.prevent="dragLeave"
     @drop.prevent="drop($event)"
   >
-    <textarea
-      style="height: 600px"
-      v-model="textSource"
-      v-if="textSource"
-    ></textarea>
     <h1 v-if="wrongFile">Wrong file type</h1>
     <h1 v-if="!textSource && !isDragging && !wrongFile">
       Drop <label for="uploadmytextfile">(or pick)</label> a text file
     </h1>
 
     <input type="file" id="uploadmytextfile" @change="requestUploadFile" />
-    <h3>{{ messages }}</h3>
   </div>
 </template>
 
@@ -41,6 +35,18 @@ export default {
     },
   },
   methods: {
+    // add absolute and personal id to each entry of the data structure
+    extendDataStructure(messages) {
+      let authors = {};
+      messages.forEach(function (object, index) {
+        if (!(object.author in authors)) authors[object.author] = 0;
+        else authors[object.author] += 1;
+        object.absolute_id = index;
+        object.personal_id = authors[object.author];
+      });
+      return messages;
+    },
+
     dragOver() {
       this.isDragging = true;
     },
@@ -67,9 +73,9 @@ export default {
           reader.onload = (f) => {
             this.textSource = f.target.result;
             this.isDragging = false;
-            parseString(this.textSource).then(
-              (messages) => (this.messages = messages)
-            );
+            parseString(this.textSource)
+              .then((messages) => (this.messages = messages))
+              .then(() => this.$emit("new_messages", this.messages));
           };
           // this is the method to read a text file content
           reader.readAsText(file);
@@ -81,13 +87,21 @@ export default {
       }
     },
   },
+  mounted() {
+    // console.log( this.$content('chat_example').fetch())
+    fetch("/chat_example.txt")
+      .then((response) => response.text())
+      .then(parseString)
+      .then((messages) => (this.messages = messages))
+      .then(() => this.$emit("new_messages", this.messages));
+  },
 };
 </script>
 
 <style scoped>
 .drop {
   width: 100%;
-  height: 100%;
+  height: 10vh;
   background-color: #eee;
   border: 10px solid #eee;
 
