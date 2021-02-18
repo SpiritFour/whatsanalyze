@@ -13,9 +13,21 @@
       <div>
         <h2 style="font-size: 3em">How it works</h2>
         <div class="explainer-list">
-          <p>1. Export your chat</p>
-          <p>2. Drag chat file into box above</p>
-          <p>3. Enjoy beautiful visualizations</p>
+          <p>
+            <v-icon large color="teal"> mdi-file-export </v-icon>
+            1. Export your chat
+          </p>
+          <p>
+            <v-icon large color="light-blue darken-3"> mdi-cog </v-icon>
+
+            2. Drag chat file into box above
+          </p>
+          <p>
+            <v-icon large color="amber darken-2">
+              mdi-emoticon-happy-outline
+            </v-icon>
+            3. Enjoy beautiful visualizations
+          </p>
         </div>
       </div>
 
@@ -142,8 +154,9 @@ export default {
   }
 
   .explainer-list p {
-    margin-right: 10%;
     display: inline;
+    padding: 1em;
+    width: 33%;
   }
 }
 
