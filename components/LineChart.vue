@@ -1,31 +1,11 @@
 <script>
 import { Line } from "vue-chartjs";
+import { Chat } from "~/functions/transformChatData";
 
 export default {
   extends: Line,
   props: {
-    chartdata: {
-      type: Object,
-      default: function () {
-        return {
-          labels: ["January", "February"],
-          datasets: [
-            {
-              label: "Person 1",
-              backgroundColor: "rgba(255, 99, 132, 0.1)",
-              borderColor: "rgb(255,99,132)",
-              data: [60, 10],
-            },
-            {
-              label: "Person 2",
-              backgroundColor: "rgba(75, 192, 192, 0.1)",
-              borderColor: "rgba(75, 192, 192, 1)",
-              data: [40, 70],
-            },
-          ],
-        };
-      },
-    },
+    chartdata: new Chat(),
     options: {
       type: Object,
       default: function () {
@@ -50,11 +30,11 @@ export default {
   },
   watch: {
     chartdata: function () {
-      this.renderChart(this.chartdata, this.options);
+      this.renderChart(this.chartdata.getLineGraphData(), this.options);
     },
   },
   mounted() {
-    this.renderChart(this.chartdata, this.options);
+    this.renderChart(this.chartdata.getLineGraphData(), this.options);
   },
 };
 </script>
