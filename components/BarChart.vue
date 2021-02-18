@@ -6,8 +6,10 @@ export default {
   extends: Bar,
   props: {
     chartdata: new Chat(),
-    // eslint-disable-next-line vue/require-prop-type-constructor
-    hourly: true,
+    hourly: {
+      type: Boolean,
+      default: true,
+    },
     options: {
       type: Object,
       default: function () {
