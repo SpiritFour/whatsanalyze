@@ -34,7 +34,7 @@ export class Chat {
   // Find hapax legomenons, a word or an expression that occurs only once within the context.
   static uniqueWords(chat_distribution) {
     function singleOccurrence(value) {
-      return value[1] == 1;
+      return value[1] === 1;
     }
     console.log(chat_distribution);
     return chat_distribution.filter(singleOccurrence);
@@ -171,11 +171,11 @@ export class Chat {
   getFunFacts() {
     let numberOfWords = Chat.getTotalNumberOfWords(this.chatObject);
     // words only used once in the complete chat ( hapax legomenons )
-    let uniqueWords = Chat.uniqueWords(this._getSortedFreqDict());
+    let uniqueWords = Chat.uniqueWords(this.sortedFreqDict);
     // number of different words used in this chat
-    let different_words = this._getSortedFreqDict();
+    let different_words = this.sortedFreqDict;
     // used emojis sorted
-    let sorted_emojys = Chat.match_emojys(this._getSortedFreqDict());
+    let sorted_emojys = Chat.match_emojys(this.sortedFreqDict);
     // longest message in the chat
     let longest_message = Chat.get_longest_message(this.chatObject);
 
