@@ -1,6 +1,5 @@
 <template>
   <article class="article pt-4 pb-4">
-    <h1 style="font-size: 3em; margin-bottom: 1em">{{ page.title }}</h1>
     <nuxt-content :document="page" />
     <div>
       <ol>

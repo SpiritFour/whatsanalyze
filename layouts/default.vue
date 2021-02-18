@@ -1,37 +1,19 @@
 <template>
   <v-app>
     <v-main style="overflow: auto; margin-bottom: 12em">
-      <!-- <div class="nav pa-5">
-        <h1>
-          <img
-            src="@/assets/images/chat-24px.svg"
-            height="40px"
-            alt="chat icon"
-            style="vertical-align: bottom"
-          />
-          WhatsAnalyse
-        </h1>
-
-        <span
-          style="
-            float: right;
-            margin-right: 15vw;
-            vertical-align: bottom;
-            margin-top: 0.66em;
-          "
-        >
-          <h3>link1</h3>
-          <h3>link2</h3>
-          <h3>link3</h3>
-          <h4
-            style="margin-left: 5em"
-            @click="$vuetify.theme.dark = !$vuetify.theme.dark"
-          >
-            {{ $vuetify.theme.dark ? "dark mode off" : "dark mode on" }}
-          </h4>
-        </span>
-        <hr class="mt-4" />
-      </div> -->
+      <div class="nav pa-5">
+        <nuxt-link to="/">
+          <h1 style="color: white">
+            <img
+              src="@/assets/images/chat-24px.svg"
+              height="40px"
+              alt="chat icon"
+              style="vertical-align: bottom"
+            />
+            WhatsAnalyse
+          </h1>
+        </nuxt-link>
+      </div>
 
       <v-container style="margin-top: 8em">
         <nuxt />
@@ -39,6 +21,19 @@
     </v-main>
 
     <div class="foot" style="text-align: center">
+      <div style="margin-top: 1em">
+        <h3>
+          <nuxt-link :to="{ name: 'whatsapp-signal' }"
+            >Switch from Signal to Whatsapp and keep yoxur data
+          </nuxt-link>
+        </h3>
+      </div>
+
+      <hr
+        width="40%"
+        color="white"
+        style="margin: auto; margin-top: 2em; margin-bottom: 1em"
+      />
       <h3>
         WhatsAnalyse
         <span>&copy; {{ new Date().getFullYear() }}</span>
@@ -48,11 +43,22 @@
 </template>
 
 <style scoped lang="scss">
+a:link {
+  color: $c-blue;
+  text-decoration: none;
+}
+a:visited {
+  color: $c-blue;
+}
+a:hover {
+  color: $c-blue-dark;
+}
+
 .nav {
   position: absolute;
   width: 100vw;
   left: 0;
-  height: 6.5em;
+  height: 5.5em;
   top: 0;
   background: $c-blue-accent;
   color: $c-white;
@@ -61,7 +67,6 @@
   padding: 1em;
   position: absolute;
   width: 100vw;
-  height: 5em;
   bottom: 0;
   background: $c-blue-accent;
   color: $c-white;

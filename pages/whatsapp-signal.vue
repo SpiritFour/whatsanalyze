@@ -4,6 +4,7 @@
 
 <script>
 export default {
+  name: "whatsapp-signal",
   async asyncData({ $content }) {
     const page = await $content("whatsapp-signal").fetch();
     return {
