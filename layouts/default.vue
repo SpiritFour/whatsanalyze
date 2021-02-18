@@ -1,7 +1,7 @@
 <template>
   <v-app>
-    <v-main style="overflow: auto; margin-bottom: 6em">
-      <div class="nav">
+    <v-main style="overflow: auto; margin-bottom: 12em">
+      <!-- <div class="nav pa-5">
         <h1>
           <img
             src="@/assets/images/chat-24px.svg"
@@ -11,16 +11,29 @@
           />
           WhatsAnalyse
         </h1>
-        <h4>- The Chat Visualization Tool</h4>
 
-        <!-- Menu items -->
-        <!-- <span style="float: right; margin-right: 15vw; vertical-align: bottom; margin-top: 0.66em">
-             <h3>link1</h3>
-             <h3>link2</h3>
-             <h3>link3</h3>
-        </span> -->
-      </div>
-      <v-container style="margin-top: 6em">
+        <span
+          style="
+            float: right;
+            margin-right: 15vw;
+            vertical-align: bottom;
+            margin-top: 0.66em;
+          "
+        >
+          <h3>link1</h3>
+          <h3>link2</h3>
+          <h3>link3</h3>
+          <h4
+            style="margin-left: 5em"
+            @click="$vuetify.theme.dark = !$vuetify.theme.dark"
+          >
+            {{ $vuetify.theme.dark ? "dark mode off" : "dark mode on" }}
+          </h4>
+        </span>
+        <hr class="mt-4" />
+      </div> -->
+
+      <v-container style="margin-top: 8em">
         <nuxt />
       </v-container>
     </v-main>
@@ -36,13 +49,12 @@
 
 <style scoped lang="scss">
 .nav {
-  padding: 1em;
   position: absolute;
   width: 100vw;
   left: 0;
-  height: 5em;
+  height: 6.5em;
   top: 0;
-  background: $c-red;
+  background: $c-blue-accent;
   color: $c-white;
 }
 .foot {
@@ -51,7 +63,7 @@
   width: 100vw;
   height: 5em;
   bottom: 0;
-  background: $c-red;
+  background: $c-blue-accent;
   color: $c-white;
 }
 
