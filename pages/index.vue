@@ -1,13 +1,11 @@
 <template>
   <v-main>
-    <h1>Whatsanalyse</h1>
-    <Content :page="page" />
-
-    <FileHandler />
-    <BarChart />
-    <LineChart />
-    <RadarChart />
-    <DonughtChart />
+    <Content :page="page" class="main-el" />
+    <FileHandler class="main-el" />
+    <BarChart class="main-el" />
+    <LineChart class="main-el" />
+    <RadarChart class="main-el" />
+    <DonughtChart class="main-el" />
   </v-main>
 </template>
 
@@ -30,4 +28,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.main-el {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+</style>

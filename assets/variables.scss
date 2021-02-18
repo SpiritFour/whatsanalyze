@@ -1,4 +1,40 @@
-// Ref: https://github.com/nuxt-community/vuetify-module#customvariables
-//
-// The variables you want to modify
-// $font-size-root: 20px;
+// ---- COLORS -----
+// MONOTONE
+
+// -- dark colors
+$c-dark: #022e40;
+$c-dark-accent: #032859;
+
+// -- light colors
+$c-white: #f2f2f2;
+$c-white-dark: #d9cdb8;
+$c-white-accent: #ffe4b6;
+
+// BLUE
+$c-blue: #016f94;
+$c-blue-accent: #21a68d;
+$c-blue-dark: #11538c;
+$c-blue-dark-accent: #227373;
+
+// WHITE
+$c-green: #88a825;
+$c-green-accent: #b3f94f;
+
+// YELLOW
+$c-yellow: #ffd45c;
+$c-yellow-accent: #ffa35c;
+
+$c-yellow-bright: #ffd800;
+$c-yellow-bright-accent: #fd9924;
+
+// ORANGE
+$c-orange: #fe6a2c;
+$c-orange-accent: #ffbf5c;
+$c-orange-dark: #cf4a30;
+$c-orange-dark-accent: #ed8c2b;
+
+// RED
+$c-red: #ff675c;
+$c-red-light: #ff855c;
+$c-red-dark: #d93b3b;
+$c-red-dark-accent: #911146;

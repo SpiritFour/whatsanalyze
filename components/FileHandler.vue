@@ -6,18 +6,12 @@
     @dragleave.prevent="dragLeave"
     @drop.prevent="drop($event)"
   >
-    <textarea
-      style="height: 600px"
-      v-model="textSource"
-      v-if="textSource"
-    ></textarea>
     <h1 v-if="wrongFile">Wrong file type</h1>
     <h1 v-if="!textSource && !isDragging && !wrongFile">
       Drop <label for="uploadmytextfile">(or pick)</label> a text file
     </h1>
 
     <input type="file" id="uploadmytextfile" @change="requestUploadFile" />
-    <h3>{{ messages }}</h3>
   </div>
 </template>
 
@@ -99,7 +93,7 @@ export default {
 <style scoped>
 .drop {
   width: 100%;
-  height: 100%;
+  height: 10vh;
   background-color: #eee;
   border: 10px solid #eee;
 
