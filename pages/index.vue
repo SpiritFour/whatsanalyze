@@ -28,163 +28,162 @@
             </v-icon>
             3. Enjoy beautiful visualizations
           </p>
-          </div>
         </div>
+      </div>
 
-        <div class="explainer">
-          <img
-            src="https://images.unsplash.com/photo-1611746869696-d09bce200020?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80"
-            alt="How to export your WhatsApp chat"
-          />
-          <h2>Export your WhatsApp chat</h2>
+      <div class="explainer">
+        <img
+          src="https://images.unsplash.com/photo-1611746869696-d09bce200020?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80"
+          alt="How to export your WhatsApp chat"
+        />
+        <h2>Export your WhatsApp chat</h2>
 
+        <p>
+          - Open the individual or group chat. <br />
+          - Tap More options > More > Export chat. <br />
+          - Choose whether to export with media or without media.
+        </p>
+      </div>
+
+      <div class="explainer">
+        <img
+          src="https://images.unsplash.com/photo-1611095567219-8fa7d4d8bf48?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=3302&q=80"
+          alt="How to export your WhatsApp chat"
+        />
+        <h2>Open file with our tool</h2>
+
+        <p>Tab on the box above and select your file. Wait for 2 seconds.</p>
+      </div>
+
+      <div class="explainer">
+        <img
+          src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80"
+          alt="How to export your WhatsApp chat"
+        />
+        <h2>Enjoy beautiful visuaizations</h2>
+
+        <p>
+          Learn who you really are and how you communicate with your friends.
+          Reveal never know facts!.
+        </p>
+      </div>
+
+      <div class="explainer">
+        <img
+          src="https://images.unsplash.com/photo-1472746729193-36ad213ac4a5?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8ZnJpZW5kcyUyMHNoYXJlfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
+          alt="How to export your WhatsApp chat"
+        />
+        <h2>Share results with friends</h2>
+
+        <p>
+          Impress your friends with real data. Know you know who writes the most
+          messages, uses wich emojies and more.
+        </p>
+      </div>
+    </div>
+
+    <div style="text-align: center" class="testimonial-container">
+      <h2 style="text-align: center">
+        People who analyse their chats - get first hand data insights
+      </h2>
+
+      <div style="overflow: hidden">
+        <div class="testimonial">
+          <v-icon large color="black"> mdi-format-quote-close </v-icon>
+          <p>Jennifer says</p>
           <p>
-            - Open the individual or group chat. <br />
-            - Tap More options > More > Export chat. <br />
-            - Choose whether to export with media or without media.
+            Visualizing my friends chat revealed a lot about our relationship. I
+            always though that I was the one sending more messages. Really nice
+            to see all those fun facts about our history. Keep it going and add
+            more beautiful visuals
           </p>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
         </div>
-
-        <div class="explainer">
-          <img
-            src="https://images.unsplash.com/photo-1611095567219-8fa7d4d8bf48?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=3302&q=80"
-            alt="How to export your WhatsApp chat"
-          />
-          <h2>Open file with our tool</h2>
-
-          <p>Tab on the box above and select your file. Wait for 2 seconds.</p>
-        </div>
-
-        <div class="explainer">
-          <img
-            src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80"
-            alt="How to export your WhatsApp chat"
-          />
-          <h2>Enjoy beautiful visuaizations</h2>
-
+        <div class="testimonial">
+          <v-icon large color="black"> mdi-format-quote-close </v-icon>
+          <p>Lara says</p>
           <p>
-            Learn who you really are and how you communicate with your friends.
-            Reveal never know facts!.
+            Amazing to see a whole whatsapp history at a glance. I have chats
+            going back multiple years seeing how the relationship is mirrored in
+            the chat is amazing. I love that my files are not uploaded and that
+            it runs directly in my browser
           </p>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
         </div>
+      </div>
+    </div>
 
-        <div class="explainer">
-          <img
-            src="https://images.unsplash.com/photo-1472746729193-36ad213ac4a5?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8ZnJpZW5kcyUyMHNoYXJlfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-            alt="How to export your WhatsApp chat"
-          />
-          <h2>Share results with friends</h2>
+    <div class="cta-bottom">
+      <h1 style="text-align: center">Start now</h1>
+      <span>
+        Analyse your chat, reveal unknown facts and surprise your friends with
+        insights into your communication.</span
+      >
+      <br />
+      <v-btn to="#drop" color="#07bc4c" style="color: #ffffff" class="my-5">
+        Analyse my chat
+      </v-btn>
+    </div>
 
+    <Content :page="page" class="main-el mt-15" />
+
+    <div style="text-align: center" class="testimonial-container">
+      <h2 style="text-align: center">
+        People who analyse their chats - get first hand data insights
+      </h2>
+
+      <div style="overflow: hidden">
+        <div class="testimonial">
+          <v-icon large color="black"> mdi-format-quote-close </v-icon>
+          <p>Jennifer says</p>
           <p>
-            Impress your friends with real data. Know you know who writes the
-            most messages, uses wich emojies and more.
+            Visualizing my friends chat revealed a lot about our relationship. I
+            always though that I was the one sending more messages. Really nice
+            to see all those fun facts about our history. Keep it going and add
+            more beautiful visuals
           </p>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
+        </div>
+        <div class="testimonial">
+          <v-icon large color="black"> mdi-format-quote-close </v-icon>
+          <p>Lara says</p>
+          <p>
+            Amazing to see a whole whatsapp history at a glance. I have chats
+            going back multiple years seeing how the relationship is mirrored in
+            the chat is amazing. I love that my files are not uploaded and that
+            it runs directly in my browser
+          </p>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
         </div>
       </div>
+    </div>
 
-      <div style="text-align: center" class="testimonial-container">
-        <h2 style="text-align: center">
-          People who analyse their chats - get first hand data insights
-        </h2>
-
-        <div style="overflow: hidden">
-          <div class="testimonial">
-            <v-icon large color="black"> mdi-format-quote-close </v-icon>
-            <p>Jennifer says</p>
-            <p>
-              Visualizing my friends chat revealed a lot about our relationship.
-              I always though that I was the one sending more messages. Really
-              nice to see all those fun facts about our history. Keep it going
-              and add more beautiful visuals
-            </p>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-          </div>
-          <div class="testimonial">
-            <v-icon large color="black"> mdi-format-quote-close </v-icon>
-            <p>Lara says</p>
-            <p>
-              Amazing to see a whole whatsapp history at a glance. I have chats
-              going back multiple years seeing how the relationship is mirrored
-              in the chat is amazing. I love that my files are not uploaded and
-              that it runs directly in my browser
-            </p>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-          </div>
-        </div>
-      </div>
-
-      <div class="cta-bottom">
-        <h1 style="text-align: center">Start now</h1>
-        <span>
-          Analyse your chat, reveal unknown facts and surprise your friends with
-          insights into your communication.</span
-        >
-        <br />
-        <v-btn to="#drop" color="#07bc4c" style="color: #ffffff" class="my-5">
-          Analyse my chat
-        </v-btn>
-      </div>
-
-      <Content :page="page" class="main-el mt-15" />
-
-      <div style="text-align: center" class="testimonial-container">
-        <h2 style="text-align: center">
-          People who analyse their chats - get first hand data insights
-        </h2>
-
-        <div style="overflow: hidden">
-          <div class="testimonial">
-            <v-icon large color="black"> mdi-format-quote-close </v-icon>
-            <p>Jennifer says</p>
-            <p>
-              Visualizing my friends chat revealed a lot about our relationship.
-              I always though that I was the one sending more messages. Really
-              nice to see all those fun facts about our history. Keep it going
-              and add more beautiful visuals
-            </p>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-          </div>
-          <div class="testimonial">
-            <v-icon large color="black"> mdi-format-quote-close </v-icon>
-            <p>Lara says</p>
-            <p>
-              Amazing to see a whole whatsapp history at a glance. I have chats
-              going back multiple years seeing how the relationship is mirrored
-              in the chat is amazing. I love that my files are not uploaded and
-              that it runs directly in my browser
-            </p>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-          </div>
-        </div>
-      </div>
-
-      <div class="cta-bottom">
-        <h1 style="text-align: center">Start now</h1>
-        <span>
-          Analyse your chat, reveal unknown facts and surprise your friends with
-          insights into your communication.</span
-        >
-        <br />
-        <v-btn to="#drop" color="#07bc4c" style="color: white" class="my-5">
-          Analyse my chat</v-btn
-        >
-      </div>
+    <div class="cta-bottom">
+      <h1 style="text-align: center">Start now</h1>
+      <span>
+        Analyse your chat, reveal unknown facts and surprise your friends with
+        insights into your communication.</span
+      >
+      <br />
+      <v-btn to="#drop" color="#07bc4c" style="color: white" class="my-5">
+        Analyse my chat</v-btn
+      >
     </div>
 
     <div v-show="!isShowingCharts">
@@ -296,7 +295,7 @@ export default {
     display: inline;
     padding: 1em;
     width: 33%;
-    }
+  }
   .testimonial {
     width: 100%;
     padding: 3em;
