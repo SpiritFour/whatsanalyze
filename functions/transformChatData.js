@@ -95,11 +95,17 @@ export class Chat {
     return hours;
   }
 
-  constructor(chatObject = []) {
+  constructor(chatObject = [], groupAfter = 9) {
     // this one is the complete input
     this.chatObject = chatObject;
+    // for groupmessages we probably want to group after some time
+    this._groupAfter = groupAfter;
     // here we remove messages (i.e. system messages)
     this.filterdChatObject = Chat.remove_named_messages(chatObject);
+    //number of persons in chat
+    this.numPersonsInChat = Object.entries(
+      Chat.getMessagesPerPerson(this.filterdChatObject)
+    ).length;
     // frequencies for all words in chat (excluding system)
     this._sortedFreqList = null;
     // here we have the messages per person, also adding colors to them
@@ -125,7 +131,13 @@ export class Chat {
     return this._messagesPerPerson;
   }
 
-  _getMessagesPerPerson(groupAfter = 9) {
+  set groupAfter(groupAfter) {
+    this._groupAfter = groupAfter;
+    this._sortedFreqList = null;
+    this._messagesPerPerson = null;
+  }
+
+  _getMessagesPerPerson() {
     let persons = Object.entries(
       Chat.getMessagesPerPerson(this.filterdChatObject)
     );
@@ -136,10 +148,10 @@ export class Chat {
     let grouped = false;
 
     persons.forEach((person, idx) => {
-      if (idx > groupAfter) {
-        enrichedPersons[
-          groupAfter
-        ].messages = enrichedPersons[9].messages.concat(person[1]);
+      if (idx > this._groupAfter) {
+        enrichedPersons[this._groupAfter].messages = enrichedPersons[
+          this._groupAfter
+        ].messages.concat(person[1]);
         grouped = true;
       } else {
         enrichedPersons.push({
@@ -151,8 +163,9 @@ export class Chat {
     });
 
     if (grouped) {
-      enrichedPersons[groupAfter].name = "Others";
-      enrichedPersons[groupAfter].messages.sort(
+      enrichedPersons[this._groupAfter].name = "Others";
+      enrichedPersons[this._groupAfter].color = "#D3D3D3";
+      enrichedPersons[this._groupAfter].messages.sort(
         (a, b) => a.absolute_id - b.absolute_id
       );
     }

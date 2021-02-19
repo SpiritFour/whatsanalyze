@@ -33,12 +33,15 @@ export default {
     },
   },
   watch: {
-    chartdata: function () {
-      if (this.hourly) {
-        this.renderChart(this.chartdata.getHourlyData(), this.options);
-      } else {
-        this.renderChart(this.chartdata.getDailyData(), this.options);
-      }
+    chartdata: {
+      handler() {
+        if (this.hourly) {
+          this.renderChart(this.chartdata.getHourlyData(), this.options);
+        } else {
+          this.renderChart(this.chartdata.getDailyData(), this.options);
+        }
+      },
+      deep: true,
     },
   },
 
