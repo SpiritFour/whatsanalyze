@@ -127,7 +127,6 @@ export default {
     },
   },
   mounted() {
-    // console.log( this.$content('chat_example').fetch())
     fetch("/chat_example.txt")
       .then((response) => response.text())
       .then(parseString)
