@@ -126,15 +126,29 @@ export class Chat {
   }
 
   _getMessagesPerPerson() {
-    let persons = Chat.getMessagesPerPerson(this.filterdChatObject);
+    let persons = Object.entries(
+      Chat.getMessagesPerPerson(this.filterdChatObject)
+    );
+    console.log(persons);
+    persons = persons.sort((a, b) => b[1].length - a[1].length);
+
     let enrichedPersons = [];
-    Object.keys(persons).map((name, idx) => {
-      enrichedPersons.push({
-        name: name,
-        color: chatColors[idx % chatColors.length],
-        messages: persons[name],
-      });
+
+    persons.forEach((person, idx) => {
+      if (idx > 9) {
+        enrichedPersons[9].messages = enrichedPersons[9].messages.concat(
+          person[1]
+        );
+        console.log(person[1]);
+      } else {
+        enrichedPersons.push({
+          name: person[0],
+          color: chatColors[idx % chatColors.length],
+          messages: person[1],
+        });
+      }
     });
+
     return enrichedPersons;
   }
 
