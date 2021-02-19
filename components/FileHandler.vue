@@ -107,6 +107,7 @@ export default {
               value: "1",
             });
             this.isSuccess = true;
+            this.processingFile = false;
           };
           // this is the method to read a text file content
           reader.readAsText(file);
@@ -120,6 +121,7 @@ export default {
           this.wrongFile = true;
           this.textSource = null;
           this.isDragging = false;
+          this.processingFile = false;
         }
       }
     },

@@ -129,45 +129,6 @@
 
       <Content :page="page" class="main-el mt-15" />
 
-      <div style="text-align: center" class="testimonial-container">
-        <h2 style="text-align: center">
-          People who analyse their chats - get first hand data insights
-        </h2>
-
-        <div style="overflow: hidden">
-          <div class="testimonial">
-            <v-icon large color="black"> mdi-format-quote-close </v-icon>
-            <p>Jennifer says</p>
-            <p>
-              Visualizing my friends chat revealed a lot about our relationship.
-              I always though that I was the one sending more messages. Really
-              nice to see all those fun facts about our history. Keep it going
-              and add more beautiful visuals
-            </p>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-          </div>
-          <div class="testimonial">
-            <v-icon large color="black"> mdi-format-quote-close </v-icon>
-            <p>Lara says</p>
-            <p>
-              Amazing to see a whole whatsapp history at a glance. I have chats
-              going back multiple years seeing how the relationship is mirrored
-              in the chat is amazing. I love that my files are not uploaded and
-              that it runs directly in my browser
-            </p>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-            <v-icon large color="#ffd782"> mdi-star </v-icon>
-          </div>
-        </div>
-      </div>
-
       <Cta />
     </div>
 
