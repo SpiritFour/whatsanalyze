@@ -1,29 +1,14 @@
 <script>
 import { Bar } from "vue-chartjs";
+import { Chat } from "~/functions/transformChatData";
 
 export default {
   extends: Bar,
   props: {
-    chartdata: {
-      type: Object,
-      default: function () {
-        return {
-          labels: ["January", "February"],
-          datasets: [
-            {
-              label: "Person 1",
-              backgroundColor: "rgba(255, 99, 132, 1)",
-              borderColor: "rgba(255, 99, 132, 0.1)",
-              data: [60, 10],
-            },
-            {
-              label: "Person 2",
-              backgroundColor: "rgba(75, 192, 192, 1)",
-              data: [40, 70],
-            },
-          ],
-        };
-      },
+    chartdata: new Chat(),
+    hourly: {
+      type: Boolean,
+      default: true,
     },
     options: {
       type: Object,
@@ -49,12 +34,20 @@ export default {
   },
   watch: {
     chartdata: function () {
-      this.renderChart(this.chartdata, this.options);
+      if (this.hourly) {
+        this.renderChart(this.chartdata.getHourlyData(), this.options);
+      } else {
+        this.renderChart(this.chartdata.getDailyData(), this.options);
+      }
     },
   },
 
   mounted() {
-    this.renderChart(this.chartdata, this.options);
+    if (this.hourly) {
+      this.renderChart(this.chartdata.getHourlyData(), this.options);
+    } else {
+      this.renderChart(this.chartdata.getDailyData(), this.options);
+    }
   },
 };
 </script>

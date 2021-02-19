@@ -79,34 +79,20 @@ export class Chat {
     };
   }
 
-  static getLineGraphData(messagesByPerson, dates) {
-    // calculate date ranges where messages happened
-    var minDate = new Date(Math.min.apply(null, dates));
-    var maxDate = new Date(Math.max.apply(null, dates));
-
-    var x_axis = this.getDaysBetween(minDate, maxDate);
-
-    // iterate over persons
-    var datasets = Object.keys(messagesByPerson).map((person) => {
-      // this is the x axis with values to plot the graph with
-      var hist_info = new Array(x_axis.length).fill(0);
-      // now count messages per day
-      messagesByPerson[person].forEach(
-        (message) =>
-          (hist_info[x_axis.indexOf(message.date.toDateString())] += 1)
-      );
-      return {
-        label: person,
-        backgroundColor: "rgba(255, 99, 132, 0.1)",
-        borderColor: "rgb(255,99,132)",
-        data: hist_info,
-      };
+  static hourlyDataFromChat(messages) {
+    let hours = new Array(24).fill(0);
+    messages.map((message) => {
+      hours[message.date.getHours()] += 1;
     });
+    return hours;
+  }
 
-    return {
-      labels: x_axis,
-      datasets: datasets,
-    };
+  static dailyDataFromChat(messages) {
+    let hours = new Array(7).fill(0);
+    messages.map((message) => {
+      hours[message.date.getDay()] += 1;
+    });
+    return hours;
   }
 
   constructor(chatObject = []) {
@@ -118,6 +104,9 @@ export class Chat {
     this._sortedFreqList = null;
     // here we have the messages per person, also adding colors to them
     this._messagesPerPerson = null;
+
+    // all dates of messages
+    this._dates = null;
   }
 
   get sortedFreqDict() {
@@ -149,6 +138,14 @@ export class Chat {
     return enrichedPersons;
   }
 
+  get dates() {
+    if (this._dates) return this._dates;
+    this._dates = this.chatObject.map((message) =>
+      message.date.setHours(0, 0, 0, 0)
+    );
+    return this._dates;
+  }
+
   getShareOfSpeech() {
     return {
       labels: this.messagesPerPerson.map((person) => person.name),
@@ -159,6 +156,71 @@ export class Chat {
           data: this.messagesPerPerson.map((person) => person.messages.length),
         },
       ],
+    };
+  }
+
+  getHourlyData() {
+    return {
+      labels: [...Array(24).keys()],
+      datasets: this.messagesPerPerson.map((person) => {
+        return {
+          label: person.name,
+          backgroundColor: person.color,
+          data: Chat.hourlyDataFromChat(person.messages),
+        };
+      }),
+    };
+  }
+
+  getDailyData() {
+    return {
+      labels: [
+        "Montag",
+        "Dienstag",
+        "Mittwoch",
+        "Donnerstag",
+        "Freitag",
+        "Samstag",
+        "Sonntag",
+      ],
+      datasets: this.messagesPerPerson.map((person) => {
+        return {
+          label: person.name,
+          backgroundColor: person.color,
+          data: Chat.dailyDataFromChat(person.messages),
+        };
+      }),
+    };
+  }
+
+  getLineGraphData() {
+    // calculate date ranges where messages happened
+    var minDate = new Date(Math.min.apply(null, this.dates));
+    var maxDate = new Date(Math.max.apply(null, this.dates));
+
+    var x_axis = Chat.getDaysBetween(minDate, maxDate);
+
+    // iterate over persons
+    var datasets = this.messagesPerPerson.map((person) => {
+      var hist_info = {};
+      person.messages.forEach((message) => {
+        var ds = message.date.toDateString();
+        hist_info[ds] = (hist_info[ds] || 0) + 1;
+      });
+
+      return {
+        label: person.name,
+        backgroundColor: person.color,
+        borderColor: person.color,
+        data: Object.entries(hist_info).map((entry) => {
+          return { x: entry[0], y: entry[1] };
+        }),
+      };
+    });
+
+    return {
+      labels: x_axis,
+      datasets: datasets,
     };
   }
 }

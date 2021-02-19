@@ -9,7 +9,7 @@
       <br />
       <FileHandler @new_messages="chat_ = new Chat($event)" />
     </div>
-<div v-show="!isShowingCharts">
+
     <div class="explainer-container">
       <div>
         <h2 style="font-size: 3em">How it works</h2>
@@ -71,9 +71,6 @@
       </div>
     </div>
 
-
-    <Content :page="page" class="main-el mt-15" />
-    
     <div style="text-align: center" class="testimonial-container">
       <h2 style="text-align: center">
         People who analyse their chats - get first hand data insights
@@ -120,14 +117,72 @@
         insights into your communication.</span
       >
       <br />
+      <v-btn to="#drop" color="#07bc4c" style="color: #ffffff" class="my-5">
+        Analyse my chat
+      </v-btn>
+    </div>
+
+
+    <Content :page="page" class="main-el mt-15" />
+    
+    <div style="text-align: center" class="testimonial-container">
+      <h2 style="text-align: center">
+        People who analyse their chats - get first hand data insights
+      </h2>
+
+      <div style="overflow: hidden">
+        <div class="testimonial">
+          <v-icon large color="black"> mdi-format-quote-close </v-icon>
+          <p>Jennifer says</p>
+          <p>
+            Visualizing my friends chat revealed a lot about our relationship. I
+            always though that I was the one sending more messages. Really nice
+            to see all those fun facts about our history. Keep it going and add
+            more beautiful visuals
+          </p>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
+        </div>
+        <div class="testimonial">
+          <v-icon large color="black"> mdi-format-quote-close </v-icon>
+          <p>Lara says</p>
+          <p>
+            Amazing to see a whole whatsapp history at a glance. I have chats
+            going back multiple years seeing how the relationship is mirrored in
+            the chat is amazing. I love that my files are not uploaded and that
+            it runs directly in my browser
+          </p>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
+          <v-icon large color="#ffd782"> mdi-star </v-icon>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="cta-bottom">
+      <h1 style="text-align: center">Start now</h1>
+      <span>
+        Analyse your chat, reveal unknown facts and surprise your friends with
+        insights into your communication.</span
+      >
+      <br />
       <v-btn to="#drop" color="#07bc4c" style="color: white" class="my-5">
         Analyse my chat</v-btn
       >
     </div>
    </div>
     
-    <div v-show="isShowingCharts">
+    <div v-show="!isShowingCharts">
+      <LineChart :chartdata="chat_" />
       <DonughtChart :chartdata="chat_" />
+      <BarChart :chartdata="chat_" :hourly="true" />
+      <BarChart :chartdata="chat_" :hourly="false" />
     </div>
     
   </v-main>
@@ -139,6 +194,7 @@ import { Chat } from "~/functions/transformChatData";
 export default {
   async asyncData({ $content }) {
     const page = await $content("home").fetch();
+    console.log(page);
     return {
       page,
     };
@@ -146,7 +202,7 @@ export default {
 
   data() {
     return {
-      isShowingCharts: false,
+      isShowingChats: false,
       isStripeLoaded: false,
       chat_: new Chat(),
     };
@@ -164,10 +220,23 @@ export default {
     padding: 3em;
   }
 }
-@media (max-width: 759px) {
+
+@media (min-width: 760px) {
   .testimonial {
-    width: 100%;
+    min-width: 300px;
+    width: 50%;
+    float: left;
     padding: 3em;
+  }
+  .explainer {
+    min-width: 150px;
+    max-width: 25%;
+    float: left;
+    padding: 1em;
+  }
+  .explainer-list p {
+    margin-right: 10%;
+    display: inline;
   }
 }
 
@@ -213,22 +282,26 @@ export default {
     min-width: 150px;
     max-width: 25%;
     float: left;
-    padding: 1em;
+    padding: 3em;
   }
-
-  .explainer-list p {
-    margin-right: 10%;
-    display: inline;
+}
+@media (max-width: 759px) {
+  .testimonial {
+    width: 100%;
+    padding: 3em;
   }
 }
 
-@media (max-width: 760px) {
-  .explainer {
-    float: none;
-    padding: 2em;
-  }
-  .explainer-list p {
-    margin-top: 1em;
-  }
+.cta-bottom {
+  text-align: center;
+  background: $c-white;
+  padding: 1em;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.main-el {
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 </style>
