@@ -8,7 +8,7 @@
       <br />
       <FileHandler
         @new_messages="chat_ = new Chat($event)"
-        @hide_eplanation="isShowingChats = $event"
+        @hide_explanation="isShowingChats = $event"
       />
     </div>
 

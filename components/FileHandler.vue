@@ -77,7 +77,7 @@ export default {
               .then((messages) => (this.messages = messages))
               .then(() => {
                 this.$emit("new_messages", this.messages);
-                this.$emit("hide_eplanation", true);
+                this.$emit("hide_explanation", true);
               });
             this.$gtag.event("file-parsed", {
               event_category: "home",
