@@ -1,5 +1,6 @@
 <template>
   <div>
+    <GroupOthers :chat-object="chat_" />
     <LineChart :chartdata="chat_" />
     <DonughtChart :chartdata="chat_" />
     <BarChart :chartdata="chat_" :hourly="true" />
