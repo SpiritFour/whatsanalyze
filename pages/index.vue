@@ -6,17 +6,32 @@
       <p>No data is sent to a server and will never be saved.</p>
 
       <br />
-      <FileHandler @new_messages="chat_ = new Chat($event)" />
+      <FileHandler
+        @new_messages="chat_ = new Chat($event)"
+        @hide_eplanation="isShowingChats = $event"
+      />
     </div>
 
-    <div v-show="!isShowingCharts">
+    <div v-show="!isShowingChats">
       <div class="explainer-container">
         <div>
           <h2 style="font-size: 3em">How it works</h2>
           <div class="explainer-list">
-            <p>1. Export your chat</p>
-            <p>2. Drag chat file into box above</p>
-            <p>3. Enjoy beautiful visualizations</p>
+            <p>
+              <v-icon large color="teal"> mdi-file-export </v-icon>
+              1. Export your chat
+            </p>
+            <p>
+              <v-icon large color="light-blue darken-3"> mdi-cog </v-icon>
+
+              2. Drag chat file into box above
+            </p>
+            <p>
+              <v-icon large color="amber darken-2">
+                mdi-emoticon-happy-outline
+              </v-icon>
+              3. Enjoy beautiful visualizations
+            </p>
           </div>
         </div>
 
@@ -110,17 +125,7 @@
         </div>
       </div>
 
-      <div class="cta-bottom">
-        <h1 style="text-align: center">Start now</h1>
-        <span>
-          Analyse your chat, reveal unknown facts and surprise your friends with
-          insights into your communication.</span
-        >
-        <br />
-        <v-btn to="#drop" color="#07bc4c" style="color: #ffffff" class="my-5">
-          Analyse my chat
-        </v-btn>
-      </div>
+      <Cta />
 
       <Content :page="page" class="main-el mt-15" />
 
@@ -163,25 +168,10 @@
         </div>
       </div>
 
-      <div class="cta-bottom">
-        <h1 style="text-align: center">Start now</h1>
-        <span>
-          Analyse your chat, reveal unknown facts and surprise your friends with
-          insights into your communication.</span
-        >
-        <br />
-        <v-btn to="#drop" color="#07bc4c" style="color: white" class="my-5">
-          Analyse my chat</v-btn
-        >
-      </div>
+      <Cta />
     </div>
 
-    <div v-show="!isShowingCharts">
-      <LineChart :chartdata="chat_" />
-      <DonughtChart :chartdata="chat_" />
-      <BarChart :chartdata="chat_" :hourly="true" />
-      <BarChart :chartdata="chat_" :hourly="false" />
-    </div>
+    <Results :chat_="chat_" />
   </v-main>
 </template>
 
@@ -200,7 +190,6 @@ export default {
   data() {
     return {
       isShowingChats: false,
-      isStripeLoaded: false,
       chat_: new Chat(),
     };
   },
@@ -281,8 +270,11 @@ export default {
     float: left;
     padding: 3em;
   }
-}
-@media (max-width: 759px) {
+  .explainer-list p {
+    display: inline;
+    padding: 1em;
+    width: 33%;
+  }
   .testimonial {
     width: 100%;
     padding: 3em;
