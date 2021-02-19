@@ -6,6 +6,18 @@ export default {
   extends: Doughnut,
   props: {
     chartdata: new Chat(),
+    options: {
+      type: Object,
+      default: function () {
+        return {
+          responsive: true,
+          maintainAspectRatio: false,
+          legend: {
+            position: "bottom",
+          },
+        };
+      },
+    },
   },
   watch: {
     chartdata: function () {
