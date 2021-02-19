@@ -123,8 +123,11 @@
 
     <Content :page="page" class="main-el mt-15" />
 
-    <div v-show="isShowingChats">
+    <div v-show="!isShowingCharts">
+      <LineChart :chartdata="chat_" />
       <DonughtChart :chartdata="chat_" />
+      <BarChart :chartdata="chat_" :hourly="true" />
+      <BarChart :chartdata="chat_" :hourly="false" />
     </div>
   </v-main>
 </template>
