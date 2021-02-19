@@ -186,14 +186,19 @@ export class Chat {
     // words only used once in the complete chat ( hapax legomenons )
     let uniqueWords = Chat.uniqueWords(this.sortedFreqDict);
     // number of different words used in this chat
-    let different_words = this.sortedFreqDict.length;
+    let differentWords = this.sortedFreqDict.length;
     // used emojis sorted
-    let sorted_emojis = Chat.match_emojys(this.sortedFreqDict);
+    let sortedEmojis = Chat.match_emojys(this.sortedFreqDict);
     // longest message in the chat
-    let longest_message = Chat.get_longest_message(this.filterdChatObject);
+    let longestMessage = Chat.get_longest_message(this.filterdChatObject);
     // average words used per message
-
-    console.log(longest_message, different_words, sorted_emojis);
+    let averageMessageLength = numberOfWords / this.filterdChatObject.length;
+    console.log(
+      longestMessage,
+      differentWords,
+      sortedEmojis,
+      averageMessageLength
+    );
 
     return {
       labels: ["UnFun Facts"],
@@ -213,7 +218,7 @@ export class Chat {
           // image of smiley
           label: "Longest message in chat",
           backgroundColor: "rgba(75, 192, 192, 1)",
-          data: [longest_message],
+          data: [averageMessageLength],
         },
       ],
     };
