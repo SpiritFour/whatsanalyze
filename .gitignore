@@ -89,3 +89,5 @@ sw.*
 
 # Vim swap files
 *.swp
+/assets/variables.css
+/assets/variables.css.map
