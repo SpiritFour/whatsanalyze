@@ -6,14 +6,48 @@ export default {
   extends: Bar,
   props: {
     chartdata: new Chat(),
+    hourly: {
+      type: Boolean,
+      default: true,
+    },
+    options: {
+      type: Object,
+      default: function () {
+        return {
+          responsive: true,
+          maintainAspectRatio: false,
+          legend: {
+            position: "bottom",
+          },
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                },
+              },
+            ],
+          },
+        };
+      },
+    },
   },
   watch: {
     chartdata: function () {
-      this.renderChart(this.chartdata.getFunFacts(), this.options);
+      if (this.hourly) {
+        this.renderChart(this.chartdata.getHourlyData(), this.options);
+      } else {
+        this.renderChart(this.chartdata.getDailyData(), this.options);
+      }
     },
   },
+
   mounted() {
-    this.renderChart(this.chartdata.getFunFacts(), this.options);
+    if (this.hourly) {
+      this.renderChart(this.chartdata.getHourlyData(), this.options);
+    } else {
+      this.renderChart(this.chartdata.getDailyData(), this.options);
+    }
   },
 };
 </script>
