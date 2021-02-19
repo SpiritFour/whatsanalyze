@@ -29,8 +29,11 @@ export default {
     },
   },
   watch: {
-    chartdata: function () {
-      this.renderChart(this.chartdata.getLineGraphData(), this.options);
+    chartdata: {
+      handler() {
+        this.renderChart(this.chartdata.getLineGraphData(), this.options);
+      },
+      deep: true,
     },
   },
   mounted() {
