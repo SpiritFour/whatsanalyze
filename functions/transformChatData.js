@@ -15,21 +15,50 @@ export class Chat {
   }
 
   static getTotalNumberOfWords(chatObject) {
-    return chatObject.reduce((n, { message }) => n + message.length, 0);
+    return chatObject.reduce(
+      (n, { message }) => n + message.split(" ").length,
+      0
+    );
   }
 
   // Find hapax legomenons, a word or an expression that occurs only once within the context.
-  static getUniqueWords(chatObject) {
-    const messageString = chatObject.reduce(
+  static uniqueWords(chat_distribution) {
+    function singleOccurrence(value) {
+      return value[1] === 1;
+    }
+    return chat_distribution.filter(singleOccurrence);
+  }
+
+  static match_emojys(chat_distribution) {
+    const regexpEmojiPresentation = /\p{Emoji_Presentation}/gu;
+    function isEmoji(value) {
+      return value[0].match(regexpEmojiPresentation);
+    }
+
+    return chat_distribution.filter(isEmoji);
+  }
+
+  static get_longest_message(chat_object) {
+    return Math.max(
+      ...chat_object.map((object) => object.message.split(" ").length)
+    );
+  }
+
+  // creates a sorted FreqArray for the chat corpus [{word: 10},{hi:9},...]
+  static createSortedFreqDict(chatObject) {
+    const message_string = chatObject.reduce(
       (n, { message }) => n + " " + message,
       " "
     );
-    let messageArray = messageString.replace(/\n/g, " ").split(" ");
+    let message_array = message_string.replace(/\n/g, " ").split(" ");
     let distribution = {};
-    messageArray.map(function (item) {
+    message_array.map(function (item) {
       distribution[item] = (distribution[item] || 0) + 1;
     });
-    return { fix: 1 };
+    let sorted_distribution = Object.entries(distribution).sort(
+      (a, b) => b[1] - a[1]
+    );
+    return sorted_distribution;
   }
 
   static toDayDates(chatObject) {
@@ -49,34 +78,6 @@ export class Chat {
 
   static getMessagesPerPerson(chatObject) {
     return this.groupBy(chatObject, "author");
-  }
-
-  static getFunFacts(chatObject) {
-    let numberOfWords = Chat.getTotalNumberOfWords(chatObject);
-    let uniqueWords = Chat.getUniqueWords(chatObject);
-    console.log(Object.keys(uniqueWords), numberOfWords);
-    return {
-      labels: ["UnFun Facts"],
-      datasets: [
-        {
-          label: "Unique words used in this chat",
-          backgroundColor: "rgba(255, 99, 132, 1)",
-          borderColor: "rgba(255, 99, 132, 0.1)",
-          data: [Object.keys(uniqueWords).length],
-        },
-        {
-          label: "Total Number of Words you typed",
-          backgroundColor: "rgba(75, 192, 192, 1)",
-          data: [numberOfWords],
-        },
-        {
-          // image of smiley
-          label: "You are a cry baby, most used smiley",
-          backgroundColor: "rgba(75, 192, 192, 1)",
-          data: [100],
-        },
-      ],
-    };
   }
 
   static hourlyDataFromChat(messages) {
@@ -117,12 +118,8 @@ export class Chat {
 
   get sortedFreqDict() {
     if (this._sortedFreqList) return this._sortedFreqList;
-    this._sortedFreqList = this._getSortedFreqDict();
+    this._sortedFreqList = Chat.createSortedFreqDict(this.chatObject);
     return this._sortedFreqList;
-  }
-
-  _getSortedFreqDict() {
-    return null;
   }
 
   get messagesPerPerson() {
@@ -190,6 +187,30 @@ export class Chat {
         },
       ],
     };
+  }
+
+  getFunFacts() {
+    let people = this.messagesPerPerson.map((person) => {
+      let name = person.name;
+      let numberOfWords = Chat.getTotalNumberOfWords(person.messages);
+      let longestMessage = Chat.get_longest_message(person.messages);
+      let personalFreqDic = Chat.createSortedFreqDict(person.messages);
+      console.log(personalFreqDic);
+      let uniqueWords = Chat.uniqueWords(personalFreqDic).length;
+      let sortedEmojis = Chat.match_emojys(personalFreqDic)
+        .map((emoji) => emoji[0])
+        .slice(0, 3);
+      let averageMessageLength = numberOfWords / person.messages.length;
+      return {
+        name: name,
+        numberOfWords: numberOfWords,
+        longestMessage: longestMessage,
+        uniqueWords: uniqueWords,
+        sortedEmojis: sortedEmojis,
+        averageMessageLength: Math.round(averageMessageLength),
+      };
+    });
+    return people;
   }
 
   getHourlyData() {

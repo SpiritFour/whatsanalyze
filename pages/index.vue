@@ -172,7 +172,6 @@
     </div>
 
     <Results :chat_="chat_" />
-
   </v-main>
 </template>
 

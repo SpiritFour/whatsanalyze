@@ -100,7 +100,7 @@ export default {
               .then(() => {
                 this.$emit("new_messages", this.messages);
                 this.$emit("hide_explanation", true);
-               });
+              });
             this.$gtag.event("file-parsed", {
               event_category: "home",
               event_label: "lead",
