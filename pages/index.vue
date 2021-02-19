@@ -172,6 +172,7 @@
     </div>
 
     <Results :chat_="chat_" />
+
   </v-main>
 </template>
 
@@ -181,7 +182,6 @@ import { Chat } from "~/functions/transformChatData";
 export default {
   async asyncData({ $content }) {
     const page = await $content("home").fetch();
-    console.log(page);
     return {
       page,
     };

@@ -79,6 +79,7 @@ export default {
                 this.$emit("new_messages", this.messages);
                 this.$emit("hide_eplanation", true);
               });
+
             this.$gtag.event("file-parsed", {
               event_category: "home",
               event_label: "lead",
@@ -105,7 +106,7 @@ export default {
     fetch("/chat_example.txt")
       .then((response) => response.text())
       .then(parseString)
-      .then((messages) => (this.messages = messages))
+      .then((messages) => (this.messages = this.extendDataStructure(messages)))
       .then(() => this.$emit("new_messages", this.messages));
   },
 };
