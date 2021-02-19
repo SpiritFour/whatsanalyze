@@ -97,8 +97,10 @@ export default {
                 (messages) =>
                   (this.messages = this.extendDataStructure(messages))
               )
-              .then(() => this.$emit("new_messages", this.messages));
-            this.processingFile = false;
+              .then(() => {
+                this.$emit("new_messages", this.messages);
+                this.$emit("hide_explanation", true);
+              });
             this.$gtag.event("file-parsed", {
               event_category: "home",
               event_label: "lead",
