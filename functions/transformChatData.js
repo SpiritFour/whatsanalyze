@@ -19,24 +19,10 @@ export class Chat {
   }
 
   // Find hapax legomenons, a word or an expression that occurs only once within the context.
-  static getUniqueWords(chatObject) {
-    const messageString = chatObject.reduce(
-      (n, { message }) => n + " " + message,
-      " "
-    );
-    let messageArray = messageString.replace(/\n/g, " ").split(" ");
-    let distribution = {};
-    messageArray.map(function (item) {
-      distribution[item] = (distribution[item] || 0) + 1;
-    });
-    return { fix: 1 };
-  }
-  // Find hapax legomenons, a word or an expression that occurs only once within the context.
   static uniqueWords(chat_distribution) {
     function singleOccurrence(value) {
       return value[1] === 1;
     }
-    console.log(chat_distribution);
     return chat_distribution.filter(singleOccurrence);
   }
 
@@ -50,7 +36,9 @@ export class Chat {
   }
 
   static get_longest_message(chat_object) {
-    return Math.max(...chat_object.map((object) => object.message.length));
+    return Math.max(
+      ...chat_object.map((object) => object.message.split(" ").length)
+    );
   }
 
   static toDayDates(chatObject) {
@@ -169,17 +157,18 @@ export class Chat {
   }
 
   getFunFacts() {
-    let numberOfWords = Chat.getTotalNumberOfWords(this.chatObject);
+    // number of words used in complete chat
+    let numberOfWords = Chat.getTotalNumberOfWords(this.filterdChatObject);
     // words only used once in the complete chat ( hapax legomenons )
     let uniqueWords = Chat.uniqueWords(this.sortedFreqDict);
     // number of different words used in this chat
-    let different_words = this.sortedFreqDict;
+    let different_words = this.sortedFreqDict.length;
     // used emojis sorted
-    let sorted_emojys = Chat.match_emojys(this.sortedFreqDict);
+    let sorted_emojis = Chat.match_emojys(this.sortedFreqDict);
     // longest message in the chat
-    let longest_message = Chat.get_longest_message(this.chatObject);
+    let longest_message = Chat.get_longest_message(this.filterdChatObject);
 
-    console.log(longest_message, different_words, sorted_emojys);
+    console.log(longest_message, different_words, sorted_emojis);
 
     return {
       labels: ["UnFun Facts"],
@@ -197,9 +186,9 @@ export class Chat {
         },
         {
           // image of smiley
-          label: "You are a cry baby, most used smiley",
+          label: "Longest message in chat",
           backgroundColor: "rgba(75, 192, 192, 1)",
-          data: [100],
+          data: [longest_message],
         },
       ],
     };
