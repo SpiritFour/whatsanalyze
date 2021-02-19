@@ -75,7 +75,10 @@ export default {
             this.isDragging = false;
             parseString(this.textSource)
               .then((messages) => (this.messages = messages))
-              .then(() => this.$emit("new_messages", this.messages));
+              .then(() => {
+                this.$emit("new_messages", this.messages);
+                this.$emit("hide_eplanation", true);
+              });
             this.$gtag.event("file-parsed", {
               event_category: "home",
               event_label: "lead",
