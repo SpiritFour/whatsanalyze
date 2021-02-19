@@ -125,21 +125,22 @@ export class Chat {
     return this._messagesPerPerson;
   }
 
-  _getMessagesPerPerson() {
+  _getMessagesPerPerson(groupAfter = 9) {
     let persons = Object.entries(
       Chat.getMessagesPerPerson(this.filterdChatObject)
     );
-    console.log(persons);
     persons = persons.sort((a, b) => b[1].length - a[1].length);
 
     let enrichedPersons = [];
 
+    let grouped = false;
+
     persons.forEach((person, idx) => {
-      if (idx > 9) {
-        enrichedPersons[9].messages = enrichedPersons[9].messages.concat(
-          person[1]
-        );
-        console.log(person[1]);
+      if (idx > groupAfter) {
+        enrichedPersons[
+          groupAfter
+        ].messages = enrichedPersons[9].messages.concat(person[1]);
+        grouped = true;
       } else {
         enrichedPersons.push({
           name: person[0],
@@ -149,14 +150,19 @@ export class Chat {
       }
     });
 
+    if (grouped) {
+      enrichedPersons[groupAfter].name = "Others";
+      enrichedPersons[groupAfter].messages.sort(
+        (a, b) => a.absolute_id - b.absolute_id
+      );
+    }
+
     return enrichedPersons;
   }
 
   get dates() {
     if (this._dates) return this._dates;
-    this._dates = this.chatObject.map((message) =>
-      message.date.setHours(0, 0, 0, 0)
-    );
+    this._dates = this.chatObject.map((message) => message.date);
     return this._dates;
   }
 
@@ -212,7 +218,10 @@ export class Chat {
     var minDate = new Date(Math.min.apply(null, this.dates));
     var maxDate = new Date(Math.max.apply(null, this.dates));
 
-    var x_axis = Chat.getDaysBetween(minDate, maxDate);
+    var x_axis = Chat.getDaysBetween(
+      minDate.setHours(0, 0, 0, 0),
+      maxDate.setHours(0, 0, 0, 0)
+    );
 
     // iterate over persons
     var datasets = this.messagesPerPerson.map((person) => {

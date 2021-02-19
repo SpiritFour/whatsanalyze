@@ -74,7 +74,10 @@ export default {
             this.textSource = f.target.result;
             this.isDragging = false;
             parseString(this.textSource)
-              .then((messages) => (this.messages = messages))
+              .then(
+                (messages) =>
+                  (this.messages = this.extendDataStructure(messages))
+              )
               .then(() => this.$emit("new_messages", this.messages));
             this.$gtag.event("file-parsed", {
               event_category: "home",
@@ -102,7 +105,7 @@ export default {
     fetch("/chat_example.txt")
       .then((response) => response.text())
       .then(parseString)
-      .then((messages) => (this.messages = messages))
+      .then((messages) => (this.messages = this.extendDataStructure(messages)))
       .then(() => this.$emit("new_messages", this.messages));
   },
 };
