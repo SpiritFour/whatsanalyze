@@ -6,11 +6,25 @@
     @dragleave.prevent="dragLeave"
     @drop.prevent="drop($event)"
   >
-    <h1 v-if="wrongFile">Wrong file type</h1>
-    <h1 v-if="!textSource && !isDragging && !wrongFile">
-      Drop <label for="uploadmytextfile">(or pick)</label> a text file
+    <h1 v-if="wrongFile">Wrong file format please upload a .txt!</h1>
+    <h1
+      style="text-align: center"
+      v-if="
+        !textSource &&
+        !isDragging &&
+        !wrongFile &&
+        !isSuccess &&
+        !processingFile
+      "
+    >
+      <v-icon large> mdi-tray-arrow-down </v-icon>
+      <br />
+      <strong>Drag </strong>
+      <label style="cursor: pointer" for="uploadmytextfile">(or choose)</label>
+      a .txt file
     </h1>
-
+    <h1 v-if="processingFile">Processing your file please wait...</h1>
+    <h1 v-if="isSuccess">Done!</h1>
     <input type="file" id="uploadmytextfile" @change="requestUploadFile" />
   </div>
 </template>
@@ -24,6 +38,8 @@ export default {
     return {
       isDragging: false,
       wrongFile: false,
+      processingFile: false,
+      isSuccess: false,
       textSource: null,
       chatStruct: null,
       messages: [],
@@ -54,6 +70,7 @@ export default {
       this.isDragging = false;
     },
     drop(e) {
+      this.processingFile = true;
       let files = e.dataTransfer.files;
       this.process(files);
     },
@@ -64,6 +81,8 @@ export default {
     },
     process(files) {
       this.wrongFile = false;
+      this.processingFile = true;
+      this.isSuccess = false;
       // allows only 1 file
       if (files.length === 1) {
         let file = files[0];
@@ -79,15 +98,18 @@ export default {
                   (this.messages = this.extendDataStructure(messages))
               )
               .then(() => this.$emit("new_messages", this.messages));
+            this.processingFile = false;
             this.$gtag.event("file-parsed", {
               event_category: "home",
               event_label: "lead",
               value: "1",
             });
+            this.isSuccess = true;
           };
           // this is the method to read a text file content
           reader.readAsText(file);
         } else {
+          this.processingFile = false;
           this.$gtag.event("file-error", {
             event_category: "home",
             event_label: "lead",
@@ -115,9 +137,9 @@ export default {
 .drop {
   width: 100%;
   height: 20vh;
-  background-color: $c-blue-accent;
-  border: 10px solid #eee;
-  color: $c-white;
+  background-color: $c-white;
+  outline: 2px dashed black;
+  outline-offset: -10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -141,5 +163,9 @@ input[type="file"] {
 
 label {
   text-decoration: underline;
+}
+
+.isDragging {
+  background-color: grey;
 }
 </style>

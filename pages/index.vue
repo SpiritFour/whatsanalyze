@@ -26,7 +26,7 @@
             <v-icon large color="amber darken-2">
               mdi-emoticon-happy-outline
             </v-icon>
-            3. Enjoy beautiful visualizations
+            3. Enjoy beautiful insights
           </p>
         </div>
       </div>
