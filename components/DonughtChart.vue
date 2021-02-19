@@ -20,8 +20,11 @@ export default {
     },
   },
   watch: {
-    chartdata: function () {
-      this.renderChart(this.chartdata.getShareOfSpeech(), this.options);
+    chartdata: {
+      handler() {
+        this.renderChart(this.chartdata.getShareOfSpeech(), this.options);
+      },
+      deep: true,
     },
   },
   mounted() {

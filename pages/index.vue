@@ -136,6 +136,7 @@
     <Content :page="page" class="main-el mt-15" />
 
     <div v-show="!isShowingCharts">
+      <GroupOthers :chat-object="chat_" />
       <LineChart :chartdata="chat_" />
       <DonughtChart :chartdata="chat_" />
       <BarChart :chartdata="chat_" :hourly="true" />
@@ -162,7 +163,6 @@ import { Chat } from "~/functions/transformChatData";
 export default {
   async asyncData({ $content }) {
     const page = await $content("home").fetch();
-    console.log(page);
     return {
       page,
     };

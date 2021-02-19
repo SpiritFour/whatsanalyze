@@ -95,11 +95,17 @@ export class Chat {
     return hours;
   }
 
-  constructor(chatObject = []) {
+  constructor(chatObject = [], groupAfter = 9) {
     // this one is the complete input
     this.chatObject = chatObject;
+    // for groupmessages we probably want to group after some time
+    this._groupAfter = groupAfter;
     // here we remove messages (i.e. system messages)
     this.filterdChatObject = Chat.remove_named_messages(chatObject);
+    //number of persons in chat
+    this.numPersonsInChat = Object.entries(
+      Chat.getMessagesPerPerson(this.filterdChatObject)
+    ).length;
     // frequencies for all words in chat (excluding system)
     this._sortedFreqList = null;
     // here we have the messages per person, also adding colors to them
@@ -125,24 +131,51 @@ export class Chat {
     return this._messagesPerPerson;
   }
 
+  set groupAfter(groupAfter) {
+    this._groupAfter = groupAfter;
+    this._sortedFreqList = null;
+    this._messagesPerPerson = null;
+  }
+
   _getMessagesPerPerson() {
-    let persons = Chat.getMessagesPerPerson(this.filterdChatObject);
+    let persons = Object.entries(
+      Chat.getMessagesPerPerson(this.filterdChatObject)
+    );
+    persons = persons.sort((a, b) => b[1].length - a[1].length);
+
     let enrichedPersons = [];
-    Object.keys(persons).map((name, idx) => {
-      enrichedPersons.push({
-        name: name,
-        color: chatColors[idx % chatColors.length],
-        messages: persons[name],
-      });
+
+    let grouped = false;
+
+    persons.forEach((person, idx) => {
+      if (idx > this._groupAfter) {
+        enrichedPersons[this._groupAfter].messages = enrichedPersons[
+          this._groupAfter
+        ].messages.concat(person[1]);
+        grouped = true;
+      } else {
+        enrichedPersons.push({
+          name: person[0],
+          color: chatColors[idx % chatColors.length],
+          messages: person[1],
+        });
+      }
     });
+
+    if (grouped) {
+      enrichedPersons[this._groupAfter].name = "Others";
+      enrichedPersons[this._groupAfter].color = "#D3D3D3";
+      enrichedPersons[this._groupAfter].messages.sort(
+        (a, b) => a.absolute_id - b.absolute_id
+      );
+    }
+
     return enrichedPersons;
   }
 
   get dates() {
     if (this._dates) return this._dates;
-    this._dates = this.chatObject.map((message) =>
-      message.date.setHours(0, 0, 0, 0)
-    );
+    this._dates = this.chatObject.map((message) => message.date);
     return this._dates;
   }
 
@@ -198,7 +231,10 @@ export class Chat {
     var minDate = new Date(Math.min.apply(null, this.dates));
     var maxDate = new Date(Math.max.apply(null, this.dates));
 
-    var x_axis = Chat.getDaysBetween(minDate, maxDate);
+    var x_axis = Chat.getDaysBetween(
+      minDate.setHours(0, 0, 0, 0),
+      maxDate.setHours(0, 0, 0, 0)
+    );
 
     // iterate over persons
     var datasets = this.messagesPerPerson.map((person) => {
