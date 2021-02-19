@@ -15,7 +15,10 @@ export class Chat {
   }
 
   static getTotalNumberOfWords(chatObject) {
-    return chatObject.reduce((n, { message }) => n + message.length, 0);
+    return chatObject.reduce(
+      (n, { message }) => n + message.split(" ").length,
+      0
+    );
   }
 
   // Find hapax legomenons, a word or an expression that occurs only once within the context.
@@ -41,6 +44,23 @@ export class Chat {
     );
   }
 
+  // creates a sorted FreqArray for the chat corpus [{word: 10},{hi:9},...]
+  static createSortedFreqDict(chatObject) {
+    const message_string = chatObject.reduce(
+      (n, { message }) => n + " " + message,
+      " "
+    );
+    let message_array = message_string.replace(/\n/g, " ").split(" ");
+    let distribution = {};
+    message_array.map(function (item) {
+      distribution[item] = (distribution[item] || 0) + 1;
+    });
+    let sorted_distribution = Object.entries(distribution).sort(
+      (a, b) => b[1] - a[1]
+    );
+    return sorted_distribution;
+  }
+
   static toDayDates(chatObject) {
     return chatObject.map((message) => message.date.setHours(0, 0, 0, 0));
   }
@@ -60,33 +80,6 @@ export class Chat {
     return this.groupBy(chatObject, "author");
   }
 
-  static getFunFacts(chatObject) {
-    let numberOfWords = Chat.getTotalNumberOfWords(chatObject);
-    let uniqueWords = Chat.getUniqueWords(chatObject);
-    console.log(Object.keys(uniqueWords), numberOfWords);
-    return {
-      labels: ["UnFun Facts"],
-      datasets: [
-        {
-          label: "Unique words used in this chat",
-          backgroundColor: "rgba(255, 99, 132, 1)",
-          borderColor: "rgba(255, 99, 132, 0.1)",
-          data: [Object.keys(uniqueWords).length],
-        },
-        {
-          label: "Total Number of Words you typed",
-          backgroundColor: "rgba(75, 192, 192, 1)",
-          data: [numberOfWords],
-        },
-        {
-          // image of smiley
-          label: "You are a cry baby, most used smiley",
-          backgroundColor: "rgba(75, 192, 192, 1)",
-          data: [100],
-        },
-      ],
-    };
-  }
   static hourlyDataFromChat(messages) {
     let hours = new Array(24).fill(0);
     messages.map((message) => {
@@ -119,25 +112,8 @@ export class Chat {
 
   get sortedFreqDict() {
     if (this._sortedFreqList) return this._sortedFreqList;
-    this._sortedFreqList = this._getSortedFreqDict();
+    this._sortedFreqList = Chat.createSortedFreqDict(this.chatObject);
     return this._sortedFreqList;
-  }
-
-  // creates a sorted FreqArray for the chat corpus [{word: 10},{hi:9},...]
-  _getSortedFreqDict() {
-    const message_string = this.chatObject.reduce(
-      (n, { message }) => n + " " + message,
-      " "
-    );
-    let message_array = message_string.replace(/\n/g, " ").split(" ");
-    let distribution = {};
-    message_array.map(function (item) {
-      distribution[item] = (distribution[item] || 0) + 1;
-    });
-    let sorted_distribution = Object.entries(distribution).sort(
-      (a, b) => b[1] - a[1]
-    );
-    return sorted_distribution;
   }
 
   get messagesPerPerson() {
@@ -181,47 +157,27 @@ export class Chat {
   }
 
   getFunFacts() {
-    // number of words used in complete chat
-    let numberOfWords = Chat.getTotalNumberOfWords(this.filterdChatObject);
-    // words only used once in the complete chat ( hapax legomenons )
-    let uniqueWords = Chat.uniqueWords(this.sortedFreqDict);
-    // number of different words used in this chat
-    let differentWords = this.sortedFreqDict.length;
-    // used emojis sorted
-    let sortedEmojis = Chat.match_emojys(this.sortedFreqDict);
-    // longest message in the chat
-    let longestMessage = Chat.get_longest_message(this.filterdChatObject);
-    // average words used per message
-    let averageMessageLength = numberOfWords / this.filterdChatObject.length;
-    console.log(
-      longestMessage,
-      differentWords,
-      sortedEmojis,
-      averageMessageLength
-    );
-
-    return {
-      labels: ["UnFun Facts"],
-      datasets: [
-        {
-          label: "Unique words used in this chat",
-          backgroundColor: "rgba(255, 99, 132, 1)",
-          borderColor: "rgba(255, 99, 132, 0.1)",
-          data: [Object.keys(uniqueWords).length],
-        },
-        {
-          label: "Total Number of Words you typed",
-          backgroundColor: "rgba(75, 192, 192, 1)",
-          data: [numberOfWords],
-        },
-        {
-          // image of smiley
-          label: "Longest message in chat",
-          backgroundColor: "rgba(75, 192, 192, 1)",
-          data: [averageMessageLength],
-        },
-      ],
-    };
+    let people = this.messagesPerPerson.map((person) => {
+      let name = person.name;
+      let numberOfWords = Chat.getTotalNumberOfWords(person.messages);
+      let longestMessage = Chat.get_longest_message(person.messages);
+      let personalFreqDic = Chat.createSortedFreqDict(person.messages);
+      console.log(personalFreqDic);
+      let uniqueWords = Chat.uniqueWords(personalFreqDic).length;
+      let sortedEmojis = Chat.match_emojys(personalFreqDic)
+        .map((emoji) => emoji[0])
+        .slice(0, 3);
+      let averageMessageLength = numberOfWords / person.messages.length;
+      return {
+        name: name,
+        numberOfWords: numberOfWords,
+        longestMessage: longestMessage,
+        uniqueWords: uniqueWords,
+        sortedEmojis: sortedEmojis,
+        averageMessageLength: Math.round(averageMessageLength),
+      };
+    });
+    return people;
   }
 
   getHourlyData() {
