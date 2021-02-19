@@ -192,6 +192,7 @@ export class Chat {
     // longest message in the chat
     let longest_message = Chat.get_longest_message(this.filterdChatObject);
     // average words used per message
+
     console.log(longest_message, different_words, sorted_emojis);
 
     return {
