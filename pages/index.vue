@@ -135,62 +135,23 @@
 
     <Content :page="page" class="main-el mt-15" />
 
-    <div style="text-align: center" class="testimonial-container">
-      <h2 style="text-align: center">
-        People who analyse their chats - get first hand data insights
-      </h2>
-
-      <div style="overflow: hidden">
-        <div class="testimonial">
-          <v-icon large color="black"> mdi-format-quote-close </v-icon>
-          <p>Jennifer says</p>
-          <p>
-            Visualizing my friends chat revealed a lot about our relationship. I
-            always though that I was the one sending more messages. Really nice
-            to see all those fun facts about our history. Keep it going and add
-            more beautiful visuals
-          </p>
-          <v-icon large color="#ffd782"> mdi-star </v-icon>
-          <v-icon large color="#ffd782"> mdi-star </v-icon>
-          <v-icon large color="#ffd782"> mdi-star </v-icon>
-          <v-icon large color="#ffd782"> mdi-star </v-icon>
-          <v-icon large color="#ffd782"> mdi-star </v-icon>
-        </div>
-        <div class="testimonial">
-          <v-icon large color="black"> mdi-format-quote-close </v-icon>
-          <p>Lara says</p>
-          <p>
-            Amazing to see a whole whatsapp history at a glance. I have chats
-            going back multiple years seeing how the relationship is mirrored in
-            the chat is amazing. I love that my files are not uploaded and that
-            it runs directly in my browser
-          </p>
-          <v-icon large color="#ffd782"> mdi-star </v-icon>
-          <v-icon large color="#ffd782"> mdi-star </v-icon>
-          <v-icon large color="#ffd782"> mdi-star </v-icon>
-          <v-icon large color="#ffd782"> mdi-star </v-icon>
-          <v-icon large color="#ffd782"> mdi-star </v-icon>
-        </div>
-      </div>
-    </div>
-
-    <div class="cta-bottom">
-      <h1 style="text-align: center">Start now</h1>
-      <span>
-        Analyse your chat, reveal unknown facts and surprise your friends with
-        insights into your communication.</span
-      >
-      <br />
-      <v-btn to="#drop" color="#07bc4c" style="color: white" class="my-5">
-        Analyse my chat</v-btn
-      >
-    </div>
-
     <div v-show="!isShowingCharts">
       <LineChart :chartdata="chat_" />
       <DonughtChart :chartdata="chat_" />
       <BarChart :chartdata="chat_" :hourly="true" />
       <BarChart :chartdata="chat_" :hourly="false" />
+    </div>
+    <div class="cta-bottom">
+      <h1 style="text-align: center">Analyse your own whatsapp data now</h1>
+      <span>
+        Interested to see how your own chat data looks? Reveal some interesting
+        facts now. For example you can see how many toilet rolls would be needed
+        to print your chat. Deep dive into your own chat data now.
+      </span>
+      <br />
+      <v-btn to="#drop" color="#07bc4c" style="color: #ffffff" class="my-5">
+        Analyse my chat
+      </v-btn>
     </div>
   </v-main>
 </template>
