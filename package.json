@@ -28,6 +28,7 @@
     "nuxt": "^2.14.12",
     "push-dir": "^0.4.1",
     "vue-chartjs": "^3.5.1",
+    "vue-gtag": "^1.11.0",
     "whatsapp-chat-parser": "^3.1.0"
   },
   "devDependencies": {
