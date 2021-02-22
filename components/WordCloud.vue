@@ -8,12 +8,23 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import * as am4plugins_wordCloud from "@amcharts/amcharts4/plugins/wordCloud";
 import { Chat } from "~/functions/transformChatData";
 
+import stopwords from "stopwords-de";
+
 am4core.useTheme(am4themes_animated);
+am4core.options.onlyShowOnViewport = true;
 
 export default {
   name: "WordCloud",
   props: {
     chartdata: new Chat(),
+    minWordLength: {
+      type: Number,
+      default: 3,
+    },
+    stopWords: {
+      type: Array,
+      default: () => stopwords,
+    },
   },
   data() {
     return {
@@ -21,17 +32,17 @@ export default {
       series: null,
     };
   },
+  methods: {
+    updateGraph() {
+      this.series.data = this.chartdata.getAllWords();
+    },
+  },
   watch: {
     chartdata: {
       handler() {
         this.updateGraph();
       },
       deep: true,
-    },
-  },
-  methods: {
-    updateGraph() {
-      this.series.text = this.chartdata.getAllWords();
     },
   },
   mounted() {
@@ -42,7 +53,14 @@ export default {
     this.series = this.chart.series.push(
       new am4plugins_wordCloud.WordCloudSeries()
     );
+    this.series.dataFields.word = "word";
+    this.series.dataFields.value = "freq";
+    this.series.labels.template.tooltipText = "{word}:\n[bold]{freq}[/]";
+    this.series.accuracy = 5;
     this.updateGraph();
+  },
+  beforeDestroy: function () {
+    this.chart.dispose();
   },
 };
 </script>

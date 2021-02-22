@@ -1,7 +1,6 @@
 <template>
   <div>
     <GroupOthers :chat-object="chat_" />
-    <WordCloud :chartdata="chat_" />
     <LineChart :chartdata="chat_" />
     <DonughtChart :chartdata="chat_" />
     <RadarChart :chartdata="chat_" dataGrouping="hourly" />
@@ -10,6 +9,7 @@
     <BarChart :chartdata="chat_" dataGrouping="hourly" />
     <BarChart :chartdata="chat_" dataGrouping="daily" />
     <BarChart :chartdata="chat_" dataGrouping="weekly" />
+    <WordCloud :chartdata="chat_" />
     <FunFacts :chartdata="chat_" />
   </div>
 </template>
