@@ -34,6 +34,30 @@
             </p>
           </div>
         </div>
+        <v-timeline align-top :dense="$vuetify.breakpoint.smAndDown">
+          <v-timeline-item
+            v-for="(item, i) in items"
+            :key="i"
+            :color="item.color"
+            :icon="item.icon"
+            fill-dot
+          >
+            <v-card :color="item.color" dark>
+              <v-card-title class="title"> Lorem Ipsum Dolor </v-card-title>
+              <v-card-text class="white text--primary">
+                <p>
+                  Lorem ipsum dolor sit amet, no nam oblique veritus. Commune
+                  scaevola imperdiet nec ut, sed euismod convenire principes at.
+                  Est et nobis iisque percipit, an vim zril disputando
+                  voluptatibus, vix an salutandi sententiae.
+                </p>
+                <v-btn :color="item.color" class="mx-0" outlined>
+                  Button
+                </v-btn>
+              </v-card-text>
+            </v-card>
+          </v-timeline-item>
+        </v-timeline>
 
         <div class="explainer">
           <img
@@ -64,7 +88,7 @@
             src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80"
             alt="How to export your WhatsApp chat"
           />
-          <h2>Enjoy beautiful visuaizations</h2>
+          <h2>Enjoy beautiful visualizations</h2>
 
           <p>
             Learn who you really are and how you communicate with your friends.
@@ -81,7 +105,7 @@
 
           <p>
             Impress your friends with real data. Know you know who writes the
-            most messages, uses wich emojies and more.
+            most messages, uses wich emojis and more.
           </p>
         </div>
       </div>
