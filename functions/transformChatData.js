@@ -260,10 +260,27 @@ export class Chat {
     // iterate over persons
     var datasets = this.messagesPerPerson.map((person) => {
       var hist_info = {};
-      person.messages.forEach((message) => {
-        var ds = message.date.toDateString();
-        hist_info[ds] = (hist_info[ds] || 0) + 1;
-      });
+
+      function _addDayCount(message) {
+        const oneDayInMS = 24 * 60 * 60 * 1000;
+
+        var prevDate = new Date(message.date.getTime() - oneDayInMS);
+        if (prevDate > minDate) {
+          prevDate = prevDate.toDateString();
+          hist_info[prevDate] = hist_info[prevDate] || 0;
+        }
+
+        var currDate = message.date.toDateString();
+        hist_info[currDate] = (hist_info[currDate] || 0) + 1;
+
+        var nextDate = new Date(message.date.getTime() + oneDayInMS);
+        if (nextDate < maxDate) {
+          nextDate = nextDate.toDateString();
+          hist_info[nextDate] = hist_info[nextDate] || 0;
+        }
+      }
+
+      person.messages.forEach(_addDayCount);
 
       return {
         label: person.name,
