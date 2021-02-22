@@ -1,4 +1,5 @@
-import { chatColors } from "~/functions/colors";
+import { chatColors, hexToRgbA } from "~/functions/colors";
+import stopwords from "stopwords-de";
 
 export class Chat {
   static remove_named_messages(chatObject, name = "system") {
@@ -71,7 +72,7 @@ export class Chat {
       d <= end;
       d.setDate(d.getDate() + 1)
     ) {
-      a.push(new Date(d).toDateString());
+      a.push(new Date(d));
     }
     return a;
   }
@@ -96,11 +97,21 @@ export class Chat {
     return hours;
   }
 
-  constructor(chatObject = [], groupAfter = 9) {
+  static weeklyDataFromChat(messages) {
+    let hours = new Array(12).fill(0);
+    messages.map((message) => {
+      hours[message.date.getMonth()] += 1;
+    });
+    return hours;
+  }
+
+  constructor(chatObject = [], groupAfter = 9, maxWordsWordCloud = 500) {
     // this one is the complete input
     this.chatObject = chatObject;
     // for groupmessages we probably want to group after some time
     this._groupAfter = groupAfter;
+    // max number of words shown in word cloud
+    this._maxWordsWordCloud = maxWordsWordCloud;
     // here we remove messages (i.e. system messages)
     this.filterdChatObject = Chat.remove_named_messages(chatObject);
     //number of persons in chat
@@ -130,8 +141,11 @@ export class Chat {
 
   set groupAfter(groupAfter) {
     this._groupAfter = groupAfter;
-    this._sortedFreqList = null;
     this._messagesPerPerson = null;
+  }
+
+  set maxWordsWordCloud(maxWordsWordCloud) {
+    this._maxWordsWordCloud = maxWordsWordCloud;
   }
 
   _getMessagesPerPerson() {
@@ -176,13 +190,16 @@ export class Chat {
     return this._dates;
   }
 
-  getShareOfSpeech() {
+  getShareOfSpeech(opacity = 1) {
     return {
       labels: this.messagesPerPerson.map((person) => person.name),
       datasets: [
         {
           label: "Share of Speech",
-          backgroundColor: this.messagesPerPerson.map((person) => person.color),
+          backgroundColor: this.messagesPerPerson.map((person) =>
+            hexToRgbA(person.color, opacity)
+          ),
+          borderColor: this.messagesPerPerson.map((person) => person.color),
           data: this.messagesPerPerson.map((person) => person.messages.length),
         },
       ],
@@ -213,35 +230,89 @@ export class Chat {
     return people;
   }
 
-  getHourlyData() {
+  getHourlyData(opacity = 1) {
     return {
-      labels: [...Array(24).keys()],
+      labels: [
+        "0AM",
+        "1AM",
+        "2AM",
+        "3AM",
+        "4AM",
+        "5AM",
+        "6AM",
+        "7AM",
+        "8AM",
+        "9AM",
+        "10AM",
+        "11AM",
+        "12PM",
+        "1PM",
+        "2PM",
+        "3PM",
+        "4PM",
+        "5PM",
+        "6PM",
+        "7PM",
+        "8PM",
+        "9PM",
+        "10PM",
+        "11PM",
+      ],
       datasets: this.messagesPerPerson.map((person) => {
         return {
           label: person.name,
-          backgroundColor: person.color,
+          backgroundColor: hexToRgbA(person.color, opacity),
+          borderColor: person.color,
           data: Chat.hourlyDataFromChat(person.messages),
         };
       }),
     };
   }
 
-  getDailyData() {
+  getDailyData(opacity = 1) {
     return {
       labels: [
-        "Montag",
-        "Dienstag",
-        "Mittwoch",
-        "Donnerstag",
-        "Freitag",
-        "Samstag",
-        "Sonntag",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
       ],
       datasets: this.messagesPerPerson.map((person) => {
         return {
           label: person.name,
-          backgroundColor: person.color,
+          backgroundColor: hexToRgbA(person.color, opacity),
+          borderColor: person.color,
           data: Chat.dailyDataFromChat(person.messages),
+        };
+      }),
+    };
+  }
+
+  getWeeklyData(opacity = 1) {
+    return {
+      labels: [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ],
+      datasets: this.messagesPerPerson.map((person) => {
+        return {
+          label: person.name,
+          backgroundColor: hexToRgbA(person.color, opacity),
+          borderColor: person.color,
+          data: Chat.weeklyDataFromChat(person.messages),
         };
       }),
     };
@@ -252,22 +323,39 @@ export class Chat {
     var minDate = new Date(Math.min.apply(null, this.dates));
     var maxDate = new Date(Math.max.apply(null, this.dates));
 
-    var x_axis = Chat.getDaysBetween(
-      minDate.setHours(0, 0, 0, 0),
-      maxDate.setHours(0, 0, 0, 0)
-    );
-
     // iterate over persons
     var datasets = this.messagesPerPerson.map((person) => {
       var hist_info = {};
-      person.messages.forEach((message) => {
-        var ds = message.date.toDateString();
-        hist_info[ds] = (hist_info[ds] || 0) + 1;
-      });
+
+      function _addDayCount(message) {
+        const oneDayInMS = 24 * 60 * 60 * 1000;
+
+        // we group for one day -> set to mid day
+        var currDate = new Date(message.date);
+        currDate.setHours(12, 0, 0, 0);
+
+        var prevDate = new Date(currDate.getTime() - oneDayInMS);
+        if (prevDate > minDate) {
+          hist_info[prevDate] = hist_info[prevDate] || 0;
+        }
+
+        hist_info[currDate] = (hist_info[currDate] || 0) + 1;
+
+        var nextDate = new Date(currDate.getTime() + oneDayInMS);
+        if (nextDate < maxDate) {
+          hist_info[nextDate] = hist_info[nextDate] || 0;
+        }
+      }
+
+      person.messages.forEach(_addDayCount);
 
       return {
+        borderWidth: 1,
+        lineTension: 0,
+        pointRadius: 0,
+        pointHitRadius: 5,
         label: person.name,
-        backgroundColor: person.color,
+        backgroundColor: hexToRgbA(person.color),
         borderColor: person.color,
         data: Object.entries(hist_info).map((entry) => {
           return { x: entry[0], y: entry[1] };
@@ -275,9 +363,46 @@ export class Chat {
       };
     });
 
-    return {
-      labels: x_axis,
-      datasets: datasets,
-    };
+    return [
+      {
+        datasets: datasets,
+      },
+      this.getLineGraphXAxis(maxDate, minDate),
+    ];
+  }
+
+  getLineGraphXAxis(maxDate, minDate) {
+    var diffDate = new Date(maxDate - minDate);
+    var unit = "";
+    if (diffDate.getFullYear() > 1971) unit = "year";
+    else if (diffDate.getFullYear() > 1970 && diffDate.getMonth() > 0)
+      unit = "month";
+    else unit = "day";
+    return unit;
+  }
+
+  getAllWords() {
+    return this.sortedFreqDict
+      .filter(
+        (word) =>
+          !(
+            stopwords.includes(word[0].toLowerCase()) ||
+            [
+              "",
+              "ich",
+              "du",
+              "wir",
+              "aber",
+              "<media",
+              "omitted>",
+              "omitted",
+              "image",
+            ].includes(word[0].toLowerCase())
+          ) && word[1] > 1
+      )
+      .map((word) => {
+        return { word: word[0], freq: word[1] };
+      })
+      .slice(0, this._maxWordsWordCloud);
   }
 }

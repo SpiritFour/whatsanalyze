@@ -1,54 +1,65 @@
 <script>
 import { Radar } from "vue-chartjs";
+import { Chat } from "~/functions/transformChatData";
 
 export default {
   extends: Radar,
   props: {
-    chartdata: {
-      type: Object,
-      default: function() {
-        return {
-          labels: ["January", "February", "March", "April", "May", "June"],
-          datasets: [
-            {
-              label: "Person 1",
-              backgroundColor: "rgba(255, 99, 132, 0.1)",
-              borderColor: "rgba(255, 99, 132, 1)",
-
-              data: [60, 10, 60, 10, 60, 10]
-            },
-            {
-              label: "Person 2",
-              backgroundColor: "rgba(75, 192, 192, 0.1)",
-              borderColor: "rgba(75, 192, 192, 1)",
-
-              data: [40, 70, 40, 70, 40, 70]
-            }
-          ]
-        };
-      }
+    dataGrouping: {
+      type: String,
+      validator: function (value) {
+        // The value must match one of these strings
+        return ["hourly", "daily", "weekly"].indexOf(value) !== -1;
+      },
     },
+    chartdata: new Chat(),
     options: {
       type: Object,
-      default: function() {
+      default: function () {
         return {
           responsive: true,
           maintainAspectRatio: false,
-          legend: {
-            position: "bottom"
-          },
           scale: {
+            angleLines: {
+              // display: false,
+            },
             ticks: {
-              min: 0
-            }
-          }
+              beginAtZero: true,
+              precision: 0,
+            },
+          },
+          legend: {
+            position: "bottom",
+          },
+          title: {
+            display: true,
+            text: ["Messages per time unit"],
+          },
         };
-      }
-    }
+      },
+    },
   },
-
+  watch: {
+    chartdata: {
+      handler() {
+        this.updateGraph();
+      },
+      deep: true,
+    },
+  },
+  methods: {
+    updateGraph() {
+      if (this.dataGrouping === "hourly") {
+        this.renderChart(this.chartdata.getHourlyData(0.1), this.options);
+      } else if (this.dataGrouping === "daily") {
+        this.renderChart(this.chartdata.getDailyData(0.1), this.options);
+      } else {
+        this.renderChart(this.chartdata.getWeeklyData(0.1), this.options);
+      }
+    },
+  },
   mounted() {
-    this.renderChart(this.chartdata, this.options);
-  }
+    this.updateGraph();
+  },
 };
 </script>

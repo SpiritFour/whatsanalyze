@@ -1,10 +1,10 @@
 ---
 title: How to export your chat data?
-description: Learn how to use Whats Analyse
+description: Learn how to use Whats Analyze
 ---
 
 
-Do you want to know how to **analyse** your **WhatsApp chat**? You can do it right here in **less than 2 Minutes**.
+Do you want to know how to **analyze** your **WhatsApp chat**? You can do it right here in **less than 2 Minutes**.
 
 This is done **without sending** any of your **chat data to a server**. It runs all locally on your device.
 Just drag your .zip .txt file in the area above.
@@ -34,7 +34,7 @@ Exporting your complete chat history is easy
   - Without Media
     * With this option you will only export the text within the chat as a .txt file.
 
-4) Now you can choose between sending it as an email, via an installed chat app, airdrop and many more. Choose Save to Files to Upload it here to analyse your chat.
+4) Now you can choose between sending it as an email, via an installed chat app, airdrop and many more. Choose Save to Files to Upload it here to analyze your chat.
 
 
 ### Option 2 Android: Export as a .txt file using a phone running Android

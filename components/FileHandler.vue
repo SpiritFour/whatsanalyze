@@ -1,49 +1,47 @@
 <template>
   <div
-    class="drop"
-    :class="getClasses"
+    class="drop-container pa-md-16 pa-4"
     @dragover.prevent="dragOver"
     @dragleave.prevent="dragLeave"
     @drop.prevent="drop($event)"
   >
-    <h1 v-if="wrongFile">
-      Wrong file format please upload a .txt!
-      <v-icon large> mdi-tray-arrow-down </v-icon>
-      <br />
-      <strong>Drag & Drop</strong>
-      <label style="cursor: pointer" for="uploadmytextfile">(or choose)</label>
-      your chat .txt file
-    </h1>
-    <h1
-      style="text-align: center"
-      v-if="
-        !textSource &&
-        !isDragging &&
-        !wrongFile &&
-        !isSuccess &&
-        !processingFile
-      "
-    >
-      <v-icon large> mdi-tray-arrow-down </v-icon>
-      <br />
-      <strong>Drag & Drop</strong>
-      <label style="cursor: pointer" for="uploadmytextfile">(or choose)</label>
-      your chat .txt file
-    </h1>
-    <h1 v-if="processingFile">Processing your file please wait...</h1>
-    <h1 v-if="isSuccess">
-      Done!
-      <v-icon large> mdi-tray-arrow-down </v-icon>
-      <br />
-      <strong
-        >Look at your analysis below
-        <br />
-        or Drag & Drop</strong
+    <label style="cursor: pointer" for="uploadmytextfile">
+      <div
+        class="drop"
+        :class="{
+          isDragging: this.isDragging,
+          smallFont: $vuetify.breakpoint.smAndDown,
+        }"
       >
-      <label style="cursor: pointer" for="uploadmytextfile">(or choose)</label>
-      a new chat .txt file
-    </h1>
-    <input type="file" id="uploadmytextfile" @change="requestUploadFile" />
+        <input type="file" id="uploadmytextfile" @change="requestUploadFile" />
+
+        <p v-if="wrongFile">Wrong file format please upload a .txt!</p>
+        <p v-if="isDragging" class="drop-instruction">
+          <v-icon size="2em">mdi-arrow-down-drop-circle</v-icon>
+          <br />
+          Drop it now!
+        </p>
+        <p v-if="!isDragging && !wrongFile && !processingFile">
+          <v-icon size="2em"> mdi-file </v-icon>
+          <br />
+
+          <span v-if="isSuccess">Done! Look at your analysis below. </span>
+
+          <span v-if="$vuetify.breakpoint.mdAndUp">
+            <strong>Drag </strong>
+            (or select)
+          </span>
+
+          <span v-if="$vuetify.breakpoint.smAndDown">
+            <strong style="text-decoration: underline">Pick </strong>
+          </span>
+
+          <span v-show="textSource">another file to add it</span>
+          <span v-show="!textSource"> your Whats App .txt file </span>
+        </p>
+        <p v-show="processingFile">Processing your file...</p>
+      </div>
+    </label>
   </div>
 </template>
 
@@ -68,11 +66,6 @@ export default {
       chatStruct: null,
       messages: [],
     };
-  },
-  computed: {
-    getClasses() {
-      return { isDragging: this.isDragging };
-    },
   },
   methods: {
     zipLoadEndHandler(e) {
@@ -213,20 +206,47 @@ export default {
 </script>
 
 <style scoped lang="scss">
+p {
+  font-size: 2em;
+}
+
+.smallFont p {
+  font-size: 1.1em !important;
+}
+
+.drop-container {
+  text-align: center;
+  background: $c-blue-accent;
+}
+
+.drop-instruction {
+  font-size: 3em !important;
+  color: $c-dark !important;
+  font-weight: bold;
+  text-shadow: none !important;
+}
+
 .drop {
-  width: 100%;
-  height: 20vh;
-  background-color: $c-white;
-  outline: 2px dashed black;
-  outline-offset: -10px;
   display: flex;
   align-items: center;
+
+  height: 100%;
+  align-items: center;
   justify-content: center;
-
-  padding: 1rem;
   transition: background-color 0.2s ease-in-out;
-
   font-family: sans-serif;
+
+  // shadows
+  box-shadow: 5px 5px 10px $c-dark;
+  text-shadow: 2px 2px 2px $c-dark;
+
+  // colors
+  background-color: $c-blue-accent-dark;
+  color: $c-blue-accent;
+
+  // outline
+  outline: 10px dashed $c-dark;
+  outline-offset: -10px;
 }
 
 textarea {
@@ -240,11 +260,8 @@ input[type="file"] {
   display: none;
 }
 
-label {
-  text-decoration: underline;
-}
-
 .isDragging {
-  background-color: grey;
+  background-color: $c-yellow;
+  outline: 10px dashed $c-blue-accent-dark;
 }
 </style>

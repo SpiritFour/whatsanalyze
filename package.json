@@ -21,6 +21,8 @@
     "*.{js,css,md,vue}": "prettier --write"
   },
   "dependencies": {
+    "@amcharts/amcharts4": "^4.10.15",
+    "@mdi/js": "^5.9.55",
     "@nuxt/content": "^1.13.1",
     "chart.js": "^2.9.4",
     "core-js": "^3.8.3",
@@ -28,6 +30,7 @@
     "npm": "^7.5.4",
     "nuxt": "^2.14.12",
     "push-dir": "^0.4.1",
+    "stopwords-de": "^0.3.0",
     "vue-chartjs": "^3.5.1",
     "vue-gtag": "^1.11.0",
     "whatsapp-chat-parser": "^3.1.0"
