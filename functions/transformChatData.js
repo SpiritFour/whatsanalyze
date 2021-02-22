@@ -184,14 +184,14 @@ export class Chat {
     return this._dates;
   }
 
-  getShareOfSpeech() {
+  getShareOfSpeech(opacity = 1) {
     return {
       labels: this.messagesPerPerson.map((person) => person.name),
       datasets: [
         {
           label: "Share of Speech",
           backgroundColor: this.messagesPerPerson.map((person) =>
-            hexToRgbA(person.color)
+            hexToRgbA(person.color, opacity)
           ),
           borderColor: this.messagesPerPerson.map((person) => person.color),
           data: this.messagesPerPerson.map((person) => person.messages.length),
@@ -224,7 +224,7 @@ export class Chat {
     return people;
   }
 
-  getHourlyData() {
+  getHourlyData(opacity = 1) {
     return {
       labels: [
         "0AM",
@@ -255,7 +255,7 @@ export class Chat {
       datasets: this.messagesPerPerson.map((person) => {
         return {
           label: person.name,
-          backgroundColor: hexToRgbA(person.color),
+          backgroundColor: hexToRgbA(person.color, opacity),
           borderColor: person.color,
           data: Chat.hourlyDataFromChat(person.messages),
         };
@@ -263,7 +263,7 @@ export class Chat {
     };
   }
 
-  getDailyData() {
+  getDailyData(opacity = 1) {
     return {
       labels: [
         "Monday",
@@ -277,7 +277,7 @@ export class Chat {
       datasets: this.messagesPerPerson.map((person) => {
         return {
           label: person.name,
-          backgroundColor: hexToRgbA(person.color),
+          backgroundColor: hexToRgbA(person.color, opacity),
           borderColor: person.color,
           data: Chat.dailyDataFromChat(person.messages),
         };
@@ -285,7 +285,7 @@ export class Chat {
     };
   }
 
-  getWeeklyData() {
+  getWeeklyData(opacity = 1) {
     return {
       labels: [
         "January",
@@ -304,7 +304,7 @@ export class Chat {
       datasets: this.messagesPerPerson.map((person) => {
         return {
           label: person.name,
-          backgroundColor: hexToRgbA(person.color),
+          backgroundColor: hexToRgbA(person.color, opacity),
           borderColor: person.color,
           data: Chat.weeklyDataFromChat(person.messages),
         };
