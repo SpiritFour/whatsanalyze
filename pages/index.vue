@@ -1,40 +1,75 @@
 <template>
-  <v-main>
-    <div style="margin-bottom: 10em">
-      <h1 style="font-size: 3em">Analyse your WhatsApp Chat</h1>
-      <p style="font-size: 2em">Now drag your .txt file in the area below</p>
-      <v-alert dense text type="success" dismissible>
-        <strong>No</strong> chat <strong>data</strong> is sent to a server it
-        runs all <strong>locally</strong> in your browser
-      </v-alert>
-
-      <br />
-      <FileHandler
-        @new_messages="chat_ = new Chat($event)"
-        @hide_explanation="isShowingChats = $event"
+  <div>
+    <div
+      class="header-cta"
+      :style="'height:' + ($vuetify.breakpoint.mdAndUp ? '35vh' : '55vh')"
+    >
+      <div
+        class="below-nav header-left"
+        :class="{
+          'pt-5': $vuetify.breakpoint.smAndDown,
+          'pt-15': $vuetify.breakpoint.mdAndUp,
+          'small-h1': $vuetify.breakpoint.smAndDown,
+          'small-h2': $vuetify.breakpoint.smAndDown,
+        }"
+      >
+        <h1>Analyze your WhatsApp Chat in seconds</h1>
+        <h2 style="font-size: 1.3em">
+          Insights and stats of your WhatsApp Chats generated locally on your
+          computer.
+        </h2>
+        <br />
+        <p
+          style="
+            background: rgba(0, 0, 0, 0.2);
+            color: white;
+            border-radius: 5px;
+            width: fit-content;
+          "
+          class="py-1 px-3"
+        >
+          <v-icon color="white" style="vertical-align: sub">
+            mdi-security
+          </v-icon>
+          <strong>No</strong> chat <strong>data</strong> is sent to a server it
+          runs only <strong>locally</strong> in your browser.
+        </p>
+      </div>
+      <LineChart
+        class="header-right"
+        :chartdata="chat_"
+        :style="'height:' + ($vuetify.breakpoint.mdAndUp ? '35vh' : '55vh')"
       />
     </div>
 
-    <div v-show="!isShowingChats">
-      <div class="explainer-container">
-        <div>
-          <h2 style="font-size: 3em">How it works</h2>
-          <div class="explainer-list">
-            <p>
-              <v-icon large color="teal"> mdi-file-export </v-icon>
-              1. Export your chat
-            </p>
-            <p>
-              <v-icon large color="light-blue darken-3"> mdi-cog </v-icon>
+    <FileHandler
+      :style="'height:' + ($vuetify.breakpoint.mdAndUp ? '40vh' : '20vh')"
+      @new_messages="chat_ = new Chat($event)"
+      @hide_explanation="isShowingChats = $event"
+    />
 
-              2. Drag chat file into box above
-            </p>
-            <p>
-              <v-icon large color="amber darken-2">
-                mdi-emoticon-happy-outline
-              </v-icon>
-              3. Enjoy beautiful visualizations
-            </p>
+    <v-container style="padding-top: 8em">
+      <div v-show="!isShowingChats">
+        <div class="explainer-container">
+          <div>
+            <h2 style="font-size: 3em">How it works</h2>
+            <div class="explainer-list">
+              <p>
+                <v-icon large color="teal"> mdi-file-export </v-icon>
+                1. Export your chat
+              </p>
+              <p>
+                <v-icon large color="light-blue darken-3"> mdi-cog </v-icon>
+
+                2. Drag chat file into box above
+              </p>
+              <p>
+                <v-icon large color="amber darken-2">
+                  mdi-emoticon-happy-outline
+                </v-icon>
+                3. Enjoy beautiful visualizations
+              </p>
+            </div>
           </div>
         </div>
 
@@ -80,7 +115,7 @@
 
       <div style="text-align: center" class="testimonial-container">
         <h2 style="text-align: center">
-          People who analyse their chats - get first hand data insights
+          People who analyze their chats - get first hand data insights
         </h2>
 
         <div style="overflow: hidden">
@@ -122,10 +157,10 @@
       <Content :page="page" class="main-el mt-15" />
 
       <Cta />
-    </div>
 
-    <Results :chat_="chat_" />
-  </v-main>
+      <Results :chat_="chat_" />
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -192,6 +227,32 @@ export default {
 </script>
 
 <style lang="scss">
+.header-cta {
+  background: $c-blue-accent;
+
+  overflow: hidden;
+}
+.header-left {
+  float: left;
+
+  width: 60vw;
+}
+
+.header-right {
+  padding-right: 5%;
+  float: left;
+  width: 40vw;
+  background: $c-blue-accent;
+}
+
+.below-nav {
+  background: $c-blue-accent;
+  padding: 5% !important;
+}
+.v-btn {
+  text-transform: none !important;
+}
+
 @media (min-width: 760px) {
   .testimonial {
     min-width: 300px;
