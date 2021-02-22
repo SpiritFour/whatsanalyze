@@ -3,7 +3,10 @@
     <div style="margin-bottom: 10em">
       <h1 style="font-size: 3em">Analyse your WhatsApp Chat</h1>
       <p style="font-size: 2em">Now drag your .txt file in the area below</p>
-      <p>No data is sent to a server and will never be saved.</p>
+      <v-alert dense text type="success" dismissible>
+        <strong>No</strong> chat <strong>data</strong> is sent to a server it
+        runs all <strong>locally</strong> in your browser
+      </v-alert>
 
       <br />
       <FileHandler
