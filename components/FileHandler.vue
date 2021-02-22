@@ -51,6 +51,11 @@
 import { parseString } from "whatsapp-chat-parser";
 import JSZip from "jszip";
 
+const showError = (message, err) => {
+  console.error(err || message); // eslint-disable-line no-console
+  alert(message); // eslint-disable-line no-alert
+};
+
 export default {
   name: "DropAnImage",
   data() {
@@ -70,6 +75,66 @@ export default {
     },
   },
   methods: {
+    zipLoadEndHandler(e) {
+      const arrayBuffer = e.target.result;
+      const jszip = new JSZip();
+      const zip = jszip.loadAsync(arrayBuffer);
+
+      zip
+        .then(this.readChatFile)
+        .then((text) => parseString(text, { parseAttachments: true }))
+        .then(
+          (messages) => (this.messages = this.extendDataStructure(messages))
+        )
+        .then(() => {
+          this.$emit("new_messages", this.messages);
+          this.$emit("hide_explanation", true);
+        });
+    },
+
+    txtLoadEndHandler(e) {
+      parseString(e.target.result)
+        .then(
+          (messages) => (this.messages = this.extendDataStructure(messages))
+        )
+        .then(() => {
+          this.$emit("new_messages", this.messages);
+          this.$emit("hide_explanation", true);
+        });
+    },
+
+    readChatFile(zipData) {
+      const chatFile = zipData.file("_chat.txt");
+      if (chatFile) return chatFile.async("string");
+
+      const chatFiles = zipData.file(/.*(?:chat|whatsapp).*\.txt$/i);
+
+      if (!chatFiles.length) {
+        throw new Error("No txt files found in archive");
+      }
+
+      const chatFilesSorted = chatFiles.sort(
+        (a, b) => a.name.length - b.name.length
+      );
+
+      return chatFilesSorted[0].async("string");
+    },
+
+    processFile(file) {
+      const reader = new FileReader();
+      // if (file.type.indexOf("zip") >= 0)
+      if (/^application\/(?:x-)?zip(?:-compressed)?$/.test(file.type)) {
+        console.log("ZIP");
+        reader.addEventListener("loadend", this.zipLoadEndHandler);
+        reader.readAsArrayBuffer(file);
+      } else if (file.type === "text/plain") {
+        reader.addEventListener("loadend", this.txtLoadEndHandler);
+        reader.readAsText(file);
+      } else {
+        showError(`File type ${file.type} not supported`);
+      }
+    },
+
     // add absolute and personal id to each entry of the data structure
     extendDataStructure(messages) {
       let authors = {};
@@ -93,35 +158,12 @@ export default {
       let files = e.dataTransfer.files;
       this.process(files);
     },
-    requestUploadFile() {
-      let src = this.$el.querySelector("#uploadmytextfile");
-      let files = src.files;
-      this.readFile(files).then(() => this.createDataStruct());
-    },
-
-    async createTextSourceFromZip(file) {
-      let zip = new JSZip();
-      zip.loadAsync(file).then(() => {
-        zip
-          .file("_chat.txt")
-          .async("string")
-          .then((fileData) => {
-            return fileData;
-          });
-      });
-    },
-    createTextSourceFromText(file) {
-      let reader = new FileReader();
-      reader.onload = (f) => {
-        return f.target.result;
-      };
-      reader.readAsText(file);
-    },
 
     createDataStruct() {
       this.wrongFile = false;
       this.processingFile = true;
       this.isSuccess = false;
+
       if (this.textSource != null) {
         this.isDragging = false;
         parseString(this.textSource)
@@ -152,18 +194,11 @@ export default {
         this.processingFile = false;
       }
     },
-    async readFile(files) {
-      if (files.length === 1) {
-        let file = files[0];
-        if (file.type.indexOf("zip") >= 0) {
-          this.createTextSourceFromZip(file).then((data) => {
-            this.textSource = data;
-          });
-        } else if (file.type.indexOf("text/") >= 0) {
-          this.textSource = this.createTextSourceFromText(file);
-        }
-      }
-      console.log(this.textSource);
+
+    requestUploadFile() {
+      let src = this.$el.querySelector("#uploadmytextfile");
+      let files = src.files;
+      this.processFile(files[0]);
     },
   },
 
