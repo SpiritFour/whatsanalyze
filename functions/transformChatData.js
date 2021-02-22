@@ -96,6 +96,14 @@ export class Chat {
     return hours;
   }
 
+  static weeklyDataFromChat(messages) {
+    let hours = new Array(12).fill(0);
+    messages.map((message) => {
+      hours[message.date.getMonth()] += 1;
+    });
+    return hours;
+  }
+
   constructor(chatObject = [], groupAfter = 9) {
     // this one is the complete input
     this.chatObject = chatObject;
@@ -267,6 +275,32 @@ export class Chat {
           label: person.name,
           backgroundColor: person.color,
           data: Chat.dailyDataFromChat(person.messages),
+        };
+      }),
+    };
+  }
+
+  getWeeklyData() {
+    return {
+      labels: [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ],
+      datasets: this.messagesPerPerson.map((person) => {
+        return {
+          label: person.name,
+          backgroundColor: person.color,
+          data: Chat.weeklyDataFromChat(person.messages),
         };
       }),
     };

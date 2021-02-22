@@ -5,9 +5,12 @@ import { Chat } from "~/functions/transformChatData";
 export default {
   extends: Radar,
   props: {
-    hourly: {
-      type: Boolean,
-      default: true,
+    dataGrouping: {
+      type: String,
+      validator: function (value) {
+        // The value must match one of these strings
+        return ["hourly", "daily", "weekly"].indexOf(value) !== -1;
+      },
     },
     chartdata: new Chat(),
     options: {
@@ -42,12 +45,13 @@ export default {
   },
   methods: {
     updateGraph() {
-      if (this.hourly) {
+      if (this.dataGrouping === "hourly") {
         this.renderChart(this.chartdata.getHourlyData(), this.options);
-      } else {
+      } else if (this.dataGrouping === "daily") {
         this.renderChart(this.chartdata.getDailyData(), this.options);
+      } else {
+        this.renderChart(this.chartdata.getWeeklyData(), this.options);
       }
-      // this.renderChart(this.chartdata.getHourlyData(), this.options);
     },
   },
   mounted() {

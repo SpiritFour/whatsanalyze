@@ -6,9 +6,12 @@ export default {
   extends: Bar,
   props: {
     chartdata: new Chat(),
-    hourly: {
-      type: Boolean,
-      default: true,
+    dataGrouping: {
+      type: String,
+      validator: function (value) {
+        // The value must match one of these strings
+        return ["hourly", "daily", "weekly"].indexOf(value) !== -1;
+      },
     },
     options: {
       type: Object,
@@ -54,10 +57,12 @@ export default {
   },
   methods: {
     updateGraph() {
-      if (this.hourly) {
+      if (this.dataGrouping === "hourly") {
         this.renderChart(this.chartdata.getHourlyData(), this.options);
-      } else {
+      } else if (this.dataGrouping === "daily") {
         this.renderChart(this.chartdata.getDailyData(), this.options);
+      } else {
+        this.renderChart(this.chartdata.getWeeklyData(), this.options);
       }
     },
   },
