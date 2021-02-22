@@ -31,7 +31,7 @@ export default {
               {
                 scaleLabel: {
                   display: true,
-                  labelString: "number of messages",
+                  labelString: "Messages",
                 },
                 ticks: {
                   beginAtZero: true,

@@ -279,9 +279,9 @@ export class Chat {
       person.messages.forEach(_addDayCount);
 
       return {
-        borderWidth: 2,
+        borderWidth: 1,
         lineTension: 0,
-        pointRadius: 1,
+        pointRadius: 0,
         pointHitRadius: 5,
         label: person.name,
         backgroundColor: hexToRgbA(person.color),
