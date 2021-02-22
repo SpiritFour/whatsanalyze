@@ -154,7 +154,7 @@ export class Chat {
         enrichedPersons.push({
           name: person[0],
           color: chatColors[idx % chatColors.length],
-          messages: person[1],
+          messages: person[1].sort((a, b) => a.date - b.date),
         });
       }
     });
@@ -195,7 +195,7 @@ export class Chat {
       let numberOfWords = Chat.getTotalNumberOfWords(person.messages);
       let longestMessage = Chat.get_longest_message(person.messages);
       let personalFreqDic = Chat.createSortedFreqDict(person.messages);
-      console.log(personalFreqDic);
+
       let uniqueWords = Chat.uniqueWords(personalFreqDic).length;
       let sortedEmojis = Chat.match_emojys(personalFreqDic)
         .map((emoji) => emoji[0])
