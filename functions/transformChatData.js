@@ -1,4 +1,4 @@
-import { chatColors } from "~/functions/colors";
+import { chatColors, hexToRgbA } from "~/functions/colors";
 
 export class Chat {
   static remove_named_messages(chatObject, name = "system") {
@@ -71,7 +71,7 @@ export class Chat {
       d <= end;
       d.setDate(d.getDate() + 1)
     ) {
-      a.push(new Date(d).toDateString());
+      a.push(new Date(d));
     }
     return a;
   }
@@ -215,7 +215,7 @@ export class Chat {
 
   getHourlyData() {
     return {
-      labels: [...Array(24).keys()],
+      labels: [...Array(24).keys()].map((hour) => hour * 1000 * 60 * 60),
       datasets: this.messagesPerPerson.map((person) => {
         return {
           label: person.name,
@@ -229,13 +229,13 @@ export class Chat {
   getDailyData() {
     return {
       labels: [
-        "Montag",
-        "Dienstag",
-        "Mittwoch",
-        "Donnerstag",
-        "Freitag",
-        "Samstag",
-        "Sonntag",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
       ],
       datasets: this.messagesPerPerson.map((person) => {
         return {
@@ -252,22 +252,35 @@ export class Chat {
     var minDate = new Date(Math.min.apply(null, this.dates));
     var maxDate = new Date(Math.max.apply(null, this.dates));
 
-    var x_axis = Chat.getDaysBetween(
-      minDate.setHours(0, 0, 0, 0),
-      maxDate.setHours(0, 0, 0, 0)
-    );
-
     // iterate over persons
     var datasets = this.messagesPerPerson.map((person) => {
       var hist_info = {};
-      person.messages.forEach((message) => {
-        var ds = message.date.toDateString();
-        hist_info[ds] = (hist_info[ds] || 0) + 1;
-      });
+
+      function _addDayCount(message) {
+        const oneDayInMS = 24 * 60 * 60 * 1000;
+
+        // we group for one day -> set to mid day
+        var currDate = new Date(message.date);
+        currDate.setHours(12, 0, 0, 0);
+
+        var prevDate = new Date(currDate.getTime() - oneDayInMS);
+        if (prevDate > minDate) {
+          hist_info[prevDate] = hist_info[prevDate] || 0;
+        }
+
+        hist_info[currDate] = (hist_info[currDate] || 0) + 1;
+
+        var nextDate = new Date(currDate.getTime() + oneDayInMS);
+        if (nextDate < maxDate) {
+          hist_info[nextDate] = hist_info[nextDate] || 0;
+        }
+      }
+
+      person.messages.forEach(_addDayCount);
 
       return {
         label: person.name,
-        backgroundColor: person.color,
+        backgroundColor: hexToRgbA(person.color),
         borderColor: person.color,
         data: Object.entries(hist_info).map((entry) => {
           return { x: entry[0], y: entry[1] };
@@ -275,9 +288,21 @@ export class Chat {
       };
     });
 
-    return {
-      labels: x_axis,
-      datasets: datasets,
-    };
+    return [
+      {
+        datasets: datasets,
+      },
+      this.getLineGraphXAxis(maxDate, minDate),
+    ];
+  }
+
+  getLineGraphXAxis(maxDate, minDate) {
+    var diffDate = new Date(maxDate - minDate);
+    var unit = "";
+    if (diffDate.getFullYear() > 1971) unit = "year";
+    else if (diffDate.getFullYear() > 1970 && diffDate.getMonth() > 0)
+      unit = "month";
+    else unit = "day";
+    return unit;
   }
 }

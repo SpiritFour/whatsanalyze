@@ -186,6 +186,8 @@ export default {
 
 <style lang="scss">
 .header-cta {
+  background: $c-blue-accent;
+
   overflow: hidden;
 }
 .header-left {
