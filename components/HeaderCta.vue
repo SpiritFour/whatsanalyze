@@ -28,7 +28,11 @@
         <v-row no-gutters>
           <v-col cols="1" v-show="$vuetify.breakpoint.mdAndUp"> </v-col>
           <v-col md="8" xs="12" class="pr-10">
-            <LineChart class="header-right" :chartdata="chat_" />
+            <LineChart
+              class="header-right"
+              :chartdata="chat_"
+              :options="chartOptions"
+            />
           </v-col>
         </v-row>
       </v-col>
@@ -39,6 +43,67 @@
 <script>
 export default {
   props: ["chat_"],
+  data() {
+    return {
+      chartOptions: {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          position: "bottom",
+          labels: {
+            fontStyle: "bold",
+            fontColor: "black",
+            fontSize: 15,
+          },
+        },
+
+        scales: {
+          xAxes: [
+            {
+              ticks: {
+                fontColor: "black",
+                fontStyle: "bold",
+                fontSize: 11,
+              },
+              type: "time",
+              time: {
+                unit: this.chat_.linegraphXAxisUnit,
+              },
+              gridLines: {
+                display: false,
+                zeroLineColor: "#ffffff",
+              },
+            },
+          ],
+          yAxes: [
+            {
+              ticks: {
+                fontStyle: "bold",
+
+                fontColor: "black",
+                fontSize: 11,
+                beginAtZero: true,
+              },
+              scaleLabel: {
+                display: true,
+                labelString: "Messages",
+                fontColor: "black",
+                fontStyle: "bold",
+              },
+              gridLines: {
+                display: false,
+              },
+            },
+          ],
+        },
+        elements: {
+          line: {
+            tension: 0,
+          },
+        },
+      },
+    };
+  },
 };
 </script>
 

@@ -4,7 +4,7 @@
 
     <div class="text-h3 font-weight-bold py-10">Chat Timeline</div>
     <small>Messages per Day </small>
-    <LineChart :chartdata="chat_" />
+    <LineChart :chartdata="chat_" class="pb-10" />
 
     <div class="text-h3 font-weight-bold pt-10">Fun Facts</div>
     <FunFacts :chartdata="chat_" class="pb-10" />
@@ -17,10 +17,10 @@
         <div class="text-h4 font-weight-bold">Person</div>
         <DonughtChart :chartdata="chat_" class="py-10" />
       </v-col>
-      <v-cols cols="6">
+      <v-col cols="6">
         <div class="text-h4 font-weight-bold">Month</div>
         <RadarChart :chartdata="chat_" dataGrouping="weekly" class="py-10" />
-      </v-cols>
+      </v-col>
     </v-row>
 
     <v-row>
@@ -28,10 +28,10 @@
         <div class="text-h4 font-weight-bold">Time of Day</div>
         <RadarChart :chartdata="chat_" dataGrouping="hourly" class="py-10" />
       </v-col>
-      <v-cols cols="6">
+      <v-col cols="6">
         <div class="text-h4 font-weight-bold">Weekday</div>
         <RadarChart :chartdata="chat_" dataGrouping="daily" class="py-10" />
-      </v-cols>
+      </v-col>
     </v-row>
 
     <!-- make toggle between radar and normal charts -->
