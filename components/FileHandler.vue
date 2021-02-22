@@ -150,6 +150,7 @@ export default {
 <style scoped lang="scss">
 p {
   font-size: 2em;
+  padding: 2em;
 }
 
 .smallFont p {
@@ -187,7 +188,7 @@ p {
   color: $c-blue-accent;
 
   // outline
-  outline: 10px dashed $c-dark;
+  outline: 4px dashed $c-dark;
   outline-offset: -10px;
 }
 
