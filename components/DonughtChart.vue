@@ -17,7 +17,7 @@ export default {
           },
           title: {
             display: true,
-            text: ["Share of Speech", "in number of messages"],
+            text: ["Share of Speech", "in Number of Messages"],
           },
         };
       },
