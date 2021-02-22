@@ -61,7 +61,6 @@ export default {
   props: ["chartdata"],
   mounted() {
     this.data = this.chartdata.getFunFacts();
-    console.log(this.data);
   },
   watch: {
     chartdata: function () {

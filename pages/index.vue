@@ -1,40 +1,75 @@
 <template>
-  <v-main>
-    <div style="margin-bottom: 10em">
-      <h1 style="font-size: 3em">Analyse your WhatsApp Chat</h1>
-      <p style="font-size: 2em">Now drag your .txt file in the area below</p>
-      <v-alert dense text type="success" dismissible>
-        <strong>No</strong> chat <strong>data</strong> is sent to a server it
-        runs all <strong>locally</strong> in your browser
-      </v-alert>
-
-      <br />
-      <FileHandler
-        @new_messages="chat_ = new Chat($event)"
-        @hide_explanation="isShowingChats = $event"
+  <div>
+    <div
+      class="header-cta"
+      :style="'height:' + ($vuetify.breakpoint.mdAndUp ? '35vh' : '55vh')"
+    >
+      <div
+        class="below-nav header-left"
+        :class="{
+          'pt-5': $vuetify.breakpoint.smAndDown,
+          'pt-15': $vuetify.breakpoint.mdAndUp,
+          'small-h1': $vuetify.breakpoint.smAndDown,
+          'small-h2': $vuetify.breakpoint.smAndDown,
+        }"
+      >
+        <h1>Analyze your WhatsApp Chat in seconds</h1>
+        <h2 style="font-size: 1.3em">
+          Insights and stats of your WhatsApp Chats generated locally on your
+          computer.
+        </h2>
+        <br />
+        <p
+          style="
+            background: rgba(0, 0, 0, 0.2);
+            color: white;
+            border-radius: 5px;
+            width: fit-content;
+          "
+          class="py-1 px-3"
+        >
+          <v-icon color="white" style="vertical-align: sub">
+            mdi-security
+          </v-icon>
+          <strong>No</strong> chat <strong>data</strong> is sent to a server it
+          runs only <strong>locally</strong> in your browser.
+        </p>
+      </div>
+      <LineChart
+        class="header-right"
+        :chartdata="chat_"
+        :style="'height:' + ($vuetify.breakpoint.mdAndUp ? '35vh' : '55vh')"
       />
     </div>
 
-    <div v-show="!isShowingChats">
-      <div class="explainer-container">
-        <div>
-          <h2 style="font-size: 3em">How it works</h2>
-          <div class="explainer-list">
-            <p>
-              <v-icon large color="teal"> mdi-file-export </v-icon>
-              1. Export your chat
-            </p>
-            <p>
-              <v-icon large color="light-blue darken-3"> mdi-cog </v-icon>
+    <FileHandler
+      :style="'height:' + ($vuetify.breakpoint.mdAndUp ? '40vh' : '20vh')"
+      @new_messages="chat_ = new Chat($event)"
+      @hide_explanation="isShowingChats = $event"
+    />
 
-              2. Drag chat file into box above
-            </p>
-            <p>
-              <v-icon large color="amber darken-2">
-                mdi-emoticon-happy-outline
-              </v-icon>
-              3. Enjoy beautiful visualizations
-            </p>
+    <v-container style="padding-top: 8em">
+      <div v-show="!isShowingChats">
+        <div class="explainer-container">
+          <div>
+            <h2 style="font-size: 3em">How it works</h2>
+            <div class="explainer-list">
+              <p>
+                <v-icon large color="teal"> mdi-file-export </v-icon>
+                1. Export your chat
+              </p>
+              <p>
+                <v-icon large color="light-blue darken-3"> mdi-cog </v-icon>
+
+                2. Drag chat file into box above
+              </p>
+              <p>
+                <v-icon large color="amber darken-2">
+                  mdi-emoticon-happy-outline
+                </v-icon>
+                3. Enjoy beautiful visualizations
+              </p>
+            </div>
           </div>
         </div>
 
@@ -80,7 +115,7 @@
 
       <div style="text-align: center" class="testimonial-container">
         <h2 style="text-align: center">
-          People who analyse their chats - get first hand data insights
+          People who analyze their chats - get first hand data insights
         </h2>
 
         <div style="overflow: hidden">
@@ -122,98 +157,100 @@
       <Content :page="page" class="main-el mt-15" />
 
       <Cta />
-    </div>
-    <Results :chat_="chat_" />
-    <h2 style="font-size: 3em">FAQ about WhatsApp chat</h2>
-    <v-expansion-panels>
-      <v-expansion-panel>
-        <v-expansion-panel-header>
-          How to export your WhatsApp chat
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
-          Everyone can easily export his whatsapp chat or group chat. Open
-          WhatsApp on the device you are currently logged in with > Tap on the
-          chat > Go to the chats settings > Scroll down and tap on Export chat >
-          Choose to export with or without media.
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-      <v-expansion-panel>
-        <v-expansion-panel-header>
-          How to export your WhatsApp group chat
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
-          Exporting your WhatsApp group chat works like a normal chat. Open up
-          Whatsapp with the device that you are logged in with. Go to the chat
-          and tap on "More" and then Export chat. You can now choose to export
-          the chat with or without Media.
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-      <v-expansion-panel>
-        <v-expansion-panel-header>
-          How to Archive all Whatsapp chats on iOS
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
-          On iOS you can Archive your WhatsApp chats by opening WhatsApp then
-          tap on "Settings" in the Navigation bar. Tap on chats and then Archive
-          All Chats.
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-      <v-expansion-panel>
-        <v-expansion-panel-header>
-          How to Archive all Whatsapp chats on Android
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
-          On Android open WhatsApp then tap on the three-dot icon at the top
-          right corner. Tap on "Settings" and then "Chats". On the new View tap
-          "Chat history" and "Archive all chats".
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-      <v-expansion-panel>
-        <v-expansion-panel-header>
-          How to Backup Whatsapp chat on iOS including iOS 14
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
-          By backing up your WhatsApp chat on your Iphone you can load your
-          account to a new device easily. Open WhatsApp, tap on "Settings" at
-          the bottom-right corner. Then tap on "Chats" and "Chat Backup" next
-          press "Back Up Now"
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-      <v-expansion-panel>
-        <v-expansion-panel-header>
-          How to Backup Whatsapp chat on Android
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
-          to Backup Whatsapp chat on your Android device, tap on the three-dots
-          at the top-right of your screen. Tap on "Settings and then on "Chats".
-          Next press on "Chat backup" and on the next screen "Back Up" Button
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-      <v-expansion-panel>
-        <v-expansion-panel-header>
-          How to transfer Whatsapp Group Chats to Signal
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
-          Create a group in Signal with your whatsApp contacts, now click on the
-          group or on the three-dots at the top right. In the Settings view tap
-          on group link copy the link. Finally go to whatsApp and paste the link
-          in the chat box of the group you want to migrate.
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-      <v-expansion-panel>
-        <v-expansion-panel-header>
-          How to transfer Whatsapp to Telegram
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
-          Open the chat you want to transfer in WhatsApp and tap on the
-          three-dots at the top right corner. Select "Export Chat" and in the
-          "Share menu" select Telegram. You can choose to export with or without
-          media. You can repeat this step for all chats you would like to
-          transfer.
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-    </v-expansion-panels>
-  </v-main>
+      <Results :chat_="chat_" />
+      <h2 style="font-size: 3em">FAQ about WhatsApp chat</h2>
+      <v-expansion-panels>
+        <v-expansion-panel>
+          <v-expansion-panel-header>
+            How to export your WhatsApp chat
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            Everyone can easily export his whatsapp chat or group chat. Open
+            WhatsApp on the device you are currently logged in with > Tap on the
+            chat > Go to the chats settings > Scroll down and tap on Export chat
+            > Choose to export with or without media.
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+        <v-expansion-panel>
+          <v-expansion-panel-header>
+            How to export your WhatsApp group chat
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            Exporting your WhatsApp group chat works like a normal chat. Open up
+            Whatsapp with the device that you are logged in with. Go to the chat
+            and tap on "More" and then Export chat. You can now choose to export
+            the chat with or without Media.
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+        <v-expansion-panel>
+          <v-expansion-panel-header>
+            How to Archive all Whatsapp chats on iOS
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            On iOS you can Archive your WhatsApp chats by opening WhatsApp then
+            tap on "Settings" in the Navigation bar. Tap on chats and then
+            Archive All Chats.
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+        <v-expansion-panel>
+          <v-expansion-panel-header>
+            How to Archive all Whatsapp chats on Android
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            On Android open WhatsApp then tap on the three-dot icon at the top
+            right corner. Tap on "Settings" and then "Chats". On the new View
+            tap "Chat history" and "Archive all chats".
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+        <v-expansion-panel>
+          <v-expansion-panel-header>
+            How to Backup Whatsapp chat on iOS including iOS 14
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            By backing up your WhatsApp chat on your Iphone you can load your
+            account to a new device easily. Open WhatsApp, tap on "Settings" at
+            the bottom-right corner. Then tap on "Chats" and "Chat Backup" next
+            press "Back Up Now"
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+        <v-expansion-panel>
+          <v-expansion-panel-header>
+            How to Backup Whatsapp chat on Android
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            to Backup Whatsapp chat on your Android device, tap on the
+            three-dots at the top-right of your screen. Tap on "Settings and
+            then on "Chats". Next press on "Chat backup" and on the next screen
+            "Back Up" Button
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+        <v-expansion-panel>
+          <v-expansion-panel-header>
+            How to transfer Whatsapp Group Chats to Signal
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            Create a group in Signal with your whatsApp contacts, now click on
+            the group or on the three-dots at the top right. In the Settings
+            view tap on group link copy the link. Finally go to whatsApp and
+            paste the link in the chat box of the group you want to migrate.
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+        <v-expansion-panel>
+          <v-expansion-panel-header>
+            How to transfer Whatsapp to Telegram
+          </v-expansion-panel-header>
+          <v-expansion-panel-content>
+            Open the chat you want to transfer in WhatsApp and tap on the
+            three-dots at the top right corner. Select "Export Chat" and in the
+            "Share menu" select Telegram. You can choose to export with or
+            without media. You can repeat this step for all chats you would like
+            to transfer.
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-expansion-panels>
+      <Results :chat_="chat_" />
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -280,6 +317,32 @@ export default {
 </script>
 
 <style lang="scss">
+.header-cta {
+  background: $c-blue-accent;
+
+  overflow: hidden;
+}
+.header-left {
+  float: left;
+
+  width: 60vw;
+}
+
+.header-right {
+  padding-right: 5%;
+  float: left;
+  width: 40vw;
+  background: $c-blue-accent;
+}
+
+.below-nav {
+  background: $c-blue-accent;
+  padding: 5% !important;
+}
+.v-btn {
+  text-transform: none !important;
+}
+
 @media (min-width: 760px) {
   .testimonial {
     min-width: 300px;

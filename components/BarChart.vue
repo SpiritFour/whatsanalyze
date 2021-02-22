@@ -6,9 +6,12 @@ export default {
   extends: Bar,
   props: {
     chartdata: new Chat(),
-    hourly: {
-      type: Boolean,
-      default: true,
+    dataGrouping: {
+      type: String,
+      validator: function (value) {
+        // The value must match one of these strings
+        return ["hourly", "daily", "weekly"].indexOf(value) !== -1;
+      },
     },
     options: {
       type: Object,
@@ -20,10 +23,22 @@ export default {
             position: "bottom",
           },
           scales: {
+            xAxes: [
+              {
+                gridLines: {
+                  display: false,
+                },
+              },
+            ],
             yAxes: [
               {
+                scaleLabel: {
+                  display: true,
+                  labelString: "Messages",
+                },
                 ticks: {
                   beginAtZero: true,
+                  precision: 0,
                 },
               },
             ],
@@ -35,22 +50,24 @@ export default {
   watch: {
     chartdata: {
       handler() {
-        if (this.hourly) {
-          this.renderChart(this.chartdata.getHourlyData(), this.options);
-        } else {
-          this.renderChart(this.chartdata.getDailyData(), this.options);
-        }
+        this.updateGraph();
       },
       deep: true,
     },
   },
-
+  methods: {
+    updateGraph() {
+      if (this.dataGrouping === "hourly") {
+        this.renderChart(this.chartdata.getHourlyData(), this.options);
+      } else if (this.dataGrouping === "daily") {
+        this.renderChart(this.chartdata.getDailyData(), this.options);
+      } else {
+        this.renderChart(this.chartdata.getWeeklyData(), this.options);
+      }
+    },
+  },
   mounted() {
-    if (this.hourly) {
-      this.renderChart(this.chartdata.getHourlyData(), this.options);
-    } else {
-      this.renderChart(this.chartdata.getDailyData(), this.options);
-    }
+    this.updateGraph();
   },
 };
 </script>
