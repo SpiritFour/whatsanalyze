@@ -55,7 +55,7 @@ export default {
     );
     this.series.dataFields.word = "word";
     this.series.dataFields.value = "freq";
-    this.series.labels.template.tooltipText = "{word}:\n[bold]{freq}[/]";
+    this.series.labels.template.tooltipText = "[bold]{freq}[/] x {word}";
     this.series.accuracy = 5;
     this.updateGraph();
   },

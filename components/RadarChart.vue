@@ -19,9 +19,6 @@ export default {
         return {
           responsive: true,
           maintainAspectRatio: false,
-          legend: {
-            position: "bottom",
-          },
           scale: {
             angleLines: {
               // display: false,
@@ -30,6 +27,13 @@ export default {
               beginAtZero: true,
               precision: 0,
             },
+          },
+          legend: {
+            position: "bottom",
+          },
+          title: {
+            display: true,
+            text: ["Messages per time unit"],
           },
         };
       },

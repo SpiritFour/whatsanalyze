@@ -387,9 +387,16 @@ export class Chat {
         (word) =>
           !(
             stopwords.includes(word[0].toLowerCase()) ||
-            ["", "ich", "du", "wir", "aber", "<media", "omitted>"].includes(
-              word[0].toLowerCase()
-            )
+            [
+              "",
+              "ich",
+              "du",
+              "wir",
+              "aber",
+              "<media",
+              "omitted>",
+              "omitted",
+            ].includes(word[0].toLowerCase())
           ) && word[1] > 1
       )
       .map((word) => {
