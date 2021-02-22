@@ -49,6 +49,7 @@
 
 <script>
 import { parseString } from "whatsapp-chat-parser";
+import JSZip from "jszip";
 
 export default {
   name: "DropAnImage",
@@ -93,57 +94,79 @@ export default {
       this.process(files);
     },
     requestUploadFile() {
-      var src = this.$el.querySelector("#uploadmytextfile");
+      let src = this.$el.querySelector("#uploadmytextfile");
       let files = src.files;
-      this.process(files);
+      this.readFile(files).then(() => this.createDataStruct());
     },
-    process(files) {
+
+    async createTextSourceFromZip(file) {
+      let zip = new JSZip();
+      zip.loadAsync(file).then(() => {
+        zip
+          .file("_chat.txt")
+          .async("string")
+          .then((fileData) => {
+            return fileData;
+          });
+      });
+    },
+    createTextSourceFromText(file) {
+      let reader = new FileReader();
+      reader.onload = (f) => {
+        return f.target.result;
+      };
+      reader.readAsText(file);
+    },
+
+    createDataStruct() {
       this.wrongFile = false;
       this.processingFile = true;
       this.isSuccess = false;
-      // allows only 1 file
-      if (files.length === 1) {
-        let file = files[0];
-        // allows text only
-        if (file.type.indexOf("text/") >= 0) {
-          var reader = new FileReader();
-          reader.onload = (f) => {
-            this.textSource = f.target.result;
-            this.isDragging = false;
-            parseString(this.textSource)
-              .then(
-                (messages) =>
-                  (this.messages = this.extendDataStructure(messages))
-              )
-              .then(() => {
-                this.$emit("new_messages", this.messages);
-                this.$emit("hide_explanation", true);
-              });
-            this.$gtag.event("file-parsed", {
-              event_category: "home",
-              event_label: "lead",
-              value: "1",
-            });
-            this.isSuccess = true;
-            this.processingFile = false;
-          };
-          // this is the method to read a text file content
-          reader.readAsText(file);
-        } else {
-          this.processingFile = false;
-          this.$gtag.event("file-error", {
-            event_category: "home",
-            event_label: "lead",
-            value: "0",
+      if (this.textSource != null) {
+        this.isDragging = false;
+        parseString(this.textSource)
+          .then(
+            (messages) => (this.messages = this.extendDataStructure(messages))
+          )
+          .then(() => {
+            this.$emit("new_messages", this.messages);
+            this.$emit("hide_explanation", true);
           });
-          this.wrongFile = true;
-          this.textSource = null;
-          this.isDragging = false;
-          this.processingFile = false;
-        }
+        this.$gtag.event("file-parsed", {
+          event_category: "home",
+          event_label: "lead",
+          value: "1",
+        });
+        this.isSuccess = true;
+        this.processingFile = false;
+      } else {
+        this.processingFile = false;
+        this.$gtag.event("file-error", {
+          event_category: "home",
+          event_label: "lead",
+          value: "0",
+        });
+        this.wrongFile = true;
+        this.textSource = null;
+        this.isDragging = false;
+        this.processingFile = false;
       }
     },
+    async readFile(files) {
+      if (files.length === 1) {
+        let file = files[0];
+        if (file.type.indexOf("zip") >= 0) {
+          this.createTextSourceFromZip(file).then((data) => {
+            this.textSource = data;
+          });
+        } else if (file.type.indexOf("text/") >= 0) {
+          this.textSource = this.createTextSourceFromText(file);
+        }
+      }
+      console.log(this.textSource);
+    },
   },
+
   mounted() {
     fetch("/chat_example.txt")
       .then((response) => response.text())
