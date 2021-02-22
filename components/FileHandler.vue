@@ -22,7 +22,7 @@
           Drop it now!
         </p>
         <p v-if="!isDragging && !wrongFile && !processingFile">
-          <v-icon size="2em"> mdi-file </v-icon>
+          <v-icon size="2em" color="#21a68d"> mdi-file </v-icon>
           <br />
 
           <span v-if="isSuccess">Done! Look at your analysis below. </span>

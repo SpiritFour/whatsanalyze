@@ -219,6 +219,7 @@ export class Chat {
         .slice(0, 3);
       let averageMessageLength = numberOfWords / person.messages.length;
       return {
+        color: person.color,
         name: name,
         numberOfWords: numberOfWords,
         longestMessage: longestMessage,
