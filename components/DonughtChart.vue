@@ -15,6 +15,10 @@ export default {
           legend: {
             position: "bottom",
           },
+          title: {
+            display: true,
+            text: ["Share of Speech", "in Number of Messages"],
+          },
         };
       },
     },
