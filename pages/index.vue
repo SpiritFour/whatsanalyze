@@ -1,12 +1,41 @@
 <template>
   <div>
+    <div
+      class="header-cta"
+      :style="'height:' + ($vuetify.breakpoint.mdAndUp ? '35vh' : '55vh')"
+    >
+      <div
+        class="below-nav header-left"
+        :class="{
+          'pt-5': $vuetify.breakpoint.smAndDown,
+          'pt-15': $vuetify.breakpoint.mdAndUp,
+          'small-h1': $vuetify.breakpoint.smAndDown,
+          'small-h2': $vuetify.breakpoint.smAndDown,
+        }"
+      >
+        <h1>Analyze your WhatsApp Chat in seconds</h1>
+        <h2 style="font-size: 1.3em">
+          Insights and stats of your WhatsApp Chats generated locally on your
+          computer.
+        </h2>
+        <br />
+        <p>
+          <v-icon color="black" style="vertical-align: sub">
+            mdi-security
+          </v-icon>
+          All data about your chat stays on your device. Nowhere else.
+        </p>
+      </div>
+      <LineChart class="header-right" :chartdata="chat_" />
+    </div>
+
     <FileHandler
-      :style="'height:' + ($vuetify.breakpoint.mdAndUp ? '50vh' : '30vh')"
+      :style="'height:' + ($vuetify.breakpoint.mdAndUp ? '40vh' : '20vh')"
       @new_messages="chat_ = new Chat($event)"
       @hide_explanation="isShowingChats = $event"
     />
 
-    <v-container>
+    <v-container style="padding-top: 8em">
       <div v-show="!isShowingChats">
         <div class="explainer-container">
           <div>
@@ -156,6 +185,29 @@ export default {
 </script>
 
 <style lang="scss">
+.header-cta {
+  overflow: hidden;
+}
+.header-left {
+  float: left;
+
+  width: 60vw;
+}
+
+.header-right {
+  float: left;
+  width: 40vw;
+  background: $c-blue-accent;
+}
+
+.below-nav {
+  background: $c-blue-accent;
+  padding: 5% !important;
+}
+.v-btn {
+  text-transform: none !important;
+}
+
 @media (min-width: 760px) {
   .testimonial {
     min-width: 300px;

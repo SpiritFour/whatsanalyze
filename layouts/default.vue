@@ -1,9 +1,6 @@
 <template>
   <v-app>
-    <div
-      class="nav"
-      :style="'height:' + ($vuetify.breakpoint.mdAndUp ? '50vh' : '70vh')"
-    >
+    <div class="nav">
       <nuxt-link to="/">
         <h1 style="color: black; font-size: 2em">
           <img
@@ -15,30 +12,6 @@
           <span v-show="$vuetify.breakpoint.mdAndUp">WhatsAnalyze</span>
         </h1>
       </nuxt-link>
-
-      <div
-        :class="{
-          'pt-5': $vuetify.breakpoint.smAndDown,
-          'pt-15': $vuetify.breakpoint.mdAndUp,
-          'small-h1': $vuetify.breakpoint.smAndDown,
-        }"
-      >
-        <h1>Analyze your WhatsApp Chat</h1>
-        <h2>Drag your .txt file in the area below</h2>
-        <br />
-        <p>
-          <v-icon color="black" style="vertical-align: sub">
-            mdi-account-lock
-          </v-icon>
-          Your chat is analyzed locally in your browser.
-        </p>
-        <p>
-          <v-icon color="black" style="vertical-align: sub">
-            mdi-security
-          </v-icon>
-          All data about your chat stays on your device. Nowhere else.
-        </p>
-      </div>
     </div>
 
     <v-main>
@@ -90,8 +63,12 @@ a:hover {
 .small-h1 h1 {
   font-size: 2em !important;
 }
+.small-h2 h2 {
+  font-size: 1.3em !important;
+}
 
 .nav {
+  height: 10vh;
   width: 100%;
   background: $c-blue-accent;
   padding: 5% !important;

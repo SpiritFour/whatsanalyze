@@ -18,7 +18,7 @@
 
         <p v-show="wrongFile">Wrong file format please upload a .txt!</p>
         <p v-show="isDragging" class="drop-instruction">
-          <v-icon :size="$vuetify.breakpoint.mdAndUp ? 100 : 50"
+          <v-icon :size="$vuetify.breakpoint.mdAndUp ? 100 : 30"
             >mdi-arrow-down-drop-circle</v-icon
           >
           <br />
@@ -26,21 +26,26 @@
         </p>
         <p v-show="!isDragging && !wrongFile && !processingFile">
           <br />
-          <v-icon
-            style="margin-top: -50px"
-            :size="$vuetify.breakpoint.mdAndUp ? 100 : 50"
-          >
+          <v-icon :size="$vuetify.breakpoint.mdAndUp ? 100 : 30">
             mdi-file
           </v-icon>
           <br />
-          <strong>Drag </strong>
-          <span style="text-decoration: underline">(or select)</span>
+
+          <span v-if="isSuccess">Done!</span>
+
+          <span v-if="$vuetify.breakpoint.mdAndUp">
+            <strong>Drag </strong>
+            (or select)
+          </span>
+
+          <span v-if="$vuetify.breakpoint.smAndDown">
+            <strong style="text-decoration: underline">Pick </strong>
+          </span>
 
           <span v-show="textSource">another file to add it</span>
           <span v-show="!textSource"> your Whats App .txt file </span>
         </p>
-        <p v-if="processingFile">Processing your file...</p>
-        <p v-if="isSuccess">Done!</p>
+        <p v-show="processingFile">Processing your file...</p>
       </div>
     </label>
   </div>
@@ -180,8 +185,8 @@ p {
   font-family: sans-serif;
 
   // shadows
-  box-shadow: 5px 5px 40px $c-dark;
-  text-shadow: 5px 5px 40px $c-dark;
+  box-shadow: 5px 5px 10px $c-dark;
+  text-shadow: 2px 2px 2px $c-dark;
 
   // colors
   background-color: $c-blue-accent-dark;
