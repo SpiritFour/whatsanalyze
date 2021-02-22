@@ -1,10 +1,9 @@
 <template>
   <div
-    class="drop-container"
+    class="drop-container pa-md-16 pa-4"
     @dragover.prevent="dragOver"
     @dragleave.prevent="dragLeave"
     @drop.prevent="drop($event)"
-    :style="'padding:' + ($vuetify.breakpoint.mdAndUp ? '4em' : ' 10px')"
   >
     <label style="cursor: pointer" for="uploadmytextfile">
       <div
@@ -16,19 +15,14 @@
       >
         <input type="file" id="uploadmytextfile" @change="requestUploadFile" />
 
-        <p v-show="wrongFile">Wrong file format please upload a .txt!</p>
-        <p v-show="isDragging" class="drop-instruction">
-          <v-icon :size="$vuetify.breakpoint.mdAndUp ? 100 : 30"
-            >mdi-arrow-down-drop-circle</v-icon
-          >
+        <p v-if="wrongFile">Wrong file format please upload a .txt!</p>
+        <p v-if="isDragging" class="drop-instruction">
+          <v-icon size="2em">mdi-arrow-down-drop-circle</v-icon>
           <br />
           Drop it now!
         </p>
-        <p v-show="!isDragging && !wrongFile && !processingFile">
-          <br />
-          <v-icon :size="$vuetify.breakpoint.mdAndUp ? 100 : 30">
-            mdi-file
-          </v-icon>
+        <p v-if="!isDragging && !wrongFile && !processingFile">
+          <v-icon size="2em"> mdi-file </v-icon>
           <br />
 
           <span v-if="isSuccess">Done! Look at your analysis below. </span>
