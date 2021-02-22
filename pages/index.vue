@@ -1,45 +1,34 @@
 <template>
   <div>
-    <div
-      class="header-cta"
-      :style="'height:' + ($vuetify.breakpoint.mdAndUp ? '35vh' : '55vh')"
-    >
-      <div
-        class="below-nav header-left"
-        :class="{
-          'pt-5': $vuetify.breakpoint.smAndDown,
-          'pt-15': $vuetify.breakpoint.mdAndUp,
-          'small-h1': $vuetify.breakpoint.smAndDown,
-          'small-h2': $vuetify.breakpoint.smAndDown,
-        }"
-      >
-        <h1>Analyze your WhatsApp Chat in seconds</h1>
-        <h2 style="font-size: 1.3em">
-          Insights and stats of your WhatsApp Chats generated locally on your
-          computer.
-        </h2>
-        <br />
-        <p
-          style="
-            background: rgba(0, 0, 0, 0.2);
-            color: white;
-            border-radius: 5px;
-            width: fit-content;
-          "
-          class="py-1 px-3"
-        >
-          <v-icon color="white" style="vertical-align: sub">
-            mdi-security
-          </v-icon>
-          <strong>No</strong> chat <strong>data</strong> is sent to a server it
-          runs only <strong>locally</strong> in your browser.
-        </p>
-      </div>
-      <LineChart
-        class="header-right"
-        :chartdata="chat_"
-        :style="'height:' + ($vuetify.breakpoint.mdAndUp ? '35vh' : '55vh')"
-      />
+    <div class="header-cta">
+      <v-row no-gutters class="pt-md-10">
+        <v-col class="below-nav header-left pa-5" cols="12" md="6">
+          <h1>Analyze your WhatsApp Chat in seconds</h1>
+          <h2 style="font-size: 1.3em">
+            Insights and stats of your WhatsApp Chats generated locally on your
+            computer.
+          </h2>
+          <br />
+          <p
+            style="
+              background: rgba(0, 0, 0, 0.2);
+              color: white;
+              border-radius: 5px;
+              width: fit-content;
+            "
+            class="py-1 px-3"
+          >
+            <v-icon color="white" style="vertical-align: sub">
+              mdi-security
+            </v-icon>
+            <strong>No</strong> chat <strong>data</strong> is sent to a server
+            it runs only <strong>locally</strong> in your browser.
+          </p>
+        </v-col>
+        <v-col cols="12" md="6" class="pa-5">
+          <LineChart class="header-right" :chartdata="chat_" />
+        </v-col>
+      </v-row>
     </div>
 
     <FileHandler
@@ -323,20 +312,14 @@ export default {
 }
 .header-left {
   float: left;
-
-  width: 60vw;
 }
 
 .header-right {
-  padding-right: 5%;
-  float: left;
-  width: 40vw;
   background: $c-blue-accent;
 }
 
 .below-nav {
   background: $c-blue-accent;
-  padding: 5% !important;
 }
 .v-btn {
   text-transform: none !important;
