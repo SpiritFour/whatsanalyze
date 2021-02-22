@@ -18,6 +18,10 @@ export default {
           scales: {
             yAxes: [
               {
+                scaleLabel: {
+                  display: true,
+                  labelString: "number of messages",
+                },
                 ticks: {
                   beginAtZero: true,
                 },
