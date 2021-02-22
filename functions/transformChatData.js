@@ -190,7 +190,10 @@ export class Chat {
       datasets: [
         {
           label: "Share of Speech",
-          backgroundColor: this.messagesPerPerson.map((person) => person.color),
+          backgroundColor: this.messagesPerPerson.map((person) =>
+            hexToRgbA(person.color)
+          ),
+          borderColor: this.messagesPerPerson.map((person) => person.color),
           data: this.messagesPerPerson.map((person) => person.messages.length),
         },
       ],
@@ -252,7 +255,8 @@ export class Chat {
       datasets: this.messagesPerPerson.map((person) => {
         return {
           label: person.name,
-          backgroundColor: person.color,
+          backgroundColor: hexToRgbA(person.color),
+          borderColor: person.color,
           data: Chat.hourlyDataFromChat(person.messages),
         };
       }),
@@ -273,7 +277,8 @@ export class Chat {
       datasets: this.messagesPerPerson.map((person) => {
         return {
           label: person.name,
-          backgroundColor: person.color,
+          backgroundColor: hexToRgbA(person.color),
+          borderColor: person.color,
           data: Chat.dailyDataFromChat(person.messages),
         };
       }),
@@ -299,7 +304,8 @@ export class Chat {
       datasets: this.messagesPerPerson.map((person) => {
         return {
           label: person.name,
-          backgroundColor: person.color,
+          backgroundColor: hexToRgbA(person.color),
+          borderColor: person.color,
           data: Chat.weeklyDataFromChat(person.messages),
         };
       }),
