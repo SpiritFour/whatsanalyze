@@ -6,9 +6,12 @@ export default {
   extends: Bar,
   props: {
     chartdata: new Chat(),
-    hourly: {
-      type: Boolean,
-      default: true,
+    dataGrouping: {
+      type: String,
+      validator: function (value) {
+        // The value must match one of these strings
+        return ["hourly", "daily", "weekly"].indexOf(value) !== -1;
+      },
     },
     options: {
       type: Object,
@@ -22,8 +25,6 @@ export default {
           scales: {
             xAxes: [
               {
-                type: "time",
-                time: {},
                 gridLines: {
                   display: false,
                 },
@@ -33,7 +34,7 @@ export default {
               {
                 scaleLabel: {
                   display: true,
-                  labelString: "number of messages",
+                  labelString: "Messages",
                 },
                 ticks: {
                   beginAtZero: true,
@@ -56,14 +57,12 @@ export default {
   },
   methods: {
     updateGraph() {
-      if (this.hourly) {
-        // eslint-disable-next-line vue/no-mutating-props
-        this.options.scales.xAxes[0].type = "time";
+      if (this.dataGrouping === "hourly") {
         this.renderChart(this.chartdata.getHourlyData(), this.options);
-      } else {
-        // eslint-disable-next-line vue/no-mutating-props
-        this.options.scales.xAxes[0].type = "category";
+      } else if (this.dataGrouping === "daily") {
         this.renderChart(this.chartdata.getDailyData(), this.options);
+      } else {
+        this.renderChart(this.chartdata.getWeeklyData(), this.options);
       }
     },
   },
