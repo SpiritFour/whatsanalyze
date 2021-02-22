@@ -16,6 +16,17 @@ export default {
             position: "bottom",
           },
           scales: {
+            xAxes: [
+              {
+                type: "time",
+                time: {
+                  unit: this.chartdata.linegraphXAxisUnit,
+                },
+                gridLines: {
+                  display: false,
+                },
+              },
+            ],
             yAxes: [
               {
                 scaleLabel: {
@@ -24,14 +35,6 @@ export default {
                 },
                 ticks: {
                   beginAtZero: true,
-                },
-              },
-            ],
-            xAxes: [
-              {
-                type: "time",
-                time: {
-                  unit: this.chartdata.linegraphXAxisUnit,
                 },
               },
             ],

@@ -215,7 +215,7 @@ export class Chat {
 
   getHourlyData() {
     return {
-      labels: [...Array(24).keys()],
+      labels: [...Array(24).keys()].map((hour) => hour * 1000 * 60 * 60),
       datasets: this.messagesPerPerson.map((person) => {
         return {
           label: person.name,
@@ -229,13 +229,13 @@ export class Chat {
   getDailyData() {
     return {
       labels: [
-        "Montag",
-        "Dienstag",
-        "Mittwoch",
-        "Donnerstag",
-        "Freitag",
-        "Samstag",
-        "Sonntag",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
       ],
       datasets: this.messagesPerPerson.map((person) => {
         return {
