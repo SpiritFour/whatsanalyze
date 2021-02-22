@@ -34,26 +34,21 @@
             </p>
           </div>
         </div>
+
         <v-timeline align-top :dense="$vuetify.breakpoint.smAndDown">
           <v-timeline-item
             v-for="(item, i) in items"
             :key="i"
             :color="item.color"
             :icon="item.icon"
+            :title="item.title"
+            :text="item.text"
             fill-dot
           >
             <v-card :color="item.color" dark>
-              <v-card-title class="title"> Lorem Ipsum Dolor </v-card-title>
+              <v-card-title class="title"> {{ item.title }} </v-card-title>
               <v-card-text class="white text--primary">
-                <p>
-                  Lorem ipsum dolor sit amet, no nam oblique veritus. Commune
-                  scaevola imperdiet nec ut, sed euismod convenire principes at.
-                  Est et nobis iisque percipit, an vim zril disputando
-                  voluptatibus, vix an salutandi sententiae.
-                </p>
-                <v-btn :color="item.color" class="mx-0" outlined>
-                  Button
-                </v-btn>
+                {{ item.text }}
               </v-card-text>
             </v-card>
           </v-timeline-item>
@@ -61,15 +56,15 @@
 
         <div class="explainer">
           <img
-            src="https://images.unsplash.com/photo-1611746869696-d09bce200020?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80"
-            alt="How to export your WhatsApp chat"
+            src="https://images.unsplash.com/photo-1472746729193-36ad213ac4a5?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8ZnJpZW5kcyUyMHNoYXJlfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
+            alt="How to share your WhatsApp chat insights and graphs"
           />
-          <h2>Export your WhatsApp chat</h2>
+          <h2>Share results with friends</h2>
 
           <p>
-            - Open the individual or group chat. <br />
-            - Tap More options > More > Export chat. <br />
-            - Choose whether to export with media or without media.
+            Impress your friends with real data. Share them who actually writes
+            the most messages, your favorite emoji and more about your
+            communication.
           </p>
         </div>
 
@@ -175,6 +170,32 @@ export default {
     return {
       isShowingChats: false,
       chat_: new Chat(),
+      items: [
+        {
+          color: "red lighten-2",
+          icon: "mdi-file-export",
+          text: "test1",
+          title: "1",
+        },
+        {
+          color: "purple darken-1",
+          icon: "mdi-file",
+          text: "test2",
+          title: "2",
+        },
+        {
+          color: "green lighten-1",
+          icon: "mdi-chart-box",
+          text: "test3",
+          title: "3",
+        },
+        {
+          color: "indigo",
+          icon: "mdi-share",
+          text: "test4",
+          title: "4",
+        },
+      ],
     };
   },
   methods: { Chat },
