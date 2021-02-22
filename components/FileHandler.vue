@@ -35,7 +35,11 @@
       Done!
       <v-icon large> mdi-tray-arrow-down </v-icon>
       <br />
-      <strong>Look at your analysis below or Drag & Drop</strong>
+      <strong
+        >Look at your analysis below
+        <br />
+        or Drag & Drop</strong
+      >
       <label style="cursor: pointer" for="uploadmytextfile">(or choose)</label>
       a new _chat.txt file
     </h1>
