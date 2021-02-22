@@ -1,31 +1,48 @@
 <template>
   <div
-    class="drop"
-    :class="getClasses"
+    class="drop-container"
     @dragover.prevent="dragOver"
     @dragleave.prevent="dragLeave"
     @drop.prevent="drop($event)"
+    :style="'padding:' + ($vuetify.breakpoint.mdAndUp ? '4em' : ' 10px')"
   >
-    <h1 v-if="wrongFile">Wrong file format please upload a .txt!</h1>
-    <h1
-      style="text-align: center"
-      v-if="
-        !textSource &&
-        !isDragging &&
-        !wrongFile &&
-        !isSuccess &&
-        !processingFile
-      "
-    >
-      <v-icon large> mdi-tray-arrow-down </v-icon>
-      <br />
-      <strong>Drag </strong>
-      <label style="cursor: pointer" for="uploadmytextfile">(or choose)</label>
-      a .txt file
-    </h1>
-    <h1 v-if="processingFile">Processing your file please wait...</h1>
-    <h1 v-if="isSuccess">Done!</h1>
-    <input type="file" id="uploadmytextfile" @change="requestUploadFile" />
+    <label style="cursor: pointer" for="uploadmytextfile">
+      <div
+        class="drop"
+        :class="{
+          isDragging: this.isDragging,
+          smallFont: $vuetify.breakpoint.smAndDown,
+        }"
+      >
+        <input type="file" id="uploadmytextfile" @change="requestUploadFile" />
+
+        <p v-show="wrongFile">Wrong file format please upload a .txt!</p>
+        <p v-show="isDragging" class="drop-instruction">
+          <v-icon :size="$vuetify.breakpoint.mdAndUp ? 100 : 50"
+            >mdi-arrow-down-drop-circle</v-icon
+          >
+          <br />
+          Drop it now!
+        </p>
+        <p v-show="!isDragging && !wrongFile && !processingFile">
+          <br />
+          <v-icon
+            style="margin-top: -50px"
+            :size="$vuetify.breakpoint.mdAndUp ? 100 : 50"
+          >
+            mdi-file
+          </v-icon>
+          <br />
+          <strong>Drag </strong>
+          <span style="text-decoration: underline">(or select)</span>
+
+          <span v-show="textSource">another file to add it</span>
+          <span v-show="!textSource"> your Whats App .txt file </span>
+        </p>
+        <p v-if="processingFile">Processing your file...</p>
+        <p v-if="isSuccess">Done!</p>
+      </div>
+    </label>
   </div>
 </template>
 
@@ -44,11 +61,6 @@ export default {
       chatStruct: null,
       messages: [],
     };
-  },
-  computed: {
-    getClasses() {
-      return { isDragging: this.isDragging };
-    },
   },
   methods: {
     // add absolute and personal id to each entry of the data structure
@@ -137,20 +149,47 @@ export default {
 </script>
 
 <style scoped lang="scss">
+p {
+  font-size: 2em;
+}
+
+.smallFont p {
+  font-size: 1.1em !important;
+}
+
+.drop-container {
+  text-align: center;
+  background: $c-blue-accent;
+}
+
+.drop-instruction {
+  font-size: 3em !important;
+  color: $c-dark !important;
+  font-weight: bold;
+  text-shadow: none !important;
+}
+
 .drop {
-  width: 100%;
-  height: 20vh;
-  background-color: $c-white;
-  outline: 2px dashed black;
-  outline-offset: -10px;
   display: flex;
   align-items: center;
+
+  height: 100%;
+  align-items: center;
   justify-content: center;
-
-  padding: 1rem;
   transition: background-color 0.2s ease-in-out;
-
   font-family: sans-serif;
+
+  // shadows
+  box-shadow: 5px 5px 40px $c-dark;
+  text-shadow: 5px 5px 40px $c-dark;
+
+  // colors
+  background-color: $c-blue-accent-dark;
+  color: $c-blue-accent;
+
+  // outline
+  outline: 10px dashed $c-dark;
+  outline-offset: -10px;
 }
 
 textarea {
@@ -164,11 +203,8 @@ input[type="file"] {
   display: none;
 }
 
-label {
-  text-decoration: underline;
-}
-
 .isDragging {
-  background-color: grey;
+  background-color: $c-yellow;
+  outline: 10px dashed $c-blue-accent-dark;
 }
 </style>
