@@ -248,7 +248,6 @@
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
-      <Results :chat_="chat_" />
     </v-container>
   </div>
 </template>
