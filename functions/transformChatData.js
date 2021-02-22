@@ -1,4 +1,5 @@
 import { chatColors, hexToRgbA } from "~/functions/colors";
+import stopwords from "stopwords-de";
 
 export class Chat {
   static remove_named_messages(chatObject, name = "system") {
@@ -104,11 +105,13 @@ export class Chat {
     return hours;
   }
 
-  constructor(chatObject = [], groupAfter = 9) {
+  constructor(chatObject = [], groupAfter = 9, maxWordsWordCloud = 500) {
     // this one is the complete input
     this.chatObject = chatObject;
     // for groupmessages we probably want to group after some time
     this._groupAfter = groupAfter;
+    // max number of words shown in word cloud
+    this._maxWordsWordCloud = maxWordsWordCloud;
     // here we remove messages (i.e. system messages)
     this.filterdChatObject = Chat.remove_named_messages(chatObject);
     //number of persons in chat
@@ -138,8 +141,11 @@ export class Chat {
 
   set groupAfter(groupAfter) {
     this._groupAfter = groupAfter;
-    this._sortedFreqList = null;
     this._messagesPerPerson = null;
+  }
+
+  set maxWordsWordCloud(maxWordsWordCloud) {
+    this._maxWordsWordCloud = maxWordsWordCloud;
   }
 
   _getMessagesPerPerson() {
@@ -373,5 +379,22 @@ export class Chat {
       unit = "month";
     else unit = "day";
     return unit;
+  }
+
+  getAllWords() {
+    return this.sortedFreqDict
+      .filter(
+        (word) =>
+          !(
+            stopwords.includes(word[0].toLowerCase()) ||
+            ["", "ich", "du", "wir", "aber", "<media", "omitted>"].includes(
+              word[0].toLowerCase()
+            )
+          ) && word[1] > 1
+      )
+      .map((word) => {
+        return { word: word[0], freq: word[1] };
+      })
+      .slice(0, this._maxWordsWordCloud);
   }
 }
