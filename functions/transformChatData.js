@@ -71,7 +71,7 @@ export class Chat {
       d <= end;
       d.setDate(d.getDate() + 1)
     ) {
-      a.push(new Date(d).toDateString());
+      a.push(new Date(d));
     }
     return a;
   }
@@ -252,11 +252,6 @@ export class Chat {
     var minDate = new Date(Math.min.apply(null, this.dates));
     var maxDate = new Date(Math.max.apply(null, this.dates));
 
-    var x_axis = Chat.getDaysBetween(
-      minDate.setHours(0, 0, 0, 0),
-      maxDate.setHours(0, 0, 0, 0)
-    );
-
     // iterate over persons
     var datasets = this.messagesPerPerson.map((person) => {
       var hist_info = {};
@@ -264,18 +259,19 @@ export class Chat {
       function _addDayCount(message) {
         const oneDayInMS = 24 * 60 * 60 * 1000;
 
-        var prevDate = new Date(message.date.getTime() - oneDayInMS);
+        // we group for one day -> set to mid day
+        var currDate = new Date(message.date);
+        currDate.setHours(12, 0, 0, 0);
+
+        var prevDate = new Date(currDate.getTime() - oneDayInMS);
         if (prevDate > minDate) {
-          prevDate = prevDate.toDateString();
           hist_info[prevDate] = hist_info[prevDate] || 0;
         }
 
-        var currDate = message.date.toDateString();
         hist_info[currDate] = (hist_info[currDate] || 0) + 1;
 
-        var nextDate = new Date(message.date.getTime() + oneDayInMS);
+        var nextDate = new Date(currDate.getTime() + oneDayInMS);
         if (nextDate < maxDate) {
-          nextDate = nextDate.toDateString();
           hist_info[nextDate] = hist_info[nextDate] || 0;
         }
       }
@@ -292,9 +288,21 @@ export class Chat {
       };
     });
 
-    return {
-      labels: x_axis,
-      datasets: datasets,
-    };
+    return [
+      {
+        datasets: datasets,
+      },
+      this.getLineGraphXAxis(maxDate, minDate),
+    ];
+  }
+
+  getLineGraphXAxis(maxDate, minDate) {
+    var diffDate = new Date(maxDate - minDate);
+    var unit = "";
+    if (diffDate.getFullYear() > 1971) unit = "year";
+    else if (diffDate.getFullYear() > 1970 && diffDate.getMonth() > 0)
+      unit = "month";
+    else unit = "day";
+    return unit;
   }
 }

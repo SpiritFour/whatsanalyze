@@ -23,6 +23,14 @@ export default {
                 },
               },
             ],
+            xAxes: [
+              {
+                type: "time",
+                time: {
+                  unit: this.chartdata.linegraphXAxisUnit,
+                },
+              },
+            ],
           },
           elements: {
             line: {
@@ -36,13 +44,21 @@ export default {
   watch: {
     chartdata: {
       handler() {
-        this.renderChart(this.chartdata.getLineGraphData(), this.options);
+        this.updateGraph();
       },
       deep: true,
     },
   },
+  methods: {
+    updateGraph: function () {
+      var lineGraphData = this.chartdata.getLineGraphData();
+      // eslint-disable-next-line vue/no-mutating-props
+      this.options.scales.xAxes[0].time.unit = lineGraphData[1];
+      this.renderChart(lineGraphData[0], this.options);
+    },
+  },
   mounted() {
-    this.renderChart(this.chartdata.getLineGraphData(), this.options);
+    this.updateGraph();
   },
 };
 </script>
