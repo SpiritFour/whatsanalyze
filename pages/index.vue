@@ -26,7 +26,11 @@
           All data about your chat stays on your device. Nowhere else.
         </p>
       </div>
-      <LineChart class="header-right" :chartdata="chat_" />
+      <LineChart
+        class="header-right"
+        :chartdata="chat_"
+        :style="'height:' + ($vuetify.breakpoint.mdAndUp ? '35vh' : '55vh')"
+      />
     </div>
 
     <FileHandler
@@ -197,6 +201,7 @@ export default {
 }
 
 .header-right {
+  padding-right: 5%;
   float: left;
   width: 40vw;
   background: $c-blue-accent;
