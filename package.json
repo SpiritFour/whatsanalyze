@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@amcharts/amcharts4": "^4.10.15",
+    "@mdi/js": "^5.9.55",
     "@nuxt/content": "^1.13.1",
     "chart.js": "^2.9.4",
     "core-js": "^3.8.3",

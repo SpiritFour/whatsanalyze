@@ -24,7 +24,7 @@
       <div style="margin-top: 1em">
         <h3>
           <nuxt-link :to="{ name: 'whatsapp-signal' }"
-            >Switch from Signal to Whatsapp and keep yoxur data
+            >Switch from Signal to Whatsapp and keep your data
           </nuxt-link>
         </h3>
       </div>

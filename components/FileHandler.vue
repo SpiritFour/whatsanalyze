@@ -6,7 +6,14 @@
     @dragleave.prevent="dragLeave"
     @drop.prevent="drop($event)"
   >
-    <h1 v-if="wrongFile">Wrong file format please upload a .txt!</h1>
+    <h1 v-if="wrongFile">
+      Wrong file format please upload a .txt!
+      <v-icon large> mdi-tray-arrow-down </v-icon>
+      <br />
+      <strong>Drag & Drop</strong>
+      <label style="cursor: pointer" for="uploadmytextfile">(or choose)</label>
+      your chat .txt file
+    </h1>
     <h1
       style="text-align: center"
       v-if="
@@ -19,12 +26,23 @@
     >
       <v-icon large> mdi-tray-arrow-down </v-icon>
       <br />
-      <strong>Drag </strong>
+      <strong>Drag & Drop</strong>
       <label style="cursor: pointer" for="uploadmytextfile">(or choose)</label>
-      a .txt file
+      your chat .txt file
     </h1>
     <h1 v-if="processingFile">Processing your file please wait...</h1>
-    <h1 v-if="isSuccess">Done!</h1>
+    <h1 v-if="isSuccess">
+      Done!
+      <v-icon large> mdi-tray-arrow-down </v-icon>
+      <br />
+      <strong
+        >Look at your analysis below
+        <br />
+        or Drag & Drop</strong
+      >
+      <label style="cursor: pointer" for="uploadmytextfile">(or choose)</label>
+      a new chat .txt file
+    </h1>
     <input type="file" id="uploadmytextfile" @change="requestUploadFile" />
   </div>
 </template>

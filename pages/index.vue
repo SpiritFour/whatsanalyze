@@ -3,7 +3,10 @@
     <div style="margin-bottom: 10em">
       <h1 style="font-size: 3em">Analyse your WhatsApp Chat</h1>
       <p style="font-size: 2em">Now drag your .txt file in the area below</p>
-      <p>No data is sent to a server and will never be saved.</p>
+      <v-alert dense text type="success" dismissible>
+        <strong>No</strong> chat <strong>data</strong> is sent to a server it
+        runs all <strong>locally</strong> in your browser
+      </v-alert>
 
       <br />
       <FileHandler
@@ -35,55 +38,44 @@
           </div>
         </div>
 
-        <div class="explainer">
-          <img
-            src="https://images.unsplash.com/photo-1611746869696-d09bce200020?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80"
-            alt="How to export your WhatsApp chat"
-          />
-          <h2>Export your WhatsApp chat</h2>
-
-          <p>
-            - Open the individual or group chat. <br />
-            - Tap More options > More > Export chat. <br />
-            - Choose whether to export with media or without media.
-          </p>
-        </div>
-
-        <div class="explainer">
-          <img
-            src="https://images.unsplash.com/photo-1611095567219-8fa7d4d8bf48?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=3302&q=80"
-            alt="How to export your WhatsApp chat"
-          />
-          <h2>Open file with our tool</h2>
-
-          <p>Tab on the box above and select your file. Wait for 2 seconds.</p>
-        </div>
-
-        <div class="explainer">
-          <img
-            src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80"
-            alt="How to export your WhatsApp chat"
-          />
-          <h2>Enjoy beautiful visuaizations</h2>
-
-          <p>
-            Learn who you really are and how you communicate with your friends.
-            Reveal never know facts!.
-          </p>
-        </div>
-
-        <div class="explainer">
-          <img
-            src="https://images.unsplash.com/photo-1472746729193-36ad213ac4a5?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8ZnJpZW5kcyUyMHNoYXJlfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-            alt="How to export your WhatsApp chat"
-          />
-          <h2>Share results with friends</h2>
-
-          <p>
-            Impress your friends with real data. Know you know who writes the
-            most messages, uses wich emojies and more.
-          </p>
-        </div>
+        <v-timeline align-top :dense="$vuetify.breakpoint.smAndDown">
+          <v-timeline-item
+            v-for="(item, i) in items"
+            :key="i"
+            :color="item.color"
+            :icon="item.icon"
+            :title="item.title"
+            :text="item.text"
+            :text2="item.text2"
+            :text3="item.text3"
+            :imageSrc="item.imageSrc"
+            :imageAlt="item.imageAlt"
+            fill-dot
+          >
+            <v-card :color="item.color" dark>
+              <v-card-title class="title"> {{ item.title }} </v-card-title>
+              <v-card-text
+                style="float: left; text-align: left"
+                class="white text--primary"
+              >
+                <p>
+                  <v-img
+                    style="float: left; margin-right: 2rem"
+                    max-height="147"
+                    max-width="250"
+                    :src="item.imageSrc"
+                  />
+                  <br />
+                  {{ item.text }}
+                  <br />
+                  {{ item.text2 }}
+                  <br />
+                  {{ item.text3 }}
+                </p>
+              </v-card-text>
+            </v-card>
+          </v-timeline-item>
+        </v-timeline>
       </div>
 
       <div style="text-align: center" class="testimonial-container">
@@ -151,6 +143,48 @@ export default {
     return {
       isShowingChats: false,
       chat_: new Chat(),
+      items: [
+        {
+          color: "red lighten-2",
+          icon: "mdi-file-export",
+          text: " 1. Open the individual or group chat.",
+          text2: "2. Tap More options > More > Export chat.",
+          text3: "3. Choose to export without media.",
+          title: "Export your WhatsApp chat",
+          imageSrc:
+            "https://images.unsplash.com/photo-1611746869696-d09bce200020?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80",
+          imageAlt: "How to export your WhatsApp Signal Telegram Threema chat",
+        },
+        {
+          color: "purple darken-1",
+          icon: "mdi-file",
+          text: "Tab on the box above and select your chat .txt file.",
+          title: "Open file with our tool",
+          imageSrc:
+            "https://images.unsplash.com/photo-1611095567219-8fa7d4d8bf48?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=3302&q=80",
+          imageAlt: "How to export your WhatsApp chat",
+        },
+        {
+          color: "green lighten-1",
+          icon: "mdi-chart-box",
+          text:
+            "Learn who you really are and how you communicate with your friends. Reveal never know facts!. ",
+          title: "Enjoy beautiful visualizations",
+          imageSrc:
+            "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80",
+          imageAlt: "How to export your WhatsApp chat",
+        },
+        {
+          color: "indigo",
+          icon: "mdi-share",
+          text:
+            "Impress your friends with real data. Stun them with data, who writes the most messages, what emojis are most used and much more. ",
+          title: "Share results with friends",
+          imageSrc:
+            "https://images.unsplash.com/photo-1472746729193-36ad213ac4a5?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8ZnJpZW5kcyUyMHNoYXJlfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+          imageAlt: "How to export your WhatsApp chat",
+        },
+      ],
     };
   },
   methods: { Chat },
