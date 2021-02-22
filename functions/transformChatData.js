@@ -96,6 +96,14 @@ export class Chat {
     return hours;
   }
 
+  static weeklyDataFromChat(messages) {
+    let hours = new Array(12).fill(0);
+    messages.map((message) => {
+      hours[message.date.getMonth()] += 1;
+    });
+    return hours;
+  }
+
   constructor(chatObject = [], groupAfter = 9) {
     // this one is the complete input
     this.chatObject = chatObject;
@@ -215,7 +223,32 @@ export class Chat {
 
   getHourlyData() {
     return {
-      labels: [...Array(24).keys()].map((hour) => hour * 1000 * 60 * 60),
+      labels: [
+        "0AM",
+        "1AM",
+        "2AM",
+        "3AM",
+        "4AM",
+        "5AM",
+        "6AM",
+        "7AM",
+        "8AM",
+        "9AM",
+        "10AM",
+        "11AM",
+        "12PM",
+        "1PM",
+        "2PM",
+        "3PM",
+        "4PM",
+        "5PM",
+        "6PM",
+        "7PM",
+        "8PM",
+        "9PM",
+        "10PM",
+        "11PM",
+      ],
       datasets: this.messagesPerPerson.map((person) => {
         return {
           label: person.name,
@@ -242,6 +275,32 @@ export class Chat {
           label: person.name,
           backgroundColor: person.color,
           data: Chat.dailyDataFromChat(person.messages),
+        };
+      }),
+    };
+  }
+
+  getWeeklyData() {
+    return {
+      labels: [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ],
+      datasets: this.messagesPerPerson.map((person) => {
+        return {
+          label: person.name,
+          backgroundColor: person.color,
+          data: Chat.weeklyDataFromChat(person.messages),
         };
       }),
     };
