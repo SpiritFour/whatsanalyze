@@ -21,6 +21,7 @@
     "*.{js,css,md,vue}": "prettier --write"
   },
   "dependencies": {
+    "@amcharts/amcharts4": "^4.10.15",
     "@nuxt/content": "^1.13.1",
     "chart.js": "^2.9.4",
     "core-js": "^3.8.3",

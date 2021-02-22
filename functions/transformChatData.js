@@ -364,4 +364,10 @@ export class Chat {
     else unit = "day";
     return unit;
   }
+
+  getAllWords() {
+    return this.chatObject
+      .map((message) => message.message)
+      .reduce((a, b) => a + " " + b, "");
+  }
 }
