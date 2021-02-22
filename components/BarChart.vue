@@ -22,8 +22,6 @@ export default {
           scales: {
             xAxes: [
               {
-                type: "time",
-                time: {},
                 gridLines: {
                   display: false,
                 },
@@ -57,12 +55,8 @@ export default {
   methods: {
     updateGraph() {
       if (this.hourly) {
-        // eslint-disable-next-line vue/no-mutating-props
-        this.options.scales.xAxes[0].type = "time";
         this.renderChart(this.chartdata.getHourlyData(), this.options);
       } else {
-        // eslint-disable-next-line vue/no-mutating-props
-        this.options.scales.xAxes[0].type = "category";
         this.renderChart(this.chartdata.getDailyData(), this.options);
       }
     },

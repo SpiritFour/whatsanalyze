@@ -215,7 +215,32 @@ export class Chat {
 
   getHourlyData() {
     return {
-      labels: [...Array(24).keys()].map((hour) => hour * 1000 * 60 * 60),
+      labels: [
+        "0AM",
+        "1AM",
+        "2AM",
+        "3AM",
+        "4AM",
+        "5AM",
+        "6AM",
+        "7AM",
+        "8AM",
+        "9AM",
+        "10AM",
+        "11AM",
+        "12PM",
+        "1PM",
+        "2PM",
+        "3PM",
+        "4PM",
+        "5PM",
+        "6PM",
+        "7PM",
+        "8PM",
+        "9PM",
+        "10PM",
+        "11PM",
+      ],
       datasets: this.messagesPerPerson.map((person) => {
         return {
           label: person.name,
