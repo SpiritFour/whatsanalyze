@@ -1,4 +1,4 @@
-import { chatColors } from "~/functions/colors";
+import { chatColors, hexToRgbA } from "~/functions/colors";
 
 export class Chat {
   static remove_named_messages(chatObject, name = "system") {
@@ -280,7 +280,7 @@ export class Chat {
 
       return {
         label: person.name,
-        backgroundColor: person.color,
+        backgroundColor: hexToRgbA(person.color),
         borderColor: person.color,
         data: Object.entries(hist_info).map((entry) => {
           return { x: entry[0], y: entry[1] };
