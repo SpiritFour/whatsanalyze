@@ -12,7 +12,7 @@
       <br />
       <strong>Drag & Drop</strong>
       <label style="cursor: pointer" for="uploadmytextfile">(or choose)</label>
-      your _chat.txt file
+      your chat .txt file
     </h1>
     <h1
       style="text-align: center"
@@ -28,7 +28,7 @@
       <br />
       <strong>Drag & Drop</strong>
       <label style="cursor: pointer" for="uploadmytextfile">(or choose)</label>
-      your _chat.txt file
+      your chat .txt file
     </h1>
     <h1 v-if="processingFile">Processing your file please wait...</h1>
     <h1 v-if="isSuccess">
@@ -41,7 +41,7 @@
         or Drag & Drop</strong
       >
       <label style="cursor: pointer" for="uploadmytextfile">(or choose)</label>
-      a new _chat.txt file
+      a new chat .txt file
     </h1>
     <input type="file" id="uploadmytextfile" @change="requestUploadFile" />
   </div>
