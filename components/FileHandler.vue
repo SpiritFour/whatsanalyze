@@ -31,7 +31,7 @@
           </v-icon>
           <br />
 
-          <span v-if="isSuccess">Done!</span>
+          <span v-if="isSuccess">Done! Look at your analysis below. </span>
 
           <span v-if="$vuetify.breakpoint.mdAndUp">
             <strong>Drag </strong>
