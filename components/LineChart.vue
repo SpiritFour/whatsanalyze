@@ -24,6 +24,11 @@ export default {
               },
             ],
           },
+          elements: {
+            line: {
+              tension: 0,
+            },
+          },
         };
       },
     },
