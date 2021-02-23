@@ -29,6 +29,7 @@
         :text2="item.text2"
         :text3="item.text3"
         :imageSrc="item.imageSrc"
+        :inageSrcLazy="item.imageSrcLazy"
         :imageAlt="item.imageAlt"
         fill-dot
       >
@@ -40,10 +41,11 @@
           >
             <p class="text-body-1">
               <v-img
+                :lazy-src="item.imageSrcLazy"
+                :src="item.imageSrc"
                 style="float: left; margin-right: 2rem"
                 max-height="147"
                 max-width="250"
-                :src="item.imageSrc"
               />
               <br />
               {{ item.text }}
@@ -60,6 +62,15 @@
 </template>
 
 <script>
+import img1 from "assets/img/adem-ay-zs-41Br0WhQ-unsplash.jpg";
+import img1Lazy from "assets/img/adem-ay-zs-41Br0WhQ-unsplash-lazy.jpeg";
+import img2 from "assets/img/bermix-studio-1xmcsdkBgWg-unsplash.jpg";
+import img2Lazy from "assets/img/bermix-studio-1xmcsdkBgWg-unsplash-lazy.jpeg";
+import img3 from "assets/img/christian-wiediger-5BG-9id-A6I-unsplash.jpg";
+import img3Lazy from "assets/img/christian-wiediger-5BG-9id-A6I-unsplash-lazy.jpeg";
+import img4 from "assets/img/luke-chesser-JKUTrJ4vK00-unsplash.jpg";
+import img4Lazy from "assets/img/luke-chesser-JKUTrJ4vK00-unsplash-lazy.jpeg";
+
 export default {
   data() {
     return {
@@ -71,8 +82,8 @@ export default {
           text2: "2. Tap More options > More > Export chat.",
           text3: "3. Choose to export without media.",
           title: "Export your chat",
-          imageSrc:
-            "https://images.unsplash.com/photo-1611746869696-d09bce200020?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80",
+          imageSrc: img1,
+          imageSrcLazy: img1Lazy,
           imageAlt: "How to export your WhatsApp Signal Telegram Threema chat",
         },
         {
@@ -80,8 +91,8 @@ export default {
           icon: "mdi-file",
           text: "Tab on the box above and select your chat .txt file.",
           title: "Drag file into box above",
-          imageSrc:
-            "https://images.unsplash.com/photo-1611095567219-8fa7d4d8bf48?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=3302&q=80",
+          imageSrc: img2,
+          imageSrcLazy: img2Lazy,
           imageAlt: "How to export your WhatsApp chat",
         },
         {
@@ -90,8 +101,8 @@ export default {
           text:
             "Learn who you really are and how you communicate with your friends. Reveal never know facts!. ",
           title: "Enjoy beautiful visualizations",
-          imageSrc:
-            "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80",
+          imageSrc: img3,
+          imageSrcLazy: img3Lazy,
           imageAlt: "How to export your WhatsApp chat",
         },
         {
@@ -100,8 +111,8 @@ export default {
           text:
             "Impress your friends with real data. Stun them with data, who writes the most messages, what emojis are most used and much more. ",
           title: "Share the results with your friends",
-          imageSrc:
-            "https://images.unsplash.com/photo-1472746729193-36ad213ac4a5?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8ZnJpZW5kcyUyMHNoYXJlfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+          imageSrc: img4,
+          imageSrcLazy: img4Lazy,
           imageAlt: "How to export your WhatsApp chat",
         },
       ],
