@@ -9,12 +9,10 @@
 
     <v-container v-show="!isShowingChats" class="pt-16">
       <HowItWorks />
-      <Cta />
+      <CtaMiddle />
       <Testimonials />
       <Content :page="page" />
-
-      <Cta />
-
+      <CtaBottom />
       <Faq />
     </v-container>
 
