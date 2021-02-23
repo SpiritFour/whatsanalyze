@@ -1,5 +1,6 @@
 import { chatColors, hexToRgbA } from "~/functions/colors";
-import stopwords from "stopwords-de";
+import stopwords_de from "stopwords-de";
+import stopwords from "stopwords-en";
 
 export class Chat {
   static remove_named_messages(chatObject, name = "system") {
@@ -105,7 +106,7 @@ export class Chat {
     return hours;
   }
 
-  constructor(chatObject = [], groupAfter = 9, maxWordsWordCloud = 500) {
+  constructor(chatObject = [], groupAfter = 9, maxWordsWordCloud = 200) {
     // this one is the complete input
     this.chatObject = chatObject;
     // for groupmessages we probably want to group after some time
@@ -382,10 +383,12 @@ export class Chat {
   }
 
   getAllWords() {
+    console.log(this.sortedFreqDict);
     return this.sortedFreqDict
       .filter(
         (word) =>
           !(
+            stopwords_de.includes(word[0].toLowerCase()) ||
             stopwords.includes(word[0].toLowerCase()) ||
             [
               "",
@@ -395,8 +398,8 @@ export class Chat {
               "aber",
               "<media",
               "omitted>",
-              "omitted",
-              "image",
+              "‎image",
+              "media",
             ].includes(word[0].toLowerCase())
           ) && word[1] > 1
       )

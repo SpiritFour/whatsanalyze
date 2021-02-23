@@ -11949,6 +11949,11 @@ stopwords-de@^0.3.0:
   resolved "https://registry.yarnpkg.com/stopwords-de/-/stopwords-de-0.3.0.tgz#a63123c7217645967f8a4055cdb6ce921b8ba40f"
   integrity sha512-9Agjg1Hv6nXxEZFI1L1WUo1Qqbiy113Xjdw2PDZ9L/YISASZuPJZlShF7AGXDhULiBvmWdg4rBlCv05CJsXnww==
 
+stopwords-en@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/stopwords-en/-/stopwords-en-0.3.0.tgz#ef1ffbd32e03cf2f9cbf226adcb80e27ec3fe0ff"
+  integrity sha1-7x/70y4Dzy+cvyJq3LgOJ+w/4P8=
+
 stream-browserify@^2.0.1:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/stream-browserify/-/stream-browserify-2.0.2.tgz#87521d38a44aa7ee91ce1cd2a47df0cb49dd660b"
