@@ -219,6 +219,7 @@ export class Chat {
         .slice(0, 3);
       let averageMessageLength = numberOfWords / person.messages.length;
       return {
+        color: person.color,
         name: name,
         numberOfWords: numberOfWords,
         longestMessage: longestMessage,
@@ -350,9 +351,9 @@ export class Chat {
       person.messages.forEach(_addDayCount);
 
       return {
-        borderWidth: 1,
+        borderWidth: 2,
         lineTension: 0,
-        pointRadius: 0,
+        pointRadius: 1,
         pointHitRadius: 5,
         label: person.name,
         backgroundColor: hexToRgbA(person.color),

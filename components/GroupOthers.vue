@@ -1,7 +1,9 @@
 <template>
-  <div>
+  <div v-if="chatObject.numPersonsInChat > 2">
+    <div class="text-h5">
+      You can group the persons with the least messages here.
+    </div>
     <v-slider
-      v-if="chatObject.numPersonsInChat > 2"
       v-model="groupAfter"
       label="Group People into others"
       thumb-color="red"

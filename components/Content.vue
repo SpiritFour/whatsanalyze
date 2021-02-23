@@ -1,8 +1,8 @@
 <template>
-  <article class="article pt-4 pb-4">
-    <h1 style="font-size: 3em; margin-bottom: 1em">{{ page.title }}</h1>
-    <nuxt-content :document="page" />
-    <div>
+  <article class="article px-10">
+    <div class="text-center text-h2 py-10">{{ page.title }}</div>
+    <!-- toc -->
+    <div class="toc">
       <ol>
         <li v-for="heading in page.toc" :key="heading.id">
           <a :href="'#' + heading.id">
@@ -11,6 +11,8 @@
         </li>
       </ol>
     </div>
+    <!-- main content -->
+    <nuxt-content :document="page" class="py-10" />
   </article>
 </template>
 
@@ -23,21 +25,41 @@ export default {
 <style lang="scss">
 .article {
   background: $c-white;
-  position: relative;
-  padding: 3em;
 }
-.nuxt-content h1 {
-  font-size: 4em;
-  margin-bottom: 1em;
-}
-.nuxt-content h2 {
-  font-size: 2em;
-  margin-top: 0.7em;
-  margin-bottom: 0.7em;
-}
-.nuxt-content h3 {
-  font-size: 1.5em;
-  margin-bottom: 0.7em;
-  margin-top: 0.7em;
+
+.nuxt-content,
+.toc {
+  a:visited {
+    color: black;
+  }
+
+  a:hover {
+    color: $c-blue-accent !important;
+  }
+
+  a:link {
+    color: black;
+    text-decoration: underline !important;
+  }
+
+  h2 {
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+    font-size: 3rem !important;
+    font-weight: 400;
+    line-height: 3.125rem;
+    letter-spacing: normal !important;
+    font-family: "Roboto", sans-serif !important;
+  }
+
+  h3 {
+    padding-top: 1em;
+    padding-bottom: 0.4em;
+    font-size: 1.5rem !important;
+    font-weight: 400;
+    line-height: 2rem;
+    letter-spacing: normal !important;
+    font-family: "Roboto", sans-serif !important;
+  }
 }
 </style>

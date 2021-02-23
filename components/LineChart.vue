@@ -10,6 +10,7 @@ export default {
       type: Object,
       default: function () {
         return {
+          pointHitRadius: 5,
           responsive: true,
           maintainAspectRatio: false,
           legend: {
@@ -24,6 +25,7 @@ export default {
                 },
                 gridLines: {
                   display: false,
+                  color: "#FFFFFF",
                 },
               },
             ],
