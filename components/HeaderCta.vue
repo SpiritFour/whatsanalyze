@@ -4,8 +4,8 @@
       <v-col class="below-nav header-left" cols="12" md="6">
         <h1>Analyze your WhatsApp Chat in seconds</h1>
         <h2 style="font-size: 1.3em">
-          Insights and stats of your WhatsApp Chats generated locally on your
-          computer.
+          Reveal insights - get statistics of your WhatsApp communication all
+          generated locally on your device.
         </h2>
         <br />
         <p

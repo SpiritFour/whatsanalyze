@@ -70,7 +70,7 @@ export default {
           text: " 1. Open the (group) chat.",
           text2: "2. Tap More options > More > Export chat.",
           text3: "3. Choose to export without media.",
-          title: "Export your Whats App chat",
+          title: "Export your chat",
           imageSrc:
             "https://images.unsplash.com/photo-1611746869696-d09bce200020?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80",
           imageAlt: "How to export your WhatsApp Signal Telegram Threema chat",
