@@ -47,6 +47,7 @@
 
 <script>
 import { parseString } from "whatsapp-chat-parser";
+import JSZip from "jszip";
 
 export default {
   name: "DropAnImage",
@@ -62,6 +63,55 @@ export default {
     };
   },
   methods: {
+    zipLoadEndHandler(e) {
+      const arrayBuffer = e.target.result;
+      const jszip = new JSZip();
+      const zip = jszip.loadAsync(arrayBuffer);
+
+      zip
+        .then(this.readChatFile)
+        .then((text) => parseString(text, { parseAttachments: true }))
+        .then(this.updateMessages);
+    },
+
+    txtLoadEndHandler(e) {
+      parseString(e.target.result).then(this.updateMessages);
+    },
+
+    updateMessages(messages) {
+      this.messages = this.extendDataStructure(messages);
+      this.$emit("new_messages", this.messages);
+      this.$emit("hide_explanation", true);
+    },
+
+    readChatFile(zipData) {
+      const chatFile = zipData.file("_chat.txt");
+      if (chatFile) return chatFile.async("string");
+
+      const chatFiles = zipData.file(/.*(?:chat|whatsapp).*\.txt$/i);
+
+      if (!chatFiles.length) {
+        throw new Error("No txt files found in archive");
+      }
+
+      const chatFilesSorted = chatFiles.sort(
+        (a, b) => a.name.length - b.name.length
+      );
+
+      return chatFilesSorted[0].async("string");
+    },
+
+    processFile(file) {
+      const reader = new FileReader();
+      if (/^application\/(?:x-)?zip(?:-compressed)?$/.test(file.type)) {
+        reader.addEventListener("loadend", this.zipLoadEndHandler);
+        reader.readAsArrayBuffer(file);
+      } else if (file.type === "text/plain") {
+        reader.addEventListener("loadend", this.txtLoadEndHandler);
+        reader.readAsText(file);
+      }
+    },
+
     // add absolute and personal id to each entry of the data structure
     extendDataStructure(messages) {
       let authors = {};
@@ -85,58 +135,50 @@ export default {
       let files = e.dataTransfer.files;
       this.process(files);
     },
-    requestUploadFile() {
-      var src = this.$el.querySelector("#uploadmytextfile");
-      let files = src.files;
-      this.process(files);
-    },
-    process(files) {
+
+    createDataStruct() {
       this.wrongFile = false;
       this.processingFile = true;
       this.isSuccess = false;
-      // allows only 1 file
-      if (files.length === 1) {
-        let file = files[0];
-        // allows text only
-        if (file.type.indexOf("text/") >= 0) {
-          var reader = new FileReader();
-          reader.onload = (f) => {
-            this.textSource = f.target.result;
-            this.isDragging = false;
-            parseString(this.textSource)
-              .then(
-                (messages) =>
-                  (this.messages = this.extendDataStructure(messages))
-              )
-              .then(() => {
-                this.$emit("new_messages", this.messages);
-                this.$emit("hide_explanation", true);
-              });
-            this.$gtag.event("file-parsed", {
-              event_category: "home",
-              event_label: "lead",
-              value: "1",
-            });
-            this.isSuccess = true;
-            this.processingFile = false;
-          };
-          // this is the method to read a text file content
-          reader.readAsText(file);
-        } else {
-          this.processingFile = false;
-          this.$gtag.event("file-error", {
-            event_category: "home",
-            event_label: "lead",
-            value: "0",
+
+      if (this.textSource != null) {
+        this.isDragging = false;
+        parseString(this.textSource)
+          .then(
+            (messages) => (this.messages = this.extendDataStructure(messages))
+          )
+          .then(() => {
+            this.$emit("new_messages", this.messages);
+            this.$emit("hide_explanation", true);
           });
-          this.wrongFile = true;
-          this.textSource = null;
-          this.isDragging = false;
-          this.processingFile = false;
-        }
+        this.$gtag.event("file-parsed", {
+          event_category: "home",
+          event_label: "lead",
+          value: "1",
+        });
+        this.isSuccess = true;
+        this.processingFile = false;
+      } else {
+        this.processingFile = false;
+        this.$gtag.event("file-error", {
+          event_category: "home",
+          event_label: "lead",
+          value: "0",
+        });
+        this.wrongFile = true;
+        this.textSource = null;
+        this.isDragging = false;
+        this.processingFile = false;
       }
     },
+
+    requestUploadFile() {
+      let src = this.$el.querySelector("#uploadmytextfile");
+      let files = src.files;
+      this.processFile(files[0]);
+    },
   },
+
   mounted() {
     fetch("/chat_example.txt")
       .then((response) => response.text())
