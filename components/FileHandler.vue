@@ -49,11 +49,6 @@
 import { parseString } from "whatsapp-chat-parser";
 import JSZip from "jszip";
 
-const showError = (message, err) => {
-  console.error(err || message); // eslint-disable-line no-console
-  alert(message); // eslint-disable-line no-alert
-};
-
 export default {
   name: "DropAnImage",
   data() {
@@ -76,24 +71,18 @@ export default {
       zip
         .then(this.readChatFile)
         .then((text) => parseString(text, { parseAttachments: true }))
-        .then(
-          (messages) => (this.messages = this.extendDataStructure(messages))
-        )
-        .then(() => {
-          this.$emit("new_messages", this.messages);
-          this.$emit("hide_explanation", true);
-        });
+        .then(this.helper);
     },
 
     txtLoadEndHandler(e) {
-      parseString(e.target.result)
-        .then(
-          (messages) => (this.messages = this.extendDataStructure(messages))
-        )
-        .then(() => {
-          this.$emit("new_messages", this.messages);
-          this.$emit("hide_explanation", true);
-        });
+      parseString(e.target.result).then(this.helper);
+    },
+
+    async helper(messages) {
+      console.log(messages);
+      this.messages = await this.extendDataStructure(messages);
+      this.$emit("new_messages", this.messages);
+      this.$emit("hide_explanation", true);
     },
 
     readChatFile(zipData) {
@@ -115,16 +104,12 @@ export default {
 
     processFile(file) {
       const reader = new FileReader();
-      // if (file.type.indexOf("zip") >= 0)
       if (/^application\/(?:x-)?zip(?:-compressed)?$/.test(file.type)) {
-        console.log("ZIP");
         reader.addEventListener("loadend", this.zipLoadEndHandler);
         reader.readAsArrayBuffer(file);
       } else if (file.type === "text/plain") {
         reader.addEventListener("loadend", this.txtLoadEndHandler);
         reader.readAsText(file);
-      } else {
-        showError(`File type ${file.type} not supported`);
       }
     },
 
