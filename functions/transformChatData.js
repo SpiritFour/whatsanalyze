@@ -3,10 +3,11 @@ import stopwords_de from "stopwords-de";
 import stopwords from "stopwords-en";
 
 export class Chat {
-  static remove_named_messages(chatObject, name = "system") {
-    return chatObject.filter(
-      (message) => message.author.toLowerCase() !== name
-    );
+  static removeSystemMessages(chatObject) {
+    // remove the first message with slice ("this chat is encrypted") and all system messages via the filter.
+    return chatObject
+      .slice(1)
+      .filter((message) => message.author.toLowerCase() !== "system");
   }
 
   static groupBy(chatObject, key) {
@@ -114,7 +115,7 @@ export class Chat {
     // max number of words shown in word cloud
     this._maxWordsWordCloud = maxWordsWordCloud;
     // here we remove messages (i.e. system messages)
-    this.filterdChatObject = Chat.remove_named_messages(chatObject);
+    this.filterdChatObject = Chat.removeSystemMessages(chatObject);
     //number of persons in chat
     this.numPersonsInChat = Object.entries(
       Chat.getMessagesPerPerson(this.filterdChatObject)
