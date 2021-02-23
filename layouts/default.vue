@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <div class="nav">
+    <div class="nav pa-16">
       <nuxt-link to="/">
         <h1 style="color: black; font-size: 2em">
           <img
@@ -41,7 +41,7 @@
   </v-app>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 hr {
   margin: auto;
   margin-top: 1em;
@@ -71,7 +71,6 @@ a:hover {
   height: 10vh;
   width: 100%;
   background: $c-blue-accent;
-  padding: 5% !important;
 }
 
 .mobile {
