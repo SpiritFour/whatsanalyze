@@ -384,7 +384,6 @@ export class Chat {
   }
 
   getAllWords() {
-    console.log(this.sortedFreqDict);
     return this.sortedFreqDict
       .filter(
         (word) =>
@@ -400,7 +399,7 @@ export class Chat {
               "<media",
               "omitted>",
               "‎image",
-              "media",
+              "omitted",
             ].includes(word[0].toLowerCase())
           ) && word[1] > 1
       )
