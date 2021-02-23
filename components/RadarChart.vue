@@ -31,10 +31,6 @@ export default {
           legend: {
             position: "bottom",
           },
-          title: {
-            display: true,
-            text: ["Messages per time unit"],
-          },
         };
       },
     },
