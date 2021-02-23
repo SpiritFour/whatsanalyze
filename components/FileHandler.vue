@@ -71,16 +71,15 @@ export default {
       zip
         .then(this.readChatFile)
         .then((text) => parseString(text, { parseAttachments: true }))
-        .then(this.helper);
+        .then(this.updateMessages);
     },
 
     txtLoadEndHandler(e) {
-      parseString(e.target.result).then(this.helper);
+      parseString(e.target.result).then(this.updateMessages);
     },
 
-    async helper(messages) {
-      console.log(messages);
-      this.messages = await this.extendDataStructure(messages);
+    updateMessages(messages) {
+      this.messages = this.extendDataStructure(messages);
       this.$emit("new_messages", this.messages);
       this.$emit("hide_explanation", true);
     },
