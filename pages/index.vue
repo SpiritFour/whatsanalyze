@@ -28,12 +28,11 @@
 
     <v-container v-show="!isShowingChats" class="pt-16">
       <export-explainer />
-      <HowItWorks />
       <CtaMiddle />
+      <Faq />
       <Testimonials />
       <Content :page="page" />
       <CtaBottom />
-      <Faq />
     </v-container>
 
     <v-container>
