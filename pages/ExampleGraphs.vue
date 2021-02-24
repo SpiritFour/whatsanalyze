@@ -39,10 +39,10 @@
     <v-col v-else>
       <v-carousel
         :continuous="true"
-        :cycle="true"
+        :cycle="false"
         :show-arrows="false"
         hide-delimiter-background
-        height="350"
+        height="100vw"
       >
         <v-carousel-item>
           <LineChart
@@ -96,8 +96,8 @@ export default {
           position: "top",
           labels: {
             fontStyle: "bold",
-            fontColor: "black",
-            fontSize: 15,
+            fontColor: "rgb(51,51,51)",
+            fontSize: 10,
           },
         },
 
@@ -105,7 +105,7 @@ export default {
           xAxes: [
             {
               ticks: {
-                fontColor: "black",
+                fontColor: "rgb(51,51,51)",
                 fontStyle: "bold",
                 fontSize: 11,
               },
@@ -115,24 +115,16 @@ export default {
               },
               gridLines: {
                 display: false,
-                zeroLineColor: "#ffffff",
               },
             },
           ],
           yAxes: [
             {
               ticks: {
-                fontStyle: "bold",
-
-                fontColor: "black",
-                fontSize: 11,
-                beginAtZero: true,
+                display: false,
               },
               scaleLabel: {
-                display: true,
-                labelString: "Messages",
-                fontColor: "black",
-                fontStyle: "bold",
+                display: false,
               },
               gridLines: {
                 display: false,
@@ -151,6 +143,11 @@ export default {
         maintainAspectRatio: true,
         legend: {
           position: "top",
+          labels: {
+            fontStyle: "bold",
+            fontColor: "rgb(51,51,51)",
+            fontSize: 10,
+          },
         },
       },
       radarchartHeaderChartOptions: {
@@ -159,14 +156,26 @@ export default {
         scale: {
           angleLines: {
             // display: false,
+            color: "rgb(51,51,51)",
           },
           ticks: {
-            beginAtZero: true,
-            precision: 0,
+            display: false,
+          },
+          gridLines: {
+            color: "rgb(51,51,51)",
+          },
+
+          pointLabels: {
+            fontColor: "rgb(51,51,51)",
           },
         },
         legend: {
           position: "top",
+          labels: {
+            fontStyle: "bold",
+            fontColor: "rgb(51,51,51)",
+            fontSize: 10,
+          },
         },
       },
       barchartHeaderChartOptions: {
@@ -174,12 +183,20 @@ export default {
         maintainAspectRatio: true,
         legend: {
           position: "top",
+          labels: {
+            fontStyle: "bold",
+            fontColor: "rgb(51,51,51)",
+            fontSize: 10,
+          },
         },
         scales: {
           xAxes: [
             {
               gridLines: {
                 display: false,
+              },
+              ticks: {
+                fontColor: "rgb(51,51,51)",
               },
             },
           ],
@@ -188,10 +205,15 @@ export default {
               scaleLabel: {
                 display: true,
                 labelString: "Messages",
+                fontColor: "rgb(51,51,51)",
+              },
+              gridLines: {
+                display: false,
               },
               ticks: {
                 beginAtZero: true,
                 precision: 0,
+                display: false,
               },
             },
           ],
@@ -204,6 +226,10 @@ export default {
 <style lang="scss">
 .col {
   padding: 1em !important;
+}
+
+.v-image {
+  margin-bottom: 50px;
 }
 
 @media (min-width: 760px) {

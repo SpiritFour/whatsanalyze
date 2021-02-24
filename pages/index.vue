@@ -9,7 +9,7 @@
           @hide_explanation="isShowingChats = $event"
         />
       </v-col>
-      <v-col cols="12" md="6" class="px-8 px-md-16 pb-8">
+      <v-col cols="12" md="6" class="px-8 px-md-0">
         <ExampleGraphs :chat_="chat_" />
       </v-col>
     </v-row>
