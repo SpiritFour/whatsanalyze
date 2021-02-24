@@ -1,6 +1,6 @@
 <template>
   <div
-    class="drop-container pa-md-16 pa-4"
+    class="drop-container pa-4 pa-md-0"
     @dragover.prevent="dragOver"
     @dragleave.prevent="dragLeave"
     @drop.prevent="drop($event)"
@@ -21,8 +21,11 @@
           <br />
           Drop it now!
         </p>
-        <p v-if="!isDragging && !wrongFile && !processingFile">
-          <v-icon size="2em" color="#21a68d"> mdi-file </v-icon>
+        <div
+          class="pa-3 text-body-1 text-md-h5"
+          v-if="!isDragging && !wrongFile && !processingFile"
+        >
+          <v-icon size="2em"> mdi-file </v-icon>
           <br />
 
           <span v-if="isSuccess">Done! Look at your analysis below. </span>
@@ -38,7 +41,7 @@
 
           <span v-show="textSource">another file to add it</span>
           <span v-show="!textSource"> your Whats App .txt file </span>
-        </p>
+        </div>
         <p v-show="processingFile">Processing your file...</p>
       </div>
     </label>
@@ -190,11 +193,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-p {
-  font-size: 2em;
-  padding: 2em;
-}
-
 .smallFont p {
   font-size: 1.1em !important;
 }
@@ -221,17 +219,9 @@ p {
   transition: background-color 0.2s ease-in-out;
   font-family: sans-serif;
 
-  // shadows
-  box-shadow: 5px 5px 10px $c-dark;
-  text-shadow: 2px 2px 2px $c-dark;
-
-  // colors
-  background-color: $c-blue-accent-dark;
-  color: $c-blue-accent;
-
   // outline
-  outline: 4px dashed $c-dark;
-  outline-offset: -10px;
+  border: 2px dashed $c-dark;
+  border-radius: 20px;
 }
 
 textarea {

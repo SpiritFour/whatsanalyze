@@ -1,11 +1,26 @@
 <template>
   <div>
-    <HeaderCta :chat_="chat_" />
-
-    <FileHandler
-      @new_messages="chat_ = new Chat($event)"
-      @hide_explanation="isShowingChats = $event"
-    />
+    <v-row no-gutters class="top-color">
+      <v-col cols="12" md="6" class="px-8 px-md-16 pb-8">
+        <HeaderCta />
+        <FileHandler
+          v-if="$vuetify.breakpoint.mdAndUp"
+          @new_messages="chat_ = new Chat($event)"
+          @hide_explanation="isShowingChats = $event"
+        />
+      </v-col>
+      <v-col cols="12" md="6" class="px-8 px-md-0">
+        <ExampleGraphs :chat_="chat_" />
+      </v-col>
+    </v-row>
+    <v-row v-if="$vuetify.breakpoint.smAndDown" class="top-color ma-0">
+      <v-col>
+        <FileHandler
+          @new_messages="chat_ = new Chat($event)"
+          @hide_explanation="isShowingChats = $event"
+        />
+      </v-col>
+    </v-row>
 
     <v-container v-show="!isShowingChats" class="pt-16">
       <HowItWorks />
@@ -24,8 +39,10 @@
 
 <script>
 import { Chat } from "~/functions/transformChatData";
+import ExampleGraphs from "~/pages/ExampleGraphs";
 
 export default {
+  components: { ExampleGraphs },
   async asyncData({ $content }) {
     const page = await $content("home").fetch();
     return {
@@ -44,6 +61,9 @@ export default {
 </script>
 
 <style lang="scss">
+.top-color {
+  background-color: $c-blue-accent;
+}
 .v-btn {
   text-transform: none !important;
 }
