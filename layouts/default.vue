@@ -1,18 +1,20 @@
 <template>
   <v-app>
-    <div class="nav pl-8 pl-md-16 py-2">
-      <nuxt-link to="/">
-        <h1 style="color: black; font-size: 2em">
-          <img
-            src="@/assets/whatsanalyze-logo-black.png"
-            height="40px"
-            alt="chat icon"
-            style="vertical-align: sub"
-            class="pr-3"
-          />
-          <span v-show="$vuetify.breakpoint.mdAndUp">WhatsAnalyze</span>
-        </h1>
-      </nuxt-link>
+    <div class="nav pl-xs-8 pl-0 py-8">
+      <v-container>
+        <nuxt-link to="/">
+          <h1 style="color: black; font-size: 2em" class="pl-md-16">
+            <img
+              src="@/assets/whatsanalyze-logo-black.png"
+              height="40px"
+              alt="chat icon"
+              style="vertical-align: sub"
+              class="pr-3"
+            />
+            WhatsAnalyze
+          </h1>
+        </nuxt-link>
+      </v-container>
     </div>
 
     <v-main>
