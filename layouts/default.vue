@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <div class="nav pa-16">
+    <div class="nav pl-8 pl-md-16 py-2">
       <nuxt-link to="/">
         <h1 style="color: black; font-size: 2em">
           <img
@@ -8,6 +8,7 @@
             height="40px"
             alt="chat icon"
             style="vertical-align: sub"
+            class="pr-3"
           />
           <span v-show="$vuetify.breakpoint.mdAndUp">WhatsAnalyze</span>
         </h1>
@@ -68,7 +69,6 @@ a:hover {
 }
 
 .nav {
-  height: 10vh;
   width: 100%;
   background: $c-blue-accent;
 }
