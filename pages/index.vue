@@ -8,6 +8,7 @@
     />
 
     <v-container v-show="!isShowingChats" class="pt-16">
+      <export-explainer />
       <HowItWorks />
       <CtaMiddle />
       <Testimonials />
@@ -23,9 +24,11 @@
 </template>
 
 <script>
+import ExportExplainer from "~/components/ExportExplainer.vue";
 import { Chat } from "~/functions/transformChatData";
 
 export default {
+  components: { ExportExplainer },
   async asyncData({ $content }) {
     const page = await $content("home").fetch();
     return {
