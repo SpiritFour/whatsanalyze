@@ -1,54 +1,48 @@
 <template>
   <div
-    class="drop-container pa-md-16 pa-4"
+    class="drop-container pa-4 pa-md-0"
     @dragover.prevent="dragOver"
     @dragleave.prevent="dragLeave"
     @drop.prevent="drop($event)"
   >
     <label style="cursor: pointer" for="uploadmytextfile">
-      <div class="drop-shadow">
+      <div
+        class="drop"
+        :class="{
+          isDragging: this.isDragging,
+          smallFont: $vuetify.breakpoint.smAndDown,
+        }"
+      >
+        <input type="file" id="uploadmytextfile" @change="requestUploadFile" />
+
+        <p v-if="wrongFile">Wrong file format please upload a .txt!</p>
+        <p v-if="isDragging" class="drop-instruction">
+          <v-icon size="2em">mdi-arrow-down-drop-circle</v-icon>
+          <br />
+          Drop it now!
+        </p>
         <div
-          class="drop"
-          :class="{
-            isDragging: this.isDragging,
-            smallFont: $vuetify.breakpoint.smAndDown,
-          }"
+          class="pa-3 text-body-1 text-md-h5"
+          v-if="!isDragging && !wrongFile && !processingFile"
         >
-          <input
-            type="file"
-            id="uploadmytextfile"
-            @change="requestUploadFile"
-          />
+          <v-icon size="2em"> mdi-file </v-icon>
+          <br />
 
-          <p v-if="wrongFile">Wrong file format please upload a .txt!</p>
-          <p v-if="isDragging" class="drop-instruction">
-            <v-icon size="2em">mdi-arrow-down-drop-circle</v-icon>
-            <br />
-            Drop it now!
-          </p>
-          <div
-            class="pa-3 text-body-1 text-md-h5"
-            v-if="!isDragging && !wrongFile && !processingFile"
-          >
-            <v-icon size="2em"> mdi-file </v-icon>
-            <br />
+          <span v-if="isSuccess">Done! Look at your analysis below. </span>
 
-            <span v-if="isSuccess">Done! Look at your analysis below. </span>
+          <span v-if="$vuetify.breakpoint.mdAndUp">
+            <strong>Drag </strong>
+            (or select)
+          </span>
 
-            <span v-if="$vuetify.breakpoint.mdAndUp">
-              <strong>Drag </strong>
-              (or select)
-            </span>
+          <span v-if="$vuetify.breakpoint.smAndDown">
+            <strong style="text-decoration: underline">Pick </strong>
+          </span>
 
-            <span v-if="$vuetify.breakpoint.smAndDown">
-              <strong style="text-decoration: underline">Pick </strong>
-            </span>
-
-            <span v-show="textSource">another file to add it</span>
-            <span v-show="!textSource"> your Whats App .txt file </span>
-          </div>
-          <p v-show="processingFile">Processing your file...</p>
+          <span v-show="textSource">another file to add it</span>
+          <span v-show="!textSource"> your Whats App .txt file </span>
         </div>
+        <p v-show="processingFile">Processing your file...</p>
       </div>
     </label>
   </div>
@@ -227,13 +221,7 @@ export default {
 
   // outline
   border: 2px dashed $c-dark;
-  border-radius: 7px;
-}
-
-.drop-shadow {
-  box-shadow: 0 0 20px $c-dark inset;
-  border-radius: 10px;
-  padding: 1em;
+  border-radius: 20px;
 }
 
 textarea {

@@ -1,11 +1,30 @@
 <template>
   <div>
-    <HeaderCta :chat_="chat_" />
-
-    <FileHandler
-      @new_messages="chat_ = new Chat($event)"
-      @hide_explanation="isShowingChats = $event"
-    />
+    <v-row no-gutters class="top-color">
+      <v-col cols="12" md="6" class="px-16 pb-8">
+        <HeaderCta />
+        <FileHandler
+          v-if="$vuetify.breakpoint.mdAndUp"
+          @new_messages="chat_ = new Chat($event)"
+          @hide_explanation="isShowingChats = $event"
+        />
+      </v-col>
+      <v-col cols="12" md="6" class="px-16 pl-md-0">
+        <LineChart
+          class="header-right"
+          :chartdata="chat_"
+          :options="linegraphHeaderChartOptions"
+        />
+      </v-col>
+    </v-row>
+    <v-row v-if="$vuetify.breakpoint.smAndDown" class="top-color ma-0">
+      <v-col>
+        <FileHandler
+          @new_messages="chat_ = new Chat($event)"
+          @hide_explanation="isShowingChats = $event"
+        />
+      </v-col>
+    </v-row>
 
     <v-container v-show="!isShowingChats" class="pt-16">
       <HowItWorks />
@@ -37,6 +56,63 @@ export default {
     return {
       isShowingChats: false,
       chat_: new Chat(),
+      linegraphHeaderChartOptions: {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          position: "bottom",
+          labels: {
+            fontStyle: "bold",
+            fontColor: "black",
+            fontSize: 15,
+          },
+        },
+
+        scales: {
+          xAxes: [
+            {
+              ticks: {
+                fontColor: "black",
+                fontStyle: "bold",
+                fontSize: 11,
+              },
+              type: "time",
+              time: {
+                unit: "month",
+              },
+              gridLines: {
+                display: false,
+                zeroLineColor: "#ffffff",
+              },
+            },
+          ],
+          yAxes: [
+            {
+              ticks: {
+                fontStyle: "bold",
+
+                fontColor: "black",
+                fontSize: 11,
+                beginAtZero: true,
+              },
+              scaleLabel: {
+                display: true,
+                labelString: "Messages",
+                fontColor: "black",
+                fontStyle: "bold",
+              },
+              gridLines: {
+                display: false,
+              },
+            },
+          ],
+        },
+        elements: {
+          line: {
+            tension: 0,
+          },
+        },
+      },
     };
   },
   methods: { Chat },
@@ -44,6 +120,9 @@ export default {
 </script>
 
 <style lang="scss">
+.top-color {
+  background-color: $c-blue-accent;
+}
 .v-btn {
   text-transform: none !important;
 }
