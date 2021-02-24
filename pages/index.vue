@@ -12,7 +12,7 @@
             />
           </v-col>
           <v-col cols="12" md="6" class="px-8 px-md-0">
-            <ExampleGraphs :chat_="chat_" />s
+            <ExampleGraphs :chat_="chat_" />
           </v-col>
         </v-row>
         <v-row v-if="$vuetify.breakpoint.smAndDown" class="top-color ma-0">
