@@ -23,15 +23,13 @@
     </v-row>
 
     <v-container v-show="!isShowingChats" class="pt-16">
-      <export-explainer />
+      <ExportExplainer />
       <HowItWorks />
       <CtaMiddle />
       <Testimonials />
-      <Content :page="page" />
       <CtaBottom />
       <Faq />
     </v-container>
-
     <v-container>
       <Results :chat_="chat_" />
     </v-container>
@@ -39,12 +37,11 @@
 </template>
 
 <script>
-import ExportExplainer from "~/components/ExportExplainer.vue";
 import { Chat } from "~/functions/transformChatData";
 import ExampleGraphs from "~/pages/ExampleGraphs";
 
 export default {
-  components: { ExportExplainer },
+  components: { ExampleGraphs },
   async asyncData({ $content }) {
     const page = await $content("home").fetch();
     return {
