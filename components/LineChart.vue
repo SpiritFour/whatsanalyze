@@ -13,6 +13,7 @@ export default {
           pointHitRadius: 5,
           responsive: true,
           maintainAspectRatio: false,
+          lineTension: 1,
           legend: {
             position: "bottom",
           },
