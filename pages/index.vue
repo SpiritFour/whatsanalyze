@@ -35,7 +35,7 @@
       <CtaBottom />
     </v-container>
 
-    <v-container>
+    <v-container v-show="isShowingChats">
       <Results :chat_="chat_" />
     </v-container>
   </div>
