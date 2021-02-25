@@ -1,4 +1,5 @@
 import colors from "vuetify/es5/util/colors";
+import fs from "fs";
 // import sass from "sass-loader";
 
 export default {
@@ -72,5 +73,13 @@ export default {
   },
   server: {
     host: "0.0.0.0",
+    https:
+      // eslint-disable-next-line no-undef
+      process.env.NODE_ENV !== "production"
+        ? {
+            key: fs.readFileSync("0.0.0.0.key"),
+            cert: fs.readFileSync("0.0.0.0.crt"),
+          }
+        : {},
   },
 };

@@ -21,3 +21,10 @@ Search for prettier and eslint in pycharm to set it up on saving a file.
 You can also add .vue there for running stuff on Vue files as well.
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+## HTTPS Certificate
+
+https://letsencrypt.org/docs/certificates-for-localhost/
+```bash
+openssl req -x509 -out 0.0.0.0.crt -keyout 0.0.0.0.key -newkey rsa:2048 -nodes -sha256 -subj '/CN=0.0.0.0' -extensions EXT -config <( printf "[dn]\nCN=0.0.0.0\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:0.0.0.0\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
+```
