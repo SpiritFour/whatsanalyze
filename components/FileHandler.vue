@@ -131,7 +131,6 @@ export default {
       this.isSuccess = false;
       this.wrongFile = false;
 
-      console.log("Reset");
 
       // Page freezes during file read, we need to wait for data to propagate to DOM
       setTimeout(() => {
