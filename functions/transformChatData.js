@@ -131,6 +131,9 @@ export class Chat {
     this._lineGraphData = Promise.resolve(this._getLineGraphData());
     this._funfacts = Promise.resolve(this._getFunFacts());
     this._allWords = Promise.resolve(this._getAllWords());
+    this._hourlyData = Promise.resolve(this._getHourlyData());
+    this._dailyData = Promise.resolve(this._getDailyData());
+    this._weeklyData = Promise.resolve(this._getWeeklyData());
   }
 
   get sortedFreqDict() {
@@ -237,7 +240,7 @@ export class Chat {
     return this._funfacts;
   }
 
-  getHourlyData(opacity = 1) {
+  _getHourlyData(opacity = 1) {
     return {
       labels: [
         "0AM",
@@ -276,7 +279,11 @@ export class Chat {
     };
   }
 
-  getDailyData(opacity = 1) {
+  getHourlyData() {
+    return this._hourlyData;
+  }
+
+  _getDailyData(opacity = 1) {
     return {
       labels: [
         "Monday",
@@ -298,7 +305,11 @@ export class Chat {
     };
   }
 
-  getWeeklyData(opacity = 1) {
+  getDailyData() {
+    return this._dailyData;
+  }
+
+  _getWeeklyData(opacity = 1) {
     return {
       labels: [
         "January",
@@ -323,6 +334,10 @@ export class Chat {
         };
       }),
     };
+  }
+
+  getWeeklyData() {
+    return this._weeklyData;
   }
 
   _getLineGraphData() {

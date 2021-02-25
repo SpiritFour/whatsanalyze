@@ -58,11 +58,17 @@ export default {
   methods: {
     updateGraph() {
       if (this.dataGrouping === "hourly") {
-        this.renderChart(this.chartdata.getHourlyData(), this.options);
+        this.chartdata
+          .getHourlyData()
+          .then((x) => this.renderChart(x, this.options));
       } else if (this.dataGrouping === "daily") {
-        this.renderChart(this.chartdata.getDailyData(), this.options);
+        this.chartdata
+          .getDailyData()
+          .then((x) => this.renderChart(x, this.options));
       } else {
-        this.renderChart(this.chartdata.getWeeklyData(), this.options);
+        this.chartdata
+          .getWeeklyData()
+          .then((x) => this.renderChart(x, this.options));
       }
     },
   },
