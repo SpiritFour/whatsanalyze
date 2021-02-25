@@ -63,7 +63,6 @@ export default {
   },
   methods: {
     updateGraph: function () {
-      console.log(this.options);
       var lineGraphData = this.chartdata.getLineGraphData();
       // eslint-disable-next-line vue/no-mutating-props
       this.options.scales.xAxes[0].time.unit = lineGraphData[1];
