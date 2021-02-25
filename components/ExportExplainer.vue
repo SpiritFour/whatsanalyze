@@ -16,7 +16,7 @@
         <div>
           <v-carousel
             v-model="model"
-            continuous="false"
+            :continuous="false"
             hide-delimiter-background
             hide-delimiters
             show-arrows-on-hover

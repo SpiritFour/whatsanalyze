@@ -1,10 +1,14 @@
 <template>
   <div
-    class="drop-container pa-4 pa-md-0 pt-lg-16"
+    class="drop-container pa-4 pa-md-0 mb-8"
     @dragover.prevent="dragOver"
     @dragleave.prevent="dragLeave"
     @drop.prevent="drop($event)"
   >
+    <v-icon size="50" color="rgba(0,0,0,0.8)" class="py-2">
+      mdi-chevron-down
+    </v-icon>
+
     <label style="cursor: pointer" for="uploadmytextfile">
       <div
         class="drop"
@@ -23,12 +27,12 @@
         </p>
         <div
           class="pa-3 text-body-1 text-md-h5"
-          v-if="!isDragging && !wrongFile && !processingFile"
+          v-if="!isDragging && !wrongFile && !processing"
         >
           <v-icon size="2em"> mdi-file </v-icon>
           <br />
 
-          <span v-if="isSuccess">Done! Look at your analysis below. </span>
+          <div v-if="isSuccess">Done! Look at your analysis below.</div>
 
           <span v-if="$vuetify.breakpoint.mdAndUp">
             <strong>Drag</strong> or <strong>select</strong>
@@ -38,12 +42,14 @@
             <strong style="text-decoration: underline">Select </strong>
           </span>
 
-          <span v-show="messages">another file to analyze it.</span>
-          <span v-show="!messages">
+          <span v-if="isSuccess">another file to analyze it.</span>
+          <span v-if="!isSuccess">
             your Whats App .txt file into this box.</span
           >
         </div>
-        <p v-show="processingFile">Processing your file...</p>
+        <div class="pa-3 text-body-1 text-md-h5" v-if="processing">
+          Processing your file...
+        </div>
       </div>
     </label>
   </div>
@@ -59,7 +65,7 @@ export default {
     return {
       isDragging: false,
       wrongFile: false,
-      processingFile: false,
+      processing: false,
       isSuccess: false,
       messages: [],
     };
@@ -84,6 +90,8 @@ export default {
       this.messages = this.extendDataStructure(messages);
       this.$emit("new_messages", this.messages);
       this.$emit("hide_explanation", true);
+      this.processing = false;
+      this.isSuccess = true;
     },
 
     readChatFile(zipData) {
@@ -104,14 +112,19 @@ export default {
     },
 
     processFile(file) {
-      const reader = new FileReader();
-      if (/^application\/(?:x-)?zip(?:-compressed)?$/.test(file.type)) {
-        reader.addEventListener("loadend", this.zipLoadEndHandler);
-        reader.readAsArrayBuffer(file);
-      } else if (file.type === "text/plain") {
-        reader.addEventListener("loadend", this.txtLoadEndHandler);
-        reader.readAsText(file);
-      }
+      this.processing = true;
+
+      // Page freezes during file read, we need to wait for data to propagate to DOM
+      setTimeout(() => {
+        const reader = new FileReader();
+        if (/^application\/(?:x-)?zip(?:-compressed)?$/.test(file.type)) {
+          reader.addEventListener("loadend", this.zipLoadEndHandler);
+          reader.readAsArrayBuffer(file);
+        } else if (file.type === "text/plain") {
+          reader.addEventListener("loadend", this.txtLoadEndHandler);
+          reader.readAsText(file);
+        }
+      }, 50);
     },
 
     // add absolute and personal id to each entry of the data structure
@@ -135,9 +148,8 @@ export default {
     },
 
     drop(e) {
-      this.processingFile = true;
       let files = e.dataTransfer.files;
-      this.process(files);
+      this.processFile(files[0]);
     },
 
     requestUploadFile() {
@@ -174,15 +186,6 @@ export default {
 }
 
 .drop {
-  display: flex;
-  align-items: center;
-
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.2s ease-in-out;
-  font-family: sans-serif;
-
   // outline
   border: 2px dashed $c-dark;
   border-radius: 20px;
