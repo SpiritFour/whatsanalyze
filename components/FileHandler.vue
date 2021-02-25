@@ -131,7 +131,6 @@ export default {
       this.isSuccess = false;
       this.wrongFile = false;
 
-
       // Page freezes during file read, we need to wait for data to propagate to DOM
       setTimeout(() => {
         const reader = new FileReader();
@@ -215,7 +214,7 @@ export default {
 
   // animation
   animation-name: attention;
-  animation-duration: 4s;
+  animation-duration: 2s;
   animation-iteration-count: infinite;
 }
 
