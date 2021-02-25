@@ -4,8 +4,8 @@
       Analyze your WhatsApp Chat in seconds
     </div>
     <div class="text-h6 text-lg-h4">
-      Reveal insights - get statistics of your WhatsApp communication all
-      generated locally on your device.
+      Reveal insights & get statistics of your WhatsApp chats generated on your
+      device.
     </div>
     <br />
     <p

@@ -11,7 +11,7 @@
 
     <label style="cursor: pointer" for="uploadmytextfile">
       <div
-        class="drop"
+        class="drop pa-3"
         :class="{
           isDragging: isDragging,
           smallFont: $vuetify.breakpoint.smAndDown,
@@ -20,41 +20,49 @@
       >
         <input type="file" id="uploadmytextfile" @change="requestUploadFile" />
         <!-- Wrong File -->
-        <div v-if="wrongFile" class="text-body-1">
+        <div v-show="wrongFile" class="text-body-1 text-md-h5 w-100">
           <strong>Wrong file format!</strong> <br />
           Please upload the <strong>.txt</strong> or<strong>.zip</strong> file
           you get when exporting your chat!
         </div>
         <!-- is Dragging -->
-        <div v-if="isDragging" class="text-h4 py-2">
+        <div v-show="isDragging" class="text-h4 py-2 w-100">
           <br />
           Drop file now!
         </div>
         <!-- Standard State -->
         <div
-          class="pa-3 text-body-1 text-md-h5"
-          v-if="!isDragging && !wrongFile && !processing"
+          class="text-body-1 text-md-h5 w-100"
+          v-show="!isDragging && !wrongFile && !processing"
         >
           <v-icon size="2em"> mdi-file </v-icon>
           <br />
 
-          <div v-if="isSuccess">Done! Look at your analysis below.</div>
+          <div v-if="isSuccess">
+            <strong>Done!</strong> <br />
+            Look at your analysis below.
+          </div>
 
-          <span v-if="$vuetify.breakpoint.mdAndUp">
-            <strong>Drag</strong> or <strong>select</strong>
-          </span>
+          <div :class="{ 'text-caption': isSuccess }">
+            <span v-if="$vuetify.breakpoint.mdAndUp">
+              <strong>Drag</strong> or <strong>select</strong>
+            </span>
 
-          <span v-if="$vuetify.breakpoint.smAndDown">
-            <strong style="text-decoration: underline">Select </strong>
-          </span>
+            <span v-if="$vuetify.breakpoint.smAndDown">
+              <strong style="text-decoration: underline">Select </strong>
+            </span>
 
-          <span v-if="isSuccess">another file to analyze it.</span>
-          <span v-if="!isSuccess">
-            your Whats App .txt file into this box.</span
-          >
+            <span v-if="isSuccess">another file to analyze it.</span>
+            <span v-if="!isSuccess">
+              your Whats App .txt file into this box.</span
+            >
+          </div>
         </div>
-        <div class="pa-3 text-body-1 text-md-h5" v-if="processing">
-          Processing your file...
+        <br />
+        <div class="text-body-1 text-md-h5 w-100" v-show="processing">
+          <img src="@/assets/loader.svg" height="40" width="40" />
+          <br />
+          <strong>Processing</strong> your file...
         </div>
       </div>
     </label>
@@ -121,6 +129,9 @@ export default {
       this.isDragging = false;
       this.processing = true;
       this.isSuccess = false;
+      this.wrongFile = false;
+
+      console.log("Reset");
 
       // Page freezes during file read, we need to wait for data to propagate to DOM
       setTimeout(() => {
@@ -136,7 +147,7 @@ export default {
           this.processing = false;
           this.isSuccess = false;
         }
-      }, 50);
+      }, 100);
     },
 
     // add absolute and personal id to each entry of the data structure
@@ -181,6 +192,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.w-100 {
+  width: 100%;
+}
+
 .smallFont p {
   font-size: 1.1em !important;
 }
@@ -230,10 +245,28 @@ input[type="file"] {
 
 .isDragging {
   box-shadow: 0px 0px 40px black !important;
-
   border-style: solid;
   background: $c-dark;
   text-shadow: chartreuse;
   color: $c-blue-accent !important;
+}
+
+.isSuccess {
+  // animation
+  animation-name: done;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+}
+
+@keyframes done {
+  0% {
+    background: $c-blue-accent;
+  }
+  50% {
+    background: greenyellow;
+  }
+  100% {
+    background: $c-blue-accent;
+  }
 }
 </style>
