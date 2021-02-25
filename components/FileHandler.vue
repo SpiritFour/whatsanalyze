@@ -13,18 +13,24 @@
       <div
         class="drop"
         :class="{
-          isDragging: this.isDragging,
+          isDragging: isDragging,
           smallFont: $vuetify.breakpoint.smAndDown,
+          isSuccess: isSuccess,
         }"
       >
         <input type="file" id="uploadmytextfile" @change="requestUploadFile" />
-
-        <p v-if="wrongFile">Wrong file format please upload a .txt!</p>
-        <p v-if="isDragging" class="drop-instruction">
-          <v-icon size="2em">mdi-arrow-down-drop-circle</v-icon>
+        <!-- Wrong File -->
+        <div v-if="wrongFile" class="text-body-1">
+          <strong>Wrong file format!</strong> <br />
+          Please upload the <strong>.txt</strong> or<strong>.zip</strong> file
+          you get when exporting your chat!
+        </div>
+        <!-- is Dragging -->
+        <div v-if="isDragging" class="text-h4 py-2">
           <br />
-          Drop it now!
-        </p>
+          Drop file now!
+        </div>
+        <!-- Standard State -->
         <div
           class="pa-3 text-body-1 text-md-h5"
           v-if="!isDragging && !wrongFile && !processing"
@@ -112,7 +118,9 @@ export default {
     },
 
     processFile(file) {
+      this.isDragging = false;
       this.processing = true;
+      this.isSuccess = false;
 
       // Page freezes during file read, we need to wait for data to propagate to DOM
       setTimeout(() => {
@@ -123,6 +131,10 @@ export default {
         } else if (file.type === "text/plain") {
           reader.addEventListener("loadend", this.txtLoadEndHandler);
           reader.readAsText(file);
+        } else {
+          this.wrongFile = true;
+          this.processing = false;
+          this.isSuccess = false;
         }
       }, 50);
     },
@@ -178,14 +190,11 @@ export default {
   background: $c-blue-accent;
 }
 
-.drop-instruction {
-  font-size: 3em !important;
-  color: $c-dark !important;
-  font-weight: bold;
-  text-shadow: none !important;
-}
-
 .drop {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  min-height: 150px;
   // outline
   border: 2px dashed $c-dark;
   border-radius: 20px;
@@ -220,7 +229,11 @@ input[type="file"] {
 }
 
 .isDragging {
-  background-color: $c-yellow;
-  outline: 10px dashed $c-blue-accent-dark;
+  box-shadow: 0px 0px 40px black !important;
+
+  border-style: solid;
+  background: $c-dark;
+  text-shadow: chartreuse;
+  color: $c-blue-accent !important;
 }
 </style>
