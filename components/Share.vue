@@ -7,8 +7,11 @@
       fab
       dark
       style="position: absolute; right: 0; top: 0"
-      ><v-icon size="35">mdi-download</v-icon></v-btn
+      :loading="loading"
     >
+      <v-icon size="35" v-if="canShare">mdi-share</v-icon>
+      <v-icon size="35" v-else>mdi-download</v-icon>
+    </v-btn>
   </v-container>
 </template>
 

@@ -17,34 +17,42 @@
     <v-row>
       <v-col cols="6">
         <div class="text-h4 font-weight-bold">Person</div>
-        <ChartsDonughtChart :chartdata="chat_" class="py-10" />
+        <Share>
+          <ChartsDonughtChart :chartdata="chat_" class="py-10" />
+        </Share>
       </v-col>
       <v-col cols="6">
         <div class="text-h4 font-weight-bold">Month</div>
-        <ChartsRadarChart
-          :chartdata="chat_"
-          dataGrouping="weekly"
-          class="py-10"
-        />
+        <Share>
+          <ChartsRadarChart
+            :chartdata="chat_"
+            dataGrouping="weekly"
+            class="py-10"
+          />
+        </Share>
       </v-col>
     </v-row>
 
     <v-row>
       <v-col cols="6">
         <div class="text-h4 font-weight-bold">Time of Day</div>
-        <ChartsRadarChart
-          :chartdata="chat_"
-          dataGrouping="hourly"
-          class="py-10"
-        />
+        <Share>
+          <ChartsRadarChart
+            :chartdata="chat_"
+            dataGrouping="hourly"
+            class="py-10"
+          />
+        </Share>
       </v-col>
       <v-col cols="6">
         <div class="text-h4 font-weight-bold">Weekday</div>
-        <ChartsRadarChart
-          :chartdata="chat_"
-          dataGrouping="daily"
-          class="py-10"
-        />
+        <Share>
+          <ChartsRadarChart
+            :chartdata="chat_"
+            dataGrouping="daily"
+            class="py-10"
+          />
+        </Share>
       </v-col>
     </v-row>
 
