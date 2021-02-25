@@ -151,6 +151,13 @@ export class Chat {
   set groupAfter(groupAfter) {
     this._groupAfter = groupAfter;
     this._messagesPerPerson = null;
+
+    this._lineGraphData = Promise.resolve(this._getLineGraphData());
+    this._funfacts = Promise.resolve(this._getFunFacts());
+    // this._allWords = Promise.resolve(this._getAllWords());
+    this._hourlyData = Promise.resolve(this._getHourlyData());
+    this._dailyData = Promise.resolve(this._getDailyData());
+    this._weeklyData = Promise.resolve(this._getWeeklyData());
   }
 
   _getMessagesPerPerson() {

@@ -74,6 +74,7 @@ export default {
       handler() {
         this.updateGraph();
       },
+      deep: true,
     },
   },
   mounted() {
