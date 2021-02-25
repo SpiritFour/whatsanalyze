@@ -150,10 +150,6 @@ export class Chat {
     this._messagesPerPerson = null;
   }
 
-  set maxWordsWordCloud(maxWordsWordCloud) {
-    this._maxWordsWordCloud = maxWordsWordCloud;
-  }
-
   _getMessagesPerPerson() {
     let persons = Object.entries(
       Chat.getMessagesPerPerson(this.filterdChatObject)

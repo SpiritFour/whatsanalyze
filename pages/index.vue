@@ -3,7 +3,11 @@
     <div class="top-color">
       <v-container>
         <v-row no-gutters>
-          <v-col cols="12" md="6" class="px-0 px-md-16 pb-8">
+          <v-col
+            cols="12"
+            :md="isShowingChats ? 12 : 6"
+            class="px-0 px-md-16 pb-8"
+          >
             <HeaderCta />
             <FileHandler
               v-if="$vuetify.breakpoint.mdAndUp"
@@ -11,7 +15,7 @@
               @hide_explanation="isShowingChats = $event"
             />
           </v-col>
-          <v-col cols="12" md="6" class="px-8 px-md-0">
+          <v-col v-if="!isShowingChats" cols="12" md="6" class="px-8 px-md-0">
             <ChartsExampleGraphs :chat_="chat_" />
           </v-col>
         </v-row>
@@ -33,7 +37,7 @@
       <Testimonials />
       <CtaBottom />
     </v-container>
-    <v-container v-show="isShowingChats">
+    <v-container v-if="isShowingChats">
       <ChartsResults :chat_="chat_" />
     </v-container>
   </div>
