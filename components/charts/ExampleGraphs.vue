@@ -3,13 +3,13 @@
     <v-col v-if="$vuetify.breakpoint.smAndUp">
       <v-row>
         <v-col cols="12" sm="6">
-          <LineChart
+          <ChartsLineChart
             :chartdata="chat_"
             :options="linegraphHeaderChartOptions"
           />
         </v-col>
         <v-col cols="12" sm="6">
-          <DonughtChart
+          <ChartsDonughtChart
             :chartdata="chat_"
             :options="donoughtHeaderChartOptions"
           />
@@ -17,13 +17,13 @@
       </v-row>
       <v-row>
         <v-col cols="12" sm="6">
-          <RadarChart
+          <ChartsRadarChart
             :chartdata="chat_"
             :options="radarchartHeaderChartOptions"
           />
         </v-col>
         <v-col cols="12" sm="6">
-          <BarChart
+          <ChartsBarChart
             :chartdata="chat_"
             :options="barchartHeaderChartOptions"
             dataGrouping="hourly"
@@ -32,7 +32,7 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <WordCloud :chartdata="chat_" />
+          <ChartsWordCloud :chartdata="chat_" />
         </v-col>
       </v-row>
     </v-col>
@@ -45,24 +45,24 @@
         height="100vw"
       >
         <v-carousel-item>
-          <LineChart
+          <ChartsLineChart
             :chartdata="chat_"
             :options="linegraphHeaderChartOptions"
           />
         </v-carousel-item>
         <v-carousel-item>
-          <DonughtChart
+          <ChartsDonughtChart
             :chartdata="chat_"
             :options="donoughtHeaderChartOptions"
           />
         </v-carousel-item>
         <v-carousel-item>
-          <RadarChart
+          <ChartsRadarChart
             :chartdata="chat_"
             :options="radarchartHeaderChartOptions"
           /> </v-carousel-item
         ><v-carousel-item>
-          <BarChart
+          <ChartsBarChart
             :chartdata="chat_"
             :options="barchartHeaderChartOptions"
             dataGrouping="hourly"
@@ -71,7 +71,7 @@
           <v-container fill-height fluid>
             <v-row align="center" justify="center">
               <v-col>
-                <WordCloud :chartdata="chat_" />
+                <ChartsWordCloud :chartdata="chat_" />
               </v-col>
             </v-row>
           </v-container>

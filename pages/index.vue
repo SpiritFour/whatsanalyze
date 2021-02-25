@@ -12,7 +12,7 @@
             />
           </v-col>
           <v-col cols="12" md="6" class="px-8 px-md-0">
-            <ExampleGraphs :chat_="chat_" />
+            <ChartsExampleGraphs :chat_="chat_" />
           </v-col>
         </v-row>
         <v-row v-if="$vuetify.breakpoint.smAndDown" class="top-color ma-0">
@@ -36,7 +36,7 @@
     </v-container>
 
     <v-container v-show="isShowingChats">
-      <Results :chat_="chat_" />
+      <ChartsResults :chat_="chat_" />
     </v-container>
   </div>
 </template>
