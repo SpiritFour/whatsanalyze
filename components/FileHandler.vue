@@ -214,7 +214,7 @@ export default {
 
   // animation
   animation-name: attention;
-  animation-duration: 4s;
+  animation-duration: 2s;
   animation-iteration-count: infinite;
 }
 
