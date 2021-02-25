@@ -64,13 +64,20 @@ export default {
     };
   },
   props: ["chartdata"],
-  mounted() {
-    this.data = this.chartdata.getFunFacts();
+  methods: {
+    updateGraph() {
+      this.chartdata.getFunFacts().then((funFacts) => (this.data = funFacts));
+    },
   },
   watch: {
-    chartdata: function () {
-      this.data = this.chartdata.getFunFacts();
+    chartdata: {
+      handler() {
+        this.updateGraph();
+      },
     },
+  },
+  mounted() {
+    this.updateGraph();
   },
 };
 </script>

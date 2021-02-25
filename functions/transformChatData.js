@@ -127,6 +127,9 @@ export class Chat {
 
     // all dates of messages
     this._dates = null;
+
+    this._lineGraphData = Promise.resolve(this._getLineGraphData());
+    this._funfacts = Promise.resolve(this._getFunFacts());
   }
 
   get sortedFreqDict() {
@@ -208,7 +211,7 @@ export class Chat {
     };
   }
 
-  getFunFacts() {
+  _getFunFacts() {
     let people = this.messagesPerPerson.map((person) => {
       let name = person.name;
       let numberOfWords = Chat.getTotalNumberOfWords(person.messages);
@@ -231,6 +234,10 @@ export class Chat {
       };
     });
     return people;
+  }
+
+  getFunFacts() {
+    return this._funfacts;
   }
 
   getHourlyData(opacity = 1) {
@@ -321,7 +328,7 @@ export class Chat {
     };
   }
 
-  getLineGraphData() {
+  _getLineGraphData() {
     // calculate date ranges where messages happened
     var minDate = new Date(Math.min.apply(null, this.dates));
     var maxDate = new Date(Math.max.apply(null, this.dates));
@@ -372,6 +379,10 @@ export class Chat {
       },
       this.getLineGraphXAxis(maxDate, minDate),
     ];
+  }
+
+  getLineGraphData() {
+    return this._lineGraphData;
   }
 
   getLineGraphXAxis(maxDate, minDate) {

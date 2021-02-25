@@ -101,7 +101,7 @@ export default {
     },
 
     updateMessages(messages) {
-      this.messages = this.extendDataStructure(messages);
+      this.messages = messages;
       this.$emit("new_messages", this.messages);
       this.$emit("hide_explanation", true);
       this.processing = false;
@@ -148,18 +148,6 @@ export default {
       }, 100);
     },
 
-    // add absolute and personal id to each entry of the data structure
-    extendDataStructure(messages) {
-      let authors = {};
-      messages.forEach(function (object, index) {
-        if (!(object.author in authors)) authors[object.author] = 0;
-        else authors[object.author] += 1;
-        object.absolute_id = index;
-        object.personal_id = authors[object.author];
-      });
-      return messages;
-    },
-
     dragOver() {
       this.isDragging = true;
     },
@@ -183,7 +171,7 @@ export default {
     fetch("/chat_example.txt")
       .then((response) => response.text())
       .then(parseString)
-      .then((messages) => (this.messages = this.extendDataStructure(messages)))
+      .then((messages) => (this.messages = messages))
       .then(() => this.$emit("new_messages", this.messages));
   },
 };

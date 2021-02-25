@@ -18,7 +18,7 @@
               <div>
                 <v-carousel
                   v-model="activeTab"
-                  continuous="false"
+                  :continuous="false"
                   hide-delimiter-background
                   hide-delimiters
                   show-arrows-on-hover

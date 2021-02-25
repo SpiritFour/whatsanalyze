@@ -7,7 +7,7 @@
             <HeaderCta />
             <FileHandler
               v-if="$vuetify.breakpoint.mdAndUp"
-              @new_messages="chat_ = new Chat($event)"
+              @new_messages="newMessages"
               @hide_explanation="isShowingChats = $event"
             />
           </v-col>
@@ -18,7 +18,7 @@
         <v-row v-if="$vuetify.breakpoint.smAndDown" class="top-color ma-0">
           <v-col>
             <FileHandler
-              @new_messages="chat_ = new Chat($event)"
+              @new_messages="newMessages"
               @hide_explanation="isShowingChats = $event"
             />
           </v-col>
@@ -56,7 +56,12 @@ export default {
       chat_: new Chat(),
     };
   },
-  methods: { Chat },
+  methods: {
+    Chat,
+    newMessages(messages) {
+      this.chat_ = new Chat(messages);
+    },
+  },
 };
 </script>
 
