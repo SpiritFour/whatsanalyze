@@ -31,16 +31,17 @@
           <span v-if="isSuccess">Done! Look at your analysis below. </span>
 
           <span v-if="$vuetify.breakpoint.mdAndUp">
-            <strong>Drag </strong>
-            (or select)
+            <strong>Drag</strong> or <strong>select</strong>
           </span>
 
           <span v-if="$vuetify.breakpoint.smAndDown">
-            <strong style="text-decoration: underline">Pick </strong>
+            <strong style="text-decoration: underline">Select </strong>
           </span>
 
-          <span v-show="textSource">another file to add it</span>
-          <span v-show="!textSource"> your Whats App .txt file </span>
+          <span v-show="messages">another file to analyze it.</span>
+          <span v-show="!messages">
+            your Whats App .txt file into this box.</span
+          >
         </div>
         <p v-show="processingFile">Processing your file...</p>
       </div>
@@ -60,8 +61,6 @@ export default {
       wrongFile: false,
       processingFile: false,
       isSuccess: false,
-      textSource: null,
-      chatStruct: null,
       messages: [],
     };
   },
@@ -130,49 +129,15 @@ export default {
     dragOver() {
       this.isDragging = true;
     },
+
     dragLeave() {
       this.isDragging = false;
     },
+
     drop(e) {
       this.processingFile = true;
       let files = e.dataTransfer.files;
       this.process(files);
-    },
-
-    createDataStruct() {
-      this.wrongFile = false;
-      this.processingFile = true;
-      this.isSuccess = false;
-
-      if (this.textSource != null) {
-        this.isDragging = false;
-        parseString(this.textSource)
-          .then(
-            (messages) => (this.messages = this.extendDataStructure(messages))
-          )
-          .then(() => {
-            this.$emit("new_messages", this.messages);
-            this.$emit("hide_explanation", true);
-          });
-        this.$gtag.event("file-parsed", {
-          event_category: "home",
-          event_label: "lead",
-          value: "1",
-        });
-        this.isSuccess = true;
-        this.processingFile = false;
-      } else {
-        this.processingFile = false;
-        this.$gtag.event("file-error", {
-          event_category: "home",
-          event_label: "lead",
-          value: "0",
-        });
-        this.wrongFile = true;
-        this.textSource = null;
-        this.isDragging = false;
-        this.processingFile = false;
-      }
     },
 
     requestUploadFile() {
@@ -181,7 +146,6 @@ export default {
       this.processFile(files[0]);
     },
   },
-
   mounted() {
     fetch("/chat_example.txt")
       .then((response) => response.text())
@@ -222,6 +186,23 @@ export default {
   // outline
   border: 2px dashed $c-dark;
   border-radius: 20px;
+
+  // animation
+  animation-name: attention;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes attention {
+  0% {
+    box-shadow: 2px 2px 20px black;
+  }
+  50% {
+    box-shadow: none;
+  }
+  100% {
+    box-shadow: 2px 2px 20px black;
+  }
 }
 
 textarea {
