@@ -95,6 +95,8 @@ import img6_lazy from "@/assets/img/iOS/Frame6_lazy.png";
 import img6 from "@/assets/img/iOS/Frame6.png";
 import img7_lazy from "@/assets/img/iOS/Frame7_lazy.png";
 import img7 from "@/assets/img/iOS/Frame7.png";
+import img8_lazy from "@/assets/img/iOS/Frame8_lazy.png";
+import img8 from "@/assets/img/iOS/Frame8.png";
 
 export default {
   data: () => ({
@@ -133,6 +135,11 @@ export default {
       {
         img: img7,
         imgLazy: img7_lazy,
+        text: "",
+      },
+      {
+        img: img8,
+        imgLazy: img8_lazy,
         text: "",
       },
     ],
