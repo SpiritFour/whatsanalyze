@@ -1,49 +1,39 @@
 <template>
   <v-container>
     <v-row no-gutters>
-      <v-col cols="12" md="3" class="pb-8">
+      <v-col cols="12" sm="4" class="pb-8">
         <div class="text-center">
           <div class="py-10">
-            <div class="carousel-container" style="height: 600px; width: 300px">
+            <div class="carousel-container">
               <div class="frame-container">
                 <v-img
                   class="frame"
-                  height="600px"
-                  width="300px"
                   contain
                   :src="require('@/assets/img/iOS/FrameiOS.png')"
                 />
               </div>
 
-              <div>
-                <v-carousel
-                  v-model="activeTab"
-                  :continuous="false"
-                  hide-delimiter-background
-                  hide-delimiters
-                  show-arrows-on-hover
-                  height="1230"
+              <v-carousel
+                v-model="activeTab"
+                :continuous="false"
+                hide-delimiter-background
+                hide-delimiters
+                show-arrows-on-hover
+                height="100%"
+                width="100%"
+              >
+                <v-carousel-item
+                  v-for="(item, idx) in carouselItems"
+                  :key="idx"
                 >
-                  <v-carousel-item
-                    v-for="(item, idx) in carouselItems"
-                    :key="idx"
-                  >
-                    <v-row align="center" justify="center">
-                      <v-img
-                        height="600px"
-                        contain
-                        :lazy-src="item.imgLazy"
-                        :src="item.img"
-                      />
-                    </v-row>
-                  </v-carousel-item>
-                </v-carousel>
-              </div>
+                  <v-img contain :lazy-src="item.imgLazy" :src="item.img" />
+                </v-carousel-item>
+              </v-carousel>
             </div>
           </div>
         </div>
       </v-col>
-      <v-col cols="12" md="9" class="pt-md-15">
+      <v-col cols="12" sm="8" class="pt-md-15">
         <v-timeline dense clipped>
           <v-slide-x-transition group> </v-slide-x-transition>
           <v-timeline-item
@@ -57,18 +47,16 @@
             @click.native.stop="activeTab = i"
           >
             <v-row justify="space-between">
-              <v-col cols="7">
-                <v-chip
-                  v-if="i === 0"
-                  class="white--text ml-0"
-                  color="purple"
-                  label
-                  small
-                >
-                  iOS
-                </v-chip>
-                {{ tabItems.text }}
-              </v-col>
+              <v-chip
+                v-if="i === 0"
+                class="white--text ml-0"
+                color="purple"
+                label
+                small
+              >
+                iOS
+              </v-chip>
+              {{ tabItems.text }}
             </v-row>
           </v-timeline-item>
           <v-timeline-item class="mb-4" hide-dot>
@@ -179,19 +167,20 @@ export default {
 
 <style scoped>
 .carousel-container {
-  height: 600px;
   position: relative;
+  width: 100%;
 }
 
 .frame-container {
   pointer-events: none;
-  left: 50%;
+  left: 0;
+  top: 0;
+  width: 100%;
   position: absolute;
 }
 
 .frame {
-  left: -50%;
   z-index: 99999;
-  top: -11px;
+  top: 2px;
 }
 </style>
