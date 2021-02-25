@@ -130,6 +130,7 @@ export class Chat {
 
     this._lineGraphData = Promise.resolve(this._getLineGraphData());
     this._funfacts = Promise.resolve(this._getFunFacts());
+    this._allWords = Promise.resolve(this._getAllWords());
   }
 
   get sortedFreqDict() {
@@ -395,7 +396,7 @@ export class Chat {
     return unit;
   }
 
-  getAllWords() {
+  _getAllWords() {
     return this.sortedFreqDict
       .filter(
         (word) =>
@@ -417,7 +418,10 @@ export class Chat {
       )
       .map((word) => {
         return { word: word[0], freq: word[1] };
-      })
-      .slice(0, this._maxWordsWordCloud);
+      });
+  }
+
+  getAllWords() {
+    return this._allWords.then((x) => x.slice(0, this._maxWordsWordCloud));
   }
 }
