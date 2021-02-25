@@ -9,7 +9,7 @@
           How to export your WhatsApp chat
         </v-expansion-panel-header>
         <v-expansion-panel-content>
-          Everyone can easily export his whatsapp chat or group chat. Open
+          Everyone can easily export his WhatsApp chat or group chat. Open
           WhatsApp on the device you are currently logged in with > Tap on the
           chat > Go to the chats settings > Scroll down and tap on Export chat >
           Choose to export with or without media.

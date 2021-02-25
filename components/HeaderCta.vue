@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="text-h4 font-weight-bold">
+    <div class="text-h4 font-weight-bold text-lg-h1">
       Analyze your WhatsApp Chat in seconds
     </div>
-    <div class="text-h6">
-      Reveal insights - get statistics of your WhatsApp communication all
-      generated locally on your device.
+    <div class="text-h6 text-lg-h4">
+      Reveal insights & get statistics of your WhatsApp chats generated on your
+      device.
     </div>
     <br />
     <p
@@ -15,7 +15,7 @@
         border-radius: 10px;
         width: fit-content;
       "
-      class="py-1 px-3"
+      class="py-1 px-3 text-lg-h6"
     >
       <v-icon color="black" style="vertical-align: sub"> mdi-security </v-icon>
       <strong>No</strong> chat <strong>data</strong> is sent to a server it runs

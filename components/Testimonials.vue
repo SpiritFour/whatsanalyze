@@ -32,7 +32,7 @@ export default {
         {
           name: "Lara",
           text:
-            "Amazing to see a whole whatsapp history at a glance. I have chats going back multiple years seeing how the relationship is mirrored in the chat is amazing. I love that my files are not uploaded and that it runs directly in my browser.",
+            "Amazing to see a whole WhatsApp history at a glance. I have chats going back multiple years seeing how the relationship is mirrored in the chat is amazing. I love that my files are not uploaded and that it runs directly in my browser.",
         },
       ],
     };
