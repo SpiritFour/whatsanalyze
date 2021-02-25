@@ -63,10 +63,11 @@ export default {
   },
   methods: {
     updateGraph: function () {
-      var lineGraphData = this.chartdata.getLineGraphData();
-      // eslint-disable-next-line vue/no-mutating-props
-      this.options.scales.xAxes[0].time.unit = lineGraphData[1];
-      this.renderChart(lineGraphData[0], this.options);
+      this.chartdata.getLineGraphData().then((lineGraphData) => {
+        // eslint-disable-next-line vue/no-mutating-props
+        this.options.scales.xAxes[0].time.unit = lineGraphData[1];
+        this.renderChart(lineGraphData[0], this.options);
+      });
     },
   },
   mounted() {

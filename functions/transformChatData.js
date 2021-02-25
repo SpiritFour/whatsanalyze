@@ -127,6 +127,13 @@ export class Chat {
 
     // all dates of messages
     this._dates = null;
+
+    this._lineGraphData = Promise.resolve(this._getLineGraphData());
+    this._funfacts = Promise.resolve(this._getFunFacts());
+    this._allWords = Promise.resolve(this._getAllWords());
+    this._hourlyData = Promise.resolve(this._getHourlyData());
+    this._dailyData = Promise.resolve(this._getDailyData());
+    this._weeklyData = Promise.resolve(this._getWeeklyData());
   }
 
   get sortedFreqDict() {
@@ -144,10 +151,13 @@ export class Chat {
   set groupAfter(groupAfter) {
     this._groupAfter = groupAfter;
     this._messagesPerPerson = null;
-  }
 
-  set maxWordsWordCloud(maxWordsWordCloud) {
-    this._maxWordsWordCloud = maxWordsWordCloud;
+    this._lineGraphData = Promise.resolve(this._getLineGraphData());
+    this._funfacts = Promise.resolve(this._getFunFacts());
+    // this._allWords = Promise.resolve(this._getAllWords());
+    this._hourlyData = Promise.resolve(this._getHourlyData());
+    this._dailyData = Promise.resolve(this._getDailyData());
+    this._weeklyData = Promise.resolve(this._getWeeklyData());
   }
 
   _getMessagesPerPerson() {
@@ -208,7 +218,7 @@ export class Chat {
     };
   }
 
-  getFunFacts() {
+  _getFunFacts() {
     let people = this.messagesPerPerson.map((person) => {
       let name = person.name;
       let numberOfWords = Chat.getTotalNumberOfWords(person.messages);
@@ -233,7 +243,11 @@ export class Chat {
     return people;
   }
 
-  getHourlyData(opacity = 1) {
+  getFunFacts() {
+    return this._funfacts;
+  }
+
+  _getHourlyData(opacity = 1) {
     return {
       labels: [
         "0AM",
@@ -272,7 +286,11 @@ export class Chat {
     };
   }
 
-  getDailyData(opacity = 1) {
+  getHourlyData() {
+    return this._hourlyData;
+  }
+
+  _getDailyData(opacity = 1) {
     return {
       labels: [
         "Monday",
@@ -294,7 +312,11 @@ export class Chat {
     };
   }
 
-  getWeeklyData(opacity = 1) {
+  getDailyData() {
+    return this._dailyData;
+  }
+
+  _getWeeklyData(opacity = 1) {
     return {
       labels: [
         "January",
@@ -321,7 +343,11 @@ export class Chat {
     };
   }
 
-  getLineGraphData() {
+  getWeeklyData() {
+    return this._weeklyData;
+  }
+
+  _getLineGraphData() {
     // calculate date ranges where messages happened
     var minDate = new Date(Math.min.apply(null, this.dates));
     var maxDate = new Date(Math.max.apply(null, this.dates));
@@ -374,6 +400,10 @@ export class Chat {
     ];
   }
 
+  getLineGraphData() {
+    return this._lineGraphData;
+  }
+
   getLineGraphXAxis(maxDate, minDate) {
     var diffDate = new Date(maxDate - minDate);
     var unit = "";
@@ -384,7 +414,7 @@ export class Chat {
     return unit;
   }
 
-  getAllWords() {
+  _getAllWords() {
     return this.sortedFreqDict
       .filter(
         (word) =>
@@ -406,7 +436,10 @@ export class Chat {
       )
       .map((word) => {
         return { word: word[0], freq: word[1] };
-      })
-      .slice(0, this._maxWordsWordCloud);
+      });
+  }
+
+  getAllWords() {
+    return this._allWords.then((x) => x.slice(0, this._maxWordsWordCloud));
   }
 }

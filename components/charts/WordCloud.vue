@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     updateGraph() {
-      this.series.data = this.chartdata.getAllWords();
+      this.chartdata.getAllWords().then((x) => (this.series.data = x));
     },
   },
   watch: {

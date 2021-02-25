@@ -30,3 +30,7 @@ export function hexToRgbA(hex, alpha = 0.1) {
   }
   throw new Error("Bad Hex");
 }
+
+export function updateAlpha(rgba, alpha = 0.1) {
+  return rgba.split(",").slice(0, -1).join(",") + "," + alpha + ")";
+}
