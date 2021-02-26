@@ -15,13 +15,13 @@
     <div class="text-h3 font-weight-bold py-10">Messages per</div>
 
     <v-row>
-      <v-col cols="6">
+      <v-col cols="12" md="6">
         <div class="text-h4 font-weight-bold">Person</div>
         <Share>
           <ChartsDonughtChart :chartdata="chat_" class="py-10" />
         </Share>
       </v-col>
-      <v-col cols="6">
+      <v-col cols="12" md="6">
         <div class="text-h4 font-weight-bold">Time of Day</div>
         <Share>
           <ChartsBarChart
@@ -34,7 +34,7 @@
     </v-row>
 
     <v-row>
-      <v-col cols="6">
+      <v-col cols="12" sm="6">
         <div class="text-h4 font-weight-bold">Month</div>
         <Share>
           <ChartsRadarChart
@@ -44,7 +44,7 @@
           />
         </Share>
       </v-col>
-      <v-col cols="6">
+      <v-col cols="12" sm="6">
         <div class="text-h4 font-weight-bold">Weekday</div>
         <Share>
           <ChartsRadarChart
