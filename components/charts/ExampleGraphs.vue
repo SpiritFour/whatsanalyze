@@ -22,13 +22,13 @@
         </v-col>
       </v-row>
     </v-col>
-    <v-col v-else>
+    <v-col v-else class="py-0">
       <v-carousel
         :continuous="true"
         :cycle="false"
         :show-arrows="false"
         hide-delimiter-background
-        height="100vw"
+        height="auto"
       >
         <v-carousel-item>
           <ChartsLineChart
@@ -152,8 +152,11 @@ export default {
           yAxes: [
             {
               scaleLabel: {
-                display: false,
+                display: true,
                 labelString: "Messages",
+                fontColor: "rgb(51,51,51)",
+                fontStyle: "bold",
+                fontSize: 11,
               },
               ticks: {
                 precision: 0,
@@ -184,6 +187,25 @@ export default {
             fontColor: "rgb(51,51,51)",
             fontSize: 10,
           },
+        },
+        scales: {
+          yAxes: [
+            {
+              scaleLabel: {
+                display: true,
+                labelString: "Messages",
+                fontColor: "rgb(51,51,51)",
+                fontStyle: "bold",
+                fontSize: 11,
+              },
+              ticks: {
+                display: false,
+              },
+              gridLines: {
+                display: false,
+              },
+            },
+          ],
         },
       },
       radarchartHeaderChartOptions: {
