@@ -3,7 +3,11 @@
     <v-col v-if="$vuetify.breakpoint.smAndUp">
       <v-row>
         <v-col cols="12" sm="6">
-          <ChartsBarChart :chartdata="chat_" dataGrouping="hourly" />
+          <ChartsBarChart
+            :chartdata="chat_"
+            :options="barHeaderChartOptions"
+            dataGrouping="hourly"
+          />
         </v-col>
         <v-col cols="12" sm="6">
           <ChartsDonughtChart
@@ -29,7 +33,7 @@
         <v-carousel-item>
           <ChartsLineChart
             :chartdata="chat_"
-            :options="linegraphHeaderChartOptions"
+            :options="bargraphHeaderChartOptions"
           />
         </v-carousel-item>
         <v-carousel-item>
@@ -70,7 +74,7 @@ export default {
   },
   data() {
     return {
-      linegraphHeaderChartOptions: {
+      barHeaderChartOptions: {
         responsive: true,
         maintainAspectRatio: true,
         // aspectRatio: 1,
@@ -91,10 +95,6 @@ export default {
                 fontStyle: "bold",
                 fontSize: 11,
               },
-              type: "time",
-              time: {
-                unit: "month",
-              },
               gridLines: {
                 display: false,
               },
@@ -103,13 +103,13 @@ export default {
           yAxes: [
             {
               ticks: {
-                display: false,
+                display: true,
               },
               scaleLabel: {
                 display: false,
               },
               gridLines: {
-                display: false,
+                display: true,
               },
             },
           ],
