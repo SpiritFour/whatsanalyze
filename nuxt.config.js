@@ -45,7 +45,7 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxt/content"],
+  modules: ["@nuxt/content", "@nuxtjs/pwa"],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

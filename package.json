@@ -38,6 +38,7 @@
     "whatsapp-chat-parser": "^3.1.0"
   },
   "devDependencies": {
+    "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/vuetify": "^1.11.3",
     "@vue/test-utils": "^1.1.2",
     "babel-core": "7.0.0-bridge.0",
