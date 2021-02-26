@@ -20,8 +20,8 @@ export default {
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       {
-        hid: "main",
-        name: "Whats Analyze - The What's App Chat Analyzer",
+        hid: "description",
+        name: "description",
         content:
           "America's Most Popular Whatsapp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
       },
