@@ -5,7 +5,7 @@
         <v-col cols="12" sm="6">
           <ChartsBarChart
             :chartdata="chat_"
-            :options="barHeaderChartOptions"
+            :options="barchartHeaderChartOptions"
             dataGrouping="hourly"
           />
         </v-col>
@@ -74,52 +74,6 @@ export default {
   },
   data() {
     return {
-      barHeaderChartOptions: {
-        responsive: true,
-        maintainAspectRatio: true,
-        // aspectRatio: 1,
-        legend: {
-          position: "top",
-          labels: {
-            fontStyle: "bold",
-            fontColor: "rgb(51,51,51)",
-            fontSize: 10,
-          },
-        },
-
-        scales: {
-          xAxes: [
-            {
-              ticks: {
-                fontColor: "rgb(51,51,51)",
-                fontStyle: "bold",
-                fontSize: 11,
-              },
-              gridLines: {
-                display: false,
-              },
-            },
-          ],
-          yAxes: [
-            {
-              ticks: {
-                display: false,
-              },
-              scaleLabel: {
-                display: false,
-              },
-              gridLines: {
-                display: false,
-              },
-            },
-          ],
-        },
-        elements: {
-          line: {
-            tension: 0,
-          },
-        },
-      },
       linegraphHeaderChartOptions: {
         pointHitRadius: 5,
         responsive: true,
@@ -263,7 +217,9 @@ export default {
               scaleLabel: {
                 display: true,
                 labelString: "Messages",
+                fontStyle: "bold",
                 fontColor: "rgb(51,51,51)",
+                fontSize: 10,
               },
               gridLines: {
                 display: false,
