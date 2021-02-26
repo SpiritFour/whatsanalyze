@@ -105,8 +105,6 @@ import img4_lazy from "@/assets/img/Android/4copy.png";
 import img4 from "@/assets/img/Android/4.png";
 import img5_lazy from "@/assets/img/Android/5copy.png";
 import img5 from "@/assets/img/Android/5.png";
-import img6_lazy from "@/assets/img/Android/6copy.png";
-import img6 from "@/assets/img/Android/6.png";
 
 export default {
   data: () => ({
@@ -203,11 +201,6 @@ export default {
           {
             img: img5,
             imgLazy: img5_lazy,
-            text: "",
-          },
-          {
-            img: img6,
-            imgLazy: img6_lazy,
             text: "",
           },
         ],
