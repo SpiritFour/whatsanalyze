@@ -70,7 +70,12 @@
                 </v-timeline-item>
                 <v-timeline-item class="mb-4" hide-dot>
                   <v-btn
-                    @click="$vuetify.goTo('#fileHandler')"
+                    @click="
+                      $vuetify.goTo('#fileHandler', {
+                        duration: 300,
+                        offset: 100,
+                      })
+                    "
                     color="#07bc4c"
                     class="my-5 text-h6 white--text"
                   >
