@@ -30,7 +30,6 @@
                   :continuous="false"
                   hide-delimiter-background
                   hide-delimiters
-                  show-arrows-on-hover
                   class="pa-md-16"
                   height="auto"
                 >
