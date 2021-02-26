@@ -11,8 +11,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: "Whats Analyze - The What's App Chat Analyzer",
-    title: "Whats Analyze - The What's App Chat Analyzer",
+    titleTemplate: "Whats Analyze - The WhatsApp Chat Analyzer",
+    title: "Whats Analyze - The WhatsApp Chat Analyzer",
     htmlAttrs: {
       lang: "en",
     },
@@ -23,7 +23,7 @@ export default {
         hid: "description",
         name: "description",
         content:
-          "America's Most Popular Whatsapp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
+          "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
       },
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
