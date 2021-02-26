@@ -4,7 +4,7 @@
     <span class="text-body-1"> {{ text }}</span>
     <br />
     <v-btn
-      to="#drop"
+      @click="$vuetify.goTo('#fileHandler', 0.7, 0)"
       color="#07bc4c"
       style="color: #ffffff"
       class="my-5 text-h6"

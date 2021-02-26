@@ -10,6 +10,7 @@
           >
             <HeaderCta />
             <FileHandler
+              id="fileHandler"
               v-if="$vuetify.breakpoint.mdAndUp"
               @new_messages="newMessages"
               @hide_explanation="isShowingChats = $event"
@@ -22,6 +23,7 @@
         <v-row v-if="$vuetify.breakpoint.smAndDown" class="top-color ma-0">
           <v-col>
             <FileHandler
+              id="fileHandler"
               @new_messages="newMessages"
               @hide_explanation="isShowingChats = $event"
             />

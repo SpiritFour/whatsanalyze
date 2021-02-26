@@ -59,7 +59,7 @@
                 </v-timeline-item>
                 <v-timeline-item class="mb-4" hide-dot>
                   <v-btn
-                    to="#drop"
+                    @click="$vuetify.goTo('#fileHandler')"
                     color="#07bc4c"
                     class="my-5 text-h6 white--text"
                   >
