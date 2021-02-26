@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <div class="text-h5 text-md-h2 text-center pb-8">
-      How To export your chat on
+      How to export your chat on
     </div>
     <v-tabs v-model="tab" centered>
       <v-tab
@@ -53,9 +53,7 @@
                   fill-dot
                   @click.native.stop="activeTab = i"
                 >
-                  <v-row>
-                    {{ tabItem.text }}
-                  </v-row>
+                  <v-row v-html="tabItem.text"> </v-row>
                 </v-timeline-item>
                 <v-timeline-item class="mb-4" hide-dot>
                   <v-btn
@@ -93,6 +91,8 @@ import iOS_img6_lazy from "@/assets/img/iOS/Frame6_lazy.png";
 import iOS_img6 from "@/assets/img/iOS/Frame6.png";
 import iOS_img7_lazy from "@/assets/img/iOS/Frame7_lazy.png";
 import iOS_img7 from "@/assets/img/iOS/Frame7.png";
+import iOS_img8_lazy from "@/assets/img/iOS/Frame8_lazy.png";
+import iOS_img8 from "@/assets/img/iOS/Frame8.png";
 // Android
 import AndroidFrame from "@/assets/img/Android/frameAndroid.png";
 import img1_lazy from "@/assets/img/Android/1copy.png";
@@ -150,6 +150,11 @@ export default {
             imgLazy: iOS_img7_lazy,
             text: "",
           },
+          {
+            img: iOS_img8,
+            imgLazy: iOS_img8_lazy,
+            text: "",
+          },
         ],
         tabItems: [
           {
@@ -158,22 +163,27 @@ export default {
           },
           {
             text:
-              'Tap on the name of the chat at the top to open "Group/Chat Info"',
+              'Tap on the name of the chat at the top to open <b class="px-1">Group/Chat Info</b>',
           },
           {
             text: "In chat info, scroll all the way to the bottom",
           },
           {
-            text: 'Tap on "export chat" > choose "Without Media"',
+            text: 'Tap on<b class="px-1">Export Chat</b>',
           },
           {
-            text: 'Choose "Without Media"',
+            text: 'Choose<b class="px-1">Without Media</b>',
           },
           {
-            text: 'Tap on "Save to Files" to save it on your iPhone',
+            text:
+              'Tap on<b class="px-1">Save to Files</b> to save it on your iPhone',
           },
           {
-            text: "Save the file on your iPhone",
+            text:
+              'Finally select <b class="px-1">On my iPhone</b> to save it locally',
+          },
+          {
+            text: "At last you can choose your exported .zip to be analyzed",
           },
         ],
       },
@@ -210,21 +220,21 @@ export default {
         tabItems: [
           {
             text:
-              "On your Android phone open WhatsApp and tap on the chat you would like to export",
+              'On your Android phone open <b class="px-1">WhatsApp</b> and tap on the chat you would like to export',
           },
           {
             text:
-              'Tap on the name of the chat at the top to open the "Group/Chat Info"',
+              'Tap on the name of the chat at the top to open the  <b class="px-1">Group/Chat Info</b>',
           },
           {
-            text: 'In the new menu tap on "More >"',
+            text: 'In the new menu tap on <b class="px-1">More</b>',
           },
           {
-            text: 'Tap on "Export chat"',
+            text: 'Tap on <b class="px-1">Export chat</b>',
           },
           {
             text:
-              'Choose "Without Media". Send the file yourself via "E-Mail" or save it to Google Drive',
+              'Choose <b class="px-1">Without Media</b>. Send the file yourself via <b class="px-1">E-Mail</b> or save it to <b class="px-1">Google Drive</b>',
           },
         ],
       },
