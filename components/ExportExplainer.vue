@@ -36,6 +36,21 @@
                       :key="idx"
                     >
                       <v-img contain :lazy-src="item.imgLazy" :src="item.img" />
+                      <v-btn
+                        fab
+                        outlined
+                        color="black"
+                        disabled
+                        :style="
+                          'position: absolute; left: ' +
+                          item.x +
+                          'px' +
+                          '; top: ' +
+                          item.y +
+                          'px'
+                        "
+                        class="blinking"
+                      ></v-btn>
                     </v-carousel-item>
                   </v-carousel>
                 </div>
@@ -119,6 +134,8 @@ export default {
             img: iOS_img1,
             imgLazy: iOS_img1_lazy,
             text: "",
+            x: 50,
+            y: 100,
           },
           {
             img: iOS_img2,
@@ -233,7 +250,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .carousel-container {
   position: relative;
   width: 100%;
@@ -250,5 +267,33 @@ export default {
 .frame {
   z-index: 99999;
   top: 2px;
+}
+.blinking {
+  animation-name: blink;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  z-index: 99999;
+  border: 3px solid rgba(0, 128, 0, 0.7);
+  background-color: transparent;
+}
+
+@keyframes blink {
+  0% {
+    width: 50px;
+    height: 50px;
+  }
+  50% {
+    width: 10px;
+    height: 10px;
+    margin-left: 20px;
+    margin-top: 20px;
+    background-color: rgba(0, 128, 0, 0.3);
+    border-color: rgba(0, 128, 0, 0.3);
+    border-width: 2px;
+  }
+  100% {
+    width: 50px;
+    height: 50px;
+  }
 }
 </style>
