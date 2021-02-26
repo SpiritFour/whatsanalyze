@@ -42,10 +42,9 @@
               </div>
             </v-col>
             <v-col cols="12" sm="8" class="pt-md-15">
-              <v-timeline dense clipped>
-                <v-slide-x-transition group> </v-slide-x-transition>
+              <v-timeline dense>
                 <v-timeline-item
-                  class="mb-4"
+                  class="mb-4 align-center"
                   small
                   v-for="(tabItem, i) in data.tabItems"
                   :key="i"
@@ -54,7 +53,7 @@
                   fill-dot
                   @click.native.stop="activeTab = i"
                 >
-                  <v-row justify="space-between">
+                  <v-row>
                     {{ tabItem.text }}
                   </v-row>
                 </v-timeline-item>
@@ -92,7 +91,8 @@ import iOS_img5_lazy from "@/assets/img/iOS/Frame5_lazy.png";
 import iOS_img5 from "@/assets/img/iOS/Frame5.png";
 import iOS_img6_lazy from "@/assets/img/iOS/Frame6_lazy.png";
 import iOS_img6 from "@/assets/img/iOS/Frame6.png";
-
+import iOS_img7_lazy from "@/assets/img/iOS/Frame7_lazy.png";
+import iOS_img7 from "@/assets/img/iOS/Frame7.png";
 // Android
 import AndroidFrame from "@/assets/img/Android/frameAndroid.png";
 import img1_lazy from "@/assets/img/Android/1copy.png";
@@ -141,13 +141,13 @@ export default {
             text: "",
           },
           {
-            img: iOS_img5,
-            imgLazy: iOS_img5_lazy,
+            img: iOS_img6,
+            imgLazy: iOS_img6_lazy,
             text: "",
           },
           {
-            img: iOS_img6,
-            imgLazy: iOS_img6_lazy,
+            img: iOS_img7,
+            imgLazy: iOS_img7_lazy,
             text: "",
           },
         ],
@@ -171,6 +171,9 @@ export default {
           },
           {
             text: 'Tap on "Save to Files" to save it on your iPhone',
+          },
+          {
+            text: "Save the file on your iPhone",
           },
         ],
       },
