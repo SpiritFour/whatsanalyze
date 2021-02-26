@@ -106,6 +106,11 @@ export default {
       this.$emit("hide_explanation", true);
       this.processing = false;
       this.isSuccess = true;
+      this.$gtag.event("file-parsed", {
+        event_category: "home",
+        event_label: "lead",
+        value: "1",
+      });
     },
 
     readChatFile(zipData) {
@@ -144,6 +149,11 @@ export default {
           this.wrongFile = true;
           this.processing = false;
           this.isSuccess = false;
+          this.$gtag.event("file-error", {
+            event_category: "home",
+            event_label: "lead",
+            value: "0",
+          });
         }
       }, 100);
     },
