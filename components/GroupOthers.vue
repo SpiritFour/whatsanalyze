@@ -5,7 +5,7 @@
     </div>
     <v-slider
       v-model="groupAfter"
-      label="Group People into others"
+      label="Number of people grouped into Others"
       thumb-color="red"
       thumb-label="always"
       tick

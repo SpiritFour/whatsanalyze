@@ -431,8 +431,9 @@ export class Chat {
               "aber",
               "<media",
               "omitted>",
-              "‎Bild",
-              "‎image",
+              "bild",
+              "image",
+              "weggelassen",
               "omitted",
             ].includes(word[0].toLowerCase())
           ) && word[1] > 1
