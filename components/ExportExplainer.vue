@@ -17,46 +17,57 @@
         <v-container>
           <v-row no-gutters>
             <v-col cols="12" sm="4">
-              <div class="text-center">
-                <div class="carousel-container">
-                  <div class="frame-container">
-                    <v-img
-                      class="frame ma-md-16"
-                      contain
-                      :src="data.frameImg"
-                    />
-                  </div>
-                  <v-carousel
-                    v-model="tabStatus[idx]"
-                    :continuous="false"
-                    hide-delimiter-background
-                    hide-delimiters
-                    show-arrows-on-hover
-                    height="100%"
-                    width="100%"
-                    class="pa-md-16"
-                  >
-                    <v-carousel-item
-                      v-for="(item, idx) in data.carouselItems"
-                      :key="idx"
-                    >
-                      <v-img contain :lazy-src="item.imgLazy" :src="item.img" />
-                      <v-btn
-                        fab
-                        outlined
-                        color="black"
-                        disabled
-                        :style="
-                          'position: absolute; left: ' +
-                          item.x +
-                          '; top: ' +
-                          item.y
-                        "
-                        class="blinking"
-                      ></v-btn>
-                    </v-carousel-item>
-                  </v-carousel>
+              <div class="carousel-container">
+                <div class="frame-container">
+                  <v-img
+                    ref="smartphone"
+                    class="frame ma-md-16"
+                    :src="data.frameImg"
+                  />
                 </div>
+                <v-carousel
+                  v-model="tabStatus[idx]"
+                  :continuous="false"
+                  hide-delimiter-background
+                  hide-delimiters
+                  show-arrows-on-hover
+                  class="pa-md-16"
+                  height="auto"
+                >
+                  <v-carousel-item
+                    v-for="(item, idx) in data.carouselItems"
+                    :key="idx"
+                  >
+                    <v-img contain :lazy-src="item.imgLazy" :src="item.img">
+                      <template v-slot:placeholder>
+                        <v-row
+                          class="ma-0"
+                          align="center"
+                          justify="center"
+                          :style="'height: ' + $refs.smartphone.clientHeight"
+                        >
+                          <v-progress-circular
+                            indeterminate
+                            color="grey lighten-5"
+                          ></v-progress-circular>
+                        </v-row>
+                      </template>
+                    </v-img>
+                    <v-btn
+                      fab
+                      outlined
+                      color="black"
+                      disabled
+                      :style="
+                        'position: absolute; left: ' +
+                        item.x +
+                        '; top: ' +
+                        item.y
+                      "
+                      class="blinking"
+                    ></v-btn>
+                  </v-carousel-item>
+                </v-carousel>
               </div>
             </v-col>
             <v-col cols="12" sm="8" class="pt-md-15">
@@ -157,7 +168,7 @@ export default {
             imgLazy: iOS_img3_lazy,
             text: "",
             x: "50%",
-            y: "90%",
+            y: "88%",
           },
           {
             img: iOS_img4,
@@ -191,6 +202,8 @@ export default {
             img: iOS_img8,
             imgLazy: iOS_img8_lazy,
             text: "",
+            x: "50%",
+            y: "81.5%",
           },
         ],
         tabItems: [
@@ -294,6 +307,7 @@ export default {
 .carousel-container {
   position: relative;
   width: 100%;
+  height: 100%;
 }
 
 .frame-container {
@@ -301,6 +315,7 @@ export default {
   left: 0;
   top: 0;
   width: 100%;
+  height: 100%;
   position: absolute;
 }
 
