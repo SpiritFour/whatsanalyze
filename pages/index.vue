@@ -10,6 +10,7 @@
           >
             <HeaderCta />
             <FileHandler
+              id="fileHandler"
               v-if="$vuetify.breakpoint.mdAndUp"
               @new_messages="newMessages"
               @hide_explanation="isShowingChats = $event"
