@@ -62,11 +62,10 @@
                   <v-btn
                     to="#drop"
                     color="#07bc4c"
-                    style="color: #ffffff"
-                    class="my-5 text-h6"
+                    class="my-5 text-h6 white--text"
                   >
                     <v-icon>mdi-arrow-right</v-icon>
-                    Analyze your chat .zip now.
+                    Tab on the upload box above and select your file.
                   </v-btn>
                 </v-timeline-item>
               </v-timeline>
@@ -175,13 +174,6 @@ export default {
           {
             text: 'Tap on "Save to Files" to save it on your iPhone',
           },
-          {
-            text: 'Finally select "On my iPhone" to save it locally',
-          },
-          {
-            text:
-              "At last you can select your exported chat .zip now to be analyzed",
-          },
         ],
       },
       {
@@ -235,15 +227,8 @@ export default {
             text: 'Tap on "Export chat"',
           },
           {
-            text: 'Choose "Without Media"',
-          },
-          {
             text:
-              'Now you can send yourself the file via "E-Mail" or save it to your Google Drive',
-          },
-          {
-            text:
-              "At last you can select your exported chat .zip now to be analyzed",
+              'Choose "Without Media". Send the file yourself via "E-Mail" or save it to Google Drive',
           },
         ],
       },
