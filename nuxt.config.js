@@ -28,6 +28,13 @@ export default {
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
   },
+  pwa: {
+    manifest: {
+      name: "Whats Analyze - The WhatsApp Chat Analyzer",
+      lang: "en",
+      useWebmanifestExtension: true,
+    },
+  },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
