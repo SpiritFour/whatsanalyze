@@ -3,9 +3,10 @@
     <v-col v-if="$vuetify.breakpoint.smAndUp">
       <v-row>
         <v-col cols="12" sm="6">
-          <ChartsLineChart
+          <ChartsBarChart
             :chartdata="chat_"
-            :options="linegraphHeaderChartOptions"
+            :options="barchartHeaderChartOptions"
+            dataGrouping="hourly"
           />
         </v-col>
         <v-col cols="12" sm="6">
@@ -21,13 +22,13 @@
         </v-col>
       </v-row>
     </v-col>
-    <v-col v-else>
+    <v-col v-else class="py-0">
       <v-carousel
         :continuous="true"
         :cycle="false"
         :show-arrows="false"
         hide-delimiter-background
-        height="100vw"
+        height="auto"
       >
         <v-carousel-item>
           <ChartsLineChart
@@ -74,9 +75,10 @@ export default {
   data() {
     return {
       linegraphHeaderChartOptions: {
+        pointHitRadius: 5,
         responsive: true,
         maintainAspectRatio: true,
-        // aspectRatio: 1,
+        lineTension: 1,
         legend: {
           position: "top",
           labels: {
@@ -85,34 +87,40 @@ export default {
             fontSize: 10,
           },
         },
-
         scales: {
           xAxes: [
             {
+              type: "time",
+              time: {},
+              gridLines: {
+                display: false,
+                color: "#FFFFFF",
+              },
               ticks: {
                 fontColor: "rgb(51,51,51)",
                 fontStyle: "bold",
                 fontSize: 11,
               },
-              type: "time",
-              time: {
-                unit: "month",
-              },
-              gridLines: {
-                display: false,
-              },
             },
           ],
           yAxes: [
             {
-              ticks: {
-                display: false,
-              },
               scaleLabel: {
+                display: true,
+                labelString: "Messages",
+                fontColor: "rgb(51,51,51)",
+                fontStyle: "bold",
+                fontSize: 11,
+              },
+              ticks: {
+                precision: 0,
+                stepSize: 1,
+                beginAtZero: true,
                 display: false,
               },
               gridLines: {
                 display: false,
+                color: "#FFFFFF",
               },
             },
           ],
@@ -133,6 +141,25 @@ export default {
             fontColor: "rgb(51,51,51)",
             fontSize: 10,
           },
+        },
+        scales: {
+          yAxes: [
+            {
+              scaleLabel: {
+                display: true,
+                labelString: "Messages",
+                fontColor: "rgb(51,51,51)",
+                fontStyle: "bold",
+                fontSize: 11,
+              },
+              ticks: {
+                display: false,
+              },
+              gridLines: {
+                display: false,
+              },
+            },
+          ],
         },
       },
       radarchartHeaderChartOptions: {
@@ -190,7 +217,9 @@ export default {
               scaleLabel: {
                 display: true,
                 labelString: "Messages",
+                fontStyle: "bold",
                 fontColor: "rgb(51,51,51)",
+                fontSize: 10,
               },
               gridLines: {
                 display: false,
@@ -209,6 +238,11 @@ export default {
 };
 </script>
 <style lang="scss">
+.v-carousel__controls__item {
+  margin: 0 8px !important;
+  width: 7px !important;
+  height: 7px !important;
+}
 .col {
   padding: 1em !important;
 }

@@ -16,7 +16,7 @@
               @hide_explanation="isShowingChats = $event"
             />
           </v-col>
-          <v-col v-if="!isShowingChats" cols="12" md="6" class="px-8 px-md-0">
+          <v-col v-if="!isShowingChats" cols="12" md="6">
             <ChartsExampleGraphs :chat_="chat_" />
           </v-col>
         </v-row>

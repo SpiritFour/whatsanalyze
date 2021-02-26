@@ -22,11 +22,11 @@
         </Share>
       </v-col>
       <v-col cols="6">
-        <div class="text-h4 font-weight-bold">Month</div>
+        <div class="text-h4 font-weight-bold">Time of Day</div>
         <Share>
-          <ChartsRadarChart
+          <ChartsBarChart
             :chartdata="chat_"
-            dataGrouping="weekly"
+            dataGrouping="hourly"
             class="py-10"
           />
         </Share>
@@ -35,11 +35,11 @@
 
     <v-row>
       <v-col cols="6">
-        <div class="text-h4 font-weight-bold">Time of Day</div>
+        <div class="text-h4 font-weight-bold">Month</div>
         <Share>
           <ChartsRadarChart
             :chartdata="chat_"
-            dataGrouping="hourly"
+            dataGrouping="weekly"
             class="py-10"
           />
         </Share>
