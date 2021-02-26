@@ -60,7 +60,7 @@
               </v-timeline>
 
               <v-btn
-                to="#drop"
+                @click="$vuetify.goTo('#fileHandler')"
                 color="#07bc4c"
                 class="text-md-h6 text-caption ml-10 white--text"
                 style="max-width: 100%"
