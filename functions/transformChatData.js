@@ -416,7 +416,6 @@ export class Chat {
   }
 
   _getAllWords() {
-    console.log(this.sortedFreqDict);
     return this.sortedFreqDict
       .filter(
         (word) =>

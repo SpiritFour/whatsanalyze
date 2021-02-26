@@ -3,10 +3,7 @@
     <v-col v-if="$vuetify.breakpoint.smAndUp">
       <v-row>
         <v-col cols="12" sm="6">
-          <ChartsLineChart
-            :chartdata="chat_"
-            :options="linegraphHeaderChartOptions"
-          />
+          <ChartsBarChart :chartdata="chat_" dataGrouping="hourly" />
         </v-col>
         <v-col cols="12" sm="6">
           <ChartsDonughtChart
