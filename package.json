@@ -26,6 +26,7 @@
     "@nuxt/content": "^1.13.1",
     "chart.js": "^2.9.4",
     "core-js": "^3.8.3",
+    "html2canvas": "^1.0.0-rc.7",
     "jszip": "^3.6.0",
     "npm": "^7.5.4",
     "nuxt": "^2.14.12",

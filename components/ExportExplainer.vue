@@ -81,7 +81,7 @@
                   fill-dot
                   @click.native.stop="tabStatus = [i, i]"
                 >
-                  <v-row v-html="tabItem.text"> </v-row>
+                  <v-row v-html="tabItem.text" style="cursor: pointer"> </v-row>
                 </v-timeline-item>
               </v-timeline>
 
@@ -208,31 +208,33 @@ export default {
         tabItems: [
           {
             text:
-              "On iPhone open WhatsApp and tap on the chat you would like to export",
+              "<span>On iPhone open WhatsApp and tap on the chat you would like to export.</span>",
           },
           {
             text:
-              'Tap on the name of the chat at the top to open <b class="px-1">Group/Chat Info</b>',
-          },
-          {
-            text: "In chat info, scroll all the way to the bottom",
-          },
-          {
-            text: 'Tap on<b class="px-1">Export Chat</b>',
-          },
-          {
-            text: 'Choose<b class="px-1">Without Media</b>',
+              "<span>Tap on the name of the chat at the top to open <b>Group/Chat Info</b>.</span>",
           },
           {
             text:
-              'Tap on<b class="px-1">Save to Files</b> to save it on your iPhone',
+              "<span>In chat info, scroll all the way to the bottom.</span>",
+          },
+          {
+            text: "<span>Tap on <b>Export Chat</b>.</span>",
+          },
+          {
+            text: "<span>Choose <b >Without Media</b>.</span>",
           },
           {
             text:
-              'Finally select <b class="px-1">On my iPhone</b> to save it locally',
+              "<span>Tap on <b>Save to Files</b> to save it on your iPhone.</span>",
           },
           {
-            text: "At last you can choose your exported .zip to be analyzed",
+            text:
+              "<span>Finally select <b >On my iPhone</b> to save it locally.</span>",
+          },
+          {
+            text:
+              "<span>At last you can select your exported .zip to be analyzed.</span>",
           },
         ],
       },
@@ -279,21 +281,21 @@ export default {
         tabItems: [
           {
             text:
-              'On your Android phone open <b class="px-1">WhatsApp</b> and tap on the chat you would like to export',
+              "<span>On your Android phone open <b>WhatsApp</b> and tap on the chat you would like to export.</span>",
           },
           {
             text:
-              'Tap on the name of the chat at the top to open the  <b class="px-1">Group/Chat Info</b>',
+              "<span>Tap on the name of the chat at the top to open the <b >Group/Chat Info</b>.</span>",
           },
           {
-            text: 'In the new menu tap on <b class="px-1">More</b>',
+            text: "<span>In the new menu tap on <b>More</b>.</span>",
           },
           {
-            text: 'Tap on <b class="px-1">Export chat</b>',
+            text: "<span>Tap on <b>Export chat</b>.</span>",
           },
           {
             text:
-              'Choose <b class="px-1">Without Media</b>. Send the file yourself via <b class="px-1">E-Mail</b> or save it to <b class="px-1">Google Drive</b>',
+              "<span>Choose <b>Without Media</b> and send the file yourself via <b>E-Mail</b> or save it to <b>Google Drive</b>.</span>",
           },
         ],
       },
