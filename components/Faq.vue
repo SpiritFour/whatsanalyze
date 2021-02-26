@@ -51,7 +51,7 @@
           How to Backup Whatsapp chat on iOS including iOS 14
         </v-expansion-panel-header>
         <v-expansion-panel-content>
-          By backing up your WhatsApp chat on your Iphone you can load your
+          By backing up your WhatsApp chat on your iPhone you can load your
           account to a new device easily. Open WhatsApp, tap on "Settings" at
           the bottom-right corner. Then tap on "Chats" and "Chat Backup" next
           press "Back Up Now"

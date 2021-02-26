@@ -20,7 +20,7 @@
               <v-chip class="white--text ml-0" color="purple" label small>
                 iOS
               </v-chip>
-              On Iphone open WhatsApp and tap on the chat you would like to
+              On iPhone open WhatsApp and tap on the chat you would like to
               export
             </v-col>
           </v-row>
@@ -48,7 +48,7 @@
         <v-timeline-item color="grey" small>
           <v-row justify="space-between">
             <v-col cols="7">
-              Tap on "Save to Files" to save it on your Iphone
+              Tap on "Save to Files" to save it on your iPhone
             </v-col>
             <v-col class="text-right" cols="5"> </v-col>
           </v-row>
@@ -56,7 +56,7 @@
         <v-timeline-item color="grey" small>
           <v-row justify="space-between">
             <v-col cols="7">
-              Finally select "On my Iphone" to save it locally
+              Finally select "On my iPhone" to save it locally
             </v-col>
             <v-col class="text-right" cols="5"> </v-col>
           </v-row>

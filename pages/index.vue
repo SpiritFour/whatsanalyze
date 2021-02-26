@@ -32,10 +32,16 @@
 
     <v-container v-show="!isShowingChats" class="pt-16">
       <ExportExplainer />
-      <CtaMiddle />
+      <Cta />
       <Faq />
       <Testimonials />
-      <CtaBottom />
+      <Cta
+        title="Analyze your own WhatsApp data now"
+        buttonText="Analyze my chat"
+        text="Interested about your own chat data? Reveal some interesting facts now.
+      Start with figuring out how many toilet rolls would be needed to print
+      your whole chat. Take deep dive in your data now!."
+      />
     </v-container>
     <v-container v-if="isShowingChats">
       <ChartsResults :chat_="chat_" />

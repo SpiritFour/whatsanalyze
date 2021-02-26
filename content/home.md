@@ -16,11 +16,11 @@ Don't have your chat file yet? Read our tutorial: **How to export your chat** no
 
 The **tutorial to export** your chat depends on the Device you are using. We have a tutorial for **1: iOS**, for **2: Android**, or **3: PC** they work for **individual chats** or **group chats**.
 
-### Option 1 Iphone: Export as a .txt file on iOS
+### Option 1 iPhone: Export as a .txt file on iOS
 
 Exporting your complete chat history is easy
 
-1. Navigate to the WhatsApp application on your Iphone and open it
+1. Navigate to the WhatsApp application on your iPhone and open it
 1. Tap on the chat and then again on the name of the chat at the top. To open up further details about this chat
 1. In chat settings, scroll all the way to the bottom and tap on export chat you can select:
 

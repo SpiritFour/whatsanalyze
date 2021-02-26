@@ -16,21 +16,6 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" sm="6">
-          <ChartsRadarChart
-            :chartdata="chat_"
-            :options="radarchartHeaderChartOptions"
-          />
-        </v-col>
-        <v-col cols="12" sm="6">
-          <ChartsBarChart
-            :chartdata="chat_"
-            :options="barchartHeaderChartOptions"
-            dataGrouping="hourly"
-          />
-        </v-col>
-      </v-row>
-      <v-row>
         <v-col cols="12">
           <ChartsWordCloud :chartdata="chat_" />
         </v-col>
