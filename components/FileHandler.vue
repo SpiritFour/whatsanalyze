@@ -1,6 +1,6 @@
 <template>
   <div
-    class="drop-container pa-4 pa-md-0 mb-8"
+    class="drop-container pa-md-0"
     @dragover.prevent="dragOver"
     @dragleave.prevent="dragLeave"
     @drop.prevent="drop($event)"

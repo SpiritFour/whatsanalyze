@@ -7,7 +7,7 @@
       Reveal insights & get statistics, while all data stays on your device.
     </div>
     <br />
-    <p
+    <div
       style="
         background: rgba(217, 60, 60, 0.7);
         color: black;
@@ -19,6 +19,6 @@
       <v-icon color="black" style="vertical-align: sub"> mdi-security </v-icon>
       <strong>No</strong> chat <strong>data</strong> is sent to a server it runs
       only <strong>locally</strong> in your browser.
-    </p>
+    </div>
   </div>
 </template>

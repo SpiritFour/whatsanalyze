@@ -135,6 +135,7 @@ export class Chat {
     this._hourlyData = Promise.resolve(this._getHourlyData());
     this._dailyData = Promise.resolve(this._getDailyData());
     this._weeklyData = Promise.resolve(this._getWeeklyData());
+    this._shareOfSpeech = Promise.resolve(this._getShareOfSpeech());
   }
 
   get sortedFreqDict() {
@@ -159,6 +160,7 @@ export class Chat {
     this._hourlyData = Promise.resolve(this._getHourlyData());
     this._dailyData = Promise.resolve(this._getDailyData());
     this._weeklyData = Promise.resolve(this._getWeeklyData());
+    this._shareOfSpeech = Promise.resolve(this._getShareOfSpeech());
   }
 
   _getMessagesPerPerson() {
@@ -203,7 +205,7 @@ export class Chat {
     return this._dates;
   }
 
-  getShareOfSpeech(opacity = 1) {
+  _getShareOfSpeech(opacity = 1) {
     return {
       labels: this.messagesPerPerson.map((person) => person.name),
       datasets: [
@@ -217,6 +219,10 @@ export class Chat {
         },
       ],
     };
+  }
+
+  getShareOfSpeech() {
+    return this._shareOfSpeech;
   }
 
   _getFunFacts() {
@@ -416,7 +422,6 @@ export class Chat {
   }
 
   _getAllWords() {
-    console.log(this.sortedFreqDict);
     return this.sortedFreqDict
       .filter(
         (word) =>

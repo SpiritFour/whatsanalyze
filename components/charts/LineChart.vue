@@ -38,7 +38,6 @@ export default {
                 },
                 ticks: {
                   precision: 0,
-                  stepSize: 1,
                   beginAtZero: true,
                 },
               },
