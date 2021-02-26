@@ -16,20 +16,25 @@
       <v-tab-item v-for="(data, idx) in tabData" :key="idx">
         <v-container>
           <v-row no-gutters>
-            <v-col cols="12" sm="4" class="pb-8">
+            <v-col cols="12" sm="4">
               <div class="text-center">
                 <div class="carousel-container">
                   <div class="frame-container">
-                    <v-img class="frame" contain :src="data.frameImg" />
+                    <v-img
+                      class="frame ma-md-16"
+                      contain
+                      :src="data.frameImg"
+                    />
                   </div>
                   <v-carousel
-                    v-model="activeTab"
+                    v-model="tabStatus[idx]"
                     :continuous="false"
                     hide-delimiter-background
                     hide-delimiters
                     show-arrows-on-hover
                     height="100%"
                     width="100%"
+                    class="pa-md-16"
                   >
                     <v-carousel-item
                       v-for="(item, idx) in data.carouselItems"
@@ -49,9 +54,9 @@
                   v-for="(tabItem, i) in data.tabItems"
                   :key="i"
                   :text="tabItem.text"
-                  :color="activeTab === i ? 'blue' : 'grey'"
+                  :color="tabStatus[idx] === i ? 'blue' : 'grey'"
                   fill-dot
-                  @click.native.stop="activeTab = i"
+                  @click.native.stop="tabStatus[idx] = i"
                 >
                   <v-row>
                     {{ tabItem.text }}
@@ -66,7 +71,7 @@
                 style="max-width: 100%"
               >
                 <v-icon>mdi-arrow-right</v-icon>
-                Select file via box above.
+                Select file via box above. {{ tabStatus }}
               </v-btn>
             </v-col>
           </v-row>
@@ -109,7 +114,8 @@ import img5 from "@/assets/img/Android/5.png";
 export default {
   data: () => ({
     tab: null,
-    activeTab: 0,
+    tabStatus: [0, 0],
+
     tabData: [
       {
         title: "iOS (Apple)",
