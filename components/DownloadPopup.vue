@@ -2,7 +2,19 @@
   <div class="text-center">
     <v-dialog v-model="dialog" width="500">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn color="red lighten-2" dark v-bind="attrs" v-on="on">
+        <v-btn
+          color="red lighten-2"
+          dark
+          v-bind="attrs"
+          v-on="on"
+          @click="
+            this.$gtag.event('donation-popup-clicked', {
+              event_category: 'donation',
+              event_label: 'popup-clicked',
+              value: '1',
+            })
+          "
+        >
           <v-icon>mdi-download</v-icon>Download your Results now!
         </v-btn>
       </template>
@@ -74,6 +86,11 @@ export default {
   },
   methods: {
     download() {
+      this.$gtag.event("donation-popup-clicked", {
+        event_category: "donation",
+        event_label: "paypal-clicked",
+        value: "1",
+      });
       setTimeout(() => {
         html2canvas(this.results.$el, {
           scrollX: 0,
@@ -87,7 +104,6 @@ export default {
             canvas.toDataURL(),
             "whatsanlazye-results-" + names + ".png"
           );
-          this.downloading = false;
         });
       }, 20000);
     },
