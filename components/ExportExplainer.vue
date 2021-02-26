@@ -107,6 +107,41 @@ import img5_lazy from "@/assets/img/Android/5copy.png";
 import img5 from "@/assets/img/Android/5.png";
 
 export default {
+  mounted() {
+    // Preload images
+    const images = [
+      iOSFrame,
+      AndroidFrame,
+      iOS_img1_lazy,
+      iOS_img2_lazy,
+      iOS_img3_lazy,
+      iOS_img4_lazy,
+      iOS_img5_lazy,
+      iOS_img6_lazy,
+      iOS_img7_lazy,
+      img1_lazy,
+      img2_lazy,
+      img3_lazy,
+      img4_lazy,
+      img5_lazy,
+      iOS_img1,
+      iOS_img2,
+      iOS_img3,
+      iOS_img4,
+      iOS_img5,
+      iOS_img6,
+      iOS_img7,
+      img1,
+      img2,
+      img3,
+      img4,
+      img5,
+    ];
+    for (const src in images) {
+      const image = new Image();
+      image.src = src;
+    }
+  },
   data: () => ({
     tab: null,
     activeTab: 0,
