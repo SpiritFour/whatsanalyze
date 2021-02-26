@@ -33,7 +33,7 @@
         <v-carousel-item>
           <ChartsLineChart
             :chartdata="chat_"
-            :options="bargraphHeaderChartOptions"
+            :options="linegraphHeaderChartOptions"
           />
         </v-carousel-item>
         <v-carousel-item>
@@ -103,13 +103,67 @@ export default {
           yAxes: [
             {
               ticks: {
-                display: true,
+                display: false,
               },
               scaleLabel: {
                 display: false,
               },
               gridLines: {
-                display: true,
+                display: false,
+              },
+            },
+          ],
+        },
+        elements: {
+          line: {
+            tension: 0,
+          },
+        },
+      },
+      linegraphHeaderChartOptions: {
+        pointHitRadius: 5,
+        responsive: true,
+        maintainAspectRatio: true,
+        lineTension: 1,
+        legend: {
+          position: "top",
+          labels: {
+            fontStyle: "bold",
+            fontColor: "rgb(51,51,51)",
+            fontSize: 10,
+          },
+        },
+        scales: {
+          xAxes: [
+            {
+              type: "time",
+              time: {},
+              gridLines: {
+                display: false,
+                color: "#FFFFFF",
+              },
+              ticks: {
+                fontColor: "rgb(51,51,51)",
+                fontStyle: "bold",
+                fontSize: 11,
+              },
+            },
+          ],
+          yAxes: [
+            {
+              scaleLabel: {
+                display: false,
+                labelString: "Messages",
+              },
+              ticks: {
+                precision: 0,
+                stepSize: 1,
+                beginAtZero: true,
+                display: false,
+              },
+              gridLines: {
+                display: false,
+                color: "#FFFFFF",
               },
             },
           ],
