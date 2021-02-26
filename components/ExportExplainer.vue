@@ -57,17 +57,17 @@
                     {{ tabItem.text }}
                   </v-row>
                 </v-timeline-item>
-                <v-timeline-item class="mb-4" hide-dot>
-                  <v-btn
-                    to="#drop"
-                    color="#07bc4c"
-                    class="my-5 text-h6 white--text"
-                  >
-                    <v-icon>mdi-arrow-right</v-icon>
-                    Tab on the upload box above and select your file.
-                  </v-btn>
-                </v-timeline-item>
               </v-timeline>
+
+              <v-btn
+                to="#drop"
+                color="#07bc4c"
+                class="text-md-h6 text-caption ml-10 white--text"
+                style="max-width: 100%"
+              >
+                <v-icon>mdi-arrow-right</v-icon>
+                Select file via box above.
+              </v-btn>
             </v-col>
           </v-row>
         </v-container>
