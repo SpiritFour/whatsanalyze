@@ -56,7 +56,7 @@
                   :text="tabItem.text"
                   :color="tabStatus[idx] === i ? 'blue' : 'grey'"
                   fill-dot
-                  @click.native.stop="tabStatus[idx] = i"
+                  @click.native.stop="tabStatus = [i, i]"
                 >
                   <v-row>
                     {{ tabItem.text }}
@@ -71,7 +71,7 @@
                 style="max-width: 100%"
               >
                 <v-icon>mdi-arrow-right</v-icon>
-                Select file via box above. {{ tabStatus }}
+                Select file via box above. {{ tabStatus }} {{ idx }}
               </v-btn>
             </v-col>
           </v-row>
@@ -115,7 +115,7 @@ export default {
   data: () => ({
     tab: null,
     tabStatus: [0, 0],
-
+    po: 0,
     tabData: [
       {
         title: "iOS (Apple)",
