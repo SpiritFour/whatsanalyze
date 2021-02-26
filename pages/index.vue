@@ -23,6 +23,7 @@
         <v-row v-if="$vuetify.breakpoint.smAndDown" class="top-color ma-0">
           <v-col>
             <FileHandler
+              id="fileHandler"
               @new_messages="newMessages"
               @hide_explanation="isShowingChats = $event"
             />
