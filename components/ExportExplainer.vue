@@ -44,10 +44,8 @@
                         :style="
                           'position: absolute; left: ' +
                           item.x +
-                          'px' +
                           '; top: ' +
-                          item.y +
-                          'px'
+                          item.y
                         "
                         class="blinking"
                       ></v-btn>
@@ -134,38 +132,50 @@ export default {
             img: iOS_img1,
             imgLazy: iOS_img1_lazy,
             text: "",
-            x: 50,
-            y: 100,
+            x: "50%",
+            y: "20%",
           },
           {
             img: iOS_img2,
             imgLazy: iOS_img2_lazy,
             text: "",
+            x: "50%",
+            y: "10%",
           },
           {
             img: iOS_img3,
             imgLazy: iOS_img3_lazy,
             text: "",
+            x: "50%",
+            y: "90%",
           },
           {
             img: iOS_img4,
             imgLazy: iOS_img4_lazy,
             text: "",
+            x: "20%",
+            y: "61%",
           },
           {
             img: iOS_img5,
             imgLazy: iOS_img5_lazy,
             text: "",
+            x: "50%",
+            y: "76%",
           },
           {
             img: iOS_img6,
             imgLazy: iOS_img6_lazy,
             text: "",
+            x: "50%",
+            y: "63%",
           },
           {
             img: iOS_img7,
             imgLazy: iOS_img7_lazy,
             text: "",
+            x: "85%",
+            y: "11%",
           },
         ],
         tabItems: [
@@ -202,26 +212,36 @@ export default {
             img: img1,
             imgLazy: img1_lazy,
             text: "",
+            x: "50%",
+            y: "18%",
           },
           {
             img: img2,
             imgLazy: img2_lazy,
             text: "",
+            x: "50%",
+            y: "13%",
           },
           {
             img: img3,
             imgLazy: img3_lazy,
             text: "",
+            x: "60%",
+            y: "37%",
           },
           {
             img: img4,
             imgLazy: img4_lazy,
             text: "",
+            x: "60%",
+            y: "27%",
           },
           {
             img: img5,
             imgLazy: img5_lazy,
             text: "",
+            x: "27%",
+            y: "50%",
           },
         ],
         tabItems: [
@@ -275,6 +295,8 @@ export default {
   z-index: 99999;
   border: 3px solid rgba(0, 128, 0, 0.7);
   background-color: transparent;
+  margin-left: -25px;
+  margin-top: -25px;
 }
 
 @keyframes blink {
@@ -285,8 +307,8 @@ export default {
   50% {
     width: 10px;
     height: 10px;
-    margin-left: 20px;
-    margin-top: 20px;
+    margin-left: 0px;
+    margin-top: 0px;
     background-color: rgba(0, 128, 0, 0.3);
     border-color: rgba(0, 128, 0, 0.3);
     border-width: 2px;
