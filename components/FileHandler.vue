@@ -54,7 +54,7 @@
 
             <span v-if="isSuccess">another file to analyze it.</span>
             <span v-if="!isSuccess">
-              your Whats App .txt file into this box.</span
+              your WhatsApp .zip or .txt file into this box.</span
             >
           </div>
         </div>
