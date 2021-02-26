@@ -8,7 +8,7 @@
           v-bind="attrs"
           v-on="on"
           @click="
-            this.$gtag.event('donation-popup-clicked', {
+            $gtag.event('donation-popup-clicked', {
               event_category: 'donation',
               event_label: 'popup-clicked',
               value: '1',
@@ -27,7 +27,7 @@
 
         <v-card-text class="pt-3">
           You will get all results as an image exactly as presented on your
-          device.
+          device. Generating may take a while.
         </v-card-text>
 
         <v-row align="center" justify="center" class="mb-3" @click="download">
@@ -85,17 +85,20 @@ export default {
     };
   },
   methods: {
-    download() {
+    async download() {
       this.$gtag.event("donation-popup-clicked", {
         event_category: "donation",
         event_label: "paypal-clicked",
         value: "1",
       });
-      setTimeout(() => {
-        html2canvas(this.results.$el, {
-          scrollX: 0,
-          scrollY: -window.scrollY,
-        }).then((canvas) => {
+      let canvas = html2canvas(this.results.$el, {
+        scrollX: 0,
+        scrollY: -window.scrollY,
+      });
+
+      let timeout = new Promise((res) => setTimeout(() => res(), 20000));
+      timeout.then(() => {
+        canvas.then((canvas) => {
           let names = this.chat.messagesPerPerson
             .slice(0, 2)
             .map((person) => person.name)
@@ -105,7 +108,7 @@ export default {
             "whatsanlazye-results-" + names + ".png"
           );
         });
-      }, 20000);
+      });
     },
   },
 };
