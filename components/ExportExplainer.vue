@@ -123,7 +123,7 @@ import img5 from "@/assets/img/Android/5.png";
 
 export default {
   data: () => ({
-    tab: null,
+    tab: window.safari ? 0 : 1,
     activeTab: 0,
     tabData: [
       {
