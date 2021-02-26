@@ -46,37 +46,16 @@
       />
     </v-container>
     <v-container v-if="isShowingChats">
-      <ChartsResults :chat_="chat_" />
-      <v-row align="center" justify="center" class="mb-3">
-        <form
-          action="https://www.paypal.com/donate"
-          method="post"
-          target="_top"
-        >
-          <input type="hidden" name="hosted_button_id" value="EPCYG8WEF289G" />
-          <input
-            type="image"
-            src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"
-            border="0"
-            name="submit"
-            title="PayPal - The safer, easier way to pay online!"
-            alt="Donate with PayPal button"
-          />
-          <img
-            alt=""
-            border="0"
-            src="https://www.paypal.com/en_US/i/scr/pixel.gif"
-            width="1"
-            height="1"
-          />
-        </form>
-      </v-row>
+      <ChartsResults ref="results" :chat_="chat_" />
+      <DownloadPopup :results="$refs.results" :chat="this.chat_" />
     </v-container>
   </div>
 </template>
 
 <script>
 import { Chat } from "~/functions/transformChatData";
+import html2canvas from "html2canvas";
+import { downloadBase64File } from "~/functions/utils";
 
 export default {
   async asyncData({ $content }) {
@@ -90,12 +69,30 @@ export default {
     return {
       isShowingChats: false,
       chat_: new Chat(),
+      downloading: false,
     };
   },
   methods: {
     Chat,
     newMessages(messages) {
       this.chat_ = new Chat(messages);
+    },
+    downloadImage() {
+      this.downloading = true;
+      html2canvas(this.$refs.results.$el, {
+        scrollX: 0,
+        scrollY: -window.scrollY,
+      }).then((canvas) => {
+        let names = this.chat_.messagesPerPerson
+          .slice(0, 2)
+          .map((person) => person.name)
+          .join("-");
+        downloadBase64File(
+          canvas.toDataURL(),
+          "whatsanlazye-results-" + names + ".png"
+        );
+        this.downloading = false;
+      });
     },
   },
 };

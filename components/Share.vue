@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import { downloadBase64File } from "~/functions/utils";
+
 export default {
   name: "Share",
   props: {
@@ -37,16 +39,6 @@ export default {
     };
   },
   methods: {
-    downloadBase64File(contentBase64, fileName) {
-      const downloadLink = document.createElement("a");
-      document.body.appendChild(downloadLink);
-
-      downloadLink.href = contentBase64;
-      downloadLink.target = "_self";
-      downloadLink.download = fileName;
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
-    },
     share() {
       if (this.canShare) {
         this.loading = true;
@@ -63,7 +55,7 @@ export default {
         });
       } else {
         let a = this.$slots.default[0].child.$refs.canvas.toDataURL();
-        this.downloadBase64File(a, this.imageName);
+        downloadBase64File(a, this.imageName);
       }
     },
   },
