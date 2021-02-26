@@ -75,6 +75,8 @@ export default {
   data() {
     return {
       linegraphHeaderChartOptions: {
+        tooltips: { enabled: false },
+        hover: { mode: null },
         pointHitRadius: 5,
         responsive: true,
         maintainAspectRatio: true,
@@ -132,6 +134,8 @@ export default {
         },
       },
       donoughtHeaderChartOptions: {
+        tooltips: { enabled: false },
+        hover: { mode: null },
         responsive: true,
         maintainAspectRatio: true,
         legend: {
@@ -163,6 +167,8 @@ export default {
         },
       },
       radarchartHeaderChartOptions: {
+        tooltips: { enabled: false },
+        hover: { mode: null },
         responsive: true,
         maintainAspectRatio: true,
         scale: {
@@ -191,6 +197,8 @@ export default {
         },
       },
       barchartHeaderChartOptions: {
+        tooltips: { enabled: false },
+        hover: { mode: null },
         responsive: true,
         maintainAspectRatio: true,
         legend: {
