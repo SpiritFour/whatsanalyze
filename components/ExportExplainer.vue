@@ -36,6 +36,19 @@
                       :key="idx"
                     >
                       <v-img contain :lazy-src="item.imgLazy" :src="item.img" />
+                      <v-btn
+                        fab
+                        outlined
+                        color="black"
+                        disabled
+                        :style="
+                          'position: absolute; left: ' +
+                          item.x +
+                          '; top: ' +
+                          item.y
+                        "
+                        class="blinking"
+                      ></v-btn>
                     </v-carousel-item>
                   </v-carousel>
                 </div>
@@ -108,7 +121,7 @@ import img5 from "@/assets/img/Android/5.png";
 
 export default {
   data: () => ({
-    tab: null,
+    tab: window.safari ? 0 : 1,
     activeTab: 0,
     tabData: [
       {
@@ -119,36 +132,50 @@ export default {
             img: iOS_img1,
             imgLazy: iOS_img1_lazy,
             text: "",
+            x: "50%",
+            y: "20%",
           },
           {
             img: iOS_img2,
             imgLazy: iOS_img2_lazy,
             text: "",
+            x: "50%",
+            y: "10%",
           },
           {
             img: iOS_img3,
             imgLazy: iOS_img3_lazy,
             text: "",
+            x: "50%",
+            y: "90%",
           },
           {
             img: iOS_img4,
             imgLazy: iOS_img4_lazy,
             text: "",
+            x: "20%",
+            y: "61%",
           },
           {
             img: iOS_img5,
             imgLazy: iOS_img5_lazy,
             text: "",
+            x: "50%",
+            y: "76%",
           },
           {
             img: iOS_img6,
             imgLazy: iOS_img6_lazy,
             text: "",
+            x: "50%",
+            y: "63%",
           },
           {
             img: iOS_img7,
             imgLazy: iOS_img7_lazy,
             text: "",
+            x: "85%",
+            y: "11%",
           },
           {
             img: iOS_img8,
@@ -195,26 +222,36 @@ export default {
             img: img1,
             imgLazy: img1_lazy,
             text: "",
+            x: "50%",
+            y: "18%",
           },
           {
             img: img2,
             imgLazy: img2_lazy,
             text: "",
+            x: "50%",
+            y: "13%",
           },
           {
             img: img3,
             imgLazy: img3_lazy,
             text: "",
+            x: "60%",
+            y: "37%",
           },
           {
             img: img4,
             imgLazy: img4_lazy,
             text: "",
+            x: "60%",
+            y: "27%",
           },
           {
             img: img5,
             imgLazy: img5_lazy,
             text: "",
+            x: "27%",
+            y: "50%",
           },
         ],
         tabItems: [
@@ -243,7 +280,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .carousel-container {
   position: relative;
   width: 100%;
@@ -260,5 +297,35 @@ export default {
 .frame {
   z-index: 99999;
   top: 2px;
+}
+.blinking {
+  animation-name: blink;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  z-index: 99999;
+  border: 3px solid rgba(0, 128, 0, 0.7);
+  background-color: transparent;
+  margin-left: -25px;
+  margin-top: -25px;
+}
+
+@keyframes blink {
+  0% {
+    width: 50px;
+    height: 50px;
+  }
+  50% {
+    width: 10px;
+    height: 10px;
+    margin-left: 0px;
+    margin-top: 0px;
+    background-color: rgba(0, 128, 0, 0.3);
+    border-color: rgba(0, 128, 0, 0.3);
+    border-width: 2px;
+  }
+  100% {
+    width: 50px;
+    height: 50px;
+  }
 }
 </style>

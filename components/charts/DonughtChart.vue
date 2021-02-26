@@ -22,13 +22,20 @@ export default {
   watch: {
     chartdata: {
       handler() {
-        this.renderChart(this.chartdata.getShareOfSpeech(), this.options);
+        this.updateGraph();
       },
       deep: true,
     },
   },
+  methods: {
+    updateGraph() {
+      this.chartdata
+        .getShareOfSpeech()
+        .then((x) => this.renderChart(x, this.options));
+    },
+  },
   mounted() {
-    this.renderChart(this.chartdata.getShareOfSpeech(), this.options);
+    this.updateGraph();
   },
 };
 </script>
