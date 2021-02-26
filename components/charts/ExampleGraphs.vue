@@ -238,6 +238,11 @@ export default {
 };
 </script>
 <style lang="scss">
+.v-carousel__controls__item {
+  margin: 0 8px !important;
+  width: 7px !important;
+  height: 7px !important;
+}
 .col {
   padding: 1em !important;
 }
