@@ -85,6 +85,17 @@ export default {
     };
   },
   methods: {
+    extendDataStructure(messages) {
+      let authors = {};
+      messages.forEach(function (object, index) {
+        if (!(object.author in authors)) authors[object.author] = 0;
+        else authors[object.author] += 1;
+        object.absolute_id = index;
+        object.personal_id = authors[object.author];
+      });
+      return messages;
+    },
+
     zipLoadEndHandler(e) {
       const arrayBuffer = e.target.result;
       const jszip = new JSZip();
@@ -101,7 +112,7 @@ export default {
     },
 
     updateMessages(messages) {
-      this.messages = messages;
+      this.messages = this.extendDataStructure(messages);
       this.$emit("new_messages", this.messages);
       this.$emit("hide_explanation", true);
       this.processing = false;

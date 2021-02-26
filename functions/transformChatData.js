@@ -49,10 +49,11 @@ export class Chat {
 
   // creates a sorted FreqArray for the chat corpus [{word: 10},{hi:9},...]
   static createSortedFreqDict(chatObject) {
-    const message_string = chatObject.reduce(
+    let message_string = chatObject.reduce(
       (n, { message }) => n + " " + message,
       " "
     );
+    message_string = message_string.replace(/\u200E/gi, "");
     let message_array = message_string.replace(/\n/g, " ").split(" ");
     let distribution = {};
     message_array.map(function (item) {
@@ -415,6 +416,7 @@ export class Chat {
   }
 
   _getAllWords() {
+    console.log(this.sortedFreqDict);
     return this.sortedFreqDict
       .filter(
         (word) =>
@@ -429,7 +431,9 @@ export class Chat {
               "aber",
               "<media",
               "omitted>",
-              "‎image",
+              "bild",
+              "image",
+              "weggelassen",
               "omitted",
             ].includes(word[0].toLowerCase())
           ) && word[1] > 1
