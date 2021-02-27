@@ -25,6 +25,8 @@ export default {
         content:
           "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
       },
+      // bing indexing
+      { name: "msvalidate.01", content: "E04DE33CC93C0FF892248C9E70A9A918" },
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
   },
