@@ -6958,6 +6958,11 @@ is-hexadecimal@^1.0.0:
   resolved "https://registry.npmjs.org/is-hexadecimal/-/is-hexadecimal-1.0.4.tgz"
   integrity sha512-gyPJuv83bHMpocVYoqof5VDiZveEoGoFL8m3BXNb2VW8Xs+rz9kqO8LOQ5DH6EsuvilT1ApazU0pyl+ytbPtlw==
 
+is-https@^2.0.0:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/is-https/-/is-https-2.0.2.tgz#7009d303c72580f15897d5c063d6b6bc1f838fef"
+  integrity sha512-UfUCKVQH/6PQRCh5Qk9vNu4feLZiFmV/gr8DjbtJD0IrCRIDTA6E+d/AVFGPulI5tqK5W45fYbn1Nir1O99rFw==
+
 is-lambda@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/is-lambda/-/is-lambda-1.0.1.tgz"
@@ -10875,6 +10880,13 @@ readdirp@~3.5.0:
   integrity sha512-cMhu7c/8rdhkHXWsY+osBhfSy0JikwpHK/5+imo+LpeasTF8ouErHrlYkwT0++njiyuDvc7OFY5T3ukvZ8qmFQ==
   dependencies:
     picomatch "^2.2.1"
+
+redirect-ssl@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/redirect-ssl/-/redirect-ssl-2.0.0.tgz#0d70f0adeab2de6f01f4adc4da4f55775a29b6cf"
+  integrity sha512-+6hV0ltd6rnBZmHaKtct7siAm1hvwf0F2nTDQHXOkJyt78d6X4Smiyuni/TsXnNsBrpuOQ6vRSvFC+/4VvMylA==
+  dependencies:
+    is-https "^2.0.0"
 
 regenerate-unicode-properties@^8.2.0:
   version "8.2.0"

@@ -31,6 +31,7 @@
     "npm": "^7.5.4",
     "nuxt": "^2.14.12",
     "push-dir": "^0.4.1",
+    "redirect-ssl": "^2.0.0",
     "stopwords-de": "^0.3.0",
     "stopwords-en": "^0.3.0",
     "vue-chartjs": "^3.5.1",

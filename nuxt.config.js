@@ -1,8 +1,13 @@
 import colors from "vuetify/es5/util/colors";
 import fs from "fs";
-// import sass from "sass-loader";
 
 export default {
+  // redirect from http -> https
+  serverMiddleware: [
+    // Will register redirect-ssl npm package
+    "redirect-ssl",
+  ],
+
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
