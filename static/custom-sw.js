@@ -53,4 +53,6 @@ if ("serviceWorker" in navigator) {
     console.log("log all messages");
     console.log(e);
   });
+} else {
+  console.log("no service workger in navigation");
 }
