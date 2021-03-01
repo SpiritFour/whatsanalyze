@@ -104,6 +104,8 @@ export default {
         console.alert(e.data.files); //contains the file(s)
         _this.chat_ = new Chat();
         _this.$refs.filehandler.processFile(e.data.files[0]);
+      } else {
+        console.log("got other stuff:", e);
       }
     });
   },

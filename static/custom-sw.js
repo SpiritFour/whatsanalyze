@@ -19,7 +19,8 @@
 //   });
 // });
 
-//service-worker.js:
+console.alert("Custom service worker!");
+// maybe i need servvice woker windows communicating with each other
 //service-worker.js:
 self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
