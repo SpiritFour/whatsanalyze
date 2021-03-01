@@ -43,19 +43,19 @@ self.addEventListener("fetch", (event) => {
 });
 
 console.log("self: ", JSON.stringify(self));
-console.log(JSON.stringify(self));
-console.log(self);
-navigator.serviceWorker.getRegistrations().then((registrations) => {
-  console.log("all registrations:", registrations);
-  for (const worker of registrations) {
-    console.log("Service worker:", worker);
-  }
+console.log("navigator: ", JSON.stringify(navigator));
+
+navigator.serviceWorker.addEventListener("message", function (e) {
+  console.log("log all messages");
+  console.log(e);
 });
 if ("serviceWorker" in navigator) {
   console.log("service workger in navigation!!! yuhu");
-  navigator.serviceWorker.addEventListener("message", function (e) {
-    console.log("log all messages");
-    console.log(e);
+  navigator.serviceWorker.getRegistrations().then((registrations) => {
+    console.log("all registrations:", registrations);
+    for (const worker of registrations) {
+      console.log("Service worker:", worker);
+    }
   });
 } else {
   console.log("no service workger in navigation");
