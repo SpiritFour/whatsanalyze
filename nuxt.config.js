@@ -38,8 +38,35 @@ export default {
   pwa: {
     manifest: {
       name: "Whats Analyze - The WhatsApp Chat Analyzer",
+      short_name: "whatsanalyze.com",
+      description:
+        "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
+      start_url: "/",
+      display: "standalone",
+      background_color: "#ffffff",
+      theme_color: "#21a68d",
       lang: "en",
       useWebmanifestExtension: true,
+      share_target: {
+        action: "/data",
+        method: "POST",
+        enctype: "multipart/form-data",
+        params: {
+          title: "name",
+          text: "description",
+          url: "link",
+          files: [
+            {
+              name: "records",
+              accept: ["text/txt", ".txt"],
+            },
+            {
+              name: "graphs",
+              accept: "image/svg+xml",
+            },
+          ],
+        },
+      },
     },
   },
 
