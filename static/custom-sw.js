@@ -19,7 +19,7 @@
 //   });
 // });
 
-console.alert("Custom service worker!");
+console.log("Custom service worker!");
 // maybe i need servvice woker windows communicating with each other
 //service-worker.js:
 self.addEventListener("fetch", (event) => {
@@ -41,3 +41,16 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 });
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.getRegistrations().then((registrations) => {
+    for (const worker of registrations) {
+      console.log("Service worker:", worker);
+    }
+  });
+
+  navigator.serviceWorker.addEventListener("message", function (e) {
+    console.log("log all messages");
+    console.log(e);
+  });
+}
