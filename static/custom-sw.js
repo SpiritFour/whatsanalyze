@@ -1,4 +1,3 @@
-console.alert("Custom service worker!");
 // window.$workbox.then((wb) => {
 //   console.log("got workbox", wb);
 //   wb.addEventListener("fetch", (event) => {

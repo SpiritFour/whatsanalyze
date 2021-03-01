@@ -48,7 +48,7 @@ export default {
       lang: "en",
       useWebmanifestExtension: true,
       share_target: {
-        action: "/data2",
+        action: "/?homescreen=1&share-target=1",
         method: "POST",
         enctype: "multipart/form-data",
         params: {
