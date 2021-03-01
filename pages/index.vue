@@ -10,6 +10,7 @@
           >
             <HeaderCta />
             <FileHandler
+              ref="filehandler"
               id="fileHandler"
               v-if="$vuetify.breakpoint.mdAndUp"
               @new_messages="newMessages"
@@ -23,6 +24,7 @@
         <v-row v-if="$vuetify.breakpoint.smAndDown" class="top-color ma-0">
           <v-col>
             <FileHandler
+              ref="filehandler"
               id="fileHandler"
               @new_messages="newMessages"
               @hide_explanation="isShowingChats = $event"
@@ -94,6 +96,16 @@ export default {
         this.downloading = false;
       });
     },
+  },
+  mounted() {
+    let _this = this;
+    navigator.serviceWorker.addEventListener("message", function (e) {
+      if ("receiving-file-share" in _this.$route.query) {
+        console.alert(e.data.files); //contains the file(s)
+        _this.chat_ = new Chat();
+        _this.$refs.filehandler.processFile(e.data.files[0]);
+      }
+    });
   },
 };
 </script>

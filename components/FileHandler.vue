@@ -197,12 +197,12 @@ export default {
   },
   created() {
     //script in index.html:
-    navigator.serviceWorker.addEventListener("message", function (e) {
-      if ("receiving-file-share" in this.$route.query) {
-        console.alert(e.data.files); //contains the file(s)
-        this.processFile(e.data.files[0]);
-      }
-    });
+    // navigator.serviceWorker.addEventListener("message", function (e) {
+    //   if ("receiving-file-share" in this.$route.query) {
+    //     console.alert(e.data.files); //contains the file(s)
+    //     this.processFile(e.data.files[0]);
+    //   }
+    // });
   },
 };
 </script>
