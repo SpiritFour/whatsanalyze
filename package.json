@@ -7,6 +7,7 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
+    "local": "nuxt generate && nuxt start",
     "test": "jest",
     "deploy": "nuxt generate && push-dir --dir=dist --branch=gh-pages --cleanup"
   },

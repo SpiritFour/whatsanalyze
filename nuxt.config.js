@@ -68,6 +68,9 @@ export default {
         },
       },
     },
+    workbox: {
+      importScripts: ["custom-sw.js"],
+    },
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
