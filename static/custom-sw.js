@@ -56,6 +56,13 @@ self.addEventListener("message", function (e) {
 //   // If we don't do this we'll be displaying the notification after the initial installation, which isn't perferred.
 //   console.log("message", event);
 // });
+window.$workbox.then((w) => {
+  console.log("workbox here:", JSON.stringify(w));
+  w.addEventListener("message", (event) => {
+    // If we don't do this we'll be displaying the notification after the initial installation, which isn't perferred.
+    console.log("got message", event);
+  });
+});
 
 console.log("self: ", JSON.stringify(self));
 console.log("self: ", JSON.stringify(self.workbox));
