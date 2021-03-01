@@ -42,12 +42,24 @@ self.addEventListener("fetch", (event) => {
   }
 });
 
-console.log("self: ", JSON.stringify(self));
-
 self.addEventListener("message", function (e) {
   console.log("log all messages");
   console.log(e);
 });
+
+self.workbox.addEventListener("installed", (event) => {
+  // If we don't do this we'll be displaying the notification after the initial installation, which isn't perferred.
+  console.log("installed", event);
+});
+
+self.workbox.addEventListener("message", (event) => {
+  // If we don't do this we'll be displaying the notification after the initial installation, which isn't perferred.
+  console.log("message", event);
+});
+
+console.log("self: ", JSON.stringify(self));
+console.log("self: ", JSON.stringify(self.workbox));
+
 // if ("serviceWorker" in self) {
 //   console.log("service workger in navigation!!! yuhu");
 //   self.getRegistrations().then((registrations) => {
