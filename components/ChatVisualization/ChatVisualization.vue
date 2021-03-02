@@ -4,7 +4,7 @@
       <ChatVisualizationChat :chat="chat" />
     </v-row>
     <v-row justify="center">
-      <v-dialog v-model="showDownloadPopup">
+      <v-dialog v-model="showDownloadPopup" width="500">
         <template v-slot:activator="{ on, attrs }">
           <v-btn
             color="red lighten-2"
