@@ -56,6 +56,7 @@ self.addEventListener("message", function (e) {
 //   // If we don't do this we'll be displaying the notification after the initial installation, which isn't perferred.
 //   console.log("message", event);
 // });
+//window is here not defined
 window.$workbox.then((w) => {
   console.log("workbox here:", JSON.stringify(w));
   w.addEventListener("message", (event) => {
