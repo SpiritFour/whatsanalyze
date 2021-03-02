@@ -1,12 +1,13 @@
 <template>
   <div>
-    <ChatVisualizationPayment
-      @onCreateOrder="onCreateOrder"
-      @onApprove="onApprove"
-      @onError="onError"
-      currency="EUR"
-      :amount="10"
-    />
+    <v-row justify="center"
+      ><ChatVisualizationPayment
+        @onCreateOrder="onCreateOrder"
+        @onApprove="onApprove"
+        @onError="onError"
+        currency="EUR"
+        :amount="10"
+    /></v-row>
   </div>
 </template>
 

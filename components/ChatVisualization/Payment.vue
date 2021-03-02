@@ -49,6 +49,7 @@ export default {
       paypal
         .Buttons({
           style: {
+            size: "small",
             shape: "rect",
             color: "black",
             layout: "vertical",
@@ -88,4 +89,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#paypal-button-container {
+  width: 150px;
+}
+</style>
