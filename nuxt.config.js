@@ -60,12 +60,8 @@ export default {
           url: "link",
           files: [
             {
-              name: "records",
+              name: "file",
               accept: ["text/txt", ".txt"],
-            },
-            {
-              name: "graphs",
-              accept: "image/svg+xml",
             },
           ],
         },
