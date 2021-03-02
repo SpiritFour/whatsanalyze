@@ -63,6 +63,14 @@ export default {
               name: "file",
               accept: ["text/txt", ".txt"],
             },
+            {
+              name: "file2",
+              accept: ["text/plain"],
+            },
+            {
+              name: "file3",
+              accept: ["text"],
+            },
           ],
         },
       },
