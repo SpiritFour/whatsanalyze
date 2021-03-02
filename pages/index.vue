@@ -107,7 +107,7 @@ export default {
       let text = await fetch("/chat_example.txt").then((a) => a.blob());
       console.log("text in rando button", text);
       var data = new FormData();
-      data.append("files", text, "rando.txt");
+      data.append("file", text, "rando.txt");
       console.log("formdata in rando button", data);
       const requestOptions = {
         method: "POST",

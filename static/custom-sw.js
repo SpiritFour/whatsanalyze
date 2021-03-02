@@ -55,28 +55,32 @@ self.onpush = (x) => {
 
 self.onfetch = (event) => {
   const url = new URL(event.request.url);
-  console.log(
-    event,
-    url,
-    event.request.method,
-    url.pathname,
-    url.searchParams.has("share-target"),
-    event.clientId
-  );
+
   if (
     (event.request.method === "POST" &&
       url.pathname === "/" &&
       url.searchParams.has("share-target")) ||
     url.pathname === "/data2"
   ) {
+    console.log(
+      event,
+      url,
+      event.request.method,
+      url.pathname,
+      url.searchParams.has("share-target"),
+      event.clientId
+    );
+    // we should only log this for better readability
     event.respondWith(Response.redirect("/?receiving-file-share=1"));
     event.waitUntil(
       (async function () {
-        const client = await self.clients.get(event.clientId);
+        const client = await self.clients.get(
+          event.clientId || event.resultingClientId
+        );
         console.log("client in wait until", client);
         const data = await event.request.formData();
         console.log("data in wait until", data);
-        const files = data.get("files");
+        const files = data.get("file");
         console.log("files in wait until", files);
         client.postMessage({ files });
       })()
