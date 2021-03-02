@@ -127,28 +127,30 @@ export default {
     navigator.serviceWorker.addEventListener("push", (m) => {
       console.log("index push", m);
     });
-    window.$workbox.then((workbox) => {
-      console.log("workbox here", workbox);
-      if (workbox) {
-        workbox.addEventListener("installed", (event) => {
-          // If we don't do this we'll be displaying the notification after the initial installation, which isn't perferred.
-          if (event.isUpdate) {
-            // whatever logic you want to use to notify the user that they need to refresh the page.
-          }
-        });
-        workbox.addEventListener("push", (m) => {
-          console.log("index push wb", m);
-        });
-        workbox.addEventListener("message", (m) => {
-          console.log(m.data.files); //contains the file(s)
-          console.log("index message wb", m);
-          _this.chat_ = new Chat();
-          let files = m.data.files;
-          if (Array.isArray(files)) files = files[0];
-          _this.$refs.filehandler.processFile(files);
-        });
-      }
-    });
+    if (window.$workbox !== undefined) {
+      window.$workbox.then((workbox) => {
+        console.log("workbox here", workbox);
+        if (workbox) {
+          workbox.addEventListener("installed", (event) => {
+            // If we don't do this we'll be displaying the notification after the initial installation, which isn't perferred.
+            if (event.isUpdate) {
+              // whatever logic you want to use to notify the user that they need to refresh the page.
+            }
+          });
+          workbox.addEventListener("push", (m) => {
+            console.log("index push wb", m);
+          });
+          workbox.addEventListener("message", (m) => {
+            console.log(m.data.files); //contains the file(s)
+            console.log("index message wb", m);
+            _this.chat_ = new Chat();
+            let files = m.data.files;
+            if (Array.isArray(files)) files = files[0];
+            _this.$refs.filehandler.processFile(files);
+          });
+        }
+      });
+    }
   },
 };
 </script>
