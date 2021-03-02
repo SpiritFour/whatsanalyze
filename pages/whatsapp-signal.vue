@@ -11,19 +11,23 @@ export default {
       page,
     };
   },
-  head() {
-    return {
-      title: this.title,
-      meta: [
-        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
-        {
-          hid: "description",
-          name: "description",
-          content:
-            "Learn how to export your chat from WhatsApp to Signal ✓ Now working for Group Chats ✓ Keep your Data ✓ No Chat Data is sent to a Server. Get Started now!",
-        },
-      ],
-    };
+
+  head: {
+    title: "WhatsAnalyze - How to switch from Signal to WhatsApp",
+    meta: [
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      {
+        hid: "description",
+        name: "description",
+        content:
+          "Learn how to export your chat from WhatsApp to Signal ✓ Now working for Group Chats ✓ Keep your Data ✓ No Chat Data is sent to a Server. Get Started now!",
+      },
+      {
+        property: "op:image",
+        content: "/whatsanalyze-logo-white.png",
+      },
+    ],
   },
 };
 </script>

@@ -47,7 +47,7 @@
     </v-container>
 
     <v-container v-if="isShowingChats">
-      <ChartsResults ref="results" :chat_="chat_" />
+      <ChartsResults ref="results" :chat="chat_" />
       <DownloadPopup :results="$refs.results" :chat="this.chat_" />
     </v-container>
   </div>
@@ -64,6 +64,22 @@ export default {
     return {
       page,
     };
+  },
+  head: {
+    titleTemplate: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+    title: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+    meta: [
+      {
+        hid: "description",
+        name: "description",
+        content:
+          "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
+      },
+      {
+        property: "op:image",
+        content: "/whatsanalyze-logo-white.png",
+      },
+    ],
   },
 
   data() {
