@@ -23,7 +23,7 @@
     </div>
     <!-- Chat -->
     <v-container class="chat">
-      <v-row v-for="(data, idx) in chat_.chatObject" no-gutters :key="idx">
+      <v-row v-for="(data, idx) in chat.chatObject" no-gutters :key="idx">
         <v-sheet
           elevation="1"
           max-width="40%"
@@ -33,7 +33,7 @@
           :class="{
             myMessage: selectedEgo
               ? selectedEgo === data.author
-              : chat_.messagesPerPerson[0].name === data.author,
+              : chat.messagesPerPerson[0].name === data.author,
             system: colors[data.author] === undefined,
           }"
         >
@@ -66,10 +66,11 @@
 
 <script>
 export default {
+  name: "Chat",
   computed: {
     colors() {
       let colors = {};
-      this.chat_.messagesPerPerson.forEach((person) => {
+      this.chat.messagesPerPerson.forEach((person) => {
         colors[person.name] = person.color;
       });
       return colors;
@@ -80,7 +81,7 @@ export default {
       selectedEgo: "",
     };
   },
-  props: ["chat_"],
+  props: ["chat"],
   methods: {
     changeEgoTo(name) {
       this.selectedEgo = name;
