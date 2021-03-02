@@ -10,7 +10,7 @@
         </template>
         <v-list>
           <v-list-item
-            v-for="(color, name) in colors"
+            v-for="(color, name) in chat.personColorMap"
             :key="name"
             @click="changeEgoTo(name)"
           >
@@ -21,6 +21,7 @@
         </v-list>
       </v-menu>
     </div>
+
     <!-- Chat -->
     <v-container class="chat">
       <v-row v-for="(data, idx) in chat.chatObject" no-gutters :key="idx">
@@ -34,12 +35,12 @@
             myMessage: selectedEgo
               ? selectedEgo === data.author
               : chat.messagesPerPerson[0].name === data.author,
-            system: colors[data.author] === undefined,
+            system: chat.personColorMap[data.author] === undefined,
           }"
         >
           <div
             class="text-small font-weight-bold author text-left"
-            :style="'color: ' + colors[data.author]"
+            :style="'color: ' + chat.personColorMap[data.author]"
           >
             {{ data.author }}
           </div>
@@ -67,15 +68,7 @@
 <script>
 export default {
   name: "Chat",
-  computed: {
-    colors() {
-      let colors = {};
-      this.chat.messagesPerPerson.forEach((person) => {
-        colors[person.name] = person.color;
-      });
-      return colors;
-    },
-  },
+  computed: {},
   data() {
     return {
       selectedEgo: "",

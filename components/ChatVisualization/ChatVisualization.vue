@@ -1,5 +1,5 @@
 <template>
-  <v-col>
+  <v-col class="my-4 mb-16">
     <v-row>
       <ChatVisualizationChat :chat="chat" />
     </v-row>
