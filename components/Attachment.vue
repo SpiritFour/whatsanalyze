@@ -1,23 +1,31 @@
 <template>
   <div>
     <img
-      v-if="mimeType.startsWith('image/')"
-      :src="src"
-      :title="fileName"
+      v-if="attachments.mimeType.startsWith('image/')"
+      :src="attachments.src"
+      :title="attachments.fileName"
       alt=""
     />
-    <video v-if="mimeType.startsWith('video/')" :title="fileName">
-      <source :src="src" :type="mimeType" />
+    <video
+      v-if="attachments.mimeType.startsWith('video/')"
+      controls
+      :title="attachments.fileName"
+    >
+      <source :src="attachments.src" :type="attachments.mimeType" />
     </video>
 
     <audio
-      v-if="mimeType.startsWith('audio/')"
+      v-if="attachments.mimeType.startsWith('audio/')"
       controls
-      :src="src"
-      :title="fileName"
+      :src="attachments.src"
+      :title="attachments.fileName"
     />
-    <a v-if="mimeType.startsWith('href')" :href="src" :download="fileName">
-      {{ fileName }}
+    <a
+      v-if="attachments.mimeType.startsWith('href')"
+      :href="attachments.src"
+      :download="attachments.fileName"
+    >
+      {{ attachments.fileName }}
     </a>
   </div>
 </template>
@@ -25,6 +33,6 @@
 <script>
 export default {
   name: "Attachment",
-  props: ["mimeType", "src", "fileName"],
+  props: ["attachments"],
 };
 </script>

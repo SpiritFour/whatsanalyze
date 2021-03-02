@@ -9,7 +9,7 @@
             class="px-0 px-md-16 pb-8"
           >
             <HeaderCta />
-            <Attachment mimeType="image/" src="/favicon.ico" fileName="test" />
+            <Attachment :attachments="chat_.testattachment" />
             <FileHandler
               id="fileHandler"
               v-if="$vuetify.breakpoint.mdAndUp"

@@ -100,14 +100,14 @@ export default {
       if (fileName.endsWith(".m4a")) return "audio/mp4";
       if (fileName.endsWith(".wav")) return "audio/wav";
       if (fileName.endsWith(".opus")) return "audio/ogg";
-
+      if (fileName.endsWith(".vcf")) return "not_supported";
       return null;
     },
 
     renderAttachment(fileName, attachment) {
       const mimeType = this.getMimeType(fileName) || "";
-      const src = `data:${mimeType};base64,${attachment}`;
-      return [mimeType, src, fileName];
+      const src = "data:" + mimeType + ";base64, " + attachment;
+      return { mimeType: mimeType, src: src, fileName: fileName };
     },
 
     extendDataStructure(messages) {
@@ -118,8 +118,7 @@ export default {
         object.absolute_id = index;
         object.personal_id = authors[object.author];
       });
-      messages.push(this.attachments);
-      return messages;
+      return { messages: messages, attachments: this.attachments };
     },
 
     zipLoadEndHandler(e) {
@@ -135,8 +134,11 @@ export default {
 
     handleAttachments(zipData) {
       zipData.forEach((relativePath, file) => {
-        this.attachments[relativePath] = file.async("base64").then((data) => {
-          this.renderAttachment(relativePath, data);
+        file.async("base64").then((data) => {
+          this.attachments[relativePath] = this.renderAttachment(
+            relativePath,
+            data
+          );
         });
       });
     },
@@ -227,7 +229,7 @@ export default {
     fetch("/chat_example.txt")
       .then((response) => response.text())
       .then(parseString)
-      .then((messages) => (this.messages = messages))
+      .then((messages) => (this.messages = this.extendDataStructure(messages)))
       .then(() => this.$emit("new_messages", this.messages));
   },
 };
