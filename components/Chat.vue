@@ -83,7 +83,6 @@ export default {
   props: ["chat_"],
   methods: {
     changeEgoTo(name) {
-      console.log(this.personColors);
       this.selectedEgo = name;
     },
     getDateString(date) {
