@@ -4,11 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate",
-    "local": "NODE_ENV=production nuxt generate && nuxt start",
-    "test": "jest",
+    "local": "NUXT_ENV_LOCAL=1 nuxt generate && NUXT_ENV_LOCAL=1 nuxt start",
     "deploy": "nuxt generate && push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "husky": {

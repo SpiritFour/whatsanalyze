@@ -1,6 +1,9 @@
 import colors from "vuetify/es5/util/colors";
 import fs from "fs";
 
+// eslint-disable-next-line no-undef
+let local = process.env.NUXT_ENV_LOCAL !== undefined;
+
 export default {
   // redirect from http -> https
   serverMiddleware: [
@@ -124,10 +127,10 @@ export default {
     host: "0.0.0.0",
     https:
       // eslint-disable-next-line no-undef
-      process.env.NODE_ENV !== "production"
+      process.env.NODE_ENV !== "production" || local
         ? {
-            key: fs.readFileSync("0.0.0.0.key"),
-            cert: fs.readFileSync("0.0.0.0.crt"),
+            key: fs.readFileSync("./0.0.0.0.key"),
+            cert: fs.readFileSync("./0.0.0.0.crt"),
           }
         : {},
   },
