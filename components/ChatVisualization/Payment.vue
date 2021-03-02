@@ -24,7 +24,6 @@ export default {
   },
   head() {
     return {
-      title: "Payment Page - My awesome project",
       script: [
         {
           hid: "paypal",
@@ -61,8 +60,7 @@ export default {
             return actions.order.create({
               purchase_units: [
                 {
-                  description:
-                    "WhatsApp chat exported, visualized and analyzed as PDF",
+                  description: "WhatsApp chat visualization as PDF",
                   amount: {
                     currency_code: context.currency,
                     value: context.amount,
