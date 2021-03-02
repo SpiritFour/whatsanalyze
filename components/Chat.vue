@@ -28,13 +28,13 @@
           elevation="1"
           max-width="40%"
           rounded="lg"
-          class="pa-2 ma-2 message"
+          class="pa-2 ma-2"
           color="rgb(38, 45, 49)"
           :class="{
             myMessage: selectedEgo
               ? selectedEgo === data.author
               : chat_.messagesPerPerson[0].name === data.author,
-            system: systemNames.includes(data.author.toLowerCase()),
+            system: colors[data.author] === undefined,
           }"
         >
           <div
@@ -48,7 +48,7 @@
             <v-img contain width="100%" />
           </div>
 
-          <div class="white--text message text-left">
+          <div class="white--text message">
             {{ data.message }}
           </div>
 
@@ -78,13 +78,12 @@ export default {
   data() {
     return {
       selectedEgo: "",
-      personColors: {},
-      systemNames: "system",
     };
   },
   props: ["chat_"],
   methods: {
     changeEgoTo(name) {
+      console.log(this.personColors);
       this.selectedEgo = name;
     },
     getDateString(date) {
@@ -127,13 +126,13 @@ export default {
   background-color: rgb(13, 20, 24);
   background-image: url("https://whatsapp-chat-parser.netlify.app/static/media/bg-dark.ffb9199c.png");
 }
-.message {
-  color: white;
-}
 
 .myMessage {
   background-color: rgb(14, 97, 98) !important;
   margin-left: auto !important;
+}
+.message {
+  text-align: left;
 }
 
 .system {
@@ -143,6 +142,7 @@ export default {
   text-align: center;
 }
 .system .message {
+  text-align: center;
   color: rgb(250, 217, 100) !important;
 }
 .system .author,
