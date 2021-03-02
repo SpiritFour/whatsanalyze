@@ -67,6 +67,7 @@
     <!-- Add workcloud with emojies only  -->
     <div class="text-h3 font-weight-bold pt-10">Word Cloud</div>
     <ChartsWordCloud :chartdata="chat_" class="pb-10" />
+    <Chat :chat_="chat_" />
   </div>
 </template>
 

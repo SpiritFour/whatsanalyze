@@ -46,6 +46,7 @@
       your whole chat. Take deep dive in your data now!."
       />
     </v-container>
+
     <v-container v-if="isShowingChats">
       <ChartsResults ref="results" :chat_="chat_" />
       <DownloadPopup :results="$refs.results" :chat="this.chat_" />
