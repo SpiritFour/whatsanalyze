@@ -82,9 +82,34 @@ export default {
       processing: false,
       isSuccess: false,
       messages: [],
+      attachments: {},
     };
   },
   methods: {
+    getMimeType(fileName) {
+      if (/\.jpe?g$/.test(fileName)) return "image/jpeg";
+      if (fileName.endsWith(".png")) return "image/png";
+      if (fileName.endsWith(".gif")) return "image/gif";
+      if (fileName.endsWith(".webp")) return "image/webp";
+      if (fileName.endsWith(".svg")) return "image/svg+xml";
+
+      if (fileName.endsWith(".mp4")) return "video/mp4";
+      if (fileName.endsWith(".webm")) return "video/webm";
+
+      if (fileName.endsWith(".mp3")) return "audio/mpeg";
+      if (fileName.endsWith(".m4a")) return "audio/mp4";
+      if (fileName.endsWith(".wav")) return "audio/wav";
+      if (fileName.endsWith(".opus")) return "audio/ogg";
+
+      return null;
+    },
+
+    renderAttachment(fileName, attachment) {
+      const mimeType = this.getMimeType(fileName) || "";
+      const src = `data:${mimeType};base64,${attachment}`;
+      return [mimeType, src, fileName];
+    },
+
     extendDataStructure(messages) {
       let authors = {};
       messages.forEach(function (object, index) {
@@ -93,6 +118,7 @@ export default {
         object.absolute_id = index;
         object.personal_id = authors[object.author];
       });
+      messages.push(this.attachments);
       return messages;
     },
 
@@ -105,6 +131,14 @@ export default {
         .then(this.readChatFile)
         .then((text) => parseString(text, { parseAttachments: true }))
         .then(this.updateMessages);
+    },
+
+    handleAttachments(zipData) {
+      zipData.forEach((relativePath, file) => {
+        this.attachments[relativePath] = file.async("base64").then((data) => {
+          this.renderAttachment(relativePath, data);
+        });
+      });
     },
 
     txtLoadEndHandler(e) {
@@ -125,6 +159,7 @@ export default {
     },
 
     readChatFile(zipData) {
+      this.handleAttachments(zipData);
       const chatFile = zipData.file("_chat.txt");
       if (chatFile) return chatFile.async("string");
 
