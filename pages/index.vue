@@ -120,14 +120,8 @@ export default {
     },
   },
   mounted() {
+    let _this = this;
     navigator.serviceWorker.addEventListener("message", function (e) {
-      // if ("receiving-file-share" in _this.$route.query) {
-      //   console.alert(e.data.files); //contains the file(s)
-      //   _this.chat_ = new Chat();
-      //   _this.$refs.filehandler.processFile(e.data.files[0]);
-      // } else {
-      //   console.log("got other stuff:", e);
-      // }
       console.log("index push", e);
     });
     navigator.serviceWorker.addEventListener("push", (m) => {
@@ -146,7 +140,12 @@ export default {
           console.log("index push wb", m);
         });
         workbox.addEventListener("message", (m) => {
+          console.log(m.data.files); //contains the file(s)
           console.log("index message wb", m);
+          _this.chat_ = new Chat();
+          let files = m.data.files;
+          if (Array.isArray(files)) files = files[0];
+          _this.$refs.filehandler.processFile(files);
         });
       }
     });

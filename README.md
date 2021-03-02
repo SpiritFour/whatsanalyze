@@ -29,3 +29,8 @@ https://letsencrypt.org/docs/certificates-for-localhost/
 openssl req -x509 -out 0.0.0.0.crt -keyout 0.0.0.0.key -newkey rsa:2048 -nodes -sha256 -subj '/CN=localhost' -extensions EXT -config <( printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
 ```
 Also need to install the .crt file and trust it in your system settings
+
+Code to generate certificate installable on android:
+```bash
+openssl pkcs12 -export -in 0.0.0.0.crt -inkey 0.0.0.0.key -out 0.0.0.0.p12
+```
