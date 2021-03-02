@@ -22,25 +22,6 @@
 console.log("Custom service worker!");
 // maybe i need servvice woker windows communicating with each other
 //service-worker.js:
-self.addEventListener("fetch", (event) => {
-  const url = new URL(event.request.url);
-  if (
-    event.request.method === "POST" &&
-    url.pathname === "/" &&
-    url.searchParams.has("share-target")
-  ) {
-    event.respondWith(Response.redirect("/?receiving-file-share=1"));
-    event.waitUntil(
-      (async function () {
-        const client = await self.clients.get(event.resultingClientId);
-        const data = await event.request.formData();
-        const files = data.get("file");
-        client.postMessage({ files });
-      })()
-    );
-    return;
-  }
-});
 
 self.addEventListener("message", function (e) {
   console.log("log all messages");
@@ -65,8 +46,44 @@ self.addEventListener("message", function (e) {
 //   });
 // });
 
-console.log("self: ", JSON.stringify(self));
-console.log("self: ", JSON.stringify(self.workbox));
+console.log("self: ", self);
+console.log("self: ", self.onpush);
+
+self.onpush = (x) => {
+  console.log(x);
+};
+
+self.onfetch = (event) => {
+  const url = new URL(event.request.url);
+  console.log(
+    event,
+    url,
+    event.request.method,
+    url.pathname,
+    url.searchParams.has("share-target"),
+    event.clientId
+  );
+  if (
+    (event.request.method === "POST" &&
+      url.pathname === "/" &&
+      url.searchParams.has("share-target")) ||
+    url.pathname === "/data2"
+  ) {
+    event.respondWith(Response.redirect("/?receiving-file-share=1"));
+    event.waitUntil(
+      (async function () {
+        const client = await self.clients.get(event.clientId);
+        console.log("client in wait until", client);
+        const data = await event.request.formData();
+        console.log("data in wait until", data);
+        const files = data.get("files");
+        console.log("files in wait until", files);
+        client.postMessage({ files });
+      })()
+    );
+    return;
+  }
+};
 
 // if ("serviceWorker" in self) {
 //   console.log("service workger in navigation!!! yuhu");

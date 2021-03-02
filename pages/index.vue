@@ -1,5 +1,6 @@
 <template>
   <div>
+    <v-btn @click="rando"></v-btn>
     <div class="top-color">
       <v-container>
         <v-row no-gutters>
@@ -96,16 +97,57 @@ export default {
         this.downloading = false;
       });
     },
+    async rando() {
+      // var url = new URL("/data2", window.location.origin);
+      //
+      // var params = { files: [await fetch("/chat_example.txt")] }; // or:
+      //
+      // url.search = new URLSearchParams(params).toString();
+      // fetch(url);
+      let text = await fetch("/chat_example.txt").then((a) => a.blob());
+      console.log("text in rando button", text);
+      var data = new FormData();
+      data.append("files", text, "rando.txt");
+      console.log("formdata in rando button", data);
+      const requestOptions = {
+        method: "POST",
+        // headers: { "Content-Type": "text/plain" },
+        body: data,
+      };
+      fetch("/data2?share-target=1", requestOptions).then((response) =>
+        console.log("response btn", response)
+      );
+    },
   },
   mounted() {
-    let _this = this;
     navigator.serviceWorker.addEventListener("message", function (e) {
-      if ("receiving-file-share" in _this.$route.query) {
-        console.alert(e.data.files); //contains the file(s)
-        _this.chat_ = new Chat();
-        _this.$refs.filehandler.processFile(e.data.files[0]);
-      } else {
-        console.log("got other stuff:", e);
+      // if ("receiving-file-share" in _this.$route.query) {
+      //   console.alert(e.data.files); //contains the file(s)
+      //   _this.chat_ = new Chat();
+      //   _this.$refs.filehandler.processFile(e.data.files[0]);
+      // } else {
+      //   console.log("got other stuff:", e);
+      // }
+      console.log("index push", e);
+    });
+    navigator.serviceWorker.addEventListener("push", (m) => {
+      console.log("index push", m);
+    });
+    window.$workbox.then((workbox) => {
+      console.log("workbox here", workbox);
+      if (workbox) {
+        workbox.addEventListener("installed", (event) => {
+          // If we don't do this we'll be displaying the notification after the initial installation, which isn't perferred.
+          if (event.isUpdate) {
+            // whatever logic you want to use to notify the user that they need to refresh the page.
+          }
+        });
+        workbox.addEventListener("push", (m) => {
+          console.log("index push wb", m);
+        });
+        workbox.addEventListener("message", (m) => {
+          console.log("index message wb", m);
+        });
       }
     });
   },
