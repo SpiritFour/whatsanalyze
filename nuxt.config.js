@@ -87,4 +87,11 @@ export default {
           }
         : {},
   },
+  env: {
+    paypalClientId:
+      // eslint-disable-next-line no-undef
+      process.env.NODE_ENV !== "production"
+        ? "ARYQUp4C_oNjNUNkvSPzLeaiulItDmnHUU226OANt2haCKC2c70ZrKZTmRHCPldcu4SD22LmPEuonfec"
+        : "AUMWxSZrtBOA1RicR_3nGijYb8yYxyq2lxBjiwoQKfVc-8jfdPr5N7X5EFUackMCLb_K7HiKswnDBUJ8",
+  },
 };

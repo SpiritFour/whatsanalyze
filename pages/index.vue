@@ -32,6 +32,7 @@
       </v-container>
     </div>
 
+    <ChatVisualizationPayment></ChatVisualizationPayment>
     <v-container v-show="!isShowingChats" class="pt-16">
       <ExportExplainer />
       <Cta />
