@@ -80,6 +80,9 @@ self.onfetch = (event) => {
         console.log("client in wait until", client);
         const data = await event.request.formData();
         console.log("data in wait until", data);
+        data.forEach((b, c) => {
+          console.log(b, c);
+        });
         const files = data.get("file");
         console.log("files in wait until", files); //todo this is null, find a way to log data with all keys (FormDat)
         client.postMessage({ files });
