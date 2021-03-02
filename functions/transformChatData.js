@@ -65,13 +65,17 @@ export class Chat {
         .filter(function isNotEmpty(i) {
           return i.length > 0;
         });
-      const emojies = item.match(regexpEmojiPresentation);
+      let emojies = item.match(regexpEmojiPresentation);
+      if (!emojies) {
+        emojies = [];
+      }
+
       filtered_message_array.push(...words, ...emojies);
     });
 
     let distribution = {};
 
-    message_array.map(function (item) {
+    filtered_message_array.map(function (item) {
       distribution[item] = (distribution[item] || 0) + 1;
     });
 
