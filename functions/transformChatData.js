@@ -32,7 +32,7 @@ export class Chat {
     return chat_distribution.filter(singleOccurrence);
   }
 
-  static match_emojys(chat_distribution) {
+  static match_emojies(chat_distribution) {
     const regexpEmojiPresentation = /\p{Emoji_Presentation}/gu;
     function isEmoji(value) {
       return value[0].match(regexpEmojiPresentation);
@@ -48,17 +48,33 @@ export class Chat {
   }
 
   // creates a sorted FreqArray for the chat corpus [{word: 10},{hi:9},...]
-  static createSortedFreqDict(chatObject) {
+  static createSortedFreqArray(chatObject) {
     let message_string = chatObject.reduce(
       (n, { message }) => n + " " + message,
       " "
     );
     message_string = message_string.replace(/\u200E/gi, "");
     let message_array = message_string.replace(/\n/g, " ").split(" ");
+    let filtered_message_array = [];
+
+    const regexpEmojiPresentation = /\p{Emoji_Presentation}/gu;
+
+    message_array.map(function (item) {
+      const words = item
+        .split(regexpEmojiPresentation)
+        .filter(function isNotEmpty(i) {
+          return i.length > 0;
+        });
+      const emojies = item.match(regexpEmojiPresentation);
+      filtered_message_array.push(...words, ...emojies);
+    });
+
     let distribution = {};
+
     message_array.map(function (item) {
       distribution[item] = (distribution[item] || 0) + 1;
     });
+
     let sorted_distribution = Object.entries(distribution).sort(
       (a, b) => b[1] - a[1]
     );
@@ -140,7 +156,7 @@ export class Chat {
 
   get sortedFreqDict() {
     if (this._sortedFreqList) return this._sortedFreqList;
-    this._sortedFreqList = Chat.createSortedFreqDict(this.chatObject);
+    this._sortedFreqList = Chat.createSortedFreqArray(this.chatObject);
     return this._sortedFreqList;
   }
 
@@ -230,10 +246,11 @@ export class Chat {
       let name = person.name;
       let numberOfWords = Chat.getTotalNumberOfWords(person.messages);
       let longestMessage = Chat.get_longest_message(person.messages);
-      let personalFreqDic = Chat.createSortedFreqDict(person.messages);
+      let personalFreqArray = Chat.createSortedFreqArray(person.messages);
 
-      let uniqueWords = Chat.uniqueWords(personalFreqDic).length;
-      let sortedEmojis = Chat.match_emojys(personalFreqDic)
+      let uniqueWords = Chat.uniqueWords(personalFreqArray).length;
+
+      let sortedEmojis = Chat.match_emojies(personalFreqArray)
         .map((emoji) => emoji[0])
         .slice(0, 3);
       let averageMessageLength = numberOfWords / person.messages.length;
