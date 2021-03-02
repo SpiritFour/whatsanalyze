@@ -1,15 +1,17 @@
 <template>
   <div class="text-center py-10">
-    <GroupOthers :chat-object="chat_" />
+    <ChatVisualization :chat="chat" />
+
+    <GroupOthers :chat-object="chat" />
 
     <div class="text-h3 font-weight-bold py-10">Chat Timeline</div>
     <small>Messages per Day </small>
     <Share>
-      <ChartsLineChart :chartdata="chat_" class="pb-10" />
+      <ChartsLineChart :chartdata="chat" class="pb-10" />
     </Share>
 
     <div class="text-h3 font-weight-bold pt-10">Fun Facts</div>
-    <ChartsFunFacts :chartdata="chat_" class="pb-10" />
+    <ChartsFunFacts :chartdata="chat" class="pb-10" />
 
     <!-- Make dropdown -> messages or words -->
     <div class="text-h3 font-weight-bold py-10">Messages per</div>
@@ -18,14 +20,14 @@
       <v-col cols="12" md="6">
         <div class="text-h4 font-weight-bold">Person</div>
         <Share>
-          <ChartsDonughtChart :chartdata="chat_" class="py-10" />
+          <ChartsDonughtChart :chartdata="chat" class="py-10" />
         </Share>
       </v-col>
       <v-col cols="12" md="6">
         <div class="text-h4 font-weight-bold">Time of Day</div>
         <Share>
           <ChartsBarChart
-            :chartdata="chat_"
+            :chartdata="chat"
             dataGrouping="hourly"
             class="py-10"
           />
@@ -38,7 +40,7 @@
         <div class="text-h4 font-weight-bold">Month</div>
         <Share>
           <ChartsRadarChart
-            :chartdata="chat_"
+            :chartdata="chat"
             dataGrouping="weekly"
             class="py-10"
           />
@@ -48,7 +50,7 @@
         <div class="text-h4 font-weight-bold">Weekday</div>
         <Share>
           <ChartsRadarChart
-            :chartdata="chat_"
+            :chartdata="chat"
             dataGrouping="daily"
             class="py-10"
           />
@@ -58,21 +60,20 @@
 
     <!-- make toggle between radar and normal charts -->
     <div v-show="false">
-      <ChartsBarChart :chartdata="chat_" dataGrouping="hourly" class="py-10" />
-      <ChartsBarChart :chartdata="chat_" dataGrouping="daily" class="py-10" />
-      <ChartsBarChart :chartdata="chat_" dataGrouping="weekly" class="py-10" />
+      <ChartsBarChart :chartdata="chat" dataGrouping="hourly" class="py-10" />
+      <ChartsBarChart :chartdata="chat" dataGrouping="daily" class="py-10" />
+      <ChartsBarChart :chartdata="chat" dataGrouping="weekly" class="py-10" />
     </div>
 
     <!-- Remove "weggelassen" und so whatsapp shit -->
     <!-- Add workcloud with emojies only  -->
     <div class="text-h3 font-weight-bold pt-10">Word Cloud</div>
-    <ChartsWordCloud :chartdata="chat_" class="pb-10" />
-    <Chat :chat_="chat_" />
+    <ChartsWordCloud :chartdata="chat" class="pb-10" />
   </div>
 </template>
 
 <script>
 export default {
-  props: ["chat_"],
+  props: ["chat"],
 };
 </script>
