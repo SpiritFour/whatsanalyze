@@ -1,10 +1,4 @@
 console.log("Custom service worker!");
-// maybe i need servvice woker windows communicating with each other
-//service-worker.js:
-
-self.onpush = (x) => {
-  console.log(x);
-};
 
 self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
@@ -13,17 +7,11 @@ self.addEventListener("fetch", (event) => {
   if (url.origin !== location.origin) return;
 
   if (
-    (url.pathname === "/" &&
-      url.searchParams.has("share-target") &&
-      event.request.method === "POST") ||
-    url.pathname === "/data2"
+    url.pathname === "/" &&
+    url.searchParams.has("share-target") &&
+    event.request.method === "POST"
   ) {
     serveShareTarget(event);
-    return;
-  }
-
-  if (url.pathname === "/data3") {
-    serveShareTarget(event, false);
     return;
   }
 });
