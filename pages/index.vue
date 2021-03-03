@@ -10,6 +10,7 @@
           >
             <HeaderCta />
             <FileHandler
+              ref="filehandler"
               id="fileHandler"
               v-if="$vuetify.breakpoint.mdAndUp"
               @new_messages="newMessages"
@@ -23,6 +24,7 @@
         <v-row v-if="$vuetify.breakpoint.smAndDown" class="top-color ma-0">
           <v-col>
             <FileHandler
+              ref="filehandler"
               id="fileHandler"
               @new_messages="newMessages"
               @hide_explanation="isShowingChats = $event"
@@ -111,6 +113,32 @@ export default {
         this.downloading = false;
       });
     },
+    setupWorkBox() {
+      let _this = this;
+      if (window.$workbox !== undefined) {
+        window.$workbox.then((workbox) => {
+          console.log("workbox here", workbox);
+          if (workbox) {
+            workbox.addEventListener("message", (m) => {
+              // eslint-disable-next-line no-prototype-builtins
+              if (_this.$route.query.hasOwnProperty("receiving-file-share")) {
+                console.log(m.data.file); //contains the file(s)
+                console.log("index message wb", m);
+                console.log("current route", _this.$route);
+                let files = m.data.file;
+                // currently only the first file, but ultimately we want to pass all files
+                if (Array.isArray(files)) files = files[0];
+                _this.$refs.filehandler.processFile(files);
+              }
+            });
+            workbox.messageSW("SHARE_READY");
+          }
+        });
+      }
+    },
+  },
+  created() {
+    this.setupWorkBox();
   },
 };
 </script>
