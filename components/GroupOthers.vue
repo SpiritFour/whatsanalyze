@@ -7,17 +7,19 @@
       People
     </div>
     <div class="text-h6">
-      Slide to group multiple persons with the least messages.
+      Select number of participants to show individual. All others are grouped
+      together.
     </div>
     <v-slider
       class="pt-10"
       v-model="groupAfter"
       thumb-color="red darken-2"
       thumb-label="always"
-      tick
+      ticks="always"
+      tick-size="4"
       step="1"
       min="2"
-      :max="Math.min(chatObject.numPersonsInChat - 1, 20)"
+      :max="chatObject.numPersonsInChat - 1"
       @change="
         /* eslint-disable vue/no-mutating-props */
         chatObject.groupAfter = groupAfter

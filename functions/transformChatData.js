@@ -144,6 +144,10 @@ export class Chat {
     return this._sortedFreqList;
   }
 
+  get groupAfter() {
+    return this._groupAfter;
+  }
+
   get messagesPerPerson() {
     if (this._messagesPerPerson) return this._messagesPerPerson;
     this._messagesPerPerson = this._getMessagesPerPerson();
