@@ -16,59 +16,6 @@
       <v-tab-item v-for="(data, idx) in tabData" :key="idx">
         <v-container>
           <v-row no-gutters>
-            <v-col cols="12" sm="4">
-              <div class="carousel-container">
-                <div class="frame-container">
-                  <v-img
-                    ref="smartphone"
-                    class="frame ma-md-16"
-                    :src="data.frameImg"
-                  />
-                </div>
-                <v-carousel
-                  v-model="tabStatus[idx]"
-                  :continuous="false"
-                  hide-delimiter-background
-                  hide-delimiters
-                  class="pa-md-16"
-                  height="auto"
-                >
-                  <v-carousel-item
-                    v-for="(item, idx) in data.carouselItems"
-                    :key="idx"
-                  >
-                    <v-img contain :lazy-src="item.imgLazy" :src="item.img">
-                      <template v-slot:placeholder>
-                        <v-row
-                          class="ma-0"
-                          align="center"
-                          justify="center"
-                          :style="'height: ' + $refs.smartphone.clientHeight"
-                        >
-                          <v-progress-circular
-                            indeterminate
-                            color="grey lighten-5"
-                          ></v-progress-circular>
-                        </v-row>
-                      </template>
-                    </v-img>
-                    <v-btn
-                      fab
-                      outlined
-                      color="black"
-                      disabled
-                      :style="
-                        'position: absolute; left: ' +
-                        item.x +
-                        '; top: ' +
-                        item.y
-                      "
-                      class="blinking"
-                    ></v-btn>
-                  </v-carousel-item>
-                </v-carousel>
-              </div>
-            </v-col>
             <v-col cols="12" sm="8" class="pt-md-15">
               <v-timeline dense>
                 <v-timeline-item
@@ -93,12 +40,58 @@
                   })
                 "
                 color="#07bc4c"
-                class="text-md-h6 text-caption ml-10 white--text"
+                class="text-md-h6 text-caption ml-10 white--text pb-2"
                 style="max-width: 100%"
               >
                 <v-icon>mdi-arrow-right</v-icon>
                 Select file via box above.
               </v-btn>
+            </v-col>
+            <v-col cols="12" sm="4">
+              <div class="carousel-container">
+                <div class="frame-container">
+                  <v-img
+                    ref="smartphone"
+                    class="frame ma-md-16"
+                    :src="data.frameImg"
+                  />
+                </div>
+                <!--                this is model and pngs-->
+                <v-carousel
+                  v-model="tabStatus[idx]"
+                  :continuous="false"
+                  hide-delimiter-background
+                  hide-delimiters
+                  class="pa-md-16"
+                  height="auto"
+                >
+                  <v-carousel-item
+                    v-for="(item, idx) in data.carouselItems"
+                    :key="idx"
+                  >
+                    <v-img contain :lazy-src="item.imgLazy" :src="item.img">
+                      <v-row class="ma-0" align="center" justify="center">
+                        <v-progress-circular
+                          color="grey lighten-5"
+                        ></v-progress-circular>
+                      </v-row>
+                    </v-img>
+                    <v-btn
+                      fab
+                      outlined
+                      color="black"
+                      disabled
+                      :style="
+                        'position: absolute; left: ' +
+                        item.x +
+                        '; top: ' +
+                        item.y
+                      "
+                      class="blinking"
+                    ></v-btn>
+                  </v-carousel-item>
+                </v-carousel>
+              </div>
             </v-col>
           </v-row>
         </v-container>
