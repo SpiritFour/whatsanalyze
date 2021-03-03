@@ -95,14 +95,13 @@ export default {
         scrollX: 0,
         scrollY: -window.scrollY,
       });
-
+      let names = this.chat.messagesPerPerson
+        .slice(0, 2)
+        .map((person) => person.name)
+        .join("-");
       let timeout = new Promise((res) => setTimeout(() => res(), 20000));
       timeout.then(() => {
         canvas.then((canvas) => {
-          let names = this.chat.messagesPerPerson
-            .slice(0, 2)
-            .map((person) => person.name)
-            .join("-");
           downloadBase64File(
             canvas.toDataURL(),
             "whatsanlazye-results-" + names + ".png"
