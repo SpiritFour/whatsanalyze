@@ -21,9 +21,14 @@ self.addEventListener("fetch", (event) => {
     serveShareTarget(event);
     return;
   }
+
+  if (url.pathname === "/data3") {
+    serveShareTarget(event, false);
+    return;
+  }
 });
 
-function serveShareTarget(event) {
+function serveShareTarget(event, wait = true) {
   const dataPromise = event.request.formData();
 
   // Redirect so the user can refresh the page without resending data.
@@ -32,7 +37,9 @@ function serveShareTarget(event) {
   event.waitUntil(
     (async function () {
       // The page sends this message to tell the service worker it's ready to receive the file.
-      await nextMessage("SHARE_READY");
+      console.log("wait for share ready");
+      if (wait) await nextMessage("SHARE_READY");
+
       const client = await self.clients.get(
         event.resultingClientId || event.clientId
       );

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "NUXT_ENV_LOCAL=1 nuxt",
     "local": "NUXT_ENV_LOCAL=1 nuxt generate && NUXT_ENV_LOCAL=1 nuxt start",
     "deploy": "nuxt generate && push-dir --dir=dist --branch=gh-pages --cleanup"
   },

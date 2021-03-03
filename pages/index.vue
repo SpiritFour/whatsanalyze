@@ -108,13 +108,13 @@ export default {
       console.log("text in rando button", text);
       var data = new FormData();
       data.append("file", text, "rando.txt");
-      console.log("formdata in rando button", data);
+      console.log("formdata in rando button", data.get("file"));
       const requestOptions = {
         method: "POST",
         // headers: { "Content-Type": "text/plain" },
         body: data,
       };
-      fetch("/data2?share-target=1", requestOptions).then((response) =>
+      fetch("/data3", requestOptions).then((response) =>
         console.log("response btn", response)
       );
     },
@@ -141,10 +141,10 @@ export default {
             console.log("index push wb", m);
           });
           workbox.addEventListener("message", (m) => {
-            console.log(m.data.files); //contains the file(s)
+            console.log(m.data.file); //contains the file(s)
             console.log("index message wb", m);
             _this.chat_ = new Chat();
-            let files = m.data.files;
+            let files = m.data.file;
             if (Array.isArray(files)) files = files[0];
             _this.$refs.filehandler.processFile(files);
           });
