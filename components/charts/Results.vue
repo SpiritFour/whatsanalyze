@@ -1,16 +1,15 @@
 <template>
   <div class="text-center py-10">
-    <ChatVisualization :chat="chat" />
-
-    <GroupOthers :chat-object="chat" />
-
-    <div class="text-h3 font-weight-bold py-10">Chat Timeline</div>
-    <small>Messages per Day </small>
+    <div class="text-h2 font-weight-bold py-10">Chat Timeline</div>
+    <div>Messages per Day</div>
     <Share>
       <ChartsLineChart :chartdata="chat" class="pb-10" />
     </Share>
 
-    <div class="text-h3 font-weight-bold pt-10">Fun Facts</div>
+    <GroupOthers :chat-object="chat" />
+
+    <ChartsTextStats :chat="chat" />
+
     <ChartsFunFacts :chartdata="chat" class="pb-10" />
 
     <!-- Make dropdown -> messages or words -->
@@ -59,7 +58,7 @@
     </v-row>
 
     <!-- make toggle between radar and normal charts -->
-    <div v-show="false">
+    <div v-if="false">
       <ChartsBarChart :chartdata="chat" dataGrouping="hourly" class="py-10" />
       <ChartsBarChart :chartdata="chat" dataGrouping="daily" class="py-10" />
       <ChartsBarChart :chartdata="chat" dataGrouping="weekly" class="py-10" />
@@ -69,6 +68,8 @@
     <!-- Add workcloud with emojies only  -->
     <div class="text-h3 font-weight-bold pt-10">Word Cloud</div>
     <ChartsWordCloud :chartdata="chat" class="pb-10" />
+
+    <ChatVisualization :chat="chat" />
   </div>
 </template>
 
