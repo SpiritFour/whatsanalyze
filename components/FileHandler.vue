@@ -86,29 +86,6 @@ export default {
     };
   },
   methods: {
-    getMimeType(fileName) {
-      if (/\.jpe?g$/.test(fileName)) return "image/jpeg";
-      if (fileName.endsWith(".png")) return "image/png";
-      if (fileName.endsWith(".gif")) return "image/gif";
-      if (fileName.endsWith(".webp")) return "image/webp";
-      if (fileName.endsWith(".svg")) return "image/svg+xml";
-
-      if (fileName.endsWith(".mp4")) return "video/mp4";
-      if (fileName.endsWith(".webm")) return "video/webm";
-
-      if (fileName.endsWith(".mp3")) return "audio/mpeg";
-      if (fileName.endsWith(".m4a")) return "audio/mp4";
-      if (fileName.endsWith(".wav")) return "audio/wav";
-      if (fileName.endsWith(".opus")) return "audio/ogg";
-      return "this" + fileName + " not supported";
-    },
-
-    renderAttachment(fileName, attachment) {
-      const mimeType = this.getMimeType(fileName) || "";
-      const src = "data:" + mimeType + ";base64, " + attachment;
-      return { mimeType: mimeType, src: src, fileName: fileName };
-    },
-
     extendDataStructure(messages) {
       let authors = {};
       messages.forEach(function (object, index) {
@@ -133,12 +110,8 @@ export default {
 
     handleAttachments(zipData) {
       zipData.forEach((relativePath, file) => {
-        file.async("base64").then((data) => {
-          this.attachments[relativePath] = this.renderAttachment(
-            relativePath,
-            data
-          );
-        });
+        if (!relativePath.endsWith(".txt"))
+          this.attachments[relativePath] = file;
       });
     },
 
@@ -160,7 +133,7 @@ export default {
     },
 
     readChatFile(zipData) {
-      this.handleAttachments(zipData);
+      this.handleAttachments(zipData, chatFile);
       const chatFile = zipData.file("_chat.txt");
       if (chatFile) return chatFile.async("string");
 

@@ -116,17 +116,8 @@ export class Chat {
     // this one is the complete input
     this.chatObject = chatObject.messages;
     this.attachments = chatObject.attachments;
-    if (Object.keys(this.attachments).length > 10) {
-      this.testattachment = this.attachments[
-        "00000214-PHOTO-2018-12-04-23-20-06.jpg"
-      ];
-    } else
-      this.testattachment = {
-        mimeType: "image/",
-        src: "whatsanlazye-logo-black.png",
-        fileName: "test",
-      };
-
+    console.log(this.chatObject);
+    console.log(this.attachments);
     // for groupmessages we probably want to group after some time
     this._groupAfter = groupAfter;
     // max number of words shown in word cloud
