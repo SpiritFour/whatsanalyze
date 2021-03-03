@@ -10,23 +10,32 @@
         </template>
         <v-list>
           <v-list-item
-            v-for="(color, name) in colors"
+            v-for="(color, name) in chat.personColorMap"
             :key="name"
             @click="changeEgoTo(name)"
           >
-            <v-list-item-title :style="'color: ' + color">{{
-              name
-            }}</v-list-item-title>
+            <v-list-item-title :style="'color: ' + color">
+              {{ name }}
+            </v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
     </div>
+
     <!-- Chat -->
     <v-container class="chat">
-      <v-row v-for="(data, idx) in chat.chatObject" no-gutters :key="idx">
+      <v-row
+        v-for="(data, idx) in chat.chatObject.slice(
+          startIdx,
+          startIdx + offset
+        )"
+        no-gutters
+        :key="idx"
+        class="scroll-stop"
+      >
         <v-sheet
           elevation="1"
-          max-width="40%"
+          max-width="50%"
           rounded="lg"
           class="pa-2 ma-2"
           color="rgb(38, 45, 49)"
@@ -34,12 +43,12 @@
             myMessage: selectedEgo
               ? selectedEgo === data.author
               : chat.messagesPerPerson[0].name === data.author,
-            system: colors[data.author] === undefined,
+            system: chat.personColorMap[data.author] === undefined,
           }"
         >
           <div
             class="text-small font-weight-bold author text-left"
-            :style="'color: ' + colors[data.author]"
+            :style="'color: ' + chat.personColorMap[data.author]"
           >
             {{ data.author }}
           </div>
@@ -48,9 +57,10 @@
             <v-img contain width="100%" />
           </div>
 
-          <div class="white--text message">
-            {{ data.message }}
-          </div>
+          <div
+            class="white--text message"
+            v-html="parseMessage(data.message)"
+          ></div>
 
           <div
             class="text-caption text-right date pt-2"
@@ -60,6 +70,21 @@
           </div>
         </v-sheet>
       </v-row>
+      <v-row
+        class="my-8"
+        v-if="
+          chat.chatObject.slice(startIdx + offset, startIdx + 2 * offset)
+            .length > 0
+        "
+      >
+        <v-btn
+          class="ma-auto white--text"
+          @click="startIdx += offset"
+          color="rgb(14, 97, 98)"
+        >
+          Load next {{ offset }} messages</v-btn
+        >
+      </v-row>
     </v-container>
   </v-container>
 </template>
@@ -67,22 +92,44 @@
 <script>
 export default {
   name: "Chat",
-  computed: {
-    colors() {
-      let colors = {};
-      this.chat.messagesPerPerson.forEach((person) => {
-        colors[person.name] = person.color;
-      });
-      return colors;
-    },
-  },
+  computed: {},
   data() {
     return {
+      startIdx: 0,
       selectedEgo: "",
+      offset: 50,
     };
   },
   props: ["chat"],
   methods: {
+    parseMessage(message) {
+      var validUrl = new RegExp(
+        "^(https?:\\/\\/)?" + // protocol
+          "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
+          "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
+          "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+          "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+          "(\\#[-a-z\\d_]*)?$",
+        "i"
+      );
+      const words = message.split(" ");
+      let htmlMessage = "";
+      words.forEach((word) => {
+        if (validUrl.test(word)) {
+          htmlMessage +=
+            "<a style='word-break: break-all' href=" +
+            word +
+            ">" +
+            word +
+            "</a>" +
+            " ";
+        } else {
+          htmlMessage += word + " ";
+        }
+      });
+      return htmlMessage;
+    },
+
     changeEgoTo(name) {
       this.selectedEgo = name;
     },
@@ -101,21 +148,28 @@ export default {
         "November",
         "December",
       ];
+      if (date) {
+        const day = date.getDate();
+        const month = months[date.getMonth()];
+        const year = date.getFullYear();
+        const hour = date.getHours();
+        const min = date.getMinutes();
 
-      const day = date.getDay();
-      const month = months[date.getMonth()];
-      const year = date.getFullYear();
-      const hour = date.getHours();
-      const min = date.getMinutes();
-
-      return day + " " + month + " " + year + ", " + hour + ":" + min;
+        return day + " " + month + " " + year + ", " + hour + ":" + min;
+      }
+      return "";
     },
   },
 };
 </script>
 
 <style scoped>
+.scroll-stop {
+  scroll-snap-align: start;
+}
 .chat {
+  scroll-snap-type: y mandatory;
+
   border-radius: 10px;
   width: 100%;
   height: 90vh;
@@ -133,6 +187,7 @@ export default {
 }
 .message {
   text-align: left;
+  word-break: break-word;
 }
 
 .system {
@@ -140,6 +195,7 @@ export default {
   max-width: 70% !important;
   margin: auto !important;
   text-align: center;
+  word-wrap: break-word;
 }
 .system .message {
   text-align: center;
