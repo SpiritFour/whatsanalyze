@@ -35,7 +35,7 @@
       >
         <v-sheet
           elevation="1"
-          max-width="40%"
+          max-width="50%"
           rounded="lg"
           class="pa-2 ma-2"
           color="rgb(38, 45, 49)"
