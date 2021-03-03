@@ -70,7 +70,7 @@ self.addEventListener("fetch", (event) => {
   }
 });
 
-export function serveShareTarget(event) {
+function serveShareTarget(event) {
   const dataPromise = event.request.formData();
 
   // Redirect so the user can refresh the page without resending data.

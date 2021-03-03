@@ -69,6 +69,7 @@ export default {
     },
     workbox: {
       importScripts: ["custom-sw.js"],
+      dev: local,
     },
   },
 
