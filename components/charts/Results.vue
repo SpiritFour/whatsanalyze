@@ -1,8 +1,8 @@
 <template>
   <div class="text-center py-10">
-    <GroupOthers :chat-object="chat" />
-
     <ChartsTextStats :chat="chat" />
+
+    <GroupOthers :chat-object="chat" />
 
     <ChartsFunFacts :chartdata="chat" class="pb-10" />
 
