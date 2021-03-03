@@ -15,8 +15,6 @@ export default {
   head: {
     title: "WhatsAnalyze - How to switch from Signal to WhatsApp",
     meta: [
-      { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
       {
         hid: "description",
         name: "description",
