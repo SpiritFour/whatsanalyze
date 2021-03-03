@@ -149,6 +149,7 @@ export default {
             if (Array.isArray(files)) files = files[0];
             _this.$refs.filehandler.processFile(files);
           });
+          workbox.messageSW("SHARE_READY");
         }
       });
     }

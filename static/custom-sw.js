@@ -5,6 +5,9 @@ console.log("Custom service worker!");
 self.addEventListener("message", function (e) {
   console.log("log all messages");
   console.log(e);
+  if (e.data === "SHARE_READY") {
+    console.log("yuhu ready");
+  }
 });
 
 self.onpush = (x) => {
@@ -76,7 +79,7 @@ function serveShareTarget(event) {
   event.waitUntil(
     (async function () {
       // The page sends this message to tell the service worker it's ready to receive the file.
-      // await nextMessage("share-ready");
+      await nextMessage("SHARE_READY");
       const client = await self.clients.get(
         event.resultingClientId || event.clientId
       );
@@ -93,18 +96,25 @@ function serveShareTarget(event) {
   );
 }
 
-// const nextMessageResolveMap = new Map();
+const nextMessageResolveMap = new Map();
 
-// /**
-//  * Wait on a message with a particular event.data value.
-//  *
-//  * @param dataVal The event.data value.
-//  */
-// function nextMessage(dataVal) {
-//   return new Promise((resolve) => {
-//     if (!nextMessageResolveMap.has(dataVal)) {
-//       nextMessageResolveMap.set(dataVal, []);
-//     }
-//     nextMessageResolveMap.get(dataVal).push(resolve);
-//   });
-// }
+/**
+ * Wait on a message with a particular event.data value.
+ *
+ * @param dataVal The event.data value.
+ */
+function nextMessage(dataVal) {
+  return new Promise((resolve) => {
+    if (!nextMessageResolveMap.has(dataVal)) {
+      nextMessageResolveMap.set(dataVal, []);
+    }
+    nextMessageResolveMap.get(dataVal).push(resolve);
+  });
+}
+
+self.addEventListener("message", (event) => {
+  const resolvers = nextMessageResolveMap.get(event.data);
+  if (!resolvers) return;
+  nextMessageResolveMap.delete(event.data);
+  for (const resolve of resolvers) resolve();
+});
