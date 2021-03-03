@@ -123,9 +123,16 @@ export class Chat {
     // here we remove messages (i.e. system messages)
     this.filterdChatObject = Chat.removeSystemMessages(chatObject);
     //number of persons in chat
-    this.numPersonsInChat = Object.entries(
+    const messagesTemp = Object.entries(
       Chat.getMessagesPerPerson(this.filterdChatObject)
-    ).length;
+    );
+    this.numPersonsInChat = messagesTemp.length;
+    // All persons
+    this.personColorMap = {};
+    messagesTemp.forEach((item, idx) => {
+      this.personColorMap[item[0]] = chatColors[idx % chatColors.length];
+    });
+
     // frequencies for all words in chat (excluding system)
     this._sortedFreqList = null;
     // here we have the messages per person, also adding colors to them
@@ -187,7 +194,7 @@ export class Chat {
       } else {
         enrichedPersons.push({
           name: person[0],
-          color: chatColors[idx % chatColors.length],
+          color: this.personColorMap[person[0]],
           messages: person[1].sort((a, b) => a.date - b.date),
         });
       }
