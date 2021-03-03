@@ -8,23 +8,22 @@
             :md="isShowingChats ? 12 : 6"
             class="px-0 px-md-16 pb-8"
           >
-            <HeaderCta />
+            <HeaderCta
+              titelH1="Export your WhatsApp Chat to PDF in seconds"
+              titelH2="Get all your chats PDFs, while all data stays on your device."
+            />
             <FileHandler
-              ref="filehandler"
               id="fileHandler"
               v-if="$vuetify.breakpoint.mdAndUp"
               @new_messages="newMessages"
               @hide_explanation="isShowingChats = $event"
             />
           </v-col>
-          <v-col v-if="!isShowingChats" cols="12" md="6">
-            <ChartsExampleGraphs :chat_="chat_" />
-          </v-col>
+          <v-col v-if="!isShowingChats" cols="12" md="6"> </v-col>
         </v-row>
         <v-row v-if="$vuetify.breakpoint.smAndDown" class="top-color ma-0">
           <v-col>
             <FileHandler
-              ref="filehandler"
               id="fileHandler"
               @new_messages="newMessages"
               @hide_explanation="isShowingChats = $event"
@@ -46,9 +45,11 @@
       Start with figuring out how many toilet rolls would be needed to print
       your whole chat. Take deep dive in your data now!."
       />
+      <Content :page="page" />
     </v-container>
+
     <v-container v-if="isShowingChats">
-      <ChartsResults ref="results" :chat="chat_" :attachments="attachments" />
+      <ChartsResults ref="results" :chat="chat_" />
       <DownloadPopup :results="$refs.results" :chat="this.chat_" />
     </v-container>
   </div>
@@ -61,20 +62,19 @@ import { downloadBase64File } from "~/functions/utils";
 
 export default {
   async asyncData({ $content }) {
-    const page = await $content("home").fetch();
+    const page = await $content("whatsapp-to-pdf").fetch();
     return {
       page,
     };
   },
   head: {
-    titleTemplate: "WhatsAnalyze - The WhatsApp Chat Analyzer",
-    title: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+    title: "WhatsAnalyze - How to Export your WhatsApp Chat to PDF",
     meta: [
       {
         hid: "description",
         name: "description",
         content:
-          "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
+          "Export your Whatsapp chat to PDF in seconds ✓ Now working for Group Chats ✓ Create your own PDF Book ✓ No Chat Data is sent to a Server. Get Started now!",
       },
       {
         property: "op:image",
@@ -88,14 +88,12 @@ export default {
       isShowingChats: false,
       chat_: new Chat(),
       downloading: false,
-      attachments: undefined,
     };
   },
   methods: {
     Chat,
-    newMessages(chatObject) {
-      this.attachments = chatObject.attachments;
-      this.chat_ = new Chat(chatObject.messages);
+    newMessages(messages) {
+      this.chat_ = new Chat(messages);
     },
     downloadImage() {
       this.downloading = true;
@@ -114,32 +112,6 @@ export default {
         this.downloading = false;
       });
     },
-    setupWorkBox() {
-      let _this = this;
-      if (window.$workbox !== undefined) {
-        window.$workbox.then((workbox) => {
-          console.log("workbox here", workbox);
-          if (workbox) {
-            workbox.addEventListener("message", (m) => {
-              // eslint-disable-next-line no-prototype-builtins
-              if (_this.$route.query.hasOwnProperty("receiving-file-share")) {
-                console.log(m.data.file); //contains the file(s)
-                console.log("index message wb", m);
-                console.log("current route", _this.$route);
-                let files = m.data.file;
-                // currently only the first file, but ultimately we want to pass all files
-                if (Array.isArray(files)) files = files[0];
-                _this.$refs.filehandler.processFile(files);
-              }
-            });
-            workbox.messageSW("SHARE_READY");
-          }
-        });
-      }
-    },
-  },
-  created() {
-    this.setupWorkBox();
   },
 };
 </script>

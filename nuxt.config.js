@@ -1,6 +1,8 @@
 import colors from "vuetify/es5/util/colors";
 import fs from "fs";
-// import sass from "sass-loader";
+
+// eslint-disable-next-line no-undef
+let local = process.env.NUXT_ENV_LOCAL !== undefined;
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -11,22 +13,54 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: "Whats Analyze - The WhatsApp Chat Analyzer",
-    title: "Whats Analyze - The WhatsApp Chat Analyzer",
     htmlAttrs: {
       lang: "en",
     },
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      {
-        hid: "description",
-        name: "description",
-        content:
-          "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
-      },
+      // bing indexing
+      { name: "msvalidate.01", content: "E04DE33CC93C0FF892248C9E70A9A918" },
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+  },
+  pwa: {
+    manifest: {
+      name: "Whats Analyze - The WhatsApp Chat Analyzer",
+      short_name: "whatsanalyze.com",
+      description:
+        "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
+      start_url: "/",
+      display: "standalone",
+      background_color: "#21a68d",
+      theme_color: "#000000",
+      lang: "en",
+      useWebmanifestExtension: true,
+      share_target: {
+        action: "/?share-target=1",
+        method: "POST",
+        enctype: "multipart/form-data",
+        params: {
+          title: "name",
+          text: "description",
+          url: "link",
+          files: [
+            {
+              name: "file",
+              accept: ["*/*"],
+            },
+          ],
+        },
+      },
+    },
+    workbox: {
+      importScripts: ["custom-sw.js"],
+      dev: local,
+    },
+    icon: {
+      source: "/assets",
+      fileName: "whatsanalyze-logo-black.png",
+    },
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -45,7 +79,7 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxt/content"],
+  modules: ["@nuxt/content", "@nuxtjs/pwa"],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
@@ -80,11 +114,18 @@ export default {
     host: "0.0.0.0",
     https:
       // eslint-disable-next-line no-undef
-      process.env.NODE_ENV !== "production"
+      process.env.NODE_ENV !== "production" || local
         ? {
-            key: fs.readFileSync("0.0.0.0.key"),
-            cert: fs.readFileSync("0.0.0.0.crt"),
+            key: fs.readFileSync("./0.0.0.0.key"),
+            cert: fs.readFileSync("./0.0.0.0.crt"),
           }
         : {},
+  },
+  env: {
+    paypalClientId:
+      // eslint-disable-next-line no-undef
+      process.env.NODE_ENV !== "production"
+        ? "ARYQUp4C_oNjNUNkvSPzLeaiulItDmnHUU226OANt2haCKC2c70ZrKZTmRHCPldcu4SD22LmPEuonfec"
+        : "AUMWxSZrtBOA1RicR_3nGijYb8yYxyq2lxBjiwoQKfVc-8jfdPr5N7X5EFUackMCLb_K7HiKswnDBUJ8",
   },
 };

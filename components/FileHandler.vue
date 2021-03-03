@@ -177,26 +177,23 @@ export default {
       this.isSuccess = false;
       this.wrongFile = false;
 
-      // Page freezes during file read, we need to wait for data to propagate to DOM
-      setTimeout(() => {
-        const reader = new FileReader();
-        if (/^application\/(?:x-)?zip(?:-compressed)?$/.test(file.type)) {
-          reader.addEventListener("loadend", this.zipLoadEndHandler);
-          reader.readAsArrayBuffer(file);
-        } else if (file.type === "text/plain") {
-          reader.addEventListener("loadend", this.txtLoadEndHandler);
-          reader.readAsText(file);
-        } else {
-          this.wrongFile = true;
-          this.processing = false;
-          this.isSuccess = false;
-          this.$gtag.event("file-error", {
-            event_category: "home",
-            event_label: "lead",
-            value: "0",
-          });
-        }
-      }, 100);
+      const reader = new FileReader();
+      if (/^application\/(?:x-)?zip(?:-compressed)?$/.test(file.type)) {
+        reader.addEventListener("loadend", this.zipLoadEndHandler);
+        reader.readAsArrayBuffer(file);
+      } else if (file.type === "text/plain") {
+        reader.addEventListener("loadend", this.txtLoadEndHandler);
+        reader.readAsText(file);
+      } else {
+        this.wrongFile = true;
+        this.processing = false;
+        this.isSuccess = false;
+        this.$gtag.event("file-error", {
+          event_category: "home",
+          event_label: "lead",
+          value: "0",
+        });
+      }
     },
 
     dragOver() {
