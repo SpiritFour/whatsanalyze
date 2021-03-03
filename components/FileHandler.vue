@@ -195,15 +195,6 @@ export default {
       .then((messages) => (this.messages = messages))
       .then(() => this.$emit("new_messages", this.messages));
   },
-  created() {
-    //script in index.html:
-    // navigator.serviceWorker.addEventListener("message", function (e) {
-    //   if ("receiving-file-share" in this.$route.query) {
-    //     console.alert(e.data.files); //contains the file(s)
-    //     this.processFile(e.data.files[0]);
-    //   }
-    // });
-  },
 };
 </script>
 

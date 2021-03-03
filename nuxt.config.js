@@ -5,12 +5,6 @@ import fs from "fs";
 let local = process.env.NUXT_ENV_LOCAL !== undefined;
 
 export default {
-  // redirect from http -> https
-  serverMiddleware: [
-    // Will register redirect-ssl npm package
-    "redirect-ssl",
-  ],
-
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 

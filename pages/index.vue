@@ -125,8 +125,8 @@ export default {
                 console.log(m.data.file); //contains the file(s)
                 console.log("index message wb", m);
                 console.log("current route", _this.$route);
-                _this.chat_ = new Chat();
                 let files = m.data.file;
+                // currently only the first file, but ultimately we want to pass all files
                 if (Array.isArray(files)) files = files[0];
                 _this.$refs.filehandler.processFile(files);
               }
