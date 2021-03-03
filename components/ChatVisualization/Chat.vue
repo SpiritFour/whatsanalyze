@@ -66,7 +66,7 @@
             class="text-caption text-right date pt-2"
             style="color: rgb(204, 204, 204)"
           >
-            {{ getDateString(data.date) }}
+            {{ _getDateString(data.date) }}
           </div>
         </v-sheet>
       </v-row>
@@ -90,6 +90,8 @@
 </template>
 
 <script>
+import { getDateString } from "~/functions/utils";
+
 export default {
   name: "Chat",
   computed: {},
@@ -129,35 +131,11 @@ export default {
       });
       return htmlMessage;
     },
-
     changeEgoTo(name) {
       this.selectedEgo = name;
     },
-    getDateString(date) {
-      const months = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-      ];
-      if (date) {
-        const day = date.getDate();
-        const month = months[date.getMonth()];
-        const year = date.getFullYear();
-        const hour = date.getHours();
-        const min = date.getMinutes();
-
-        return day + " " + month + " " + year + ", " + hour + ":" + min;
-      }
-      return "";
+    _getDateString(date) {
+      return getDateString(date);
     },
   },
 };

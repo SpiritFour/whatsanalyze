@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="text-h4 font-weight-bold text-lg-h1">
-      Analyze your WhatsApp Chat in seconds
+      {{ titelH1 }}
     </div>
     <div class="text-h6 text-lg-h4">
-      Reveal insights & get statistics, while all data stays on your device.
+      {{ titelH2 }}
     </div>
     <br />
     <div
@@ -22,3 +22,16 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    titelH1: { default: "Analyze your WhatsApp Chat in seconds", type: String },
+    titelH2: {
+      default:
+        "Reveal insights & get statistics, while all data stays on your device.",
+      type: String,
+    },
+  },
+};
+</script>

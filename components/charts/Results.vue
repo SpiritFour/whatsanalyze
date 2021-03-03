@@ -1,10 +1,9 @@
 <template>
   <div class="text-center py-10">
-    <ChatVisualization :chat="chat" />
-
     <GroupOthers :chat-object="chat" />
 
-    <div class="text-h3 font-weight-bold pt-10">Fun Facts</div>
+    <ChartsTextStats :chat="chat" />
+
     <ChartsFunFacts :chartdata="chat" class="pb-10" />
 
     <!-- Make dropdown -> messages or words -->
@@ -53,7 +52,7 @@
     </v-row>
 
     <!-- make toggle between radar and normal charts -->
-    <div v-show="false">
+    <div v-if="false">
       <ChartsBarChart :chartdata="chat" dataGrouping="hourly" class="py-10" />
       <ChartsBarChart :chartdata="chat" dataGrouping="daily" class="py-10" />
       <ChartsBarChart :chartdata="chat" dataGrouping="weekly" class="py-10" />
@@ -69,6 +68,8 @@
     <Share>
       <ChartsAreaLineChart :chartdata="chat" class="pb-10" />
     </Share>
+
+    <ChatVisualization :chat="chat" />
   </div>
 </template>
 

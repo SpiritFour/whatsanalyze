@@ -4,6 +4,7 @@
     <span class="text-body-1"> {{ text }}</span>
     <br />
     <v-btn
+      to="/"
       @click="$vuetify.goTo('#fileHandler', { duration: 300, offset: 100 })"
       color="#07bc4c"
       style="color: #ffffff"

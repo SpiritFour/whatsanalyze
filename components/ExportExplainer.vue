@@ -140,9 +140,30 @@ import img5_lazy from "@/assets/img/Android/5copy.png";
 import img5 from "@/assets/img/Android/5.png";
 
 export default {
+  methods: {
+    detectIOS() {
+      return (
+        [
+          "iPad Simulator",
+          "iPhone Simulator",
+          "iPod Simulator",
+          "iPad",
+          "iPhone",
+          "iPod",
+        ].includes(navigator.platform) ||
+        // iPad on iOS 13 detection
+        (navigator.userAgent.includes("Mac") && "ontouchend" in document) ||
+        window.safari
+      );
+    },
+  },
+  computed: {
+    tab() {
+      return this.detectIOS() ? 0 : 1;
+    },
+  },
   data: () => ({
     tabStatus: [0, 0],
-    tab: window.safari ? 0 : 1,
     tabData: [
       {
         title: "iOS (Apple)",
