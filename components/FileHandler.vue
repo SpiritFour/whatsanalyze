@@ -100,8 +100,7 @@ export default {
       if (fileName.endsWith(".m4a")) return "audio/mp4";
       if (fileName.endsWith(".wav")) return "audio/wav";
       if (fileName.endsWith(".opus")) return "audio/ogg";
-      if (fileName.endsWith(".vcf")) return "not_supported";
-      return null;
+      return "this" + fileName + " not supported";
     },
 
     renderAttachment(fileName, attachment) {
