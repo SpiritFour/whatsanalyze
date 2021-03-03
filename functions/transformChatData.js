@@ -189,7 +189,7 @@ export class Chat {
       } else {
         enrichedPersons.push({
           name: person[0],
-          color: chatColors[idx % chatColors.length], // Make this work: this.personColorMap[person[0]]
+          color: this.personColorMap[person[0]],
           messages: person[1].sort((a, b) => a.date - b.date),
         });
       }
