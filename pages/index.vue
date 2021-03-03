@@ -119,7 +119,7 @@ export default {
       );
     },
   },
-  mounted() {
+  created() {
     let _this = this;
     navigator.serviceWorker.addEventListener("message", function (e) {
       console.log("index push", e);
@@ -135,6 +135,7 @@ export default {
             // If we don't do this we'll be displaying the notification after the initial installation, which isn't perferred.
             if (event.isUpdate) {
               // whatever logic you want to use to notify the user that they need to refresh the page.
+              console.alert("installed");
             }
           });
           workbox.addEventListener("push", (m) => {

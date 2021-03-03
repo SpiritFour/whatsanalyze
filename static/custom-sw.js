@@ -7,9 +7,6 @@ self.addEventListener("message", function (e) {
   console.log(e);
 });
 
-console.log("self: ", self);
-console.log("self: ", self.onpush);
-
 self.onpush = (x) => {
   console.log(x);
 };
