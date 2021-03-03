@@ -1,6 +1,7 @@
 import { chatColors, hexToRgbA } from "~/functions/colors";
 import stopwords_de from "stopwords-de";
 import stopwords from "stopwords-en";
+import { onlyEmoji } from "emoji-aware";
 
 export class Chat {
   static removeSystemMessages(chatObject) {
@@ -35,7 +36,11 @@ export class Chat {
   static match_emojys(chat_distribution) {
     const regexpEmojiPresentation = /\p{Emoji_Presentation}/gu;
     function isEmoji(value) {
-      return value[0].match(regexpEmojiPresentation);
+      let emojiString = value[0].match(regexpEmojiPresentation);
+      if (emojiString != null) {
+        return onlyEmoji(emojiString[0]);
+      }
+      return emojiString;
     }
 
     return chat_distribution.filter(isEmoji);
