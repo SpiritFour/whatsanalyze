@@ -14,9 +14,9 @@
             :key="name"
             @click="changeEgoTo(name)"
           >
-            <v-list-item-title :style="'color: ' + color">{{
-              name
-            }}</v-list-item-title>
+            <v-list-item-title :style="'color: ' + color">
+              {{ name }}
+            </v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -24,7 +24,15 @@
 
     <!-- Chat -->
     <v-container class="chat">
-      <v-row v-for="(data, idx) in chat.chatObject" no-gutters :key="idx">
+      <v-row
+        v-for="(data, idx) in chat.chatObject.slice(
+          startIdx,
+          startIdx + offset
+        )"
+        no-gutters
+        :key="idx"
+        class="scroll-stop"
+      >
         <v-sheet
           elevation="1"
           max-width="40%"
@@ -61,6 +69,21 @@
           </div>
         </v-sheet>
       </v-row>
+      <v-row
+        class="my-8"
+        v-if="
+          chat.chatObject.slice(startIdx + offset, startIdx + 2 * offset)
+            .length > 0
+        "
+      >
+        <v-btn
+          class="ma-auto white--text"
+          @click="startIdx += offset"
+          color="rgb(14, 97, 98)"
+        >
+          Load next {{ offset }} messages</v-btn
+        >
+      </v-row>
     </v-container>
   </v-container>
 </template>
@@ -71,7 +94,9 @@ export default {
   computed: {},
   data() {
     return {
+      startIdx: 0,
       selectedEgo: "",
+      offset: 50,
     };
   },
   props: ["chat"],
@@ -106,21 +131,28 @@ export default {
         "November",
         "December",
       ];
+      if (date) {
+        const day = date.getDay() + 1;
+        const month = months[date.getMonth()];
+        const year = date.getFullYear();
+        const hour = date.getHours();
+        const min = date.getMinutes();
 
-      const day = date.getDay();
-      const month = months[date.getMonth()];
-      const year = date.getFullYear();
-      const hour = date.getHours();
-      const min = date.getMinutes();
-
-      return day + " " + month + " " + year + ", " + hour + ":" + min;
+        return day + " " + month + " " + year + ", " + hour + ":" + min;
+      }
+      return "";
     },
   },
 };
 </script>
 
 <style scoped>
+.scroll-stop {
+  scroll-snap-align: start;
+}
 .chat {
+  scroll-snap-type: y mandatory;
+
   border-radius: 10px;
   width: 100%;
   height: 90vh;
