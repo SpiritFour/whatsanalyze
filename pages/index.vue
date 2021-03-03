@@ -9,7 +9,7 @@
             class="px-0 px-md-16 pb-8"
           >
             <HeaderCta />
-            <Attachment :attachments="chat_.testattachment" />
+            <!--            <Attachment :attachments="chat_.testattachment" />-->
             <FileHandler
               id="fileHandler"
               v-if="$vuetify.breakpoint.mdAndUp"
@@ -47,7 +47,7 @@
       />
     </v-container>
     <v-container v-if="isShowingChats">
-      <ChartsResults ref="results" :chat_="chat_" />
+      <ChartsResults ref="results" :chat_="chat_" :attachments="attachments" />
       <DownloadPopup :results="$refs.results" :chat="this.chat_" />
     </v-container>
   </div>
@@ -71,12 +71,14 @@ export default {
       isShowingChats: false,
       chat_: new Chat(),
       downloading: false,
+      attachments: undefined,
     };
   },
   methods: {
     Chat,
-    newMessages(messages) {
-      this.chat_ = new Chat(messages);
+    newMessages(chatObject) {
+      this.attachments = chatObject.attachments;
+      this.chat_ = new Chat(chatObject.messages);
     },
     downloadImage() {
       this.downloading = true;

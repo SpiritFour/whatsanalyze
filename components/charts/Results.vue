@@ -72,6 +72,6 @@
 
 <script>
 export default {
-  props: ["chat_"],
+  props: ["chat_", "attachments"],
 };
 </script>
