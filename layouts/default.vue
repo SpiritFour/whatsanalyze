@@ -23,8 +23,8 @@
 
     <div class="foot py-7">
       <h3 class="my-7">
-        <nuxt-link :to="{ name: 'whatsapp-signal' }">
-          Switch from Signal to Whatsapp and keep your data
+        <nuxt-link :to="{ name: 'whatsapp-to-pdf' }">
+          Export your WhatsApp Chat directly to PDF
         </nuxt-link>
       </h3>
 
