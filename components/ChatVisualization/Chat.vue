@@ -57,9 +57,10 @@
             <v-img contain width="100%" />
           </div>
 
-          <div class="white--text message">
-            {{ data.message }}
-          </div>
+          <div
+            class="white--text message"
+            v-html="parseMessage(data.message)"
+          ></div>
 
           <div
             class="text-caption text-right date pt-2"
@@ -101,8 +102,8 @@ export default {
   },
   props: ["chat"],
   methods: {
-    validURL(str) {
-      var pattern = new RegExp(
+    parseMessage(message) {
+      var validUrl = new RegExp(
         "^(https?:\\/\\/)?" + // protocol
           "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
           "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
@@ -110,9 +111,25 @@ export default {
           "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
           "(\\#[-a-z\\d_]*)?$",
         "i"
-      ); // fragment locator
-      return !!pattern.test(str);
+      );
+      const words = message.split(" ");
+      let htmlMessage = "";
+      words.forEach((word) => {
+        if (validUrl.test(word)) {
+          htmlMessage +=
+            "<a style='word-break: break-all' href=" +
+            word +
+            ">" +
+            word +
+            "</a>" +
+            " ";
+        } else {
+          htmlMessage += word + " ";
+        }
+      });
+      return htmlMessage;
     },
+
     changeEgoTo(name) {
       this.selectedEgo = name;
     },
@@ -170,6 +187,7 @@ export default {
 }
 .message {
   text-align: left;
+  word-break: break-word;
 }
 
 .system {
