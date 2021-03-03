@@ -4,12 +4,6 @@
 
     <GroupOthers :chat-object="chat" />
 
-    <div class="text-h3 font-weight-bold py-10">Chat Timeline</div>
-    <small>Messages per Day </small>
-    <Share>
-      <ChartsLineChart :chartdata="chat" class="pb-10" />
-    </Share>
-
     <div class="text-h3 font-weight-bold pt-10">Fun Facts</div>
     <ChartsFunFacts :chartdata="chat" class="pb-10" />
 
@@ -69,6 +63,12 @@
     <!-- Add workcloud with emojies only  -->
     <div class="text-h3 font-weight-bold pt-10">Word Cloud</div>
     <ChartsWordCloud :chartdata="chat" class="pb-10" />
+
+    <div class="text-h3 font-weight-bold py-10">Chat Timeline</div>
+    <small>Messages per Day </small>
+    <Share>
+      <ChartsAreaLineChart :chartdata="chat" class="pb-10" />
+    </Share>
   </div>
 </template>
 

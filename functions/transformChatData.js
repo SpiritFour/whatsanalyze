@@ -372,36 +372,22 @@ export class Chat {
     var maxDate = new Date(Math.max.apply(null, this.dates));
 
     // iterate over persons
+    this.messagesPerPerson.group;
     var datasets = this.messagesPerPerson.map((person) => {
       var hist_info = {};
 
       function _addDayCount(message) {
-        const oneDayInMS = 24 * 60 * 60 * 1000;
-
-        // we group for one day -> set to mid day
         var currDate = new Date(message.date);
         currDate.setHours(12, 0, 0, 0);
-
-        var prevDate = new Date(currDate.getTime() - oneDayInMS);
-        if (prevDate > minDate) {
-          hist_info[prevDate] = hist_info[prevDate] || 0;
-        }
-
         hist_info[currDate] = (hist_info[currDate] || 0) + 1;
-
-        var nextDate = new Date(currDate.getTime() + oneDayInMS);
-        if (nextDate < maxDate) {
-          hist_info[nextDate] = hist_info[nextDate] || 0;
-        }
       }
-
       person.messages.forEach(_addDayCount);
 
       return {
-        borderWidth: 2,
-        lineTension: 0,
+        borderWidth: 1,
+        lineTension: 0.1,
         pointRadius: 1,
-        pointHitRadius: 5,
+        pointHitRadius: 1,
         label: person.name,
         backgroundColor: hexToRgbA(person.color),
         borderColor: person.color,

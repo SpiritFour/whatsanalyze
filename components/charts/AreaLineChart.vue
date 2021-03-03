@@ -1,37 +1,36 @@
 <script>
-import { Bar } from "vue-chartjs";
+import { Line } from "vue-chartjs";
 import { Chat } from "~/functions/transformChatData";
 
 export default {
-  extends: Bar,
+  extends: Line,
   props: {
     chartdata: new Chat(),
-    dataGrouping: {
-      type: String,
-      validator: function (value) {
-        // The value must match one of these strings
-        return ["hourly", "daily", "weekly"].indexOf(value) !== -1;
-      },
-    },
     options: {
       type: Object,
       default: function () {
         return {
+          pointHitRadius: 5,
           responsive: true,
           maintainAspectRatio: false,
+          lineTension: 1,
           legend: {
             position: "bottom",
           },
           scales: {
             xAxes: [
               {
+                type: "time",
+                time: {
+                  unit: this.chartdata.linegraphXAxisUnit,
+                },
+                distribution: "series",
                 gridLines: {
                   display: false,
+                  color: "#FFFFFF",
                 },
-                stacked: true,
               },
             ],
-
             yAxes: [
               {
                 scaleLabel: {
@@ -39,12 +38,17 @@ export default {
                   labelString: "Messages",
                 },
                 ticks: {
-                  beginAtZero: true,
                   precision: 0,
+                  beginAtZero: true,
                 },
                 stacked: true,
               },
             ],
+          },
+          elements: {
+            line: {
+              tension: 0,
+            },
           },
         };
       },
@@ -59,20 +63,12 @@ export default {
     },
   },
   methods: {
-    updateGraph() {
-      if (this.dataGrouping === "hourly") {
-        this.chartdata
-          .getHourlyData()
-          .then((x) => this.renderChart(x, this.options));
-      } else if (this.dataGrouping === "daily") {
-        this.chartdata
-          .getDailyData()
-          .then((x) => this.renderChart(x, this.options));
-      } else {
-        this.chartdata
-          .getWeeklyData()
-          .then((x) => this.renderChart(x, this.options));
-      }
+    updateGraph: function () {
+      this.chartdata.getLineGraphData().then((lineGraphData) => {
+        // eslint-disable-next-line vue/no-mutating-props
+        this.options.scales.xAxes[0].time.unit = lineGraphData[1];
+        this.renderChart(lineGraphData[0], this.options);
+      });
     },
   },
   mounted() {
