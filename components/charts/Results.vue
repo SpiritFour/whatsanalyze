@@ -1,16 +1,15 @@
 <template>
   <div class="text-center py-10">
-    <ChartsTextStats :chat="chat" />
-
-    <GroupOthers :chat-object="chat" />
-
-    <div class="text-h3 font-weight-bold py-10">Chat Timeline</div>
-    <small>Messages per Day </small>
+    <div class="text-h2 font-weight-bold py-10">Chat Timeline</div>
+    <div>Messages per Day</div>
     <Share>
       <ChartsLineChart :chartdata="chat" class="pb-10" />
     </Share>
 
-    <div class="text-h3 font-weight-bold pt-10">Fun Facts</div>
+    <GroupOthers :chat-object="chat" />
+
+    <ChartsTextStats :chat="chat" />
+
     <ChartsFunFacts :chartdata="chat" class="pb-10" />
 
     <!-- Make dropdown -> messages or words -->
