@@ -57,6 +57,10 @@ export default {
       importScripts: ["custom-sw.js"],
       dev: local,
     },
+    icon: {
+      source: "/assets",
+      fileName: "whatsanalyze-logo-black.png",
+    },
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
