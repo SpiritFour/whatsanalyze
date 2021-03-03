@@ -2,56 +2,9 @@ console.log("Custom service worker!");
 // maybe i need servvice woker windows communicating with each other
 //service-worker.js:
 
-self.addEventListener("message", function (e) {
-  console.log("log all messages");
-  console.log(e);
-  if (e.data === "SHARE_READY") {
-    console.log("yuhu ready");
-  }
-});
-
 self.onpush = (x) => {
   console.log(x);
 };
-
-// self.onfetch = (event) => {
-//   const url = new URL(event.request.url);
-//
-//   if (
-//     (event.request.method === "POST" &&
-//       url.pathname === "/" &&
-//       url.searchParams.has("share-target")) ||
-//     url.pathname === "/data2"
-//   ) {
-//     console.log(
-//       event,
-//       url,
-//       event.request.method,
-//       url.pathname,
-//       url.searchParams.has("share-target"),
-//       event.clientId
-//     );
-//     // we should only log this for better readability
-//     event.respondWith(Response.redirect("/?receiving-file-share=1"));
-//     event.waitUntil(
-//       (async function () {
-//         const client = await self.clients.get(
-//           event.clientId || event.resultingClientId
-//         );
-//         console.log("client in wait until", client);
-//         const data = await event.request.formData();
-//         console.log("data in wait until", data);
-//         data.forEach((b, c) => {
-//           console.log(b, c);
-//         });
-//         const files = data.get("file");
-//         console.log("files in wait until", files); //todo this is null, find a way to log data with all keys (FormDat)
-//         client.postMessage({ files });
-//       })()
-//     );
-//     return;
-//   }
-// };
 
 self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
@@ -113,7 +66,13 @@ function nextMessage(dataVal) {
 }
 
 self.addEventListener("message", (event) => {
+  console.log("log all messages");
+  console.log(event);
+  if (event.data === "SHARE_READY") {
+    console.log("yuhu ready");
+  }
   const resolvers = nextMessageResolveMap.get(event.data);
+  console.log("here are the resolvers", resolvers);
   if (!resolvers) return;
   nextMessageResolveMap.delete(event.data);
   for (const resolve of resolvers) resolve();
