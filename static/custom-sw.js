@@ -37,7 +37,7 @@ function serveShareTarget(event, wait = true) {
       data.forEach((b, c) => {
         console.log(b, c);
       });
-      const file = data.get("file");
+      const file = data.getAll("file");
       console.log("files in wait until", file);
       client.postMessage({ file });
     })()

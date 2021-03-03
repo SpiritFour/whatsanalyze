@@ -103,13 +103,16 @@ export default {
           console.log("workbox here", workbox);
           if (workbox) {
             workbox.addEventListener("message", (m) => {
-              console.log(m.data.file); //contains the file(s)
-              console.log("index message wb", m);
-              console.log("current route", _this.$route);
-              _this.chat_ = new Chat();
-              let files = m.data.file;
-              if (Array.isArray(files)) files = files[0];
-              _this.$refs.filehandler.processFile(files);
+              // eslint-disable-next-line no-prototype-builtins
+              if (_this.$route.query.hasOwnProperty("receiving-file-share")) {
+                console.log(m.data.file); //contains the file(s)
+                console.log("index message wb", m);
+                console.log("current route", _this.$route);
+                _this.chat_ = new Chat();
+                let files = m.data.file;
+                if (Array.isArray(files)) files = files[0];
+                _this.$refs.filehandler.processFile(files);
+              }
             });
             workbox.messageSW("SHARE_READY");
           }

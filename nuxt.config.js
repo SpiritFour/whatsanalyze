@@ -46,8 +46,8 @@ export default {
         "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
       start_url: "/",
       display: "standalone",
-      background_color: "#ffffff",
-      theme_color: "#21a68d",
+      background_color: "#21a68d",
+      theme_color: "#000000",
       lang: "en",
       useWebmanifestExtension: true,
       share_target: {
