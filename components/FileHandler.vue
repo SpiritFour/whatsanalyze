@@ -81,20 +81,18 @@ export default {
       wrongFile: false,
       processing: false,
       isSuccess: false,
-      messages: [],
       attachments: {},
     };
   },
   methods: {
-    extendDataStructure(messages) {
+    extendDataStructure(chatObject) {
       let authors = {};
-      messages.forEach(function (object, index) {
+      chatObject.messages.forEach(function (object, index) {
         if (!(object.author in authors)) authors[object.author] = 0;
         else authors[object.author] += 1;
         object.absolute_id = index;
         object.personal_id = authors[object.author];
       });
-      return { messages: messages, attachments: this.attachments };
     },
 
     zipLoadEndHandler(e) {
@@ -103,25 +101,42 @@ export default {
       const zip = jszip.loadAsync(arrayBuffer);
 
       zip
-        .then(this.readChatFile)
-        .then((text) => parseString(text, { parseAttachments: true }))
+        .then((zipData) => {
+          let chatFile = this.getChatFile(zipData);
+          return parseString(chatFile, {
+            parseAttachments: true,
+          }).then((messages) => {
+            return {
+              messages: messages,
+              attachments: zipData,
+            };
+          });
+        })
         .then(this.updateMessages);
     },
 
-    handleAttachments(zipData) {
-      zipData.forEach((relativePath, file) => {
-        if (!relativePath.endsWith(".txt"))
-          this.attachments[relativePath] = file;
-      });
+    async getChatFile(zipData) {
+      // this is the standard file on ios, if found return
+      const chatFile = zipData.file("_chat.txt");
+      if (chatFile) return chatFile.async("string");
+
+      // otherwise search for potential other txt files
+      // take shortes one
+      return await zipData
+        .file(/.*(?:chat|whatsapp).*\.txt$/i)
+        .sort((a, b) => a.name.length - b.name.length)[0]
+        .async("string");
     },
 
     txtLoadEndHandler(e) {
-      parseString(e.target.result).then(this.updateMessages);
+      parseString(e.target.result).then((messages) =>
+        this.updateMessages({ messages: messages })
+      );
     },
 
-    updateMessages(messages) {
-      this.messages = this.extendDataStructure(messages);
-      this.$emit("new_messages", this.messages);
+    updateMessages(chatObject) {
+      this.extendDataStructure(chatObject);
+      this.$emit("new_messages", chatObject);
       this.$emit("hide_explanation", true);
       this.processing = false;
       this.isSuccess = true;
@@ -130,24 +145,6 @@ export default {
         event_label: "lead",
         value: "1",
       });
-    },
-
-    readChatFile(zipData) {
-      this.handleAttachments(zipData, chatFile);
-      const chatFile = zipData.file("_chat.txt");
-      if (chatFile) return chatFile.async("string");
-
-      const chatFiles = zipData.file(/.*(?:chat|whatsapp).*\.txt$/i);
-
-      if (!chatFiles.length) {
-        throw new Error("No txt files found in archive");
-      }
-
-      const chatFilesSorted = chatFiles.sort(
-        (a, b) => a.name.length - b.name.length
-      );
-
-      return chatFilesSorted[0].async("string");
     },
 
     processFile(file) {
@@ -198,8 +195,12 @@ export default {
     fetch("/chat_example.txt")
       .then((response) => response.text())
       .then(parseString)
-      .then((messages) => (this.messages = this.extendDataStructure(messages)))
-      .then(() => this.$emit("new_messages", this.messages));
+      .then((messages) => {
+        messages = { messages: messages };
+        this.extendDataStructure(messages);
+        return messages;
+      })
+      .then((messages) => this.$emit("new_messages", messages));
   },
 };
 </script>

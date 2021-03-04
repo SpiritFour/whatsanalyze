@@ -113,16 +113,10 @@ export class Chat {
     return hours;
   }
 
-  constructor(
-    chatObject = { messages: [], attachments: {} },
-    groupAfter = 9,
-    maxWordsWordCloud = 200
-  ) {
+  constructor(chatObject = [], groupAfter = 9, maxWordsWordCloud = 200) {
     // this one is the complete input
-    this.chatObject = chatObject.messages;
-    this.attachments = chatObject.attachments;
-    console.log(this.chatObject);
-    console.log(this.attachments);
+    this.chatObject = chatObject;
+
     // for groupmessages we probably want to group after some time
     this._groupAfter = groupAfter;
     // max number of words shown in word cloud
