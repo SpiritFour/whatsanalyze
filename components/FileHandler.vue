@@ -18,7 +18,12 @@
           isSuccess: isSuccess,
         }"
       >
-        <input type="file" id="uploadmytextfile" @change="requestUploadFile" />
+        <input
+          type="file"
+          multiple
+          id="uploadmytextfile"
+          @change="requestUploadFile"
+        />
         <!-- Wrong File -->
         <div v-show="wrongFile" class="text-body-1 text-md-h5 w-100">
           <strong>Wrong file format!</strong> <br />
@@ -81,19 +86,18 @@ export default {
       wrongFile: false,
       processing: false,
       isSuccess: false,
-      messages: [],
+      attachments: {},
     };
   },
   methods: {
-    extendDataStructure(messages) {
+    extendDataStructure(chatObject) {
       let authors = {};
-      messages.forEach(function (object, index) {
+      chatObject.messages.forEach(function (object, index) {
         if (!(object.author in authors)) authors[object.author] = 0;
         else authors[object.author] += 1;
         object.absolute_id = index;
         object.personal_id = authors[object.author];
       });
-      return messages;
     },
 
     zipLoadEndHandler(e) {
@@ -102,18 +106,80 @@ export default {
       const zip = jszip.loadAsync(arrayBuffer);
 
       zip
-        .then(this.readChatFile)
-        .then((text) => parseString(text, { parseAttachments: true }))
+        .then((zipData) => {
+          let chatFile = this.getChatFile(zipData);
+          return parseString(chatFile, {
+            parseAttachments: true,
+          }).then((messages) => {
+            return {
+              messages: messages,
+              attachments: zipData,
+            };
+          });
+        })
         .then(this.updateMessages);
     },
 
-    txtLoadEndHandler(e) {
-      parseString(e.target.result).then(this.updateMessages);
+    async getChatFile(zipData) {
+      // this is the standard file on ios, if found return
+      const chatFile = zipData.file("_chat.txt");
+      if (chatFile) return chatFile.async("string");
+
+      // otherwise search for potential other txt files
+      // take shortes one
+      return await zipData
+        .file(/.*(?:chat|whatsapp).*\.txt$/i)
+        .sort((a, b) => a.name.length - b.name.length)[0]
+        .async("string");
     },
 
-    updateMessages(messages) {
-      this.messages = this.extendDataStructure(messages);
-      this.$emit("new_messages", this.messages);
+    readMultipleFiles(files) {
+      function findChatFile(files) {
+        let chatRegex = new RegExp(/.*(?:chat|whatsapp).*\.txt$/i);
+        return files.find((file) => {
+          return chatRegex.test(file.name);
+        });
+      }
+
+      files = Array.from(files);
+      let chatFile = findChatFile(files);
+      if (chatFile === undefined) {
+        this.showErrorMessage();
+        return;
+      }
+      const reader = new FileReader();
+      reader.addEventListener("loadend", (loadedFile) => {
+        parseString(loadedFile.target.result, {
+          parseAttachments: true,
+        }).then((messages) => {
+          this.updateMessages({
+            messages: messages,
+            attachments: {
+              files: files,
+              file(_fileName) {
+                return {
+                  async: () =>
+                    Promise.resolve(
+                      this.files.find((file) => file.name === _fileName)
+                    ),
+                };
+              },
+            },
+          });
+        });
+      });
+      reader.readAsText(chatFile);
+    },
+
+    txtLoadEndHandler(e) {
+      parseString(e.target.result).then((messages) =>
+        this.updateMessages({ messages: messages })
+      );
+    },
+
+    updateMessages(chatObject) {
+      this.extendDataStructure(chatObject);
+      this.$emit("new_messages", chatObject);
       this.$emit("hide_explanation", true);
       this.processing = false;
       this.isSuccess = true;
@@ -124,45 +190,37 @@ export default {
       });
     },
 
-    readChatFile(zipData) {
-      const chatFile = zipData.file("_chat.txt");
-      if (chatFile) return chatFile.async("string");
-
-      const chatFiles = zipData.file(/.*(?:chat|whatsapp).*\.txt$/i);
-
-      if (!chatFiles.length) {
-        throw new Error("No txt files found in archive");
-      }
-
-      const chatFilesSorted = chatFiles.sort(
-        (a, b) => a.name.length - b.name.length
-      );
-
-      return chatFilesSorted[0].async("string");
+    showErrorMessage() {
+      this.wrongFile = true;
+      this.processing = false;
+      this.isSuccess = false;
+      this.$gtag.event("file-error", {
+        event_category: "home",
+        event_label: "lead",
+        value: "0",
+      });
     },
-
-    processFile(file) {
+    processFileList(fileList) {
       this.isDragging = false;
       this.processing = true;
       this.isSuccess = false;
       this.wrongFile = false;
-
-      const reader = new FileReader();
-      if (/^application\/(?:x-)?zip(?:-compressed)?$/.test(file.type)) {
-        reader.addEventListener("loadend", this.zipLoadEndHandler);
-        reader.readAsArrayBuffer(file);
-      } else if (file.type === "text/plain") {
-        reader.addEventListener("loadend", this.txtLoadEndHandler);
-        reader.readAsText(file);
+      if (fileList.length > 1) {
+        //do multiple here
+        this.readMultipleFiles(fileList);
       } else {
-        this.wrongFile = true;
-        this.processing = false;
-        this.isSuccess = false;
-        this.$gtag.event("file-error", {
-          event_category: "home",
-          event_label: "lead",
-          value: "0",
-        });
+        let file = fileList[0];
+        // do singles here
+        const reader = new FileReader();
+        if (/^application\/(?:x-)?zip(?:-compressed)?$/.test(file.type)) {
+          reader.addEventListener("loadend", this.zipLoadEndHandler);
+          reader.readAsArrayBuffer(file);
+        } else if (file.type === "text/plain") {
+          reader.addEventListener("loadend", this.txtLoadEndHandler);
+          reader.readAsText(file);
+        } else {
+          this.showErrorMessage();
+        }
       }
     },
 
@@ -175,22 +233,26 @@ export default {
     },
 
     drop(e) {
-      let files = e.dataTransfer.files;
-      this.processFile(files[0]);
+      let fileList = e.dataTransfer.files;
+      this.processFileList(fileList);
     },
 
     requestUploadFile() {
       let src = this.$el.querySelector("#uploadmytextfile");
-      let files = src.files;
-      this.processFile(files[0]);
+      let fileList = src.files;
+      this.processFileList(fileList);
     },
   },
   mounted() {
     fetch("/chat_example.txt")
       .then((response) => response.text())
       .then(parseString)
-      .then((messages) => (this.messages = messages))
-      .then(() => this.$emit("new_messages", this.messages));
+      .then((messages) => {
+        messages = { messages: messages };
+        this.extendDataStructure(messages);
+        return messages;
+      })
+      .then((messages) => this.$emit("new_messages", messages));
   },
 };
 </script>

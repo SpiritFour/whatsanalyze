@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="pb-0">
     <div class="text-h5 text-md-h2 text-center pb-8">
       How to export your chat on
     </div>
@@ -14,94 +14,74 @@
     </v-tabs>
     <v-tabs-items v-model="tab">
       <v-tab-item v-for="(data, idx) in tabData" :key="idx">
-        <v-container>
-          <v-row no-gutters>
-            <v-col cols="12" sm="4">
-              <div class="carousel-container">
-                <div class="frame-container">
-                  <v-img
-                    ref="smartphone"
-                    class="frame ma-md-16"
-                    :src="data.frameImg"
-                  />
-                </div>
-                <v-carousel
-                  v-model="tabStatus[idx]"
-                  :continuous="false"
-                  hide-delimiter-background
-                  hide-delimiters
-                  class="pa-md-16"
-                  height="auto"
-                >
-                  <v-carousel-item
-                    v-for="(item, idx) in data.carouselItems"
-                    :key="idx"
-                  >
-                    <v-img contain :lazy-src="item.imgLazy" :src="item.img">
-                      <template v-slot:placeholder>
-                        <v-row
-                          class="ma-0"
-                          align="center"
-                          justify="center"
-                          :style="'height: ' + $refs.smartphone.clientHeight"
-                        >
-                          <v-progress-circular
-                            indeterminate
-                            color="grey lighten-5"
-                          ></v-progress-circular>
-                        </v-row>
-                      </template>
-                    </v-img>
-                    <v-btn
-                      fab
-                      outlined
-                      color="black"
-                      disabled
-                      :style="
-                        'position: absolute; left: ' +
-                        item.x +
-                        '; top: ' +
-                        item.y
-                      "
-                      class="blinking"
-                    ></v-btn>
-                  </v-carousel-item>
-                </v-carousel>
-              </div>
-            </v-col>
-            <v-col cols="12" sm="8" class="pt-md-15">
-              <v-timeline dense>
-                <v-timeline-item
-                  class="mb-4 align-center"
-                  small
-                  v-for="(tabItem, i) in data.tabItems"
-                  :key="i"
-                  :text="tabItem.text"
-                  :color="tabStatus[idx] === i ? 'blue' : 'grey'"
-                  fill-dot
-                  @click.native.stop="tabStatus = [i, i]"
-                >
-                  <v-row v-html="tabItem.text" style="cursor: pointer"> </v-row>
-                </v-timeline-item>
-              </v-timeline>
-
-              <v-btn
-                @click="
-                  $vuetify.goTo('#fileHandler', {
-                    duration: 300,
-                    offset: 100,
-                  })
-                "
-                color="#07bc4c"
-                class="text-md-h6 text-caption ml-10 white--text"
-                style="max-width: 100%"
+        <v-row no-gutters>
+          <v-col cols="12" sm="8" class="pt-md-15">
+            <v-timeline dense>
+              <v-timeline-item
+                class="mb-4 align-center"
+                small
+                v-for="(tabItem, i) in data.tabItems"
+                :key="i"
+                :text="tabItem.text"
+                :color="tabStatus[idx] === i ? 'blue' : 'grey'"
+                fill-dot
+                @click.native.stop="tabStatus = [i, i]"
               >
-                <v-icon>mdi-arrow-right</v-icon>
-                Select file via box above.
-              </v-btn>
-            </v-col>
-          </v-row>
-        </v-container>
+                <v-row v-html="tabItem.text" style="cursor: pointer"> </v-row>
+              </v-timeline-item>
+            </v-timeline>
+
+            <v-btn
+              elevation="10"
+              @click="
+                $vuetify.goTo('#fileHandler', {
+                  duration: 300,
+                  offset: 100,
+                })
+              "
+              color="#07bc4c"
+              class="text-md-h6 text-caption ml-10 white--text"
+              style="max-width: 100%"
+            >
+              <v-icon>mdi-arrow-right</v-icon>
+              Select file via box above.
+            </v-btn>
+          </v-col>
+          <v-col cols="12" sm="4" class="pt-5">
+            <div class="carousel-container px-md-16 px-4">
+              <v-img ref="smartphone" class="frame" :src="data.frameImg" />
+              <!--                this is model and pngs-->
+              <v-carousel
+                v-model="tabStatus[idx]"
+                :continuous="false"
+                hide-delimiter-background
+                hide-delimiters
+                show-arrows
+                class="frame-container px-md-16 px-4"
+                height="auto"
+              >
+                <v-carousel-item
+                  v-for="(item, idx) in data.carouselItems"
+                  :key="idx"
+                  @click.native.stop="increaseTabstatus()"
+                >
+                  <v-img contain :lazy-src="item.imgLazy" :src="item.img">
+                  </v-img>
+                  <v-btn
+                    fab
+                    outlined
+                    color="black"
+                    disabled
+                    :style="
+                      'position: absolute; left: ' + item.x + '; top: ' + item.y
+                    "
+                    class="blinking"
+                  ></v-btn>
+                </v-carousel-item>
+              </v-carousel>
+            </div>
+          </v-col>
+        </v-row>
       </v-tab-item>
     </v-tabs-items>
   </v-container>
@@ -140,30 +120,15 @@ import img5_lazy from "@/assets/img/Android/5copy.png";
 import img5 from "@/assets/img/Android/5.png";
 
 export default {
-  methods: {
-    detectIOS() {
-      return (
-        [
-          "iPad Simulator",
-          "iPhone Simulator",
-          "iPod Simulator",
-          "iPad",
-          "iPhone",
-          "iPod",
-        ].includes(navigator.platform) ||
-        // iPad on iOS 13 detection
-        (navigator.userAgent.includes("Mac") && "ontouchend" in document) ||
-        window.safari
-      );
-    },
-  },
-  computed: {
-    tab() {
-      return this.detectIOS() ? 0 : 1;
-    },
-  },
   data: () => ({
     tabStatus: [0, 0],
+    tab:
+      navigator.platform.toLowerCase().includes("ios") ||
+      navigator.platform.toLowerCase().includes("iphone") ||
+      navigator.platform.toLowerCase().includes("ipad") ||
+      navigator.platform.toLowerCase().includes("mac")
+        ? 0
+        : 1,
     tabData: [
       {
         title: "iOS (Apple)",
@@ -322,6 +287,14 @@ export default {
       },
     ],
   }),
+  methods: {
+    increaseTabstatus() {
+      let maxValue = this.tabData[this.tab].carouselItems.length;
+      let a = [...this.tabStatus];
+      a[this.tab] = Math.min(a[this.tab] + 1, maxValue);
+      this.tabStatus = a;
+    },
+  },
 };
 </script>
 
@@ -331,17 +304,14 @@ export default {
   width: 100%;
   height: 100%;
 }
-
 .frame-container {
-  pointer-events: none;
   left: 0;
   top: 0;
-  width: 100%;
-  height: 100%;
   position: absolute;
 }
 
 .frame {
+  pointer-events: none;
   z-index: 99999;
   top: 2px;
 }

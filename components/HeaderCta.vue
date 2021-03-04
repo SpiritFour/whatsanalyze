@@ -26,7 +26,7 @@
 <script>
 export default {
   props: {
-    titelH1: { default: "Analyze your WhatsApp Chat in seconds", type: String },
+    titelH1: { default: "Analyze your WhatsApp Chat in Seconds", type: String },
     titelH2: {
       default:
         "Reveal insights & get statistics, while all data stays on your device.",
