@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div v-if="attachment.mimeType">
+    {{ attachment }}
+    <div v-if="attachment">
       <img
         v-if="attachment.mimeType.startsWith('image/')"
         :src="attachment.src"
@@ -35,6 +36,14 @@
 <script>
 export default {
   name: "Attachment",
-  props: ["attachment"],
+  props: ["attachmentPromise"],
+  data() {
+    return {
+      attachment: undefined,
+    };
+  },
+  created() {
+    this.attachmentPromise.then((resolved) => (this.attachment = resolved));
+  },
 };
 </script>
