@@ -116,12 +116,13 @@ export class Chat {
   constructor(chatObject = [], groupAfter = 9, maxWordsWordCloud = 200) {
     // this one is the complete input
     this.chatObject = chatObject;
+
     // for groupmessages we probably want to group after some time
     this._groupAfter = groupAfter;
     // max number of words shown in word cloud
     this._maxWordsWordCloud = maxWordsWordCloud;
     // here we remove messages (i.e. system messages)
-    this.filterdChatObject = Chat.removeSystemMessages(chatObject);
+    this.filterdChatObject = Chat.removeSystemMessages(this.chatObject);
     //number of persons in chat
     const messagesTemp = Object.entries(
       Chat.getMessagesPerPerson(this.filterdChatObject)
@@ -211,7 +212,6 @@ export class Chat {
         (a, b) => a.absolute_id - b.absolute_id
       );
     }
-
     return enrichedPersons;
   }
 
@@ -451,6 +451,8 @@ export class Chat {
               "wir",
               "aber",
               "<media",
+              "<attached:",
+              "audio",
               "omitted>",
               "bild",
               "image",

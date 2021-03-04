@@ -47,9 +47,8 @@
       your whole chat. Take deep dive in your data now!."
       />
     </v-container>
-
     <v-container v-if="isShowingChats">
-      <ChartsResults ref="results" :chat="chat_" />
+      <ChartsResults ref="results" :chat="chat_" :attachments="attachments" />
       <DownloadPopup :results="$refs.results" :chat="this.chat_" />
     </v-container>
   </div>
@@ -89,14 +88,14 @@ export default {
       isShowingChats: false,
       chat_: new Chat(),
       downloading: false,
-      deferredPrompt: null,
-      buttonStatus: false,
+      attachments: undefined,
     };
   },
   methods: {
     Chat,
-    newMessages(messages) {
-      this.chat_ = new Chat(messages);
+    newMessages(chatObject) {
+      this.attachments = chatObject.attachments;
+      this.chat_ = new Chat(chatObject.messages);
     },
     downloadImage() {
       this.downloading = true;
@@ -115,7 +114,6 @@ export default {
         this.downloading = false;
       });
     },
-
     setupWorkBox() {
       let _this = this;
       if (window.$workbox !== undefined) {
@@ -182,14 +180,6 @@ export default {
   }
 }
 
-.cta-bottom {
-  text-align: center;
-  background: $c-white;
-  padding: 1em;
-  margin-top: 2em;
-  margin-bottom: 2em;
-}
-
 .explainer-list {
   overflow: hidden;
   margin-left: 10%;
@@ -225,14 +215,6 @@ export default {
     width: 100%;
     padding: 3em;
   }
-}
-
-.cta-bottom {
-  text-align: center;
-  background: $c-white;
-  padding: 1em;
-  margin-top: 2em;
-  margin-bottom: 2em;
 }
 
 .main-el {

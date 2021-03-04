@@ -1,7 +1,7 @@
 <template>
   <v-col class="my-4 mb-16">
     <v-row>
-      <ChatVisualizationChat :chat="chat" />
+      <ChatVisualizationChat :chat="chat" :attachments="attachments" />
     </v-row>
     <v-row justify="center">
       <v-dialog v-model="showDownloadPopup" width="500">
@@ -58,7 +58,7 @@
 <script>
 export default {
   name: "ChatVisualization",
-  props: ["chat"],
+  props: ["chat", "attachments"],
   data() {
     return {
       showDownloadPopup: false,
