@@ -47,9 +47,8 @@
       your whole chat. Take deep dive in your data now!."
       />
     </v-container>
-
     <v-container v-if="isShowingChats">
-      <ChartsResults ref="results" :chat="chat_" />
+      <ChartsResults ref="results" :chat="chat_" :attachments="attachments" />
       <DownloadPopup :results="$refs.results" :chat="this.chat_" />
     </v-container>
   </div>
@@ -89,12 +88,14 @@ export default {
       isShowingChats: false,
       chat_: new Chat(),
       downloading: false,
+      attachments: undefined,
     };
   },
   methods: {
     Chat,
-    newMessages(messages) {
-      this.chat_ = new Chat(messages);
+    newMessages(chatObject) {
+      this.attachments = chatObject.attachments;
+      this.chat_ = new Chat(chatObject.messages);
     },
     downloadImage() {
       this.downloading = true;
