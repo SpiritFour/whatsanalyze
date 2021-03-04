@@ -52,6 +52,7 @@
       <ChartsResults ref="results" :chat="chat_" />
       <DownloadPopup :results="$refs.results" :chat="this.chat_" />
     </v-container>
+    <PdfDownloader :chat="this.chat_" />
   </div>
 </template>
 
