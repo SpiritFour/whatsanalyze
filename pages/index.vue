@@ -49,8 +49,8 @@
     </v-container>
 
     <v-container v-if="isShowingChats">
-      <DownloadPopup :results="$refs.results" :chat="this.chat_" />
       <ChartsResults ref="results" :chat="chat_" />
+      <DownloadPopup :results="$refs.results" :chat="this.chat_" />
     </v-container>
   </div>
 </template>
