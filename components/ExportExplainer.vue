@@ -124,6 +124,8 @@ export default {
     tabStatus: [0, 0],
     tab:
       navigator.platform.toLowerCase().includes("ios") ||
+      navigator.platform.toLowerCase().includes("iphone") ||
+      navigator.platform.toLowerCase().includes("ipad") ||
       navigator.platform.toLowerCase().includes("mac")
         ? 0
         : 1,
