@@ -1,5 +1,6 @@
 <template>
   <div class="text-center py-10">
+    <ChatVisualization :chat="chat" :attachments="attachments" />
     <div class="text-h2 font-weight-bold py-10">Chat Timeline</div>
     <div>Messages per Day</div>
     <Share>
@@ -68,8 +69,6 @@
     <!-- Add workcloud with emojies only  -->
     <div class="text-h3 font-weight-bold pt-10">Word Cloud</div>
     <ChartsWordCloud :chartdata="chat" class="pb-10" />
-
-    <ChatVisualization :chat="chat" :attachments="attachments" />
   </div>
 </template>
 

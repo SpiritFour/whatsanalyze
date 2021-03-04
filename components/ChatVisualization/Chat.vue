@@ -104,7 +104,7 @@ export default {
     return {
       startIdx: 0,
       selectedEgo: "",
-      offset: 50,
+      offset: 20,
     };
   },
   props: ["chat", "attachments"],
