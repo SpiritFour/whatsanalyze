@@ -1,38 +1,40 @@
 <template>
   <div>
-    <img
-      v-if="attachments.mimeType.startsWith('image/')"
-      :src="attachments.src"
-      :title="attachments.fileName"
-      alt=""
-    />
-    <video
-      v-if="attachments.mimeType.startsWith('video/')"
-      controls
-      :title="attachments.fileName"
-    >
-      <source :src="attachments.src" :type="attachments.mimeType" />
-    </video>
+    <div v-if="attachment.mimeType">
+      <img
+        v-if="attachment.mimeType.startsWith('image/')"
+        :src="attachment.src"
+        :title="attachment.fileName"
+        alt=""
+      />
+      <video
+        v-if="attachment.mimeType.startsWith('video/')"
+        controls
+        :title="attachment.fileName"
+      >
+        <source :src="attachment.src" :type="attachment.mimeType" />
+      </video>
 
-    <audio
-      v-if="attachments.mimeType.startsWith('audio/')"
-      controls
-      :src="attachments.src"
-      :title="attachments.fileName"
-    />
-    <a
-      v-if="attachments.mimeType.startsWith('href')"
-      :href="attachments.src"
-      :download="attachments.fileName"
-    >
-      {{ attachments.fileName }}
-    </a>
+      <audio
+        v-if="attachment.mimeType.startsWith('audio/')"
+        controls
+        :src="attachment.src"
+        :title="attachment.fileName"
+      />
+      <a
+        v-if="attachment.mimeType.startsWith('href')"
+        :href="attachment.src"
+        :download="attachment.fileName"
+      >
+        {{ attachment.fileName }}
+      </a>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "Attachment",
-  props: ["attachments"],
+  props: ["attachment"],
 };
 </script>

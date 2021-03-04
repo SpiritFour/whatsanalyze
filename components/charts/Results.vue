@@ -69,7 +69,7 @@
     <div class="text-h3 font-weight-bold pt-10">Word Cloud</div>
     <ChartsWordCloud :chartdata="chat" class="pb-10" />
 
-    <ChatVisualization :chat="chat" />
+    <ChatVisualization :chat="chat" :attachments="attachments" />
   </div>
 </template>
 
