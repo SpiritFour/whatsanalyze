@@ -1,6 +1,7 @@
 import { chatColors, hexToRgbA } from "~/functions/colors";
 import stopwords_de from "stopwords-de";
 import stopwords from "stopwords-en";
+import { onlyEmoji } from "emoji-aware";
 
 export class Chat {
   static removeSystemMessages(chatObject) {
@@ -35,7 +36,11 @@ export class Chat {
   static match_emojys(chat_distribution) {
     const regexpEmojiPresentation = /\p{Emoji_Presentation}/gu;
     function isEmoji(value) {
-      return value[0].match(regexpEmojiPresentation);
+      let emojiString = value[0].match(regexpEmojiPresentation);
+      if (emojiString != null) {
+        return onlyEmoji(emojiString[0]);
+      }
+      return emojiString;
     }
 
     return chat_distribution.filter(isEmoji);
@@ -118,9 +123,16 @@ export class Chat {
     // here we remove messages (i.e. system messages)
     this.filterdChatObject = Chat.removeSystemMessages(chatObject);
     //number of persons in chat
-    this.numPersonsInChat = Object.entries(
+    const messagesTemp = Object.entries(
       Chat.getMessagesPerPerson(this.filterdChatObject)
-    ).length;
+    );
+    this.numPersonsInChat = messagesTemp.length;
+    // All persons
+    this.personColorMap = {};
+    messagesTemp.forEach((item, idx) => {
+      this.personColorMap[item[0]] = chatColors[idx % chatColors.length];
+    });
+
     // frequencies for all words in chat (excluding system)
     this._sortedFreqList = null;
     // here we have the messages per person, also adding colors to them
@@ -142,6 +154,10 @@ export class Chat {
     if (this._sortedFreqList) return this._sortedFreqList;
     this._sortedFreqList = Chat.createSortedFreqDict(this.chatObject);
     return this._sortedFreqList;
+  }
+
+  get groupAfter() {
+    return this._groupAfter;
   }
 
   get messagesPerPerson() {
@@ -182,7 +198,7 @@ export class Chat {
       } else {
         enrichedPersons.push({
           name: person[0],
-          color: chatColors[idx % chatColors.length],
+          color: this.personColorMap[person[0]],
           messages: person[1].sort((a, b) => a.date - b.date),
         });
       }
