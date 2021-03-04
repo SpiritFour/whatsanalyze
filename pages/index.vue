@@ -54,7 +54,7 @@
     </v-container>
 
     <v-btn v-on:click="downloadPWA" :disabled="buttonStatus" dark id="dlPWA"
-      >Click to install the WebApp. Simplifying & Speed Up</v-btn
+      >Click to install the WebApp. Simplifying & Speed Up!</v-btn
     >
   </div>
 </template>
