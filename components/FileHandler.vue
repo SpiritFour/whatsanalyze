@@ -152,7 +152,6 @@ export default {
         parseString(loadedFile.target.result, {
           parseAttachments: true,
         }).then((messages) => {
-          console.log("finished", files, messages);
           this.updateMessages({
             messages: messages,
             attachments: {
