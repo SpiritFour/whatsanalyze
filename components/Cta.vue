@@ -9,6 +9,7 @@
       color="#07bc4c"
       style="color: #ffffff"
       class="my-5 text-h6"
+      elevation="10"
     >
       {{ buttonTxt }}
     </v-btn>

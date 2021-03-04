@@ -33,6 +33,7 @@
               </v-timeline>
 
               <v-btn
+                elevation="10"
                 @click="
                   $vuetify.goTo('#fileHandler', {
                     duration: 300,
@@ -40,14 +41,14 @@
                   })
                 "
                 color="#07bc4c"
-                class="text-md-h6 text-caption ml-10 white--text pb-2"
+                class="text-md-h6 text-caption ml-10 white--text"
                 style="max-width: 100%"
               >
                 <v-icon>mdi-arrow-right</v-icon>
                 Select file via box above.
               </v-btn>
             </v-col>
-            <v-col cols="12" sm="4">
+            <v-col cols="12" sm="4" class="pt-5">
               <div class="carousel-container">
                 <div class="frame-container">
                   <v-img
@@ -70,11 +71,6 @@
                     :key="idx"
                   >
                     <v-img contain :lazy-src="item.imgLazy" :src="item.img">
-                      <v-row class="ma-0" align="center" justify="center">
-                        <v-progress-circular
-                          color="grey lighten-5"
-                        ></v-progress-circular>
-                      </v-row>
                     </v-img>
                     <v-btn
                       fab
