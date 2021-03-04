@@ -1,15 +1,14 @@
 <template>
   <div>
-    {{ attachment }}
-    <div v-if="attachment">
+    <div v-if="attachment" class="media-style">
       <img
         v-if="attachment.mimeType.startsWith('image/')"
         :src="attachment.src"
         :title="attachment.fileName"
-        alt=""
+        :alt="attachment.fileName"
       />
       <video
-        v-if="attachment.mimeType.startsWith('video/')"
+        v-else-if="attachment.mimeType.startsWith('video/')"
         controls
         :title="attachment.fileName"
       >
@@ -17,18 +16,17 @@
       </video>
 
       <audio
-        v-if="attachment.mimeType.startsWith('audio/')"
+        v-else-if="attachment.mimeType.startsWith('audio/')"
         controls
         :src="attachment.src"
         :title="attachment.fileName"
       />
-      <a
-        v-if="attachment.mimeType.startsWith('href')"
-        :href="attachment.src"
-        :download="attachment.fileName"
-      >
+      <v-row v-else class="white--text">
+        <v-icon size="20">mdi-file</v-icon>
+        {{ attachment.mimeType }}<br />
         {{ attachment.fileName }}
-      </a>
+        aa
+      </v-row>
     </div>
   </div>
 </template>
@@ -47,3 +45,13 @@ export default {
   },
 };
 </script>
+
+<style>
+.media-style img,
+video,
+audio,
+a {
+  max-width: 100%;
+  max-height: 50vh;
+}
+</style>

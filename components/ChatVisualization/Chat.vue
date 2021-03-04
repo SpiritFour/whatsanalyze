@@ -145,11 +145,8 @@ export default {
       return getDateString(date);
     },
     async getAttachment(attachment) {
-      console.log(attachment);
       let data = await this.attachments.file(attachment).async("base64");
-      let a = this.renderAttachment(attachment, data);
-      console.log(a);
-      return a;
+      return this.renderAttachment(attachment, data);
     },
     getMimeType(fileName) {
       if (/\.jpe?g$/.test(fileName)) return "image/jpeg";
