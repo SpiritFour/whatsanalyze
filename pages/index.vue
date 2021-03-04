@@ -1,5 +1,7 @@
 <template>
   <div>
+    <!-- <PdfDownloader :chat="this.chat_" /> -->
+    <PdfGenerator :ref="this.$refs" :chat="chat_" />
     <div class="top-color">
       <v-container>
         <v-row no-gutters>
@@ -34,7 +36,7 @@
       </v-container>
     </div>
 
-    <v-container v-show="!isShowingChats" class="pt-16">
+    <v-container v-show="isShowingChats" class="pt-16">
       <ExportExplainer />
       <Cta />
       <Faq />
@@ -47,11 +49,10 @@
       your whole chat. Take deep dive in your data now!."
       />
     </v-container>
-    <v-container v-if="isShowingChats">
+    <v-container v-if="!isShowingChats">
       <ChartsResults ref="results" :chat="chat_" :attachments="attachments" />
       <DownloadPopup :results="$refs.results" :chat="this.chat_" />
     </v-container>
-    <PdfDownloader :chat="this.chat_" />
   </div>
 </template>
 

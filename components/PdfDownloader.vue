@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container>
     <vue-html2pdf
       :paginate-elements-by-height="1400"
       :manual-pagination="true"
@@ -20,7 +20,7 @@
     </vue-html2pdf>
 
     <v-btn @click="downloadPdf">Download - Status: {{ progress }}%</v-btn>
-  </div>
+  </v-container>
 </template>
 
 <script>
