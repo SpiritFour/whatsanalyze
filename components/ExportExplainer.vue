@@ -120,7 +120,6 @@ import img5_lazy from "@/assets/img/Android/5copy.png";
 import img5 from "@/assets/img/Android/5.png";
 
 export default {
-  methods: {
   data: () => ({
     tabStatus: [0, 0],
     tab:
