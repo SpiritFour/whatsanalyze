@@ -179,14 +179,6 @@ export default {
   }
 }
 
-.cta-bottom {
-  text-align: center;
-  background: $c-white;
-  padding: 1em;
-  margin-top: 2em;
-  margin-bottom: 2em;
-}
-
 .explainer-list {
   overflow: hidden;
   margin-left: 10%;
@@ -222,14 +214,6 @@ export default {
     width: 100%;
     padding: 3em;
   }
-}
-
-.cta-bottom {
-  text-align: center;
-  background: $c-white;
-  padding: 1em;
-  margin-top: 2em;
-  margin-bottom: 2em;
 }
 
 .main-el {
