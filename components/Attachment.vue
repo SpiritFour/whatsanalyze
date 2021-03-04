@@ -21,11 +21,12 @@
         :src="attachment.src"
         :title="attachment.fileName"
       />
-      <v-row v-else class="white--text">
-        <v-icon size="20">mdi-file</v-icon>
-        {{ attachment.mimeType }}<br />
+      <v-row v-else class="white--text" align="center">
+        <v-btn class="ma-2" color="primary" dark>
+          .{{ attachment.mimeType }}
+          <v-icon size="20">mdi-file</v-icon>
+        </v-btn>
         {{ attachment.fileName }}
-        aa
       </v-row>
     </div>
   </div>

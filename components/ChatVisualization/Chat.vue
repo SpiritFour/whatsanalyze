@@ -162,14 +162,15 @@ export default {
       if (fileName.endsWith(".m4a")) return "audio/mp4";
       if (fileName.endsWith(".wav")) return "audio/wav";
       if (fileName.endsWith(".opus")) return "audio/ogg";
-      if (fileName.endsWith(".vcf")) return "not_supported";
-      return null;
+      return fileName.split(".").splice(-1)[0];
     },
 
     renderAttachment(fileName, attachment) {
       const mimeType = this.getMimeType(fileName) || "";
       const src = "data:" + mimeType + ";base64, " + attachment;
-      return { mimeType: mimeType, src: src, fileName: fileName };
+      let trimmedFileName = fileName.substring(fileName.indexOf("-") + 1);
+      console.log(fileName.indexOf("-"));
+      return { mimeType: mimeType, src: src, fileName: trimmedFileName };
     },
   },
 };
