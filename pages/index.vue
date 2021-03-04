@@ -128,8 +128,8 @@ export default {
                 console.log("current route", _this.$route);
                 let files = m.data.file;
                 // currently only the first file, but ultimately we want to pass all files
-                if (Array.isArray(files)) files = files[0];
-                _this.$refs.filehandler.processFile(files);
+                // if (Array.isArray(files)) files = files[0];
+                _this.$refs.filehandler.processFileList(files);
               }
             });
             workbox.messageSW("SHARE_READY");
