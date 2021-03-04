@@ -84,6 +84,9 @@
                   <v-row v-html="tabItem.text" style="cursor: pointer"> </v-row>
                 </v-timeline-item>
               </v-timeline>
+              <v-btn v-on:click="downloadPWA" dark id="dlPWA"
+                >Click to install the WebApp. Simplify & Speed Up!</v-btn
+              >
 
               <v-btn
                 @click="
@@ -156,11 +159,44 @@ export default {
         window.safari
       );
     },
+    async downloadPWA() {
+      {
+        // Hide the app provided install promotion
+        this.showInstallPromotion(false);
+        // Show the install prompt
+        this.deferredPrompt.prompt();
+        // Wait for the user to respond to the prompt
+        const { outcome } = await this.deferredPrompt.userChoice;
+        // Optionally, send analytics event with outcome of user choice
+        console.log(`User response to the install prompt: ${outcome}`);
+        // We've used the prompt, and can't use it again, throw it away
+        this.deferredPrompt = null;
+      }
+    },
+    showInstallPromotion(status) {
+      console.log(status);
+      //this.buttonStatus = status;
+    },
+    catchPWA() {
+      window.addEventListener("beforeinstallprompt", (e) => {
+        // Prevent the mini-infobar from appearing on mobile
+        e.preventDefault();
+        // Stash the event so it can be triggered later.
+        this.deferredPrompt = e;
+        // Update UI notify the user they can install the PWA
+        this.showInstallPromotion(true);
+        // Optionally, send analytics event that PWA install promo was shown.
+        console.log(`'beforeinstallprompt' event was fired.`);
+      });
+    },
   },
   computed: {
     tab() {
       return this.detectIOS() ? 0 : 1;
     },
+  },
+  created() {
+    this.catchPWA();
   },
   data: () => ({
     tabStatus: [0, 0],
