@@ -21,12 +21,27 @@
         :src="attachment.src"
         :title="attachment.fileName"
       />
-      <v-row v-else class="white--text" align="center">
-        <v-btn class="ma-2" color="primary" dark>
-          .{{ attachment.mimeType }}
-          <v-icon size="20">mdi-file</v-icon>
-        </v-btn>
-        {{ attachment.fileName }}
+
+      <v-row v-else color="black" dark align="center" justify="center">
+        <v-col class="my-0 px-0" style="position: relative" align="center">
+          <v-row justify="center" align="center">
+            <v-icon size="40" color="grey" left>mdi-file</v-icon>
+          </v-row>
+          <v-row
+            style="position: absolute; bottom: 50%; right: 75%"
+            justify="center"
+          >
+            {{ attachment.mimeType }}
+          </v-row>
+        </v-col>
+        <v-col
+          class="ma-0 pa-1 pr-2"
+          justify="center"
+          align="center"
+          style="flex-wrap: nowrap; overflow-x: auto"
+        >
+          {{ attachment.fileName }}
+        </v-col>
       </v-row>
     </div>
   </div>
