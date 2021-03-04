@@ -53,7 +53,7 @@
       <DownloadPopup :results="$refs.results" :chat="this.chat_" />
     </v-container>
 
-    <v-btn v-on:click="downloadPWA" dark>Download the instant App</v-btn>
+    <v-btn v-on:click="downloadPWA" dark>{{ deferredPrompt }}</v-btn>
   </div>
 </template>
 
