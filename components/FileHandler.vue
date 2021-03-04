@@ -18,7 +18,12 @@
           isSuccess: isSuccess,
         }"
       >
-        <input type="file" id="uploadmytextfile" @change="requestUploadFile" />
+        <input
+          type="file"
+          multiple
+          id="uploadmytextfile"
+          @change="requestUploadFile"
+        />
         <!-- Wrong File -->
         <div v-show="wrongFile" class="text-body-1 text-md-h5 w-100">
           <strong>Wrong file format!</strong> <br />
@@ -128,10 +133,49 @@ export default {
         .async("string");
     },
 
+    readMultipleFiles(files) {
+      function findChatFile(files) {
+        let chatRegex = new RegExp(/.*(?:chat|whatsapp).*\.txt$/i);
+        return files.find((file) => {
+          return chatRegex.test(file.name);
+        });
+      }
+
+      files = Array.from(files);
+      let chatFile = findChatFile(files);
+      if (chatFile === undefined) {
+        this.showErrorMessage();
+        return;
+      }
+      const reader = new FileReader();
+      reader.addEventListener("loadend", (loadedFile) => {
+        parseString(loadedFile.target.result, {
+          parseAttachments: true,
+        }).then((messages) => {
+          console.log("finished", files, messages);
+          this.updateMessages({
+            messages: messages,
+            attachments: {
+              files: files,
+              file(_fileName) {
+                return {
+                  async: () =>
+                    Promise.resolve(
+                      this.files.find((file) => file.name === _fileName)
+                    ),
+                };
+              },
+            },
+          });
+        });
+      });
+      reader.readAsText(chatFile);
+    },
+
     txtLoadEndHandler(e) {
-      parseString(e.target.result).then((messages) =>
-        this.updateMessages({ messages: messages })
-      );
+      parseString(e.target.result, {
+        parseAttachments: true,
+      }).then((messages) => this.updateMessages({ messages: messages }));
     },
 
     updateMessages(chatObject) {
@@ -147,28 +191,37 @@ export default {
       });
     },
 
-    processFile(file) {
+    showErrorMessage() {
+      this.wrongFile = true;
+      this.processing = false;
+      this.isSuccess = false;
+      this.$gtag.event("file-error", {
+        event_category: "home",
+        event_label: "lead",
+        value: "0",
+      });
+    },
+    processFileList(fileList) {
       this.isDragging = false;
       this.processing = true;
       this.isSuccess = false;
       this.wrongFile = false;
-
-      const reader = new FileReader();
-      if (/^application\/(?:x-)?zip(?:-compressed)?$/.test(file.type)) {
-        reader.addEventListener("loadend", this.zipLoadEndHandler);
-        reader.readAsArrayBuffer(file);
-      } else if (file.type === "text/plain") {
-        reader.addEventListener("loadend", this.txtLoadEndHandler);
-        reader.readAsText(file);
+      if (fileList.length > 1) {
+        //do multiple here
+        this.readMultipleFiles(fileList);
       } else {
-        this.wrongFile = true;
-        this.processing = false;
-        this.isSuccess = false;
-        this.$gtag.event("file-error", {
-          event_category: "home",
-          event_label: "lead",
-          value: "0",
-        });
+        let file = fileList[0];
+        // do singles here
+        const reader = new FileReader();
+        if (/^application\/(?:x-)?zip(?:-compressed)?$/.test(file.type)) {
+          reader.addEventListener("loadend", this.zipLoadEndHandler);
+          reader.readAsArrayBuffer(file);
+        } else if (file.type === "text/plain") {
+          reader.addEventListener("loadend", this.txtLoadEndHandler);
+          reader.readAsText(file);
+        } else {
+          this.showErrorMessage();
+        }
       }
     },
 
@@ -181,14 +234,14 @@ export default {
     },
 
     drop(e) {
-      let files = e.dataTransfer.files;
-      this.processFile(files[0]);
+      let fileList = e.dataTransfer.files;
+      this.processFileList(fileList);
     },
 
     requestUploadFile() {
       let src = this.$el.querySelector("#uploadmytextfile");
-      let files = src.files;
-      this.processFile(files[0]);
+      let fileList = src.files;
+      this.processFileList(fileList);
     },
   },
   mounted() {

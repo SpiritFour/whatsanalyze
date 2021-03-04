@@ -168,9 +168,7 @@ export default {
     renderAttachment(fileName, attachment) {
       const mimeType = this.getMimeType(fileName) || "";
       const src = "data:" + mimeType + ";base64, " + attachment;
-      let trimmedFileName = fileName.substring(fileName.indexOf("-") + 1);
-      console.log(fileName.indexOf("-"));
-      return { mimeType: mimeType, src: src, fileName: trimmedFileName };
+      return { mimeType: mimeType, src: src, fileName: fileName.split("-")[1] };
     },
   },
 };
