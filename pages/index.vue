@@ -53,7 +53,9 @@
       <DownloadPopup :results="$refs.results" :chat="this.chat_" />
     </v-container>
 
-    <v-btn v-on:click="downloadPWA" dark>{{ deferredPrompt }}</v-btn>
+    <v-btn v-on:click="downloadPWA" :disabled="buttonStatus" dark id="dlPWA"
+      >Click to install the WebApp. Simplifying & Speed Up</v-btn
+    >
   </div>
 </template>
 
@@ -92,6 +94,7 @@ export default {
       chat_: new Chat(),
       downloading: false,
       deferredPrompt: null,
+      buttonStatus: true,
     };
   },
   methods: {
@@ -117,7 +120,7 @@ export default {
       });
     },
     showInstallPromotion(status) {
-      console.log(status);
+      this.buttonStatus = status;
     },
     async downloadPWA() {
       {
