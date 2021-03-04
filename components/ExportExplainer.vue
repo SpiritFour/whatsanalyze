@@ -121,9 +121,6 @@ import img5 from "@/assets/img/Android/5.png";
 
 export default {
   data: () => ({
-    data: {
-      userOs: "",
-    },
     tabStatus: [0, 0],
     tab:
       navigator.platform.toLowerCase().includes("ios") ||
