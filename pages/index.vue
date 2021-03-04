@@ -94,7 +94,7 @@ export default {
       chat_: new Chat(),
       downloading: false,
       deferredPrompt: null,
-      buttonStatus: true,
+      buttonStatus: false,
     };
   },
   methods: {
@@ -120,7 +120,8 @@ export default {
       });
     },
     showInstallPromotion(status) {
-      this.buttonStatus = status;
+      console.log(status);
+      //this.buttonStatus = status;
     },
     async downloadPWA() {
       {
