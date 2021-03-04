@@ -121,8 +121,15 @@ import img5 from "@/assets/img/Android/5.png";
 
 export default {
   data: () => ({
+    data: {
+      userOs: "",
+    },
     tabStatus: [0, 0],
-    tab: window.safari ? 0 : 1,
+    tab:
+      navigator.platform.toLowerCase().includes("ios") ||
+      navigator.platform.toLowerCase().includes("mac")
+        ? 0
+        : 1,
     tabData: [
       {
         title: "iOS (Apple)",
