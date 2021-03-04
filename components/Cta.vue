@@ -1,6 +1,6 @@
 <template>
-  <div class="cta-bottom">
-    <div class="text-h2 py-10 font-weight-bold">{{ title }}</div>
+  <div class="cta-bottom my-md-8">
+    <div class="text-h2 font-weight-bold">{{ title }}</div>
     <span class="text-body-1"> {{ text }}</span>
     <br />
     <v-btn
@@ -8,7 +8,8 @@
       @click="$vuetify.goTo('#fileHandler', { duration: 300, offset: 100 })"
       color="#07bc4c"
       style="color: #ffffff"
-      class="my-5 text-h6"
+      class="mt-5 text-h6"
+      elevation="10"
     >
       {{ buttonTxt }}
     </v-btn>
@@ -31,3 +32,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.cta-bottom {
+  text-align: center;
+  background: $c-white;
+  padding: 2em;
+}
+</style>

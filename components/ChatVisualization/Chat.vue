@@ -57,7 +57,13 @@
             <v-img contain width="100%" />
           </div>
 
+          <Attachment
+            v-if="data.attachment"
+            :attachmentPromise="getAttachment(data.attachment.fileName)"
+          >
+          </Attachment>
           <div
+            v-else
             class="white--text message"
             v-html="parseMessage(data.message)"
           ></div>
@@ -94,15 +100,15 @@ import { getDateString } from "~/functions/utils";
 
 export default {
   name: "Chat",
-  computed: {},
   data() {
     return {
       startIdx: 0,
       selectedEgo: "",
-      offset: 50,
+      offset: 20,
     };
   },
-  props: ["chat"],
+  props: ["chat", "attachments"],
+  computed: {},
   methods: {
     parseMessage(message) {
       var validUrl = new RegExp(
@@ -114,6 +120,7 @@ export default {
           "(\\#[-a-z\\d_]*)?$",
         "i"
       );
+      new RegExp("");
       const words = message.split(" ");
       let htmlMessage = "";
       words.forEach((word) => {
@@ -136,6 +143,32 @@ export default {
     },
     _getDateString(date) {
       return getDateString(date);
+    },
+    async getAttachment(attachment) {
+      let data = await this.attachments.file(attachment).async("base64");
+      return this.renderAttachment(attachment, data);
+    },
+    getMimeType(fileName) {
+      if (/\.jpe?g$/.test(fileName)) return "image/jpeg";
+      if (fileName.endsWith(".png")) return "image/png";
+      if (fileName.endsWith(".gif")) return "image/gif";
+      if (fileName.endsWith(".webp")) return "image/webp";
+      if (fileName.endsWith(".svg")) return "image/svg+xml";
+
+      if (fileName.endsWith(".mp4")) return "video/mp4";
+      if (fileName.endsWith(".webm")) return "video/webm";
+
+      if (fileName.endsWith(".mp3")) return "audio/mpeg";
+      if (fileName.endsWith(".m4a")) return "audio/mp4";
+      if (fileName.endsWith(".wav")) return "audio/wav";
+      if (fileName.endsWith(".opus")) return "audio/ogg";
+      return fileName.split(".").splice(-1)[0];
+    },
+
+    renderAttachment(fileName, attachment) {
+      const mimeType = this.getMimeType(fileName) || "";
+      const src = "data:" + mimeType + ";base64, " + attachment;
+      return { mimeType: mimeType, src: src, fileName: fileName.split("-")[1] };
     },
   },
 };
