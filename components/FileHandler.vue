@@ -172,9 +172,9 @@ export default {
     },
 
     txtLoadEndHandler(e) {
-      parseString(e.target.result, {
-        parseAttachments: true,
-      }).then((messages) => this.updateMessages({ messages: messages }));
+      parseString(e.target.result).then((messages) =>
+        this.updateMessages({ messages: messages })
+      );
     },
 
     updateMessages(chatObject) {
