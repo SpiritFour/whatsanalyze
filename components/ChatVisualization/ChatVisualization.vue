@@ -3,7 +3,7 @@
     <v-row>
       <ChatVisualizationChat :chat="chat" :attachments="attachments" />
     </v-row>
-    <v-row justify="center">
+    <v-row justify="center" id="payButton">
       <div class="cta my-md-4">
         <div class="text-h3 font-weight-bold pb-4">
           We generate your chat PDF
@@ -33,11 +33,27 @@
               <v-icon>mdi-download</v-icon>
               Download full chat PDF
             </v-btn>
+            <div
+              class="link"
+              v-bind="attrs"
+              v-on.prevent="on"
+              @click="
+                $gtag.event('download-preview-popup-clicked', {
+                  event_category: 'download',
+                  event_label: 'popup-clicked',
+                  value: '0.5',
+                })
+              "
+            >
+              Retrieve a free preview of your chat
+            </div>
           </template>
           <v-card>
             <v-card-title class="headline cyan" style="word-break: normal">
-              <div class="text-h4 font-weight-bold">Did we make you go 🥳?</div>
-              <span>Buy us a ☕️ and get your results for free!!!</span>
+              <div class="text-h4 font-weight-bold">
+                This feature is coming on the 03/10/21 !!
+              </div>
+              <span>You can still buy us a ☕️ if you like!!!</span>
             </v-card-title>
 
             <v-card-text class="pt-3">
@@ -65,7 +81,6 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
-        <div class="link">Retrieve a free preview of your chat</div>
       </div>
     </v-row>
   </v-col>
