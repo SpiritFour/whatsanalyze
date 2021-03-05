@@ -29,8 +29,8 @@
               >
                 <v-row v-html="tabItem.text" style="cursor: pointer"> </v-row>
                 <v-btn
+                  v-if="i === 0 && tab === 1"
                   v-bind:disabled="!installButtonStatus"
-                  v-if="i == 0"
                   v-on:click="downloadPWA"
                   id="dlPWA "
                   class="mt-5 pa-2 white--text"
