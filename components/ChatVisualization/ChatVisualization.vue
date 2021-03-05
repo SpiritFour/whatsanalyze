@@ -12,7 +12,7 @@
           Now get your full WhatsApp chat <br />
           for 3,99 $ as a PDF instantly
         </div>
-        <v-dialog v-model="showDownloadPopup" width="500">
+        <v-dialog v-model="showDownloadPopup" width="550">
           <template v-slot:activator="{ on, attrs }">
             <v-btn
               dark
@@ -51,23 +51,39 @@
           <v-card>
             <v-card-title class="headline cyan" style="word-break: normal">
               <div class="text-h4 font-weight-bold">
-                This feature is coming on the 03/10/21 !!
+                This feature is coming soon !!
               </div>
               <span>You can still buy us a ☕️ if you like!!!</span>
             </v-card-title>
-
             <v-card-text class="pt-3">
-              You will get all results as an image exactly as presented on your
-              device. Generating may take a while.
+              If you want to stay tuned and get notified, register
+              <a
+                :href="'https://forms.gle/FmX4LKYhMwxs4gYs8'"
+                @click="
+                  $gtag.event('download-chat-register-email-clicked', {
+                    event_category: 'download',
+                    event_label: 'popup-clicked',
+                    value: '1',
+                  })
+                "
+                target="_blank"
+                >here</a
+              >.
             </v-card-text>
-            <v-row justify="center"
-              ><ChatVisualizationPayment
+            <v-row cols="12" justify="center" align="center" class="pt-6 pr-10">
+              <ChatVisualizationPayment
                 @onCreateOrder="onCreateOrder"
                 @onApprove="onApprove"
                 @onError="onError"
                 currency="EUR"
-                :amount="10"
-            /></v-row>
+                :amount="3"
+              />
+            </v-row>
+            <v-card-text class="pt-3">
+              You will get all results as an image exactly as presented on your
+              device. Generating may take a while.
+            </v-card-text>
+
             <v-divider></v-divider>
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -104,6 +120,9 @@ export default {
     },
     onError(event) {
       console.log("error", event);
+    },
+    formClicked() {
+      console.log("form clicked");
     },
   },
 };
