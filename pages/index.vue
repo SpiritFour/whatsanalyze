@@ -123,13 +123,11 @@ export default {
             workbox.addEventListener("message", (m) => {
               // eslint-disable-next-line no-prototype-builtins
               if (_this.$route.query.hasOwnProperty("receiving-file-share")) {
-                console.log(m.data.file); //contains the file(s)
                 console.log("index message wb", m);
                 let files = m.data.file;
                 // currently only the first file, but ultimately we want to pass all files
                 // if (Array.isArray(files)) files = files[0];
-                console.log(_this.$refs.filehandler);
-                _this.$refs.filehandler.processFileList(files);
+                _this.$refs.filehandler.processFileList(files, true);
               }
             });
             workbox.messageSW("SHARE_READY");
