@@ -147,12 +147,14 @@ export default {
         this.showErrorMessage();
         return;
       }
-
+      console.log("chat file found:", chatFile);
       const reader = new FileReader();
       reader.addEventListener("loadend", (loadedFile) => {
+        console.log("loaded file", loadedFile);
         parseString(loadedFile.target.result, {
           parseAttachments: true,
         }).then((messages) => {
+          console.log("messages", messages);
           this.updateMessages({
             messages: messages,
             attachments: {
