@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="chat_">
     <v-col v-if="$vuetify.breakpoint.smAndUp">
       <v-row>
         <v-col cols="12" sm="6">

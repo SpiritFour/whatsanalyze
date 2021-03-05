@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center py-10">
+  <div v-if="chat" class="text-center py-10">
     <ChatVisualization :chat="chat" :attachments="attachments" />
     <div class="text-h2 font-weight-bold py-10">Chat Timeline</div>
     <div>Messages per Day</div>
