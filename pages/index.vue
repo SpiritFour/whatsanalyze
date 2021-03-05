@@ -86,7 +86,7 @@ export default {
   data() {
     return {
       isShowingChats: false,
-      chat_: new Chat(),
+      chat_: undefined,
       downloading: false,
       attachments: undefined,
     };
@@ -94,8 +94,11 @@ export default {
   methods: {
     Chat,
     newMessages(chatObject) {
-      this.attachments = chatObject.attachments;
-      this.chat_ = new Chat(chatObject.messages);
+      // we only update with default chat object if chat_ is undefined
+      if (!chatObject.default || this.chat_ === undefined) {
+        this.attachments = chatObject.attachments;
+        this.chat_ = new Chat(chatObject.messages);
+      }
     },
     downloadImage() {
       this.downloading = true;

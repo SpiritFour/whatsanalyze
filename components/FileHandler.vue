@@ -247,12 +247,12 @@ export default {
       this.processFileList(fileList);
     },
   },
-  mounted() {
+  created() {
     fetch("/chat_example.txt")
       .then((response) => response.text())
       .then(parseString)
       .then((messages) => {
-        messages = { messages: messages };
+        messages = { messages: messages, default: true };
         this.extendDataStructure(messages);
         return messages;
       })
