@@ -36,7 +36,7 @@
                   class="mt-5 pa-2 white--text"
                   color="#07bc4c"
                   style=""
-                  >Click to install the WebApp</v-btn
+                  >add to Homescreen</v-btn
                 >
               </v-timeline-item>
             </v-timeline>
@@ -74,8 +74,7 @@
                   :key="idx"
                   @click.native.stop="increaseTabstatus()"
                 >
-                  <v-img contain :lazy-src="item.imgLazy" :src="item.img">
-                  </v-img>
+                  <v-img :lazy-src="item.imgLazy" :src="item.img"> </v-img>
                   <v-btn
                     fab
                     outlined
@@ -113,8 +112,6 @@ import iOS_img6_lazy from "@/assets/img/iOS/Frame6_lazy.png";
 import iOS_img6 from "@/assets/img/iOS/Frame6.png";
 import iOS_img7_lazy from "@/assets/img/iOS/Frame7_lazy.png";
 import iOS_img7 from "@/assets/img/iOS/Frame7.png";
-import iOS_img8_lazy from "@/assets/img/iOS/Frame8_lazy.png";
-import iOS_img8 from "@/assets/img/iOS/Frame8.png";
 // Android
 import AndroidFrame from "@/assets/img/Android/frameAndroid.png";
 import img1_lazy from "@/assets/img/Android/1copy.png";
@@ -125,8 +122,10 @@ import img3_lazy from "@/assets/img/Android/3copy.png";
 import img3 from "@/assets/img/Android/3.png";
 import img4_lazy from "@/assets/img/Android/4copy.png";
 import img4 from "@/assets/img/Android/4.png";
-import img5_lazy from "@/assets/img/Android/5copy.png";
 import img5 from "@/assets/img/Android/5.png";
+import img5_lazy from "@/assets/img/Android/5copy.png";
+import img6 from "@/assets/img/Android/6.png";
+import img6_lazy from "@/assets/img/Android/6copy.png";
 
 export default {
   data: () => ({
@@ -150,53 +149,46 @@ export default {
             imgLazy: iOS_img1_lazy,
             text: "",
             x: "50%",
-            y: "20%",
+            y: "10%",
           },
           {
             img: iOS_img2,
             imgLazy: iOS_img2_lazy,
             text: "",
             x: "50%",
-            y: "10%",
+            y: "88%",
           },
           {
             img: iOS_img3,
             imgLazy: iOS_img3_lazy,
             text: "",
-            x: "50%",
-            y: "88%",
+            x: "20%",
+            y: "61%",
           },
           {
             img: iOS_img4,
             imgLazy: iOS_img4_lazy,
             text: "",
-            x: "20%",
-            y: "61%",
+            x: "50%",
+            y: "76%",
           },
           {
             img: iOS_img5,
             imgLazy: iOS_img5_lazy,
             text: "",
             x: "50%",
-            y: "76%",
+            y: "63%",
           },
           {
             img: iOS_img6,
             imgLazy: iOS_img6_lazy,
             text: "",
             x: "50%",
-            y: "63%",
+            y: "32%",
           },
           {
             img: iOS_img7,
             imgLazy: iOS_img7_lazy,
-            text: "",
-            x: "85%",
-            y: "11%",
-          },
-          {
-            img: iOS_img8,
-            imgLazy: iOS_img8_lazy,
             text: "",
             x: "50%",
             y: "81.5%",
@@ -205,11 +197,7 @@ export default {
         tabItems: [
           {
             text:
-              "<span>On iPhone open WhatsApp and tap on the chat you would like to export.</span>",
-          },
-          {
-            text:
-              "<span>Tap on the name of the chat at the top to open <b>Group/Chat Info</b>.</span>",
+              "<span>On iPhone <b>open</b> WhatsApp and the <b>chat</b> or <b>group chat</b> you would like to export > at the top <b>tap on</b> the <b>name</b> of the chat.</span>",
           },
           {
             text:
@@ -227,7 +215,7 @@ export default {
           },
           {
             text:
-              "<span>Finally select <b >On my iPhone</b> to save it locally.</span>",
+              "<span>Finally select <b >On my iPhone</b> and <b >save</b> to save it locally.</span>",
           },
           {
             text:
@@ -243,14 +231,14 @@ export default {
             img: img1,
             imgLazy: img1_lazy,
             text: "",
-            x: "50%",
-            y: "18%",
+            x: "78%",
+            y: "51%",
           },
           {
             img: img2,
             imgLazy: img2_lazy,
             text: "",
-            x: "50%",
+            x: "89%",
             y: "13%",
           },
           {
@@ -271,22 +259,25 @@ export default {
             img: img5,
             imgLazy: img5_lazy,
             text: "",
-            x: "27%",
-            y: "50%",
+            x: "67%",
+            y: "48%",
+          },
+          {
+            img: img6,
+            imgLazy: img6_lazy,
+            text: "",
+            x: "14%",
+            y: "73%",
           },
         ],
         tabItems: [
           {
             text:
-              "<span>Open this Website in Chrome on your Android Phone and press the button below to add the Website to your home screen</span>",
+              "<span>On your Android phone open this Website in <b>Chrome</b> and tap on the button <b>add to Homescreen</b> and press install</span>",
           },
           {
             text:
-              "<span>On your Android phone open <b>WhatsApp</b> and tap on the chat you would like to export.</span>",
-          },
-          {
-            text:
-              "<span>Tap on the name of the chat at the top to open the <b >Group/Chat Info</b>.</span>",
+              "<span>Open <b>WhatsApp</b> and tap on the chat you would like to export > tap on the <b>three-dots</b> at the top right corner.</span>",
           },
           {
             text: "<span>In the new menu tap on <b>More</b>.</span>",
@@ -296,7 +287,11 @@ export default {
           },
           {
             text:
-              "<span>Choose <b>Without Media</b> and send the file yourself via <b>E-Mail</b> or save it to <b>Google Drive</b>.</span>",
+              "<span>Choose Without Media or <b>Include Media</b> if you want to include your images and other files in the export.</span>",
+          },
+          {
+            text:
+              "<span>Now in the sharing view tap on <b>Whatsanalyze</b> or alternatively if you skipped step 1 send it to your self via <b>E-Mail</b> or save it to <b>Google Drive</b>.</span>",
           },
         ],
       },
