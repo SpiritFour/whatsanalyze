@@ -28,11 +28,18 @@
                 @click.native.stop="tabStatus = [i, i]"
               >
                 <v-row v-html="tabItem.text" style="cursor: pointer"> </v-row>
+                <v-btn
+                  :disabled="!installButtonStatus"
+                  v-if="i == 0"
+                  v-on:click="downloadPWA"
+                  id="dlPWA "
+                  class="mt-5 pa-2 white--text"
+                  color="#07bc4c"
+                  style=""
+                  >Click to install the WebApp</v-btn
+                >
               </v-timeline-item>
             </v-timeline>
-            <v-btn v-on:click="downloadPWA" dark id="dlPWA"
-              >Click to install the WebApp. Simplify & Speed Up!</v-btn
-            >
 
             <v-btn
               elevation="10"
@@ -44,7 +51,6 @@
               "
               color="#07bc4c"
               class="text-md-h6 text-caption ml-10 white--text"
-              style="max-width: 100%"
             >
               <v-icon>mdi-arrow-right</v-icon>
               Select file via box above.
@@ -125,6 +131,7 @@ import img5 from "@/assets/img/Android/5.png";
 export default {
   data: () => ({
     deferredPrompt: null,
+    installButtonStatus: false,
     tabStatus: [0, 0],
     tab:
       navigator.platform.toLowerCase().includes("ios") ||
@@ -271,6 +278,10 @@ export default {
         tabItems: [
           {
             text:
+              "<span>Open this Website in Chrome on your Android Phone and press the button below to add the Website to your home screen</span>",
+          },
+          {
+            text:
               "<span>On your Android phone open <b>WhatsApp</b> and tap on the chat you would like to export.</span>",
           },
           {
@@ -308,15 +319,21 @@ export default {
           // Wait for the user to respond to the prompt
           const { outcome } = await this.deferredPrompt.userChoice;
           // Optionally, send analytics event with outcome of user choice
-          console.log(`User response to the install prompt: ${outcome}`);
+
+          this.$gtag.event("PWA install", {
+            event_category: "home",
+            event_label: "lead",
+            value: outcome,
+          });
+
           // We've used the prompt, and can't use it again, throw it away
           this.deferredPrompt = null;
         }
       }
     },
+    // eslint-disable-next-line no-unused-vars
     showInstallPromotion(status) {
-      console.log(status);
-      //this.buttonStatus = status;
+      this.installButtonStatus = status;
     },
     catchPWA() {
       window.addEventListener("beforeinstallprompt", (e) => {
@@ -327,7 +344,6 @@ export default {
         // Update UI notify the user they can install the PWA
         this.showInstallPromotion(true);
         // Optionally, send analytics event that PWA install promo was shown.
-        console.log(`'beforeinstallprompt' event was fired.`);
       });
     },
     created() {
@@ -354,6 +370,7 @@ export default {
   z-index: 99999;
   top: 2px;
 }
+
 .blinking {
   animation-name: blink;
   animation-duration: 2s;
