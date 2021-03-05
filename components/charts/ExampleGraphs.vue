@@ -31,11 +31,30 @@
         height="auto"
       >
         <v-carousel-item>
+          <v-container fill-height fluid>
+            <v-row align="center" justify="center">
+              <v-col>
+                <ChartsWordCloud :chartdata="chat_" />
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-carousel-item>
+
+        <v-carousel-item>
+          <ChartsBarChart
+            :chartdata="chat_"
+            :options="barchartHeaderChartOptions"
+            dataGrouping="hourly"
+          />
+        </v-carousel-item>
+
+        <v-carousel-item>
           <ChartsLineChart
             :chartdata="chat_"
             :options="linegraphHeaderChartOptions"
           />
         </v-carousel-item>
+
         <v-carousel-item>
           <ChartsDonughtChart
             :chartdata="chat_"
@@ -46,21 +65,7 @@
           <ChartsRadarChart
             :chartdata="chat_"
             :options="radarchartHeaderChartOptions"
-          /> </v-carousel-item
-        ><v-carousel-item>
-          <ChartsBarChart
-            :chartdata="chat_"
-            :options="barchartHeaderChartOptions"
-            dataGrouping="hourly"
-          /> </v-carousel-item
-        ><v-carousel-item>
-          <v-container fill-height fluid>
-            <v-row align="center" justify="center">
-              <v-col>
-                <ChartsWordCloud :chartdata="chat_" />
-              </v-col>
-            </v-row>
-          </v-container>
+          />
         </v-carousel-item>
       </v-carousel>
     </v-col>
