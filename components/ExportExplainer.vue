@@ -29,7 +29,7 @@
               >
                 <v-row v-html="tabItem.text" style="cursor: pointer"> </v-row>
                 <v-btn
-                  :disabled="!installButtonStatus"
+                  v-bind:disabled="!installButtonStatus"
                   v-if="i == 0"
                   v-on:click="downloadPWA"
                   id="dlPWA "
@@ -346,9 +346,9 @@ export default {
         // Optionally, send analytics event that PWA install promo was shown.
       });
     },
-    created() {
-      this.catchPWA();
-    },
+  },
+  created() {
+    this.catchPWA();
   },
 };
 </script>
