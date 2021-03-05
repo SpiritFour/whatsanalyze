@@ -205,7 +205,9 @@ export default {
       this.processing = true;
       this.isSuccess = false;
       this.wrongFile = false;
+      console.log("process Filelist", fileList);
       if (fileList.length > 1) {
+        console.log("multiple is doing stuff");
         //do multiple here
         this.readMultipleFiles(fileList);
       } else {
@@ -216,6 +218,7 @@ export default {
           reader.addEventListener("loadend", this.zipLoadEndHandler);
           reader.readAsArrayBuffer(file);
         } else if (file.type === "text/plain") {
+          console.log("single file is doing stuff");
           reader.addEventListener("loadend", this.txtLoadEndHandler);
           reader.readAsText(file);
         } else {

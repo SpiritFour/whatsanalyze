@@ -125,7 +125,6 @@ export default {
               if (_this.$route.query.hasOwnProperty("receiving-file-share")) {
                 console.log(m.data.file); //contains the file(s)
                 console.log("index message wb", m);
-                console.log("current route", _this.$route);
                 let files = m.data.file;
                 // currently only the first file, but ultimately we want to pass all files
                 // if (Array.isArray(files)) files = files[0];
