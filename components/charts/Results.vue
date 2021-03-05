@@ -1,6 +1,10 @@
 <template>
   <div v-if="chat" class="text-center py-10">
-    <ChatVisualization :chat="chat" :attachments="attachments" />
+    <ChatVisualization
+      :chat="chat"
+      :attachments="attachments"
+      :results="this"
+    />
     <div class="text-h2 font-weight-bold py-10">Chat Timeline</div>
     <div>Messages per Day</div>
     <Share>

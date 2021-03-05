@@ -33,19 +33,8 @@
               <v-icon>mdi-download</v-icon>
               Download full chat PDF
             </v-btn>
-            <div
-              class="link"
-              v-bind="attrs"
-              v-on.prevent="on"
-              @click="
-                $gtag.event('download-preview-popup-clicked', {
-                  event_category: 'download',
-                  event_label: 'popup-clicked',
-                  value: '0.5',
-                })
-              "
-            >
-              Retrieve a free preview of your chat
+            <div class="link" @click="download">
+              Retrieve a free preview of your analyzed chat
             </div>
           </template>
           <v-card>
@@ -55,8 +44,9 @@
               </div>
               <span>You can still buy us a ☕️ if you like!!!</span>
             </v-card-title>
-            <v-card-text class="pt-3">
-              If you want to stay tuned and get notified, register
+            <v-card-text class="pt-3 text-h5 font-weight-bold">
+              If you want to stay tuned and get notified when new features
+              arrive, register
               <a
                 :href="'https://forms.gle/FmX4LKYhMwxs4gYs8'"
                 @click="
@@ -68,7 +58,11 @@
                 "
                 target="_blank"
                 >here</a
-              >.
+              >. We would love to stay in touch.
+            </v-card-text>
+            <v-card-text>
+              Supporting us keeps the servers running, as all services provided
+              are for free.
             </v-card-text>
             <v-row cols="12" justify="center" align="center" class="pt-6 pr-10">
               <ChatVisualizationPayment
@@ -76,14 +70,9 @@
                 @onApprove="onApprove"
                 @onError="onError"
                 currency="EUR"
-                :amount="3"
+                :amount="3.5"
               />
             </v-row>
-            <v-card-text class="pt-3">
-              You will get all results as an image exactly as presented on your
-              device. Generating may take a while.
-            </v-card-text>
-
             <v-divider></v-divider>
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -103,9 +92,12 @@
 </template>
 
 <script>
+import html2canvas from "html2canvas";
+import { downloadBase64File } from "~/functions/utils";
+
 export default {
   name: "ChatVisualization",
-  props: ["chat", "attachments"],
+  props: ["chat", "attachments", "results"],
   data() {
     return {
       showDownloadPopup: false,
@@ -121,8 +113,27 @@ export default {
     onError(event) {
       console.log("error", event);
     },
-    formClicked() {
-      console.log("form clicked");
+    async download() {
+      this.$gtag.event("donation-download-started", {
+        event_category: "download",
+        event_label: "popup-clicked",
+        value: "1",
+      });
+
+      let canvas = html2canvas(this.results.$el, {
+        scrollX: 0,
+        scrollY: -window.scrollY,
+      });
+      let names = this.chat.messagesPerPerson
+        .slice(0, 2)
+        .map((person) => person.name)
+        .join("-");
+      canvas.then((canvas) => {
+        downloadBase64File(
+          canvas.toDataURL(),
+          "whatsanlazye-results-" + names + ".png"
+        );
+      });
     },
   },
 };
