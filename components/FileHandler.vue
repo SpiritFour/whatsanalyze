@@ -133,7 +133,7 @@ export default {
         .async("string");
     },
 
-    readMultipleFiles(files) {
+    readSharedFiles(files) {
       function findChatFile(files) {
         let chatRegex = new RegExp(/.*(?:chat|whatsapp).*\.txt$/i);
         return files.find((file) => {
@@ -147,6 +147,7 @@ export default {
         this.showErrorMessage();
         return;
       }
+
       const reader = new FileReader();
       reader.addEventListener("loadend", (loadedFile) => {
         parseString(loadedFile.target.result, {
@@ -200,16 +201,16 @@ export default {
         value: "0",
       });
     },
-    processFileList(fileList) {
+    processFileList(fileList, shared = false) {
       this.isDragging = false;
       this.processing = true;
       this.isSuccess = false;
       this.wrongFile = false;
       console.log("process Filelist", fileList);
-      if (fileList.length > 1) {
+      if (shared || fileList.length > 1) {
         console.log("multiple is doing stuff");
         //do multiple here
-        this.readMultipleFiles(fileList);
+        this.readSharedFiles(fileList);
       } else {
         let file = fileList[0];
         // do singles here
