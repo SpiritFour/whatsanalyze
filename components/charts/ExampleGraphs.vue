@@ -25,8 +25,8 @@
     <v-col v-else class="py-0">
       <v-carousel
         :continuous="true"
-        :cycle="false"
-        :show-arrows="false"
+        :cycle="true"
+        :show-arrows="true"
         hide-delimiter-background
         height="auto"
       >
