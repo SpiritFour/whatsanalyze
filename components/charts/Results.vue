@@ -73,6 +73,7 @@
     <!-- Add workcloud with emojies only  -->
     <div class="text-h3 font-weight-bold pt-10">Word Cloud</div>
     <ChartsWordCloud :chartdata="chat" class="pb-10" />
+    <DownloadPopup :results="this" :chat="chat" />
   </div>
 </template>
 
