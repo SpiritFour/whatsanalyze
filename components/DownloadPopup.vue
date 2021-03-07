@@ -7,14 +7,8 @@
         </div>
         <div class="text-body-1">Currently for free! <br /></div>
         <v-dialog v-model="dialog" width="500">
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn
-              color="#07bc4c"
-              dark
-              v-bind="attrs"
-              v-on="on"
-              @click="download"
-            >
+          <template v-slot:activator="{ on }">
+            <v-btn color="#07bc4c" dark v-on="on" @click="download">
               <v-icon>mdi-download</v-icon>Download your Results now!
             </v-btn>
           </template>
@@ -92,7 +86,7 @@ export default {
     };
   },
   methods: {
-    async download() {
+    download() {
       this.$gtag.event("donation-popup-clicked", {
         event_category: "donation",
         event_label: "popup-clicked",
