@@ -360,43 +360,25 @@ export class Chat {
     };
     const minDate = new Date(Math.min.apply(null, this.dates));
     const maxDate = new Date(Math.max.apply(null, this.dates));
-    let labels = getDaysArray(minDate, maxDate);
-
     let daysDict = getDaysArray(minDate, maxDate);
     this.filterdChatObject.map((message) => {
       daysDict[moment(message.date).format("YYYY-MM-DD")] += 1;
     });
-    let allChat = {
-      data: Object.values(daysDict),
-      borderWidth: 1,
-      lineTension: 0,
-      radius: 0,
-      pointRadius: 1,
-      pointHitRadius: 2,
-      fill: false,
-      label: "Combined",
-      borderColor: hexToRgbA("#000000", 1),
+    return {
+      labels: Object.keys(daysDict),
+      datasets: [
+        {
+          data: Object.values(daysDict),
+          label: "Everyone",
+          borderWidth: 1,
+          lineTension: 0,
+          pointRadius: 1,
+          pointHitRadius: 2,
+          backgroundColor: hexToRgbA(chatColors[0]),
+          borderColor: hexToRgbA("#0e6b0e", [1]),
+        },
+      ],
     };
-
-    let datasets = this.messagesPerPerson.map((person) => {
-      let daysDict = getDaysArray(minDate, maxDate);
-      person.messages.forEach((message) => {
-        daysDict[moment(message.date).format("YYYY-MM-DD")] += 1;
-      });
-      return {
-        data: Object.values(daysDict),
-        borderWidth: 1,
-        lineTension: 0,
-        radius: 0,
-        pointRadius: 1,
-        pointHitRadius: 2,
-        label: person.name,
-        fill: false,
-        borderColor: person.color,
-      };
-    });
-    datasets.push(allChat);
-    return { labels: Object.keys(labels), datasets: datasets };
   }
 
   getLineGraphData() {
