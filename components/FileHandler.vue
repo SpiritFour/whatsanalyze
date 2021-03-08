@@ -79,7 +79,7 @@ import { parseString } from "whatsapp-chat-parser";
 import JSZip from "jszip";
 
 export default {
-  name: "DropAnImage",
+  name: "FileHandler",
   data() {
     return {
       isDragging: false,

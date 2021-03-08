@@ -21,7 +21,7 @@
             <ChartsExampleGraphs :chat_="chat_" />
           </v-col>
         </v-row>
-        <v-row v-if="$vuetify.breakpoint.smAndDown" class="top-color ma-0">
+        <v-row v-if="$vuetify.breakpoint.smAndDown">
           <v-col>
             <FileHandler
               ref="filehandler"
@@ -116,30 +116,6 @@ export default {
         this.downloading = false;
       });
     },
-    setupWorkBox() {
-      let _this = this;
-      if (window.$workbox !== undefined) {
-        window.$workbox.then((workbox) => {
-          console.log("workbox here", workbox);
-          if (workbox) {
-            workbox.addEventListener("message", (m) => {
-              // eslint-disable-next-line no-prototype-builtins
-              if (_this.$route.query.hasOwnProperty("receiving-file-share")) {
-                console.log("index message wb", m);
-                let files = m.data.file;
-                // currently only the first file, but ultimately we want to pass all files
-                // if (Array.isArray(files)) files = files[0];
-                _this.$refs.filehandler.processFileList(files, true);
-              }
-            });
-            workbox.messageSW("SHARE_READY");
-          }
-        });
-      }
-    },
-  },
-  created() {
-    this.setupWorkBox();
   },
 };
 </script>

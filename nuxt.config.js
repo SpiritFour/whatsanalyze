@@ -37,7 +37,7 @@ export default {
       lang: "en",
       useWebmanifestExtension: true,
       share_target: {
-        action: "/?share-target=1",
+        action: "/pwa-results?share-target=1",
         method: "POST",
         enctype: "multipart/form-data",
         params: {
