@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- <PdfDownloader :chat="this.chat_" /> -->
-    <PdfGenerator :ref="this.$refs" :chat="chat_" />
+    <PdfGenerator :ref="this.$refs" :chat="chat_" ego="Jane Doe" />
     <div class="top-color">
       <v-container>
         <v-row no-gutters>
