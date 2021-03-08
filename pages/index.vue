@@ -95,7 +95,7 @@ export default {
       // we only update with default chat object if chat_ is undefined
       if (!chatObject.default || this.chat === undefined) {
         this.attachments = chatObject.attachments;
-        this.chat_ = new Chat(chatObject.messages);
+        this.chat = new Chat(chatObject.messages);
       }
     },
   },
