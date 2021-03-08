@@ -10,7 +10,7 @@ export default {
       type: Object,
       default: function () {
         return {
-          pointHitRadius: 5,
+          pointHitRadius: 2,
           responsive: true,
           maintainAspectRatio: false,
           lineTension: 0,
@@ -42,7 +42,7 @@ export default {
           },
           elements: {
             line: {
-              tension: 1,
+              tension: 0,
             },
           },
         };

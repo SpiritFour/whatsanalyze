@@ -361,25 +361,41 @@ export class Chat {
     const minDate = new Date(Math.min.apply(null, this.dates));
     const maxDate = new Date(Math.max.apply(null, this.dates));
     let labels = getDaysArray(minDate, maxDate);
+
+    let daysDict = getDaysArray(minDate, maxDate);
+    this.filterdChatObject.map((message) => {
+      daysDict[moment(message.date).format("YYYY-MM-DD")] += 1;
+    });
+    let allChat = {
+      data: Object.values(daysDict),
+      borderWidth: 1,
+      lineTension: 0,
+      radius: 0,
+      pointRadius: 1,
+      pointHitRadius: 2,
+      fill: false,
+      label: "Combined",
+      borderColor: hexToRgbA("#000000", 1),
+    };
+
     let datasets = this.messagesPerPerson.map((person) => {
-      console.log(person);
       let daysDict = getDaysArray(minDate, maxDate);
       person.messages.forEach((message) => {
         daysDict[moment(message.date).format("YYYY-MM-DD")] += 1;
       });
-      console.log(daysDict);
       return {
         data: Object.values(daysDict),
         borderWidth: 1,
-        lineTension: 1,
+        lineTension: 0,
         radius: 0,
         pointRadius: 1,
         pointHitRadius: 2,
         label: person.name,
-        backgroundColor: hexToRgbA(person.color),
+        fill: false,
         borderColor: person.color,
       };
     });
+    datasets.push(allChat);
     return { labels: Object.keys(labels), datasets: datasets };
   }
 
