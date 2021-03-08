@@ -2,11 +2,7 @@
   <div>
     <v-container class="top-color">
       <HeaderCta />
-      <FileHandler
-        ref="filehandler"
-        @new_messages="newMessages"
-        @hide_explanation="isShowingChats = $event"
-      />
+      <FileHandler ref="filehandler" @new_messages="newMessages" />
     </v-container>
     <ChartsResults ref="results" :chat="chat" :attachments="attachments" />
   </div>
@@ -20,7 +16,6 @@ export default {
   data() {
     return {
       chat: undefined,
-      downloading: false,
       attachments: undefined,
     };
   },

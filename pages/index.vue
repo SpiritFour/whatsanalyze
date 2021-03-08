@@ -55,8 +55,6 @@
 
 <script>
 import { Chat } from "~/functions/transformChatData";
-import html2canvas from "html2canvas";
-import { downloadBase64File } from "~/functions/utils";
 
 export default {
   async asyncData({ $content }) {
@@ -86,7 +84,6 @@ export default {
     return {
       isShowingChats: false,
       chat_: undefined,
-      downloading: false,
       attachments: undefined,
     };
   },
@@ -99,31 +96,11 @@ export default {
         this.chat_ = new Chat(chatObject.messages);
       }
     },
-    downloadImage() {
-      this.downloading = true;
-      html2canvas(this.$refs.results.$el, {
-        scrollX: 0,
-        scrollY: -window.scrollY,
-      }).then((canvas) => {
-        let names = this.chat_.messagesPerPerson
-          .slice(0, 2)
-          .map((person) => person.name)
-          .join("-");
-        downloadBase64File(
-          canvas.toDataURL(),
-          "whatsanlazye-results-" + names + ".png"
-        );
-        this.downloading = false;
-      });
-    },
   },
 };
 </script>
 
 <style lang="scss">
-.top-color {
-  background-color: $c-blue-accent;
-}
 .v-btn {
   text-transform: none !important;
 }
