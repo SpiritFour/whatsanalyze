@@ -139,6 +139,7 @@ export default {
       return htmlMessage;
     },
     changeEgoTo(name) {
+      this.$emit("setEgo", name);
       this.selectedEgo = name;
     },
     _getDateString(date) {
