@@ -55,8 +55,6 @@
 
 <script>
 import { Chat } from "~/functions/transformChatData";
-// import fs from "fs";
-// import http from "http";
 
 export default {
   async asyncData({ $content }) {
@@ -98,6 +96,15 @@ export default {
         this.chat = new Chat(chatObject.messages);
       }
     },
+  },
+  created() {
+    Object.keys(this.$route.query).forEach((key) => {
+      this.$gtag.event("ref_" + key, {
+        event_category: "home",
+        event_label: "lead",
+        value: "1",
+      });
+    });
   },
 };
 </script>
