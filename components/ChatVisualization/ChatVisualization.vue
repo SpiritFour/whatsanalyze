@@ -1,11 +1,7 @@
 <template>
   <v-col class="my-4 mb-16">
     <v-row>
-      <ChatVisualizationChat
-        :chat="chat"
-        :attachments="attachments"
-        @setEgo="setEgo"
-      />
+      <Chat :chat="chat" :attachments="attachments" @setEgo="setEgo" />
     </v-row>
     <v-row justify="center" id="payButton">
       <div class="cta my-md-4">
@@ -43,12 +39,10 @@
           </template>
           <v-card>
             <v-card-title class="headline cyan" style="word-break: normal">
-              <div class="text-h4 font-weight-bold">
-                This feature is coming soon !!
-              </div>
-              <span>You can still buy us a ☕️ if you like!!!</span>
+              <div class="text-h4 font-weight-bold">Nice !!</div>
+              <span>You are just a step away from your pdf!</span>
             </v-card-title>
-            <v-card-text class="pt-3 text-h5 font-weight-bold">
+            <v-card-text class="pt-3 text-body-1 font-weight-bold">
               If you want to stay tuned and get notified when new features
               arrive, register
               <a
@@ -64,9 +58,8 @@
                 >here</a
               >. We would love to stay in touch.
             </v-card-text>
-            <v-card-text>
-              Supporting us keeps the servers running, as all services provided
-              are for free.
+            <v-card-text class="text-h5">
+              Supporting us keeps the servers running :)
             </v-card-text>
             <v-row cols="12" justify="center" align="center" class="pt-6 pr-10">
               <ChatVisualizationPayment
@@ -128,6 +121,11 @@ export default {
       return aRgb;
     },
     render() {
+      this.$gtag.event("render-pdf-started", {
+        event_category: "payment",
+        event_label: "render-function-executed",
+        value: "1",
+      });
       // Default export is a4 paper, portrait, using millimeters for units
       const doc = new jsPDF();
       const width = 210;
@@ -282,7 +280,7 @@ export default {
       console.log("order created", data, actions);
     },
     onApprove(event) {
-      this.download();
+      this.render();
       console.log("approved", event);
     },
     onError(event) {
@@ -291,14 +289,6 @@ export default {
       console.log("error", event);
     },
     async download() {
-      this.$gtag.event("donation-download-started", {
-        event_category: "download",
-        event_label: "popup-clicked",
-        value: "1",
-      });
-
-      this.render();
-
       let canvas = html2canvas(this.results.$el, {
         scrollX: 0,
         scrollY: -window.scrollY,
