@@ -25,19 +25,11 @@
     <v-col v-else class="py-0">
       <v-carousel
         :continuous="true"
-        :cycle="false"
+        :cycle="true"
         :show-arrows="true"
         hide-delimiter-background
         height="auto"
       >
-        <v-carousel-item>
-          <ChartsBarChart
-            :chartdata="chat"
-            :options="barchartHeaderChartOptions"
-            dataGrouping="hourly"
-          />
-        </v-carousel-item>
-
         <v-carousel-item>
           <v-container fill-height fluid>
             <v-row align="center" justify="center">
@@ -46,6 +38,14 @@
               </v-col>
             </v-row>
           </v-container>
+        </v-carousel-item>
+
+        <v-carousel-item>
+          <ChartsBarChart
+            :chartdata="chat"
+            :options="barchartHeaderChartOptions"
+            dataGrouping="hourly"
+          />
         </v-carousel-item>
 
         <v-carousel-item>
