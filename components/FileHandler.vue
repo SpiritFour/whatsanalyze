@@ -79,7 +79,7 @@ import { parseString } from "whatsapp-chat-parser";
 import JSZip from "jszip";
 
 export default {
-  name: "DropAnImage",
+  name: "FileHandler",
   data() {
     return {
       isDragging: false,
@@ -133,7 +133,7 @@ export default {
         .async("string");
     },
 
-    readMultipleFiles(files) {
+    readSharedFiles(files) {
       function findChatFile(files) {
         let chatRegex = new RegExp(/.*(?:chat|whatsapp).*\.txt$/i);
         return files.find((file) => {
@@ -200,14 +200,15 @@ export default {
         value: "0",
       });
     },
-    processFileList(fileList) {
+    processFileList(fileList, shared = false) {
       this.isDragging = false;
       this.processing = true;
       this.isSuccess = false;
       this.wrongFile = false;
-      if (fileList.length > 1) {
+
+      if (shared || fileList.length > 1) {
         //do multiple here
-        this.readMultipleFiles(fileList);
+        this.readSharedFiles(fileList);
       } else {
         let file = fileList[0];
         // do singles here
@@ -242,17 +243,6 @@ export default {
       let fileList = src.files;
       this.processFileList(fileList);
     },
-  },
-  mounted() {
-    fetch("/chat_example.txt")
-      .then((response) => response.text())
-      .then(parseString)
-      .then((messages) => {
-        messages = { messages: messages };
-        this.extendDataStructure(messages);
-        return messages;
-      })
-      .then((messages) => this.$emit("new_messages", messages));
   },
 };
 </script>

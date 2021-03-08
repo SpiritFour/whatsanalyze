@@ -1,24 +1,24 @@
 <template>
-  <div>
+  <div v-if="chat">
     <v-col v-if="$vuetify.breakpoint.smAndUp">
       <v-row>
         <v-col cols="12" sm="6">
           <ChartsBarChart
-            :chartdata="chat_"
+            :chartdata="chat"
             :options="barchartHeaderChartOptions"
             dataGrouping="hourly"
           />
         </v-col>
         <v-col cols="12" sm="6">
           <ChartsDonughtChart
-            :chartdata="chat_"
+            :chartdata="chat"
             :options="donoughtHeaderChartOptions"
           />
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="12">
-          <ChartsWordCloud :chartdata="chat_" />
+          <ChartsWordCloud :chartdata="chat" />
         </v-col>
       </v-row>
     </v-col>
@@ -26,54 +26,59 @@
       <v-carousel
         :continuous="true"
         :cycle="false"
-        :show-arrows="false"
+        :show-arrows="true"
         hide-delimiter-background
         height="auto"
       >
         <v-carousel-item>
+          <ChartsBarChart
+            :chartdata="chat"
+            :options="barchartHeaderChartOptions"
+            dataGrouping="hourly"
+          />
+        </v-carousel-item>
+
+        <v-carousel-item>
+          <v-container fill-height fluid>
+            <v-row align="center" justify="center">
+              <v-col>
+                <ChartsWordCloud :chartdata="chat" />
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-carousel-item>
+
+        <v-carousel-item>
           <ChartsLineChart
-            :chartdata="chat_"
+            :chartdata="chat"
             :options="linegraphHeaderChartOptions"
           />
         </v-carousel-item>
+
         <v-carousel-item>
           <ChartsDonughtChart
-            :chartdata="chat_"
+            :chartdata="chat"
             :options="donoughtHeaderChartOptions"
           />
         </v-carousel-item>
         <v-carousel-item>
           <ChartsRadarChart
-            :chartdata="chat_"
+            :chartdata="chat"
             :options="radarchartHeaderChartOptions"
-          /> </v-carousel-item
-        ><v-carousel-item>
-          <ChartsBarChart
-            :chartdata="chat_"
-            :options="barchartHeaderChartOptions"
-            dataGrouping="hourly"
-          /> </v-carousel-item
-        ><v-carousel-item>
-          <v-container fill-height fluid>
-            <v-row align="center" justify="center">
-              <v-col>
-                <ChartsWordCloud :chartdata="chat_" />
-              </v-col>
-            </v-row>
-          </v-container>
+          />
         </v-carousel-item>
       </v-carousel>
     </v-col>
   </div>
 </template>
 <script>
+import { Chat } from "~/functions/transformChatData";
+
 export default {
   name: "ExampleGraphs",
-  props: {
-    chat_: {},
-  },
   data() {
     return {
+      chat: undefined,
       linegraphHeaderChartOptions: {
         tooltips: { enabled: false },
         hover: { mode: null },
@@ -242,6 +247,24 @@ export default {
         },
       },
     };
+  },
+  created() {
+    fetch("/example-results.txt")
+      .then((response) => response.text())
+      .then((messages) => {
+        var instance = new Chat();
+        var serializedObject = JSON.parse(messages);
+        Object.assign(instance, {
+          _lineGraphData: Promise.resolve(serializedObject[0]),
+          _funfacts: Promise.resolve(serializedObject[1]),
+          _allWords: Promise.resolve(serializedObject[2]),
+          _hourlyData: Promise.resolve(serializedObject[3]),
+          _dailyData: Promise.resolve(serializedObject[4]),
+          _weeklyData: Promise.resolve(serializedObject[5]),
+          _shareOfSpeech: Promise.resolve(serializedObject[6]),
+        });
+        this.chat = instance;
+      });
   },
 };
 </script>

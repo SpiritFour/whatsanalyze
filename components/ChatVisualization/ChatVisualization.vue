@@ -7,7 +7,7 @@
         @setEgo="setEgo"
       />
     </v-row>
-    <v-row justify="center">
+    <v-row justify="center" id="payButton">
       <div class="cta my-md-4">
         <div class="text-h3 font-weight-bold pb-4">
           We generate your chat PDF
@@ -16,7 +16,7 @@
           Now get your full WhatsApp chat <br />
           for 3,99 $ as a PDF instantly
         </div>
-        <v-dialog v-model="showDownloadPopup" width="500">
+        <v-dialog v-model="showDownloadPopup" width="550">
           <template v-slot:activator="{ on, attrs }">
             <v-btn
               dark
@@ -37,25 +37,46 @@
               <v-icon>mdi-download</v-icon>
               Download full chat PDF
             </v-btn>
+            <div class="link" @click="download">
+              Retrieve a free preview of your analyzed chat
+            </div>
           </template>
           <v-card>
             <v-card-title class="headline cyan" style="word-break: normal">
-              <div class="text-h4 font-weight-bold">Did we make you go 🥳?</div>
-              <span>Buy us a ☕️ and get your results for free!!!</span>
+              <div class="text-h4 font-weight-bold">
+                This feature is coming soon !!
+              </div>
+              <span>You can still buy us a ☕️ if you like!!!</span>
             </v-card-title>
-
-            <v-card-text class="pt-3">
-              You will get all results as an image exactly as presented on your
-              device. Generating may take a while.
+            <v-card-text class="pt-3 text-h5 font-weight-bold">
+              If you want to stay tuned and get notified when new features
+              arrive, register
+              <a
+                :href="'https://forms.gle/FmX4LKYhMwxs4gYs8'"
+                @click="
+                  $gtag.event('download-chat-register-email-clicked', {
+                    event_category: 'download',
+                    event_label: 'popup-clicked',
+                    value: '1',
+                  })
+                "
+                target="_blank"
+                >here</a
+              >. We would love to stay in touch.
             </v-card-text>
-            <v-row justify="center"
-              ><ChatVisualizationPayment
+            <v-card-text>
+              Supporting us keeps the servers running, as all services provided
+              are for free.
+            </v-card-text>
+            <v-row cols="12" justify="center" align="center" class="pt-6 pr-10">
+              <ChatVisualizationPayment
                 @onCreateOrder="onCreateOrder"
                 @onApprove="onApprove"
                 @onError="onError"
                 currency="EUR"
-                :amount="10"
-            /></v-row>
+                :amount="3.5"
+              />
+            </v-row>
             <v-divider></v-divider>
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -69,7 +90,6 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
-        <div class="link">Retrieve a free preview of your chat</div>
       </div>
     </v-row>
   </v-col>
@@ -78,11 +98,12 @@
 <script>
 import jsPDF from "jspdf";
 import logo from "/assets/whatsanalyze-logo-black.png";
-import { getDateString } from "~/functions/utils";
+import { getDateString, downloadBase64File } from "~/functions/utils";
+import html2canvas from "html2canvas";
 
 export default {
   name: "ChatVisualization",
-  props: ["chat", "attachments"],
+  props: ["chat", "attachments", "results"],
   data() {
     return {
       showDownloadPopup: false,
@@ -261,13 +282,37 @@ export default {
       console.log("order created", data, actions);
     },
     onApprove(event) {
-      this.render();
+      this.download();
       console.log("approved", event);
     },
     onError(event) {
       console.log("approved", event);
 
       console.log("error", event);
+    },
+    async download() {
+      this.$gtag.event("donation-download-started", {
+        event_category: "download",
+        event_label: "popup-clicked",
+        value: "1",
+      });
+
+      this.render();
+
+      let canvas = html2canvas(this.results.$el, {
+        scrollX: 0,
+        scrollY: -window.scrollY,
+      });
+      let names = this.chat.messagesPerPerson
+        .slice(0, 2)
+        .map((person) => person.name)
+        .join("-");
+      canvas.then((canvas) => {
+        downloadBase64File(
+          canvas.toDataURL(),
+          "whatsanlazye-results-" + names + ".png"
+        );
+      });
     },
   },
 };

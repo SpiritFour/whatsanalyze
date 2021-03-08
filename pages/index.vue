@@ -18,10 +18,10 @@
             />
           </v-col>
           <v-col v-if="!isShowingChats" cols="12" md="6">
-            <ChartsExampleGraphs :chat_="chat_" />
+            <ChartsExampleGraphs :chat_="chat" />
           </v-col>
         </v-row>
-        <v-row v-if="$vuetify.breakpoint.smAndDown" class="top-color ma-0">
+        <v-row v-if="$vuetify.breakpoint.smAndDown">
           <v-col>
             <FileHandler
               ref="filehandler"
@@ -47,8 +47,9 @@
       your whole chat. Take deep dive in your data now!."
       />
     </v-container>
-    <v-container v-if="!isShowingChats">
-      <ChartsResults ref="results" :chat="chat_" :attachments="attachments" />
+
+    <v-container v-if="isShowingChats">
+      <ChartsResults ref="results" :chat="chat" :attachments="attachments" />
       <DownloadPopup :results="$refs.results" :chat="this.chat_" />
     </v-container>
   </div>
@@ -56,8 +57,6 @@
 
 <script>
 import { Chat } from "~/functions/transformChatData";
-import html2canvas from "html2canvas";
-import { downloadBase64File } from "~/functions/utils";
 
 export default {
   async asyncData({ $content }) {
@@ -86,68 +85,33 @@ export default {
   data() {
     return {
       isShowingChats: false,
-      chat_: new Chat(),
-      downloading: false,
+      chat: undefined,
       attachments: undefined,
     };
   },
   methods: {
     Chat,
     newMessages(chatObject) {
-      this.attachments = chatObject.attachments;
-      this.chat_ = new Chat(chatObject.messages);
-    },
-    downloadImage() {
-      this.downloading = true;
-      html2canvas(this.$refs.results.$el, {
-        scrollX: 0,
-        scrollY: -window.scrollY,
-      }).then((canvas) => {
-        let names = this.chat_.messagesPerPerson
-          .slice(0, 2)
-          .map((person) => person.name)
-          .join("-");
-        downloadBase64File(
-          canvas.toDataURL(),
-          "whatsanlazye-results-" + names + ".png"
-        );
-        this.downloading = false;
-      });
-    },
-    setupWorkBox() {
-      let _this = this;
-      if (window.$workbox !== undefined) {
-        window.$workbox.then((workbox) => {
-          console.log("workbox here", workbox);
-          if (workbox) {
-            workbox.addEventListener("message", (m) => {
-              // eslint-disable-next-line no-prototype-builtins
-              if (_this.$route.query.hasOwnProperty("receiving-file-share")) {
-                console.log(m.data.file); //contains the file(s)
-                console.log("index message wb", m);
-                console.log("current route", _this.$route);
-                let files = m.data.file;
-                // currently only the first file, but ultimately we want to pass all files
-                if (Array.isArray(files)) files = files[0];
-                _this.$refs.filehandler.processFile(files);
-              }
-            });
-            workbox.messageSW("SHARE_READY");
-          }
-        });
+      // we only update with default chat object if chat_ is undefined
+      if (!chatObject.default || this.chat === undefined) {
+        this.attachments = chatObject.attachments;
+        this.chat = new Chat(chatObject.messages);
       }
     },
   },
   created() {
-    this.setupWorkBox();
+    Object.keys(this.$route.query).forEach((key) => {
+      this.$gtag.event("ref_" + key, {
+        event_category: "home",
+        event_label: "lead",
+        value: "1",
+      });
+    });
   },
 };
 </script>
 
 <style lang="scss">
-.top-color {
-  background-color: $c-blue-accent;
-}
 .v-btn {
   text-transform: none !important;
 }

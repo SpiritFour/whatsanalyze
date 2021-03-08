@@ -22,7 +22,7 @@ export default {
       // bing indexing
       { name: "msvalidate.01", content: "E04DE33CC93C0FF892248C9E70A9A918" },
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
   },
   pwa: {
     manifest: {
@@ -37,7 +37,7 @@ export default {
       lang: "en",
       useWebmanifestExtension: true,
       share_target: {
-        action: "/?share-target=1",
+        action: "/pwa-results?share-target=1",
         method: "POST",
         enctype: "multipart/form-data",
         params: {
@@ -59,7 +59,7 @@ export default {
     },
     icon: {
       source: "/assets",
-      fileName: "whatsanalyze-logo-black.png",
+      fileName: "whatsanalyze-logo-green.png",
     },
   },
 
@@ -79,7 +79,16 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     "@nuxtjs/vuetify",
+    "nuxt-compress",
   ],
+  "nuxt-compress": {
+    gzip: {
+      cache: true,
+    },
+    brotli: {
+      threshold: 10240,
+    },
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ["@nuxt/content", "@nuxtjs/pwa"],
