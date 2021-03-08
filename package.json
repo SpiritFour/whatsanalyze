@@ -27,6 +27,7 @@
     "emoji-aware": "^3.0.5",
     "html2canvas": "^1.0.0-rc.7",
     "jszip": "^3.6.0",
+    "moment": "^2.29.1",
     "npm": "^7.5.4",
     "nuxt": "^2.14.12",
     "push-dir": "^0.4.1",

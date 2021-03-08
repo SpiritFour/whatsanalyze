@@ -2,6 +2,7 @@ import { chatColors, hexToRgbA } from "~/functions/colors";
 import stopwords_de from "stopwords-de";
 import stopwords from "stopwords-en";
 import { onlyEmoji } from "emoji-aware";
+import * as moment from "moment";
 
 export class Chat {
   static removeSystemMessages(chatObject) {
@@ -217,7 +218,7 @@ export class Chat {
 
   get dates() {
     if (this._dates) return this._dates;
-    this._dates = this.chatObject.map((message) => message.date);
+    this._dates = this.filterdChatObject.map((message) => message.date);
     return this._dates;
   }
 
@@ -315,15 +316,7 @@ export class Chat {
 
   _getDailyData(opacity = 1) {
     return {
-      labels: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday",
-      ],
+      labels: moment.weekdays(),
       datasets: this.messagesPerPerson.map((person) => {
         return {
           label: person.name,
@@ -341,20 +334,7 @@ export class Chat {
 
   _getWeeklyData(opacity = 1) {
     return {
-      labels: [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-      ],
+      labels: moment.months(),
       datasets: this.messagesPerPerson.map((person) => {
         return {
           label: person.name,
@@ -371,56 +351,34 @@ export class Chat {
   }
 
   _getLineGraphData() {
-    // calculate date ranges where messages happened
-    var minDate = new Date(Math.min.apply(null, this.dates));
-    var maxDate = new Date(Math.max.apply(null, this.dates));
-
-    // iterate over persons
-    var datasets = this.messagesPerPerson.map((person) => {
-      var hist_info = {};
-
-      function _addDayCount(message) {
-        const oneDayInMS = 24 * 60 * 60 * 1000;
-
-        // we group for one day -> set to mid day
-        var currDate = new Date(message.date);
-        currDate.setHours(12, 0, 0, 0);
-
-        var prevDate = new Date(currDate.getTime() - oneDayInMS);
-        if (prevDate > minDate) {
-          hist_info[prevDate] = hist_info[prevDate] || 0;
-        }
-
-        hist_info[currDate] = (hist_info[currDate] || 0) + 1;
-
-        var nextDate = new Date(currDate.getTime() + oneDayInMS);
-        if (nextDate < maxDate) {
-          hist_info[nextDate] = hist_info[nextDate] || 0;
-        }
+    let getDaysArray = function (s, e) {
+      let initDateDict = {};
+      for (let m = moment(s); m.isBefore(e); m.add(1, "days")) {
+        initDateDict[m.format("YYYY-MM-DD")] = 0;
       }
-
-      person.messages.forEach(_addDayCount);
-
-      return {
-        borderWidth: 2,
-        lineTension: 0,
-        pointRadius: 1,
-        pointHitRadius: 5,
-        label: person.name,
-        backgroundColor: hexToRgbA(person.color),
-        borderColor: person.color,
-        data: Object.entries(hist_info).map((entry) => {
-          return { x: entry[0], y: entry[1] };
-        }),
-      };
+      return initDateDict;
+    };
+    const minDate = new Date(Math.min.apply(null, this.dates));
+    const maxDate = new Date(Math.max.apply(null, this.dates));
+    let daysDict = getDaysArray(minDate, maxDate);
+    this.filterdChatObject.map((message) => {
+      daysDict[moment(message.date).format("YYYY-MM-DD")] += 1;
     });
-
-    return [
-      {
-        datasets: datasets,
-      },
-      this.getLineGraphXAxis(maxDate, minDate),
-    ];
+    return {
+      labels: Object.keys(daysDict),
+      datasets: [
+        {
+          data: Object.values(daysDict),
+          borderWidth: 1,
+          lineTension: 1,
+          radius: 0,
+          pointRadius: 1,
+          pointHitRadius: 2,
+          backgroundColor: hexToRgbA(chatColors[1]),
+          borderColor: hexToRgbA(chatColors[2]),
+        },
+      ],
+    };
   }
 
   getLineGraphData() {

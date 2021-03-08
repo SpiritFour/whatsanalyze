@@ -13,7 +13,7 @@ export default {
           pointHitRadius: 5,
           responsive: true,
           maintainAspectRatio: false,
-          lineTension: 1,
+          lineTension: 0,
           legend: {
             position: "bottom",
           },
@@ -21,9 +21,6 @@ export default {
             xAxes: [
               {
                 type: "time",
-                time: {
-                  unit: this.chartdata.linegraphXAxisUnit,
-                },
                 gridLines: {
                   display: false,
                   color: "#FFFFFF",
@@ -45,7 +42,7 @@ export default {
           },
           elements: {
             line: {
-              tension: 0,
+              tension: 1,
             },
           },
         };
@@ -62,11 +59,9 @@ export default {
   },
   methods: {
     updateGraph: function () {
-      this.chartdata.getLineGraphData().then((lineGraphData) => {
-        // eslint-disable-next-line vue/no-mutating-props
-        this.options.scales.xAxes[0].time.unit = lineGraphData[1];
-        this.renderChart(lineGraphData[0], this.options);
-      });
+      this.chartdata
+        .getLineGraphData()
+        .then((x) => this.renderChart(x, this.options));
     },
   },
   mounted() {
