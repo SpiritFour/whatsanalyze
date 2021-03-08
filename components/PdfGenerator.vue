@@ -13,6 +13,8 @@ import html2canvas from "html2canvas";
 // eslint-disable-next-line no-unused-vars
 import logo from "/assets/whatsanalyze-logo-black.png";
 
+import { getDateString } from "~/functions/utils";
+
 export default {
   props: ["chat"],
   methods: {
@@ -53,14 +55,15 @@ export default {
       const pageYSpace = 297 - marginTop * 2;
 
       const messageMarginBottom = 5;
+      const authorHeight = 8;
+      const timeHeight = 5;
       let usedYSpace = 0;
 
-      const calcMessageHeight = function (numLines) {
+      const calcMessageBodyHeight = function (numLines) {
         let messageY = marginTop + usedYSpace;
-        // Split messages to fit
 
         // Height of Messages
-        const messageYSpace = numLines * lineHeight;
+        const messageYSpace = numLines * lineHeight + authorHeight + timeHeight;
 
         // Check if lines fit on page,
         if (usedYSpace + messageYSpace > pageYSpace) {
@@ -70,6 +73,7 @@ export default {
           usedYSpace = 0;
         }
         usedYSpace += messageMarginBottom + messageYSpace;
+
         return messageY;
       };
 
@@ -78,24 +82,42 @@ export default {
           parseInt(idx) + data.message,
           100
         );
-        // number of lines to fit
         const numLines = splitMessage.length;
+        const messageHeight = lineHeight * numLines;
         // Y Coordinate of Message
-        let messageY = calcMessageHeight(numLines);
+        let messageY = calcMessageBodyHeight(numLines);
 
         // Draw background
         doc.setFillColor(10, 100, 200);
         // draw bubble
-        doc.rect(marginLeft, messageY - 5, 100, lineHeight * numLines, "F");
+        doc.rect(
+          marginLeft,
+          messageY - 3,
+          100,
+          messageHeight + authorHeight + timeHeight,
+          "F"
+        );
+
+        // draw author
+        doc.setFontSize(fontSize / 1.5);
+        // doc.setDrawColor(100, 0, 0);
+        doc.setFont("helvetica", "bold");
+        doc.text(marginLeft, messageY, data.author);
 
         // Draw message lines
         doc.setFontSize(fontSize);
+        doc.setDrawColor(0, 0, 0);
         doc.setFont("helvetica", "normal");
-        doc.text(marginLeft, messageY, splitMessage);
+        doc.text(marginLeft, messageY + authorHeight, splitMessage);
 
-        // author
-        // doc.setFontSize(8);
-        // doc.setFont("helvetica", "bold");
+        // draw time
+        console.log(data.date);
+        doc.setFontSize(fontSize / 2);
+        doc.text(
+          marginLeft,
+          messageY + authorHeight + messageHeight,
+          getDateString(data.date)
+        );
       });
 
       doc.save("WhatsAnalyze - Report");
