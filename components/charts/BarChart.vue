@@ -56,7 +56,22 @@ export default {
     },
   },
   methods: {
+    setStacked(startStackingAt = 4) {
+      console.log(this.chartdata.numPersonsInChat);
+      if (this.chartdata.numPersonsInChat > startStackingAt) {
+        // eslint-disable-next-line vue/no-mutating-props
+        this.options.scales.xAxes[0].stacked = true;
+        // eslint-disable-next-line vue/no-mutating-props
+        this.options.scales.yAxes[0].stacked = true;
+      } else {
+        // eslint-disable-next-line vue/no-mutating-props
+        this.options.scales.xAxes[0].stacked = false;
+        // eslint-disable-next-line vue/no-mutating-props
+        this.options.scales.yAxes[0].stacked = false;
+      }
+    },
     updateGraph() {
+      this.setStacked();
       if (this.dataGrouping === "hourly") {
         this.chartdata
           .getHourlyData()
