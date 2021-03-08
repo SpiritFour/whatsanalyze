@@ -55,16 +55,9 @@ export default {
       const messageMarginBottom = 5;
       let usedYSpace = 0;
 
-      this.chat.chatObject.forEach((data, idx) => {
-        // Y Coordinate of Message
+      const calcMessageHeight = function (numLines) {
         let messageY = marginTop + usedYSpace;
         // Split messages to fit
-        const splitMessage = doc.splitTextToSize(
-          parseInt(idx) + data.message,
-          100
-        );
-        // number of lines to fit
-        const numLines = splitMessage.length;
 
         // Height of Messages
         const messageYSpace = numLines * lineHeight;
@@ -77,6 +70,18 @@ export default {
           usedYSpace = 0;
         }
         usedYSpace += messageMarginBottom + messageYSpace;
+        return messageY;
+      };
+
+      this.chat.chatObject.forEach((data, idx) => {
+        const splitMessage = doc.splitTextToSize(
+          parseInt(idx) + data.message,
+          100
+        );
+        // number of lines to fit
+        const numLines = splitMessage.length;
+        // Y Coordinate of Message
+        let messageY = calcMessageHeight(numLines);
 
         // Draw background
         doc.setFillColor(10, 100, 200);
