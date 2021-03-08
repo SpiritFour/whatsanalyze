@@ -19,35 +19,80 @@ export default {
     render() {
       // Default export is a4 paper, portrait, using millimeters for units
       const doc = new jsPDF();
-
+      const width = 210;
+      const height = 297;
       // Draw background
       doc.setFillColor(23, 166, 141);
-      doc.rect(0, 0, 1000, 1000, "F");
-      // Add logo
+      //
+      doc.rect(0, 0, width, height, "F");
+      // subtitle
+      doc.setFontSize(16);
+      doc.text(15, 30, "Your Chat in your hands.");
+      // logo
       doc.addImage(logo, "PNG", 15, 40, 40, 40);
-
-      // Add title
+      // title
       doc.setFontSize(50);
       doc.setTextColor(0, 0, 0);
       doc.setFont("helvetica", "bold");
       doc.text(65, 76, "WhatsAnalyze");
 
-      doc.setFontSize(16);
-      doc.text(20, 30, "Your Chat in your hands.");
       doc.addPage("a4", "p");
 
+      // messages
+      // 16 =~ 4 mm
+      let fontSize = 14;
+      doc.setFontSize(fontSize);
+      // line + padding top and bottom
+      const lineHeight = (fontSize * 1.5) / 3.64;
+      doc.setFont("helvetica", "normal");
+
+      // https://stackoverflow.com/questions/24272058/word-wrap-in-generated-pdf-using-jspdf
+      // var splitTitle = doc.splitTextToSize(reportTitle, 180);
+      const marginTop = 25;
+      const marginLeft = 20;
+      const pageYSpace = 297 - marginTop * 2;
+
+      const messageMarginBottom = 5;
+      let usedYSpace = 0;
+
       this.chat.chatObject.forEach((data, idx) => {
-        doc.text(20, 20 + 10 * (idx % 20), data.message);
-        if ((idx + 1) % 20 === 0) {
+        // Y Coordinate of Message
+        let messageY = marginTop + usedYSpace;
+        // Split messages to fit
+        const splitMessage = doc.splitTextToSize(
+          parseInt(idx) + data.message,
+          100
+        );
+        // number of lines to fit
+        const numLines = splitMessage.length;
+
+        // Height of Messages
+        const messageYSpace = numLines * lineHeight;
+
+        // Check if lines fit on page,
+        if (usedYSpace + messageYSpace > pageYSpace) {
+          // is first message
           doc.addPage("a4", "p");
+          messageY = marginTop;
+          usedYSpace = 0;
         }
+        usedYSpace += messageMarginBottom + messageYSpace;
+
+        // Draw background
+        doc.setFillColor(10, 100, 200);
+        // draw bubble
+        doc.rect(marginLeft, messageY - 5, 100, lineHeight * numLines, "F");
+
+        // Draw message lines
+        doc.setFontSize(fontSize);
+        doc.setFont("helvetica", "normal");
+        doc.text(marginLeft, messageY, splitMessage);
+
+        // author
+        // doc.setFontSize(8);
+        // doc.setFont("helvetica", "bold");
       });
 
-      // doc.html(this.$refs.content.innerHTML, {
-      //   callback: function (d) {
-      //     d.save("popo.pdf");
-      //   },
-      // });
       doc.save("WhatsAnalyze - Report");
     },
     renderCss() {
