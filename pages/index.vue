@@ -18,7 +18,7 @@
             />
           </v-col>
           <v-col v-if="!isShowingChats" cols="12" md="6">
-            <ChartsExampleGraphs :chat_="chat_" />
+            <ChartsExampleGraphs :chat_="chat" />
           </v-col>
         </v-row>
         <v-row v-if="$vuetify.breakpoint.smAndDown">
@@ -48,13 +48,15 @@
       />
     </v-container>
     <v-container v-if="isShowingChats">
-      <ChartsResults ref="results" :chat="chat_" :attachments="attachments" />
+      <ChartsResults ref="results" :chat="chat" :attachments="attachments" />
     </v-container>
   </div>
 </template>
 
 <script>
 import { Chat } from "~/functions/transformChatData";
+// import fs from "fs";
+// import http from "http";
 
 export default {
   async asyncData({ $content }) {
@@ -83,7 +85,7 @@ export default {
   data() {
     return {
       isShowingChats: false,
-      chat_: undefined,
+      chat: undefined,
       attachments: undefined,
     };
   },
@@ -91,7 +93,7 @@ export default {
     Chat,
     newMessages(chatObject) {
       // we only update with default chat object if chat_ is undefined
-      if (!chatObject.default || this.chat_ === undefined) {
+      if (!chatObject.default || this.chat === undefined) {
         this.attachments = chatObject.attachments;
         this.chat_ = new Chat(chatObject.messages);
       }

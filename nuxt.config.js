@@ -76,7 +76,16 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     "@nuxtjs/vuetify",
+    "nuxt-compress",
   ],
+  "nuxt-compress": {
+    gzip: {
+      cache: true,
+    },
+    brotli: {
+      threshold: 10240,
+    },
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ["@nuxt/content", "@nuxtjs/pwa"],
