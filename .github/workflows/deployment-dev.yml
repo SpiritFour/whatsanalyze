@@ -5,13 +5,15 @@ name: Deploy to Firebase Hosting on merge
 "on":
   push:
     branches:
-      - gh-pages
+      - dev
+  workflow_dispatch:
+
 jobs:
-  build_and_deploy:
+  deploy-firebase-dev:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: yarn install && yarn nuxt generate
+      - run: yarn install && yarn ci-dev-build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
