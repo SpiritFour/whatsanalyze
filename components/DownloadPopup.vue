@@ -79,7 +79,7 @@ import { downloadBase64File } from "~/functions/utils";
 
 export default {
   name: "DownloadPopup",
-  props: ["graphs", "chat"],
+  props: ["results", "chat"],
   data() {
     return {
       dialog: false,
@@ -87,13 +87,14 @@ export default {
   },
   methods: {
     download() {
+      console.log("download here", this.results);
       this.$gtag.event("donation-popup-clicked", {
         event_category: "donation",
         event_label: "popup-clicked",
         value: "1",
       });
 
-      let canvas = html2canvas(this.graphs, {
+      let canvas = html2canvas(this.results.$refs.graphs, {
         scrollX: 0,
         scrollY: -window.scrollY,
         onclone: function (clonedDoc) {
