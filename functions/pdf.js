@@ -61,7 +61,7 @@ export async function render(chat, ego, isSample = false) {
   ) {
     // logo
     doc.addImage(_logo, "PNG", x + 50, y, 13, 13);
-    // title50
+    // title
     if (addText) {
       doc.setFontSize(20);
       doc.setTextColor(0, 0, 0);
@@ -89,6 +89,8 @@ export async function render(chat, ego, isSample = false) {
   const drawAuthorBubble = function (author, x, y) {
     const rgbAuthorColor = hexToRgb(chat.personColorMap[author].slice(1));
     doc.setFillColor(rgbAuthorColor[0], rgbAuthorColor[1], rgbAuthorColor[2]);
+    // This line does not properly work so for now we give them the same width
+    // TODO: Check with non asci
     // const author_width = doc.getTextWidth(author);
 
     doc.roundedRect(x - 3, y, width / 2, 10, 5, 5, "F");
@@ -160,9 +162,6 @@ export async function render(chat, ego, isSample = false) {
     }
   });
 
-  // // subtitle
-  // doc.setFontSize(16);
-  // doc.text(15, 30, "Your Chat in your hands.");
   //   ----- Start of message pages
   addPage();
   doc.setTextColor(0, 0, 0);
