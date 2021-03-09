@@ -42,7 +42,6 @@
     "stopwords-en": "^0.3.0",
     "vue-chartjs": "^3.5.1",
     "vue-gtag": "^1.11.0",
-    "vue-html2pdf": "^1.8.0",
     "whatsapp-chat-parser": "^3.1.0"
   },
   "devDependencies": {
