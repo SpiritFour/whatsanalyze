@@ -16,6 +16,7 @@ export default {
           lineTension: 0,
           legend: {
             position: "bottom",
+            display: false,
           },
           scales: {
             xAxes: [

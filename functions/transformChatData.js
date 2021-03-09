@@ -369,13 +369,12 @@ export class Chat {
       datasets: [
         {
           data: Object.values(daysDict),
-          label: "Everyone",
           borderWidth: 1,
           lineTension: 0,
           pointRadius: 0,
           pointHitRadius: 2,
-          backgroundColor: hexToRgbA(chatColors[0]),
-          borderColor: hexToRgbA("#0e6b0e", [1]),
+          backgroundColor: hexToRgbA("#EF5350"),
+          borderColor: hexToRgbA("#B71C1C", [1]),
         },
       ],
     };
