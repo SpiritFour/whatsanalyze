@@ -13,7 +13,7 @@
         <ChartsLineChart :chartdata="chat" class="pb-10" />
       </Share>
 
-      <GroupOthers :chat-object="chat" />
+      <GroupOthers :chat-object="chat" data-html2canvas-ignore="true" />
       <ChartsTextStats :chat="chat" />
 
       <ChartsFunFacts :chartdata="chat" class="pb-10" />
