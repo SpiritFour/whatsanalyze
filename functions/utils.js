@@ -9,6 +9,8 @@ export function downloadBase64File(contentBase64, fileName) {
   document.body.removeChild(downloadLink);
 }
 
+const zeroPad = (num, places) => String(num).padStart(places, "0");
+
 export function getDateString(date, includeTime = true) {
   const months = [
     "January",
@@ -37,7 +39,7 @@ export function getDateString(date, includeTime = true) {
       month +
       " " +
       year +
-      (includeTime ? ", " + hour + ":" + min : "")
+      (includeTime ? ", " + zeroPad(hour, 2) + ":" + zeroPad(min, 2) : "")
     );
   }
   return "";
