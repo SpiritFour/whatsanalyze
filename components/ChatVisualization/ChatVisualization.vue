@@ -133,11 +133,7 @@ export default {
         value: "1",
       });
       // download first 100 messages only
-      render(
-        this.chat.chatObject.slice(0, 100),
-        this.chat.personColorMap,
-        this.ego
-      );
+      render(this.chat, this.ego, true);
     },
   },
 };
