@@ -79,6 +79,7 @@ export async function render(chat, ego, isSample = false) {
     usedYSpace = 0;
   };
   const addHeading = function (text, x, y) {
+    doc.setTextColor(0, 0, 0);
     doc.setFontSize(50);
     doc.text(text, x, y);
     doc.setLineWidth(0.5);
@@ -95,11 +96,11 @@ export async function render(chat, ego, isSample = false) {
     doc.setFontSize(20);
     doc.text(author.replace(asciRegex, ""), x, y + 7);
   };
-  const addGreenPage = function () {
+  const addGreenPage = function (showText = false) {
     doc.addPage();
     doc.setFillColor(23, 166, 141);
     doc.rect(0, 0, width, height, "F");
-    addBranding(logoBlack, false);
+    addBranding(logoBlack, showText);
     usedYSpace = marginTop;
   };
 
@@ -173,8 +174,12 @@ export async function render(chat, ego, isSample = false) {
   const messages = isSample ? chat.chatObject.slice(0, 100) : chat.chatObject;
 
   messages.forEach((data) => {
-    const isSystem = "System" === data.author;
+    let isSystem = "System" === data.author;
     const isEgo = ego === data.author;
+
+    if (!isSystem && !(data.author in chat.personColorMap)) {
+      isSystem = true;
+    }
 
     const splitMessage = doc.splitTextToSize(data.message, isSystem ? 120 : 60);
     const numLines = splitMessage.length;
@@ -252,6 +257,13 @@ export async function render(chat, ego, isSample = false) {
       );
     }
   });
+
+  addGreenPage(true);
+  usedYSpace += marginTop + 50;
+  addHeading("Thanks!", marginLeft, usedYSpace);
+  usedYSpace += 20;
+  doc.setFontSize(20);
+  doc.text("whatsanalyze.com", marginLeft, usedYSpace);
 
   doc.save("WhatsAnalyze - " + ego);
 }
