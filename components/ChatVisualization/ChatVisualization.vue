@@ -118,7 +118,7 @@ export default {
       console.log("order created", data, actions);
     },
     onApprove(event) {
-      this.render();
+      render(this.chat, this.ego, false);
       console.log("approved", event);
     },
     onError(event) {
