@@ -79,7 +79,7 @@ import { downloadBase64File } from "~/functions/utils";
 
 export default {
   name: "DownloadPopup",
-  props: ["results", "chat"],
+  props: ["graphs", "chat"],
   data() {
     return {
       dialog: false,
@@ -93,7 +93,7 @@ export default {
         value: "1",
       });
 
-      let canvas = html2canvas(this.results.$el, {
+      let canvas = html2canvas(this.graphs, {
         scrollX: 0,
         scrollY: -window.scrollY,
       });
