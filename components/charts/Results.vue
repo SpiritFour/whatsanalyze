@@ -69,7 +69,6 @@
       <ChartsBarChart :chartdata="chat" dataGrouping="weekly" class="py-10" />
     </div>
 
-    <!-- Remove "weggelassen" und so whatsapp shit -->
     <!-- Add workcloud with emojies only  -->
     <div class="text-h3 font-weight-bold pt-10">Word Cloud</div>
     <ChartsWordCloud :chartdata="chat" class="pb-10" />

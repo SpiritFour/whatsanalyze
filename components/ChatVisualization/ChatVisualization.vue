@@ -1,16 +1,16 @@
 <template>
   <v-col class="my-4 mb-16">
     <v-row>
-      <ChatVisualizationChat :chat="chat" :attachments="attachments" />
+      <Chat :chat="chat" :attachments="attachments" @setEgo="setEgo" />
     </v-row>
     <v-row justify="center" id="payButton">
       <div class="cta my-md-4">
         <div class="text-h3 font-weight-bold pb-4">
-          We generate your chat PDF
+          Download your Chat as a PDF
         </div>
         <div class="text-body-1">
-          Now get your full WhatsApp chat <br />
-          for 3,99 $ as a PDF instantly
+          Get your full WhatsApp chat <br />
+          for 3,99 $ as a PDF instantly.
         </div>
         <v-dialog v-model="showDownloadPopup" width="550">
           <template v-slot:activator="{ on, attrs }">
@@ -31,20 +31,18 @@
               "
             >
               <v-icon>mdi-download</v-icon>
-              Download full chat PDF
+              Download your full chat as a PDF
             </v-btn>
-            <div class="link" @click="download">
-              Retrieve a free preview of your analyzed chat
+            <div class="link" @click="downloadSample">
+              Get a preview of your PDF for free
             </div>
           </template>
           <v-card>
             <v-card-title class="headline cyan" style="word-break: normal">
-              <div class="text-h4 font-weight-bold">
-                This feature is coming soon !!
-              </div>
-              <span>You can still buy us a ☕️ if you like!!!</span>
+              <div class="text-h4 font-weight-bold">Nice !!</div>
+              <span>You are just a step away from your PDF!</span>
             </v-card-title>
-            <v-card-text class="pt-3 text-h5 font-weight-bold">
+            <v-card-text class="pt-3 text-body-1 font-weight-bold">
               If you want to stay tuned and get notified when new features
               arrive, register
               <a
@@ -60,9 +58,8 @@
                 >here</a
               >. We would love to stay in touch.
             </v-card-text>
-            <v-card-text>
-              Supporting us keeps the servers running, as all services provided
-              are for free.
+            <v-card-text class="text-h5">
+              Supporting us keeps the servers running :)
             </v-card-text>
             <v-row cols="12" justify="center" align="center" class="pt-6 pr-10">
               <ChatVisualizationPayment
@@ -92,8 +89,7 @@
 </template>
 
 <script>
-import html2canvas from "html2canvas";
-import { downloadBase64File } from "~/functions/utils";
+import { render } from "~/functions/pdf";
 
 export default {
   name: "ChatVisualization",
@@ -101,39 +97,43 @@ export default {
   data() {
     return {
       showDownloadPopup: false,
+      ego: this.chat.messagesPerPerson[0].name,
     };
   },
   methods: {
+    setEgo(ego) {
+      this.ego = ego;
+    },
+    download() {
+      this.$gtag.event("download-pdf", {
+        event_category: "download",
+        event_label: "download-pdf",
+        value: "10",
+      });
+      render(this.chat.chatObject, this.chat.personColorMap, this.ego);
+    },
     onCreateOrder(data, actions) {
+      console.log("approved", event);
+
       console.log("order created", data, actions);
     },
     onApprove(event) {
+      render(this.chat, this.ego, false);
       console.log("approved", event);
     },
     onError(event) {
+      console.log("approved", event);
+
       console.log("error", event);
     },
-    async download() {
-      this.$gtag.event("donation-download-started", {
-        event_category: "download",
-        event_label: "popup-clicked",
-        value: "1",
+    downloadSample() {
+      this.$gtag.event("download-sample-pdf", {
+        event_category: "home",
+        event_label: "download-sample-pdf",
+        value: "5",
       });
-
-      let canvas = html2canvas(this.results.$el, {
-        scrollX: 0,
-        scrollY: -window.scrollY,
-      });
-      let names = this.chat.messagesPerPerson
-        .slice(0, 2)
-        .map((person) => person.name)
-        .join("-");
-      canvas.then((canvas) => {
-        downloadBase64File(
-          canvas.toDataURL(),
-          "whatsanlazye-results-" + names + ".png"
-        );
-      });
+      // download first 100 messages only
+      render(this.chat, this.ego, true);
     },
   },
 };
