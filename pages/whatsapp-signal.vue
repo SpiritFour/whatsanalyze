@@ -11,7 +11,13 @@ export default {
       page,
     };
   },
-
+  pwa: {
+    manifest: {
+      name: "WhatsAnalyze - How to switch from Signal to WhatsApp",
+      description:
+        "Learn how to export your chat from WhatsApp to Signal ✓ Now working for Group Chats ✓ Keep your Data ✓ No Chat Data is sent to a Server. Get Started now!",
+    },
+  },
   head: {
     title: "WhatsAnalyze - How to switch from Signal to WhatsApp",
     meta: [

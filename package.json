@@ -31,6 +31,7 @@
     "moment": "^2.29.1",
     "npm": "^7.5.4",
     "nuxt": "^2.14.12",
+    "nuxt-compress": "^4.1.0",
     "push-dir": "^0.4.1",
     "stopwords-de": "^0.3.0",
     "stopwords-en": "^0.3.0",

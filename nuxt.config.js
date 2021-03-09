@@ -26,10 +26,7 @@ export default {
   },
   pwa: {
     manifest: {
-      name: "Whats Analyze - The WhatsApp Chat Analyzer",
       short_name: "whatsanalyze.com",
-      description:
-        "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
       start_url: "/",
       display: "standalone",
       background_color: "#21a68d",
@@ -37,7 +34,7 @@ export default {
       lang: "en",
       useWebmanifestExtension: true,
       share_target: {
-        action: "/?share-target=1",
+        action: "/pwa-results?share-target=1",
         method: "POST",
         enctype: "multipart/form-data",
         params: {
@@ -76,7 +73,16 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     "@nuxtjs/vuetify",
+    "nuxt-compress",
   ],
+  "nuxt-compress": {
+    gzip: {
+      cache: true,
+    },
+    brotli: {
+      threshold: 10240,
+    },
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ["@nuxt/content", "@nuxtjs/pwa"],

@@ -79,7 +79,7 @@ import { parseString } from "whatsapp-chat-parser";
 import JSZip from "jszip";
 
 export default {
-  name: "DropAnImage",
+  name: "FileHandler",
   data() {
     return {
       isDragging: false,
@@ -243,17 +243,6 @@ export default {
       let fileList = src.files;
       this.processFileList(fileList);
     },
-  },
-  created() {
-    fetch("/chat_example.txt")
-      .then((response) => response.text())
-      .then(parseString)
-      .then((messages) => {
-        messages = { messages: messages, default: true };
-        this.extendDataStructure(messages);
-        return messages;
-      })
-      .then((messages) => this.$emit("new_messages", messages));
   },
 };
 </script>

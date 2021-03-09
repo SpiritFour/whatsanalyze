@@ -67,6 +67,13 @@ export default {
       page,
     };
   },
+  pwa: {
+    manifest: {
+      name: "WhatsAnalyze - How to Export your WhatsApp Chat to PDF",
+      description:
+        "Export your Whatsapp Chat to PDF in seconds ✓ Create your own Chat Story Book ✓ No Chat Data is sent to a Server. Get Started now!",
+    },
+  },
   head: {
     title: "WhatsAnalyze - How to Export your WhatsApp Chat to PDF",
     meta: [

@@ -143,6 +143,10 @@ export class Chat {
     // all dates of messages
     this._dates = null;
 
+    this.__reload();
+  }
+
+  __reload() {
     this._lineGraphData = Promise.resolve(this._getLineGraphData());
     this._funfacts = Promise.resolve(this._getFunFacts());
     this._allWords = Promise.resolve(this._getAllWords());
