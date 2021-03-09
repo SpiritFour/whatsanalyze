@@ -17,7 +17,7 @@
             <v-btn
               dark
               v-bind="attrs"
-              v-on.prevent="on"
+              v-on="on"
               color="#07bc4c"
               style="color: white"
               class="mt-5 mb-5 text-h6"
