@@ -31,7 +31,7 @@ export async function render(chat, ego, isSample = false) {
     let messageY = marginTop + usedYSpace;
     const messageYSpace = numLines * lineHeight + authorHeight + timeHeight; // Height of Messages
     // Check if lines fit on page,
-    if (usedYSpace + messageYSpace > pageYSpace) {
+    if (usedYSpace + messageYSpace + marginTop / 2 > pageYSpace) {
       // is first message
       addPage();
       messageY = marginTop;
