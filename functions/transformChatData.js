@@ -460,6 +460,7 @@ export class Chat {
               "omitted>",
               "bild",
               "image",
+              "<Medien",
               "weggelassen",
               "omitted",
             ].includes(word[0].toLowerCase())
