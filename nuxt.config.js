@@ -26,10 +26,7 @@ export default {
   },
   pwa: {
     manifest: {
-      name: "Whats Analyze - The WhatsApp Chat Analyzer",
       short_name: "whatsanalyze.com",
-      description:
-        "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
       start_url: "/",
       display: "standalone",
       background_color: "#21a68d",
@@ -131,10 +128,8 @@ export default {
         : {},
   },
   env: {
-    paypalClientId:
-      // eslint-disable-next-line no-undef
-      process.env.NODE_ENV !== "production"
-        ? "ARYQUp4C_oNjNUNkvSPzLeaiulItDmnHUU226OANt2haCKC2c70ZrKZTmRHCPldcu4SD22LmPEuonfec"
-        : "AUMWxSZrtBOA1RicR_3nGijYb8yYxyq2lxBjiwoQKfVc-8jfdPr5N7X5EFUackMCLb_K7HiKswnDBUJ8",
+    paypalClientId: local
+      ? "ARYQUp4C_oNjNUNkvSPzLeaiulItDmnHUU226OANt2haCKC2c70ZrKZTmRHCPldcu4SD22LmPEuonfec"
+      : "AUMWxSZrtBOA1RicR_3nGijYb8yYxyq2lxBjiwoQKfVc-8jfdPr5N7X5EFUackMCLb_K7HiKswnDBUJ8",
   },
 };
