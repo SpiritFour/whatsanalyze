@@ -105,10 +105,10 @@ export default {
       this.ego = ego;
     },
     download() {
-      this.$gtag.event("render-pdf-started", {
+      this.$gtag.event("download-pdf", {
         event_category: "download",
-        event_label: "render-function-executed",
-        value: "1",
+        event_label: "download-pdf",
+        value: "10",
       });
       render(this.chat.chatObject, this.chat.personColorMap, this.ego);
     },
@@ -127,10 +127,10 @@ export default {
       console.log("error", event);
     },
     downloadSample() {
-      this.$gtag.event("render-sample-pdf-started", {
-        event_category: "download",
-        event_label: "render-sample-function-executed",
-        value: "1",
+      this.$gtag.event("download-sample-pdf", {
+        event_category: "home",
+        event_label: "download-sample-pdf",
+        value: "5",
       });
       // download first 100 messages only
       render(this.chat, this.ego, true);
