@@ -260,10 +260,16 @@ export async function render(chat, ego, isSample = false) {
 
   addGreenPage(true);
   usedYSpace += marginTop + 50;
-  addHeading("Thanks!", marginLeft, usedYSpace);
-  usedYSpace += 20;
-  doc.setFontSize(20);
-  doc.text("whatsanalyze.com", marginLeft, usedYSpace);
+  if (isSample) {
+    addHeading("Get full pdf at", marginLeft, usedYSpace);
+    usedYSpace += 20;
+    doc.text("whatsanalyze.com", marginLeft, usedYSpace);
+  } else {
+    addHeading("Thanks!", marginLeft, usedYSpace);
+    usedYSpace += 20;
+    doc.setFontSize(20);
+    doc.text("whatsanalyze.com", marginLeft, usedYSpace);
+  }
 
   doc.save("WhatsAnalyze - " + ego);
 }
