@@ -13,7 +13,7 @@ export async function render(chat, ego, isSample = false) {
   const fontSize = 11;
   const marginTop = 32;
   const marginLeft = 20;
-  const pageYSpace = 297 - marginTop * 2;
+  const pageYSpace = 297 - marginTop;
   const messageMarginBottom = 5;
   const paddingMessage = 3;
   const authorHeight = 9;
@@ -23,6 +23,9 @@ export async function render(chat, ego, isSample = false) {
   let usedYSpace = 0;
 
   //    --- HELPER FUNCTIONS
+  // eslint-disable-next-line no-control-regex
+  const asciRegex = new RegExp(/[^\x00-\x7F]/g);
+
   // calculates height for new message
   const calcMessageBodyHeight = function (numLines) {
     let messageY = marginTop + usedYSpace;
@@ -90,8 +93,17 @@ export async function render(chat, ego, isSample = false) {
     doc.roundedRect(x - 3, y, width / 2, 10, 5, 5, "F");
     doc.setFont("helvetica", "bold");
     doc.setFontSize(20);
-    doc.text(author, x, y + 7);
+    doc.text(author.replace(asciRegex, ""), x, y + 7);
   };
+  const addGreenPage = function () {
+    doc.addPage();
+    doc.setFillColor(23, 166, 141);
+    doc.rect(0, 0, width, height, "F");
+    addBranding(logoBlack, false);
+    usedYSpace = marginTop;
+  };
+
+  //
 
   //   ----- FIRST PAGE
   doc.setFillColor(23, 166, 141);
@@ -104,42 +116,49 @@ export async function render(chat, ego, isSample = false) {
 
   //    Add participants
   usedYSpace += 10;
-  Object.keys(chat.personColorMap).forEach((key, idx) => {
+  Object.keys(chat.personColorMap).forEach((key) => {
     if (key in chat.personColorMap) {
-      usedYSpace += idx * 13;
-      drawAuthorBubble(key, marginLeft, usedYSpace);
+      if (usedYSpace + 13 > pageYSpace) {
+        addGreenPage();
+      }
+      if (key in chat.personColorMap) {
+        drawAuthorBubble(key, marginLeft, usedYSpace);
+      }
+      usedYSpace += 13;
     }
   });
 
   //   new page
+  addGreenPage();
   usedYSpace = 55;
-  doc.addPage();
-  doc.setFillColor(23, 166, 141);
-  doc.rect(0, 0, width, height, "F");
-  addBranding(logoBlack, false);
-
   //   Add fun Facts
   addHeading("Fun Facts", marginLeft, usedYSpace);
   usedYSpace += 10;
 
   const funFacts = await chat.getFunFacts();
+  const funFactHeight = 40;
+  funFacts.forEach((fact) => {
+    if (fact.name in chat.personColorMap) {
+      if (usedYSpace + funFactHeight > pageYSpace) {
+        addGreenPage();
+      }
 
-  funFacts.forEach((fact, idx) => {
-    usedYSpace += idx * 50;
-    drawAuthorBubble(fact.name, marginLeft, usedYSpace);
-    doc.setFontSize(15);
-    doc.setFont("helvetica", "normal");
+      drawAuthorBubble(fact.name, marginLeft, usedYSpace);
+      doc.setFontSize(15);
+      doc.setFont("helvetica", "normal");
 
-    let factStrings = [];
-    factStrings.push("Number of Words:" + fact.numberOfWords);
-    factStrings.push("Average Message Length:" + fact.averageMessageLength);
-    factStrings.push("Unique words:" + fact.uniqueWords);
-    factStrings.push("Characters in longest Message:" + fact.longestMessage);
+      let factStrings = [];
+      factStrings.push("Number of Words: " + fact.numberOfWords);
+      factStrings.push("Average Message Length: " + fact.averageMessageLength);
+      factStrings.push("Unique words: " + fact.uniqueWords);
+      factStrings.push("Characters in longest Message: " + fact.longestMessage);
 
-    doc.text(factStrings, marginLeft, usedYSpace + 15);
+      doc.text(factStrings, marginLeft, usedYSpace + 15);
+
+      usedYSpace += funFactHeight;
+    }
   });
 
-  console.log(funFacts);
   // // subtitle
   // doc.setFontSize(16);
   // doc.text(15, 30, "Your Chat in your hands.");
@@ -208,6 +227,7 @@ export async function render(chat, ego, isSample = false) {
 
     // Draw message
     if (isSystem) {
+      console.log(splitMessage);
       doc.setTextColor(249, 217, 100);
     } else {
       doc.setTextColor(255, 255, 255);
@@ -217,7 +237,7 @@ export async function render(chat, ego, isSample = false) {
     doc.text(
       isSystem ? messageX + 65 : messageX + paddingMessage,
       messageY + authorHeight,
-      splitMessage,
+      splitMessage.map((m) => m.replace(asciRegex, "")),
       isSystem ? "center" : ""
     );
 
