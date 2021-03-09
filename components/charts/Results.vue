@@ -75,7 +75,7 @@
       <div class="text-h3 font-weight-bold pt-10">Word Cloud</div>
       <ChartsWordCloud :chartdata="chat" class="pb-10" />
     </div>
-    <DownloadPopup :graphs="this.$refs.graphs" :chat="chat" />
+    <DownloadPopup :results="this" :chat="chat" />
   </div>
 </template>
 
