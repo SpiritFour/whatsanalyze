@@ -8,7 +8,7 @@
         <div class="text-body-1">Currently for free! <br /></div>
         <v-dialog v-model="dialog" width="500">
           <template v-slot:activator="{ on }">
-            <v-btn color="#07bc4c" dark v-on="on" @click="download">
+            <v-btn color="#07bc4c" dark v-on="on" @click="() => download()">
               <v-icon>mdi-download</v-icon>Download your Results now!
             </v-btn>
           </template>
@@ -79,7 +79,7 @@ import { downloadBase64File } from "~/functions/utils";
 
 export default {
   name: "DownloadPopup",
-  props: ["results", "chat"],
+  props: ["graphs", "chat"],
   data() {
     return {
       dialog: false,
@@ -93,10 +93,18 @@ export default {
         value: "1",
       });
 
-      let canvas = html2canvas(this.results.$el, {
+      let canvas = html2canvas(this.graphs, {
         scrollX: 0,
         scrollY: -window.scrollY,
+        onclone: function (clonedDoc) {
+          let nonVisibleStuff = clonedDoc.querySelectorAll(
+            ".only-visible-to-html2canvas"
+          );
+          nonVisibleStuff.forEach((y) => (y.style.display = "block"));
+          return clonedDoc;
+        },
       });
+
       let names = this.chat.messagesPerPerson
         .slice(0, 2)
         .map((person) => person.name)
