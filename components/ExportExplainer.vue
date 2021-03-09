@@ -310,14 +310,19 @@ export default {
         this.showInstallPromotion(false);
         // Show the install prompt
         if (this.deferredPrompt) {
+          this.$gtag.event("PWA install displayed", {
+            event_category: "home",
+            event_label: "PWA",
+            value: outcome,
+          });
           this.deferredPrompt.prompt();
           // Wait for the user to respond to the prompt
           const { outcome } = await this.deferredPrompt.userChoice;
           // Optionally, send analytics event with outcome of user choice
 
-          this.$gtag.event("PWA install", {
+          this.$gtag.event("PWA install pressed", {
             event_category: "home",
-            event_label: "lead",
+            event_label: "PWA",
             value: outcome,
           });
 

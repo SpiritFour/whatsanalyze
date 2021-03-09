@@ -88,8 +88,8 @@ export default {
   methods: {
     download() {
       this.$gtag.event("donation-popup-clicked", {
-        event_category: "donation",
-        event_label: "popup-clicked",
+        event_category: "home",
+        event_label: "donation",
         value: "1",
       });
 
@@ -110,8 +110,8 @@ export default {
     },
     paypalButtonPressed() {
       this.$gtag.event("donation-popup-clicked", {
-        event_category: "donation",
-        event_label: "paypal-clicked",
+        event_category: "home",
+        event_label: "donation",
         value: "1",
       });
     },

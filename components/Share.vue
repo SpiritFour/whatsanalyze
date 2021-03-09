@@ -43,7 +43,7 @@ export default {
       let chartName = this.$slots.default[0].componentOptions.tag;
       if (this.canShare) {
         this.$gtag.event("download-graph", {
-          event_category: "graph",
+          event_category: "home",
           event_label: chartName + "-share-pressed",
           value: "1",
         });
@@ -63,7 +63,7 @@ export default {
             .then(() => {
               this.loading = false;
               this.$gtag.event("download-graph", {
-                event_category: "graph",
+                event_category: "home",
                 event_label: chartName + "-shared",
                 value: "1",
               });
@@ -72,14 +72,14 @@ export default {
         });
       } else {
         this.$gtag.event("download-graph", {
-          event_category: "graph",
+          event_category: "home",
           event_label: chartName + "-download-pressed",
           value: "1",
         });
         let a = this.$slots.default[0].child.$refs.canvas.toDataURL();
         downloadBase64File(a, chartName + "-" + this.imageName);
         this.$gtag.event("download-graph", {
-          event_category: "graph",
+          event_category: "home",
           event_label: chartName + "-downloaded",
           value: "1",
         });

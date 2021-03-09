@@ -5,7 +5,14 @@
     <br />
     <v-btn
       to="/"
-      @click="$vuetify.goTo('#fileHandler', { duration: 300, offset: 100 })"
+      @click="
+        $vuetify.goTo('#fileHandler', { duration: 300, offset: 100 });
+        this.$gtag.event('JumpToFilehandler-clicked', {
+          event_category: 'home',
+          event_label: 'lead',
+          value: 1,
+        });
+      "
       color="#07bc4c"
       style="color: #ffffff"
       class="mt-5 text-h6"

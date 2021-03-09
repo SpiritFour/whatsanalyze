@@ -185,7 +185,7 @@ export default {
       this.isSuccess = true;
       this.$gtag.event("file-parsed", {
         event_category: "home",
-        event_label: "lead",
+        event_label: "file",
         value: "1",
       });
     },
@@ -196,7 +196,7 @@ export default {
       this.isSuccess = false;
       this.$gtag.event("file-error", {
         event_category: "home",
-        event_label: "lead",
+        event_label: "file",
         value: "0",
       });
     },
@@ -236,6 +236,11 @@ export default {
     drop(e) {
       let fileList = e.dataTransfer.files;
       this.processFileList(fileList);
+      this.$gtag.event("file-drag-dropped", {
+        event_category: "home",
+        event_label: "file",
+        value: "1",
+      });
     },
 
     requestUploadFile() {

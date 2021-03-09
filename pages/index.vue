@@ -101,7 +101,7 @@ export default {
     Object.keys(this.$route.query).forEach((key) => {
       this.$gtag.event("ref_" + key, {
         event_category: "home",
-        event_label: "lead",
+        event_label: "referral",
         value: "1",
       });
     });

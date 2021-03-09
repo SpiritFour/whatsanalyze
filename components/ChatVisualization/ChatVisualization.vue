@@ -24,8 +24,8 @@
               elevation="10"
               @click="
                 $gtag.event('download-chat-popup-clicked', {
-                  event_category: 'download',
-                  event_label: 'popup-clicked',
+                  event_category: 'home',
+                  event_label: 'lead',
                   value: '1',
                 })
               "
@@ -51,8 +51,8 @@
                 :href="'https://forms.gle/FmX4LKYhMwxs4gYs8'"
                 @click="
                   $gtag.event('download-chat-register-email-clicked', {
-                    event_category: 'download',
-                    event_label: 'popup-clicked',
+                    event_category: 'home',
+                    event_label: 'lead',
                     value: '1',
                   })
                 "
@@ -106,17 +106,27 @@ export default {
   methods: {
     onCreateOrder(data, actions) {
       console.log("order created", data, actions);
+      this.$gtag.event("paypal-opened", {
+        event_category: "home",
+        event_label: "payment",
+        value: "1",
+      });
     },
     onApprove(event) {
       console.log("approved", event);
+      this.$gtag.event("paypal-approved", {
+        event_category: "home",
+        event_label: "payment",
+        value: "100",
+      });
     },
     onError(event) {
       console.log("error", event);
     },
     async download() {
-      this.$gtag.event("donation-download-started", {
-        event_category: "download",
-        event_label: "popup-clicked",
+      this.$gtag.event("download-started", {
+        event_category: "home",
+        event_label: "payment",
         value: "1",
       });
 
