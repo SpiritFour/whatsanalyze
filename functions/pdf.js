@@ -221,7 +221,7 @@ export async function render(chat, ego, isSample = false) {
       doc.text(
         messageX + paddingMessage,
         messageY + paddingMessage,
-        data.author
+        data.author.replace(asciRegex, "")
       );
     }
 
