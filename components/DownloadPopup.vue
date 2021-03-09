@@ -96,7 +96,15 @@ export default {
       let canvas = html2canvas(this.graphs, {
         scrollX: 0,
         scrollY: -window.scrollY,
+        onclone: function (clonedDoc) {
+          let nonVisibleStuff = clonedDoc.querySelectorAll(
+            ".only-visible-to-html2canvas"
+          );
+          nonVisibleStuff.forEach((y) => (y.style.display = "block"));
+          return clonedDoc;
+        },
       });
+
       let names = this.chat.messagesPerPerson
         .slice(0, 2)
         .map((person) => person.name)

@@ -7,6 +7,7 @@
     />
 
     <div ref="graphs">
+      <GlobalHeader class="only-visible-to-html2canvas" />
       <div class="text-h2 font-weight-bold py-10">Chat Timeline</div>
       <div>Messages per Day</div>
       <Share>
