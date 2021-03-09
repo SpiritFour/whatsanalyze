@@ -8,7 +8,7 @@
         <div class="text-body-1">Currently for free! <br /></div>
         <v-dialog v-model="dialog" width="500">
           <template v-slot:activator="{ on }">
-            <v-btn color="#07bc4c" dark v-on="on" @click="download">
+            <v-btn color="#07bc4c" dark v-on="on" @click="() => download()">
               <v-icon>mdi-download</v-icon>Download your Results now!
             </v-btn>
           </template>
