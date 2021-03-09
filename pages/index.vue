@@ -63,6 +63,13 @@ export default {
       page,
     };
   },
+  pwa: {
+    manifest: {
+      name: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+      description:
+        "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
+    },
+  },
   head: {
     titleTemplate: "WhatsAnalyze - The WhatsApp Chat Analyzer",
     title: "WhatsAnalyze - The WhatsApp Chat Analyzer",
