@@ -26,10 +26,7 @@ export default {
   },
   pwa: {
     manifest: {
-      name: "Whats Analyze - The WhatsApp Chat Analyzer",
       short_name: "whatsanalyze.com",
-      description:
-        "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
       start_url: "/",
       display: "standalone",
       background_color: "#21a68d",
