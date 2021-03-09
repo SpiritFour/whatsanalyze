@@ -77,11 +77,6 @@
 </template>
 
 <script>
-// import * as JsPDF from "jspdf";
-// import html2canvas from "html2canvas";
-// // eslint-disable-next-line no-unused-vars
-// import DOMPurify from "dompurify";
-
 export default {
   props: ["chat", "attachments"],
 };
