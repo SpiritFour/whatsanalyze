@@ -29,6 +29,8 @@ export async function render(chat, ego, isSample = false) {
   const authorHeight = 9;
   const timeHeight = 3;
 
+  const backgroundGreenHex = "#21a68d";
+
   //   Variable to track y-coordinate / used space on page
   let usedYSpace = 0;
 
@@ -53,9 +55,12 @@ export async function render(chat, ego, isSample = false) {
     return messageY;
   };
   const hexToRgb = function (hex) {
-    if (hex.length != 6) {
-      throw "Only six-digit hex colors are allowed.";
+    if (hex.length != 7) {
+      console.log(hex);
+      throw "Only seven-digit hex colors are allowed.";
     }
+    // remove #
+    hex = hex.slice(1);
 
     var aRgbHex = hex.match(/.{1,2}/g);
     var aRgb = [
@@ -101,8 +106,15 @@ export async function render(chat, ego, isSample = false) {
   const drawAuthorBubble = function (author, x, y) {
     doc.setFont("myFont", "bold");
     doc.setFontSize(20);
-    const rgbAuthorColor = hexToRgb(chat.personColorMap[author].slice(1));
-    doc.setFillColor(rgbAuthorColor[0], rgbAuthorColor[1], rgbAuthorColor[2]);
+
+    let personHexColor = chat.personColorMap[author];
+    // background color should not be used
+    if (backgroundGreenHex === personHexColor) {
+      personHexColor = "#20C5FF";
+    }
+    const personRgbColor = hexToRgb(personHexColor);
+    doc.setFillColor(personRgbColor[0], personRgbColor[1], personRgbColor[2]);
+
     const author_width = doc.getTextWidth(author);
 
     doc.roundedRect(x - 3, y, author_width + 6, 10, 5, 5, "F");
@@ -220,13 +232,11 @@ export async function render(chat, ego, isSample = false) {
       doc.setFont("myFont", "normal");
 
       if (data.author in chat.personColorMap) {
-        const rgbAuthorColor = hexToRgb(
-          chat.personColorMap[data.author].slice(1)
-        );
+        const personRgbColor = hexToRgb(chat.personColorMap[data.author]);
         doc.setTextColor(
-          rgbAuthorColor[0],
-          rgbAuthorColor[1],
-          rgbAuthorColor[2]
+          personRgbColor[0],
+          personRgbColor[1],
+          personRgbColor[2]
         );
       }
 
