@@ -8,6 +8,7 @@
       dark
       style="position: absolute; right: 0; top: 0"
       :loading="loading"
+      data-html2canvas-ignore="true"
     >
       <v-icon size="35" v-if="canShare">mdi-share</v-icon>
       <v-icon size="35" v-else>mdi-download</v-icon>
