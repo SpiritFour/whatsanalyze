@@ -7,10 +7,28 @@
     </h3>
 
     <hr width="70%" color="white" />
+    <a
+      class="black--text"
+      target="_blank"
+      href="https://github.com/SpiritFour/whatsanalyze"
+    >
+      <h3>
+        <img
+          style="vertical-align: sub"
+          alt="github logo"
+          src="~/assets/img/github/GitHub-Mark-Light-32px.png"
+        />
+
+        This project is <b>open-source</b> and all code is <b>public</b> on
+        <b>github</b>
+      </h3>
+    </a>
+    <br />
+
     <h3>
       <img
         src="~/assets/whatsanalyze-logo-white.png"
-        height="22px"
+        height="32px"
         alt="whatsanalyze logo"
         style="vertical-align: sub"
       />

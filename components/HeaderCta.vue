@@ -1,9 +1,10 @@
 <template>
   <div>
-    <div class="text-h4 font-weight-bold text-lg-h1">
+    <div class="text-h4 font-weight-bold text-lg-h2">
       {{ titelH1 }}
     </div>
-    <div class="text-h6 text-lg-h4">
+    <br />
+    <div class="text-h6 text-lg-h5">
       {{ titelH2 }}
     </div>
     <br />
@@ -17,8 +18,34 @@
       class="py-1 px-3 text-lg-h6"
     >
       <v-icon color="black" style="vertical-align: sub"> mdi-security </v-icon>
-      <strong>No</strong> chat <strong>data</strong> is sent to a server it runs
-      only <strong>locally</strong> in your browser.
+      <b>No</b> chat <b>data</b> is sent to a server all code runs
+      <b>locally</b> in your browser.
+    </div>
+    <br />
+    <div
+      style="
+        background: rgba(2, 111, 140, 0.7);
+        color: black;
+        border-radius: 10px;
+        width: fit-content;
+      "
+      class="py-1 px-3 text-lg-h6"
+    >
+      <img
+        style="vertical-align: sub"
+        alt="github logo"
+        height="22"
+        src="~/assets/img/github/GitHub-Mark-32px.png"
+      />
+      This project is <b>open-source</b> and all code is <b>public</b> on
+      <b>github</b>.
+      <a
+        class="black--text"
+        target="_blank"
+        href="https://github.com/SpiritFour/whatsanalyze"
+      >
+        Check it yourself.
+      </a>
     </div>
   </div>
 </template>
