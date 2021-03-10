@@ -47,3 +47,7 @@ $c-red-dark-accent: #911146;
 .top-color {
   background-color: $c-blue-accent;
 }
+
+.only-visible-to-html2canvas {
+  display: none;
+}
