@@ -18,7 +18,7 @@
       class="py-1 px-3 text-lg-h6"
     >
       <v-icon color="black" style="vertical-align: sub"> mdi-security </v-icon>
-      <b>No</b> chat <b>data</b> is sent to a server all code runs
+      <b>No</b> chat <b>data</b> is sent to a server! All code runs
       <b>locally</b> in your browser.
     </div>
     <br />
