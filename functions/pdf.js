@@ -1,8 +1,18 @@
 import logoBlack from "/assets/whatsanalyze-logo-black.png";
 import logoWhite from "/assets/whatsanalyze-logo-white.png";
+import myFont from "/assets/pdf-fonts/Helvetica.js";
 
 import { getDateString } from "~/functions/utils";
 import jsPDF from "jspdf";
+
+var callAddFont = function () {
+  this.addFileToVFS("myFont.ttf", myFont.normal);
+  this.addFont("myFont.ttf", "myFont", "normal");
+
+  this.addFileToVFS("myFont.ttf", myFont.bold);
+  this.addFont("myFont.ttf", "myFont", "bold");
+};
+jsPDF.API.events.push(["addFonts", callAddFont]);
 
 export async function render(chat, ego, isSample = false) {
   // Default export is a4 paper, portrait, using millimeters for units
@@ -19,12 +29,16 @@ export async function render(chat, ego, isSample = false) {
   const authorHeight = 9;
   const timeHeight = 3;
 
+  const backgroundGreenHex = "#21a68d";
+
   //   Variable to track y-coordinate / used space on page
   let usedYSpace = 0;
 
   //    --- HELPER FUNCTIONS
+
+  // We might need to strip out some chars, however we are now using a font with _some_ utf8 support
   // eslint-disable-next-line no-control-regex
-  const asciRegex = new RegExp(/[^\x00-\x7F]/g);
+  // const asciRegex = new RegExp(/[^\x00-\x7F]/g);
 
   // calculates height for new message
   const calcMessageBodyHeight = function (numLines) {
@@ -41,9 +55,12 @@ export async function render(chat, ego, isSample = false) {
     return messageY;
   };
   const hexToRgb = function (hex) {
-    if (hex.length != 6) {
-      throw "Only six-digit hex colors are allowed.";
+    if (hex.length != 7) {
+      console.log(hex);
+      throw "Only seven-digit hex colors are allowed.";
     }
+    // remove #
+    hex = hex.slice(1);
 
     var aRgbHex = hex.match(/.{1,2}/g);
     var aRgb = [
@@ -65,7 +82,7 @@ export async function render(chat, ego, isSample = false) {
     if (addText) {
       doc.setFontSize(20);
       doc.setTextColor(0, 0, 0);
-      doc.setFont("helvetica", "bold");
+      doc.setFont("myFont", "bold");
       doc.text(x, y + 10, "WhatsAnalyze");
     }
   };
@@ -87,16 +104,21 @@ export async function render(chat, ego, isSample = false) {
     doc.line(x, y + 5, x + 100, y + 5); // horizontal line
   };
   const drawAuthorBubble = function (author, x, y) {
-    const rgbAuthorColor = hexToRgb(chat.personColorMap[author].slice(1));
-    doc.setFillColor(rgbAuthorColor[0], rgbAuthorColor[1], rgbAuthorColor[2]);
-    // This line does not properly work so for now we give them the same width
-    // TODO: Check with non asci
-    // const author_width = doc.getTextWidth(author);
-
-    doc.roundedRect(x - 3, y, width / 2, 10, 5, 5, "F");
-    doc.setFont("helvetica", "bold");
+    doc.setFont("myFont", "bold");
     doc.setFontSize(20);
-    doc.text(author.replace(asciRegex, ""), x, y + 7);
+
+    let personHexColor = chat.personColorMap[author];
+    // background color should not be used
+    if (backgroundGreenHex === personHexColor) {
+      personHexColor = "#20C5FF";
+    }
+    const personRgbColor = hexToRgb(personHexColor);
+    doc.setFillColor(personRgbColor[0], personRgbColor[1], personRgbColor[2]);
+
+    const author_width = doc.getTextWidth(author);
+
+    doc.roundedRect(x - 3, y, author_width + 6, 10, 5, 5, "F");
+    doc.text(author, x, y + 7);
   };
   const addGreenPage = function (showText = false) {
     doc.addPage();
@@ -105,8 +127,6 @@ export async function render(chat, ego, isSample = false) {
     addBranding(logoBlack, showText);
     usedYSpace = marginTop;
   };
-
-  //
 
   //   ----- FIRST PAGE
   doc.setFillColor(23, 166, 141);
@@ -148,7 +168,7 @@ export async function render(chat, ego, isSample = false) {
 
       drawAuthorBubble(fact.name, marginLeft, usedYSpace);
       doc.setFontSize(15);
-      doc.setFont("helvetica", "normal");
+      doc.setFont("myFont", "normal");
 
       let factStrings = [];
       factStrings.push("Number of Words: " + fact.numberOfWords);
@@ -166,7 +186,7 @@ export async function render(chat, ego, isSample = false) {
   addPage();
   doc.setTextColor(0, 0, 0);
   doc.setFontSize(fontSize);
-  doc.setFont("helvetica", "normal");
+  doc.setFont("myFont", "normal");
   const lineHeight = (fontSize * 1.5) / 3.64; // line + padding top and bottom
 
   //   Iterate all messages
@@ -209,23 +229,22 @@ export async function render(chat, ego, isSample = false) {
     // draw author
     if (!isSystem) {
       doc.setFontSize(fontSize / 1.3);
+      doc.setFont("myFont", "normal");
 
       if (data.author in chat.personColorMap) {
-        const rgbAuthorColor = hexToRgb(
-          chat.personColorMap[data.author].slice(1)
-        );
+        const personRgbColor = hexToRgb(chat.personColorMap[data.author]);
         doc.setTextColor(
-          rgbAuthorColor[0],
-          rgbAuthorColor[1],
-          rgbAuthorColor[2]
+          personRgbColor[0],
+          personRgbColor[1],
+          personRgbColor[2]
         );
       }
 
-      doc.setFont("helvetica", "bold");
+      doc.setFont("myFont", "bold");
       doc.text(
         messageX + paddingMessage,
         messageY + paddingMessage,
-        data.author.replace(asciRegex, "")
+        data.author //replace(asciRegex, "")
       );
     }
 
@@ -237,11 +256,11 @@ export async function render(chat, ego, isSample = false) {
       doc.setTextColor(255, 255, 255);
     }
     doc.setFontSize(fontSize);
-    doc.setFont("helvetica", "normal");
+    doc.setFont("myFont", "normal");
     doc.text(
       isSystem ? messageX + 65 : messageX + paddingMessage,
       messageY + authorHeight,
-      splitMessage.map((m) => m.replace(asciRegex, "")),
+      splitMessage, //.map((m) => m.replace(asciRegex, "")),
       isSystem ? "center" : ""
     );
 
