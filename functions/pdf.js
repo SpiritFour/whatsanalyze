@@ -114,6 +114,7 @@ export async function render(chat, ego, isSample = false) {
     }
     const personRgbColor = hexToRgb(personHexColor);
     doc.setFillColor(personRgbColor[0], personRgbColor[1], personRgbColor[2]);
+
     const author_width = doc.getTextWidth(author);
 
     doc.roundedRect(x - 3, y, author_width + 6, 10, 5, 5, "F");
