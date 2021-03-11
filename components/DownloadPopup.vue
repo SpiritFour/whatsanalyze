@@ -155,20 +155,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.cta {
-  text-align: center;
-  background: $c-white;
-  padding: 2em;
-}
-.link {
-  border: none;
-  /*optional*/
-  font-family: arial, sans-serif;
-  /*input has OS specific font-family*/
-  color: #069;
-  text-decoration: underline;
-  cursor: pointer;
-}
-</style>
