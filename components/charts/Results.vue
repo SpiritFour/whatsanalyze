@@ -21,7 +21,9 @@
       />
       <ChartsTextStats :chat="chat" />
 
-      <ChartsFunFacts :chartdata="chat" class="pb-10" />
+      <share :use-html2-canvas="true">
+        <ChartsFunFacts :chartdata="chat" class="pb-10" />
+      </share>
 
       <!-- Make dropdown -> messages or words -->
       <div class="text-h3 font-weight-bold py-10">Messages per</div>
