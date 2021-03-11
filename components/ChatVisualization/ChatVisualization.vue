@@ -19,8 +19,8 @@
               v-bind="attrs"
               v-on="on"
               color="#07bc4c"
-              style="color: white"
-              class="mt-5 mb-5 text-h6"
+              style="color: white; max-width: 100%"
+              class="mt-5 mb-5 text-body-2 text-md-h6"
               elevation="10"
               @click="
                 $gtag.event('download-chat-popup-clicked', {
@@ -138,20 +138,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.cta {
-  text-align: center;
-  background: $c-white;
-  padding: 2em;
-}
-.link {
-  border: none;
-  /*optional*/
-  font-family: arial, sans-serif;
-  /*input has OS specific font-family*/
-  color: #069;
-  text-decoration: underline;
-  cursor: pointer;
-}
-</style>
