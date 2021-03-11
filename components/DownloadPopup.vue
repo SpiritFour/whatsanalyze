@@ -79,7 +79,7 @@ import { downloadBase64File } from "~/functions/utils";
 
 export default {
   name: "DownloadPopup",
-  props: ["results", "chat"],
+  props: ["chat"],
   data() {
     return {
       dialog: false,
@@ -87,16 +87,32 @@ export default {
   },
   methods: {
     download() {
-      console.log("download here", this.results);
+      // console.log("download here", this.results);
       this.$gtag.event("donation-popup-clicked", {
         event_category: "donation",
         event_label: "popup-clicked",
         value: "1",
       });
 
-      let canvas = html2canvas(this.results.$refs.graphs, {
+      let additionalHeight = 0;
+      document
+        .querySelectorAll(".additional-height")
+        .forEach((a) => (additionalHeight += a.clientHeight));
+
+      let negativeHeight = 0;
+      document
+        .querySelectorAll("[remove-height-in-html2-canvas]")
+        .forEach((a) => (negativeHeight -= a.clientHeight));
+
+      let normalHeight = document.querySelector("#download-graphs")
+        .clientHeight;
+
+      //wordcloud
+      let canvas = html2canvas(document.querySelector("#download-graphs"), {
         scrollX: 0,
         scrollY: -window.scrollY,
+        //somehow now its 64 pixel to high
+        height: normalHeight + additionalHeight + negativeHeight - 64,
         onclone: function (clonedDoc) {
           let nonVisibleStuff = clonedDoc.querySelectorAll(
             ".only-visible-to-html2canvas"
@@ -113,7 +129,7 @@ export default {
       canvas.then((canvas) => {
         downloadBase64File(
           canvas.toDataURL(),
-          "whatsanlazye-results-" + names + ".png"
+          "whatsanlayze-results-" + names + ".png"
         );
       });
     },
