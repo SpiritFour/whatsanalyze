@@ -10,7 +10,6 @@
       :loading="loading"
       data-html2canvas-ignore
     >
-      {{ $vuetify.breakpoint.name }}
       <v-icon size="35" v-if="canShare">mdi-share</v-icon>
       <v-icon size="35" v-else>mdi-download</v-icon>
     </v-btn>
