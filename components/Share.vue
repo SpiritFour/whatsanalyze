@@ -10,6 +10,7 @@
       :loading="loading"
       data-html2canvas-ignore
     >
+      {{ $vuetify.breakpoint.name }}
       <v-icon size="35" v-if="canShare">mdi-share</v-icon>
       <v-icon size="35" v-else>mdi-download</v-icon>
     </v-btn>
@@ -50,7 +51,16 @@ export default {
         // extremly ugly but could not find a way around this
         // scrollY somehow is ignored in the html2canvas options
         let currScroll = window.scrollY;
-        window.scrollTo(0, 340);
+
+        let offset = 0;
+        if (this.$vuetify.breakpoint.xsOnly) {
+          offset = 340;
+        } else if (this.$vuetify.breakpoint.smOnly) {
+          offset = 280;
+        } else if (this.$vuetify.breakpoint.mdAndUp) {
+          offset = 260;
+        }
+        window.scrollTo(0, offset);
         return html2canvas(this.$slots.default[0].child.$el).then((_) => {
           window.scrollTo(0, currScroll);
           return _;
