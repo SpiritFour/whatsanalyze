@@ -1,5 +1,5 @@
 <template>
-  <div class="foot py-7">
+  <div class="foot py-7 additional-height">
     <h3 class="my-7">
       <nuxt-link :to="{ name: 'whatsapp-to-pdf' }">
         Export your WhatsApp Chat directly to PDF
