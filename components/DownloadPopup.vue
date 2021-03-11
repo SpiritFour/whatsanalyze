@@ -95,7 +95,7 @@ export default {
     };
   },
   methods: {
-    download() {
+    download: function () {
       this.loading = true;
       this.$gtag.event("donation-popup-clicked", {
         event_category: "donation",
@@ -103,7 +103,7 @@ export default {
         value: "1",
       });
 
-      let a = () => {
+      setTimeout(() => {
         let additionalHeight = 0;
         document
           .querySelectorAll(".additional-height")
@@ -143,9 +143,7 @@ export default {
           );
           this.loading = false;
         });
-      };
-
-      setTimeout(a, 250);
+      }, 250);
     },
     paypalButtonPressed() {
       this.$gtag.event("donation-popup-clicked", {
