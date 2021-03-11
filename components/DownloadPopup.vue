@@ -97,16 +97,13 @@ export default {
   methods: {
     download() {
       this.loading = true;
-      // console.log("download here", this.results);
       this.$gtag.event("donation-popup-clicked", {
         event_category: "donation",
         event_label: "popup-clicked",
         value: "1",
       });
-      console.log("download");
 
       let a = () => {
-        console.log("start");
         let additionalHeight = 0;
         document
           .querySelectorAll(".additional-height")
