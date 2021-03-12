@@ -35,7 +35,7 @@
       >
         <v-sheet
           elevation="1"
-          max-width="50%"
+          max-width="70%"
           rounded="lg"
           class="pa-2 ma-2"
           color="rgb(38, 45, 49)"
@@ -157,14 +157,12 @@ export default {
 }
 .chat {
   scroll-snap-type: y mandatory;
-
   border-radius: 10px;
   width: 100%;
   height: 90vh;
   background-repeat: initial;
   overflow: scroll;
   overflow-x: hidden;
-
   background-color: rgb(13, 20, 24);
   background-image: url("https://whatsapp-chat-parser.netlify.app/static/media/bg-dark.ffb9199c.png");
 }
