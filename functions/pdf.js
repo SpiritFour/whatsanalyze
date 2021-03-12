@@ -291,7 +291,6 @@ export async function render(chat, attachments, ego, isSample = false) {
 
   for (const idx in messages) {
     const data = messages[idx];
-    console.log(data);
     let isSystem = "System" === data.author;
     const isEgo = ego === data.author;
 
@@ -335,8 +334,10 @@ export async function render(chat, attachments, ego, isSample = false) {
       : marginLeft + paddingMessage; // get start X Coordinate of Message
 
     // Draw bubble
+    let offset = 0;
     if (isSystem) {
       messageX = 40;
+      offset = (120 - messageWidth) / 2;
       doc.setFillColor(53, 53, 38);
     } else if (isEgo) {
       doc.setFillColor(13, 97, 98);
@@ -344,9 +345,9 @@ export async function render(chat, attachments, ego, isSample = false) {
       doc.setFillColor(38, 45, 49);
     }
     doc.roundedRect(
-      messageX,
+      messageX + offset,
       messageY - 1,
-      messageWidth + 5,
+      messageWidth + 10,
       isSystem
         ? messageHeight + 2 * paddingMessage
         : messageHeight + authorHeight + timeHeight,
