@@ -394,7 +394,6 @@ export async function render(chat, attachments, ego, isSample = false) {
 
     // Draw message
     if (!hasAttachment) {
-      console.log(splitMessage);
       if (isSystem) {
         doc.setTextColor(249, 217, 100);
       } else {
