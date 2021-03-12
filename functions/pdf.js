@@ -72,7 +72,7 @@ export async function render(chat, ego, isSample = false) {
   };
 
   // calculates height for new message
-  const calcMessageBodyHeight = function (numLines) {
+  const calcMessageBodyHeight = function (numLines, isSystem) {
     let messageY = marginTop + usedYSpace;
     const messageYSpace = numLines * lineHeight + authorHeight + timeHeight; // Height of Messages
     // Check if lines fit on page,
@@ -82,7 +82,9 @@ export async function render(chat, ego, isSample = false) {
       messageY = marginTop;
       usedYSpace = 0;
     }
-    usedYSpace += messageMarginBottom + messageYSpace;
+    usedYSpace += isSystem
+      ? messageMarginBottom + messageYSpace - authorHeight + timeHeight
+      : messageMarginBottom + messageYSpace;
     return messageY;
   };
   const hexToRgb = function (hex) {
@@ -294,7 +296,7 @@ export async function render(chat, ego, isSample = false) {
     const numLines = splitMessage.length;
     const messageHeight = lineHeight * numLines;
 
-    let messageY = calcMessageBodyHeight(numLines); // get start Y Coordinate of Message
+    let messageY = calcMessageBodyHeight(numLines, isSystem); // get start Y Coordinate of Message
     let messageX = isEgo ? 58 : marginLeft + paddingMessage; // get start X Coordinate of Message
 
     // Draw bubble
