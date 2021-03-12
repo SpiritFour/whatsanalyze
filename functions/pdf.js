@@ -37,6 +37,8 @@ export async function render(chat, ego, isSample = false) {
     Math.abs((firstDate - lastDate) / (24 * 60 * 60 * 1000))
   );
 
+  console.log(chat);
+
   //   Variable to track y-coordinate / used space on page
   let usedYSpace = 0;
 
@@ -292,6 +294,7 @@ export async function render(chat, ego, isSample = false) {
       isSystem = true;
     }
 
+    doc.setFontSize(fontSize);
     const splitMessage = doc.splitTextToSize(data.message, isSystem ? 120 : 60);
     const numLines = splitMessage.length;
     const messageHeight = lineHeight * numLines;
@@ -344,7 +347,6 @@ export async function render(chat, ego, isSample = false) {
 
     // Draw message
     if (isSystem) {
-      console.log(splitMessage);
       doc.setTextColor(249, 217, 100);
     } else {
       doc.setTextColor(255, 255, 255);
