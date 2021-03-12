@@ -8,10 +8,18 @@
         <div class="text-h3 font-weight-bold pb-4">
           Download your Chat as a PDF
         </div>
+        <v-progress-linear
+          v-show="isLoading"
+          indeterminate
+          color="blue"
+          class="mb-0"
+        ></v-progress-linear>
+
         <div class="text-body-1">
           Get your full WhatsApp chat <br />
-          for 3,99 $ as a PDF instantly.
+          for 3.99 € as a PDF instantly.
         </div>
+
         <v-dialog v-model="showDownloadPopup" width="550">
           <template v-slot:activator="{ on, attrs }">
             <v-btn
@@ -19,8 +27,8 @@
               v-bind="attrs"
               v-on="on"
               color="#07bc4c"
-              style="color: white"
-              class="mt-5 mb-5 text-h6"
+              style="color: white; max-width: 100%"
+              class="mt-5 mb-5 text-body-2 text-md-h6"
               elevation="10"
               @click="
                 $gtag.event('download-chat-popup-clicked', {
@@ -98,19 +106,24 @@ export default {
     return {
       showDownloadPopup: false,
       ego: this.chat.messagesPerPerson[0].name,
+      isLoading: false,
     };
   },
   methods: {
     setEgo(ego) {
       this.ego = ego;
     },
-    download() {
+    async download() {
       this.$gtag.event("download-pdf", {
         event_category: "download",
         event_label: "download-pdf",
         value: "10",
       });
-      render(this.chat.chatObject, this.chat.personColorMap, this.ego);
+      this.isLoading = true;
+      let done = await render(this.chat, this.attachments, this.ego, false);
+      if (done) {
+        this.isLoading = false;
+      }
     },
     onCreateOrder(data, actions) {
       console.log("approved", event);
@@ -118,7 +131,7 @@ export default {
       console.log("order created", data, actions);
     },
     onApprove(event) {
-      render(this.chat, this.ego, false);
+      render(this.chat, this.attachments, this.ego, false);
       console.log("approved", event);
     },
     onError(event) {
@@ -126,32 +139,19 @@ export default {
 
       console.log("error", event);
     },
-    downloadSample() {
+    async downloadSample() {
       this.$gtag.event("download-sample-pdf", {
         event_category: "home",
         event_label: "download-sample-pdf",
         value: "5",
       });
-      // download first 100 messages only
-      render(this.chat, this.ego, true);
+      this.isLoading = true;
+      // download sample
+      let done = await render(this.chat, this.attachments, this.ego, true);
+      if (done) {
+        this.isLoading = false;
+      }
     },
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.cta {
-  text-align: center;
-  background: $c-white;
-  padding: 2em;
-}
-.link {
-  border: none;
-  /*optional*/
-  font-family: arial, sans-serif;
-  /*input has OS specific font-family*/
-  color: #069;
-  text-decoration: underline;
-  cursor: pointer;
-}
-</style>

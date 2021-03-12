@@ -1,14 +1,24 @@
 <template>
-  <v-col class="my-4 mb-16">
+  <v-col class="my-4 mt-10">
     <v-row justify="center">
       <div class="cta my-md-4">
         <div class="text-h3 font-weight-bold pb-4">
           Download all Graphs at once!
         </div>
-        <div class="text-body-1">Currently for free! <br /></div>
-        <v-dialog v-model="dialog" width="500">
+        <div class="text-body-1 pb-2">All for free, just for you ❤️️</div>
+        <div class="text-body-2 pb-4">
+          You might want to wait until the <b>Word Cloud</b> is finished
+          arranging.
+        </div>
+        <v-dialog v-model="dialog" width="600">
           <template v-slot:activator="{ on }">
-            <v-btn color="#07bc4c" dark v-on="on" @click="() => download()">
+            <v-btn
+              color="#07bc4c"
+              dark
+              v-on="on"
+              @click="download"
+              :loading="loading"
+            >
               <v-icon>mdi-download</v-icon>Download your Results now!
             </v-btn>
           </template>
@@ -58,13 +68,17 @@
               </form>
             </v-row>
             <v-divider></v-divider>
-
+            <v-progress-linear
+              v-if="loading"
+              indeterminate
+              color="blue"
+              class="mb-0"
+            ></v-progress-linear>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="red darken-1" text @click="dialog = false">
                 Close
               </v-btn>
-              <v-btn color="primary" text :loading="true"> Download </v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -79,43 +93,62 @@ import { downloadBase64File } from "~/functions/utils";
 
 export default {
   name: "DownloadPopup",
-  props: ["results", "chat"],
+  props: ["chat"],
   data() {
     return {
       dialog: false,
+      loading: false,
     };
   },
   methods: {
-    download() {
-      console.log("download here", this.results);
+    download: function () {
+      this.loading = true;
       this.$gtag.event("donation-popup-clicked", {
         event_category: "donation",
         event_label: "popup-clicked",
         value: "1",
       });
 
-      let canvas = html2canvas(this.results.$refs.graphs, {
-        scrollX: 0,
-        scrollY: -window.scrollY,
-        onclone: function (clonedDoc) {
-          let nonVisibleStuff = clonedDoc.querySelectorAll(
-            ".only-visible-to-html2canvas"
-          );
-          nonVisibleStuff.forEach((y) => (y.style.display = "block"));
-          return clonedDoc;
-        },
-      });
+      setTimeout(() => {
+        let additionalHeight = 0;
+        document
+          .querySelectorAll(".additional-height")
+          .forEach((a) => (additionalHeight += a.clientHeight));
 
-      let names = this.chat.messagesPerPerson
-        .slice(0, 2)
-        .map((person) => person.name)
-        .join("-");
-      canvas.then((canvas) => {
-        downloadBase64File(
-          canvas.toDataURL(),
-          "whatsanlazye-results-" + names + ".png"
-        );
-      });
+        let negativeHeight = 0;
+        document
+          .querySelectorAll("[remove-height-in-html2-canvas]")
+          .forEach((a) => (negativeHeight -= a.clientHeight));
+
+        let normalHeight = document.querySelector("#download-graphs")
+          .clientHeight;
+
+        //wordcloud
+        let canvas = html2canvas(document.querySelector("#download-graphs"), {
+          scrollX: 0,
+          scrollY: -window.scrollY,
+          height: normalHeight + additionalHeight + negativeHeight,
+          onclone: function (clonedDoc) {
+            let nonVisibleStuff = clonedDoc.querySelectorAll(
+              ".only-visible-to-html2canvas"
+            );
+            nonVisibleStuff.forEach((y) => (y.style.display = "block"));
+            return clonedDoc;
+          },
+        });
+
+        let names = this.chat.messagesPerPerson
+          .slice(0, 2)
+          .map((person) => person.name)
+          .join("-");
+        canvas.then((canvas) => {
+          downloadBase64File(
+            canvas.toDataURL(),
+            "whatsanlayze-results-" + names + ".png"
+          );
+          this.loading = false;
+        });
+      }, 250);
     },
     paypalButtonPressed() {
       this.$gtag.event("donation-popup-clicked", {
@@ -127,20 +160,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.cta {
-  text-align: center;
-  background: $c-white;
-  padding: 2em;
-}
-.link {
-  border: none;
-  /*optional*/
-  font-family: arial, sans-serif;
-  /*input has OS specific font-family*/
-  color: #069;
-  text-decoration: underline;
-  cursor: pointer;
-}
-</style>

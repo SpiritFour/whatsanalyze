@@ -2,7 +2,7 @@
   <v-app>
     <GlobalHeader />
 
-    <v-main>
+    <v-main style="overflow-x: hidden">
       <nuxt />
     </v-main>
 
