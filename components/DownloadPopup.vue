@@ -12,7 +12,13 @@
         </div>
         <v-dialog v-model="dialog" width="600">
           <template v-slot:activator="{ on }">
-            <v-btn color="#07bc4c" dark v-on="on" @click="download">
+            <v-btn
+              color="#07bc4c"
+              dark
+              v-on="on"
+              @click="download"
+              :loading="loading"
+            >
               <v-icon>mdi-download</v-icon>Download your Results now!
             </v-btn>
           </template>
@@ -121,8 +127,7 @@ export default {
         let canvas = html2canvas(document.querySelector("#download-graphs"), {
           scrollX: 0,
           scrollY: -window.scrollY,
-          //somehow now its 64 pixel to high
-          height: normalHeight + additionalHeight + negativeHeight - 64,
+          height: normalHeight + additionalHeight + negativeHeight,
           onclone: function (clonedDoc) {
             let nonVisibleStuff = clonedDoc.querySelectorAll(
               ".only-visible-to-html2canvas"
