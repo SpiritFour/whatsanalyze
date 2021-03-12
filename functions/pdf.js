@@ -325,8 +325,12 @@ export async function render(chat, attachments, ego, isSample = false) {
       ? 120
       : singleLineTextWidth;
     // It might be needed to adjust to author width!
-    if (messageWidth < 20) {
-      messageWidth = 20;
+    doc.setFontSize(fontSize / 1.3);
+    doc.setFont("myFont", "bold");
+    const authorWidth = doc.getTextWidth(data.author);
+
+    if (messageWidth < authorWidth) {
+      messageWidth = authorWidth + 15;
     }
 
     let messageX = isEgo
@@ -358,7 +362,6 @@ export async function render(chat, attachments, ego, isSample = false) {
 
     // draw author
     if (!isSystem) {
-      doc.setFontSize(fontSize / 1.3);
       doc.setFont("myFont", "normal");
 
       if (data.author in chat.personColorMap) {
@@ -373,7 +376,7 @@ export async function render(chat, attachments, ego, isSample = false) {
       doc.text(
         messageX + paddingMessage,
         messageY + paddingMessage,
-        data.author //replace(asciRegex, "")
+        data.author
       );
     }
 
