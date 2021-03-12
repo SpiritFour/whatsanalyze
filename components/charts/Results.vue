@@ -21,9 +21,14 @@
       />
       <ChartsTextStats :chat="chat" />
 
-      <share :use-html2-canvas="true">
-        <ChartsFunFacts :chartdata="chat" class="pb-10" />
-      </share>
+      <Share :use-html2-canvas="true">
+        <ChartsFunFacts
+          :chartdata="chat"
+          class="pb-10"
+          data-html2canvas-ignore
+          remove-height-in-html2-canvas
+        />
+      </Share>
 
       <!-- Make dropdown -> messages or words -->
       <div class="text-h3 font-weight-bold py-10">Messages per</div>
@@ -47,6 +52,28 @@
         </v-col>
       </v-row>
 
+      <v-row>
+        <v-col cols="12" sm="6">
+          <div class="text-h4 font-weight-bold">Month</div>
+          <Share>
+            <ChartsRadarChart
+              :chartdata="chat"
+              dataGrouping="weekly"
+              class="py-10"
+            />
+          </Share>
+        </v-col>
+        <v-col cols="12" sm="6">
+          <div class="text-h4 font-weight-bold">Weekday</div>
+          <Share>
+            <ChartsRadarChart
+              :chartdata="chat"
+              dataGrouping="daily"
+              class="py-10"
+            />
+          </Share>
+        </v-col>
+      </v-row>
       <!--  Add workcloud with emojies only  -->
       <div class="text-h3 font-weight-bold pt-10">Word Cloud</div>
       <ChartsWordCloud id="wordcloud" :chartdata="chat" class="px-10" />
