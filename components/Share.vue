@@ -18,6 +18,7 @@
 
 <script>
 import { downloadBase64File } from "~/functions/utils";
+import html2canvas from "html2canvas";
 
 export default {
   name: "Share",
@@ -25,6 +26,10 @@ export default {
     imageName: {
       type: String,
       default: "whatsanalyze.png",
+    },
+    useHtml2Canvas: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -40,16 +45,42 @@ export default {
     };
   },
   methods: {
-    share() {
+    async getCanvas() {
+      if (this.useHtml2Canvas) {
+        // extremly ugly but could not find a way around this
+        // scrollY somehow is ignored in the html2canvas options
+        let currScroll = window.scrollY;
+
+        let offset = 0;
+        if (this.$vuetify.breakpoint.xsOnly) {
+          offset = 340;
+        } else if (this.$vuetify.breakpoint.smOnly) {
+          offset = 280;
+        } else if (this.$vuetify.breakpoint.mdAndUp) {
+          offset = 260;
+        }
+        window.scrollTo(0, offset);
+        return html2canvas(this.$slots.default[0].child.$el).then((_) => {
+          window.scrollTo(0, currScroll);
+          return _;
+        });
+      } else {
+        return this.$slots.default[0].child.$refs.canvas;
+      }
+    },
+    async share() {
       let chartName = this.$slots.default[0].componentOptions.tag;
+      this.loading = true;
+      let canvas = await this.getCanvas();
+      this.loading = false;
+
       if (this.canShare) {
         this.$gtag.event("download-graph", {
           event_category: "graph",
           event_label: chartName + "-share-pressed",
           value: "1",
         });
-        this.loading = true;
-        this.$slots.default[0].child.$refs.canvas.toBlob((blob) => {
+        canvas.toBlob((blob) => {
           navigator
             .share({
               title: "WhatsAnalze.com",
@@ -62,14 +93,12 @@ export default {
               ],
             })
             .then(() => {
-              this.loading = false;
               this.$gtag.event("download-graph", {
                 event_category: "graph",
                 event_label: chartName + "-shared",
                 value: "1",
               });
-            })
-            .catch(() => (this.loading = false));
+            });
         });
       } else {
         this.$gtag.event("download-graph", {
@@ -77,8 +106,10 @@ export default {
           event_label: chartName + "-download-pressed",
           value: "1",
         });
-        let a = this.$slots.default[0].child.$refs.canvas.toDataURL();
-        downloadBase64File(a, chartName + "-" + this.imageName);
+        downloadBase64File(
+          canvas.toDataURL(),
+          chartName + "-" + this.imageName
+        );
         this.$gtag.event("download-graph", {
           event_category: "graph",
           event_label: chartName + "-downloaded",
