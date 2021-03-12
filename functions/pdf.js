@@ -318,7 +318,20 @@ export async function render(chat, attachments, ego, isSample = false) {
     const numLines = splitMessage.length;
     const messageHeight = lineHeight * numLines + attachmentSize[1];
     let messageY = calcMessageBodyHeight(numLines, attachmentSize[1], isSystem); // get start Y Coordinate of Message
-    let messageX = isEgo ? 58 : marginLeft + paddingMessage; // get start X Coordinate of Message
+
+    const singleLineTextWidth = doc.getTextWidth(data.message);
+    let messageWidth = hasAttachment
+      ? attachmentSize[0]
+      : singleLineTextWidth > 120
+      ? 120
+      : singleLineTextWidth;
+    if (messageWidth < 15) {
+      messageWidth = 15;
+    }
+
+    let messageX = isEgo
+      ? width - marginLeft - messageWidth - 10
+      : marginLeft + paddingMessage; // get start X Coordinate of Message
 
     // Draw bubble
     if (isSystem) {
@@ -332,7 +345,7 @@ export async function render(chat, attachments, ego, isSample = false) {
     doc.roundedRect(
       messageX,
       messageY - 1,
-      130,
+      messageWidth + 5,
       isSystem
         ? messageHeight + 2 * paddingMessage
         : messageHeight + authorHeight + timeHeight,
@@ -400,7 +413,7 @@ export async function render(chat, attachments, ego, isSample = false) {
       doc.setFontSize(fontSize / 1.8);
       doc.setTextColor(200, 200, 200);
       doc.text(
-        messageX + 104,
+        messageX + messageWidth - 10,
         messageY + authorHeight + messageHeight - 1,
         getDateString(data.date, false)
       );
