@@ -21,8 +21,8 @@ function renderAttachment(fileName, attachment) {
   return { mimeType: mimeType, src: src, fileName: fileName.split("-")[1] };
 }
 
+// gets attachment mimeType, src, and filename from attachments
 export async function getAttachment(fileName, attachments) {
   let data = await attachments.file(fileName).async("base64");
-
   return renderAttachment(fileName, data);
 }
