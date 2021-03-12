@@ -325,8 +325,9 @@ export async function render(chat, attachments, ego, isSample = false) {
       : singleLineTextWidth > 120
       ? 120
       : singleLineTextWidth;
-    if (messageWidth < 15) {
-      messageWidth = 15;
+    // It might be needed to adjust to author width!
+    if (messageWidth < 20) {
+      messageWidth = 20;
     }
 
     let messageX = isEgo
@@ -393,6 +394,7 @@ export async function render(chat, attachments, ego, isSample = false) {
 
     // Draw message
     if (!hasAttachment) {
+      console.log(splitMessage);
       if (isSystem) {
         doc.setTextColor(249, 217, 100);
       } else {
