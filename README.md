@@ -1,4 +1,22 @@
-# chat-analyzer-nuxt
+# WhatsAnalyze
+
+- Analyze your WhatsApp Chat in Seconds
+- Reveal insights & get statistics, while all data stays on your device.
+- No chat data is sent to a server it runs only locally in your browser.
+ 
+This is an open-source tool to analyze your WhatsApp Chat and create pdfs from your chat. You can run the code locally on your device or visit whatsanalyze.com to see the hosted "main" branch. The website is hosted on github pages and all code is visible. 
+
+No data about your chat is transferred to any server at all.
+
+![Bildschirmfoto 2021-03-09 um 21 31 28](https://user-images.githubusercontent.com/32100482/110533954-d192e880-811e-11eb-9a0f-ba630014f350.png)
+
+Dev deployment: https://whatsanalyze-80665.web.app
+
+## Encountered an issue?
+
+Please report bugs in the github issues.
+
+# Running whatsanalyze locally
 
 ## Build Setup
 

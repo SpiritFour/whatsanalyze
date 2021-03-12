@@ -47,6 +47,7 @@
       your whole chat. Take deep dive in your data now!."
       />
     </v-container>
+
     <v-container v-if="isShowingChats">
       <ChartsResults ref="results" :chat="chat" :attachments="attachments" />
     </v-container>

@@ -1,5 +1,5 @@
 <template>
-  <div class="cta-bottom my-md-8">
+  <div class="cta">
     <div class="text-h2 font-weight-bold">{{ title }}</div>
     <span class="text-body-1"> {{ text }}</span>
     <br />
@@ -15,7 +15,7 @@
       "
       color="#07bc4c"
       style="color: #ffffff"
-      class="mt-5 text-h6"
+      class="mt-5 mb-2 text-h6"
       elevation="10"
     >
       {{ buttonTxt }}
@@ -39,11 +39,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.cta-bottom {
-  text-align: center;
-  background: $c-white;
-  padding: 2em;
-}
-</style>

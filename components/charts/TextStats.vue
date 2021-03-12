@@ -2,27 +2,55 @@
   <v-container>
     <!-- Days you are chatting -->
     <v-row class="my-16 pa-8 white--text">
-      <v-col class="cyan darken-2" style="position: relative" cols="12" sm="6">
-        <v-icon size="100">mdi-calendar</v-icon>
-        <v-col cols="12" class="text-h5 font-weight-bold pa-0 ma-0 text-center"
-          >You chatted for
-        </v-col>
-        <div class="text-h1 font-weight-bold ma-auto my-0 pa-4">
-          {{ dateDiffs }}
-        </div>
-        <v-col cols="12" class="text-h5 font-weight-bold pa-0 ma-0 text-center"
-          >days
-        </v-col>
+      <v-col class="cyan darken-2 fact-box py-10" cols="12" sm="6">
+        <v-icon v-show="$vuetify.breakpoint.mdAndUp" size="100"
+          >mdi-calendar</v-icon
+        >
+        <v-row>
+          <v-col
+            cols="12"
+            class="text-h5 font-weight-bold pa-0 ma-0 text-center"
+          >
+            You chatted for
+          </v-col>
+        </v-row>
+
+        <v-row>
+          <v-col class="text-h1 font-weight-bold text-center pa-0">
+            {{ dateDiffs }}
+          </v-col>
+        </v-row>
+
+        <v-row>
+          <v-col cols="12" class="text-h5 font-weight-bold pa-0 text-center">
+            days
+          </v-col>
+        </v-row>
       </v-col>
 
-      <v-col class="amber darken-1" style="position: relative" cols="12" sm="6">
-        <v-icon color="yellow accent-1" size="100">mdi-android-messages</v-icon>
-        <div class="text-h1 font-weight-bold ma-auto pa-4">
-          {{ totalMessages }}
-        </div>
+      <v-col class="amber darken-1 fact-box py-10" cols="12" sm="6">
+        <v-icon
+          v-show="$vuetify.breakpoint.mdAndUp"
+          color="yellow accent-1"
+          size="100"
+          >mdi-android-messages</v-icon
+        >
         <v-row>
-          <v-col cols="12" class="text-h5 font-weight-bold pa-0 text-center"
-            >Total Messages
+          <v-col
+            cols="12"
+            class="text-h5 font-weight-bold pa-0 ma-0 text-center"
+          >
+            You have sent
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col class="text-h1 font-weight-bold text-center pa-0">
+            {{ totalMessages }}
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col class="text-h5 font-weight-bold pa-0 text-center">
+            messages
           </v-col>
         </v-row>
       </v-col>
@@ -103,5 +131,8 @@ export default {
   opacity: 0.8;
   position: absolute !important;
   left: 10px;
+}
+.fact-box {
+  position: relative;
 }
 </style>

@@ -35,9 +35,7 @@
 
     <v-container v-show="!isShowingChats" class="pt-16">
       <ExportExplainer />
-      <Cta />
-      <Faq />
-      <Testimonials />
+      <Content :page="page" />
       <Cta
         title="Analyze your own WhatsApp data now"
         buttonText="Analyze my chat"
@@ -45,12 +43,10 @@
       Start with figuring out how many toilet rolls would be needed to print
       your whole chat. Take deep dive in your data now!."
       />
-      <Content :page="page" />
     </v-container>
 
     <v-container v-if="isShowingChats">
       <ChartsResults ref="results" :chat="chat_" />
-      <DownloadPopup :results="$refs.results" :chat="this.chat_" />
     </v-container>
   </div>
 </template>

@@ -470,7 +470,7 @@ I will think about it until tonight
 1/3/21, 01:33 - John Doe : Yes, because of Corona and because I'm currently with my parents, I would prefer things outside for now
 1/3/21, 17:37 - Jane Doe: What's your email?
 1/3/21, 17:37 - Jane Doe: Yes makes sense
-1/3/21, 17:37 - John Doe : John Doe@John Doe-wolf.de
+1/3/21, 17:37 - John Doe : John Doe@John-Doe.com
 1/3/21, 17:37 - Jane Doe: Do you like to train tomorrow afternoon?
 1/3/21, 17:38 - John Doe : Yep
 1/3/21, 17:38 - Jane Doe: Cool, you get an invitation
