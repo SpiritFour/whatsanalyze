@@ -161,9 +161,15 @@ export async function render(chat, attachments, ego, isSample = false) {
     usedYSpace += 16;
   };
   const getScale = function (width, height, desiredWidth) {
-    const scale = desiredWidth / width;
+    const yScale = (0.5 * pageYSpace) / height;
+    const xScale = desiredWidth / width;
+
+    const scale = xScale <= yScale ? xScale : yScale;
+
     const rescaledHeight = height * scale;
-    return [desiredWidth, rescaledHeight];
+    const rescaledWidth = width * scale;
+
+    return [rescaledWidth, rescaledHeight];
   };
   const addGraphToPage = function (graph, name) {
     const [rescaledWidth, rescaledHeight] = getScale(
