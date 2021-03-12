@@ -450,4 +450,6 @@ export async function render(chat, attachments, ego, isSample = false) {
   }
 
   doc.save("WhatsAnalyze - " + ego);
+
+  return 1;
 }
