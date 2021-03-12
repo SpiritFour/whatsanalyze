@@ -1,7 +1,12 @@
 import logoBlack from "/assets/whatsanalyze-logo-black.png";
 import myFont from "/assets/pdf-fonts/Helvetica.js";
 
-import { getDateString } from "~/functions/utils";
+import {
+  dateDiffs,
+  firstDate,
+  getDateString,
+  lastDate,
+} from "~/functions/utils";
 import { getAttachment } from "~/functions/attachments";
 import jsPDF from "jspdf";
 
@@ -31,11 +36,9 @@ export async function render(chat, attachments, ego, isSample = false) {
 
   const backgroundGreenHex = "#21a68d";
 
-  const lastDate = chat.chatObject.slice(-1)[0].date;
-  const firstDate = chat.chatObject[0].date;
-  const numDays = Math.round(
-    Math.abs((firstDate - lastDate) / (24 * 60 * 60 * 1000))
-  );
+  const lastDateConst = lastDate(chat);
+  const firstDateConst = firstDate(chat);
+  const dateDiffsConst = dateDiffs(firstDateConst, lastDateConst);
 
   //   Variable to track y-coordinate / used space on page
   let usedYSpace = 0;
@@ -206,7 +209,7 @@ export async function render(chat, attachments, ego, isSample = false) {
   addHeading(isSample ? "Your Sample" : "Your Chat", marginLeft, usedYSpace);
   usedYSpace += 10;
 
-  writeDoubleSizeText(String(numDays), " days");
+  writeDoubleSizeText(String(dateDiffsConst), " days");
   writeDoubleSizeText(String(chat.chatObject.length), " messages");
   writeDoubleSizeText(String(chat.numPersonsInChat), " people");
 
@@ -241,7 +244,7 @@ export async function render(chat, attachments, ego, isSample = false) {
   usedYSpace += 10;
 
   doc.setFontSize(30);
-  doc.text(getDateString(firstDate), marginLeft, usedYSpace);
+  doc.text(getDateString(firstDateConst), marginLeft, usedYSpace);
   usedYSpace += 20;
 
   doc.setFontSize(20);
@@ -249,7 +252,7 @@ export async function render(chat, attachments, ego, isSample = false) {
   usedYSpace += 10;
 
   doc.setFontSize(30);
-  writeRightSideText(getDateString(lastDate), false);
+  writeRightSideText(getDateString(lastDateConst), false);
   usedYSpace += 7;
 
   // FUN FACTS

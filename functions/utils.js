@@ -20,3 +20,16 @@ export function getDateString(date, includeTime = true) {
   }
   return "";
 }
+
+export function dateDiffs(firstDate, lastDate, measurementUnit = "days") {
+  console.log(firstDate, lastDate);
+  return moment(lastDate).diff(moment(firstDate), measurementUnit);
+}
+
+export function firstDate(chat) {
+  return chat.filterdChatObject[0].date;
+}
+
+export function lastDate(chat) {
+  return chat.filterdChatObject.slice(-1)[0].date;
+}
