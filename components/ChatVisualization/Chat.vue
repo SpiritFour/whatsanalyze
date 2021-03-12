@@ -59,7 +59,7 @@
 
           <Attachment
             v-if="data.attachment"
-            :attachmentPromise="getAttachment(data.attachment.fileName)"
+            :attachmentPromise="_getAttachment(data.attachment.fileName)"
           >
           </Attachment>
           <div
@@ -97,7 +97,7 @@
 
 <script>
 import { getDateString } from "~/functions/utils";
-
+import { getAttachment } from "~/functions/attachments.js";
 export default {
   name: "Chat",
   data() {
@@ -108,7 +108,6 @@ export default {
     };
   },
   props: ["chat", "attachments"],
-  computed: {},
   methods: {
     parseMessage(message) {
       var validUrl = new RegExp(
@@ -142,34 +141,11 @@ export default {
       this.$emit("setEgo", name);
       this.selectedEgo = name;
     },
+    async _getAttachment(fileName) {
+      return await getAttachment(fileName, this.attachments);
+    },
     _getDateString(date) {
       return getDateString(date);
-    },
-    async getAttachment(attachment) {
-      let data = await this.attachments.file(attachment).async("base64");
-      return this.renderAttachment(attachment, data);
-    },
-    getMimeType(fileName) {
-      if (/\.jpe?g$/.test(fileName)) return "image/jpeg";
-      if (fileName.endsWith(".png")) return "image/png";
-      if (fileName.endsWith(".gif")) return "image/gif";
-      if (fileName.endsWith(".webp")) return "image/webp";
-      if (fileName.endsWith(".svg")) return "image/svg+xml";
-
-      if (fileName.endsWith(".mp4")) return "video/mp4";
-      if (fileName.endsWith(".webm")) return "video/webm";
-
-      if (fileName.endsWith(".mp3")) return "audio/mpeg";
-      if (fileName.endsWith(".m4a")) return "audio/mp4";
-      if (fileName.endsWith(".wav")) return "audio/wav";
-      if (fileName.endsWith(".opus")) return "audio/ogg";
-      return fileName.split(".").splice(-1)[0];
-    },
-
-    renderAttachment(fileName, attachment) {
-      const mimeType = this.getMimeType(fileName) || "";
-      const src = "data:" + mimeType + ";base64, " + attachment;
-      return { mimeType: mimeType, src: src, fileName: fileName.split("-")[1] };
     },
   },
 };

@@ -10,7 +10,7 @@
       <GlobalHeader class="only-visible-to-html2canvas" />
       <div class="text-h2 font-weight-bold py-10">Chat Timeline</div>
       <div>Messages per Day</div>
-      <Share>
+      <Share id="chat-timeline">
         <ChartsLineChart :chartdata="chat" class="pb-10" />
       </Share>
 
@@ -36,13 +36,13 @@
       <v-row>
         <v-col cols="12" md="6">
           <div class="text-h4 font-weight-bold">Person</div>
-          <Share>
+          <Share id="messages-per-person">
             <ChartsDonughtChart :chartdata="chat" class="py-10" />
           </Share>
         </v-col>
         <v-col cols="12" md="6">
           <div class="text-h4 font-weight-bold">Time of Day</div>
-          <Share>
+          <Share id="messages-per-time-of-day">
             <ChartsBarChart
               :chartdata="chat"
               dataGrouping="hourly"
