@@ -283,6 +283,8 @@ export async function render(chat, attachments, ego, isSample = false) {
 
   //   ----- Start of message pages
   addColoredPage();
+  // reset Y space, messages have different mariginTop
+  usedYSpace = 0;
   doc.setFont("myFont", "normal");
   const lineHeight = (fontSize * 1.5) / 3.64; // line + padding top and bottom
 
@@ -329,8 +331,15 @@ export async function render(chat, attachments, ego, isSample = false) {
     doc.setFont("myFont", "bold");
     const authorWidth = doc.getTextWidth(data.author);
 
+    doc.setFontSize(fontSize / 1.8);
+    const dateString = getDateString(data.date, true);
+    const dateWidth = doc.getTextWidth(dateString);
+
     if (messageWidth < authorWidth) {
-      messageWidth = authorWidth + 15;
+      messageWidth = authorWidth;
+    }
+    if (messageWidth < dateWidth) {
+      messageWidth = dateWidth;
     }
 
     let messageX = isEgo
@@ -351,7 +360,7 @@ export async function render(chat, attachments, ego, isSample = false) {
     doc.roundedRect(
       messageX + offset,
       messageY - 1,
-      messageWidth + 10,
+      messageWidth + 6,
       isSystem
         ? messageHeight + 2 * paddingMessage
         : messageHeight + authorHeight + timeHeight,
@@ -362,8 +371,6 @@ export async function render(chat, attachments, ego, isSample = false) {
 
     // draw author
     if (!isSystem) {
-      doc.setFont("myFont", "normal");
-
       if (data.author in chat.personColorMap) {
         const personRgbColor = hexToRgb(chat.personColorMap[data.author]);
         doc.setTextColor(
@@ -372,6 +379,8 @@ export async function render(chat, attachments, ego, isSample = false) {
           personRgbColor[2]
         );
       }
+
+      doc.setFontSize(fontSize / 1.3);
       doc.setFont("myFont", "bold");
       doc.text(
         messageX + paddingMessage,
@@ -417,10 +426,11 @@ export async function render(chat, attachments, ego, isSample = false) {
     if (!isSystem) {
       doc.setFontSize(fontSize / 1.8);
       doc.setTextColor(200, 200, 200);
+
       doc.text(
-        messageX + messageWidth - 10,
-        messageY + authorHeight + messageHeight - 1,
-        getDateString(data.date, false)
+        messageX + messageWidth - dateWidth + paddingMessage,
+        messageY + authorHeight + messageHeight,
+        dateString
       );
     }
   }
