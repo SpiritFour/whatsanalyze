@@ -118,7 +118,7 @@ export default {
       console.log("order created", data, actions);
     },
     onApprove(event) {
-      render(this.chat, this.ego, false);
+      render(this.chat, this.attachments, this.ego, false);
       console.log("approved", event);
     },
     onError(event) {
@@ -133,7 +133,7 @@ export default {
         value: "5",
       });
       // download first 100 messages only
-      render(this.chat, this.ego, true);
+      render(this.chat, this.attachments, this.ego, true);
     },
   },
 };
