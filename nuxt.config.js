@@ -56,7 +56,7 @@ export default {
     },
     icon: {
       source: "/assets",
-      fileName: "whatsanalyze-logo-green.png",
+      fileName: "whatsanalyze-logo-black-PWA.png",
     },
   },
 
