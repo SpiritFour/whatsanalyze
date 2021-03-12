@@ -10,6 +10,8 @@ No data about your chat is transferred to any server at all.
 
 ![Bildschirmfoto 2021-03-09 um 21 31 28](https://user-images.githubusercontent.com/32100482/110533954-d192e880-811e-11eb-9a0f-ba630014f350.png)
 
+Dev deployment: https://whatsanalyze-80665.web.app
+
 ## Encountered an issue?
 
 Please report bugs in the github issues.
