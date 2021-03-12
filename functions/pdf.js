@@ -65,6 +65,12 @@ export async function render(chat, ego, isSample = false) {
     doc.text(text, width - marginLeft - textWidth, usedYSpace);
   };
 
+  const addPageIfNeeded = function (height, r = 23, g = 166, b = 141) {
+    if (usedYSpace + height > pageYSpace) {
+      addColoredPage(false, r, g, b);
+    }
+  };
+
   // calculates height for new message
   const calcMessageBodyHeight = function (numLines) {
     let messageY = marginTop + usedYSpace;
@@ -124,10 +130,6 @@ export async function render(chat, ego, isSample = false) {
     doc.setTextColor(0, 0, 0);
     doc.setFontSize(50);
     doc.text(text, x, y);
-    const textWidth = doc.getTextWidth(text);
-    doc.setLineWidth(0.5);
-    doc.setDrawColor(0, 0, 0); // draw red lines
-    doc.line(x, y + 5, x + textWidth, y + 5); // horizontal line
     usedYSpace += 10;
   };
   const drawAuthorBubble = function (author, x, y) {
@@ -222,6 +224,8 @@ export async function render(chat, ego, isSample = false) {
   addGraphToPage(messagesPerTimeOfDay, "Time of Day");
   addGraphToPage(messagesPerPerson, "Messages per Person");
 
+  addPageIfNeeded(47);
+
   doc.setFontSize(20);
   doc.text("First Message", marginLeft, usedYSpace);
   usedYSpace += 10;
@@ -231,9 +235,9 @@ export async function render(chat, ego, isSample = false) {
   usedYSpace += 20;
 
   doc.setFontSize(20);
-
   writeRightSideText("Last Message");
   usedYSpace += 10;
+
   doc.setFontSize(30);
   writeRightSideText(getDateString(lastDate), false);
   usedYSpace += 7;
@@ -305,7 +309,9 @@ export async function render(chat, ego, isSample = false) {
       messageX,
       messageY - 1,
       130,
-      messageHeight + authorHeight + timeHeight,
+      isSystem
+        ? messageHeight + 2 * paddingMessage
+        : messageHeight + authorHeight + timeHeight,
       2,
       2,
       "F"
@@ -344,7 +350,7 @@ export async function render(chat, ego, isSample = false) {
     doc.setFont("myFont", "normal");
     doc.text(
       isSystem ? messageX + 65 : messageX + paddingMessage,
-      messageY + authorHeight,
+      isSystem ? messageY + 2 * paddingMessage : messageY + authorHeight,
       splitMessage, //.map((m) => m.replace(asciRegex, "")),
       isSystem ? "center" : ""
     );
