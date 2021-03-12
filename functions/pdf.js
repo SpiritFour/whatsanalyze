@@ -149,6 +149,7 @@ export async function render(chat, ego, isSample = false) {
     doc.roundedRect(x - 3, y, author_width + 6, 10, 5, 5, "F");
     doc.text(author, x, y + 7);
   };
+  // Standard color is our blue-green
   const addColoredPage = function (showText = false, r = 23, g = 166, b = 141) {
     doc.addPage();
     doc.setFillColor(r, g, b);
