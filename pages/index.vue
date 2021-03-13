@@ -114,6 +114,9 @@ export default {
       });
     });
   },
+  mounted() {
+    console.log("hello firestore", this.$fire.firestore);
+  },
 };
 </script>
 

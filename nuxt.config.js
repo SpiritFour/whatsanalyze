@@ -85,7 +85,7 @@ export default {
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxt/content", "@nuxtjs/pwa"],
+  modules: ["@nuxt/content", "@nuxtjs/pwa", "@nuxtjs/firebase"],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
@@ -103,6 +103,25 @@ export default {
           error: colors.deepOrange.accent4,
           success: colors.green.accent3,
         },
+      },
+    },
+  },
+  firebase: {
+    config: {
+      apiKey: "AIzaSyBWNP0Ckw94E7tyoZZozAOZ6JSQRH2lzFU",
+      authDomain: "whatsanalyze-80665.firebaseapp.com",
+      projectId: "whatsanalyze-80665",
+      storageBucket: "whatsanalyze-80665.appspot.com",
+      messagingSenderId: "116352567232",
+      appId: "1:116352567232:web:b44bef99e5a4fc6c962a25",
+      measurementId: "G-H1WL9MXJ17",
+    },
+    services: {
+      auth: false, // Just as example. Can be any other service.
+      firestore: {
+        memoryOnly: false, // default
+        chunkName: local ? "[id]" : "firebase-auth", // default
+        enablePersistence: true,
       },
     },
   },
