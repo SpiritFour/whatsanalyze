@@ -22,7 +22,6 @@ export function getDateString(date, includeTime = true) {
 }
 
 export function dateDiffs(firstDate, lastDate, measurementUnit = "days") {
-  console.log(firstDate, lastDate);
   return moment(lastDate).diff(moment(firstDate), measurementUnit);
 }
 
