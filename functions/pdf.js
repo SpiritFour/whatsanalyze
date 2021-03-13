@@ -306,15 +306,20 @@ export async function render(chat, attachments, ego, isSample = false) {
 
     let attachment = undefined;
     let attachmentSize = [0, 0];
-    if (hasAttachment) {
-      // load attachment
-      attachment = await getAttachment(data.attachment.fileName, attachments);
-      attachmentSize = await getImgSizes(attachment.src);
-      attachmentSize = getScale(
-        attachmentSize[0],
-        attachmentSize[1],
-        (width - 2 * marginLeft) * 0.7
-      );
+    try {
+      if (hasAttachment) {
+        // load attachment
+        attachment = await getAttachment(data.attachment.fileName, attachments);
+        attachmentSize = await getImgSizes(attachment.src);
+        attachmentSize = getScale(
+          attachmentSize[0],
+          attachmentSize[1],
+          (width - 2 * marginLeft) * 0.7
+        );
+      }
+    } catch (e) {
+      console.log(e);
+      continue;
     }
 
     doc.setFontSize(fontSize);
@@ -382,7 +387,6 @@ export async function render(chat, attachments, ego, isSample = false) {
           personRgbColor[2]
         );
       }
-
       doc.setFontSize(fontSize / 1.3);
       doc.setFont("myFont", "bold");
       doc.text(
@@ -399,7 +403,7 @@ export async function render(chat, attachments, ego, isSample = false) {
         doc.addImage(
           attachment.src,
           filetype,
-          marginLeft + paddingMessage * 2,
+          messageX + paddingMessage,
           messageY + authorHeight,
           attachmentSize[0],
           attachmentSize[1]
