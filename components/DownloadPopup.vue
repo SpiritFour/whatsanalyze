@@ -84,7 +84,9 @@
           </v-card>
         </v-dialog>
 
-        <div class="text-text-h3 my-4">Looking for PDF download instead?</div>
+        <div class="text-text-h3 my-4">
+          Looking for <b>PDF download</b> instead?
+        </div>
         <v-btn
           color="#07bc4c"
           dark
