@@ -209,6 +209,23 @@ export async function render(chat, attachments, ego, isSample = false) {
   addHeading(isSample ? "Your Sample" : "Your Chat", marginLeft, usedYSpace);
   usedYSpace += 10;
 
+  doc.setFontSize(20);
+  doc.text("First Message", marginLeft, usedYSpace);
+  usedYSpace += 10;
+
+  doc.setFontSize(30);
+  doc.text(getDateString(firstDateConst), marginLeft, usedYSpace);
+  usedYSpace += 15;
+
+  doc.setFontSize(20);
+  writeRightSideText("Last Message");
+  usedYSpace += 10;
+
+  doc.setFontSize(30);
+  writeRightSideText(getDateString(lastDateConst), false);
+  usedYSpace += 15;
+
+  addPageIfNeeded(50);
   writeDoubleSizeText(String(dateDiffsConst), " days");
   writeDoubleSizeText(String(chat.chatObject.length), " messages");
   writeDoubleSizeText(String(chat.numPersonsInChat), " people");
@@ -232,28 +249,14 @@ export async function render(chat, attachments, ego, isSample = false) {
   const chatTimeline = await loadImage("#chat-timeline");
   const messagesPerTimeOfDay = await loadImage("#messages-per-time-of-day");
   const messagesPerPerson = await loadImage("#messages-per-person");
+  const radarMonth = await loadImage("#radar-month");
+  const radarDay = await loadImage("#radar-day");
 
   addGraphToPage(chatTimeline, "Chat Timeline");
   addGraphToPage(messagesPerTimeOfDay, "Time of Day");
   addGraphToPage(messagesPerPerson, "Messages per Person");
-
-  addPageIfNeeded(47);
-
-  doc.setFontSize(20);
-  doc.text("First Message", marginLeft, usedYSpace);
-  usedYSpace += 10;
-
-  doc.setFontSize(30);
-  doc.text(getDateString(firstDateConst), marginLeft, usedYSpace);
-  usedYSpace += 20;
-
-  doc.setFontSize(20);
-  writeRightSideText("Last Message");
-  usedYSpace += 10;
-
-  doc.setFontSize(30);
-  writeRightSideText(getDateString(lastDateConst), false);
-  usedYSpace += 7;
+  addGraphToPage(radarMonth, "Messages per Month");
+  addGraphToPage(radarDay, "Messages per Time");
 
   // FUN FACTS
   addColoredPage();
