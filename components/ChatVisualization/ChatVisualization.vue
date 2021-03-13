@@ -12,7 +12,7 @@
           v-show="isLoading"
           indeterminate
           color="blue"
-          class="mb-0"
+          class="mb-2"
         ></v-progress-linear>
         <v-btn class="preview-btn mb-2" elevation="10" @click="downloadSample">
           <v-icon class="mr-1">mdi-download</v-icon>
@@ -53,6 +53,12 @@
             <v-card-text class="pt-3 text-body-1 font-weight-bold">
               Supporting us keeps the 💻 running 🎉
             </v-card-text>
+            <v-progress-linear
+              v-show="isLoading"
+              indeterminate
+              color="blue"
+              class="mb-2"
+            ></v-progress-linear>
             <v-row cols="12" justify="center" align="center" class="pt-6 pr-10">
               <ChatVisualizationPayment
                 @onCreateOrder="onCreateOrder"
@@ -99,33 +105,28 @@ export default {
     setEgo(ego) {
       this.ego = ego;
     },
-    async download() {
+    download() {
       this.$gtag.event("download-pdf", {
         event_category: "download",
         event_label: "download-pdf",
         value: "10",
       });
       this.isLoading = true;
-      let done = await render(this.chat, this.attachments, this.ego, false);
-      if (done) {
-        this.isLoading = false;
-      }
+      render(this.chat, this.attachments, this.ego, false).then(
+        () => (this.isLoading = false)
+      );
     },
     onCreateOrder(data, actions) {
-      console.log("approved", event);
-
       console.log("order created", data, actions);
     },
     onApprove(event) {
-      render(this.chat, this.attachments, this.ego, false);
       console.log("approved", event);
+      this.download();
     },
     onError(event) {
-      console.log("approved", event);
-
       console.log("error", event);
     },
-    async downloadSample() {
+    downloadSample() {
       this.$gtag.event("download-sample-pdf", {
         event_category: "home",
         event_label: "download-sample-pdf",
@@ -133,10 +134,9 @@ export default {
       });
       this.isLoading = true;
       // download sample
-      let done = await render(this.chat, this.attachments, this.ego, true);
-      if (done) {
-        this.isLoading = false;
-      }
+      render(this.chat, this.attachments, this.ego, true).then(
+        () => (this.isLoading = false)
+      );
     },
   },
 };
