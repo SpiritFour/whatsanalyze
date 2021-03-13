@@ -306,9 +306,12 @@ export async function render(chat, attachments, ego, isSample = false) {
 
     let attachment = undefined;
     let attachmentSize = [0, 0];
+
     if (hasAttachment) {
       // load attachment
       attachment = await getAttachment(data.attachment.fileName, attachments);
+      // skip if no image
+      if (!attachment.mimeType.startsWith("image/")) continue;
       attachmentSize = await getImgSizes(attachment.src);
       attachmentSize = getScale(
         attachmentSize[0],
@@ -382,7 +385,6 @@ export async function render(chat, attachments, ego, isSample = false) {
           personRgbColor[2]
         );
       }
-
       doc.setFontSize(fontSize / 1.3);
       doc.setFont("myFont", "bold");
       doc.text(
@@ -393,19 +395,17 @@ export async function render(chat, attachments, ego, isSample = false) {
     }
 
     if (hasAttachment) {
-      if (attachment.mimeType.startsWith("image/")) {
-        let filetype = attachment.mimeType.split("/").splice(-1)[0];
+      let filetype = attachment.mimeType.split("/").splice(-1)[0];
 
-        doc.addImage(
-          attachment.src,
-          filetype,
-          marginLeft + paddingMessage * 2,
-          messageY + authorHeight,
-          attachmentSize[0],
-          attachmentSize[1]
-        );
-        usedYSpace += attachmentSize[1];
-      }
+      doc.addImage(
+        attachment.src,
+        filetype,
+        messageX + paddingMessage,
+        messageY + authorHeight,
+        attachmentSize[0],
+        attachmentSize[1]
+      );
+      usedYSpace += attachmentSize[1];
     }
 
     // Draw message
