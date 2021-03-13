@@ -79,6 +79,20 @@
                 :amount="3.5"
               />
             </v-row>
+            <v-row style="max-width: 100%">
+              <v-col cols="auto" class="text-h5">
+                Or insert pre-paid token:</v-col
+              >
+              <v-col>
+                <v-text-field
+                  counter="6"
+                  maxlength="6"
+                  style="font-family: monospace; width: 6em"
+                ></v-text-field>
+              </v-col>
+              <v-col cols="2"><v-btn>redeem</v-btn></v-col>
+            </v-row>
+
             <v-divider></v-divider>
             <v-card-actions>
               <v-spacer></v-spacer>
