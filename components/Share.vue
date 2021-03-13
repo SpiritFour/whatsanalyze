@@ -60,8 +60,15 @@ export default {
           offset = 260;
         }
         window.scrollTo(0, offset);
-        return html2canvas(this.$slots.default[0].child.$el).then((_) => {
+        let html = this.$slots.default[0].child.$el;
+        let removedTag = false;
+        if (html.getAttribute("data-html2canvas-ignore") !== undefined) {
+          html.removeAttribute("data-html2canvas-ignore");
+          removedTag = true;
+        }
+        return html2canvas(html).then((_) => {
           window.scrollTo(0, currScroll);
+          if (removedTag) html.setAttribute("data-html2canvas-ignore", "");
           return _;
         });
       } else {

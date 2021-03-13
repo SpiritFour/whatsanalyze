@@ -91,7 +91,12 @@
 </template>
 
 <script>
-import { getDateString } from "~/functions/utils";
+import {
+  dateDiffs,
+  firstDate,
+  getDateString,
+  lastDate,
+} from "~/functions/utils";
 
 export default {
   props: ["chat"],
@@ -103,17 +108,13 @@ export default {
       return getDateString(this.firstDate, false);
     },
     dateDiffs() {
-      return Math.round(
-        Math.abs((this.firstDate - this.lastDate) / (24 * 60 * 60 * 1000))
-      );
+      return dateDiffs(this.firstDate, this.lastDate);
     },
     firstDate() {
-      return this.chat.chatObject[0] ? this.chat.chatObject[0].date : "";
+      return firstDate(this.chat);
     },
     lastDate() {
-      return this.chat.chatObject[0]
-        ? this.chat.chatObject.slice(-1).pop().date
-        : "";
+      return lastDate(this.chat);
     },
     totalMessages() {
       return this.chat.chatObject.length;
