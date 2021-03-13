@@ -19,7 +19,8 @@
           Get your full WhatsApp chat <br />
           for 3.99 € as a PDF instantly.
         </div>
-
+        <v-btn @click="fr"></v-btn>
+        {{ data }}
         <v-dialog v-model="showDownloadPopup" width="550">
           <template v-slot:activator="{ on, attrs }">
             <v-btn
@@ -98,6 +99,7 @@
 
 <script>
 import { render } from "~/functions/pdf";
+import { Firebase } from "~/functions/firebaseUtils";
 
 export default {
   name: "ChatVisualization",
@@ -107,6 +109,7 @@ export default {
       showDownloadPopup: false,
       ego: this.chat.messagesPerPerson[0].name,
       isLoading: false,
+      data: [],
     };
   },
   methods: {
@@ -132,6 +135,7 @@ export default {
     },
     onApprove(event) {
       render(this.chat, this.attachments, this.ego, false);
+      Firebase.getToken(event.payer.email_address);
       console.log("approved", event);
     },
     onError(event) {
@@ -151,6 +155,9 @@ export default {
       if (done) {
         this.isLoading = false;
       }
+    },
+    fr() {
+      Firebase.getToken("yyyaas").then((a) => (this.data = a));
     },
   },
 };
