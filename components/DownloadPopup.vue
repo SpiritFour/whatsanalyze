@@ -19,7 +19,8 @@
               @click="download"
               :loading="loading"
             >
-              <v-icon>mdi-download</v-icon>Download your Results now!
+              <v-icon class="mr-2">mdi-download</v-icon>Download your Results
+              now!
             </v-btn>
           </template>
 
@@ -82,6 +83,17 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+
+        <div class="text-text-h3 my-4">
+          Looking for <b>PDF download</b> instead?
+        </div>
+        <v-btn
+          color="#07bc4c"
+          dark
+          @click="$vuetify.goTo('#payButton', { duration: 300, offset: 100 })"
+          ><v-icon class="mr-2">mdi-keyboard-return</v-icon>go to PDF
+          download</v-btn
+        >
       </div>
     </v-row>
   </v-col>
