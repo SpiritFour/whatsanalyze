@@ -123,7 +123,6 @@ export default {
       this.download();
     },
     onError(event) {
-      console.log("error", event);
     },
     downloadSample() {
       this.$gtag.event("download-sample-pdf", {
