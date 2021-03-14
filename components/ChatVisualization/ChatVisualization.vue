@@ -120,7 +120,6 @@ export default {
       console.log("order created", data, actions);
     },
     onApprove(event) {
-      console.log("approved", event);
       this.download();
     },
     onError(event) {
