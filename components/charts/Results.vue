@@ -55,7 +55,7 @@
       <v-row>
         <v-col cols="12" sm="6">
           <div class="text-h4 font-weight-bold">Month</div>
-          <Share>
+          <Share id="radar-month">
             <ChartsRadarChart
               :chartdata="chat"
               dataGrouping="weekly"
@@ -65,7 +65,7 @@
         </v-col>
         <v-col cols="12" sm="6">
           <div class="text-h4 font-weight-bold">Weekday</div>
-          <Share>
+          <Share id="radar-day">
             <ChartsRadarChart
               :chartdata="chat"
               dataGrouping="daily"
