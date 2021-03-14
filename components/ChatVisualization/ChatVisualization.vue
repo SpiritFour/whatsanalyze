@@ -1,10 +1,93 @@
 <template>
   <v-col class="my-4 mb-16">
+    <div class="text-h1 font-weight-bold">Your Full Chat</div>
+    <v-divider class="py-5" />
+    <!-- this could be refactored into a component -->
+    <v-row justify="center" id="payButton">
+      <div class="cta pa-10 my-md-4">
+        <div class="text-h4 text-md-h3 font-weight-bold pb-4">
+          Download your Chat as PDF
+        </div>
+        <v-progress-linear
+          v-show="isLoading"
+          indeterminate
+          color="blue"
+          class="mb-2"
+        ></v-progress-linear>
+        <v-btn class="preview-btn mb-2" elevation="10" @click="downloadSample">
+          <v-icon class="mr-1">mdi-download</v-icon>
+          <span><b>free</b> preview PDF</span>
+        </v-btn>
+        <div class="text-body-1 my-2">
+          Get your <b>full</b> WhatsApp chat for
+          <b>{{ price + " " + currency }}</b> as a PDF instantly.
+        </div>
+
+        <v-dialog v-model="showDownloadPopup" width="550">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              dark
+              v-bind="attrs"
+              v-on="on"
+              color="#07bc4c"
+              style="color: white; max-width: 100%"
+              class="my-3"
+              elevation="10"
+              @click="
+                $gtag.event('download-chat-popup-clicked', {
+                  event_category: 'download',
+                  event_label: 'popup-clicked',
+                  value: '1',
+                })
+              "
+            >
+              <v-icon class="mr-1">mdi-download</v-icon>
+              <span><b>full</b> chat PDF</span>
+            </v-btn>
+          </template>
+          <v-card>
+            <v-card-title class="headline cyan" style="word-break: normal">
+              <div class="text-h4 font-weight-bold">Nice !!</div>
+              <span>You are just a step away from your PDF!</span>
+            </v-card-title>
+            <v-card-text class="pt-3 text-body-1 font-weight-bold">
+              Supporting us keeps the 💻 running 🎉
+            </v-card-text>
+            <v-progress-linear
+              v-show="isLoading"
+              indeterminate
+              color="blue"
+              class="mb-2"
+            ></v-progress-linear>
+            <v-row cols="12" justify="center" align="center" class="pt-6 pr-10">
+              <ChatVisualizationPayment
+                @onCreateOrder="onCreateOrder"
+                @onApprove="onApprove"
+                @onError="onError"
+                :currency="currency"
+                :amount="price"
+              />
+            </v-row>
+            <v-divider></v-divider>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                color="red darken-1"
+                text
+                @click="showDownloadPopup = false"
+              >
+                Close
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </div>
+    </v-row>
     <v-row>
       <Chat :chat="chat" :attachments="attachments" @setEgo="setEgo" />
     </v-row>
     <v-row justify="center" id="payButton">
-      <div class="cta my-md-4">
+      <div class="cta pa-10 my-md-4">
         <div class="text-h4 text-md-h3 font-weight-bold pb-4">
           Download your Chat as PDF
         </div>
@@ -119,11 +202,10 @@ export default {
     onCreateOrder(data, actions) {
       console.log("order created", data, actions);
     },
-    onApprove(event) {
+    onApprove() {
       this.download();
     },
-    onError(event) {
-    },
+    onError() {},
     downloadSample() {
       this.$gtag.event("download-sample-pdf", {
         event_category: "home",
@@ -139,8 +221,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.preview-btn {
-}
-</style>

@@ -1,5 +1,5 @@
 <template>
-  <v-col class="my-4 mt-10">
+  <v-col class="mb-8">
     <v-row justify="center">
       <div class="cta my-md-4">
         <div class="text-h3 font-weight-bold pb-4">
