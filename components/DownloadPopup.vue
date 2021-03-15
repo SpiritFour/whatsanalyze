@@ -125,6 +125,7 @@ export default {
       dialog: false,
       loading: false,
       suffix: this.isSimple ? "-top" : "",
+      GTAG_INTERACTION,
     };
   },
   methods: {
@@ -177,7 +178,6 @@ export default {
       gtagEvent("donation_download_results", GTAG_PAYMENT, 5);
     },
     gtagEvent,
-    GTAG_INTERACTION,
   },
 };
 </script>

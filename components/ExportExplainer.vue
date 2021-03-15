@@ -134,6 +134,7 @@ import {
 
 export default {
   data: () => ({
+    GTAG_INTERACTION,
     deferredPrompt: null,
     installButtonStatus: false,
     tabStatus: [0, 0],
@@ -341,7 +342,6 @@ export default {
         // Optionally, send analytics event that PWA install promo was shown.
       });
     },
-    GTAG_INTERACTION,
     gtagEvent,
   },
   created() {

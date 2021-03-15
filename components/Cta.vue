@@ -35,8 +35,12 @@ export default {
       type: String,
     },
   },
+  data() {
+    return {
+      GTAG_INTERACTION,
+    };
+  },
   methods: {
-    GTAG_INTERACTION,
     gtagEvent,
   },
 };

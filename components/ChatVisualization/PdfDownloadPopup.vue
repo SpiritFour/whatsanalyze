@@ -80,6 +80,8 @@ export default {
     return {
       showDownloadPopup: false,
       isLoading: false,
+      GTAG_PAYMENT,
+      GTAG_PDF,
     };
   },
   methods: {
@@ -106,7 +108,6 @@ export default {
         () => (this.isLoading = false)
       );
     },
-    GTAG_PAYMENT,
     gtagEvent,
   },
 };
