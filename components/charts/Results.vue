@@ -3,10 +3,25 @@
     <div id="download-graphs">
       <GlobalHeader class="only-visible-to-html2canvas" />
 
+      <DownloadPopup
+        :chat="chat"
+        data-html2canvas-ignore
+        remove-height-in-html2-canvas
+      />
+
       <div class="text-h2 font-weight-bold py-10">Chat Timeline</div>
       <div>Messages per Day</div>
       <Share id="chat-timeline">
         <ChartsLineChart :chartdata="chat" />
+      </Share>
+
+      <Share :use-html2-canvas="true">
+        <ChartsFunFacts
+          :chartdata="chat"
+          class="pb-10"
+          data-html2canvas-ignore
+          remove-height-in-html2-canvas
+        />
       </Share>
 
       <ChartsTextStats :chat="chat" />
@@ -65,15 +80,6 @@
         data-html2canvas-ignore
         remove-height-in-html2-canvas
       />
-
-      <Share :use-html2-canvas="true">
-        <ChartsFunFacts
-          :chartdata="chat"
-          class="pb-10"
-          data-html2canvas-ignore
-          remove-height-in-html2-canvas
-        />
-      </Share>
 
       <ChatVisualization
         data-html2canvas-ignore
