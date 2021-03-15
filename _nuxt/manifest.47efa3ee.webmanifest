@@ -1,0 +1,72 @@
+{
+  "name": "WhatsAnalyze - The WhatsApp Chat Analyzer",
+  "short_name": "WhatsAnalyze",
+  "description": "- Analyze your WhatsApp Chat in Seconds - Reveal insights & get statistics, while all data stays on your device. - No chat data is sent to a server it runs only locally in your browser.",
+  "icons": [
+    {
+      "src": "/_nuxt/icons/icon_64x64.90b52a.png",
+      "sizes": "64x64",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/_nuxt/icons/icon_120x120.90b52a.png",
+      "sizes": "120x120",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/_nuxt/icons/icon_144x144.90b52a.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/_nuxt/icons/icon_152x152.90b52a.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/_nuxt/icons/icon_192x192.90b52a.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/_nuxt/icons/icon_384x384.90b52a.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/_nuxt/icons/icon_512x512.90b52a.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#21a68d",
+  "theme_color": "#000000",
+  "lang": "en",
+  "share_target": {
+    "action": "/pwa-results?share-target=1",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "name",
+      "text": "description",
+      "url": "link",
+      "files": [
+        {
+          "name": "file",
+          "accept": [
+            "*/*"
+          ]
+        }
+      ]
+    }
+  }
+}
