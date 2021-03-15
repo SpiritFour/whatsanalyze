@@ -22,8 +22,8 @@ export default {
   methods: {
     Chat,
     newMessages(chatObject) {
-      // we only update with default chat object if chat_ is undefined
-      if (!chatObject.default || this.chat_ === undefined) {
+      // we only update with default chat object if chatis undefined
+      if (!chatObject.default || this.chat === undefined) {
         this.attachments = chatObject.attachments;
         this.chat = new Chat(chatObject.messages);
       }

@@ -1,5 +1,14 @@
 <template>
-  <Content :page="page" class="main-el mt-15" />
+  <v-container>
+    <Content :page="page" class="my-15" />
+    <Cta
+      to="/"
+      class="pt-0 pb-15"
+      title="Backup your WhatsApp Data"
+      buttonTxt="Save your WhatsApp as PDF"
+      text="✓ Group Chats ✓ Create your PDF Chat ✓ Privacy First"
+    />
+  </v-container>
 </template>
 
 <script>

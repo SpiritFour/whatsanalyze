@@ -15,7 +15,7 @@
     <v-tabs-items v-model="tab">
       <v-tab-item v-for="(data, idx) in tabData" :key="idx">
         <v-row no-gutters>
-          <v-col cols="12" sm="8" class="pt-md-15">
+          <v-col cols="12" sm="8" class="pt-md-15 pb-10">
             <v-timeline dense>
               <v-timeline-item
                 class="mb-4 align-center"
@@ -43,23 +43,26 @@
             <v-btn
               elevation="10"
               @click="
-                gtagEvent('jump_to_filehandler_' + tab, GTAG_INTERACTION, 0);
-                $vuetify.goTo('#fileHandler', {
-                  duration: 300,
-                  offset: 100,
-                });
+                to
+                  ? null
+                  : gtagEvent('jump_to_filehandler_' + tab, GTAG_INTERACTION, 0);
+$vuetify.goTo('#fileHandler', {
+                      duration: 300,
+                      offset: 100,
+                    });
               "
+              :to="to ? to : null"
               color="#07bc4c"
               class="text-md-h6 text-caption ml-10 white--text"
             >
               <v-icon>mdi-arrow-right</v-icon>
-              Select file via box above.
+              {{ cta }}
             </v-btn>
           </v-col>
           <v-col cols="12" sm="4" class="pt-5">
             <div class="carousel-container px-md-16 px-4">
               <v-img ref="smartphone" class="frame" :src="data.frameImg" />
-              <!--                this is model and pngs-->
+              <!-- model and pngs-->
               <v-carousel
                 v-model="tabStatus[idx]"
                 :continuous="false"
@@ -133,6 +136,10 @@ import {
 } from "~/functions/gtagValues";
 
 export default {
+  props: {
+    cta: { default: "Select file via box above.", type: String },
+    to: { default: null, type: String },
+  },
   data: () => ({
     GTAG_INTERACTION,
     deferredPrompt: null,
