@@ -68,8 +68,19 @@ export default {
     title: "WhatsAnalyze - The WhatsApp Chat Analyzer",
     meta: [
       {
+        hid: "og:title",
+        name: "og:title",
+        content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+      },
+      {
         hid: "description",
         name: "description",
+        content:
+          "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
+      },
+      {
+        hid: "og:description",
+        name: "og:description",
         content:
           "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
       },

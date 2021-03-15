@@ -22,9 +22,9 @@ export default {
       // bing indexing
       { name: "msvalidate.01", content: "E04DE33CC93C0FF892248C9E70A9A918" },
       {
-        hid: "og:title",
-        name: "og:title",
-        content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+        hid: "og:image",
+        property: "og:image",
+        content: "/sharePreview.png",
       },
     ],
     link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
