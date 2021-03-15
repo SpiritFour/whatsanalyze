@@ -21,12 +21,26 @@ export default {
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       // bing indexing
       { name: "msvalidate.01", content: "E04DE33CC93C0FF892248C9E70A9A918" },
+      {
+        hid: "og:image",
+        property: "og:image",
+        content: "/sharePreview.png",
+      },
     ],
-    link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
+    link: [{ rel: "icon", type: "image/png", href: "/favicon.ico" }],
   },
   pwa: {
+    meta: {
+      ogType: false,
+      ogTitle: false,
+      ogDescription: false,
+      title: false,
+      name: false,
+      description: false,
+    },
     manifest: {
-      short_name: "whatsanalyze.com",
+      name: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+      short_name: "WhatsAnalyze",
       start_url: "/",
       display: "standalone",
       background_color: "#21a68d",

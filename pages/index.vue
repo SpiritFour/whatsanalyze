@@ -70,17 +70,14 @@ export default {
       page,
     };
   },
-  pwa: {
-    manifest: {
-      name: "WhatsAnalyze - The WhatsApp Chat Analyzer",
-      description:
-        "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
-    },
-  },
   head: {
-    titleTemplate: "WhatsAnalyze - The WhatsApp Chat Analyzer",
     title: "WhatsAnalyze - The WhatsApp Chat Analyzer",
     meta: [
+      {
+        hid: "og:title",
+        name: "og:title",
+        content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+      },
       {
         hid: "description",
         name: "description",
@@ -88,8 +85,10 @@ export default {
           "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
       },
       {
-        property: "op:image",
-        content: "/whatsanalyze-logo-white.png",
+        hid: "og:description",
+        name: "og:description",
+        content:
+          "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
       },
     ],
   },

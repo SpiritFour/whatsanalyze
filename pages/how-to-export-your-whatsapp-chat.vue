@@ -29,13 +29,19 @@ export default {
     title: "WhatsAnalyze - How to Export your WhatsApp Chat",
     meta: [
       {
+        hid: "og:title",
+        name: "og:title",
+        content: "WhatsAnalyze - How to Export your WhatsApp Chat",
+      },
+      {
         hid: "description",
         name: "description",
         content: "Export your Whatsapp Chat ✓ iOS Tutorial ✓ Android Guide",
       },
       {
-        property: "op:image",
-        content: "/whatsanalyze-logo-white.png",
+        hid: "og:description",
+        name: "og:description",
+        content: "Export your Whatsapp Chat ✓ iOS Tutorial ✓ Android Guide",
       },
     ],
   },
