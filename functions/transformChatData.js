@@ -114,7 +114,7 @@ export class Chat {
     return hours;
   }
 
-  constructor(chatObject = [], groupAfter = 9, maxWordsWordCloud = 200) {
+  constructor(chatObject = [], groupAfter = 9, maxWordsWordCloud = 150) {
     // this one is the complete input
     this.chatObject = chatObject;
 

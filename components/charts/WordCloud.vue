@@ -21,6 +21,14 @@ export default {
       type: Number,
       default: 3,
     },
+    minFontSize: {
+      type: Number,
+      default: 6,
+    },
+    randomness: {
+      type: Number,
+      default: 0.1,
+    },
     stopWords: {
       type: Array,
       default: () => stopwords,
