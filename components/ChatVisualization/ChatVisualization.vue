@@ -113,7 +113,6 @@ export default {
           this.currency = getCurrencyAbbreviation(response.country);
         })
         .catch((data) => {
-          console.log("Request failed" + data + "Stay with Dollar");
         });
     },
     download() {
