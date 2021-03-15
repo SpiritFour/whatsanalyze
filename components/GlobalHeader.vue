@@ -1,5 +1,5 @@
 <template>
-  <div class="nav pl-xs-8 pl-0 py-8 additional-height">
+  <div class="nav pl-xs-8 pl-0 py-0 py-md-8 additional-height">
     <v-container>
       <nuxt-link to="/">
         <h1 style="color: black; font-size: 2em" class="pl-md-16">

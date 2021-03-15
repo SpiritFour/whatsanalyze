@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <div class="text-h3 font-weight-bold text-center">Your Chat</div>
     <div class="text-center my-4">
       <v-menu offset-y>
         <template v-slot:activator="{ on, attrs }">
@@ -98,6 +97,7 @@
 <script>
 import { getDateString } from "~/functions/utils";
 import { getAttachment } from "~/functions/attachments.js";
+import { GTAG_INTERACTION, gtagEvent } from "~/functions/gtagValues";
 export default {
   name: "Chat",
   data() {
@@ -140,6 +140,7 @@ export default {
     changeEgoTo(name) {
       this.$emit("setEgo", name);
       this.selectedEgo = name;
+      gtagEvent("change_ego_chat", GTAG_INTERACTION, 0);
     },
     async _getAttachment(fileName) {
       return await getAttachment(fileName, this.attachments);

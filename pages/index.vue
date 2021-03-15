@@ -42,9 +42,9 @@
       <Cta
         title="Analyze your own WhatsApp data now"
         buttonText="Analyze my chat"
-        text="Interested about your own chat data? Reveal some interesting facts now.
-      Start with figuring out how many toilet rolls would be needed to print
-      your whole chat. Take deep dive in your data now!."
+        text="Interested about your own chat data? Reveal some interesting and entertaining facts now.
+        Most Used Smileys, Share of speech, and much more ...
+      "
       />
     </v-container>
 
@@ -56,6 +56,12 @@
 
 <script>
 import { Chat } from "~/functions/transformChatData";
+import {
+  GTAG_INTERACTION,
+  GTAG_LEAD,
+  GTAG_NUM_PERSONS,
+  gtagEvent,
+} from "~/functions/gtagValues";
 
 export default {
   async asyncData({ $content }) {
@@ -64,17 +70,14 @@ export default {
       page,
     };
   },
-  pwa: {
-    manifest: {
-      name: "WhatsAnalyze - The WhatsApp Chat Analyzer",
-      description:
-        "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
-    },
-  },
   head: {
-    titleTemplate: "WhatsAnalyze - The WhatsApp Chat Analyzer",
     title: "WhatsAnalyze - The WhatsApp Chat Analyzer",
     meta: [
+      {
+        hid: "og:title",
+        name: "og:title",
+        content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+      },
       {
         hid: "description",
         name: "description",
@@ -82,8 +85,10 @@ export default {
           "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
       },
       {
-        property: "op:image",
-        content: "/whatsanalyze-logo-white.png",
+        hid: "og:description",
+        name: "og:description",
+        content:
+          "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
       },
     ],
   },
@@ -93,6 +98,7 @@ export default {
       isShowingChats: false,
       chat: undefined,
       attachments: undefined,
+      loading: false,
     };
   },
   methods: {
@@ -102,17 +108,23 @@ export default {
       if (!chatObject.default || this.chat === undefined) {
         this.attachments = chatObject.attachments;
         this.chat = new Chat(chatObject.messages);
+        if (this.chat.numPersonsInChat > 2) {
+          gtagEvent("analyzed_pair_chat", GTAG_INTERACTION, 0);
+        } else {
+          gtagEvent("analyzed_group_chat", GTAG_INTERACTION, 0);
+        }
+        gtagEvent(
+          "analyzed_chat_" + this.chat.numPersonsInChat,
+          GTAG_NUM_PERSONS,
+          0
+        );
       }
     },
-  },
-  created() {
-    Object.keys(this.$route.query).forEach((key) => {
-      this.$gtag.event("ref_" + key, {
-        event_category: "home",
-        event_label: "lead",
-        value: "1",
+    created() {
+      Object.keys(this.$route.query).forEach((key) => {
+        gtagEvent(key, GTAG_LEAD);
       });
-    });
+    },
   },
 };
 </script>
@@ -185,10 +197,5 @@ export default {
     width: 100%;
     padding: 3em;
   }
-}
-
-.main-el {
-  margin-top: 1em;
-  margin-bottom: 1em;
 }
 </style>

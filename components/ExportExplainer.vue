@@ -15,7 +15,7 @@
     <v-tabs-items v-model="tab">
       <v-tab-item v-for="(data, idx) in tabData" :key="idx">
         <v-row no-gutters>
-          <v-col cols="12" sm="8" class="pt-md-15">
+          <v-col cols="12" sm="8" class="pt-md-15 pb-10">
             <v-timeline dense>
               <v-timeline-item
                 class="mb-4 align-center"
@@ -40,26 +40,29 @@
                 >
               </v-timeline-item>
             </v-timeline>
-
             <v-btn
               elevation="10"
               @click="
-                $vuetify.goTo('#fileHandler', {
-                  duration: 300,
-                  offset: 100,
-                })
+                to
+                  ? null
+                  : gtagEvent('jump_to_filehandler_' + tab, GTAG_INTERACTION, 0);
+$vuetify.goTo('#fileHandler', {
+                      duration: 300,
+                      offset: 100,
+                    });
               "
+              :to="to ? to : null"
               color="#07bc4c"
               class="text-md-h6 text-caption ml-10 white--text"
             >
               <v-icon>mdi-arrow-right</v-icon>
-              Select file via box above.
+              {{ cta }}
             </v-btn>
           </v-col>
           <v-col cols="12" sm="4" class="pt-5">
             <div class="carousel-container px-md-16 px-4">
               <v-img ref="smartphone" class="frame" :src="data.frameImg" />
-              <!--                this is model and pngs-->
+              <!-- model and pngs-->
               <v-carousel
                 v-model="tabStatus[idx]"
                 :continuous="false"
@@ -126,9 +129,19 @@ import img5 from "@/assets/img/Android/5.png";
 import img5_lazy from "@/assets/img/Android/5copy.png";
 import img6 from "@/assets/img/Android/6.png";
 import img6_lazy from "@/assets/img/Android/6copy.png";
+import {
+  GTAG_INTERACTION,
+  GTAG_INSTALL,
+  gtagEvent,
+} from "~/functions/gtagValues";
 
 export default {
+  props: {
+    cta: { default: "Select file via box above.", type: String },
+    to: { default: null, type: String },
+  },
   data: () => ({
+    GTAG_INTERACTION,
     deferredPrompt: null,
     installButtonStatus: false,
     tabStatus: [0, 0],
@@ -314,12 +327,7 @@ export default {
           // Wait for the user to respond to the prompt
           const { outcome } = await this.deferredPrompt.userChoice;
           // Optionally, send analytics event with outcome of user choice
-
-          this.$gtag.event("PWA install", {
-            event_category: "home",
-            event_label: "lead",
-            value: outcome,
-          });
+          gtagEvent("pwa_" + outcome, GTAG_INSTALL, 2);
 
           // We've used the prompt, and can't use it again, throw it away
           this.deferredPrompt = null;
@@ -341,6 +349,7 @@ export default {
         // Optionally, send analytics event that PWA install promo was shown.
       });
     },
+    gtagEvent,
   },
   created() {
     this.catchPWA();
