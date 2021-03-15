@@ -22,7 +22,7 @@
       <Share :use-html2-canvas="true">
         <ChartsFunFacts
           :chartdata="chat"
-          class="pb-10"
+          class="pb-md-10"
           data-html2canvas-ignore
           remove-height-in-html2-canvas
         />

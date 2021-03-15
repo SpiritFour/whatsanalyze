@@ -42,9 +42,9 @@
       <Cta
         title="Analyze your own WhatsApp data now"
         buttonText="Analyze my chat"
-        text="Interested about your own chat data? Reveal some interesting facts now.
-      Start with figuring out how many toilet rolls would be needed to print
-      your whole chat. Take deep dive in your data now!."
+        text="Interested about your own chat data? Reveal some interesting and entertaining facts now.
+        Most Used Smileys, Share of speech, and much more ...
+      "
       />
     </v-container>
 

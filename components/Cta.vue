@@ -32,7 +32,7 @@ export default {
       type: String,
     },
     title: {
-      default: "Start now",
+      default: "Analyze your Chat",
       type: String,
     },
   },

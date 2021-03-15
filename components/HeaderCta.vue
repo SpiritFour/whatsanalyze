@@ -13,7 +13,7 @@
         background: rgba(217, 60, 60, 0.7);
         color: black;
         border-radius: 10px;
-        width: fit-content;
+        width: 100%;
       "
       class="py-1 px-3 text-lg-h6"
     >
@@ -27,7 +27,7 @@
         background: rgba(2, 111, 140, 0.7);
         color: black;
         border-radius: 10px;
-        width: fit-content;
+        width: 100%;
       "
       class="py-1 px-3 text-lg-h6"
     >

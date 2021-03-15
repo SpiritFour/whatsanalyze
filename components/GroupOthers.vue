@@ -1,6 +1,6 @@
 <template>
   <div v-if="chatObject.numPersonsInChat > 2" class="mt-16">
-    <div class="text-h2 font-weight-bold mb-2">
+    <div class="text-h2 font-weight-bold mb-5">
       <span class="red darken-2 white--text px-2">{{
         chatObject.numPersonsInChat
       }}</span>
