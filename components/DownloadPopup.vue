@@ -1,12 +1,14 @@
 <template>
   <v-col class="mb-8">
     <v-row justify="center">
-      <div class="cta my-md-4">
-        <div class="text-h3 font-weight-bold pb-4">
+      <div class="my-md-4" :class="{ cta: !isSimple }">
+        <div v-if="!isSimple" class="text-h3 font-weight-bold pb-4">
           Download all Graphs at once!
         </div>
-        <div class="text-body-1 pb-2">All for free, just for you ❤️️</div>
-        <div class="text-body-2 pb-4">
+        <div v-if="!isSimple" class="text-body-1 pb-2">
+          Share them with your friends, all free just for you ❤️️
+        </div>
+        <div v-if="!isSimple" class="text-body-2 pb-4">
           You might want to wait until the <b>Word Cloud</b> is finished
           arranging.
         </div>
@@ -19,8 +21,7 @@
               @click="download"
               :loading="loading"
             >
-              <v-icon class="mr-2">mdi-download</v-icon>Download your Results
-              now!
+              <v-icon class="mr-2">mdi-download</v-icon>Download Results
             </v-btn>
           </template>
 
@@ -84,10 +85,11 @@
           </v-card>
         </v-dialog>
 
-        <div class="text-text-h3 my-4">
+        <div v-if="!isSimple" class="text-text-h3 my-4">
           Looking for <b>PDF download</b> instead?
         </div>
         <v-btn
+          v-if="!isSimple"
           color="#07bc4c"
           dark
           @click="$vuetify.goTo('#payButton', { duration: 300, offset: 100 })"
@@ -105,7 +107,10 @@ import { downloadBase64File } from "~/functions/utils";
 
 export default {
   name: "DownloadPopup",
-  props: ["chat"],
+  props: {
+    chat: { type: Object },
+    isSimple: { default: false, type: Boolean },
+  },
   data() {
     return {
       dialog: false,

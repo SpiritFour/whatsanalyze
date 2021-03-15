@@ -1,20 +1,23 @@
 <template>
-  <div v-if="chat" class="text-center pt-10">
+  <div v-if="chat" class="text-center">
     <div id="download-graphs">
       <GlobalHeader class="only-visible-to-html2canvas" />
-
+      <DownloadPopup
+        :chat="chat"
+        isSimple
+        data-html2canvas-ignore
+        remove-height-in-html2-canvas
+      />
+      <div class="text-h2 font-weight-bold pb-10">Chat Timeline</div>
+      <div>Messages per Day</div>
+      <Share id="chat-timeline">
+        <ChartsLineChart :chartdata="chat" />
+      </Share>
       <DownloadPopup
         :chat="chat"
         data-html2canvas-ignore
         remove-height-in-html2-canvas
       />
-
-      <div class="text-h2 font-weight-bold py-10">Chat Timeline</div>
-      <div>Messages per Day</div>
-      <Share id="chat-timeline">
-        <ChartsLineChart :chartdata="chat" />
-      </Share>
-
       <Share :use-html2-canvas="true">
         <ChartsFunFacts
           :chartdata="chat"
