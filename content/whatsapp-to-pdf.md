@@ -1,6 +1,6 @@
 ---
-title: How to create a PDF from your WhatsApp chat
-description: Learn how to convert your WhatsApp into a beautiful PDF.
+title: WhatsApp chat to PDF
+description: Learn how to convert your WhatsApp Chat into a beautiful PDF.
 ---
 
 Do you want to know how to **analyze** your **WhatsApp chat**? You can do it right here in **less than 2 Minutes**.

@@ -1,5 +1,7 @@
 <template>
-  <Content :page="page" class="my-15" />
+  <v-container>
+    <Content :page="page" class="my-15" />
+  </v-container>
 </template>
 
 <script>

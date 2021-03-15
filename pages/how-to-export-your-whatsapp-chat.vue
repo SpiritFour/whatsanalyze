@@ -11,7 +11,7 @@
       to="/"
       class="pt-0 pb-15"
       title="Analyze your own WhatsApp data"
-      buttonText="Analyze my chat"
+      buttonTxt="Analyze my chat"
       text="Interested about your own chat data? Take deep dive in your data!"
     />
   </v-container>

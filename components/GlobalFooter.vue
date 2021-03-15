@@ -1,6 +1,6 @@
 <template>
   <div class="foot py-7 additional-height">
-    <h3 class="my-3" v-for="post in posts" :key="post">
+    <h3 class="my-3" v-for="post in posts" :key="post.to">
       <nuxt-link :to="{ name: post.name }">
         {{ post.text }}
       </nuxt-link>

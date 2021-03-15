@@ -24,7 +24,7 @@
 export default {
   props: {
     to: { default: "", type: String },
-    buttonTxt: { default: "Analyze your chat now!", type: String },
+    buttonTxt: { default: "Analyze your chat!", type: String },
     text: {
       default:
         "Analyze your chat, reveal unknown facts and surprise your friends with insights into your communication.",
