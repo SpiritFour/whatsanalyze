@@ -14,7 +14,7 @@ We believe **everyone** should have the power to **get insights** into **their**
 Don't have your chat file yet? Read our tutorial: **How to export your chat** now!
 ## How to export your WhatsApp Chat
 
-The **tutorial to export** your chat depends on the device you are using. We have a tutorial for **1: iOS**, for **2: Android**, or **3: PC** they work for **individual chats** or **group chats**.
+The **tutorial to export your chat** depends on the device you are using. We have a tutorial for **1: iOS**, for **2: Android**, or **3: PC** they work for **individual chats** or **group chats**.
 
 ### Option 1 iPhone: Export as a .txt file on iOS
 
@@ -36,14 +36,14 @@ Exporting your complete chat history is easy
 
 1. Navigate to the WhatsApp application on your iPhone and open it
 1. Tap on the chat and then again on the name of the chat at the top. To open up further details about this chat
-1. In chat settings, scroll all the way to the bottom and tap on Email chat. Then you select without media. ℹ️  For the chat analysis only a .txt is needed. Choose Without Media ℹ️
+1. In chat settings, scroll to the bottom and tap on Email chat. Then you select without media. 
 
 - Attach Media
-  * This option will also export all media of the chat, including Photos and Videos
-
-  ❗️ Attach media will generate a larger chat archive ❗️
+  * This option will also export all media of the chat (including photos and videos)
+    ❗️ Attaching media will generate a larger chat archive. Use this if you want to backup everything. ❗️
 - Without Media
   * With this option, you will only export the text within the chat as a .txt file.
+    ❗️ For the chat analysis, this works as well. But your images will not be shown! ❗️
 
 ### Option 3 PC: Export as a .txt file on your computer running WhatsApp web
 
