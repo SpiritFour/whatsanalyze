@@ -17,16 +17,17 @@
     <v-dialog v-model="showDownloadPopup" width="550">
       <template v-slot:activator="{ on, attrs }">
         <v-row justify="center" class="mt-3">
-          <v-btn class="mr-3" elevation="10" @click="downloadSample">
+          <v-btn class="ma-3" elevation="10" @click="downloadSample">
             <v-icon class="mr-1">mdi-download</v-icon>
             <span><b>free</b> preview PDF</span>
           </v-btn>
           <v-btn
+            class="ma-3 white--text"
             dark
             v-bind="attrs"
             v-on="on"
             color="#07bc4c"
-            style="color: white; max-width: 100%"
+            style="max-width: 100%"
             elevation="10"
             @click="gtagEvent('full_pdf_pressed', GTAG_PAYMENT)"
           >

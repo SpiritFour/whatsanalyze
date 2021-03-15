@@ -2,10 +2,8 @@
   <v-container class="px-6">
     <!-- First and last contact -->
 
-    <v-row class="my-7">
-      <v-col
-        cols="12"
-        class="text-h5 text-md-h4 font-weight-bold pa-0 text-left"
+    <v-row class="my-7 text-left">
+      <v-col cols="12" class="text-h5 text-md-h4 font-weight-bold pa-0"
         >First Message
       </v-col>
       <div class="font-weight-bold text-h3 text-md-h2">
@@ -13,13 +11,11 @@
       </div>
     </v-row>
 
-    <v-row class="my-7">
+    <v-row class="my-7 text-right">
       <div class="text-md-h2 text-h3 font-weight-bold ml-auto">
         {{ lastDateString }}
       </div>
-      <v-col
-        cols="12"
-        class="text-h5 text-md-h4 font-weight-bold pa-0 text-right"
+      <v-col cols="12" class="text-h5 text-md-h4 font-weight-bold pa-0"
         >Last Message
       </v-col>
     </v-row>

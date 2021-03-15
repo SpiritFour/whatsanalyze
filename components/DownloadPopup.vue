@@ -8,10 +8,6 @@
         <div v-if="!isSimple" class="text-body-1 pb-2">
           Share them with your friends, all free just for you ❤️️
         </div>
-        <div v-if="!isSimple" class="text-body-2 pb-4">
-          You might want to wait until the <b>Word Cloud</b> is finished
-          arranging.
-        </div>
         <v-dialog v-model="dialog" width="600">
           <template v-slot:activator="{ on }">
             <v-btn
@@ -86,19 +82,20 @@
         </v-dialog>
 
         <div v-if="!isSimple" class="text-text-h3 my-4">
-          Looking for <b>PDF download</b> instead?
+          Looking for <b>PDF download</b>?
+
+          <v-btn
+            v-if="!isSimple"
+            color="#07bc4c"
+            dark
+            @click="
+              gtagEvent('jump_to_pdf_download_cta', GTAG_INTERACTION, 0);
+              $vuetify.goTo('#payButton', { duration: 300, offset: 100 });
+            "
+            ><v-icon class="mr-2">mdi-keyboard-return</v-icon>go to PDF
+            download</v-btn
+          >
         </div>
-        <v-btn
-          v-if="!isSimple"
-          color="#07bc4c"
-          dark
-          @click="
-            gtagEvent('jump_to_pdf_download_cta', GTAG_INTERACTION, 0);
-            $vuetify.goTo('#payButton', { duration: 300, offset: 100 });
-          "
-          ><v-icon class="mr-2">mdi-keyboard-return</v-icon>go to PDF
-          download</v-btn
-        >
       </div>
     </v-row>
   </v-col>
