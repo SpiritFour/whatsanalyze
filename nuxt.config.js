@@ -26,13 +26,23 @@ export default {
         name: "description",
         content: "WhatsAnalyze",
       },
-      { hid: "og:title", name: "og:title", content: "WhatsAnalyze" },
+      {
+        hid: "og:title",
+        name: "og:title",
+        content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+      },
     ],
     link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
   },
   pwa: {
+    meta: {
+      ogType: false,
+      ogTitle: false,
+      ogDescription: false,
+    },
     manifest: {
-      short_name: "whatsanalyze.com",
+      name: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+      short_name: "WhatsAnalyze",
       start_url: "/",
       display: "standalone",
       background_color: "#21a68d",
