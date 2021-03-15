@@ -29,50 +29,50 @@ export default {
     ],
     link: [{ rel: "icon", type: "image/png", href: "/favicon.ico" }],
   },
-  pwa: {
-    meta: {
-      ogType: false,
-      ogTitle: false,
-      ogDescription: false,
-      title: false,
-      name: false,
-      description: false,
-    },
-    manifest: {
-      name: "WhatsAnalyze - The WhatsApp Chat Analyzer",
-      short_name: "WhatsAnalyze",
-      start_url: "/",
-      display: "standalone",
-      background_color: "#21a68d",
-      theme_color: "#000000",
-      lang: "en",
-      useWebmanifestExtension: true,
-      share_target: {
-        action: "/pwa-results?share-target=1",
-        method: "POST",
-        enctype: "multipart/form-data",
-        params: {
-          title: "name",
-          text: "description",
-          url: "link",
-          files: [
-            {
-              name: "file",
-              accept: ["*/*"],
-            },
-          ],
-        },
-      },
-    },
-    workbox: {
-      importScripts: ["custom-sw.js"],
-      dev: local,
-    },
-    icon: {
-      source: "/assets",
-      fileName: "whatsanalyze-logo-black-PWA.png",
-    },
-  },
+  // pwa: {
+  //   meta: {
+  //     ogType: false,
+  //     ogTitle: false,
+  //     ogDescription: false,
+  //     title: false,
+  //     name: false,
+  //     description: false,
+  //   },
+  //   manifest: {
+  //     name: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+  //     short_name: "WhatsAnalyze",
+  //     start_url: "/",
+  //     display: "standalone",
+  //     background_color: "#21a68d",
+  //     theme_color: "#000000",
+  //     lang: "en",
+  //     useWebmanifestExtension: true,
+  //     share_target: {
+  //       action: "/pwa-results?share-target=1",
+  //       method: "POST",
+  //       enctype: "multipart/form-data",
+  //       params: {
+  //         title: "name",
+  //         text: "description",
+  //         url: "link",
+  //         files: [
+  //           {
+  //             name: "file",
+  //             accept: ["*/*"],
+  //           },
+  //         ],
+  //       },
+  //     },
+  //   },
+  //   workbox: {
+  //     importScripts: ["custom-sw.js"],
+  //     dev: local,
+  //   },
+  //   icon: {
+  //     source: "/assets",
+  //     fileName: "whatsanalyze-logo-black-PWA.png",
+  //   },
+  // },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
