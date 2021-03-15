@@ -1,10 +1,10 @@
 <template>
-  <article class="article px-10">
-    <div class="text-center text-h2 pt-10 font-weight-bold">
+  <article class="article px-10 py-10">
+    <div class="text-center text-h2 pb-10 font-weight-bold">
       {{ page.title }}
     </div>
     <!-- toc -->
-    <div class="toc">
+    <div class="toc" v-if="page.toc">
       <ol>
         <li v-for="heading in page.toc" :key="heading.id">
           <a :href="'#' + heading.id">
@@ -14,7 +14,7 @@
       </ol>
     </div>
     <!-- main content -->
-    <nuxt-content :document="page" class="py-10" />
+    <nuxt-content :document="page" />
   </article>
 </template>
 

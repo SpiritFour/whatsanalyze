@@ -6,7 +6,7 @@
       to="/"
     />
 
-    <Content :page="page" class="mt-15" />
+    <Content :page="page" />
     <Cta
       to="/"
       class="pt-0 pb-15"
