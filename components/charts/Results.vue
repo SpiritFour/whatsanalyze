@@ -5,6 +5,7 @@
       <DownloadPopup
         :chat="chat"
         isSimple
+        class="my-5"
         data-html2canvas-ignore
         remove-height-in-html2-canvas
       />
