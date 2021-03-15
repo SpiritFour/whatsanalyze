@@ -22,17 +22,6 @@ export default {
       // bing indexing
       { name: "msvalidate.01", content: "E04DE33CC93C0FF892248C9E70A9A918" },
       {
-        hid: "og:title",
-        name: "og:title",
-        content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
-      },
-      {
-        hid: "description",
-        name: "description",
-        content:
-          "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
-      },
-      {
         hid: "og:image",
         property: "og:image",
         content: "/sharePreview.png",
