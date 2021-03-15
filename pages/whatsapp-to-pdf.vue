@@ -28,6 +28,11 @@ export default {
     title: "WhatsAnalyze - How to Export your WhatsApp Chat to PDF",
     meta: [
       {
+        hid: "robots",
+        name: "robots",
+        content: "noindex",
+      },
+      {
         hid: "og:title",
         name: "og:title",
         content: "WhatsAnalyze - How to Export your WhatsApp Chat to PDF",
