@@ -420,6 +420,13 @@ export class Chat {
               "<Medien",
               "weggelassen",
               "omitted",
+              "_",
+              "_weggelassen>",
+              "_ommited>",
+              "_omesso>",
+              "_omitted",
+              "_weggelassen",
+              "_attached",
             ].includes(word[0].toLowerCase())
           ) && word[1] > 1
       )
