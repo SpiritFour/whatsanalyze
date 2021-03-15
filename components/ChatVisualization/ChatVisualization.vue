@@ -47,6 +47,7 @@ export default {
       this.ego = ego;
     },
     detectCurrency() {
+      // We lookup the IP to set the currency according to the user's location. 
       fetch("https://extreme-ip-lookup.com/json/")
         .then((res) => res.json())
         .then((response) => {
