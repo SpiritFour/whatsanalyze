@@ -104,6 +104,7 @@
 <script>
 import html2canvas from "html2canvas";
 import { downloadBase64File } from "~/functions/utils";
+import { gtagEvent, GTAG_PAYMENT, GTAG_RESULTS } from "~/functions/gtagValues";
 
 export default {
   name: "DownloadPopup",
@@ -115,16 +116,13 @@ export default {
     return {
       dialog: false,
       loading: false,
+      suffix: this.isSimple ? "-top" : "",
     };
   },
   methods: {
     download: function () {
       this.loading = true;
-      this.$gtag.event("download-btn-clicked" + this.isSimple ? "top" : "", {
-        event_category: "button",
-        event_label: "download",
-        value: "1",
-      });
+      gtagEvent("download_image", GTAG_RESULTS);
 
       setTimeout(() => {
         let additionalHeight = 0;
@@ -168,11 +166,7 @@ export default {
       }, 250);
     },
     paypalButtonPressed() {
-      this.$gtag.event("donation-popup-clicked", {
-        event_category: "donation",
-        event_label: "paypal-clicked",
-        value: "1",
-      });
+      gtagEvent("donation_download_results", GTAG_PAYMENT, 5);
     },
   },
 };

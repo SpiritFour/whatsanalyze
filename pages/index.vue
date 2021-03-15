@@ -56,6 +56,7 @@
 
 <script>
 import { Chat } from "~/functions/transformChatData";
+import { GTAG_LEAD, gtagEvent } from "~/functions/gtagValues";
 
 export default {
   async asyncData({ $content }) {
@@ -107,11 +108,7 @@ export default {
     },
     created() {
       Object.keys(this.$route.query).forEach((key) => {
-        this.$gtag.event("ref_" + key, {
-          event_category: "home",
-          event_label: "lead",
-          value: "1",
-        });
+        gtagEvent(key, GTAG_LEAD);
       });
     },
   },

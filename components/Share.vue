@@ -19,6 +19,7 @@
 <script>
 import { downloadBase64File } from "~/functions/utils";
 import html2canvas from "html2canvas";
+import { GTAG_RESULTS, gtagEvent } from "~/functions/gtagValues";
 
 export default {
   name: "Share",
@@ -82,11 +83,8 @@ export default {
       this.loading = false;
 
       if (this.canShare) {
-        this.$gtag.event("download-graph", {
-          event_category: "graph",
-          event_label: chartName + "-share-pressed",
-          value: "1",
-        });
+        gtagEvent("share_" + chartName + "_pressed", GTAG_RESULTS, 0);
+
         canvas.toBlob((blob) => {
           navigator
             .share({
@@ -100,28 +98,16 @@ export default {
               ],
             })
             .then(() => {
-              this.$gtag.event("download-graph", {
-                event_category: "graph",
-                event_label: chartName + "-shared",
-                value: "1",
-              });
+              gtagEvent("share_" + chartName + "_shared", GTAG_RESULTS, 2);
             });
         });
       } else {
-        this.$gtag.event("download-graph", {
-          event_category: "graph",
-          event_label: chartName + "-download-pressed",
-          value: "1",
-        });
         downloadBase64File(
           canvas.toDataURL(),
           chartName + "-" + this.imageName
         );
-        this.$gtag.event("download-graph", {
-          event_category: "graph",
-          event_label: chartName + "-downloaded",
-          value: "1",
-        });
+
+        gtagEvent("download_" + chartName, GTAG_RESULTS);
       }
     },
   },

@@ -126,6 +126,7 @@ import img5 from "@/assets/img/Android/5.png";
 import img5_lazy from "@/assets/img/Android/5copy.png";
 import img6 from "@/assets/img/Android/6.png";
 import img6_lazy from "@/assets/img/Android/6copy.png";
+import { GTAG_INSTALL, gtagEvent } from "~/functions/gtagValues";
 
 export default {
   data: () => ({
@@ -314,12 +315,7 @@ export default {
           // Wait for the user to respond to the prompt
           const { outcome } = await this.deferredPrompt.userChoice;
           // Optionally, send analytics event with outcome of user choice
-
-          this.$gtag.event("PWA install", {
-            event_category: "home",
-            event_label: "lead",
-            value: outcome,
-          });
+          gtagEvent("pwa_" + outcome, GTAG_INSTALL, 2);
 
           // We've used the prompt, and can't use it again, throw it away
           this.deferredPrompt = null;
