@@ -93,6 +93,7 @@ export default {
       isShowingChats: false,
       chat: undefined,
       attachments: undefined,
+      loading: false,
     };
   },
   methods: {
@@ -104,15 +105,15 @@ export default {
         this.chat = new Chat(chatObject.messages);
       }
     },
-  },
-  created() {
-    Object.keys(this.$route.query).forEach((key) => {
-      this.$gtag.event("ref_" + key, {
-        event_category: "home",
-        event_label: "lead",
-        value: "1",
+    created() {
+      Object.keys(this.$route.query).forEach((key) => {
+        this.$gtag.event("ref_" + key, {
+          event_category: "home",
+          event_label: "lead",
+          value: "1",
+        });
       });
-    });
+    },
   },
 };
 </script>

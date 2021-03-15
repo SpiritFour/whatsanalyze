@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <div class="text-h3 font-weight-bold text-center">Your Chat</div>
     <div class="text-center my-4">
       <v-menu offset-y>
         <template v-slot:activator="{ on, attrs }">
