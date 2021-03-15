@@ -1,7 +1,7 @@
 <template>
   <v-col class="mb-8">
     <v-row justify="center">
-      <div class="my-md-4" :class="{ cta: !isSimple }">
+      <div class="my-md-4 pa-8" :class="{ cta: !isSimple }">
         <div v-if="!isSimple" class="text-h3 font-weight-bold pb-4">
           Download all Graphs at once!
         </div>
