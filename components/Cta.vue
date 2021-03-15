@@ -5,7 +5,10 @@
     <br />
     <v-btn
       to="/"
-      @click="$vuetify.goTo('#fileHandler', { duration: 300, offset: 100 })"
+      @click="
+        gtagEvent('jump_to_filehandler_cta', GTAG_INTERACTION, 0);
+        $vuetify.goTo('#fileHandler', { duration: 300, offset: 100 });
+      "
       color="#07bc4c"
       style="color: #ffffff"
       class="mt-5 mb-2 text-h6"
@@ -17,6 +20,8 @@
 </template>
 
 <script>
+import { GTAG_INTERACTION, gtagEvent } from "~/functions/gtagValues";
+
 export default {
   props: {
     buttonTxt: { default: "Analyze your chat now!", type: String },
@@ -29,6 +34,10 @@ export default {
       default: "Start now",
       type: String,
     },
+  },
+  methods: {
+    GTAG_INTERACTION,
+    gtagEvent,
   },
 };
 </script>

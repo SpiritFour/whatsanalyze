@@ -126,7 +126,11 @@ import img5 from "@/assets/img/Android/5.png";
 import img5_lazy from "@/assets/img/Android/5copy.png";
 import img6 from "@/assets/img/Android/6.png";
 import img6_lazy from "@/assets/img/Android/6copy.png";
-import { GTAG_INSTALL, gtagEvent } from "~/functions/gtagValues";
+import {
+  GTAG_INTERACTION,
+  GTAG_INSTALL,
+  gtagEvent,
+} from "~/functions/gtagValues";
 
 export default {
   data: () => ({
@@ -337,7 +341,7 @@ export default {
         // Optionally, send analytics event that PWA install promo was shown.
       });
     },
-    GTAG_INSTALL,
+    GTAG_INTERACTION,
     gtagEvent,
   },
   created() {
