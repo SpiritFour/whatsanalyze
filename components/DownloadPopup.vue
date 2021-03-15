@@ -120,9 +120,9 @@ export default {
   methods: {
     download: function () {
       this.loading = true;
-      this.$gtag.event("donation-popup-clicked", {
-        event_category: "donation",
-        event_label: "popup-clicked",
+      this.$gtag.event("download-btn-clicked" + this.isSimple ? "top" : "", {
+        event_category: "button",
+        event_label: "download",
         value: "1",
       });
 
