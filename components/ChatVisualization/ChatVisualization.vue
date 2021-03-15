@@ -29,6 +29,8 @@
 
 <script>
 import PdfDownload from "~/components/ChatVisualization/PdfDownloadPopup";
+import { render } from "~/functions/pdf";
+import { getCurrencyAbbreviation } from "country-currency-map";
 
 export default {
   name: "ChatVisualization",
@@ -38,13 +40,55 @@ export default {
     return {
       ego: this.chat.messagesPerPerson[0].name,
       price: 0.99,
-      currency: "EUR",
+      currency: "USD",
     };
   },
   methods: {
     setEgo(ego) {
       this.ego = ego;
     },
+    detectCurrency() {
+      fetch("https://extreme-ip-lookup.com/json/")
+        .then((res) => res.json())
+        .then((response) => {
+          this.currency = getCurrencyAbbreviation(response.country);
+        })
+        .catch((data) => {
+        });
+    },
+    download() {
+      this.$gtag.event("download-pdf", {
+        event_category: "download",
+        event_label: "download-pdf",
+        value: "10",
+      });
+      this.isLoading = true;
+      render(this.chat, this.attachments, this.ego, false).then(
+        () => (this.isLoading = false)
+      );
+    },
+    onCreateOrder(data, actions) {
+      console.log("order created", data, actions);
+    },
+    onApprove() {
+      this.download();
+    },
+    onError() {},
+    downloadSample() {
+      this.$gtag.event("download-sample-pdf", {
+        event_category: "home",
+        event_label: "download-sample-pdf",
+        value: "5",
+      });
+      this.isLoading = true;
+      // download sample
+      render(this.chat, this.attachments, this.ego, true).then(
+        () => (this.isLoading = false)
+      );
+    },
+  },
+  mounted() {
+    this.detectCurrency();
   },
 };
 </script>
