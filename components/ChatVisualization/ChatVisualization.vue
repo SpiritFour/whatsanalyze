@@ -51,9 +51,9 @@ export default {
       fetch("https://extreme-ip-lookup.com/json/")
         .then((res) => res.json())
         .then((response) => {
-          console.log(response);
-          if (response !== undefined && response !== "undefined")
-            this.currency = getCurrencyAbbreviation(response.country);
+          let userDependentCurrency = getCurrencyAbbreviation(response.country);
+          if (userDependentCurrency !== undefined)
+            this.currency = userDependentCurrency;
         })
         .catch(() => {});
     },
