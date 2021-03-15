@@ -105,9 +105,13 @@ export default {
       gtagEvent("sample_download", GTAG_PDF, 2);
       this.isLoading = true;
       // download sample
-      render(this.chat, this.attachments, this.ego, true).then(
-        () => (this.isLoading = false)
-      );
+      console.log(this.$route.query);
+      render(
+        this.chat,
+        this.attachments,
+        this.ego,
+        !this.$route.query.free
+      ).then(() => (this.isLoading = false));
     },
     gtagEvent,
   },
