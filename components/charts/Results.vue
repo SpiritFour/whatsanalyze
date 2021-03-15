@@ -79,6 +79,9 @@
         </v-col>
       </v-row>
 
+      <div class="text-h3 font-weight-bold pt-10">Word Cloud</div>
+      <ChartsWordCloud id="wordcloud" :chartdata="chat" class="px-10" />
+
       <DownloadPopup
         :chat="chat"
         data-html2canvas-ignore
