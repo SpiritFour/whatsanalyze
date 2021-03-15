@@ -39,6 +39,7 @@ export default {
       ogType: false,
       ogTitle: false,
       ogDescription: false,
+      title: false,
     },
     manifest: {
       name: "WhatsAnalyze - The WhatsApp Chat Analyzer",
