@@ -21,6 +21,12 @@ export default {
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       // bing indexing
       { name: "msvalidate.01", content: "E04DE33CC93C0FF892248C9E70A9A918" },
+      {
+        hid: "description",
+        name: "description",
+        content: "WhatsAnalyze",
+      },
+      { hid: "og:title", name: "og:title", content: "WhatsAnalyze" },
     ],
     link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
   },
