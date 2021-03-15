@@ -6,10 +6,9 @@
     <v-btn
       :to="to ? to : null"
       @click="
-        to
-          ? null
-          :         gtagEvent('jump_to_filehandler_cta', GTAG_INTERACTION, 0);
-$vuetify.goTo('#fileHandler', { duration: 300, offset: 100 });
+        to ? null : gtagEvent('jump_to_filehandler_cta', GTAG_INTERACTION, 0);
+        $vuetify.goTo('#fileHandler', { duration: 300, offset: 100 });
+      "
       color="#07bc4c"
       style="color: #ffffff"
       class="mt-5 text-h6"
