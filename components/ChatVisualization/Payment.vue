@@ -77,7 +77,6 @@ export default {
           },
 
           onError: function (err) {
-            console.log(err);
             context.$emit("onError", err);
           },
         })
