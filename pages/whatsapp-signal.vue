@@ -1,5 +1,5 @@
 <template>
-  <Content :page="page" class="main-el mt-15" />
+  <Content :page="page" class="my-15" />
 </template>
 
 <script>

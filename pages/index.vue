@@ -186,9 +186,4 @@ export default {
     padding: 3em;
   }
 }
-
-.main-el {
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
 </style>

@@ -1,6 +1,8 @@
 <template>
   <article class="article px-10">
-    <div class="text-center text-h2 py-10">{{ page.title }}</div>
+    <div class="text-center text-h2 pt-10 font-weight-bold">
+      {{ page.title }}
+    </div>
     <!-- toc -->
     <div class="toc">
       <ol>
