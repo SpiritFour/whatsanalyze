@@ -40,14 +40,14 @@
                 >
               </v-timeline-item>
             </v-timeline>
-
             <v-btn
               elevation="10"
               @click="
+                gtagEvent('jump_to_filehandler_' + tab, GTAG_INTERACTION, 0);
                 $vuetify.goTo('#fileHandler', {
                   duration: 300,
                   offset: 100,
-                })
+                });
               "
               color="#07bc4c"
               class="text-md-h6 text-caption ml-10 white--text"
@@ -126,9 +126,15 @@ import img5 from "@/assets/img/Android/5.png";
 import img5_lazy from "@/assets/img/Android/5copy.png";
 import img6 from "@/assets/img/Android/6.png";
 import img6_lazy from "@/assets/img/Android/6copy.png";
+import {
+  GTAG_INTERACTION,
+  GTAG_INSTALL,
+  gtagEvent,
+} from "~/functions/gtagValues";
 
 export default {
   data: () => ({
+    GTAG_INTERACTION,
     deferredPrompt: null,
     installButtonStatus: false,
     tabStatus: [0, 0],
@@ -314,12 +320,7 @@ export default {
           // Wait for the user to respond to the prompt
           const { outcome } = await this.deferredPrompt.userChoice;
           // Optionally, send analytics event with outcome of user choice
-
-          this.$gtag.event("PWA install", {
-            event_category: "home",
-            event_label: "lead",
-            value: outcome,
-          });
+          gtagEvent("pwa_" + outcome, GTAG_INSTALL, 2);
 
           // We've used the prompt, and can't use it again, throw it away
           this.deferredPrompt = null;
@@ -341,6 +342,7 @@ export default {
         // Optionally, send analytics event that PWA install promo was shown.
       });
     },
+    gtagEvent,
   },
   created() {
     this.catchPWA();

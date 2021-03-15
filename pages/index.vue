@@ -56,6 +56,12 @@
 
 <script>
 import { Chat } from "~/functions/transformChatData";
+import {
+  GTAG_INTERACTION,
+  GTAG_LEAD,
+  GTAG_NUM_PERSONS,
+  gtagEvent,
+} from "~/functions/gtagValues";
 
 export default {
   async asyncData({ $content }) {
@@ -103,15 +109,21 @@ export default {
       if (!chatObject.default || this.chat === undefined) {
         this.attachments = chatObject.attachments;
         this.chat = new Chat(chatObject.messages);
+        if (this.chat.numPersonsInChat > 2) {
+          gtagEvent("analyzed_pair_chat", GTAG_INTERACTION, 0);
+        } else {
+          gtagEvent("analyzed_group_chat", GTAG_INTERACTION, 0);
+        }
+        gtagEvent(
+          "analyzed_chat_" + this.chat.numPersonsInChat,
+          GTAG_NUM_PERSONS,
+          0
+        );
       }
     },
     created() {
       Object.keys(this.$route.query).forEach((key) => {
-        this.$gtag.event("ref_" + key, {
-          event_category: "home",
-          event_label: "lead",
-          value: "1",
-        });
+        gtagEvent(key, GTAG_LEAD);
       });
     },
   },
