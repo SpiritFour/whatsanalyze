@@ -46,7 +46,7 @@
               Get a preview of your PDF for free
             </div>
           </template>
-          <v-card>
+          <v-card style="overflow-x: hidden">
             <v-card-title class="headline cyan" style="word-break: normal">
               <div class="text-h4 font-weight-bold">Nice !!</div>
               <span>You are just a step away from your PDF!</span>
@@ -79,19 +79,41 @@
                 :amount="3.5"
               />
             </v-row>
-            <v-row style="max-width: 100%">
-              <v-col cols="auto" class="text-h5">
-                Or insert pre-paid token:</v-col
-              >
-              <v-col>
-                <v-text-field
-                  counter="6"
-                  maxlength="6"
-                  style="font-family: monospace; width: 6em"
-                ></v-text-field>
-              </v-col>
-              <v-col cols="2"><v-btn>redeem</v-btn></v-col>
-            </v-row>
+            <v-card-text class="text-h5">
+              Or insert pre-paid token:</v-card-text
+            >
+            <v-card-text>
+              {{ email }} {{ token }}
+              <v-form v-model="valid" lazy-validation>
+                <v-row>
+                  <v-col>
+                    <v-text-field
+                      v-model="token"
+                      counter="20"
+                      maxlength="20"
+                      minlength="20"
+                      label="Token"
+                      placeholder="6b06Cv0Kis7JgjV6IzYQ"
+                      style="font-family: monospace; width: fit-content"
+                      :rules="tokenRules"
+                      required
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="7">
+                    <v-text-field
+                      v-model="email"
+                      placeholder="john@doe.com"
+                      :rules="emailRules"
+                      label="E-mail"
+                      required
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
+                <v-btn :disabled="!valid" color="success" @click="download">
+                  Start Download
+                </v-btn>
+              </v-form>
+            </v-card-text>
 
             <v-divider></v-divider>
             <v-card-actions>
@@ -124,6 +146,18 @@ export default {
       ego: this.chat.messagesPerPerson[0].name,
       isLoading: false,
       data: [],
+      emailRules: [
+        (v) => !!v || "E-mail is required",
+        (v) => /.+@.+/.test(v) || "E-mail must be valid",
+      ],
+      tokenRules: [
+        (v) => !!v || "Token is required",
+        (v) =>
+          !v || v.length === 20 || "Token consists of exactly 20 characters",
+      ],
+      token: "",
+      email: "",
+      valid: true,
     };
   },
   methods: {
