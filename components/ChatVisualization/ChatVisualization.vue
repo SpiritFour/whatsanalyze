@@ -38,7 +38,7 @@ export default {
   data() {
     return {
       ego: this.chat.messagesPerPerson[0].name,
-      price: 0.99,
+      price: 1.99,
       currency: "USD",
     };
   },
@@ -46,12 +46,16 @@ export default {
     setEgo(ego) {
       this.ego = ego;
     },
+    // We lookup the IP to set the currency according to the user's location.
     detectCurrency() {
       fetch("https://extreme-ip-lookup.com/json/")
         .then((res) => res.json())
         .then((response) => {
-          this.currency = getCurrencyAbbreviation(response.country);
-        });
+          let userDependentCurrency = getCurrencyAbbreviation(response.country);
+          if (userDependentCurrency !== undefined)
+            this.currency = userDependentCurrency;
+        })
+        .catch(() => {});
     },
   },
   mounted() {
