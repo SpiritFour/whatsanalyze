@@ -13,6 +13,15 @@ import { Chat } from "~/functions/transformChatData";
 
 export default {
   name: "pwa-results",
+  head: {
+    meta: [
+      {
+        hid: "robots",
+        name: "robots",
+        content: "noindex",
+      },
+    ],
+  },
   data() {
     return {
       chat: undefined,

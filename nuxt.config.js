@@ -22,11 +22,6 @@ export default {
       // bing indexing
       { name: "msvalidate.01", content: "E04DE33CC93C0FF892248C9E70A9A918" },
       {
-        hid: "description",
-        name: "description",
-        content: "WhatsAnalyze",
-      },
-      {
         hid: "og:title",
         name: "og:title",
         content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
@@ -40,6 +35,8 @@ export default {
       ogTitle: false,
       ogDescription: false,
       title: false,
+      name: false,
+      description: false,
     },
     manifest: {
       name: "WhatsAnalyze - The WhatsApp Chat Analyzer",
