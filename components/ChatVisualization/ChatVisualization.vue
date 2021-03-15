@@ -39,7 +39,7 @@ export default {
   data() {
     return {
       ego: this.chat.messagesPerPerson[0].name,
-      price: 0.99,
+      price: 1.99,
       currency: "USD",
     };
   },
@@ -51,10 +51,10 @@ export default {
       fetch("https://extreme-ip-lookup.com/json/")
         .then((res) => res.json())
         .then((response) => {
-          this.currency = getCurrencyAbbreviation(response.country);
+          if (response !== undefined && response !== "undefined")
+            this.currency = getCurrencyAbbreviation(response.country);
         })
-        .catch((data) => {
-        });
+        .catch(() => {});
     },
     download() {
       this.$gtag.event("download-pdf", {
