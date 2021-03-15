@@ -40,14 +40,14 @@
                 >
               </v-timeline-item>
             </v-timeline>
-
             <v-btn
               elevation="10"
               @click="
+                gtagEvent('jump_to_filehandler_' + tab, GTAG_INTERACTION, 0);
                 $vuetify.goTo('#fileHandler', {
                   duration: 300,
                   offset: 100,
-                })
+                });
               "
               color="#07bc4c"
               class="text-md-h6 text-caption ml-10 white--text"
@@ -337,6 +337,8 @@ export default {
         // Optionally, send analytics event that PWA install promo was shown.
       });
     },
+    GTAG_INSTALL,
+    gtagEvent,
   },
   created() {
     this.catchPWA();

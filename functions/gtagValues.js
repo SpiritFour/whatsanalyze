@@ -6,6 +6,7 @@ export const GTAG_PDF = "pdf";
 export const GTAG_PAYMENT = "payment";
 export const GTAG_INSTALL = "install";
 export const GTAG_LEAD = "lead";
+export const GTAG_INTERACTION = "interaction";
 
 export function gtagEvent(action, label, value = "1") {
   window.$nuxt.$gtag.event(label + "_" + action, {
