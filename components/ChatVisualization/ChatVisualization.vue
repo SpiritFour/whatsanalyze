@@ -29,7 +29,6 @@
 
 <script>
 import PdfDownload from "~/components/ChatVisualization/PdfDownloadPopup";
-import { render } from "~/functions/pdf";
 import { getCurrencyAbbreviation } from "country-currency-map";
 
 export default {
@@ -56,36 +55,6 @@ export default {
             this.currency = userDependentCurrency;
         })
         .catch(() => {});
-    },
-    download() {
-      this.$gtag.event("download-pdf", {
-        event_category: "download",
-        event_label: "download-pdf",
-        value: "10",
-      });
-      this.isLoading = true;
-      render(this.chat, this.attachments, this.ego, false).then(
-        () => (this.isLoading = false)
-      );
-    },
-    onCreateOrder(data, actions) {
-      console.log("order created", data, actions);
-    },
-    onApprove() {
-      this.download();
-    },
-    onError() {},
-    downloadSample() {
-      this.$gtag.event("download-sample-pdf", {
-        event_category: "home",
-        event_label: "download-sample-pdf",
-        value: "5",
-      });
-      this.isLoading = true;
-      // download sample
-      render(this.chat, this.attachments, this.ego, true).then(
-        () => (this.isLoading = false)
-      );
     },
   },
   mounted() {
