@@ -79,6 +79,11 @@ export default {
         content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
       },
       {
+        hid: "og:site_name",
+        name: "og:site_name",
+        content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+      },
+      {
         hid: "description",
         name: "description",
         content:

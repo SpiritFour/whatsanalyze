@@ -34,6 +34,11 @@ export default {
         content: "WhatsAnalyze - How to Export your WhatsApp Chat",
       },
       {
+        hid: "og:site_name",
+        name: "og:site_name",
+        content: "WhatsAnalyze - How to Export your WhatsApp Chat",
+      },
+      {
         hid: "description",
         name: "description",
         content: "Export your Whatsapp Chat ✓ iOS Tutorial ✓ Android Guide",
