@@ -97,6 +97,7 @@
 <script>
 import { getDateString } from "~/functions/utils";
 import { getAttachment } from "~/functions/attachments.js";
+import { GTAG_INTERACTION, gtagEvent } from "~/functions/gtagValues";
 export default {
   name: "Chat",
   data() {
@@ -139,6 +140,7 @@ export default {
     changeEgoTo(name) {
       this.$emit("setEgo", name);
       this.selectedEgo = name;
+      gtagEvent("change_ego_chat", GTAG_INTERACTION, 0);
     },
     async _getAttachment(fileName) {
       return await getAttachment(fileName, this.attachments);
