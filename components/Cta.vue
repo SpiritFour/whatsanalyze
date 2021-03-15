@@ -1,24 +1,29 @@
 <template>
-  <div class="cta">
-    <div class="text-h2 font-weight-bold">{{ title }}</div>
+  <v-container class="cta pt-7 my-5 text-center">
+    <div class="text-h2 font-weight-bold mb-7">{{ title }}</div>
     <span class="text-body-1"> {{ text }}</span>
     <br />
     <v-btn
-      to="/"
-      @click="$vuetify.goTo('#fileHandler', { duration: 300, offset: 100 })"
+      :to="to ? to : null"
+      @click="
+        to
+          ? null
+          : $vuetify.goTo('#fileHandler', { duration: 300, offset: 100 })
+      "
       color="#07bc4c"
       style="color: #ffffff"
-      class="mt-5 mb-2 text-h6"
+      class="mt-5 text-h6"
       elevation="10"
     >
       {{ buttonTxt }}
     </v-btn>
-  </div>
+  </v-container>
 </template>
 
 <script>
 export default {
   props: {
+    to: { default: "", type: String },
     buttonTxt: { default: "Analyze your chat now!", type: String },
     text: {
       default:
