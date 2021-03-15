@@ -82,19 +82,23 @@
         </v-dialog>
 
         <div v-if="!isSimple" class="text-text-h3 my-4">
-          Looking for <b>PDF download</b>?
+          <v-col>
+            <div v-if="!isSimple" class="text-body-1 pb-2">
+              Looking for <b>PDF download</b>?
+            </div>
 
-          <v-btn
-            v-if="!isSimple"
-            color="#07bc4c"
-            dark
-            @click="
-              gtagEvent('jump_to_pdf_download_cta', GTAG_INTERACTION, 0);
-              $vuetify.goTo('#payButton', { duration: 300, offset: 100 });
-            "
-            ><v-icon class="mr-2">mdi-keyboard-return</v-icon>go to PDF
-            download</v-btn
-          >
+            <v-btn
+              v-if="!isSimple"
+              color="#07bc4c"
+              dark
+              @click="
+                gtagEvent('jump_to_pdf_download_cta', GTAG_INTERACTION, 0);
+                $vuetify.goTo('#payButton', { duration: 300, offset: 100 });
+              "
+              ><v-icon class="mr-2">mdi-keyboard-return</v-icon>go to PDF
+              download</v-btn
+            >
+          </v-col>
         </div>
       </div>
     </v-row>

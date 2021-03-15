@@ -39,7 +39,13 @@
       <Cta />
       <Faq />
       <Testimonials />
-      <Cta />
+      <Cta
+        title="Analyze your own WhatsApp data now"
+        buttonText="Analyze my chat"
+        text="Interested about your own chat data? Reveal some interesting and entertaining facts now.
+        Most Used Smileys, Share of speech, and much more ...
+      "
+      />
     </v-container>
 
     <v-container v-if="isShowingChats">
