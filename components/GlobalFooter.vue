@@ -55,7 +55,7 @@ export default {
           text: "Create a PDF from your WhatsApp chat",
         },
         {
-          name: "whatsapp-signal",
+          name: "switch-from-whatsapp-to-signal",
           text: "How to switch to Signal from WhatsApp",
         },
         {
