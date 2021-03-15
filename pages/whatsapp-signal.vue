@@ -22,8 +22,8 @@ export default {
     title: "WhatsAnalyze - How to switch from Signal to WhatsApp",
     meta: [
       {
-        hid: "description",
-        name: "description",
+        hid: "SignalToWhatsApp",
+        name: "SignalToWhatsApp",
         content:
           "Learn how to export your chat from WhatsApp to Signal ✓ Now working for Group Chats ✓ Keep your Data ✓ No Chat Data is sent to a Server. Get Started now!",
       },

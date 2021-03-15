@@ -74,8 +74,8 @@ export default {
     title: "WhatsAnalyze - How to Export your WhatsApp Chat to PDF",
     meta: [
       {
-        hid: "description",
-        name: "description",
+        hid: "ChatToPDF",
+        name: "ChatToPDF",
         content:
           "Export your Whatsapp chat to PDF in seconds ✓ Now working for Group Chats ✓ Create your own PDF Book ✓ No Chat Data is sent to a Server. Get Started now!",
       },
