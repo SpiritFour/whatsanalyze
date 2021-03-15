@@ -88,6 +88,7 @@
 
 <script>
 import { render } from "~/functions/pdf";
+import { getCurrencyAbbreviation } from "country-currency-map";
 
 export default {
   name: "ChatVisualization",
@@ -98,12 +99,21 @@ export default {
       ego: this.chat.messagesPerPerson[0].name,
       isLoading: false,
       price: 0.99,
-      currency: "EUR",
+      currency: "USD",
     };
   },
   methods: {
     setEgo(ego) {
       this.ego = ego;
+    },
+    detectCurrency() {
+      fetch("https://extreme-ip-lookup.com/json/")
+        .then((res) => res.json())
+        .then((response) => {
+          this.currency = getCurrencyAbbreviation(response.country);
+        })
+        .catch((data) => {
+        });
     },
     download() {
       this.$gtag.event("download-pdf", {
@@ -119,11 +129,10 @@ export default {
     onCreateOrder(data, actions) {
       console.log("order created", data, actions);
     },
-    onApprove(event) {
+    onApprove() {
       this.download();
     },
-    onError(event) {
-    },
+    onError() {},
     downloadSample() {
       this.$gtag.event("download-sample-pdf", {
         event_category: "home",
@@ -136,6 +145,9 @@ export default {
         () => (this.isLoading = false)
       );
     },
+  },
+  mounted() {
+    this.detectCurrency();
   },
 };
 </script>
