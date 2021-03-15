@@ -1,14 +1,19 @@
 <template>
-  <div v-if="chatObject.numPersonsInChat > 2">
-    <div class="text-h2 font-weight-bold my-8">
+  <div v-if="chatObject.numPersonsInChat > 2" class="mt-16">
+    <div class="text-h2 font-weight-bold mb-2">
       <span class="red darken-2 white--text px-2">{{
         chatObject.numPersonsInChat
       }}</span>
       People
     </div>
     <div class="text-h6">
-      Select number of participants to show individual. All others are grouped
-      together.
+      Select the number of participants to show individual.All others are
+      grouped together.
+      <br />
+      <small>
+        If you select "2", only the two people with the most messages are shown
+        individually. Others are grouped as "Others"</small
+      >
     </div>
     <v-slider
       class="pt-10"

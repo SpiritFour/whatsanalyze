@@ -29,7 +29,7 @@ export default {
           hid: "paypal",
           src:
             "https://www.paypal.com/sdk/js?currency=" +
-            "EUR" +
+            this.currency +
             "&client-id=" +
             // eslint-disable-next-line no-undef
             process.env.paypalClientId,

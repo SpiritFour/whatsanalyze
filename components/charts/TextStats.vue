@@ -1,7 +1,31 @@
 <template>
-  <v-container>
+  <v-container class="px-6">
+    <!-- First and last contact -->
+
+    <v-row class="my-7">
+      <v-col
+        cols="12"
+        class="text-h5 text-md-h4 font-weight-bold pa-0 text-left"
+        >First Message
+      </v-col>
+      <div class="font-weight-bold text-h3 text-md-h2">
+        {{ firstDateString }}
+      </div>
+    </v-row>
+
+    <v-row class="my-7">
+      <div class="text-md-h2 text-h3 font-weight-bold ml-auto">
+        {{ lastDateString }}
+      </div>
+      <v-col
+        cols="12"
+        class="text-h5 text-md-h4 font-weight-bold pa-0 text-right"
+        >Last Message
+      </v-col>
+    </v-row>
+
     <!-- Days you are chatting -->
-    <v-row class="my-16 pa-8 white--text">
+    <v-row class="white--text">
       <v-col class="cyan darken-2 fact-box py-10" cols="12" sm="6">
         <v-icon v-show="$vuetify.breakpoint.mdAndUp" size="100"
           >mdi-calendar</v-icon
@@ -53,30 +77,6 @@
             messages
           </v-col>
         </v-row>
-      </v-col>
-    </v-row>
-
-    <!-- First and last contact -->
-
-    <v-row class="my-16 px-5">
-      <v-col
-        cols="12"
-        class="text-h5 text-md-h3 font-weight-bold pa-0 text-left"
-        >First Message
-      </v-col>
-      <div class="font-weight-bold text-h3 text-md-h1">
-        {{ firstDateString }}
-      </div>
-    </v-row>
-
-    <v-row class="my-10 px-5">
-      <div class="text-md-h1 text-h3 font-weight-bold ml-auto">
-        {{ lastDateString }}
-      </div>
-      <v-col
-        cols="12"
-        class="text-h5 text-md-h3 font-weight-bold pa-0 text-right"
-        >Last Message
       </v-col>
     </v-row>
 

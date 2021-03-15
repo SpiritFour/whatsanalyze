@@ -8,8 +8,8 @@
       @click="
         to
           ? null
-          : $vuetify.goTo('#fileHandler', { duration: 300, offset: 100 })
-      "
+          :         gtagEvent('jump_to_filehandler_cta', GTAG_INTERACTION, 0);
+$vuetify.goTo('#fileHandler', { duration: 300, offset: 100 });
       color="#07bc4c"
       style="color: #ffffff"
       class="mt-5 text-h6"
@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import { GTAG_INTERACTION, gtagEvent } from "~/functions/gtagValues";
+
 export default {
   props: {
     to: { default: "", type: String },
@@ -34,6 +36,14 @@ export default {
       default: "Start now",
       type: String,
     },
+  },
+  data() {
+    return {
+      GTAG_INTERACTION,
+    };
+  },
+  methods: {
+    gtagEvent,
   },
 };
 </script>

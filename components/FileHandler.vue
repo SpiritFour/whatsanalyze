@@ -77,6 +77,7 @@
 <script>
 import { parseString } from "whatsapp-chat-parser";
 import JSZip from "jszip";
+import { gtagEvent, GTAG_FILE } from "~/functions/gtagValues";
 
 export default {
   name: "FileHandler",
@@ -183,22 +184,14 @@ export default {
       this.$emit("hide_explanation", true);
       this.processing = false;
       this.isSuccess = true;
-      this.$gtag.event("file-parsed", {
-        event_category: "home",
-        event_label: "lead",
-        value: "1",
-      });
+      gtagEvent("parsed", GTAG_FILE);
     },
 
     showErrorMessage() {
       this.wrongFile = true;
       this.processing = false;
       this.isSuccess = false;
-      this.$gtag.event("file-error", {
-        event_category: "home",
-        event_label: "lead",
-        value: "0",
-      });
+      gtagEvent("error", GTAG_FILE, 0);
     },
     processFileList(fileList, shared = false) {
       this.isDragging = false;
