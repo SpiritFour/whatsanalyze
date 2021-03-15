@@ -21,11 +21,6 @@ export default {
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       // bing indexing
       { name: "msvalidate.01", content: "E04DE33CC93C0FF892248C9E70A9A918" },
-      {
-        hid: "og:image",
-        property: "og:image",
-        content: "/sharePreview.png",
-      },
     ],
     link: [{ rel: "icon", type: "image/png", href: "/favicon.ico" }],
   },
