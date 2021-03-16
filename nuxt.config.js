@@ -4,13 +4,13 @@ import fs from "fs";
 // eslint-disable-next-line no-undef
 let local = process.env.NUXT_ENV_LOCAL !== undefined;
 
-// eslint-disable-next-line no-undef
-const baseUrl = process.env.BASE_URL || "https://www.whatsanalyze.com";
+const baseUrl = // eslint-disable-next-line no-undef
+(process.env.BASE_URL || "https://www.whatsanalyze.com").replace(
+  "http",
+  "https"
+);
 
 export default {
-  // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
-  ssr: false,
-
   // Target: https://go.nuxtjs.dev/config-target
   target: "static",
 
@@ -19,7 +19,6 @@ export default {
     htmlAttrs: {
       lang: "en",
     },
-    title: "n-WhatsAnalyze - The WhatsApp Chat Analyzer",
 
     meta: [
       { charset: "utf-8" },
@@ -31,37 +30,11 @@ export default {
         property: "og:image",
         content: baseUrl + "/sharePreview.png",
       },
-      {
-        hid: "og:title",
-        name: "og:title",
-        property: "og:title",
-        content: "n-WhatsAnalyze - The WhatsApp Chat Analyzer",
-      },
-      {
-        hid: "og:site_name",
-        name: "og:site_name",
-        property: "og:site_name",
-        content: "n-WhatsAnalyze - The WhatsApp Chat Analyzer",
-      },
-      {
-        hid: "description",
-        name: "description",
-        property: "description",
-        content:
-          "n-America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
-      },
-      {
-        hid: "og:description",
-        name: "og:description",
-        property: "og:description",
-        content:
-          "n-America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
-      },
     ],
     link: [{ rel: "icon", type: "image/png", href: "/favicon.ico" }],
   },
   pwa: {
-    meta: { name: false, description: false },
+    // meta: false,
     manifest: {
       name: "WhatsAnalyze - The WhatsApp Chat Analyzer - manifest",
       short_name: "WhatsAnalyze - manifest",
@@ -102,7 +75,13 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ["@/plugins/gtag"],
+  plugins: [
+    "@/plugins/gtag",
+    {
+      src: "~/plugins/amcharts.js",
+      ssr: false,
+    },
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -169,5 +148,6 @@ export default {
     paypalClientId: local
       ? "ARYQUp4C_oNjNUNkvSPzLeaiulItDmnHUU226OANt2haCKC2c70ZrKZTmRHCPldcu4SD22LmPEuonfec"
       : "AUMWxSZrtBOA1RicR_3nGijYb8yYxyq2lxBjiwoQKfVc-8jfdPr5N7X5EFUackMCLb_K7HiKswnDBUJ8",
+    baseUrl: baseUrl,
   },
 };
