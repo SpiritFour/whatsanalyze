@@ -15,7 +15,7 @@
     <v-tabs-items v-model="tab">
       <v-tab-item v-for="(data, idx) in tabData" :key="idx">
         <v-row no-gutters>
-          <v-col cols="12" sm="8" class="pt-md-15 pb-10">
+          <v-col cols="12" sm="8" class="pb-10">
             <v-timeline dense>
               <v-timeline-item
                 class="mb-4 align-center"
@@ -45,11 +45,15 @@
               @click="
                 to
                   ? null
-                  : gtagEvent('jump_to_filehandler_' + tab, GTAG_INTERACTION, 0);
-$vuetify.goTo('#fileHandler', {
-                      duration: 300,
-                      offset: 100,
-                    });
+                  : gtagEvent(
+                      'jump_to_filehandler_' + tab,
+                      GTAG_INTERACTION,
+                      0
+                    );
+                $vuetify.goTo('#fileHandler', {
+                  duration: 300,
+                  offset: 100,
+                });
               "
               :to="to ? to : null"
               color="#07bc4c"
@@ -59,8 +63,13 @@ $vuetify.goTo('#fileHandler', {
               {{ cta }}
             </v-btn>
           </v-col>
-          <v-col cols="12" sm="4" class="pt-5">
-            <div class="carousel-container px-md-16 px-4">
+          <v-col
+            cols="12"
+            sm="4"
+            class="py-5"
+            :class="{ 'mobile-padding': $vuetify.breakpoint.xsOnly }"
+          >
+            <div class="carousel-container px-4">
               <v-img ref="smartphone" class="frame" :src="data.frameImg" />
               <!-- model and pngs-->
               <v-carousel
@@ -69,7 +78,7 @@ $vuetify.goTo('#fileHandler', {
                 hide-delimiter-background
                 hide-delimiters
                 show-arrows
-                class="frame-container px-md-16 px-4"
+                class="frame-container px-4"
                 height="auto"
               >
                 <v-carousel-item
@@ -364,6 +373,12 @@ export default {
   height: 100%;
   min-height: 50px;
 }
+
+.mobile-padding {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
 .frame-container {
   left: 0;
   top: 0;

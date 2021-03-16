@@ -1,10 +1,6 @@
 <template>
   <v-container>
-    <ExportExplainer
-      class="mt-10"
-      cta="Analyze your data and save it as a beautiful PDF"
-      to="/"
-    />
+    <ExportExplainer class="mt-10" cta="Export your chat as PDF" to="/" />
 
     <Content :page="page" />
     <Cta
