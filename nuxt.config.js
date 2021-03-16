@@ -30,7 +30,7 @@ export default {
     link: [{ rel: "icon", type: "image/png", href: "/favicon.ico" }],
   },
   pwa: {
-    meta: { name: "WhatsAnalyze - The WhatsApp Chat Analyzer" },
+    meta: { name: "WhatsAnalyze - The WhatsApp Chat Analyzer - pwa" },
     manifest: {
       name: "WhatsAnalyze - The WhatsApp Chat Analyzer",
       short_name: "WhatsAnalyze",

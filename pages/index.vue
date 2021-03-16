@@ -76,22 +76,26 @@ export default {
       {
         hid: "og:title",
         name: "og:title",
+        property: "og:title",
         content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
       },
       {
         hid: "og:site_name",
         name: "og:site_name",
+        property: "og:site_name",
         content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
       },
       {
         hid: "description",
         name: "description",
+        property: "description",
         content:
           "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
       },
       {
         hid: "og:description",
         name: "og:description",
+        property: "og:description",
         content:
           "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
       },
