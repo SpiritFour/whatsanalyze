@@ -5,7 +5,7 @@
       cta="Analyze your data and save it as a beautiful PDF"
       to="/"
     />
-
+    <PdfExample class="pb-10" />
     <Content :page="page" />
     <Cta
       to="/"

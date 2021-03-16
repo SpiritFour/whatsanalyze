@@ -4,9 +4,11 @@ import fs from "fs";
 // eslint-disable-next-line no-undef
 let local = process.env.NUXT_ENV_LOCAL !== undefined;
 
-const baseUrl = ( // eslint-disable-next-line no-undef
-  process.env.BASE_URL || "https://www.whatsanalyze.com"
-).replace("http:", "https:");
+const baseUrl = // eslint-disable-next-line no-undef
+(process.env.BASE_URL || "https://www.whatsanalyze.com").replace(
+  "http:",
+  "https:"
+);
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
