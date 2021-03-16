@@ -114,7 +114,7 @@ export class Chat {
     return hours;
   }
 
-  constructor(chatObject = [], groupAfter = 9, maxWordsWordCloud = 200) {
+  constructor(chatObject = [], groupAfter = 9, maxWordsWordCloud = 150) {
     // this one is the complete input
     this.chatObject = chatObject;
 
@@ -417,9 +417,17 @@ export class Chat {
               "omitted>",
               "bild",
               "image",
-              "<Medien",
+              "<medien",
+              "ausgeschlossen>",
               "weggelassen",
               "omitted",
+              "_",
+              "_weggelassen>",
+              "_ommited>",
+              "_omesso>",
+              "_omitted",
+              "_weggelassen",
+              "_attached",
             ].includes(word[0].toLowerCase())
           ) && word[1] > 1
       )

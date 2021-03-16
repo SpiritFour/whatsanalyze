@@ -10,8 +10,7 @@
           >
             <HeaderCta />
             <FileHandler
-              ref="filehandler"
-              id="fileHandler"
+              class="filehandler"
               v-if="$vuetify.breakpoint.mdAndUp"
               @new_messages="newMessages"
               @hide_explanation="isShowingChats = $event"
@@ -24,8 +23,7 @@
         <v-row v-if="$vuetify.breakpoint.smAndDown">
           <v-col>
             <FileHandler
-              ref="filehandler"
-              id="fileHandler"
+              class="filehandler"
               @new_messages="newMessages"
               @hide_explanation="isShowingChats = $event"
             />
@@ -42,9 +40,9 @@
       <Cta
         title="Analyze your own WhatsApp data now"
         buttonText="Analyze my chat"
-        text="Interested about your own chat data? Reveal some interesting facts now.
-      Start with figuring out how many toilet rolls would be needed to print
-      your whole chat. Take deep dive in your data now!."
+        text="Interested about your own chat data? Reveal some interesting and entertaining facts now.
+        Most Used Smileys, Share of speech, and much more ...
+      "
       />
     </v-container>
 
@@ -56,6 +54,12 @@
 
 <script>
 import { Chat } from "~/functions/transformChatData";
+import {
+  GTAG_INTERACTION,
+  GTAG_LEAD,
+  GTAG_NUM_PERSONS,
+  gtagEvent,
+} from "~/functions/gtagValues";
 
 export default {
   async asyncData({ $content }) {
@@ -64,30 +68,45 @@ export default {
       page,
     };
   },
-  pwa: {
-    manifest: {
-      name: "WhatsAnalyze - The WhatsApp Chat Analyzer",
-      description:
-        "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
-    },
+  head() {
+    return {
+      title: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+      meta: [
+        {
+          hid: "og:title",
+          name: "og:title",
+          property: "og:title",
+          content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+        },
+        {
+          hid: "og:site_name",
+          name: "og:site_name",
+          property: "og:site_name",
+          content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+        },
+        {
+          hid: "description",
+          name: "description",
+          property: "description",
+          content:
+            "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
+        },
+        {
+          hid: "og:description",
+          name: "og:description",
+          property: "og:description",
+          content:
+            "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
+        },
+        {
+          hid: "og:url",
+          name: "og:url",
+          property: "og:url",
+          content: "whatsanalyze.com",
+        },
+      ],
+    };
   },
-  head: {
-    titleTemplate: "WhatsAnalyze - The WhatsApp Chat Analyzer",
-    title: "WhatsAnalyze - The WhatsApp Chat Analyzer",
-    meta: [
-      {
-        hid: "description",
-        name: "description",
-        content:
-          "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
-      },
-      {
-        property: "op:image",
-        content: "/whatsanalyze-logo-white.png",
-      },
-    ],
-  },
-
   data() {
     return {
       isShowingChats: false,
@@ -103,15 +122,21 @@ export default {
       if (!chatObject.default || this.chat === undefined) {
         this.attachments = chatObject.attachments;
         this.chat = new Chat(chatObject.messages);
+        if (this.chat.numPersonsInChat > 2) {
+          gtagEvent("analyzed_pair_chat", GTAG_INTERACTION, 0);
+        } else {
+          gtagEvent("analyzed_group_chat", GTAG_INTERACTION, 0);
+        }
+        gtagEvent(
+          "analyzed_chat_" + this.chat.numPersonsInChat,
+          GTAG_NUM_PERSONS,
+          0
+        );
       }
     },
     created() {
       Object.keys(this.$route.query).forEach((key) => {
-        this.$gtag.event("ref_" + key, {
-          event_category: "home",
-          event_label: "lead",
-          value: "1",
-        });
+        gtagEvent(key, GTAG_LEAD);
       });
     },
   },
@@ -186,10 +211,5 @@ export default {
     width: 100%;
     padding: 3em;
   }
-}
-
-.main-el {
-  margin-top: 1em;
-  margin-bottom: 1em;
 }
 </style>

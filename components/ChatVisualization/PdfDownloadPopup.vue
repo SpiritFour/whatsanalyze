@@ -17,24 +17,19 @@
     <v-dialog v-model="showDownloadPopup" width="550">
       <template v-slot:activator="{ on, attrs }">
         <v-row justify="center" class="mt-3">
-          <v-btn class="mr-3" elevation="10" @click="downloadSample">
+          <v-btn class="ma-3" elevation="10" @click="downloadSample">
             <v-icon class="mr-1">mdi-download</v-icon>
             <span><b>free</b> preview PDF</span>
           </v-btn>
           <v-btn
+            class="ma-3 white--text"
             dark
             v-bind="attrs"
             v-on="on"
             color="#07bc4c"
-            style="color: white; max-width: 100%"
+            style="max-width: 100%"
             elevation="10"
-            @click="
-              $gtag.event('download-chat-popup-clicked', {
-                event_category: 'download',
-                event_label: 'popup-clicked',
-                value: '1',
-              })
-            "
+            @click="gtagEvent('full_pdf_pressed', GTAG_PAYMENT)"
           >
             <v-icon class="mr-1">mdi-download</v-icon>
             <span><b>full</b> chat PDF</span>
@@ -77,6 +72,7 @@
 </template>
 <script>
 import { render } from "~/functions/pdf";
+import { GTAG_PAYMENT, GTAG_PDF, gtagEvent } from "~/functions/gtagValues";
 
 export default {
   name: "PdfDownload",
@@ -85,40 +81,39 @@ export default {
     return {
       showDownloadPopup: false,
       isLoading: false,
+      GTAG_PAYMENT,
+      GTAG_PDF,
     };
   },
   methods: {
     download() {
-      this.$gtag.event("download-pdf", {
-        event_category: "download",
-        event_label: "download-pdf",
-        value: "10",
-      });
+      gtagEvent("full_download", GTAG_PDF, 3);
       this.isLoading = true;
       render(this.chat, this.attachments, this.ego, false).then(
         () => (this.isLoading = false)
       );
     },
-    onCreateOrder(data, actions) {
-      console.log("order created", data, actions);
+    onCreateOrder() {
+      gtagEvent("created", GTAG_PAYMENT, 0);
     },
     onApprove() {
-      this.showDownloadPopup = false;
+      gtagEvent("approved", GTAG_PAYMENT, 10);
       this.download();
     },
     onError() {},
     downloadSample() {
-      this.$gtag.event("download-sample-pdf", {
-        event_category: "home",
-        event_label: "download-sample-pdf",
-        value: "5",
-      });
+      gtagEvent("sample_download", GTAG_PDF, 2);
       this.isLoading = true;
       // download sample
-      render(this.chat, this.attachments, this.ego, true).then(
-        () => (this.isLoading = false)
-      );
+      console.log(this.$route.query);
+      render(
+        this.chat,
+        this.attachments,
+        this.ego,
+        !this.$route.query.free
+      ).then(() => (this.isLoading = false));
     },
+    gtagEvent,
   },
 };
 </script>

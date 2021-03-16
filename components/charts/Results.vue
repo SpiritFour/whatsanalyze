@@ -5,6 +5,7 @@
       <DownloadPopup
         :chat="chat"
         isSimple
+        class="my-5"
         data-html2canvas-ignore
         remove-height-in-html2-canvas
       />
@@ -21,7 +22,7 @@
       <Share :use-html2-canvas="true">
         <ChartsFunFacts
           :chartdata="chat"
-          class="pb-10"
+          class="pb-md-10"
           data-html2canvas-ignore
           remove-height-in-html2-canvas
         />
@@ -77,6 +78,9 @@
           </Share>
         </v-col>
       </v-row>
+
+      <div class="text-h3 font-weight-bold pt-10">Word Cloud</div>
+      <ChartsWordCloud id="wordcloud" :chartdata="chat" class="px-10" />
 
       <DownloadPopup
         :chat="chat"

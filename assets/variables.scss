@@ -54,18 +54,8 @@ $c-red-dark-accent: #911146;
 
 @import "~vuetify/src/styles/styles.sass";
 
-@media #{map-get($display-breakpoints, 'md-and-up')} {
-  .cta {
-    padding: 2em;
-  }
-}
-
 .cta {
-  text-align: center;
   background: $c-white;
-  max-width: 100%;
-  overflow-x: hidden;
-  padding: 0.5em;
 }
 
 .link {

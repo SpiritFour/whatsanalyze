@@ -4,10 +4,13 @@ import fs from "fs";
 // eslint-disable-next-line no-undef
 let local = process.env.NUXT_ENV_LOCAL !== undefined;
 
-export default {
-  // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
-  ssr: false,
+const baseUrl = // eslint-disable-next-line no-undef
+(process.env.BASE_URL || "https://www.whatsanalyze.com").replace(
+  "http:",
+  "https:"
+);
 
+export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: "static",
 
@@ -16,17 +19,24 @@ export default {
     htmlAttrs: {
       lang: "en",
     },
+
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       // bing indexing
       { name: "msvalidate.01", content: "E04DE33CC93C0FF892248C9E70A9A918" },
+      {
+        hid: "og:image",
+        property: "og:image",
+        content: baseUrl + "/sharePreview.png",
+      },
     ],
-    link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
+    link: [{ rel: "icon", type: "image/png", href: "/favicon.ico" }],
   },
   pwa: {
     manifest: {
-      short_name: "whatsanalyze.com",
+      name: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+      short_name: "WhatsAnalyze",
       start_url: "/",
       display: "standalone",
       background_color: "#21a68d",
@@ -64,7 +74,13 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ["@/plugins/gtag"],
+  plugins: [
+    "@/plugins/gtag",
+    {
+      src: "~/plugins/amcharts.js",
+      ssr: false,
+    },
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -131,5 +147,6 @@ export default {
     paypalClientId: local
       ? "ARYQUp4C_oNjNUNkvSPzLeaiulItDmnHUU226OANt2haCKC2c70ZrKZTmRHCPldcu4SD22LmPEuonfec"
       : "AUMWxSZrtBOA1RicR_3nGijYb8yYxyq2lxBjiwoQKfVc-8jfdPr5N7X5EFUackMCLb_K7HiKswnDBUJ8",
+    baseUrl: baseUrl,
   },
 };

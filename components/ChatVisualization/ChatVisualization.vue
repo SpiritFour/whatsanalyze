@@ -1,6 +1,6 @@
 <template>
   <v-col class="my-4 mb-16">
-    <div class="text-h1 font-weight-bold">Your Full Chat</div>
+    <div class="text-h3 text-md-h1 font-weight-bold">Your Full Chat</div>
     <v-divider class="py-5" />
     <!-- this could be refactored into a component -->
     <v-row justify="center" id="payButton">
@@ -29,7 +29,6 @@
 
 <script>
 import PdfDownload from "~/components/ChatVisualization/PdfDownloadPopup";
-import { render } from "~/functions/pdf";
 import { getCurrencyAbbreviation } from "country-currency-map";
 
 export default {
@@ -39,7 +38,7 @@ export default {
   data() {
     return {
       ego: this.chat.messagesPerPerson[0].name,
-      price: 0.99,
+      price: 1.99,
       currency: "USD",
     };
   },
@@ -47,44 +46,16 @@ export default {
     setEgo(ego) {
       this.ego = ego;
     },
+    // We lookup the IP to set the currency according to the user's location.
     detectCurrency() {
       fetch("https://extreme-ip-lookup.com/json/")
         .then((res) => res.json())
         .then((response) => {
-          this.currency = getCurrencyAbbreviation(response.country);
+          let userDependentCurrency = getCurrencyAbbreviation(response.country);
+          if (userDependentCurrency !== undefined)
+            this.currency = userDependentCurrency;
         })
-        .catch((data) => {
-        });
-    },
-    download() {
-      this.$gtag.event("download-pdf", {
-        event_category: "download",
-        event_label: "download-pdf",
-        value: "10",
-      });
-      this.isLoading = true;
-      render(this.chat, this.attachments, this.ego, false).then(
-        () => (this.isLoading = false)
-      );
-    },
-    onCreateOrder(data, actions) {
-      console.log("order created", data, actions);
-    },
-    onApprove() {
-      this.download();
-    },
-    onError() {},
-    downloadSample() {
-      this.$gtag.event("download-sample-pdf", {
-        event_category: "home",
-        event_label: "download-sample-pdf",
-        value: "5",
-      });
-      this.isLoading = true;
-      // download sample
-      render(this.chat, this.attachments, this.ego, true).then(
-        () => (this.isLoading = false)
-      );
+        .catch(() => {});
     },
   },
   mounted() {
