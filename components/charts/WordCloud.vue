@@ -3,15 +3,9 @@
 </template>
 
 <script>
-import * as am4core from "@amcharts/amcharts4/core";
-import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-import * as am4plugins_wordCloud from "@amcharts/amcharts4/plugins/wordCloud";
 import { Chat } from "~/functions/transformChatData";
 
 import stopwords from "stopwords-de";
-
-am4core.useTheme(am4themes_animated);
-am4core.options.onlyShowOnViewport = true;
 
 export default {
   name: "WordCloud",
@@ -54,6 +48,10 @@ export default {
     },
   },
   mounted() {
+    let { am4core, am4themes_animated, am4plugins_wordCloud } = this.$am4core();
+    am4core.useTheme(am4themes_animated);
+    am4core.options.onlyShowOnViewport = true;
+
     this.chart = am4core.create(
       this.$refs.chartdiv,
       am4plugins_wordCloud.WordCloud

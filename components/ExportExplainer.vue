@@ -13,96 +13,100 @@
       >
     </v-tabs>
     <v-tabs-items v-model="tab">
-      <v-tab-item v-for="(data, idx) in tabData" :key="idx">
-        <v-row no-gutters>
-          <v-col cols="12" sm="8" class="pb-10">
-            <v-timeline dense>
-              <v-timeline-item
-                class="mb-4 align-center"
-                small
-                v-for="(tabItem, i) in data.tabItems"
-                :key="i"
-                :text="tabItem.text"
-                :color="tabStatus[idx] === i ? 'blue' : 'grey'"
-                fill-dot
-                @click.native.stop="tabStatus = [i, i]"
-              >
-                <v-row v-html="tabItem.text" style="cursor: pointer"> </v-row>
-                <v-btn
-                  v-if="i === 0 && tab === 1"
-                  v-bind:disabled="!installButtonStatus"
-                  v-on:click="downloadPWA"
-                  id="dlPWA "
-                  class="mt-5 pa-2 white--text"
-                  color="#07bc4c"
-                  style=""
-                  >add to Homescreen</v-btn
+      <client-only>
+        <v-tab-item v-for="(data, idx) in tabData" :key="idx + '_' + tab">
+          <v-row no-gutters>
+            <v-col cols="12" sm="8" class="pb-10">
+              <v-timeline dense>
+                <v-timeline-item
+                  class="mb-4 align-center"
+                  small
+                  v-for="(tabItem, i) in data.tabItems"
+                  :key="i"
+                  :text="tabItem.text"
+                  :color="tabStatus[idx] === i ? 'blue' : 'grey'"
+                  fill-dot
+                  @click.native.stop="tabStatus = [i, i]"
                 >
-              </v-timeline-item>
-            </v-timeline>
-            <v-btn
-              elevation="10"
-              @click="
-                to
-                  ? null
-                  : gtagEvent(
-                      'jump_to_filehandler_' + tab,
-                      GTAG_INTERACTION,
-                      0
-                    );
-                $vuetify.goTo('#fileHandler', {
-                  duration: 300,
-                  offset: 100,
-                });
-              "
-              :to="to ? to : null"
-              color="#07bc4c"
-              class="text-md-h6 text-caption ml-10 white--text"
-            >
-              <v-icon>mdi-arrow-right</v-icon>
-              {{ cta }}
-            </v-btn>
-          </v-col>
-          <v-col
-            cols="12"
-            sm="4"
-            class="py-5"
-            :class="{ 'mobile-padding': $vuetify.breakpoint.xsOnly }"
-          >
-            <div class="carousel-container px-4">
-              <v-img ref="smartphone" class="frame" :src="data.frameImg" />
-              <!-- model and pngs-->
-              <v-carousel
-                v-model="tabStatus[idx]"
-                :continuous="false"
-                hide-delimiter-background
-                hide-delimiters
-                show-arrows
-                class="frame-container px-4"
-                height="auto"
-              >
-                <v-carousel-item
-                  v-for="(item, idx) in data.carouselItems"
-                  :key="idx"
-                  @click.native.stop="increaseTabstatus()"
-                >
-                  <v-img :lazy-src="item.imgLazy" :src="item.img"> </v-img>
+                  <v-row v-html="tabItem.text" style="cursor: pointer"> </v-row>
                   <v-btn
-                    fab
-                    outlined
-                    color="black"
-                    disabled
-                    :style="
-                      'position: absolute; left: ' + item.x + '; top: ' + item.y
-                    "
-                    class="blinking"
-                  ></v-btn>
-                </v-carousel-item>
-              </v-carousel>
-            </div>
-          </v-col>
-        </v-row>
-      </v-tab-item>
+                    v-if="i === 0 && tab === 1"
+                    v-bind:disabled="!installButtonStatus"
+                    v-on:click="downloadPWA"
+                    id="dlPWA "
+                    class="mt-5 pa-2 white--text"
+                    color="#07bc4c"
+                    style=""
+                    >add to Homescreen</v-btn
+                  >
+                </v-timeline-item>
+              </v-timeline>
+              <v-btn
+                elevation="10"
+                @click="
+                  to
+                    ? null
+                    : gtagEvent(
+                        'jump_to_filehandler_' + tab,
+                        GTAG_INTERACTION,
+                        0
+                      );
+                  $vuetify.goTo('.filehandler', {
+                    duration: 300,
+                    offset: 100,
+                  });
+                "
+                :to="to ? to : null"
+                color="#07bc4c"
+                class="text-md-h6 text-caption ml-10 white--text"
+              >
+                <v-icon>mdi-arrow-right</v-icon>
+                {{ cta }}
+              </v-btn>
+            </v-col>
+            <v-col
+              cols="12"
+              sm="4"
+              class="py-5"
+              :class="{ 'mobile-padding': $vuetify.breakpoint.xsOnly }"
+            >
+              <div class="carousel-container px-4">
+                <v-img ref="smartphone" class="frame" :src="data.frameImg" />
+                <!-- model and pngs-->
+                <v-carousel
+                  v-model="tabStatus[idx]"
+                  :continuous="false"
+                  hide-delimiter-background
+                  hide-delimiters
+                  show-arrows
+                  class="frame-container px-4"
+                  height="auto"
+                >
+                  <v-carousel-item
+                    v-for="(item, idx) in data.carouselItems"
+                    :key="idx"
+                    @click.native.stop="increaseTabstatus()"
+                  >
+                    <v-img :lazy-src="item.imgLazy" :src="item.img"> </v-img>
+                    <v-btn
+                      fab
+                      outlined
+                      color="black"
+                      disabled
+                      :style="
+                        'position: absolute; left: ' +
+                        item.x +
+                        '; top: ' +
+                        item.y
+                      "
+                      class="blinking"
+                    ></v-btn>
+                  </v-carousel-item>
+                </v-carousel>
+              </div>
+            </v-col>
+          </v-row> </v-tab-item
+      ></client-only>
     </v-tabs-items>
   </v-container>
 </template>
@@ -149,176 +153,188 @@ export default {
     cta: { default: "Select file via box above.", type: String },
     to: { default: null, type: String },
   },
-  data: () => ({
-    GTAG_INTERACTION,
-    deferredPrompt: null,
-    installButtonStatus: false,
-    tabStatus: [0, 0],
-    tab:
-      navigator.platform.toLowerCase().includes("ios") ||
-      navigator.platform.toLowerCase().includes("iphone") ||
-      navigator.platform.toLowerCase().includes("ipad") ||
-      navigator.platform.toLowerCase().includes("mac")
-        ? 0
-        : 1,
-    tabData: [
-      {
-        title: "iOS (Apple)",
-        frameImg: iOSFrame,
-        carouselItems: [
-          {
-            img: iOS_img1,
-            imgLazy: iOS_img1_lazy,
-            text: "",
-            x: "50%",
-            y: "10%",
-          },
-          {
-            img: iOS_img2,
-            imgLazy: iOS_img2_lazy,
-            text: "",
-            x: "50%",
-            y: "88%",
-          },
-          {
-            img: iOS_img3,
-            imgLazy: iOS_img3_lazy,
-            text: "",
-            x: "20%",
-            y: "61%",
-          },
-          {
-            img: iOS_img4,
-            imgLazy: iOS_img4_lazy,
-            text: "",
-            x: "50%",
-            y: "76%",
-          },
-          {
-            img: iOS_img5,
-            imgLazy: iOS_img5_lazy,
-            text: "",
-            x: "50%",
-            y: "63%",
-          },
-          {
-            img: iOS_img6,
-            imgLazy: iOS_img6_lazy,
-            text: "",
-            x: "50%",
-            y: "32%",
-          },
-          {
-            img: iOS_img7,
-            imgLazy: iOS_img7_lazy,
-            text: "",
-            x: "50%",
-            y: "81.5%",
-          },
-        ],
-        tabItems: [
-          {
-            text:
-              "<span>On iPhone <b>open</b> WhatsApp and the <b>chat</b> or <b>group chat</b> you would like to export > at the top <b>tap on</b> the <b>name</b> of the chat.</span>",
-          },
-          {
-            text:
-              "<span>In chat info, scroll all the way to the bottom.</span>",
-          },
-          {
-            text: "<span>Tap on <b>Export Chat</b>.</span>",
-          },
-          {
-            text: "<span>Choose <b >Without Media</b>.</span>",
-          },
-          {
-            text:
-              "<span>Tap on <b>Save to Files</b> to save it on your iPhone.</span>",
-          },
-          {
-            text:
-              "<span>Finally select <b >On my iPhone</b> and <b >save</b> to save it locally.</span>",
-          },
-          {
-            text:
-              "<span>At last you can select your exported .zip to be analyzed.</span>",
-          },
-        ],
-      },
-      {
-        title: "Android",
-        frameImg: AndroidFrame,
-        carouselItems: [
-          {
-            img: img1,
-            imgLazy: img1_lazy,
-            text: "",
-            x: "78%",
-            y: "51%",
-          },
-          {
-            img: img2,
-            imgLazy: img2_lazy,
-            text: "",
-            x: "89%",
-            y: "13%",
-          },
-          {
-            img: img3,
-            imgLazy: img3_lazy,
-            text: "",
-            x: "60%",
-            y: "37%",
-          },
-          {
-            img: img4,
-            imgLazy: img4_lazy,
-            text: "",
-            x: "60%",
-            y: "27%",
-          },
-          {
-            img: img5,
-            imgLazy: img5_lazy,
-            text: "",
-            x: "67%",
-            y: "48%",
-          },
-          {
-            img: img6,
-            imgLazy: img6_lazy,
-            text: "",
-            x: "14%",
-            y: "73%",
-          },
-        ],
-        tabItems: [
-          {
-            text:
-              "<span>On your Android phone open this Website in <b>Chrome</b> and tap on the button <b>add to Homescreen</b> and press install</span>",
-          },
-          {
-            text:
-              "<span>Open <b>WhatsApp</b> and tap on the chat you would like to export > tap on the <b>three-dots</b> at the top right corner.</span>",
-          },
-          {
-            text: "<span>In the new menu tap on <b>More</b>.</span>",
-          },
-          {
-            text: "<span>Tap on <b>Export chat</b>.</span>",
-          },
-          {
-            text:
-              "<span>Choose Without Media or <b>Include Media</b> if you want to include your images and other files in the export.</span>",
-          },
-          {
-            text:
-              "<span>Now in the sharing view tap on <b>Whatsanalyze</b> or alternatively if you skipped step 1 send it to your self via <b>E-Mail</b> or save it to <b>Google Drive</b>.</span>",
-          },
-        ],
-      },
-    ],
-  }),
+  computed: {
+    apple: () => {
+      // eslint-disable-next-line no-undef
+      const browser = process.browser;
+      if (browser) {
+        return (
+          browser.platform.toLowerCase().includes("ios") ||
+          browser.platform.toLowerCase().includes("iphone") ||
+          browser.platform.toLowerCase().includes("ipad") ||
+          browser.platform.toLowerCase().includes("mac")
+        );
+      } else {
+        return true;
+      }
+    },
+  },
+  data() {
+    return {
+      GTAG_INTERACTION,
+      deferredPrompt: null,
+      installButtonStatus: false,
+      tabStatus: [0, 0],
+      tab: this.apple ? 0 : 1,
+      tabData: [
+        {
+          title: "iOS (Apple)",
+          frameImg: iOSFrame,
+          carouselItems: [
+            {
+              img: iOS_img1,
+              imgLazy: iOS_img1_lazy,
+              text: "",
+              x: "50%",
+              y: "10%",
+            },
+            {
+              img: iOS_img2,
+              imgLazy: iOS_img2_lazy,
+              text: "",
+              x: "50%",
+              y: "88%",
+            },
+            {
+              img: iOS_img3,
+              imgLazy: iOS_img3_lazy,
+              text: "",
+              x: "20%",
+              y: "61%",
+            },
+            {
+              img: iOS_img4,
+              imgLazy: iOS_img4_lazy,
+              text: "",
+              x: "50%",
+              y: "76%",
+            },
+            {
+              img: iOS_img5,
+              imgLazy: iOS_img5_lazy,
+              text: "",
+              x: "50%",
+              y: "63%",
+            },
+            {
+              img: iOS_img6,
+              imgLazy: iOS_img6_lazy,
+              text: "",
+              x: "50%",
+              y: "32%",
+            },
+            {
+              img: iOS_img7,
+              imgLazy: iOS_img7_lazy,
+              text: "",
+              x: "50%",
+              y: "81.5%",
+            },
+          ],
+          tabItems: [
+            {
+              text:
+                "<span>On iPhone <b>open</b> WhatsApp and the <b>chat</b> or <b>group chat</b> you would like to export > at the top <b>tap on</b> the <b>name</b> of the chat.</span>",
+            },
+            {
+              text:
+                "<span>In chat info, scroll all the way to the bottom.</span>",
+            },
+            {
+              text: "<span>Tap on <b>Export Chat</b>.</span>",
+            },
+            {
+              text: "<span>Choose <b >Without Media</b>.</span>",
+            },
+            {
+              text:
+                "<span>Tap on <b>Save to Files</b> to save it on your iPhone.</span>",
+            },
+            {
+              text:
+                "<span>Finally select <b >On my iPhone</b> and <b >save</b> to save it locally.</span>",
+            },
+            {
+              text:
+                "<span>At last you can select your exported .zip to be analyzed.</span>",
+            },
+          ],
+        },
+        {
+          title: "Android",
+          frameImg: AndroidFrame,
+          carouselItems: [
+            {
+              img: img1,
+              imgLazy: img1_lazy,
+              text: "",
+              x: "78%",
+              y: "51%",
+            },
+            {
+              img: img2,
+              imgLazy: img2_lazy,
+              text: "",
+              x: "89%",
+              y: "13%",
+            },
+            {
+              img: img3,
+              imgLazy: img3_lazy,
+              text: "",
+              x: "60%",
+              y: "37%",
+            },
+            {
+              img: img4,
+              imgLazy: img4_lazy,
+              text: "",
+              x: "60%",
+              y: "27%",
+            },
+            {
+              img: img5,
+              imgLazy: img5_lazy,
+              text: "",
+              x: "67%",
+              y: "48%",
+            },
+            {
+              img: img6,
+              imgLazy: img6_lazy,
+              text: "",
+              x: "14%",
+              y: "73%",
+            },
+          ],
+          tabItems: [
+            {
+              text:
+                "<span>On your Android phone open this Website in <b>Chrome</b> and tap on the button <b>add to Homescreen</b> and press install</span>",
+            },
+            {
+              text:
+                "<span>Open <b>WhatsApp</b> and tap on the chat you would like to export > tap on the <b>three-dots</b> at the top right corner.</span>",
+            },
+            {
+              text: "<span>In the new menu tap on <b>More</b>.</span>",
+            },
+            {
+              text: "<span>Tap on <b>Export chat</b>.</span>",
+            },
+            {
+              text:
+                "<span>Choose Without Media or <b>Include Media</b> if you want to include your images and other files in the export.</span>",
+            },
+            {
+              text:
+                "<span>Now in the sharing view tap on <b>Whatsanalyze</b> or alternatively if you skipped step 1 send it to your self via <b>E-Mail</b> or save it to <b>Google Drive</b>.</span>",
+            },
+          ],
+        },
+      ],
+    };
+  },
   methods: {
     increaseTabstatus() {
       let maxValue = this.tabData[this.tab].carouselItems.length;
@@ -348,15 +364,18 @@ export default {
       this.installButtonStatus = status;
     },
     catchPWA() {
-      window.addEventListener("beforeinstallprompt", (e) => {
-        // Prevent the mini-infobar from appearing on mobile
-        e.preventDefault();
-        // Stash the event so it can be triggered later.
-        this.deferredPrompt = e;
-        // Update UI notify the user they can install the PWA
-        this.showInstallPromotion(true);
-        // Optionally, send analytics event that PWA install promo was shown.
-      });
+      // eslint-disable-next-line no-undef
+      if (process.client) {
+        window.addEventListener("beforeinstallprompt", (e) => {
+          // Prevent the mini-infobar from appearing on mobile
+          e.preventDefault();
+          // Stash the event so it can be triggered later.
+          this.deferredPrompt = e;
+          // Update UI notify the user they can install the PWA
+          this.showInstallPromotion(true);
+          // Optionally, send analytics event that PWA install promo was shown.
+        });
+      }
     },
     gtagEvent,
   },
