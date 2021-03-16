@@ -6,8 +6,8 @@ let local = process.env.NUXT_ENV_LOCAL !== undefined;
 
 const baseUrl = // eslint-disable-next-line no-undef
 (process.env.BASE_URL || "https://www.whatsanalyze.com").replace(
-  "http",
-  "https"
+  "http:",
+  "https:"
 );
 
 export default {
