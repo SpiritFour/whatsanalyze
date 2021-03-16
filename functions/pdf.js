@@ -99,7 +99,6 @@ export async function render(chat, attachments, ego, isSample = false) {
   };
   const hexToRgb = function (hex) {
     if (hex.length != 7) {
-      console.log(hex);
       throw "Only seven-digit hex colors are allowed.";
     }
     // remove #

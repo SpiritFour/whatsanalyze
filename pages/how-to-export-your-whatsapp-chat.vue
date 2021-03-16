@@ -5,7 +5,7 @@
       cta="Analyze your data and save it as a beautiful PDF"
       to="/"
     />
-
+    <PdfExample class="pb-10" />
     <Content :page="page" />
     <Cta
       to="/"
@@ -31,17 +31,32 @@ export default {
       {
         hid: "og:title",
         name: "og:title",
+        property: "og:title",
+        content: "WhatsAnalyze - How to Export your WhatsApp Chat",
+      },
+      {
+        hid: "og:site_name",
+        name: "og:site_name",
+        property: "og:site_name",
         content: "WhatsAnalyze - How to Export your WhatsApp Chat",
       },
       {
         hid: "description",
         name: "description",
+        property: "description",
         content: "Export your Whatsapp Chat ✓ iOS Tutorial ✓ Android Guide",
       },
       {
         hid: "og:description",
         name: "og:description",
+        property: "og:description",
         content: "Export your Whatsapp Chat ✓ iOS Tutorial ✓ Android Guide",
+      },
+      {
+        hid: "og:url",
+        name: "og:url",
+        property: "og:url",
+        content: "whatsanalyze.com/how-to-export-your-whatsapp-chat",
       },
     ],
   },

@@ -10,8 +10,7 @@
           >
             <HeaderCta />
             <FileHandler
-              ref="filehandler"
-              id="fileHandler"
+              class="filehandler"
               v-if="$vuetify.breakpoint.mdAndUp"
               @new_messages="newMessages"
               @hide_explanation="isShowingChats = $event"
@@ -24,8 +23,7 @@
         <v-row v-if="$vuetify.breakpoint.smAndDown">
           <v-col>
             <FileHandler
-              ref="filehandler"
-              id="fileHandler"
+              class="filehandler"
               @new_messages="newMessages"
               @hide_explanation="isShowingChats = $event"
             />
@@ -70,29 +68,45 @@ export default {
       page,
     };
   },
-  head: {
-    title: "WhatsAnalyze - The WhatsApp Chat Analyzer",
-    meta: [
-      {
-        hid: "og:title",
-        name: "og:title",
-        content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
-      },
-      {
-        hid: "description",
-        name: "description",
-        content:
-          "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
-      },
-      {
-        hid: "og:description",
-        name: "og:description",
-        content:
-          "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
-      },
-    ],
+  head() {
+    return {
+      title: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+      meta: [
+        {
+          hid: "og:title",
+          name: "og:title",
+          property: "og:title",
+          content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+        },
+        {
+          hid: "og:site_name",
+          name: "og:site_name",
+          property: "og:site_name",
+          content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+        },
+        {
+          hid: "description",
+          name: "description",
+          property: "description",
+          content:
+            "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
+        },
+        {
+          hid: "og:description",
+          name: "og:description",
+          property: "og:description",
+          content:
+            "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
+        },
+        {
+          hid: "og:url",
+          name: "og:url",
+          property: "og:url",
+          content: "whatsanalyze.com",
+        },
+      ],
+    };
   },
-
   data() {
     return {
       isShowingChats: false,
