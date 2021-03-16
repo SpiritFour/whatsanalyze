@@ -39,7 +39,7 @@ export default {
     return {
       ego: this.chat.messagesPerPerson[0].name,
       price: 1.99,
-      currency: "USD",
+      currency: "EUR",
     };
   },
   methods: {
