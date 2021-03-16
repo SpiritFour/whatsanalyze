@@ -4,6 +4,9 @@ import fs from "fs";
 // eslint-disable-next-line no-undef
 let local = process.env.NUXT_ENV_LOCAL !== undefined;
 
+// eslint-disable-next-line no-undef
+const baseUrl = process.env.BASE_URL || "https://www.whatsanalyze.com";
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -16,6 +19,8 @@ export default {
     htmlAttrs: {
       lang: "en",
     },
+    title: "n-WhatsAnalyze - The WhatsApp Chat Analyzer",
+
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -24,16 +29,42 @@ export default {
       {
         hid: "og:image",
         property: "og:image",
-        content: "/sharePreview.png",
+        content: baseUrl + "/sharePreview.png",
+      },
+      {
+        hid: "og:title",
+        name: "og:title",
+        property: "og:title",
+        content: "n-WhatsAnalyze - The WhatsApp Chat Analyzer",
+      },
+      {
+        hid: "og:site_name",
+        name: "og:site_name",
+        property: "og:site_name",
+        content: "n-WhatsAnalyze - The WhatsApp Chat Analyzer",
+      },
+      {
+        hid: "description",
+        name: "description",
+        property: "description",
+        content:
+          "n-America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
+      },
+      {
+        hid: "og:description",
+        name: "og:description",
+        property: "og:description",
+        content:
+          "n-America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
       },
     ],
     link: [{ rel: "icon", type: "image/png", href: "/favicon.ico" }],
   },
   pwa: {
-    meta: { name: "WhatsAnalyze - The WhatsApp Chat Analyzer - pwa" },
+    meta: { name: false, description: false },
     manifest: {
-      name: "WhatsAnalyze - The WhatsApp Chat Analyzer",
-      short_name: "WhatsAnalyze",
+      name: "WhatsAnalyze - The WhatsApp Chat Analyzer - manifest",
+      short_name: "WhatsAnalyze - manifest",
       start_url: "/",
       display: "standalone",
       background_color: "#21a68d",
