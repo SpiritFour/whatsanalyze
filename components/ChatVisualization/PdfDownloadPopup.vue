@@ -3,6 +3,14 @@
     <div class="text-h4 text-md-h3 font-weight-bold pb-4">
       Download your Chat as PDF
     </div>
+
+    <v-img
+      :lazy-src="item.imageSrcLazy"
+      :src="require('@/assets/pdf-example.png')"
+      max-height="147"
+      max-width="250"
+    />
+
     <v-progress-linear
       v-show="isLoading"
       indeterminate
