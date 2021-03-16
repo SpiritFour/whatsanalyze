@@ -4,7 +4,7 @@
       Download your Chat as PDF
     </div>
 
-    <v-row class>
+    <v-row>
       <v-img
         class="ma-auto my-4"
         :src="require('@/assets/pdf-example.jpg')"
