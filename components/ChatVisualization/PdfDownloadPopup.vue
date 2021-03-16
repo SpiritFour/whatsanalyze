@@ -4,12 +4,14 @@
       Download your Chat as PDF
     </div>
 
-    <v-img
-      :lazy-src="item.imageSrcLazy"
-      :src="require('@/assets/pdf-example.png')"
-      max-height="147"
-      max-width="250"
-    />
+    <v-row class>
+      <v-img
+        class="ma-auto my-4"
+        :src="require('@/assets/pdf-example.jpg')"
+        max-height="147"
+        max-width="250"
+      />
+    </v-row>
 
     <v-progress-linear
       v-show="isLoading"
