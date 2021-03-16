@@ -35,6 +35,7 @@
 
     <v-container v-show="!isShowingChats" class="pt-16">
       <ExportExplainer />
+      <PdfExample class="pb-10" />
       <Content :page="page" />
       <Cta
         title="Analyze your own WhatsApp data now"
