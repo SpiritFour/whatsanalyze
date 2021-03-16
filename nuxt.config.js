@@ -22,9 +22,30 @@ export default {
       // bing indexing
       { name: "msvalidate.01", content: "E04DE33CC93C0FF892248C9E70A9A918" },
       {
+        hid: "og:site_name",
+        property: "og:site_name",
+        content: "WhatsAnalyze",
+      },
+      {
+        hid: "og:title",
+        property: "og:title",
+        content: "Analyze your WhatsApp Chats",
+      },
+      {
+        hid: "og:description",
+        property: "og:description",
+        content:
+          "Learn who writes the most and many more! You can even generate a PDF from your chat!",
+      },
+      {
         hid: "og:image",
         property: "og:image",
         content: "/sharePreview.png",
+      },
+      {
+        hid: "og:type",
+        property: "og:type",
+        content: "website",
       },
     ],
     link: [{ rel: "icon", type: "image/png", href: "/favicon.ico" }],
