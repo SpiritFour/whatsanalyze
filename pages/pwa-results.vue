@@ -57,7 +57,10 @@ export default {
     },
   },
   created() {
-    this.setupWorkBox();
+    // eslint-disable-next-line no-undef
+    if (process.client) {
+      this.setupWorkBox();
+    }
   },
 };
 </script>

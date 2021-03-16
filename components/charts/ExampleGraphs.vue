@@ -249,22 +249,25 @@ export default {
     };
   },
   created() {
-    fetch("/example-results.txt")
-      .then((response) => response.text())
-      .then((messages) => {
-        var instance = new Chat();
-        var serializedObject = JSON.parse(messages);
-        Object.assign(instance, {
-          _lineGraphData: Promise.resolve(serializedObject[0]),
-          _funfacts: Promise.resolve(serializedObject[1]),
-          _allWords: Promise.resolve(serializedObject[2]),
-          _hourlyData: Promise.resolve(serializedObject[3]),
-          _dailyData: Promise.resolve(serializedObject[4]),
-          _weeklyData: Promise.resolve(serializedObject[5]),
-          _shareOfSpeech: Promise.resolve(serializedObject[6]),
+    // eslint-disable-next-line no-undef
+    if (process.client) {
+      fetch("/example-results.txt")
+        .then((response) => response.text())
+        .then((messages) => {
+          var instance = new Chat();
+          var serializedObject = JSON.parse(messages);
+          Object.assign(instance, {
+            _lineGraphData: Promise.resolve(serializedObject[0]),
+            _funfacts: Promise.resolve(serializedObject[1]),
+            _allWords: Promise.resolve(serializedObject[2]),
+            _hourlyData: Promise.resolve(serializedObject[3]),
+            _dailyData: Promise.resolve(serializedObject[4]),
+            _weeklyData: Promise.resolve(serializedObject[5]),
+            _shareOfSpeech: Promise.resolve(serializedObject[6]),
+          });
+          this.chat = instance;
         });
-        this.chat = instance;
-      });
+    }
   },
 };
 </script>
