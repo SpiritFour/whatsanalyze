@@ -4,11 +4,9 @@ import fs from "fs";
 // eslint-disable-next-line no-undef
 let local = process.env.NUXT_ENV_LOCAL !== undefined;
 
-const baseUrl = // eslint-disable-next-line no-undef
-(process.env.BASE_URL || "https://www.whatsanalyze.com").replace(
-  "http:",
-  "https:"
-);
+const baseUrl = ( // eslint-disable-next-line no-undef
+  process.env.BASE_URL || "https://www.whatsanalyze.com"
+).replace("http:", "https:");
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
@@ -34,10 +32,9 @@ export default {
     link: [{ rel: "icon", type: "image/png", href: "/favicon.ico" }],
   },
   pwa: {
-    // meta: false,
     manifest: {
-      name: "WhatsAnalyze - The WhatsApp Chat Analyzer - manifest",
-      short_name: "WhatsAnalyze - manifest",
+      name: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+      short_name: "WhatsAnalyze",
       start_url: "/",
       display: "standalone",
       background_color: "#21a68d",
