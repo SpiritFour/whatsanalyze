@@ -67,7 +67,7 @@
             <v-col
               cols="12"
               sm="4"
-              class="py-5"
+              class="py-5 px-md-15"
               :class="{ 'mobile-padding': $vuetify.breakpoint.xsOnly }"
             >
               <div class="carousel-container px-4">
