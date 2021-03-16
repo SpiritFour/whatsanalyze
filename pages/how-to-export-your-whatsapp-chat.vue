@@ -52,6 +52,12 @@ export default {
         property: "og:description",
         content: "Export your Whatsapp Chat ✓ iOS Tutorial ✓ Android Guide",
       },
+      {
+        hid: "og:url",
+        name: "og:url",
+        property: "og:url",
+        content: "whatsanalyze.com/how-to-export-your-whatsapp-chat",
+      },
     ],
   },
 };

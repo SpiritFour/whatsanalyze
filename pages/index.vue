@@ -98,6 +98,12 @@ export default {
           content:
             "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
         },
+        {
+          hid: "og:url",
+          name: "og:url",
+          property: "og:url",
+          content: "whatsanalyze.com",
+        },
       ],
     };
   },
