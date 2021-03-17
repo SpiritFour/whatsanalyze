@@ -14,7 +14,7 @@
     </v-tabs>
     <v-tabs-items v-model="tab">
       <client-only>
-        <v-tab-item v-for="(data, idx) in tabData" :key="idx + '_' + tab">
+        <v-tab-item v-for="(data, idx) in tabData" :key="idx">
           <v-row no-gutters>
             <v-col cols="12" sm="8" class="pb-10">
               <v-timeline dense>
