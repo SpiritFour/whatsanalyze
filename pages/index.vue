@@ -37,10 +37,11 @@
       <Cta showImage />
       <Faq />
       <Testimonials />
+      <PdfExample />
       <Cta
-        title="Analyze your own WhatsApp data now"
-        buttonText="Analyze my chat"
-        text="Interested about your own chat data? Reveal some interesting and entertaining facts now.
+        title="Get your Free PDF preview"
+        buttonTxt="Generate your chat PDF"
+        text="Get your chat as a beautiful PDF with Revealing insight and interesting facts.
         Most Used Smileys, Share of speech, and much more ...
       "
       />
