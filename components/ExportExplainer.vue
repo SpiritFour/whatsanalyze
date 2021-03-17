@@ -16,7 +16,7 @@
       <client-only>
         <v-tab-item v-for="(data, idx) in tabData" :key="idx + '_' + tab">
           <v-row no-gutters>
-            <v-col cols="12" sm="8" class="pt-md-15 pb-10">
+            <v-col cols="12" sm="8" class="pb-10">
               <v-timeline dense>
                 <v-timeline-item
                   class="mb-4 align-center"
@@ -64,8 +64,13 @@
                 {{ cta }}
               </v-btn>
             </v-col>
-            <v-col cols="12" sm="4" class="pt-5">
-              <div class="carousel-container px-md-16 px-4">
+            <v-col
+              cols="12"
+              sm="4"
+              class="py-5 px-md-15"
+              :class="{ 'mobile-padding': $vuetify.breakpoint.xsOnly }"
+            >
+              <div class="carousel-container px-4">
                 <v-img ref="smartphone" class="frame" :src="data.frameImg" />
                 <!-- model and pngs-->
                 <v-carousel
@@ -74,7 +79,7 @@
                   hide-delimiter-background
                   hide-delimiters
                   show-arrows
-                  class="frame-container px-md-16 px-4"
+                  class="frame-container px-4"
                   height="auto"
                 >
                   <v-carousel-item
@@ -100,9 +105,8 @@
                 </v-carousel>
               </div>
             </v-col>
-          </v-row>
-        </v-tab-item>
-      </client-only>
+          </v-row> </v-tab-item
+      ></client-only>
     </v-tabs-items>
   </v-container>
 </template>
@@ -388,6 +392,12 @@ export default {
   height: 100%;
   min-height: 50px;
 }
+
+.mobile-padding {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
 .frame-container {
   left: 0;
   top: 0;
