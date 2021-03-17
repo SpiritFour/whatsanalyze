@@ -3,7 +3,7 @@ title: Switch from WhatsApp to Signal
 description: Switch from WhatsApp to Signal
 ---
 
-!()[https://www.whatsanalyze.com/whatsapp-vs-signal.jpg]
+![](https://www.whatsanalyze.com/whatsapp-vs-signal.jpg)
 
 Wanna use a real privacy-focused messenger? Signal is the way to go. Even [Edward Snowden uses it every day](https://www.signal.org/)!
 
