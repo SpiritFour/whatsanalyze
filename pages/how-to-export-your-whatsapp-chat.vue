@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <ExportExplainer class="mt-10" cta="Export your chat as PDF" to="/" />
-
+    <PdfExample />
     <Content :page="page" />
     <Cta
       to="/"
