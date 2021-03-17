@@ -43,19 +43,7 @@
               </v-timeline>
               <v-btn
                 elevation="10"
-                @click="
-                  to
-                    ? null
-                    : gtagEvent(
-                        'jump_to_filehandler_' + tab,
-                        GTAG_INTERACTION,
-                        0
-                      );
-                  $vuetify.goTo('.filehandler', {
-                    duration: 300,
-                    offset: 100,
-                  });
-                "
+                @click="clickHandler"
                 :to="to ? to : null"
                 color="#07bc4c"
                 class="text-md-h6 text-caption ml-10 white--text"
@@ -336,6 +324,15 @@ export default {
     };
   },
   methods: {
+    clickHandler() {
+      if (!this.to) {
+        gtagEvent("jump_to_filehandler_" + this.tab, GTAG_INTERACTION, 0);
+        this.$vuetify.goTo(".filehandler", {
+          duration: 300,
+          offset: 100,
+        });
+      }
+    },
     increaseTabstatus() {
       let maxValue = this.tabData[this.tab].carouselItems.length;
       let a = [...this.tabStatus];

@@ -13,10 +13,7 @@
     <br />
     <v-btn
       :to="to ? to : null"
-      @click="
-        to ? null : gtagEvent('jump_to_filehandler_cta', GTAG_INTERACTION, 0);
-        $vuetify.goTo('.filehandler', { duration: 300, offset: 100 });
-      "
+      @click="clickHandler"
       color="#07bc4c"
       style="color: #ffffff"
       class="mt-5 text-h6"
@@ -51,6 +48,12 @@ export default {
     };
   },
   methods: {
+    clickHandler() {
+      if (!this.to) {
+        gtagEvent("jump_to_filehandler_cta", GTAG_INTERACTION, 0);
+        this.$vuetify.goTo(".filehandler", { duration: 300, offset: 100 });
+      }
+    },
     gtagEvent,
   },
 };
