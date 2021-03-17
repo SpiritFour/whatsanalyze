@@ -54,10 +54,10 @@ export default {
         //   name: "whatsapp-to-pdf",
         //   text: "Create a PDF from your WhatsApp chat",
         // },
-        // {
-        //   name: "switch-from-whatsapp-to-signal",
-        //   text: "How to switch to Signal from WhatsApp",
-        // },
+        {
+          name: "switch-from-whatsapp-to-signal",
+          text: "How to switch to Signal from WhatsApp",
+        },
         {
           name: "how-to-export-your-whatsapp-chat",
           text: "How to export your WhatsApp Chat",
