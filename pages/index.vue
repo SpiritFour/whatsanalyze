@@ -122,7 +122,7 @@ export default {
       if (!chatObject.default || this.chat === undefined) {
         this.attachments = chatObject.attachments;
         this.chat = new Chat(chatObject.messages);
-        if (this.chat.numPersonsInChat > 2) {
+        if (this.chat.numPersonsInChat <= 2) {
           gtagEvent("analyzed_pair_chat", GTAG_INTERACTION, 0);
         } else {
           gtagEvent("analyzed_group_chat", GTAG_INTERACTION, 0);
@@ -134,11 +134,14 @@ export default {
         );
       }
     },
-    created() {
+  },
+  created() {
+    // eslint-disable-next-line no-undef
+    if (process.client) {
       Object.keys(this.$route.query).forEach((key) => {
         gtagEvent(key, GTAG_LEAD);
       });
-    },
+    }
   },
 };
 </script>
