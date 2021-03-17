@@ -101,7 +101,7 @@ export default {
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxt/content", "@nuxtjs/pwa"],
+  modules: ["@nuxt/content", "@nuxtjs/pwa", "@nuxtjs/gtm"],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
@@ -121,6 +121,9 @@ export default {
         },
       },
     },
+  },
+  gtm: {
+    id: "GTM-W32PNH3",
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

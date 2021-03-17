@@ -3,6 +3,16 @@
     <div class="text-h4 text-md-h3 font-weight-bold pb-4">
       Download your Chat as PDF
     </div>
+
+    <v-row>
+      <v-img
+        class="ma-auto my-4"
+        :src="require('@/assets/pdf-example.jpg')"
+        max-height="147"
+        max-width="250"
+      />
+    </v-row>
+
     <v-progress-linear
       v-show="isLoading"
       indeterminate
