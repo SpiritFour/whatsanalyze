@@ -21,7 +21,8 @@
     ></v-progress-linear>
     <div class="text-body-1 my-2">
       Get your <b>full</b> WhatsApp chat for
-      <b>{{ price + " " + currency }}</b> as a PDF instantly.
+      <b style="color: green">{{ price + " " + currency }}</b>
+      <s style="color: grey">{{ 4.99 + " " + currency }}</s> as a PDF instantly.
     </div>
 
     <v-dialog v-model="showDownloadPopup" width="550">
