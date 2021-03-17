@@ -1,6 +1,14 @@
 <template>
   <v-container class="cta pt-7 my-5 text-center">
     <div class="text-h2 font-weight-bold mb-7">{{ title }}</div>
+
+    <v-row v-if="showImage">
+      <v-img
+        class="ma-auto mt-4 mb-8"
+        :src="require('@/assets/my-chat.jpg')"
+        max-width="250"
+      />
+    </v-row>
     <span class="text-body-1"> {{ text }}</span>
     <br />
     <v-btn
@@ -24,6 +32,7 @@ import { GTAG_INTERACTION, gtagEvent } from "~/functions/gtagValues";
 
 export default {
   props: {
+    showImage: { default: false, type: Boolean },
     to: { default: "", type: String },
     buttonTxt: { default: "Analyze your chat!", type: String },
     text: {

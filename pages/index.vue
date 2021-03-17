@@ -34,7 +34,7 @@
 
     <v-container v-show="!isShowingChats" class="pt-16">
       <ExportExplainer />
-      <Cta />
+      <Cta showImage />
       <Faq />
       <Testimonials />
       <Cta
