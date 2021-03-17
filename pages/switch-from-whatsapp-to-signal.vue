@@ -29,10 +29,22 @@ export default {
         content: "noindex",
       },
       {
+        hid: "og:title",
+        name: "og:title",
+        content: "WhatsAnalyze - How to Export your WhatsApp Chat to PDF",
+      },
+
+      {
+        hid: "og:description",
+        name: "og:description",
+        content:
+          "Export your Whatsapp chat to PDF in seconds ✓ Group Chats ✓ Create a PDF Book ✓ Privacy First -> No Chat Data is sent to a Server. Get your pdf now!",
+      },
+      {
         hid: "description",
         name: "description",
         content:
-          "Learn how to export your chat from WhatsApp to Signal ✓ Now working for Group Chats ✓ Keep your Data ✓ No Chat Data is sent to a Server. Get Started now!",
+          "Export your Whatsapp chat to PDF in seconds ✓ Now working for Group Chats ✓ Create your own PDF Book ✓ No Chat Data is sent to a Server. Get Started now!",
       },
     ],
   },
