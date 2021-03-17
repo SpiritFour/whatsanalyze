@@ -134,11 +134,15 @@ export default {
         );
       }
     },
-    created() {
+  },
+  created() {
+    // eslint-disable-next-line no-undef
+    if (process.client) {
       Object.keys(this.$route.query).forEach((key) => {
+        console.log("got param", key);
         gtagEvent(key, GTAG_LEAD);
       });
-    },
+    }
   },
 };
 </script>
