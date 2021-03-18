@@ -35,16 +35,16 @@ Signal has recently tweeted a tutorial it is actually super easy and works in 4 
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">A lot of people have been asking how to move their group chats from other apps to Signal, and Signal group links are a great way to get started. Drop a group link into your former chat app of choice like you&#39;re dropping the mic on the way out. <a href="https://t.co/q49DeZufBG">pic.twitter.com/q49DeZufBG</a></p>&mdash; Signal (@signalapp) <a href="https://twitter.com/signalapp/status/1347309781564813312?ref_src=twsrc%5Etfw">January 7, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
 
-Step 1: Open the **Signal App** > tap on the **three dots** in the **top right corner** > **create** a **group** (use the same name from your whatsapp group)
+**Step 1:** Open the **Signal App** > tap on the **three dots** in the **top right corner** > **create** a **group** (use the same name from your whatsapp group)
 
-Step 2: Now in the just created group > open it and press at the top again to **open** its **group settings** > scroll to **Group link**
+**Step 2:** Now in the just created group > open it and press at the top again to **open** its **group settings** > scroll to **Group link**
 
-Step 3: Tap on the toggle to turn it on and **press** on **Share**
+**Step 3:** Tap on the toggle to turn it on and **press** on **Share**
 
-Step 4: Now open Whatsapp and **Paste it** in your **former Whatsapp group** to let your **friends join** 
+**Step 4:** Now open Whatsapp and **Paste it** in your **former Whatsapp group** to let your **friends join** 
 
 Signal offers no functionality to import any data. You need to start with a blank state and can not have your old WhatsApp chats in Signal.
 
-If you, however, want to backup your data you [export your WhatsApp data](https://whatsanalyze.com/how-to-export-your-whatsapp-chat) and then run it through our tool and save it as a PDF!
+If you, however, want to back up your data you [export your WhatsApp data](https://whatsanalyze.com/how-to-export-your-whatsapp-chat) and then run it through our tool and save it as a PDF!
 
 In that way, you can keep your chats as a PDF and have a secure, privacy-focused messenger!
