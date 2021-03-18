@@ -38,7 +38,7 @@
         </v-row>
       </v-col>
     </v-row>
-    <v-row class="ma-10" justify="center">
+    <v-row justify="center">
       <v-col
         align="center"
         cols="3"
@@ -76,21 +76,18 @@ export default {
         {
           // eslint-disable-next-line no-undef
           image: require("~/assets/img/us/Paul_WA.jpg"),
-
           name: "Paul Kehnel",
           description: ["Computer Science  MSc", "likes stuff"],
         },
         {
           // eslint-disable-next-line no-undef
           image: require("~/assets/img/us/Adrian_WA.jpg"),
-
           name: "Adrian Thiesen",
           description: ["Business Administration BSc", "likes stuff"],
         },
         {
           // eslint-disable-next-line no-undef
           image: require("~/assets/img/us/Moritz_WA.jpeg"),
-
           name: "Moritz Wolf",
           description: ["Robotics MSc", "likes stuff"],
         },

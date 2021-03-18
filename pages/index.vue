@@ -36,7 +36,7 @@
       <ExportExplainer />
       <Cta showImage />
       <Faq />
-      <Testimonials />
+      <About />
       <PdfExample />
       <Cta
         title="Get your Free PDF preview"
