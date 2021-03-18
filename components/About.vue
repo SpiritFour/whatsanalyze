@@ -4,9 +4,13 @@
       About us
     </v-row>
     <v-row class="ma-10 text-body-1" justify="center">
-      <v-col cols="12" sm="12" md="10">
-        We are a group of four friends that switched from signal to whatsapp a
-        few weeks ago.
+      <v-col cols="12" sm="12" md="10" align="center">
+        We are a group of <b>university friends</b>. As we recently all left
+        WhatsApp we wanted to analyse how or chats evolved over the years.
+        <br />
+        As <b>Computer Science students</b> are paranoid and think they can do
+        everything better, we naturally wanted to build a solution our self,
+        where <b>no personal data</b> is shared or made public.
       </v-col>
     </v-row>
     <v-row class="ma-10" justify="center">
@@ -78,21 +82,21 @@ export default {
           image: require("~/assets/img/us/Paul_WA.jpg"),
 
           name: "Paul Kehnel",
-          description: ["Computer Science  MSc", "likes stuff"],
+          description: ["Computer Science  MSc", "Bicycle Dude"],
         },
         {
           // eslint-disable-next-line no-undef
           image: require("~/assets/img/us/Adrian_WA.jpg"),
 
           name: "Adrian Thiesen",
-          description: ["Business Administration BSc", "likes stuff"],
+          description: ["Business Administration BSc", "The Allrounder"],
         },
         {
           // eslint-disable-next-line no-undef
           image: require("~/assets/img/us/Moritz_WA.jpeg"),
 
           name: "Moritz Wolf",
-          description: ["Robotics MSc", "likes stuff"],
+          description: ["Robotics MSc", "Outdoor Specialist"],
         },
       ],
     };
