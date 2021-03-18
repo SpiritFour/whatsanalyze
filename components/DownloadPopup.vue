@@ -145,14 +145,18 @@ export default {
           .querySelectorAll("[remove-height-in-html2-canvas]")
           .forEach((a) => (negativeHeight -= a.clientHeight));
 
+        console.log(
+          document.querySelectorAll("[remove-height-in-html2-canvas]")
+        );
+
         let normalHeight = document.querySelector("#download-graphs")
           .clientHeight;
 
         //wordcloud
         let canvas = html2canvas(document.querySelector("#download-graphs"), {
           scrollX: 0,
-          scrollY: -window.scrollY,
-          height: normalHeight + additionalHeight + negativeHeight,
+          scrollY: -window.scrollY + 50,
+          height: normalHeight + negativeHeight + additionalHeight + 200,
           onclone: function (clonedDoc) {
             let nonVisibleStuff = clonedDoc.querySelectorAll(
               ".only-visible-to-html2canvas"
