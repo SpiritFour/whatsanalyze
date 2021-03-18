@@ -8,20 +8,18 @@
         class="my-5"
         data-html2canvas-ignore
         remove-height-in-html2-canvas
-        @download-all-individual="downloadAll()"
       />
       <div class="text-h2 font-weight-bold pb-10">Chat Timeline</div>
       <div>Messages per Day</div>
-      <Share id="chat-timeline" ref="timeline">
-        <ChartsLineChart :chartdata="chat" style="background-color: #ffffff" />
+      <Share id="chat-timeline">
+        <ChartsLineChart :chartdata="chat" />
       </Share>
       <DownloadPopup
         :chat="chat"
         data-html2canvas-ignore
         remove-height-in-html2-canvas
-        @download-all-individual="downloadAll()"
       />
-      <Share :use-html2-canvas="true" ref="funFacts">
+      <Share :use-html2-canvas="true">
         <ChartsFunFacts
           :chartdata="chat"
           class="pb-md-10"
@@ -42,17 +40,13 @@
       <v-row>
         <v-col cols="12" md="6">
           <div class="text-h4 font-weight-bold">Person</div>
-          <Share id="messages-per-person" ref="perPerson">
-            <ChartsDonughtChart
-              :chartdata="chat"
-              class="py-10"
-              style="background-color: #ffffff"
-            />
+          <Share id="messages-per-person">
+            <ChartsDonughtChart :chartdata="chat" class="py-10" />
           </Share>
         </v-col>
         <v-col cols="12" md="6">
           <div class="text-h4 font-weight-bold">Time of Day</div>
-          <Share id="messages-per-time-of-day" ref="perTimeOfDay">
+          <Share id="messages-per-time-of-day">
             <ChartsBarChart
               :chartdata="chat"
               dataGrouping="hourly"
@@ -65,18 +59,17 @@
       <v-row>
         <v-col cols="12" sm="6">
           <div class="text-h4 font-weight-bold">Month</div>
-          <Share id="radar-month" ref="perMonth">
+          <Share id="radar-month">
             <ChartsRadarChart
               :chartdata="chat"
               dataGrouping="weekly"
               class="py-10"
-              style="background-color: #ffffff"
             />
           </Share>
         </v-col>
         <v-col cols="12" sm="6">
           <div class="text-h4 font-weight-bold">Weekday</div>
-          <Share id="radar-day" ref="perWeekday">
+          <Share id="radar-day">
             <ChartsRadarChart
               :chartdata="chat"
               dataGrouping="daily"
@@ -87,18 +80,12 @@
       </v-row>
 
       <div class="text-h3 font-weight-bold pt-10">Word Cloud</div>
-      <ChartsWordCloud
-        id="wordcloud"
-        :chartdata="chat"
-        class="px-10"
-        style="background-color: #ffffff"
-      />
+      <ChartsWordCloud id="wordcloud" :chartdata="chat" class="px-10" />
 
       <DownloadPopup
         :chat="chat"
         data-html2canvas-ignore
         remove-height-in-html2-canvas
-        @download-all-individual="downloadAll()"
       />
 
       <ChatVisualization
@@ -117,27 +104,5 @@
 <script>
 export default {
   props: ["chat", "attachments"],
-  methods: {
-    downloadAll() {
-      setTimeout(() => {
-        this.$refs.timeline.share();
-        setTimeout(() => {
-          this.$refs.perWeekday.share();
-          setTimeout(() => {
-            this.$refs.perMonth.share();
-            setTimeout(() => {
-              this.$refs.perTimeOfDay.share();
-              setTimeout(() => {
-                this.$refs.perPerson.share();
-                setTimeout(() => {
-                  this.$refs.funFacts.share();
-                }, 1000);
-              }, 1000);
-            }, 1000);
-          }, 1000);
-        }, 1000);
-      }, 1000);
-    },
-  },
 };
 </script>

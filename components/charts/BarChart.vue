@@ -17,10 +17,6 @@ export default {
       type: Object,
       default: function () {
         return {
-          chartArea: {
-            backgroundColor: "red",
-            color: "red",
-          },
           responsive: true,
           maintainAspectRatio: false,
           legend: {
@@ -47,22 +43,6 @@ export default {
               },
             ],
           },
-          // TODO: set BG to white
-          // https://github.com/chartjs/Chart.js/issues/2830
-          // plugins: [
-          //   {
-          //     beforeDraw: function (chartInstance) {
-          //       var ctx = chartInstance.chart.ctx;
-          //       ctx.fillStyle = "red";
-          //       ctx.fillRect(
-          //         0,
-          //         0,
-          //         chartInstance.chart.width,
-          //         chartInstance.chart.height
-          //       );
-          //     },
-          //   },
-          // ],
         };
       },
     },
