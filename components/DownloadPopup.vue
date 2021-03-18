@@ -131,49 +131,53 @@ export default {
   },
   methods: {
     download: function () {
-      this.loading = true;
-      gtagEvent("download_image", GTAG_RESULTS);
+      if (this.$vuetify.breakpoint.smAndDown) {
+        this.$emit("download-all-individual", true);
+      } else {
+        this.loading = true;
+        gtagEvent("download_image", GTAG_RESULTS);
 
-      setTimeout(() => {
-        let additionalHeight = 0;
-        document
-          .querySelectorAll(".additional-height")
-          .forEach((a) => (additionalHeight += a.clientHeight));
+        setTimeout(() => {
+          let additionalHeight = 0;
+          document
+            .querySelectorAll(".additional-height")
+            .forEach((a) => (additionalHeight += a.clientHeight));
 
-        let negativeHeight = 0;
-        document
-          .querySelectorAll("[remove-height-in-html2-canvas]")
-          .forEach((a) => (negativeHeight -= a.clientHeight));
+          let negativeHeight = 0;
+          document
+            .querySelectorAll("[remove-height-in-html2-canvas]")
+            .forEach((a) => (negativeHeight -= a.clientHeight));
 
-        let normalHeight = document.querySelector("#download-graphs")
-          .clientHeight;
+          let normalHeight = document.querySelector("#download-graphs")
+            .clientHeight;
 
-        //wordcloud
-        let canvas = html2canvas(document.querySelector("#download-graphs"), {
-          scrollX: 0,
-          scrollY: -window.scrollY,
-          height: normalHeight + additionalHeight + negativeHeight,
-          onclone: function (clonedDoc) {
-            let nonVisibleStuff = clonedDoc.querySelectorAll(
-              ".only-visible-to-html2canvas"
+          //wordcloud
+          let canvas = html2canvas(document.querySelector("#download-graphs"), {
+            scrollX: 0,
+            scrollY: -window.scrollY,
+            height: normalHeight + additionalHeight + negativeHeight,
+            onclone: function (clonedDoc) {
+              let nonVisibleStuff = clonedDoc.querySelectorAll(
+                ".only-visible-to-html2canvas"
+              );
+              nonVisibleStuff.forEach((y) => (y.style.display = "block"));
+              return clonedDoc;
+            },
+          });
+
+          let names = this.chat.messagesPerPerson
+            .slice(0, 2)
+            .map((person) => person.name)
+            .join("-");
+          canvas.then((canvas) => {
+            downloadBase64File(
+              canvas.toDataURL(),
+              "whatsanlayze-results-" + names + ".png"
             );
-            nonVisibleStuff.forEach((y) => (y.style.display = "block"));
-            return clonedDoc;
-          },
-        });
-
-        let names = this.chat.messagesPerPerson
-          .slice(0, 2)
-          .map((person) => person.name)
-          .join("-");
-        canvas.then((canvas) => {
-          downloadBase64File(
-            canvas.toDataURL(),
-            "whatsanlayze-results-" + names + ".png"
-          );
-          this.loading = false;
-        });
-      }, 250);
+            this.loading = false;
+          });
+        }, 250);
+      }
     },
     paypalButtonPressed() {
       gtagEvent("donation_download_results", GTAG_PAYMENT, 5);
