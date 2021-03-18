@@ -37,7 +37,6 @@ export default {
         name: "og:title",
         content: "WhatsAnalyze - How to Export your WhatsApp Chat to PDF",
       },
-
       {
         hid: "og:description",
         name: "og:description",
