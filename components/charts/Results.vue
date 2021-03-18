@@ -119,12 +119,24 @@ export default {
   props: ["chat", "attachments"],
   methods: {
     downloadAll() {
-      this.$refs.perWeekday.share();
-      this.$refs.perMonth.share();
-      this.$refs.perTimeOfDay.share();
-      this.$refs.perPerson.share();
-      this.$refs.funFacts.share();
-      this.$refs.timeline.share();
+      setTimeout(() => {
+        this.$refs.timeline.share();
+        setTimeout(() => {
+          this.$refs.perWeekday.share();
+          setTimeout(() => {
+            this.$refs.perMonth.share();
+            setTimeout(() => {
+              this.$refs.perTimeOfDay.share();
+              setTimeout(() => {
+                this.$refs.perPerson.share();
+                setTimeout(() => {
+                  this.$refs.funFacts.share();
+                }, 1000);
+              }, 1000);
+            }, 1000);
+          }, 1000);
+        }, 1000);
+      }, 1000);
     },
   },
 };
