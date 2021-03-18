@@ -1,6 +1,6 @@
 <template>
-  <v-container style="position: relative">
-    <slot></slot>
+  <v-container ref="afd" style="position: relative">
+    <slot ref="slot2"></slot>
     <v-btn
       @click="share"
       color="#016f94"
