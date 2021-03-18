@@ -4,11 +4,9 @@ import fs from "fs";
 // eslint-disable-next-line no-undef
 let local = process.env.NUXT_ENV_LOCAL !== undefined;
 
-const baseUrl = // eslint-disable-next-line no-undef
-(process.env.BASE_URL || "https://www.whatsanalyze.com").replace(
-  "http:",
-  "https:"
-);
+const baseUrl = ( // eslint-disable-next-line no-undef
+  process.env.BASE_URL || "https://www.whatsanalyze.com"
+).replace("http:", "https:");
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
@@ -31,7 +29,10 @@ export default {
         content: baseUrl + "/sharePreview.png",
       },
     ],
-    link: [{ rel: "icon", type: "image/png", href: "/favicon.ico" }],
+    link: [
+      { rel: "icon", href: "/favicon.ico" },
+      { rel: "apple-touch-icon", href: "/favicon.ico" },
+    ],
   },
   pwa: {
     manifest: {
