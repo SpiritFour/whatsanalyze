@@ -29,6 +29,11 @@ export default {
   background: $c-white;
 }
 
+.nuxt-content * img {
+  max-width: 100%;
+  padding: 1em;
+}
+
 .nuxt-content,
 .toc {
   a:visited {

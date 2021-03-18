@@ -24,27 +24,36 @@ export default {
     title: "WhatsAnalyze - How to switch from Signal to WhatsApp",
     meta: [
       {
-        hid: "robots",
-        name: "robots",
-        content: "noindex",
-      },
-      {
         hid: "og:title",
         name: "og:title",
-        content: "WhatsAnalyze - How to Export your WhatsApp Chat to PDF",
+        property: "og:title",
+        content: "WhatsAnalyze - How to switch from WhatsApp to PDF",
       },
-
       {
-        hid: "og:description",
-        name: "og:description",
-        content:
-          "Export your Whatsapp chat to PDF in seconds ✓ Group Chats ✓ Create a PDF Book ✓ Privacy First -> No Chat Data is sent to a Server. Get your pdf now!",
+        hid: "og:site_name",
+        name: "og:site_name",
+        property: "og:site_name",
+        content: "WhatsAnalyze - How to switch from WhatsApp to PDF",
       },
       {
         hid: "description",
         name: "description",
+        property: "description",
         content:
-          "Export your Whatsapp chat to PDF in seconds ✓ Now working for Group Chats ✓ Create your own PDF Book ✓ No Chat Data is sent to a Server. Get Started now!",
+          "Switch from WhatsApp to Signal ✓ Transfer your Group Chats ✓ Create Backups",
+      },
+      {
+        hid: "og:description",
+        name: "og:description",
+        property: "og:description",
+        content:
+          "Switch from WhatsApp to Signal ✓ Transfer your Group Chats ✓ Create Backups",
+      },
+      {
+        hid: "og:url",
+        name: "og:url",
+        property: "og:url",
+        content: "whatsanalyze.com/switch-from-whatsapp-to-signal",
       },
     ],
   },
