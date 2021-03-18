@@ -145,10 +145,6 @@ export default {
           .querySelectorAll("[remove-height-in-html2-canvas]")
           .forEach((a) => (negativeHeight -= a.clientHeight));
 
-        console.log(
-          document.querySelectorAll("[remove-height-in-html2-canvas]")
-        );
-
         let normalHeight = document.querySelector("#download-graphs")
           .clientHeight;
 
