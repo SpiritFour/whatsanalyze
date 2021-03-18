@@ -1,5 +1,5 @@
 <template>
-  <div class="cta pa-10 my-md-4">
+  <div class="cta pa-2 pa-md-5 my-md-2">
     <div class="text-h4 text-md-h3 font-weight-bold pb-4">
       Download your Chat as PDF
     </div>
@@ -19,32 +19,50 @@
       color="blue"
       class="mb-2"
     ></v-progress-linear>
-    <div class="text-body-1 my-2">
-      Get your <b>full</b> WhatsApp chat for
-      <b style="color: green">{{ price + " " + currency }}</b>
-      <s style="color: grey">{{ 4.99 + " " + currency }}</s> as a PDF instantly.
-    </div>
 
     <v-dialog v-model="showDownloadPopup" width="550">
       <template v-slot:activator="{ on, attrs }">
-        <v-row justify="center" class="mt-3">
-          <v-btn class="ma-3" elevation="10" @click="downloadSample">
-            <v-icon class="mr-1">mdi-download</v-icon>
-            <span><b>free</b> preview PDF</span>
-          </v-btn>
-          <v-btn
-            class="ma-3 white--text"
-            dark
-            v-bind="attrs"
-            v-on="on"
-            color="#07bc4c"
-            style="max-width: 100%"
-            elevation="10"
-            @click="gtagEvent('full_pdf_pressed', GTAG_PAYMENT)"
-          >
-            <v-icon class="mr-1">mdi-download</v-icon>
-            <span><b>full</b> chat PDF</span>
-          </v-btn>
+        <v-row justify="center" class="pa-0 ma-0">
+          <v-col class="pa-0 ma-0">
+            <v-btn elevation="10" @click="downloadSample">
+              <v-icon class="mr-1">mdi-download</v-icon>
+              <span><b>free</b> preview PDF</span>
+            </v-btn>
+            <v-col class="mt-2">
+              <v-row justify="center" align="center">
+                <b style="color: green">{{ 0 + " " + currency }}</b>
+              </v-row>
+            </v-col>
+          </v-col>
+          <v-col class="pa-0 ma-0">
+            <v-btn
+              class="white--text"
+              dark
+              v-bind="attrs"
+              v-on="on"
+              color="#07bc4c"
+              style="max-width: 100%"
+              elevation="10"
+              @click="gtagEvent('full_pdf_pressed', GTAG_PAYMENT)"
+            >
+              <v-icon class="mr-1">mdi-download</v-icon>
+              <span><b>full</b> chat PDF</span>
+            </v-btn>
+            <v-col class="mt-2">
+              <v-row justify="center" align="center">
+                <b style="color: green">{{ price + " " + currency }}</b>
+                <span
+                  class="px-1 ml-2"
+                  style="color: white; background: red; border-radius: 5px"
+                >
+                  -40%</span
+                >
+              </v-row>
+              <v-row justify="center" align="center">
+                <s style="color: grey">{{ 4.99 + " " + currency }}</s>
+              </v-row>
+            </v-col>
+          </v-col>
         </v-row>
       </template>
       <v-card>
