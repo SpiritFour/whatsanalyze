@@ -36,6 +36,7 @@
       <ExportExplainer />
       <Cta showImage />
       <Faq />
+      <Testimonials />
       <About />
       <PdfExample />
       <Cta
