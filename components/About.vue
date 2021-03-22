@@ -4,9 +4,10 @@
       About us
     </v-row>
     <v-row class="ma-10 text-body-1" justify="center">
-      <v-col cols="12" sm="12" md="10" align="center">
+      <v-col align="center" cols="12" md="10" sm="12">
         We are a group of <b>university friends</b>. As we recently all left
         WhatsApp we wanted to analyse how or chats evolved over the years.
+        <br />
         <br />
         As <b>Computer Science students</b> are paranoid and think they can do
         everything better, we naturally wanted to build a solution our self,
@@ -15,18 +16,18 @@
     </v-row>
     <v-row class="ma-10" justify="center">
       <v-col
-        cols="12"
-        sm="6"
-        md="3"
-        justify="center"
-        class="mb-3 my-xs-16"
         v-for="person in persons"
         :key="person.name"
+        class="mb-3 my-xs-16"
+        cols="12"
+        justify="center"
+        md="3"
+        sm="6"
         style="text-align: center"
       >
-        <v-row justify="center" class="mb-3">
+        <v-row class="mb-3" justify="center">
           <v-avatar size="120">
-            <v-img :src="person.image"></v-img>
+            <img :src="person.image" />
           </v-avatar>
         </v-row>
         <v-row class="text-h5 font-weight-bold" justify="center">
@@ -35,8 +36,8 @@
         <v-row
           v-for="d in person.description"
           :key="d"
-          justify="center"
           class="text-body-1"
+          justify="center"
         >
           {{ d }}
         </v-row>
@@ -44,10 +45,10 @@
     </v-row>
     <v-row justify="center">
       <v-col
-        align="center"
-        cols="3"
         v-for="university in universities"
         :key="university"
+        align="center"
+        cols="3"
       >
         <img :src="university" style="width: 100%; max-width: 100px" />
       </v-col>
