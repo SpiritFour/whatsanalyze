@@ -18,6 +18,7 @@
           </v-col>
           <v-col v-if="!isShowingChats" cols="12" md="6">
             <ChartsExampleGraphs :chat_="chat" />
+            <TrustLogos />
           </v-col>
         </v-row>
         <v-row v-if="$vuetify.breakpoint.smAndDown">
