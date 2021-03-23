@@ -34,17 +34,18 @@ export class Chat {
     return chat_distribution.filter(singleOccurrence);
   }
 
-  static match_emojys(chat_distribution) {
-    const regexpEmojiPresentation = /\p{Emoji_Presentation}/gu;
-    function isEmoji(value) {
-      let emojiString = value[0].match(regexpEmojiPresentation);
-      if (emojiString != null) {
-        return onlyEmoji(emojiString[0]);
+  static match_emojys(chat_distribution, terminationCondition = 3) {
+    let mostUsedEmojis = [];
+    chat_distribution.forEach((entry) => {
+      if (terminationCondition === 0) {
+        return mostUsedEmojis;
       }
-      return emojiString;
-    }
-
-    return chat_distribution.filter(isEmoji);
+      let emojis = onlyEmoji(entry[0]);
+      if (emojis.length !== 0) {
+        mostUsedEmojis.push(emojis[0]);
+        terminationCondition -= 1;
+      }
+    });
   }
 
   static get_longest_message(chat_object) {
@@ -73,17 +74,6 @@ export class Chat {
 
   static toDayDates(chatObject) {
     return chatObject.map((message) => message.date.setHours(0, 0, 0, 0));
-  }
-
-  static getDaysBetween(start, end) {
-    for (
-      var a = [], d = new Date(start);
-      d <= end;
-      d.setDate(d.getDate() + 1)
-    ) {
-      a.push(new Date(d));
-    }
-    return a;
   }
 
   static getMessagesPerPerson(chatObject) {
@@ -254,9 +244,7 @@ export class Chat {
       let personalFreqDic = Chat.createSortedFreqDict(person.messages);
 
       let uniqueWords = Chat.uniqueWords(personalFreqDic).length;
-      let sortedEmojis = Chat.match_emojys(personalFreqDic)
-        .map((emoji) => emoji[0])
-        .slice(0, 3);
+      let sortedEmojis = Chat.match_emojys(personalFreqDic, 3);
       let averageMessageLength = numberOfWords / person.messages.length;
       return {
         color: person.color,
