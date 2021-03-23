@@ -1,5 +1,5 @@
 <template>
-  <v-container class="mt-md-1 mt-5">
+  <v-container class="mt-md-1 my-3">
     <v-row><div class="ml-5 text-h5 font-weight-bold">Known from:</div></v-row>
     <v-row justify="center">
       <v-col>
@@ -12,10 +12,9 @@
             /></v-avatar>
           </a>
         </v-row>
-        <v-row v-if="$vuetify.breakpoint.mdAndUp">
+        <v-row class="pt-1" v-if="$vuetify.breakpoint.mdAndUp">
           <div class="text-body-2">
-            "Eine erstaunliche Datensammlung mitsamt Fun-Facts und spannender
-            Visualisierungen."
+            "Fun-Facts und spannende Visualisierungen."
           </div>
         </v-row>
       </v-col>
@@ -29,10 +28,9 @@
             /></v-avatar>
           </a>
         </v-row>
-        <v-row v-if="$vuetify.breakpoint.mdAndUp">
+        <v-row class="pt-1" v-if="$vuetify.breakpoint.mdAndUp">
           <div class="text-body-2">
-            "... unter anderem herausfinden, zu welcher Uhrzeit ihr am
-            häufigsten schreibt."
+            "Zu welcher Uhrzeit ihr am häufigsten schreibt."
           </div>
         </v-row>
       </v-col>
@@ -46,10 +44,9 @@
             /></v-avatar>
           </a>
         </v-row>
-        <v-row v-if="$vuetify.breakpoint.mdAndUp">
+        <v-row class="pt-1" v-if="$vuetify.breakpoint.mdAndUp">
           <div class="text-body-2">
-            "Die Analyse der Chats findet nur in eurem Browser statt, sodass nur
-            ihr die Daten sehen könnt."
+            "Die Analyse findet nur in eurem Browser statt"
           </div>
         </v-row>
       </v-col>
