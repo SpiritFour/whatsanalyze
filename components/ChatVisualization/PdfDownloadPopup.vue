@@ -55,7 +55,7 @@
                   class="px-1 ml-2"
                   style="color: white; background: red; border-radius: 5px"
                 >
-                  -40%</span
+                  -60%</span
                 >
               </v-row>
               <v-row justify="center" align="center">
