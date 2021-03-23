@@ -1,7 +1,7 @@
 <template>
   <div class="text-center testimonial-container py-10">
     <div class="text-h2">
-      {{ $t(testimonialHeadline) }}
+      {{ $t("testimonialHeadline") }}
     </div>
     <div style="overflow: hidden">
       <div v-for="t in testimonials" class="testimonial" :key="t.name">

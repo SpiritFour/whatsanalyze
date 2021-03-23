@@ -8,7 +8,7 @@
 
     <hr width="70%" color="white" />
 
-    <div class="my-5">{{ $t(love) }}</div>
+    <div class="my-5">{{ $t("love") }}</div>
 
     <a
       class="black--text"
@@ -22,7 +22,7 @@
         src="~/assets/img/github/GitHub-Mark-Light-32px.png"
       />
 
-      {{ $t(openSource) }}
+      {{ $t("openSource") }}
     </a>
     <br />
 
