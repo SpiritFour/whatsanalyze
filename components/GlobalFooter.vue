@@ -37,7 +37,9 @@
       </h3>
 
       <h3 class="mt-5" style="height: 70px">
-        &copy; {{ new Date().getFullYear() }}
+        &copy; {{ new Date().getFullYear() }} -
+        <nuxt-link to="/about">About</nuxt-link> -
+        <nuxt-link to="/impressum">Impressum</nuxt-link>
       </h3>
     </v-container>
   </div>

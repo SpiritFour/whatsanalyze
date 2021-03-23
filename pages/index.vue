@@ -37,6 +37,7 @@
       <Cta showImage />
       <Faq />
       <Testimonials />
+      <About />
       <PdfExample />
       <Cta
         :title="$t('getFreePDFPreview')"
