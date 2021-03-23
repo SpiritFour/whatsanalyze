@@ -1,5 +1,5 @@
 <template>
-  <v-container class="mt-md-16 mt-5">
+  <v-container class="mt-md-1 mt-5">
     <v-row><div class="ml-5 text-h5 font-weight-bold">Known from:</div></v-row>
     <v-row justify="center">
       <v-col>
@@ -14,8 +14,8 @@
         </v-row>
         <v-row v-if="$vuetify.breakpoint.mdAndUp">
           <div class="text-body-2">
-            "Das Ergebnis verspricht eine erstaunliche Datensammlung mitsamt
-            einiger Fun-Facts und spannender Visualisierungen."
+            "Eine erstaunliche Datensammlung mitsamt Fun-Facts und spannender
+            Visualisierungen."
           </div>
         </v-row>
       </v-col>
@@ -31,8 +31,8 @@
         </v-row>
         <v-row v-if="$vuetify.breakpoint.mdAndUp">
           <div class="text-body-2">
-            "...könnt ihr unter anderem herausfinden, zu welcher Uhrzeit ihr am
-            häufigsten WhatsApp-Nachrichten schreibt."
+            "... unter anderem herausfinden, zu welcher Uhrzeit ihr am
+            häufigsten schreibt."
           </div>
         </v-row>
       </v-col>
@@ -49,7 +49,7 @@
         <v-row v-if="$vuetify.breakpoint.mdAndUp">
           <div class="text-body-2">
             "Die Analyse der Chats findet nur in eurem Browser statt, sodass nur
-            ihr die Daten, die ihr aus WhatsApp exportiert, sehen könnt."
+            ihr die Daten sehen könnt."
           </div>
         </v-row>
       </v-col>

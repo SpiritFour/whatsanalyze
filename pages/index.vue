@@ -2,7 +2,7 @@
   <div>
     <div class="top-color">
       <v-container>
-        <v-row no-gutters>
+        <v-row v-if="$vuetify.breakpoint.mdAndUp" no-gutters>
           <v-col
             cols="12"
             :md="isShowingChats ? 12 : 6"
@@ -11,7 +11,6 @@
             <HeaderCta />
             <FileHandler
               class="filehandler"
-              v-if="$vuetify.breakpoint.mdAndUp"
               @new_messages="newMessages"
               @hide_explanation="isShowingChats = $event"
             />
@@ -21,13 +20,20 @@
             <TrustLogos />
           </v-col>
         </v-row>
-        <v-row v-if="$vuetify.breakpoint.smAndDown">
-          <v-col>
+        <v-row v-if="$vuetify.breakpoint.smAndDown" no-gutters>
+          <v-col cols="12" :md="isShowingChats ? 12 : 6" class="px-0 pb-1">
+            <HeaderCta />
+          </v-col>
+          <v-col class="pt-0">
             <FileHandler
               class="filehandler"
               @new_messages="newMessages"
               @hide_explanation="isShowingChats = $event"
             />
+          </v-col>
+          <v-col v-if="!isShowingChats" cols="12" md="6">
+            <TrustLogos />
+            <ChartsExampleGraphs :chat_="chat" />
           </v-col>
         </v-row>
       </v-container>
