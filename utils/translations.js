@@ -11,7 +11,7 @@ export const messages = {
       "Reveal insights & get statistics, while all data stays on your device.",
     interestedAbout:
       "Interested about your own chat data? Take deep dive in your data!",
-    analyzeYourChat: "Analyze your chat!",
+    analyzeYourChat: "Analyze your chat",
     analyzeYourChatLong:
       "Analyze your chat, reveal unknown facts and surprise your friends with insights into your communication.",
     didWeMake: "Did we make you go 🥳?",
@@ -20,6 +20,8 @@ export const messages = {
       "You will get all results as an image exactly as presented on your device. Generating may take a while.",
     headerTextFeaturesTable: "Features & Solutions  of PDF export tools",
     goToPDF: "go to PDF download",
+    downloadPDF: "Download your Chat as PDF",
+    fullChat: "Your Full Chat",
     tabItemiOS1:
       "<span>On iPhone <b>open</b> WhatsApp and the <b>chat</b> or <b>group chat</b> you would like to export > at the top <b>tap on</b> the <b>name</b> of the chat.</span>",
     tabItemiOS2: "<span>In chat info, scroll all the way to the bottom.</span>",
@@ -129,6 +131,7 @@ export const messages = {
     pageNameExport: "How to export your WhatsApp Chat",
     addToHomescreen: "add to Homescreen",
     people: "People",
+    changeView: "Change Point of View",
     groupChat:
       "Select the number of participants to show individual.All others are grouped together.",
     groupInfo:

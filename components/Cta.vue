@@ -31,13 +31,22 @@ export default {
   props: {
     showImage: { default: false, type: Boolean },
     to: { default: "", type: String },
-    buttonTxt: { default: this.$t("analyzeYourChat"), type: String },
+    buttonTxt: {
+      default: function () {
+        return this.$t("analyzeYourChat");
+      },
+      type: String,
+    },
     text: {
-      default: this.$t("analyzeYourChatLong"),
+      default: function () {
+        return this.$t("analyzeYourChatLong");
+      },
       type: String,
     },
     title: {
-      default: this.$t("analyzeYourChat"),
+      default: function () {
+        return this.$t("analyzeYourChat");
+      },
       type: String,
     },
   },

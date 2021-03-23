@@ -153,7 +153,12 @@ if (process.browser) {
 
 export default {
   props: {
-    cta: { default: this.$t("selectFile"), type: String },
+    cta: {
+      default: function () {
+        return this.$t("selectFile");
+      },
+      type: String,
+    },
     to: { default: null, type: String },
   },
   data() {

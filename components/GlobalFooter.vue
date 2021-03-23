@@ -21,8 +21,7 @@
         alt="github logo"
         src="~/assets/img/github/GitHub-Mark-Light-32px.png"
       />
-
-      {{ $t("openSource") }}
+      <span v-html="$t('openSource')"></span>
     </a>
     <br />
 

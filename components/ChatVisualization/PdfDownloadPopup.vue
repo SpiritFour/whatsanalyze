@@ -1,7 +1,7 @@
 <template>
   <div class="cta pa-2 pa-md-5 my-md-2">
     <div class="text-h4 text-md-h3 font-weight-bold pb-4">
-      Download your Chat as PDF
+      {{ $t("downloadPDF") }}
     </div>
 
     <v-row>

@@ -10,7 +10,7 @@
     <br />
     <div class="py-1 px-3 text-lg-h6 alert privacy">
       <v-icon color="black" style="vertical-align: sub"> mdi-security </v-icon>
-      {{ $t("infoSec") }}
+      <span v-html="$t('infoSec')" />
     </div>
     <br />
     <div class="py-1 px-3 text-lg-h6 alert github">
@@ -20,7 +20,7 @@
         height="22"
         src="~/assets/img/github/GitHub-Mark-32px.png"
       />
-      {{ $t("infoPriv") }}
+      <span v-html="$t('infoPriv')" />
     </div>
   </div>
 </template>
@@ -28,9 +28,16 @@
 <script>
 export default {
   props: {
-    titelH1: { default: this.$t("analyzeInSeconds"), type: String },
+    titelH1: {
+      default: function () {
+        return this.$t("analyzeInSeconds");
+      },
+      type: String,
+    },
     titelH2: {
-      default: this.$t("revealInsights"),
+      default: function () {
+        return this.$t("revealInsights");
+      },
       type: String,
     },
   },

@@ -41,28 +41,26 @@
           <v-icon size="2em"> mdi-file </v-icon>
           <br />
 
-          <div v-if="isSuccess">
-            {{ $t("fileDone") }}
-          </div>
+          <div v-if="isSuccess" v-html="$t('fileDone')"></div>
 
           <div :class="{ 'text-caption': isSuccess }">
-            <span v-if="$vuetify.breakpoint.mdAndUp">
-              {{ $t("fileSuccess") }}
+            <span v-if="$vuetify.breakpoint.mdAndUp" v-html="$t('fileSuccess')">
+            </span>
+            <span
+              v-if="$vuetify.breakpoint.smAndDown"
+              v-html="$t('fileSelect')"
+            >
             </span>
 
-            <span v-if="$vuetify.breakpoint.smAndDown">
-              {{ $t("fileSelect") }}
-            </span>
-
-            <span v-if="isSuccess">{{ $t("fileAnother") }}</span>
-            <span v-if="!isSuccess"> {{ $t("fileZip") }}</span>
+            <span v-if="isSuccess" v-html="$t('fileAnother')"></span>
+            <span v-if="!isSuccess" v-html="$t('fileZip')"></span>
           </div>
         </div>
         <br />
         <div class="text-body-1 text-md-h5 w-100" v-show="processing">
           <img src="@/assets/loader.svg" height="40" width="40" />
           <br />
-          {{ $t("fileProcessing") }}
+          <span v-html="$t('fileProcessing')" />
         </div>
       </div>
     </label>
