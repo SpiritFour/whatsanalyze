@@ -31,14 +31,13 @@ export default {
   props: {
     showImage: { default: false, type: Boolean },
     to: { default: "", type: String },
-    buttonTxt: { default: "Analyze your chat!", type: String },
+    buttonTxt: { default: this.$t("analyzeYourChat"), type: String },
     text: {
-      default:
-        "Analyze your chat, reveal unknown facts and surprise your friends with insights into your communication.",
+      default: this.$t("analyzeYourChatLong"),
       type: String,
     },
     title: {
-      default: "Analyze your Chat",
+      default: this.$t("analyzeYourChat"),
       type: String,
     },
   },

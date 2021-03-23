@@ -26,14 +26,12 @@
         />
         <!-- Wrong File -->
         <div v-show="wrongFile" class="text-body-1 text-md-h5 w-100">
-          <strong>Wrong file format!</strong> <br />
-          Please upload the <strong>.txt</strong> or<strong>.zip</strong> file
-          you get when exporting your chat!
+          {{ $t("fileWrong") }}
         </div>
         <!-- is Dragging -->
         <div v-show="isDragging" class="text-h4 py-2 w-100">
           <br />
-          Drop file now!
+          {{ $t("fileDrop") }}
         </div>
         <!-- Standard State -->
         <div
@@ -44,30 +42,27 @@
           <br />
 
           <div v-if="isSuccess">
-            <strong>Done!</strong> <br />
-            Look at your analysis below.
+            {{ $t("fileDone") }}
           </div>
 
           <div :class="{ 'text-caption': isSuccess }">
             <span v-if="$vuetify.breakpoint.mdAndUp">
-              <strong>Drag</strong> or <strong>select</strong>
+              {{ $t("fileSuccess") }}
             </span>
 
             <span v-if="$vuetify.breakpoint.smAndDown">
-              <strong style="text-decoration: underline">Select </strong>
+              {{ $t("fileSelect") }}
             </span>
 
-            <span v-if="isSuccess">another file to analyze it.</span>
-            <span v-if="!isSuccess">
-              your WhatsApp .zip or .txt file into this box.</span
-            >
+            <span v-if="isSuccess">{{ $t("fileAnother") }}</span>
+            <span v-if="!isSuccess"> {{ $t("fileZip") }}</span>
           </div>
         </div>
         <br />
         <div class="text-body-1 text-md-h5 w-100" v-show="processing">
           <img src="@/assets/loader.svg" height="40" width="40" />
           <br />
-          <strong>Processing</strong> your file...
+          {{ $t("fileProcessing") }}
         </div>
       </div>
     </label>

@@ -14,7 +14,7 @@
         <div>
           <v-icon :color="person.color">mdi-book</v-icon>
 
-          Total words: <b>{{ person.numberOfWords }}</b>
+          {{ $t("totalWords") }} <b>{{ person.numberOfWords }}</b>
         </div>
 
         <br />
@@ -22,7 +22,7 @@
         <!-- TODO: We need a count of how often emojies are used -->
         <div>
           <v-icon :color="person.color"> mdi-emoticon-excited-outline </v-icon>
-          Most used emojies:
+          {{ $t("mostUsedEmojie") }}
           <span v-for="emojie in person.sortedEmojis" :key="emojie">
             {{ emojie }} {{ emojie.count }}
           </span>
@@ -32,24 +32,24 @@
 
         <div>
           <v-icon :color="person.color"> mdi-android-messages </v-icon>
-
-          Longest message: <b>{{ person.longestMessage }}</b> words
+          {{ $t("longestMessage") }}
+          <b>{{ person.longestMessage }}</b> words
         </div>
 
         <br />
 
         <div>
           <v-icon :color="person.color"> mdi-star </v-icon>
-
-          Unique words: <b>{{ person.uniqueWords }}</b>
+          {{ $t("uniqueWords") }}
+          <b>{{ person.uniqueWords }}</b>
         </div>
 
         <br />
 
         <div>
           <v-icon :color="person.color"> mdi-android-studio </v-icon>
-
-          Average words per message: <b>{{ person.averageMessageLength }}</b>
+          {{ $t("avgWords") }}
+          <b>{{ person.averageMessageLength }}</b>
         </div>
       </div>
     </div>

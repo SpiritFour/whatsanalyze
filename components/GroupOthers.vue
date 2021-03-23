@@ -4,16 +4,14 @@
       <span class="red darken-2 white--text px-2">{{
         chatObject.numPersonsInChat
       }}</span>
-      People
+      {{ $t(people) }}
     </div>
     <div class="text-h6">
-      Select the number of participants to show individual.All others are
-      grouped together.
+      {{ $t(groupChat) }}
       <br />
       <small>
-        If you select "2", only the two people with the most messages are shown
-        individually. Others are grouped as "Others"</small
-      >
+        {{ $t(groupInfo) }}
+      </small>
     </div>
     <v-slider
       class="pt-10"

@@ -8,7 +8,7 @@
 
     <hr width="70%" color="white" />
 
-    <div class="my-5">Made with ❤️ by four friends.</div>
+    <div class="my-5">{{ $t(love) }}</div>
 
     <a
       class="black--text"
@@ -22,8 +22,7 @@
         src="~/assets/img/github/GitHub-Mark-Light-32px.png"
       />
 
-      This project is <b>open-source</b> and all code is <b>public</b> on
-      <b>GitHub</b>
+      {{ $t(openSource) }}
     </a>
     <br />
 
@@ -56,11 +55,11 @@ export default {
         // },
         {
           name: "switch-from-whatsapp-to-signal",
-          text: "How to switch to Signal from WhatsApp",
+          text: this.$t("pageNameSignal"),
         },
         {
           name: "how-to-export-your-whatsapp-chat",
-          text: "How to export your WhatsApp Chat",
+          text: this.$t("pageNameExport"),
         },
       ],
     };

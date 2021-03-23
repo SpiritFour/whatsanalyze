@@ -37,7 +37,7 @@
                     class="mt-5 pa-2 white--text"
                     color="#07bc4c"
                     style=""
-                    >add to Homescreen</v-btn
+                    >{{ $t("addToHomescreen") }}</v-btn
                   >
                 </v-timeline-item>
               </v-timeline>
@@ -153,7 +153,7 @@ if (process.browser) {
 
 export default {
   props: {
-    cta: { default: "Select file via box above.", type: String },
+    cta: { default: this.$t("selectFile"), type: String },
     to: { default: null, type: String },
   },
   data() {
