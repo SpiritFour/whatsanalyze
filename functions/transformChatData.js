@@ -36,7 +36,6 @@ export class Chat {
 
   static match_emojys(chat_distribution, terminationCondition = 3) {
     let mostUsedEmojis = new Set();
-    console.log(chat_distribution);
     for (let entry of chat_distribution) {
       if (mostUsedEmojis.size === terminationCondition) {
         return mostUsedEmojis;
