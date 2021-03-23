@@ -35,17 +35,18 @@ export class Chat {
   }
 
   static match_emojys(chat_distribution, terminationCondition = 3) {
-    let mostUsedEmojis = [];
-    chat_distribution.forEach((entry) => {
-      if (terminationCondition === 0) {
+    let mostUsedEmojis = new Set();
+    console.log(chat_distribution);
+    for (let entry of chat_distribution) {
+      if (mostUsedEmojis.size === terminationCondition) {
         return mostUsedEmojis;
       }
       let emojis = onlyEmoji(entry[0]);
       if (emojis.length !== 0) {
-        mostUsedEmojis.push(emojis[0]);
-        terminationCondition -= 1;
+        mostUsedEmojis.add(emojis[0]);
       }
-    });
+    }
+    return mostUsedEmojis;
   }
 
   static get_longest_message(chat_object) {
