@@ -220,30 +220,25 @@ export default {
           ],
           tabItems: [
             {
-              text:
-                "<span>On iPhone <b>open</b> WhatsApp and the <b>chat</b> or <b>group chat</b> you would like to export > at the top <b>tap on</b> the <b>name</b> of the chat.</span>",
+              text: this.$t("tabItemiOS1"),
             },
             {
-              text:
-                "<span>In chat info, scroll all the way to the bottom.</span>",
+              text: this.$t("tabItemiOS2"),
             },
             {
-              text: "<span>Tap on <b>Export Chat</b>.</span>",
+              text: this.$t("tabItemiOS3"),
             },
             {
-              text: "<span>Choose <b >Without Media</b>.</span>",
+              text: this.$t("tabItemiOS4"),
             },
             {
-              text:
-                "<span>Tap on <b>Save to Files</b> to save it on your iPhone.</span>",
+              text: this.$t("tabItemiOS5"),
             },
             {
-              text:
-                "<span>Finally select <b >On my iPhone</b> and <b >save</b> to save it locally.</span>",
+              text: this.$t("tabItemiOS6"),
             },
             {
-              text:
-                "<span>At last you can select your exported .zip to be analyzed.</span>",
+              text: this.$t("tabItemiOS7"),
             },
           ],
         },
@@ -296,26 +291,22 @@ export default {
           ],
           tabItems: [
             {
-              text:
-                "<span>On your Android phone open this Website in <b>Chrome</b> and tap on the button <b>add to Homescreen</b> and press install</span>",
+              text: this.$t("tabItemAndroid1"),
             },
             {
-              text:
-                "<span>Open <b>WhatsApp</b> and tap on the chat you would like to export > tap on the <b>three-dots</b> at the top right corner.</span>",
+              text: this.$t("tabItemAndroid2"),
             },
             {
-              text: "<span>In the new menu tap on <b>More</b>.</span>",
+              text: this.$t("tabItemAndroid3"),
             },
             {
-              text: "<span>Tap on <b>Export chat</b>.</span>",
+              text: this.$t("tabItemAndroid4"),
             },
             {
-              text:
-                "<span>Choose Without Media or <b>Include Media</b> if you want to include your images and other files in the export.</span>",
+              text: this.$t("tabItemAndroid5"),
             },
             {
-              text:
-                "<span>Now in the sharing view tap on <b>Whatsanalyze</b> or alternatively if you skipped step 1 send it to your self via <b>E-Mail</b> or save it to <b>Google Drive</b>.</span>",
+              text: this.$t("tabItemAndroid6"),
             },
           ],
         },

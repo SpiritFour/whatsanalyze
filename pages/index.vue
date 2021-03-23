@@ -39,11 +39,9 @@
       <Testimonials />
       <PdfExample />
       <Cta
-        title="Get your Free PDF preview"
-        buttonTxt="Generate your chat PDF"
-        text="Get your chat as a beautiful PDF with Revealing insight and interesting facts.
-        Most Used Smileys, Share of speech, and much more ...
-      "
+        :title="$t('getFreePDFPreview')"
+        :buttonTxt="$t('generateYourChatPDF')"
+        :text="$t('getChatBeautiful')"
       />
     </v-container>
 
