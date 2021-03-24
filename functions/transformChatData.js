@@ -36,13 +36,13 @@ export class Chat {
 
   static match_emojys(chat_distribution, terminationCondition = 3) {
     let mostUsedEmojis = new Set();
-    console.log(chat_distribution);
+    const regexpEmojiPresentation = /\p{Emoji_Presentation}/gu;
     for (let entry of chat_distribution) {
       if (mostUsedEmojis.size === terminationCondition) {
         return mostUsedEmojis;
       }
       let emojis = onlyEmoji(entry[0]);
-      if (emojis.length !== 0) {
+      if (emojis.length !== 0 && emojis[0].match(regexpEmojiPresentation)) {
         mostUsedEmojis.add(emojis[0]);
       }
     }
