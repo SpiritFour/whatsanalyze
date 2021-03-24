@@ -12,10 +12,8 @@
         </v-row>
         <v-row class="pt-2" v-if="$vuetify.breakpoint.mdAndUp">
           <figure>
-            <blockquote :cite="site.href">
-              <p>
-                {{ site.description }}
-              </p>
+            <blockquote>
+              <p>{{ site.description }}</p>
             </blockquote>
             <figcaption>—{{ site.name }}</figcaption>
           </figure>
@@ -76,5 +74,8 @@ blockquote p {
 
 blockquote p::before {
   content: "\201C";
+}
+blockquote p::after {
+  content: "\201D";
 }
 </style>
