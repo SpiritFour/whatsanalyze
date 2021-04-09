@@ -139,8 +139,6 @@ import {
 let apple = () => false;
 // eslint-disable-next-line no-undef
 if (process.browser) {
-  console.log(navigator.plattform);
-
   apple = () => {
     return (
       navigator.platform.toLowerCase().includes("ios") ||
