@@ -136,26 +136,25 @@ import {
   gtagEvent,
 } from "~/functions/gtagValues";
 
+let apple = () => false;
+// eslint-disable-next-line no-undef
+if (process.browser) {
+  console.log(navigator.plattform);
+
+  apple = () => {
+    return (
+      navigator.platform.toLowerCase().includes("ios") ||
+      navigator.platform.toLowerCase().includes("iphone") ||
+      navigator.platform.toLowerCase().includes("ipad") ||
+      navigator.platform.toLowerCase().includes("mac")
+    );
+  };
+}
+
 export default {
   props: {
     cta: { default: "Select file via box above.", type: String },
     to: { default: null, type: String },
-  },
-  computed: {
-    apple: () => {
-      // eslint-disable-next-line no-undef
-      const browser = process.browser;
-      if (browser) {
-        return (
-          browser.platform.toLowerCase().includes("ios") ||
-          browser.platform.toLowerCase().includes("iphone") ||
-          browser.platform.toLowerCase().includes("ipad") ||
-          browser.platform.toLowerCase().includes("mac")
-        );
-      } else {
-        return true;
-      }
-    },
   },
   data() {
     return {
@@ -163,7 +162,7 @@ export default {
       deferredPrompt: null,
       installButtonStatus: false,
       tabStatus: [0, 0],
-      tab: this.apple ? 0 : 1,
+      tab: apple() ? 0 : 1,
       tabData: [
         {
           title: "iOS (Apple)",
