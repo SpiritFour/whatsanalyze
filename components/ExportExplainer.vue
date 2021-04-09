@@ -1,7 +1,7 @@
 <template>
   <v-container class="pb-0">
     <div class="text-h5 text-md-h2 text-center pb-8">
-      How to export your chat on
+      {{ $t("howToExportOn") }}
     </div>
     <v-tabs v-model="tab" centered>
       <v-tab

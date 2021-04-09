@@ -70,6 +70,7 @@ export const messages = {
       "          Choose to export with or without media.",
 
     howToGroup: "How to export your WhatsApp group chat",
+    howToExportOn: "How to export your chat on",
     howToGroupLong:
       "Exporting your WhatsApp group chat works like a normal chat. Open up\n" +
       "          Whatsapp with the device that you are logged in with. Go to the chat\n" +
@@ -237,6 +238,7 @@ export const messages = {
     youSent: "Sie haben gesendet",
     faqWhatsapp: "FAQs zu WhatsApp-Chats",
     howToExport: "Wie man seinen WhatsApp-Chat exportiert",
+    howToExportOn: "Exportiere deinen Chat auf",
     howToExportLong:
       "          Jeder kann ganz einfach seinen WhatsApp-Chat oder Gruppenchat exportieren. Open\n" +
       "          WhatsApp auf dem Gerät, mit dem Sie gerade eingeloggt sind > Tippen Sie auf den\n" +
@@ -318,7 +320,7 @@ export const messages = {
     infoPriv:
       "Dieses Projekt ist <b>open-source</b> und der gesamte Code ist <b>öffentlich</b> auf\n" +
       "      <b>github</b>. <a\n" +
-      ' class="black-text"\n' +
+      ' class="black--text"\n' +
       ' target="_blank"\n' +
       ' href="https://github.com/SpiritFour/whatsanalyze"\n' +
       "      >\n" +

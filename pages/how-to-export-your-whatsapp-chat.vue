@@ -3,12 +3,13 @@
     <ExportExplainer class="mt-10" cta="exportAsPDF" to="/" />
     <PdfExample />
     <Content :page="page" />
-    <v-data-table :headers="headers" :items="desserts" class="elevation-1">
-      <template v-slot:item="item">
-        <v-chip dark>
-          {{ item }}
-        </v-chip>
-      </template>
+    <v-data-table
+      hide-default-footer
+      disable-sort
+      :headers="headers"
+      :items="desserts"
+      class="elevation-1 mt-3"
+    >
     </v-data-table>
     <Cta
       to="/"
@@ -36,8 +37,10 @@ export default {
         { text: "Dr. Fon", value: "drfon" },
         { text: "Longshot app", value: "longshotapp" },
         { text: "Export to txt and then to PDF", value: "pdfex" },
-        { text: "WhatsAnalyze", value: "whatsAnalyze" },
-        { text: "Calories", value: "calories" },
+        {
+          text: "WhatsAnalyze",
+          value: "whatsAnalyze",
+        },
       ],
       desserts: [
         {
