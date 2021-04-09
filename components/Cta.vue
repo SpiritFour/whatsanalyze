@@ -1,6 +1,6 @@
 <template>
   <v-container class="cta pt-7 my-5 text-center">
-    <div class="text-h2 font-weight-bold mb-7">{{ title }}</div>
+    <div class="text-h2 font-weight-bold mb-7">{{ $t(title) }}</div>
 
     <v-row v-if="showImage">
       <v-img
@@ -9,7 +9,7 @@
         max-width="250"
       />
     </v-row>
-    <span class="text-body-1"> {{ text }}</span>
+    <span class="text-body-1"> {{ $t(text) }}</span>
     <br />
     <v-btn
       :to="to ? to : null"
@@ -19,7 +19,7 @@
       class="mt-5 text-h6"
       elevation="10"
     >
-      {{ buttonTxt }}
+      {{ $t(buttonTxt) }}
     </v-btn>
   </v-container>
 </template>
@@ -33,19 +33,19 @@ export default {
     to: { default: "", type: String },
     buttonTxt: {
       default: function () {
-        return this.$t("analyzeYourChat");
+        return "analyzeYourChat";
       },
       type: String,
     },
     text: {
       default: function () {
-        return this.$t("analyzeYourChatLong");
+        return "analyzeYourChatLong";
       },
       type: String,
     },
     title: {
       default: function () {
-        return this.$t("analyzeYourChat");
+        return "analyzeYourChat";
       },
       type: String,
     },

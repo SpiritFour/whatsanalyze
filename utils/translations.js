@@ -1,5 +1,10 @@
 export const messages = {
   en: {
+    known: "Known from:",
+    backupWhatsApp: "Backup your WhatsApp Data",
+    exportAsPDF: "Save your chat as PDF",
+    convertToPDF: "Convert your exported WhatsApp data to PDF",
+    ctaBullets: "✓ Group Chats ✓ Create your PDF Chat ✓ Privacy First",
     getFreePDFPreview: "Get your Free PDF preview",
     generateYourChatPDF: "Generate your chat PDF",
     getChatBeautiful:
@@ -159,8 +164,20 @@ export const messages = {
       "Visualizing my friends chat revealed a lot about our relationship. I always though that I was the one sending more messages. Really nice to see all those fun facts about our history. Keep it going and add more beautiful visuals.",
     lara:
       "Amazing to see a whole WhatsApp history at a glance. I have chats going back multiple years seeing how the relationship is mirrored in the chat is amazing. I love that my files are not uploaded and that it runs directly in my browser.",
+    says: "says",
+    about: "About us",
+    aboutPoints:
+      "We are a group of <b>university friends</b>. As we recently all left WhatsApp and wanted to analyse how or chats evolved over the years. <br /> <br /> As <b>Computer Science students</b> are paranoid and think they can doeverything better, we naturally wanted to build a solution our self, where <b>no personal data</b> is shared or made public.",
   },
   de: {
+    known: "Bekannt aus:",
+
+    ctaBullets:
+      "✓ Gruppen Chats ✓ Erstelle ein PDF aus deinem Chat ✓ Privat und Sicher",
+
+    backupWhatsApp: "Backup deine WhatsApp Daten",
+    exportAsPDF: "Speichere deinen Chat als PDF",
+    convertToPDF: "Konvertiere deinen exportierten WhatsApp Chat zu PDF",
     getFreePDFPreview: "Holen Sie sich eine kostenlose PDF-Vorschau",
     generateYourChatPDF: "Erzeugen Sie Ihr Chat-PDF",
     getChatBeautiful:
@@ -317,5 +334,9 @@ export const messages = {
       "Die Visualisierung der Chats meiner Freunde hat viel über unsere Beziehung enthüllt. Ich dachte immer, dass ich diejenige bin, die mehr Nachrichten verschickt. Wirklich schön, all diese lustigen Fakten über unsere Geschichte zu sehen. Machen Sie weiter so und fügen Sie mehr schöne Visualisierungen hinzu.",
     lara:
       "Erstaunlich, eine ganze WhatsApp-Historie auf einen Blick zu sehen. Ich habe Chats, die mehrere Jahre zurückreichen, zu sehen, wie sich die Beziehung im Chat widerspiegelt, ist erstaunlich. Ich liebe es, dass meine Dateien nicht hochgeladen werden und dass es direkt in meinem Browser läuft.",
+    says: "sagt",
+    about: "Über die Macher",
+    aboutPoints:
+      "Wir sind eine Gruppe von <b>Universitätsfreunden</b>. Da wir vor kurzem alle WhatsApp verlassen haben, wollten wir analysieren, wie sich unsere Chats über die Jahre entwickelt haben. <br /> <br />Da <b>Informatikstudenten</b> paranoid sind und denken, dass sie alles besser können, wollten wir natürlich selbst eine Lösung bauen, bei der <b>keine persönlichen Daten</b> geteilt oder öffentlich gemacht werden.",
   },
 };

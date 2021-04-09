@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="text-h4 font-weight-bold text-lg-h2">
-      {{ titelH1 }}
+      {{ $t(titelH1) }}
     </div>
     <br />
     <div class="text-h6 text-lg-h5">
-      {{ titelH2 }}
+      {{ $t(titelH2) }}
     </div>
     <br />
     <div class="py-1 px-3 text-lg-h6 alert privacy">
@@ -30,13 +30,13 @@ export default {
   props: {
     titelH1: {
       default: function () {
-        return this.$t("analyzeInSeconds");
+        return "analyzeInSeconds";
       },
       type: String,
     },
     titelH2: {
       default: function () {
-        return this.$t("revealInsights");
+        return "revealInsights";
       },
       type: String,
     },

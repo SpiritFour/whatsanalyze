@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <ExportExplainer class="mt-10" cta="Export your chat as PDF" to="/" />
+    <ExportExplainer class="mt-10" cta="exportAsPDF" to="/" />
     <PdfExample />
     <Content :page="page" />
     <v-data-table :headers="headers" :items="desserts" class="elevation-1">
@@ -13,9 +13,9 @@
     <Cta
       to="/"
       class="pt-0 pb-15"
-      :title="$t('analyzeYourOwnWhatsapp')"
-      :buttonTxt="$t('analyzeMyChat')"
-      :text="$t('interestedAbout')"
+      title="analyzeYourOwnWhatsapp"
+      buttonTxt="analyzeMyChat"
+      text="interestedAbout"
     />
   </v-container>
 </template>

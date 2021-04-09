@@ -47,9 +47,9 @@
       <About />
       <PdfExample />
       <Cta
-        :title="$t('getFreePDFPreview')"
-        :buttonTxt="$t('generateYourChatPDF')"
-        :text="$t('getChatBeautiful')"
+        title="getFreePDFPreview"
+        buttonTxt="generateYourChatPDF"
+        text="getChatBeautiful"
       />
     </v-container>
 

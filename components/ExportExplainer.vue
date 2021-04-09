@@ -23,12 +23,13 @@
                   small
                   v-for="(tabItem, i) in data.tabItems"
                   :key="i"
-                  :text="tabItem.text"
+                  :text="$t(tabItem.text)"
                   :color="tabStatus[idx] === i ? 'blue' : 'grey'"
                   fill-dot
                   @click.native.stop="tabStatus = [i, i]"
                 >
-                  <v-row v-html="tabItem.text" style="cursor: pointer"> </v-row>
+                  <v-row v-html="$t(tabItem.text)" style="cursor: pointer">
+                  </v-row>
                   <v-btn
                     v-if="i === 0 && tab === 1"
                     v-bind:disabled="!installButtonStatus"
@@ -49,7 +50,7 @@
                 class="text-md-h6 text-caption ml-10 white--text"
               >
                 <v-icon>mdi-arrow-right</v-icon>
-                {{ cta }}
+                {{ $t(cta) }}
               </v-btn>
             </v-col>
             <v-col
@@ -153,7 +154,7 @@ export default {
   props: {
     cta: {
       default: function () {
-        return this.$t("selectFile");
+        return "selectFile";
       },
       type: String,
     },
@@ -223,25 +224,25 @@ export default {
           ],
           tabItems: [
             {
-              text: this.$t("tabItemiOS1"),
+              text: "tabItemiOS1",
             },
             {
-              text: this.$t("tabItemiOS2"),
+              text: "tabItemiOS2",
             },
             {
-              text: this.$t("tabItemiOS3"),
+              text: "tabItemiOS3",
             },
             {
-              text: this.$t("tabItemiOS4"),
+              text: "tabItemiOS4",
             },
             {
-              text: this.$t("tabItemiOS5"),
+              text: "tabItemiOS5",
             },
             {
-              text: this.$t("tabItemiOS6"),
+              text: "tabItemiOS6",
             },
             {
-              text: this.$t("tabItemiOS7"),
+              text: "tabItemiOS7",
             },
           ],
         },
@@ -294,22 +295,22 @@ export default {
           ],
           tabItems: [
             {
-              text: this.$t("tabItemAndroid1"),
+              text: "tabItemAndroid1",
             },
             {
-              text: this.$t("tabItemAndroid2"),
+              text: "tabItemAndroid2",
             },
             {
-              text: this.$t("tabItemAndroid3"),
+              text: "tabItemAndroid3",
             },
             {
-              text: this.$t("tabItemAndroid4"),
+              text: "tabItemAndroid4",
             },
             {
-              text: this.$t("tabItemAndroid5"),
+              text: "tabItemAndroid5",
             },
             {
-              text: this.$t("tabItemAndroid6"),
+              text: "tabItemAndroid6",
             },
           ],
         },

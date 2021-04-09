@@ -5,9 +5,9 @@
       <div v-for="t in testimonials" class="testimonial" :key="t.name">
         <v-icon large color="black"> mdi-format-quote-close </v-icon>
         <p>
-          <strong>{{ t.name }}</strong> says
+          <strong>{{ t.name }}</strong> {{ $t("says") }}
         </p>
-        <p>{{ t.text }}</p>
+        <p>{{ $t(t.text) }}</p>
         <v-icon v-for="id in 5" large color="#ffd782" :key="id">
           mdi-star
         </v-icon>
@@ -23,11 +23,11 @@ export default {
       testimonials: [
         {
           name: "Jennifer",
-          text: this.$t("jennifer"),
+          text: "jennifer",
         },
         {
           name: "Lara",
-          text: this.$t("lara"),
+          text: "lara",
         },
       ],
     };
