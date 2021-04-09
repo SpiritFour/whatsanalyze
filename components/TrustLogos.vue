@@ -13,9 +13,9 @@
         <v-row class="pt-2" v-if="$vuetify.breakpoint.mdAndUp">
           <figure>
             <blockquote>
-              <p>{{ site.description }}</p>
+              <div>{{ site.description }}</div>
             </blockquote>
-            <figcaption>—{{ site.name }}</figcaption>
+            <figcaption class="text-right pr-3">—{{ site.name }}</figcaption>
           </figure>
         </v-row>
       </v-col>
@@ -66,16 +66,16 @@ blockquote {
   margin: 0;
 }
 
-blockquote p {
-  padding: 15px;
-  background: #eee;
+blockquote div {
+  padding: 5px;
+  background: rgba(255, 255, 255, 0.5);
   border-radius: 5px;
 }
 
-blockquote p::before {
+blockquote div::before {
   content: "\201C";
 }
-blockquote p::after {
+blockquote div::after {
   content: "\201D";
 }
 </style>
