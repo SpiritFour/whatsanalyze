@@ -286,7 +286,7 @@ export const messages = {
     openSource:
       "Dieses Projekt ist <b>open-source</b> und der gesamte Code ist <b>öffentlich</b> auf <b>GitHub</b>",
     pageNameSignal: "Wie man von WhatsApp zu Signal wechselt",
-    SeitennameExport: "So exportieren Sie Ihren WhatsApp-Chat",
+    pageNameExport: "So exportieren Sie Ihren WhatsApp-Chat",
     addToHomescreen: "Zum Homescreen hinzufügen",
     people: "Leute",
     changeView: "Blickwinkel ändern",
