@@ -1,7 +1,9 @@
 <template>
   <v-container class="mt-md-1 my-3">
     <v-row
-      ><div class="ml-5 mb-1 text-h5 font-weight-bold">Known from:</div></v-row
+      ><div class="ml-5 mb-1 text-h5 font-weight-bold">
+        {{ $t("known") }}
+      </div></v-row
     >
     <v-row justify="center">
       <v-col v-for="site in trustedSites" :key="site.name">

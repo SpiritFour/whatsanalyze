@@ -1,7 +1,7 @@
 <template>
   <v-container class="pb-0">
     <div class="text-h5 text-md-h2 text-center pb-8">
-      How to export your chat on
+      {{ $t("howToExportOn") }}
     </div>
     <v-tabs v-model="tab" centered>
       <v-tab
@@ -23,12 +23,13 @@
                   small
                   v-for="(tabItem, i) in data.tabItems"
                   :key="i"
-                  :text="tabItem.text"
+                  :text="$t(tabItem.text)"
                   :color="tabStatus[idx] === i ? 'blue' : 'grey'"
                   fill-dot
                   @click.native.stop="tabStatus = [i, i]"
                 >
-                  <v-row v-html="tabItem.text" style="cursor: pointer"> </v-row>
+                  <v-row v-html="$t(tabItem.text)" style="cursor: pointer">
+                  </v-row>
                   <v-btn
                     v-if="i === 0 && tab === 1"
                     v-bind:disabled="!installButtonStatus"
@@ -37,7 +38,7 @@
                     class="mt-5 pa-2 white--text"
                     color="#07bc4c"
                     style=""
-                    >add to Homescreen</v-btn
+                    >{{ $t("addToHomescreen") }}</v-btn
                   >
                 </v-timeline-item>
               </v-timeline>
@@ -49,7 +50,7 @@
                 class="text-md-h6 text-caption ml-10 white--text"
               >
                 <v-icon>mdi-arrow-right</v-icon>
-                {{ cta }}
+                {{ $t(cta) }}
               </v-btn>
             </v-col>
             <v-col
@@ -139,8 +140,6 @@ import {
 let apple = () => false;
 // eslint-disable-next-line no-undef
 if (process.browser) {
-  console.log(navigator.plattform);
-
   apple = () => {
     return (
       navigator.platform.toLowerCase().includes("ios") ||
@@ -153,7 +152,12 @@ if (process.browser) {
 
 export default {
   props: {
-    cta: { default: "Select file via box above.", type: String },
+    cta: {
+      default: function () {
+        return "selectFile";
+      },
+      type: String,
+    },
     to: { default: null, type: String },
   },
   data() {
@@ -220,30 +224,25 @@ export default {
           ],
           tabItems: [
             {
-              text:
-                "<span>On iPhone <b>open</b> WhatsApp and the <b>chat</b> or <b>group chat</b> you would like to export > at the top <b>tap on</b> the <b>name</b> of the chat.</span>",
+              text: "tabItemiOS1",
             },
             {
-              text:
-                "<span>In chat info, scroll all the way to the bottom.</span>",
+              text: "tabItemiOS2",
             },
             {
-              text: "<span>Tap on <b>Export Chat</b>.</span>",
+              text: "tabItemiOS3",
             },
             {
-              text: "<span>Choose <b >Without Media</b>.</span>",
+              text: "tabItemiOS4",
             },
             {
-              text:
-                "<span>Tap on <b>Save to Files</b> to save it on your iPhone.</span>",
+              text: "tabItemiOS5",
             },
             {
-              text:
-                "<span>Finally select <b >On my iPhone</b> and <b >save</b> to save it locally.</span>",
+              text: "tabItemiOS6",
             },
             {
-              text:
-                "<span>At last you can select your exported .zip to be analyzed.</span>",
+              text: "tabItemiOS7",
             },
           ],
         },
@@ -296,26 +295,22 @@ export default {
           ],
           tabItems: [
             {
-              text:
-                "<span>On your Android phone open this Website in <b>Chrome</b> and tap on the button <b>add to Homescreen</b> and press install</span>",
+              text: "tabItemAndroid1",
             },
             {
-              text:
-                "<span>Open <b>WhatsApp</b> and tap on the chat you would like to export > tap on the <b>three-dots</b> at the top right corner.</span>",
+              text: "tabItemAndroid2",
             },
             {
-              text: "<span>In the new menu tap on <b>More</b>.</span>",
+              text: "tabItemAndroid3",
             },
             {
-              text: "<span>Tap on <b>Export chat</b>.</span>",
+              text: "tabItemAndroid4",
             },
             {
-              text:
-                "<span>Choose Without Media or <b>Include Media</b> if you want to include your images and other files in the export.</span>",
+              text: "tabItemAndroid5",
             },
             {
-              text:
-                "<span>Now in the sharing view tap on <b>Whatsanalyze</b> or alternatively if you skipped step 1 send it to your self via <b>E-Mail</b> or save it to <b>Google Drive</b>.</span>",
+              text: "tabItemAndroid6",
             },
           ],
         },

@@ -35,3 +35,11 @@ Exporting your complete chat history is easy!
 ### Option 3 PC: Export as a .txt file on your computer running WhatsApp web
 
 Exporting your chat history is not supported on WhatsApp Web as of 2021. This post will be updated when this function becomes available. Please use your connected phone and export your chat directly on the phone as described in 1: iOS and 2: Android. 
+
+### How to generate a PDF from your txt file
+
+You can now after exporting your WhatsApp chat data (.txt or .zip) send it to your pc and open it in word or pages to then export it to PDF. 
+
+With this solution your PDF as your .txt is quite unreadable. There are also some other solutions that help you in exporting to pdf and make it quite easy. 
+
+

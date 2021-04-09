@@ -1,17 +1,13 @@
 <template>
   <v-container>
     <Content :page="page" />
-    <ExportExplainer
-      to="/"
-      cta="Convert your exported WhatsApp data to PDF"
-      class="mt-10"
-    />
+    <ExportExplainer to="/" cta="convertToPDF" class="mt-10" />
     <Cta
       to="/"
       class="pt-0 pb-15"
-      title="Get your chat as PDF"
-      buttonTxt="Get your chat as PDF"
-      text="✓ Group Chats ✓ Create your PDF Chat ✓ Privacy First"
+      title="exportAsPDF"
+      buttonTxt="convertToPDF"
+      text="ctaBullets"
     />
   </v-container>
 </template>

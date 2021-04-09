@@ -26,14 +26,12 @@
         />
         <!-- Wrong File -->
         <div v-show="wrongFile" class="text-body-1 text-md-h5 w-100">
-          <strong>Wrong file format!</strong> <br />
-          Please upload the <strong>.txt</strong> or<strong>.zip</strong> file
-          you get when exporting your chat!
+          {{ $t("fileWrong") }}
         </div>
         <!-- is Dragging -->
         <div v-show="isDragging" class="text-h4 py-2 w-100">
           <br />
-          Drop file now!
+          {{ $t("fileDrop") }}
         </div>
         <!-- Standard State -->
         <div
@@ -43,31 +41,26 @@
           <v-icon size="2em"> mdi-file </v-icon>
           <br />
 
-          <div v-if="isSuccess">
-            <strong>Done!</strong> <br />
-            Look at your analysis below.
-          </div>
+          <div v-if="isSuccess" v-html="$t('fileDone')"></div>
 
           <div :class="{ 'text-caption': isSuccess }">
-            <span v-if="$vuetify.breakpoint.mdAndUp">
-              <strong>Drag</strong> or <strong>select</strong>
+            <span v-if="$vuetify.breakpoint.mdAndUp" v-html="$t('fileSuccess')">
             </span>
-
-            <span v-if="$vuetify.breakpoint.smAndDown">
-              <strong style="text-decoration: underline">Select </strong>
-            </span>
-
-            <span v-if="isSuccess">another file to analyze it.</span>
-            <span v-if="!isSuccess">
-              your WhatsApp .zip or .txt file into this box.</span
+            <span
+              v-if="$vuetify.breakpoint.smAndDown"
+              v-html="$t('fileSelect')"
             >
+            </span>
+
+            <span v-if="isSuccess" v-html="$t('fileAnother')"></span>
+            <span v-if="!isSuccess" v-html="$t('fileZip')"></span>
           </div>
         </div>
         <br />
         <div class="text-body-1 text-md-h5 w-100" v-show="processing">
           <img src="@/assets/loader.svg" height="40" width="40" />
           <br />
-          <strong>Processing</strong> your file...
+          <span v-html="$t('fileProcessing')" />
         </div>
       </div>
     </label>

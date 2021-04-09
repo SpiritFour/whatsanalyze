@@ -1,14 +1,14 @@
 <template>
   <div class="foot py-7 additional-height">
     <h3 class="my-3" v-for="post in posts" :key="post.to">
-      <nuxt-link :to="{ name: post.name }">
-        {{ post.text }}
+      <nuxt-link :to="post.name">
+        {{ $t(post.text) }}
       </nuxt-link>
     </h3>
 
     <hr width="70%" color="white" />
 
-    <div class="my-5">Made with ❤️ by four friends.</div>
+    <div class="my-5">{{ $t("love") }}</div>
 
     <a
       class="black--text"
@@ -21,9 +21,7 @@
         alt="github logo"
         src="~/assets/img/github/GitHub-Mark-Light-32px.png"
       />
-
-      This project is <b>open-source</b> and all code is <b>public</b> on
-      <b>GitHub</b>
+      <span v-html="$t('openSource')"></span>
     </a>
     <br />
 
@@ -58,11 +56,11 @@ export default {
         // },
         {
           name: "switch-from-whatsapp-to-signal",
-          text: "How to switch to Signal from WhatsApp",
+          text: "pageNameSignal",
         },
         {
           name: "how-to-export-your-whatsapp-chat",
-          text: "How to export your WhatsApp Chat",
+          text: "pageNameExport",
         },
       ],
     };

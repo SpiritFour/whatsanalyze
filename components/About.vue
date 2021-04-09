@@ -1,17 +1,16 @@
 <template>
   <v-container class="pa-5">
     <v-row class="ma-10 text-h3 font-weight-bold" justify="center">
-      About us
+      {{ $t("about") }}
     </v-row>
     <v-row class="ma-10 text-body-1" justify="center">
-      <v-col align="center" cols="12" md="10" sm="12">
-        We are a group of <b>university friends</b>. As we recently all left
-        WhatsApp we wanted to analyse how or chats evolved over the years.
-        <br />
-        <br />
-        As <b>Computer Science students</b> are paranoid and think they can do
-        everything better, we naturally wanted to build a solution our self,
-        where <b>no personal data</b> is shared or made public.
+      <v-col
+        align="center"
+        cols="12"
+        md="10"
+        sm="12"
+        v-html="$t('aboutPoints')"
+      >
       </v-col>
     </v-row>
     <v-row class="ma-10" justify="center">
