@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: "whatsapp-signal",
+  name: "switch-from-whatsapp-to-signal",
   async asyncData({ $content }) {
     const page = await $content("whatsapp-signal").fetch();
     return {

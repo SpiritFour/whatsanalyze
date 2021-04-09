@@ -22,6 +22,7 @@
 
 <script>
 export default {
+  name: "how-to-export-your-whatsapp-chat",
   data() {
     return {
       headers: [

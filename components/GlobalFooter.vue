@@ -1,8 +1,8 @@
 <template>
   <div class="foot py-7 additional-height">
     <h3 class="my-3" v-for="post in posts" :key="post.to">
-      <nuxt-link :to="{ name: post.name }">
-        {{ post.text }}
+      <nuxt-link :to="post.name">
+        {{ $t(post.text) }}
       </nuxt-link>
     </h3>
 
@@ -56,11 +56,11 @@ export default {
         // },
         {
           name: "switch-from-whatsapp-to-signal",
-          text: this.$t("pageNameSignal"),
+          text: "pageNameSignal",
         },
         {
           name: "how-to-export-your-whatsapp-chat",
-          text: this.$t("pageNameExport"),
+          text: "pageNameExport",
         },
       ],
     };
