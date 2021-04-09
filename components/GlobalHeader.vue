@@ -15,7 +15,6 @@
               WhatsAnalyze
             </h1>
           </nuxt-link>
-
           <v-spacer></v-spacer>
           <LanguageSwitcher />
         </v-card-actions>
