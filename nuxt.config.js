@@ -106,7 +106,16 @@ export default {
   modules: ["@nuxt/content", "@nuxtjs/pwa", "@nuxtjs/gtm", "nuxt-i18n"],
   i18n: {
     seo: true,
-    locales: ["en", "de"],
+    locales: [
+      {
+        code: "en",
+        iso: "en-US",
+      },
+      {
+        code: "de",
+        iso: "de-DE",
+      },
+    ],
     defaultLocale: "en",
     detectBrowserLanguage: {
       alwaysRedirect: false,
@@ -114,7 +123,6 @@ export default {
       onlyOnRoot: true,
       useCookie: true,
       cookieCrossOrigin: false,
-      cookieDomain: null,
       cookieKey: "i18n_redirected",
       cookieSecure: false,
     },
