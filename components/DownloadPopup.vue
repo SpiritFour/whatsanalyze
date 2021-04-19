@@ -23,13 +23,11 @@
 
           <v-card>
             <v-card-title class="headline cyan" style="word-break: normal">
-              <div class="text-h4 font-weight-bold">Did we make you go 🥳?</div>
-              <span>Buy us a ☕️ and get your results for free!!!</span>
+              <div class="text-h4 font-weight-bold">{{ $t("didWeMake") }}</div>
+              <span>{{ $t("buyUsCoffee") }}</span>
             </v-card-title>
-
             <v-card-text class="pt-3">
-              You will get all results as an image exactly as presented on your
-              device. Generating may take a while.
+              <div>{{ $t("getResults") }}</div>
             </v-card-text>
 
             <v-row
@@ -95,8 +93,8 @@
                 gtagEvent('jump_to_pdf_download_cta', GTAG_INTERACTION, 0);
                 $vuetify.goTo('#payButton', { duration: 300, offset: 100 });
               "
-              ><v-icon class="mr-2">mdi-keyboard-return</v-icon>go to PDF
-              download</v-btn
+              ><v-icon class="mr-2">mdi-keyboard-return</v-icon
+              >{{ $t("goToPDF") }}</v-btn
             >
           </v-col>
         </div>

@@ -1,5 +1,6 @@
 import colors from "vuetify/es5/util/colors";
 import fs from "fs";
+import { messages } from "./utils/translations.js";
 
 // eslint-disable-next-line no-undef
 let local = process.env.NUXT_ENV_LOCAL !== undefined;
@@ -102,7 +103,34 @@ export default {
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxt/content", "@nuxtjs/pwa", "@nuxtjs/gtm"],
+  modules: ["@nuxt/content", "@nuxtjs/pwa", "@nuxtjs/gtm", "nuxt-i18n"],
+  i18n: {
+    seo: true,
+    locales: [
+      {
+        code: "en",
+        iso: "en-US",
+      },
+      {
+        code: "de",
+        iso: "de-DE",
+      },
+    ],
+    defaultLocale: "en",
+    detectBrowserLanguage: {
+      alwaysRedirect: false,
+      fallbackLocale: "en",
+      onlyOnRoot: true,
+      useCookie: true,
+      cookieCrossOrigin: false,
+      cookieKey: "i18n_redirected",
+      cookieSecure: false,
+    },
+    vueI18n: {
+      fallbackLocale: "en",
+      messages: messages,
+    },
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

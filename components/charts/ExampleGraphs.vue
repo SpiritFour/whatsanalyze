@@ -114,7 +114,7 @@ export default {
             {
               scaleLabel: {
                 display: true,
-                labelString: "Messages",
+                labelString: this.$t("messages"),
                 fontColor: "rgb(51,51,51)",
                 fontStyle: "bold",
                 fontSize: 11,
@@ -156,7 +156,7 @@ export default {
             {
               scaleLabel: {
                 display: true,
-                labelString: "Messages",
+                labelString: this.$t("messages"),
                 fontColor: "rgb(51,51,51)",
                 fontStyle: "bold",
                 fontSize: 11,
@@ -229,7 +229,7 @@ export default {
             {
               scaleLabel: {
                 display: true,
-                labelString: "Messages",
+                labelString: this.$t("messages"),
                 fontStyle: "bold",
                 fontColor: "rgb(51,51,51)",
                 fontSize: 10,

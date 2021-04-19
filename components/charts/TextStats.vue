@@ -4,7 +4,7 @@
 
     <v-row class="my-7 text-left">
       <v-col cols="12" class="text-h5 text-md-h4 font-weight-bold pa-0"
-        >First Message
+        >{{ $t("firstMessage") }}
       </v-col>
       <div class="font-weight-bold text-h3 text-md-h2">
         {{ firstDateString }}
@@ -16,7 +16,7 @@
         {{ lastDateString }}
       </div>
       <v-col cols="12" class="text-h5 text-md-h4 font-weight-bold pa-0"
-        >Last Message
+        >{{ $t("lastMessage") }}
       </v-col>
     </v-row>
 
@@ -31,7 +31,7 @@
             cols="12"
             class="text-h5 font-weight-bold pa-0 ma-0 text-center"
           >
-            You chatted for
+            {{ $t("youChatted") }}
           </v-col>
         </v-row>
 
@@ -43,7 +43,7 @@
 
         <v-row>
           <v-col cols="12" class="text-h5 font-weight-bold pa-0 text-center">
-            days
+            {{ $t("days") }}
           </v-col>
         </v-row>
       </v-col>
@@ -60,7 +60,7 @@
             cols="12"
             class="text-h5 font-weight-bold pa-0 ma-0 text-center"
           >
-            You have sent
+            {{ $t("youSent") }}
           </v-col>
         </v-row>
         <v-row>
@@ -70,7 +70,7 @@
         </v-row>
         <v-row>
           <v-col class="text-h5 font-weight-bold pa-0 text-center">
-            messages
+            {{ $t("messages") }}
           </v-col>
         </v-row>
       </v-col>

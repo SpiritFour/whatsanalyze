@@ -34,7 +34,7 @@ export default {
               {
                 scaleLabel: {
                   display: true,
-                  labelString: "Messages",
+                  labelString: this.$t("messages"),
                 },
                 ticks: {
                   beginAtZero: true,

@@ -1,6 +1,6 @@
 <template>
   <v-col class="my-4 mb-16">
-    <div class="text-h3 text-md-h1 font-weight-bold">Your Full Chat</div>
+    <div class="text-h3 text-md-h1 font-weight-bold">{{ $t("fullChat") }}</div>
     <v-divider class="py-5" />
     <!-- this could be refactored into a component -->
     <v-row justify="center" id="payButton">

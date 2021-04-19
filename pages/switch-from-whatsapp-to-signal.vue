@@ -4,16 +4,16 @@
     <Cta
       to="/"
       class="pt-0 pb-15"
-      title="Backup your WhatsApp Data"
-      buttonTxt="Save your WhatsApp as PDF"
-      text="✓ Group Chats ✓ Create your PDF Chat ✓ Privacy First"
+      title="backupWhatsApp"
+      buttonTxt="exportAsPDF"
+      text="ctaBullets"
     />
   </v-container>
 </template>
 
 <script>
 export default {
-  name: "whatsapp-signal",
+  name: "switch-from-whatsapp-to-signal",
   async asyncData({ $content }) {
     const page = await $content("whatsapp-signal").fetch();
     return {
