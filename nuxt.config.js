@@ -92,6 +92,7 @@ export default {
     // https://go.nuxtjs.dev/vuetify
     "@nuxtjs/vuetify",
     "nuxt-compress",
+    "@nuxtjs/sentry",
   ],
   "nuxt-compress": {
     gzip: {
@@ -153,6 +154,17 @@ export default {
   },
   gtm: {
     id: "GTM-W32PNH3",
+  },
+  sentry: {
+    dsn:
+      "https://48bdeb273a134a8095aef20174fdadcb@o824314.ingest.sentry.io/5810773", // Enter your project's DSN here
+    // Additional Module Options go here
+    // https://sentry.nuxtjs.org/sentry/options
+    config: {
+      // Add native Sentry config here
+      // https://docs.sentry.io/platforms/javascript/guides/vue/configuration/options/
+      tracesSampleRate: 1.0,
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
