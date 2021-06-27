@@ -351,8 +351,9 @@ export class Chat {
       }
       return initDateDict;
     };
-    const minDate = new Date(Math.min.apply(null, this.dates));
-    const maxDate = new Date(Math.max.apply(null, this.dates));
+    const sortedDates = this.dates.sort();
+    const minDate = new Date(sortedDates[0]);
+    const maxDate = new Date(sortedDates[-1]);
     let daysDict = getDaysArray(minDate, maxDate);
     this.filterdChatObject.map((message) => {
       daysDict[moment(message.date).format("YYYY-MM-DD")] += 1;
