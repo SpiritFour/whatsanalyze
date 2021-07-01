@@ -1,6 +1,7 @@
 import colors from "vuetify/es5/util/colors";
 import fs from "fs";
 import { messages } from "./utils/translations.js";
+import SentryWebpackPlugin from "@sentry/webpack-plugin";
 
 // eslint-disable-next-line no-undef
 let local = process.env.NUXT_ENV_LOCAL !== undefined;
@@ -155,24 +156,54 @@ export default {
   gtm: {
     id: "GTM-W32PNH3",
   },
-  sentry: {
-    dsn:
-      "https://48bdeb273a134a8095aef20174fdadcb@o824314.ingest.sentry.io/5810773", // Enter your project's DSN here
-    // Additional Module Options go here
-    // https://sentry.nuxtjs.org/sentry/options
-    config: {
-      // Add native Sentry config here
-      // https://docs.sentry.io/platforms/javascript/guides/vue/configuration/options/
-      tracesSampleRate: 1.0,
-    },
-  },
+  sentry: !local
+    ? {}
+    : {
+        dsn:
+          "https://48bdeb273a134a8095aef20174fdadcb@o824314.ingest.sentry.io/5810773",
+        // disabled: local,
+        sourceMapStyle: "hidden-source-map",
+        publishRelease: !local,
+        attachCommits: !local,
+
+        // Additional Module Options go here
+        // https://sentry.nuxtjs.org/sentry/options
+        config: {
+          // Add native Sentry config here
+          // https://docs.sentry.io/platforms/javascript/guides/vue/configuration/options/
+          tracesSampleRate: 1.0,
+          vueOptions: {
+            tracing: true,
+            tracingOptions: {
+              hooks: ["mount", "update"],
+              timeout: 2000,
+              trackComponents: true,
+            },
+          },
+          browserOptions: {},
+        },
+      },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    extend(config, { isDev }) {
+    extend(config, { isDev, isClient }) {
       // Sets webpack's mode to development if `isDev` is true.
       if (isDev) {
         config.mode = "development";
+      } else {
+        if (isClient) {
+          config.devtool = "source-map";
+        }
+
+        config.plugins.push(
+          new SentryWebpackPlugin({
+            // sentry-cli configuration
+            // webpack specific configuration
+            include: ["dist/"],
+            ignore: ["node_modules"],
+            configFile: ".sentryclirc",
+          })
+        );
       }
     },
   },
