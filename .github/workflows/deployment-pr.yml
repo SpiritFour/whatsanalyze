@@ -21,3 +21,11 @@ jobs:
           projectId: whatsanalyze-80665
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
+      - name: Sentry Release
+        uses: getsentry/action-release@v1.1.5
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+          with:
+            environment: pr

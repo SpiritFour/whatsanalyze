@@ -5,6 +5,10 @@ import SentryWebpackPlugin from "@sentry/webpack-plugin";
 
 // eslint-disable-next-line no-undef
 let local = process.env.NUXT_ENV_LOCAL !== undefined;
+// eslint-disable-next-line no-undef
+let sentryAuth = process.env.SENTRY_AUTH_TOKEN;
+// eslint-disable-next-line no-undef
+let sentryRelease = process.env.SENTRY_RELEASE;
 
 const baseUrl = ( // eslint-disable-next-line no-undef
   process.env.BASE_URL || "https://www.whatsanalyze.com"
@@ -201,7 +205,10 @@ export default {
             // webpack specific configuration
             include: ["dist/"],
             ignore: ["node_modules"],
-            configFile: ".sentryclirc",
+            authToken: sentryAuth,
+            org: "whatsanalyze",
+            project: "whatsanalyze",
+            release: sentryRelease,
           })
         );
       }
