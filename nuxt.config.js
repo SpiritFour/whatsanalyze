@@ -6,7 +6,7 @@ import SentryWebpackPlugin from "@sentry/webpack-plugin";
 // eslint-disable-next-line no-undef
 let local = process.env.NUXT_ENV_LOCAL !== undefined;
 // eslint-disable-next-line no-undef
-let sentryAuth = process.env.SENTRY_AUTH_TOKEN;
+let sentryAuth = process.env.NUXT_ENV_SENTRY_AUTH_TOKEN;
 // eslint-disable-next-line no-undef
 let sentryRelease = process.env.SENTRY_RELEASE;
 
