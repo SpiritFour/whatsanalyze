@@ -25,6 +25,8 @@
     "@nuxt/content": "^1.13.1",
     "@nuxtjs/gtm": "^2.4.0",
     "@nuxtjs/sentry": "^5.1.0",
+    "@sentry/tracing": "^6.8.0",
+    "@sentry/webpack-plugin": "^1.15.1",
     "canvg": "^3.0.7",
     "chart.js": "^2.9.4",
     "core-js": "^3.9.1",
