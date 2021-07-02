@@ -32,7 +32,7 @@ export default {
             this.currency +
             "&client-id=" +
             // eslint-disable-next-line no-undef
-            process.env.paypalClientId,
+            this.$config.paypalClientId,
           defer: true,
           // Changed after script load
           callback: () => {
