@@ -1,20 +1,28 @@
 import colors from "vuetify/es5/util/colors";
 import fs from "fs";
 import { messages } from "./utils/translations.js";
-import SentryWebpackPlugin from "@sentry/webpack-plugin";
 
 // eslint-disable-next-line no-undef
 let local = process.env.NUXT_ENV_LOCAL !== undefined;
-// eslint-disable-next-line no-undef
-let sentryAuth = process.env.NUXT_ENV_SENTRY_AUTH_TOKEN;
-// eslint-disable-next-line no-undef
-let sentryRelease = process.env.SENTRY_RELEASE;
-
-const baseUrl = ( // eslint-disable-next-line no-undef
-  process.env.BASE_URL || "https://www.whatsanalyze.com"
-).replace("http:", "https:");
+const baseUrl = // eslint-disable-next-line no-undef
+(process.env.BASE_URL || "https://www.whatsanalyze.com").replace(
+  "http:",
+  "https:"
+);
 
 export default {
+  publicRuntimeConfig: {
+    local,
+    baseUrl,
+    paypalClientId: local
+      ? "ARYQUp4C_oNjNUNkvSPzLeaiulItDmnHUU226OANt2haCKC2c70ZrKZTmRHCPldcu4SD22LmPEuonfec"
+      : "AUMWxSZrtBOA1RicR_3nGijYb8yYxyq2lxBjiwoQKfVc-8jfdPr5N7X5EFUackMCLb_K7HiKswnDBUJ8",
+    privateRuntimeConfig: {
+      // eslint-disable-next-line no-undef
+      SENTRY_AUTH_TOKEN: process.env.SENTRY_AUTH_TOKEN,
+    },
+  },
+
   // Target: https://go.nuxtjs.dev/config-target
   target: "static",
 
@@ -184,6 +192,12 @@ export default {
       },
       browserOptions: {},
     },
+    webpackConfig: {
+      include: ["./dist/"],
+      ignore: ["node_modules"],
+      org: "whatsanalyze",
+      project: "whatsanalyze",
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -194,21 +208,8 @@ export default {
         config.mode = "development";
       } else {
         if (isClient) {
-          config.devtool = "source-map";
+          config.devtool = "hidden-source-map";
         }
-
-        config.plugins.push(
-          new SentryWebpackPlugin({
-            // sentry-cli configuration
-            // webpack specific configuration
-            include: ["dist/"],
-            ignore: ["node_modules"],
-            authToken: sentryAuth,
-            org: "whatsanalyze",
-            project: "whatsanalyze",
-            release: sentryRelease,
-          })
-        );
       }
     },
   },
@@ -222,11 +223,5 @@ export default {
             cert: fs.readFileSync("./0.0.0.0.crt"),
           }
         : {},
-  },
-  env: {
-    paypalClientId: local
-      ? "ARYQUp4C_oNjNUNkvSPzLeaiulItDmnHUU226OANt2haCKC2c70ZrKZTmRHCPldcu4SD22LmPEuonfec"
-      : "AUMWxSZrtBOA1RicR_3nGijYb8yYxyq2lxBjiwoQKfVc-8jfdPr5N7X5EFUackMCLb_K7HiKswnDBUJ8",
-    baseUrl: baseUrl,
   },
 };
