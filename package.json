@@ -51,13 +51,16 @@
     "whatsapp-chat-parser": "^3.1.0"
   },
   "devDependencies": {
+    "@nuxt/types": "^2.15.7",
+    "@nuxt/typescript-build": "^2.1.0",
+    "@nuxtjs/eslint-config-typescript": "^6.0.1",
     "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/vuetify": "^1.11.3",
     "@vue/test-utils": "^1.1.2",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^26.6.3",
     "eslint": "^7.20.0",
-    "eslint-config-prettier": "^7.2.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-vue": "^7.6.0",
     "husky": "4.2.3",
     "jest": "^26.6.3",

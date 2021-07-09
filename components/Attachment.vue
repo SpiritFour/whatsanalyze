@@ -2,20 +2,27 @@
   <div>
     <div v-if="attachment" class="media-style">
       <img
-        v-if="attachment.mimeType.startsWith('image/')"
+        v-if="attachment.mimeTypeData.mimeTypeGroup === MimeTypeGroup.image"
         :src="attachment.src"
         :title="attachment.fileName"
         :alt="attachment.fileName"
       />
       <video
-        v-else-if="attachment.mimeType.startsWith('video/')"
+        v-else-if="
+          attachment.mimeTypeData.mimeTypeGroup === MimeTypeGroup.video
+        "
         controls
         :title="attachment.fileName"
       >
-        <source :src="attachment.src" :type="attachment.mimeType" />
+        <source
+          :src="attachment.src"
+          :type="attachment.mimeTypeData.mimeType"
+        />
       </video>
       <audio
-        v-else-if="attachment.mimeType.startsWith('audio/')"
+        v-else-if="
+          attachment.mimeTypeData.mimeTypeGroup === MimeTypeGroup.audio
+        "
         controls
         :src="attachment.src"
         :title="attachment.fileName"
@@ -23,12 +30,12 @@
       <v-row v-else align="center" class="rando-file-container">
         <v-col class="ma-0 pa-0 pr-3" style="position: relative" cols="2">
           <v-row justify="center">
-            <v-icon class="ma-0 pa-0" size="30" color="grey" left
-              >mdi-file</v-icon
-            >
+            <v-icon class="ma-0 pa-0" size="30" color="grey" left>
+              mdi-file
+            </v-icon>
           </v-row>
           <div class="center" style="font-size: xx-small">
-            {{ attachment.mimeType }}
+            {{ attachment.mimeTypeData.mimeType }}
           </div>
         </v-col>
         <v-col class="ma-auto pl-0 pr-2 py-1" align="left" cols="10">
@@ -48,17 +55,24 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Attachment, MimeTypeGroup } from "~/functions/attachments";
 export default {
   name: "Attachment",
-  props: ["attachmentPromise"],
+  props: {
+    attachmentPromise: {
+      type: Promise as Promise<Attachment>,
+      default: undefined,
+    },
+  },
   data() {
     return {
-      attachment: undefined,
+      attachment: undefined as Attachment,
+      MimeTypeGroup,
     };
   },
-  created() {
-    this.attachmentPromise.then((resolved) => (this.attachment = resolved));
+  async fetch() {
+    this.attachment = await this.attachmentPromise;
   },
 };
 </script>

@@ -1,5 +1,6 @@
-import logoBlack from "/assets/whatsanalyze-logo-black.png";
-import myFont from "/assets/pdf-fonts/Helvetica.js";
+import jsPDF from "jspdf";
+import logoBlack from "~/assets/whatsanalyze-logo-black.png";
+import myFont from "~/assets/pdf-fonts/Helvetica.js";
 
 import {
   dateDiffs,
@@ -7,10 +8,9 @@ import {
   getDateString,
   lastDate,
 } from "~/functions/utils";
-import { getAttachment } from "~/functions/attachments";
-import jsPDF from "jspdf";
+import { Attachment, getAttachment } from "~/functions/attachments";
 
-var callAddFont = function () {
+const callAddFont = function () {
   this.addFileToVFS("myFont.ttf", myFont.normal);
   this.addFont("myFont.ttf", "myFont", "normal");
 
@@ -21,6 +21,7 @@ jsPDF.API.events.push(["addFonts", callAddFont]);
 
 export async function render(chat, attachments, ego, isSample = false) {
   // Default export is a4 paper, portrait, using millimeters for units
+  // eslint-disable-next-line new-cap
   const doc = new jsPDF();
   // doc specifications
   const width = 210;
@@ -44,7 +45,7 @@ export async function render(chat, attachments, ego, isSample = false) {
   let usedYSpace = 0;
 
   //    --- HELPER FUNCTIONS
-  const getImgSizes = function (imgUrl) {
+  const getImgSizes = function (imgUrl): Promise<number[]> {
     return new Promise((resolve, reject) => {
       const img = new Image();
       img.onload = () => {
@@ -56,9 +57,9 @@ export async function render(chat, attachments, ego, isSample = false) {
   };
 
   const loadImage = async function (selector) {
-    const imgUrl = document
-      .querySelector(selector + ">*>canvas")
-      .toDataURL("image/png");
+    const imgUrl = (document.querySelector(
+      selector + ">*>canvas"
+    ) as HTMLCanvasElement).toDataURL("image/png");
     const sizes = await getImgSizes(imgUrl);
     return { img: imgUrl, width: sizes[0], height: sizes[1] };
   };
@@ -98,14 +99,14 @@ export async function render(chat, attachments, ego, isSample = false) {
     return messageY;
   };
   const hexToRgb = function (hex) {
-    if (hex.length != 7) {
-      throw "Only seven-digit hex colors are allowed.";
+    if (hex.length !== 7) {
+      throw new Error("Only seven-digit hex colors are allowed.");
     }
     // remove #
     hex = hex.slice(1);
 
-    var aRgbHex = hex.match(/.{1,2}/g);
-    var aRgb = [
+    const aRgbHex = hex.match(/.{1,2}/g);
+    const aRgb = [
       parseInt(aRgbHex[0], 16),
       parseInt(aRgbHex[1], 16),
       parseInt(aRgbHex[2], 16),
@@ -120,7 +121,7 @@ export async function render(chat, attachments, ego, isSample = false) {
       doc.setFontSize(20);
       doc.setTextColor(0, 0, 0);
       doc.setFont("myFont", "bold");
-      doc.text(x, y + 10, "WhatsAnalyze");
+      doc.text("WhatsAnalyze", x, y + 10);
     }
   };
   const addHeading = function (text, x, y) {
@@ -141,9 +142,9 @@ export async function render(chat, attachments, ego, isSample = false) {
     const personRgbColor = hexToRgb(personHexColor);
     doc.setFillColor(personRgbColor[0], personRgbColor[1], personRgbColor[2]);
 
-    const author_width = doc.getTextWidth(author);
+    const authorWidth = doc.getTextWidth(author);
 
-    doc.roundedRect(x - 3, y, author_width + 6, 10, 5, 5, "F");
+    doc.roundedRect(x - 3, y, authorWidth + 6, 10, 5, 5, "F");
     doc.text(author, x, y + 7);
   };
   const addColoredPage = function (showText = false, r = 23, g = 166, b = 141) {
@@ -221,7 +222,7 @@ export async function render(chat, attachments, ego, isSample = false) {
   usedYSpace += 10;
 
   doc.setFontSize(30);
-  writeRightSideText(getDateString(lastDateConst), false);
+  writeRightSideText(getDateString(lastDateConst));
   usedYSpace += 15;
 
   addPageIfNeeded(50);
@@ -274,7 +275,7 @@ export async function render(chat, attachments, ego, isSample = false) {
       doc.setFontSize(15);
       doc.setFont("myFont", "normal");
 
-      let factStrings = [];
+      const factStrings = [];
       factStrings.push("Number of Words: " + fact.numberOfWords);
       factStrings.push("Average Message Length: " + fact.averageMessageLength);
       factStrings.push("Unique words: " + fact.uniqueWords);
@@ -298,7 +299,7 @@ export async function render(chat, attachments, ego, isSample = false) {
 
   for (const idx in messages) {
     const data = messages[idx];
-    let isSystem = "System" === data.author;
+    let isSystem = data.author === "System";
     const isEgo = ego === data.author;
 
     if (!isSystem && !(data.author in chat.personColorMap)) {
@@ -306,14 +307,14 @@ export async function render(chat, attachments, ego, isSample = false) {
     }
     const hasAttachment = !!data.attachment;
 
-    let attachment = undefined;
+    let attachment: Attachment;
     let attachmentSize = [0, 0];
 
     if (hasAttachment) {
       // load attachment
       attachment = await getAttachment(data.attachment.fileName, attachments);
       // skip if no image
-      if (!attachment.mimeType.startsWith("image/")) continue;
+      if (!attachment.mimeTypeData.renderInPDF) continue;
       attachmentSize = await getImgSizes(attachment.src);
       attachmentSize = getScale(
         attachmentSize[0],
@@ -326,7 +327,11 @@ export async function render(chat, attachments, ego, isSample = false) {
     const splitMessage = doc.splitTextToSize(data.message, 120);
     const numLines = splitMessage.length;
     const messageHeight = lineHeight * numLines + attachmentSize[1];
-    let messageY = calcMessageBodyHeight(numLines, attachmentSize[1], isSystem); // get start Y Coordinate of Message
+    const messageY = calcMessageBodyHeight(
+      numLines,
+      attachmentSize[1],
+      isSystem
+    ); // get start Y Coordinate of Message
 
     const singleLineTextWidth = doc.getTextWidth(data.message);
     let messageWidth = hasAttachment
@@ -390,14 +395,14 @@ export async function render(chat, attachments, ego, isSample = false) {
       doc.setFontSize(fontSize / 1.3);
       doc.setFont("myFont", "bold");
       doc.text(
+        data.author,
         messageX + paddingMessage,
-        messageY + paddingMessage,
-        data.author
+        messageY + paddingMessage
       );
     }
 
     if (hasAttachment) {
-      let filetype = attachment.mimeType.split("/").splice(-1)[0];
+      const filetype = attachment.mimeTypeData.mimeTypeEnding;
 
       doc.addImage(
         attachment.src,
@@ -420,10 +425,11 @@ export async function render(chat, attachments, ego, isSample = false) {
       doc.setFontSize(fontSize);
       doc.setFont("myFont", "normal");
       doc.text(
+        splitMessage,
         isSystem ? messageX + 65 : messageX + paddingMessage,
         isSystem ? messageY + 2 * paddingMessage : messageY + authorHeight,
-        splitMessage, //.map((m) => m.replace(asciRegex, "")),
-        isSystem ? "center" : ""
+        // .map((m) => m.replace(asciRegex, "")),
+        { align: isSystem ? "center" : "left" }
       );
     }
 
@@ -433,9 +439,9 @@ export async function render(chat, attachments, ego, isSample = false) {
       doc.setTextColor(200, 200, 200);
 
       doc.text(
+        dateString,
         messageX + messageWidth - dateWidth + paddingMessage,
-        messageY + authorHeight + messageHeight,
-        dateString
+        messageY + authorHeight + messageHeight
       );
     }
   }

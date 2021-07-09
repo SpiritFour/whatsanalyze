@@ -4,6 +4,8 @@ env:
 extends:
   - "eslint:recommended"
   - "plugin:vue/essential"
+  - "@nuxtjs/eslint-config-typescript"
+  - "eslint-config-prettier"
 parserOptions:
   ecmaVersion: 12
   sourceType: module

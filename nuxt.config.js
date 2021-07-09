@@ -1,14 +1,12 @@
-import colors from "vuetify/es5/util/colors";
 import fs from "fs";
+import colors from "vuetify/es5/util/colors";
 import { messages } from "./utils/translations.js";
 
 // eslint-disable-next-line no-undef
-let local = process.env.NUXT_ENV_LOCAL !== undefined;
-const baseUrl = // eslint-disable-next-line no-undef
-(process.env.BASE_URL || "https://www.whatsanalyze.com").replace(
-  "http:",
-  "https:"
-);
+const local = process.env.NUXT_ENV_LOCAL !== undefined;
+const baseUrl = ( // eslint-disable-next-line no-undef
+  process.env.BASE_URL || "https://www.whatsanalyze.com"
+).replace("http:", "https:");
 
 export default {
   publicRuntimeConfig: {
@@ -106,6 +104,7 @@ export default {
     "@nuxtjs/vuetify",
     "nuxt-compress",
     "@nuxtjs/sentry",
+    "@nuxt/typescript-build",
   ],
   "nuxt-compress": {
     gzip: {
@@ -142,7 +141,7 @@ export default {
     },
     vueI18n: {
       fallbackLocale: "en",
-      messages: messages,
+      messages,
     },
   },
 
@@ -206,11 +205,9 @@ export default {
       // Sets webpack's mode to development if `isDev` is true.
       if (isDev) {
         config.mode = "development";
-      } else {
-        if (isClient) {
+      } else if (isClient) {
           config.devtool = "hidden-source-map";
         }
-      }
     },
   },
   server: {
