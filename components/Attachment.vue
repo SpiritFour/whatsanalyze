@@ -55,19 +55,19 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Attachment, MimeTypeGroup } from "~/functions/attachments";
+<script>
+import { MimeTypeGroup } from "~/functions/attachments";
 export default {
   name: "Attachment",
   props: {
     attachmentPromise: {
-      type: Promise as Promise<Attachment>,
+      type: Promise,
       default: undefined,
     },
   },
   data() {
     return {
-      attachment: undefined as Attachment,
+      attachment: undefined,
       MimeTypeGroup,
     };
   },
