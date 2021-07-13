@@ -4,13 +4,13 @@
       <span class="red darken-2 white--text px-2">{{
         chatObject.numPersonsInChat
       }}</span>
-      {{ $t(people) }}
+      {{ $t("people") }}
     </div>
     <div class="text-h6">
-      {{ $t(groupChat) }}
+      {{ $t("groupChat") }}
       <br />
       <small>
-        {{ $t(groupInfo) }}
+        {{ $t("groupInfo") }}
       </small>
     </div>
     <v-slider

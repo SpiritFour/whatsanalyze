@@ -2,7 +2,7 @@
   <v-container>
     <div class="text-center my-4">
       <v-menu offset-y>
-        <template v-slot:activator="{ on, attrs }">
+        <template #activator="{ on, attrs }">
           <v-btn color="primary" dark v-bind="attrs" v-on="on">
             {{ $t("changeView") }}
           </v-btn>
@@ -28,8 +28,8 @@
           startIdx,
           startIdx + offset
         )"
-        no-gutters
         :key="idx"
+        no-gutters
         class="scroll-stop"
       >
         <v-sheet
@@ -58,7 +58,7 @@
 
           <Attachment
             v-if="data.attachment"
-            :attachmentPromise="_getAttachment(data.attachment.fileName)"
+            :attachment-promise="_getAttachment(data.attachment.fileName)"
           >
           </Attachment>
           <div
@@ -76,16 +76,16 @@
         </v-sheet>
       </v-row>
       <v-row
-        class="my-8"
         v-if="
           chat.chatObject.slice(startIdx + offset, startIdx + 2 * offset)
             .length > 0
         "
+        class="my-8"
       >
         <v-btn
           class="ma-auto white--text"
-          @click="startIdx += offset"
           color="rgb(14, 97, 98)"
+          @click="startIdx += offset"
         >
           Load next {{ offset }} messages</v-btn
         >
@@ -96,10 +96,11 @@
 
 <script>
 import { getDateString } from "~/functions/utils";
-import { getAttachment } from "~/functions/attachments.js";
+import { getAttachment } from "~/functions/attachments.ts";
 import { GTAG_INTERACTION, gtagEvent } from "~/functions/gtagValues";
 export default {
   name: "Chat",
+  props: ["chat", "attachments"],
   data() {
     return {
       startIdx: 0,
@@ -107,10 +108,9 @@ export default {
       offset: 20,
     };
   },
-  props: ["chat", "attachments"],
   methods: {
     parseMessage(message) {
-      var validUrl = new RegExp(
+      const validUrl = new RegExp(
         "^(https?:\\/\\/)?" + // protocol
           "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
           "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
@@ -119,7 +119,6 @@ export default {
           "(\\#[-a-z\\d_]*)?$",
         "i"
       );
-      new RegExp("");
       const words = message.split(" ");
       let htmlMessage = "";
       words.forEach((word) => {
