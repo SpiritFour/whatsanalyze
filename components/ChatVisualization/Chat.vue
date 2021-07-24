@@ -187,7 +187,8 @@ export default {
 .system {
   background-color: rgb(53, 53, 38) !important;
   max-width: 70% !important;
-  margin: auto !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
   text-align: center;
   word-wrap: break-word;
 }
