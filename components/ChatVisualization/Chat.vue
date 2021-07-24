@@ -22,7 +22,7 @@
     </div>
 
     <!-- Chat -->
-    <v-container class="chat">
+    <v-container id="chat" class="chat">
       <v-row
         v-for="(data, idx) in chat.chatObject.slice(
           startIdx,
@@ -85,10 +85,10 @@
         <v-btn
           class="ma-auto white--text"
           color="rgb(14, 97, 98)"
-          @click="startIdx += offset"
+          @click="nextMessages"
         >
-          Load next {{ offset }} messages</v-btn
-        >
+          Load next {{ offset }} messages
+        </v-btn>
       </v-row>
     </v-container>
   </v-container>
@@ -98,6 +98,7 @@
 import { getDateString } from "~/functions/utils";
 import { getAttachment } from "~/functions/attachments.ts";
 import { GTAG_INTERACTION, gtagEvent } from "~/functions/gtagValues";
+
 export default {
   name: "Chat",
   props: ["chat", "attachments"],
@@ -147,6 +148,11 @@ export default {
     _getDateString(date) {
       return getDateString(date);
     },
+    nextMessages() {
+      this.startIdx += this.offset;
+      const container = this.$el.querySelector("#chat");
+      container.scrollTop = 0;
+    },
   },
 };
 </script>
@@ -155,6 +161,7 @@ export default {
 .scroll-stop {
   scroll-snap-align: start;
 }
+
 .chat {
   scroll-snap-type: y mandatory;
   border-radius: 10px;
@@ -171,6 +178,7 @@ export default {
   background-color: rgb(14, 97, 98) !important;
   margin-left: auto !important;
 }
+
 .message {
   text-align: left;
   word-break: break-word;
@@ -183,10 +191,12 @@ export default {
   text-align: center;
   word-wrap: break-word;
 }
+
 .system .message {
   text-align: center;
   color: rgb(250, 217, 100) !important;
 }
+
 .system .author,
 .system .date {
   display: none;
