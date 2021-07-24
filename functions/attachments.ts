@@ -86,6 +86,11 @@ export async function getAttachment(
   fileName: string,
   attachments: JSZip
 ): Promise<Attachment> {
-  const data = await attachments.file(fileName)?.async("base64");
+  // potentially this finds files that are a false match
+  // but there is the case that the images are in the "zip" folder, so we need
+  // to be sure to find em
+  const data = await attachments
+    .file(RegExp(".*" + fileName))[0]
+    ?.async("base64");
   return renderAttachment(fileName, data);
 }
