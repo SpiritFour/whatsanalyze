@@ -37,7 +37,8 @@ export default {
   props: ["chat", "attachments", "results"],
   data() {
     return {
-      ego: this.chat.messagesPerPerson[0].name,
+      // its possible that the first person did not write any message at all
+      ego: this.chat.messagesPerPerson[0]?.name,
       price: 1.99,
       currency: "EUR",
     };

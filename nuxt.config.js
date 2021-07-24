@@ -1,12 +1,15 @@
 import fs from "fs";
 import colors from "vuetify/es5/util/colors";
 import { messages } from "./utils/translations.js";
+import Sentry from "@nuxtjs/sentry";
 
 // eslint-disable-next-line no-undef
 const local = process.env.NUXT_ENV_LOCAL !== undefined;
-const baseUrl = ( // eslint-disable-next-line no-undef
-  process.env.BASE_URL || "https://www.whatsanalyze.com"
-).replace("http:", "https:");
+const baseUrl = // eslint-disable-next-line no-undef
+(process.env.BASE_URL || "https://www.whatsanalyze.com").replace(
+  "http:",
+  "https:"
+);
 
 export default {
   publicRuntimeConfig: {
@@ -190,6 +193,13 @@ export default {
         },
       },
       browserOptions: {},
+      beforeSend(event) {
+        // Check if it is an exception, and if so, show the report dialog
+        if (event.exception) {
+          Sentry.showReportDialog({ eventId: event.event_id });
+        }
+        return event;
+      },
     },
     webpackConfig: {
       include: ["./dist/"],
@@ -206,8 +216,8 @@ export default {
       if (isDev) {
         config.mode = "development";
       } else if (isClient) {
-          config.devtool = "hidden-source-map";
-        }
+        config.devtool = "hidden-source-map";
+      }
     },
   },
   server: {

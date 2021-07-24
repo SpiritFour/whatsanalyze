@@ -141,6 +141,9 @@ export default {
         );
       }
     },
+    rando() {
+      throw Error("random errro");
+    },
   },
   created() {
     // eslint-disable-next-line no-undef

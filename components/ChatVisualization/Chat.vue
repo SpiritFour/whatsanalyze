@@ -41,7 +41,8 @@
           :class="{
             myMessage: selectedEgo
               ? selectedEgo === data.author
-              : chat.messagesPerPerson[0].name === data.author,
+              : !!chat.messagesPerPerson[0] &&
+                chat.messagesPerPerson[0].name === data.author,
             system: chat.personColorMap[data.author] === undefined,
           }"
         >
