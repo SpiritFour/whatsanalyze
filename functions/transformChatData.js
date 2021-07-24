@@ -351,8 +351,30 @@ export class Chat {
       }
       return initDateDict;
     };
-    const minDate = new Date(Math.min.apply(null, this.dates));
-    const maxDate = new Date(Math.max.apply(null, this.dates));
+    function arrayMin(arr) {
+      var len = arr.length,
+        min = Infinity;
+      while (len--) {
+        if (arr[len] < min) {
+          min = arr[len];
+        }
+      }
+      return min;
+    }
+
+    function arrayMax(arr) {
+      var len = arr.length,
+        max = -Infinity;
+      while (len--) {
+        if (arr[len] > max) {
+          max = arr[len];
+        }
+      }
+      return max;
+    }
+
+    const minDate = new Date(arrayMin(this.dates));
+    const maxDate = new Date(arrayMax(this.dates));
     let daysDict = getDaysArray(minDate, maxDate);
     this.filterdChatObject.map((message) => {
       daysDict[moment(message.date).format("YYYY-MM-DD")] += 1;
