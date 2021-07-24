@@ -26,7 +26,7 @@ export function dateDiffs(firstDate, lastDate, measurementUnit = "days") {
 }
 
 export function firstDate(chat) {
-  return chat.filterdChatObject[0].date;
+  return chat.filterdChatObject[0]?.date;
 }
 
 export function lastDate(chat) {
