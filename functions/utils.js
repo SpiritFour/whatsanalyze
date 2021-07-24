@@ -30,5 +30,5 @@ export function firstDate(chat) {
 }
 
 export function lastDate(chat) {
-  return chat.filterdChatObject.slice(-1)[0].date;
+  return chat.filterdChatObject.slice(-1)[0]?.date;
 }
