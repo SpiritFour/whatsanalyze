@@ -96,6 +96,12 @@ export default {
                 }),
               ],
             })
+            .catch((error) => {
+              // Ignore AbortError (User did not want to share)
+              // if it does not work, do this: https://stackoverflow.com/questions/49663206/navigator-share-wont-resolve-nor-reject-when-user-cancels-native-selector-on-an
+              if (!error.message.startsWith("AbortError:"))
+                this.$sentry.captureException(error);
+            })
             .then(() => {
               gtagEvent("share_" + chartName + "_shared", GTAG_RESULTS, 2);
             });

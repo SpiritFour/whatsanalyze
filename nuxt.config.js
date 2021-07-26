@@ -1,9 +1,10 @@
-import colors from "vuetify/es5/util/colors";
 import fs from "fs";
+import colors from "vuetify/es5/util/colors";
 import { messages } from "./utils/translations.js";
+import Sentry from "@nuxtjs/sentry";
 
 // eslint-disable-next-line no-undef
-let local = process.env.NUXT_ENV_LOCAL !== undefined;
+const local = process.env.NUXT_ENV_LOCAL !== undefined;
 const baseUrl = // eslint-disable-next-line no-undef
 (process.env.BASE_URL || "https://www.whatsanalyze.com").replace(
   "http:",
@@ -106,6 +107,7 @@ export default {
     "@nuxtjs/vuetify",
     "nuxt-compress",
     "@nuxtjs/sentry",
+    "@nuxt/typescript-build",
   ],
   "nuxt-compress": {
     gzip: {
@@ -142,7 +144,7 @@ export default {
     },
     vueI18n: {
       fallbackLocale: "en",
-      messages: messages,
+      messages,
     },
   },
 
@@ -191,6 +193,13 @@ export default {
         },
       },
       browserOptions: {},
+      beforeSend(event) {
+        // Check if it is an exception, and if so, show the report dialog
+        if (event.exception) {
+          Sentry.showReportDialog({ eventId: event.event_id });
+        }
+        return event;
+      },
     },
     webpackConfig: {
       include: ["./dist/"],
@@ -206,10 +215,8 @@ export default {
       // Sets webpack's mode to development if `isDev` is true.
       if (isDev) {
         config.mode = "development";
-      } else {
-        if (isClient) {
-          config.devtool = "hidden-source-map";
-        }
+      } else if (isClient) {
+        config.devtool = "hidden-source-map";
       }
     },
   },

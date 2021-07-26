@@ -180,11 +180,11 @@ export default {
       gtagEvent("parsed", GTAG_FILE);
     },
 
-    showErrorMessage() {
+    showErrorMessage(text = undefined) {
       this.wrongFile = true;
       this.processing = false;
       this.isSuccess = false;
-      gtagEvent("error", GTAG_FILE, 0);
+      gtagEvent("error" + (text || ""), GTAG_FILE, 0);
     },
     processFileList(fileList, shared = false) {
       this.isDragging = false;
@@ -197,6 +197,7 @@ export default {
         this.readSharedFiles(fileList);
       } else {
         let file = fileList[0];
+        if (!file) return this.showErrorMessage("_undefined_shared_file");
         // do singles here
         const reader = new FileReader();
         if (/^application\/(?:x-)?zip(?:-compressed)?$/.test(file.type)) {
