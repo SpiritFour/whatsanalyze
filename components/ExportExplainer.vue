@@ -19,35 +19,35 @@
             <v-col cols="12" sm="8" class="pb-10">
               <v-timeline dense>
                 <v-timeline-item
-                  class="mb-4 align-center"
-                  small
                   v-for="(tabItem, i) in data.tabItems"
                   :key="i"
+                  class="mb-4 align-center"
+                  small
                   :text="$t(tabItem.text)"
                   :color="tabStatus[idx] === i ? 'blue' : 'grey'"
                   fill-dot
                   @click.native.stop="tabStatus = [i, i]"
                 >
-                  <v-row v-html="$t(tabItem.text)" style="cursor: pointer">
+                  <v-row style="cursor: pointer" v-html="$t(tabItem.text)">
                   </v-row>
                   <v-btn
                     v-if="i === 0 && tab === 1"
-                    v-bind:disabled="!installButtonStatus"
-                    v-on:click="downloadPWA"
                     id="dlPWA "
+                    :disabled="!installButtonStatus"
                     class="mt-5 pa-2 white--text"
                     color="#07bc4c"
                     style=""
+                    @click="downloadPWA"
                     >{{ $t("addToHomescreen") }}</v-btn
                   >
                 </v-timeline-item>
               </v-timeline>
               <v-btn
                 elevation="10"
-                @click="clickHandler"
                 :to="to ? to : null"
                 color="#07bc4c"
                 class="text-md-h6 text-caption ml-10 white--text"
+                @click="clickHandler"
               >
                 <v-icon>mdi-arrow-right</v-icon>
                 {{ $t(cta) }}
@@ -317,6 +317,9 @@ export default {
       ],
     };
   },
+  created() {
+    this.catchPWA();
+  },
   methods: {
     clickHandler() {
       if (!this.to) {
@@ -370,9 +373,6 @@ export default {
     },
     gtagEvent,
   },
-  created() {
-    this.catchPWA();
-  },
 };
 </script>
 
@@ -397,7 +397,7 @@ export default {
 
 .frame {
   pointer-events: none;
-  z-index: 99999;
+  z-index: 1;
   top: 2px;
 }
 
@@ -405,7 +405,7 @@ export default {
   animation-name: blink;
   animation-duration: 2s;
   animation-iteration-count: infinite;
-  z-index: 99999;
+  z-index: 1;
   border: 3px solid rgba(0, 128, 0, 0.7);
   background-color: transparent;
   margin-left: -25px;
