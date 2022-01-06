@@ -6,8 +6,8 @@
 
     <v-row>
       <v-img
-        class="ma-auto my-4"
         :src="require('@/assets/pdf-example.jpg')"
+        class="ma-auto my-4"
         max-height="147"
         max-width="250"
       />
@@ -15,21 +15,21 @@
 
     <v-progress-linear
       v-show="isLoading"
-      indeterminate
-      color="blue"
       class="mb-2"
+      color="blue"
+      indeterminate
     ></v-progress-linear>
 
     <v-dialog v-model="showDownloadPopup" width="550">
-      <template v-slot:activator="{ on, attrs }">
-        <v-row justify="center" class="pa-0 ma-0">
+      <template #activator="{ on, attrs }">
+        <v-row class="pa-0 ma-0" justify="center">
           <v-col class="pa-0 ma-0">
             <v-btn elevation="10" @click="downloadSample">
               <v-icon class="mr-1">mdi-download</v-icon>
               <span><b>free</b> preview PDF</span>
             </v-btn>
             <v-col class="mt-2">
-              <v-row justify="center" align="center">
+              <v-row align="center" justify="center">
                 <b style="color: green">{{ 0 + " " + currency }}</b>
               </v-row>
             </v-col>
@@ -37,29 +37,29 @@
           <v-col class="pa-0 ma-0">
             <v-btn
               class="white--text"
-              dark
-              v-bind="attrs"
-              v-on="on"
               color="#07bc4c"
-              style="max-width: 100%"
+              dark
               elevation="10"
+              style="max-width: 100%"
+              v-bind="attrs"
               @click="gtagEvent('full_pdf_pressed', GTAG_PAYMENT)"
+              v-on="on"
             >
               <v-icon class="mr-1">mdi-download</v-icon>
               <span><b>full</b> chat PDF</span>
             </v-btn>
             <v-col class="mt-2">
-              <v-row justify="center" align="center">
+              <v-row align="center" justify="center">
                 <b style="color: green">{{ price + " " + currency }}</b>
                 <span
                   class="px-1 ml-2"
                   style="color: white; background: red; border-radius: 5px"
                 >
-                  -60%</span
+                  -66%</span
                 >
               </v-row>
-              <v-row justify="center" align="center">
-                <s style="color: grey">{{ 4.99 + " " + currency }}</s>
+              <v-row align="center" justify="center">
+                <s style="color: grey">{{ 15 + " " + currency }}</s>
               </v-row>
             </v-col>
           </v-col>
@@ -75,17 +75,17 @@
         </v-card-text>
         <v-progress-linear
           v-show="isLoading"
-          indeterminate
-          color="blue"
           class="mb-2"
+          color="blue"
+          indeterminate
         ></v-progress-linear>
-        <v-row cols="12" justify="center" align="center" class="pt-6 pr-10">
+        <v-row align="center" class="pt-6 pr-10" cols="12" justify="center">
           <ChatVisualizationPayment
-            @onCreateOrder="onCreateOrder"
-            @onApprove="onApprove"
-            @onError="onError"
-            :currency="currency"
             :amount="price"
+            :currency="currency"
+            @onApprove="onApprove"
+            @onCreateOrder="onCreateOrder"
+            @onError="onError"
           />
         </v-row>
         <v-divider></v-divider>

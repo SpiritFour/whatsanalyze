@@ -3,25 +3,25 @@
     <div class="text-h3 text-md-h1 font-weight-bold">{{ $t("fullChat") }}</div>
     <v-divider class="py-5" />
     <!-- this could be refactored into a component -->
-    <v-row justify="center" id="payButton">
+    <v-row id="payButton" justify="center">
       <PdfDownload
-        :currency="currency"
-        :price="price"
-        :chat="chat"
         :attachments="attachments"
+        :chat="chat"
+        :currency="currency"
         :ego="ego"
+        :price="price"
       />
     </v-row>
     <v-row>
-      <Chat :chat="chat" :attachments="attachments" @setEgo="setEgo" />
+      <Chat :attachments="attachments" :chat="chat" @setEgo="setEgo" />
     </v-row>
     <v-row justify="center">
       <PdfDownload
-        :currency="currency"
-        :price="price"
-        :chat="chat"
         :attachments="attachments"
+        :chat="chat"
+        :currency="currency"
         :ego="ego"
+        :price="price"
       />
     </v-row>
   </v-col>
@@ -29,7 +29,6 @@
 
 <script>
 import PdfDownload from "~/components/ChatVisualization/PdfDownloadPopup";
-import { getCurrencyAbbreviation } from "country-currency-map";
 
 export default {
   name: "ChatVisualization",
@@ -39,7 +38,7 @@ export default {
     return {
       // its possible that the first person did not write any message at all
       ego: this.chat.messagesPerPerson[0]?.name,
-      price: 1.99,
+      price: 4.99,
       currency: "EUR",
     };
   },
@@ -47,20 +46,6 @@ export default {
     setEgo(ego) {
       this.ego = ego;
     },
-    // We lookup the IP to set the currency according to the user's location.
-    detectCurrency() {
-      fetch("https://extreme-ip-lookup.com/json/")
-        .then((res) => res.json())
-        .then((response) => {
-          let userDependentCurrency = getCurrencyAbbreviation(response.country);
-          if (userDependentCurrency !== undefined)
-            this.currency = userDependentCurrency;
-        })
-        .catch(() => {});
-    },
-  },
-  mounted() {
-    this.detectCurrency();
   },
 };
 </script>
