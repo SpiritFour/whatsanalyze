@@ -1,7 +1,5 @@
-import jsPDF from "jspdf";
-import * as JSZip from "jszip";
-import logoBlack from "~/assets/whatsanalyze-logo-black.png";
-import myFont from "~/assets/pdf-fonts/Helvetica.js";
+import logoBlack from "/assets/whatsanalyze-logo-black.png";
+import myFont from "/assets/pdf-fonts/Helvetica.js";
 
 import {
   dateDiffs,
@@ -9,10 +7,10 @@ import {
   getDateString,
   lastDate,
 } from "~/functions/utils";
-import { Attachment, getAttachment } from "~/functions/attachments";
-import { Chat } from "~/functions/transformChatData";
+import { getAttachment } from "~/functions/attachments";
+import jsPDF from "jspdf";
 
-const callAddFont = function (this: any) {
+var callAddFont = function () {
   this.addFileToVFS("myFont.ttf", myFont.normal);
   this.addFont("myFont.ttf", "myFont", "normal");
 
@@ -21,14 +19,8 @@ const callAddFont = function (this: any) {
 };
 jsPDF.API.events.push(["addFonts", callAddFont]);
 
-export async function render(
-  chat: Chat,
-  attachments: JSZip,
-  ego: string,
-  isSample = false
-) {
+export async function render(chat, attachments, ego, isSample = false) {
   // Default export is a4 paper, portrait, using millimeters for units
-  // eslint-disable-next-line new-cap
   const doc = new jsPDF();
   // doc specifications
   const width = 210;
@@ -52,7 +44,7 @@ export async function render(
   let usedYSpace = 0;
 
   //    --- HELPER FUNCTIONS
-  const getImgSizes = function (imgUrl: string): Promise<number[]> {
+  const getImgSizes = function (imgUrl) {
     return new Promise((resolve, reject) => {
       const img = new Image();
       img.onload = () => {
@@ -63,20 +55,20 @@ export async function render(
     });
   };
 
-  const loadImage = async function (selector: string) {
-    const imgUrl = (document.querySelector(
-      selector + ">*>canvas"
-    ) as HTMLCanvasElement).toDataURL("image/png");
+  const loadImage = async function (selector) {
+    const imgUrl = document
+      .querySelector(selector + ">*>canvas")
+      .toDataURL("image/png");
     const sizes = await getImgSizes(imgUrl);
     return { img: imgUrl, width: sizes[0], height: sizes[1] };
   };
 
-  const writeRightSideText = function (text: string) {
+  const writeRightSideText = function (text) {
     const textWidth = doc.getTextWidth(text);
     doc.text(text, width - marginLeft - textWidth, usedYSpace);
   };
 
-  const addPageIfNeeded = function (height: number, r = 23, g = 166, b = 141) {
+  const addPageIfNeeded = function (height, r = 23, g = 166, b = 141) {
     if (usedYSpace + height > pageYSpace) {
       addColoredPage(false, r, g, b);
     }
@@ -84,9 +76,9 @@ export async function render(
 
   // calculates height for new message
   const calcMessageBodyHeight = function (
-    numLines: number,
-    attachmentHeight: number,
-    isSystem: boolean
+    numLines,
+    attachmentHeight,
+    isSystem
   ) {
     let messageY = marginTop + usedYSpace;
     const messageYSpace = numLines * lineHeight + authorHeight + timeHeight; // Height of Messages
@@ -105,22 +97,21 @@ export async function render(
       : messageMarginBottom + messageYSpace;
     return messageY;
   };
-  const hexToRgb = function (hex: string) {
-    if (hex.length !== 7) {
-      throw new Error("Only seven-digit hex colors are allowed.");
+  const hexToRgb = function (hex) {
+    if (hex.length != 7) {
+      console.log(hex);
+      throw "Only seven-digit hex colors are allowed.";
     }
     // remove #
     hex = hex.slice(1);
 
-    const aRgbHex = hex.match(/.{1,2}/g);
-    if (aRgbHex) {
-      return [
-        parseInt(aRgbHex[0], 16),
-        parseInt(aRgbHex[1], 16),
-        parseInt(aRgbHex[2], 16),
-      ];
-    }
-    return [0, 0, 0];
+    var aRgbHex = hex.match(/.{1,2}/g);
+    var aRgb = [
+      parseInt(aRgbHex[0], 16),
+      parseInt(aRgbHex[1], 16),
+      parseInt(aRgbHex[2], 16),
+    ];
+    return aRgb;
   };
   const addBranding = function (addText = true, x = 130, y = 15) {
     // logo
@@ -130,21 +121,20 @@ export async function render(
       doc.setFontSize(20);
       doc.setTextColor(0, 0, 0);
       doc.setFont("myFont", "bold");
-      doc.text("WhatsAnalyze", x, y + 10);
+      doc.text(x, y + 10, "WhatsAnalyze");
     }
   };
-  const addHeading = function (text: string, x: number, y: number) {
+  const addHeading = function (text, x, y) {
     doc.setTextColor(0, 0, 0);
     doc.setFontSize(50);
     doc.text(text, x, y);
     usedYSpace += 10;
   };
-  const drawAuthorBubble = function (author: string, x: number, y: number) {
+  const drawAuthorBubble = function (author, x, y) {
     doc.setFont("myFont", "bold");
     doc.setFontSize(20);
 
-    // @ts-ignore
-    let personHexColor: string = chat.personColorMap[author];
+    let personHexColor = chat.personColorMap[author];
     // background color should not be used
     if (backgroundGreenHex === personHexColor) {
       personHexColor = "#20C5FF";
@@ -152,9 +142,9 @@ export async function render(
     const personRgbColor = hexToRgb(personHexColor);
     doc.setFillColor(personRgbColor[0], personRgbColor[1], personRgbColor[2]);
 
-    const authorWidth = doc.getTextWidth(author);
+    const author_width = doc.getTextWidth(author);
 
-    doc.roundedRect(x - 3, y, authorWidth + 6, 10, 5, 5, "F");
+    doc.roundedRect(x - 3, y, author_width + 6, 10, 5, 5, "F");
     doc.text(author, x, y + 7);
   };
   const addColoredPage = function (showText = false, r = 23, g = 166, b = 141) {
@@ -165,7 +155,7 @@ export async function render(
     addBranding(showText);
     usedYSpace = marginTop;
   };
-  const writeDoubleSizeText = function (text1: string, text2: string) {
+  const writeDoubleSizeText = function (text1, text2) {
     doc.setFontSize(40);
     const text1Width = doc.getTextWidth(text1);
     doc.text(text1, marginLeft, usedYSpace);
@@ -173,11 +163,7 @@ export async function render(
     doc.text(text2, marginLeft + text1Width, usedYSpace);
     usedYSpace += 16;
   };
-  const getScale = function (
-    width: number,
-    height: number,
-    desiredWidth: number
-  ) {
+  const getScale = function (width, height, desiredWidth) {
     const yScale = (0.5 * pageYSpace) / height;
     const xScale = desiredWidth / width;
 
@@ -188,7 +174,7 @@ export async function render(
 
     return [rescaledWidth, rescaledHeight];
   };
-  const addGraphToPage = function (graph: any, name: string) {
+  const addGraphToPage = function (graph, name) {
     const [rescaledWidth, rescaledHeight] = getScale(
       graph.width,
       graph.height,
@@ -236,7 +222,7 @@ export async function render(
   usedYSpace += 10;
 
   doc.setFontSize(30);
-  writeRightSideText(getDateString(lastDateConst));
+  writeRightSideText(getDateString(lastDateConst), false);
   usedYSpace += 15;
 
   addPageIfNeeded(50);
@@ -277,34 +263,29 @@ export async function render(
   usedYSpace = 55;
   addHeading("Fun Facts", marginLeft, usedYSpace);
 
+  const funFacts = await chat.getFunFacts();
   const funFactHeight = 40;
-  await chat.getFunFacts()?.then((funFacts) =>
-    funFacts.forEach((fact) => {
-      if (fact.name in chat.personColorMap) {
-        if (usedYSpace + funFactHeight > pageYSpace) {
-          addColoredPage();
-        }
-
-        drawAuthorBubble(fact.name, marginLeft, usedYSpace);
-        doc.setFontSize(15);
-        doc.setFont("myFont", "normal");
-
-        const factStrings = [];
-        factStrings.push("Number of Words: " + fact.numberOfWords);
-        factStrings.push(
-          "Average Message Length: " + fact.averageMessageLength
-        );
-        factStrings.push("Unique words: " + fact.uniqueWords);
-        factStrings.push(
-          "Characters in longest Message: " + fact.longestMessage
-        );
-
-        doc.text(factStrings, marginLeft, usedYSpace + 15);
-
-        usedYSpace += funFactHeight;
+  funFacts.forEach((fact) => {
+    if (fact.name in chat.personColorMap) {
+      if (usedYSpace + funFactHeight > pageYSpace) {
+        addColoredPage();
       }
-    })
-  );
+
+      drawAuthorBubble(fact.name, marginLeft, usedYSpace);
+      doc.setFontSize(15);
+      doc.setFont("myFont", "normal");
+
+      let factStrings = [];
+      factStrings.push("Number of Words: " + fact.numberOfWords);
+      factStrings.push("Average Message Length: " + fact.averageMessageLength);
+      factStrings.push("Unique words: " + fact.uniqueWords);
+      factStrings.push("Characters in longest Message: " + fact.longestMessage);
+
+      doc.text(factStrings, marginLeft, usedYSpace + 15);
+
+      usedYSpace += funFactHeight;
+    }
+  });
 
   //   ----- Start of message pages
   addColoredPage();
@@ -318,7 +299,7 @@ export async function render(
 
   for (const idx in messages) {
     const data = messages[idx];
-    let isSystem = data.author === "System";
+    let isSystem = "System" === data.author;
     const isEgo = ego === data.author;
 
     if (!isSystem && !(data.author in chat.personColorMap)) {
@@ -326,14 +307,14 @@ export async function render(
     }
     const hasAttachment = !!data.attachment;
 
-    let attachment: Attachment;
+    let attachment = undefined;
     let attachmentSize = [0, 0];
 
     if (hasAttachment) {
       // load attachment
       attachment = await getAttachment(data.attachment.fileName, attachments);
       // skip if no image
-      if (!attachment.mimeTypeData.renderInPDF) continue;
+      if (!attachment.mimeType.startsWith("image/")) continue;
       attachmentSize = await getImgSizes(attachment.src);
       attachmentSize = getScale(
         attachmentSize[0],
@@ -346,11 +327,7 @@ export async function render(
     const splitMessage = doc.splitTextToSize(data.message, 120);
     const numLines = splitMessage.length;
     const messageHeight = lineHeight * numLines + attachmentSize[1];
-    const messageY = calcMessageBodyHeight(
-      numLines,
-      attachmentSize[1],
-      isSystem
-    ); // get start Y Coordinate of Message
+    let messageY = calcMessageBodyHeight(numLines, attachmentSize[1], isSystem); // get start Y Coordinate of Message
 
     const singleLineTextWidth = doc.getTextWidth(data.message);
     let messageWidth = hasAttachment
@@ -404,7 +381,6 @@ export async function render(
     // draw author
     if (!isSystem) {
       if (data.author in chat.personColorMap) {
-        // @ts-ignore
         const personRgbColor = hexToRgb(chat.personColorMap[data.author]);
         doc.setTextColor(
           personRgbColor[0],
@@ -415,17 +391,17 @@ export async function render(
       doc.setFontSize(fontSize / 1.3);
       doc.setFont("myFont", "bold");
       doc.text(
-        data.author,
         messageX + paddingMessage,
-        messageY + paddingMessage
+        messageY + paddingMessage,
+        data.author
       );
     }
 
     if (hasAttachment) {
-      const filetype = attachment!.mimeTypeData.mimeTypeEnding;
+      let filetype = attachment.mimeType.split("/").splice(-1)[0];
 
       doc.addImage(
-        attachment!.src,
+        attachment.src,
         filetype,
         messageX + paddingMessage,
         messageY + authorHeight,
@@ -445,11 +421,10 @@ export async function render(
       doc.setFontSize(fontSize);
       doc.setFont("myFont", "normal");
       doc.text(
-        splitMessage,
         isSystem ? messageX + 65 : messageX + paddingMessage,
         isSystem ? messageY + 2 * paddingMessage : messageY + authorHeight,
-        // .map((m) => m.replace(asciRegex, "")),
-        { align: isSystem ? "center" : "left" }
+        splitMessage, //.map((m) => m.replace(asciRegex, "")),
+        isSystem ? "center" : ""
       );
     }
 
@@ -459,9 +434,9 @@ export async function render(
       doc.setTextColor(200, 200, 200);
 
       doc.text(
-        dateString,
         messageX + messageWidth - dateWidth + paddingMessage,
-        messageY + authorHeight + messageHeight
+        messageY + authorHeight + messageHeight,
+        dateString
       );
     }
   }

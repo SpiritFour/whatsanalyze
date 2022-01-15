@@ -29,15 +29,10 @@
           startIdx + offset
         )"
         :key="idx"
-        no-gutters
         class="scroll-stop"
+        no-gutters
       >
         <v-sheet
-          elevation="1"
-          max-width="70%"
-          rounded="lg"
-          class="pa-2 ma-2"
-          color="rgb(38, 45, 49)"
           :class="{
             myMessage: selectedEgo
               ? selectedEgo === data.author
@@ -45,10 +40,15 @@
                 chat.messagesPerPerson[0].name === data.author,
             system: chat.personColorMap[data.author] === undefined,
           }"
+          class="pa-2 ma-2"
+          color="rgb(38, 45, 49)"
+          elevation="1"
+          max-width="70%"
+          rounded="lg"
         >
           <div
-            class="text-small font-weight-bold author text-left"
             :style="'color: ' + chat.personColorMap[data.author]"
+            class="text-small font-weight-bold author text-left"
           >
             {{ data.author }}
           </div>
@@ -97,7 +97,7 @@
 
 <script>
 import { getDateString } from "~/functions/utils";
-import { getAttachment } from "~/functions/attachments.ts";
+import { getAttachment } from "~/functions/attachments";
 import { GTAG_INTERACTION, gtagEvent } from "~/functions/gtagValues";
 
 export default {
@@ -107,18 +107,18 @@ export default {
     return {
       startIdx: 0,
       selectedEgo: "",
-      offset: 20,
+      offset: 20
     };
   },
   methods: {
     parseMessage(message) {
       const validUrl = new RegExp(
         "(https?:\\/\\/)?" + // protocol
-          "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
-          "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
-          "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
-          "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
-          "(\\#[-a-z\\d_]*)?",
+        "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
+        "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
+        "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+        "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+        "(\\#[-a-z\\d_]*)?",
         "i"
       );
       const words = message.split(" ");
@@ -153,8 +153,8 @@ export default {
       this.startIdx += this.offset;
       const container = this.$el.querySelector("#chat");
       container.scrollTop = 0;
-    },
-  },
+    }
+  }
 };
 </script>
 
