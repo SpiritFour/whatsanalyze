@@ -3,9 +3,8 @@ import colors from "vuetify/es5/util/colors";
 import { messages } from "./utils/translations.js";
 import Sentry from "@nuxtjs/sentry";
 
-// eslint-disable-next-line no-undef
 const local = process.env.NUXT_ENV_LOCAL !== undefined;
-const baseUrl = ( // eslint-disable-next-line no-undef
+const baseUrl = (
   process.env.BASE_URL || "https://www.whatsanalyze.com"
 ).replace("http:", "https:");
 
