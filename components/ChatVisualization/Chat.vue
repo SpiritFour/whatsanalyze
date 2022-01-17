@@ -107,18 +107,18 @@ export default {
     return {
       startIdx: 0,
       selectedEgo: "",
-      offset: 20
+      offset: 20,
     };
   },
   methods: {
     parseMessage(message) {
       const validUrl = new RegExp(
         "(https?:\\/\\/)?" + // protocol
-        "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
-        "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
-        "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
-        "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
-        "(\\#[-a-z\\d_]*)?",
+          "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
+          "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
+          "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+          "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+          "(\\#[-a-z\\d_]*)?",
         "i"
       );
       const words = message.split(" ");
@@ -153,8 +153,8 @@ export default {
       this.startIdx += this.offset;
       const container = this.$el.querySelector("#chat");
       container.scrollTop = 0;
-    }
-  }
+    },
+  },
 };
 </script>
 
