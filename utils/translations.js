@@ -1,5 +1,6 @@
 export const messages = {
   en: {
+    titleGoogle: "WhatsAnalyze - The WhatsApp Chat Analyzer",
     metaDescription:
       "Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ Free statistics and PDF chat export. Get Started now!",
     metaDescriptionWhatsExport:
@@ -178,6 +179,7 @@ export const messages = {
       "We are a group of <b>university friends</b>. As we recently all left WhatsApp and wanted to analyse how or chats evolved over the years. <br /> <br /> As <b>Computer Science students</b> are paranoid and think they can doeverything better, we naturally wanted to build a solution our self, where <b>no personal data</b> is shared or made public.",
   },
   de: {
+    titleGoogle: "WhatsAnalyze - The WhatsApp Chat Analyzer",
     metaDescription:
       "WhatsApp Analyzer ✓ Jetzt mit Gruppenchats ✓ Enthülle den Charakter deiner Freunde ✓ Kostenlose Statistiken und PDF chat export - Starten Sie jetzt!",
     metaDescriptionWhatsExport:
@@ -355,6 +357,7 @@ export const messages = {
       "Wir sind eine Gruppe von <b>Universitätsfreunden</b>. Da wir vor kurzem alle WhatsApp verlassen haben, wollten wir analysieren, wie sich unsere Chats über die Jahre entwickelt haben. <br /> <br />Da <b>Informatikstudenten</b> paranoid sind und denken, dass sie alles besser können, wollten wir natürlich selbst eine Lösung bauen, bei der <b>keine persönlichen Daten</b> geteilt oder öffentlich gemacht werden.",
   },
   es: {
+    titleGoogle: "WhatsAnalyze - El analizador de chat de WhatsApp",
     metaDescription:
       "Analizador de WhatsApp más popular ✓ Ahora ofrece chats de grupo ✓ Revela el carácter de tus amigos ✓ Estadísticas gratuitas y exportación de chats en PDF. Empieza ahora!",
     metaDescriptionWhatsExport:
