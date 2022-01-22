@@ -2,17 +2,17 @@
   <div>
     <div class="top-color">
       <v-container>
-        <v-row v-if="$vuetify.breakpoint.mdAndUp" no-gutters style="height: 70vh">
+        <v-row v-if="$vuetify.breakpoint.mdAndUp" no-gutters style="max-height: 70vh; justify-content: center;">
           <v-col
-            :md="isShowingChats ? 12 : 6"
-            :style="isShowingChats? 'height: fit-content' : ''"
+            :md="isShowingChats ? 9 : 6"
+            :style="isShowingChats ? 'height: fit-content' : ''"
             class="px-0 px-md-16 pb-8"
             cols="12"
           >
-            <v-row style="height: 35vh">
+            <v-row style="max-height: 45vh; justify-content: center;">
               <HeaderCta />
             </v-row>
-            <v-row style="height: 35vh; justify-content: center;">
+            <v-row style="max-height: 25vh; justify-content: center;">
               <FileHandler
                 :style="isShowingChats? 'max-width: 800px' : ''"
                 class="filehandler"
@@ -38,7 +38,6 @@
             />
           </v-col>
           <v-col v-if="!isShowingChats" cols="12" md="6">
-            <TrustLogos />
             <ChartsExampleGraphs :chat_="chat" />
           </v-col>
         </v-row>

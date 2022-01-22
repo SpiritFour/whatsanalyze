@@ -48,12 +48,12 @@
           </v-container>
         </v-carousel-item>
 
-        <v-carousel-item>
-          <ChartsLineChart
-            :chartdata="chat"
-            :options="linegraphHeaderChartOptions"
-          />
-        </v-carousel-item>
+        <!--        <v-carousel-item>-->
+        <!--          <ChartsLineChart-->
+        <!--            :chartdata="chat"-->
+        <!--            :options="linegraphHeaderChartOptions"-->
+        <!--          />-->
+        <!--        </v-carousel-item>-->
 
         <v-carousel-item>
           <ChartsDonughtChart

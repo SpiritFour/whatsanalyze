@@ -39,12 +39,10 @@
             v-if="!isDragging &&!wrongFile && !processing"
             class="text-body-1 text-md-h6 text-xl-h5 w-100 h-100"
           >
-            <v-icon size="2em"> mdi-file</v-icon>
-            <br />
-
-            <div v-if="isSuccess" v-html="$t('fileDone')"></div>
+            <v-icon v-if="!isSuccess" size="2em">mdi-file</v-icon>
 
             <div :class="{ 'text-caption': isSuccess }">
+              <div v-if="isSuccess" v-html="$t('fileDone')"></div>
               <span v-if="$vuetify.breakpoint.mdAndUp" v-html="$t('fileSuccess')">
               </span>
               <span

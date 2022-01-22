@@ -121,9 +121,7 @@ export const messages = {
       "          Please upload the <strong>.txt</strong> or<strong>.zip</strong> file\n" +
       "          you get when exporting your chat!",
     fileDrop: "Drop file now!",
-    fileDone:
-      "<strong>Done!</strong> <br />\n" +
-      "            Look at your analysis below.",
+    fileDone: "<strong>Done!</strong> Look at your analysis below.",
     fileSuccess: "<strong>Drag</strong> or <strong>select</strong>",
     fileSelect: '<strong style="text-decoration: underline">Select </strong>',
     fileAnother: "another file to analyze it.",
@@ -294,8 +292,7 @@ export const messages = {
       ", die Sie beim Exportieren Ihres Chats erhalten!",
     fileDrop: "Datei jetzt ablegen!",
     fileDone:
-      "<strong>Done!</strong> <br />\n" +
-      "            Schauen Sie sich Ihre Analyse unten an.",
+      "<strong>Fertig!</strong> Schauen Sie sich Ihre Analyse unten an.",
     fileSuccess: "<strong>Ziehen</strong> oder <strong>Auswählen</strong>",
     fileSelect: '<strong style="text-decoration: underline">Auswahl</strong>',
     fileAnother: "eine andere Datei, um sie zu analysieren.",
