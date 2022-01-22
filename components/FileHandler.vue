@@ -26,7 +26,7 @@
             @change="requestUploadFile"
           />
           <!-- Wrong File -->
-          <div v-show="wrongFile" class="text-body-1 text-md-h5 w-100">
+          <div v-show="wrongFile" class="text-body-1 text-md-h6 text-xl-h5 w-100">
             {{ $t("fileWrong") }}
           </div>
           <!-- is Dragging -->
@@ -37,7 +37,7 @@
           <!-- Standard State -->
           <div
             v-if="!isDragging &&!wrongFile && !processing"
-            class="text-body-1 text-md-h5 w-100 h-100"
+            class="text-body-1 text-md-h6 text-xl-h5 w-100 h-100"
           >
             <v-icon size="2em"> mdi-file</v-icon>
             <br />
@@ -59,7 +59,7 @@
 
           </div>
           <br />
-          <div v-show="processing" class="text-body-1 text-md-h5 w-100">
+          <div v-show="processing" class="text-body-1 text-md-h6 text-xl-h5 w-100">
             <img height="40" src="@/assets/loader.svg" width="40" />
             <br />
             <span v-html="$t('fileProcessing')" />
@@ -262,7 +262,7 @@ export default {
   display: flex;
   align-items: center;
   justify-items: center;
-  min-height: 150px;
+  //min-height: 150px;
   // outline
   border: 2px dashed rgba(0, 0, 0, 0.3);
   border-radius: 10px;

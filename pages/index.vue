@@ -2,33 +2,39 @@
   <div>
     <div class="top-color">
       <v-container>
-        <v-row v-if="$vuetify.breakpoint.mdAndUp" no-gutters>
+        <v-row v-if="$vuetify.breakpoint.mdAndUp" no-gutters style="height: 70vh">
           <v-col
-            cols="12"
             :md="isShowingChats ? 12 : 6"
+            :style="isShowingChats? 'height: fit-content' : ''"
             class="px-0 px-md-16 pb-8"
+            cols="12"
           >
-            <HeaderCta />
-            <FileHandler
-              class="filehandler"
-              @new_messages="newMessages"
-              @hide_explanation="isShowingChats = $event"
-            />
+            <v-row style="height: 35vh">
+              <HeaderCta />
+            </v-row>
+            <v-row style="height: 35vh; justify-content: center;">
+              <FileHandler
+                :style="isShowingChats? 'max-width: 800px' : ''"
+                class="filehandler"
+                style="align-self:end; width: 100%"
+                @hide_explanation="isShowingChats = $event"
+                @new_messages="newMessages"
+              />
+            </v-row>
           </v-col>
           <v-col v-if="!isShowingChats" cols="12" md="6">
             <ChartsExampleGraphs :chat_="chat" />
-            <TrustLogos />
           </v-col>
         </v-row>
         <v-row v-if="$vuetify.breakpoint.smAndDown" no-gutters>
-          <v-col cols="12" :md="isShowingChats ? 12 : 6" class="px-0 pb-1">
+          <v-col :md="isShowingChats ? 12 : 6" class="px-0 pb-1" cols="12">
             <HeaderCta />
           </v-col>
           <v-col class="pt-0">
             <FileHandler
               class="filehandler"
-              @new_messages="newMessages"
               @hide_explanation="isShowingChats = $event"
+              @new_messages="newMessages"
             />
           </v-col>
           <v-col v-if="!isShowingChats" cols="12" md="6">
@@ -38,41 +44,44 @@
         </v-row>
       </v-container>
     </div>
-
+    <TrustLogos v-if="!isShowingChats" />
     <v-container v-show="!isShowingChats" class="pt-16">
       <ExportExplainer />
-      <Cta showImage />
+      <Cta show-image />
       <Faq />
       <Testimonials />
       <About />
       <PdfExample />
       <Cta
-        title="getFreePDFPreview"
-        buttonTxt="generateYourChatPDF"
+        button-txt="generateYourChatPDF"
         text="getChatBeautiful"
+        title="getFreePDFPreview"
       />
     </v-container>
 
     <v-container v-if="isShowingChats">
-      <ChartsResults ref="results" :chat="chat" :attachments="attachments" />
+      <ChartsResults ref="results" :attachments="attachments" :chat="chat" />
     </v-container>
   </div>
 </template>
 
 <script>
 import { Chat } from "~/functions/transformChatData";
-import {
-  GTAG_INTERACTION,
-  GTAG_LEAD,
-  GTAG_NUM_PERSONS,
-  gtagEvent,
-} from "~/functions/gtagValues";
+import { GTAG_INTERACTION, GTAG_LEAD, GTAG_NUM_PERSONS, gtagEvent } from "~/functions/gtagValues";
 
 export default {
   async asyncData({ $content }) {
     const page = await $content("home").fetch();
     return {
-      page,
+      page
+    };
+  },
+  data() {
+    return {
+      isShowingChats: false,
+      chat: undefined,
+      attachments: undefined,
+      loading: false
     };
   },
   head() {
@@ -83,44 +92,44 @@ export default {
           hid: "og:title",
           name: "og:title",
           property: "og:title",
-          content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+          content: "WhatsAnalyze - The WhatsApp Chat Analyzer"
         },
         {
           hid: "og:site_name",
           name: "og:site_name",
           property: "og:site_name",
-          content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+          content: "WhatsAnalyze - The WhatsApp Chat Analyzer"
         },
         {
           hid: "description",
           name: "description",
           property: "description",
           content:
-            "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
+            "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!"
         },
         {
           hid: "og:description",
           name: "og:description",
           property: "og:description",
           content:
-            "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
+            "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!"
         },
         {
           hid: "og:url",
           name: "og:url",
           property: "og:url",
-          content: "whatsanalyze.com",
-        },
-      ],
+          content: "whatsanalyze.com"
+        }
+      ]
     };
   },
-  data() {
-    return {
-      isShowingChats: false,
-      chat: undefined,
-      attachments: undefined,
-      loading: false,
-    };
+  created() {
+    // eslint-disable-next-line no-undef
+    if (process.client) {
+      Object.keys(this.$route.query).forEach((key) => {
+        gtagEvent(key, GTAG_LEAD);
+      });
+    }
   },
   methods: {
     Chat,
@@ -143,16 +152,8 @@ export default {
     },
     rando() {
       throw Error("random errro");
-    },
-  },
-  created() {
-    // eslint-disable-next-line no-undef
-    if (process.client) {
-      Object.keys(this.$route.query).forEach((key) => {
-        gtagEvent(key, GTAG_LEAD);
-      });
     }
-  },
+  }
 };
 </script>
 
@@ -195,6 +196,7 @@ export default {
   margin-bottom: 40px;
   margin-top: 20px;
 }
+
 .explainer-list p {
   font-size: 1.2em;
 }

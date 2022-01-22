@@ -1,19 +1,19 @@
 <template>
   <div>
-    <div class="text-h4 font-weight-bold text-lg-h2">
+    <div class="text-h4 font-weight-bold text-lg-h4 text-xl-h2">
       {{ $t(titelH1) }}
     </div>
     <br />
-    <div class="text-h6 text-lg-h5">
+    <div class="text-h6 text-lg-body-1 text-xl-h5">
       {{ $t(titelH2) }}
     </div>
     <br />
-    <div class="py-1 px-3 text-lg-h6 alert grey-highlight">
+    <div class="py-1 px-3 text-lg-body-2 text-xl-h5 alert grey-highlight">
       <v-icon color="black" style="vertical-align: sub"> mdi-security</v-icon>
       <span v-html="$t('infoSec')" />
     </div>
     <br />
-    <div class="py-1 px-3 text-lg-h6 alert grey-highlight">
+    <div class="py-1 px-3 text-lg-body-2 text-xl-h5 alert grey-highlight">
       <img
         alt="github logo"
         height="22"
