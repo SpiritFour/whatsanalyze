@@ -15,7 +15,7 @@
       to="/"
       class="pt-0 pb-15"
       title="analyzeYourOwnWhatsapp"
-      buttonTxt="analyzeMyChat"
+      button-txt="analyzeMyChat"
       text="interestedAbout"
     />
   </v-container>
@@ -23,7 +23,46 @@
 
 <script>
 export default {
-  name: "how-to-export-your-whatsapp-chat",
+  name: "HowToExportYourWhatsappChat",
+  title: "WhatsAnalyze - How to export WhatsApp chat",
+  meta: [
+    {
+      hid: "og:title",
+      name: "og:title",
+      property: "og:title",
+      content: "WhatsAnalyze - How to export WhatsApp chat",
+    },
+    {
+      hid: "og:site_name",
+      name: "og:site_name",
+      property: "og:site_name",
+      content: "WhatsAnalyze - How to export WhatsApp chat",
+    },
+    {
+      hid: "description",
+      name: "description",
+      property: "description",
+      content: "metaDescriptionWhatsExport",
+    },
+    {
+      hid: "og:description",
+      name: "og:description",
+      property: "og:description",
+      content: "metaDescriptionWhatsExport",
+    },
+    {
+      hid: "og:url",
+      name: "og:url",
+      property: "og:url",
+      content: "whatsanalyze.com/how-to-export-your-whatsapp-chat",
+    },
+  ],
+  async asyncData({ $content }) {
+    const page = await $content("how-to-export-your-whatsapp-chat").fetch();
+    return {
+      page,
+    };
+  },
   data() {
     return {
       headers: [
@@ -132,12 +171,6 @@ export default {
           pdfex: "✅",
         },
       ],
-    };
-  },
-  async asyncData({ $content }) {
-    const page = await $content("how-to-export-your-whatsapp-chat").fetch();
-    return {
-      page,
     };
   },
   head: {

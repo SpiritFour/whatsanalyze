@@ -87,7 +87,7 @@ export default {
           // eslint-disable-next-line no-undef
           image: require("~/assets/img/us/Adrian_WA.jpg"),
           name: "Adrian Thiesen",
-          description: ["Business Administration BSc", "The Allrounder"],
+          description: ["Information Systems BSc", "The Product Enthusiast"],
         },
         {
           // eslint-disable-next-line no-undef

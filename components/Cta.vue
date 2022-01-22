@@ -13,11 +13,11 @@
     <br />
     <v-btn
       :to="to ? to : null"
-      @click="clickHandler"
       color="#07bc4c"
       style="color: #ffffff"
       class="mt-5 text-h6"
       elevation="10"
+      @click="clickHandler"
     >
       {{ $t(buttonTxt) }}
     </v-btn>
@@ -45,7 +45,7 @@ export default {
     },
     title: {
       default: function () {
-        return "analyzeYourChat";
+        return "analyzeYourChatTitle";
       },
       type: String,
     },

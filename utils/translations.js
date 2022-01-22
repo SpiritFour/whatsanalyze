@@ -1,5 +1,11 @@
 export const messages = {
   en: {
+    metaDescription:
+      "Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ Free statistics and PDF chat export. Get Started now!",
+    metaDescriptionWhatsExport:
+      "Most popular WhatsApp analyzer ✓ Now with PDF chat export ✓ Reveal your friends character ✓ Free statistics. Get Started now!",
+    metaDescriptionSignal:
+      "Switch from WhatsApp to Signal ✓ Transfer your Group Chats ✓ Create Backups ✓ Free statistics and PDF chat export. Get Started now!",
     known: "Known from:",
     backupWhatsApp: "Backup your WhatsApp Data",
     exportAsPDF: "Save your chat as PDF",
@@ -13,12 +19,13 @@ export const messages = {
     analyzeYourOwnWhatsapp: "Analyze your own WhatsApp data",
     analyzeInSeconds: "Analyze your WhatsApp Chat in Seconds",
     revealInsights:
-      "Reveal insights & get statistics, while all data stays on your device.",
+      "Get insights into <strong>your chats</strong> - Now with more interesting graphs, <strong>free statistics</strong> and full <strong>PDF export</strong>",
     interestedAbout:
       "Interested about your own chat data? Take deep dive in your data!",
-    analyzeYourChat: "Analyze your chat",
+    analyzeYourChat: "Get started",
+    analyzeYourChatTitle: "Chat Example - Now also Supporting group chats",
     analyzeYourChatLong:
-      "Analyze your chat, reveal unknown facts and surprise your friends with insights into your communication.",
+      "Analyze your chat, reveal unknown facts and surprise your friends with insights into year long conversation.",
     didWeMake: "Did we make you go 🥳?",
     buyUsCoffee: "Buy us a ☕️ and get your results for free!!!",
     getResults:
@@ -49,7 +56,7 @@ export const messages = {
       "<span>Choose Without Media or <b>Include Media</b> if you want to include your images and other files in the export.</span>",
     tabItemAndroid6:
       "<span>Now in the sharing view tap on <b>Whatsanalyze</b> or alternatively if you skipped step 1 send it to your self via <b>E-Mail</b> or save it to <b>Google Drive</b>.</span>",
-    selectFile: "Select file via box above.",
+    selectFile: "Export completed, now select your chat file",
     messages: "Messages",
     totalWords: "Total words:",
     mostUsedEmojie: "Most used emojis:",
@@ -171,11 +178,15 @@ export const messages = {
       "We are a group of <b>university friends</b>. As we recently all left WhatsApp and wanted to analyse how or chats evolved over the years. <br /> <br /> As <b>Computer Science students</b> are paranoid and think they can doeverything better, we naturally wanted to build a solution our self, where <b>no personal data</b> is shared or made public.",
   },
   de: {
-    known: "Bekannt aus:",
-
+    metaDescription:
+      "WhatsApp Analyzer ✓ Jetzt mit Gruppenchats ✓ Enthülle den Charakter deiner Freunde ✓ Kostenlose Statistiken und PDF chat export - Starten Sie jetzt!",
+    metaDescriptionWhatsExport:
+      "Beliebtester WhatsApp Analyzer ✓ Jetzt mit PDF chat export ✓ Enthülle den Charakter deiner Freunde ✓ Kostenlose Statistiken. Get Started now!",
+    metaDescriptionSignal:
+      "Wechsel von WhatsApp zu Signal ✓ Übertrage deine Gruppenchats ✓ Erstelle Backups",
+    nown: "Bekannt aus:",
     ctaBullets:
       "✓ Gruppen Chats ✓ Erstelle ein PDF aus deinem Chat ✓ Privat und Sicher",
-
     backupWhatsApp: "Backup deine WhatsApp Daten",
     exportAsPDF: "Speichere deinen Chat als PDF",
     convertToPDF: "Konvertiere deinen exportierten WhatsApp Chat zu PDF",
@@ -183,14 +194,16 @@ export const messages = {
     generateYourChatPDF: "Erzeugen Sie Ihr Chat-PDF",
     getChatBeautiful:
       "Erhalten Sie Ihren Chat als schönes PDF mit aufschlussreichen Einblicken und interessanten Fakten. Meistverwendete Smileys, Share of Speech und vieles mehr ...",
-    analyzeMyChat: "Analysieren Sie meinen Chat",
+    analyzeMyChat: "Chat jetzt Analysieren",
     analyzeYourOwnWhatsapp: "Analysieren Sie Ihre eigenen WhatsApp-Daten",
-    analyzeInSeconds: "Analysieren Sie Ihren WhatsApp-Chat in Sekunden",
+    analyzeInSeconds: "Analysiere dein WhatsApp Chat in Sekunden",
     revealInsights:
-      "Enthüllen Sie Einblicke und erhalten Sie Statistiken, während alle Daten auf Ihrem Gerät bleiben",
+      "Erhalte Einblicke in <strong>deine Chats</strong> - Jetzt mit noch mehr Graphen, <strong>gratis Statistiken</strong> und kompleten <strong>PDF export</strong>",
     interestedAbout:
       "Interessiert an Ihren eigenen Chat-Daten? Take deep dive in your data!",
-    analyzeYourChat: "Analysieren Sie Ihren Chat!",
+    analyzeYourChat: "Jetzt starten",
+    analyzeYourChatTitle:
+      "Chat Beispiel Analyse - Jetzt auch für Gruppen Chats",
     analyzeYourChatLong:
       "Analysieren Sie Ihren Chat, decken Sie unbekannte Fakten auf und überraschen Sie Ihre Freunde mit Einblicken in Ihre Kommunikation.",
     didWeMake: "Haben wir Sie dazu gebracht 🥳?",

@@ -5,7 +5,7 @@
     </div>
     <br />
     <div class="text-h6 text-lg-h5">
-      {{ $t(titelH2) }}
+      <span v-html="$t(titelH2)"> </span>
     </div>
     <br />
     <div class="py-1 px-3 text-lg-h6 alert privacy">

@@ -41,14 +41,14 @@
 
     <v-container v-show="!isShowingChats" class="pt-16">
       <ExportExplainer />
-      <Cta showImage />
+      <Cta show-image />
       <Faq />
       <Testimonials />
       <About />
       <PdfExample />
       <Cta
         title="getFreePDFPreview"
-        buttonTxt="generateYourChatPDF"
+        button-txt="generateYourChatPDF"
         text="getChatBeautiful"
       />
     </v-container>
@@ -75,6 +75,14 @@ export default {
       page,
     };
   },
+  data() {
+    return {
+      isShowingChats: false,
+      chat: undefined,
+      attachments: undefined,
+      loading: false,
+    };
+  },
   head() {
     return {
       title: "WhatsAnalyze - The WhatsApp Chat Analyzer",
@@ -95,15 +103,13 @@ export default {
           hid: "description",
           name: "description",
           property: "description",
-          content:
-            "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
+          content: "metaDescription",
         },
         {
           hid: "og:description",
           name: "og:description",
           property: "og:description",
-          content:
-            "America's Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ No Chat Data is sent to a Server. Get Started now!",
+          content: "metaDescription",
         },
         {
           hid: "og:url",
@@ -114,13 +120,13 @@ export default {
       ],
     };
   },
-  data() {
-    return {
-      isShowingChats: false,
-      chat: undefined,
-      attachments: undefined,
-      loading: false,
-    };
+  created() {
+    // eslint-disable-next-line no-undef
+    if (process.client) {
+      Object.keys(this.$route.query).forEach((key) => {
+        gtagEvent(key, GTAG_LEAD);
+      });
+    }
   },
   methods: {
     Chat,
@@ -144,14 +150,6 @@ export default {
     rando() {
       throw Error("random errro");
     },
-  },
-  created() {
-    // eslint-disable-next-line no-undef
-    if (process.client) {
-      Object.keys(this.$route.query).forEach((key) => {
-        gtagEvent(key, GTAG_LEAD);
-      });
-    }
   },
 };
 </script>
