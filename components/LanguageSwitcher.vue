@@ -28,6 +28,12 @@ export default {
           flag: "🇩🇪",
           iso: "de-DE",
         },
+        {
+          code: "es",
+          name: "Español",
+          flag: "🇪🇸",
+          iso: "es-ES",
+        },
       ],
     };
   },
