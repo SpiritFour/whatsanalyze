@@ -1,6 +1,7 @@
 <template>
   <div v-if="chat">
     <v-col v-if="$vuetify.breakpoint.smAndUp">
+      <div class="text-h4 text-center pt-0" style="margin-top: -1em">Beispiel Ergebnisse</div>
       <v-row>
         <v-col cols="12" sm="6">
           <ChartsBarChart
@@ -8,17 +9,19 @@
             :options="barchartHeaderChartOptions"
             data-grouping="hourly"
           />
+          <div class="mx-3 mt-3 text-body-1">John und Jane schreiben wohl am meisten um 4 Uhr Nachmittags...</div>
         </v-col>
         <v-col cols="12" sm="6">
           <ChartsDonughtChart
             :chartdata="chat"
             :options="donoughtHeaderChartOptions"
           />
+          <div class="mx-3 mt-3 text-body-1">...und John schreibt insgesamt etwas mehr als Jane.</div>
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="12">
-          <ChartsWordCloud :chartdata="chat" />
+          <v-img src="example-fun-facts.png"></v-img>
         </v-col>
       </v-row>
     </v-col>
@@ -139,12 +142,12 @@ export default {
         }
       },
       donoughtHeaderChartOptions: {
-        tooltips: { enabled: false },
+        tooltips: { enabled: true },
         hover: { mode: null },
         responsive: true,
         maintainAspectRatio: true,
         legend: {
-          position: "top",
+          position: "bottom",
           labels: {
             fontStyle: "bold",
             fontColor: "rgb(51,51,51)",
@@ -155,7 +158,7 @@ export default {
           yAxes: [
             {
               scaleLabel: {
-                display: true,
+                display: false,
                 labelString: this.$t("messages"),
                 fontColor: "rgb(51,51,51)",
                 fontStyle: "bold",
@@ -202,12 +205,12 @@ export default {
         }
       },
       barchartHeaderChartOptions: {
-        tooltips: { enabled: false },
+        tooltips: { enabled: true },
         hover: { mode: null },
         responsive: true,
         maintainAspectRatio: true,
         legend: {
-          position: "top",
+          position: "bottom",
           labels: {
             fontStyle: "bold",
             fontColor: "rgb(51,51,51)",
@@ -228,7 +231,7 @@ export default {
           yAxes: [
             {
               scaleLabel: {
-                display: true,
+                display: false,
                 labelString: this.$t("messages"),
                 fontStyle: "bold",
                 fontColor: "rgb(51,51,51)",

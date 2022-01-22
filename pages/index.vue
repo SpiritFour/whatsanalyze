@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="top-color">
+    <div :style="$vuetify.breakpoint.mdAndUp && !isShowingChats ? 'margin-bottom: 10vh':''" class="top-color">
       <v-container>
-        <v-row v-if="$vuetify.breakpoint.mdAndUp" no-gutters style="max-height: 70vh; justify-content: center;">
+        <v-row v-if="$vuetify.breakpoint.mdAndUp" no-gutters style="height: 70vh; justify-content: center;">
           <v-col
             :md="isShowingChats ? 9 : 6"
             :style="isShowingChats ? 'height: fit-content' : ''"
