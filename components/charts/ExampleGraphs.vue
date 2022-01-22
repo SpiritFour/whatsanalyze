@@ -6,7 +6,7 @@
           <ChartsBarChart
             :chartdata="chat"
             :options="barchartHeaderChartOptions"
-            dataGrouping="hourly"
+            data-grouping="hourly"
           />
         </v-col>
         <v-col cols="12" sm="6">
@@ -27,14 +27,14 @@
         :continuous="true"
         :cycle="false"
         :show-arrows="true"
-        hide-delimiter-background
         height="auto"
+        hide-delimiter-background
       >
         <v-carousel-item>
           <ChartsBarChart
             :chartdata="chat"
             :options="barchartHeaderChartOptions"
-            dataGrouping="hourly"
+            data-grouping="hourly"
           />
         </v-carousel-item>
 
@@ -91,8 +91,8 @@ export default {
           labels: {
             fontStyle: "bold",
             fontColor: "rgb(51,51,51)",
-            fontSize: 10,
-          },
+            fontSize: 10
+          }
         },
         scales: {
           xAxes: [
@@ -101,14 +101,14 @@ export default {
               time: {},
               gridLines: {
                 display: false,
-                color: "#FFFFFF",
+                color: "#FFFFFF"
               },
               ticks: {
                 fontColor: "rgb(51,51,51)",
                 fontStyle: "bold",
-                fontSize: 11,
-              },
-            },
+                fontSize: 11
+              }
+            }
           ],
           yAxes: [
             {
@@ -117,26 +117,26 @@ export default {
                 labelString: this.$t("messages"),
                 fontColor: "rgb(51,51,51)",
                 fontStyle: "bold",
-                fontSize: 11,
+                fontSize: 11
               },
               ticks: {
                 precision: 0,
                 stepSize: 1,
                 beginAtZero: true,
-                display: false,
+                display: false
               },
               gridLines: {
                 display: false,
-                color: "#FFFFFF",
-              },
-            },
-          ],
+                color: "#FFFFFF"
+              }
+            }
+          ]
         },
         elements: {
           line: {
-            tension: 0,
-          },
-        },
+            tension: 0
+          }
+        }
       },
       donoughtHeaderChartOptions: {
         tooltips: { enabled: false },
@@ -148,8 +148,8 @@ export default {
           labels: {
             fontStyle: "bold",
             fontColor: "rgb(51,51,51)",
-            fontSize: 10,
-          },
+            fontSize: 10
+          }
         },
         scales: {
           yAxes: [
@@ -159,17 +159,17 @@ export default {
                 labelString: this.$t("messages"),
                 fontColor: "rgb(51,51,51)",
                 fontStyle: "bold",
-                fontSize: 11,
+                fontSize: 11
               },
               ticks: {
-                display: false,
+                display: false
               },
               gridLines: {
-                display: false,
-              },
-            },
-          ],
-        },
+                display: false
+              }
+            }
+          ]
+        }
       },
       radarchartHeaderChartOptions: {
         tooltips: { enabled: false },
@@ -179,27 +179,27 @@ export default {
         scale: {
           angleLines: {
             // display: false,
-            color: "rgb(51,51,51)",
+            color: "rgb(51,51,51)"
           },
           ticks: {
-            display: false,
+            display: false
           },
           gridLines: {
-            color: "rgb(51,51,51)",
+            color: "rgb(51,51,51)"
           },
 
           pointLabels: {
-            fontColor: "rgb(51,51,51)",
-          },
+            fontColor: "rgb(51,51,51)"
+          }
         },
         legend: {
           position: "top",
           labels: {
             fontStyle: "bold",
             fontColor: "rgb(51,51,51)",
-            fontSize: 10,
-          },
-        },
+            fontSize: 10
+          }
+        }
       },
       barchartHeaderChartOptions: {
         tooltips: { enabled: false },
@@ -211,19 +211,19 @@ export default {
           labels: {
             fontStyle: "bold",
             fontColor: "rgb(51,51,51)",
-            fontSize: 10,
-          },
+            fontSize: 10
+          }
         },
         scales: {
           xAxes: [
             {
               gridLines: {
-                display: false,
+                display: false
               },
               ticks: {
-                fontColor: "rgb(51,51,51)",
-              },
-            },
+                fontColor: "rgb(51,51,51)"
+              }
+            }
           ],
           yAxes: [
             {
@@ -232,26 +232,26 @@ export default {
                 labelString: this.$t("messages"),
                 fontStyle: "bold",
                 fontColor: "rgb(51,51,51)",
-                fontSize: 10,
+                fontSize: 10
               },
               gridLines: {
-                display: false,
+                display: false
               },
               ticks: {
                 beginAtZero: true,
                 precision: 0,
-                display: false,
-              },
-            },
-          ],
-        },
-      },
+                display: false
+              }
+            }
+          ]
+        }
+      }
     };
   },
   created() {
     // eslint-disable-next-line no-undef
     if (process.client) {
-      fetch("/example-results.txt")
+      fetch("/example-results.json")
         .then((response) => response.text())
         .then((messages) => {
           var instance = new Chat();
@@ -263,12 +263,12 @@ export default {
             _hourlyData: Promise.resolve(serializedObject[3]),
             _dailyData: Promise.resolve(serializedObject[4]),
             _weeklyData: Promise.resolve(serializedObject[5]),
-            _shareOfSpeech: Promise.resolve(serializedObject[6]),
+            _shareOfSpeech: Promise.resolve(serializedObject[6])
           });
           this.chat = instance;
         });
     }
-  },
+  }
 };
 </script>
 <style lang="scss">
@@ -277,6 +277,7 @@ export default {
   width: 7px !important;
   height: 7px !important;
 }
+
 .col {
   padding: 1em !important;
 }
