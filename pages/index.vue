@@ -85,7 +85,7 @@ export default {
   },
   head() {
     return {
-      title: "titleGoogle",
+      title: "WhatsAnalyze - The WhatsApp Chat Analyzer",
       meta: [
         {
           hid: "og:title",
