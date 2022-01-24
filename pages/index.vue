@@ -1,8 +1,9 @@
 <template>
   <div>
-    <div :style="$vuetify.breakpoint.mdAndUp && !isShowingChats ? 'margin-bottom: 10vh':''" class="top-color">
+    <div ref="aboveTheFold" class="top-color" style="overflow-y: hidden">
       <v-container>
-        <v-row v-if="$vuetify.breakpoint.mdAndUp" no-gutters style="height: 70vh; justify-content: center;">
+        <v-row v-if="$vuetify.breakpoint.mdAndUp" no-gutters
+               style="height: 70vh; min-height:504px; justify-content: center;">
           <v-col
             :md="isShowingChats ? 9 : 6"
             :style="isShowingChats ? 'height: fit-content' : ''"
@@ -43,6 +44,11 @@
         </v-row>
       </v-container>
     </div>
+    <v-row v-if="$vuetify.breakpoint.mdAndUp" no-gutters style="height: 10vh; justify-content: center;">
+      <v-icon class="py-2 arrow-down" color="rgba(0,0,0,0.8)" size="50">
+        mdi-chevron-down
+      </v-icon>
+    </v-row>
     <TrustLogos v-if="!isShowingChats" />
     <v-container v-show="!isShowingChats" class="pt-16">
       <ExportExplainer />
@@ -67,6 +73,8 @@
 <script>
 import { Chat } from "~/functions/transformChatData";
 import { GTAG_INTERACTION, GTAG_LEAD, GTAG_NUM_PERSONS, gtagEvent } from "~/functions/gtagValues";
+import debounce from "lodash/debounce";
+
 
 export default {
   async asyncData({ $content }) {
@@ -130,6 +138,14 @@ export default {
       });
     }
   },
+  mounted() {
+    this.handleDebouncedScroll = debounce(this.handleScroll, 0);
+    window.addEventListener("scroll", this.handleDebouncedScroll);
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleDebouncedScroll);
+  },
   methods: {
     Chat,
     newMessages(chatObject) {
@@ -151,6 +167,10 @@ export default {
     },
     rando() {
       throw Error("random errro");
+    },
+    handleScroll() {
+      // Any code to be executed when the window is scrolled
+      this.$refs.aboveTheFold.scrollTop = window.scrollY;
     }
   }
 };
@@ -225,5 +245,27 @@ export default {
     width: 100%;
     padding: 3em;
   }
+}
+
+.arrow-down {
+  animation-name: attention;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes attention {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 </style>
