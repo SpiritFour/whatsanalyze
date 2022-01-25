@@ -1,23 +1,27 @@
 <template>
   <div v-if="chat">
     <v-col v-if="$vuetify.breakpoint.smAndUp">
-      <div class="text-h4 text-center pt-0" style="margin-top: -1em">Beispiel Ergebnisse</div>
-      <v-row>
-        <v-col cols="12" sm="6">
+      <v-row class="mt-10">
+        <v-spacer></v-spacer>
+        <v-col cols="12" sm="6" xl="5">
           <ChartsBarChart
             :chartdata="chat"
             :options="barchartHeaderChartOptions"
             data-grouping="hourly"
           />
-          <div class="mx-3 mt-3 text-body-1">John und Jane schreiben wohl am meisten um 4 Uhr Nachmittags...</div>
+          <div class="mx-3 mt-3 text-body-1 text-xl-h6 font-weight-bold">{{ $t("exampleGraphSubtitle1") }}
+          </div>
         </v-col>
-        <v-col cols="12" sm="6">
+        <v-spacer></v-spacer>
+        <v-col cols="12" sm="6" xl="5">
           <ChartsDonughtChart
             :chartdata="chat"
             :options="donoughtHeaderChartOptions"
           />
-          <div class="mx-3 mt-3 text-body-1">...und John schreibt insgesamt etwas mehr als Jane.</div>
+          <div class="mx-3 mt-3 text-body-1 text-xl-h6 font-weight-bold">{{ $t("exampleGraphSubtitle2") }}
+          </div>
         </v-col>
+        <v-spacer></v-spacer>
       </v-row>
       <v-row>
         <v-col cols="12">

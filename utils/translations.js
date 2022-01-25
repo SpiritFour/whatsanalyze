@@ -167,6 +167,10 @@ export const messages = {
     about: "About us",
     aboutPoints:
       "We are a group of <b>university friends</b>. As we recently all left WhatsApp and wanted to analyse how or chats evolved over the years. <br /> <br /> As <b>Computer Science students</b> are paranoid and think they can doeverything better, we naturally wanted to build a solution our self, where <b>no personal data</b> is shared or made public.",
+    exampleGraphSubtitle1:
+      "John and Jane probably write the most at 4 A.M.  Afternoon...",
+    exampleGraphSubtitle2:
+      "...and John writes a little more overall than Jane.",
   },
   de: {
     known: "Bekannt aus:",
@@ -337,5 +341,9 @@ export const messages = {
     about: "Über die Macher",
     aboutPoints:
       "Wir sind eine Gruppe von <b>Universitätsfreunden</b>. Da wir vor kurzem alle WhatsApp verlassen haben, wollten wir analysieren, wie sich unsere Chats über die Jahre entwickelt haben. <br /> <br />Da <b>Informatikstudenten</b> paranoid sind und denken, dass sie alles besser können, wollten wir natürlich selbst eine Lösung bauen, bei der <b>keine persönlichen Daten</b> geteilt oder öffentlich gemacht werden.",
+    exampleGraphSubtitle1:
+      "John und Jane schreiben wohl am meisten um 4 Uhr Nachmittags...",
+    exampleGraphSubtitle2:
+      "...und John schreibt insgesamt etwas mehr als Jane.",
   },
 };
