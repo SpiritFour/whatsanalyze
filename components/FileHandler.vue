@@ -5,8 +5,6 @@
     @dragleave.prevent="dragLeave"
     @drop.prevent="drop($event)"
   >
-    <ArrowDown />
-
     <div class="drop-container">
       <label for="uploadmytextfile" style="cursor: pointer">
         <div

@@ -2,18 +2,26 @@
   <div>
     <div ref="aboveTheFold" class="top-color" style="overflow-y: hidden">
       <v-container>
-        <v-row v-if="$vuetify.breakpoint.mdAndUp" no-gutters
-               style="height: 70vh; min-height:504px; justify-content: center;">
+        <v-row v-if="$vuetify.breakpoint.mdAndUp"
+               :style="isShowingChats ? 'height: fit-content' : 'height: 70vh; min-height:504px;'"
+               class="center-content"
+               no-gutters
+        >
           <v-col
             :md="isShowingChats ? 9 : 6"
-            :style="isShowingChats ? 'height: fit-content' : ''"
             class="px-0 px-md-16 pb-8"
             cols="12"
           >
-            <v-row style="max-height: 45vh; justify-content: center;">
+            <v-row :style="isShowingChats ? 'height: fit-content' : 'height: 45vh;'"
+                   class="center-content"
+            >
               <HeaderCta />
             </v-row>
-            <v-row style="max-height: 25vh; justify-content: center;">
+            <v-row class="center-content">
+              <ArrowDown :animate="true" />
+            </v-row>
+            <v-row :style="isShowingChats ? 'height: fit-content' : 'height: 25vh;'"
+                   class="center-content">
               <FileHandler
                 :style="isShowingChats? 'max-width: 800px' : ''"
                 class="filehandler"
@@ -254,4 +262,9 @@ export default {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+.center-content {
+  justify-content: center;
+}
+
 </style>
