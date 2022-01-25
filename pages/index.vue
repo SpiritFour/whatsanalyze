@@ -21,10 +21,10 @@
               <ArrowDown :animate="true" />
             </v-row>
             <v-row :style="isShowingChats ? 'height: fit-content' : 'height: 25vh;'"
-                   class="center-content">
+                   class="center-content filehandler">
               <FileHandler
                 :style="isShowingChats? 'max-width: 800px' : ''"
-                class="filehandler"
+                class=""
                 style="align-self:end; width: 100%"
                 @hide_explanation="isShowingChats = $event"
                 @new_messages="newMessages"

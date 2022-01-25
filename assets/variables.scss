@@ -64,6 +64,14 @@ $c-red-dark-accent: #911146;
   background: $c-white;
 }
 
+.btn-color {
+  background-color: $c-blue-accent !important;
+}
+
+.btn-color-dark {
+  background-color: $c-blue-secondary-dark !important;
+}
+
 .link {
   border: none;
   /*optional*/

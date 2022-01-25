@@ -14,8 +14,7 @@
     <br />
     <v-btn
       :to="to ? to : null"
-      class="mt-5 text-h6"
-      color="#07bc4c"
+      class="mt-5 text-h6 btn-color"
       elevation="10"
       style="color: #ffffff"
       @click="clickHandler"
@@ -60,7 +59,7 @@ export default {
     clickHandler() {
       if (!this.to) {
         gtagEvent("jump_to_filehandler_cta", GTAG_INTERACTION, 0);
-        this.$vuetify.goTo(".filehandler", { duration: 300, offset: 100 });
+        this.$vuetify.goTo(".filehandler", { duration: 300, offset: 300 });
       }
     },
     gtagEvent

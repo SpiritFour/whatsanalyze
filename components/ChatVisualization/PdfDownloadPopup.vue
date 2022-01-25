@@ -35,8 +35,7 @@
           </v-col>
           <v-col class="pa-0 ma-0">
             <v-btn
-              class="white--text"
-              color="#07bc4c"
+              class="white--text btn-color"
               dark
               elevation="10"
               style="max-width: 100%"

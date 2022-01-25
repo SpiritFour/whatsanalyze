@@ -24,7 +24,7 @@ export const messages = {
     getResults:
       "You will get all results as an image exactly as presented on your device. Generating may take a while.",
     headerTextFeaturesTable: "Features & Solutions  of PDF export tools",
-    goToPDF: "go to PDF download",
+    goToPDF: "Go to PDF download",
     downloadPDF: "Download your Chat as PDF",
     fullChat: "Your Full Chat",
     tabItemiOS1:
@@ -49,7 +49,7 @@ export const messages = {
       "<span>Choose Without Media or <b>Include Media</b> if you want to include your images and other files in the export.</span>",
     tabItemAndroid6:
       "<span>Now in the sharing view tap on <b>Whatsanalyze</b> or alternatively if you skipped step 1 send it to your self via <b>E-Mail</b> or save it to <b>Google Drive</b>.</span>",
-    selectFile: "Select file via box above.",
+    selectFile: "Select file via box above",
     messages: "Messages",
     totalWords: "Total words:",
     mostUsedEmojie: "Most used emojis:",

@@ -2,16 +2,16 @@
   <v-container ref="afd" style="position: relative">
     <slot ref="slot2"></slot>
     <v-btn
-      @click="share"
-      color="#016f94"
-      fab
-      dark
-      style="position: absolute; right: 0; top: 0"
       :loading="loading"
+      class="btn-color-dark"
+      dark
       data-html2canvas-ignore
+      fab
+      style="position: absolute; right: 0; top: 0"
+      @click="share"
     >
-      <v-icon size="35" v-if="canShare">mdi-share</v-icon>
-      <v-icon size="35" v-else>mdi-download</v-icon>
+      <v-icon v-if="canShare" size="35">mdi-share</v-icon>
+      <v-icon v-else size="35">mdi-download</v-icon>
     </v-btn>
   </v-container>
 </template>
@@ -26,12 +26,12 @@ export default {
   props: {
     imageName: {
       type: String,
-      default: "whatsanalyze.png",
+      default: "whatsanalyze.png"
     },
     useHtml2Canvas: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   data() {
     return {
@@ -39,10 +39,10 @@ export default {
         (navigator.share &&
           navigator.canShare &&
           navigator.canShare({
-            files: [new File([], "image.png", { type: "image/png" })],
+            files: [new File([], "image.png", { type: "image/png" })]
           })) ||
         false,
-      loading: false,
+      loading: false
     };
   },
   methods: {
@@ -92,9 +92,9 @@ export default {
               text: this.$t("haveALook"),
               files: [
                 new File([blob], chartName + "-" + this.imageName, {
-                  type: "image/png",
-                }),
-              ],
+                  type: "image/png"
+                })
+              ]
             })
             .catch((error) => {
               // Ignore AbortError (User did not want to share)
@@ -114,8 +114,8 @@ export default {
 
         gtagEvent("download_" + chartName, GTAG_RESULTS);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
