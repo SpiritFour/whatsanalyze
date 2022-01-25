@@ -36,8 +36,11 @@
           </v-col>
         </v-row>
         <v-row v-if="$vuetify.breakpoint.smAndDown" no-gutters>
-          <v-col :md="isShowingChats ? 12 : 6" class="px-0 pb-1" cols="12">
+          <v-col class="px-0 pb-1 my-auto" cols="12">
             <HeaderCta />
+          </v-col>
+          <v-col cols="12">
+            <ArrowDown :animate="true" style="width: 100%; overflow: hidden" />
           </v-col>
           <v-col class="pt-0">
             <FileHandler
