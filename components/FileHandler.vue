@@ -5,9 +5,7 @@
     @dragleave.prevent="dragLeave"
     @drop.prevent="drop($event)"
   >
-    <v-icon class="py-2" color="rgba(0,0,0,0.8)" size="50">
-      mdi-chevron-down
-    </v-icon>
+    <ArrowDown />
 
     <div class="drop-container">
       <label for="uploadmytextfile" style="cursor: pointer">

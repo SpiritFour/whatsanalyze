@@ -45,13 +45,11 @@
       </v-container>
     </div>
     <v-row v-if="$vuetify.breakpoint.mdAndUp" no-gutters style="height: 10vh; justify-content: center;">
-      <v-icon class="py-2 arrow-down" color="rgba(0,0,0,0.8)" size="50">
-        mdi-chevron-down
-      </v-icon>
+      <ArrowDown :animate="true" />
     </v-row>
     <TrustLogos v-if="!isShowingChats" />
     <v-container v-show="!isShowingChats" class="pt-16">
-      <ExportExplainer />
+      <ExportExplainer class="exportexplainer" />
       <Cta show-image />
       <Faq />
       <Testimonials />
@@ -244,18 +242,6 @@ export default {
   .testimonial {
     width: 100%;
     padding: 3em;
-  }
-}
-
-.arrow-down {
-  animation-name: attention;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-}
-
-@keyframes attention {
-  50% {
-    opacity: 0.5;
   }
 }
 
