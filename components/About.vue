@@ -43,11 +43,10 @@
       <v-col
         v-for="university in universities"
         :key="university"
-
         cols="3"
       >
         <v-row justify="center">
-          <v-img :lazy-src="university" :src="university" style="width: 100px; max-width: 100px" />
+          <v-img :lazy-src="university" :src="university" style="width: 100%; max-width: 100px" />
         </v-row>
       </v-col>
     </v-row>
