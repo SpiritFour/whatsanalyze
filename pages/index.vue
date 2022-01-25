@@ -59,7 +59,7 @@
       <ArrowDown :animate="true" />
     </v-row>
     <TrustLogos v-if="!isShowingChats" />
-    <v-container v-show="!isShowingChats" class="pt-16">
+    <v-container v-show="!isShowingChats" class="pt-md-16">
       <ExportExplainer class="exportexplainer" />
       <Cta show-image />
       <Faq />

@@ -11,10 +11,11 @@
       <v-col v-for="site in trustedSites" :key="site.name">
         <v-row justify="center">
           <a :href="site.href">
-            <v-avatar size="70"><img :src="site.image" /></v-avatar>
+            <v-img :lazy-src="site.image" :src="site.image"
+                   class="mb-0" style="border-radius: 35px; width: 70px; height: 70px" />
           </a>
         </v-row>
-        <v-row v-if="$vuetify.breakpoint.mdAndUp" class="pt-2" justify="center">
+        <v-row v-if="$vuetify.breakpoint.mdAndUp" class="pt-8" justify="center">
           <figure>
             <blockquote>
               <div>{{ site.description }}</div>
@@ -53,7 +54,7 @@ export default {
         {
           name: "Netzwelt.de",
           // eslint-disable-next-line no-undef
-          image: require("~/assets/img/trust-logos/netzwelt.png"),
+          image: require("~/assets/img/trust-logos/netzwelt.jpeg"),
           href:
             "https://www.netzwelt.de/news/187295-whatsapp-webseite-analysiert-chats.html",
           description: "Zu welcher Uhrzeit ihr am häufigsten schreibt"
