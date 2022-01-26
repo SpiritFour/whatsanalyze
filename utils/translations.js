@@ -24,7 +24,7 @@ export const messages = {
     getResults:
       "You will get all results as an image exactly as presented on your device. Generating may take a while.",
     headerTextFeaturesTable: "Features & Solutions  of PDF export tools",
-    goToPDF: "go to PDF download",
+    goToPDF: "Go to PDF download",
     downloadPDF: "Download your Chat as PDF",
     fullChat: "Your Full Chat",
     tabItemiOS1:
@@ -49,7 +49,7 @@ export const messages = {
       "<span>Choose Without Media or <b>Include Media</b> if you want to include your images and other files in the export.</span>",
     tabItemAndroid6:
       "<span>Now in the sharing view tap on <b>Whatsanalyze</b> or alternatively if you skipped step 1 send it to your self via <b>E-Mail</b> or save it to <b>Google Drive</b>.</span>",
-    selectFile: "Select file via box above.",
+    selectFile: "Select file via box above",
     messages: "Messages",
     totalWords: "Total words:",
     mostUsedEmojie: "Most used emojis:",
@@ -121,9 +121,7 @@ export const messages = {
       "          Please upload the <strong>.txt</strong> or<strong>.zip</strong> file\n" +
       "          you get when exporting your chat!",
     fileDrop: "Drop file now!",
-    fileDone:
-      "<strong>Done!</strong> <br />\n" +
-      "            Look at your analysis below.",
+    fileDone: "<strong>Done!</strong> Look at your analysis below.",
     fileSuccess: "<strong>Drag</strong> or <strong>select</strong>",
     fileSelect: '<strong style="text-decoration: underline">Select </strong>',
     fileAnother: "another file to analyze it.",
@@ -169,6 +167,10 @@ export const messages = {
     about: "About us",
     aboutPoints:
       "We are a group of <b>university friends</b>. As we recently all left WhatsApp and wanted to analyse how or chats evolved over the years. <br /> <br /> As <b>Computer Science students</b> are paranoid and think they can doeverything better, we naturally wanted to build a solution our self, where <b>no personal data</b> is shared or made public.",
+    exampleGraphSubtitle1:
+      "John and Jane probably write the most at 4 A.M.  Afternoon...",
+    exampleGraphSubtitle2:
+      "...and John writes a little more overall than Jane.",
   },
   de: {
     known: "Bekannt aus:",
@@ -294,8 +296,7 @@ export const messages = {
       ", die Sie beim Exportieren Ihres Chats erhalten!",
     fileDrop: "Datei jetzt ablegen!",
     fileDone:
-      "<strong>Done!</strong> <br />\n" +
-      "            Schauen Sie sich Ihre Analyse unten an.",
+      "<strong>Fertig!</strong> Schauen Sie sich Ihre Analyse unten an.",
     fileSuccess: "<strong>Ziehen</strong> oder <strong>Auswählen</strong>",
     fileSelect: '<strong style="text-decoration: underline">Auswahl</strong>',
     fileAnother: "eine andere Datei, um sie zu analysieren.",
@@ -340,5 +341,9 @@ export const messages = {
     about: "Über die Macher",
     aboutPoints:
       "Wir sind eine Gruppe von <b>Universitätsfreunden</b>. Da wir vor kurzem alle WhatsApp verlassen haben, wollten wir analysieren, wie sich unsere Chats über die Jahre entwickelt haben. <br /> <br />Da <b>Informatikstudenten</b> paranoid sind und denken, dass sie alles besser können, wollten wir natürlich selbst eine Lösung bauen, bei der <b>keine persönlichen Daten</b> geteilt oder öffentlich gemacht werden.",
+    exampleGraphSubtitle1:
+      "John und Jane schreiben wohl am meisten um 4 Uhr Nachmittags...",
+    exampleGraphSubtitle2:
+      "...und John schreibt insgesamt etwas mehr als Jane.",
   },
 };

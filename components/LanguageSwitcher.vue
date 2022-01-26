@@ -1,5 +1,5 @@
 <template>
-  <select v-model="selectedLocale">
+  <select v-model="selectedLocale" class="text-md-h3 text-h4">
     <option
       v-for="locale in availableLocales"
       :key="locale.code"
@@ -20,21 +20,21 @@ export default {
           code: "en",
           name: "English",
           flag: "🇬🇧",
-          iso: "en-GB",
+          iso: "en-GB"
         },
         {
           code: "de",
           name: "Deutsch",
           flag: "🇩🇪",
-          iso: "de-DE",
-        },
-      ],
+          iso: "de-DE"
+        }
+      ]
     };
   },
   watch: {
     selectedLocale(newLocale) {
       this.$router.push(this.switchLocalePath(newLocale));
-    },
-  },
+    }
+  }
 };
 </script>
