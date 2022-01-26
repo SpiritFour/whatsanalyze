@@ -16,8 +16,6 @@
                    class="center-content"
             >
               <HeaderCta />
-            </v-row>
-            <v-row class="center-content">
               <ArrowDown :animate="true" />
             </v-row>
             <v-row :style="isShowingChats ? 'height: fit-content' : 'height: 25vh;'"
