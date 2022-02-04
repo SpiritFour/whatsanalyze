@@ -1,0 +1,1759 @@
+[
+  [
+    {
+      "datasets": [
+        {
+          "borderWidth": 2,
+          "lineTension": 0,
+          "pointRadius": 1,
+          "pointHitRadius": 5,
+          "label": "John Doe ",
+          "backgroundColor": "rgba(217,59,59, 0.1 )",
+          "borderColor": "#00535f",
+          "data": [
+            {
+              "x": "Thu Jan 10 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 1
+            },
+            {
+              "x": "Fri Jan 11 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Sun Feb 10 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Mon Feb 11 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 2
+            },
+            {
+              "x": "Tue Feb 12 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Tue Apr 09 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Wed Apr 10 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 2
+            },
+            {
+              "x": "Thu Apr 11 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Sun Aug 25 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Mon Aug 26 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 3
+            },
+            {
+              "x": "Tue Aug 27 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Mon Sep 09 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Tue Sep 10 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 4
+            },
+            {
+              "x": "Wed Sep 11 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Sat Sep 14 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Sun Sep 15 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 4
+            },
+            {
+              "x": "Mon Sep 16 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 4
+            },
+            {
+              "x": "Tue Sep 17 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 1
+            },
+            {
+              "x": "Wed Sep 18 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 4
+            },
+            {
+              "x": "Thu Sep 19 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Fri Sep 20 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 7
+            },
+            {
+              "x": "Sat Sep 21 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Tue Sep 24 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Wed Sep 25 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 7
+            },
+            {
+              "x": "Thu Sep 26 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 2
+            },
+            {
+              "x": "Fri Sep 27 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Sun Sep 29 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Mon Sep 30 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 6
+            },
+            {
+              "x": "Tue Oct 01 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Sat Oct 19 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Sun Oct 20 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 3
+            },
+            {
+              "x": "Mon Oct 21 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Mon Oct 28 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Tue Oct 29 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 5
+            },
+            {
+              "x": "Wed Oct 30 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 2
+            },
+            {
+              "x": "Thu Oct 31 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Sat Nov 09 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Sun Nov 10 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 1
+            },
+            {
+              "x": "Mon Nov 11 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 2
+            },
+            {
+              "x": "Tue Nov 12 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Thu Nov 21 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Fri Nov 22 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 8
+            },
+            {
+              "x": "Sat Nov 23 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Wed Nov 27 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Thu Nov 28 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 3
+            },
+            {
+              "x": "Fri Nov 29 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Tue Dec 10 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Wed Dec 11 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 6
+            },
+            {
+              "x": "Thu Dec 12 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 2
+            },
+            {
+              "x": "Fri Dec 13 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Sat Dec 14 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Sun Dec 15 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 1
+            },
+            {
+              "x": "Mon Dec 16 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 2
+            },
+            {
+              "x": "Tue Dec 17 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Mon Dec 23 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Tue Dec 24 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 2
+            },
+            {
+              "x": "Wed Dec 25 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Thu Jan 23 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Fri Jan 24 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 3
+            },
+            {
+              "x": "Sat Jan 25 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Wed Jan 29 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Thu Jan 30 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 1
+            },
+            {
+              "x": "Fri Jan 31 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Thu Apr 09 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Fri Apr 10 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 3
+            },
+            {
+              "x": "Sat Apr 11 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Tue Aug 25 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Wed Aug 26 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 12
+            },
+            {
+              "x": "Thu Aug 27 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 4
+            },
+            {
+              "x": "Fri Aug 28 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Sat Aug 29 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Sun Aug 30 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 4
+            },
+            {
+              "x": "Mon Aug 31 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 1
+            },
+            {
+              "x": "Tue Sep 01 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Mon Sep 07 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Tue Sep 08 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 8
+            },
+            {
+              "x": "Wed Sep 09 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Fri Sep 11 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Sat Sep 12 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 19
+            },
+            {
+              "x": "Sun Sep 13 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 4
+            },
+            {
+              "x": "Mon Sep 14 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Sat Sep 26 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Sun Sep 27 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 10
+            },
+            {
+              "x": "Mon Sep 28 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Tue Sep 29 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 9
+            },
+            {
+              "x": "Wed Sep 30 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Tue Oct 27 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Wed Oct 28 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 24
+            },
+            {
+              "x": "Thu Oct 29 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Tue Nov 17 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Wed Nov 18 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 8
+            },
+            {
+              "x": "Thu Nov 19 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Wed Dec 09 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Thu Dec 10 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 3
+            },
+            {
+              "x": "Fri Dec 11 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Mon Dec 14 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Tue Dec 15 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 7
+            },
+            {
+              "x": "Wed Dec 16 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 36
+            },
+            {
+              "x": "Thu Dec 17 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Tue Dec 22 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Wed Dec 23 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 1
+            },
+            {
+              "x": "Thu Dec 24 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 4
+            },
+            {
+              "x": "Fri Dec 25 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Fri Jan 01 2021 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Sat Jan 02 2021 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 4
+            },
+            {
+              "x": "Sun Jan 03 2021 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 7
+            },
+            {
+              "x": "Mon Jan 04 2021 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 14
+            },
+            {
+              "x": "Tue Jan 05 2021 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Wed Jan 06 2021 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 5
+            },
+            {
+              "x": "Thu Jan 07 2021 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 6
+            },
+            {
+              "x": "Fri Jan 08 2021 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 5
+            },
+            {
+              "x": "Sat Jan 09 2021 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Sun Jan 10 2021 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Mon Jan 11 2021 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 13
+            },
+            {
+              "x": "Tue Jan 12 2021 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            }
+          ]
+        },
+        {
+          "borderWidth": 2,
+          "lineTension": 0,
+          "pointRadius": 1,
+          "pointHitRadius": 5,
+          "label": "Jane Doe",
+          "backgroundColor": "rgba(1,111,148, 0.1 )",
+          "borderColor": "#51b0bc",
+          "data": [
+            {
+              "x": "Thu Jan 10 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 1
+            },
+            {
+              "x": "Fri Jan 11 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Sun Feb 10 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Mon Feb 11 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 3
+            },
+            {
+              "x": "Tue Feb 12 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Tue Apr 09 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Wed Apr 10 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 1
+            },
+            {
+              "x": "Thu Apr 11 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Sun Aug 25 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Mon Aug 26 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 2
+            },
+            {
+              "x": "Tue Aug 27 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Mon Sep 09 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Tue Sep 10 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 3
+            },
+            {
+              "x": "Wed Sep 11 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Sat Sep 14 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Sun Sep 15 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 1
+            },
+            {
+              "x": "Mon Sep 16 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 8
+            },
+            {
+              "x": "Tue Sep 17 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 2
+            },
+            {
+              "x": "Wed Sep 18 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 3
+            },
+            {
+              "x": "Thu Sep 19 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Fri Sep 20 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 4
+            },
+            {
+              "x": "Sat Sep 21 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Tue Sep 24 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Wed Sep 25 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 10
+            },
+            {
+              "x": "Thu Sep 26 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 1
+            },
+            {
+              "x": "Fri Sep 27 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Sun Sep 29 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Mon Sep 30 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 5
+            },
+            {
+              "x": "Tue Oct 01 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Sat Oct 19 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Sun Oct 20 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 2
+            },
+            {
+              "x": "Mon Oct 21 2019 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Mon Oct 28 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Tue Oct 29 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 3
+            },
+            {
+              "x": "Wed Oct 30 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 3
+            },
+            {
+              "x": "Thu Oct 31 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Sat Nov 09 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Sun Nov 10 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 2
+            },
+            {
+              "x": "Mon Nov 11 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Thu Nov 21 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Fri Nov 22 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 6
+            },
+            {
+              "x": "Sat Nov 23 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Wed Nov 27 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Thu Nov 28 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 2
+            },
+            {
+              "x": "Fri Nov 29 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Tue Dec 10 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Wed Dec 11 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 7
+            },
+            {
+              "x": "Thu Dec 12 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 3
+            },
+            {
+              "x": "Fri Dec 13 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Sat Dec 14 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Sun Dec 15 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 3
+            },
+            {
+              "x": "Mon Dec 16 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 1
+            },
+            {
+              "x": "Tue Dec 17 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Mon Dec 23 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Tue Dec 24 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 1
+            },
+            {
+              "x": "Wed Dec 25 2019 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Thu Jan 23 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Fri Jan 24 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 3
+            },
+            {
+              "x": "Sat Jan 25 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Tue Aug 25 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Wed Aug 26 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 11
+            },
+            {
+              "x": "Thu Aug 27 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 3
+            },
+            {
+              "x": "Fri Aug 28 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Sat Aug 29 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Sun Aug 30 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 4
+            },
+            {
+              "x": "Mon Aug 31 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Mon Sep 07 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Tue Sep 08 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 7
+            },
+            {
+              "x": "Wed Sep 09 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Fri Sep 11 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Sat Sep 12 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 14
+            },
+            {
+              "x": "Sun Sep 13 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 2
+            },
+            {
+              "x": "Mon Sep 14 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Sat Sep 26 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Sun Sep 27 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 10
+            },
+            {
+              "x": "Mon Sep 28 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Tue Sep 29 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 7
+            },
+            {
+              "x": "Wed Sep 30 2020 12:00:00 GMT+0200 (Central European Summer Time)",
+              "y": 0
+            },
+            {
+              "x": "Tue Oct 27 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Wed Oct 28 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 29
+            },
+            {
+              "x": "Thu Oct 29 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Tue Nov 17 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Wed Nov 18 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 5
+            },
+            {
+              "x": "Thu Nov 19 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Wed Dec 09 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Thu Dec 10 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 2
+            },
+            {
+              "x": "Fri Dec 11 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Mon Dec 14 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Tue Dec 15 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 7
+            },
+            {
+              "x": "Wed Dec 16 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 19
+            },
+            {
+              "x": "Thu Dec 17 2020 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Fri Jan 01 2021 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Sat Jan 02 2021 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 4
+            },
+            {
+              "x": "Sun Jan 03 2021 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 5
+            },
+            {
+              "x": "Mon Jan 04 2021 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 11
+            },
+            {
+              "x": "Tue Jan 05 2021 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 1
+            },
+            {
+              "x": "Wed Jan 06 2021 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 3
+            },
+            {
+              "x": "Thu Jan 07 2021 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 3
+            },
+            {
+              "x": "Fri Jan 08 2021 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 3
+            },
+            {
+              "x": "Sat Jan 09 2021 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Sun Jan 10 2021 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Mon Jan 11 2021 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 5
+            },
+            {
+              "x": "Tue Jan 12 2021 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 1
+            },
+            {
+              "x": "Wed Jan 13 2021 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Mon Feb 15 2021 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 0
+            },
+            {
+              "x": "Tue Feb 16 2021 12:00:00 GMT+0100 (Central European Standard Time)",
+              "y": 1
+            }
+          ]
+        }
+      ]
+    },
+    "year"
+  ],
+  [
+    {
+      "color": "#00535f",
+      "name": "John Doe ",
+      "numberOfWords": 1656,
+      "longestMessage": 52,
+      "uniqueWords": 496,
+      "sortedEmojis": [
+        "😬",
+        "👍",
+        "🙂"
+      ],
+      "averageMessageLength": 6
+    },
+    {
+      "color": "#51b0bc",
+      "name": "Jane Doe",
+      "numberOfWords": 1480,
+      "longestMessage": 38,
+      "uniqueWords": 457,
+      "sortedEmojis": [
+        "😅"
+      ],
+      "averageMessageLength": 6
+    }
+  ],
+  [
+    {
+      "word": "nice",
+      "freq": 12
+    },
+    {
+      "word": "tomorrow",
+      "freq": 10
+    },
+    {
+      "word": ";)",
+      "freq": 9
+    },
+    {
+      "word": ":)",
+      "freq": 8
+    },
+    {
+      "word": "Yes,",
+      "freq": 7
+    },
+    {
+      "word": "read",
+      "freq": 6
+    },
+    {
+      "word": "Haha",
+      "freq": 6
+    },
+    {
+      "word": "😅",
+      "freq": 6
+    },
+    {
+      "word": "Isar",
+      "freq": 5
+    },
+    {
+      "word": "week",
+      "freq": 5
+    },
+    {
+      "word": "master",
+      "freq": 5
+    },
+    {
+      "word": "days",
+      "freq": 5
+    },
+    {
+      "word": "meet",
+      "freq": 4
+    },
+    {
+      "word": "bit",
+      "freq": 4
+    },
+    {
+      "word": "leave",
+      "freq": 4
+    },
+    {
+      "word": "cool",
+      "freq": 4
+    },
+    {
+      "word": "hiking",
+      "freq": 4
+    },
+    {
+      "word": "time",
+      "freq": 4
+    },
+    {
+      "word": "camera",
+      "freq": 4
+    },
+    {
+      "word": "train",
+      "freq": 4
+    },
+    {
+      "word": "Nice",
+      "freq": 4
+    },
+    {
+      "word": "today?",
+      "freq": 4
+    },
+    {
+      "word": "😬",
+      "freq": 4
+    },
+    {
+      "word": "day",
+      "freq": 4
+    },
+    {
+      "word": "doing?",
+      "freq": 4
+    },
+    {
+      "word": "bene",
+      "freq": 4
+    },
+    {
+      "word": "hour",
+      "freq": 4
+    },
+    {
+      "word": "pleasure",
+      "freq": 4
+    },
+    {
+      "word": "shipping",
+      "freq": 4
+    },
+    {
+      "word": "3",
+      "freq": 3
+    },
+    {
+      "word": "👍",
+      "freq": 3
+    },
+    {
+      "word": "Oke",
+      "freq": 3
+    },
+    {
+      "word": "weekend",
+      "freq": 3
+    },
+    {
+      "word": "book",
+      "freq": 3
+    },
+    {
+      "word": "meeting",
+      "freq": 3
+    },
+    {
+      "word": "there.",
+      "freq": 3
+    },
+    {
+      "word": "you?",
+      "freq": 3
+    },
+    {
+      "word": "Garching",
+      "freq": 3
+    },
+    {
+      "word": "week?",
+      "freq": 3
+    },
+    {
+      "word": "trip",
+      "freq": 3
+    },
+    {
+      "word": "tomorrow?",
+      "freq": 3
+    },
+    {
+      "word": "bring",
+      "freq": 3
+    },
+    {
+      "word": "Christmas",
+      "freq": 3
+    },
+    {
+      "word": "when?",
+      "freq": 3
+    },
+    {
+      "word": "start",
+      "freq": 3
+    },
+    {
+      "word": "thesis",
+      "freq": 3
+    },
+    {
+      "word": "lot",
+      "freq": 3
+    },
+    {
+      "word": "yes,",
+      "freq": 3
+    },
+    {
+      "word": "Munich",
+      "freq": 3
+    },
+    {
+      "word": "Lou",
+      "freq": 3
+    },
+    {
+      "word": "damn",
+      "freq": 3
+    },
+    {
+      "word": "reading",
+      "freq": 3
+    },
+    {
+      "word": ":P",
+      "freq": 3
+    },
+    {
+      "word": "google",
+      "freq": 3
+    },
+    {
+      "word": "hammock",
+      "freq": 3
+    },
+    {
+      "word": "sand",
+      "freq": 3
+    },
+    {
+      "word": "5",
+      "freq": 2
+    },
+    {
+      "word": "Jane",
+      "freq": 2
+    },
+    {
+      "word": "Send",
+      "freq": 2
+    },
+    {
+      "word": "drive",
+      "freq": 2
+    },
+    {
+      "word": "cycle",
+      "freq": 2
+    },
+    {
+      "word": "bridge",
+      "freq": 2
+    },
+    {
+      "word": "location:",
+      "freq": 2
+    },
+    {
+      "word": "bike",
+      "freq": 2
+    },
+    {
+      "word": "it.",
+      "freq": 2
+    },
+    {
+      "word": "tomorrow,",
+      "freq": 2
+    },
+    {
+      "word": "Friday",
+      "freq": 2
+    },
+    {
+      "word": "fits",
+      "freq": 2
+    },
+    {
+      "word": "again?",
+      "freq": 2
+    },
+    {
+      "word": "car?",
+      "freq": 2
+    },
+    {
+      "word": "either.",
+      "freq": 2
+    },
+    {
+      "word": "sleeping",
+      "freq": 2
+    },
+    {
+      "word": "sebi",
+      "freq": 2
+    },
+    {
+      "word": "fit",
+      "freq": 2
+    },
+    {
+      "word": "people",
+      "freq": 2
+    },
+    {
+      "word": "check",
+      "freq": 2
+    },
+    {
+      "word": "Fits",
+      "freq": 2
+    },
+    {
+      "word": "us.",
+      "freq": 2
+    },
+    {
+      "word": "thanks,",
+      "freq": 2
+    },
+    {
+      "word": "MAPS.ME",
+      "freq": 2
+    },
+    {
+      "word": "app",
+      "freq": 2
+    },
+    {
+      "word": "weather?",
+      "freq": 2
+    },
+    {
+      "word": "morning?",
+      "freq": 2
+    },
+    {
+      "word": "bouldering",
+      "freq": 2
+    },
+    {
+      "word": "8:30",
+      "freq": 2
+    },
+    {
+      "word": "9:00",
+      "freq": 2
+    },
+    {
+      "word": "now?",
+      "freq": 2
+    },
+    {
+      "word": "takes",
+      "freq": 2
+    },
+    {
+      "word": "so.",
+      "freq": 2
+    },
+    {
+      "word": "ahh",
+      "freq": 2
+    },
+    {
+      "word": "feel",
+      "freq": 2
+    },
+    {
+      "word": "challenges",
+      "freq": 2
+    },
+    {
+      "word": "you!",
+      "freq": 2
+    },
+    {
+      "word": "then?",
+      "freq": 2
+    },
+    {
+      "word": "send",
+      "freq": 2
+    },
+    {
+      "word": "Hope",
+      "freq": 2
+    },
+    {
+      "word": "home,",
+      "freq": 2
+    },
+    {
+      "word": "photo",
+      "freq": 2
+    },
+    {
+      "word": "evening",
+      "freq": 2
+    },
+    {
+      "word": "20€",
+      "freq": 2
+    },
+    {
+      "word": "Merry",
+      "freq": 2
+    },
+    {
+      "word": "shower",
+      "freq": 2
+    },
+    {
+      "word": ":D",
+      "freq": 2
+    },
+    {
+      "word": "night",
+      "freq": 2
+    },
+    {
+      "word": "time?",
+      "freq": 2
+    },
+    {
+      "word": "yo,",
+      "freq": 2
+    },
+    {
+      "word": "or?",
+      "freq": 2
+    },
+    {
+      "word": "Sebi",
+      "freq": 2
+    },
+    {
+      "word": "today.",
+      "freq": 2
+    },
+    {
+      "word": "driving",
+      "freq": 2
+    },
+    {
+      "word": "visited",
+      "freq": 2
+    },
+    {
+      "word": "normal",
+      "freq": 2
+    },
+    {
+      "word": "super",
+      "freq": 2
+    },
+    {
+      "word": "Miro",
+      "freq": 2
+    },
+    {
+      "word": "BTW",
+      "freq": 2
+    },
+    {
+      "word": "already?",
+      "freq": 2
+    },
+    {
+      "word": "it?",
+      "freq": 2
+    },
+    {
+      "word": "forest",
+      "freq": 2
+    },
+    {
+      "word": "18:30",
+      "freq": 2
+    },
+    {
+      "word": "cooking",
+      "freq": 2
+    },
+    {
+      "word": "tonight",
+      "freq": 2
+    },
+    {
+      "word": "Thursday",
+      "freq": 2
+    },
+    {
+      "word": "need?",
+      "freq": 2
+    },
+    {
+      "word": "method",
+      "freq": 2
+    },
+    {
+      "word": "haha",
+      "freq": 2
+    },
+    {
+      "word": "haha,",
+      "freq": 2
+    },
+    {
+      "word": "Saturday",
+      "freq": 2
+    },
+    {
+      "word": "Rome",
+      "freq": 2
+    },
+    {
+      "word": "friends",
+      "freq": 2
+    },
+    {
+      "word": "lockdown",
+      "freq": 2
+    },
+    {
+      "word": "Corona",
+      "freq": 2
+    },
+    {
+      "word": "Vatican",
+      "freq": 2
+    },
+    {
+      "word": "late",
+      "freq": 2
+    },
+    {
+      "word": "here.",
+      "freq": 2
+    },
+    {
+      "word": "link",
+      "freq": 2
+    },
+    {
+      "word": "me?",
+      "freq": 2
+    },
+    {
+      "word": "Wait",
+      "freq": 2
+    },
+    {
+      "word": "blog",
+      "freq": 2
+    },
+    {
+      "word": "🙂",
+      "freq": 2
+    },
+    {
+      "word": "ski",
+      "freq": 2
+    },
+    {
+      "word": "2-3",
+      "freq": 2
+    },
+    {
+      "word": "blue",
+      "freq": 2
+    },
+    {
+      "word": "eu",
+      "freq": 2
+    },
+    {
+      "word": "store",
+      "freq": 2
+    },
+    {
+      "word": "depends",
+      "freq": 2
+    },
+    {
+      "word": "practice",
+      "freq": 2
+    },
+    {
+      "word": "arrived",
+      "freq": 2
+    },
+    {
+      "word": "walk",
+      "freq": 2
+    },
+    {
+      "word": "workout",
+      "freq": 2
+    },
+    {
+      "word": "video",
+      "freq": 2
+    },
+    {
+      "word": "zoo",
+      "freq": 2
+    }
+  ],
+  {
+    "labels": [
+      "0AM",
+      "1AM",
+      "2AM",
+      "3AM",
+      "4AM",
+      "5AM",
+      "6AM",
+      "7AM",
+      "8AM",
+      "9AM",
+      "10AM",
+      "11AM",
+      "12PM",
+      "1PM",
+      "2PM",
+      "3PM",
+      "4PM",
+      "5PM",
+      "6PM",
+      "7PM",
+      "8PM",
+      "9PM",
+      "10PM",
+      "11PM"
+    ],
+    "datasets": [
+      {
+        "label": "John Doe ",
+        "backgroundColor": "#00535f",
+        "borderColor": "#00535f",
+        "data": [
+          1,
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          22,
+          12,
+          5,
+          9,
+          31,
+          8,
+          28,
+          37,
+          14,
+          49,
+          29,
+          13,
+          19,
+          12,
+          3,
+          1
+        ]
+      },
+      {
+        "label": "Jane Doe",
+        "backgroundColor": "#51b0bc",
+        "borderColor": "#51b0bc",
+        "data": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          22,
+          5,
+          1,
+          8,
+          25,
+          12,
+          24,
+          50,
+          4,
+          30,
+          20,
+          6,
+          17,
+          2,
+          8,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "labels": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+    "datasets": [
+      {
+        "label": "John Doe ",
+        "backgroundColor": "#00535f",
+        "borderColor": "#00535f",
+        "data": [
+          34,
+          47,
+          36,
+          107,
+          26,
+          26,
+          23
+        ]
+      },
+      {
+        "label": "Jane Doe",
+        "backgroundColor": "#51b0bc",
+        "borderColor": "#51b0bc",
+        "data": [
+          29,
+          35,
+          33,
+          91,
+          15,
+          16,
+          18
+        ]
+      }
+    ]
+  },
+  {
+    "labels": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ],
+    "datasets": [
+      {
+        "label": "John Doe ",
+        "backgroundColor": "#00535f",
+        "borderColor": "#00535f",
+        "data": [
+          59,
+          2,
+          0,
+          5,
+          0,
+          0,
+          0,
+          24,
+          89,
+          34,
+          22,
+          64
+        ]
+      },
+      {
+        "label": "Jane Doe",
+        "backgroundColor": "#51b0bc",
+        "borderColor": "#51b0bc",
+        "data": [
+          40,
+          4,
+          0,
+          1,
+          0,
+          0,
+          0,
+          20,
+          77,
+          37,
+          15,
+          43
+        ]
+      }
+    ]
+  },
+  {
+    "labels": [
+      "John Doe ",
+      "Jane Doe"
+    ],
+    "datasets": [
+      {
+        "label": "Share of Speech",
+        "backgroundColor": [
+          "#00535f",
+          "#51b0bc"
+        ],
+        "borderColor": [
+          "#00535f",
+          "#51b0bc"
+        ],
+        "data": [
+          299,
+          237
+        ]
+      }
+    ]
+  }
+]

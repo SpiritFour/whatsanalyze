@@ -1,46 +1,64 @@
 <template>
   <div>
-    <div class="top-color">
+    <div ref="aboveTheFold" class="top-color" style="overflow-y: hidden">
       <v-container>
-        <v-row v-if="$vuetify.breakpoint.mdAndUp" no-gutters>
+        <v-row v-if="$vuetify.breakpoint.mdAndUp"
+               :style="isShowingChats ? 'height: fit-content' : 'height: 70vh; min-height:504px;'"
+               class="center-content"
+               no-gutters
+        >
           <v-col
-            cols="12"
-            :md="isShowingChats ? 12 : 6"
+            :md="isShowingChats ? 9 : 6"
             class="px-0 px-md-16 pb-8"
+            cols="12"
           >
-            <HeaderCta />
-            <FileHandler
-              class="filehandler"
-              @new_messages="newMessages"
-              @hide_explanation="isShowingChats = $event"
-            />
+            <v-row :style="isShowingChats ? 'height: fit-content' : 'height: 45vh;'"
+                   class="center-content"
+            >
+              <HeaderCta />
+              <ArrowDown :animate="true" />
+            </v-row>
+            <v-row :style="isShowingChats ? 'height: fit-content' : 'height: 25vh;'"
+                   class="center-content filehandler">
+              <FileHandler
+                :style="isShowingChats? 'max-width: 800px' : ''"
+                class=""
+                style="align-self:end; width: 100%"
+                @hide_explanation="isShowingChats = $event"
+                @new_messages="newMessages"
+              />
+            </v-row>
           </v-col>
           <v-col v-if="!isShowingChats" cols="12" md="6">
             <ChartsExampleGraphs :chat_="chat" />
-            <TrustLogos />
           </v-col>
         </v-row>
         <v-row v-if="$vuetify.breakpoint.smAndDown" no-gutters>
-          <v-col cols="12" :md="isShowingChats ? 12 : 6" class="px-0 pb-1">
+          <v-col class="px-0 pb-1 my-auto" cols="12">
             <HeaderCta />
+          </v-col>
+          <v-col cols="12">
+            <ArrowDown :animate="true" style="width: 100%; overflow: hidden" />
           </v-col>
           <v-col class="pt-0">
             <FileHandler
               class="filehandler"
-              @new_messages="newMessages"
               @hide_explanation="isShowingChats = $event"
+              @new_messages="newMessages"
             />
           </v-col>
           <v-col v-if="!isShowingChats" cols="12" md="6">
-            <TrustLogos />
             <ChartsExampleGraphs :chat_="chat" />
           </v-col>
         </v-row>
       </v-container>
     </div>
-
-    <v-container v-show="!isShowingChats" class="pt-16">
-      <ExportExplainer />
+    <v-row v-if="$vuetify.breakpoint.mdAndUp" no-gutters style="height: 10vh; justify-content: center;">
+      <ArrowDown :animate="true" />
+    </v-row>
+    <TrustLogos v-if="!isShowingChats" />
+    <v-container v-show="!isShowingChats" class="pt-md-16">
+      <ExportExplainer class="exportexplainer" />
       <Cta show-image />
       <Faq />
       <Testimonials />
@@ -48,31 +66,38 @@
       <PdfExample />
       <Cta
         title="getFreePDFPreview"
+
         button-txt="generateYourChatPDF"
         text="getChatBeautiful"
+        title="getFreePDFPreview"
       />
     </v-container>
 
     <v-container v-if="isShowingChats">
-      <ChartsResults ref="results" :chat="chat" :attachments="attachments" />
+      <ChartsResults ref="results" :attachments="attachments" :chat="chat" />
     </v-container>
   </div>
 </template>
 
 <script>
 import { Chat } from "~/functions/transformChatData";
-import {
-  GTAG_INTERACTION,
-  GTAG_LEAD,
-  GTAG_NUM_PERSONS,
-  gtagEvent,
-} from "~/functions/gtagValues";
+import { GTAG_INTERACTION, GTAG_LEAD, GTAG_NUM_PERSONS, gtagEvent } from "~/functions/gtagValues";
+import debounce from "lodash/debounce";
+
 
 export default {
   async asyncData({ $content }) {
     const page = await $content("home").fetch();
     return {
-      page,
+      page
+    };
+  },
+  data() {
+    return {
+      isShowingChats: false,
+      chat: undefined,
+      attachments: undefined,
+      loading: false
     };
   },
   data() {
@@ -91,18 +116,19 @@ export default {
           hid: "og:title",
           name: "og:title",
           property: "og:title",
-          content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+          content: "WhatsAnalyze - The WhatsApp Chat Analyzer"
         },
         {
           hid: "og:site_name",
           name: "og:site_name",
           property: "og:site_name",
-          content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+          content: "WhatsAnalyze - The WhatsApp Chat Analyzer"
         },
         {
           hid: "description",
           name: "description",
           property: "description",
+
           content: "metaDescription",
         },
         {
@@ -115,9 +141,9 @@ export default {
           hid: "og:url",
           name: "og:url",
           property: "og:url",
-          content: "whatsanalyze.com",
-        },
-      ],
+          content: "whatsanalyze.com"
+        }
+      ]
     };
   },
   created() {
@@ -127,6 +153,15 @@ export default {
         gtagEvent(key, GTAG_LEAD);
       });
     }
+
+  },
+  mounted() {
+    this.handleDebouncedScroll = debounce(this.handleScroll, 0);
+    window.addEventListener("scroll", this.handleDebouncedScroll);
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleDebouncedScroll);
   },
   methods: {
     Chat,
@@ -151,6 +186,13 @@ export default {
       throw Error("random errro");
     },
   },
+
+    handleScroll() {
+      // Any code to be executed when the window is scrolled
+      this.$refs.aboveTheFold.scrollTop = window.scrollY;
+    }
+  }
+
 };
 </script>
 
@@ -193,6 +235,7 @@ export default {
   margin-bottom: 40px;
   margin-top: 20px;
 }
+
 .explainer-list p {
   font-size: 1.2em;
 }
@@ -223,4 +266,19 @@ export default {
     padding: 3em;
   }
 }
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.center-content {
+  justify-content: center;
+}
+
 </style>

@@ -24,8 +24,7 @@
     <v-dialog v-model="dialog" width="500">
       <template #activator="{ on, attrs }">
         <v-btn
-          class="rounded-0 btn pa-0"
-          color="primary"
+          class="rounded-0 btn pa-0 btn-color-dark"
           dark
           elevation="0"
           v-bind="attrs"
@@ -39,7 +38,7 @@
       </template>
 
       <v-card>
-        <v-card-title class="text-h4 blue">
+        <v-card-title class="text-h4 btn-color">
           {{ $t("writeUs") }}
           <v-spacer />
           <v-btn icon @click="dialog = false">
@@ -90,7 +89,7 @@
                 />
               </v-input>
 
-              <v-btn :disabled="!valid" color="success" @click="validate">
+              <v-btn :disabled="!valid" class="btn-color" @click="validate">
                 Send
               </v-btn>
             </v-row>
@@ -117,14 +116,14 @@ export default {
       email: "",
       emailRules: [
         (v) => !!v || this.$t("email"),
-        (v) => /.+@.+\..+/.test(v) || this.$t("email"),
+        (v) => /.+@.+\..+/.test(v) || this.$t("email")
       ],
       text: "",
       starValue: 0,
       starRules: [(v) => !!v || this.$t("rating")],
       select: null,
       dialog: false,
-      message: null,
+      message: null
     };
   },
 
@@ -142,14 +141,14 @@ export default {
             text: this.text,
             rating: this.starValue,
             locale: this.$i18n.locale,
-            created: this.$fireModule.firestore.FieldValue.serverTimestamp(),
+            created: this.$fireModule.firestore.FieldValue.serverTimestamp()
           })
           .then(() => {
             this.message = this.$t("messageReceived");
           });
       }
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>
