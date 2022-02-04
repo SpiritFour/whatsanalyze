@@ -1,6 +1,6 @@
 export let chatColors = [
-  "#016f94",
-  "#d93b3b",
+  "#00535f",
+  "#51b0bc",
   "#21a68d",
   "#ffd45c",
   "#35cd96",

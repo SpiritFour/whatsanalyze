@@ -8,8 +8,7 @@
       <v-img
         :src="require('@/assets/pdf-example.jpg')"
         class="ma-auto my-4"
-        max-height="147"
-        max-width="250"
+        max-width="100vw"
       />
     </v-row>
 
@@ -36,8 +35,7 @@
           </v-col>
           <v-col class="pa-0 ma-0">
             <v-btn
-              class="white--text"
-              color="#07bc4c"
+              class="white--text btn-color"
               dark
               elevation="10"
               style="max-width: 100%"
@@ -111,7 +109,7 @@ export default {
       showDownloadPopup: false,
       isLoading: false,
       GTAG_PAYMENT,
-      GTAG_PDF,
+      GTAG_PDF
     };
   },
   methods: {
@@ -129,7 +127,8 @@ export default {
       gtagEvent("approved", GTAG_PAYMENT, 10);
       this.download();
     },
-    onError() {},
+    onError() {
+    },
     downloadSample() {
       gtagEvent("sample_download", GTAG_PDF, 2);
       this.isLoading = true;
@@ -142,7 +141,7 @@ export default {
         !this.$route.query.free
       ).then(() => (this.isLoading = false));
     },
-    gtagEvent,
-  },
+    gtagEvent
+  }
 };
 </script>
