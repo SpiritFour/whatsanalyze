@@ -65,7 +65,6 @@
       <About />
       <PdfExample />
       <Cta
-        title="getFreePDFPreview"
         button-txt="generateYourChatPDF"
         text="getChatBeautiful"
         title="getFreePDFPreview"
@@ -99,14 +98,6 @@ export default {
       loading: false
     };
   },
-  data() {
-    return {
-      isShowingChats: false,
-      chat: undefined,
-      attachments: undefined,
-      loading: false,
-    };
-  },
   head() {
     return {
       title: "WhatsAnalyze - The WhatsApp Chat Analyzer",
@@ -127,13 +118,13 @@ export default {
           hid: "description",
           name: "description",
           property: "description",
-          content: "metaDescription",
+          content: "metaDescription"
         },
         {
           hid: "og:description",
           name: "og:description",
           property: "og:description",
-          content: "metaDescription",
+          content: "metaDescription"
         },
         {
           hid: "og:url",
@@ -159,7 +150,7 @@ export default {
 
   beforeDestroy() {
     window.removeEventListener("scroll", this.handleDebouncedScroll);
-    },
+  },
   methods: {
     Chat,
     newMessages(chatObject) {

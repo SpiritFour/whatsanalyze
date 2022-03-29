@@ -26,9 +26,15 @@ export default {
           code: "de",
           name: "Deutsch",
           flag: "🇩🇪",
-          iso: "de-DE"
-        }
-      ]
+          iso: "de-DE",
+        },
+        {
+          code: "es",
+          name: "Español",
+          flag: "🇪🇸",
+          iso: "es-ES",
+        },
+      ],
     };
   },
   watch: {
