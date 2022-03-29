@@ -14,7 +14,6 @@
     <br />
     <v-btn
       :to="to ? to : null"
-
       class="mt-5 text-h6 btn-color"
       elevation="10"
       style="color: #ffffff"
@@ -45,10 +44,8 @@ export default {
       type: String
     },
     title: {
-
       default: function () {
         return "analyzeYourChatTitle";
-
       },
       type: String
     }

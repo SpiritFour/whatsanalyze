@@ -65,10 +65,9 @@
       <About />
       <PdfExample />
       <Cta
-        button-txt="generateYourChatPDF"
-
-        text="getChatBeautiful"
         title="getFreePDFPreview"
+        button-txt="generateYourChatPDF"
+        text="getChatBeautiful"
         title="getFreePDFPreview"
       />
     </v-container>
@@ -120,7 +119,6 @@ export default {
           hid: "description",
           name: "description",
           property: "description",
-
           content: "metaDescription",
         },
         {
@@ -145,7 +143,6 @@ export default {
         gtagEvent(key, GTAG_LEAD);
       });
     }
-
   },
   mounted() {
     this.handleDebouncedScroll = debounce(this.handleScroll, 0);
@@ -154,7 +151,7 @@ export default {
 
   beforeDestroy() {
     window.removeEventListener("scroll", this.handleDebouncedScroll);
-  },
+    },
   methods: {
     Chat,
     newMessages(chatObject) {
@@ -181,9 +178,7 @@ export default {
       // Any code to be executed when the window is scrolled
       this.$refs.aboveTheFold.scrollTop = window.scrollY;
     }
-  },
-
-
+  }
 };
 </script>
 

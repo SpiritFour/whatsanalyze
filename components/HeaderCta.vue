@@ -4,7 +4,6 @@
       {{ $t(titelH1) }}
     </div>
     <br />
-
     <div class="text-h6 text-lg-body-1 text-xl-h5">
       {{ $t(titelH2) }}
     </div>
