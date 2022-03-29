@@ -65,10 +65,10 @@
       <About />
       <PdfExample />
       <Cta
-        title="getFreePDFPreview"
-
         button-txt="generateYourChatPDF"
+
         text="getChatBeautiful"
+        title="getFreePDFPreview"
         title="getFreePDFPreview"
       />
     </v-container>
@@ -98,14 +98,6 @@ export default {
       chat: undefined,
       attachments: undefined,
       loading: false
-    };
-  },
-  data() {
-    return {
-      isShowingChats: false,
-      chat: undefined,
-      attachments: undefined,
-      loading: false,
     };
   },
   head() {
@@ -185,13 +177,12 @@ export default {
     rando() {
       throw Error("random errro");
     },
-  },
-
     handleScroll() {
       // Any code to be executed when the window is scrolled
       this.$refs.aboveTheFold.scrollTop = window.scrollY;
     }
-  }
+  },
+
 
 };
 </script>
