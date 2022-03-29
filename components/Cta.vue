@@ -44,8 +44,8 @@ export default {
       type: String
     },
     title: {
-      default: function() {
-        return "analyzeYourChat";
+      default: function () {
+        return "analyzeYourChatTitle";
       },
       type: String
     }
