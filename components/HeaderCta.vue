@@ -5,7 +5,7 @@
     </div>
     <br />
     <div class="text-h6 text-lg-body-1 text-xl-h5">
-      {{ $t(titelH2) }}
+      <span v-html="$t(titelH2)" />
     </div>
     <br />
     <div class="py-1 px-3 text-lg-body-2 text-xl-h5 alert grey-highlight">

@@ -517,16 +517,16 @@ export const messages = {
       'Si selecciona "2", solo se muestran las dos personas con más mensajes\n' +
       '        individualmente. Otros se agrupan como "Otros"',
     infoSec:
-      "<b>No</b> chat <b>data</b> is sent to a server! All code runs\n" +
-      "      <b>locally</b> in your browser.",
+      "<b>No</b> se envían <b>datos</b>del chat a un servidor! Todos los códigos se ejecutan\n" +
+      "      <b>localmente</b> en su navegador.",
     infoPriv:
-      "This project is <b>open-source</b> and all code is <b>public</b> on\n" +
+      "Este proyecto es de <b>código abierto</b> y todo el código es <b>público</b> en\n" +
       "      <b>github</b>. <a\n" +
       '        class="black--text"\n' +
       '        target="_blank"\n' +
       '        href="https://github.com/SpiritFour/whatsanalyze"\n' +
       "      >\n" +
-      "        Check it yourself.\n" +
+      "        Compruébelo usted mismo.\n" +
       "      </a>",
     examplePDF: "PDF de ejemplo de una exportación de chat:",
     haveALook:
@@ -541,6 +541,6 @@ export const messages = {
     says: "dice",
     about: "Sobre nosotras",
     aboutPoints:
-      "Somos un grupo de <b>amigos de la universidad</b>. Como hace poco todos dejamos WhatsApp y queríamos analizar cómo evolucionaron los chats a lo largo de los años. <br /> <br /> Como <b>estudiantes de Informática< /b> son paranoicos y piensan que pueden hacer todo mejor, naturalmente queríamos construir una solución nosotros mismos, donde <b>ningún dato personal</b> se comparta o se haga público.",
+      "Somos un grupo de <b>amigos de la universidad</b>. Como hace poco todos dejamos WhatsApp y queríamos analizar cómo evolucionaron los chats a lo largo de los años. <br /> <br /> Como <b>estudiantes de Informática</b> son paranoicos y piensan que pueden hacer todo mejor, naturalmente queríamos construir una solución nosotros mismos, donde <b>ningún dato personal</b> se comparta o se haga público.",
   },
 };
