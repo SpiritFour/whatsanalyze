@@ -1,2 +1,5 @@
 jest.config.js
-test/*
+static/sw.js
+test/**/*
+dist/**/*
+node_modules

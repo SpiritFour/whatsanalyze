@@ -96,7 +96,7 @@
 
 <script>
 import { getDateString } from "~/functions/utils";
-import { getAttachment } from "~/functions/attachments.ts";
+import { getAttachment } from "~/functions/attachments";
 import { GTAG_INTERACTION, gtagEvent } from "~/functions/gtagValues";
 
 export default {

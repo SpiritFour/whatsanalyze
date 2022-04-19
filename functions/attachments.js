@@ -1,25 +1,11 @@
-import * as JSZip from "jszip";
-
-export enum MimeTypeGroup {
-  image,
-  video,
-  audio,
-  other,
+export class MimeTypeGroup {
+  static image = "image";
+  static video = "video";
+  static audio = "audio";
+  static other = "other";
 }
 
-interface MimeTypeData {
-  mimeType: string | undefined;
-  mimeTypeGroup: MimeTypeGroup;
-  mimeTypeEnding: string;
-  renderInPDF: boolean;
-}
-export interface Attachment {
-  mimeTypeData: MimeTypeData;
-  src: string;
-  fileName: string;
-}
-
-function getMimeType(fileName: string): MimeTypeData {
+function getMimeType(fileName) {
   function _internal() {
     if (/\.jpe?g$/.test(fileName) || fileName.endsWith(".png")) {
       return {
@@ -59,13 +45,10 @@ function getMimeType(fileName: string): MimeTypeData {
   };
 }
 
-function renderAttachment(
-  fileName: string,
-  attachmentData?: string
-): Attachment {
+function renderAttachment(fileName, attachmentData) {
   // if the attachmentData is null (because we were not able to find the file)
   // we set the mimetype to the same format as an unknown file
-  const mimeTypeData: MimeTypeData = attachmentData
+  const mimeTypeData = attachmentData
     ? getMimeType(fileName)
     : {
         mimeTypeGroup: MimeTypeGroup.other,
@@ -82,10 +65,7 @@ function renderAttachment(
 }
 
 // gets attachment mimeType, src, and filename from attachments
-export async function getAttachment(
-  fileName: string,
-  attachments: JSZip
-): Promise<Attachment> {
+export async function getAttachment(fileName, attachments) {
   // potentially this finds files that are a false match
   // but there is the case that the images are in the "zip" folder, so we need
   // to be sure to find em
