@@ -4,8 +4,9 @@
 
     <v-row v-if="showImage">
       <v-img
-        class="ma-auto mt-4 mb-8"
+        :lazy-src="require('@/assets/my-chat.jpg')"
         :src="require('@/assets/my-chat.jpg')"
+        class="ma-auto mt-4 mb-8"
         max-width="250"
       />
     </v-row>
@@ -13,11 +14,10 @@
     <br />
     <v-btn
       :to="to ? to : null"
-      @click="clickHandler"
-      color="#07bc4c"
-      style="color: #ffffff"
-      class="mt-5 text-h6"
+      class="mt-5 text-h6 btn-color"
       elevation="10"
+      style="color: #ffffff"
+      @click="clickHandler"
     >
       {{ $t(buttonTxt) }}
     </v-btn>
@@ -32,37 +32,37 @@ export default {
     showImage: { default: false, type: Boolean },
     to: { default: "", type: String },
     buttonTxt: {
-      default: function () {
+      default: function() {
         return "analyzeYourChat";
       },
-      type: String,
+      type: String
     },
     text: {
-      default: function () {
+      default: function() {
         return "analyzeYourChatLong";
       },
-      type: String,
+      type: String
     },
     title: {
       default: function () {
-        return "analyzeYourChat";
+        return "analyzeYourChatTitle";
       },
-      type: String,
-    },
+      type: String
+    }
   },
   data() {
     return {
-      GTAG_INTERACTION,
+      GTAG_INTERACTION
     };
   },
   methods: {
     clickHandler() {
       if (!this.to) {
         gtagEvent("jump_to_filehandler_cta", GTAG_INTERACTION, 0);
-        this.$vuetify.goTo(".filehandler", { duration: 300, offset: 100 });
+        this.$vuetify.goTo(".filehandler", { duration: 300, offset: 300 });
       }
     },
-    gtagEvent,
-  },
+    gtagEvent
+  }
 };
 </script>

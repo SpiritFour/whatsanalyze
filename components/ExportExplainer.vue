@@ -7,25 +7,26 @@
       <v-tab
         v-for="data in tabData"
         :key="data.title"
-        grow
         class="text-body-1 text-md-h4"
-        >{{ data.title }}</v-tab
+        grow
+      >{{ data.title }}
+      </v-tab
       >
     </v-tabs>
     <v-tabs-items v-model="tab">
       <client-only>
         <v-tab-item v-for="(data, idx) in tabData" :key="idx">
           <v-row no-gutters>
-            <v-col cols="12" sm="8" class="pb-10">
+            <v-col class="pb-10" cols="12" sm="8">
               <v-timeline dense>
                 <v-timeline-item
                   v-for="(tabItem, i) in data.tabItems"
                   :key="i"
-                  class="mb-4 align-center"
-                  small
-                  :text="$t(tabItem.text)"
                   :color="tabStatus[idx] === i ? 'blue' : 'grey'"
+                  :text="$t(tabItem.text)"
+                  class="mb-4 align-center"
                   fill-dot
+                  small
                   @click.native.stop="tabStatus = [i, i]"
                 >
                   <v-row style="cursor: pointer" v-html="$t(tabItem.text)">
@@ -34,19 +35,17 @@
                     v-if="i === 0 && tab === 1"
                     id="dlPWA "
                     :disabled="!installButtonStatus"
-                    class="mt-5 pa-2 white--text"
-                    color="#07bc4c"
-                    style=""
+                    class="mt-5 pa-2 white--text btn-color"
                     @click="downloadPWA"
-                    >{{ $t("addToHomescreen") }}</v-btn
+                  >{{ $t("addToHomescreen") }}
+                  </v-btn
                   >
                 </v-timeline-item>
               </v-timeline>
               <v-btn
-                elevation="10"
                 :to="to ? to : null"
-                color="#07bc4c"
-                class="text-md-h6 text-caption ml-10 white--text"
+                class="text-md-h6 text-caption ml-10 white--text btn-color"
+                elevation="10"
                 @click="clickHandler"
               >
                 <v-icon>mdi-arrow-right</v-icon>
@@ -54,34 +53,30 @@
               </v-btn>
             </v-col>
             <v-col
+              :class="{ 'mobile-padding': $vuetify.breakpoint.xsOnly }"
+              class="py-5 px-md-15"
               cols="12"
               sm="4"
-              class="py-5 px-md-15"
-              :class="{ 'mobile-padding': $vuetify.breakpoint.xsOnly }"
             >
               <div class="carousel-container px-4">
-                <v-img ref="smartphone" class="frame" :src="data.frameImg" />
+                <v-img ref="smartphone" :src="data.frameImg" class="frame" />
                 <!-- model and pngs-->
                 <v-carousel
                   v-model="tabStatus[idx]"
                   :continuous="false"
+                  class="frame-container px-4"
+                  height="auto"
                   hide-delimiter-background
                   hide-delimiters
                   show-arrows
-                  class="frame-container px-4"
-                  height="auto"
                 >
                   <v-carousel-item
                     v-for="(item, idx) in data.carouselItems"
                     :key="idx"
                     @click.native.stop="increaseTabstatus()"
                   >
-                    <v-img :lazy-src="item.imgLazy" :src="item.img"> </v-img>
+                    <v-img :lazy-src="item.imgLazy" :src="item.img"></v-img>
                     <v-btn
-                      fab
-                      outlined
-                      color="black"
-                      disabled
                       :style="
                         'position: absolute; left: ' +
                         item.x +
@@ -89,13 +84,19 @@
                         item.y
                       "
                       class="blinking"
+                      color="black"
+                      disabled
+                      fab
+                      outlined
                     ></v-btn>
                   </v-carousel-item>
                 </v-carousel>
               </div>
             </v-col>
-          </v-row> </v-tab-item
-      ></client-only>
+          </v-row>
+        </v-tab-item
+        >
+      </client-only>
     </v-tabs-items>
   </v-container>
 </template>
@@ -131,11 +132,7 @@ import img5 from "@/assets/img/Android/5.png";
 import img5_lazy from "@/assets/img/Android/5copy.png";
 import img6 from "@/assets/img/Android/6.png";
 import img6_lazy from "@/assets/img/Android/6copy.png";
-import {
-  GTAG_INTERACTION,
-  GTAG_INSTALL,
-  gtagEvent,
-} from "~/functions/gtagValues";
+import { GTAG_INSTALL, GTAG_INTERACTION, gtagEvent } from "~/functions/gtagValues";
 
 let apple = () => false;
 // eslint-disable-next-line no-undef
@@ -153,12 +150,12 @@ if (process.browser) {
 export default {
   props: {
     cta: {
-      default: function () {
+      default: function() {
         return "selectFile";
       },
-      type: String,
+      type: String
     },
-    to: { default: null, type: String },
+    to: { default: null, type: String }
   },
   data() {
     return {
@@ -177,74 +174,74 @@ export default {
               imgLazy: iOS_img1_lazy,
               text: "",
               x: "50%",
-              y: "10%",
+              y: "10%"
             },
             {
               img: iOS_img2,
               imgLazy: iOS_img2_lazy,
               text: "",
               x: "50%",
-              y: "88%",
+              y: "88%"
             },
             {
               img: iOS_img3,
               imgLazy: iOS_img3_lazy,
               text: "",
               x: "20%",
-              y: "61%",
+              y: "61%"
             },
             {
               img: iOS_img4,
               imgLazy: iOS_img4_lazy,
               text: "",
               x: "50%",
-              y: "76%",
+              y: "76%"
             },
             {
               img: iOS_img5,
               imgLazy: iOS_img5_lazy,
               text: "",
               x: "50%",
-              y: "63%",
+              y: "63%"
             },
             {
               img: iOS_img6,
               imgLazy: iOS_img6_lazy,
               text: "",
               x: "50%",
-              y: "32%",
+              y: "32%"
             },
             {
               img: iOS_img7,
               imgLazy: iOS_img7_lazy,
               text: "",
               x: "50%",
-              y: "81.5%",
-            },
+              y: "81.5%"
+            }
           ],
           tabItems: [
             {
-              text: "tabItemiOS1",
+              text: "tabItemiOS1"
             },
             {
-              text: "tabItemiOS2",
+              text: "tabItemiOS2"
             },
             {
-              text: "tabItemiOS3",
+              text: "tabItemiOS3"
             },
             {
-              text: "tabItemiOS4",
+              text: "tabItemiOS4"
             },
             {
-              text: "tabItemiOS5",
+              text: "tabItemiOS5"
             },
             {
-              text: "tabItemiOS6",
+              text: "tabItemiOS6"
             },
             {
-              text: "tabItemiOS7",
-            },
-          ],
+              text: "tabItemiOS7"
+            }
+          ]
         },
         {
           title: "Android",
@@ -255,66 +252,66 @@ export default {
               imgLazy: img1_lazy,
               text: "",
               x: "78%",
-              y: "51%",
+              y: "51%"
             },
             {
               img: img2,
               imgLazy: img2_lazy,
               text: "",
               x: "89%",
-              y: "13%",
+              y: "13%"
             },
             {
               img: img3,
               imgLazy: img3_lazy,
               text: "",
               x: "60%",
-              y: "37%",
+              y: "37%"
             },
             {
               img: img4,
               imgLazy: img4_lazy,
               text: "",
               x: "60%",
-              y: "27%",
+              y: "27%"
             },
             {
               img: img5,
               imgLazy: img5_lazy,
               text: "",
               x: "67%",
-              y: "48%",
+              y: "48%"
             },
             {
               img: img6,
               imgLazy: img6_lazy,
               text: "",
               x: "14%",
-              y: "73%",
-            },
+              y: "73%"
+            }
           ],
           tabItems: [
             {
-              text: "tabItemAndroid1",
+              text: "tabItemAndroid1"
             },
             {
-              text: "tabItemAndroid2",
+              text: "tabItemAndroid2"
             },
             {
-              text: "tabItemAndroid3",
+              text: "tabItemAndroid3"
             },
             {
-              text: "tabItemAndroid4",
+              text: "tabItemAndroid4"
             },
             {
-              text: "tabItemAndroid5",
+              text: "tabItemAndroid5"
             },
             {
-              text: "tabItemAndroid6",
-            },
-          ],
-        },
-      ],
+              text: "tabItemAndroid6"
+            }
+          ]
+        }
+      ]
     };
   },
   created() {
@@ -326,7 +323,7 @@ export default {
         gtagEvent("jump_to_filehandler_" + this.tab, GTAG_INTERACTION, 0);
         this.$vuetify.goTo(".filehandler", {
           duration: 300,
-          offset: 100,
+          offset: 100
         });
       }
     },
@@ -371,12 +368,12 @@ export default {
         });
       }
     },
-    gtagEvent,
-  },
+    gtagEvent
+  }
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .carousel-container {
   position: relative;
   width: 100%;

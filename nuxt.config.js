@@ -4,7 +4,7 @@ import { messages } from "./utils/translations.js";
 import Sentry from "@nuxtjs/sentry";
 
 const local = process.env.NUXT_ENV_LOCAL !== undefined;
-const baseUrl = (
+const baseUrl = ( // eslint-disable-next-line no-undef
   process.env.BASE_URL || "https://www.whatsanalyze.com"
 ).replace("http:", "https:");
 
@@ -146,6 +146,10 @@ export default {
       {
         code: "de",
         iso: "de-DE",
+      },
+      {
+        code: "es",
+        iso: "es-ES",
       },
     ],
     defaultLocale: "en",

@@ -5,7 +5,7 @@
       to="/"
       class="pt-0 pb-15"
       title="backupWhatsApp"
-      buttonTxt="exportAsPDF"
+      button-txt="exportAsPDF"
       text="ctaBullets"
     />
   </v-container>
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: "switch-from-whatsapp-to-signal",
+  name: "SwitchFromWhatsappToSignal",
   async asyncData({ $content }) {
     const page = await $content("whatsapp-signal").fetch();
     return {
@@ -39,15 +39,13 @@ export default {
         hid: "description",
         name: "description",
         property: "description",
-        content:
-          "Switch from WhatsApp to Signal ✓ Transfer your Group Chats ✓ Create Backups",
+        content: "metaDescriptionSignal",
       },
       {
         hid: "og:description",
         name: "og:description",
         property: "og:description",
-        content:
-          "Switch from WhatsApp to Signal ✓ Transfer your Group Chats ✓ Create Backups",
+        content: "metaDescriptionSignal",
       },
       {
         hid: "og:url",

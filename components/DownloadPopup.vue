@@ -1,7 +1,7 @@
 <template>
   <v-col class="mb-8">
     <v-row justify="center">
-      <div class="my-md-4 pa-8" :class="{ cta: !isSimple }">
+      <div :class="{ cta: !isSimple }" class="my-md-4 pa-8">
         <div v-if="!isSimple" class="text-h3 font-weight-bold pb-4">
           Download all Graphs at once!
         </div>
@@ -9,15 +9,16 @@
           Share them with your friends, all free just for you ❤️️
         </div>
         <v-dialog v-model="dialog" width="600">
-          <template v-slot:activator="{ on }">
+          <template #activator="{ on }">
             <v-btn
-              color="#07bc4c"
-              dark
-              v-on="on"
-              @click="download"
               :loading="loading"
+              class="btn-color"
+              dark
+              @click="download"
+              v-on="on"
             >
-              <v-icon class="mr-2">mdi-download</v-icon>Download Results
+              <v-icon class="mr-2">mdi-download</v-icon>
+              Download Results
             </v-btn>
           </template>
 
@@ -32,8 +33,8 @@
 
             <v-row
               align="center"
-              justify="center"
               class="mb-3"
+              justify="center"
               @click="paypalButtonPressed"
             >
               <form
@@ -42,33 +43,33 @@
                 target="_blank"
               >
                 <input
-                  type="hidden"
                   name="hosted_button_id"
+                  type="hidden"
                   value="EPCYG8WEF289G"
                 />
                 <input
-                  type="image"
-                  src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"
+                  alt="Donate with PayPal button"
                   border="0"
                   name="submit"
+                  src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"
                   title="PayPal - The safer, easier way to pay online!"
-                  alt="Donate with PayPal button"
+                  type="image"
                 />
                 <img
                   alt=""
                   border="0"
+                  height="1"
                   src="https://www.paypal.com/en_US/i/scr/pixel.gif"
                   width="1"
-                  height="1"
                 />
               </form>
             </v-row>
             <v-divider></v-divider>
             <v-progress-linear
               v-if="loading"
-              indeterminate
-              color="blue"
               class="mb-0"
+              color="blue"
+              indeterminate
             ></v-progress-linear>
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -87,14 +88,18 @@
 
             <v-btn
               v-if="!isSimple"
-              color="#07bc4c"
+              class="btn-color"
               dark
               @click="
                 gtagEvent('jump_to_pdf_download_cta', GTAG_INTERACTION, 0);
                 $vuetify.goTo('#payButton', { duration: 300, offset: 100 });
               "
-              ><v-icon class="mr-2">mdi-keyboard-return</v-icon
-              >{{ $t("goToPDF") }}</v-btn
+            >
+              <v-icon class="mr-2">mdi-arrow-right
+              </v-icon
+              >
+              {{ $t("goToPDF") }}
+            </v-btn
             >
           </v-col>
         </div>
@@ -106,29 +111,24 @@
 <script>
 import html2canvas from "html2canvas";
 import { downloadBase64File } from "~/functions/utils";
-import {
-  gtagEvent,
-  GTAG_INTERACTION,
-  GTAG_PAYMENT,
-  GTAG_RESULTS,
-} from "~/functions/gtagValues";
+import { GTAG_INTERACTION, GTAG_PAYMENT, GTAG_RESULTS, gtagEvent } from "~/functions/gtagValues";
 
 export default {
   name: "DownloadPopup",
   props: {
     chat: { type: Object },
-    isSimple: { default: false, type: Boolean },
+    isSimple: { default: false, type: Boolean }
   },
   data() {
     return {
       dialog: false,
       loading: false,
       suffix: this.isSimple ? "-top" : "",
-      GTAG_INTERACTION,
+      GTAG_INTERACTION
     };
   },
   methods: {
-    download: function () {
+    download: function() {
       this.loading = true;
       gtagEvent("download_image", GTAG_RESULTS);
 
@@ -151,13 +151,13 @@ export default {
           scrollX: 0,
           scrollY: -window.scrollY,
           height: normalHeight + additionalHeight + negativeHeight,
-          onclone: function (clonedDoc) {
+          onclone: function(clonedDoc) {
             let nonVisibleStuff = clonedDoc.querySelectorAll(
               ".only-visible-to-html2canvas"
             );
             nonVisibleStuff.forEach((y) => (y.style.display = "block"));
             return clonedDoc;
-          },
+          }
         });
 
         let names = this.chat.messagesPerPerson
@@ -176,7 +176,7 @@ export default {
     paypalButtonPressed() {
       gtagEvent("donation_download_results", GTAG_PAYMENT, 5);
     },
-    gtagEvent,
-  },
+    gtagEvent
+  }
 };
 </script>
