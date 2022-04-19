@@ -1,76 +1,74 @@
 <template>
   <div
-    class="drop-container pa-md-0"
+    class="file-handler pa-md-0"
     @dragover.prevent="dragOver"
     @dragleave.prevent="dragLeave"
     @drop.prevent="drop($event)"
   >
-    <v-icon size="50" color="rgba(0,0,0,0.8)" class="py-2">
-      mdi-chevron-down
-    </v-icon>
-
-    <label style="cursor: pointer" for="uploadmytextfile">
-      <div
-        class="drop pa-3"
-        :class="{
+    <div class="drop-container">
+      <label for="uploadmytextfile" style="cursor: pointer">
+        <div
+          :class="{
           isDragging: isDragging,
           smallFont: $vuetify.breakpoint.smAndDown,
           isSuccess: isSuccess,
         }"
-      >
-        <input
-          type="file"
-          multiple
-          id="uploadmytextfile"
-          @change="requestUploadFile"
-        />
-        <!-- Wrong File -->
-        <div v-show="wrongFile" class="text-body-1 text-md-h5 w-100">
-          {{ $t("fileWrong") }}
-        </div>
-        <!-- is Dragging -->
-        <div v-show="isDragging" class="text-h4 py-2 w-100">
-          <br />
-          {{ $t("fileDrop") }}
-        </div>
-        <!-- Standard State -->
-        <div
-          class="text-body-1 text-md-h5 w-100"
-          v-show="!isDragging && !wrongFile && !processing"
+          class="drop pa-3"
         >
-          <v-icon size="2em"> mdi-file </v-icon>
+          <input
+            id="uploadmytextfile"
+            multiple
+            type="file"
+            @change="requestUploadFile"
+          />
+          <!-- Wrong File -->
+          <div v-show="wrongFile" class="text-body-1 text-md-h6 text-xl-h5 w-100">
+            {{ $t("fileWrong") }}
+          </div>
+          <!-- is Dragging -->
+          <div v-if="isDragging" class="w-100 h-100">
+            <br />
+            {{ $t("fileDrop") }}
+          </div>
+          <!-- Standard State -->
+          <div
+            v-if="!isDragging &&!wrongFile && !processing"
+            class="text-body-1 text-md-h6 text-xl-h5 w-100 h-100"
+          >
+            <v-icon v-if="!isSuccess" size="2em">mdi-file</v-icon>
+
+            <div :class="{ 'text-caption': isSuccess }">
+              <div v-if="isSuccess" v-html="$t('fileDone')"></div>
+              <span v-if="$vuetify.breakpoint.mdAndUp" v-html="$t('fileSuccess')">
+              </span>
+              <span
+                v-if="$vuetify.breakpoint.smAndDown"
+                v-html="$t('fileSelect')"
+              >
+              </span>
+
+              <span v-if="isSuccess" v-html="$t('fileAnother')"></span>
+              <span v-if="!isSuccess" v-html="$t('fileZip')"></span>
+            </div>
+
+          </div>
           <br />
-
-          <div v-if="isSuccess" v-html="$t('fileDone')"></div>
-
-          <div :class="{ 'text-caption': isSuccess }">
-            <span v-if="$vuetify.breakpoint.mdAndUp" v-html="$t('fileSuccess')">
-            </span>
-            <span
-              v-if="$vuetify.breakpoint.smAndDown"
-              v-html="$t('fileSelect')"
-            >
-            </span>
-
-            <span v-if="isSuccess" v-html="$t('fileAnother')"></span>
-            <span v-if="!isSuccess" v-html="$t('fileZip')"></span>
+          <div v-show="processing" class="text-body-1 text-md-h6 text-xl-h5 w-100">
+            <img height="40" src="@/assets/loader.svg" width="40" />
+            <br />
+            <span v-html="$t('fileProcessing')" />
           </div>
         </div>
-        <br />
-        <div class="text-body-1 text-md-h5 w-100" v-show="processing">
-          <img src="@/assets/loader.svg" height="40" width="40" />
-          <br />
-          <span v-html="$t('fileProcessing')" />
-        </div>
-      </div>
-    </label>
+      </label>
+
+    </div>
   </div>
 </template>
 
 <script>
 import { parseString } from "whatsapp-chat-parser";
 import JSZip from "jszip";
-import { gtagEvent, GTAG_FILE } from "~/functions/gtagValues";
+import { GTAG_FILE, gtagEvent } from "~/functions/gtagValues";
 
 export default {
   name: "FileHandler",
@@ -80,13 +78,13 @@ export default {
       wrongFile: false,
       processing: false,
       isSuccess: false,
-      attachments: {},
+      attachments: {}
     };
   },
   methods: {
     extendDataStructure(chatObject) {
       let authors = {};
-      chatObject.messages.forEach(function (object, index) {
+      chatObject.messages.forEach(function(object, index) {
         if (!(object.author in authors)) authors[object.author] = 0;
         else authors[object.author] += 1;
         object.absolute_id = index;
@@ -103,11 +101,11 @@ export default {
         .then((zipData) => {
           let chatFile = this.getChatFile(zipData);
           return parseString(chatFile, {
-            parseAttachments: true,
+            parseAttachments: true
           }).then((messages) => {
             return {
               messages: messages,
-              attachments: zipData,
+              attachments: zipData
             };
           });
         })
@@ -144,7 +142,7 @@ export default {
       const reader = new FileReader();
       reader.addEventListener("loadend", (loadedFile) => {
         parseString(loadedFile.target.result, {
-          parseAttachments: true,
+          parseAttachments: true
         }).then((messages) => {
           this.updateMessages({
             messages: messages,
@@ -155,10 +153,10 @@ export default {
                   async: () =>
                     Promise.resolve(
                       this.files.find((file) => file.name === _fileName)
-                    ),
+                    )
                 };
-              },
-            },
+              }
+            }
           });
         });
       });
@@ -229,12 +227,12 @@ export default {
       let src = this.$el.querySelector("#uploadmytextfile");
       let fileList = src.files;
       this.processFileList(fileList);
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .w-100 {
   width: 100%;
 }
@@ -243,24 +241,27 @@ export default {
   font-size: 1.1em !important;
 }
 
-.drop-container {
+.file-handler {
   text-align: center;
   background: $c-blue-accent;
+}
+
+.drop-container {
+  background-color: $c-blue-accent-light;
+  border-radius: 10px;
+  padding: 10px;
 }
 
 .drop {
   display: flex;
   align-items: center;
   justify-items: center;
-  min-height: 150px;
+  //min-height: 150px;
   // outline
-  border: 2px dashed $c-dark;
-  border-radius: 20px;
-
-  // animation
-  animation-name: attention;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
+  border: 2px dashed rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  color: black;
+  //background: white;
 }
 
 @keyframes attention {

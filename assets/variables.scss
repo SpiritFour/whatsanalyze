@@ -16,8 +16,14 @@ $c-white-dark: #bfbfbf;
 $c-white-accent: #e1e1e1;
 
 // BLUE
-$c-blue: #016f94;
 $c-blue-accent: #21a68d;
+$c-blue-accent-light: #60d8bd;
+$c-blue-accent-dark: #007660;
+
+$c-blue-secondary: #0c808c;
+$c-blue-secondary-light: #51b0bc;
+$c-blue-secondary-dark: #00535f;
+
 $c-blue-dark: #11538c;
 $c-blue-accent-dark: #227373;
 
@@ -56,6 +62,14 @@ $c-red-dark-accent: #911146;
 
 .cta {
   background: $c-white;
+}
+
+.btn-color {
+  background-color: $c-blue-accent !important;
+}
+
+.btn-color-dark {
+  background-color: $c-blue-secondary-dark !important;
 }
 
 .link {

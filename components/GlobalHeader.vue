@@ -1,16 +1,16 @@
 <template>
-  <div class="nav pl-xs-8 pl-0 py-0 py-md-8 additional-height">
+  <div class="nav pl-xs-8 pl-0 py-0 py-md-0  additional-height">
     <v-container class="pl-md-16">
-      <v-card flat tile color="#21a68d">
+      <v-card color="#21a68d" flat tile>
         <v-card-actions>
           <nuxt-link to="/">
             <h1 style="color: black; font-size: 2em">
               <img
-                src="~/assets/whatsanalyze-logo-black.png"
-                height="40px"
                 alt="WhatsAnalyze Logo"
-                style="vertical-align: sub"
                 class="pr-3"
+                height="40px"
+                src="~/assets/whatsanalyze-logo-black.png"
+                style="vertical-align: sub"
               />
               WhatsAnalyze
             </h1>
@@ -24,9 +24,10 @@
 </template>
 <script>
 import LanguageSwitcher from "./LanguageSwitcher.vue";
+
 export default {
-  components: { LanguageSwitcher },
   name: "GlobalHeader",
+  components: { LanguageSwitcher }
 };
 </script>
 <style lang="scss" scoped>
