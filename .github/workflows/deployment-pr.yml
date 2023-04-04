@@ -11,6 +11,7 @@ name: Deploy to Firebase Hosting on PR
 jobs:
   deploy-firebase-pr:
     runs-on: ubuntu-latest
+    node-version: [16.x]
     steps:
       - uses: actions/checkout@v2
       - run: yarn install && yarn ci-dev-build
