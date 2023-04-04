@@ -15,6 +15,7 @@
     <v-row>
       <Chat :attachments="attachments" :chat="chat" @setEgo="setEgo" />
     </v-row>
+
     <v-row justify="center">
       <PdfDownload
         :attachments="attachments"

@@ -2,28 +2,36 @@
   <div>
     <div ref="aboveTheFold" class="top-color" style="overflow-y: hidden">
       <v-container>
-        <v-row v-if="$vuetify.breakpoint.mdAndUp"
-               :style="isShowingChats ? 'height: fit-content' : 'height: 70vh; min-height:504px;'"
-               class="center-content"
-               no-gutters
+        <v-row
+          v-if="$vuetify.breakpoint.mdAndUp"
+          :style="
+            isShowingChats
+              ? 'height: fit-content'
+              : 'height: 70vh; min-height:504px;'
+          "
+          class="center-content"
+          no-gutters
         >
           <v-col
             :md="isShowingChats ? 9 : 6"
             class="px-0 px-md-16 pb-8"
             cols="12"
           >
-            <v-row :style="isShowingChats ? 'height: fit-content' : 'height: 45vh;'"
-                   class="center-content"
+            <v-row
+              :style="isShowingChats ? 'height: fit-content' : 'height: 45vh;'"
+              class="center-content"
             >
               <HeaderCta />
               <ArrowDown :animate="true" />
             </v-row>
-            <v-row :style="isShowingChats ? 'height: fit-content' : 'height: 25vh;'"
-                   class="center-content filehandler">
+            <v-row
+              :style="isShowingChats ? 'height: fit-content' : 'height: 25vh;'"
+              class="center-content filehandler"
+            >
               <FileHandler
-                :style="isShowingChats? 'max-width: 800px' : ''"
+                :style="isShowingChats ? 'max-width: 800px' : ''"
                 class=""
-                style="align-self:end; width: 100%"
+                style="align-self: end; width: 100%"
                 @hide_explanation="isShowingChats = $event"
                 @new_messages="newMessages"
               />
@@ -53,7 +61,11 @@
         </v-row>
       </v-container>
     </div>
-    <v-row v-if="$vuetify.breakpoint.mdAndUp" no-gutters style="height: 10vh; justify-content: center;">
+    <v-row
+      v-if="$vuetify.breakpoint.mdAndUp"
+      no-gutters
+      style="height: 10vh; justify-content: center"
+    >
       <ArrowDown :animate="true" />
     </v-row>
     <TrustLogos v-if="!isShowingChats" />
@@ -79,15 +91,19 @@
 
 <script>
 import { Chat } from "~/functions/transformChatData";
-import { GTAG_INTERACTION, GTAG_LEAD, GTAG_NUM_PERSONS, gtagEvent } from "~/functions/gtagValues";
+import {
+  GTAG_INTERACTION,
+  GTAG_LEAD,
+  GTAG_NUM_PERSONS,
+  gtagEvent,
+} from "~/functions/gtagValues";
 import debounce from "lodash/debounce";
-
 
 export default {
   async asyncData({ $content }) {
     const page = await $content("home").fetch();
     return {
-      page
+      page,
     };
   },
   data() {
@@ -95,7 +111,7 @@ export default {
       isShowingChats: false,
       chat: undefined,
       attachments: undefined,
-      loading: false
+      loading: false,
     };
   },
   head() {
@@ -106,33 +122,33 @@ export default {
           hid: "og:title",
           name: "og:title",
           property: "og:title",
-          content: "WhatsAnalyze - The WhatsApp Chat Analyzer"
+          content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
         },
         {
           hid: "og:site_name",
           name: "og:site_name",
           property: "og:site_name",
-          content: "WhatsAnalyze - The WhatsApp Chat Analyzer"
+          content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
         },
         {
           hid: "description",
           name: "description",
           property: "description",
-          content: "metaDescription"
+          content: "metaDescription",
         },
         {
           hid: "og:description",
           name: "og:description",
           property: "og:description",
-          content: "metaDescription"
+          content: "metaDescription",
         },
         {
           hid: "og:url",
           name: "og:url",
           property: "og:url",
-          content: "whatsanalyze.com"
-        }
-      ]
+          content: "whatsanalyze.com",
+        },
+      ],
     };
   },
   created() {
@@ -176,8 +192,8 @@ export default {
     handleScroll() {
       // Any code to be executed when the window is scrolled
       this.$refs.aboveTheFold.scrollTop = window.scrollY;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -266,4 +282,30 @@ export default {
   justify-content: center;
 }
 
+.overflow-hidden {
+  overflow: hidden;
+}
+.loading {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  height: 10px;
+  background: black;
+  animation: lds-dual-ring 2s linear infinite;
+  overflow: hidden;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: translateX(0);
+  }
+  33% {
+    transform: translateX(100%);
+  }
+  66% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
 </style>
