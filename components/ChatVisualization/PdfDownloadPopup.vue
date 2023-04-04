@@ -1,5 +1,5 @@
 <template>
-  <div class="cta pa-2 pa-md-5 my-md-2">
+  <div class="cta pa-2 pa-md-5 my-md-2 overflow-hidden">
     <div class="text-h4 text-md-h3 font-weight-bold pb-4">
       {{ $t("downloadPDF") }}
     </div>
@@ -12,12 +12,7 @@
       />
     </v-row>
 
-    <v-progress-linear
-      v-show="isLoading"
-      class="mb-2"
-      color="blue"
-      indeterminate
-    ></v-progress-linear>
+    <div v-show="isLoading" class="loading"></div>
 
     <v-dialog v-model="showDownloadPopup" width="550">
       <template #activator="{ on, attrs }">
@@ -109,7 +104,7 @@ export default {
       showDownloadPopup: false,
       isLoading: false,
       GTAG_PAYMENT,
-      GTAG_PDF
+      GTAG_PDF,
     };
   },
   methods: {
@@ -127,8 +122,7 @@ export default {
       gtagEvent("approved", GTAG_PAYMENT, 10);
       this.download();
     },
-    onError() {
-    },
+    onError() {},
     downloadSample() {
       gtagEvent("sample_download", GTAG_PDF, 2);
       this.isLoading = true;
@@ -141,7 +135,7 @@ export default {
         !this.$route.query.free
       ).then(() => (this.isLoading = false));
     },
-    gtagEvent
-  }
+    gtagEvent,
+  },
 };
 </script>

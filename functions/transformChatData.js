@@ -50,9 +50,14 @@ export class Chat {
   }
 
   static get_longest_message(chat_object) {
-    return Math.max(
-      ...chat_object.map((object) => object.message.split(" ").length)
-    );
+    let max_value = 0;
+    chat_object.forEach((chat_line) => {
+      const cur_length = chat_line.message.split(" ").length;
+      if (max_value < cur_length) {
+        max_value = cur_length;
+      }
+    });
+    return max_value;
   }
 
   // creates a sorted FreqArray for the chat corpus [{word: 10},{hi:9},...]

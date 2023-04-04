@@ -9,10 +9,10 @@
       <label for="uploadmytextfile" style="cursor: pointer">
         <div
           :class="{
-          isDragging: isDragging,
-          smallFont: $vuetify.breakpoint.smAndDown,
-          isSuccess: isSuccess,
-        }"
+            isDragging: isDragging,
+            smallFont: $vuetify.breakpoint.smAndDown,
+            isSuccess: isSuccess,
+          }"
           class="drop pa-3"
         >
           <input
@@ -22,9 +22,11 @@
             @change="requestUploadFile"
           />
           <!-- Wrong File -->
-          <div v-show="wrongFile" class="text-body-1 text-md-h6 text-xl-h5 w-100">
-            {{ $t("fileWrong") }}
-          </div>
+          <div
+            v-show="wrongFile"
+            class="text-body-1 text-md-h6 text-xl-h5 w-100"
+            v-html="$t('fileWrong')"
+          ></div>
           <!-- is Dragging -->
           <div v-if="isDragging" class="w-100 h-100">
             <br />
@@ -32,14 +34,17 @@
           </div>
           <!-- Standard State -->
           <div
-            v-if="!isDragging &&!wrongFile && !processing"
+            v-if="!isDragging && !wrongFile && !processing"
             class="text-body-1 text-md-h6 text-xl-h5 w-100 h-100"
           >
             <v-icon v-if="!isSuccess" size="2em">mdi-file</v-icon>
 
             <div :class="{ 'text-caption': isSuccess }">
               <div v-if="isSuccess" v-html="$t('fileDone')"></div>
-              <span v-if="$vuetify.breakpoint.mdAndUp" v-html="$t('fileSuccess')">
+              <span
+                v-if="$vuetify.breakpoint.mdAndUp"
+                v-html="$t('fileSuccess')"
+              >
               </span>
               <span
                 v-if="$vuetify.breakpoint.smAndDown"
@@ -50,17 +55,18 @@
               <span v-if="isSuccess" v-html="$t('fileAnother')"></span>
               <span v-if="!isSuccess" v-html="$t('fileZip')"></span>
             </div>
-
           </div>
           <br />
-          <div v-show="processing" class="text-body-1 text-md-h6 text-xl-h5 w-100">
-            <img height="40" src="@/assets/loader.svg" width="40" />
+          <div
+            v-show="processing"
+            class="text-body-1 text-md-h6 text-xl-h5 w-100 overflow-hidden"
+          >
+            <div class="loading" />
             <br />
             <span v-html="$t('fileProcessing')" />
           </div>
         </div>
       </label>
-
     </div>
   </div>
 </template>
@@ -78,13 +84,13 @@ export default {
       wrongFile: false,
       processing: false,
       isSuccess: false,
-      attachments: {}
+      attachments: {},
     };
   },
   methods: {
     extendDataStructure(chatObject) {
       let authors = {};
-      chatObject.messages.forEach(function(object, index) {
+      chatObject.messages.forEach(function (object, index) {
         if (!(object.author in authors)) authors[object.author] = 0;
         else authors[object.author] += 1;
         object.absolute_id = index;
@@ -101,11 +107,11 @@ export default {
         .then((zipData) => {
           let chatFile = this.getChatFile(zipData);
           return parseString(chatFile, {
-            parseAttachments: true
+            parseAttachments: true,
           }).then((messages) => {
             return {
               messages: messages,
-              attachments: zipData
+              attachments: zipData,
             };
           });
         })
@@ -142,7 +148,7 @@ export default {
       const reader = new FileReader();
       reader.addEventListener("loadend", (loadedFile) => {
         parseString(loadedFile.target.result, {
-          parseAttachments: true
+          parseAttachments: true,
         }).then((messages) => {
           this.updateMessages({
             messages: messages,
@@ -153,10 +159,10 @@ export default {
                   async: () =>
                     Promise.resolve(
                       this.files.find((file) => file.name === _fileName)
-                    )
+                    ),
                 };
-              }
-            }
+              },
+            },
           });
         });
       });
@@ -227,8 +233,8 @@ export default {
       let src = this.$el.querySelector("#uploadmytextfile");
       let fileList = src.files;
       this.processFileList(fileList);
-    }
-  }
+    },
+  },
 };
 </script>
 
