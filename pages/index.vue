@@ -1,6 +1,5 @@
 <template>
   <div>
-    <v-btn @click="rando"></v-btn>
     <div ref="aboveTheFold" class="top-color" style="overflow-y: hidden">
       <v-container>
         <v-row
