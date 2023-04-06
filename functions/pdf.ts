@@ -31,7 +31,8 @@ export async function render(
   messagesPerTimeOfDay: any,
   messagesPerPerson: any,
   radarMonth: any,
-  radarDay: any
+  radarDay: any,
+  webworker: any
 ) {
   // Default export is a4 paper, portrait, using millimeters for units
   // eslint-disable-next-line new-cap
@@ -294,6 +295,11 @@ export async function render(
   const messages = isSample ? chat.chatObject.slice(0, 100) : chat.chatObject;
 
   for (const idx in messages) {
+    webworker.postMessage({
+      data: (Number(idx) / messages.length) * 100,
+      type: "progress",
+    });
+
     const data = messages[idx];
     let isSystem = data.author === "System";
     const isEgo = ego === data.author;

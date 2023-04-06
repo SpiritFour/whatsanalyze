@@ -12,14 +12,14 @@
       />
     </v-row>
 
-    <v-row v-show="true" class="ma-3">
+    <v-row v-show="isLoading" class="ma-3">
       <div class="text-body-1 pa-2">
         {{ $t("waitingForPDF") }}
       </div>
       <v-progress-linear
         class=""
         color="blue"
-        indeterminate
+        :value="progress"
       ></v-progress-linear>
     </v-row>
 
@@ -118,6 +118,7 @@ export default {
       isLoading: false,
       GTAG_PAYMENT,
       GTAG_PDF,
+      progress: 0,
     };
   },
   methods: {
@@ -139,6 +140,7 @@ export default {
     async downloadSample() {
       gtagEvent("sample_download", GTAG_PDF, 2);
       this.isLoading = true;
+      this.progress = 0;
 
       if (process.browser) {
         const chatTimeline = await loadImage("#chat-timeline");
@@ -156,13 +158,11 @@ export default {
         const chat = objectToDictionary(this.chat);
         chat.funFacts = await this.chat.getFunFacts();
 
-        console.log(chat);
-        console.log(this.chat);
         worker.postMessage({
           chat: chat,
           attachments: this.attachments,
           ego: this.ego,
-          isSample: true,
+          isSample: false,
           chatTimeline,
           messagesPerTimeOfDay,
           messagesPerPerson,
@@ -172,11 +172,15 @@ export default {
       }
     },
     workerResponseHandler: function (event) {
-      console.log("[WORKER REPONSE]", event);
-      const pdfData = event.data;
-      const blob = new Blob([pdfData], { type: "application/pdf" });
-      saveAs(blob, "WhatsAnalyze - " + this.ego);
-      this.isLoading = false;
+      const data = event.data;
+      if (data.type === "pdf") {
+        const blob = new Blob([data.data], { type: "application/pdf" });
+        saveAs(blob, "WhatsAnalyze - " + this.ego);
+        this.isLoading = false;
+      }
+      if (data.type === "progress") {
+        this.progress = data.data;
+      }
     },
     gtagEvent,
   },

@@ -24,10 +24,11 @@ self.onmessage = async (event) => {
     messagesPerTimeOfDay,
     messagesPerPerson,
     radarMonth,
-    radarDay
+    radarDay,
+    self
   );
 
   // we can not transfer functions from web worker to main thread thus we serialize it
-  const pdfData = doc.output("arraybuffer");
-  self.postMessage(pdfData, [pdfData]);
+  const pdfData = { data: doc.output("arraybuffer"), type: "pdf" };
+  self.postMessage(pdfData, []);
 };
