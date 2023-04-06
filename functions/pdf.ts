@@ -8,6 +8,7 @@ import {
   firstDate,
   getDateString,
   lastDate,
+  getImgSizes,
 } from "~/functions/utils";
 import { Attachment, getAttachment } from "~/functions/attachments";
 import { Chat } from "~/functions/transformChatData";
@@ -25,7 +26,12 @@ export async function render(
   chat: Chat,
   attachments: JSZip,
   ego: string,
-  isSample = false
+  isSample = false,
+  chatTimeline: any,
+  messagesPerTimeOfDay: any,
+  messagesPerPerson: any,
+  radarMonth: any,
+  radarDay: any
 ) {
   // Default export is a4 paper, portrait, using millimeters for units
   // eslint-disable-next-line new-cap
@@ -52,25 +58,6 @@ export async function render(
   let usedYSpace = 0;
 
   //    --- HELPER FUNCTIONS
-  const getImgSizes = function (imgUrl: string): Promise<number[]> {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.onload = () => {
-        resolve([img.width, img.height]);
-      };
-      img.onerror = reject;
-      img.src = imgUrl;
-    });
-  };
-
-  const loadImage = async function (selector: string) {
-    const imgUrl = (document.querySelector(
-      selector + ">*>canvas"
-    ) as HTMLCanvasElement).toDataURL("image/png");
-    const sizes = await getImgSizes(imgUrl);
-    return { img: imgUrl, width: sizes[0], height: sizes[1] };
-  };
-
   const writeRightSideText = function (text: string) {
     const textWidth = doc.getTextWidth(text);
     doc.text(text, width - marginLeft - textWidth, usedYSpace);
@@ -260,17 +247,12 @@ export async function render(
   // IMAGES
   addColoredPage(false, 255, 255, 255);
   usedYSpace = 55;
-  // const chatTimeline = await loadImage("#chat-timeline");
-  // const messagesPerTimeOfDay = await loadImage("#messages-per-time-of-day");
-  // const messagesPerPerson = await loadImage("#messages-per-person");
-  // const radarMonth = await loadImage("#radar-month");
-  // const radarDay = await loadImage("#radar-day");
 
-  // addGraphToPage(chatTimeline, "Chat Timeline");
-  // addGraphToPage(messagesPerTimeOfDay, "Time of Day");
-  // addGraphToPage(messagesPerPerson, "Messages per Person");
-  // addGraphToPage(radarMonth, "Messages per Month");
-  // addGraphToPage(radarDay, "Messages per Time");
+  addGraphToPage(chatTimeline, "Chat Timeline");
+  addGraphToPage(messagesPerTimeOfDay, "Time of Day");
+  addGraphToPage(messagesPerPerson, "Messages per Person");
+  addGraphToPage(radarMonth, "Messages per Month");
+  addGraphToPage(radarDay, "Messages per Time");
 
   // FUN FACTS
   addColoredPage();
@@ -278,33 +260,28 @@ export async function render(
   addHeading("Fun Facts", marginLeft, usedYSpace);
 
   const funFactHeight = 40;
-  // await chat.getFunFacts()?.then((funFacts) =>
-  //   funFacts.forEach((fact) => {
-  //     if (fact.name in chat.personColorMap) {
-  //       if (usedYSpace + funFactHeight > pageYSpace) {
-  //         addColoredPage();
-  //       }
 
-  //       drawAuthorBubble(fact.name, marginLeft, usedYSpace);
-  //       doc.setFontSize(15);
-  //       doc.setFont("myFont", "normal");
+  chat.funFacts.forEach((fact) => {
+    if (fact.name in chat.personColorMap) {
+      if (usedYSpace + funFactHeight > pageYSpace) {
+        addColoredPage();
+      }
 
-  //       const factStrings = [];
-  //       factStrings.push("Number of Words: " + fact.numberOfWords);
-  //       factStrings.push(
-  //         "Average Message Length: " + fact.averageMessageLength
-  //       );
-  //       factStrings.push("Unique words: " + fact.uniqueWords);
-  //       factStrings.push(
-  //         "Characters in longest Message: " + fact.longestMessage
-  //       );
+      drawAuthorBubble(fact.name, marginLeft, usedYSpace);
+      doc.setFontSize(15);
+      doc.setFont("myFont", "normal");
 
-  //       doc.text(factStrings, marginLeft, usedYSpace + 15);
+      const factStrings = [];
+      factStrings.push("Number of Words: " + fact.numberOfWords);
+      factStrings.push("Average Message Length: " + fact.averageMessageLength);
+      factStrings.push("Unique words: " + fact.uniqueWords);
+      factStrings.push("Characters in longest Message: " + fact.longestMessage);
 
-  //       usedYSpace += funFactHeight;
-  //     }
-  //   })
-  // );
+      doc.text(factStrings, marginLeft, usedYSpace + 15);
+
+      usedYSpace += funFactHeight;
+    }
+  });
 
   //   ----- Start of message pages
   addColoredPage();

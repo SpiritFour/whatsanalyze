@@ -48,3 +48,22 @@ export function objectToDictionary(obj) {
     return acc;
   }, {});
 }
+
+export const getImgSizes = function (imgUrl) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      resolve([img.width, img.height]);
+    };
+    img.onerror = reject;
+    img.src = imgUrl;
+  });
+};
+
+export const loadImage = async function (selector) {
+  const imgUrl = document
+    .querySelector(selector + ">*>canvas")
+    .toDataURL("image/png");
+  const sizes = await getImgSizes(imgUrl);
+  return { img: imgUrl, width: sizes[0], height: sizes[1] };
+};

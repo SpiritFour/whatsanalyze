@@ -107,6 +107,7 @@ import { GTAG_PAYMENT, GTAG_PDF, gtagEvent } from "~/functions/gtagValues";
 import PDFWorker from "worker-loader!~/assets/js/pdf.worker.js";
 import { objectToDictionary } from "~/functions/utils";
 import { saveAs } from "file-saver";
+import { loadImage } from "~/functions/utils";
 
 export default {
   name: "PdfDownload",
@@ -135,20 +136,36 @@ export default {
       this.download();
     },
     onError() {},
-    downloadSample() {
+    async downloadSample() {
       gtagEvent("sample_download", GTAG_PDF, 2);
       this.isLoading = true;
 
       if (process.browser) {
+        const chatTimeline = await loadImage("#chat-timeline");
+        const messagesPerTimeOfDay = await loadImage(
+          "#messages-per-time-of-day"
+        );
+        const messagesPerPerson = await loadImage("#messages-per-person");
+        const radarMonth = await loadImage("#radar-month");
+        const radarDay = await loadImage("#radar-day");
+
         // Remember workers just work in client?
         const worker = new PDFWorker();
         worker.addEventListener("message", this.workerResponseHandler);
 
+        const chat = objectToDictionary(this.chat);
+        chat.funFacts = await this.chat.getFunFacts();
+
         worker.postMessage({
-          chat: objectToDictionary(this.chat),
+          chat: chat,
           attachments: this.attachments,
           ego: this.ego,
-          isSample: false,
+          isSample: true,
+          chatTimeline,
+          messagesPerTimeOfDay,
+          messagesPerPerson,
+          radarMonth,
+          radarDay,
         });
       }
     },

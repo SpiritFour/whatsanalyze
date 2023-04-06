@@ -4,8 +4,28 @@ self.onmessage = async (event) => {
   console.log("[WORKER] worker con data: ", event.data);
 
   // this generates the jspdf document
-  const { chat, attachments, ego, isSample } = event.data;
-  const doc = await render(chat, attachments, ego, isSample);
+  const {
+    chat,
+    attachments,
+    ego,
+    isSample,
+    chatTimeline,
+    messagesPerTimeOfDay,
+    messagesPerPerson,
+    radarMonth,
+    radarDay,
+  } = event.data;
+  const doc = await render(
+    chat,
+    attachments,
+    ego,
+    isSample,
+    chatTimeline,
+    messagesPerTimeOfDay,
+    messagesPerPerson,
+    radarMonth,
+    radarDay
+  );
 
   // we can not transfer functions from web worker to main thread thus we serialize it
   const pdfData = doc.output("arraybuffer");
