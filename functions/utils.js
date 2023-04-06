@@ -34,19 +34,20 @@ export function lastDate(chat) {
 }
 
 export function objectToDictionary(obj) {
-  return Object.keys(obj).reduce((acc, key) => {
-    const val = obj[key];
-    if (typeof val !== "function") {
-      if (Array.isArray(val)) {
-        acc[key] = val.map(objectToDictionary);
-      } else if (val && typeof val === "object") {
-        acc[key] = objectToDictionary(val);
-      } else {
-        acc[key] = val;
-      }
+  const dict = {};
+  for (const [key, value] of Object.entries(obj)) {
+    if (
+      value !== null &&
+      typeof value === "object" &&
+      !Array.isArray(value) &&
+      !(value instanceof Date)
+    ) {
+      dict[key] = objectToDictionary(value);
+    } else {
+      dict[key] = value;
     }
-    return acc;
-  }, {});
+  }
+  return dict;
 }
 
 export const getImgSizes = function (imgUrl) {

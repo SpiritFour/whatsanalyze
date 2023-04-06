@@ -8,16 +8,16 @@
       <v-img
         :src="require('@/assets/pdf-example.jpg')"
         class="ma-auto my-4"
-        max-width="100vw"
+        max-width="100%"
       />
     </v-row>
 
-    <v-row v-show="isLoading" class="pb-5">
-      <div class="text-body-1">
+    <v-row v-show="true" class="ma-3">
+      <div class="text-body-1 pa-2">
         {{ $t("waitingForPDF") }}
       </div>
       <v-progress-linear
-        class="mb-2"
+        class=""
         color="blue"
         indeterminate
       ></v-progress-linear>
@@ -156,6 +156,8 @@ export default {
         const chat = objectToDictionary(this.chat);
         chat.funFacts = await this.chat.getFunFacts();
 
+        console.log(chat);
+        console.log(this.chat);
         worker.postMessage({
           chat: chat,
           attachments: this.attachments,
