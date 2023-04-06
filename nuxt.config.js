@@ -5,11 +5,9 @@ import * as Sentry from "@sentry/vue";
 
 // eslint-disable-next-line no-undef
 const local = process.env.NUXT_ENV_LOCAL !== undefined;
-const baseUrl = // eslint-disable-next-line no-undef
-(process.env.BASE_URL || "https://www.whatsanalyze.com").replace(
-  "http:",
-  "https:"
-);
+const baseUrl = ( // eslint-disable-next-line no-undef
+  process.env.BASE_URL || "https://www.whatsanalyze.com"
+).replace("http:", "https:");
 
 export default {
   publicRuntimeConfig: {
@@ -242,6 +240,17 @@ export default {
         config.mode = "development";
       } else if (isClient) {
         config.devtool = "hidden-source-map";
+        // config.module.rules.push({
+        //   test: /\.worker.js$/,
+        //   use: [
+        //     {
+        //       loader: require.resolve("worker-loader"),
+        //       options: {
+        //         name: "assets/js/[name].js",
+        //       },
+        //     },
+        //   ],
+        // });
       }
     },
   },

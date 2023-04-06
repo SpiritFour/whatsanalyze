@@ -32,3 +32,19 @@ export function firstDate(chat) {
 export function lastDate(chat) {
   return chat.filterdChatObject.slice(-1)[0]?.date;
 }
+
+export function objectToDictionary(obj) {
+  return Object.keys(obj).reduce((acc, key) => {
+    const val = obj[key];
+    if (typeof val !== "function") {
+      if (Array.isArray(val)) {
+        acc[key] = val.map(objectToDictionary);
+      } else if (val && typeof val === "object") {
+        acc[key] = objectToDictionary(val);
+      } else {
+        acc[key] = val;
+      }
+    }
+    return acc;
+  }, {});
+}

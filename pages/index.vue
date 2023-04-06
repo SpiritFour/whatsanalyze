@@ -1,5 +1,6 @@
 <template>
   <div>
+    <v-btn @click="stuff"></v-btn>
     <div ref="aboveTheFold" class="top-color" style="overflow-y: hidden">
       <v-container>
         <v-row
@@ -69,19 +70,15 @@
       <ArrowDown :animate="true" />
     </v-row>
     <TrustLogos v-if="!isShowingChats" />
-    <v-container v-show="!isShowingChats" class="pt-md-16">
+    <!-- <v-container v-show="!isShowingChats" class="pt-md-16">
       <ExportExplainer class="exportexplainer" />
       <Cta show-image />
       <Faq />
       <Testimonials />
       <About />
       <PdfExample />
-      <Cta
-        button-txt="generateYourChatPDF"
-        text="getChatBeautiful"
-        title="getFreePDFPreview"
-      />
-    </v-container>
+      <Cta button-txt="generateYourChatPDF" text="getChatBeautiful" title="getFreePDFPreview" />
+    </v-container> -->
 
     <v-container v-if="isShowingChats">
       <ChartsResults ref="results" :attachments="attachments" :chat="chat" />
@@ -98,6 +95,7 @@ import {
   gtagEvent,
 } from "~/functions/gtagValues";
 import debounce from "lodash/debounce";
+import Worker from "worker-loader!~/assets/js/pdf.worker.js";
 
 export default {
   async asyncData({ $content }) {
@@ -189,9 +187,21 @@ export default {
     rando() {
       throw Error("random errro");
     },
+    stuff() {
+      if (process.browser) {
+        // Remember workers just work in client?
+        console.log("start worker: ", Worker);
+        const worker = new Worker(); //this.$worker.createWorker() // Instruction assigned in plugin
+        worker.addEventListener("message", this.workerResponseHandler);
+        worker.postMessage("Message sent to worker");
+      }
+    },
     handleScroll() {
       // Any code to be executed when the window is scrolled
       this.$refs.aboveTheFold.scrollTop = window.scrollY;
+    },
+    workerResponseHandler: function (event) {
+      console.log("[WORKER REPONSE]", event);
     },
   },
 };
@@ -218,12 +228,14 @@ export default {
     float: left;
     padding: 3em;
   }
+
   .explainer {
     min-width: 150px;
     max-width: 25%;
     float: left;
     padding: 1em;
   }
+
   .explainer-list p {
     margin-right: 10%;
     display: inline;
@@ -257,11 +269,13 @@ export default {
     float: left;
     padding: 3em;
   }
+
   .explainer-list p {
     display: inline;
     padding: 1em;
     width: 33%;
   }
+
   .testimonial {
     width: 100%;
     padding: 3em;
@@ -274,8 +288,10 @@ export default {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .hide-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 .center-content {
@@ -285,6 +301,7 @@ export default {
 .overflow-hidden {
   overflow: hidden;
 }
+
 .loading {
   display: inline-block;
   position: relative;
@@ -294,16 +311,20 @@ export default {
   animation: lds-dual-ring 2s linear infinite;
   overflow: hidden;
 }
+
 @keyframes lds-dual-ring {
   0% {
     transform: translateX(0);
   }
+
   33% {
     transform: translateX(100%);
   }
+
   66% {
     transform: translateX(-100%);
   }
+
   100% {
     transform: translateX(0);
   }

@@ -12,7 +12,16 @@
       />
     </v-row>
 
-    <div v-show="isLoading" class="loading"></div>
+    <v-row v-show="isLoading" class="pb-5">
+      <div class="text-body-1">
+        {{ $t("waitingForPDF") }}
+      </div>
+      <v-progress-linear
+        class="mb-2"
+        color="blue"
+        indeterminate
+      ></v-progress-linear>
+    </v-row>
 
     <v-dialog v-model="showDownloadPopup" width="550">
       <template #activator="{ on, attrs }">
@@ -95,6 +104,9 @@
 <script>
 import { render } from "~/functions/pdf";
 import { GTAG_PAYMENT, GTAG_PDF, gtagEvent } from "~/functions/gtagValues";
+import PDFWorker from "worker-loader!~/assets/js/pdf.worker.js";
+import { objectToDictionary } from "~/functions/utils";
+import { saveAs } from "file-saver";
 
 export default {
   name: "PdfDownload",
@@ -126,14 +138,26 @@ export default {
     downloadSample() {
       gtagEvent("sample_download", GTAG_PDF, 2);
       this.isLoading = true;
-      // download sample
-      console.log(this.$route.query);
-      render(
-        this.chat,
-        this.attachments,
-        this.ego,
-        !this.$route.query.free
-      ).then(() => (this.isLoading = false));
+
+      if (process.browser) {
+        // Remember workers just work in client?
+        const worker = new PDFWorker();
+        worker.addEventListener("message", this.workerResponseHandler);
+
+        worker.postMessage({
+          chat: objectToDictionary(this.chat),
+          attachments: this.attachments,
+          ego: this.ego,
+          isSample: false,
+        });
+      }
+    },
+    workerResponseHandler: function (event) {
+      console.log("[WORKER REPONSE]", event);
+      const pdfData = event.data;
+      const blob = new Blob([pdfData], { type: "application/pdf" });
+      saveAs(blob, "WhatsAnalyze - " + this.ego);
+      this.isLoading = false;
     },
     gtagEvent,
   },

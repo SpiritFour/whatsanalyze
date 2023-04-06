@@ -260,17 +260,17 @@ export async function render(
   // IMAGES
   addColoredPage(false, 255, 255, 255);
   usedYSpace = 55;
-  const chatTimeline = await loadImage("#chat-timeline");
-  const messagesPerTimeOfDay = await loadImage("#messages-per-time-of-day");
-  const messagesPerPerson = await loadImage("#messages-per-person");
-  const radarMonth = await loadImage("#radar-month");
-  const radarDay = await loadImage("#radar-day");
+  // const chatTimeline = await loadImage("#chat-timeline");
+  // const messagesPerTimeOfDay = await loadImage("#messages-per-time-of-day");
+  // const messagesPerPerson = await loadImage("#messages-per-person");
+  // const radarMonth = await loadImage("#radar-month");
+  // const radarDay = await loadImage("#radar-day");
 
-  addGraphToPage(chatTimeline, "Chat Timeline");
-  addGraphToPage(messagesPerTimeOfDay, "Time of Day");
-  addGraphToPage(messagesPerPerson, "Messages per Person");
-  addGraphToPage(radarMonth, "Messages per Month");
-  addGraphToPage(radarDay, "Messages per Time");
+  // addGraphToPage(chatTimeline, "Chat Timeline");
+  // addGraphToPage(messagesPerTimeOfDay, "Time of Day");
+  // addGraphToPage(messagesPerPerson, "Messages per Person");
+  // addGraphToPage(radarMonth, "Messages per Month");
+  // addGraphToPage(radarDay, "Messages per Time");
 
   // FUN FACTS
   addColoredPage();
@@ -278,33 +278,33 @@ export async function render(
   addHeading("Fun Facts", marginLeft, usedYSpace);
 
   const funFactHeight = 40;
-  await chat.getFunFacts()?.then((funFacts) =>
-    funFacts.forEach((fact) => {
-      if (fact.name in chat.personColorMap) {
-        if (usedYSpace + funFactHeight > pageYSpace) {
-          addColoredPage();
-        }
+  // await chat.getFunFacts()?.then((funFacts) =>
+  //   funFacts.forEach((fact) => {
+  //     if (fact.name in chat.personColorMap) {
+  //       if (usedYSpace + funFactHeight > pageYSpace) {
+  //         addColoredPage();
+  //       }
 
-        drawAuthorBubble(fact.name, marginLeft, usedYSpace);
-        doc.setFontSize(15);
-        doc.setFont("myFont", "normal");
+  //       drawAuthorBubble(fact.name, marginLeft, usedYSpace);
+  //       doc.setFontSize(15);
+  //       doc.setFont("myFont", "normal");
 
-        const factStrings = [];
-        factStrings.push("Number of Words: " + fact.numberOfWords);
-        factStrings.push(
-          "Average Message Length: " + fact.averageMessageLength
-        );
-        factStrings.push("Unique words: " + fact.uniqueWords);
-        factStrings.push(
-          "Characters in longest Message: " + fact.longestMessage
-        );
+  //       const factStrings = [];
+  //       factStrings.push("Number of Words: " + fact.numberOfWords);
+  //       factStrings.push(
+  //         "Average Message Length: " + fact.averageMessageLength
+  //       );
+  //       factStrings.push("Unique words: " + fact.uniqueWords);
+  //       factStrings.push(
+  //         "Characters in longest Message: " + fact.longestMessage
+  //       );
 
-        doc.text(factStrings, marginLeft, usedYSpace + 15);
+  //       doc.text(factStrings, marginLeft, usedYSpace + 15);
 
-        usedYSpace += funFactHeight;
-      }
-    })
-  );
+  //       usedYSpace += funFactHeight;
+  //     }
+  //   })
+  // );
 
   //   ----- Start of message pages
   addColoredPage();
@@ -480,7 +480,5 @@ export async function render(
     doc.text("whatsanalyze.com", marginLeft, usedYSpace);
   }
 
-  doc.save("WhatsAnalyze - " + ego);
-
-  return 1;
+  return doc;
 }

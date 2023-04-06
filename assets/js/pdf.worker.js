@@ -1,0 +1,13 @@
+import { render } from "~/functions/pdf";
+
+self.onmessage = async (event) => {
+  console.log("[WORKER] worker con data: ", event.data);
+
+  // this generates the jspdf document
+  const { chat, attachments, ego, isSample } = event.data;
+  const doc = await render(chat, attachments, ego, isSample);
+
+  // we can not transfer functions from web worker to main thread thus we serialize it
+  const pdfData = doc.output("arraybuffer");
+  self.postMessage(pdfData, [pdfData]);
+};
