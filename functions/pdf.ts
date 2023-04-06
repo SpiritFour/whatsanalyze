@@ -23,7 +23,7 @@ const callAddFont = function (this: any) {
 jsPDF.API.events.push(["addFonts", callAddFont]);
 
 export async function render(
-  chat: Chat,
+  chat: any,
   attachments: JSZip,
   ego: string,
   isSample = false,
@@ -261,7 +261,7 @@ export async function render(
 
   const funFactHeight = 40;
 
-  chat.funFacts.forEach((fact) => {
+  chat.funFacts.forEach((fact: any) => {
     if (fact.name in chat.personColorMap) {
       if (usedYSpace + funFactHeight > pageYSpace) {
         addColoredPage();
