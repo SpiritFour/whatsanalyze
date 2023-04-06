@@ -162,7 +162,7 @@ export default {
           chat: chat,
           attachments: this.attachments,
           ego: this.ego,
-          isSample: false,
+          isSample: !this.$route.query.free,
           chatTimeline,
           messagesPerTimeOfDay,
           messagesPerPerson,
