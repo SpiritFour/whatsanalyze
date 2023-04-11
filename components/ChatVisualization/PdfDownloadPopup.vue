@@ -16,9 +16,14 @@
       <div class="text-body-1 pa-2">
         {{ $t("waitingForPDF") }}
       </div>
-      <div>Loading your images, videos and documents ...</div>
-      >
+      <div v-show="!progress">
+        <v-progress-circular indeterminate style="height: 1em" color="blue">
+        </v-progress-circular>
+        Loading your images, videos and documents
+      </div>
+
       <v-progress-linear
+        v-show="progress"
         class=""
         color="blue"
         :value="progress"
@@ -104,7 +109,6 @@
   </div>
 </template>
 <script>
-import { render } from "~/functions/pdf";
 import { GTAG_PAYMENT, GTAG_PDF, gtagEvent } from "~/functions/gtagValues";
 import PDFWorker from "worker-loader!~/assets/js/pdf.worker.js";
 import { objectToDictionary } from "~/functions/utils";
@@ -124,27 +128,23 @@ export default {
     };
   },
   methods: {
-    download() {
+    downloadFull() {
       gtagEvent("full_download", GTAG_PDF, 3);
-      this.isLoading = true;
-      render(this.chat, this.attachments, this.ego, false).then(
-        () => (this.isLoading = false)
-      );
+      this.download();
     },
     onCreateOrder() {
       gtagEvent("created", GTAG_PAYMENT, 0);
     },
     onApprove() {
       gtagEvent("approved", GTAG_PAYMENT, 10);
-      this.download();
+      this.downloadFull();
+      this.showDownloadPopup = false;
     },
     onError() {},
-    async downloadSample() {
-      gtagEvent("sample_download", GTAG_PDF, 2);
-      this.isLoading = true;
-      this.progress = 0;
-
+    async download() {
       if (process.browser) {
+        this.isLoading = true;
+        this.progress = 0;
         // the graphs need to be converted to an image beforehand, as the web worker has no access to document
         const chatTimeline = await loadImage("#chat-timeline");
         const messagesPerTimeOfDay = await loadImage(
@@ -173,6 +173,10 @@ export default {
           radarDay,
         });
       }
+    },
+    downloadSample() {
+      gtagEvent("sample_download", GTAG_PDF, 2);
+      this.download();
     },
     workerResponseHandler: function (event) {
       const data = event.data;
