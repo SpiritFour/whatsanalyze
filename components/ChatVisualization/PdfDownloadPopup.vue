@@ -130,7 +130,7 @@ export default {
   methods: {
     downloadFull() {
       gtagEvent("full_download", GTAG_PDF, 3);
-      this.download();
+      this.download(true);
     },
     onCreateOrder() {
       gtagEvent("created", GTAG_PAYMENT, 0);
@@ -141,7 +141,7 @@ export default {
       this.showDownloadPopup = false;
     },
     onError() {},
-    async download() {
+    async download(full = false) {
       if (process.browser) {
         this.isLoading = true;
         this.progress = 0;
@@ -165,7 +165,7 @@ export default {
           chat: chat,
           attachments: this.attachments,
           ego: this.ego,
-          isSample: !this.$route.query.free,
+          isSample: full,
           chatTimeline,
           messagesPerTimeOfDay,
           messagesPerPerson,
@@ -176,7 +176,7 @@ export default {
     },
     downloadSample() {
       gtagEvent("sample_download", GTAG_PDF, 2);
-      this.download();
+      this.download(!this.$route.query.free);
     },
     workerResponseHandler: function (event) {
       const data = event.data;
