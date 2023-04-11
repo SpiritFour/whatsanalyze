@@ -1,8 +1,6 @@
 import { render } from "~/functions/pdf";
 
 self.onmessage = async (event) => {
-  console.log("[WORKER] worker con data: ", event.data);
-
   // this generates the jspdf document
   const {
     chat,

@@ -1,4 +1,5 @@
 import * as JSZip from "jszip";
+import pako from "pako";
 
 export enum MimeTypeGroup {
   image,
@@ -15,8 +16,10 @@ interface MimeTypeData {
 }
 export interface Attachment {
   mimeTypeData: MimeTypeData;
-  src: string;
+  src?: Uint8Array;
   fileName: string;
+  width?: number;
+  height?: number;
 }
 
 function getMimeType(fileName: string): MimeTypeData {
@@ -59,10 +62,10 @@ function getMimeType(fileName: string): MimeTypeData {
   };
 }
 
-function renderAttachment(
+async function renderAttachment(
   fileName: string,
-  attachmentData?: string
-): Attachment {
+  attachmentData?: Uint8Array
+): Promise<Attachment> {
   // if the attachmentData is null (because we were not able to find the file)
   // we set the mimetype to the same format as an unknown file
   const mimeTypeData: MimeTypeData = attachmentData
@@ -74,23 +77,81 @@ function renderAttachment(
         renderInPDF: false,
       };
 
+  let width, height;
+  if (mimeTypeData.mimeTypeGroup === MimeTypeGroup.image && attachmentData) {
+    // Create a blob from the uint8array data
+    const blob = new Blob([attachmentData], {
+      type: getMimeType(fileName).mimeType,
+    });
+
+    // Create a bitmap image from the blob data
+    const bitmap = await createImageBitmap(blob);
+    (width = bitmap.width), (height = bitmap.height);
+  }
+
   return {
     mimeTypeData,
-    src: "data:" + mimeTypeData.mimeType + ";base64, " + attachmentData,
-    fileName: fileName.split("-")[1],
+    src: attachmentData,
+    fileName: fileName,
+    width,
+    height,
   };
 }
 
 // gets attachment mimeType, src, and filename from attachments
 export async function getAttachment(
   fileName: string,
-  attachments: JSZip
+  attachments: Array<{
+    name: string;
+    compressedContent?: Uint8Array;
+    decompressedData?: Uint8Array;
+  }>
 ): Promise<Attachment> {
   // potentially this finds files that are a false match
   // but there is the case that the images are in the "zip" folder, so we need
   // to be sure to find em
-  const data = await attachments
-    .file(RegExp(".*" + fileName))[0]
-    ?.async("base64");
-  return renderAttachment(fileName, data);
+
+  const data: any = attachments.filter((file) =>
+    RegExp(".*" + fileName).test(file.name)
+  );
+
+  if (data.length === 0) {
+    // sometimes we can not find the attachment
+    return renderAttachment(fileName);
+  }
+  let decompressedData;
+
+  if (data[0].compressedContent) {
+    // this means we have a zip file and have to inflate it frrst
+    decompressedData = inflate(data[0]);
+  } else {
+    // this means a list of files was uploaded
+    decompressedData = data[0].decompressedData;
+  }
+
+  return renderAttachment(fileName, decompressedData);
+}
+
+// this functions inflates ziped files
+function inflate(data: any) {
+  const inflater = new pako.Inflate({ raw: true });
+  const chunkSize = 1024; // adjust as needed
+  let offset = 0;
+
+  // needed to unkompress this by hand
+  const compressedData = data.compressedContent;
+  while (offset < compressedData.length) {
+    const end = Math.min(offset + chunkSize, compressedData.length);
+    const chunk = compressedData.subarray(offset, end);
+    inflater.push(chunk);
+    offset = end;
+  }
+
+  if (inflater.err) {
+    throw Error(`Error inflating data: ${inflater.msg}`);
+  } else {
+    const decompressedData = inflater.result;
+    // use uint8 array instead, the width and height can be calculated in the render attachment function
+    return decompressedData;
+  }
 }

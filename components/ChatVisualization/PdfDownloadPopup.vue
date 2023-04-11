@@ -16,6 +16,8 @@
       <div class="text-body-1 pa-2">
         {{ $t("waitingForPDF") }}
       </div>
+      <div>Loading your images, videos and documents ...</div>
+      >
       <v-progress-linear
         class=""
         color="blue"
@@ -143,6 +145,7 @@ export default {
       this.progress = 0;
 
       if (process.browser) {
+        // the graphs need to be converted to an image beforehand, as the web worker has no access to document
         const chatTimeline = await loadImage("#chat-timeline");
         const messagesPerTimeOfDay = await loadImage(
           "#messages-per-time-of-day"
@@ -151,14 +154,14 @@ export default {
         const radarMonth = await loadImage("#radar-month");
         const radarDay = await loadImage("#radar-day");
 
-        // Remember workers just work in client?
         const worker = new PDFWorker();
         worker.addEventListener("message", this.workerResponseHandler);
 
-        const chat = objectToDictionary(this.chat);
-        chat.funFacts = await this.chat.getFunFacts();
+        const chat = objectToDictionary(this.chat); // remove functions
+        chat.funFacts = await this.chat.getFunFacts(); // set funfacts beforehand instead of using function call
 
         worker.postMessage({
+          // pass all data to service worker
           chat: chat,
           attachments: this.attachments,
           ego: this.ego,
@@ -174,6 +177,7 @@ export default {
     workerResponseHandler: function (event) {
       const data = event.data;
       if (data.type === "pdf") {
+        // service workers can not save files
         const blob = new Blob([data.data], { type: "application/pdf" });
         saveAs(blob, "WhatsAnalyze - " + this.ego);
         this.isLoading = false;

@@ -33,17 +33,18 @@ export function lastDate(chat) {
   return chat.filterdChatObject.slice(-1)[0]?.date;
 }
 
-export function objectToDictionary(obj) {
-  const dict = {};
+// this is used on objects that should be transfered to the web worker
+// the webworker can not receive functions
+export function objectToDictionary(obj, dict = {}) {
   for (const [key, value] of Object.entries(obj)) {
     if (
-      value !== null &&
       typeof value === "object" &&
+      value !== null &&
       !Array.isArray(value) &&
       !(value instanceof Date)
     ) {
-      dict[key] = objectToDictionary(value);
-    } else {
+      objectToDictionary(value, (dict[key] = {}));
+    } else if (typeof value !== "function") {
       dict[key] = value;
     }
   }

@@ -8,7 +8,6 @@ import {
   firstDate,
   getDateString,
   lastDate,
-  getImgSizes,
 } from "~/functions/utils";
 import { Attachment, getAttachment } from "~/functions/attachments";
 import { Chat } from "~/functions/transformChatData";
@@ -24,7 +23,11 @@ jsPDF.API.events.push(["addFonts", callAddFont]);
 
 export async function render(
   chat: any,
-  attachments: JSZip,
+  attachments: Array<{
+    name: string;
+    compressedContent?: Uint8Array;
+    decompressedData?: Uint8Array;
+  }>,
   ego: string,
   isSample = false,
   chatTimeline: any,
@@ -315,9 +318,10 @@ export async function render(
     if (hasAttachment) {
       // load attachment
       attachment = await getAttachment(data.attachment.fileName, attachments);
+
       // skip if no image
       if (!attachment.mimeTypeData.renderInPDF) continue;
-      attachmentSize = await getImgSizes(attachment.src);
+      attachmentSize = [attachment.width!, attachment.height!];
       attachmentSize = getScale(
         attachmentSize[0],
         attachmentSize[1],
@@ -408,7 +412,7 @@ export async function render(
       const filetype = attachment!.mimeTypeData.mimeTypeEnding;
 
       doc.addImage(
-        attachment!.src,
+        attachment!.src!,
         filetype,
         messageX + paddingMessage,
         messageY + authorHeight,
