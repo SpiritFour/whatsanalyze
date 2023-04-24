@@ -179,6 +179,8 @@ export const messages = {
       "John and Jane probably write the most at 4 A.M.  Afternoon...",
     exampleGraphSubtitle2:
       "...and John writes a little more overall than Jane.",
+    waitingForPDF:
+      "The generation of the PDF can take some while, sometimes up to 10 minutes, depending on your device. Please be patient.",
   },
   de: {
     titleGoogle: "WhatsAnalyze - The WhatsApp Chat Analyzer",
@@ -360,6 +362,8 @@ export const messages = {
       "John und Jane schreiben wohl am meisten um 4 Uhr Nachmittags...",
     exampleGraphSubtitle2:
       "...und John schreibt insgesamt etwas mehr als Jane.",
+    waitingForPDF:
+      "Die Generierung des PDFs kann etwas dauern, manchmal bis zu 10 Minuten, abhängig von Ihrem Gerät. Bitte haben Sie Geduld.",
   },
   es: {
     titleGoogle: "WhatsAnalyze - El analizador de chat de WhatsApp",
@@ -542,5 +546,7 @@ export const messages = {
     about: "Sobre nosotras",
     aboutPoints:
       "Somos un grupo de <b>amigos de la universidad</b>. Como hace poco todos dejamos WhatsApp y queríamos analizar cómo evolucionaron los chats a lo largo de los años. <br /> <br /> Como <b>estudiantes de Informática</b> son paranoicos y piensan que pueden hacer todo mejor, naturalmente queríamos construir una solución nosotros mismos, donde <b>ningún dato personal</b> se comparta o se haga público.",
+    waitingForPDF:
+      "La generación del PDF puede tardar un tiempo, a veces hasta 10 minutos, dependiendo de su dispositivo. Por favor, tenga paciencia.",
   },
 };

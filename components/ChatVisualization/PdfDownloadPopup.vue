@@ -8,11 +8,27 @@
       <v-img
         :src="require('@/assets/pdf-example.jpg')"
         class="ma-auto my-4"
-        max-width="100vw"
+        max-width="100%"
       />
     </v-row>
 
-    <div v-show="isLoading" class="loading"></div>
+    <v-row v-show="isLoading" class="ma-3">
+      <div class="text-body-1 pa-2">
+        {{ $t("waitingForPDF") }}
+      </div>
+      <div v-show="!progress">
+        <v-progress-circular indeterminate style="height: 1em" color="blue">
+        </v-progress-circular>
+        Loading your images, videos and documents
+      </div>
+
+      <v-progress-linear
+        v-show="progress"
+        class=""
+        color="blue"
+        :value="progress"
+      ></v-progress-linear>
+    </v-row>
 
     <v-dialog v-model="showDownloadPopup" width="550">
       <template #activator="{ on, attrs }">
@@ -93,8 +109,11 @@
   </div>
 </template>
 <script>
-import { render } from "~/functions/pdf";
 import { GTAG_PAYMENT, GTAG_PDF, gtagEvent } from "~/functions/gtagValues";
+import PDFWorker from "worker-loader!~/assets/js/pdf.worker.js";
+import { objectToDictionary } from "~/functions/utils";
+import { saveAs } from "file-saver";
+import { loadImage } from "~/functions/utils";
 
 export default {
   name: "PdfDownload",
@@ -105,35 +124,71 @@ export default {
       isLoading: false,
       GTAG_PAYMENT,
       GTAG_PDF,
+      progress: 0,
     };
   },
   methods: {
-    download() {
+    downloadFull() {
       gtagEvent("full_download", GTAG_PDF, 3);
-      this.isLoading = true;
-      render(this.chat, this.attachments, this.ego, false).then(
-        () => (this.isLoading = false)
-      );
+      this.download(true);
     },
     onCreateOrder() {
       gtagEvent("created", GTAG_PAYMENT, 0);
     },
     onApprove() {
       gtagEvent("approved", GTAG_PAYMENT, 10);
-      this.download();
+      this.downloadFull();
+      this.showDownloadPopup = false;
     },
     onError() {},
+    async download(full = false) {
+      if (process.browser) {
+        this.isLoading = true;
+        this.progress = 0;
+        // the graphs need to be converted to an image beforehand, as the web worker has no access to document
+        const chatTimeline = await loadImage("#chat-timeline");
+        const messagesPerTimeOfDay = await loadImage(
+          "#messages-per-time-of-day"
+        );
+        const messagesPerPerson = await loadImage("#messages-per-person");
+        const radarMonth = await loadImage("#radar-month");
+        const radarDay = await loadImage("#radar-day");
+
+        const worker = new PDFWorker();
+        worker.addEventListener("message", this.workerResponseHandler);
+
+        const chat = objectToDictionary(this.chat); // remove functions
+        chat.funFacts = await this.chat.getFunFacts(); // set funfacts beforehand instead of using function call
+
+        worker.postMessage({
+          // pass all data to service worker
+          chat: chat,
+          attachments: this.attachments,
+          ego: this.ego,
+          isSample: full,
+          chatTimeline,
+          messagesPerTimeOfDay,
+          messagesPerPerson,
+          radarMonth,
+          radarDay,
+        });
+      }
+    },
     downloadSample() {
       gtagEvent("sample_download", GTAG_PDF, 2);
-      this.isLoading = true;
-      // download sample
-      console.log(this.$route.query);
-      render(
-        this.chat,
-        this.attachments,
-        this.ego,
-        !this.$route.query.free
-      ).then(() => (this.isLoading = false));
+      this.download(!this.$route.query.free);
+    },
+    workerResponseHandler: function (event) {
+      const data = event.data;
+      if (data.type === "pdf") {
+        // service workers can not save files
+        const blob = new Blob([data.data], { type: "application/pdf" });
+        saveAs(blob, "WhatsAnalyze - " + this.ego);
+        this.isLoading = false;
+      }
+      if (data.type === "progress") {
+        this.progress = data.data;
+      }
     },
     gtagEvent,
   },

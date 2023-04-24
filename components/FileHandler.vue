@@ -111,7 +111,13 @@ export default {
           }).then((messages) => {
             return {
               messages: messages,
-              attachments: zipData,
+              // we just pass a list of filenames with compressed contents here
+              attachments: Object.values(zipData.files).map((file) => {
+                return {
+                  name: file.name,
+                  compressedContent: file._data.compressedContent,
+                };
+              }),
             };
           });
         })
@@ -129,6 +135,15 @@ export default {
         .file(/.*(?:chat|whatsapp).*\.txt$/i)
         .sort((a, b) => a.name.length - b.name.length)[0]
         .async("string");
+    },
+
+    readFileAsArrayBuffer(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(new Uint8Array(reader.result));
+        reader.onerror = reject;
+        reader.readAsArrayBuffer(file);
+      });
     },
 
     readSharedFiles(files) {
@@ -149,20 +164,18 @@ export default {
       reader.addEventListener("loadend", (loadedFile) => {
         parseString(loadedFile.target.result, {
           parseAttachments: true,
-        }).then((messages) => {
+        }).then(async (messages) => {
+          // the only difference to the zip file is, that these blobs are already inflated
+          let attachments = [];
+          // we would like to have all files as uint8arrays, as such we have to read the file in as array
+          await files.forEach(async (file) => {
+            const arr = await this.readFileAsArrayBuffer(file);
+            attachments.push({ name: file.name, decompressedData: arr });
+          });
+
           this.updateMessages({
             messages: messages,
-            attachments: {
-              files: files,
-              file(_fileName) {
-                return {
-                  async: () =>
-                    Promise.resolve(
-                      this.files.find((file) => file.name === _fileName)
-                    ),
-                };
-              },
-            },
+            attachments,
           });
         });
       });
@@ -274,9 +287,11 @@ export default {
   0% {
     box-shadow: 2px 2px 20px black;
   }
+
   50% {
     box-shadow: none;
   }
+
   100% {
     box-shadow: 2px 2px 20px black;
   }
@@ -312,9 +327,11 @@ input[type="file"] {
   0% {
     background: $c-blue-accent;
   }
+
   50% {
     background: greenyellow;
   }
+
   100% {
     background: $c-blue-accent;
   }
