@@ -35,7 +35,7 @@
             </v-icon>
           </v-row>
           <div class="center" style="font-size: xx-small">
-            {{ attachment.mimeTypeData.mimeType }}
+            {{ attachment.mimeTypeData.mimeTypeEnding }}
           </div>
         </v-col>
         <v-col class="ma-auto pl-0 pr-2 py-1" align="left" cols="10">
@@ -72,7 +72,10 @@ export default {
     };
   },
   async fetch() {
-    this.attachment = await this.attachmentPromise;
+    let attachment = await this.attachmentPromise;
+    // transform uint8array to url
+    attachment.src = URL.createObjectURL(new Blob([attachment.src.buffer]));
+    this.attachment = attachment;
   },
 };
 </script>
