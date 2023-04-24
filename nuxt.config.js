@@ -1,15 +1,12 @@
 import fs from "fs";
 import colors from "vuetify/es5/util/colors";
 import { messages } from "./utils/translations.js";
-import * as Sentry from "@sentry/vue";
 
 // eslint-disable-next-line no-undef
 const local = process.env.NUXT_ENV_LOCAL !== undefined;
-const baseUrl = // eslint-disable-next-line no-undef
-(process.env.BASE_URL || "https://www.whatsanalyze.com").replace(
-  "http:",
-  "https:"
-);
+const baseUrl = ( // eslint-disable-next-line no-undef
+  process.env.BASE_URL || "https://www.whatsanalyze.com"
+).replace("http:", "https:");
 
 export default {
   publicRuntimeConfig: {
@@ -218,14 +215,8 @@ export default {
         },
       },
       browserOptions: {},
-      beforeSend(event) {
-        // Check if it is an exception, and if so, show the report dialog
-        if (event.exception) {
-          Sentry.showReportDialog({ eventId: event.event_id });
-        }
-        return event;
-      },
     },
+    clientConfig: "~/plugins/sentry.client.config.js",
     webpackConfig: {
       include: ["./dist/"],
       ignore: ["node_modules"],
