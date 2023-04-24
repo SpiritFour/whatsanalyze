@@ -218,12 +218,14 @@ export default {
     float: left;
     padding: 3em;
   }
+
   .explainer {
     min-width: 150px;
     max-width: 25%;
     float: left;
     padding: 1em;
   }
+
   .explainer-list p {
     margin-right: 10%;
     display: inline;
@@ -257,11 +259,13 @@ export default {
     float: left;
     padding: 3em;
   }
+
   .explainer-list p {
     display: inline;
     padding: 1em;
     width: 33%;
   }
+
   .testimonial {
     width: 100%;
     padding: 3em;
@@ -274,8 +278,10 @@ export default {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .hide-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 .center-content {
@@ -285,6 +291,7 @@ export default {
 .overflow-hidden {
   overflow: hidden;
 }
+
 .loading {
   display: inline-block;
   position: relative;
@@ -294,16 +301,20 @@ export default {
   animation: lds-dual-ring 2s linear infinite;
   overflow: hidden;
 }
+
 @keyframes lds-dual-ring {
   0% {
     transform: translateX(0);
   }
+
   33% {
     transform: translateX(100%);
   }
+
   66% {
     transform: translateX(-100%);
   }
+
   100% {
     transform: translateX(0);
   }

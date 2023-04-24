@@ -22,10 +22,20 @@ const callAddFont = function (this: any) {
 jsPDF.API.events.push(["addFonts", callAddFont]);
 
 export async function render(
-  chat: Chat,
-  attachments: JSZip,
+  chat: any,
+  attachments: Array<{
+    name: string;
+    compressedContent?: Uint8Array;
+    decompressedData?: Uint8Array;
+  }>,
   ego: string,
-  isSample = false
+  isSample = false,
+  chatTimeline: any,
+  messagesPerTimeOfDay: any,
+  messagesPerPerson: any,
+  radarMonth: any,
+  radarDay: any,
+  webworker: any
 ) {
   // Default export is a4 paper, portrait, using millimeters for units
   // eslint-disable-next-line new-cap
@@ -52,25 +62,6 @@ export async function render(
   let usedYSpace = 0;
 
   //    --- HELPER FUNCTIONS
-  const getImgSizes = function (imgUrl: string): Promise<number[]> {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.onload = () => {
-        resolve([img.width, img.height]);
-      };
-      img.onerror = reject;
-      img.src = imgUrl;
-    });
-  };
-
-  const loadImage = async function (selector: string) {
-    const imgUrl = (document.querySelector(
-      selector + ">*>canvas"
-    ) as HTMLCanvasElement).toDataURL("image/png");
-    const sizes = await getImgSizes(imgUrl);
-    return { img: imgUrl, width: sizes[0], height: sizes[1] };
-  };
-
   const writeRightSideText = function (text: string) {
     const textWidth = doc.getTextWidth(text);
     doc.text(text, width - marginLeft - textWidth, usedYSpace);
@@ -260,11 +251,6 @@ export async function render(
   // IMAGES
   addColoredPage(false, 255, 255, 255);
   usedYSpace = 55;
-  const chatTimeline = await loadImage("#chat-timeline");
-  const messagesPerTimeOfDay = await loadImage("#messages-per-time-of-day");
-  const messagesPerPerson = await loadImage("#messages-per-person");
-  const radarMonth = await loadImage("#radar-month");
-  const radarDay = await loadImage("#radar-day");
 
   addGraphToPage(chatTimeline, "Chat Timeline");
   addGraphToPage(messagesPerTimeOfDay, "Time of Day");
@@ -278,33 +264,28 @@ export async function render(
   addHeading("Fun Facts", marginLeft, usedYSpace);
 
   const funFactHeight = 40;
-  await chat.getFunFacts()?.then((funFacts) =>
-    funFacts.forEach((fact) => {
-      if (fact.name in chat.personColorMap) {
-        if (usedYSpace + funFactHeight > pageYSpace) {
-          addColoredPage();
-        }
 
-        drawAuthorBubble(fact.name, marginLeft, usedYSpace);
-        doc.setFontSize(15);
-        doc.setFont("myFont", "normal");
-
-        const factStrings = [];
-        factStrings.push("Number of Words: " + fact.numberOfWords);
-        factStrings.push(
-          "Average Message Length: " + fact.averageMessageLength
-        );
-        factStrings.push("Unique words: " + fact.uniqueWords);
-        factStrings.push(
-          "Characters in longest Message: " + fact.longestMessage
-        );
-
-        doc.text(factStrings, marginLeft, usedYSpace + 15);
-
-        usedYSpace += funFactHeight;
+  chat.funFacts.forEach((fact: any) => {
+    if (fact.name in chat.personColorMap) {
+      if (usedYSpace + funFactHeight > pageYSpace) {
+        addColoredPage();
       }
-    })
-  );
+
+      drawAuthorBubble(fact.name, marginLeft, usedYSpace);
+      doc.setFontSize(15);
+      doc.setFont("myFont", "normal");
+
+      const factStrings = [];
+      factStrings.push("Number of Words: " + fact.numberOfWords);
+      factStrings.push("Average Message Length: " + fact.averageMessageLength);
+      factStrings.push("Unique words: " + fact.uniqueWords);
+      factStrings.push("Characters in longest Message: " + fact.longestMessage);
+
+      doc.text(factStrings, marginLeft, usedYSpace + 15);
+
+      usedYSpace += funFactHeight;
+    }
+  });
 
   //   ----- Start of message pages
   addColoredPage();
@@ -317,6 +298,11 @@ export async function render(
   const messages = isSample ? chat.chatObject.slice(0, 100) : chat.chatObject;
 
   for (const idx in messages) {
+    webworker.postMessage({
+      data: (Number(idx) / messages.length) * 100,
+      type: "progress",
+    });
+
     const data = messages[idx];
     let isSystem = data.author === "System";
     const isEgo = ego === data.author;
@@ -332,9 +318,10 @@ export async function render(
     if (hasAttachment) {
       // load attachment
       attachment = await getAttachment(data.attachment.fileName, attachments);
+
       // skip if no image
       if (!attachment.mimeTypeData.renderInPDF) continue;
-      attachmentSize = await getImgSizes(attachment.src);
+      attachmentSize = [attachment.width!, attachment.height!];
       attachmentSize = getScale(
         attachmentSize[0],
         attachmentSize[1],
@@ -425,7 +412,7 @@ export async function render(
       const filetype = attachment!.mimeTypeData.mimeTypeEnding;
 
       doc.addImage(
-        attachment!.src,
+        attachment!.src!,
         filetype,
         messageX + paddingMessage,
         messageY + authorHeight,
@@ -480,7 +467,5 @@ export async function render(
     doc.text("whatsanalyze.com", marginLeft, usedYSpace);
   }
 
-  doc.save("WhatsAnalyze - " + ego);
-
-  return 1;
+  return doc;
 }

@@ -32,3 +32,40 @@ export function firstDate(chat) {
 export function lastDate(chat) {
   return chat.filterdChatObject.slice(-1)[0]?.date;
 }
+
+// this is used on objects that should be transfered to the web worker
+// the webworker can not receive functions
+export function objectToDictionary(obj, dict = {}) {
+  for (const [key, value] of Object.entries(obj)) {
+    if (
+      typeof value === "object" &&
+      value !== null &&
+      !Array.isArray(value) &&
+      !(value instanceof Date)
+    ) {
+      objectToDictionary(value, (dict[key] = {}));
+    } else if (typeof value !== "function") {
+      dict[key] = value;
+    }
+  }
+  return dict;
+}
+
+export const getImgSizes = function (imgUrl) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      resolve([img.width, img.height]);
+    };
+    img.onerror = reject;
+    img.src = imgUrl;
+  });
+};
+
+export const loadImage = async function (selector) {
+  const imgUrl = document
+    .querySelector(selector + ">*>canvas")
+    .toDataURL("image/png");
+  const sizes = await getImgSizes(imgUrl);
+  return { img: imgUrl, width: sizes[0], height: sizes[1] };
+};
