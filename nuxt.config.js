@@ -4,9 +4,11 @@ import { messages } from "./utils/translations.js";
 
 // eslint-disable-next-line no-undef
 const local = process.env.NUXT_ENV_LOCAL !== undefined;
-const baseUrl = ( // eslint-disable-next-line no-undef
-  process.env.BASE_URL || "https://www.whatsanalyze.com"
-).replace("http:", "https:");
+const baseUrl = // eslint-disable-next-line no-undef
+(process.env.BASE_URL || "https://www.whatsanalyze.com").replace(
+  "http:",
+  "https:"
+);
 
 export default {
   publicRuntimeConfig: {
@@ -197,7 +199,7 @@ export default {
       "https://48bdeb273a134a8095aef20174fdadcb@o824314.ingest.sentry.io/5810773",
     disabled: local,
     sourceMapStyle: "hidden-source-map",
-    publishRelease: true,
+    publishRelease: false,
     attachCommits: true,
 
     // Additional Module Options go here
