@@ -4,11 +4,9 @@ import { messages } from "./utils/translations.js";
 
 // eslint-disable-next-line no-undef
 const local = process.env.NUXT_ENV_LOCAL !== undefined;
-const baseUrl = // eslint-disable-next-line no-undef
-(process.env.BASE_URL || "https://www.whatsanalyze.com").replace(
-  "http:",
-  "https:"
-);
+const baseUrl = ( // eslint-disable-next-line no-undef
+  process.env.BASE_URL || "https://www.whatsanalyze.com"
+).replace("http:", "https:");
 
 export default {
   publicRuntimeConfig: {
@@ -153,6 +151,10 @@ export default {
       {
         code: "es",
         iso: "es-ES",
+      },
+      {
+        code: "fr",
+        iso: "fr-FR",
       },
     ],
     defaultLocale: "en",
