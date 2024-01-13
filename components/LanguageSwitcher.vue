@@ -20,7 +20,7 @@ export default {
           code: "en",
           name: "English",
           flag: "🇬🇧",
-          iso: "en-GB"
+          iso: "en-GB",
         },
         {
           code: "de",
@@ -34,13 +34,19 @@ export default {
           flag: "🇪🇸",
           iso: "es-ES",
         },
+        {
+          code: "pt",
+          name: "Português",
+          flag: "🇧🇷",
+          iso: "pt-PT",
+        },
       ],
     };
   },
   watch: {
     selectedLocale(newLocale) {
       this.$router.push(this.switchLocalePath(newLocale));
-    }
-  }
+    },
+  },
 };
 </script>
