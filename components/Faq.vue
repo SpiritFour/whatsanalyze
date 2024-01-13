@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="font-weight-bold text-h2 text-center py-10">
+    <div id="faq" class="font-weight-bold text-h2 text-center py-10">
       {{ $t("faqWhatsapp") }}
     </div>
     <v-expansion-panels class="px-sm-10 px-0">
