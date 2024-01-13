@@ -19,6 +19,7 @@
             id="uploadmytextfile"
             multiple
             type="file"
+            accept=".txt, .zip"
             @change="requestUploadFile"
           />
           <!-- Wrong File -->
