@@ -3,17 +3,48 @@
     <ExportExplainer class="mt-10" cta="exportAsPDF" to="/" />
     <PdfExample />
     <Content :page="page" />
+    <div class="additional-resources mt-5">
+      <h2>Additional Resources</h2>
+      <li>YouTube tutorials for export</li>
+    </div>
+    <!-- YouTube Video Embed -->
+    <iframe
+      class="youtube-video my-5"
+      width="560"
+      height="315"
+      src="https://www.youtube.com/embed/Mq5ZvyerA8E"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+    <ul>
+      <li class="mb-2">
+        FAQs: Common questions and troubleshooting tips. <br />
+        <a href="/#faq">Read our FAQs</a>
+      </li>
+      <li>
+        User Stories: Experiences and tips from users. <br />
+        <a href="/#stories">Discover User Stories</a>
+      </li>
+    </ul>
+    <div class="comparison-section my-5">
+      <h2>Comparison of different tools available</h2>
+      <p>
+        Comparison of different tools available for exporting whatsapp chat and
+        creating a pdf
+      </p>
+    </div>
     <v-data-table
+      class="styled-table"
       hide-default-footer
       disable-sort
       :headers="headers"
       :items="desserts"
-      class="elevation-1 mt-3"
-    >
-    </v-data-table>
+    ></v-data-table>
     <Cta
       to="/"
-      class="pt-0 pb-15"
+      class="cta-sectionpy-5"
       title="analyzeYourOwnWhatsapp"
       button-txt="analyzeMyChat"
       text="interestedAbout"
@@ -67,7 +98,7 @@ export default {
     return {
       headers: [
         {
-          text: "Features & Solutions  of PDF export tools",
+          text: "Features & Solutions of PDF export tools",
           align: "start",
           sortable: false,
           value: "name",
@@ -82,93 +113,99 @@ export default {
         },
       ],
       desserts: [
+        // Privacy comparison
         {
-          name: "Privacy",
-          zapptales: "⛔️ user has no control",
+          name: "Privacy 🛡️",
+          zapptales: "🔴 Limited user control",
           whatsAnalyze:
-            "✅ Build with privacy in mind  ✅ all  calculations are done on the device  ✅ no chat data is stored or shared",
-          drfon: "⛔️ user has no control",
-          longshotapp: "✅",
-          pdfex: "✅",
+            "🟢 Superior: Complete privacy with on-device processing",
+          drfon: "🔴 Limited user control",
+          longshotapp: "🟡 Basic privacy",
+          pdfex: "🟡 Basic privacy",
         },
+        // Security comparison
         {
-          name: "Security",
-          zapptales: "⛔️ sent to server " + "⛔️ might be stored",
+          name: "Security 🔒",
+          zapptales: "🔴 Potential server storage risks",
+          whatsAnalyze: "🟢 Top-notch: All operations are local and secure",
+          drfon: "🔴 Potential server storage risks",
+          longshotapp: "🔴 Not open source, security unclear",
+          pdfex: "🟡 Generally secure",
+        },
+        // Effort comparison
+        {
+          name: "Effort 🛠️",
+          zapptales: "🔴 High: Requires desktop app and multiple steps",
+          whatsAnalyze: "🟢 Minimal: Quick and straightforward on your phone",
+          drfon: "🔴 High: Requires desktop app",
+          longshotapp: "🟡 Medium: On phone but requires external app",
+          pdfex: "🔴 High effort required",
+        },
+        // User can Print comparison
+        {
+          name: "User can Print 🖨️",
+          zapptales: "🟡 Printable",
           whatsAnalyze:
-            "✅ Everything runs locally on your device ✅ as secure as your phone ✅ secure your chat backup",
-          drfon: "⛔️ sent to server " + "⛔️ No control",
-          longshotapp: "⛔️ not open source",
-          pdfex: "✅️ is secure",
+            "🟢 Optimized for Printing: Perfect for books or booklets",
+          drfon: "🟡 Printable",
+          longshotapp: "🔴 Not printable",
+          pdfex: "🟡 Printable",
         },
+        // Analytics comparison
         {
-          name: "Effort",
-          zapptales:
-            "⛔️external desktop application ⛔️ hundreds of steps needed",
+          name: "Analytics 📊",
+          zapptales: "🔴 No additional features",
           whatsAnalyze:
-            "✅ directly on your phone takes ✅ less than 1 minute ✅ no third party device or desktop app is required",
-          drfon: "⛔️ external desktop application",
-          longshotapp: "✅ on phone" + "⛔️ external application",
-          pdfex: "⚠️ high effort",
+            "🟢 Comprehensive: Includes fun facts and detailed analysis",
+          drfon: "🔴 No additional features",
+          longshotapp: "🔴 No additional features",
+          pdfex: "🔴 No additional features",
         },
+        // iOS compatibility
         {
-          name: "User can Print",
-          zapptales: "✅ can be printed",
+          name: "iOS Compatibility 📱",
+          zapptales: "🟡 Compatible with iPhone",
+          whatsAnalyze: "🟢 Fully optimized for iPhone",
+          drfon: "🟡 Compatible with iPhone",
+          longshotapp: "🔴 Android only",
+          pdfex: "🔴 Complicated, requires external app",
+        },
+        // Android compatibility
+        {
+          name: "Android Compatibility 📱",
+          zapptales: "🟡 Works with complications",
+          whatsAnalyze: "🟢 Seamless experience on Android devices",
+          drfon: "🟡 Works with complications",
+          longshotapp: "🟢 Fully compatible",
+          pdfex: "🔴 Requires external app",
+        },
+        // Free Preview comparison
+        {
+          name: "Free Preview 🔍",
+          zapptales: "🔴 No preview available",
+          whatsAnalyze: "🟢 Exclusive: Free preview with complete statistics",
+          drfon: "🔴 No preview, subscription trial",
+          longshotapp: "🔴 No trial available",
+          pdfex: "🔴 Long and complicated process",
+        },
+        // Price comparison
+        {
+          name: "Price 💲",
+          zapptales: "🔴 Expensive",
+          whatsAnalyze: "🟢 Most affordable andbest value",
+          drfon: "🔴 Expensive",
+          longshotapp: "🟡 In-app purchases",
+          pdfex: "🟡 Free, but with ads",
+        },
+        // Rating comparison
+        {
+          name: "Rating ⭐",
+          zapptales: "🟡 Good",
           whatsAnalyze:
-            "✅ Pdf can be printed ✅ right size to be used for a booklet or book from your whatsapp chat",
-          drfon: "✅ can be printed",
-          longshotapp: "⛔️ can not be printed",
-          pdfex: "✅ can be printed",
-        },
-        {
-          name: "Analytics",
-          zapptales: "⛔️ no additional information",
-          whatsAnalyze:
-            "✅ Fun facts ✅ Statistics ✅ Chat usage and time analysis data",
-          drfon: "⛔️ no additional information",
-          longshotapp: "⛔️ no additional information",
-          pdfex: "⛔️ no additional information",
-        },
-        {
-          name: "iOS",
-          zapptales: "✅ works on iPhone",
-          whatsAnalyze:
-            "✅ runs on iPhone effortlessly just open whatsanalyze.com in your browser",
-          drfon: "✅ works on iPhone",
-          longshotapp: "⛔️ Android only",
-          pdfex: "⚠️ complicated and external app needed",
-        },
-        {
-          name: "Android",
-          zapptales: "⚠️ complicated but works",
-          whatsAnalyze:
-            "✅ Android fully supported open whatsanalyze.com with your chrome browser on your android phone ",
-          drfon: "⚠️ complicated but works",
-          longshotapp: "✅ works",
-          pdfex: "⚠️ external app needed",
-        },
-        {
-          name: "Free Preview",
-          zapptales: "⛔️ no preview",
-          whatsAnalyze: " ✅ Free preview ✅ all statistics for free ",
-          drfon: "⛔️ no preview ⚠️ subscription trial",
-          longshotapp: "⛔️ no trial",
-          pdfex: "⚠️ long process",
-        },
-        {
-          name: "Price",
-          zapptales: "⛔️ 14,90 is expensive",
-          whatsAnalyze: "✅ Cheapest with just 1,99 ",
-          drfon: "⛔️ 14,90 is expensive",
-          longshotapp: "⚠️ in App purchases️",
-          pdfex: "free apps but many ads",
-        },
-        {
-          name: "Rating",
-          zapptales: "✅✅✅",
-          whatsAnalyze: "✅✅✅✅✅ -Secure -Affordable -Analytics",
-          drfon: "✅✅",
-          longshotapp: "✅",
-          pdfex: "✅",
+            "🟢 Excellent: Highest rating for security, affordability, and analytics",
+          drfon: "🟡 Good",
+          longshotapp: "🟡 Average",
+          pdfex: "🟡 Average",
         },
       ],
     };
@@ -210,3 +247,66 @@ export default {
   },
 };
 </script>
+<style>
+.mt-5,
+.my-5,
+.mb-2,
+.py-5 {
+  margin-top: 20px; /* Adjust top margin */
+  margin-bottom: 20px; /* Adjust bottom margin */
+  padding-top: 20px; /* Adjust top padding */
+  padding-bottom: 20px; /* Adjust bottom padding */
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.styled-table thead {
+  background-color: #f4f4f4;
+  color: #333;
+  font-weight: bold;
+}
+
+.styled-table tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+.styled-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+@media (max-width: 600px) {
+  .styled-table thead {
+    display: none;
+  }
+  .styled-table,
+  .styled-table tbody,
+  .styled-table th,
+  .styled-table td,
+  .styled-table tr {
+    display: block;
+  }
+  .styled-table td {
+    position: relative;
+    padding-left: 50%;
+  }
+  .styled-table td::before {
+    position: absolute;
+    top: 0;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    content: attr(data-label);
+  }
+}
+</style>
