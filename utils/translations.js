@@ -404,7 +404,7 @@ export const messages = {
     downloadPDF: "Descargue su Chat como PDF",
     fullChat: "Tu charla completa",
     tabItemiOS1:
-      "<span>En el iPhone <b>abre</b> WhatsApp y el <b>chat</b> o <b>chat de grupo</b> que deseas exportar> en la parte superior <b>toca < /b> el <b>nombre</b> del chat.</span>",
+      "<span>En el iPhone <b>abre</b> WhatsApp y el <b>chat</b> o <b>chat de grupo</b> que deseas exportar> en la parte superior <b>toca </b> el <b>nombre</b> del chat.</span>",
     tabItemiOS2:
       "<span>En la información del chat, desplácese hasta el final.</span>",
     tabItemiOS3: "<span>Toca <b>Exportar chat</b>.</span>",
@@ -549,6 +549,184 @@ export const messages = {
     waitingForPDF:
       "La generación del PDF puede tardar un tiempo, a veces hasta 10 minutos, dependiendo de su dispositivo. Por favor, tenga paciencia.",
   },
+  pt: {
+    titleGoogle: "WhatsAnalyze - O analisador de bate-papo do WhatsApp",
+    metaDescription:
+      "Analisador mais popular do WhatsApp ✓ Agora oferecendo bate-papos em grupo ✓ Revele o caráter de seus amigos ✓ Estatísticas gratuitas e exportação de bate-papo em PDF. Comece agora!",
+    metaDescriptionWhatsExport:
+      "Analisador mais popular do WhatsApp ✓ Agora com exportação de bate-papo em PDF ✓ Revele o caráter de seus amigos ✓ Estatísticas gratuitas. Comece agora!",
+    metaDescriptionSignal:
+      "Mude do WhatsApp para o Signal ✓ Transfira seus bate-papos em grupo ✓ Crie backups ✓ Estatísticas gratuitas e exportação de bate-papo em PDF. Comece agora!",
+    conhecido: "Conhecido de:",
+    backupWhatsApp: "Faça backup de seus dados do WhatsApp",
+    exportAsPDF: "Salve seu bate-papo como PDF",
+    convertToPDF: "Converta seus dados do WhatsApp exportados para PDF",
+    ctaBullets:
+      "✓ Chats em grupo ✓ Crie seu chat em PDF ✓ Privacidade em primeiro lugar",
+    getFreePDFPreview: "Obtenha sua visualização gratuita do PDF",
+    generateYourChatPDF: "Gere seu PDF de bate-papo",
+    getChatBeautiful:
+      "Obtenha seu bate-papo como um belo PDF com informações reveladoras e fatos interessantes. Smileys mais usados, compartilhamento de fala e muito mais...",
+    analyzeMyChat: "Analise meu bate-papo",
+    analyzeYourOwnWhatsapp: "Analyze your own WhatsApp data",
+    analyzeInSeconds: "Analise seu bate-papo do WhatsApp em segundos",
+    revealInsights:
+      "Obtenha informações sobre <strong>seus bate-papos</strong> - Agora com gráficos mais interessantes, <strong>estatísticas gratuitas</strong> e completo<strong> Exportação de PDF</strong>",
+    interestedAbout:
+      "Interessado em seus próprios dados de bate-papo? Dê um mergulho profundo em seus dados!",
+    analyseYourChat: "Comece a usar",
+    analyseYourChatTitle:
+      "Exemplo de bate-papo - Agora também oferece suporte a bate-papos em grupo",
+    analyseYourChatLong:
+      "Analise seu bate-papo, revele fatos desconhecidos e surpreenda seus amigos com insights sobre conversas de um ano inteiro",
+    didWeMake: "Fizemos você se divertir 🥳?",
+    buyUsCoffee: "Compre-nos um ☕️ e obtenha seus resultados gratuitamente!!!",
+    getResults:
+      "Você receberá todos os resultados como uma imagem exatamente como apresentada em seu dispositivo. A geração pode demorar um pouco.",
+    headerTextFeaturesTable:
+      "Recursos e soluções de ferramentas de exportação de PDF",
+    goToPDF: "Ir para o download do PDF",
+    downloadPDF: "Baixe seu Chat em PDF",
+    fullChat: "Seu Chat Completo",
+    tabItemiOS1:
+      "<span>No iPhone <b>abra</b> o WhatsApp e o <b>chat</b> ou <b>grupo de chat</b> que você deseja exportar > no topo <b>toque no</b> nome do chat.</span>",
+    tabItemiOS2: "<span>Na informação do chat, role até o fim.</span>",
+    tabItemiOS3: "<span>Toque em <b>Exportar Chat</b>.</span>",
+    tabItemiOS4: "<span>Escolha <b>Sem Mídia</b>.</span>",
+    tabItemiOS5:
+      "<span>Toque em <b>Salvar em Arquivos</b> para salvar no seu iPhone.</span>",
+    tabItemiOS6:
+      "<span>Finalmente selecione <b>No meu iPhone</b> e <b>salve</b> para salvar localmente.</span>",
+    tabItemiOS7:
+      "<span>Por último, você pode selecionar seu .zip exportado para ser analisado.</span>",
+    tabItemAndroid1:
+      "<span>No seu telefone Android abra este Site no <b>Chrome</b> e toque no botão <b>adicionar à tela inicial</b> e pressione instalar</span>",
+    tabItemAndroid2:
+      "<span>Abra o <b>WhatsApp</b> e toque no chat que deseja exportar > toque nos <b>três pontos</b> no canto superior direito.</span>",
+    tabItemAndroid3: "<span>No novo menu toque em <b>Mais</b>.</span>",
+    tabItemAndroid4: "<span>Toque em <b>Exportar chat</b>.</span>",
+    tabItemAndroid5:
+      "<span>Escolha Sem Mídia ou <b>Incluir Mídia</b> se desejar incluir suas imagens e outros arquivos na exportação.</span>",
+    tabItemAndroid6:
+      "<span>Agora na vista de compartilhamento toque em <b>Whatsanalyze</b> ou alternativamente se você pulou o passo 1 envie para você mesmo via <b>E-Mail</b> ou salve no <b>Google Drive</b>.</span>",
+    selectFile: "Selecione o arquivo pela caixa acima",
+    messages: "Mensagens",
+    totalWords: "Total de palavras:",
+    mostUsedEmojie: "Emojis mais usados:",
+    longestMessage: "Mensagem mais longa:",
+    uniqueWords: "Acervo de palavras (palavras únicas usadas):",
+    avgWords: "Média de palavras por mensagem:",
+    firstMessage: "primeira Mensagem",
+    lastMessage: "Última mensagem",
+    youChatted: "Você conversou por",
+    days: "dias",
+    youSent: "Você enviou",
+    faqWhatsapp: "FAQs sobre chats do WhatsApp",
+    howToExport: "Como exportar seu chat do WhatsApp",
+    howToExportLong:
+      " Todos podem exportar facilmente seu chat ou grupo de chat do WhatsApp. Abra\n" +
+      " o WhatsApp no dispositivo em que você está atualmente logado > Toque no\n" +
+      " chat > Vá para as configurações do chat > Role para baixo e toque em Exportar chat >\n" +
+      " Escolha exportar com ou sem mídia.",
+    howToGroup: "Como exportar seu grupo de chat do WhatsApp",
+    howToExportOn: "Como exportar seu chat em",
+    howToGroupLong:
+      "Exportar seu grupo de chat do WhatsApp funciona como um chat normal. Abra o\n" +
+      " Whatsapp com o dispositivo em que você está logado. Vá para o chat\n" +
+      ' e toque em "Mais" e depois Exportar chat. Agora você pode escolher exportar\n' +
+      " o chat com ou sem Mídia.",
+    howToArchiveiOS: "Como Arquivar todos os chats do Whatsapp no iOS",
+    howToArchiveiOSLong:
+      "No iOS você pode Arquivar seus chats do WhatsApp abrindo o WhatsApp e então\n" +
+      ' tocar em "Configurações" na barra de navegação. Toque em chats e depois Arquivar\n' +
+      " Todos os Chats.",
+    howToArchiveAndroid: "Como Arquivar todos os chats do Whatsapp no Android",
+    howToArchiveAndroidLong:
+      "No Android abra o WhatsApp e toque no ícone de três pontos no canto\n" +
+      ' superior direito. Toque em "Configurações" e depois "Chats". Na nova tela toque\n' +
+      ' em "Histórico de chat" e "Arquivar todos os chats".',
+    howToBackupiOS:
+      "Como fazer Backup do chat do Whatsapp no iOS incluindo o iOS 14",
+    howToBackupiOSLong:
+      "Ao fazer backup do seu chat do WhatsApp no seu iPhone você pode carregar sua\n" +
+      ' conta em um novo dispositivo facilmente. Abra o WhatsApp, toque em "Configurações" no\n' +
+      ' canto inferior direito. Em seguida, toque em "Chats" e "Backup de Chat" depois\n' +
+      ' pressione "Fazer Backup Agora"',
+    howToBackupAndroid: "Como fazer Backup do chat do Whatsapp no Android",
+    howToBackupAndroidLong:
+      "Para fazer backup do bate-papo do Whatsapp em seu dispositivo Android, toque no ícone de três pontos" +
+      ' no canto superior direito da tela. Toque em "Configurações" e depois em "Chats".\n' +
+      ' Em seguida, pressione o botão "Chat backup" e, na tela seguinte, o botão "Back Up"',
+    howToTransferSignal:
+      "Como transferir Grupos de Chat do Whatsapp para o Signal\n",
+    howToTransferSignalLong:
+      "Crie um grupo no Signal com seus contatos do WhatsApp, agora clique no\n" +
+      " grupo ou nos três pontos no canto superior direito. Na tela de Configurações toque\n" +
+      " em link do grupo copie o link. Finalmente, vá para o WhatsApp e cole o link\n" +
+      " na caixa de chat do grupo que você deseja migrar.",
+    howToTransferTelegram: "Como transferir o Whatsapp para o Telegram",
+    howToTransferTelegramLong:
+      "Abra o chat que deseja transferir no WhatsApp e toque nos três pontos no canto superior direito. Selecione Exportar Chat e no menu Compartilhar selecione Telegram. Você pode escolher exportar com ou sem mídia. Você pode repetir este passo para todos os chats que deseja transferir.",
+    howToTransferToIphone:
+      "Como transferir o Whatsapp do Android para o Iphone",
+    howToTransferToIphoneLong:
+      "Atualmente não existe uma maneira fácil de transferir seus chats entre os sistemas operacionais, o mais fácil é arquivar os chats que você deseja manter como PDF e começar novos.",
+    fileWrong:
+      "<strong>Formato de arquivo errado!</strong> <br />\n" +
+      " Por favor, faça upload do arquivo <strong>.txt</strong> ou<strong>.zip</strong> que\n" +
+      " você obteve ao exportar seu chat!",
+    fileDrop: "Solte o arquivo agora!",
+    fileDone: "<strong>Concluído!</strong> Veja sua análise abaixo.",
+    fileSuccess: "<strong>Arraste</strong> ou <strong>selecione</strong>",
+    fileSelect:
+      '<strong style="text-decoration: underline">Selecione </strong>',
+    fileAnother: "outro arquivo para analisá-lo.",
+    fileZip: "seu arquivo .zip ou .txt do WhatsApp nesta caixa.",
+    fileProcessing: "<strong>Processando</strong> seu arquivo...",
+    love: "Feito com ❤️ por quatro amigos.",
+    openSource:
+      "Este projeto é <b>open-source</b> e todo o código é <b>público</b> em\n" +
+      " <b>GitHub</b>",
+    pageNameSignal: "Como mudar para o Signal do WhatsApp",
+    pageNameExport: "Como exportar seu Chat do WhatsApp",
+    addToHomescreen: "adicionar à tela inicial",
+    people: "Pessoas",
+    changeView: "Mudar Ponto de Vista",
+    groupChat:
+      "Selecione o número de participantes para mostrar individualmente. Todos os outros são agrupados.",
+    groupInfo:
+      'Se você selecionar "2", apenas as duas pessoas com mais mensagens são mostradas\n' +
+      ' individualmente. Outros são agrupados como "Outros"',
+    infoSec:
+      "<b>Não</b> são enviados dados de chat para um servidor! Todo o código é executado",
+    infoPriv:
+      "Este projeto é <b>open-source</b> e todo o código é <b>público</b> no" +
+      "<b>github</b>. <a\n" +
+      ' class="black--text"\n' +
+      'target="_blank"\n' +
+      ' href="https://github.com/SpiritFour/whatsanalyze"\n' +
+      " >\n" +
+      "Confira você mesmo.",
+    examplePDF: "Exemplo de PDF de uma exportação de chat:",
+    haveALook:
+      "Dê uma olhada neste gráfico da nossa conversa, gerado pelo whatsanalyze.com.",
+    testimonialHeadline:
+      "Analise seus chats <strong> obtenha insights diretos dos dados</strong>",
+    jennifer:
+      "Visualizar o chat com meus amigos revelou muito sobre nosso relacionamento. Sempre pensei que eu era quem enviava mais mensagens. Muito legal ver todos esses fatos divertidos sobre nossa história. Continuem assim e adicionem mais visuais bonitos.",
+    lara:
+      "Incrível ver um histórico completo do WhatsApp de relance. Tenho chats de vários anos e ver como o relacionamento é refletido no chat é incrível. Adoro que meus arquivos não sejam carregados e que tudo funcione diretamente no meu navegador.",
+    says: "diz",
+    about: "Sobre nós",
+    aboutPoints:
+      "Somos um grupo de <b>amigos da universidade</b>. Como recentemente todos deixamos o WhatsApp e queríamos analisar como nossos chats evoluíram ao longo dos anos. <br /> <br /> Como <b>estudantes de Ciência da Computação</b> somos paranóicos e achamos que podemos fazer tudo melhor, naturalmente queríamos construir uma solução própria, onde <b>nenhum dado pessoal</b> é compartilhado ou tornado público.",
+    exampleGraphSubtitle1:
+      "John e Jane provavelmente escrevem mais às 4 da manhã. Tarde...",
+    exampleGraphSubtitle2:
+      "...e John escreve um pouco mais no geral do que Jane.",
+    waitingForPDF:
+      "A geração do PDF pode demorar um pouco, às vezes até 10 minutos, dependendo do seu dispositivo. Por favor, tenha paciência.",
+    },
   fr: {
     titleGoogle: "WhatsAnalyze - The WhatsApp Chat Analyzer",
     metaDescription:

@@ -156,6 +156,10 @@ export default {
         code: "fr",
         iso: "fr-FR",
       },
+      {
+        code: "pt",
+        iso: "pt-PT",
+      },
     ],
     defaultLocale: "en",
     detectBrowserLanguage: {

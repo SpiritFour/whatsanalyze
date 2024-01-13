@@ -35,6 +35,12 @@ export default {
           iso: "es-ES",
         },
         {
+          code: "pt",
+          name: "Português",
+          flag: "🇧🇷",
+          iso: "pt-PT",
+        },
+        {
           code: "fr",
           name: "Français",
           flag: "🇫🇷",
