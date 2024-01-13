@@ -40,6 +40,12 @@ export default {
           flag: "🇧🇷",
           iso: "pt-PT",
         },
+        {
+          code: "fr",
+          name: "Français",
+          flag: "🇫🇷",
+          iso: "fr-FR",
+        },
       ],
     };
   },

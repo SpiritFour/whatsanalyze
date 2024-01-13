@@ -726,5 +726,168 @@ export const messages = {
       "...e John escreve um pouco mais no geral do que Jane.",
     waitingForPDF:
       "A geração do PDF pode demorar um pouco, às vezes até 10 minutos, dependendo do seu dispositivo. Por favor, tenha paciência.",
+    },
+  fr: {
+    titleGoogle: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+    metaDescription:
+      "L'analyseur WhatsApp le plus populaire ✓ Offre maintenant des chats de groupe ✓ Révèle le caractère de vos amis ✓ Statistiques gratuites et exportation des chats au format PDF. Commencez maintenant !",
+    metaDescriptionWhatsExport:
+      "L'analyseur WhatsApp le plus populaire ✓ Maintenant avec l'exportation des chats en PDF ✓ Révéler le caractère de vos amis ✓ Statistiques gratuites. Commencez maintenant !",
+    metaDescriptionSignal:
+      "Passez de WhatsApp à Signal ✓ Transférez vos discussions de groupe ✓ Créez des sauvegardes ✓ Statistiques gratuites et exportation des discussions au format PDF. Commencez maintenant !",
+    known: "Connu pour :",
+    backupWhatsApp: "Sauvegarder vos données WhatsApp",
+    exportAsPDF: "Enregistrez votre chat au format PDF",
+    convertToPDF: "Convertissez vos données WhatsApp exportées en PDF",
+    ctaBullets: "✓ Chats de groupe ✓ Créer un chat PDF ✓ Confidentialité en premier",
+    getFreePDFPreview: "Obtenez votre PDF gratuit en avant-première",
+    generateYourChatPDF: "Générer le PDF de votre chat",
+    getChatBeautiful: "Obtenez votre chat sous la forme d'un magnifique PDF avec des informations révélatrices et des faits intéressants. Smileys les plus utilisés, partage de la parole, et bien plus encore ...",
+    analyzeMyChat: "Analyser mon chat",
+    analyzeYourOwnWhatsapp: "Analysez vos propres données WhatsApp",
+    analyzeInSeconds: "Analysez votre chat WhatsApp en quelques secondes",
+    revealInsights:
+      "Obtenez des informations sur <strong>vos chats</strong> - Désormais avec des graphiques plus intéressants, des <strong>statistiques gratuites</strong> et l'exportation complète au <strong>format PDF</strong>",
+    interestedAbout: "Intéressé par vos propres données de chat ? Plongez dans vos données !",
+    analyzeYourChat: "Commencer",
+    analyzeYourChatTitle: "Exemple de chat - Désormais, les chats de groupe sont également pris en charge",
+    analyzeYourChatLong: "Analysez votre chat, révélez des faits inconnus et surprenez vos amis en leur donnant un aperçu d'une conversation d'un an.",
+    didWeMake: "On t'a fait partir 🥳 ?",
+    buyUsCoffee: "Achetez-nous un ☕️ et obtenez vos résultats gratuitement !!!",
+    getResults: "Vous obtiendrez tous les résultats sous la forme d'une image exactement telle qu'elle est présentée sur votre appareil. La génération peut prendre un certain temps.",
+    headerTextFeaturesTable: "Caractéristiques et solutions des outils d'exportation PDF",
+    goToPDF: "Télécharger le PDF",
+    downloadPDF: "Téléchargez votre Chat au format PDF",
+    fullChat: "Votre chat complet",
+    tabItemiOS1: "<span>Sur l'iPhone, <b>ouvrez</b> WhatsApp et le <b>chat</b> ou le <b>groupe de chat</b> que vous souhaitez exporter > en haut, <b>tapez</b> sur le <b>nom</b> du chat.</span>",
+    tabItemiOS2: "<span>Dans les informations sur le chat, faites défiler la page jusqu'en bas.</span>",
+    tabItemiOS3: "<span>Tapez sur <b>Exporter le chat Tap on</b>.</span>",
+    tabItemiOS4: "<span>Choisir <b >sans media</b>.</span>",
+    tabItemiOS5: "<span>Cliquez sur <b>Enregistrer dans les fichiers</b> pour l'enregistrer sur votre iPhone.</span>",
+    tabItemiOS6: "<span>Enfin, sélectionnez <b>Sur mon iPhone</b> et <b>enregistrez</b> pour l'enregistrer localement.</span>",
+    tabItemiOS7: "<span>Enfin, vous pouvez sélectionner votre fichier .zip exporté pour l'analyser.</span>",
+    tabItemAndroid1: "<span>Sur votre téléphone Android, ouvrez ce site Web dans <b>Chrome</b> et appuyez sur le bouton <b>Ajouter à l'écran</b> d'accueil et appuyez sur Installer.</span>",
+    tabItemAndroid2: "<span>Ouvrez <b>WhatsApp</b> et tapez sur la discussion que vous souhaitez exporter > tapez sur les <b>trois points</b> dans le coin supérieur droit.</span>",
+    tabItemAndroid3: "<span>Dans le nouveau menu, tapez sur <b>Plus</b></span>",
+    tabItemAndroid4: "<span>Cliquez sur <b>Exporter discussion</b>.</span>",
+    tabItemAndroid5: "<span>Choisissez <b>Sans média</b> ou <b>Inclure média</b> si vous souhaitez inclure vos images et autres fichiers dans l'exportation.</span>",
+    tabItemAndroid6: "<span>Dans la vue de partage, appuyez sur <b>Whatsanalyze</b> ou, si vous avez sauté l'étape 1, envoyez-le à vous-même par <b>e-mail</b> ou sauvegardez-le sur <b>Google Drive</b>.</span>",
+    selectFile: "Sélectionner le fichier dans la boîte ci-dessus",
+    messages: "Messages",
+    totalWords: "Nombre total de mots :",
+    mostUsedEmojie: "Emojis les plus utilisés :",
+    longestMessage: "Message le plus long :",
+    uniqueWords: "Wordstock (mots uniques utilisés) :",
+    avgWords: "Nombre moyen de mots par message :",
+    firstMessage: "premier message",
+    lastMessage: "Dernier message",
+    youChatted: "Vous avez discuté pendant",
+    days: "Jours",
+    youSent: "Vous avez envoyé",
+    faqWhatsapp: "FAQ sur les chats WhatsApp",
+    howToExport: "Comment exporter votre chat WhatsApp",
+    howToExportLong:
+      "          Tout le monde peut facilement exporter son chat WhatsApp ou son chat de groupe. Ouvrir\n" +
+      "          WhatsApp sur l'appareil avec lequel vous êtes actuellement connecté > Cliquee sur le\n" +
+      "          chat > Allez dans les paramètres des chats > Faites défiler vers le bas et appuyez sur Exporter le chat. >\n" +
+      "          Choisir d'exporter avec ou sans support.",
+
+    howToGroup: "Comment exporter votre chat de groupe WhatsApp",
+    howToExportOn: "Comment exporter votre chat sur",
+    howToGroupLong:
+      "L'exportation de votre discussion de groupe WhatsApp fonctionne comme une discussion normale. Ouvrir up\n" +
+      "          Utilisez Whatsapp avec l'appareil avec lequel vous êtes connecté. Accéder au chat\n" +
+      '          et appuyez sur "Plus", puis sur Exporter le chat. Vous pouvez maintenant choisir d\'exporter\n' +
+      "          le chat avec ou sans média.",
+
+    howToArchiveiOS: "Comment archiver tous les chats Whatsapp sur iOS ?",
+    howToArchiveiOSLong:
+      "Sur iOS, vous pouvez archiver vos discussions WhatsApp en ouvrant WhatsApp puis\n" +
+      '          tapez sur "Paramètres" dans la barre de navigation. Tapez sur "Chats" puis sur "Archives".\n' +
+      "          tous les Chats.",
+
+    howToArchiveAndroid: "Comment archiver tous les chats Whatsapp sur Android",
+    howToArchiveAndroidLong:
+      "Sur Android, ouvrez WhatsApp puis tapez sur l'icône à trois points en haut.\n" +
+      '          dans le coin droit. Tapez sur "Paramètres" puis sur "Chats". Dans la nouvelle vue, tapez sur\n' +
+      '          "Historique des chats" et "Archiver tous les chats".',
+
+    howToBackupiOS: "Comment sauvegarder le chat Whatsapp sur iOS, y compris iOS 14 ?",
+    howToBackupiOSLong:
+      "En sauvegardant votre chat WhatsApp sur votre iPhone, vous pouvez charger votre\n" +
+      '          vers un nouvel appareil. Ouvrez WhatsApp, tapez sur "Paramètres" à\n' +
+      '          dans le coin inférieur droit. Tapez ensuite sur "Chats" et "Sauvegarde des chats"\n' +
+      '          appuyez sur "Sauvegarder maintenant"',
+
+    howToBackupAndroid: "Comment sauvegarder le chat Whatsapp sur Android",
+    howToBackupAndroidLong:
+      "Pour sauvegarder le chat Whatsapp sur votre appareil Android, appuyez sur les trois points.\n" +
+      '          en haut à droite de votre écran. Tapez sur "Paramètres", puis sur "Chats".\n' +
+      '          Appuyez ensuite sur "Chat backup" et sur le bouton "Back Up" de l\'écran suivant.',
+
+    howToTransferSignal: "Comment transférer des conversations de groupe Whatsapp vers Signal ?\n",
+    howToTransferSignalLong:
+      "Créez un groupe dans Signal avec vos contacts whatsApp, puis cliquez sur le bouton\n" +
+      "          ou sur les trois points en haut à droite. Dans la vue Paramètres, tapez sur\n" +
+      "          sur le lien du groupe, copiez le lien. Enfin, allez sur whatsApp et collez le lien.\n" +
+      "          dans la boîte de dialogue du groupe que vous souhaitez migrer.",
+
+    howToTransferTelegram: "Comment transférer Whatsapp vers Telegram",
+    howToTransferTelegramLong:
+      "Open the chat you want to transfer in WhatsApp and tap on the three-dots at the top right corner. Select Export Chat and in the Share menu select Telegram. You can choose to export with or without media. You can repeat this step for all chats you would like to transfer.",
+
+    howToTransferToIphone: "Comment transférer Whatsapp d'Android à Iphone",
+    howToTransferToIphoneLong:
+      "Il n'existe actuellement aucun moyen simple de transférer vos chats entre les systèmes d'exploitation. Le plus simple est d'archiver les chats que vous souhaitez conserver au format PDF et d'en recommencer un nouveau.",
+    fileWrong:
+      "<strong>Mauvais format de ficher !</strong> <br />\n" +
+      "          Formats autorisés <strong>.txt</strong> or<strong>.zip</strong> \n" +
+      "          que vous obtenez lorsque vous exportez votre chat!",
+    fileDrop: "Déposez votre fichier maintenant !",
+    fileDone: "<strong>C'est fait!</strong> Regardez votre analyse ci-dessous.",
+    fileSuccess: "<strong>Faite glisser</strong> ou <strong>selectionner</strong>",
+    fileSelect: '<strong style="text-decoration: underline">Selectionner </strong>',
+    fileAnother: "un autre fichier pour l'analyser.",
+    fileZip: "votre fichier WhatsApp .zip ou .txt dans cette espace.",
+    fileProcessing: "<strong>Analise en cours</strong> de votre fichier...",
+    love: "Fabriqué avec ❤️ par quatre amis.",
+    openSource:
+      "Ce projet est <b>open-source</b> tout le code est <b>public</b> sur\n" +
+      "      <b>GitHub</b>",
+    pageNameSignal: "Comment passer de WhatsApp à Signal",
+    pageNameExport: "Comment exporter votre chat WhatsApp",
+    addToHomescreen: "ajouter à l'écran d'accueil",
+    people: "Les gens",
+    changeView: "Changer de point de vue",
+    groupChat:
+      "Sélectionnez le nombre de participants à afficher individuellement. Tous les autres sont regroupés.",
+    groupInfo:
+      'Si vous sélectionnez "2", seules les deux personnes ayant envoyé le plus de messages sont affichées.\n' +
+      '        individuellement. Les autres sont regroupés sous l\'appellation "Autres"',
+    infoSec:
+      "<b>Aucune donnée</b> de chat n'est envoyée à un serveur ! Tous le code est utilisé\n" +
+      "      <b>localement</b> sur votre navigateur.",
+    infoPriv:
+      "C'est un projet <b>open-source</b> et tous le code est <b>public</b> sur\n" +
+      "      <b>github</b>. <a\n" +
+      '        class="black--text"\n' +
+      '        target="_blank"\n' +
+      '        href="https://github.com/SpiritFour/whatsanalyze"\n' +
+      "      >\n" +
+      "        Vérifiez vous-même.\n" +
+      "      </a>",
+    examplePDF: "Exemple de PDF à partir d'une exportation de chat :",
+    haveALook: "Jetez un coup d'œil à ce graphique de notre conversation, généré par whatsanalyze.com.",
+    testimonialHeadline:
+      "Analysez vos chats et\n" +
+      "      <strong> obtenir des informations sur les données</strong>",
+    jennifer: "La visualisation du chat de mes amis a révélé beaucoup de choses sur notre relation. J'ai toujours pensé que c'était moi qui envoyais le plus de messages. C'est vraiment sympa de voir tous ces faits amusants sur notre histoire. Je pense qu'il faut continuer et ajouter d'autres belles images.",
+    lara: "C'est incroyable de voir tout l'historique de WhatsApp en un coup d'œil. J'ai des chats qui remontent à plusieurs années et voir comment la relation est reflétée dans le chat est incroyable. J'aime le fait que mes fichiers ne soient pas téléchargés et que l'application fonctionne directement dans mon navigateur.",
+    says: "says",
+    about: "A propos",
+    aboutPoints: "Nous sommes un groupe <b>d'amis d'université</b>. Nous avons récemment quitté WhatsApp et nous voulions analyser l'évolution de nos chats au fil des ans. <br /> <br /> Comme <b>les étudiants en informatique</b> sont paranoïaques et pensent qu'ils peuvent tout faire mieux, nous avons naturellement voulu construire une solution nous-mêmes, où <b>aucune donnée personnelle</b> n'est partagée ou rendue publique.",
+    exampleGraphSubtitle1: "John et Jane sont probablement ceux qui écrivent le plus à 4 heures du matin...",
+    exampleGraphSubtitle2: "...et John écrit un peu plus que Jane.",
+    waitingForPDF: "La génération du PDF peut prendre un certain temps, parfois jusqu'à 10 minutes, en fonction de votre appareil. Veuillez faire preuve de patience.",
   },
 };

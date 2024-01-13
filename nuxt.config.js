@@ -153,6 +153,10 @@ export default {
         iso: "es-ES",
       },
       {
+        code: "fr",
+        iso: "fr-FR",
+      },
+      {
         code: "pt",
         iso: "pt-PT",
       },
