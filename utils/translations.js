@@ -181,6 +181,19 @@ export const messages = {
       "...and John writes a little more overall than Jane.",
     waitingForPDF:
       "The generation of the PDF can take some while, sometimes up to 10 minutes, depending on your device. Please be patient.",
+    chatTimeline: "Chat Timeline",
+    messagesPerDay: "Messages per Day",
+    messagesPer: "Messages per",
+    person: "Person",
+    timeOfDay: "Time of Day",
+    month: "Month",
+    weekday: "Weekday",
+    wordCloud: "Word Cloud",
+    downloadAllGraphs: "Download all Graphs at once!",
+    shareWithFriends: "Share them with your friends, all free just for you ❤️️",
+    downloadResults: "Download Results",
+    lookingFor: "Looking for",
+    pdfDownload: "PDF download",
   },
   de: {
     titleGoogle: "WhatsAnalyze - The WhatsApp Chat Analyzer",
@@ -364,6 +377,20 @@ export const messages = {
       "...und John schreibt insgesamt etwas mehr als Jane.",
     waitingForPDF:
       "Die Generierung des PDFs kann etwas dauern, manchmal bis zu 10 Minuten, abhängig von Ihrem Gerät. Bitte haben Sie Geduld.",
+    chatTimeline: "Chat-Zeitstrahl",
+    messagesPerDay: "Nachrichten pro Tag",
+    messagesPer: "Nachrichten pro",
+    person: "Person",
+    timeOfDay: "Tageszeit",
+    month: "Monat",
+    weekday: "Wochentag",
+    wordCloud: "Wortwolke",
+    downloadAllGraphs: "Alle Graphen auf einmal herunterladen!",
+    shareWithFriends:
+      "Teilen Sie sie mit Ihren Freunden, alles kostenlos nur für Sie ❤️️",
+    downloadResults: "Ergebnisse herunterladen",
+    lookingFor: "Suche nach",
+    pdfDownload: "PDF-Download",
   },
   es: {
     titleGoogle: "WhatsAnalyze - El analizador de chat de WhatsApp",
@@ -548,6 +575,20 @@ export const messages = {
       "Somos un grupo de <b>amigos de la universidad</b>. Como hace poco todos dejamos WhatsApp y queríamos analizar cómo evolucionaron los chats a lo largo de los años. <br /> <br /> Como <b>estudiantes de Informática</b> son paranoicos y piensan que pueden hacer todo mejor, naturalmente queríamos construir una solución nosotros mismos, donde <b>ningún dato personal</b> se comparta o se haga público.",
     waitingForPDF:
       "La generación del PDF puede tardar un tiempo, a veces hasta 10 minutos, dependiendo de su dispositivo. Por favor, tenga paciencia.",
+    chatTimeline: "Cronología del Chat",
+    messagesPerDay: "Mensajes por Día",
+    messagesPer: "Mensajes por",
+    person: "Persona",
+    timeOfDay: "Hora del Día",
+    month: "Mes",
+    weekday: "Día de la Semana",
+    wordCloud: "Nube de Palabras",
+    downloadAllGraphs: "¡Descarga todos los gráficos a la vez!",
+    shareWithFriends:
+      "Compártelos con tus amigos, todo gratis sólo para ti ❤️️",
+    downloadResults: "Descargar resultados",
+    lookingFor: "Buscando",
+    pdfDownload: "Descarga de PDF",
   },
   pt: {
     titleGoogle: "WhatsAnalyze - O analisador de bate-papo do WhatsApp",
@@ -726,7 +767,21 @@ export const messages = {
       "...e John escreve um pouco mais no geral do que Jane.",
     waitingForPDF:
       "A geração do PDF pode demorar um pouco, às vezes até 10 minutos, dependendo do seu dispositivo. Por favor, tenha paciência.",
-    },
+    chatTimeline: "Linha do Tempo do Chat",
+    messagesPerDay: "Mensagens por Dia",
+    messagesPer: "Mensagens por",
+    person: "Pessoa",
+    timeOfDay: "Hora do Dia",
+    month: "Mês",
+    weekday: "Dia da Semana",
+    wordCloud: "Nuvem de Palavras",
+    downloadAllGraphs: "Baixe todos os gráficos de uma vez!",
+    shareWithFriends:
+      "Compartilhe-os com seus amigos, tudo gratuito só para você ❤️️",
+    downloadResults: "Download Results",
+    lookingFor: "Procurando por",
+    pdfDownload: "Download de PDF",
+  },
   fr: {
     titleGoogle: "WhatsAnalyze - The WhatsApp Chat Analyzer",
     metaDescription:
@@ -739,39 +794,56 @@ export const messages = {
     backupWhatsApp: "Sauvegarder vos données WhatsApp",
     exportAsPDF: "Enregistrez votre chat au format PDF",
     convertToPDF: "Convertissez vos données WhatsApp exportées en PDF",
-    ctaBullets: "✓ Chats de groupe ✓ Créer un chat PDF ✓ Confidentialité en premier",
+    ctaBullets:
+      "✓ Chats de groupe ✓ Créer un chat PDF ✓ Confidentialité en premier",
     getFreePDFPreview: "Obtenez votre PDF gratuit en avant-première",
     generateYourChatPDF: "Générer le PDF de votre chat",
-    getChatBeautiful: "Obtenez votre chat sous la forme d'un magnifique PDF avec des informations révélatrices et des faits intéressants. Smileys les plus utilisés, partage de la parole, et bien plus encore ...",
+    getChatBeautiful:
+      "Obtenez votre chat sous la forme d'un magnifique PDF avec des informations révélatrices et des faits intéressants. Smileys les plus utilisés, partage de la parole, et bien plus encore ...",
     analyzeMyChat: "Analyser mon chat",
     analyzeYourOwnWhatsapp: "Analysez vos propres données WhatsApp",
     analyzeInSeconds: "Analysez votre chat WhatsApp en quelques secondes",
     revealInsights:
       "Obtenez des informations sur <strong>vos chats</strong> - Désormais avec des graphiques plus intéressants, des <strong>statistiques gratuites</strong> et l'exportation complète au <strong>format PDF</strong>",
-    interestedAbout: "Intéressé par vos propres données de chat ? Plongez dans vos données !",
+    interestedAbout:
+      "Intéressé par vos propres données de chat ? Plongez dans vos données !",
     analyzeYourChat: "Commencer",
-    analyzeYourChatTitle: "Exemple de chat - Désormais, les chats de groupe sont également pris en charge",
-    analyzeYourChatLong: "Analysez votre chat, révélez des faits inconnus et surprenez vos amis en leur donnant un aperçu d'une conversation d'un an.",
+    analyzeYourChatTitle:
+      "Exemple de chat - Désormais, les chats de groupe sont également pris en charge",
+    analyzeYourChatLong:
+      "Analysez votre chat, révélez des faits inconnus et surprenez vos amis en leur donnant un aperçu d'une conversation d'un an.",
     didWeMake: "On t'a fait partir 🥳 ?",
-    buyUsCoffee: "Achetez-nous un ☕️ et obtenez vos résultats gratuitement !!!",
-    getResults: "Vous obtiendrez tous les résultats sous la forme d'une image exactement telle qu'elle est présentée sur votre appareil. La génération peut prendre un certain temps.",
-    headerTextFeaturesTable: "Caractéristiques et solutions des outils d'exportation PDF",
+    buyUsCoffee:
+      "Achetez-nous un ☕️ et obtenez vos résultats gratuitement !!!",
+    getResults:
+      "Vous obtiendrez tous les résultats sous la forme d'une image exactement telle qu'elle est présentée sur votre appareil. La génération peut prendre un certain temps.",
+    headerTextFeaturesTable:
+      "Caractéristiques et solutions des outils d'exportation PDF",
     goToPDF: "Télécharger le PDF",
     downloadPDF: "Téléchargez votre Chat au format PDF",
     fullChat: "Votre chat complet",
-    tabItemiOS1: "<span>Sur l'iPhone, <b>ouvrez</b> WhatsApp et le <b>chat</b> ou le <b>groupe de chat</b> que vous souhaitez exporter > en haut, <b>tapez</b> sur le <b>nom</b> du chat.</span>",
-    tabItemiOS2: "<span>Dans les informations sur le chat, faites défiler la page jusqu'en bas.</span>",
+    tabItemiOS1:
+      "<span>Sur l'iPhone, <b>ouvrez</b> WhatsApp et le <b>chat</b> ou le <b>groupe de chat</b> que vous souhaitez exporter > en haut, <b>tapez</b> sur le <b>nom</b> du chat.</span>",
+    tabItemiOS2:
+      "<span>Dans les informations sur le chat, faites défiler la page jusqu'en bas.</span>",
     tabItemiOS3: "<span>Tapez sur <b>Exporter le chat Tap on</b>.</span>",
     tabItemiOS4: "<span>Choisir <b >sans media</b>.</span>",
-    tabItemiOS5: "<span>Cliquez sur <b>Enregistrer dans les fichiers</b> pour l'enregistrer sur votre iPhone.</span>",
-    tabItemiOS6: "<span>Enfin, sélectionnez <b>Sur mon iPhone</b> et <b>enregistrez</b> pour l'enregistrer localement.</span>",
-    tabItemiOS7: "<span>Enfin, vous pouvez sélectionner votre fichier .zip exporté pour l'analyser.</span>",
-    tabItemAndroid1: "<span>Sur votre téléphone Android, ouvrez ce site Web dans <b>Chrome</b> et appuyez sur le bouton <b>Ajouter à l'écran</b> d'accueil et appuyez sur Installer.</span>",
-    tabItemAndroid2: "<span>Ouvrez <b>WhatsApp</b> et tapez sur la discussion que vous souhaitez exporter > tapez sur les <b>trois points</b> dans le coin supérieur droit.</span>",
+    tabItemiOS5:
+      "<span>Cliquez sur <b>Enregistrer dans les fichiers</b> pour l'enregistrer sur votre iPhone.</span>",
+    tabItemiOS6:
+      "<span>Enfin, sélectionnez <b>Sur mon iPhone</b> et <b>enregistrez</b> pour l'enregistrer localement.</span>",
+    tabItemiOS7:
+      "<span>Enfin, vous pouvez sélectionner votre fichier .zip exporté pour l'analyser.</span>",
+    tabItemAndroid1:
+      "<span>Sur votre téléphone Android, ouvrez ce site Web dans <b>Chrome</b> et appuyez sur le bouton <b>Ajouter à l'écran</b> d'accueil et appuyez sur Installer.</span>",
+    tabItemAndroid2:
+      "<span>Ouvrez <b>WhatsApp</b> et tapez sur la discussion que vous souhaitez exporter > tapez sur les <b>trois points</b> dans le coin supérieur droit.</span>",
     tabItemAndroid3: "<span>Dans le nouveau menu, tapez sur <b>Plus</b></span>",
     tabItemAndroid4: "<span>Cliquez sur <b>Exporter discussion</b>.</span>",
-    tabItemAndroid5: "<span>Choisissez <b>Sans média</b> ou <b>Inclure média</b> si vous souhaitez inclure vos images et autres fichiers dans l'exportation.</span>",
-    tabItemAndroid6: "<span>Dans la vue de partage, appuyez sur <b>Whatsanalyze</b> ou, si vous avez sauté l'étape 1, envoyez-le à vous-même par <b>e-mail</b> ou sauvegardez-le sur <b>Google Drive</b>.</span>",
+    tabItemAndroid5:
+      "<span>Choisissez <b>Sans média</b> ou <b>Inclure média</b> si vous souhaitez inclure vos images et autres fichiers dans l'exportation.</span>",
+    tabItemAndroid6:
+      "<span>Dans la vue de partage, appuyez sur <b>Whatsanalyze</b> ou, si vous avez sauté l'étape 1, envoyez-le à vous-même par <b>e-mail</b> ou sauvegardez-le sur <b>Google Drive</b>.</span>",
     selectFile: "Sélectionner le fichier dans la boîte ci-dessus",
     messages: "Messages",
     totalWords: "Nombre total de mots :",
@@ -812,7 +884,8 @@ export const messages = {
       '          dans le coin droit. Tapez sur "Paramètres" puis sur "Chats". Dans la nouvelle vue, tapez sur\n' +
       '          "Historique des chats" et "Archiver tous les chats".',
 
-    howToBackupiOS: "Comment sauvegarder le chat Whatsapp sur iOS, y compris iOS 14 ?",
+    howToBackupiOS:
+      "Comment sauvegarder le chat Whatsapp sur iOS, y compris iOS 14 ?",
     howToBackupiOSLong:
       "En sauvegardant votre chat WhatsApp sur votre iPhone, vous pouvez charger votre\n" +
       '          vers un nouvel appareil. Ouvrez WhatsApp, tapez sur "Paramètres" à\n' +
@@ -825,7 +898,8 @@ export const messages = {
       '          en haut à droite de votre écran. Tapez sur "Paramètres", puis sur "Chats".\n' +
       '          Appuyez ensuite sur "Chat backup" et sur le bouton "Back Up" de l\'écran suivant.',
 
-    howToTransferSignal: "Comment transférer des conversations de groupe Whatsapp vers Signal ?\n",
+    howToTransferSignal:
+      "Comment transférer des conversations de groupe Whatsapp vers Signal ?\n",
     howToTransferSignalLong:
       "Créez un groupe dans Signal avec vos contacts whatsApp, puis cliquez sur le bouton\n" +
       "          ou sur les trois points en haut à droite. Dans la vue Paramètres, tapez sur\n" +
@@ -845,8 +919,10 @@ export const messages = {
       "          que vous obtenez lorsque vous exportez votre chat!",
     fileDrop: "Déposez votre fichier maintenant !",
     fileDone: "<strong>C'est fait!</strong> Regardez votre analyse ci-dessous.",
-    fileSuccess: "<strong>Faite glisser</strong> ou <strong>selectionner</strong>",
-    fileSelect: '<strong style="text-decoration: underline">Selectionner </strong>',
+    fileSuccess:
+      "<strong>Faite glisser</strong> ou <strong>selectionner</strong>",
+    fileSelect:
+      '<strong style="text-decoration: underline">Selectionner </strong>',
     fileAnother: "un autre fichier pour l'analyser.",
     fileZip: "votre fichier WhatsApp .zip ou .txt dans cette espace.",
     fileProcessing: "<strong>Analise en cours</strong> de votre fichier...",
@@ -877,17 +953,37 @@ export const messages = {
       "        Vérifiez vous-même.\n" +
       "      </a>",
     examplePDF: "Exemple de PDF à partir d'une exportation de chat :",
-    haveALook: "Jetez un coup d'œil à ce graphique de notre conversation, généré par whatsanalyze.com.",
+    haveALook:
+      "Jetez un coup d'œil à ce graphique de notre conversation, généré par whatsanalyze.com.",
     testimonialHeadline:
       "Analysez vos chats et\n" +
       "      <strong> obtenir des informations sur les données</strong>",
-    jennifer: "La visualisation du chat de mes amis a révélé beaucoup de choses sur notre relation. J'ai toujours pensé que c'était moi qui envoyais le plus de messages. C'est vraiment sympa de voir tous ces faits amusants sur notre histoire. Je pense qu'il faut continuer et ajouter d'autres belles images.",
-    lara: "C'est incroyable de voir tout l'historique de WhatsApp en un coup d'œil. J'ai des chats qui remontent à plusieurs années et voir comment la relation est reflétée dans le chat est incroyable. J'aime le fait que mes fichiers ne soient pas téléchargés et que l'application fonctionne directement dans mon navigateur.",
+    jennifer:
+      "La visualisation du chat de mes amis a révélé beaucoup de choses sur notre relation. J'ai toujours pensé que c'était moi qui envoyais le plus de messages. C'est vraiment sympa de voir tous ces faits amusants sur notre histoire. Je pense qu'il faut continuer et ajouter d'autres belles images.",
+    lara:
+      "C'est incroyable de voir tout l'historique de WhatsApp en un coup d'œil. J'ai des chats qui remontent à plusieurs années et voir comment la relation est reflétée dans le chat est incroyable. J'aime le fait que mes fichiers ne soient pas téléchargés et que l'application fonctionne directement dans mon navigateur.",
     says: "says",
     about: "A propos",
-    aboutPoints: "Nous sommes un groupe <b>d'amis d'université</b>. Nous avons récemment quitté WhatsApp et nous voulions analyser l'évolution de nos chats au fil des ans. <br /> <br /> Comme <b>les étudiants en informatique</b> sont paranoïaques et pensent qu'ils peuvent tout faire mieux, nous avons naturellement voulu construire une solution nous-mêmes, où <b>aucune donnée personnelle</b> n'est partagée ou rendue publique.",
-    exampleGraphSubtitle1: "John et Jane sont probablement ceux qui écrivent le plus à 4 heures du matin...",
+    aboutPoints:
+      "Nous sommes un groupe <b>d'amis d'université</b>. Nous avons récemment quitté WhatsApp et nous voulions analyser l'évolution de nos chats au fil des ans. <br /> <br /> Comme <b>les étudiants en informatique</b> sont paranoïaques et pensent qu'ils peuvent tout faire mieux, nous avons naturellement voulu construire une solution nous-mêmes, où <b>aucune donnée personnelle</b> n'est partagée ou rendue publique.",
+    exampleGraphSubtitle1:
+      "John et Jane sont probablement ceux qui écrivent le plus à 4 heures du matin...",
     exampleGraphSubtitle2: "...et John écrit un peu plus que Jane.",
-    waitingForPDF: "La génération du PDF peut prendre un certain temps, parfois jusqu'à 10 minutes, en fonction de votre appareil. Veuillez faire preuve de patience.",
+    waitingForPDF:
+      "La génération du PDF peut prendre un certain temps, parfois jusqu'à 10 minutes, en fonction de votre appareil. Veuillez faire preuve de patience.",
+    chatTimeline: "Chronologie du Chat",
+    messagesPerDay: "Messages par Jour",
+    messagesPer: "Messages par",
+    person: "Personne",
+    timeOfDay: "Heure du Jour",
+    month: "Mois",
+    weekday: "Jour de la Semaine",
+    wordCloud: "Nuage de Mots",
+    downloadAllGraphs: "Télécharger tous les graphiques en une seule fois !",
+    shareWithFriends:
+      "Partagez-les avec vos amis, tout cela gratuitement, rien que pour vous ❤️️",
+    downloadResults: "Télécharger les résultats",
+    lookingFor: "Recherche de",
+    pdfDownload: "Téléchargement PDF",
   },
 };
