@@ -293,8 +293,7 @@ export const messages = {
       ' in der rechten Ecke. Tippe auf "Einstellungen" und dann auf "Chats". In der neuen Ansicht tippe auf\n' +
       ' "Chatverlauf" und "Alle Chats archivieren".',
 
-    howToBackupiOS:
-      "So sichernst Whatsapp-Chats auf iOS einschließlich iOS 14",
+    howToBackupiOS: "So sichernst Whatsapp-Chats auf iOS einschließlich iOS 14",
 
     howToBackupiOSLong:
       "Indem Du deinen WhatsApp-Chat auf deinem iPhone sicherst, kannst du deinen" +
@@ -323,8 +322,7 @@ export const messages = {
       "          Bitte lade die <strong>.txt</strong> oder<strong>.zip</strong> Datei hoch\n" +
       ", die Du beim Exportieren deines Chats erhäözszs!",
     fileDrop: "Datei jetzt ablegen!",
-    fileDone:
-      "<strong>Fertig!</strong> Schaue dir deine Analyse unten an.",
+    fileDone: "<strong>Fertig!</strong> Schaue dir deine Analyse unten an.",
     fileSuccess: "<strong>Ziehen</strong> oder <strong>Auswählen</strong>",
     fileSelect: '<strong style="text-decoration: underline">Auswahl</strong>',
     fileAnother: "eine andere Datei, um sie zu analysieren.",
@@ -374,7 +372,7 @@ export const messages = {
     exampleGraphSubtitle2:
       "...und John schreibt insgesamt etwas mehr als Jane.",
     waitingForPDF:
-      "Die Generierung des PDFs kann etwas dauern, manchmal bis zu 10 Minuten, abhängig von Ihrem Gerät. Bitte haben Sie Geduld.",
+      "Die Generierung des PDFs kann etwas dauern, manchmal bis zu 10 Minuten, abhängig von Ihrem Gerät. Bitte habe Geduld.",
     chatTimeline: "Chat-Zeitstrahl",
     messagesPerDay: "Nachrichten pro Tag",
     messagesPer: "Nachrichten pro",
@@ -385,7 +383,7 @@ export const messages = {
     wordCloud: "Wortwolke",
     downloadAllGraphs: "Alle Graphen auf einmal herunterladen!",
     shareWithFriends:
-      "Teilen Sie sie mit Ihren Freunden, alles kostenlos nur für Sie ❤️️",
+      "Teilen es mit Deinen Freunden. Kostenlos nur für Dich ❤️️",
     downloadResults: "Ergebnisse herunterladen",
     lookingFor: "Suche nach",
     pdfDownload: "PDF-Download",
