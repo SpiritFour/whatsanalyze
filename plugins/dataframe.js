@@ -1,4 +1,6 @@
-import Vue from "vue";
-import DataFrame from "dataframe-js";
+import { defineNuxtPlugin } from '#app';
+import DataFrame from 'dataframe-js';
 
-Vue.use(DataFrame);
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.vueApp.use(DataFrame);
+});

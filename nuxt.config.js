@@ -1,6 +1,8 @@
 import fs from "fs";
-import colors from "vuetify/es5/util/colors";
+import colors from "vuetify/lib/util/colors";
 import { messages } from "./utils/translations.js";
+import { VitePWA } from 'vite-plugin-pwa';
+
 
 // eslint-disable-next-line no-undef
 const local = process.env.NUXT_ENV_LOCAL !== undefined;
@@ -46,41 +48,46 @@ export default {
       { rel: "apple-touch-icon", href: "/favicon.ico" },
     ],
   },
-  pwa: {
-    manifest: {
-      name: "WhatsAnalyze - The WhatsApp Chat Analyzer",
-      short_name: "WhatsAnalyze",
-      start_url: "/",
-      display: "standalone",
-      background_color: "#21a68d",
-      theme_color: "#000000",
-      lang: "en",
-      useWebmanifestExtension: true,
-      share_target: {
-        action: "/pwa-results?share-target=1",
-        method: "POST",
-        enctype: "multipart/form-data",
-        params: {
-          title: "name",
-          text: "description",
-          url: "link",
-          files: [
-            {
-              name: "file",
-              accept: ["*/*"],
+  vite: {
+    plugins: [
+      VitePWA({
+        registerType: 'autoUpdate',
+        includeAssets: ['favicon.svg', '/favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
+        manifest: {
+          name: 'WhatsAnalyze - The WhatsApp Chat Analyzer',
+          short_name: 'WhatsAnalyze',
+          start_url: '/',
+          display: 'standalone',
+          background_color: '#21a68d',
+          theme_color: '#000000',
+          share_target: {
+            action: "/pwa-results?share-target=1",
+            method: "POST",
+            enctype: "multipart/form-data",
+            params: {
+              title: "name",
+              text: "description",
+              url: "link",
+              files: [
+                {
+                  name: "file",
+                  accept: ["*/*"],
+                },
+              ],
             },
-          ],
+          },
+          workbox: {
+            importScripts: ["custom-sw.js"],
+            dev: local,
+          },
+          icon: {
+            src: "/assets/whatsanalyze-logo-black-PWA.png",
+            sizes: "192x192",
+            type: "image/png",
+          },
         },
-      },
-    },
-    workbox: {
-      importScripts: ["custom-sw.js"],
-      dev: local,
-    },
-    icon: {
-      source: "/assets",
-      fileName: "whatsanalyze-logo-black-PWA.png",
-    },
+      }),
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -117,13 +124,11 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    "@nuxt/content",
-    "@nuxtjs/pwa",
-    "@nuxtjs/gtm",
-    "nuxt-i18n",
-    "@nuxtjs/firebase",
+    '@nuxt/content',
+    'nuxt-vuefire',
+    '@zadigetvoltaire/nuxt-gtm'
   ],
-  firebase: {
+  vuefire: {
     config: {
       apiKey: "AIzaSyBWNP0Ckw94E7tyoZZozAOZ6JSQRH2lzFU",
       authDomain: "whatsanalyze-80665.firebaseapp.com",
@@ -137,46 +142,46 @@ export default {
       firestore: true, // Just as example. Can be any other service.
     },
   },
-  i18n: {
-    seo: true,
-    locales: [
-      {
-        code: "en",
-        iso: "en-US",
-      },
-      {
-        code: "de",
-        iso: "de-DE",
-      },
-      {
-        code: "es",
-        iso: "es-ES",
-      },
-      {
-        code: "fr",
-        iso: "fr-FR",
-      },
-      {
-        code: "pt",
-        iso: "pt-PT",
-      },
-    ],
-    defaultLocale: "en",
-    detectBrowserLanguage: {
-      alwaysRedirect: false,
-      fallbackLocale: "en",
-      onlyOnRoot: true,
-      useCookie: true,
-      cookieCrossOrigin: false,
-      cookieKey: "i18n_redirected",
-      cookieSecure: false,
+i18n: {
+  seo: true,
+  locales: [
+    {
+      code: "en",
+      iso: "en-US",
     },
-    vueI18n: {
-      fallbackLocale: "en",
-      messages,
+    {
+      code: "de",
+      iso: "de-DE",
     },
-    vueI18nLoader: true,
+    {
+      code: "es",
+      iso: "es-ES",
+    },
+    {
+      code: "fr",
+      iso: "fr-FR",
+    },
+    {
+      code: "pt",
+      iso: "pt-PT",
+    },
+  ],
+  defaultLocale: "en",
+  detectBrowserLanguage: {
+    alwaysRedirect: false,
+    fallbackLocale: "en",
+    onlyOnRoot: true,
+    useCookie: true,
+    cookieCrossOrigin: false,
+    cookieKey: "i18n_redirected",
+    cookieSecure: false,
   },
+  vueI18n: {
+    fallbackLocale: "en",
+    messages,
+  },
+  vueI18nLoader: true,
+},
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
@@ -256,3 +261,5 @@ export default {
         : {},
   },
 };
+
+

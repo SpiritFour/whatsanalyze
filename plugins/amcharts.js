@@ -1,13 +1,15 @@
-import * as am4core from "@amcharts/amcharts4/core";
-import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-import * as am4plugins_wordCloud from "@amcharts/amcharts4/plugins/wordCloud";
+import { defineNuxtPlugin } from '#app';
 
-import Vue from "vue";
+import * as am5core from "@amcharts/amcharts5";
+import am5themes_animated from "@amcharts/amcharts5/themes/Animated";
+import * as am5plugins_wordCloud from "@amcharts/amcharts5/wc";
 
-Vue.prototype.$am4core = () => {
-  return {
-    am4core,
-    am4themes_animated,
-    am4plugins_wordCloud,
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.vueApp.config.globalProperties.$am5core = () => {
+    return {
+      am5core,
+      am5themes_animated,
+      am5plugins_wordCloud,
+    };
   };
-};
+});

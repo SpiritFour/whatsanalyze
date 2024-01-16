@@ -1,10 +1,11 @@
-import Vue from "vue";
-import VueGtag from "vue-gtag";
+import { defineNuxtPlugin } from '#app';
+import VueGtag from 'vue-gtag';
 
-Vue.use(VueGtag, {
-  config: {
+export default defineNuxtPlugin((nuxtApp) => {
+  const gtagConfig = {
     id: "G-XYC2EWGZZ3",
-    // eslint-disable-next-line no-undef
     enabled: process.env.NUXT_ENV_LOCAL === undefined,
-  },
+  };
+
+  nuxtApp.vueApp.use(VueGtag, gtagConfig);
 });

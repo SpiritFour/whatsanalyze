@@ -31,6 +31,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import 'assets/variables.scss';
 hr {
   margin: auto;
   margin-top: 1em;
