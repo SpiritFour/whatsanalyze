@@ -64,22 +64,22 @@ export default {
   },
   methods: {
     updateGraph() {
-    this.chartdata.getEmojiCloudData().then((words) => {
-      // Regex pattern to match currency like '24,95€'
-      const filterPattern = /€\d+([,\.]\d+)?|\d+([,\.]\d+)?€|R\$\d+([,\.]\d+)?|\d+([,\.]\d+)?R\$|\$?\d+([,\.]\d+)?|\d+([,\.]\d+)?\$|₹\d+([,\.]\d+)?|\d+([,\.]\d+)?₹|[!?].*|.*[!?]/;
-      
-      const wordData = words.filter((wordObj) => {
-        // Check if the word matches the currency pattern
-        const isCurrency = filterPattern.test(wordObj.word);
+      this.chartdata.getEmojiCloudData().then((words) => {
+        // Regex pattern to match currency like '24,95€'
+        const filterPattern = /(?:€|\$|R\$|₹)?\d+[,.]?\d*(?:€|\$|R\$|₹)?|[!?]/;
 
-        // Remove words that are currencies or entirely emojis
-        return !isCurrency && onlyEmoji(wordObj.word).length > 0;
+        const wordData = words.filter((wordObj) => {
+          // Check if the word matches the currency pattern
+          const isCurrency = filterPattern.test(wordObj.word);
+
+          // Remove words that are currencies or entirely emojis
+          return !isCurrency && onlyEmoji(wordObj.word).length > 0;
+        });
+
+        // Assign the filtered data
+        this.series.data = wordData;
       });
-
-      // Assign the filtered data
-      this.series.data = wordData;
-    });
-  },
+    },
   },
 };
 </script>
