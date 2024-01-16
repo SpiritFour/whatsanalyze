@@ -82,6 +82,9 @@
       <div class="text-h3 font-weight-bold pt-10">{{ $t("wordCloud") }}</div>
       <ChartsWordCloud id="wordcloud" :chartdata="chat" class="px-10" />
 
+      <div class="text-h3 font-weight-bold pt-10">Emojis</div>
+      <ChartsEmojiCloud id="emojicloud" :chartdata="chat" class="px-10" />
+
       <DownloadPopup
         :chat="chat"
         data-html2canvas-ignore
