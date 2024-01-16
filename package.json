@@ -80,6 +80,7 @@
     "jest": "^29.7.0",
     "lint-staged": "^15.2.0",
     "prettier": "3.2.2",
+    "sass": "^1.69.7",
     "vite-plugin-pwa": "^0.17.4",
     "vue-jest": "^3.0.4"
   }
