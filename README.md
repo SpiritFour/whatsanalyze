@@ -22,17 +22,17 @@ Please report bugs in the github issues.
 
 ```bash
 # install dependencies
-$ yarn install
+$ pnpm install
 
 # serve with hot reload at localhost:3000
-$ yarn dev
+$ pnpm dev
 
 # build for production and launch server
-$ yarn build
-$ yarn start
+$ pnpm build
+$ pnpm start
 
 # generate static project
-$ yarn generate
+$ pnpm generate
 ```
 
 Search for prettier and eslint in pycharm to set it up on saving a file. 

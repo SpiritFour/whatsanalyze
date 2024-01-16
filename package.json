@@ -14,15 +14,20 @@
       "pre-commit": "lint-staged"
     }
   },
+  "engines": {
+    "node": "^18"
+  },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown",
     "*.{js,vue}": "eslint --cache --fix",
     "*.{js,css,md,vue}": "prettier --write"
   },
   "dependencies": {
-    "@amcharts/amcharts4": "^4.10.15",
+    "@amcharts/amcharts4": "^4.10.35",
+    "@babel/core": "^7.21.4",
     "@mdi/js": "^5.9.55",
-    "@nuxt/content": "^1.13.1",
+    "@nuxt/content": "^1.15.1",
+    "@nuxt/ufo": "^0.5.4",
     "@nuxtjs/firebase": "^7.6.1",
     "@nuxtjs/gtm": "^2.4.0",
     "@nuxtjs/sentry": "7.1.13",
@@ -31,7 +36,7 @@
     "@sentry/webpack-plugin": "^1.20.0",
     "canvg": "^3.0.7",
     "chart.js": "^2.9.4",
-    "core-js": "^3.9.1",
+    "core-js": "^3.30.0",
     "country-currency-map": "^2.1.7",
     "dompurify": "^2.2.6",
     "emoji-aware": "^3.0.5",
@@ -51,13 +56,15 @@
     "push-dir": "^0.4.1",
     "stopwords-de": "^0.3.0",
     "stopwords-en": "^0.3.0",
+    "vue": "^2.7.14",
     "vue-chartjs": "^3.5.1",
     "vue-gtag": "^1.11.0",
+    "webpack": "4.46.0",
     "whatsapp-chat-parser": "^3.1.0",
     "worker-loader": "^3.0.8"
   },
   "devDependencies": {
-    "@nuxt/types": "^2.15.7",
+    "@nuxt/types": "^2.16.3",
     "@nuxt/typescript-build": "^2.1.0",
     "@nuxtjs/eslint-config-typescript": "^6.0.1",
     "@nuxtjs/pwa": "^3.3.5",
@@ -66,13 +73,13 @@
     "@vue/test-utils": "^1.1.2",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^26.6.3",
-    "eslint": "^7.20.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-vue": "^7.6.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-vue": "^7.20.0",
     "husky": "4.2.3",
     "jest": "^26.6.3",
     "lint-staged": "^10.5.4",
     "prettier": "2.2.1",
-    "vue-jest": "^3.0.4"
+    "vue-jest": "^3.0.7"
   }
 }
