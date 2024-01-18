@@ -83,10 +83,7 @@
         "
         class="my-8"
       >
-        <v-btn
-          class="ma-auto white--text btn-color"
-          @click="nextMessages"
-        >
+        <v-btn class="ma-auto white--text btn-color" @click="nextMessages">
           Load next {{ offset }} messages
         </v-btn>
       </v-row>
@@ -106,18 +103,18 @@ export default {
     return {
       startIdx: 0,
       selectedEgo: "",
-      offset: 20
+      offset: 20,
     };
   },
   methods: {
     parseMessage(message) {
       const validUrl = new RegExp(
         "(https?:\\/\\/)?" + // protocol
-        "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
-        "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
-        "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
-        "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
-        "(\\#[-a-z\\d_]*)?",
+          "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
+          "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
+          "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+          "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+          "(\\#[-a-z\\d_]*)?",
         "i"
       );
       const words = message.split(" ");
@@ -152,8 +149,8 @@ export default {
       this.startIdx += this.offset;
       const container = this.$el.querySelector("#chat");
       container.scrollTop = 0;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -171,7 +168,7 @@ export default {
   overflow: scroll;
   overflow-x: hidden;
   background-color: rgb(13, 20, 24);
-  background-image: url("https://whatsapp-chat-parser.netlify.app/static/media/bg-dark.ffb9199c.png");
+  background-image: url("/dark-bg.jpg");
 }
 
 .myMessage {

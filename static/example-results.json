@@ -919,11 +919,7 @@
       "numberOfWords": 1656,
       "longestMessage": 52,
       "uniqueWords": 496,
-      "sortedEmojis": [
-        "😬",
-        "👍",
-        "🙂"
-      ],
+      "sortedEmojis": ["😬", "👍", "🙂"],
       "averageMessageLength": 6
     },
     {
@@ -932,9 +928,7 @@
       "numberOfWords": 1480,
       "longestMessage": 38,
       "uniqueWords": 457,
-      "sortedEmojis": [
-        "😅"
-      ],
+      "sortedEmojis": ["😅"],
       "averageMessageLength": 6
     }
   ],
@@ -1651,29 +1645,13 @@
         "label": "John Doe ",
         "backgroundColor": "#00535f",
         "borderColor": "#00535f",
-        "data": [
-          34,
-          47,
-          36,
-          107,
-          26,
-          26,
-          23
-        ]
+        "data": [34, 47, 36, 107, 26, 26, 23]
       },
       {
         "label": "Jane Doe",
         "backgroundColor": "#51b0bc",
         "borderColor": "#51b0bc",
-        "data": [
-          29,
-          35,
-          33,
-          91,
-          15,
-          16,
-          18
-        ]
+        "data": [29, 35, 33, 91, 15, 16, 18]
       }
     ]
   },
@@ -1697,62 +1675,24 @@
         "label": "John Doe ",
         "backgroundColor": "#00535f",
         "borderColor": "#00535f",
-        "data": [
-          59,
-          2,
-          0,
-          5,
-          0,
-          0,
-          0,
-          24,
-          89,
-          34,
-          22,
-          64
-        ]
+        "data": [59, 2, 0, 5, 0, 0, 0, 24, 89, 34, 22, 64]
       },
       {
         "label": "Jane Doe",
         "backgroundColor": "#51b0bc",
         "borderColor": "#51b0bc",
-        "data": [
-          40,
-          4,
-          0,
-          1,
-          0,
-          0,
-          0,
-          20,
-          77,
-          37,
-          15,
-          43
-        ]
+        "data": [40, 4, 0, 1, 0, 0, 0, 20, 77, 37, 15, 43]
       }
     ]
   },
   {
-    "labels": [
-      "John Doe ",
-      "Jane Doe"
-    ],
+    "labels": ["John Doe ", "Jane Doe"],
     "datasets": [
       {
         "label": "Share of Speech",
-        "backgroundColor": [
-          "#00535f",
-          "#51b0bc"
-        ],
-        "borderColor": [
-          "#00535f",
-          "#51b0bc"
-        ],
-        "data": [
-          299,
-          237
-        ]
+        "backgroundColor": ["#00535f", "#51b0bc"],
+        "borderColor": ["#00535f", "#51b0bc"],
+        "data": [299, 237]
       }
     ]
   }

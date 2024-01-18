@@ -82,12 +82,9 @@
         <v-card-text class="pt-3 text-body-1 font-weight-bold">
           Supporting us keeps the 💻 running 🎉
         </v-card-text>
-        <v-progress-linear
-          v-show="isLoading"
-          class="mb-2"
-          color="blue"
-          indeterminate
-        ></v-progress-linear>
+
+        <div v-if="isLoading" class="loading mb-2" />
+
         <v-row align="center" class="pt-6 pr-10" cols="12" justify="center">
           <ChatVisualizationPayment
             :amount="price"

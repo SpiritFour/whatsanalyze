@@ -1,5 +1,5 @@
 <template>
-  <div class="nav pl-xs-8 pl-0 py-0 py-md-0  additional-height">
+  <div class="nav pl-xs-8 pl-0 py-0 py-md-0 additional-height">
     <v-container class="pl-md-16">
       <v-card color="#21a68d" flat tile>
         <v-card-actions>
@@ -27,7 +27,7 @@ import LanguageSwitcher from "./LanguageSwitcher.vue";
 
 export default {
   name: "GlobalHeader",
-  components: { LanguageSwitcher }
+  components: { LanguageSwitcher },
 };
 </script>
 <style lang="scss" scoped>

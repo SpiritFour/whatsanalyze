@@ -13,6 +13,12 @@ import { Chat } from "~/functions/transformChatData";
 
 export default {
   name: "pwa-results",
+  data() {
+    return {
+      chat: undefined,
+      attachments: undefined,
+    };
+  },
   head: {
     meta: [
       {
@@ -22,11 +28,11 @@ export default {
       },
     ],
   },
-  data() {
-    return {
-      chat: undefined,
-      attachments: undefined,
-    };
+  created() {
+    // eslint-disable-next-line no-undef
+    if (process.client) {
+      this.setupWorkBox();
+    }
   },
   methods: {
     Chat,
@@ -55,12 +61,6 @@ export default {
         });
       }
     },
-  },
-  created() {
-    // eslint-disable-next-line no-undef
-    if (process.client) {
-      this.setupWorkBox();
-    }
   },
 };
 </script>

@@ -1,2 +1,3 @@
 jest.config.js
 test/*
+static/sw.js

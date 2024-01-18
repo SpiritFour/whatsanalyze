@@ -29,18 +29,18 @@
 export default {
   props: {
     titelH1: {
-      default: function() {
+      default: function () {
         return "analyzeInSeconds";
       },
-      type: String
+      type: String,
     },
     titelH2: {
-      default: function() {
+      default: function () {
         return "revealInsights";
       },
-      type: String
-    }
-  }
+      type: String,
+    },
+  },
 };
 </script>
 

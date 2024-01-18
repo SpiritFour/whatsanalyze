@@ -23,8 +23,11 @@
         sm="6"
       >
         <v-row justify="center">
-          <v-img :lazy-src="person.image" :src="person.image"
-                 style="height: 120px; max-width: 120px; border-radius: 60px" />
+          <v-img
+            :lazy-src="person.image"
+            :src="person.image"
+            style="height: 120px; max-width: 120px; border-radius: 60px"
+          />
         </v-row>
         <v-row class="text-h5 font-weight-bold" justify="center">
           {{ person.name }}
@@ -40,13 +43,13 @@
       </v-col>
     </v-row>
     <v-row align="center" class="mx-md-10">
-      <v-col
-        v-for="university in universities"
-        :key="university"
-        cols="3"
-      >
+      <v-col v-for="university in universities" :key="university" cols="3">
         <v-row justify="center">
-          <v-img :lazy-src="university" :src="university" style="width: 100%; max-width: 100px" />
+          <v-img
+            :lazy-src="university"
+            :src="university"
+            style="width: 100%; max-width: 100px"
+          />
         </v-row>
       </v-col>
     </v-row>
@@ -66,20 +69,20 @@ export default {
         // eslint-disable-next-line no-undef
         require("~/assets/img/uni/Otago_Logo.png"),
         // eslint-disable-next-line no-undef
-        require("~/assets/img/uni/Stockholm_Logo.png")
+        require("~/assets/img/uni/Stockholm_Logo.png"),
       ],
       persons: [
         {
           // eslint-disable-next-line no-undef
           image: require("~/assets/img/us/Sebastian_WA.jpg"),
           name: "Sebastian Fellner",
-          description: ["Computer Science MSc", "AI Enthusiast"]
+          description: ["Computer Science MSc", "AI Enthusiast"],
         },
         {
           // eslint-disable-next-line no-undef
           image: require("~/assets/img/us/Paul_WA.jpg"),
           name: "Paul Kehnel",
-          description: ["Computer Science  MSc", "Bicycle Dude"]
+          description: ["Computer Science  MSc", "Bicycle Dude"],
         },
         {
           // eslint-disable-next-line no-undef
@@ -91,11 +94,11 @@ export default {
           // eslint-disable-next-line no-undef
           image: require("~/assets/img/us/Moritz_WA.jpeg"),
           name: "Moritz Wolf",
-          description: ["Robotics MSc", "Outdoor Specialist"]
-        }
-      ]
+          description: ["Robotics MSc", "Outdoor Specialist"],
+        },
+      ],
     };
-  }
+  },
 };
 </script>
 

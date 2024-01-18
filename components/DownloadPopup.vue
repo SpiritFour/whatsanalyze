@@ -22,7 +22,7 @@
             </v-btn>
           </template>
 
-          <v-card>
+          <v-card class="overflow-hidden">
             <v-card-title class="headline cyan" style="word-break: normal">
               <div class="text-h4 font-weight-bold">{{ $t("didWeMake") }}</div>
               <span>{{ $t("buyUsCoffee") }}</span>
@@ -65,12 +65,8 @@
               </form>
             </v-row>
             <v-divider></v-divider>
-            <v-progress-linear
-              v-if="loading"
-              class="mb-0"
-              color="blue"
-              indeterminate
-            ></v-progress-linear>
+            <div v-if="loading" class="loading" />
+
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="red darken-1" text @click="dialog = false">
