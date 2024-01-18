@@ -20,12 +20,12 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
       - uses: pnpm/action-setup@v2
         with:
           version: 8
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
       - name: install dependencies
         run: pnpm install
       - run: pnpm run prettier --write .
