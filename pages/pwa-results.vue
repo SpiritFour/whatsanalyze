@@ -12,7 +12,7 @@
 import { Chat } from "~/functions/transformChatData";
 
 export default {
-  name: "PwaResults",
+  name: "pwa-results",
   data() {
     return {
       chat: undefined,
