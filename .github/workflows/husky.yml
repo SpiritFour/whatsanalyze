@@ -23,9 +23,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: install yarn
-        run: npm install -g yarn
+      - name: install pnpm
+        run: npm install -g pnpm
       - name: install dependencies
-        run: yarn install
-      - run: yarn run prettier --write .
-      - run: yarn run eslint .
+        run: pnpm install
+      - run: pnpm run prettier --write .
+      - run: pnpm run eslint .
