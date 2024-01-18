@@ -28,5 +28,5 @@ jobs:
           node-version: 16
       - name: install dependencies
         run: pnpm install
-      - run: pnpm run prettier --write .
-      - run: pnpm run eslint .
+      - run: pnpm exec prettier --write .
+      - run: pnpm exec eslint .

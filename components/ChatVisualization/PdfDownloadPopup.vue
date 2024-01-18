@@ -83,7 +83,7 @@
           Supporting us keeps the 💻 running 🎉
         </v-card-text>
 
-        <div v-if="isLoading" class="loading mb-2"/>
+        <div v-if="isLoading" class="loading mb-2" />
 
         <v-row align="center" class="pt-6 pr-10" cols="12" justify="center">
           <ChatVisualizationPayment

@@ -26,12 +26,12 @@ export default {
   props: {
     imageName: {
       type: String,
-      default: "whatsanalyze.png"
+      default: "whatsanalyze.png",
     },
     useHtml2Canvas: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
@@ -39,10 +39,10 @@ export default {
         (navigator.share &&
           navigator.canShare &&
           navigator.canShare({
-            files: [new File([], "image.png", { type: "image/png" })]
+            files: [new File([], "image.png", { type: "image/png" })],
           })) ||
         false,
-      loading: false
+      loading: false,
     };
   },
   methods: {
@@ -92,9 +92,9 @@ export default {
               text: this.$t("haveALook"),
               files: [
                 new File([blob], chartName + "-" + this.imageName, {
-                  type: "image/png"
-                })
-              ]
+                  type: "image/png",
+                }),
+              ],
             })
             .catch((error) => {
               // Ignore AbortError (User did not want to share)
@@ -114,8 +114,8 @@ export default {
 
         gtagEvent("download_" + chartName, GTAG_RESULTS);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
