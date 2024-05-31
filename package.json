@@ -7,7 +7,9 @@
     "local": "NUXT_ENV_LOCAL=1 nuxt generate && NUXT_ENV_LOCAL=1 nuxt start",
     "ci-dev-build": "NUXT_ENV_LOCAL=1 nuxt generate",
     "deploy": "nuxt generate && push-dir --dir=dist --branch=gh-pages --cleanup",
-    "deploy-sebi": "nuxt generate && rm dist/CNAME && push-dir --remote=https://github.com/fellnerse/fellnerse.github.io.git --dir=dist --branch=gh-pages --cleanup"
+    "deploy-sebi": "nuxt generate && rm dist/CNAME && push-dir --remote=https://github.com/fellnerse/fellnerse.github.io.git --dir=dist --branch=gh-pages --cleanup",
+    "format": "prettier . --write --ignore-unknown",
+    "lint": "eslint . --cache --fix"
   },
   "husky": {
     "hooks": {

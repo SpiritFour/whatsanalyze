@@ -1,7 +1,7 @@
 <template>
   <div v-if="chat">
     <v-col v-if="$vuetify.breakpoint.smAndUp">
-      <v-row class="mt-10">
+      <v-row>
         <v-spacer></v-spacer>
         <v-col cols="12" sm="6" xl="5">
           <ChartsBarChart
