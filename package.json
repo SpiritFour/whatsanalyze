@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "prepare": "dlx husky install",
+    "prepare": "pnpm dlx husky install",
     "dev": "NUXT_ENV_LOCAL=1 nuxt",
     "local": "NUXT_ENV_LOCAL=1 nuxt generate && NUXT_ENV_LOCAL=1 nuxt start",
     "ci-dev-build": "NUXT_ENV_LOCAL=1 nuxt generate",
