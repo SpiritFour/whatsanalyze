@@ -14,10 +14,13 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
       - name: Install and Build 🔧
         run: |
-          yarn install
-          yarn nuxt generate
+          pnpm install
+          pnpm nuxt generate
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
       - name: Deploy 🚀

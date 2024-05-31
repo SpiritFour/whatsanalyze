@@ -1,7 +1,7 @@
 <template>
   <div v-if="chat">
     <v-col v-if="$vuetify.breakpoint.smAndUp">
-      <v-row class="mt-10">
+      <v-row>
         <v-spacer></v-spacer>
         <v-col cols="12" sm="6" xl="5">
           <ChartsBarChart
@@ -9,7 +9,8 @@
             :options="barchartHeaderChartOptions"
             data-grouping="hourly"
           />
-          <div class="mx-3 mt-3 text-body-1 text-xl-h6 font-weight-bold">{{ $t("exampleGraphSubtitle1") }}
+          <div class="mx-3 mt-3 text-body-1 text-xl-h6 font-weight-bold">
+            {{ $t("exampleGraphSubtitle1") }}
           </div>
         </v-col>
         <v-spacer></v-spacer>
@@ -18,7 +19,8 @@
             :chartdata="chat"
             :options="donoughtHeaderChartOptions"
           />
-          <div class="mx-3 mt-3 text-body-1 text-xl-h6 font-weight-bold">{{ $t("exampleGraphSubtitle2") }}
+          <div class="mx-3 mt-3 text-body-1 text-xl-h6 font-weight-bold">
+            {{ $t("exampleGraphSubtitle2") }}
           </div>
         </v-col>
         <v-spacer></v-spacer>
@@ -98,8 +100,8 @@ export default {
           labels: {
             fontStyle: "bold",
             fontColor: "rgb(51,51,51)",
-            fontSize: 10
-          }
+            fontSize: 10,
+          },
         },
         scales: {
           xAxes: [
@@ -108,14 +110,14 @@ export default {
               time: {},
               gridLines: {
                 display: false,
-                color: "#FFFFFF"
+                color: "#FFFFFF",
               },
               ticks: {
                 fontColor: "rgb(51,51,51)",
                 fontStyle: "bold",
-                fontSize: 11
-              }
-            }
+                fontSize: 11,
+              },
+            },
           ],
           yAxes: [
             {
@@ -124,26 +126,26 @@ export default {
                 labelString: this.$t("messages"),
                 fontColor: "rgb(51,51,51)",
                 fontStyle: "bold",
-                fontSize: 11
+                fontSize: 11,
               },
               ticks: {
                 precision: 0,
                 stepSize: 1,
                 beginAtZero: true,
-                display: false
+                display: false,
               },
               gridLines: {
                 display: false,
-                color: "#FFFFFF"
-              }
-            }
-          ]
+                color: "#FFFFFF",
+              },
+            },
+          ],
         },
         elements: {
           line: {
-            tension: 0
-          }
-        }
+            tension: 0,
+          },
+        },
       },
       donoughtHeaderChartOptions: {
         tooltips: { enabled: true },
@@ -155,8 +157,8 @@ export default {
           labels: {
             fontStyle: "bold",
             fontColor: "rgb(51,51,51)",
-            fontSize: 10
-          }
+            fontSize: 10,
+          },
         },
         scales: {
           yAxes: [
@@ -166,17 +168,17 @@ export default {
                 labelString: this.$t("messages"),
                 fontColor: "rgb(51,51,51)",
                 fontStyle: "bold",
-                fontSize: 11
+                fontSize: 11,
               },
               ticks: {
-                display: false
+                display: false,
               },
               gridLines: {
-                display: false
-              }
-            }
-          ]
-        }
+                display: false,
+              },
+            },
+          ],
+        },
       },
       radarchartHeaderChartOptions: {
         tooltips: { enabled: false },
@@ -186,27 +188,27 @@ export default {
         scale: {
           angleLines: {
             // display: false,
-            color: "rgb(51,51,51)"
+            color: "rgb(51,51,51)",
           },
           ticks: {
-            display: false
+            display: false,
           },
           gridLines: {
-            color: "rgb(51,51,51)"
+            color: "rgb(51,51,51)",
           },
 
           pointLabels: {
-            fontColor: "rgb(51,51,51)"
-          }
+            fontColor: "rgb(51,51,51)",
+          },
         },
         legend: {
           position: "top",
           labels: {
             fontStyle: "bold",
             fontColor: "rgb(51,51,51)",
-            fontSize: 10
-          }
-        }
+            fontSize: 10,
+          },
+        },
       },
       barchartHeaderChartOptions: {
         tooltips: { enabled: true },
@@ -218,19 +220,19 @@ export default {
           labels: {
             fontStyle: "bold",
             fontColor: "rgb(51,51,51)",
-            fontSize: 10
-          }
+            fontSize: 10,
+          },
         },
         scales: {
           xAxes: [
             {
               gridLines: {
-                display: false
+                display: false,
               },
               ticks: {
-                fontColor: "rgb(51,51,51)"
-              }
-            }
+                fontColor: "rgb(51,51,51)",
+              },
+            },
           ],
           yAxes: [
             {
@@ -239,20 +241,20 @@ export default {
                 labelString: this.$t("messages"),
                 fontStyle: "bold",
                 fontColor: "rgb(51,51,51)",
-                fontSize: 10
+                fontSize: 10,
               },
               gridLines: {
-                display: false
+                display: false,
               },
               ticks: {
                 beginAtZero: true,
                 precision: 0,
-                display: false
-              }
-            }
-          ]
-        }
-      }
+                display: false,
+              },
+            },
+          ],
+        },
+      },
     };
   },
   created() {
@@ -270,12 +272,12 @@ export default {
             _hourlyData: Promise.resolve(serializedObject[3]),
             _dailyData: Promise.resolve(serializedObject[4]),
             _weeklyData: Promise.resolve(serializedObject[5]),
-            _shareOfSpeech: Promise.resolve(serializedObject[6])
+            _shareOfSpeech: Promise.resolve(serializedObject[6]),
           });
           this.chat = instance;
         });
     }
-  }
+  },
 };
 </script>
 <style lang="scss">

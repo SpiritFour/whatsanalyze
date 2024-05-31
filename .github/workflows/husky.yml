@@ -20,12 +20,13 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: install yarn
-        run: npm install -g yarn
       - name: install dependencies
-        run: yarn install
-      - run: yarn run prettier --write .
-      - run: yarn run eslint .
+        run: pnpm install
+      - run: pnpm exec prettier --write .
+      - run: pnpm exec eslint .

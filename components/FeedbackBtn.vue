@@ -116,14 +116,14 @@ export default {
       email: "",
       emailRules: [
         (v) => !!v || this.$t("email"),
-        (v) => /.+@.+\..+/.test(v) || this.$t("email")
+        (v) => /.+@.+\..+/.test(v) || this.$t("email"),
       ],
       text: "",
       starValue: 0,
       starRules: [(v) => !!v || this.$t("rating")],
       select: null,
       dialog: false,
-      message: null
+      message: null,
     };
   },
 
@@ -141,14 +141,14 @@ export default {
             text: this.text,
             rating: this.starValue,
             locale: this.$i18n.locale,
-            created: this.$fireModule.firestore.FieldValue.serverTimestamp()
+            created: this.$fireModule.firestore.FieldValue.serverTimestamp(),
           })
           .then(() => {
             this.message = this.$t("messageReceived");
           });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>

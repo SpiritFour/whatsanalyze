@@ -1,7 +1,12 @@
 <template>
-  <v-icon :class="{'arrow-down':animate}" class="py-2" color="rgba(0,0,0,0.8)" content-class="elevation-0"
-          size="50"
-          @click="goToExportExplainer">
+  <v-icon
+    :class="{ 'arrow-down': animate }"
+    class="py-2"
+    color="rgba(0,0,0,0.8)"
+    content-class="elevation-0"
+    size="50"
+    @click="goToExportExplainer"
+  >
     mdi-chevron-down
   </v-icon>
   <!--  todo hide ugly button grey thingy after pressing-->
@@ -14,8 +19,8 @@ export default {
   methods: {
     goToExportExplainer() {
       this.$vuetify.goTo(".exportexplainer", { duration: 300 });
-    }
-  }
+    },
+  },
 };
 </script>
 
