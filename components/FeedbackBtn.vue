@@ -3,7 +3,7 @@
   "en": {
     "writeUs": "Write Us!",
     "cardText": "Do you have feedback for us? Did something not work? Do you have suggestions for improvement? Let us know!",
-    "messageReceived": "We got your message!",
+    "messageReceived": "We received your message!",
     "name": "Name is required",
     "email": "E-mail must be valid",
     "rating": "Rating is required"
@@ -47,7 +47,7 @@
         </v-card-title>
 
         <v-card-text class="pt-4 pb-0 text-h6">
-          {{ $t("cardText") }}
+          {{ !message ? $t("cardText") : "" }}
           <v-form
             v-if="!message"
             ref="form"
@@ -116,14 +116,14 @@ export default {
       email: "",
       emailRules: [
         (v) => !!v || this.$t("email"),
-        (v) => /.+@.+\..+/.test(v) || this.$t("email"),
+        (v) => /.+@.+\..+/.test(v) || this.$t("email")
       ],
       text: "",
       starValue: 0,
       starRules: [(v) => !!v || this.$t("rating")],
       select: null,
       dialog: false,
-      message: null,
+      message: null
     };
   },
 
@@ -132,23 +132,33 @@ export default {
       const valid = this.$refs.form.validate();
       if (valid) {
         this.valid = false;
+        const mail = {
+          toUids: ["sebastian"],
+          ccUids: ["adrian", "mo", "paul"],
+          from: this.email,
+          replyTo: this.email,
+          template: {
+            name: "feedback",
+            data: {
+              name: this.name,
+              text: this.text,
+              rating: this.starValue,
+              locale: this.$i18n.locale,
+              email: this.email
+            },
+            created: this.$fireModule.firestore.FieldValue.serverTimestamp()
+          }
+        };
         this.$fire.firestore
-          .collection("messages")
+          .collection("mail")
           .doc()
-          .set({
-            name: this.name,
-            email: this.email,
-            text: this.text,
-            rating: this.starValue,
-            locale: this.$i18n.locale,
-            created: this.$fireModule.firestore.FieldValue.serverTimestamp(),
-          })
+          .set(mail)
           .then(() => {
             this.message = this.$t("messageReceived");
           });
       }
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>
