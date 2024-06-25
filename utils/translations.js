@@ -195,7 +195,8 @@ export const messages = {
     lookingFor: "Looking for",
     pdfDownload: "PDF download",
     excludeWords: "Exclude Words",
-    excludeWordsHint: "Should be space separated list. RegEx is also supported."
+    excludeWordsHint:
+      "Should be space separated list. RegEx is also supported.",
   },
   de: {
     titleGoogle: "WhatsAnalyze - The WhatsApp Chat Analyzer",
