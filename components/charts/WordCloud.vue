@@ -80,6 +80,10 @@ export default {
     this.chart.dispose();
   },
   methods: {
+    /** Updates graph by, getting data, and processing it
+     *
+     * filters out words from user input as well
+     * **/
     async updateGraph() {
       // this is a list of [{word: String, freq: String}, ...]
       const allWords = await this.chartdata.getAllWords();
