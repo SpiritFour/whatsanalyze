@@ -166,7 +166,7 @@ export default {
         canvas.then((canvas) => {
           downloadBase64File(
             canvas.toDataURL(),
-            "whatsanlayze-results-" + names + ".png"
+            "whatsanalyze-results-" + names + ".png"
           );
           this.loading = false;
         });
