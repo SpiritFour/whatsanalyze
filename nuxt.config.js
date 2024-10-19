@@ -251,8 +251,8 @@ export default {
       // eslint-disable-next-line no-undef
       process.env.NODE_ENV !== "production" || local
         ? {
-            key: fs.readFileSync("./0.0.0.0.key"),
-            cert: fs.readFileSync("./0.0.0.0.crt"),
+            key: fs.readFileSync("./localhost-key.pem"),
+            cert: fs.readFileSync("./localhost.pem"),
           }
         : {},
   },
