@@ -82,12 +82,9 @@
         <v-card-text class="pt-3 text-body-1 font-weight-bold">
           Supporting us keeps the 💻 running 🎉
         </v-card-text>
-        <v-progress-linear
-          v-show="isLoading"
-          class="mb-2"
-          color="blue"
-          indeterminate
-        ></v-progress-linear>
+
+        <div v-if="isLoading" class="loading mb-2" />
+
         <v-row align="center" class="pt-6 pr-10" cols="12" justify="center">
           <ChatVisualizationPayment
             :amount="price"
@@ -130,7 +127,7 @@ export default {
   methods: {
     downloadFull() {
       gtagEvent("full_download", GTAG_PDF, 3);
-      this.download(true);
+      this.download(false);
     },
     onCreateOrder() {
       gtagEvent("created", GTAG_PAYMENT, 0);
@@ -141,7 +138,7 @@ export default {
       this.showDownloadPopup = false;
     },
     onError() {},
-    async download(full = false) {
+    async download(isSample = false) {
       if (process.browser) {
         this.isLoading = true;
         this.progress = 0;
@@ -165,7 +162,7 @@ export default {
           chat: chat,
           attachments: this.attachments,
           ego: this.ego,
-          isSample: full,
+          isSample,
           chatTimeline,
           messagesPerTimeOfDay,
           messagesPerPerson,

@@ -3,10 +3,10 @@
     <v-row justify="center">
       <div :class="{ cta: !isSimple }" class="my-md-4 pa-8">
         <div v-if="!isSimple" class="text-h3 font-weight-bold pb-4">
-          Download all Graphs at once!
+          {{ $t("downloadAllGraphs") }}
         </div>
         <div v-if="!isSimple" class="text-body-1 pb-2">
-          Share them with your friends, all free just for you ❤️️
+          {{ $t("shareWithFriends") }}
         </div>
         <v-dialog v-model="dialog" width="600">
           <template #activator="{ on }">
@@ -18,11 +18,11 @@
               v-on="on"
             >
               <v-icon class="mr-2">mdi-download</v-icon>
-              Download Results
+              {{ $t("downloadResults") }}
             </v-btn>
           </template>
 
-          <v-card>
+          <v-card class="overflow-hidden">
             <v-card-title class="headline cyan" style="word-break: normal">
               <div class="text-h4 font-weight-bold">{{ $t("didWeMake") }}</div>
               <span>{{ $t("buyUsCoffee") }}</span>
@@ -65,12 +65,8 @@
               </form>
             </v-row>
             <v-divider></v-divider>
-            <v-progress-linear
-              v-if="loading"
-              class="mb-0"
-              color="blue"
-              indeterminate
-            ></v-progress-linear>
+            <div v-if="loading" class="loading" />
+
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="red darken-1" text @click="dialog = false">
@@ -83,7 +79,8 @@
         <div v-if="!isSimple" class="text-text-h3 my-4">
           <v-col>
             <div v-if="!isSimple" class="text-body-1 pb-2">
-              Looking for <b>PDF download</b>?
+              {{ $t("lookingFor") }} <b>{{ $t("pdfDownload") }}</b
+              >?
             </div>
 
             <v-btn
@@ -95,12 +92,9 @@
                 $vuetify.goTo('#payButton', { duration: 300, offset: 100 });
               "
             >
-              <v-icon class="mr-2">mdi-arrow-right
-              </v-icon
-              >
+              <v-icon class="mr-2">mdi-arrow-right </v-icon>
               {{ $t("goToPDF") }}
-            </v-btn
-            >
+            </v-btn>
           </v-col>
         </div>
       </div>
@@ -111,24 +105,29 @@
 <script>
 import html2canvas from "html2canvas";
 import { downloadBase64File } from "~/functions/utils";
-import { GTAG_INTERACTION, GTAG_PAYMENT, GTAG_RESULTS, gtagEvent } from "~/functions/gtagValues";
+import {
+  GTAG_INTERACTION,
+  GTAG_PAYMENT,
+  GTAG_RESULTS,
+  gtagEvent,
+} from "~/functions/gtagValues";
 
 export default {
   name: "DownloadPopup",
   props: {
     chat: { type: Object },
-    isSimple: { default: false, type: Boolean }
+    isSimple: { default: false, type: Boolean },
   },
   data() {
     return {
       dialog: false,
       loading: false,
       suffix: this.isSimple ? "-top" : "",
-      GTAG_INTERACTION
+      GTAG_INTERACTION,
     };
   },
   methods: {
-    download: function() {
+    download: function () {
       this.loading = true;
       gtagEvent("download_image", GTAG_RESULTS);
 
@@ -151,13 +150,13 @@ export default {
           scrollX: 0,
           scrollY: -window.scrollY,
           height: normalHeight + additionalHeight + negativeHeight,
-          onclone: function(clonedDoc) {
+          onclone: function (clonedDoc) {
             let nonVisibleStuff = clonedDoc.querySelectorAll(
               ".only-visible-to-html2canvas"
             );
             nonVisibleStuff.forEach((y) => (y.style.display = "block"));
             return clonedDoc;
-          }
+          },
         });
 
         let names = this.chat.messagesPerPerson
@@ -176,7 +175,7 @@ export default {
     paypalButtonPressed() {
       gtagEvent("donation_download_results", GTAG_PAYMENT, 5);
     },
-    gtagEvent
-  }
+    gtagEvent,
+  },
 };
 </script>

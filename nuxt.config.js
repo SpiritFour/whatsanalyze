@@ -4,11 +4,9 @@ import { messages } from "./utils/translations.js";
 
 // eslint-disable-next-line no-undef
 const local = process.env.NUXT_ENV_LOCAL !== undefined;
-const baseUrl = // eslint-disable-next-line no-undef
-(process.env.BASE_URL || "https://www.whatsanalyze.com").replace(
-  "http:",
-  "https:"
-);
+const baseUrl = ( // eslint-disable-next-line no-undef
+  process.env.BASE_URL || "https://www.whatsanalyze.com"
+).replace("http:", "https:");
 
 export default {
   publicRuntimeConfig: {
@@ -25,6 +23,7 @@ export default {
 
   // Target: https://go.nuxtjs.dev/config-target
   target: "static",
+  ssr: false,
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -154,6 +153,14 @@ export default {
         code: "es",
         iso: "es-ES",
       },
+      {
+        code: "fr",
+        iso: "fr-FR",
+      },
+      {
+        code: "pt",
+        iso: "pt-PT",
+      },
     ],
     defaultLocale: "en",
     detectBrowserLanguage: {
@@ -244,8 +251,8 @@ export default {
       // eslint-disable-next-line no-undef
       process.env.NODE_ENV !== "production" || local
         ? {
-            key: fs.readFileSync("./0.0.0.0.key"),
-            cert: fs.readFileSync("./0.0.0.0.crt"),
+            key: fs.readFileSync("./localhost-key.pem"),
+            cert: fs.readFileSync("./localhost.pem"),
           }
         : {},
   },
