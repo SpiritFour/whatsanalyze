@@ -127,7 +127,7 @@ export default {
   methods: {
     downloadFull() {
       gtagEvent("full_download", GTAG_PDF, 3);
-      this.download(true);
+      this.download(false);
     },
     onCreateOrder() {
       gtagEvent("created", GTAG_PAYMENT, 0);
@@ -138,7 +138,7 @@ export default {
       this.showDownloadPopup = false;
     },
     onError() {},
-    async download(full = false) {
+    async download(isSample = false) {
       if (process.browser) {
         this.isLoading = true;
         this.progress = 0;
@@ -162,7 +162,7 @@ export default {
           chat: chat,
           attachments: this.attachments,
           ego: this.ego,
-          isSample: full,
+          isSample,
           chatTimeline,
           messagesPerTimeOfDay,
           messagesPerPerson,
