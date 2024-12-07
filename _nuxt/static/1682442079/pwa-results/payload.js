@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/pwa-results", {data:[{}],fetch:{},mutations:void 0});
