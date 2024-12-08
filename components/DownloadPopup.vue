@@ -104,13 +104,13 @@
 
 <script>
 import html2canvas from "html2canvas";
-import { downloadBase64File } from "~/functions/utils";
+import { downloadBase64File } from "~/utils/utils";
 import {
   GTAG_INTERACTION,
   GTAG_PAYMENT,
   GTAG_RESULTS,
   gtagEvent,
-} from "~/functions/gtagValues";
+} from "~/utils/gtagValues";
 
 export default {
   name: "DownloadPopup",

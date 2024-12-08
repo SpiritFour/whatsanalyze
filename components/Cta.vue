@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { GTAG_INTERACTION, gtagEvent } from "~/functions/gtagValues";
+import { GTAG_INTERACTION, gtagEvent } from "~/utils/gtagValues";
 
 export default {
   props: {

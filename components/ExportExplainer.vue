@@ -133,7 +133,7 @@ import {
   GTAG_INSTALL,
   GTAG_INTERACTION,
   gtagEvent,
-} from "~/functions/gtagValues";
+} from "~/utils/gtagValues";
 
 let apple = () => false;
 // eslint-disable-next-line no-undef

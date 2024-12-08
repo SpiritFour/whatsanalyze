@@ -11,11 +11,12 @@
     in
     {
       devShells = eachSystem (pkgs: {
-        default = pkgs.mkShellNoCC {
+        default = pkgs.mkShell {
           buildInputs = [
             pkgs.nodejs_18
             pkgs.pnpm
             pkgs.firebase-tools
+            pkgs.python39
           ];
         };
       });

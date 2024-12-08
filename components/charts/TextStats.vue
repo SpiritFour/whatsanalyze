@@ -92,7 +92,7 @@ import {
   firstDate,
   getDateString,
   lastDate,
-} from "~/functions/utils";
+} from "~/utils/utils";
 
 export default {
   props: ["chat"],

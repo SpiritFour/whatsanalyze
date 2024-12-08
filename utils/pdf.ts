@@ -8,9 +8,9 @@ import {
   firstDate,
   getDateString,
   lastDate,
-} from "~/functions/utils";
-import { Attachment, getAttachment } from "~/functions/attachments";
-import { Chat } from "~/functions/transformChatData";
+} from "~/utils/utils";
+import { Attachment, getAttachment } from "~/utils/attachments";
+import { Chat } from "~/utils/transformChatData";
 
 const callAddFont = function (this: any) {
   this.addFileToVFS("myFont.ttf", myFont.normal);
