@@ -1,6 +1,6 @@
 <script>
 import { Line } from "vue-chartjs";
-import { Chat } from "~/functions/transformChatData";
+import { Chat } from "~/utils/transformChatData";
 
 export default {
   extends: Line,

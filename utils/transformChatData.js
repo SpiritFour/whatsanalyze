@@ -1,4 +1,4 @@
-import { chatColors, hexToRgbA } from "~/functions/colors";
+import { chatColors, hexToRgbA } from "~/utils/colors";
 import stopwords_de from "stopwords-de";
 import stopwords from "stopwords-en";
 import { onlyEmoji } from "emoji-aware";

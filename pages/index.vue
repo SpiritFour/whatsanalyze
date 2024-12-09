@@ -90,13 +90,13 @@
 </template>
 
 <script>
-import { Chat } from "~/functions/transformChatData";
+import { Chat } from "~/utils/transformChatData";
 import {
   GTAG_INTERACTION,
   GTAG_LEAD,
   GTAG_NUM_PERSONS,
   gtagEvent,
-} from "~/functions/gtagValues";
+} from "~/utils/gtagValues";
 import debounce from "lodash/debounce";
 
 export default {
