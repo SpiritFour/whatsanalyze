@@ -159,3 +159,127 @@ exports.helloworld = onRequest(
     response.send({ approveLink });
   }
 );
+
+
+/*
+async function saveTransactionInFirebase(id, productIds, amount, email) {
+  await db.collection('transactions')
+    .doc(id)
+    .set({
+      timestamp: Date.now(),
+      amount: amount,
+      email: email,
+    });
+}
+
+function userFacingMessage(error) {
+  return error.type ? error.message : 'An error occurred, developers have been alerted';
+}
+
+
+function paypalClient() {
+  let clientId = functions.config().keys.paypal_client_id
+  let clientSecret = functions.config().keys.paypal_client_secret
+  const paypalEnvironment = paypal.core.LiveEnvironment(
+    clientId, clientSecret
+  );
+
+  return new paypal.core.PayPalHttpClient(paypalEnvironment);
+}
+
+exports.validatePaypalPayment = functions.https.onRequest(async (req, res) => {
+  try {
+    res.set('Access-Control-Allow-Origin', 'https://whatsanalyze.com')
+    // get body from request
+    var {
+      amount,
+      productIds,
+      numberOfBlackTags,
+      customerContact,
+      paymentMethod
+    } = getBodyData(req);
+
+    // Get the signature from the request header
+    const request = new paypal.orders.OrdersCreateRequest();
+    request.prefer("return=representation");
+    request.requestBody({
+      intent: 'CAPTURE',
+      purchase_units: [{
+        amount: {
+          currency_code: 'EUR',
+          // paypal needs the price in full eur not in cents
+          value: amount / 100.0,
+        }
+      }]
+      //,
+      //   application_context:  {
+      //     shipping_preference: NO_SHIPPING
+      //  }
+    });
+    // create paypal order
+    let order;
+    try {
+      order = order = await paypalClient().execute(request);
+    } catch (err) {
+      // Handle any errors from the call
+      console.error('Error' + err);
+      res.status(500).send(userFacingMessage("Server Error. Please try again."))
+      return null
+    }
+    // save order in firebase
+    await saveTransactionInFirebase(order.result.id, productIds, amount, customerContact, paymentMethod, numberOfBlackTags);
+
+    // Return a successful response to the client with the order ID
+    console.log("Validated paypal order with id " + order.result.id);
+    res.status(200).json({
+      orderID: order.result.id
+    });
+
+  } catch (err) {
+    console.log(err)
+    res.status(500).send(userFacingMessage(err))
+    return null
+  }
+})
+
+exports.paypalWebhook = functions.https.onRequest(async (req, res) => {
+  // get data
+  const body = req.body;
+  // chech for event
+  if (body.event_type === "PAYMENT.CAPTURE.COMPLETED") {
+    try {
+      const orderID = body.resource.links[2].href.split('/').pop()
+      const docRef = db.collection('pastTransactions')
+        .doc(orderID)
+      docRef.get().then(async doc => {
+        if (doc.exists) {
+          // update data
+          docRef.set({
+            recievedPayment: true
+          }, {
+            merge: true
+          })
+          // send order confirmation
+          const customerContact = doc.data().customerContact
+          const orderedProducts = doc.data().productIds
+          await sendOrderConfirmation(customerContact, orderedProducts)
+          // send success
+          res.status(200).send({
+            recieved: true
+          }).end();
+        } else {
+          const message = "Invalid id: " + orderID
+          notifyAdmin(message, 'Error @ paypalWebhook')
+          console.log(message);
+          res.status(200).end();
+          return null
+        }
+      })
+    } catch (err) {
+      notifyAdmin(err, 'Error @ paypalWebhook')
+      res.status(500).end();
+      return null
+    }
+  }
+})
+*/
