@@ -87,12 +87,7 @@
 </template>
 
 <script>
-import {
-  dateDiffs,
-  firstDate,
-  getDateString,
-  lastDate,
-} from "~/utils/utils";
+import { dateDiffs, firstDate, getDateString, lastDate } from "~/utils/utils";
 
 export default {
   props: ["chat"],

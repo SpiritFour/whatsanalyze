@@ -129,11 +129,7 @@ import img5 from "@/assets/img/Android/5.png";
 import img5_lazy from "@/assets/img/Android/5copy.png";
 import img6 from "@/assets/img/Android/6.png";
 import img6_lazy from "@/assets/img/Android/6copy.png";
-import {
-  GTAG_INSTALL,
-  GTAG_INTERACTION,
-  gtagEvent,
-} from "~/utils/gtagValues";
+import { GTAG_INSTALL, GTAG_INTERACTION, gtagEvent } from "~/utils/gtagValues";
 
 let apple = () => false;
 // eslint-disable-next-line no-undef

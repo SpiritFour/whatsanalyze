@@ -3,12 +3,7 @@ import * as JSZip from "jszip";
 import logoBlack from "~/assets/whatsanalyze-logo-black.png";
 import myFont from "~/assets/pdf-fonts/Helvetica.js";
 
-import {
-  dateDiffs,
-  firstDate,
-  getDateString,
-  lastDate,
-} from "~/utils/utils";
+import { dateDiffs, firstDate, getDateString, lastDate } from "~/utils/utils";
 import { Attachment, getAttachment } from "~/utils/attachments";
 import { Chat } from "~/utils/transformChatData";
 
