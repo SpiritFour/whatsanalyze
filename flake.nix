@@ -17,6 +17,7 @@
             pkgs.pnpm
             pkgs.firebase-tools
             pkgs.python39
+            pkgs.git
           ];
         };
       });
