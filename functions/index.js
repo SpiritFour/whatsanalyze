@@ -48,8 +48,8 @@ async function createProduct(accessToken, productId) {
     body: JSON.stringify({
       name: "Whatsanalyze Plan",
       type: "SERVICE",
-      image_url: "https://example.com/streaming.jpg",
-      home_url: "https://example.com/home",
+      image_url: "https://whatsanalyze.com/subscriptions.png",
+      home_url: "https://whatsanalyze.com/",
     }),
   });
 }
@@ -130,8 +130,8 @@ async function getSubscriptionLink(
       body: JSON.stringify({
         plan_id,
         application_context: {
-          cancel_url: "https://www.example.com/cancel",
-          return_url: "https://www.example.com/return",
+          cancel_url: "https://whatsanalyze.com/cancel",
+          return_url: "https://whatsanalyze.com/subscribe",
         },
       }),
     })
