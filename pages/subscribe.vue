@@ -47,19 +47,11 @@ export default {
       this.token = queryParams.get("token");
     },
     async loadSubscription() {
-      // todo wäre sehr nice wenn die base url noch in der nuxt config da fest machen
-      const response = await fetch("http://localhost:5001/whatsanalyze-80665/us-central1/checksubscriberstatus", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        },
-        body: JSON.stringify({
-          subscriptionId: this.subscription_id
-        })
-      });
+      const response = await this.$fire.functions.httpsCallable("checksubscriberstatus")({
+        subscriptionId: this.subscription_id,
+      })
 
-      this.subscriptionData = await response.json();
+      this.subscriptionData = await response.data;
       this.isValid = this.subscriptionData.valid;
     }
   }

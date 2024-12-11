@@ -9,7 +9,7 @@
 
 const { onRequest } = require("firebase-functions/v2/https");
 const { initializeApp } = require("firebase-admin/app");
-const { getFirestore } = require( "firebase-admin/firestore");
+const { getFirestore } = require("firebase-admin/firestore");
 
 const logger = require("firebase-functions/logger");
 
@@ -149,31 +149,15 @@ async function getSubscriptionLink(
 }
 
 exports.helloworld = onRequest(
-  { secrets: ["PAYPAL_PASSWORD_DEV", "PAYPAL_PASSWORD_PROD"] },
+  { secrets: ["PAYPAL_PASSWORD_DEV", "PAYPAL_PASSWORD_PROD"], cors: true },
   async (request, response) => {
 
-    const allowedOrigins = ["localhost:3000","127.0.0.1:3000", "whatsanalyze.com", "a.run.app"]
-    const baseUrl = request.get("origin")
-    // Set CORS headers manually
-    for (const origin of allowedOrigins) {
-      if (baseUrl.includes(origin)) {
-        response.set('Access-Control-Allow-Origin', baseUrl); // Replace with your frontend's URL
-        break
-      }
-    }
-    console.log(`${baseUrl}`)
-    response.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    response.set('Access-Control-Allow-Headers', 'Content-Type');
-
-    // Handle preflight (OPTIONS) requests
-    if (request.method === 'OPTIONS') {
-      return response.status(204).send(''); // Respond to the preflight request (CORS-specific)
-    }
+    const origin = request.get("origin");
 
     const token = await requestAccessToken(true);
     // example value:
     // {"status":"APPROVAL_PENDING","id":"I-XKCLA5KDLLK3","create_time":"2024-12-09T20:08:32Z","links":[{"href":"https://www.sandbox.paypal.com/webapps/billing/subscriptions?ba_token=BA-41P21132UV5106118","rel":"approve","method":"GET"},{"href":"https://api-m.sandbox.paypal.com/v1/billing/subscriptions/I-XKCLA5KDLLK3","rel":"edit","method":"PATCH"},{"href":"https://api-m.sandbox.paypal.com/v1/billing/subscriptions/I-XKCLA5KDLLK3","rel":"self","method":"GET"}]}
-    const linkStuff = await getSubscriptionLink(token.access_token, `${baseUrl}`);
+    const linkStuff = await getSubscriptionLink(token.access_token, `${origin}`);
 
     logger.info("got link stuff back", { linkStuff });
     logger.info("links", { links: linkStuff.links });
@@ -185,7 +169,7 @@ exports.helloworld = onRequest(
       (link) => link.rel === "approve"
     )[0].href;
 
-    response.send({ approveLink });
+    response.send({ data: { approveLink } });
   }
 );
 
@@ -267,7 +251,7 @@ exports.helloworld = onRequest(
 }
 */
 
-exports.paypalwebhook = onRequest({ secrets: ["PAYPAL_PASSWORD_DEV", "PAYPAL_PASSWORD_PROD"] },async (req,res) => {
+exports.paypalwebhook = onRequest({ secrets: ["PAYPAL_PASSWORD_DEV", "PAYPAL_PASSWORD_PROD"] }, async (req, res) => {
   // get data
   const webhookData = req.body;
   console.log(webhookData);
@@ -278,9 +262,9 @@ exports.paypalwebhook = onRequest({ secrets: ["PAYPAL_PASSWORD_DEV", "PAYPAL_PAS
     // get customer information
     const token = await requestAccessToken(true);
 
-    const subscriptionData = await showSubscriptions(token.access_token, subscriptionId)
+    const subscriptionData = await showSubscriptions(token.access_token, subscriptionId);
 
-    const emailAddress = subscriptionData.subscriber.email_address
+    const emailAddress = subscriptionData.subscriber.email_address;
 
     const docRef = db.collection("subscriptions")
       .doc(emailAddress);
@@ -293,31 +277,33 @@ exports.paypalwebhook = onRequest({ secrets: ["PAYPAL_PASSWORD_DEV", "PAYPAL_PAS
       expirationTimestamp
     }, { merge: true });
   }
-  res.status(200).end()
+  res.status(200).end();
 });
 
-exports.checksubscriberstatus = onRequest({ secrets: ["PAYPAL_PASSWORD_DEV", "PAYPAL_PASSWORD_PROD"] },async (req,res) => {
+exports.checksubscriberstatus = onRequest({ secrets: ["PAYPAL_PASSWORD_DEV", "PAYPAL_PASSWORD_PROD"], cors: true }, async (req, res) => {
   // get data
-  const id = req.body.email || req.body.subscriptionId;
-  const isEmail = !!req.body.email;
+  const id = req.body.data.email || req.body.data.subscriptionId;
+  const isEmail = !!req.body.data.email;
 
-  if (!id){
+  if (!id) {
     res.status(400).send("No id provided");
-    return
+    return;
   }
 
   let exists = false;
-  if(isEmail){
+  if (isEmail) {
     exists = (await db.collection("subscriptions")
       .doc(id).get()).exists;
-  }
-  else{
+  } else {
     exists = !(await db.collection("subscriptions")
       .where("subscriptionData.id", "==", id).limit(1).get()).empty;
   }
-  res.status(200).send({isValid: exists});
+  res.status(200).send({
+    data: {
+      isValid: exists
+    }
+  });
 });
-
 
 
 /*
