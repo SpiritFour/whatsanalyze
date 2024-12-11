@@ -1,4 +1,4 @@
-import { render } from "~/functions/pdf";
+import { render } from "~/utils/pdf";
 
 self.onmessage = async (event) => {
   // this generates the jspdf document
