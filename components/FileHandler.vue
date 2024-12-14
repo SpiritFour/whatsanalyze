@@ -75,7 +75,7 @@
 <script>
 import { parseString } from "whatsapp-chat-parser";
 import JSZip from "jszip";
-import { GTAG_FILE, gtagEvent } from "~/functions/gtagValues";
+import { GTAG_FILE, gtagEvent } from "~/utils/gtagValues";
 
 export default {
   name: "FileHandler",

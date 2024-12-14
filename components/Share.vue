@@ -17,9 +17,9 @@
 </template>
 
 <script>
-import { downloadBase64File } from "~/functions/utils";
+import { downloadBase64File } from "~/utils/utils";
 import html2canvas from "html2canvas";
-import { GTAG_RESULTS, gtagEvent } from "~/functions/gtagValues";
+import { GTAG_RESULTS, gtagEvent } from "~/utils/gtagValues";
 
 export default {
   name: "Share",
