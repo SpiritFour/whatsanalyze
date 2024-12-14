@@ -49,6 +49,7 @@ export default {
     async loadSubscription() {
       const response = await this.$fire.functions.httpsCallable("checksubscriberstatus")({
         subscriptionId: this.subscription_id,
+        client_id: this.$config.paypalClientId,
       })
 
       this.subscriptionData = await response.data;

@@ -19,15 +19,29 @@ const app = initializeApp();
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
 
-const PAYPAL_CLIENT_ID_DEV =
-  "ARYQUp4C_oNjNUNkvSPzLeaiulItDmnHUU226OANt2haCKC2c70ZrKZTmRHCPldcu4SD22LmPEuonfec";
-const PAYPAL_CLIENT_ID_PROD =
-  "AUMWxSZrtBOA1RicR_3nGijYb8yYxyq2lxBjiwoQKfVc-8jfdPr5N7X5EFUackMCLb_K7HiKswnDBUJ8";
+const clientIds = {
+  "ARYQUp4C_oNjNUNkvSPzLeaiulItDmnHUU226OANt2haCKC2c70ZrKZTmRHCPldcu4SD22LmPEuonfec": {
+    env: "dev",
+    // this needs to be an anonymous function, so it gets evaluated during runtime, where this env variable is available,
+    // if the function has access to it
+    clientId: "ARYQUp4C_oNjNUNkvSPzLeaiulItDmnHUU226OANt2haCKC2c70ZrKZTmRHCPldcu4SD22LmPEuonfec",
+    token: () => requestAccessTokenClient("ARYQUp4C_oNjNUNkvSPzLeaiulItDmnHUU226OANt2haCKC2c70ZrKZTmRHCPldcu4SD22LmPEuonfec",process.env.PAYPAL_PASSWORD_DEV),
+    subscriptionCollectionName: `subscriptions-dev`
+  },
+  "AUMWxSZrtBOA1RicR_3nGijYb8yYxyq2lxBjiwoQKfVc-8jfdPr5N7X5EFUackMCLb_K7HiKswnDBUJ8": {
+    env: "prod",
+    clientId: "AUMWxSZrtBOA1RicR_3nGijYb8yYxyq2lxBjiwoQKfVc-8jfdPr5N7X5EFUackMCLb_K7HiKswnDBUJ8",
+    token: () => requestAccessTokenClient("AUMWxSZrtBOA1RicR_3nGijYb8yYxyq2lxBjiwoQKfVc-8jfdPr5N7X5EFUackMCLb_K7HiKswnDBUJ8",process.env.PAYPAL_PASSWORD_PROD),
+    subscriptionCollectionName: `subscriptions-prod`
+  }
+};
 
-async function requestAccessToken(dev = true) {
-  const basic_auth = dev
-    ? `${PAYPAL_CLIENT_ID_DEV}:${process.env.PAYPAL_PASSWORD_DEV}`
-    : `${PAYPAL_CLIENT_ID_PROD}:${process.env.PAYPAL_PASSWORD_PROD}`;
+async function requestAccessTokenClient(clientId, secret_key) {
+  // console.log("Requesting access token", config);
+  // const basic_auth = `${config.clientId}:${config.secret_key()}`;
+  const basic_auth = `${clientId}:${secret_key}`;
+  console.log(`Access Token: ${basic_auth}`);
+  // todo we also have to use a different url for prod
   const response = await fetch(
     "https://api-m.sandbox.paypal.com/v1/oauth2/token",
     {
@@ -148,16 +162,44 @@ async function getSubscriptionLink(
   ).json();
 }
 
+// use for client request
+function getConfigFromClientRequest(request) {
+  const clientId = request.body?.data?.client_id;
+  if (!clientId) {
+    return undefined;
+  }
+  const config = clientIds[clientId];
+  if (!config) {
+    return config;
+  }
+  config.origin = request.get("origin");
+  return config;
+}
+
+// use for server requests
+function getConfigForEnv(isDev = false) {
+  console.log(Object.entries(clientIds));
+  return Object.entries(clientIds).find(([_,value]) => value.env === (isDev ? "dev" : "prod"))[1];
+}
+
 exports.helloworld = onRequest(
   { secrets: ["PAYPAL_PASSWORD_DEV", "PAYPAL_PASSWORD_PROD"], cors: true },
   async (request, response) => {
 
-    const origin = request.get("origin");
+    const config = getConfigFromClientRequest(request);
+    if (!config) {
+      response.status(422).send({
+        data: {
+          error: "No paypal client id provided"
+        }
+      });
+      return;
+    }
 
-    const token = await requestAccessToken(true);
+    const token = await config.token();
     // example value:
     // {"status":"APPROVAL_PENDING","id":"I-XKCLA5KDLLK3","create_time":"2024-12-09T20:08:32Z","links":[{"href":"https://www.sandbox.paypal.com/webapps/billing/subscriptions?ba_token=BA-41P21132UV5106118","rel":"approve","method":"GET"},{"href":"https://api-m.sandbox.paypal.com/v1/billing/subscriptions/I-XKCLA5KDLLK3","rel":"edit","method":"PATCH"},{"href":"https://api-m.sandbox.paypal.com/v1/billing/subscriptions/I-XKCLA5KDLLK3","rel":"self","method":"GET"}]}
-    const linkStuff = await getSubscriptionLink(token.access_token, `${origin}`);
+    const linkStuff = await getSubscriptionLink(token.access_token, `${config.origin}`);
 
     logger.info("got link stuff back", { linkStuff });
     logger.info("links", { links: linkStuff.links });
@@ -174,14 +216,14 @@ exports.helloworld = onRequest(
 );
 
 /*
-{
+curl localhost:5001/whatsanalyze-80665/us-central1/paypalwebhook -H "Origin: sandbox.localhost:3000" --header "Content-Type: application/json" --data '{
   "id": "WH-0K623039JK653552F-4YE01958GG893271P",
   "create_time": "2024-12-09T23:37:49.867Z",
   "resource_type": "sale",
   "event_type": "PAYMENT.SALE.COMPLETED",
   "summary": "Payment completed for EUR 15.0 EUR",
   "resource": {
-    "billing_agreement_id": "I-L4G29A5V524B",
+    "billing_agreement_id": "I-XBCXVY6FXX47",
     "amount": {
       "total": "15.00",
       "currency": "EUR",
@@ -248,26 +290,35 @@ exports.helloworld = onRequest(
     }
   ],
   "event_version": "1.0"
-}
+}'
 */
 
+// todo how do we know where is the webhook coming from? we need it for the call to get the subscriber info
 exports.paypalwebhook = onRequest({ secrets: ["PAYPAL_PASSWORD_DEV", "PAYPAL_PASSWORD_PROD"] }, async (req, res) => {
   // get data
   const webhookData = req.body;
-  console.log(webhookData);
+  console.log("got data", webhookData);
+
+  const origin = req.get("origin");
+  logger.info("got origin", { origin });
+  const isDev = origin.includes("sandbox");
+
+  const config = getConfigForEnv(isDev);
+  logger.info("got config", config);
+
   // check for event
+  logger.info("got config", webhookData.event_type);
   if (webhookData.event_type === "PAYMENT.SALE.COMPLETED") {
+    console.log('hello2');
     const subscriptionId = webhookData.resource.billing_agreement_id;
-
+    logger.info("got subscriptionId", subscriptionId);
     // get customer information
-    const token = await requestAccessToken(true);
-
+    const token = await config.token();
+    logger.info("got token", token);
     const subscriptionData = await showSubscriptions(token.access_token, subscriptionId);
 
-    const emailAddress = subscriptionData.subscriber.email_address;
-
-    const docRef = db.collection("subscriptions")
-      .doc(emailAddress);
+    const docRef = db.collection(config.subscriptionCollectionName)
+      .doc(subscriptionId);
 
     // todo calculate real value from subscriptionData
     const expirationTimestamp = (new Date()).setFullYear(new Date().getFullYear() + 1);
@@ -280,7 +331,21 @@ exports.paypalwebhook = onRequest({ secrets: ["PAYPAL_PASSWORD_DEV", "PAYPAL_PAS
   res.status(200).end();
 });
 
-exports.checksubscriberstatus = onRequest({ secrets: ["PAYPAL_PASSWORD_DEV", "PAYPAL_PASSWORD_PROD"], cors: true }, async (req, res) => {
+exports.checksubscriberstatus = onRequest({
+  secrets: ["PAYPAL_PASSWORD_DEV", "PAYPAL_PASSWORD_PROD"],
+  cors: true
+}, async (req, res) => {
+
+  const config = getConfigFromClientRequest(req);
+  if (!config) {
+    res.status(422).send({
+      data: {
+        error: "No paypal client id provided"
+      }
+    });
+    return;
+  }
+
   // get data
   const id = req.body.data.email || req.body.data.subscriptionId;
   const isEmail = !!req.body.data.email;
@@ -292,11 +357,12 @@ exports.checksubscriberstatus = onRequest({ secrets: ["PAYPAL_PASSWORD_DEV", "PA
 
   let exists = false;
   if (isEmail) {
-    exists = (await db.collection("subscriptions")
-      .doc(id).get()).exists;
+    // todo email is not id anymore -> check how to find it
+    exists = !(await db.collection(config.subscriptionCollectionName)
+      .where("subscriptionData.subscriber.email_address", "==", id).limit(1).get()).empty;
   } else {
-    exists = !(await db.collection("subscriptions")
-      .where("subscriptionData.id", "==", id).limit(1).get()).empty;
+    exists = (await db.collection(config.subscriptionCollectionName)
+      .doc(id).get()).exists;
   }
   res.status(200).send({
     data: {
