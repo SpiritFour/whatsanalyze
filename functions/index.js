@@ -31,6 +31,7 @@ const clientIds = {
   "AUMWxSZrtBOA1RicR_3nGijYb8yYxyq2lxBjiwoQKfVc-8jfdPr5N7X5EFUackMCLb_K7HiKswnDBUJ8": {
     env: "prod",
     clientId: "AUMWxSZrtBOA1RicR_3nGijYb8yYxyq2lxBjiwoQKfVc-8jfdPr5N7X5EFUackMCLb_K7HiKswnDBUJ8",
+    // todo pass api url
     token: () => requestAccessTokenClient("AUMWxSZrtBOA1RicR_3nGijYb8yYxyq2lxBjiwoQKfVc-8jfdPr5N7X5EFUackMCLb_K7HiKswnDBUJ8",process.env.PAYPAL_PASSWORD_PROD),
     subscriptionCollectionName: `subscriptions-prod`
   }
@@ -298,10 +299,9 @@ exports.paypalwebhook = onRequest({ secrets: ["PAYPAL_PASSWORD_DEV", "PAYPAL_PAS
   // get data
   const webhookData = req.body;
   console.log("got data", webhookData);
-
-  const origin = req.get("origin");
-  logger.info("got origin", { origin });
-  const isDev = origin.includes("sandbox");
+  
+  // somehow paypal does not set a origin header..
+  const isDev = webhookData.links[0].href.includes("sandbox");
 
   const config = getConfigForEnv(isDev);
   logger.info("got config", config);
