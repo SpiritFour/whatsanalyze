@@ -4,11 +4,9 @@ import { messages } from "./utils/translations.js";
 
 // eslint-disable-next-line no-undef
 const local = process.env.NUXT_ENV_LOCAL !== undefined;
-const baseUrl = // eslint-disable-next-line no-undef
-  (process.env.BASE_URL || "https://www.whatsanalyze.com").replace(
-    "http:",
-    "https:"
-  );
+const baseUrl = ( // eslint-disable-next-line no-undef
+  process.env.BASE_URL || "https://www.whatsanalyze.com"
+).replace("http:", "https:");
 
 export default {
   publicRuntimeConfig: {
@@ -19,8 +17,8 @@ export default {
       : "AUMWxSZrtBOA1RicR_3nGijYb8yYxyq2lxBjiwoQKfVc-8jfdPr5N7X5EFUackMCLb_K7HiKswnDBUJ8",
     privateRuntimeConfig: {
       // eslint-disable-next-line no-undef
-      SENTRY_AUTH_TOKEN: process.env.SENTRY_AUTH_TOKEN
-    }
+      SENTRY_AUTH_TOKEN: process.env.SENTRY_AUTH_TOKEN,
+    },
   },
 
   // Target: https://go.nuxtjs.dev/config-target
@@ -30,7 +28,7 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     htmlAttrs: {
-      lang: "en"
+      lang: "en",
     },
 
     meta: [
@@ -41,13 +39,13 @@ export default {
       {
         hid: "og:image",
         property: "og:image",
-        content: baseUrl + "/sharePreview.png"
-      }
+        content: baseUrl + "/sharePreview.png",
+      },
     ],
     link: [
       { rel: "icon", href: "/favicon.ico" },
-      { rel: "apple-touch-icon", href: "/favicon.ico" }
-    ]
+      { rel: "apple-touch-icon", href: "/favicon.ico" },
+    ],
   },
   pwa: {
     manifest: {
@@ -70,20 +68,20 @@ export default {
           files: [
             {
               name: "file",
-              accept: ["*/*"]
-            }
-          ]
-        }
-      }
+              accept: ["*/*"],
+            },
+          ],
+        },
+      },
     },
     workbox: {
       importScripts: ["custom-sw.js"],
-      dev: local
+      dev: local,
     },
     icon: {
       source: "/assets",
-      fileName: "whatsanalyze-logo-black-PWA.png"
-    }
+      fileName: "whatsanalyze-logo-black-PWA.png",
+    },
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -94,8 +92,8 @@ export default {
     "@/plugins/gtag",
     {
       src: "~/plugins/amcharts.js",
-      ssr: false
-    }
+      ssr: false,
+    },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -107,15 +105,15 @@ export default {
     "@nuxtjs/vuetify",
     "nuxt-compress",
     "@nuxtjs/sentry",
-    "@nuxt/typescript-build"
+    "@nuxt/typescript-build",
   ],
   "nuxt-compress": {
     gzip: {
-      cache: true
+      cache: true,
     },
     brotli: {
-      threshold: 10240
-    }
+      threshold: 10240,
+    },
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -124,7 +122,7 @@ export default {
     "@nuxtjs/pwa",
     "@nuxtjs/gtm",
     "nuxt-i18n",
-    "@nuxtjs/firebase"
+    "@nuxtjs/firebase",
   ],
   firebase: {
     config: {
@@ -134,38 +132,38 @@ export default {
       storageBucket: "whatsanalyze-80665.appspot.com",
       messagingSenderId: "116352567232",
       appId: "1:116352567232:web:b44bef99e5a4fc6c962a25",
-      measurementId: "G-H1WL9MXJ17"
+      measurementId: "G-H1WL9MXJ17",
     },
     services: {
       firestore: true, // Just as example. Can be any other service.
       functions: {
         emulatorPort: local ? 5001 : undefined, // todo check if this runs still when deployd in firebase, as we build it for that with local==true
-      }
-    }
+      },
+    },
   },
   i18n: {
     seo: true,
     locales: [
       {
         code: "en",
-        iso: "en-US"
+        iso: "en-US",
       },
       {
         code: "de",
-        iso: "de-DE"
+        iso: "de-DE",
       },
       {
         code: "es",
-        iso: "es-ES"
+        iso: "es-ES",
       },
       {
         code: "fr",
-        iso: "fr-FR"
+        iso: "fr-FR",
       },
       {
         code: "pt",
-        iso: "pt-PT"
-      }
+        iso: "pt-PT",
+      },
     ],
     defaultLocale: "en",
     detectBrowserLanguage: {
@@ -175,13 +173,13 @@ export default {
       useCookie: true,
       cookieCrossOrigin: false,
       cookieKey: "i18n_redirected",
-      cookieSecure: false
+      cookieSecure: false,
     },
     vueI18n: {
       fallbackLocale: "en",
-      messages
+      messages,
     },
-    vueI18nLoader: true
+    vueI18nLoader: true,
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -198,13 +196,13 @@ export default {
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
-          success: colors.green.accent3
-        }
-      }
-    }
+          success: colors.green.accent3,
+        },
+      },
+    },
   },
   gtm: {
-    id: "GTM-W32PNH3"
+    id: "GTM-W32PNH3",
   },
   sentry: {
     dsn:
@@ -225,18 +223,18 @@ export default {
         tracingOptions: {
           hooks: ["mount", "update"],
           timeout: 2000,
-          trackComponents: true
-        }
+          trackComponents: true,
+        },
       },
-      browserOptions: {}
+      browserOptions: {},
     },
-    clientConfig: "~/plugins/sentry.client.config.js",
+    clientConfig: "~/plugins/sentry.client.paypalClientRegistry.js",
     webpackConfig: {
       include: ["./dist/"],
       ignore: ["node_modules"],
       org: "whatsanalyze",
-      project: "whatsanalyze"
-    }
+      project: "whatsanalyze",
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -248,17 +246,17 @@ export default {
       } else if (isClient) {
         config.devtool = "hidden-source-map";
       }
-    }
+    },
   },
   server: {
     host: "0.0.0.0",
     https:
-    // eslint-disable-next-line no-undef
+      // eslint-disable-next-line no-undef
       process.env.NODE_ENV !== "production" || local
         ? {
-          key: fs.readFileSync("./localhost-key.pem"),
-          cert: fs.readFileSync("./localhost.pem")
-        }
-        : {}
-  }
+            key: fs.readFileSync("./localhost-key.pem"),
+            cert: fs.readFileSync("./localhost.pem"),
+          }
+        : {},
+  },
 };
