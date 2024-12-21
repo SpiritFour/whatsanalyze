@@ -1,4 +1,3 @@
-jest.paypalClientRegistry.js
 test/*
 static/sw.js
 .direnv
