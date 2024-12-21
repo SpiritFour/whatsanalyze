@@ -5,6 +5,9 @@
   "scripts": {
     "prepare": "pnpm dlx husky install",
     "dev": "NUXT_ENV_LOCAL=1 nuxt",
+    "dev-with-functions": "NUXT_ENV_WITH_FUNCTIONS=1 NUXT_ENV_LOCAL=1 nuxt",
+    "functions": "firebase emulators:start --only functions",
+    "deploy-functions": "firebase deploy --only functions",
     "local": "NUXT_ENV_LOCAL=1 nuxt generate && NUXT_ENV_LOCAL=1 nuxt start",
     "ci-dev-build": "NUXT_ENV_LOCAL=1 nuxt generate",
     "deploy": "nuxt generate && push-dir --dir=dist --branch=gh-pages --cleanup",
@@ -52,7 +55,6 @@
     "nuxt-compress": "^4.1.1",
     "nuxt-i18n": "^6.28.1",
     "pako": "^2.1.0",
-    "paypal": "^1.0.1",
     "push-dir": "^0.4.1",
     "stopwords-de": "^0.3.0",
     "stopwords-en": "^0.3.0",

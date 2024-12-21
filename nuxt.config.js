@@ -4,9 +4,12 @@ import { messages } from "./utils/translations.js";
 
 // eslint-disable-next-line no-undef
 const local = process.env.NUXT_ENV_LOCAL !== undefined;
-const baseUrl = ( // eslint-disable-next-line no-undef
-  process.env.BASE_URL || "https://www.whatsanalyze.com"
-).replace("http:", "https:");
+const run_with_functions = process.env.NUXT_ENV_WITH_FUNCTIONS !== undefined;
+const baseUrl = // eslint-disable-next-line no-undef
+(process.env.BASE_URL || "https://www.whatsanalyze.com").replace(
+  "http:",
+  "https:"
+);
 
 export default {
   publicRuntimeConfig: {
@@ -137,7 +140,7 @@ export default {
     services: {
       firestore: true, // Just as example. Can be any other service.
       functions: {
-        emulatorPort: local ? 5001 : undefined, // todo check if this runs still when deployd in firebase, as we build it for that with local==true
+        emulatorPort: run_with_functions ? 5001 : undefined,
       },
     },
   },
