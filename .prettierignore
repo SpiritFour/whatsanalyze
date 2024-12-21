@@ -9,3 +9,4 @@ static/sw.js
 .idea
 .nuxt
 node_modules
+nuxt.config.js
