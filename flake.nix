@@ -3,6 +3,7 @@
      nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 #    systems.url = "github:nix-systems/default";
   };
+#  nativeBuildInputs = [ installShellFiles ];
 
   outputs =
     { systems, nixpkgs, ... }@inputs:
@@ -12,7 +13,7 @@
     {
       devShells = eachSystem (pkgs: {
         default = pkgs.mkShell {
-          buildInputs = [
+          nativeBuildInputs = [
             pkgs.nodejs_18
             pkgs.pnpm
             pkgs.firebase-tools
@@ -20,6 +21,7 @@
             pkgs.git
           ];
         };
+
       });
     };
 }
