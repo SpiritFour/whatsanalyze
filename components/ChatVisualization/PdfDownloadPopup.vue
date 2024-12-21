@@ -106,11 +106,11 @@
   </div>
 </template>
 <script>
-import { GTAG_PAYMENT, GTAG_PDF, gtagEvent } from "~/functions/gtagValues";
+import { GTAG_PAYMENT, GTAG_PDF, gtagEvent } from "~/utils/gtagValues";
 import PDFWorker from "worker-loader!~/assets/js/pdf.worker.js";
-import { objectToDictionary } from "~/functions/utils";
+import { objectToDictionary } from "~/utils/utils";
 import { saveAs } from "file-saver";
-import { loadImage } from "~/functions/utils";
+import { loadImage } from "~/utils/utils";
 
 export default {
   name: "PdfDownload",

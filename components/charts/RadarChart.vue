@@ -1,7 +1,7 @@
 <script>
 import { Radar } from "vue-chartjs";
-import { Chat } from "~/functions/transformChatData";
-import { updateAlpha } from "~/functions/colors";
+import { Chat } from "~/utils/transformChatData";
+import { updateAlpha } from "~/utils/colors";
 
 export default {
   extends: Radar,

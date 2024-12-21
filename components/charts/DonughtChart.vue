@@ -1,6 +1,6 @@
 <script>
 import { Doughnut } from "vue-chartjs";
-import { Chat } from "~/functions/transformChatData";
+import { Chat } from "~/utils/transformChatData";
 
 export default {
   extends: Doughnut,

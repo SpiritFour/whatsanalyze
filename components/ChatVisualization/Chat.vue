@@ -92,9 +92,9 @@
 </template>
 
 <script>
-import { getDateString } from "~/functions/utils";
-import { getAttachment } from "~/functions/attachments.ts";
-import { GTAG_INTERACTION, gtagEvent } from "~/functions/gtagValues";
+import { getDateString } from "~/utils/utils";
+import { getAttachment } from "~/utils/attachments.ts";
+import { GTAG_INTERACTION, gtagEvent } from "~/utils/gtagValues";
 
 export default {
   name: "Chat",
