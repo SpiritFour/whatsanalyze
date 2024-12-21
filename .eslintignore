@@ -1,3 +1,7 @@
 jest.paypalClientRegistry.js
 test/*
 static/sw.js
+.direnv
+.idea
+.nuxt
+node_modules
