@@ -10,17 +10,15 @@
 const { onRequest } = require("firebase-functions/v2/https");
 
 const logger = require("firebase-functions/logger");
-const { paypalClientRegistry } = require("./paypalClientRegistry");
-
-// Initialize Cloud Firestore and get a reference to the service
+const {
+  paypalClientRegistry: backendClientRegistry,
+} = require("./backendClientRegistry");
 
 exports.helloworld = onRequest(
   { secrets: ["PAYPAL_PASSWORD_DEV", "PAYPAL_PASSWORD_PROD"], cors: true },
   async (request, response) => {
-    const paypalClient = paypalClientRegistry.getConfigFromClientRequest(
-      request
-    );
-    if (!paypalClient) {
+    const client = backendClientRegistry.getClientFromClientRequest(request);
+    if (!client) {
       response.status(422).send({
         data: {
           error: "No paypal client id provided",
@@ -38,7 +36,7 @@ exports.helloworld = onRequest(
       return;
     }
 
-    const approveLink = await paypalClient.getSubscriptionLink(origin);
+    const approveLink = await client.getSubscriptionLink(origin);
 
     response.send({ data: { approveLink } });
   }
@@ -54,7 +52,7 @@ exports.paypalwebhook = onRequest(
     // somehow paypal does not set a origin header...
     const isDev = webhookData.links[0].href.includes("sandbox");
 
-    const client = paypalClientRegistry.getConfigForEnv(isDev);
+    const client = backendClientRegistry.getClientForEnv(isDev);
     logger.info("got client", client);
     await client.handleWebhook(webhookData);
 
@@ -68,7 +66,7 @@ exports.checksubscriberstatus = onRequest(
     cors: true,
   },
   async (req, res) => {
-    const client = paypalClientRegistry.getConfigFromClientRequest(req);
+    const client = backendClientRegistry.getClientFromClientRequest(req);
     if (!client) {
       res.status(422).send({
         data: {
@@ -78,9 +76,7 @@ exports.checksubscriberstatus = onRequest(
       return;
     }
 
-    logger.info("body.data", req.body.data);
     const { email, subscriptionId } = req.body.data;
-    logger.info("body.data2", email, subscriptionId);
 
     if (!(email || subscriptionId)) {
       res

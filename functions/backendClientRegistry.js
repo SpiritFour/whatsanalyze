@@ -1,10 +1,12 @@
 const { getFirestore } = require("firebase-admin/firestore");
 const { initializeApp } = require("firebase-admin/app");
 const logger = require("firebase-functions/logger");
+
+// Initialize Cloud Firestore and get a reference to the service
 const app = initializeApp();
 const db = getFirestore(app);
 
-class PaypalClient {
+class BackendClient {
   constructor(env, clientId, clientSecretName, planId, apiEndpoint) {
     this.env = env;
     this.clientId = clientId;
@@ -119,6 +121,76 @@ class PaypalClient {
     }
   }
 
+  async createProduct(productId) {
+    return fetch(`${this.apiEndpoint}/v1/catalogs/products`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${await this.getAccessToken()}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "PayPal-Request-Id": productId,
+        Prefer: "return=representation",
+      },
+      body: JSON.stringify({
+        name: "Whatsanalyze Plan",
+        type: "SERVICE",
+        image_url: "https://whatsanalyze.com/subscriptions.png",
+        home_url: "https://whatsanalyze.com/",
+      }),
+    });
+  }
+
+  async createPlan(product_id) {
+    return fetch(`${this.apiEndpoint}/v1/billing/plans`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${await this.getAccessToken()}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Prefer: "return=representation",
+      },
+      body: JSON.stringify({
+        product_id,
+        name: "Whatsanalyze Plan",
+        billing_cycles: [
+          {
+            frequency: {
+              interval_unit: "MONTH",
+              interval_count: 1,
+            },
+            tenure_type: "REGULAR",
+            sequence: 1,
+            pricing_scheme: {
+              fixed_price: {
+                value: "15",
+                currency_code: "EUR",
+              },
+            },
+          },
+        ],
+        payment_preferences: {
+          auto_bill_outstanding: true,
+          setup_fee_failure_action: "CONTINUE",
+          payment_failure_threshold: 3,
+        },
+      }),
+    });
+  }
+
+  async getPlans() {
+    return fetch(
+      `${this.apiEndpoint}/v1/billing/plans?sort_by=create_time&sort_order=desc`,
+      {
+        headers: {
+          Authorization: `Bearer ${await this.getAccessToken()}`,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Prefer: "return=representation",
+        },
+      }
+    );
+  }
+
   // ################ Firebase Stuff is here #########
 
   async getSubscriptionDataByEmail(email) {
@@ -164,10 +236,10 @@ const configs = [
   },
 ];
 
-class ConfigRegistry {
+class BackendClientRegistry {
   constructor(configs) {
     this.paypalClients = configs.map((config) => {
-      return new PaypalClient(
+      return new BackendClient(
         config.env,
         config.clientId,
         config.clientSecretName,
@@ -182,18 +254,18 @@ class ConfigRegistry {
   }
 
   // use for client requests
-  getConfigFromClientRequest(request) {
+  getClientFromClientRequest(request) {
     const clientId = request.body?.data?.client_id;
     console.log("Client ID", clientId);
     return this.getClientById(clientId);
   }
 
   // use for server requests
-  getConfigForEnv(isDev) {
+  getClientForEnv(isDev) {
     return this.paypalClients.find((client) => client.isDev() === isDev);
   }
 }
 
-const paypalClientRegistry = new ConfigRegistry(configs);
+const backendClientRegistry = new BackendClientRegistry(configs);
 
-module.exports = { paypalClientRegistry };
+module.exports = { backendClientRegistry };
