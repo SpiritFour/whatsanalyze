@@ -139,7 +139,7 @@ export default {
     services: {
       firestore: true, // Just as example. Can be any other service.
       functions: {
-        emulatorPort: local ? 5001 : undefined,
+        emulatorPort: local ? 5001 : undefined, // todo check if this runs still when deployd in firebase, as we build it for that with local==true
       }
     }
   },
