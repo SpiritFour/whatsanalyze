@@ -1,5 +1,13 @@
 export const messages = {
   en: {
+
+    subscription: {
+      "title": "Subscription",
+      "cta": "Get a subscription now. Unlimited analytics. Great Fun.",
+      "button": "Buy monthly subscription for 10€"
+    },
+
+
     titleGoogle: "WhatsAnalyze - The WhatsApp Chat Analyzer",
     metaDescription:
       "Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ Free statistics and PDF chat export. Get Started now!",
@@ -82,33 +90,33 @@ export const messages = {
     howToGroupLong:
       "Exporting your WhatsApp group chat works like a normal chat. Open up\n" +
       "          Whatsapp with the device that you are logged in with. Go to the chat\n" +
-      '          and tap on "More" and then Export chat. You can now choose to export\n' +
+      "          and tap on \"More\" and then Export chat. You can now choose to export\n" +
       "          the chat with or without Media.",
 
     howToArchiveiOS: "How to Archive all Whatsapp chats on iOS",
     howToArchiveiOSLong:
       "On iOS you can Archive your WhatsApp chats by opening WhatsApp then\n" +
-      '          tap on "Settings" in the Navigation bar. Tap on chats and then Archive\n' +
+      "          tap on \"Settings\" in the Navigation bar. Tap on chats and then Archive\n" +
       "          All Chats.",
 
     howToArchiveAndroid: "How to Archive all Whatsapp chats on Android",
     howToArchiveAndroidLong:
       "On Android open WhatsApp then tap on the three-dot icon at the top\n" +
-      '          right corner. Tap on "Settings" and then "Chats". On the new View tap\n' +
-      '          "Chat history" and "Archive all chats".',
+      "          right corner. Tap on \"Settings\" and then \"Chats\". On the new View tap\n" +
+      "          \"Chat history\" and \"Archive all chats\".",
 
     howToBackupiOS: "How to Backup Whatsapp chat on iOS including iOS 14",
     howToBackupiOSLong:
       "By backing up your WhatsApp chat on your iPhone you can load your\n" +
-      '          account to a new device easily. Open WhatsApp, tap on "Settings" at\n' +
-      '          the bottom-right corner. Then tap on "Chats" and "Chat Backup" next\n' +
-      '          press "Back Up Now"',
+      "          account to a new device easily. Open WhatsApp, tap on \"Settings\" at\n" +
+      "          the bottom-right corner. Then tap on \"Chats\" and \"Chat Backup\" next\n" +
+      "          press \"Back Up Now\"",
 
     howToBackupAndroid: "How to Backup Whatsapp chat on Android",
     howToBackupAndroidLong:
       "To Backup Whatsapp chat on your Android device, tap on the three-dots\n" +
-      '          at the top-right of your screen. Tap on "Settings and then on "Chats".\n' +
-      '          Next press on "Chat backup" and on the next screen "Back Up" Button',
+      "          at the top-right of your screen. Tap on \"Settings and then on \"Chats\".\n" +
+      "          Next press on \"Chat backup\" and on the next screen \"Back Up\" Button",
 
     howToTransferSignal: "How to transfer Whatsapp Group Chats to Signal\n",
     howToTransferSignalLong:
@@ -131,7 +139,7 @@ export const messages = {
     fileDrop: "Drop file now!",
     fileDone: "<strong>Done!</strong> Look at your analysis below.",
     fileSuccess: "<strong>Drag</strong> or <strong>select</strong>",
-    fileSelect: '<strong style="text-decoration: underline">Select </strong>',
+    fileSelect: "<strong style=\"text-decoration: underline\">Select </strong>",
     fileAnother: "another file to analyze it.",
     fileZip: "your WhatsApp .zip or .txt file into this box.",
     fileProcessing: "<strong>Processing</strong> your file...",
@@ -147,17 +155,17 @@ export const messages = {
     groupChat:
       "Select the number of participants to show individual.All others are grouped together.",
     groupInfo:
-      'If you select "2", only the two people with the most messages are shown\n' +
-      '        individually. Others are grouped as "Others"',
+      "If you select \"2\", only the two people with the most messages are shown\n" +
+      "        individually. Others are grouped as \"Others\"",
     infoSec:
       "<b>No</b> chat <b>data</b> is sent to a server! All code runs\n" +
       "      <b>locally</b> in your browser.",
     infoPriv:
       "This project is <b>open-source</b> and all code is <b>public</b> on\n" +
       "      <b>github</b>. <a\n" +
-      '        class="black--text"\n' +
-      '        target="_blank"\n' +
-      '        href="https://github.com/SpiritFour/whatsanalyze"\n' +
+      "        class=\"black--text\"\n" +
+      "        target=\"_blank\"\n" +
+      "        href=\"https://github.com/SpiritFour/whatsanalyze\"\n" +
       "      >\n" +
       "        Check it yourself.\n" +
       "      </a>",
@@ -193,7 +201,7 @@ export const messages = {
     shareWithFriends: "Share them with your friends, all free just for you ❤️️",
     downloadResults: "Download Results",
     lookingFor: "Looking for",
-    pdfDownload: "PDF download",
+    pdfDownload: "PDF download"
   },
   de: {
     titleGoogle: "WhatsAnalyze - The WhatsApp Chat Analyzer",
@@ -281,30 +289,30 @@ export const messages = {
     howToGroupLong:
       "Das Exportieren deines WhatsApp-Gruppenchats funktioniert wie ein normaler Chat. Öffne up\n" +
       "          Whatsapp mit dem Gerä. Gehe auf den Chat\n" +
-      ' und tippe auf "Mehr" und dann auf "Chat exportieren". Du können nun wählen, ob Du\n" + " den Chat mit oder ohne Medien exportieren mötest.',
+      " und tippe auf \"Mehr\" und dann auf \"Chat exportieren\". Du können nun wählen, ob Du\n\" + \" den Chat mit oder ohne Medien exportieren mötest.",
     howToArchiveiOS: "So archivierst alle Whatsapp-Chats auf iOS",
     howToArchiveiOSLong:
       "Auf iOS kannst du Deine WhatsApp-Chats archivieren, indem Du WhatsApp öffnest und" +
-      ' in der Navigationsleiste auf "Einstellungen" tippen. Tippe auf Chats und dann auf Archivieren\n' +
+      " in der Navigationsleiste auf \"Einstellungen\" tippen. Tippe auf Chats und dann auf Archivieren\n" +
       "          Alle Chats.",
     howToArchiveAndroid: "So archivierst alle Whatsapp-Chats auf Android",
     howToArchiveAndroidLong:
       "Öffne unter Android WhatsApp und tippe dann auf das Drei-Punkte-Symbol in der oberen\n" +
-      ' in der rechten Ecke. Tippe auf "Einstellungen" und dann auf "Chats". In der neuen Ansicht tippe auf\n' +
-      ' "Chatverlauf" und "Alle Chats archivieren".',
+      " in der rechten Ecke. Tippe auf \"Einstellungen\" und dann auf \"Chats\". In der neuen Ansicht tippe auf\n" +
+      " \"Chatverlauf\" und \"Alle Chats archivieren\".",
 
     howToBackupiOS: "So sichernst Whatsapp-Chats auf iOS einschließlich iOS 14",
 
     howToBackupiOSLong:
       "Indem Du deinen WhatsApp-Chat auf deinem iPhone sicherst, kannst du deinen" +
-      ' Account einfach auf ein neues Gerät übertragen. Öffnen WhatsApp, tippe auf "Einstellungen" in\n' +
-      ' in der rechten unteren Ecke. Tippe dann auf "Chats" und "Chat-Backup" neben\n' +
-      ' drücke auf "Jetzt sichern"',
+      " Account einfach auf ein neues Gerät übertragen. Öffnen WhatsApp, tippe auf \"Einstellungen\" in\n" +
+      " in der rechten unteren Ecke. Tippe dann auf \"Chats\" und \"Chat-Backup\" neben\n" +
+      " drücke auf \"Jetzt sichern\"",
     howToBackupAndroid: "How to Backup Whatsapp chat on Android",
     howToBackupAndroidLong:
       "Um den Whatsapp-Chat auf deinem Android-Gerät zu sichern, tippe auf die drei Punkte\n" +
-      ' oben rechts auf deinem Bildschirm. Tippe auf "Einstellungen" und dann auf "Chats".\n' +
-      ' Tippe anschließend auf "Chat-Backup" und auf dem nächsten Bildschirm auf die Schaltfläche "Backup"',
+      " oben rechts auf deinem Bildschirm. Tippe auf \"Einstellungen\" und dann auf \"Chats\".\n" +
+      " Tippe anschließend auf \"Chat-Backup\" und auf dem nächsten Bildschirm auf die Schaltfläche \"Backup\"",
     howToTransferSignal: "Wie übertrage ich Whatsapp-Gruppenchats auf Signal\n",
     howToTransferSignalLong:
       "Erstelle eine Gruppe in Signal mit deinen Whatsapp-Kontakten, klicke nun auf die\n" +
@@ -324,7 +332,7 @@ export const messages = {
     fileDrop: "Datei jetzt ablegen!",
     fileDone: "<strong>Fertig!</strong> Schaue dir deine Analyse unten an.",
     fileSuccess: "<strong>Ziehen</strong> oder <strong>Auswählen</strong>",
-    fileSelect: '<strong style="text-decoration: underline">Auswahl</strong>',
+    fileSelect: "<strong style=\"text-decoration: underline\">Auswahl</strong>",
     fileAnother: "eine andere Datei, um sie zu analysieren.",
     fileZip: "deine WhatsApp-.zip- oder .txt-Datei in dieses Feld.",
     fileProcessing: "<strong>Verarbeitung</strong> deiner Datei...",
@@ -339,17 +347,17 @@ export const messages = {
     groupChat:
       "Wähle die Anzahl der Teilnehmer aus, die einzeln angezeigt werden sollen. Alle anderen werden in einer Gruppe zusammengefasst.",
     groupInfo:
-      'Wenn Du "2" wählst, werden nur die beiden Personen mit den meisten Nachrichten angezeigt' +
-      ' einzeln. Die anderen werden als "Andere" gruppiert.',
+      "Wenn Du \"2\" wählst, werden nur die beiden Personen mit den meisten Nachrichten angezeigt" +
+      " einzeln. Die anderen werden als \"Andere\" gruppiert.",
     infoSec:
       "<b>Keine</b> Chat-<b>Daten</b> werden an einen Server gesendet! Alle Codes laufen\n" +
       "      <b>lokal</b> in deinem Browser.",
     infoPriv:
       "Dieses Projekt ist <b>open-source</b> und der gesamte Code ist <b>öffentlich</b> auf\n" +
       "      <b>github</b>. <a\n" +
-      ' class="black--text"\n' +
-      ' target="_blank"\n' +
-      ' href="https://github.com/SpiritFour/whatsanalyze"\n' +
+      " class=\"black--text\"\n" +
+      " target=\"_blank\"\n" +
+      " href=\"https://github.com/SpiritFour/whatsanalyze\"\n" +
       "      >\n" +
       "        Überprüfen es selbst.\n" +
       "      </a>",
@@ -386,7 +394,7 @@ export const messages = {
       "Teilen es mit Deinen Freunden. Kostenlos nur für Dich ❤️️",
     downloadResults: "Ergebnisse herunterladen",
     lookingFor: "Suche nach",
-    pdfDownload: "PDF-Download",
+    pdfDownload: "PDF-Download"
   },
   es: {
     titleGoogle: "WhatsAnalyze - El analizador de chat de WhatsApp",
@@ -473,28 +481,28 @@ export const messages = {
     howToGroupLong:
       "Exportar tu chat grupal de WhatsApp funciona como un chat normal. Abre\n" +
       "          Whatsapp con el dispositivo con el que estás conectado. ir al chat\n" +
-      '          y toca "Más" y luego Exportar chat. Ahora puede elegir exportar\n' +
+      "          y toca \"Más\" y luego Exportar chat. Ahora puede elegir exportar\n" +
       "          el chat con o sin medios.",
 
     howToArchiveiOS: "Cómo archivar todos los chats de Whatsapp en iOS",
     howToArchiveiOSLong:
       "En iOS, puede archivar sus chats de WhatsApp abriendo WhatsApp y luego\n" +
-      '          toque "Configuración" en la barra de navegación. Toque chats y luego Archivar\n' +
+      "          toque \"Configuración\" en la barra de navegación. Toque chats y luego Archivar\n" +
       "          Todos los chats.",
 
     howToArchiveAndroid: "Cómo archivar todos los chats de Whatsapp en Android",
     howToArchiveAndroidLong:
       "En Android, abra WhatsApp y luego toque el ícono de tres puntos en la parte superior\n" +
-      '          esquina derecha. Toca "Configuración" y luego "Chats". En el nuevo toque Ver\n' +
-      '          "Historial de chat" y "Archivar todos los chats".',
+      "          esquina derecha. Toca \"Configuración\" y luego \"Chats\". En el nuevo toque Ver\n" +
+      "          \"Historial de chat\" y \"Archivar todos los chats\".",
 
     howToBackupiOS:
       "Cómo hacer una copia de seguridad del chat de Whatsapp en iOS, incluido iOS 14",
     howToBackupiOSLong:
       "Al hacer una copia de seguridad de su chat de WhatsApp en su iPhone, puede cargar su\n" +
-      '          cuenta a un nuevo dispositivo fácilmente. Abra WhatsApp, toque "Configuración" en\n' +
-      '          la esquina inferior derecha. Luego toque "Chats" y "Chat Backup" a continuación\n' +
-      '          presione "Hacer copia de seguridad ahora"',
+      "          cuenta a un nuevo dispositivo fácilmente. Abra WhatsApp, toque \"Configuración\" en\n" +
+      "          la esquina inferior derecha. Luego toque \"Chats\" y \"Chat Backup\" a continuación\n" +
+      "          presione \"Hacer copia de seguridad ahora\"",
 
     howToBackupAndroid:
       "Cómo hacer una copia de seguridad del chat de Whatsapp en Android",
@@ -525,7 +533,7 @@ export const messages = {
       "<strong>Done!</strong> <br />\n" +
       "            Mira tu análisis a continuación.",
     fileSuccess: "<strong>Drag</strong> or <strong>select</strong>",
-    fileSelect: '<strong style="text-decoration: underline">Select </strong>',
+    fileSelect: "<strong style=\"text-decoration: underline\">Select </strong>",
     fileAnother: "otro archivo para analizarlo.",
     fileZip: "su archivo .zip o .txt de WhatsApp en este cuadro.",
     fileProcessing: "<strong>Procesando</strong> tu archivo...",
@@ -541,17 +549,17 @@ export const messages = {
     groupChat:
       "Seleccione el número de participantes para mostrar individualmente. Todos los demás se agrupan.",
     groupInfo:
-      'Si selecciona "2", solo se muestran las dos personas con más mensajes\n' +
-      '        individualmente. Otros se agrupan como "Otros"',
+      "Si selecciona \"2\", solo se muestran las dos personas con más mensajes\n" +
+      "        individualmente. Otros se agrupan como \"Otros\"",
     infoSec:
       "<b>No</b> se envían <b>datos</b>del chat a un servidor! Todos los códigos se ejecutan\n" +
       "      <b>localmente</b> en su navegador.",
     infoPriv:
       "Este proyecto es de <b>código abierto</b> y todo el código es <b>público</b> en\n" +
       "      <b>github</b>. <a\n" +
-      '        class="black--text"\n' +
-      '        target="_blank"\n' +
-      '        href="https://github.com/SpiritFour/whatsanalyze"\n' +
+      "        class=\"black--text\"\n" +
+      "        target=\"_blank\"\n" +
+      "        href=\"https://github.com/SpiritFour/whatsanalyze\"\n" +
       "      >\n" +
       "        Compruébelo usted mismo.\n" +
       "      </a>",
@@ -584,7 +592,7 @@ export const messages = {
       "Compártelos con tus amigos, todo gratis sólo para ti ❤️️",
     downloadResults: "Descargar resultados",
     lookingFor: "Buscando",
-    pdfDownload: "Descarga de PDF",
+    pdfDownload: "Descarga de PDF"
   },
   pt: {
     titleGoogle: "WhatsAnalyze - O analisador de bate-papo do WhatsApp",
@@ -670,30 +678,30 @@ export const messages = {
     howToGroupLong:
       "Exportar seu grupo de chat do WhatsApp funciona como um chat normal. Abra o\n" +
       " Whatsapp com o dispositivo em que você está logado. Vá para o chat\n" +
-      ' e toque em "Mais" e depois Exportar chat. Agora você pode escolher exportar\n' +
+      " e toque em \"Mais\" e depois Exportar chat. Agora você pode escolher exportar\n" +
       " o chat com ou sem Mídia.",
     howToArchiveiOS: "Como Arquivar todos os chats do Whatsapp no iOS",
     howToArchiveiOSLong:
       "No iOS você pode Arquivar seus chats do WhatsApp abrindo o WhatsApp e então\n" +
-      ' tocar em "Configurações" na barra de navegação. Toque em chats e depois Arquivar\n' +
+      " tocar em \"Configurações\" na barra de navegação. Toque em chats e depois Arquivar\n" +
       " Todos os Chats.",
     howToArchiveAndroid: "Como Arquivar todos os chats do Whatsapp no Android",
     howToArchiveAndroidLong:
       "No Android abra o WhatsApp e toque no ícone de três pontos no canto\n" +
-      ' superior direito. Toque em "Configurações" e depois "Chats". Na nova tela toque\n' +
-      ' em "Histórico de chat" e "Arquivar todos os chats".',
+      " superior direito. Toque em \"Configurações\" e depois \"Chats\". Na nova tela toque\n" +
+      " em \"Histórico de chat\" e \"Arquivar todos os chats\".",
     howToBackupiOS:
       "Como fazer Backup do chat do Whatsapp no iOS incluindo o iOS 14",
     howToBackupiOSLong:
       "Ao fazer backup do seu chat do WhatsApp no seu iPhone você pode carregar sua\n" +
-      ' conta em um novo dispositivo facilmente. Abra o WhatsApp, toque em "Configurações" no\n' +
-      ' canto inferior direito. Em seguida, toque em "Chats" e "Backup de Chat" depois\n' +
-      ' pressione "Fazer Backup Agora"',
+      " conta em um novo dispositivo facilmente. Abra o WhatsApp, toque em \"Configurações\" no\n" +
+      " canto inferior direito. Em seguida, toque em \"Chats\" e \"Backup de Chat\" depois\n" +
+      " pressione \"Fazer Backup Agora\"",
     howToBackupAndroid: "Como fazer Backup do chat do Whatsapp no Android",
     howToBackupAndroidLong:
       "Para fazer backup do bate-papo do Whatsapp em seu dispositivo Android, toque no ícone de três pontos" +
-      ' no canto superior direito da tela. Toque em "Configurações" e depois em "Chats".\n' +
-      ' Em seguida, pressione o botão "Chat backup" e, na tela seguinte, o botão "Back Up"',
+      " no canto superior direito da tela. Toque em \"Configurações\" e depois em \"Chats\".\n" +
+      " Em seguida, pressione o botão \"Chat backup\" e, na tela seguinte, o botão \"Back Up\"",
     howToTransferSignal:
       "Como transferir Grupos de Chat do Whatsapp para o Signal\n",
     howToTransferSignalLong:
@@ -716,7 +724,7 @@ export const messages = {
     fileDone: "<strong>Concluído!</strong> Veja sua análise abaixo.",
     fileSuccess: "<strong>Arraste</strong> ou <strong>selecione</strong>",
     fileSelect:
-      '<strong style="text-decoration: underline">Selecione </strong>',
+      "<strong style=\"text-decoration: underline\">Selecione </strong>",
     fileAnother: "outro arquivo para analisá-lo.",
     fileZip: "seu arquivo .zip ou .txt do WhatsApp nesta caixa.",
     fileProcessing: "<strong>Processando</strong> seu arquivo...",
@@ -732,16 +740,16 @@ export const messages = {
     groupChat:
       "Selecione o número de participantes para mostrar individualmente. Todos os outros são agrupados.",
     groupInfo:
-      'Se você selecionar "2", apenas as duas pessoas com mais mensagens são mostradas\n' +
-      ' individualmente. Outros são agrupados como "Outros"',
+      "Se você selecionar \"2\", apenas as duas pessoas com mais mensagens são mostradas\n" +
+      " individualmente. Outros são agrupados como \"Outros\"",
     infoSec:
       "<b>Não</b> são enviados dados de chat para um servidor! Todo o código é executado",
     infoPriv:
       "Este projeto é <b>open-source</b> e todo o código é <b>público</b> no" +
       "<b>github</b>. <a\n" +
-      ' class="black--text"\n' +
-      'target="_blank"\n' +
-      ' href="https://github.com/SpiritFour/whatsanalyze"\n' +
+      " class=\"black--text\"\n" +
+      "target=\"_blank\"\n" +
+      " href=\"https://github.com/SpiritFour/whatsanalyze\"\n" +
       " >\n" +
       "Confira você mesmo.",
     examplePDF: "Exemplo de PDF de uma exportação de chat:",
@@ -776,7 +784,7 @@ export const messages = {
       "Compartilhe-os com seus amigos, tudo gratuito só para você ❤️️",
     downloadResults: "Download Results",
     lookingFor: "Procurando por",
-    pdfDownload: "Download de PDF",
+    pdfDownload: "Download de PDF"
   },
   fr: {
     titleGoogle: "WhatsAnalyze - The WhatsApp Chat Analyzer",
@@ -865,34 +873,34 @@ export const messages = {
     howToGroupLong:
       "L'exportation de votre discussion de groupe WhatsApp fonctionne comme une discussion normale. Ouvrir up\n" +
       "          Utilisez Whatsapp avec l'appareil avec lequel vous êtes connecté. Accéder au chat\n" +
-      '          et appuyez sur "Plus", puis sur Exporter le chat. Vous pouvez maintenant choisir d\'exporter\n' +
+      "          et appuyez sur \"Plus\", puis sur Exporter le chat. Vous pouvez maintenant choisir d'exporter\n" +
       "          le chat avec ou sans média.",
 
     howToArchiveiOS: "Comment archiver tous les chats Whatsapp sur iOS ?",
     howToArchiveiOSLong:
       "Sur iOS, vous pouvez archiver vos discussions WhatsApp en ouvrant WhatsApp puis\n" +
-      '          tapez sur "Paramètres" dans la barre de navigation. Tapez sur "Chats" puis sur "Archives".\n' +
+      "          tapez sur \"Paramètres\" dans la barre de navigation. Tapez sur \"Chats\" puis sur \"Archives\".\n" +
       "          tous les Chats.",
 
     howToArchiveAndroid: "Comment archiver tous les chats Whatsapp sur Android",
     howToArchiveAndroidLong:
       "Sur Android, ouvrez WhatsApp puis tapez sur l'icône à trois points en haut.\n" +
-      '          dans le coin droit. Tapez sur "Paramètres" puis sur "Chats". Dans la nouvelle vue, tapez sur\n' +
-      '          "Historique des chats" et "Archiver tous les chats".',
+      "          dans le coin droit. Tapez sur \"Paramètres\" puis sur \"Chats\". Dans la nouvelle vue, tapez sur\n" +
+      "          \"Historique des chats\" et \"Archiver tous les chats\".",
 
     howToBackupiOS:
       "Comment sauvegarder le chat Whatsapp sur iOS, y compris iOS 14 ?",
     howToBackupiOSLong:
       "En sauvegardant votre chat WhatsApp sur votre iPhone, vous pouvez charger votre\n" +
-      '          vers un nouvel appareil. Ouvrez WhatsApp, tapez sur "Paramètres" à\n' +
-      '          dans le coin inférieur droit. Tapez ensuite sur "Chats" et "Sauvegarde des chats"\n' +
-      '          appuyez sur "Sauvegarder maintenant"',
+      "          vers un nouvel appareil. Ouvrez WhatsApp, tapez sur \"Paramètres\" à\n" +
+      "          dans le coin inférieur droit. Tapez ensuite sur \"Chats\" et \"Sauvegarde des chats\"\n" +
+      "          appuyez sur \"Sauvegarder maintenant\"",
 
     howToBackupAndroid: "Comment sauvegarder le chat Whatsapp sur Android",
     howToBackupAndroidLong:
       "Pour sauvegarder le chat Whatsapp sur votre appareil Android, appuyez sur les trois points.\n" +
-      '          en haut à droite de votre écran. Tapez sur "Paramètres", puis sur "Chats".\n' +
-      '          Appuyez ensuite sur "Chat backup" et sur le bouton "Back Up" de l\'écran suivant.',
+      "          en haut à droite de votre écran. Tapez sur \"Paramètres\", puis sur \"Chats\".\n" +
+      "          Appuyez ensuite sur \"Chat backup\" et sur le bouton \"Back Up\" de l'écran suivant.",
 
     howToTransferSignal:
       "Comment transférer des conversations de groupe Whatsapp vers Signal ?\n",
@@ -918,7 +926,7 @@ export const messages = {
     fileSuccess:
       "<strong>Faite glisser</strong> ou <strong>selectionner</strong>",
     fileSelect:
-      '<strong style="text-decoration: underline">Selectionner </strong>',
+      "<strong style=\"text-decoration: underline\">Selectionner </strong>",
     fileAnother: "un autre fichier pour l'analyser.",
     fileZip: "votre fichier WhatsApp .zip ou .txt dans cette espace.",
     fileProcessing: "<strong>Analise en cours</strong> de votre fichier...",
@@ -934,17 +942,17 @@ export const messages = {
     groupChat:
       "Sélectionnez le nombre de participants à afficher individuellement. Tous les autres sont regroupés.",
     groupInfo:
-      'Si vous sélectionnez "2", seules les deux personnes ayant envoyé le plus de messages sont affichées.\n' +
-      '        individuellement. Les autres sont regroupés sous l\'appellation "Autres"',
+      "Si vous sélectionnez \"2\", seules les deux personnes ayant envoyé le plus de messages sont affichées.\n" +
+      "        individuellement. Les autres sont regroupés sous l'appellation \"Autres\"",
     infoSec:
       "<b>Aucune donnée</b> de chat n'est envoyée à un serveur ! Tous le code est utilisé\n" +
       "      <b>localement</b> sur votre navigateur.",
     infoPriv:
       "C'est un projet <b>open-source</b> et tous le code est <b>public</b> sur\n" +
       "      <b>github</b>. <a\n" +
-      '        class="black--text"\n' +
-      '        target="_blank"\n' +
-      '        href="https://github.com/SpiritFour/whatsanalyze"\n' +
+      "        class=\"black--text\"\n" +
+      "        target=\"_blank\"\n" +
+      "        href=\"https://github.com/SpiritFour/whatsanalyze\"\n" +
       "      >\n" +
       "        Vérifiez vous-même.\n" +
       "      </a>",
@@ -980,6 +988,6 @@ export const messages = {
       "Partagez-les avec vos amis, tout cela gratuitement, rien que pour vous ❤️️",
     downloadResults: "Télécharger les résultats",
     lookingFor: "Recherche de",
-    pdfDownload: "Téléchargement PDF",
-  },
+    pdfDownload: "Téléchargement PDF"
+  }
 };
