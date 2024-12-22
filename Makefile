@@ -18,4 +18,4 @@ functions-local:
 	firebase emulators:start --only functions
 
 deploy-functions:
-	firebase deploy --only-functions
+	firebase deploy --only functions
