@@ -10,9 +10,7 @@
 const { onRequest } = require("firebase-functions/v2/https");
 
 const logger = require("firebase-functions/logger");
-const {
-  paypalClientRegistry: backendClientRegistry,
-} = require("./backendClientRegistry");
+const { backendClientRegistry } = require("./backendClientRegistry");
 
 exports.helloworld = onRequest(
   { secrets: ["PAYPAL_PASSWORD_DEV", "PAYPAL_PASSWORD_PROD"], cors: true },
@@ -86,11 +84,9 @@ exports.checksubscriberstatus = onRequest(
     }
 
     // get data
-    let exists = await client.doesSubscriptionExist(email, subscriptionId);
+    let data = await client.getSubscription(email, subscriptionId);
     res.status(200).send({
-      data: {
-        isValid: exists,
-      },
+      data,
     });
   }
 );

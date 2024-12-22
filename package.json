@@ -6,7 +6,7 @@
     "prepare": "pnpm dlx husky install",
     "dev": "NUXT_ENV_LOCAL=1 nuxt",
     "dev-with-functions": "NUXT_ENV_WITH_FUNCTIONS=1 NUXT_ENV_LOCAL=1 nuxt",
-    "functions": "firebase emulators:start --only functions",
+    "functions": ">&2 echo 'you have to run this without pnpm, ohterwise the access to the secrets somehow does not work\nfirebase emulators:start --only functions'",
     "deploy-functions": "firebase deploy --only functions",
     "local": "NUXT_ENV_LOCAL=1 nuxt generate && NUXT_ENV_LOCAL=1 nuxt start",
     "ci-dev-build": "NUXT_ENV_LOCAL=1 nuxt generate",

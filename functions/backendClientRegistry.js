@@ -17,7 +17,6 @@ class BackendClient {
   }
 
   getClientSecret() {
-    console.log();
     return process.env[this.clientSecretName];
   }
 
@@ -32,7 +31,7 @@ class BackendClient {
     // console.log("Requesting access token", config);
     // const basic_auth = `${config.clientId}:${config.secret_key()}`;
     const basic_auth = `${this.clientId}:${this.getClientSecret()}`;
-    console.log(`Access Token: ${basic_auth}`);
+
     // todo we also have to use a different url for prod
     const response = await fetch(`${this.apiEndpoint}/v1/oauth2/token`, {
       method: "POST",
@@ -44,8 +43,14 @@ class BackendClient {
         grant_type: "client_credentials",
       }),
     });
+
+    if (!response.ok) {
+      throw await response.text();
+    }
+
     const token = await response.json();
     this.accessToken = token.access_token;
+
     return this.accessToken;
   }
 
@@ -202,17 +207,25 @@ class BackendClient {
   }
 
   async getSubscriptionDataById(subscriptionId) {
-    return await db
+    return db
       .collection(this.subscriptionCollectionName)
       .doc(subscriptionId)
       .get();
   }
 
-  async doesSubscriptionExist(email, subscriptionId) {
+  async getSubscription(email, subscriptionId) {
     if (email) {
-      return !(await this.getSubscriptionDataByEmail(email)).empty;
+      const data = await this.getSubscriptionDataByEmail(email);
+      return {
+        isValid: !data.empty,
+        data: data.docs.map((x) => x.data()),
+      };
     } else {
-      return (await this.getSubscriptionDataById(subscriptionId)).exists;
+      const data = await this.getSubscriptionDataById(subscriptionId);
+      return {
+        isValid: data.exists,
+        data: data.data(),
+      };
     }
   }
 }

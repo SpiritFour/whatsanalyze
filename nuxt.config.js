@@ -229,7 +229,7 @@ export default {
       },
       browserOptions: {},
     },
-    clientConfig: "~/plugins/sentry.client.paypalClientRegistry.js",
+    clientConfig: "~/plugins/sentry.client.config.js",
     webpackConfig: {
       include: ["./dist/"],
       ignore: ["node_modules"],
@@ -252,12 +252,12 @@ export default {
   server: {
     host: "0.0.0.0",
     https:
-      // eslint-disable-next-line no-undef
+    // eslint-disable-next-line no-undef
       process.env.NODE_ENV !== "production" || local
         ? {
-            key: fs.readFileSync("./localhost-key.pem"),
-            cert: fs.readFileSync("./localhost.pem"),
-          }
+          key: fs.readFileSync("./localhost-key.pem"),
+          cert: fs.readFileSync("./localhost.pem"),
+        }
         : {},
   },
 };
