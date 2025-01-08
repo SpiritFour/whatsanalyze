@@ -17,8 +17,7 @@
         {{ $t("waitingForPDF") }}
       </div>
       <div v-show="!progress">
-        <v-progress-circular indeterminate style="height: 1em" color="blue">
-        </v-progress-circular>
+        <v-progress-circular indeterminate style="height: 1em" color="blue" />
         Loading your images, videos and documents
       </div>
 
@@ -27,16 +26,17 @@
         class=""
         color="blue"
         :value="progress"
-      ></v-progress-linear>
+      />
     </v-row>
 
     <v-dialog v-model="showDownloadPopup" width="550">
       <template #activator="{ on, attrs }">
         <v-row class="pa-0 ma-0" justify="center">
-          <v-col class="pa-0 ma-0">
+
+          <v-col class="pa-0 ma-0" v-if="!isValidSubscription">
             <v-btn elevation="10" @click="downloadSample">
               <v-icon class="mr-1">mdi-download</v-icon>
-              <span><b>free</b> preview PDF</span>
+              <span>Download <b>free</b> preview PDF</span>
             </v-btn>
             <v-col class="mt-2">
               <v-row align="center" justify="center">
@@ -44,6 +44,7 @@
               </v-row>
             </v-col>
           </v-col>
+
           <v-col class="pa-0 ma-0">
             <v-btn
               class="white--text btn-color"
@@ -55,9 +56,10 @@
               v-on="on"
             >
               <v-icon class="mr-1">mdi-download</v-icon>
-              <span><b>full</b> chat PDF</span>
+              <span>Download <b>full</b> chat PDF</span>
             </v-btn>
-            <v-col class="mt-2">
+
+            <v-col class="mt-2" v-if="!isValidSubscription">
               <v-row align="center" justify="center">
                 <b style="color: green">{{ price + " " + currency }}</b>
                 <span
@@ -74,6 +76,7 @@
           </v-col>
         </v-row>
       </template>
+
       <v-card>
         <v-card-title class="headline cyan" style="word-break: normal">
           <div class="text-h4 font-weight-bold">Nice !!</div>
@@ -85,8 +88,11 @@
 
         <div v-if="isLoading" class="loading mb-2" />
 
-        <v-row align="center" class="pt-6 pr-10" cols="12" justify="center">
+        <v-row align="center" class="py-6 pr-10" cols="12" justify="center">
+
+          <v-btn v-if="isValidSubscription" @click="downloadFull">Download now</v-btn>
           <ChatVisualizationPayment
+            v-else
             :amount="price"
             :currency="currency"
             @onApprove="onApprove"
@@ -108,26 +114,26 @@
 <script>
 import { GTAG_PAYMENT, GTAG_PDF, gtagEvent } from "~/utils/gtagValues";
 import PDFWorker from "worker-loader!~/assets/js/pdf.worker.js";
-import { objectToDictionary } from "~/utils/utils";
+import { loadImage, objectToDictionary } from "~/utils/utils";
 import { saveAs } from "file-saver";
-import { loadImage } from "~/utils/utils";
 
 export default {
   name: "PdfDownload",
-  props: ["currency", "price", "chat", "attachments", "ego"],
+  props: ["currency", "price", "chat", "attachments", "ego", "isValidSubscription"],
   data() {
     return {
       showDownloadPopup: false,
       isLoading: false,
       GTAG_PAYMENT,
       GTAG_PDF,
-      progress: 0,
+      progress: 0
     };
   },
   methods: {
     downloadFull() {
       gtagEvent("full_download", GTAG_PDF, 3);
       this.download(false);
+      this.showDownloadPopup = false;
     },
     onCreateOrder() {
       gtagEvent("created", GTAG_PAYMENT, 0);
@@ -135,9 +141,9 @@ export default {
     onApprove() {
       gtagEvent("approved", GTAG_PAYMENT, 10);
       this.downloadFull();
-      this.showDownloadPopup = false;
     },
-    onError() {},
+    onError() {
+    },
     async download(isSample = false) {
       if (process.browser) {
         this.isLoading = true;
@@ -167,15 +173,15 @@ export default {
           messagesPerTimeOfDay,
           messagesPerPerson,
           radarMonth,
-          radarDay,
+          radarDay
         });
       }
     },
     downloadSample() {
       gtagEvent("sample_download", GTAG_PDF, 2);
-      this.download(!this.$route.query.free);
+      this.download(true);
     },
-    workerResponseHandler: function (event) {
+    workerResponseHandler: function(event) {
       const data = event.data;
       if (data.type === "pdf") {
         // service workers can not save files
@@ -187,7 +193,7 @@ export default {
         this.progress = data.data;
       }
     },
-    gtagEvent,
-  },
+    gtagEvent
+  }
 };
 </script>

@@ -1,9 +1,14 @@
 <template>
-  <div class="pa-8">
-    <div v-if="!subscription_id">
+  <div class="ma-8">
 
-      <h2>Buy New Subscriptions</h2>
-      <SubscribeBtn />
+    <SubscriptionChecker :id="subscription_id" :email="email" @isValid="isValid = true"
+                         @isInvalid="isValid = false" />
+
+    <div v-if="!subscription_id" class="my-8">
+      <div class="my-8">
+        <h2>Buy New Subscriptions</h2>
+        <SubscribeBtn class="my-2" />
+      </div>
 
       <h2>Login via Email</h2>
       <v-text-field label="Email" v-model="email" />
@@ -14,17 +19,21 @@
       <div v-else-if="isEmailValid === false">Subscription could not be found. Please enter your correct email.</div>
     </div>
 
-    <div v-else>
-      <v-progress-circular v-if="!isValid" indeterminate style="height: 5em" color="blue" />
+    <div v-else class="my-8">
+      <v-progress-circular v-if="isValid === null" indeterminate style="height: 5em" color="blue" />
       <div v-else>
-        <h2>Use your Subscriptions</h2>
+        <h2>Your subscription is {{ isValid ? "Active" : "Invalid" }}</h2>
 
-        Subscription ID: {{ subscription_id }}
+        <div v-if="isValid">
+          <b>Subscription ID:</b> {{ subscription_id }}
+        </div>
 
-        <br />
-        <br />
-        <v-btn to="/">
-          Go Home
+        <v-btn to="/" class="mt-2">
+          Go to homepage and use your subscription
+        </v-btn>
+
+        <v-btn @click="logout" class="mt-2 m">
+          Logout
         </v-btn>
 
       </div>
@@ -33,55 +42,37 @@
 </template>
 
 <script>
+import SubscriptionChecker from "~/components/SubscriptionChecker.vue";
+import { getSubscriptionParams } from "~/utils/subscription";
+
 export default {
   name: "Subscriptions",
+  components: { SubscriptionChecker },
   data() {
     return {
-      subscription_id: null,
       ba_token: null,
       token: null,
       isValid: null,
       subscriptionData: null,
       APIinterval: null,
       maxCounter: 0,
+      subscription_id: null,
       email: null,
       isEmailValid: null
     };
   },
   mounted() {
-    this.getSubscriptionParams();
-    this.checkSubscription();
+    const { email, id } = getSubscriptionParams();
+    this.subscription_id = id;
+    this.email = email;
   },
   methods: {
-    getSubscriptionParams() {
-      // query
-      const queryParams = new URLSearchParams(window.location.search);
-      this.subscription_id = queryParams.get("subscription_id");
-      this.ba_token = queryParams.get("ba_token");
-      this.token = queryParams.get("token");
+    logout() {
+      if (!confirm("You you really want to logout?")) return;
 
-      if (this.subscription_id) return;
-
-      // local Storage
-      const subscription = JSON.parse(localStorage.getItem("subscription") ?? "");
-
-      this.email = subscription.email;
-      this.subscription_id = subscription.subscriptionId;
-    },
-    async checkSubscription() {
-      if (this.subscription_id) {
-        await this.loadSubscription({ subscriptionId: this.subscription_id });
-
-        this.APIinterval = setInterval(() => {
-          /*asks be if subscription is valid*/
-          if (this.isValid || this.maxCounter > 20) {
-            clearInterval(this.APIinterval);
-            return;
-          }
-          this.loadSubscription({ subscriptionId: this.subscription_id });
-          this.maxCounter++;
-        }, 3 * 1000);
-      }
+      localStorage.setItem("subscription", JSON.stringify({}));
+      /*remove query and reload*/
+      window.location.replace("/subscribe");
     },
     async checkEmailSubscription() {
       await this.loadSubscription({ email: this.email });

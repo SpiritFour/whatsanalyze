@@ -1,5 +1,8 @@
 <template>
   <div>
+    <SubscriptionChecker :id="subscription.id" :email="subscription.email" @isValid="subscription.isValid = true"
+                         @isInvalid="subscription.isValid = false" />
+
     <div ref="aboveTheFold" class="top-color" style="overflow-y: hidden">
       <v-container>
         <v-row
@@ -17,13 +20,30 @@
             class="px-0 px-md-16 pb-8"
             cols="12"
           >
+
             <v-row
               :style="isShowingChats ? 'height: fit-content' : ''"
               class="center-content"
             >
               <HeaderCta />
+
+              <div v-if="subscription.isValid" class="mt-6" style="width: 100%">
+                <v-alert dense type="info" prominent>
+                  Thanks for supporting us. You can download unlimited PDF's for free.
+
+                  <v-btn
+                    to="/subscribe"
+                    plain
+                  >
+                    More Info
+                  </v-btn>
+
+                </v-alert>
+              </div>
+
               <ArrowDown :animate="true" />
             </v-row>
+
             <v-row
               :style="isShowingChats ? 'height: fit-content' : ''"
               class="center-content filehandler"
@@ -61,13 +81,7 @@
         </v-row>
       </v-container>
     </div>
-    <v-row
-      v-if="$vuetify.breakpoint.mdAndUp"
-      no-gutters
-      style="height: 10vh; justify-content: center"
-    >
-      <ArrowDown :animate="true" />
-    </v-row>
+
     <TrustLogos v-if="!isShowingChats" />
     <v-container v-show="!isShowingChats" class="pt-md-16">
       <ExportExplainer class="exportexplainer" />
@@ -84,26 +98,25 @@
     </v-container>
 
     <v-container v-if="isShowingChats">
-      <ChartsResults ref="results" :attachments="attachments" :chat="chat" />
+      <ChartsResults ref="results" :attachments="attachments" :chat="chat"
+                     :isValidSubscription="subscription.isValid" />
     </v-container>
   </div>
 </template>
 
 <script>
 import { Chat } from "~/utils/transformChatData";
-import {
-  GTAG_INTERACTION,
-  GTAG_LEAD,
-  GTAG_NUM_PERSONS,
-  gtagEvent,
-} from "~/utils/gtagValues";
+import { GTAG_INTERACTION, GTAG_LEAD, GTAG_NUM_PERSONS, gtagEvent } from "~/utils/gtagValues";
 import debounce from "lodash/debounce";
+import SubscriptionChecker from "~/components/SubscriptionChecker.vue";
+import { getSubscriptionParams } from "~/utils/subscription";
 
 export default {
+  components: { SubscriptionChecker },
   async asyncData({ $content }) {
     const page = await $content("home").fetch();
     return {
-      page,
+      page
     };
   },
   data() {
@@ -112,6 +125,11 @@ export default {
       chat: undefined,
       attachments: undefined,
       loading: false,
+      subscription: {
+        id: null,
+        email: null,
+        isValid: null
+      }
     };
   },
   head() {
@@ -122,33 +140,33 @@ export default {
           hid: "og:title",
           name: "og:title",
           property: "og:title",
-          content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+          content: "WhatsAnalyze - The WhatsApp Chat Analyzer"
         },
         {
           hid: "og:site_name",
           name: "og:site_name",
           property: "og:site_name",
-          content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+          content: "WhatsAnalyze - The WhatsApp Chat Analyzer"
         },
         {
           hid: "description",
           name: "description",
           property: "description",
-          content: "metaDescription",
+          content: "metaDescription"
         },
         {
           hid: "og:description",
           name: "og:description",
           property: "og:description",
-          content: "metaDescription",
+          content: "metaDescription"
         },
         {
           hid: "og:url",
           name: "og:url",
           property: "og:url",
-          content: "whatsanalyze.com",
-        },
-      ],
+          content: "whatsanalyze.com"
+        }
+      ]
     };
   },
   created() {
@@ -162,6 +180,10 @@ export default {
   mounted() {
     this.handleDebouncedScroll = debounce(this.handleScroll, 0);
     window.addEventListener("scroll", this.handleDebouncedScroll);
+
+    const { email, id } = getSubscriptionParams();
+    this.subscription.id = id;
+    this.subscription.email = email;
   },
 
   beforeDestroy() {
@@ -192,8 +214,8 @@ export default {
     handleScroll() {
       // Any code to be executed when the window is scrolled
       this.$refs.aboveTheFold.scrollTop = window.scrollY;
-    },
-  },
+    }
+  }
 };
 </script>
 

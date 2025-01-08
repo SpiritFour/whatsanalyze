@@ -23,6 +23,7 @@
         :currency="currency"
         :ego="ego"
         :price="price"
+        :isValidSubscription="isValidSubscription"
       />
     </v-row>
   </v-col>
@@ -34,19 +35,19 @@ import PdfDownload from "~/components/ChatVisualization/PdfDownloadPopup";
 export default {
   name: "ChatVisualization",
   components: { PdfDownload },
-  props: ["chat", "attachments", "results"],
+  props: ["chat", "attachments", "results", "isValidSubscription"],
   data() {
     return {
       // its possible that the first person did not write any message at all
       ego: this.chat.messagesPerPerson[0]?.name,
       price: 4.99,
-      currency: "EUR",
+      currency: "EUR"
     };
   },
   methods: {
     setEgo(ego) {
       this.ego = ego;
-    },
-  },
+    }
+  }
 };
 </script>

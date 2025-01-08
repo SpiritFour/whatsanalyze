@@ -94,6 +94,7 @@
         :chat="chat"
         :attachments="attachments"
         :results="this"
+        :isValidSubscription="isValidSubscription"
       />
 
       <GlobalFooter class="only-visible-to-html2canvas" />
@@ -103,6 +104,6 @@
 
 <script>
 export default {
-  props: ["chat", "attachments"],
+  props: ["chat", "attachments", "isValidSubscription"]
 };
 </script>
