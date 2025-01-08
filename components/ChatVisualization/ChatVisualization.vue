@@ -10,6 +10,7 @@
         :currency="currency"
         :ego="ego"
         :price="price"
+        :isValidSubscription="isValidSubscription"
       />
     </v-row>
     <v-row>
