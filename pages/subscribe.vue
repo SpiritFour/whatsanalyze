@@ -1,8 +1,12 @@
 <template>
   <div class="ma-8">
-
-    <SubscriptionChecker :id="subscription_id" :email="email" @isValid="isValid = true"
-                         @isInvalid="isValid = false" />
+    <SubscriptionChecker
+      :id="subscription_id"
+      :email="email"
+      @isValid="isValid = true"
+      @isInvalid="isValid = false"
+    />
+    {{ subscriptionData }}
 
     <div v-if="!subscription_id" class="my-8">
       <div class="my-8">
@@ -13,28 +17,32 @@
       <h2>Login via Email</h2>
       <v-text-field label="Email" v-model="email" />
 
-      <v-btn @click="email && checkEmailSubscription()">Load Subscription</v-btn>
+      <v-btn @click="email && checkEmailSubscription()"
+        >Load Subscription</v-btn
+      >
 
       <div v-if="isEmailValid">Subscription successfully loaded</div>
-      <div v-else-if="isEmailValid === false">Subscription could not be found. Please enter your correct email.</div>
+      <div v-else-if="isEmailValid === false">
+        Subscription could not be found. Please enter your correct email.
+      </div>
     </div>
 
     <div v-else class="my-8">
-      <v-progress-circular v-if="isValid === null" indeterminate style="height: 5em" color="blue" />
+      <div v-if="isValid === null">
+        <v-progress-circular indeterminate style="height: 5em" color="blue" />
+        <h2>Waiting for response from paypal...</h2>
+        This can take up to 2 minutes.
+      </div>
       <div v-else>
         <h2>Your subscription is {{ isValid ? "Active" : "Invalid" }}</h2>
 
-        <div v-if="isValid">
-          <b>Subscription ID:</b> {{ subscription_id }}
-        </div>
+        <div v-if="isValid"><b>Subscription ID:</b> {{ subscription_id }}</div>
 
         <v-btn to="/" class="mt-2">
           Go to homepage and use your subscription
         </v-btn>
 
-        <v-btn @click="logout" class="mt-2 m">
-          Logout
-        </v-btn>
+        <v-btn @click="logout" class="mt-2 m"> Logout </v-btn>
       </div>
     </div>
   </div>
@@ -57,7 +65,7 @@ export default {
       maxCounter: 0,
       subscription_id: null,
       email: null,
-      isEmailValid: null
+      isEmailValid: null,
     };
   },
   mounted() {
@@ -83,7 +91,7 @@ export default {
         "checksubscriberstatus"
       )({
         ...data,
-        client_id: this.$config.paypalClientId
+        client_id: this.$config.paypalClientId,
       });
 
       this.subscriptionData = await response.data;
@@ -93,8 +101,8 @@ export default {
         localStorage.setItem("subscription", JSON.stringify(data));
         clearInterval(this.APIinterval);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

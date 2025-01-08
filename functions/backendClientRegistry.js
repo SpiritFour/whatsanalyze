@@ -222,9 +222,16 @@ class BackendClient {
       };
     } else {
       const data = await this.getSubscriptionDataById(subscriptionId);
+      const retrievedData = data.data();
+
       return {
         isValid: data.exists,
-        data: data.data(),
+        data: {
+          subscriptionId: retrievedData.subscriptionData.id,
+          email: retrievedData.subscriptionData.subscriber.email_address,
+          name: retrievedData.subscriptionData.subscriber.name,
+          expirationTimestamp: retrievedData.expirationTimestamp,
+        },
       };
     }
   }
