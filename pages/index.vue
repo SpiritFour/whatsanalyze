@@ -64,6 +64,20 @@
         <v-row v-if="$vuetify.breakpoint.smAndDown" no-gutters>
           <v-col class="px-0 pb-1 my-auto" cols="12">
             <HeaderCta />
+
+            <div v-if="subscription.isValid" class="mt-6" style="width: 100%">
+              <v-alert dense type="info" prominent>
+                Thanks for supporting us. You can download unlimited PDF's for free.
+
+                <v-btn
+                  to="/subscribe"
+                  plain
+                >
+                  More Info
+                </v-btn>
+
+              </v-alert>
+            </div>
           </v-col>
           <v-col cols="12">
             <ArrowDown :animate="true" style="width: 100%; overflow: hidden" />
