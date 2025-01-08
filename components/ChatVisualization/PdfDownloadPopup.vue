@@ -88,17 +88,29 @@
 
         <div v-if="isLoading" class="loading mb-2" />
 
-        <v-row align="center" class="py-6 pr-10" cols="12" justify="center">
+        <v-row align="center" class="py-6 ma-0" cols="12" justify="center">
 
           <v-btn v-if="isValidSubscription" @click="downloadFull">Download now</v-btn>
-          <ChatVisualizationPayment
-            v-else
-            :amount="price"
-            :currency="currency"
-            @onApprove="onApprove"
-            @onCreateOrder="onCreateOrder"
-            @onError="onError"
-          />
+
+          <div v-else>
+            <ChatVisualizationPayment
+              :amount="price"
+              :currency="currency"
+              @onApprove="onApprove"
+              @onCreateOrder="onCreateOrder"
+              @onError="onError"
+            />
+
+            <v-alert dense type="info" prominent>
+              You can also get a subscription for unlimited PDF's here
+              <v-btn
+                to="/subscribe"
+              >
+                Open Subscription Page
+              </v-btn>
+            </v-alert>
+          </div>
+
         </v-row>
         <v-divider></v-divider>
         <v-card-actions>
@@ -116,9 +128,11 @@ import { GTAG_PAYMENT, GTAG_PDF, gtagEvent } from "~/utils/gtagValues";
 import PDFWorker from "worker-loader!~/assets/js/pdf.worker.js";
 import { loadImage, objectToDictionary } from "~/utils/utils";
 import { saveAs } from "file-saver";
+import SubscriptionChecker from "~/components/SubscriptionChecker.vue";
 
 export default {
   name: "PdfDownload",
+  components: { SubscriptionChecker },
   props: ["currency", "price", "chat", "attachments", "ego", "isValidSubscription"],
   data() {
     return {
