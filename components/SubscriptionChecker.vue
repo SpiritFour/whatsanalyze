@@ -43,6 +43,7 @@ export default {
         /*asks be if subscription is valid*/
         if (this.isValid || this.maxCounter > 20) {
           clearInterval(this.APIinterval);
+          this.$emit("isInvalid");
           return;
         }
         this.loadSubscription(data);
@@ -66,8 +67,6 @@ export default {
         localStorage.setItem("subscription", JSON.stringify(data));
         this.$emit("isValid");
         clearInterval(this.APIinterval);
-      } else {
-        this.$emit("isInvalid");
       }
     }
   }
