@@ -20,7 +20,15 @@ export const messages = {
     analyzeYourOwnWhatsapp: "Analyze your own WhatsApp data",
     analyzeInSeconds: "Analyze your WhatsApp Chat in Seconds",
     revealInsights:
-      "Get insights into <strong>your chats</strong> - Now with more interesting graphs, <strong>free statistics</strong> and full <strong>PDF export</strong>",
+      "<strong>Instant Insights:</strong> Discover <b>who’s texting</b>  the <b>most</b>  messages, see peak activity times, and <b>uncover hidden patterns</b> in <b>your friends conversation</b> history.",
+    infoSec:
+      "<b>No</b> chat <b>data</b> is sent to any server. Everything runs <b>locally</b> " +
+      "in your browser for guaranteed privacy. " +
+      '<a href="#faq-privacy" class="black--text" >' +
+      "  Read more about privacy." +
+      "</a>",
+    openSource:
+      "<strong>Open Source:</strong> This project is <b>open-source</b>, and all code is <b>public</b> on <b>GitHub</b>. Check it out for yourself.",
     interestedAbout:
       "Interested about your own chat data? Take deep dive in your data!",
     analyzeYourChat: "Get started",
@@ -70,6 +78,9 @@ export const messages = {
     days: "days",
     youSent: "You have sent",
     faqWhatsapp: "FAQs about WhatsApp chats",
+    privacyFAQTitle: "Is My Chat Data Really Private?",
+    privacyFAQContent:
+      "Yes, absolutely. All chat processing occurs locally in your browser. No data is ever sent to a server. You can even inspect the open-source code on GitHub to verify.",
     howToExport: "How to export your WhatsApp chat",
     howToExportLong:
       "          Everyone can easily export his WhatsApp chat or group chat. Open\n" +
@@ -136,9 +147,6 @@ export const messages = {
     fileZip: "your WhatsApp .zip or .txt file into this box.",
     fileProcessing: "<strong>Processing</strong> your file...",
     love: "Made with ❤️ by four friends.",
-    openSource:
-      "This project is <b>open-source</b> and all code is <b>public</b> on\n" +
-      "      <b>GitHub</b>",
     pageNameSignal: "How to switch to Signal from WhatsApp",
     pageNameExport: "How to export your WhatsApp Chat",
     addToHomescreen: "add to Homescreen",
@@ -149,9 +157,6 @@ export const messages = {
     groupInfo:
       'If you select "2", only the two people with the most messages are shown\n' +
       '        individually. Others are grouped as "Others"',
-    infoSec:
-      "<b>No</b> chat <b>data</b> is sent to a server! All code runs\n" +
-      "      <b>locally</b> in your browser.",
     infoPriv:
       "This project is <b>open-source</b> and all code is <b>public</b> on\n" +
       "      <b>github</b>. <a\n" +
@@ -269,6 +274,9 @@ export const messages = {
     days: "Tage",
     youSent: "Du hast gesendet",
     faqWhatsapp: "FAQs zu WhatsApp-Chats",
+    privacyFAQTitle: "Sind meine Chat-Daten wirklich privat?",
+    privacyFAQContent:
+      "Ja, absolut. Die gesamte Chat-Verarbeitung erfolgt lokal in Ihrem Browser. Es werden keinerlei Daten an einen Server gesendet. Sie können sogar den Open-Source-Code auf GitHub einsehen, um dies zu überprüfen.",
     howToExport: "Wie man seinen WhatsApp-Chat exportiert",
     howToExportOn: "Exportiere deinen Chat auf",
     howToExportLong:
@@ -342,8 +350,7 @@ export const messages = {
       'Wenn Du "2" wählst, werden nur die beiden Personen mit den meisten Nachrichten angezeigt' +
       ' einzeln. Die anderen werden als "Andere" gruppiert.',
     infoSec:
-      "<b>Keine</b> Chat-<b>Daten</b> werden an einen Server gesendet! Alle Codes laufen\n" +
-      "      <b>lokal</b> in deinem Browser.",
+      '<b>Keine</b> Chat-<b>Daten</b> werden an einen Server gesendet. Alles wird <b>lokal</b> in Ihrem Browser ausgeführt, um die Privatsphäre zu gewährleisten. <a href="#faq-privacy" class="black--text">Weitere Informationen zum Datenschutz.</a>',
     infoPriv:
       "Dieses Projekt ist <b>open-source</b> und der gesamte Code ist <b>öffentlich</b> auf\n" +
       "      <b>github</b>. <a\n" +
@@ -461,6 +468,9 @@ export const messages = {
     days: "días",
     youSent: "Has enviado",
     faqWhatsapp: "Preguntas frecuentes sobre los chats de WhatsApp",
+    privacyFAQTitle: "¿Mis datos de chat son realmente privados?",
+    privacyFAQContent:
+      "Sí, absolutamente. Todo el procesamiento del chat ocurre localmente en tu navegador. No se envía ningún dato a un servidor. Incluso puedes inspeccionar el código abierto en GitHub para verificarlo.",
     howToExport: "Cómo exportar tu chat de WhatsApp",
     howToExportLong:
       "          Todos pueden exportar fácilmente su chat de WhatsApp o chat grupal. Abierto\n" +
@@ -544,8 +554,7 @@ export const messages = {
       'Si selecciona "2", solo se muestran las dos personas con más mensajes\n' +
       '        individualmente. Otros se agrupan como "Otros"',
     infoSec:
-      "<b>No</b> se envían <b>datos</b>del chat a un servidor! Todos los códigos se ejecutan\n" +
-      "      <b>localmente</b> en su navegador.",
+      '<b>No</b> se envían <b>datos</b> del chat a ningún servidor. Todo se ejecuta <b>localmente</b> en tu navegador para garantizar la privacidad. <a href="#faq-privacy" class="black--text">Lee más sobre la privacidad.</a>',
     infoPriv:
       "Este proyecto es de <b>código abierto</b> y todo el código es <b>público</b> en\n" +
       "      <b>github</b>. <a\n" +
@@ -659,6 +668,9 @@ export const messages = {
     days: "dias",
     youSent: "Você enviou",
     faqWhatsapp: "FAQs sobre chats do WhatsApp",
+    privacyFAQTitle: "Meus dados de chat são realmente privados?",
+    privacyFAQContent:
+      "Sim, com certeza. Todo o processamento do chat ocorre localmente em seu navegador. Nenhum dado é enviado para um servidor. Você pode até mesmo inspecionar o código-fonte aberto no GitHub para verificar.",
     howToExport: "Como exportar seu chat do WhatsApp",
     howToExportLong:
       " Todos podem exportar facilmente seu chat ou grupo de chat do WhatsApp. Abra\n" +
@@ -735,7 +747,7 @@ export const messages = {
       'Se você selecionar "2", apenas as duas pessoas com mais mensagens são mostradas\n' +
       ' individualmente. Outros são agrupados como "Outros"',
     infoSec:
-      "<b>Não</b> são enviados dados de chat para um servidor! Todo o código é executado",
+      '<b>Nenhum</b> dado de <b>chat</b> é enviado a qualquer servidor. Tudo é executado <b>localmente</b> no seu navegador para garantir a privacidade. <a href="#faq-privacy" class="black--text">Leia mais sobre privacidade.</a>',
     infoPriv:
       "Este projeto é <b>open-source</b> e todo o código é <b>público</b> no" +
       "<b>github</b>. <a\n" +
@@ -853,6 +865,9 @@ export const messages = {
     days: "Jours",
     youSent: "Vous avez envoyé",
     faqWhatsapp: "FAQ sur les chats WhatsApp",
+    privacyFAQTitle: "Mes données de chat sont-elles vraiment privées ?",
+    privacyFAQContent:
+      "Oui, absolument. Tout le traitement du chat s’effectue localement dans votre navigateur. Aucune donnée n’est jamais envoyée à un serveur. Vous pouvez même inspecter le code source ouvert sur GitHub pour le vérifier.",
     howToExport: "Comment exporter votre chat WhatsApp",
     howToExportLong:
       "          Tout le monde peut facilement exporter son chat WhatsApp ou son chat de groupe. Ouvrir\n" +
@@ -937,8 +952,7 @@ export const messages = {
       'Si vous sélectionnez "2", seules les deux personnes ayant envoyé le plus de messages sont affichées.\n' +
       '        individuellement. Les autres sont regroupés sous l\'appellation "Autres"',
     infoSec:
-      "<b>Aucune donnée</b> de chat n'est envoyée à un serveur ! Tous le code est utilisé\n" +
-      "      <b>localement</b> sur votre navigateur.",
+      '<b>Aucune</b> donnée de <b>chat</b> n’est envoyée à un serveur. Tout fonctionne <b>localement</b> dans votre navigateur pour garantir la confidentialité. <a href="#faq-privacy" class="black--text">En savoir plus sur la confidentialité.</a>',
     infoPriv:
       "C'est un projet <b>open-source</b> et tous le code est <b>public</b> sur\n" +
       "      <b>github</b>. <a\n" +
