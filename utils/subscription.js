@@ -4,9 +4,10 @@ export const getSubscriptionParams = () => {
   const id = queryParams.get("subscription_id");
 
   if (id) return { id, email: null };
-
+  const data = localStorage.getItem("subscription");
   // local Storage
-  const subscription = JSON.parse(localStorage.getItem("subscription") ?? "");
+  if (!data) return { id: null, email: null };
+  const subscription = JSON.parse(data);
 
   return { email: subscription.email, id: subscription.subscriptionId };
 };
