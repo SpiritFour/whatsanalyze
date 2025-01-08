@@ -46,13 +46,14 @@ exports.paypalwebhook = onRequest(
     // get data
     const webhookData = req.body;
     console.log("got data", webhookData);
+    const origin = req.get("origin");
 
     // somehow paypal does not set a origin header...
     const isDev = webhookData.links[0].href.includes("sandbox");
 
     const client = backendClientRegistry.getClientForEnv(isDev);
     logger.info("got client", client);
-    await client.handleWebhook(webhookData);
+    await client.handleWebhook(webhookData, origin);
 
     res.status(200).end();
   }

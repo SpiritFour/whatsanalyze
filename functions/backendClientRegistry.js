@@ -1,4 +1,4 @@
-const { getFirestore } = require("firebase-admin/firestore");
+const { getFirestore, Timestamp } = require("firebase-admin/firestore");
 const { initializeApp } = require("firebase-admin/app");
 const logger = require("firebase-functions/logger");
 
@@ -97,7 +97,7 @@ class BackendClient {
     return response.json();
   }
 
-  async handleWebhook(webhookData) {
+  async handleWebhook(webhookData, origin) {
     if (webhookData.event_type === "PAYMENT.SALE.COMPLETED") {
       const subscriptionId = webhookData.resource.billing_agreement_id;
       // get customer information
@@ -121,6 +121,22 @@ class BackendClient {
         },
         { merge: true }
       );
+      // const email = "moritz@moritz-wolf.de"; //subscriptionData.subscriber.email_address;
+      const email = subscriptionData.subscriber.email_address;
+      const mail = {
+        to: email,
+        template: {
+          name: "subscription",
+          data: {
+            text: `${origin}/subscribe?subscription_id=${subscriptionId}&email=${email}`,
+            subscriptionId: subscriptionData.id,
+            email: email,
+            name: subscriptionData.subscriber.name.given_name,
+          },
+          created: Timestamp.fromDate(new Date()),
+        },
+      };
+      await db.collection("mail").doc().set(mail);
     } else {
       logger.info("unhandled webhook data", webhookData);
     }
