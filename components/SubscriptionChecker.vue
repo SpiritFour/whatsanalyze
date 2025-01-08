@@ -43,7 +43,10 @@ export default {
         /*asks be if subscription is valid*/
         if (this.isValid || this.maxCounter > 20) {
           clearInterval(this.APIinterval);
-          this.$emit("isInvalid");
+
+          if (!this.isValid) {
+            this.$emit("isInvalid");
+          }
           return;
         }
         this.loadSubscription(data);

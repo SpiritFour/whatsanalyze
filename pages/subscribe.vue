@@ -13,7 +13,7 @@
       <h2>Login via Email</h2>
       <v-text-field label="Email" v-model="email" />
 
-      <v-btn @click="checkEmailSubscription()" :disable="!email">Load Subscription</v-btn>
+      <v-btn @click="email && checkEmailSubscription()">Load Subscription</v-btn>
 
       <div v-if="isEmailValid">Subscription successfully loaded</div>
       <div v-else-if="isEmailValid === false">Subscription could not be found. Please enter your correct email.</div>
@@ -35,7 +35,6 @@
         <v-btn @click="logout" class="mt-2 m">
           Logout
         </v-btn>
-
       </div>
     </div>
   </div>
