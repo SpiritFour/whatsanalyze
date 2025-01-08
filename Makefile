@@ -1,5 +1,5 @@
 base-url=localhost:5001/whatsanalyze-80665/us-central1
-base=curl -H "Origin: sandbox.localhost:3000"
+base=curl -H "Origin: localhost:3000"
 base-post=$(base) --header "Content-Type: application/json"
 
 test-paypalwebhook:
