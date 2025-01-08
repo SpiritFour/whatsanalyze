@@ -3,7 +3,17 @@
     <div id="faq" class="font-weight-bold text-h2 text-center py-10">
       {{ $t("faqWhatsapp") }}
     </div>
-    <v-expansion-panels class="px-sm-10 px-0">
+    <v-expansion-panels v-model="expandedPanels" multiple class="px-sm-10 px-0">
+      <!-- PRIVACY FAQ -->
+      <v-expansion-panel>
+        <!-- Note: no special ID on header needed, but you can if you want -->
+        <v-expansion-panel-header id="faq-privacy">
+          {{ $t("privacyFAQTitle") }}
+        </v-expansion-panel-header>
+        <v-expansion-panel-content>
+          {{ $t("privacyFAQContent") }}
+        </v-expansion-panel-content>
+      </v-expansion-panel>
       <v-expansion-panel>
         <v-expansion-panel-header>
           {{ $t("howToExport") }}
@@ -79,9 +89,12 @@
     </v-expansion-panels>
   </div>
 </template>
-
 <script>
-export default {};
+export default {
+  data: () => ({
+    expandedPanels: [0],
+  }),
+};
 </script>
 
 <style scoped>
