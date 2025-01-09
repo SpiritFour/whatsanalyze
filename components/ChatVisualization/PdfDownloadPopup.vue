@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-v-html -->
 <template>
   <div class="cta pa-2 pa-md-5 my-md-2 overflow-hidden">
     <!-- Title -->
@@ -147,6 +148,7 @@
     </v-dialog>
   </div>
 </template>
+<!-- eslint-enable vue/no-v-html -->
 <script>
 import { GTAG_PAYMENT, GTAG_PDF, gtagEvent } from "~/utils/gtagValues";
 import PDFWorker from "worker-loader!~/assets/js/pdf.worker.js";
@@ -157,7 +159,14 @@ import SubscriptionChecker from "~/components/SubscriptionChecker.vue";
 export default {
   name: "PdfDownload",
   components: { SubscriptionChecker },
-  props: ["currency", "price", "chat", "attachments", "ego", "isValidSubscription"],
+  props: {
+    currency: { type: String, required: true },
+    price: { type: Number, required: true },
+    chat: { type: Object, required: true },
+    attachments: { type: Array, default: () => [] },
+    ego: { type: String, required: true },
+    isValidSubscription: { type: Boolean, default: false }
+  },
   data() {
     return {
       showDownloadPopup: false,
