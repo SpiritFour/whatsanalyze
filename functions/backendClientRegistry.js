@@ -7,13 +7,14 @@ const app = initializeApp();
 const db = getFirestore(app);
 
 class BackendClient {
-  constructor(env, clientId, clientSecretName, planId, apiEndpoint) {
+  constructor(env, clientId, clientSecretName, planId, apiEndpoint, baseUrl) {
     this.env = env;
     this.clientId = clientId;
     this.clientSecretName = clientSecretName;
     this.planId = planId;
     this.apiEndpoint = apiEndpoint;
     this.subscriptionCollectionName = `subscriptions-${env}`;
+    this.baseUrl = baseUrl;
   }
 
   getClientSecret() {
@@ -97,7 +98,7 @@ class BackendClient {
     return response.json();
   }
 
-  async handleWebhook(webhookData, origin) {
+  async handleWebhook(webhookData) {
     if (webhookData.event_type === "PAYMENT.SALE.COMPLETED") {
       const subscriptionId = webhookData.resource.billing_agreement_id;
       // get customer information
@@ -125,10 +126,11 @@ class BackendClient {
       const email = subscriptionData.subscriber.email_address;
       const mail = {
         to: email,
+        bccUids: ["adrian", "mo", "paul", "sebastian"],
         template: {
           name: "subscription",
           data: {
-            text: `${origin}/subscribe?subscription_id=${subscriptionId}&email=${email}`,
+            text: `${this.baseUrl}/subscribe?subscription_id=${subscriptionId}&email=${email}`,
             subscriptionId: subscriptionData.id,
             email: email,
             name: subscriptionData.subscriber.name.given_name,
@@ -138,7 +140,22 @@ class BackendClient {
       };
       await db.collection("mail").doc().set(mail);
     } else {
-      logger.info("unhandled webhook data", webhookData);
+      logger.error("unhandled webhook data", webhookData);
+      const mail = {
+        to: "sebastian",
+        bccUids: ["adrian", "mo", "paul"],
+        template: {
+          name: "feedback",
+          data: {
+            name: "Unhandled Webhook",
+            text: JSON.stringify(webhookData),
+            rating: -1,
+            email: null,
+          },
+          created: Timestamp.fromDate(new Date()),
+        },
+      };
+      await db.collection("mail").doc().set(mail);
     }
   }
 
@@ -261,6 +278,10 @@ const configs = [
     clientSecretName: "PAYPAL_PASSWORD_DEV",
     planId: "P-28458220JT356632KM5K5HJI",
     apiEndpoint: "https://api-m.sandbox.paypal.com",
+    // todo this is really ugly. instead we should add the callback url to the context of the paypal call.
+    // somewhere here: https://developer.paypal.com/docs/api/subscriptions/v1/#subscriptions_create
+    // or we have to create the intend in firebase already somehow and correlate it then
+    baseUrl: "https://whatsanalyze-80665.web.app",
   },
   {
     env: "prod",
@@ -269,6 +290,7 @@ const configs = [
     clientSecretName: "PAYPAL_PASSWORD_PROD",
     planId: undefined, // todo create plan for prod
     apiEndpoint: undefined, // todo find apiEndpoint
+    baseUrl: "https://whatsanalyze.com",
   },
 ];
 
@@ -280,7 +302,8 @@ class BackendClientRegistry {
         config.clientId,
         config.clientSecretName,
         config.planId,
-        config.apiEndpoint
+        config.apiEndpoint,
+        config.baseUrl
       );
     });
   }
