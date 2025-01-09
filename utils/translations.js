@@ -1,13 +1,10 @@
 export const messages = {
   en: {
-
     subscription: {
       "title": "Subscription",
       "cta": "Get a subscription now. Unlimited analytics. Great Fun.",
       "button": "Buy monthly subscription for 10€"
     },
-
-
     titleGoogle: "WhatsAnalyze - The WhatsApp Chat Analyzer",
     metaDescription:
       "Most Popular WhatsApp Analyzer ✓ Now offering Group chats ✓ Reveal your friends character ✓ Free statistics and PDF chat export. Get Started now!",
@@ -206,7 +203,17 @@ export const messages = {
     shareWithFriends: "Share them with your friends, all free just for you ❤️️",
     downloadResults: "Download Results",
     lookingFor: "Looking for",
-    pdfDownload: "PDF download"
+    pdfDownload: "PDF download",
+    loadingMedia: "Loading your <span>images</span>, <span>videos</span> and <span>documents</span>",
+    downloadFreePreviewPDF: "Download <b>free preview</b> PDF",
+    downloadFullChatPDF: "Download <b>full chat</b> PDF",
+    popupTitle: "<span>Nice!!</span>",
+    popupSubtitle: "You are just a step away from your PDF!",
+    popupInfo: "<b>Supporting us</b> keeps the 💻 running 🎉",
+    downloadNow: "Download now",
+    subscriptionHint: "You can also get a <span>subscription</span> for unlimited PDFs here",
+    openSubscriptionPage: "Open <span>Subscription Page</span>",
+    closeButton: "Close"
   },
   de: {
     titleGoogle: "WhatsAnalyze - The WhatsApp Chat Analyzer",
@@ -397,12 +404,21 @@ export const messages = {
     weekday: "Wochentag",
     wordCloud: "Wortwolke",
     downloadAllGraphs: "Alle Graphen auf einmal herunterladen!",
-    shareWithFriends:
-      "Teilen es mit Deinen Freunden. Kostenlos nur für Dich ❤️️",
+    shareWithFriends: "Teilen es mit Deinen Freunden. Kostenlos nur für Dich ❤️️",
     downloadResults: "Ergebnisse herunterladen",
     lookingFor: "Suche nach",
-    pdfDownload: "PDF-Download"
-  },
+    pdfDownload: "PDF-Download",
+    loadingMedia: "Wir laden deine <span>Bilder</span>, <span>Videos</span> und <span>Dokumente</span>",
+    downloadFreePreviewPDF: "Kostenlose <b>PDF-Vorschau</b> herunterladen",
+    downloadFullChatPDF: "<b>Vollständiges</b> Chat-PDF herunterladen",
+    popupTitle: "<span>Toll!!</span>",
+    popupSubtitle: "Sie sind nur einen Schritt von Ihrem PDF entfernt!",
+    popupInfo: "<b>Indem Sie uns unterstützen</b>, bleibt der Rechner am Laufen 🎉",
+    downloadNow: "Jetzt herunterladen",
+    subscriptionHint: "Sie können hier auch ein <span>Abo</span> für unbegrenzte PDF-Downloads abschließen",
+    openSubscriptionPage: "<span>Aboseite</span> öffnen",
+    closeButton: "Schließen"
+},
   es: {
     titleGoogle: "WhatsAnalyze - El analizador de chat de WhatsApp",
     metaDescription:
@@ -601,7 +617,17 @@ export const messages = {
       "Compártelos con tus amigos, todo gratis sólo para ti ❤️️",
     downloadResults: "Descargar resultados",
     lookingFor: "Buscando",
-    pdfDownload: "Descarga de PDF"
+    pdfDownload: "Descarga de PDF",
+    loadingMedia: "Cargando tus <span>imágenes</span>, <span>videos</span> y <span>documentos</span>",
+    downloadFreePreviewPDF: "Descargar <b>vista previa gratuita</b> del PDF",
+    downloadFullChatPDF: "Descargar <b>PDF completo</b> del chat",
+    popupTitle: "<span>¡Genial!</span>",
+    popupSubtitle: "¡Estás a un paso de tu PDF!",
+    popupInfo: "<b>Apoyarnos</b> mantiene la 💻 funcionando 🎉",
+    downloadNow: "Descargar ahora",
+    subscriptionHint: "También puedes obtener una <span>suscripción</span> para descargas ilimitadas de PDFs aquí",
+    openSubscriptionPage: "Abrir <span>página de suscripción</span>",
+    closeButton: "Cerrar"
   },
   pt: {
     titleGoogle: "WhatsAnalyze - O analisador de bate-papo do WhatsApp",
@@ -796,7 +822,17 @@ export const messages = {
       "Compartilhe-os com seus amigos, tudo gratuito só para você ❤️️",
     downloadResults: "Download Results",
     lookingFor: "Procurando por",
-    pdfDownload: "Download de PDF"
+    pdfDownload: "Download de PDF",
+    loadingMedia: "Carregando suas <span>imagens</span>, <span>vídeos</span> e <span>documentos</span>",
+    downloadFreePreviewPDF: "Baixar <b>prévia gratuita</b> do PDF",
+    downloadFullChatPDF: "Baixar <b>PDF completo</b> do chat",
+    popupTitle: "<span>Ótimo!!</span>",
+    popupSubtitle: "Você está a um passo do seu PDF!",
+    popupInfo: "<b>Ao nos apoiar</b>, você mantém o computador funcionando 🎉",
+    downloadNow: "Baixar agora",
+    subscriptionHint: "Você também pode obter uma <span>assinatura</span> para PDFs ilimitados aqui",
+    openSubscriptionPage: "Abrir <span>página de assinatura</span>",
+    closeButton: "Fechar"
   },
   fr: {
     titleGoogle: "WhatsAnalyze - The WhatsApp Chat Analyzer",
@@ -1002,6 +1038,16 @@ export const messages = {
       "Partagez-les avec vos amis, tout cela gratuitement, rien que pour vous ❤️️",
     downloadResults: "Télécharger les résultats",
     lookingFor: "Recherche de",
-    pdfDownload: "Téléchargement PDF"
+    pdfDownload: "Téléchargement PDF",
+    loadingMedia: "Chargement de vos <span>images</span>, <span>vidéos</span> et <span>documents</span>",
+    downloadFreePreviewPDF: "Télécharger un <b>aperçu gratuit</b> du PDF",
+    downloadFullChatPDF: "Télécharger le <b>PDF complet</b> de la conversation",
+    popupTitle: "<span>Génial !!</span>",
+    popupSubtitle: "Vous n’êtes plus qu’à un pas de votre PDF !",
+    popupInfo: "<b>En nous soutenant</b>, vous maintenez l’ordinateur en marche 🎉",
+    downloadNow: "Télécharger maintenant",
+    subscriptionHint: "Vous pouvez également souscrire un <span>abonnement</span> pour des PDFs illimités ici",
+    openSubscriptionPage: "Ouvrir la <span>page d’abonnement</span>",
+    closeButton: "Fermer"
   }
 };
