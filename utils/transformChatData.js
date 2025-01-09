@@ -26,6 +26,29 @@ export class Chat {
     );
   }
 
+  static getTotalCallMinutes(chatObject) {
+    // Regex captures:
+    //   1) "Voice" or "Video"
+    //   2) optional spaces and a possible left-to-right mark (\u200E)
+    //   3) digits
+    //   4) optional spaces
+    //   5) "min"
+    // Example lines:
+    //   "Voice call. ‎5 min"
+    //   "Video call. 10 min"
+    const callRegex = /(Voice|Video) call\.\s*\u200E?(\d+)\s*min/;
+
+    let totalMinutes = 0;
+    for (const msg of chatObject) {
+      const match = msg.message.match(callRegex);
+      if (match) {
+        // match[2] is the number of minutes
+        totalMinutes += parseInt(match[2], 10);
+      }
+    }
+    return totalMinutes;
+  }
+
   // Find hapax legomenons, a word or an expression that occurs only once within the context.
   static uniqueWords(chat_distribution) {
     function singleOccurrence(value) {
@@ -444,6 +467,7 @@ export class Chat {
               "_omitted",
               "_weggelassen",
               "_attached",
+              "Messages and calls are end-to-end encrypted.",
             ].includes(word[0].toLowerCase())
           ) && word[1] > 1
       )

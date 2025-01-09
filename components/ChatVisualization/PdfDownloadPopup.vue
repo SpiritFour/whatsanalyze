@@ -155,6 +155,7 @@ import PDFWorker from "worker-loader!~/assets/js/pdf.worker.js";
 import { loadImage, objectToDictionary } from "~/utils/utils";
 import { saveAs } from "file-saver";
 import SubscriptionChecker from "~/components/SubscriptionChecker.vue";
+import { Chat } from "~/utils/transformChatData";
 
 export default {
   name: "PdfDownload",
@@ -209,6 +210,7 @@ export default {
 
         const chat = objectToDictionary(this.chat); // remove functions
         chat.funFacts = await this.chat.getFunFacts(); // set funfacts beforehand instead of using function call
+        chat.totalCalls = Chat.getTotalCallMinutes(this.chat.chatObject);
 
         worker.postMessage({
           // pass all data to service worker

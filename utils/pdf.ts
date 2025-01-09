@@ -228,6 +228,7 @@ export async function render(
   addPageIfNeeded(50);
   writeDoubleSizeText(String(dateDiffsConst), " days");
   writeDoubleSizeText(String(chat.chatObject.length), " messages");
+  writeDoubleSizeText(String(chat.totalCalls), " minutes called");
   writeDoubleSizeText(String(chat.numPersonsInChat), " people");
 
   //    Add participants
