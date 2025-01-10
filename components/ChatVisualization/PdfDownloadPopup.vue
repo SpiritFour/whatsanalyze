@@ -100,17 +100,8 @@
               <div class="pricing-card text-center py-5 px-4">
                 <div class="text-h3 font-weight-bold title">{{ $t("subscriptionTitle") }}</div>
                 <div class="text-body-1 py-3 subtitle">{{ $t("subscriptionDescription") }}</div>
-                <v-btn
-                  color="secondary"
-                  class="mt-3 mb-4"
-                  elevation="10"
-                  style="max-width: 100%"
-                  v-bind="attrs"
-                  @click="gtagEvent('subscription_pressed', GTAG_PAYMENT)"
-                  v-on="on"
-                >
-                  {{ $t("chooseSubscription") }}
-                </v-btn>
+                <SubscribeBtn>
+                </SubscribeBtn>
                 <div class="price-description">
                   <v-row align="center" justify="center">
                     <b style="color: green">{{ price - 3 + ' ' + currency }}</b>
