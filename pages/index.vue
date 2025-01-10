@@ -18,14 +18,14 @@
             cols="12"
           >
             <v-row
-              :style="isShowingChats ? 'height: fit-content' : 'height: 45vh;'"
+              :style="isShowingChats ? 'height: fit-content' : ''"
               class="center-content"
             >
               <HeaderCta />
               <ArrowDown :animate="true" />
             </v-row>
             <v-row
-              :style="isShowingChats ? 'height: fit-content' : 'height: 25vh;'"
+              :style="isShowingChats ? 'height: fit-content' : ''"
               class="center-content filehandler"
             >
               <FileHandler

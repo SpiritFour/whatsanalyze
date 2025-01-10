@@ -32,27 +32,27 @@ export default {
     showImage: { default: false, type: Boolean },
     to: { default: "", type: String },
     buttonTxt: {
-      default: function() {
+      default: function () {
         return "analyzeYourChat";
       },
-      type: String
+      type: String,
     },
     text: {
-      default: function() {
+      default: function () {
         return "analyzeYourChatLong";
       },
-      type: String
+      type: String,
     },
     title: {
       default: function () {
         return "analyzeYourChatTitle";
       },
-      type: String
-    }
+      type: String,
+    },
   },
   data() {
     return {
-      GTAG_INTERACTION
+      GTAG_INTERACTION,
     };
   },
   methods: {
@@ -62,7 +62,7 @@ export default {
         this.$vuetify.goTo(".filehandler", { duration: 300, offset: 300 });
       }
     },
-    gtagEvent
-  }
+    gtagEvent,
+  },
 };
 </script>
