@@ -38,59 +38,98 @@
     <!-- Download dialog -->
     <v-dialog v-model="showDownloadPopup" width="550">
       <template #activator="{ on, attrs }">
-        <v-row class="pa-0 ma-0" justify="center">
-
-          <!-- Free Preview PDF button -->
-          <v-col
-            class="pa-0 ma-0"
-            v-if="!isValidSubscription"
-          >
-            <v-btn elevation="10" @click="downloadSample">
-              <v-icon class="mr-1">mdi-download</v-icon>
-              <span v-html="$t('downloadFreePreviewPDF')"></span>
-            </v-btn>
-            <v-col class="mt-2">
-              <v-row align="center" justify="center">
-                <b style="color: green">{{ 0 + ' ' + currency }}</b>
-              </v-row>
+        <!-- Pricing Section -->
+        <div class="pricing-section mt-10">
+          <div class="text-h2 font-weight-bold pb-5 ">{{ $t("pricingTitle") }}</div>
+          <div class="text-subtitle-1 ">{{ $t("pricingSubtitle") }}</div>
+          <v-row justify="center" align="center" class="py-5">
+            <!-- Free Tier -->
+            <v-col cols="12" sm="4">
+              <div class="pricing-card text-center py-5 px-4">
+                <div class="text-h3 font-weight-bold title">{{ $t("freeTierTitle") }}</div>
+                <div class="text-body-1 py-3 subtitle">{{ $t("freeTierDescription") }}</div>
+                <v-btn
+                  color="primary"
+                  outlined
+                  class="mt-3 mb-4"
+                  @click="handleFreePdfClick"
+                >
+                  <v-icon class="mr-1">mdi-download</v-icon>
+                  <span v-html="$t('downloadFreePreviewPDF')"></span>
+                </v-btn>
+                <div class="price-description">
+                  <b style="color: green">{{ 0 + ' ' + currency }}</b>
+                </div>
+              </div>
             </v-col>
-          </v-col>
 
-          <!-- Full PDF button -->
-          <v-col class="pa-0 ma-0">
-            <v-btn
-              class="white--text btn-color"
-              dark
-              elevation="10"
-              style="max-width: 100%"
-              v-bind="attrs"
-              @click="gtagEvent('full_pdf_pressed', GTAG_PAYMENT)"
-              v-on="on"
-            >
-              <v-icon class="mr-1">mdi-download</v-icon>
-              <span v-html="$t('downloadFullChatPDF')"></span>
-            </v-btn>
-
-            <v-col
-              class="mt-2"
-              v-if="!isValidSubscription"
-            >
-              <v-row align="center" justify="center">
-                <b style="color: green">{{ price + ' ' + currency }}</b>
-                <span
-                  class="px-1 ml-2"
-                  style="color: white; background: red; border-radius: 5px"
-                >-66%</span>
-              </v-row>
-              <v-row align="center" justify="center">
-                <s style="color: grey">{{ 15 + ' ' + currency }}</s>
-              </v-row>
+            <!-- One-Time Payment -->
+            <v-col cols="12" sm="4">
+              <div class="pricing-card text-center py-5 px-4">
+                <div class="text-h3 font-weight-bold title">{{ $t("oneTimeTitle") }}</div>
+                <div class="text-body-1 py-3 subtitle">{{ $t("oneTimeDescription") }}</div>
+                <v-btn
+                  color="success"
+                  class="mt-3 mb-4"
+                  v-bind="attrs"
+                  @click="gtagEvent('full_pdf_pressed', GTAG_PAYMENT)"
+                  v-on="on"
+                >
+                  <v-icon class="mr-1">mdi-download</v-icon>
+                  <span v-html="$t('downloadFullChatPDF')"></span>
+                </v-btn>
+                <div class="price-description">
+                  <v-row align="center" justify="center">
+                    <b style="color: green">{{ price + ' ' + currency }}</b>
+                    <span
+                      class="px-1 ml-2"
+                      style="color: white; background: red; border-radius: 5px"
+                    >
+                      -50%
+                    </span>
+                  </v-row>
+                  <v-row align="center" justify="center">
+                    <s style="color: grey">{{ 15 + ' ' + currency }}</s>
+                  </v-row>
+                </div>
+              </div>
             </v-col>
-          </v-col>
 
-        </v-row>
+            <!-- Monthly Subscription -->
+            <v-col cols="12" sm="4">
+              <div class="pricing-card text-center py-5 px-4">
+                <div class="text-h3 font-weight-bold title">{{ $t("subscriptionTitle") }}</div>
+                <div class="text-body-1 py-3 subtitle">{{ $t("subscriptionDescription") }}</div>
+                <v-btn
+                  color="secondary"
+                  class="mt-3 mb-4"
+                  elevation="10"
+                  style="max-width: 100%"
+                  v-bind="attrs"
+                  @click="gtagEvent('subscription_pressed', GTAG_PAYMENT)"
+                  v-on="on"
+                >
+                  {{ $t("chooseSubscription") }}
+                </v-btn>
+                <div class="price-description">
+                  <v-row align="center" justify="center">
+                    <b style="color: green">{{ price - 3 + ' ' + currency }}</b>
+                    <span
+                      class="px-1 ml-2"
+                      style="color: white; background: red; border-radius: 5px"
+                    >
+                      -80%
+                    </span>
+                  </v-row>
+                  <v-row align="center" justify="center">
+                    <s style="color: grey">{{ 24.95 + ' ' + currency }}</s>
+                  </v-row>
+                </div>
+              </div>
+            </v-col>
+          </v-row>
+        </div>
       </template>
-
       <v-card>
         <!-- Popup title + subtitle -->
         <v-card-title class="headline cyan" style="word-break: normal">
@@ -148,6 +187,7 @@
     </v-dialog>
   </div>
 </template>
+
 <!-- eslint-enable vue/no-v-html -->
 <script>
 import { GTAG_PAYMENT, GTAG_PDF, gtagEvent } from "~/utils/gtagValues";
@@ -177,6 +217,10 @@ export default {
     };
   },
   methods: {
+    handleFreePdfClick() {
+      this.downloadSample();
+      this.gtagEvent('free_pdf_pressed', GTAG_PAYMENT);
+    },
     downloadFull() {
       gtagEvent("full_download", GTAG_PDF, 3);
       this.download(false);
@@ -244,3 +288,40 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.pricing-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%; /* Ensures equal height for all cards */
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-height: 400px; /* Adjust height as needed */
+  min-height: 350px; /* Ensures equal card height */
+}
+
+.price-description {
+  margin-top: 10px;
+}
+.subtitle {
+  min-height: 100px; /* Ensures equal height for subtitles */
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.title {
+  min-height: 100px; /* Ensures equal height for subtitles */
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+
+
+</style>

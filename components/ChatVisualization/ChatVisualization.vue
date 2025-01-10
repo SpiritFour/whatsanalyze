@@ -16,17 +16,6 @@
     <v-row>
       <Chat :attachments="attachments" :chat="chat" @setEgo="setEgo" />
     </v-row>
-
-    <v-row justify="center">
-      <PdfDownload
-        :attachments="attachments"
-        :chat="chat"
-        :currency="currency"
-        :ego="ego"
-        :price="price"
-        :isValidSubscription="isValidSubscription"
-      />
-    </v-row>
   </v-col>
 </template>
 
@@ -41,7 +30,7 @@ export default {
     return {
       // its possible that the first person did not write any message at all
       ego: this.chat.messagesPerPerson[0]?.name,
-      price: 4.99,
+      price: 7.99,
       currency: "EUR"
     };
   },
