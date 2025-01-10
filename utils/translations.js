@@ -149,6 +149,7 @@ export const messages = {
     love: "Made with ❤️ by four friends.",
     pageNameSignal: "How to switch to Signal from WhatsApp",
     pageNameExport: "How to export your WhatsApp Chat",
+    pageNameWrapped: "WhatsApp Wrapped your personalized WhatsApp Year Review",
     addToHomescreen: "add to Homescreen",
     people: "People",
     changeView: "Change Point of View",
