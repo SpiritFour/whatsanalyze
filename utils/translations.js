@@ -149,7 +149,6 @@ export const messages = {
     love: "Made with ❤️ by four friends.",
     pageNameSignal: "How to switch to Signal from WhatsApp",
     pageNameExport: "How to export your WhatsApp Chat",
-    pageNameWrapped: "WhatsApp Wrapped your personalized WhatsApp Year Review",
     addToHomescreen: "add to Homescreen",
     people: "People",
     changeView: "Change Point of View",
@@ -200,6 +199,38 @@ export const messages = {
     downloadResults: "Download Results",
     lookingFor: "Looking for",
     pdfDownload: "PDF download",
+
+    pageNameWrapped: "WhatsApp Wrapped your personalized WhatsApp Year Review",
+    heroTitle: "WhatsApp Wrapped {currentYear}",
+    heroSubtitle:
+      "Your WhatsApp year, wrapped up in stunning insights! Discover your top chat buddies, most active times, and fun facts about your conversations.",
+    analyzeSafely:
+      "Analyze your chats safely: All processing happens locally in your browser—your data never leaves your device.",
+    ctaButton: "Get Started",
+    featuresTitle: "What’s in Your WhatsApp Wrapped?",
+    featuresList: {
+      topChatters: "📊 Top Chatters: See who you talked to the most this year.",
+      peakTimes: "⏰ Peak Times: Discover when you're most active.",
+      mostUsedEmojis:
+        "😂 Most Used Emojis: Find out which emojis you just can't stop using.",
+      messageInsights:
+        "💬 Message Insights: View message counts, word counts, and patterns over time.",
+      groupChats:
+        "👥 Group Chats: Dive into group dynamics and uncover who's most vocal.",
+    },
+    ctaSectionTitle: "Discover Your WhatsApp Story",
+    ctaSectionText:
+      "Curious about who you’ve messaged the most this year or what your top emoji is? Uncover fun facts, hidden patterns, and engaging insights about your WhatsApp chats with just a click.",
+    funFactsTitle: "Fun Facts About WhatsApp Chats",
+    funFactsIntro:
+      "Did you know that the average person sends over 42 messages a day on WhatsApp? Or that emojis make up over 20% of all messages?",
+    funFactsList: {
+      longestChat:
+        "🎉 Longest group chat conversation lasted over 36 hours nonstop!",
+      topEmoji:
+        "😂 Most used emoji of {currentYear}? The laughing face with tears of joy!",
+      busiestDay: "📅 The busiest WhatsApp day of the year: New Year's Eve.",
+    },
   },
   de: {
     titleGoogle: "WhatsAnalyze - The WhatsApp Chat Analyzer",
