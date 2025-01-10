@@ -300,7 +300,6 @@ body {
 }
 
 .container {
-  max-width: 800px;
   margin: auto;
   padding: 20px;
 }
@@ -310,7 +309,7 @@ body {
   background: linear-gradient(135deg, #25d366, #128c7e);
   color: white;
   text-align: center;
-  padding: 50px 20px;
+  padding: 20px 20px;
 }
 
 .hero-section h1 {
@@ -330,35 +329,5 @@ body {
 
 .cta-button:hover {
   background: #ddd;
-}
-
-/* Upload Section */
-.upload-box {
-  border: 2px dashed #ccc;
-  text-align: center;
-  padding: 20px;
-  margin: 20px 0;
-}
-
-.upload-box input {
-  display: block;
-  margin: 10px auto;
-  font-size: 1rem;
-}
-
-/* Footer */
-.footer {
-  text-align: center;
-  background: #f4f4f4;
-  padding: 10px 20px;
-}
-
-.footer a {
-  color: #128c7e;
-  text-decoration: none;
-}
-
-.footer a:hover {
-  text-decoration: underline;
 }
 </style>
