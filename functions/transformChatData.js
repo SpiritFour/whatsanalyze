@@ -110,7 +110,13 @@ export class Chat {
     return hours;
   }
 
-  constructor(chatObject = [], groupAfter = 9, maxWordsWordCloud = 150, maxWordsEmojiCloud =3000) {
+  // please help with maxWordsEmojiCloud
+  constructor(
+    chatObject = [],
+    groupAfter = 9,
+    maxWordsWordCloud = 150,
+    maxWordsEmojiCloud = 50000
+  ) {
     // this one is the complete input
     this.chatObject = chatObject;
 
@@ -446,6 +452,9 @@ export class Chat {
               "_omitted",
               "_weggelassen",
               "_attached",
+              "edited>",
+              "<This",
+              "message",
             ].includes(word[0].toLowerCase())
           ) && word[1] > 1
       )
