@@ -1,6 +1,6 @@
 <template>
   <div class="foot py-7 additional-height">
-    <h3 class="my-3" v-for="post in posts" :key="post.to">
+    <h3 v-for="post in posts" :key="post.to" class="my-3">
       <nuxt-link :to="post.name">
         {{ $t(post.text) }}
       </nuxt-link>
@@ -65,6 +65,10 @@ export default {
           name: "how-to-export-your-whatsapp-chat",
           text: "pageNameExport"
         }
+        {
+          name: "whatsapp-wrapped-year-review",
+          text: "pageNameWrapped",
+        },
       ]
     };
   }
