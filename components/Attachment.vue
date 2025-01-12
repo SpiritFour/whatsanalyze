@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { MimeTypeGroup } from "~/functions/attachments";
+import { MimeTypeGroup } from "~/utils/attachments";
 export default {
   name: "Attachment",
   props: {
