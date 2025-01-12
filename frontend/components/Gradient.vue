@@ -50,8 +50,6 @@ function draw() {
 
   // Fill the canvas
   ctx.fillStyle = gradient;
-
-  console.log({width, height})
   ctx.fillRect(0, 0, width, height);
 }
 

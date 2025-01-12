@@ -8,7 +8,11 @@
 }
 
 .container {
-    @apply max-w-6xl mx-auto px-4 md:px-0
+    @apply px-4 md:px-0 my-8
+}
+
+.gid-container, .container {
+    @apply max-w-6xl mx-auto
 }
 
 .card {

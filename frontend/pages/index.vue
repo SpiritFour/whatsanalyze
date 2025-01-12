@@ -1,8 +1,18 @@
 <template>
-  <section
-      class="card text-center container w-full h-full"
-  >
-    <Gradient class="w-full ">
+  <section class="relative overflow-hidden py-16">
+    <div
+        class="absolute left-0 top-1/2 -translate-y-1/2 w-56 h-56 bg-gradient -rotate-12 animate-pulse  hidden md:block"
+        style="clip-path: polygon(0 0, 100% 50%, 0 100%)"
+    />
+
+    <div
+        class="absolute right-0 top-1/2 -translate-y-1/2 w-56 h-56 bg-gradient rotate-12 animate-pulse hidden md:block"
+        style="clip-path: polygon(100% 0, 0 50%, 100% 100%)"
+    />
+
+    <div
+        class="card text-center container w-full h-full border-gray-950"
+    >
       <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight z-10">
         Your WhatsApp Wrapped
       </h1>
@@ -21,50 +31,37 @@
         Dive into your year of chats, voice notes, and memories.
         The story of your chat, told through your WhatsApp data.
       </p>
-      <a
-          class="inline-block bg-black text-white font-bold px-6 py-3 rounded-full hover:bg-gray-900 transition-colors"
-          href="#stats"
-      >
-        Get Your WhatsApp Wrapped
-      </a>
-    </Gradient>
+      <Gradient
+          class="inline-block text-white font-bold px-6 py-3 rounded-full hover:bg-gray-900 transition-colors">
+        <button>
+          Get Your WhatsApp Wrapped
+        </button>
+      </Gradient>
+    </div>
   </section>
 
-  <section class="relative overflow-hidden py-16">
-    <div
-        class="absolute left-0 top-1/2 -translate-y-1/2 w-56 h-56 bg-gradient rotate-45 opacity-80 animate-pulse  hidden md:block"
-        style="clip-path: polygon(0 0, 100% 50%, 0 100%)"
-    />
+  <section class="relative container">
+    <h2 class="text-3xl md:text-5xl font-extrabold text-center mb-12">
+      What is Wrapped, anyway?
+    </h2>
 
-    <div
-        class="absolute right-0 top-1/2 -translate-y-1/2 w-56 h-56 bg-gradient rotate-45 opacity-80 animate-pulse hidden md:block"
-        style="clip-path: polygon(100% 0, 0 50%, 100% 100%)"
-    />
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 text-center">
+      <div v-for="explanation in explanations" class="space-y-4">
+        <div class="mx-auto w-12 h-12 flex items-center justify-center mb-2">
 
-    <div class="relative container">
-      <h2 class="text-3xl md:text-5xl font-extrabold text-center mb-12">
-        What is Wrapped, anyway?
-      </h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 text-center">
-        <div v-for="explanation in explanations" class="space-y-4">
-          <div class="mx-auto w-12 h-12 flex items-center justify-center mb-2">
-
-            <component :is="explanation.icon" class="w-8 h-8"></component>
-          </div>
-          <h3 class="text-xl font-semibold">{{ explanation.title }}</h3>
-          <p class="text-gray-300 text-sm md:text-base leading-relaxed">
-            {{ explanation.description }}
-          </p>
+          <component :is="explanation.icon" class="w-8 h-8"></component>
         </div>
+        <h3 class="text-xl font-semibold">{{ explanation.title }}</h3>
+        <p class="text-gray-300 text-sm md:text-base leading-relaxed">
+          {{ explanation.description }}
+        </p>
       </div>
     </div>
   </section>
 
   <!-- SECTION 1: Overview -->
-  <section id="stats" class="container bg-black card">
+  <section id="stats" class="container bg-gradient card">
     <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-      <!-- Text Content -->
       <div>
         <h2 class="text-3xl md:text-4xl font-bold mb-4">Top Chats & Emojis</h2>
         <p class="mb-4">

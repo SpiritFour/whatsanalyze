@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gray-900  w-full h-full min-h-screen text-gray-300">
-    <header class="sticky top-0 z-50  bg-gray-950 py-8">
-      <div class="container flex flex-col md:flex-row  items-center justify-between">
+    <header class="sticky top-0 z-50 bg-gray-950 py-8">
+      <div class="gid-container flex flex-col md:flex-row  items-center justify-between">
         <Logo>
           <Gradient
               class="w-min h-min translate-y-2 absolute rounded-lg right-0 top-0 rotate-12 bg-gradient px-2 font-black">

@@ -1,8 +1,8 @@
 <template>
   <div class="flex items-center align-middle gap-6  cursor-pointer">
 
-    <Gradient>
-      <img :width="width" alt="logo" class="text-clip" src="/img/logo-inverse.png"/>
+    <Gradient style="width: 38px; height: 38px;">
+      <img alt="logo" class="text-clip" src="/img/logo-inverse.png" width="38px"/>
     </Gradient>
 
     <div v-if="!logoOnly" class="relative flex">
@@ -16,8 +16,6 @@
 export default {
   props: {
     logoOnly: {type: Boolean, default: false},
-    width: {type: Number, default: 38},
   }
 }
-
 </script>
