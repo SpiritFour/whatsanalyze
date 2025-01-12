@@ -1,0 +1,83 @@
+// ---- COLORS -----
+
+// Whatsapp Theme color
+$whatsappThemeColor: #07bc4c;
+$darkBackgroundColor: #0d1418;
+$lightBackgroundColor: #e5ddd5;
+
+// MONOTONE
+// -- dark colors
+$c-dark: #022e40;
+$c-dark-accent: #032859;
+
+// -- light colors
+$c-white: #f2f2f2;
+$c-white-dark: #bfbfbf;
+$c-white-accent: #e1e1e1;
+
+// BLUE
+$c-blue-accent: #21a68d;
+$c-blue-accent-light: #60d8bd;
+$c-blue-accent-dark: #007660;
+
+$c-blue-secondary: #0c808c;
+$c-blue-secondary-light: #51b0bc;
+$c-blue-secondary-dark: #00535f;
+
+$c-blue-dark: #11538c;
+$c-blue-accent-dark: #227373;
+
+// WHITE
+$c-green: #88a825;
+$c-green-accent: #b3f94f;
+
+// YELLOW
+$c-yellow: #ffd45c;
+$c-yellow-accent: #ffa35c;
+
+$c-yellow-bright: #ffd800;
+$c-yellow-bright-accent: #fd9924;
+
+// ORANGE
+$c-orange: #fe6a2c;
+$c-orange-accent: #ffbf5c;
+$c-orange-dark: #cf4a30;
+$c-orange-dark-accent: #ed8c2b;
+
+// RED
+$c-red: #ff675c;
+$c-red-light: #ff855c;
+$c-red-dark: #d93b3b;
+$c-red-dark-accent: #911146;
+
+.top-color {
+  background-color: $c-blue-accent;
+}
+
+.only-visible-to-html2canvas {
+  display: none;
+}
+
+
+.cta {
+  background: $c-white;
+  width: 100%;
+}
+
+.btn-color {
+  background-color: $c-blue-accent !important;
+}
+
+.btn-color-dark {
+  background-color: $c-blue-secondary-dark !important;
+}
+
+.link {
+  border: none;
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  color: #069;
+  text-decoration: underline;
+  cursor: pointer;
+}
