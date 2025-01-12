@@ -294,8 +294,8 @@ const configs = [
     clientId:
       "AUMWxSZrtBOA1RicR_3nGijYb8yYxyq2lxBjiwoQKfVc-8jfdPr5N7X5EFUackMCLb_K7HiKswnDBUJ8",
     clientSecretName: "PAYPAL_PASSWORD_PROD",
-    planId: undefined, // todo create plan for prod
-    apiEndpoint: undefined, // todo find apiEndpoint
+    planId: "P-6S549875VP7928542M6B4JFI", // https://www.paypal.com/billing/plans/P-6S549875VP7928542M6B4JFI
+    apiEndpoint: "https://api-m.paypal.com", // todo find apiEndpoint
     baseUrl: "https://whatsanalyze.com",
   },
 ];
