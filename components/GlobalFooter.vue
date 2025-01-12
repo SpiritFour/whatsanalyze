@@ -59,19 +59,19 @@ export default {
         // },
         {
           name: "switch-from-whatsapp-to-signal",
-          text: "pageNameSignal"
+          text: "pageNameSignal",
         },
         {
           name: "how-to-export-your-whatsapp-chat",
-          text: "pageNameExport"
-        }
+          text: "pageNameExport",
+        },
         {
           name: "whatsapp-wrapped-year-review",
           text: "pageNameWrapped",
         },
-      ]
+      ],
     };
-  }
+  },
 };
 </script>
 <style lang="scss" scoped>
