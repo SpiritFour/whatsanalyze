@@ -249,9 +249,15 @@ class BackendClient {
   async getSubscription(email, subscriptionId) {
     if (email) {
       const data = await this.getSubscriptionDataByEmail(email);
+      const retrievedData = data.docs[0]?.data();
       return {
         isValid: !data.empty,
-        data: data.docs.map((x) => x.data()),
+        data: {
+          subscriptionId: retrievedData?.subscriptionData?.id,
+          email: retrievedData?.subscriptionData?.subscriber?.email_address,
+          name: retrievedData?.subscriptionData?.subscriber?.name,
+          expirationTimestamp: retrievedData?.expirationTimestamp,
+        },
       };
     } else {
       const data = await this.getSubscriptionDataById(subscriptionId);
@@ -260,10 +266,10 @@ class BackendClient {
       return {
         isValid: data.exists,
         data: {
-          subscriptionId: retrievedData.subscriptionData.id,
-          email: retrievedData.subscriptionData.subscriber.email_address,
-          name: retrievedData.subscriptionData.subscriber.name,
-          expirationTimestamp: retrievedData.expirationTimestamp,
+          subscriptionId: retrievedData?.subscriptionData?.id,
+          email: retrievedData?.subscriptionData?.subscriber?.email_address,
+          name: retrievedData?.subscriptionData?.subscriber?.name,
+          expirationTimestamp: retrievedData?.expirationTimestamp,
         },
       };
     }

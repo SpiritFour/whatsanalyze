@@ -6,7 +6,6 @@
       @isValid="isValid = true"
       @isInvalid="isValid = false"
     />
-    {{ subscriptionData }}
 
     <div v-if="!subscription_id" class="my-8">
       <div class="my-8">
@@ -96,9 +95,14 @@ export default {
 
       this.subscriptionData = await response.data;
       this.isValid = this.subscriptionData.isValid;
-
+      this.subscription_id = this.subscriptionData.data.subscriptionId;
       if (this.isValid) {
-        localStorage.setItem("subscription", JSON.stringify(data));
+        localStorage.setItem(
+          "subscription",
+          JSON.stringify({
+            subscriptionId: this.subscription_id,
+          })
+        );
         clearInterval(this.APIinterval);
       }
     },

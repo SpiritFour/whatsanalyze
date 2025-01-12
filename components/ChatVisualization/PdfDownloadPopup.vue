@@ -9,45 +9,46 @@
 
     <v-row>
       <v-img
-        :src="require('@/assets/pdf-example.jpg')"
+        :src="require('static/pdf-example.jpg')"
         class="ma-auto my-4"
         max-width="100%"
       />
     </v-row>
-
     <!-- Loading section -->
     <v-row v-show="isLoading" class="ma-3">
       <div class="text-body-1 pa-2" v-html="$t('waitingForPDF')"></div>
 
       <div v-show="!progress">
-        <v-progress-circular
-          indeterminate
-          style="height: 1em"
-          color="blue"
-        />
+        <v-progress-circular indeterminate style="height: 1em" color="blue" />
         <span v-html="$t('loadingMedia')"></span>
       </div>
 
-      <v-progress-linear
-        v-show="progress"
-        color="blue"
-        :value="progress"
-      />
+      <v-progress-linear v-show="progress" color="blue" :value="progress" />
     </v-row>
 
     <!-- Download dialog -->
     <v-dialog v-model="showDownloadPopup" width="550">
       <template #activator="{ on, attrs }">
         <!-- Pricing Section -->
-        <div class="pricing-section mt-10">
-          <div class="text-h2 font-weight-bold pb-5 ">{{ $t("pricingTitle") }}</div>
-          <div class="text-subtitle-1 ">{{ $t("pricingSubtitle") }}</div>
+        <v-btn v-if="isValidSubscription" @click="downloadFull" color="success">
+          <span v-html="$t('downloadNow')"></span>
+        </v-btn>
+
+        <div v-else class="pricing-section mt-10">
+          <div class="text-h2 font-weight-bold pb-5">
+            {{ $t("pricingTitle") }}
+          </div>
+          <div class="text-subtitle-1">{{ $t("pricingSubtitle") }}</div>
           <v-row justify="center" align="center" class="py-5">
             <!-- Free Tier -->
             <v-col cols="12" sm="4">
               <div class="pricing-card text-center py-5 px-4">
-                <div class="text-h3 font-weight-bold title">{{ $t("freeTierTitle") }}</div>
-                <div class="text-body-1 py-3 subtitle">{{ $t("freeTierDescription") }}</div>
+                <div class="text-h3 font-weight-bold title">
+                  {{ $t("freeTierTitle") }}
+                </div>
+                <div class="text-body-1 py-3 subtitle">
+                  {{ $t("freeTierDescription") }}
+                </div>
                 <v-btn
                   color="primary"
                   outlined
@@ -58,7 +59,7 @@
                   <span v-html="$t('downloadFreePreviewPDF')"></span>
                 </v-btn>
                 <div class="price-description">
-                  <b style="color: green">{{ 0 + ' ' + currency }}</b>
+                  <b style="color: green">{{ 0 + " " + currency }}</b>
                 </div>
               </div>
             </v-col>
@@ -66,8 +67,12 @@
             <!-- One-Time Payment -->
             <v-col cols="12" sm="4">
               <div class="pricing-card text-center py-5 px-4">
-                <div class="text-h3 font-weight-bold title">{{ $t("oneTimeTitle") }}</div>
-                <div class="text-body-1 py-3 subtitle">{{ $t("oneTimeDescription") }}</div>
+                <div class="text-h3 font-weight-bold title">
+                  {{ $t("oneTimeTitle") }}
+                </div>
+                <div class="text-body-1 py-3 subtitle">
+                  {{ $t("oneTimeDescription") }}
+                </div>
                 <v-btn
                   color="success"
                   class="mt-3 mb-4"
@@ -80,7 +85,7 @@
                 </v-btn>
                 <div class="price-description">
                   <v-row align="center" justify="center">
-                    <b style="color: green">{{ price + ' ' + currency }}</b>
+                    <b style="color: green">{{ price + " " + currency }}</b>
                     <span
                       class="px-1 ml-2"
                       style="color: white; background: red; border-radius: 5px"
@@ -89,7 +94,7 @@
                     </span>
                   </v-row>
                   <v-row align="center" justify="center">
-                    <s style="color: grey">{{ 15 + ' ' + currency }}</s>
+                    <s style="color: grey">{{ 15 + " " + currency }}</s>
                   </v-row>
                 </div>
               </div>
@@ -98,13 +103,16 @@
             <!-- Monthly Subscription -->
             <v-col cols="12" sm="4">
               <div class="pricing-card text-center py-5 px-4">
-                <div class="text-h3 font-weight-bold title">{{ $t("subscriptionTitle") }}</div>
-                <div class="text-body-1 py-3 subtitle">{{ $t("subscriptionDescription") }}</div>
-                <SubscribeBtn>
-                </SubscribeBtn>
+                <div class="text-h3 font-weight-bold title">
+                  {{ $t("subscriptionTitle") }}
+                </div>
+                <div class="text-body-1 py-3 subtitle">
+                  {{ $t("subscriptionDescription") }}
+                </div>
+                <SubscribeBtn> </SubscribeBtn>
                 <div class="price-description">
                   <v-row align="center" justify="center">
-                    <b style="color: green">{{ price - 3 + ' ' + currency }}</b>
+                    <b style="color: green">{{ price - 3 + " " + currency }}</b>
                     <span
                       class="px-1 ml-2"
                       style="color: white; background: red; border-radius: 5px"
@@ -113,7 +121,7 @@
                     </span>
                   </v-row>
                   <v-row align="center" justify="center">
-                    <s style="color: grey">{{ 24.95 + ' ' + currency }}</s>
+                    <s style="color: grey">{{ 24.95 + " " + currency }}</s>
                   </v-row>
                 </div>
               </div>
@@ -136,12 +144,7 @@
         <div v-if="isLoading" class="loading mb-2" />
 
         <!-- Download or Payment -->
-        <v-row
-          align="center"
-          class="py-6 ma-0"
-          cols="12"
-          justify="center"
-        >
+        <v-row align="center" class="py-6 ma-0" cols="12" justify="center">
           <!-- Download button if subscribed -->
           <v-btn v-if="isValidSubscription" @click="downloadFull">
             <span v-html="$t('downloadNow')"></span>
@@ -196,7 +199,7 @@ export default {
     chat: { type: Object, required: true },
     attachments: { type: Array, default: () => [] },
     ego: { type: String, required: true },
-    isValidSubscription: { type: Boolean, default: false }
+    isValidSubscription: { type: Boolean, default: false },
   },
   data() {
     return {
@@ -204,13 +207,13 @@ export default {
       isLoading: false,
       GTAG_PAYMENT,
       GTAG_PDF,
-      progress: 0
+      progress: 0,
     };
   },
   methods: {
     handleFreePdfClick() {
       this.downloadSample();
-      this.gtagEvent('free_pdf_pressed', GTAG_PAYMENT);
+      this.gtagEvent("free_pdf_pressed", GTAG_PAYMENT);
     },
     downloadFull() {
       gtagEvent("full_download", GTAG_PDF, 3);
@@ -224,8 +227,7 @@ export default {
       gtagEvent("approved", GTAG_PAYMENT, 10);
       this.downloadFull();
     },
-    onError() {
-    },
+    onError() {},
     async download(isSample = false) {
       if (process.browser) {
         this.isLoading = true;
@@ -255,7 +257,7 @@ export default {
           messagesPerTimeOfDay,
           messagesPerPerson,
           radarMonth,
-          radarDay
+          radarDay,
         });
       }
     },
@@ -263,7 +265,7 @@ export default {
       gtagEvent("sample_download", GTAG_PDF, 2);
       this.download(true);
     },
-    workerResponseHandler: function(event) {
+    workerResponseHandler: function (event) {
       const data = event.data;
       if (data.type === "pdf") {
         // service workers can not save files
@@ -275,8 +277,8 @@ export default {
         this.progress = data.data;
       }
     },
-    gtagEvent
-  }
+    gtagEvent,
+  },
 };
 </script>
 
@@ -312,7 +314,4 @@ export default {
   align-items: center;
   text-align: center;
 }
-
-
-
 </style>
