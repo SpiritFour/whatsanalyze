@@ -81,7 +81,7 @@
   </div>
 </template>
 <script>
-import { Chat } from "~/functions/transformChatData";
+import { Chat } from "~/utils/transformChatData";
 
 export default {
   name: "ExampleGraphs",
