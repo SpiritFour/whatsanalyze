@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 set -e
-if [[ ! -d "/Users/private/projects/whatsanalyze" ]]; then
+if [[ ! -d "/Users/Mo/repos/whatsanalyze" ]]; then
   echo "Cannot find source directory; Did you move it?"
-  echo "(Looking for "/Users/private/projects/whatsanalyze")"
+  echo "(Looking for "/Users/Mo/repos/whatsanalyze")"
   echo 'Cannot force reload with this script - use "direnv reload" manually and then try again'
   exit 1
 fi
 
 # rebuild the cache forcefully
-_nix_direnv_force_reload=1 direnv exec "/Users/private/projects/whatsanalyze" true
+_nix_direnv_force_reload=1 direnv exec "/Users/Mo/repos/whatsanalyze" true
 
 # Update the mtime for .envrc.
 # This will cause direnv to reload again - but without re-building.
-touch "/Users/private/projects/whatsanalyze/.envrc"
+touch "/Users/Mo/repos/whatsanalyze/.envrc"
 
 # Also update the timestamp of whatever profile_rc we have.
 # This makes sure that we know we are up to date.
-touch -r "/Users/private/projects/whatsanalyze/.envrc" "/Users/private/projects/whatsanalyze/.direnv"/*.rc
+touch -r "/Users/Mo/repos/whatsanalyze/.envrc" "/Users/Mo/repos/whatsanalyze/.direnv"/*.rc
