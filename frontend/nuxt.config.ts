@@ -7,10 +7,7 @@ export default defineNuxtConfig({
     compatibilityDate: "2024-11-01",
     devtools: {enabled: true},
 
-    title: "Whatsanalyze",
-
     /* full static rendering */
-    target: "static",
     ssr: false,
 
     modules: ["@nuxtjs/tailwindcss", "@nuxtjs/i18n", "@nuxt/content"],
