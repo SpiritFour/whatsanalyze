@@ -455,6 +455,11 @@ export class Chat {
               "edited>",
               "<This",
               "message",
+              "Missed",
+              "voice",
+              "call.",
+              "Location:",
+              "deleted",
             ].includes(word[0].toLowerCase())
           ) && word[1] > 1
       )

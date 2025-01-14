@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { Chat } from "~/functions/transformChatData";
+import { Chat } from "~/utils/transformChatData";
 import { onlyEmoji } from "emoji-aware";
 
 export default {
@@ -66,7 +66,7 @@ export default {
     updateGraph() {
       this.chartdata.getEmojiCloudData().then((words) => {
         // Regex pattern to match currency like '24,95€'
-        const filterPattern = /(?:€|\$|R\$|₹)?\d+[,.]?\d*(?:€|\$|R\$|₹)?|[!?]/;
+        const filterPattern = /(?:€|\$|R\$|₹)?\d+[,.]?\d*(?:€|\$|R\$|₹)?|[!?]|^\.$/;
 
         const wordData = words.filter((wordObj) => {
           // Check if the word matches the currency pattern
