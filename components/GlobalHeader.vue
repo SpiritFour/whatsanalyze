@@ -3,7 +3,7 @@
     <v-container class="pl-md-16">
       <v-card color="#21a68d" flat tile>
         <v-card-actions>
-          <nuxt-link to="/">
+          <nuxt-link :to="localePath('/')">
             <h1 style="color: black; font-size: 2em">
               <img
                 alt="WhatsAnalyze Logo"

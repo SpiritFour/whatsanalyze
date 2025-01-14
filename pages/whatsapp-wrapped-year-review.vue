@@ -180,6 +180,42 @@
     },
     "testimonial1": "WhatsApp Wrapped m'a donné une toute nouvelle perspective sur mes conversations. J'ai été surpris de voir mes heures les plus actives et avec qui j'ai le plus parlé. C'est amusant et perspicace !",
     "testimonial2": "J'ai adoré les statistiques des emojis ! C'est une façon amusante de réfléchir à mes chats et de voir comment mes relations ont évolué au fil de l'année."
+  },
+  "it": {
+    "heroTitle": "WhatsApp Wrapped {currentYear}",
+    "heroSubtitle": "Il tuo anno su WhatsApp, racchiuso in sorprendenti intuizioni! Scopri i tuoi migliori amici di chat, i momenti più attivi e curiosità sulle tue conversazioni.",
+    "analyzeSafely": "Analizza le tue chat in sicurezza: tutto il processo avviene localmente nel tuo browser—i tuoi dati non lasciano mai il dispositivo.",
+    "ctaButton": "Inizia ora",
+    "featuresTitle": "Cosa include il tuo WhatsApp Wrapped?",
+    "featuresList": {
+      "topChatters": "📊 Chat più frequenti: Scopri con chi hai parlato di più quest'anno.",
+      "peakTimes": "⏰ Orari di punta: Scopri quando sei più attivo.",
+      "mostUsedEmojis": "😂 Emoji più usati: Scopri quali emoji non puoi smettere di usare.",
+      "messageInsights": "💬 Approfondimenti sui messaggi: Visualizza il conteggio dei messaggi, il numero di parole e i modelli nel tempo.",
+      "groupChats": "👥 Chat di gruppo: Esplora le dinamiche di gruppo e scopri chi è il più attivo."
+    },
+    "ctaSectionTitle": "Scopri la tua storia su WhatsApp",
+    "ctaSectionText": "Curioso di sapere con chi hai messaggiato di più quest'anno o qual è il tuo emoji preferito? Scopri curiosità, modelli nascosti e intuizioni interessanti sulle tue chat WhatsApp con un solo clic.",
+    "funFactsTitle": "Curiosità sulle chat WhatsApp",
+    "funFactsIntro": "Sapevi che la persona media invia oltre 42 messaggi al giorno su WhatsApp? O che gli emoji costituiscono oltre il 20% di tutti i messaggi?",
+    "funFactsList": {
+      "longestChat": "🎉 La conversazione di gruppo più lunga è durata oltre 36 ore senza interruzioni!",
+      "topEmoji": "😂 L'emoji più usato di {currentYear}? La faccina che ride con le lacrime di gioia!",
+      "busiestDay": "📅 Il giorno più attivo su WhatsApp dell'anno: la vigilia di Capodanno."
+    },
+    "howToExportTitle": "Come esportare la tua chat WhatsApp",
+    "howToExport": {
+      "iPhoneTitle": "Su iPhone:",
+      "iPhoneStep1": "Apri WhatsApp e vai alla chat o alla chat di gruppo che vuoi esportare.",
+      "iPhoneStep2": "Tocca il nome della chat in alto, scorri verso il basso e seleziona Esporta chat.",
+      "iPhoneStep3": "Scegli Senza Media e salva il file localmente.",
+      "androidTitle": "Su Android:",
+      "androidStep1": "Apri WhatsApp e vai alla chat o alla chat di gruppo che vuoi esportare.",
+      "androidStep2": "Tocca i tre puntini in alto a destra, poi Altro > Esporta chat.",
+      "androidStep3": "Scegli Senza Media e salva il file sul tuo dispositivo."
+    },
+    "testimonial1": "WhatsApp Wrapped mi ha dato una nuova prospettiva sulle mie conversazioni. Sono rimasto sorpreso nel vedere i miei orari più attivi e con chi ho parlato di più. È divertente e perspicace!",
+    "testimonial2": "Ho adorato le statistiche sugli emoji! È un modo divertente per riflettere sulle mie chat e vedere come si sono evolute le mie relazioni durante l'anno."
   }
 }
 </i18n>
@@ -283,7 +319,8 @@ export default {
   },
   methods: {
     goToHome() {
-      this.$router.push("/"); // Navigate to the home page
+      const homePath = this.localePath("index"); // Dynamically generate the localized path for the home page
+      this.$router.push(homePath);
     },
   },
 };
@@ -300,7 +337,6 @@ body {
 }
 
 .container {
-  max-width: 800px;
   margin: auto;
   padding: 20px;
 }
@@ -310,7 +346,7 @@ body {
   background: linear-gradient(135deg, #25d366, #128c7e);
   color: white;
   text-align: center;
-  padding: 50px 20px;
+  padding: 20px 20px;
 }
 
 .hero-section h1 {
@@ -330,35 +366,5 @@ body {
 
 .cta-button:hover {
   background: #ddd;
-}
-
-/* Upload Section */
-.upload-box {
-  border: 2px dashed #ccc;
-  text-align: center;
-  padding: 20px;
-  margin: 20px 0;
-}
-
-.upload-box input {
-  display: block;
-  margin: 10px auto;
-  font-size: 1rem;
-}
-
-/* Footer */
-.footer {
-  text-align: center;
-  background: #f4f4f4;
-  padding: 10px 20px;
-}
-
-.footer a {
-  color: #128c7e;
-  text-decoration: none;
-}
-
-.footer a:hover {
-  text-decoration: underline;
 }
 </style>

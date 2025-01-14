@@ -110,7 +110,13 @@ export class Chat {
     return hours;
   }
 
-  constructor(chatObject = [], groupAfter = 9, maxWordsWordCloud = 150) {
+  // please help with maxWordsEmojiCloud
+  constructor(
+    chatObject = [],
+    groupAfter = 9,
+    maxWordsWordCloud = 150,
+    maxWordsEmojiCloud = 50000
+  ) {
     // this one is the complete input
     this.chatObject = chatObject;
 
@@ -118,6 +124,8 @@ export class Chat {
     this._groupAfter = groupAfter;
     // max number of words shown in word cloud
     this._maxWordsWordCloud = maxWordsWordCloud;
+    // max number of words shown in emoji cloud
+    this._maxWordsEmojiCloud = maxWordsEmojiCloud;
     // here we remove messages (i.e. system messages)
     this.filterdChatObject = Chat.removeSystemMessages(this.chatObject);
     //number of persons in chat
@@ -444,6 +452,14 @@ export class Chat {
               "_omitted",
               "_weggelassen",
               "_attached",
+              "edited>",
+              "<This",
+              "message",
+              "Missed",
+              "voice",
+              "call.",
+              "Location:",
+              "deleted",
             ].includes(word[0].toLowerCase())
           ) && word[1] > 1
       )
@@ -454,5 +470,10 @@ export class Chat {
 
   getAllWords() {
     return this._allWords.then((x) => x.slice(0, this._maxWordsWordCloud));
+  }
+
+  // New method to extract and count emojis, limited to 1000 emojis
+  getEmojiCloudData() {
+    return this._allWords.then((x) => x.slice(0, this._maxWordsEmojiCloud));
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="foot py-7 additional-height">
     <h3 v-for="post in posts" :key="post.to" class="my-3">
-      <nuxt-link :to="post.name">
+      <nuxt-link :to="localePath(post.name)">
         {{ $t(post.text) }}
       </nuxt-link>
     </h3>
@@ -38,11 +38,11 @@
 
       <h3 class="mt-5" style="height: 70px">
         &copy; {{ new Date().getFullYear() }} -
-        <nuxt-link to="/about">About</nuxt-link>
+        <nuxt-link :to="localePath('/about')">About</nuxt-link>
         -
-        <nuxt-link to="/impressum">Imprint</nuxt-link>
+        <nuxt-link :to="localePath('/impressum')">Imprint</nuxt-link>
         -
-        <nuxt-link to="/subscribe">Subscriptions</nuxt-link>
+        <nuxt-link :to="localePath('/subscribe')">Subscriptions</nuxt-link>
       </h3>
     </v-container>
   </div>
