@@ -46,6 +46,12 @@ export default {
           flag: "🇫🇷",
           iso: "fr-FR",
         },
+        {
+          code: "it",
+          name: "Italiano",
+          flag: "🇮🇹",
+          iso: "it-IT",
+        },
       ],
     };
   },

@@ -1,9 +1,9 @@
 export const messages = {
   en: {
     subscription: {
-      "title": "Subscription",
-      "cta": "Get a subscription now. Unlimited analytics. Great Fun.",
-      "button": "Buy monthly subscription for 10€"
+      title: "Subscription",
+      cta: "Get a subscription now. Unlimited analytics. Great Fun.",
+      button: "Buy monthly subscription for 10€",
     },
     titleGoogle: "WhatsAnalyze - The WhatsApp Chat Analyzer",
     metaDescription:
@@ -98,33 +98,33 @@ export const messages = {
     howToGroupLong:
       "Exporting your WhatsApp group chat works like a normal chat. Open up\n" +
       "          Whatsapp with the device that you are logged in with. Go to the chat\n" +
-      "          and tap on \"More\" and then Export chat. You can now choose to export\n" +
+      '          and tap on "More" and then Export chat. You can now choose to export\n' +
       "          the chat with or without Media.",
 
     howToArchiveiOS: "How to Archive all Whatsapp chats on iOS",
     howToArchiveiOSLong:
       "On iOS you can Archive your WhatsApp chats by opening WhatsApp then\n" +
-      "          tap on \"Settings\" in the Navigation bar. Tap on chats and then Archive\n" +
+      '          tap on "Settings" in the Navigation bar. Tap on chats and then Archive\n' +
       "          All Chats.",
 
     howToArchiveAndroid: "How to Archive all Whatsapp chats on Android",
     howToArchiveAndroidLong:
       "On Android open WhatsApp then tap on the three-dot icon at the top\n" +
-      "          right corner. Tap on \"Settings\" and then \"Chats\". On the new View tap\n" +
-      "          \"Chat history\" and \"Archive all chats\".",
+      '          right corner. Tap on "Settings" and then "Chats". On the new View tap\n' +
+      '          "Chat history" and "Archive all chats".',
 
     howToBackupiOS: "How to Backup Whatsapp chat on iOS including iOS 14",
     howToBackupiOSLong:
       "By backing up your WhatsApp chat on your iPhone you can load your\n" +
-      "          account to a new device easily. Open WhatsApp, tap on \"Settings\" at\n" +
-      "          the bottom-right corner. Then tap on \"Chats\" and \"Chat Backup\" next\n" +
-      "          press \"Back Up Now\"",
+      '          account to a new device easily. Open WhatsApp, tap on "Settings" at\n' +
+      '          the bottom-right corner. Then tap on "Chats" and "Chat Backup" next\n' +
+      '          press "Back Up Now"',
 
     howToBackupAndroid: "How to Backup Whatsapp chat on Android",
     howToBackupAndroidLong:
       "To Backup Whatsapp chat on your Android device, tap on the three-dots\n" +
-      "          at the top-right of your screen. Tap on \"Settings and then on \"Chats\".\n" +
-      "          Next press on \"Chat backup\" and on the next screen \"Back Up\" Button",
+      '          at the top-right of your screen. Tap on "Settings and then on "Chats".\n' +
+      '          Next press on "Chat backup" and on the next screen "Back Up" Button',
 
     howToTransferSignal: "How to transfer Whatsapp Group Chats to Signal\n",
     howToTransferSignalLong:
@@ -147,7 +147,7 @@ export const messages = {
     fileDrop: "Drop file now!",
     fileDone: "<strong>Done!</strong> Look at your analysis below.",
     fileSuccess: "<strong>Drag</strong> or <strong>select</strong>",
-    fileSelect: "<strong style=\"text-decoration: underline\">Select </strong>",
+    fileSelect: '<strong style="text-decoration: underline">Select </strong>',
     fileAnother: "another file to analyze it.",
     fileZip: "your WhatsApp .zip or .txt file into this box.",
     fileProcessing: "<strong>Processing</strong> your file...",
@@ -160,14 +160,14 @@ export const messages = {
     groupChat:
       "Select the number of participants to show individual.All others are grouped together.",
     groupInfo:
-      "If you select \"2\", only the two people with the most messages are shown\n" +
-      "        individually. Others are grouped as \"Others\"",
+      'If you select "2", only the two people with the most messages are shown\n' +
+      '        individually. Others are grouped as "Others"',
     infoPriv:
       "This project is <b>open-source</b> and all code is <b>public</b> on\n" +
       "      <b>github</b>. <a\n" +
-      "        class=\"black--text\"\n" +
-      "        target=\"_blank\"\n" +
-      "        href=\"https://github.com/SpiritFour/whatsanalyze\"\n" +
+      '        class="black--text"\n' +
+      '        target="_blank"\n' +
+      '        href="https://github.com/SpiritFour/whatsanalyze"\n' +
       "      >\n" +
       "        Check it yourself.\n" +
       "      </a>",
@@ -204,53 +204,66 @@ export const messages = {
     downloadResults: "Download Results",
     lookingFor: "Looking for",
     pdfDownload: "PDF download",
-    "loadingMedia": "Loading your <span>images</span>, <span>videos</span> and <span>documents</span>",
-    "downloadFreePreviewPDF": "Download <b>free preview</b> PDF",
-    "downloadFullChatPDF": "Download <b>full chat</b> PDF",
-    "popupTitle": "<span>Nice!!</span>",
-    "popupSubtitle": "You are just a step away from your PDF!",
-    "popupInfo": "<b>Supporting us</b> keeps the 💻 running 🎉",
-    "downloadNow": "Download now",
-    "subscriptionHint": "You can also get a <span>subscription</span> for unlimited PDFs here",
-    "openSubscriptionPage": "Open <span>Subscription Page</span>",
-    "closeButton": "Close",
-    "pricingTitle": "Choose Your Plan",
-    "pricingSubtitle": "Select a plan that fits your needs.",
-    "freeTierTitle": "Free Tier",
-    "freeTierDescription": "Limited results and one-time preview download.",
-    "chooseFreeTier": "Choose Free",
-    "oneTimeTitle": "One-Time Payment",
-    "oneTimeDescription": "Download a full PDF report of your chat. For just 7,99 Euro.",
-    "oneTimePrice": "€9,99",
-    "chooseOneTime": "Buy Now",
-    "subscriptionTitle": "Monthly Subscription",
-    "subscriptionDescription": "Access unlimited results and updates every month. First month for €4,99, then €9,99 per month.",
-    "subscriptionPriceFirstMonth": "€4,99 First Month",
-    "subscriptionPriceAfter": "€9,99/month",
-    "chooseSubscription": "Subscribe Now",
-    "then": "then",
-    "pageNameWrapped": "WhatsApp Wrapped your personalized WhatsApp Year Review",
-    "heroTitle": "WhatsApp Wrapped {currentYear}",
-    "heroSubtitle": "Your WhatsApp year, wrapped up in stunning insights! Discover your top chat buddies, most active times, and fun facts about your conversations.",
-    "analyzeSafely": "Analyze your chats safely: All processing happens locally in your browser—your data never leaves your device.",
-    "ctaButton": "Get Started",
-    "featuresTitle": "What’s in Your WhatsApp Wrapped?",
-    "featuresList": {
-      "topChatters": "📊 Top Chatters: See who you talked to the most this year.",
-      "peakTimes": "⏰ Peak Times: Discover when you're most active.",
-      "mostUsedEmojis": "😂 Most Used Emojis: Find out which emojis you just can't stop using.",
-      "messageInsights": "💬 Message Insights: View message counts, word counts, and patterns over time.",
-      "groupChats": "👥 Group Chats: Dive into group dynamics and uncover who's most vocal."
+    loadingMedia:
+      "Loading your <span>images</span>, <span>videos</span> and <span>documents</span>",
+    downloadFreePreviewPDF: "Download <b>free preview</b> PDF",
+    downloadFullChatPDF: "Download <b>full chat</b> PDF",
+    popupTitle: "<span>Nice!!</span>",
+    popupSubtitle: "You are just a step away from your PDF!",
+    popupInfo: "<b>Supporting us</b> keeps the 💻 running 🎉",
+    downloadNow: "Download now",
+    subscriptionHint:
+      "You can also get a <span>subscription</span> for unlimited PDFs here",
+    openSubscriptionPage: "Open <span>Subscription Page</span>",
+    closeButton: "Close",
+    pricingTitle: "Choose Your Plan",
+    pricingSubtitle: "Select a plan that fits your needs.",
+    freeTierTitle: "Free Tier",
+    freeTierDescription: "Limited results and one-time preview download.",
+    chooseFreeTier: "Choose Free",
+    oneTimeTitle: "One-Time Payment",
+    oneTimeDescription:
+      "Download a full PDF report of your chat. For just 7,99 Euro.",
+    oneTimePrice: "€9,99",
+    chooseOneTime: "Buy Now",
+    subscriptionTitle: "Monthly Subscription",
+    subscriptionDescription:
+      "Access unlimited results and updates every month. First month for €4,99, then €9,99 per month.",
+    subscriptionPriceFirstMonth: "€4,99 First Month",
+    subscriptionPriceAfter: "€9,99/month",
+    chooseSubscription: "Subscribe Now",
+    then: "then",
+    pageNameWrapped: "WhatsApp Wrapped your personalized WhatsApp Year Review",
+    heroTitle: "WhatsApp Wrapped {currentYear}",
+    heroSubtitle:
+      "Your WhatsApp year, wrapped up in stunning insights! Discover your top chat buddies, most active times, and fun facts about your conversations.",
+    analyzeSafely:
+      "Analyze your chats safely: All processing happens locally in your browser—your data never leaves your device.",
+    ctaButton: "Get Started",
+    featuresTitle: "What’s in Your WhatsApp Wrapped?",
+    featuresList: {
+      topChatters: "📊 Top Chatters: See who you talked to the most this year.",
+      peakTimes: "⏰ Peak Times: Discover when you're most active.",
+      mostUsedEmojis:
+        "😂 Most Used Emojis: Find out which emojis you just can't stop using.",
+      messageInsights:
+        "💬 Message Insights: View message counts, word counts, and patterns over time.",
+      groupChats:
+        "👥 Group Chats: Dive into group dynamics and uncover who's most vocal.",
     },
-    "ctaSectionTitle": "Discover Your WhatsApp Story",
-    "ctaSectionText": "Curious about who you’ve messaged the most this year or what your top emoji is? Uncover fun facts, hidden patterns, and engaging insights about your WhatsApp chats with just a click.",
-    "funFactsTitle": "Fun Facts About WhatsApp Chats",
-    "funFactsIntro": "Did you know that the average person sends over 42 messages a day on WhatsApp? Or that emojis make up over 20% of all messages?",
-    "funFactsList": {
-      "longestChat": "🎉 Longest group chat conversation lasted over 36 hours nonstop!",
-      "topEmoji": "😂 Most used emoji of {currentYear}? The laughing face with tears of joy!",
-      "busiestDay": "📅 The busiest WhatsApp day of the year: New Year's Eve."
-    }
+    ctaSectionTitle: "Discover Your WhatsApp Story",
+    ctaSectionText:
+      "Curious about who you’ve messaged the most this year or what your top emoji is? Uncover fun facts, hidden patterns, and engaging insights about your WhatsApp chats with just a click.",
+    funFactsTitle: "Fun Facts About WhatsApp Chats",
+    funFactsIntro:
+      "Did you know that the average person sends over 42 messages a day on WhatsApp? Or that emojis make up over 20% of all messages?",
+    funFactsList: {
+      longestChat:
+        "🎉 Longest group chat conversation lasted over 36 hours nonstop!",
+      topEmoji:
+        "😂 Most used emoji of {currentYear}? The laughing face with tears of joy!",
+      busiestDay: "📅 The busiest WhatsApp day of the year: New Year's Eve.",
+    },
   },
   de: {
     titleGoogle: "WhatsAnalyze - The WhatsApp Chat Analyzer",
@@ -341,30 +354,30 @@ export const messages = {
     howToGroupLong:
       "Das Exportieren deines WhatsApp-Gruppenchats funktioniert wie ein normaler Chat. Öffne up\n" +
       "          Whatsapp mit dem Gerä. Gehe auf den Chat\n" +
-      " und tippe auf \"Mehr\" und dann auf \"Chat exportieren\". Du können nun wählen, ob Du\n\" + \" den Chat mit oder ohne Medien exportieren mötest.",
+      ' und tippe auf "Mehr" und dann auf "Chat exportieren". Du können nun wählen, ob Du\n" + " den Chat mit oder ohne Medien exportieren mötest.',
     howToArchiveiOS: "So archivierst alle Whatsapp-Chats auf iOS",
     howToArchiveiOSLong:
       "Auf iOS kannst du Deine WhatsApp-Chats archivieren, indem Du WhatsApp öffnest und" +
-      " in der Navigationsleiste auf \"Einstellungen\" tippen. Tippe auf Chats und dann auf Archivieren\n" +
+      ' in der Navigationsleiste auf "Einstellungen" tippen. Tippe auf Chats und dann auf Archivieren\n' +
       "          Alle Chats.",
     howToArchiveAndroid: "So archivierst alle Whatsapp-Chats auf Android",
     howToArchiveAndroidLong:
       "Öffne unter Android WhatsApp und tippe dann auf das Drei-Punkte-Symbol in der oberen\n" +
-      " in der rechten Ecke. Tippe auf \"Einstellungen\" und dann auf \"Chats\". In der neuen Ansicht tippe auf\n" +
-      " \"Chatverlauf\" und \"Alle Chats archivieren\".",
+      ' in der rechten Ecke. Tippe auf "Einstellungen" und dann auf "Chats". In der neuen Ansicht tippe auf\n' +
+      ' "Chatverlauf" und "Alle Chats archivieren".',
 
     howToBackupiOS: "So sichernst Whatsapp-Chats auf iOS einschließlich iOS 14",
 
     howToBackupiOSLong:
       "Indem Du deinen WhatsApp-Chat auf deinem iPhone sicherst, kannst du deinen" +
-      " Account einfach auf ein neues Gerät übertragen. Öffnen WhatsApp, tippe auf \"Einstellungen\" in\n" +
-      " in der rechten unteren Ecke. Tippe dann auf \"Chats\" und \"Chat-Backup\" neben\n" +
-      " drücke auf \"Jetzt sichern\"",
+      ' Account einfach auf ein neues Gerät übertragen. Öffnen WhatsApp, tippe auf "Einstellungen" in\n' +
+      ' in der rechten unteren Ecke. Tippe dann auf "Chats" und "Chat-Backup" neben\n' +
+      ' drücke auf "Jetzt sichern"',
     howToBackupAndroid: "How to Backup Whatsapp chat on Android",
     howToBackupAndroidLong:
       "Um den Whatsapp-Chat auf deinem Android-Gerät zu sichern, tippe auf die drei Punkte\n" +
-      " oben rechts auf deinem Bildschirm. Tippe auf \"Einstellungen\" und dann auf \"Chats\".\n" +
-      " Tippe anschließend auf \"Chat-Backup\" und auf dem nächsten Bildschirm auf die Schaltfläche \"Backup\"",
+      ' oben rechts auf deinem Bildschirm. Tippe auf "Einstellungen" und dann auf "Chats".\n' +
+      ' Tippe anschließend auf "Chat-Backup" und auf dem nächsten Bildschirm auf die Schaltfläche "Backup"',
     howToTransferSignal: "Wie übertrage ich Whatsapp-Gruppenchats auf Signal\n",
     howToTransferSignalLong:
       "Erstelle eine Gruppe in Signal mit deinen Whatsapp-Kontakten, klicke nun auf die\n" +
@@ -384,7 +397,7 @@ export const messages = {
     fileDrop: "Datei jetzt ablegen!",
     fileDone: "<strong>Fertig!</strong> Schaue dir deine Analyse unten an.",
     fileSuccess: "<strong>Ziehen</strong> oder <strong>Auswählen</strong>",
-    fileSelect: "<strong style=\"text-decoration: underline\">Auswahl</strong>",
+    fileSelect: '<strong style="text-decoration: underline">Auswahl</strong>',
     fileAnother: "eine andere Datei, um sie zu analysieren.",
     fileZip: "deine WhatsApp-.zip- oder .txt-Datei in dieses Feld.",
     fileProcessing: "<strong>Verarbeitung</strong> deiner Datei...",
@@ -399,16 +412,16 @@ export const messages = {
     groupChat:
       "Wähle die Anzahl der Teilnehmer aus, die einzeln angezeigt werden sollen. Alle anderen werden in einer Gruppe zusammengefasst.",
     groupInfo:
-      "Wenn Du \"2\" wählst, werden nur die beiden Personen mit den meisten Nachrichten angezeigt" +
-      " einzeln. Die anderen werden als \"Andere\" gruppiert.",
+      'Wenn Du "2" wählst, werden nur die beiden Personen mit den meisten Nachrichten angezeigt' +
+      ' einzeln. Die anderen werden als "Andere" gruppiert.',
     infoSec:
       '<b>Keine</b> Chat-<b>Daten</b> werden an einen Server gesendet. Alles wird <b>lokal</b> in Ihrem Browser ausgeführt, um die Privatsphäre zu gewährleisten. <a href="#faq-privacy" class="black--text">Weitere Informationen zum Datenschutz.</a>',
     infoPriv:
       "Dieses Projekt ist <b>open-source</b> und der gesamte Code ist <b>öffentlich</b> auf\n" +
       "      <b>github</b>. <a\n" +
-      " class=\"black--text\"\n" +
-      " target=\"_blank\"\n" +
-      " href=\"https://github.com/SpiritFour/whatsanalyze\"\n" +
+      ' class="black--text"\n' +
+      ' target="_blank"\n' +
+      ' href="https://github.com/SpiritFour/whatsanalyze"\n' +
       "      >\n" +
       "        Überprüfen es selbst.\n" +
       "      </a>",
@@ -441,36 +454,44 @@ export const messages = {
     weekday: "Wochentag",
     wordCloud: "Wortwolke",
     downloadAllGraphs: "Alle Graphen auf einmal herunterladen!",
-    shareWithFriends: "Teilen es mit Deinen Freunden. Kostenlos nur für Dich ❤️️",
+    shareWithFriends:
+      "Teilen es mit Deinen Freunden. Kostenlos nur für Dich ❤️️",
     downloadResults: "Ergebnisse herunterladen",
     lookingFor: "Suche nach",
     pdfDownload: "PDF-Download",
-    loadingMedia: "Wir laden deine <span>Bilder</span>, <span>Videos</span> und <span>Dokumente</span>",
+    loadingMedia:
+      "Wir laden deine <span>Bilder</span>, <span>Videos</span> und <span>Dokumente</span>",
     downloadFreePreviewPDF: "Kostenlose <b>PDF-Vorschau</b> herunterladen",
     downloadFullChatPDF: "<b>Vollständiges</b> Chat-PDF herunterladen",
     popupTitle: "<span>Toll!!</span>",
     popupSubtitle: "Sie sind nur einen Schritt von Ihrem PDF entfernt!",
-    popupInfo: "<b>Indem Sie uns unterstützen</b>, bleibt der Rechner am Laufen 🎉",
+    popupInfo:
+      "<b>Indem Sie uns unterstützen</b>, bleibt der Rechner am Laufen 🎉",
     downloadNow: "Jetzt herunterladen",
-    subscriptionHint: "Sie können hier auch ein <span>Abo</span> für unbegrenzte PDF-Downloads abschließen",
+    subscriptionHint:
+      "Sie können hier auch ein <span>Abo</span> für unbegrenzte PDF-Downloads abschließen",
     openSubscriptionPage: "<span>Aboseite</span> öffnen",
     closeButton: "Schließen",
     pricingTitle: "Wählen Sie Ihren Plan",
-    pricingSubtitle: "Wählen Sie einen Plan, der Ihren Bedürfnissen entspricht.",
+    pricingSubtitle:
+      "Wählen Sie einen Plan, der Ihren Bedürfnissen entspricht.",
     freeTierTitle: "Kostenlose Stufe",
-    freeTierDescription: "Begrenzte Ergebnisse und einmaliger Vorschau-Download.",
+    freeTierDescription:
+      "Begrenzte Ergebnisse und einmaliger Vorschau-Download.",
     chooseFreeTier: "Kostenlos auswählen",
     oneTimeTitle: "Einmalige Zahlung",
-    oneTimeDescription: "Laden Sie einen vollständigen PDF-Bericht Ihres Chats herunter. Für nur 7,99 Euro.",
+    oneTimeDescription:
+      "Laden Sie einen vollständigen PDF-Bericht Ihres Chats herunter. Für nur 7,99 Euro.",
     oneTimePrice: "€9,99",
     chooseOneTime: "Jetzt kaufen",
     subscriptionTitle: "Monatliches Abonnement",
-    subscriptionDescription: "Greifen Sie jeden Monat auf unbegrenzte Ergebnisse und Updates zu. Der erste Monat kostet 4,99 €, danach 9,99 € pro Monat.",
+    subscriptionDescription:
+      "Greifen Sie jeden Monat auf unbegrenzte Ergebnisse und Updates zu. Der erste Monat kostet 4,99 €, danach 9,99 € pro Monat.",
     subscriptionPriceFirstMonth: "4,99 € im ersten Monat",
     subscriptionPriceAfter: "9,99 €/Monat",
     chooseSubscription: "Jetzt abonnieren",
     then: "dann",
-},
+  },
   es: {
     titleGoogle: "WhatsAnalyze - El analizador de chat de WhatsApp",
     metaDescription:
@@ -559,28 +580,28 @@ export const messages = {
     howToGroupLong:
       "Exportar tu chat grupal de WhatsApp funciona como un chat normal. Abre\n" +
       "          Whatsapp con el dispositivo con el que estás conectado. ir al chat\n" +
-      "          y toca \"Más\" y luego Exportar chat. Ahora puede elegir exportar\n" +
+      '          y toca "Más" y luego Exportar chat. Ahora puede elegir exportar\n' +
       "          el chat con o sin medios.",
 
     howToArchiveiOS: "Cómo archivar todos los chats de Whatsapp en iOS",
     howToArchiveiOSLong:
       "En iOS, puede archivar sus chats de WhatsApp abriendo WhatsApp y luego\n" +
-      "          toque \"Configuración\" en la barra de navegación. Toque chats y luego Archivar\n" +
+      '          toque "Configuración" en la barra de navegación. Toque chats y luego Archivar\n' +
       "          Todos los chats.",
 
     howToArchiveAndroid: "Cómo archivar todos los chats de Whatsapp en Android",
     howToArchiveAndroidLong:
       "En Android, abra WhatsApp y luego toque el ícono de tres puntos en la parte superior\n" +
-      "          esquina derecha. Toca \"Configuración\" y luego \"Chats\". En el nuevo toque Ver\n" +
-      "          \"Historial de chat\" y \"Archivar todos los chats\".",
+      '          esquina derecha. Toca "Configuración" y luego "Chats". En el nuevo toque Ver\n' +
+      '          "Historial de chat" y "Archivar todos los chats".',
 
     howToBackupiOS:
       "Cómo hacer una copia de seguridad del chat de Whatsapp en iOS, incluido iOS 14",
     howToBackupiOSLong:
       "Al hacer una copia de seguridad de su chat de WhatsApp en su iPhone, puede cargar su\n" +
-      "          cuenta a un nuevo dispositivo fácilmente. Abra WhatsApp, toque \"Configuración\" en\n" +
-      "          la esquina inferior derecha. Luego toque \"Chats\" y \"Chat Backup\" a continuación\n" +
-      "          presione \"Hacer copia de seguridad ahora\"",
+      '          cuenta a un nuevo dispositivo fácilmente. Abra WhatsApp, toque "Configuración" en\n' +
+      '          la esquina inferior derecha. Luego toque "Chats" y "Chat Backup" a continuación\n' +
+      '          presione "Hacer copia de seguridad ahora"',
 
     howToBackupAndroid:
       "Cómo hacer una copia de seguridad del chat de Whatsapp en Android",
@@ -611,7 +632,7 @@ export const messages = {
       "<strong>Done!</strong> <br />\n" +
       "            Mira tu análisis a continuación.",
     fileSuccess: "<strong>Drag</strong> or <strong>select</strong>",
-    fileSelect: "<strong style=\"text-decoration: underline\">Select </strong>",
+    fileSelect: '<strong style="text-decoration: underline">Select </strong>',
     fileAnother: "otro archivo para analizarlo.",
     fileZip: "su archivo .zip o .txt de WhatsApp en este cuadro.",
     fileProcessing: "<strong>Procesando</strong> tu archivo...",
@@ -627,16 +648,16 @@ export const messages = {
     groupChat:
       "Seleccione el número de participantes para mostrar individualmente. Todos los demás se agrupan.",
     groupInfo:
-      "Si selecciona \"2\", solo se muestran las dos personas con más mensajes\n" +
-      "        individualmente. Otros se agrupan como \"Otros\"",
+      'Si selecciona "2", solo se muestran las dos personas con más mensajes\n' +
+      '        individualmente. Otros se agrupan como "Otros"',
     infoSec:
       '<b>No</b> se envían <b>datos</b> del chat a ningún servidor. Todo se ejecuta <b>localmente</b> en tu navegador para garantizar la privacidad. <a href="#faq-privacy" class="black--text">Lee más sobre la privacidad.</a>',
     infoPriv:
       "Este proyecto es de <b>código abierto</b> y todo el código es <b>público</b> en\n" +
       "      <b>github</b>. <a\n" +
-      "        class=\"black--text\"\n" +
-      "        target=\"_blank\"\n" +
-      "        href=\"https://github.com/SpiritFour/whatsanalyze\"\n" +
+      '        class="black--text"\n' +
+      '        target="_blank"\n' +
+      '        href="https://github.com/SpiritFour/whatsanalyze"\n' +
       "      >\n" +
       "        Compruébelo usted mismo.\n" +
       "      </a>",
@@ -670,27 +691,32 @@ export const messages = {
     downloadResults: "Descargar resultados",
     lookingFor: "Buscando",
     pdfDownload: "Descarga de PDF",
-    loadingMedia: "Cargando tus <span>imágenes</span>, <span>videos</span> y <span>documentos</span>",
+    loadingMedia:
+      "Cargando tus <span>imágenes</span>, <span>videos</span> y <span>documentos</span>",
     downloadFreePreviewPDF: "Descargar <b>vista previa gratuita</b> del PDF",
     downloadFullChatPDF: "Descargar <b>PDF completo</b> del chat",
     popupTitle: "<span>¡Genial!</span>",
     popupSubtitle: "¡Estás a un paso de tu PDF!",
     popupInfo: "<b>Apoyarnos</b> mantiene la 💻 funcionando 🎉",
     downloadNow: "Descargar ahora",
-    subscriptionHint: "También puedes obtener una <span>suscripción</span> para descargas ilimitadas de PDFs aquí",
+    subscriptionHint:
+      "También puedes obtener una <span>suscripción</span> para descargas ilimitadas de PDFs aquí",
     openSubscriptionPage: "Abrir <span>página de suscripción</span>",
     closeButton: "Cerrar",
     pricingTitle: "Elige tu plan",
     pricingSubtitle: "Selecciona un plan que se adapte a tus necesidades.",
     freeTierTitle: "Nivel Gratuito",
-    freeTierDescription: "Resultados limitados y descarga de vista previa única.",
+    freeTierDescription:
+      "Resultados limitados y descarga de vista previa única.",
     chooseFreeTier: "Elige Gratis",
     oneTimeTitle: "Pago Único",
-    oneTimeDescription: "Descarga un informe PDF completo de tu chat. Por solo 7,99 euros.",
+    oneTimeDescription:
+      "Descarga un informe PDF completo de tu chat. Por solo 7,99 euros.",
     oneTimePrice: "€9,99",
     chooseOneTime: "Comprar ahora",
     subscriptionTitle: "Suscripción Mensual",
-    subscriptionDescription: "Accede a resultados ilimitados y actualizaciones cada mes. El primer mes por 4,99 €, luego 9,99 € al mes.",
+    subscriptionDescription:
+      "Accede a resultados ilimitados y actualizaciones cada mes. El primer mes por 4,99 €, luego 9,99 € al mes.",
     subscriptionPriceFirstMonth: "4,99 € Primer Mes",
     subscriptionPriceAfter: "9,99 €/mes",
     chooseSubscription: "Suscríbete ahora",
@@ -783,30 +809,30 @@ export const messages = {
     howToGroupLong:
       "Exportar seu grupo de chat do WhatsApp funciona como um chat normal. Abra o\n" +
       " Whatsapp com o dispositivo em que você está logado. Vá para o chat\n" +
-      " e toque em \"Mais\" e depois Exportar chat. Agora você pode escolher exportar\n" +
+      ' e toque em "Mais" e depois Exportar chat. Agora você pode escolher exportar\n' +
       " o chat com ou sem Mídia.",
     howToArchiveiOS: "Como Arquivar todos os chats do Whatsapp no iOS",
     howToArchiveiOSLong:
       "No iOS você pode Arquivar seus chats do WhatsApp abrindo o WhatsApp e então\n" +
-      " tocar em \"Configurações\" na barra de navegação. Toque em chats e depois Arquivar\n" +
+      ' tocar em "Configurações" na barra de navegação. Toque em chats e depois Arquivar\n' +
       " Todos os Chats.",
     howToArchiveAndroid: "Como Arquivar todos os chats do Whatsapp no Android",
     howToArchiveAndroidLong:
       "No Android abra o WhatsApp e toque no ícone de três pontos no canto\n" +
-      " superior direito. Toque em \"Configurações\" e depois \"Chats\". Na nova tela toque\n" +
-      " em \"Histórico de chat\" e \"Arquivar todos os chats\".",
+      ' superior direito. Toque em "Configurações" e depois "Chats". Na nova tela toque\n' +
+      ' em "Histórico de chat" e "Arquivar todos os chats".',
     howToBackupiOS:
       "Como fazer Backup do chat do Whatsapp no iOS incluindo o iOS 14",
     howToBackupiOSLong:
       "Ao fazer backup do seu chat do WhatsApp no seu iPhone você pode carregar sua\n" +
-      " conta em um novo dispositivo facilmente. Abra o WhatsApp, toque em \"Configurações\" no\n" +
-      " canto inferior direito. Em seguida, toque em \"Chats\" e \"Backup de Chat\" depois\n" +
-      " pressione \"Fazer Backup Agora\"",
+      ' conta em um novo dispositivo facilmente. Abra o WhatsApp, toque em "Configurações" no\n' +
+      ' canto inferior direito. Em seguida, toque em "Chats" e "Backup de Chat" depois\n' +
+      ' pressione "Fazer Backup Agora"',
     howToBackupAndroid: "Como fazer Backup do chat do Whatsapp no Android",
     howToBackupAndroidLong:
       "Para fazer backup do bate-papo do Whatsapp em seu dispositivo Android, toque no ícone de três pontos" +
-      " no canto superior direito da tela. Toque em \"Configurações\" e depois em \"Chats\".\n" +
-      " Em seguida, pressione o botão \"Chat backup\" e, na tela seguinte, o botão \"Back Up\"",
+      ' no canto superior direito da tela. Toque em "Configurações" e depois em "Chats".\n' +
+      ' Em seguida, pressione o botão "Chat backup" e, na tela seguinte, o botão "Back Up"',
     howToTransferSignal:
       "Como transferir Grupos de Chat do Whatsapp para o Signal\n",
     howToTransferSignalLong:
@@ -829,7 +855,7 @@ export const messages = {
     fileDone: "<strong>Concluído!</strong> Veja sua análise abaixo.",
     fileSuccess: "<strong>Arraste</strong> ou <strong>selecione</strong>",
     fileSelect:
-      "<strong style=\"text-decoration: underline\">Selecione </strong>",
+      '<strong style="text-decoration: underline">Selecione </strong>',
     fileAnother: "outro arquivo para analisá-lo.",
     fileZip: "seu arquivo .zip ou .txt do WhatsApp nesta caixa.",
     fileProcessing: "<strong>Processando</strong> seu arquivo...",
@@ -845,16 +871,16 @@ export const messages = {
     groupChat:
       "Selecione o número de participantes para mostrar individualmente. Todos os outros são agrupados.",
     groupInfo:
-      "Se você selecionar \"2\", apenas as duas pessoas com mais mensagens são mostradas\n" +
-      " individualmente. Outros são agrupados como \"Outros\"",
+      'Se você selecionar "2", apenas as duas pessoas com mais mensagens são mostradas\n' +
+      ' individualmente. Outros são agrupados como "Outros"',
     infoSec:
       '<b>Nenhum</b> dado de <b>chat</b> é enviado a qualquer servidor. Tudo é executado <b>localmente</b> no seu navegador para garantir a privacidade. <a href="#faq-privacy" class="black--text">Leia mais sobre privacidade.</a>',
     infoPriv:
       "Este projeto é <b>open-source</b> e todo o código é <b>público</b> no" +
       "<b>github</b>. <a\n" +
-      " class=\"black--text\"\n" +
-      "target=\"_blank\"\n" +
-      " href=\"https://github.com/SpiritFour/whatsanalyze\"\n" +
+      ' class="black--text"\n' +
+      'target="_blank"\n' +
+      ' href="https://github.com/SpiritFour/whatsanalyze"\n' +
       " >\n" +
       "Confira você mesmo.",
     examplePDF: "Exemplo de PDF de uma exportação de chat:",
@@ -890,31 +916,36 @@ export const messages = {
     downloadResults: "Download Results",
     lookingFor: "Procurando por",
     pdfDownload: "Download de PDF",
-    loadingMedia: "Carregando suas <span>imagens</span>, <span>vídeos</span> e <span>documentos</span>",
+    loadingMedia:
+      "Carregando suas <span>imagens</span>, <span>vídeos</span> e <span>documentos</span>",
     downloadFreePreviewPDF: "Baixar <b>prévia gratuita</b> do PDF",
     downloadFullChatPDF: "Baixar <b>PDF completo</b> do chat",
     popupTitle: "<span>Ótimo!!</span>",
     popupSubtitle: "Você está a um passo do seu PDF!",
     popupInfo: "<b>Ao nos apoiar</b>, você mantém o computador funcionando 🎉",
     downloadNow: "Baixar agora",
-    subscriptionHint: "Você também pode obter uma <span>assinatura</span> para PDFs ilimitados aqui",
+    subscriptionHint:
+      "Você também pode obter uma <span>assinatura</span> para PDFs ilimitados aqui",
     openSubscriptionPage: "Abrir <span>página de assinatura</span>",
     closeButton: "Fechar",
     pricingTitle: "Escolha o Seu Plano",
     pricingSubtitle: "Selecione um plano que atenda às suas necessidades.",
     freeTierTitle: "Plano Gratuito",
-    freeTierDescription: "Resultados limitados e download de pré-visualização único.",
+    freeTierDescription:
+      "Resultados limitados e download de pré-visualização único.",
     chooseFreeTier: "Escolher Gratuito",
     oneTimeTitle: "Pagamento Único",
-    oneTimeDescription: "Baixe um relatório completo em PDF do seu chat. Por apenas 7,99 euros.",
+    oneTimeDescription:
+      "Baixe um relatório completo em PDF do seu chat. Por apenas 7,99 euros.",
     oneTimePrice: "€9,99",
     chooseOneTime: "Comprar Agora",
     subscriptionTitle: "Assinatura Mensal",
-    subscriptionDescription: "Acesse resultados ilimitados e atualizações todos os meses. Primeiro mês por €4,99, depois €9,99 por mês.",
+    subscriptionDescription:
+      "Acesse resultados ilimitados e atualizações todos os meses. Primeiro mês por €4,99, depois €9,99 por mês.",
     subscriptionPriceFirstMonth: "€4,99 Primeiro Mês",
     subscriptionPriceAfter: "€9,99/mês",
     chooseSubscription: "Assinar Agora",
-    then: "depois"
+    then: "depois",
   },
   fr: {
     titleGoogle: "WhatsAnalyze - The WhatsApp Chat Analyzer",
@@ -1006,34 +1037,34 @@ export const messages = {
     howToGroupLong:
       "L'exportation de votre discussion de groupe WhatsApp fonctionne comme une discussion normale. Ouvrir up\n" +
       "          Utilisez Whatsapp avec l'appareil avec lequel vous êtes connecté. Accéder au chat\n" +
-      "          et appuyez sur \"Plus\", puis sur Exporter le chat. Vous pouvez maintenant choisir d'exporter\n" +
+      '          et appuyez sur "Plus", puis sur Exporter le chat. Vous pouvez maintenant choisir d\'exporter\n' +
       "          le chat avec ou sans média.",
 
     howToArchiveiOS: "Comment archiver tous les chats Whatsapp sur iOS ?",
     howToArchiveiOSLong:
       "Sur iOS, vous pouvez archiver vos discussions WhatsApp en ouvrant WhatsApp puis\n" +
-      "          tapez sur \"Paramètres\" dans la barre de navigation. Tapez sur \"Chats\" puis sur \"Archives\".\n" +
+      '          tapez sur "Paramètres" dans la barre de navigation. Tapez sur "Chats" puis sur "Archives".\n' +
       "          tous les Chats.",
 
     howToArchiveAndroid: "Comment archiver tous les chats Whatsapp sur Android",
     howToArchiveAndroidLong:
       "Sur Android, ouvrez WhatsApp puis tapez sur l'icône à trois points en haut.\n" +
-      "          dans le coin droit. Tapez sur \"Paramètres\" puis sur \"Chats\". Dans la nouvelle vue, tapez sur\n" +
-      "          \"Historique des chats\" et \"Archiver tous les chats\".",
+      '          dans le coin droit. Tapez sur "Paramètres" puis sur "Chats". Dans la nouvelle vue, tapez sur\n' +
+      '          "Historique des chats" et "Archiver tous les chats".',
 
     howToBackupiOS:
       "Comment sauvegarder le chat Whatsapp sur iOS, y compris iOS 14 ?",
     howToBackupiOSLong:
       "En sauvegardant votre chat WhatsApp sur votre iPhone, vous pouvez charger votre\n" +
-      "          vers un nouvel appareil. Ouvrez WhatsApp, tapez sur \"Paramètres\" à\n" +
-      "          dans le coin inférieur droit. Tapez ensuite sur \"Chats\" et \"Sauvegarde des chats\"\n" +
-      "          appuyez sur \"Sauvegarder maintenant\"",
+      '          vers un nouvel appareil. Ouvrez WhatsApp, tapez sur "Paramètres" à\n' +
+      '          dans le coin inférieur droit. Tapez ensuite sur "Chats" et "Sauvegarde des chats"\n' +
+      '          appuyez sur "Sauvegarder maintenant"',
 
     howToBackupAndroid: "Comment sauvegarder le chat Whatsapp sur Android",
     howToBackupAndroidLong:
       "Pour sauvegarder le chat Whatsapp sur votre appareil Android, appuyez sur les trois points.\n" +
-      "          en haut à droite de votre écran. Tapez sur \"Paramètres\", puis sur \"Chats\".\n" +
-      "          Appuyez ensuite sur \"Chat backup\" et sur le bouton \"Back Up\" de l'écran suivant.",
+      '          en haut à droite de votre écran. Tapez sur "Paramètres", puis sur "Chats".\n' +
+      '          Appuyez ensuite sur "Chat backup" et sur le bouton "Back Up" de l\'écran suivant.',
 
     howToTransferSignal:
       "Comment transférer des conversations de groupe Whatsapp vers Signal ?\n",
@@ -1059,7 +1090,7 @@ export const messages = {
     fileSuccess:
       "<strong>Faite glisser</strong> ou <strong>selectionner</strong>",
     fileSelect:
-      "<strong style=\"text-decoration: underline\">Selectionner </strong>",
+      '<strong style="text-decoration: underline">Selectionner </strong>',
     fileAnother: "un autre fichier pour l'analyser.",
     fileZip: "votre fichier WhatsApp .zip ou .txt dans cette espace.",
     fileProcessing: "<strong>Analise en cours</strong> de votre fichier...",
@@ -1075,16 +1106,16 @@ export const messages = {
     groupChat:
       "Sélectionnez le nombre de participants à afficher individuellement. Tous les autres sont regroupés.",
     groupInfo:
-      "Si vous sélectionnez \"2\", seules les deux personnes ayant envoyé le plus de messages sont affichées.\n" +
-      "        individuellement. Les autres sont regroupés sous l'appellation \"Autres\"",
+      'Si vous sélectionnez "2", seules les deux personnes ayant envoyé le plus de messages sont affichées.\n' +
+      '        individuellement. Les autres sont regroupés sous l\'appellation "Autres"',
     infoSec:
       '<b>Aucune</b> donnée de <b>chat</b> n’est envoyée à un serveur. Tout fonctionne <b>localement</b> dans votre navigateur pour garantir la confidentialité. <a href="#faq-privacy" class="black--text">En savoir plus sur la confidentialité.</a>',
     infoPriv:
       "C'est un projet <b>open-source</b> et tous le code est <b>public</b> sur\n" +
       "      <b>github</b>. <a\n" +
-      "        class=\"black--text\"\n" +
-      "        target=\"_blank\"\n" +
-      "        href=\"https://github.com/SpiritFour/whatsanalyze\"\n" +
+      '        class="black--text"\n' +
+      '        target="_blank"\n' +
+      '        href="https://github.com/SpiritFour/whatsanalyze"\n' +
       "      >\n" +
       "        Vérifiez vous-même.\n" +
       "      </a>",
@@ -1121,14 +1152,17 @@ export const messages = {
     downloadResults: "Télécharger les résultats",
     lookingFor: "Recherche de",
     pdfDownload: "Téléchargement PDF",
-    loadingMedia: "Chargement de vos <span>images</span>, <span>vidéos</span> et <span>documents</span>",
+    loadingMedia:
+      "Chargement de vos <span>images</span>, <span>vidéos</span> et <span>documents</span>",
     downloadFreePreviewPDF: "Télécharger un <b>aperçu gratuit</b> du PDF",
     downloadFullChatPDF: "Télécharger le <b>PDF complet</b> de la conversation",
     popupTitle: "<span>Génial !!</span>",
     popupSubtitle: "Vous n’êtes plus qu’à un pas de votre PDF !",
-    popupInfo: "<b>En nous soutenant</b>, vous maintenez l’ordinateur en marche 🎉",
+    popupInfo:
+      "<b>En nous soutenant</b>, vous maintenez l’ordinateur en marche 🎉",
     downloadNow: "Télécharger maintenant",
-    subscriptionHint: "Vous pouvez également souscrire un <span>abonnement</span> pour des PDFs illimités ici",
+    subscriptionHint:
+      "Vous pouvez également souscrire un <span>abonnement</span> pour des PDFs illimités ici",
     openSubscriptionPage: "Ouvrir la <span>page d’abonnement</span>",
     closeButton: "Fermer",
     pricingTitle: "Choisissez votre plan",
@@ -1137,14 +1171,248 @@ export const messages = {
     freeTierDescription: "Résultats limités et téléchargement d'aperçu unique.",
     chooseFreeTier: "Choisissez Gratuit",
     oneTimeTitle: "Paiement Unique",
-    oneTimeDescription: "Téléchargez un rapport PDF complet de votre chat. Pour seulement 7,99 euros.",
+    oneTimeDescription:
+      "Téléchargez un rapport PDF complet de votre chat. Pour seulement 7,99 euros.",
     oneTimePrice: "€9,99",
     chooseOneTime: "Acheter maintenant",
     subscriptionTitle: "Abonnement Mensuel",
-    subscriptionDescription: "Accédez à des résultats illimités et des mises à jour chaque mois. Premier mois à 4,99 €, puis 9,99 € par mois.",
+    subscriptionDescription:
+      "Accédez à des résultats illimités et des mises à jour chaque mois. Premier mois à 4,99 €, puis 9,99 € par mois.",
     subscriptionPriceFirstMonth: "4,99 € Premier Mois",
     subscriptionPriceAfter: "9,99 €/mois",
     chooseSubscription: "Abonnez-vous maintenant",
     then: "puis",
-  }
+  },
+  it: {
+    subscription: {
+      title: "Abbonamento",
+      cta: "Abbonati ora. Analisi illimitate. Grande divertimento.",
+      button: "Acquista abbonamento mensile per 10€",
+    },
+    titleGoogle: "WhatsAnalyze - L'Analizzatore di Chat WhatsApp",
+    metaDescription:
+      "Il più popolare analizzatore di WhatsApp ✓ Ora disponibile per chat di gruppo ✓ Rivela il carattere dei tuoi amici ✓ Statistiche gratuite e esportazione chat in PDF. Inizia ora!",
+    metaDescriptionWhatsExport:
+      "Il più popolare analizzatore di WhatsApp ✓ Ora con esportazione chat in PDF ✓ Rivela il carattere dei tuoi amici ✓ Statistiche gratuite. Inizia ora!",
+    metaDescriptionSignal:
+      "Passa da WhatsApp a Signal ✓ Trasferisci le tue chat di gruppo ✓ Crea backup ✓ Statistiche gratuite e esportazione chat in PDF. Inizia ora!",
+    known: "Conosciuto da:",
+    backupWhatsApp: "Fai il backup dei tuoi dati WhatsApp",
+    exportAsPDF: "Salva la tua chat in PDF",
+    convertToPDF: "Converti i tuoi dati WhatsApp esportati in PDF",
+    ctaBullets:
+      "✓ Chat di gruppo ✓ Crea il tuo PDF della chat ✓ Privacy prima di tutto",
+    getFreePDFPreview: "Ottieni un'anteprima PDF gratuita",
+    generateYourChatPDF: "Genera il tuo PDF della chat",
+    getChatBeautiful:
+      "Ottieni la tua chat in un bel PDF con intuizioni sorprendenti e fatti interessanti. Emoji più usati, percentuale di parole, e molto altro ...",
+    analyzeMyChat: "Analizza la mia chat",
+    analyzeYourOwnWhatsapp: "Analizza i tuoi dati WhatsApp",
+    analyzeInSeconds: "Analizza la tua chat WhatsApp in pochi secondi",
+    revealInsights:
+      "<strong>Intuizioni istantanee:</strong> Scopri <b>chi invia</b> il <b>maggior numero di messaggi</b>, vedi i momenti di maggiore attività, e <b>scopri modelli nascosti</b> nella <b>cronologia delle conversazioni dei tuoi amici</b>.",
+    infoSec:
+      "<b>Nessun</b> dato della chat viene inviato a nessun server. Tutto avviene <b>localmente</b> " +
+      "nel tuo browser per garantire la privacy. " +
+      '<a href="#faq-privacy" class="black--text" >' +
+      "  Leggi di più sulla privacy." +
+      "</a>",
+    openSource:
+      "<strong>Open Source:</strong> Questo progetto è <b>open-source</b>, e tutto il codice è <b>pubblico</b> su <b>GitHub</b>. Verifica tu stesso.",
+    interestedAbout:
+      "Interessato ai tuoi dati chat? Fai un'immersione profonda nei tuoi dati!",
+    analyzeYourChat: "Inizia subito",
+    analyzeYourChatTitle:
+      "Esempio di chat - Ora supporta anche le chat di gruppo",
+    analyzeYourChatLong:
+      "Analizza la tua chat, rivela fatti sconosciuti e sorprendi i tuoi amici con intuizioni su anni di conversazioni.",
+    didWeMake: "Ti abbiamo fatto andare 🥳?",
+    buyUsCoffee: "Offrici un ☕️ e ottieni i tuoi risultati gratuitamente!!!",
+    getResults:
+      "Riceverai tutti i risultati come immagine esattamente come presentati sul tuo dispositivo. La generazione potrebbe richiedere del tempo.",
+    headerTextFeaturesTable:
+      "Caratteristiche e soluzioni degli strumenti di esportazione PDF",
+    goToPDF: "Vai al download PDF",
+    downloadPDF: "Scarica la tua chat in PDF",
+    fullChat: "L'intera tua chat",
+    tabItemiOS1:
+      "<span>Su iPhone <b>apri</b> WhatsApp e la <b>chat</b> o <b>chat di gruppo</b> che desideri esportare > in alto <b>tocca</b> il <b>nome</b> della chat.</span>",
+    tabItemiOS2: "<span>Nel dettaglio della chat, scorri fino in fondo.</span>",
+    tabItemiOS3: "<span>Tocca su <b>Esporta chat</b>.</span>",
+    tabItemiOS4: "<span>Scegli <b>senza media</b>.</span>",
+    tabItemiOS5:
+      "<span>Tocca su <b>Salva su File</b> per salvarlo sul tuo iPhone.</span>",
+    tabItemiOS6:
+      "<span>Infine seleziona <b>Sul mio iPhone</b> e <b>salva</b> per salvarlo localmente.</span>",
+    tabItemiOS7:
+      "<span>Alla fine puoi selezionare il tuo file .zip esportato per analizzarlo.</span>",
+    tabItemAndroid1:
+      "<span>Sul tuo telefono Android apri questo sito in <b>Chrome</b> e tocca sul pulsante <b>aggiungi alla schermata principale</b> e premi installa</span>",
+    tabItemAndroid2:
+      "<span>Apri <b>WhatsApp</b> e tocca sulla chat che desideri esportare > tocca sui <b>tre punti</b> in alto a destra.</span>",
+    tabItemAndroid3: "<span>Nel nuovo menu tocca su <b>Altro</b>.</span>",
+    tabItemAndroid4: "<span>Tocca su <b>Esporta chat</b>.</span>",
+    tabItemAndroid5:
+      "<span>Scegli Senza Media o <b>Includi Media</b> se desideri includere le immagini e altri file nell'esportazione.</span>",
+    tabItemAndroid6:
+      "<span>Ora nella vista di condivisione tocca su <b>Whatsanalyze</b> o, in alternativa, se hai saltato il passaggio 1 invialo a te stesso tramite <b>E-Mail</b> o salvalo su <b>Google Drive</b>.</span>",
+    selectFile: "Seleziona file tramite il box sopra",
+    messages: "Messaggi",
+    totalWords: "Totale parole:",
+    mostUsedEmojie: "Emoji più usati:",
+    longestMessage: "Messaggio più lungo:",
+    uniqueWords: "Parole uniche utilizzate:",
+    avgWords: "Media parole per messaggio:",
+    firstMessage: "Primo messaggio",
+    lastMessage: "Ultimo messaggio",
+    youChatted: "Hai chattato per",
+    days: "giorni",
+    youSent: "Hai inviato",
+    faqWhatsapp: "FAQ sulle chat WhatsApp",
+    privacyFAQTitle: "I miei dati chat sono davvero privati?",
+    privacyFAQContent:
+      "Sì, assolutamente. Tutti i processi di chat avvengono localmente nel tuo browser. Nessun dato viene mai inviato a un server. Puoi anche ispezionare il codice open-source su GitHub per verificare.",
+    howToExport: "Come esportare la tua chat WhatsApp",
+    howToExportLong:
+      "Chiunque può facilmente esportare la propria chat WhatsApp o chat di gruppo. Apri\n" +
+      "WhatsApp sul dispositivo con cui sei attualmente connesso > Tocca sulla\n" +
+      "chat > Vai alle impostazioni della chat > Scorri verso il basso e tocca su Esporta chat >\n" +
+      "Scegli di esportare con o senza media.",
+    howToGroup: "Come esportare la chat di gruppo di WhatsApp",
+    howToExportOn: "Come esportare la tua chat su",
+    howToGroupLong:
+      "Esportare la tua chat di gruppo WhatsApp funziona come una chat normale. Apri\n" +
+      "WhatsApp con il dispositivo con cui sei connesso. Vai alla chat\n" +
+      'e tocca su "Altro" e poi su Esporta chat. Ora puoi scegliere di esportare\n' +
+      "la chat con o senza media.",
+    howToArchiveiOS: "Come archiviare tutte le chat di WhatsApp su iOS",
+    howToArchiveiOSLong:
+      "Su iOS puoi archiviare le tue chat WhatsApp aprendo WhatsApp, quindi\n" +
+      'tocca su "Impostazioni" nella barra di navigazione. Tocca su Chat e poi Archivia\n' +
+      "Tutte le Chat.",
+    howToArchiveAndroid: "Come archiviare tutte le chat di WhatsApp su Android",
+    howToArchiveAndroidLong:
+      "Su Android apri WhatsApp quindi tocca sull'icona dei tre puntini in alto\n" +
+      'a destra. Tocca su "Impostazioni" e poi su "Chat". Nella nuova vista tocca\n' +
+      '"Cronologia chat" e "Archivia tutte le chat".',
+    howToBackupiOS:
+      "Come fare il backup della chat di WhatsApp su iOS, incluso iOS 14",
+    howToBackupiOSLong:
+      "Facendo il backup della tua chat WhatsApp sul tuo iPhone puoi caricare il tuo\n" +
+      'account su un nuovo dispositivo facilmente. Apri WhatsApp, tocca su "Impostazioni" in\n' +
+      'basso a destra. Poi tocca su "Chat" e "Backup delle chat", quindi\n' +
+      'premi "Esegui backup adesso".',
+    howToBackupAndroid: "Come fare il backup della chat di WhatsApp su Android",
+    howToBackupAndroidLong:
+      "Per fare il backup della chat di WhatsApp sul tuo dispositivo Android, tocca sui tre puntini\n" +
+      'in alto a destra dello schermo. Tocca su "Impostazioni" e poi su "Chat".\n' +
+      'Successivamente premi su "Backup delle chat" e nella schermata successiva su "Esegui backup".',
+    howToTransferSignal: "Come trasferire le chat di gruppo WhatsApp su Signal",
+    howToTransferSignalLong:
+      "Crea un gruppo in Signal con i tuoi contatti WhatsApp, ora clicca sul\n" +
+      "gruppo o sui tre puntini in alto a destra. Nella vista delle impostazioni tocca\n" +
+      "su link del gruppo e copia il link. Infine vai su WhatsApp e incolla il link\n" +
+      "nella chat del gruppo che desideri migrare.",
+    howToTransferTelegram: "Come trasferire WhatsApp su Telegram",
+    howToTransferTelegramLong:
+      "Apri la chat che vuoi trasferire in WhatsApp e tocca sui tre puntini in alto a destra. Seleziona Esporta chat e nel menu Condividi seleziona Telegram. Puoi scegliere di esportare con o senza media. Puoi ripetere questo passaggio per tutte le chat che desideri trasferire.",
+    howToTransferToIphone: "Come trasferire WhatsApp da Android a iPhone",
+    howToTransferToIphoneLong:
+      "Attualmente non esiste un modo semplice per trasferire le chat tra i sistemi operativi, la soluzione più facile è archiviare le chat che desideri conservare come PDF e iniziare nuove chat.",
+    fileWrong:
+      "<strong>Formato file errato!</strong> <br />\n" +
+      "Carica il file <strong>.txt</strong> o <strong>.zip</strong>\n" +
+      "che ottieni quando esporti la tua chat!",
+    fileDrop: "Trascina ora il file!",
+    fileDone: "<strong>Fatto!</strong> Guarda l'analisi qui sotto.",
+    fileSuccess: "<strong>Trascina</strong> o <strong>seleziona</strong>",
+    fileSelect:
+      '<strong style="text-decoration: underline">Seleziona </strong>',
+    fileAnother: "un altro file per analizzarlo.",
+    fileZip: "il tuo file WhatsApp .zip o .txt in questa casella.",
+    fileProcessing: "<strong>Elaborazione</strong> del tuo file...",
+    love: "Creato con ❤️ da quattro amici.",
+    pageNameSignal: "Come passare da WhatsApp a Signal",
+    pageNameExport: "Come esportare la tua chat WhatsApp",
+    addToHomescreen: "aggiungi alla schermata principale",
+    people: "Persone",
+    changeView: "Cambia punto di vista",
+    groupChat:
+      "Seleziona il numero di partecipanti da mostrare individualmente. Tutti gli altri vengono raggruppati.",
+    groupInfo:
+      'Se selezioni "2", solo le due persone con più messaggi vengono mostrate\n' +
+      'individualmente. Gli altri sono raggruppati come "Altri".',
+    infoPriv:
+      "Questo progetto è <b>open-source</b> e tutto il codice è <b>pubblico</b> su\n" +
+      "<b>github</b>. <a\n" +
+      'class="black--text"\n' +
+      'target="_blank"\n' +
+      'href="https://github.com/SpiritFour/whatsanalyze"\n' +
+      "> Verifica tu stesso.\n" +
+      "</a>",
+    examplePDF: "Esempio di PDF da un'esportazione chat:",
+    haveALook:
+      "Dai un'occhiata a questo grafico della nostra conversazione, generato da whatsanalyze.com.",
+    testimonialHeadline:
+      "Analizza le tue chat e\n" +
+      "<strong> ottieni intuizioni sui dati di prima mano</strong>",
+    jennifer:
+      "Visualizzare la chat dei miei amici ha rivelato molto sulla nostra relazione. Ho sempre pensato di essere io a inviare più messaggi. È davvero bello vedere tutti questi fatti divertenti sulla nostra storia. Continuate così e aggiungete più grafici belli.",
+    lara:
+      "Incredibile vedere un'intera storia di WhatsApp a colpo d'occhio. Ho chat che risalgono a molti anni fa e vedere come la relazione si rifletta nella chat è sorprendente. Amo che i miei file non vengano caricati e che tutto funzioni direttamente nel mio browser.",
+    says: "dice",
+    about: "Chi siamo",
+    aboutPoints:
+      "Siamo un gruppo di <b>amici universitari</b>. Di recente abbiamo tutti abbandonato WhatsApp e volevamo analizzare come si sono evolute le nostre chat nel corso degli anni. <br /> <br /> Essendo <b>studenti di Informatica</b> paranoici che pensano di poter fare tutto meglio, naturalmente abbiamo voluto costruire una soluzione noi stessi, dove <b>nessun dato personale</b> viene condiviso o reso pubblico.",
+    exampleGraphSubtitle1:
+      "John e Jane probabilmente scrivono di più alle 4 di mattina...",
+    exampleGraphSubtitle2:
+      "...e John scrive un po' di più in generale rispetto a Jane.",
+    waitingForPDF:
+      "La generazione del PDF può richiedere un po' di tempo, a volte fino a 10 minuti, a seconda del tuo dispositivo. Per favore, sii paziente.",
+    chatTimeline: "Cronologia chat",
+    messagesPerDay: "Messaggi al giorno",
+    messagesPer: "Messaggi per",
+    person: "Persona",
+    timeOfDay: "Ora del giorno",
+    month: "Mese",
+    weekday: "Giorno della settimana",
+    wordCloud: "Nuvola di parole",
+    downloadAllGraphs: "Scarica tutti i grafici in una volta!",
+    shareWithFriends:
+      "Condividili con i tuoi amici, tutto gratis solo per te ❤️️",
+    downloadResults: "Scarica i risultati",
+    lookingFor: "Cercando",
+    pdfDownload: "Download PDF",
+    loadingMedia:
+      "Caricamento dei tuoi <span>immagini</span>, <span>video</span> e <span>documenti</span>",
+    downloadFreePreviewPDF: "Scarica <b>anteprima gratuita</b> PDF",
+    downloadFullChatPDF: "Scarica <b>l'intera chat</b> in PDF",
+    popupTitle: "<span>Fantastico!!</span>",
+    popupSubtitle: "Sei a un passo dal tuo PDF!",
+    popupInfo: "<b>Supportarci</b> mantiene il 💻 funzionante 🎉",
+    downloadNow: "Scarica ora",
+    subscriptionHint:
+      "Puoi anche ottenere un <span>abbonamento</span> per PDF illimitati qui",
+    openSubscriptionPage: "Apri la <span>pagina di abbonamento</span>",
+    closeButton: "Chiudi",
+    pricingTitle: "Scegli il tuo piano",
+    pricingSubtitle: "Seleziona un piano adatto alle tue esigenze.",
+    freeTierTitle: "Piano gratuito",
+    freeTierDescription:
+      "Risultati limitati e un download anteprima una tantum.",
+    chooseFreeTier: "Scegli il gratuito",
+    oneTimeTitle: "Pagamento una tantum",
+    oneTimeDescription:
+      "Scarica un rapporto completo in PDF della tua chat. Solo per 7,99 Euro.",
+    oneTimePrice: "€9,99",
+    chooseOneTime: "Acquista ora",
+    subscriptionTitle: "Abbonamento mensile",
+    subscriptionDescription:
+      "Accedi a risultati illimitati e aggiornamenti ogni mese. Primo mese a €4,99, poi €9,99 al mese.",
+    subscriptionPriceFirstMonth: "€4,99 Primo mese",
+    subscriptionPriceAfter: "€9,99/mese",
+    chooseSubscription: "Abbonati ora",
+    then: "poi",
+  },
 };
