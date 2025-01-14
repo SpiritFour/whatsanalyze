@@ -18,7 +18,8 @@
 </template>
 
 <script>
-import { Chat } from "~/functions/transformChatData";
+import { Chat } from "~/utils/transformChatData";
+import { withoutEmoji } from "emoji-aware";
 
 import stopwords from "stopwords-de";
 
@@ -50,6 +51,17 @@ export default {
       additionalExcludes: "",
     };
   },
+  methods: {
+    updateGraph() {
+      this.chartdata.getAllWords().then((words) => {
+        const wordData = words.filter((wordObj) => {
+          // Remove Emojis
+          return withoutEmoji(wordObj.word).length > 0;
+        });
+        this.series.data = wordData
+      });
+    },
+  },
   watch: {
     chartdata: {
       handler() {
@@ -73,7 +85,8 @@ export default {
     this.series.dataFields.word = "word";
     this.series.dataFields.value = "freq";
     this.series.labels.template.tooltipText = "[bold]{freq}[/] x {word}";
-    this.series.accuracy = 5;
+    this.series.accuracy = 4;
+    this.series.minFontSize = 8;
     this.updateGraph();
   },
   beforeDestroy: function () {
