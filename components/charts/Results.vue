@@ -89,6 +89,7 @@
         :chat="chat"
         data-html2canvas-ignore
         remove-height-in-html2-canvas
+        :is-valid-subscription="isValidSubscription"
       />
 
       <ChatVisualization
@@ -97,6 +98,7 @@
         :chat="chat"
         :attachments="attachments"
         :results="this"
+        :is-valid-subscription="isValidSubscription"
       />
 
       <GlobalFooter class="only-visible-to-html2canvas" />
@@ -106,6 +108,6 @@
 
 <script>
 export default {
-  props: ["chat", "attachments"],
+  props: ["chat", "attachments", "isValidSubscription"],
 };
 </script>

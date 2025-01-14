@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { Chat } from "~/functions/transformChatData";
+import { Chat } from "~/utils/transformChatData";
 import { withoutEmoji } from "emoji-aware";
 
 import stopwords from "stopwords-de";

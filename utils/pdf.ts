@@ -3,14 +3,9 @@ import * as JSZip from "jszip";
 import logoBlack from "~/assets/whatsanalyze-logo-black.png";
 import myFont from "~/assets/pdf-fonts/Helvetica.js";
 
-import {
-  dateDiffs,
-  firstDate,
-  getDateString,
-  lastDate,
-} from "~/functions/utils";
-import { Attachment, getAttachment } from "~/functions/attachments";
-import { Chat } from "~/functions/transformChatData";
+import { dateDiffs, firstDate, getDateString, lastDate } from "~/utils/utils";
+import { Attachment, getAttachment } from "~/utils/attachments";
+import { Chat } from "~/utils/transformChatData";
 
 const callAddFont = function (this: any) {
   this.addFileToVFS("myFont.ttf", myFont.normal);

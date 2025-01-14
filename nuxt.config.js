@@ -4,6 +4,7 @@ import { messages } from "./utils/translations.js";
 
 // eslint-disable-next-line no-undef
 const local = process.env.NUXT_ENV_LOCAL !== undefined;
+const run_with_functions = process.env.NUXT_ENV_WITH_FUNCTIONS !== undefined;
 const baseUrl = ( // eslint-disable-next-line no-undef
   process.env.BASE_URL || "https://www.whatsanalyze.com"
 ).replace("http:", "https:");
@@ -136,6 +137,9 @@ export default {
     },
     services: {
       firestore: true, // Just as example. Can be any other service.
+      functions: {
+        emulatorPort: run_with_functions ? 5001 : undefined,
+      },
     },
   },
   i18n: {
@@ -248,12 +252,12 @@ export default {
   server: {
     host: "0.0.0.0",
     https:
-      // eslint-disable-next-line no-undef
+    // eslint-disable-next-line no-undef
       process.env.NODE_ENV !== "production" || local
         ? {
-            key: fs.readFileSync("./localhost-key.pem"),
-            cert: fs.readFileSync("./localhost.pem"),
-          }
+          key: fs.readFileSync("./localhost-key.pem"),
+          cert: fs.readFileSync("./localhost.pem"),
+        }
         : {},
   },
 };
