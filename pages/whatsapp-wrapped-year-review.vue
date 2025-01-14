@@ -341,7 +341,6 @@ body {
   padding: 20px;
 }
 
-/* Hero Section */
 .hero-section {
   background: linear-gradient(135deg, #25d366, #128c7e);
   color: white;
