@@ -468,8 +468,9 @@ export class Chat {
       });
   }
 
-  getAllWords() {
-    return this._allWords.then((x) => x.slice(0, this._maxWordsWordCloud));
+  async getAllWords() {
+    let x = await this._allWords;
+    return x.slice(0, this._maxWordsWordCloud);
   }
 
   // New method to extract and count emojis, limited to 1000 emojis

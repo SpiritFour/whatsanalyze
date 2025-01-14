@@ -204,6 +204,9 @@ export const messages = {
     downloadResults: "Download Results",
     lookingFor: "Looking for",
     pdfDownload: "PDF download",
+    excludeWords: "Exclude Words",
+    excludeWordsHint:
+      "Should be space separated list. RegEx is also supported.",
     loadingMedia:
       "Loading your <span>images</span>, <span>videos</span> and <span>documents</span>",
     downloadFreePreviewPDF: "Download <b>free preview</b> PDF",
