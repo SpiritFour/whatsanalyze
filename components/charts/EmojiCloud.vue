@@ -4,17 +4,15 @@
 
 <script>
 import { Chat } from "~/utils/transformChatData";
-import { withoutEmoji } from "emoji-aware";
-
-import stopwords from "stopwords-de";
+import { onlyEmoji } from "emoji-aware";
 
 export default {
-  name: "WordCloud",
+  name: "EmojiCloud",
   props: {
     chartdata: new Chat(),
     minWordLength: {
       type: Number,
-      default: 3,
+      default: 0,
     },
     minFontSize: {
       type: Number,
@@ -24,27 +22,12 @@ export default {
       type: Number,
       default: 0.1,
     },
-    stopWords: {
-      type: Array,
-      default: () => stopwords,
-    },
   },
   data() {
     return {
       chart: null,
       series: null,
     };
-  },
-  methods: {
-    updateGraph() {
-      this.chartdata.getAllWords().then((words) => {
-        const wordData = words.filter((wordObj) => {
-          // Remove Emojis
-          return withoutEmoji(wordObj.word).length > 0;
-        });
-        this.series.data = wordData
-      });
-    },
   },
   watch: {
     chartdata: {
@@ -69,12 +52,34 @@ export default {
     this.series.dataFields.word = "word";
     this.series.dataFields.value = "freq";
     this.series.labels.template.tooltipText = "[bold]{freq}[/] x {word}";
-    this.series.accuracy = 4;
-    this.series.minFontSize = 8;
+    this.series.accuracy = 5;
+    // Dynamic font scaling based on frequency
+    this.series.minFontSize = 12;
+    this.series.maxFontSize = 36;
+    this.series.minWordLength = 0;
     this.updateGraph();
   },
   beforeDestroy: function () {
     this.chart.dispose();
+  },
+  methods: {
+    updateGraph() {
+      this.chartdata.getEmojiCloudData().then((words) => {
+        // Regex pattern to match currency like '24,95€'
+        const filterPattern = /(?:€|\$|R\$|₹)?\d+[,.]?\d*(?:€|\$|R\$|₹)?|[!?]|^\.$/;
+
+        const wordData = words.filter((wordObj) => {
+          // Check if the word matches the currency pattern
+          const isCurrency = filterPattern.test(wordObj.word);
+
+          // Remove words that are currencies or entirely emojis
+          return !isCurrency && onlyEmoji(wordObj.word).length > 0;
+        });
+
+        // Assign the filtered data
+        this.series.data = wordData;
+      });
+    },
   },
 };
 </script>
