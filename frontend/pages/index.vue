@@ -31,12 +31,13 @@
         Dive into your year of chats, voice notes, and memories.
         The story of your chat, told through your WhatsApp data.
       </p>
-      <Gradient
-          class="inline-block text-white font-bold px-6 py-3 rounded-full hover:bg-gray-900 transition-colors">
-        <button>
-          Get Your WhatsApp Wrapped
-        </button>
-      </Gradient>
+
+      <nuxt-link class="cursor-pointer" to="/upload">
+        <Gradient
+            class="inline-block font-bold px-6 py-3 rounded-full hover:bg-gray-900">
+          get your whatsapp wrapped
+        </Gradient>
+      </nuxt-link>
     </div>
   </section>
 
@@ -70,7 +71,7 @@
           Share your favorites or keep them a fun secret—it's up to you!
         </p>
         <a
-            class="inline-block mt-4 bg-green-500 text-black px-5 py-2 rounded-full font-semibold hover:bg-green-600 transition-colors"
+            class="inline-block mt-4 bg-black  px-5 py-2 rounded-full font-semibold hover:bg-green-600 transition-colors"
             href="#"
         >
           Explore Now
@@ -111,6 +112,11 @@ export default {
           icon: "LightBulbIcon"
         }
       ]
+    }
+  },
+  methods: {
+    openFile() {
+      alert(1)
     }
   }
 };

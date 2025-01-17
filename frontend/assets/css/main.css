@@ -18,3 +18,7 @@
 .card {
     @apply rounded-xl px-4 py-16
 }
+
+h1 {
+    @apply font-bold text-3xl mb-2
+}

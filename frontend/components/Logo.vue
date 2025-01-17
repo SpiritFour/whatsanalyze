@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center align-middle gap-6  cursor-pointer">
+  <nuxt-link class="flex items-center align-middle gap-6 cursor-pointer" to="/">
 
     <Gradient style="width: 38px; height: 38px;">
       <img alt="logo" class="text-clip" src="/img/logo-inverse.png" width="38px"/>
@@ -9,7 +9,7 @@
       <strong class="mr-2 text-xl md:text-3xl">WhatsAnalyze</strong>
       <slot/>
     </div>
-  </div>
+  </nuxt-link>
 </template>
 
 <script lang="ts">

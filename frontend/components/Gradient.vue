@@ -1,5 +1,5 @@
 <template>
-  <div class="relative overflow-hidden">
+  <div class="relative overflow-hidden text-black">
     <canvas ref="canvas" class="w-full h-full absolute inset-0"></canvas>
     <div class="relative z-10 w-full h-full">
       <slot/>

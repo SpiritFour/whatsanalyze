@@ -4,7 +4,7 @@
       <div class="gid-container flex flex-col md:flex-row  items-center justify-between">
         <Logo>
           <Gradient
-              class="w-min h-min translate-y-2 absolute rounded-lg right-0 top-0 rotate-12 bg-gradient px-2 font-black">
+              class="w-min h-min translate-y-2 absolute rounded-lg right-0 top-0 rotate-12 bg-gradient px-2 font-black ">
             wrapped
           </Gradient>
         </Logo>
@@ -23,7 +23,7 @@
       </div>
     </header>
     <!--    <FeedbackBtn/>-->
-    <main class="text-white font-sans px-4 md:px-0">
+    <main class="text-white font-sans px-4 md:px-0 min-h-screen">
       <NuxtPage class="my-28"/>
     </main>
 
