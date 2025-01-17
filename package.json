@@ -1,0 +1,10 @@
+{
+	"dependencies": {
+		"flubber": "^0.4.2",
+		"jszip": "^3.10.1",
+		"motion": "^11.18.1"
+	},
+	"devDependencies": {
+		"@types/flubber": "^0.4.0"
+	}
+}
