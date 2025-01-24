@@ -1,7 +1,12 @@
 <template>
-  <div class="container flex justify-center">
-    <MorphSvg :from-path="star" :to-path="heart"/>
+  <div class="container ">
+    {{ data }}
+
+    <MorphSvg :from-path="star" :to-path="heart" class="h-24 w-24"/>
+    <AnimatedList/>
   </div>
+  
+  <Lines/>
 </template>
 
 <script lang="ts">
@@ -22,8 +27,18 @@ export default defineComponent({
         19.58 3 22 5.42 22 8.5 \
         c0 3.78-3.4 6.86-8.55 11.54L12 21.35z",
       },
+      data: {}
     }
   },
-  methods: {}
+  methods: {},
+  mounted() {
+    try {
+      this.data = JSON.parse(sessionStorage.getItem("stats"));
+    } catch (err) {
+      navigateTo({
+        path: '/upload',
+      })
+    }
+  }
 })
 </script>

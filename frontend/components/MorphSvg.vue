@@ -1,9 +1,7 @@
 <template>
   <svg
       ref="iconSvg"
-      height="200"
       viewBox="0 0 400 400"
-      width="200"
   >
     <g transform="translate(10 10) scale(17 17)">
       <path ref="pathEl"/>

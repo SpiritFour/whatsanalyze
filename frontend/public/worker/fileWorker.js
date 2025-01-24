@@ -23,51 +23,91 @@ const readFile = async (file) => {
     throw new Error('Unsupported file type');
 }
 
-const analyzeFile = async (textData) => {
-
-    return {messages}
-}
-
 // Filter out all messages with author === null
 function filterValidMessages(messages) {
     return messages.filter(msg => msg.author !== null);
 }
 
 function getMostUsedEmojis(messages) {
-    // Simple emoji regex (covers many, but not all possible emojis)
-    // For production, you might need a more robust approach.
+    // Simple emoji regex (covers many, but not all)
     const emojiRegex = /\p{Extended_Pictographic}/gu;
 
-    const emojiCountMap = new Map(); // Map<emoji, count>
-    let maxEmojiCount = 0;
-    let messageWithMostEmojis = null;
+    // Global stats
+    const globalEmojiCountMap = new Map();
+    let globalMaxEmojiCount = 0;
+    let globalMessageWithMostEmojis = null;
+
+    // Per-author stats
+    // authorEmojiData[author] = {
+    //   emojiCountMap: Map<emoji, count>,
+    //   maxEmojiCount: number,
+    //   messageWithMostEmojis: messageObj
+    // }
+    const authorEmojiData = {};
 
     for (let i = 0; i < messages.length; i++) {
-        const {message} = messages[i];
-        // Match all emojis in the current message
+        const {author, message} = messages[i];
+        // If this is the first time we see the author, init
+        if (!authorEmojiData[author]) {
+            authorEmojiData[author] = {
+                emojiCountMap: new Map(),
+                maxEmojiCount: 0,
+                messageWithMostEmojis: null
+            };
+        }
+
         const emojis = message.match(emojiRegex);
         if (!emojis) continue;
 
-        // Update total usage for each emoji
+        // Update global usage
         for (let j = 0; j < emojis.length; j++) {
             const e = emojis[j];
-            emojiCountMap.set(e, (emojiCountMap.get(e) || 0) + 1);
+            globalEmojiCountMap.set(e, (globalEmojiCountMap.get(e) || 0) + 1);
         }
 
-        // Track message with the most emojis
-        if (emojis.length > maxEmojiCount) {
-            maxEmojiCount = emojis.length;
-            messageWithMostEmojis = messages[i];
+        // Update author usage
+        const authorMap = authorEmojiData[author].emojiCountMap;
+        for (let j = 0; j < emojis.length; j++) {
+            const e = emojis[j];
+            authorMap.set(e, (authorMap.get(e) || 0) + 1);
+        }
+
+        // Check if this is the new global max
+        if (emojis.length > globalMaxEmojiCount) {
+            globalMaxEmojiCount = emojis.length;
+            globalMessageWithMostEmojis = messages[i];
+        }
+
+        // Check if this is the new author max
+        if (emojis.length > authorEmojiData[author].maxEmojiCount) {
+            authorEmojiData[author].maxEmojiCount = emojis.length;
+            authorEmojiData[author].messageWithMostEmojis = messages[i];
         }
     }
 
-    // Convert map to array of [emoji, count] and sort by count desc
-    const sorted = [...emojiCountMap.entries()].sort((a, b) => b[1] - a[1]);
-    const top3Emojis = sorted.slice(0, 3).map(item => ({emoji: item[0], count: item[1]}));
+    // Now compute the top 5 emojis for each author
+    const authors = {};
+    for (const author in authorEmojiData) {
+        const {emojiCountMap, messageWithMostEmojis} = authorEmojiData[author];
+
+        // Sort by count desc
+        const sorted = [...emojiCountMap.entries()].sort((a, b) => b[1] - a[1]);
+        const top5Emojis = sorted.slice(0, 5).map(([emoji, count]) => ({emoji, count}));
+
+        authors[author] = {
+            top5Emojis,
+            messageWithMostEmojis
+        };
+    }
+
+    // Global top 5
+    const sortedGlobal = [...globalEmojiCountMap.entries()].sort((a, b) => b[1] - a[1]);
+    const globalTop5Emojis = sortedGlobal.slice(0, 5).map(([emoji, count]) => ({emoji, count}));
 
     return {
-        top3Emojis,
-        messageWithMostEmojis
+        authors,
+        globalTop5Emojis,
+        globalMessageWithMostEmojis
     };
 }
 
@@ -100,83 +140,149 @@ function getNumberOfMessagesPerMonth(messages) {
 
 // Example set of stopwords you can adjust as necessary.
 const STOP_WORDS = new Set([
-    'the', 'a', 'an', 'to', 'and', 'in', 'that', 'it', 'of', 'is',
-    'you', 'for', 'on', 'with', 'as', 'was', 'are', 'this', 'i',
-    // add more stopwords if needed
+    "<media",
+    "<attached",
+    "audio",
+    "omitted>",
+    "bild",
+    "image",
+    "<medien",
+    "ausgeschlossen>",
+    "weggelassen",
+    "omitted",
+    "_",
+    "_weggelassen>",
+    "_ommited>",
+    "_omesso>",
+    "_omitted",
+    "_weggelassen",
+    "_attached",
 ]);
 
 function getRelativeWordUsage(messages) {
-    const wordCountByAuthor = {};
+    const totalMessages = messages.length;
+    let globalLongestMessage = null;
+    let globalLongestLength = 0;
+
     let totalWordCount = 0;
 
-    let longestMessage = null;
-    let maxLength = 0;
+    // For global top words
+    const globalWordFreq = new Map();
 
-    const globalWordFreq = new Map(); // Map<word, count>
+    // Per-author stats
+    // Structure:
+    // authorStats[author] = {
+    //   messageCount: number,
+    //   wordCount: number,
+    //   freqMap: Map<word, count>,
+    //   longestMessage: { length, messageObject }
+    // }
+    const authorStats = {};
 
     for (let i = 0; i < messages.length; i++) {
-        const {author, message} = messages[i];
+        const msgObj = messages[i];
+        const {author, message} = msgObj;
         const length = message.length;
 
-        // Track longest message
-        if (length > maxLength) {
-            maxLength = length;
-            longestMessage = messages[i];
+        // Initialize if first time we see this author
+        if (!authorStats[author]) {
+            authorStats[author] = {
+                messageCount: 0,
+                wordCount: 0,
+                freqMap: new Map(),
+                longestMessage: {
+                    length: 0,
+                    messageObject: null
+                }
+            };
         }
 
-        // Split message into words by non-alphanumeric characters
-        // or something more sophisticated if needed
+        // Update author's message count
+        authorStats[author].messageCount++;
+
+        // Track longest message overall
+        if (length > globalLongestLength) {
+            globalLongestLength = length;
+            globalLongestMessage = msgObj;
+        }
+
+        // Track author's longest message
+        if (length > authorStats[author].longestMessage.length) {
+            authorStats[author].longestMessage.length = length;
+            authorStats[author].longestMessage.messageObject = msgObj;
+        }
+
+        // Split into words
         const words = message
             .toLowerCase()
-            .split(/[^a-zA-Z0-9äöüÄÖÜß]+/) // adjust for your locale
+            .split(/[^a-zA-Z0-9äöüÄÖÜß]+/) // adjust as needed
             .filter(Boolean);
 
-        // Count words for each author
-        if (!wordCountByAuthor[author]) {
-            wordCountByAuthor[author] = 0;
-        }
-        wordCountByAuthor[author] += words.length;
-        totalWordCount += words.length;
+        const wordCount = words.length;
+        authorStats[author].wordCount += wordCount;
+        totalWordCount += wordCount;
 
-        // Update global frequency map (excluding stopwords)
+        // Update global freq map & author's freq map
         for (let w = 0; w < words.length; w++) {
             const word = words[w];
             if (!STOP_WORDS.has(word)) {
+                // global
                 globalWordFreq.set(word, (globalWordFreq.get(word) || 0) + 1);
+                // author
+                const authorMap = authorStats[author].freqMap;
+                authorMap.set(word, (authorMap.get(word) || 0) + 1);
             }
         }
     }
 
-    // Calculate relative usage
-    const relativeUsage = {};
-    for (const author in wordCountByAuthor) {
-        if (totalWordCount === 0) {
-            relativeUsage[author] = 0;
-        } else {
-            relativeUsage[author] = wordCountByAuthor[author] / totalWordCount;
-        }
+    // Prepare final data structure
+    // 1) Compute top 5 words for each author
+    // 2) Compute relative share of words & messages for each author
+    const resultByAuthor = {};
+
+    for (const author in authorStats) {
+        const {messageCount, wordCount, freqMap, longestMessage} = authorStats[author];
+
+        // Sort freqMap to get top 5 for this author
+        const sortedAuthorWords = [...freqMap.entries()].sort((a, b) => b[1] - a[1]);
+        const top5Words = sortedAuthorWords.slice(0, 5).map(([word, count]) => ({word, count}));
+
+        // Relative usage
+        const relativeWords = totalWordCount === 0 ? 0 : (wordCount / totalWordCount);
+        const relativeMessages = totalMessages === 0 ? 0 : (messageCount / totalMessages);
+
+        resultByAuthor[author] = {
+            top5Words,
+            longestMessage: longestMessage.messageObject,
+            relativeWords,       // fraction of total words in conversation
+            relativeMessages     // fraction of total messages in conversation
+        };
     }
 
-    // Get top 3 words from globalWordFreq
-    const sortedWords = [...globalWordFreq.entries()].sort((a, b) => b[1] - a[1]);
-    const top3Words = sortedWords.slice(0, 3).map(([word, count]) => ({word, count}));
+    // Also compute global top 5 words
+    const sortedGlobalWords = [...globalWordFreq.entries()].sort((a, b) => b[1] - a[1]);
+    const globalTop5Words = sortedGlobalWords.slice(0, 5).map(([word, count]) => ({word, count}));
 
     return {
-        relativeUsage,    // e.g. { "John Doe": 0.7, "Jane Doe": 0.3 }
-        longestMessage,   // message object with the longest character length
-        top3Words
+        authors: resultByAuthor,
+        globalLongestMessage, // the longest among all authors
+        globalTop5Words
     };
 }
 
 
 function getTimeData(messages) {
-
     // Sort by date ascending
     const sortedByDate = [...messages].sort((a, b) => new Date(a.date) - new Date(b.date));
 
     let longestGap = 0;
+    let longestGapStart = null;
+    let longestGapEnd = null;
 
     for (let i = 0; i < sortedByDate.length; i++) {
+        const {message} = sortedByDate[i];
+
+
         // Check time gaps
         if (i > 0) {
             const prevDate = new Date(sortedByDate[i - 1].date);
@@ -184,15 +290,18 @@ function getTimeData(messages) {
             const gap = currentDate - prevDate; // in ms
             if (gap > longestGap) {
                 longestGap = gap;
+                longestGapStart = prevDate;
+                longestGapEnd = currentDate;
             }
         }
     }
 
     return {
-        longestGap // in milliseconds
+        longestGap,        // in milliseconds
+        longestGapStart,   // Date object
+        longestGapEnd      // Date object
     };
 }
-
 
 function getISOWeekNumber(dateObj) {
     // This formula calculates the ISO week number for a given date.
@@ -255,7 +364,9 @@ self.addEventListener('message', async (event) => {
 
     try {
         const textData = await readFile(file);
-        const messages = whatsappChatParser.parseString(textData);
+        const messages = whatsappChatParser.parseString(textData, {
+            parseAttachments: true,
+        });
 
         const validMessages = filterValidMessages(messages);
 

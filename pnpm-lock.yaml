@@ -17,6 +17,9 @@ importers:
       motion:
         specifier: ^11.18.1
         version: 11.18.1
+      whatsapp-chat-parser:
+        specifier: ^4.0.2
+        version: 4.0.2
     devDependencies:
       '@types/flubber':
         specifier: ^0.4.0
@@ -128,6 +131,10 @@ packages:
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
+  whatsapp-chat-parser@4.0.2:
+    resolution: {integrity: sha512-p5msNP4bUrgYjNfwfE7nBkdaG/lRwZjp8YE65CW3F9vxvQg2ZCImIusUHWWKbYxxHd737N/lEfixKPJHZLfSdw==}
+    engines: {node: '>=8.0.0'}
+
 snapshots:
 
   '@types/flubber@0.4.0': {}
@@ -218,3 +225,5 @@ snapshots:
   tslib@2.8.1: {}
 
   util-deprecate@1.0.2: {}
+
+  whatsapp-chat-parser@4.0.2: {}

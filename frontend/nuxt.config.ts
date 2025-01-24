@@ -10,7 +10,7 @@ export default defineNuxtConfig({
     /* full static rendering */
     ssr: false,
 
-    modules: ["@nuxtjs/tailwindcss", "@nuxtjs/i18n", "@nuxt/content"],
+    modules: ["@nuxtjs/tailwindcss", "@nuxtjs/i18n", "@nuxt/content", '@pinia/nuxt'],
 
     postcss: {
         plugins: {
@@ -59,6 +59,5 @@ export default defineNuxtConfig({
             // eslint-disable-next-line no-undef
             SENTRY_AUTH_TOKEN: process.env.SENTRY_AUTH_TOKEN
         }
-    }
-
+    },
 });
