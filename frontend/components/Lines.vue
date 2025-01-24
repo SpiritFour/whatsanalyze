@@ -1,43 +1,29 @@
 <template>
   <article id="gallery">
-    <header>
-      Header content
-    </header>
-
+    <div class="progress"></div>
     <section class="slider-group-container">
       <div>
         <ul class="img-group">
           <li class="slider">
-            <h3>#001</h3>
+            <slot name="1"/>
           </li>
           <li class="slider">
-            <h3>#002</h3>
+            <slot name="2"/>
           </li>
           <li class="slider">
-            <h3>#003</h3>
+            <slot name="3"/>
           </li>
           <li class="slider">
-            <h3>#004</h3>
+            <slot name="4"/>
           </li>
           <li class="slider">
-            <h3>#005</h3>
+            <slot name="5"/>
           </li>
         </ul>
       </div>
     </section>
 
-    <footer>
-      <p>
-        Photos by
-        <a href="https://twitter.com/mattgperry" target="_blank"
-        >Matt Perry</a
-        >
-      </p>
-    </footer>
   </article>
-
-  <!-- The progress bar -->
-  <div class="progress"></div>
 </template>
 
 <script lang="ts" setup>
@@ -113,6 +99,7 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  overflow: hidden;
 }
 
 #gallery header h2 {
@@ -146,7 +133,7 @@ onMounted(() => {
   right: 0;
   height: 5px;
   background: #9911ff;
-  bottom: 50px;
+  top: 100px;
   transform: scaleX(0);
   transform-origin: left center;
 }

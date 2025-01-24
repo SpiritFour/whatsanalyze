@@ -24,7 +24,7 @@
     </header>
     <!--    <FeedbackBtn/>-->
     <main class="text-white font-sans px-4 md:px-0 min-h-screen">
-      <NuxtPage class="my-28"/>
+      <NuxtPage class=""/>
     </main>
 
 
