@@ -1,6 +1,7 @@
 <template>
   <section class="container card">
-    <Polygon/>
+
+    <Polygon class="relative"/>
 
     <div class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight z-10">
       Get Your WhatsApp Wrapped.
@@ -8,7 +9,7 @@
     </div>
 
 
-    <div class="flex items-center justify-center w-full">
+    <div class="flex items-center justify-center w-full relative">
       <label
           class="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer hover:bg-gray-800 bg-gray-700  border-gray-600 hover:border-gray-500 "
           for="dropzone-file">

@@ -1,6 +1,55 @@
 <template>
 
   <!--  <MorphSvg :from-path="star" :to-path="heart" class="h-80 w-80"/>-->
+
+  <!-- black bg-->
+  <!--  <div>-->
+  <!--    Whatsapp warpped-->
+  <!--    Hello author 1 author 2-->
+
+  <!--    iPhone sceen sith start of chat text. animates form complete dark bg into opening whatsapp-->
+
+  <!--    scrolling down shuts down iphone again into black-->
+  <!--  </div>-->
+
+  <!--  &lt;!&ndash; black bg&ndash;&gt;-->
+  <!--  <div>-->
+  <!--    Take a closer look.-->
+
+  <!--    - Zahlen klappen sich 3d um / drehen sich um sich-->
+  <!--    - zahlen haben outline und werden dann angeleuchtet-->
+  <!--    - getippt-->
+
+  <!--  </div>-->
+
+  <!--  <div>-->
+
+  <!--  </div>-->
+
+  <!--  &lt;!&ndash; colorful eye catcher area with some stats and big animation&ndash;&gt;-->
+  <!--  graph of chat frequency per week builds up from left to right (line graph)-->
+  <!--  interactive shows time/date of longest message, longes emojie message and longest time of no chat-->
+
+  <!--  <div>-->
+  <!--    small stats in columns (blend in) below colorful animation-->
+  <!--  </div>-->
+
+
+  <!--  <div>-->
+  <!--    Must used words appear like shot onto the page (like a canon)-->
+
+  <!--    maybe one of each chat partner at the same time-->
+
+  <!--  </div>-->
+
+  <!--  <div>-->
+
+  <!--    most used emojies animation:-->
+  <!--    1. all emojies floating around in the middle-->
+  <!--    2. scrolling takes emojies apart and shows number of usages-->
+  <!--  </div>-->
+
+
   <div>
     <Lines>
       <template v-slot:1>

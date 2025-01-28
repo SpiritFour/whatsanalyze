@@ -4,7 +4,7 @@
 
 
 .bg-gradient {
-    @apply bg-gradient-to-r from-purple-600 via-pink-500 to-yellow-500
+    @apply bg-gradient-to-r from-purple-600 via-pink-500 via-red-500 to-yellow-500
 }
 
 .container {
