@@ -2,12 +2,12 @@
   <section class="relative overflow-hidden py-16">
     <Polygon/>
     <div
-        class="card text-center container w-full h-full border-gray-950"
+        class="card text-center container w-full h-full border-gray-950 shadow-xl shadow-pink-600/50"
     >
       <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight z-10">
         Your WhatsApp Wrapped
       </h1>
-      <p class="max-w-2xl mx-auto text-lg md:text-xl mb-8">
+      <p class="max-w-2xl mx-auto text-lg md:text-xl mb-8  ">
         <!--      Summary of your chat data.
               - Who dominates the chat? # and % of messages and
               - Wer redet gern? Länge der Sprachnachrichten
@@ -26,7 +26,7 @@
       <nuxt-link class="cursor-pointer" to="/upload">
         <Gradient
             class="inline-block font-bold px-6 py-3 rounded-full hover:bg-gray-900">
-          get your whatsapp wrapped
+          Let's go
         </Gradient>
       </nuxt-link>
     </div>

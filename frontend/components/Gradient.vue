@@ -45,8 +45,9 @@ function draw() {
 
   // Add color stops for your gradient
   gradient.addColorStop(0, 'rgb(255, 150, 0)');
-  gradient.addColorStop(0.5, 'rgb(100, 0, 255)');
-  gradient.addColorStop(1, 'rgb(0, 255, 200)');
+  gradient.addColorStop(0.33, 'rgb(255,0,98)');
+  gradient.addColorStop(0.66, 'rgb(100, 0, 255)');
+  gradient.addColorStop(1, 'rgb(0,196,255)');
 
   // Fill the canvas
   ctx.fillStyle = gradient;
