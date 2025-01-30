@@ -1,4 +1,6 @@
-import type { Message } from "whatsapp-chat-parser";
+import type { Message as parserMessage } from "whatsapp-chat-parser";
+
+export type Message = parserMessage;
 
 export interface EmojiStats {
   emoji: string;

@@ -1,7 +1,6 @@
-import registerPromiseWorker from 'promise-worker/register'
+import registerPromiseWorker from "promise-worker/register";
+import { defaultParser } from "~/utils/parsing";
 
-registerPromiseWorker((message: any) => {
-  if (message.type === 'message') {
-    return `Worker reply: ${JSON.stringify(message)}`
-  }
-})
+registerPromiseWorker(async (file: File) => {
+  return defaultParser.run(file);
+});

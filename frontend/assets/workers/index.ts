@@ -1,14 +1,8 @@
 import PromiseWorker from "promise-worker";
 import ParsingWorker from "./parsing.worker?worker";
-import { importTest } from "~/utils/fileWorker";
-
+import { type defaultParserResult } from "~/utils/parsing";
 
 const parsingWorker = new PromiseWorker(new ParsingWorker());
 
-export const send = (message: any) => {
-  console.log("message here!!",JSON.stringify(message));
-  return parsingWorker.postMessage({
-    type: "message",
-    message: message + importTest
-  });
-};
+export const sendFile = (file: File) =>
+  parsingWorker.postMessage<defaultParserResult, File>(file);

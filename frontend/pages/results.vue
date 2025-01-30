@@ -1,5 +1,4 @@
 <template>
-
   <!--  <MorphSvg :from-path="star" :to-path="heart" class="h-80 w-80"/>-->
 
   <!-- black bg-->
@@ -34,7 +33,6 @@
   <!--    small stats in columns (blend in) below colorful animation-->
   <!--  </div>-->
 
-
   <!--  <div>-->
   <!--    Must used words appear like shot onto the page (like a canon)-->
 
@@ -49,26 +47,29 @@
   <!--    2. scrolling takes emojies apart and shows number of usages-->
   <!--  </div>-->
 
-
   <div>
     <Lines>
       <template v-slot:1>
         <div>
           <h2>
-            <strong>
-              Most Emojies
-            </strong>
+            <strong> Most Emojies </strong>
           </h2>
           <div class="flex">
-            <div v-for="(authorData, author) in data.emoji?.authors" :key="author" class="flex my-8 p-8">
+            <div
+              v-for="(authorData, author) in data.EmojiEmojiAnalyzer.authors"
+              :key="author"
+              class="flex my-8 p-8"
+            >
               <div>
-                <div v-for="(emoji, key) in authorData.top5Emojis"
-                     :key="key + author"
-                     class="flex gap-2 text-4xl font-bold">
+                <div
+                  v-for="(emoji, key) in authorData.top5Emojis"
+                  :key="key + author"
+                  class="flex gap-2 text-4xl font-bold"
+                >
                   <div class="p-2 w-40">
                     {{ emoji.emoji }}
                   </div>
-                  <div class=" text-gray-600">
+                  <div class="text-gray-600">
                     {{ emoji.count }}
                   </div>
                 </div>
@@ -125,12 +126,19 @@
       </template>
       <template v-slot:4>
         <div class="flex gap-20">
-          <div v-for="(authorData, author) in data.wordUsage?.authors" :key="author" class="p-20">
+          <div
+            v-for="(authorData, author) in data.wordUsage?.authors"
+            :key="author"
+            class="p-20"
+          >
             <h2>
               {{ author }}
             </h2>
             <div>
-              <div v-for="word in authorData.top5Words" class="flex gap-2 text-xl font-bold">
+              <div
+                v-for="word in authorData.top5Words"
+                class="flex gap-2 text-xl font-bold"
+              >
                 <div class="p-2 w-40">
                   {{ word.word }}
                 </div>
@@ -145,7 +153,6 @@
                 {{ authorData.longestMessage.message }}
               </div>
             </div>
-
           </div>
         </div>
       </template>
@@ -153,7 +160,8 @@
         <div>
           <h2>Longest <strong>gap</strong> in your chat</h2>
           <h3>
-            {{ (data.time?.longestGap / (1000 * 60 * 60 * 24)).toFixed(1) }} days
+            {{ (data.time?.longestGap / (1000 * 60 * 60 * 24)).toFixed(1) }}
+            days
           </h3>
 
           <p>
@@ -168,7 +176,8 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue'
+import { defineComponent } from "vue";
+import type { defaultParserResult } from "~/utils/parsing";
 
 export default defineComponent({
   data() {
@@ -185,25 +194,26 @@ export default defineComponent({
         19.58 3 22 5.42 22 8.5 \
         c0 3.78-3.4 6.86-8.55 11.54L12 21.35z",
       },
-      data: {}
-    }
+      data: {} as defaultParserResult,
+    };
   },
   methods: {
     getDate(timeString: string) {
-      if (!timeString) return '';
-      return `${new Date(timeString).getFullYear()} ${new Date(timeString).getMonth() + 1} ${new Date(timeString).getDay()}`
-    }
+      if (!timeString) return "";
+      return `${new Date(timeString).getFullYear()} ${new Date(timeString).getMonth() + 1} ${new Date(timeString).getDay()}`;
+    },
   },
   mounted() {
-    try {
-      this.data = JSON.parse(sessionStorage.getItem("stats")).data;
-    } catch (err) {
+    const data = sessionStorage.getItem("stats");
+    if (!data) {
       navigateTo({
-        path: '/upload',
-      })
+        path: "/upload",
+      });
+    } else {
+      this.data = JSON.parse(data).data;
     }
-  }
-})
+  },
+});
 </script>
 
 <style scoped>
@@ -223,17 +233,15 @@ export default defineComponent({
   @apply text-sm text-gray-900;
 }
 
-
 h2 {
-  @apply text-8xl
+  @apply text-8xl;
 }
 
 strong {
-  @apply text-orange-500 italic
+  @apply text-orange-500 italic;
 }
 
 h3 {
-  @apply text-[200px]
+  @apply text-[200px];
 }
-
 </style>
