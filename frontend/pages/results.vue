@@ -56,7 +56,7 @@
           </h2>
           <div class="flex">
             <div
-              v-for="(authorData, author) in data.EmojiEmojiAnalyzer.authors"
+              v-for="(authorData, author) in data.getMostUsedEmojis.authors"
               :key="author"
               class="flex my-8 p-8"
             >
@@ -84,12 +84,12 @@
                       {{ author }}
                     </div>
                     <div class="time">
-                      {{ getDate(authorData?.messageWithMostEmojis?.date) }}
+                      {{ getDate(authorData.messageWithMostEmojis.date) }}
                     </div>
                   </div>
 
                   <div class="message">
-                    {{ authorData?.messageWithMostEmojis?.message }}
+                    {{ authorData.messageWithMostEmojis.message }}
                   </div>
                 </div>
               </div>
@@ -102,32 +102,32 @@
           <div>
             <h2>Most active Week</h2>
             <strong>
-              {{ data.active?.weekWithMostMessages.week }}
+              {{ data.getActiveDates.weekWithMostMessages.week }}
             </strong>
             <h2>
-              {{ data.active?.weekWithMostMessages.count }}
+              {{ data.getActiveDates.weekWithMostMessages.count }}
             </h2>
           </div>
           <div>
             <h2>Most active Day</h2>
             <strong>
-              {{ data.active?.dayWithMostMessages.day }}
+              {{ data.getActiveDates.dayWithMostMessages.day }}
             </strong>
             <h2>
-              {{ data.active?.dayWithMostMessages.count }}
+              {{ data.getActiveDates.dayWithMostMessages.count }}
             </h2>
           </div>
         </div>
       </template>
       <template v-slot:3>
         <div>
-          {{ data.messagesPerMonth }}
+          {{ data.getNumberOfMessagesPerMonth }}
         </div>
       </template>
       <template v-slot:4>
         <div class="flex gap-20">
           <div
-            v-for="(authorData, author) in data.wordUsage?.authors"
+            v-for="(authorData, author) in data.getRelativeWordUsage.authors"
             :key="author"
             class="p-20"
           >
@@ -160,14 +160,16 @@
         <div>
           <h2>Longest <strong>gap</strong> in your chat</h2>
           <h3>
-            {{ (data.time?.longestGap / (1000 * 60 * 60 * 24)).toFixed(1) }}
+            {{
+              (data.getTimeData.longestGap / (1000 * 60 * 60 * 24)).toFixed(1)
+            }}
             days
           </h3>
 
           <p>
             You did not chat from
-            {{ getDate(data.time?.longestGapStart) }}
-            to {{ getDate(data.time?.longestGapEnd) }}.
+            {{ getDate(data.getTimeData.longestGapStart) }}
+            to {{ getDate(data.getTimeData.longestGapEnd) }}.
           </p>
         </div>
       </template>
@@ -198,18 +200,20 @@ export default defineComponent({
     };
   },
   methods: {
-    getDate(timeString: string) {
+    getDate(timeString: Date) {
       if (!timeString) return "";
       return `${new Date(timeString).getFullYear()} ${new Date(timeString).getMonth() + 1} ${new Date(timeString).getDay()}`;
     },
   },
   mounted() {
     const data = sessionStorage.getItem("stats");
+    console.log("data", data);
     if (!data) {
       navigateTo({
         path: "/upload",
       });
     } else {
+      console.log("got data", this.data);
       this.data = JSON.parse(data).data;
     }
   },
