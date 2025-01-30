@@ -1,3 +1,5 @@
+import type { Message } from "whatsapp-chat-parser";
+
 export interface EmojiStats {
   emoji: string;
   count: number;
@@ -10,7 +12,10 @@ export interface AuthorEmojiData {
 }
 
 export interface EmojiAnalysis {
-  authors: Record<string, { top5Emojis: EmojiStats[]; messageWithMostEmojis: Message | null }>;
+  authors: Record<
+    string,
+    { top5Emojis: EmojiStats[]; messageWithMostEmojis: Message | null }
+  >;
   globalTop5Emojis: EmojiStats[];
   globalMessageWithMostEmojis: Message | null;
 }
@@ -32,12 +37,15 @@ export interface AuthorStats {
 }
 
 export interface WordUsageAnalysis {
-  authors: Record<string, {
-    top5Words: WordUsageStats[];
-    longestMessage: Message | null;
-    relativeWords: number;
-    relativeMessages: number;
-  }>;
+  authors: Record<
+    string,
+    {
+      top5Words: WordUsageStats[];
+      longestMessage: Message | null;
+      relativeWords: number;
+      relativeMessages: number;
+    }
+  >;
   globalLongestMessage: Message | null;
   globalTop5Words: WordUsageStats[];
 }
