@@ -1,9 +1,3 @@
-export interface Message {
-  author: string | null;
-  date: string;
-  message: string;
-}
-
 export interface EmojiStats {
   emoji: string;
   count: number;

@@ -17,6 +17,12 @@
             pkgs.python39
             pkgs.git
           ];
+          shellHook = ''
+              mkdir -p .out
+              ln -s  ${pkgs.nodejs_22.out}/bin/node .out/node
+              ln -s  ${pkgs.pkgs.pnpm.out}/bin/pnpm .out/pnpm
+
+          '';
         };
 
       });

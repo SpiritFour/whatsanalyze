@@ -5,6 +5,8 @@ import { WordUsageAnalyzer } from './analyzer/wordUsageAnalyzer';
 import { TimeAnalyzer } from './analyzer/timeAnalyzer';
 import { ActiveDatesAnalyzer } from './analyzer/activeDatesAnalyzer';
 import type { Message } from './types';
+import * as whatsapp from 'whatsapp-chat-parser';
+
 
 declare const self: DedicatedWorkerGlobalScope;
 
@@ -29,7 +31,7 @@ self.addEventListener('message', async (event: MessageEvent) => {
 
 // Helper function to parse messages (assuming whatsappChatParser is available)
 function parseMessages(textData: string): Message[] {
-  return whatsappChatParser.parseString(textData, {
+  return whatsapp.parseString(textData, {
     parseAttachments: true,
   });
 }
