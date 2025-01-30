@@ -14,6 +14,7 @@
     "@pinia/nuxt": "^0.9.0",
     "chart.js": "^4.4.7",
     "nuxt": "^3.15.2",
+    "promise-worker": "^2.0.1",
     "stopwords-de": "^0.3.0",
     "stopwords-en": "^0.3.0",
     "vue": "latest",
