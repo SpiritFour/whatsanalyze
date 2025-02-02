@@ -48,7 +48,7 @@
   <!--  </div>-->
 
   <div>
-    <Lines>
+    <Lines v-if="data">
       <template v-slot:1>
         <div>
           <h2>
@@ -174,12 +174,22 @@
         </div>
       </template>
     </Lines>
+    <!--    todo have proper stuff here? how do we handle this not existing at all?-->
+    <div v-else class="flex gap-20">Sorry not found</div>
   </div>
 </template>
 
+<script setup lang="ts">
+import { useStatsStore } from "~/store/stats.js";
+
+const statsStore = useStatsStore();
+
+const { result } = storeToRefs(statsStore);
+const data = result;
+</script>
+
 <script lang="ts">
 import { defineComponent } from "vue";
-import type { defaultParserResult } from "~/utils/parsing";
 
 export default defineComponent({
   data() {
@@ -196,7 +206,6 @@ export default defineComponent({
         19.58 3 22 5.42 22 8.5 \
         c0 3.78-3.4 6.86-8.55 11.54L12 21.35z",
       },
-      data: {} as defaultParserResult,
     };
   },
   methods: {
@@ -204,18 +213,6 @@ export default defineComponent({
       if (!timeString) return "";
       return `${new Date(timeString).getFullYear()} ${new Date(timeString).getMonth() + 1} ${new Date(timeString).getDay()}`;
     },
-  },
-  mounted() {
-    const data = sessionStorage.getItem("stats");
-    console.log("data", data);
-    if (!data) {
-      navigateTo({
-        path: "/upload",
-      });
-    } else {
-      console.log("got data", this.data);
-      this.data = JSON.parse(data).data;
-    }
   },
 });
 </script>

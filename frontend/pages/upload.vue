@@ -54,37 +54,30 @@
     <div v-if="isLoading" class="bg-blue-500">
       <pre>Loading...</pre>
     </div>
-
-    <div v-if="workerResponse?.state === 'ERROR'" class="bg-red-500">
-      <pre>{{ workerResponse?.response.message }}</pre>
-    </div>
   </section>
 </template>
 
 <script lang="ts" setup>
 import { sendFile } from "assets/workers";
-import type { defaultParserResult } from "~/utils/parsing";
+import { useStatsStore } from "~/store/stats";
 
-const workerResponse = ref<defaultParserResult | null>(null);
+const statsStore = useStatsStore();
 
-const isLoading = ref(false);
+const { result, isLoading } = storeToRefs(statsStore);
 
 const handleFile = async (e: Event): Promise<void> => {
-  return new Promise((resolve, reject) => {
-    const input = e.target as HTMLInputElement;
-    if (!input.files || !input.files.length) return;
-    const file = input.files[0];
-    sendFile(file).then((res) => {
-      console.log("response2", res);
-      console.log("response2", res);
-      workerResponse.value = res;
-      isLoading.value = false;
-      sessionStorage.setItem("stats", JSON.stringify(res));
+  const input = e.target as HTMLInputElement;
+  if (!input.files || !input.files.length) return;
+  const file = input.files[0];
 
-      navigateTo({
-        path: "/results",
-      });
-    });
+  statsStore.$reset();
+  isLoading.value = true;
+  result.value = await sendFile(file);
+
+  isLoading.value = false;
+
+  navigateTo({
+    path: "/results",
   });
 };
 </script>
