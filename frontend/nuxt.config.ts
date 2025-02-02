@@ -17,7 +17,17 @@ export default defineNuxtConfig({
     "@nuxt/content",
     "@pinia/nuxt",
     "pinia-plugin-persistedstate/nuxt",
+    "~/modules/firebase",
   ],
+  firebase: {
+    apiKey: "AIzaSyCCX536nN4oTAXj49M_M1ZShD3ekLdjkBo",
+    authDomain: "whatsanalyze-wrapped.firebaseapp.com",
+    projectId: "whatsanalyze-wrapped",
+    storageBucket: "whatsanalyze-wrapped.firebasestorage.app",
+    messagingSenderId: "761196645139",
+    appId: "1:761196645139:web:88191b29876feb404ae8e6",
+    measurementId: "G-KEE2KV93SK",
+  },
 
   postcss: {
     plugins: {
@@ -68,5 +78,8 @@ export default defineNuxtConfig({
       // eslint-disable-next-line no-undef
       SENTRY_AUTH_TOKEN: process.env.SENTRY_AUTH_TOKEN,
     },
+  },
+  typescript: {
+    typeCheck: true,
   },
 });

@@ -5,57 +5,52 @@
       <div>
         <ul class="img-group">
           <li class="slider">
-            <slot name="1"/>
+            <slot name="1" />
           </li>
           <li class="slider">
-            <slot name="2"/>
+            <slot name="2" />
           </li>
           <li class="slider">
-            <slot name="3"/>
+            <slot name="3" />
           </li>
           <li class="slider">
-            <slot name="4"/>
+            <slot name="4" />
           </li>
           <li class="slider">
-            <slot name="5"/>
+            <slot name="5" />
           </li>
         </ul>
       </div>
     </section>
-
   </article>
 </template>
 
 <script lang="ts" setup>
-import {onMounted} from 'vue'
-import {animate, scroll} from 'motion'
+import { onMounted } from "vue";
+import { animate, scroll } from "motion";
 
 onMounted(() => {
   // Grab all items for horizontal slide calculation
-  const items = document.querySelectorAll(".slider")
+  const items = document.querySelectorAll(".slider");
   // How far (in vw) we translate the .img-group horizontally
   // If you have 5 items, that becomes -400vw (since items.length=5 => 5-1=4 => -400vw).
-  const translateDistance = -(items.length - 1) * 100
+  const translateDistance = -(items.length - 1) * 100;
+
+  const container = document.querySelector(".slider-group-container");
+  const scrollOptions = container ? { target: container } : undefined;
 
   // Animate the .img-group horizontally during scroll
   // Connect the scroll to .slider-group-container
   scroll(
-      animate(".img-group", {
-        transform: ["none", `translateX(${translateDistance}vw)`],
-      }),
-      {
-        target: document.querySelector(".slider-group-container"),
-      }
-  )
+    animate(".img-group", {
+      transform: ["none", `translateX(${translateDistance}vw)`],
+    }),
+    scrollOptions,
+  );
 
   // Animate .progress bar scaleX from 0 to 1
-  scroll(
-      animate(".progress", {scaleX: [0, 1]}),
-      {
-        target: document.querySelector(".slider-group-container"),
-      }
-  )
-})
+  scroll(animate(".progress", { scaleX: [0, 1] }), scrollOptions);
+});
 </script>
 
 <style scoped>

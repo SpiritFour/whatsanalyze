@@ -84,12 +84,15 @@
                       {{ author }}
                     </div>
                     <div class="time">
-                      {{ getDate(authorData.messageWithMostEmojis.date) }}
+                      {{
+                        authorData?.messageWithMostEmojis?.date &&
+                        getDate(authorData.messageWithMostEmojis.date)
+                      }}
                     </div>
                   </div>
 
                   <div class="message">
-                    {{ authorData.messageWithMostEmojis.message }}
+                    {{ authorData?.messageWithMostEmojis?.message }}
                   </div>
                 </div>
               </div>
@@ -148,9 +151,9 @@
 
             <div class="">
               Your longest messages are:
-              <h3>{{ authorData.longestMessage.message.length }}</h3>
+              <h3>{{ authorData?.longestMessage?.message.length }}</h3>
               <div class="max-w-[400px] max-h-24 overflow-scroll">
-                {{ authorData.longestMessage.message }}
+                {{ authorData?.longestMessage?.message }}
               </div>
             </div>
           </div>
@@ -168,24 +171,83 @@
 
           <p>
             You did not chat from
-            {{ getDate(data.getTimeData.longestGapStart) }}
-            to {{ getDate(data.getTimeData.longestGapEnd) }}.
+            {{
+              data.getTimeData.longestGapStart &&
+              getDate(data.getTimeData.longestGapStart)
+            }}
+            to
+            {{
+              data.getTimeData.longestGapEnd &&
+              getDate(data.getTimeData.longestGapEnd)
+            }}.
           </p>
         </div>
       </template>
     </Lines>
     <!--    todo have proper stuff here? how do we handle this not existing at all?-->
-    <div v-else class="flex gap-20">Sorry not found</div>
+    <div v-else class="flex gap-20">
+      Sorry nothing found, but do you wanna load something?
+    </div>
+    <div class="max-width: 100px;overflow: hidden; text-overflow: ellipsis;">
+      {{ share_info }}
+    </div>
+    <a :href="'results?' + share_info">share</a>
+    <br />
+    <button @click="save">Save</button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useStatsStore } from "~/store/stats.js";
+import { useStatsStore } from "~/store/stats";
+import { useUserDataStore } from "~/store/userDataStore";
+import { parseShareInfo, serializeShareInfo } from "~/utils/sharing/param";
 
 const statsStore = useStatsStore();
 
 const { result } = storeToRefs(statsStore);
 const data = result;
+// ######## data loading part
+const userDataStore = useUserDataStore();
+
+const share_info = ref("");
+
+const save = async () => {
+  if (data.value) {
+    const link = await userDataStore.saveData(data.value);
+    console.log("Shareable Link:", link);
+    share_info.value = serializeShareInfo(link);
+  } else {
+    alert("You did create a chat!");
+  }
+};
+
+onMounted(() => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const uuidParam = urlParams.get("uuid");
+  const ivParam = urlParams.get("iv");
+  const keyParam = urlParams.get("key");
+
+  if (uuidParam && ivParam && keyParam) {
+    try {
+      const shareInfo = parseShareInfo(window.location.search);
+      console.log("Parsed ShareInfo:", shareInfo);
+
+      // Use userDataStore to load the data using shareInfo
+      userDataStore
+        .loadData(shareInfo)
+        .then((loadedData) => {
+          result.value = loadedData;
+        })
+        .catch((error) => {
+          console.error("Error loading data:", error);
+        });
+    } catch (error) {
+      console.error("Failed to parse share info:", error);
+    }
+  } else {
+    console.log("No share info found in URL");
+  }
+});
 </script>
 
 <script lang="ts">

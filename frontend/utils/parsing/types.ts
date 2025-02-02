@@ -16,10 +16,10 @@ export interface AuthorEmojiData {
 export interface EmojiAnalysis {
   authors: Record<
     string,
-    { top5Emojis: EmojiStats[]; messageWithMostEmojis: Message }
+    { top5Emojis: EmojiStats[]; messageWithMostEmojis: Message | null }
   >;
   globalTop5Emojis: EmojiStats[];
-  globalMessageWithMostEmojis: Message;
+  globalMessageWithMostEmojis: Message | null;
 }
 
 export interface MessagesPerMonth {
@@ -43,7 +43,7 @@ export interface WordUsageAnalysis {
     string,
     {
       top5Words: WordUsageStats[];
-      longestMessage: Message;
+      longestMessage: Message | null;
       relativeWords: number;
       relativeMessages: number;
     }
@@ -54,8 +54,8 @@ export interface WordUsageAnalysis {
 
 export interface TimeData {
   longestGap: number;
-  longestGapStart: Date;
-  longestGapEnd: Date;
+  longestGapStart: Date | null;
+  longestGapEnd: Date | null;
 }
 
 export interface ActiveDates {

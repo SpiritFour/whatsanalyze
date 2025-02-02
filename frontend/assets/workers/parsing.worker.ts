@@ -1,6 +1,6 @@
 import registerPromiseWorker from "promise-worker/register";
-import { defaultParser } from "~/utils/parsing";
+import { parser } from "~/utils/parsing";
 
 registerPromiseWorker(async (file: File) => {
-  return defaultParser.run(file);
+  return parser.run(file);
 });

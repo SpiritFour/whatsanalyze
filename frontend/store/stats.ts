@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
-import type { defaultParserResult } from "~/utils/parsing";
+import type { ParserResult } from "~/utils/parsing";
 
 type StatsStoreDate = {
-  result: defaultParserResult | null;
+  result: ParserResult | null;
   isLoading: boolean;
 };
 
