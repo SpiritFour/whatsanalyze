@@ -26,6 +26,43 @@ export class Chat {
     );
   }
 
+  static calculateAverageResponseTime(chatObject, author) {
+
+    // Remove irrelevant messages
+    const filteredMessages = Chat.removeSystemMessages(chatObject);
+
+    // Get only the messages from the specified author
+    const authorMessages = filteredMessages.filter(
+      (message) => message.author === author
+    );
+
+    // If the author has no messages, return 0, min. length is 2 because the average response time is calculated by the distance between 2 messages
+    if (authorMessages.length < 2) return 0;
+
+    let totalResponseTime = 0;
+    let responseCount = 0;
+
+    for (let i = 1; i < filteredMessages.length; i++) {
+      const previousMessage = filteredMessages[i - 1];
+      const currentMessage = filteredMessages[i];
+
+      // Calculate the response time between messages
+      if (
+        currentMessage.author === author &&
+        previousMessage.author !== author // The author responded to someone else
+      ) {
+        const responseTime =
+          new Date(currentMessage.date) - new Date(previousMessage.date);
+        totalResponseTime += responseTime;
+        responseCount++;
+      }
+    }
+
+    // Return the average response time
+    return responseCount === 0 ? 0 : totalResponseTime / responseCount;
+  }
+
+
   // Find hapax legomenons, a word or an expression that occurs only once within the context.
   static uniqueWords(chat_distribution) {
     function singleOccurrence(value) {
@@ -200,16 +237,26 @@ export class Chat {
     let grouped = false;
 
     persons.forEach((person, idx) => {
+      const [personName, personMessages] = person;
+
       if (idx > this._groupAfter) {
         enrichedPersons[this._groupAfter].messages = enrichedPersons[
           this._groupAfter
         ].messages.concat(person[1]);
         grouped = true;
       } else {
+        const averageResponseTime = Chat.calculateAverageResponseTime(
+          this.filterdChatObject,
+          personName
+        );
+
+        console.log(personName, averageResponseTime)
+
         enrichedPersons.push({
-          name: person[0],
-          color: this.personColorMap[person[0]],
-          messages: person[1].sort((a, b) => a.date - b.date),
+          name: personName,
+          color: this.personColorMap[personName],
+          messages: personMessages.sort((a, b) => a.date - b.date),
+          averageResponseTime: averageResponseTime,
         });
       }
     });

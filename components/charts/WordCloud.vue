@@ -9,7 +9,7 @@ import { withoutEmoji } from "emoji-aware";
 import stopwords from "stopwords-de";
 
 export default {
-  name: "WordCloud",
+      name: "WordCloud",
   props: {
     chartdata: new Chat(),
     minWordLength: {
