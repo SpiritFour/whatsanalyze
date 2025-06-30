@@ -79,6 +79,11 @@
         </v-col>
       </v-row>
 
+      <div class="text-h3 font-weight-bold pt-10">
+        {{ $t("averageResponseTime") }}
+      </div>
+      <AverageResponseTime :chartdata="chat" class="px-10" />
+
       <div class="text-h3 font-weight-bold pt-10">{{ $t("wordCloud") }}</div>
       <ChartsWordCloud id="wordcloud" :chartdata="chat" class="px-10" />
 
@@ -107,7 +112,10 @@
 </template>
 
 <script>
+import AverageResponseTime from "~/components/charts/AverageResponseTime.vue";
+
 export default {
+  components: { AverageResponseTime },
   props: ["chat", "attachments", "isValidSubscription"],
 };
 </script>
