@@ -9,6 +9,54 @@
 
     <div ref="aboveTheFold" class="top-color" style="overflow-y: hidden">
       <v-container>
+        <v-alert
+          prominent
+          dark
+          class="mb-6 elevation-3 wrapped-banner"
+          style="border-radius: 12px; overflow: hidden; border: none"
+        >
+          <template #prepend>
+            <v-icon
+              large
+              class="mr-4 animate__animated animate__tada animate__infinite"
+              >mdi-party-popper</v-icon
+            >
+          </template>
+
+          <v-row align="center" no-gutters>
+            <v-col cols="12" md="8" lg="9">
+              <div class="text-h6 text-sm-h5 font-weight-bold white--text mb-1">
+                WHATSAPP WRAPPED 2026 IS HERE!
+              </div>
+              <div
+                class="subtitle-1 white--text text--lighten-1"
+                style="line-height: 1.4"
+              >
+                Your chat, told like a story. See your most active hours,
+                funniest exchanges, and emotional peaks.
+                <strong>100% Private.</strong>
+              </div>
+            </v-col>
+            <v-col
+              cols="12"
+              md="4"
+              lg="3"
+              class="text-center text-md-right mt-4 mt-md-0"
+            >
+              <v-btn
+                color="white"
+                light
+                x-large
+                class="font-weight-bold px-8"
+                rounded
+                :href="'https://wrapped.whatsanalyze.com/' + $i18n.locale"
+              >
+                See Your Story
+                <v-icon right>mdi-arrow-right</v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-alert>
         <v-row
           v-if="$vuetify.breakpoint.mdAndUp"
           :style="
@@ -355,5 +403,10 @@ export default {
   100% {
     transform: translateX(0);
   }
+}
+
+.wrapped-banner {
+  /* A rich gradient that looks premium against the teal background */
+  background: linear-gradient(90deg, #4527a0 0%, #7b1fa2 100%) !important;
 }
 </style>
