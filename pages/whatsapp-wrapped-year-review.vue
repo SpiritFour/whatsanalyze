@@ -251,13 +251,6 @@
       <div class="container">
         <h2>{{ $t("ctaSectionTitle") }}</h2>
         <p>{{ $t("ctaSectionText") }}</p>
-        <Cta
-          to="/"
-          class="cta-section py-5"
-          :title="$t('heroTitle', { currentYear })"
-          :button-txt="$t('ctaButton')"
-          :text="$t('ctaSectionText')"
-        />
       </div>
     </section>
 
@@ -319,8 +312,8 @@ export default {
   },
   methods: {
     goToHome() {
-      const homePath = this.localePath("index"); // Dynamically generate the localized path for the home page
-      this.$router.push(homePath);
+      const utmParams = "?utm_source=whatsanalyze&utm_medium=referral&utm_campaign=wrapped-2026";
+      window.location.href = `https://wrapped.whatsanalyze.com/${this.$i18n.locale}${utmParams}`;
     },
   },
 };
