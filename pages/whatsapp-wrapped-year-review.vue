@@ -312,8 +312,8 @@ export default {
   },
   methods: {
     goToHome() {
-      // Access locale via this.$i18n.locale
-      window.location.href = `https://wrapped.whatsanalyze.com/${this.$i18n.locale}`;
+      const utmParams = "?utm_source=whatsanalyze&utm_medium=referral&utm_campaign=wrapped-2026";
+      window.location.href = `https://wrapped.whatsanalyze.com/${this.$i18n.locale}${utmParams}`;
     },
   },
 };

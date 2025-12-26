@@ -49,7 +49,7 @@
                 x-large
                 class="font-weight-bold px-8"
                 rounded
-                :href="'https://wrapped.whatsanalyze.com/' + $i18n.locale"
+                :href="'https://wrapped.whatsanalyze.com/' + $i18n.locale + '?utm_source=whatsanalyze&utm_medium=referral&utm_campaign=wrapped-2026'"
               >
                 See Your Story
                 <v-icon right>mdi-arrow-right</v-icon>
