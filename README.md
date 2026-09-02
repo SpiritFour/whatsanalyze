@@ -19,7 +19,7 @@ Please report bugs in the github issues.
 # Running whatsanalyze locally
 
 ## Build Setup
-We use node 16, with 18 we had issues with our linter. The project also needs python to be installed, but the version needs to be `3.11` or lower.
+We use Node.js 22 and pnpm 8.15.8. The project also needs Python 3.11 because some legacy build dependencies compile native modules.
 
 ```bash
 # install dependencies
