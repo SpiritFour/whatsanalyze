@@ -115,7 +115,7 @@ export class Chat {
     chatObject = [],
     groupAfter = 9,
     maxWordsWordCloud = 150,
-    maxWordsEmojiCloud = 50000
+    maxWordsEmojiCloud = 150
   ) {
     // this one is the complete input
     this.chatObject = chatObject;
@@ -472,8 +472,20 @@ export class Chat {
     return this._allWords.then((x) => x.slice(0, this._maxWordsWordCloud));
   }
 
-  // New method to extract and count emojis, limited to 1000 emojis
   getEmojiCloudData() {
-    return this._allWords.then((x) => x.slice(0, this._maxWordsEmojiCloud));
+    return this._allWords.then((words) => {
+      const emojiFrequencies = {};
+
+      words.forEach(({ word, freq }) => {
+        onlyEmoji(word).forEach((emoji) => {
+          emojiFrequencies[emoji] = (emojiFrequencies[emoji] || 0) + freq;
+        });
+      });
+
+      return Object.entries(emojiFrequencies)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, this._maxWordsEmojiCloud)
+        .map(([word, freq]) => ({ word, freq }));
+    });
   }
 }
