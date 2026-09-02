@@ -31,13 +31,13 @@ export default {
       // its possible that the first person did not write any message at all
       ego: this.chat.messagesPerPerson[0]?.name,
       price: 7.99,
-      currency: "EUR"
+      currency: "EUR",
     };
   },
   methods: {
     setEgo(ego) {
       this.ego = ego;
-    }
-  }
+    },
+  },
 };
 </script>

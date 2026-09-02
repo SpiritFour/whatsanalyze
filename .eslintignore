@@ -3,4 +3,6 @@ static/sw.js
 .direnv
 .idea
 .nuxt
+coverage
+dist
 node_modules

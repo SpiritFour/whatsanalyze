@@ -264,7 +264,7 @@ export default {
     downloadSample() {
       gtagEvent("sample_download", GTAG_PDF, 2);
       const query = (this.$route && this.$route.query) || {};
-      this.download(!('free' in query));
+      this.download(!("free" in query));
     },
     workerResponseHandler: function (event) {
       const data = event.data;
