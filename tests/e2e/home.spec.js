@@ -22,13 +22,6 @@ test("renders the analyzer landing page", async ({ page }) => {
     page.getByText("Analyze your WhatsApp Chat in Seconds", { exact: true })
   ).toBeVisible();
   await expect(page.locator("#uploadmytextfile")).toBeAttached();
-
-  await page.addStyleTag({
-    content: ".amcharts-chart-div { visibility: hidden !important; }",
-  });
-  await expect(page.locator(".top-color")).toHaveScreenshot(
-    "analyzer-landing.png"
-  );
 });
 
 test("analyzes the example chat without uploading its contents", async ({

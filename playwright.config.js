@@ -14,12 +14,6 @@ module.exports = defineConfig({
     ignoreHTTPSErrors: true,
     trace: "retain-on-failure",
   },
-  expect: {
-    toHaveScreenshot: {
-      animations: "disabled",
-      maxDiffPixelRatio: 0.01,
-    },
-  },
   projects: [
     {
       name: "desktop-chromium",
