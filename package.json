@@ -16,6 +16,7 @@
     "generate": "nuxt generate",
     "start": "nuxt start",
     "test": "jest --runInBand",
+    "test:e2e": "playwright test",
     "test:generated": "node scripts/verify-generated-site.js",
     "local": "NUXT_ENV_LOCAL=1 nuxt generate && NUXT_ENV_LOCAL=1 nuxt start",
     "ci-dev-build": "NUXT_ENV_LOCAL=1 nuxt generate",
@@ -75,6 +76,7 @@
     "worker-loader": "^3.0.8"
   },
   "devDependencies": {
+    "@playwright/test": "1.62.1",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@nuxt/types": "2.18.1",
     "@nuxt/typescript-build": "^2.1.0",
