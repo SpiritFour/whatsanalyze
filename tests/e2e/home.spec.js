@@ -128,6 +128,44 @@ test("starts a subscription through the Firebase PayPal endpoint", async ({
   expect(functionRequest.postDataJSON().data.client_id).toBeTruthy();
 });
 
+test("activates a subscription after returning from PayPal", async ({
+  page,
+}) => {
+  let statusChecks = 0;
+  await page.route("**/checksubscriberstatus", async (route) => {
+    const request = route.request();
+    if (request.method() === "OPTIONS") {
+      await route.fulfill({
+        status: 204,
+        headers: {
+          "access-control-allow-origin": "*",
+          "access-control-allow-headers": "content-type",
+        },
+      });
+      return;
+    }
+
+    statusChecks += 1;
+    await route.fulfill({
+      contentType: "application/json",
+      headers: { "access-control-allow-origin": "*" },
+      body: JSON.stringify({
+        data: {
+          isValid: statusChecks > 1,
+          data: { subscriptionId: "I-TEST-SUBSCRIPTION" },
+        },
+      }),
+    });
+  });
+
+  await page.goto("/subscribe?subscription_id=I-TEST-SUBSCRIPTION");
+
+  await expect(
+    page.getByRole("heading", { name: "Your subscription is Active" })
+  ).toBeVisible({ timeout: 10_000 });
+  expect(statusChecks).toBe(2);
+});
+
 test("renders migrated markdown content", async ({ page }) => {
   await page.goto("/how-to-export-your-whatsapp-chat");
 

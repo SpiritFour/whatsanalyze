@@ -95,6 +95,13 @@ class BackendClient {
       }
     );
 
+    if (!response.ok) {
+      const error = await response.text();
+      throw new Error(
+        `PayPal subscription lookup failed (${response.status}): ${error}`
+      );
+    }
+
     return response.json();
   }
 
@@ -247,32 +254,38 @@ class BackendClient {
   }
 
   async getSubscription(email, subscriptionId) {
+    let storedData;
     if (email) {
       const data = await this.getSubscriptionDataByEmail(email);
-      const retrievedData = data.docs[0]?.data();
-      return {
-        isValid: !data.empty,
-        data: {
-          subscriptionId: retrievedData?.subscriptionData?.id,
-          email: retrievedData?.subscriptionData?.subscriber?.email_address,
-          name: retrievedData?.subscriptionData?.subscriber?.name,
-          expirationTimestamp: retrievedData?.expirationTimestamp,
-        },
-      };
-    } else {
-      const data = await this.getSubscriptionDataById(subscriptionId);
-      const retrievedData = data.data();
-
-      return {
-        isValid: data.exists,
-        data: {
-          subscriptionId: retrievedData?.subscriptionData?.id,
-          email: retrievedData?.subscriptionData?.subscriber?.email_address,
-          name: retrievedData?.subscriptionData?.subscriber?.name,
-          expirationTimestamp: retrievedData?.expirationTimestamp,
-        },
-      };
+      storedData = data.docs[0]?.data();
+      subscriptionId = storedData?.subscriptionData?.id;
     }
+
+    if (!subscriptionId) {
+      return { isValid: false, data: {} };
+    }
+
+    const subscriptionData = await this.getDataForSubscription(subscriptionId);
+    const isValid = subscriptionData.status === "ACTIVE";
+
+    if (isValid) {
+      await db
+        .collection(this.subscriptionCollectionName)
+        .doc(subscriptionId)
+        .set({ subscriptionData }, { merge: true });
+    }
+
+    return {
+      isValid,
+      data: {
+        subscriptionId: subscriptionData.id,
+        email: subscriptionData.subscriber?.email_address,
+        name: subscriptionData.subscriber?.name,
+        expirationTimestamp:
+          subscriptionData.billing_info?.next_billing_time ||
+          storedData?.expirationTimestamp,
+      },
+    };
   }
 }
 
