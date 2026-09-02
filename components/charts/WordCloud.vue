@@ -42,7 +42,7 @@ export default {
           // Remove Emojis
           return withoutEmoji(wordObj.word).length > 0;
         });
-        this.series.data = wordData
+        this.series.data = wordData;
       });
     },
   },

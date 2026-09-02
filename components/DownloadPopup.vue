@@ -79,8 +79,7 @@
         <div v-if="!isSimple" class="text-text-h3 my-4">
           <v-col>
             <div v-if="!isSimple" class="text-body-1 pb-2">
-              {{ $t("lookingFor") }} <b>{{ $t("pdfDownload") }}
-            </b>?
+              {{ $t("lookingFor") }} <b>{{ $t("pdfDownload") }} </b>?
             </div>
 
             <v-btn
@@ -105,24 +104,29 @@
 <script>
 import html2canvas from "html2canvas";
 import { downloadBase64File } from "~/utils/utils";
-import { GTAG_INTERACTION, GTAG_PAYMENT, GTAG_RESULTS, gtagEvent } from "~/utils/gtagValues";
+import {
+  GTAG_INTERACTION,
+  GTAG_PAYMENT,
+  GTAG_RESULTS,
+  gtagEvent,
+} from "~/utils/gtagValues";
 
 export default {
   name: "DownloadPopup",
   props: {
     chat: { type: Object },
-    isSimple: { default: false, type: Boolean }
+    isSimple: { default: false, type: Boolean },
   },
   data() {
     return {
       dialog: false,
       loading: false,
       suffix: this.isSimple ? "-top" : "",
-      GTAG_INTERACTION
+      GTAG_INTERACTION,
     };
   },
   methods: {
-    download: function() {
+    download: function () {
       this.loading = true;
       gtagEvent("download_image", GTAG_RESULTS);
 
@@ -145,13 +149,13 @@ export default {
           scrollX: 0,
           scrollY: -window.scrollY,
           height: normalHeight + additionalHeight + negativeHeight,
-          onclone: function(clonedDoc) {
+          onclone: function (clonedDoc) {
             let nonVisibleStuff = clonedDoc.querySelectorAll(
               ".only-visible-to-html2canvas"
             );
             nonVisibleStuff.forEach((y) => (y.style.display = "block"));
             return clonedDoc;
-          }
+          },
         });
 
         let names = this.chat.messagesPerPerson
@@ -170,7 +174,7 @@ export default {
     paypalButtonPressed() {
       gtagEvent("donation_download_results", GTAG_PAYMENT, 5);
     },
-    gtagEvent
-  }
+    gtagEvent,
+  },
 };
 </script>

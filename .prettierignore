@@ -1,4 +1,5 @@
 .nuxt
+dist
 *.md
 node_modules
 coverage

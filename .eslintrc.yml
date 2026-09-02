@@ -1,6 +1,7 @@
 env:
   browser: true
   node: true
+root: true
 extends:
   - "eslint:recommended"
   #  - "@nuxtjs/eslint-config-typescript"
