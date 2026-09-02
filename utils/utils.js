@@ -35,19 +35,27 @@ export function lastDate(chat) {
 
 // this is used on objects that should be transfered to the web worker
 // the webworker can not receive functions
-export function objectToDictionary(obj, dict = {}) {
-  for (const [key, value] of Object.entries(obj)) {
-    if (
-      typeof value === "object" &&
-      value !== null &&
-      !Array.isArray(value) &&
-      !(value instanceof Date)
-    ) {
-      objectToDictionary(value, (dict[key] = {}));
-    } else if (typeof value !== "function") {
-      dict[key] = value;
-    }
+export function objectToDictionary(value) {
+  if (typeof value === "function") return undefined;
+  if (value === null || typeof value !== "object") return value;
+  if (
+    value instanceof Date ||
+    value instanceof ArrayBuffer ||
+    ArrayBuffer.isView(value)
+  ) {
+    return value;
   }
+
+  if (Array.isArray(value)) {
+    return value.map(objectToDictionary);
+  }
+
+  const dict = {};
+  for (const [key, nestedValue] of Object.entries(value)) {
+    const clonedValue = objectToDictionary(nestedValue);
+    if (clonedValue !== undefined) dict[key] = clonedValue;
+  }
+
   return dict;
 }
 
@@ -63,9 +71,12 @@ export const getImgSizes = function (imgUrl) {
 };
 
 export const loadImage = async function (selector) {
-  const imgUrl = document
-    .querySelector(selector + ">*>canvas")
-    .toDataURL("image/png");
+  const canvas = document.querySelector(`${selector} canvas`);
+  if (!(canvas instanceof HTMLCanvasElement)) {
+    throw new Error(`Could not find chart canvas in "${selector}"`);
+  }
+
+  const imgUrl = canvas.toDataURL("image/png");
   const sizes = await getImgSizes(imgUrl);
   return { img: imgUrl, width: sizes[0], height: sizes[1] };
 };

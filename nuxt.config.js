@@ -133,12 +133,12 @@ export default defineNuxtConfig({
     defaultLocale: "en",
     strategy: "prefix_except_default",
     locales: [
-      { code: "en", language: "en-US" },
-      { code: "de", language: "de-DE" },
-      { code: "es", language: "es-ES" },
-      { code: "fr", language: "fr-FR" },
-      { code: "pt", language: "pt-PT" },
-      { code: "it", language: "it-IT" },
+      { code: "en", language: "en-US", name: "English" },
+      { code: "de", language: "de-DE", name: "Deutsch" },
+      { code: "es", language: "es-ES", name: "Español" },
+      { code: "fr", language: "fr-FR", name: "Français" },
+      { code: "pt", language: "pt-PT", name: "Português" },
+      { code: "it", language: "it-IT", name: "Italiano" },
     ],
     detectBrowserLanguage: {
       alwaysRedirect: false,

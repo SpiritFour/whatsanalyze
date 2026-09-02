@@ -44,6 +44,21 @@ test("analyzes the example chat without uploading its contents", async ({
     return body.includes("Jane Doe") || body.includes("John Doe");
   });
   expect(uploadedChatRequests).toEqual([]);
+
+  const downloadPromise = page.waitForEvent("download", { timeout: 60_000 });
+  await page
+    .getByRole("button", { name: /Download free preview PDF/i })
+    .click();
+  await downloadPromise;
+});
+
+test("switches to a localized route", async ({ page }) => {
+  await page.getByLabel("Select language").selectOption("de");
+
+  await expect(page).toHaveURL(/\/de\/?$/);
+  await expect(
+    page.getByText("Analysiere dein WhatsApp Chat in Sekunden", { exact: true })
+  ).toBeVisible();
 });
 
 test("renders migrated markdown content", async ({ page }) => {

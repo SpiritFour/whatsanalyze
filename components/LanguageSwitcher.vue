@@ -1,64 +1,36 @@
 <template>
-  <select v-model="selectedLocale" class="text-md-h3 text-h4">
+  <select
+    :value="locale"
+    class="text-md-h3 text-h4"
+    aria-label="Select language"
+    @change="setLocale"
+  >
     <option
       v-for="locale in availableLocales"
       :key="locale.code"
       :value="locale.code"
     >
-      {{ locale.flag }}
+      {{ flags[locale.code] }} {{ locale.name }}
     </option>
   </select>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      selectedLocale: this.$i18n.locale,
-      availableLocales: [
-        {
-          code: "en",
-          name: "English",
-          flag: "🇬🇧",
-          iso: "en-GB",
-        },
-        {
-          code: "de",
-          name: "Deutsch",
-          flag: "🇩🇪",
-          iso: "de-DE",
-        },
-        {
-          code: "es",
-          name: "Español",
-          flag: "🇪🇸",
-          iso: "es-ES",
-        },
-        {
-          code: "pt",
-          name: "Português",
-          flag: "🇧🇷",
-          iso: "pt-PT",
-        },
-        {
-          code: "fr",
-          name: "Français",
-          flag: "🇫🇷",
-          iso: "fr-FR",
-        },
-        {
-          code: "it",
-          name: "Italiano",
-          flag: "🇮🇹",
-          iso: "it-IT",
-        },
-      ],
-    };
-  },
-  watch: {
-    selectedLocale(newLocale) {
-      this.$router.push(this.switchLocalePath(newLocale));
-    },
-  },
+<script setup>
+const { locale, locales } = useI18n();
+const switchLocalePath = useSwitchLocalePath();
+
+const flags = {
+  en: "🇬🇧",
+  de: "🇩🇪",
+  es: "🇪🇸",
+  pt: "🇧🇷",
+  fr: "🇫🇷",
+  it: "🇮🇹",
+};
+
+const availableLocales = computed(() => locales.value);
+
+const setLocale = (event) => {
+  return navigateTo(switchLocalePath(event.target.value));
 };
 </script>

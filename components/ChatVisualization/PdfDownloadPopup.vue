@@ -204,7 +204,11 @@ export default {
       GTAG_PAYMENT,
       GTAG_PDF,
       progress: 0,
+      pdfWorker: null,
     };
+  },
+  beforeUnmount() {
+    this.closePdfWorker();
   },
   methods: {
     handleFreePdfClick() {
@@ -225,9 +229,12 @@ export default {
     },
     onError() {},
     async download(isSample = false) {
-      if (process.browser) {
-        this.isLoading = true;
-        this.progress = 0;
+      if (!import.meta.client) return;
+
+      this.isLoading = true;
+      this.progress = 0;
+
+      try {
         // the graphs need to be converted to an image beforehand, as the web worker has no access to document
         const chatTimeline = await loadImage("#chat-timeline");
         const messagesPerTimeOfDay = await loadImage(
@@ -237,16 +244,17 @@ export default {
         const radarMonth = await loadImage("#radar-month");
         const radarDay = await loadImage("#radar-day");
 
-        const worker = new PDFWorker();
-        worker.addEventListener("message", this.workerResponseHandler);
+        this.pdfWorker = new PDFWorker();
+        this.pdfWorker.addEventListener("message", this.workerResponseHandler);
+        this.pdfWorker.addEventListener("error", this.pdfErrorHandler);
 
         const chat = objectToDictionary(this.chat); // remove functions
         chat.funFacts = await this.chat.getFunFacts(); // set funfacts beforehand instead of using function call
 
-        worker.postMessage({
+        this.pdfWorker.postMessage({
           // pass all data to service worker
           chat: chat,
-          attachments: this.attachments,
+          attachments: objectToDictionary(this.attachments),
           ego: this.ego,
           isSample,
           chatTimeline,
@@ -255,6 +263,8 @@ export default {
           radarMonth,
           radarDay,
         });
+      } catch (error) {
+        this.pdfErrorHandler(error);
       }
     },
     downloadSample() {
@@ -269,10 +279,26 @@ export default {
         const blob = new Blob([data.data], { type: "application/pdf" });
         saveAs(blob, "WhatsAnalyze - " + this.ego);
         this.isLoading = false;
+        this.closePdfWorker();
       }
       if (data.type === "progress") {
         this.progress = data.data;
       }
+    },
+    pdfErrorHandler(error) {
+      console.error("PDF generation failed", error);
+      this.$sentry?.captureException(error);
+      this.isLoading = false;
+      this.progress = 0;
+      this.closePdfWorker();
+    },
+    closePdfWorker() {
+      if (!this.pdfWorker) return;
+
+      this.pdfWorker.removeEventListener("message", this.workerResponseHandler);
+      this.pdfWorker.removeEventListener("error", this.pdfErrorHandler);
+      this.pdfWorker.terminate();
+      this.pdfWorker = null;
     },
     gtagEvent,
   },
