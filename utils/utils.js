@@ -1,4 +1,4 @@
-import * as moment from "moment";
+import moment from "moment";
 export function downloadBase64File(contentBase64, fileName) {
   const downloadLink = document.createElement("a");
   document.body.appendChild(downloadLink);

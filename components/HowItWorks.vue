@@ -18,7 +18,10 @@
       </v-col>
     </v-row>
 
-    <v-timeline align-top :dense="$vuetify.breakpoint.smAndDown">
+    <v-timeline
+      align="start"
+      :density="$vuetify.display.smAndDown ? 'compact' : 'default'"
+    >
       <v-timeline-item
         v-for="(item, i) in items"
         :key="i"

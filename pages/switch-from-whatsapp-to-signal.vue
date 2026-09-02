@@ -14,46 +14,24 @@
 <script>
 export default {
   name: "SwitchFromWhatsappToSignal",
-  async asyncData({ $content }) {
-    const page = await $content("whatsapp-signal").fetch();
+  async setup() {
+    useSeoMeta({
+      title: "WhatsAnalyze - How to switch from WhatsApp to Signal",
+      description:
+        "Switch from WhatsApp to Signal, transfer group chats, and create backups.",
+      ogTitle: "WhatsAnalyze - How to switch from WhatsApp to Signal",
+      ogSiteName: "WhatsAnalyze - How to switch from WhatsApp to Signal",
+      ogDescription:
+        "Switch from WhatsApp to Signal, transfer group chats, and create backups.",
+      ogUrl: "https://www.whatsanalyze.com/switch-from-whatsapp-to-signal",
+    });
+
+    const { data: page } = await useAsyncData("content-whatsapp-signal", () =>
+      queryCollection("pages").path("/whatsapp-signal").first()
+    );
     return {
       page,
     };
-  },
-  head: {
-    title: "WhatsAnalyze - How to switch from Signal to WhatsApp",
-    meta: [
-      {
-        hid: "og:title",
-        name: "og:title",
-        property: "og:title",
-        content: "WhatsAnalyze - How to switch from WhatsApp to PDF",
-      },
-      {
-        hid: "og:site_name",
-        name: "og:site_name",
-        property: "og:site_name",
-        content: "WhatsAnalyze - How to switch from WhatsApp to PDF",
-      },
-      {
-        hid: "description",
-        name: "description",
-        property: "description",
-        content: "metaDescriptionSignal",
-      },
-      {
-        hid: "og:description",
-        name: "og:description",
-        property: "og:description",
-        content: "metaDescriptionSignal",
-      },
-      {
-        hid: "og:url",
-        name: "og:url",
-        property: "og:url",
-        content: "whatsanalyze.com/switch-from-whatsapp-to-signal",
-      },
-    ],
   },
 };
 </script>

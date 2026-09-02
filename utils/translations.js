@@ -12,6 +12,13 @@ export const messages = {
       "Most popular WhatsApp analyzer ✓ Now with PDF chat export ✓ Reveal your friends character ✓ Free statistics. Get Started now!",
     metaDescriptionSignal:
       "Switch from WhatsApp to Signal ✓ Transfer your Group Chats ✓ Create Backups ✓ Free statistics and PDF chat export. Get Started now!",
+    writeUs: "Write Us!",
+    cardText:
+      "Do you have feedback for us? Did something not work? Do you have suggestions for improvement? Let us know!",
+    messageReceived: "We received your message!",
+    name: "Name is required",
+    email: "E-mail must be valid",
+    rating: "Rating is required",
     known: "Known from:",
     backupWhatsApp: "Backup your WhatsApp Data",
     exportAsPDF: "Save your chat as PDF",
@@ -273,6 +280,13 @@ export const messages = {
       "Beliebtester WhatsApp Analyzer ✓ Jetzt mit PDF chat export ✓ Enthülle den Charakter deiner Freunde ✓ Kostenlose Statistiken. Get Started now!",
     metaDescriptionSignal:
       "Wechsel von WhatsApp zu Signal ✓ Übertrage deine Gruppenchats ✓ Erstelle Backups",
+    writeUs: "Schreibe uns!",
+    cardText:
+      "Hast du Feedback für uns? Hat etwas nicht funktioniert? Hast du Verbesserungsvorschläge? Lass es uns wissen!",
+    messageReceived: "Wir haben deine Nachricht erhalten!",
+    name: "Name fehlt",
+    email: "E-Mail muss gültig sein",
+    rating: "Bewertung fehlt",
     nown: "Bekannt aus:",
     ctaBullets:
       "✓ Gruppen Chats ✓ Erstelle ein PDF aus deinem Chat ✓ Privat und Sicher",

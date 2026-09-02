@@ -55,41 +55,20 @@
 <script>
 export default {
   name: "HowToExportYourWhatsappChat",
-  title: "WhatsAnalyze - How to export WhatsApp chat",
-  meta: [
-    {
-      hid: "og:title",
-      name: "og:title",
-      property: "og:title",
-      content: "WhatsAnalyze - How to export WhatsApp chat",
-    },
-    {
-      hid: "og:site_name",
-      name: "og:site_name",
-      property: "og:site_name",
-      content: "WhatsAnalyze - How to export WhatsApp chat",
-    },
-    {
-      hid: "description",
-      name: "description",
-      property: "description",
-      content: "metaDescriptionWhatsExport",
-    },
-    {
-      hid: "og:description",
-      name: "og:description",
-      property: "og:description",
-      content: "metaDescriptionWhatsExport",
-    },
-    {
-      hid: "og:url",
-      name: "og:url",
-      property: "og:url",
-      content: "whatsanalyze.com/how-to-export-your-whatsapp-chat",
-    },
-  ],
-  async asyncData({ $content }) {
-    const page = await $content("how-to-export-your-whatsapp-chat").fetch();
+  async setup() {
+    useSeoMeta({
+      title: "WhatsAnalyze - How to Export your WhatsApp Chat",
+      description: "Export your WhatsApp Chat. iOS tutorial and Android guide.",
+      ogTitle: "WhatsAnalyze - How to Export your WhatsApp Chat",
+      ogSiteName: "WhatsAnalyze - How to Export your WhatsApp Chat",
+      ogDescription:
+        "Export your WhatsApp Chat. iOS tutorial and Android guide.",
+      ogUrl: "https://www.whatsanalyze.com/how-to-export-your-whatsapp-chat",
+    });
+
+    const { data: page } = await useAsyncData("content-export-guide", () =>
+      queryCollection("pages").path("/how-to-export-your-whatsapp-chat").first()
+    );
     return {
       page,
     };
@@ -209,41 +188,6 @@ export default {
         },
       ],
     };
-  },
-  head: {
-    title: "WhatsAnalyze - How to Export your WhatsApp Chat",
-    meta: [
-      {
-        hid: "og:title",
-        name: "og:title",
-        property: "og:title",
-        content: "WhatsAnalyze - How to Export your WhatsApp Chat",
-      },
-      {
-        hid: "og:site_name",
-        name: "og:site_name",
-        property: "og:site_name",
-        content: "WhatsAnalyze - How to Export your WhatsApp Chat",
-      },
-      {
-        hid: "description",
-        name: "description",
-        property: "description",
-        content: "Export your Whatsapp Chat ✓ iOS Tutorial ✓ Android Guide",
-      },
-      {
-        hid: "og:description",
-        name: "og:description",
-        property: "og:description",
-        content: "Export your Whatsapp Chat ✓ iOS Tutorial ✓ Android Guide",
-      },
-      {
-        hid: "og:url",
-        name: "og:url",
-        property: "og:url",
-        content: "whatsanalyze.com/how-to-export-your-whatsapp-chat",
-      },
-    ],
   },
 };
 </script>

@@ -4,7 +4,7 @@
 
     <v-main style="overflow-x: hidden">
       <FeedbackBtn />
-      <nuxt />
+      <slot />
     </v-main>
 
     <GlobalFooter />

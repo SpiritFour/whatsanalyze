@@ -1,93 +1,86 @@
+<template>
+  <Bar v-if="graphData" :data="graphData" :options="chartOptions" />
+</template>
+
 <script>
 import { Bar } from "vue-chartjs";
 import { Chat } from "~/utils/transformChatData";
 
 export default {
-  extends: Bar,
+  components: { Bar },
   props: {
-    chartdata: new Chat(),
+    chartdata: {
+      type: Object,
+      default: () => new Chat(),
+    },
     dataGrouping: {
       type: String,
-      validator: function (value) {
-        // The value must match one of these strings
-        return ["hourly", "daily", "weekly"].indexOf(value) !== -1;
+      validator(value) {
+        return ["hourly", "daily", "weekly"].includes(value);
       },
+      default: "weekly",
     },
     options: {
       type: Object,
-      default: function () {
-        return {
-          responsive: true,
-          maintainAspectRatio: false,
+      default: null,
+    },
+  },
+  data() {
+    return {
+      graphData: null,
+    };
+  },
+  computed: {
+    chartOptions() {
+      if (this.options) return this.options;
+
+      const stacked = this.chartdata.numPersonsInChat > 4;
+      return {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
           legend: {
             position: "bottom",
           },
-          scales: {
-            xAxes: [
-              {
-                gridLines: {
-                  display: false,
-                },
-              },
-            ],
-            yAxes: [
-              {
-                scaleLabel: {
-                  display: true,
-                  labelString: this.$t("messages"),
-                },
-                ticks: {
-                  beginAtZero: true,
-                  precision: 0,
-                },
-              },
-            ],
+        },
+        scales: {
+          x: {
+            stacked,
+            grid: {
+              display: false,
+            },
           },
-        };
-      },
+          y: {
+            stacked,
+            beginAtZero: true,
+            ticks: {
+              precision: 0,
+            },
+            title: {
+              display: true,
+              text: this.$t("messages"),
+            },
+          },
+        },
+      };
     },
   },
   watch: {
     chartdata: {
-      handler() {
-        this.updateGraph();
-      },
+      handler: "updateGraph",
       deep: true,
+      immediate: true,
     },
   },
   methods: {
-    setStacked(startStackingAt = 4) {
-      if (this.chartdata.numPersonsInChat > startStackingAt) {
-        // eslint-disable-next-line vue/no-mutating-props
-        this.options.scales.xAxes[0].stacked = true;
-        // eslint-disable-next-line vue/no-mutating-props
-        this.options.scales.yAxes[0].stacked = true;
-      } else {
-        // eslint-disable-next-line vue/no-mutating-props
-        this.options.scales.xAxes[0].stacked = false;
-        // eslint-disable-next-line vue/no-mutating-props
-        this.options.scales.yAxes[0].stacked = false;
-      }
+    async updateGraph() {
+      const loaders = {
+        hourly: "getHourlyData",
+        daily: "getDailyData",
+        weekly: "getWeeklyData",
+      };
+      this.graphData = await this.chartdata[loaders[this.dataGrouping]]();
     },
-    updateGraph() {
-      this.setStacked();
-      if (this.dataGrouping === "hourly") {
-        this.chartdata
-          .getHourlyData()
-          .then((x) => this.renderChart(x, this.options));
-      } else if (this.dataGrouping === "daily") {
-        this.chartdata
-          .getDailyData()
-          .then((x) => this.renderChart(x, this.options));
-      } else {
-        this.chartdata
-          .getWeeklyData()
-          .then((x) => this.renderChart(x, this.options));
-      }
-    },
-  },
-  mounted() {
-    this.updateGraph();
   },
 };
 </script>

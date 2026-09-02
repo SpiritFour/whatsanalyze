@@ -23,7 +23,7 @@
     <!-- Days you are chatting -->
     <v-row class="white--text">
       <v-col class="cyan darken-2 fact-box py-10" cols="12" sm="6">
-        <v-icon v-show="$vuetify.breakpoint.mdAndUp" size="100"
+        <v-icon v-show="$vuetify.display.mdAndUp" size="100"
           >mdi-calendar</v-icon
         >
         <v-row>
@@ -50,7 +50,7 @@
 
       <v-col class="amber darken-1 fact-box py-10" cols="12" sm="6">
         <v-icon
-          v-show="$vuetify.breakpoint.mdAndUp"
+          v-show="$vuetify.display.mdAndUp"
           color="yellow accent-1"
           size="100"
           >mdi-android-messages</v-icon

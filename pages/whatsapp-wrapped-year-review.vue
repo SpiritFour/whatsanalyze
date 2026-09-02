@@ -319,7 +319,7 @@ export default {
   },
   methods: {
     goToHome() {
-      const homePath = this.localePath("index"); // Dynamically generate the localized path for the home page
+      const homePath = this.$localePath("index"); // Dynamically generate the localized path for the home page
       this.$router.push(homePath);
     },
   },

@@ -5,16 +5,17 @@
     </div>
     <v-tabs v-model="tab" centered>
       <v-tab
-        v-for="data in tabData"
+        v-for="(data, index) in tabData"
         :key="data.title"
+        :value="index"
         class="text-body-1 text-md-h4"
         grow
         >{{ data.title }}
       </v-tab>
     </v-tabs>
-    <v-tabs-items v-model="tab">
+    <v-window v-model="tab">
       <client-only>
-        <v-tab-item v-for="(data, idx) in tabData" :key="idx">
+        <v-window-item v-for="(data, idx) in tabData" :key="idx" :value="idx">
           <v-row no-gutters>
             <v-col class="pb-10" cols="12" sm="8">
               <v-timeline dense>
@@ -26,7 +27,7 @@
                   class="mb-4 align-center"
                   fill-dot
                   small
-                  @click.native.stop="tabStatus = [i, i]"
+                  @click.stop="tabStatus = [i, i]"
                 >
                   <v-row style="cursor: pointer" v-html="$t(tabItem.text)">
                   </v-row>
@@ -51,7 +52,7 @@
               </v-btn>
             </v-col>
             <v-col
-              :class="{ 'mobile-padding': $vuetify.breakpoint.xsOnly }"
+              :class="{ 'mobile-padding': $vuetify.display.xs }"
               class="py-5 px-md-15"
               cols="12"
               sm="4"
@@ -71,7 +72,7 @@
                   <v-carousel-item
                     v-for="(item, idx) in data.carouselItems"
                     :key="idx"
-                    @click.native.stop="increaseTabstatus()"
+                    @click.stop="increaseTabstatus()"
                   >
                     <v-img :lazy-src="item.imgLazy" :src="item.img"></v-img>
                     <v-btn
@@ -92,9 +93,9 @@
               </div>
             </v-col>
           </v-row>
-        </v-tab-item>
+        </v-window-item>
       </client-only>
-    </v-tabs-items>
+    </v-window>
   </v-container>
 </template>
 
@@ -130,6 +131,7 @@ import img5_lazy from "@/assets/img/Android/5copy.png";
 import img6 from "@/assets/img/Android/6.png";
 import img6_lazy from "@/assets/img/Android/6copy.png";
 import { GTAG_INSTALL, GTAG_INTERACTION, gtagEvent } from "~/utils/gtagValues";
+import { scrollTo } from "~/utils/scroll";
 
 let apple = () => false;
 // eslint-disable-next-line no-undef
@@ -318,10 +320,7 @@ export default {
     clickHandler() {
       if (!this.to) {
         gtagEvent("jump_to_filehandler_" + this.tab, GTAG_INTERACTION, 0);
-        this.$vuetify.goTo(".filehandler", {
-          duration: 300,
-          offset: 100,
-        });
+        scrollTo(".filehandler", { offset: 100 });
       }
     },
     increaseTabstatus() {

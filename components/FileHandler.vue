@@ -10,7 +10,7 @@
         <div
           :class="{
             isDragging: isDragging,
-            smallFont: $vuetify.breakpoint.smAndDown,
+            smallFont: $vuetify.display.smAndDown,
             isSuccess: isSuccess,
           }"
           class="drop pa-3"
@@ -42,15 +42,9 @@
 
             <div :class="{ 'text-caption': isSuccess }">
               <div v-if="isSuccess" v-html="$t('fileDone')"></div>
-              <span
-                v-if="$vuetify.breakpoint.mdAndUp"
-                v-html="$t('fileSuccess')"
-              >
+              <span v-if="$vuetify.display.mdAndUp" v-html="$t('fileSuccess')">
               </span>
-              <span
-                v-if="$vuetify.breakpoint.smAndDown"
-                v-html="$t('fileSelect')"
-              >
+              <span v-if="$vuetify.display.smAndDown" v-html="$t('fileSelect')">
               </span>
 
               <span v-if="isSuccess" v-html="$t('fileAnother')"></span>

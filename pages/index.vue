@@ -10,7 +10,7 @@
     <div ref="aboveTheFold" class="top-color" style="overflow-y: hidden">
       <v-container>
         <v-row
-          v-if="$vuetify.breakpoint.mdAndUp"
+          v-if="$vuetify.display.mdAndUp"
           :style="
             isShowingChats
               ? 'height: fit-content'
@@ -58,7 +58,7 @@
             <ChartsExampleGraphs :chat_="chat" />
           </v-col>
         </v-row>
-        <v-row v-if="$vuetify.breakpoint.smAndDown" no-gutters>
+        <v-row v-if="$vuetify.display.smAndDown" no-gutters>
           <v-col class="px-0 pb-1 my-auto" cols="12">
             <HeaderCta />
 
@@ -122,14 +122,27 @@ import {
   GTAG_NUM_PERSONS,
   gtagEvent,
 } from "~/utils/gtagValues";
-import debounce from "lodash/debounce";
+import { debounce } from "lodash-es";
 import SubscriptionChecker from "~/components/SubscriptionChecker.vue";
 import { getSubscriptionParams } from "~/utils/subscription";
 
 export default {
   components: { SubscriptionChecker },
-  async asyncData({ $content }) {
-    const page = await $content("home").fetch();
+  async setup() {
+    useSeoMeta({
+      title: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+      description:
+        "Most Popular WhatsApp Analyzer. Reveal chat statistics and export your chat as a PDF without uploading your data.",
+      ogTitle: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+      ogSiteName: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+      ogDescription:
+        "Most Popular WhatsApp Analyzer. Reveal chat statistics and export your chat as a PDF without uploading your data.",
+      ogUrl: "https://www.whatsanalyze.com",
+    });
+
+    const { data: page } = await useAsyncData("content-home", () =>
+      queryCollection("pages").path("/home").first()
+    );
     return {
       page,
     };
@@ -145,43 +158,6 @@ export default {
         email: null,
         isValid: null,
       },
-    };
-  },
-  head() {
-    return {
-      title: "WhatsAnalyze - The WhatsApp Chat Analyzer",
-      meta: [
-        {
-          hid: "og:title",
-          name: "og:title",
-          property: "og:title",
-          content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
-        },
-        {
-          hid: "og:site_name",
-          name: "og:site_name",
-          property: "og:site_name",
-          content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
-        },
-        {
-          hid: "description",
-          name: "description",
-          property: "description",
-          content: "metaDescription",
-        },
-        {
-          hid: "og:description",
-          name: "og:description",
-          property: "og:description",
-          content: "metaDescription",
-        },
-        {
-          hid: "og:url",
-          name: "og:url",
-          property: "og:url",
-          content: "whatsanalyze.com",
-        },
-      ],
     };
   },
   created() {
@@ -201,7 +177,7 @@ export default {
     this.subscription.email = email;
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     window.removeEventListener("scroll", this.handleDebouncedScroll);
   },
   methods: {

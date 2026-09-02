@@ -1,34 +1,12 @@
-<i18n>
-{
-  "en": {
-    "writeUs": "Write Us!",
-    "cardText": "Do you have feedback for us? Did something not work? Do you have suggestions for improvement? Let us know!",
-    "messageReceived": "We received your message!",
-    "name": "Name is required",
-    "email": "E-mail must be valid",
-    "rating": "Rating is required"
-  },
-  "de": {
-    "writeUs": "Schreibe uns!",
-    "cardText": "Hast du Feedback für uns? Hat etwas nicht funktioniert? Hast du Verbesserungsvorschläge? Lass es uns wissen!",
-    "messageReceived": "Wir haben deine Nachricht erhalten!",
-    "name": "Name fehlt",
-    "email": "E-Mail muss gültig sein",
-    "rating": "Bewertung fehlt"
-  }
-}
-
-</i18n>
 <template>
   <div class="bottom-right">
     <v-dialog v-model="dialog" width="500">
-      <template #activator="{ on, attrs }">
+      <template #activator="{ props }">
         <v-btn
           class="rounded-0 btn pa-0 btn-color-dark"
           dark
           elevation="0"
-          v-bind="attrs"
-          v-on="on"
+          v-bind="props"
         >
           <div class="wrapper my-2 mr-1">
             <span class="rotate-text">{{ $t("writeUs") }}</span>
@@ -128,8 +106,8 @@ export default {
   },
 
   methods: {
-    validate() {
-      const valid = this.$refs.form.validate();
+    async validate() {
+      const { valid } = await this.$refs.form.validate();
       if (valid) {
         this.valid = false;
         const mail = {
@@ -146,16 +124,12 @@ export default {
               locale: this.$i18n.locale,
               email: this.email,
             },
-            created: this.$fireModule.firestore.FieldValue.serverTimestamp(),
+            created: this.$firebase.serverTimestamp(),
           },
         };
-        this.$fire.firestore
-          .collection("mail")
-          .doc()
-          .set(mail)
-          .then(() => {
-            this.message = this.$t("messageReceived");
-          });
+        this.$firebase.sendFeedback(mail).then(() => {
+          this.message = this.$t("messageReceived");
+        });
       }
     },
   },

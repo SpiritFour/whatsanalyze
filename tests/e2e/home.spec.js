@@ -4,10 +4,16 @@ const { expect, test } = require("@playwright/test");
 const exampleChat = path.resolve(__dirname, "../../static/chat_example.txt");
 
 test.beforeEach(async ({ page }) => {
+  page.runtimeErrors = [];
+  page.on("pageerror", (error) => page.runtimeErrors.push(error.message));
   await page.addInitScript(() => {
     localStorage.setItem("i18n_redirected", "en");
   });
   await page.goto("/");
+});
+
+test.afterEach(async ({ page }) => {
+  expect(page.runtimeErrors).toEqual([]);
 });
 
 test("renders the analyzer landing page", async ({ page }) => {
@@ -45,4 +51,18 @@ test("analyzes the example chat without uploading its contents", async ({
     return body.includes("Jane Doe") || body.includes("John Doe");
   });
   expect(uploadedChatRequests).toEqual([]);
+});
+
+test("renders migrated markdown content", async ({ page }) => {
+  await page.goto("/how-to-export-your-whatsapp-chat");
+
+  await expect(page).toHaveTitle(/How to Export your WhatsApp Chat/);
+  await expect(
+    page.getByText("Export WhatsApp Chat: The Ultimate Guide", { exact: true })
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", {
+      name: "Option 1: iPhone (iOS) - Export as a .txt File",
+    })
+  ).toBeVisible();
 });

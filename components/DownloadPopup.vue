@@ -88,7 +88,7 @@
               dark
               @click="
                 gtagEvent('jump_to_pdf_download_cta', GTAG_INTERACTION, 0);
-                $vuetify.goTo('#payButton', { duration: 300, offset: 100 });
+                scrollTo('#payButton', { offset: 100 });
               "
             >
               <v-icon class="mr-2">mdi-arrow-right</v-icon>
@@ -104,6 +104,7 @@
 <script>
 import html2canvas from "html2canvas";
 import { downloadBase64File } from "~/utils/utils";
+import { scrollTo } from "~/utils/scroll";
 import {
   GTAG_INTERACTION,
   GTAG_PAYMENT,
@@ -123,6 +124,7 @@ export default {
       loading: false,
       suffix: this.isSimple ? "-top" : "",
       GTAG_INTERACTION,
+      scrollTo,
     };
   },
   methods: {

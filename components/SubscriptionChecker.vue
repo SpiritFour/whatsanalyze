@@ -52,12 +52,13 @@ export default {
     },
     async loadSubscription(data) {
       console.log("Loading", data);
-      const response = await this.$fire.functions.httpsCallable(
-        "checksubscriberstatus"
-      )({
-        ...data,
-        client_id: this.$config.paypalClientId,
-      });
+      const response = await this.$firebase.callFunction(
+        "checksubscriberstatus",
+        {
+          ...data,
+          client_id: this.$config.paypalClientId,
+        }
+      );
 
       this.subscriptionData = await response.data;
       this.isValid = this.subscriptionData.isValid;

@@ -4,91 +4,90 @@
       {{ $t("faqWhatsapp") }}
     </div>
     <v-expansion-panels v-model="expandedPanels" multiple class="px-sm-10 px-0">
-      <!-- PRIVACY FAQ -->
       <v-expansion-panel>
-        <!-- Note: no special ID on header needed, but you can if you want -->
-        <v-expansion-panel-header id="faq-privacy">
+        <v-expansion-panel-title id="faq-privacy">
           {{ $t("privacyFAQTitle") }}
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
+        </v-expansion-panel-title>
+        <v-expansion-panel-text>
           {{ $t("privacyFAQContent") }}
-        </v-expansion-panel-content>
+        </v-expansion-panel-text>
       </v-expansion-panel>
       <v-expansion-panel>
-        <v-expansion-panel-header>
+        <v-expansion-panel-title>
           {{ $t("howToExport") }}
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
+        </v-expansion-panel-title>
+        <v-expansion-panel-text>
           {{ $t("howToExportLong") }}
-        </v-expansion-panel-content>
+        </v-expansion-panel-text>
       </v-expansion-panel>
       <v-expansion-panel>
-        <v-expansion-panel-header>
+        <v-expansion-panel-title>
           {{ $t("howToGroup") }}
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
+        </v-expansion-panel-title>
+        <v-expansion-panel-text>
           {{ $t("howToGroupLong") }}
-        </v-expansion-panel-content>
+        </v-expansion-panel-text>
       </v-expansion-panel>
       <v-expansion-panel>
-        <v-expansion-panel-header>
+        <v-expansion-panel-title>
           {{ $t("howToArchiveiOS") }}
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
+        </v-expansion-panel-title>
+        <v-expansion-panel-text>
           {{ $t("howToArchiveiOSLong") }}
-        </v-expansion-panel-content>
+        </v-expansion-panel-text>
       </v-expansion-panel>
       <v-expansion-panel>
-        <v-expansion-panel-header>
+        <v-expansion-panel-title>
           {{ $t("howToArchiveAndroid") }}
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
+        </v-expansion-panel-title>
+        <v-expansion-panel-text>
           {{ $t("howToArchiveAndroidLong") }}
-        </v-expansion-panel-content>
+        </v-expansion-panel-text>
       </v-expansion-panel>
       <v-expansion-panel>
-        <v-expansion-panel-header>
+        <v-expansion-panel-title>
           {{ $t("howToBackupiOS") }}
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
+        </v-expansion-panel-title>
+        <v-expansion-panel-text>
           {{ $t("howToBackupiOSLong") }}
-        </v-expansion-panel-content>
+        </v-expansion-panel-text>
       </v-expansion-panel>
       <v-expansion-panel>
-        <v-expansion-panel-header>
+        <v-expansion-panel-title>
           {{ $t("howToBackupAndroid") }}
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
+        </v-expansion-panel-title>
+        <v-expansion-panel-text>
           {{ $t("howToBackupAndroidLong") }}
-        </v-expansion-panel-content>
+        </v-expansion-panel-text>
       </v-expansion-panel>
       <v-expansion-panel>
-        <v-expansion-panel-header>
+        <v-expansion-panel-title>
           {{ $t("howToTransferSignal") }}
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
+        </v-expansion-panel-title>
+        <v-expansion-panel-text>
           {{ $t("howToTransferSignalLong") }}
-        </v-expansion-panel-content>
+        </v-expansion-panel-text>
       </v-expansion-panel>
       <v-expansion-panel>
-        <v-expansion-panel-header>
+        <v-expansion-panel-title>
           {{ $t("howToTransferTelegram") }}
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
+        </v-expansion-panel-title>
+        <v-expansion-panel-text>
           {{ $t("howToTransferTelegramLong") }}
-        </v-expansion-panel-content>
+        </v-expansion-panel-text>
       </v-expansion-panel>
       <v-expansion-panel>
-        <v-expansion-panel-header>
+        <v-expansion-panel-title>
           {{ $t("howToTransferToIphone") }}
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
+        </v-expansion-panel-title>
+        <v-expansion-panel-text>
           {{ $t("howToTransferToIphoneLong") }}
-        </v-expansion-panel-content>
+        </v-expansion-panel-text>
       </v-expansion-panel>
     </v-expansion-panels>
   </div>
 </template>
+
 <script>
 export default {
   data: () => ({
@@ -98,7 +97,7 @@ export default {
 </script>
 
 <style scoped>
-.v-expansion-panel-header {
+.v-expansion-panel-title {
   font-weight: bold;
   border-bottom: 2px solid rgba(0, 0, 0, 0.2);
 }

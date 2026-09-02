@@ -1,54 +1,159 @@
-import fs from "fs";
-import colors from "vuetify/es5/util/colors";
-import { messages } from "./utils/translations.js";
+import fs from "node:fs";
+import { resolve } from "node:path";
 
-// eslint-disable-next-line no-undef
 const local = process.env.NUXT_ENV_LOCAL !== undefined;
-const run_with_functions = process.env.NUXT_ENV_WITH_FUNCTIONS !== undefined;
-const baseUrl = ( // eslint-disable-next-line no-undef
-  process.env.BASE_URL || "https://www.whatsanalyze.com"
-).replace("http:", "https:");
+const runWithFunctions = process.env.NUXT_ENV_WITH_FUNCTIONS !== undefined;
+const baseUrl = (process.env.BASE_URL || "https://www.whatsanalyze.com").replace(
+  "http:",
+  "https:"
+);
+const localizedPages = [
+  "",
+  "about",
+  "how-to-export-your-whatsapp-chat",
+  "impressum",
+  "pwa-results",
+  "subscribe",
+  "switch-from-whatsapp-to-signal",
+  "whatsapp-to-pdf",
+  "whatsapp-wrapped-year-review",
+];
+const localizedRoutes = ["de", "es", "fr", "pt", "it"].flatMap((locale) =>
+  localizedPages.map((page) => `/${locale}/${page}`)
+);
 
-export default {
-  publicRuntimeConfig: {
-    local,
-    baseUrl,
-    paypalClientId: local
-      ? "ARYQUp4C_oNjNUNkvSPzLeaiulItDmnHUU226OANt2haCKC2c70ZrKZTmRHCPldcu4SD22LmPEuonfec"
-      : "AUMWxSZrtBOA1RicR_3nGijYb8yYxyq2lxBjiwoQKfVc-8jfdPr5N7X5EFUackMCLb_K7HiKswnDBUJ8",
-    privateRuntimeConfig: {
-      // eslint-disable-next-line no-undef
-      SENTRY_AUTH_TOKEN: process.env.SENTRY_AUTH_TOKEN,
-    },
-  },
-
-  // Target: https://go.nuxtjs.dev/config-target
-  target: "static",
+export default defineNuxtConfig({
+  compatibilityDate: "2026-03-01",
+  srcDir: ".",
   ssr: false,
 
-  // Global page headers: https://go.nuxtjs.dev/config-head
-  head: {
-    htmlAttrs: {
-      lang: "en",
-    },
-
-    meta: [
-      { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      // bing indexing
-      { name: "msvalidate.01", content: "E04DE33CC93C0FF892248C9E70A9A918" },
-      {
-        hid: "og:image",
-        property: "og:image",
-        content: baseUrl + "/sharePreview.png",
-      },
-    ],
-    link: [
-      { rel: "icon", href: "/favicon.ico" },
-      { rel: "apple-touch-icon", href: "/favicon.ico" },
-    ],
+  dir: {
+    public: "static",
   },
+
+  nitro: {
+    preset: "static",
+    output: {
+      publicDir: resolve("./dist"),
+    },
+    prerender: {
+      routes: localizedRoutes,
+    },
+  },
+
+  app: {
+    head: {
+      title: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+      htmlAttrs: {
+        lang: "en",
+      },
+      meta: [
+        { charset: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        {
+          name: "msvalidate.01",
+          content: "E04DE33CC93C0FF892248C9E70A9A918",
+        },
+        {
+          property: "og:image",
+          content: `${baseUrl}/sharePreview.png`,
+        },
+      ],
+      link: [
+        { rel: "icon", href: "/favicon.ico" },
+        { rel: "apple-touch-icon", href: "/favicon.ico" },
+      ],
+    },
+  },
+
+  runtimeConfig: {
+    sentryAuthToken: process.env.SENTRY_AUTH_TOKEN,
+    public: {
+      local,
+      baseUrl,
+      paypalClientId: local
+        ? "ARYQUp4C_oNjNUNkvSPzLeaiulItDmnHUU226OANt2haCKC2c70ZrKZTmRHCPldcu4SD22LmPEuonfec"
+        : "AUMWxSZrtBOA1RicR_3nGijYb8yYxyq2lxBjiwoQKfVc-8jfdPr5N7X5EFUackMCLb_K7HiKswnDBUJ8",
+      firebase: {
+        apiKey: "AIzaSyBWNP0Ckw94E7tyoZZozAOZ6JSQRH2lzFU",
+        authDomain: "whatsanalyze-80665.firebaseapp.com",
+        projectId: "whatsanalyze-80665",
+        storageBucket: "whatsanalyze-80665.appspot.com",
+        messagingSenderId: "116352567232",
+        appId: "1:116352567232:web:b44bef99e5a4fc6c962a25",
+        measurementId: "G-H1WL9MXJ17",
+        functionsEmulatorPort: runWithFunctions ? 5001 : null,
+      },
+    },
+  },
+
+  css: ["~/assets/variables.scss"],
+
+  modules: [
+    "vuetify-nuxt-module",
+    "@nuxt/content",
+    "@nuxtjs/i18n",
+    "@vite-pwa/nuxt",
+    "@nuxt/scripts",
+    "@sentry/nuxt/module",
+  ],
+
+  vuetify: {
+    moduleOptions: {
+      prefixComposables: true,
+      styles: true,
+    },
+    vuetifyOptions: {
+      icons: {
+        defaultSet: "mdi",
+        sets: "mdi",
+      },
+      theme: {
+        defaultTheme: "light",
+        themes: {
+          light: {
+            dark: false,
+            colors: {
+              primary: "#1976d2",
+              secondary: "#ff8f00",
+              accent: "#424242",
+              info: "#26a69a",
+              warning: "#ffc107",
+              error: "#dd2c00",
+              success: "#00e676",
+            },
+          },
+        },
+      },
+    },
+  },
+
+  i18n: {
+    baseUrl,
+    defaultLocale: "en",
+    strategy: "prefix_except_default",
+    locales: [
+      { code: "en", language: "en-US" },
+      { code: "de", language: "de-DE" },
+      { code: "es", language: "es-ES" },
+      { code: "fr", language: "fr-FR" },
+      { code: "pt", language: "pt-PT" },
+      { code: "it", language: "it-IT" },
+    ],
+    detectBrowserLanguage: {
+      alwaysRedirect: false,
+      fallbackLocale: "en",
+      redirectOn: "root",
+      useCookie: true,
+      cookieCrossOrigin: false,
+      cookieKey: "i18n_redirected",
+      cookieSecure: false,
+    },
+    vueI18n: "./i18n.config.js",
+  },
+
   pwa: {
+    registerType: "autoUpdate",
     manifest: {
       name: "WhatsAnalyze - The WhatsApp Chat Analyzer",
       short_name: "WhatsAnalyze",
@@ -57,7 +162,13 @@ export default {
       background_color: "#21a68d",
       theme_color: "#000000",
       lang: "en",
-      useWebmanifestExtension: true,
+      icons: [
+        {
+          src: "/favicon.ico",
+          sizes: "any",
+          type: "image/x-icon",
+        },
+      ],
       share_target: {
         action: "/pwa-results?share-target=1",
         method: "POST",
@@ -77,191 +188,65 @@ export default {
     },
     workbox: {
       importScripts: ["custom-sw.js"],
-      dev: local,
     },
-    icon: {
-      source: "/assets",
-      fileName: "whatsanalyze-logo-black-PWA.png",
+    devOptions: {
+      enabled: false,
     },
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
-
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    "@/plugins/gtag",
-    {
-      src: "~/plugins/amcharts.js",
-      ssr: false,
-    },
-  ],
-
-  // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
-
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-    // https://go.nuxtjs.dev/vuetify
-    "@nuxtjs/vuetify",
-    "nuxt-compress",
-    "@nuxtjs/sentry",
-    "@nuxt/typescript-build",
-  ],
-  "nuxt-compress": {
-    gzip: {
-      cache: true,
-    },
-    brotli: {
-      threshold: 10240,
+  scripts: {
+    registry: {
+      googleAnalytics: local
+        ? false
+        : {
+            id: "G-XYC2EWGZZ3",
+            trigger: "onNuxtReady",
+            bundle: false,
+            proxy: false,
+          },
+      googleTagManager: local
+        ? false
+        : {
+            id: "GTM-W32PNH3",
+            trigger: "onNuxtReady",
+            bundle: false,
+            proxy: false,
+          },
     },
   },
 
-  // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    "@nuxt/content",
-    "@nuxtjs/pwa",
-    "@nuxtjs/gtm",
-    "nuxt-i18n",
-    "@nuxtjs/firebase",
-  ],
-  firebase: {
-    config: {
-      apiKey: "AIzaSyBWNP0Ckw94E7tyoZZozAOZ6JSQRH2lzFU",
-      authDomain: "whatsanalyze-80665.firebaseapp.com",
-      projectId: "whatsanalyze-80665",
-      storageBucket: "whatsanalyze-80665.appspot.com",
-      messagingSenderId: "116352567232",
-      appId: "1:116352567232:web:b44bef99e5a4fc6c962a25",
-      measurementId: "G-H1WL9MXJ17",
-    },
-    services: {
-      firestore: true, // Just as example. Can be any other service.
-      functions: {
-        emulatorPort: run_with_functions ? 5001 : undefined,
-      },
-    },
-  },
-  i18n: {
-    seo: true,
-    locales: [
-      {
-        code: "en",
-        iso: "en-US",
-      },
-      {
-        code: "de",
-        iso: "de-DE",
-      },
-      {
-        code: "es",
-        iso: "es-ES",
-      },
-      {
-        code: "fr",
-        iso: "fr-FR",
-      },
-      {
-        code: "pt",
-        iso: "pt-PT",
-      },
-      {
-        code: "it",
-        iso: "it-IT",
-      },
-    ],
-    defaultLocale: "en",
-    detectBrowserLanguage: {
-      alwaysRedirect: false,
-      fallbackLocale: "en",
-      onlyOnRoot: true,
-      useCookie: true,
-      cookieCrossOrigin: false,
-      cookieKey: "i18n_redirected",
-      cookieSecure: false,
-    },
-    vueI18n: {
-      fallbackLocale: "en",
-      messages,
-    },
-    vueI18nLoader: true,
-  },
-
-  // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
-  vuetify: {
-    treeShake: true,
-    customVariables: ["~/assets/variables.scss"],
-    theme: {
-      dark: false,
-      themes: {
-        dark: {
-          primary: colors.blue.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3,
+  sentry: process.env.SENTRY_AUTH_TOKEN
+    ? {
+        sourceMapsUploadOptions: {
+          authToken: process.env.SENTRY_AUTH_TOKEN,
+          org: "whatsanalyze",
+          project: "whatsanalyze",
+          telemetry: false,
         },
-      },
-    },
-  },
-  gtm: {
-    id: "GTM-W32PNH3",
-  },
-  sentry: {
-    dsn:
-      "https://48bdeb273a134a8095aef20174fdadcb@o824314.ingest.sentry.io/5810773",
-    disabled: local,
-    sourceMapStyle: "hidden-source-map",
-    publishRelease: false,
-    attachCommits: true,
-
-    // Additional Module Options go here
-    // https://sentry.nuxtjs.org/sentry/options
-    config: {
-      // Add native Sentry config here
-      // https://docs.sentry.io/platforms/javascript/guides/vue/configuration/options/
-      tracesSampleRate: 1.0,
-      vueOptions: {
-        tracing: true,
-        tracingOptions: {
-          hooks: ["mount", "update"],
-          timeout: 2000,
-          trackComponents: true,
-        },
-      },
-      browserOptions: {},
-    },
-    clientConfig: "~/plugins/sentry.client.config.js",
-    webpackConfig: {
-      include: ["./dist/"],
-      ignore: ["node_modules"],
-      org: "whatsanalyze",
-      project: "whatsanalyze",
-    },
-  },
-
-  // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-    extend(config, { isDev, isClient }) {
-      // Sets webpack's mode to development if `isDev` is true.
-      if (isDev) {
-        config.mode = "development";
-      } else if (isClient) {
-        config.devtool = "hidden-source-map";
       }
+    : {},
+
+  sourcemap: {
+    client: "hidden",
+  },
+
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "~/assets/_theme-variables.scss" as *;',
+        },
+      },
     },
   },
-  server: {
+
+  devServer: {
     host: "0.0.0.0",
-    https:
-    // eslint-disable-next-line no-undef
-      process.env.NODE_ENV !== "production" || local
-        ? {
-          key: fs.readFileSync("./localhost-key.pem"),
-          cert: fs.readFileSync("./localhost.pem"),
+    https: local
+      ? {
+          key: fs.readFileSync(resolve("./localhost-key.pem")).toString(),
+          cert: fs.readFileSync(resolve("./localhost.pem")).toString(),
         }
-        : {},
+      : false,
   },
-};
+});

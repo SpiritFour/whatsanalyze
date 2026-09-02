@@ -1,6 +1,6 @@
 <template>
   <div v-if="chat">
-    <v-col v-if="$vuetify.breakpoint.smAndUp">
+    <v-col v-if="$vuetify.display.smAndUp">
       <v-row>
         <v-spacer></v-spacer>
         <v-col cols="12" sm="6" xl="5">
@@ -27,7 +27,7 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <v-img src="example-fun-facts.png"></v-img>
+          <v-img src="/example-fun-facts.png"></v-img>
         </v-col>
       </v-row>
     </v-col>

@@ -17,7 +17,7 @@
             />
           </a>
         </v-row>
-        <v-row v-if="$vuetify.breakpoint.mdAndUp" class="pt-8" justify="center">
+        <v-row v-if="$vuetify.display.mdAndUp" class="pt-8" justify="center">
           <figure>
             <blockquote>
               <div>{{ site.description }}</div>
@@ -31,6 +31,10 @@
 </template>
 
 <script>
+import chipLogo from "~/assets/img/trust-logos/chip_logo.png";
+import gigaLogo from "~/assets/img/trust-logos/giga_logo.png";
+import netzweltLogo from "~/assets/img/trust-logos/netzwelt.jpeg";
+
 export default {
   name: "TrustLogos",
   data() {
@@ -38,25 +42,21 @@ export default {
       trustedSites: [
         {
           name: "Chip.de",
-          // eslint-disable-next-line no-undef
-          image: require("~/assets/img/trust-logos/chip_logo.png"),
+          image: chipLogo,
           href:
             "https://www.chip.de/downloads/webapp-WhatsAnalyze-WhatsApp-analysieren_183369368.html",
           description: "Fun-Facts und spannende Visualisierungen",
         },
         {
           name: "Giga.de",
-
-          // eslint-disable-next-line no-undef
-          image: require("~/assets/img/trust-logos/giga_logo.png"),
+          image: gigaLogo,
           href:
             "https://www.giga.de/news/ueberraschende-einblicke-whatsapp-chats-kostenlos-analysieren/",
           description: "Die Analyse findet nur in eurem Browser statt",
         },
         {
           name: "Netzwelt.de",
-          // eslint-disable-next-line no-undef
-          image: require("~/assets/img/trust-logos/netzwelt.jpeg"),
+          image: netzweltLogo,
           href:
             "https://www.netzwelt.de/news/187295-whatsapp-webseite-analysiert-chats.html",
           description: "Zu welcher Uhrzeit ihr am häufigsten schreibt",

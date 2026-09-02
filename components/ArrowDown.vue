@@ -13,12 +13,14 @@
 </template>
 
 <script>
+import { scrollTo } from "~/utils/scroll";
+
 export default {
   name: "ArrowDown",
   props: { animate: { default: false, type: Boolean } },
   methods: {
     goToExportExplainer() {
-      this.$vuetify.goTo(".exportexplainer", { duration: 300 });
+      scrollTo(".exportexplainer");
     },
   },
 };

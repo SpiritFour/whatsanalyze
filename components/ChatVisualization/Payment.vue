@@ -22,27 +22,29 @@ export default {
   data() {
     return {};
   },
-  head() {
-    return {
-      script: [
-        {
-          hid: "paypal",
-          src:
-            "https://www.paypal.com/sdk/js?currency=" +
-            this.currency +
-            "&client-id=" +
-            // eslint-disable-next-line no-undef
-            this.$config.paypalClientId,
-          defer: true,
-          // Changed after script load
-          callback: () => {
-            this.initPayPalButton(this);
-          },
-        },
-      ],
-    };
+  mounted() {
+    this.loadPayPalScript();
   },
   methods: {
+    loadPayPalScript() {
+      if (window.paypal) {
+        this.initPayPalButton(this);
+        return;
+      }
+
+      const script = document.createElement("script");
+      script.id = "paypal-sdk";
+      script.src =
+        "https://www.paypal.com/sdk/js?currency=" +
+        this.currency +
+        "&client-id=" +
+        this.$config.paypalClientId;
+      script.defer = true;
+      script.addEventListener("load", () => this.initPayPalButton(this), {
+        once: true,
+      });
+      document.head.appendChild(script);
+    },
     initPayPalButton(context) {
       // eslint-disable-next-line no-undef
       paypal

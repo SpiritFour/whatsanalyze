@@ -4,10 +4,13 @@ dist
 node_modules
 coverage
 pnpm-lock.yaml
+playwright-report
+test-results
 test/*
 static/sw.js
 .direnv
 .idea
 .nuxt
+.output
 node_modules
 nuxt.config.js

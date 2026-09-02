@@ -8,11 +8,7 @@
     ></div>
 
     <v-row>
-      <v-img
-        :src="require('static/pdf-example.jpg')"
-        class="ma-auto my-4"
-        max-width="100%"
-      />
+      <v-img src="/pdf-example.jpg" class="ma-auto my-4" max-width="100%" />
     </v-row>
     <!-- Loading section -->
     <v-row v-show="isLoading" class="ma-3">
@@ -185,7 +181,7 @@
 <!-- eslint-enable vue/no-v-html -->
 <script>
 import { GTAG_PAYMENT, GTAG_PDF, gtagEvent } from "~/utils/gtagValues";
-import PDFWorker from "worker-loader!~/assets/js/pdf.worker.js";
+import PDFWorker from "~/assets/js/pdf.worker.js?worker";
 import { loadImage, objectToDictionary } from "~/utils/utils";
 import { saveAs } from "file-saver";
 import SubscriptionChecker from "~/components/SubscriptionChecker.vue";

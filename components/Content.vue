@@ -4,9 +4,9 @@
       {{ page.title }}
     </div>
     <!-- toc -->
-    <div class="toc" v-if="page.toc">
+    <div v-if="toc.length" class="toc">
       <ol>
-        <li v-for="heading in page.toc" :key="heading.id">
+        <li v-for="heading in toc" :key="heading.id">
           <a :href="'#' + heading.id">
             {{ heading.text }}
           </a>
@@ -14,13 +14,18 @@
       </ol>
     </div>
     <!-- main content -->
-    <nuxt-content :document="page" />
+    <ContentRenderer class="nuxt-content" :value="page" />
   </article>
 </template>
 
 <script>
 export default {
   props: ["page"],
+  computed: {
+    toc() {
+      return this.page.body?.toc?.links || this.page.toc || [];
+    },
+  },
 };
 </script>
 

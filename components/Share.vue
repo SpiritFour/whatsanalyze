@@ -53,11 +53,11 @@ export default {
         let currScroll = window.scrollY;
 
         let offset = 0;
-        if (this.$vuetify.breakpoint.xsOnly) {
+        if (this.$vuetify.display.xs) {
           offset = 340;
-        } else if (this.$vuetify.breakpoint.smOnly) {
+        } else if (this.$vuetify.display.sm) {
           offset = 280;
-        } else if (this.$vuetify.breakpoint.mdAndUp) {
+        } else if (this.$vuetify.display.mdAndUp) {
           offset = 260;
         }
         window.scrollTo(0, offset);

@@ -23,7 +23,7 @@ export default {
       if (this.isLoading) return;
       gtagEvent("subscription_pressed", GTAG_PAYMENT);
       this.isLoading = true;
-      const response = await this.$fire.functions.httpsCallable("helloworld")({
+      const response = await this.$firebase.callFunction("helloworld", {
         client_id: this.$config.paypalClientId,
       });
       // call fetch with https://www.sandbox.paypal.com/webapps/billing/subscriptions?ba_token=BA-2MW88471JV556644J
