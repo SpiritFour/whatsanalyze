@@ -54,6 +54,10 @@ import { getSubscriptionParams } from "~/utils/subscription";
 export default {
   name: "Subscriptions",
   components: { SubscriptionChecker },
+  setup() {
+    const config = useRuntimeConfig();
+    return { paypalClientId: config.public.paypalClientId };
+  },
   data() {
     return {
       ba_token: null,
@@ -90,7 +94,7 @@ export default {
         "checksubscriberstatus",
         {
           ...data,
-          client_id: this.$config.paypalClientId,
+          client_id: this.paypalClientId,
         }
       );
 

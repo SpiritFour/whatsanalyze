@@ -3,6 +3,10 @@
 <script>
 export default {
   props: ["email", "id"],
+  setup() {
+    const config = useRuntimeConfig();
+    return { paypalClientId: config.public.paypalClientId };
+  },
   data() {
     return {
       subscription_id: null,
@@ -56,7 +60,7 @@ export default {
         "checksubscriberstatus",
         {
           ...data,
-          client_id: this.$config.paypalClientId,
+          client_id: this.paypalClientId,
         }
       );
 

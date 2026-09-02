@@ -19,8 +19,9 @@ export default {
       type: Number,
     },
   },
-  data() {
-    return {};
+  setup() {
+    const config = useRuntimeConfig();
+    return { paypalClientId: config.public.paypalClientId };
   },
   mounted() {
     this.loadPayPalScript();
@@ -34,20 +35,24 @@ export default {
 
       const script = document.createElement("script");
       script.id = "paypal-sdk";
-      script.src =
-        "https://www.paypal.com/sdk/js?currency=" +
-        this.currency +
-        "&client-id=" +
-        this.$config.paypalClientId;
+      const params = new URLSearchParams({
+        currency: this.currency,
+        "client-id": this.paypalClientId,
+      });
+      script.src = `https://www.paypal.com/sdk/js?${params}`;
       script.defer = true;
       script.addEventListener("load", () => this.initPayPalButton(this), {
         once: true,
       });
+      script.addEventListener(
+        "error",
+        (error) => this.$emit("onError", error),
+        { once: true }
+      );
       document.head.appendChild(script);
     },
     initPayPalButton(context) {
-      // eslint-disable-next-line no-undef
-      paypal
+      window.paypal
         .Buttons({
           style: {
             size: "small",

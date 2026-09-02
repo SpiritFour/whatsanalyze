@@ -28,7 +28,25 @@ test("analyzes the example chat without uploading its contents", async ({
   page,
 }) => {
   const requests = [];
+  let paypalSdkUrl;
   page.on("request", (request) => requests.push(request));
+  await page.route("https://www.paypal.com/sdk/js?**", async (route) => {
+    paypalSdkUrl = new URL(route.request().url());
+    await route.fulfill({
+      contentType: "text/javascript",
+      body: `
+        window.paypal = {
+          Buttons: () => ({
+            render: (selector) => {
+              document.querySelector(selector).innerHTML =
+                '<button type="button">Pay with PayPal</button>';
+              return Promise.resolve();
+            }
+          })
+        };
+      `,
+    });
+  });
 
   await page.locator("#uploadmytextfile").setInputFiles(exampleChat);
 
@@ -50,6 +68,15 @@ test("analyzes the example chat without uploading its contents", async ({
     .getByRole("button", { name: /Download free preview PDF/i })
     .click();
   await downloadPromise;
+
+  await page.getByRole("button", { name: /Download full chat PDF/i }).click();
+  await expect(page.getByText("Nice!!", { exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Pay with PayPal" })
+  ).toBeVisible();
+  expect(paypalSdkUrl.origin).toBe("https://www.paypal.com");
+  expect(paypalSdkUrl.searchParams.get("currency")).toBe("EUR");
+  expect(paypalSdkUrl.searchParams.get("client-id")).toBeTruthy();
 });
 
 test("switches to a localized route", async ({ page }) => {
@@ -59,6 +86,46 @@ test("switches to a localized route", async ({ page }) => {
   await expect(
     page.getByText("Analysiere dein WhatsApp Chat in Sekunden", { exact: true })
   ).toBeVisible();
+});
+
+test("starts a subscription through the Firebase PayPal endpoint", async ({
+  page,
+}) => {
+  let functionRequest;
+  await page.route("**/helloworld", async (route) => {
+    const request = route.request();
+    if (request.method() === "OPTIONS") {
+      await route.fulfill({
+        status: 204,
+        headers: {
+          "access-control-allow-origin": "*",
+          "access-control-allow-headers": "content-type",
+        },
+      });
+      return;
+    }
+
+    functionRequest = request;
+    await route.fulfill({
+      contentType: "application/json",
+      headers: { "access-control-allow-origin": "*" },
+      body: JSON.stringify({
+        data: { approveLink: "https://paypal.test/approve" },
+      }),
+    });
+  });
+  await page.route("https://paypal.test/approve", (route) =>
+    route.fulfill({ contentType: "text/html", body: "PayPal approval" })
+  );
+
+  await page.goto("/subscribe");
+  await page.getByRole("button", { name: "Subscribe Now" }).click();
+
+  await expect(page).toHaveURL("https://paypal.test/approve");
+  expect(functionRequest.url()).toBe(
+    "https://us-central1-whatsanalyze-80665.cloudfunctions.net/helloworld"
+  );
+  expect(functionRequest.postDataJSON().data.client_id).toBeTruthy();
 });
 
 test("renders migrated markdown content", async ({ page }) => {

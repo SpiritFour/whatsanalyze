@@ -24,7 +24,7 @@
 
     <!-- Download dialog -->
     <v-dialog v-model="showDownloadPopup" width="550">
-      <template #activator="{ on, attrs }">
+      <template #activator="{ props: activatorProps }">
         <!-- Pricing Section -->
         <v-btn v-if="isValidSubscription" @click="downloadFull" color="success">
           <span v-html="$t('downloadNow')"></span>
@@ -72,9 +72,8 @@
                 <v-btn
                   color="success"
                   class="mt-3 mb-4"
-                  v-bind="attrs"
+                  v-bind="activatorProps"
                   @click="gtagEvent('full_pdf_pressed', GTAG_PAYMENT)"
-                  v-on="on"
                 >
                   <v-icon class="mr-1">mdi-download</v-icon>
                   <span v-html="$t('downloadFullChatPDF')"></span>
