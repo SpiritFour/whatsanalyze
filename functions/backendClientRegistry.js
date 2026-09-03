@@ -279,6 +279,7 @@ class BackendClient {
       isValid,
       data: {
         subscriptionId: subscriptionData.id,
+        status: subscriptionData.status,
         email: subscriptionData.subscriber?.email_address,
         name: subscriptionData.subscriber?.name,
         expirationTimestamp:
