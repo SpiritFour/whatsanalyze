@@ -182,10 +182,19 @@ PayPal sandbox client and sandbox plan. Production builds use the production
 client and plan. Sandbox buyer addresses such as
 `sb-...@personal.example.com` are not real charges.
 
-An `EXPIRED` subscription must not be treated as active. During migration a
-sandbox subscription returned valid subscriber details but status `EXPIRED`;
-that indicated a sandbox plan/billing-cycle issue, not stale frontend or
-Firestore state.
+An `EXPIRED` subscription must not be treated as active. During migration,
+sandbox subscriptions became `EXPIRED` one second after the first successful
+payment. Root cause: the old sandbox plan (`P-28458220JT356632KM5K5HJI`) had
+`total_cycles: 1` on its REGULAR billing cycle — PayPal's default when
+`total_cycles` is omitted, as it was in `createPlan`. A recurring plan needs
+`total_cycles: 0` (infinite). The sandbox now uses
+`P-0KW41015GP654580PNKMT6EY`, created with `total_cycles: 0`, and `createPlan`
+sets it explicitly. The production plan was always configured correctly.
+
+Webhook registrations are per PayPal app: production is subscribed to `*`
+(all events), and the sandbox app is now aligned to `*` as well — it was
+previously missing `PAYMENT.SALE.COMPLETED`, the only event the webhook
+handles, so sandbox payments never wrote Firestore documents or sent emails.
 
 The webhook currently handles `PAYMENT.SALE.COMPLETED`, stores subscription
 details, and sends the subscription email. Webhook delivery remains useful for

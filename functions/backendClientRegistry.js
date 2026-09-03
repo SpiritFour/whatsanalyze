@@ -209,6 +209,9 @@ class BackendClient {
             },
             tenure_type: "REGULAR",
             sequence: 1,
+            // 0 = repeat forever. PayPal defaults to 1, which makes the
+            // subscription EXPIRED immediately after the first payment.
+            total_cycles: 0,
             pricing_scheme: {
               fixed_price: {
                 value: "15",
@@ -300,7 +303,10 @@ const configs = [
     clientId:
       "ARYQUp4C_oNjNUNkvSPzLeaiulItDmnHUU226OANt2haCKC2c70ZrKZTmRHCPldcu4SD22LmPEuonfec",
     clientSecretName: "PAYPAL_PASSWORD_DEV",
-    planId: "P-28458220JT356632KM5K5HJI",
+    // Recurring plan with total_cycles=0; the previous sandbox plan
+    // (P-28458220JT356632KM5K5HJI) had total_cycles=1 and expired after the
+    // first payment.
+    planId: "P-0KW41015GP654580PNKMT6EY",
     apiEndpoint: "https://api-m.sandbox.paypal.com",
     // todo this is really ugly. instead we should add the callback url to the context of the paypal call.
     // somewhere here: https://developer.paypal.com/docs/api/subscriptions/v1/#subscriptions_create
