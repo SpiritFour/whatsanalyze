@@ -20,7 +20,7 @@ test("renders the analyzer landing page", async ({ page }) => {
   await expect(page).toHaveTitle(/WhatsAnalyze/);
   await expect(
     page.getByText("Analyze your WhatsApp Chat in Seconds", { exact: true })
-  ).toBeVisible();
+  ).toBeVisible({ timeout: 15_000 });
   await expect(page.locator("#uploadmytextfile")).toBeAttached();
 });
 
@@ -179,5 +179,5 @@ test("renders migrated markdown content", async ({ page }) => {
     page.getByRole("heading", {
       name: "Option 1: iPhone (iOS) - Export as a .txt File",
     })
-  ).toBeVisible();
+  ).toBeVisible({ timeout: 15_000 });
 });

@@ -105,4 +105,7 @@ sw.*
 
 Icon\r
 
+
+# omp delta agent worktrees
+.delta/
 .direnv

@@ -21,4 +21,9 @@ globals:
   useAsyncData: readonly
   useRuntimeConfig: readonly
   useSeoMeta: readonly
+  useI18n: readonly
+  useSwitchLocalePath: readonly
+  navigateTo: readonly
+  computed: readonly
+  ref: readonly
 rules: {}

@@ -1,9 +1,9 @@
 <template>
   <v-container>
     <div class="text-center my-4">
-      <v-menu offset-y>
-        <template #activator="{ on, attrs }">
-          <v-btn class="btn-color" dark v-bind="attrs" v-on="on">
+      <v-menu>
+        <template #activator="{ props: activatorProps }">
+          <v-btn class="btn-color" dark v-bind="activatorProps">
             {{ $t("changeView") }}
           </v-btn>
         </template>

@@ -9,13 +9,13 @@
           {{ $t("shareWithFriends") }}
         </div>
         <v-dialog v-model="dialog" width="600">
-          <template #activator="{ on }">
+          <template #activator="{ props: activatorProps }">
             <v-btn
               :loading="loading"
               class="btn-color"
               dark
+              v-bind="activatorProps"
               @click="download"
-              v-on="on"
             >
               <v-icon class="mr-2">mdi-download</v-icon>
               {{ $t("downloadResults") }}

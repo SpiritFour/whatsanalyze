@@ -5,12 +5,8 @@
     aria-label="Select language"
     @change="setLocale"
   >
-    <option
-      v-for="locale in availableLocales"
-      :key="locale.code"
-      :value="locale.code"
-    >
-      {{ flags[locale.code] }} {{ locale.name }}
+    <option v-for="l in availableLocales" :key="l.code" :value="l.code">
+      {{ flags[l.code] }}
     </option>
   </select>
 </template>

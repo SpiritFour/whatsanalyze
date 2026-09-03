@@ -30,12 +30,25 @@ export default defineNuxtConfig({
   dir: {
     public: "static",
   },
+  ignore:[".delta"],
 
   nitro: {
     preset: "static",
     output: {
       publicDir: resolve("./dist"),
     },
+    watch: [
+      "assets/**",
+      "components/**",
+      "composables/**",
+      "content/**",
+      "layouts/**",
+      "middleware/**",
+      "modules/**",
+      "pages/**",
+      "plugins/**",
+      "utils/**",
+    ],
     prerender: {
       routes: localizedRoutes,
     },
@@ -231,6 +244,11 @@ export default defineNuxtConfig({
   },
 
   vite: {
+    server: {
+      watch: {
+        ignored: ["**/.delta/**", "**/dist/**"],
+      },
+    },
     css: {
       preprocessorOptions: {
         scss: {

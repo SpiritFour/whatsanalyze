@@ -77,18 +77,18 @@ export default {
     return {
       headers: [
         {
-          text: "Features & Solutions of PDF export tools",
+          title: "Features & Solutions of PDF export tools",
           align: "start",
           sortable: false,
-          value: "name",
+          key: "name",
         },
-        { text: "Zapptales", value: "zapptales" },
-        { text: "Dr. Fon", value: "drfon" },
-        { text: "Longshot app", value: "longshotapp" },
-        { text: "Export to txt and then to PDF", value: "pdfex" },
+        { title: "Zapptales", key: "zapptales" },
+        { title: "Dr. Fon", key: "drfon" },
+        { title: "Longshot app", key: "longshotapp" },
+        { title: "Export to txt and then to PDF", key: "pdfex" },
         {
-          text: "WhatsAnalyze",
-          value: "whatsAnalyze",
+          title: "WhatsAnalyze",
+          key: "whatsAnalyze",
         },
       ],
       desserts: [
