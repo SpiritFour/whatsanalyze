@@ -160,9 +160,11 @@ test("activates a subscription after returning from PayPal", async ({
 
   await page.goto("/subscribe?subscription_id=I-TEST-SUBSCRIPTION");
 
+  // The checker polls every 3s and the dev server may still be compiling
+  // /subscribe on first visit, so allow generous headroom on slow runners.
   await expect(
     page.getByRole("heading", { name: "Your subscription is Active" })
-  ).toBeVisible({ timeout: 10_000 });
+  ).toBeVisible({ timeout: 30_000 });
   expect(statusChecks).toBe(2);
 });
 

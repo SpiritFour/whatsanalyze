@@ -5,6 +5,12 @@ module.exports = defineConfig({
   snapshotPathTemplate:
     "{testDir}/{testFilePath}-snapshots/{arg}-{projectName}{ext}",
   fullyParallel: true,
+  // CI runners are small; chart rendering and PDF-worker tests exceed
+  // Playwright's 30s default there.
+  timeout: process.env.CI ? 120_000 : 30_000,
+  // First visits compile pages on the fly in `nuxt dev`, which can exceed the
+  // 5s default assertion timeout on slow machines.
+  expect: { timeout: 15_000 },
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,

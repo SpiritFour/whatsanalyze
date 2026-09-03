@@ -55,7 +55,7 @@ class BackendClient {
     return this.accessToken;
   }
 
-  async getSubscriptionLink(callbackUrl) {
+  async createSubscription(callbackUrl) {
     // example value:
     // {"status":"APPROVAL_PENDING","id":"I-XKCLA5KDLLK3","create_time":"2024-12-09T20:08:32Z","links":[{"href":"https://www.sandbox.paypal.com/webapps/billing/subscriptions?ba_token=BA-41P21132UV5106118","rel":"approve","method":"GET"},{"href":"https://api-m.sandbox.paypal.com/v1/billing/subscriptions/I-XKCLA5KDLLK3","rel":"edit","method":"PATCH"},{"href":"https://api-m.sandbox.paypal.com/v1/billing/subscriptions/I-XKCLA5KDLLK3","rel":"self","method":"GET"}]}
     const linkStuff = await (
@@ -79,8 +79,12 @@ class BackendClient {
       console.log("Link stuff mismatch", { linkStuff });
     }
 
-    // extract the link that is used to approve the subscription
-    return linkStuff.links.filter((link) => link.rel === "approve")[0].href;
+    return {
+      // the link that is used to approve the subscription
+      approveLink: linkStuff.links.filter((link) => link.rel === "approve")[0]
+        .href,
+      subscriptionId: linkStuff.id,
+    };
   }
 
   async getDataForSubscription(subscriptionId) {
