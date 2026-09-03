@@ -14,7 +14,7 @@
         "firebase-debug.*.log",
         "*.local"
       ],
-      "runtime": "nodejs18"
+      "runtime": "nodejs22"
     }
   ],
   "emulators": {
