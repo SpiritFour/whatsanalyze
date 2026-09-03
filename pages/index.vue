@@ -21,10 +21,10 @@
 
           <v-row align="center" no-gutters>
             <v-col cols="12" md="8" lg="9">
-              <div class="text-h6 text-sm-h5 font-weight-bold white--text mb-1">
+              <div class="text-h6 text-sm-h5 font-weight-bold text-white mb-1">
                 WHATSAPP WRAPPED 2026 IS HERE!
               </div>
-              <div class="text-subtitle-1 white--text" style="line-height: 1.4">
+              <div class="text-subtitle-1 text-white" style="line-height: 1.4">
                 Your chat, told like a story. See your most active hours,
                 funniest exchanges, and emotional peaks.
                 <strong>100% Private.</strong>
@@ -70,7 +70,7 @@
             >
               <HeaderCta />
               <div v-if="subscription.isValid" class="mt-6" style="width: 100%">
-                <v-alert dense type="info" prominent>
+                <v-alert density="compact" type="info" prominent>
                   Thanks for supporting us. You can download unlimited PDF's for
                   free.
 
@@ -103,7 +103,7 @@
             <HeaderCta />
 
             <div v-if="subscription.isValid" class="mt-6" style="width: 100%">
-              <v-alert dense type="info" prominent>
+              <v-alert density="compact" type="info" prominent>
                 Thanks for supporting us. You can download unlimited PDF's for
                 free.
 
@@ -204,7 +204,7 @@ export default {
   },
   created() {
     // eslint-disable-next-line no-undef
-    if (process.client) {
+    if (import.meta.client) {
       Object.keys(this.$route.query).forEach((key) => {
         gtagEvent(key, GTAG_LEAD);
       });

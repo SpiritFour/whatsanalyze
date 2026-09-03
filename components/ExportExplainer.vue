@@ -50,7 +50,7 @@
               </v-timeline>
               <v-btn
                 :to="to ? to : null"
-                class="text-md-h6 text-caption ml-10 white--text btn-color"
+                class="text-md-h6 text-caption ml-10 text-white btn-color"
                 elevation="10"
                 @click="clickHandler"
               >
@@ -142,7 +142,7 @@ import { scrollTo } from "~/utils/scroll";
 
 let apple = () => false;
 // eslint-disable-next-line no-undef
-if (process.browser) {
+if (import.meta.client) {
   apple = () => {
     return (
       navigator.platform.toLowerCase().includes("ios") ||
@@ -359,7 +359,7 @@ export default {
     },
     catchPWA() {
       // eslint-disable-next-line no-undef
-      if (process.client) {
+      if (import.meta.client) {
         window.addEventListener("beforeinstallprompt", (e) => {
           // Prevent the mini-infobar from appearing on mobile
           e.preventDefault();

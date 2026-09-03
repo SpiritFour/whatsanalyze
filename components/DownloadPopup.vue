@@ -23,7 +23,7 @@
           </template>
 
           <v-card class="overflow-hidden">
-            <v-card-title class="headline cyan" style="word-break: normal">
+            <v-card-title class="bg-cyan" style="word-break: normal">
               <div class="text-h4 font-weight-bold">{{ $t("didWeMake") }}</div>
               <span>{{ $t("buyUsCoffee") }}</span>
             </v-card-title>
@@ -69,7 +69,7 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="red darken-1" text @click="dialog = false">
+              <v-btn color="red-darken-1" variant="text" @click="dialog = false">
                 Close
               </v-btn>
             </v-card-actions>
@@ -85,7 +85,6 @@
             <v-btn
               v-if="!isSimple"
               class="btn-color"
-              dark
               @click="
                 gtagEvent('jump_to_pdf_download_cta', GTAG_INTERACTION, 0);
                 scrollTo('#payButton', { offset: 100 });

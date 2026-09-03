@@ -11,7 +11,7 @@
     <div class="my-5">{{ $t("love") }}</div>
 
     <a
-      class="black--text"
+      class="text-black"
       target="_blank"
       href="https://github.com/SpiritFour/whatsanalyze"
     >

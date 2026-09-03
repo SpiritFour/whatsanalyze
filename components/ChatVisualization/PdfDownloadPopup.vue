@@ -47,7 +47,7 @@
                 </div>
                 <v-btn
                   color="primary"
-                  outlined
+                  variant="outlined"
                   class="mt-3 mb-4"
                   @click="handleFreePdfClick"
                 >
@@ -126,7 +126,7 @@
       </template>
       <v-card>
         <!-- Popup title + subtitle -->
-        <v-card-title class="headline cyan" style="word-break: normal">
+        <v-card-title class="bg-cyan" style="word-break: normal">
           <div class="text-h4 font-weight-bold" v-html="$t('popupTitle')"></div>
           <span v-html="$t('popupSubtitle')"></span>
         </v-card-title>
@@ -154,7 +154,7 @@
               @onCreateOrder="onCreateOrder"
               @onError="onError"
             />
-            <v-alert dense type="info" prominent>
+            <v-alert density="compact" type="info" prominent>
               <span v-html="$t('subscriptionHint')"></span>
               <v-btn to="/subscribe">
                 <span v-html="$t('openSubscriptionPage')"></span>
@@ -168,7 +168,7 @@
         <!-- Close button -->
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="red darken-1" text @click="showDownloadPopup = false">
+          <v-btn color="red-darken-1" variant="text" @click="showDownloadPopup = false">
             <span v-html="$t('closeButton')"></span>
           </v-btn>
         </v-card-actions>

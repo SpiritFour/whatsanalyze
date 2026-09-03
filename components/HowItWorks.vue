@@ -3,15 +3,15 @@
     <p style="font-size: 3em" class="text-h2 text-center">How it works</p>
     <v-row class="explainer-list my-10">
       <v-col cols="4" class="text-h5 text-center">
-        <v-icon large color="teal"> mdi-file-export </v-icon>
+        <v-icon color="teal" size="large"> mdi-file-export </v-icon>
         Export your chat
       </v-col>
       <v-col cols="4" class="text-h5 text-center">
-        <v-icon large color="light-blue darken-3"> mdi-cog </v-icon>
+        <v-icon color="light-blue-darken-3" size="large"> mdi-cog </v-icon>
         Drag chat file into box above
       </v-col>
       <v-col cols="4" class="text-h5 text-center">
-        <v-icon large color="amber darken-2">
+        <v-icon color="amber-darken-2" size="large">
           mdi-emoticon-happy-outline
         </v-icon>
         Enjoy beautiful visualizations
@@ -36,11 +36,11 @@
         :imageAlt="item.imageAlt"
         fill-dot
       >
-        <v-card :color="item.color" dark>
-          <v-card-title class="title"> {{ item.title }} </v-card-title>
+        <v-card :color="item.color">
+          <v-card-title class="text-h6"> {{ item.title }} </v-card-title>
           <v-card-text
             style="float: left; text-align: left"
-            class="white text--primary"
+            class="text-white"
           >
             <p class="text-body-1">
               <v-img
@@ -79,7 +79,7 @@ export default {
     return {
       items: [
         {
-          color: "cyan darken-1",
+          color: "cyan-darken-1",
           icon: "mdi-file-export",
           text: " 1. Open the (group) chat.",
           text2: "2. Tap More options > More > Export chat.",
@@ -90,7 +90,7 @@ export default {
           imageAlt: "How to export your WhatsApp Signal Telegram Threema chat",
         },
         {
-          color: "red darken-1",
+          color: "red-darken-1",
           icon: "mdi-file",
           text: "Tab on the box above and select your chat .txt file.",
           title: "Drag file into box above",

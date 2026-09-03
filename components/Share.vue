@@ -4,9 +4,9 @@
     <v-btn
       :loading="loading"
       class="btn-color-dark"
-      dark
+      icon
+      size="x-large"
       data-html2canvas-ignore
-      fab
       style="position: absolute; right: 0; top: 0"
       @click="share"
     >

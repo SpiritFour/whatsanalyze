@@ -48,7 +48,7 @@
         </v-carousel-item>
 
         <v-carousel-item>
-          <v-container fill-height fluid>
+          <v-container class="fill-height" fluid>
             <v-row align="center" justify="center">
               <v-col>
                 <ChartsWordCloud :chartdata="chat" />
@@ -89,177 +89,150 @@ export default {
     return {
       chat: undefined,
       linegraphHeaderChartOptions: {
-        tooltips: { enabled: false },
-        hover: { mode: null },
-        pointHitRadius: 5,
         responsive: true,
         maintainAspectRatio: true,
-        lineTension: 1,
-        legend: {
-          position: "top",
-          labels: {
-            fontStyle: "bold",
-            fontColor: "rgb(51,51,51)",
-            fontSize: 10,
+        elements: {
+          line: {
+            tension: 1,
+          },
+          point: {
+            hitRadius: 5,
+          },
+        },
+        plugins: {
+          tooltip: { enabled: false },
+          legend: {
+            position: "top",
+            labels: {
+              font: {
+                weight: "bold",
+                size: 10,
+              },
+              color: "rgb(51,51,51)",
+            },
           },
         },
         scales: {
-          xAxes: [
-            {
-              type: "time",
-              time: {},
-              gridLines: {
-                display: false,
-                color: "#FFFFFF",
-              },
-              ticks: {
-                fontColor: "rgb(51,51,51)",
-                fontStyle: "bold",
-                fontSize: 11,
+          x: {
+            type: "time",
+            grid: {
+              display: false,
+              color: "#FFFFFF",
+            },
+            ticks: {
+              color: "rgb(51,51,51)",
+              font: {
+                weight: "bold",
+                size: 11,
               },
             },
-          ],
-          yAxes: [
-            {
-              scaleLabel: {
-                display: true,
-                labelString: this.$t("messages"),
-                fontColor: "rgb(51,51,51)",
-                fontStyle: "bold",
-                fontSize: 11,
-              },
-              ticks: {
-                precision: 0,
-                stepSize: 1,
-                beginAtZero: true,
-                display: false,
-              },
-              gridLines: {
-                display: false,
-                color: "#FFFFFF",
-              },
+          },
+          y: {
+            beginAtZero: true,
+            display: false,
+            ticks: {
+              precision: 0,
+              stepSize: 1,
             },
-          ],
-        },
-        elements: {
-          line: {
-            tension: 0,
+            grid: {
+              display: false,
+              color: "#FFFFFF",
+            },
           },
         },
       },
       donoughtHeaderChartOptions: {
-        tooltips: { enabled: true },
-        hover: { mode: null },
         responsive: true,
         maintainAspectRatio: true,
-        legend: {
-          position: "bottom",
-          labels: {
-            fontStyle: "bold",
-            fontColor: "rgb(51,51,51)",
-            fontSize: 10,
-          },
-        },
-        scales: {
-          yAxes: [
-            {
-              scaleLabel: {
-                display: false,
-                labelString: this.$t("messages"),
-                fontColor: "rgb(51,51,51)",
-                fontStyle: "bold",
-                fontSize: 11,
+        plugins: {
+          tooltip: { enabled: true },
+          legend: {
+            position: "bottom",
+            labels: {
+              font: {
+                weight: "bold",
+                size: 10,
               },
-              ticks: {
-                display: false,
-              },
-              gridLines: {
-                display: false,
-              },
+              color: "rgb(51,51,51)",
             },
-          ],
+          },
         },
       },
       radarchartHeaderChartOptions: {
-        tooltips: { enabled: false },
-        hover: { mode: null },
         responsive: true,
         maintainAspectRatio: true,
-        scale: {
-          angleLines: {
-            // display: false,
-            color: "rgb(51,51,51)",
-          },
-          ticks: {
-            display: false,
-          },
-          gridLines: {
-            color: "rgb(51,51,51)",
-          },
-
-          pointLabels: {
-            fontColor: "rgb(51,51,51)",
+        scales: {
+          r: {
+            angleLines: {
+              color: "rgb(51,51,51)",
+            },
+            ticks: {
+              display: false,
+            },
+            grid: {
+              color: "rgb(51,51,51)",
+            },
+            pointLabels: {
+              color: "rgb(51,51,51)",
+            },
           },
         },
-        legend: {
-          position: "top",
-          labels: {
-            fontStyle: "bold",
-            fontColor: "rgb(51,51,51)",
-            fontSize: 10,
+        plugins: {
+          tooltip: { enabled: false },
+          legend: {
+            position: "top",
+            labels: {
+              font: {
+                weight: "bold",
+                size: 10,
+              },
+              color: "rgb(51,51,51)",
+            },
           },
         },
       },
       barchartHeaderChartOptions: {
-        tooltips: { enabled: true },
-        hover: { mode: null },
         responsive: true,
         maintainAspectRatio: true,
-        legend: {
-          position: "bottom",
-          labels: {
-            fontStyle: "bold",
-            fontColor: "rgb(51,51,51)",
-            fontSize: 10,
+        plugins: {
+          tooltip: { enabled: true },
+          legend: {
+            position: "bottom",
+            labels: {
+              font: {
+                weight: "bold",
+                size: 10,
+              },
+              color: "rgb(51,51,51)",
+            },
           },
         },
         scales: {
-          xAxes: [
-            {
-              gridLines: {
-                display: false,
-              },
-              ticks: {
-                fontColor: "rgb(51,51,51)",
-              },
+          x: {
+            grid: {
+              display: false,
             },
-          ],
-          yAxes: [
-            {
-              scaleLabel: {
-                display: false,
-                labelString: this.$t("messages"),
-                fontStyle: "bold",
-                fontColor: "rgb(51,51,51)",
-                fontSize: 10,
-              },
-              gridLines: {
-                display: false,
-              },
-              ticks: {
-                beginAtZero: true,
-                precision: 0,
-                display: false,
-              },
+            ticks: {
+              color: "rgb(51,51,51)",
             },
-          ],
+          },
+          y: {
+            beginAtZero: true,
+            display: false,
+            ticks: {
+              precision: 0,
+            },
+            grid: {
+              display: false,
+            },
+          },
         },
       },
     };
   },
   created() {
     // eslint-disable-next-line no-undef
-    if (process.client) {
+    if (import.meta.client) {
       fetch("/example-results.json")
         .then((response) => response.text())
         .then((messages) => {

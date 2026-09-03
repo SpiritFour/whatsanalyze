@@ -4,7 +4,6 @@
       <template #activator="{ props }">
         <v-btn
           class="rounded-0 btn pa-0 btn-color-dark"
-          dark
           elevation="0"
           v-bind="props"
         >
@@ -59,7 +58,7 @@
               <v-input :rules="starRules" :value="starValue">
                 <v-rating
                   v-model="starValue"
-                  background-color="grey lighten-2"
+                  bg-color="grey-lighten-2"
                   color="primary"
                   hover
                   length="5"
