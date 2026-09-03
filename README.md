@@ -12,6 +12,14 @@ No data about your chat is transferred to any server at all.
 
 Dev deployment: https://whatsanalyze-80665.web.app
 
+## Maintainer documentation
+
+Read [`docs/modernization-runbook.md`](docs/modernization-runbook.md) before
+upgrading dependencies or changing the frontend, PDF, localization, Firebase,
+or PayPal integrations. It records the current architecture, migration
+decisions, deployment procedure, verification commands, and known follow-up
+work.
+
 ## Encountered an issue?
 
 Please report bugs in the github issues.
