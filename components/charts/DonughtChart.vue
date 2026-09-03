@@ -28,7 +28,8 @@ export default {
       return (
         this.options || {
           responsive: true,
-          maintainAspectRatio: false,
+          maintainAspectRatio: true,
+          aspectRatio: 1,
           plugins: {
             legend: {
               position: "bottom",

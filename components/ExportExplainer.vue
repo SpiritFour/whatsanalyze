@@ -18,24 +18,31 @@
         <v-window-item v-for="(data, idx) in tabData" :key="idx" :value="idx">
           <v-row no-gutters>
             <v-col class="pb-10" cols="12" sm="8">
-              <v-timeline dense>
+              <v-timeline
+                align="start"
+                :density="$vuetify.display.xs ? 'compact' : 'default'"
+                class="py-4"
+              >
                 <v-timeline-item
                   v-for="(tabItem, i) in data.tabItems"
                   :key="i"
-                  :color="tabStatus[idx] === i ? 'blue' : 'grey'"
-                  :text="$t(tabItem.text)"
-                  class="mb-4 align-center"
+                  :dot-color="tabStatus[idx] === i ? 'blue' : 'grey'"
                   fill-dot
-                  small
+                  :size="$vuetify.display.xs ? 'x-small' : 'small'"
+                  class="mb-4"
                   @click.stop="tabStatus = [i, i]"
                 >
-                  <v-row style="cursor: pointer" v-html="$t(tabItem.text)">
+                  <v-row
+                    class="cursor-pointer"
+                    style="cursor: pointer"
+                    v-html="$t(tabItem.text)"
+                  >
                   </v-row>
                   <v-btn
                     v-if="i === 0 && tab === 1"
-                    id="dlPWA "
+                    id="dlPWA"
                     :disabled="!installButtonStatus"
-                    class="mt-5 pa-2 white--text btn-color"
+                    class="mt-5 pa-2 btn-color"
                     @click="downloadPWA"
                     >{{ $t("addToHomescreen") }}
                   </v-btn>
@@ -85,8 +92,8 @@
                       class="blinking"
                       color="black"
                       disabled
-                      fab
-                      outlined
+                      variant="outlined"
+                      rounded="circle"
                     ></v-btn>
                   </v-carousel-item>
                 </v-carousel>
@@ -403,6 +410,10 @@ export default {
   background-color: transparent;
   margin-left: -25px;
   margin-top: -25px;
+  width: 50px !important;
+  height: 50px !important;
+  min-width: 50px !important;
+  padding: 0 !important;
 }
 
 @keyframes blink {

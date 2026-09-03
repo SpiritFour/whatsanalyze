@@ -192,6 +192,9 @@ export default {
 };
 </script>
 <style>
+.youtube-video {
+  max-width: 100%;
+}
 .mt-5,
 .my-5,
 .mb-2,
