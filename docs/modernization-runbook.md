@@ -210,12 +210,11 @@ nix develop --command firebase deploy --only functions:checksubscriberstatus
 ```
 
 The repository declares Node 22 for Functions because Firebase stopped
-accepting Node 18 deployments on October 30, 2025. During PR #381 only
-`checksubscriberstatus` was deployed on Node 22. The existing `helloworld` and
-`paypalwebhook` production revisions remained on Node 18; their next deployment
-will use the committed Node 22 runtime and updated SDKs.
+accepting Node 18 deployments on October 30, 2025. `checksubscriberstatus`,
+`helloworld`, and `paypalwebhook` all run on Node 22 in production; only the
+`ext-firestore-send-email` extension remains on Node 18.
 
-Deploy individual functions while validating the migration:
+Deploy individual functions while validating changes:
 
 ```bash
 nix develop --command firebase deploy --only functions:helloworld
@@ -319,10 +318,10 @@ does not install browsers or run Playwright.
 
 - Rename `helloworld` to describe its purpose, with a compatibility period for
   the old endpoint.
-- Deploy and verify `helloworld` and `paypalwebhook` on Node 22.
 - Decide whether Firebase functions use `onCall` or ordinary HTTP.
-- Verify or recreate the PayPal sandbox plan if fresh subscriptions immediately
-  become `EXPIRED`.
+- Verify a full sandbox subscription end to end: approve as a sandbox buyer,
+  confirm activation on `/subscribe`, and confirm the webhook writes the
+  `subscriptions-dev` document and sends the email.
 - Expand backend tests around PayPal status mapping and webhook events before
   changing payment behavior.
 - Upgrade the legacy ESLint/Jest toolchain independently; do not combine it
