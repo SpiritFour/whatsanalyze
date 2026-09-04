@@ -38,13 +38,12 @@ export function lastDate(chat) {
 export function objectToDictionary(value) {
   if (typeof value === "function") return undefined;
   if (value === null || typeof value !== "object") return value;
-  if (
-    value instanceof Date ||
-    value instanceof ArrayBuffer ||
-    ArrayBuffer.isView(value)
-  ) {
-    return value;
-  }
+  // reactive proxies (Vue wraps everything in data()) cannot be structured-cloned
+  // into a Worker: unwrap by serializing. Dates become ISO strings; typed arrays
+  // and ArrayBuffers are cloned as-is.
+  if (ArrayBuffer.isView(value)) return value;
+  if (value instanceof ArrayBuffer) return value;
+  if (value instanceof Date) return value.toISOString();
 
   if (Array.isArray(value)) {
     return value.map(objectToDictionary);

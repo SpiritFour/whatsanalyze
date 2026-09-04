@@ -79,6 +79,22 @@ Important Vuetify 3 differences encountered during migration:
 - Use native scrolling helpers instead of Vuetify 2's `$vuetify.goTo`.
 - Dialog activators receive `{ props }`; bind those props to the activator.
   The old `{ on, attrs }` pattern renders but does not open the dialog.
+- Keep activator slots to a single root element that binds the activator props.
+  With multiple roots, Vuetify cannot forward the props: its own dialog toggle
+  still fires, but `@click` handlers on sibling elements silently never run.
+- `v-btn` `dark`, `fab`, `depressed`, `outlined`, and `text` are gone. Use
+  `variant="outlined"` / `variant="text"`, and `icon` plus `size="x-large"`
+  for icon-only buttons.
+- `v-alert dense` is gone; use `density="compact"`.
+- `v-icon large` and `v-icon left` became `size="large"` and `start`.
+- Vuetify 2 color helper classes (`cyan darken-2`, `white--text`,
+  `grey lighten-2`) no longer exist. Use `bg-cyan-darken-2`, `text-white`,
+  and `bg-grey-lighten-2`; component color props need the collapsed form
+  (`color="red-darken-2"`, not `color="red darken-2"`).
+- `v-card` lost `tile`. `v-slider`'s `ticks="always"` became
+  `:show-ticks="'always'"` (a `ticks` prop is now tick data, not a mode).
+- `v-data-table` headers want `title`/`key`, not Vuetify 2's `text`/`value`.
+- `v-timeline-item` uses `dot-color` instead of `color`.
 - Tabs use window items instead of `v-tabs-items` and `v-tab-item`.
 - Expansion panels use the Vuetify 3 title/text components.
 - Do not use Vue 2's `.native` event modifier.
@@ -101,6 +117,14 @@ Localization is provided by `@nuxtjs/i18n`.
 - Nuxt Content v3 uses `queryCollection` and `ContentRenderer`.
 - PWA support comes from `@vite-pwa/nuxt`. The development service worker is
   disabled because it caused stale assets and browser-test navigation races.
+- `@vite-pwa/nuxt` silently replaces workbox's default `globPatterns` with its
+  own narrow list once payload extraction or the app manifest is active. The
+  generated `sw.js` then precaches only a handful of build files while
+  `NavigationRoute` falls back to `/`, and every navigation throws
+  `non-precached-url: [{"url":"/"}]` from `createHandlerBoundToURL`. Keep the
+  explicit `pwa.workbox.globPatterns: ["**/*.{js,wasm,css,html}"]` in
+  `nuxt.config.js`, and confirm a build's `dist/sw.js` contains `/` in its
+  precache manifest.
 - Analytics scripts are configured through Nuxt Scripts. Application events
   are pushed to `dataLayer` by `utils/gtagValues.js`.
 - Sentry uses `@sentry/nuxt`. Local builds without an auth token warn that no
@@ -142,6 +166,31 @@ Two Vue 3 migration details are essential:
    `Worker.postMessage`; `objectToDictionary` recursively converts chat and
    attachment data to cloneable plain structures while preserving dates,
    buffers, and typed arrays.
+
+More pitfalls discovered the hard way:
+
+- The worker instance lives in component `data()`, so Vue wraps it in a reactive
+  proxy. `markRaw(new PDFWorker())` keeps the raw `Worker`; proxied receivers
+  break native `postMessage` and `addEventListener` calls.
+- `objectToDictionary` must convert `Date` objects to ISO strings. A proxied
+  `Date` passes the `instanceof Date` check but cannot be structured-cloned,
+  which stalls the worker with no visible error.
+- `createImageBitmap` rejects with `InvalidStateError` for some WhatsApp
+  attachment JPEGs. Decode failures are caught per attachment:
+  `renderInPDF` becomes false and the message renders as text instead of
+  killing the whole PDF run.
+- The pricing cards and download dialog used to share the dialog activator
+  slot. Because the slot had multiple roots, the activator props were lost and
+  the buttons' own `@click` handlers never fired (the dialog toggle still
+  worked, which made it look alive). The activator is now a single button;
+  pricing cards render outside the overlay.
+
+When a worker message is never processed, check these layers in order: data
+cloneability (reactive proxies, proxied `Date`), a stuck `isLoading` flag (a
+lost worker never resets it), and the service worker's precache manifest.
+`zipLoadEndHandler` guards empty reader results and catches parse errors;
+without that guard the failure surfaced only as node-side jszip messages such
+as `Can't read the data of 'the loaded zip file'` with no UI feedback.
 
 The PDF component must handle both preparation errors and worker errors,
 release its loading state, and terminate completed or failed workers. A loading
@@ -330,3 +379,12 @@ does not install browsers or run Playwright.
   upgrades as part of an unrelated change.
 - Consider migrating Options API components incrementally when they are already
   being changed.
+- Debugging the PDF worker from an automated browser is slow: Playwright
+  worker `console` events do not surface reliably. The working approach was a
+  raw CDP session (`Target.setAutoAttach` with `flatten: true`,
+  `Runtime.enable` per session, `Page.downloadWillBegin` /
+  `Page.downloadProgress` for the save path). Reuse this recipe before adding
+  more `console.log` probes to worker code.
+- The service worker precache manifest is easy to regress silently (see the
+  PWA note above). Check `dist/sw.js` contains `/` in `precacheAndRoute` after
+  any change to `pwa` or Nitro output configuration.

@@ -201,6 +201,11 @@ export default defineNuxtConfig({
     },
     workbox: {
       importScripts: ["custom-sw.js"],
+      // @vite-pwa/nuxt overrides workbox's default globPatterns (["**/*.{js,wasm,css,html}"])
+      // with its own narrow list when payloadExtraction/appManifest kick in, which left
+      // index.html and all _nuxt assets out of the precache manifest and made the
+      // NavigationRoute fallback "/" throw "non-precached-url". Restore the default set.
+      globPatterns: ["**/*.{js,wasm,css,html}"],
     },
     devOptions: {
       enabled: false,

@@ -23,171 +23,195 @@
     </v-row>
 
     <!-- Download dialog -->
-    <v-dialog v-model="showDownloadPopup" width="550">
-      <template #activator="{ props: activatorProps }">
-        <!-- Pricing Section -->
-        <v-btn v-if="isValidSubscription" @click="downloadFull" color="success">
-          <span v-html="$t('downloadNow')"></span>
-        </v-btn>
-
-        <div v-else class="pricing-section mt-10">
-          <div class="text-h2 font-weight-bold pb-5">
-            {{ $t("pricingTitle") }}
-          </div>
-          <div class="text-subtitle-1">{{ $t("pricingSubtitle") }}</div>
-          <v-row justify="center" align="center" class="py-5">
-            <!-- Free Tier -->
-            <v-col cols="12" sm="4">
-              <div class="pricing-card text-center py-5 px-4">
-                <div class="text-h3 font-weight-bold title">
-                  {{ $t("freeTierTitle") }}
-                </div>
-                <div class="text-body-1 py-3 subtitle">
-                  {{ $t("freeTierDescription") }}
-                </div>
-                <v-btn
-                  color="primary"
-                  variant="outlined"
-                  class="mt-3 mb-4"
-                  @click="handleFreePdfClick"
-                >
-                  <v-icon class="mr-1">mdi-download</v-icon>
-                  <span v-html="$t('downloadFreePreviewPDF')"></span>
-                </v-btn>
-                <div class="price-description">
-                  <b style="color: green">{{ 0 + " " + currency }}</b>
-                </div>
-              </div>
-            </v-col>
-
-            <!-- One-Time Payment -->
-            <v-col cols="12" sm="4">
-              <div class="pricing-card text-center py-5 px-4">
-                <div class="text-h3 font-weight-bold title">
-                  {{ $t("oneTimeTitle") }}
-                </div>
-                <div class="text-body-1 py-3 subtitle">
-                  {{ $t("oneTimeDescription") }}
-                </div>
-                <v-btn
-                  color="success"
-                  class="mt-3 mb-4"
-                  v-bind="activatorProps"
-                  @click="gtagEvent('full_pdf_pressed', GTAG_PAYMENT)"
-                >
-                  <v-icon class="mr-1">mdi-download</v-icon>
-                  <span v-html="$t('downloadFullChatPDF')"></span>
-                </v-btn>
-                <div class="price-description">
-                  <v-row align="center" justify="center">
-                    <b style="color: green">{{ price + " " + currency }}</b>
-                    <span
-                      class="px-1 ml-2"
-                      style="color: white; background: red; border-radius: 5px"
-                    >
-                      -50%
-                    </span>
-                  </v-row>
-                  <v-row align="center" justify="center">
-                    <s style="color: grey">{{ 15 + " " + currency }}</s>
-                  </v-row>
-                </div>
-              </div>
-            </v-col>
-
-            <!-- Monthly Subscription -->
-            <v-col cols="12" sm="4">
-              <div class="pricing-card text-center py-5 px-4">
-                <div class="text-h3 font-weight-bold title">
-                  {{ $t("subscriptionTitle") }}
-                </div>
-                <div class="text-body-1 py-3 subtitle">
-                  {{ $t("subscriptionDescription") }}
-                </div>
-                <SubscribeBtn> </SubscribeBtn>
-                <div class="price-description">
-                  <v-row align="center" justify="center">
-                    <b style="color: green">{{ price - 3 + " " + currency }}</b>
-                    <span
-                      class="px-1 ml-2"
-                      style="color: white; background: red; border-radius: 5px"
-                    >
-                      -80%
-                    </span>
-                  </v-row>
-                  <v-row align="center" justify="center">
-                    <s style="color: grey">{{ 24.95 + " " + currency }}</s>
-                  </v-row>
-                </div>
-              </div>
-            </v-col>
-          </v-row>
-        </div>
-      </template>
-      <v-card>
-        <!-- Popup title + subtitle -->
-        <v-card-title class="bg-cyan" style="word-break: normal">
-          <div class="text-h4 font-weight-bold" v-html="$t('popupTitle')"></div>
-          <span v-html="$t('popupSubtitle')"></span>
-        </v-card-title>
-
-        <!-- Popup text -->
-        <v-card-text class="pt-3 text-body-1 font-weight-bold">
-          <span v-html="$t('popupInfo')"></span>
-        </v-card-text>
-
-        <div v-if="isLoading" class="loading mb-2" />
-
-        <!-- Download or Payment -->
-        <v-row align="center" class="py-6 ma-0" cols="12" justify="center">
-          <!-- Download button if subscribed -->
-          <v-btn v-if="isValidSubscription" @click="downloadFull">
+    <v-row justify="center">
+      <v-dialog v-model="showDownloadPopup" width="550">
+        <template #activator="{ props: activatorProps }">
+          <v-btn
+            v-if="isValidSubscription"
+            color="success"
+            v-bind="activatorProps"
+            @click="downloadFull"
+          >
             <span v-html="$t('downloadNow')"></span>
           </v-btn>
-
-          <!-- Payment section if not subscribed -->
-          <div v-else>
-            <ChatVisualizationPayment
-              :amount="price"
-              :currency="currency"
-              @onApprove="onApprove"
-              @onCreateOrder="onCreateOrder"
-              @onError="onError"
-            />
-            <v-alert density="compact" type="info" prominent>
-              <span v-html="$t('subscriptionHint')"></span>
-              <v-btn to="/subscribe">
-                <span v-html="$t('openSubscriptionPage')"></span>
-              </v-btn>
-            </v-alert>
-          </div>
-        </v-row>
-
-        <v-divider></v-divider>
-
-        <!-- Close button -->
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="red-darken-1" variant="text" @click="showDownloadPopup = false">
-            <span v-html="$t('closeButton')"></span>
+          <v-btn
+            v-else
+            color="success"
+            class="mt-10"
+            v-bind="activatorProps"
+            @click="gtagEvent('full_pdf_pressed', GTAG_PAYMENT)"
+          >
+            <v-icon class="mr-1">mdi-download</v-icon>
+            <span v-html="$t('downloadFullChatPDF')"></span>
           </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+        </template>
+
+        <v-card>
+          <!-- Popup title + subtitle -->
+          <v-card-title class="bg-cyan" style="word-break: normal">
+            <div
+              class="text-h4 font-weight-bold"
+              v-html="$t('popupTitle')"
+            ></div>
+            <span v-html="$t('popupSubtitle')"></span>
+          </v-card-title>
+
+          <!-- Popup text -->
+          <v-card-text class="pt-3 text-body-1 font-weight-bold">
+            <span v-html="$t('popupInfo')"></span>
+          </v-card-text>
+
+          <div v-if="isLoading" class="loading mb-2" />
+
+          <!-- Download or Payment -->
+          <v-row align="center" class="py-6 ma-0" cols="12" justify="center">
+            <!-- Download button if subscribed -->
+            <v-btn v-if="isValidSubscription" @click="downloadFull">
+              <span v-html="$t('downloadNow')"></span>
+            </v-btn>
+
+            <!-- Payment section if not subscribed -->
+            <div v-else>
+              <ChatVisualizationPayment
+                :amount="price"
+                :currency="currency"
+                @onApprove="onApprove"
+                @onCreateOrder="onCreateOrder"
+                @onError="onError"
+              />
+              <v-alert density="compact" type="info" prominent>
+                <span v-html="$t('subscriptionHint')"></span>
+                <v-btn to="/subscribe">
+                  <span v-html="$t('openSubscriptionPage')"></span>
+                </v-btn>
+              </v-alert>
+            </div>
+          </v-row>
+
+          <v-divider></v-divider>
+
+          <!-- Close button -->
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="red-darken-1"
+              variant="text"
+              @click="showDownloadPopup = false"
+            >
+              <span v-html="$t('closeButton')"></span>
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-row>
+
+    <!-- Pricing Section -->
+    <div v-if="!isValidSubscription" class="pricing-section mt-10">
+      <div class="text-h2 font-weight-bold pb-5">
+        {{ $t("pricingTitle") }}
+      </div>
+      <div class="text-subtitle-1">{{ $t("pricingSubtitle") }}</div>
+      <v-row justify="center" align="center" class="py-5">
+        <!-- Free Tier -->
+        <v-col cols="12" sm="4">
+          <div class="pricing-card text-center py-5 px-4">
+            <div class="text-h3 font-weight-bold title">
+              {{ $t("freeTierTitle") }}
+            </div>
+            <div class="text-body-1 py-3 subtitle">
+              {{ $t("freeTierDescription") }}
+            </div>
+            <v-btn
+              color="primary"
+              variant="outlined"
+              class="mt-3 mb-4"
+              @click="handleFreePdfClick"
+            >
+              <v-icon class="mr-1">mdi-download</v-icon>
+              <span v-html="$t('downloadFreePreviewPDF')"></span>
+            </v-btn>
+            <div class="price-description">
+              <b style="color: green">{{ 0 + " " + currency }}</b>
+            </div>
+          </div>
+        </v-col>
+
+        <!-- One-Time Payment -->
+        <v-col cols="12" sm="4">
+          <div class="pricing-card text-center py-5 px-4">
+            <div class="text-h3 font-weight-bold title">
+              {{ $t("oneTimeTitle") }}
+            </div>
+            <div class="text-body-1 py-3 subtitle">
+              {{ $t("oneTimeDescription") }}
+            </div>
+            <v-btn
+              color="success"
+              class="mt-3 mb-4"
+              @click="
+                showDownloadPopup = true;
+                gtagEvent('full_pdf_pressed', GTAG_PAYMENT);
+              "
+            >
+              <v-icon class="mr-1">mdi-download</v-icon>
+              <span v-html="$t('downloadFullChatPDF')"></span>
+            </v-btn>
+            <div class="price-description">
+              <v-row align="center" justify="center">
+                <b style="color: green">{{ price + " " + currency }}</b>
+                <span
+                  class="px-1 ml-2"
+                  style="color: white; background: red; border-radius: 5px"
+                >
+                  -50%
+                </span>
+              </v-row>
+              <v-row align="center" justify="center">
+                <s style="color: grey">{{ 15 + " " + currency }}</s>
+              </v-row>
+            </div>
+          </div>
+        </v-col>
+
+        <!-- Monthly Subscription -->
+        <v-col cols="12" sm="4">
+          <div class="pricing-card text-center py-5 px-4">
+            <div class="text-h3 font-weight-bold title">
+              {{ $t("subscriptionTitle") }}
+            </div>
+            <div class="text-body-1 py-3 subtitle">
+              {{ $t("subscriptionDescription") }}
+            </div>
+            <SubscribeBtn> </SubscribeBtn>
+            <div class="price-description">
+              <v-row align="center" justify="center">
+                <b style="color: green">{{ price - 3 + " " + currency }}</b>
+                <span
+                  class="px-1 ml-2"
+                  style="color: white; background: red; border-radius: 5px"
+                >
+                  -80%
+                </span>
+              </v-row>
+              <v-row align="center" justify="center">
+                <s style="color: grey">{{ 24.95 + " " + currency }}</s>
+              </v-row>
+            </div>
+          </div>
+        </v-col>
+      </v-row>
+    </div>
   </div>
 </template>
 
-<!-- eslint-enable vue/no-v-html -->
 <script>
+import { saveAs } from "file-saver";
+import { markRaw } from "vue";
 import { GTAG_PAYMENT, GTAG_PDF, gtagEvent } from "~/utils/gtagValues";
 import PDFWorker from "~/assets/js/pdf.worker.js?worker";
 import { loadImage, objectToDictionary } from "~/utils/utils";
-import { saveAs } from "file-saver";
-import SubscriptionChecker from "~/components/SubscriptionChecker.vue";
 
 export default {
-  name: "PdfDownload",
-  components: { SubscriptionChecker },
   props: {
     currency: { type: String, required: true },
     price: { type: Number, required: true },
@@ -242,8 +266,9 @@ export default {
         const messagesPerPerson = await loadImage("#messages-per-person");
         const radarMonth = await loadImage("#radar-month");
         const radarDay = await loadImage("#radar-day");
-
-        this.pdfWorker = new PDFWorker();
+        this.pdfWorker = markRaw(new PDFWorker());
+        // markRaw: never wrap the Worker in reactive proxies — proxied receivers break
+        // native postMessage/addEventListener calls.
         this.pdfWorker.addEventListener("message", this.workerResponseHandler);
         this.pdfWorker.addEventListener("error", this.pdfErrorHandler);
 
@@ -251,7 +276,6 @@ export default {
         chat.funFacts = await this.chat.getFunFacts(); // set funfacts beforehand instead of using function call
 
         this.pdfWorker.postMessage({
-          // pass all data to service worker
           chat: chat,
           attachments: objectToDictionary(this.attachments),
           ego: this.ego,
