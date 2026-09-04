@@ -109,3 +109,6 @@ Icon\r
 # omp delta agent worktrees
 .delta/
 .direnv
+
+# husky v9 generated helpers
+.husky/_/
