@@ -13,7 +13,7 @@
     <header class="tool-hero">
       <div class="tool-category-badge mono-label">
         <span class="badge-dot"></span>
-        WHATSAPP UTILITY SUITE
+        FREE WHATSAPP TOOL
       </div>
 
       <h1 class="tool-title">
@@ -30,8 +30,8 @@
 
     <!-- BLUF / LLM Definition Card -->
     <ToolBluf
-      title="WhatsApp Inactivity Analysis Specification"
-      summary="The WhatsApp Inactivity Tracker evaluates exported chat transcripts locally in your browser to determine the final message sender, quantify dormant intervals, and benchmark conversational turn-taking without transmitting data across external networks."
+      title="How This Inactivity Check Works"
+      summary="Check who holds the last word, calculate how long your conversation has been silent, and see reply times for each person. All processed 100% locally in your browser."
       :facts="blufFacts"
     />
 
@@ -469,7 +469,7 @@ function formatDate(d: Date): string {
   max-width: 1080px;
   margin: 0 auto;
   padding: 40px 20px 100px;
-  color: #f7fafc;
+  color: #0f172a;
 }
 
 .breadcrumb-nav {
@@ -481,12 +481,12 @@ function formatDate(d: Date): string {
 }
 
 .breadcrumb-link {
-  color: #718096;
+  color: #64748b;
   text-decoration: none;
   transition: color 0.2s;
 
   &:hover {
-    color: #60d8bd;
+    color: #0f766e;
   }
 }
 
@@ -495,8 +495,8 @@ function formatDate(d: Date): string {
 }
 
 .breadcrumb-current {
-  color: #e2e8f0;
-  font-weight: 500;
+  color: #0f172a;
+  font-weight: 600;
 }
 
 .tool-hero {
@@ -508,13 +508,14 @@ function formatDate(d: Date): string {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(33, 166, 141, 0.1);
-  border: 1px solid rgba(33, 166, 141, 0.25);
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
   padding: 4px 14px;
   border-radius: 100px;
   font-size: 0.74rem;
   letter-spacing: 0.08em;
-  color: #60d8bd;
+  color: #0f766e;
+  font-weight: 700;
   margin-bottom: 18px;
 }
 
@@ -530,7 +531,7 @@ function formatDate(d: Date): string {
   font-weight: 800;
   line-height: 1.18;
   letter-spacing: -0.035em;
-  color: #ffffff;
+  color: #0f172a;
   margin-bottom: 16px;
 
   @media (max-width: 768px) {
@@ -539,14 +540,14 @@ function formatDate(d: Date): string {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #ffffff 30%, #60d8bd 100%);
+  background: linear-gradient(135deg, #0f172a 30%, #059669 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .tool-intro {
   font-size: 1.15rem;
-  color: #a0aec0;
+  color: #475569;
   max-width: 680px;
   margin: 0 auto;
   line-height: 1.6;
@@ -576,25 +577,21 @@ function formatDate(d: Date): string {
 }
 
 .hero-metric-card {
-  background: linear-gradient(
-    145deg,
-    rgba(17, 24, 32, 0.9),
-    rgba(11, 18, 24, 0.95)
-  );
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 24px;
   padding: 36px;
   margin-bottom: 24px;
   position: relative;
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.06);
 }
 
 .status-pill {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
   padding: 4px 12px;
   border-radius: 100px;
   margin-bottom: 20px;
@@ -611,7 +608,7 @@ function formatDate(d: Date): string {
 .status-text {
   font-size: 0.82rem;
   font-weight: 600;
-  color: #f7fafc;
+  color: #0f172a;
 }
 
 .hero-headline {
@@ -623,7 +620,7 @@ function formatDate(d: Date): string {
   font-family: ui-monospace, monospace;
   font-size: 0.75rem;
   letter-spacing: 0.1em;
-  color: #718096;
+  color: #64748b;
   margin-bottom: 6px;
 }
 
@@ -631,7 +628,7 @@ function formatDate(d: Date): string {
   font-size: 2.4rem;
   font-weight: 800;
   letter-spacing: -0.03em;
-  color: #ffffff;
+  color: #0f172a;
   margin-bottom: 6px;
 }
 
@@ -643,17 +640,17 @@ function formatDate(d: Date): string {
 
 .time-relative {
   font-size: 1.25rem;
-  font-weight: 600;
-  color: #60d8bd;
+  font-weight: 700;
+  color: #059669;
 }
 
 .time-exact {
   font-size: 0.85rem;
-  color: #718096;
+  color: #64748b;
 }
 
 .last-message-quote {
-  background: rgba(0, 0, 0, 0.3);
+  background: #f8fafc;
   border-left: 3px solid #21a68d;
   border-radius: 0 12px 12px 0;
   padding: 14px 20px;
@@ -664,7 +661,7 @@ function formatDate(d: Date): string {
 
 .quote-text {
   font-size: 0.98rem;
-  color: #e2e8f0;
+  color: #334155;
   font-style: italic;
   margin: 0;
   line-height: 1.5;
@@ -686,20 +683,21 @@ function formatDate(d: Date): string {
 }
 
 .metric-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 18px;
   padding: 22px 20px;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.03);
 }
 
 .metric-icon {
   width: 38px;
   height: 38px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.04);
+  background: #f1f5f9;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -713,30 +711,31 @@ function formatDate(d: Date): string {
 .metric-label {
   font-size: 0.68rem;
   letter-spacing: 0.08em;
-  color: #718096;
+  color: #64748b;
   margin-bottom: 4px;
 }
 
 .metric-value {
   font-size: 1.35rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #0f172a;
   letter-spacing: -0.02em;
   margin-bottom: 2px;
 }
 
 .metric-caption {
   font-size: 0.78rem;
-  color: #a0aec0;
+  color: #64748b;
 }
 
 .participants-section,
 .gaps-section {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 20px;
   padding: 28px;
   margin-bottom: 32px;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
 }
 
 .section-header {
@@ -749,12 +748,13 @@ function formatDate(d: Date): string {
 .section-title {
   font-size: 1.2rem;
   font-weight: 700;
-  color: #f7fafc;
+  color: #0f172a;
 }
 
 .section-tag {
   font-size: 0.72rem;
-  color: #718096;
+  color: #64748b;
+  font-weight: 600;
 }
 
 .table-container {
@@ -771,16 +771,17 @@ function formatDate(d: Date): string {
     padding: 12px 14px;
     font-size: 0.72rem;
     font-family: ui-monospace, monospace;
-    color: #718096;
+    color: #64748b;
+    background: #f8fafc;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid #e2e8f0;
   }
 
   td {
     padding: 14px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    color: #e2e8f0;
+    border-bottom: 1px solid #f1f5f9;
+    color: #1e293b;
   }
 }
 
@@ -806,11 +807,11 @@ function formatDate(d: Date): string {
 .mono-cell {
   font-family: ui-monospace, monospace;
   font-size: 0.84rem;
-  color: #cbd5e0;
+  color: #334155;
 }
 
 .snippet-cell {
-  color: #a0aec0;
+  color: #64748b;
   font-style: italic;
 }
 
@@ -824,15 +825,15 @@ function formatDate(d: Date): string {
   display: flex;
   align-items: center;
   gap: 18px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
   border-radius: 14px;
   padding: 16px 20px;
 }
 
 .gap-rank {
   font-size: 0.85rem;
-  color: #718096;
+  color: #64748b;
   font-weight: 700;
 }
 
@@ -845,35 +846,36 @@ function formatDate(d: Date): string {
 .gap-duration {
   font-size: 1.05rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #0f172a;
 }
 
 .gap-interval {
   font-size: 0.75rem;
-  color: #718096;
+  color: #64748b;
 }
 
 .gap-broken {
   font-size: 0.86rem;
-  color: #cbd5e0;
+  color: #334155;
   margin-top: 4px;
 
   strong {
-    color: #60d8bd;
+    color: #0f766e;
   }
 
   .snippet {
-    color: #a0aec0;
+    color: #64748b;
     font-style: italic;
   }
 }
 
 .guide-article {
   margin-top: 60px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 24px;
   padding: 40px;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
 
   @media (max-width: 640px) {
     padding: 24px;
@@ -881,9 +883,10 @@ function formatDate(d: Date): string {
 }
 
 .guide-badge {
-  color: #60d8bd;
+  color: #0f766e;
   font-size: 0.74rem;
   letter-spacing: 0.08em;
+  font-weight: 700;
   margin-bottom: 8px;
   display: block;
 }
@@ -891,18 +894,18 @@ function formatDate(d: Date): string {
 .guide-title {
   font-size: 1.8rem;
   font-weight: 800;
-  color: #ffffff;
+  color: #0f172a;
   margin-bottom: 24px;
 }
 
 .guide-content {
-  color: #cbd5e0;
+  color: #334155;
   line-height: 1.7;
 
   h3 {
     font-size: 1.25rem;
     font-weight: 700;
-    color: #f7fafc;
+    color: #0f172a;
     margin: 28px 0 12px;
   }
 
@@ -932,13 +935,13 @@ function formatDate(d: Date): string {
 }
 
 .step-card {
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
   border-radius: 16px;
   padding: 20px;
 
   h4 {
-    color: #ffffff;
+    color: #0f172a;
     font-size: 1.05rem;
     margin-bottom: 12px;
   }
@@ -946,7 +949,7 @@ function formatDate(d: Date): string {
   ol {
     padding-left: 18px;
     font-size: 0.9rem;
-    color: #a0aec0;
+    color: #475569;
 
     li {
       margin-bottom: 6px;

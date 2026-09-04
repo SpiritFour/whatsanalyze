@@ -2,10 +2,10 @@
   <section class="tool-faq-section">
     <div class="faq-header">
       <div class="faq-badge mono-label">
-        <v-icon size="14" color="#21a68d" class="mr-1"
+        <v-icon size="14" color="#0f766e" class="mr-1"
           >mdi-help-circle-outline</v-icon
         >
-        TECHNICAL SPEC & FAQS
+        QUESTIONS & ANSWERS
       </div>
       <h3 class="faq-title">Frequently Asked Questions</h3>
     </div>
@@ -73,15 +73,17 @@ function toggle(index: number) {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.74rem;
   letter-spacing: 0.08em;
-  color: #60d8bd;
-  background: rgba(33, 166, 141, 0.1);
+  color: #0f766e;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
   padding: 4px 12px;
   border-radius: 100px;
   margin-bottom: 12px;
+  font-weight: 600;
 }
 
 .faq-title {
-  color: #ffffff;
+  color: #0f172a;
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -94,15 +96,16 @@ function toggle(index: number) {
 }
 
 .faq-item {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 16px;
   overflow: hidden;
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.04);
   transition: all 0.2s ease;
 
   &.is-open {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(33, 166, 141, 0.3);
+    background: #ffffff;
+    border-color: #21a68d;
   }
 }
 
@@ -114,31 +117,31 @@ function toggle(index: number) {
   padding: 18px 24px;
   background: none;
   border: none;
-  color: #f7fafc;
+  color: #0f172a;
   font-size: 1.02rem;
   font-weight: 600;
   text-align: left;
   cursor: pointer;
 
   &:hover {
-    color: #60d8bd;
+    color: #21a68d;
   }
 }
 
 .faq-chevron {
-  color: #a0aec0;
+  color: #64748b;
   transition: transform 0.25s ease;
 
   &.rotate-180 {
     transform: rotate(180deg);
-    color: #60d8bd;
+    color: #21a68d;
   }
 }
 
 .faq-answer {
   padding: 0 24px 20px;
-  color: #a0aec0;
-  font-size: 0.92rem;
+  color: #475569;
+  font-size: 0.94rem;
   line-height: 1.6;
 
   p {

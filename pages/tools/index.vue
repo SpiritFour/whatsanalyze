@@ -11,7 +11,7 @@
     <header class="hub-hero">
       <div class="hub-badge mono-label">
         <span class="badge-dot"></span>
-        MICRO-UTILITY PLATFORM
+        WHATSAPP TOOLS
       </div>
 
       <h1 class="hub-title">WhatsApp Tools & Analytics Suite</h1>
@@ -204,7 +204,7 @@ useHead({
   max-width: 1080px;
   margin: 0 auto;
   padding: 40px 20px 100px;
-  color: #f7fafc;
+  color: #0f172a;
 }
 
 .breadcrumb-nav {
@@ -216,12 +216,12 @@ useHead({
 }
 
 .breadcrumb-link {
-  color: #718096;
+  color: #64748b;
   text-decoration: none;
   transition: color 0.2s;
 
   &:hover {
-    color: #60d8bd;
+    color: #0f766e;
   }
 }
 
@@ -230,8 +230,8 @@ useHead({
 }
 
 .breadcrumb-current {
-  color: #e2e8f0;
-  font-weight: 500;
+  color: #0f172a;
+  font-weight: 600;
 }
 
 .hub-hero {
@@ -243,13 +243,14 @@ useHead({
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(33, 166, 141, 0.1);
-  border: 1px solid rgba(33, 166, 141, 0.25);
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
   padding: 4px 14px;
   border-radius: 100px;
   font-size: 0.74rem;
   letter-spacing: 0.08em;
-  color: #60d8bd;
+  color: #0f766e;
+  font-weight: 700;
   margin-bottom: 18px;
 }
 
@@ -265,7 +266,7 @@ useHead({
   font-weight: 800;
   line-height: 1.18;
   letter-spacing: -0.035em;
-  color: #ffffff;
+  color: #0f172a;
   margin-bottom: 16px;
 
   @media (max-width: 768px) {
@@ -275,7 +276,7 @@ useHead({
 
 .hub-intro {
   font-size: 1.15rem;
-  color: #a0aec0;
+  color: #475569;
   max-width: 680px;
   margin: 0 auto;
   line-height: 1.6;
@@ -298,33 +299,30 @@ useHead({
 
 .tool-card {
   position: relative;
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 24px;
   padding: 32px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   text-decoration: none;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 
   &.active-card {
-    border-color: rgba(33, 166, 141, 0.25);
-    background: linear-gradient(
-      145deg,
-      rgba(18, 28, 35, 0.7),
-      rgba(12, 20, 26, 0.8)
-    );
+    border-color: #cbd5e1;
 
     &:hover {
       border-color: #21a68d;
       transform: translateY(-3px);
-      box-shadow: 0 20px 40px -15px rgba(33, 166, 141, 0.3);
+      box-shadow: 0 16px 32px -8px rgba(33, 166, 141, 0.2);
     }
   }
 
   &.upcoming-card {
-    opacity: 0.75;
+    background: #f8fafc;
+    opacity: 0.85;
   }
 }
 
@@ -339,14 +337,15 @@ useHead({
   width: 52px;
   height: 52px;
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.05);
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
   display: flex;
   align-items: center;
   justify-content: center;
 
   &.active-icon {
-    background: rgba(33, 166, 141, 0.12);
-    border: 1px solid rgba(33, 166, 141, 0.25);
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
   }
 }
 
@@ -383,7 +382,7 @@ useHead({
 }
 
 .tool-card-title {
-  color: #ffffff;
+  color: #0f172a;
   font-size: 1.35rem;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -391,7 +390,7 @@ useHead({
 }
 
 .tool-card-desc {
-  color: #a0aec0;
+  color: #475569;
   font-size: 0.94rem;
   line-height: 1.55;
   margin-bottom: 24px;
@@ -404,7 +403,7 @@ useHead({
   flex-wrap: wrap;
   gap: 12px;
   padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid #f1f5f9;
 }
 
 .metrics-tags {
@@ -414,34 +413,33 @@ useHead({
 }
 
 .tag {
-  background: rgba(255, 255, 255, 0.04);
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
   padding: 3px 8px;
   border-radius: 6px;
   font-size: 0.68rem;
-  color: #718096;
+  color: #475569;
+  font-weight: 600;
 }
 
 .arrow-cta {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  color: #60d8bd;
+  color: #0f766e;
   font-size: 0.88rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .in-development {
-  color: #718096;
+  color: #94a3b8;
   font-size: 0.74rem;
+  font-weight: 600;
 }
 
 .full-suite-banner {
-  background: linear-gradient(
-    135deg,
-    rgba(20, 32, 40, 0.9),
-    rgba(10, 18, 23, 0.95)
-  );
-  border: 1px solid rgba(33, 166, 141, 0.2);
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border: 1px solid #334155;
   border-radius: 24px;
   padding: 36px 40px;
   display: flex;
@@ -449,6 +447,7 @@ useHead({
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 24px;
+  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.4);
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -472,7 +471,7 @@ useHead({
 }
 
 .banner-subtitle {
-  color: #a0aec0;
+  color: #cbd5e1;
   font-size: 0.92rem;
   max-width: 540px;
   margin: 0;
