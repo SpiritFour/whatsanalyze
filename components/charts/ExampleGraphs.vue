@@ -1,36 +1,39 @@
 <template>
   <div v-if="chat">
-    <v-col v-if="$vuetify.display.smAndUp">
-      <v-row>
-        <v-spacer></v-spacer>
-        <v-col cols="12" sm="6" xl="5">
+    <div v-if="$vuetify.display.smAndUp" class="example-graphs-desktop">
+      <v-row justify="center" align="start">
+        <v-col cols="12" sm="6">
           <ChartsBarChart
             :chartdata="chat"
             :options="barchartHeaderChartOptions"
             data-grouping="hourly"
           />
-          <div class="mx-3 mt-3 text-body-1 text-xl-h6 font-weight-bold">
+          <div class="mx-2 mt-2 text-body-1 text-center font-weight-bold">
             {{ $t("exampleGraphSubtitle1") }}
           </div>
         </v-col>
-        <v-spacer></v-spacer>
-        <v-col cols="12" sm="6" xl="5">
+        <v-col cols="12" sm="6">
           <ChartsDonughtChart
             :chartdata="chat"
             :options="donoughtHeaderChartOptions"
           />
-          <div class="mx-3 mt-3 text-body-1 text-xl-h6 font-weight-bold">
+          <div class="mx-2 mt-2 text-body-1 text-center font-weight-bold">
             {{ $t("exampleGraphSubtitle2") }}
           </div>
         </v-col>
-        <v-spacer></v-spacer>
       </v-row>
-      <v-row>
-        <v-col cols="12">
-          <v-img src="/example-fun-facts.png"></v-img>
+      <v-row class="mt-2" justify="center">
+        <v-col cols="12" class="d-flex justify-center pa-0">
+          <v-img
+            src="/example-fun-facts.png"
+            max-width="480"
+            max-height="240"
+            class="mx-auto"
+            contain
+          ></v-img>
         </v-col>
       </v-row>
-    </v-col>
+    </div>
     <v-col v-else class="py-0">
       <v-carousel
         :continuous="true"
@@ -263,14 +266,6 @@ export default {
   margin: 0 8px !important;
   width: 7px !important;
   height: 7px !important;
-}
-
-.col {
-  padding: 1em !important;
-}
-
-.v-image {
-  margin-bottom: 50px;
 }
 
 @media (min-width: 760px) {

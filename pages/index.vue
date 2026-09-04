@@ -7,7 +7,7 @@
       @isInvalid="subscription.isValid = false"
     />
 
-    <div ref="aboveTheFold" class="top-color" style="overflow-y: hidden">
+    <div ref="aboveTheFold" class="top-color">
       <v-container>
         <v-alert
           prominent
@@ -51,11 +51,7 @@
         </v-alert>
         <v-row
           v-if="$vuetify.display.mdAndUp"
-          :style="
-            isShowingChats
-              ? 'height: fit-content'
-              : 'height: 70vh; min-height:504px;'
-          "
+          :style="isShowingChats ? 'height: fit-content' : 'min-height: 70vh;'"
           class="center-content"
           no-gutters
         >

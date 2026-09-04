@@ -46,7 +46,7 @@
               </span>
               <span v-if="$vuetify.display.smAndDown" v-html="$t('fileSelect')">
               </span>
-
+              {{ " " }}
               <span v-if="isSuccess" v-html="$t('fileAnother')"></span>
               <span v-if="!isSuccess" v-html="$t('fileZip')"></span>
             </div>

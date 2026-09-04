@@ -513,12 +513,12 @@ export const messages = {
       "Es gibt derzeit keine einfache Möglichkeit, deine Chats zwischen den Betriebssystemen zu übertragen, am einfachsten ist es, deine Chats, die Du behalten willst, als PDF zu archivieren und neu zu starten.",
     fileWrong:
       "<strong>Falsches Dateiformat!</strong> <br />" +
-      "          Bitte lade die <strong>.txt</strong> oder<strong>.zip</strong> Datei hoch\n" +
-      ", die Du beim Exportieren deines Chats erhäözszs!",
+      "          Bitte lade die <strong>.txt</strong> oder <strong>.zip</strong> Datei hoch\n" +
+      ", die Du beim Exportieren deines Chats erhältst!",
     fileDrop: "Datei jetzt ablegen!",
     fileDone: "<strong>Fertig!</strong> Schaue dir deine Analyse unten an.",
-    fileSuccess: "<strong>Ziehen</strong> oder <strong>Auswählen</strong>",
-    fileSelect: '<strong style="text-decoration: underline">Auswahl</strong>',
+    fileSuccess: "<strong>Ziehe</strong> oder <strong>wähle</strong>",
+    fileSelect: '<strong style="text-decoration: underline">Wähle</strong>',
     fileAnother: "eine andere Datei, um sie zu analysieren.",
     fileZip: "deine WhatsApp-.zip- oder .txt-Datei in dieses Feld.",
     fileProcessing: "<strong>Verarbeitung</strong> deiner Datei...",
