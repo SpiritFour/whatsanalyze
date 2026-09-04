@@ -1,9 +1,47 @@
 import moment from "moment";
-export function downloadBase64File(contentBase64, fileName) {
+import { saveAs } from "file-saver";
+
+export function dataURLtoBlob(dataurl) {
+  const arr = dataurl.split(",");
+  const mimeMatch = arr[0].match(/:(.*?);/);
+  const mime = mimeMatch ? mimeMatch[1] : "image/png";
+  const bstr = atob(arr[1]);
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new Blob([u8arr], { type: mime });
+}
+
+export function downloadBase64File(content, fileName) {
+  if (
+    typeof HTMLCanvasElement !== "undefined" &&
+    content instanceof HTMLCanvasElement
+  ) {
+    content.toBlob((blob) => {
+      if (blob) {
+        saveAs(blob, fileName);
+      }
+    });
+    return;
+  }
+  if (typeof Blob !== "undefined" && content instanceof Blob) {
+    saveAs(content, fileName);
+    return;
+  }
+  if (typeof content === "string" && content.startsWith("data:")) {
+    try {
+      const blob = dataURLtoBlob(content);
+      saveAs(blob, fileName);
+      return;
+    } catch (e) {
+      console.warn("Falling back to standard download link", e);
+    }
+  }
   const downloadLink = document.createElement("a");
   document.body.appendChild(downloadLink);
-
-  downloadLink.href = contentBase64;
+  downloadLink.href = content;
   downloadLink.target = "_self";
   downloadLink.download = fileName;
   downloadLink.click();
