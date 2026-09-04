@@ -23,7 +23,7 @@
         data-html2canvas-ignore
         remove-height-in-html2-canvas
       />
-      <Share id="fun-facts" :use-html2-canvas="true" title="Fun Facts">
+      <Share id="fun-facts" title="Fun Facts">
         <ChartsFunFacts
           :chartdata="chat"
           class="pb-md-10"

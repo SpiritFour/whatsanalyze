@@ -1,5 +1,4 @@
 import moment from "moment";
-import { saveAs } from "file-saver";
 
 export function dataURLtoBlob(dataurl) {
   const arr = dataurl.split(",");
@@ -15,37 +14,39 @@ export function dataURLtoBlob(dataurl) {
 }
 
 export function downloadBase64File(content, fileName) {
+  let url;
+  let isBlob = false;
+
   if (
     typeof HTMLCanvasElement !== "undefined" &&
     content instanceof HTMLCanvasElement
   ) {
-    content.toBlob((blob) => {
-      if (blob) {
-        saveAs(blob, fileName);
-      }
-    });
+    url = content.toDataURL("image/png");
+  } else if (typeof Blob !== "undefined" && content instanceof Blob) {
+    url = URL.createObjectURL(content);
+    isBlob = true;
+  } else if (typeof content === "string") {
+    url = content;
+  } else {
     return;
   }
-  if (typeof Blob !== "undefined" && content instanceof Blob) {
-    saveAs(content, fileName);
-    return;
-  }
-  if (typeof content === "string" && content.startsWith("data:")) {
-    try {
-      const blob = dataURLtoBlob(content);
-      saveAs(blob, fileName);
-      return;
-    } catch (e) {
-      console.warn("Falling back to standard download link", e);
-    }
-  }
+
   const downloadLink = document.createElement("a");
   document.body.appendChild(downloadLink);
-  downloadLink.href = content;
-  downloadLink.target = "_self";
+  downloadLink.href = url;
   downloadLink.download = fileName;
   downloadLink.click();
   document.body.removeChild(downloadLink);
+
+  if (isBlob) {
+    setTimeout(() => {
+      try {
+        URL.revokeObjectURL(url);
+      } catch (_error) {
+        // ignore revoke error
+      }
+    }, 40000);
+  }
 }
 
 export function getDateString(date, includeTime = true) {

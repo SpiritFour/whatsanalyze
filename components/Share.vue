@@ -5,6 +5,7 @@
     </div>
     <v-btn
       :loading="loading"
+      :disabled="loading"
       class="btn-color-dark"
       icon
       size="x-large"
@@ -69,6 +70,7 @@ export default {
         )}`,
         "radar-month": `${this.$t("messagesPer")} - ${this.$t("month")}`,
         "radar-day": `${this.$t("messagesPer")} - ${this.$t("weekday")}`,
+        "fun-facts": "Fun Facts",
         wordcloud: this.$t("wordCloud"),
         emojicloud: "Emojis",
       };
@@ -146,7 +148,17 @@ export default {
       return canvas;
     },
     async getCanvas(chartName) {
-      if (this.useHtml2Canvas) {
+      const root =
+        this.$refs.content || this.$refs.container?.$el || this.$refs.container;
+      const rawCanvas = root?.querySelector?.("canvas");
+
+      if (rawCanvas && rawCanvas.width > 0 && rawCanvas.height > 0) {
+        const title = this.getTitle(chartName);
+        return this.createBrandedChartCanvas(rawCanvas, title, this.subtitle);
+      }
+
+      // Fallback for non-canvas elements
+      if (this.$refs.content) {
         const contentEl = this.$refs.content;
         const ignored = Array.from(
           contentEl.querySelectorAll("[data-html2canvas-ignore]")
@@ -157,30 +169,31 @@ export default {
         ignored.forEach((el) => el.removeAttribute("data-html2canvas-ignore"));
 
         try {
-          return await html2canvas(contentEl, {
+          const renderedCanvas = await html2canvas(contentEl, {
             backgroundColor: "#ffffff",
             scale: 2,
             logging: false,
             useCORS: true,
           });
+          const title = this.getTitle(chartName);
+          return this.createBrandedChartCanvas(
+            renderedCanvas,
+            title,
+            this.subtitle
+          );
         } finally {
           ignored.forEach((el) =>
             el.setAttribute("data-html2canvas-ignore", "")
           );
         }
-      } else {
-        const root =
-          this.$refs.content ||
-          this.$refs.container?.$el ||
-          this.$refs.container;
-        const rawCanvas = root?.querySelector?.("canvas");
-        if (!rawCanvas) return null;
-
-        const title = this.getTitle(chartName);
-        return this.createBrandedChartCanvas(rawCanvas, title, this.subtitle);
       }
+
+      return null;
     },
     async share() {
+      if (this.loading) return;
+      this.loading = true;
+
       const defaultSlot = this.$slots.default?.();
       const firstVNode = defaultSlot?.[0];
       const componentName =
@@ -189,17 +202,16 @@ export default {
         this.$attrs.id || componentName.replace(/([a-z])([A-Z])/g, "$1-$2")
       ).toLowerCase();
 
-      this.loading = true;
       let canvas;
       try {
         canvas = await this.getCanvas(chartName);
       } catch (err) {
         console.error("Failed to generate canvas for share", err);
       }
-      this.loading = false;
 
       if (!canvas) {
         console.error("No canvas found to share");
+        this.loading = false;
         return;
       }
 
@@ -213,7 +225,10 @@ export default {
         gtagEvent("share_" + chartName + "_pressed", GTAG_RESULTS, 0);
 
         canvas.toBlob((blob) => {
-          if (!blob) return;
+          if (!blob) {
+            this.loading = false;
+            return;
+          }
 
           const file = new File([blob], fileName, { type: "image/png" });
           let payload = {
@@ -237,6 +252,9 @@ export default {
                 this.$sentry?.captureException?.(error);
               }
             })
+            .finally(() => {
+              this.loading = false;
+            })
             .then(() => {
               gtagEvent("share_" + chartName + "_shared", GTAG_RESULTS, 2);
             });
@@ -244,6 +262,7 @@ export default {
       } else {
         downloadBase64File(canvas, fileName);
         gtagEvent("download_" + chartName, GTAG_RESULTS);
+        this.loading = false;
       }
     },
   },
