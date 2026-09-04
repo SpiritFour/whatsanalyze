@@ -224,6 +224,13 @@ export default {
       if (this.canShare) {
         gtagEvent("share_" + chartName + "_pressed", GTAG_RESULTS, 0);
 
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(shareText).catch(() => {});
+          }
+        } catch (_err) {
+          // clipboard write is optional best-effort
+        }
         canvas.toBlob((blob) => {
           if (!blob) {
             this.loading = false;
