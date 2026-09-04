@@ -5,36 +5,44 @@
     </div>
     <v-tabs v-model="tab" centered>
       <v-tab
-        v-for="data in tabData"
+        v-for="(data, index) in tabData"
         :key="data.title"
+        :value="index"
         class="text-body-1 text-md-h4"
         grow
         >{{ data.title }}
       </v-tab>
     </v-tabs>
-    <v-tabs-items v-model="tab">
+    <v-window v-model="tab" :touch="false">
       <client-only>
-        <v-tab-item v-for="(data, idx) in tabData" :key="idx">
+        <v-window-item v-for="(data, idx) in tabData" :key="idx" :value="idx">
           <v-row no-gutters>
             <v-col class="pb-10" cols="12" sm="8">
-              <v-timeline dense>
+              <v-timeline
+                align="start"
+                :density="$vuetify.display.xs ? 'compact' : 'default'"
+                class="py-4"
+              >
                 <v-timeline-item
                   v-for="(tabItem, i) in data.tabItems"
                   :key="i"
-                  :color="tabStatus[idx] === i ? 'blue' : 'grey'"
-                  :text="$t(tabItem.text)"
-                  class="mb-4 align-center"
+                  :dot-color="tabStatus[idx] === i ? 'blue' : 'grey'"
                   fill-dot
-                  small
-                  @click.native.stop="tabStatus = [i, i]"
+                  :size="$vuetify.display.xs ? 'x-small' : 'small'"
+                  class="mb-4"
+                  @click.stop="tabStatus = [i, i]"
                 >
-                  <v-row style="cursor: pointer" v-html="$t(tabItem.text)">
+                  <v-row
+                    class="cursor-pointer"
+                    style="cursor: pointer"
+                    v-html="$t(tabItem.text)"
+                  >
                   </v-row>
                   <v-btn
                     v-if="i === 0 && tab === 1"
-                    id="dlPWA "
+                    id="dlPWA"
                     :disabled="!installButtonStatus"
-                    class="mt-5 pa-2 white--text btn-color"
+                    class="mt-5 pa-2 btn-color"
                     @click="downloadPWA"
                     >{{ $t("addToHomescreen") }}
                   </v-btn>
@@ -42,16 +50,17 @@
               </v-timeline>
               <v-btn
                 :to="to ? to : null"
-                class="text-md-h6 text-caption ml-10 white--text btn-color"
+                class="text-md-h6 text-caption ml-10 text-white btn-color select-file-btn"
                 elevation="10"
+                size="large"
                 @click="clickHandler"
               >
-                <v-icon>mdi-arrow-right</v-icon>
+                <v-icon left>mdi-arrow-right</v-icon>
                 {{ $t(cta) }}
               </v-btn>
             </v-col>
             <v-col
-              :class="{ 'mobile-padding': $vuetify.breakpoint.xsOnly }"
+              :class="{ 'mobile-padding': $vuetify.display.xs }"
               class="py-5 px-md-15"
               cols="12"
               sm="4"
@@ -71,30 +80,21 @@
                   <v-carousel-item
                     v-for="(item, idx) in data.carouselItems"
                     :key="idx"
-                    @click.native.stop="increaseTabstatus()"
+                    @click.stop="increaseTabstatus()"
                   >
                     <v-img :lazy-src="item.imgLazy" :src="item.img"></v-img>
-                    <v-btn
-                      :style="
-                        'position: absolute; left: ' +
-                        item.x +
-                        '; top: ' +
-                        item.y
-                      "
-                      class="blinking"
-                      color="black"
-                      disabled
-                      fab
-                      outlined
-                    ></v-btn>
+                    <div
+                      :style="'left: ' + item.x + '; top: ' + item.y"
+                      class="click-indicator"
+                    ></div>
                   </v-carousel-item>
                 </v-carousel>
               </div>
             </v-col>
           </v-row>
-        </v-tab-item>
+        </v-window-item>
       </client-only>
-    </v-tabs-items>
+    </v-window>
   </v-container>
 </template>
 
@@ -130,10 +130,11 @@ import img5_lazy from "@/assets/img/Android/5copy.png";
 import img6 from "@/assets/img/Android/6.png";
 import img6_lazy from "@/assets/img/Android/6copy.png";
 import { GTAG_INSTALL, GTAG_INTERACTION, gtagEvent } from "~/utils/gtagValues";
+import { scrollTo } from "~/utils/scroll";
 
 let apple = () => false;
 // eslint-disable-next-line no-undef
-if (process.browser) {
+if (import.meta.client) {
   apple = () => {
     return (
       navigator.platform.toLowerCase().includes("ios") ||
@@ -318,10 +319,7 @@ export default {
     clickHandler() {
       if (!this.to) {
         gtagEvent("jump_to_filehandler_" + this.tab, GTAG_INTERACTION, 0);
-        this.$vuetify.goTo(".filehandler", {
-          duration: 300,
-          offset: 100,
-        });
+        scrollTo(".filehandler", { offset: 100 });
       }
     },
     increaseTabstatus() {
@@ -353,7 +351,7 @@ export default {
     },
     catchPWA() {
       // eslint-disable-next-line no-undef
-      if (process.client) {
+      if (import.meta.client) {
         window.addEventListener("beforeinstallprompt", (e) => {
           // Prevent the mini-infobar from appearing on mobile
           e.preventDefault();
@@ -395,34 +393,77 @@ export default {
   top: 2px;
 }
 
-.blinking {
-  animation-name: blink;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-  z-index: 1;
-  border: 3px solid rgba(0, 128, 0, 0.7);
-  background-color: transparent;
-  margin-left: -25px;
-  margin-top: -25px;
+.select-file-btn {
+  min-height: 44px;
+  height: auto !important;
+  padding: 8px 24px !important;
+  white-space: normal;
+  line-height: 1.3 !important;
 }
 
-@keyframes blink {
+.click-indicator {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.click-indicator::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid #25d366;
+  background-color: rgba(37, 211, 102, 0.25);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.3);
+  animation: pulse-touch 1.6s ease-in-out infinite;
+}
+
+.click-indicator::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #25d366;
+  box-shadow: 0 0 0 2px #ffffff, 0 1px 4px rgba(0, 0, 0, 0.3);
+  animation: pulse-core 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse-touch {
   0% {
-    width: 50px;
-    height: 50px;
+    transform: scale(0.85);
+    opacity: 0.9;
+    border-color: #25d366;
   }
   50% {
-    width: 10px;
-    height: 10px;
-    margin-left: 0px;
-    margin-top: 0px;
-    background-color: rgba(0, 128, 0, 0.3);
-    border-color: rgba(0, 128, 0, 0.3);
-    border-width: 2px;
+    transform: scale(1.25);
+    opacity: 1;
+    border-color: #128c7e;
+    background-color: rgba(37, 211, 102, 0.4);
   }
   100% {
-    width: 50px;
-    height: 50px;
+    transform: scale(0.85);
+    opacity: 0.9;
+    border-color: #25d366;
+  }
+}
+
+@keyframes pulse-core {
+  0% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(0.9);
   }
 }
 </style>

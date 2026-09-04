@@ -7,15 +7,51 @@
       @isInvalid="subscription.isValid = false"
     />
 
-    <div ref="aboveTheFold" class="top-color" style="overflow-y: hidden">
+    <div ref="aboveTheFold" class="top-color">
       <v-container>
+        <v-alert
+          prominent
+          dark
+          class="mb-6 elevation-3 wrapped-banner"
+          style="border-radius: 12px; overflow: hidden; border: none"
+        >
+          <template #prepend>
+            <v-icon large class="mr-4">mdi-party-popper</v-icon>
+          </template>
+
+          <v-row align="center" no-gutters>
+            <v-col cols="12" md="8" lg="9">
+              <div class="text-h6 text-sm-h5 font-weight-bold text-white mb-1">
+                WHATSAPP WRAPPED 2026 IS HERE!
+              </div>
+              <div class="text-subtitle-1 text-white" style="line-height: 1.4">
+                Your chat, told like a story. See your most active hours,
+                funniest exchanges, and emotional peaks.
+                <strong>100% Private.</strong>
+              </div>
+            </v-col>
+            <v-col
+              cols="12"
+              md="4"
+              lg="3"
+              class="text-center text-md-right mt-4 mt-md-0"
+            >
+              <v-btn
+                color="white"
+                x-large
+                class="font-weight-bold px-8"
+                rounded
+                :href="`https://wrapped.whatsanalyze.com/${locale}`"
+              >
+                See Your Story
+                <v-icon right>mdi-arrow-right</v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-alert>
         <v-row
-          v-if="$vuetify.breakpoint.mdAndUp"
-          :style="
-            isShowingChats
-              ? 'height: fit-content'
-              : 'height: 70vh; min-height:504px;'
-          "
+          v-if="$vuetify.display.mdAndUp"
+          :style="isShowingChats ? 'height: fit-content' : 'min-height: 70vh;'"
           class="center-content"
           no-gutters
         >
@@ -30,7 +66,7 @@
             >
               <HeaderCta />
               <div v-if="subscription.isValid" class="mt-6" style="width: 100%">
-                <v-alert dense type="info" prominent>
+                <v-alert density="compact" type="info" prominent>
                   Thanks for supporting us. You can download unlimited PDF's for
                   free.
 
@@ -58,12 +94,12 @@
             <ChartsExampleGraphs :chat_="chat" />
           </v-col>
         </v-row>
-        <v-row v-if="$vuetify.breakpoint.smAndDown" no-gutters>
+        <v-row v-if="$vuetify.display.smAndDown" no-gutters>
           <v-col class="px-0 pb-1 my-auto" cols="12">
             <HeaderCta />
 
             <div v-if="subscription.isValid" class="mt-6" style="width: 100%">
-              <v-alert dense type="info" prominent>
+              <v-alert density="compact" type="info" prominent>
                 Thanks for supporting us. You can download unlimited PDF's for
                 free.
 
@@ -122,15 +158,30 @@ import {
   GTAG_NUM_PERSONS,
   gtagEvent,
 } from "~/utils/gtagValues";
-import debounce from "lodash/debounce";
+import { debounce } from "lodash-es";
 import SubscriptionChecker from "~/components/SubscriptionChecker.vue";
 import { getSubscriptionParams } from "~/utils/subscription";
 
 export default {
   components: { SubscriptionChecker },
-  async asyncData({ $content }) {
-    const page = await $content("home").fetch();
+  async setup() {
+    useSeoMeta({
+      title: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+      description:
+        "Most Popular WhatsApp Analyzer. Reveal chat statistics and export your chat as a PDF without uploading your data.",
+      ogTitle: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+      ogSiteName: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+      ogDescription:
+        "Most Popular WhatsApp Analyzer. Reveal chat statistics and export your chat as a PDF without uploading your data.",
+      ogUrl: "https://www.whatsanalyze.com",
+    });
+
+    const { locale } = useI18n();
+    const { data: page } = await useAsyncData("content-home", () =>
+      queryCollection("pages").path("/home").first()
+    );
     return {
+      locale,
       page,
     };
   },
@@ -147,46 +198,9 @@ export default {
       },
     };
   },
-  head() {
-    return {
-      title: "WhatsAnalyze - The WhatsApp Chat Analyzer",
-      meta: [
-        {
-          hid: "og:title",
-          name: "og:title",
-          property: "og:title",
-          content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
-        },
-        {
-          hid: "og:site_name",
-          name: "og:site_name",
-          property: "og:site_name",
-          content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
-        },
-        {
-          hid: "description",
-          name: "description",
-          property: "description",
-          content: "metaDescription",
-        },
-        {
-          hid: "og:description",
-          name: "og:description",
-          property: "og:description",
-          content: "metaDescription",
-        },
-        {
-          hid: "og:url",
-          name: "og:url",
-          property: "og:url",
-          content: "whatsanalyze.com",
-        },
-      ],
-    };
-  },
   created() {
     // eslint-disable-next-line no-undef
-    if (process.client) {
+    if (import.meta.client) {
       Object.keys(this.$route.query).forEach((key) => {
         gtagEvent(key, GTAG_LEAD);
       });
@@ -201,7 +215,7 @@ export default {
     this.subscription.email = email;
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     window.removeEventListener("scroll", this.handleDebouncedScroll);
   },
   methods: {
@@ -355,5 +369,9 @@ export default {
   100% {
     transform: translateX(0);
   }
+}
+
+.wrapped-banner {
+  background: linear-gradient(90deg, #4527a0 0%, #7b1fa2 100%) !important;
 }
 </style>

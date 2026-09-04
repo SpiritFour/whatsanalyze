@@ -1,72 +1,79 @@
+<template>
+  <Line v-if="graphData" :data="graphData" :options="chartOptions" />
+</template>
+
 <script>
 import { Line } from "vue-chartjs";
 import { Chat } from "~/utils/transformChatData";
 
 export default {
-  extends: Line,
+  components: { Line },
   props: {
-    chartdata: new Chat(),
+    chartdata: {
+      type: Object,
+      default: () => new Chat(),
+    },
     options: {
       type: Object,
-      default: function () {
-        return {
-          pointHitRadius: 2,
+      default: null,
+    },
+  },
+  data() {
+    return {
+      graphData: null,
+    };
+  },
+  computed: {
+    chartOptions() {
+      return (
+        this.options || {
           responsive: true,
           maintainAspectRatio: false,
-          lineTension: 0,
-          legend: {
-            position: "bottom",
-            display: false,
-          },
-          scales: {
-            xAxes: [
-              {
-                type: "time",
-                gridLines: {
-                  display: false,
-                  color: "#FFFFFF",
-                },
-              },
-            ],
-            yAxes: [
-              {
-                scaleLabel: {
-                  display: true,
-                  labelString: this.$t("messages"),
-                },
-                ticks: {
-                  precision: 0,
-                  beginAtZero: true,
-                },
-              },
-            ],
-          },
           elements: {
             line: {
               tension: 0,
             },
           },
-        };
-      },
+          plugins: {
+            legend: {
+              display: false,
+              position: "bottom",
+            },
+          },
+          scales: {
+            x: {
+              type: "time",
+              grid: {
+                display: false,
+                color: "#ffffff",
+              },
+            },
+            y: {
+              beginAtZero: true,
+              ticks: {
+                precision: 0,
+              },
+              title: {
+                display: true,
+                text: this.$t("messages"),
+              },
+            },
+          },
+        }
+      );
     },
   },
   watch: {
     chartdata: {
-      handler() {
-        this.updateGraph();
-      },
+      handler: "updateGraph",
       deep: true,
+      immediate: true,
     },
   },
   methods: {
-    updateGraph: function () {
-      this.chartdata
-        .getLineGraphData()
-        .then((x) => this.renderChart(x, this.options));
+    async updateGraph() {
+      this.graphData = await this.chartdata.getLineGraphData();
     },
-  },
-  mounted() {
-    this.updateGraph();
   },
 };
 </script>

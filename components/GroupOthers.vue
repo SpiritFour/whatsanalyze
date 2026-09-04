@@ -1,7 +1,7 @@
 <template>
   <div v-if="chatObject.numPersonsInChat > 2" class="mt-16">
     <div class="text-h2 font-weight-bold mb-5">
-      <span class="red darken-2 white--text px-2">{{
+      <span class="bg-red-darken-2 text-white px-2">{{
         chatObject.numPersonsInChat
       }}</span>
       {{ $t("people") }}
@@ -16,9 +16,9 @@
     <v-slider
       class="pt-10"
       v-model="groupAfter"
-      thumb-color="red darken-2"
+      thumb-color="red-darken-2"
       thumb-label="always"
-      ticks="always"
+      :show-ticks="'always'"
       tick-size="4"
       step="1"
       min="2"

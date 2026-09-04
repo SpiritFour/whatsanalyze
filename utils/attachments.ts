@@ -79,14 +79,21 @@ async function renderAttachment(
 
   let width, height;
   if (mimeTypeData.mimeTypeGroup === MimeTypeGroup.image && attachmentData) {
-    // Create a blob from the uint8array data
+    // some WhatsApp exports carry odd endings (e.g. `.jpe`) — always hand the
+    // decoder a real image mime so createImageBitmap can sniff the container
     const blob = new Blob([attachmentData], {
-      type: getMimeType(fileName).mimeType,
+      type: mimeTypeData.mimeTypeEnding === "png" ? "image/png" : "image/jpeg",
     });
 
-    // Create a bitmap image from the blob data
-    const bitmap = await createImageBitmap(blob);
-    (width = bitmap.width), (height = bitmap.height);
+    // Decode failures (corrupt/heic/etc.) must not take down the whole PDF run:
+    // fall back to renderInPDF=false so the message still renders as text.
+    try {
+      const bitmap = await createImageBitmap(blob);
+      (width = bitmap.width), (height = bitmap.height);
+    } catch (error) {
+      console.error("Attachment image decode failed for", fileName, error);
+      mimeTypeData.renderInPDF = false;
+    }
   }
 
   return {

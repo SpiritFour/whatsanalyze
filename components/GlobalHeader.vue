@@ -1,9 +1,9 @@
 <template>
   <div class="nav pl-xs-8 pl-0 py-0 py-md-0 additional-height">
     <v-container class="pl-md-16">
-      <v-card color="#21a68d" flat tile>
+      <v-card color="#21a68d" flat>
         <v-card-actions>
-          <nuxt-link :to="localePath('/')">
+          <nuxt-link :to="$localePath('/')">
             <h1 style="color: black; font-size: 2em">
               <img
                 alt="WhatsAnalyze Logo"

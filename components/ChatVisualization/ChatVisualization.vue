@@ -21,10 +21,11 @@
 
 <script>
 import PdfDownload from "~/components/ChatVisualization/PdfDownloadPopup";
+import Chat from "~/components/ChatVisualization/Chat.vue";
 
 export default {
   name: "ChatVisualization",
-  components: { PdfDownload },
+  components: { PdfDownload, Chat },
   props: ["chat", "attachments", "results", "isValidSubscription"],
   data() {
     return {

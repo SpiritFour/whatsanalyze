@@ -1,0 +1,48 @@
+# Integration tests against the real PayPal sandbox through the Firebase
+# Functions emulator. Runs only when the PAYPAL_PASSWORD_DEV secret is
+# configured (never on forks) and is not a required check.
+name: PayPal Sandbox E2E
+
+on:
+  - push
+  - workflow_dispatch
+
+jobs:
+  check-secret:
+    runs-on: ubuntu-latest
+    outputs:
+      available: ${{ steps.check.outputs.available }}
+    steps:
+      - id: check
+        run: echo "available=${{ secrets.PAYPAL_PASSWORD_DEV != '' }}" >> "$GITHUB_OUTPUT"
+
+  sandbox-e2e:
+    needs: check-secret
+    if: needs.check-secret.outputs.available == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: npm ci
+        working-directory: functions
+      - run: pnpm exec playwright install --with-deps chromium
+      - name: Provide emulator secrets
+        run: |
+          {
+            echo "PAYPAL_PASSWORD_DEV=${PAYPAL_PASSWORD_DEV}"
+            echo "PAYPAL_PASSWORD_PROD=unused-in-sandbox-tests"
+          } > functions/.secret.local
+        env:
+          PAYPAL_PASSWORD_DEV: ${{ secrets.PAYPAL_PASSWORD_DEV }}
+      - run: pnpm test:e2e:sandbox
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: sandbox-e2e-traces
+          path: test-results
+          retention-days: 7

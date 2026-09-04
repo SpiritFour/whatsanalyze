@@ -55,41 +55,20 @@
 <script>
 export default {
   name: "HowToExportYourWhatsappChat",
-  title: "WhatsAnalyze - How to export WhatsApp chat",
-  meta: [
-    {
-      hid: "og:title",
-      name: "og:title",
-      property: "og:title",
-      content: "WhatsAnalyze - How to export WhatsApp chat",
-    },
-    {
-      hid: "og:site_name",
-      name: "og:site_name",
-      property: "og:site_name",
-      content: "WhatsAnalyze - How to export WhatsApp chat",
-    },
-    {
-      hid: "description",
-      name: "description",
-      property: "description",
-      content: "metaDescriptionWhatsExport",
-    },
-    {
-      hid: "og:description",
-      name: "og:description",
-      property: "og:description",
-      content: "metaDescriptionWhatsExport",
-    },
-    {
-      hid: "og:url",
-      name: "og:url",
-      property: "og:url",
-      content: "whatsanalyze.com/how-to-export-your-whatsapp-chat",
-    },
-  ],
-  async asyncData({ $content }) {
-    const page = await $content("how-to-export-your-whatsapp-chat").fetch();
+  async setup() {
+    useSeoMeta({
+      title: "WhatsAnalyze - How to Export your WhatsApp Chat",
+      description: "Export your WhatsApp Chat. iOS tutorial and Android guide.",
+      ogTitle: "WhatsAnalyze - How to Export your WhatsApp Chat",
+      ogSiteName: "WhatsAnalyze - How to Export your WhatsApp Chat",
+      ogDescription:
+        "Export your WhatsApp Chat. iOS tutorial and Android guide.",
+      ogUrl: "https://www.whatsanalyze.com/how-to-export-your-whatsapp-chat",
+    });
+
+    const { data: page } = await useAsyncData("content-export-guide", () =>
+      queryCollection("pages").path("/how-to-export-your-whatsapp-chat").first()
+    );
     return {
       page,
     };
@@ -98,18 +77,18 @@ export default {
     return {
       headers: [
         {
-          text: "Features & Solutions of PDF export tools",
+          title: "Features & Solutions of PDF export tools",
           align: "start",
           sortable: false,
-          value: "name",
+          key: "name",
         },
-        { text: "Zapptales", value: "zapptales" },
-        { text: "Dr. Fon", value: "drfon" },
-        { text: "Longshot app", value: "longshotapp" },
-        { text: "Export to txt and then to PDF", value: "pdfex" },
+        { title: "Zapptales", key: "zapptales" },
+        { title: "Dr. Fon", key: "drfon" },
+        { title: "Longshot app", key: "longshotapp" },
+        { title: "Export to txt and then to PDF", key: "pdfex" },
         {
-          text: "WhatsAnalyze",
-          value: "whatsAnalyze",
+          title: "WhatsAnalyze",
+          key: "whatsAnalyze",
         },
       ],
       desserts: [
@@ -210,44 +189,12 @@ export default {
       ],
     };
   },
-  head: {
-    title: "WhatsAnalyze - How to Export your WhatsApp Chat",
-    meta: [
-      {
-        hid: "og:title",
-        name: "og:title",
-        property: "og:title",
-        content: "WhatsAnalyze - How to Export your WhatsApp Chat",
-      },
-      {
-        hid: "og:site_name",
-        name: "og:site_name",
-        property: "og:site_name",
-        content: "WhatsAnalyze - How to Export your WhatsApp Chat",
-      },
-      {
-        hid: "description",
-        name: "description",
-        property: "description",
-        content: "Export your Whatsapp Chat ✓ iOS Tutorial ✓ Android Guide",
-      },
-      {
-        hid: "og:description",
-        name: "og:description",
-        property: "og:description",
-        content: "Export your Whatsapp Chat ✓ iOS Tutorial ✓ Android Guide",
-      },
-      {
-        hid: "og:url",
-        name: "og:url",
-        property: "og:url",
-        content: "whatsanalyze.com/how-to-export-your-whatsapp-chat",
-      },
-    ],
-  },
 };
 </script>
 <style>
+.youtube-video {
+  max-width: 100%;
+}
 .mt-5,
 .my-5,
 .mb-2,

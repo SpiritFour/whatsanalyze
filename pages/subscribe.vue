@@ -54,6 +54,10 @@ import { getSubscriptionParams } from "~/utils/subscription";
 export default {
   name: "Subscriptions",
   components: { SubscriptionChecker },
+  setup() {
+    const config = useRuntimeConfig();
+    return { paypalClientId: config.public.paypalClientId };
+  },
   data() {
     return {
       ba_token: null,
@@ -86,12 +90,13 @@ export default {
       this.isEmailValid = this.isValid;
     },
     async loadSubscription(data) {
-      const response = await this.$fire.functions.httpsCallable(
-        "checksubscriberstatus"
-      )({
-        ...data,
-        client_id: this.$config.paypalClientId,
-      });
+      const response = await this.$firebase.callFunction(
+        "checksubscriberstatus",
+        {
+          ...data,
+          client_id: this.paypalClientId,
+        }
+      );
 
       this.subscriptionData = await response.data;
       this.isValid = this.subscriptionData.isValid;

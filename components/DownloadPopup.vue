@@ -9,13 +9,13 @@
           {{ $t("shareWithFriends") }}
         </div>
         <v-dialog v-model="dialog" width="600">
-          <template #activator="{ on }">
+          <template #activator="{ props: activatorProps }">
             <v-btn
               :loading="loading"
               class="btn-color"
               dark
+              v-bind="activatorProps"
               @click="download"
-              v-on="on"
             >
               <v-icon class="mr-2">mdi-download</v-icon>
               {{ $t("downloadResults") }}
@@ -23,7 +23,7 @@
           </template>
 
           <v-card class="overflow-hidden">
-            <v-card-title class="headline cyan" style="word-break: normal">
+            <v-card-title class="bg-cyan" style="word-break: normal">
               <div class="text-h4 font-weight-bold">{{ $t("didWeMake") }}</div>
               <span>{{ $t("buyUsCoffee") }}</span>
             </v-card-title>
@@ -69,7 +69,11 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="red darken-1" text @click="dialog = false">
+              <v-btn
+                color="red-darken-1"
+                variant="text"
+                @click="dialog = false"
+              >
                 Close
               </v-btn>
             </v-card-actions>
@@ -85,10 +89,9 @@
             <v-btn
               v-if="!isSimple"
               class="btn-color"
-              dark
               @click="
                 gtagEvent('jump_to_pdf_download_cta', GTAG_INTERACTION, 0);
-                $vuetify.goTo('#payButton', { duration: 300, offset: 100 });
+                scrollTo('#payButton', { offset: 100 });
               "
             >
               <v-icon class="mr-2">mdi-arrow-right</v-icon>
@@ -104,6 +107,7 @@
 <script>
 import html2canvas from "html2canvas";
 import { downloadBase64File } from "~/utils/utils";
+import { scrollTo } from "~/utils/scroll";
 import {
   GTAG_INTERACTION,
   GTAG_PAYMENT,
@@ -123,6 +127,7 @@ export default {
       loading: false,
       suffix: this.isSimple ? "-top" : "",
       GTAG_INTERACTION,
+      scrollTo,
     };
   },
   methods: {
@@ -149,6 +154,10 @@ export default {
           scrollX: 0,
           scrollY: -window.scrollY,
           height: normalHeight + additionalHeight + negativeHeight,
+          scale: Math.min(window.devicePixelRatio || 1, 2),
+          logging: false,
+          useCORS: true,
+          backgroundColor: "#ffffff",
           onclone: function (clonedDoc) {
             let nonVisibleStuff = clonedDoc.querySelectorAll(
               ".only-visible-to-html2canvas"
@@ -162,9 +171,9 @@ export default {
           .slice(0, 2)
           .map((person) => person.name)
           .join("-");
-        canvas.then((canvas) => {
+        canvas.then((renderedCanvas) => {
           downloadBase64File(
-            canvas.toDataURL(),
+            renderedCanvas,
             "whatsanalyze.com-results-" + names + ".png"
           );
           this.loading = false;

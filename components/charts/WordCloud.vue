@@ -73,7 +73,7 @@ export default {
     this.series.minFontSize = 8;
     this.updateGraph();
   },
-  beforeDestroy: function () {
+  beforeUnmount: function () {
     this.chart.dispose();
   },
 };

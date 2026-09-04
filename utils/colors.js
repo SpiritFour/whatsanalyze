@@ -1,15 +1,15 @@
 export let chatColors = [
   "#00535f",
-  "#51b0bc",
-  "#21a68d",
-  "#ffd45c",
-  "#35cd96",
   "#ed8c2b",
-  "#b3f94f",
+  "#21a68d",
   "#ba33dc",
+  "#ffd45c",
+  "#51b0bc",
+  "#ff855c",
+  "#35cd96",
   "#ffa35c",
   "#227373",
-  "#ff855c",
+  "#b3f94f",
 ];
 
 export function hexToRgbA(hex, alpha = 0.1) {

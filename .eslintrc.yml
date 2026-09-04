@@ -13,4 +13,17 @@ parserOptions:
   sourceType: module
 plugins:
   - vue
+globals:
+  defineI18nConfig: readonly
+  defineNuxtConfig: readonly
+  defineNuxtPlugin: readonly
+  queryCollection: readonly
+  useAsyncData: readonly
+  useRuntimeConfig: readonly
+  useSeoMeta: readonly
+  useI18n: readonly
+  useSwitchLocalePath: readonly
+  navigateTo: readonly
+  computed: readonly
+  ref: readonly
 rules: {}

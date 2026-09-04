@@ -19,33 +19,40 @@ export default {
       type: Number,
     },
   },
-  data() {
-    return {};
+  setup() {
+    const config = useRuntimeConfig();
+    return { paypalClientId: config.public.paypalClientId };
   },
-  head() {
-    return {
-      script: [
-        {
-          hid: "paypal",
-          src:
-            "https://www.paypal.com/sdk/js?currency=" +
-            this.currency +
-            "&client-id=" +
-            // eslint-disable-next-line no-undef
-            this.$config.paypalClientId,
-          defer: true,
-          // Changed after script load
-          callback: () => {
-            this.initPayPalButton(this);
-          },
-        },
-      ],
-    };
+  mounted() {
+    this.loadPayPalScript();
   },
   methods: {
+    loadPayPalScript() {
+      if (window.paypal) {
+        this.initPayPalButton(this);
+        return;
+      }
+
+      const script = document.createElement("script");
+      script.id = "paypal-sdk";
+      const params = new URLSearchParams({
+        currency: this.currency,
+        "client-id": this.paypalClientId,
+      });
+      script.src = `https://www.paypal.com/sdk/js?${params}`;
+      script.defer = true;
+      script.addEventListener("load", () => this.initPayPalButton(this), {
+        once: true,
+      });
+      script.addEventListener(
+        "error",
+        (error) => this.$emit("onError", error),
+        { once: true }
+      );
+      document.head.appendChild(script);
+    },
     initPayPalButton(context) {
-      // eslint-disable-next-line no-undef
-      paypal
+      window.paypal
         .Buttons({
           style: {
             size: "small",

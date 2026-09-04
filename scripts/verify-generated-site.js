@@ -26,11 +26,16 @@ for (const relativePath of expectedFiles) {
 
 const generatedAssets = fs.readdirSync(path.join(distDirectory, "_nuxt"));
 assert(
-  generatedAssets.some((fileName) => fileName.endsWith(".webmanifest")),
+  fs.existsSync(path.join(distDirectory, "manifest.webmanifest")) ||
+    generatedAssets.some((fileName) => fileName.endsWith(".webmanifest")),
   "Missing generated web app manifest"
 );
 assert(
-  generatedAssets.some((fileName) => fileName.endsWith(".worker.js")),
+  generatedAssets.some(
+    (fileName) =>
+      fileName.endsWith(".worker.js") ||
+      (fileName.includes(".worker-") && fileName.endsWith(".js"))
+  ),
   "Missing generated web worker"
 );
 

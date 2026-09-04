@@ -7,6 +7,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 package-lock.json
+!functions/package-lock.json
 yarn.lock
 sw.*
 .vscode
@@ -22,6 +23,8 @@ lib-cov
 
 # Coverage directory used by tools like istanbul
 coverage
+playwright-report
+test-results
 
 # nyc test coverage
 .nyc_output
@@ -63,6 +66,9 @@ typings/
 # dotenv environment variables file
 .env
 
+# local Firebase emulator secrets (PAYPAL_PASSWORD_DEV etc.)
+.secret.local
+
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 
@@ -71,6 +77,8 @@ typings/
 
 # nuxt.js build output
 .nuxt
+.data
+.output
 
 # Nuxt generate
 dist
@@ -97,4 +105,10 @@ sw.*
 
 Icon\r
 
+
+# omp delta agent worktrees
+.delta/
 .direnv
+
+# husky v9 generated helpers
+.husky/_/

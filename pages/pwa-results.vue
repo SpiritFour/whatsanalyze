@@ -13,24 +13,24 @@ import { Chat } from "~/utils/transformChatData";
 
 export default {
   name: "pwa-results",
+  setup() {
+    useHead({
+      meta: [
+        {
+          name: "robots",
+          content: "noindex",
+        },
+      ],
+    });
+  },
   data() {
     return {
       chat: undefined,
       attachments: undefined,
     };
   },
-  head: {
-    meta: [
-      {
-        hid: "robots",
-        name: "robots",
-        content: "noindex",
-      },
-    ],
-  },
   created() {
-    // eslint-disable-next-line no-undef
-    if (process.client) {
+    if (import.meta.client) {
       this.setupWorkBox();
     }
   },

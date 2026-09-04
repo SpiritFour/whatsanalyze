@@ -1,88 +1,104 @@
+<template>
+  <div class="chart-container">
+    <Radar v-if="graphData" :data="graphData" :options="chartOptions" />
+  </div>
+</template>
+
 <script>
 import { Radar } from "vue-chartjs";
 import { Chat } from "~/utils/transformChatData";
 import { updateAlpha } from "~/utils/colors";
 
 export default {
-  extends: Radar,
+  components: { Radar },
   props: {
     dataGrouping: {
       type: String,
-      validator: function (value) {
-        // The value must match one of these strings
-        return ["hourly", "daily", "weekly"].indexOf(value) !== -1;
+      validator(value) {
+        return ["hourly", "daily", "weekly"].includes(value);
       },
+      default: "weekly",
     },
-    chartdata: new Chat(),
+    chartdata: {
+      type: Object,
+      default: () => new Chat(),
+    },
     options: {
       type: Object,
-      default: function () {
-        return {
+      default: null,
+    },
+  },
+  data() {
+    return {
+      graphData: null,
+    };
+  },
+  computed: {
+    chartOptions() {
+      return (
+        this.options || {
           responsive: true,
-          maintainAspectRatio: false,
-          scale: {
-            angleLines: {
-              // display: false,
+          maintainAspectRatio: true,
+          aspectRatio: 1,
+          plugins: {
+            legend: {
+              position: "bottom",
             },
-            ticks: {
+          },
+          scales: {
+            r: {
               beginAtZero: true,
-              precision: 0,
+              ticks: {
+                precision: 0,
+              },
             },
           },
-          legend: {
-            position: "bottom",
-          },
-        };
-      },
+        }
+      );
     },
   },
   watch: {
     chartdata: {
-      handler() {
-        this.updateGraph();
-      },
+      handler: "updateGraph",
       deep: true,
+      immediate: true,
     },
   },
   methods: {
-    updateGraph2() {
-      if (this.dataGrouping === "hourly") {
-        this.renderChart(this.chartdata.getHourlyData(0.1), this.options);
-      } else if (this.dataGrouping === "daily") {
-        this.renderChart(this.chartdata.getDailyData(0.1), this.options);
-      } else {
-        this.renderChart(this.chartdata.getWeeklyData(0.1), this.options);
-      }
-    },
     addOpacity(data) {
-      data.datasets = data.datasets.map((p) => {
-        p.backgroundColor = updateAlpha(p.backgroundColor, 0.1);
-        return p;
-      });
-      return data;
+      return {
+        ...data,
+        datasets: data.datasets.map((dataset) => ({
+          ...dataset,
+          backgroundColor: updateAlpha(dataset.backgroundColor, 0.1),
+        })),
+      };
     },
-
-    updateGraph() {
-      if (this.dataGrouping === "hourly") {
-        this.chartdata
-          .getHourlyData()
-          .then(this.addOpacity)
-          .then((x) => this.renderChart(x, this.options));
-      } else if (this.dataGrouping === "daily") {
-        this.chartdata
-          .getDailyData()
-          .then(this.addOpacity)
-          .then((x) => this.renderChart(x, this.options));
-      } else {
-        this.chartdata
-          .getWeeklyData()
-          .then(this.addOpacity)
-          .then((x) => this.renderChart(x, this.options));
-      }
+    async updateGraph() {
+      const loaders = {
+        hourly: "getHourlyData",
+        daily: "getDailyData",
+        weekly: "getWeeklyData",
+      };
+      const data = await this.chartdata[loaders[this.dataGrouping]]();
+      this.graphData = this.addOpacity(data);
     },
-  },
-  mounted() {
-    this.updateGraph();
   },
 };
 </script>
+
+<style scoped>
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.chart-container :deep(canvas) {
+  margin: 0 auto !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+</style>

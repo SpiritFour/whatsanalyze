@@ -10,7 +10,11 @@ export const GTAG_INTERACTION = "interaction";
 export const GTAG_NUM_PERSONS = "num_persons";
 
 export function gtagEvent(action, label, value = "1") {
-  window.$nuxt.$gtag.event(label + "_" + action, {
+  if (typeof window === "undefined") return;
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: label + "_" + action,
     event_category: CATEGORY_HOME,
     event_label: label,
     value: String(value),

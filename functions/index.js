@@ -34,9 +34,11 @@ exports.helloworld = onRequest(
       return;
     }
 
-    const approveLink = await client.getSubscriptionLink(origin);
+    const { approveLink, subscriptionId } = await client.createSubscription(
+      origin
+    );
 
-    response.send({ data: { approveLink } });
+    response.send({ data: { approveLink, subscriptionId } });
   }
 );
 
