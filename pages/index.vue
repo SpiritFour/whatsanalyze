@@ -372,6 +372,7 @@ export default {
 }
 
 .wrapped-banner {
+  /* A rich gradient that looks premium against the teal background */
   background: linear-gradient(90deg, #4527a0 0%, #7b1fa2 100%) !important;
 }
 </style>
