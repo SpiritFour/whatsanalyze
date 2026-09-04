@@ -1,1 +1,8 @@
-pnpm exec lint-staged
+#!/bin/sh
+if command -v pnpm >/dev/null 2>&1; then
+  pnpm exec lint-staged
+elif command -v nix >/dev/null 2>&1; then
+  nix develop --command pnpm exec lint-staged
+else
+  npx --no-install lint-staged
+fi

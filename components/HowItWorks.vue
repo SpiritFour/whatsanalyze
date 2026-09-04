@@ -31,17 +31,14 @@
         :text="item.text"
         :text2="item.text2"
         :text3="item.text3"
-        :imageSrc="item.imageSrc"
-        :inageSrcLazy="item.imageSrcLazy"
-        :imageAlt="item.imageAlt"
+        :image-src="item.imageSrc"
+        :inage-src-lazy="item.imageSrcLazy"
+        :image-alt="item.imageAlt"
         fill-dot
       >
         <v-card :color="item.color">
           <v-card-title class="text-h6"> {{ item.title }} </v-card-title>
-          <v-card-text
-            style="float: left; text-align: left"
-            class="text-white"
-          >
+          <v-card-text style="float: left; text-align: left" class="text-white">
             <p class="text-body-1">
               <v-img
                 :lazy-src="item.imageSrcLazy"

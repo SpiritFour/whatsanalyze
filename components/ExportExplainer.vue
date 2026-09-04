@@ -13,7 +13,7 @@
         >{{ data.title }}
       </v-tab>
     </v-tabs>
-    <v-window v-model="tab">
+    <v-window v-model="tab" :touch="false">
       <client-only>
         <v-window-item v-for="(data, idx) in tabData" :key="idx" :value="idx">
           <v-row no-gutters>
@@ -50,11 +50,12 @@
               </v-timeline>
               <v-btn
                 :to="to ? to : null"
-                class="text-md-h6 text-caption ml-10 text-white btn-color"
+                class="text-md-h6 text-caption ml-10 text-white btn-color select-file-btn"
                 elevation="10"
+                size="large"
                 @click="clickHandler"
               >
-                <v-icon>mdi-arrow-right</v-icon>
+                <v-icon left>mdi-arrow-right</v-icon>
                 {{ $t(cta) }}
               </v-btn>
             </v-col>
@@ -82,19 +83,10 @@
                     @click.stop="increaseTabstatus()"
                   >
                     <v-img :lazy-src="item.imgLazy" :src="item.img"></v-img>
-                    <v-btn
-                      :style="
-                        'position: absolute; left: ' +
-                        item.x +
-                        '; top: ' +
-                        item.y
-                      "
-                      class="blinking"
-                      color="black"
-                      disabled
-                      variant="outlined"
-                      rounded="circle"
-                    ></v-btn>
+                    <div
+                      :style="'left: ' + item.x + '; top: ' + item.y"
+                      class="click-indicator"
+                    ></div>
                   </v-carousel-item>
                 </v-carousel>
               </div>
@@ -401,38 +393,77 @@ export default {
   top: 2px;
 }
 
-.blinking {
-  animation-name: blink;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-  z-index: 1;
-  border: 3px solid rgba(0, 128, 0, 0.7);
-  background-color: transparent;
-  margin-left: -25px;
-  margin-top: -25px;
-  width: 50px !important;
-  height: 50px !important;
-  min-width: 50px !important;
-  padding: 0 !important;
+.select-file-btn {
+  min-height: 44px;
+  height: auto !important;
+  padding: 8px 24px !important;
+  white-space: normal;
+  line-height: 1.3 !important;
 }
 
-@keyframes blink {
+.click-indicator {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.click-indicator::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid #25d366;
+  background-color: rgba(37, 211, 102, 0.25);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.3);
+  animation: pulse-touch 1.6s ease-in-out infinite;
+}
+
+.click-indicator::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #25d366;
+  box-shadow: 0 0 0 2px #ffffff, 0 1px 4px rgba(0, 0, 0, 0.3);
+  animation: pulse-core 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse-touch {
   0% {
-    width: 50px;
-    height: 50px;
+    transform: scale(0.85);
+    opacity: 0.9;
+    border-color: #25d366;
   }
   50% {
-    width: 10px;
-    height: 10px;
-    margin-left: 0px;
-    margin-top: 0px;
-    background-color: rgba(0, 128, 0, 0.3);
-    border-color: rgba(0, 128, 0, 0.3);
-    border-width: 2px;
+    transform: scale(1.25);
+    opacity: 1;
+    border-color: #128c7e;
+    background-color: rgba(37, 211, 102, 0.4);
   }
   100% {
-    width: 50px;
-    height: 50px;
+    transform: scale(0.85);
+    opacity: 0.9;
+    border-color: #25d366;
+  }
+}
+
+@keyframes pulse-core {
+  0% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(0.9);
   }
 }
 </style>

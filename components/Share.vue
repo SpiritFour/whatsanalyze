@@ -1,6 +1,8 @@
 <template>
-  <v-container ref="afd" style="position: relative">
-    <slot ref="slot2"></slot>
+  <v-container ref="container" style="position: relative">
+    <div ref="content">
+      <slot></slot>
+    </div>
     <v-btn
       :loading="loading"
       class="btn-color-dark"
@@ -48,8 +50,6 @@ export default {
   methods: {
     async getCanvas() {
       if (this.useHtml2Canvas) {
-        // extremly ugly but could not find a way around this
-        // scrollY somehow is ignored in the html2canvas options
         let currScroll = window.scrollY;
 
         let offset = 0;
@@ -61,27 +61,36 @@ export default {
           offset = 260;
         }
         window.scrollTo(0, offset);
-        let html = this.$slots.default[0].child.$el;
-        let removedTag = false;
-        if (html.getAttribute("data-html2canvas-ignore") !== undefined) {
-          html.removeAttribute("data-html2canvas-ignore");
-          removedTag = true;
-        }
-        return html2canvas(html).then((_) => {
+        const html = this.$refs.content;
+        return html2canvas(html).then((renderedCanvas) => {
           window.scrollTo(0, currScroll);
-          if (removedTag) html.setAttribute("data-html2canvas-ignore", "");
-          return _;
+          return renderedCanvas;
         });
       } else {
-        return this.$slots.default[0].child.$refs.canvas;
+        const root =
+          this.$refs.content ||
+          this.$refs.container?.$el ||
+          this.$refs.container;
+        return root?.querySelector?.("canvas");
       }
     },
     async share() {
-      let chartName = this.$slots.default[0].componentOptions.tag;
+      const defaultSlot = this.$slots.default?.();
+      const firstVNode = defaultSlot?.[0];
+      const componentName =
+        firstVNode?.type?.__name || firstVNode?.type?.name || "chart";
+      const chartName = (
+        this.$attrs.id || componentName.replace(/([a-z])([A-Z])/g, "$1-$2")
+      ).toLowerCase();
+
       this.loading = true;
       let canvas = await this.getCanvas();
       this.loading = false;
 
+      if (!canvas) {
+        console.error("No canvas found to share");
+        return;
+      }
       if (this.canShare) {
         gtagEvent("share_" + chartName + "_pressed", GTAG_RESULTS, 0);
 

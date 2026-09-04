@@ -1,5 +1,7 @@
 <template>
-  <Doughnut v-if="graphData" :data="graphData" :options="chartOptions" />
+  <div class="chart-container">
+    <Doughnut v-if="graphData" :data="graphData" :options="chartOptions" />
+  </div>
 </template>
 
 <script>
@@ -53,3 +55,19 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.chart-container :deep(canvas) {
+  margin: 0 auto !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+</style>

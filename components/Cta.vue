@@ -14,8 +14,9 @@
     <br />
     <v-btn
       :to="to ? to : null"
-      class="mt-5 text-h6 btn-color"
+      class="mt-5 text-h6 btn-color cta-btn"
       elevation="10"
+      size="x-large"
       style="color: #ffffff"
       @click="clickHandler"
     >
@@ -69,3 +70,14 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.cta-btn {
+  min-height: 52px;
+  height: auto !important;
+  padding: 12px 32px !important;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.4 !important;
+}
+</style>

@@ -36,45 +36,40 @@
         :continuous="true"
         :cycle="false"
         :show-arrows="true"
-        height="auto"
+        height="280"
         hide-delimiter-background
       >
         <v-carousel-item>
-          <ChartsBarChart
-            :chartdata="chat"
-            :options="barchartHeaderChartOptions"
-            data-grouping="hourly"
-          />
+          <div class="carousel-slide-content">
+            <ChartsBarChart
+              :chartdata="chat"
+              :options="barchartHeaderChartOptions"
+              data-grouping="hourly"
+            />
+          </div>
         </v-carousel-item>
 
         <v-carousel-item>
-          <v-container class="fill-height" fluid>
-            <v-row align="center" justify="center">
-              <v-col>
-                <ChartsWordCloud :chartdata="chat" />
-              </v-col>
-            </v-row>
-          </v-container>
+          <div class="carousel-slide-content">
+            <ChartsWordCloud :chartdata="chat" />
+          </div>
         </v-carousel-item>
 
-        <!--        <v-carousel-item>-->
-        <!--          <ChartsLineChart-->
-        <!--            :chartdata="chat"-->
-        <!--            :options="linegraphHeaderChartOptions"-->
-        <!--          />-->
-        <!--        </v-carousel-item>-->
-
         <v-carousel-item>
-          <ChartsDonughtChart
-            :chartdata="chat"
-            :options="donoughtHeaderChartOptions"
-          />
+          <div class="carousel-slide-content">
+            <ChartsDonughtChart
+              :chartdata="chat"
+              :options="donoughtHeaderChartOptions"
+            />
+          </div>
         </v-carousel-item>
         <v-carousel-item>
-          <ChartsRadarChart
-            :chartdata="chat"
-            :options="radarchartHeaderChartOptions"
-          />
+          <div class="carousel-slide-content">
+            <ChartsRadarChart
+              :chartdata="chat"
+              :options="radarchartHeaderChartOptions"
+            />
+          </div>
         </v-carousel-item>
       </v-carousel>
     </v-col>
@@ -254,6 +249,16 @@ export default {
 };
 </script>
 <style lang="scss">
+.carousel-slide-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 8px 48px 24px 48px;
+  box-sizing: border-box;
+}
+
 .v-carousel__controls__item {
   margin: 0 8px !important;
   width: 7px !important;
