@@ -192,6 +192,7 @@ export default {
       barchartHeaderChartOptions: {
         responsive: true,
         maintainAspectRatio: true,
+        aspectRatio: 1.1,
         plugins: {
           tooltip: { enabled: true },
           legend: {
@@ -212,6 +213,13 @@ export default {
             },
             ticks: {
               color: "rgb(51,51,51)",
+              maxRotation: 0,
+              autoSkip: true,
+              maxTicksLimit: 8,
+              font: {
+                weight: "bold",
+                size: 10,
+              },
             },
           },
           y: {

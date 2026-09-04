@@ -6,7 +6,13 @@
       </div>
     </v-row>
     <v-row justify="center">
-      <v-col v-for="site in trustedSites" :key="site.name">
+      <v-col
+        v-for="site in trustedSites"
+        :key="site.name"
+        cols="12"
+        md="4"
+        class="px-4 py-2"
+      >
         <v-row justify="center">
           <a :href="site.href">
             <v-img
@@ -17,12 +23,14 @@
             />
           </a>
         </v-row>
-        <v-row v-if="$vuetify.display.mdAndUp" class="pt-8" justify="center">
-          <figure>
+        <v-row v-if="$vuetify.display.mdAndUp" class="pt-6" justify="center">
+          <figure class="w-100 px-2">
             <blockquote>
               <div>{{ site.description }}</div>
             </blockquote>
-            <figcaption class="text-right pr-3">—{{ site.name }}</figcaption>
+            <figcaption class="text-right pr-3 mt-2">
+              —{{ site.name }}
+            </figcaption>
           </figure>
         </v-row>
       </v-col>
@@ -74,9 +82,14 @@ blockquote {
 }
 
 blockquote div {
-  padding: 5px;
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
+  padding: 12px 16px;
+  background: rgba(0, 0, 0, 0.07);
+  border-radius: 8px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 blockquote div::before {
