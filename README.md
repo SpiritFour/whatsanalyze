@@ -29,6 +29,20 @@ Please report bugs in the github issues.
 ## Build Setup
 We use Node.js 22 and pnpm 8.15.8. The project also needs Python 3.11 because some legacy build dependencies compile native modules.
 
+### With Nix (recommended)
+
+A Nix flake is provided with all dependencies pre-configured:
+
+```bash
+# Enter development shell
+$ nix develop
+
+# Install dependencies
+$ pnpm install --frozen-lockfile
+```
+
+### Standard setup
+
 ```bash
 # install dependencies
 $ pnpm install
@@ -36,12 +50,24 @@ $ pnpm install
 # serve with hot reload at localhost:3000
 $ pnpm dev
 
-# build for production and launch server
+# build for production and launch server (recommended for low-memory environments)
 $ pnpm build
 $ pnpm start
 
 # generate static project
 $ pnpm generate
+```
+
+### Exposing via Tailscale
+
+If running on a remote server or VM, expose the instance to your tailnet:
+
+```bash
+# For production preview (HTTP on port 3000):
+$ tailscale serve --bg 3000
+
+# For dev server (HTTPS on port 3000):
+$ tailscale serve --bg https+insecure://localhost:3000
 ```
 
 Search for prettier and eslint in pycharm to set it up on saving a file. 

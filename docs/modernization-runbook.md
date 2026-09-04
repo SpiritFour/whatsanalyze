@@ -363,6 +363,51 @@ The required GitHub CI job intentionally runs formatting, linting, the small
 Jest utility suite, static generation, and generated-output verification. It
 does not install browsers or run Playwright.
 
+## Local and remote operations (Nix & Tailscale)
+
+### Running with Nix
+
+The repository includes a Nix flake (`flake.nix`) providing Node.js 22, pnpm 8.15.8, and Python 3.11:
+
+```bash
+# Enter the nix dev environment:
+nix develop
+
+# Install dependencies:
+pnpm install --frozen-lockfile
+```
+
+### Resource management: Dev mode vs. Production preview
+
+WhatsAnalyze includes several large client-side dependencies (`@amcharts/amcharts4`, `firebase`, `html2canvas`, `jspdf`, `chart.js`).
+
+- **Development (`pnpm dev`):** Vite compiles and bundles client dependencies on-demand as browser requests arrive. On memory-constrained machines (<= 2 GB RAM), this initial multi-threaded bundling spike can consume over 1 GB RSS and risk out-of-memory errors or blank pages before chunks finish compiling.
+- **Production preview (`pnpm build && pnpm start`):** Compiles the static site into `dist/` once ahead of time and serves the prerendered assets using `nuxt preview` (`npx serve dist`). Runtime memory usage stays below 50 MB with 0% idle CPU and instant page delivery.
+
+On systems with limited RAM, build and run using:
+
+```bash
+# Production build and preview (low runtime memory):
+NUXT_TELEMETRY_DISABLED=1 nix develop --command pnpm build
+nix develop --command pnpm start
+```
+
+### Exposing over Tailscale (Tailscale Serve)
+
+To share the running instance with devices across your tailnet (desktops, phones) without certificate warnings:
+
+1. **When serving production preview (`pnpm start`, HTTP on port 3000):**
+   ```bash
+   tailscale serve --bg 3000
+   ```
+
+2. **When running dev mode (`pnpm dev`, HTTPS with self-signed certificate on port 3000):**
+   ```bash
+   tailscale serve --bg https+insecure://localhost:3000
+   ```
+
+Tailscale automatically provisions a valid TLS certificate for your node's MagicDNS domain (e.g. `https://<node-name>.<tailnet>.ts.net/`), handles HTTPS termination, and proxies to your local port.
+
 ## Known follow-up work
 
 - Rename `helloworld` to describe its purpose, with a compatibility period for
