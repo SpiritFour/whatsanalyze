@@ -17,6 +17,8 @@ const localizedPages = [
   "pwa-results",
   "subscribe",
   "switch-from-whatsapp-to-signal",
+  "tools",
+  "tools/inactivity",
   "whatsapp-to-pdf",
   "whatsapp-wrapped-year-review",
 ];

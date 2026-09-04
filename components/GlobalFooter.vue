@@ -40,6 +40,8 @@
         &copy; {{ new Date().getFullYear() }} -
         <nuxt-link :to="$localePath('/about')">About</nuxt-link>
         -
+        <nuxt-link :to="$localePath('/tools')">Tools</nuxt-link>
+        -
         <nuxt-link :to="$localePath('/impressum')">Imprint</nuxt-link>
         -
         <nuxt-link :to="$localePath('/subscribe')">Subscriptions</nuxt-link>

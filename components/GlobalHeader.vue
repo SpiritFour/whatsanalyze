@@ -16,6 +16,12 @@
             </h1>
           </nuxt-link>
           <v-spacer></v-spacer>
+          <nuxt-link
+            :to="$localePath('/tools')"
+            class="text-body-1 font-weight-medium mr-4 text-white text-decoration-none"
+          >
+            Tools
+          </nuxt-link>
           <LanguageSwitcher />
         </v-card-actions>
       </v-card>
