@@ -1,5 +1,180 @@
 export const messages = {
   en: {
+    courtEvidence: {
+      seoTitle:
+        "WhatsApp Chat as Court Evidence – Clean PDF Export | WhatsAnalyze",
+      seoDescription:
+        "Turn a WhatsApp chat into a clean, chronological PDF with every message and timestamp. Processed 100% in your browser — no upload, no account.",
+      heroEyebrow: "Court-ready chat export",
+      heroTitle: "Your chat. In black and white.",
+      heroSubtitle:
+        "Turn a WhatsApp export into a clean, chronological PDF — every message, every sender, every timestamp. Created entirely on your device.",
+      heroCta: "Create your PDF",
+      heroNote: "Free preview · No account · No upload",
+      pillar1Title: "Nothing leaves your device",
+      pillar1Text:
+        "Your chat is processed locally in your browser. Your messages are never sent to a server.",
+      pillar2Title: "Complete and chronological",
+      pillar2Text:
+        "Every message in order, with sender and timestamp — not a collage of screenshots.",
+      pillar3Title: "Ready in minutes",
+      pillar3Text:
+        "Export your chat, drop the file, download the document. No account required.",
+      docEyebrow: "The document",
+      docTitle: "Every message. Every timestamp.",
+      docText:
+        "Courts need to see who wrote what, and when. Screenshots are easy to question — a clean, ordered transcript is not.",
+      docCard1Title: "Chronological order",
+      docCard1Text:
+        "Messages appear exactly as they happened, from the first day to the last.",
+      docCard2Title: "Sender and time on every message",
+      docCard2Text:
+        "Each entry is attributed and timestamped, down to the minute.",
+      docCard3Title: "Print-ready A4 pages",
+      docCard3Text:
+        "A paginated PDF that is easy to print, file, and reference in a hearing.",
+      docCard4Title: "Statistics included",
+      docCard4Text:
+        "Message counts and activity charts summarize years of contact at a glance.",
+      casesEyebrow: "Built for serious situations",
+      casesTitle: "When a chat becomes evidence.",
+      casesText:
+        "Users have already submitted WhatsAnalyze PDFs in real proceedings.",
+      case1Title: "Harassment and threats",
+      case1Text:
+        "Document repeated messages and calls for a restraining order or criminal complaint.",
+      case2Title: "Divorce and custody",
+      case2Text:
+        "Present agreements, incidents, and conversations in family court — in context.",
+      case3Title: "Genuine relationship",
+      case3Text:
+        "Show that a marriage is lived day by day, not just on paper — for visa and immigration cases.",
+      case4Title: "Work and contract disputes",
+      case4Text:
+        "Verbal agreements often live in chats. Turn them into a document you can hand over.",
+      caseLinkText: "Learn more",
+      privacyEyebrow: "Privacy",
+      privacyTitle: "Too sensitive for the cloud. So we don't use one.",
+      privacyText:
+        "Evidence is the most private data you own. WhatsAnalyze runs entirely in your browser: no upload, no account, no server that could leak your chat. The code is open source.",
+      stepsTitle: "Three steps to your document.",
+      step1Title: "Export your chat",
+      step1Text:
+        "In WhatsApp, open the chat and choose “Export chat”. “Without media” is fine.",
+      step2Title: "Drop the file",
+      step2Text:
+        "Drag the .txt or .zip export onto whatsanalyze.com. It stays on your device.",
+      step3Title: "Download the PDF",
+      step3Text:
+        "Preview the document for free and download the complete chat as a PDF.",
+      stepsGuideLink: "Step-by-step export guide",
+      quotesTitle: "Already used in real cases.",
+      quote1Text:
+        "I used the PDF as evidence in a harassment case. The clear timeline of messages and calls made it easy for my lawyer to work with.",
+      quote1Attribution: "WhatsAnalyze user, harassment case",
+      quote2Text:
+        "We had to show that our marriage is real — daily messages over years. The export said more than any certificate.",
+      quote2Attribution: "WhatsAnalyze user, visa interview",
+      faqTitle: "Questions, answered.",
+      faq1Q: "Will a court accept this PDF?",
+      faq1A:
+        "Users have successfully submitted WhatsAnalyze exports in harassment, family, and visa proceedings. Requirements differ by court and country, so always confirm with your lawyer. The export preserves what courts typically ask for: who wrote what, and when.",
+      faq2Q: "Aren't screenshots enough?",
+      faq2A:
+        "Screenshots are hard to read, easy to take out of context, and tedious to put in order. A single chronological document with senders and timestamps is far easier for lawyers and judges to review.",
+      faq3Q: "Is my chat uploaded anywhere?",
+      faq3A:
+        "No. The analysis and the PDF are generated locally in your browser. Your messages never touch our servers — the project is open source, so anyone can verify this.",
+      faq4Q: "What does it cost?",
+      faq4A:
+        "Analyzing your chat and previewing the PDF is free. Downloading the complete document is a one-time purchase — no subscription needed.",
+      ctaTitle: "Put it in black and white.",
+      ctaButton: "Analyze your chat now",
+      ctaNote: "Free preview · 100% private",
+      disclaimer:
+        "WhatsAnalyze is an analysis and formatting tool, not a law firm. Nothing on this page is legal advice, and admissibility varies by jurisdiction — always confirm requirements with your lawyer or court.",
+    },
+    relationshipProof: {
+      seoTitle:
+        "Prove Your Relationship with WhatsApp Chats – Visa & Immigration Evidence",
+      seoDescription:
+        "Turn years of WhatsApp messages into one clear PDF — timestamps, statistics, and daily conversations that show a genuine relationship. 100% private.",
+      heroEyebrow: "Relationship evidence",
+      heroTitle: "Years of “good morning”. One document.",
+      heroSubtitle:
+        "For visa applications and immigration interviews: turn your chat history into clear evidence of a genuine, ongoing relationship.",
+      heroCta: "Create your PDF",
+      heroNote: "Free preview · No account · No upload",
+      mockDays: "days",
+      mockMessages: "messages",
+      mockPeople: "people",
+      statsEyebrow: "The full picture",
+      statsTitle: "Consistency you can't fake.",
+      statsText:
+        "Officers look for regular, natural contact over a long period. Your chat statistics show exactly that — at a glance.",
+      stat1Title: "Messages over time",
+      stat1Text:
+        "Activity charts show contact month after month, year after year.",
+      stat2Title: "First to last message",
+      stat2Text:
+        "The document shows when your conversation started — and that it never stopped.",
+      stat3Title: "Both sides talking",
+      stat3Text:
+        "Per-person statistics show a real dialogue — not a one-way street.",
+      stat4Title: "Everyday life, documented",
+      stat4Text:
+        "The full transcript shows what no certificate can: daily routines, plans, and care.",
+      casesEyebrow: "Use cases",
+      casesTitle: "Made for moments that decide your future.",
+      casesText:
+        "A chat history adds what certificates and photos can't show: a relationship lived in daily communication.",
+      case1Title: "Fiancé and spouse visas",
+      case1Text:
+        "Show ongoing communication before and after visits — a core requirement in partner visa cases.",
+      case2Title: "Family reunification",
+      case2Text:
+        "Demonstrate that your relationship is lived daily, across borders and time zones.",
+      case3Title: "Residence and citizenship",
+      case3Text:
+        "Show communication across the entire duration of your marriage at interviews and renewals.",
+      case4Title: "More than a certificate",
+      case4Text:
+        "Already married? Show the daily conversations behind the paperwork — to authorities or in court.",
+      caseLinkText: "Chats as court evidence",
+      privacyEyebrow: "Privacy",
+      privacyTitle: "Your messages are nobody's business. Including ours.",
+      privacyText:
+        "WhatsAnalyze runs entirely in your browser: no upload, no account, no server. You decide what goes into the PDF and who gets to see it. The code is open source.",
+      stepsTitle: "Three steps to your evidence.",
+      step1Title: "Export your chat",
+      step1Text:
+        "In WhatsApp, open the chat and choose “Export chat”. “Without media” is fine.",
+      step2Title: "Drop the file",
+      step2Text:
+        "Drag the .txt or .zip export onto whatsanalyze.com. It stays on your device.",
+      step3Title: "Download the PDF",
+      step3Text:
+        "Preview the document for free and download the complete chat as a PDF.",
+      stepsGuideLink: "Step-by-step export guide",
+      faqTitle: "Questions, answered.",
+      faq1Q: "Is a chat export enough for a visa application?",
+      faq1A:
+        "No single document is. Authorities want a package: certificates, photos, travel records — and proof of ongoing communication. A clean chat PDF is one of the strongest ways to show the latter.",
+      faq2Q: "What do officers actually look for?",
+      faq2A:
+        "Consistency and authenticity: regular messages over the whole period you claim, natural everyday conversations, and communication around visits and milestones.",
+      faq3Q: "Our chat isn't in the official language. Do we need a translation?",
+      faq3A:
+        "Many authorities require certified translations of selected passages. A chronological PDF gives your translator — and the officer — a clean, referenceable source.",
+      faq4Q: "Is our chat uploaded anywhere?",
+      faq4A:
+        "No. Everything runs locally in your browser — your messages never leave your device. The project is open source.",
+      ctaTitle: "Show them it's real.",
+      ctaButton: "Analyze your chat now",
+      ctaNote: "Free preview · 100% private",
+      disclaimer:
+        "WhatsAnalyze is not an immigration adviser or law firm. Requirements vary by country and case — always confirm them with your lawyer or the relevant authority.",
+    },
     wrapped: {
       heroTitle: "WhatsApp Wrapped {currentYear}",
       heroSubtitle:
@@ -213,6 +388,8 @@ export const messages = {
     love: "Made with ❤️ by four friends.",
     pageNameSignal: "How to switch to Signal from WhatsApp",
     pageNameExport: "How to export your WhatsApp Chat",
+    pageNameCourt: "WhatsApp chats as court evidence",
+    pageNameRelationship: "Prove your relationship with chats",
     addToHomescreen: "add to Homescreen",
     people: "People",
     changeView: "Change Point of View",
@@ -325,6 +502,181 @@ export const messages = {
     },
   },
   de: {
+    courtEvidence: {
+      seoTitle:
+        "WhatsApp-Chat als Beweismittel vor Gericht – sauberes PDF | WhatsAnalyze",
+      seoDescription:
+        "Verwandle deinen WhatsApp-Chat in ein sauberes, chronologisches PDF – jede Nachricht mit Absender und Zeitstempel. 100 % im Browser, ohne Upload.",
+      heroEyebrow: "Gerichtsfester Chat-Export",
+      heroTitle: "Dein Chat. Schwarz auf weiß.",
+      heroSubtitle:
+        "Mach aus deinem WhatsApp-Export ein sauberes, chronologisches PDF – jede Nachricht, jeder Absender, jeder Zeitstempel. Erstellt komplett auf deinem Gerät.",
+      heroCta: "PDF erstellen",
+      heroNote: "Kostenlose Vorschau · Kein Konto · Kein Upload",
+      pillar1Title: "Nichts verlässt dein Gerät",
+      pillar1Text:
+        "Dein Chat wird lokal in deinem Browser verarbeitet. Deine Nachrichten werden nie an einen Server geschickt.",
+      pillar2Title: "Vollständig und chronologisch",
+      pillar2Text:
+        "Jede Nachricht in der richtigen Reihenfolge, mit Absender und Zeitstempel – keine Screenshot-Collage.",
+      pillar3Title: "Fertig in Minuten",
+      pillar3Text:
+        "Chat exportieren, Datei ablegen, Dokument herunterladen. Ganz ohne Konto.",
+      docEyebrow: "Das Dokument",
+      docTitle: "Jede Nachricht. Jeder Zeitstempel.",
+      docText:
+        "Vor Gericht zählt, wer wann was geschrieben hat. Screenshots lassen sich leicht anzweifeln – ein sauberes, geordnetes Protokoll nicht.",
+      docCard1Title: "Chronologische Reihenfolge",
+      docCard1Text:
+        "Nachrichten erscheinen genau so, wie sie passiert sind – vom ersten bis zum letzten Tag.",
+      docCard2Title: "Absender und Uhrzeit an jeder Nachricht",
+      docCard2Text:
+        "Jeder Eintrag ist minutengenau zugeordnet und mit Zeitstempel versehen.",
+      docCard3Title: "Druckfertige A4-Seiten",
+      docCard3Text:
+        "Ein paginiertes PDF, das sich leicht drucken, abheften und in einer Verhandlung zitieren lässt.",
+      docCard4Title: "Statistiken inklusive",
+      docCard4Text:
+        "Nachrichtenzahlen und Aktivitäts-Charts fassen Jahre an Kontakt auf einen Blick zusammen.",
+      casesEyebrow: "Für ernste Situationen gebaut",
+      casesTitle: "Wenn ein Chat zum Beweis wird.",
+      casesText:
+        "Nutzer:innen haben WhatsAnalyze-PDFs bereits in echten Verfahren eingereicht.",
+      case1Title: "Belästigung und Drohungen",
+      case1Text:
+        "Dokumentiere wiederholte Nachrichten und Anrufe – für eine Gewaltschutzanordnung oder Anzeige.",
+      case2Title: "Scheidung und Sorgerecht",
+      case2Text:
+        "Lege Absprachen, Vorfälle und Gespräche vor dem Familiengericht vor – im Zusammenhang.",
+      case3Title: "Echte Beziehung",
+      case3Text:
+        "Zeig, dass eine Ehe täglich gelebt wird und nicht nur auf dem Papier steht – für Visum und Behörden.",
+      case4Title: "Arbeits- und Vertragsstreit",
+      case4Text:
+        "Mündliche Absprachen leben oft im Chat. Mach daraus ein Dokument, das du übergeben kannst.",
+      caseLinkText: "Mehr erfahren",
+      privacyEyebrow: "Privatsphäre",
+      privacyTitle: "Zu sensibel für die Cloud. Deshalb nutzen wir keine.",
+      privacyText:
+        "Beweise sind die privatesten Daten, die du besitzt. WhatsAnalyze läuft komplett in deinem Browser: kein Upload, kein Konto, kein Server, der deinen Chat leaken könnte. Der Code ist Open Source.",
+      stepsTitle: "In drei Schritten zum Dokument.",
+      step1Title: "Chat exportieren",
+      step1Text:
+        "Öffne den Chat in WhatsApp und wähle „Chat exportieren“. „Ohne Medien“ reicht.",
+      step2Title: "Datei ablegen",
+      step2Text:
+        "Zieh die .txt- oder .zip-Datei auf whatsanalyze.com. Sie bleibt auf deinem Gerät.",
+      step3Title: "PDF herunterladen",
+      step3Text:
+        "Sieh dir das Dokument kostenlos in der Vorschau an und lade den kompletten Chat als PDF.",
+      stepsGuideLink: "Ausführliche Export-Anleitung",
+      quotesTitle: "Schon in echten Verfahren verwendet.",
+      quote1Text:
+        "Ich habe das PDF als Beweis in einem Belästigungsfall verwendet. Mit der klaren Zeitleiste aus Nachrichten und Anrufen konnte meine Anwältin sofort arbeiten.",
+      quote1Attribution: "WhatsAnalyze-Nutzerin, Belästigungsfall",
+      quote2Text:
+        "Wir mussten zeigen, dass unsere Ehe echt ist – tägliche Nachrichten über Jahre. Der Export hat mehr gesagt als jede Urkunde.",
+      quote2Attribution: "WhatsAnalyze-Nutzer, Visumstermin",
+      faqTitle: "Fragen, beantwortet.",
+      faq1Q: "Akzeptiert ein Gericht dieses PDF?",
+      faq1A:
+        "Nutzer:innen haben WhatsAnalyze-Exporte bereits erfolgreich in Belästigungs-, Familien- und Visumsverfahren eingereicht. Die Anforderungen unterscheiden sich je nach Gericht und Land – kläre das immer mit deiner Anwältin oder deinem Anwalt. Der Export enthält, was Gerichte typischerweise verlangen: wer wann was geschrieben hat.",
+      faq2Q: "Reichen Screenshots nicht aus?",
+      faq2A:
+        "Screenshots sind schwer zu lesen, leicht aus dem Zusammenhang zu reißen und mühsam zu ordnen. Ein einziges chronologisches Dokument mit Absendern und Zeitstempeln ist für Anwälte und Richter deutlich einfacher zu prüfen.",
+      faq3Q: "Wird mein Chat irgendwohin hochgeladen?",
+      faq3A:
+        "Nein. Analyse und PDF entstehen lokal in deinem Browser. Deine Nachrichten berühren nie unsere Server – das Projekt ist Open Source, jeder kann das überprüfen.",
+      faq4Q: "Was kostet das?",
+      faq4A:
+        "Chat analysieren und PDF-Vorschau sind kostenlos. Der Download des kompletten Dokuments ist ein Einmalkauf – ohne Abo.",
+      ctaTitle: "Bring es schwarz auf weiß.",
+      ctaButton: "Jetzt Chat analysieren",
+      ctaNote: "Kostenlose Vorschau · 100 % privat",
+      disclaimer:
+        "WhatsAnalyze ist ein Analyse- und Formatierungs-Tool, keine Rechtsberatung. Ob ein Beweis zugelassen wird, hängt von Gericht und Land ab – kläre die Anforderungen immer mit Anwalt oder Gericht.",
+    },
+    relationshipProof: {
+      seoTitle:
+        "Beziehung nachweisen mit WhatsApp-Chats – Beweise für Visum & Behörden",
+      seoDescription:
+        "Mach aus Jahren von WhatsApp-Nachrichten ein klares PDF – Zeitstempel, Statistiken und Alltagsgespräche, die eine echte Beziehung belegen. 100 % privat.",
+      heroEyebrow: "Beziehungsnachweis",
+      heroTitle: "Jahre voller „Guten Morgen“. Ein Dokument.",
+      heroSubtitle:
+        "Für Visumsanträge und Behördentermine: Verwandle euren Chatverlauf in einen klaren Nachweis einer echten, gelebten Beziehung.",
+      heroCta: "PDF erstellen",
+      heroNote: "Kostenlose Vorschau · Kein Konto · Kein Upload",
+      mockDays: "Tage",
+      mockMessages: "Nachrichten",
+      mockPeople: "Personen",
+      statsEyebrow: "Das ganze Bild",
+      statsTitle: "Beständigkeit kann man nicht faken.",
+      statsText:
+        "Behörden achten auf regelmäßigen, natürlichen Kontakt über lange Zeit. Genau das zeigen eure Chat-Statistiken – auf einen Blick.",
+      stat1Title: "Nachrichten im Zeitverlauf",
+      stat1Text:
+        "Aktivitäts-Charts zeigen Kontakt, Monat für Monat, Jahr für Jahr.",
+      stat2Title: "Von der ersten bis zur letzten Nachricht",
+      stat2Text:
+        "Das Dokument zeigt, wann euer Gespräch begann – und dass es nie aufgehört hat.",
+      stat3Title: "Beide Seiten schreiben",
+      stat3Text:
+        "Statistiken pro Person zeigen einen echten Dialog – keine Einbahnstraße.",
+      stat4Title: "Dokumentierter Alltag",
+      stat4Text:
+        "Das vollständige Protokoll zeigt, was keine Urkunde kann: Alltag, Pläne und Fürsorge.",
+      casesEyebrow: "Einsatzbereiche",
+      casesTitle: "Für Momente, die über eure Zukunft entscheiden.",
+      casesText:
+        "Ein Chatverlauf ergänzt Urkunden und Fotos um das, was am schwersten zu fälschen ist: gelebte Kommunikation.",
+      case1Title: "Verlobten- und Ehegattenvisum",
+      case1Text:
+        "Zeigt laufende Kommunikation vor und nach euren Treffen – eine Kernanforderung in Visumsverfahren.",
+      case2Title: "Familiennachzug",
+      case2Text:
+        "Belegt, dass eure Beziehung über Grenzen und Zeitzonen hinweg täglich gelebt wird.",
+      case3Title: "Aufenthalt und Einbürgerung",
+      case3Text:
+        "Zeigt bei Interviews und Verlängerungen Kommunikation über die gesamte Dauer eurer Ehe.",
+      case4Title: "Mehr als ein Papier",
+      case4Text:
+        "Schon verheiratet? Zeigt die täglichen Gespräche hinter den Papieren – gegenüber Behörden oder vor Gericht.",
+      caseLinkText: "Chats als Beweismittel",
+      privacyEyebrow: "Privatsphäre",
+      privacyTitle: "Eure Nachrichten sind niemandes Sache. Auch nicht unsere.",
+      privacyText:
+        "WhatsAnalyze läuft komplett in eurem Browser: kein Upload, kein Konto, kein Server. Ihr entscheidet, was ins PDF kommt und wer es sieht. Der Code ist Open Source.",
+      stepsTitle: "In drei Schritten zu euren Beweisen.",
+      step1Title: "Chat exportieren",
+      step1Text:
+        "Öffnet den Chat in WhatsApp und wählt „Chat exportieren“. „Ohne Medien“ reicht.",
+      step2Title: "Datei ablegen",
+      step2Text:
+        "Zieht die .txt- oder .zip-Datei auf whatsanalyze.com. Sie bleibt auf eurem Gerät.",
+      step3Title: "PDF herunterladen",
+      step3Text:
+        "Seht euch das Dokument kostenlos in der Vorschau an und ladet den kompletten Chat als PDF.",
+      stepsGuideLink: "Ausführliche Export-Anleitung",
+      faqTitle: "Fragen, beantwortet.",
+      faq1Q: "Reicht ein Chat-Export für einen Visumsantrag?",
+      faq1A:
+        "Kein einzelnes Dokument reicht. Behörden wollen ein Paket: Urkunden, Fotos, Reisedokumente – und Nachweise der laufenden Kommunikation. Ein sauberes Chat-PDF ist einer der stärksten Wege, Letzteres zu zeigen.",
+      faq2Q: "Worauf achten Behörden wirklich?",
+      faq2A:
+        "Auf Beständigkeit und Echtheit: regelmäßige Nachrichten über den gesamten Zeitraum, natürliche Alltagsgespräche und Kommunikation rund um Besuche und Meilensteine.",
+      faq3Q: "Unser Chat ist nicht in der Amtssprache. Brauchen wir eine Übersetzung?",
+      faq3A:
+        "Viele Behörden verlangen beglaubigte Übersetzungen ausgewählter Passagen. Ein chronologisches PDF gibt eurer Übersetzerin – und der Behörde – eine saubere, zitierbare Quelle.",
+      faq4Q: "Wird unser Chat irgendwohin hochgeladen?",
+      faq4A:
+        "Nein. Alles läuft lokal in eurem Browser – eure Nachrichten verlassen euer Gerät nie. Das Projekt ist Open Source.",
+      ctaTitle: "Zeigt, dass es echt ist.",
+      ctaButton: "Jetzt Chat analysieren",
+      ctaNote: "Kostenlose Vorschau · 100 % privat",
+      disclaimer:
+        "WhatsAnalyze ist keine Migrationsberatung und keine Kanzlei. Die Anforderungen unterscheiden sich je nach Land und Fall – klärt sie immer mit eurer Anwältin, eurem Anwalt oder der zuständigen Behörde.",
+    },
     wrapped: {
       heroTitle: "WhatsApp Wrapped {currentYear}",
       heroSubtitle:
@@ -527,6 +879,8 @@ export const messages = {
       "Dieses Projekt ist <b>open-source</b> und der gesamte Code ist <b>öffentlich</b> auf <b>GitHub</b>",
     pageNameSignal: "Wie man von WhatsApp zu Signal wechselt",
     pageNameExport: "So exportierst Du deinen WhatsApp-Chat",
+    pageNameCourt: "WhatsApp-Chats als Beweismittel",
+    pageNameRelationship: "Beziehung mit Chats nachweisen",
     addToHomescreen: "Zum Homescreen hinzufügen",
     people: "Leute",
     changeView: "Blickwinkel ändern",
@@ -614,6 +968,181 @@ export const messages = {
     then: "dann",
   },
   es: {
+    courtEvidence: {
+      seoTitle:
+        "Chat de WhatsApp como prueba en juicio – PDF limpio | WhatsAnalyze",
+      seoDescription:
+        "Convierte un chat de WhatsApp en un PDF limpio y cronológico con cada mensaje y su marca de tiempo. 100 % en tu navegador, sin subir nada.",
+      heroEyebrow: "Exportación lista para el juzgado",
+      heroTitle: "Tu chat. Negro sobre blanco.",
+      heroSubtitle:
+        "Convierte tu exportación de WhatsApp en un PDF limpio y cronológico: cada mensaje, cada remitente, cada marca de tiempo. Creado íntegramente en tu dispositivo.",
+      heroCta: "Crear tu PDF",
+      heroNote: "Vista previa gratis · Sin cuenta · Sin subida",
+      pillar1Title: "Nada sale de tu dispositivo",
+      pillar1Text:
+        "Tu chat se procesa localmente en tu navegador. Tus mensajes nunca se envían a un servidor.",
+      pillar2Title: "Completo y cronológico",
+      pillar2Text:
+        "Cada mensaje en orden, con remitente y hora: no una collage de capturas.",
+      pillar3Title: "Listo en minutos",
+      pillar3Text:
+        "Exporta tu chat, suelta el archivo y descarga el documento. Sin cuenta.",
+      docEyebrow: "El documento",
+      docTitle: "Cada mensaje. Cada marca de tiempo.",
+      docText:
+        "En el juzgado importa quién escribió qué y cuándo. Las capturas se pueden cuestionar; un transcripción ordenada, no.",
+      docCard1Title: "Orden cronológico",
+      docCard1Text:
+        "Los mensajes aparecen tal y como ocurrieron, del primer día al último.",
+      docCard2Title: "Remitente y hora en cada mensaje",
+      docCard2Text:
+        "Cada entrada está atribuida y fechada, minuto a minuto.",
+      docCard3Title: "Páginas A4 listas para imprimir",
+      docCard3Text:
+        "Un PDF paginado, fácil de imprimir, archivar y citar en una audiencia.",
+      docCard4Title: "Estadísticas incluidas",
+      docCard4Text:
+        "Conteos de mensajes y gráficos de actividad resumen años de contacto de un vistazo.",
+      casesEyebrow: "Hecho para situaciones serias",
+      casesTitle: "Cuando un chat se convierte en prueba.",
+      casesText:
+        "Usuarios ya han presentado PDFs de WhatsAnalyze en procedimientos reales.",
+      case1Title: "Acoso y amenazas",
+      case1Text:
+        "Documenta mensajes y llamadas repetidas para una orden de protección o una denuncia.",
+      case2Title: "Divorcio y custodia",
+      case2Text:
+        "Presenta acuerdos, incidentes y conversaciones ante el juzgado de familia, en contexto.",
+      case3Title: "Relación genuina",
+      case3Text:
+        "Demuestra que un matrimonio se vive a diario y no solo en el papel, para casos de visado e inmigración.",
+      case4Title: "Conflictos laborales y contractuales",
+      case4Text:
+        "Los acuerdos verbales suelen vivir en el chat. Conviértelos en un documento que puedas entregar.",
+      caseLinkText: "Saber más",
+      privacyEyebrow: "Privacidad",
+      privacyTitle: "Demasiado sensible para la nube. Por eso no usamos una.",
+      privacyText:
+        "La prueba es el dato más privado que posees. WhatsAnalyze funciona íntegramente en tu navegador: sin subida, sin cuenta, sin servidor que pueda filtrar tu chat. El código es de código abierto.",
+      stepsTitle: "Tres pasos hasta tu documento.",
+      step1Title: "Exporta tu chat",
+      step1Text:
+        "En WhatsApp, abre el chat y elige «Exportar chat». «Sin multimedia» está bien.",
+      step2Title: "Suelta el archivo",
+      step2Text:
+        "Arrastra la exportación .txt o .zip a whatsanalyze.com. Se queda en tu dispositivo.",
+      step3Title: "Descarga el PDF",
+      step3Text:
+        "Vista previa gratuita del documento y descarga del chat completo en PDF.",
+      stepsGuideLink: "Guía de exportación paso a paso",
+      quotesTitle: "Ya usado en casos reales.",
+      quote1Text:
+        "Usé el PDF como prueba en un caso de acoso. La línea de tiempo clara de mensajes y llamadas hizo fácil el trabajo de mi abogado.",
+      quote1Attribution: "Usuario de WhatsAnalyze, caso de acoso",
+      quote2Text:
+        "Tuvimos que demostrar que nuestro matrimonio es real: mensajes diarios durante años. La exportación dijo más que cualquier certificado.",
+      quote2Attribution: "Usuario de WhatsAnalyze, entrevista de visado",
+      faqTitle: "Preguntas, respondidas.",
+      faq1Q: "¿Un juzgado aceptará este PDF?",
+      faq1A:
+        "Usuarios han presentado exportaciones de WhatsAnalyze con éxito en procedimientos de acoso, familia y visados. Los requisitos varían según el juzgado y el país, así que confírmalo siempre con tu abogado. La exportación conserva lo que los tribunales suelen pedir: quién escribió qué y cuándo.",
+      faq2Q: "¿No bastan las capturas de pantalla?",
+      faq2A:
+        "Las capturas son difíciles de leer, fáciles de sacar de contexto y tediosas de ordenar. Un único documento cronológico con remitentes y marcas de tiempo es mucho más fácil de revisar para abogados y jueces.",
+      faq3Q: "¿Se sube mi chat a algún sitio?",
+      faq3A:
+        "No. El análisis y el PDF se generan localmente en tu navegador. Tus mensajes nunca tocan nuestros servidores: el proyecto es de código abierto, cualquiera puede verificarlo.",
+      faq4Q: "¿Cuánto cuesta?",
+      faq4A:
+        "Analizar tu chat y ver la vista previa del PDF es gratis. Descargar el documento completo es una compra única, sin suscripción.",
+      ctaTitle: "Ponlo negro sobre blanco.",
+      ctaButton: "Analiza tu chat ahora",
+      ctaNote: "Vista previa gratis · 100 % privado",
+      disclaimer:
+        "WhatsAnalyze es una herramienta de análisis y formato, no un despacho de abogados. Nada en esta página es asesoramiento legal y la admisibilidad varía según la jurisdicción: confirma siempre los requisitos con tu abogado o el juzgado.",
+    },
+    relationshipProof: {
+      seoTitle:
+        "Demuestra tu relación con chats de WhatsApp – Prueba para visados e inmigración",
+      seoDescription:
+        "Convierte años de mensajes de WhatsApp en un PDF claro: marcas de tiempo, estadísticas y conversaciones diarias que demuestran una relación genuina. 100 % privado.",
+      heroEyebrow: "Prueba de relación",
+      heroTitle: "Años de «buenos días». Un documento.",
+      heroSubtitle:
+        "Para solicitudes de visado y entrevistas de inmigración: convierte tu historial de chat en una prueba clara de una relación genuina y continua.",
+      heroCta: "Crear tu PDF",
+      heroNote: "Vista previa gratis · Sin cuenta · Sin subida",
+      mockDays: "días",
+      mockMessages: "mensajes",
+      mockPeople: "personas",
+      statsEyebrow: "El panorama completo",
+      statsTitle: "Constancia que no se puede falsificar.",
+      statsText:
+        "Los oficiales buscan contacto regular y natural durante mucho tiempo. Tus estadísticas de chat muestran exactamente eso, de un vistazo.",
+      stat1Title: "Mensajes a lo largo del tiempo",
+      stat1Text:
+        "Los gráficos de actividad muestran contacto mes a mes, año a año.",
+      stat2Title: "Del primer al último mensaje",
+      stat2Text:
+        "El documento muestra cuándo empezó vuestra conversación, y que nunca se detuvo.",
+      stat3Title: "Ambos lados escribiendo",
+      stat3Text:
+        "Las estadísticas por persona muestran un diálogo real, no una calle de un solo sentido.",
+      stat4Title: "La vida cotidiana, documentada",
+      stat4Text:
+        "La transcripción completa muestra lo que ningún certificado puede: rutinas, planes y cuidado diario.",
+      casesEyebrow: "Casos de uso",
+      casesTitle: "Hecho para momentos que deciden tu futuro.",
+      casesText:
+        "Un historial de chat añade lo que los certificados y fotos no pueden mostrar: una relación vivida en la comunicación diaria.",
+      case1Title: "Visados de novios y cónyuges",
+      case1Text:
+        "Muestra comunicación continua antes y después de las visitas, un requisito clave en los visados de pareja.",
+      case2Title: "Reagrupación familiar",
+      case2Text:
+        "Demuestra que vuestra relación se vive a diario, más allá de fronteras y husos horarios.",
+      case3Title: "Residencia y nacionalidad",
+      case3Text:
+        "Muestra comunicación durante toda la duración de vuestro matrimonio en entrevistas y renovaciones.",
+      case4Title: "Más que un certificado",
+      case4Text:
+        "¿Ya casados? Muestra las conversaciones diarias detrás del papeleo, ante autoridades o en el juzgado.",
+      caseLinkText: "Chats como prueba en juicio",
+      privacyEyebrow: "Privacidad",
+      privacyTitle: "Tus mensajes no son asunto de nadie. Ni siquiera nuestro.",
+      privacyText:
+        "WhatsAnalyze funciona íntegramente en tu navegador: sin subida, sin cuenta, sin servidor. Tú decides qué entra en el PDF y quién lo ve. El código es de código abierto.",
+      stepsTitle: "Tres pasos hasta tu prueba.",
+      step1Title: "Exporta tu chat",
+      step1Text:
+        "En WhatsApp, abre el chat y elige «Exportar chat». «Sin multimedia» está bien.",
+      step2Title: "Suelta el archivo",
+      step2Text:
+        "Arrastra la exportación .txt o .zip a whatsanalyze.com. Se queda en tu dispositivo.",
+      step3Title: "Descarga el PDF",
+      step3Text:
+        "Vista previa gratuita del documento y descarga del chat completo en PDF.",
+      stepsGuideLink: "Guía de exportación paso a paso",
+      faqTitle: "Preguntas, respondidas.",
+      faq1Q: "¿Basta una exportación de chat para una solicitud de visado?",
+      faq1A:
+        "Ningún documento por sí solo. Las autoridades quieren un paquete: certificados, fotos, registros de viajes y prueba de comunicación continua. Un PDF de chat limpio es una de las formas más fuertes de mostrar lo último.",
+      faq2Q: "¿Qué buscan realmente los oficiales?",
+      faq2A:
+        "Constancia y autenticidad: mensajes regulares durante todo el periodo que declaras, conversaciones cotidianas naturales y comunicación alrededor de visitas e hitos.",
+      faq3Q: "Nuestro chat no está en la lengua oficial. ¿Necesitamos traducción?",
+      faq3A:
+        "Muchas autoridades exigen traducciones certificadas de pasajes seleccionados. Un PDF cronológico le da a tu traductor, y al oficial, una fuente limpia y citable.",
+      faq4Q: "¿Se sube nuestro chat a algún sitio?",
+      faq4A:
+        "No. Todo funciona localmente en tu navegador: tus mensajes nunca salen de tu dispositivo. El proyecto es de código abierto.",
+      ctaTitle: "Demuestra que es real.",
+      ctaButton: "Analiza tu chat ahora",
+      ctaNote: "Vista previa gratis · 100 % privado",
+      disclaimer:
+        "WhatsAnalyze no es un asesor de inmigración ni un despacho de abogados. Los requisitos varían según el país y el caso: confírmalos siempre con tu abogado o la autoridad correspondiente.",
+    },
     wrapped: {
       heroTitle: "WhatsApp Wrapped {currentYear}",
       heroSubtitle:
@@ -815,6 +1344,8 @@ export const messages = {
       "      <b>GitHub</b>",
     pageNameSignal: "Cómo cambiar a Signal desde WhatsApp",
     pageNameExport: "Cómo exportar tu chat de WhatsApp",
+    pageNameCourt: "Chats de WhatsApp como prueba en juicio",
+    pageNameRelationship: "Demuestra tu relación con chats",
     addToHomescreen: "añadir a la pantalla principal",
     people: "Personas",
     changeView: "Cambiar punto de vista",

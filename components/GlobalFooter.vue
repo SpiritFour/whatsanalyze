@@ -58,6 +58,14 @@ export default {
         //   text: "Create a PDF from your WhatsApp chat",
         // },
         {
+          name: "court-evidence",
+          text: "pageNameCourt",
+        },
+        {
+          name: "proof-of-relationship",
+          text: "pageNameRelationship",
+        },
+        {
           name: "switch-from-whatsapp-to-signal",
           text: "pageNameSignal",
         },
