@@ -12,7 +12,7 @@ product. Each page targets a specific search intent, converts to the analyzer
 | `/tools/court-evidence` | Legal evidence: harassment, divorce/custody, work disputes | CSS transcript mockup (`LandingDocMock`) |
 | `/tools/proof-of-relationship` | Visa/immigration: proving a genuine relationship | CSS stats mockup (`LandingStatsMock`) |
 
-All tools pages are indexable, carry per-locale SEO meta and JSON-LD, and are cross-linked via the `/tools` hub and breadcrumbs. Root URLs `/court-evidence` and `/proof-of-relationship` redirect via 301.
+All tools pages are indexable, carry per-locale SEO meta and JSON-LD, and are cross-linked via the `/tools` hub and breadcrumbs.
 
 ## Shared components (`components/landing/`)
 

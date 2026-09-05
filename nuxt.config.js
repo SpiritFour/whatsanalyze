@@ -41,14 +41,6 @@ export default defineNuxtConfig({
     output: {
       publicDir: resolve("./dist"),
     },
-    routeRules: {
-      "/court-evidence": {
-        redirect: { to: "/tools/court-evidence", statusCode: 301 },
-      },
-      "/proof-of-relationship": {
-        redirect: { to: "/tools/proof-of-relationship", statusCode: 301 },
-      },
-    },
     watch: [
       "components/**",
       "composables/**",

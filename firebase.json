@@ -1,29 +1,7 @@
 {
   "hosting": {
     "public": "dist",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-    "redirects": [
-      {
-        "source": "/court-evidence",
-        "destination": "/tools/court-evidence",
-        "type": 301
-      },
-      {
-        "source": "/proof-of-relationship",
-        "destination": "/tools/proof-of-relationship",
-        "type": 301
-      },
-      {
-        "source": "/:locale(de|es|fr|pt|it)/court-evidence",
-        "destination": "/:locale/tools/court-evidence",
-        "type": 301
-      },
-      {
-        "source": "/:locale(de|es|fr|pt|it)/proof-of-relationship",
-        "destination": "/:locale/tools/proof-of-relationship",
-        "type": 301
-      }
-    ]
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
   },
   "functions": [
     {
