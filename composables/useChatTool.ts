@@ -1,10 +1,5 @@
 import { parseString } from "whatsapp-chat-parser";
 import JSZip from "jszip";
-import {
-  formatTimeAgo as formatTimeAgoUtil,
-  formatDuration as formatDurationUtil,
-  analyzeInactivity as analyzeInactivityUtil,
-} from "~/utils/inactivity";
 export interface ChatMessage {
   date: Date;
   author: string;
@@ -80,24 +75,6 @@ export interface SharedChatState {
 export const useSharedChat = () => {
   return useState<SharedChatState | null>("shared_chat_data", () => null);
 };
-
-export function formatTimeAgo(date: Date, referenceDate = new Date()): string {
-  return formatTimeAgoUtil(date, referenceDate);
-}
-
-export function formatDuration(ms: number): string {
-  return formatDurationUtil(ms);
-}
-
-export function analyzeInactivity(
-  messages: ChatMessage[],
-  parseDurationMs = 0
-): ChatInactivityAnalysis | null {
-  return analyzeInactivityUtil(
-    messages,
-    parseDurationMs
-  ) as ChatInactivityAnalysis | null;
-}
 
 // Extractor helper to parse a File (.txt or .zip) or string
 export async function parseChatFile(

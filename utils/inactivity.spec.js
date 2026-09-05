@@ -1,3 +1,4 @@
+/* eslint-env jest */
 import { analyzeInactivity, formatDuration, formatTimeAgo } from "./inactivity";
 
 describe("useChatTool inactivity analysis", () => {

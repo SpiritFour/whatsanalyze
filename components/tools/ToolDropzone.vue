@@ -104,12 +104,12 @@
 import { ref } from "vue";
 import {
   parseChatFile,
-  analyzeInactivity,
   useSharedChat,
   type ChatMessage,
   type ChatAttachment,
   type ChatInactivityAnalysis,
 } from "~/composables/useChatTool";
+import { analyzeInactivity } from "~/utils/inactivity";
 
 const emit = defineEmits<{
   (e: "analyzed", payload: {
