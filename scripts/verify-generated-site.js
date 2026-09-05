@@ -17,6 +17,8 @@ const expectedFiles = [
   "tools/proof-of-relationship/index.html",
   "whatsapp-to-pdf/index.html",
   "whatsapp-wrapped-year-review/index.html",
+  "wrapped/index.html",
+  "wrapped/results/index.html",
 ];
 
 for (const relativePath of expectedFiles) {

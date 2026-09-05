@@ -91,7 +91,7 @@ export default {
   },
   methods: {
     goToHome() {
-      window.location.href = `https://wrapped.whatsanalyze.com/${this.$i18n.locale}`;
+      this.$router.push(this.localePath("/wrapped"));
     },
   },
 };
