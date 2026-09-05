@@ -76,6 +76,12 @@ export const useSharedChat = () => {
   return useState<SharedChatState | null>("shared_chat_data", () => null);
 };
 
+export {
+  analyzeInactivity,
+  formatDuration,
+  formatTimeAgo,
+} from "~/utils/inactivity";
+
 // Extractor helper to parse a File (.txt or .zip) or string
 export async function parseChatFile(
   fileOrText: File | string

@@ -1,52 +1,26 @@
 <template>
-  <div class="inactivity-tool-page">
-    <!-- Breadcrumb Bar -->
-    <nav class="breadcrumb-nav">
-      <NuxtLink :to="$localePath('/')" class="breadcrumb-link"
-        >WhatsAnalyze</NuxtLink
-      >
-      <span class="breadcrumb-separator">/</span>
-      <NuxtLink :to="$localePath('/tools')" class="breadcrumb-link"
-        >Tools</NuxtLink
-      >
-      <span class="breadcrumb-separator">/</span>
-      <span class="breadcrumb-current">Inactivity & Last Message Tracker</span>
-    </nav>
-
-    <!-- Hero Header -->
-    <header class="tool-hero">
-      <div class="tool-category-badge mono-label">
-        <span class="badge-dot"></span>
-        FREE WHATSAPP TOOL
+  <div class="landing-page">
+    <!-- Hero with ToolDropzone Visual Slot -->
+    <LandingHero
+      eyebrow="Free WhatsApp Tool"
+      title="Who Texted Last? Inactivity & Gap Tracker"
+      subtitle="Discover who sent the last message, calculate elapsed silence duration, measure reply latencies, and pinpoint historical conversation gaps."
+      note="100% client-side · Zero server upload · Free & open source"
+    >
+      <div id="dropzone-slot">
+        <ToolDropzone @analyzed="onChatAnalyzed" @reset="onReset" />
       </div>
+    </LandingHero>
 
-      <h1 class="tool-title">
-        Who Texted Last? <br />
-        <span class="gradient-text">WhatsApp Inactivity & Gap Tracker</span>
-      </h1>
-
-      <p class="tool-intro">
-        Discover who sent the last message, calculate elapsed silence duration,
-        measure reply latencies, and pinpoint the longest conversation gaps.
-        Client-side, instant, and 100% private.
-      </p>
-    </header>
-
-    <!-- BLUF / LLM Definition Card -->
-    <ToolBluf
-      title="How This Inactivity Check Works"
-      summary="Check who holds the last word, calculate how long your conversation has been silent, and see reply times for each person. All processed 100% locally in your browser."
-      :facts="blufFacts"
-    />
-
-    <!-- Interactive Dropzone -->
-    <section class="dropzone-section">
-      <ToolDropzone @analyzed="onChatAnalyzed" @reset="onReset" />
-    </section>
-
-    <!-- Results Dashboard (Visible when chat is parsed) -->
-    <section v-if="analysis" class="analysis-results-section">
-      <!-- Hero Metric Banner -->
+    <!-- Results Section (Visible when chat is parsed) -->
+    <LandingSection
+      v-if="analysis"
+      theme="light"
+      eyebrow="Live Chat Insights"
+      title="Conversation Inactivity Report"
+      text="Computed directly from your timestamps in your browser's local memory."
+    >
+      <!-- Hero Metric Card -->
       <div
         class="hero-metric-card"
         :style="{ '--status-color': analysis.inactivityColor }"
@@ -68,18 +42,18 @@
         </div>
 
         <div class="last-message-quote">
-          <v-icon size="18" color="#718096" class="quote-icon"
-            >mdi-format-quote-open</v-icon
-          >
+          <v-icon size="18" color="#718096" class="quote-icon">
+            mdi-format-quote-open
+          </v-icon>
           <p class="quote-text">{{ analysis.lastMessage.message }}</p>
         </div>
       </div>
 
-      <!-- Key Metrics Row -->
+      <!-- Key Metrics 4-Card Grid -->
       <div class="metrics-grid">
         <div class="metric-card">
           <div class="metric-icon">
-            <v-icon color="#60d8bd">mdi-timer-sand</v-icon>
+            <v-icon color="#21a68d">mdi-timer-sand</v-icon>
           </div>
           <div class="metric-meta">
             <span class="metric-label mono-label">LONGEST SILENCE GAP</span>
@@ -110,9 +84,7 @@
           <div class="metric-meta">
             <span class="metric-label mono-label">FASTEST REPLY TIME</span>
             <span class="metric-value">{{ fastestResponderTime }}</span>
-            <span class="metric-caption">
-              {{ fastestResponderName }}
-            </span>
+            <span class="metric-caption">{{ fastestResponderName }}</span>
           </div>
         </div>
 
@@ -122,9 +94,9 @@
           </div>
           <div class="metric-meta">
             <span class="metric-label mono-label">TOTAL MESSAGES</span>
-            <span class="metric-value">{{
-              analysis.totalMessages.toLocaleString()
-            }}</span>
+            <span class="metric-value">
+              {{ analysis.totalMessages.toLocaleString() }}
+            </span>
             <span class="metric-caption">
               Over {{ analysis.dateRange.totalDays }} days
             </span>
@@ -132,15 +104,15 @@
         </div>
       </div>
 
-      <!-- Participant Inactivity Table -->
+      <!-- Participant Activity & Latency Breakdown Table -->
       <div class="participants-section">
         <div class="section-header">
           <h3 class="section-title">
             Participant Activity & Latency Breakdown
           </h3>
-          <span class="mono-label section-tag"
-            >{{ analysis.participants.length }} PARTICIPANTS</span
-          >
+          <span class="mono-label section-tag">
+            {{ analysis.participants.length }} PARTICIPANTS
+          </span>
         </div>
 
         <div class="table-container">
@@ -211,143 +183,77 @@
           </div>
         </div>
       </div>
-    </section>
+    </LandingSection>
 
-    <!-- The Magnetic Full Analysis Hook -->
-    <ToolHook />
-
-    <!-- Educational & How-to Guide for SEO / LLM Ranking -->
-    <article class="guide-article">
-      <div class="guide-header">
-        <span class="guide-badge mono-label">EXPLAINER & TUTORIAL</span>
-        <h2 class="guide-title">
-          How to Check WhatsApp Inactivity and Ghosting
-        </h2>
-      </div>
-
-      <div class="guide-content">
-        <h3>1. How WhatsApp Inactivity is Computed</h3>
-        <p>
-          Unlike WhatsApp itself, which only displays individual read receipts
-          or "Last Seen" timestamps for active connections, exported chat logs
-          preserve exact millisecond-precision histories. By parsing message
-          timestamps chronologically:
-        </p>
-        <ul>
-          <li>
-            <strong>Current Inactivity:</strong> Measured as the elapsed delta
-            between the final message timestamp and the current system clock.
-          </li>
-          <li>
-            <strong>Conversation Breaks:</strong> Any silence gap exceeding 6
-            hours without communication marks the end of an active exchange and
-            the start of an inactive phase.
-          </li>
-          <li>
-            <strong>Turn-Taking Response Latency:</strong> Calculated
-            specifically when one participant sends a message immediately
-            following an interlocutor's statement.
-          </li>
-        </ul>
-
-        <h3>2. How to Export Your WhatsApp Chat</h3>
-        <div class="platform-steps-grid">
-          <div class="step-card">
-            <h4>📱 iPhone (iOS)</h4>
-            <ol>
-              <li>Open WhatsApp and select the target chat.</li>
-              <li>Tap the contact or group name at the very top.</li>
-              <li>
-                Scroll to the bottom and select <strong>Export Chat</strong>.
-              </li>
-              <li>
-                Choose <strong>Without Media</strong> for instant processing.
-              </li>
-              <li>Save to "Files" or AirDrop to your computer.</li>
-            </ol>
-          </div>
-
-          <div class="step-card">
-            <h4>🤖 Android</h4>
-            <ol>
-              <li>Open the WhatsApp conversation.</li>
-              <li>Tap the three vertical dots (⋮) in the top right corner.</li>
-              <li>
-                Select <strong>More</strong> → <strong>Export chat</strong>.
-              </li>
-              <li>Select <strong>Without Media</strong>.</li>
-              <li>Share or save the generated <code>.txt</code> file.</li>
-            </ol>
-          </div>
-        </div>
-
-        <h3>3. Zero-Knowledge Privacy Guarantee</h3>
-        <p>
-          WhatsApp chats contain intimate personal exchanges. WhatsAnalyze
-          operates under a strict
-          <strong>Zero-Knowledge client architecture</strong>. The entire parser
-          runs exclusively inside your browser's JavaScript V8/WebAssembly
-          sandbox. No text, timestamps, names, or metadata are ever transmitted
-          to any remote server or third-party tracking endpoint.
+    <!-- Conversion Hook (Dark Landing Section) -->
+    <LandingSection
+      theme="dark"
+      eyebrow="Beyond Basic Inactivity"
+      title="You're Seeing Only 1% of Your Chat Data"
+      text="WhatsAnalyze transforms your entire conversation into interactive charts, response metrics, and an annual Wrapped story. 100% private in your browser."
+    >
+      <LandingCards :items="fullAnalysisFeatures" />
+      <div class="hook-actions">
+        <LandingButton :to="localePath('/')" @click="openFullAnalysis">
+          Explore Complete WhatsApp Analysis →
+        </LandingButton>
+        <p class="hook-note">
+          Instant transition · No re-upload required · Free
         </p>
       </div>
-    </article>
-    <!-- Technical FAQ Component -->
-    <ToolFaq :items="faqItems" />
+    </LandingSection>
 
-    <!-- Bottom Conversion CTA Section -->
-    <section class="bottom-cta-section">
-      <div class="bottom-cta-card">
-        <div class="bottom-cta-badge mono-label">
-          <span class="badge-dot"></span>
-          GET INSTANT INSIGHTS
-        </div>
-        <h2 class="bottom-cta-title">Ready to Check Your Chat's Inactivity?</h2>
-        <p class="bottom-cta-subtitle">
-          Drop your exported WhatsApp file above or jump straight into the full
-          analyzer. 100% private in your browser.
-        </p>
+    <!-- Methodology & Precision Section -->
+    <LandingSection
+      theme="white"
+      eyebrow="Methodology & Precision"
+      title="How Inactivity & Turn-Taking Are Measured"
+      text="Unlike WhatsApp's basic online status, exported chat logs provide millisecond-accurate conversation history."
+    >
+      <LandingCards :items="methodologyCards" />
+    </LandingSection>
 
-        <div class="bottom-cta-actions">
-          <button
-            type="button"
-            class="btn-cta-primary"
-            @click="scrollToDropzone"
-          >
-            <v-icon size="18" class="mr-2">mdi-tray-arrow-up</v-icon>
-            <span>Analyze Your Chat Now</span>
-          </button>
-          <NuxtLink :to="$localePath('/')" class="btn-cta-secondary">
-            <v-icon size="18" class="mr-2"
-              >mdi-chart-timeline-variant-shimmer</v-icon
-            >
-            <span>Full WhatsApp Analyzer</span>
-          </NuxtLink>
-        </div>
+    <!-- Step-by-Step Export Guide -->
+    <LandingSection
+      theme="light"
+      eyebrow="Step-by-Step Guide"
+      title="How to Export Your WhatsApp Chat"
+    >
+      <LandingSteps :steps="exportSteps" />
+      <p class="landing-page__guide-link">
+        <NuxtLink :to="localePath('how-to-export-your-whatsapp-chat')">
+          Detailed WhatsApp Export Guide →
+        </NuxtLink>
+      </p>
+    </LandingSection>
 
-        <div class="bottom-cta-trust mono-label">
-          <span>Zero Server Upload</span>
-          <span class="dot">•</span>
-          <span>No Account Required</span>
-          <span class="dot">•</span>
-          <span>End-to-End Encrypted Memory</span>
-        </div>
-      </div>
-    </section>
+    <!-- Frequently Asked Questions -->
+    <LandingSection theme="white" title="Frequently Asked Questions">
+      <LandingFaq :items="faqItems" />
+    </LandingSection>
+
+    <!-- Final Bottom CTA -->
+    <LandingCta
+      title="Ready to Check Your Chat's Inactivity?"
+      cta-text="Check Your Chat Now"
+      cta-to="#"
+      note="100% Private · Zero Server Upload · No Registration Required"
+      disclaimer="WhatsAnalyze is an independent open-source project and is not affiliated with, endorsed by, or sponsored by WhatsApp or Meta."
+      @click="scrollToDropzone"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import ToolDropzone from "~/components/tools/ToolDropzone.vue";
-import ToolHook from "~/components/tools/ToolHook.vue";
-import ToolBluf, { type BlufFact } from "~/components/tools/ToolBluf.vue";
-import ToolFaq, { type FaqItem } from "~/components/tools/ToolFaq.vue";
 import {
   type ChatInactivityAnalysis,
   type ChatMessage,
   type ChatAttachment,
 } from "~/composables/useChatTool";
+
+const localePath = useLocalePath();
 
 // SEO Metadata & Generative Engine Optimization
 useSeoMeta({
@@ -361,85 +267,61 @@ useSeoMeta({
   ogUrl: "https://www.whatsanalyze.com/tools/inactivity",
 });
 
-// JSON-LD Structured Data for AI search & rich snippets
-useHead({
+const faqItems = [
+  {
+    q: "Can I see who sent the last message in a group chat?",
+    a: "Yes. The inactivity tool lists every participant alongside their specific last message timestamp, making it easy to see who went silent first and who holds the last word.",
+  },
+  {
+    q: "Is my chat data uploaded or saved anywhere?",
+    a: "No. All parsing and metric calculations execute purely in your browser's local memory. No chat text or metadata ever leaves your device.",
+  },
+  {
+    q: "What defines a 'Silence Gap' or conversation break?",
+    a: "A silence gap occurs when more than 6 hours pass between two consecutive messages. The longest gaps represent historical periods of dormancy.",
+  },
+  {
+    q: "Does this work with both Android and iOS exports?",
+    a: "Yes. The parser supports all WhatsApp date and timestamp conventions across iOS, Android, and WhatsApp Web exports.",
+  },
+];
+
+// JSON-LD Structured Data
+useHead(() => ({
   script: [
     {
       type: "application/ld+json",
-      children: JSON.stringify({
+      innerHTML: JSON.stringify({
         "@context": "https://schema.org",
         "@graph": [
           {
             "@type": "SoftwareApplication",
-            "name": "WhatsAnalyze WhatsApp Inactivity Tracker",
-            "operatingSystem": "All (Web-based)",
-            "applicationCategory": "UtilitiesApplication",
-            "offers": {
+            name: "WhatsAnalyze WhatsApp Inactivity Tracker",
+            operatingSystem: "All (Web-based)",
+            applicationCategory: "UtilitiesApplication",
+            offers: {
               "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "USD",
+              price: "0",
+              priceCurrency: "USD",
             },
-            "description":
+            description:
               "Client-side tool to analyze WhatsApp chat inactivity, last message senders, and response latencies.",
           },
           {
-            "@type": "HowTo",
-            "name": "How to check who texted last in a WhatsApp chat",
-            "step": [
-              {
-                "@type": "HowToStep",
-                "name": "Export WhatsApp Chat",
-                "text": "Export your WhatsApp chat without media as a .txt or .zip file.",
-              },
-              {
-                "@type": "HowToStep",
-                "name": "Drop File in WhatsAnalyze Inactivity Tool",
-                "text": "Drop the exported chat file into the tool dropzone.",
-              },
-              {
-                "@type": "HowToStep",
-                "name": "View Inactivity Metrics",
-                "text": "Inspect the last message sender, elapsed silence time, and conversation gaps instantly.",
-              },
-            ],
+            "@type": "FAQPage",
+            mainEntity: faqItems.map((item) => ({
+              "@type": "Question",
+              name: item.q,
+              acceptedAnswer: { "@type": "Answer", text: item.a },
+            })),
           },
         ],
       }),
     },
   ],
-});
+}));
 
 const analysis = ref<ChatInactivityAnalysis | null>(null);
-
-const blufFacts: BlufFact[] = [
-  { label: "Supported Formats", value: "WhatsApp .txt and .zip exports" },
-  { label: "Security Spec", value: "100% Client-Side (Zero Server Upload)" },
-  { label: "Core Metrics", value: "Last sender, silence gap, reply latencies" },
-  { label: "Pricing", value: "Completely Free / Open Source" },
-];
-
-const faqItems: FaqItem[] = [
-  {
-    question: "Can I see who sent the last message in a group chat?",
-    answer:
-      "Yes. The inactivity tool lists every participant alongside their specific last message timestamp, making it easy to see who went silent first and who holds the last word.",
-  },
-  {
-    question: "Is my chat data uploaded or saved anywhere?",
-    answer:
-      "No. All parsing and metric calculations execute purely in your browser's local memory. No chat text or metadata ever leaves your device.",
-  },
-  {
-    question: "What defines a 'Silence Gap' or conversation break?",
-    answer:
-      "A silence gap occurs when more than 6 hours pass between two consecutive messages. The longest gaps represent historical periods of dormancy.",
-  },
-  {
-    question: "Does this work with both Android and iOS exports?",
-    answer:
-      "Yes. The parser supports all WhatsApp date and timestamp conventions across iOS, Android, and WhatsApp Web exports.",
-  },
-];
 
 function onChatAnalyzed(payload: {
   analysis: ChatInactivityAnalysis;
@@ -472,26 +354,46 @@ const topGapBrokenBy = computed(() => {
 });
 
 const topInitiatorName = computed(() => {
-  if (!analysis.value || analysis.value.conversationInitiations.breakdown.length === 0) return "N/A";
-  const sorted = [...analysis.value.conversationInitiations.breakdown].sort((a, b) => b.count - a.count);
+  if (
+    !analysis.value ||
+    analysis.value.conversationInitiations.breakdown.length === 0
+  )
+    return "N/A";
+  const sorted = [
+    ...analysis.value.conversationInitiations.breakdown,
+  ].sort((a, b) => b.count - a.count);
   return sorted[0]?.author || "N/A";
 });
 
 const topInitiatorPct = computed(() => {
-  if (!analysis.value || analysis.value.conversationInitiations.breakdown.length === 0) return 0;
-  const sorted = [...analysis.value.conversationInitiations.breakdown].sort((a, b) => b.count - a.count);
+  if (
+    !analysis.value ||
+    analysis.value.conversationInitiations.breakdown.length === 0
+  )
+    return 0;
+  const sorted = [
+    ...analysis.value.conversationInitiations.breakdown,
+  ].sort((a, b) => b.count - a.count);
   return sorted[0]?.percentage || 0;
 });
 
 const fastestResponder = computed(() => {
   if (!analysis.value) return null;
-  const candidates = analysis.value.participants.filter((p) => p.avgResponseTimeMs > 0);
+  const candidates = analysis.value.participants.filter(
+    (p) => p.avgResponseTimeMs > 0
+  );
   if (candidates.length === 0) return null;
-  return candidates.sort((a, b) => a.avgResponseTimeMs - b.avgResponseTimeMs)[0];
+  return candidates.sort(
+    (a, b) => a.avgResponseTimeMs - b.avgResponseTimeMs
+  )[0];
 });
 
-const fastestResponderName = computed(() => fastestResponder.value?.name || "N/A");
-const fastestResponderTime = computed(() => fastestResponder.value?.avgResponseTimeFormatted || "N/A");
+const fastestResponderName = computed(
+  () => fastestResponder.value?.name || "N/A"
+);
+const fastestResponderTime = computed(
+  () => fastestResponder.value?.avgResponseTimeFormatted || "N/A"
+);
 
 function truncate(str: string, len: number): string {
   if (!str) return "";
@@ -507,153 +409,94 @@ function formatDate(d: Date): string {
 }
 
 function scrollToDropzone() {
-  const el = document.querySelector(".dropzone-section");
+  const el = document.getElementById("dropzone-slot");
   if (el) {
     el.scrollIntoView({ behavior: "smooth" });
   }
 }
+
+function openFullAnalysis() {
+  // Shared chat is already loaded in useSharedChat
+}
+
+const fullAnalysisFeatures = [
+  {
+    icon: "mdi-chart-bell-curve-cumulative",
+    title: "24h Activity Distribution",
+    text: "Find out when you talk the most — from morning coffee chats to late night conversations.",
+  },
+  {
+    icon: "mdi-emoticon-outline",
+    title: "Emoji & Word Clouds",
+    text: "Discover which emojis and catchphrases define your conversation dynamic.",
+  },
+  {
+    icon: "mdi-lightning-bolt-outline",
+    title: "First Responder Dynamics",
+    text: "Detailed breakdown of who starts topics, double texts, and answers the fastest.",
+  },
+  {
+    icon: "mdi-party-popper",
+    title: "WhatsApp Wrapped Story",
+    text: "Turn your chat into an Instagram-story style retrospective to share with friends.",
+  },
+];
+
+const methodologyCards = [
+  {
+    icon: "mdi-clock-check-outline",
+    title: "Millisecond-Accurate Silence",
+    text: "Elapsed time is calculated from the final message timestamp down to the minute, differentiating active exchanges from historical dormancies.",
+  },
+  {
+    icon: "mdi-chat-processing-outline",
+    title: "Turn-Taking Response Latency",
+    text: "Average reply speed is measured specifically when participants respond to each other, filtering out natural day-long pauses.",
+  },
+  {
+    icon: "mdi-timer-sand-complete",
+    title: "6-Hour Conversation Gaps",
+    text: "Silences exceeding 6 hours are classified as conversation breaks to determine who consistently revives and initiates chats.",
+  },
+];
+
+const exportSteps = [
+  {
+    title: "Open Chat in WhatsApp",
+    text: "Open any 1-on-1 or group chat on iOS or Android and tap the contact or group name at the top.",
+  },
+  {
+    title: "Export Chat Without Media",
+    text: "Scroll to the bottom, select 'Export Chat', and choose 'Without Media' for instant processing.",
+  },
+  {
+    title: "Drop File in the Tracker",
+    text: "Drop the generated .txt or .zip file into the dropzone above to view inactivity metrics immediately.",
+  },
+];
 </script>
 
 <style scoped lang="scss">
-.inactivity-tool-page {
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 40px 20px 100px;
-  color: #0f172a;
-  overflow-x: hidden;
-  width: 100%;
-}
-.breadcrumb-nav {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.84rem;
-  margin-bottom: 32px;
-}
-
-.breadcrumb-link {
-  color: #64748b;
-  text-decoration: none;
-  transition: color 0.2s;
-
-  &:hover {
-    color: #0f766e;
-  }
-}
-
-.breadcrumb-separator {
-  color: #4a5568;
-}
-
-.breadcrumb-current {
-  color: #0f172a;
-  font-weight: 600;
-}
-
-.tool-hero {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.tool-category-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #f0fdf4;
-  border: 1px solid #bbf7d0;
-  padding: 4px 14px;
-  border-radius: 100px;
-  font-size: 0.74rem;
-  letter-spacing: 0.08em;
-  color: #0f766e;
-  font-weight: 700;
-  margin-bottom: 18px;
-}
-
-.badge-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #00e676;
-}
-
-.tool-title {
-  font-size: 2.75rem;
-  font-weight: 800;
-  line-height: 1.18;
-  letter-spacing: -0.035em;
-  color: #0f172a;
-  margin-bottom: 16px;
-
-  @media (max-width: 768px) {
-    font-size: 2rem;
-  }
-}
-
-.gradient-text {
-  background: linear-gradient(135deg, #0f172a 30%, #059669 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.tool-intro {
-  font-size: 1.15rem;
-  color: #475569;
-  max-width: 680px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-
-.mono-label {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-}
-
-.dropzone-section {
-  margin-bottom: 48px;
-}
-
-.analysis-results-section {
-  animation: fadeIn 0.4s ease-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .hero-metric-card {
   background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 24px;
-  padding: 36px;
-  margin-bottom: 24px;
-  position: relative;
-  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.06);
+  border-radius: 20px;
+  padding: clamp(1.8rem, 4vw, 2.5rem);
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 22px rgba(0, 0, 0, 0.06);
+  text-align: left;
   min-width: 0;
   max-width: 100%;
   overflow: hidden;
-
-  @media (max-width: 600px) {
-    padding: 24px 16px;
-    border-radius: 18px;
-  }
 }
 
 .status-pill {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: #f5f5f7;
   padding: 4px 12px;
   border-radius: 100px;
-  margin-bottom: 20px;
+  margin-bottom: 1.2rem;
 }
 
 .status-indicator {
@@ -666,41 +509,38 @@ function scrollToDropzone() {
 
 .status-text {
   font-size: 0.82rem;
-  font-weight: 600;
-  color: #0f172a;
+  font-weight: 700;
+  color: #1d1d1f;
 }
 
 .hero-headline {
-  margin-bottom: 20px;
+  margin-bottom: 1.4rem;
 }
 
 .hero-sublabel {
   display: block;
   font-family: ui-monospace, monospace;
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  color: #64748b;
-  margin-bottom: 6px;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  color: rgba(29, 29, 31, 0.55);
+  margin-bottom: 0.35rem;
 }
 
 .hero-author {
-  font-size: 2.4rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  color: #0f172a;
-  margin-bottom: 6px;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #1d1d1f;
+  margin-bottom: 0.35rem;
   overflow-wrap: anywhere;
   word-break: break-word;
-
-  @media (max-width: 600px) {
-    font-size: 1.75rem;
-  }
 }
 
 .hero-time {
   display: flex;
   align-items: baseline;
   gap: 8px;
+  flex-wrap: wrap;
 }
 
 .time-relative {
@@ -711,24 +551,20 @@ function scrollToDropzone() {
 
 .time-exact {
   font-size: 0.85rem;
-  color: #64748b;
+  color: rgba(29, 29, 31, 0.55);
 }
 
 .last-message-quote {
-  background: #f8fafc;
+  background: #f5f5f7;
   border-left: 3px solid #21a68d;
   border-radius: 0 12px 12px 0;
-  padding: 14px 20px;
+  padding: 14px 18px;
   display: flex;
   align-items: flex-start;
   gap: 10px;
   min-width: 0;
   max-width: 100%;
   overflow: hidden;
-
-  @media (max-width: 600px) {
-    padding: 12px 14px;
-  }
 }
 
 .quote-icon {
@@ -737,8 +573,8 @@ function scrollToDropzone() {
 }
 
 .quote-text {
-  font-size: 0.98rem;
-  color: #334155;
+  font-size: 0.95rem;
+  color: #1d1d1f;
   font-style: italic;
   margin: 0;
   line-height: 1.5;
@@ -748,37 +584,30 @@ function scrollToDropzone() {
   word-break: break-word;
   white-space: pre-wrap;
 }
+
 .metrics-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin-bottom: 32px;
-
-  @media (max-width: 900px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: 540px) {
-    grid-template-columns: 1fr;
-  }
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+  margin-bottom: 2.4rem;
 }
 
 .metric-card {
   background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 18px;
-  padding: 22px 20px;
+  border-radius: 20px;
+  padding: 1.6rem;
+  box-shadow: 0 4px 22px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.03);
+  gap: 10px;
+  text-align: left;
 }
 
 .metric-icon {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: 10px;
-  background: #f1f5f9;
+  background: #f5f5f7;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -790,59 +619,57 @@ function scrollToDropzone() {
 }
 
 .metric-label {
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   letter-spacing: 0.08em;
-  color: #64748b;
+  color: rgba(29, 29, 31, 0.55);
   margin-bottom: 4px;
 }
 
 .metric-value {
   font-size: 1.35rem;
   font-weight: 700;
-  color: #0f172a;
+  color: #1d1d1f;
   letter-spacing: -0.02em;
   margin-bottom: 2px;
 }
 
 .metric-caption {
-  font-size: 0.78rem;
-  color: #64748b;
+  font-size: 0.8rem;
+  color: rgba(29, 29, 31, 0.65);
 }
 
 .participants-section,
 .gaps-section {
   background: #ffffff;
-  border: 1px solid #e2e8f0;
   border-radius: 20px;
-  padding: 28px;
-  margin-bottom: 32px;
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
+  padding: clamp(1.6rem, 3.5vw, 2.2rem);
+  margin-bottom: 2.4rem;
+  box-shadow: 0 4px 22px rgba(0, 0, 0, 0.06);
+  text-align: left;
   min-width: 0;
   max-width: 100%;
   overflow: hidden;
-
-  @media (max-width: 600px) {
-    padding: 20px 16px;
-    border-radius: 16px;
-  }
 }
+
 .section-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .section-title {
   font-size: 1.2rem;
   font-weight: 700;
-  color: #0f172a;
+  color: #1d1d1f;
 }
 
 .section-tag {
   font-size: 0.72rem;
-  color: #64748b;
-  font-weight: 600;
+  color: rgba(29, 29, 31, 0.55);
+  font-weight: 700;
 }
 
 .table-container {
@@ -851,6 +678,7 @@ function scrollToDropzone() {
   max-width: 100%;
   -webkit-overflow-scrolling: touch;
 }
+
 .participants-table {
   width: 100%;
   border-collapse: collapse;
@@ -859,19 +687,19 @@ function scrollToDropzone() {
 
   th {
     padding: 12px 14px;
-    font-size: 0.72rem;
+    font-size: 0.74rem;
     font-family: ui-monospace, monospace;
-    color: #64748b;
-    background: #f8fafc;
+    color: rgba(29, 29, 31, 0.6);
+    background: #f5f5f7;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid rgba(29, 29, 31, 0.1);
   }
 
   td {
     padding: 14px;
-    border-bottom: 1px solid #f1f5f9;
-    color: #1e293b;
+    border-bottom: 1px solid rgba(29, 29, 31, 0.06);
+    color: #1d1d1f;
   }
 }
 
@@ -885,8 +713,8 @@ function scrollToDropzone() {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: rgba(33, 166, 141, 0.2);
-  color: #60d8bd;
+  background: rgba(33, 166, 141, 0.15);
+  color: #21a68d;
   font-weight: 700;
   display: inline-flex;
   align-items: center;
@@ -897,17 +725,18 @@ function scrollToDropzone() {
 .mono-cell {
   font-family: ui-monospace, monospace;
   font-size: 0.84rem;
-  color: #334155;
+  color: #1d1d1f;
 }
 
 .snippet-cell {
-  color: #64748b;
+  color: rgba(29, 29, 31, 0.6);
   font-style: italic;
   min-width: 120px;
   max-width: 240px;
   overflow-wrap: anywhere;
   word-break: break-word;
 }
+
 .gaps-list {
   display: flex;
   flex-direction: column;
@@ -918,8 +747,7 @@ function scrollToDropzone() {
   display: flex;
   align-items: center;
   gap: 18px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: #f5f5f7;
   border-radius: 14px;
   padding: 16px 20px;
   min-width: 0;
@@ -928,13 +756,13 @@ function scrollToDropzone() {
 
   @media (max-width: 600px) {
     gap: 12px;
-    padding: 14px 12px;
+    padding: 14px 14px;
   }
 }
 
 .gap-rank {
-  font-size: 0.85rem;
-  color: #64748b;
+  font-size: 0.88rem;
+  color: rgba(29, 29, 31, 0.45);
   font-weight: 700;
   flex-shrink: 0;
 }
@@ -950,28 +778,28 @@ function scrollToDropzone() {
 .gap-duration {
   font-size: 1.05rem;
   font-weight: 700;
-  color: #0f172a;
+  color: #1d1d1f;
 }
 
 .gap-interval {
-  font-size: 0.75rem;
-  color: #64748b;
+  font-size: 0.76rem;
+  color: rgba(29, 29, 31, 0.55);
 }
 
 .gap-broken {
-  font-size: 0.86rem;
-  color: #334155;
+  font-size: 0.88rem;
+  color: #1d1d1f;
   margin-top: 4px;
   min-width: 0;
   overflow-wrap: anywhere;
   word-break: break-word;
 
   strong {
-    color: #0f766e;
+    color: #21a68d;
   }
 
   .snippet {
-    color: #64748b;
+    color: rgba(29, 29, 31, 0.6);
     font-style: italic;
     overflow-wrap: anywhere;
     word-break: break-word;
@@ -979,220 +807,33 @@ function scrollToDropzone() {
   }
 }
 
-.guide-article {
-  margin-top: 60px;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 24px;
-  padding: 40px;
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
-
-  @media (max-width: 640px) {
-    padding: 24px;
-  }
-}
-
-.guide-badge {
-  color: #0f766e;
-  font-size: 0.74rem;
-  letter-spacing: 0.08em;
-  font-weight: 700;
-  margin-bottom: 8px;
-  display: block;
-}
-
-.guide-title {
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: #0f172a;
-  margin-bottom: 24px;
-}
-
-.guide-content {
-  color: #334155;
-  line-height: 1.7;
-
-  h3 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #0f172a;
-    margin: 28px 0 12px;
-  }
-
-  p {
-    margin-bottom: 16px;
-  }
-
-  ul {
-    margin-bottom: 20px;
-    padding-left: 20px;
-
-    li {
-      margin-bottom: 8px;
-    }
-  }
-}
-
-.platform-steps-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin: 20px 0;
-
-  @media (max-width: 640px) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.step-card {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 16px;
-  padding: 20px;
-
-  h4 {
-    color: #0f172a;
-    font-size: 1.05rem;
-    margin-bottom: 12px;
-  }
-
-  ol {
-    padding-left: 18px;
-    font-size: 0.9rem;
-    color: #475569;
-
-    li {
-      margin-bottom: 6px;
-    }
-  }
-}
-.bottom-cta-section {
-  width: 100%;
-  max-width: 820px;
-  margin: 60px auto 20px;
-}
-
-.bottom-cta-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 24px;
-  padding: 44px 32px;
+.hook-actions {
+  margin-top: 2.4rem;
   text-align: center;
-  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+}
 
-  @media (max-width: 600px) {
-    padding: 32px 18px;
-    border-radius: 18px;
+.hook-note {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: rgba(245, 245, 247, 0.55);
+}
+
+.landing-page__guide-link {
+  margin-top: 2rem;
+  text-align: center;
+
+  a {
+    color: $c-blue-accent-dark;
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
-.bottom-cta-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #f0fdf4;
-  border: 1px solid #bbf7d0;
-  padding: 4px 12px;
-  border-radius: 100px;
-  font-size: 0.74rem;
-  letter-spacing: 0.08em;
-  color: #0f766e;
-  font-weight: 700;
-  margin-bottom: 16px;
-}
-
-.bottom-cta-title {
-  color: #0f172a;
-  font-size: 1.85rem;
-  font-weight: 800;
-  letter-spacing: -0.025em;
-  margin-bottom: 10px;
-
-  @media (max-width: 600px) {
-    font-size: 1.45rem;
-  }
-}
-
-.bottom-cta-subtitle {
-  color: #475569;
-  font-size: 1rem;
-  line-height: 1.55;
-  max-width: 580px;
-  margin: 0 auto 28px;
-}
-
-.bottom-cta-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  margin-bottom: 24px;
-}
-
-.btn-cta-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: #21a68d;
-  color: #ffffff;
-  font-size: 1rem;
-  font-weight: 700;
-  padding: 13px 26px;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 6px 20px -3px rgba(33, 166, 141, 0.4);
-  transition: all 0.2s ease;
-
-  &:hover {
-    background: #2ab89c;
-    transform: translateY(-1px);
-    box-shadow: 0 10px 25px -3px rgba(33, 166, 141, 0.55);
-  }
-
-  @media (max-width: 600px) {
-    width: 100%;
-    font-size: 0.95rem;
-  }
-}
-
-.btn-cta-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: #0f172a;
-  color: #ffffff !important;
-  font-size: 1rem;
-  font-weight: 700;
-  padding: 13px 26px;
-  border-radius: 12px;
-  text-decoration: none !important;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background: #1e293b;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px -3px rgba(15, 23, 42, 0.25);
-  }
-
-  @media (max-width: 600px) {
-    width: 100%;
-    font-size: 0.95rem;
-  }
-}
-
-.bottom-cta-trust {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  color: #64748b;
-  font-size: 0.74rem;
-
-  .dot {
-    color: #cbd5e1;
-  }
+.mono-label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 </style>

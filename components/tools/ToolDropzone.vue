@@ -1,16 +1,16 @@
 <template>
   <div class="tool-dropzone-wrapper">
-    <!-- Technical Security Banner (Peak Design Style) -->
+    <!-- Technical Security Banner -->
     <div class="tech-spec-bar">
       <span class="pulse-dot"></span>
-      <span class="mono-label">LOCAL CLIENT-SIDE ENGINE</span>
+      <span class="mono-label">LOCAL CLIENT ENGINE</span>
       <span class="separator">•</span>
       <span class="mono-label">ZERO CLOUD TRANSMISSION</span>
       <span class="separator">•</span>
-      <span class="mono-label">END-TO-END PRIVATE</span>
+      <span class="mono-label">100% PRIVATE</span>
     </div>
 
-    <!-- Drop Container -->
+    <!-- Drop Container Card (Styled like LandingDocMock / LandingStatsMock) -->
     <div
       class="tool-dropzone"
       :class="{
@@ -69,7 +69,7 @@
       <!-- Parsed Success State / Change File Bar -->
       <div v-else class="loaded-file-bar">
         <div class="file-summary">
-          <v-icon color="#00e676" class="mr-2">mdi-check-decagram</v-icon>
+          <v-icon color="#21a68d" class="mr-2">mdi-check-decagram</v-icon>
           <div class="file-info">
             <span class="file-name">{{ loadedFileName }}</span>
             <span class="file-meta mono-label">
@@ -91,7 +91,7 @@
 
       <!-- Error message if parsing fails -->
       <div v-if="errorMessage" class="dropzone-error" @click.stop>
-        <v-icon color="#ff5252" size="18" class="mr-1"
+        <v-icon color="#dd2c00" size="18" class="mr-1"
           >mdi-alert-circle-outline</v-icon
         >
         <span>{{ errorMessage }}</span>
@@ -112,11 +112,14 @@ import {
 import { analyzeInactivity } from "~/utils/inactivity";
 
 const emit = defineEmits<{
-  (e: "analyzed", payload: {
-    analysis: ChatInactivityAnalysis;
-    messages: ChatMessage[];
-    attachments: ChatAttachment[];
-  }): void;
+  (
+    e: "analyzed",
+    payload: {
+      analysis: ChatInactivityAnalysis;
+      messages: ChatMessage[];
+      attachments: ChatAttachment[];
+    }
+  ): void;
   (e: "reset"): void;
 }>();
 
@@ -144,20 +147,29 @@ function onDragLeave() {
   isDragging.value = false;
 }
 
-async function processInput(fileOrText: File | string, fileName = "WhatsApp Chat") {
+async function processInput(
+  fileOrText: File | string,
+  fileName = "WhatsApp Chat"
+) {
   loading.value = true;
   errorMessage.value = null;
 
   try {
-    const { messages, attachments, durationMs } = await parseChatFile(fileOrText);
+    const { messages, attachments, durationMs } = await parseChatFile(
+      fileOrText
+    );
 
     if (!messages || messages.length === 0) {
-      throw new Error("No messages found. Please ensure this is a valid WhatsApp chat export (.txt or .zip).");
+      throw new Error(
+        "No messages found. Please ensure this is a valid WhatsApp chat export (.txt or .zip)."
+      );
     }
 
     const analysis = analyzeInactivity(messages, durationMs);
     if (!analysis) {
-      throw new Error("Could not compute inactivity metrics: Chat contains no participant messages.");
+      throw new Error(
+        "Could not compute inactivity metrics: Chat contains no participant messages."
+      );
     }
 
     hasLoadedFile.value = true;
@@ -178,7 +190,10 @@ async function processInput(fileOrText: File | string, fileName = "WhatsApp Chat
       attachments,
     });
   } catch (err) {
-    errorMessage.value = err instanceof Error ? err.message : "Failed to parse WhatsApp chat export.";
+    errorMessage.value =
+      err instanceof Error
+        ? err.message
+        : "Failed to parse WhatsApp chat export.";
   } finally {
     loading.value = false;
     isDragging.value = false;
@@ -194,7 +209,8 @@ async function onFileSelected(event: Event) {
 
 async function onDrop(event: DragEvent) {
   isDragging.value = false;
-  if (!event.dataTransfer?.files || event.dataTransfer.files.length === 0) return;
+  if (!event.dataTransfer?.files || event.dataTransfer.files.length === 0)
+    return;
   const file = event.dataTransfer.files[0];
   await processInput(file, file.name);
 }
@@ -210,7 +226,8 @@ async function loadSampleChat() {
     const text = await response.text();
     await processInput(text, "Sample WhatsApp Chat (Jane & John)");
   } catch (err) {
-    errorMessage.value = err instanceof Error ? err.message : "Failed to load sample chat.";
+    errorMessage.value =
+      err instanceof Error ? err.message : "Failed to load sample chat.";
     loading.value = false;
   }
 }
@@ -219,7 +236,7 @@ async function loadSampleChat() {
 <style scoped lang="scss">
 .tool-dropzone-wrapper {
   width: 100%;
-  max-width: 820px;
+  max-width: 640px;
   margin: 0 auto;
 }
 
@@ -229,11 +246,11 @@ async function loadSampleChat() {
   justify-content: center;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 12px;
+  margin-bottom: 1rem;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   letter-spacing: 0.08em;
-  color: #718096;
+  color: rgba(245, 245, 247, 0.65);
   text-transform: uppercase;
 }
 
@@ -241,8 +258,8 @@ async function loadSampleChat() {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: #00e676;
-  box-shadow: 0 0 8px #00e676;
+  background-color: #21a68d;
+  box-shadow: 0 0 8px #21a68d;
   animation: pulse-glow 2s infinite ease-in-out;
 }
 
@@ -259,21 +276,23 @@ async function loadSampleChat() {
 }
 
 .separator {
-  color: #4a5568;
+  color: rgba(245, 245, 247, 0.35);
 }
 
 .tool-dropzone {
   position: relative;
-  border: 2px dashed #cbd5e1;
+  background: #ffffff;
+  color: #1d1d1f;
+  border: 2px dashed rgba(29, 29, 31, 0.16);
   border-radius: 20px;
-  padding: 40px 24px;
+  padding: clamp(2rem, 5vw, 3rem) clamp(1.2rem, 3vw, 2rem);
   text-align: center;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
 
   &:hover {
     border-color: #21a68d;
-    background: #fcfdfd;
+    background: #ffffff;
   }
 
   &.is-dragging {
@@ -283,116 +302,118 @@ async function loadSampleChat() {
   }
 
   &.has-file {
-    padding: 16px 24px;
+    padding: 18px 24px;
     border-style: solid;
     border-color: #bbf7d0;
     background: #f0fdf4;
   }
+}
 
-  .hidden-file-input {
-    display: none;
+.hidden-file-input {
+  display: none;
+}
+
+.dropzone-content {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.icon-bubble {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(33, 166, 141, 0.12);
+  border: 1px solid rgba(33, 166, 141, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.dropzone-title {
+  color: #1d1d1f;
+  font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin-bottom: 0.5rem;
+}
+
+.dropzone-subtitle {
+  color: rgba(29, 29, 31, 0.68);
+  font-size: 0.95rem;
+  margin-bottom: 1.8rem;
+
+  code {
+    background: #f5f5f7;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-family: ui-monospace, SFMono-Regular, monospace;
+    font-size: 0.82rem;
+    color: #0f766e;
+    border: 1px solid rgba(29, 29, 31, 0.1);
   }
+}
 
-  .dropzone-content {
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #21a68d;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.8em 1.8em;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(33, 166, 141, 0.35);
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #2ab89c;
+    transform: translateY(-1px);
+    box-shadow: 0 12px 28px rgba(33, 166, 141, 0.45);
   }
+}
 
-  .icon-bubble {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    background: rgba(33, 166, 141, 0.12);
-    border: 1px solid rgba(33, 166, 141, 0.25);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 16px;
-  }
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f7;
+  color: #1d1d1f;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.8em 1.6em;
+  border-radius: 999px;
+  border: 1px solid rgba(29, 29, 31, 0.12);
+  cursor: pointer;
+  transition: all 0.2s ease;
 
-  .dropzone-title {
-    color: #0f172a;
-    font-size: 1.25rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    margin-bottom: 6px;
-  }
-
-  .dropzone-subtitle {
-    color: #475569;
-    font-size: 0.92rem;
-    margin-bottom: 24px;
-
-    code {
-      background: #f1f5f9;
-      padding: 2px 6px;
-      border-radius: 6px;
-      font-family: ui-monospace, SFMono-Regular, monospace;
-      font-size: 0.82rem;
-      color: #0f766e;
-      border: 1px solid #e2e8f0;
-    }
-  }
-
-  .action-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    justify-content: center;
-  }
-
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    background: #21a68d;
-    color: #ffffff;
-    font-size: 0.92rem;
-    font-weight: 600;
-    padding: 10px 22px;
-    border-radius: 12px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
-
-    &:hover {
-      background: #2ab89c;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 14px rgba(33, 166, 141, 0.4);
-    }
-  }
-
-  .btn-ghost {
-    display: inline-flex;
-    align-items: center;
-    background: #f8fafc;
-    color: #334155;
-    font-size: 0.92rem;
-    font-weight: 600;
-    padding: 10px 20px;
-    border-radius: 12px;
-    border: 1px solid #cbd5e1;
-    cursor: pointer;
-    transition: all 0.2s ease;
-
-    &:hover {
-      background: #e2e8f0;
-      color: #0f172a;
-      border-color: #94a3b8;
-    }
-    border-color: rgba(255, 255, 255, 0.25);
+  &:hover {
+    background: #e5e5ea;
+    color: #1d1d1f;
+    border-color: rgba(29, 29, 31, 0.2);
   }
 }
 
 .spinner-ring {
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border: 3px solid rgba(33, 166, 141, 0.2);
   border-top-color: #21a68d;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
 }
 
 @keyframes spin {
@@ -400,17 +421,19 @@ async function loadSampleChat() {
     transform: rotate(360deg);
   }
 }
+
 .loading-title {
-  color: #0f172a;
-  font-size: 1.1rem;
+  color: #1d1d1f;
+  font-size: 1.15rem;
   font-weight: 700;
-  margin-bottom: 6px;
+  margin-bottom: 0.4rem;
 }
 
 .loading-meta {
-  color: #64748b;
+  color: rgba(29, 29, 31, 0.6);
   font-size: 0.78rem;
 }
+
 .loaded-file-bar {
   display: flex;
   align-items: center;
@@ -431,13 +454,13 @@ async function loadSampleChat() {
 }
 
 .file-name {
-  color: #0f172a;
+  color: #1d1d1f;
   font-weight: 700;
   font-size: 0.96rem;
 }
 
 .file-meta {
-  color: #059669;
+  color: #0f766e;
   font-size: 0.76rem;
   font-weight: 600;
 }
@@ -446,18 +469,18 @@ async function loadSampleChat() {
   display: inline-flex;
   align-items: center;
   background: #ffffff;
-  color: #334155;
+  color: #1d1d1f;
   font-size: 0.82rem;
   font-weight: 600;
   padding: 6px 14px;
-  border-radius: 8px;
-  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  border: 1px solid rgba(29, 29, 31, 0.15);
   cursor: pointer;
   transition: all 0.2s ease;
 
   &:hover {
-    background: #f1f5f9;
-    color: #0f172a;
+    background: #f5f5f7;
+    color: #1d1d1f;
   }
 }
 
@@ -467,10 +490,10 @@ async function loadSampleChat() {
   align-items: center;
   justify-content: center;
   font-size: 0.85rem;
-  color: #ff5252;
-  background: rgba(255, 82, 82, 0.1);
-  border: 1px solid rgba(255, 82, 82, 0.25);
-  border-radius: 8px;
+  color: #dd2c00;
+  background: rgba(221, 44, 0, 0.08);
+  border: 1px solid rgba(221, 44, 0, 0.2);
+  border-radius: 10px;
   padding: 8px 14px;
 }
 </style>
