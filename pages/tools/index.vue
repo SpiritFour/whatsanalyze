@@ -2,7 +2,9 @@
   <div class="tools-hub-page">
     <!-- Breadcrumb Bar -->
     <nav class="breadcrumb-nav">
-      <NuxtLink to="/" class="breadcrumb-link">WhatsAnalyze</NuxtLink>
+      <NuxtLink :to="$localePath('/')" class="breadcrumb-link"
+        >WhatsAnalyze</NuxtLink
+      >
       <span class="breadcrumb-separator">/</span>
       <span class="breadcrumb-current">Tools Suite</span>
     </nav>
@@ -26,7 +28,10 @@
     <!-- Tools Grid (Apple Style Cards) -->
     <div class="tools-grid">
       <!-- Inactivity Tracker (Active) -->
-      <NuxtLink to="/tools/inactivity" class="tool-card active-card">
+      <NuxtLink
+        :to="$localePath('/tools/inactivity')"
+        class="tool-card active-card"
+      >
         <div class="tool-card-header">
           <div class="tool-icon-wrapper active-icon">
             <v-icon color="#21a68d" size="28">mdi-timer-sand</v-icon>
@@ -149,7 +154,7 @@
           interactive graphs, emoji clouds, and a downloadable PDF book.
         </p>
       </div>
-      <NuxtLink to="/" class="btn-main-dashboard">
+      <NuxtLink :to="$localePath('/')" class="btn-main-dashboard">
         Launch Full Analyzer
         <v-icon size="18" class="ml-2">mdi-arrow-right</v-icon>
       </NuxtLink>

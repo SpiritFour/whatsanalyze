@@ -137,6 +137,13 @@ function openFullAnalysis() {
   box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7),
     0 0 40px rgba(33, 166, 141, 0.08);
   overflow: hidden;
+  min-width: 0;
+  max-width: 100%;
+
+  @media (max-width: 600px) {
+    padding: 28px 18px;
+    border-radius: 20px;
+  }
 
   &::before {
     content: "";
@@ -222,6 +229,9 @@ function openFullAnalysis() {
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 16px;
   padding: 18px 20px;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
   transition: all 0.2s ease;
 
   &:hover {
@@ -247,11 +257,15 @@ function openFullAnalysis() {
 }
 
 .teaser-content {
+  min-width: 0;
+
   h4 {
     font-size: 0.98rem;
     font-weight: 600;
     color: #f7fafc;
     margin-bottom: 4px;
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
   p {
@@ -259,6 +273,8 @@ function openFullAnalysis() {
     color: #a0aec0;
     line-height: 1.45;
     margin: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 }
 
@@ -284,11 +300,19 @@ function openFullAnalysis() {
   cursor: pointer;
   box-shadow: 0 10px 25px -5px rgba(33, 166, 141, 0.5);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  max-width: 100%;
+  white-space: normal;
+  text-align: center;
 
   &:hover {
     background: #2ab89c;
     transform: scale(1.02);
     box-shadow: 0 15px 35px -5px rgba(33, 166, 141, 0.65);
+  }
+
+  @media (max-width: 600px) {
+    font-size: 0.95rem;
+    padding: 14px 20px;
   }
 }
 

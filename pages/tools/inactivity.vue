@@ -2,9 +2,13 @@
   <div class="inactivity-tool-page">
     <!-- Breadcrumb Bar -->
     <nav class="breadcrumb-nav">
-      <NuxtLink to="/" class="breadcrumb-link">WhatsAnalyze</NuxtLink>
+      <NuxtLink :to="$localePath('/')" class="breadcrumb-link"
+        >WhatsAnalyze</NuxtLink
+      >
       <span class="breadcrumb-separator">/</span>
-      <NuxtLink to="/tools" class="breadcrumb-link">Tools</NuxtLink>
+      <NuxtLink :to="$localePath('/tools')" class="breadcrumb-link"
+        >Tools</NuxtLink
+      >
       <span class="breadcrumb-separator">/</span>
       <span class="breadcrumb-current">Inactivity & Last Message Tracker</span>
     </nav>
@@ -288,9 +292,48 @@
         </p>
       </div>
     </article>
-
     <!-- Technical FAQ Component -->
     <ToolFaq :items="faqItems" />
+
+    <!-- Bottom Conversion CTA Section -->
+    <section class="bottom-cta-section">
+      <div class="bottom-cta-card">
+        <div class="bottom-cta-badge mono-label">
+          <span class="badge-dot"></span>
+          GET INSTANT INSIGHTS
+        </div>
+        <h2 class="bottom-cta-title">Ready to Check Your Chat's Inactivity?</h2>
+        <p class="bottom-cta-subtitle">
+          Drop your exported WhatsApp file above or jump straight into the full
+          analyzer. 100% private in your browser.
+        </p>
+
+        <div class="bottom-cta-actions">
+          <button
+            type="button"
+            class="btn-cta-primary"
+            @click="scrollToDropzone"
+          >
+            <v-icon size="18" class="mr-2">mdi-tray-arrow-up</v-icon>
+            <span>Analyze Your Chat Now</span>
+          </button>
+          <NuxtLink :to="$localePath('/')" class="btn-cta-secondary">
+            <v-icon size="18" class="mr-2"
+              >mdi-chart-timeline-variant-shimmer</v-icon
+            >
+            <span>Full WhatsApp Analyzer</span>
+          </NuxtLink>
+        </div>
+
+        <div class="bottom-cta-trust mono-label">
+          <span>Zero Server Upload</span>
+          <span class="dot">•</span>
+          <span>No Account Required</span>
+          <span class="dot">•</span>
+          <span>End-to-End Encrypted Memory</span>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -462,6 +505,13 @@ function formatDate(d: Date): string {
     year: "numeric",
   }).format(d);
 }
+
+function scrollToDropzone() {
+  const el = document.querySelector(".dropzone-section");
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth" });
+  }
+}
 </script>
 
 <style scoped lang="scss">
@@ -470,8 +520,9 @@ function formatDate(d: Date): string {
   margin: 0 auto;
   padding: 40px 20px 100px;
   color: #0f172a;
+  overflow-x: hidden;
+  width: 100%;
 }
-
 .breadcrumb-nav {
   display: flex;
   align-items: center;
@@ -584,6 +635,14 @@ function formatDate(d: Date): string {
   margin-bottom: 24px;
   position: relative;
   box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.06);
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+
+  @media (max-width: 600px) {
+    padding: 24px 16px;
+    border-radius: 18px;
+  }
 }
 
 .status-pill {
@@ -630,6 +689,12 @@ function formatDate(d: Date): string {
   letter-spacing: -0.03em;
   color: #0f172a;
   margin-bottom: 6px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+
+  @media (max-width: 600px) {
+    font-size: 1.75rem;
+  }
 }
 
 .hero-time {
@@ -657,6 +722,18 @@ function formatDate(d: Date): string {
   display: flex;
   align-items: flex-start;
   gap: 10px;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+
+  @media (max-width: 600px) {
+    padding: 12px 14px;
+  }
+}
+
+.quote-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .quote-text {
@@ -665,8 +742,12 @@ function formatDate(d: Date): string {
   font-style: italic;
   margin: 0;
   line-height: 1.5;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  white-space: pre-wrap;
 }
-
 .metrics-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -736,8 +817,15 @@ function formatDate(d: Date): string {
   padding: 28px;
   margin-bottom: 32px;
   box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
-}
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
 
+  @media (max-width: 600px) {
+    padding: 20px 16px;
+    border-radius: 16px;
+  }
+}
 .section-header {
   display: flex;
   align-items: center;
@@ -759,8 +847,10 @@ function formatDate(d: Date): string {
 
 .table-container {
   overflow-x: auto;
+  width: 100%;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
 }
-
 .participants-table {
   width: 100%;
   border-collapse: collapse;
@@ -813,8 +903,11 @@ function formatDate(d: Date): string {
 .snippet-cell {
   color: #64748b;
   font-style: italic;
+  min-width: 120px;
+  max-width: 240px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
-
 .gaps-list {
   display: flex;
   flex-direction: column;
@@ -829,18 +922,29 @@ function formatDate(d: Date): string {
   border: 1px solid #e2e8f0;
   border-radius: 14px;
   padding: 16px 20px;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+
+  @media (max-width: 600px) {
+    gap: 12px;
+    padding: 14px 12px;
+  }
 }
 
 .gap-rank {
   font-size: 0.85rem;
   color: #64748b;
   font-weight: 700;
+  flex-shrink: 0;
 }
 
 .gap-content {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  min-width: 0;
+  flex: 1 1 auto;
 }
 
 .gap-duration {
@@ -858,6 +962,9 @@ function formatDate(d: Date): string {
   font-size: 0.86rem;
   color: #334155;
   margin-top: 4px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 
   strong {
     color: #0f766e;
@@ -866,6 +973,9 @@ function formatDate(d: Date): string {
   .snippet {
     color: #64748b;
     font-style: italic;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    display: inline;
   }
 }
 
@@ -954,6 +1064,135 @@ function formatDate(d: Date): string {
     li {
       margin-bottom: 6px;
     }
+  }
+}
+.bottom-cta-section {
+  width: 100%;
+  max-width: 820px;
+  margin: 60px auto 20px;
+}
+
+.bottom-cta-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  padding: 44px 32px;
+  text-align: center;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+
+  @media (max-width: 600px) {
+    padding: 32px 18px;
+    border-radius: 18px;
+  }
+}
+
+.bottom-cta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  color: #0f766e;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.bottom-cta-title {
+  color: #0f172a;
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  margin-bottom: 10px;
+
+  @media (max-width: 600px) {
+    font-size: 1.45rem;
+  }
+}
+
+.bottom-cta-subtitle {
+  color: #475569;
+  font-size: 1rem;
+  line-height: 1.55;
+  max-width: 580px;
+  margin: 0 auto 28px;
+}
+
+.bottom-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.btn-cta-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #21a68d;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 13px 26px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 20px -3px rgba(33, 166, 141, 0.4);
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #2ab89c;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 25px -3px rgba(33, 166, 141, 0.55);
+  }
+
+  @media (max-width: 600px) {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+}
+
+.btn-cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #0f172a;
+  color: #ffffff !important;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 13px 26px;
+  border-radius: 12px;
+  text-decoration: none !important;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #1e293b;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px -3px rgba(15, 23, 42, 0.25);
+  }
+
+  @media (max-width: 600px) {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+}
+
+.bottom-cta-trust {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #64748b;
+  font-size: 0.74rem;
+
+  .dot {
+    color: #cbd5e1;
   }
 }
 </style>
