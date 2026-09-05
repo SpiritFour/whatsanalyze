@@ -10,8 +10,10 @@ const baseUrl = (process.env.BASE_URL || "https://www.whatsanalyze.com").replace
 const localizedPages = [
   "",
   "about",
+  "court-evidence",
   "how-to-export-your-whatsapp-chat",
   "impressum",
+  "proof-of-relationship",
   "pwa-results",
   "subscribe",
   "switch-from-whatsapp-to-signal",
