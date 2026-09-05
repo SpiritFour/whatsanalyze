@@ -2,7 +2,7 @@ import { chatColors, hexToRgbA } from "~/utils/colors";
 import stopwords_de from "stopwords-de";
 import stopwords from "stopwords-en";
 import { onlyEmoji } from "emoji-aware";
-import * as moment from "moment";
+import moment from "moment";
 
 export class Chat {
   static removeSystemMessages(chatObject) {

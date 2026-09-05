@@ -9,7 +9,9 @@
     </div>
     <br />
     <div class="py-1 px-3 text-lg-body-2 text-xl-h5 alert grey-highlight">
-      <v-icon color="black" style="vertical-align: sub"> mdi-security</v-icon>
+      <v-icon color="black" class="mr-2" style="vertical-align: sub">
+        mdi-security
+      </v-icon>
       <span v-html="$t('infoSec')" />
     </div>
     <br />
@@ -17,6 +19,7 @@
       <img
         alt="github logo"
         height="22"
+        class="mr-2"
         src="~/assets/img/github/GitHub-Mark-32px.png"
         style="vertical-align: sub"
       />
@@ -49,6 +52,8 @@ export default {
   color: black;
   border-radius: 10px;
   width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .grey-highlight {

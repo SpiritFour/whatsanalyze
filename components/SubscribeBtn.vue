@@ -4,15 +4,19 @@
     class="mt-3 mb-4"
     elevation="10"
     style="max-width: 100%"
-    :loading="isLoading" @click="createSubscriptionPaypal()"
-  >{{
-      $t("chooseSubscription")
-  }}</v-btn>
+    :loading="isLoading"
+    @click="createSubscriptionPaypal()"
+    >{{ $t("chooseSubscription") }}</v-btn
+  >
 </template>
 
 <script>
 import { GTAG_PAYMENT, gtagEvent } from "~/utils/gtagValues";
 export default {
+  setup() {
+    const config = useRuntimeConfig();
+    return { paypalClientId: config.public.paypalClientId };
+  },
   data() {
     return {
       isLoading: false,
@@ -21,18 +25,25 @@ export default {
   methods: {
     async createSubscriptionPaypal() {
       if (this.isLoading) return;
-      gtagEvent('subscription_pressed', GTAG_PAYMENT)
+      gtagEvent("subscription_pressed", GTAG_PAYMENT);
       this.isLoading = true;
-      const response = await this.$fire.functions.httpsCallable("helloworld")({
-        client_id: this.$config.paypalClientId,
-      });
-      // call fetch with https://www.sandbox.paypal.com/webapps/billing/subscriptions?ba_token=BA-2MW88471JV556644J
-      if (!response.data.approveLink) {
-        alert("Error opening paypal: " + response.error);
+
+      try {
+        const response = await this.$firebase.callFunction("helloworld", {
+          client_id: this.paypalClientId,
+        });
+        const approveLink = response.data?.approveLink;
+        if (!approveLink) {
+          throw new Error(response.data?.error || "No approval link returned");
+        }
+
+        window.location.assign(approveLink);
+      } catch (error) {
+        console.error("Error opening PayPal", error);
+        this.$sentry?.captureException(error);
+        alert("Error opening PayPal. Please try again.");
         this.isLoading = false;
       }
-
-      location.href = response.data.approveLink;
     },
   },
 };

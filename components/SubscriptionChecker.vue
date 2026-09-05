@@ -1,10 +1,12 @@
-<template>
-</template>
+<template></template>
 
 <script>
-
 export default {
   props: ["email", "id"],
+  setup() {
+    const config = useRuntimeConfig();
+    return { paypalClientId: config.public.paypalClientId };
+  },
   data() {
     return {
       subscription_id: null,
@@ -12,7 +14,7 @@ export default {
       subscriptionData: null,
       APIinterval: null,
       maxCounter: 0,
-      isEmailValid: null
+      isEmailValid: null,
     };
   },
   watch: {
@@ -21,11 +23,10 @@ export default {
     },
     email() {
       this.checkSubscription();
-    }
+    },
   },
   methods: {
     async checkSubscription() {
-
       if (!this.email && !this.id) {
         return;
       }
@@ -54,14 +55,14 @@ export default {
       }, 3 * 1000);
     },
     async loadSubscription(data) {
-
       console.log("Loading", data);
-      const response = await this.$fire.functions.httpsCallable(
-        "checksubscriberstatus"
-      )({
-        ...data,
-        client_id: this.$config.paypalClientId
-      });
+      const response = await this.$firebase.callFunction(
+        "checksubscriberstatus",
+        {
+          ...data,
+          client_id: this.paypalClientId,
+        }
+      );
 
       this.subscriptionData = await response.data;
       this.isValid = this.subscriptionData.isValid;
@@ -71,8 +72,8 @@ export default {
         this.$emit("isValid");
         clearInterval(this.APIinterval);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

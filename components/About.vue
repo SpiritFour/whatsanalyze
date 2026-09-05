@@ -57,42 +57,38 @@
 </template>
 
 <script>
+import adrianImage from "~/assets/img/us/Adrian_WA.jpg";
+import moritzImage from "~/assets/img/us/Moritz_WA.jpeg";
+import paulImage from "~/assets/img/us/Paul_WA.jpg";
+import sebastianImage from "~/assets/img/us/Sebastian_WA.jpg";
+import osloLogo from "~/assets/img/uni/Oslo_Logo.png";
+import otagoLogo from "~/assets/img/uni/Otago_Logo.png";
+import stockholmLogo from "~/assets/img/uni/Stockholm_Logo.png";
+import tumLogo from "~/assets/img/uni/TUM_Logo.png";
+
 export default {
   name: "About",
   data() {
     return {
-      universities: [
-        // eslint-disable-next-line no-undef
-        require("~/assets/img/uni/TUM_Logo.png"),
-        // eslint-disable-next-line no-undef
-        require("~/assets/img/uni/Oslo_Logo.png"),
-        // eslint-disable-next-line no-undef
-        require("~/assets/img/uni/Otago_Logo.png"),
-        // eslint-disable-next-line no-undef
-        require("~/assets/img/uni/Stockholm_Logo.png"),
-      ],
+      universities: [tumLogo, osloLogo, otagoLogo, stockholmLogo],
       persons: [
         {
-          // eslint-disable-next-line no-undef
-          image: require("~/assets/img/us/Sebastian_WA.jpg"),
+          image: sebastianImage,
           name: "Sebastian Fellner",
           description: ["Computer Science MSc", "AI Enthusiast"],
         },
         {
-          // eslint-disable-next-line no-undef
-          image: require("~/assets/img/us/Paul_WA.jpg"),
+          image: paulImage,
           name: "Paul Kehnel",
           description: ["Computer Science  MSc", "Bicycle Dude"],
         },
         {
-          // eslint-disable-next-line no-undef
-          image: require("~/assets/img/us/Adrian_WA.jpg"),
+          image: adrianImage,
           name: "Adrian Thiesen",
           description: ["Information Systems BSc", "The Product Enthusiast"],
         },
         {
-          // eslint-disable-next-line no-undef
-          image: require("~/assets/img/us/Moritz_WA.jpeg"),
+          image: moritzImage,
           name: "Moritz Wolf",
           description: ["Robotics MSc", "Outdoor Specialist"],
         },

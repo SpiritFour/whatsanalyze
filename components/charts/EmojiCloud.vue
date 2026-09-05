@@ -59,7 +59,7 @@ export default {
     this.series.minWordLength = 0;
     this.updateGraph();
   },
-  beforeDestroy: function () {
+  beforeUnmount: function () {
     this.chart.dispose();
   },
   methods: {

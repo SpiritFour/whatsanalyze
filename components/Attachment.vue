@@ -30,7 +30,7 @@
       <v-row v-else align="center" class="rando-file-container">
         <v-col class="ma-0 pa-0 pr-3" style="position: relative" cols="2">
           <v-row justify="center">
-            <v-icon class="ma-0 pa-0" size="30" color="grey" left>
+            <v-icon class="ma-0 pa-0" size="30" color="grey" start>
               mdi-file
             </v-icon>
           </v-row>

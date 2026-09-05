@@ -55,7 +55,7 @@ class BackendClient {
     return this.accessToken;
   }
 
-  async getSubscriptionLink(callbackUrl) {
+  async createSubscription(callbackUrl) {
     // example value:
     // {"status":"APPROVAL_PENDING","id":"I-XKCLA5KDLLK3","create_time":"2024-12-09T20:08:32Z","links":[{"href":"https://www.sandbox.paypal.com/webapps/billing/subscriptions?ba_token=BA-41P21132UV5106118","rel":"approve","method":"GET"},{"href":"https://api-m.sandbox.paypal.com/v1/billing/subscriptions/I-XKCLA5KDLLK3","rel":"edit","method":"PATCH"},{"href":"https://api-m.sandbox.paypal.com/v1/billing/subscriptions/I-XKCLA5KDLLK3","rel":"self","method":"GET"}]}
     const linkStuff = await (
@@ -79,8 +79,12 @@ class BackendClient {
       console.log("Link stuff mismatch", { linkStuff });
     }
 
-    // extract the link that is used to approve the subscription
-    return linkStuff.links.filter((link) => link.rel === "approve")[0].href;
+    return {
+      // the link that is used to approve the subscription
+      approveLink: linkStuff.links.filter((link) => link.rel === "approve")[0]
+        .href,
+      subscriptionId: linkStuff.id,
+    };
   }
 
   async getDataForSubscription(subscriptionId) {
@@ -94,6 +98,13 @@ class BackendClient {
         },
       }
     );
+
+    if (!response.ok) {
+      const error = await response.text();
+      throw new Error(
+        `PayPal subscription lookup failed (${response.status}): ${error}`
+      );
+    }
 
     return response.json();
   }
@@ -198,6 +209,9 @@ class BackendClient {
             },
             tenure_type: "REGULAR",
             sequence: 1,
+            // 0 = repeat forever. PayPal defaults to 1, which makes the
+            // subscription EXPIRED immediately after the first payment.
+            total_cycles: 0,
             pricing_scheme: {
               fixed_price: {
                 value: "15",
@@ -247,32 +261,39 @@ class BackendClient {
   }
 
   async getSubscription(email, subscriptionId) {
+    let storedData;
     if (email) {
       const data = await this.getSubscriptionDataByEmail(email);
-      const retrievedData = data.docs[0]?.data();
-      return {
-        isValid: !data.empty,
-        data: {
-          subscriptionId: retrievedData?.subscriptionData?.id,
-          email: retrievedData?.subscriptionData?.subscriber?.email_address,
-          name: retrievedData?.subscriptionData?.subscriber?.name,
-          expirationTimestamp: retrievedData?.expirationTimestamp,
-        },
-      };
-    } else {
-      const data = await this.getSubscriptionDataById(subscriptionId);
-      const retrievedData = data.data();
-
-      return {
-        isValid: data.exists,
-        data: {
-          subscriptionId: retrievedData?.subscriptionData?.id,
-          email: retrievedData?.subscriptionData?.subscriber?.email_address,
-          name: retrievedData?.subscriptionData?.subscriber?.name,
-          expirationTimestamp: retrievedData?.expirationTimestamp,
-        },
-      };
+      storedData = data.docs[0]?.data();
+      subscriptionId = storedData?.subscriptionData?.id;
     }
+
+    if (!subscriptionId) {
+      return { isValid: false, data: {} };
+    }
+
+    const subscriptionData = await this.getDataForSubscription(subscriptionId);
+    const isValid = subscriptionData.status === "ACTIVE";
+
+    if (isValid) {
+      await db
+        .collection(this.subscriptionCollectionName)
+        .doc(subscriptionId)
+        .set({ subscriptionData }, { merge: true });
+    }
+
+    return {
+      isValid,
+      data: {
+        subscriptionId: subscriptionData.id,
+        status: subscriptionData.status,
+        email: subscriptionData.subscriber?.email_address,
+        name: subscriptionData.subscriber?.name,
+        expirationTimestamp:
+          subscriptionData.billing_info?.next_billing_time ||
+          storedData?.expirationTimestamp,
+      },
+    };
   }
 }
 
@@ -282,7 +303,10 @@ const configs = [
     clientId:
       "ARYQUp4C_oNjNUNkvSPzLeaiulItDmnHUU226OANt2haCKC2c70ZrKZTmRHCPldcu4SD22LmPEuonfec",
     clientSecretName: "PAYPAL_PASSWORD_DEV",
-    planId: "P-28458220JT356632KM5K5HJI",
+    // Recurring plan with total_cycles=0; the previous sandbox plan
+    // (P-28458220JT356632KM5K5HJI) had total_cycles=1 and expired after the
+    // first payment.
+    planId: "P-0KW41015GP654580PNKMT6EY",
     apiEndpoint: "https://api-m.sandbox.paypal.com",
     // todo this is really ugly. instead we should add the callback url to the context of the paypal call.
     // somewhere here: https://developer.paypal.com/docs/api/subscriptions/v1/#subscriptions_create

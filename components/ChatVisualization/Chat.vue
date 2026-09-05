@@ -1,9 +1,9 @@
 <template>
   <v-container>
     <div class="text-center my-4">
-      <v-menu offset-y>
-        <template #activator="{ on, attrs }">
-          <v-btn class="btn-color" dark v-bind="attrs" v-on="on">
+      <v-menu>
+        <template #activator="{ props: activatorProps }">
+          <v-btn class="btn-color text-white" v-bind="activatorProps">
             {{ $t("changeView") }}
           </v-btn>
         </template>
@@ -64,7 +64,7 @@
           </Attachment>
           <div
             v-else
-            class="white--text message"
+            class="text-white message"
             v-html="parseMessage(data.message)"
           ></div>
 
@@ -83,7 +83,7 @@
         "
         class="my-8"
       >
-        <v-btn class="ma-auto white--text btn-color" @click="nextMessages">
+        <v-btn class="ma-auto text-white btn-color" @click="nextMessages">
           Load next {{ offset }} messages
         </v-btn>
       </v-row>

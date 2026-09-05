@@ -2,16 +2,17 @@ module.exports = {
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/$1",
     "^~/(.*)$": "<rootDir>/$1",
-    "^vue$": "vue/dist/vue.common.js",
   },
-  moduleFileExtensions: ["js", "vue", "json"],
+  moduleFileExtensions: ["js", "json"],
   transform: {
     "^.+\\.js$": "babel-jest",
-    ".*\\.(vue)$": "vue-jest",
   },
-  collectCoverage: true,
-  collectCoverageFrom: [
-    "<rootDir>/components/**/*.vue",
-    "<rootDir>/pages/**/*.vue",
+  testPathIgnorePatterns: [
+    "/node_modules/",
+    "/tests/e2e/",
+    "/tests/e2e-sandbox/",
+    "/.delta/",
   ],
+  collectCoverage: true,
+  collectCoverageFrom: ["<rootDir>/utils/transformChatData.js"],
 };

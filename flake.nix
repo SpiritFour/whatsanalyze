@@ -9,12 +9,16 @@
     in
     {
       devShells = eachSystem (pkgs: {
-        default = pkgs.mkShell {
+        default = let
+          pnpm = pkgs.writeShellScriptBin "pnpm" ''
+            exec ${pkgs.nodejs_22}/bin/corepack pnpm@8.15.8 "$@"
+          '';
+        in pkgs.mkShell {
           nativeBuildInputs = [
-            pkgs.nodejs_18
-            pkgs.pnpm
+            pkgs.nodejs_22
+            pnpm
             pkgs.firebase-tools
-            pkgs.python39
+            pkgs.python311
             pkgs.git
           ];
         };

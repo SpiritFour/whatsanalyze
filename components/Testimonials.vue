@@ -3,12 +3,12 @@
     <div id="stories" class="text-h2" v-html="$t('testimonialHeadline')"></div>
     <div style="overflow: hidden">
       <div v-for="t in testimonials" :key="t.name" class="testimonial">
-        <v-icon large color="black"> mdi-format-quote-close </v-icon>
+        <v-icon color="black" size="large"> mdi-format-quote-close </v-icon>
         <p>
           <strong>{{ t.name }}</strong> {{ $t("says") }}
         </p>
         <p>{{ $t(t.text) }}</p>
-        <v-icon v-for="id in 5" :key="id" large color="#ffd782">
+        <v-icon v-for="id in 5" :key="id" color="#ffd782" size="large">
           mdi-star
         </v-icon>
       </div>

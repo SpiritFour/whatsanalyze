@@ -21,23 +21,24 @@
 
 <script>
 import PdfDownload from "~/components/ChatVisualization/PdfDownloadPopup";
+import Chat from "~/components/ChatVisualization/Chat.vue";
 
 export default {
   name: "ChatVisualization",
-  components: { PdfDownload },
+  components: { PdfDownload, Chat },
   props: ["chat", "attachments", "results", "isValidSubscription"],
   data() {
     return {
       // its possible that the first person did not write any message at all
       ego: this.chat.messagesPerPerson[0]?.name,
       price: 7.99,
-      currency: "EUR"
+      currency: "EUR",
     };
   },
   methods: {
     setEgo(ego) {
       this.ego = ego;
-    }
-  }
+    },
+  },
 };
 </script>

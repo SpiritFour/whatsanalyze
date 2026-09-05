@@ -1,80 +1,78 @@
 <template>
   <div v-if="chat">
-    <v-col v-if="$vuetify.breakpoint.smAndUp">
-      <v-row>
-        <v-spacer></v-spacer>
-        <v-col cols="12" sm="6" xl="5">
+    <div v-if="$vuetify.display.smAndUp" class="example-graphs-desktop">
+      <v-row justify="center" align="start">
+        <v-col cols="12" sm="6">
           <ChartsBarChart
             :chartdata="chat"
             :options="barchartHeaderChartOptions"
             data-grouping="hourly"
           />
-          <div class="mx-3 mt-3 text-body-1 text-xl-h6 font-weight-bold">
+          <div class="mx-2 mt-2 text-body-1 text-center font-weight-bold">
             {{ $t("exampleGraphSubtitle1") }}
           </div>
         </v-col>
-        <v-spacer></v-spacer>
-        <v-col cols="12" sm="6" xl="5">
+        <v-col cols="12" sm="6">
           <ChartsDonughtChart
             :chartdata="chat"
             :options="donoughtHeaderChartOptions"
           />
-          <div class="mx-3 mt-3 text-body-1 text-xl-h6 font-weight-bold">
+          <div class="mx-2 mt-2 text-body-1 text-center font-weight-bold">
             {{ $t("exampleGraphSubtitle2") }}
           </div>
         </v-col>
-        <v-spacer></v-spacer>
       </v-row>
-      <v-row>
-        <v-col cols="12">
-          <v-img src="example-fun-facts.png"></v-img>
+      <v-row class="mt-2" justify="center">
+        <v-col cols="12" class="d-flex justify-center pa-0">
+          <v-img
+            src="/example-fun-facts.png"
+            max-width="480"
+            max-height="240"
+            class="mx-auto"
+            contain
+          ></v-img>
         </v-col>
       </v-row>
-    </v-col>
+    </div>
     <v-col v-else class="py-0">
       <v-carousel
         :continuous="true"
         :cycle="false"
         :show-arrows="true"
-        height="auto"
+        height="280"
         hide-delimiter-background
       >
         <v-carousel-item>
-          <ChartsBarChart
-            :chartdata="chat"
-            :options="barchartHeaderChartOptions"
-            data-grouping="hourly"
-          />
+          <div class="carousel-slide-content">
+            <ChartsBarChart
+              :chartdata="chat"
+              :options="barchartHeaderChartOptions"
+              data-grouping="hourly"
+            />
+          </div>
         </v-carousel-item>
 
         <v-carousel-item>
-          <v-container fill-height fluid>
-            <v-row align="center" justify="center">
-              <v-col>
-                <ChartsWordCloud :chartdata="chat" />
-              </v-col>
-            </v-row>
-          </v-container>
+          <div class="carousel-slide-content">
+            <ChartsWordCloud :chartdata="chat" />
+          </div>
         </v-carousel-item>
 
-        <!--        <v-carousel-item>-->
-        <!--          <ChartsLineChart-->
-        <!--            :chartdata="chat"-->
-        <!--            :options="linegraphHeaderChartOptions"-->
-        <!--          />-->
-        <!--        </v-carousel-item>-->
-
         <v-carousel-item>
-          <ChartsDonughtChart
-            :chartdata="chat"
-            :options="donoughtHeaderChartOptions"
-          />
+          <div class="carousel-slide-content">
+            <ChartsDonughtChart
+              :chartdata="chat"
+              :options="donoughtHeaderChartOptions"
+            />
+          </div>
         </v-carousel-item>
         <v-carousel-item>
-          <ChartsRadarChart
-            :chartdata="chat"
-            :options="radarchartHeaderChartOptions"
-          />
+          <div class="carousel-slide-content">
+            <ChartsRadarChart
+              :chartdata="chat"
+              :options="radarchartHeaderChartOptions"
+            />
+          </div>
         </v-carousel-item>
       </v-carousel>
     </v-col>
@@ -89,177 +87,158 @@ export default {
     return {
       chat: undefined,
       linegraphHeaderChartOptions: {
-        tooltips: { enabled: false },
-        hover: { mode: null },
-        pointHitRadius: 5,
         responsive: true,
         maintainAspectRatio: true,
-        lineTension: 1,
-        legend: {
-          position: "top",
-          labels: {
-            fontStyle: "bold",
-            fontColor: "rgb(51,51,51)",
-            fontSize: 10,
+        elements: {
+          line: {
+            tension: 1,
+          },
+          point: {
+            hitRadius: 5,
+          },
+        },
+        plugins: {
+          tooltip: { enabled: false },
+          legend: {
+            position: "top",
+            labels: {
+              font: {
+                weight: "bold",
+                size: 10,
+              },
+              color: "rgb(51,51,51)",
+            },
           },
         },
         scales: {
-          xAxes: [
-            {
-              type: "time",
-              time: {},
-              gridLines: {
-                display: false,
-                color: "#FFFFFF",
-              },
-              ticks: {
-                fontColor: "rgb(51,51,51)",
-                fontStyle: "bold",
-                fontSize: 11,
+          x: {
+            type: "time",
+            grid: {
+              display: false,
+              color: "#FFFFFF",
+            },
+            ticks: {
+              color: "rgb(51,51,51)",
+              font: {
+                weight: "bold",
+                size: 11,
               },
             },
-          ],
-          yAxes: [
-            {
-              scaleLabel: {
-                display: true,
-                labelString: this.$t("messages"),
-                fontColor: "rgb(51,51,51)",
-                fontStyle: "bold",
-                fontSize: 11,
-              },
-              ticks: {
-                precision: 0,
-                stepSize: 1,
-                beginAtZero: true,
-                display: false,
-              },
-              gridLines: {
-                display: false,
-                color: "#FFFFFF",
-              },
+          },
+          y: {
+            beginAtZero: true,
+            display: false,
+            ticks: {
+              precision: 0,
+              stepSize: 1,
             },
-          ],
-        },
-        elements: {
-          line: {
-            tension: 0,
+            grid: {
+              display: false,
+              color: "#FFFFFF",
+            },
           },
         },
       },
       donoughtHeaderChartOptions: {
-        tooltips: { enabled: true },
-        hover: { mode: null },
         responsive: true,
         maintainAspectRatio: true,
-        legend: {
-          position: "bottom",
-          labels: {
-            fontStyle: "bold",
-            fontColor: "rgb(51,51,51)",
-            fontSize: 10,
-          },
-        },
-        scales: {
-          yAxes: [
-            {
-              scaleLabel: {
-                display: false,
-                labelString: this.$t("messages"),
-                fontColor: "rgb(51,51,51)",
-                fontStyle: "bold",
-                fontSize: 11,
+        plugins: {
+          tooltip: { enabled: true },
+          legend: {
+            position: "bottom",
+            labels: {
+              font: {
+                weight: "bold",
+                size: 10,
               },
-              ticks: {
-                display: false,
-              },
-              gridLines: {
-                display: false,
-              },
+              color: "rgb(51,51,51)",
             },
-          ],
+          },
         },
       },
       radarchartHeaderChartOptions: {
-        tooltips: { enabled: false },
-        hover: { mode: null },
         responsive: true,
         maintainAspectRatio: true,
-        scale: {
-          angleLines: {
-            // display: false,
-            color: "rgb(51,51,51)",
-          },
-          ticks: {
-            display: false,
-          },
-          gridLines: {
-            color: "rgb(51,51,51)",
-          },
-
-          pointLabels: {
-            fontColor: "rgb(51,51,51)",
+        scales: {
+          r: {
+            angleLines: {
+              color: "rgb(51,51,51)",
+            },
+            ticks: {
+              display: false,
+            },
+            grid: {
+              color: "rgb(51,51,51)",
+            },
+            pointLabels: {
+              color: "rgb(51,51,51)",
+            },
           },
         },
-        legend: {
-          position: "top",
-          labels: {
-            fontStyle: "bold",
-            fontColor: "rgb(51,51,51)",
-            fontSize: 10,
+        plugins: {
+          tooltip: { enabled: false },
+          legend: {
+            position: "top",
+            labels: {
+              font: {
+                weight: "bold",
+                size: 10,
+              },
+              color: "rgb(51,51,51)",
+            },
           },
         },
       },
       barchartHeaderChartOptions: {
-        tooltips: { enabled: true },
-        hover: { mode: null },
         responsive: true,
         maintainAspectRatio: true,
-        legend: {
-          position: "bottom",
-          labels: {
-            fontStyle: "bold",
-            fontColor: "rgb(51,51,51)",
-            fontSize: 10,
+        aspectRatio: 1.1,
+        plugins: {
+          tooltip: { enabled: true },
+          legend: {
+            position: "bottom",
+            labels: {
+              font: {
+                weight: "bold",
+                size: 10,
+              },
+              color: "rgb(51,51,51)",
+            },
           },
         },
         scales: {
-          xAxes: [
-            {
-              gridLines: {
-                display: false,
-              },
-              ticks: {
-                fontColor: "rgb(51,51,51)",
+          x: {
+            grid: {
+              display: false,
+            },
+            ticks: {
+              color: "rgb(51,51,51)",
+              maxRotation: 0,
+              autoSkip: true,
+              maxTicksLimit: 8,
+              font: {
+                weight: "bold",
+                size: 10,
               },
             },
-          ],
-          yAxes: [
-            {
-              scaleLabel: {
-                display: false,
-                labelString: this.$t("messages"),
-                fontStyle: "bold",
-                fontColor: "rgb(51,51,51)",
-                fontSize: 10,
-              },
-              gridLines: {
-                display: false,
-              },
-              ticks: {
-                beginAtZero: true,
-                precision: 0,
-                display: false,
-              },
+          },
+          y: {
+            beginAtZero: true,
+            display: false,
+            ticks: {
+              precision: 0,
             },
-          ],
+            grid: {
+              display: false,
+            },
+          },
         },
       },
     };
   },
   created() {
     // eslint-disable-next-line no-undef
-    if (process.client) {
+    if (import.meta.client) {
       fetch("/example-results.json")
         .then((response) => response.text())
         .then((messages) => {
@@ -281,18 +260,20 @@ export default {
 };
 </script>
 <style lang="scss">
+.carousel-slide-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 8px 48px 24px 48px;
+  box-sizing: border-box;
+}
+
 .v-carousel__controls__item {
   margin: 0 8px !important;
   width: 7px !important;
   height: 7px !important;
-}
-
-.col {
-  padding: 1em !important;
-}
-
-.v-image {
-  margin-bottom: 50px;
 }
 
 @media (min-width: 760px) {

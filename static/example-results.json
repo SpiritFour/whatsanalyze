@@ -479,8 +479,8 @@
           "pointRadius": 1,
           "pointHitRadius": 5,
           "label": "Jane Doe",
-          "backgroundColor": "rgba(1,111,148, 0.1 )",
-          "borderColor": "#51b0bc",
+          "backgroundColor": "rgba(237,140,43, 0.1 )",
+          "borderColor": "#ed8c2b",
           "data": [
             {
               "x": "Thu Jan 10 2019 12:00:00 GMT+0100 (Central European Standard Time)",
@@ -923,7 +923,7 @@
       "averageMessageLength": 6
     },
     {
-      "color": "#51b0bc",
+      "color": "#ed8c2b",
       "name": "Jane Doe",
       "numberOfWords": 1480,
       "longestMessage": 38,
@@ -1599,8 +1599,8 @@
       },
       {
         "label": "Jane Doe",
-        "backgroundColor": "#51b0bc",
-        "borderColor": "#51b0bc",
+        "backgroundColor": "#ed8c2b",
+        "borderColor": "#ed8c2b",
         "data": [
           1,
           0,
@@ -1649,8 +1649,8 @@
       },
       {
         "label": "Jane Doe",
-        "backgroundColor": "#51b0bc",
-        "borderColor": "#51b0bc",
+        "backgroundColor": "#ed8c2b",
+        "borderColor": "#ed8c2b",
         "data": [29, 35, 33, 91, 15, 16, 18]
       }
     ]
@@ -1679,8 +1679,8 @@
       },
       {
         "label": "Jane Doe",
-        "backgroundColor": "#51b0bc",
-        "borderColor": "#51b0bc",
+        "backgroundColor": "#ed8c2b",
+        "borderColor": "#ed8c2b",
         "data": [40, 4, 0, 1, 0, 0, 0, 20, 77, 37, 15, 43]
       }
     ]
@@ -1690,8 +1690,8 @@
     "datasets": [
       {
         "label": "Share of Speech",
-        "backgroundColor": ["#00535f", "#51b0bc"],
-        "borderColor": ["#00535f", "#51b0bc"],
+        "backgroundColor": ["#00535f", "#ed8c2b"],
+        "borderColor": ["#00535f", "#ed8c2b"],
         "data": [299, 237]
       }
     ]

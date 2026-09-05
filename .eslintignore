@@ -1,6 +1,9 @@
 test/*
 static/sw.js
+.delta
 .direnv
 .idea
 .nuxt
+coverage
+dist
 node_modules

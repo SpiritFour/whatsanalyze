@@ -10,7 +10,7 @@
         <div
           :class="{
             isDragging: isDragging,
-            smallFont: $vuetify.breakpoint.smAndDown,
+            smallFont: $vuetify.display.smAndDown,
             isSuccess: isSuccess,
           }"
           class="drop pa-3"
@@ -42,17 +42,11 @@
 
             <div :class="{ 'text-caption': isSuccess }">
               <div v-if="isSuccess" v-html="$t('fileDone')"></div>
-              <span
-                v-if="$vuetify.breakpoint.mdAndUp"
-                v-html="$t('fileSuccess')"
-              >
+              <span v-if="$vuetify.display.mdAndUp" v-html="$t('fileSuccess')">
               </span>
-              <span
-                v-if="$vuetify.breakpoint.smAndDown"
-                v-html="$t('fileSelect')"
-              >
+              <span v-if="$vuetify.display.smAndDown" v-html="$t('fileSelect')">
               </span>
-
+              {{ " " }}
               <span v-if="isSuccess" v-html="$t('fileAnother')"></span>
               <span v-if="!isSuccess" v-html="$t('fileZip')"></span>
             </div>
@@ -101,10 +95,16 @@ export default {
 
     zipLoadEndHandler(e) {
       const arrayBuffer = e.target.result;
+      // reader.readAsArrayBuffer produced nothing (empty/corrupt file or read error):
+      // passing it into JSZip would blow up deep inside `loadAsync` with
+      // "Can't read the data of 'the loaded zip file'" — fail visibly instead.
+      if (!arrayBuffer || !arrayBuffer.byteLength) {
+        this.showErrorMessage("_empty_zip");
+        return;
+      }
       const jszip = new JSZip();
-      const zip = jszip.loadAsync(arrayBuffer);
-
-      zip
+      jszip
+        .loadAsync(arrayBuffer)
         .then((zipData) => {
           let chatFile = this.getChatFile(zipData);
           return parseString(chatFile, {
@@ -122,7 +122,11 @@ export default {
             };
           });
         })
-        .then(this.updateMessages);
+        .then(this.updateMessages)
+        .catch((error) => {
+          console.error("ZIP parsing failed", error);
+          this.showErrorMessage();
+        });
     },
 
     async getChatFile(zipData) {
