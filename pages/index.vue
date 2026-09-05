@@ -213,8 +213,20 @@ export default {
     const { email, id } = getSubscriptionParams();
     this.subscription.id = id;
     this.subscription.email = email;
-  },
 
+    const sharedChat = useSharedChat();
+    if (
+      sharedChat.value &&
+      sharedChat.value.messages &&
+      sharedChat.value.messages.length > 0
+    ) {
+      this.isShowingChats = true;
+      this.newMessages({
+        messages: sharedChat.value.messages,
+        attachments: sharedChat.value.attachments || [],
+      });
+    }
+  },
   beforeUnmount() {
     window.removeEventListener("scroll", this.handleDebouncedScroll);
   },

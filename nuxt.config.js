@@ -10,13 +10,15 @@ const baseUrl = (process.env.BASE_URL || "https://www.whatsanalyze.com").replace
 const localizedPages = [
   "",
   "about",
-  "court-evidence",
   "how-to-export-your-whatsapp-chat",
   "impressum",
-  "proof-of-relationship",
   "pwa-results",
   "subscribe",
   "switch-from-whatsapp-to-signal",
+  "tools",
+  "tools/court-evidence",
+  "tools/inactivity",
+  "tools/proof-of-relationship",
   "whatsapp-to-pdf",
   "whatsapp-wrapped-year-review",
 ];
@@ -40,7 +42,6 @@ export default defineNuxtConfig({
       publicDir: resolve("./dist"),
     },
     watch: [
-      "assets/**",
       "components/**",
       "composables/**",
       "content/**",

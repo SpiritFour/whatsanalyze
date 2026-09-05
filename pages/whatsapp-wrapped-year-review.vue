@@ -99,19 +99,16 @@ export default {
 
 <style scoped>
 /* General Styles */
-body {
-  font-family: "Arial", sans-serif;
-  margin: 0;
-  padding: 0;
-  color: #333;
-  line-height: 1.6;
+.whatsapp-wrapped {
+  width: 100%;
+  margin: 0 auto;
 }
 
 .container {
+  max-width: 960px;
   margin: auto;
   padding: 20px;
 }
-
 /* Hero Section */
 .hero-section {
   background: linear-gradient(135deg, #25d366, #128c7e);
