@@ -1,6 +1,7 @@
 <template>
   <div class="landing-page">
     <LandingHero
+      align="left"
       :breadcrumbs="breadcrumbs"
       :eyebrow="t('relationshipProof.heroEyebrow')"
       :title="t('relationshipProof.heroTitle')"

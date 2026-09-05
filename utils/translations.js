@@ -6,7 +6,7 @@ export const messages = {
       seoDescription:
         "Turn a WhatsApp chat into a clean, chronological PDF with every message and timestamp. Processed 100% in your browser — no upload, no account.",
       heroEyebrow: "Court-ready chat export",
-      heroTitle: "Your chat. In black and white.",
+      heroTitle: "Your chat.<br />In black and white.",
       heroSubtitle:
         "Turn a WhatsApp export into a clean, chronological PDF — every message, every sender, every timestamp. Created entirely on your device.",
       heroCta: "Create your PDF",
@@ -100,7 +100,7 @@ export const messages = {
       seoDescription:
         "Turn years of WhatsApp messages into one clear PDF — timestamps, statistics, and daily conversations that show a genuine relationship. 100% private.",
       heroEyebrow: "Relationship evidence",
-      heroTitle: "Years of “good morning”. One document.",
+      heroTitle: "Years of “good morning”.<br />One document.",
       heroSubtitle:
         "For visa applications and immigration interviews: turn your chat history into clear evidence of a genuine, ongoing relationship.",
       heroCta: "Create your PDF",
@@ -509,7 +509,7 @@ export const messages = {
       seoDescription:
         "Verwandle deinen WhatsApp-Chat in ein sauberes, chronologisches PDF – jede Nachricht mit Absender und Zeitstempel. 100 % im Browser, ohne Upload.",
       heroEyebrow: "Gerichtsfester Chat-Export",
-      heroTitle: "Dein Chat. Schwarz auf weiß.",
+      heroTitle: "Dein Chat.<br />Schwarz auf weiß.",
       heroSubtitle:
         "Mach aus deinem WhatsApp-Export ein sauberes, chronologisches PDF – jede Nachricht, jeder Absender, jeder Zeitstempel. Erstellt komplett auf deinem Gerät.",
       heroCta: "PDF erstellen",
@@ -603,7 +603,7 @@ export const messages = {
       seoDescription:
         "Mach aus Jahren von WhatsApp-Nachrichten ein klares PDF – Zeitstempel, Statistiken und Alltagsgespräche, die eine echte Beziehung belegen. 100 % privat.",
       heroEyebrow: "Beziehungsnachweis",
-      heroTitle: "Jahre voller „Guten Morgen“. Ein Dokument.",
+      heroTitle: "Jahre voller „Guten Morgen“.<br />Ein Dokument.",
       heroSubtitle:
         "Für Visumsanträge und Behördentermine: Verwandle euren Chatverlauf in einen klaren Nachweis einer echten, gelebten Beziehung.",
       heroCta: "PDF erstellen",
@@ -976,7 +976,7 @@ export const messages = {
       seoDescription:
         "Convierte un chat de WhatsApp en un PDF limpio y cronológico con cada mensaje y su marca de tiempo. 100 % en tu navegador, sin subir nada.",
       heroEyebrow: "Exportación lista para el juzgado",
-      heroTitle: "Tu chat. Negro sobre blanco.",
+      heroTitle: "Tu chat.<br />Negro sobre blanco.",
       heroSubtitle:
         "Convierte tu exportación de WhatsApp en un PDF limpio y cronológico: cada mensaje, cada remitente, cada marca de tiempo. Creado íntegramente en tu dispositivo.",
       heroCta: "Crear tu PDF",
@@ -1069,7 +1069,7 @@ export const messages = {
       seoDescription:
         "Convierte años de mensajes de WhatsApp en un PDF claro: marcas de tiempo, estadísticas y conversaciones diarias que demuestran una relación genuina. 100 % privado.",
       heroEyebrow: "Prueba de relación",
-      heroTitle: "Años de «buenos días». Un documento.",
+      heroTitle: "Años de «buenos días».<br />Un documento.",
       heroSubtitle:
         "Para solicitudes de visado y entrevistas de inmigración: convierte tu historial de chat en una prueba clara de una relación genuina y continua.",
       heroCta: "Crear tu PDF",
