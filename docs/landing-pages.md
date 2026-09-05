@@ -4,15 +4,15 @@ Apple/Peak-Design-style landing pages for the highest-intent use cases of the
 product. Each page targets a specific search intent, converts to the analyzer
 (`/`), and is fully prerendered for all six locales.
 
-## Pages in this MR
+## Pages in the Tools Hierarchy
 
 | Route | Intent | Hero visual |
 | --- | --- | --- |
-| `/court-evidence` | Legal evidence: harassment, divorce/custody, work disputes | CSS transcript mockup (`LandingDocMock`) |
-| `/proof-of-relationship` | Visa/immigration: proving a genuine relationship | CSS stats mockup (`LandingStatsMock`) |
+| `/tools/inactivity` | Inactivity & last message tracker | Client-side dropzone (`ToolDropzone`) |
+| `/tools/court-evidence` | Legal evidence: harassment, divorce/custody, work disputes | CSS transcript mockup (`LandingDocMock`) |
+| `/tools/proof-of-relationship` | Visa/immigration: proving a genuine relationship | CSS stats mockup (`LandingStatsMock`) |
 
-Both pages are indexable (no `robots: noindex`), carry per-locale SEO meta and
-FAQPage JSON-LD, and cross-link to each other via a use-case card.
+All tools pages are indexable, carry per-locale SEO meta and JSON-LD, and are cross-linked via the `/tools` hub and breadcrumbs. Root URLs `/court-evidence` and `/proof-of-relationship` redirect via 301.
 
 ## Shared components (`components/landing/`)
 

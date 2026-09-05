@@ -2,6 +2,7 @@
   <div class="landing-page">
     <!-- Hero with ToolDropzone Visual Slot -->
     <LandingHero
+      :breadcrumbs="breadcrumbs"
       eyebrow="Free WhatsApp Tool"
       title="Who Texted Last? Inactivity & Gap Tracker"
       subtitle="Discover who sent the last message, calculate elapsed silence duration, measure reply latencies, and pinpoint historical conversation gaps."
@@ -255,6 +256,11 @@ import {
 
 const localePath = useLocalePath();
 
+const breadcrumbs = computed(() => [
+  { label: "WhatsAnalyze", to: localePath("/") },
+  { label: "Tools", to: localePath("/tools") },
+  { label: "Inactivity Tracker" },
+]);
 // SEO Metadata & Generative Engine Optimization
 useSeoMeta({
   title: "Who Texted Last? WhatsApp Inactivity & Gap Tracker | WhatsAnalyze",

@@ -12,7 +12,9 @@ const expectedFiles = [
   "pwa-results/index.html",
   "subscribe/index.html",
   "tools/index.html",
+  "tools/court-evidence/index.html",
   "tools/inactivity/index.html",
+  "tools/proof-of-relationship/index.html",
   "whatsapp-to-pdf/index.html",
   "whatsapp-wrapped-year-review/index.html",
 ];

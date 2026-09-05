@@ -60,11 +60,11 @@ export default {
         //   text: "Create a PDF from your WhatsApp chat",
         // },
         {
-          name: "court-evidence",
+          name: "tools/court-evidence",
           text: "pageNameCourt",
         },
         {
-          name: "proof-of-relationship",
+          name: "tools/proof-of-relationship",
           text: "pageNameRelationship",
         },
         {

@@ -10,15 +10,15 @@ const baseUrl = (process.env.BASE_URL || "https://www.whatsanalyze.com").replace
 const localizedPages = [
   "",
   "about",
-  "court-evidence",
   "how-to-export-your-whatsapp-chat",
   "impressum",
-  "proof-of-relationship",
   "pwa-results",
   "subscribe",
   "switch-from-whatsapp-to-signal",
   "tools",
+  "tools/court-evidence",
   "tools/inactivity",
+  "tools/proof-of-relationship",
   "whatsapp-to-pdf",
   "whatsapp-wrapped-year-review",
 ];
@@ -41,8 +41,15 @@ export default defineNuxtConfig({
     output: {
       publicDir: resolve("./dist"),
     },
+    routeRules: {
+      "/court-evidence": {
+        redirect: { to: "/tools/court-evidence", statusCode: 301 },
+      },
+      "/proof-of-relationship": {
+        redirect: { to: "/tools/proof-of-relationship", statusCode: 301 },
+      },
+    },
     watch: [
-      "assets/**",
       "components/**",
       "composables/**",
       "content/**",

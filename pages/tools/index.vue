@@ -111,6 +111,20 @@ useHead({
               url: "https://www.whatsanalyze.com/tools/inactivity",
               applicationCategory: "UtilitiesApplication",
             },
+            {
+              "@type": "SoftwareApplication",
+              position: 2,
+              name: "WhatsApp Court & Legal Evidence PDF",
+              url: "https://www.whatsanalyze.com/tools/court-evidence",
+              applicationCategory: "UtilitiesApplication",
+            },
+            {
+              "@type": "SoftwareApplication",
+              position: 3,
+              name: "WhatsApp Proof of Relationship for Visa",
+              url: "https://www.whatsanalyze.com/tools/proof-of-relationship",
+              applicationCategory: "UtilitiesApplication",
+            },
           ],
         },
       }),
@@ -128,8 +142,23 @@ const toolsList = computed(() => [
     linkText: "Open Tool",
   },
   {
+    icon: "mdi-scale-balance",
+    title: "Court & Legal Evidence PDF",
+    text:
+      "Format WhatsApp chats into court-admissible, tamper-evident PDF transcripts with exact timestamps and sender verification.",
+    to: localePath("/tools/court-evidence"),
+    linkText: "Open Tool",
+  },
+  {
+    icon: "mdi-heart-outline",
+    title: "Proof of Relationship for Visa",
+    text:
+      "Generate verified chat timelines, messaging frequency charts, and continuous communication records for immigration petitions.",
+    to: localePath("/tools/proof-of-relationship"),
+    linkText: "Open Tool",
+  },
+  {
     icon: "mdi-counter",
-    title: "Message & Line Counter",
     text:
       "Count raw lines, message volume distribution per person, and speech shares in 1-on-1 and group chats.",
     linkText: "Coming Soon",
