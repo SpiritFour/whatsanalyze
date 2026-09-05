@@ -1,0 +1,52 @@
+@tailwind components;
+@tailwind utilities;
+
+.wrapped-scope {
+  color-scheme: dark;
+}
+
+.wrapped-scope .container {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.wrapped-scope .grid-container {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wrapped-scope .bg-whatsapp {
+  background: url('/wrapped/backgrounds/light.png') repeat;
+}
+
+.wrapped-scope .bg-gradient {
+  @apply bg-gradient-to-r from-lime-600 via-emerald-400 to-green-500;
+}
+
+.wrapped-scope .bg-gradient-red {
+  @apply bg-gradient-to-r from-purple-600 via-pink-500 via-red-500 to-yellow-500;
+}
+
+.wrapped-scope .card {
+  @apply rounded-xl px-4 py-8;
+}
+
+.wrapped-scope .card1 {
+  @apply rounded-2xl bg-white/5 px-4 py-2 shadow-[0_18px_55px_rgba(0,0,0,0.75)] backdrop-blur-2xl;
+}
+
+.wrapped-scope .card-dark {
+  @apply rounded-2xl bg-black/40 px-4 py-2 text-right shadow-inner shadow-black/60;
+}
+
+.wrapped-scope .card--flush {
+  @apply py-0;
+}
+
+.wrapped-scope h1 {
+  @apply font-bold text-3xl mb-2;
+}

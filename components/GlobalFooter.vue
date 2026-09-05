@@ -40,6 +40,8 @@
         &copy; {{ new Date().getFullYear() }} -
         <nuxt-link :to="$localePath('/about')">About</nuxt-link>
         -
+        <nuxt-link :to="$localePath('/tools')">Tools</nuxt-link>
+        -
         <nuxt-link :to="$localePath('/impressum')">Imprint</nuxt-link>
         -
         <nuxt-link :to="$localePath('/subscribe')">Subscriptions</nuxt-link>
@@ -58,11 +60,11 @@ export default {
         //   text: "Create a PDF from your WhatsApp chat",
         // },
         {
-          name: "court-evidence",
+          name: "tools/court-evidence",
           text: "pageNameCourt",
         },
         {
-          name: "proof-of-relationship",
+          name: "tools/proof-of-relationship",
           text: "pageNameRelationship",
         },
         {

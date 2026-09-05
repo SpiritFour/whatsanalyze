@@ -10,15 +10,22 @@ const baseUrl = (process.env.BASE_URL || "https://www.whatsanalyze.com").replace
 const localizedPages = [
   "",
   "about",
-  "court-evidence",
   "how-to-export-your-whatsapp-chat",
   "impressum",
-  "proof-of-relationship",
   "pwa-results",
   "subscribe",
   "switch-from-whatsapp-to-signal",
+  "tools",
+  "tools/court-evidence",
+  "tools/inactivity",
+  "tools/proof-of-relationship",
   "whatsapp-to-pdf",
   "whatsapp-wrapped-year-review",
+  "wrapped",
+  "wrapped/results",
+  "wrapped/subscription/verify",
+  "wrapped/subscription/success",
+  "wrapped/subscription/canceled",
 ];
 const localizedRoutes = ["de", "es", "fr", "pt", "it"].flatMap((locale) =>
   localizedPages.map((page) => `/${locale}/${page}`)
@@ -40,7 +47,6 @@ export default defineNuxtConfig({
       publicDir: resolve("./dist"),
     },
     watch: [
-      "assets/**",
       "components/**",
       "composables/**",
       "content/**",
@@ -99,12 +105,37 @@ export default defineNuxtConfig({
         measurementId: "G-H1WL9MXJ17",
         functionsEmulatorPort: runWithFunctions ? 5001 : null,
       },
+      stripePriceId: local
+        ? "price_1Sc6u074KJ57kF2wxb5cnIZL"
+        : "price_1SgOxVL4rDqbYflowSbSteJQ",
+      wrappedFirebase: {
+        apiKey: local
+          ? "AIzaSyCCX536nN4oTAXj49M_M1ZShD3ekLdjkBo"
+          : "AIzaSyBaVob5g3xHdzJnkOI2dtbdYND-__Tzutc",
+        authDomain: local
+          ? "whatsanalyze-wrapped.firebaseapp.com"
+          : "whatsanalyze-wrapped-prod.firebaseapp.com",
+        projectId: local
+          ? "whatsanalyze-wrapped"
+          : "whatsanalyze-wrapped-prod",
+        storageBucket: local
+          ? "whatsanalyze-wrapped.firebasestorage.app"
+          : "whatsanalyze-wrapped-prod.firebasestorage.app",
+        messagingSenderId: local ? "761196645139" : "1053765361889",
+        appId: local
+          ? "1:761196645139:web:88191b29876feb404ae8e6"
+          : "1:1053765361889:web:feb439fa8220fadf1157a0",
+        measurementId: local ? "G-KEE2KV93SK" : "G-XJDRX60BNX",
+      },
     },
   },
 
   css: ["~/assets/variables.scss"],
 
   modules: [
+    "@pinia/nuxt",
+    "pinia-plugin-persistedstate/nuxt",
+    "@nuxtjs/tailwindcss",
     "vuetify-nuxt-module",
     "@nuxt/content",
     "@nuxtjs/i18n",
@@ -112,6 +143,17 @@ export default defineNuxtConfig({
     "@nuxt/scripts",
     "@sentry/nuxt/module",
   ],
+
+  tailwindcss: {
+    cssPath: "~/assets/wrapped/tailwind.css",
+    configPath: "tailwind.config.mjs",
+    exposeConfig: false,
+    viewer: false,
+  },
+
+  pinia: {
+    storesDirs: ["./stores/**"],
+  },
 
   vuetify: {
     moduleOptions: {

@@ -1,11 +1,37 @@
 <template>
-  <header class="landing-hero">
+  <header
+    :class="['landing-hero', align === 'left' ? 'landing-hero--left' : '']"
+  >
     <div
+      ref="inner"
       class="landing-hero__inner landing-reveal"
       :class="{ 'is-visible': visible }"
     >
+      <nav
+        v-if="breadcrumbs && breadcrumbs.length"
+        class="landing-hero__breadcrumbs"
+        aria-label="Breadcrumbs"
+      >
+        <template v-for="(crumb, i) in breadcrumbs" :key="i">
+          <NuxtLink
+            v-if="crumb.to"
+            :to="crumb.to"
+            class="landing-hero__breadcrumb-link"
+          >
+            {{ crumb.label }}
+          </NuxtLink>
+          <span v-else class="landing-hero__breadcrumb-current">{{
+            crumb.label
+          }}</span>
+          <span
+            v-if="i < breadcrumbs.length - 1"
+            class="landing-hero__breadcrumb-sep"
+            >/</span
+          >
+        </template>
+      </nav>
       <p v-if="eyebrow" class="landing-hero__eyebrow">{{ eyebrow }}</p>
-      <h1 class="landing-hero__title">{{ title }}</h1>
+      <h1 class="landing-hero__title" v-html="title"></h1>
       <p v-if="subtitle" class="landing-hero__subtitle">{{ subtitle }}</p>
       <div v-if="ctaText" class="landing-hero__actions">
         <LandingButton :to="ctaTo">{{ ctaText }}</LandingButton>
@@ -22,6 +48,8 @@
 export default {
   name: "LandingHero",
   props: {
+    align: { type: String, default: "center" },
+    breadcrumbs: { type: Array, default: () => [] },
     eyebrow: { type: String, default: "" },
     title: { type: String, required: true },
     subtitle: { type: String, default: "" },
@@ -72,6 +100,35 @@ export default {
     transform: none;
   }
 }
+.landing-hero__breadcrumbs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: rgba(245, 245, 247, 0.6);
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.landing-hero__breadcrumb-link {
+  color: rgba(245, 245, 247, 0.6);
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #ffffff;
+  }
+}
+
+.landing-hero__breadcrumb-current {
+  color: #f5f5f7;
+  font-weight: 500;
+}
+
+.landing-hero__breadcrumb-sep {
+  color: rgba(245, 245, 247, 0.35);
+}
 
 .landing-hero__eyebrow {
   color: $c-blue-accent-light;
@@ -111,5 +168,31 @@ export default {
 
 .landing-hero__visual {
   margin-top: clamp(3rem, 7vw, 5.5rem);
+}
+.landing-hero--left {
+  text-align: left;
+
+  .landing-hero__inner {
+    text-align: left;
+  }
+
+  .landing-hero__breadcrumbs {
+    justify-content: flex-start;
+  }
+
+  .landing-hero__title {
+    margin: 0;
+    max-width: none;
+  }
+
+  .landing-hero__subtitle {
+    margin: 1.6rem 0 0;
+    max-width: 48rem;
+  }
+
+  .landing-hero__actions {
+    display: flex;
+    justify-content: flex-start;
+  }
 }
 </style>

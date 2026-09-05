@@ -41,7 +41,7 @@
                 x-large
                 class="font-weight-bold px-8"
                 rounded
-                :href="`https://wrapped.whatsanalyze.com/${locale}`"
+                :to="localePath('/wrapped')"
               >
                 See Your Story
                 <v-icon right>mdi-arrow-right</v-icon>
@@ -177,11 +177,13 @@ export default {
     });
 
     const { locale } = useI18n();
+    const localePath = useLocalePath();
     const { data: page } = await useAsyncData("content-home", () =>
       queryCollection("pages").path("/home").first()
     );
     return {
       locale,
+      localePath,
       page,
     };
   },
@@ -213,8 +215,20 @@ export default {
     const { email, id } = getSubscriptionParams();
     this.subscription.id = id;
     this.subscription.email = email;
-  },
 
+    const sharedChat = useSharedChat();
+    if (
+      sharedChat.value &&
+      sharedChat.value.messages &&
+      sharedChat.value.messages.length > 0
+    ) {
+      this.isShowingChats = true;
+      this.newMessages({
+        messages: sharedChat.value.messages,
+        attachments: sharedChat.value.attachments || [],
+      });
+    }
+  },
   beforeUnmount() {
     window.removeEventListener("scroll", this.handleDebouncedScroll);
   },
