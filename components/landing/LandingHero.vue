@@ -1,6 +1,9 @@
 <template>
   <header class="landing-hero">
-    <div class="landing-hero__inner landing-reveal" :class="{ 'is-visible': visible }">
+    <div
+      class="landing-hero__inner landing-reveal"
+      :class="{ 'is-visible': visible }"
+    >
       <p v-if="eyebrow" class="landing-hero__eyebrow">{{ eyebrow }}</p>
       <h1 class="landing-hero__title">{{ title }}</h1>
       <p v-if="subtitle" class="landing-hero__subtitle">{{ subtitle }}</p>

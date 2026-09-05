@@ -5,7 +5,9 @@
       <div class="doc-mock__header">
         <span class="doc-mock__kicker">Chat Transcript</span>
         <span class="doc-mock__meta">WhatsApp export · 2 participants</span>
-        <span class="doc-mock__meta">Aug 26, 2019 – Feb 16, 2021 · 537 messages</span>
+        <span class="doc-mock__meta"
+          >Aug 26, 2019 – Feb 16, 2021 · 537 messages</span
+        >
       </div>
       <div class="doc-mock__divider">Jan 14, 2021</div>
       <div v-for="row in rows" :key="row.time + row.text" class="doc-mock__row">
@@ -29,11 +31,31 @@ export default {
   data() {
     return {
       rows: [
-        { time: "09:14", name: "Alex", text: "Did you get my messages yesterday?" },
-        { time: "09:16", name: "Sam", text: "Yes, all of them. I kept everything." },
-        { time: "09:17", name: "Alex", text: "Good. We might need them later." },
-        { time: "12:02", name: "Sam", text: "I exported the whole chat this morning." },
-        { time: "12:05", name: "Alex", text: "Every message, with date and time." },
+        {
+          time: "09:14",
+          name: "Alex",
+          text: "Did you get my messages yesterday?",
+        },
+        {
+          time: "09:16",
+          name: "Sam",
+          text: "Yes, all of them. I kept everything.",
+        },
+        {
+          time: "09:17",
+          name: "Alex",
+          text: "Good. We might need them later.",
+        },
+        {
+          time: "12:02",
+          name: "Sam",
+          text: "I exported the whole chat this morning.",
+        },
+        {
+          time: "12:05",
+          name: "Alex",
+          text: "Every message, with date and time.",
+        },
         { time: "12:06", name: "Sam", text: "Exactly. In black and white." },
       ],
     };

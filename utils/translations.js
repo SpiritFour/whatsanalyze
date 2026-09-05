@@ -163,7 +163,8 @@ export const messages = {
       faq2Q: "What do officers actually look for?",
       faq2A:
         "Consistency and authenticity: regular messages over the whole period you claim, natural everyday conversations, and communication around visits and milestones.",
-      faq3Q: "Our chat isn't in the official language. Do we need a translation?",
+      faq3Q:
+        "Our chat isn't in the official language. Do we need a translation?",
       faq3A:
         "Many authorities require certified translations of selected passages. A chronological PDF gives your translator — and the officer — a clean, referenceable source.",
       faq4Q: "Is our chat uploaded anywhere?",
@@ -665,7 +666,8 @@ export const messages = {
       faq2Q: "Worauf achten Behörden wirklich?",
       faq2A:
         "Auf Beständigkeit und Echtheit: regelmäßige Nachrichten über den gesamten Zeitraum, natürliche Alltagsgespräche und Kommunikation rund um Besuche und Meilensteine.",
-      faq3Q: "Unser Chat ist nicht in der Amtssprache. Brauchen wir eine Übersetzung?",
+      faq3Q:
+        "Unser Chat ist nicht in der Amtssprache. Brauchen wir eine Übersetzung?",
       faq3A:
         "Viele Behörden verlangen beglaubigte Übersetzungen ausgewählter Passagen. Ein chronologisches PDF gibt eurer Übersetzerin – und der Behörde – eine saubere, zitierbare Quelle.",
       faq4Q: "Wird unser Chat irgendwohin hochgeladen?",
@@ -996,8 +998,7 @@ export const messages = {
       docCard1Text:
         "Los mensajes aparecen tal y como ocurrieron, del primer día al último.",
       docCard2Title: "Remitente y hora en cada mensaje",
-      docCard2Text:
-        "Cada entrada está atribuida y fechada, minuto a minuto.",
+      docCard2Text: "Cada entrada está atribuida y fechada, minuto a minuto.",
       docCard3Title: "Páginas A4 listas para imprimir",
       docCard3Text:
         "Un PDF paginado, fácil de imprimir, archivar y citar en una audiencia.",
@@ -1131,7 +1132,8 @@ export const messages = {
       faq2Q: "¿Qué buscan realmente los oficiales?",
       faq2A:
         "Constancia y autenticidad: mensajes regulares durante todo el periodo que declaras, conversaciones cotidianas naturales y comunicación alrededor de visitas e hitos.",
-      faq3Q: "Nuestro chat no está en la lengua oficial. ¿Necesitamos traducción?",
+      faq3Q:
+        "Nuestro chat no está en la lengua oficial. ¿Necesitamos traducción?",
       faq3A:
         "Muchas autoridades exigen traducciones certificadas de pasajes seleccionados. Un PDF cronológico le da a tu traductor, y al oficial, una fuente limpia y citable.",
       faq4Q: "¿Se sube nuestro chat a algún sitio?",

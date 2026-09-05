@@ -1,9 +1,7 @@
 <template>
   <div class="landing-quotes">
     <figure v-for="quote in quotes" :key="quote.text" class="landing-quote">
-      <blockquote class="landing-quote__text">
-        “{{ quote.text }}”
-      </blockquote>
+      <blockquote class="landing-quote__text">“{{ quote.text }}”</blockquote>
       <figcaption class="landing-quote__attribution">
         — {{ quote.attribution }}
       </figcaption>

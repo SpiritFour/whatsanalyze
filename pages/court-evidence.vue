@@ -106,9 +106,11 @@ export default {
 
     const pillars = computed(() =>
       [1, 2, 3].map((i) => ({
-        icon: ["mdi-cellphone-lock", "mdi-format-list-numbered", "mdi-clock-fast"][
-          i - 1
-        ],
+        icon: [
+          "mdi-cellphone-lock",
+          "mdi-format-list-numbered",
+          "mdi-clock-fast",
+        ][i - 1],
         title: t(`courtEvidence.pillar${i}Title`),
         text: t(`courtEvidence.pillar${i}Text`),
       }))
