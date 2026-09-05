@@ -69,7 +69,7 @@ test("analyzes the example chat without uploading its contents", async ({
     .click();
   await downloadPromise;
 
-  await page.getByRole("button", { name: /Download full chat PDF/i }).click();
+  await page.getByRole("button", { name: /Download full chat PDF/i }).first().click();
   await expect(page.getByText("Nice!!", { exact: true })).toBeVisible();
   await expect(
     page.getByRole("button", { name: "Pay with PayPal" })

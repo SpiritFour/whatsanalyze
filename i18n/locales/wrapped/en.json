@@ -1,0 +1,418 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "close": "Close",
+    "save": "Save",
+    "upload": "Upload",
+    "download": "Download",
+    "export": "Export",
+    "share": "Share",
+    "yes": "Yes",
+    "no": "No",
+    "or": "or",
+    "menu": "Menu"
+  },
+  "nav": {
+    "subscription": "Pro Subscription",
+    "privacy": "Privacy",
+    "exportGuide": "How to export",
+    "selectLanguage": "Select language",
+    "appTitle": "WhatsApp Wrapped"
+  },
+  "footer": {
+    "privacyFirst": "Privacy First",
+    "privacyFirstDescription": "Everything runs locally in your browser for guaranteed privacy. If you create a share-link, only encrypted data is saved.",
+    "openSource": "Open Source",
+    "openSourceDescription": "This project is open-source and all code is public on github. Feel free to run it locally and see how it is working.",
+    "checkOnGithub": "Check code on GitHub.",
+    "madeBy": "Made with ❤ by friends in Munich",
+    "copyright": "© 2026 WhatsApp Wrapped. All rights reserved."
+  },
+  "home": {
+    "hero": {
+      "title": "Wrapped - but for ",
+      "subtitle": "The story of your relationships, told through your WhatsApp chat data",
+      "usedBy": "Used by 1000s of people.",
+      "english": {
+        "tagline": "{year} WhatsApp Wrapped is here",
+        "headline": "Your Chat, Told Like a Story",
+        "descriptionMobile": "WhatsAnalyze turns your exported WhatsApp data into a private story-style recap. Relive your busiest hours, funniest exchanges, and emotional peaks without your messages ever leaving the browser.",
+        "descriptionDesktop": "WhatsAnalyze turns your exported WhatsApp data into a visual recap-like your own private \"year in review.\" See your most active hours, funniest exchanges, and emotional peaks in a beautiful story-style format. All insights are processed locally on your device-your messages never leave your browser.",
+        "highlights": [
+          "Private by design",
+          "TXT or ZIP support",
+          "Encrypted share-links",
+          "Instant PDF + image exports"
+        ]
+      }
+    },
+    "sections": {
+      "whatIs": "What is WhatsApp Wrapped",
+      "whatToExpect": "What to expect?",
+      "privacyFirst": "Privacy first",
+      "whatIsSubheading": "A deeper look into your relationships.",
+      "whatToExpectSubheading": "A lot.",
+      "privacyFirstSubheading": "Your chat does not leave your device."
+    },
+    "press": {
+      "eyebrow": "Known from",
+      "title": "Press & community love",
+      "cta": "Read blog",
+      "quotes": [
+        {
+          "quote": "Fun facts and exciting visualizations",
+          "source": "Chip.de",
+          "href": "https://www.chip.de/downloads/webapp-WhatsAnalyze-WhatsApp-analysieren_183369368.html",
+          "logo": "/img/trust-logos/chip_logo.png"
+        },
+        {
+          "quote": "The analysis happens only in your browser",
+          "source": "Giga.de",
+          "href": "https://www.giga.de/news/ueberraschende-einblicke-whatsapp-chats-kostenlos-analysieren/",
+          "logo": "/img/trust-logos/giga_logo.png"
+        },
+        {
+          "quote": "Find out what time you text the most",
+          "source": "Netzwelt.de",
+          "href": "https://www.netzwelt.de/news/187295-whatsapp-webseite-analysiert-chats-1803.html",
+          "logo": "/img/trust-logos/netzwelt.jpeg"
+        }
+      ]
+    },
+    "media": {
+      "eyebrow": "Media gallery",
+      "title": "Relive your chats in cinematic slides",
+      "description": "Tap through the stories behind your most active days, late-night debates, and unforgettable emojis. Everything renders locally so you can share screenshots without leaking raw chat files.",
+      "tagline": "Share-ready in seconds",
+      "cards": [
+        {
+          "eyebrow": "Peak hours",
+          "title": "Heatmaps of your loudest days",
+          "description": "See when the chat never slept with highlight cards for marathon message streaks, voice-note sprees, and late-night drop-ins.",
+          "stat": "Auto-generated in 7 seconds"
+        },
+        {
+          "eyebrow": "Relationship loops",
+          "title": "Relive your year in conversations",
+          "description": "Explore your chats as story-style slides—from the most-used emojis to the message that got the biggest reaction. Our visuals highlight moments, rhythms, and relationships without ever exposing private messages.",
+          "stat": "Everything runs locally in your browser for complete privacy."
+        },
+        {
+          "eyebrow": "Gallery mix",
+          "title": "Shareable story formats",
+          "description": "Portrait, square, and desktop canvases are rendered in one pass so you can ship your recap to Instagram, TikTok, or newsletters instantly.",
+          "stat": "4 optimized aspect ratios"
+        }
+      ]
+    },
+    "subscriptionAd": {
+      "eyebrow": "Whatsanalyse Pro",
+      "headline": "Unlock the full storytelling experience",
+      "description": "Start for free or upgrade for unlimited uploads, premium exports, and faster processing.",
+      "free": {
+        "badge": "Free",
+        "headline": "Explore at your own pace",
+        "description": "Perfect for testing Whatsanalyse or creating a one-off recap.",
+        "priceSuffix": "/ forever",
+        "cta": "Start for free",
+        "features": [
+          "Unlimited story sharing and link views",
+          "First chat analysis for free",
+          "No credit card required"
+        ]
+      },
+      "pro": {
+        "badge": "Most popular",
+        "label": "Pro",
+        "headline": "For storytellers & teams",
+        "description": "Unlimited uploads, premium exports, and faster processing for power users.",
+        "priceSuffix": "/ month",
+        "note": "Cancel anytime · share with friends",
+        "cta": "Upgrade to Pro",
+        "loading": "Redirecting to Stripe…",
+        "features": [
+          "Unlimited chat uploads & story generations",
+          "Priority processing and exclusive early features",
+          "Share your subscription with up to 3 friends",
+          "PDF / HD exports for polished recaps"
+        ]
+      },
+      "footnote": "Secure Stripe checkout · no hidden fees",
+      "errors": {
+        "checkoutLinkMissing": "Checkout link missing. Please try again.",
+        "general": "Something went wrong. Please try again."
+      }
+    },
+    "subscription": {
+      "manage": {
+        "title": "Manage your plan",
+        "description": "Manage your plan directly in the Stripe portal—update payment details or cancel whenever you need.",
+        "button": "Manage Subscription",
+        "buttonLoading": "Opening Stripe Portal...",
+        "missingDetails": "Missing subscription details. Please verify again.",
+        "portalError": "Unable to open the Stripe billing portal. Please try again."
+      }
+    },
+    "celebration": {
+      "eyebrow": "Fresh ways to celebrate",
+      "title": "Your private chat recap keeps getting smarter",
+      "description": "From evolving moods to personalized chat moments, WhatsAnalyze Wrapped mirrors everything fans love about Spotify's experience-built for the messages that define your friendships.",
+      "items": [
+        {
+          "badge": "New",
+          "title": "Chat Evolution Timeline",
+          "description": "Track how your moods, pacing, and emoji vocabulary changed month over month. Watch phases appear just like Spotify's Music Evolution-now for your conversations."
+        },
+        {
+          "badge": "Returning Favorite",
+          "title": "Relationship Spotlight",
+          "description": "Reveal your longest conversation streak-style insights for messaging. Identify who kept conversations alive and what percentile fan you are for every friend."
+        },
+        {
+          "badge": "Story Magic",
+          "title": "Message Evolution",
+          "description": "Generate a curated queue of chats, insights, or moments that match each chat phase. Every card links back to the exact moment in your exported data."
+        },
+        {
+          "badge": "Clips & Cameos",
+          "title": "Chat highlights that tell your story",
+          "description": "Each recap is curated like an Instagram story—with subtle animations, emojis, and smart transitions that bring your conversation history to life. See your most active times, funniest exchanges, and longest streaks in a way that feels personal and alive."
+        }
+      ]
+    },
+    "features": [
+      {
+        "title": "Chat summary dashboards",
+        "description": "See who drives the conversation, the share of speech, and how momentum shifts throughout the year."
+      },
+      {
+        "title": "Voice notes & calls",
+        "description": "Quantify talk time, spot who leaves the longest recordings, and highlight the friend who always starts calls."
+      },
+      {
+        "title": "Time-machine insights",
+        "description": "Pinpoint peak weeks, busiest hours, and surprise droughts so you can relive the highs (and roast the lows)."
+      },
+      {
+        "title": "Vocabulary deep dives",
+        "description": "Surface word counts, emoji streaks, and per-person catchphrases to capture your chat's unique dialect."
+      },
+      {
+        "title": "Media breakdowns",
+        "description": "Count every image, attachment, and link without exposing their content-just the story they tell."
+      },
+      {
+        "title": "Chat archetypes",
+        "description": "Label the Emoji King, the Voice Note Novelist, or the Ghost Texter based on normalized activity thresholds."
+      }
+    ],
+    "ai": {
+      "eyebrow": "Bringing AI magic to Wrapped",
+      "title": "Future AI insights for your chats",
+      "description": "We are prototyping NotebookLM-style prompting to map chat personalities, communication patterns, and conflict cues securely on-device. These planned tools stay private until you opt in, and no raw text leaves your browser.",
+      "status": "Planned beta · join the English waitlist soon",
+      "cards": [
+        {
+          "title": "AI Persona Map",
+          "description": "Draft personality archetypes for every participant, revealing how tone, pacing, and emoji habits ebb and flow through the year."
+        },
+        {
+          "title": "Relationship Insight Coach",
+          "description": "Identify celebration moments, friction points, and mutual appreciation gaps so you can nudge healthier communication habits."
+        },
+        {
+          "title": "Conflict Resolution Prompts",
+          "description": "Get context-aware prompts that summarize disagreements, surface shared ground, and suggest follow-up messages without exposing raw chat logs."
+        }
+      ]
+    },
+    "share": {
+      "eyebrow": "Wrapped everywhere",
+      "title": "Share your results privately",
+      "description": "Post your Wrapped visuals to your chat partner via a secret link. Data is end-to-end encrypted.",
+      "cards": [
+        {
+          "title": "End-to-end encrypted share link",
+          "description": "Let your chat partners join the fun by sending them a link to your Whatsanalyze Wrapped!"
+        }
+      ]
+    },
+    "globalTouchpoints": {
+      "eyebrow": "Wrapped here, there, everywhere",
+      "title": "Built for friends, fans, and campuses",
+      "cards": [
+        {
+          "title": "Creators & teams",
+          "description": "Influencers, podcasters, and student clubs use WhatsAnalyze to drop personalized Wrapped posts that spotlight their most loyal supporters."
+        },
+        {
+          "title": "Campus collaborations",
+          "description": "Bring Wrapped to dorm lobbies or hackathons. Rotate spotlight screens that show anonymized stats while keeping raw data on a local kiosk."
+        },
+        {
+          "title": "Open-source & community projects",
+          "description": "WhatsAnalyze is fully open-source and privacy-first. Anyone can fork it, extend it, or design new visual templates—whether for personal use, campus projects, or creative experiments—all without ever sending data to a server."
+        },
+        {
+          "title": "Chat Magic",
+          "description": "Message Evolution story magic: generate a curated queue of chat insights, funny details or eventful moments that mirror each chat phase, with every card linking back to the exact moment in your exported data."
+        }
+      ]
+    },
+    "explanations": [
+      {
+        "title": "Message Insights",
+        "description": "Analyze your messaging frequency, peak times, and communication patterns"
+      },
+      {
+        "title": "Encrypted Sharing",
+        "description": "Your data is encrypted end-to-end. Share your wrapped results without privacy concerns"
+      },
+      {
+        "title": "Download Results",
+        "description": "Get your personalized wrapped report in multiple formats for easy sharing"
+      }
+    ]
+  },
+  "upload": {
+    "dragDrop": "Click to upload or drag and drop your WhatsApp export.",
+    "noServerUpload": "No data is sent to any server. Processing only on your device.",
+    "fileFormats": "TXT or ZIP",
+    "loading": "Loading...",
+    "processingYourData": "Processing your data...",
+    "selectChatFile": "Select your WhatsApp chat file",
+    "paywall": {
+      "title": "Unlock unlimited chat analyses",
+      "description": "You've already analyzed one chat for free. Subscribe to continue generating new WhatsApp Wrapped stories instantly.",
+      "cta": "Upgrade to Pro",
+      "secondary": "Maybe later"
+    }
+  },
+  "exportGuide": {
+    "title": "How to export your WhatsApp chat?",
+    "ios": "iOS",
+    "android": "Android",
+    "iosSteps": [
+      "Open WhatsApp and go to the chat you want to export",
+      "Tap on the chat name at the top",
+      "Scroll down and tap \"Export Chat\"",
+      "Choose \"Without Media\" or \"Including Media\"",
+      "Select how you want to share the file (Email, iCloud Drive, etc.)",
+      "Select your file and follow the prompts to export",
+      "Share the exported .txt file with WhatsApp Wrapped"
+    ],
+    "androidSteps": [
+      "Open WhatsApp and long-press on the chat you want to export",
+      "Tap the three-dot menu icon",
+      "Select \"More\" > \"Export Chat\"",
+      "Choose \"Without Media\" or \"Including Media\"",
+      "Select how you want to share the file",
+      "Share the exported .txt file with WhatsApp Wrapped"
+    ],
+    "info": {
+      "title": "Handle large exports on a computer",
+      "description": "WhatsAnalyze processes everything locally in your browser, so huge TXT or ZIP exports can slow down phones. For smoother processing, send the exported file to your computer first and run the analysis there."
+    },
+    "coming_soon": "Android guide coming soon"
+  },
+  "results": {
+    "mostEmojis": "Most Emojis",
+    "mostEmojisInOne": "Most emoji's in one message",
+    "messageCount": "Total Messages",
+    "chatPartners": "Chat Partners",
+    "averageMessageLength": "Average Message Length",
+    "longestStreak": "Longest Streak",
+    "mostActiveTime": "Most Active Time",
+    "leastActiveTime": "Least Active Time",
+    "averageMessagesPerDay": "Average Messages Per Day",
+    "topWords": "Top Words",
+    "topEmojis": "Top Emojis",
+    "wordFrequency": "Word Frequency",
+    "emojiFrequency": "Emoji Frequency",
+    "messageTimeline": "Message Timeline",
+    "activityByDay": "Activity by Day",
+    "activityByHour": "Activity by Hour",
+    "mostActiveWeek": "Most Active Week",
+    "mostActiveMonth": "Most Active Month",
+    "mostActiveYear": "Most Active Year",
+    "firstMessage": "First Message",
+    "lastMessage": "Last Message",
+    "daysActive": "Days Active",
+    "totalWords": "Total Words",
+    "averageWordsPerMessage": "Average Words Per Message",
+    "longestMessage": "Longest Message",
+    "shortestMessage": "Shortest Message",
+    "mostCommonEmoji": "Most Common Emoji",
+    "busiesHour": "Busiest Hour",
+    "quietestHour": "Quietest Hour",
+    "busiesDay": "Busiest Day",
+    "quietestDay": "Quietest Day",
+    "messageFrequency": "Message Frequency",
+    "status": {
+      "loadingSharedStory": "Preparing your shared story...",
+      "decryptError": "We couldn't decrypt this share link. Please make sure it wasn't modified."
+    },
+    "intro": {
+      "headline": "{year} Wrapped",
+      "firstMessagesTitle": "Your year started with"
+    },
+    "emoji": {
+      "topTitle": "Your most used emojis",
+      "messageTitle": "Message with most emojis",
+      "from": "from",
+      "overTime": {
+        "stackedTitle": "Emoji mix over time"
+      }
+    },
+    "words": {
+      "banner": {
+        "first": "While it is",
+        "second": "not a",
+        "third": "Competition"
+      },
+      "duel": {
+        "messagedLabel": "messaged",
+        "moreWordsThan": "more words than"
+      },
+      "breakdown": {
+        "title": "The Breakdown",
+        "wordsLabel": "words",
+        "messagesLabel": "messages"
+      }
+    },
+    "conversation": {
+      "changeTitle": "You changed. And so has your conversation.",
+      "rhythm": {
+        "title": "Your chat rhythm",
+        "mostActiveMonth": "Most active month",
+        "mostMessages": "Most messages",
+        "maxMessagesPerMonth": "Max messages/month",
+        "messagesInMonth": "messages in {month}",
+        "totalMessagesSince": "{count} messages since <month></month>",
+        "tooltip": "{name}: {value} messages"
+      }
+    },
+    "share": {
+      "title": "Keep the story going",
+      "description": "Send your Wrapped story to a friend with an end-to-end encrypted link or jump back to analyze a new chat.",
+      "preparing": "Preparing secure link...",
+      "buttons": {
+        "shareNative": "Share with friends",
+        "shareCopy": "Copy secure link",
+        "analyzeAnother": "Analyze another chat"
+      },
+      "messages": {
+        "nativeShare": "Share sheet opened on your device.",
+        "linkCopied": "Secure link copied to your clipboard.",
+        "unableToPrepare": "Unable to prepare the share link. Please try again."
+      },
+      "nativeShareTitle": "WhatsAnalyze Wrapped",
+      "nativeShareText": "Open our encrypted WhatsApp Wrapped story."
+    }
+  },
+  "wrappedAbout": "About Us",
+  "wrappedAboutPoints": "<p>We are a group of friends with a shared passion for technology and curiosity about human communication. After years of intense WhatsApp usage, we wanted to understand how our conversations and relationships changed over time.</p><p>As computer scientists we wanted more than raw statistics—we wanted a tool that unites privacy and curiosity. That idea became WhatsAnalyze: a fully local, privacy-first solution that delivers meaningful insights without sharing personal information.</p><p>A tool by users, for users—transparent, secure, and crafted with care.</p>"
+}

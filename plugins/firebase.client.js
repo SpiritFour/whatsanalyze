@@ -17,6 +17,21 @@ export default defineNuxtPlugin(() => {
   const firestore = getFirestore(app);
   const functions = getFunctions(app);
 
+  let wrappedFirestore = firestore;
+  let wrappedFunctions = functions;
+  if (config.public.wrappedFirebase) {
+    try {
+      const wrappedApp = initializeApp(
+        config.public.wrappedFirebase,
+        "wrapped"
+      );
+      wrappedFirestore = getFirestore(wrappedApp);
+      wrappedFunctions = getFunctions(wrappedApp);
+    } catch (e) {
+      console.warn("Wrapped Firebase initialization:", e);
+    }
+  }
+
   if (config.public.firebase.functionsEmulatorPort) {
     connectFunctionsEmulator(
       functions,
@@ -24,7 +39,6 @@ export default defineNuxtPlugin(() => {
       config.public.firebase.functionsEmulatorPort
     );
   }
-
   return {
     provide: {
       firebase: {
@@ -36,6 +50,8 @@ export default defineNuxtPlugin(() => {
         },
         serverTimestamp,
       },
+      firestore: wrappedFirestore,
+      functions: wrappedFunctions,
     },
   };
 });
