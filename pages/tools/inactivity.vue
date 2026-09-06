@@ -220,7 +220,10 @@
     >
       <LandingCards :items="fullAnalysisFeatures" />
       <div class="hook-actions">
-        <LandingButton :to="localePath('/')" @click="openFullAnalysis">
+        <LandingButton
+          :to="localePath({ path: '/', hash: '#results' })"
+          @click="openFullAnalysis"
+        >
           {{ t("toolsInactivity.hookButton") }}
         </LandingButton>
         <p class="hook-note">

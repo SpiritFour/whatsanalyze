@@ -18,6 +18,7 @@
     "test": "jest --runInBand",
     "test:e2e": "playwright test",
     "test:e2e:sandbox": "playwright test --config playwright.sandbox.config.js",
+    "test:e2e:preview": "playwright test tests/e2e/tools-and-footer.spec.js --config playwright.preview.config.js",
     "test:generated": "node scripts/verify-generated-site.js",
     "local": "NUXT_ENV_LOCAL=1 nuxt generate && NUXT_ENV_LOCAL=1 nuxt preview",
     "ci-dev-build": "NUXT_ENV_LOCAL=1 nuxt generate",

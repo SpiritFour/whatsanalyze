@@ -197,7 +197,7 @@
     >
       <LandingCards :items="hookFeatures" />
       <div class="hook-actions">
-        <LandingButton :to="localePath('/')">
+        <LandingButton :to="localePath({ path: '/', hash: '#results' })">
           {{ t("toolsChatHeatmap.hookButton") }}
         </LandingButton>
         <p class="hook-note">

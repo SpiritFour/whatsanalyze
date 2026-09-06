@@ -192,7 +192,7 @@
     >
       <LandingCards :items="hookFeatures" />
       <div class="hook-actions">
-        <LandingButton :to="localePath('/')">
+        <LandingButton :to="localePath({ path: '/', hash: '#results' })">
           {{ t("toolsWordCounter.hookButton") }}
         </LandingButton>
         <p class="hook-note">

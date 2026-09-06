@@ -1,7 +1,7 @@
 <template>
   <div class="foot py-7 additional-height">
-    <h3 v-for="post in posts" :key="post.to" class="my-3">
-      <nuxt-link :to="$localePath(post.name)">
+    <h3 v-for="post in posts" :key="post.path" class="my-3">
+      <nuxt-link :to="$localePath(post.path)">
         {{ $t(post.text) }}
       </nuxt-link>
     </h3>
@@ -62,39 +62,39 @@ export default {
         //   text: "Create a PDF from your WhatsApp chat",
         // },
         {
-          name: "tools/court-evidence",
+          path: "/tools/court-evidence",
           text: "pageNameCourt",
         },
         {
-          name: "tools/proof-of-relationship",
+          path: "/tools/proof-of-relationship",
           text: "pageNameRelationship",
         },
         {
-          name: "tools/inactivity",
+          path: "/tools/inactivity",
           text: "pageNameInactivity",
         },
         {
-          name: "tools/message-counter",
+          path: "/tools/message-counter",
           text: "pageNameMessages",
         },
         {
-          name: "tools/word-counter",
+          path: "/tools/word-counter",
           text: "pageNameWords",
         },
         {
-          name: "tools/chat-heatmap",
+          path: "/tools/chat-heatmap",
           text: "pageNameHeatmap",
         },
         {
-          name: "switch-from-whatsapp-to-signal",
+          path: "/switch-from-whatsapp-to-signal",
           text: "pageNameSignal",
         },
         {
-          name: "how-to-export-your-whatsapp-chat",
+          path: "/how-to-export-your-whatsapp-chat",
           text: "pageNameExport",
         },
         {
-          name: "whatsapp-wrapped-year-review",
+          path: "/whatsapp-wrapped-year-review",
           text: "pageNameWrapped",
         },
       ],
