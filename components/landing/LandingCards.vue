@@ -1,22 +1,33 @@
 <template>
   <div class="landing-cards">
-    <component
-      :is="item.to ? 'NuxtLink' : 'div'"
-      v-for="item in items"
-      :key="item.title"
-      :to="item.to"
-      class="landing-card"
-      :class="{ 'landing-card--link': item.to }"
-    >
-      <v-icon v-if="item.icon" class="landing-card__icon" size="32">
-        {{ item.icon }}
-      </v-icon>
-      <h3 class="landing-card__title">{{ item.title }}</h3>
-      <p class="landing-card__text">{{ item.text }}</p>
-      <span v-if="item.to" class="landing-card__more">
-        {{ item.linkText }} <v-icon size="16">mdi-arrow-right</v-icon>
-      </span>
-    </component>
+    <template v-for="item in items" :key="item.title">
+      <NuxtLink
+        v-if="item.to"
+        :to="item.to"
+        class="landing-card landing-card--link"
+      >
+        <v-icon v-if="item.icon" class="landing-card__icon" size="32">
+          {{ item.icon }}
+        </v-icon>
+        <h3 class="landing-card__title">{{ item.title }}</h3>
+        <p class="landing-card__text">{{ item.text }}</p>
+        <span class="landing-card__more">
+          {{ item.linkText || "Open" }}
+          <v-icon size="16">mdi-arrow-right</v-icon>
+        </span>
+      </NuxtLink>
+
+      <div v-else class="landing-card">
+        <v-icon v-if="item.icon" class="landing-card__icon" size="32">
+          {{ item.icon }}
+        </v-icon>
+        <h3 class="landing-card__title">{{ item.title }}</h3>
+        <p class="landing-card__text">{{ item.text }}</p>
+        <span v-if="item.linkText" class="landing-card__status">
+          {{ item.linkText }}
+        </span>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -49,12 +60,13 @@ export default {
   display: flex;
   flex-direction: column;
 }
-
 .landing-card--link {
-  transition: transform 0.25s ease;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 
   &:hover {
     transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.09);
   }
 }
 
@@ -85,5 +97,13 @@ export default {
   display: inline-flex;
   align-items: center;
   gap: 0.3em;
+}
+
+.landing-card__status {
+  margin-top: auto;
+  padding-top: 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--landing-card-muted, rgba(29, 29, 31, 0.45));
 }
 </style>

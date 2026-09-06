@@ -1,6 +1,8 @@
 <template>
   <div class="landing-page">
     <LandingHero
+      align="left"
+      :breadcrumbs="breadcrumbs"
       :eyebrow="t('courtEvidence.heroEyebrow')"
       :title="t('courtEvidence.heroTitle')"
       :subtitle="t('courtEvidence.heroSubtitle')"
@@ -139,7 +141,7 @@ export default {
         ][i - 1],
         title: t(`courtEvidence.case${i}Title`),
         text: t(`courtEvidence.case${i}Text`),
-        to: i === 3 ? localePath("proof-of-relationship") : undefined,
+        to: i === 3 ? localePath("/tools/proof-of-relationship") : undefined,
         linkText: i === 3 ? t("courtEvidence.caseLinkText") : undefined,
       }))
     );
@@ -158,8 +160,15 @@ export default {
       }))
     );
 
+    const breadcrumbs = computed(() => [
+      { label: "WhatsAnalyze", to: localePath("/") },
+      { label: "Tools", to: localePath("/tools") },
+      { label: t("courtEvidence.heroEyebrow") || "Court Evidence" },
+    ]);
+
     return {
       t,
+      breadcrumbs,
       analyzerPath: computed(() => localePath("/")),
       exportGuidePath: computed(() =>
         localePath("how-to-export-your-whatsapp-chat")

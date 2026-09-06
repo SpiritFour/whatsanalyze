@@ -1,7 +1,7 @@
 <template>
   <div class="foot py-7 additional-height">
-    <h3 v-for="post in posts" :key="post.to" class="my-3">
-      <nuxt-link :to="$localePath(post.name)">
+    <h3 v-for="post in posts" :key="post.path" class="my-3">
+      <nuxt-link :to="$localePath(post.path)">
         {{ $t(post.text) }}
       </nuxt-link>
     </h3>
@@ -40,6 +40,10 @@
         &copy; {{ new Date().getFullYear() }} -
         <nuxt-link :to="$localePath('/about')">About</nuxt-link>
         -
+        <nuxt-link :to="$localePath('/tools')">{{
+          $t("toolsHub.headerTools") || "Tools"
+        }}</nuxt-link>
+        -
         <nuxt-link :to="$localePath('/impressum')">Imprint</nuxt-link>
         -
         <nuxt-link :to="$localePath('/subscribe')">Subscriptions</nuxt-link>
@@ -58,23 +62,39 @@ export default {
         //   text: "Create a PDF from your WhatsApp chat",
         // },
         {
-          name: "court-evidence",
+          path: "/tools/court-evidence",
           text: "pageNameCourt",
         },
         {
-          name: "proof-of-relationship",
+          path: "/tools/proof-of-relationship",
           text: "pageNameRelationship",
         },
         {
-          name: "switch-from-whatsapp-to-signal",
+          path: "/tools/inactivity",
+          text: "pageNameInactivity",
+        },
+        {
+          path: "/tools/message-counter",
+          text: "pageNameMessages",
+        },
+        {
+          path: "/tools/word-counter",
+          text: "pageNameWords",
+        },
+        {
+          path: "/tools/chat-heatmap",
+          text: "pageNameHeatmap",
+        },
+        {
+          path: "/switch-from-whatsapp-to-signal",
           text: "pageNameSignal",
         },
         {
-          name: "how-to-export-your-whatsapp-chat",
+          path: "/how-to-export-your-whatsapp-chat",
           text: "pageNameExport",
         },
         {
-          name: "whatsapp-wrapped-year-review",
+          path: "/whatsapp-wrapped-year-review",
           text: "pageNameWrapped",
         },
       ],
