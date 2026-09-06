@@ -102,7 +102,7 @@ export const messages = {
         "Turn years of WhatsApp messages into one clear PDF — timestamps, statistics, and daily conversations that show a genuine relationship. 100% private.",
       heroEyebrow: "Relationship evidence",
       heroTitle:
-        '<span class="landing-hero__title-line">Years of “good morning”.</span><span class="landing-hero__title-line">One document.</span>',
+        '<span class="landing-hero__title-line">Years of “good morning 😘”.</span><span class="landing-hero__title-line">One document.</span>',
       heroSubtitle:
         "For visa applications and immigration interviews: turn your chat history into clear evidence of a genuine, ongoing relationship.",
       heroCta: "Create your PDF",
@@ -766,7 +766,7 @@ export const messages = {
         "Mach aus Jahren von WhatsApp-Nachrichten ein klares PDF – Zeitstempel, Statistiken und Alltagsgespräche, die eine echte Beziehung belegen. 100 % privat.",
       heroEyebrow: "Beziehungsnachweis",
       heroTitle:
-        '<span class="landing-hero__title-line">Jahre voller „Guten Morgen“.</span><span class="landing-hero__title-line">Ein Dokument.</span>',
+        '<span class="landing-hero__title-line">Jahre voller „Guter Morgen 😘“.</span><span class="landing-hero__title-line">Ein Dokument.</span>',
       heroSubtitle:
         "Für Visumsanträge und Behördentermine: Verwandle euren Chatverlauf in einen klaren Nachweis einer echten, gelebten Beziehung.",
       heroCta: "PDF erstellen",
@@ -1406,7 +1406,7 @@ export const messages = {
         "Convierte años de mensajes de WhatsApp en un PDF claro: marcas de tiempo, estadísticas y conversaciones diarias que demuestran una relación genuina. 100 % privado.",
       heroEyebrow: "Prueba de relación",
       heroTitle:
-        '<span class="landing-hero__title-line">Años de «buenos días».</span><span class="landing-hero__title-line">Un documento.</span>',
+        '<span class="landing-hero__title-line">Años de «buenos días 😘».</span><span class="landing-hero__title-line">Un documento.</span>',
       heroSubtitle:
         "Para solicitudes de visado y entrevistas de inmigración: convierte tu historial de chat en una prueba clara de una relación genuina y continua.",
       heroCta: "Crear tu PDF",
@@ -2484,7 +2484,7 @@ export const messages = {
         "Transforme anos de mensagens em um PDF com horários, estatísticas e conversas diárias que comprovam um relacionamento genuíno. 100% privado.",
       heroEyebrow: "Comprovação de relacionamento",
       heroTitle:
-        '<span class="landing-hero__title-line">Anos de “bom dia”.</span><span class="landing-hero__title-line">Um documento.</span>',
+        '<span class="landing-hero__title-line">Anos de “bom dia 😘”.</span><span class="landing-hero__title-line">Um documento.</span>',
       heroSubtitle:
         "Para pedidos de visto e entrevistas de imigração: transforme o histórico da sua conversa em prova clara de um relacionamento genuíno e contínuo.",
       heroCta: "Criar seu PDF",
@@ -3117,7 +3117,7 @@ export const messages = {
         "Transformez des années de messages WhatsApp en un PDF clair : horodatages, statistiques et échanges quotidiens qui attestent d'une relation authentique. 100 % privé.",
       heroEyebrow: "Preuve de relation",
       heroTitle:
-        '<span class="landing-hero__title-line">Des années de « bonjour ».</span><span class="landing-hero__title-line">Un document.</span>',
+        '<span class="landing-hero__title-line">Des années de « bonjour 😘 ».</span><span class="landing-hero__title-line">Un document.</span>',
       heroSubtitle:
         "Pour vos demandes de visa et entretiens d'immigration : transformez votre historique de chat en une preuve évidente d'une relation sincère et continue.",
       heroCta: "Créer votre PDF",
@@ -3748,7 +3748,7 @@ export const messages = {
         "Trasforma anni di messaggi in un PDF chiaro: orari, statistiche e conversazioni quotidiane che dimostrano un legame autentico e duraturo. 100% privato.",
       heroEyebrow: "Prova di relazione",
       heroTitle:
-        '<span class="landing-hero__title-line">Anni di «buongiorno».</span><span class="landing-hero__title-line">Un documento.</span>',
+        '<span class="landing-hero__title-line">Anni di «buongiorno 😘».</span><span class="landing-hero__title-line">Un documento.</span>',
       heroSubtitle:
         "Per domande di visto e colloqui di immigrazione: trasforma la tua chat in una prova inequivocabile di una relazione autentica e continua.",
       heroCta: "Crea il tuo PDF",
