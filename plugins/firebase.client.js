@@ -19,7 +19,6 @@ export default defineNuxtPlugin(() => {
 
   let wrappedFirestore = firestore;
   let wrappedFunctions = functions;
-  let wrappedAnalytics;
   let analytics;
 
   if (config.public.wrappedFirebase) {
