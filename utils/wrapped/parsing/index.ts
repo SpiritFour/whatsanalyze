@@ -98,18 +98,32 @@ class Parser {
       /is a contact\.$/i,
     ];
 
-    return messages.filter((msg) => {
+    const nonIgnored = messages.filter((msg) => {
+      if (msg.author === null) return false;
       const normalizedMessage = msg.message.replace(/\u200e/g, "").trim();
-      const isIgnored = ignoredMessagePatterns.some((pattern) =>
+      return !ignoredMessagePatterns.some((pattern) =>
         pattern.test(normalizedMessage)
       );
-
-      return (
-        msg.author !== null &&
-        msg.date.getFullYear() === getTargetYear() &&
-        !isIgnored
-      );
     });
+
+    const targetYear = getTargetYear();
+    const inTargetYear = nonIgnored.filter(
+      (msg) => msg.date.getFullYear() === targetYear
+    );
+
+    if (inTargetYear.length > 0) {
+      return inTargetYear;
+    }
+
+    // If no messages match target year (e.g. test chats or older exports),
+    // use messages from the latest year present in the chat so slides render
+    const years = nonIgnored.map((msg) => msg.date.getFullYear());
+    if (years.length > 0) {
+      const latestYear = Math.max(...years);
+      return nonIgnored.filter((msg) => msg.date.getFullYear() === latestYear);
+    }
+
+    return nonIgnored;
   }
 }
 

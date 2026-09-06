@@ -112,23 +112,13 @@ export default defineNuxtConfig({
         ? "price_1Sc6u074KJ57kF2wxb5cnIZL"
         : "price_1SgOxVL4rDqbYflowSbSteJQ",
       wrappedFirebase: {
-        apiKey: local
-          ? "AIzaSyCCX536nN4oTAXj49M_M1ZShD3ekLdjkBo"
-          : "AIzaSyBaVob5g3xHdzJnkOI2dtbdYND-__Tzutc",
-        authDomain: local
-          ? "whatsanalyze-wrapped.firebaseapp.com"
-          : "whatsanalyze-wrapped-prod.firebaseapp.com",
-        projectId: local
-          ? "whatsanalyze-wrapped"
-          : "whatsanalyze-wrapped-prod",
-        storageBucket: local
-          ? "whatsanalyze-wrapped.firebasestorage.app"
-          : "whatsanalyze-wrapped-prod.firebasestorage.app",
-        messagingSenderId: local ? "761196645139" : "1053765361889",
-        appId: local
-          ? "1:761196645139:web:88191b29876feb404ae8e6"
-          : "1:1053765361889:web:feb439fa8220fadf1157a0",
-        measurementId: local ? "G-KEE2KV93SK" : "G-XJDRX60BNX",
+        apiKey: "AIzaSyBaVob5g3xHdzJnkOI2dtbdYND-__Tzutc",
+        authDomain: "whatsanalyze-wrapped-prod.firebaseapp.com",
+        projectId: "whatsanalyze-wrapped-prod",
+        storageBucket: "whatsanalyze-wrapped-prod.firebasestorage.app",
+        messagingSenderId: "1053765361889",
+        appId: "1:1053765361889:web:feb439fa8220fadf1157a0",
+        measurementId: "G-XJDRX60BNX",
       },
     },
   },
