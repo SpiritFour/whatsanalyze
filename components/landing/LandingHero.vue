@@ -31,7 +31,7 @@
         </template>
       </nav>
       <p v-if="eyebrow" class="landing-hero__eyebrow">{{ eyebrow }}</p>
-      <h1 class="landing-hero__title" v-html="title"></h1>
+      <h1 class="landing-hero__title" v-html="renderedTitle"></h1>
       <p v-if="subtitle" class="landing-hero__subtitle">{{ subtitle }}</p>
       <div v-if="ctaText" class="landing-hero__actions">
         <LandingButton :to="ctaTo">{{ ctaText }}</LandingButton>
@@ -59,6 +59,24 @@ export default {
   },
   data() {
     return { visible: false };
+  },
+  computed: {
+    renderedTitle() {
+      if (!this.title) return "";
+      if (this.title.includes("landing-hero__title-line")) {
+        return this.title;
+      }
+      if (/<br\s*\/?>/i.test(this.title)) {
+        return this.title
+          .split(/<br\s*\/?>/i)
+          .map(
+            (part) =>
+              `<span class="landing-hero__title-line">${part.trim()}</span>`
+          )
+          .join("");
+      }
+      return this.title;
+    },
   },
   mounted() {
     requestAnimationFrame(() => {
@@ -140,12 +158,16 @@ export default {
 }
 
 .landing-hero__title {
-  font-size: clamp(2.5rem, 7vw, 4.8rem);
+  font-size: clamp(2.2rem, 5.5vw, 4.2rem);
   font-weight: 700;
-  line-height: 1.05;
+  line-height: 1.1;
   letter-spacing: -0.02em;
   margin: 0 auto;
   max-width: 18ch;
+
+  :deep(.landing-hero__title-line) {
+    display: block;
+  }
 }
 
 .landing-hero__subtitle {
@@ -183,6 +205,12 @@ export default {
   .landing-hero__title {
     margin: 0;
     max-width: none;
+    font-size: clamp(2rem, 4.4vw, 3.6rem);
+
+    :deep(.landing-hero__title-line) {
+      display: block;
+      white-space: nowrap;
+    }
   }
 
   .landing-hero__subtitle {
@@ -193,6 +221,18 @@ export default {
   .landing-hero__actions {
     display: flex;
     justify-content: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .landing-hero--left .landing-hero__title {
+    font-size: clamp(1.35rem, 5.2vw, 2rem);
+  }
+}
+
+@media (max-width: 380px) {
+  .landing-hero--left .landing-hero__title {
+    font-size: clamp(1.15rem, 5vw, 1.5rem);
   }
 }
 </style>

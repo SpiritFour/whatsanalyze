@@ -3,10 +3,10 @@
     <!-- Hero with ToolDropzone Visual Slot -->
     <LandingHero
       :breadcrumbs="breadcrumbs"
-      eyebrow="Free WhatsApp Tool"
-      title="Who Texted Last? Inactivity & Gap Tracker"
-      subtitle="Discover who sent the last message, calculate elapsed silence duration, measure reply latencies, and pinpoint historical conversation gaps."
-      note="100% client-side · Zero server upload · Free & open source"
+      :eyebrow="t('toolsInactivity.heroEyebrow')"
+      :title="t('toolsInactivity.heroTitle')"
+      :subtitle="t('toolsInactivity.heroSubtitle')"
+      :note="t('toolsInactivity.heroNote')"
     >
       <div id="dropzone-slot">
         <ToolDropzone @analyzed="onChatAnalyzed" @reset="onReset" />
@@ -17,9 +17,9 @@
     <LandingSection
       v-if="analysis"
       theme="light"
-      eyebrow="Live Chat Insights"
-      title="Conversation Inactivity Report"
-      text="Computed directly from your timestamps in your browser's local memory."
+      :eyebrow="t('toolsInactivity.reportEyebrow')"
+      :title="t('toolsInactivity.reportTitle')"
+      :text="t('toolsInactivity.reportText')"
     >
       <!-- Hero Metric Card -->
       <div
@@ -28,11 +28,13 @@
       >
         <div class="status-pill">
           <span class="status-indicator"></span>
-          <span class="status-text">{{ analysis.inactivityStatusLabel }}</span>
+          <span class="status-text">{{ localizedStatusText }}</span>
         </div>
 
         <div class="hero-headline">
-          <span class="hero-sublabel">LAST MESSAGE WAS SENT BY</span>
+          <span class="hero-sublabel">{{
+            t("toolsInactivity.lastMessageSentBy")
+          }}</span>
           <h2 class="hero-author">{{ analysis.lastMessage.author }}</h2>
           <div class="hero-time">
             <span class="time-relative">{{
@@ -57,33 +59,43 @@
             <v-icon color="#21a68d">mdi-timer-sand</v-icon>
           </div>
           <div class="metric-meta">
-            <span class="metric-label mono-label">LONGEST SILENCE GAP</span>
+            <span class="metric-label mono-label">{{
+              t("toolsInactivity.metricLongestSilence")
+            }}</span>
             <span class="metric-value">{{ topGapFormatted }}</span>
             <span class="metric-caption">
-              Revived by {{ topGapBrokenBy }}
+              {{
+                t("toolsInactivity.metricRevivedBy", { name: topGapBrokenBy })
+              }}
             </span>
           </div>
         </div>
-
         <div class="metric-card">
           <div class="metric-icon">
             <v-icon color="#ffd45c">mdi-reply-all-outline</v-icon>
           </div>
           <div class="metric-meta">
-            <span class="metric-label mono-label">FIRST RESPONDER</span>
+            <span class="metric-label mono-label">{{
+              t("toolsInactivity.metricTopInitiator")
+            }}</span>
             <span class="metric-value">{{ topInitiatorName }}</span>
             <span class="metric-caption">
-              Started {{ topInitiatorPct }}% of conversations
+              {{
+                t("toolsInactivity.metricStartedConversations", {
+                  pct: topInitiatorPct,
+                })
+              }}
             </span>
           </div>
         </div>
-
         <div class="metric-card">
           <div class="metric-icon">
             <v-icon color="#ff8f00">mdi-speedometer</v-icon>
           </div>
           <div class="metric-meta">
-            <span class="metric-label mono-label">FASTEST REPLY TIME</span>
+            <span class="metric-label mono-label">{{
+              t("toolsInactivity.metricFastestReply")
+            }}</span>
             <span class="metric-value">{{ fastestResponderTime }}</span>
             <span class="metric-caption">{{ fastestResponderName }}</span>
           </div>
@@ -94,12 +106,18 @@
             <v-icon color="#00e676">mdi-message-text-outline</v-icon>
           </div>
           <div class="metric-meta">
-            <span class="metric-label mono-label">TOTAL MESSAGES</span>
+            <span class="metric-label mono-label">{{
+              t("toolsInactivity.metricTotalMessages")
+            }}</span>
             <span class="metric-value">
               {{ analysis.totalMessages.toLocaleString() }}
             </span>
             <span class="metric-caption">
-              Over {{ analysis.dateRange.totalDays }} days
+              {{
+                t("toolsInactivity.metricOverDays", {
+                  days: analysis.dateRange.totalDays,
+                })
+              }}
             </span>
           </div>
         </div>
@@ -109,10 +127,14 @@
       <div class="participants-section">
         <div class="section-header">
           <h3 class="section-title">
-            Participant Activity & Latency Breakdown
+            {{ t("toolsInactivity.participantsTitle") }}
           </h3>
           <span class="mono-label section-tag">
-            {{ analysis.participants.length }} PARTICIPANTS
+            {{
+              t("toolsInactivity.participantsCount", {
+                count: analysis.participants.length,
+              })
+            }}
           </span>
         </div>
 
@@ -120,11 +142,11 @@
           <table class="participants-table">
             <thead>
               <tr>
-                <th>Participant</th>
-                <th>Last Active</th>
-                <th>Last Snippet</th>
-                <th>Avg Reply Latency</th>
-                <th>Starters Ratio</th>
+                <th>{{ t("toolsInactivity.colParticipant") }}</th>
+                <th>{{ t("toolsInactivity.colLastActive") }}</th>
+                <th>{{ t("toolsInactivity.colLastMessage") }}</th>
+                <th>{{ t("toolsInactivity.colMedianReply") }}</th>
+                <th>{{ t("toolsInactivity.colShare") }}</th>
               </tr>
             </thead>
             <tbody>
@@ -155,8 +177,10 @@
         class="gaps-section"
       >
         <div class="section-header">
-          <h3 class="section-title">Longest Silence Periods (Chat Gaps)</h3>
-          <span class="mono-label section-tag">TOP HISTORICAL DORMANCIES</span>
+          <h3 class="section-title">{{ t("toolsInactivity.gapsTitle") }}</h3>
+          <span class="mono-label section-tag">{{
+            t("toolsInactivity.gapsBadge")
+          }}</span>
         </div>
 
         <div class="gaps-list">
@@ -168,14 +192,15 @@
             <div class="gap-rank mono-label">#{{ index + 1 }}</div>
             <div class="gap-content">
               <div class="gap-duration">
-                {{ gap.durationFormatted }} of silence
+                {{ gap.durationFormatted }} {{ t("toolsInactivity.ofSilence") }}
               </div>
               <div class="gap-interval mono-label">
                 {{ formatDate(gap.startDate) }} → {{ formatDate(gap.endDate) }}
               </div>
               <div class="gap-broken">
-                Silence broken by <strong>{{ gap.brokenBy }}</strong
-                >:
+                {{
+                  t("toolsInactivity.silenceBrokenBy", { name: gap.brokenBy })
+                }}
                 <span class="snippet"
                   >"{{ truncate(gap.messageAfter, 60) }}"</span
                 >
@@ -189,17 +214,17 @@
     <!-- Conversion Hook (Dark Landing Section) -->
     <LandingSection
       theme="dark"
-      eyebrow="Beyond Basic Inactivity"
-      title="You're Seeing Only 1% of Your Chat Data"
-      text="WhatsAnalyze transforms your entire conversation into interactive charts, response metrics, and an annual Wrapped story. 100% private in your browser."
+      :eyebrow="t('toolsInactivity.hookEyebrow')"
+      :title="t('toolsInactivity.hookTitle')"
+      :text="t('toolsInactivity.hookText')"
     >
       <LandingCards :items="fullAnalysisFeatures" />
       <div class="hook-actions">
         <LandingButton :to="localePath('/')" @click="openFullAnalysis">
-          Explore Complete WhatsApp Analysis →
+          {{ t("toolsInactivity.hookButton") }}
         </LandingButton>
         <p class="hook-note">
-          Instant transition · No re-upload required · Free
+          {{ t("toolsInactivity.hookNote") }}
         </p>
       </div>
     </LandingSection>
@@ -207,9 +232,9 @@
     <!-- Methodology & Precision Section -->
     <LandingSection
       theme="white"
-      eyebrow="Methodology & Precision"
-      title="How Inactivity & Turn-Taking Are Measured"
-      text="Unlike WhatsApp's basic online status, exported chat logs provide millisecond-accurate conversation history."
+      :eyebrow="t('toolsInactivity.methodologyEyebrow')"
+      :title="t('toolsInactivity.methodologyTitle')"
+      :text="t('toolsInactivity.methodologyText')"
     >
       <LandingCards :items="methodologyCards" />
     </LandingSection>
@@ -217,29 +242,29 @@
     <!-- Step-by-Step Export Guide -->
     <LandingSection
       theme="light"
-      eyebrow="Step-by-Step Guide"
-      title="How to Export Your WhatsApp Chat"
+      :eyebrow="t('toolsInactivity.stepsEyebrow')"
+      :title="t('toolsInactivity.stepsTitle')"
     >
       <LandingSteps :steps="exportSteps" />
       <p class="landing-page__guide-link">
         <NuxtLink :to="localePath('how-to-export-your-whatsapp-chat')">
-          Detailed WhatsApp Export Guide →
+          {{ t("toolsInactivity.guideLink") }} →
         </NuxtLink>
       </p>
     </LandingSection>
 
     <!-- Frequently Asked Questions -->
-    <LandingSection theme="white" title="Frequently Asked Questions">
+    <LandingSection theme="white" :title="t('toolsInactivity.faqTitle')">
       <LandingFaq :items="faqItems" />
     </LandingSection>
 
     <!-- Final Bottom CTA -->
     <LandingCta
-      title="Ready to Check Your Chat's Inactivity?"
-      cta-text="Check Your Chat Now"
+      :title="t('toolsInactivity.ctaTitle')"
+      :cta-text="t('toolsInactivity.ctaButton')"
       cta-to="#"
-      note="100% Private · Zero Server Upload · No Registration Required"
-      disclaimer="WhatsAnalyze is an independent open-source project and is not affiliated with, endorsed by, or sponsored by WhatsApp or Meta."
+      :note="t('toolsInactivity.ctaNote')"
+      :disclaimer="t('toolsInactivity.disclaimer')"
       @click="scrollToDropzone"
     />
   </div>
@@ -254,43 +279,50 @@ import {
   type ChatAttachment,
 } from "~/composables/useChatTool";
 
+const { t } = useI18n();
 const localePath = useLocalePath();
 
 const breadcrumbs = computed(() => [
-  { label: "WhatsAnalyze", to: localePath("/") },
-  { label: "Tools", to: localePath("/tools") },
-  { label: "Inactivity Tracker" },
+  { label: t("toolsInactivity.breadcrumbHome"), to: localePath("/") },
+  { label: t("toolsInactivity.breadcrumbTools"), to: localePath("/tools") },
+  { label: t("toolsInactivity.breadcrumbCurrent") },
 ]);
+
 // SEO Metadata & Generative Engine Optimization
 useSeoMeta({
-  title: "Who Texted Last? WhatsApp Inactivity & Gap Tracker | WhatsAnalyze",
-  description:
-    "Free WhatsApp inactivity checker. Find out who sent the last message, calculate chat silence duration, detect ghosting, and analyze reply latency 100% privately in your browser.",
-  ogTitle: "Who Texted Last? WhatsApp Inactivity & Gap Tracker",
-  ogDescription:
-    "Check who sent the last WhatsApp message, how long the conversation has been dormant, and reply latencies with zero server upload.",
+  title: () => t("toolsInactivity.seoTitle"),
+  description: () => t("toolsInactivity.seoDescription"),
+  ogTitle: () => t("toolsInactivity.ogTitle"),
+  ogDescription: () => t("toolsInactivity.ogDescription"),
   ogType: "website",
   ogUrl: "https://www.whatsanalyze.com/tools/inactivity",
 });
 
-const faqItems = [
+const localizedStatusText = computed(() => {
+  if (!analysis.value) return "";
+  const key = `toolsInactivity.status_${analysis.value.inactivityStatus}`;
+  const translated = t(key);
+  return translated !== key ? translated : analysis.value.inactivityStatusLabel;
+});
+
+const faqItems = computed(() => [
   {
-    q: "Can I see who sent the last message in a group chat?",
-    a: "Yes. The inactivity tool lists every participant alongside their specific last message timestamp, making it easy to see who went silent first and who holds the last word.",
+    q: t("toolsInactivity.faq1Q"),
+    a: t("toolsInactivity.faq1A"),
   },
   {
-    q: "Is my chat data uploaded or saved anywhere?",
-    a: "No. All parsing and metric calculations execute purely in your browser's local memory. No chat text or metadata ever leaves your device.",
+    q: t("toolsInactivity.faq2Q"),
+    a: t("toolsInactivity.faq2A"),
   },
   {
-    q: "What defines a 'Silence Gap' or conversation break?",
-    a: "A silence gap occurs when more than 6 hours pass between two consecutive messages. The longest gaps represent historical periods of dormancy.",
+    q: t("toolsInactivity.faq3Q"),
+    a: t("toolsInactivity.faq3A"),
   },
   {
-    q: "Does this work with both Android and iOS exports?",
-    a: "Yes. The parser supports all WhatsApp date and timestamp conventions across iOS, Android, and WhatsApp Web exports.",
+    q: t("toolsInactivity.faq4Q"),
+    a: t("toolsInactivity.faq4A"),
   },
-];
+]);
 
 // JSON-LD Structured Data
 useHead(() => ({
@@ -302,7 +334,7 @@ useHead(() => ({
         "@graph": [
           {
             "@type": "SoftwareApplication",
-            name: "WhatsAnalyze WhatsApp Inactivity Tracker",
+            name: t("toolsInactivity.seoTitle"),
             operatingSystem: "All (Web-based)",
             applicationCategory: "UtilitiesApplication",
             offers: {
@@ -310,12 +342,11 @@ useHead(() => ({
               price: "0",
               priceCurrency: "USD",
             },
-            description:
-              "Client-side tool to analyze WhatsApp chat inactivity, last message senders, and response latencies.",
+            description: t("toolsInactivity.seoDescription"),
           },
           {
             "@type": "FAQPage",
-            mainEntity: faqItems.map((item) => ({
+            mainEntity: faqItems.value.map((item) => ({
               "@type": "Question",
               name: item.q,
               acceptedAnswer: { "@type": "Answer", text: item.a },
@@ -425,61 +456,61 @@ function openFullAnalysis() {
   // Shared chat is already loaded in useSharedChat
 }
 
-const fullAnalysisFeatures = [
+const fullAnalysisFeatures = computed(() => [
   {
     icon: "mdi-chart-bell-curve-cumulative",
-    title: "24h Activity Distribution",
-    text: "Find out when you talk the most — from morning coffee chats to late night conversations.",
+    title: t("toolsInactivity.hookCard1Title"),
+    text: t("toolsInactivity.hookCard1Text"),
   },
   {
     icon: "mdi-emoticon-outline",
-    title: "Emoji & Word Clouds",
-    text: "Discover which emojis and catchphrases define your conversation dynamic.",
+    title: t("toolsInactivity.hookCard2Title"),
+    text: t("toolsInactivity.hookCard2Text"),
   },
   {
     icon: "mdi-lightning-bolt-outline",
-    title: "First Responder Dynamics",
-    text: "Detailed breakdown of who starts topics, double texts, and answers the fastest.",
+    title: t("toolsInactivity.hookCard3Title"),
+    text: t("toolsInactivity.hookCard3Text"),
   },
   {
     icon: "mdi-party-popper",
-    title: "WhatsApp Wrapped Story",
-    text: "Turn your chat into an Instagram-story style retrospective to share with friends.",
+    title: t("toolsInactivity.hookCard4Title"),
+    text: t("toolsInactivity.hookCard4Text"),
   },
-];
+]);
 
-const methodologyCards = [
+const methodologyCards = computed(() => [
   {
     icon: "mdi-clock-check-outline",
-    title: "Millisecond-Accurate Silence",
-    text: "Elapsed time is calculated from the final message timestamp down to the minute, differentiating active exchanges from historical dormancies.",
+    title: t("toolsInactivity.methodCard1Title"),
+    text: t("toolsInactivity.methodCard1Text"),
   },
   {
     icon: "mdi-chat-processing-outline",
-    title: "Turn-Taking Response Latency",
-    text: "Average reply speed is measured specifically when participants respond to each other, filtering out natural day-long pauses.",
+    title: t("toolsInactivity.methodCard2Title"),
+    text: t("toolsInactivity.methodCard2Text"),
   },
   {
     icon: "mdi-timer-sand-complete",
-    title: "6-Hour Conversation Gaps",
-    text: "Silences exceeding 6 hours are classified as conversation breaks to determine who consistently revives and initiates chats.",
+    title: t("toolsInactivity.methodCard3Title"),
+    text: t("toolsInactivity.methodCard3Text"),
   },
-];
+]);
 
-const exportSteps = [
+const exportSteps = computed(() => [
   {
-    title: "Open Chat in WhatsApp",
-    text: "Open any 1-on-1 or group chat on iOS or Android and tap the contact or group name at the top.",
+    title: t("toolsInactivity.step1Title"),
+    text: t("toolsInactivity.step1Text"),
   },
   {
-    title: "Export Chat Without Media",
-    text: "Scroll to the bottom, select 'Export Chat', and choose 'Without Media' for instant processing.",
+    title: t("toolsInactivity.step2Title"),
+    text: t("toolsInactivity.step2Text"),
   },
   {
-    title: "Drop File in the Tracker",
-    text: "Drop the generated .txt or .zip file into the dropzone above to view inactivity metrics immediately.",
+    title: t("toolsInactivity.step3Title"),
+    text: t("toolsInactivity.step3Text"),
   },
-];
+]);
 </script>
 
 <style scoped lang="scss">

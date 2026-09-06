@@ -3,11 +3,11 @@
     <!-- Technical Security Banner -->
     <div class="tech-spec-bar">
       <span class="pulse-dot"></span>
-      <span class="mono-label">LOCAL CLIENT ENGINE</span>
+      <span class="mono-label">{{ t("toolDropzone.localEngine") }}</span>
       <span class="separator">•</span>
-      <span class="mono-label">ZERO CLOUD TRANSMISSION</span>
+      <span class="mono-label">{{ t("toolDropzone.zeroCloud") }}</span>
       <span class="separator">•</span>
-      <span class="mono-label">100% PRIVATE</span>
+      <span class="mono-label">{{ t("toolDropzone.private") }}</span>
     </div>
 
     <!-- Drop Container Card (Styled like LandingDocMock / LandingStatsMock) -->
@@ -40,19 +40,17 @@
           <v-icon size="32" color="#21a68d">mdi-tray-arrow-down</v-icon>
         </div>
 
-        <h3 class="dropzone-title">Drop your WhatsApp chat export here</h3>
-        <p class="dropzone-subtitle">
-          Accepts exported <code>.txt</code> or <code>.zip</code> chat files
-        </p>
+        <h3 class="dropzone-title">{{ t("toolDropzone.dropTitle") }}</h3>
+        <p class="dropzone-subtitle">{{ t("toolDropzone.dropSubtitle") }}</p>
 
         <div class="action-buttons" @click.stop>
           <button type="button" class="btn-primary" @click="triggerFileDialog">
             <v-icon size="18" class="mr-1">mdi-file-upload-outline</v-icon>
-            Select Chat File
+            {{ t("toolDropzone.selectFile") }}
           </button>
           <button type="button" class="btn-ghost" @click="loadSampleChat">
             <v-icon size="18" class="mr-1">mdi-play-circle-outline</v-icon>
-            Try With Sample Chat
+            {{ t("toolDropzone.trySample") }}
           </button>
         </div>
       </div>
@@ -60,9 +58,9 @@
       <!-- Loading / Parsing State -->
       <div v-else-if="loading" class="dropzone-content loading-state">
         <div class="spinner-ring"></div>
-        <h4 class="loading-title">Analyzing Conversation Gaps...</h4>
+        <h4 class="loading-title">{{ t("toolDropzone.analyzingTitle") }}</h4>
         <p class="loading-meta mono-label">
-          Computing timestamps, response latencies, and participant inactivity
+          {{ t("toolDropzone.analyzingSubtitle") }}
         </p>
       </div>
 
@@ -73,8 +71,12 @@
           <div class="file-info">
             <span class="file-name">{{ loadedFileName }}</span>
             <span class="file-meta mono-label">
-              {{ parsedMessageCount.toLocaleString() }} messages • analyzed in
-              {{ parseDurationMs }}ms
+              {{
+                t("toolDropzone.messagesAnalyzedIn", {
+                  count: parsedMessageCount.toLocaleString(),
+                  time: parseDurationMs,
+                })
+              }}
             </span>
           </div>
         </div>
@@ -85,7 +87,7 @@
           @click="triggerFileDialog"
         >
           <v-icon size="16" class="mr-1">mdi-swap-horizontal</v-icon>
-          Switch File
+          {{ t("toolDropzone.switchFile") }}
         </button>
       </div>
 
@@ -102,6 +104,8 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+
+const { t } = useI18n();
 import {
   parseChatFile,
   useSharedChat,

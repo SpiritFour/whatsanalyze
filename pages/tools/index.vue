@@ -1,27 +1,30 @@
 <template>
   <div class="landing-page">
     <LandingHero
-      eyebrow="WhatsApp Tools & Utilities"
-      title="Single-Purpose Tools for Your WhatsApp Chats"
-      subtitle="Fast, focused, client-side utilities. Answer specific questions about your conversations with zero server upload and complete privacy."
-      cta-text="Open Inactivity Tracker"
+      :eyebrow="t('toolsHub.heroEyebrow')"
+      :title="t('toolsHub.heroTitle')"
+      :subtitle="t('toolsHub.heroSubtitle')"
+      :cta-text="t('toolsHub.heroCta')"
       :cta-to="localePath('/tools/inactivity')"
-      note="100% client-side · Zero server upload · Free & open source"
+      :note="t('toolsHub.heroNote')"
     >
       <div class="tools-hero-preview">
         <div class="tools-hero-card">
           <div class="tools-hero-card__header">
-            <span class="tools-hero-card__badge">Live Micro-Tool</span>
+            <span class="tools-hero-card__badge">{{
+              t("toolsHub.heroCardBadge")
+            }}</span>
             <span class="tools-hero-card__dot"></span>
           </div>
-          <h3 class="tools-hero-card__title">Who Texted Last?</h3>
+          <h3 class="tools-hero-card__title">
+            {{ t("toolsHub.heroCardTitle") }}
+          </h3>
           <p class="tools-hero-card__desc">
-            Calculate elapsed silence duration, turn-taking reply latencies, and
-            discover the longest conversation gaps in your chat.
+            {{ t("toolsHub.heroCardDesc") }}
           </p>
           <div class="tools-hero-card__action">
             <LandingButton :to="localePath('/tools/inactivity')">
-              Try Inactivity Tracker →
+              {{ t("toolsHub.heroCardBtn") }}
             </LandingButton>
           </div>
         </div>
@@ -31,9 +34,9 @@
     <!-- Section 1: The Tools Grid -->
     <LandingSection
       theme="light"
-      eyebrow="Available & Upcoming Tools"
-      title="Choose What You Want to Measure"
-      text="Every tool runs directly in your browser. No registration, no data uploaded to any server."
+      :eyebrow="t('toolsHub.sectionToolsEyebrow')"
+      :title="t('toolsHub.sectionToolsTitle')"
+      :text="t('toolsHub.sectionToolsText')"
     >
       <LandingCards :items="toolsList" />
     </LandingSection>
@@ -41,9 +44,9 @@
     <!-- Section 2: Why Client-Side Tools? (Pillars) -->
     <LandingSection
       theme="white"
-      eyebrow="Private By Design"
-      title="Why Local-Only Chat Tools Matter"
-      text="Your personal conversations are sensitive. That's why we never transmit your data across external networks."
+      :eyebrow="t('toolsHub.sectionPillarsEyebrow')"
+      :title="t('toolsHub.sectionPillarsTitle')"
+      :text="t('toolsHub.sectionPillarsText')"
     >
       <LandingCards :items="pillars" />
     </LandingSection>
@@ -51,24 +54,24 @@
     <!-- Section 3: 3 Steps to Use -->
     <LandingSection
       theme="light"
-      eyebrow="How It Works"
-      title="From Chat Export to Insights in Seconds"
+      :eyebrow="t('toolsHub.sectionStepsEyebrow')"
+      :title="t('toolsHub.sectionStepsTitle')"
     >
       <LandingSteps :steps="steps" />
       <p class="landing-page__guide-link">
         <NuxtLink :to="localePath('how-to-export-your-whatsapp-chat')">
-          Detailed WhatsApp Export Guide →
+          {{ t("toolsHub.guideLink") }} →
         </NuxtLink>
       </p>
     </LandingSection>
 
     <!-- Section 4: Bottom CTA -->
     <LandingCta
-      title="Prefer the Full Picture in One Dashboard?"
-      cta-text="Launch Full WhatsApp Analyzer"
+      :title="t('toolsHub.ctaTitle')"
+      :cta-text="t('toolsHub.ctaButton')"
       :cta-to="localePath('/')"
-      note="Analyze all charts, word clouds, wrapped stories, and export beautiful PDF books."
-      disclaimer="WhatsAnalyze is an independent open-source project and is not affiliated with, endorsed by, or sponsored by WhatsApp or Meta."
+      :note="t('toolsHub.ctaNote')"
+      :disclaimer="t('toolsHub.disclaimer')"
     />
   </div>
 </template>
@@ -76,30 +79,29 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
+const { t } = useI18n();
 const localePath = useLocalePath();
 
 // SEO Metadata
 useSeoMeta({
-  title: "WhatsApp Tools & Utilities Suite | WhatsAnalyze",
-  description:
-    "Explore individual, fast, and 100% private WhatsApp chat tools. From inactivity tracking and message counting to response latencies — processed entirely in your browser.",
-  ogTitle: "WhatsApp Tools & Utilities Suite | WhatsAnalyze",
-  ogDescription:
-    "Single-purpose, fast WhatsApp tools. Check who texted last, count messages, and inspect silence gaps without uploading data.",
+  title: () => t("toolsHub.seoTitle"),
+  description: () => t("toolsHub.seoDescription"),
+  ogTitle: () => t("toolsHub.ogTitle"),
+  ogDescription: () => t("toolsHub.ogDescription"),
   ogType: "website",
   ogUrl: "https://www.whatsanalyze.com/tools",
 });
 
 // JSON-LD ItemList Schema
-useHead({
+useHead(() => ({
   script: [
     {
       type: "application/ld+json",
       innerHTML: JSON.stringify({
         "@context": "https://schema.org",
         "@type": "CollectionPage",
-        name: "WhatsAnalyze WhatsApp Tools",
-        description: "Collection of client-side WhatsApp utility tools.",
+        name: t("toolsHub.seoTitle"),
+        description: t("toolsHub.seoDescription"),
         url: "https://www.whatsanalyze.com/tools",
         mainEntity: {
           "@type": "ItemList",
@@ -107,21 +109,21 @@ useHead({
             {
               "@type": "SoftwareApplication",
               position: 1,
-              name: "WhatsApp Inactivity & Last Message Tracker",
+              name: t("toolsHub.toolInactivityTitle"),
               url: "https://www.whatsanalyze.com/tools/inactivity",
               applicationCategory: "UtilitiesApplication",
             },
             {
               "@type": "SoftwareApplication",
               position: 2,
-              name: "WhatsApp Court & Legal Evidence PDF",
+              name: t("toolsHub.toolCourtTitle"),
               url: "https://www.whatsanalyze.com/tools/court-evidence",
               applicationCategory: "UtilitiesApplication",
             },
             {
               "@type": "SoftwareApplication",
               position: 3,
-              name: "WhatsApp Proof of Relationship for Visa",
+              name: t("toolsHub.toolRelationshipTitle"),
               url: "https://www.whatsanalyze.com/tools/proof-of-relationship",
               applicationCategory: "UtilitiesApplication",
             },
@@ -130,91 +132,80 @@ useHead({
       }),
     },
   ],
-});
+}));
 
 const toolsList = computed(() => [
   {
     icon: "mdi-timer-sand",
-    title: "Inactivity & Last Message Tracker",
-    text:
-      "Find out who sent the last message, calculate elapsed silence duration, measure reply latencies, and pinpoint historical chat gaps.",
+    title: t("toolsHub.toolInactivityTitle"),
+    text: t("toolsHub.toolInactivityText"),
     to: localePath("/tools/inactivity"),
-    linkText: "Open Tool",
+    linkText: t("toolsHub.openTool"),
   },
   {
     icon: "mdi-scale-balance",
-    title: "Court & Legal Evidence PDF",
-    text:
-      "Format WhatsApp chats into court-admissible, tamper-evident PDF transcripts with exact timestamps and sender verification.",
+    title: t("toolsHub.toolCourtTitle"),
+    text: t("toolsHub.toolCourtText"),
     to: localePath("/tools/court-evidence"),
-    linkText: "Open Tool",
+    linkText: t("toolsHub.openTool"),
   },
   {
     icon: "mdi-heart-outline",
-    title: "Proof of Relationship for Visa",
-    text:
-      "Generate verified chat timelines, messaging frequency charts, and continuous communication records for immigration petitions.",
+    title: t("toolsHub.toolRelationshipTitle"),
+    text: t("toolsHub.toolRelationshipText"),
     to: localePath("/tools/proof-of-relationship"),
-    linkText: "Open Tool",
+    linkText: t("toolsHub.openTool"),
   },
   {
     icon: "mdi-counter",
-    text:
-      "Count raw lines, message volume distribution per person, and speech shares in 1-on-1 and group chats.",
-    linkText: "Coming Soon",
+    title: t("toolsHub.toolCounterTitle"),
+    text: t("toolsHub.toolCounterText"),
+    linkText: t("toolsHub.comingSoon"),
   },
   {
     icon: "mdi-format-letter-case",
-    title: "Word & Vocabulary Counter",
-    text:
-      "Discover total word counts, average sentence lengths, and vocabulary richness across your conversations.",
-    linkText: "Coming Soon",
+    title: t("toolsHub.toolVocabularyTitle"),
+    text: t("toolsHub.toolVocabularyText"),
+    linkText: t("toolsHub.comingSoon"),
   },
   {
     icon: "mdi-clock-time-four-outline",
-    title: "Peak Chat Hours & Heatmap",
-    text:
-      "Analyze when conversation activity peaks throughout 24 hours. Compare day vs night talk patterns.",
-    linkText: "Coming Soon",
+    title: t("toolsHub.toolHeatmapTitle"),
+    text: t("toolsHub.toolHeatmapText"),
+    linkText: t("toolsHub.comingSoon"),
   },
 ]);
 
 const pillars = computed(() => [
   {
     icon: "mdi-cellphone-lock",
-    title: "100% In-Browser Privacy",
-    text:
-      "No chat text, timestamps, or media files are ever transmitted to a server. All computation happens locally in your device's memory.",
+    title: t("toolsHub.pillar1Title"),
+    text: t("toolsHub.pillar1Text"),
   },
   {
     icon: "mdi-lightning-bolt-outline",
-    title: "Zero Setup, Instant Results",
-    text:
-      "No account registration, no app installation. Just drop your WhatsApp export file and view metrics in milliseconds.",
+    title: t("toolsHub.pillar2Title"),
+    text: t("toolsHub.pillar2Text"),
   },
   {
     icon: "mdi-lock-open-outline",
-    title: "Open Source & Verifiable",
-    text:
-      "Transparent and independently auditable code on GitHub. Your private communications stay completely in your control.",
+    title: t("toolsHub.pillar3Title"),
+    text: t("toolsHub.pillar3Text"),
   },
 ]);
 
 const steps = computed(() => [
   {
-    title: "Export Your WhatsApp Chat",
-    text:
-      "Export any 1-on-1 or group chat without media from WhatsApp on your iPhone or Android phone.",
+    title: t("toolsHub.step1Title"),
+    text: t("toolsHub.step1Text"),
   },
   {
-    title: "Choose a Micro-Tool",
-    text:
-      "Select the specific question you want answered — inactivity, message count, or response latency.",
+    title: t("toolsHub.step2Title"),
+    text: t("toolsHub.step2Text"),
   },
   {
-    title: "Get Instant Private Answers",
-    text:
-      "Inspect your metrics immediately, or seamlessly transition to the full analyzer for deep analytics.",
+    title: t("toolsHub.step3Title"),
+    text: t("toolsHub.step3Text"),
   },
 ]);
 </script>

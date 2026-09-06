@@ -40,7 +40,9 @@
         &copy; {{ new Date().getFullYear() }} -
         <nuxt-link :to="$localePath('/about')">About</nuxt-link>
         -
-        <nuxt-link :to="$localePath('/tools')">Tools</nuxt-link>
+        <nuxt-link :to="$localePath('/tools')">{{
+          $t("toolsHub.headerTools") || "Tools"
+        }}</nuxt-link>
         -
         <nuxt-link :to="$localePath('/impressum')">Imprint</nuxt-link>
         -
@@ -66,6 +68,10 @@ export default {
         {
           name: "tools/proof-of-relationship",
           text: "pageNameRelationship",
+        },
+        {
+          name: "tools/inactivity",
+          text: "pageNameInactivity",
         },
         {
           name: "switch-from-whatsapp-to-signal",

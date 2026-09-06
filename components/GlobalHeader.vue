@@ -20,7 +20,7 @@
             <v-icon size="16" class="mr-1" color="#000000"
               >mdi-toolbox-outline</v-icon
             >
-            <span>Tools</span>
+            <span>{{ $t("toolsHub.headerTools") || "Tools" }}</span>
           </nuxt-link>
 
           <v-btn
