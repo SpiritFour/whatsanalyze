@@ -81,6 +81,9 @@ export {
   formatDuration,
   formatTimeAgo,
 } from "~/utils/inactivity";
+export { analyzeMessages } from "~/utils/messageCounter";
+export { analyzeWords } from "~/utils/wordCounter";
+export { analyzeHeatmap } from "~/utils/chatHeatmap";
 
 // Extractor helper to parse a File (.txt or .zip) or string
 export async function parseChatFile(

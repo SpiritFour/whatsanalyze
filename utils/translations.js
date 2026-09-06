@@ -535,6 +535,12 @@ export const messages = {
         "Analyze all charts, word clouds, wrapped stories, and export beautiful PDF books.",
       disclaimer:
         "WhatsAnalyze is an independent open-source project and is not affiliated with, endorsed by, or sponsored by WhatsApp or Meta.",
+      analyticsGroupTitle: "Chat Analytics & Metrics",
+      analyticsGroupDesc:
+        "Fast, focused in-browser tools to measure conversation dynamics, message counts, vocabulary, and activity hours.",
+      courtGroupTitle: "Official Documentation & Legal Proof",
+      courtGroupDesc:
+        "Court-admissible PDF transcripts and verified relationship timelines formatted for legal proceedings and immigration petitions.",
     },
     toolDropzone: {
       localEngine: "LOCAL CLIENT ENGINE",
@@ -662,6 +668,216 @@ export const messages = {
         "Turn your chat into an Instagram-story style retrospective to share with friends.",
     },
     pageNameInactivity: "WhatsApp Inactivity & Last Message Tracker",
+    toolsMessageCounter: {
+      seoTitle: "WhatsApp Message & Line Counter | WhatsAnalyze",
+      seoDescription:
+        "Count total messages, lines, and characters in your WhatsApp chat. Inspect speech shares and busiest chat days 100% privately in your browser.",
+      ogTitle: "WhatsApp Message & Line Counter | WhatsAnalyze",
+      ogDescription:
+        "Fast, 100% private WhatsApp message and line counter. Discover who texts more and your all-time busiest chat days.",
+      heroEyebrow: "Free WhatsApp Tool",
+      heroTitle: "WhatsApp Message & Line Counter",
+      heroSubtitle:
+        "Discover total message volume, line counts, character distributions, and see who texts the most in your conversations.",
+      heroNote: "100% client-side · Zero server upload · Free & open source",
+      reportEyebrow: "Live Chat Metrics",
+      reportTitle: "Message Volume & Line Distribution",
+      reportText:
+        "Calculated directly from your WhatsApp export in your browser's local memory.",
+      metricTotalMessages: "TOTAL MESSAGES",
+      metricTotalLines: "TOTAL LINES",
+      metricDailyAverage: "MESSAGES / DAY",
+      metricBusiestDay: "BUSIEST CHAT DAY",
+      captionMessagesOverDays: "Over {days} total days",
+      captionLinesPerMsg: "Avg {avg} lines per message",
+      captionDailyAvg: "Daily messaging pace",
+      captionDayRecord: "{count} messages sent",
+      participantsTitle: "Participant Message & Speech Shares",
+      participantsCount: "{count} PARTICIPANTS",
+      colParticipant: "Participant",
+      colMessages: "Messages",
+      colShare: "Share",
+      colLines: "Lines",
+      colChars: "Characters",
+      hookEyebrow: "Beyond Basic Counters",
+      hookTitle: "Ready for Word Clouds, Timelines & Wrapped?",
+      hookText:
+        "WhatsAnalyze converts your entire chat into comprehensive charts, sentiment trends, and an Instagram-story style Wrapped review. 100% private in your browser.",
+      hookButton: "Launch Full WhatsApp Analyzer →",
+      hookNote: "Instant transition · No re-upload needed · Free",
+      stepsEyebrow: "Step-by-Step Guide",
+      stepsTitle: "How to Count Messages in Your Chat",
+      step1Title: "Export Your WhatsApp Chat",
+      step1Text:
+        "Open WhatsApp, go to the chat settings, select 'Export Chat' and tap 'Without Media'.",
+      step2Title: "Drop Your File Here",
+      step2Text:
+        "Drop the exported .txt or .zip file in the dropzone above. Parsing executes locally in milliseconds.",
+      step3Title: "View Message Volumes",
+      step3Text:
+        "Inspect message shares per person, total line counts, and all-time record chat days immediately.",
+      guideLink: "Detailed WhatsApp Export Guide",
+      faqTitle: "Frequently Asked Questions",
+      faq1Q: "Can this count messages in large group chats?",
+      faq1A:
+        "Yes. The counter supports 1-on-1 chats and group chats with dozens of participants and hundreds of thousands of messages.",
+      faq2Q: "How are multi-line messages counted?",
+      faq2A:
+        "Single messages sent with multiple line breaks are accurately separated into message units and total text line counts.",
+      faq3Q: "Is my chat data uploaded to any server?",
+      faq3A:
+        "Never. All parsing runs entirely inside your browser's local memory. No text or data leaves your computer or phone.",
+      faq4Q: "Does it support both Android and iPhone exports?",
+      faq4A:
+        "Yes. All standard date and timestamp formats from iOS, Android, and WhatsApp Web are automatically recognized.",
+      ctaTitle: "Ready to Count Your Chat Messages?",
+      ctaButton: "Count Your Messages Now",
+      ctaNote: "100% Private · Zero Server Upload · No Registration Required",
+      disclaimer:
+        "WhatsAnalyze is an independent open-source project and is not affiliated with, endorsed by, or sponsored by WhatsApp or Meta.",
+    },
+    toolsWordCounter: {
+      seoTitle: "WhatsApp Word & Vocabulary Counter | WhatsAnalyze",
+      seoDescription:
+        "Discover total word counts, vocabulary richness, average message lengths, and top used words in your WhatsApp chats 100% privately in your browser.",
+      ogTitle: "WhatsApp Word & Vocabulary Counter | WhatsAnalyze",
+      ogDescription:
+        "Analyze word counts, unique vocabulary, and most frequent words in your WhatsApp chats without uploading data.",
+      heroEyebrow: "Free WhatsApp Tool",
+      heroTitle: "WhatsApp Word & Vocabulary Counter",
+      heroSubtitle:
+        "Analyze total words, unique vocabulary richness, longest messages, and the signature words defining your conversations.",
+      heroNote: "100% client-side · Zero server upload · Free & open source",
+      reportEyebrow: "Vocabulary Metrics",
+      reportTitle: "Chat Vocabulary & Word Analysis",
+      reportText:
+        "Computed directly from your conversation in your browser's local memory.",
+      metricTotalWords: "TOTAL WORDS",
+      metricUniqueWords: "UNIQUE VOCABULARY",
+      metricAvgWords: "AVG WORDS / MESSAGE",
+      metricLongestMessage: "LONGEST MESSAGE",
+      captionUniqueRatio: "{count} distinct words used",
+      captionAvgPace: "Average sentence length",
+      captionLongestBy: "By {author} ({words} words)",
+      topWordsTitle: "Most Frequently Used Words",
+      topWordsSubtitle: "Automatic stopword filtering applied",
+      participantsTitle: "Vocabulary Breakdown by Participant",
+      participantsCount: "{count} PARTICIPANTS",
+      colParticipant: "Participant",
+      colWords: "Words",
+      colUniqueWords: "Unique Words",
+      colAvgWords: "Avg Words/Msg",
+      colShare: "Share",
+      hookEyebrow: "Beyond Word Counts",
+      hookTitle: "Explore Full Word Clouds & Sentiment Insights",
+      hookText:
+        "WhatsAnalyze generates full visual word clouds, 24h activity curves, and annual Wrapped stories for your conversations. 100% private.",
+      hookButton: "Open Full WhatsApp Analyzer →",
+      hookNote: "Instant transition · No re-upload required · Free",
+      stepsEyebrow: "Step-by-Step Guide",
+      stepsTitle: "How to Count Words in Your WhatsApp Chat",
+      step1Title: "Export Your WhatsApp Chat",
+      step1Text:
+        "Open your chat, tap the contact or group name, choose 'Export Chat' and tap 'Without Media'.",
+      step2Title: "Drop Your Chat File",
+      step2Text:
+        "Drop the .txt or .zip export in the dropzone above. Vocabulary is parsed locally in milliseconds.",
+      step3Title: "Discover Your Vocabulary",
+      step3Text:
+        "Inspect your top words, total word counts, and who writes the longest messages.",
+      guideLink: "Detailed WhatsApp Export Guide",
+      faqTitle: "Frequently Asked Questions",
+      faq1Q: "How are unique words and vocabulary richness measured?",
+      faq1A:
+        "Every distinct word used across the chat is identified and counted, reflecting the breadth of your active vocabulary.",
+      faq2Q: "Are common words like 'the', 'and', or 'in' filtered out?",
+      faq2A:
+        "Yes. The top words section filters out common grammatical stopwords to highlight the most meaningful words you use.",
+      faq3Q: "Does any chat text leave my browser?",
+      faq3A:
+        "No. All text parsing, tokenization, and frequency counts happen locally inside your browser's memory.",
+      faq4Q: "Can I analyze chats in languages other than English?",
+      faq4A:
+        "Yes. The vocabulary counter processes conversations in English, German, Spanish, French, Portuguese, Italian, and many others.",
+      ctaTitle: "Ready to Analyze Your Chat's Vocabulary?",
+      ctaButton: "Count Your Words Now",
+      ctaNote: "100% Private · Zero Server Upload · No Registration Required",
+      disclaimer:
+        "WhatsAnalyze is an independent open-source project and is not affiliated with, endorsed by, or sponsored by WhatsApp or Meta.",
+    },
+    toolsChatHeatmap: {
+      seoTitle: "WhatsApp Peak Chat Hours & 24h Heatmap | WhatsAnalyze",
+      seoDescription:
+        "Analyze when your WhatsApp chats peak throughout 24 hours. Compare day vs night talk patterns and busiest days 100% privately in your browser.",
+      ogTitle: "WhatsApp Peak Chat Hours & 24h Heatmap | WhatsAnalyze",
+      ogDescription:
+        "Discover peak chat hours and day vs night messaging distribution in your WhatsApp conversations without uploading data.",
+      heroEyebrow: "Free WhatsApp Tool",
+      heroTitle: "WhatsApp Peak Chat Hours & 24h Heatmap",
+      heroSubtitle:
+        "Discover when your conversations come alive throughout the 24 hours of the day. Compare daytime vs nighttime messaging patterns.",
+      heroNote: "100% client-side · Zero server upload · Free & open source",
+      reportEyebrow: "Activity Metrics",
+      reportTitle: "24-Hour Activity & Heatmap Report",
+      reportText:
+        "Computed directly from your conversation timestamps in your browser's local memory.",
+      metricPeakHour: "PEAK CHAT HOUR",
+      metricPeakDay: "MOST ACTIVE DAY",
+      metricDaytime: "DAYTIME ACTIVITY",
+      metricNighttime: "NIGHTTIME ACTIVITY",
+      captionPeakCount: "{count} messages in peak hour",
+      captionPeakDayPct: "{pct}% of all messages",
+      captionDayHours: "6:00 AM – 10:00 PM ({pct}%)",
+      captionNightHours: "10:00 PM – 6:00 AM ({pct}%)",
+      chartTitle: "24-Hour Messaging Activity Distribution",
+      chartSubtitle: "Total messages sent by hour of the day",
+      participantsTitle: "Day vs. Night Split by Participant",
+      participantsCount: "{count} PARTICIPANTS",
+      colParticipant: "Participant",
+      colPeakHour: "Peak Hour",
+      colDayShare: "Daytime Share",
+      colNightShare: "Nighttime Share",
+      colTotal: "Total Messages",
+      hookEyebrow: "Beyond Activity Hours",
+      hookTitle: "Explore Full 365-Day Timelines & Response Speeds",
+      hookText:
+        "WhatsAnalyze transforms your entire conversation into interactive charts, response metrics, and an annual Wrapped story. 100% private in your browser.",
+      hookButton: "Open Complete WhatsApp Analyzer →",
+      hookNote: "Instant transition · No re-upload required · Free",
+      stepsEyebrow: "Step-by-Step Guide",
+      stepsTitle: "How to Analyze Your Chat's Activity Hours",
+      step1Title: "Export Your WhatsApp Chat",
+      step1Text:
+        "Open your chat, tap the contact or group name, choose 'Export Chat' and tap 'Without Media'.",
+      step2Title: "Drop Your File Here",
+      step2Text:
+        "Drop the .txt or .zip file in the dropzone above. Timestamp breakdown occurs in milliseconds.",
+      step3Title: "View 24h Heatmaps",
+      step3Text:
+        "Inspect your peak hours, day vs. night patterns, and discover who texts late into the night.",
+      guideLink: "Detailed WhatsApp Export Guide",
+      faqTitle: "Frequently Asked Questions",
+      faq1Q: "How are daytime and nighttime hours defined?",
+      faq1A:
+        "Daytime is defined as 6:00 AM to 10:00 PM (06:00–21:59). Nighttime covers 10:00 PM to 6:00 AM (22:00–05:59).",
+      faq2Q: "Does the tool adjust for different time zones?",
+      faq2A:
+        "Timestamps in exported chat logs reflect the time zone of the device that created the export.",
+      faq3Q: "Can I see which participant texts the most at night?",
+      faq3A:
+        "Yes. The breakdown table details the exact daytime vs nighttime percentage for every participant.",
+      faq4Q: "Are timestamps or chat files sent to any server?",
+      faq4A:
+        "No. All calculation runs locally in your browser. No files or timestamps ever leave your device.",
+      ctaTitle: "Ready to Discover Your Peak Chat Hours?",
+      ctaButton: "Analyze Chat Hours Now",
+      ctaNote: "100% Private · Zero Server Upload · No Registration Required",
+      disclaimer:
+        "WhatsAnalyze is an independent open-source project and is not affiliated with, endorsed by, or sponsored by WhatsApp or Meta.",
+    },
+    pageNameMessages: "WhatsApp Message & Line Counter",
+    pageNameWords: "WhatsApp Word & Vocabulary Counter",
+    pageNameHeatmap: "WhatsApp Peak Chat Hours & 24h Heatmap",
   },
   de: {
     courtEvidence: {
@@ -1174,6 +1390,12 @@ export const messages = {
         "Erlebe alle Diagramme, Wortwolken, Wrapped-Storys und exportiere hochwertige PDF-Bücher.",
       disclaimer:
         "WhatsAnalyze ist ein unabhängiges Open-Source-Projekt und steht in keiner Verbindung zu WhatsApp oder Meta.",
+      analyticsGroupTitle: "Gesprächs- & Chat-Analysen",
+      analyticsGroupDesc:
+        "Fokussierte Tools im Browser für Gesprächsdynamik, Nachrichtenanzahl, Wortschatz und Aktivitätszeiten.",
+      courtGroupTitle: "Offizielle Dokumentation & Gerichtsfeste Nachweise",
+      courtGroupDesc:
+        "Gerichtsfeste PDF-Protokolle und verifizierte Kommunikationszeitachsen für Justiz und Behörden.",
     },
     toolDropzone: {
       localEngine: "LOKAL IM BROWSER",
@@ -1303,6 +1525,222 @@ export const messages = {
         "Verwandle deinen Chat in einen interaktiven Jahresrückblick zum Teilen mit Freunden.",
     },
     pageNameInactivity: "WhatsApp Inaktivität & Letzte Nachricht",
+    toolsMessageCounter: {
+      seoTitle: "WhatsApp Nachrichten- & Zeilenzähler | WhatsAnalyze",
+      seoDescription:
+        "Zähle Nachrichten, Zeilen und Zeichen in deinem WhatsApp-Chat. Erfahre, wer mehr schreibt und wann euer aktivster Tag war – 100 % privat im Browser.",
+      ogTitle: "WhatsApp Nachrichten- & Zeilenzähler | WhatsAnalyze",
+      ogDescription:
+        "Schneller, 100 % privater WhatsApp-Nachrichtenzähler. Finde heraus, wer mehr schreibt und entdecke euren Rekord-Tag.",
+      heroEyebrow: "Kostenloses WhatsApp-Tool",
+      heroTitle: "WhatsApp Nachrichten- & Zeilenzähler",
+      heroSubtitle:
+        "Erfahre das gesamte Nachrichtenvolumen, Zeilenanzahlen, Zeichenverteilungen und wer die meisten Nachrichten in deinen Chats sendet.",
+      heroNote:
+        "100 % im Browser · Kein Server-Upload · Kostenlos & Open Source",
+      reportEyebrow: "Echtzeit-Metriken",
+      reportTitle: "Nachrichtenvolumen & Zeilenverteilung",
+      reportText:
+        "Direkt aus deinem WhatsApp-Export im lokalen Speicher deines Browsers berechnet.",
+      metricTotalMessages: "NACHRICHTEN GESAMT",
+      metricTotalLines: "ZEILEN GESAMT",
+      metricDailyAverage: "NACHRICHTEN / TAG",
+      metricBusiestDay: "AKTIVSTER CHAT-TAG",
+      captionMessagesOverDays: "Über {days} Tage",
+      captionLinesPerMsg: "Durchschnittlich {avg} Zeilen / Nachricht",
+      captionDailyAvg: "Tägliches Nachrichtentempo",
+      captionDayRecord: "{count} Nachrichten gesendet",
+      participantsTitle: "Nachrichtenanteile der Teilnehmer",
+      participantsCount: "{count} TEILNEHMER",
+      colParticipant: "Teilnehmer",
+      colMessages: "Nachrichten",
+      colShare: "Anteil",
+      colLines: "Zeilen",
+      colChars: "Zeichen",
+      hookEyebrow: "Mehr als nur Zählen",
+      hookTitle: "Bereit für Wortwolken, Zeitverläufe & Wrapped?",
+      hookText:
+        "WhatsAnalyze verwandelt deinen Chat in interaktive Grafiken, Antwort-Metriken und ein persönliches WhatsApp Wrapped. 100 % privat im Browser.",
+      hookButton: "Vollständige WhatsApp-Analyse starten →",
+      hookNote: "Direkter Wechsel · Kein erneuter Upload nötig · Kostenlos",
+      stepsEyebrow: "Schritt-für-Schritt-Anleitung",
+      stepsTitle: "So zählst du deine WhatsApp-Nachrichten",
+      step1Title: "WhatsApp-Chat exportieren",
+      step1Text:
+        "Öffne WhatsApp, wähle den gewünschten Chat, tippe auf 'Chat exportieren' und wähle 'Ohne Medien'.",
+      step2Title: "Datei hier ablegen",
+      step2Text:
+        "Ziehe die erzeugte .txt- oder .zip-Datei in das obige Feld. Die Berechnung erfolgt lokal in Millisekunden.",
+      step3Title: "Ergebnisse sofort sehen",
+      step3Text:
+        "Sieh dir Gesprächsanteile, Zeilenzahlen und euren allzeitigen Rekordtag direkt an.",
+      guideLink: "Ausführliche WhatsApp-Export-Anleitung",
+      faqTitle: "Häufig gestellte Fragen",
+      faq1Q: "Können auch große Gruppenchats gezählt werden?",
+      faq1A:
+        "Ja. Das Tool verarbeitet sowohl Einzelchats als auch Gruppen mit vielen Teilnehmern und hunderttausenden Nachrichten.",
+      faq2Q: "Wie werden mehrzeilige Nachrichten gezählt?",
+      faq2A:
+        "Einzelne Nachrichten mit Absätzen werden präzise in Nachrichtenanzahl und Gesamtextzeilen aufgeschlüsselt.",
+      faq3Q: "Werden meine Chatdaten hochgeladen?",
+      faq3A:
+        "Niemals. Die gesamte Analyse läuft im Speicher deines Browsers. Kein Text verlässt dein Gerät.",
+      faq4Q: "Funktioniert das mit iPhone- und Android-Exporten?",
+      faq4A:
+        "Ja. Alle gängigen Datums- und Zeitformate von iOS, Android und WhatsApp Web werden automatisch erkannt.",
+      ctaTitle: "Bereit, deine Nachrichten zu zählen?",
+      ctaButton: "Jetzt Nachrichten zählen",
+      ctaNote:
+        "100 % privat · Kein Server-Upload · Keine Registrierung erforderlich",
+      disclaimer:
+        "WhatsAnalyze ist ein unabhängiges Open-Source-Projekt und steht in keiner Verbindung zu WhatsApp oder Meta.",
+    },
+    toolsWordCounter: {
+      seoTitle: "WhatsApp Wort- & Wortschatzzähler | WhatsAnalyze",
+      seoDescription:
+        "Entdecke Gesamtwortzahlen, Wortschatzvielfalt, durchschnittliche Nachrichtenlängen und die häufigsten Wörter in deinen WhatsApp-Chats 100 % privat.",
+      ogTitle: "WhatsApp Wort- & Wortschatzzähler | WhatsAnalyze",
+      ogDescription:
+        "Analysiere Wortzahlen, Wortschatzvielfalt und die häufigsten Wörter deiner WhatsApp-Chats ohne Datenupload.",
+      heroEyebrow: "Kostenloses WhatsApp-Tool",
+      heroTitle: "WhatsApp Wort- & Wortschatzzähler",
+      heroSubtitle:
+        "Analysiere Gesamtwortzahlen, Wortschatzvielfalt, Rekordnachrichten und die prägenden Begriffe eurer Unterhaltungen.",
+      heroNote:
+        "100 % im Browser · Kein Server-Upload · Kostenlos & Open Source",
+      reportEyebrow: "Wortschatz-Metriken",
+      reportTitle: "Wort- & Wortschatz-Analyse",
+      reportText:
+        "Direkt aus deinem Chat im lokalen Speicher deines Browsers berechnet.",
+      metricTotalWords: "WÖRTER GESAMT",
+      metricUniqueWords: "WORTSCHATZ-VIELFALT",
+      metricAvgWords: "DURCHSCHN. WÖRTER / MSG",
+      metricLongestMessage: "LÄNGSTE NACHRICHT",
+      captionUniqueRatio: "{count} verschiedene Einzelwörter",
+      captionAvgPace: "Durchschnittliche Satzlänge",
+      captionLongestBy: "Von {author} ({words} Wörter)",
+      topWordsTitle: "Häufigste Wörter im Chat",
+      topWordsSubtitle: "Automatische Filterung von Füllwörtern aktiv",
+      participantsTitle: "Wortschatz-Analyse pro Teilnehmer",
+      participantsCount: "{count} TEILNEHMER",
+      colParticipant: "Teilnehmer",
+      colWords: "Wörter",
+      colUniqueWords: "Einzelwörter",
+      colAvgWords: "Wörter/Nachricht",
+      colShare: "Anteil",
+      hookEyebrow: "Mehr als nur Wörter zählen",
+      hookTitle: "Entdecke Wortwolken & Jahresrückblicke",
+      hookText:
+        "WhatsAnalyze generiert interaktive Wortwolken, 24h-Aktivitätskurven und personalisierte Wrapped-Storys. 100 % privat im Browser.",
+      hookButton: "Vollständige WhatsApp-Analyse starten →",
+      hookNote: "Direkter Wechsel · Kein erneuter Upload nötig · Kostenlos",
+      stepsEyebrow: "Schritt-für-Schritt-Anleitung",
+      stepsTitle: "So analysierst du den Wortschatz deines Chats",
+      step1Title: "WhatsApp-Chat exportieren",
+      step1Text:
+        "Öffne den Chat, tippe auf den Kontaktnamen, wähle 'Chat exportieren' und tippe auf 'Ohne Medien'.",
+      step2Title: "Chat-Datei ablegen",
+      step2Text:
+        "Ziehe die .txt- oder .zip-Datei in das obige Feld. Die Wortschatzanalyse startet sofort im Browser.",
+      step3Title: "Wortschatz entdecken",
+      step3Text:
+        "Sieh dir eure Lieblingswörter, Wortzahlen und die längste verfasste Nachricht an.",
+      guideLink: "Ausführliche WhatsApp-Export-Anleitung",
+      faqTitle: "Häufig gestellte Fragen",
+      faq1Q: "Wie wird die Wortschatzvielfalt berechnet?",
+      faq1A:
+        "Jedes unterschiedliche Wort, das im Chat verwendet wird, wird gezählt. Dies zeigt die sprachliche Vielfalt eurer Unterhaltung.",
+      faq2Q: "Werden Füllwörter wie 'und', 'der', 'die' herausgefiltert?",
+      faq2A:
+        "Ja. Bei den Top-Wörtern werden typische Füllwörter gefiltert, damit die tatsächlich aussagekräftigen Begriffe sichtbar werden.",
+      faq3Q: "Verlassen meine Nachrichten mein Gerät?",
+      faq3A:
+        "Nein. Die gesamte Textzerlegung und Frequenzzählung findet lokal im Speicher deines Browsers statt.",
+      faq4Q: "Funktioniert das auch für mehrsprachige Chats?",
+      faq4A:
+        "Ja. Das Tool verarbeitet Chats auf Deutsch, Englisch, Spanisch, Französisch, Portugiesisch, Italienisch und vielen weiteren Sprachen.",
+      ctaTitle: "Bereit, euren Wortschatz zu analysieren?",
+      ctaButton: "Jetzt Wörter zählen",
+      ctaNote:
+        "100 % privat · Kein Server-Upload · Keine Registrierung erforderlich",
+      disclaimer:
+        "WhatsAnalyze ist ein unabhängiges Open-Source-Projekt und steht in keiner Verbindung zu WhatsApp oder Meta.",
+    },
+    toolsChatHeatmap: {
+      seoTitle: "WhatsApp Aktivitätszeiten & 24h-Heatmap | WhatsAnalyze",
+      seoDescription:
+        "Finde heraus, wann deine WhatsApp-Chats im 24-Stunden-Verlauf am aktivsten sind. Vergleiche Tag- und Nachtaktivität 100 % privat im Browser.",
+      ogTitle: "WhatsApp Aktivitätszeiten & 24h-Heatmap | WhatsAnalyze",
+      ogDescription:
+        "Analysiere Spitzenzeiten und Tag- vs. Nachtaktivität deiner WhatsApp-Chats ohne Server-Upload.",
+      heroEyebrow: "Kostenloses WhatsApp-Tool",
+      heroTitle: "WhatsApp Aktivitätszeiten & 24h-Heatmap",
+      heroSubtitle:
+        "Entdecke, zu welchen Uhrzeiten eure Unterhaltung am lebendigsten ist. Vergleiche Tag- und Nachtmuster auf einen Blick.",
+      heroNote:
+        "100 % im Browser · Kein Server-Upload · Kostenlos & Open Source",
+      reportEyebrow: "Aktivitäts-Metriken",
+      reportTitle: "24-Stunden-Aktivität & Heatmap-Bericht",
+      reportText:
+        "Direkt aus deinen Chat-Zeitstempeln im lokalen Speicher deines Browsers berechnet.",
+      metricPeakHour: "AKTIVSTE UHRZEIT",
+      metricPeakDay: "AKTIVSTER WOCHENTAG",
+      metricDaytime: "TAGESAKTIVITÄT",
+      metricNighttime: "NACHTAKTIVITÄT",
+      captionPeakCount: "{count} Nachrichten zur Spitzenzeit",
+      captionPeakDayPct: "{pct} % aller Nachrichten",
+      captionDayHours: "6:00 – 22:00 Uhr ({pct} %)",
+      captionNightHours: "22:00 – 6:00 Uhr ({pct} %)",
+      chartTitle: "24-Stunden-Aktivitätsverlauf",
+      chartSubtitle: "Gesendete Nachrichten nach Tagesstunde",
+      participantsTitle: "Tag-/Nacht-Verteilung nach Teilnehmer",
+      participantsCount: "{count} TEILNEHMER",
+      colParticipant: "Teilnehmer",
+      colPeakHour: "Spitzenzeit",
+      colDayShare: "Taganteil",
+      colNightShare: "Nachtanteil",
+      colTotal: "Nachrichten gesamt",
+      hookEyebrow: "Mehr als nur Uhrzeiten",
+      hookTitle: "Entdecke 365-Tage-Verläufe & Antwortzeiten",
+      hookText:
+        "WhatsAnalyze verwandelt deinen gesamten Chat in interaktive Kurven, Antwort-Metriken und ein persönliches WhatsApp Wrapped. 100 % privat im Browser.",
+      hookButton: "Vollständige WhatsApp-Analyse starten →",
+      hookNote: "Direkter Wechsel · Kein erneuter Upload nötig · Kostenlos",
+      stepsEyebrow: "Schritt-für-Schritt-Anleitung",
+      stepsTitle: "So analysierst du die Aktivitätszeiten deines Chats",
+      step1Title: "WhatsApp-Chat exportieren",
+      step1Text:
+        "Öffne den Chat, tippe auf den Kontaktnamen, wähle 'Chat exportieren' und tippe auf 'Ohne Medien'.",
+      step2Title: "Datei ablegen",
+      step2Text:
+        "Ziehe die .txt- oder .zip-Datei in das obige Feld. Die Zeitstempelanalyse erfolgt in Millisekunden.",
+      step3Title: "Heatmap erkunden",
+      step3Text:
+        "Sieh dir Spitzenzeiten an und finde heraus, wer besonders spät nachts noch aktiv ist.",
+      guideLink: "Ausführliche WhatsApp-Export-Anleitung",
+      faqTitle: "Häufig gestellte Fragen",
+      faq1Q: "Wie sind Tag- und Nachtzeiten definiert?",
+      faq1A:
+        "Als Tageszeit gilt der Zeitraum von 6:00 bis 22:00 Uhr. Nachtzeit umfasst 22:00 bis 6:00 Uhr.",
+      faq2Q: "Werden Zeitzonen berücksichtigt?",
+      faq2A:
+        "Die Zeitstempel im Chat-Export spiegeln die Zeitzone des Smartphones wider, auf dem der Export erstellt wurde.",
+      faq3Q: "Kann ich sehen, wer nachts am meisten schreibt?",
+      faq3A:
+        "Ja. Die Teilnehmer-Tabelle schlüsselt für jede Person die prozentuale Tag- und Nachtaktivität auf.",
+      faq4Q: "Verlassen Zeitstempel mein Gerät?",
+      faq4A:
+        "Nein. Alle Berechnungen laufen lokal im Browser ab. Keine Daten werden an Server gesendet.",
+      ctaTitle: "Bereit, eure aktivsten Stunden zu entdecken?",
+      ctaButton: "Jetzt Aktivität analysieren",
+      ctaNote:
+        "100 % privat · Kein Server-Upload · Keine Registrierung erforderlich",
+      disclaimer:
+        "WhatsAnalyze ist ein unabhängiges Open-Source-Projekt und steht in keiner Verbindung zu WhatsApp oder Meta.",
+    },
+    pageNameMessages: "WhatsApp Nachrichten- & Zeilenzähler",
+    pageNameWords: "WhatsApp Wort- & Wortschatzzähler",
+    pageNameHeatmap: "WhatsApp Aktivitätszeiten & 24h-Heatmap",
   },
   es: {
     courtEvidence: {
@@ -1802,6 +2240,12 @@ export const messages = {
         "Analiza gráficos, nubes de palabras, historias tipo Wrapped y genera hermosos libros en PDF.",
       disclaimer:
         "WhatsAnalyze es un proyecto de código abierto independiente y no está afiliado, respaldado ni patrocinado por WhatsApp o Meta.",
+      analyticsGroupTitle: "Análisis y métricas de chat",
+      analyticsGroupDesc:
+        "Herramientas rápidas y privadas en navegador para medir dinámicas, mensajes, vocabulario y horarios.",
+      courtGroupTitle: "Documentación oficial y pruebas judiciales",
+      courtGroupDesc:
+        "Transcripciones en PDF válidas en juicios y cronogramas de relación verificados para visados y tribunales.",
     },
     toolDropzone: {
       localEngine: "MOTOR LOCAL EN NAVEGADOR",
@@ -1932,6 +2376,218 @@ export const messages = {
         "Convierte tu chat en una retrospectiva estilo historia de Instagram para compartir.",
     },
     pageNameInactivity: "Inactividad y última respuesta en WhatsApp",
+    toolsMessageCounter: {
+      seoTitle: "Contador de mensajes y líneas de WhatsApp | WhatsAnalyze",
+      seoDescription:
+        "Cuenta mensajes, líneas y caracteres de tu chat de WhatsApp. Descubre quién escribe más y el día más activo 100 % privado en tu navegador.",
+      ogTitle: "Contador de mensajes y líneas de WhatsApp | WhatsAnalyze",
+      ogDescription:
+        "Contador rápido y privado para WhatsApp. Descubre quién envía más mensajes y tus récords de conversación.",
+      heroEyebrow: "Herramienta gratuita para WhatsApp",
+      heroTitle: "Contador de mensajes y líneas de WhatsApp",
+      heroSubtitle:
+        "Descubre el volumen total de mensajes, líneas de texto, caracteres y qué participante escribe más en tus conversaciones.",
+      heroNote:
+        "100 % en el navegador · Sin subida a servidores · Gratis y de código abierto",
+      reportEyebrow: "Métricas en tiempo real",
+      reportTitle: "Volumen de mensajes y distribución de líneas",
+      reportText:
+        "Calculado directamente a partir de tu exportación en la memoria local del navegador.",
+      metricTotalMessages: "MENSAJES TOTALES",
+      metricTotalLines: "LÍNEAS TOTALES",
+      metricDailyAverage: "MENSAJES / DÍA",
+      metricBusiestDay: "DÍA MÁS ACTIVO",
+      captionMessagesOverDays: "En {days} días en total",
+      captionLinesPerMsg: "Media de {avg} líneas por mensaje",
+      captionDailyAvg: "Ritmo diario de mensajes",
+      captionDayRecord: "{count} mensajes enviados",
+      participantsTitle: "Participación y reparto de mensajes",
+      participantsCount: "{count} PARTICIPANTES",
+      colParticipant: "Participante",
+      colMessages: "Mensajes",
+      colShare: "Porcentaje",
+      colLines: "Líneas",
+      colChars: "Caracteres",
+      hookEyebrow: "Más que solo contar",
+      hookTitle: "¿Listo para nubes de palabras y Wrapped anual?",
+      hookText:
+        "WhatsAnalyze convierte tu chat en gráficos completos, métricas y una historia Wrapped para compartir. 100 % privado.",
+      hookButton: "Abrir analizador completo de WhatsApp →",
+      hookNote: "Transición inmediata · Sin volver a subir · Gratis",
+      stepsEyebrow: "Guía paso a paso",
+      stepsTitle: "Cómo contar los mensajes de tu chat",
+      step1Title: "Exportar chat de WhatsApp",
+      step1Text:
+        "Abre WhatsApp, pulsa en los ajustes del chat, selecciona 'Exportar chat' y elige 'Sin archivos'.",
+      step2Title: "Soltar archivo aquí",
+      step2Text:
+        "Suelta el archivo .txt o .zip en el recuadro superior. El análisis se realiza localmente en milisegundos.",
+      step3Title: "Ver estadísticas al instante",
+      step3Text:
+        "Revisa la proporción de mensajes por persona, líneas totales y tu día récord de conversación.",
+      guideLink: "Guía detallada para exportar WhatsApp",
+      faqTitle: "Preguntas frecuentes",
+      faq1Q: "¿Puede contar mensajes en grupos grandes?",
+      faq1A:
+        "Sí. Admite chats individuales y grupos con decenas de participantes y miles de mensajes.",
+      faq2Q: "¿Cómo se cuentan los mensajes de varias líneas?",
+      faq2A:
+        "Se cuenta cada mensaje individual y simultáneamente se desglosan las líneas reales de texto.",
+      faq3Q: "¿Se sube algún dato a servidores?",
+      faq3A:
+        "Nunca. Todo el análisis se ejecuta en tu navegador sin transferir archivos a la red.",
+      faq4Q: "¿Funciona en Android y en iPhone?",
+      faq4A:
+        "Sí, es totalmente compatible con los formatos de fecha y hora de iOS, Android y WhatsApp Web.",
+      ctaTitle: "¿Listo para contar los mensajes de tu chat?",
+      ctaButton: "Contar mis mensajes ahora",
+      ctaNote: "100 % privado · Sin subida a servidores · Sin registro",
+      disclaimer:
+        "WhatsAnalyze es un proyecto de código abierto independiente y no está afiliado, respaldado ni patrocinado por WhatsApp o Meta.",
+    },
+    toolsWordCounter: {
+      seoTitle: "Contador de palabras y vocabulario de WhatsApp | WhatsAnalyze",
+      seoDescription:
+        "Descubre el recuento total de palabras, riqueza léxica, longitud media de mensajes y las palabras más usadas en tus chats de WhatsApp 100 % privado.",
+      ogTitle: "Contador de palabras y vocabulario de WhatsApp | WhatsAnalyze",
+      ogDescription:
+        "Analiza el total de palabras, vocabulario único y términos más frecuentes de tus chats de WhatsApp sin subir datos.",
+      heroEyebrow: "Herramienta gratuita para WhatsApp",
+      heroTitle: "Contador de palabras y vocabulario de WhatsApp",
+      heroSubtitle:
+        "Analiza el recuento total de palabras, vocabulario único, los mensajes más largos y las palabras que definen tus conversaciones.",
+      heroNote:
+        "100 % en el navegador · Sin subida a servidores · Gratis y de código abierto",
+      reportEyebrow: "Métricas léxicas",
+      reportTitle: "Análisis de palabras y vocabulario del chat",
+      reportText:
+        "Calculado directamente a partir de tu conversación en la memoria local del navegador.",
+      metricTotalWords: "PALABRAS TOTALES",
+      metricUniqueWords: "VOCABULARIO ÚNICO",
+      metricAvgWords: "MEDIA PALABRAS / MSG",
+      metricLongestMessage: "MENSAJE MÁS LARGO",
+      captionUniqueRatio: "{count} palabras distintas empleadas",
+      captionAvgPace: "Longitud media de frase",
+      captionLongestBy: "De {author} ({words} palabras)",
+      topWordsTitle: "Palabras más frecuentes en el chat",
+      topWordsSubtitle: "Filtrado automático de palabras vacías aplicado",
+      participantsTitle: "Desglose de vocabulario por participante",
+      participantsCount: "{count} PARTICIPANTES",
+      colParticipant: "Participante",
+      colWords: "Palabras",
+      colUniqueWords: "Palabras únicas",
+      colAvgWords: "Palabras/Mensaje",
+      colShare: "Porcentaje",
+      hookEyebrow: "Más que contar palabras",
+      hookTitle: "Explora nubes de palabras y gráficos completos",
+      hookText:
+        "WhatsAnalyze genera nubes de palabras interactivas, curvas de actividad 24h e historias Wrapped anuales. 100 % privado.",
+      hookButton: "Abrir analizador completo de WhatsApp →",
+      hookNote: "Transición inmediata · Sin volver a subir · Gratis",
+      stepsEyebrow: "Guía paso a paso",
+      stepsTitle: "Cómo analizar las palabras de tu chat",
+      step1Title: "Exportar chat de WhatsApp",
+      step1Text:
+        "Abre el chat, toca en el nombre del contacto, pulsa 'Exportar chat' y selecciona 'Sin archivos'.",
+      step2Title: "Soltar archivo aquí",
+      step2Text:
+        "Suelta el archivo .txt o .zip en el área superior. El conteo se ejecuta en milisegundos en tu dispositivo.",
+      step3Title: "Descubrir tu vocabulario",
+      step3Text:
+        "Descubre vuestras palabras favoritas, el volumen total y el mensaje más extenso.",
+      guideLink: "Guía detallada para exportar WhatsApp",
+      faqTitle: "Preguntas frecuentes",
+      faq1Q: "¿Cómo se mide el vocabulario único?",
+      faq1A:
+        "Se identifica cada palabra distinta empleada a lo largo del chat para evaluar la variedad de vuestra comunicación.",
+      faq2Q: "¿Se filtran palabras comunes como 'el', 'de' o 'que'?",
+      faq2A:
+        "Sí. La sección de términos destacados filtra las palabras gramaticales comunes para resaltar los vocablos con significado.",
+      faq3Q: "¿Mis conversaciones se suben a servidores?",
+      faq3A:
+        "No. El análisis y conteo léxico se ejecutan íntegramente en la memoria de tu navegador.",
+      faq4Q: "¿Es compatible con varios idiomas?",
+      faq4A:
+        "Sí. Funciona a la perfección con chats en español, inglés, alemán, francés, portugués, italiano y más.",
+      ctaTitle: "¿Listo para analizar las palabras de tu chat?",
+      ctaButton: "Contar palabras ahora",
+      ctaNote: "100 % privado · Sin subida a servidores · Sin registro",
+      disclaimer:
+        "WhatsAnalyze es un proyecto de código abierto independiente y no está afiliado, respaldado ni patrocinado por WhatsApp o Meta.",
+    },
+    toolsChatHeatmap: {
+      seoTitle: "Horas pico y mapa de calor 24h de WhatsApp | WhatsAnalyze",
+      seoDescription:
+        "Descubre a qué horas alcanza el pico tu chat de WhatsApp a lo largo de 24 horas. Compara día y noche 100 % privado en tu navegador.",
+      ogTitle: "Horas pico y mapa de calor 24h de WhatsApp | WhatsAnalyze",
+      ogDescription:
+        "Analiza cuándo se envían más mensajes y compara patrones de día y noche en tus chats de WhatsApp sin subir datos.",
+      heroEyebrow: "Herramienta gratuita para WhatsApp",
+      heroTitle: "Horas pico y mapa de calor 24h de WhatsApp",
+      heroSubtitle:
+        "Descubre en qué momentos del día se intensifica vuestra conversación y compara actividad diurna y nocturna de un vistazo.",
+      heroNote:
+        "100 % en el navegador · Sin subida a servidores · Gratis y de código abierto",
+      reportEyebrow: "Métricas de actividad",
+      reportTitle: "Informe de actividad 24 horas y mapa de calor",
+      reportText:
+        "Calculado directamente a partir de las marcas de tiempo en la memoria local de tu navegador.",
+      metricPeakHour: "HORA PICO",
+      metricPeakDay: "DÍA MÁS ACTIVO",
+      metricDaytime: "ACTIVIDAD DIURNA",
+      metricNighttime: "ACTIVIDAD NOCTURNA",
+      captionPeakCount: "{count} mensajes en la hora pico",
+      captionPeakDayPct: "{pct} % de todos los mensajes",
+      captionDayHours: "6:00 – 22:00 ({pct} %)",
+      captionNightHours: "22:00 – 6:00 ({pct} %)",
+      chartTitle: "Distribución de actividad de mensajes en 24 horas",
+      chartSubtitle: "Mensajes totales enviados según la hora del día",
+      participantsTitle: "Reparto día/noche por participante",
+      participantsCount: "{count} PARTICIPANTES",
+      colParticipant: "Participante",
+      colPeakHour: "Hora pico",
+      colDayShare: "Porcentaje diurno",
+      colNightShare: "Porcentaje nocturno",
+      colTotal: "Mensajes totales",
+      hookEyebrow: "Más que solo horas pico",
+      hookTitle: "Descubre cronogramas anuales y velocidad de respuesta",
+      hookText:
+        "WhatsAnalyze convierte tu chat en gráficos interactivos, métricas de respuesta y tu historia Wrapped anual. 100 % privado.",
+      hookButton: "Abrir analizador completo de WhatsApp →",
+      hookNote: "Transición inmediata · Sin volver a subir · Gratis",
+      stepsEyebrow: "Guía paso a paso",
+      stepsTitle: "Cómo analizar las horas de actividad de tu chat",
+      step1Title: "Exportar chat de WhatsApp",
+      step1Text:
+        "Abre el chat, toca en el nombre del contacto, pulsa 'Exportar chat' y selecciona 'Sin archivos'.",
+      step2Title: "Soltar archivo aquí",
+      step2Text:
+        "Suelta el archivo .txt o .zip en el recuadro superior. Las marcas de tiempo se procesan en milisegundos.",
+      step3Title: "Explorar mapa de calor",
+      step3Text:
+        "Descubre vuestras horas pico y quién suele escribir hasta altas horas de la noche.",
+      guideLink: "Guía detallada para exportar WhatsApp",
+      faqTitle: "Preguntas frecuentes",
+      faq1Q: "¿Cómo se definen los horarios diurno y nocturno?",
+      faq1A:
+        "El horario diurno comprende de 6:00 a 22:00. El horario nocturno cubre de 22:00 a 6:00.",
+      faq2Q: "¿Se ajusta a la zona horaria?",
+      faq2A:
+        "Las fechas del archivo reflejan la zona horaria del dispositivo desde el que se realizó la exportación.",
+      faq3Q: "¿Puedo ver quién escribe más por la noche?",
+      faq3A:
+        "Sí. La tabla desglosa con exactitud el porcentaje diurno y nocturno de cada participante.",
+      faq4Q: "¿Se sube algún archivo a servidores?",
+      faq4A: "No. Todo el análisis se realiza localmente en el navegador.",
+      ctaTitle: "¿Listo para descubrir vuestras horas más activas?",
+      ctaButton: "Analizar horas de chat ahora",
+      ctaNote: "100 % privado · Sin subida a servidores · Sin registro",
+      disclaimer:
+        "WhatsAnalyze es un proyecto de código abierto independiente y no está afiliado, respaldado ni patrocinado por WhatsApp o Meta.",
+    },
+    pageNameMessages: "Contador de mensajes y líneas de WhatsApp",
+    pageNameWords: "Contador de palabras y vocabulario de WhatsApp",
+    pageNameHeatmap: "Horas pico y mapa de calor 24h de WhatsApp",
   },
   pt: {
     wrapped: {
@@ -2257,6 +2913,12 @@ export const messages = {
         "Analise gráficos, nuvens de palavras, retrospectivas e exporte livros em PDF.",
       disclaimer:
         "WhatsAnalyze é um projeto de código aberto independente e não tem vínculo com o WhatsApp ou a Meta.",
+      analyticsGroupTitle: "Análises e métricas de conversa",
+      analyticsGroupDesc:
+        "Ferramentas focadas no navegador para medir dinâmica, contagem de mensagens, vocabulário e horários.",
+      courtGroupTitle: "Documentação oficial e comprovações jurídicas",
+      courtGroupDesc:
+        "Relatórios em PDF para processos judiciais e linhas do tempo verificadas para pedidos de visto.",
     },
     toolDropzone: {
       localEngine: "MOTOR LOCAL NO NAVEGADOR",
@@ -2558,6 +3220,220 @@ export const messages = {
     pageNameCourt: "Conversas do WhatsApp como prova na justiça",
     pageNameRelationship: "Comprovação de relacionamento com chats",
     pageNameInactivity: "Rastreador de inatividade e última mensagem",
+    toolsMessageCounter: {
+      seoTitle: "Contador de mensagens e linhas do WhatsApp | WhatsAnalyze",
+      seoDescription:
+        "Conte mensagens, linhas e caracteres da sua conversa do WhatsApp. Veja quem manda mais mensagens 100% no navegador.",
+      ogTitle: "Contador de mensagens e linhas do WhatsApp | WhatsAnalyze",
+      ogDescription:
+        "Contador rápido e 100% privado para WhatsApp. Descubra quem fala mais e o dia recorde da conversa.",
+      heroEyebrow: "Ferramenta gratuita para WhatsApp",
+      heroTitle: "Contador de mensagens e linhas do WhatsApp",
+      heroSubtitle:
+        "Descubra o volume total de mensagens, contagem de linhas e veja quem mais conversa no chat.",
+      heroNote:
+        "100% no navegador · Zero envio para servidor · Gratuito e código aberto",
+      reportEyebrow: "Métricas em tempo real",
+      reportTitle: "Volume de mensagens e contagem de linhas",
+      reportText:
+        "Calculado diretamente da sua exportação na memória local do navegador.",
+      metricTotalMessages: "TOTAL DE MENSAGENS",
+      metricTotalLines: "TOTAL DE LINHAS",
+      metricDailyAverage: "MENSAGENS / DIA",
+      metricBusiestDay: "DIA MAIS ATIVO",
+      captionMessagesOverDays: "Em {days} dias no total",
+      captionLinesPerMsg: "Média de {avg} linhas por mensagem",
+      captionDailyAvg: "Ritmo diário de mensagens",
+      captionDayRecord: "{count} mensagens enviadas",
+      participantsTitle: "Participação e volume por contato",
+      participantsCount: "{count} PARTICIPANTES",
+      colParticipant: "Participante",
+      colMessages: "Mensagens",
+      colShare: "Proporção",
+      colLines: "Linhas",
+      colChars: "Caracteres",
+      hookEyebrow: "Muito além de contar",
+      hookTitle: "Pronto para gráficos de palavras e Wrapped anual?",
+      hookText:
+        "O WhatsAnalyze transforma sua conversa em estatísticas completas e retrospectiva no estilo Stories. 100% privado.",
+      hookButton: "Abrir análise completa do WhatsApp →",
+      hookNote: "Transição imediata · Sem reenvio · Gratuito",
+      stepsEyebrow: "Guia passo a passo",
+      stepsTitle: "Como contar mensagens da conversa",
+      step1Title: "Exportar conversa no WhatsApp",
+      step1Text:
+        "Abra a conversa, selecione 'Exportar conversa' e escolha 'Sem mídia'.",
+      step2Title: "Soltar arquivo no navegador",
+      step2Text:
+        "Arraste o arquivo .txt ou .zip para a área acima. O cálculo ocorre na hora.",
+      step3Title: "Ver estatísticas imediatas",
+      step3Text:
+        "Confira quem enviou mais mensagens, contagem de linhas e o dia de maior movimento.",
+      guideLink: "Guia detalhado de exportação do WhatsApp",
+      faqTitle: "Perguntas frequentes",
+      faq1Q: "Funciona em grupos grandes?",
+      faq1A:
+        "Sim, processa conversas individuais e grupos com dezenas de pessoas e centenas de milhares de mensagens.",
+      faq2Q: "Como mensagens com quebras de linha são calculadas?",
+      faq2A:
+        "Calculamos tanto o número total de mensagens quanto as linhas reais de texto digitadas.",
+      faq3Q: "Os dados saem do meu celular?",
+      faq3A:
+        "Não. Todo o processamento ocorre na memória local do seu navegador sem transmissão para servidores.",
+      faq4Q: "É compatível com iPhone e Android?",
+      faq4A:
+        "Sim, aceita os formatos de exportação padrão do iOS, Android e WhatsApp Web.",
+      ctaTitle: "Pronto para contar as mensagens da sua conversa?",
+      ctaButton: "Contar mensagens agora",
+      ctaNote: "100% privado · Zero upload para servidor · Sem cadastro",
+      disclaimer:
+        "O WhatsAnalyze é um projeto de código aberto independente e não tem vínculo com o WhatsApp ou a Meta.",
+    },
+    toolsWordCounter: {
+      seoTitle: "Contador de palavras e vocabulário do WhatsApp | WhatsAnalyze",
+      seoDescription:
+        "Descubra contagem total de palavras, riqueza de vocabulário e palavras mais usadas no WhatsApp 100% no navegador.",
+      ogTitle: "Contador de palavras e vocabulário do WhatsApp | WhatsAnalyze",
+      ogDescription:
+        "Analise o volume de palavras e os termos mais frequentes da conversa sem enviar dados para a nuvem.",
+      heroEyebrow: "Ferramenta gratuita para WhatsApp",
+      heroTitle: "Contador de palavras e vocabulário do WhatsApp",
+      heroSubtitle:
+        "Analise o volume total de palavras, riqueza do vocabulário, maiores mensagens e termos mais usados.",
+      heroNote:
+        "100% no navegador · Zero envio para servidor · Gratuito e código aberto",
+      reportEyebrow: "Métricas léxicas",
+      reportTitle: "Análise de palavras e vocabulário",
+      reportText:
+        "Calculado diretamente da sua conversa na memória local do seu navegador.",
+      metricTotalWords: "TOTAL DE PALAVRAS",
+      metricUniqueWords: "VOCABULÁRIO ÚNICO",
+      metricAvgWords: "MÉDIA PALAVRAS / MSG",
+      metricLongestMessage: "MAIOR MENSAGEM",
+      captionUniqueRatio: "{count} palavras distintas usadas",
+      captionAvgPace: "Tamanho médio das frases",
+      captionLongestBy: "Por {author} ({words} palavras)",
+      topWordsTitle: "Palavras mais frequentes na conversa",
+      topWordsSubtitle: "Filtro automático de termos comuns ativado",
+      participantsTitle: "Vocabulário por participante",
+      participantsCount: "{count} PARTICIPANTES",
+      colParticipant: "Participante",
+      colWords: "Palavras",
+      colUniqueWords: "Palavras únicas",
+      colAvgWords: "Palavras/Mensagem",
+      colShare: "Proporção",
+      hookEyebrow: "Muito além de contar palavras",
+      hookTitle: "Descubra nuvens de palavras e retrospectivas",
+      hookText:
+        "O WhatsAnalyze gera nuvens de palavras visuais, distribuição de horários e retrospectiva Wrapped. 100% privado.",
+      hookButton: "Abrir análise completa do WhatsApp →",
+      hookNote: "Transição imediata · Sem reenvio · Gratuito",
+      stepsEyebrow: "Guia passo a passo",
+      stepsTitle: "Como contar palavras da conversa",
+      step1Title: "Exportar conversa no WhatsApp",
+      step1Text:
+        "Abra a conversa, selecione 'Exportar conversa' e escolha 'Sem mídia'.",
+      step2Title: "Soltar arquivo aqui",
+      step2Text:
+        "Arraste o arquivo .txt ou .zip para o campo acima. O cálculo ocorre em milissegundos.",
+      step3Title: "Ver seu vocabulário",
+      step3Text:
+        "Confira as palavras mais faladas, o total de vocábulos e a maior mensagem enviada.",
+      guideLink: "Guia detalhado de exportação do WhatsApp",
+      faqTitle: "Perguntas frequentes",
+      faq1Q: "Como a riqueza de vocabulário é avaliada?",
+      faq1A:
+        "Contamos cada palavra diferente utilizada para medir a variedade vocabular dos participantes.",
+      faq2Q: "Termos simples como 'de', 'para' e 'com' são descartados?",
+      faq2A:
+        "Sim, aplicamos filtros de palavras vazias para que apenas os termos mais expressivos apareçam no ranking.",
+      faq3Q: "Os textos das mensagens são salvos?",
+      faq3A:
+        "Não. A análise ocorre exclusivamente na memória do navegador do seu próprio aparelho.",
+      faq4Q: "Funciona em português?",
+      faq4A:
+        "Sim, processa conversas em português, inglês, espanhol e dezenas de outros idiomas.",
+      ctaTitle: "Pronto para analisar as palavras da conversa?",
+      ctaButton: "Contar palavras agora",
+      ctaNote: "100% privado · Zero upload para servidor · Sem cadastro",
+      disclaimer:
+        "O WhatsAnalyze é um projeto de código aberto independente e não tem vínculo com o WhatsApp ou a Meta.",
+    },
+    toolsChatHeatmap: {
+      seoTitle:
+        "Horários de pico e mapa de calor 24h do WhatsApp | WhatsAnalyze",
+      seoDescription:
+        "Analise quando suas conversas do WhatsApp atingem o pico nas 24 horas do dia. Compare dia vs noite 100% no navegador.",
+      ogTitle:
+        "Horários de pico e mapa de calor 24h do WhatsApp | WhatsAnalyze",
+      ogDescription:
+        "Descubra os horários de pico e a distribuição dia vs noite da sua conversa sem envio de dados.",
+      heroEyebrow: "Ferramenta gratuita para WhatsApp",
+      heroTitle: "Horários de pico e mapa de calor 24h do WhatsApp",
+      heroSubtitle:
+        "Descubra em quais momentos do dia a conversa mais esquenta. Compare padrões de dia e noite num relance.",
+      heroNote:
+        "100% no navegador · Zero envio para servidor · Gratuito e código aberto",
+      reportEyebrow: "Métricas de atividade",
+      reportTitle: "Relatório de atividade 24 horas e mapa de calor",
+      reportText:
+        "Calculado diretamente dos registros de data e hora na memória local do seu navegador.",
+      metricPeakHour: "HORÁRIO DE PICO",
+      metricPeakDay: "DIA MAIS ATIVO",
+      metricDaytime: "ATIVIDADE DIURNA",
+      metricNighttime: "ATIVIDADE NOTURNA",
+      captionPeakCount: "{count} mensagens no horário de pico",
+      captionPeakDayPct: "{pct}% de todas as mensagens",
+      captionDayHours: "6:00 – 22:00 ({pct}%)",
+      captionNightHours: "22:00 – 6:00 ({pct}%)",
+      chartTitle: "Distribuição de atividade nas 24 horas",
+      chartSubtitle: "Total de mensagens por hora do dia",
+      participantsTitle: "Divisão dia/noite por participante",
+      participantsCount: "{count} PARTICIPANTES",
+      colParticipant: "Participante",
+      colPeakHour: "Horário de pico",
+      colDayShare: "Proporção diurna",
+      colNightShare: "Proporção noturna",
+      colTotal: "Mensagens totais",
+      hookEyebrow: "Muito além de horários de pico",
+      hookTitle: "Descubra linhas do tempo de 365 dias e Wrapped anual",
+      hookText:
+        "O WhatsAnalyze transforma sua conversa em gráficos interativos e retrospectiva Wrapped. 100% privado.",
+      hookButton: "Abrir análise completa do WhatsApp →",
+      hookNote: "Transição imediata · Sem reenvio · Gratuito",
+      stepsEyebrow: "Guia passo a passo",
+      stepsTitle: "Como analisar os horários da conversa",
+      step1Title: "Exportar conversa no WhatsApp",
+      step1Text:
+        "Abra a conversa, selecione 'Exportar conversa' e escolha 'Sem mídia'.",
+      step2Title: "Soltar arquivo no navegador",
+      step2Text:
+        "Arraste o arquivo .txt ou .zip para a área acima. O processamento ocorre em milissegundos.",
+      step3Title: "Ver mapa de calor",
+      step3Text:
+        "Veja os horários de maior conversa e quem costuma mandar mensagens tarde da noite.",
+      guideLink: "Guia detalhado de exportação do WhatsApp",
+      faqTitle: "Perguntas frequentes",
+      faq1Q: "Como os períodos de dia e noite são divididos?",
+      faq1A:
+        "O dia abrange das 6:00 às 22:00. A noite compreende o intervalo entre 22:00 e 6:00.",
+      faq2Q: "Leva em conta fusos horários?",
+      faq2A:
+        "Os horários do arquivo refletem o fuso horário do aparelho em que a conversa foi exportada.",
+      faq3Q: "Posso ver quem manda mais mensagens de madrugada?",
+      faq3A:
+        "Sim. A tabela mostra a porcentagem exata de atividade diurna e noturna de cada pessoa.",
+      faq4Q: "Os horários das minhas mensagens são enviados a algum servidor?",
+      faq4A: "Não. Todo o cálculo ocorre localmente no navegador.",
+      ctaTitle: "Pronto para descobrir seus horários mais ativos?",
+      ctaButton: "Analisar horários agora",
+      ctaNote: "100% privado · Zero upload para servidor · Sem cadastro",
+      disclaimer:
+        "O WhatsAnalyze é um projeto de código aberto independente e não tem vínculo com o WhatsApp ou a Meta.",
+    },
+    pageNameMessages: "Contador de mensagens e linhas do WhatsApp",
+    pageNameWords: "Contador de palavras e vocabulário do WhatsApp",
+    pageNameHeatmap: "Horários de pico e mapa de calor 24h do WhatsApp",
   },
   fr: {
     wrapped: {
@@ -2889,6 +3765,12 @@ export const messages = {
         "Explorez tous les graphiques, nuages de mots, histoires Wrapped et exportez des livres PDF soignés.",
       disclaimer:
         "WhatsAnalyze est un projet open source indépendant sans affiliation, approbation ou parrainage par WhatsApp ou Meta.",
+      analyticsGroupTitle: "Analyses et métriques de discussion",
+      analyticsGroupDesc:
+        "Des outils ciblés dans le navigateur pour mesurer les dynamiques, les volumes de messages, le vocabulaire et les heures d'échange.",
+      courtGroupTitle: "Documentation officielle et preuves juridiques",
+      courtGroupDesc:
+        "Transcriptions PDF recevables en justice et chronologies certifiées pour les démarches consulaires et judiciaires.",
     },
     toolDropzone: {
       localEngine: "MOTEUR LOCAL DU NAVIGATEUR",
@@ -3192,6 +4074,221 @@ export const messages = {
     pageNameCourt: "Chats WhatsApp comme preuve en justice",
     pageNameRelationship: "Prouver votre relation avec vos chats",
     pageNameInactivity: "Suivi d'inactivité et dernier message",
+    toolsMessageCounter: {
+      seoTitle: "Compteur de messages et de lignes WhatsApp | WhatsAnalyze",
+      seoDescription:
+        "Comptez les messages, lignes et caractères de votre chat WhatsApp. Découvrez qui écrit le plus et votre jour le plus actif, 100 % privé.",
+      ogTitle: "Compteur de messages et de lignes WhatsApp | WhatsAnalyze",
+      ogDescription:
+        "Compteur WhatsApp rapide et 100 % privé. Découvrez qui envoie le plus de messages et vos records de discussion.",
+      heroEyebrow: "Outil WhatsApp gratuit",
+      heroTitle: "Compteur de messages et de lignes WhatsApp",
+      heroSubtitle:
+        "Découvrez le volume total de messages, le nombre de lignes et qui participe le plus à vos échanges.",
+      heroNote:
+        "100 % dans le navigateur · Aucun envoi sur serveur · Gratuit et open source",
+      reportEyebrow: "Métriques en direct",
+      reportTitle: "Volume de messages et répartition des lignes",
+      reportText:
+        "Calculé directement à partir de votre export dans la mémoire locale de votre navigateur.",
+      metricTotalMessages: "TOTAL DES MESSAGES",
+      metricTotalLines: "TOTAL DES LIGNES",
+      metricDailyAverage: "MESSAGES / JOUR",
+      metricBusiestDay: "JOUR LE PLUS ACTIF",
+      captionMessagesOverDays: "Sur {days} jours au total",
+      captionLinesPerMsg: "Moyenne de {avg} lignes par message",
+      captionDailyAvg: "Rythme quotidien d'échanges",
+      captionDayRecord: "{count} messages envoyés",
+      participantsTitle: "Répartition des messages par participant",
+      participantsCount: "{count} PARTICIPANTS",
+      colParticipant: "Participant",
+      colMessages: "Messages",
+      colShare: "Part",
+      colLines: "Lignes",
+      colChars: "Caractères",
+      hookEyebrow: "Bien plus qu'un simple compteur",
+      hookTitle: "Envie de nuages de mots et d'une rétrospective Wrapped ?",
+      hookText:
+        "WhatsAnalyze transforme l'ensemble de votre chat en graphiques interactifs et rétrospective annuelle. 100 % privé.",
+      hookButton: "Lancer l'analyseur complet de WhatsApp →",
+      hookNote: "Passage immédiat · Aucun renvoi de fichier · Gratuit",
+      stepsEyebrow: "Guide étape par étape",
+      stepsTitle: "Comment compter les messages de votre discussion",
+      step1Title: "Exporter la discussion WhatsApp",
+      step1Text:
+        "Dans WhatsApp, ouvrez les options du chat, appuyez sur 'Exporter la discussion' et choisissez 'Sans médias'.",
+      step2Title: "Déposer le fichier ici",
+      step2Text:
+        "Glissez le fichier .txt ou .zip exporté dans la zone ci-dessus. Le traitement s'effectue en quelques millisecondes.",
+      step3Title: "Consulter vos statistiques",
+      step3Text:
+        "Découvrez la part de parole de chacun, le total des lignes écrites et votre journée record.",
+      guideLink: "Guide détaillé pour exporter WhatsApp",
+      faqTitle: "Foire aux questions",
+      faq1Q: "Peut-on analyser de grands groupes ?",
+      faq1A:
+        "Oui. L'outil prend en charge les discussions privées ainsi que les groupes de plusieurs dizaines de membres.",
+      faq2Q: "Comment sont comptées les lignes multiples ?",
+      faq2A:
+        "Chaque message est comptabilisé individuellement et les retours à la ligne sont additionnés pour donner le total des lignes.",
+      faq3Q: "Mes messages sont-ils envoyés sur un serveur ?",
+      faq3A:
+        "Non, tout le calcul a lieu dans la mémoire locale de votre navigateur. Rien n'est transmis à distance.",
+      faq4Q: "Est-ce compatible avec Android et iPhone ?",
+      faq4A:
+        "Oui, tous les formats de date WhatsApp sur iOS, Android et Web sont automatiquement reconnus.",
+      ctaTitle: "Prêt à compter les messages de votre discussion ?",
+      ctaButton: "Compter mes messages maintenant",
+      ctaNote: "100 % privé · Aucun envoi sur serveur · Sans inscription",
+      disclaimer:
+        "WhatsAnalyze est un projet open source indépendant sans affiliation, approbation ou parrainage par WhatsApp ou Meta.",
+    },
+    toolsWordCounter: {
+      seoTitle: "Compteur de mots et de vocabulaire WhatsApp | WhatsAnalyze",
+      seoDescription:
+        "Découvrez le nombre de mots, la richesse du vocabulaire, la taille moyenne des messages et les mots les plus utilisés sur WhatsApp. 100 % privé.",
+      ogTitle: "Compteur de mots et de vocabulaire WhatsApp | WhatsAnalyze",
+      ogDescription:
+        "Analysez le nombre de mots et les termes récurrents de vos conversations WhatsApp sans aucun transfert de données.",
+      heroEyebrow: "Outil WhatsApp gratuit",
+      heroTitle: "Compteur de mots et de vocabulaire WhatsApp",
+      heroSubtitle:
+        "Analysez le volume total de mots, la richesse du vocabulaire, les messages les plus longs et les mots emblématiques de vos échanges.",
+      heroNote:
+        "100 % dans le navigateur · Aucun envoi sur serveur · Gratuit et open source",
+      reportEyebrow: "Métriques lexicales",
+      reportTitle: "Analyse du vocabulaire et des mots du chat",
+      reportText:
+        "Calculé directement à partir de votre discussion dans la mémoire locale de votre navigateur.",
+      metricTotalWords: "TOTAL DES MOTS",
+      metricUniqueWords: "VOCABULAIRE UNIQUE",
+      metricAvgWords: "MOYENNE MOTS / MSG",
+      metricLongestMessage: "MESSAGE LE PLUS LONG",
+      captionUniqueRatio: "{count} mots distincts employés",
+      captionAvgPace: "Longueur moyenne des phrases",
+      captionLongestBy: "Par {author} ({words} mots)",
+      topWordsTitle: "Mots les plus fréquents dans la discussion",
+      topWordsSubtitle: "Filtrage automatique des mots courants actif",
+      participantsTitle: "Répartition du vocabulaire par participant",
+      participantsCount: "{count} PARTICIPANTS",
+      colParticipant: "Participant",
+      colWords: "Mots",
+      colUniqueWords: "Mots uniques",
+      colAvgWords: "Mots/Message",
+      colShare: "Part",
+      hookEyebrow: "Bien plus qu'un simple décompte",
+      hookTitle: "Explorez des nuages de mots et votre Wrapped",
+      hookText:
+        "WhatsAnalyze génère des nuages de mots visuels, des courbes d'activité et une rétrospective annuelle Wrapped. 100 % privé.",
+      hookButton: "Lancer l'analyseur complet de WhatsApp →",
+      hookNote: "Passage immédiat · Aucun renvoi de fichier · Gratuit",
+      stepsEyebrow: "Guide étape par étape",
+      stepsTitle: "Comment analyser les mots de votre discussion",
+      step1Title: "Exporter la discussion WhatsApp",
+      step1Text:
+        "Ouvrez le chat, appuyez sur le nom en haut, sélectionnez 'Exporter la discussion' et 'Sans médias'.",
+      step2Title: "Déposer le fichier",
+      step2Text:
+        "Glissez le fichier .txt ou .zip exporté ci-dessus. L'analyse s'effectue en quelques millisecondes.",
+      step3Title: "Explorer vos mots",
+      step3Text:
+        "Découvrez vos mots les plus fréquents, le volume total et votre message record.",
+      guideLink: "Guide détaillé pour exporter WhatsApp",
+      faqTitle: "Foire aux questions",
+      faq1Q: "Comment la richesse du vocabulaire est-elle calculée ?",
+      faq1A:
+        "Nous recensons chaque mot distinct utilisé dans la conversation pour mesurer la diversité du langage employé.",
+      faq2Q: "Les mots de liaison courants sont-ils exclus ?",
+      faq2A:
+        "Oui, un filtre automatique écarte les mots grammaticaux usuels pour faire ressortir les termes les plus significatifs.",
+      faq3Q: "Mes messages sont-ils enregistrés ?",
+      faq3A:
+        "Non, tout le traitement s'effectue en local dans la mémoire de votre navigateur.",
+      faq4Q: "L'outil gère-t-il le français ?",
+      faq4A:
+        "Parfaitement, ainsi que l'anglais, l'espagnol, l'allemand, l'italien et bien d'autres langues.",
+      ctaTitle: "Prêt à explorer les mots de votre discussion ?",
+      ctaButton: "Compter mes mots maintenant",
+      ctaNote: "100 % privé · Aucun envoi sur serveur · Sans inscription",
+      disclaimer:
+        "WhatsAnalyze est un projet open source indépendant sans affiliation, approbation ou parrainage par WhatsApp ou Meta.",
+    },
+    toolsChatHeatmap: {
+      seoTitle:
+        "Heures de pointe et carte thermique 24h WhatsApp | WhatsAnalyze",
+      seoDescription:
+        "Analysez les heures les plus actives de vos chats WhatsApp sur 24h. Comparez jour et nuit 100 % confidentiel dans votre navigateur.",
+      ogTitle:
+        "Heures de pointe et carte thermique 24h WhatsApp | WhatsAnalyze",
+      ogDescription:
+        "Découvrez les heures les plus actives et la répartition jour/nuit de vos échanges sans téléversement.",
+      heroEyebrow: "Outil WhatsApp gratuit",
+      heroTitle: "Heures de pointe et carte thermique 24h WhatsApp",
+      heroSubtitle:
+        "Découvrez à quel moment de la journée vos échanges sont les plus animés. Comparez les habitudes de jour et de nuit en un coup d'œil.",
+      heroNote:
+        "100 % dans le navigateur · Aucun envoi sur serveur · Gratuit et open source",
+      reportEyebrow: "Métriques d'activité",
+      reportTitle: "Rapport d'activité sur 24 heures et carte thermique",
+      reportText:
+        "Calculé directement à partir des horodatages de votre discussion dans la mémoire locale de votre navigateur.",
+      metricPeakHour: "HEURE DE POINTE",
+      metricPeakDay: "JOUR LE PLUS ACTIF",
+      metricDaytime: "ACTIVITÉ EN JOURNÉE",
+      metricNighttime: "ACTIVITÉ NOCTURNE",
+      captionPeakCount: "{count} messages à l'heure de pointe",
+      captionPeakDayPct: "{pct} % de tous les messages",
+      captionDayHours: "6h00 – 22h00 ({pct} %)",
+      captionNightHours: "22h00 – 6h00 ({pct} %)",
+      chartTitle: "Répartition de l'activité sur 24 heures",
+      chartSubtitle: "Messages envoyés par heure de la journée",
+      participantsTitle: "Répartition jour/nuit par participant",
+      participantsCount: "{count} PARTICIPANTS",
+      colParticipant: "Participant",
+      colPeakHour: "Heure de pointe",
+      colDayShare: "Part de jour",
+      colNightShare: "Part de nuit",
+      colTotal: "Messages totaux",
+      hookEyebrow: "Bien plus que des heures d'activité",
+      hookTitle: "Explorez des courbes sur 365 jours et votre Wrapped",
+      hookText:
+        "WhatsAnalyze transforme l'ensemble de votre conversation en graphiques interactifs et rétrospective Wrapped. 100 % privé.",
+      hookButton: "Lancer l'analyseur complet de WhatsApp →",
+      hookNote: "Passage immédiat · Aucun renvoi de fichier · Gratuit",
+      stepsEyebrow: "Guide étape par étape",
+      stepsTitle: "Comment analyser les heures de votre discussion",
+      step1Title: "Exporter la discussion WhatsApp",
+      step1Text:
+        "Ouvrez le chat, appuyez sur le nom en haut, sélectionnez 'Exporter la discussion' et 'Sans médias'.",
+      step2Title: "Déposer le fichier",
+      step2Text:
+        "Glissez le fichier .txt ou .zip exporté ci-dessus. L'analyse des horodatages s'exécute en quelques millisecondes.",
+      step3Title: "Explorer la carte thermique",
+      step3Text:
+        "Découvrez vos heures de pointe et repérez qui envoie des messages tard le soir.",
+      guideLink: "Guide détaillé pour exporter WhatsApp",
+      faqTitle: "Foire aux questions",
+      faq1Q: "Comment sont définies les périodes de jour et de nuit ?",
+      faq1A:
+        "La journée correspond à la tranche 6h00–22h00. La nuit correspond à la tranche 22h00–6h00.",
+      faq2Q: "Les fuseaux horaires sont-ils pris en compte ?",
+      faq2A:
+        "Les heures du fichier correspondent au fuseau horaire de l'appareil qui a généré l'export.",
+      faq3Q: "Puis-je voir qui écrit le plus la nuit ?",
+      faq3A:
+        "Oui. Le tableau détaille le pourcentage exact de messages diurnes et nocturnes pour chaque participant.",
+      faq4Q: "Mes données quittent-elles mon appareil ?",
+      faq4A:
+        "Non, tous les calculs sont effectués en local dans la mémoire de votre navigateur.",
+      ctaTitle: "Prêt à découvrir vos heures les plus actives ?",
+      ctaButton: "Analyser les horaires maintenant",
+      ctaNote: "100 % privé · Aucun envoi sur serveur · Sans inscription",
+      disclaimer:
+        "WhatsAnalyze est un projet open source indépendant sans affiliation, approbation ou parrainage par WhatsApp ou Meta.",
+    },
+    pageNameMessages: "Compteur de messages et de lignes WhatsApp",
+    pageNameWords: "Compteur de mots et de vocabulaire WhatsApp",
+    pageNameHeatmap: "Heures de pointe et carte thermique 24h WhatsApp",
   },
   it: {
     wrapped: {
@@ -3522,6 +4619,12 @@ export const messages = {
         "Analizza tutti i grafici, le nuvole di parole, le storie Wrapped ed esporta eleganti libri in PDF.",
       disclaimer:
         "WhatsAnalyze è un progetto open source indipendente e non è affiliato, approvato o sponsorizzato da WhatsApp o Meta.",
+      analyticsGroupTitle: "Analisi e metriche della chat",
+      analyticsGroupDesc:
+        "Strumenti mirati nel browser per misurare dinamiche, volumi di messaggi, vocabolario e fasce orarie.",
+      courtGroupTitle: "Documentazione ufficiale e prove legali",
+      courtGroupDesc:
+        "Trascrizioni PDF legali e cronologie verificate pensate per tribunali e pratiche di visto.",
     },
     toolDropzone: {
       localEngine: "MOTORE LOCALE NEL BROWSER",
@@ -3822,5 +4925,221 @@ export const messages = {
     pageNameCourt: "Chat di WhatsApp come prova legale",
     pageNameRelationship: "Dimostra la tua relazione con le chat",
     pageNameInactivity: "Tracker di inattività e ultimo messaggio",
+    toolsMessageCounter: {
+      seoTitle: "Contatore di messaggi e righe WhatsApp | WhatsAnalyze",
+      seoDescription:
+        "Conta messaggi, righe e caratteri della tua chat di WhatsApp. Scopri chi scrive di più e il giorno più attivo, 100% privato nel browser.",
+      ogTitle: "Contatore di messaggi e righe WhatsApp | WhatsAnalyze",
+      ogDescription:
+        "Contatore rapido e privato per WhatsApp. Scopri chi invia più messaggi e i tuoi record di conversazione.",
+      heroEyebrow: "Strumento WhatsApp gratuito",
+      heroTitle: "Contatore di messaggi e righe WhatsApp",
+      heroSubtitle:
+        "Scopri il volume totale di messaggi, il conteggio delle righe e chi partecipa di più nelle tue chat.",
+      heroNote:
+        "100% nel browser · Nessun caricamento su server · Gratuito e open source",
+      reportEyebrow: "Metriche in tempo reale",
+      reportTitle: "Volume dei messaggi e distribuzione delle righe",
+      reportText:
+        "Calcolato direttamente dalla tua esportazione nella memoria locale del browser.",
+      metricTotalMessages: "MESSAGGI TOTALI",
+      metricTotalLines: "RIGHE TOTALI",
+      metricDailyAverage: "MESSAGGI / GIORNO",
+      metricBusiestDay: "GIORNO PIÙ ATTIVO",
+      captionMessagesOverDays: "In {days} giorni complessivi",
+      captionLinesPerMsg: "Media di {avg} righe per messaggio",
+      captionDailyAvg: "Ritmo giornaliero di messaggi",
+      captionDayRecord: "{count} messaggi inviati",
+      participantsTitle: "Quote di messaggi per partecipante",
+      participantsCount: "{count} PARTECIPANTI",
+      colParticipant: "Partecipante",
+      colMessages: "Messaggi",
+      colShare: "Percentuale",
+      colLines: "Righe",
+      colChars: "Caratteri",
+      hookEyebrow: "Oltre il semplice conteggio",
+      hookTitle: "Pronto per nuvole di parole, grafici e Wrapped annuale?",
+      hookText:
+        "WhatsAnalyze trasforma la tua chat in statistiche approfondite e una storia Wrapped pronta da condividere. 100% privato.",
+      hookButton: "Avvia l'analizzatore completo di WhatsApp →",
+      hookNote: "Passaggio immediato · Nessun nuovo caricamento · Gratuito",
+      stepsEyebrow: "Guida passo dopo passo",
+      stepsTitle: "Come contare i messaggi della tua chat",
+      step1Title: "Esporta la chat di WhatsApp",
+      step1Text:
+        "Apri WhatsApp, tocca le impostazioni della chat, seleziona 'Esporta chat' e scegli 'Senza file multimediali'.",
+      step2Title: "Rilascia il file qui",
+      step2Text:
+        "Trascina il file .txt o .zip nel riquadro in alto. L'elaborazione locale richiede pochi millisecondi.",
+      step3Title: "Consulta subito i risultati",
+      step3Text:
+        "Visualizza la percentuale di messaggi per persona, le righe complessive e il giorno record.",
+      guideLink: "Guida dettagliata all'esportazione di WhatsApp",
+      faqTitle: "Domande frequenti",
+      faq1Q: "Può contare i messaggi nei gruppi numerosi?",
+      faq1A:
+        "Sì. Supporta chat individuali e gruppi con decine di membri e centinaia di migliaia di messaggi.",
+      faq2Q: "Come vengono contati i messaggi su più righe?",
+      faq2A:
+        "Ogni messaggio viene conteggiato come unità e gli a capo vengono sommati per calcolare le righe totali di testo.",
+      faq3Q: "I miei dati vengono caricati su server?",
+      faq3A:
+        "Mai. Tutta l'analisi viene svolta in locale nel browser, senza inviare dati all'esterno.",
+      faq4Q: "Funziona con esportazioni sia da Android sia da iPhone?",
+      faq4A:
+        "Sì. Tutti i formati di data e ora di iOS, Android e WhatsApp Web vengono riconosciuti automaticamente.",
+      ctaTitle: "Pronto a contare i messaggi della tua chat?",
+      ctaButton: "Conta i messaggi adesso",
+      ctaNote:
+        "100% privato · Nessun caricamento su server · Nessuna registrazione",
+      disclaimer:
+        "WhatsAnalyze è un progetto open source indipendente e non è affiliato, approvato o sponsorizzato da WhatsApp o Meta.",
+    },
+    toolsWordCounter: {
+      seoTitle: "Contatore di parole e vocabolario WhatsApp | WhatsAnalyze",
+      seoDescription:
+        "Scopri il conteggio totale delle parole, la varietà del vocabolario e i termini più usati nelle tue chat di WhatsApp 100% nel browser.",
+      ogTitle: "Contatore di parole e vocabolario WhatsApp | WhatsAnalyze",
+      ogDescription:
+        "Analizza il volume di parole, il vocabolario unico e i termini più usati nelle chat di WhatsApp senza caricare dati.",
+      heroEyebrow: "Strumento WhatsApp gratuito",
+      heroTitle: "Contatore di parole e vocabolario WhatsApp",
+      heroSubtitle:
+        "Analizza il volume totale delle parole, la ricchezza del vocabolario, i messaggi più lunghi e i termini distintivi delle tue chat.",
+      heroNote:
+        "100% nel browser · Nessun caricamento su server · Gratuito e open source",
+      reportEyebrow: "Metriche lessicali",
+      reportTitle: "Analisi delle parole e del vocabolario della chat",
+      reportText:
+        "Calcolato direttamente dalla tua conversazione nella memoria locale del browser.",
+      metricTotalWords: "PAROLE TOTALI",
+      metricUniqueWords: "VOCABOLARIO UNICO",
+      metricAvgWords: "MEDIA PAROLE / MSG",
+      metricLongestMessage: "MESSAGGIO PIÙ LUNGO",
+      captionUniqueRatio: "{count} parole diverse utilizzate",
+      captionAvgPace: "Lunghezza media delle frasi",
+      captionLongestBy: "Di {author} ({words} parole)",
+      topWordsTitle: "Parole più frequenti nella chat",
+      topWordsSubtitle: "Filtro automatico dei termini comuni attivo",
+      participantsTitle: "Analisi del vocabolario per partecipante",
+      participantsCount: "{count} PARTECIPANTI",
+      colParticipant: "Partecipante",
+      colWords: "Parole",
+      colUniqueWords: "Parole uniche",
+      colAvgWords: "Parole/Messaggio",
+      colShare: "Percentuale",
+      hookEyebrow: "Oltre il semplice conteggio",
+      hookTitle: "Scopri nuvole di parole e storia Wrapped",
+      hookText:
+        "WhatsAnalyze crea nuvole di parole visive, grafici temporali e una storia Wrapped annuale. 100% privato.",
+      hookButton: "Avvia l'analizzatore completo di WhatsApp →",
+      hookNote: "Passaggio immediato · Nessun nuovo caricamento · Gratuito",
+      stepsEyebrow: "Guida passo dopo passo",
+      stepsTitle: "Come analizzare le parole della tua chat",
+      step1Title: "Esporta la chat di WhatsApp",
+      step1Text:
+        "Apri la chat, tocca il nome in alto, seleziona 'Esporta chat' e scegli 'Senza file multimediali'.",
+      step2Title: "Rilascia il file qui",
+      step2Text:
+        "Trascina il file .txt o .zip nel riquadro in alto per avviare il calcolo in pochi millisecondi.",
+      step3Title: "Esplora il tuo vocabolario",
+      step3Text:
+        "Visualizza i vocaboli più usati, il volume totale e il messaggio più lungo mai scritto.",
+      guideLink: "Guida dettagliata all'esportazione di WhatsApp",
+      faqTitle: "Domande frequenti",
+      faq1Q: "Come viene valutata la varietà del vocabolario?",
+      faq1A:
+        "Viene identificata ogni singola parola distinta utilizzata nella chat per calcolare la ricchezza linguistica complessiva.",
+      faq2Q: "Le parole comuni come 'il', 'di', 'e' vengono escluse?",
+      faq2A:
+        "Sì, un filtro automatico elimina le congiunzioni e gli articoli per valorizzare i vocaboli più espressivi.",
+      faq3Q: "I messaggi lasciano il mio dispositivo?",
+      faq3A:
+        "No. Tutta l'analisi lessicale avviene nella memoria locale del tuo browser.",
+      faq4Q: "Funziona con chat in italiano?",
+      faq4A:
+        "Certamente, supporta l'italiano, l'inglese, lo spagnolo, il tedesco, il francese e molte altre lingue.",
+      ctaTitle: "Pronto ad analizzare le parole della tua chat?",
+      ctaButton: "Conta le parole adesso",
+      ctaNote:
+        "100% privato · Nessun caricamento su server · Nessuna registrazione",
+      disclaimer:
+        "WhatsAnalyze è un progetto open source indipendente e non è affiliato, approvato o sponsorizzato da WhatsApp o Meta.",
+    },
+    toolsChatHeatmap: {
+      seoTitle: "Orari di punta e mappa termica 24h WhatsApp | WhatsAnalyze",
+      seoDescription:
+        "Analizza quando le tue chat di WhatsApp raggiungono il picco nelle 24 ore. Confronta giorno e notte 100% nel browser in totale privacy.",
+      ogTitle: "Orari di punta e mappa termica 24h WhatsApp | WhatsAnalyze",
+      ogDescription:
+        "Scopri le fasce orarie più attive e la distribuzione giorno/notte delle tue conversazioni senza caricare file.",
+      heroEyebrow: "Strumento WhatsApp gratuito",
+      heroTitle: "Orari di punta e mappa termica 24h WhatsApp",
+      heroSubtitle:
+        "Scopri in quali momenti della giornata la conversazione è più viva. Confronta le abitudini tra giorno e notte a colpo d'occhio.",
+      heroNote:
+        "100% nel browser · Nessun caricamento su server · Gratuito e open source",
+      reportEyebrow: "Metriche di attività",
+      reportTitle: "Rapporto attività nelle 24 ore e mappa termica",
+      reportText:
+        "Calcolato direttamente dai timestamp nella memoria locale del tuo browser.",
+      metricPeakHour: "ORA DI PUNTA",
+      metricPeakDay: "GIORNO PIÙ ATTIVO",
+      metricDaytime: "ATTIVITÀ DIURNA",
+      metricNighttime: "ATTIVITÀ NOTTURNA",
+      captionPeakCount: "{count} messaggi nell'ora di punta",
+      captionPeakDayPct: "{pct}% di tutti i messaggi",
+      captionDayHours: "6:00 – 22:00 ({pct}%)",
+      captionNightHours: "22:00 – 6:00 ({pct}%)",
+      chartTitle: "Distribuzione dell'attività nelle 24 ore",
+      chartSubtitle: "Messaggi complessivi inviati per ora del giorno",
+      participantsTitle: "Ripartizione giorno/notte per partecipante",
+      participantsCount: "{count} PARTECIPANTI",
+      colParticipant: "Partecipante",
+      colPeakHour: "Ora di punta",
+      colDayShare: "Percentuale diurna",
+      colNightShare: "Percentuale notturna",
+      colTotal: "Messaggi totali",
+      hookEyebrow: "Oltre gli orari di punta",
+      hookTitle: "Esplora grafici annuali e velocità di risposta",
+      hookText:
+        "WhatsAnalyze trasforma l'intera conversazione in grafici interattivi e una storia Wrapped pronta da condividere. 100% privato.",
+      hookButton: "Avvia l'analizzatore completo di WhatsApp →",
+      hookNote: "Passaggio immediato · Nessun nuovo caricamento · Gratuito",
+      stepsEyebrow: "Guida passo dopo passo",
+      stepsTitle: "Come analizzare gli orari della tua chat",
+      step1Title: "Esporta la chat di WhatsApp",
+      step1Text:
+        "Apri la chat, tocca il nome in alto, seleziona 'Esporta chat' e scegli 'Senza file multimediali'.",
+      step2Title: "Rilascia il file qui",
+      step2Text:
+        "Trascina il file .txt o .zip nel riquadro in alto. L'elaborazione oraria richiede pochi millisecondi.",
+      step3Title: "Esplora la mappa termica",
+      step3Text:
+        "Visualizza le ore di punta e scopri chi invia messaggi a notte fonda.",
+      guideLink: "Guida dettagliata all'esportazione di WhatsApp",
+      faqTitle: "Domande frequenti",
+      faq1Q: "Come sono definite le fasce diurna e notturna?",
+      faq1A:
+        "La fascia diurna va dalle 6:00 alle 22:00. La fascia notturna copre dalle 22:00 alle 6:00.",
+      faq2Q: "Tiene conto del fuso orario?",
+      faq2A:
+        "Gli orari del file rispecchiano il fuso orario del dispositivo da cui è stata effettuata l'esportazione.",
+      faq3Q: "Posso vedere chi scrive di più di notte?",
+      faq3A:
+        "Sì. La tabella riporta per ciascun partecipante la percentuale precisa di messaggi diurni e notturni.",
+      faq4Q: "I dati lasciano il mio dispositivo?",
+      faq4A:
+        "No. Tutto il calcolo avviene localmente nella memoria del browser.",
+      ctaTitle: "Pronto a scoprire le vostre ore più attive?",
+      ctaButton: "Analizza gli orari adesso",
+      ctaNote:
+        "100% privato · Nessun caricamento su server · Nessuna registrazione",
+      disclaimer:
+        "WhatsAnalyze è un progetto open source indipendente e non è affiliato, approvato o sponsorizzato da WhatsApp o Meta.",
+    },
+    pageNameMessages: "Contatore di messaggi e righe WhatsApp",
+    pageNameWords: "Contatore di parole e vocabolario WhatsApp",
+    pageNameHeatmap: "Orari di punta e mappa termica 24h WhatsApp",
   },
 };

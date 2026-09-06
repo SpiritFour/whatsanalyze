@@ -5,52 +5,92 @@
       :title="t('toolsHub.heroTitle')"
       :subtitle="t('toolsHub.heroSubtitle')"
     >
-      <div class="tools-showcase-grid">
-        <component
-          :is="tool.to ? 'NuxtLink' : 'div'"
-          v-for="tool in toolsList"
-          :key="tool.title"
-          :to="tool.to"
-          class="tool-card"
-          :class="{
-            'tool-card--active': !!tool.to,
-            'tool-card--coming': !tool.to,
-          }"
-        >
-          <div class="tool-card__header">
-            <div
-              class="tool-card__icon-wrap"
-              :style="{
-                background: tool.bg,
-              }"
-            >
-              <v-icon :color="tool.color" size="24">{{ tool.icon }}</v-icon>
-            </div>
-            <span
-              v-if="tool.to"
-              class="tool-card__badge tool-card__badge--live"
-            >
-              <span class="tool-card__live-dot"></span>
-              {{ t("toolsHub.heroCardBadge") }}
-            </span>
-            <span v-else class="tool-card__badge tool-card__badge--coming">
-              {{ t("toolsHub.comingSoon") }}
+      <div class="tools-directory">
+        <!-- Group 1: Chat Analytics & Metrics -->
+        <div class="tools-group">
+          <div class="tools-group__header">
+            <span class="tools-group__tag">
+              <v-icon size="14" class="mr-1" color="#21a68d"
+                >mdi-chart-box-outline</v-icon
+              >
+              {{ t("toolsHub.analyticsGroupTitle") }}
             </span>
           </div>
 
-          <h3 class="tool-card__title">{{ tool.title }}</h3>
-          <p class="tool-card__desc">{{ tool.text }}</p>
+          <div class="tools-showcase-grid tools-showcase-grid--4cols">
+            <NuxtLink
+              v-for="tool in analyticsTools"
+              :key="tool.title"
+              :to="tool.to"
+              class="tool-card"
+            >
+              <div class="tool-card__header">
+                <div
+                  class="tool-card__icon-wrap"
+                  :style="{ background: tool.bg }"
+                >
+                  <v-icon :color="tool.color" size="22">{{ tool.icon }}</v-icon>
+                </div>
+              </div>
 
-          <div class="tool-card__footer">
-            <span v-if="tool.to" class="tool-card__action">
-              {{ tool.linkText }}
-              <v-icon size="14" class="ml-1">mdi-arrow-right</v-icon>
-            </span>
-            <span v-else class="tool-card__coming-text">
-              {{ tool.linkText }}
+              <h3 class="tool-card__title">{{ tool.title }}</h3>
+              <p class="tool-card__desc">{{ tool.text }}</p>
+
+              <div class="tool-card__footer">
+                <span class="tool-card__action">
+                  {{ tool.linkText }}
+                  <v-icon size="14" class="ml-1">mdi-arrow-right</v-icon>
+                </span>
+              </div>
+            </NuxtLink>
+          </div>
+        </div>
+
+        <!-- Group 2: Official Documentation & Legal Evidence (Separated) -->
+        <div class="tools-group tools-group--court">
+          <div class="tools-group__header">
+            <span class="tools-group__tag tools-group__tag--court">
+              <v-icon size="14" class="mr-1" color="#818cf8"
+                >mdi-shield-check-outline</v-icon
+              >
+              {{ t("toolsHub.courtGroupTitle") }}
             </span>
           </div>
-        </component>
+
+          <div class="tools-showcase-grid tools-showcase-grid--2cols">
+            <NuxtLink
+              v-for="tool in courtTools"
+              :key="tool.title"
+              :to="tool.to"
+              class="tool-card tool-card--court"
+            >
+              <div class="tool-card__header">
+                <div
+                  class="tool-card__icon-wrap"
+                  :style="{ background: tool.bg }"
+                >
+                  <v-icon :color="tool.color" size="24">{{ tool.icon }}</v-icon>
+                </div>
+                <span class="tool-card__court-badge">
+                  <v-icon size="12" class="mr-1"
+                    >mdi-file-certificate-outline</v-icon
+                  >
+                  PDF
+                </span>
+              </div>
+
+              <h3 class="tool-card__title">{{ tool.title }}</h3>
+              <p class="tool-card__desc">{{ tool.text }}</p>
+
+              <div class="tool-card__footer">
+                <span class="tool-card__action tool-card__action--court">
+                  {{ tool.linkText }}
+                  <v-icon size="14" class="ml-1">mdi-arrow-right</v-icon>
+                </span>
+              </div>
+            </NuxtLink>
+          </div>
+        </div>
       </div>
     </LandingHero>
 
@@ -140,6 +180,27 @@ useHead(() => ({
               url: "https://www.whatsanalyze.com/tools/proof-of-relationship",
               applicationCategory: "UtilitiesApplication",
             },
+            {
+              "@type": "SoftwareApplication",
+              position: 4,
+              name: t("toolsHub.toolCounterTitle"),
+              url: "https://www.whatsanalyze.com/tools/message-counter",
+              applicationCategory: "UtilitiesApplication",
+            },
+            {
+              "@type": "SoftwareApplication",
+              position: 5,
+              name: t("toolsHub.toolVocabularyTitle"),
+              url: "https://www.whatsanalyze.com/tools/word-counter",
+              applicationCategory: "UtilitiesApplication",
+            },
+            {
+              "@type": "SoftwareApplication",
+              position: 6,
+              name: t("toolsHub.toolHeatmapTitle"),
+              url: "https://www.whatsanalyze.com/tools/chat-heatmap",
+              applicationCategory: "UtilitiesApplication",
+            },
           ],
         },
       }),
@@ -147,7 +208,7 @@ useHead(() => ({
   ],
 }));
 
-const toolsList = computed(() => [
+const analyticsTools = computed(() => [
   {
     icon: "mdi-timer-sand",
     color: "#21a68d",
@@ -157,6 +218,36 @@ const toolsList = computed(() => [
     to: localePath("/tools/inactivity"),
     linkText: t("toolsHub.openTool"),
   },
+  {
+    icon: "mdi-counter",
+    color: "#fbbf24",
+    bg: "rgba(251, 191, 36, 0.15)",
+    title: t("toolsHub.toolCounterTitle"),
+    text: t("toolsHub.toolCounterText"),
+    to: localePath("/tools/message-counter"),
+    linkText: t("toolsHub.openTool"),
+  },
+  {
+    icon: "mdi-format-letter-case",
+    color: "#c084fc",
+    bg: "rgba(192, 132, 252, 0.15)",
+    title: t("toolsHub.toolVocabularyTitle"),
+    text: t("toolsHub.toolVocabularyText"),
+    to: localePath("/tools/word-counter"),
+    linkText: t("toolsHub.openTool"),
+  },
+  {
+    icon: "mdi-clock-time-four-outline",
+    color: "#38bdf8",
+    bg: "rgba(56, 189, 248, 0.15)",
+    title: t("toolsHub.toolHeatmapTitle"),
+    text: t("toolsHub.toolHeatmapText"),
+    to: localePath("/tools/chat-heatmap"),
+    linkText: t("toolsHub.openTool"),
+  },
+]);
+
+const courtTools = computed(() => [
   {
     icon: "mdi-scale-balance",
     color: "#818cf8",
@@ -175,32 +266,7 @@ const toolsList = computed(() => [
     to: localePath("/tools/proof-of-relationship"),
     linkText: t("toolsHub.openTool"),
   },
-  {
-    icon: "mdi-counter",
-    color: "#fbbf24",
-    bg: "rgba(251, 191, 36, 0.15)",
-    title: t("toolsHub.toolCounterTitle"),
-    text: t("toolsHub.toolCounterText"),
-    linkText: t("toolsHub.comingSoon"),
-  },
-  {
-    icon: "mdi-format-letter-case",
-    color: "#c084fc",
-    bg: "rgba(192, 132, 252, 0.15)",
-    title: t("toolsHub.toolVocabularyTitle"),
-    text: t("toolsHub.toolVocabularyText"),
-    linkText: t("toolsHub.comingSoon"),
-  },
-  {
-    icon: "mdi-clock-time-four-outline",
-    color: "#38bdf8",
-    bg: "rgba(56, 189, 248, 0.15)",
-    title: t("toolsHub.toolHeatmapTitle"),
-    text: t("toolsHub.toolHeatmapText"),
-    linkText: t("toolsHub.comingSoon"),
-  },
 ]);
-
 const pillars = computed(() => [
   {
     icon: "mdi-cellphone-lock",
@@ -261,61 +327,113 @@ const steps = computed(() => [
   margin-top: clamp(1.4rem, 2.5vw, 2rem);
 }
 
-.tools-showcase-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  text-align: left;
+.tools-directory {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
 }
 
-@media (max-width: 960px) {
-  .tools-showcase-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.85rem;
+.tools-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  text-align: left;
+
+  &--court {
+    padding-top: 0.8rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
 }
 
-@media (max-width: 600px) {
-  .tools-showcase-grid {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
+.tools-group__header {
+  display: flex;
+  align-items: center;
+}
+
+.tools-group__tag {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(245, 245, 247, 0.7);
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  &--court {
+    color: #c7d2fe;
+    background: rgba(129, 140, 248, 0.1);
+    border-color: rgba(129, 140, 248, 0.25);
+  }
+}
+
+.tools-showcase-grid {
+  display: grid;
+  gap: 1rem;
+  text-align: left;
+
+  &--4cols {
+    grid-template-columns: repeat(4, 1fr);
+
+    @media (max-width: 1080px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &--2cols {
+    grid-template-columns: repeat(2, 1fr);
+
+    @media (max-width: 700px) {
+      grid-template-columns: 1fr;
+    }
   }
 }
 
 .tool-card {
   display: flex;
   flex-direction: column;
-  padding: 1.15rem 1.25rem;
+  padding: 1.25rem;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
   text-decoration: none;
   color: inherit;
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  position: relative;
+  cursor: pointer;
 
-  &--active {
-    cursor: pointer;
+  &:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.22);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.4);
 
-    &:hover {
-      transform: translateY(-3px);
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.22);
-      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.4);
-
-      .tool-card__action {
-        color: #ffffff;
-        .v-icon {
-          transform: translateX(3px);
-        }
+    .tool-card__action {
+      color: #ffffff;
+      .v-icon {
+        transform: translateX(3px);
       }
     }
   }
 
-  &--coming {
-    opacity: 0.72;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px dashed rgba(255, 255, 255, 0.08);
+  &--court {
+    background: linear-gradient(
+      180deg,
+      rgba(129, 140, 248, 0.07) 0%,
+      rgba(255, 255, 255, 0.03) 100%
+    );
+    border: 1px solid rgba(129, 140, 248, 0.2);
+
+    &:hover {
+      border-color: rgba(129, 140, 248, 0.4);
+      box-shadow: 0 16px 36px rgba(99, 102, 241, 0.2);
+    }
   }
 }
 
@@ -323,63 +441,45 @@ const steps = computed(() => [
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.8rem;
 }
 
 .tool-card__icon-wrap {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.tool-card__badge {
-  font-size: 0.7rem;
+.tool-card__court-badge {
+  font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  padding: 0.2rem 0.55rem;
-  border-radius: 20px;
+  color: #c7d2fe;
+  background: rgba(129, 140, 248, 0.15);
+  border: 1px solid rgba(129, 140, 248, 0.3);
+  padding: 3px 8px;
+  border-radius: 6px;
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
-
-  &--live {
-    background: rgba(33, 166, 141, 0.15);
-    color: #60d8bd;
-    border: 1px solid rgba(33, 166, 141, 0.3);
-  }
-
-  &--coming {
-    background: rgba(255, 255, 255, 0.05);
-    color: rgba(245, 245, 247, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.07);
-  }
-}
-
-.tool-card__live-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #00e676;
-  box-shadow: 0 0 8px #00e676;
 }
 
 .tool-card__title {
   font-size: 1.08rem;
   font-weight: 700;
   color: #ffffff;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.4rem;
   line-height: 1.3;
 }
 
 .tool-card__desc {
-  font-size: 0.85rem;
+  font-size: 0.84rem;
   line-height: 1.45;
   color: rgba(245, 245, 247, 0.68);
-  margin-bottom: 0.9rem;
+  margin-bottom: 1rem;
   flex-grow: 1;
 }
 
@@ -398,12 +498,10 @@ const steps = computed(() => [
   .v-icon {
     transition: transform 0.2s ease;
   }
-}
 
-.tool-card__coming-text {
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: rgba(245, 245, 247, 0.4);
+  &--court {
+    color: #a5b4fc;
+  }
 }
 
 .landing-page__guide-link {

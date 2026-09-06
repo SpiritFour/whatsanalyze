@@ -74,6 +74,18 @@ export default {
           text: "pageNameInactivity",
         },
         {
+          name: "tools/message-counter",
+          text: "pageNameMessages",
+        },
+        {
+          name: "tools/word-counter",
+          text: "pageNameWords",
+        },
+        {
+          name: "tools/chat-heatmap",
+          text: "pageNameHeatmap",
+        },
+        {
           name: "switch-from-whatsapp-to-signal",
           text: "pageNameSignal",
         },

@@ -15,6 +15,9 @@ const expectedFiles = [
   "tools/court-evidence/index.html",
   "tools/inactivity/index.html",
   "tools/proof-of-relationship/index.html",
+  "tools/message-counter/index.html",
+  "tools/word-counter/index.html",
+  "tools/chat-heatmap/index.html",
   "whatsapp-to-pdf/index.html",
   "whatsapp-wrapped-year-review/index.html",
 ];

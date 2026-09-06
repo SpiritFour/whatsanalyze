@@ -19,6 +19,9 @@ const localizedPages = [
   "tools/court-evidence",
   "tools/inactivity",
   "tools/proof-of-relationship",
+  "tools/message-counter",
+  "tools/word-counter",
+  "tools/chat-heatmap",
   "whatsapp-to-pdf",
   "whatsapp-wrapped-year-review",
 ];

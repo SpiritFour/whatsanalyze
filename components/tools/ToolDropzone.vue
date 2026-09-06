@@ -114,12 +114,23 @@ import {
   type ChatInactivityAnalysis,
 } from "~/composables/useChatTool";
 import { analyzeInactivity } from "~/utils/inactivity";
+import { analyzeMessages } from "~/utils/messageCounter";
+import { analyzeWords } from "~/utils/wordCounter";
+import { analyzeHeatmap } from "~/utils/chatHeatmap";
+
+interface Props {
+  toolType?: "inactivity" | "messages" | "words" | "heatmap";
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  toolType: "inactivity",
+});
 
 const emit = defineEmits<{
   (
     e: "analyzed",
     payload: {
-      analysis: ChatInactivityAnalysis;
+      analysis: any;
       messages: ChatMessage[];
       attachments: ChatAttachment[];
     }
@@ -169,10 +180,20 @@ async function processInput(
       );
     }
 
-    const analysis = analyzeInactivity(messages, durationMs);
+    let analysis: any = null;
+    if (props.toolType === "messages") {
+      analysis = analyzeMessages(messages, durationMs);
+    } else if (props.toolType === "words") {
+      analysis = analyzeWords(messages, durationMs);
+    } else if (props.toolType === "heatmap") {
+      analysis = analyzeHeatmap(messages, durationMs);
+    } else {
+      analysis = analyzeInactivity(messages, durationMs);
+    }
+
     if (!analysis) {
       throw new Error(
-        "Could not compute inactivity metrics: Chat contains no participant messages."
+        "Could not compute metrics: Chat contains no participant messages."
       );
     }
 
