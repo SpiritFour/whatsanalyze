@@ -1,3 +1,4 @@
+import { getAnalytics, isSupported } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import {
   addDoc,
@@ -10,7 +11,6 @@ import {
   getFunctions,
   httpsCallable,
 } from "firebase/functions";
-
 export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig();
   const app = initializeApp(config.public.firebase);
@@ -19,6 +19,9 @@ export default defineNuxtPlugin(() => {
 
   let wrappedFirestore = firestore;
   let wrappedFunctions = functions;
+  let wrappedAnalytics;
+  let analytics;
+
   if (config.public.wrappedFirebase) {
     try {
       const wrappedApp = initializeApp(
@@ -30,6 +33,18 @@ export default defineNuxtPlugin(() => {
     } catch (e) {
       console.warn("Wrapped Firebase initialization:", e);
     }
+  }
+
+  if (process.client) {
+    isSupported().then((supported) => {
+      if (supported) {
+        try {
+          analytics = getAnalytics(app);
+        } catch (e) {
+          console.warn("Analytics initialization:", e);
+        }
+      }
+    });
   }
 
   if (config.public.firebase.functionsEmulatorPort) {
@@ -50,8 +65,13 @@ export default defineNuxtPlugin(() => {
         },
         serverTimestamp,
       },
-      firestore: wrappedFirestore,
-      functions: wrappedFunctions,
+      firestore,
+      functions,
+      wrappedFirestore,
+      wrappedFunctions,
+      get analytics() {
+        return analytics;
+      },
     },
   };
 });

@@ -13,6 +13,14 @@
         <!-- Desktop Navigation -->
         <nav class="hidden md:flex items-center space-x-6 ml-auto">
           <NuxtLink
+            :to="localePath('/')"
+            class="hover:text-gray-300 transition-colors text-sm font-semibold flex gap-1.5 items-center hover:scale-105 text-emerald-400"
+          >
+            <ArrowLeftIcon class="w-4 h-4" />
+            {{ $t("nav.mainApp") }}
+          </NuxtLink>
+
+          <NuxtLink
             :to="localePath('/wrapped/subscription/verify')"
             class="hover:text-gray-300 transition-colors text-sm font-semibold flex gap-2 items-center cursor-pointer hover:scale-105"
           >
@@ -20,7 +28,6 @@
             <InformationCircleIcon v-else class="w-4 h-4 text-blue-400" />
             {{ $t("nav.subscription") }}
           </NuxtLink>
-
           <NuxtLink
             :to="localePath('/wrapped') + '#privacy'"
             class="hover:text-gray-300 transition-colors text-sm font-semibold hover:scale-105"
@@ -59,8 +66,17 @@
         class="md:hidden mt-4 pt-4 border-t border-gray-900 flex flex-col gap-3"
       >
         <NuxtLink
+          :to="localePath('/')"
+          class="hover:text-gray-300 transition-colors text-sm font-semibold flex gap-2 items-center py-2 px-2 rounded hover:bg-gray-900 text-emerald-400"
+          @click="mobileMenuOpen = false"
+        >
+          <ArrowLeftIcon class="w-4 h-4" />
+          {{ $t("nav.mainApp") }}
+        </NuxtLink>
+
+        <NuxtLink
           :to="localePath('/wrapped/subscription/verify')"
-          class="hover:text-gray-300 transition-colors text-sm font-semibold flex gap-2 items-center cursor-pointer hover:scale-105"
+          class="hover:text-gray-300 transition-colors text-sm font-semibold flex gap-2 items-center cursor-pointer hover:scale-105 py-2 px-2 rounded hover:bg-gray-900"
           @click="mobileMenuOpen = false"
         >
           <CheckCircleIcon v-if="isVerified" class="w-4 h-4 text-green-400" />
@@ -166,10 +182,10 @@ import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useSubscriptionStore } from "~/stores/wrapped/subscriptionStore";
 import {
+  ArrowLeftIcon,
   CheckCircleIcon,
   InformationCircleIcon,
 } from "@heroicons/vue/16/solid";
-
 const localePath = useLocalePath();
 const subscriptionStore = useSubscriptionStore();
 const { isVerified } = storeToRefs(subscriptionStore);

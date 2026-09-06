@@ -16,10 +16,10 @@
     "menu": "Menu"
   },
   "nav": {
+    "mainApp": "Accueil WhatsAnalyze",
     "subscription": "Abonnement Pro",
     "privacy": "Confidentialité",
     "exportGuide": "Comment exporter",
-    "selectLanguage": "Choisir la langue",
     "appTitle": "WhatsApp Wrapped"
   },
   "footer": {

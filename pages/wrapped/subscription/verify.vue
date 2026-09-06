@@ -196,10 +196,9 @@ const handleVerification = async () => {
   error.value = "";
 
   try {
-    const verifySubscription = httpsCallable(
-      useNuxtApp().$functions,
-      "verifySubscription"
-    );
+    const nuxtApp = useNuxtApp();
+    const functions = (nuxtApp.$wrappedFunctions || nuxtApp.$functions) as any;
+    const verifySubscription = httpsCallable(functions, "verifySubscription");
 
     const res = await verifySubscription({
       email: email.value,
@@ -265,8 +264,10 @@ const openCustomerPortal = async () => {
   isPortalLoading.value = true;
 
   try {
+    const nuxtApp = useNuxtApp();
+    const functions = (nuxtApp.$wrappedFunctions || nuxtApp.$functions) as any;
     const createCustomerPortal = httpsCallable(
-      useNuxtApp().$functions,
+      functions,
       "createCustomerPortal"
     );
 

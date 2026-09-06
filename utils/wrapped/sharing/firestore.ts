@@ -19,7 +19,8 @@ export async function storeResult(data: string): Promise<ShareInfo> {
   console.log("generated key", key);
   const encryptedData = await encryptData(data, key);
 
-  const firestore = useNuxtApp().$firestore;
+  const firestore = (useNuxtApp().$wrappedFirestore ||
+    useNuxtApp().$firestore) as Firestore;
 
   console.log("encryptedData", { uuid, key, encryptedData, firestore });
 
@@ -43,7 +44,8 @@ export async function retrieveResult({
   uuid,
   encryptedKey,
 }: ShareInfo): Promise<string> {
-  const firestore = useNuxtApp().$firestore;
+  const firestore = (useNuxtApp().$wrappedFirestore ||
+    useNuxtApp().$firestore) as Firestore;
   const docRef = doc(firestore, "data", uuid);
   const docSnap = await getDoc(docRef);
   console.log("retrieve Result", { uuid, encryptedKey, docRef, docSnap });

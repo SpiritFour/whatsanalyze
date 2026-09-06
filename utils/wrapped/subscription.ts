@@ -6,8 +6,10 @@ import { httpsCallable } from "firebase/functions";
 export const fetchSubscriptionCheckoutUrl = async (): Promise<
   string | undefined
 > => {
+  const nuxtApp = useNuxtApp();
+  const functions = (nuxtApp.$wrappedFunctions || nuxtApp.$functions) as any;
   const createCheckoutSession = httpsCallable(
-    useNuxtApp().$functions,
+    functions,
     "createCheckoutSession"
   );
 

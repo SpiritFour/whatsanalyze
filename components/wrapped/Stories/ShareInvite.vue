@@ -57,6 +57,7 @@ const userDataStore = useUserDataStore();
 const { result } = storeToRefs(statsStore);
 const { t } = useI18n();
 const { trackShareCreated } = useAnalytics();
+const localePath = useLocalePath();
 
 const runtimeConfig = useRuntimeConfig();
 
@@ -95,7 +96,9 @@ const resolveBaseUrl = () => {
 const buildShareUrl = (queryString: string) => {
   const base = resolveBaseUrl();
   const normalizedBase = base.endsWith("/") ? base.slice(0, -1) : base;
-  return `${normalizedBase}/results?${queryString}`;
+  const path = localePath("/wrapped/results");
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  return `${normalizedBase}${normalizedPath}?${queryString}`;
 };
 
 const copyToClipboard = async (text: string) => {
