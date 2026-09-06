@@ -2,7 +2,8 @@
   <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
     <div>
       <h2 class="text-3xl md:text-4xl font-bold mb-4">
-        {{ $t("exportGuide.title").split("WhatsApp")[0] }}<i>WhatsApp</i>{{ $t("exportGuide.title").split("WhatsApp")[1] }}
+        {{ $t("exportGuide.title").split("WhatsApp")[0] }}<i>WhatsApp</i
+        >{{ $t("exportGuide.title").split("WhatsApp")[1] }}
       </h2>
       <p class="mb-4">
         In depth guide to export your WhatsApp Chat data from your Android or
@@ -54,7 +55,10 @@
                 {{ instruction.text }}
               </div>
             </div>
-            <div v-if="isMobile && selectedStep === idx" class="mb-2 mt-4 pl-10">
+            <div
+              v-if="isMobile && selectedStep === idx"
+              class="mb-2 mt-4 pl-10"
+            >
               <div class="relative max-w-[320px]" :style="frameWrapperStyle">
                 <span
                   aria-hidden="true"
@@ -162,7 +166,7 @@ export default {
     incrementIdx(): void {
       this.selectedStep = Math.min(
         this.selectedStep + 1,
-        this.instructions[this.selectedSystem].length - 1,
+        this.instructions[this.selectedSystem].length - 1
       );
     },
     handleBreakpointChange(event: MediaQueryListEvent) {
@@ -175,7 +179,10 @@ export default {
       this.mobileQuery = window.matchMedia("(max-width: 767px)");
       this.isMobile = this.mobileQuery.matches;
       if (this.mobileQuery.addEventListener) {
-        this.mobileQuery.addEventListener("change", this.handleBreakpointChange);
+        this.mobileQuery.addEventListener(
+          "change",
+          this.handleBreakpointChange
+        );
       } else {
         this.mobileQuery.addListener(this.handleBreakpointChange);
       }
@@ -187,7 +194,7 @@ export default {
       if (this.mobileQuery.removeEventListener) {
         this.mobileQuery.removeEventListener(
           "change",
-          this.handleBreakpointChange,
+          this.handleBreakpointChange
         );
       } else {
         this.mobileQuery.removeListener(this.handleBreakpointChange);
@@ -286,9 +293,9 @@ export default {
       pointerLayouts: {
         iOS: [
           { top: "20%", left: "20%" },
-          { top: "3%"},
+          { top: "3%" },
           { top: "77%", left: "20%" },
-          { top: "83%", left: "40%"  },
+          { top: "83%", left: "40%" },
           { top: "45%", left: "53%" },
           { top: "40%", left: "20%" },
           { top: "60%" },

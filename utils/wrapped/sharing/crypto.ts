@@ -29,7 +29,7 @@ export async function encryptData(data: string, key: Key): Promise<string> {
       iv: key.iv,
     },
     key.cryptoKey,
-    encodedData,
+    encodedData
   );
   return arrayBufferToBase64(encrypted);
 }
@@ -43,7 +43,7 @@ export async function decryptData(encryptedData: string, key: Key) {
         iv: key.iv,
       },
       key.cryptoKey,
-      encryptedArrayBuffer,
+      encryptedArrayBuffer
     );
     const decoder = new TextDecoder();
     return decoder.decode(decryptedData);
@@ -59,7 +59,7 @@ export async function generateKey(): Promise<Key> {
       length: 256,
     },
     true,
-    ["encrypt", "decrypt"],
+    ["encrypt", "decrypt"]
   );
   const iv = crypto.getRandomValues(new Uint8Array(12)).buffer;
   return { cryptoKey: key, iv };

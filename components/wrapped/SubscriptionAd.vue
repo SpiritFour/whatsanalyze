@@ -43,8 +43,14 @@
           </div>
 
           <ul class="space-y-2 text-sm text-gray-300 mb-6 flex-1">
-            <li v-for="feature in freeFeatures" :key="feature" class="flex gap-2">
-              <span class="mt-[6px] h-1.5 w-1.5 rounded-full bg-gray-500"></span>
+            <li
+              v-for="feature in freeFeatures"
+              :key="feature"
+              class="flex gap-2"
+            >
+              <span
+                class="mt-[6px] h-1.5 w-1.5 rounded-full bg-gray-500"
+              ></span>
               <span>{{ feature }}</span>
             </li>
           </ul>
@@ -96,8 +102,14 @@
           </p>
 
           <ul class="space-y-2 text-sm text-gray-100 mb-6 flex-1">
-            <li v-for="feature in proFeatures" :key="feature" class="flex gap-2">
-              <span class="mt-[6px] h-1.5 w-1.5 rounded-full bg-green-500"></span>
+            <li
+              v-for="feature in proFeatures"
+              :key="feature"
+              class="flex gap-2"
+            >
+              <span
+                class="mt-[6px] h-1.5 w-1.5 rounded-full bg-green-500"
+              ></span>
               <span>{{ feature }}</span>
             </li>
           </ul>

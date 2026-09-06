@@ -2,7 +2,6 @@
   <div
     class="pointer-events-none absolute inset-0 -z-10 overflow-hidden bg-green-800 text-white/80"
   >
-
     <div
       class="absolute inset-0 bg-[radial-gradient(ellipse,rgba(0,0,0,0)_0,rgba(0,0,0,0.9)_80%)]"
     />
@@ -22,7 +21,6 @@
       />
     </div>
 
-
     <div class="absolute inset-0 text-xs font-semibold tracking-tight">
       <span
         v-for="t in text"
@@ -34,7 +32,6 @@
         {{ t.text }}
       </span>
     </div>
-
 
     <svg
       v-for="graph in graphs"

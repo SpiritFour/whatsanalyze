@@ -81,7 +81,7 @@ function randomPoint(
   width: number,
   height: number,
   previousPoint?: Point,
-  maxAttempts = 100,
+  maxAttempts = 100
 ): Point {
   const cx = width / 2;
   const cy = height / 2;
@@ -173,14 +173,14 @@ function createEmojiAnimation(el: HTMLElement, width: number, height: number) {
     const rotate = randomBetween(-180, 180);
 
     transforms.push(
-      `translate(${next.x}px, ${next.y}px) rotate(${rotate}deg) scale(${1})`,
+      `translate(${next.x}px, ${next.y}px) rotate(${rotate}deg) scale(${1})`
     );
   }
 
   const delay = randomBetween(0, props.maxRandomDelay);
   const totalDuration = randomBetween(
     props.duration * 0.7,
-    props.duration * 1.3,
+    props.duration * 1.3
   );
 
   const scale = randomBetween(props.minScale, props.maxScale);
@@ -251,20 +251,14 @@ watch(
   () => {
     initAnimations();
   },
-  { deep: true },
+  { deep: true }
 );
 </script>
 
 <style scoped>
 .emoji {
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Apple Color Emoji",
-    "Segoe UI Emoji",
-    "Noto Color Emoji",
-    sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Apple Color Emoji",
+    "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
 }
 
 .stage {

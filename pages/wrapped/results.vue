@@ -59,7 +59,7 @@ useSeoMeta({
 const shareLoading = ref(false);
 const shareErrorKey = ref<string | null>(null);
 const shareErrorMessage = computed(() =>
-  shareErrorKey.value ? t(shareErrorKey.value) : "",
+  shareErrorKey.value ? t(shareErrorKey.value) : ""
 );
 
 const buildSearchFromQuery = () => {
@@ -110,7 +110,7 @@ watch(
   () => {
     loadSharedStory();
   },
-  { immediate: true },
+  { immediate: true }
 );
 
 onMounted(() => {

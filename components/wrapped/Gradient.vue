@@ -40,7 +40,7 @@ function draw() {
     0,
     width / 2,
     height / 2,
-    Math.max(width, height),
+    Math.max(width, height)
   );
 
   // Add color stops for your gradient

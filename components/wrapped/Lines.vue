@@ -45,7 +45,7 @@ onMounted(() => {
     animate(".img-group", {
       transform: ["none", `translateX(${translateDistance}vw)`],
     }),
-    scrollOptions,
+    scrollOptions
   );
 
   // Animate .progress bar scaleX from 0 to 1

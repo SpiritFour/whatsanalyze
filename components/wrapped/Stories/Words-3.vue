@@ -22,12 +22,12 @@
           <div class="text-3xl font-bold leading-none text-emerald-300">
             {{
               Math.round(
-                data.relativeWords * result.getWordUsage.totalWordCount,
+                data.relativeWords * result.getWordUsage.totalWordCount
               )
             }}
           </div>
           <div class="mt-1 text-[0.65rem] tracking-[0.25em] text-slate-400">
-            {{ t('results.words.breakdown.wordsLabel') }}
+            {{ t("results.words.breakdown.wordsLabel") }}
           </div>
         </div>
 
@@ -35,12 +35,12 @@
           <div class="text-3xl font-bold leading-none text-white">
             {{
               Math.round(
-                data.relativeMessages * result.getWordUsage.totalMessagesCount,
+                data.relativeMessages * result.getWordUsage.totalMessagesCount
               )
             }}
           </div>
           <div class="mt-1 text-[0.65rem] tracking-[0.25em] text-slate-400">
-            {{ t('results.words.breakdown.messagesLabel') }}
+            {{ t("results.words.breakdown.messagesLabel") }}
           </div>
         </div>
       </div>

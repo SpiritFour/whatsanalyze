@@ -68,7 +68,7 @@ onMounted(() => {
       topSlider.value,
       // @ts-ignore
       { opacity, transform: transformTop },
-      { duration, easing: "ease-out" },
+      { duration, easing: "ease-out" }
     );
     animate(
       bottomSlider.value,
@@ -77,7 +77,7 @@ onMounted(() => {
         opacity,
         transform: transformBottom,
       },
-      { duration, easing: "ease-out" },
+      { duration, easing: "ease-out" }
     );
   }
   // Play whoosh sound

@@ -43,7 +43,10 @@
     <pre>{{ $t("upload.loading") }}</pre>
   </div>
 
-  <WrappedSubscriptionPaywall :open="showPaywall" @close="showPaywall = false" />
+  <WrappedSubscriptionPaywall
+    :open="showPaywall"
+    @close="showPaywall = false"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -54,8 +57,11 @@ import { useStatsStore } from "~/stores/wrapped/stats";
 import { useSubscriptionStore } from "~/stores/wrapped/subscriptionStore";
 import { useUploadAccessStore } from "~/stores/wrapped/uploadAccessStore";
 
-const { trackFileUpload, trackAnalysisComplete, trackPaywallShown } =
-  useAnalytics();
+const {
+  trackFileUpload,
+  trackAnalysisComplete,
+  trackPaywallShown,
+} = useAnalytics();
 const localePath = useLocalePath();
 
 const statsStore = useStatsStore();

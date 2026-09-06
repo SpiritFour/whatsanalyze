@@ -2,7 +2,7 @@ import type { Message, TimeData } from "../types";
 
 export function getTimeData(messages: Message[]): TimeData {
   const sortedByDate = [...messages].sort(
-    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
   );
   let longestGap = 0;
   let longestGapStart: Date | null = null;

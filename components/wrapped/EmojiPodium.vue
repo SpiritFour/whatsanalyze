@@ -61,14 +61,14 @@ onMounted(() => {
     {
       duration: 0.9,
       easing: "ease-out",
-    },
+    }
   ).finished.then(() => {
     // idle bounce
     animate(
       // @ts-ignore
       first.value,
       { y: [0, -8, 0] },
-      { duration: 0.5, easing: "ease-in-out", repeat: Infinity },
+      { duration: 0.5, easing: "ease-in-out", repeat: Infinity }
     );
   });
 
@@ -84,13 +84,13 @@ onMounted(() => {
       duration: 0.9,
       delay: 0.15,
       easing: "ease-out",
-    },
+    }
   ).finished.then(() => {
     animate(
       // @ts-ignore
       second.value,
       { y: [0, -5, 0] },
-      { duration: 0.6, easing: "ease-in-out", repeat: Infinity },
+      { duration: 0.6, easing: "ease-in-out", repeat: Infinity }
     );
   });
 
@@ -106,13 +106,13 @@ onMounted(() => {
       duration: 0.9,
       delay: 0.3,
       easing: "ease-out",
-    },
+    }
   ).finished.then(() => {
     animate(
       // @ts-ignore
       third.value,
       { y: [0, -5, 0] },
-      { duration: 0.6, easing: "ease-in-out", repeat: Infinity },
+      { duration: 0.6, easing: "ease-in-out", repeat: Infinity }
     );
   });
 });

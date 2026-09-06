@@ -6,7 +6,7 @@ import { useSwitchLocalePath } from "#i18n";
 
 // 1) Strongly-typed locale codes
 const LOCALE_CODES = ["en", "de", "es", "pt", "fr", "it"] as const;
-type LocaleCode = (typeof LOCALE_CODES)[number];
+type LocaleCode = typeof LOCALE_CODES[number];
 
 // 2) Locales array typed with LocaleCode
 const locales: Array<{
@@ -104,7 +104,7 @@ watch(
     if (LOCALE_CODES.includes(newLocale as LocaleCode)) {
       selected.value = newLocale as LocaleCode;
     }
-  },
+  }
 );
 </script>
 

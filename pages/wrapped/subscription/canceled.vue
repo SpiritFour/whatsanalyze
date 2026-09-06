@@ -1,5 +1,7 @@
 <template>
-  <div class="container flex flex-col justify-center items-center py-16 text-center">
+  <div
+    class="container flex flex-col justify-center items-center py-16 text-center"
+  >
     <h1 class="text-3xl font-bold mb-4">Subscription Canceled</h1>
     <p class="text-gray-400 mb-8">
       Your payment process was canceled. No charges were made.

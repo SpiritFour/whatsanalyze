@@ -63,7 +63,7 @@ export function getMostUsedEmojis(messages: Message[]): EmojiAnalysis {
   }
 
   const sortedGlobal = [...globalEmojiCountMap.entries()].sort(
-    (a, b) => b[1] - a[1],
+    (a, b) => b[1] - a[1]
   );
   const globalTop5Emojis = sortedGlobal
     .slice(0, 5)

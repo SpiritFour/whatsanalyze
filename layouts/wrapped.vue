@@ -165,7 +165,10 @@
 import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useSubscriptionStore } from "~/stores/wrapped/subscriptionStore";
-import { CheckCircleIcon, InformationCircleIcon } from "@heroicons/vue/16/solid";
+import {
+  CheckCircleIcon,
+  InformationCircleIcon,
+} from "@heroicons/vue/16/solid";
 
 const localePath = useLocalePath();
 const subscriptionStore = useSubscriptionStore();

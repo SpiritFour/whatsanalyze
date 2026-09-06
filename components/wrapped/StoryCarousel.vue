@@ -147,7 +147,7 @@ watch(
     resetProgress();
     startLoop();
   },
-  { immediate: true },
+  { immediate: true }
 );
 
 const slideNames = [

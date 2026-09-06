@@ -17,7 +17,9 @@
         &times;
       </button>
 
-      <p class="text-xs uppercase tracking-[0.3em] text-green-400 font-semibold mb-3">
+      <p
+        class="text-xs uppercase tracking-[0.3em] text-green-400 font-semibold mb-3"
+      >
         {{ t("nav.subscription") }}
       </p>
       <h3 class="text-2xl font-bold text-white mb-3">
@@ -34,7 +36,11 @@
           :disabled="isStarting"
           @click="startSubscription"
         >
-          {{ isStarting ? t("home.subscriptionAd.pro.loading") : t("upload.paywall.cta") }}
+          {{
+            isStarting
+              ? t("home.subscriptionAd.pro.loading")
+              : t("upload.paywall.cta")
+          }}
         </button>
         <button
           class="w-full inline-flex items-center justify-center rounded-xl border border-gray-700 px-4 py-3 text-sm font-medium text-gray-300 hover:bg-gray-800 transition"

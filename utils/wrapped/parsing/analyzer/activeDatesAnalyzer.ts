@@ -2,12 +2,12 @@ import type { ActiveDates, Message } from "../types";
 
 function getISOWeekNumber(dateObj: Date): string {
   const temp = new Date(
-    Date.UTC(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate()),
+    Date.UTC(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate())
   );
   temp.setUTCDate(temp.getUTCDate() + 4 - (temp.getUTCDay() || 7));
   const yearStart = new Date(Date.UTC(temp.getUTCFullYear(), 0, 1));
   const weekNo = Math.ceil(
-    ((temp.getTime() - yearStart.getTime()) / 86400000 + 1) / 7,
+    ((temp.getTime() - yearStart.getTime()) / 86400000 + 1) / 7
   );
   return `${temp.getUTCFullYear()}-W${String(weekNo).padStart(2, "0")}`;
 }

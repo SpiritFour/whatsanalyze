@@ -2,7 +2,11 @@
 
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
-import { decryptData, encryptData, generateKey } from "~/utils/wrapped/sharing/crypto";
+import {
+  decryptData,
+  encryptData,
+  generateKey,
+} from "~/utils/wrapped/sharing/crypto";
 
 type ShareableKey = { iv: number[]; key: ArrayBuffer };
 
@@ -50,7 +54,7 @@ export async function retrieveResult({
       encryptedKey.key,
       "AES-GCM",
       true,
-      ["decrypt"],
+      ["decrypt"]
     );
     const document = docSnap.data();
     console.log("document", document.data);

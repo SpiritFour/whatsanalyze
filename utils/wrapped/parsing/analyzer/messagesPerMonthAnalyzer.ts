@@ -1,7 +1,7 @@
 import type { Message, MessagesPerMonth } from "../types";
 
 export function getNumberOfMessagesPerMonth(
-  messages: Message[],
+  messages: Message[]
 ): MessagesPerMonth {
   const result: MessagesPerMonth = {};
   for (const message of messages) {

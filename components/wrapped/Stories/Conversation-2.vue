@@ -11,14 +11,14 @@
           <p
             class="text-[0.65rem] font-semibold uppercase tracking-[0.1em] text-slate-400"
           >
-            {{ t('results.conversation.rhythm.mostActiveMonth') }}
+            {{ t("results.conversation.rhythm.mostActiveMonth") }}
           </p>
           <p class="mt-0.5 text-2xl font-semibold leading-none">
             {{ prettyMonth(summary.maxMonth) }}
           </p>
 
           <p class="mt-0.5 text-[0.7rem] text-slate-300">
-            {{ t('results.conversation.rhythm.mostMessages') }}
+            {{ t("results.conversation.rhythm.mostMessages") }}
           </p>
         </div>
 
@@ -26,14 +26,14 @@
           <p
             class="text-[0.65rem] font-semibold tracking-[0.1em] uppercase text-slate-400"
           >
-            {{ t('results.conversation.rhythm.maxMessagesPerMonth') }}
+            {{ t("results.conversation.rhythm.maxMessagesPerMonth") }}
           </p>
           <p class="mt-0.5 text-2xl font-semibold leading-none">
             {{ summary.max }}
           </p>
           <p class="mt-0.5 text-[0.7rem] text-slate-300">
             {{
-              t('results.conversation.rhythm.messagesInMonth', {
+              t("results.conversation.rhythm.messagesInMonth", {
                 month: prettyMonth(summary.maxMonth),
               })
             }}
@@ -41,10 +41,7 @@
         </div>
       </div>
 
-      <p
-        v-if="totalMessagesSinceParts"
-        class="mt-2 text-sm text-slate-300"
-      >
+      <p v-if="totalMessagesSinceParts" class="mt-2 text-sm text-slate-300">
         {{ totalMessagesSinceParts.before }}
         <span class="font-semibold">
           {{ prettyMonth(summary.firstMonth) }}

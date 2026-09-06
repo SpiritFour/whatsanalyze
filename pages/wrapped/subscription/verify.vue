@@ -225,7 +225,9 @@ const handleVerification = async () => {
   } catch (err: unknown) {
     verified.value = false;
     error.value =
-      err instanceof Error ? err.message : "An error occurred during verification";
+      err instanceof Error
+        ? err.message
+        : "An error occurred during verification";
     console.error("Verification error:", err);
   } finally {
     loading.value = false;

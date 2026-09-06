@@ -25,12 +25,8 @@
       </div>
 
       <div class="text-sm space-y-2">
-        <p>
-          <strong>Email:</strong> {{ result.customer_details?.email }}
-        </p>
-        <p>
-          <strong>Verification Code:</strong> {{ result.subscription }}
-        </p>
+        <p><strong>Email:</strong> {{ result.customer_details?.email }}</p>
+        <p><strong>Verification Code:</strong> {{ result.subscription }}</p>
         <p><strong>Status:</strong> {{ result.payment_status }}</p>
       </div>
 
@@ -103,7 +99,9 @@ const goToVerification = () => {
       token: subscriptionId,
       email: email,
     });
-    router.push(localePath(`/wrapped/subscription/verify?${params.toString()}`));
+    router.push(
+      localePath(`/wrapped/subscription/verify?${params.toString()}`)
+    );
   } else {
     router.push(localePath("/wrapped/subscription/verify"));
   }

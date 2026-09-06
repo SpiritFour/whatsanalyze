@@ -18,7 +18,7 @@
       </div>
 
       <div class="text-xl text-slate-200">
-        {{ t('results.words.duel.messagedLabel') }}
+        {{ t("results.words.duel.messagedLabel") }}
       </div>
 
       <div
@@ -28,7 +28,7 @@
       </div>
 
       <div class="text-xl font-medium text-slate-200 mb-2">
-        {{ t('results.words.duel.moreWordsThan') }}
+        {{ t("results.words.duel.moreWordsThan") }}
       </div>
 
       <div

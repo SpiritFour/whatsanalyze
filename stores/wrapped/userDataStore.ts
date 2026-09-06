@@ -1,11 +1,8 @@
 import { defineStore } from "pinia";
 import type { ParserResult } from "~/utils/wrapped/parsing";
 import { parser } from "~/utils/wrapped/parsing";
-import {
-  retrieveResult,
-  type ShareInfo,
-  storeResult,
-} from "~/utils/wrapped/sharing/firestore";
+import type { ShareInfo } from "~/utils/wrapped/sharing/firestore";
+import { retrieveResult, storeResult } from "~/utils/wrapped/sharing/firestore";
 
 interface UserData {
   userData: ParserResult | null;

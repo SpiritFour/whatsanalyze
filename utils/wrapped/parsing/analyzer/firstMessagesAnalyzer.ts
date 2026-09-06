@@ -5,7 +5,7 @@ export function getFirstMessages(messages: Message[]): Message[] {
     ...new Set(
       messages
         .filter((m) => m.author) // remove undefined/null authors
-        .map((m) => m.author as string),
+        .map((m) => m.author as string)
     ),
   ];
 

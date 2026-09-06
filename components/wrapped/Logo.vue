@@ -18,7 +18,12 @@ defineProps({
       class="rounded-full flex items-center justify-center bg-gradient p-1"
       style="width: 38px; height: 38px"
     >
-      <img alt="logo" class="text-clip" src="/img/logo-inverse.png" width="38px" />
+      <img
+        alt="logo"
+        class="text-clip"
+        src="/img/logo-inverse.png"
+        width="38px"
+      />
     </div>
 
     <div v-if="!logoOnly" class="relative flex">

@@ -22,7 +22,8 @@ export const useAnalytics = () => {
   const trackPageView = (pagePath: string, pageTitle?: string) => {
     trackEvent("page_view", {
       page_path: pagePath,
-      page_title: pageTitle || (typeof document !== "undefined" ? document.title : ""),
+      page_title:
+        pageTitle || (typeof document !== "undefined" ? document.title : ""),
     });
   };
 

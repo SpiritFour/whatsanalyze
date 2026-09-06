@@ -68,20 +68,20 @@ const shareErrorKey = ref<string | null>(null);
 const hasResult = computed(() => Boolean(result.value));
 
 const canNativeShare = computed(
-  () => process.client && typeof navigator !== "undefined" && !!navigator.share,
+  () => process.client && typeof navigator !== "undefined" && !!navigator.share
 );
 
 const shareButtonLabel = computed(() =>
   canNativeShare.value
     ? t("results.share.buttons.shareNative")
-    : t("results.share.buttons.shareCopy"),
+    : t("results.share.buttons.shareCopy")
 );
 
 const shareMessageText = computed(() =>
-  shareMessageKey.value ? t(shareMessageKey.value) : "",
+  shareMessageKey.value ? t(shareMessageKey.value) : ""
 );
 const shareErrorText = computed(() =>
-  shareErrorKey.value ? t(shareErrorKey.value) : "",
+  shareErrorKey.value ? t(shareErrorKey.value) : ""
 );
 
 const resolveBaseUrl = () => {

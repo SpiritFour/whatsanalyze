@@ -32,7 +32,7 @@
     </div>
 
     <div class="pb-10 text-center text-lg font-semibold tracking-wide">
-      {{ t('results.emoji.from') }}
+      {{ t("results.emoji.from") }}
       <span class="font-bold">{{ message?.author }}</span>
     </div>
   </WrappedStoryContainer>
@@ -84,7 +84,7 @@ const setupCornerGlow = () => {
         delay: i * 0.2,
         repeat: Infinity,
         easing: "ease-in-out",
-      },
+      }
     );
   });
 };
@@ -118,7 +118,7 @@ const setupAutoScroll = () => {
       direction: "alternate",
       easing: "linear",
       delay: 0.8,
-    },
+    }
   );
 };
 
@@ -134,6 +134,6 @@ watch(
   async () => {
     await nextTick();
     setupAutoScroll();
-  },
+  }
 );
 </script>
