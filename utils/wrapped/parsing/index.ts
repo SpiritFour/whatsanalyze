@@ -47,11 +47,10 @@ class Parser {
 
   async run(file: File): Promise<ParserResult> {
     const textData = await this.readFile(file);
-    const messages = whatsapp.parseString(textData, {
+    const messages = await whatsapp.parseString(textData, {
       parseAttachments: true,
     });
     const validMessages = this.filterValidMessages(messages);
-
     return {
       getMostUsedEmojis: getMostUsedEmojis(validMessages),
       getNumberOfMessagesPerMonth: getNumberOfMessagesPerMonth(validMessages),

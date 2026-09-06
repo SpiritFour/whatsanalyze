@@ -7,9 +7,9 @@
         <p>
           <strong>{{ $t("wrapped.analyzeSafely") }}</strong>
         </p>
-        <button class="cta-button" @click="goToHome">
+        <NuxtLink :to="localePath('/wrapped')" class="cta-button">
           {{ $t("wrapped.ctaButton") }}
-        </button>
+        </NuxtLink>
       </div>
     </header>
 
@@ -89,11 +89,7 @@ export default {
       currentYear: new Date().getFullYear(), // Dynamically set the current year
     };
   },
-  methods: {
-    goToHome() {
-      this.$router.push(this.localePath("/wrapped"));
-    },
-  },
+  methods: {},
 };
 </script>
 
@@ -122,6 +118,7 @@ export default {
 }
 
 .cta-button {
+  display: inline-block;
   background: #fff;
   color: #128c7e;
   border: none;
@@ -130,6 +127,7 @@ export default {
   cursor: pointer;
   margin-top: 20px;
   border-radius: 5px;
+  text-decoration: none;
 }
 
 .cta-button:hover {
