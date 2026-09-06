@@ -120,6 +120,7 @@ export default defineNuxtConfig({
         appId: "1:1053765361889:web:feb439fa8220fadf1157a0",
         measurementId: "G-XJDRX60BNX",
       },
+      wrappedFunctionsProjectId: local ? "whatsanalyze-wrapped" : "whatsanalyze-wrapped-prod",
     },
   },
 
