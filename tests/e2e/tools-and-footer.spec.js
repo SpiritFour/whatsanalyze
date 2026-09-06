@@ -93,4 +93,31 @@ test.describe("Footer Links & Tools Suite", () => {
     const aboveTheFold = page.locator(".top-color");
     await expect(aboveTheFold).toBeHidden();
   });
+
+  test("tools header button shows dropdown on hover and navigates to tools or specific tool", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    const toolsBtn = page.locator(".header-tools-link");
+    await expect(toolsBtn).toBeVisible();
+
+    // Hover over Tools button
+    await toolsBtn.hover();
+    const dropdown = page.locator(".tools-dropdown-menu");
+    await expect(dropdown).toBeVisible({ timeout: 5_000 });
+
+    // Verify all 6 tools are present in dropdown
+    const toolItems = dropdown.locator(".dropdown-tool-item");
+    await expect(toolItems).toHaveCount(6);
+
+    // Click on Inactivity Tracker item
+    await toolItems.first().click();
+    await page.waitForURL(/.*\/tools\/inactivity/);
+    await expect(page.locator(".landing-hero__title")).toBeVisible();
+
+    // Verify clicking header Tools link itself navigates to /tools
+    await page.locator(".header-tools-link").click();
+    await page.waitForURL(/.*\/tools$/);
+    await expect(page.locator(".tools-directory")).toBeVisible();
+  });
 });
