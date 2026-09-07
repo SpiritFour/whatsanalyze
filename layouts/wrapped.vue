@@ -190,4 +190,22 @@ const localePath = useLocalePath();
 const subscriptionStore = useSubscriptionStore();
 const { isVerified } = storeToRefs(subscriptionStore);
 const mobileMenuOpen = ref(false);
+
+useHead({
+  meta: [
+    {
+      name: "viewport",
+      content:
+        "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover",
+    },
+    { name: "color-scheme", content: "dark" },
+    { name: "theme-color", content: "#000000" },
+  ],
+  htmlAttrs: {
+    style: "background-color: #000000;",
+  },
+  bodyAttrs: {
+    style: "background-color: #000000;",
+  },
+});
 </script>
