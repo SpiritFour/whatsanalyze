@@ -68,64 +68,10 @@
   border-color: #e5e7eb;
 }
 
-/* Explicit filter blur classes to guarantee smooth blur on gradient circles */
-.wrapped-scope .blur-none {
-  filter: blur(0) !important;
-}
-.wrapped-scope .blur-sm {
-  filter: blur(4px) !important;
-}
-.wrapped-scope .blur {
-  filter: blur(8px) !important;
-}
-.wrapped-scope .blur-md {
-  filter: blur(12px) !important;
-}
-.wrapped-scope .blur-lg {
-  filter: blur(16px) !important;
-}
-.wrapped-scope .blur-xl {
-  filter: blur(24px) !important;
-}
-.wrapped-scope .blur-2xl {
-  filter: blur(40px) !important;
-}
+/* Explicit filter blur class to guarantee smooth blur on gradient circles */
 .wrapped-scope .blur-3xl {
   filter: blur(64px) !important;
 }
-.wrapped-scope .backdrop-blur-none {
-  backdrop-filter: blur(0) !important;
-  -webkit-backdrop-filter: blur(0) !important;
-}
-.wrapped-scope .backdrop-blur-sm {
-  backdrop-filter: blur(4px) !important;
-  -webkit-backdrop-filter: blur(4px) !important;
-}
-.wrapped-scope .backdrop-blur {
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-}
-.wrapped-scope .backdrop-blur-md {
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-}
-.wrapped-scope .backdrop-blur-lg {
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-}
-.wrapped-scope .backdrop-blur-xl {
-  backdrop-filter: blur(24px) !important;
-  -webkit-backdrop-filter: blur(24px) !important;
-}
-.wrapped-scope .backdrop-blur-2xl {
-  backdrop-filter: blur(40px) !important;
-  -webkit-backdrop-filter: blur(40px) !important;
-}
-.wrapped-scope .backdrop-blur-3xl {
-  backdrop-filter: blur(64px) !important;
-  -webkit-backdrop-filter: blur(64px) !important;
-}
-
 .wrapped-scope a {
   color: inherit;
   text-decoration: inherit;
