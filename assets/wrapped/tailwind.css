@@ -3,6 +3,65 @@
 
 .wrapped-scope {
   color-scheme: dark;
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+}
+
+/* Scoped Tailwind Preflight resets so wrapped renders identically to standalone */
+.wrapped-scope *,
+.wrapped-scope *::before,
+.wrapped-scope *::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: #e5e7eb;
+}
+
+.wrapped-scope a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.wrapped-scope button {
+  background-color: transparent;
+  color: inherit;
+}
+
+.wrapped-scope hr {
+  border-color: #111827;
+}
+
+.wrapped-scope img,
+.wrapped-scope svg,
+.wrapped-scope video {
+  display: block;
+  vertical-align: middle;
+}
+
+.wrapped-scope .border {
+  border-width: 1px !important;
+}
+
+.wrapped-scope .border-2 {
+  border-width: 2px !important;
+}
+
+.wrapped-scope .border-t-2 {
+  border-top-width: 2px !important;
+}
+
+.wrapped-scope .border-b-2 {
+  border-bottom-width: 2px !important;
+}
+
+.wrapped-scope h1,
+.wrapped-scope h2,
+.wrapped-scope h3,
+.wrapped-scope h4,
+.wrapped-scope h5,
+.wrapped-scope h6 {
+  font-size: inherit;
+  font-weight: inherit;
 }
 
 .wrapped-scope .container {
@@ -45,8 +104,4 @@
 
 .wrapped-scope .card--flush {
   @apply py-0;
-}
-
-.wrapped-scope h1 {
-  @apply font-bold text-3xl mb-2;
 }
