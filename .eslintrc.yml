@@ -9,6 +9,7 @@ extends:
   - "prettier"
 parser: "vue-eslint-parser"
 parserOptions:
+  parser: "@typescript-eslint/parser"
   ecmaVersion: 12
   sourceType: module
 plugins:
@@ -30,4 +31,11 @@ globals:
   useLocalePath: readonly
   defineProps: readonly
   definePageMeta: readonly
-rules: {}
+  useSharedChat: readonly
+  useRoute: readonly
+  useNuxtApp: readonly
+  useAnalytics: readonly
+  defineEmits: readonly
+  onMounted: readonly
+rules:
+  vue/no-multiple-template-root: "off"

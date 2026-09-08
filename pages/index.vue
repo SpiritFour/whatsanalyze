@@ -1,12 +1,5 @@
 <template>
   <div>
-    <SubscriptionChecker
-      :id="subscription.id"
-      :email="subscription.email"
-      @isValid="subscription.isValid = true"
-      @isInvalid="subscription.isValid = false"
-    />
-
     <div v-show="!isShowingChats" ref="aboveTheFold" class="top-color">
       <v-container>
         <v-alert
@@ -65,7 +58,7 @@
               class="center-content"
             >
               <HeaderCta />
-              <div v-if="subscription.isValid" class="mt-6" style="width: 100%">
+              <div v-if="isSubscriptionValid" class="mt-6" style="width: 100%">
                 <v-alert density="compact" type="info" prominent>
                   Thanks for supporting us. You can download unlimited PDF's for
                   free.
@@ -98,7 +91,7 @@
           <v-col class="px-0 pb-1 my-auto" cols="12">
             <HeaderCta />
 
-            <div v-if="subscription.isValid" class="mt-6" style="width: 100%">
+            <div v-if="isSubscriptionValid" class="mt-6" style="width: 100%">
               <v-alert density="compact" type="info" prominent>
                 Thanks for supporting us. You can download unlimited PDF's for
                 free.
@@ -168,7 +161,7 @@
         ref="results"
         :attachments="attachments"
         :chat="chat"
-        :is-valid-subscription="subscription.isValid"
+        :is-valid-subscription="isSubscriptionValid"
       />
     </v-container>
   </div>
@@ -183,11 +176,10 @@ import {
   gtagEvent,
 } from "~/utils/gtagValues";
 import { debounce } from "lodash-es";
-import SubscriptionChecker from "~/components/SubscriptionChecker.vue";
-import { getSubscriptionParams } from "~/utils/subscription";
+import { useSubscriptionStore } from "~/stores/subscription";
+import { storeToRefs } from "pinia";
 
 export default {
-  components: { SubscriptionChecker },
   async setup() {
     useSeoMeta({
       title: "WhatsAnalyze - The WhatsApp Chat Analyzer",
@@ -209,6 +201,8 @@ export default {
       locale,
       localePath,
       page,
+      isSubscriptionValid: storeToRefs(useSubscriptionStore())
+        .isSubscriptionValid,
     };
   },
   data() {
@@ -217,11 +211,6 @@ export default {
       chat: undefined,
       attachments: undefined,
       loading: false,
-      subscription: {
-        id: null,
-        email: null,
-        isValid: null,
-      },
     };
   },
   computed: {
@@ -244,10 +233,6 @@ export default {
   mounted() {
     this.handleDebouncedScroll = debounce(this.handleScroll, 0);
     window.addEventListener("scroll", this.handleDebouncedScroll);
-
-    const { email, id } = getSubscriptionParams();
-    this.subscription.id = id;
-    this.subscription.email = email;
 
     const sharedChat = useSharedChat();
     if (

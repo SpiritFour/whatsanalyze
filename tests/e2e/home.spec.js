@@ -91,11 +91,9 @@ test("switches to a localized route", async ({ page }) => {
   ).toBeVisible();
 });
 
-test("starts a subscription through the Firebase PayPal endpoint", async ({
-  page,
-}) => {
-  let functionRequest;
-  await page.route("**/helloworld", async (route) => {
+test("starts a subscription through Stripe checkout", async ({ page }) => {
+  let checkoutRequest;
+  await page.route("**/createCheckoutSession", async (route) => {
     const request = route.request();
     if (request.method() === "OPTIONS") {
       await route.fulfill({
@@ -108,34 +106,32 @@ test("starts a subscription through the Firebase PayPal endpoint", async ({
       return;
     }
 
-    functionRequest = request;
+    checkoutRequest = request;
     await route.fulfill({
       contentType: "application/json",
       headers: { "access-control-allow-origin": "*" },
       body: JSON.stringify({
-        data: { approveLink: "https://paypal.test/approve" },
+        data: { url: "https://checkout.stripe.test/c/pay/cs_test_home" },
       }),
     });
   });
-  await page.route("https://paypal.test/approve", (route) =>
-    route.fulfill({ contentType: "text/html", body: "PayPal approval" })
+  await page.route("https://checkout.stripe.test/**", (route) =>
+    route.fulfill({ contentType: "text/html", body: "Stripe Checkout Mock" })
   );
 
   await page.goto("/subscribe");
   await page.getByRole("button", { name: "Subscribe Now" }).click();
 
-  await expect(page).toHaveURL("https://paypal.test/approve");
-  expect(functionRequest.url()).toBe(
-    "https://us-central1-whatsanalyze-80665.cloudfunctions.net/helloworld"
+  await expect(page).toHaveURL(
+    "https://checkout.stripe.test/c/pay/cs_test_home"
   );
-  expect(functionRequest.postDataJSON().data.client_id).toBeTruthy();
+  expect(checkoutRequest).toBeTruthy();
 });
 
-test("activates a subscription after returning from PayPal", async ({
+test("activates a subscription after verifying on /subscribe", async ({
   page,
 }) => {
-  let statusChecks = 0;
-  await page.route("**/checksubscriberstatus", async (route) => {
+  await page.route("**/verifySubscription", async (route) => {
     const request = route.request();
     if (request.method() === "OPTIONS") {
       await route.fulfill({
@@ -148,27 +144,28 @@ test("activates a subscription after returning from PayPal", async ({
       return;
     }
 
-    statusChecks += 1;
     await route.fulfill({
       contentType: "application/json",
       headers: { "access-control-allow-origin": "*" },
       body: JSON.stringify({
         data: {
-          isValid: statusChecks > 1,
-          data: { subscriptionId: "I-TEST-SUBSCRIPTION" },
+          isValid: true,
+          customerName: "Sam Subscriber",
+          expiresAt: new Date(Date.now() + 86400000 * 30).toISOString(),
+          customerId: "cus_home_123",
         },
       }),
     });
   });
 
-  await page.goto("/subscribe?subscription_id=I-TEST-SUBSCRIPTION");
+  await page.goto(
+    "/subscribe?email=sam@example.com&subscription_id=sub_test_home"
+  );
 
-  // The checker polls every 3s and the dev server may still be compiling
-  // /subscribe on first visit, so allow generous headroom on slow runners.
   await expect(
     page.getByRole("heading", { name: "Your subscription is Active" })
   ).toBeVisible({ timeout: 30_000 });
-  expect(statusChecks).toBe(2);
+  await expect(page.getByText("sub_test_home")).toBeVisible();
 });
 
 test("renders migrated markdown content", async ({ page }) => {

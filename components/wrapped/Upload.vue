@@ -54,7 +54,7 @@ import { ref, watch } from "vue";
 import { storeToRefs } from "pinia";
 import { sendFile } from "~/assets/wrapped/workers";
 import { useStatsStore } from "~/stores/wrapped/stats";
-import { useSubscriptionStore } from "~/stores/wrapped/subscriptionStore";
+import { useSubscriptionStore } from "~/stores/subscription";
 import { useUploadAccessStore } from "~/stores/wrapped/uploadAccessStore";
 
 const {

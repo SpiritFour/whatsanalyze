@@ -5,43 +5,38 @@
     elevation="10"
     style="max-width: 100%"
     :loading="isLoading"
-    @click="createSubscriptionPaypal()"
+    @click="createSubscriptionStripe()"
     >{{ $t("chooseSubscription") }}</v-btn
   >
 </template>
 
 <script>
 import { GTAG_PAYMENT, gtagEvent } from "~/utils/gtagValues";
+import { fetchSubscriptionCheckoutUrl } from "~/utils/subscription";
+
 export default {
-  setup() {
-    const config = useRuntimeConfig();
-    return { paypalClientId: config.public.paypalClientId };
-  },
   data() {
     return {
       isLoading: false,
     };
   },
   methods: {
-    async createSubscriptionPaypal() {
+    async createSubscriptionStripe() {
       if (this.isLoading) return;
       gtagEvent("subscription_pressed", GTAG_PAYMENT);
       this.isLoading = true;
 
       try {
-        const response = await this.$firebase.callFunction("helloworld", {
-          client_id: this.paypalClientId,
-        });
-        const approveLink = response.data?.approveLink;
-        if (!approveLink) {
-          throw new Error(response.data?.error || "No approval link returned");
+        const url = await fetchSubscriptionCheckoutUrl();
+        if (!url) {
+          throw new Error("No checkout URL returned from payment service");
         }
 
-        window.location.assign(approveLink);
+        window.location.assign(url);
       } catch (error) {
-        console.error("Error opening PayPal", error);
+        console.error("Error opening Stripe Checkout", error);
         this.$sentry?.captureException(error);
-        alert("Error opening PayPal. Please try again.");
+        alert("Error opening Checkout. Please try again.");
         this.isLoading = false;
       }
     },

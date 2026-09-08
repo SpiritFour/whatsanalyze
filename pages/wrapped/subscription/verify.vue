@@ -133,7 +133,7 @@ import { onMounted, ref } from "vue";
 import { httpsCallable } from "firebase/functions";
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/vue/24/solid";
 import { useI18n } from "vue-i18n";
-import { useSubscriptionStore } from "~/stores/wrapped/subscriptionStore";
+import { useSubscriptionStore } from "~/stores/subscription";
 
 definePageMeta({
   layout: "wrapped",
