@@ -117,11 +117,9 @@ const goToVerification = () => {
       token: subscriptionId,
       email: email,
     });
-    router.push(
-      localePath(`/wrapped/subscription/verify?${params.toString()}`)
-    );
+    router.push(localePath(`/subscribe?${params.toString()}`));
   } else {
-    router.push(localePath("/wrapped/subscription/verify"));
+    router.push(localePath("/subscribe"));
   }
 };
 </script>

@@ -56,7 +56,7 @@ test.describe("Stripe subscription and verification flow", () => {
     }
   });
 
-  test("verifies an active Stripe subscription on /wrapped/subscription/verify", async ({
+  test("verifies an active Stripe subscription on unified /subscribe", async ({
     page,
   }) => {
     await page.route("**/verifySubscription", async (route) => {
@@ -86,15 +86,13 @@ test.describe("Stripe subscription and verification flow", () => {
       });
     });
 
-    await page.goto(
-      "/wrapped/subscription/verify?email=test@example.com&token=sub_test123"
-    );
+    await page.goto("/subscribe?email=test@example.com&token=sub_test123");
 
     await expect(
-      page.getByRole("heading", { name: /subscription verified/i })
+      page.getByRole("heading", { name: /your subscription is active/i })
     ).toBeVisible({ timeout: 30_000 });
-    await expect(page.getByText("Alex Developer")).toBeVisible();
     await expect(page.getByText("test@example.com")).toBeVisible();
+    await expect(page.getByText("sub_test123")).toBeVisible();
   });
 
   test("shows error when subscription verification fails", async ({ page }) => {
@@ -124,12 +122,12 @@ test.describe("Stripe subscription and verification flow", () => {
     });
 
     await page.goto(
-      "/wrapped/subscription/verify?email=expired@example.com&token=sub_expired123"
+      "/subscribe?email=expired@example.com&token=sub_expired123"
     );
 
     await expect(
       page.getByText(
-        /subscription has expired|subscription verification failed/i
+        /subscription has expired|subscription could not be verified/i
       )
     ).toBeVisible({ timeout: 15_000 });
   });
