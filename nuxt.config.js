@@ -111,6 +111,9 @@ export default defineNuxtConfig({
       stripePriceId: local
         ? "price_1Sc6u074KJ57kF2wxb5cnIZL"
         : "price_1SgOxVL4rDqbYflowSbSteJQ",
+      stripeOneTimePriceId: local
+        ? "price_1ShAqrL4rDqbYfloWx53VxpL"
+        : "price_1ShAqrL4rDqbYfloWx53VxpL",
       wrappedFirebase: {
         apiKey: "AIzaSyBaVob5g3xHdzJnkOI2dtbdYND-__Tzutc",
         authDomain: "whatsanalyze-wrapped-prod.firebaseapp.com",

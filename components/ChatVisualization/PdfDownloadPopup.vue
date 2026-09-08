@@ -71,17 +71,22 @@
             </v-btn>
 
             <!-- Payment section if not subscribed -->
-            <div v-else>
-              <ChatVisualizationPayment
-                :amount="price"
-                :currency="currency"
-                @onApprove="onApprove"
-                @onCreateOrder="onCreateOrder"
-                @onError="onError"
-              />
+            <div v-else class="text-center">
+              <v-btn
+                color="success"
+                size="large"
+                class="mb-3"
+                :loading="isOneTimeLoading"
+                @click="payOneTimeStripe"
+              >
+                <v-icon class="mr-1">mdi-credit-card</v-icon>
+                <span
+                  >{{ $t("chooseOneTime") }} ({{ price }} {{ currency }})</span
+                >
+              </v-btn>
               <v-alert density="compact" type="info" prominent>
                 <span v-html="$t('subscriptionHint')"></span>
-                <v-btn to="/subscribe">
+                <v-btn to="/subscribe" class="ml-2" variant="tonal">
                   <span v-html="$t('openSubscriptionPage')"></span>
                 </v-btn>
               </v-alert>
@@ -208,6 +213,7 @@
 import { saveAs } from "file-saver";
 import { markRaw } from "vue";
 import { GTAG_PAYMENT, GTAG_PDF, gtagEvent } from "~/utils/gtagValues";
+import { fetchOneTimeCheckoutUrl } from "~/utils/subscription";
 import PDFWorker from "~/assets/js/pdf.worker.js?worker";
 import { loadImage, objectToDictionary } from "~/utils/utils";
 
@@ -224,6 +230,7 @@ export default {
     return {
       showDownloadPopup: false,
       isLoading: false,
+      isOneTimeLoading: false,
       GTAG_PAYMENT,
       GTAG_PDF,
       progress: 0,
@@ -243,14 +250,23 @@ export default {
       this.download(false);
       this.showDownloadPopup = false;
     },
-    onCreateOrder() {
+    async payOneTimeStripe() {
+      if (this.isOneTimeLoading) return;
       gtagEvent("created", GTAG_PAYMENT, 0);
+      this.isOneTimeLoading = true;
+      try {
+        const url = await fetchOneTimeCheckoutUrl({
+          successUrl: `${window.location.origin}/?session_id={CHECKOUT_SESSION_ID}&payment_success=true`,
+          cancelUrl: window.location.href,
+        });
+        if (!url) throw new Error("No checkout URL returned");
+        window.location.assign(url);
+      } catch (err) {
+        console.error("Error creating one-time Stripe checkout:", err);
+        alert("Failed to start checkout. Please try again.");
+        this.isOneTimeLoading = false;
+      }
     },
-    onApprove() {
-      gtagEvent("approved", GTAG_PAYMENT, 10);
-      this.downloadFull();
-    },
-    onError() {},
     async download(isSample = false) {
       if (!import.meta.client) return;
 

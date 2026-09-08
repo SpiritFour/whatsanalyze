@@ -22,11 +22,14 @@ export const getSubscriptionParams = () => {
 };
 
 /**
- * Requests a Stripe Checkout URL for the default subscription plan.
+ * Requests a Stripe Checkout URL for subscription or one-time payment.
  */
-export const fetchSubscriptionCheckoutUrl = async (): Promise<
-  string | undefined
-> => {
+export const fetchSubscriptionCheckoutUrl = async (options?: {
+  priceId?: string;
+  mode?: "subscription" | "payment";
+  successUrl?: string;
+  cancelUrl?: string;
+}): Promise<string | undefined> => {
   const nuxtApp = useNuxtApp();
   const functions = (nuxtApp.$wrappedFunctions || nuxtApp.$functions) as any;
   const createCheckoutSession = httpsCallable(
@@ -35,10 +38,32 @@ export const fetchSubscriptionCheckoutUrl = async (): Promise<
   );
 
   const config = useRuntimeConfig();
+  const isOneTime = options?.mode === "payment";
+  const defaultPriceId = isOneTime
+    ? config.public.stripeOneTimePriceId || "price_1ShAqrL4rDqbYfloWx53VxpL"
+    : config.public.stripePriceId;
+
   const response = await createCheckoutSession({
-    priceId: config.public.stripePriceId,
+    priceId: options?.priceId || defaultPriceId,
+    mode: options?.mode || "subscription",
+    successUrl: options?.successUrl,
+    cancelUrl: options?.cancelUrl,
   });
   const { url } = response.data as { url?: string };
 
   return url;
+};
+
+/**
+ * One-time checkout helper.
+ */
+export const fetchOneTimeCheckoutUrl = async (options?: {
+  successUrl?: string;
+  cancelUrl?: string;
+}): Promise<string | undefined> => {
+  return fetchSubscriptionCheckoutUrl({
+    mode: "payment",
+    successUrl: options?.successUrl,
+    cancelUrl: options?.cancelUrl,
+  });
 };

@@ -33,6 +33,7 @@ globals:
   definePageMeta: readonly
   useSharedChat: readonly
   useRoute: readonly
+  useRouter: readonly
   useNuxtApp: readonly
   useAnalytics: readonly
   defineEmits: readonly

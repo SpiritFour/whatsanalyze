@@ -178,6 +178,11 @@ import {
 import { debounce } from "lodash-es";
 import { useSubscriptionStore } from "~/stores/subscription";
 import { storeToRefs } from "pinia";
+import {
+  saveChatSession,
+  loadChatSession,
+  clearChatSession,
+} from "~/utils/chatSession";
 
 export default {
   async setup() {
@@ -248,6 +253,15 @@ export default {
       this.$nextTick(() => {
         window.scrollTo({ top: 0, behavior: "instant" });
       });
+    } else {
+      const savedSession = loadChatSession();
+      if (savedSession && savedSession.messages?.length > 0) {
+        this.isShowingChats = true;
+        this.newMessages({
+          messages: savedSession.messages,
+          attachments: savedSession.attachments || [],
+        });
+      }
     }
   },
   beforeUnmount() {
@@ -270,6 +284,7 @@ export default {
           GTAG_NUM_PERSONS,
           0
         );
+        saveChatSession(chatObject);
       }
     },
     rando() {
@@ -286,6 +301,7 @@ export default {
       this.attachments = undefined;
       const sharedChat = useSharedChat();
       sharedChat.value = null;
+      clearChatSession();
     },
   },
 };
