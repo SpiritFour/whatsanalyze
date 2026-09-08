@@ -4,9 +4,8 @@
 name: Deploy to Firebase Hosting on PR
 "on":
   pull_request:
-    branches:
-      - dev
-      - feat/integrate-wrapped
+    branches-ignore:
+      - main
   workflow_dispatch:
 
 jobs:
