@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full h-full flex items-center justify-center text-center relative flex-col gap-2"
+    class="w-full h-full flex items-center justify-center text-center relative flex-col gap-2 isolate"
   >
     <h2
       v-if="title"
@@ -14,5 +14,10 @@
 </template>
 
 <script lang="ts" setup>
-const props = defineProps<{ title?: string }>();
+defineProps({
+  title: {
+    type: String,
+    default: "",
+  },
+});
 </script>

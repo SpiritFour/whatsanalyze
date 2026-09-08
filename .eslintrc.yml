@@ -28,4 +28,6 @@ globals:
   ref: readonly
   useHead: readonly
   useLocalePath: readonly
+  defineProps: readonly
+  definePageMeta: readonly
 rules: {}
