@@ -72,16 +72,17 @@
 .wrapped-scope .blur-3xl {
   filter: blur(64px) !important;
 }
-.wrapped-scope a {
-  color: inherit;
-  text-decoration: inherit;
+@layer base {
+  button,
+  [type="button"],
+  [type="reset"],
+  [type="submit"] {
+    background-color: transparent;
+    color: inherit;
+  }
 }
 
-.wrapped-scope button {
-  background-color: transparent;
-  color: inherit;
-}
-
+@tailwind base;
 .wrapped-scope hr {
   border-color: #111827;
 }

@@ -4,13 +4,13 @@
     class="text-5xl"
     :title="t('results.words.breakdown.title')"
   >
+    <WrappedStyleGlow />
+
     <div
       v-for="(data, author) in result.getWordUsage.authors"
       :key="author"
-      class="w-full mt-4 max-w-md rounded-3xl bg-white/5 px-8 py-6 text-center shadow-xl shadow-black/40 backdrop-blur-lg"
+      class="relative z-10 w-full mt-4 max-w-md rounded-3xl bg-white/5 px-8 py-6 text-center shadow-xl shadow-black/40 backdrop-blur-lg overflow-hidden"
     >
-      <WrappedStyleGlow />
-
       <div class="text-2xl font-semibold tracking-tight">
         {{ author }}
       </div>
