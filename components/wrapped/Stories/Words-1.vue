@@ -1,7 +1,6 @@
 <template>
   <WrappedStoryContainer title="">
     <WrappedStyleGlow />
-    <WrappedStylePolygon />
 
     <div
       class="relative z-10 flex h-full flex-col items-center justify-center px-10 text-center"
@@ -34,9 +33,6 @@
 <script lang="ts" setup>
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
-import AnimatedDots from "~/components/wrapped/Style/AnimatedDots.vue";
-import Glow from "~/components/wrapped/Style/Glow.vue";
-
 const { t } = useI18n();
 const bannerLines = computed(() => ({
   first: t("results.words.banner.first"),

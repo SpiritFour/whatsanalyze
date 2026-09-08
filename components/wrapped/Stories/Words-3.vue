@@ -4,8 +4,6 @@
     class="text-5xl"
     :title="t('results.words.breakdown.title')"
   >
-    <WrappedStylePolygon />
-
     <div
       v-for="(data, author) in result.getWordUsage.authors"
       :key="author"
@@ -49,12 +47,11 @@
 </template>
 
 <script lang="ts" setup>
+import { storeToRefs } from "pinia";
 import { useI18n } from "vue-i18n";
 import { useStatsStore } from "~/stores/wrapped/stats";
-import Glow from "~/components/wrapped/Style/Glow.vue";
 
 const statsStore = useStatsStore();
-
 const { result } = storeToRefs(statsStore);
 const { t } = useI18n();
 </script>

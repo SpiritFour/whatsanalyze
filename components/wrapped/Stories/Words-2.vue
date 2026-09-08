@@ -2,8 +2,6 @@
   <WrappedStoryContainer v-if="result">
     <WrappedStyleGlow />
 
-    <WrappedStylePolygon />
-
     <div
       class="relative z-10 flex h-full flex-col items-center justify-center px-10 text-center"
     >
@@ -45,12 +43,12 @@
 </template>
 
 <script lang="ts" setup>
+import { computed } from "vue";
+import { storeToRefs } from "pinia";
 import { useI18n } from "vue-i18n";
 import { useStatsStore } from "~/stores/wrapped/stats";
-import Glow from "~/components/wrapped/Style/Glow.vue";
 
 const statsStore = useStatsStore();
-
 const { result } = storeToRefs(statsStore);
 const { t } = useI18n();
 
@@ -77,8 +75,5 @@ const data = computed(() => {
   console.log(min, max, currentLooser, currentWinner);
   const difference = Math.floor((max - min) * wordUsage.totalWordCount);
   return { looser: currentLooser, winner: currentWinner, difference };
-});
-const word_count = computed(() => {
-  if (!result.value) return [];
 });
 </script>
