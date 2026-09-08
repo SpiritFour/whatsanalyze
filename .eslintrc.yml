@@ -26,4 +26,8 @@ globals:
   navigateTo: readonly
   computed: readonly
   ref: readonly
+  useHead: readonly
+  useLocalePath: readonly
+  defineProps: readonly
+  definePageMeta: readonly
 rules: {}

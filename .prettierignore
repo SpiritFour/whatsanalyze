@@ -13,4 +13,5 @@ static/sw.js
 .nuxt
 .output
 node_modules
+functions-wrapped/lib
 nuxt.config.js

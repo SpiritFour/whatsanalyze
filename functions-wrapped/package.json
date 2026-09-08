@@ -1,0 +1,36 @@
+{
+  "name": "functions-wrapped",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "dev": "npm run build -- --watch | firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy:dev": "npm run build && firebase deploy --only functions --project dev",
+    "deploy:prod": "npm run build && firebase deploy --only functions --project prod",
+    "logs": "firebase functions:log",
+    "secrets:set:dev": "firebase --project dev functions:secrets:set",
+    "secrets:set:prod": "firebase --project prod functions:secrets:set",
+    "init:templates:dev": "ts-node scripts/initializeTemplates.ts dev",
+    "init:templates:prod": "ts-node scripts/initializeTemplates.ts prod",
+    "subscribe": "stripe trigger subscription.payment_succeeded --add \"customer:email=stripe@whatsanalyze.com\"",
+    "subscriptions:list": "stripe subscriptions list | jq \".data[] | {id: .id, status: .status, customer: .customer}\"",
+    "stripe:test-checkout:prod": "STRIPE_API_KEY=$(firebase functions:secrets:access STRIPE_SECRET_KEY --project prod) stripe checkout sessions create --mode=subscription -d \"line_items[0][price]=price_1ShAqrL4rDqbYfloWx53VxpL\" -d \"line_items[0][quantity]=1\" --success-url=\"https://whatsanalyze.com/subscription/verify?session_id={CHECKOUT_SESSION_ID}\" --cancel-url=\"https://whatsanalyze.com\" --live"
+  },
+  "engines": {
+    "node": "22"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "@google-cloud/functions-framework": "^4.0.1",
+    "firebase-admin": "^12.6.0",
+    "firebase-functions": "^6.0.1",
+    "stripe": "^20.0.0"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "private": true
+}

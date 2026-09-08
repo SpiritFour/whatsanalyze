@@ -24,6 +24,11 @@ const localizedPages = [
   "tools/chat-heatmap",
   "whatsapp-to-pdf",
   "whatsapp-wrapped-year-review",
+  "wrapped",
+  "wrapped/results",
+  "wrapped/subscription/verify",
+  "wrapped/subscription/success",
+  "wrapped/subscription/canceled",
 ];
 const localizedRoutes = ["de", "es", "fr", "pt", "it"].flatMap((locale) =>
   localizedPages.map((page) => `/${locale}/${page}`)
@@ -103,12 +108,28 @@ export default defineNuxtConfig({
         measurementId: "G-H1WL9MXJ17",
         functionsEmulatorPort: runWithFunctions ? 5001 : null,
       },
+      stripePriceId: local
+        ? "price_1Sc6u074KJ57kF2wxb5cnIZL"
+        : "price_1SgOxVL4rDqbYflowSbSteJQ",
+      wrappedFirebase: {
+        apiKey: "AIzaSyBaVob5g3xHdzJnkOI2dtbdYND-__Tzutc",
+        authDomain: "whatsanalyze-wrapped-prod.firebaseapp.com",
+        projectId: "whatsanalyze-wrapped-prod",
+        storageBucket: "whatsanalyze-wrapped-prod.firebasestorage.app",
+        messagingSenderId: "1053765361889",
+        appId: "1:1053765361889:web:feb439fa8220fadf1157a0",
+        measurementId: "G-XJDRX60BNX",
+      },
+      wrappedFunctionsProjectId: local ? "whatsanalyze-wrapped" : "whatsanalyze-wrapped-prod",
     },
   },
 
   css: ["~/assets/variables.scss"],
 
   modules: [
+    "@pinia/nuxt",
+    "pinia-plugin-persistedstate/nuxt",
+    "@nuxtjs/tailwindcss",
     "vuetify-nuxt-module",
     "@nuxt/content",
     "@nuxtjs/i18n",
@@ -116,6 +137,17 @@ export default defineNuxtConfig({
     "@nuxt/scripts",
     "@sentry/nuxt/module",
   ],
+
+  tailwindcss: {
+    cssPath: "~/assets/wrapped/tailwind.css",
+    configPath: "tailwind.config.mjs",
+    exposeConfig: false,
+    viewer: false,
+  },
+
+  pinia: {
+    storesDirs: ["./stores/**"],
+  },
 
   vuetify: {
     moduleOptions: {

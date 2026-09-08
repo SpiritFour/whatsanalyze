@@ -26,12 +26,40 @@ jobs:
         with:
           node-version: 20
       - uses: FirebaseExtended/action-hosting-deploy@v0
+        id: firebase_deploy
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_WHATSANALYZE_80665 }}"
           projectId: whatsanalyze-80665
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
+      - name: Create GitHub Deployment
+        if: steps.firebase_deploy.outputs.details_url != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const url = '${{ steps.firebase_deploy.outputs.details_url }}';
+            const deployment = await github.rest.repos.createDeployment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: context.payload.pull_request ? context.payload.pull_request.head.sha : context.sha,
+              environment: 'Preview',
+              description: 'Firebase Hosting Preview Deployment',
+              auto_merge: false,
+              required_contexts: [],
+              transient_environment: true
+            });
+            if (deployment.data && deployment.data.id) {
+              await github.rest.repos.createDeploymentStatus({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                deployment_id: deployment.data.id,
+                state: 'success',
+                environment: 'Preview',
+                environment_url: url,
+                description: 'Deployed to Firebase Hosting preview channel'
+              });
+            }
       - name: Sentry Release
         uses: getsentry/action-release@v1.1.5
         env:
