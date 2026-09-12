@@ -6,7 +6,7 @@ export interface OneTimePurchase {
   /**
    * Fingerprint of the chat this payment unlocks. A single payment buys the
    * PDF of the chat it was started from, so the next upload has to pay again.
-   * Null only for a purchase made before we recorded this.
+   * Null is an entry from before purchases named a chat, and unlocks nothing.
    */
   chatFingerprint: string | null;
   /**
@@ -85,9 +85,8 @@ export const unlocksChat = (
   purchase: OneTimePurchase | null,
   fingerprint: string | null
 ): boolean => {
-  if (!purchase) return false;
-  // An older purchase without a fingerprint keeps unlocking whatever is open,
-  // rather than swallowing a payment someone already made.
-  if (!purchase.chatFingerprint) return true;
+  // A purchase that names no chat unlocks no chat. Anything else would hand
+  // the full PDF to whatever is open, which is the hole this exists to close.
+  if (!purchase?.chatFingerprint || !fingerprint) return false;
   return purchase.chatFingerprint === fingerprint;
 };

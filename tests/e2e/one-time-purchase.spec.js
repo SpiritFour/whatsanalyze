@@ -80,6 +80,29 @@ const otherChatFile = () => {
   };
 };
 
+/**
+ * The full PDF has to be out of reach: no download button anywhere, and the
+ * paywall offering to buy instead. Checking only that the pricing table is
+ * back would pass while a download button sat right next to it.
+ */
+const expectPaywall = async (page) => {
+  await expect(page.getByText("Choose Your Plan")).toBeVisible({
+    timeout: 30_000,
+  });
+  await expect(
+    page.getByRole("button", { name: /^Download now$/i })
+  ).toHaveCount(0);
+
+  await page
+    .getByRole("button", { name: /Download full chat PDF/i })
+    .first()
+    .click();
+  await expect(page.getByRole("button", { name: /Buy Now/i })).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: /^Download now$/i })
+  ).toHaveCount(0);
+};
+
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
     localStorage.setItem("i18n_redirected", "en");
@@ -97,6 +120,7 @@ test("delivers the full PDF after returning from a paid one-time checkout", asyn
     payment_status: "paid",
     customer_details: { email: "buyer@example.com" },
   });
+  await stubCreateCheckoutSession(page);
 
   // Analyze a chat first: that is what the one-time payment buys, and it has
   // to survive the redirect to Stripe and back.
@@ -105,6 +129,8 @@ test("delivers the full PDF after returning from a paid one-time checkout", asyn
   await expect(page.getByText("Chat Timeline", { exact: true })).toBeVisible({
     timeout: 30_000,
   });
+
+  await startOneTimeCheckout(page);
 
   // Stripe sends the buyer back to the homepage with the paid session.
   const downloadPromise = page.waitForEvent("download", { timeout: 120_000 });
@@ -155,10 +181,29 @@ test("locks the full PDF again when a different chat is uploaded", async ({
   // A single payment buys the PDF of one chat. The next upload is a new chat,
   // and has to be paid for.
   await page.locator("#uploadmytextfile").setInputFiles(otherChatFile());
-  await expect(page.getByText("Choose Your Plan")).toBeVisible({
+  await expectPaywall(page);
+  await expect(page.getByText("Your full chat PDF is paid for")).toBeVisible();
+});
+
+test("keeps the paywall closed for a purchase that names no chat", async ({
+  page,
+}) => {
+  // What a browser is left with after paying on a build that did not record
+  // the chat yet. It must not unlock whatever chat is opened next.
+  await page.addInitScript(() => {
+    sessionStorage.setItem(
+      "whatsanalyze_one_time_purchase",
+      JSON.stringify({ sessionId: "cs_test_without_chat" })
+    );
+  });
+
+  await page.goto("/");
+  await page.locator("#uploadmytextfile").setInputFiles(exampleChat);
+  await expect(page.getByText("Chat Timeline", { exact: true })).toBeVisible({
     timeout: 30_000,
   });
-  await expect(page.getByText("Your full chat PDF is paid for")).toBeVisible();
+
+  await expectPaywall(page);
 });
 
 test("keeps the paywall closed when the checkout session was not paid", async ({
@@ -178,7 +223,5 @@ test("keeps the paywall closed when the checkout session was not paid", async ({
 
   await page.goto("/?session_id=cs_test_unpaid&payment_success=true");
 
-  await expect(page.getByText("Choose Your Plan")).toBeVisible({
-    timeout: 30_000,
-  });
+  await expectPaywall(page);
 });
