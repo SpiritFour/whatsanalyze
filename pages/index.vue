@@ -11,7 +11,7 @@
       </v-alert>
     </v-container>
 
-    <div v-show="!isShowingChats" ref="aboveTheFold" class="top-color">
+    <div ref="aboveTheFold" class="top-color">
       <v-container>
         <v-alert
           prominent
@@ -143,30 +143,6 @@
       />
     </v-container>
 
-    <div v-if="isShowingChats" class="active-chat-bar py-3">
-      <v-container
-        class="d-flex align-center justify-space-between flex-wrap gap-2"
-      >
-        <div class="d-flex align-center">
-          <v-icon color="#21a68d" class="mr-2">mdi-check-decagram</v-icon>
-          <span class="font-weight-bold text-subtitle-1">
-            {{ activeChatSummary }}
-          </span>
-        </div>
-        <v-btn
-          variant="outlined"
-          color="#21a68d"
-          size="small"
-          class="font-weight-bold"
-          style="text-transform: none"
-          @click="resetChat"
-        >
-          <v-icon size="16" class="mr-1">mdi-swap-horizontal</v-icon>
-          {{ $t("fileAnother") || "Analyze Another Chat" }}
-        </v-btn>
-      </v-container>
-    </div>
-
     <v-container v-if="isShowingChats" id="results" class="py-4">
       <ChartsResults
         ref="results"
@@ -238,13 +214,6 @@ export default {
       // Paid for the full PDF, but the chat it was bought for is gone (the
       // tab was closed, or it was too large to keep in sessionStorage).
       return Boolean(this.oneTimePurchase) && !this.isShowingChats;
-    },
-    activeChatSummary() {
-      if (!this.chat) return "WhatsApp Chat Analysis";
-      const count = this.chat.filterdChatObject
-        ? this.chat.filterdChatObject.length
-        : 0;
-      return `Complete Analysis (${count.toLocaleString()} messages)`;
     },
   },
   created() {
@@ -375,14 +344,6 @@ export default {
       if (this.$refs.aboveTheFold) {
         this.$refs.aboveTheFold.scrollTop = window.scrollY;
       }
-    },
-    resetChat() {
-      this.isShowingChats = false;
-      this.chat = undefined;
-      this.attachments = undefined;
-      const sharedChat = useSharedChat();
-      sharedChat.value = null;
-      clearChatSession();
     },
   },
 };
