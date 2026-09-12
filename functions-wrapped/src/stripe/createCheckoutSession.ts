@@ -2,6 +2,8 @@ import { HttpsError, onCall } from "firebase-functions/https";
 import {
   ensureSameOrigin,
   getStripe,
+  introCouponId,
+  oneTimePriceId,
   proPriceId,
   stripeSecretKey,
   validateOrigin,
@@ -24,7 +26,37 @@ export const createCheckoutSession = onCall(
     const origin = validateOrigin(request.rawRequest.get("origin"));
     const data = (request.data || {}) as CreateCheckoutSessionRequest;
     const mode = data.mode === "payment" ? "payment" : "subscription";
-    const price = data.priceId || proPriceId.value();
+
+    // The price is resolved here, not taken from the caller: anyone can call
+    // this endpoint, and access is granted per paid invoice regardless of what
+    // was paid, so a caller picking the price picks what Pro costs.
+    const price =
+      mode === "payment" ? oneTimePriceId.value() : proPriceId.value();
+
+    if (!price) {
+      logger.error("No price configured for checkout mode", { mode });
+      throw new HttpsError("failed-precondition", "No price configured.");
+    }
+
+    if (data.priceId && data.priceId !== price) {
+      throw new HttpsError(
+        "invalid-argument",
+        `priceId is not the configured ${mode} price.`
+      );
+    }
+
+    // A Trial Offer on the product (reduced first month, then full price) is
+    // not applied by Checkout — it only supports free trials via trial_end —
+    // so the advertised intro month is a first-invoice coupon on the full
+    // price. Renewals then bill the full price as a normal subscription_cycle.
+    const introCoupon =
+      mode === "subscription" ? introCouponId.value().trim() : "";
+
+    if (mode === "subscription" && !introCoupon) {
+      logger.error(
+        "INTRO_COUPON_ID is not set: subscribing at full price while the site advertises a reduced first month."
+      );
+    }
 
     const defaultSuccessUrl =
       mode === "payment"
@@ -47,6 +79,7 @@ export const createCheckoutSession = onCall(
             quantity: 1,
           },
         ],
+        discounts: introCoupon ? [{ coupon: introCoupon }] : undefined,
         success_url,
         cancel_url,
       });

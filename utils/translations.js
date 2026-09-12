@@ -425,9 +425,9 @@ export const messages = {
     chooseOneTime: "Buy Now",
     subscriptionTitle: "Monthly Subscription",
     subscriptionDescription:
-      "Access unlimited results and updates every month. First month for €4,99, then €9,99 per month.",
+      "Access unlimited results and updates every month. First month for €4,99, then €10 per month.",
     subscriptionPriceFirstMonth: "€4,99 First Month",
-    subscriptionPriceAfter: "€9,99/month",
+    subscriptionPriceAfter: "€10/month",
     chooseSubscription: "Subscribe Now",
     then: "then",
     pageNameWrapped: "WhatsApp Wrapped your personalized WhatsApp Year Review",
@@ -1310,9 +1310,9 @@ export const messages = {
     chooseOneTime: "Jetzt kaufen",
     subscriptionTitle: "Monatliches Abonnement",
     subscriptionDescription:
-      "Greifen Sie jeden Monat auf unbegrenzte Ergebnisse und Updates zu. Der erste Monat kostet 4,99 €, danach 9,99 € pro Monat.",
+      "Greifen Sie jeden Monat auf unbegrenzte Ergebnisse und Updates zu. Der erste Monat kostet 4,99 €, danach 10 € pro Monat.",
     subscriptionPriceFirstMonth: "4,99 € im ersten Monat",
-    subscriptionPriceAfter: "9,99 €/Monat",
+    subscriptionPriceAfter: "10 €/Monat",
     chooseSubscription: "Jetzt abonnieren",
     then: "dann",
     toolsHub: {
@@ -2160,9 +2160,9 @@ export const messages = {
     chooseOneTime: "Comprar ahora",
     subscriptionTitle: "Suscripción Mensual",
     subscriptionDescription:
-      "Accede a resultados ilimitados y actualizaciones cada mes. El primer mes por 4,99 €, luego 9,99 € al mes.",
+      "Accede a resultados ilimitados y actualizaciones cada mes. El primer mes por 4,99 €, luego 10 € al mes.",
     subscriptionPriceFirstMonth: "4,99 € Primer Mes",
-    subscriptionPriceAfter: "9,99 €/mes",
+    subscriptionPriceAfter: "10 €/mes",
     chooseSubscription: "Suscríbete ahora",
     then: "luego",
     toolsHub: {
@@ -2833,9 +2833,9 @@ export const messages = {
     chooseOneTime: "Comprar Agora",
     subscriptionTitle: "Assinatura Mensal",
     subscriptionDescription:
-      "Acesse resultados ilimitados e atualizações todos os meses. Primeiro mês por €4,99, depois €9,99 por mês.",
+      "Acesse resultados ilimitados e atualizações todos os meses. Primeiro mês por €4,99, depois €10 por mês.",
     subscriptionPriceFirstMonth: "€4,99 Primeiro Mês",
-    subscriptionPriceAfter: "€9,99/mês",
+    subscriptionPriceAfter: "€10/mês",
     chooseSubscription: "Assinar Agora",
     then: "depois",
     toolsHub: {
@@ -3683,9 +3683,9 @@ export const messages = {
     chooseOneTime: "Acheter maintenant",
     subscriptionTitle: "Abonnement Mensuel",
     subscriptionDescription:
-      "Accédez à des résultats illimités et des mises à jour chaque mois. Premier mois à 4,99 €, puis 9,99 € par mois.",
+      "Accédez à des résultats illimités et des mises à jour chaque mois. Premier mois à 4,99 €, puis 10 € par mois.",
     subscriptionPriceFirstMonth: "4,99 € Premier Mois",
-    subscriptionPriceAfter: "9,99 €/mois",
+    subscriptionPriceAfter: "10 €/mois",
     chooseSubscription: "Abonnez-vous maintenant",
     then: "puis",
     toolsHub: {
@@ -4537,9 +4537,9 @@ export const messages = {
     chooseOneTime: "Acquista ora",
     subscriptionTitle: "Abbonamento mensile",
     subscriptionDescription:
-      "Accedi a risultati illimitati e aggiornamenti ogni mese. Primo mese a €4,99, poi €9,99 al mese.",
+      "Accedi a risultati illimitati e aggiornamenti ogni mese. Primo mese a €4,99, poi €10 al mese.",
     subscriptionPriceFirstMonth: "€4,99 Primo mese",
-    subscriptionPriceAfter: "€9,99/mese",
+    subscriptionPriceAfter: "€10/mese",
     chooseSubscription: "Abbonati ora",
     then: "poi",
     toolsHub: {

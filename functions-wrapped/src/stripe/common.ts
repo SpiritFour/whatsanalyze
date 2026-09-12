@@ -6,6 +6,12 @@ export const stripeSecretKey = defineSecret("STRIPE_SECRET_KEY");
 export const stripeWebhookSecret = defineSecret("STRIPE_WEBHOOK_SECRET");
 export const stripePublishableKey = defineString("STRIPE_PUBLISHABLE_KEY");
 export const proPriceId = defineString("PRO_PRICE_ID");
+export const oneTimePriceId = defineString("ONE_TIME_PRICE_ID");
+// Stripe coupon that turns the recurring PRO_PRICE_ID into the advertised
+// reduced first month. Trial Offers configured on the product cannot be
+// attached to a Checkout Session, so the intro price is a first-invoice
+// discount instead. Empty means "sell at full price, no intro offer".
+export const introCouponId = defineString("INTRO_COUPON_ID");
 export const appName = defineString("APP_NAME");
 const allowedOrigins = defineString("ALLOWED_ORIGINS");
 

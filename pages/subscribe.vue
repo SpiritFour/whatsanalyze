@@ -88,7 +88,8 @@
             </div>
             <div class="plan-price">
               <span class="currency">€</span><span class="amount">4,99</span>
-              <span class="interval">/ month</span>
+              <span class="interval">first month</span>
+              <div class="follow-on">then €10 / month</div>
             </div>
           </div>
 
@@ -491,6 +492,12 @@ export default {
   font-size: 0.95rem;
   color: #6b7280;
   margin-left: 4px;
+}
+
+.plan-price .follow-on {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-top: 2px;
 }
 
 .feature-list {

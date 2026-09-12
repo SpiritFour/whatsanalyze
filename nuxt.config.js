@@ -108,9 +108,12 @@ export default defineNuxtConfig({
         measurementId: "G-H1WL9MXJ17",
         functionsEmulatorPort: runWithFunctions ? 5001 : null,
       },
+      // Full subscription price. The reduced first month is a coupon applied
+      // server-side (INTRO_COUPON_ID), not a separate price: Checkout ignores
+      // the Trial Offer configured on the product.
       stripePriceId: local
         ? "price_1Sc6u074KJ57kF2wxb5cnIZL"
-        : "price_1UEjQpL4rDqbYflogBj8kOpX",
+        : "price_1SgOxVL4rDqbYflowSbSteJQ",
       stripeOneTimePriceId: local
         ? "price_1UEjOz74KJ57kF2wXRhOyf05"
         : "price_1UEjQ4L4rDqbYflo33cJS7RR",

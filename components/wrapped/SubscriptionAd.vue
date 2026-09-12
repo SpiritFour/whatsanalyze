@@ -92,11 +92,14 @@
           </p>
 
           <div class="mb-2">
-            <span class="text-3xl font-bold">€10</span>
+            <span class="text-3xl font-bold">€4,99</span>
             <span class="text-gray-300 text-sm ml-1">
-              {{ t("home.subscriptionAd.pro.priceSuffix") }}
+              {{ t("home.subscriptionAd.pro.introSuffix") }}
             </span>
           </div>
+          <p class="text-xs text-gray-300 mb-1">
+            {{ t("home.subscriptionAd.pro.followOn") }}
+          </p>
           <p class="text-xs text-gray-300 mb-6">
             {{ t("home.subscriptionAd.pro.note") }}
           </p>

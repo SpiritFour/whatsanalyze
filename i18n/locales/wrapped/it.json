@@ -130,6 +130,8 @@
         "headline": "Per storyteller e team",
         "description": "Upload illimitati, export premium e elaborazione più veloce per i power user.",
         "priceSuffix": "/ mese",
+        "introSuffix": "primo mese",
+        "followOn": "poi €10 / mese",
         "note": "Annulli quando vuoi · condividi con gli amici",
         "cta": "Passa a Pro",
         "loading": "Reindirizzamento a Stripe…",

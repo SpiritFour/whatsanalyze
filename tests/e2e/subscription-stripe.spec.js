@@ -52,7 +52,12 @@ test.describe("Stripe subscription and verification flow", () => {
     await expect(unlockButton).toBeVisible();
     await unlockButton.click();
     await expect(page).toHaveURL(/^https:\/\/checkout\.stripe\.test\//);
-    expect(checkoutRequest).toBeTruthy();
+
+    // The reduced first month is a server-side coupon on the full price, so
+    // the client must ask for the full subscription price, never a cheaper one.
+    const checkoutPayload = checkoutRequest.postDataJSON().data;
+    expect(checkoutPayload.mode).toBe("subscription");
+    expect(checkoutPayload.priceId).toBe("price_1Sc6u074KJ57kF2wxb5cnIZL");
   });
 
   test("verifies an active Stripe subscription on unified /subscribe", async ({

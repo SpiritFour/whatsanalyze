@@ -190,16 +190,14 @@
             <SubscribeBtn> </SubscribeBtn>
             <div class="price-description">
               <v-row align="center" justify="center">
-                <b style="color: green">{{ price - 3 + " " + currency }}</b>
-                <span
-                  class="px-1 ml-2"
-                  style="color: white; background: red; border-radius: 5px"
-                >
-                  -80%
-                </span>
+                <b style="color: green">{{
+                  $t("subscriptionPriceFirstMonth")
+                }}</b>
               </v-row>
               <v-row align="center" justify="center">
-                <s style="color: grey">{{ 24.95 + " " + currency }}</s>
+                <span style="color: grey"
+                  >{{ $t("then") }} {{ $t("subscriptionPriceAfter") }}</span
+                >
               </v-row>
             </div>
           </div>
