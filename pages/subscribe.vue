@@ -164,7 +164,9 @@
           <h3 class="card-heading">Restore or Verify Existing Access</h3>
           <p class="card-subtext mb-4">
             Already subscribed? Enter your email and subscription ID (from your
-            receipt email) to activate on this device.
+            receipt email) to activate on this device. Subscriptions from before
+            the switch to Stripe still work — use the PayPal ID that starts with
+            <span class="mono">I-</span>.
           </p>
 
           <form class="restore-form" @submit.prevent="verify()">
@@ -186,7 +188,7 @@
                 id="sub-id"
                 v-model="subscriptionId"
                 type="text"
-                placeholder="sub_..."
+                placeholder="sub_... or I-..."
                 required
                 class="apple-input mono"
               />
@@ -202,7 +204,7 @@
               class="secondary-btn w-full"
               :disabled="loading || !email || !subscriptionId"
             >
-              {{ loading ? "Verifying with Stripe..." : "Verify Access" }}
+              {{ loading ? "Verifying..." : "Verify Access" }}
             </button>
           </form>
         </div>

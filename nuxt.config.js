@@ -95,6 +95,11 @@ export default defineNuxtConfig({
     public: {
       local,
       baseUrl,
+      // Still needed to verify subscriptions taken out through PayPal before
+      // the move to Stripe. No new PayPal subscription can be created.
+      paypalClientId: local
+        ? "ARYQUp4C_oNjNUNkvSPzLeaiulItDmnHUU226OANt2haCKC2c70ZrKZTmRHCPldcu4SD22LmPEuonfec"
+        : "AUMWxSZrtBOA1RicR_3nGijYb8yYxyq2lxBjiwoQKfVc-8jfdPr5N7X5EFUackMCLb_K7HiKswnDBUJ8",
       firebase: {
         apiKey: "AIzaSyBWNP0Ckw94E7tyoZZozAOZ6JSQRH2lzFU",
         authDomain: "whatsanalyze-80665.firebaseapp.com",
