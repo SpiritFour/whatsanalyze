@@ -1,5 +1,6 @@
 import { HttpsError, onCall } from "firebase-functions/https";
 import {
+  ensureSameOrigin,
   getStripe,
   proPriceId,
   stripeSecretKey,
@@ -28,16 +29,15 @@ export const createCheckoutSession = onCall(
     const defaultSuccessUrl =
       mode === "payment"
         ? `${origin}/?session_id={CHECKOUT_SESSION_ID}&payment_success=true`
-        : `${origin}/subscription/verify?session_id={CHECKOUT_SESSION_ID}`;
+        : `${origin}/subscribe?session_id={CHECKOUT_SESSION_ID}`;
     const defaultCancelUrl = `${origin}/subscribe`;
 
-    const success_url = data.successUrl
-      ? data.successUrl.replace(
-          "{CHECKOUT_SESSION_ID}",
-          "{CHECKOUT_SESSION_ID}"
-        )
-      : defaultSuccessUrl;
-    const cancel_url = data.cancelUrl || defaultCancelUrl;
+    const success_url =
+      ensureSameOrigin(data.successUrl, origin, "successUrl") ||
+      defaultSuccessUrl;
+    const cancel_url =
+      ensureSameOrigin(data.cancelUrl, origin, "cancelUrl") ||
+      defaultCancelUrl;
 
     try {
       const session = await stripe.checkout.sessions.create({

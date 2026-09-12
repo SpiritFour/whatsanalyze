@@ -1,5 +1,10 @@
 import { HttpsError, onCall } from "firebase-functions/https";
-import { getStripe, stripeSecretKey, validateOrigin } from "./common";
+import {
+  ensureSameOrigin,
+  getStripe,
+  stripeSecretKey,
+  validateOrigin,
+} from "./common";
 import * as logger from "firebase-functions/logger";
 import { db } from "../firebase";
 
@@ -45,7 +50,9 @@ export const createCustomerPortal = onCall(
 
       const portalSession = await stripe.billingPortal.sessions.create({
         customer: customerId,
-        return_url: returnUrl || defaultReturnUrl,
+        return_url:
+          ensureSameOrigin(returnUrl, origin, "returnUrl") ||
+          defaultReturnUrl,
       });
       return { url: portalSession.url };
     } catch (error: any) {

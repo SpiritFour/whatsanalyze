@@ -47,13 +47,12 @@ test.describe("Stripe subscription and verification flow", () => {
     await page.goto("/wrapped");
 
     const unlockButton = page.getByRole("button", {
-      name: /unlock all slides|subscribe/i,
+      name: /upgrade to pro/i,
     });
-    if (await unlockButton.isVisible()) {
-      await unlockButton.click();
-      await expect(page).toHaveURL(/^https:\/\/checkout\.stripe\.test\//);
-      expect(checkoutRequest).toBeTruthy();
-    }
+    await expect(unlockButton).toBeVisible();
+    await unlockButton.click();
+    await expect(page).toHaveURL(/^https:\/\/checkout\.stripe\.test\//);
+    expect(checkoutRequest).toBeTruthy();
   });
 
   test("verifies an active Stripe subscription on unified /subscribe", async ({

@@ -49,3 +49,20 @@ export function validateOrigin(origin?: string): string {
 
   throw new HttpsError("failed-precondition", `Origin not allowed: ${origin}`);
 }
+
+/**
+ * Client-supplied redirect URLs (Stripe success/cancel/return URLs) must stay
+ * on the already-validated origin, otherwise a caller could turn this
+ * endpoint into an open redirect for phishing.
+ */
+export function ensureSameOrigin(
+  url: string | undefined,
+  origin: string,
+  field: string
+): string | undefined {
+  if (!url) return undefined;
+  if (url !== origin && !url.startsWith(`${origin}/`)) {
+    throw new HttpsError("invalid-argument", `${field} must match the request origin.`);
+  }
+  return url;
+}

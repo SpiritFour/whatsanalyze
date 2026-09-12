@@ -110,10 +110,10 @@ export default defineNuxtConfig({
       },
       stripePriceId: local
         ? "price_1Sc6u074KJ57kF2wxb5cnIZL"
-        : "price_1SgOxVL4rDqbYflowSbSteJQ",
+        : "price_1UEjQpL4rDqbYflogBj8kOpX",
       stripeOneTimePriceId: local
-        ? "price_1ShAqrL4rDqbYfloWx53VxpL"
-        : "price_1ShAqrL4rDqbYfloWx53VxpL",
+        ? "price_1UEjOz74KJ57kF2wXRhOyf05"
+        : "price_1UEjQ4L4rDqbYflo33cJS7RR",
       wrappedFirebase: {
         apiKey: "AIzaSyBaVob5g3xHdzJnkOI2dtbdYND-__Tzutc",
         authDomain: "whatsanalyze-wrapped-prod.firebaseapp.com",

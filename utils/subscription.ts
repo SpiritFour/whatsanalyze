@@ -40,7 +40,7 @@ export const fetchSubscriptionCheckoutUrl = async (options?: {
   const config = useRuntimeConfig();
   const isOneTime = options?.mode === "payment";
   const defaultPriceId = isOneTime
-    ? config.public.stripeOneTimePriceId || "price_1ShAqrL4rDqbYfloWx53VxpL"
+    ? config.public.stripeOneTimePriceId
     : config.public.stripePriceId;
 
   const response = await createCheckoutSession({
