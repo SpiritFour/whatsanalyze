@@ -89,6 +89,9 @@ test.beforeEach(async ({ page }) => {
 test("delivers the full PDF after returning from a paid one-time checkout", async ({
   page,
 }) => {
+  // Renders every chart and builds the PDF in a worker.
+  test.slow();
+
   await stubCheckoutSession(page, {
     mode: "payment",
     payment_status: "paid",
@@ -104,7 +107,7 @@ test("delivers the full PDF after returning from a paid one-time checkout", asyn
   });
 
   // Stripe sends the buyer back to the homepage with the paid session.
-  const downloadPromise = page.waitForEvent("download", { timeout: 90_000 });
+  const downloadPromise = page.waitForEvent("download", { timeout: 120_000 });
   await page.goto("/?session_id=cs_test_paid&payment_success=true");
 
   const download = await downloadPromise;
@@ -126,6 +129,9 @@ test("delivers the full PDF after returning from a paid one-time checkout", asyn
 test("locks the full PDF again when a different chat is uploaded", async ({
   page,
 }) => {
+  // Renders every chart and builds the PDF in a worker.
+  test.slow();
+
   await stubCheckoutSession(page, {
     mode: "payment",
     payment_status: "paid",
@@ -142,7 +148,7 @@ test("locks the full PDF again when a different chat is uploaded", async ({
   // Buy through the paywall, so the purchase is tied to the chat on screen.
   await startOneTimeCheckout(page);
 
-  const downloadPromise = page.waitForEvent("download", { timeout: 90_000 });
+  const downloadPromise = page.waitForEvent("download", { timeout: 120_000 });
   await page.goto("/?session_id=cs_test_paid&payment_success=true");
   await downloadPromise;
 

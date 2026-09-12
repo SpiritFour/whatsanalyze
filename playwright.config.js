@@ -5,9 +5,10 @@ module.exports = defineConfig({
   snapshotPathTemplate:
     "{testDir}/{testFilePath}-snapshots/{arg}-{projectName}{ext}",
   fullyParallel: true,
-  // CI runners are small; chart rendering and PDF-worker tests exceed
-  // Playwright's 30s default there.
-  timeout: process.env.CI ? 120_000 : 30_000,
+  // Rendering every chart and building a PDF in a worker takes the better part
+  // of a minute whenever the machine is busy — on a small CI runner, and just
+  // as much locally with the suite running in parallel.
+  timeout: 120_000,
   // First visits compile pages on the fly in `nuxt dev`, which can exceed the
   // 5s default assertion timeout on slow machines.
   expect: { timeout: 15_000 },
@@ -21,13 +22,22 @@ module.exports = defineConfig({
     trace: "retain-on-failure",
   },
   projects: [
+    // Compiles every route once, so no test has to wait for `nuxt dev`.
+    {
+      name: "warmup",
+      testMatch: /warmup\.setup\.js/,
+    },
     {
       name: "desktop-chromium",
       use: { ...devices["Desktop Chrome"] },
+      testIgnore: /warmup\.setup\.js/,
+      dependencies: ["warmup"],
     },
     {
       name: "mobile-chromium",
       use: { ...devices["Pixel 5"] },
+      testIgnore: /warmup\.setup\.js/,
+      dependencies: ["warmup"],
     },
   ],
   webServer: {

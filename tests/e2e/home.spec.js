@@ -27,6 +27,10 @@ test("renders the analyzer landing page", async ({ page }) => {
 test("analyzes the example chat without uploading its contents", async ({
   page,
 }) => {
+  // Renders every chart and builds two PDFs in a worker, which takes minutes
+  // on a small runner.
+  test.slow();
+
   const requests = [];
   let checkoutRequest;
   page.on("request", (request) => requests.push(request));
@@ -71,7 +75,7 @@ test("analyzes the example chat without uploading its contents", async ({
   });
   expect(uploadedChatRequests).toEqual([]);
 
-  const downloadPromise = page.waitForEvent("download", { timeout: 60_000 });
+  const downloadPromise = page.waitForEvent("download", { timeout: 120_000 });
   await page
     .getByRole("button", { name: /Download free preview PDF/i })
     .click();
