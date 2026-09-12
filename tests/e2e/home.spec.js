@@ -28,25 +28,33 @@ test("analyzes the example chat without uploading its contents", async ({
   page,
 }) => {
   const requests = [];
-  let paypalSdkUrl;
+  let checkoutRequest;
   page.on("request", (request) => requests.push(request));
-  await page.route("https://www.paypal.com/sdk/js?**", async (route) => {
-    paypalSdkUrl = new URL(route.request().url());
+  await page.route("**/createCheckoutSession", async (route) => {
+    const request = route.request();
+    if (request.method() === "OPTIONS") {
+      await route.fulfill({
+        status: 204,
+        headers: {
+          "access-control-allow-origin": "*",
+          "access-control-allow-headers": "content-type",
+        },
+      });
+      return;
+    }
+
+    checkoutRequest = request;
     await route.fulfill({
-      contentType: "text/javascript",
-      body: `
-        window.paypal = {
-          Buttons: () => ({
-            render: (selector) => {
-              document.querySelector(selector).innerHTML =
-                '<button type="button">Pay with PayPal</button>';
-              return Promise.resolve();
-            }
-          })
-        };
-      `,
+      contentType: "application/json",
+      headers: { "access-control-allow-origin": "*" },
+      body: JSON.stringify({
+        data: { url: "https://checkout.stripe.test/c/pay/cs_test_one_time" },
+      }),
     });
   });
+  await page.route("https://checkout.stripe.test/**", (route) =>
+    route.fulfill({ contentType: "text/html", body: "Stripe Checkout Mock" })
+  );
 
   await page.locator("#uploadmytextfile").setInputFiles(exampleChat);
 
@@ -74,12 +82,14 @@ test("analyzes the example chat without uploading its contents", async ({
     .first()
     .click();
   await expect(page.getByText("Nice!!", { exact: true })).toBeVisible();
-  await expect(
-    page.getByRole("button", { name: "Pay with PayPal" })
-  ).toBeVisible();
-  expect(paypalSdkUrl.origin).toBe("https://www.paypal.com");
-  expect(paypalSdkUrl.searchParams.get("currency")).toBe("EUR");
-  expect(paypalSdkUrl.searchParams.get("client-id")).toBeTruthy();
+  await page.getByRole("button", { name: /Buy Now \(7\.99 EUR\)/i }).click();
+
+  await expect(page).toHaveURL(
+    "https://checkout.stripe.test/c/pay/cs_test_one_time"
+  );
+  const checkoutPayload = checkoutRequest.postDataJSON().data;
+  expect(checkoutPayload.mode).toBe("payment");
+  expect(checkoutPayload.priceId).toBeTruthy();
 });
 
 test("switches to a localized route", async ({ page }) => {

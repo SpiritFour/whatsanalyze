@@ -36,8 +36,7 @@ export const createCheckoutSession = onCall(
       ensureSameOrigin(data.successUrl, origin, "successUrl") ||
       defaultSuccessUrl;
     const cancel_url =
-      ensureSameOrigin(data.cancelUrl, origin, "cancelUrl") ||
-      defaultCancelUrl;
+      ensureSameOrigin(data.cancelUrl, origin, "cancelUrl") || defaultCancelUrl;
 
     try {
       const session = await stripe.checkout.sessions.create({

@@ -62,7 +62,10 @@ export function ensureSameOrigin(
 ): string | undefined {
   if (!url) return undefined;
   if (url !== origin && !url.startsWith(`${origin}/`)) {
-    throw new HttpsError("invalid-argument", `${field} must match the request origin.`);
+    throw new HttpsError(
+      "invalid-argument",
+      `${field} must match the request origin.`
+    );
   }
   return url;
 }

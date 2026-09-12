@@ -51,8 +51,7 @@ export const createCustomerPortal = onCall(
       const portalSession = await stripe.billingPortal.sessions.create({
         customer: customerId,
         return_url:
-          ensureSameOrigin(returnUrl, origin, "returnUrl") ||
-          defaultReturnUrl,
+          ensureSameOrigin(returnUrl, origin, "returnUrl") || defaultReturnUrl,
       });
       return { url: portalSession.url };
     } catch (error: any) {
