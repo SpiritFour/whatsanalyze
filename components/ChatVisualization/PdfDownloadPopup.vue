@@ -209,9 +209,10 @@
 
 <script>
 import { saveAs } from "file-saver";
-import { markRaw } from "vue";
+import { markRaw, toRaw } from "vue";
 import { GTAG_PAYMENT, GTAG_PDF, gtagEvent } from "~/utils/gtagValues";
 import { fetchOneTimeCheckoutUrl } from "~/utils/subscription";
+import { chatFingerprint } from "~/utils/chatFingerprint";
 import PDFWorker from "~/assets/js/pdf.worker.js?worker";
 import { loadImage, objectToDictionary } from "~/utils/utils";
 
@@ -239,13 +240,29 @@ export default {
     };
   },
   computed: {
+    /** Identifies the chat on screen, to tie a single payment to it. */
+    currentChatFingerprint() {
+      // toRaw: reading every message through the reactive proxy would make
+      // this depend on each one of them, and the chat's lazy getters mutate
+      // themselves — the fingerprint would be recomputed over the whole chat
+      // again and again while the PDF is being built.
+      return chatFingerprint(toRaw(this.chat));
+    },
     /** Unlocked by a subscription or by a single payment for this chat. */
     hasFullAccess() {
-      return this.isValidSubscription || Boolean(this.oneTimePurchase);
+      return (
+        this.isValidSubscription ||
+        unlocksChat(this.oneTimePurchase, this.currentChatFingerprint)
+      );
     },
   },
   watch: {
     oneTimePurchase() {
+      this.downloadPurchasedPdf();
+    },
+    // The buyer was told to upload the paid chat again — deliver it the moment
+    // they do, without making them hunt for the button.
+    currentChatFingerprint() {
       this.downloadPurchasedPdf();
     },
   },
@@ -263,8 +280,24 @@ export default {
     downloadPurchasedPdf() {
       const purchase = useOneTimePurchase();
       if (!purchase.value?.pendingDownload) return;
+      // Only deliver into the chat that was paid for. If a different one is on
+      // screen the purchase stays pending until that chat is uploaded again.
+      if (!unlocksChat(purchase.value, this.currentChatFingerprint)) return;
+
       purchase.value = { ...purchase.value, pendingDownload: false };
+      this.scrollIntoView();
       this.$nextTick(() => this.downloadFull());
+    },
+    /**
+     * Stripe drops the buyer back at the top of a long page. Bring them down
+     * to the download section, where the PDF they paid for is being built.
+     */
+    scrollIntoView() {
+      // The restored charts above this section are still being laid out, so
+      // scrolling on the next tick would aim at an offset that moves away.
+      setTimeout(() => {
+        this.$el?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 300);
     },
     handleFreePdfClick() {
       this.downloadSample();
@@ -280,6 +313,7 @@ export default {
       gtagEvent("created", GTAG_PAYMENT, 0);
       this.isOneTimeLoading = true;
       try {
+        rememberOneTimeCheckoutChat(this.currentChatFingerprint);
         const url = await fetchOneTimeCheckoutUrl({
           successUrl: `${window.location.origin}/?session_id={CHECKOUT_SESSION_ID}&payment_success=true`,
           cancelUrl: window.location.href,

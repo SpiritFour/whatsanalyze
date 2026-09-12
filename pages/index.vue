@@ -172,6 +172,7 @@ import {
   loadChatSession,
   clearChatSession,
 } from "~/utils/chatSession";
+import { chatFingerprint } from "~/utils/chatFingerprint";
 
 export default {
   async setup() {
@@ -211,9 +212,13 @@ export default {
   },
   computed: {
     showReuploadHint() {
-      // Paid for the full PDF, but the chat it was bought for is gone (the
-      // tab was closed, or it was too large to keep in sessionStorage).
-      return Boolean(this.oneTimePurchase) && !this.isShowingChats;
+      // Paid for the full PDF, but the chat it was bought for is not the one
+      // on screen: it is gone (tab closed, too large to keep in
+      // sessionStorage) or a different chat was uploaded since.
+      return (
+        Boolean(this.oneTimePurchase) &&
+        !unlocksChat(this.oneTimePurchase, chatFingerprint(toRaw(this.chat)))
+      );
     },
   },
   created() {
@@ -309,11 +314,7 @@ export default {
         }
 
         gtagEvent("approved", GTAG_PAYMENT, 10);
-        persistOneTimePurchase(sessionId);
-        useOneTimePurchase().value = {
-          sessionId,
-          pendingDownload: true,
-        };
+        useOneTimePurchase().value = persistOneTimePurchase(sessionId);
       } catch (err) {
         console.error("Could not confirm the one-time payment:", err);
         this.oneTimePaymentError = true;

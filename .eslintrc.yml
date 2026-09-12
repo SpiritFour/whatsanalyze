@@ -40,6 +40,9 @@ globals:
   useOneTimePurchase: readonly
   restoreOneTimePurchase: readonly
   persistOneTimePurchase: readonly
+  rememberOneTimeCheckoutChat: readonly
+  unlocksChat: readonly
+  toRaw: readonly
   defineEmits: readonly
   onMounted: readonly
 rules:

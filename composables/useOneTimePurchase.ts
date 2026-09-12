@@ -4,11 +4,22 @@ export interface OneTimePurchase {
   /** Stripe Checkout Session the payment was confirmed against. */
   sessionId: string;
   /**
+   * Fingerprint of the chat this payment unlocks. A single payment buys the
+   * PDF of the chat it was started from, so the next upload has to pay again.
+   * Null only for a purchase made before we recorded this.
+   */
+  chatFingerprint: string | null;
+  /**
    * True while the PDF the user just paid for still has to start downloading.
    * Set when returning from Checkout, cleared once the download has fired, so
    * a later navigation does not download the file all over again.
    */
   pendingDownload: boolean;
+}
+
+interface StoredPurchase {
+  sessionId?: string;
+  chatFingerprint?: string | null;
 }
 
 /**
@@ -22,25 +33,61 @@ export interface OneTimePurchase {
 export const useOneTimePurchase = () =>
   useState<OneTimePurchase | null>("one_time_purchase", () => null);
 
-export const restoreOneTimePurchase = (): OneTimePurchase | null => {
+const readStoredPurchase = (): StoredPurchase | null => {
   if (typeof window === "undefined") return null;
   try {
     const raw = sessionStorage.getItem(STORAGE_KEY);
-    if (!raw) return null;
-    const stored = JSON.parse(raw) as { sessionId?: string };
-    if (!stored?.sessionId) return null;
-    return { sessionId: stored.sessionId, pendingDownload: false };
+    return raw ? (JSON.parse(raw) as StoredPurchase) : null;
   } catch (err) {
     console.warn("Failed to read one-time purchase:", err);
     return null;
   }
 };
 
-export const persistOneTimePurchase = (sessionId: string) => {
+const writeStoredPurchase = (stored: StoredPurchase) => {
   if (typeof window === "undefined") return;
   try {
-    sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ sessionId }));
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
   } catch (err) {
     console.warn("Failed to persist one-time purchase:", err);
   }
+};
+
+/**
+ * Note which chat is being paid for before handing the user to Stripe. The
+ * redirect is a full page load, so the answer has to be written down now —
+ * coming back we only get a session id, which says nothing about the chat.
+ */
+export const rememberOneTimeCheckoutChat = (chatFingerprint: string | null) => {
+  writeStoredPurchase({ chatFingerprint });
+};
+
+export const restoreOneTimePurchase = (): OneTimePurchase | null => {
+  const stored = readStoredPurchase();
+  // Without a session id this is only the note we left before the redirect:
+  // the checkout was started but never paid.
+  if (!stored?.sessionId) return null;
+  return {
+    sessionId: stored.sessionId,
+    chatFingerprint: stored.chatFingerprint ?? null,
+    pendingDownload: false,
+  };
+};
+
+export const persistOneTimePurchase = (sessionId: string): OneTimePurchase => {
+  const chatFingerprint = readStoredPurchase()?.chatFingerprint ?? null;
+  writeStoredPurchase({ sessionId, chatFingerprint });
+  return { sessionId, chatFingerprint, pendingDownload: true };
+};
+
+/** Does this purchase unlock the chat currently on screen? */
+export const unlocksChat = (
+  purchase: OneTimePurchase | null,
+  fingerprint: string | null
+): boolean => {
+  if (!purchase) return false;
+  // An older purchase without a fingerprint keeps unlocking whatever is open,
+  // rather than swallowing a payment someone already made.
+  if (!purchase.chatFingerprint) return true;
+  return purchase.chatFingerprint === fingerprint;
 };
