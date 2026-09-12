@@ -27,7 +27,7 @@
       <v-dialog v-model="showDownloadPopup" width="550">
         <template #activator="{ props: activatorProps }">
           <v-btn
-            v-if="isValidSubscription"
+            v-if="hasFullAccess"
             color="success"
             v-bind="activatorProps"
             @click="downloadFull"
@@ -66,11 +66,11 @@
           <!-- Download or Payment -->
           <v-row align="center" class="py-6 ma-0" cols="12" justify="center">
             <!-- Download button if subscribed -->
-            <v-btn v-if="isValidSubscription" @click="downloadFull">
+            <v-btn v-if="hasFullAccess" @click="downloadFull">
               <span v-html="$t('downloadNow')"></span>
             </v-btn>
 
-            <!-- Payment section if not subscribed -->
+            <!-- Payment section if the full PDF is not unlocked yet -->
             <div v-else class="text-center">
               <v-btn
                 color="success"
@@ -111,7 +111,7 @@
     </v-row>
 
     <!-- Pricing Section -->
-    <div v-if="!isValidSubscription" class="pricing-section mt-10">
+    <div v-if="!hasFullAccess" class="pricing-section mt-10">
       <div class="text-h2 font-weight-bold pb-5">
         {{ $t("pricingTitle") }}
       </div>
@@ -224,6 +224,9 @@ export default {
     ego: { type: String, required: true },
     isValidSubscription: { type: Boolean, default: false },
   },
+  setup() {
+    return { oneTimePurchase: useOneTimePurchase() };
+  },
   data() {
     return {
       showDownloadPopup: false,
@@ -235,10 +238,34 @@ export default {
       pdfWorker: null,
     };
   },
+  computed: {
+    /** Unlocked by a subscription or by a single payment for this chat. */
+    hasFullAccess() {
+      return this.isValidSubscription || Boolean(this.oneTimePurchase);
+    },
+  },
+  watch: {
+    oneTimePurchase() {
+      this.downloadPurchasedPdf();
+    },
+  },
+  mounted() {
+    this.downloadPurchasedPdf();
+  },
   beforeUnmount() {
     this.closePdfWorker();
   },
   methods: {
+    /**
+     * Start the download the buyer just paid for. The flag is cleared first so
+     * that later navigations within the session do not download it again.
+     */
+    downloadPurchasedPdf() {
+      const purchase = useOneTimePurchase();
+      if (!purchase.value?.pendingDownload) return;
+      purchase.value = { ...purchase.value, pendingDownload: false };
+      this.$nextTick(() => this.downloadFull());
+    },
     handleFreePdfClick() {
       this.downloadSample();
       this.gtagEvent("free_pdf_pressed", GTAG_PAYMENT);

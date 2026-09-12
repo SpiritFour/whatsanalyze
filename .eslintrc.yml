@@ -36,6 +36,10 @@ globals:
   useRouter: readonly
   useNuxtApp: readonly
   useAnalytics: readonly
+  useState: readonly
+  useOneTimePurchase: readonly
+  restoreOneTimePurchase: readonly
+  persistOneTimePurchase: readonly
   defineEmits: readonly
   onMounted: readonly
 rules:

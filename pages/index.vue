@@ -1,5 +1,16 @@
 <template>
   <div>
+    <v-container v-if="oneTimePaymentError || showReuploadHint" class="pb-0">
+      <v-alert v-if="oneTimePaymentError" density="compact" type="warning">
+        We could not confirm your payment. If you were charged, please contact
+        us and we will sort it out.
+      </v-alert>
+      <v-alert v-else density="compact" type="success">
+        Your full chat PDF is paid for. Upload the chat again to download it —
+        it never left your device, so we cannot restore it for you.
+      </v-alert>
+    </v-container>
+
     <div v-show="!isShowingChats" ref="aboveTheFold" class="top-color">
       <v-container>
         <v-alert
@@ -168,11 +179,13 @@
 </template>
 
 <script>
+import { httpsCallable } from "firebase/functions";
 import { Chat } from "~/utils/transformChatData";
 import {
   GTAG_INTERACTION,
   GTAG_LEAD,
   GTAG_NUM_PERSONS,
+  GTAG_PAYMENT,
   gtagEvent,
 } from "~/utils/gtagValues";
 import { debounce } from "lodash-es";
@@ -208,6 +221,7 @@ export default {
       page,
       isSubscriptionValid: storeToRefs(useSubscriptionStore())
         .isSubscriptionValid,
+      oneTimePurchase: useOneTimePurchase(),
     };
   },
   data() {
@@ -216,9 +230,15 @@ export default {
       chat: undefined,
       attachments: undefined,
       loading: false,
+      oneTimePaymentError: false,
     };
   },
   computed: {
+    showReuploadHint() {
+      // Paid for the full PDF, but the chat it was bought for is gone (the
+      // tab was closed, or it was too large to keep in sessionStorage).
+      return Boolean(this.oneTimePurchase) && !this.isShowingChats;
+    },
     activeChatSummary() {
       if (!this.chat) return "WhatsApp Chat Analysis";
       const count = this.chat.filterdChatObject
@@ -256,19 +276,80 @@ export default {
     } else {
       const savedSession = loadChatSession();
       if (savedSession && savedSession.messages?.length > 0) {
-        this.isShowingChats = true;
-        this.newMessages({
-          messages: savedSession.messages,
-          attachments: savedSession.attachments || [],
-        });
+        try {
+          this.isShowingChats = true;
+          this.newMessages({
+            messages: savedSession.messages,
+            attachments: savedSession.attachments || [],
+          });
+        } catch (err) {
+          // A chat we cannot rebuild must not take the whole page down with
+          // it — drop it and show the upload form instead.
+          console.error("Could not restore the previous chat:", err);
+          clearChatSession();
+          this.isShowingChats = false;
+          this.chat = undefined;
+        }
       }
     }
+
+    useOneTimePurchase().value = restoreOneTimePurchase();
+    this.confirmOneTimePayment();
   },
   beforeUnmount() {
     window.removeEventListener("scroll", this.handleDebouncedScroll);
   },
   methods: {
     Chat,
+    /**
+     * Stripe sends the buyer back here after a one-time PDF payment. Confirm
+     * the session really was paid, then unlock the full PDF and let it
+     * download on its own — the buyer already clicked "buy", asking them to
+     * find the button again is not a delivery.
+     */
+    async confirmOneTimePayment() {
+      const {
+        payment_success: paymentSuccess,
+        session_id: sessionId,
+      } = this.$route.query;
+
+      if (paymentSuccess !== "true" || !sessionId) return;
+
+      // Never leave the ids in the URL: a reload or a shared link would
+      // re-run this, and the session id is the proof of payment.
+      const query = { ...this.$route.query };
+      delete query.payment_success;
+      delete query.session_id;
+      this.$router.replace({ query });
+
+      try {
+        const functions = this.$wrappedFunctions || this.$functions;
+        const getCheckoutSession = httpsCallable(
+          functions,
+          "getCheckoutSession"
+        );
+        const res = await getCheckoutSession({ sessionId });
+        const session = res.data;
+
+        if (session?.payment_status !== "paid") {
+          console.warn(
+            "Checkout session is not paid:",
+            session?.payment_status
+          );
+          return;
+        }
+
+        gtagEvent("approved", GTAG_PAYMENT, 10);
+        persistOneTimePurchase(sessionId);
+        useOneTimePurchase().value = {
+          sessionId,
+          pendingDownload: true,
+        };
+      } catch (err) {
+        console.error("Could not confirm the one-time payment:", err);
+        this.oneTimePaymentError = true;
+      }
+    },
     newMessages(chatObject) {
       // we only update with default chat object if chat_ is undefined
       if (!chatObject.default || this.chat === undefined) {

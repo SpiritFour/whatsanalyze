@@ -39,7 +39,22 @@ export const loadChatSession = (): PersistedChatSession | null => {
       clearChatSession();
       return null;
     }
-    return session;
+
+    // JSON has no date type, so every message came back with `date` as a
+    // string. The analyzer calls Date methods on it, so without reviving them
+    // the restored chat throws on the first chart and the page renders blank.
+    const messages = (session.messages || []).map((message: any) => ({
+      ...message,
+      date: new Date(message.date),
+    }));
+
+    if (messages.some((message) => Number.isNaN(message.date.getTime()))) {
+      console.warn("Persisted chat session has unreadable dates, dropping it.");
+      clearChatSession();
+      return null;
+    }
+
+    return { ...session, messages };
   } catch (err) {
     console.warn("Failed to load persisted chat session:", err);
     return null;
