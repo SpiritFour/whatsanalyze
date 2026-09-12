@@ -97,7 +97,9 @@ const getCheckoutSessionData = async (sessionId: string) => {
     const email = result.value?.customer_details?.email;
     if (subId && email) {
       autoVerifying.value = true;
-      await subscriptionStore.verify(email, subId);
+      // The subscription only exists once Stripe's webhook has written it,
+      // which can land after this redirect.
+      await subscriptionStore.verifyAfterCheckout(email, subId);
       autoVerifying.value = false;
     }
   } catch (err: unknown) {

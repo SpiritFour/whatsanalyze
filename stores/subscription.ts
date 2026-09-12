@@ -13,6 +13,8 @@ interface SubscriptionStoreState {
   subscription: SubscriptionData | undefined;
   isLoading: boolean;
   isVerified: boolean;
+  /** Waiting for Stripe's webhook to create the subscription after checkout. */
+  isActivating: boolean;
 }
 
 export const useSubscriptionStore = defineStore("subscription", {
@@ -20,6 +22,7 @@ export const useSubscriptionStore = defineStore("subscription", {
     subscription: undefined,
     isLoading: false,
     isVerified: false,
+    isActivating: false,
   }),
   getters: {
     getSubscription(state: SubscriptionStoreState) {
@@ -103,8 +106,35 @@ export const useSubscriptionStore = defineStore("subscription", {
         this.setLoading(false);
       }
     },
+    /**
+     * Verify right after checkout, where the subscription only exists once
+     * Stripe's webhook has written it. Stripe usually delivers within seconds,
+     * but the redirect is immediate, so a single "not found" says nothing yet.
+     * Only that answer is retried — an expired subscription is a final answer.
+     */
+    async verifyAfterCheckout(
+      email: string,
+      subscriptionId: string,
+      attempts = 6,
+      delayMs = 2500
+    ) {
+      let result = await this.verify(email, subscriptionId);
+
+      for (let attempt = 1; attempt < attempts; attempt++) {
+        if (result.isValid || !/not found/i.test(result.message || "")) break;
+        this.isActivating = true;
+        await new Promise((resolve) => setTimeout(resolve, delayMs));
+        result = await this.verify(email, subscriptionId);
+      }
+
+      this.isActivating = false;
+      return result;
+    },
   },
   persist: {
+    // Only the subscription itself outlives the tab. Persisting the transient
+    // flags brings a page back stuck mid-verification after a reload.
+    pick: ["subscription", "isVerified"],
     storage: import.meta.client ? localStorage : undefined,
   },
 });

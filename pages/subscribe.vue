@@ -79,6 +79,11 @@
 
       <!-- State: No Active Subscription -->
       <div v-else class="space-y-8">
+        <p v-if="subscriptionStore.isActivating" class="activating-banner">
+          Payment received — activating your subscription. This takes a few
+          seconds.
+        </p>
+
         <!-- Pricing / Plan Tier Card -->
         <div class="apple-card highlight-card">
           <div class="plan-header">
@@ -162,7 +167,7 @@
             receipt email) to activate on this device.
           </p>
 
-          <form class="restore-form" @submit.prevent="verify">
+          <form class="restore-form" @submit.prevent="verify()">
             <div class="input-group">
               <label for="sub-email">Email Address</label>
               <input
@@ -310,10 +315,13 @@ export default {
       }
 
       if (this.email && this.subscriptionId) {
-        await this.verify();
+        // Coming back from checkout the subscription may not be stored yet, so
+        // wait for Stripe's webhook instead of telling a paying customer that
+        // their subscription does not exist.
+        await this.verify({ afterCheckout: Boolean(sessionId) });
       }
     },
-    async verify() {
+    async verify({ afterCheckout = false } = {}) {
       if (!this.email || !this.subscriptionId) {
         this.error = "Please enter both email and subscription ID.";
         return;
@@ -324,10 +332,15 @@ export default {
       this.loading = true;
 
       try {
-        const result = await this.subscriptionStore.verify(
-          this.email,
-          this.subscriptionId
-        );
+        const result = afterCheckout
+          ? await this.subscriptionStore.verifyAfterCheckout(
+              this.email,
+              this.subscriptionId
+            )
+          : await this.subscriptionStore.verify(
+              this.email,
+              this.subscriptionId
+            );
         if (result.isValid) {
           this.successMessage = "Subscription successfully verified!";
         } else {
@@ -492,6 +505,16 @@ export default {
   font-size: 0.95rem;
   color: #6b7280;
   margin-left: 4px;
+}
+
+.activating-banner {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  text-align: center;
 }
 
 .plan-price .follow-on {

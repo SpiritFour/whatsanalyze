@@ -99,6 +99,50 @@ test.describe("Stripe subscription and verification flow", () => {
     await expect(page.getByText("sub_test123")).toBeVisible();
   });
 
+  test("keeps a verified subscription across a reload", async ({ page }) => {
+    let verifyCalls = 0;
+    await page.route("**/verifySubscription", async (route) => {
+      const request = route.request();
+      if (request.method() === "OPTIONS") {
+        await route.fulfill({
+          status: 204,
+          headers: {
+            "access-control-allow-origin": "*",
+            "access-control-allow-headers": "content-type",
+          },
+        });
+        return;
+      }
+
+      verifyCalls += 1;
+      await route.fulfill({
+        contentType: "application/json",
+        headers: { "access-control-allow-origin": "*" },
+        body: JSON.stringify({
+          data: {
+            isValid: true,
+            customerName: "Alex Developer",
+            expiresAt: new Date(Date.now() + 86400000 * 30).toISOString(),
+            customerId: "cus_12345",
+          },
+        }),
+      });
+    });
+
+    await page.goto("/subscribe?email=test@example.com&token=sub_test123");
+    await expect(
+      page.getByRole("heading", { name: /your subscription is active/i })
+    ).toBeVisible({ timeout: 30_000 });
+
+    // Straight to /subscribe without the credentials in the URL: the stored
+    // subscription has to carry access on its own.
+    await page.goto("/subscribe");
+    await expect(
+      page.getByRole("heading", { name: /your subscription is active/i })
+    ).toBeVisible({ timeout: 30_000 });
+    expect(verifyCalls).toBe(1);
+  });
+
   test("shows error when subscription verification fails", async ({ page }) => {
     await page.route("**/verifySubscription", async (route) => {
       const request = route.request();
