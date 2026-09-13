@@ -6,6 +6,12 @@ export const stripeSecretKey = defineSecret("STRIPE_SECRET_KEY");
 export const stripeWebhookSecret = defineSecret("STRIPE_WEBHOOK_SECRET");
 export const stripePublishableKey = defineString("STRIPE_PUBLISHABLE_KEY");
 export const proPriceId = defineString("PRO_PRICE_ID");
+export const oneTimePriceId = defineString("ONE_TIME_PRICE_ID");
+// Stripe coupon that turns the recurring PRO_PRICE_ID into the advertised
+// reduced first month. Trial Offers configured on the product cannot be
+// attached to a Checkout Session, so the intro price is a first-invoice
+// discount instead. Empty means "sell at full price, no intro offer".
+export const introCouponId = defineString("INTRO_COUPON_ID");
 export const appName = defineString("APP_NAME");
 const allowedOrigins = defineString("ALLOWED_ORIGINS");
 
@@ -48,4 +54,24 @@ export function validateOrigin(origin?: string): string {
   }
 
   throw new HttpsError("failed-precondition", `Origin not allowed: ${origin}`);
+}
+
+/**
+ * Client-supplied redirect URLs (Stripe success/cancel/return URLs) must stay
+ * on the already-validated origin, otherwise a caller could turn this
+ * endpoint into an open redirect for phishing.
+ */
+export function ensureSameOrigin(
+  url: string | undefined,
+  origin: string,
+  field: string
+): string | undefined {
+  if (!url) return undefined;
+  if (url !== origin && !url.startsWith(`${origin}/`)) {
+    throw new HttpsError(
+      "invalid-argument",
+      `${field} must match the request origin.`
+    );
+  }
+  return url;
 }

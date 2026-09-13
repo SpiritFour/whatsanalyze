@@ -22,11 +22,11 @@ echo "2) Production (prod)"
 read -p "Enter choice [1-2]: " env_choice
 
 if [ "$env_choice" = "1" ]; then
-    PROJECT="dev"
-    ENV_FILE=".env.dev.local"
+    PROJECT="wrapped-dev"
+    ENV_FILE=".env.whatsanalyze-wrapped"
 elif [ "$env_choice" = "2" ]; then
-    PROJECT="prod"
-    ENV_FILE=".env.prod.local"
+    PROJECT="wrapped-prod"
+    ENV_FILE=".env.whatsanalyze-wrapped-prod"
 else
     echo "❌ Invalid choice"
     exit 1
@@ -50,28 +50,19 @@ echo ""
 echo "✅ Secrets configured successfully!"
 echo ""
 
-# Create env file if it doesn't exist
-if [ ! -f "$ENV_FILE" ]; then
-    echo "📝 Creating $ENV_FILE..."
-    
-    if [ "$PROJECT" = "dev" ]; then
-        cp .env.dev "$ENV_FILE"
-    else
-        cp .env.prod "$ENV_FILE"
-    fi
-    
-    echo "✅ Created $ENV_FILE - Please edit it with your values:"
-    echo "   - STRIPE_PUBLISHABLE_KEY"
-    echo "   - BASIC_PRICE_ID"
-    echo "   - PRO_PRICE_ID"
-    echo "   - DOMAIN"
-else
-    echo "ℹ️  $ENV_FILE already exists"
-fi
+echo "ℹ️  Non-sensitive config lives in $ENV_FILE (committed):"
+echo "   - STRIPE_PUBLISHABLE_KEY"
+echo "   - PRO_PRICE_ID"
+echo "   - ALLOWED_ORIGINS"
+echo "   - EMAIL_BASE_URL"
 
 echo ""
 echo "🎉 Setup complete!"
 echo ""
 echo "Next steps:"
-echo "1. Edit $ENV_FILE with your non-sensitive config"
-echo "2. Deploy with: npm run deploy:$PROJECT"
+echo "1. Check $ENV_FILE for the non-sensitive config"
+if [ "$PROJECT" = "wrapped-dev" ]; then
+    echo "2. Deploy with: npm run deploy:dev"
+else
+    echo "2. Deploy with: npm run deploy:prod"
+fi

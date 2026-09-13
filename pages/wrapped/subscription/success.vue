@@ -30,12 +30,20 @@
         <p><strong>Status:</strong> {{ result.payment_status }}</p>
       </div>
 
-      <button
-        class="py-2 px-4 rounded-md text-sm border-2 text-green-500 border-green-500 hover:bg-green-500 hover:text-white w-80 text-center"
-        @click="goToVerification"
-      >
-        Verify Subscription
-      </button>
+      <div class="flex gap-4">
+        <button
+          class="py-2 px-4 rounded-md text-sm border-2 text-green-500 border-green-500 hover:bg-green-500 hover:text-white text-center"
+          @click="goToVerification"
+        >
+          {{ autoVerifying ? "Verifying..." : "View Subscription Details" }}
+        </button>
+        <NuxtLink
+          :to="localePath('/wrapped')"
+          class="py-2 px-4 rounded-md text-sm bg-green-500 text-white hover:bg-green-600 text-center flex items-center"
+        >
+          Continue to Wrapped
+        </NuxtLink>
+      </div>
     </div>
   </div>
 </template>
@@ -44,7 +52,7 @@
 import { onMounted, ref } from "vue";
 import { httpsCallable } from "firebase/functions";
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/vue/24/solid";
-
+import { useSubscriptionStore } from "~/stores/subscription";
 definePageMeta({
   layout: "wrapped",
 });
@@ -63,6 +71,8 @@ const localePath = useLocalePath();
 const loading = ref(false);
 const result = ref<CheckoutSessionResult | null>(null);
 const error = ref("");
+const autoVerifying = ref(false);
+const subscriptionStore = useSubscriptionStore();
 const { trackSubscriptionCompleted } = useAnalytics();
 
 onMounted(() => {
@@ -81,6 +91,17 @@ const getCheckoutSessionData = async (sessionId: string) => {
     const res = await getCheckoutSession({ sessionId });
     result.value = res.data as CheckoutSessionResult;
     trackSubscriptionCompleted("stripe");
+
+    // Automatically verify into the Pinia store without requiring user click
+    const subId = result.value?.subscription;
+    const email = result.value?.customer_details?.email;
+    if (subId && email) {
+      autoVerifying.value = true;
+      // The subscription only exists once Stripe's webhook has written it,
+      // which can land after this redirect.
+      await subscriptionStore.verifyAfterCheckout(email, subId);
+      autoVerifying.value = false;
+    }
   } catch (err: unknown) {
     error.value = err instanceof Error ? err.message : "Unknown error";
     console.error("Callable error:", err);
@@ -98,11 +119,9 @@ const goToVerification = () => {
       token: subscriptionId,
       email: email,
     });
-    router.push(
-      localePath(`/wrapped/subscription/verify?${params.toString()}`)
-    );
+    router.push(localePath(`/subscribe?${params.toString()}`));
   } else {
-    router.push(localePath("/wrapped/subscription/verify"));
+    router.push(localePath("/subscribe"));
   }
 };
 </script>

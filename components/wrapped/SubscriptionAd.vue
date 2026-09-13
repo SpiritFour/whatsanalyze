@@ -92,11 +92,14 @@
           </p>
 
           <div class="mb-2">
-            <span class="text-3xl font-bold">€10</span>
+            <span class="text-3xl font-bold">€4,99</span>
             <span class="text-gray-300 text-sm ml-1">
-              {{ t("home.subscriptionAd.pro.priceSuffix") }}
+              {{ t("home.subscriptionAd.pro.introSuffix") }}
             </span>
           </div>
+          <p class="text-xs text-gray-300 mb-1">
+            {{ t("home.subscriptionAd.pro.followOn") }}
+          </p>
           <p class="text-xs text-gray-300 mb-6">
             {{ t("home.subscriptionAd.pro.note") }}
           </p>
@@ -141,7 +144,7 @@
 <script lang="ts" setup>
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { fetchSubscriptionCheckoutUrl } from "~/utils/wrapped/subscription";
+import { fetchSubscriptionCheckoutUrl } from "~/utils/subscription";
 
 const isStarting = ref(false);
 const checkoutError = ref("");

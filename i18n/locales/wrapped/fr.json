@@ -130,6 +130,8 @@
         "headline": "Pour raconteurs et équipes",
         "description": "Imports illimités, exports premium et traitement plus rapide pour les power users.",
         "priceSuffix": "/ mois",
+        "introSuffix": "premier mois",
+        "followOn": "puis 10 € / mois",
         "note": "Annulation à tout moment · partagez avec des amis",
         "cta": "Passer à Pro",
         "loading": "Redirection vers Stripe…",

@@ -61,7 +61,7 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { fetchSubscriptionCheckoutUrl } from "~/utils/wrapped/subscription";
+import { fetchSubscriptionCheckoutUrl } from "~/utils/subscription";
 
 const { trackSubscriptionStarted } = useAnalytics();
 

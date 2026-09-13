@@ -1,5 +1,10 @@
 import { HttpsError, onCall } from "firebase-functions/https";
-import { getStripe, stripeSecretKey, validateOrigin } from "./common";
+import {
+  ensureSameOrigin,
+  getStripe,
+  stripeSecretKey,
+  validateOrigin,
+} from "./common";
 import * as logger from "firebase-functions/logger";
 import { db } from "../firebase";
 
@@ -10,7 +15,7 @@ export const createCustomerPortal = onCall(
 
     const origin = validateOrigin(request.rawRequest.get("origin"));
 
-    const { subscriptionId, email } = request.data;
+    const { subscriptionId, email, returnUrl } = request.data;
 
     if (!subscriptionId || typeof subscriptionId !== "string") {
       throw new HttpsError("invalid-argument", "subscriptionId is required");
@@ -39,11 +44,14 @@ export const createCustomerPortal = onCall(
         throw new HttpsError("failed-precondition", "Customer ID missing");
       }
 
+      const defaultReturnUrl = `${origin}/subscribe?token=${subscriptionId}&email=${encodeURIComponent(
+        email
+      )}`;
+
       const portalSession = await stripe.billingPortal.sessions.create({
         customer: customerId,
-        return_url: `${origin}/wrapped/subscription/verify?token=${subscriptionId}&email=${encodeURIComponent(
-          email
-        )}`,
+        return_url:
+          ensureSameOrigin(returnUrl, origin, "returnUrl") || defaultReturnUrl,
       });
       return { url: portalSession.url };
     } catch (error: any) {

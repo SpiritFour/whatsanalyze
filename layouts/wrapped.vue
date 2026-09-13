@@ -180,7 +180,7 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { storeToRefs } from "pinia";
-import { useSubscriptionStore } from "~/stores/wrapped/subscriptionStore";
+import { useSubscriptionStore } from "~/stores/subscription";
 import {
   ArrowLeftIcon,
   CheckCircleIcon,
