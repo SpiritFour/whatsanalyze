@@ -195,3 +195,17 @@ test("renders migrated markdown content", async ({ page }) => {
     })
   ).toBeVisible({ timeout: 15_000 });
 });
+
+test("opens the download section when linked straight to it", async ({
+  page,
+}) => {
+  // "Open Chat Analyzer" on the subscribe page sends subscribers here for
+  // their download, not for the hero.
+  await page.locator("#uploadmytextfile").setInputFiles(exampleChat);
+  await expect(page.getByText("Chat Timeline", { exact: true })).toBeVisible({
+    timeout: 30_000,
+  });
+
+  await page.goto("/#payButton");
+  await expect(page.locator("#payButton")).toBeInViewport({ timeout: 30_000 });
+});

@@ -63,6 +63,15 @@ export const useSubscriptionStore = defineStore("subscription", {
       this.subscription = undefined;
       this.isVerified = false;
     },
+    /**
+     * Sign out for good. Clearing the state is not enough: the persisted copy
+     * is written on a later tick, so navigating away right after beats it and
+     * the next load restores the subscription that was just logged out of.
+     */
+    logout() {
+      this.clearSubscription();
+      if (import.meta.client) localStorage.removeItem("subscription");
+    },
     setLoading(loading: boolean) {
       this.isLoading = loading;
     },

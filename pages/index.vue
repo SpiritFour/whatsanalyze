@@ -13,46 +13,6 @@
 
     <div ref="aboveTheFold" class="top-color">
       <v-container>
-        <v-alert
-          prominent
-          dark
-          class="mb-6 elevation-3 wrapped-banner"
-          style="border-radius: 12px; overflow: hidden; border: none"
-        >
-          <template #prepend>
-            <v-icon large class="mr-4">mdi-party-popper</v-icon>
-          </template>
-
-          <v-row align="center" no-gutters>
-            <v-col cols="12" md="8" lg="9">
-              <div class="text-h6 text-sm-h5 font-weight-bold text-white mb-1">
-                WHATSAPP WRAPPED 2026 IS HERE!
-              </div>
-              <div class="text-subtitle-1 text-white" style="line-height: 1.4">
-                Your chat, told like a story. See your most active hours,
-                funniest exchanges, and emotional peaks.
-                <strong>100% Private.</strong>
-              </div>
-            </v-col>
-            <v-col
-              cols="12"
-              md="4"
-              lg="3"
-              class="text-center text-md-right mt-4 mt-md-0"
-            >
-              <v-btn
-                color="white"
-                x-large
-                class="font-weight-bold px-8"
-                rounded
-                :to="localePath('/wrapped')"
-              >
-                See Your Story
-                <v-icon right>mdi-arrow-right</v-icon>
-              </v-btn>
-            </v-col>
-          </v-row>
-        </v-alert>
         <v-row
           v-if="$vuetify.display.mdAndUp"
           :style="isShowingChats ? 'height: fit-content' : 'min-height: 70vh;'"
@@ -125,6 +85,46 @@
             <ChartsExampleGraphs :chat_="chat" />
           </v-col>
         </v-row>
+        <v-alert
+          prominent
+          dark
+          class="mt-6 elevation-3 wrapped-banner"
+          style="border-radius: 12px; overflow: hidden; border: none"
+        >
+          <template #prepend>
+            <v-icon large class="mr-4">mdi-party-popper</v-icon>
+          </template>
+
+          <v-row align="center" no-gutters>
+            <v-col cols="12" md="8" lg="9">
+              <div class="text-h6 text-sm-h5 font-weight-bold text-white mb-1">
+                WHATSAPP WRAPPED 2026 IS HERE!
+              </div>
+              <div class="text-subtitle-1 text-white" style="line-height: 1.4">
+                Your chat, told like a story. See your most active hours,
+                funniest exchanges, and emotional peaks.
+                <strong>100% Private.</strong>
+              </div>
+            </v-col>
+            <v-col
+              cols="12"
+              md="4"
+              lg="3"
+              class="text-center text-md-right mt-4 mt-md-0"
+            >
+              <v-btn
+                color="white"
+                x-large
+                class="font-weight-bold px-8"
+                rounded
+                :to="localePath('/wrapped')"
+              >
+                See Your Story
+                <v-icon right>mdi-arrow-right</v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-alert>
       </v-container>
     </div>
 
@@ -173,6 +173,7 @@ import {
   clearChatSession,
 } from "~/utils/chatSession";
 import { chatFingerprint } from "~/utils/chatFingerprint";
+import { scrollToSettled } from "~/utils/scroll";
 
 export default {
   async setup() {
@@ -269,6 +270,12 @@ export default {
 
     useOneTimePurchase().value = restoreOneTimePurchase();
     this.confirmOneTimePayment();
+
+    // Arriving from "Open Chat Analyzer" on the subscribe page: they came for
+    // their download, so take them to it rather than to the hero.
+    if (this.$route.hash === "#payButton" && this.isShowingChats) {
+      this.$nextTick(() => scrollToSettled("#payButton", { offset: 100 }));
+    }
   },
   beforeUnmount() {
     window.removeEventListener("scroll", this.handleDebouncedScroll);

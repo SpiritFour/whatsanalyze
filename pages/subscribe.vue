@@ -62,7 +62,9 @@
         <p v-if="portalError" class="error-banner">{{ portalError }}</p>
 
         <div class="actions-row">
-          <NuxtLink to="/" class="primary-btn"> Open Chat Analyzer </NuxtLink>
+          <NuxtLink to="/#payButton" class="primary-btn">
+            Open Chat Analyzer
+          </NuxtLink>
           <NuxtLink to="/wrapped" class="secondary-btn">
             Open WhatsApp Wrapped
           </NuxtLink>
@@ -393,7 +395,7 @@ export default {
     },
     logout() {
       if (!confirm("Do you really want to logout?")) return;
-      this.subscriptionStore.clearSubscription();
+      this.subscriptionStore.logout();
       this.email = "";
       this.subscriptionId = "";
       this.error = "";
@@ -670,7 +672,9 @@ export default {
 
 .meta-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  /* Wide enough for a Stripe subscription id to stay on one line; squeezing a
+     third column in here is what made it wrap into its neighbour. */
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1rem;
   background: #f9fafb;
   border-radius: 14px;
@@ -681,6 +685,9 @@ export default {
 .meta-item {
   display: flex;
   flex-direction: column;
+  /* Grid items default to min-width: auto, which lets a long id push past its
+     column and paint over the neighbouring one. */
+  min-width: 0;
 }
 
 .meta-label {
@@ -696,6 +703,7 @@ export default {
   font-size: 0.95rem;
   font-weight: 600;
   color: #111827;
+  overflow-wrap: anywhere;
 }
 
 .mono {

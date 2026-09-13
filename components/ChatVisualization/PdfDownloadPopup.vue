@@ -120,7 +120,7 @@
         <!-- Free Tier -->
         <v-col cols="12" sm="4">
           <div class="pricing-card text-center py-5 px-4">
-            <div class="text-h3 font-weight-bold title">
+            <div class="text-h4 text-lg-h3 font-weight-bold title">
               {{ $t("freeTierTitle") }}
             </div>
             <div class="text-body-1 py-3 subtitle">
@@ -144,7 +144,7 @@
         <!-- One-Time Payment -->
         <v-col cols="12" sm="4">
           <div class="pricing-card text-center py-5 px-4">
-            <div class="text-h3 font-weight-bold title">
+            <div class="text-h4 text-lg-h3 font-weight-bold title">
               {{ $t("oneTimeTitle") }}
             </div>
             <div class="text-body-1 py-3 subtitle">
@@ -181,7 +181,7 @@
         <!-- Monthly Subscription -->
         <v-col cols="12" sm="4">
           <div class="pricing-card text-center py-5 px-4">
-            <div class="text-h3 font-weight-bold title">
+            <div class="text-h4 text-lg-h3 font-weight-bold title">
               {{ $t("subscriptionTitle") }}
             </div>
             <div class="text-body-1 py-3 subtitle">
@@ -213,6 +213,7 @@ import { markRaw, toRaw } from "vue";
 import { GTAG_PAYMENT, GTAG_PDF, gtagEvent } from "~/utils/gtagValues";
 import { fetchOneTimeCheckoutUrl } from "~/utils/subscription";
 import { chatFingerprint } from "~/utils/chatFingerprint";
+import { scrollToSettled } from "~/utils/scroll";
 import PDFWorker from "~/assets/js/pdf.worker.js?worker";
 import { loadImage, objectToDictionary } from "~/utils/utils";
 
@@ -285,19 +286,10 @@ export default {
       if (!unlocksChat(purchase.value, this.currentChatFingerprint)) return;
 
       purchase.value = { ...purchase.value, pendingDownload: false };
-      this.scrollIntoView();
+      // Stripe drops the buyer back at the top of a long page. Bring them down
+      // to the download section, where the PDF they paid for is being built.
+      this.$nextTick(() => scrollToSettled("#payButton", { offset: 100 }));
       this.$nextTick(() => this.downloadFull());
-    },
-    /**
-     * Stripe drops the buyer back at the top of a long page. Bring them down
-     * to the download section, where the PDF they paid for is being built.
-     */
-    scrollIntoView() {
-      // The restored charts above this section are still being laid out, so
-      // scrolling on the next tick would aim at an offset that moves away.
-      setTimeout(() => {
-        this.$el?.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 300);
     },
     handleFreePdfClick() {
       this.downloadSample();
@@ -415,8 +407,20 @@ export default {
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  max-height: 400px; /* Adjust height as needed */
   min-height: 350px; /* Ensures equal card height */
+}
+
+/* Long labels used to run past the button and the card edge. */
+.pricing-card :deep(.v-btn) {
+  max-width: 100%;
+  height: auto;
+  min-height: 40px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.pricing-card :deep(.v-btn__content) {
+  white-space: normal;
 }
 
 .price-description {
@@ -434,5 +438,7 @@ export default {
   display: flex;
   align-items: center;
   text-align: center;
+  /* "Subscription" is one word and wider than the card on its own. */
+  overflow-wrap: anywhere;
 }
 </style>

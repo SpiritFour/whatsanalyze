@@ -143,6 +143,69 @@ test.describe("Stripe subscription and verification flow", () => {
     expect(verifyCalls).toBe(1);
   });
 
+  test("stays logged out after logging out", async ({ page }) => {
+    await page.route("**/verifySubscription", async (route) => {
+      const request = route.request();
+      if (request.method() === "OPTIONS") {
+        await route.fulfill({
+          status: 204,
+          headers: {
+            "access-control-allow-origin": "*",
+            "access-control-allow-headers": "content-type",
+          },
+        });
+        return;
+      }
+
+      await route.fulfill({
+        contentType: "application/json",
+        headers: { "access-control-allow-origin": "*" },
+        body: JSON.stringify({
+          data: {
+            isValid: true,
+            customerName: "Alex Developer",
+            expiresAt: new Date(Date.now() + 86400000 * 30).toISOString(),
+            customerId: "cus_12345",
+          },
+        }),
+      });
+    });
+    page.on("dialog", (dialog) => dialog.accept());
+
+    await page.goto("/subscribe?email=test@example.com&token=sub_test123");
+    await expect(
+      page.getByRole("heading", { name: /your subscription is active/i })
+    ).toBeVisible({ timeout: 30_000 });
+
+    // The subscription id has no spaces to wrap at, and used to run over the
+    // columns beside it.
+    const boxes = await Promise.all(
+      [0, 1, 2].map((index) =>
+        page.locator(".meta-item").nth(index).boundingBox()
+      )
+    );
+    const overlaps = (a, b) =>
+      a.x < b.x + b.width &&
+      b.x < a.x + a.width &&
+      a.y < b.y + b.height &&
+      b.y < a.y + a.height;
+    expect(overlaps(boxes[0], boxes[1])).toBe(false);
+    expect(overlaps(boxes[0], boxes[2])).toBe(false);
+    expect(overlaps(boxes[1], boxes[2])).toBe(false);
+
+    await page.getByRole("button", { name: /logout/i }).click();
+    await expect(
+      page.getByRole("heading", { name: /restore or verify existing access/i })
+    ).toBeVisible({ timeout: 30_000 });
+
+    // Logging out has to outlive the reload: the stored copy is written on a
+    // later tick, and navigating away used to beat it.
+    await page.goto("/subscribe");
+    await expect(
+      page.getByRole("heading", { name: /your subscription is active/i })
+    ).toHaveCount(0);
+  });
+
   test("shows error when subscription verification fails", async ({ page }) => {
     await page.route("**/verifySubscription", async (route) => {
       const request = route.request();
