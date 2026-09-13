@@ -295,26 +295,36 @@ git diff --check
 `test:generated` verifies representative localized pages, Nuxt's root manifest,
 the Vite-built worker, and required PWA assets in `dist`.
 
-Playwright is a local regression suite rather than a required CI check:
+Playwright runs on every pull request (`.github/workflows/e2e.yml`):
 
 ```bash
 nix develop --command pnpm exec playwright install chromium
 nix develop --command pnpm test:e2e
 ```
 
-When `CI` is set, the per-test timeout is raised to 120 seconds because chart
-rendering and the PDF worker exceed Playwright's 30-second default on small
-runners.
+The suite drives the **built** site, served from `dist` on port 4173, not
+`nuxt dev`. The app is a static SPA, and `nuxt dev` compiles each route on
+first request: that cost a full run about 17 minutes and forced 15–120 second
+timeouts on assertions that answer in one or two seconds against a build.
+Building once takes under a minute, brings the whole run to roughly three, and
+tests the artifact that is actually deployed.
 
-It covers desktop and mobile behavior, including:
+Three files, by concern:
 
-- landing-page rendering and browser runtime errors
-- local chat analysis without chat data in outgoing requests
-- free PDF generation
-- paid PDF dialog and PayPal SDK initialization
-- subscription endpoint and approval redirect
-- delayed subscription activation after the PayPal return
-- localized routing and migrated Markdown content
+- `payments.spec.js` — one-time checkout, the paywall, and which chat a
+  payment unlocks; plus the price and mode the client asks Stripe to charge
+- `subscription.spec.js` — verification through Stripe and through PayPal for
+  pre-migration customers, persistence across reloads, and logout
+- `site.spec.js` — landing page, local chat analysis with no chat data in
+  outgoing requests, free PDF generation, localized routing, migrated Markdown,
+  wrapped, and the tool pages
+
+Stripe, PayPal and the Firebase callables are stubbed in `fixtures.js`, which
+also fails any test that produced an uncaught runtime error.
+
+Only tests tagged `@mobile` run a second time on a phone viewport. Running the
+whole suite on both doubled the time for the same stubs and the same answers;
+the layout assertions are the ones a viewport actually changes.
 
 Visual snapshots were removed because Linux and macOS font/layout rendering
 differed by a pixel and made CI unreliable. Functional browser assertions are
@@ -326,8 +336,8 @@ Checkout moved from PayPal to Stripe, so the suite that drove the PayPal
 sandbox through the Functions emulator (`tests/e2e-sandbox`,
 `playwright.sandbox.config.js`, the `PayPal Sandbox E2E` workflow) no longer
 had a flow to exercise and was removed. Stripe checkout is covered by
-`tests/e2e/subscription-stripe.spec.js`, which stubs
-`createCheckoutSession` and asserts the redirect to Stripe's hosted page.
+`tests/e2e/payments.spec.js`, which stubs `createCheckoutSession` and asserts
+the redirect to Stripe's hosted page.
 
 The required GitHub CI job intentionally runs formatting, linting, the small
 Jest utility suite, static generation, and generated-output verification. It
