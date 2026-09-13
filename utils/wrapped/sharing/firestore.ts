@@ -13,29 +13,23 @@ type ShareableKey = { iv: number[]; key: ArrayBuffer };
 export type ShareInfo = { uuid: string; encryptedKey: ShareableKey };
 
 export async function storeResult(data: string): Promise<ShareInfo> {
-  console.log("was called!");
   const uuid = uuidv4();
   const key = await generateKey();
-  console.log("generated key", key);
   const encryptedData = await encryptData(data, key);
 
   const firestore = (useNuxtApp().$wrappedFirestore ||
     useNuxtApp().$firestore) as Firestore;
 
-  console.log("encryptedData", { uuid, key, encryptedData, firestore });
-
-  const d = doc(firestore, "data", uuid);
-  console.log("d", d);
-  await setDoc(d, {
+  await setDoc(doc(firestore, "data", uuid), {
     data: encryptedData,
   });
 
-  // You may want to export the key in a way that it can be shared
+  // The key never reaches Firestore: it travels in the share link's fragment,
+  // so only someone holding the link can read the chat back.
   const exportedKey = {
     iv: Array.from(new Uint8Array(key.iv)),
     key: await crypto.subtle.exportKey("raw", key.cryptoKey),
   };
-  console.log("exportedkey", exportedKey);
 
   return { uuid, encryptedKey: exportedKey };
 }
@@ -48,9 +42,7 @@ export async function retrieveResult({
     useNuxtApp().$firestore) as Firestore;
   const docRef = doc(firestore, "data", uuid);
   const docSnap = await getDoc(docRef);
-  console.log("retrieve Result", { uuid, encryptedKey, docRef, docSnap });
   if (docSnap.exists()) {
-    console.log("document exists");
     const key = await crypto.subtle.importKey(
       "raw",
       encryptedKey.key,
@@ -59,13 +51,10 @@ export async function retrieveResult({
       ["decrypt"]
     );
     const document = docSnap.data();
-    console.log("document", document.data);
-    const decrypted_document = await decryptData(document.data, {
+    return await decryptData(document.data, {
       cryptoKey: key,
       iv: new Uint8Array(encryptedKey.iv).buffer,
     });
-    console.log("decrypted docyment", decrypted_document);
-    return decrypted_document;
   } else {
     throw new Error("No such document!");
   }

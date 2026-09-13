@@ -72,7 +72,6 @@ const data = computed(() => {
       currentLooser = author;
     }
   }
-  console.log(min, max, currentLooser, currentWinner);
   const difference = Math.floor((max - min) * wordUsage.totalWordCount);
   return { looser: currentLooser, winner: currentWinner, difference };
 });
