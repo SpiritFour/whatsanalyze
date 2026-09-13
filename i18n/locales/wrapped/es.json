@@ -130,6 +130,8 @@
         "headline": "Para storytellers y equipos",
         "description": "Cargas ilimitadas, exportaciones premium y procesamiento más rápido para usuarios intensivos.",
         "priceSuffix": "/ mes",
+        "introSuffix": "primer mes",
+        "followOn": "luego 10 € / mes",
         "note": "Cancela cuando quieras · compártelo con amigos",
         "cta": "Actualizar a Pro",
         "loading": "Redirigiendo a Stripe…",

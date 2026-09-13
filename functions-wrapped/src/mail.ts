@@ -15,7 +15,9 @@ function buildSubscriptionLoginUrl(customer: Customer): string {
     token: customer.subscriptionId,
     email: customer.email,
   });
-  return `${emailBaseUrl.value()}/wrapped/subscription/verify?${params.toString()}`;
+  // Straight to the page that manages the subscription: /wrapped/subscription
+  // /verify only bounces to it, which costs the reader a blank redirect page.
+  return `${emailBaseUrl.value()}/subscribe?${params.toString()}`;
 }
 
 export async function sendSubscriptionConfirmationEmail(

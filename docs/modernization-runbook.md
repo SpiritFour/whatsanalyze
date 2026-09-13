@@ -320,44 +320,14 @@ Visual snapshots were removed because Linux and macOS font/layout rendering
 differed by a pixel and made CI unreliable. Functional browser assertions are
 more useful here.
 
-### PayPal sandbox integration suite
+### PayPal sandbox integration suite (removed)
 
-A separate suite exercises the real subscription backend against the PayPal
-sandbox through the Firebase Functions emulator:
-
-```bash
-(cd functions && npm ci)
-printf 'PAYPAL_PASSWORD_DEV=<sandbox secret>\nPAYPAL_PASSWORD_PROD=unused\n' \
-  > functions/.secret.local
-nix develop --command pnpm test:e2e:sandbox
-```
-
-`functions/.secret.local` is gitignored and must never be committed. Without
-it, the emulator falls back to Google Secret Manager, which works only when
-the Firebase CLI is logged in.
-
-When running the Functions emulator on macOS, keep `TMPDIR` short. macOS
-truncates unix-socket paths at ~104 characters, and the emulator creates one
-socket per function worker under `TMPDIR` with the unique suffix last. With a
-long `TMPDIR` (e.g. nested nix-shell or agent-terminal temp dirs) the worker
-sockets collide after truncation and every request silently executes
-whichever function's worker booted first — e.g. `checksubscriberstatus`
-returning `helloworld`'s "Was not able to determine callbackURL" error. The
-sandbox Playwright config pins `TMPDIR=/tmp` for the emulator; do the same
-for manual `firebase emulators:start` runs if functions answer with another
-function's response.
-
-The suite creates real (unapproved) sandbox subscriptions: it asserts that
-clicking Subscribe reaches PayPal's hosted approval page and that
-`checksubscriberstatus` reports a fresh subscription as `APPROVAL_PENDING`
-rather than active. The buyer approval on paypal.com is deliberately not
-automated — it requires a sandbox buyer login, and PayPal's bot detection
-makes that unreliable, especially on small runners. Approving a subscription
-end-to-end remains a manual test.
-
-In CI, the `PayPal Sandbox E2E` workflow runs this suite on every push when
-the `PAYPAL_PASSWORD_DEV` repository secret is configured (so never on
-forks). It is not a required check.
+Checkout moved from PayPal to Stripe, so the suite that drove the PayPal
+sandbox through the Functions emulator (`tests/e2e-sandbox`,
+`playwright.sandbox.config.js`, the `PayPal Sandbox E2E` workflow) no longer
+had a flow to exercise and was removed. Stripe checkout is covered by
+`tests/e2e/subscription-stripe.spec.js`, which stubs
+`createCheckoutSession` and asserts the redirect to Stripe's hosted page.
 
 The required GitHub CI job intentionally runs formatting, linting, the small
 Jest utility suite, static generation, and generated-output verification. It

@@ -37,8 +37,10 @@ test.describe("Footer Links & Tools Suite", () => {
     for (const toolPath of toolPaths) {
       const response = await page.goto(toolPath);
       expect(response?.status()).toBe(200);
+      // Six page loads in a row: on a busy runner one of them will need more
+      // than ten seconds, and that says nothing about the footer links.
       await expect(page.locator(".landing-hero__title")).toBeVisible({
-        timeout: 10_000,
+        timeout: 30_000,
       });
     }
   });
@@ -84,14 +86,13 @@ test.describe("Footer Links & Tools Suite", () => {
     // Verify navigation to main page with results
     await page.waitForURL(/.*#results/);
     await expect(page.locator("#results")).toBeVisible({ timeout: 15_000 });
-    await expect(page.locator(".active-chat-bar")).toBeVisible();
-    await expect(page.locator(".active-chat-bar")).toContainText(
-      "Complete Analysis"
-    );
+    await expect(page.getByText("Chat Timeline", { exact: true })).toBeVisible({
+      timeout: 15_000,
+    });
 
-    // Verify the upload hero is hidden
-    const aboveTheFold = page.locator(".top-color");
-    await expect(aboveTheFold).toBeHidden();
+    // The upload hero stays on the page, so another chat can be dropped in
+    // without leaving the results.
+    await expect(page.locator(".top-color")).toBeVisible();
   });
 
   test("tools header button shows dropdown on hover and navigates to tools or specific tool", async ({

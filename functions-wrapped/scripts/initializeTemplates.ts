@@ -1,7 +1,7 @@
 import * as admin from "firebase-admin";
 import * as fs from "fs";
 
-const project = process.argv[2] || "dev";
+const project = process.argv[2] || "wrapped-dev";
 
 try {
   // Read .firebaserc to get project ID

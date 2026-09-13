@@ -27,26 +27,38 @@ test("renders the analyzer landing page", async ({ page }) => {
 test("analyzes the example chat without uploading its contents", async ({
   page,
 }) => {
+  // Renders every chart and builds two PDFs in a worker, which takes minutes
+  // on a small runner.
+  test.slow();
+
   const requests = [];
-  let paypalSdkUrl;
+  let checkoutRequest;
   page.on("request", (request) => requests.push(request));
-  await page.route("https://www.paypal.com/sdk/js?**", async (route) => {
-    paypalSdkUrl = new URL(route.request().url());
+  await page.route("**/createCheckoutSession", async (route) => {
+    const request = route.request();
+    if (request.method() === "OPTIONS") {
+      await route.fulfill({
+        status: 204,
+        headers: {
+          "access-control-allow-origin": "*",
+          "access-control-allow-headers": "content-type",
+        },
+      });
+      return;
+    }
+
+    checkoutRequest = request;
     await route.fulfill({
-      contentType: "text/javascript",
-      body: `
-        window.paypal = {
-          Buttons: () => ({
-            render: (selector) => {
-              document.querySelector(selector).innerHTML =
-                '<button type="button">Pay with PayPal</button>';
-              return Promise.resolve();
-            }
-          })
-        };
-      `,
+      contentType: "application/json",
+      headers: { "access-control-allow-origin": "*" },
+      body: JSON.stringify({
+        data: { url: "https://checkout.stripe.test/c/pay/cs_test_one_time" },
+      }),
     });
   });
+  await page.route("https://checkout.stripe.test/**", (route) =>
+    route.fulfill({ contentType: "text/html", body: "Stripe Checkout Mock" })
+  );
 
   await page.locator("#uploadmytextfile").setInputFiles(exampleChat);
 
@@ -63,7 +75,7 @@ test("analyzes the example chat without uploading its contents", async ({
   });
   expect(uploadedChatRequests).toEqual([]);
 
-  const downloadPromise = page.waitForEvent("download", { timeout: 60_000 });
+  const downloadPromise = page.waitForEvent("download", { timeout: 120_000 });
   await page
     .getByRole("button", { name: /Download free preview PDF/i })
     .click();
@@ -74,12 +86,14 @@ test("analyzes the example chat without uploading its contents", async ({
     .first()
     .click();
   await expect(page.getByText("Nice!!", { exact: true })).toBeVisible();
-  await expect(
-    page.getByRole("button", { name: "Pay with PayPal" })
-  ).toBeVisible();
-  expect(paypalSdkUrl.origin).toBe("https://www.paypal.com");
-  expect(paypalSdkUrl.searchParams.get("currency")).toBe("EUR");
-  expect(paypalSdkUrl.searchParams.get("client-id")).toBeTruthy();
+  await page.getByRole("button", { name: /Buy Now \(7\.99 EUR\)/i }).click();
+
+  await expect(page).toHaveURL(
+    "https://checkout.stripe.test/c/pay/cs_test_one_time"
+  );
+  const checkoutPayload = checkoutRequest.postDataJSON().data;
+  expect(checkoutPayload.mode).toBe("payment");
+  expect(checkoutPayload.priceId).toBeTruthy();
 });
 
 test("switches to a localized route", async ({ page }) => {
@@ -91,11 +105,9 @@ test("switches to a localized route", async ({ page }) => {
   ).toBeVisible();
 });
 
-test("starts a subscription through the Firebase PayPal endpoint", async ({
-  page,
-}) => {
-  let functionRequest;
-  await page.route("**/helloworld", async (route) => {
+test("starts a subscription through Stripe checkout", async ({ page }) => {
+  let checkoutRequest;
+  await page.route("**/createCheckoutSession", async (route) => {
     const request = route.request();
     if (request.method() === "OPTIONS") {
       await route.fulfill({
@@ -108,34 +120,32 @@ test("starts a subscription through the Firebase PayPal endpoint", async ({
       return;
     }
 
-    functionRequest = request;
+    checkoutRequest = request;
     await route.fulfill({
       contentType: "application/json",
       headers: { "access-control-allow-origin": "*" },
       body: JSON.stringify({
-        data: { approveLink: "https://paypal.test/approve" },
+        data: { url: "https://checkout.stripe.test/c/pay/cs_test_home" },
       }),
     });
   });
-  await page.route("https://paypal.test/approve", (route) =>
-    route.fulfill({ contentType: "text/html", body: "PayPal approval" })
+  await page.route("https://checkout.stripe.test/**", (route) =>
+    route.fulfill({ contentType: "text/html", body: "Stripe Checkout Mock" })
   );
 
   await page.goto("/subscribe");
   await page.getByRole("button", { name: "Subscribe Now" }).click();
 
-  await expect(page).toHaveURL("https://paypal.test/approve");
-  expect(functionRequest.url()).toBe(
-    "https://us-central1-whatsanalyze-80665.cloudfunctions.net/helloworld"
+  await expect(page).toHaveURL(
+    "https://checkout.stripe.test/c/pay/cs_test_home"
   );
-  expect(functionRequest.postDataJSON().data.client_id).toBeTruthy();
+  expect(checkoutRequest).toBeTruthy();
 });
 
-test("activates a subscription after returning from PayPal", async ({
+test("activates a subscription after verifying on /subscribe", async ({
   page,
 }) => {
-  let statusChecks = 0;
-  await page.route("**/checksubscriberstatus", async (route) => {
+  await page.route("**/verifySubscription", async (route) => {
     const request = route.request();
     if (request.method() === "OPTIONS") {
       await route.fulfill({
@@ -148,27 +158,28 @@ test("activates a subscription after returning from PayPal", async ({
       return;
     }
 
-    statusChecks += 1;
     await route.fulfill({
       contentType: "application/json",
       headers: { "access-control-allow-origin": "*" },
       body: JSON.stringify({
         data: {
-          isValid: statusChecks > 1,
-          data: { subscriptionId: "I-TEST-SUBSCRIPTION" },
+          isValid: true,
+          customerName: "Sam Subscriber",
+          expiresAt: new Date(Date.now() + 86400000 * 30).toISOString(),
+          customerId: "cus_home_123",
         },
       }),
     });
   });
 
-  await page.goto("/subscribe?subscription_id=I-TEST-SUBSCRIPTION");
+  await page.goto(
+    "/subscribe?email=sam@example.com&subscription_id=sub_test_home"
+  );
 
-  // The checker polls every 3s and the dev server may still be compiling
-  // /subscribe on first visit, so allow generous headroom on slow runners.
   await expect(
     page.getByRole("heading", { name: "Your subscription is Active" })
   ).toBeVisible({ timeout: 30_000 });
-  expect(statusChecks).toBe(2);
+  await expect(page.getByText("sub_test_home")).toBeVisible();
 });
 
 test("renders migrated markdown content", async ({ page }) => {
@@ -183,4 +194,18 @@ test("renders migrated markdown content", async ({ page }) => {
       name: "Option 1: iPhone (iOS) - Export as a .txt File",
     })
   ).toBeVisible({ timeout: 15_000 });
+});
+
+test("opens the download section when linked straight to it", async ({
+  page,
+}) => {
+  // "Open Chat Analyzer" on the subscribe page sends subscribers here for
+  // their download, not for the hero.
+  await page.locator("#uploadmytextfile").setInputFiles(exampleChat);
+  await expect(page.getByText("Chat Timeline", { exact: true })).toBeVisible({
+    timeout: 30_000,
+  });
+
+  await page.goto("/#payButton");
+  await expect(page.locator("#payButton")).toBeInViewport({ timeout: 30_000 });
 });

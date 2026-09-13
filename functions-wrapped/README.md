@@ -1,6 +1,6 @@
 # Project switching
-firebase use dev
-firebase use prod
+firebase use wrapped-dev # whatsanalyze-wrapped
+firebase use wrapped-prod # whatsanalyze-wrapped-prod
 # Firebase Functions Setup (Node 22)
 
 ## Prerequisites
@@ -19,17 +19,12 @@ cd functions
 npm install
 ```
 
-### 2. Add Firebase Projects
+### 2. Firebase Projects
 
-```bash
-firebase use --add
-# Alias: dev
-# Project: whatsanalyze-dev (or your dev project ID)
+Aliases are already committed in `../.firebaserc`:
 
-firebase use --add
-# Alias: prod
-# Project: whatsanalyze-prod (or your prod project ID)
-```
+- `wrapped-dev` → `whatsanalyze-wrapped`
+- `wrapped-prod` → `whatsanalyze-wrapped-prod`
 
 ### 3. Build & Test Locally
 
@@ -43,14 +38,12 @@ Visit `http://localhost:5001` for emulator UI.
 ### 4. Deploy to Dev
 
 ```bash
-firebase use dev
 npm run deploy:dev
 ```
 
 ### 5. Deploy to Prod
 
 ```bash
-firebase use prod
 npm run deploy:prod
 ```
 

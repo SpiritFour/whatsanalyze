@@ -95,6 +95,8 @@ export default defineNuxtConfig({
     public: {
       local,
       baseUrl,
+      // Still needed to verify subscriptions taken out through PayPal before
+      // the move to Stripe. No new PayPal subscription can be created.
       paypalClientId: local
         ? "ARYQUp4C_oNjNUNkvSPzLeaiulItDmnHUU226OANt2haCKC2c70ZrKZTmRHCPldcu4SD22LmPEuonfec"
         : "AUMWxSZrtBOA1RicR_3nGijYb8yYxyq2lxBjiwoQKfVc-8jfdPr5N7X5EFUackMCLb_K7HiKswnDBUJ8",
@@ -108,9 +110,15 @@ export default defineNuxtConfig({
         measurementId: "G-H1WL9MXJ17",
         functionsEmulatorPort: runWithFunctions ? 5001 : null,
       },
+      // Full subscription price. The reduced first month is a coupon applied
+      // server-side (INTRO_COUPON_ID), not a separate price: Checkout ignores
+      // the Trial Offer configured on the product.
       stripePriceId: local
         ? "price_1Sc6u074KJ57kF2wxb5cnIZL"
         : "price_1SgOxVL4rDqbYflowSbSteJQ",
+      stripeOneTimePriceId: local
+        ? "price_1UEjOz74KJ57kF2wXRhOyf05"
+        : "price_1UEjQ4L4rDqbYflo33cJS7RR",
       wrappedFirebase: {
         apiKey: "AIzaSyBaVob5g3xHdzJnkOI2dtbdYND-__Tzutc",
         authDomain: "whatsanalyze-wrapped-prod.firebaseapp.com",
