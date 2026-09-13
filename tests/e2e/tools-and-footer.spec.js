@@ -37,8 +37,10 @@ test.describe("Footer Links & Tools Suite", () => {
     for (const toolPath of toolPaths) {
       const response = await page.goto(toolPath);
       expect(response?.status()).toBe(200);
+      // Six page loads in a row: on a busy runner one of them will need more
+      // than ten seconds, and that says nothing about the footer links.
       await expect(page.locator(".landing-hero__title")).toBeVisible({
-        timeout: 10_000,
+        timeout: 30_000,
       });
     }
   });
