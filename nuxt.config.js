@@ -119,16 +119,29 @@ export default defineNuxtConfig({
       stripeOneTimePriceId: local
         ? "price_1UEjOz74KJ57kF2wXRhOyf05"
         : "price_1UEjQ4L4rDqbYflo33cJS7RR",
-      wrappedFirebase: {
-        apiKey: "AIzaSyBaVob5g3xHdzJnkOI2dtbdYND-__Tzutc",
-        authDomain: "whatsanalyze-wrapped-prod.firebaseapp.com",
-        projectId: "whatsanalyze-wrapped-prod",
-        storageBucket: "whatsanalyze-wrapped-prod.firebasestorage.app",
-        messagingSenderId: "1053765361889",
-        appId: "1:1053765361889:web:feb439fa8220fadf1157a0",
-        measurementId: "G-XJDRX60BNX",
-      },
-      wrappedFunctionsProjectId: local ? "whatsanalyze-wrapped" : "whatsanalyze-wrapped-prod",
+      // Firestore and the Stripe functions have to come from the same wrapped
+      // project: the functions charge in the Stripe mode of the project they
+      // run in, so a local build paying in test mode must not write its shared
+      // chats into the database real customers read from.
+      wrappedFirebase: local
+        ? {
+            apiKey: "AIzaSyCCX536nN4oTAXj49M_M1ZShD3ekLdjkBo",
+            authDomain: "whatsanalyze-wrapped.firebaseapp.com",
+            projectId: "whatsanalyze-wrapped",
+            storageBucket: "whatsanalyze-wrapped.firebasestorage.app",
+            messagingSenderId: "761196645139",
+            appId: "1:761196645139:web:88191b29876feb404ae8e6",
+            measurementId: "G-KEE2KV93SK",
+          }
+        : {
+            apiKey: "AIzaSyBaVob5g3xHdzJnkOI2dtbdYND-__Tzutc",
+            authDomain: "whatsanalyze-wrapped-prod.firebaseapp.com",
+            projectId: "whatsanalyze-wrapped-prod",
+            storageBucket: "whatsanalyze-wrapped-prod.firebasestorage.app",
+            messagingSenderId: "1053765361889",
+            appId: "1:1053765361889:web:feb439fa8220fadf1157a0",
+            measurementId: "G-XJDRX60BNX",
+          },
     },
   },
 
