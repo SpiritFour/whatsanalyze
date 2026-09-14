@@ -1,4 +1,3 @@
-import { getAnalytics, isSupported } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import {
   addDoc,
@@ -19,7 +18,6 @@ export default defineNuxtPlugin(() => {
 
   let wrappedFirestore = firestore;
   let wrappedFunctions = functions;
-  let analytics;
 
   if (config.public.wrappedFirebase) {
     try {
@@ -32,18 +30,6 @@ export default defineNuxtPlugin(() => {
     } catch (e) {
       console.warn("Wrapped Firebase initialization:", e);
     }
-  }
-
-  if (process.client) {
-    isSupported().then((supported) => {
-      if (supported) {
-        try {
-          analytics = getAnalytics(app);
-        } catch (e) {
-          console.warn("Analytics initialization:", e);
-        }
-      }
-    });
   }
 
   if (config.public.firebase.functionsEmulatorPort) {
@@ -68,9 +54,6 @@ export default defineNuxtPlugin(() => {
       functions,
       wrappedFirestore,
       wrappedFunctions,
-      get analytics() {
-        return analytics;
-      },
     },
   };
 });

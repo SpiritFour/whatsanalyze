@@ -107,7 +107,6 @@ export default defineNuxtConfig({
         storageBucket: "whatsanalyze-80665.appspot.com",
         messagingSenderId: "116352567232",
         appId: "1:116352567232:web:b44bef99e5a4fc6c962a25",
-        measurementId: "G-H1WL9MXJ17",
         functionsEmulatorPort: runWithFunctions ? 5001 : null,
       },
       // Full subscription price. The reduced first month is a coupon applied
@@ -131,7 +130,6 @@ export default defineNuxtConfig({
             storageBucket: "whatsanalyze-wrapped.firebasestorage.app",
             messagingSenderId: "761196645139",
             appId: "1:761196645139:web:88191b29876feb404ae8e6",
-            measurementId: "G-KEE2KV93SK",
           }
         : {
             apiKey: "AIzaSyBaVob5g3xHdzJnkOI2dtbdYND-__Tzutc",
@@ -140,7 +138,6 @@ export default defineNuxtConfig({
             storageBucket: "whatsanalyze-wrapped-prod.firebasestorage.app",
             messagingSenderId: "1053765361889",
             appId: "1:1053765361889:web:feb439fa8220fadf1157a0",
-            measurementId: "G-XJDRX60BNX",
           },
     },
   },

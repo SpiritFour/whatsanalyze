@@ -53,6 +53,8 @@ import { onMounted, ref } from "vue";
 import { httpsCallable } from "firebase/functions";
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/vue/24/solid";
 import { useSubscriptionStore } from "~/stores/subscription";
+import { CATEGORY_WRAPPED, GTAG_PAYMENT, gtagEvent } from "~/utils/gtagValues";
+
 definePageMeta({
   layout: "wrapped",
 });
@@ -73,7 +75,6 @@ const result = ref<CheckoutSessionResult | null>(null);
 const error = ref("");
 const autoVerifying = ref(false);
 const subscriptionStore = useSubscriptionStore();
-const { trackSubscriptionCompleted } = useAnalytics();
 
 onMounted(() => {
   const sessionId = route.query.session_id as string;
@@ -90,7 +91,7 @@ const getCheckoutSessionData = async (sessionId: string) => {
     const getCheckoutSession = httpsCallable(functions, "getCheckoutSession");
     const res = await getCheckoutSession({ sessionId });
     result.value = res.data as CheckoutSessionResult;
-    trackSubscriptionCompleted("stripe");
+    gtagEvent("approved_stripe", GTAG_PAYMENT, 10, CATEGORY_WRAPPED);
 
     // Automatically verify into the Pinia store without requiring user click
     const subId = result.value?.subscription;

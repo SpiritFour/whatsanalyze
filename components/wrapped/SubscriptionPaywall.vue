@@ -62,8 +62,7 @@
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { fetchSubscriptionCheckoutUrl } from "~/utils/subscription";
-
-const { trackSubscriptionStarted } = useAnalytics();
+import { CATEGORY_WRAPPED, GTAG_PAYMENT, gtagEvent } from "~/utils/gtagValues";
 
 defineProps<{
   open: boolean;
@@ -86,7 +85,7 @@ const startSubscription = async () => {
   if (isStarting.value) return;
   checkoutError.value = "";
 
-  trackSubscriptionStarted("paywall");
+  gtagEvent("subscription_pressed_paywall", GTAG_PAYMENT, 1, CATEGORY_WRAPPED);
 
   try {
     isStarting.value = true;

@@ -37,13 +37,13 @@ import { useStatsStore } from "~/stores/wrapped/stats";
 import { useUserDataStore } from "~/stores/wrapped/userDataStore";
 import { parseShareInfo } from "~/utils/wrapped/sharing/param";
 import { useI18n } from "vue-i18n";
+import { CATEGORY_WRAPPED, GTAG_RESULTS, gtagEvent } from "~/utils/gtagValues";
 
 definePageMeta({
   layout: "wrapped",
 });
 
 const route = useRoute();
-const { trackResultsViewed } = useAnalytics();
 
 const statsStore = useStatsStore();
 const { result } = storeToRefs(statsStore);
@@ -115,7 +115,12 @@ watch(
 
 onMounted(() => {
   const isShared = !!buildSearchFromQuery();
-  trackResultsViewed(isShared);
+  gtagEvent(
+    isShared ? "viewed_shared" : "viewed",
+    GTAG_RESULTS,
+    1,
+    CATEGORY_WRAPPED
+  );
 });
 </script>
 

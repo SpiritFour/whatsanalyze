@@ -3,6 +3,11 @@ import { onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRoute, useRouter } from "vue-router";
 import { useSwitchLocalePath } from "#i18n";
+import {
+  CATEGORY_WRAPPED,
+  GTAG_INTERACTION,
+  gtagEvent,
+} from "~/utils/gtagValues";
 
 // 1) Strongly-typed locale codes
 const LOCALE_CODES = ["en", "de", "es", "pt", "fr", "it"] as const;
@@ -28,13 +33,12 @@ const { locale, setLocale } = useI18n();
 const router = useRouter();
 const route = useRoute();
 const switchLocalePath = useSwitchLocalePath();
-const { trackLanguageChanged } = useAnalytics();
 
 // 4) Selected is a ref<LocaleCode>
 const selected = ref<LocaleCode>(locale.value as LocaleCode);
 const isDesktop = ref(false);
 let mediaQuery: MediaQueryList | null = null;
-let mediaListener: ((event: MediaQueryListEvent) => void) | null = null;
+let mediaListener: MediaQueryList["onchange"] = null;
 
 onMounted(() => {
   if (
@@ -89,7 +93,12 @@ const navigateToLocale = async (code: LocaleCode) => {
     hash: route.hash || resolved.hash,
   });
 
-  trackLanguageChanged(fromLang, code);
+  gtagEvent(
+    `language_${fromLang}_to_${code}`,
+    GTAG_INTERACTION,
+    0,
+    CATEGORY_WRAPPED
+  );
 };
 
 const onChange = async (e: Event) => {
