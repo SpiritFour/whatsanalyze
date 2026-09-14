@@ -91,15 +91,28 @@ wrapped's transactional mail flows through it, upgrade it.
 
 ## Migration
 
-### Phase 0: capture what is not in git
+### Phase 0: capture what is not in git (done)
 
-Firestore security rules are console-only and exist in none of the three
-repositories. Export the rules for both projects, commit them as
-`firestore.rules`, and add a `firestore` block to `firebase.json`.
+Firestore security rules were console-only and existed in none of the three
+repositories. They now live in `firestore.rules`, wired through a `firestore`
+block in `firebase.json`.
 
-This is the one genuinely unrecoverable item, and the failure is quiet: without
-the `data` collection's public create and read grants, sharing breaks on cutover
-with no build-time or deploy-time error. Do it before anything else.
+Reading them back required the Firebase Rules API rather than the CLI, which has
+no equivalent of `firestore:rules:get`. User credentials need a quota project on
+that API, so the call carries an `x-goog-user-project` header:
+
+```bash
+T=$(gcloud auth print-access-token)
+curl -s -H "Authorization: Bearer $T" -H "x-goog-user-project: $PROJECT" \
+  "https://firebaserules.googleapis.com/v1/projects/$PROJECT/releases"
+# then fetch the rulesetName the cloud.firestore release points at
+```
+
+What came back was open at the wildcard in both projects, so the committed rules
+are not a copy of production — see the commit that added them. They have not
+been deployed; deploy them to `dev` and exercise upload, share, open-link and
+the feedback form before promoting, because a mistake here locks real users out
+of sharing rather than failing loudly.
 
 ### Phase 1: repoint code at the main project
 
@@ -149,6 +162,11 @@ gcloud firestore export gs://<eur3-bucket>/wrapped-$(date +%F) \
 gcloud firestore import gs://<eur3-bucket>/wrapped-<date> \
   --project whatsanalyze-80665
 ```
+
+`gcloud` comes from the flake. These two commands authenticate with the user
+credential from `gcloud auth login`, so they do not need application-default
+credentials — only `scripts/initializeTemplates.ts` does, because it goes
+through `firebase-admin`.
 
 Writes to `data` after the snapshot are lost, so either freeze writes for the
 duration or re-run a delta export at cutover.
