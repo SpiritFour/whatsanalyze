@@ -1,54 +1,18 @@
 <template>
   <div>
-    <SubscriptionChecker
-      :id="subscription.id"
-      :email="subscription.email"
-      @isValid="subscription.isValid = true"
-      @isInvalid="subscription.isValid = false"
-    />
+    <v-container v-if="oneTimePaymentError || showReuploadHint" class="pb-0">
+      <v-alert v-if="oneTimePaymentError" density="compact" type="warning">
+        We could not confirm your payment. If you were charged, please contact
+        us and we will sort it out.
+      </v-alert>
+      <v-alert v-else density="compact" type="success">
+        Your full chat PDF is paid for. Upload the chat again to download it —
+        it never left your device, so we cannot restore it for you.
+      </v-alert>
+    </v-container>
 
-    <div v-show="!isShowingChats" ref="aboveTheFold" class="top-color">
+    <div ref="aboveTheFold" class="top-color">
       <v-container>
-        <v-alert
-          prominent
-          dark
-          class="mb-6 elevation-3 wrapped-banner"
-          style="border-radius: 12px; overflow: hidden; border: none"
-        >
-          <template #prepend>
-            <v-icon large class="mr-4">mdi-party-popper</v-icon>
-          </template>
-
-          <v-row align="center" no-gutters>
-            <v-col cols="12" md="8" lg="9">
-              <div class="text-h6 text-sm-h5 font-weight-bold text-white mb-1">
-                WHATSAPP WRAPPED 2026 IS HERE!
-              </div>
-              <div class="text-subtitle-1 text-white" style="line-height: 1.4">
-                Your chat, told like a story. See your most active hours,
-                funniest exchanges, and emotional peaks.
-                <strong>100% Private.</strong>
-              </div>
-            </v-col>
-            <v-col
-              cols="12"
-              md="4"
-              lg="3"
-              class="text-center text-md-right mt-4 mt-md-0"
-            >
-              <v-btn
-                color="white"
-                x-large
-                class="font-weight-bold px-8"
-                rounded
-                :href="`https://wrapped.whatsanalyze.com/${locale}`"
-              >
-                See Your Story
-                <v-icon right>mdi-arrow-right</v-icon>
-              </v-btn>
-            </v-col>
-          </v-row>
-        </v-alert>
         <v-row
           v-if="$vuetify.display.mdAndUp"
           :style="isShowingChats ? 'height: fit-content' : 'min-height: 70vh;'"
@@ -65,7 +29,7 @@
               class="center-content"
             >
               <HeaderCta />
-              <div v-if="subscription.isValid" class="mt-6" style="width: 100%">
+              <div v-if="isSubscriptionValid" class="mt-6" style="width: 100%">
                 <v-alert density="compact" type="info" prominent>
                   Thanks for supporting us. You can download unlimited PDF's for
                   free.
@@ -98,7 +62,7 @@
           <v-col class="px-0 pb-1 my-auto" cols="12">
             <HeaderCta />
 
-            <div v-if="subscription.isValid" class="mt-6" style="width: 100%">
+            <div v-if="isSubscriptionValid" class="mt-6" style="width: 100%">
               <v-alert density="compact" type="info" prominent>
                 Thanks for supporting us. You can download unlimited PDF's for
                 free.
@@ -121,6 +85,46 @@
             <ChartsExampleGraphs :chat_="chat" />
           </v-col>
         </v-row>
+        <v-alert
+          prominent
+          dark
+          class="mt-6 elevation-3 wrapped-banner"
+          style="border-radius: 12px; overflow: hidden; border: none"
+        >
+          <template #prepend>
+            <v-icon large class="mr-4">mdi-party-popper</v-icon>
+          </template>
+
+          <v-row align="center" no-gutters>
+            <v-col cols="12" md="8" lg="9">
+              <div class="text-h6 text-sm-h5 font-weight-bold text-white mb-1">
+                WHATSAPP WRAPPED 2026 IS HERE!
+              </div>
+              <div class="text-subtitle-1 text-white" style="line-height: 1.4">
+                Your chat, told like a story. See your most active hours,
+                funniest exchanges, and emotional peaks.
+                <strong>100% Private.</strong>
+              </div>
+            </v-col>
+            <v-col
+              cols="12"
+              md="4"
+              lg="3"
+              class="text-center text-md-right mt-4 mt-md-0"
+            >
+              <v-btn
+                color="white"
+                x-large
+                class="font-weight-bold px-8"
+                rounded
+                :to="localePath('/wrapped')"
+              >
+                See Your Story
+                <v-icon right>mdi-arrow-right</v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-alert>
       </v-container>
     </div>
 
@@ -139,55 +143,39 @@
       />
     </v-container>
 
-    <div v-if="isShowingChats" class="active-chat-bar py-3">
-      <v-container
-        class="d-flex align-center justify-space-between flex-wrap gap-2"
-      >
-        <div class="d-flex align-center">
-          <v-icon color="#21a68d" class="mr-2">mdi-check-decagram</v-icon>
-          <span class="font-weight-bold text-subtitle-1">
-            {{ activeChatSummary }}
-          </span>
-        </div>
-        <v-btn
-          variant="outlined"
-          color="#21a68d"
-          size="small"
-          class="font-weight-bold"
-          style="text-transform: none"
-          @click="resetChat"
-        >
-          <v-icon size="16" class="mr-1">mdi-swap-horizontal</v-icon>
-          {{ $t("fileAnother") || "Analyze Another Chat" }}
-        </v-btn>
-      </v-container>
-    </div>
-
     <v-container v-if="isShowingChats" id="results" class="py-4">
       <ChartsResults
         ref="results"
         :attachments="attachments"
         :chat="chat"
-        :is-valid-subscription="subscription.isValid"
+        :is-valid-subscription="isSubscriptionValid"
       />
     </v-container>
   </div>
 </template>
 
 <script>
+import { httpsCallable } from "firebase/functions";
 import { Chat } from "~/utils/transformChatData";
 import {
   GTAG_INTERACTION,
   GTAG_LEAD,
   GTAG_NUM_PERSONS,
+  GTAG_PAYMENT,
   gtagEvent,
 } from "~/utils/gtagValues";
 import { debounce } from "lodash-es";
-import SubscriptionChecker from "~/components/SubscriptionChecker.vue";
-import { getSubscriptionParams } from "~/utils/subscription";
+import { useSubscriptionStore } from "~/stores/subscription";
+import { storeToRefs } from "pinia";
+import {
+  saveChatSession,
+  loadChatSession,
+  clearChatSession,
+} from "~/utils/chatSession";
+import { chatFingerprint } from "~/utils/chatFingerprint";
+import { scrollToSettled } from "~/utils/scroll";
 
 export default {
-  components: { SubscriptionChecker },
   async setup() {
     useSeoMeta({
       title: "WhatsAnalyze - The WhatsApp Chat Analyzer",
@@ -201,12 +189,17 @@ export default {
     });
 
     const { locale } = useI18n();
+    const localePath = useLocalePath();
     const { data: page } = await useAsyncData("content-home", () =>
       queryCollection("pages").path("/home").first()
     );
     return {
       locale,
+      localePath,
       page,
+      isSubscriptionValid: storeToRefs(useSubscriptionStore())
+        .isSubscriptionValid,
+      oneTimePurchase: useOneTimePurchase(),
     };
   },
   data() {
@@ -215,20 +208,18 @@ export default {
       chat: undefined,
       attachments: undefined,
       loading: false,
-      subscription: {
-        id: null,
-        email: null,
-        isValid: null,
-      },
+      oneTimePaymentError: false,
     };
   },
   computed: {
-    activeChatSummary() {
-      if (!this.chat) return "WhatsApp Chat Analysis";
-      const count = this.chat.filterdChatObject
-        ? this.chat.filterdChatObject.length
-        : 0;
-      return `Complete Analysis (${count.toLocaleString()} messages)`;
+    showReuploadHint() {
+      // Paid for the full PDF, but the chat it was bought for is not the one
+      // on screen: it is gone (tab closed, too large to keep in
+      // sessionStorage) or a different chat was uploaded since.
+      return (
+        Boolean(this.oneTimePurchase) &&
+        !unlocksChat(this.oneTimePurchase, chatFingerprint(toRaw(this.chat)))
+      );
     },
   },
   created() {
@@ -242,10 +233,6 @@ export default {
   mounted() {
     this.handleDebouncedScroll = debounce(this.handleScroll, 0);
     window.addEventListener("scroll", this.handleDebouncedScroll);
-
-    const { email, id } = getSubscriptionParams();
-    this.subscription.id = id;
-    this.subscription.email = email;
 
     const sharedChat = useSharedChat();
     if (
@@ -261,6 +248,33 @@ export default {
       this.$nextTick(() => {
         window.scrollTo({ top: 0, behavior: "instant" });
       });
+    } else {
+      const savedSession = loadChatSession();
+      if (savedSession && savedSession.messages?.length > 0) {
+        try {
+          this.isShowingChats = true;
+          this.newMessages({
+            messages: savedSession.messages,
+            attachments: savedSession.attachments || [],
+          });
+        } catch (err) {
+          // A chat we cannot rebuild must not take the whole page down with
+          // it — drop it and show the upload form instead.
+          console.error("Could not restore the previous chat:", err);
+          clearChatSession();
+          this.isShowingChats = false;
+          this.chat = undefined;
+        }
+      }
+    }
+
+    useOneTimePurchase().value = restoreOneTimePurchase();
+    this.confirmOneTimePayment();
+
+    // Arriving from "Open Chat Analyzer" on the subscribe page: they came for
+    // their download, so take them to it rather than to the hero.
+    if (this.$route.hash === "#payButton" && this.isShowingChats) {
+      this.$nextTick(() => scrollToSettled("#payButton", { offset: 100 }));
     }
   },
   beforeUnmount() {
@@ -268,6 +282,51 @@ export default {
   },
   methods: {
     Chat,
+    /**
+     * Stripe sends the buyer back here after a one-time PDF payment. Confirm
+     * the session really was paid, then unlock the full PDF and let it
+     * download on its own — the buyer already clicked "buy", asking them to
+     * find the button again is not a delivery.
+     */
+    async confirmOneTimePayment() {
+      const {
+        payment_success: paymentSuccess,
+        session_id: sessionId,
+      } = this.$route.query;
+
+      if (paymentSuccess !== "true" || !sessionId) return;
+
+      // Never leave the ids in the URL: a reload or a shared link would
+      // re-run this, and the session id is the proof of payment.
+      const query = { ...this.$route.query };
+      delete query.payment_success;
+      delete query.session_id;
+      this.$router.replace({ query });
+
+      try {
+        const functions = this.$wrappedFunctions || this.$functions;
+        const getCheckoutSession = httpsCallable(
+          functions,
+          "getCheckoutSession"
+        );
+        const res = await getCheckoutSession({ sessionId });
+        const session = res.data;
+
+        if (session?.payment_status !== "paid") {
+          console.warn(
+            "Checkout session is not paid:",
+            session?.payment_status
+          );
+          return;
+        }
+
+        gtagEvent("approved", GTAG_PAYMENT, 10);
+        useOneTimePurchase().value = persistOneTimePurchase(sessionId);
+      } catch (err) {
+        console.error("Could not confirm the one-time payment:", err);
+        this.oneTimePaymentError = true;
+      }
+    },
     newMessages(chatObject) {
       // we only update with default chat object if chat_ is undefined
       if (!chatObject.default || this.chat === undefined) {
@@ -283,6 +342,7 @@ export default {
           GTAG_NUM_PERSONS,
           0
         );
+        saveChatSession(chatObject);
       }
     },
     rando() {
@@ -292,13 +352,6 @@ export default {
       if (this.$refs.aboveTheFold) {
         this.$refs.aboveTheFold.scrollTop = window.scrollY;
       }
-    },
-    resetChat() {
-      this.isShowingChats = false;
-      this.chat = undefined;
-      this.attachments = undefined;
-      const sharedChat = useSharedChat();
-      sharedChat.value = null;
     },
   },
 };

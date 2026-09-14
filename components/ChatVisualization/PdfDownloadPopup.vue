@@ -27,7 +27,7 @@
       <v-dialog v-model="showDownloadPopup" width="550">
         <template #activator="{ props: activatorProps }">
           <v-btn
-            v-if="isValidSubscription"
+            v-if="hasFullAccess"
             color="success"
             v-bind="activatorProps"
             @click="downloadFull"
@@ -66,22 +66,27 @@
           <!-- Download or Payment -->
           <v-row align="center" class="py-6 ma-0" cols="12" justify="center">
             <!-- Download button if subscribed -->
-            <v-btn v-if="isValidSubscription" @click="downloadFull">
+            <v-btn v-if="hasFullAccess" @click="downloadFull">
               <span v-html="$t('downloadNow')"></span>
             </v-btn>
 
-            <!-- Payment section if not subscribed -->
-            <div v-else>
-              <ChatVisualizationPayment
-                :amount="price"
-                :currency="currency"
-                @onApprove="onApprove"
-                @onCreateOrder="onCreateOrder"
-                @onError="onError"
-              />
+            <!-- Payment section if the full PDF is not unlocked yet -->
+            <div v-else class="text-center">
+              <v-btn
+                color="success"
+                size="large"
+                class="mb-3"
+                :loading="isOneTimeLoading"
+                @click="payOneTimeStripe"
+              >
+                <v-icon class="mr-1">mdi-credit-card</v-icon>
+                <span
+                  >{{ $t("chooseOneTime") }} ({{ price }} {{ currency }})</span
+                >
+              </v-btn>
               <v-alert density="compact" type="info" prominent>
                 <span v-html="$t('subscriptionHint')"></span>
-                <v-btn to="/subscribe">
+                <v-btn to="/subscribe" class="ml-2" variant="tonal">
                   <span v-html="$t('openSubscriptionPage')"></span>
                 </v-btn>
               </v-alert>
@@ -106,7 +111,7 @@
     </v-row>
 
     <!-- Pricing Section -->
-    <div v-if="!isValidSubscription" class="pricing-section mt-10">
+    <div v-if="!hasFullAccess" class="pricing-section mt-10">
       <div class="text-h2 font-weight-bold pb-5">
         {{ $t("pricingTitle") }}
       </div>
@@ -115,7 +120,7 @@
         <!-- Free Tier -->
         <v-col cols="12" sm="4">
           <div class="pricing-card text-center py-5 px-4">
-            <div class="text-h3 font-weight-bold title">
+            <div class="text-h4 text-lg-h3 font-weight-bold title">
               {{ $t("freeTierTitle") }}
             </div>
             <div class="text-body-1 py-3 subtitle">
@@ -139,7 +144,7 @@
         <!-- One-Time Payment -->
         <v-col cols="12" sm="4">
           <div class="pricing-card text-center py-5 px-4">
-            <div class="text-h3 font-weight-bold title">
+            <div class="text-h4 text-lg-h3 font-weight-bold title">
               {{ $t("oneTimeTitle") }}
             </div>
             <div class="text-body-1 py-3 subtitle">
@@ -176,7 +181,7 @@
         <!-- Monthly Subscription -->
         <v-col cols="12" sm="4">
           <div class="pricing-card text-center py-5 px-4">
-            <div class="text-h3 font-weight-bold title">
+            <div class="text-h4 text-lg-h3 font-weight-bold title">
               {{ $t("subscriptionTitle") }}
             </div>
             <div class="text-body-1 py-3 subtitle">
@@ -185,16 +190,14 @@
             <SubscribeBtn> </SubscribeBtn>
             <div class="price-description">
               <v-row align="center" justify="center">
-                <b style="color: green">{{ price - 3 + " " + currency }}</b>
-                <span
-                  class="px-1 ml-2"
-                  style="color: white; background: red; border-radius: 5px"
-                >
-                  -80%
-                </span>
+                <b style="color: green">{{
+                  $t("subscriptionPriceFirstMonth")
+                }}</b>
               </v-row>
               <v-row align="center" justify="center">
-                <s style="color: grey">{{ 24.95 + " " + currency }}</s>
+                <span style="color: grey"
+                  >{{ $t("then") }} {{ $t("subscriptionPriceAfter") }}</span
+                >
               </v-row>
             </div>
           </div>
@@ -206,8 +209,11 @@
 
 <script>
 import { saveAs } from "file-saver";
-import { markRaw } from "vue";
+import { markRaw, toRaw } from "vue";
 import { GTAG_PAYMENT, GTAG_PDF, gtagEvent } from "~/utils/gtagValues";
+import { fetchOneTimeCheckoutUrl } from "~/utils/subscription";
+import { chatFingerprint } from "~/utils/chatFingerprint";
+import { scrollToSettled } from "~/utils/scroll";
 import PDFWorker from "~/assets/js/pdf.worker.js?worker";
 import { loadImage, objectToDictionary } from "~/utils/utils";
 
@@ -220,20 +226,71 @@ export default {
     ego: { type: String, required: true },
     isValidSubscription: { type: Boolean, default: false },
   },
+  setup() {
+    return { oneTimePurchase: useOneTimePurchase() };
+  },
   data() {
     return {
       showDownloadPopup: false,
       isLoading: false,
+      isOneTimeLoading: false,
       GTAG_PAYMENT,
       GTAG_PDF,
       progress: 0,
       pdfWorker: null,
     };
   },
+  computed: {
+    /** Identifies the chat on screen, to tie a single payment to it. */
+    currentChatFingerprint() {
+      // toRaw: reading every message through the reactive proxy would make
+      // this depend on each one of them, and the chat's lazy getters mutate
+      // themselves — the fingerprint would be recomputed over the whole chat
+      // again and again while the PDF is being built.
+      return chatFingerprint(toRaw(this.chat));
+    },
+    /** Unlocked by a subscription or by a single payment for this chat. */
+    hasFullAccess() {
+      return (
+        this.isValidSubscription ||
+        unlocksChat(this.oneTimePurchase, this.currentChatFingerprint)
+      );
+    },
+  },
+  watch: {
+    oneTimePurchase() {
+      this.downloadPurchasedPdf();
+    },
+    // The buyer was told to upload the paid chat again — deliver it the moment
+    // they do, without making them hunt for the button.
+    currentChatFingerprint() {
+      this.downloadPurchasedPdf();
+    },
+  },
+  mounted() {
+    this.downloadPurchasedPdf();
+  },
   beforeUnmount() {
     this.closePdfWorker();
   },
   methods: {
+    /**
+     * Start the download the buyer just paid for. The flag is cleared first so
+     * that later navigations within the session do not download it again.
+     */
+    downloadPurchasedPdf() {
+      const purchase = useOneTimePurchase();
+      if (!purchase.value?.pendingDownload) return;
+      // Only deliver into the chat that was paid for. If a different one is on
+      // screen the purchase stays pending until that chat is uploaded again.
+      if (!unlocksChat(purchase.value, this.currentChatFingerprint)) return;
+
+      purchase.value = { ...purchase.value, pendingDownload: false };
+      // Stripe drops the buyer back at the top of a long page. Bring them down
+      // to the download section, where the PDF they paid for is being built.
+      this.$nextTick(() => scrollToSettled("#payButton", { offset: 100 }));
+      this.$nextTick(() => this.downloadFull());
+    },
     handleFreePdfClick() {
       this.downloadSample();
       this.gtagEvent("free_pdf_pressed", GTAG_PAYMENT);
@@ -243,14 +300,24 @@ export default {
       this.download(false);
       this.showDownloadPopup = false;
     },
-    onCreateOrder() {
+    async payOneTimeStripe() {
+      if (this.isOneTimeLoading) return;
       gtagEvent("created", GTAG_PAYMENT, 0);
+      this.isOneTimeLoading = true;
+      try {
+        rememberOneTimeCheckoutChat(this.currentChatFingerprint);
+        const url = await fetchOneTimeCheckoutUrl({
+          successUrl: `${window.location.origin}/?session_id={CHECKOUT_SESSION_ID}&payment_success=true`,
+          cancelUrl: window.location.href,
+        });
+        if (!url) throw new Error("No checkout URL returned");
+        window.location.assign(url);
+      } catch (err) {
+        console.error("Error creating one-time Stripe checkout:", err);
+        alert("Failed to start checkout. Please try again.");
+        this.isOneTimeLoading = false;
+      }
     },
-    onApprove() {
-      gtagEvent("approved", GTAG_PAYMENT, 10);
-      this.downloadFull();
-    },
-    onError() {},
     async download(isSample = false) {
       if (!import.meta.client) return;
 
@@ -340,8 +407,20 @@ export default {
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  max-height: 400px; /* Adjust height as needed */
   min-height: 350px; /* Ensures equal card height */
+}
+
+/* Long labels used to run past the button and the card edge. */
+.pricing-card :deep(.v-btn) {
+  max-width: 100%;
+  height: auto;
+  min-height: 40px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.pricing-card :deep(.v-btn__content) {
+  white-space: normal;
 }
 
 .price-description {
@@ -359,5 +438,7 @@ export default {
   display: flex;
   align-items: center;
   text-align: center;
+  /* "Subscription" is one word and wider than the card on its own. */
+  overflow-wrap: anywhere;
 }
 </style>

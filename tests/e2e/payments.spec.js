@@ -1,0 +1,192 @@
+/**
+ * Paying for the full chat PDF, and what that payment does and does not
+ * unlock. Everything Stripe is stubbed: no test leaves the machine, and the
+ * assertions are about what the client asks to be charged and what it hands
+ * over afterwards.
+ */
+const {
+  STRIPE_CHECKOUT,
+  analyzeChat,
+  expect,
+  otherChatFile,
+  paidSession,
+  stubCallable,
+  stubStripeCheckout,
+  test,
+} = require("./fixtures");
+
+/** Walk through the paywall the way a buyer does, up to leaving for Stripe. */
+const startOneTimeCheckout = async (page) => {
+  await page
+    .getByRole("button", { name: "Download full chat PDF" })
+    .first()
+    .click();
+  await page.getByRole("button", { name: "Buy Now" }).click();
+  await page.waitForURL("https://checkout.stripe.test/**");
+};
+
+/** Come back from Stripe the way a buyer does, with the session in the URL. */
+const returnFromCheckout = (page, sessionId) =>
+  page.goto(`/?session_id=${sessionId}&payment_success=true`);
+
+/**
+ * The full PDF has to be out of reach: no download button anywhere, and the
+ * paywall offering to buy instead. Checking only that the pricing table is
+ * back would pass while a download button sat right next to it.
+ */
+const expectPaywall = async (page) => {
+  await expect(page.getByText("Choose Your Plan")).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: /^Download now$/i })
+  ).toHaveCount(0);
+
+  await page
+    .getByRole("button", { name: /Download full chat PDF/i })
+    .first()
+    .click();
+  await expect(page.getByRole("button", { name: /Buy Now/i })).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: /^Download now$/i })
+  ).toHaveCount(0);
+};
+
+test.describe("buying the full PDF once", () => {
+  test("asks Stripe to charge the one-time price for the chat on screen", async ({
+    page,
+  }) => {
+    const checkout = await stubStripeCheckout(page);
+
+    await page.goto("/");
+    await analyzeChat(page);
+
+    await page
+      .getByRole("button", { name: /Download full chat PDF/i })
+      .first()
+      .click();
+    await expect(page.getByText("Nice!!", { exact: true })).toBeVisible();
+    await page.getByRole("button", { name: /Buy Now \(7\.99 EUR\)/i }).click();
+
+    await expect(page).toHaveURL(STRIPE_CHECKOUT);
+    const payload = checkout[0].postDataJSON().data;
+    expect(payload.mode).toBe("payment");
+    expect(payload.priceId).toBeTruthy();
+  });
+
+  test("delivers the full PDF on the way back from a paid checkout", async ({
+    page,
+  }) => {
+    await stubCallable(page, "getCheckoutSession", paidSession);
+    await stubStripeCheckout(page);
+
+    // Analyze a chat first: that is what the one-time payment buys, and it has
+    // to survive the redirect to Stripe and back.
+    await page.goto("/");
+    await analyzeChat(page);
+    await startOneTimeCheckout(page);
+
+    const downloadPromise = page.waitForEvent("download");
+    await returnFromCheckout(page, "cs_test_paid");
+
+    const download = await downloadPromise;
+    expect(download.suggestedFilename()).toMatch(/\.pdf$/i);
+
+    // Stripe drops the buyer at the top of a long page — they should be looking
+    // at the download section they paid for, not at the hero.
+    await expect(page.locator("#payButton")).toBeInViewport();
+
+    // The proof of payment must not stay in the URL, where a reload or a shared
+    // link would replay it.
+    await expect(page).toHaveURL(/\/$/);
+
+    // The full PDF stays unlocked for the session instead of showing the
+    // pricing table again.
+    await expect(page.getByText("Choose Your Plan")).toHaveCount(0);
+  });
+
+  test("locks the full PDF again when a different chat is uploaded", async ({
+    page,
+  }) => {
+    await stubCallable(page, "getCheckoutSession", paidSession);
+    await stubStripeCheckout(page);
+
+    await page.goto("/");
+    await analyzeChat(page);
+    // Buy through the paywall, so the purchase is tied to the chat on screen.
+    await startOneTimeCheckout(page);
+
+    const downloadPromise = page.waitForEvent("download");
+    await returnFromCheckout(page, "cs_test_paid");
+    await downloadPromise;
+
+    // A single payment buys the PDF of one chat. The next upload is a new chat,
+    // and has to be paid for.
+    await analyzeChat(page, otherChatFile());
+    await expectPaywall(page);
+    await expect(
+      page.getByText("Your full chat PDF is paid for")
+    ).toBeVisible();
+  });
+
+  test("keeps the paywall closed for a purchase that names no chat", async ({
+    page,
+  }) => {
+    // What a browser is left with after paying on a build that did not record
+    // the chat yet. It must not unlock whatever chat is opened next.
+    await page.addInitScript(() => {
+      sessionStorage.setItem(
+        "whatsanalyze_one_time_purchase",
+        JSON.stringify({ sessionId: "cs_test_without_chat" })
+      );
+    });
+
+    await page.goto("/");
+    await analyzeChat(page);
+
+    await expectPaywall(page);
+  });
+
+  test("keeps the paywall closed when the checkout session was not paid", async ({
+    page,
+  }) => {
+    await stubCallable(page, "getCheckoutSession", {
+      ...paidSession,
+      payment_status: "unpaid",
+    });
+
+    await page.goto("/");
+    await analyzeChat(page);
+    await returnFromCheckout(page, "cs_test_unpaid");
+
+    await expectPaywall(page);
+  });
+});
+
+test.describe("starting a subscription", () => {
+  test("charges the full subscription price from /wrapped", async ({
+    page,
+  }) => {
+    const checkout = await stubStripeCheckout(page);
+
+    await page.goto("/wrapped");
+    await page.getByRole("button", { name: /upgrade to pro/i }).click();
+
+    await expect(page).toHaveURL(/^https:\/\/checkout\.stripe\.test\//);
+    // The reduced first month is a server-side coupon on the full price, so
+    // the client must ask for the full subscription price, never a cheaper one.
+    const payload = checkout[0].postDataJSON().data;
+    expect(payload.mode).toBe("subscription");
+    expect(payload.priceId).toBe("price_1Sc6u074KJ57kF2wxb5cnIZL");
+  });
+
+  test("sends a subscriber from /subscribe to Stripe checkout", async ({
+    page,
+  }) => {
+    const checkout = await stubStripeCheckout(page);
+
+    await page.goto("/subscribe");
+    await page.getByRole("button", { name: "Subscribe Now" }).click();
+
+    await expect(page).toHaveURL(STRIPE_CHECKOUT);
+    expect(checkout).toHaveLength(1);
+  });
+});

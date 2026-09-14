@@ -36,6 +36,8 @@ const expectedFiles = [
   "de/impressum/index.html",
   "de/subscribe/index.html",
   "de/whatsapp-wrapped-year-review/index.html",
+  "wrapped/index.html",
+  "wrapped/results/index.html",
 ];
 
 for (const relativePath of expectedFiles) {

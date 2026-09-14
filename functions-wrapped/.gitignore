@@ -1,0 +1,19 @@
+# Compiled JavaScript files
+lib/**/*.js
+lib/**/*.js.map
+
+# TypeScript v1 declaration files
+typings/
+
+# Node.js dependency directory
+node_modules/
+
+# Environment files
+*.local
+.env
+.env.*
+!.env.example
+!.env.dev
+!.env.prod
+!.env.whatsanalyze-wrapped
+!.env.whatsanalyze-wrapped-prod

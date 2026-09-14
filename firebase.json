@@ -15,6 +15,18 @@
         "*.local"
       ],
       "runtime": "nodejs22"
+    },
+    {
+      "source": "functions-wrapped",
+      "codebase": "wrapped",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ],
+      "runtime": "nodejs22"
     }
   ],
   "emulators": {
