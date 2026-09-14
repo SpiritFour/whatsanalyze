@@ -31,7 +31,7 @@ export const fetchSubscriptionCheckoutUrl = async (options?: {
   cancelUrl?: string;
 }): Promise<string | undefined> => {
   const nuxtApp = useNuxtApp();
-  const functions = (nuxtApp.$wrappedFunctions || nuxtApp.$functions) as any;
+  const functions = nuxtApp.$functions as any;
   const createCheckoutSession = httpsCallable(
     functions,
     "createCheckoutSession"

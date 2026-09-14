@@ -18,6 +18,9 @@
             pkgs.nodejs_22
             pnpm
             pkgs.firebase-tools
+            # Firestore export/import and application-default credentials, which
+            # the Firebase CLI does not cover.
+            pkgs.google-cloud-sdk
             pkgs.python311
             pkgs.git
           ];

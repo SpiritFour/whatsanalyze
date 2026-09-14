@@ -17,22 +17,7 @@ export default defineNuxtPlugin(() => {
   const firestore = getFirestore(app);
   const functions = getFunctions(app);
 
-  let wrappedFirestore = firestore;
-  let wrappedFunctions = functions;
   let analytics;
-
-  if (config.public.wrappedFirebase) {
-    try {
-      const wrappedApp = initializeApp(
-        config.public.wrappedFirebase,
-        "wrapped"
-      );
-      wrappedFirestore = getFirestore(wrappedApp);
-      wrappedFunctions = getFunctions(wrappedApp);
-    } catch (e) {
-      console.warn("Wrapped Firebase initialization:", e);
-    }
-  }
 
   if (process.client) {
     isSupported().then((supported) => {
@@ -66,8 +51,6 @@ export default defineNuxtPlugin(() => {
       },
       firestore,
       functions,
-      wrappedFirestore,
-      wrappedFunctions,
       get analytics() {
         return analytics;
       },

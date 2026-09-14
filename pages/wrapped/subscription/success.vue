@@ -86,7 +86,7 @@ const getCheckoutSessionData = async (sessionId: string) => {
   loading.value = true;
   try {
     const nuxtApp = useNuxtApp();
-    const functions = (nuxtApp.$wrappedFunctions || nuxtApp.$functions) as any;
+    const functions = nuxtApp.$functions as any;
     const getCheckoutSession = httpsCallable(functions, "getCheckoutSession");
     const res = await getCheckoutSession({ sessionId });
     result.value = res.data as CheckoutSessionResult;
