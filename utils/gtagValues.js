@@ -1,4 +1,5 @@
 export const CATEGORY_HOME = "home";
+export const CATEGORY_WRAPPED = "wrapped";
 
 export const GTAG_FILE = "file";
 export const GTAG_RESULTS = "results";
@@ -9,13 +10,18 @@ export const GTAG_LEAD = "lead";
 export const GTAG_INTERACTION = "interaction";
 export const GTAG_NUM_PERSONS = "num_persons";
 
-export function gtagEvent(action, label, value = "1") {
+export function gtagEvent(
+  action,
+  label,
+  value = "1",
+  category = CATEGORY_HOME
+) {
   if (typeof window === "undefined") return;
 
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
     event: label + "_" + action,
-    event_category: CATEGORY_HOME,
+    event_category: category,
     event_label: label,
     value: String(value),
   });

@@ -56,12 +56,13 @@ import { sendFile } from "~/assets/wrapped/workers";
 import { useStatsStore } from "~/stores/wrapped/stats";
 import { useSubscriptionStore } from "~/stores/subscription";
 import { useUploadAccessStore } from "~/stores/wrapped/uploadAccessStore";
+import {
+  CATEGORY_WRAPPED,
+  GTAG_FILE,
+  GTAG_PAYMENT,
+  gtagEvent,
+} from "~/utils/gtagValues";
 
-const {
-  trackFileUpload,
-  trackAnalysisComplete,
-  trackPaywallShown,
-} = useAnalytics();
 const localePath = useLocalePath();
 
 const statsStore = useStatsStore();
@@ -86,13 +87,13 @@ const handleFile = async (e: Event): Promise<void> => {
 
   if (!hasFreeUploadRemaining.value && !isSubscriptionValid.value) {
     showPaywall.value = true;
-    trackPaywallShown();
+    gtagEvent("paywall_shown", GTAG_PAYMENT, 0, CATEGORY_WRAPPED);
     input.value = "";
     return;
   }
 
   const fileType = file.name.endsWith(".zip") ? "zip" : "txt";
-  trackFileUpload(fileType);
+  gtagEvent(`upload_${fileType}`, GTAG_FILE, 1, CATEGORY_WRAPPED);
 
   statsStore.$reset();
   isLoading.value = true;
@@ -101,7 +102,12 @@ const handleFile = async (e: Event): Promise<void> => {
     result.value = (await sendFile(file)) ?? undefined;
 
     if (result.value) {
-      trackAnalysisComplete(result.value.getWordUsage.totalMessagesCount ?? 0);
+      gtagEvent(
+        "parsed",
+        GTAG_FILE,
+        result.value.getWordUsage.totalMessagesCount ?? 0,
+        CATEGORY_WRAPPED
+      );
     }
 
     if (hasFreeUploadRemaining.value) {

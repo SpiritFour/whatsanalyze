@@ -41,8 +41,7 @@ import {
   useSlots,
   watch,
 } from "vue";
-
-const { trackStorySlideViewed } = useAnalytics();
+import { CATEGORY_WRAPPED, GTAG_RESULTS, gtagEvent } from "~/utils/gtagValues";
 
 const props = defineProps({
   duration: {
@@ -163,14 +162,16 @@ const slideNames = [
   "ShareInvite",
 ];
 
-watch(activeIndex, (newIndex) => {
-  const slideName = slideNames[newIndex] || `Slide${newIndex}`;
-  trackStorySlideViewed(newIndex, slideName);
-});
+function trackSlide(index: number) {
+  const slideName = slideNames[index] || `Slide${index}`;
+  gtagEvent(`story_${slideName}`, GTAG_RESULTS, index, CATEGORY_WRAPPED);
+}
+
+watch(activeIndex, trackSlide);
 
 onMounted(() => {
   startLoop();
-  trackStorySlideViewed(0, slideNames[0]);
+  trackSlide(0);
 });
 onBeforeUnmount(stopLoop);
 </script>

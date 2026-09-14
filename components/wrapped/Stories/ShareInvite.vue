@@ -47,16 +47,15 @@
 import { computed, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useI18n } from "vue-i18n";
-import SoftOrbs from "~/components/wrapped/Style/SoftOrbs.vue";
 import { useStatsStore } from "~/stores/wrapped/stats";
 import { useUserDataStore } from "~/stores/wrapped/userDataStore";
 import { serializeShareInfo } from "~/utils/wrapped/sharing/param";
+import { CATEGORY_WRAPPED, GTAG_RESULTS, gtagEvent } from "~/utils/gtagValues";
 
 const statsStore = useStatsStore();
 const userDataStore = useUserDataStore();
 const { result } = storeToRefs(statsStore);
 const { t } = useI18n();
-const { trackShareCreated } = useAnalytics();
 const localePath = useLocalePath();
 
 const runtimeConfig = useRuntimeConfig();
@@ -154,11 +153,11 @@ const handleShare = async () => {
         url,
       });
       shareMessageKey.value = "results.share.messages.nativeShare";
-      trackShareCreated("native");
+      gtagEvent("share_native", GTAG_RESULTS, 2, CATEGORY_WRAPPED);
     } else {
       await copyToClipboard(url);
       shareMessageKey.value = "results.share.messages.linkCopied";
-      trackShareCreated("copy");
+      gtagEvent("share_copy", GTAG_RESULTS, 2, CATEGORY_WRAPPED);
     }
   } catch (error) {
     console.error("Failed to share story", error);
