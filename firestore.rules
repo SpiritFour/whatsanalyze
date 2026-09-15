@@ -1,0 +1,67 @@
+rules_version = '2';
+
+// Deny by default. Every collection below is listed explicitly, because the
+// two projects this replaces were both open: whatsanalyze-wrapped-prod allowed
+// `read, write: if true` on every document, and whatsanalyze-80665 allowed
+// `write: if true`.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Wrapped results behind a share link. The uuid is the only handle and the
+    // AES key never leaves the link's fragment, so someone who guesses a uuid
+    // still only gets ciphertext. `list` stays closed so the collection cannot
+    // be enumerated, and a share is immutable once written -- otherwise anyone
+    // holding a uuid could overwrite or delete someone else's story.
+    match /data/{uuid} {
+      allow get: if true;
+      allow create: if request.resource.data.keys().hasOnly(['data'])
+                    && request.resource.data.data is string
+                    && request.resource.data.data.size() < 5242880;
+      allow list, update, delete: if false;
+    }
+
+    // Feedback form queue for the Trigger Email extension. Recipients may only
+    // be named indirectly through toUids/ccUids, which the extension resolves
+    // against emailRecipients; a raw `to` would turn this into an open relay
+    // for our SMTP sender. Pinning the template stops a client from invoking
+    // the subscription mail instead.
+    match /mail/{id} {
+      allow create: if !('to' in request.resource.data)
+                    && !('cc' in request.resource.data)
+                    && !('bcc' in request.resource.data)
+                    && request.resource.data.toUids is list
+                    && request.resource.data.template.name == 'feedback';
+      allow read, update, delete: if false;
+    }
+
+    // Written by the Stripe webhook, read by verifySubscription. Both run in
+    // Cloud Functions through the Admin SDK, which bypasses these rules, so
+    // nothing client-side has any business here: a forged document in
+    // `subscriptions` is a free subscription, and the collection holds
+    // customer emails and Stripe ids.
+    match /subscriptions/{customerId} {
+      allow read, write: if false;
+    }
+
+    // Legacy PayPal subscribers, same reasoning.
+    match /subscriptions-dev/{id} {
+      allow read, write: if false;
+    }
+    match /subscriptions-prod/{id} {
+      allow read, write: if false;
+    }
+
+    // Extension-owned: mail bodies and the uid -> address mapping.
+    match /mailTemplates/{id} {
+      allow read, write: if false;
+    }
+    match /emailRecipients/{id} {
+      allow read, write: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

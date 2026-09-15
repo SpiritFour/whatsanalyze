@@ -15,8 +15,20 @@ const localizedPages = [
   "pwa-results",
   "subscribe",
   "switch-from-whatsapp-to-signal",
+  "tools",
+  "tools/court-evidence",
+  "tools/inactivity",
+  "tools/proof-of-relationship",
+  "tools/message-counter",
+  "tools/word-counter",
+  "tools/chat-heatmap",
   "whatsapp-to-pdf",
   "whatsapp-wrapped-year-review",
+  "wrapped",
+  "wrapped/results",
+  "wrapped/subscription/verify",
+  "wrapped/subscription/success",
+  "wrapped/subscription/canceled",
 ];
 const localizedRoutes = ["de", "es", "fr", "pt", "it"].flatMap((locale) =>
   localizedPages.map((page) => `/${locale}/${page}`)
@@ -38,7 +50,6 @@ export default defineNuxtConfig({
       publicDir: resolve("./dist"),
     },
     watch: [
-      "assets/**",
       "components/**",
       "composables/**",
       "content/**",
@@ -84,25 +95,54 @@ export default defineNuxtConfig({
     public: {
       local,
       baseUrl,
+      // Still needed to verify subscriptions taken out through PayPal before
+      // the move to Stripe. No new PayPal subscription can be created.
       paypalClientId: local
         ? "ARYQUp4C_oNjNUNkvSPzLeaiulItDmnHUU226OANt2haCKC2c70ZrKZTmRHCPldcu4SD22LmPEuonfec"
         : "AUMWxSZrtBOA1RicR_3nGijYb8yYxyq2lxBjiwoQKfVc-8jfdPr5N7X5EFUackMCLb_K7HiKswnDBUJ8",
-      firebase: {
-        apiKey: "AIzaSyBWNP0Ckw94E7tyoZZozAOZ6JSQRH2lzFU",
-        authDomain: "whatsanalyze-80665.firebaseapp.com",
-        projectId: "whatsanalyze-80665",
-        storageBucket: "whatsanalyze-80665.appspot.com",
-        messagingSenderId: "116352567232",
-        appId: "1:116352567232:web:b44bef99e5a4fc6c962a25",
-        measurementId: "G-H1WL9MXJ17",
-        functionsEmulatorPort: runWithFunctions ? 5001 : null,
-      },
+      // One project per environment. Firestore and the functions have to come
+      // from the same project: the functions charge in the Stripe mode of the
+      // project they run in, so a local build paying in test mode must not
+      // write its shared chats into the database real customers read from.
+      // `whatsanalyze-wrapped` is the dev project -- its id is frozen from when
+      // Wrapped was a separate product, only the display name says dev.
+      firebase: local
+        ? {
+            apiKey: "AIzaSyCCX536nN4oTAXj49M_M1ZShD3ekLdjkBo",
+            authDomain: "whatsanalyze-wrapped.firebaseapp.com",
+            projectId: "whatsanalyze-wrapped",
+            storageBucket: "whatsanalyze-wrapped.firebasestorage.app",
+            messagingSenderId: "761196645139",
+            appId: "1:761196645139:web:88191b29876feb404ae8e6",
+            functionsEmulatorPort: runWithFunctions ? 5001 : null,
+          }
+        : {
+            apiKey: "AIzaSyBWNP0Ckw94E7tyoZZozAOZ6JSQRH2lzFU",
+            authDomain: "whatsanalyze-80665.firebaseapp.com",
+            projectId: "whatsanalyze-80665",
+            storageBucket: "whatsanalyze-80665.appspot.com",
+            messagingSenderId: "116352567232",
+            appId: "1:116352567232:web:b44bef99e5a4fc6c962a25",
+            functionsEmulatorPort: runWithFunctions ? 5001 : null,
+          },
+      // Full subscription price. The reduced first month is a coupon applied
+      // server-side (INTRO_COUPON_ID), not a separate price: Checkout ignores
+      // the Trial Offer configured on the product.
+      stripePriceId: local
+        ? "price_1Sc6u074KJ57kF2wxb5cnIZL"
+        : "price_1SgOxVL4rDqbYflowSbSteJQ",
+      stripeOneTimePriceId: local
+        ? "price_1UEjOz74KJ57kF2wXRhOyf05"
+        : "price_1UEjQ4L4rDqbYflo33cJS7RR",
     },
   },
 
   css: ["~/assets/variables.scss"],
 
   modules: [
+    "@pinia/nuxt",
+    "pinia-plugin-persistedstate/nuxt",
+    "@nuxtjs/tailwindcss",
     "vuetify-nuxt-module",
     "@nuxt/content",
     "@nuxtjs/i18n",
@@ -110,6 +150,17 @@ export default defineNuxtConfig({
     "@nuxt/scripts",
     "@sentry/nuxt/module",
   ],
+
+  tailwindcss: {
+    cssPath: "~/assets/wrapped/tailwind.css",
+    configPath: "tailwind.config.mjs",
+    exposeConfig: false,
+    viewer: false,
+  },
+
+  pinia: {
+    storesDirs: ["./stores/**"],
+  },
 
   vuetify: {
     moduleOptions: {

@@ -7,9 +7,9 @@
         <p>
           <strong>{{ $t("wrapped.analyzeSafely") }}</strong>
         </p>
-        <button class="cta-button" @click="goToHome">
+        <NuxtLink :to="localePath('/wrapped')" class="cta-button">
           {{ $t("wrapped.ctaButton") }}
-        </button>
+        </NuxtLink>
       </div>
     </header>
 
@@ -89,29 +89,22 @@ export default {
       currentYear: new Date().getFullYear(), // Dynamically set the current year
     };
   },
-  methods: {
-    goToHome() {
-      window.location.href = `https://wrapped.whatsanalyze.com/${this.$i18n.locale}`;
-    },
-  },
+  methods: {},
 };
 </script>
 
 <style scoped>
 /* General Styles */
-body {
-  font-family: "Arial", sans-serif;
-  margin: 0;
-  padding: 0;
-  color: #333;
-  line-height: 1.6;
+.whatsapp-wrapped {
+  width: 100%;
+  margin: 0 auto;
 }
 
 .container {
+  max-width: 960px;
   margin: auto;
   padding: 20px;
 }
-
 /* Hero Section */
 .hero-section {
   background: linear-gradient(135deg, #25d366, #128c7e);
@@ -125,6 +118,7 @@ body {
 }
 
 .cta-button {
+  display: inline-block;
   background: #fff;
   color: #128c7e;
   border: none;
@@ -133,6 +127,7 @@ body {
   cursor: pointer;
   margin-top: 20px;
   border-radius: 5px;
+  text-decoration: none;
 }
 
 .cta-button:hover {
