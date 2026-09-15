@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { execFileSync } from "node:child_process";
 import { resolve } from "node:path";
 
 const local = process.env.NUXT_ENV_LOCAL !== undefined;
@@ -134,6 +135,19 @@ export default defineNuxtConfig({
       stripeOneTimePriceId: local
         ? "price_1UEjOz74KJ57kF2wXRhOyf05"
         : "price_1UEjQ4L4rDqbYflo33cJS7RR",
+    },
+  },
+
+  hooks: {
+    // The PDF exporter needs the whole Twemoji set as a single asset. Built
+    // here rather than in the npm scripts so every entry point (dev, generate,
+    // build, e2e) gets it without anyone having to remember.
+    "build:before": () => {
+      execFileSync(
+        process.execPath,
+        [resolve("./scripts/build-twemoji-sprite.mjs")],
+        { stdio: "inherit" }
+      );
     },
   },
 

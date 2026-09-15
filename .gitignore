@@ -112,3 +112,6 @@ Icon\r
 
 # husky v9 generated helpers
 .husky/_/
+
+# generated at build time from @twemoji/svg (scripts/build-twemoji-sprite.mjs)
+/static/twemoji-sprite.json

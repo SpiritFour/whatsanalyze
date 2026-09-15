@@ -19,7 +19,11 @@
         <span v-html="$t('loadingMedia')"></span>
       </div>
 
-      <v-progress-linear v-show="progress" color="blue" :value="progress" />
+      <v-progress-linear
+        v-show="progress"
+        color="blue"
+        :model-value="progress"
+      />
     </v-row>
 
     <!-- Download dialog -->
@@ -209,13 +213,13 @@
 
 <script>
 import { saveAs } from "file-saver";
-import { markRaw, toRaw } from "vue";
+import { toRaw } from "vue";
 import { GTAG_PAYMENT, GTAG_PDF, gtagEvent } from "~/utils/gtagValues";
 import { fetchOneTimeCheckoutUrl } from "~/utils/subscription";
 import { chatFingerprint } from "~/utils/chatFingerprint";
 import { scrollToSettled } from "~/utils/scroll";
-import PDFWorker from "~/assets/js/pdf.worker.js?worker";
-import { loadImage, objectToDictionary } from "~/utils/utils";
+import { renderChatPdf } from "~/utils/pdf";
+import { loadImage } from "~/utils/utils";
 
 export default {
   props: {
@@ -237,7 +241,9 @@ export default {
       GTAG_PAYMENT,
       GTAG_PDF,
       progress: 0,
-      pdfWorker: null,
+      // The export outlives a navigation away from the results page; don't
+      // trigger a download into a component that is already gone.
+      isUnmounted: false,
     };
   },
   computed: {
@@ -271,7 +277,7 @@ export default {
     this.downloadPurchasedPdf();
   },
   beforeUnmount() {
-    this.closePdfWorker();
+    this.isUnmounted = true;
   },
   methods: {
     /**
@@ -320,39 +326,47 @@ export default {
     },
     async download(isSample = false) {
       if (!import.meta.client) return;
+      if (this.isLoading) return;
 
       this.isLoading = true;
       this.progress = 0;
 
       try {
-        // the graphs need to be converted to an image beforehand, as the web worker has no access to document
-        const chatTimeline = await loadImage("#chat-timeline");
-        const messagesPerTimeOfDay = await loadImage(
-          "#messages-per-time-of-day"
-        );
-        const messagesPerPerson = await loadImage("#messages-per-person");
-        const radarMonth = await loadImage("#radar-month");
-        const radarDay = await loadImage("#radar-day");
-        this.pdfWorker = markRaw(new PDFWorker());
-        // markRaw: never wrap the Worker in reactive proxies — proxied receivers break
-        // native postMessage/addEventListener calls.
-        this.pdfWorker.addEventListener("message", this.workerResponseHandler);
-        this.pdfWorker.addEventListener("error", this.pdfErrorHandler);
+        // Snapshot the charts as images first: they are canvases on this page,
+        // and the exporter lays out in its own isolated frame.
+        const charts = [
+          { name: "Chat Timeline", chart: await loadImage("#chat-timeline") },
+          {
+            name: "Time of Day",
+            chart: await loadImage("#messages-per-time-of-day"),
+          },
+          {
+            name: "Messages per Person",
+            chart: await loadImage("#messages-per-person"),
+          },
+          {
+            name: "Messages per Month",
+            chart: await loadImage("#radar-month"),
+          },
+          { name: "Messages per Time", chart: await loadImage("#radar-day") },
+        ];
 
-        const chat = objectToDictionary(this.chat); // remove functions
-        chat.funFacts = await this.chat.getFunFacts(); // set funfacts beforehand instead of using function call
-
-        this.pdfWorker.postMessage({
-          chat: chat,
-          attachments: objectToDictionary(this.attachments),
+        const blob = await renderChatPdf({
+          // toRaw: the exporter walks every message, and reading them through
+          // the reactive proxy would make this component depend on all of them.
+          chat: toRaw(this.chat),
+          attachments: toRaw(this.attachments),
           ego: this.ego,
           isSample,
-          chatTimeline,
-          messagesPerTimeOfDay,
-          messagesPerPerson,
-          radarMonth,
-          radarDay,
+          charts,
+          onProgress: (percent) => {
+            this.progress = percent;
+          },
         });
+
+        if (this.isUnmounted) return;
+        saveAs(blob, "WhatsAnalyze - " + this.ego + ".pdf");
+        this.isLoading = false;
       } catch (error) {
         this.pdfErrorHandler(error);
       }
@@ -362,33 +376,11 @@ export default {
       const query = (this.$route && this.$route.query) || {};
       this.download(!("free" in query));
     },
-    workerResponseHandler: function (event) {
-      const data = event.data;
-      if (data.type === "pdf") {
-        // service workers can not save files
-        const blob = new Blob([data.data], { type: "application/pdf" });
-        saveAs(blob, "WhatsAnalyze - " + this.ego);
-        this.isLoading = false;
-        this.closePdfWorker();
-      }
-      if (data.type === "progress") {
-        this.progress = data.data;
-      }
-    },
     pdfErrorHandler(error) {
       console.error("PDF generation failed", error);
       this.$sentry?.captureException(error);
       this.isLoading = false;
       this.progress = 0;
-      this.closePdfWorker();
-    },
-    closePdfWorker() {
-      if (!this.pdfWorker) return;
-
-      this.pdfWorker.removeEventListener("message", this.workerResponseHandler);
-      this.pdfWorker.removeEventListener("error", this.pdfErrorHandler);
-      this.pdfWorker.terminate();
-      this.pdfWorker = null;
     },
     gtagEvent,
   },
