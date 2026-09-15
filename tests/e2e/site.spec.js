@@ -79,6 +79,27 @@ test.describe("the analyzer", () => {
     expect(download.suggestedFilename()).toMatch(/\.pdf$/i);
   });
 
+  // ?style=court is how the court evidence landing page hands visitors over.
+  test("builds the court evidence PDF when arriving with ?style=court", async ({
+    page,
+  }) => {
+    await page.goto("/?style=court");
+    await page.locator("#uploadmytextfile").setInputFiles(await zipExport());
+    await expectAnalysis(page);
+
+    await expect(
+      page.getByRole("button", { name: "Court evidence" }),
+    ).toHaveAttribute("aria-pressed", "true");
+    const downloadPromise = page.waitForEvent("download");
+    await page
+      .getByRole("button", { name: /Download free preview PDF/i })
+      .click();
+    const download = await downloadPromise;
+    expect(download.suggestedFilename()).toMatch(
+      /^WhatsAnalyze Court Transcript.*\.pdf$/,
+    );
+  });
+
   // The three below cover the results-page QA round (#411). Nothing failed
   // these when they were filed, because nothing was watching those numbers.
   test("takes the visitor to the analysis it just built", async ({ page }) => {

@@ -8,12 +8,48 @@
       v-html="$t('downloadPDF')"
     ></h2>
 
+    <!-- Export style -->
+    <p class="m-0 mt-6 text-base font-semibold text-wa-ink">
+      {{ $t("pdfStyleTitle") }}
+    </p>
+    <div class="mt-3 flex flex-wrap justify-center gap-2">
+      <UiButton
+        v-for="option in pdfStyles"
+        :key="option"
+        size="sm"
+        :variant="pdfStyle === option ? 'primary' : 'secondary'"
+        :aria-pressed="pdfStyle === option"
+        @click="pdfStyle = option"
+      >
+        {{ $t(option === "court" ? "pdfStyleCourt" : "pdfStyleVisual") }}
+      </UiButton>
+    </div>
+    <p class="m-0 mt-2 text-sm text-wa-ink-muted">
+      {{ isCourtStyle ? $t("pdfStyleCourtHint") : $t("pdfStyleVisualHint") }}
+    </p>
+
     <img
+      v-if="!isCourtStyle"
       src="/pdf-example.jpg"
       alt=""
       class="mx-auto mt-6 w-full max-w-[560px] rounded-token border border-solid border-[rgba(29,29,31,0.08)]"
       loading="lazy"
     />
+    <!-- The example image shows the visual style, so the court style gets its
+         own summary instead of a misleading preview. -->
+    <ul
+      v-else
+      class="m-0 mx-auto mt-6 max-w-[520px] list-none space-y-2 p-0 text-left text-sm text-wa-ink"
+    >
+      <li
+        v-for="feature in courtFeatures"
+        :key="feature"
+        class="flex items-start gap-2"
+      >
+        <span class="font-bold text-wa-accent" aria-hidden="true">✓</span>
+        <span>{{ feature }}</span>
+      </li>
+    </ul>
 
     <!-- Building the PDF takes a while on a long chat, so say what is
          happening: first while the media is still being read, then with a
@@ -253,6 +289,8 @@ export default {
     chat: { type: Object, required: true },
     attachments: { type: Array, default: () => [] },
     ego: { type: String, required: true },
+    // name, size and SHA-256 of the uploaded export, for the court PDF
+    source: { type: Object, default: null },
     isValidSubscription: { type: Boolean, default: false },
   },
   setup() {
@@ -269,6 +307,9 @@ export default {
       discountPercent: ONE_TIME_DISCOUNT_PERCENT,
       progress: 0,
       pdfWorker: null,
+      // ?style=court: the visitor came from the court evidence landing page
+      pdfStyle: this.$route?.query?.style === "court" ? "court" : "visual",
+      pdfStyles: ["visual", "court"],
     };
   },
   computed: {
@@ -290,6 +331,14 @@ export default {
     },
     subscriptionPrice() {
       return formatPrice(SUBSCRIPTION_PRICE, this.$i18n.locale);
+    },
+    isCourtStyle() {
+      return this.pdfStyle === "court";
+    },
+    courtFeatures() {
+      return [1, 2, 3, 4].map((index) =>
+        this.$t(`pdfStyleCourtFeature${index}`),
+      );
     },
     /** Identifies the chat on screen, to tie a single payment to it. */
     currentChatFingerprint() {
@@ -350,7 +399,7 @@ export default {
       analyticsChat.download("pdf_sample");
     },
     downloadFull() {
-      analyticsChat.download("pdf_full");
+      analyticsChat.download(this.isCourtStyle ? "pdf_full_court" : "pdf_full");
       this.download(false);
       this.showDownloadPopup = false;
     },
@@ -383,13 +432,8 @@ export default {
 
       try {
         // the graphs need to be converted to an image beforehand, as the web worker has no access to document
-        const chatTimeline = await loadImage("#chat-timeline");
-        const messagesPerTimeOfDay = await loadImage(
-          "#messages-per-time-of-day",
-        );
-        const messagesPerPerson = await loadImage("#messages-per-person");
-        const radarMonth = await loadImage("#radar-month");
-        const radarDay = await loadImage("#radar-day");
+        // the court transcript shows no charts, so it skips rasterising them
+        const graphs = this.isCourtStyle ? {} : await this.loadGraphs();
         this.pdfWorker = markRaw(new PDFWorker());
         // markRaw: never wrap the Worker in reactive proxies — proxied receivers break
         // native postMessage/addEventListener calls.
@@ -419,15 +463,23 @@ export default {
           attachments: objectToDictionary(attachments),
           ego: this.ego,
           isSample,
-          chatTimeline,
-          messagesPerTimeOfDay,
-          messagesPerPerson,
-          radarMonth,
-          radarDay,
+          style: this.pdfStyle,
+          source: objectToDictionary(this.source),
+          ...graphs,
         });
       } catch (error) {
         this.pdfErrorHandler(error);
       }
+    },
+    /** Chart canvases as images — the worker has no access to the document. */
+    async loadGraphs() {
+      return {
+        chatTimeline: await loadImage("#chat-timeline"),
+        messagesPerTimeOfDay: await loadImage("#messages-per-time-of-day"),
+        messagesPerPerson: await loadImage("#messages-per-person"),
+        radarMonth: await loadImage("#radar-month"),
+        radarDay: await loadImage("#radar-day"),
+      };
     },
     downloadSample() {
       const query = (this.$route && this.$route.query) || {};
@@ -438,7 +490,10 @@ export default {
       if (data.type === "pdf") {
         // service workers can not save files
         const blob = new Blob([data.data], { type: "application/pdf" });
-        FileSaver.saveAs(blob, `WhatsAnalyze - ${String(this.ego).trim()}.pdf`);
+        FileSaver.saveAs(
+          blob,
+          `${this.isCourtStyle ? "WhatsAnalyze Court Transcript" : "WhatsAnalyze"} - ${String(this.ego).trim()}.pdf`,
+        );
         this.isLoading = false;
         this.closePdfWorker();
       }

@@ -440,7 +440,7 @@ export const analyticsChat = {
   },
 
   download(
-    fileType: "pdf_sample" | "pdf_full" | "chart_image",
+    fileType: "pdf_sample" | "pdf_full" | "pdf_full_court" | "chart_image",
     chartName?: string,
   ) {
     trackEvent("file_download", {

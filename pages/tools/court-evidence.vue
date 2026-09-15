@@ -176,9 +176,14 @@ export default {
       breadcrumbs,
       // These pages carry no dropzone of their own, so the CTA has to
       // land on the analyzer's upload area rather than the top of the
-      // homepage — step 2 tells people to drop a file there.
+      // homepage — step 2 tells people to drop a file there. The court
+      // evidence style is what the visitor came for, so preselect it.
       analyzerPath: computed(() =>
-        localePath({ path: "/", hash: "#dropzone-slot" }),
+        localePath({
+          path: "/",
+          hash: "#dropzone-slot",
+          query: { style: "court" },
+        }),
       ),
       exportGuidePath: computed(() =>
         localePath("how-to-export-your-whatsapp-chat"),

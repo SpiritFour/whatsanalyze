@@ -177,6 +177,7 @@
         remove-height-in-html2-canvas
         :chat="chat"
         :attachments="attachments"
+        :source="source"
         :results="this"
         :is-valid-subscription="isValidSubscription"
       />
@@ -192,6 +193,7 @@ export default {
   props: {
     chat: { type: Object, default: null },
     attachments: { type: Array, default: () => [] },
+    source: { type: Object, default: null },
     isValidSubscription: { type: Boolean, default: false },
     /**
      * This analysis came from a share link: charts only, with no messages

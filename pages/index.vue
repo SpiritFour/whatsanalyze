@@ -46,6 +46,7 @@
         ref="results"
         :attachments="attachments"
         :chat="chat"
+        :source="source"
         :is-valid-subscription="isSubscriptionValid"
       />
     </LandingSection>
@@ -177,6 +178,7 @@ export default {
       isShowingChats: false,
       chat: undefined,
       attachments: undefined,
+      source: undefined,
       loading: false,
       oneTimePaymentError: false,
       pdfExampleImage,
@@ -275,6 +277,7 @@ export default {
           this.newMessages({
             messages: savedSession.messages,
             attachments: savedSession.attachments || [],
+            source: savedSession.source || null,
           });
         } catch (err) {
           // A chat we cannot rebuild must not take the whole page down with
@@ -357,6 +360,7 @@ export default {
       // we only update with default chat object if chat_ is undefined
       if (!chatObject.default || this.chat === undefined) {
         this.attachments = chatObject.attachments;
+        this.source = chatObject.source || null;
         this.chat = new Chat(chatObject.messages);
         analyticsChat.chatAnalyzed(
           this.chat.numPersonsInChat,
