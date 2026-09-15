@@ -280,6 +280,21 @@ export const messages = {
     headerTextFeaturesTable: "Features & Solutions  of PDF export tools",
     goToPDF: "Go to PDF download",
     downloadPDF: "Download your Chat as PDF",
+    pdfStyleTitle: "PDF style",
+    pdfStyleVisual: "Visual story",
+    pdfStyleCourt: "Court evidence",
+    pdfStyleVisualHint:
+      "Colourful chat bubbles, charts and fun facts — made to be read and shared.",
+    pdfStyleCourtHint:
+      "Sober black-and-white transcript with integrity hash, exhibit index and signature page — made for courts and authorities.",
+    pdfStyleCourtFeature1:
+      "Numbered lines with exact timestamps (YYYY-MM-DD HH:mm:ss)",
+    pdfStyleCourtFeature2:
+      "SHA-256 fingerprint of your export file on the cover page",
+    pdfStyleCourtFeature3:
+      "Exhibit index listing every attachment with its own hash",
+    pdfStyleCourtFeature4:
+      "Binding margin, “Page X of Y” and a signature block",
     fullChat: "Your Full Chat",
     tabItemiOS1:
       "<span>On iPhone <b>open</b> WhatsApp and the <b>chat</b> or <b>group chat</b> you would like to export > at the top <b>tap on</b> the <b>name</b> of the chat.</span>",
@@ -1157,6 +1172,20 @@ export const messages = {
     headerTextFeaturesTable: "Eigenschaften und Lösungen der PDF-Export-Tools",
     goToPDF: "Gehe zum PDF-Download",
     downloadPDF: "Den Chat als PDF herunterladen",
+    pdfStyleTitle: "PDF-Stil",
+    pdfStyleVisual: "Visuelle Story",
+    pdfStyleCourt: "Gerichtsfest",
+    pdfStyleVisualHint:
+      "Bunte Chat-Blasen, Diagramme und Fun Facts – zum Lesen und Teilen.",
+    pdfStyleCourtHint:
+      "Nüchternes Schwarz-Weiß-Protokoll mit Integritäts-Hash, Beweismittelverzeichnis und Unterschriftenfeld – für Gerichte und Behörden.",
+    pdfStyleCourtFeature1:
+      "Nummerierte Zeilen mit exakten Zeitstempeln (JJJJ-MM-TT HH:mm:ss)",
+    pdfStyleCourtFeature2:
+      "SHA-256-Prüfsumme deiner Exportdatei auf dem Deckblatt",
+    pdfStyleCourtFeature3:
+      "Beweismittelverzeichnis mit eigener Prüfsumme je Anhang",
+    pdfStyleCourtFeature4: "Heftrand, „Seite X von Y“ und Unterschriftenfeld",
     fullChat: "Dein vollständiger Chat",
     tabItemiOS1:
       "<span>Auf dem iPhone öffne <b>WhatsApp</b> und den <b>Chat</b> oder <b>Gruppenchat</b>, den Du exportieren möchtest > oben <b>tippe auf</b> den <b>Name</b> des Chats.</span>",
@@ -2008,6 +2037,21 @@ export const messages = {
       "Características y soluciones de las herramientas de exportación de PDF",
     goToPDF: "ir a la descarga del PDF",
     downloadPDF: "Descargue su Chat como PDF",
+    pdfStyleTitle: "Estilo del PDF",
+    pdfStyleVisual: "Historia visual",
+    pdfStyleCourt: "Prueba judicial",
+    pdfStyleVisualHint:
+      "Burbujas de chat en color, gráficos y datos curiosos: para leer y compartir.",
+    pdfStyleCourtHint:
+      "Transcripción sobria en blanco y negro con hash de integridad, índice de anexos y espacio para la firma: para juzgados y autoridades.",
+    pdfStyleCourtFeature1:
+      "Líneas numeradas con marcas de tiempo exactas (AAAA-MM-DD HH:mm:ss)",
+    pdfStyleCourtFeature2:
+      "Huella SHA-256 de tu archivo de exportación en la portada",
+    pdfStyleCourtFeature3:
+      "Índice de anexos con el hash de cada archivo adjunto",
+    pdfStyleCourtFeature4:
+      "Margen para encuadernar, «Página X de Y» y bloque de firma",
     fullChat: "Tu charla completa",
     tabItemiOS1:
       "<span>En el iPhone <b>abre</b> WhatsApp y el <b>chat</b> o <b>chat de grupo</b> que deseas exportar> en la parte superior <b>toca </b> el <b>nombre</b> del chat.</span>",
@@ -2680,6 +2724,20 @@ export const messages = {
       "Recursos e soluções de ferramentas de exportação de PDF",
     goToPDF: "Ir para o download do PDF",
     downloadPDF: "Baixe seu Chat em PDF",
+    pdfStyleTitle: "Estilo do PDF",
+    pdfStyleVisual: "História visual",
+    pdfStyleCourt: "Prova judicial",
+    pdfStyleVisualHint:
+      "Balões de conversa coloridos, gráficos e curiosidades: para ler e partilhar.",
+    pdfStyleCourtHint:
+      "Transcrição sóbria a preto e branco com hash de integridade, índice de anexos e campo de assinatura: para tribunais e autoridades.",
+    pdfStyleCourtFeature1:
+      "Linhas numeradas com data e hora exatas (AAAA-MM-DD HH:mm:ss)",
+    pdfStyleCourtFeature2:
+      "Impressão SHA-256 do seu ficheiro de exportação na capa",
+    pdfStyleCourtFeature3: "Índice de anexos com o hash de cada ficheiro",
+    pdfStyleCourtFeature4:
+      "Margem para encadernação, «Página X de Y» e bloco de assinatura",
     fullChat: "Seu Chat Completo",
     tabItemiOS1:
       "<span>No iPhone <b>abra</b> o WhatsApp e o <b>chat</b> ou <b>grupo de chat</b> que você deseja exportar > no topo <b>toque no</b> nome do chat.</span>",
@@ -3530,6 +3588,21 @@ export const messages = {
       "Caractéristiques et solutions des outils d'exportation PDF",
     goToPDF: "Télécharger le PDF",
     downloadPDF: "Téléchargez votre Chat au format PDF",
+    pdfStyleTitle: "Style du PDF",
+    pdfStyleVisual: "Récit visuel",
+    pdfStyleCourt: "Preuve judiciaire",
+    pdfStyleVisualHint:
+      "Bulles de discussion colorées, graphiques et anecdotes : à lire et à partager.",
+    pdfStyleCourtHint:
+      "Transcription sobre en noir et blanc avec empreinte d'intégrité, index des pièces et bloc de signature : pour les tribunaux et les administrations.",
+    pdfStyleCourtFeature1:
+      "Lignes numérotées avec horodatage exact (AAAA-MM-JJ HH:mm:ss)",
+    pdfStyleCourtFeature2:
+      "Empreinte SHA-256 de votre fichier d'export sur la page de garde",
+    pdfStyleCourtFeature3:
+      "Index des pièces listant chaque fichier joint avec son empreinte",
+    pdfStyleCourtFeature4:
+      "Marge de reliure, « Page X sur Y » et bloc de signature",
     fullChat: "Votre chat complet",
     tabItemiOS1:
       "<span>Sur l'iPhone, <b>ouvrez</b> WhatsApp et le <b>chat</b> ou le <b>groupe de chat</b> que vous souhaitez exporter > en haut, <b>tapez</b> sur le <b>nom</b> du chat.</span>",
@@ -4390,6 +4463,20 @@ export const messages = {
       "Caratteristiche e soluzioni degli strumenti di esportazione PDF",
     goToPDF: "Vai al download PDF",
     downloadPDF: "Scarica la tua chat in PDF",
+    pdfStyleTitle: "Stile del PDF",
+    pdfStyleVisual: "Racconto visivo",
+    pdfStyleCourt: "Prova giudiziaria",
+    pdfStyleVisualHint:
+      "Fumetti colorati, grafici e curiosità: da leggere e condividere.",
+    pdfStyleCourtHint:
+      "Trascrizione sobria in bianco e nero con hash di integrità, indice degli allegati e spazio per la firma: per tribunali e autorità.",
+    pdfStyleCourtFeature1:
+      "Righe numerate con marche temporali esatte (AAAA-MM-GG HH:mm:ss)",
+    pdfStyleCourtFeature2:
+      "Impronta SHA-256 del file esportato sulla copertina",
+    pdfStyleCourtFeature3: "Indice degli allegati con l'hash di ogni file",
+    pdfStyleCourtFeature4:
+      "Margine per la rilegatura, «Pagina X di Y» e blocco firma",
     fullChat: "L'intera tua chat",
     tabItemiOS1:
       "<span>Su iPhone <b>apri</b> WhatsApp e la <b>chat</b> o <b>chat di gruppo</b> che desideri esportare > in alto <b>tocca</b> il <b>nome</b> della chat.</span>",

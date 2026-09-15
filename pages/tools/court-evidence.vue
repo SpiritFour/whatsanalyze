@@ -169,7 +169,12 @@ export default {
     return {
       t,
       breadcrumbs,
-      analyzerPath: computed(() => localePath("/")),
+      // arriving from here, the court evidence style is what the visitor came
+      // for — preselect it in the export
+      analyzerPath: computed(() => ({
+        path: localePath("/"),
+        query: { style: "court" },
+      })),
       exportGuidePath: computed(() =>
         localePath("how-to-export-your-whatsapp-chat")
       ),
