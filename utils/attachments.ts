@@ -105,6 +105,33 @@ async function renderAttachment(
   };
 }
 
+// raw bytes of an attachment, or undefined when the file is not part of the upload
+export function getAttachmentBytes(
+  fileName: string,
+  attachments: Array<{
+    name: string;
+    compressedContent?: Uint8Array;
+    decompressedData?: Uint8Array;
+  }>
+): Uint8Array | undefined {
+  // potentially this finds files that are a false match
+  // but there is the case that the images are in the "zip" folder, so we need
+  // to be sure to find em
+
+  const data: any = attachments.filter((file) =>
+    RegExp(".*" + fileName).test(file.name)
+  );
+
+  if (data.length === 0) return undefined;
+
+  if (data[0].compressedContent) {
+    // this means we have a zip file and have to inflate it frrst
+    return inflate(data[0]);
+  }
+  // this means a list of files was uploaded
+  return data[0].decompressedData;
+}
+
 // gets attachment mimeType, src, and filename from attachments
 export async function getAttachment(
   fileName: string,
@@ -114,29 +141,8 @@ export async function getAttachment(
     decompressedData?: Uint8Array;
   }>
 ): Promise<Attachment> {
-  // potentially this finds files that are a false match
-  // but there is the case that the images are in the "zip" folder, so we need
-  // to be sure to find em
-
-  const data: any = attachments.filter((file) =>
-    RegExp(".*" + fileName).test(file.name)
-  );
-
-  if (data.length === 0) {
-    // sometimes we can not find the attachment
-    return renderAttachment(fileName);
-  }
-  let decompressedData;
-
-  if (data[0].compressedContent) {
-    // this means we have a zip file and have to inflate it frrst
-    decompressedData = inflate(data[0]);
-  } else {
-    // this means a list of files was uploaded
-    decompressedData = data[0].decompressedData;
-  }
-
-  return renderAttachment(fileName, decompressedData);
+  // sometimes we can not find the attachment, renderAttachment handles that
+  return renderAttachment(fileName, getAttachmentBytes(fileName, attachments));
 }
 
 // this functions inflates ziped files

@@ -105,6 +105,7 @@
         remove-height-in-html2-canvas
         :chat="chat"
         :attachments="attachments"
+        :source="source"
         :results="this"
         :is-valid-subscription="isValidSubscription"
       />
@@ -116,6 +117,6 @@
 
 <script>
 export default {
-  props: ["chat", "attachments", "isValidSubscription"],
+  props: ["chat", "attachments", "source", "isValidSubscription"],
 };
 </script>

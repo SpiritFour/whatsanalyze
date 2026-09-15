@@ -1,20 +1,11 @@
 import jsPDF from "jspdf";
 import * as JSZip from "jszip";
 import logoBlack from "~/assets/whatsanalyze-logo-black.png";
-import myFont from "~/assets/pdf-fonts/Helvetica.js";
 
+import "~/utils/pdfFont";
 import { dateDiffs, firstDate, getDateString, lastDate } from "~/utils/utils";
 import { Attachment, getAttachment } from "~/utils/attachments";
 import { Chat } from "~/utils/transformChatData";
-
-const callAddFont = function (this: any) {
-  this.addFileToVFS("myFont.ttf", myFont.normal);
-  this.addFont("myFont.ttf", "myFont", "normal");
-
-  this.addFileToVFS("myFont.ttf", myFont.bold);
-  this.addFont("myFont.ttf", "myFont", "bold");
-};
-jsPDF.API.events.push(["addFonts", callAddFont]);
 
 export async function render(
   chat: any,

@@ -10,7 +10,8 @@
         :currency="currency"
         :ego="ego"
         :price="price"
-        :isValidSubscription="isValidSubscription"
+        :source="source"
+        :is-valid-subscription="isValidSubscription"
       />
     </v-row>
     <v-row>
@@ -26,7 +27,7 @@ import Chat from "~/components/ChatVisualization/Chat.vue";
 export default {
   name: "ChatVisualization",
   components: { PdfDownload, Chat },
-  props: ["chat", "attachments", "results", "isValidSubscription"],
+  props: ["chat", "attachments", "source", "results", "isValidSubscription"],
   data() {
     return {
       // its possible that the first person did not write any message at all

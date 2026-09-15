@@ -70,6 +70,7 @@
 import { parseString } from "whatsapp-chat-parser";
 import JSZip from "jszip";
 import { GTAG_FILE, gtagEvent } from "~/utils/gtagValues";
+import { sha256Hex } from "~/utils/courtEvidence";
 
 export default {
   name: "FileHandler",
@@ -80,9 +81,33 @@ export default {
       processing: false,
       isSuccess: false,
       attachments: {},
+      // identifies the uploaded file for the court evidence PDF
+      source: null,
     };
   },
   methods: {
+    /**
+     * SHA-256 over the bytes the user handed us, so the court evidence PDF can
+     * state a fingerprint the recipient reproduces with `shasum -a 256`.
+     * `bytes` is passed in where the file was read anyway, to avoid reading
+     * large exports twice.
+     */
+    async fingerprint(file, bytes) {
+      try {
+        const data = bytes || new Uint8Array(await file.arrayBuffer());
+        return {
+          name: file.name,
+          size: file.size,
+          sha256: await sha256Hex(data),
+        };
+      } catch (err) {
+        // Losing the fingerprint only costs the court PDF its strongest hash;
+        // it must never stop someone from analysing their chat.
+        console.warn("Could not fingerprint the uploaded file:", err);
+        return { name: file.name, size: file.size, sha256: null };
+      }
+    },
+
     extendDataStructure(chatObject) {
       let authors = {};
       chatObject.messages.forEach(function (object, index) {
@@ -93,7 +118,7 @@ export default {
       });
     },
 
-    zipLoadEndHandler(e) {
+    async zipLoadEndHandler(e, file) {
       const arrayBuffer = e.target.result;
       // reader.readAsArrayBuffer produced nothing (empty/corrupt file or read error):
       // passing it into JSZip would blow up deep inside `loadAsync` with
@@ -102,6 +127,7 @@ export default {
         this.showErrorMessage("_empty_zip");
         return;
       }
+      this.source = await this.fingerprint(file, new Uint8Array(arrayBuffer));
       const jszip = new JSZip();
       jszip
         .loadAsync(arrayBuffer)
@@ -151,7 +177,7 @@ export default {
       });
     },
 
-    readSharedFiles(files) {
+    async readSharedFiles(files) {
       function findChatFile(files) {
         let chatRegex = new RegExp(/.*(?:chat|whatsapp).*\.txt$/i);
         return files.find((file) => {
@@ -165,6 +191,7 @@ export default {
         this.showErrorMessage();
         return;
       }
+      this.source = await this.fingerprint(chatFile);
       const reader = new FileReader();
       reader.addEventListener("loadend", (loadedFile) => {
         parseString(loadedFile.target.result, {
@@ -195,7 +222,7 @@ export default {
 
     updateMessages(chatObject) {
       this.extendDataStructure(chatObject);
-      this.$emit("new_messages", chatObject);
+      this.$emit("new_messages", { ...chatObject, source: this.source });
       this.$emit("hide_explanation", true);
       this.processing = false;
       this.isSuccess = true;
@@ -208,24 +235,28 @@ export default {
       this.isSuccess = false;
       gtagEvent("error" + (text || ""), GTAG_FILE, 0);
     },
-    processFileList(fileList, shared = false) {
+    async processFileList(fileList, shared = false) {
       this.isDragging = false;
       this.processing = true;
       this.isSuccess = false;
       this.wrongFile = false;
+      this.source = null;
 
       if (shared || fileList.length > 1) {
         //do multiple here
-        this.readSharedFiles(fileList);
+        await this.readSharedFiles(fileList);
       } else {
         let file = fileList[0];
         if (!file) return this.showErrorMessage("_undefined_shared_file");
         // do singles here
         const reader = new FileReader();
         if (/^application\/(?:x-)?zip(?:-compressed)?$/.test(file.type)) {
-          reader.addEventListener("loadend", this.zipLoadEndHandler);
+          reader.addEventListener("loadend", (event) =>
+            this.zipLoadEndHandler(event, file)
+          );
           reader.readAsArrayBuffer(file);
         } else if (file.type === "text/plain") {
+          this.source = await this.fingerprint(file);
           reader.addEventListener("loadend", this.txtLoadEndHandler);
           reader.readAsText(file);
         } else {
