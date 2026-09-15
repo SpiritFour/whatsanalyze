@@ -1,7 +1,40 @@
 @use "theme-variables" as *;
 
-.top-color {
-  background-color: $c-blue-accent;
+// The design tokens again, as custom properties: Tailwind, the /wrapped
+// components and anything else outside the Sass pipeline read them from here.
+:root {
+  --wa-surface-dark: #{$wa-surface-dark};
+  --wa-surface-dark-raised: #{$wa-surface-dark-raised};
+  --wa-surface-light: #{$wa-surface-light};
+  --wa-surface-white: #{$wa-surface-white};
+
+  --wa-ink: #{$wa-ink};
+  --wa-ink-muted: #{$wa-ink-muted};
+  --wa-ink-faint: #{$wa-ink-faint};
+  --wa-ink-invert: #{$wa-ink-invert};
+  --wa-ink-invert-muted: #{$wa-ink-invert-muted};
+  --wa-ink-invert-faint: #{$wa-ink-invert-faint};
+
+  --wa-border: #{$wa-border};
+  --wa-border-invert: #{$wa-border-invert};
+
+  --wa-accent: #{$wa-accent};
+  --wa-accent-light: #{$wa-accent-light};
+  --wa-accent-dark: #{$wa-accent-dark};
+  --wa-accent-soft: #{$wa-accent-soft};
+
+  --wa-radius-sm: #{$wa-radius-sm};
+  --wa-radius-md: #{$wa-radius-md};
+  --wa-radius-lg: #{$wa-radius-lg};
+  --wa-radius-xl: #{$wa-radius-xl};
+  --wa-radius-pill: #{$wa-radius-pill};
+
+  --wa-shadow-sm: #{$wa-shadow-sm};
+  --wa-shadow-md: #{$wa-shadow-md};
+  --wa-shadow-lg: #{$wa-shadow-lg};
+  --wa-shadow-accent: #{$wa-shadow-accent};
+
+  --wa-shell-width: #{$wa-shell-width};
 }
 
 .only-visible-to-html2canvas {
@@ -14,7 +47,7 @@
 }
 
 .btn-color {
-  background-color: $c-blue-accent !important;
+  background-color: $wa-accent !important;
 }
 
 .btn-color-dark {
@@ -29,4 +62,10 @@
   color: #069;
   text-decoration: underline;
   cursor: pointer;
+}
+
+// The monospace caption of the tool pages. Every tool page used the class but
+// only one of them defined it — it lives here now so they all look the same.
+.mono-label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }

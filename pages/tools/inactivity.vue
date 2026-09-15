@@ -872,8 +872,4 @@ const exportSteps = computed(() => [
     }
   }
 }
-
-.mono-label {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-}
 </style>

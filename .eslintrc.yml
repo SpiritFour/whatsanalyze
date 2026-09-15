@@ -44,5 +44,6 @@ globals:
   toRaw: readonly
   defineEmits: readonly
   onMounted: readonly
+  useToolsNav: readonly
 rules:
   vue/no-multiple-template-root: "off"
