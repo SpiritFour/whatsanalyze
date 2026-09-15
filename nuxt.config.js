@@ -114,7 +114,6 @@ export default defineNuxtConfig({
             storageBucket: "whatsanalyze-wrapped.firebasestorage.app",
             messagingSenderId: "761196645139",
             appId: "1:761196645139:web:88191b29876feb404ae8e6",
-            measurementId: "G-KEE2KV93SK",
             functionsEmulatorPort: runWithFunctions ? 5001 : null,
           }
         : {
@@ -124,7 +123,6 @@ export default defineNuxtConfig({
             storageBucket: "whatsanalyze-80665.appspot.com",
             messagingSenderId: "116352567232",
             appId: "1:116352567232:web:b44bef99e5a4fc6c962a25",
-            measurementId: "G-H1WL9MXJ17",
             functionsEmulatorPort: runWithFunctions ? 5001 : null,
           },
       // Full subscription price. The reduced first month is a coupon applied

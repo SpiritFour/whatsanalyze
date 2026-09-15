@@ -1,4 +1,3 @@
-import { getAnalytics, isSupported } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import {
   addDoc,
@@ -16,20 +15,6 @@ export default defineNuxtPlugin(() => {
   const app = initializeApp(config.public.firebase);
   const firestore = getFirestore(app);
   const functions = getFunctions(app);
-
-  let analytics;
-
-  if (process.client) {
-    isSupported().then((supported) => {
-      if (supported) {
-        try {
-          analytics = getAnalytics(app);
-        } catch (e) {
-          console.warn("Analytics initialization:", e);
-        }
-      }
-    });
-  }
 
   if (config.public.firebase.functionsEmulatorPort) {
     connectFunctionsEmulator(
@@ -51,9 +36,6 @@ export default defineNuxtPlugin(() => {
       },
       firestore,
       functions,
-      get analytics() {
-        return analytics;
-      },
     },
   };
 });

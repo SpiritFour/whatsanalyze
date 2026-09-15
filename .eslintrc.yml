@@ -35,7 +35,6 @@ globals:
   useRoute: readonly
   useRouter: readonly
   useNuxtApp: readonly
-  useAnalytics: readonly
   useState: readonly
   useOneTimePurchase: readonly
   restoreOneTimePurchase: readonly

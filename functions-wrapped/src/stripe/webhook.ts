@@ -54,7 +54,10 @@ export const stripeWebhook = onRequest(
       if (invoice.billing_reason === "subscription_create") {
         logger.info("Subscription was created and payed!");
         // store user data in db and send them an email with the login link
-        await handleInvoiceForSubscription(invoice, sendConfirmationEmail.value());
+        await handleInvoiceForSubscription(
+          invoice,
+          sendConfirmationEmail.value()
+        );
       } else if (invoice.billing_reason === "subscription_cycle") {
         logger.info("Reoccurring payment for Subscription!");
         await handleInvoiceForSubscription(invoice, false);

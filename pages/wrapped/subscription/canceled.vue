@@ -17,15 +17,15 @@
 
 <script setup lang="ts">
 import { onMounted } from "vue";
+import { CATEGORY_WRAPPED, GTAG_PAYMENT, gtagEvent } from "~/utils/gtagValues";
 
 definePageMeta({
   layout: "wrapped",
 });
 
 const localePath = useLocalePath();
-const { trackSubscriptionCanceled } = useAnalytics();
 
 onMounted(() => {
-  trackSubscriptionCanceled();
+  gtagEvent("canceled", GTAG_PAYMENT, 0, CATEGORY_WRAPPED);
 });
 </script>
