@@ -187,12 +187,36 @@ credential from `gcloud auth login`, so they do not need application-default
 credentials — only `scripts/initializeTemplates.ts` does, because it goes
 through `firebase-admin`.
 
-Writes to `data` after the snapshot are lost, so either freeze writes for the
-duration or re-run a delta export at cutover.
+The prod bucket already exists: `gs://whatsanalyze-migration-eur3`, created at
+`EU` to match the source database's `eur3`. That pairing is a hard requirement
+and has been verified against the real database.
 
-Timing matters more than technique here. Wrapped peaks in December and is close
-to idle the rest of the year, so running this outside the season shrinks the
-loss window to near zero instead of fighting live traffic.
+#### Run it twice, either side of the cutover
+
+The ordering is the part that is easy to get wrong, because each obvious
+sequence loses something:
+
+- Migrate, then cut over, and every share created between the snapshot and the
+  frontend switching is written to the old project and never copied. Silent,
+  permanent data loss.
+- Cut over, then migrate, and nothing is lost — the old project stops being
+  written to the moment the frontend switches — but old share links do not
+  resolve until the import lands.
+
+Running it twice avoids both:
+
+1. Export and import now. Old links start resolving from the new project.
+2. Merge `dev` into `main`. The frontend switches, and the old project's `data`
+   collection stops growing.
+3. Export and import again, to sweep up everything written between 1 and 2.
+
+Step 3 is safe to repeat because import writes documents under their original
+ids, and a `data` document is never updated after creation — the rules now
+enforce that, denying `update` and `delete`. Re-importing a record that is
+already there is a genuine no-op, so the second pass can only add.
+
+Timing still helps. Wrapped peaks in December and is close to idle the rest of
+the year, so the gap between passes 1 and 3 is cheapest outside the season.
 
 ### Phase 4: cutover
 
