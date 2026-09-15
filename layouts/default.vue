@@ -1,12 +1,12 @@
 <template>
   <v-app>
-    <GlobalHeader />
+    <SiteHeader />
 
     <v-main style="overflow-x: hidden">
       <FeedbackBtn />
       <slot />
     </v-main>
 
-    <GlobalFooter />
+    <SiteFooter />
   </v-app>
 </template>

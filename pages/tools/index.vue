@@ -38,7 +38,7 @@
 
               <div class="tool-card__footer">
                 <span class="tool-card__action">
-                  {{ tool.linkText }}
+                  {{ openTool }}
                   <v-icon size="14" class="ml-1">mdi-arrow-right</v-icon>
                 </span>
               </div>
@@ -84,7 +84,7 @@
 
               <div class="tool-card__footer">
                 <span class="tool-card__action tool-card__action--court">
-                  {{ tool.linkText }}
+                  {{ openTool }}
                   <v-icon size="14" class="ml-1">mdi-arrow-right</v-icon>
                 </span>
               </div>
@@ -208,65 +208,10 @@ useHead(() => ({
   ],
 }));
 
-const analyticsTools = computed(() => [
-  {
-    icon: "mdi-timer-sand",
-    color: "#21a68d",
-    bg: "rgba(33, 166, 141, 0.15)",
-    title: t("toolsHub.toolInactivityTitle"),
-    text: t("toolsHub.toolInactivityText"),
-    to: localePath("/tools/inactivity"),
-    linkText: t("toolsHub.openTool"),
-  },
-  {
-    icon: "mdi-counter",
-    color: "#fbbf24",
-    bg: "rgba(251, 191, 36, 0.15)",
-    title: t("toolsHub.toolCounterTitle"),
-    text: t("toolsHub.toolCounterText"),
-    to: localePath("/tools/message-counter"),
-    linkText: t("toolsHub.openTool"),
-  },
-  {
-    icon: "mdi-format-letter-case",
-    color: "#c084fc",
-    bg: "rgba(192, 132, 252, 0.15)",
-    title: t("toolsHub.toolVocabularyTitle"),
-    text: t("toolsHub.toolVocabularyText"),
-    to: localePath("/tools/word-counter"),
-    linkText: t("toolsHub.openTool"),
-  },
-  {
-    icon: "mdi-clock-time-four-outline",
-    color: "#38bdf8",
-    bg: "rgba(56, 189, 248, 0.15)",
-    title: t("toolsHub.toolHeatmapTitle"),
-    text: t("toolsHub.toolHeatmapText"),
-    to: localePath("/tools/chat-heatmap"),
-    linkText: t("toolsHub.openTool"),
-  },
-]);
+// Same catalogue as the header dropdown and the footer.
+const { analyticsTools, courtTools } = useToolsNav();
+const openTool = computed(() => t("toolsHub.openTool"));
 
-const courtTools = computed(() => [
-  {
-    icon: "mdi-scale-balance",
-    color: "#818cf8",
-    bg: "rgba(129, 140, 248, 0.15)",
-    title: t("toolsHub.toolCourtTitle"),
-    text: t("toolsHub.toolCourtText"),
-    to: localePath("/tools/court-evidence"),
-    linkText: t("toolsHub.openTool"),
-  },
-  {
-    icon: "mdi-heart-outline",
-    color: "#fb7185",
-    bg: "rgba(251, 113, 133, 0.15)",
-    title: t("toolsHub.toolRelationshipTitle"),
-    text: t("toolsHub.toolRelationshipText"),
-    to: localePath("/tools/proof-of-relationship"),
-    linkText: t("toolsHub.openTool"),
-  },
-]);
 const pillars = computed(() => [
   {
     icon: "mdi-cellphone-lock",

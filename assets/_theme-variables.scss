@@ -40,3 +40,54 @@ $c-red: #ff675c;
 $c-red-light: #ff855c;
 $c-red-dark: #d93b3b;
 $c-red-dark-accent: #911146;
+
+// ---------------------------------------------------------------------------
+// Design tokens
+//
+// One scale for the whole product: the main site, /tools and /wrapped. The
+// landing components were the first to use these values, everything else
+// follows them now — so changing a token here lands on every surface at once.
+// Mirrored as CSS custom properties in assets/variables.scss and as Tailwind
+// theme values in tailwind.config.mjs, for the parts that cannot see Sass.
+// ---------------------------------------------------------------------------
+
+// Surfaces — sections alternate dark → light → white, never anything else.
+$wa-surface-dark: #0d1418;
+$wa-surface-dark-raised: rgba(245, 245, 247, 0.05);
+$wa-surface-light: #f5f5f7;
+$wa-surface-white: #ffffff;
+
+// Ink
+$wa-ink: #1d1d1f;
+$wa-ink-muted: rgba(29, 29, 31, 0.68);
+$wa-ink-faint: rgba(29, 29, 31, 0.45);
+$wa-ink-invert: #f5f5f7;
+$wa-ink-invert-muted: rgba(245, 245, 247, 0.68);
+$wa-ink-invert-faint: rgba(245, 245, 247, 0.45);
+
+// Hairlines
+$wa-border: rgba(29, 29, 31, 0.12);
+$wa-border-invert: rgba(245, 245, 247, 0.12);
+
+// Accent — the WhatsApp teal, the only brand colour in the UI chrome.
+$wa-accent: $c-blue-accent;
+$wa-accent-light: $c-blue-accent-light;
+$wa-accent-dark: $c-blue-accent-dark;
+$wa-accent-soft: rgba(33, 166, 141, 0.12);
+
+// Radii
+$wa-radius-sm: 10px;
+$wa-radius-md: 12px;
+$wa-radius-lg: 16px;
+$wa-radius-xl: 20px;
+$wa-radius-pill: 999px;
+
+// Elevation
+$wa-shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.04);
+$wa-shadow-md: 0 10px 30px rgba(0, 0, 0, 0.06);
+$wa-shadow-lg: 0 30px 60px rgba(0, 0, 0, 0.45);
+$wa-shadow-accent: 0 10px 30px rgba(33, 166, 141, 0.35);
+
+// Layout
+$wa-content-width: 1080px;
+$wa-shell-width: 1180px;

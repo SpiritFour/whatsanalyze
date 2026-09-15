@@ -1,7 +1,7 @@
 <template>
   <div v-if="chat" class="text-center">
     <div id="download-graphs">
-      <GlobalHeader class="only-visible-to-html2canvas" />
+      <SiteHeader :sticky="false" class="only-visible-to-html2canvas" />
       <DownloadPopup
         :chat="chat"
         is-simple
@@ -109,7 +109,7 @@
         :is-valid-subscription="isValidSubscription"
       />
 
-      <GlobalFooter class="only-visible-to-html2canvas" />
+      <SiteFooter class="only-visible-to-html2canvas" />
     </div>
   </div>
 </template>

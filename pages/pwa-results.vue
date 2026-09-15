@@ -1,9 +1,15 @@
 <template>
   <div>
-    <v-container class="top-color">
-      <HeaderCta />
-      <FileHandler ref="filehandler" @new_messages="newMessages" />
-    </v-container>
+    <LandingHero
+      :eyebrow="$t('homeLanding.heroEyebrow')"
+      :title="$t('analyzeInSeconds')"
+      :subtitle="$t('homeLanding.heroSubtitle')"
+      :note="$t('toolsHub.heroNote')"
+    >
+      <div class="pwa-results__upload">
+        <FileHandler ref="filehandler" @new_messages="newMessages" />
+      </div>
+    </LandingHero>
     <ChartsResults ref="results" :chat="chat" :attachments="attachments" />
   </div>
 </template>
@@ -12,7 +18,7 @@
 import { Chat } from "~/utils/transformChatData";
 
 export default {
-  name: "pwa-results",
+  name: "PwaResults",
   setup() {
     useHead({
       meta: [
@@ -64,3 +70,10 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.pwa-results__upload {
+  max-width: 640px;
+  margin: 0 auto;
+}
+</style>
