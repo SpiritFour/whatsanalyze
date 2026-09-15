@@ -132,21 +132,40 @@ default alias, clean up `.firebaserc`, and move the values from
 `.env.whatsanalyze-wrapped*` onto the main project, dropping the wrapped-only
 entries from `ALLOWED_ORIGINS`.
 
-### Phase 2: Stripe rewiring
+### Phase 2: Stripe rewiring (overlap window open)
 
 The Stripe account itself does not change. Customers, subscriptions, prices and
 the intro coupon all stay where they are. What changes is where Stripe delivers
 webhooks.
 
-1. Deploy the functions to `whatsanalyze-80665`, yielding
-   `https://us-central1-whatsanalyze-80665.cloudfunctions.net/stripeWebhook`.
-2. Add that as a *second* endpoint in the Stripe dashboard. It gets a new
-   signing secret; set it as `STRIPE_WEBHOOK_SECRET` on the main project.
-3. Copy `STRIPE_SECRET_KEY` across with `firebase functions:secrets:set`.
-4. Leave both endpoints active for several days. Stripe delivers to both, so
-   both `subscriptions` mirrors stay current — which is what makes the next
-   phase reversible.
-5. Delete the old endpoint once deliveries on the new one are confirmed.
+Steps 1 to 4 are done. Both endpoints are registered and enabled, so every
+`checkout.session.completed` and `invoice.payment_succeeded` is delivered twice:
+
+| Endpoint | Project | Behaviour |
+| --- | --- | --- |
+| `we_1SeeXYL4rDqbYflolVUjE6OD` | `whatsanalyze-wrapped-prod` | unchanged; still the only one emailing customers |
+| `we_1UFoB1L4rDqbYflosczPlQXS` | `whatsanalyze-80665` | verifies signatures, writes `subscriptions`, sends no mail |
+
+`whatsanalyze-80665` runs with `SEND_CONFIRMATION_EMAIL=false`, confirmed on the
+deployed service and not only in the env file. Its `subscriptions` mirror has
+been current since the second endpoint was registered, so the Phase 3 import
+only has to backfill what existed before that point.
+
+Nothing forces this state to end. Every day in it is another day of
+subscriptions written to both projects, and the handover is undone by deleting
+the new endpoint.
+
+What remains, once the mirror has been seen working against real traffic:
+
+5. Delete the old endpoint.
+6. Flip `SEND_CONFIRMATION_EMAIL` to true on `whatsanalyze-80665` and redeploy.
+
+That order matters. Reversed, every customer subscribing in between gets two
+identical confirmation emails, because nothing downstream deduplicates.
+
+Deploy the wrapped codebase explicitly — `firebase deploy --only functions:wrapped`.
+The bare `--only functions` the CLI suggests after a secret change also deploys
+the PayPal codebase that shares the project.
 
 ### Phase 3: data migration
 
