@@ -304,7 +304,7 @@ export default {
       this.$router.replace({ query });
 
       try {
-        const functions = this.$wrappedFunctions || this.$functions;
+        const functions = this.$functions;
         const getCheckoutSession = httpsCallable(
           functions,
           "getCheckoutSession"

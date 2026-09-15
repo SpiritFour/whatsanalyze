@@ -92,8 +92,7 @@ export const useSubscriptionStore = defineStore("subscription", {
       this.setLoading(true);
       try {
         const nuxtApp = useNuxtApp();
-        const functions = (nuxtApp.$wrappedFunctions ||
-          nuxtApp.$functions) as any;
+        const functions = nuxtApp.$functions as any;
         const verifyCallable = httpsCallable(functions, "verifySubscription");
         const res = await verifyCallable({ email, subscriptionId });
         const data = res.data as {

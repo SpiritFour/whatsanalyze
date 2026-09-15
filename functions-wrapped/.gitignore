@@ -17,3 +17,4 @@ node_modules/
 !.env.prod
 !.env.whatsanalyze-wrapped
 !.env.whatsanalyze-wrapped-prod
+!.env.whatsanalyze-80665

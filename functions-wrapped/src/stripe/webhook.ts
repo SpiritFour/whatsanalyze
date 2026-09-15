@@ -1,9 +1,19 @@
 import { onRequest } from "firebase-functions/https";
+import { defineBoolean } from "firebase-functions/params";
 import Stripe from "stripe";
 import * as logger from "firebase-functions/logger";
 import { getStripe, stripeSecretKey, stripeWebhookSecret } from "./common";
 import { Customer, sendSubscriptionConfirmationEmail } from "../mail";
 import { db } from "../firebase";
+
+// Stripe fans an event out to every registered endpoint. While the move to the
+// site's project runs, two deployments receive the same invoice and each would
+// mail the customer, so the arriving one stays quiet until the old endpoint is
+// gone. Both still write `subscriptions`, which keeps the mirrors in step and
+// makes the switch reversible.
+const sendConfirmationEmail = defineBoolean("SEND_CONFIRMATION_EMAIL", {
+  default: true,
+});
 
 export const stripeWebhook = onRequest(
   { cors: false, secrets: [stripeSecretKey, stripeWebhookSecret] },
@@ -44,7 +54,10 @@ export const stripeWebhook = onRequest(
       if (invoice.billing_reason === "subscription_create") {
         logger.info("Subscription was created and payed!");
         // store user data in db and send them an email with the login link
-        await handleInvoiceForSubscription(invoice, true);
+        await handleInvoiceForSubscription(
+          invoice,
+          sendConfirmationEmail.value()
+        );
       } else if (invoice.billing_reason === "subscription_cycle") {
         logger.info("Reoccurring payment for Subscription!");
         await handleInvoiceForSubscription(invoice, false);

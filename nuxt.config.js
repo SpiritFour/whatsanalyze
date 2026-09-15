@@ -100,15 +100,31 @@ export default defineNuxtConfig({
       paypalClientId: local
         ? "ARYQUp4C_oNjNUNkvSPzLeaiulItDmnHUU226OANt2haCKC2c70ZrKZTmRHCPldcu4SD22LmPEuonfec"
         : "AUMWxSZrtBOA1RicR_3nGijYb8yYxyq2lxBjiwoQKfVc-8jfdPr5N7X5EFUackMCLb_K7HiKswnDBUJ8",
-      firebase: {
-        apiKey: "AIzaSyBWNP0Ckw94E7tyoZZozAOZ6JSQRH2lzFU",
-        authDomain: "whatsanalyze-80665.firebaseapp.com",
-        projectId: "whatsanalyze-80665",
-        storageBucket: "whatsanalyze-80665.appspot.com",
-        messagingSenderId: "116352567232",
-        appId: "1:116352567232:web:b44bef99e5a4fc6c962a25",
-        functionsEmulatorPort: runWithFunctions ? 5001 : null,
-      },
+      // One project per environment. Firestore and the functions have to come
+      // from the same project: the functions charge in the Stripe mode of the
+      // project they run in, so a local build paying in test mode must not
+      // write its shared chats into the database real customers read from.
+      // `whatsanalyze-wrapped` is the dev project -- its id is frozen from when
+      // Wrapped was a separate product, only the display name says dev.
+      firebase: local
+        ? {
+            apiKey: "AIzaSyCCX536nN4oTAXj49M_M1ZShD3ekLdjkBo",
+            authDomain: "whatsanalyze-wrapped.firebaseapp.com",
+            projectId: "whatsanalyze-wrapped",
+            storageBucket: "whatsanalyze-wrapped.firebasestorage.app",
+            messagingSenderId: "761196645139",
+            appId: "1:761196645139:web:88191b29876feb404ae8e6",
+            functionsEmulatorPort: runWithFunctions ? 5001 : null,
+          }
+        : {
+            apiKey: "AIzaSyBWNP0Ckw94E7tyoZZozAOZ6JSQRH2lzFU",
+            authDomain: "whatsanalyze-80665.firebaseapp.com",
+            projectId: "whatsanalyze-80665",
+            storageBucket: "whatsanalyze-80665.appspot.com",
+            messagingSenderId: "116352567232",
+            appId: "1:116352567232:web:b44bef99e5a4fc6c962a25",
+            functionsEmulatorPort: runWithFunctions ? 5001 : null,
+          },
       // Full subscription price. The reduced first month is a coupon applied
       // server-side (INTRO_COUPON_ID), not a separate price: Checkout ignores
       // the Trial Offer configured on the product.
@@ -118,27 +134,6 @@ export default defineNuxtConfig({
       stripeOneTimePriceId: local
         ? "price_1UEjOz74KJ57kF2wXRhOyf05"
         : "price_1UEjQ4L4rDqbYflo33cJS7RR",
-      // Firestore and the Stripe functions have to come from the same wrapped
-      // project: the functions charge in the Stripe mode of the project they
-      // run in, so a local build paying in test mode must not write its shared
-      // chats into the database real customers read from.
-      wrappedFirebase: local
-        ? {
-            apiKey: "AIzaSyCCX536nN4oTAXj49M_M1ZShD3ekLdjkBo",
-            authDomain: "whatsanalyze-wrapped.firebaseapp.com",
-            projectId: "whatsanalyze-wrapped",
-            storageBucket: "whatsanalyze-wrapped.firebasestorage.app",
-            messagingSenderId: "761196645139",
-            appId: "1:761196645139:web:88191b29876feb404ae8e6",
-          }
-        : {
-            apiKey: "AIzaSyBaVob5g3xHdzJnkOI2dtbdYND-__Tzutc",
-            authDomain: "whatsanalyze-wrapped-prod.firebaseapp.com",
-            projectId: "whatsanalyze-wrapped-prod",
-            storageBucket: "whatsanalyze-wrapped-prod.firebasestorage.app",
-            messagingSenderId: "1053765361889",
-            appId: "1:1053765361889:web:feb439fa8220fadf1157a0",
-          },
     },
   },
 

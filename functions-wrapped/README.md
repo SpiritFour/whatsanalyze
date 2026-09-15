@@ -1,6 +1,6 @@
 # Project switching
-firebase use wrapped-dev # whatsanalyze-wrapped
-firebase use wrapped-prod # whatsanalyze-wrapped-prod
+firebase use dev # whatsanalyze-wrapped
+firebase use default # whatsanalyze-80665
 # Firebase Functions Setup (Node 22)
 
 ## Prerequisites
@@ -23,8 +23,8 @@ npm install
 
 Aliases are already committed in `../.firebaserc`:
 
-- `wrapped-dev` → `whatsanalyze-wrapped`
-- `wrapped-prod` → `whatsanalyze-wrapped-prod`
+- `dev` → `whatsanalyze-wrapped`
+- `default` → `whatsanalyze-80665`
 
 ### 3. Build & Test Locally
 

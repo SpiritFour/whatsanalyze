@@ -298,7 +298,7 @@ export default {
       if (sessionId && !this.email) {
         try {
           this.loading = true;
-          const functions = this.$wrappedFunctions || this.$functions;
+          const functions = this.$functions;
           const getCheckoutSession = httpsCallable(
             functions,
             "getCheckoutSession"
@@ -370,7 +370,7 @@ export default {
       this.isPortalLoading = true;
 
       try {
-        const functions = this.$wrappedFunctions || this.$functions;
+        const functions = this.$functions;
         const createCustomerPortal = httpsCallable(
           functions,
           "createCustomerPortal"

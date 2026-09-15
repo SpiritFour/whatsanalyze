@@ -1,5 +1,6 @@
 // store functions
 
+import type { Firestore } from "firebase/firestore";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
 import {
@@ -17,8 +18,7 @@ export async function storeResult(data: string): Promise<ShareInfo> {
   const key = await generateKey();
   const encryptedData = await encryptData(data, key);
 
-  const firestore = (useNuxtApp().$wrappedFirestore ||
-    useNuxtApp().$firestore) as Firestore;
+  const firestore = useNuxtApp().$firestore as Firestore;
 
   await setDoc(doc(firestore, "data", uuid), {
     data: encryptedData,
@@ -38,8 +38,7 @@ export async function retrieveResult({
   uuid,
   encryptedKey,
 }: ShareInfo): Promise<string> {
-  const firestore = (useNuxtApp().$wrappedFirestore ||
-    useNuxtApp().$firestore) as Firestore;
+  const firestore = useNuxtApp().$firestore as Firestore;
   const docRef = doc(firestore, "data", uuid);
   const docSnap = await getDoc(docRef);
   if (docSnap.exists()) {
