@@ -44,6 +44,7 @@
       v-if="isShowingChats"
       id="results"
       theme="light"
+      :reveal="false"
       :eyebrow="$t('homeLanding.resultsEyebrow')"
       :title="$t('homeLanding.resultsTitle')"
     >

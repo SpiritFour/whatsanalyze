@@ -25,6 +25,12 @@ export default {
     eyebrow: { type: String, default: "" },
     title: { type: String, default: "" },
     text: { type: String, default: "" },
+    /**
+     * Off for sections that carry the thing the visitor came for, like the
+     * chat analysis: those must be on screen the moment they render, not
+     * after a scroll.
+     */
+    reveal: { type: Boolean, default: true },
   },
   data() {
     return {
@@ -33,7 +39,7 @@ export default {
     };
   },
   mounted() {
-    if (!("IntersectionObserver" in window)) {
+    if (!this.reveal || !("IntersectionObserver" in window)) {
       this.visible = true;
       return;
     }
@@ -44,7 +50,11 @@ export default {
           this.observer.disconnect();
         }
       },
-      { threshold: 0.15 }
+      // Fire on the first pixel rather than on a share of the section: a
+      // section taller than about seven viewports can never show 15% of
+      // itself, and would stay at opacity 0 for good. Pulling the bottom of
+      // the root up keeps the reveal feeling the same for short sections.
+      { threshold: 0, rootMargin: "0px 0px -10% 0px" }
     );
     this.observer.observe(this.$refs.inner);
   },
