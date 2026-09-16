@@ -1,30 +1,34 @@
 <template>
-  <div class="bottom-right">
+  <!-- Fixed to the viewport, so it lands in the middle of the downloaded
+       summary image if html2canvas is allowed to see it. -->
+  <div class="bottom-right" data-html2canvas-ignore>
     <v-dialog v-model="dialog" width="500">
       <template #activator="{ props }">
-        <v-btn
-          class="rounded-0 btn pa-0 btn-color-dark"
-          elevation="0"
-          v-bind="props"
-        >
-          <div class="wrapper my-2 mr-1">
-            <span class="rotate-text">{{ $t("writeUs") }}</span>
-            <v-icon class="mr-1 rotate-image">mdi-pencil</v-icon>
-          </div>
-        </v-btn>
+        <button type="button" class="tab" v-bind="props">
+          <span class="rotate-text">{{ $t("writeUs") }}</span>
+          <IconPencil class="rotate-image" />
+        </button>
       </template>
 
-      <v-card>
-        <v-card-title class="text-h4 btn-color">
-          {{ $t("writeUs") }}
-          <v-spacer />
-          <v-btn icon @click="dialog = false">
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
-        </v-card-title>
+      <v-card class="wa-scope overflow-hidden rounded-token-lg">
+        <div
+          class="flex items-center justify-between gap-3 bg-wa-accent px-6 py-4 text-white"
+        >
+          <p class="m-0 text-xl font-bold">{{ $t("writeUs") }}</p>
+          <button
+            type="button"
+            class="close"
+            aria-label="Close"
+            @click="dialog = false"
+          >
+            <IconClose />
+          </button>
+        </div>
 
-        <v-card-text class="pt-4 pb-0 text-h6">
-          {{ !message ? $t("cardText") : "" }}
+        <v-card-text class="px-6 pb-2 pt-5">
+          <p v-if="!message" class="m-0 text-sm text-wa-ink-muted">
+            {{ $t("cardText") }}
+          </p>
           <v-form
             v-if="!message"
             ref="form"
@@ -66,18 +70,11 @@
                 />
               </v-input>
 
-              <v-btn :disabled="!valid" class="btn-color" @click="validate">
-                Send
-              </v-btn>
+              <UiButton :disabled="!valid" @click="validate"> Send </UiButton>
             </v-row>
           </v-form>
-          <div v-else>
-            <v-divider />
-            {{ message }}
-          </div>
+          <p v-else class="m-0 text-sm text-wa-ink">{{ message }}</p>
         </v-card-text>
-
-        <v-divider></v-divider>
       </v-card>
     </v-dialog>
   </div>
@@ -151,15 +148,43 @@ export default {
   transform: rotate(-90deg);
 }
 
-.btn {
-  height: fit-content !important;
-  min-width: fit-content !important;
-}
-
-.wrapper {
+/* A tab glued to the edge of the window, reading bottom-to-top. */
+.tab {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 0.4rem;
+  padding: 0.9rem 0.5rem;
+  border: none;
+  border-radius: 10px 0 0 10px;
+  background: #00535f;
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+  transition: background 0.2s ease;
+}
+
+.tab:hover {
+  background: #0c808c;
+}
+
+.close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.close:hover {
+  background: rgba(0, 0, 0, 0.08);
 }
 
 .row-class {

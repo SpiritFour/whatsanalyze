@@ -20,7 +20,8 @@
     "subscription": "Pro Abonnement",
     "privacy": "Datenschutz",
     "exportGuide": "Wie exportieren?",
-    "appTitle": "WhatsApp Wrapped"
+    "appTitle": "WhatsApp Wrapped",
+    "selectLanguage": "Sprache wählen"
   },
   "footer": {
     "privacyFirst": "Datenschutz zuerst",
@@ -28,6 +29,8 @@
     "openSource": "Open Source",
     "openSourceDescription": "Dieses Projekt ist Open Source, der gesamte Code ist öffentlich auf GitHub. Du kannst es lokal ausführen und nachvollziehen, wie es funktioniert.",
     "checkOnGithub": "Code auf GitHub ansehen.",
+    "guides": "Anleitungen",
+    "company": "Unternehmen",
     "madeBy": "Mit ❤ von Freunden in München gemacht",
     "copyright": "© 2026 WhatsApp Wrapped. Alle Rechte vorbehalten."
   },

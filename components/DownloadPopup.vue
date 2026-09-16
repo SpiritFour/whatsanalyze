@@ -1,113 +1,112 @@
 <template>
-  <v-col class="mb-8">
-    <v-row justify="center">
-      <div :class="{ cta: !isSimple }" class="my-md-4 pa-8">
-        <div v-if="!isSimple" class="text-h3 font-weight-bold pb-4">
-          {{ $t("downloadAllGraphs") }}
-        </div>
-        <div v-if="!isSimple" class="text-body-1 pb-2">
-          {{ $t("shareWithFriends") }}
-        </div>
-        <v-dialog v-model="dialog" width="600">
-          <template #activator="{ props: activatorProps }">
-            <v-btn
-              :loading="loading"
-              class="btn-color"
-              dark
-              v-bind="activatorProps"
-              @click="download"
-            >
-              <v-icon class="mr-2">mdi-download</v-icon>
-              {{ $t("downloadResults") }}
-            </v-btn>
-          </template>
+  <div class="wa-scope text-center">
+    <div
+      :class="
+        isSimple
+          ? ''
+          : 'rounded-token-lg border border-solid border-[rgba(29,29,31,0.08)] bg-wa-surface-white p-6 shadow-card md:p-8'
+      "
+    >
+      <h3
+        v-if="!isSimple"
+        class="m-0 text-xl font-bold text-wa-ink md:text-2xl"
+      >
+        {{ $t("downloadAllGraphs") }}
+      </h3>
+      <p v-if="!isSimple" class="m-0 mb-6 mt-2 text-sm text-wa-ink-muted">
+        {{ $t("shareWithFriends") }}
+      </p>
 
-          <v-card class="overflow-hidden">
-            <v-card-title class="bg-cyan" style="word-break: normal">
-              <div class="text-h4 font-weight-bold">{{ $t("didWeMake") }}</div>
-              <span>{{ $t("buyUsCoffee") }}</span>
-            </v-card-title>
-            <v-card-text class="pt-3">
-              <div>{{ $t("getResults") }}</div>
-            </v-card-text>
+      <v-dialog v-model="dialog" width="600">
+        <template #activator="{ props: activatorProps }">
+          <UiButton
+            :loading="loading"
+            size="lg"
+            v-bind="activatorProps"
+            @click="download"
+          >
+            <IconDownload v-if="!loading" />
+            {{ $t("downloadResults") }}
+          </UiButton>
+        </template>
 
-            <v-row
-              align="center"
-              class="mb-3"
-              justify="center"
+        <v-card class="wa-scope overflow-hidden rounded-token-lg">
+          <div class="bg-wa-accent px-6 py-5 text-white">
+            <p class="m-0 text-xl font-bold">{{ $t("didWeMake") }}</p>
+            <p class="m-0 mt-1 text-sm opacity-90">{{ $t("buyUsCoffee") }}</p>
+          </div>
+
+          <div class="px-6 py-5 text-center">
+            <p class="m-0 text-sm text-wa-ink-muted">{{ $t("getResults") }}</p>
+
+            <form
+              action="https://www.paypal.com/donate"
+              method="post"
+              target="_blank"
+              class="mt-5"
               @click="paypalButtonPressed"
             >
-              <form
-                action="https://www.paypal.com/donate"
-                method="post"
-                target="_blank"
-              >
-                <input
-                  name="hosted_button_id"
-                  type="hidden"
-                  value="EPCYG8WEF289G"
-                />
-                <input
-                  alt="Donate with PayPal button"
-                  border="0"
-                  name="submit"
-                  src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"
-                  title="PayPal - The safer, easier way to pay online!"
-                  type="image"
-                />
-                <img
-                  alt=""
-                  border="0"
-                  height="1"
-                  src="https://www.paypal.com/en_US/i/scr/pixel.gif"
-                  width="1"
-                />
-              </form>
-            </v-row>
-            <v-divider></v-divider>
-            <div v-if="loading" class="loading" />
+              <input
+                name="hosted_button_id"
+                type="hidden"
+                value="EPCYG8WEF289G"
+              />
+              <input
+                alt="Donate with PayPal button"
+                border="0"
+                name="submit"
+                src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"
+                title="PayPal - The safer, easier way to pay online!"
+                type="image"
+              />
+              <img
+                alt=""
+                border="0"
+                height="1"
+                src="https://www.paypal.com/en_US/i/scr/pixel.gif"
+                width="1"
+              />
+            </form>
 
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn
-                color="red-darken-1"
-                variant="text"
-                @click="dialog = false"
-              >
-                Close
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
+            <div v-if="loading" class="loading mt-4" />
+          </div>
 
-        <div v-if="!isSimple" class="text-text-h3 my-4">
-          <v-col>
-            <div v-if="!isSimple" class="text-body-1 pb-2">
-              {{ $t("lookingFor") }} <b>{{ $t("pdfDownload") }} </b>?
-            </div>
+          <div
+            class="flex justify-end border-0 border-t border-solid border-[rgba(29,29,31,0.08)] px-4 py-3"
+          >
+            <UiButton variant="danger" size="sm" @click="dialog = false">
+              Close
+            </UiButton>
+          </div>
+        </v-card>
+      </v-dialog>
 
-            <v-btn
-              v-if="!isSimple"
-              class="btn-color"
-              @click="
-                gtagEvent('jump_to_pdf_download_cta', GTAG_INTERACTION, 0);
-                scrollTo('#payButton', { offset: 100 });
-              "
-            >
-              <v-icon class="mr-2">mdi-arrow-right</v-icon>
-              {{ $t("goToPDF") }}
-            </v-btn>
-          </v-col>
-        </div>
+      <div v-if="!isSimple" class="mt-8">
+        <p class="m-0 mb-3 text-sm text-wa-ink-muted">
+          {{ $t("lookingFor") }}
+          <b class="text-wa-ink">{{ $t("pdfDownload") }}</b
+          >?
+        </p>
+        <UiButton
+          variant="secondary"
+          @click="
+            gtagEvent('jump_to_pdf_download_cta', GTAG_INTERACTION, 0);
+            scrollTo('#payButton', { offset: 100 });
+          "
+        >
+          {{ $t("goToPDF") }}
+          <span aria-hidden="true">&rarr;</span>
+        </UiButton>
       </div>
-    </v-row>
-  </v-col>
+    </div>
+  </div>
 </template>
 
 <script>
 import html2canvas from "html2canvas";
 import { downloadBase64File } from "~/utils/utils";
 import { scrollTo } from "~/utils/scroll";
+import { applySvgChartSnapshots, snapshotSvgCharts } from "~/utils/svgImage";
 import {
   GTAG_INTERACTION,
   GTAG_PAYMENT,
@@ -135,7 +134,12 @@ export default {
       this.loading = true;
       gtagEvent("download_image", GTAG_RESULTS);
 
-      setTimeout(() => {
+      setTimeout(async () => {
+        const graphs = document.querySelector("#download-graphs");
+        // Taken before the capture: html2canvas cannot draw the SVG clouds,
+        // and inside onclone there is no room to wait for anything.
+        const svgSnapshots = await snapshotSvgCharts(graphs);
+
         let additionalHeight = 0;
         document
           .querySelectorAll(".additional-height")
@@ -163,6 +167,10 @@ export default {
               ".only-visible-to-html2canvas"
             );
             nonVisibleStuff.forEach((y) => (y.style.display = "block"));
+            applySvgChartSnapshots(
+              clonedDoc.querySelector("#download-graphs"),
+              svgSnapshots
+            );
             return clonedDoc;
           },
         });

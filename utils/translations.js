@@ -542,6 +542,27 @@ export const messages = {
       courtGroupDesc:
         "Court-admissible PDF transcripts and verified relationship timelines formatted for legal proceedings and immigration petitions.",
     },
+    homeLanding: {
+      wrappedButton: "See Your Story",
+      wrappedNav: "Wrapped — Chat as a Story",
+      heroEyebrow: "WhatsApp Chat Analyzer",
+      heroSubtitle:
+        "Drop your chat export below and see who talks most, when you write and what you write about. Everything is read in your browser — nothing is uploaded.",
+      resultsEyebrow: "Your Chat",
+      resultsTitle: "Your Analysis",
+      previewEyebrow: "What You Get",
+      previewTitle: "Charts That Tell the Story of Your Chat",
+      previewText:
+        "Messages per hour, share of speech, word clouds and fun facts. This is a real chat, analyzed exactly the way yours will be.",
+      wrappedEyebrow: "New This Year",
+      pdfEyebrow: "PDF Export",
+      pdfText:
+        "Turn the whole conversation into a clean, printable document — the statistics up front and every message behind them.",
+      pressTitle: "Trusted by the Press and by Our Readers",
+      faqEyebrow: "Good to Know",
+      aboutEyebrow: "Who We Are",
+      ctaTitle: "Ready to See Your Own Chat?",
+    },
     toolDropzone: {
       localEngine: "LOCAL CLIENT ENGINE",
       zeroCloud: "ZERO CLOUD TRANSMISSION",
@@ -1196,7 +1217,7 @@ export const messages = {
     privacyFAQContent:
       "Ja, absolut. Die gesamte Chat-Verarbeitung erfolgt lokal in Ihrem Browser. Es werden keinerlei Daten an einen Server gesendet. Sie können sogar den Open-Source-Code auf GitHub einsehen, um dies zu überprüfen.",
     howToExport: "Wie man seinen WhatsApp-Chat exportiert",
-    howToExportOn: "Exportiere deinen Chat auf",
+    howToExportOn: "Exportiere deinen Chat",
     howToExportLong:
       "          Jeder kann ganz einfach seinen WhatsApp-Chat oder Gruppenchat exportieren. Open\n          WhatsApp auf dem Gerät, mit dem Du gerade eingeloggt sind > Tippe auf den\n Chat > Gehe zu den Chats-Einstellungen > Scrolle nach unten und tippe auf Chat exportieren >\n          Exportiere mit oder ohne Medien.",
     howToGroup: "So exportierst Du deinen WhatsApp-Gruppenchat",
@@ -1336,7 +1357,7 @@ export const messages = {
         "Berechne die verstrichene Stille, Antwortzeiten und finde die längsten Gesprächspausen in deinem Chat.",
       heroCardBtn: "Inaktivitäts-Tracker testen →",
       sectionToolsEyebrow: "Verfügbare & kommende Tools",
-      sectionToolsTitle: "Wähle aus, was du analysieren möchtest",
+      sectionToolsTitle: "Und weitere Tools",
       sectionToolsText:
         "Jedes Tool läuft direkt in deinem Browser. Keine Registrierung, keine Datenübertragung an Server.",
       toolInactivityTitle: "Inaktivität & Letzte Nachricht",
@@ -1397,12 +1418,33 @@ export const messages = {
       courtGroupDesc:
         "Gerichtsfeste PDF-Protokolle und verifizierte Kommunikationszeitachsen für Justiz und Behörden.",
     },
+    homeLanding: {
+      wrappedButton: "Zeig mir meine Story",
+      wrappedNav: "Wrapped — Chat als Story",
+      heroEyebrow: "WhatsApp Chat-Analyse",
+      heroSubtitle:
+        "Wer schreibt am meisten? Wann, wann und wie oft? Speichere das Ergebnis oder sogar den ganzen Chat als PDF.",
+      resultsEyebrow: "Dein Chat",
+      resultsTitle: "Deine Analyse",
+      previewEyebrow: "Das bekommst du",
+      previewTitle: "Analysiere deine Chats",
+      previewText:
+        "Nachrichten pro Stunde, Redeanteile, Wortwolken und Fun Facts und vieles mehr.",
+      wrappedEyebrow: "Neu in diesem Jahr",
+      pdfEyebrow: "PDF-Export",
+      pdfText:
+        "Mach aus dem ganzen Gespräch ein sauberes, druckbares Dokument – die Statistiken vorne und jede Nachricht dahinter.",
+      pressTitle: "Empfohlen von der Presse und unseren Leserinnen und Lesern",
+      faqEyebrow: "Gut zu wissen",
+      aboutEyebrow: "Wer wir sind",
+      ctaTitle: "Bereit für deinen eigenen Chat?",
+    },
     toolDropzone: {
       localEngine: "LOKAL IM BROWSER",
       zeroCloud: "KEINE CLOUD-ÜBERTRAGUNG",
       private: "100 % PRIVAT",
       dropTitle: "Ziehe deinen WhatsApp-Chat-Export hierher",
-      dropSubtitle: "Unterstützt exportierte .txt- oder .zip-Dateien",
+      dropSubtitle: ".txt- oder .zip",
       selectFile: "Chat-Datei auswählen",
       trySample: "Mit Beispiel-Chat testen",
       analyzingTitle: "Analysiere Gesprächspausen...",
@@ -2247,6 +2289,27 @@ export const messages = {
       courtGroupDesc:
         "Transcripciones en PDF válidas en juicios y cronogramas de relación verificados para visados y tribunales.",
     },
+    homeLanding: {
+      wrappedButton: "Ver tu historia",
+      wrappedNav: "Wrapped — Tu chat como historia",
+      heroEyebrow: "Analizador de chats de WhatsApp",
+      heroSubtitle:
+        "Sube tu chat exportado aquí abajo y descubre quién habla más, cuándo escribís y de qué. Todo se lee en tu navegador: no se sube nada.",
+      resultsEyebrow: "Tu chat",
+      resultsTitle: "Tu análisis",
+      previewEyebrow: "Esto es lo que obtienes",
+      previewTitle: "Gráficos que cuentan la historia de tu chat",
+      previewText:
+        "Mensajes por hora, reparto de la conversación, nubes de palabras y datos curiosos. Es un chat real, analizado igual que lo será el tuyo.",
+      wrappedEyebrow: "Nuevo este año",
+      pdfEyebrow: "Exportar a PDF",
+      pdfText:
+        "Convierte toda la conversación en un documento limpio y listo para imprimir: las estadísticas delante y cada mensaje detrás.",
+      pressTitle: "Con la confianza de la prensa y de quienes nos leen",
+      faqEyebrow: "Conviene saberlo",
+      aboutEyebrow: "Quiénes somos",
+      ctaTitle: "¿Listo para ver tu propio chat?",
+    },
     toolDropzone: {
       localEngine: "MOTOR LOCAL EN NAVEGADOR",
       zeroCloud: "SIN TRANSMISIÓN A LA NUBE",
@@ -2590,6 +2653,7 @@ export const messages = {
     pageNameHeatmap: "Horas pico y mapa de calor 24h de WhatsApp",
   },
   pt: {
+    analyzeYourChat: "Começar",
     wrapped: {
       heroTitle: "WhatsApp Wrapped {currentYear}",
       heroSubtitle:
@@ -2919,6 +2983,27 @@ export const messages = {
       courtGroupTitle: "Documentação oficial e comprovações jurídicas",
       courtGroupDesc:
         "Relatórios em PDF para processos judiciais e linhas do tempo verificadas para pedidos de visto.",
+    },
+    homeLanding: {
+      wrappedButton: "Ver a sua história",
+      wrappedNav: "Wrapped — A conversa como história",
+      heroEyebrow: "Analisador de conversas do WhatsApp",
+      heroSubtitle:
+        "Envie a exportação da sua conversa abaixo e veja quem fala mais, quando escrevem e sobre o quê. Tudo é lido no seu navegador — nada é enviado.",
+      resultsEyebrow: "A sua conversa",
+      resultsTitle: "A sua análise",
+      previewEyebrow: "O que você recebe",
+      previewTitle: "Gráficos que contam a história da sua conversa",
+      previewText:
+        "Mensagens por hora, partilha da conversa, nuvens de palavras e curiosidades. É uma conversa real, analisada tal como a sua será.",
+      wrappedEyebrow: "Novo este ano",
+      pdfEyebrow: "Exportação em PDF",
+      pdfText:
+        "Transforme toda a conversa num documento limpo e pronto a imprimir — as estatísticas à frente e cada mensagem a seguir.",
+      pressTitle: "Com a confiança da imprensa e de quem nos lê",
+      faqEyebrow: "Bom saber",
+      aboutEyebrow: "Quem somos",
+      ctaTitle: "Pronto para ver a sua própria conversa?",
     },
     toolDropzone: {
       localEngine: "MOTOR LOCAL NO NAVEGADOR",
@@ -3771,6 +3856,27 @@ export const messages = {
       courtGroupTitle: "Documentation officielle et preuves juridiques",
       courtGroupDesc:
         "Transcriptions PDF recevables en justice et chronologies certifiées pour les démarches consulaires et judiciaires.",
+    },
+    homeLanding: {
+      wrappedButton: "Voir votre story",
+      wrappedNav: "Wrapped — Le chat en story",
+      heroEyebrow: "Analyseur de chat WhatsApp",
+      heroSubtitle:
+        "Déposez votre export de conversation ci-dessous et voyez qui écrit le plus, à quelle heure et à quel sujet. Tout est lu dans votre navigateur : rien n'est envoyé.",
+      resultsEyebrow: "Votre conversation",
+      resultsTitle: "Votre analyse",
+      previewEyebrow: "Ce que vous obtenez",
+      previewTitle: "Des graphiques qui racontent votre conversation",
+      previewText:
+        "Messages par heure, temps de parole, nuages de mots et anecdotes. Une vraie conversation, analysée exactement comme le sera la vôtre.",
+      wrappedEyebrow: "Nouveau cette année",
+      pdfEyebrow: "Export PDF",
+      pdfText:
+        "Transformez toute la conversation en un document propre et imprimable : les statistiques d'abord, puis chaque message.",
+      pressTitle: "Recommandé par la presse et par nos lecteurs",
+      faqEyebrow: "Bon à savoir",
+      aboutEyebrow: "Qui nous sommes",
+      ctaTitle: "Prêt à découvrir votre conversation ?",
     },
     toolDropzone: {
       localEngine: "MOTEUR LOCAL DU NAVIGATEUR",
@@ -4625,6 +4731,27 @@ export const messages = {
       courtGroupTitle: "Documentazione ufficiale e prove legali",
       courtGroupDesc:
         "Trascrizioni PDF legali e cronologie verificate pensate per tribunali e pratiche di visto.",
+    },
+    homeLanding: {
+      wrappedButton: "Guarda la tua storia",
+      wrappedNav: "Wrapped — La chat come storia",
+      heroEyebrow: "Analizzatore di chat WhatsApp",
+      heroSubtitle:
+        "Carica qui sotto l'esportazione della tua chat e scopri chi scrive di più, quando scrivete e di cosa. Tutto viene letto nel tuo browser: niente viene caricato.",
+      resultsEyebrow: "La tua chat",
+      resultsTitle: "La tua analisi",
+      previewEyebrow: "Cosa ottieni",
+      previewTitle: "Grafici che raccontano la storia della tua chat",
+      previewText:
+        "Messaggi per ora, quota di conversazione, nuvole di parole e curiosità. È una chat vera, analizzata esattamente come lo sarà la tua.",
+      wrappedEyebrow: "Novità di quest'anno",
+      pdfEyebrow: "Esportazione PDF",
+      pdfText:
+        "Trasforma l'intera conversazione in un documento pulito e stampabile: prima le statistiche, poi ogni messaggio.",
+      pressTitle: "Scelto dalla stampa e da chi ci legge",
+      faqEyebrow: "Da sapere",
+      aboutEyebrow: "Chi siamo",
+      ctaTitle: "Pronto a vedere la tua chat?",
     },
     toolDropzone: {
       localEngine: "MOTORE LOCALE NEL BROWSER",

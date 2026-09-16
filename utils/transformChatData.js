@@ -1,8 +1,78 @@
-import { chatColors, hexToRgbA } from "~/utils/colors";
+import {
+  accentColor,
+  chatColors,
+  hexToRgbA,
+  othersColor,
+} from "~/utils/colors";
 import stopwords_de from "stopwords-de";
 import stopwords from "stopwords-en";
 import { onlyEmoji } from "emoji-aware";
 import moment from "moment";
+
+/**
+ * Words that say nothing about the conversation.
+ *
+ * Everything here is lowercase and compared lowercase — the list used to hold
+ * entries like "<This" and "Missed" that could never match.
+ */
+const IGNORED_WORDS = new Set([
+  "",
+  "ich",
+  "du",
+  "wir",
+  "aber",
+  "audio",
+  "bild",
+  "image",
+  "message",
+  "missed",
+  "voice",
+  "call.",
+  "location:",
+  "deleted",
+  "omitted",
+  "omitted>",
+  "ausgeschlossen>",
+  "weggelassen",
+  "edited>",
+  "_",
+  "_weggelassen>",
+  "_ommited>",
+  "_omesso>",
+  "_omitted",
+  "_weggelassen",
+  "_attached",
+]);
+
+/**
+ * WhatsApp's own markers rather than something someone typed: every export
+ * language writes them inside angle brackets ("<Anhang:", "<attached:",
+ * "<Medien ausgeschlossen>"), so the bracket is the rule and the list above
+ * only has to cover the words that leak out of them.
+ *
+ * Single symbols ("=", "-", ".") are dropped too — but an emoji is never a
+ * symbol here: the emoji cloud is built from this same list, and dropping a
+ * lone "❤" emptied it. Two-character faces like ":)" survive on purpose;
+ * those are things people actually say.
+ */
+function isLoneSymbol(word) {
+  // Code points, not UTF-16 units, so an emoji counts as one character.
+  return (
+    Array.from(word).length === 1 &&
+    !/[\p{L}\p{N}\p{Extended_Pictographic}]/u.test(word)
+  );
+}
+
+function isNoiseWord(word) {
+  const lower = String(word).toLowerCase();
+  return (
+    lower.startsWith("<") ||
+    isLoneSymbol(lower) ||
+    IGNORED_WORDS.has(lower) ||
+    stopwords_de.includes(lower) ||
+    stopwords.includes(lower)
+  );
+}
 
 export class Chat {
   static removeSystemMessages(chatObject) {
@@ -113,7 +183,9 @@ export class Chat {
   // please help with maxWordsEmojiCloud
   constructor(
     chatObject = [],
-    groupAfter = 9,
+    // Eight people, eight colours: past that everyone lands in "Others"
+    // rather than sharing a colour with someone else.
+    groupAfter = 8,
     maxWordsWordCloud = 150,
     maxWordsEmojiCloud = 150
   ) {
@@ -216,7 +288,7 @@ export class Chat {
 
     if (grouped) {
       enrichedPersons[this._groupAfter].name = "Others";
-      enrichedPersons[this._groupAfter].color = "#D3D3D3";
+      enrichedPersons[this._groupAfter].color = othersColor;
       enrichedPersons[this._groupAfter].messages.sort(
         (a, b) => a.absolute_id - b.absolute_id
       );
@@ -401,8 +473,8 @@ export class Chat {
           lineTension: 0,
           pointRadius: 0,
           pointHitRadius: 2,
-          backgroundColor: hexToRgbA("#EF5350"),
-          borderColor: hexToRgbA("#B71C1C", [1]),
+          backgroundColor: hexToRgbA(accentColor, 0.2),
+          borderColor: accentColor,
         },
       ],
     };
@@ -424,45 +496,7 @@ export class Chat {
 
   _getAllWords() {
     return this.sortedFreqDict
-      .filter(
-        (word) =>
-          !(
-            stopwords_de.includes(word[0].toLowerCase()) ||
-            stopwords.includes(word[0].toLowerCase()) ||
-            [
-              "",
-              "ich",
-              "du",
-              "wir",
-              "aber",
-              "<media",
-              "<attached:",
-              "audio",
-              "omitted>",
-              "bild",
-              "image",
-              "<medien",
-              "ausgeschlossen>",
-              "weggelassen",
-              "omitted",
-              "_",
-              "_weggelassen>",
-              "_ommited>",
-              "_omesso>",
-              "_omitted",
-              "_weggelassen",
-              "_attached",
-              "edited>",
-              "<This",
-              "message",
-              "Missed",
-              "voice",
-              "call.",
-              "Location:",
-              "deleted",
-            ].includes(word[0].toLowerCase())
-          ) && word[1] > 1
-      )
+      .filter((word) => !isNoiseWord(word[0]) && word[1] > 1)
       .map((word) => {
         return { word: word[0], freq: word[1] };
       });

@@ -1,97 +1,112 @@
 <template>
-  <div v-if="chat" class="text-center">
-    <div id="download-graphs">
-      <GlobalHeader class="only-visible-to-html2canvas" />
-      <DownloadPopup
-        :chat="chat"
-        is-simple
-        class="my-5"
-        data-html2canvas-ignore
-        remove-height-in-html2-canvas
-      />
-      <div class="text-h2 font-weight-bold pb-10">{{ $t("chatTimeline") }}</div>
-      <div>{{ $t("messagesPerDay") }}</div>
-      <Share
-        id="chat-timeline"
-        :title="$t('messagesPerDay')"
-        :subtitle="$t('chatTimeline')"
-      >
-        <ChartsLineChart :chartdata="chat" />
-      </Share>
-      <DownloadPopup
-        :chat="chat"
-        data-html2canvas-ignore
-        remove-height-in-html2-canvas
-      />
-      <Share id="fun-facts" title="Fun Facts">
-        <ChartsFunFacts
-          :chartdata="chat"
-          class="pb-md-10"
+  <div v-if="chat" class="wa-scope">
+    <div
+      id="download-graphs"
+      class="mx-auto flex max-w-[1080px] flex-col gap-6 md:gap-8"
+    >
+      <div class="flex justify-between">
+        <div class="text-4xl font-bold">
+          {{ $t("homeLanding.resultsTitle") }}
+        </div>
+
+        <DownloadPopup
+          :chat="chat"
+          is-simple
           data-html2canvas-ignore
           remove-height-in-html2-canvas
         />
-      </Share>
+      </div>
+
+      <ChartsCard :title="$t('chatTimeline')" :subtitle="$t('messagesPerDay')">
+        <Share
+          id="chat-timeline"
+          :title="$t('messagesPerDay')"
+          :subtitle="$t('chatTimeline')"
+        >
+          <div class="h-[280px] md:h-[360px]">
+            <ChartsLineChart :chartdata="chat" />
+          </div>
+        </Share>
+      </ChartsCard>
 
       <ChartsTextStats :chat="chat" />
+
+      <ChartsCard title="Fun Facts">
+        <Share id="fun-facts" title="Fun Facts">
+          <!-- No html2canvas-ignore here: the fun facts belong in the
+               downloaded summary image like every other card. -->
+          <ChartsFunFacts :chartdata="chat" />
+        </Share>
+      </ChartsCard>
 
       <GroupOthers
         :chat-object="chat"
         data-html2canvas-ignore
         remove-height-in-html2-canvas
       />
-      <!-- Make dropdown -> messages or words -->
-      <div class="text-h3 font-weight-bold py-10">{{ $t("messagesPer") }}</div>
-      <v-row>
-        <v-col cols="12" md="6">
-          <div class="text-h4 font-weight-bold">{{ $t("person") }}</div>
+
+      <div class="grid gap-6 md:grid-cols-2 md:gap-8">
+        <ChartsCard :title="$t('person')" :subtitle="$t('messagesPer')">
           <Share
             id="messages-per-person"
-            class="py-10"
             :title="$t('messagesPer') + ' - ' + $t('person')"
           >
-            <ChartsDonughtChart :chartdata="chat" />
+            <div class="mx-auto max-w-[360px]">
+              <ChartsDonughtChart
+                :chartdata="chat"
+                :center-label="$t('messages')"
+              />
+            </div>
           </Share>
-        </v-col>
-        <v-col cols="12" md="6">
-          <div class="text-h4 font-weight-bold">{{ $t("timeOfDay") }}</div>
+        </ChartsCard>
+
+        <ChartsCard :title="$t('timeOfDay')" :subtitle="$t('messagesPer')">
           <Share
             id="messages-per-time-of-day"
-            class="py-10"
             :title="$t('messagesPer') + ' - ' + $t('timeOfDay')"
           >
-            <ChartsBarChart :chartdata="chat" data-grouping="hourly" />
+            <div class="h-[300px]">
+              <ChartsBarChart :chartdata="chat" data-grouping="hourly" />
+            </div>
           </Share>
-        </v-col>
-      </v-row>
+        </ChartsCard>
+      </div>
 
-      <v-row>
-        <v-col cols="12" sm="6">
-          <div class="text-h4 font-weight-bold">{{ $t("month") }}</div>
+      <div class="grid gap-6 md:grid-cols-2 md:gap-8">
+        <ChartsCard :title="$t('month')" :subtitle="$t('messagesPer')">
           <Share
             id="radar-month"
-            class="py-10"
             :title="$t('messagesPer') + ' - ' + $t('month')"
           >
-            <ChartsRadarChart :chartdata="chat" data-grouping="weekly" />
+            <div class="mx-auto max-w-[420px]">
+              <ChartsRadarChart :chartdata="chat" data-grouping="weekly" />
+            </div>
           </Share>
-        </v-col>
-        <v-col cols="12" sm="6">
-          <div class="text-h4 font-weight-bold">{{ $t("weekday") }}</div>
+        </ChartsCard>
+
+        <ChartsCard :title="$t('weekday')" :subtitle="$t('messagesPer')">
           <Share
             id="radar-day"
-            class="py-10"
             :title="$t('messagesPer') + ' - ' + $t('weekday')"
           >
-            <ChartsRadarChart :chartdata="chat" data-grouping="daily" />
+            <div class="mx-auto max-w-[420px]">
+              <ChartsRadarChart :chartdata="chat" data-grouping="daily" />
+            </div>
           </Share>
-        </v-col>
-      </v-row>
+        </ChartsCard>
+      </div>
 
-      <div class="text-h3 font-weight-bold pt-10">{{ $t("wordCloud") }}</div>
-      <ChartsWordCloud id="wordcloud" :chartdata="chat" class="px-10" />
+      <ChartsCard :title="$t('wordCloud')">
+        <Share id="wordcloud" :title="$t('wordCloud')">
+          <ChartsWordCloud :chartdata="chat" class="h-[320px]" />
+        </Share>
+      </ChartsCard>
 
-      <div class="text-h3 font-weight-bold pt-10">Emojis</div>
-      <ChartsEmojiCloud id="emojicloud" :chartdata="chat" class="px-10" />
+      <ChartsCard title="Emojis">
+        <Share id="emojicloud" title="Emojis">
+          <ChartsEmojiCloud :chartdata="chat" class="h-[260px]" />
+        </Share>
+      </ChartsCard>
 
       <DownloadPopup
         :chat="chat"
@@ -108,8 +123,6 @@
         :results="this"
         :is-valid-subscription="isValidSubscription"
       />
-
-      <GlobalFooter class="only-visible-to-html2canvas" />
     </div>
   </div>
 </template>

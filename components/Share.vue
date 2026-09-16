@@ -1,28 +1,58 @@
 <template>
-  <v-container ref="container" style="position: relative">
+  <div ref="container" class="wa-scope relative">
     <div ref="content">
       <slot></slot>
     </div>
-    <v-btn
-      :loading="loading"
+    <button
+      type="button"
       :disabled="loading"
-      class="btn-color-dark"
-      icon
-      size="x-large"
+      :aria-label="canShare ? 'Share' : $t('downloadResults')"
       data-html2canvas-ignore
-      style="position: absolute; right: 0; top: 0"
+      class="absolute right-0 top-0 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full border border-solid border-[rgba(29,29,31,0.08)] bg-white/80 text-wa-ink-faint backdrop-blur transition-colors hover:bg-white hover:text-wa-accent disabled:opacity-50"
       @click="share"
     >
-      <v-icon v-if="canShare" size="35">mdi-share</v-icon>
-      <v-icon v-else size="35">mdi-download</v-icon>
-    </v-btn>
-  </v-container>
+      <span
+        v-if="loading"
+        class="block h-4 w-4 animate-spin rounded-full border-2 border-solid border-[rgba(29,29,31,0.15)] border-t-wa-accent"
+      ></span>
+      <svg
+        v-else-if="canShare"
+        viewBox="0 0 24 24"
+        class="h-[18px] w-[18px]"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="18" cy="5" r="3" />
+        <circle cx="6" cy="12" r="3" />
+        <circle cx="18" cy="19" r="3" />
+        <path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4" />
+      </svg>
+      <svg
+        v-else
+        viewBox="0 0 24 24"
+        class="h-[18px] w-[18px]"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M12 3v12M7 11l5 5 5-5M5 21h14" />
+      </svg>
+    </button>
+  </div>
 </template>
 
 <script>
 import { downloadBase64File } from "~/utils/utils";
 import html2canvas from "html2canvas";
 import { GTAG_RESULTS, gtagEvent } from "~/utils/gtagValues";
+import { SVG_CHART_CLASS, chartToCanvas } from "~/utils/svgImage";
 
 export default {
   name: "Share",
@@ -147,14 +177,31 @@ export default {
 
       return canvas;
     },
+    /**
+     * The word and emoji clouds are amCharts SVG, not a canvas. html2canvas
+     * never settles on them — it used to leave the share button spinning for
+     * good — so they are rasterised directly instead.
+     */
     async getCanvas(chartName) {
       const root =
         this.$refs.content || this.$refs.container?.$el || this.$refs.container;
       const rawCanvas = root?.querySelector?.("canvas");
+      const title = this.getTitle(chartName);
 
       if (rawCanvas && rawCanvas.width > 0 && rawCanvas.height > 0) {
-        const title = this.getTitle(chartName);
         return this.createBrandedChartCanvas(rawCanvas, title, this.subtitle);
+      }
+
+      const svgChart = root?.querySelector?.(`.${SVG_CHART_CLASS}`);
+      if (svgChart) {
+        const chartCanvas = await chartToCanvas(svgChart);
+        if (chartCanvas) {
+          return this.createBrandedChartCanvas(
+            chartCanvas,
+            title,
+            this.subtitle
+          );
+        }
       }
 
       // Fallback for non-canvas elements
@@ -175,7 +222,6 @@ export default {
             logging: false,
             useCORS: true,
           });
-          const title = this.getTitle(chartName);
           return this.createBrandedChartCanvas(
             renderedCanvas,
             title,
@@ -204,7 +250,15 @@ export default {
 
       let canvas;
       try {
-        canvas = await this.getCanvas(chartName);
+        canvas = await Promise.race([
+          this.getCanvas(chartName),
+          new Promise((_resolve, reject) =>
+            setTimeout(
+              () => reject(new Error("Rendering the image timed out")),
+              20000
+            )
+          ),
+        ]);
       } catch (err) {
         console.error("Failed to generate canvas for share", err);
       }

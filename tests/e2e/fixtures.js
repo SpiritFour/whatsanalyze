@@ -111,6 +111,14 @@ const activeSubscription = (overrides = {}) => ({
 const analyzeChat = async (page, file = EXAMPLE_CHAT) => {
   await page.locator("#uploadmytextfile").setInputFiles(file);
   await expect(page.getByText("Chat Timeline", { exact: true })).toBeVisible();
+  // `toBeVisible` passes on a fully transparent element, so it says nothing
+  // about whether the analysis was painted. A reveal animation that never
+  // fires leaves the whole thing at opacity 0 and every assertion above
+  // still green.
+  await expect(page.locator("#results .landing-reveal")).toHaveCSS(
+    "opacity",
+    "1"
+  );
 };
 
 /** A second export, so the paid chat and the new one are clearly different. */

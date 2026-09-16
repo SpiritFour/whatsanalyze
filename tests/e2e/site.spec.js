@@ -123,9 +123,9 @@ test.describe("tools and footer", () => {
 
   test("gives every footer link somewhere to go", async ({ page }) => {
     await page.goto("/");
-    await page.waitForSelector(".foot");
+    await page.waitForSelector(".site-footer");
 
-    const links = await page.locator(".foot a").all();
+    const links = await page.locator(".site-footer a").all();
     expect(links.length).toBeGreaterThanOrEqual(10);
 
     for (const link of links) {
@@ -181,26 +181,25 @@ test.describe("tools and footer", () => {
     ).toBeVisible();
     // The upload hero stays on the page, so another chat can be dropped in
     // without leaving the results.
-    await expect(page.locator(".top-color")).toBeVisible();
+    await expect(page.locator("#dropzone-slot")).toBeAttached();
   });
 
-  test("opens the tools dropdown from the header and navigates from it", async ({
-    page,
-  }) => {
+  test("navigates from the header links", async ({ page }) => {
     await page.goto("/");
-    await page.locator(".header-tools-link").hover();
 
-    const dropdown = page.locator(".tools-dropdown-menu");
-    await expect(dropdown).toBeVisible();
-    await expect(dropdown.locator(".dropdown-tool-item")).toHaveCount(6);
+    const nav = page.locator(".site-header__nav");
+    // The tools are one plain link now, not a dropdown.
+    await expect(nav.locator("a")).toHaveCount(2);
+    await expect(page.locator(".site-header__dropdown")).toHaveCount(0);
+    // A "start the analyzer" button on the analyzer itself is not a call to
+    // action — the homepage header has none.
+    await expect(page.locator(".site-header__cta")).toHaveCount(0);
 
-    await dropdown.locator(".dropdown-tool-item").first().click();
-    await page.waitForURL(/.*\/tools\/inactivity/);
-    await expect(page.locator(".landing-hero__title")).toBeVisible();
-
-    // The header link itself goes to the directory.
-    await page.locator(".header-tools-link").click();
+    await nav.locator("a").first().click();
     await page.waitForURL(/.*\/tools$/);
     await expect(page.locator(".tools-directory")).toBeVisible();
+
+    await nav.locator("a").nth(1).click();
+    await page.waitForURL(/.*\/wrapped$/);
   });
 });
