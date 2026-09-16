@@ -52,7 +52,7 @@
 import { downloadBase64File } from "~/utils/utils";
 import html2canvas from "html2canvas";
 import { GTAG_RESULTS, gtagEvent } from "~/utils/gtagValues";
-import { largestSvg, svgToCanvas } from "~/utils/svgImage";
+import { SVG_CHART_CLASS, chartToCanvas } from "~/utils/svgImage";
 
 export default {
   name: "Share",
@@ -192,11 +192,15 @@ export default {
         return this.createBrandedChartCanvas(rawCanvas, title, this.subtitle);
       }
 
-      const svg = largestSvg(root);
-      if (svg) {
-        const svgCanvas = await svgToCanvas(svg);
-        if (svgCanvas) {
-          return this.createBrandedChartCanvas(svgCanvas, title, this.subtitle);
+      const svgChart = root?.querySelector?.(`.${SVG_CHART_CLASS}`);
+      if (svgChart) {
+        const chartCanvas = await chartToCanvas(svgChart);
+        if (chartCanvas) {
+          return this.createBrandedChartCanvas(
+            chartCanvas,
+            title,
+            this.subtitle
+          );
         }
       }
 

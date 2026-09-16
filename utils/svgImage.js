@@ -32,17 +32,43 @@ export function svgToDataUrl(svg) {
   return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(source);
 }
 
+/** A loaded <img> for a data URL, or null if the browser refuses it. */
+async function loadImage(src) {
+  const image = new Image();
+  try {
+    await new Promise((resolve, reject) => {
+      image.onload = resolve;
+      image.onerror = () => reject(new Error("Could not load the image"));
+      image.src = src;
+    });
+  } catch (error) {
+    console.error("Could not load a chart image", error);
+    return null;
+  }
+  return image;
+}
+
+/**
+ * The picture of a chart, straight from amCharts where the element offers it.
+ * Its exporter handles the browsers a hand-rolled SVG raster does not.
+ */
+async function chartImageSource(element) {
+  if (typeof element?.exportChartImage !== "function") return null;
+  try {
+    return await element.exportChartImage();
+  } catch (error) {
+    console.error("The chart could not export itself", error);
+    return null;
+  }
+}
+
 /** The SVG, drawn onto a white canvas at `scale` times its screen size. */
 export async function svgToCanvas(svg, scale = 2) {
   const rect = svg.getBoundingClientRect();
   if (!rect.width || !rect.height) return null;
 
-  const image = new Image();
-  await new Promise((resolve, reject) => {
-    image.onload = resolve;
-    image.onerror = () => reject(new Error("Could not rasterise the SVG"));
-    image.src = svgToDataUrl(svg);
-  });
+  const image = await loadImage(svgToDataUrl(svg));
+  if (!image) return null;
 
   const canvas = document.createElement("canvas");
   canvas.width = rect.width * scale;
@@ -52,6 +78,33 @@ export async function svgToCanvas(svg, scale = 2) {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
   return canvas;
+}
+
+/**
+ * A canvas of one SVG chart: the chart's own export if it offers one, a raster
+ * of its SVG otherwise.
+ */
+export async function chartToCanvas(element) {
+  const svg = largestSvg(element);
+  if (!svg) return null;
+
+  const rect = svg.getBoundingClientRect();
+  const exported = await chartImageSource(element);
+  if (exported) {
+    const image = await loadImage(exported);
+    if (image) {
+      const canvas = document.createElement("canvas");
+      canvas.width = image.naturalWidth || rect.width;
+      canvas.height = image.naturalHeight || rect.height;
+      const ctx = canvas.getContext("2d");
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+      return canvas;
+    }
+  }
+
+  return svgToCanvas(svg);
 }
 
 /**
@@ -70,7 +123,7 @@ export async function snapshotSvgCharts(root) {
       if (!svg) return null;
       const rect = svg.getBoundingClientRect();
       try {
-        const canvas = await svgToCanvas(svg);
+        const canvas = await chartToCanvas(chart);
         if (!canvas) return null;
         return {
           src: canvas.toDataURL("image/png"),

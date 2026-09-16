@@ -61,8 +61,16 @@ export default {
     this.series.maxFontSize = 64;
     this.series.minWordLength = 0;
     this.updateGraph();
+
+    // amCharts renders to SVG, which neither html2canvas nor a hand-rolled
+    // canvas raster can be trusted with in every browser. Its own exporter
+    // can, so the share button and the summary capture ask the element for a
+    // picture instead of reading its DOM.
+    this.$refs.chartdiv.exportChartImage = () =>
+      this.chart.exporting.getImage("png");
   },
   beforeUnmount: function () {
+    if (this.$refs.chartdiv) delete this.$refs.chartdiv.exportChartImage;
     this.chart.dispose();
   },
   methods: {

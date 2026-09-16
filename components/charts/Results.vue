@@ -123,8 +123,6 @@
         :results="this"
         :is-valid-subscription="isValidSubscription"
       />
-
-      <SiteFooter class="only-visible-to-html2canvas" />
     </div>
   </div>
 </template>
