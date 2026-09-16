@@ -66,7 +66,7 @@ export default {
 
 <style lang="scss" scoped>
 .landing-section {
-  padding: clamp(4rem, 10vw, 7.5rem) 1.5rem;
+  padding: clamp(4rem, 10vw, 4rem) 1.5rem;
   text-align: center;
 
   &--light {

@@ -54,8 +54,8 @@ export default {
     this.series.labels.template.tooltipText = "[bold]{freq}[/] x {word}";
     this.series.accuracy = 5;
     // Dynamic font scaling based on frequency
-    this.series.minFontSize = 12;
-    this.series.maxFontSize = 36;
+    this.series.minFontSize = 18;
+    this.series.maxFontSize = 64;
     this.series.minWordLength = 0;
     this.updateGraph();
   },
@@ -65,8 +65,9 @@ export default {
   methods: {
     updateGraph() {
       this.chartdata.getEmojiCloudData().then((words) => {
-        // Regex pattern to match currency like '24,95€'
-        const filterPattern = /(?:€|\$|R\$|₹)?\d+[,.]?\d*(?:€|\$|R\$|₹)?|[!?]|^\.$/;
+        // Currency amounts ("24,95€") and bare currency signs both come back
+        // from onlyEmoji as if they were emoji. They are not.
+        const filterPattern = /^(?:€|\$|R\$|₹)$|(?:€|\$|R\$|₹)?\d+[,.]?\d*(?:€|\$|R\$|₹)?|[!?]|^\.$/;
 
         const wordData = words.filter((wordObj) => {
           // Check if the word matches the currency pattern

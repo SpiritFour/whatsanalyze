@@ -49,15 +49,27 @@ export function downloadBase64File(content, fileName) {
   }
 }
 
-export function getDateString(date, includeTime = true) {
-  if (date) {
-    if (includeTime === true) {
-      return moment(date).format("MMMM Do YYYY h:mm");
-    } else {
-      return moment(date).format("dddd, MMMM Do YYYY");
-    }
-  }
-  return "";
+/**
+ * A date in the reader's language.
+ *
+ * This used to be a hard-coded English moment format, so a German page said
+ * "Thursday, June 6th 2019". Intl does the translating; pass the app's locale
+ * where one is known, and leave it out to follow the browser.
+ */
+export function getDateString(date, includeTime = true, locale = undefined) {
+  if (!date) return "";
+
+  const options = includeTime
+    ? {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      }
+    : { weekday: "long", year: "numeric", month: "long", day: "numeric" };
+
+  return new Intl.DateTimeFormat(locale, options).format(new Date(date));
 }
 
 export function dateDiffs(firstDate, lastDate, measurementUnit = "days") {

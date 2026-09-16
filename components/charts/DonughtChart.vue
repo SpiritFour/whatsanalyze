@@ -7,6 +7,7 @@
 <script>
 import { Doughnut } from "vue-chartjs";
 import { Chat } from "~/utils/transformChatData";
+import { doughnutOptions, separateSegments } from "~/utils/chartTheme";
 
 export default {
   components: { Doughnut },
@@ -14,6 +15,15 @@ export default {
     chartdata: {
       type: Object,
       default: () => new Chat(),
+    },
+    compact: {
+      type: Boolean,
+      default: false,
+    },
+    /** Headline in the hole of the ring, e.g. the total message count. */
+    centerLabel: {
+      type: String,
+      default: "",
     },
     options: {
       type: Object,
@@ -26,19 +36,19 @@ export default {
     };
   },
   computed: {
+    total() {
+      const dataset = this.graphData?.datasets?.[0];
+      if (!dataset) return 0;
+      return dataset.data.reduce((sum, value) => sum + value, 0);
+    },
     chartOptions() {
-      return (
-        this.options || {
-          responsive: true,
-          maintainAspectRatio: true,
-          aspectRatio: 1,
-          plugins: {
-            legend: {
-              position: "bottom",
-            },
-          },
-        }
-      );
+      if (this.options) return this.options;
+      return doughnutOptions({
+        compact: this.compact,
+        centerText: this.centerLabel
+          ? { value: this.total.toLocaleString(), label: this.centerLabel }
+          : null,
+      });
     },
   },
   watch: {
@@ -50,24 +60,24 @@ export default {
   },
   methods: {
     async updateGraph() {
-      this.graphData = await this.chartdata.getShareOfSpeech();
+      this.graphData = separateSegments(
+        await this.chartdata.getShareOfSpeech()
+      );
     },
   },
 };
 </script>
 
 <style scoped>
+/*
+ * Chart.js reads its size from this box. It must not carry a percentage
+ * max-width on the canvas: Chart.js resolves that against the canvas' own
+ * current width, so the chart gets locked at whatever size it was created
+ * with — which is why every chart used to render 300px wide.
+ */
 .chart-container {
   position: relative;
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.chart-container :deep(canvas) {
-  margin: 0 auto !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
 }
 </style>

@@ -184,23 +184,22 @@ test.describe("tools and footer", () => {
     await expect(page.locator("#dropzone-slot")).toBeAttached();
   });
 
-  test("opens the tools dropdown from the header and navigates from it", async ({
-    page,
-  }) => {
+  test("navigates from the header links", async ({ page }) => {
     await page.goto("/");
-    await page.locator(".site-header__link--trigger").hover();
 
-    const dropdown = page.locator(".site-header__dropdown");
-    await expect(dropdown).toBeVisible();
-    await expect(dropdown.locator(".site-header__tool")).toHaveCount(6);
+    const nav = page.locator(".site-header__nav");
+    // The tools are one plain link now, not a dropdown.
+    await expect(nav.locator("a")).toHaveCount(2);
+    await expect(page.locator(".site-header__dropdown")).toHaveCount(0);
+    // A "start the analyzer" button on the analyzer itself is not a call to
+    // action — the homepage header has none.
+    await expect(page.locator(".site-header__cta")).toHaveCount(0);
 
-    await dropdown.locator(".site-header__tool").first().click();
-    await page.waitForURL(/.*\/tools\/inactivity/);
-    await expect(page.locator(".landing-hero__title")).toBeVisible();
-
-    // The header link itself goes to the directory.
-    await page.locator(".site-header__link--trigger").click();
+    await nav.locator("a").first().click();
     await page.waitForURL(/.*\/tools$/);
     await expect(page.locator(".tools-directory")).toBeVisible();
+
+    await nav.locator("a").nth(1).click();
+    await page.waitForURL(/.*\/wrapped$/);
   });
 });

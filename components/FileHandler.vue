@@ -41,7 +41,7 @@
         <v-icon color="#21a68d">mdi-check-decagram</v-icon>
         <span class="file-handler__loaded-text">
           <span v-html="$t('fileDone')"></span>
-          <span class="file-handler__loaded-hint">
+          <span class="file-handler__loaded-hint flex gap-1">
             <span v-html="$t('fileSelect')"></span>
             <span v-html="$t('fileAnother')"></span>
           </span>
@@ -280,7 +280,7 @@ export default {
   color: $wa-ink;
   border: 2px dashed $wa-border;
   border-radius: $wa-radius-xl;
-  padding: clamp(2rem, 5vw, 3rem) clamp(1.2rem, 3vw, 2rem);
+  padding: clamp(0.8rem, 3vw, 2rem) clamp(1rem, 2vw, 1.5rem);
   text-align: center;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: $wa-shadow-lg;

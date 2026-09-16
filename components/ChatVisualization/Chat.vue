@@ -3,9 +3,9 @@
     <div class="text-center my-4">
       <v-menu>
         <template #activator="{ props: activatorProps }">
-          <v-btn class="btn-color text-white" v-bind="activatorProps">
+          <UiButton size="sm" v-bind="activatorProps">
             {{ $t("changeView") }}
-          </v-btn>
+          </UiButton>
         </template>
         <v-list>
           <v-list-item
@@ -83,9 +83,9 @@
         "
         class="my-8"
       >
-        <v-btn class="ma-auto text-white btn-color" @click="nextMessages">
+        <UiButton class="ma-auto" @click="nextMessages">
           Load next {{ offset }} messages
-        </v-btn>
+        </UiButton>
       </v-row>
     </v-container>
   </v-container>
@@ -143,7 +143,7 @@ export default {
       return await getAttachment(fileName, this.attachments);
     },
     _getDateString(date) {
-      return getDateString(date);
+      return getDateString(date, true, this.$i18n.locale);
     },
     nextMessages() {
       this.startIdx += this.offset;

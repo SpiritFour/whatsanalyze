@@ -5,6 +5,18 @@ export default {
   },
   content: [
     "./components/wrapped/**/*.{js,vue,ts}",
+    // The results page and the charts, which opt in with .wa-scope. Listed
+    // file by file so Tailwind never generates a utility whose name collides
+    // with a Vuetify class in a component that is not using Tailwind.
+    "./components/charts/**/*.{js,vue,ts}",
+    "./components/ui/**/*.{js,vue,ts}",
+    "./components/ChatVisualization/*.vue",
+    "./components/Cta.vue",
+    "./components/FeedbackBtn.vue",
+    "./components/SubscribeBtn.vue",
+    "./components/Share.vue",
+    "./components/DownloadPopup.vue",
+    "./components/GroupOthers.vue",
     "./layouts/wrapped.vue",
     "./pages/wrapped/**/*.{js,vue,ts}",
     "./assets/wrapped/**/*.{css,scss}",
@@ -28,6 +40,24 @@ export default {
           DEFAULT: "var(--wa-accent)",
           light: "var(--wa-accent-light)",
           dark: "var(--wa-accent-dark)",
+        },
+        // Vuetify ships its own .bg-accent / .text-accent / .bg-surface-*,
+        // and it wins the cascade wherever both stylesheets are loaded — so
+        // anything outside /wrapped uses these prefixed names instead.
+        "wa-accent": {
+          DEFAULT: "var(--wa-accent)",
+          light: "var(--wa-accent-light)",
+          dark: "var(--wa-accent-dark)",
+        },
+        "wa-ink": {
+          DEFAULT: "var(--wa-ink)",
+          muted: "var(--wa-ink-muted)",
+          faint: "var(--wa-ink-faint)",
+        },
+        "wa-surface": {
+          white: "var(--wa-surface-white)",
+          light: "var(--wa-surface-light)",
+          dark: "var(--wa-surface-dark)",
         },
       },
       borderRadius: {

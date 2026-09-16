@@ -28,7 +28,7 @@ export default {
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: -0.02em;
-  max-width: 20ch;
+  max-width: 60ch;
   margin: 0 auto;
 }
 
@@ -44,7 +44,7 @@ export default {
 
 .landing-cta__disclaimer {
   margin: clamp(2.5rem, 6vw, 4rem) auto 0;
-  max-width: 40rem;
+  max-width: 60rem;
   font-size: 0.8rem;
   line-height: 1.5;
   color: rgba(245, 245, 247, 0.4);

@@ -5,6 +5,16 @@
   color-scheme: dark;
   font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+}
+
+/* Tailwind's utilities lean on these defaults, which normally come from the
+   preflight reset we do not load. Any part of the site that wants Tailwind
+   opts in by carrying one of these scope classes. Only the custom properties
+   are shared: .wa-scope deliberately keeps the page's own font and colours,
+   and spells out `border-solid` where it needs a border, so that it never
+   resets anything underneath it. */
+.wrapped-scope,
+.wa-scope {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
   --tw-translate-x: 0;
@@ -72,11 +82,14 @@
 .wrapped-scope .blur-3xl {
   filter: blur(64px) !important;
 }
+/* Scoped: unscoped, this lands in the base layer — which this file emits
+   after the utilities — and a plain `button` selector then beats every
+   background utility on every button on the site. */
 @layer base {
-  button,
-  [type="button"],
-  [type="reset"],
-  [type="submit"] {
+  .wrapped-scope button,
+  .wrapped-scope [type="button"],
+  .wrapped-scope [type="reset"],
+  .wrapped-scope [type="submit"] {
     background-color: transparent;
     color: inherit;
   }

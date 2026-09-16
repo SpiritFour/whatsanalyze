@@ -4,15 +4,15 @@
     started here used to return to whatever page it was launched from, which
     is the pricing table the subscriber just paid to get rid of.
   -->
-  <v-btn
-    color="secondary"
-    class="mt-3 mb-4"
-    elevation="10"
-    style="max-width: 100%"
+  <UiButton
     to="/subscribe"
+    variant="secondary"
+    block
+    class="mt-3"
     @click="gtagEvent('subscription_pressed', GTAG_PAYMENT)"
-    >{{ $t("chooseSubscription") }}</v-btn
   >
+    {{ $t("chooseSubscription") }}
+  </UiButton>
 </template>
 
 <script>

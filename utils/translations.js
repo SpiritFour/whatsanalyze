@@ -544,6 +544,7 @@ export const messages = {
     },
     homeLanding: {
       wrappedButton: "See Your Story",
+      wrappedNav: "Wrapped — Chat as a Story",
       heroEyebrow: "WhatsApp Chat Analyzer",
       heroSubtitle:
         "Drop your chat export below and see who talks most, when you write and what you write about. Everything is read in your browser — nothing is uploaded.",
@@ -1216,7 +1217,7 @@ export const messages = {
     privacyFAQContent:
       "Ja, absolut. Die gesamte Chat-Verarbeitung erfolgt lokal in Ihrem Browser. Es werden keinerlei Daten an einen Server gesendet. Sie können sogar den Open-Source-Code auf GitHub einsehen, um dies zu überprüfen.",
     howToExport: "Wie man seinen WhatsApp-Chat exportiert",
-    howToExportOn: "Exportiere deinen Chat auf",
+    howToExportOn: "Exportiere deinen Chat",
     howToExportLong:
       "          Jeder kann ganz einfach seinen WhatsApp-Chat oder Gruppenchat exportieren. Open\n          WhatsApp auf dem Gerät, mit dem Du gerade eingeloggt sind > Tippe auf den\n Chat > Gehe zu den Chats-Einstellungen > Scrolle nach unten und tippe auf Chat exportieren >\n          Exportiere mit oder ohne Medien.",
     howToGroup: "So exportierst Du deinen WhatsApp-Gruppenchat",
@@ -1356,7 +1357,7 @@ export const messages = {
         "Berechne die verstrichene Stille, Antwortzeiten und finde die längsten Gesprächspausen in deinem Chat.",
       heroCardBtn: "Inaktivitäts-Tracker testen →",
       sectionToolsEyebrow: "Verfügbare & kommende Tools",
-      sectionToolsTitle: "Wähle aus, was du analysieren möchtest",
+      sectionToolsTitle: "Und weitere Tools",
       sectionToolsText:
         "Jedes Tool läuft direkt in deinem Browser. Keine Registrierung, keine Datenübertragung an Server.",
       toolInactivityTitle: "Inaktivität & Letzte Nachricht",
@@ -1419,15 +1420,16 @@ export const messages = {
     },
     homeLanding: {
       wrappedButton: "Zeig mir meine Story",
+      wrappedNav: "Wrapped — Chat als Story",
       heroEyebrow: "WhatsApp Chat-Analyse",
       heroSubtitle:
-        "Lade deinen Chat-Export unten hoch und sieh, wer am meisten schreibt, wann ihr schreibt und worüber. Alles wird in deinem Browser gelesen – nichts wird hochgeladen.",
+        "Wer schreibt am meisten? Wann, wann und wie oft? Speichere das Ergebnis oder sogar den ganzen Chat als PDF.",
       resultsEyebrow: "Dein Chat",
       resultsTitle: "Deine Analyse",
       previewEyebrow: "Das bekommst du",
-      previewTitle: "Diagramme, die die Geschichte deines Chats erzählen",
+      previewTitle: "Analysiere deine Chats",
       previewText:
-        "Nachrichten pro Stunde, Redeanteile, Wortwolken und Fun Facts. Ein echter Chat, genau so ausgewertet wie deiner.",
+        "Nachrichten pro Stunde, Redeanteile, Wortwolken und Fun Facts und vieles mehr.",
       wrappedEyebrow: "Neu in diesem Jahr",
       pdfEyebrow: "PDF-Export",
       pdfText:
@@ -1442,7 +1444,7 @@ export const messages = {
       zeroCloud: "KEINE CLOUD-ÜBERTRAGUNG",
       private: "100 % PRIVAT",
       dropTitle: "Ziehe deinen WhatsApp-Chat-Export hierher",
-      dropSubtitle: "Unterstützt exportierte .txt- oder .zip-Dateien",
+      dropSubtitle: ".txt- oder .zip",
       selectFile: "Chat-Datei auswählen",
       trySample: "Mit Beispiel-Chat testen",
       analyzingTitle: "Analysiere Gesprächspausen...",
@@ -2289,6 +2291,7 @@ export const messages = {
     },
     homeLanding: {
       wrappedButton: "Ver tu historia",
+      wrappedNav: "Wrapped — Tu chat como historia",
       heroEyebrow: "Analizador de chats de WhatsApp",
       heroSubtitle:
         "Sube tu chat exportado aquí abajo y descubre quién habla más, cuándo escribís y de qué. Todo se lee en tu navegador: no se sube nada.",
@@ -2983,6 +2986,7 @@ export const messages = {
     },
     homeLanding: {
       wrappedButton: "Ver a sua história",
+      wrappedNav: "Wrapped — A conversa como história",
       heroEyebrow: "Analisador de conversas do WhatsApp",
       heroSubtitle:
         "Envie a exportação da sua conversa abaixo e veja quem fala mais, quando escrevem e sobre o quê. Tudo é lido no seu navegador — nada é enviado.",
@@ -3855,6 +3859,7 @@ export const messages = {
     },
     homeLanding: {
       wrappedButton: "Voir votre story",
+      wrappedNav: "Wrapped — Le chat en story",
       heroEyebrow: "Analyseur de chat WhatsApp",
       heroSubtitle:
         "Déposez votre export de conversation ci-dessous et voyez qui écrit le plus, à quelle heure et à quel sujet. Tout est lu dans votre navigateur : rien n'est envoyé.",
@@ -4729,6 +4734,7 @@ export const messages = {
     },
     homeLanding: {
       wrappedButton: "Guarda la tua storia",
+      wrappedNav: "Wrapped — La chat come storia",
       heroEyebrow: "Analizzatore di chat WhatsApp",
       heroSubtitle:
         "Carica qui sotto l'esportazione della tua chat e scopri chi scrive di più, quando scrivete e di cosa. Tutto viene letto nel tuo browser: niente viene caricato.",

@@ -12,19 +12,24 @@
         class="landing-hero__breadcrumbs"
         aria-label="Breadcrumbs"
       >
-        <template v-for="(crumb, i) in breadcrumbs" :key="i">
+        <template v-for="(crumb, i) in breadcrumbs">
           <NuxtLink
             v-if="crumb.to"
+            :key="`link-${i}`"
             :to="crumb.to"
             class="landing-hero__breadcrumb-link"
           >
             {{ crumb.label }}
           </NuxtLink>
-          <span v-else class="landing-hero__breadcrumb-current">{{
-            crumb.label
-          }}</span>
+          <span
+            v-else
+            :key="`crumb-${i}`"
+            class="landing-hero__breadcrumb-current"
+            >{{ crumb.label }}</span
+          >
           <span
             v-if="i < breadcrumbs.length - 1"
+            :key="`sep-${i}`"
             class="landing-hero__breadcrumb-sep"
             >/</span
           >
@@ -91,12 +96,12 @@ export default {
   background: #0d1418;
   color: #f5f5f7;
   text-align: center;
-  padding: clamp(4.5rem, 12vw, 9rem) 1.5rem clamp(3rem, 8vw, 6rem);
+  padding: 4rem 1.5rem clamp(2rem, 6vw, 4rem);
   overflow: hidden;
 }
 
 .landing-hero__inner {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -163,7 +168,7 @@ export default {
   line-height: 1.1;
   letter-spacing: -0.02em;
   margin: 0 auto;
-  max-width: 18ch;
+  max-width: 60rem;
 
   :deep(.landing-hero__title-line) {
     display: block;
@@ -189,7 +194,7 @@ export default {
 }
 
 .landing-hero__visual {
-  margin-top: clamp(3rem, 7vw, 5.5rem);
+  margin-top: clamp(1rem, 7vw, 3rem);
 }
 .landing-hero--left {
   text-align: left;

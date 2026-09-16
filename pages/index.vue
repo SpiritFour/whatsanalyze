@@ -12,17 +12,13 @@
     </div>
 
     <LandingHero
-      :eyebrow="$t('homeLanding.heroEyebrow')"
       :title="$t('analyzeInSeconds')"
       :subtitle="$t('homeLanding.heroSubtitle')"
-      :note="$t('toolsHub.heroNote')"
     >
       <div id="dropzone-slot" class="home-upload">
         <p class="home-upload__specs">
           <span class="home-upload__dot"></span>
           <span class="mono-label">{{ $t("toolDropzone.localEngine") }}</span>
-          <span class="home-upload__sep">•</span>
-          <span class="mono-label">{{ $t("toolDropzone.zeroCloud") }}</span>
           <span class="home-upload__sep">•</span>
           <span class="mono-label">{{ $t("toolDropzone.private") }}</span>
         </p>
@@ -45,8 +41,6 @@
       id="results"
       theme="light"
       :reveal="false"
-      :eyebrow="$t('homeLanding.resultsEyebrow')"
-      :title="$t('homeLanding.resultsTitle')"
     >
       <ChartsResults
         ref="results"
@@ -57,53 +51,16 @@
     </LandingSection>
 
     <template v-else>
+      <!--      Charts -->
       <LandingSection
-        theme="white"
-        :eyebrow="$t('homeLanding.previewEyebrow')"
+        theme="light"
         :title="$t('homeLanding.previewTitle')"
         :text="$t('homeLanding.previewText')"
       >
         <ChartsExampleGraphs class="home-preview" />
       </LandingSection>
 
-      <LandingSection
-        theme="light"
-        :eyebrow="$t('toolsHub.sectionStepsEyebrow')"
-        :title="$t('howToExportOn')"
-      >
-        <LandingSteps :steps="exportSteps" />
-        <p class="home-guide-link">
-          <NuxtLink :to="localePath('/how-to-export-your-whatsapp-chat')">
-            {{ $t("toolsHub.guideLink") }} →
-          </NuxtLink>
-        </p>
-      </LandingSection>
-
-      <LandingSection
-        theme="dark"
-        :eyebrow="$t('toolsHub.sectionToolsEyebrow')"
-        :title="$t('toolsHub.sectionToolsTitle')"
-        :text="$t('toolsHub.sectionToolsText')"
-      >
-        <LandingCards :items="toolCards" />
-      </LandingSection>
-
-      <LandingSection
-        theme="light"
-        :eyebrow="$t('homeLanding.wrappedEyebrow')"
-        :title="$t('home.hero.english.headline')"
-        :text="$t('home.hero.subtitle')"
-      >
-        <div class="home-wrapped">
-          <p class="home-wrapped__tagline">
-            {{ $t("home.hero.english.tagline", { year: currentYear }) }}
-          </p>
-          <LandingButton :to="localePath('/wrapped')">
-            {{ $t("homeLanding.wrappedButton") }}
-          </LandingButton>
-        </div>
-      </LandingSection>
-
+      <!--      PDF -->
       <LandingSection
         theme="white"
         :eyebrow="$t('homeLanding.pdfEyebrow')"
@@ -116,26 +73,28 @@
           class="home-pdf__image"
           loading="lazy"
         />
-        <div class="home-pdf__action">
-          <LandingButton
-            :to="localePath({ path: '/', hash: '#dropzone-slot' })"
-          >
-            {{ $t("getFreePDFPreview") }}
-          </LandingButton>
-        </div>
       </LandingSection>
 
       <LandingSection
         theme="light"
-        :eyebrow="$t('home.press.eyebrow')"
-        :title="$t('homeLanding.pressTitle')"
+        :eyebrow="$t('toolsHub.sectionStepsEyebrow')"
+        :title="$t('howToExportOn')"
       >
+        <ExportExplainer cta="toolDropzone.selectFile" />
+
+        <p class="home-guide-link">
+          <NuxtLink :to="localePath('/how-to-export-your-whatsapp-chat')">
+            {{ $t("toolsHub.guideLink") }} →
+          </NuxtLink>
+        </p>
+      </LandingSection>
+
+      <LandingSection theme="light" :eyebrow="$t('home.press.eyebrow')">
         <div class="home-press">
           <a
             v-for="site in pressQuotes"
             :key="site.source"
             :href="site.href"
-            class="home-press__logo"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -154,22 +113,14 @@
         <LandingFaq :items="faqItems" />
       </LandingSection>
 
-      <LandingSection
-        theme="light"
-        :eyebrow="$t('homeLanding.aboutEyebrow')"
-        :title="$t('about')"
-      >
-        <p class="home-about" v-html="$t('aboutPoints')"></p>
-        <p class="home-guide-link">
-          <NuxtLink :to="localePath('/about')">{{ $t("about") }} →</NuxtLink>
-        </p>
+      <LandingSection theme="light">
+        <About />
       </LandingSection>
 
       <LandingCta
         :title="$t('homeLanding.ctaTitle')"
         :cta-text="$t('analyzeYourChat')"
         :cta-to="localePath({ path: '/', hash: '#dropzone-slot' })"
-        :note="$t('ctaBullets')"
         :disclaimer="$t('toolsHub.disclaimer')"
       />
     </template>
@@ -274,11 +225,6 @@ export default {
           text: site.quote,
           attribution: site.source,
         })),
-        {
-          text: this.$t("jennifer"),
-          attribution: `Jennifer ${this.$t("says")}`,
-        },
-        { text: this.$t("lara"), attribution: `Lara ${this.$t("says")}` },
       ];
     },
     faqItems() {
@@ -440,8 +386,6 @@ export default {
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 1rem;
-  font-size: 0.74rem;
-  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: $wa-ink-invert-faint;
 }
@@ -537,14 +481,8 @@ export default {
     height: 64px;
     border-radius: 50%;
     object-fit: cover;
-    filter: grayscale(1);
     opacity: 0.75;
     transition: filter 0.2s ease, opacity 0.2s ease;
-  }
-
-  &__logo:hover img {
-    filter: none;
-    opacity: 1;
   }
 }
 
