@@ -20,6 +20,7 @@
     "notFoundText": "Le lien est sans doute ancien ou mal saisi. Tout le reste est toujours là.",
     "genericTitle": "Une erreur est survenue",
     "genericText": "Cette page n'a pas pu être chargée. Recharger suffit souvent — sinon, utilisez l'un des liens ci-dessous.",
+    "reload": "Recharger la page",
     "backHome": "Retour à l'analyseur de chat",
     "toWrapped": "Ouvrir WhatsApp Wrapped"
   },
