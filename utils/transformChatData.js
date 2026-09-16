@@ -50,14 +50,24 @@ const IGNORED_WORDS = new Set([
  * "<Medien ausgeschlossen>"), so the bracket is the rule and the list above
  * only has to cover the words that leak out of them.
  *
- * Single symbols ("=", "-", ".") are dropped too. Two-character faces like
- * ":)" survive on purpose — those are things people actually say.
+ * Single symbols ("=", "-", ".") are dropped too — but an emoji is never a
+ * symbol here: the emoji cloud is built from this same list, and dropping a
+ * lone "❤" emptied it. Two-character faces like ":)" survive on purpose;
+ * those are things people actually say.
  */
+function isLoneSymbol(word) {
+  // Code points, not UTF-16 units, so an emoji counts as one character.
+  return (
+    Array.from(word).length === 1 &&
+    !/[\p{L}\p{N}\p{Extended_Pictographic}]/u.test(word)
+  );
+}
+
 function isNoiseWord(word) {
   const lower = String(word).toLowerCase();
   return (
     lower.startsWith("<") ||
-    (lower.length === 1 && !/[\p{L}\p{N}]/u.test(lower)) ||
+    isLoneSymbol(lower) ||
     IGNORED_WORDS.has(lower) ||
     stopwords_de.includes(lower) ||
     stopwords.includes(lower)

@@ -5,8 +5,6 @@
       class="mx-auto flex max-w-[1080px] flex-col gap-6 md:gap-8"
     >
       <div class="flex justify-between">
-        <SiteHeader :sticky="false" class="only-visible-to-html2canvas" />
-
         <div class="text-4xl font-bold">
           {{ $t("homeLanding.resultsTitle") }}
         </div>

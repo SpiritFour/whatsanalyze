@@ -94,4 +94,14 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+/*
+ * The chart draws into whatever box this div has. Its height normally comes
+ * from a utility class on the tag, but a cloud with no height at all renders
+ * nothing at all, so it carries its own floor.
+ */
+.js-svg-chart {
+  width: 100%;
+  min-height: 320px;
+}
+</style>
