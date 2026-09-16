@@ -1,5 +1,7 @@
 <template>
-  <div class="bottom-right">
+  <!-- Fixed to the viewport, so it lands in the middle of the downloaded
+       summary image if html2canvas is allowed to see it. -->
+  <div class="bottom-right" data-html2canvas-ignore>
     <v-dialog v-model="dialog" width="500">
       <template #activator="{ props }">
         <button type="button" class="tab" v-bind="props">

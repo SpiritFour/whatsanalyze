@@ -1,5 +1,5 @@
 <template>
-  <div ref="chartdiv"></div>
+  <div ref="chartdiv" class="js-svg-chart"></div>
 </template>
 
 <script>
@@ -40,7 +40,10 @@ export default {
   mounted() {
     let { am4core, am4themes_animated, am4plugins_wordCloud } = this.$am4core();
     am4core.useTheme(am4themes_animated);
-    am4core.options.onlyShowOnViewport = true;
+    // Not onlyShowOnViewport: a cloud that has never been scrolled past does
+    // not exist yet, and came out as an empty box in the downloaded summary
+    // image of someone who hit the button at the top of the page.
+    am4core.options.onlyShowOnViewport = false;
 
     this.chart = am4core.create(
       this.$refs.chartdiv,

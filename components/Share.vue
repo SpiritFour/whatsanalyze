@@ -52,6 +52,7 @@
 import { downloadBase64File } from "~/utils/utils";
 import html2canvas from "html2canvas";
 import { GTAG_RESULTS, gtagEvent } from "~/utils/gtagValues";
+import { largestSvg, svgToCanvas } from "~/utils/svgImage";
 
 export default {
   name: "Share",
@@ -181,36 +182,6 @@ export default {
      * never settles on them — it used to leave the share button spinning for
      * good — so they are rasterised directly instead.
      */
-    async svgToCanvas(svg) {
-      const rect = svg.getBoundingClientRect();
-      if (!rect.width || !rect.height) return null;
-
-      const clone = svg.cloneNode(true);
-      clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-      clone.setAttribute("width", rect.width);
-      clone.setAttribute("height", rect.height);
-
-      const source = new XMLSerializer().serializeToString(clone);
-      const url =
-        "data:image/svg+xml;charset=utf-8," + encodeURIComponent(source);
-
-      const image = new Image();
-      await new Promise((resolve, reject) => {
-        image.onload = resolve;
-        image.onerror = () => reject(new Error("Could not rasterise the SVG"));
-        image.src = url;
-      });
-
-      const scale = 2;
-      const canvas = document.createElement("canvas");
-      canvas.width = rect.width * scale;
-      canvas.height = rect.height * scale;
-      const ctx = canvas.getContext("2d");
-      ctx.fillStyle = "#ffffff";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-      return canvas;
-    },
     async getCanvas(chartName) {
       const root =
         this.$refs.content || this.$refs.container?.$el || this.$refs.container;
@@ -221,14 +192,9 @@ export default {
         return this.createBrandedChartCanvas(rawCanvas, title, this.subtitle);
       }
 
-      // The biggest SVG in there is the chart; amCharts adds smaller ones for
-      // its own overlays.
-      const svg = Array.from(root?.querySelectorAll?.("svg") || []).sort(
-        (a, b) =>
-          b.getBoundingClientRect().width - a.getBoundingClientRect().width
-      )[0];
+      const svg = largestSvg(root);
       if (svg) {
-        const svgCanvas = await this.svgToCanvas(svg);
+        const svgCanvas = await svgToCanvas(svg);
         if (svgCanvas) {
           return this.createBrandedChartCanvas(svgCanvas, title, this.subtitle);
         }

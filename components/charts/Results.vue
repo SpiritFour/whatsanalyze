@@ -35,11 +35,9 @@
 
       <ChartsCard title="Fun Facts">
         <Share id="fun-facts" title="Fun Facts">
-          <ChartsFunFacts
-            :chartdata="chat"
-            data-html2canvas-ignore
-            remove-height-in-html2-canvas
-          />
+          <!-- No html2canvas-ignore here: the fun facts belong in the
+               downloaded summary image like every other card. -->
+          <ChartsFunFacts :chartdata="chat" />
         </Share>
       </ChartsCard>
 

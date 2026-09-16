@@ -106,6 +106,7 @@
 import html2canvas from "html2canvas";
 import { downloadBase64File } from "~/utils/utils";
 import { scrollTo } from "~/utils/scroll";
+import { applySvgChartSnapshots, snapshotSvgCharts } from "~/utils/svgImage";
 import {
   GTAG_INTERACTION,
   GTAG_PAYMENT,
@@ -133,7 +134,12 @@ export default {
       this.loading = true;
       gtagEvent("download_image", GTAG_RESULTS);
 
-      setTimeout(() => {
+      setTimeout(async () => {
+        const graphs = document.querySelector("#download-graphs");
+        // Taken before the capture: html2canvas cannot draw the SVG clouds,
+        // and inside onclone there is no room to wait for anything.
+        const svgSnapshots = await snapshotSvgCharts(graphs);
+
         let additionalHeight = 0;
         document
           .querySelectorAll(".additional-height")
@@ -161,6 +167,10 @@ export default {
               ".only-visible-to-html2canvas"
             );
             nonVisibleStuff.forEach((y) => (y.style.display = "block"));
+            applySvgChartSnapshots(
+              clonedDoc.querySelector("#download-graphs"),
+              svgSnapshots
+            );
             return clonedDoc;
           },
         });
