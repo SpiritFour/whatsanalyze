@@ -9,6 +9,22 @@
         data-html2canvas-ignore
         remove-height-in-html2-canvas
       />
+
+      <v-row
+        class="my-5"
+        justify="center"
+        data-html2canvas-ignore
+        remove-height-in-html2-canvas
+      >
+        <div class="cta pa-8">
+          <div class="text-h3 font-weight-bold pb-4">
+            {{ $t("socialShareCtaTitle") }}
+          </div>
+          <div class="text-body-1 pb-6">{{ $t("socialShareCtaSubtitle") }}</div>
+          <SocialShareModal :chat="chat" />
+        </div>
+      </v-row>
+
       <div class="text-h2 font-weight-bold pb-10">{{ $t("chatTimeline") }}</div>
       <div>{{ $t("messagesPerDay") }}</div>
       <Share

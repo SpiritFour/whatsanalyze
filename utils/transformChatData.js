@@ -4,6 +4,51 @@ import stopwords from "stopwords-en";
 import { onlyEmoji } from "emoji-aware";
 import moment from "moment";
 
+// Words that carry no meaning for word clouds or "signature word" highlights:
+// language stopwords plus the placeholders WhatsApp leaves behind for omitted
+// media, calls and deleted messages.
+const NOISE_WORDS = [
+  "",
+  "ich",
+  "du",
+  "wir",
+  "aber",
+  "<media",
+  "<attached:",
+  "audio",
+  "omitted>",
+  "bild",
+  "image",
+  "<medien",
+  "ausgeschlossen>",
+  "weggelassen",
+  "omitted",
+  "_",
+  "_weggelassen>",
+  "_ommited>",
+  "_omesso>",
+  "_omitted",
+  "_weggelassen",
+  "_attached",
+  "edited>",
+  "<This",
+  "message",
+  "Missed",
+  "voice",
+  "call.",
+  "Location:",
+  "deleted",
+];
+
+export function isNoiseWord(word) {
+  const lowerCased = word.toLowerCase();
+  return (
+    stopwords_de.includes(lowerCased) ||
+    stopwords.includes(lowerCased) ||
+    NOISE_WORDS.includes(lowerCased)
+  );
+}
+
 export class Chat {
   static removeSystemMessages(chatObject) {
     // remove the first message with slice ("this chat is encrypted") and all system messages via the filter.
@@ -424,45 +469,7 @@ export class Chat {
 
   _getAllWords() {
     return this.sortedFreqDict
-      .filter(
-        (word) =>
-          !(
-            stopwords_de.includes(word[0].toLowerCase()) ||
-            stopwords.includes(word[0].toLowerCase()) ||
-            [
-              "",
-              "ich",
-              "du",
-              "wir",
-              "aber",
-              "<media",
-              "<attached:",
-              "audio",
-              "omitted>",
-              "bild",
-              "image",
-              "<medien",
-              "ausgeschlossen>",
-              "weggelassen",
-              "omitted",
-              "_",
-              "_weggelassen>",
-              "_ommited>",
-              "_omesso>",
-              "_omitted",
-              "_weggelassen",
-              "_attached",
-              "edited>",
-              "<This",
-              "message",
-              "Missed",
-              "voice",
-              "call.",
-              "Location:",
-              "deleted",
-            ].includes(word[0].toLowerCase())
-          ) && word[1] > 1
-      )
+      .filter((word) => !isNoiseWord(word[0]) && word[1] > 1)
       .map((word) => {
         return { word: word[0], freq: word[1] };
       });
