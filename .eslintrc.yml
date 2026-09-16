@@ -25,6 +25,7 @@ globals:
   useI18n: readonly
   useSwitchLocalePath: readonly
   navigateTo: readonly
+  reloadNuxtApp: readonly
   computed: readonly
   ref: readonly
   useHead: readonly
