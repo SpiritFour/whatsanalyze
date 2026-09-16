@@ -17,6 +17,15 @@
         />
       </div>
 
+      <ChartsCard
+        :title="$t('shareLinkCtaTitle')"
+        :subtitle="$t('shareLinkCtaSubtitle')"
+        data-html2canvas-ignore
+        remove-height-in-html2-canvas
+      >
+        <ShareLinkButton :chat="chat" />
+      </ChartsCard>
+
       <ChartsCard :title="$t('chatTimeline')" :subtitle="$t('messagesPerDay')">
         <Share
           id="chat-timeline"
@@ -30,6 +39,8 @@
       </ChartsCard>
 
       <ChartsTextStats :chat="chat" />
+
+      <HighlightsSection :chat="chat" :exclude="['overview']" />
 
       <ChartsCard title="Fun Facts">
         <Share id="fun-facts" title="Fun Facts">
