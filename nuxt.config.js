@@ -44,6 +44,16 @@ export default defineNuxtConfig({
   },
   ignore:[".delta"],
 
+  experimental: {
+    // The default, `automatic`, only reloads when a chunk fails *during route
+    // navigation*. Ours fail on first paint and on lazy components instead --
+    // mobile networks and in-app webviews dropping a request for a chunk that
+    // is present on the server -- and those fell through to the error page.
+    // `automatic-immediate` reloads the current route straight away, guarded
+    // by Nuxt against reloading the same path more than once per 10 seconds.
+    emitRouteChunkError: "automatic-immediate",
+  },
+
   nitro: {
     preset: "static",
     output: {
