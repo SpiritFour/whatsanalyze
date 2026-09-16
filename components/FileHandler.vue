@@ -112,11 +112,12 @@ export default {
           }).then((messages) => {
             return {
               messages: messages,
-              // we just pass a list of filenames with compressed contents here
+              // we just pass the zip entries here, they are only read once an
+              // attachment is actually rendered
               attachments: Object.values(zipData.files).map((file) => {
                 return {
                   name: file.name,
-                  compressedContent: file._data.compressedContent,
+                  zipEntry: file,
                 };
               }),
             };

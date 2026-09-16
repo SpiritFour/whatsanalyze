@@ -3,11 +3,14 @@ module.exports = {
     "^@/(.*)$": "<rootDir>/$1",
     "^~/(.*)$": "<rootDir>/$1",
   },
-  moduleFileExtensions: ["js", "json"],
+  moduleFileExtensions: ["js", "ts", "json"],
   transform: {
-    "^.+\\.js$": "babel-jest",
+    "^.+\\.[jt]s$": "babel-jest",
   },
   testPathIgnorePatterns: ["/node_modules/", "/tests/e2e/", "/.delta/"],
   collectCoverage: true,
-  collectCoverageFrom: ["<rootDir>/utils/transformChatData.js"],
+  collectCoverageFrom: [
+    "<rootDir>/utils/transformChatData.js",
+    "<rootDir>/utils/attachments.ts",
+  ],
 };

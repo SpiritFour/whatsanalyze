@@ -4,7 +4,11 @@ import logoBlack from "~/assets/whatsanalyze-logo-black.png";
 import myFont from "~/assets/pdf-fonts/Helvetica.js";
 
 import { dateDiffs, firstDate, getDateString, lastDate } from "~/utils/utils";
-import { Attachment, getAttachment } from "~/utils/attachments";
+import {
+  Attachment,
+  AttachmentSource,
+  getAttachment,
+} from "~/utils/attachments";
 import { Chat } from "~/utils/transformChatData";
 
 const callAddFont = function (this: any) {
@@ -18,11 +22,7 @@ jsPDF.API.events.push(["addFonts", callAddFont]);
 
 export async function render(
   chat: any,
-  attachments: Array<{
-    name: string;
-    compressedContent?: Uint8Array;
-    decompressedData?: Uint8Array;
-  }>,
+  attachments: AttachmentSource[],
   ego: string,
   isSample = false,
   chatTimeline: any,

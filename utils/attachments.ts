@@ -1,5 +1,4 @@
 import * as JSZip from "jszip";
-import pako from "pako";
 
 export enum MimeTypeGroup {
   image,
@@ -20,6 +19,14 @@ export interface Attachment {
   fileName: string;
   width?: number;
   height?: number;
+}
+
+export interface AttachmentSource {
+  name: string;
+  // The JSZip entry itself, so media is only decompressed once it is rendered.
+  zipEntry?: JSZip.JSZipObject;
+  // Set instead of `zipEntry` when a plain list of files was uploaded.
+  decompressedData?: Uint8Array;
 }
 
 function getMimeType(fileName: string): MimeTypeData {
@@ -108,17 +115,13 @@ async function renderAttachment(
 // gets attachment mimeType, src, and filename from attachments
 export async function getAttachment(
   fileName: string,
-  attachments: Array<{
-    name: string;
-    compressedContent?: Uint8Array;
-    decompressedData?: Uint8Array;
-  }>
+  attachments: AttachmentSource[]
 ): Promise<Attachment> {
   // potentially this finds files that are a false match
   // but there is the case that the images are in the "zip" folder, so we need
   // to be sure to find em
 
-  const data: any = attachments.filter((file) =>
+  const data = attachments.filter((file) =>
     RegExp(".*" + fileName).test(file.name)
   );
 
@@ -126,39 +129,13 @@ export async function getAttachment(
     // sometimes we can not find the attachment
     return renderAttachment(fileName);
   }
-  let decompressedData;
 
-  if (data[0].compressedContent) {
-    // this means we have a zip file and have to inflate it frrst
-    decompressedData = inflate(data[0]);
-  } else {
-    // this means a list of files was uploaded
-    decompressedData = data[0].decompressedData;
-  }
+  // `async` reads both deflated and stored entries. WhatsApp stores media
+  // uncompressed because it is already compressed, and a raw inflate over
+  // those bytes fails with "Error inflating data: invalid block type".
+  const decompressedData = data[0].zipEntry
+    ? await data[0].zipEntry.async("uint8array")
+    : data[0].decompressedData;
 
   return renderAttachment(fileName, decompressedData);
-}
-
-// this functions inflates ziped files
-function inflate(data: any) {
-  const inflater = new pako.Inflate({ raw: true });
-  const chunkSize = 1024; // adjust as needed
-  let offset = 0;
-
-  // needed to unkompress this by hand
-  const compressedData = data.compressedContent;
-  while (offset < compressedData.length) {
-    const end = Math.min(offset + chunkSize, compressedData.length);
-    const chunk = compressedData.subarray(offset, end);
-    inflater.push(chunk);
-    offset = end;
-  }
-
-  if (inflater.err) {
-    throw Error(`Error inflating data: ${inflater.msg}`);
-  } else {
-    const decompressedData = inflater.result;
-    // use uint8 array instead, the width and height can be calculated in the render attachment function
-    return decompressedData;
-  }
 }

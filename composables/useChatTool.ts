@@ -63,7 +63,7 @@ export interface ChatInactivityAnalysis {
 
 export interface ChatAttachment {
   name: string;
-  compressedContent: unknown;
+  zipEntry?: JSZip.JSZipObject;
 }
 
 export interface SharedChatState {
@@ -133,15 +133,7 @@ export async function parseChatFile(
 
     const attachments: ChatAttachment[] = Object.values(zip.files)
       .filter((f) => !f.name.endsWith(".txt") && !f.dir)
-      .map((f) => {
-        const zipEntry = (f as unknown) as {
-          _data?: { compressedContent?: unknown };
-        };
-        return {
-          name: f.name,
-          compressedContent: zipEntry._data?.compressedContent,
-        };
-      });
+      .map((f) => ({ name: f.name, zipEntry: f }));
 
     const durationMs = Math.round(performance.now() - startTime);
     return { messages, attachments, durationMs };
