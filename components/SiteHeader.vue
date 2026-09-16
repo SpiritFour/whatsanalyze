@@ -1,5 +1,5 @@
 <template>
-  <header class="site-header" :class="{ 'site-header--static': !sticky }">
+  <header class="site-header">
     <div class="site-header__inner">
       <NuxtLink :to="localePath('/')" class="site-header__brand">
         <img
@@ -10,33 +10,30 @@
         <span class="site-header__wordmark">WhatsAnalyze</span>
       </NuxtLink>
 
-      <nav class="site-header__nav" :aria-label="$t('toolsHub.headerTools')">
-        <NuxtLink :to="localePath('/tools')" class="site-header__link">
-          <v-icon size="16">mdi-toolbox-outline</v-icon>
-          {{ $t("toolsHub.headerTools") }}
-        </NuxtLink>
-
-        <NuxtLink :to="localePath('/wrapped')" class="site-header__link">
-          <v-icon size="16">mdi-star-four-points-outline</v-icon>
-          {{ $t("homeLanding.wrappedNav") }}
-        </NuxtLink>
-
+      <nav class="site-header__nav" aria-label="Products">
         <NuxtLink
-          v-for="link in links"
-          :key="link.to"
-          :to="link.to"
-          class="site-header__link"
+          v-for="product in otherProducts"
+          :key="product.to"
+          :to="product.to"
+          class="site-header__link site-header__link--product"
         >
-          <v-icon v-if="link.icon" size="16">{{ link.icon }}</v-icon>
-          {{ link.label }}
+          <v-icon size="16">{{ product.icon }}</v-icon>
+          {{ product.label }}
         </NuxtLink>
       </nav>
 
       <div class="site-header__actions">
-        <NuxtLink v-if="showCta" :to="ctaTo" class="site-header__cta">
-          <v-icon size="16">{{ ctaIcon }}</v-icon>
-          {{ ctaLabel }}
-        </NuxtLink>
+        <nav class="site-header__nav site-header__nav--support">
+          <NuxtLink
+            v-for="link in supportLinks"
+            :key="link.to"
+            :to="link.to"
+            class="site-header__link"
+          >
+            <v-icon v-if="link.icon" size="16">{{ link.icon }}</v-icon>
+            {{ link.label }}
+          </NuxtLink>
+        </nav>
         <LanguageSwitcher />
         <button
           type="button"
@@ -51,30 +48,23 @@
     </div>
 
     <nav v-if="menuOpen" class="site-header__mobile">
-      <NuxtLink :to="localePath('/tools')" class="site-header__mobile-link">
-        <v-icon size="18">mdi-toolbox-outline</v-icon>
-        {{ $t("toolsHub.headerTools") }}
-      </NuxtLink>
-      <NuxtLink :to="localePath('/wrapped')" class="site-header__mobile-link">
-        <v-icon size="18">mdi-star-four-points-outline</v-icon>
-        {{ $t("homeLanding.wrappedNav") }}
+      <NuxtLink
+        v-for="product in otherProducts"
+        :key="product.to"
+        :to="product.to"
+        class="site-header__mobile-link"
+      >
+        <v-icon size="18">{{ product.icon }}</v-icon>
+        {{ product.label }}
       </NuxtLink>
       <NuxtLink
-        v-for="link in links"
+        v-for="link in supportLinks"
         :key="link.to"
         :to="link.to"
-        class="site-header__mobile-link"
+        class="site-header__mobile-link site-header__mobile-link--support"
       >
         <v-icon v-if="link.icon" size="18">{{ link.icon }}</v-icon>
         {{ link.label }}
-      </NuxtLink>
-      <NuxtLink
-        v-if="showCta"
-        :to="ctaTo"
-        class="site-header__cta site-header__cta--mobile"
-      >
-        <v-icon size="16">{{ ctaIcon }}</v-icon>
-        {{ ctaLabel }}
       </NuxtLink>
     </nav>
   </header>
@@ -82,48 +72,89 @@
 
 <script setup>
 import { computed, ref, watch } from "vue";
+import { storeToRefs } from "pinia";
 import LanguageSwitcher from "~/components/LanguageSwitcher.vue";
+import { useSubscriptionStore } from "~/stores/subscription";
 
-const props = defineProps({
-  /** Extra nav entries: [{ label, to, icon? }]. /wrapped adds its own here. */
-  links: { type: Array, default: () => [] },
-  /** Main action. Defaults to the analyzer, which is the homepage. */
-  cta: { type: Object, default: null },
-  /**
-   * Off for the html2canvas copy in the downloadable graphs: html2canvas
-   * cannot render the translucent, blurred bar and paints a grey smear.
-   */
-  sticky: { type: Boolean, default: true },
-});
-
-const { locale } = useI18n();
+const { t } = useI18n();
 const localePath = useLocalePath();
 const route = useRoute();
+const { isVerified } = storeToRefs(useSubscriptionStore());
+
 const menuOpen = ref(false);
 
-const analyzeLabel = computed(() => {
-  const map = {
-    de: "Chat analysieren",
-    es: "Analizar chat",
-    fr: "Analyser le chat",
-    pt: "Analisar conversa",
-    it: "Analizza chat",
-  };
-  return map[locale.value] || "Analyze Chat";
+/** Which of the three products the reader is in right now. */
+const currentProduct = computed(() => {
+  const path = route.path;
+  if (/(^|\/)wrapped(\/|$)/.test(path)) return "wrapped";
+  if (/(^|\/)tools(\/|$)/.test(path)) return "tools";
+  return "analyzer";
 });
 
-const ctaTo = computed(() => props.cta?.to || localePath("/"));
-const ctaLabel = computed(() => props.cta?.label || analyzeLabel.value);
-const ctaIcon = computed(() => props.cta?.icon || "mdi-message-text-outline");
+const PRODUCT_ORDER = ["analyzer", "wrapped", "tools"];
 
-// A call to action pointing at the page you are already reading is not one —
-// on the homepage it read as a button that should open something, and did
-// nothing at all.
-const samePath = (a, b) =>
-  String(a).split("#")[0].replace(/\/$/, "") === String(b).replace(/\/$/, "");
-const showCta = computed(
-  () => typeof ctaTo.value !== "string" || !samePath(ctaTo.value, route.path)
-);
+/**
+ * The header leads with the two products you are not using — the third is the
+ * page you are already on, and a link to that is just noise. The order is
+ * fixed, so the bar does not reshuffle itself as you move around the site.
+ */
+const otherProducts = computed(() => {
+  const products = {
+    analyzer: {
+      to: localePath("/"),
+      label: "Analyzer",
+      icon: "mdi-chart-box-outline",
+    },
+    wrapped: {
+      to: localePath("/wrapped"),
+      label: "Wrapped",
+      icon: "mdi-star-four-points-outline",
+    },
+    tools: {
+      to: localePath("/tools"),
+      label: t("toolsHub.headerTools"),
+      icon: "mdi-toolbox-outline",
+    },
+  };
+
+  return PRODUCT_ORDER.filter((key) => key !== currentProduct.value).map(
+    (key) => products[key]
+  );
+});
+
+/**
+ * The three /wrapped kept in its own bar, now on every page. Each one points
+ * at the version that belongs to the product you are in: inside /wrapped they
+ * are its own sections and its own subscription check, everywhere else the
+ * main site's pages.
+ */
+const supportLinks = computed(() => {
+  const onWrapped = currentProduct.value === "wrapped";
+  const wrappedHome = localePath("/wrapped");
+
+  return [
+    {
+      to: onWrapped
+        ? localePath("/wrapped/subscription/verify")
+        : localePath("/subscribe"),
+      label: t("nav.subscription"),
+      icon: isVerified.value
+        ? "mdi-check-circle-outline"
+        : "mdi-information-outline",
+    },
+    {
+      // The main site keeps its privacy statement inside the imprint page.
+      to: onWrapped ? `${wrappedHome}#privacy` : localePath("/impressum"),
+      label: t("nav.privacy"),
+    },
+    {
+      to: onWrapped
+        ? `${wrappedHome}#guide`
+        : localePath("/how-to-export-your-whatsapp-chat"),
+      label: t("nav.exportGuide"),
+    },
+  ];
+});
 
 // A tap that navigates has to close the panel it was tapped in, otherwise the
 // menu stays open over the page it just opened.
@@ -144,12 +175,6 @@ watch(
   backdrop-filter: blur(12px);
   border-bottom: 1px solid $wa-border-invert;
   color: $wa-ink-invert;
-
-  &--static {
-    position: static;
-    background: $wa-surface-dark;
-    backdrop-filter: none;
-  }
 }
 
 .site-header__inner {
@@ -207,6 +232,12 @@ watch(
   }
 }
 
+/* The three secondary destinations, next to the language picker. */
+.site-header__nav--support {
+  margin-right: 0;
+  gap: 0.15rem;
+}
+
 .site-header__link {
   display: inline-flex;
   align-items: center;
@@ -224,6 +255,15 @@ watch(
     color: $wa-ink-invert;
     background: $wa-surface-dark-raised;
   }
+
+  &--product {
+    color: $wa-ink-invert;
+  }
+}
+
+.site-header__nav--support .site-header__link {
+  font-size: 0.85rem;
+  font-weight: 500;
 }
 
 .site-header__actions {
@@ -231,36 +271,6 @@ watch(
   align-items: center;
   gap: 0.6rem;
   margin-left: auto;
-}
-
-.site-header__cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.5rem 1.1rem;
-  border-radius: $wa-radius-pill;
-  background: $wa-accent;
-  color: #ffffff;
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-decoration: none;
-  white-space: nowrap;
-  transition: background 0.2s ease, transform 0.2s ease;
-
-  &:hover {
-    background: $wa-accent-light;
-    transform: translateY(-1px);
-  }
-
-  @media (max-width: 600px) {
-    display: none;
-  }
-
-  &--mobile {
-    display: inline-flex;
-    justify-content: center;
-    margin-top: 0.5rem;
-  }
 }
 
 .site-header__burger {
@@ -306,6 +316,13 @@ watch(
   &:hover {
     background: $wa-surface-dark-raised;
     color: $wa-ink-invert;
+  }
+
+  /* Secondary, so the two products stay the first thing in the panel. */
+  &--support {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: $wa-ink-invert-faint;
   }
 }
 </style>
