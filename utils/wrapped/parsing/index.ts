@@ -19,6 +19,7 @@ import { z } from "zod";
 import { getFirstMessages } from "~/utils/wrapped/parsing/analyzer/firstMessagesAnalyzer";
 import { getEmojiOverTime } from "~/utils/wrapped/parsing/analyzer/emojiOverTimeAnalyzer";
 import { getTargetYear } from "~/utils/wrapped/dateUtils";
+import { isSystemMessage } from "~/utils/systemMessages";
 
 export interface ParserResult {
   getMostUsedEmojis: EmojiAnalysis;
@@ -93,13 +94,11 @@ class Parser {
   }
 
   private filterValidMessages(messages: Message[]): Message[] {
-    const ignoredMessagePatterns = [
-      /messages and calls are end-to-end encrypted/i,
-      /is a contact\.$/i,
-    ];
+    const ignoredMessagePatterns = [/is a contact\.$/i];
 
     const nonIgnored = messages.filter((msg) => {
       if (msg.author === null) return false;
+      if (isSystemMessage(msg.message)) return false;
       const normalizedMessage = msg.message.replace(/\u200e/g, "").trim();
       return !ignoredMessagePatterns.some((pattern) =>
         pattern.test(normalizedMessage)

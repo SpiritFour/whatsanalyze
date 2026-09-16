@@ -78,6 +78,7 @@
 import { parseString } from "whatsapp-chat-parser";
 import JSZip from "jszip";
 import { GTAG_FILE, gtagEvent } from "~/utils/gtagValues";
+import { markSystemMessages } from "~/utils/systemMessages";
 
 export default {
   name: "FileHandler",
@@ -202,6 +203,7 @@ export default {
     },
 
     updateMessages(chatObject) {
+      markSystemMessages(chatObject.messages);
       this.extendDataStructure(chatObject);
       this.$emit("new_messages", chatObject);
       this.$emit("hide_explanation", true);
