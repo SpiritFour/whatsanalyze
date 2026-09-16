@@ -23,6 +23,12 @@
             pkgs.google-cloud-sdk
             # Webhook endpoints, and forwarding them to the emulator locally.
             pkgs.stripe-cli
+            # Issues, events and release history from Sentry.
+            pkgs.sentry-cli
+            # GA4 has no CLI: the Analytics Data API is queried over REST with a
+            # token from `gcloud auth application-default print-access-token`.
+            pkgs.curl
+            pkgs.jq
             pkgs.python311
             pkgs.git
           ];
