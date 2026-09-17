@@ -1,17 +1,38 @@
 <template>
-  <component
-    :is="tag"
-    v-bind="linkProps"
+  <!--
+    The three tags are spelled out rather than picked by `<component :is>`.
+    Nuxt resolves auto-imported components at compile time, so a runtime string
+    `"NuxtLink"` finds nothing to resolve and ships a literal `<NUXTLINK>`
+    element: no href, no navigation, every `to=` button dead.
+  -->
+  <NuxtLink
+    v-if="to"
+    :to="to"
     :class="classes"
-    :disabled="isButton && (disabled || loading)"
     :aria-busy="loading ? 'true' : null"
   >
-    <span
-      v-if="loading"
-      class="block h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-solid border-current border-t-transparent opacity-70"
-    ></span>
+    <span v-if="loading" :class="SPINNER"></span>
     <slot />
-  </component>
+  </NuxtLink>
+  <a
+    v-else-if="href"
+    :href="href"
+    :class="classes"
+    :aria-busy="loading ? 'true' : null"
+  >
+    <span v-if="loading" :class="SPINNER"></span>
+    <slot />
+  </a>
+  <button
+    v-else
+    type="button"
+    :class="classes"
+    :disabled="disabled || loading"
+    :aria-busy="loading ? 'true' : null"
+  >
+    <span v-if="loading" :class="SPINNER"></span>
+    <slot />
+  </button>
 </template>
 
 <script>
@@ -40,6 +61,9 @@ const SIZES = {
   lg: "px-8 py-3.5 text-base",
 };
 
+const SPINNER =
+  "block h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-solid border-current border-t-transparent opacity-70";
+
 export default {
   name: "UiButton",
   props: {
@@ -62,21 +86,10 @@ export default {
     /** Full width, for stacked cards and narrow screens. */
     block: { type: Boolean, default: false },
   },
+  data() {
+    return { SPINNER };
+  },
   computed: {
-    isButton() {
-      return !this.to && !this.href;
-    },
-    tag() {
-      // Globally registered by Nuxt, so the name is enough.
-      if (this.to) return "NuxtLink";
-      if (this.href) return "a";
-      return "button";
-    },
-    linkProps() {
-      if (this.to) return { to: this.to };
-      if (this.href) return { href: this.href };
-      return { type: "button" };
-    },
     classes() {
       return [
         // Wrapping is the normal case here: these labels are translated, and
