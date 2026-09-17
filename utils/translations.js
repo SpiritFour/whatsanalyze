@@ -430,7 +430,6 @@ export const messages = {
     subscriptionPriceAfter: "€10/month",
     chooseSubscription: "Subscribe Now",
     then: "then",
-    pageNameWrapped: "WhatsApp Wrapped your personalized WhatsApp Year Review",
     heroTitle: "WhatsApp Wrapped {currentYear}",
     heroSubtitle:
       "Your WhatsApp year, wrapped up in stunning insights! Discover your top chat buddies, most active times, and fun facts about your conversations.",
