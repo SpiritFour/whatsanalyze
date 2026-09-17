@@ -46,10 +46,13 @@
       />
 
       <div class="grid gap-6 md:grid-cols-2 md:gap-8">
-        <ChartsCard :title="$t('person')" :subtitle="$t('messagesPer')">
+        <ChartsCard
+          :title="$t('person')"
+          :subtitle="`${$t('messagesPer')} ${$t('person')}`"
+        >
           <Share
             id="messages-per-person"
-            :title="$t('messagesPer') + ' - ' + $t('person')"
+            :title="`${$t('messagesPer')} ${$t('person')}`"
           >
             <div class="mx-auto max-w-[360px]">
               <ChartsDonughtChart
@@ -60,10 +63,13 @@
           </Share>
         </ChartsCard>
 
-        <ChartsCard :title="$t('timeOfDay')" :subtitle="$t('messagesPer')">
+        <ChartsCard
+          :title="$t('timeOfDay')"
+          :subtitle="`${$t('messagesPer')} ${$t('hour')}`"
+        >
           <Share
             id="messages-per-time-of-day"
-            :title="$t('messagesPer') + ' - ' + $t('timeOfDay')"
+            :title="`${$t('messagesPer')} ${$t('hour')}`"
           >
             <div class="h-[300px]">
               <ChartsBarChart :chartdata="chat" data-grouping="hourly" />
@@ -73,10 +79,13 @@
       </div>
 
       <div class="grid gap-6 md:grid-cols-2 md:gap-8">
-        <ChartsCard :title="$t('month')" :subtitle="$t('messagesPer')">
+        <ChartsCard
+          :title="$t('month')"
+          :subtitle="`${$t('messagesPer')} ${$t('month')}`"
+        >
           <Share
             id="radar-month"
-            :title="$t('messagesPer') + ' - ' + $t('month')"
+            :title="`${$t('messagesPer')} ${$t('month')}`"
           >
             <div class="mx-auto max-w-[420px]">
               <ChartsRadarChart :chartdata="chat" data-grouping="weekly" />
@@ -84,10 +93,13 @@
           </Share>
         </ChartsCard>
 
-        <ChartsCard :title="$t('weekday')" :subtitle="$t('messagesPer')">
+        <ChartsCard
+          :title="$t('weekday')"
+          :subtitle="`${$t('messagesPer')} ${$t('weekday')}`"
+        >
           <Share
             id="radar-day"
-            :title="$t('messagesPer') + ' - ' + $t('weekday')"
+            :title="`${$t('messagesPer')} ${$t('weekday')}`"
           >
             <div class="mx-auto max-w-[420px]">
               <ChartsRadarChart :chartdata="chat" data-grouping="daily" />
