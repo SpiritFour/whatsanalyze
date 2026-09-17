@@ -36,7 +36,7 @@
           </p>
 
           <div class="mb-6">
-            <span class="text-3xl font-bold">€0</span>
+            <span class="text-3xl font-bold">{{ freePrice }}</span>
             <span class="text-gray-500 text-sm ml-1">
               {{ t("home.subscriptionAd.free.priceSuffix") }}
             </span>
@@ -92,13 +92,17 @@
           </p>
 
           <div class="mb-2">
-            <span class="text-3xl font-bold">€4,99</span>
+            <span class="text-3xl font-bold">{{ introPrice }}</span>
             <span class="text-gray-300 text-sm ml-1">
               {{ t("home.subscriptionAd.pro.introSuffix") }}
             </span>
           </div>
           <p class="text-xs text-gray-300 mb-1">
-            {{ t("home.subscriptionAd.pro.followOn") }}
+            {{
+              t("home.subscriptionAd.pro.followOn", {
+                price: subscriptionPrice,
+              })
+            }}
           </p>
           <p class="text-xs text-gray-300 mb-6">
             {{ t("home.subscriptionAd.pro.note") }}
@@ -126,7 +130,7 @@
             {{
               isStarting
                 ? t("home.subscriptionAd.pro.loading")
-                : t("home.subscriptionAd.pro.cta")
+                : t("chooseSubscription")
             }}
           </button>
           <p class="text-xs text-gray-300 text-center mt-3">
@@ -144,11 +148,18 @@
 <script lang="ts" setup>
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { fetchSubscriptionCheckoutUrl } from "~/utils/subscription";
+import { fetchWrappedCheckoutUrl } from "~/utils/subscription";
+import { INTRO_PRICE, SUBSCRIPTION_PRICE, formatPrice } from "~/utils/pricing";
 
 const isStarting = ref(false);
 const checkoutError = ref("");
-const { t, tm } = useI18n();
+const { t, tm, locale } = useI18n();
+
+const freePrice = computed(() => formatPrice(0, locale.value));
+const introPrice = computed(() => formatPrice(INTRO_PRICE, locale.value));
+const subscriptionPrice = computed(() =>
+  formatPrice(SUBSCRIPTION_PRICE, locale.value)
+);
 
 const freeFeatures = computed(
   () => tm("home.subscriptionAd.free.features") as string[]
@@ -164,7 +175,7 @@ const startSubscription = async () => {
   try {
     isStarting.value = true;
 
-    const url = await fetchSubscriptionCheckoutUrl();
+    const url = await fetchWrappedCheckoutUrl();
 
     if (!url) {
       throw new Error(t("home.subscriptionAd.errors.checkoutLinkMissing"));

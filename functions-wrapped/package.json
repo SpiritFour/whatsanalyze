@@ -14,8 +14,7 @@
     "init:templates:dev": "ts-node scripts/initializeTemplates.ts dev",
     "init:templates:prod": "ts-node scripts/initializeTemplates.ts default",
     "subscribe": "stripe trigger subscription.payment_succeeded --add \"customer:email=stripe@whatsanalyze.com\"",
-    "subscriptions:list": "stripe subscriptions list | jq \".data[] | {id: .id, status: .status, customer: .customer}\"",
-    "stripe:test-checkout:prod": "STRIPE_API_KEY=$(firebase functions:secrets:access STRIPE_SECRET_KEY --project default) stripe checkout sessions create --mode=subscription -d \"line_items[0][price]=price_1ShAqrL4rDqbYfloWx53VxpL\" -d \"line_items[0][quantity]=1\" --success-url=\"https://whatsanalyze.com/subscribe?session_id={CHECKOUT_SESSION_ID}\" --cancel-url=\"https://whatsanalyze.com/subscribe\" --live"
+    "subscriptions:list": "stripe subscriptions list | jq \".data[] | {id: .id, status: .status, customer: .customer}\""
   },
   "engines": {
     "node": "22"

@@ -142,9 +142,8 @@
         "description": "Unbegrenzte Uploads, Premium-Exporte und schnellere Verarbeitung für Power-User.",
         "priceSuffix": "/ Monat",
         "introSuffix": "im ersten Monat",
-        "followOn": "danach 10 € / Monat",
+        "followOn": "danach {price} / Monat",
         "note": "Jederzeit kündbar · mit Freunden teilen",
-        "cta": "Upgrade auf Pro",
         "loading": "Weiter zu Stripe…",
         "features": [
           "Unbegrenzte Chat-Uploads & Story-Generierungen",
@@ -300,7 +299,6 @@
     "paywall": {
       "title": "Schalte unbegrenzte Analysen frei",
       "description": "Du hast bereits einen Chat kostenlos analysiert. Abonniere jetzt, um sofort weitere Wrapped-Storys zu erzeugen.",
-      "cta": "Auf Pro upgraden",
       "secondary": "Vielleicht später"
     }
   },

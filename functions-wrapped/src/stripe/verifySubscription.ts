@@ -36,7 +36,18 @@ export const verifySubscription = onCall({ cors: true }, async (request) => {
 
     // Check if subscription has not expired
     const now = new Date();
-    const expiresAt = data.expiresAt.toDate();
+    const expiresAt = data.expiresAt?.toDate?.();
+
+    // A document without an expiry is one the webhook has not finished
+    // writing. Reading through it threw, and the caller — a customer who just
+    // paid and is being retried every couple of seconds — got a 500 each time.
+    if (!expiresAt) {
+      logger.warn("Subscription has no expiry yet", { email, subscriptionId });
+      return {
+        isValid: false,
+        message: "Subscription not found",
+      };
+    }
 
     if (now > expiresAt) {
       logger.warn("Subscription has expired", { email, expiresAt });

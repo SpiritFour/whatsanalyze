@@ -39,7 +39,7 @@
           {{
             isStarting
               ? t("home.subscriptionAd.pro.loading")
-              : t("upload.paywall.cta")
+              : t("chooseSubscription")
           }}
         </button>
         <button
@@ -61,7 +61,7 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { fetchSubscriptionCheckoutUrl } from "~/utils/subscription";
+import { fetchWrappedCheckoutUrl } from "~/utils/subscription";
 import { CATEGORY_WRAPPED, GTAG_PAYMENT, gtagEvent } from "~/utils/gtagValues";
 
 defineProps<{
@@ -89,7 +89,7 @@ const startSubscription = async () => {
 
   try {
     isStarting.value = true;
-    const url = await fetchSubscriptionCheckoutUrl();
+    const url = await fetchWrappedCheckoutUrl();
 
     if (!url) {
       throw new Error(t("home.subscriptionAd.errors.checkoutLinkMissing"));

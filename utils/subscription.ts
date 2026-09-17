@@ -55,6 +55,26 @@ export const fetchSubscriptionCheckoutUrl = async (options?: {
 };
 
 /**
+ * Subscription checkout started from inside Wrapped. Without these URLs the
+ * backend falls back to `/subscribe`, and someone who paid from Wrapped is
+ * dropped on the generic subscribe page instead of the Wrapped success page
+ * that exists for exactly this.
+ */
+export const fetchWrappedCheckoutUrl = async (): Promise<
+  string | undefined
+> => {
+  const localePath = useLocalePath();
+  const { origin } = window.location;
+
+  return fetchSubscriptionCheckoutUrl({
+    successUrl: `${origin}${localePath(
+      "/wrapped/subscription/success"
+    )}?session_id={CHECKOUT_SESSION_ID}`,
+    cancelUrl: `${origin}${localePath("/wrapped/subscription/canceled")}`,
+  });
+};
+
+/**
  * One-time checkout helper.
  */
 export const fetchOneTimeCheckoutUrl = async (options?: {

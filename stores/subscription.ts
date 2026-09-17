@@ -197,8 +197,10 @@ export const useSubscriptionStore = defineStore("subscription", {
     /**
      * Verify right after checkout, where the subscription only exists once
      * Stripe's webhook has written it. Stripe usually delivers within seconds,
-     * but the redirect is immediate, so a single "not found" says nothing yet.
-     * Only that answer is retried — an expired subscription is a final answer.
+     * but the redirect is immediate, so a single failure says nothing yet:
+     * "not found" and a backend that raced the webhook are both "not there
+     * yet". Only a subscription that is there, or one that has expired, is a
+     * final answer.
      */
     async verifyAfterCheckout(
       email: string,
@@ -206,10 +208,13 @@ export const useSubscriptionStore = defineStore("subscription", {
       attempts = 6,
       delayMs = 2500
     ) {
+      const isFinalAnswer = (result: { isValid: boolean; message?: string }) =>
+        result.isValid || /expired/i.test(result.message || "");
+
       let result = await this.verify(email, subscriptionId);
 
       for (let attempt = 1; attempt < attempts; attempt++) {
-        if (result.isValid || !/not found/i.test(result.message || "")) break;
+        if (isFinalAnswer(result)) break;
         this.isActivating = true;
         await new Promise((resolve) => setTimeout(resolve, delayMs));
         result = await this.verify(email, subscriptionId);
