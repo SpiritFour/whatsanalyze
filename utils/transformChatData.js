@@ -8,6 +8,7 @@ import stopwords_de from "stopwords-de";
 import stopwords from "stopwords-en";
 import { onlyEmoji } from "emoji-aware";
 import moment from "moment";
+import { participantMessages } from "~/utils/utils";
 
 /**
  * Words that say nothing about the conversation.
@@ -63,10 +64,16 @@ function isLoneSymbol(word) {
   );
 }
 
+/** A link someone pasted says nothing about how they talk. */
+export function isLink(word) {
+  return /^(?:https?:\/\/|www\.)/i.test(word) || word.includes("://");
+}
+
 function isNoiseWord(word) {
   const lower = String(word).toLowerCase();
   return (
     lower.startsWith("<") ||
+    isLink(lower) ||
     isLoneSymbol(lower) ||
     IGNORED_WORDS.has(lower) ||
     stopwords_de.includes(lower) ||
@@ -79,9 +86,9 @@ export class Chat {
     // Notices like "this chat is encrypted" are relabelled to the "System" author while
     // parsing (see utils/systemMessages.js), so filtering on the author is enough — we no
     // longer blind-drop the first message, which used to cost a real one on Android exports.
-    return chatObject.filter(
-      (message) => message.author.toLowerCase() !== "system"
-    );
+    // participantMessages is that filter, shared with the tool pages so no two pages can
+    // disagree about how many messages a chat holds.
+    return participantMessages(chatObject);
   }
 
   static groupBy(chatObject, key) {
@@ -236,7 +243,8 @@ export class Chat {
 
   get sortedFreqDict() {
     if (this._sortedFreqList) return this._sortedFreqList;
-    this._sortedFreqList = Chat.createSortedFreqDict(this.chatObject);
+    // Words people typed, not WhatsApp's own notices.
+    this._sortedFreqList = Chat.createSortedFreqDict(this.filterdChatObject);
     return this._sortedFreqList;
   }
 

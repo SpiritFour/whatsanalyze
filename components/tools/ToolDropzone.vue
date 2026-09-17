@@ -113,6 +113,7 @@ import {
   type ChatAttachment,
   type ChatInactivityAnalysis,
 } from "~/composables/useChatTool";
+import { participantMessages } from "~/utils/utils";
 import { analyzeInactivity } from "~/utils/inactivity";
 import { analyzeMessages } from "~/utils/messageCounter";
 import { analyzeWords } from "~/utils/wordCounter";
@@ -199,7 +200,9 @@ async function processInput(
 
     hasLoadedFile.value = true;
     loadedFileName.value = fileName;
-    parsedMessageCount.value = messages.length;
+    // What the report below counts, not the raw line count: WhatsApp's own
+    // notices are in `messages` but are nobody's message.
+    parsedMessageCount.value = participantMessages(messages).length;
     parseDurationMs.value = durationMs;
 
     // Cache in shared state for seamless transition to full analysis

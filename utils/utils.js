@@ -72,8 +72,39 @@ export function getDateString(date, includeTime = true, locale = undefined) {
   return new Intl.DateTimeFormat(locale, options).format(new Date(date));
 }
 
+/**
+ * The messages people actually sent.
+ *
+ * WhatsApp writes its own notices ("Messages are end-to-end encrypted",
+ * "X joined") into the export with the author "System". Everything that counts
+ * messages goes through here, so the analyzer and the tools cannot disagree
+ * about how big a chat is.
+ */
+export function participantMessages(messages) {
+  return messages.filter(
+    (message) =>
+      message.author &&
+      message.author.trim().length > 0 &&
+      message.author.trim().toLowerCase() !== "system"
+  );
+}
+
 export function dateDiffs(firstDate, lastDate, measurementUnit = "days") {
   return moment(lastDate).diff(moment(firstDate), measurementUnit);
+}
+
+/**
+ * How long the chat ran, in calendar days.
+ *
+ * Counted from midnight to midnight on purpose: a chat that starts at 17:47
+ * and ends at 16:47 spans the same number of days either way, and counting the
+ * raw hour difference made the analyzer say 539 where the tools said 540.
+ */
+export function chatDurationInDays(firstDate, lastDate) {
+  if (!firstDate || !lastDate) return 0;
+  return moment(lastDate)
+    .startOf("day")
+    .diff(moment(firstDate).startOf("day"), "days");
 }
 
 export function firstDate(chat) {

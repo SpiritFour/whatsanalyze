@@ -1,3 +1,5 @@
+import { chatDurationInDays, participantMessages } from "~/utils/utils";
+
 export function formatTimeAgo(date, referenceDate = new Date()) {
   const diffMs = Math.max(0, referenceDate.getTime() - date.getTime());
   const diffSec = Math.floor(diffMs / 1000);
@@ -43,12 +45,7 @@ export function formatDuration(ms) {
 }
 
 export function analyzeInactivity(messages, parseDurationMs = 0) {
-  const validMessages = messages.filter(
-    (m) =>
-      m.author &&
-      m.author.toLowerCase() !== "system" &&
-      m.author.trim().length > 0
-  );
+  const validMessages = participantMessages(messages);
 
   if (validMessages.length === 0) {
     return null;
@@ -187,11 +184,10 @@ export function analyzeInactivity(messages, parseDurationMs = 0) {
     percentage: p.conversationStartersPct,
   }));
 
+  // Same calendar-day span the analyzer reports, so every page agrees.
   const totalDays = Math.max(
     1,
-    Math.round(
-      (lastMsg.date.getTime() - firstMsg.date.getTime()) / (1000 * 60 * 60 * 24)
-    )
+    chatDurationInDays(firstMsg.date, lastMsg.date)
   );
 
   return {
