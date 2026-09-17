@@ -107,6 +107,13 @@ export default {
     };
   },
   methods: {
+    escapeHtml(text) {
+      return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    },
     parseMessage(message) {
       const validUrl = new RegExp(
         "(https?:\\/\\/)?" + // protocol
@@ -117,19 +124,38 @@ export default {
           "(\\#[-a-z\\d_]*)?",
         "i"
       );
+
+      // "<media omitted>", "<Medien ausgeschlossen>", ... — WhatsApp's own
+      // marker for an attachment that was left out of the export. The whole
+      // message is one angle-bracket tag, so it used to be dropped as unknown
+      // HTML and left a bubble with nothing but a name and a time in it.
+      const omitted = message.trim().match(/^<([^<>]+)>$/);
+      if (omitted) {
+        return (
+          '<span class="omitted">📎 ' + this.escapeHtml(omitted[1]) + "</span>"
+        );
+      }
+
       const words = message.split(" ");
       let htmlMessage = "";
       words.forEach((word) => {
+        const safeWord = this.escapeHtml(word);
         if (validUrl.test(word)) {
+          // Always an absolute http(s) link: a bare "example.com" used to
+          // become a link to a page on whatsanalyze.com, and anything else a
+          // message can carry ("javascript:...") must never end up in an href.
+          const href = /^https?:\/\//i.test(word)
+            ? encodeURI(word)
+            : "https://" + encodeURI(word.replace(/^[a-z]+:\/*/i, ""));
           htmlMessage +=
-            "<a style='word-break: break-all' href=" +
-            word +
-            ">" +
-            word +
+            '<a style="word-break: break-all" rel="noopener noreferrer" target="_blank" href="' +
+            href +
+            '">' +
+            safeWord +
             "</a>" +
             " ";
         } else {
-          htmlMessage += word + " ";
+          htmlMessage += safeWord + " ";
         }
       });
       return htmlMessage;
@@ -179,6 +205,20 @@ export default {
 .message {
   text-align: left;
   word-break: break-word;
+}
+
+/*
+ * Links live on a dark doodle background, where the browser's default blue is
+ * all but unreadable. This is the blue WhatsApp itself uses on dark bubbles.
+ */
+.message :deep(a) {
+  color: #53bdeb;
+  text-decoration: underline;
+}
+
+.message :deep(.omitted) {
+  color: rgb(204, 204, 204);
+  font-style: italic;
 }
 
 .system {
