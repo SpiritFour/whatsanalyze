@@ -22,7 +22,6 @@ const expectedFiles = [
   "how-to-export-your-whatsapp-chat/index.html",
   "impressum/index.html",
   "whatsapp-to-pdf/index.html",
-  "whatsapp-wrapped-year-review/index.html",
   "de/tools/index.html",
   "de/tools/court-evidence/index.html",
   "de/tools/proof-of-relationship/index.html",
@@ -35,7 +34,6 @@ const expectedFiles = [
   "de/about/index.html",
   "de/impressum/index.html",
   "de/subscribe/index.html",
-  "de/whatsapp-wrapped-year-review/index.html",
   "wrapped/index.html",
   "wrapped/results/index.html",
 ];

@@ -4,7 +4,19 @@
   },
   "hosting": {
     "public": "dist",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "redirects": [
+      {
+        "source": "/whatsapp-wrapped-year-review",
+        "destination": "/wrapped",
+        "type": 301
+      },
+      {
+        "source": "/:locale/whatsapp-wrapped-year-review",
+        "destination": "/:locale/wrapped",
+        "type": 301
+      }
+    ]
   },
   "functions": [
     {

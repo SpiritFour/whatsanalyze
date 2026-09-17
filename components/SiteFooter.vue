@@ -109,10 +109,6 @@ const guides = computed(() => [
     to: localePath("/switch-from-whatsapp-to-signal"),
     label: t("pageNameSignal"),
   },
-  {
-    to: localePath("/whatsapp-wrapped-year-review"),
-    label: t("pageNameWrapped"),
-  },
   { to: localePath("/wrapped"), label: t("nav.appTitle") },
 ]);
 

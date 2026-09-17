@@ -15,6 +15,14 @@
     "or": "ou",
     "menu": "Menu"
   },
+  "errorPage": {
+    "notFoundTitle": "Esta página não existe",
+    "notFoundText": "O link deve estar desatualizado ou mal escrito. Tudo o resto continua aqui.",
+    "genericTitle": "Algo correu mal",
+    "genericText": "Não foi possível carregar esta página. Recarregar costuma resolver — caso contrário, siga um dos links abaixo.",
+    "backHome": "Voltar ao analisador de conversas",
+    "toWrapped": "Abrir o WhatsApp Wrapped"
+  },
   "nav": {
     "mainApp": "Início WhatsAnalyze",
     "subscription": "Subscrição Pro",

@@ -121,6 +121,20 @@ test.describe("tools and footer", () => {
     "/tools/chat-heatmap",
   ];
 
+  test("no longer links to the retired year review page", async ({ page }) => {
+    // It was replaced by /wrapped and only ever reached an error page. Hosting
+    // redirects the old URL for the copies Google still has.
+    await page.goto("/");
+    await page.waitForSelector(".site-footer");
+
+    await expect(
+      page.locator(".site-footer a[href*='whatsapp-wrapped-year-review']")
+    ).toHaveCount(0);
+    await expect(page.locator(".site-footer a[href='/wrapped']")).toHaveCount(
+      1
+    );
+  });
+
   test("gives every footer link somewhere to go", async ({ page }) => {
     await page.goto("/");
     await page.waitForSelector(".site-footer");
@@ -201,5 +215,32 @@ test.describe("tools and footer", () => {
 
     await nav.locator("a").nth(1).click();
     await page.waitForURL(/.*\/wrapped$/);
+  });
+});
+
+test.describe("the error page", () => {
+  test("carries the site chrome and a way out", async ({ page }) => {
+    const response = await page.goto("/this-route-does-not-exist");
+    expect(response?.status()).toBe(404);
+
+    await expect(page).toHaveTitle("This page doesn't exist");
+    await expect(page.locator(".site-header")).toBeVisible();
+    await expect(page.locator(".site-footer")).toBeAttached();
+
+    // Clearing the error is what actually gets the user off this page — a
+    // NuxtLink on its own leaves it rendered over whatever it navigated to.
+    await page.locator(".error-page__primary").click();
+    await page.waitForURL(/.*:\d+\/$/);
+    await expect(page.locator("#uploadmytextfile")).toBeAttached();
+  });
+
+  test("keeps the locale it was reached in", async ({ page }) => {
+    await page.goto("/de/this-route-does-not-exist");
+
+    await expect(page).toHaveTitle("Diese Seite gibt es nicht");
+    await expect(page.locator(".error-page__primary")).toHaveAttribute(
+      "href",
+      "/de"
+    );
   });
 });

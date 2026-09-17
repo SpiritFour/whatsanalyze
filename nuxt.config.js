@@ -23,7 +23,6 @@ const localizedPages = [
   "tools/word-counter",
   "tools/chat-heatmap",
   "whatsapp-to-pdf",
-  "whatsapp-wrapped-year-review",
   "wrapped",
   "wrapped/results",
   "wrapped/subscription/verify",

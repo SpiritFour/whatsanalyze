@@ -15,6 +15,14 @@
     "or": "ou",
     "menu": "Menu"
   },
+  "errorPage": {
+    "notFoundTitle": "Cette page n'existe pas",
+    "notFoundText": "Le lien est sans doute ancien ou mal saisi. Tout le reste est toujours là.",
+    "genericTitle": "Une erreur est survenue",
+    "genericText": "Cette page n'a pas pu être chargée. Recharger suffit souvent — sinon, utilisez l'un des liens ci-dessous.",
+    "backHome": "Retour à l'analyseur de chat",
+    "toWrapped": "Ouvrir WhatsApp Wrapped"
+  },
   "nav": {
     "mainApp": "Accueil WhatsAnalyze",
     "subscription": "Abonnement Pro",
