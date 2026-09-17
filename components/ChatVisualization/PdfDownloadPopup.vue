@@ -107,9 +107,7 @@
                 @click="payOneTimeStripe"
               >
                 <IconCard v-if="!isOneTimeLoading" />
-                <span
-                  >{{ $t("chooseOneTime") }} ({{ price }} {{ currency }})</span
-                >
+                <span>{{ $t("chooseOneTime") }} ({{ oneTimePrice }})</span>
               </UiButton>
 
               <div
@@ -166,7 +164,7 @@
               <IconDownload />
               <span v-html="$t('downloadFreePreviewPDF')"></span>
             </UiButton>
-            <p class="pricing-card__price">{{ 0 + " " + currency }}</p>
+            <p class="pricing-card__price">{{ freePrice }}</p>
           </div>
         </div>
 
@@ -174,7 +172,9 @@
         <div class="pricing-card pricing-card--featured">
           <div>
             <p class="pricing-card__title">{{ $t("oneTimeTitle") }}</p>
-            <p class="pricing-card__text">{{ $t("oneTimeDescription") }}</p>
+            <p class="pricing-card__text">
+              {{ $t("oneTimeDescription", { price: oneTimePrice }) }}
+            </p>
           </div>
           <div>
             <UiButton
@@ -188,9 +188,9 @@
               <span v-html="$t('downloadFullChatPDF')"></span>
             </UiButton>
             <p class="pricing-card__price">
-              {{ price + " " + currency }}
-              <span class="pricing-card__badge">-50%</span>
-              <s class="pricing-card__was">{{ 15 + " " + currency }}</s>
+              {{ oneTimePrice }}
+              <span class="pricing-card__badge">-{{ discountPercent }}%</span>
+              <s class="pricing-card__was">{{ oneTimeListPrice }}</s>
             </p>
           </div>
         </div>
@@ -200,16 +200,22 @@
           <div>
             <p class="pricing-card__title">{{ $t("subscriptionTitle") }}</p>
             <p class="pricing-card__text">
-              {{ $t("subscriptionDescription") }}
+              {{
+                $t("subscriptionDescription", {
+                  price: introPrice,
+                  monthlyPrice: subscriptionPrice,
+                })
+              }}
             </p>
           </div>
           <div>
             <SubscribeBtn />
             <p class="pricing-card__price">
-              {{ $t("subscriptionPriceFirstMonth") }}
+              {{ $t("subscriptionPriceFirstMonth", { price: introPrice }) }}
             </p>
             <p class="pricing-card__was pricing-card__was--block">
-              {{ $t("then") }} {{ $t("subscriptionPriceAfter") }}
+              {{ $t("then") }}
+              {{ $t("subscriptionPriceAfter", { price: subscriptionPrice }) }}
             </p>
           </div>
         </div>
@@ -223,6 +229,14 @@ import { saveAs } from "file-saver";
 import { markRaw, toRaw } from "vue";
 import { GTAG_PAYMENT, GTAG_PDF, gtagEvent } from "~/utils/gtagValues";
 import { fetchOneTimeCheckoutUrl } from "~/utils/subscription";
+import {
+  INTRO_PRICE,
+  ONE_TIME_DISCOUNT_PERCENT,
+  ONE_TIME_LIST_PRICE,
+  ONE_TIME_PRICE,
+  SUBSCRIPTION_PRICE,
+  formatPrice,
+} from "~/utils/pricing";
 import { chatFingerprint } from "~/utils/chatFingerprint";
 import { scrollToSettled } from "~/utils/scroll";
 import PDFWorker from "~/assets/js/pdf.worker.js?worker";
@@ -230,8 +244,6 @@ import { loadImage, objectToDictionary } from "~/utils/utils";
 
 export default {
   props: {
-    currency: { type: String, required: true },
-    price: { type: Number, required: true },
     chat: { type: Object, required: true },
     attachments: { type: Array, default: () => [] },
     ego: { type: String, required: true },
@@ -247,11 +259,31 @@ export default {
       isOneTimeLoading: false,
       GTAG_PAYMENT,
       GTAG_PDF,
+      discountPercent: ONE_TIME_DISCOUNT_PERCENT,
       progress: 0,
       pdfWorker: null,
     };
   },
   computed: {
+    /**
+     * Every amount in this table goes through one formatter: it used to quote
+     * "7,99 Euro", "7.99 EUR" and "15 EUR" within a single card.
+     */
+    freePrice() {
+      return formatPrice(0, this.$i18n.locale);
+    },
+    oneTimePrice() {
+      return formatPrice(ONE_TIME_PRICE, this.$i18n.locale);
+    },
+    oneTimeListPrice() {
+      return formatPrice(ONE_TIME_LIST_PRICE, this.$i18n.locale);
+    },
+    introPrice() {
+      return formatPrice(INTRO_PRICE, this.$i18n.locale);
+    },
+    subscriptionPrice() {
+      return formatPrice(SUBSCRIPTION_PRICE, this.$i18n.locale);
+    },
     /** Identifies the chat on screen, to tie a single payment to it. */
     currentChatFingerprint() {
       // toRaw: reading every message through the reactive proxy would make

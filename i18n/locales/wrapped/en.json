@@ -142,9 +142,8 @@
         "description": "Unlimited uploads, premium exports, and faster processing for power users.",
         "priceSuffix": "/ month",
         "introSuffix": "first month",
-        "followOn": "then €10 / month",
+        "followOn": "then {price} / month",
         "note": "Cancel anytime · share with friends",
-        "cta": "Upgrade to Pro",
         "loading": "Redirecting to Stripe…",
         "features": [
           "Unlimited chat uploads & story generations",
@@ -300,7 +299,6 @@
     "paywall": {
       "title": "Unlock unlimited chat analyses",
       "description": "You've already analyzed one chat for free. Subscribe to continue generating new WhatsApp Wrapped stories instantly.",
-      "cta": "Upgrade to Pro",
       "secondary": "Maybe later"
     }
   },

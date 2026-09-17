@@ -142,9 +142,8 @@
         "description": "Upload illimitati, export premium e elaborazione più veloce per i power user.",
         "priceSuffix": "/ mese",
         "introSuffix": "primo mese",
-        "followOn": "poi €10 / mese",
+        "followOn": "poi {price} / mese",
         "note": "Annulli quando vuoi · condividi con gli amici",
-        "cta": "Passa a Pro",
         "loading": "Reindirizzamento a Stripe…",
         "features": [
           "Upload illimitati di chat e generazione di storie",
@@ -300,7 +299,6 @@
     "paywall": {
       "title": "Sblocca analisi illimitate",
       "description": "Hai già analizzato una chat gratuitamente. Abbonati per continuare a generare nuove storie Wrapped all'istante.",
-      "cta": "Passa a Pro",
       "secondary": "Magari dopo"
     }
   },

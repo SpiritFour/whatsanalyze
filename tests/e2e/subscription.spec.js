@@ -7,6 +7,7 @@ const {
   activeSubscription,
   expect,
   stubCallable,
+  stubCallableFailure,
   test,
 } = require("./fixtures");
 
@@ -106,6 +107,45 @@ test.describe("verifying a Stripe subscription", () => {
     ).toBeVisible();
   });
 
+  // The explanation used to sit below the pricing table, off screen. Someone
+  // following the link in their renewal email saw an ordinary sales page with
+  // no sign that anything had gone wrong.
+  test("says why the link did not work without making them scroll", async ({
+    page,
+  }) => {
+    await stubCallable(page, "verifySubscription", {
+      isValid: false,
+      message: "Subscription has expired",
+    });
+
+    await page.goto(
+      "/subscribe?email=expired@example.com&token=sub_expired123"
+    );
+
+    await expect(page.getByText(/subscription has expired/i)).toBeInViewport();
+  });
+
+  // The session id is the proof of payment: a reload or a shared link would
+  // replay it.
+  test("drops the checkout session from the URL on the way in", async ({
+    page,
+  }) => {
+    await stubCallable(page, "getCheckoutSession", {
+      mode: "subscription",
+      payment_status: "paid",
+      subscription: "sub_from_checkout",
+      customer_details: { email: "buyer@example.com" },
+    });
+    await stubCallable(page, "verifySubscription", activeSubscription());
+
+    await page.goto("/subscribe?session_id=cs_test_subscription");
+
+    await expect(
+      page.getByRole("heading", { name: /your subscription is active/i })
+    ).toBeVisible();
+    await expect(page).not.toHaveURL(/session_id/);
+  });
+
   // The subscription id has no spaces to wrap at, and used to run over the
   // columns beside it — which only shows up where the columns are narrow.
   test("lays the subscription details out without overlap @mobile", async ({
@@ -131,6 +171,88 @@ test.describe("verifying a Stripe subscription", () => {
     expect(overlaps(boxes[0], boxes[1])).toBe(false);
     expect(overlaps(boxes[0], boxes[2])).toBe(false);
     expect(overlaps(boxes[1], boxes[2])).toBe(false);
+  });
+});
+
+/**
+ * Where Stripe drops a subscriber who paid from inside Wrapped. Every way of
+ * arriving here that is not a confirmed payment has to lead somewhere.
+ */
+test.describe("returning from a Wrapped checkout", () => {
+  test("confirms the payment and offers the way on", async ({ page }) => {
+    await stubCallable(page, "getCheckoutSession", {
+      mode: "subscription",
+      payment_status: "paid",
+      subscription: "sub_wrapped",
+      customer_details: { email: "buyer@example.com" },
+    });
+    await stubCallable(page, "verifySubscription", activeSubscription());
+
+    await page.goto("/wrapped/subscription/success?session_id=cs_test_paid");
+
+    await expect(
+      page.getByRole("heading", { name: /payment successful/i })
+    ).toBeVisible();
+    await expect(page.getByText("sub_wrapped")).toBeVisible();
+  });
+
+  // Opened on its own it used to render a header, a footer, and nothing at all
+  // in between.
+  test("says something when there is no checkout to confirm", async ({
+    page,
+  }) => {
+    await page.goto("/wrapped/subscription/success");
+
+    await expect(
+      page.getByRole("heading", { name: /nothing to confirm here/i })
+    ).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: /back to whatsapp wrapped/i })
+    ).toBeVisible();
+  });
+
+  test("never hands the customer a raw Stripe error", async ({ page }) => {
+    await stubCallableFailure(
+      page,
+      "getCheckoutSession",
+      "No such checkout.session: cs_test_abc"
+    );
+
+    await page.goto("/wrapped/subscription/success?session_id=cs_test_abc");
+
+    await expect(
+      page.getByRole("heading", { name: /could not confirm your payment/i })
+    ).toBeVisible();
+    await expect(page.getByText(/No such checkout\.session/)).toHaveCount(0);
+
+    // A dead end is what made this page a support ticket: there has to be a
+    // retry, somewhere to go, and someone to ask.
+    await expect(
+      page.getByRole("button", { name: /try again/i })
+    ).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: /manage your subscription/i })
+    ).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: "info@whatsanalyze.com" })
+    ).toBeVisible();
+  });
+
+  test("does not call an unpaid checkout a payment", async ({ page }) => {
+    await stubCallable(page, "getCheckoutSession", {
+      mode: "subscription",
+      payment_status: "unpaid",
+      customer_details: { email: "buyer@example.com" },
+    });
+
+    await page.goto("/wrapped/subscription/success?session_id=cs_test_unpaid");
+
+    await expect(
+      page.getByRole("heading", { name: /did not go through/i })
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: /payment successful/i })
+    ).toHaveCount(0);
   });
 });
 

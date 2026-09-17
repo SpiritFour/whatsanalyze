@@ -86,6 +86,19 @@
           seconds.
         </p>
 
+        <!--
+          Why the link they clicked did not let them in. It belongs above the
+          sales pitch: at the bottom of the page, next to the restore form,
+          it sat below the fold and the page looked like ordinary pricing.
+        -->
+        <div v-if="linkError" class="error-banner link-error">
+          <strong>{{ linkError }}</strong>
+          <span>
+            Renew below, or verify again with the email and subscription ID from
+            your receipt.
+          </span>
+        </div>
+
         <!-- Pricing / Plan Tier Card -->
         <div class="apple-card highlight-card">
           <div class="plan-header">
@@ -94,9 +107,9 @@
               <h2 class="plan-name">WhatsAnalyze All-Access</h2>
             </div>
             <div class="plan-price">
-              <span class="currency">€</span><span class="amount">4,99</span>
+              <span class="amount">{{ introPrice }}</span>
               <span class="interval">first month</span>
-              <div class="follow-on">then €10 / month</div>
+              <div class="follow-on">then {{ subscriptionPrice }} / month</div>
             </div>
           </div>
 
@@ -152,7 +165,7 @@
               {{
                 isCheckoutLoading
                   ? "Redirecting to Stripe..."
-                  : "Subscribe Now with Stripe"
+                  : $t("chooseSubscription")
               }}
             </button>
             <p class="secure-tag mt-2">
@@ -222,6 +235,7 @@ import {
   getSubscriptionParams,
   fetchSubscriptionCheckoutUrl,
 } from "~/utils/subscription";
+import { INTRO_PRICE, SUBSCRIPTION_PRICE, formatPrice } from "~/utils/pricing";
 
 export default {
   name: "Subscriptions",
@@ -232,6 +246,8 @@ export default {
       loading: false,
       isCheckoutLoading: false,
       error: "",
+      /** Why a link from an email or a checkout return did not let them in. */
+      linkError: "",
       successMessage: "",
       isPortalLoading: false,
       portalError: "",
@@ -240,6 +256,12 @@ export default {
   computed: {
     subscriptionStore() {
       return useSubscriptionStore();
+    },
+    introPrice() {
+      return formatPrice(INTRO_PRICE, this.$i18n.locale);
+    },
+    subscriptionPrice() {
+      return formatPrice(SUBSCRIPTION_PRICE, this.$i18n.locale);
     },
   },
   async mounted() {
@@ -292,9 +314,21 @@ export default {
         this.isCheckoutLoading = false;
       }
     },
+    /**
+     * The session id is the proof of payment for a checkout that just
+     * happened. Leaving it in the URL means a reload or a shared link replays
+     * it, so it goes as soon as it has been read.
+     */
+    dropSessionIdFromUrl() {
+      if (!this.$route.query.session_id) return;
+      const query = { ...this.$route.query };
+      delete query.session_id;
+      this.$router.replace({ query });
+    },
     async autoVerifyFromParams() {
       // If we only have session_id from checkout return, resolve details first
       const sessionId = this.$route.query.session_id;
+      this.dropSessionIdFromUrl();
       if (sessionId && !this.email) {
         try {
           this.loading = true;
@@ -322,16 +356,20 @@ export default {
         // Coming back from checkout the subscription may not be stored yet, so
         // wait for Stripe's webhook instead of telling a paying customer that
         // their subscription does not exist.
-        await this.verify({ afterCheckout: Boolean(sessionId) });
+        await this.verify({
+          afterCheckout: Boolean(sessionId),
+          fromLink: true,
+        });
       }
     },
-    async verify({ afterCheckout = false } = {}) {
+    async verify({ afterCheckout = false, fromLink = false } = {}) {
       if (!this.email || !this.subscriptionId) {
         this.error = "Please enter both email and subscription ID.";
         return;
       }
 
       this.error = "";
+      this.linkError = "";
       this.successMessage = "";
       this.loading = true;
 
@@ -348,13 +386,28 @@ export default {
         if (result.isValid) {
           this.successMessage = "Subscription successfully verified!";
         } else {
-          this.error = result.message || "Subscription could not be verified.";
+          this.reportFailure(
+            result.message || "Subscription could not be verified.",
+            fromLink
+          );
         }
       } catch (err) {
-        this.error = err?.message || "An unexpected error occurred.";
+        this.reportFailure(
+          err?.message || "An unexpected error occurred.",
+          fromLink
+        );
       } finally {
         this.loading = false;
       }
+    },
+    /**
+     * A failure the customer asked for goes next to the form they submitted;
+     * one from a link they clicked goes to the top of the page, where they are
+     * looking, instead of below the pricing they never asked to see.
+     */
+    reportFailure(message, fromLink) {
+      if (fromLink) this.linkError = message;
+      else this.error = message;
     },
     async openCustomerPortal() {
       const activeEmail = this.email || this.subscriptionStore.getEmail;
@@ -399,6 +452,7 @@ export default {
       this.email = "";
       this.subscriptionId = "";
       this.error = "";
+      this.linkError = "";
       this.successMessage = "";
       window.location.replace("/subscribe");
     },
@@ -489,13 +543,6 @@ export default {
 .plan-name {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #111827;
-}
-
-.plan-price .currency {
-  font-size: 1.25rem;
-  font-weight: 600;
-  vertical-align: top;
   color: #111827;
 }
 
@@ -760,6 +807,14 @@ export default {
   color: #dc2626;
   font-size: 0.88rem;
   margin: 0;
+}
+
+.link-error {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.95rem;
+  text-align: center;
 }
 
 .success-banner {

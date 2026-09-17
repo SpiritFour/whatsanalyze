@@ -420,14 +420,13 @@ export const messages = {
     chooseFreeTier: "Choose Free",
     oneTimeTitle: "One-Time Payment",
     oneTimeDescription:
-      "Download a full PDF report of your chat. For just 7,99 Euro.",
-    oneTimePrice: "€9,99",
+      "Download a full PDF report of your chat. For just {price}.",
     chooseOneTime: "Buy Now",
     subscriptionTitle: "Monthly Subscription",
     subscriptionDescription:
-      "Access unlimited results and updates every month. First month for €4,99, then €10 per month.",
-    subscriptionPriceFirstMonth: "€4,99 First Month",
-    subscriptionPriceAfter: "€10/month",
+      "Access unlimited results and updates every month. First month for {price}, then {monthlyPrice} per month.",
+    subscriptionPriceFirstMonth: "{price} First Month",
+    subscriptionPriceAfter: "{price}/month",
     chooseSubscription: "Subscribe Now",
     then: "then",
     heroTitle: "WhatsApp Wrapped {currentYear}",
@@ -1325,14 +1324,13 @@ export const messages = {
     chooseFreeTier: "Kostenlos auswählen",
     oneTimeTitle: "Einmalige Zahlung",
     oneTimeDescription:
-      "Laden Sie einen vollständigen PDF-Bericht Ihres Chats herunter. Für nur 7,99 Euro.",
-    oneTimePrice: "€9,99",
+      "Laden Sie einen vollständigen PDF-Bericht Ihres Chats herunter. Für nur {price}.",
     chooseOneTime: "Jetzt kaufen",
     subscriptionTitle: "Monatliches Abonnement",
     subscriptionDescription:
-      "Greifen Sie jeden Monat auf unbegrenzte Ergebnisse und Updates zu. Der erste Monat kostet 4,99 €, danach 10 € pro Monat.",
-    subscriptionPriceFirstMonth: "4,99 € im ersten Monat",
-    subscriptionPriceAfter: "10 €/Monat",
+      "Greifen Sie jeden Monat auf unbegrenzte Ergebnisse und Updates zu. Der erste Monat kostet {price}, danach {monthlyPrice} pro Monat.",
+    subscriptionPriceFirstMonth: "{price} im ersten Monat",
+    subscriptionPriceAfter: "{price}/Monat",
     chooseSubscription: "Jetzt abonnieren",
     then: "dann",
     toolsHub: {
@@ -2196,14 +2194,13 @@ export const messages = {
     chooseFreeTier: "Elige Gratis",
     oneTimeTitle: "Pago Único",
     oneTimeDescription:
-      "Descarga un informe PDF completo de tu chat. Por solo 7,99 euros.",
-    oneTimePrice: "€9,99",
+      "Descarga un informe PDF completo de tu chat. Por solo {price}.",
     chooseOneTime: "Comprar ahora",
     subscriptionTitle: "Suscripción Mensual",
     subscriptionDescription:
-      "Accede a resultados ilimitados y actualizaciones cada mes. El primer mes por 4,99 €, luego 10 € al mes.",
-    subscriptionPriceFirstMonth: "4,99 € Primer Mes",
-    subscriptionPriceAfter: "10 €/mes",
+      "Accede a resultados ilimitados y actualizaciones cada mes. El primer mes por {price}, luego {monthlyPrice} al mes.",
+    subscriptionPriceFirstMonth: "{price} Primer Mes",
+    subscriptionPriceAfter: "{price}/mes",
     chooseSubscription: "Suscríbete ahora",
     then: "luego",
     toolsHub: {
@@ -2891,14 +2888,13 @@ export const messages = {
     chooseFreeTier: "Escolher Gratuito",
     oneTimeTitle: "Pagamento Único",
     oneTimeDescription:
-      "Baixe um relatório completo em PDF do seu chat. Por apenas 7,99 euros.",
-    oneTimePrice: "€9,99",
+      "Baixe um relatório completo em PDF do seu chat. Por apenas {price}.",
     chooseOneTime: "Comprar Agora",
     subscriptionTitle: "Assinatura Mensal",
     subscriptionDescription:
-      "Acesse resultados ilimitados e atualizações todos os meses. Primeiro mês por €4,99, depois €10 por mês.",
-    subscriptionPriceFirstMonth: "€4,99 Primeiro Mês",
-    subscriptionPriceAfter: "€10/mês",
+      "Acesse resultados ilimitados e atualizações todos os meses. Primeiro mês por {price}, depois {monthlyPrice} por mês.",
+    subscriptionPriceFirstMonth: "{price} Primeiro Mês",
+    subscriptionPriceAfter: "{price}/mês",
     chooseSubscription: "Assinar Agora",
     then: "depois",
     toolsHub: {
@@ -3762,14 +3758,13 @@ export const messages = {
     chooseFreeTier: "Choisissez Gratuit",
     oneTimeTitle: "Paiement Unique",
     oneTimeDescription:
-      "Téléchargez un rapport PDF complet de votre chat. Pour seulement 7,99 euros.",
-    oneTimePrice: "€9,99",
+      "Téléchargez un rapport PDF complet de votre chat. Pour seulement {price}.",
     chooseOneTime: "Acheter maintenant",
     subscriptionTitle: "Abonnement Mensuel",
     subscriptionDescription:
-      "Accédez à des résultats illimités et des mises à jour chaque mois. Premier mois à 4,99 €, puis 10 € par mois.",
-    subscriptionPriceFirstMonth: "4,99 € Premier Mois",
-    subscriptionPriceAfter: "10 €/mois",
+      "Accédez à des résultats illimités et des mises à jour chaque mois. Premier mois à {price}, puis {monthlyPrice} par mois.",
+    subscriptionPriceFirstMonth: "{price} Premier Mois",
+    subscriptionPriceAfter: "{price}/mois",
     chooseSubscription: "Abonnez-vous maintenant",
     then: "puis",
     toolsHub: {
@@ -4637,14 +4632,13 @@ export const messages = {
     chooseFreeTier: "Scegli il gratuito",
     oneTimeTitle: "Pagamento una tantum",
     oneTimeDescription:
-      "Scarica un rapporto completo in PDF della tua chat. Solo per 7,99 Euro.",
-    oneTimePrice: "€9,99",
+      "Scarica un rapporto completo in PDF della tua chat. Solo per {price}.",
     chooseOneTime: "Acquista ora",
     subscriptionTitle: "Abbonamento mensile",
     subscriptionDescription:
-      "Accedi a risultati illimitati e aggiornamenti ogni mese. Primo mese a €4,99, poi €10 al mese.",
-    subscriptionPriceFirstMonth: "€4,99 Primo mese",
-    subscriptionPriceAfter: "€10/mese",
+      "Accedi a risultati illimitati e aggiornamenti ogni mese. Primo mese a {price}, poi {monthlyPrice} al mese.",
+    subscriptionPriceFirstMonth: "{price} Primo mese",
+    subscriptionPriceAfter: "{price}/mese",
     chooseSubscription: "Abbonati ora",
     then: "poi",
     toolsHub: {

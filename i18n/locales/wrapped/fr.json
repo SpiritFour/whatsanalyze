@@ -142,9 +142,8 @@
         "description": "Imports illimités, exports premium et traitement plus rapide pour les power users.",
         "priceSuffix": "/ mois",
         "introSuffix": "premier mois",
-        "followOn": "puis 10 € / mois",
+        "followOn": "puis {price} / mois",
         "note": "Annulation à tout moment · partagez avec des amis",
-        "cta": "Passer à Pro",
         "loading": "Redirection vers Stripe…",
         "features": [
           "Imports de chats illimités et génération d'histoires",
@@ -300,7 +299,6 @@
     "paywall": {
       "title": "Débloquez des analyses illimitées",
       "description": "Vous avez déjà analysé une conversation gratuitement. Abonnez-vous pour continuer à créer de nouvelles stories Wrapped immédiatement.",
-      "cta": "Passer en Pro",
       "secondary": "Plus tard"
     }
   },

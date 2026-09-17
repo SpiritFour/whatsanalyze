@@ -7,10 +7,8 @@
       <PdfDownload
         :attachments="attachments"
         :chat="chat"
-        :currency="currency"
         :ego="ego"
-        :price="price"
-        :isValidSubscription="isValidSubscription"
+        :is-valid-subscription="isValidSubscription"
       />
     </v-row>
     <v-row>
@@ -31,8 +29,6 @@ export default {
     return {
       // its possible that the first person did not write any message at all
       ego: this.chat.messagesPerPerson[0]?.name,
-      price: 7.99,
-      currency: "EUR",
     };
   },
   methods: {

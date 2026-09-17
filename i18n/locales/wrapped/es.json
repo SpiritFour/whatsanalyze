@@ -142,9 +142,8 @@
         "description": "Cargas ilimitadas, exportaciones premium y procesamiento más rápido para usuarios intensivos.",
         "priceSuffix": "/ mes",
         "introSuffix": "primer mes",
-        "followOn": "luego 10 € / mes",
+        "followOn": "luego {price} / mes",
         "note": "Cancela cuando quieras · compártelo con amigos",
-        "cta": "Actualizar a Pro",
         "loading": "Redirigiendo a Stripe…",
         "features": [
           "Cargas ilimitadas de chats y generación de historias",
@@ -300,7 +299,6 @@
     "paywall": {
       "title": "Desbloquea análisis ilimitados",
       "description": "Ya has analizado un chat gratis. Suscríbete para seguir generando nuevas historias Wrapped al instante.",
-      "cta": "Hazte Pro",
       "secondary": "Quizás después"
     }
   },

@@ -76,6 +76,26 @@ const stubCallable = async (page, name, body) => {
   return calls;
 };
 
+/**
+ * Answer a Firebase callable the way a failing backend does, so a test can
+ * check what the customer is shown when it does.
+ */
+const stubCallableFailure = async (page, name, message) => {
+  await page.route(`**/${name}`, async (route) => {
+    if (route.request().method() === "OPTIONS") {
+      await route.fulfill(CORS_PREFLIGHT);
+      return;
+    }
+
+    await route.fulfill({
+      status: 500,
+      contentType: "application/json",
+      headers: { "access-control-allow-origin": "*" },
+      body: JSON.stringify({ error: { status: "INTERNAL", message } }),
+    });
+  });
+};
+
 /** The Stripe Checkout page, served by us, so no test leaves the machine. */
 const STRIPE_CHECKOUT = "https://checkout.stripe.test/c/pay/cs_test_session";
 
@@ -148,6 +168,7 @@ module.exports = {
   otherChatFile,
   paidSession,
   stubCallable,
+  stubCallableFailure,
   stubStripeCheckout,
   test,
 };
