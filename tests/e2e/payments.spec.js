@@ -178,6 +178,42 @@ test.describe("starting a subscription", () => {
     expect(payload.priceId).toBe("price_1Sc6u074KJ57kF2wxb5cnIZL");
   });
 
+  /**
+   * Both entry points used to be `<component :is="'NuxtLink'">`, which ships a
+   * literal `<NUXTLINK>` element: a CTA that looks right and goes nowhere. The
+   * header nav was the only way left into the subscription from the analyzer.
+   */
+  test("reaches the subscription page from the analyzed chat", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await analyzeChat(page);
+
+    // Nothing on the results may be one of those unclickable pseudo-elements.
+    await expect(page.locator("nuxtlink")).toHaveCount(0);
+
+    await page.getByRole("link", { name: "Subscribe Now" }).click();
+    await page.waitForURL(/\/subscribe$/);
+    await expect(
+      page.getByRole("button", { name: "Subscribe Now" })
+    ).toBeVisible();
+  });
+
+  test("reaches the subscription page from the paywall dialog", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await analyzeChat(page);
+
+    await page
+      .getByRole("button", { name: /Download full chat PDF/i })
+      .first()
+      .click();
+    await page.getByRole("link", { name: /Open Subscription Page/i }).click();
+
+    await page.waitForURL(/\/subscribe$/);
+  });
+
   test("sends a subscriber from /subscribe to Stripe checkout", async ({
     page,
   }) => {
