@@ -128,8 +128,8 @@ export default defineNuxtConfig({
       // server-side (INTRO_COUPON_ID), not a separate price: Checkout ignores
       // the Trial Offer configured on the product.
       stripePriceId: local
-        ? "price_1Sc6u074KJ57kF2wxb5cnIZL"
-        : "price_1SgOxVL4rDqbYflowSbSteJQ",
+        ? "price_1UGehh74KJ57kF2woEzDq1UR"
+        : "price_1UGedRL4rDqbYflomrrqwaYy",
       stripeOneTimePriceId: local
         ? "price_1UEjOz74KJ57kF2wXRhOyf05"
         : "price_1UEjQ4L4rDqbYflo33cJS7RR",

@@ -12,8 +12,10 @@ export const oneTimePriceId = defineString("ONE_TIME_PRICE_ID");
 // attached to a Checkout Session, so the intro price is a first-invoice
 // discount instead. Empty means "sell at full price, no intro offer".
 // PRO_PRICE_ID minus this coupon is what the site quotes as the first month
-// (INTRO_PRICE in utils/pricing.ts): change one and the other has to follow,
-// or checkout charges something the customer was never shown.
+// (SUBSCRIPTION_PRICE and INTRO_PRICE in utils/pricing.ts): change one and the
+// others have to follow, or checkout charges something the customer was never
+// shown. A Stripe price cannot be edited, so a new amount means a new price id
+// here, in nuxt.config.js and in every .env.* — all of which are per mode.
 export const introCouponId = defineString("INTRO_COUPON_ID");
 export const appName = defineString("APP_NAME");
 const allowedOrigins = defineString("ALLOWED_ORIGINS");

@@ -175,7 +175,7 @@ test.describe("starting a subscription", () => {
     // the client must ask for the full subscription price, never a cheaper one.
     const payload = checkout[0].postDataJSON().data;
     expect(payload.mode).toBe("subscription");
-    expect(payload.priceId).toBe("price_1Sc6u074KJ57kF2wxb5cnIZL");
+    expect(payload.priceId).toBe("price_1UGehh74KJ57kF2woEzDq1UR");
   });
 
   // Without them the backend falls back to /subscribe, and someone who paid
@@ -233,14 +233,14 @@ test.describe("quoting prices", () => {
     // it: 15 → 7.99 is 47% off, and claiming more is a price indication risk
     // in the EU.
     await expect(prices.nth(1)).toHaveText(/^€7\.99\s*-47%\s*€15$/);
-    // The intro month is a flat 5 € off coupon on the €10 price, so €5 is what
-    // checkout asks for. "€4,99" was a price no customer was ever charged.
-    await expect(prices.nth(2)).toHaveText("€5 First Month");
+    // The intro month is a flat 5 € off coupon on the monthly price, so the
+    // two have to be quoted 5 € apart or checkout contradicts the table.
+    await expect(prices.nth(2)).toHaveText("€4.99 First Month");
     await expect(page.locator(".pricing-card__was--block")).toHaveText(
-      "then €10/month"
+      "then €9.99/month"
     );
 
-    // No "7,99 Euro" next to "7.99 EUR" next to "€10/month".
+    // No "7,99 Euro" next to "7.99 EUR" next to "€9.99/month".
     await expect(
       page.locator(".pricing-card").getByText(/EUR|Euro/)
     ).toHaveCount(0);
