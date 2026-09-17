@@ -201,20 +201,29 @@ test.describe("tools and footer", () => {
   test("navigates from the header links", async ({ page }) => {
     await page.goto("/");
 
-    const nav = page.locator(".site-header__nav");
-    // The tools are one plain link now, not a dropdown.
+    // The support links share the class, so the products are only the ones in
+    // the bar that carries the label.
+    const nav = page.locator(".site-header__nav[aria-label='Products']");
+    // The two products you are not in, as plain links rather than a dropdown.
     await expect(nav.locator("a")).toHaveCount(2);
     await expect(page.locator(".site-header__dropdown")).toHaveCount(0);
     // A "start the analyzer" button on the analyzer itself is not a call to
     // action — the homepage header has none.
     await expect(page.locator(".site-header__cta")).toHaveCount(0);
 
-    await nav.locator("a").first().click();
+    await nav.locator("a[href='/tools']").click();
     await page.waitForURL(/.*\/tools$/);
     await expect(page.locator(".tools-directory")).toBeVisible();
 
-    await nav.locator("a").nth(1).click();
+    // The product you are in drops out of the bar and the analyzer takes its
+    // slot, so there are always two ways on to the other two.
+    await expect(nav.locator("a")).toHaveCount(2);
+    await expect(nav.locator("a[href='/tools']")).toHaveCount(0);
+    await expect(nav.locator("a[href='/']")).toHaveCount(1);
+
+    await nav.locator("a[href='/wrapped']").click();
     await page.waitForURL(/.*\/wrapped$/);
+    await expect(page.locator("label[for='dropzone-file']")).toBeVisible();
   });
 });
 
