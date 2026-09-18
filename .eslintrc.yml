@@ -44,6 +44,7 @@ globals:
   unlocksChat: readonly
   toRaw: readonly
   defineEmits: readonly
+  withDefaults: readonly
   onMounted: readonly
   useToolsNav: readonly
 rules:
