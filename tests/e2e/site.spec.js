@@ -3,7 +3,7 @@
  * change somewhere else cannot quietly take a page down without anyone
  * noticing, and every one of them also fails on an uncaught runtime error.
  */
-const { analyzeChat, expect, test } = require("./fixtures");
+const { analyzeChat, EXAMPLE_CHAT, expect, test } = require("./fixtures");
 
 test.describe("the analyzer", () => {
   test("renders the landing page", async ({ page }) => {
@@ -34,6 +34,59 @@ test.describe("the analyzer", () => {
       return body.includes("Jane Doe") || body.includes("John Doe");
     });
     expect(leaked).toEqual([]);
+  });
+
+  // The three below cover the results-page QA round (#411). Nothing failed
+  // these when they were filed, because nothing was watching those numbers.
+  test("takes the visitor to the analysis it just built", async ({ page }) => {
+    await page.goto("/");
+    await analyzeChat(page);
+
+    // The results start some 700px below the hero. Leaving the visitor up
+    // there made a successful upload look like it had only printed "Done!".
+    await expect
+      .poll(() => page.evaluate(() => Math.round(window.scrollY)))
+      .toBeGreaterThan(300);
+  });
+
+  test("counts the same messages everywhere it shows a count", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await analyzeChat(page);
+
+    // 536 messages from two people, plus the encryption notice nobody sent.
+    // The stat card used to count the notice and call the total "You have
+    // sent", while the doughnut beside it left it out — 537 against 535.
+    await expect(page.getByText("Messages in total")).toBeVisible();
+    await expect(
+      page.locator("#download-graphs").getByText("536", { exact: true })
+    ).toBeVisible();
+    await expect(
+      page.locator("#download-graphs").getByText("540", { exact: true })
+    ).toBeVisible();
+
+    // The same file, counted again by a tool that reached it another way.
+    await page.goto("/tools/message-counter");
+    await page.locator('input[type="file"]').setInputFiles(EXAMPLE_CHAT);
+    await expect(page.getByText(/536 messages/)).toBeVisible();
+    await expect(page.getByText(/540 total days/)).toBeVisible();
+  });
+
+  test("names the thing each chart counts", async ({ page }) => {
+    await page.goto("/");
+    await analyzeChat(page);
+
+    // These four used to read "Messages per" and stop, the noun having ended
+    // up in the card title instead.
+    for (const subtitle of [
+      "Messages per Person",
+      "Messages per Hour",
+      "Messages per Month",
+      "Messages per Weekday",
+    ]) {
+      await expect(page.getByText(subtitle, { exact: true })).toBeVisible();
+    }
   });
 
   test("builds the free preview PDF in the browser", async ({ page }) => {

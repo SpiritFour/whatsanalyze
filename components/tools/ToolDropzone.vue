@@ -111,7 +111,6 @@ import {
   useSharedChat,
   type ChatMessage,
   type ChatAttachment,
-  type ChatInactivityAnalysis,
 } from "~/composables/useChatTool";
 import { participantMessages } from "~/utils/utils";
 import { analyzeInactivity } from "~/utils/inactivity";
@@ -127,6 +126,11 @@ const props = withDefaults(defineProps<Props>(), {
   toolType: "inactivity",
 });
 
+// `e` and `payload` below name the parameters of a TypeScript call signature.
+// They are types, not variables, and only the TypeScript-aware no-unused-vars
+// knows the difference — this project still lints with the base rule, which
+// reported all three as unused and failed the pre-commit hook.
+/* eslint-disable no-unused-vars */
 const emit = defineEmits<{
   (
     e: "analyzed",
@@ -138,6 +142,7 @@ const emit = defineEmits<{
   ): void;
   (e: "reset"): void;
 }>();
+/* eslint-enable no-unused-vars */
 
 const fileInput = ref<HTMLInputElement | null>(null);
 const isDragging = ref(false);
