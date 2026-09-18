@@ -95,6 +95,12 @@ export default {
     extendDataStructure(chatObject) {
       let authors = {};
       chatObject.messages.forEach(function (object, index) {
+        // WhatsApp exports names exactly as they are stored, and a contact
+        // saved as "John Doe " keeps that trailing space through every label,
+        // quote and file name built from it.
+        if (typeof object.author === "string") {
+          object.author = object.author.trim();
+        }
         if (!(object.author in authors)) authors[object.author] = 0;
         else authors[object.author] += 1;
         object.absolute_id = index;

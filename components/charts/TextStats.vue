@@ -24,7 +24,12 @@
 </template>
 
 <script>
-import { dateDiffs, firstDate, getDateString, lastDate } from "~/utils/utils";
+import {
+  chatDurationInDays,
+  firstDate,
+  getDateString,
+  lastDate,
+} from "~/utils/utils";
 
 export default {
   props: ["chat"],
@@ -43,14 +48,15 @@ export default {
         },
         {
           label: this.$t("youChatted"),
-          value: dateDiffs(firstDate(this.chat), lastDate(this.chat)),
+          value: chatDurationInDays(firstDate(this.chat), lastDate(this.chat)),
           unit: this.$t("days"),
           accent: true,
         },
         {
-          label: this.$t("youSent"),
-          value: this.chat.chatObject.length.toLocaleString(),
-          unit: this.$t("messages"),
+          // Everyone's messages, not the reader's own — the card used to say
+          // "you have sent" over the total for the whole chat.
+          label: this.$t("messagesTotal"),
+          value: this.chat.filterdChatObject.length.toLocaleString(),
           accent: true,
         },
       ];

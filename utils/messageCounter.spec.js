@@ -39,4 +39,24 @@ describe("analyzeMessages", () => {
     expect(result.busiestDay.dateStr).toBe("2026-01-01");
     expect(result.busiestDay.count).toBe(2);
   });
+
+  it("counts the chat duration in calendar days", () => {
+    // Late on the first evening to early on the last: the hour difference is
+    // under two days, but the chat still spans two days on a calendar — which
+    // is what the analyzer's "you chatted for" card says.
+    const messages = [
+      {
+        date: new Date("2026-01-01T23:00:00"),
+        author: "Alice",
+        message: "good night",
+      },
+      {
+        date: new Date("2026-01-03T01:00:00"),
+        author: "Bob",
+        message: "good morning",
+      },
+    ];
+
+    expect(analyzeMessages(messages).totalDays).toBe(2);
+  });
 });

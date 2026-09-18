@@ -410,7 +410,7 @@ export default {
       if (data.type === "pdf") {
         // service workers can not save files
         const blob = new Blob([data.data], { type: "application/pdf" });
-        saveAs(blob, "WhatsAnalyze - " + this.ego);
+        saveAs(blob, `WhatsAnalyze - ${String(this.ego).trim()}.pdf`);
         this.isLoading = false;
         this.closePdfWorker();
       }

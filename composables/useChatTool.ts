@@ -86,6 +86,19 @@ export { analyzeMessages } from "~/utils/messageCounter";
 export { analyzeWords } from "~/utils/wordCounter";
 export { analyzeHeatmap } from "~/utils/chatHeatmap";
 
+/**
+ * WhatsApp exports a contact's name exactly as it is stored, so a name saved
+ * as "John Doe " keeps its trailing space into every quote, label and file
+ * name built from it.
+ */
+function trimAuthors(messages: ChatMessage[]): ChatMessage[] {
+  return messages.map((message) =>
+    typeof message.author === "string"
+      ? { ...message, author: message.author.trim() }
+      : message
+  );
+}
+
 // Extractor helper to parse a File (.txt or .zip) or string
 export async function parseChatFile(
   fileOrText: File | string
@@ -97,10 +110,12 @@ export async function parseChatFile(
   const startTime = performance.now();
 
   if (typeof fileOrText === "string") {
-    const messages = markSystemMessages(
-      (await parseString(fileOrText, {
-        parseAttachments: true,
-      })) as ChatMessage[]
+    const messages = trimAuthors(
+      markSystemMessages(
+        (await parseString(fileOrText, {
+          parseAttachments: true,
+        })) as ChatMessage[]
+      )
     );
     const durationMs = Math.round(performance.now() - startTime);
     return { messages, attachments: [], durationMs };
@@ -130,10 +145,12 @@ export async function parseChatFile(
     }
 
     const textContent = await chatFile.async("string");
-    const messages = markSystemMessages(
-      (await parseString(textContent, {
-        parseAttachments: true,
-      })) as ChatMessage[]
+    const messages = trimAuthors(
+      markSystemMessages(
+        (await parseString(textContent, {
+          parseAttachments: true,
+        })) as ChatMessage[]
+      )
     );
 
     const attachments: ChatAttachment[] = Object.values(zip.files)
@@ -152,10 +169,12 @@ export async function parseChatFile(
     return { messages, attachments, durationMs };
   } else {
     const textContent = await fileOrText.text();
-    const messages = markSystemMessages(
-      (await parseString(textContent, {
-        parseAttachments: true,
-      })) as ChatMessage[]
+    const messages = trimAuthors(
+      markSystemMessages(
+        (await parseString(textContent, {
+          parseAttachments: true,
+        })) as ChatMessage[]
+      )
     );
     const durationMs = Math.round(performance.now() - startTime);
     return { messages, attachments: [], durationMs };

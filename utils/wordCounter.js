@@ -1,4 +1,19 @@
+import stopwordsDe from "stopwords-de";
+import stopwordsEn from "stopwords-en";
+import { participantMessages } from "~/utils/utils";
+
+/**
+ * Words that say nothing about a chat.
+ *
+ * The English and German lists come from the same packages the analyzer uses —
+ * the hand-written list below only had 40 English words in it, so "yes", "are",
+ * "is" and "can" walked straight into the top ten of every report. The rest of
+ * the languages have no package here, so their most common words stay listed
+ * by hand.
+ */
 const COMMON_STOPWORDS = new Set([
+  ...stopwordsEn,
+  ...stopwordsDe,
   "the",
   "be",
   "to",
@@ -166,13 +181,10 @@ const COMMON_STOPWORDS = new Set([
   "undefined",
 ]);
 
+const URL_PATTERN = /(?:https?:\/\/|www\.)\S+/gi;
+
 export function analyzeWords(messages, parseDurationMs = 0) {
-  const validMessages = messages.filter(
-    (m) =>
-      m.author &&
-      m.author.toLowerCase() !== "system" &&
-      m.author.trim().length > 0
-  );
+  const validMessages = participantMessages(messages);
 
   if (validMessages.length === 0) {
     return null;
@@ -188,6 +200,9 @@ export function analyzeWords(messages, parseDurationMs = 0) {
     const rawWords = msg.message
       ? msg.message
           .toLowerCase()
+          // Links first: the punctuation strip below would otherwise tear
+          // "https://example.com" into the "words" https, example and com.
+          .replace(URL_PATTERN, " ")
           .replace(/[.,/#!$%^&*;:{}=\-_`~()?"'„“«»…0-9]/g, " ")
           .split(/\s+/)
           .filter((w) => w.length > 1)

@@ -29,4 +29,28 @@ describe("analyzeWords", () => {
     expect(result.longestMessage.author).toBe("Alice");
     expect(result.participants.length).toBe(2);
   });
+
+  it("filters stopwords and does not count link fragments as words", () => {
+    const messages = [
+      {
+        date: new Date("2026-01-01T10:00:00Z"),
+        author: "Alice",
+        message:
+          "yes this is nice can you look at https://example.com/holiday-pictures",
+      },
+      {
+        date: new Date("2026-01-01T10:05:00Z"),
+        author: "Bob",
+        message: "yes it is nice, see www.example.com/more as well",
+      },
+    ];
+
+    const topWords = analyzeWords(messages).topWords.map((w) => w.word);
+    expect(topWords).toContain("nice");
+    expect(topWords).not.toContain("https");
+    expect(topWords).not.toContain("example");
+    expect(topWords).toEqual(
+      expect.not.arrayContaining(["yes", "is", "can", "this"])
+    );
+  });
 });

@@ -25,7 +25,7 @@
 
         <FileHandler
           @hide_explanation="isShowingChats = $event"
-          @new_messages="newMessages"
+          @new_messages="uploadedMessages"
         />
 
         <p v-if="isSubscriptionValid" class="home-upload__subscriber">
@@ -343,6 +343,15 @@ export default {
         console.error("Could not confirm the one-time payment:", err);
         this.oneTimePaymentError = true;
       }
+    },
+    /**
+     * A chat that was just dropped on the page. The results render ~700px
+     * below the hero, so without this the upload looks like it did nothing —
+     * the post-payment return already scrolls, and this makes the two agree.
+     */
+    uploadedMessages(chatObject) {
+      this.newMessages(chatObject);
+      this.$nextTick(() => scrollToSettled("#results", { offset: 80 }));
     },
     newMessages(chatObject) {
       // we only update with default chat object if chat_ is undefined

@@ -92,14 +92,12 @@ export default {
       if (this.title) return this.title;
       const titleMap = {
         "chat-timeline": this.$t("messagesPerDay"),
-        "messages-per-person": `${this.$t("messagesPer")} - ${this.$t(
-          "person"
+        "messages-per-person": `${this.$t("messagesPer")} ${this.$t("person")}`,
+        "messages-per-time-of-day": `${this.$t("messagesPer")} ${this.$t(
+          "hour"
         )}`,
-        "messages-per-time-of-day": `${this.$t("messagesPer")} - ${this.$t(
-          "timeOfDay"
-        )}`,
-        "radar-month": `${this.$t("messagesPer")} - ${this.$t("month")}`,
-        "radar-day": `${this.$t("messagesPer")} - ${this.$t("weekday")}`,
+        "radar-month": `${this.$t("messagesPer")} ${this.$t("month")}`,
+        "radar-day": `${this.$t("messagesPer")} ${this.$t("weekday")}`,
         "fun-facts": "Fun Facts",
         wordcloud: this.$t("wordCloud"),
         emojicloud: "Emojis",

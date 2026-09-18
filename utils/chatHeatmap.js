@@ -1,10 +1,7 @@
+import { participantMessages } from "~/utils/utils";
+
 export function analyzeHeatmap(messages, parseDurationMs = 0) {
-  const validMessages = messages.filter(
-    (m) =>
-      m.author &&
-      m.author.toLowerCase() !== "system" &&
-      m.author.trim().length > 0
-  );
+  const validMessages = participantMessages(messages);
 
   if (validMessages.length === 0) {
     return null;
