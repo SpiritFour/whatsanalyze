@@ -1,6 +1,21 @@
 /* eslint-env jest */
 import { Chat } from "./transformChatData";
 
+describe("Chat.removeSystemMessages", () => {
+  it("drops system messages without swallowing the first real one", () => {
+    const messages = [
+      { author: "System", message: "Messages and calls are end-to-end..." },
+      { author: "Jane Doe", message: "first real message" },
+      { author: "John Doe", message: "second real message" },
+    ];
+
+    expect(Chat.removeSystemMessages(messages)).toEqual([
+      { author: "Jane Doe", message: "first real message" },
+      { author: "John Doe", message: "second real message" },
+    ]);
+  });
+});
+
 describe("Chat.getEmojiCloudData", () => {
   it("extracts and aggregates emojis before applying the display limit", async () => {
     const chat = Object.create(Chat.prototype);

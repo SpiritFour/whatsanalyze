@@ -76,10 +76,12 @@ function isNoiseWord(word) {
 
 export class Chat {
   static removeSystemMessages(chatObject) {
-    // remove the first message with slice ("this chat is encrypted") and all system messages via the filter.
-    return chatObject
-      .filter((message) => message.author.toLowerCase() !== "system")
-      .slice(1);
+    // Notices like "this chat is encrypted" are relabelled to the "System" author while
+    // parsing (see utils/systemMessages.js), so filtering on the author is enough — we no
+    // longer blind-drop the first message, which used to cost a real one on Android exports.
+    return chatObject.filter(
+      (message) => message.author.toLowerCase() !== "system"
+    );
   }
 
   static groupBy(chatObject, key) {

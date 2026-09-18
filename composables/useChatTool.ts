@@ -1,5 +1,6 @@
 import { parseString } from "whatsapp-chat-parser";
 import JSZip from "jszip";
+import { markSystemMessages } from "~/utils/systemMessages";
 export interface ChatMessage {
   date: Date;
   author: string;
@@ -96,9 +97,11 @@ export async function parseChatFile(
   const startTime = performance.now();
 
   if (typeof fileOrText === "string") {
-    const messages = (await parseString(fileOrText, {
-      parseAttachments: true,
-    })) as ChatMessage[];
+    const messages = markSystemMessages(
+      (await parseString(fileOrText, {
+        parseAttachments: true,
+      })) as ChatMessage[]
+    );
     const durationMs = Math.round(performance.now() - startTime);
     return { messages, attachments: [], durationMs };
   }
@@ -127,9 +130,11 @@ export async function parseChatFile(
     }
 
     const textContent = await chatFile.async("string");
-    const messages = (await parseString(textContent, {
-      parseAttachments: true,
-    })) as ChatMessage[];
+    const messages = markSystemMessages(
+      (await parseString(textContent, {
+        parseAttachments: true,
+      })) as ChatMessage[]
+    );
 
     const attachments: ChatAttachment[] = Object.values(zip.files)
       .filter((f) => !f.name.endsWith(".txt") && !f.dir)
@@ -147,9 +152,11 @@ export async function parseChatFile(
     return { messages, attachments, durationMs };
   } else {
     const textContent = await fileOrText.text();
-    const messages = (await parseString(textContent, {
-      parseAttachments: true,
-    })) as ChatMessage[];
+    const messages = markSystemMessages(
+      (await parseString(textContent, {
+        parseAttachments: true,
+      })) as ChatMessage[]
+    );
     const durationMs = Math.round(performance.now() - startTime);
     return { messages, attachments: [], durationMs };
   }
