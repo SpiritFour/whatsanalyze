@@ -1,14 +1,24 @@
 <template>
-  <v-container>
-    <Content :page="page" class="my-15" />
-    <Cta
-      to="/"
-      class="pt-0 pb-15"
-      title="backupWhatsApp"
-      button-txt="exportAsPDF"
-      text="ctaBullets"
+  <div>
+    <LandingHero
+      :breadcrumbs="[
+        { label: 'WhatsAnalyze', to: localePath('/') },
+        { label: page?.title || 'Switch from WhatsApp to Signal' },
+      ]"
+      :title="page?.title || 'Switch from WhatsApp to Signal'"
+      :subtitle="page?.description || ''"
     />
-  </v-container>
+    <Content :page="page" />
+    <v-container>
+      <Cta
+        to="/"
+        class="pt-0 pb-15"
+        title="backupWhatsApp"
+        button-txt="exportAsPDF"
+        text="ctaBullets"
+      />
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -29,8 +39,10 @@ export default {
     const { data: page } = await useAsyncData("content-whatsapp-signal", () =>
       queryCollection("pages").path("/whatsapp-signal").first()
     );
+    const localePath = useLocalePath();
     return {
       page,
+      localePath,
     };
   },
 };

@@ -120,13 +120,13 @@
       ]
     },
     "subscriptionAd": {
-      "eyebrow": "Whatsanalyse Pro",
+      "eyebrow": "WhatsAnalyze Pro",
       "headline": "Entfessle das volle Storytelling-Erlebnis",
       "description": "Starte gratis oder upgrade für unbegrenzte Uploads, Premium-Exporte und schnellere Verarbeitung.",
       "free": {
         "badge": "Gratis",
         "headline": "Erkunde alles in deinem Tempo",
-        "description": "Perfekt, um Whatsanalyse zu testen oder ein einzelnes Recap zu erstellen.",
+        "description": "Perfekt, um WhatsAnalyze zu testen oder ein einzelnes Recap zu erstellen.",
         "priceSuffix": "/ für immer",
         "cta": "Kostenlos starten",
         "features": [
@@ -248,7 +248,7 @@
       "cards": [
         {
           "title": "End-to-end verschlüsselter Share-Link",
-          "description": "Lass deine Chat Partner an dem Spaß teilhaben und schicke ihnen einen Link für dein Whatsanalyze Wrapped!"
+          "description": "Lass deine Chat Partner an dem Spaß teilhaben und schicke ihnen einen Link für dein WhatsAnalyze Wrapped!"
         }
       ]
     },
@@ -364,7 +364,10 @@
     "messageFrequency": "Nachrichtenfrequenz",
     "status": {
       "loadingSharedStory": "Deine geteilte Story wird vorbereitet ...",
-      "decryptError": "Wir konnten diesen Freigabelink nicht entschlüsseln. Bitte prüfe, ob er unverändert ist."
+      "decryptError": "Wir konnten diesen Freigabelink nicht entschlüsseln. Bitte prüfe, ob er unverändert ist.",
+      "emptyTitle": "Noch kein Wrapped",
+      "emptyText": "Lade einen Chat-Export hoch und wir bauen deine Story direkt hier im Browser.",
+      "emptyCta": "Mein Wrapped erstellen"
     },
     "intro": {
       "headline": "{year} Rückblick",

@@ -224,7 +224,7 @@
     <LandingCta
       :title="t('toolsWordCounter.ctaTitle')"
       :cta-text="t('toolsWordCounter.ctaButton')"
-      cta-to="#"
+      cta-to="#dropzone-slot"
       :note="t('toolsWordCounter.ctaNote')"
       :disclaimer="t('toolsWordCounter.disclaimer')"
       @click="scrollToDropzone"
@@ -240,10 +240,13 @@ import type { ChatMessage, ChatAttachment } from "~/composables/useChatTool";
 const { t } = useI18n();
 const localePath = useLocalePath();
 
+// The last crumb is the tool's name from the shared catalogue
+// (composables/useSiteNav.ts), the same string the /tools index, the footer
+// and the header use. Each page used to name itself differently here.
 const breadcrumbs = computed(() => [
   { label: "WhatsAnalyze", to: localePath("/") },
-  { label: "Tools", to: localePath("/tools") },
-  { label: t("toolsWordCounter.heroTitle") },
+  { label: t("toolsHub.headerTools"), to: localePath("/tools") },
+  { label: t("toolsHub.toolVocabularyTitle") },
 ]);
 
 useSeoMeta({
@@ -388,7 +391,10 @@ useHead(() => ({
   border-radius: 16px;
   padding: 1.4rem 1.2rem;
   display: flex;
-  align-items: center;
+  // Top-aligned, not centred: the grid stretches every card to the tallest
+  // one, so a centred card whose sub-label wraps to two lines sat about 10px
+  // off its neighbours. From the top they all start on the same line.
+  align-items: flex-start;
   gap: 1.1rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
   border: 1px solid rgba(0, 0, 0, 0.06);
@@ -507,105 +513,7 @@ useHead(() => ({
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.section-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid #f1f5f9;
-}
-
-.section-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #0f172a;
-}
-
-.section-tag {
-  font-size: 0.75rem;
-  font-weight: 700;
-  background: #f1f5f9;
-  padding: 4px 10px;
-  border-radius: 20px;
-  color: #475569;
-}
-
-.table-container {
-  overflow-x: auto;
-}
-
-.participants-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-
-  th {
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: #64748b;
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid #e2e8f0;
-  }
-
-  td {
-    padding: 1rem;
-    font-size: 0.95rem;
-    color: #1e293b;
-    border-bottom: 1px solid #f1f5f9;
-  }
-
-  tr:last-child td {
-    border-bottom: none;
-  }
-}
-
-.name-cell {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.avatar-circle {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: #fae8ff;
-  color: #a855f7;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 0.85rem;
-}
-
-.mono-cell {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-}
-
-.share-cell {
-  min-width: 140px;
-}
-
-.share-bar-wrap {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.share-bar {
-  height: 8px;
-  background: #a855f7;
-  border-radius: 4px;
-  min-width: 4px;
-}
-
-.share-label {
-  font-size: 0.8rem;
-  color: #64748b;
-}
+@include wa-participants-table(#a855f7, rgba(168, 85, 247, 0.14));
 
 .hook-actions {
   margin-top: 2.5rem;

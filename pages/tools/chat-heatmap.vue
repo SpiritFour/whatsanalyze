@@ -127,7 +127,10 @@
               <div
                 class="bar-fill"
                 :class="{ 'is-peak': hour === analysis.peakHour }"
-                :style="{ height: `${analysis.hourlyPercentages[hour]}%` }"
+                :style="{
+                  height: `${analysis.hourlyPercentages[hour]}%`,
+                  background: heatColor(analysis.hourlyPercentages[hour]),
+                }"
                 :title="`${hour}:00 – ${count} messages`"
               ></div>
             </div>
@@ -229,7 +232,7 @@
     <LandingCta
       :title="t('toolsChatHeatmap.ctaTitle')"
       :cta-text="t('toolsChatHeatmap.ctaButton')"
-      cta-to="#"
+      cta-to="#dropzone-slot"
       :note="t('toolsChatHeatmap.ctaNote')"
       :disclaimer="t('toolsChatHeatmap.disclaimer')"
       @click="scrollToDropzone"
@@ -245,10 +248,13 @@ import type { ChatMessage, ChatAttachment } from "~/composables/useChatTool";
 const { t } = useI18n();
 const localePath = useLocalePath();
 
+// The last crumb is the tool's name from the shared catalogue
+// (composables/useSiteNav.ts), the same string the /tools index, the footer
+// and the header use. Each page used to name itself differently here.
 const breadcrumbs = computed(() => [
   { label: "WhatsAnalyze", to: localePath("/") },
-  { label: "Tools", to: localePath("/tools") },
-  { label: t("toolsChatHeatmap.heroTitle") },
+  { label: t("toolsHub.headerTools"), to: localePath("/tools") },
+  { label: t("toolsHub.toolHeatmapTitle") },
 ]);
 
 useSeoMeta({
@@ -288,6 +294,17 @@ const peakDayName = computed(() => {
   if (!analysis.value) return "N/A";
   return dayNames[analysis.value.peakDayIndex] || "N/A";
 });
+
+/**
+ * The page promises a heatmap, so the hours are shaded by how busy they are
+ * rather than all drawn in the same blue: one sequential ramp from a pale,
+ * quiet hour to a deep, busy one.
+ */
+function heatColor(pct: number) {
+  const intensity = Math.min(1, Math.max(0, (pct || 0) / 100));
+  const lightness = 84 - intensity * 48;
+  return `hsl(200, 82%, ${lightness}%)`;
+}
 
 function scrollToDropzone() {
   const el = document.getElementById("dropzone-slot");
@@ -408,7 +425,10 @@ useHead(() => ({
   border-radius: 16px;
   padding: 1.4rem 1.2rem;
   display: flex;
-  align-items: center;
+  // Top-aligned, not centred: the grid stretches every card to the tallest
+  // one, so a centred card whose sub-label wraps to two lines sat about 10px
+  // off its neighbours. From the top they all start on the same line.
+  align-items: flex-start;
   gap: 1.1rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
   border: 1px solid rgba(0, 0, 0, 0.06);
@@ -516,13 +536,12 @@ useHead(() => ({
 
 .bar-fill {
   width: 100%;
-  background: #0284c7;
   border-radius: 4px 4px 0 0;
   transition: height 0.4s ease;
   min-height: 2px;
 
   &.is-peak {
-    background: #21a68d;
+    background: #21a68d !important;
     box-shadow: 0 0 10px rgba(33, 166, 141, 0.5);
   }
 
@@ -552,83 +571,7 @@ useHead(() => ({
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.section-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid #f1f5f9;
-}
-
-.section-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #0f172a;
-}
-
-.section-tag {
-  font-size: 0.75rem;
-  font-weight: 700;
-  background: #f1f5f9;
-  padding: 4px 10px;
-  border-radius: 20px;
-  color: #475569;
-}
-
-.table-container {
-  overflow-x: auto;
-}
-
-.participants-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-
-  th {
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: #64748b;
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid #e2e8f0;
-  }
-
-  td {
-    padding: 1rem;
-    font-size: 0.95rem;
-    color: #1e293b;
-    border-bottom: 1px solid #f1f5f9;
-  }
-
-  tr:last-child td {
-    border-bottom: none;
-  }
-}
-
-.name-cell {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.avatar-circle {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: #e0f2fe;
-  color: #0284c7;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 0.85rem;
-}
-
-.mono-cell {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-}
+@include wa-participants-table(#0284c7, rgba(2, 132, 199, 0.12));
 
 .hook-actions {
   margin-top: 2.5rem;

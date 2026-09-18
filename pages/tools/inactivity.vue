@@ -265,7 +265,7 @@
     <LandingCta
       :title="t('toolsInactivity.ctaTitle')"
       :cta-text="t('toolsInactivity.ctaButton')"
-      cta-to="#"
+      cta-to="#dropzone-slot"
       :note="t('toolsInactivity.ctaNote')"
       :disclaimer="t('toolsInactivity.disclaimer')"
       @click="scrollToDropzone"
@@ -285,10 +285,13 @@ import {
 const { t } = useI18n();
 const localePath = useLocalePath();
 
+// The last crumb is the tool's name from the shared catalogue
+// (composables/useSiteNav.ts), the same string the /tools index, the footer
+// and the header use. Each page used to name itself differently here.
 const breadcrumbs = computed(() => [
-  { label: t("toolsInactivity.breadcrumbHome"), to: localePath("/") },
-  { label: t("toolsInactivity.breadcrumbTools"), to: localePath("/tools") },
-  { label: t("toolsInactivity.breadcrumbCurrent") },
+  { label: "WhatsAnalyze", to: localePath("/") },
+  { label: t("toolsHub.headerTools"), to: localePath("/tools") },
+  { label: t("toolsHub.toolInactivityTitle") },
 ]);
 
 // SEO Metadata & Generative Engine Optimization
@@ -691,82 +694,7 @@ const exportSteps = computed(() => [
   overflow: hidden;
 }
 
-.section-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1.2rem;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.section-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #1d1d1f;
-}
-
-.section-tag {
-  font-size: 0.72rem;
-  color: rgba(29, 29, 31, 0.55);
-  font-weight: 700;
-}
-
-.table-container {
-  overflow-x: auto;
-  width: 100%;
-  max-width: 100%;
-  -webkit-overflow-scrolling: touch;
-}
-
-.participants-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-  font-size: 0.9rem;
-
-  th {
-    padding: 12px 14px;
-    font-size: 0.74rem;
-    font-family: ui-monospace, monospace;
-    color: rgba(29, 29, 31, 0.6);
-    background: #f5f5f7;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    border-bottom: 1px solid rgba(29, 29, 31, 0.1);
-  }
-
-  td {
-    padding: 14px;
-    border-bottom: 1px solid rgba(29, 29, 31, 0.06);
-    color: #1d1d1f;
-  }
-}
-
-.name-cell {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.avatar-circle {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: rgba(33, 166, 141, 0.15);
-  color: #21a68d;
-  font-weight: 700;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-}
-
-.mono-cell {
-  font-family: ui-monospace, monospace;
-  font-size: 0.84rem;
-  color: #1d1d1f;
-}
+@include wa-participants-table(#21a68d, rgba(33, 166, 141, 0.15));
 
 .snippet-cell {
   color: rgba(29, 29, 31, 0.6);

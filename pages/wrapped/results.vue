@@ -12,7 +12,7 @@
     {{ t("results.status.loadingSharedStory") }}
   </div>
 
-  <WrappedStoryCarousel :duration="6000">
+  <WrappedStoryCarousel v-if="result" :duration="6000">
     <WrappedStoriesIntro1 />
     <WrappedStoriesIntro2 />
 
@@ -28,6 +28,27 @@
     <WrappedStoriesConversation2 />
     <WrappedStoriesShareInvite />
   </WrappedStoryCarousel>
+
+  <!-- Without an analysis the carousel used to play all eleven slides empty —
+       an emoji card with two quote marks and nothing between them, a dangling
+       "from". Send people back to the upload instead. -->
+  <div
+    v-else-if="isEmpty"
+    class="mx-auto mt-16 mb-24 max-w-lg rounded-2xl border border-white/15 bg-white/5 px-6 py-10 text-center"
+  >
+    <p class="text-2xl font-bold text-white">
+      {{ t("results.status.emptyTitle") }}
+    </p>
+    <p class="mt-3 text-sm text-slate-300">
+      {{ t("results.status.emptyText") }}
+    </p>
+    <NuxtLink
+      :to="localePath('/wrapped')"
+      class="mt-8 inline-block rounded-full bg-emerald-400 px-6 py-3 font-semibold text-black no-underline shadow-lg shadow-emerald-500/40 transition-colors hover:bg-emerald-300"
+    >
+      {{ t("results.status.emptyCta") }}
+    </NuxtLink>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -50,6 +71,7 @@ const { result } = storeToRefs(statsStore);
 const userDataStore = useUserDataStore();
 
 const { t } = useI18n();
+const localePath = useLocalePath();
 
 useSeoMeta({
   title: "Your WhatsApp Wrapped Story",
@@ -60,6 +82,12 @@ const shareLoading = ref(false);
 const shareErrorKey = ref<string | null>(null);
 const shareErrorMessage = computed(() =>
   shareErrorKey.value ? t(shareErrorKey.value) : ""
+);
+
+// Nothing to tell a story about: no analysis in the store, and no share link
+// still on its way in.
+const isEmpty = computed(
+  () => !result.value && !shareLoading.value && !shareErrorKey.value
 );
 
 const buildSearchFromQuery = () => {

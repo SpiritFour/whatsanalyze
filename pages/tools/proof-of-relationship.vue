@@ -14,6 +14,7 @@
         :days-label="t('relationshipProof.mockDays')"
         :messages-label="t('relationshipProof.mockMessages')"
         :people-label="t('relationshipProof.mockPeople')"
+        :example-label="t('exampleDataLabel')"
       />
     </LandingHero>
 
@@ -66,9 +67,11 @@
 </template>
 
 <script>
+import { ONE_TIME_PRICE, formatPrice } from "~/utils/pricing";
+
 export default {
   setup() {
-    const { t } = useI18n();
+    const { t, locale } = useI18n();
     const localePath = useLocalePath();
 
     useSeoMeta({
@@ -78,12 +81,22 @@ export default {
       ogDescription: () => t("relationshipProof.seoDescription"),
     });
 
-    const faq = computed(() =>
-      [1, 2, 3, 4].map((i) => ({
+    // The cost question closes both PDF pages, quoting the real one-time
+    // price rather than "a one-time purchase" — /tools/proof-of-relationship
+    // had no cost question at all, so a visa applicant could not find out
+    // that the download is paid.
+    const faq = computed(() => [
+      ...[1, 2, 3, 4].map((i) => ({
         q: t(`relationshipProof.faq${i}Q`),
         a: t(`relationshipProof.faq${i}A`),
-      }))
-    );
+      })),
+      {
+        q: t("relationshipProof.faqCostQ"),
+        a: t("relationshipProof.faqCostA", {
+          price: formatPrice(ONE_TIME_PRICE, locale.value),
+        }),
+      },
+    ]);
 
     useHead(() => ({
       script: [
@@ -136,16 +149,24 @@ export default {
         text: t(`relationshipProof.step${i}Text`),
       }))
     );
+    // The last crumb is the tool's name from the shared catalogue
+    // (composables/useSiteNav.ts), the same string the /tools index, the footer
+    // and the header use. Each page used to name itself differently here.
     const breadcrumbs = computed(() => [
       { label: "WhatsAnalyze", to: localePath("/") },
-      { label: "Tools", to: localePath("/tools") },
-      { label: t("relationshipProof.heroEyebrow") || "Proof of Relationship" },
+      { label: t("toolsHub.headerTools"), to: localePath("/tools") },
+      { label: t("toolsHub.toolRelationshipTitle") },
     ]);
 
     return {
       t,
       breadcrumbs,
-      analyzerPath: computed(() => localePath("/")),
+      // These pages carry no dropzone of their own, so the CTA has to
+      // land on the analyzer's upload area rather than the top of the
+      // homepage — step 2 tells people to drop a file there.
+      analyzerPath: computed(() =>
+        localePath({ path: "/", hash: "#dropzone-slot" })
+      ),
       exportGuidePath: computed(() =>
         localePath("how-to-export-your-whatsapp-chat")
       ),

@@ -30,12 +30,14 @@
               v-html="$t(tabItem.text)"
             ></span>
           </button>
+          <!-- Only offered where the browser actually fired
+               beforeinstallprompt. It used to render permanently greyed out
+               everywhere else, which read as a broken button. -->
           <button
-            v-if="i === 0 && tab === 1"
+            v-if="i === 0 && tab === 1 && installButtonStatus"
             id="dlPWA"
             type="button"
             class="export-explainer__pwa"
-            :disabled="!installButtonStatus"
             @click="downloadPWA"
           >
             {{ $t("addToHomescreen") }}
@@ -523,16 +525,16 @@ export default {
   margin: 0.4rem 0 0.6rem 3.35rem;
   padding: 0.5rem 1.1rem;
   border-radius: $wa-radius-pill;
-  border: 1px solid $wa-border;
-  background: $wa-surface-white;
+  border: none;
+  background: $wa-accent;
   font-size: 0.9rem;
   font-weight: 600;
-  color: $wa-accent-dark;
+  color: #ffffff;
   cursor: pointer;
+  transition: background 0.2s ease;
 
-  &:disabled {
-    opacity: 0.45;
-    cursor: default;
+  &:hover {
+    background: $wa-accent-dark;
   }
 }
 

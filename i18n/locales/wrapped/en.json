@@ -51,7 +51,7 @@
         "tagline": "{year} WhatsApp Wrapped is here",
         "headline": "Your Chat, Told Like a Story",
         "descriptionMobile": "WhatsAnalyze turns your exported WhatsApp data into a private story-style recap. Relive your busiest hours, funniest exchanges, and emotional peaks without your messages ever leaving the browser.",
-        "descriptionDesktop": "WhatsAnalyze turns your exported WhatsApp data into a visual recap-like your own private \"year in review.\" See your most active hours, funniest exchanges, and emotional peaks in a beautiful story-style format. All insights are processed locally on your device-your messages never leave your browser.",
+        "descriptionDesktop": "WhatsAnalyze turns your exported WhatsApp data into a visual recap — like your own private \"year in review.\" See your most active hours, funniest exchanges, and emotional peaks in a beautiful story-style format. All insights are processed locally on your device — your messages never leave your browser.",
         "highlights": [
           "Private by design",
           "TXT or ZIP support",
@@ -120,13 +120,13 @@
       ]
     },
     "subscriptionAd": {
-      "eyebrow": "Whatsanalyse Pro",
+      "eyebrow": "WhatsAnalyze Pro",
       "headline": "Unlock the full storytelling experience",
       "description": "Start for free or upgrade for unlimited uploads, premium exports, and faster processing.",
       "free": {
         "badge": "Free",
         "headline": "Explore at your own pace",
-        "description": "Perfect for testing Whatsanalyse or creating a one-off recap.",
+        "description": "Perfect for testing WhatsAnalyze or creating a one-off recap.",
         "priceSuffix": "/ forever",
         "cta": "Start for free",
         "features": [
@@ -176,7 +176,7 @@
         {
           "badge": "New",
           "title": "Chat Evolution Timeline",
-          "description": "Track how your moods, pacing, and emoji vocabulary changed month over month. Watch phases appear just like Spotify's Music Evolution-now for your conversations."
+          "description": "Track how your moods, pacing, and emoji vocabulary changed month over month. Watch phases appear just like Spotify's Music Evolution — now for your conversations."
         },
         {
           "badge": "Returning Favorite",
@@ -248,7 +248,7 @@
       "cards": [
         {
           "title": "End-to-end encrypted share link",
-          "description": "Let your chat partners join the fun by sending them a link to your Whatsanalyze Wrapped!"
+          "description": "Let your chat partners join the fun by sending them a link to your WhatsAnalyze Wrapped!"
         }
       ]
     },
@@ -364,7 +364,10 @@
     "messageFrequency": "Message Frequency",
     "status": {
       "loadingSharedStory": "Preparing your shared story...",
-      "decryptError": "We couldn't decrypt this share link. Please make sure it wasn't modified."
+      "decryptError": "We couldn't decrypt this share link. Please make sure it wasn't modified.",
+      "emptyTitle": "No Wrapped yet",
+      "emptyText": "Upload a chat export and we will build your story right here in the browser.",
+      "emptyCta": "Create my Wrapped"
     },
     "intro": {
       "headline": "{year} Wrapped",

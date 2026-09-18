@@ -1,11 +1,11 @@
 ---
 title: "Export WhatsApp Chat: The Ultimate Guide"
-description: "Export WhatsApp Chat: The Ultimate Guide"
+description: "Step-by-step instructions for exporting a WhatsApp chat on iPhone, Android and PC — single chats and groups."
 --- 
 <br><br>
 WhatsApp, a widely-used messaging platform, often necessitates the need to export chats for various reasons like backup, archiving, or transferring data. This guide offers step-by-step instructions tailored for different devices and provides insights into each method.
 
-Learn how to export your WhatsApp chat for various purposes such as backup, analysis, or archiving. This guide covers iOS, Android, and PC platforms, catering to both individual and group chats. Furthermore it gives you hands on tipps on how you can create a PDF from your whatsapp chat.
+Learn how to export your WhatsApp chat for various purposes such as backup, analysis, or archiving. This guide covers iOS, Android, and PC platforms, catering to both individual and group chats. Furthermore it gives you hands-on tips on how you can create a PDF from your WhatsApp chat.
 
 ### Option 1: iPhone (iOS) - Export as a .txt File
 
