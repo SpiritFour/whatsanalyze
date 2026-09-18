@@ -3,7 +3,11 @@ import { defineBoolean } from "firebase-functions/params";
 import Stripe from "stripe";
 import * as logger from "firebase-functions/logger";
 import { getStripe, stripeSecretKey, stripeWebhookSecret } from "./common";
-import { Customer, sendSubscriptionConfirmationEmail } from "../mail";
+import {
+  Customer,
+  SubscriptionBilling,
+  sendSubscriptionConfirmationEmail,
+} from "../mail";
 import { db } from "../firebase";
 
 // Stripe fans an event out to every registered endpoint. While the move to the
@@ -121,6 +125,29 @@ async function getCustomer(
   };
 }
 
+/**
+ * The confirmation email has to quote the charge the customer just saw. The
+ * first invoice runs the intro coupon against the recurring price, so
+ * `amount_paid` is the reduced first month while the line's unit amount is
+ * what renews — the two are read off the same invoice so they cannot drift
+ * apart. If Stripe sends an invoice without line detail we fall back to the
+ * undiscounted total and the same 30 days the subscription is stored with.
+ */
+function summarizeBilling(invoice: Stripe.Invoice): SubscriptionBilling {
+  const line = invoice.lines?.data?.[0];
+  const recurringAmount = line?.pricing?.unit_amount_decimal;
+
+  return {
+    amountPaidCents: invoice.amount_paid,
+    renewalAmountCents:
+      recurringAmount != null ? Number(recurringAmount) : invoice.subtotal,
+    currency: invoice.currency,
+    renewsAt:
+      line?.period?.end ??
+      Math.floor(calculateExpirationDate().getTime() / 1000),
+  };
+}
+
 async function persistCustomer(customer: Customer) {
   // can we do also just an update of fields? so existing fields are not overwritten?
   await db.collection("subscriptions").doc(customer.id).set({
@@ -155,7 +182,10 @@ export async function handleInvoiceForSubscription(
     });
     if (sendSubscriptionConfirmationMail) {
       // Send subscription confirmation email
-      await sendSubscriptionConfirmationEmail(customer);
+      await sendSubscriptionConfirmationEmail(
+        customer,
+        summarizeBilling(invoice)
+      );
     }
   } else {
     logger.warn("Was not able to extract customer from invoice.");

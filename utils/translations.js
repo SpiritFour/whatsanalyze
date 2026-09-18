@@ -1,5 +1,56 @@
 export const messages = {
   en: {
+    subscribePage: {
+      title: "One Subscription. Everything Unlocked.",
+      subtitle:
+        "Enjoy unlimited full PDF exports, WhatsApp Wrapped stories, and advanced chat analytics across every device.",
+      activeTitle: "Your subscription is Active",
+      activeSubtext:
+        "You have full access to all features and unlimited PDF downloads.",
+      subscriptionIdLabel: "Subscription ID",
+      emailLabel: "Linked Email",
+      validUntilLabel: "Valid Until",
+      openAnalyzer: "Open Chat Analyzer",
+      openWrapped: "Open WhatsApp Wrapped",
+      managePortal: "Manage Subscription",
+      openingPortal: "Opening...",
+      logout: "Logout",
+      logoutConfirm: "Do you really want to logout?",
+      activating:
+        "Payment received — activating your subscription. This takes a few seconds.",
+      linkErrorHint:
+        "Renew below, or verify again with the email and subscription ID from your receipt.",
+      planTier: "Pro Access",
+      firstMonth: "first month",
+      followOn: "then {price} / month",
+      feature1Title: "Unlimited Full Chat PDF Exports",
+      feature1Text:
+        "Export whole chat histories with full message logs, media timestamps, and metadata.",
+      feature2Title: "Complete WhatsApp Wrapped Experience",
+      feature2Text:
+        "Unlock all wrapped slides, emotional analytics, top phrases, and shareable stories.",
+      feature3Title: "Full Privacy Guarantee",
+      feature3Text:
+        "Client-side processing. Your chat files and messages are never stored on our servers.",
+      feature4Title: "Self-Service Billing Portal",
+      feature4Text:
+        "Cancel or pause anytime with 1-click via the secure Stripe Customer Portal.",
+      redirecting: "Redirecting to Stripe...",
+      secureTag: "🔒 Encrypted Stripe 256-bit checkout. Cancel anytime.",
+      restoreTitle: "Restore or Verify Existing Access",
+      restoreText:
+        "Already subscribed? Enter your email and subscription ID (from your receipt email) to activate on this device. Subscriptions from before the switch to Stripe still work — use the PayPal ID that starts with I-.",
+      emailFieldLabel: "Email Address",
+      verifying: "Verifying...",
+      verifyCta: "Verify Access",
+      verifySuccess: "Subscription successfully verified!",
+      errorMissingFields: "Please enter both email and subscription ID.",
+      errorVerifyFailed: "Subscription could not be verified.",
+      errorUnexpected: "An unexpected error occurred.",
+      errorCheckout: "Unable to start checkout. Please try again.",
+      errorPortalMissing: "Missing email or subscription ID.",
+      errorPortalFailed: "Failed to open customer portal.",
+    },
     courtEvidence: {
       seoTitle:
         "WhatsApp Chat as Court Evidence – Clean PDF Export | WhatsAnalyze",
@@ -229,11 +280,6 @@ export const messages = {
         "WhatsApp Wrapped gave me a whole new perspective on my conversations. I was surprised to see my most active times and who I talked to the most. It's fun and insightful!",
       testimonial2:
         "I loved the emoji stats! It’s a fun way to reflect on my chats and see how my relationships evolved over the year.",
-    },
-    subscription: {
-      title: "Subscription",
-      cta: "Get a subscription now. Unlimited analytics. Great Fun.",
-      button: "Buy monthly subscription for 10€",
     },
     titleGoogle: "WhatsAnalyze - The WhatsApp Chat Analyzer",
     metaDescription:
@@ -900,6 +946,59 @@ export const messages = {
     pageNameHeatmap: "WhatsApp Peak Chat Hours & 24h Heatmap",
   },
   de: {
+    subscribePage: {
+      title: "Ein Abo. Alles freigeschaltet.",
+      subtitle:
+        "Unbegrenzte vollständige PDF-Exporte, WhatsApp-Wrapped-Storys und fortgeschrittene Chat-Analysen auf jedem Gerät.",
+      activeTitle: "Dein Abo ist aktiv",
+      activeSubtext:
+        "Du hast vollen Zugriff auf alle Funktionen und unbegrenzte PDF-Downloads.",
+      subscriptionIdLabel: "Abo-ID",
+      emailLabel: "Verknüpfte E-Mail",
+      validUntilLabel: "Gültig bis",
+      openAnalyzer: "Chat-Analyse öffnen",
+      openWrapped: "WhatsApp Wrapped öffnen",
+      managePortal: "Abo verwalten",
+      openingPortal: "Wird geöffnet …",
+      logout: "Abmelden",
+      logoutConfirm: "Möchtest du dich wirklich abmelden?",
+      activating:
+        "Zahlung erhalten — dein Abo wird aktiviert. Das dauert ein paar Sekunden.",
+      linkErrorHint:
+        "Verlängere unten oder verifiziere erneut mit der E-Mail und der Abo-ID aus deiner Bestätigungsmail.",
+      planTier: "Pro-Zugang",
+      firstMonth: "erster Monat",
+      followOn: "danach {price} / Monat",
+      feature1Title: "Unbegrenzte vollständige Chat-PDF-Exporte",
+      feature1Text:
+        "Exportiere ganze Chatverläufe mit allen Nachrichten, Medien-Zeitstempeln und Metadaten.",
+      feature2Title: "Komplettes WhatsApp-Wrapped-Erlebnis",
+      feature2Text:
+        "Schalte alle Wrapped-Slides, Emotionsanalysen, Top-Phrasen und teilbare Storys frei.",
+      feature3Title: "Volle Datenschutzgarantie",
+      feature3Text:
+        "Verarbeitung im Browser. Deine Chat-Dateien und Nachrichten landen nie auf unseren Servern.",
+      feature4Title: "Self-Service-Abrechnungsportal",
+      feature4Text:
+        "Kündige oder pausiere jederzeit mit einem Klick über das sichere Stripe-Kundenportal.",
+      redirecting: "Weiterleitung zu Stripe …",
+      secureTag:
+        "🔒 Verschlüsselter Stripe-Checkout mit 256 Bit. Jederzeit kündbar.",
+      restoreTitle: "Bestehenden Zugang wiederherstellen oder prüfen",
+      restoreText:
+        "Schon Abonnent? Gib deine E-Mail und deine Abo-ID (aus der Bestätigungsmail) ein, um dieses Gerät freizuschalten. Abos von vor dem Wechsel zu Stripe funktionieren weiterhin — nutze dafür die PayPal-ID, die mit I- beginnt.",
+      emailFieldLabel: "E-Mail-Adresse",
+      verifying: "Wird geprüft …",
+      verifyCta: "Zugang prüfen",
+      verifySuccess: "Abo erfolgreich verifiziert!",
+      errorMissingFields: "Bitte gib E-Mail und Abo-ID ein.",
+      errorVerifyFailed: "Das Abo konnte nicht verifiziert werden.",
+      errorUnexpected: "Ein unerwarteter Fehler ist aufgetreten.",
+      errorCheckout:
+        "Der Checkout konnte nicht gestartet werden. Bitte versuche es erneut.",
+      errorPortalMissing: "E-Mail oder Abo-ID fehlt.",
+      errorPortalFailed: "Das Kundenportal konnte nicht geöffnet werden.",
+    },
     courtEvidence: {
       seoTitle:
         "WhatsApp-Chat als Beweismittel vor Gericht – sauberes PDF | WhatsAnalyze",
@@ -1784,6 +1883,58 @@ export const messages = {
     pageNameHeatmap: "WhatsApp Aktivitätszeiten & 24h-Heatmap",
   },
   es: {
+    subscribePage: {
+      title: "Una suscripción. Todo desbloqueado.",
+      subtitle:
+        "Disfruta de exportaciones PDF completas e ilimitadas, historias de WhatsApp Wrapped y análisis de chat avanzados en todos tus dispositivos.",
+      activeTitle: "Tu suscripción está activa",
+      activeSubtext:
+        "Tienes acceso completo a todas las funciones y descargas de PDF ilimitadas.",
+      subscriptionIdLabel: "ID de suscripción",
+      emailLabel: "Correo vinculado",
+      validUntilLabel: "Válida hasta",
+      openAnalyzer: "Abrir el analizador de chats",
+      openWrapped: "Abrir WhatsApp Wrapped",
+      managePortal: "Gestionar suscripción",
+      openingPortal: "Abriendo…",
+      logout: "Cerrar sesión",
+      logoutConfirm: "¿Seguro que quieres cerrar sesión?",
+      activating:
+        "Pago recibido: estamos activando tu suscripción. Tarda unos segundos.",
+      linkErrorHint:
+        "Renueva abajo o verifica de nuevo con el correo y el ID de suscripción de tu recibo.",
+      planTier: "Acceso Pro",
+      firstMonth: "primer mes",
+      followOn: "luego {price} / mes",
+      feature1Title: "Exportaciones PDF completas e ilimitadas",
+      feature1Text:
+        "Exporta historiales de chat enteros con todos los mensajes, marcas de tiempo de los archivos y metadatos.",
+      feature2Title: "Experiencia completa de WhatsApp Wrapped",
+      feature2Text:
+        "Desbloquea todas las diapositivas, el análisis emocional, las frases más usadas y las historias para compartir.",
+      feature3Title: "Garantía total de privacidad",
+      feature3Text:
+        "Procesamiento en tu dispositivo. Tus archivos de chat y tus mensajes nunca se guardan en nuestros servidores.",
+      feature4Title: "Portal de facturación de autoservicio",
+      feature4Text:
+        "Cancela o pausa cuando quieras con un clic desde el portal de clientes seguro de Stripe.",
+      redirecting: "Redirigiendo a Stripe…",
+      secureTag:
+        "🔒 Pago cifrado de 256 bits con Stripe. Cancela cuando quieras.",
+      restoreTitle: "Restaura o verifica tu acceso",
+      restoreText:
+        "¿Ya tienes suscripción? Introduce tu correo y tu ID de suscripción (del correo del recibo) para activarla en este dispositivo. Las suscripciones anteriores al cambio a Stripe siguen funcionando: usa el ID de PayPal que empieza por I-.",
+      emailFieldLabel: "Correo electrónico",
+      verifying: "Verificando…",
+      verifyCta: "Verificar acceso",
+      verifySuccess: "¡Suscripción verificada correctamente!",
+      errorMissingFields: "Introduce el correo y el ID de suscripción.",
+      errorVerifyFailed: "No se ha podido verificar la suscripción.",
+      errorUnexpected: "Se ha producido un error inesperado.",
+      errorCheckout: "No se ha podido iniciar el pago. Inténtalo de nuevo.",
+      errorPortalMissing: "Falta el correo o el ID de suscripción.",
+      errorPortalFailed: "No se ha podido abrir el portal de clientes.",
+    },
     courtEvidence: {
       seoTitle:
         "Chat de WhatsApp como prueba en juicio – PDF limpio | WhatsAnalyze",
@@ -2652,6 +2803,58 @@ export const messages = {
     pageNameHeatmap: "Horas pico y mapa de calor 24h de WhatsApp",
   },
   pt: {
+    subscribePage: {
+      title: "Uma assinatura. Tudo liberado.",
+      subtitle:
+        "Aproveite exportações em PDF completas e ilimitadas, as histórias do WhatsApp Wrapped e análises avançadas de conversas em todos os seus aparelhos.",
+      activeTitle: "Sua assinatura está ativa",
+      activeSubtext:
+        "Você tem acesso completo a todos os recursos e downloads de PDF ilimitados.",
+      subscriptionIdLabel: "ID da assinatura",
+      emailLabel: "E-mail vinculado",
+      validUntilLabel: "Válida até",
+      openAnalyzer: "Abrir o analisador de conversas",
+      openWrapped: "Abrir o WhatsApp Wrapped",
+      managePortal: "Gerenciar assinatura",
+      openingPortal: "Abrindo…",
+      logout: "Sair",
+      logoutConfirm: "Quer mesmo sair?",
+      activating:
+        "Pagamento recebido — estamos ativando sua assinatura. Isso leva alguns segundos.",
+      linkErrorHint:
+        "Renove abaixo ou verifique de novo com o e-mail e o ID da assinatura do seu recibo.",
+      planTier: "Acesso Pro",
+      firstMonth: "primeiro mês",
+      followOn: "depois {price} / mês",
+      feature1Title: "Exportações em PDF completas e ilimitadas",
+      feature1Text:
+        "Exporte conversas inteiras com todas as mensagens, os horários das mídias e os metadados.",
+      feature2Title: "Experiência completa do WhatsApp Wrapped",
+      feature2Text:
+        "Libere todos os slides, as análises emocionais, as frases mais usadas e as histórias para compartilhar.",
+      feature3Title: "Garantia total de privacidade",
+      feature3Text:
+        "Processamento no seu aparelho. Seus arquivos de conversa e suas mensagens nunca ficam nos nossos servidores.",
+      feature4Title: "Portal de cobrança self-service",
+      feature4Text:
+        "Cancele ou pause quando quiser com um clique pelo portal do cliente seguro da Stripe.",
+      redirecting: "Redirecionando para a Stripe…",
+      secureTag:
+        "🔒 Checkout Stripe criptografado de 256 bits. Cancele quando quiser.",
+      restoreTitle: "Restaure ou verifique seu acesso",
+      restoreText:
+        "Já é assinante? Digite seu e-mail e o ID da assinatura (do e-mail de recibo) para ativar neste aparelho. Assinaturas anteriores à mudança para a Stripe continuam valendo: use o ID do PayPal que começa com I-.",
+      emailFieldLabel: "Endereço de e-mail",
+      verifying: "Verificando…",
+      verifyCta: "Verificar acesso",
+      verifySuccess: "Assinatura verificada com sucesso!",
+      errorMissingFields: "Digite o e-mail e o ID da assinatura.",
+      errorVerifyFailed: "Não foi possível verificar a assinatura.",
+      errorUnexpected: "Ocorreu um erro inesperado.",
+      errorCheckout: "Não foi possível iniciar o pagamento. Tente de novo.",
+      errorPortalMissing: "Falta o e-mail ou o ID da assinatura.",
+      errorPortalFailed: "Não foi possível abrir o portal do cliente.",
+    },
     analyzeYourChat: "Começar",
     wrapped: {
       heroTitle: "WhatsApp Wrapped {currentYear}",
@@ -3520,6 +3723,59 @@ export const messages = {
     pageNameHeatmap: "Horários de pico e mapa de calor 24h do WhatsApp",
   },
   fr: {
+    subscribePage: {
+      title: "Un abonnement. Tout est débloqué.",
+      subtitle:
+        "Profitez d'exports PDF complets illimités, des stories WhatsApp Wrapped et d'analyses de conversation avancées sur tous vos appareils.",
+      activeTitle: "Votre abonnement est actif",
+      activeSubtext:
+        "Vous avez accès à toutes les fonctionnalités et aux téléchargements PDF illimités.",
+      subscriptionIdLabel: "ID d'abonnement",
+      emailLabel: "E-mail associé",
+      validUntilLabel: "Valable jusqu'au",
+      openAnalyzer: "Ouvrir l'analyseur de conversations",
+      openWrapped: "Ouvrir WhatsApp Wrapped",
+      managePortal: "Gérer l'abonnement",
+      openingPortal: "Ouverture…",
+      logout: "Se déconnecter",
+      logoutConfirm: "Voulez-vous vraiment vous déconnecter ?",
+      activating:
+        "Paiement reçu — activation de votre abonnement en cours. Cela prend quelques secondes.",
+      linkErrorHint:
+        "Renouvelez ci-dessous, ou vérifiez à nouveau avec l'e-mail et l'ID d'abonnement de votre reçu.",
+      planTier: "Accès Pro",
+      firstMonth: "premier mois",
+      followOn: "puis {price} / mois",
+      feature1Title: "Exports PDF complets et illimités",
+      feature1Text:
+        "Exportez des conversations entières avec tous les messages, les horodatages des médias et les métadonnées.",
+      feature2Title: "Expérience WhatsApp Wrapped complète",
+      feature2Text:
+        "Débloquez toutes les slides, les analyses émotionnelles, les expressions favorites et les stories à partager.",
+      feature3Title: "Garantie de confidentialité totale",
+      feature3Text:
+        "Traitement dans votre navigateur. Vos fichiers de conversation et vos messages ne sont jamais stockés sur nos serveurs.",
+      feature4Title: "Portail de facturation en libre-service",
+      feature4Text:
+        "Annulez ou mettez en pause à tout moment en un clic via le portail client sécurisé de Stripe.",
+      redirecting: "Redirection vers Stripe…",
+      secureTag:
+        "🔒 Paiement Stripe chiffré en 256 bits. Annulable à tout moment.",
+      restoreTitle: "Restaurer ou vérifier un accès existant",
+      restoreText:
+        "Déjà abonné ? Saisissez votre e-mail et votre ID d'abonnement (indiqué dans l'e-mail de reçu) pour l'activer sur cet appareil. Les abonnements souscrits avant le passage à Stripe fonctionnent toujours : utilisez l'ID PayPal qui commence par I-.",
+      emailFieldLabel: "Adresse e-mail",
+      verifying: "Vérification…",
+      verifyCta: "Vérifier l'accès",
+      verifySuccess: "Abonnement vérifié avec succès !",
+      errorMissingFields:
+        "Veuillez saisir votre e-mail et votre ID d'abonnement.",
+      errorVerifyFailed: "L'abonnement n'a pas pu être vérifié.",
+      errorUnexpected: "Une erreur inattendue s'est produite.",
+      errorCheckout: "Impossible de démarrer le paiement. Veuillez réessayer.",
+      errorPortalMissing: "E-mail ou ID d'abonnement manquant.",
+      errorPortalFailed: "Impossible d'ouvrir le portail client.",
+    },
     wrapped: {
       heroTitle: "WhatsApp Wrapped {currentYear}",
       heroSubtitle:
@@ -4396,6 +4652,57 @@ export const messages = {
     pageNameHeatmap: "Heures de pointe et carte thermique 24h WhatsApp",
   },
   it: {
+    subscribePage: {
+      title: "Un abbonamento. Tutto sbloccato.",
+      subtitle:
+        "Esportazioni PDF complete e illimitate, storie di WhatsApp Wrapped e analisi avanzate delle chat su ogni dispositivo.",
+      activeTitle: "Il tuo abbonamento è attivo",
+      activeSubtext:
+        "Hai accesso completo a tutte le funzioni e download PDF illimitati.",
+      subscriptionIdLabel: "ID abbonamento",
+      emailLabel: "Email collegata",
+      validUntilLabel: "Valido fino al",
+      openAnalyzer: "Apri l'analizzatore di chat",
+      openWrapped: "Apri WhatsApp Wrapped",
+      managePortal: "Gestisci abbonamento",
+      openingPortal: "Apertura…",
+      logout: "Esci",
+      logoutConfirm: "Vuoi davvero uscire?",
+      activating:
+        "Pagamento ricevuto — stiamo attivando il tuo abbonamento. Ci vogliono pochi secondi.",
+      linkErrorHint:
+        "Rinnova qui sotto, oppure verifica di nuovo con l'email e l'ID abbonamento della tua ricevuta.",
+      planTier: "Accesso Pro",
+      firstMonth: "primo mese",
+      followOn: "poi {price} / mese",
+      feature1Title: "Esportazioni PDF complete e illimitate",
+      feature1Text:
+        "Esporta intere cronologie di chat con tutti i messaggi, i timestamp dei media e i metadati.",
+      feature2Title: "Esperienza WhatsApp Wrapped completa",
+      feature2Text:
+        "Sblocca tutte le slide, le analisi emotive, le frasi più usate e le storie da condividere.",
+      feature3Title: "Garanzia di privacy totale",
+      feature3Text:
+        "Elaborazione nel browser. I tuoi file di chat e i tuoi messaggi non finiscono mai sui nostri server.",
+      feature4Title: "Portale di fatturazione self-service",
+      feature4Text:
+        "Disdici o metti in pausa quando vuoi con un clic dal portale clienti sicuro di Stripe.",
+      redirecting: "Reindirizzamento a Stripe…",
+      secureTag: "🔒 Checkout Stripe cifrato a 256 bit. Disdici quando vuoi.",
+      restoreTitle: "Ripristina o verifica un accesso esistente",
+      restoreText:
+        "Sei già abbonato? Inserisci la tua email e il tuo ID abbonamento (dall'email di ricevuta) per attivarlo su questo dispositivo. Gli abbonamenti precedenti al passaggio a Stripe funzionano ancora: usa l'ID PayPal che inizia con I-.",
+      emailFieldLabel: "Indirizzo email",
+      verifying: "Verifica in corso…",
+      verifyCta: "Verifica accesso",
+      verifySuccess: "Abbonamento verificato con successo!",
+      errorMissingFields: "Inserisci email e ID abbonamento.",
+      errorVerifyFailed: "Non è stato possibile verificare l'abbonamento.",
+      errorUnexpected: "Si è verificato un errore imprevisto.",
+      errorCheckout: "Impossibile avviare il pagamento. Riprova.",
+      errorPortalMissing: "Email o ID abbonamento mancante.",
+      errorPortalFailed: "Impossibile aprire il portale clienti.",
+    },
     wrapped: {
       heroTitle: "WhatsApp Wrapped {currentYear}",
       heroSubtitle:
@@ -4448,11 +4755,6 @@ export const messages = {
         "WhatsApp Wrapped mi ha dato una nuova prospettiva sulle mie conversazioni. Sono rimasto sorpreso nel vedere i miei orari più attivi e con chi ho parlato di più. È divertente e perspicace!",
       testimonial2:
         "Ho adorato le statistiche sugli emoji! È un modo divertente per riflettere sulle mie chat e vedere come si sono evolute le mie relazioni durante l'anno.",
-    },
-    subscription: {
-      title: "Abbonamento",
-      cta: "Abbonati ora. Analisi illimitate. Grande divertimento.",
-      button: "Acquista abbonamento mensile per 10€",
     },
     titleGoogle: "WhatsAnalyze - L'Analizzatore di Chat WhatsApp",
     metaDescription:

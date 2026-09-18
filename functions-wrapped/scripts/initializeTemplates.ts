@@ -20,19 +20,30 @@ try {
 
   const db = admin.firestore();
 
+  // The plan is sold as "WhatsAnalyze Pro" on /subscribe, and the restore form
+  // there labels the id "Subscription ID" — the email names both the same way,
+  // so nobody has to work out which product they bought or which field the id
+  // belongs in. The billing block states what a recurring EU charge has to
+  // state: the amount, the renewal, and the way out.
   const subscriptionTemplate = {
-    subject: "Subscription Confirmation - WhatsAnalyze Wrapped",
+    subject: "Subscription Confirmation - WhatsAnalyze Pro",
     html: `<html><body>
       <h2>Welcome, {{customerName}}!</h2>
       <p>Your subscription has been successfully created.</p>
-      <p>Thank you for joining WhatsAnalyze Wrapped. You now have access to all premium features.</p>
+      <p>Thank you for joining WhatsAnalyze Pro. You now have access to all premium features, including WhatsApp Wrapped.</p>
       <p><a href="{{loginUrl}}">Open your account</a></p>
       <p><small>If the link doesn't work, copy and paste this URL into your browser:<br/>{{loginUrl}}</small></p>
-      <p><small>Your verification code: {{subscriptionId}}</small></p>
+      <h3>Your billing details</h3>
+      <ul>
+        <li>Charged today: {{amountPaid}}</li>
+        <li>Renews on {{renewalDate}} for {{renewalAmount}} per month</li>
+        <li>Subscription ID: {{subscriptionId}}</li>
+      </ul>
+      <p>You can cancel or pause anytime: open your account and choose "Manage Subscription" to reach the Stripe Customer Portal.</p>
       <p>If you have any questions, please reach out to our support team.</p>
       <p>Best regards,<br/>WhatsAnalyze Team</p>
     </body></html>`,
-    text: `Welcome, {{customerName}}!\n\nYour subscription has been successfully created.\n\nThank you for joining WhatsAnalyze Wrapped. You now have access to all premium features.\n\nOpen your account: {{loginUrl}}\n\nVerification code (if needed): {{subscriptionId}}\n\nBest regards,\nWhatsAnalyze Team`,
+    text: `Welcome, {{customerName}}!\n\nYour subscription has been successfully created.\n\nThank you for joining WhatsAnalyze Pro. You now have access to all premium features, including WhatsApp Wrapped.\n\nOpen your account: {{loginUrl}}\n\nYour billing details:\n- Charged today: {{amountPaid}}\n- Renews on {{renewalDate}} for {{renewalAmount}} per month\n- Subscription ID: {{subscriptionId}}\n\nYou can cancel or pause anytime: open your account and choose "Manage Subscription" to reach the Stripe Customer Portal.\n\nBest regards,\nWhatsAnalyze Team`,
   };
 
   db.collection("mailTemplates")

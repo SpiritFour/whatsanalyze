@@ -4,11 +4,8 @@
       <!-- Top header branding -->
       <div class="sub-page__header text-center">
         <span class="sub-badge">WhatsAnalyze Pro</span>
-        <h1 class="sub-title">One Subscription. Everything Unlocked.</h1>
-        <p class="sub-subtitle">
-          Enjoy unlimited full PDF exports, WhatsApp Wrapped stories, and
-          advanced chat analytics across every device.
-        </p>
+        <h1 class="sub-title">{{ $t("subscribePage.title") }}</h1>
+        <p class="sub-subtitle">{{ $t("subscribePage.subtitle") }}</p>
       </div>
 
       <!-- State: Active Verified Subscription -->
@@ -33,26 +30,32 @@
             </svg>
           </div>
           <div>
-            <h2 class="card-heading">Your subscription is Active</h2>
+            <h2 class="card-heading">
+              {{ $t("subscribePage.activeTitle") }}
+            </h2>
             <p class="card-subtext">
-              You have full access to all features and unlimited PDF downloads.
+              {{ $t("subscribePage.activeSubtext") }}
             </p>
           </div>
         </div>
 
         <div class="meta-grid">
           <div class="meta-item">
-            <span class="meta-label">Subscription ID</span>
+            <span class="meta-label">{{
+              $t("subscribePage.subscriptionIdLabel")
+            }}</span>
             <span class="meta-value mono">{{
               subscriptionStore.getSubscriptionId
             }}</span>
           </div>
           <div v-if="subscriptionStore.getEmail" class="meta-item">
-            <span class="meta-label">Linked Email</span>
+            <span class="meta-label">{{ $t("subscribePage.emailLabel") }}</span>
             <span class="meta-value">{{ subscriptionStore.getEmail }}</span>
           </div>
           <div v-if="subscriptionStore.getExpiresAt" class="meta-item">
-            <span class="meta-label">Valid Until</span>
+            <span class="meta-label">{{
+              $t("subscribePage.validUntilLabel")
+            }}</span>
             <span class="meta-value">{{
               formatDate(subscriptionStore.getExpiresAt)
             }}</span>
@@ -62,28 +65,36 @@
         <p v-if="portalError" class="error-banner">{{ portalError }}</p>
 
         <div class="actions-row">
-          <NuxtLink to="/#payButton" class="primary-btn">
-            Open Chat Analyzer
+          <NuxtLink
+            :to="localePath({ path: '/', hash: '#payButton' })"
+            class="primary-btn"
+          >
+            {{ $t("subscribePage.openAnalyzer") }}
           </NuxtLink>
-          <NuxtLink to="/wrapped" class="secondary-btn">
-            Open WhatsApp Wrapped
+          <NuxtLink :to="localePath('/wrapped')" class="secondary-btn">
+            {{ $t("subscribePage.openWrapped") }}
           </NuxtLink>
           <button
             class="secondary-btn"
             :disabled="isPortalLoading"
             @click="openCustomerPortal"
           >
-            {{ isPortalLoading ? "Opening..." : "Manage Subscription" }}
+            {{
+              isPortalLoading
+                ? $t("subscribePage.openingPortal")
+                : $t("subscribePage.managePortal")
+            }}
           </button>
-          <button class="text-btn text-danger" @click="logout">Logout</button>
+          <button class="text-btn text-danger" @click="logout">
+            {{ $t("subscribePage.logout") }}
+          </button>
         </div>
       </div>
 
       <!-- State: No Active Subscription -->
       <div v-else class="space-y-8">
         <p v-if="subscriptionStore.isActivating" class="activating-banner">
-          Payment received — activating your subscription. This takes a few
-          seconds.
+          {{ $t("subscribePage.activating") }}
         </p>
 
         <!--
@@ -93,65 +104,31 @@
         -->
         <div v-if="linkError" class="error-banner link-error">
           <strong>{{ linkError }}</strong>
-          <span>
-            Renew below, or verify again with the email and subscription ID from
-            your receipt.
-          </span>
+          <span>{{ $t("subscribePage.linkErrorHint") }}</span>
         </div>
 
         <!-- Pricing / Plan Tier Card -->
         <div class="apple-card highlight-card">
           <div class="plan-header">
             <div>
-              <span class="plan-tier">Pro Access</span>
+              <span class="plan-tier">{{ $t("subscribePage.planTier") }}</span>
               <h2 class="plan-name">WhatsAnalyze All-Access</h2>
             </div>
             <div class="plan-price">
               <span class="amount">{{ introPrice }}</span>
-              <span class="interval">first month</span>
-              <div class="follow-on">then {{ subscriptionPrice }} / month</div>
+              <span class="interval">{{ $t("subscribePage.firstMonth") }}</span>
+              <div class="follow-on">
+                {{ $t("subscribePage.followOn", { price: subscriptionPrice }) }}
+              </div>
             </div>
           </div>
 
           <div class="feature-list">
-            <div class="feature-item">
+            <div v-for="n in 4" :key="n" class="feature-item">
               <div class="check-icon">✓</div>
               <div>
-                <strong>Unlimited Full Chat PDF Exports</strong>
-                <p>
-                  Export whole chat histories with full message logs, media
-                  timestamps, and metadata.
-                </p>
-              </div>
-            </div>
-            <div class="feature-item">
-              <div class="check-icon">✓</div>
-              <div>
-                <strong>Complete WhatsApp Wrapped Experience</strong>
-                <p>
-                  Unlock all wrapped slides, emotional analytics, top phrases,
-                  and shareable stories.
-                </p>
-              </div>
-            </div>
-            <div class="feature-item">
-              <div class="check-icon">✓</div>
-              <div>
-                <strong>Full Privacy Guarantee</strong>
-                <p>
-                  Client-side processing. Your chat files and messages are never
-                  stored on our servers.
-                </p>
-              </div>
-            </div>
-            <div class="feature-item">
-              <div class="check-icon">✓</div>
-              <div>
-                <strong>Self-Service Billing Portal</strong>
-                <p>
-                  Cancel or pause anytime with 1-click via the secure Stripe
-                  Customer Portal.
-                </p>
+                <strong>{{ $t(`subscribePage.feature${n}Title`) }}</strong>
+                <p>{{ $t(`subscribePage.feature${n}Text`) }}</p>
               </div>
             </div>
           </div>
@@ -164,29 +141,24 @@
             >
               {{
                 isCheckoutLoading
-                  ? "Redirecting to Stripe..."
+                  ? $t("subscribePage.redirecting")
                   : $t("chooseSubscription")
               }}
             </button>
-            <p class="secure-tag mt-2">
-              🔒 Encrypted Stripe 256-bit checkout. Cancel anytime.
-            </p>
+            <p class="secure-tag mt-2">{{ $t("subscribePage.secureTag") }}</p>
           </div>
         </div>
 
         <!-- Restore / Login Card -->
         <div class="apple-card">
-          <h3 class="card-heading">Restore or Verify Existing Access</h3>
-          <p class="card-subtext mb-4">
-            Already subscribed? Enter your email and subscription ID (from your
-            receipt email) to activate on this device. Subscriptions from before
-            the switch to Stripe still work — use the PayPal ID that starts with
-            <span class="mono">I-</span>.
-          </p>
+          <h3 class="card-heading">{{ $t("subscribePage.restoreTitle") }}</h3>
+          <p class="card-subtext mb-4">{{ $t("subscribePage.restoreText") }}</p>
 
           <form class="restore-form" @submit.prevent="verify()">
             <div class="input-group">
-              <label for="sub-email">Email Address</label>
+              <label for="sub-email">{{
+                $t("subscribePage.emailFieldLabel")
+              }}</label>
               <input
                 id="sub-email"
                 v-model="email"
@@ -198,7 +170,9 @@
             </div>
 
             <div class="input-group">
-              <label for="sub-id">Subscription ID</label>
+              <label for="sub-id">{{
+                $t("subscribePage.subscriptionIdLabel")
+              }}</label>
               <input
                 id="sub-id"
                 v-model="subscriptionId"
@@ -219,7 +193,11 @@
               class="secondary-btn w-full"
               :disabled="loading || !email || !subscriptionId"
             >
-              {{ loading ? "Verifying..." : "Verify Access" }}
+              {{
+                loading
+                  ? $t("subscribePage.verifying")
+                  : $t("subscribePage.verifyCta")
+              }}
             </button>
           </form>
         </div>
@@ -239,6 +217,11 @@ import { INTRO_PRICE, SUBSCRIPTION_PRICE, formatPrice } from "~/utils/pricing";
 
 export default {
   name: "Subscriptions",
+  setup() {
+    // The page is reachable under every locale prefix, so every link out of it
+    // — and the reload after logging out — has to keep the reader's language.
+    return { localePath: useLocalePath() };
+  },
   data() {
     return {
       email: "",
@@ -292,7 +275,7 @@ export default {
   methods: {
     formatDate(dateString) {
       if (!dateString) return "";
-      return new Date(dateString).toLocaleDateString("en-US", {
+      return new Date(dateString).toLocaleDateString(this.$i18n.locale, {
         year: "numeric",
         month: "long",
         day: "numeric",
@@ -302,15 +285,18 @@ export default {
       if (this.isCheckoutLoading) return;
       this.isCheckoutLoading = true;
       try {
+        const returnPath = `${window.location.origin}${this.localePath(
+          "/subscribe"
+        )}`;
         const url = await fetchSubscriptionCheckoutUrl({
-          successUrl: `${window.location.origin}/subscribe?session_id={CHECKOUT_SESSION_ID}`,
-          cancelUrl: `${window.location.origin}/subscribe`,
+          successUrl: `${returnPath}?session_id={CHECKOUT_SESSION_ID}`,
+          cancelUrl: returnPath,
         });
         if (!url) throw new Error("No checkout URL returned");
         window.location.assign(url);
       } catch (err) {
         console.error("Error starting checkout:", err);
-        alert("Unable to start checkout. Please try again.");
+        alert(this.$t("subscribePage.errorCheckout"));
         this.isCheckoutLoading = false;
       }
     },
@@ -364,7 +350,7 @@ export default {
     },
     async verify({ afterCheckout = false, fromLink = false } = {}) {
       if (!this.email || !this.subscriptionId) {
-        this.error = "Please enter both email and subscription ID.";
+        this.error = this.$t("subscribePage.errorMissingFields");
         return;
       }
 
@@ -384,16 +370,16 @@ export default {
               this.subscriptionId
             );
         if (result.isValid) {
-          this.successMessage = "Subscription successfully verified!";
+          this.successMessage = this.$t("subscribePage.verifySuccess");
         } else {
           this.reportFailure(
-            result.message || "Subscription could not be verified.",
+            result.message || this.$t("subscribePage.errorVerifyFailed"),
             fromLink
           );
         }
       } catch (err) {
         this.reportFailure(
-          err?.message || "An unexpected error occurred.",
+          err?.message || this.$t("subscribePage.errorUnexpected"),
           fromLink
         );
       } finally {
@@ -415,7 +401,7 @@ export default {
         this.subscriptionId || this.subscriptionStore.getSubscriptionId;
 
       if (!activeEmail || !activeSubscriptionId) {
-        this.portalError = "Missing email or subscription ID.";
+        this.portalError = this.$t("subscribePage.errorPortalMissing");
         return;
       }
 
@@ -441,20 +427,21 @@ export default {
 
         window.location.href = data.url;
       } catch (err) {
-        this.portalError = err?.message || "Failed to open customer portal.";
+        this.portalError =
+          err?.message || this.$t("subscribePage.errorPortalFailed");
       } finally {
         this.isPortalLoading = false;
       }
     },
     logout() {
-      if (!confirm("Do you really want to logout?")) return;
+      if (!confirm(this.$t("subscribePage.logoutConfirm"))) return;
       this.subscriptionStore.logout();
       this.email = "";
       this.subscriptionId = "";
       this.error = "";
       this.linkError = "";
       this.successMessage = "";
-      window.location.replace("/subscribe");
+      window.location.replace(this.localePath("/subscribe"));
     },
   },
 };

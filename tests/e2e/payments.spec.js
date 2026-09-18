@@ -281,4 +281,43 @@ test.describe("quoting prices", () => {
       page.locator(".pricing-card").getByText(/EUR|Euro/)
     ).toHaveCount(0);
   });
+
+  // The main subscription funnel used to translate its nav and nothing else,
+  // so /de/subscribe sold a German reader an English page — down to "€4,99
+  // first month then €10 / month", which was not even the price charged.
+  test("sells the subscription in the reader's language", async ({ page }) => {
+    const expected = {
+      de: {
+        title: "Ein Abo. Alles freigeschaltet.",
+        follow: "danach 9,99 € / Monat",
+      },
+      fr: {
+        title: "Un abonnement. Tout est débloqué.",
+        follow: "puis 9,99 € / mois",
+      },
+      it: {
+        title: "Un abbonamento. Tutto sbloccato.",
+        follow: "poi 9,99 € / mese",
+      },
+      es: {
+        title: "Una suscripción. Todo desbloqueado.",
+        follow: "luego 9,99 € / mes",
+      },
+      pt: {
+        title: "Uma assinatura. Tudo liberado.",
+        follow: "depois € 9,99 / mês",
+      },
+    };
+
+    for (const [locale, { title, follow }] of Object.entries(expected)) {
+      await page.goto(`/${locale}/subscribe`);
+      await expect(page.locator(".sub-title")).toHaveText(title);
+      // The symbol position and the decimal comma follow the locale, so this
+      // is the one place the recurring price can be checked as it is read.
+      await expect(page.locator(".plan-price .follow-on")).toHaveText(follow);
+      await expect(page.locator(".sub-page__container")).not.toContainText(
+        "Everything Unlocked"
+      );
+    }
+  });
 });
