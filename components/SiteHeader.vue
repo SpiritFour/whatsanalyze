@@ -1,5 +1,7 @@
 <template>
-  <header class="site-header">
+  <!-- The bar is sticky, so html2canvas draws it over the top of whatever it
+       is capturing. It has no business in a downloaded chart. -->
+  <header class="site-header" data-html2canvas-ignore>
     <div class="site-header__inner">
       <NuxtLink :to="localePath('/')" class="site-header__brand">
         <img
