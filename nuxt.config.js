@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 import {
   localeCodes,
   localizedPages,
+  retiredRedirects,
   siteBaseUrl,
 } from "./config/routes.js";
 
@@ -42,9 +43,25 @@ export default defineNuxtConfig({
     prerender: {
       // /sitemap.xml is a server route; prerendering it writes a real sitemap
       // into dist instead of letting the SPA shell answer for it.
-      routes: [...localizedRoutes, "/sitemap.xml"],
+      // The retired paths have no page of their own, so they are only written
+      // into dist if the prerenderer is told to visit them.
+      routes: [
+        ...localizedRoutes,
+        ...Object.keys(retiredRedirects),
+        "/sitemap.xml",
+      ],
     },
   },
+
+  // Retired URLs, prerendered as redirect stubs so they survive on GitHub
+  // Pages. See retiredPages in config/routes.js for why firebase.json cannot
+  // carry these.
+  routeRules: Object.fromEntries(
+    Object.entries(retiredRedirects).map(([from, to]) => [
+      from,
+      { redirect: { to, statusCode: 301 } },
+    ])
+  ),
 
   app: {
     head: {
