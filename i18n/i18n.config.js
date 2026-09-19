@@ -1,4 +1,5 @@
 import { messages } from "../utils/translations.js";
+import { wrappedMessages } from "../utils/wrapped/translations.js";
 import {
   de as vuetifyDe,
   en as vuetifyEn,
@@ -27,6 +28,7 @@ export default defineI18nConfig(() => ({
       {
         $vuetify: vuetifyMessages[locale],
         ...localeMessages,
+        ...(wrappedMessages[locale] || wrappedMessages.en),
       },
     ])
   ),

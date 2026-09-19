@@ -18,6 +18,11 @@
             pkgs.nodejs_22
             pnpm
             pkgs.firebase-tools
+            # Firestore export/import and application-default credentials, which
+            # the Firebase CLI does not cover.
+            pkgs.google-cloud-sdk
+            # Webhook endpoints, and forwarding them to the emulator locally.
+            pkgs.stripe-cli
             pkgs.python311
             pkgs.git
           ];

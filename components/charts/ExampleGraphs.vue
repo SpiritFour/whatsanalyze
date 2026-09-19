@@ -1,239 +1,28 @@
 <template>
-  <div v-if="chat">
-    <div v-if="$vuetify.display.smAndUp" class="example-graphs-desktop">
-      <v-row justify="center" align="start">
-        <v-col cols="12" sm="6">
-          <ChartsBarChart
-            :chartdata="chat"
-            :options="barchartHeaderChartOptions"
-            data-grouping="hourly"
-          />
-          <div class="mx-2 mt-2 text-body-1 text-center font-weight-bold">
-            {{ $t("exampleGraphSubtitle1") }}
-          </div>
-        </v-col>
-        <v-col cols="12" sm="6">
-          <ChartsDonughtChart
-            :chartdata="chat"
-            :options="donoughtHeaderChartOptions"
-          />
-          <div class="mx-2 mt-2 text-body-1 text-center font-weight-bold">
-            {{ $t("exampleGraphSubtitle2") }}
-          </div>
-        </v-col>
-      </v-row>
-      <v-row class="mt-2" justify="center">
-        <v-col cols="12" class="d-flex justify-center pa-0">
-          <v-img
-            src="/example-fun-facts.png"
-            max-width="480"
-            max-height="240"
-            class="mx-auto"
-            contain
-          ></v-img>
-        </v-col>
-      </v-row>
-    </div>
-    <v-col v-else class="py-0">
-      <v-carousel
-        :continuous="true"
-        :cycle="false"
-        :show-arrows="true"
-        height="280"
-        hide-delimiter-background
-      >
-        <v-carousel-item>
-          <div class="carousel-slide-content">
-            <ChartsBarChart
-              :chartdata="chat"
-              :options="barchartHeaderChartOptions"
-              data-grouping="hourly"
-            />
-          </div>
-        </v-carousel-item>
+  <div v-if="chat" class="wa-scope grid gap-4 md:grid-cols-2 md:gap-6">
+    <ChartsCard :title="$t('exampleGraphSubtitle1')">
+      <div class="h-[260px]">
+        <ChartsBarChart :chartdata="chat" data-grouping="hourly" compact />
+      </div>
+    </ChartsCard>
 
-        <v-carousel-item>
-          <div class="carousel-slide-content">
-            <ChartsWordCloud :chartdata="chat" />
-          </div>
-        </v-carousel-item>
-
-        <v-carousel-item>
-          <div class="carousel-slide-content">
-            <ChartsDonughtChart
-              :chartdata="chat"
-              :options="donoughtHeaderChartOptions"
-            />
-          </div>
-        </v-carousel-item>
-        <v-carousel-item>
-          <div class="carousel-slide-content">
-            <ChartsRadarChart
-              :chartdata="chat"
-              :options="radarchartHeaderChartOptions"
-            />
-          </div>
-        </v-carousel-item>
-      </v-carousel>
-    </v-col>
+    <ChartsCard :title="$t('exampleGraphSubtitle2')">
+      <div class="mx-auto max-w-[260px]">
+        <ChartsDonughtChart :chartdata="chat" compact />
+      </div>
+    </ChartsCard>
   </div>
 </template>
+
 <script>
 import { Chat } from "~/utils/transformChatData";
+import { recolorChartData } from "~/utils/colors";
 
 export default {
   name: "ExampleGraphs",
   data() {
     return {
       chat: undefined,
-      linegraphHeaderChartOptions: {
-        responsive: true,
-        maintainAspectRatio: true,
-        elements: {
-          line: {
-            tension: 1,
-          },
-          point: {
-            hitRadius: 5,
-          },
-        },
-        plugins: {
-          tooltip: { enabled: false },
-          legend: {
-            position: "top",
-            labels: {
-              font: {
-                weight: "bold",
-                size: 10,
-              },
-              color: "rgb(51,51,51)",
-            },
-          },
-        },
-        scales: {
-          x: {
-            type: "time",
-            grid: {
-              display: false,
-              color: "#FFFFFF",
-            },
-            ticks: {
-              color: "rgb(51,51,51)",
-              font: {
-                weight: "bold",
-                size: 11,
-              },
-            },
-          },
-          y: {
-            beginAtZero: true,
-            display: false,
-            ticks: {
-              precision: 0,
-              stepSize: 1,
-            },
-            grid: {
-              display: false,
-              color: "#FFFFFF",
-            },
-          },
-        },
-      },
-      donoughtHeaderChartOptions: {
-        responsive: true,
-        maintainAspectRatio: true,
-        plugins: {
-          tooltip: { enabled: true },
-          legend: {
-            position: "bottom",
-            labels: {
-              font: {
-                weight: "bold",
-                size: 10,
-              },
-              color: "rgb(51,51,51)",
-            },
-          },
-        },
-      },
-      radarchartHeaderChartOptions: {
-        responsive: true,
-        maintainAspectRatio: true,
-        scales: {
-          r: {
-            angleLines: {
-              color: "rgb(51,51,51)",
-            },
-            ticks: {
-              display: false,
-            },
-            grid: {
-              color: "rgb(51,51,51)",
-            },
-            pointLabels: {
-              color: "rgb(51,51,51)",
-            },
-          },
-        },
-        plugins: {
-          tooltip: { enabled: false },
-          legend: {
-            position: "top",
-            labels: {
-              font: {
-                weight: "bold",
-                size: 10,
-              },
-              color: "rgb(51,51,51)",
-            },
-          },
-        },
-      },
-      barchartHeaderChartOptions: {
-        responsive: true,
-        maintainAspectRatio: true,
-        aspectRatio: 1.1,
-        plugins: {
-          tooltip: { enabled: true },
-          legend: {
-            position: "bottom",
-            labels: {
-              font: {
-                weight: "bold",
-                size: 10,
-              },
-              color: "rgb(51,51,51)",
-            },
-          },
-        },
-        scales: {
-          x: {
-            grid: {
-              display: false,
-            },
-            ticks: {
-              color: "rgb(51,51,51)",
-              maxRotation: 0,
-              autoSkip: true,
-              maxTicksLimit: 8,
-              font: {
-                weight: "bold",
-                size: 10,
-              },
-            },
-          },
-          y: {
-            beginAtZero: true,
-            display: false,
-            ticks: {
-              precision: 0,
-            },
-            grid: {
-              display: false,
-            },
-          },
-        },
-      },
     };
   },
   created() {
@@ -244,14 +33,20 @@ export default {
         .then((messages) => {
           var instance = new Chat();
           var serializedObject = JSON.parse(messages);
+          // The file was written with whatever palette was current that day,
+          // so the colours are replaced with today's on the way in.
           Object.assign(instance, {
-            _lineGraphData: Promise.resolve(serializedObject[0]),
+            _lineGraphData: Promise.resolve(
+              recolorChartData(serializedObject[0])
+            ),
             _funfacts: Promise.resolve(serializedObject[1]),
             _allWords: Promise.resolve(serializedObject[2]),
-            _hourlyData: Promise.resolve(serializedObject[3]),
-            _dailyData: Promise.resolve(serializedObject[4]),
-            _weeklyData: Promise.resolve(serializedObject[5]),
-            _shareOfSpeech: Promise.resolve(serializedObject[6]),
+            _hourlyData: Promise.resolve(recolorChartData(serializedObject[3])),
+            _dailyData: Promise.resolve(recolorChartData(serializedObject[4])),
+            _weeklyData: Promise.resolve(recolorChartData(serializedObject[5])),
+            _shareOfSpeech: Promise.resolve(
+              recolorChartData(serializedObject[6])
+            ),
           });
           this.chat = instance;
         });
@@ -259,51 +54,3 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-.carousel-slide-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  padding: 8px 48px 24px 48px;
-  box-sizing: border-box;
-}
-
-.v-carousel__controls__item {
-  margin: 0 8px !important;
-  width: 7px !important;
-  height: 7px !important;
-}
-
-@media (min-width: 760px) {
-}
-
-@media (min-width: 760px) {
-  .explainer-list p {
-    margin-right: 10%;
-    display: inline;
-  }
-}
-
-.explainer-list p {
-  font-size: 1.2em;
-}
-
-.explainer h2 {
-  min-height: 3em;
-}
-
-.explainer img {
-  max-height: 200px;
-  padding: 1em;
-}
-
-@media (min-width: 761px) {
-  .explainer-list p {
-    display: inline;
-    padding: 1em;
-    width: 33%;
-  }
-}
-</style>

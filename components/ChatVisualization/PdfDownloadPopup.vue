@@ -1,239 +1,339 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <div class="cta pa-2 pa-md-5 my-md-2 overflow-hidden">
-    <!-- Title -->
-    <div
-      class="text-h4 text-md-h3 font-weight-bold pb-4"
+  <div
+    class="wa-scope rounded-token-lg border border-solid border-[rgba(29,29,31,0.08)] bg-wa-surface-white p-6 text-center shadow-card md:p-8"
+  >
+    <h2
+      class="m-0 text-2xl font-bold text-wa-ink md:text-3xl"
       v-html="$t('downloadPDF')"
-    ></div>
+    ></h2>
 
-    <v-row>
-      <v-img src="/pdf-example.jpg" class="ma-auto my-4" max-width="100%" />
-    </v-row>
-    <!-- Loading section -->
-    <v-row v-show="isLoading" class="ma-3">
-      <div class="text-body-1 pa-2" v-html="$t('waitingForPDF')"></div>
+    <img
+      src="/pdf-example.jpg"
+      alt=""
+      class="mx-auto mt-6 w-full max-w-[560px] rounded-token border border-solid border-[rgba(29,29,31,0.08)]"
+      loading="lazy"
+    />
 
-      <div v-show="!progress">
-        <v-progress-circular indeterminate style="height: 1em" color="blue" />
+    <!-- Building the PDF takes a while on a long chat, so say what is
+         happening: first while the media is still being read, then with a
+         real percentage once the pages start rendering. -->
+    <div v-show="isLoading" class="mx-auto mt-6 max-w-[420px]">
+      <p class="m-0 text-sm text-wa-ink-muted" v-html="$t('waitingForPDF')"></p>
+
+      <p
+        v-show="!progress"
+        class="m-0 mt-2 flex items-center justify-center gap-2 text-sm text-wa-ink-faint"
+      >
+        <span
+          class="block h-4 w-4 animate-spin rounded-full border-2 border-solid border-[rgba(29,29,31,0.15)] border-t-wa-accent"
+        ></span>
         <span v-html="$t('loadingMedia')"></span>
-      </div>
+      </p>
 
-      <v-progress-linear v-show="progress" color="blue" :value="progress" />
-    </v-row>
+      <div
+        v-show="progress"
+        class="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-[rgba(29,29,31,0.08)]"
+        role="progressbar"
+        :aria-valuenow="progress"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >
+        <div
+          class="h-full rounded-full bg-wa-accent transition-all"
+          :style="{ width: progress + '%' }"
+        ></div>
+      </div>
+    </div>
 
     <!-- Download dialog -->
-    <v-row justify="center">
+    <div class="mt-6 flex justify-center">
       <v-dialog v-model="showDownloadPopup" width="550">
         <template #activator="{ props: activatorProps }">
-          <v-btn
-            v-if="isValidSubscription"
-            color="success"
+          <UiButton
+            v-if="hasFullAccess"
+            size="lg"
             v-bind="activatorProps"
             @click="downloadFull"
           >
             <span v-html="$t('downloadNow')"></span>
-          </v-btn>
-          <v-btn
+          </UiButton>
+          <UiButton
             v-else
-            color="success"
-            class="mt-10"
+            size="lg"
+            class="mt-6"
             v-bind="activatorProps"
             @click="gtagEvent('full_pdf_pressed', GTAG_PAYMENT)"
           >
-            <v-icon class="mr-1">mdi-download</v-icon>
+            <IconDownload />
             <span v-html="$t('downloadFullChatPDF')"></span>
-          </v-btn>
+          </UiButton>
         </template>
 
-        <v-card>
+        <v-card class="wa-scope overflow-hidden rounded-token-lg">
           <!-- Popup title + subtitle -->
-          <v-card-title class="bg-cyan" style="word-break: normal">
-            <div
-              class="text-h4 font-weight-bold"
-              v-html="$t('popupTitle')"
-            ></div>
-            <span v-html="$t('popupSubtitle')"></span>
-          </v-card-title>
+          <div class="bg-wa-accent px-6 py-5 text-white">
+            <p class="m-0 text-xl font-bold" v-html="$t('popupTitle')"></p>
+            <p
+              class="m-0 mt-1 text-sm opacity-90"
+              v-html="$t('popupSubtitle')"
+            ></p>
+          </div>
 
-          <!-- Popup text -->
-          <v-card-text class="pt-3 text-body-1 font-weight-bold">
-            <span v-html="$t('popupInfo')"></span>
-          </v-card-text>
+          <div class="px-6 py-5 text-center">
+            <p
+              class="m-0 text-sm font-semibold text-wa-ink"
+              v-html="$t('popupInfo')"
+            ></p>
 
-          <div v-if="isLoading" class="loading mb-2" />
+            <div v-if="isLoading" class="loading my-4" />
 
-          <!-- Download or Payment -->
-          <v-row align="center" class="py-6 ma-0" cols="12" justify="center">
             <!-- Download button if subscribed -->
-            <v-btn v-if="isValidSubscription" @click="downloadFull">
+            <UiButton
+              v-if="hasFullAccess"
+              size="lg"
+              class="mt-5"
+              @click="downloadFull"
+            >
               <span v-html="$t('downloadNow')"></span>
-            </v-btn>
+            </UiButton>
 
-            <!-- Payment section if not subscribed -->
-            <div v-else>
-              <ChatVisualizationPayment
-                :amount="price"
-                :currency="currency"
-                @onApprove="onApprove"
-                @onCreateOrder="onCreateOrder"
-                @onError="onError"
-              />
-              <v-alert density="compact" type="info" prominent>
+            <!-- Payment section if the full PDF is not unlocked yet -->
+            <template v-else>
+              <UiButton
+                size="lg"
+                class="mt-5"
+                :loading="isOneTimeLoading"
+                @click="payOneTimeStripe"
+              >
+                <IconCard v-if="!isOneTimeLoading" />
+                <span>{{ $t("chooseOneTime") }} ({{ oneTimePrice }})</span>
+              </UiButton>
+
+              <div
+                class="mt-5 rounded-token bg-[rgba(33,166,141,0.08)] p-4 text-sm text-wa-ink-muted"
+              >
                 <span v-html="$t('subscriptionHint')"></span>
-                <v-btn to="/subscribe">
+                <UiButton
+                  to="/subscribe"
+                  variant="secondary"
+                  size="sm"
+                  class="mt-3"
+                  block
+                >
                   <span v-html="$t('openSubscriptionPage')"></span>
-                </v-btn>
-              </v-alert>
-            </div>
-          </v-row>
-
-          <v-divider></v-divider>
+                </UiButton>
+              </div>
+            </template>
+          </div>
 
           <!-- Close button -->
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn
-              color="red-darken-1"
-              variant="text"
+          <div
+            class="flex justify-end border-0 border-t border-solid border-[rgba(29,29,31,0.08)] px-4 py-3"
+          >
+            <UiButton
+              variant="danger"
+              size="sm"
               @click="showDownloadPopup = false"
             >
               <span v-html="$t('closeButton')"></span>
-            </v-btn>
-          </v-card-actions>
+            </UiButton>
+          </div>
         </v-card>
       </v-dialog>
-    </v-row>
+    </div>
 
     <!-- Pricing Section -->
-    <div v-if="!isValidSubscription" class="pricing-section mt-10">
-      <div class="text-h2 font-weight-bold pb-5">
+    <div v-if="!hasFullAccess" class="mt-12">
+      <h3 class="m-0 text-xl font-bold text-wa-ink md:text-2xl">
         {{ $t("pricingTitle") }}
-      </div>
-      <div class="text-subtitle-1">{{ $t("pricingSubtitle") }}</div>
-      <v-row justify="center" align="center" class="py-5">
-        <!-- Free Tier -->
-        <v-col cols="12" sm="4">
-          <div class="pricing-card text-center py-5 px-4">
-            <div class="text-h3 font-weight-bold title">
-              {{ $t("freeTierTitle") }}
-            </div>
-            <div class="text-body-1 py-3 subtitle">
-              {{ $t("freeTierDescription") }}
-            </div>
-            <v-btn
-              color="primary"
-              variant="outlined"
-              class="mt-3 mb-4"
-              @click="handleFreePdfClick"
-            >
-              <v-icon class="mr-1">mdi-download</v-icon>
-              <span v-html="$t('downloadFreePreviewPDF')"></span>
-            </v-btn>
-            <div class="price-description">
-              <b style="color: green">{{ 0 + " " + currency }}</b>
-            </div>
-          </div>
-        </v-col>
+      </h3>
+      <p class="m-0 mt-2 text-sm text-wa-ink-muted">
+        {{ $t("pricingSubtitle") }}
+      </p>
 
-        <!-- One-Time Payment -->
-        <v-col cols="12" sm="4">
-          <div class="pricing-card text-center py-5 px-4">
-            <div class="text-h3 font-weight-bold title">
-              {{ $t("oneTimeTitle") }}
-            </div>
-            <div class="text-body-1 py-3 subtitle">
-              {{ $t("oneTimeDescription") }}
-            </div>
-            <v-btn
-              color="success"
-              class="mt-3 mb-4"
+      <div class="mt-6 grid gap-4 md:grid-cols-3">
+        <!-- Free -->
+        <div class="pricing-card">
+          <div>
+            <p class="pricing-card__title">{{ $t("freeTierTitle") }}</p>
+            <p class="pricing-card__text">{{ $t("freeTierDescription") }}</p>
+          </div>
+          <div>
+            <UiButton variant="secondary" block @click="handleFreePdfClick">
+              <IconDownload />
+              <span v-html="$t('downloadFreePreviewPDF')"></span>
+            </UiButton>
+            <p class="pricing-card__price">{{ freePrice }}</p>
+          </div>
+        </div>
+
+        <!-- One-time -->
+        <div class="pricing-card pricing-card--featured">
+          <div>
+            <p class="pricing-card__title">{{ $t("oneTimeTitle") }}</p>
+            <p class="pricing-card__text">
+              {{ $t("oneTimeDescription", { price: oneTimePrice }) }}
+            </p>
+          </div>
+          <div>
+            <UiButton
+              block
               @click="
                 showDownloadPopup = true;
                 gtagEvent('full_pdf_pressed', GTAG_PAYMENT);
               "
             >
-              <v-icon class="mr-1">mdi-download</v-icon>
+              <IconDownload />
               <span v-html="$t('downloadFullChatPDF')"></span>
-            </v-btn>
-            <div class="price-description">
-              <v-row align="center" justify="center">
-                <b style="color: green">{{ price + " " + currency }}</b>
-                <span
-                  class="px-1 ml-2"
-                  style="color: white; background: red; border-radius: 5px"
-                >
-                  -50%
-                </span>
-              </v-row>
-              <v-row align="center" justify="center">
-                <s style="color: grey">{{ 15 + " " + currency }}</s>
-              </v-row>
-            </div>
+            </UiButton>
+            <p class="pricing-card__price">
+              {{ oneTimePrice }}
+              <span class="pricing-card__badge">-{{ discountPercent }}%</span>
+              <s class="pricing-card__was">{{ oneTimeListPrice }}</s>
+            </p>
           </div>
-        </v-col>
+        </div>
 
-        <!-- Monthly Subscription -->
-        <v-col cols="12" sm="4">
-          <div class="pricing-card text-center py-5 px-4">
-            <div class="text-h3 font-weight-bold title">
-              {{ $t("subscriptionTitle") }}
-            </div>
-            <div class="text-body-1 py-3 subtitle">
-              {{ $t("subscriptionDescription") }}
-            </div>
-            <SubscribeBtn> </SubscribeBtn>
-            <div class="price-description">
-              <v-row align="center" justify="center">
-                <b style="color: green">{{ price - 3 + " " + currency }}</b>
-                <span
-                  class="px-1 ml-2"
-                  style="color: white; background: red; border-radius: 5px"
-                >
-                  -80%
-                </span>
-              </v-row>
-              <v-row align="center" justify="center">
-                <s style="color: grey">{{ 24.95 + " " + currency }}</s>
-              </v-row>
-            </div>
+        <!-- Subscription -->
+        <div class="pricing-card">
+          <div>
+            <p class="pricing-card__title">{{ $t("subscriptionTitle") }}</p>
+            <p class="pricing-card__text">
+              {{
+                $t("subscriptionDescription", {
+                  price: introPrice,
+                  monthlyPrice: subscriptionPrice,
+                })
+              }}
+            </p>
           </div>
-        </v-col>
-      </v-row>
+          <div>
+            <SubscribeBtn />
+            <p class="pricing-card__price">
+              {{ $t("subscriptionPriceFirstMonth", { price: introPrice }) }}
+            </p>
+            <p class="pricing-card__was pricing-card__was--block">
+              {{ $t("then") }}
+              {{ $t("subscriptionPriceAfter", { price: subscriptionPrice }) }}
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { saveAs } from "file-saver";
-import { markRaw } from "vue";
+import { markRaw, toRaw } from "vue";
 import { GTAG_PAYMENT, GTAG_PDF, gtagEvent } from "~/utils/gtagValues";
+import { fetchOneTimeCheckoutUrl } from "~/utils/subscription";
+import {
+  INTRO_PRICE,
+  ONE_TIME_DISCOUNT_PERCENT,
+  ONE_TIME_LIST_PRICE,
+  ONE_TIME_PRICE,
+  SUBSCRIPTION_PRICE,
+  formatPrice,
+} from "~/utils/pricing";
+import { chatFingerprint } from "~/utils/chatFingerprint";
+import { scrollToSettled } from "~/utils/scroll";
 import PDFWorker from "~/assets/js/pdf.worker.js?worker";
 import { loadImage, objectToDictionary } from "~/utils/utils";
 
 export default {
   props: {
-    currency: { type: String, required: true },
-    price: { type: Number, required: true },
     chat: { type: Object, required: true },
     attachments: { type: Array, default: () => [] },
     ego: { type: String, required: true },
     isValidSubscription: { type: Boolean, default: false },
   },
+  setup() {
+    return { oneTimePurchase: useOneTimePurchase() };
+  },
   data() {
     return {
       showDownloadPopup: false,
       isLoading: false,
+      isOneTimeLoading: false,
       GTAG_PAYMENT,
       GTAG_PDF,
+      discountPercent: ONE_TIME_DISCOUNT_PERCENT,
       progress: 0,
       pdfWorker: null,
     };
+  },
+  computed: {
+    /**
+     * Every amount in this table goes through one formatter: it used to quote
+     * "7,99 Euro", "7.99 EUR" and "15 EUR" within a single card.
+     */
+    freePrice() {
+      return formatPrice(0, this.$i18n.locale);
+    },
+    oneTimePrice() {
+      return formatPrice(ONE_TIME_PRICE, this.$i18n.locale);
+    },
+    oneTimeListPrice() {
+      return formatPrice(ONE_TIME_LIST_PRICE, this.$i18n.locale);
+    },
+    introPrice() {
+      return formatPrice(INTRO_PRICE, this.$i18n.locale);
+    },
+    subscriptionPrice() {
+      return formatPrice(SUBSCRIPTION_PRICE, this.$i18n.locale);
+    },
+    /** Identifies the chat on screen, to tie a single payment to it. */
+    currentChatFingerprint() {
+      // toRaw: reading every message through the reactive proxy would make
+      // this depend on each one of them, and the chat's lazy getters mutate
+      // themselves — the fingerprint would be recomputed over the whole chat
+      // again and again while the PDF is being built.
+      return chatFingerprint(toRaw(this.chat));
+    },
+    /** Unlocked by a subscription or by a single payment for this chat. */
+    hasFullAccess() {
+      return (
+        this.isValidSubscription ||
+        unlocksChat(this.oneTimePurchase, this.currentChatFingerprint)
+      );
+    },
+  },
+  watch: {
+    oneTimePurchase() {
+      this.downloadPurchasedPdf();
+    },
+    // The buyer was told to upload the paid chat again — deliver it the moment
+    // they do, without making them hunt for the button.
+    currentChatFingerprint() {
+      this.downloadPurchasedPdf();
+    },
+  },
+  mounted() {
+    this.downloadPurchasedPdf();
   },
   beforeUnmount() {
     this.closePdfWorker();
   },
   methods: {
+    /**
+     * Start the download the buyer just paid for. The flag is cleared first so
+     * that later navigations within the session do not download it again.
+     */
+    downloadPurchasedPdf() {
+      const purchase = useOneTimePurchase();
+      if (!purchase.value?.pendingDownload) return;
+      // Only deliver into the chat that was paid for. If a different one is on
+      // screen the purchase stays pending until that chat is uploaded again.
+      if (!unlocksChat(purchase.value, this.currentChatFingerprint)) return;
+
+      purchase.value = { ...purchase.value, pendingDownload: false };
+      // Stripe drops the buyer back at the top of a long page. Bring them down
+      // to the download section, where the PDF they paid for is being built.
+      this.$nextTick(() => scrollToSettled("#payButton", { offset: 100 }));
+      this.$nextTick(() => this.downloadFull());
+    },
     handleFreePdfClick() {
       this.downloadSample();
       this.gtagEvent("free_pdf_pressed", GTAG_PAYMENT);
@@ -243,14 +343,24 @@ export default {
       this.download(false);
       this.showDownloadPopup = false;
     },
-    onCreateOrder() {
+    async payOneTimeStripe() {
+      if (this.isOneTimeLoading) return;
       gtagEvent("created", GTAG_PAYMENT, 0);
+      this.isOneTimeLoading = true;
+      try {
+        rememberOneTimeCheckoutChat(this.currentChatFingerprint);
+        const url = await fetchOneTimeCheckoutUrl({
+          successUrl: `${window.location.origin}/?session_id={CHECKOUT_SESSION_ID}&payment_success=true`,
+          cancelUrl: window.location.href,
+        });
+        if (!url) throw new Error("No checkout URL returned");
+        window.location.assign(url);
+      } catch (err) {
+        console.error("Error creating one-time Stripe checkout:", err);
+        alert("Failed to start checkout. Please try again.");
+        this.isOneTimeLoading = false;
+      }
     },
-    onApprove() {
-      gtagEvent("approved", GTAG_PAYMENT, 10);
-      this.downloadFull();
-    },
-    onError() {},
     async download(isSample = false) {
       if (!import.meta.client) return;
 
@@ -300,7 +410,7 @@ export default {
       if (data.type === "pdf") {
         // service workers can not save files
         const blob = new Blob([data.data], { type: "application/pdf" });
-        saveAs(blob, "WhatsAnalyze - " + this.ego);
+        saveAs(blob, `WhatsAnalyze - ${String(this.ego).trim()}.pdf`);
         this.isLoading = false;
         this.closePdfWorker();
       }
@@ -328,36 +438,68 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .pricing-card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  height: 100%; /* Ensures equal height for all cards */
+  gap: 1.5rem;
+  padding: 1.5rem;
   text-align: center;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  max-height: 400px; /* Adjust height as needed */
-  min-height: 350px; /* Ensures equal card height */
+  border: 1px solid $wa-border;
+  border-radius: $wa-radius-lg;
+  background: $wa-surface-white;
 }
 
-.price-description {
-  margin-top: 10px;
-}
-.subtitle {
-  min-height: 100px; /* Ensures equal height for subtitles */
-  display: flex;
-  align-items: center;
-  text-align: center;
+/* The one we actually sell. */
+.pricing-card--featured {
+  border-color: $wa-accent;
+  box-shadow: 0 10px 30px rgba(33, 166, 141, 0.12);
 }
 
-.title {
-  min-height: 100px; /* Ensures equal height for subtitles */
+.pricing-card__title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: $wa-ink;
+  /* "Subscription" is one word and wider than the card on its own. */
+  overflow-wrap: anywhere;
+}
+
+.pricing-card__text {
+  margin: 0.5rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: $wa-ink-muted;
+}
+
+.pricing-card__price {
   display: flex;
   align-items: center;
-  text-align: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin: 0.9rem 0 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: $wa-ink;
+}
+
+.pricing-card__badge {
+  padding: 0.1rem 0.35rem;
+  border-radius: 5px;
+  background: $c-red-dark;
+  color: #ffffff;
+  font-size: 0.7rem;
+}
+
+.pricing-card__was {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: $wa-ink-faint;
+}
+
+.pricing-card__was--block {
+  display: block;
+  margin: 0.25rem 0 0;
 }
 </style>

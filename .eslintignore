@@ -7,3 +7,4 @@ static/sw.js
 coverage
 dist
 node_modules
+functions-wrapped/lib

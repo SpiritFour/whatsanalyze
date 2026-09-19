@@ -1,15 +1,94 @@
-import { chatColors, hexToRgbA } from "~/utils/colors";
+import {
+  accentColor,
+  chatColors,
+  hexToRgbA,
+  othersColor,
+} from "~/utils/colors";
 import stopwords_de from "stopwords-de";
 import stopwords from "stopwords-en";
 import { onlyEmoji } from "emoji-aware";
 import moment from "moment";
+import { participantMessages } from "~/utils/utils";
+
+/**
+ * Words that say nothing about the conversation.
+ *
+ * Everything here is lowercase and compared lowercase — the list used to hold
+ * entries like "<This" and "Missed" that could never match.
+ */
+const IGNORED_WORDS = new Set([
+  "",
+  "ich",
+  "du",
+  "wir",
+  "aber",
+  "audio",
+  "bild",
+  "image",
+  "message",
+  "missed",
+  "voice",
+  "call.",
+  "location:",
+  "deleted",
+  "omitted",
+  "omitted>",
+  "ausgeschlossen>",
+  "weggelassen",
+  "edited>",
+  "_",
+  "_weggelassen>",
+  "_ommited>",
+  "_omesso>",
+  "_omitted",
+  "_weggelassen",
+  "_attached",
+]);
+
+/**
+ * WhatsApp's own markers rather than something someone typed: every export
+ * language writes them inside angle brackets ("<Anhang:", "<attached:",
+ * "<Medien ausgeschlossen>"), so the bracket is the rule and the list above
+ * only has to cover the words that leak out of them.
+ *
+ * Single symbols ("=", "-", ".") are dropped too — but an emoji is never a
+ * symbol here: the emoji cloud is built from this same list, and dropping a
+ * lone "❤" emptied it. Two-character faces like ":)" survive on purpose;
+ * those are things people actually say.
+ */
+function isLoneSymbol(word) {
+  // Code points, not UTF-16 units, so an emoji counts as one character.
+  return (
+    Array.from(word).length === 1 &&
+    !/[\p{L}\p{N}\p{Extended_Pictographic}]/u.test(word)
+  );
+}
+
+/** A link someone pasted says nothing about how they talk. */
+export function isLink(word) {
+  return /^(?:https?:\/\/|www\.)/i.test(word) || word.includes("://");
+}
+
+function isNoiseWord(word) {
+  const lower = String(word).toLowerCase();
+  return (
+    lower.startsWith("<") ||
+    isLink(lower) ||
+    isLoneSymbol(lower) ||
+    IGNORED_WORDS.has(lower) ||
+    stopwords_de.includes(lower) ||
+    stopwords.includes(lower)
+  );
+}
 
 export class Chat {
   static removeSystemMessages(chatObject) {
-    // remove the first message with slice ("this chat is encrypted") and all system messages via the filter.
-    return chatObject
-      .filter((message) => message.author.toLowerCase() !== "system")
-      .slice(1);
+    // Notices like "this chat is encrypted" are relabelled to the "System" author while
+    // parsing (see utils/systemMessages.js), so filtering on the author is enough — we no
+    // longer blind-drop the first message, which used to cost a real one on Android exports.
+    // participantMessages is that filter, shared with the tool pages so no two pages can
+    // disagree about how many messages a chat holds.
+    return participantMessages(chatObject);
   }
 
   static groupBy(chatObject, key) {
@@ -113,7 +192,9 @@ export class Chat {
   // please help with maxWordsEmojiCloud
   constructor(
     chatObject = [],
-    groupAfter = 9,
+    // Eight people, eight colours: past that everyone lands in "Others"
+    // rather than sharing a colour with someone else.
+    groupAfter = 8,
     maxWordsWordCloud = 150,
     maxWordsEmojiCloud = 150
   ) {
@@ -162,7 +243,8 @@ export class Chat {
 
   get sortedFreqDict() {
     if (this._sortedFreqList) return this._sortedFreqList;
-    this._sortedFreqList = Chat.createSortedFreqDict(this.chatObject);
+    // Words people typed, not WhatsApp's own notices.
+    this._sortedFreqList = Chat.createSortedFreqDict(this.filterdChatObject);
     return this._sortedFreqList;
   }
 
@@ -216,7 +298,7 @@ export class Chat {
 
     if (grouped) {
       enrichedPersons[this._groupAfter].name = "Others";
-      enrichedPersons[this._groupAfter].color = "#D3D3D3";
+      enrichedPersons[this._groupAfter].color = othersColor;
       enrichedPersons[this._groupAfter].messages.sort(
         (a, b) => a.absolute_id - b.absolute_id
       );
@@ -401,8 +483,8 @@ export class Chat {
           lineTension: 0,
           pointRadius: 0,
           pointHitRadius: 2,
-          backgroundColor: hexToRgbA("#EF5350"),
-          borderColor: hexToRgbA("#B71C1C", [1]),
+          backgroundColor: hexToRgbA(accentColor, 0.2),
+          borderColor: accentColor,
         },
       ],
     };
@@ -424,45 +506,7 @@ export class Chat {
 
   _getAllWords() {
     return this.sortedFreqDict
-      .filter(
-        (word) =>
-          !(
-            stopwords_de.includes(word[0].toLowerCase()) ||
-            stopwords.includes(word[0].toLowerCase()) ||
-            [
-              "",
-              "ich",
-              "du",
-              "wir",
-              "aber",
-              "<media",
-              "<attached:",
-              "audio",
-              "omitted>",
-              "bild",
-              "image",
-              "<medien",
-              "ausgeschlossen>",
-              "weggelassen",
-              "omitted",
-              "_",
-              "_weggelassen>",
-              "_ommited>",
-              "_omesso>",
-              "_omitted",
-              "_weggelassen",
-              "_attached",
-              "edited>",
-              "<This",
-              "message",
-              "Missed",
-              "voice",
-              "call.",
-              "Location:",
-              "deleted",
-            ].includes(word[0].toLowerCase())
-          ) && word[1] > 1
-      )
+      .filter((word) => !isNoiseWord(word[0]) && word[1] > 1)
       .map((word) => {
         return { word: word[0], freq: word[1] };
       });

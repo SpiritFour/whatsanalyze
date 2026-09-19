@@ -9,6 +9,7 @@ extends:
   - "prettier"
 parser: "vue-eslint-parser"
 parserOptions:
+  parser: "@typescript-eslint/parser"
   ecmaVersion: 12
   sourceType: module
 plugins:
@@ -24,6 +25,27 @@ globals:
   useI18n: readonly
   useSwitchLocalePath: readonly
   navigateTo: readonly
+  clearError: readonly
   computed: readonly
   ref: readonly
-rules: {}
+  useHead: readonly
+  useLocalePath: readonly
+  defineProps: readonly
+  definePageMeta: readonly
+  useSharedChat: readonly
+  useRoute: readonly
+  useRouter: readonly
+  useNuxtApp: readonly
+  useState: readonly
+  useOneTimePurchase: readonly
+  restoreOneTimePurchase: readonly
+  persistOneTimePurchase: readonly
+  rememberOneTimeCheckoutChat: readonly
+  unlocksChat: readonly
+  toRaw: readonly
+  defineEmits: readonly
+  withDefaults: readonly
+  onMounted: readonly
+  useToolsNav: readonly
+rules:
+  vue/no-multiple-template-root: "off"

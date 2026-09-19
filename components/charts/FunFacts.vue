@@ -1,56 +1,55 @@
 <template>
-  <div class="fun-facts">
+  <div class="wa-scope fun-facts">
     <canvas ref="canvas" style="display: none"></canvas>
-    <div v-for="(person, idx) in data" :key="idx" class="person-facts">
-      <div
-        class="text-h4 font-weight-bold py-5"
-        :style="'color: white; background: ' + person.color"
+    <div class="grid gap-4" :class="gridClass">
+      <article
+        v-for="(person, idx) in data"
+        :key="idx"
+        class="rounded-token-lg border border-solid border-[rgba(29,29,31,0.08)] bg-wa-surface-white p-5"
       >
-        {{ person.name }}
-      </div>
-
-      <div class="text-left mt-8">
-        <div>
-          <v-icon :color="person.color">mdi-book</v-icon>
-
-          {{ $t("totalWords") }} <b>{{ person.numberOfWords }}</b>
-        </div>
-
-        <br />
-
-        <!-- TODO: We need a count of how often emojies are used -->
-        <div>
-          <v-icon :color="person.color"> mdi-emoticon-excited-outline </v-icon>
-          {{ $t("mostUsedEmojie") }}
-          <span v-for="emojie in person.sortedEmojis" :key="emojie">
-            {{ emojie }} {{ emojie.count }}
+        <header class="flex items-center gap-3">
+          <span
+            class="grid h-9 w-9 shrink-0 place-items-center rounded-full text-sm font-bold text-white"
+            :style="{ background: person.color }"
+            aria-hidden="true"
+          >
+            {{ initial(person.name) }}
           </span>
+          <h4
+            class="m-0 truncate text-base font-bold leading-tight text-wa-ink"
+            :title="person.name"
+          >
+            {{ person.name }}
+          </h4>
+        </header>
+
+        <dl class="m-0 mt-4 grid grid-cols-2 gap-2">
+          <div
+            v-for="row in numberRows(person)"
+            :key="row.label"
+            class="rounded-token bg-[#f5f5f7] px-3 py-2.5"
+          >
+            <dt
+              class="text-[0.65rem] font-semibold leading-tight text-wa-ink-faint"
+            >
+              {{ row.label }}
+            </dt>
+            <dd class="m-0 mt-1 text-lg font-bold tabular-nums text-wa-ink">
+              {{ row.value }}
+            </dd>
+          </div>
+        </dl>
+
+        <div
+          v-if="emojiRow(person)"
+          class="mt-3 flex items-center justify-between gap-3 border-0 border-t border-solid border-[rgba(29,29,31,0.06)] pt-3"
+        >
+          <span class="text-xs text-wa-ink-faint">
+            {{ emojiRow(person).label }}
+          </span>
+          <span class="text-xl leading-none">{{ emojiRow(person).value }}</span>
         </div>
-
-        <br />
-
-        <div>
-          <v-icon :color="person.color"> mdi-android-messages </v-icon>
-          {{ $t("longestMessage") }}
-          <b>{{ person.longestMessage }}</b> words
-        </div>
-
-        <br />
-
-        <div>
-          <v-icon :color="person.color"> mdi-star </v-icon>
-          {{ $t("uniqueWords") }}
-          <b>{{ person.uniqueWords }}</b>
-        </div>
-
-        <br />
-
-        <div>
-          <v-icon :color="person.color"> mdi-android-studio </v-icon>
-          {{ $t("avgWords") }}
-          <b>{{ person.averageMessageLength }}</b>
-        </div>
-      </div>
+      </article>
     </div>
   </div>
 </template>
@@ -62,6 +61,16 @@ export default {
     return {
       data: [],
     };
+  },
+  computed: {
+    /**
+     * A two-person chat gets one card per row: at three columns the pair sat
+     * in two thirds of the width with a hole next to them.
+     */
+    gridClass() {
+      if (this.data.length <= 2) return "sm:grid-cols-1";
+      return "sm:grid-cols-2 lg:grid-cols-3";
+    },
   },
   watch: {
     chartdata: {
@@ -75,6 +84,57 @@ export default {
     this.updateGraph();
   },
   methods: {
+    /** First letter of the name, for the colour chip that identifies them. */
+    initial(name) {
+      return (name || "?").trim().charAt(0).toUpperCase();
+    },
+    /** The four counts, shown as tiles. */
+    numberRows(person) {
+      return this.factRows(person).filter((row) => !row.isEmoji);
+    },
+    /** Emojis are not a number and do not belong in a number tile. */
+    emojiRow(person) {
+      return this.factRows(person).find((row) => row.isEmoji);
+    },
+    /**
+     * The five facts per person, in one place: the cards on screen and the
+     * image the share button hands out have to say the same thing.
+     */
+    factRows(person) {
+      const emojis = Array.from(person.sortedEmojis || [])
+        .map((e) => (typeof e === "string" ? e : e?.emoji || ""))
+        .filter(Boolean)
+        .join(" ");
+
+      return [
+        {
+          icon: "\u{1F4D6}",
+          label: this.$t("totalWords"),
+          value: (person.numberOfWords || 0).toLocaleString(),
+        },
+        {
+          icon: "\u{1F60A}",
+          label: this.$t("mostUsedEmojie"),
+          value: emojis || "-",
+          isEmoji: true,
+        },
+        {
+          icon: "\u{1F4AC}",
+          label: this.$t("longestMessage"),
+          value: `${person.longestMessage || 0}`,
+        },
+        {
+          icon: "\u2B50",
+          label: this.$t("uniqueWords"),
+          value: (person.uniqueWords || 0).toLocaleString(),
+        },
+        {
+          icon: "\u{1F4D0}",
+          label: this.$t("avgWords"),
+          value: `${person.averageMessageLength || 0}`,
+        },
+      ];
+    },
     async updateGraph() {
       if (!this.chartdata?.getFunFacts) return;
       this.data = await this.chartdata.getFunFacts();
@@ -147,47 +207,7 @@ export default {
         const startY = y + 115;
         const rowHeight = 46;
 
-        const totalWordsLabel = this.$t("totalWords") || "Total words:";
-        const mostUsedLabel = this.$t("mostUsedEmojie") || "Most used emojis:";
-        const longestMessageLabel =
-          this.$t("longestMessage") || "Longest message:";
-        const uniqueWordsLabel = this.$t("uniqueWords") || "Unique words:";
-        const avgWordsLabel = this.$t("avgWords") || "Avg words / message:";
-
-        const emojiList = Array.from(person.sortedEmojis || []);
-        const emojiStr =
-          emojiList
-            .map((e) => (typeof e === "string" ? e : e?.emoji || ""))
-            .filter(Boolean)
-            .join(" ") || "-";
-
-        const rows = [
-          {
-            icon: "📖",
-            label: totalWordsLabel,
-            value: (person.numberOfWords || 0).toLocaleString(),
-          },
-          {
-            icon: "😊",
-            label: mostUsedLabel,
-            value: emojiStr,
-          },
-          {
-            icon: "💬",
-            label: longestMessageLabel,
-            value: `${person.longestMessage || 0} words`,
-          },
-          {
-            icon: "⭐",
-            label: uniqueWordsLabel,
-            value: (person.uniqueWords || 0).toLocaleString(),
-          },
-          {
-            icon: "📐",
-            label: avgWordsLabel,
-            value: `${person.averageMessageLength || 0}`,
-          },
-        ];
+        const rows = this.factRows(person);
 
         rows.forEach((row, rIdx) => {
           const rowY = startY + rIdx * rowHeight;
@@ -217,15 +237,8 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped>
 .fun-facts {
   overflow: hidden;
-}
-
-.person-facts {
-  display: inline-block;
-  margin: 1em;
-  padding: 1em;
-  border: 2px solid $c-white;
 }
 </style>

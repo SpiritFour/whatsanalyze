@@ -40,3 +40,227 @@ $c-red: #ff675c;
 $c-red-light: #ff855c;
 $c-red-dark: #d93b3b;
 $c-red-dark-accent: #911146;
+
+// ---------------------------------------------------------------------------
+// Design tokens
+//
+// One scale for the whole product: the main site, /tools and /wrapped. The
+// landing components were the first to use these values, everything else
+// follows them now — so changing a token here lands on every surface at once.
+// Mirrored as CSS custom properties in assets/variables.scss and as Tailwind
+// theme values in tailwind.config.mjs, for the parts that cannot see Sass.
+// ---------------------------------------------------------------------------
+
+// Surfaces — sections alternate dark → light → white, never anything else.
+$wa-surface-dark: #0d1418;
+$wa-surface-dark-raised: rgba(245, 245, 247, 0.05);
+$wa-surface-light: #f5f5f7;
+$wa-surface-white: #ffffff;
+
+// Ink
+$wa-ink: #1d1d1f;
+$wa-ink-muted: rgba(29, 29, 31, 0.68);
+$wa-ink-faint: rgba(29, 29, 31, 0.45);
+$wa-ink-invert: #f5f5f7;
+$wa-ink-invert-muted: rgba(245, 245, 247, 0.68);
+$wa-ink-invert-faint: rgba(245, 245, 247, 0.45);
+
+// Hairlines
+$wa-border: rgba(29, 29, 31, 0.12);
+$wa-border-invert: rgba(245, 245, 247, 0.12);
+
+// Accent — the WhatsApp teal, the only brand colour in the UI chrome.
+$wa-accent: $c-blue-accent;
+$wa-accent-light: $c-blue-accent-light;
+$wa-accent-dark: $c-blue-accent-dark;
+$wa-accent-soft: rgba(33, 166, 141, 0.12);
+
+// Radii
+$wa-radius-sm: 10px;
+$wa-radius-md: 12px;
+$wa-radius-lg: 16px;
+$wa-radius-xl: 20px;
+$wa-radius-pill: 999px;
+
+// Elevation
+$wa-shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.04);
+$wa-shadow-md: 0 10px 30px rgba(0, 0, 0, 0.06);
+$wa-shadow-lg: 0 30px 60px rgba(0, 0, 0, 0.45);
+$wa-shadow-accent: 0 10px 30px rgba(33, 166, 141, 0.35);
+
+// Layout
+$wa-content-width: 1080px;
+$wa-shell-width: 1180px;
+
+// ---------------------------------------------------------------------------
+// The participant table shared by the four free tool pages.
+//
+// Each tool had its own copy of these rules, which is how they drifted apart
+// (one grew a grey header band, the others did not) and how they all ended up
+// clipping their last columns on a phone: a table forced to `width: 100%`
+// cannot shrink below its min-content width, so it silently overflowed a
+// container whose scrollbar is invisible on touch.
+//
+// The fix is a real minimum width plus the scroll shadows below, which are
+// painted with `background-attachment: local` so they fade themselves out once
+// the reader reaches either end — a scroll hint that needs no JavaScript.
+// ---------------------------------------------------------------------------
+@mixin wa-participants-table(
+  $accent: $wa-accent,
+  $accent-soft: $wa-accent-soft
+) {
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid $wa-border;
+    // The surrounding section centres its text; once the title and the count
+    // wrap onto separate lines on a phone, centring them leaves both adrift of
+    // the left-aligned table underneath.
+    text-align: left;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: $wa-ink;
+  }
+
+  .section-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: $wa-surface-light;
+    padding: 4px 10px;
+    border-radius: $wa-radius-pill;
+    color: $wa-ink-muted;
+    white-space: nowrap;
+  }
+
+  .table-container {
+    overflow-x: auto;
+    width: 100%;
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+    background-image: linear-gradient(
+        to right,
+        #{$wa-surface-white} 30%,
+        rgba(255, 255, 255, 0)
+      ),
+      linear-gradient(to left, #{$wa-surface-white} 30%, rgba(255, 255, 255, 0)),
+      radial-gradient(farthest-side at 0 50%, rgba(0, 0, 0, 0.16), transparent),
+      radial-gradient(
+        farthest-side at 100% 50%,
+        rgba(0, 0, 0, 0.16),
+        transparent
+      );
+    background-position: left center, right center, left center, right center;
+    background-repeat: no-repeat;
+    background-size: 44px 100%, 44px 100%, 16px 100%, 16px 100%;
+    background-attachment: local, local, scroll, scroll;
+
+    // Touch browsers hide the scrollbar until you already scroll, which is the
+    // affordance that was missing. A slim always-on bar says "there is more".
+    scrollbar-width: thin;
+    scrollbar-color: rgba(29, 29, 31, 0.28) transparent;
+
+    &::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(29, 29, 31, 0.28);
+      border-radius: $wa-radius-pill;
+    }
+  }
+
+  .participants-table {
+    width: 100%;
+    min-width: 36rem;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.9rem;
+
+    th {
+      padding: 12px 14px;
+      font-size: 0.74rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        monospace;
+      font-weight: 700;
+      color: $wa-ink-muted;
+      background: $wa-surface-light;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      border-bottom: 1px solid $wa-border;
+    }
+
+    td {
+      padding: 14px;
+      color: $wa-ink;
+      vertical-align: middle;
+      border-bottom: 1px solid rgba(29, 29, 31, 0.06);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+  }
+
+  // Deliberately not a flex container: the class sits on the <td> itself, and
+  // a flex cell drops out of the row's vertical alignment, so the name floated
+  // to the top of any row a wrapped snippet had made tall.
+  .name-cell {
+    white-space: nowrap;
+  }
+
+  .avatar-circle {
+    flex: none;
+    vertical-align: middle;
+    margin-right: 10px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: $accent-soft;
+    color: $accent;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+  }
+
+  // Numbers and time ranges are the cells that wrapped to three lines.
+  .mono-cell {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      monospace;
+    font-size: 0.84rem;
+    white-space: nowrap;
+  }
+
+  .share-cell {
+    min-width: 140px;
+  }
+
+  .share-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .share-bar {
+    height: 8px;
+    background: $accent;
+    border-radius: 4px;
+    min-width: 4px;
+  }
+
+  .share-label {
+    font-size: 0.8rem;
+    color: $wa-ink-muted;
+    white-space: nowrap;
+  }
+}

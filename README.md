@@ -29,6 +29,20 @@ Please report bugs in the github issues.
 ## Build Setup
 We use Node.js 22 and pnpm 8.15.8. The project also needs Python 3.11 because some legacy build dependencies compile native modules.
 
+### With Nix (recommended)
+
+A Nix flake is provided with all dependencies pre-configured:
+
+```bash
+# Enter development shell
+$ nix develop
+
+# Install dependencies
+$ pnpm install --frozen-lockfile
+```
+
+### Standard setup
+
 ```bash
 # install dependencies
 $ pnpm install
@@ -36,12 +50,48 @@ $ pnpm install
 # serve with hot reload at localhost:3000
 $ pnpm dev
 
-# build for production and launch server
+# build for production and launch server (recommended for low-memory environments)
 $ pnpm build
 $ pnpm start
 
 # generate static project
 $ pnpm generate
+```
+
+### End-to-end tests
+
+```bash
+$ pnpm test:e2e
+```
+
+The suite runs against the **built** site, not `pnpm dev`: the app is a static
+SPA, and `nuxt dev` compiles each route the first time it is asked for, which
+used to cost the suite minutes of waiting. Playwright builds it and serves
+`dist` on port 4173 for you, so `pnpm test:e2e` on its own is all you need.
+
+Between runs it reuses a server that is already listening on 4173, which keeps
+the loop short while you are writing a test. That server is serving the `dist`
+from whenever it started — after changing app code, restart it:
+
+```bash
+$ pnpm build:e2e && pnpm serve:e2e
+```
+
+`tests/e2e/payments.spec.js` is the one to keep green: it is the checkout,
+the paywall and what a payment unlocks. Stripe, PayPal and the Firebase
+callables are all stubbed through `tests/e2e/fixtures.js`, so the tests never
+leave the machine.
+
+### Exposing via Tailscale
+
+If running on a remote server or VM, expose the instance to your tailnet:
+
+```bash
+# For production preview (HTTP on port 3000):
+$ tailscale serve --bg 3000
+
+# For dev server (HTTPS on port 3000):
+$ tailscale serve --bg https+insecure://localhost:3000
 ```
 
 Search for prettier and eslint in pycharm to set it up on saving a file. 

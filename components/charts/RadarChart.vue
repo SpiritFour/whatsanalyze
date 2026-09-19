@@ -8,6 +8,7 @@
 import { Radar } from "vue-chartjs";
 import { Chat } from "~/utils/transformChatData";
 import { updateAlpha } from "~/utils/colors";
+import { radarOptions } from "~/utils/chartTheme";
 
 export default {
   components: { Radar },
@@ -23,6 +24,10 @@ export default {
       type: Object,
       default: () => new Chat(),
     },
+    compact: {
+      type: Boolean,
+      default: false,
+    },
     options: {
       type: Object,
       default: null,
@@ -35,26 +40,7 @@ export default {
   },
   computed: {
     chartOptions() {
-      return (
-        this.options || {
-          responsive: true,
-          maintainAspectRatio: true,
-          aspectRatio: 1,
-          plugins: {
-            legend: {
-              position: "bottom",
-            },
-          },
-          scales: {
-            r: {
-              beginAtZero: true,
-              ticks: {
-                precision: 0,
-              },
-            },
-          },
-        }
-      );
+      return this.options || radarOptions({ compact: this.compact });
     },
   },
   watch: {
@@ -65,12 +51,16 @@ export default {
     },
   },
   methods: {
-    addOpacity(data) {
+    /** Overlapping webs: the fill has to stay see-through, the outline does not. */
+    softenFill(data) {
       return {
         ...data,
         datasets: data.datasets.map((dataset) => ({
           ...dataset,
-          backgroundColor: updateAlpha(dataset.backgroundColor, 0.1),
+          backgroundColor: updateAlpha(dataset.backgroundColor, 0.12),
+          pointBackgroundColor: dataset.borderColor,
+          pointBorderColor: "#ffffff",
+          pointBorderWidth: 1.5,
         })),
       };
     },
@@ -81,24 +71,22 @@ export default {
         weekly: "getWeeklyData",
       };
       const data = await this.chartdata[loaders[this.dataGrouping]]();
-      this.graphData = this.addOpacity(data);
+      this.graphData = this.softenFill(data);
     },
   },
 };
 </script>
 
 <style scoped>
+/*
+ * Chart.js reads its size from this box. It must not carry a percentage
+ * max-width on the canvas: Chart.js resolves that against the canvas' own
+ * current width, so the chart gets locked at whatever size it was created
+ * with — which is why every chart used to render 300px wide.
+ */
 .chart-container {
   position: relative;
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.chart-container :deep(canvas) {
-  margin: 0 auto !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
 }
 </style>

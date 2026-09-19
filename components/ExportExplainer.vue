@@ -1,101 +1,119 @@
 <template>
-  <v-container class="pb-0">
-    <div class="text-h5 text-md-h2 text-center pb-8">
-      {{ $t("howToExportOn") }}
-    </div>
-    <v-tabs v-model="tab" centered>
-      <v-tab
+  <div class="export-explainer">
+    <div class="export-explainer__tabs" role="tablist">
+      <button
         v-for="(data, index) in tabData"
         :key="data.title"
-        :value="index"
-        class="text-body-1 text-md-h4"
-        grow
-        >{{ data.title }}
-      </v-tab>
-    </v-tabs>
-    <v-window v-model="tab" :touch="false">
-      <client-only>
-        <v-window-item v-for="(data, idx) in tabData" :key="idx" :value="idx">
-          <v-row no-gutters>
-            <v-col class="pb-10" cols="12" sm="8">
-              <v-timeline
-                align="start"
-                :density="$vuetify.display.xs ? 'compact' : 'default'"
-                class="py-4"
-              >
-                <v-timeline-item
-                  v-for="(tabItem, i) in data.tabItems"
-                  :key="i"
-                  :dot-color="tabStatus[idx] === i ? 'blue' : 'grey'"
-                  fill-dot
-                  :size="$vuetify.display.xs ? 'x-small' : 'small'"
-                  class="mb-4"
-                  @click.stop="tabStatus = [i, i]"
-                >
-                  <v-row
-                    class="cursor-pointer"
-                    style="cursor: pointer"
-                    v-html="$t(tabItem.text)"
-                  >
-                  </v-row>
-                  <v-btn
-                    v-if="i === 0 && tab === 1"
-                    id="dlPWA"
-                    :disabled="!installButtonStatus"
-                    class="mt-5 pa-2 btn-color"
-                    @click="downloadPWA"
-                    >{{ $t("addToHomescreen") }}
-                  </v-btn>
-                </v-timeline-item>
-              </v-timeline>
-              <v-btn
-                :to="to ? to : null"
-                class="text-md-h6 text-caption ml-10 text-white btn-color select-file-btn"
-                elevation="10"
-                size="large"
-                @click="clickHandler"
-              >
-                <v-icon left>mdi-arrow-right</v-icon>
-                {{ $t(cta) }}
-              </v-btn>
-            </v-col>
-            <v-col
-              :class="{ 'mobile-padding': $vuetify.display.xs }"
-              class="py-5 px-md-15"
-              cols="12"
-              sm="4"
-            >
-              <div class="carousel-container px-4">
-                <v-img ref="smartphone" :src="data.frameImg" class="frame" />
-                <!-- model and pngs-->
-                <v-carousel
-                  v-model="tabStatus[idx]"
-                  :continuous="false"
-                  class="frame-container px-4"
-                  height="auto"
-                  hide-delimiter-background
-                  hide-delimiters
-                  show-arrows
-                >
-                  <v-carousel-item
-                    v-for="(item, idx) in data.carouselItems"
-                    :key="idx"
-                    @click.stop="increaseTabstatus()"
-                  >
-                    <v-img :lazy-src="item.imgLazy" :src="item.img"></v-img>
-                    <div
-                      :style="'left: ' + item.x + '; top: ' + item.y"
-                      class="click-indicator"
-                    ></div>
-                  </v-carousel-item>
-                </v-carousel>
-              </div>
-            </v-col>
-          </v-row>
-        </v-window-item>
-      </client-only>
-    </v-window>
-  </v-container>
+        type="button"
+        role="tab"
+        :aria-selected="tab === index"
+        class="export-explainer__tab"
+        :class="{ 'is-active': tab === index }"
+        @click="tab = index"
+      >
+        {{ data.title }}
+      </button>
+    </div>
+
+    <div class="export-explainer__body">
+      <ol class="export-explainer__steps">
+        <li v-for="(tabItem, i) in activeTab.tabItems" :key="i">
+          <button
+            type="button"
+            class="export-explainer__step"
+            :class="{ 'is-active': activeStep === i }"
+            @click="goToStep(i)"
+          >
+            <span class="export-explainer__step-num">{{ i + 1 }}</span>
+            <span
+              class="export-explainer__step-text"
+              v-html="$t(tabItem.text)"
+            ></span>
+          </button>
+          <!-- Only offered where the browser actually fired
+               beforeinstallprompt. It used to render permanently greyed out
+               everywhere else, which read as a broken button. -->
+          <button
+            v-if="i === 0 && tab === 1 && installButtonStatus"
+            id="dlPWA"
+            type="button"
+            class="export-explainer__pwa"
+            @click="downloadPWA"
+          >
+            {{ $t("addToHomescreen") }}
+          </button>
+        </li>
+      </ol>
+
+      <div class="export-explainer__phone">
+        <div class="export-explainer__frame" @click="goToStep(activeStep + 1)">
+          <img
+            :src="activeTab.frameImg"
+            alt=""
+            aria-hidden="true"
+            class="export-explainer__frame-img"
+          />
+          <div class="export-explainer__screen">
+            <img
+              :src="activeSlide.img"
+              :alt="`${activeTab.title} — ${activeStep + 1}`"
+              loading="lazy"
+            />
+            <span
+              class="export-explainer__tap"
+              :style="{ left: activeSlide.x, top: activeSlide.y }"
+            ></span>
+          </div>
+        </div>
+
+        <div class="export-explainer__pager">
+          <button
+            type="button"
+            class="export-explainer__arrow"
+            :disabled="activeStep === 0"
+            aria-label="Previous step"
+            @click="goToStep(activeStep - 1)"
+          >
+            <v-icon size="18">mdi-chevron-left</v-icon>
+          </button>
+          <span class="export-explainer__dots">
+            <button
+              v-for="(item, i) in activeTab.carouselItems"
+              :key="i"
+              type="button"
+              class="export-explainer__dot"
+              :class="{ 'is-active': activeStep === i }"
+              :aria-label="`Step ${i + 1}`"
+              @click="goToStep(i)"
+            ></button>
+          </span>
+          <button
+            type="button"
+            class="export-explainer__arrow"
+            :disabled="activeStep === activeTab.carouselItems.length - 1"
+            aria-label="Next step"
+            @click="goToStep(activeStep + 1)"
+          >
+            <v-icon size="18">mdi-chevron-right</v-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="export-explainer__cta">
+      <NuxtLink v-if="to" :to="to" class="export-explainer__button">
+        {{ $t(cta) }}
+      </NuxtLink>
+      <button
+        v-else
+        type="button"
+        class="export-explainer__button"
+        @click="clickHandler"
+      >
+        {{ $t(cta) }}
+      </button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -161,7 +179,7 @@ export default {
       deferredPrompt: null,
       installButtonStatus: false,
       tabStatus: [0, 0],
-      tab: apple() ? 0 : 1,
+      tab: 0,
       tabData: [
         {
           title: "iOS (Apple)",
@@ -312,21 +330,40 @@ export default {
       ],
     };
   },
+  computed: {
+    activeTab() {
+      return this.tabData[this.tab];
+    },
+    activeStep() {
+      return Math.min(
+        this.tabStatus[this.tab],
+        this.activeTab.carouselItems.length - 1
+      );
+    },
+    activeSlide() {
+      return this.activeTab.carouselItems[this.activeStep];
+    },
+  },
   created() {
     this.catchPWA();
   },
+  mounted() {
+    // Only now: picking the tab from the platform during setup would render
+    // iOS on the server and Android in the browser, and hydration would trip
+    // over the mismatch.
+    this.tab = apple() ? 0 : 1;
+  },
   methods: {
     clickHandler() {
-      if (!this.to) {
-        gtagEvent("jump_to_filehandler_" + this.tab, GTAG_INTERACTION, 0);
-        scrollTo(".filehandler", { offset: 100 });
-      }
+      gtagEvent("jump_to_filehandler_" + this.tab, GTAG_INTERACTION, 0);
+      scrollTo("#dropzone-slot, .file-handler", { offset: 100 });
     },
-    increaseTabstatus() {
-      let maxValue = this.tabData[this.tab].carouselItems.length;
-      let a = [...this.tabStatus];
-      a[this.tab] = Math.min(a[this.tab] + 1, maxValue);
-      this.tabStatus = a;
+    goToStep(index) {
+      const steps = this.activeTab.carouselItems.length;
+      const next = Math.max(0, Math.min(index, steps - 1));
+      const status = [...this.tabStatus];
+      status[this.tab] = next;
+      this.tabStatus = status;
     },
     async downloadPWA() {
       {
@@ -369,101 +406,298 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.carousel-container {
-  position: relative;
+.export-explainer {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.export-explainer__tabs {
+  display: flex;
+  width: fit-content;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  margin: 0 auto;
+  border-radius: $wa-radius-pill;
+  background: $wa-surface-light;
+  border: 1px solid $wa-border;
+}
+
+.export-explainer__tab {
+  padding: 0.5rem 1.4rem;
+  border: none;
+  border-radius: $wa-radius-pill;
+  background: transparent;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: $wa-ink-muted;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+
+  &.is-active {
+    background: $wa-accent;
+    color: #ffffff;
+  }
+}
+
+.export-explainer__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 260px);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+  margin-top: clamp(1.8rem, 4vw, 2.6rem);
+
+  @media (max-width: 720px) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.export-explainer__steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.export-explainer__step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
   width: 100%;
-  height: 100%;
-  min-height: 50px;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid transparent;
+  border-radius: $wa-radius-md;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    background: $wa-surface-white;
+  }
+
+  &.is-active {
+    background: $wa-surface-white;
+    border-color: $wa-border;
+    box-shadow: $wa-shadow-sm;
+  }
 }
 
-.mobile-padding {
-  padding-left: 10%;
-  padding-right: 10%;
-}
-
-.frame-container {
-  left: 0;
-  top: 0;
-  position: absolute;
-}
-
-.frame {
-  pointer-events: none;
-  z-index: 1;
-  top: 2px;
-}
-
-.select-file-btn {
-  min-height: 44px;
-  height: auto !important;
-  padding: 8px 24px !important;
-  white-space: normal;
-  line-height: 1.3 !important;
-}
-
-.click-indicator {
-  position: absolute;
-  width: 44px;
-  height: 44px;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 5;
+.export-explainer__step-num {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: $wa-ink-faint;
+  background: $wa-surface-light;
+  transition: background 0.2s ease, color 0.2s ease;
+
+  .export-explainer__step.is-active & {
+    background: $wa-accent;
+    color: #ffffff;
+  }
 }
 
-.click-indicator::before {
-  content: "";
-  position: absolute;
+.export-explainer__step-text {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: $wa-ink-muted;
+
+  .export-explainer__step.is-active & {
+    color: $wa-ink;
+  }
+
+  :deep(b),
+  :deep(strong) {
+    color: $wa-ink;
+    font-weight: 600;
+  }
+}
+
+.export-explainer__pwa {
+  margin: 0.4rem 0 0.6rem 3.35rem;
+  padding: 0.5rem 1.1rem;
+  border-radius: $wa-radius-pill;
+  border: none;
+  background: $wa-accent;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: $wa-accent-dark;
+  }
+}
+
+.export-explainer__phone {
+  position: sticky;
+  top: 6rem;
+
+  @media (max-width: 720px) {
+    position: static;
+    max-width: 260px;
+    margin: 0 auto;
+  }
+}
+
+.export-explainer__frame {
+  position: relative;
+  cursor: pointer;
+}
+
+.export-explainer__frame-img {
+  position: relative;
+  z-index: 1;
+  display: block;
   width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  border: 3px solid #25d366;
-  background-color: rgba(37, 211, 102, 0.25);
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.3);
-  animation: pulse-touch 1.6s ease-in-out infinite;
+  pointer-events: none;
 }
 
-.click-indicator::after {
-  content: "";
+.export-explainer__screen {
   position: absolute;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background-color: #25d366;
-  box-shadow: 0 0 0 2px #ffffff, 0 1px 4px rgba(0, 0, 0, 0.3);
-  animation: pulse-core 1.6s ease-in-out infinite;
+  inset: 0;
+  padding: 0 4%;
+
+  img {
+    display: block;
+    width: 100%;
+  }
 }
 
-@keyframes pulse-touch {
-  0% {
-    transform: scale(0.85);
+.export-explainer__tap {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 2;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &::before {
+    width: 100%;
+    height: 100%;
+    border: 2px solid $wa-accent;
+    background: rgba(33, 166, 141, 0.25);
+    animation: export-tap 1.6s ease-in-out infinite;
+  }
+
+  &::after {
+    width: 12px;
+    height: 12px;
+    background: $wa-accent;
+    box-shadow: 0 0 0 2px #ffffff;
+  }
+}
+
+@keyframes export-tap {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(0.85);
     opacity: 0.9;
-    border-color: #25d366;
   }
   50% {
-    transform: scale(1.25);
+    transform: translate(-50%, -50%) scale(1.2);
     opacity: 1;
-    border-color: #128c7e;
-    background-color: rgba(37, 211, 102, 0.4);
-  }
-  100% {
-    transform: scale(0.85);
-    opacity: 0.9;
-    border-color: #25d366;
   }
 }
 
-@keyframes pulse-core {
-  0% {
-    transform: scale(0.9);
+@media (prefers-reduced-motion: reduce) {
+  .export-explainer__tap::before {
+    animation: none;
   }
-  50% {
-    transform: scale(1.15);
+}
+
+.export-explainer__pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.export-explainer__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid $wa-border;
+  background: $wa-surface-white;
+  color: $wa-ink-muted;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: default;
   }
-  100% {
-    transform: scale(0.9);
+}
+
+.export-explainer__dots {
+  display: inline-flex;
+  gap: 0.35rem;
+}
+
+.export-explainer__dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: $wa-border;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+
+  &.is-active {
+    background: $wa-accent;
+    transform: scale(1.3);
+  }
+}
+
+.export-explainer__cta {
+  margin-top: clamp(1.8rem, 4vw, 2.6rem);
+  text-align: center;
+}
+
+.export-explainer__button {
+  display: inline-block;
+  padding: 0.9em 2.2em;
+  border: none;
+  border-radius: $wa-radius-pill;
+  background: $wa-accent;
+  color: #ffffff;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(33, 166, 141, 0.35);
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    background: $wa-accent-light;
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 }
 </style>

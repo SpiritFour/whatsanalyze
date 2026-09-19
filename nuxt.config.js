@@ -1,26 +1,17 @@
 import fs from "node:fs";
 import { resolve } from "node:path";
+import {
+  localeCodes,
+  localizedPages,
+  siteBaseUrl,
+} from "./config/routes.js";
 
 const local = process.env.NUXT_ENV_LOCAL !== undefined;
 const runWithFunctions = process.env.NUXT_ENV_WITH_FUNCTIONS !== undefined;
-const baseUrl = (process.env.BASE_URL || "https://www.whatsanalyze.com").replace(
-  "http:",
-  "https:"
-);
-const localizedPages = [
-  "",
-  "about",
-  "how-to-export-your-whatsapp-chat",
-  "impressum",
-  "pwa-results",
-  "subscribe",
-  "switch-from-whatsapp-to-signal",
-  "whatsapp-to-pdf",
-  "whatsapp-wrapped-year-review",
-];
-const localizedRoutes = ["de", "es", "fr", "pt", "it"].flatMap((locale) =>
-  localizedPages.map((page) => `/${locale}/${page}`)
-);
+const baseUrl = siteBaseUrl;
+const localizedRoutes = localeCodes
+  .filter((locale) => locale !== "en")
+  .flatMap((locale) => localizedPages.map((page) => `/${locale}/${page}`));
 
 export default defineNuxtConfig({
   compatibilityDate: "2026-03-01",
@@ -38,7 +29,6 @@ export default defineNuxtConfig({
       publicDir: resolve("./dist"),
     },
     watch: [
-      "assets/**",
       "components/**",
       "composables/**",
       "content/**",
@@ -50,7 +40,9 @@ export default defineNuxtConfig({
       "utils/**",
     ],
     prerender: {
-      routes: localizedRoutes,
+      // /sitemap.xml is a server route; prerendering it writes a real sitemap
+      // into dist instead of letting the SPA shell answer for it.
+      routes: [...localizedRoutes, "/sitemap.xml"],
     },
   },
 
@@ -84,25 +76,54 @@ export default defineNuxtConfig({
     public: {
       local,
       baseUrl,
+      // Still needed to verify subscriptions taken out through PayPal before
+      // the move to Stripe. No new PayPal subscription can be created.
       paypalClientId: local
         ? "ARYQUp4C_oNjNUNkvSPzLeaiulItDmnHUU226OANt2haCKC2c70ZrKZTmRHCPldcu4SD22LmPEuonfec"
         : "AUMWxSZrtBOA1RicR_3nGijYb8yYxyq2lxBjiwoQKfVc-8jfdPr5N7X5EFUackMCLb_K7HiKswnDBUJ8",
-      firebase: {
-        apiKey: "AIzaSyBWNP0Ckw94E7tyoZZozAOZ6JSQRH2lzFU",
-        authDomain: "whatsanalyze-80665.firebaseapp.com",
-        projectId: "whatsanalyze-80665",
-        storageBucket: "whatsanalyze-80665.appspot.com",
-        messagingSenderId: "116352567232",
-        appId: "1:116352567232:web:b44bef99e5a4fc6c962a25",
-        measurementId: "G-H1WL9MXJ17",
-        functionsEmulatorPort: runWithFunctions ? 5001 : null,
-      },
+      // One project per environment. Firestore and the functions have to come
+      // from the same project: the functions charge in the Stripe mode of the
+      // project they run in, so a local build paying in test mode must not
+      // write its shared chats into the database real customers read from.
+      // `whatsanalyze-wrapped` is the dev project -- its id is frozen from when
+      // Wrapped was a separate product, only the display name says dev.
+      firebase: local
+        ? {
+            apiKey: "AIzaSyCCX536nN4oTAXj49M_M1ZShD3ekLdjkBo",
+            authDomain: "whatsanalyze-wrapped.firebaseapp.com",
+            projectId: "whatsanalyze-wrapped",
+            storageBucket: "whatsanalyze-wrapped.firebasestorage.app",
+            messagingSenderId: "761196645139",
+            appId: "1:761196645139:web:88191b29876feb404ae8e6",
+            functionsEmulatorPort: runWithFunctions ? 5001 : null,
+          }
+        : {
+            apiKey: "AIzaSyBWNP0Ckw94E7tyoZZozAOZ6JSQRH2lzFU",
+            authDomain: "whatsanalyze-80665.firebaseapp.com",
+            projectId: "whatsanalyze-80665",
+            storageBucket: "whatsanalyze-80665.appspot.com",
+            messagingSenderId: "116352567232",
+            appId: "1:116352567232:web:b44bef99e5a4fc6c962a25",
+            functionsEmulatorPort: runWithFunctions ? 5001 : null,
+          },
+      // Full subscription price. The reduced first month is a coupon applied
+      // server-side (INTRO_COUPON_ID), not a separate price: Checkout ignores
+      // the Trial Offer configured on the product.
+      stripePriceId: local
+        ? "price_1UGehh74KJ57kF2woEzDq1UR"
+        : "price_1UGedRL4rDqbYflomrrqwaYy",
+      stripeOneTimePriceId: local
+        ? "price_1UEjOz74KJ57kF2wXRhOyf05"
+        : "price_1UEjQ4L4rDqbYflo33cJS7RR",
     },
   },
 
   css: ["~/assets/variables.scss"],
 
   modules: [
+    "@pinia/nuxt",
+    "pinia-plugin-persistedstate/nuxt",
+    "@nuxtjs/tailwindcss",
     "vuetify-nuxt-module",
     "@nuxt/content",
     "@nuxtjs/i18n",
@@ -110,6 +131,17 @@ export default defineNuxtConfig({
     "@nuxt/scripts",
     "@sentry/nuxt/module",
   ],
+
+  tailwindcss: {
+    cssPath: "~/assets/wrapped/tailwind.css",
+    configPath: "tailwind.config.mjs",
+    exposeConfig: false,
+    viewer: false,
+  },
+
+  pinia: {
+    storesDirs: ["./stores/**"],
+  },
 
   vuetify: {
     moduleOptions: {

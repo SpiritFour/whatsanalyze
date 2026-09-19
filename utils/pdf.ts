@@ -3,7 +3,12 @@ import * as JSZip from "jszip";
 import logoBlack from "~/assets/whatsanalyze-logo-black.png";
 import myFont from "~/assets/pdf-fonts/Helvetica.js";
 
-import { dateDiffs, firstDate, getDateString, lastDate } from "~/utils/utils";
+import {
+  chatDurationInDays,
+  firstDate,
+  getDateString,
+  lastDate,
+} from "~/utils/utils";
 import { Attachment, getAttachment } from "~/utils/attachments";
 import { Chat } from "~/utils/transformChatData";
 
@@ -51,7 +56,7 @@ export async function render(
 
   const lastDateConst = lastDate(chat);
   const firstDateConst = firstDate(chat);
-  const dateDiffsConst = dateDiffs(firstDateConst, lastDateConst);
+  const dateDiffsConst = chatDurationInDays(firstDateConst, lastDateConst);
 
   //   Variable to track y-coordinate / used space on page
   let usedYSpace = 0;
@@ -227,7 +232,7 @@ export async function render(
 
   addPageIfNeeded(50);
   writeDoubleSizeText(String(dateDiffsConst), " days");
-  writeDoubleSizeText(String(chat.chatObject.length), " messages");
+  writeDoubleSizeText(String(chat.filterdChatObject.length), " messages");
   writeDoubleSizeText(String(chat.numPersonsInChat), " people");
 
   //    Add participants
@@ -248,10 +253,10 @@ export async function render(
   usedYSpace = 55;
 
   addGraphToPage(chatTimeline, "Chat Timeline");
-  addGraphToPage(messagesPerTimeOfDay, "Time of Day");
+  addGraphToPage(messagesPerTimeOfDay, "Messages per Hour");
   addGraphToPage(messagesPerPerson, "Messages per Person");
   addGraphToPage(radarMonth, "Messages per Month");
-  addGraphToPage(radarDay, "Messages per Time");
+  addGraphToPage(radarDay, "Messages per Weekday");
 
   // FUN FACTS
   addColoredPage();

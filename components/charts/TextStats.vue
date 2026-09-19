@@ -1,130 +1,66 @@
 <template>
-  <v-container class="px-6">
-    <!-- First and last contact -->
-
-    <v-row class="my-7 text-left">
-      <v-col cols="12" class="text-h5 text-md-h4 font-weight-bold pa-0"
-        >{{ $t("firstMessage") }}
-      </v-col>
-      <div class="font-weight-bold text-h3 text-md-h2">
-        {{ firstDateString }}
-      </div>
-    </v-row>
-
-    <v-row class="my-7 text-right">
-      <div class="text-md-h2 text-h3 font-weight-bold ml-auto">
-        {{ lastDateString }}
-      </div>
-      <v-col cols="12" class="text-h5 text-md-h4 font-weight-bold pa-0"
-        >{{ $t("lastMessage") }}
-      </v-col>
-    </v-row>
-
-    <!-- Days you are chatting -->
-    <v-row class="text-white">
-      <v-col class="bg-cyan-darken-2 fact-box py-10" cols="12" sm="6">
-        <v-icon v-show="$vuetify.display.mdAndUp" size="100"
-          >mdi-calendar</v-icon
-        >
-        <v-row>
-          <v-col
-            cols="12"
-            class="text-h5 font-weight-bold pa-0 ma-0 text-center"
-          >
-            {{ $t("youChatted") }}
-          </v-col>
-        </v-row>
-
-        <v-row>
-          <v-col class="text-h1 font-weight-bold text-center pa-0">
-            {{ dateDiffs }}
-          </v-col>
-        </v-row>
-
-        <v-row>
-          <v-col cols="12" class="text-h5 font-weight-bold pa-0 text-center">
-            {{ $t("days") }}
-          </v-col>
-        </v-row>
-      </v-col>
-
-      <v-col class="bg-amber-darken-1 fact-box py-10" cols="12" sm="6">
-        <v-icon
-          v-show="$vuetify.display.mdAndUp"
-          color="yellow-accent-1"
-          size="100"
-          >mdi-android-messages</v-icon
-        >
-        <v-row>
-          <v-col
-            cols="12"
-            class="text-h5 font-weight-bold pa-0 ma-0 text-center"
-          >
-            {{ $t("youSent") }}
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col class="text-h1 font-weight-bold text-center pa-0">
-            {{ totalMessages }}
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col class="text-h5 font-weight-bold pa-0 text-center">
-            {{ $t("messages") }}
-          </v-col>
-        </v-row>
-      </v-col>
-    </v-row>
-
-    <!-- Total message count -->
-
-    <!-- Most acrive day -->
-
-    <!-- Total Word count -->
-
-    <!-- Totlal Images/Audio etc shared -->
-  </v-container>
+  <section class="wa-scope grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div
+      v-for="stat in stats"
+      :key="stat.label"
+      class="rounded-token-lg border border-solid border-[rgba(29,29,31,0.08)] bg-wa-surface-white p-5 text-left shadow-card"
+    >
+      <p
+        class="m-0 text-[0.7rem] font-bold uppercase tracking-[0.08em] text-wa-ink-faint"
+      >
+        {{ stat.label }}
+      </p>
+      <p
+        class="m-0 mt-2 text-2xl font-bold leading-tight md:text-3xl"
+        :class="stat.accent ? 'text-wa-accent' : 'text-wa-ink'"
+      >
+        {{ stat.value }}
+      </p>
+      <p v-if="stat.unit" class="m-0 mt-1 text-sm text-wa-ink-faint">
+        {{ stat.unit }}
+      </p>
+    </div>
+  </section>
 </template>
 
 <script>
-import { dateDiffs, firstDate, getDateString, lastDate } from "~/utils/utils";
+import {
+  chatDurationInDays,
+  firstDate,
+  getDateString,
+  lastDate,
+} from "~/utils/utils";
 
 export default {
   props: ["chat"],
   computed: {
-    lastDateString() {
-      return getDateString(this.lastDate, false);
-    },
-    firstDateString() {
-      return getDateString(this.firstDate, false);
-    },
-    dateDiffs() {
-      return dateDiffs(this.firstDate, this.lastDate);
-    },
-    firstDate() {
-      return firstDate(this.chat);
-    },
-    lastDate() {
-      return lastDate(this.chat);
-    },
-    totalMessages() {
-      return this.chat.chatObject.length;
+    // Four numbers at the top of the analysis, before any chart: the span of
+    // the conversation and its size, which is what people look for first.
+    stats() {
+      return [
+        {
+          label: this.$t("firstMessage"),
+          value: getDateString(firstDate(this.chat), false, this.$i18n.locale),
+        },
+        {
+          label: this.$t("lastMessage"),
+          value: getDateString(lastDate(this.chat), false, this.$i18n.locale),
+        },
+        {
+          label: this.$t("youChatted"),
+          value: chatDurationInDays(firstDate(this.chat), lastDate(this.chat)),
+          unit: this.$t("days"),
+          accent: true,
+        },
+        {
+          // Everyone's messages, not the reader's own — the card used to say
+          // "you have sent" over the total for the whole chat.
+          label: this.$t("messagesTotal"),
+          value: this.chat.filterdChatObject.length.toLocaleString(),
+          accent: true,
+        },
+      ];
     },
   },
-  data() {
-    return {};
-  },
-  methods: {},
 };
 </script>
-
-<style scoped>
-.v-icon {
-  opacity: 0.8;
-  position: absolute !important;
-  left: 10px;
-}
-.fact-box {
-  position: relative;
-}
-</style>

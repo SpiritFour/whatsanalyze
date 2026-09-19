@@ -10,7 +10,6 @@ import {
   getFunctions,
   httpsCallable,
 } from "firebase/functions";
-
 export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig();
   const app = initializeApp(config.public.firebase);
@@ -24,7 +23,6 @@ export default defineNuxtPlugin(() => {
       config.public.firebase.functionsEmulatorPort
     );
   }
-
   return {
     provide: {
       firebase: {
@@ -36,6 +34,8 @@ export default defineNuxtPlugin(() => {
         },
         serverTimestamp,
       },
+      firestore,
+      functions,
     },
   };
 });
