@@ -2,7 +2,9 @@
   <LandingSection theme="dark">
     <h2 class="landing-cta__title">{{ title }}</h2>
     <div class="landing-cta__actions">
-      <LandingButton :to="ctaTo">{{ ctaText }}</LandingButton>
+      <LandingButton :to="ctaTo" @click="$emit('click')">
+        {{ ctaText }}
+      </LandingButton>
     </div>
     <p v-if="note" class="landing-cta__note">{{ note }}</p>
     <p v-if="disclaimer" class="landing-cta__disclaimer">{{ disclaimer }}</p>
@@ -19,6 +21,9 @@ export default {
     note: { type: String, default: "" },
     disclaimer: { type: String, default: "" },
   },
+  // Declared so the listener lands on the button rather than falling through
+  // to the whole dark section, which used to make every pixel of it clickable.
+  emits: ["click"],
 };
 </script>
 

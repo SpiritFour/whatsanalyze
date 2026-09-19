@@ -19,7 +19,7 @@
       </button>
 
       <button
-        class="rounded-full border border-white/30 py-3 px-6 font-semibold text-white hover:bg-white/10 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        class="rounded-full border border-white/60 bg-white/10 py-3 px-6 font-semibold text-white hover:bg-white/20 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
         :disabled="isPreparing"
         @click="handleAnalyzeAnother"
       >

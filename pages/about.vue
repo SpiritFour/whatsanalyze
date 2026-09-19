@@ -1,12 +1,22 @@
 <template>
-  <v-container>
+  <div>
+    <LandingHero
+      :breadcrumbs="[
+        { label: 'WhatsAnalyze', to: localePath('/') },
+        { label: $t('about') },
+      ]"
+      :title="$t('about')"
+    />
     <About />
-  </v-container>
+  </div>
 </template>
 
 <script>
 export default {
   name: "about.vue",
+  setup() {
+    return { localePath: useLocalePath() };
+  },
 };
 </script>
 

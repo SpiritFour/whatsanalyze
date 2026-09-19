@@ -3,7 +3,7 @@
     class="pointer-events-none absolute inset-0 -z-10 overflow-hidden bg-green-800 text-white/80"
   >
     <div
-      class="absolute inset-0 bg-[radial-gradient(ellipse,rgba(0,0,0,0)_0,rgba(0,0,0,0.9)_80%)]"
+      class="absolute inset-0 bg-[radial-gradient(ellipse,rgba(0,0,0,0)_0,rgba(0,0,0,0.65)_85%)]"
     />
 
     <div>
@@ -21,7 +21,7 @@
       />
     </div>
 
-    <div class="absolute inset-0 text-xs font-semibold tracking-tight">
+    <div class="absolute inset-0 text-sm font-semibold tracking-tight">
       <span
         v-for="t in text"
         :key="t.text"
@@ -56,7 +56,7 @@ const text = [
     delayClass: "",
   },
   {
-    text: "Whats up today?",
+    text: "What's up today?",
     style: { top: "32%", right: "12%" },
     delayClass: "delay-1",
   },
@@ -98,16 +98,22 @@ const graphs = [
 </script>
 
 <style scoped>
-/* Floating text */
+/* Floating text.
+
+   The fade used to spend most of its cycle between transparent and opaque,
+   and a heavy black text-shadow sat under it — so for seconds at a time the
+   shadow was all you could see and the messages read as dark smudges on the
+   green. They snap in and out now and hold at full opacity in between, over a
+   light halo instead of a drop shadow. */
 @keyframes calc-float {
   0% {
     transform: translate3d(0, 0, 0) scale(1);
     opacity: 0;
   }
-  15% {
+  6% {
     opacity: 1;
   }
-  60% {
+  88% {
     opacity: 1;
   }
   100% {
@@ -118,8 +124,16 @@ const graphs = [
 
 .calc-float {
   opacity: 0;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.85), 0 1px 2px rgba(0, 0, 0, 0.9);
   animation: calc-float 10s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .calc-float {
+    opacity: 1;
+    animation: none;
+  }
 }
 
 .delay-1 {

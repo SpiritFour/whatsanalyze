@@ -39,14 +39,17 @@
         v-for="university in universities"
         :key="university.name"
         :href="university.url"
-        class="flex items-center justify-center"
+        class="flex w-full max-w-[160px] items-center justify-center rounded-2xl bg-white/95 px-5 py-4 transition hover:bg-white"
         rel="noreferrer noopener"
         target="_blank"
       >
+        <!-- On a white plate rather than loose on the green panel: two of the
+             four are dark marks that all but disappeared there, and Otago's
+             PNG carries its own opaque box that showed as a dark rectangle. -->
         <img
           :alt="university.name"
           :src="university.src"
-          class="max-h-16 w-full max-w-[140px] object-contain grayscale hover:grayscale-0 transition"
+          class="max-h-12 w-full object-contain"
           loading="lazy"
         />
       </a>

@@ -35,6 +35,17 @@
   --wa-shadow-accent: #{$wa-shadow-accent};
 
   --wa-shell-width: #{$wa-shell-width};
+
+  // The sticky header's height. Anything that has to clear it — the Wrapped
+  // story's progress strip, which is drawn inside a full-screen card that
+  // starts at the top of the viewport — offsets itself by this.
+  --wa-header-height: 60px;
+}
+
+@media (max-width: 600px) {
+  :root {
+    --wa-header-height: 52px;
+  }
 }
 
 .only-visible-to-html2canvas {

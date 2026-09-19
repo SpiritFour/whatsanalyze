@@ -5,7 +5,11 @@
       @mouseenter="onMouseEnter"
       @mouseleave="onMouseLeave"
     >
-      <div class="absolute top-2 left-2 right-2 flex gap-1 z-20">
+      <!-- On a phone the card fills the viewport starting at y=0, which puts
+           the progress strip behind the sticky header for the whole story.
+           Drop it below the header there; on a tablet and up the card is a
+           regular block in the flow and the strip sits at its own top edge. -->
+      <div class="story-progress absolute left-2 right-2 flex gap-1 z-20">
         <div
           v-for="(_, index) in stories"
           :key="index"
@@ -175,3 +179,15 @@ onMounted(() => {
 });
 onBeforeUnmount(stopLoop);
 </script>
+
+<style scoped>
+.story-progress {
+  top: calc(var(--wa-header-height, 52px) + 0.5rem);
+}
+
+@media (min-width: 640px) {
+  .story-progress {
+    top: 0.5rem;
+  }
+}
+</style>

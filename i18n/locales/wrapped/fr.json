@@ -120,13 +120,13 @@
       ]
     },
     "subscriptionAd": {
-      "eyebrow": "Whatsanalyse Pro",
+      "eyebrow": "WhatsAnalyze Pro",
       "headline": "Débloquez toute l'expérience storytelling",
       "description": "Commencez gratuitement ou passez à Pro pour des imports illimités, des exports premium et un traitement plus rapide.",
       "free": {
         "badge": "Gratuit",
         "headline": "Explorez à votre rythme",
-        "description": "Parfait pour tester Whatsanalyse ou créer un récap ponctuel.",
+        "description": "Parfait pour tester WhatsAnalyze ou créer un récap ponctuel.",
         "priceSuffix": "/ pour toujours",
         "cta": "Commencer gratuitement",
         "features": [
@@ -248,7 +248,7 @@
       "cards": [
         {
           "title": "Lien de partage chiffré de bout en bout",
-          "description": "Permets à tes partenaires de chat de participer en leur envoyant un lien vers ton Whatsanalyze Wrapped !"
+          "description": "Permets à tes partenaires de chat de participer en leur envoyant un lien vers ton WhatsAnalyze Wrapped !"
         }
       ]
     },
@@ -364,7 +364,10 @@
     "messageFrequency": "Fréquence des messages",
     "status": {
       "loadingSharedStory": "Préparation de votre story partagée...",
-      "decryptError": "Impossible de décrypter ce lien partagé. Vérifiez qu'il n'a pas été modifié."
+      "decryptError": "Impossible de décrypter ce lien partagé. Vérifiez qu'il n'a pas été modifié.",
+      "emptyTitle": "Pas encore de Wrapped",
+      "emptyText": "Importe un export de conversation et nous construirons ton histoire directement dans le navigateur.",
+      "emptyCta": "Créer mon Wrapped"
     },
     "intro": {
       "headline": "Rétrospective {year}",

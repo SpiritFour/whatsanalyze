@@ -31,7 +31,7 @@
           <h2 class="text-xl font-semibold mb-1">
             {{ t("home.subscriptionAd.free.headline") }}
           </h2>
-          <p class="text-gray-400 text-sm mb-5">
+          <p class="text-gray-400 text-sm mb-5 md:min-h-[3rem]">
             {{ t("home.subscriptionAd.free.description") }}
           </p>
 
@@ -56,7 +56,7 @@
           </ul>
 
           <a
-            class="w-full inline-flex items-center justify-center rounded-xl border border-gray-600 px-4 py-2.5 text-sm font-medium text-gray-200 hover:bg-gray-800 transition"
+            class="w-full inline-flex items-center justify-center rounded-xl border border-gray-600 px-4 py-2.5 text-sm font-medium text-gray-200 no-underline hover:bg-gray-800 transition"
             href="#top"
             type="button"
           >
@@ -87,7 +87,7 @@
           <h2 class="text-xl font-semibold mb-1">
             {{ t("home.subscriptionAd.pro.headline") }}
           </h2>
-          <p class="text-white text-sm mb-5">
+          <p class="text-white text-sm mb-5 md:min-h-[3rem]">
             {{ t("home.subscriptionAd.pro.description") }}
           </p>
 
@@ -133,14 +133,15 @@
                 : t("chooseSubscription")
             }}
           </button>
-          <p class="text-xs text-gray-300 text-center mt-3">
-            {{ t("home.subscriptionAd.footnote") }}
-          </p>
-          <p v-if="checkoutError" class="text-xs text-red-200 text-center mt-2">
-            {{ checkoutError }}
-          </p>
         </div>
       </div>
+
+      <p class="text-xs text-gray-300 text-center mt-6">
+        {{ t("home.subscriptionAd.footnote") }}
+      </p>
+      <p v-if="checkoutError" class="text-xs text-red-200 text-center mt-2">
+        {{ checkoutError }}
+      </p>
     </div>
   </div>
 </template>

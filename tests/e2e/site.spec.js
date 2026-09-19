@@ -129,9 +129,12 @@ test.describe("the analyzer", () => {
     await page.goto("/how-to-export-your-whatsapp-chat");
 
     await expect(page).toHaveTitle(/How to Export your WhatsApp Chat/);
+    // By role, not by text: the page title is also the last breadcrumb now, so
+    // a plain text match finds two nodes.
     await expect(
-      page.getByText("Export WhatsApp Chat: The Ultimate Guide", {
-        exact: true,
+      page.getByRole("heading", {
+        name: "Export WhatsApp Chat: The Ultimate Guide",
+        level: 1,
       })
     ).toBeVisible();
     await expect(

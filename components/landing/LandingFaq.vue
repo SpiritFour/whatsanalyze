@@ -46,6 +46,14 @@ export default {
   &::-webkit-details-marker {
     display: none;
   }
+
+  // The "Write Us!" tab is fixed to the right edge at bottom: 10vh, which on a
+  // phone lands right on top of whichever "+" happens to scroll past it. The
+  // row still toggles when you tap its text, but the "+" is what people aim
+  // at — so keep the chevron clear of the tab.
+  @media (max-width: 700px) {
+    padding-right: 2.75rem;
+  }
 }
 
 .landing-faq__chevron {

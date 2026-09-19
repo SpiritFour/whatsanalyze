@@ -1,55 +1,69 @@
 <template>
-  <v-container>
-    <ExportExplainer class="mt-10" cta="exportAsPDF" to="/" />
-    <PdfExample />
-    <Content :page="page" />
-    <div class="additional-resources mt-5">
-      <h2>Additional Resources</h2>
-      <li>YouTube tutorials for export</li>
-    </div>
-    <!-- YouTube Video Embed -->
-    <iframe
-      class="youtube-video my-5"
-      width="560"
-      height="315"
-      src="https://www.youtube.com/embed/Mq5ZvyerA8E"
-      title="YouTube video player"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
-    ></iframe>
-    <ul>
-      <li class="mb-2">
-        FAQs: Common questions and troubleshooting tips. <br />
-        <a href="/#faq">Read our FAQs</a>
-      </li>
-      <li>
-        User Stories: Experiences and tips from users. <br />
-        <a href="/#stories">Discover User Stories</a>
-      </li>
-    </ul>
-    <div class="comparison-section my-5">
-      <h2>Comparison of different tools available</h2>
-      <p>
-        Comparison of different tools available for exporting whatsapp chat and
-        creating a pdf
-      </p>
-    </div>
-    <v-data-table
-      class="styled-table"
-      hide-default-footer
-      disable-sort
-      :headers="headers"
-      :items="desserts"
-    ></v-data-table>
-    <Cta
-      to="/"
-      class="cta-sectionpy-5"
-      title="analyzeYourOwnWhatsapp"
-      button-txt="analyzeMyChat"
-      text="interestedAbout"
+  <div>
+    <LandingHero
+      :breadcrumbs="[
+        { label: 'WhatsAnalyze', to: localePath('/') },
+        { label: page?.title || 'How to export your WhatsApp chat' },
+      ]"
+      :title="page?.title || 'How to export your WhatsApp chat'"
+      :subtitle="page?.description || ''"
     />
-  </v-container>
+    <v-container>
+      <ExportExplainer class="mt-10" cta="exportAsPDF" to="/" />
+      <PdfExample />
+    </v-container>
+    <Content :page="page" />
+    <v-container>
+      <div class="additional-resources mt-5">
+        <h2>Additional Resources</h2>
+        <ul>
+          <li>YouTube tutorials for export</li>
+        </ul>
+      </div>
+      <!-- YouTube Video Embed -->
+      <iframe
+        class="youtube-video my-5"
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/Mq5ZvyerA8E"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+      <ul>
+        <li class="mb-2">
+          FAQs: Common questions and troubleshooting tips. <br />
+          <a href="/#faq">Read our FAQs</a>
+        </li>
+        <li>
+          User Stories: Experiences and tips from users. <br />
+          <a href="/#stories">Discover User Stories</a>
+        </li>
+      </ul>
+      <div class="comparison-section my-5">
+        <h2>Comparison of different tools available</h2>
+        <p>
+          Comparison of different tools available for exporting a WhatsApp chat
+          and creating a PDF
+        </p>
+      </div>
+      <v-data-table
+        class="styled-table"
+        hide-default-footer
+        disable-sort
+        :headers="headers"
+        :items="desserts"
+      ></v-data-table>
+      <Cta
+        to="/"
+        class="cta-sectionpy-5"
+        title="analyzeYourOwnWhatsapp"
+        button-txt="analyzeMyChat"
+        text="interestedAbout"
+      />
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -69,8 +83,10 @@ export default {
     const { data: page } = await useAsyncData("content-export-guide", () =>
       queryCollection("pages").path("/how-to-export-your-whatsapp-chat").first()
     );
+    const localePath = useLocalePath();
     return {
       page,
+      localePath,
     };
   },
   data() {
@@ -171,7 +187,7 @@ export default {
         {
           name: "Price 💲",
           zapptales: "🔴 Expensive",
-          whatsAnalyze: "🟢 Most affordable andbest value",
+          whatsAnalyze: "🟢 Most affordable, best value",
           drfon: "🔴 Expensive",
           longshotapp: "🟡 In-app purchases",
           pdfex: "🟡 Free, but with ads",

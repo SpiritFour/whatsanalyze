@@ -1,6 +1,6 @@
 ---
 title: Switch from WhatsApp to Signal
-description: Switch from WhatsApp to Signal
+description: Move to Signal, take your group chats with you, and keep your WhatsApp history as a PDF.
 ---
 
 ![](https://www.whatsanalyze.com/whatsapp-vs-signal.jpg)
@@ -20,9 +20,9 @@ Ready to use a real privacy-focused messenger? Signal is the way to go. Even [Ed
 
 ## Why switch from WhatsApp to Signal
 
-WhatsApp is owned by Facebook. We all know about Facebook having a _really_ bad track record of respecting the privacy of their users. Even though Facebook can't read your WhatsApp messages, they do track you and analyze what you do. They use the data to sell it to third parties to improve their ads business and that is actually the only part they care about. I certainly do not want that. So that's why I switched to signal. Here is how you can switch to Signal from WhatsApp too.
+WhatsApp is owned by Facebook. We all know about Facebook having a _really_ bad track record of respecting the privacy of their users. Even though Facebook can't read your WhatsApp messages, they do track you and analyze what you do. They use the data to sell it to third parties to improve their ads business and that is actually the only part they care about. I certainly do not want that. So that's why I switched to Signal. Here is how you can switch to Signal from WhatsApp too.
 
-This is also why they recently updated their Terms of Service and privacy policy informing all users about their changes. They want to partner your data from whatsapp with their other products like instagram and facebook in order to generate even more tracking and detail footprints about their users. For me this was also the point to switch to another solution especially it is so easy and convenient to do. 
+This is also why they recently updated their Terms of Service and privacy policy informing all users about their changes. They want to partner your data from WhatsApp with their other products like Instagram and Facebook in order to generate even more tracking and detail footprints about their users. For me this was also the point to switch to another solution especially it is so easy and convenient to do. 
 
 ### Download Signal from their Website
 
@@ -33,15 +33,17 @@ Now you can start using it right away! There also is a Tablet, Mac, and Windows 
 ### How you can transfer your WhatsApp group to Signal
 Signal has recently tweeted a tutorial it is actually super easy and works in 4 simple steps in less than a minute. 
 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">A lot of people have been asking how to move their group chats from other apps to Signal, and Signal group links are a great way to get started. Drop a group link into your former chat app of choice like you&#39;re dropping the mic on the way out. <a href="https://t.co/q49DeZufBG">pic.twitter.com/q49DeZufBG</a></p>&mdash; Signal (@signalapp) <a href="https://twitter.com/signalapp/status/1347309781564813312?ref_src=twsrc%5Etfw">January 7, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+> A lot of people have been asking how to move their group chats from other apps to Signal, and Signal group links are a great way to get started. Drop a group link into your former chat app of choice like you're dropping the mic on the way out.
+>
+> — [Signal (@signalapp), 7 January 2021](https://twitter.com/signalapp/status/1347309781564813312) 
 
-**Step 1:** Open the **Signal App** > tap on the **three dots** in the **top right corner** > **create** a **group** (use the same name from your whatsapp group)
+**Step 1:** Open the **Signal App** > tap on the **three dots** in the **top right corner** > **create** a **group** (use the same name from your WhatsApp group)
 
 **Step 2:** Now in the just created group > open it and press at the top again to **open** its **group settings** > scroll to **Group link**
 
 **Step 3:** Tap on the toggle to turn it on and **press** on **Share**
 
-**Step 4:** Now open Whatsapp and **Paste it** in your **former Whatsapp group** to let your **friends join** 
+**Step 4:** Now open WhatsApp and **Paste it** in your **former WhatsApp group** to let your **friends join** 
 
 Signal offers no functionality to import any data. You need to start with a blank state and can not have your old WhatsApp chats in Signal.
 

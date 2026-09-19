@@ -91,12 +91,28 @@ const currentProduct = computed(() => {
   return "analyzer";
 });
 
+const PRODUCT_ROOTS = {
+  analyzer: () => localePath("/"),
+  wrapped: () => localePath("/wrapped"),
+  tools: () => localePath("/tools"),
+};
+
+/**
+ * True only on the product's own landing page. One level deeper — a single
+ * tool, the Wrapped story — the link back up is the way out of that page, not
+ * noise, and it used to be missing: only the breadcrumb led back to /tools.
+ */
+const atProductRoot = computed(
+  () =>
+    route.path.replace(/\/$/, "") ===
+    PRODUCT_ROOTS[currentProduct.value]().replace(/\/$/, "")
+);
+
 const PRODUCT_ORDER = ["analyzer", "wrapped", "tools"];
 
 /**
- * The header leads with the two products you are not using — the third is the
- * page you are already on, and a link to that is just noise. The order is
- * fixed, so the bar does not reshuffle itself as you move around the site.
+ * The header leads with the products you are not using. The order is fixed, so
+ * the bar does not reshuffle itself as you move around the site.
  */
 const otherProducts = computed(() => {
   const products = {
@@ -117,9 +133,9 @@ const otherProducts = computed(() => {
     },
   };
 
-  return PRODUCT_ORDER.filter((key) => key !== currentProduct.value).map(
-    (key) => products[key]
-  );
+  return PRODUCT_ORDER.filter(
+    (key) => key !== currentProduct.value || !atProductRoot.value
+  ).map((key) => products[key]);
 });
 
 /**
@@ -181,6 +197,9 @@ watch(
   max-width: $wa-shell-width;
   margin: 0 auto;
   padding: 0.7rem 1.5rem;
+  // Pins the header to the height --wa-header-height advertises, so the
+  // surfaces that offset themselves by it cannot end up underneath it.
+  min-height: var(--wa-header-height);
   display: flex;
   align-items: center;
   gap: 1.5rem;

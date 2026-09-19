@@ -113,7 +113,9 @@
         <LandingFaq :items="faqItems" />
       </LandingSection>
 
-      <LandingSection theme="light">
+      <!-- The heading comes from the section here; on /about the page's own
+           hero carries it, so the component itself no longer ships one. -->
+      <LandingSection theme="light" :title="$t('about')">
         <About />
       </LandingSection>
 

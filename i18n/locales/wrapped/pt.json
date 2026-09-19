@@ -120,13 +120,13 @@
       ]
     },
     "subscriptionAd": {
-      "eyebrow": "Whatsanalyse Pro",
+      "eyebrow": "WhatsAnalyze Pro",
       "headline": "Desbloqueie toda a experiência narrativa",
       "description": "Comece grátis ou faça upgrade para obter uploads ilimitados, exportações premium e processamento mais rápido.",
       "free": {
         "badge": "Grátis",
         "headline": "Explore ao seu ritmo",
-        "description": "Perfeito para testar o Whatsanalyse ou criar um recap pontual.",
+        "description": "Perfeito para testar o WhatsAnalyze ou criar um recap pontual.",
         "priceSuffix": "/ para sempre",
         "cta": "Começar grátis",
         "features": [
@@ -248,7 +248,7 @@
       "cards": [
         {
           "title": "Link de compartilhamento criptografado de ponta a ponta",
-          "description": "Deixe seus parceiros de chat participarem da diversão enviando um link para o seu Whatsanalyze Wrapped!"
+          "description": "Deixe seus parceiros de chat participarem da diversão enviando um link para o seu WhatsAnalyze Wrapped!"
         }
       ]
     },
@@ -364,7 +364,10 @@
     "messageFrequency": "Frequência de mensagens",
     "status": {
       "loadingSharedStory": "A preparar a tua história partilhada...",
-      "decryptError": "Não conseguimos descodificar esta ligação partilhada. Verifica se não foi alterada."
+      "decryptError": "Não conseguimos descodificar esta ligação partilhada. Verifica se não foi alterada.",
+      "emptyTitle": "Ainda não há Wrapped",
+      "emptyText": "Carrega uma exportação de conversa e criamos a tua história aqui mesmo, no navegador.",
+      "emptyCta": "Criar o meu Wrapped"
     },
     "intro": {
       "headline": "Retrospectiva {year}",

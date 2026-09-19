@@ -1,7 +1,10 @@
 <template>
-  <div class="stats-mock" aria-hidden="true">
+  <div class="stats-mock">
     <div class="stats-mock__card">
-      <div class="stats-mock__numbers">
+      <!-- Says out loud that these are made-up numbers. It used to read as a
+           real report, with a hard-coded axis that ended in 2024. -->
+      <span class="stats-mock__badge mono-label">{{ exampleLabel }}</span>
+      <div class="stats-mock__numbers" aria-hidden="true">
         <div class="stats-mock__stat">
           <span class="stats-mock__value">1,247</span>
           <span class="stats-mock__label">{{ daysLabel }}</span>
@@ -15,7 +18,7 @@
           <span class="stats-mock__label">{{ peopleLabel }}</span>
         </div>
       </div>
-      <div class="stats-mock__chart">
+      <div class="stats-mock__chart" aria-hidden="true">
         <div
           v-for="(bar, index) in bars"
           :key="index"
@@ -23,11 +26,8 @@
           :style="{ height: bar + '%' }"
         ></div>
       </div>
-      <div class="stats-mock__axis">
-        <span>2021</span>
-        <span>2022</span>
-        <span>2023</span>
-        <span>2024</span>
+      <div class="stats-mock__axis" aria-hidden="true">
+        <span v-for="year in axisYears" :key="year">{{ year }}</span>
       </div>
     </div>
   </div>
@@ -40,6 +40,7 @@ export default {
     daysLabel: { type: String, default: "days" },
     messagesLabel: { type: String, default: "messages" },
     peopleLabel: { type: String, default: "people" },
+    exampleLabel: { type: String, default: "Example data" },
   },
   data() {
     return {
@@ -71,6 +72,13 @@ export default {
       ],
     };
   },
+  computed: {
+    // The four years ending with the current one, so the mock cannot go stale.
+    axisYears() {
+      const thisYear = new Date().getFullYear();
+      return [thisYear - 3, thisYear - 2, thisYear - 1, thisYear];
+    },
+  },
 };
 </script>
 
@@ -81,12 +89,27 @@ export default {
 }
 
 .stats-mock__card {
+  position: relative;
   background: #ffffff;
   color: #1d1d1f;
   border-radius: 20px;
   padding: clamp(1.6rem, 4vw, 2.4rem);
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
   text-align: left;
+}
+
+.stats-mock__badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 3px 9px;
+  border-radius: $wa-radius-pill;
+  background: $wa-surface-light;
+  color: $wa-ink-faint;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .stats-mock__numbers {

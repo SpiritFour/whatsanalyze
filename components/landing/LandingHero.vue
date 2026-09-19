@@ -35,13 +35,18 @@
           >
         </template>
       </nav>
-      <p v-if="eyebrow" class="landing-hero__eyebrow">{{ eyebrow }}</p>
-      <h1 class="landing-hero__title" v-html="renderedTitle"></h1>
-      <p v-if="subtitle" class="landing-hero__subtitle">{{ subtitle }}</p>
-      <div v-if="ctaText" class="landing-hero__actions">
-        <LandingButton :to="ctaTo">{{ ctaText }}</LandingButton>
+      <!-- Copy and visual are siblings so the left-aligned variant can put them
+           side by side instead of stacking the visual under a half-empty
+           hero. -->
+      <div class="landing-hero__copy">
+        <p v-if="eyebrow" class="landing-hero__eyebrow">{{ eyebrow }}</p>
+        <h1 class="landing-hero__title" v-html="renderedTitle"></h1>
+        <p v-if="subtitle" class="landing-hero__subtitle">{{ subtitle }}</p>
+        <div v-if="ctaText" class="landing-hero__actions">
+          <LandingButton :to="ctaTo">{{ ctaText }}</LandingButton>
+        </div>
+        <p v-if="note" class="landing-hero__note">{{ note }}</p>
       </div>
-      <p v-if="note" class="landing-hero__note">{{ note }}</p>
       <div v-if="$slots.default" class="landing-hero__visual">
         <slot />
       </div>
@@ -226,6 +231,43 @@ export default {
   .landing-hero__actions {
     display: flex;
     justify-content: flex-start;
+  }
+
+  // Once there is room for it, the visual sits beside the copy rather than
+  // under it: the left-aligned hero used to leave the whole right half of the
+  // screen empty and push its preview mock below the fold.
+  @media (min-width: 1000px) {
+    .landing-hero__inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      column-gap: clamp(2rem, 5vw, 4rem);
+      align-items: center;
+    }
+
+    .landing-hero__breadcrumbs {
+      grid-column: 1 / -1;
+    }
+
+    .landing-hero__copy {
+      grid-column: 1;
+      min-width: 0;
+    }
+
+    // The designed line breaks are kept as separate lines, but they may not
+    // refuse to wrap: half the width means a long one would otherwise run
+    // straight across the visual next to it.
+    .landing-hero__title {
+      font-size: clamp(2rem, 3.4vw, 3.1rem);
+
+      :deep(.landing-hero__title-line) {
+        white-space: normal;
+      }
+    }
+
+    .landing-hero__visual {
+      grid-column: 2;
+      margin-top: 0;
+    }
   }
 }
 

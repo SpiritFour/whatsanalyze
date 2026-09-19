@@ -1,37 +1,17 @@
 import fs from "node:fs";
 import { resolve } from "node:path";
+import {
+  localeCodes,
+  localizedPages,
+  siteBaseUrl,
+} from "./config/routes.js";
 
 const local = process.env.NUXT_ENV_LOCAL !== undefined;
 const runWithFunctions = process.env.NUXT_ENV_WITH_FUNCTIONS !== undefined;
-const baseUrl = (process.env.BASE_URL || "https://www.whatsanalyze.com").replace(
-  "http:",
-  "https:"
-);
-const localizedPages = [
-  "",
-  "about",
-  "how-to-export-your-whatsapp-chat",
-  "impressum",
-  "pwa-results",
-  "subscribe",
-  "switch-from-whatsapp-to-signal",
-  "tools",
-  "tools/court-evidence",
-  "tools/inactivity",
-  "tools/proof-of-relationship",
-  "tools/message-counter",
-  "tools/word-counter",
-  "tools/chat-heatmap",
-  "whatsapp-to-pdf",
-  "wrapped",
-  "wrapped/results",
-  "wrapped/subscription/verify",
-  "wrapped/subscription/success",
-  "wrapped/subscription/canceled",
-];
-const localizedRoutes = ["de", "es", "fr", "pt", "it"].flatMap((locale) =>
-  localizedPages.map((page) => `/${locale}/${page}`)
-);
+const baseUrl = siteBaseUrl;
+const localizedRoutes = localeCodes
+  .filter((locale) => locale !== "en")
+  .flatMap((locale) => localizedPages.map((page) => `/${locale}/${page}`));
 
 export default defineNuxtConfig({
   compatibilityDate: "2026-03-01",
@@ -60,7 +40,9 @@ export default defineNuxtConfig({
       "utils/**",
     ],
     prerender: {
-      routes: localizedRoutes,
+      // /sitemap.xml is a server route; prerendering it writes a real sitemap
+      // into dist instead of letting the SPA shell answer for it.
+      routes: [...localizedRoutes, "/sitemap.xml"],
     },
   },
 
