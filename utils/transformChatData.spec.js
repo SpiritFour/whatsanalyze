@@ -79,4 +79,50 @@ describe("Chat.getAllWords", () => {
     expect(words).not.toContain("https://example.com/page");
     expect(words.some((word) => word.startsWith("<"))).toBe(false);
   });
+
+  it("counts a word once however it was punctuated or capitalised", async () => {
+    const message = "Pizza, pizza? pizza! PIZZA";
+    const chat = new Chat([
+      { date: new Date(), author: "Alice", message },
+      { date: new Date(), author: "Bob", message },
+    ]);
+
+    const words = await chat.getAllWords();
+    expect(words).toEqual([{ word: "pizza", freq: 8 }]);
+  });
+
+  it("drops stopwords and emoticons the word counter also drops", async () => {
+    const message =
+      "yes there is nice weather tomorrow ;) and pizza :P pour dans pizza";
+    const chat = new Chat([
+      { date: new Date(), author: "Alice", message },
+      { date: new Date(), author: "Bob", message },
+    ]);
+
+    const words = (await chat.getAllWords()).map((entry) => entry.word);
+    expect(words).toContain("pizza");
+    expect(words).toContain("weather");
+    // English and German come from the stopword packages, the other languages
+    // from the shared hand-written list.
+    expect(words).not.toContain("yes");
+    expect(words).not.toContain("there");
+    expect(words).not.toContain("pour");
+    expect(words).not.toContain(";)");
+    expect(words).not.toContain(":p");
+  });
+
+  it("keeps emoji intact for the emoji cloud", async () => {
+    const message = "❤️ ❤️ 😂, 😂 pizza pizza";
+    const chat = new Chat([
+      { date: new Date(), author: "Alice", message },
+      { date: new Date(), author: "Bob", message },
+    ]);
+
+    await expect(chat.getEmojiCloudData()).resolves.toEqual(
+      expect.arrayContaining([
+        { word: "❤️", freq: 4 },
+        { word: "😂", freq: 4 },
+      ])
+    );
+  });
 });

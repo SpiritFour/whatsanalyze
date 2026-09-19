@@ -74,8 +74,8 @@ const { t } = useI18n();
 const localePath = useLocalePath();
 
 useSeoMeta({
-  title: "Your WhatsApp Wrapped Story",
-  description: "View your personalized WhatsApp Wrapped year in review story.",
+  title: () => t("wrappedSeo.resultsTitle"),
+  description: () => t("wrappedSeo.resultsDescription"),
 });
 
 const shareLoading = ref(false);

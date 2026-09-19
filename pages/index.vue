@@ -152,18 +152,17 @@ import pdfExampleImage from "~/assets/img/whatsapp export pdf.png";
 
 export default {
   async setup() {
+    const { locale, t } = useI18n();
+
     useSeoMeta({
-      title: "WhatsAnalyze - The WhatsApp Chat Analyzer",
-      description:
-        "Most Popular WhatsApp Analyzer. Reveal chat statistics and export your chat as a PDF without uploading your data.",
-      ogTitle: "WhatsAnalyze - The WhatsApp Chat Analyzer",
-      ogSiteName: "WhatsAnalyze - The WhatsApp Chat Analyzer",
-      ogDescription:
-        "Most Popular WhatsApp Analyzer. Reveal chat statistics and export your chat as a PDF without uploading your data.",
+      title: () => t("seo.homeTitle"),
+      description: () => t("seo.homeDescription"),
+      ogTitle: () => t("seo.homeTitle"),
+      ogSiteName: () => t("seo.homeTitle"),
+      ogDescription: () => t("seo.homeDescription"),
       ogUrl: "https://www.whatsanalyze.com",
     });
 
-    const { locale } = useI18n();
     const localePath = useLocalePath();
     const { allTools } = useToolsNav();
     const { data: page } = await useAsyncData("content-home", () =>
