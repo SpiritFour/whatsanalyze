@@ -50,3 +50,28 @@ const notIndexable = new Set([
 export const indexablePages = localizedPages.filter(
   (page) => !notIndexable.has(page)
 );
+
+/**
+ * Pages that used to ship here and now live somewhere else, as a path relative
+ * to the locale root.
+ *
+ * These cannot be left to `firebase.json`. The live site is deployed to
+ * GitHub Pages by `deployment-live.yml`, and GitHub Pages reads none of
+ * Firebase Hosting's redirect rules — so a redirect written only there works
+ * on the dev project and 404s in production. Prerendering each one as a
+ * redirect stub is the only form that works on both.
+ */
+export const retiredPages = {
+  "whatsapp-wrapped-year-review": "wrapped",
+};
+
+/** Every retired path, per locale, mapped to its destination. */
+export const retiredRedirects = Object.fromEntries(
+  localeCodes.flatMap((locale) => {
+    const prefix = locale === defaultLocale ? "" : `/${locale}`;
+    return Object.entries(retiredPages).map(([from, to]) => [
+      `${prefix}/${from}`,
+      `${prefix}/${to}`,
+    ]);
+  })
+);
