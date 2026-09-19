@@ -4,17 +4,18 @@ import {
   hexToRgbA,
   othersColor,
 } from "~/utils/colors";
-import stopwords_de from "stopwords-de";
-import stopwords from "stopwords-en";
 import { onlyEmoji } from "emoji-aware";
 import moment from "moment";
 import { participantMessages } from "~/utils/utils";
+import { COMMON_STOPWORDS, normalizeWord } from "~/utils/stopwords";
 
 /**
  * Words that say nothing about the conversation.
  *
  * Everything here is lowercase and compared lowercase — the list used to hold
- * entries like "<This" and "Missed" that could never match.
+ * entries like "<This" and "Missed" that could never match. It is compared
+ * against normalised words too, so entries carry no edge punctuation: "call."
+ * and "location:" arrive here as "call" and "location".
  */
 const IGNORED_WORDS = new Set([
   "",
@@ -28,8 +29,8 @@ const IGNORED_WORDS = new Set([
   "message",
   "missed",
   "voice",
-  "call.",
-  "location:",
+  "call",
+  "location",
   "deleted",
   "omitted",
   "omitted>",
@@ -51,16 +52,16 @@ const IGNORED_WORDS = new Set([
  * "<Medien ausgeschlossen>"), so the bracket is the rule and the list above
  * only has to cover the words that leak out of them.
  *
- * Single symbols ("=", "-", ".") are dropped too — but an emoji is never a
- * symbol here: the emoji cloud is built from this same list, and dropping a
- * lone "❤" emptied it. Two-character faces like ":)" survive on purpose;
- * those are things people actually say.
+ * Anything a single character long is dropped too — but an emoji is never a
+ * single character here: the emoji cloud is built from this same list, and
+ * dropping a lone "❤" emptied it. This is what leaves the emoticons out:
+ * normalising strips the punctuation off ";)" and ":P" entirely, leaving ""
+ * and "p", neither of which is a word.
  */
-function isLoneSymbol(word) {
+function isLoneCharacter(word) {
   // Code points, not UTF-16 units, so an emoji counts as one character.
   return (
-    Array.from(word).length === 1 &&
-    !/[\p{L}\p{N}\p{Extended_Pictographic}]/u.test(word)
+    Array.from(word).length <= 1 && !/\p{Extended_Pictographic}/u.test(word)
   );
 }
 
@@ -74,10 +75,11 @@ function isNoiseWord(word) {
   return (
     lower.startsWith("<") ||
     isLink(lower) ||
-    isLoneSymbol(lower) ||
+    isLoneCharacter(lower) ||
     IGNORED_WORDS.has(lower) ||
-    stopwords_de.includes(lower) ||
-    stopwords.includes(lower)
+    // The same list the word counter tool filters by, so the two pages agree
+    // about which words are worth showing.
+    COMMON_STOPWORDS.has(lower)
   );
 }
 
@@ -146,7 +148,13 @@ export class Chat {
       " "
     );
     message_string = message_string.replace(/\u200E/gi, "");
-    let message_array = message_string.replace(/\n/g, " ").split(" ");
+    let message_array = message_string
+      .replace(/\n/g, " ")
+      .split(" ")
+      // "Yes," "yes" and "Yes" are one word said three times. Counting them
+      // separately split their frequency three ways and stopped any of them
+      // from ever matching the stopword list.
+      .map(normalizeWord);
     let distribution = {};
     message_array.map(function (item) {
       distribution[item] = (distribution[item] || 0) + 1;

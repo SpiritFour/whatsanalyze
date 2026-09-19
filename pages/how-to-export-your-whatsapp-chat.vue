@@ -70,13 +70,14 @@
 export default {
   name: "HowToExportYourWhatsappChat",
   async setup() {
+    const { t } = useI18n();
+
     useSeoMeta({
-      title: "WhatsAnalyze - How to Export your WhatsApp Chat",
-      description: "Export your WhatsApp Chat. iOS tutorial and Android guide.",
-      ogTitle: "WhatsAnalyze - How to Export your WhatsApp Chat",
-      ogSiteName: "WhatsAnalyze - How to Export your WhatsApp Chat",
-      ogDescription:
-        "Export your WhatsApp Chat. iOS tutorial and Android guide.",
+      title: () => t("seo.exportGuideTitle"),
+      description: () => t("seo.exportGuideDescription"),
+      ogTitle: () => t("seo.exportGuideTitle"),
+      ogSiteName: () => t("seo.exportGuideTitle"),
+      ogDescription: () => t("seo.exportGuideDescription"),
       ogUrl: "https://www.whatsanalyze.com/how-to-export-your-whatsapp-chat",
     });
 

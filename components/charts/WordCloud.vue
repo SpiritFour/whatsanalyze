@@ -6,29 +6,16 @@
 import { Chat } from "~/utils/transformChatData";
 import { withoutEmoji } from "emoji-aware";
 
-import stopwords from "stopwords-de";
 import { chartFontFamily } from "~/utils/chartTheme";
 
 export default {
   name: "WordCloud",
+  // No stopword prop: the filtering happens in Chat.getAllWords, shared with
+  // the word counter tool. The prop this used to declare defaulted to German
+  // stopwords, was never read by anything, and read like the component filtered
+  // its own words while it showed whatever it was handed.
   props: {
     chartdata: new Chat(),
-    minWordLength: {
-      type: Number,
-      default: 3,
-    },
-    minFontSize: {
-      type: Number,
-      default: 6,
-    },
-    randomness: {
-      type: Number,
-      default: 0.1,
-    },
-    stopWords: {
-      type: Array,
-      default: () => stopwords,
-    },
   },
   data() {
     return {

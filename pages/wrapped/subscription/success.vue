@@ -18,7 +18,15 @@
 
       <div class="text-sm space-y-2">
         <p><strong>Email:</strong> {{ result.customer_details?.email }}</p>
-        <p><strong>Verification Code:</strong> {{ result.subscription }}</p>
+        <!--
+          The same name /subscribe and the confirmation email give it. It used
+          to be the "Verification Code" here and the "Subscription ID" there,
+          so anyone copying it across had to guess which field it belonged in.
+        -->
+        <p>
+          <strong>{{ $t("subscribePage.subscriptionIdLabel") }}:</strong>
+          {{ result.subscription }}
+        </p>
         <p><strong>Status:</strong> {{ result.payment_status }}</p>
       </div>
 

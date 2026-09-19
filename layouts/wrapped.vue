@@ -13,7 +13,13 @@
 </template>
 
 <script lang="ts" setup>
-useHead({
+import { useLocaleHead } from "#i18n";
+
+// Same reason as layouts/default.vue: the lang attribute, hreflang alternates
+// and canonical have to follow the route's locale, not nuxt.config's "en".
+const localeHead = useLocaleHead();
+
+useHead(() => ({
   meta: [
     {
       name: "viewport",
@@ -22,12 +28,15 @@ useHead({
     },
     { name: "color-scheme", content: "dark" },
     { name: "theme-color", content: "#0d1418" },
+    ...(localeHead.value.meta || []),
   ],
+  link: localeHead.value.link,
   htmlAttrs: {
+    ...localeHead.value.htmlAttrs,
     style: "background-color: #0d1418;",
   },
   bodyAttrs: {
     style: "background-color: #0d1418;",
   },
-});
+}));
 </script>
