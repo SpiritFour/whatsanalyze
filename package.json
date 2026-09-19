@@ -59,7 +59,7 @@
     "firebase": "^12.8.0",
     "flubber": "^0.4.2",
     "html2canvas": "^1.4.1",
-    "jspdf": "^2.5.1",
+    "jspdf": "^4.2.1",
     "jspdf-autotable": "^3.8.1",
     "jszip": "^3.10.1",
     "lodash-es": "^4.17.21",
