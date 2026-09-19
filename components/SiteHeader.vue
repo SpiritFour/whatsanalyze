@@ -1,5 +1,5 @@
 <template>
-  <header class="site-header">
+  <header ref="headerEl" class="site-header">
     <div class="site-header__inner">
       <NuxtLink :to="localePath('/')" class="site-header__brand">
         <img
@@ -71,7 +71,7 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
 import LanguageSwitcher from "~/components/LanguageSwitcher.vue";
 import { useSubscriptionStore } from "~/stores/subscription";
@@ -82,6 +82,31 @@ const route = useRoute();
 const { isVerified } = storeToRefs(useSubscriptionStore());
 
 const menuOpen = ref(false);
+
+// The header's real height, published for anything that has to clear it — the
+// Wrapped story's progress strip, drawn inside a full-screen card that starts
+// at the top of the viewport. Measured rather than assumed: a hard-coded
+// guess was 8px short of the phone header and left the strip's top edge
+// underneath it. The :root values in assets/variables.scss are the fallback
+// until this runs.
+const headerEl = ref(null);
+let headerObserver = null;
+
+onMounted(() => {
+  if (!headerEl.value) return;
+  const publish = () =>
+    document.documentElement.style.setProperty(
+      "--wa-header-height",
+      `${Math.ceil(headerEl.value.getBoundingClientRect().height)}px`
+    );
+  publish();
+  if ("ResizeObserver" in window) {
+    headerObserver = new ResizeObserver(publish);
+    headerObserver.observe(headerEl.value);
+  }
+});
+
+onBeforeUnmount(() => headerObserver?.disconnect());
 
 /** Which of the three products the reader is in right now. */
 const currentProduct = computed(() => {
@@ -197,9 +222,6 @@ watch(
   max-width: $wa-shell-width;
   margin: 0 auto;
   padding: 0.7rem 1.5rem;
-  // Pins the header to the height --wa-header-height advertises, so the
-  // surfaces that offset themselves by it cannot end up underneath it.
-  min-height: var(--wa-header-height);
   display: flex;
   align-items: center;
   gap: 1.5rem;
