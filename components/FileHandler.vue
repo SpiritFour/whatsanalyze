@@ -254,6 +254,7 @@ export default {
         if (/^application\/(?:x-)?zip(?:-compressed)?$/.test(file.type)) {
           reader.addEventListener("loadend", this.zipLoadEndHandler);
           reader.readAsArrayBuffer(file);
+        } else if (file.type === "text/plain") {
           reader.addEventListener("loadend", this.txtLoadEndHandler);
           reader.readAsText(file);
         } else {
