@@ -91,6 +91,7 @@ const handleFile = async (e: Event): Promise<void> => {
     analyticsWrapped.paywallViewed("upload_gate");
     input.value = "";
     return;
+  }
 
   const fileType = file.name.endsWith(".zip") ? "zip" : "txt";
   gtagEvent(`upload_${fileType}`, GTAG_FILE, 1, CATEGORY_WRAPPED);

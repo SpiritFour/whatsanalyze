@@ -230,8 +230,8 @@ import { markRaw, toRaw } from "vue";
 import { GTAG_PAYMENT, GTAG_PDF, gtagEvent } from "~/utils/gtagValues";
 import { analyticsChat, analyticsEcommerce } from "~/composables/useAnalytics";
 import { fetchOneTimeCheckoutUrl } from "~/utils/subscription";
+import {
   INTRO_PRICE,
-  ONE_TIME_DISCOUNT_PERCENT,
   ONE_TIME_LIST_PRICE,
   ONE_TIME_PRICE,
   SUBSCRIPTION_PRICE,
@@ -354,6 +354,7 @@ export default {
         value: 2.99,
       });
       this.isOneTimeLoading = true;
+      try {
         rememberOneTimeCheckoutChat(this.currentChatFingerprint);
         const url = await fetchOneTimeCheckoutUrl({
           successUrl: `${window.location.origin}/?session_id={CHECKOUT_SESSION_ID}&payment_success=true`,
@@ -377,7 +378,7 @@ export default {
         // the graphs need to be converted to an image beforehand, as the web worker has no access to document
         const chatTimeline = await loadImage("#chat-timeline");
         const messagesPerTimeOfDay = await loadImage(
-          "#messages-per-time-of-day"
+          "#messages-per-time-of-day",
         );
         const messagesPerPerson = await loadImage("#messages-per-person");
         const radarMonth = await loadImage("#radar-month");

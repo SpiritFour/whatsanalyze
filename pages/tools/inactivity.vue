@@ -402,9 +402,9 @@ const topInitiatorName = computed(() => {
     analysis.value.conversationInitiations.breakdown.length === 0
   )
     return "N/A";
-  const sorted = [
-    ...analysis.value.conversationInitiations.breakdown,
-  ].sort((a, b) => b.count - a.count);
+  const sorted = [...analysis.value.conversationInitiations.breakdown].sort(
+    (a, b) => b.count - a.count,
+  );
   return sorted[0]?.author || "N/A";
 });
 
@@ -414,28 +414,28 @@ const topInitiatorPct = computed(() => {
     analysis.value.conversationInitiations.breakdown.length === 0
   )
     return 0;
-  const sorted = [
-    ...analysis.value.conversationInitiations.breakdown,
-  ].sort((a, b) => b.count - a.count);
+  const sorted = [...analysis.value.conversationInitiations.breakdown].sort(
+    (a, b) => b.count - a.count,
+  );
   return sorted[0]?.percentage || 0;
 });
 
 const fastestResponder = computed(() => {
   if (!analysis.value) return null;
   const candidates = analysis.value.participants.filter(
-    (p) => p.avgResponseTimeMs > 0
+    (p) => p.avgResponseTimeMs > 0,
   );
   if (candidates.length === 0) return null;
   return candidates.sort(
-    (a, b) => a.avgResponseTimeMs - b.avgResponseTimeMs
+    (a, b) => a.avgResponseTimeMs - b.avgResponseTimeMs,
   )[0];
 });
 
 const fastestResponderName = computed(
-  () => fastestResponder.value?.name || "N/A"
+  () => fastestResponder.value?.name || "N/A",
 );
 const fastestResponderTime = computed(
-  () => fastestResponder.value?.avgResponseTimeFormatted || "N/A"
+  () => fastestResponder.value?.avgResponseTimeFormatted || "N/A",
 );
 
 function truncate(str: string, len: number): string {

@@ -138,7 +138,7 @@ const emit = defineEmits<{
       analysis: unknown;
       messages: ChatMessage[];
       attachments: ChatAttachment[];
-    }
+    },
   ): void;
   (e: "reset"): void;
 }>();
@@ -170,19 +170,18 @@ function onDragLeave() {
 
 async function processInput(
   fileOrText: File | string,
-  fileName = "WhatsApp Chat"
+  fileName = "WhatsApp Chat",
 ) {
   loading.value = true;
   errorMessage.value = null;
 
   try {
-    const { messages, attachments, durationMs } = await parseChatFile(
-      fileOrText
-    );
+    const { messages, attachments, durationMs } =
+      await parseChatFile(fileOrText);
 
     if (!messages || messages.length === 0) {
       throw new Error(
-        "No messages found. Please ensure this is a valid WhatsApp chat export (.txt or .zip)."
+        "No messages found. Please ensure this is a valid WhatsApp chat export (.txt or .zip).",
       );
     }
 
@@ -199,7 +198,7 @@ async function processInput(
 
     if (!analysis) {
       throw new Error(
-        "Could not compute metrics: Chat contains no participant messages."
+        "Could not compute metrics: Chat contains no participant messages.",
       );
     }
     hasLoadedFile.value = true;
@@ -224,7 +223,7 @@ async function processInput(
     analyticsTools.analyzed(
       props.toolType,
       parsedMessageCount.value,
-      parseDurationMs.value
+      parseDurationMs.value,
     );
   } catch (err) {
     const msg =

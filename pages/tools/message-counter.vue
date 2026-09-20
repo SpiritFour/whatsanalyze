@@ -258,7 +258,7 @@ const linesPerMessage = computed(() => {
   if (!analysis.value || analysis.value.totalMessages === 0) return 1;
   return (
     Math.round(
-      (analysis.value.totalLines / analysis.value.totalMessages) * 100
+      (analysis.value.totalLines / analysis.value.totalMessages) * 100,
     ) / 100
   );
 });
@@ -268,7 +268,7 @@ const linesPerMessageCaption = computed(() =>
     ? t("toolsMessageCounter.captionLinesPerMsgOne")
     : t("toolsMessageCounter.captionLinesPerMsg", {
         avg: linesPerMessage.value.toLocaleString(locale.value),
-      })
+      }),
 );
 
 function scrollToDropzone() {

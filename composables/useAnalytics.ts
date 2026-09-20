@@ -68,7 +68,7 @@ export function sanitizeEventName(rawName: string): string {
  * - Undefined/null/NaN cleaned up
  */
 export function sanitizeParams(
-  rawParams?: EventParams
+  rawParams?: EventParams,
 ): Record<string, string | number | boolean> {
   if (!rawParams) return {};
 
@@ -155,7 +155,9 @@ export const analyticsEcommerce = {
     trackEvent("begin_checkout", {
       checkout_type: options.checkoutType,
       price_id: options.priceId || "default",
-      value: options.value ?? (options.checkoutType === "subscription" ? 4.99 : 2.99),
+      value:
+        options.value ??
+        (options.checkoutType === "subscription" ? 4.99 : 2.99),
       currency: options.currency || "USD",
       source: options.source || "unknown",
     });
@@ -202,7 +204,11 @@ export const analyticsTools = {
     trackEvent("tool_hub_click", { tool_name: toolName });
   },
 
-  fileUploaded(toolName: string, fileType: "txt" | "zip" | "other", source: "drop" | "picker" = "picker") {
+  fileUploaded(
+    toolName: string,
+    fileType: "txt" | "zip" | "other",
+    source: "drop" | "picker" = "picker",
+  ) {
     trackEvent("tool_file_uploaded", {
       tool_name: toolName,
       file_type: fileType,
@@ -229,7 +235,10 @@ export const analyticsTools = {
     });
   },
 
-  ctaClick(toolName: string, ctaType: "full_analyzer" | "export_guide" | "subscribe" | "other") {
+  ctaClick(
+    toolName: string,
+    ctaType: "full_analyzer" | "export_guide" | "subscribe" | "other",
+  ) {
     trackEvent("tool_cta_click", {
       tool_name: toolName,
       cta_type: ctaType,
@@ -241,14 +250,21 @@ export const analyticsTools = {
  * Core Chat Analyzer (Main flow)
  */
 export const analyticsChat = {
-  uploadStarted(fileType: "txt" | "zip" | "other", uploadMethod: "drop" | "picker" | "shared" = "picker") {
+  uploadStarted(
+    fileType: "txt" | "zip" | "other",
+    uploadMethod: "drop" | "picker" | "shared" = "picker",
+  ) {
     trackEvent("file_upload_started", {
       file_type: fileType,
       upload_method: uploadMethod,
     });
   },
 
-  parsedSuccess(messageCount: number, participantCount?: number, durationMs?: number) {
+  parsedSuccess(
+    messageCount: number,
+    participantCount?: number,
+    durationMs?: number,
+  ) {
     trackEvent("file_parsed_success", {
       message_count: messageCount,
       participant_count: participantCount,
@@ -273,14 +289,20 @@ export const analyticsChat = {
     trackEvent("select_participant", { action: "change_ego" });
   },
 
-  share(method: "native_share" | "clipboard" | "image_download", contentType: string) {
+  share(
+    method: "native_share" | "clipboard" | "image_download",
+    contentType: string,
+  ) {
     trackEvent("share", {
       method,
       content_type: contentType,
     });
   },
 
-  download(fileType: "pdf_sample" | "pdf_full" | "chart_image", chartName?: string) {
+  download(
+    fileType: "pdf_sample" | "pdf_full" | "chart_image",
+    chartName?: string,
+  ) {
     trackEvent("file_download", {
       file_type: fileType,
       chart_name: chartName,

@@ -171,7 +171,7 @@ export default {
     const localePath = useLocalePath();
     const { allTools } = useToolsNav();
     const { data: page } = await useAsyncData("content-home", () =>
-      queryCollection("pages").path("/home").first()
+      queryCollection("pages").path("/home").first(),
     );
     return {
       locale,
@@ -317,10 +317,8 @@ export default {
      * find the button again is not a delivery.
      */
     async confirmOneTimePayment() {
-      const {
-        payment_success: paymentSuccess,
-        session_id: sessionId,
-      } = this.$route.query;
+      const { payment_success: paymentSuccess, session_id: sessionId } =
+        this.$route.query;
 
       if (paymentSuccess !== "true" || !sessionId) return;
 
@@ -335,7 +333,7 @@ export default {
         const functions = this.$functions;
         const getCheckoutSession = httpsCallable(
           functions,
-          "getCheckoutSession"
+          "getCheckoutSession",
         );
         const res = await getCheckoutSession({ sessionId });
         const session = res.data;
@@ -343,7 +341,7 @@ export default {
         if (session?.payment_status !== "paid") {
           console.warn(
             "Checkout session is not paid:",
-            session?.payment_status
+            session?.payment_status,
           );
           return;
         }
@@ -384,11 +382,11 @@ export default {
         gtagEvent(
           "analyzed_chat_" + this.chat.numPersonsInChat,
           GTAG_NUM_PERSONS,
-          0
+          0,
         );
         analyticsChat.chatAnalyzed(
           this.chat.numPersonsInChat,
-          this.chat.numPersonsInChat > 2
+          this.chat.numPersonsInChat > 2,
         );
         saveChatSession(chatObject);
       }
@@ -513,7 +511,9 @@ export default {
     border-radius: 50%;
     object-fit: cover;
     opacity: 0.75;
-    transition: filter 0.2s ease, opacity 0.2s ease;
+    transition:
+      filter 0.2s ease,
+      opacity 0.2s ease;
   }
 }
 
