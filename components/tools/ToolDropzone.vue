@@ -232,6 +232,7 @@ async function processInput(
         : "Failed to parse WhatsApp chat export.";
     errorMessage.value = msg;
     analyticsTools.error(props.toolType, msg);
+  } finally {
     loading.value = false;
     isDragging.value = false;
   }
