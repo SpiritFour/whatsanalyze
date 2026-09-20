@@ -1,5 +1,21 @@
 export const messages = {
   en: {
+    // The document title is the one piece of every page that was never
+    // localised: /de/ and /fr/ shipped English titles into Google's index.
+    seo: {
+      homeTitle: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+      homeDescription:
+        "Most Popular WhatsApp Analyzer. Reveal chat statistics and export your chat as a PDF without uploading your data.",
+      exportGuideTitle: "WhatsAnalyze - How to Export your WhatsApp Chat",
+      exportGuideDescription:
+        "Export your WhatsApp Chat. iOS tutorial and Android guide.",
+      pdfGuideTitle: "WhatsAnalyze - How to Export your WhatsApp Chat to PDF",
+      pdfGuideDescription:
+        "Export your WhatsApp chat to PDF in seconds without sending chat data to a server.",
+      signalTitle: "WhatsAnalyze - How to switch from WhatsApp to Signal",
+      signalDescription:
+        "Switch from WhatsApp to Signal, transfer group chats, and create backups.",
+    },
     subscribePage: {
       title: "One Subscription. Everything Unlocked.",
       subtitle:
@@ -956,6 +972,22 @@ export const messages = {
     pageNameHeatmap: "WhatsApp Peak Chat Hours & 24h Heatmap",
   },
   de: {
+    // The document title is the one piece of every page that was never
+    // localised: /de/ and /fr/ shipped English titles into Google's index.
+    seo: {
+      homeTitle: "WhatsAnalyze - Die WhatsApp-Chat-Analyse",
+      homeDescription:
+        "Die beliebteste WhatsApp-Analyse. Entdecke deine Chat-Statistiken und exportiere deinen Chat als PDF, ohne deine Daten hochzuladen.",
+      exportGuideTitle: "WhatsAnalyze - WhatsApp-Chat exportieren",
+      exportGuideDescription:
+        "Exportiere deinen WhatsApp-Chat. Anleitung für iOS und Android.",
+      pdfGuideTitle: "WhatsAnalyze - WhatsApp-Chat als PDF exportieren",
+      pdfGuideDescription:
+        "Exportiere deinen WhatsApp-Chat in Sekunden als PDF, ohne Chat-Daten an einen Server zu senden.",
+      signalTitle: "WhatsAnalyze - Von WhatsApp zu Signal wechseln",
+      signalDescription:
+        "Wechsle von WhatsApp zu Signal, übertrage Gruppenchats und erstelle Backups.",
+    },
     subscribePage: {
       title: "Ein Abo. Alles freigeschaltet.",
       subtitle:
@@ -1903,6 +1935,22 @@ export const messages = {
     pageNameHeatmap: "WhatsApp Aktivitätszeiten & 24h-Heatmap",
   },
   es: {
+    // The document title is the one piece of every page that was never
+    // localised: /de/ and /fr/ shipped English titles into Google's index.
+    seo: {
+      homeTitle: "WhatsAnalyze - El analizador de chats de WhatsApp",
+      homeDescription:
+        "El analizador de WhatsApp más popular. Descubre las estadísticas de tus chats y exporta tu conversación en PDF sin subir tus datos.",
+      exportGuideTitle: "WhatsAnalyze - Cómo exportar tu chat de WhatsApp",
+      exportGuideDescription:
+        "Exporta tu chat de WhatsApp. Tutorial para iOS y guía para Android.",
+      pdfGuideTitle: "WhatsAnalyze - Cómo exportar tu chat de WhatsApp a PDF",
+      pdfGuideDescription:
+        "Exporta tu chat de WhatsApp a PDF en segundos sin enviar los datos a ningún servidor.",
+      signalTitle: "WhatsAnalyze - Cómo pasar de WhatsApp a Signal",
+      signalDescription:
+        "Pasa de WhatsApp a Signal, transfiere chats de grupo y crea copias de seguridad.",
+    },
     subscribePage: {
       title: "Una suscripción. Todo desbloqueado.",
       subtitle:
@@ -2833,6 +2881,24 @@ export const messages = {
     pageNameHeatmap: "Horas pico y mapa de calor 24h de WhatsApp",
   },
   pt: {
+    // The document title is the one piece of every page that was never
+    // localised: /de/ and /fr/ shipped English titles into Google's index.
+    seo: {
+      homeTitle: "WhatsAnalyze - O analisador de conversas do WhatsApp",
+      homeDescription:
+        "O analisador de WhatsApp mais popular. Descobre as estatísticas das tuas conversas e exporta o teu chat em PDF sem carregar os teus dados.",
+      exportGuideTitle:
+        "WhatsAnalyze - Como exportar a tua conversa do WhatsApp",
+      exportGuideDescription:
+        "Exporta a tua conversa do WhatsApp. Tutorial para iOS e guia para Android.",
+      pdfGuideTitle:
+        "WhatsAnalyze - Como exportar a tua conversa do WhatsApp para PDF",
+      pdfGuideDescription:
+        "Exporta a tua conversa do WhatsApp para PDF em segundos, sem enviar dados para um servidor.",
+      signalTitle: "WhatsAnalyze - Como mudar do WhatsApp para o Signal",
+      signalDescription:
+        "Muda do WhatsApp para o Signal, transfere conversas de grupo e cria cópias de segurança.",
+    },
     subscribePage: {
       title: "Uma assinatura. Tudo liberado.",
       subtitle:
@@ -3763,6 +3829,24 @@ export const messages = {
     pageNameHeatmap: "Horários de pico e mapa de calor 24h do WhatsApp",
   },
   fr: {
+    // The document title is the one piece of every page that was never
+    // localised: /de/ and /fr/ shipped English titles into Google's index.
+    seo: {
+      homeTitle: "WhatsAnalyze - L'analyseur de conversations WhatsApp",
+      homeDescription:
+        "L'analyseur WhatsApp le plus populaire. Découvrez les statistiques de vos conversations et exportez votre chat en PDF sans envoyer vos données.",
+      exportGuideTitle:
+        "WhatsAnalyze - Comment exporter votre conversation WhatsApp",
+      exportGuideDescription:
+        "Exportez votre conversation WhatsApp. Tutoriel iOS et guide Android.",
+      pdfGuideTitle:
+        "WhatsAnalyze - Comment exporter votre conversation WhatsApp en PDF",
+      pdfGuideDescription:
+        "Exportez votre conversation WhatsApp en PDF en quelques secondes, sans envoyer vos données à un serveur.",
+      signalTitle: "WhatsAnalyze - Comment passer de WhatsApp à Signal",
+      signalDescription:
+        "Passez de WhatsApp à Signal, transférez vos groupes et créez des sauvegardes.",
+    },
     subscribePage: {
       title: "Un abonnement. Tout est débloqué.",
       subtitle:
@@ -4702,6 +4786,23 @@ export const messages = {
     pageNameHeatmap: "Heures de pointe et carte thermique 24h WhatsApp",
   },
   it: {
+    // The document title is the one piece of every page that was never
+    // localised: /de/ and /fr/ shipped English titles into Google's index.
+    seo: {
+      homeTitle: "WhatsAnalyze - L'analizzatore di chat WhatsApp",
+      homeDescription:
+        "L'analizzatore WhatsApp più popolare. Scopri le statistiche delle tue chat ed esporta la conversazione in PDF senza caricare i tuoi dati.",
+      exportGuideTitle: "WhatsAnalyze - Come esportare la tua chat WhatsApp",
+      exportGuideDescription:
+        "Esporta la tua chat WhatsApp. Tutorial per iOS e guida per Android.",
+      pdfGuideTitle:
+        "WhatsAnalyze - Come esportare la tua chat WhatsApp in PDF",
+      pdfGuideDescription:
+        "Esporta la tua chat WhatsApp in PDF in pochi secondi, senza inviare i dati a un server.",
+      signalTitle: "WhatsAnalyze - Come passare da WhatsApp a Signal",
+      signalDescription:
+        "Passa da WhatsApp a Signal, trasferisci le chat di gruppo e crea backup.",
+    },
     subscribePage: {
       title: "Un abbonamento. Tutto sbloccato.",
       subtitle:

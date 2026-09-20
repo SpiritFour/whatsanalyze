@@ -207,17 +207,14 @@ definePageMeta({
 });
 
 const { t, tm } = useI18n();
-useHead({
-  title: "WhatsApp Wrapped - Your Year in Review",
-});
-
+// This page is the 301 target for /whatsapp-wrapped-year-review, so it is the
+// one absorbing the existing search traffic — and /de/wrapped and /fr/wrapped
+// were being indexed with an English title over fully localized body copy.
 useSeoMeta({
-  title: "WhatsApp Wrapped - Your Year in Review",
-  description:
-    "Analyze your WhatsApp chats and get stunning insights into your conversations, peak times, emoji podium, and messaging habits.",
-  ogTitle: "WhatsApp Wrapped - Your Year in Review",
-  ogDescription:
-    "Analyze your WhatsApp chats and get stunning insights into your conversations, peak times, emoji podium, and messaging habits.",
+  title: () => t("wrappedSeo.title"),
+  description: () => t("wrappedSeo.description"),
+  ogTitle: () => t("wrappedSeo.title"),
+  ogDescription: () => t("wrappedSeo.description"),
 });
 
 interface HeroCopy {

@@ -25,14 +25,14 @@
 export default {
   name: "SwitchFromWhatsappToSignal",
   async setup() {
+    const { t } = useI18n();
+
     useSeoMeta({
-      title: "WhatsAnalyze - How to switch from WhatsApp to Signal",
-      description:
-        "Switch from WhatsApp to Signal, transfer group chats, and create backups.",
-      ogTitle: "WhatsAnalyze - How to switch from WhatsApp to Signal",
-      ogSiteName: "WhatsAnalyze - How to switch from WhatsApp to Signal",
-      ogDescription:
-        "Switch from WhatsApp to Signal, transfer group chats, and create backups.",
+      title: () => t("seo.signalTitle"),
+      description: () => t("seo.signalDescription"),
+      ogTitle: () => t("seo.signalTitle"),
+      ogSiteName: () => t("seo.signalTitle"),
+      ogDescription: () => t("seo.signalDescription"),
       ogUrl: "https://www.whatsanalyze.com/switch-from-whatsapp-to-signal",
     });
 
