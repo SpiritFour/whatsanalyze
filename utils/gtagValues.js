@@ -15,7 +15,7 @@ export function gtagEvent(
   action,
   label,
   value = "1",
-  category = CATEGORY_HOME,
+  category = CATEGORY_HOME
 ) {
   if (typeof window === "undefined") return;
 

@@ -68,7 +68,7 @@ export function sanitizeEventName(rawName: string): string {
  * - Undefined/null/NaN cleaned up
  */
 export function sanitizeParams(
-  rawParams?: EventParams,
+  rawParams?: EventParams
 ): Record<string, string | number | boolean> {
   if (!rawParams) return {};
 
@@ -207,7 +207,7 @@ export const analyticsTools = {
   fileUploaded(
     toolName: string,
     fileType: "txt" | "zip" | "other",
-    source: "drop" | "picker" = "picker",
+    source: "drop" | "picker" = "picker"
   ) {
     trackEvent("tool_file_uploaded", {
       tool_name: toolName,
@@ -237,7 +237,7 @@ export const analyticsTools = {
 
   ctaClick(
     toolName: string,
-    ctaType: "full_analyzer" | "export_guide" | "subscribe" | "other",
+    ctaType: "full_analyzer" | "export_guide" | "subscribe" | "other"
   ) {
     trackEvent("tool_cta_click", {
       tool_name: toolName,
@@ -252,7 +252,7 @@ export const analyticsTools = {
 export const analyticsChat = {
   uploadStarted(
     fileType: "txt" | "zip" | "other",
-    uploadMethod: "drop" | "picker" | "shared" = "picker",
+    uploadMethod: "drop" | "picker" | "shared" = "picker"
   ) {
     trackEvent("file_upload_started", {
       file_type: fileType,
@@ -263,7 +263,7 @@ export const analyticsChat = {
   parsedSuccess(
     messageCount: number,
     participantCount?: number,
-    durationMs?: number,
+    durationMs?: number
   ) {
     trackEvent("file_parsed_success", {
       message_count: messageCount,
@@ -291,7 +291,7 @@ export const analyticsChat = {
 
   share(
     method: "native_share" | "clipboard" | "image_download",
-    contentType: string,
+    contentType: string
   ) {
     trackEvent("share", {
       method,
@@ -301,7 +301,7 @@ export const analyticsChat = {
 
   download(
     fileType: "pdf_sample" | "pdf_full" | "chart_image",
-    chartName?: string,
+    chartName?: string
   ) {
     trackEvent("file_download", {
       file_type: fileType,

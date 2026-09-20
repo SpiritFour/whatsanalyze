@@ -133,7 +133,7 @@ export default {
         ][i - 1],
         title: t(`relationshipProof.stat${i}Title`),
         text: t(`relationshipProof.stat${i}Text`),
-      })),
+      }))
     );
 
     const useCases = computed(() =>
@@ -148,14 +148,14 @@ export default {
         text: t(`relationshipProof.case${i}Text`),
         to: i === 4 ? localePath("/tools/court-evidence") : undefined,
         linkText: i === 4 ? t("relationshipProof.caseLinkText") : undefined,
-      })),
+      }))
     );
 
     const steps = computed(() =>
       [1, 2, 3].map((i) => ({
         title: t(`relationshipProof.step${i}Title`),
         text: t(`relationshipProof.step${i}Text`),
-      })),
+      }))
     );
     // The last crumb is the tool's name from the shared catalogue
     // (composables/useSiteNav.ts), the same string the /tools index, the footer
@@ -173,10 +173,10 @@ export default {
       // land on the analyzer's upload area rather than the top of the
       // homepage — step 2 tells people to drop a file there.
       analyzerPath: computed(() =>
-        localePath({ path: "/", hash: "#dropzone-slot" }),
+        localePath({ path: "/", hash: "#dropzone-slot" })
       ),
       exportGuidePath: computed(() =>
-        localePath("how-to-export-your-whatsapp-chat"),
+        localePath("how-to-export-your-whatsapp-chat")
       ),
       stats,
       useCases,

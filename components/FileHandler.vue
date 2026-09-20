@@ -204,7 +204,7 @@ export default {
 
     txtLoadEndHandler(e) {
       parseString(e.target.result).then((messages) =>
-        this.updateMessages({ messages: messages }),
+        this.updateMessages({ messages: messages })
       );
     },
 
@@ -218,7 +218,7 @@ export default {
       gtagEvent("parsed", GTAG_FILE);
       analyticsChat.parsedSuccess(
         chatObject.messages?.length || 0,
-        chatObject.numPersonsInChat,
+        chatObject.numPersonsInChat
       );
     },
 
@@ -247,7 +247,7 @@ export default {
           file.name.endsWith(".zip");
         analyticsChat.uploadStarted(
           isZip ? "zip" : "txt",
-          this.isDragging ? "drop" : "picker",
+          this.isDragging ? "drop" : "picker"
         );
         // do singles here
         const reader = new FileReader();
@@ -370,9 +370,7 @@ input[type="file"] {
   font-size: 0.95rem;
   font-weight: 600;
   box-shadow: $wa-shadow-accent;
-  transition:
-    background 0.2s ease,
-    transform 0.2s ease;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .file-handler__drop:hover .file-handler__button {
