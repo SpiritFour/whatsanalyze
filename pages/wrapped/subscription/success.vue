@@ -92,14 +92,18 @@ import { httpsCallable } from "firebase/functions";
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/vue/24/solid";
 import { useSubscriptionStore } from "~/stores/subscription";
 import { CATEGORY_WRAPPED, GTAG_PAYMENT, gtagEvent } from "~/utils/gtagValues";
+import { analyticsEcommerce } from "~/composables/useAnalytics";
 
 definePageMeta({
   layout: "wrapped",
 });
 
 interface CheckoutSessionResult {
+  id?: string;
   subscription?: string;
   payment_status?: string;
+  amount_total?: number;
+  currency?: string;
   customer_details?: {
     email?: string;
   };
@@ -179,8 +183,14 @@ const getCheckoutSessionData = async (id: string) => {
 
     result.value = session;
     gtagEvent("approved_stripe", GTAG_PAYMENT, 10, CATEGORY_WRAPPED);
-
-    // Automatically verify into the Pinia store without requiring user click
+    analyticsEcommerce.purchase({
+      transactionId: session.id || id,
+      value: session.amount_total ? session.amount_total / 100 : 4.99,
+      currency: session.currency?.toUpperCase() || "USD",
+      paymentType: "subscription",
+      subscriptionId: session.subscription,
+      source: "wrapped",
+    });
     const subId = session.subscription;
     const email = session.customer_details?.email;
     if (subId && email) {

@@ -23,6 +23,7 @@
               :key="tool.title"
               :to="tool.to"
               class="tool-card"
+              @click="trackToolClick(tool.title)"
             >
               <div class="tool-card__header">
                 <div
@@ -63,6 +64,7 @@
               :key="tool.title"
               :to="tool.to"
               class="tool-card tool-card--court"
+              @click="trackToolClick(tool.title)"
             >
               <div class="tool-card__header">
                 <div
@@ -125,16 +127,25 @@
       :cta-to="localePath('/')"
       :note="t('toolsHub.ctaNote')"
       :disclaimer="t('toolsHub.disclaimer')"
+      @click="trackBottomCta"
     />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
+import { analyticsTools as tracker } from "~/composables/useAnalytics";
 
 const { t } = useI18n();
 const localePath = useLocalePath();
 
+function trackToolClick(toolName: string) {
+  tracker.hubClick(toolName);
+}
+
+function trackBottomCta() {
+  tracker.ctaClick("tools_hub", "full_analyzer");
+}
 // SEO Metadata
 useSeoMeta({
   title: () => t("toolsHub.seoTitle"),

@@ -46,7 +46,7 @@ import {
   watch,
 } from "vue";
 import { CATEGORY_WRAPPED, GTAG_RESULTS, gtagEvent } from "~/utils/gtagValues";
-
+import { analyticsWrapped } from "~/composables/useAnalytics";
 const props = defineProps({
   duration: {
     type: Number,
@@ -169,8 +169,8 @@ const slideNames = [
 function trackSlide(index: number) {
   const slideName = slideNames[index] || `Slide${index}`;
   gtagEvent(`story_${slideName}`, GTAG_RESULTS, index, CATEGORY_WRAPPED);
+  analyticsWrapped.slideView(slideName, index);
 }
-
 watch(activeIndex, trackSlide);
 
 onMounted(() => {

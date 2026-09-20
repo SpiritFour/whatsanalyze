@@ -268,7 +268,7 @@
       cta-to="#dropzone-slot"
       :note="t('toolsInactivity.ctaNote')"
       :disclaimer="t('toolsInactivity.disclaimer')"
-      @click="scrollToDropzone"
+      @click="onBottomCtaClick"
     />
   </div>
 </template>
@@ -281,7 +281,7 @@ import {
   type ChatMessage,
   type ChatAttachment,
 } from "~/composables/useChatTool";
-
+import { analyticsTools } from "~/composables/useAnalytics";
 const { t } = useI18n();
 const localePath = useLocalePath();
 
@@ -457,11 +457,15 @@ function scrollToDropzone() {
     el.scrollIntoView({ behavior: "smooth" });
   }
 }
-
 function openFullAnalysis() {
   // Shared chat is already loaded in useSharedChat
+  analyticsTools.ctaClick("inactivity", "full_analyzer");
 }
 
+function onBottomCtaClick() {
+  scrollToDropzone();
+  analyticsTools.ctaClick("inactivity", "scroll_to_dropzone");
+}
 const fullAnalysisFeatures = computed(() => [
   {
     icon: "mdi-chart-bell-curve-cumulative",

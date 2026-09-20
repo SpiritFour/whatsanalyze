@@ -52,8 +52,8 @@
 import { downloadBase64File } from "~/utils/utils";
 import html2canvas from "html2canvas";
 import { GTAG_RESULTS, gtagEvent } from "~/utils/gtagValues";
+import { analyticsChat } from "~/composables/useAnalytics";
 import { SVG_CHART_CLASS, chartToCanvas } from "~/utils/svgImage";
-
 export default {
   name: "Share",
   props: {
@@ -316,11 +316,14 @@ export default {
             })
             .then(() => {
               gtagEvent("share_" + chartName + "_shared", GTAG_RESULTS, 2);
+              analyticsChat.share("native_share", chartName);
             });
         });
       } else {
         downloadBase64File(canvas, fileName);
         gtagEvent("download_" + chartName, GTAG_RESULTS);
+        analyticsChat.share("image_download", chartName);
+        analyticsChat.download("chart_image", chartName);
         this.loading = false;
       }
     },

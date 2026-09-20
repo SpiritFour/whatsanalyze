@@ -113,6 +113,7 @@ import {
   GTAG_RESULTS,
   gtagEvent,
 } from "~/utils/gtagValues";
+import { analyticsChat } from "~/composables/useAnalytics";
 
 export default {
   name: "DownloadPopup",
@@ -133,7 +134,7 @@ export default {
     download: function () {
       this.loading = true;
       gtagEvent("download_image", GTAG_RESULTS);
-
+      analyticsChat.download("chart_image", "graphs");
       setTimeout(async () => {
         const graphs = document.querySelector("#download-graphs");
         // Taken before the capture: html2canvas cannot draw the SVG clouds,

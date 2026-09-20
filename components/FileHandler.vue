@@ -78,8 +78,8 @@
 import { parseString } from "whatsapp-chat-parser";
 import JSZip from "jszip";
 import { GTAG_FILE, gtagEvent } from "~/utils/gtagValues";
+import { analyticsChat } from "~/composables/useAnalytics";
 import { markSystemMessages } from "~/utils/systemMessages";
-
 export default {
   name: "FileHandler",
   data() {
@@ -216,13 +216,19 @@ export default {
       this.processing = false;
       this.isSuccess = true;
       gtagEvent("parsed", GTAG_FILE);
+      analyticsChat.parsedSuccess(
+        chatObject.messages?.length || 0,
+        chatObject.numPersonsInChat
+      );
     },
 
     showErrorMessage(text = undefined) {
       this.wrongFile = true;
       this.processing = false;
       this.isSuccess = false;
-      gtagEvent("error" + (text || ""), GTAG_FILE, 0);
+      const errorCode = text ? String(text).replace(/\s+/g, "_") : "unknown";
+      gtagEvent("error_" + errorCode, GTAG_FILE, 0);
+      analyticsChat.parsedError(errorCode);
     },
     processFileList(fileList, shared = false) {
       this.isDragging = false;
@@ -236,9 +242,15 @@ export default {
       } else {
         let file = fileList[0];
         if (!file) return this.showErrorMessage("_undefined_shared_file");
+        const isZip =
+          /^application\/(?:x-)?zip(?:-compressed)?$/.test(file.type) ||
+          file.name.endsWith(".zip");
+        analyticsChat.uploadStarted(
+          isZip ? "zip" : "txt",
+          this.isDragging ? "drop" : "picker"
+        );
         // do singles here
         const reader = new FileReader();
-        if (/^application\/(?:x-)?zip(?:-compressed)?$/.test(file.type)) {
           reader.addEventListener("loadend", this.zipLoadEndHandler);
           reader.readAsArrayBuffer(file);
         } else if (file.type === "text/plain") {
