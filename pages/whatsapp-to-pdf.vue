@@ -25,14 +25,14 @@
 <script>
 export default {
   async setup() {
+    const { t } = useI18n();
+
     useSeoMeta({
-      title: "WhatsAnalyze - How to Export your WhatsApp Chat to PDF",
+      title: () => t("seo.pdfGuideTitle"),
       robots: "noindex",
-      description:
-        "Export your WhatsApp chat to PDF in seconds without sending chat data to a server.",
-      ogTitle: "WhatsAnalyze - How to Export your WhatsApp Chat to PDF",
-      ogDescription:
-        "Export your WhatsApp chat to PDF in seconds without sending chat data to a server.",
+      description: () => t("seo.pdfGuideDescription"),
+      ogTitle: () => t("seo.pdfGuideTitle"),
+      ogDescription: () => t("seo.pdfGuideDescription"),
     });
 
     const { data: page } = await useAsyncData("content-whatsapp-to-pdf", () =>

@@ -428,5 +428,11 @@
     }
   },
   "wrappedAbout": "À propos",
-  "wrappedAboutPoints": "<p>Nous sommes un groupe d’amis passionnés de technologie et curieux des mécanismes de la communication humaine. Après des années d’usage intensif de WhatsApp, nous voulions comprendre comment nos conversations et nos relations avaient évolué.</p><p>En tant qu’informaticiens, nous voulions plus que des statistiques brutes : une solution qui concilie confidentialité et curiosité. C’est ainsi qu’est né WhatsAnalyze : une solution entièrement locale, axée sur la confidentialité, qui fournit des insights pertinents sans partager d’informations personnelles.</p><p>Un outil fait par des utilisateurs, pour des utilisateurs — transparent, sécurisé et conçu avec soin.</p>"
+  "wrappedAboutPoints": "<p>Nous sommes un groupe d’amis passionnés de technologie et curieux des mécanismes de la communication humaine. Après des années d’usage intensif de WhatsApp, nous voulions comprendre comment nos conversations et nos relations avaient évolué.</p><p>En tant qu’informaticiens, nous voulions plus que des statistiques brutes : une solution qui concilie confidentialité et curiosité. C’est ainsi qu’est né WhatsAnalyze : une solution entièrement locale, axée sur la confidentialité, qui fournit des insights pertinents sans partager d’informations personnelles.</p><p>Un outil fait par des utilisateurs, pour des utilisateurs — transparent, sécurisé et conçu avec soin.</p>",
+  "wrappedSeo": {
+    "title": "WhatsApp Wrapped - Votre année en résumé",
+    "description": "Analysez vos conversations WhatsApp et découvrez des statistiques étonnantes sur vos échanges, vos heures de pointe, le podium des emojis et vos habitudes d'écriture.",
+    "resultsTitle": "Votre story WhatsApp Wrapped",
+    "resultsDescription": "Découvrez votre rétrospective annuelle personnalisée WhatsApp Wrapped."
+  }
 }
