@@ -59,15 +59,25 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
 import { fetchWrappedCheckoutUrl } from "~/utils/subscription";
 import { CATEGORY_WRAPPED, GTAG_PAYMENT, gtagEvent } from "~/utils/gtagValues";
+import { analyticsEcommerce } from "~/composables/useAnalytics";
 
-defineProps<{
+const props = defineProps<{
   open: boolean;
 }>();
 
+watch(
+  () => props.open,
+  (isOpen) => {
+    if (isOpen) {
+      analyticsEcommerce.viewPricing("wrapped_paywall");
+    }
+  },
+  { immediate: true }
+);
 const emit = defineEmits<{
   close: [];
 }>();
@@ -86,6 +96,11 @@ const startSubscription = async () => {
   checkoutError.value = "";
 
   gtagEvent("subscription_pressed_paywall", GTAG_PAYMENT, 1, CATEGORY_WRAPPED);
+  analyticsEcommerce.beginCheckout({
+    checkoutType: "subscription",
+    source: "wrapped_paywall",
+    value: 4.99,
+  });
 
   try {
     isStarting.value = true;
@@ -96,9 +111,12 @@ const startSubscription = async () => {
     }
 
     window.location.assign(url);
-  } catch (err: any) {
-    checkoutError.value =
-      err?.message || t("home.subscriptionAd.errors.general");
+  } catch (err: unknown) {
+    const message =
+      err instanceof Error
+        ? err.message
+        : t("home.subscriptionAd.errors.general");
+    checkoutError.value = message;
     console.error("Paywall checkout error:", err);
   } finally {
     isStarting.value = false;

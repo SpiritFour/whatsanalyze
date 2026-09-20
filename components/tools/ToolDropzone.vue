@@ -104,6 +104,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { analyticsTools } from "~/composables/useAnalytics";
 
 const { t } = useI18n();
 import {
@@ -117,7 +118,6 @@ import { analyzeInactivity } from "~/utils/inactivity";
 import { analyzeMessages } from "~/utils/messageCounter";
 import { analyzeWords } from "~/utils/wordCounter";
 import { analyzeHeatmap } from "~/utils/chatHeatmap";
-
 interface Props {
   toolType?: "inactivity" | "messages" | "words" | "heatmap";
 }
@@ -135,10 +135,10 @@ const emit = defineEmits<{
   (
     e: "analyzed",
     payload: {
-      analysis: any;
+      analysis: unknown;
       messages: ChatMessage[];
       attachments: ChatAttachment[];
-    }
+    },
   ): void;
   (e: "reset"): void;
 }>();
@@ -170,23 +170,22 @@ function onDragLeave() {
 
 async function processInput(
   fileOrText: File | string,
-  fileName = "WhatsApp Chat"
+  fileName = "WhatsApp Chat",
 ) {
   loading.value = true;
   errorMessage.value = null;
 
   try {
-    const { messages, attachments, durationMs } = await parseChatFile(
-      fileOrText
-    );
+    const { messages, attachments, durationMs } =
+      await parseChatFile(fileOrText);
 
     if (!messages || messages.length === 0) {
       throw new Error(
-        "No messages found. Please ensure this is a valid WhatsApp chat export (.txt or .zip)."
+        "No messages found. Please ensure this is a valid WhatsApp chat export (.txt or .zip).",
       );
     }
 
-    let analysis: any = null;
+    let analysis: unknown = null;
     if (props.toolType === "messages") {
       analysis = analyzeMessages(messages, durationMs);
     } else if (props.toolType === "words") {
@@ -199,10 +198,9 @@ async function processInput(
 
     if (!analysis) {
       throw new Error(
-        "Could not compute metrics: Chat contains no participant messages."
+        "Could not compute metrics: Chat contains no participant messages.",
       );
     }
-
     hasLoadedFile.value = true;
     loadedFileName.value = fileName;
     // What the report below counts, not the raw line count: WhatsApp's own
@@ -222,11 +220,18 @@ async function processInput(
       messages,
       attachments,
     });
+    analyticsTools.analyzed(
+      props.toolType,
+      parsedMessageCount.value,
+      parseDurationMs.value,
+    );
   } catch (err) {
-    errorMessage.value =
+    const msg =
       err instanceof Error
         ? err.message
         : "Failed to parse WhatsApp chat export.";
+    errorMessage.value = msg;
+    analyticsTools.error(props.toolType, msg);
   } finally {
     loading.value = false;
     isDragging.value = false;
@@ -237,6 +242,8 @@ async function onFileSelected(event: Event) {
   const target = event.target as HTMLInputElement;
   if (!target.files || target.files.length === 0) return;
   const file = target.files[0];
+  const fileType = file.name.endsWith(".zip") ? "zip" : "txt";
+  analyticsTools.fileUploaded(props.toolType, fileType, "picker");
   await processInput(file, file.name);
 }
 
@@ -245,12 +252,14 @@ async function onDrop(event: DragEvent) {
   if (!event.dataTransfer?.files || event.dataTransfer.files.length === 0)
     return;
   const file = event.dataTransfer.files[0];
+  const fileType = file.name.endsWith(".zip") ? "zip" : "txt";
+  analyticsTools.fileUploaded(props.toolType, fileType, "drop");
   await processInput(file, file.name);
 }
-
 async function loadSampleChat() {
   loading.value = true;
   errorMessage.value = null;
+  analyticsTools.sampleLoaded(props.toolType);
   try {
     const response = await fetch("/chat_example.txt");
     if (!response.ok) {
@@ -259,8 +268,10 @@ async function loadSampleChat() {
     const text = await response.text();
     await processInput(text, "Sample WhatsApp Chat (Jane & John)");
   } catch (err) {
-    errorMessage.value =
+    const msg =
       err instanceof Error ? err.message : "Failed to load sample chat.";
+    errorMessage.value = msg;
+    analyticsTools.error(props.toolType, msg);
     loading.value = false;
   }
 }

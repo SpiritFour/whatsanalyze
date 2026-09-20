@@ -9,8 +9,8 @@
       :cta-text="t('courtEvidence.heroCta')"
       :cta-to="analyzerPath"
       :note="t('courtEvidence.heroNote')"
+      @click="trackHeroCta"
     >
-      <LandingDocMock />
     </LandingHero>
 
     <LandingSection theme="white">
@@ -65,18 +65,27 @@
       :cta-to="analyzerPath"
       :note="t('courtEvidence.ctaNote')"
       :disclaimer="t('courtEvidence.disclaimer')"
+      @click="trackBottomCta"
     />
   </div>
 </template>
 
 <script>
 import { ONE_TIME_PRICE, formatPrice } from "~/utils/pricing";
+import { analyticsTools } from "~/composables/useAnalytics";
 
 export default {
   setup() {
     const { t, locale } = useI18n();
     const localePath = useLocalePath();
 
+    function trackHeroCta() {
+      analyticsTools.ctaClick("court_evidence", "hero_analyzer");
+    }
+
+    function trackBottomCta() {
+      analyticsTools.ctaClick("court_evidence", "full_analyzer");
+    }
     useSeoMeta({
       title: () => t("courtEvidence.seoTitle"),
       description: () => t("courtEvidence.seoDescription"),
@@ -199,6 +208,8 @@ export default {
       steps,
       quotes,
       faq,
+      trackHeroCta,
+      trackBottomCta,
     };
   },
 };

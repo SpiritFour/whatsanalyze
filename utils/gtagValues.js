@@ -10,6 +10,7 @@ export const GTAG_LEAD = "lead";
 export const GTAG_INTERACTION = "interaction";
 export const GTAG_NUM_PERSONS = "num_persons";
 
+import { trackEvent } from "../composables/useAnalytics";
 export function gtagEvent(
   action,
   label,
@@ -18,11 +19,12 @@ export function gtagEvent(
 ) {
   if (typeof window === "undefined") return;
 
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({
-    event: label + "_" + action,
+  const rawEventName = label ? `${label}_${action}` : String(action);
+  const numericVal = Number(value);
+
+  trackEvent(rawEventName, {
     event_category: category,
     event_label: label,
-    value: String(value),
+    value: Number.isFinite(numericVal) ? numericVal : String(value),
   });
 }

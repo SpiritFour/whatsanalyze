@@ -214,7 +214,7 @@ import {
   fetchSubscriptionCheckoutUrl,
 } from "~/utils/subscription";
 import { INTRO_PRICE, SUBSCRIPTION_PRICE, formatPrice } from "~/utils/pricing";
-
+import { analyticsEcommerce } from "~/composables/useAnalytics";
 export default {
   name: "Subscriptions",
   setup() {
@@ -271,6 +271,12 @@ export default {
     ) {
       await this.autoVerifyFromParams();
     }
+
+    if (this.$route.query.canceled) {
+      analyticsEcommerce.checkoutCancelled("subscribe_page");
+    } else {
+      analyticsEcommerce.viewPricing("subscribe_page");
+    }
   },
   methods: {
     formatDate(dateString) {
@@ -284,13 +290,19 @@ export default {
     async startSubscriptionCheckout() {
       if (this.isCheckoutLoading) return;
       this.isCheckoutLoading = true;
+      analyticsEcommerce.beginCheckout({
+        checkoutType: "subscription",
+        source: "subscribe_page",
+        value: 4.99,
+        currency: "USD",
+      });
       try {
         const returnPath = `${window.location.origin}${this.localePath(
           "/subscribe"
         )}`;
         const url = await fetchSubscriptionCheckoutUrl({
           successUrl: `${returnPath}?session_id={CHECKOUT_SESSION_ID}`,
-          cancelUrl: returnPath,
+          cancelUrl: `${returnPath}?canceled=true`,
         });
         if (!url) throw new Error("No checkout URL returned");
         window.location.assign(url);
@@ -330,6 +342,16 @@ export default {
           }
           if (session?.customer_details?.email) {
             this.email = session.customer_details.email;
+          }
+          if (session?.payment_status === "paid") {
+            analyticsEcommerce.purchase({
+              transactionId: session.id || sessionId,
+              value: session.amount_total ? session.amount_total / 100 : 4.99,
+              currency: session.currency?.toUpperCase() || "USD",
+              paymentType: "subscription",
+              subscriptionId: session.subscription,
+              source: "subscribe_page",
+            });
           }
         } catch (err) {
           console.warn("Could not retrieve checkout session details:", err);
@@ -371,6 +393,13 @@ export default {
             );
         if (result.isValid) {
           this.successMessage = this.$t("subscribePage.verifySuccess");
+          analyticsEcommerce.subscriptionVerified(
+            afterCheckout
+              ? "auto_param"
+              : fromLink
+              ? "email_link"
+              : "manual_code"
+          );
         } else {
           this.reportFailure(
             result.message || this.$t("subscribePage.errorVerifyFailed"),
@@ -425,6 +454,7 @@ export default {
           throw new Error("Stripe portal URL missing.");
         }
 
+        analyticsEcommerce.customerPortalOpened(activeSubscriptionId);
         window.location.href = data.url;
       } catch (err) {
         this.portalError =
