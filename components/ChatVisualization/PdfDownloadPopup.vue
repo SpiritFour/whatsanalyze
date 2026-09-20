@@ -228,10 +228,10 @@
 import { saveAs } from "file-saver";
 import { markRaw, toRaw } from "vue";
 import { GTAG_PAYMENT, GTAG_PDF, gtagEvent } from "~/utils/gtagValues";
+import { analyticsChat, analyticsEcommerce } from "~/composables/useAnalytics";
 import { fetchOneTimeCheckoutUrl } from "~/utils/subscription";
 import {
   INTRO_PRICE,
-  ONE_TIME_DISCOUNT_PERCENT,
   ONE_TIME_LIST_PRICE,
   ONE_TIME_PRICE,
   SUBSCRIPTION_PRICE,
@@ -337,15 +337,22 @@ export default {
     handleFreePdfClick() {
       this.downloadSample();
       this.gtagEvent("free_pdf_pressed", GTAG_PAYMENT);
+      analyticsChat.download("pdf_sample");
     },
     downloadFull() {
       gtagEvent("full_download", GTAG_PDF, 3);
+      analyticsChat.download("pdf_full");
       this.download(false);
       this.showDownloadPopup = false;
     },
     async payOneTimeStripe() {
       if (this.isOneTimeLoading) return;
       gtagEvent("created", GTAG_PAYMENT, 0);
+      analyticsEcommerce.beginCheckout({
+        checkoutType: "one_time",
+        source: "pdf_download_popup",
+        value: 2.99,
+      });
       this.isOneTimeLoading = true;
       try {
         rememberOneTimeCheckoutChat(this.currentChatFingerprint);

@@ -134,11 +134,15 @@ import { httpsCallable } from "firebase/functions";
 import { Chat } from "~/utils/transformChatData";
 import {
   GTAG_INTERACTION,
-  GTAG_LEAD,
   GTAG_NUM_PERSONS,
   GTAG_PAYMENT,
   gtagEvent,
 } from "~/utils/gtagValues";
+import {
+  analyticsChat,
+  analyticsEcommerce,
+  trackEvent,
+} from "~/composables/useAnalytics";
 import { useSubscriptionStore } from "~/stores/subscription";
 import { storeToRefs } from "pinia";
 import {
@@ -249,9 +253,14 @@ export default {
   created() {
     // eslint-disable-next-line no-undef
     if (import.meta.client) {
-      Object.keys(this.$route.query).forEach((key) => {
-        gtagEvent(key, GTAG_LEAD);
-      });
+      const query = this.$route.query;
+      const ref = query.ref || query.affiliate || query.partner || query.source;
+      if (ref) {
+        trackEvent("campaign_referral", {
+          referrer_code: String(ref),
+          landing_page: this.$route.path,
+        });
+      }
     }
   },
   mounted() {
@@ -339,6 +348,13 @@ export default {
         }
 
         gtagEvent("approved", GTAG_PAYMENT, 10);
+        analyticsEcommerce.purchase({
+          transactionId: session?.id || sessionId,
+          value: session?.amount_total ? session.amount_total / 100 : 2.99,
+          currency: session?.currency?.toUpperCase() || "USD",
+          paymentType: "one_time",
+          source: "one_time_pdf",
+        });
         useOneTimePurchase().value = persistOneTimePurchase(sessionId);
       } catch (err) {
         console.error("Could not confirm the one-time payment:", err);
@@ -368,6 +384,10 @@ export default {
           "analyzed_chat_" + this.chat.numPersonsInChat,
           GTAG_NUM_PERSONS,
           0
+        );
+        analyticsChat.chatAnalyzed(
+          this.chat.numPersonsInChat,
+          this.chat.numPersonsInChat > 2
         );
         saveChatSession(chatObject);
       }

@@ -200,7 +200,10 @@
     >
       <LandingCards :items="hookFeatures" />
       <div class="hook-actions">
-        <LandingButton :to="localePath({ path: '/', hash: '#results' })">
+        <LandingButton
+          :to="localePath({ path: '/', hash: '#results' })"
+          @click="analyticsTools.ctaClick('chat_heatmap', 'full_analyzer')"
+        >
           {{ t("toolsChatHeatmap.hookButton") }}
         </LandingButton>
         <p class="hook-note">
@@ -235,7 +238,7 @@
       cta-to="#dropzone-slot"
       :note="t('toolsChatHeatmap.ctaNote')"
       :disclaimer="t('toolsChatHeatmap.disclaimer')"
-      @click="scrollToDropzone"
+      @click="onBottomCtaClick"
     />
   </div>
 </template>
@@ -244,9 +247,15 @@
 import { ref, computed } from "vue";
 import ToolDropzone from "~/components/tools/ToolDropzone.vue";
 import type { ChatMessage, ChatAttachment } from "~/composables/useChatTool";
+import { analyticsTools } from "~/composables/useAnalytics";
 
 const { t } = useI18n();
 const localePath = useLocalePath();
+
+function onBottomCtaClick() {
+  scrollToDropzone();
+  analyticsTools.ctaClick("chat_heatmap", "scroll_to_dropzone");
+}
 
 // The last crumb is the tool's name from the shared catalogue
 // (composables/useSiteNav.ts), the same string the /tools index, the footer

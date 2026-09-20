@@ -18,6 +18,7 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
 import { CATEGORY_WRAPPED, GTAG_PAYMENT, gtagEvent } from "~/utils/gtagValues";
+import { analyticsEcommerce } from "~/composables/useAnalytics";
 
 definePageMeta({
   layout: "wrapped",
@@ -27,5 +28,6 @@ const localePath = useLocalePath();
 
 onMounted(() => {
   gtagEvent("canceled", GTAG_PAYMENT, 0, CATEGORY_WRAPPED);
+  analyticsEcommerce.checkoutCancelled("wrapped");
 });
 </script>

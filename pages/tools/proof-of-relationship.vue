@@ -9,13 +9,12 @@
       :cta-text="t('relationshipProof.heroCta')"
       :cta-to="analyzerPath"
       :note="t('relationshipProof.heroNote')"
+      @click="trackHeroCta"
     >
-      <LandingStatsMock
-        :days-label="t('relationshipProof.mockDays')"
-        :messages-label="t('relationshipProof.mockMessages')"
-        :people-label="t('relationshipProof.mockPeople')"
-        :example-label="t('exampleDataLabel')"
-      />
+      :days-label="t('relationshipProof.mockDays')"
+      :messages-label="t('relationshipProof.mockMessages')"
+      :people-label="t('relationshipProof.mockPeople')"
+      :example-label="t('exampleDataLabel')" />
     </LandingHero>
 
     <LandingSection
@@ -62,18 +61,27 @@
       :cta-to="analyzerPath"
       :note="t('relationshipProof.ctaNote')"
       :disclaimer="t('relationshipProof.disclaimer')"
+      @click="trackBottomCta"
     />
   </div>
 </template>
 
 <script>
 import { ONE_TIME_PRICE, formatPrice } from "~/utils/pricing";
+import { analyticsTools } from "~/composables/useAnalytics";
 
 export default {
   setup() {
     const { t, locale } = useI18n();
     const localePath = useLocalePath();
 
+    function trackHeroCta() {
+      analyticsTools.ctaClick("proof_of_relationship", "hero_analyzer");
+    }
+
+    function trackBottomCta() {
+      analyticsTools.ctaClick("proof_of_relationship", "full_analyzer");
+    }
     useSeoMeta({
       title: () => t("relationshipProof.seoTitle"),
       description: () => t("relationshipProof.seoDescription"),
@@ -174,6 +182,8 @@ export default {
       useCases,
       steps,
       faq,
+      trackHeroCta,
+      trackBottomCta,
     };
   },
 };

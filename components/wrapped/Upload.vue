@@ -62,7 +62,7 @@ import {
   GTAG_PAYMENT,
   gtagEvent,
 } from "~/utils/gtagValues";
-
+import { analyticsChat, analyticsWrapped } from "~/composables/useAnalytics";
 const localePath = useLocalePath();
 
 const statsStore = useStatsStore();
@@ -88,6 +88,7 @@ const handleFile = async (e: Event): Promise<void> => {
   if (!hasFreeUploadRemaining.value && !isSubscriptionValid.value) {
     showPaywall.value = true;
     gtagEvent("paywall_shown", GTAG_PAYMENT, 0, CATEGORY_WRAPPED);
+    analyticsWrapped.paywallViewed("upload_gate");
     input.value = "";
     return;
   }
@@ -102,12 +103,9 @@ const handleFile = async (e: Event): Promise<void> => {
     result.value = (await sendFile(file)) ?? undefined;
 
     if (result.value) {
-      gtagEvent(
-        "parsed",
-        GTAG_FILE,
-        result.value.getWordUsage.totalMessagesCount ?? 0,
-        CATEGORY_WRAPPED
-      );
+      const count = result.value.getWordUsage.totalMessagesCount ?? 0;
+      gtagEvent("parsed", GTAG_FILE, count, CATEGORY_WRAPPED);
+      analyticsChat.parsedSuccess(count);
     }
 
     if (hasFreeUploadRemaining.value) {
