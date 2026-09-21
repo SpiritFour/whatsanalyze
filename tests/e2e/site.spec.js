@@ -3,6 +3,7 @@
  * change somewhere else cannot quietly take a page down without anyone
  * noticing, and every one of them also fails on an uncaught runtime error.
  */
+const { readFile } = require("fs/promises");
 const { analyzeChat, EXAMPLE_CHAT, expect, test } = require("./fixtures");
 
 test.describe("the analyzer", () => {
@@ -99,6 +100,58 @@ test.describe("the analyzer", () => {
       .click();
     const download = await downloadPromise;
     expect(download.suggestedFilename()).toMatch(/\.pdf$/i);
+  });
+
+  test("keeps the site header out of the downloaded image", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await analyzeChat(page);
+
+    // What actually keeps it out: html2canvas drops these from its clone, so
+    // the sticky bar cannot be painted over the capture whatever the browser
+    // resolves its position to (#405). Headless Chromium happens to leave it
+    // out anyway, so the pixels below cannot stand in for this assertion.
+    await expect(page.locator(".site-header")).toHaveAttribute(
+      "data-html2canvas-ignore",
+      ""
+    );
+
+    const downloadPromise = page.waitForEvent("download");
+    await page
+      .getByRole("button", { name: "Download Results" })
+      .first()
+      .click();
+    const download = await downloadPromise;
+    expect(download.suggestedFilename()).toMatch(/\.png$/i);
+
+    // And the image still starts where it should: the analysis title on white,
+    // not a solid near-black bar the full width of the capture.
+    const image = await readFile(await download.path());
+    const darkShare = await page.evaluate(async (source) => {
+      const picture = new Image();
+      await new Promise((resolve, reject) => {
+        picture.onload = resolve;
+        picture.onerror = reject;
+        picture.src = source;
+      });
+
+      const canvas = document.createElement("canvas");
+      canvas.width = picture.naturalWidth;
+      canvas.height = picture.naturalHeight;
+      canvas.getContext("2d").drawImage(picture, 0, 0);
+
+      const strip = canvas
+        .getContext("2d")
+        .getImageData(0, 0, canvas.width, Math.min(40, canvas.height)).data;
+      let dark = 0;
+      for (let i = 0; i < strip.length; i += 4) {
+        if (strip[i] < 80 && strip[i + 1] < 80 && strip[i + 2] < 80) dark++;
+      }
+      return dark / (strip.length / 4);
+    }, `data:image/png;base64,${image.toString("base64")}`);
+
+    expect(darkShare).toBeLessThan(0.2);
   });
 
   test("opens the download section when linked straight to it", async ({
