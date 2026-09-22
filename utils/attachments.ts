@@ -157,7 +157,11 @@ export function zipFileToAttachment(file: {
     compressedContent?: Uint8Array;
     compression?: { magic: string };
   };
-}): { name: string; compressedContent?: Uint8Array; decompressedData?: Uint8Array } {
+}): {
+  name: string;
+  compressedContent?: Uint8Array;
+  decompressedData?: Uint8Array;
+} {
   const bytes = file._data?.compressedContent;
   const isStored = file._data?.compression?.magic === STORE_MAGIC;
   return isStored
