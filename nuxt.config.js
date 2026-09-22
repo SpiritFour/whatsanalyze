@@ -273,14 +273,6 @@ export default defineNuxtConfig({
             bundle: false,
             proxy: false,
           },
-      googleTagManager: local
-        ? false
-        : {
-            id: "GTM-W32PNH3",
-            trigger: "onNuxtReady",
-            bundle: false,
-            proxy: false,
-          },
     },
   },
 

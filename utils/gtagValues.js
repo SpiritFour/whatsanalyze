@@ -16,11 +16,10 @@ export function gtagEvent(
   value = "1",
   category = CATEGORY_HOME
 ) {
-  if (typeof window === "undefined") return;
+  if (typeof window === "undefined" || typeof window.gtag !== "function")
+    return;
 
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({
-    event: label + "_" + action,
+  window.gtag("event", label + "_" + action, {
     event_category: category,
     event_label: label,
     value: String(value),
