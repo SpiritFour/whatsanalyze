@@ -29,7 +29,6 @@ export const localizedPages = [
   "whatsapp-to-pdf",
   "wrapped",
   "wrapped/results",
-  "wrapped/subscription/verify",
   "wrapped/subscription/success",
   "wrapped/subscription/canceled",
 ];
@@ -42,7 +41,6 @@ export const localizedPages = [
 const notIndexable = new Set([
   "pwa-results",
   "wrapped/results",
-  "wrapped/subscription/verify",
   "wrapped/subscription/success",
   "wrapped/subscription/canceled",
 ]);
@@ -63,6 +61,9 @@ export const indexablePages = localizedPages.filter(
  */
 export const retiredPages = {
   "whatsapp-wrapped-year-review": "wrapped",
+  // Was a page whose whole job was to redirect to /subscribe. Nothing the
+  // backend sends ever pointed at it, so no query string is lost here.
+  "wrapped/subscription/verify": "subscribe",
 };
 
 /** Every retired path, per locale, mapped to its destination. */

@@ -47,6 +47,9 @@ globals:
   withDefaults: readonly
   onMounted: readonly
   useToolsNav: readonly
+  useToolBreadcrumbs: readonly
+  useToolSchema: readonly
+  scrollToDropzone: readonly
   storeToRefs: readonly
   defineEventHandler: readonly
   setHeader: readonly

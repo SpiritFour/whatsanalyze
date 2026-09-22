@@ -133,12 +133,10 @@
 import { httpsCallable } from "firebase/functions";
 import { Chat } from "~/utils/transformChatData";
 import {
-  GTAG_INTERACTION,
-  GTAG_NUM_PERSONS,
-  GTAG_PAYMENT,
-  gtagEvent,
-} from "~/utils/gtagValues";
-import { analyticsChat, trackEvent } from "~/composables/useAnalytics";
+  analyticsChat,
+  analyticsEcommerce,
+  trackEvent,
+} from "~/composables/useAnalytics";
 import { useSubscriptionStore } from "~/stores/subscription";
 import { storeToRefs } from "pinia";
 import {
@@ -343,7 +341,7 @@ export default {
           return;
         }
 
-        gtagEvent("approved", GTAG_PAYMENT, 10);
+        analyticsEcommerce.checkoutCompleted("one_time", "home_pdf");
         // The `purchase` event itself comes from the Stripe webhook, which sees
         // the sales this page never does: ad blockers, and buyers who close the
         // tab before it loads.
@@ -367,16 +365,6 @@ export default {
       if (!chatObject.default || this.chat === undefined) {
         this.attachments = chatObject.attachments;
         this.chat = new Chat(chatObject.messages);
-        if (this.chat.numPersonsInChat <= 2) {
-          gtagEvent("analyzed_pair_chat", GTAG_INTERACTION, 0);
-        } else {
-          gtagEvent("analyzed_group_chat", GTAG_INTERACTION, 0);
-        }
-        gtagEvent(
-          "analyzed_chat_" + this.chat.numPersonsInChat,
-          GTAG_NUM_PERSONS,
-          0
-        );
         analyticsChat.chatAnalyzed(
           this.chat.numPersonsInChat,
           this.chat.numPersonsInChat > 2

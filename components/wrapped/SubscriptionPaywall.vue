@@ -62,7 +62,6 @@
 import { ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
 import { fetchWrappedCheckoutUrl } from "~/utils/subscription";
-import { CATEGORY_WRAPPED, GTAG_PAYMENT, gtagEvent } from "~/utils/gtagValues";
 import { analyticsEcommerce } from "~/composables/useAnalytics";
 
 const props = defineProps<{
@@ -95,11 +94,9 @@ const startSubscription = async () => {
   if (isStarting.value) return;
   checkoutError.value = "";
 
-  gtagEvent("subscription_pressed_paywall", GTAG_PAYMENT, 1, CATEGORY_WRAPPED);
   analyticsEcommerce.beginCheckout({
     checkoutType: "subscription",
     source: "wrapped_paywall",
-    value: 4.99,
   });
 
   try {

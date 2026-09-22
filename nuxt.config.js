@@ -93,11 +93,6 @@ export default defineNuxtConfig({
     public: {
       local,
       baseUrl,
-      // Still needed to verify subscriptions taken out through PayPal before
-      // the move to Stripe. No new PayPal subscription can be created.
-      paypalClientId: local
-        ? "ARYQUp4C_oNjNUNkvSPzLeaiulItDmnHUU226OANt2haCKC2c70ZrKZTmRHCPldcu4SD22LmPEuonfec"
-        : "AUMWxSZrtBOA1RicR_3nGijYb8yYxyq2lxBjiwoQKfVc-8jfdPr5N7X5EFUackMCLb_K7HiKswnDBUJ8",
       // One project per environment. Firestore and the functions have to come
       // from the same project: the functions charge in the Stripe mode of the
       // project they run in, so a local build paying in test mode must not
@@ -150,7 +145,7 @@ export default defineNuxtConfig({
   ],
 
   tailwindcss: {
-    cssPath: "~/assets/wrapped/tailwind.css",
+    cssPath: "~/assets/tailwind.css",
     configPath: "tailwind.config.mjs",
     exposeConfig: false,
     viewer: false,

@@ -87,13 +87,7 @@
           <b class="text-wa-ink">{{ $t("pdfDownload") }}</b
           >?
         </p>
-        <UiButton
-          variant="secondary"
-          @click="
-            gtagEvent('jump_to_pdf_download_cta', GTAG_INTERACTION, 0);
-            scrollTo('#payButton', { offset: 100 });
-          "
-        >
+        <UiButton variant="secondary" @click="jumpToPdfDownload">
           {{ $t("goToPDF") }}
           <span aria-hidden="true">&rarr;</span>
         </UiButton>
@@ -107,13 +101,7 @@ import html2canvas from "html2canvas";
 import { downloadBase64File } from "~/utils/utils";
 import { scrollTo } from "~/utils/scroll";
 import { applySvgChartSnapshots, snapshotSvgCharts } from "~/utils/svgImage";
-import {
-  GTAG_INTERACTION,
-  GTAG_PAYMENT,
-  GTAG_RESULTS,
-  gtagEvent,
-} from "~/utils/gtagValues";
-import { analyticsChat } from "~/composables/useAnalytics";
+import { analyticsChat, analyticsSite } from "~/composables/useAnalytics";
 
 export default {
   name: "DownloadPopup",
@@ -126,14 +114,11 @@ export default {
       dialog: false,
       loading: false,
       suffix: this.isSimple ? "-top" : "",
-      GTAG_INTERACTION,
-      scrollTo,
     };
   },
   methods: {
     download: function () {
       this.loading = true;
-      gtagEvent("download_image", GTAG_RESULTS);
       analyticsChat.download("chart_image", "graphs");
       setTimeout(async () => {
         const graphs = document.querySelector("#download-graphs");
@@ -190,9 +175,12 @@ export default {
       }, 250);
     },
     paypalButtonPressed() {
-      gtagEvent("donation_download_results", GTAG_PAYMENT, 5);
+      analyticsSite.donateClicked("results_download");
     },
-    gtagEvent,
+    jumpToPdfDownload() {
+      analyticsSite.jumpToUpload("pdf_download_cta");
+      scrollTo("#payButton", { offset: 100 });
+    },
   },
 };
 </script>

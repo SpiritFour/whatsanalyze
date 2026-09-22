@@ -1,9 +1,16 @@
 /**
- * Unified Analytics Engine for WhatsAnalyze
+ * Every analytics event the site sends.
  *
  * Dispatches window.gtag('event', name, params) -> Google Analytics 4
  * (Property 262743198 / G-XYC2EWGZZ3). GTM/Bing Ads is not used.
+ *
+ * Events go through the typed helpers below rather than `trackEvent` directly,
+ * so the set of event names is the set of methods here. There used to be a
+ * second, untyped `gtagEvent` path alongside this one, carrying Universal
+ * Analytics' event_category/event_label vocabulary that GA4 has no use for —
+ * ten components fired both and every action was counted twice.
  */
+import { CURRENCY, INTRO_PRICE, ONE_TIME_PRICE } from "~/utils/pricing";
 
 /* eslint-disable no-unused-vars -- ambient type declaration, not a real binding */
 declare global {
@@ -138,6 +145,12 @@ export const analyticsEcommerce = {
     });
   },
 
+  /**
+   * The amounts come from utils/pricing.ts, which is what the pages quote and
+   * what the Stripe prices are configured with. Spelling them out here is how
+   * begin_checkout came to report $4.99 for a €7.99 sale, so the funnel
+   * disagreed with the purchase events the webhook sends.
+   */
   beginCheckout(options: {
     checkoutType: "subscription" | "one_time";
     priceId?: string;
@@ -148,18 +161,32 @@ export const analyticsEcommerce = {
     trackEvent("begin_checkout", {
       checkout_type: options.checkoutType,
       price_id: options.priceId || "default",
+      // A subscription is charged the discounted first month at checkout.
       value:
         options.value ??
-        (options.checkoutType === "subscription" ? 4.99 : 2.99),
-      currency: options.currency || "USD",
+        (options.checkoutType === "subscription"
+          ? INTRO_PRICE
+          : ONE_TIME_PRICE),
+      currency: options.currency || CURRENCY,
       source: options.source || "unknown",
     });
   },
 
   // No `purchase` here on purpose. It is sent from the Stripe webhook
-  // (`functions-wrapped/src/analytics/measurementProtocol.ts`), which sees every
+  // (`functions/src/analytics/measurementProtocol.ts`), which sees every
   // paid cent plus the renewals no browser is around for. GA4 does not
   // deduplicate by transaction id, so exactly one sender may exist.
+
+  /**
+   * Back from Stripe with a paid session. Deliberately not `purchase` —
+   * that one is the webhook's, and GA4 does not deduplicate.
+   */
+  checkoutCompleted(checkoutType: "subscription" | "one_time", source: string) {
+    trackEvent("checkout_completed", {
+      checkout_type: checkoutType,
+      source,
+    });
+  },
 
   checkoutCancelled(source: string) {
     trackEvent("checkout_cancelled", { source });
@@ -308,7 +335,77 @@ export const analyticsWrapped = {
   storyShared(method: "native" | "copy") {
     trackEvent("story_shared", { method });
   },
+
+  resultsViewed(isShared: boolean) {
+    trackEvent("wrapped_results_viewed", {
+      source: isShared ? "shared_link" : "own_upload",
+    });
+  },
 };
+
+/**
+ * Site-wide interactions that belong to no single product.
+ */
+export const analyticsSite = {
+  /** A CTA that scrolls the visitor to an upload box rather than navigating. */
+  jumpToUpload(source: string) {
+    trackEvent("jump_to_upload", { source });
+  },
+
+  pwaInstall(outcome: "accepted" | "dismissed") {
+    trackEvent("pwa_install", { outcome });
+  },
+
+  languageChanged(from: string, to: string) {
+    trackEvent("language_changed", { from, to });
+  },
+
+  /** The PayPal donate button on the results page. */
+  donateClicked(source: string) {
+    trackEvent("donate_clicked", { source });
+  },
+};
+
+/**
+ * The GA identifiers of this browser, read straight off the cookies gtag
+ * writes. Purchases are reported from the Stripe webhook, which sees the money
+ * but not the visitor — these are what let it file the sale under the campaign
+ * that brought the buyer in, instead of as a new direct user.
+ *
+ * Both are empty when GA never loaded: an ad blocker, or a visitor who
+ * declined the analytics cookies. The webhook still books the revenue, and it
+ * stays unattributed — which is what declining is supposed to mean.
+ */
+export function getAnalyticsIds(): { clientId?: string; sessionId?: string } {
+  const cookies = new Map<string, string>();
+  if (typeof document !== "undefined") {
+    for (const entry of document.cookie.split(";")) {
+      const separator = entry.indexOf("=");
+      if (separator === -1) continue;
+      cookies.set(entry.slice(0, separator).trim(), entry.slice(separator + 1));
+    }
+  }
+
+  // "GA1.1.1234567890.1700000000" — the client id is the last two parts.
+  const ga = cookies.get("_ga");
+  const clientId = ga ? ga.split(".").slice(-2).join(".") : undefined;
+
+  // "GS2.1.s1700000000$o3$g1$..." on the per-property cookie. There is only
+  // one GA4 container on this site, so the suffix does not have to be known.
+  const session = [...cookies.entries()].find(([key]) =>
+    key.startsWith("_ga_")
+  )?.[1];
+  const sessionId = session
+    ? session.split(".")[2]?.replace(/^s/, "").split("$")[0]
+    : undefined;
+
+  // Only what was actually found: the callable SDK turns an undefined property
+  // into a null on the wire, and a null id has no business reaching Stripe.
+  return {
+    ...(clientId ? { clientId } : {}),
+    ...(sessionId ? { sessionId } : {}),
+  };
+}
 
 /**
  * Nuxt Composable
@@ -320,5 +417,6 @@ export function useAnalytics() {
     tools: analyticsTools,
     chat: analyticsChat,
     wrapped: analyticsWrapped,
+    site: analyticsSite,
   };
 }

@@ -1,5 +1,5 @@
 import { httpsCallable } from "firebase/functions";
-import { getAnalyticsIds } from "~/utils/gtagValues";
+import { getAnalyticsIds } from "~/composables/useAnalytics";
 
 export const getSubscriptionParams = () => {
   if (typeof window === "undefined") return { id: null, email: null };
