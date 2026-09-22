@@ -24,8 +24,11 @@ const paypalApiBase = defineString("PAYPAL_API_BASE", {
 });
 
 async function getAccessToken(): Promise<string> {
+  // Trimmed: a secret stored with a trailing newline — which is what piping
+  // one in on the command line produces — corrupts the header and turns every
+  // legacy login into a 401.
   const credentials = Buffer.from(
-    `${paypalClientId.value()}:${paypalSecret.value()}`
+    `${paypalClientId.value().trim()}:${paypalSecret.value().trim()}`
   ).toString("base64");
 
   const response = await fetch(`${paypalApiBase.value()}/v1/oauth2/token`, {
