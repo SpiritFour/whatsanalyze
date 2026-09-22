@@ -75,12 +75,13 @@
 </template>
 
 <script>
-import { parseString } from "whatsapp-chat-parser";
-import JSZip from "jszip";
-import { GTAG_FILE, gtagEvent } from "~/utils/gtagValues";
 import { analyticsChat } from "~/composables/useAnalytics";
-import { markSystemMessages } from "~/utils/systemMessages";
-import { zipFileToAttachment } from "~/utils/attachments";
+import {
+  isZipFile,
+  parseChatFile,
+  parseSharedFiles,
+} from "~/composables/useChatTool";
+
 export default {
   name: "FileHandler",
   data() {
@@ -89,134 +90,55 @@ export default {
       wrongFile: false,
       processing: false,
       isSuccess: false,
-      attachments: {},
     };
   },
   methods: {
-    extendDataStructure(chatObject) {
-      let authors = {};
-      chatObject.messages.forEach(function (object, index) {
-        // WhatsApp exports names exactly as they are stored, and a contact
-        // saved as "John Doe " keeps that trailing space through every label,
-        // quote and file name built from it.
-        if (typeof object.author === "string") {
-          object.author = object.author.trim();
-        }
-        if (!(object.author in authors)) authors[object.author] = 0;
-        else authors[object.author] += 1;
-        object.absolute_id = index;
-        object.personal_id = authors[object.author];
-      });
-    },
+    /**
+     * Parsing happens in composables/useChatTool, which is also what the
+     * /tools pages use — one answer to what a WhatsApp export contains,
+     * whichever box the file was dropped into.
+     */
+    async processFileList(fileList, shared = false) {
+      const files = Array.from(fileList || []);
+      const wasDragged = this.isDragging;
 
-    zipLoadEndHandler(e) {
-      const arrayBuffer = e.target.result;
-      // reader.readAsArrayBuffer produced nothing (empty/corrupt file or read error):
-      // passing it into JSZip would blow up deep inside `loadAsync` with
-      // "Can't read the data of 'the loaded zip file'" — fail visibly instead.
-      if (!arrayBuffer || !arrayBuffer.byteLength) {
-        this.showErrorMessage("_empty_zip");
-        return;
-      }
-      const jszip = new JSZip();
-      jszip
-        .loadAsync(arrayBuffer)
-        .then((zipData) => {
-          let chatFile = this.getChatFile(zipData);
-          return parseString(chatFile, {
-            parseAttachments: true,
-          }).then((messages) => {
-            return {
-              messages: messages,
-              // we just pass a list of filenames with compressed contents here
-              attachments: Object.values(zipData.files).map(
-                zipFileToAttachment
-              ),
-            };
-          });
-        })
-        .then(this.updateMessages)
-        .catch((error) => {
-          console.error("ZIP parsing failed", error);
-          this.showErrorMessage();
-        });
-    },
+      this.isDragging = false;
+      this.processing = true;
+      this.isSuccess = false;
+      this.wrongFile = false;
 
-    async getChatFile(zipData) {
-      // this is the standard file on ios, if found return
-      const chatFile = zipData.file("_chat.txt");
-      if (chatFile) return chatFile.async("string");
+      if (!files.length) return this.showErrorMessage("_undefined_shared_file");
 
-      // otherwise search for potential other txt files
-      // take shortes one
-      return await zipData
-        .file(/.*(?:chat|whatsapp).*\.txt$/i)
-        .sort((a, b) => a.name.length - b.name.length)[0]
-        .async("string");
-    },
-
-    readFileAsArrayBuffer(file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(new Uint8Array(reader.result));
-        reader.onerror = reject;
-        reader.readAsArrayBuffer(file);
-      });
-    },
-
-    readSharedFiles(files) {
-      function findChatFile(files) {
-        let chatRegex = new RegExp(/.*(?:chat|whatsapp).*\.txt$/i);
-        return files.find((file) => {
-          return chatRegex.test(file.name);
-        });
+      const multiple = shared || files.length > 1;
+      if (!multiple) {
+        analyticsChat.uploadStarted(
+          isZipFile(files[0]) ? "zip" : "txt",
+          wasDragged ? "drop" : "picker"
+        );
       }
 
-      files = Array.from(files);
-      let chatFile = findChatFile(files);
-      if (chatFile === undefined) {
-        this.showErrorMessage();
-        return;
+      try {
+        const chatObject = multiple
+          ? await parseSharedFiles(files)
+          : await parseChatFile(files[0]);
+        this.updateMessages(chatObject);
+      } catch (error) {
+        console.error("Chat parsing failed", error);
+        this.showErrorMessage(error?.message);
       }
-      const reader = new FileReader();
-      reader.addEventListener("loadend", (loadedFile) => {
-        parseString(loadedFile.target.result, {
-          parseAttachments: true,
-        }).then(async (messages) => {
-          // the only difference to the zip file is, that these blobs are already inflated
-          let attachments = [];
-          // we would like to have all files as uint8arrays, as such we have to read the file in as array
-          await files.forEach(async (file) => {
-            const arr = await this.readFileAsArrayBuffer(file);
-            attachments.push({ name: file.name, decompressedData: arr });
-          });
-
-          this.updateMessages({
-            messages: messages,
-            attachments,
-          });
-        });
-      });
-      reader.readAsText(chatFile);
-    },
-
-    txtLoadEndHandler(e) {
-      parseString(e.target.result).then((messages) =>
-        this.updateMessages({ messages: messages })
-      );
     },
 
     updateMessages(chatObject) {
-      markSystemMessages(chatObject.messages);
-      this.extendDataStructure(chatObject);
       this.$emit("new_messages", chatObject);
       this.$emit("hide_explanation", true);
       this.processing = false;
       this.isSuccess = true;
-      gtagEvent("parsed", GTAG_FILE);
       analyticsChat.parsedSuccess(
         chatObject.messages?.length || 0,
-        chatObject.numPersonsInChat
+        // Participants, counted off the parsed messages. The transformed chat
+        // knows this too, but it does not exist yet at this point.
+        new Set(chatObject.messages?.map((message) => message.author)).size,
+        chatObject.durationMs
       );
     },
 
@@ -225,40 +147,7 @@ export default {
       this.processing = false;
       this.isSuccess = false;
       const errorCode = text ? String(text).replace(/\s+/g, "_") : "unknown";
-      gtagEvent("error_" + errorCode, GTAG_FILE, 0);
       analyticsChat.parsedError(errorCode);
-    },
-    processFileList(fileList, shared = false) {
-      this.isDragging = false;
-      this.processing = true;
-      this.isSuccess = false;
-      this.wrongFile = false;
-
-      if (shared || fileList.length > 1) {
-        //do multiple here
-        this.readSharedFiles(fileList);
-      } else {
-        let file = fileList[0];
-        if (!file) return this.showErrorMessage("_undefined_shared_file");
-        const isZip =
-          /^application\/(?:x-)?zip(?:-compressed)?$/.test(file.type) ||
-          file.name.endsWith(".zip");
-        analyticsChat.uploadStarted(
-          isZip ? "zip" : "txt",
-          this.isDragging ? "drop" : "picker"
-        );
-        // do singles here
-        const reader = new FileReader();
-        if (/^application\/(?:x-)?zip(?:-compressed)?$/.test(file.type)) {
-          reader.addEventListener("loadend", this.zipLoadEndHandler);
-          reader.readAsArrayBuffer(file);
-        } else if (file.type === "text/plain") {
-          reader.addEventListener("loadend", this.txtLoadEndHandler);
-          reader.readAsText(file);
-        } else {
-          this.showErrorMessage();
-        }
-      }
     },
 
     dragOver() {
@@ -270,14 +159,11 @@ export default {
     },
 
     drop(e) {
-      let fileList = e.dataTransfer.files;
-      this.processFileList(fileList);
+      this.processFileList(e.dataTransfer.files);
     },
 
     requestUploadFile() {
-      let src = this.$el.querySelector("#uploadmytextfile");
-      let fileList = src.files;
-      this.processFileList(fileList);
+      this.processFileList(this.$el.querySelector("#uploadmytextfile").files);
     },
   },
 };

@@ -127,9 +127,8 @@ const activeSubscription = (overrides = {}) => ({
   ...overrides,
 });
 
-/** Upload a chat and wait until the analysis is on screen. */
-const analyzeChat = async (page, file = EXAMPLE_CHAT) => {
-  await page.locator("#uploadmytextfile").setInputFiles(file);
+/** Wait until a parsed chat is actually painted on screen. */
+const expectAnalysis = async (page) => {
   await expect(page.getByText("Chat Timeline", { exact: true })).toBeVisible();
   // `toBeVisible` passes on a fully transparent element, so it says nothing
   // about whether the analysis was painted. A reveal animation that never
@@ -139,6 +138,42 @@ const analyzeChat = async (page, file = EXAMPLE_CHAT) => {
     "opacity",
     "1"
   );
+};
+
+/** Upload a chat and wait until the analysis is on screen. */
+const analyzeChat = async (page, file = EXAMPLE_CHAT) => {
+  await page.locator("#uploadmytextfile").setInputFiles(file);
+  await expectAnalysis(page);
+};
+
+/**
+ * A chat export packed the way WhatsApp packs one when media is included.
+ * `shape` picks between the two layouts the parser has to cope with: iOS
+ * writes `_chat.txt`, Android names the file after the contact.
+ */
+const zipExport = async (shape = "ios") => {
+  const JSZip = require("jszip");
+  const fs = require("fs");
+  const chat = fs.readFileSync(EXAMPLE_CHAT);
+  const zip = new JSZip();
+
+  if (shape === "ios") {
+    zip.file("_chat.txt", chat);
+    // A stored (non-DEFLATE) entry, which is what an already-compressed JPEG
+    // ends up as and what used to throw "invalid block type" on inflate.
+    zip.file("IMG-0001.jpg", Buffer.from([0xff, 0xd8, 0xff, 0xe0]));
+  } else {
+    // The longer name is a decoy: picking it would parse "decoy" as the chat
+    // and leave the page with no messages at all.
+    zip.file("WhatsApp Chat with Bob (2).txt", "decoy");
+    zip.file("WhatsApp Chat with Bob.txt", chat);
+  }
+
+  return {
+    name: `${shape}-export.zip`,
+    mimeType: "application/zip",
+    buffer: await zip.generateAsync({ type: "nodebuffer" }),
+  };
 };
 
 /** A second export, so the paid chat and the new one are clearly different. */
@@ -161,6 +196,8 @@ const otherChatFile = () => {
 
 module.exports = {
   EXAMPLE_CHAT,
+  expectAnalysis,
+  zipExport,
   STRIPE_CHECKOUT,
   activeSubscription,
   analyzeChat,

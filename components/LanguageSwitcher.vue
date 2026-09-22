@@ -22,11 +22,7 @@
 
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from "vue";
-import {
-  CATEGORY_WRAPPED,
-  GTAG_INTERACTION,
-  gtagEvent,
-} from "~/utils/gtagValues";
+import { analyticsSite } from "~/composables/useAnalytics";
 
 const { locale, locales } = useI18n();
 const switchLocalePath = useSwitchLocalePath();
@@ -61,12 +57,7 @@ onBeforeUnmount(() => {
 
 const onChange = (event) => {
   const target = event.target.value;
-  gtagEvent(
-    `language_${locale.value}_to_${target}`,
-    GTAG_INTERACTION,
-    0,
-    CATEGORY_WRAPPED
-  );
+  analyticsSite.languageChanged(locale.value, target);
   return navigateTo(switchLocalePath(target));
 };
 </script>

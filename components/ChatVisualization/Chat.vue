@@ -94,7 +94,7 @@
 <script>
 import { getDateString } from "~/utils/utils";
 import { getAttachment } from "~/utils/attachments.ts";
-import { GTAG_INTERACTION, gtagEvent } from "~/utils/gtagValues";
+import { analyticsChat } from "~/composables/useAnalytics";
 
 export default {
   name: "Chat",
@@ -163,7 +163,7 @@ export default {
     changeEgoTo(name) {
       this.$emit("setEgo", name);
       this.selectedEgo = name;
-      gtagEvent("change_ego_chat", GTAG_INTERACTION, 0);
+      analyticsChat.participantChanged();
     },
     async _getAttachment(fileName) {
       return await getAttachment(fileName, this.attachments);

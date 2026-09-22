@@ -50,7 +50,6 @@ import { useI18n } from "vue-i18n";
 import { useStatsStore } from "~/stores/wrapped/stats";
 import { useUserDataStore } from "~/stores/wrapped/userDataStore";
 import { serializeShareInfo } from "~/utils/wrapped/sharing/param";
-import { CATEGORY_WRAPPED, GTAG_RESULTS, gtagEvent } from "~/utils/gtagValues";
 import { analyticsWrapped } from "~/composables/useAnalytics";
 const statsStore = useStatsStore();
 const userDataStore = useUserDataStore();
@@ -153,12 +152,10 @@ const handleShare = async () => {
         url,
       });
       shareMessageKey.value = "results.share.messages.nativeShare";
-      gtagEvent("share_native", GTAG_RESULTS, 2, CATEGORY_WRAPPED);
       analyticsWrapped.storyShared("native");
     } else {
       await copyToClipboard(url);
       shareMessageKey.value = "results.share.messages.linkCopied";
-      gtagEvent("share_copy", GTAG_RESULTS, 2, CATEGORY_WRAPPED);
       analyticsWrapped.storyShared("copy");
     }
   } catch (error) {

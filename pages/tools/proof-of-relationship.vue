@@ -106,22 +106,7 @@ export default {
       },
     ]);
 
-    useHead(() => ({
-      script: [
-        {
-          type: "application/ld+json",
-          innerHTML: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: faq.value.map((item) => ({
-              "@type": "Question",
-              name: item.q,
-              acceptedAnswer: { "@type": "Answer", text: item.a },
-            })),
-          }),
-        },
-      ],
-    }));
+    useToolSchema({ faqItems: faq });
 
     const stats = computed(() =>
       [1, 2, 3, 4].map((i) => ({
@@ -160,11 +145,7 @@ export default {
     // The last crumb is the tool's name from the shared catalogue
     // (composables/useSiteNav.ts), the same string the /tools index, the footer
     // and the header use. Each page used to name itself differently here.
-    const breadcrumbs = computed(() => [
-      { label: "WhatsAnalyze", to: localePath("/") },
-      { label: t("toolsHub.headerTools"), to: localePath("/tools") },
-      { label: t("toolsHub.toolRelationshipTitle") },
-    ]);
+    const breadcrumbs = useToolBreadcrumbs("toolsHub.toolRelationshipTitle");
 
     return {
       t,

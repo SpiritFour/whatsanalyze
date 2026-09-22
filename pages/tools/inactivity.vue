@@ -288,11 +288,7 @@ const localePath = useLocalePath();
 // The last crumb is the tool's name from the shared catalogue
 // (composables/useSiteNav.ts), the same string the /tools index, the footer
 // and the header use. Each page used to name itself differently here.
-const breadcrumbs = computed(() => [
-  { label: "WhatsAnalyze", to: localePath("/") },
-  { label: t("toolsHub.headerTools"), to: localePath("/tools") },
-  { label: t("toolsHub.toolInactivityTitle") },
-]);
+const breadcrumbs = useToolBreadcrumbs("toolsHub.toolInactivityTitle");
 
 // SEO Metadata & Generative Engine Optimization
 useSeoMeta({
@@ -331,38 +327,13 @@ const faqItems = computed(() => [
 ]);
 
 // JSON-LD Structured Data
-useHead(() => ({
-  script: [
-    {
-      type: "application/ld+json",
-      innerHTML: JSON.stringify({
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "SoftwareApplication",
-            name: t("toolsInactivity.seoTitle"),
-            operatingSystem: "All (Web-based)",
-            applicationCategory: "UtilitiesApplication",
-            offers: {
-              "@type": "Offer",
-              price: "0",
-              priceCurrency: "USD",
-            },
-            description: t("toolsInactivity.seoDescription"),
-          },
-          {
-            "@type": "FAQPage",
-            mainEntity: faqItems.value.map((item) => ({
-              "@type": "Question",
-              name: item.q,
-              acceptedAnswer: { "@type": "Answer", text: item.a },
-            })),
-          },
-        ],
-      }),
-    },
-  ],
-}));
+useToolSchema({
+  faqItems,
+  app: {
+    nameKey: "toolsInactivity.seoTitle",
+    descriptionKey: "toolsInactivity.seoDescription",
+  },
+});
 
 const analysis = ref<ChatInactivityAnalysis | null>(null);
 
@@ -451,12 +422,6 @@ function formatDate(d: Date): string {
   }).format(d);
 }
 
-function scrollToDropzone() {
-  const el = document.getElementById("dropzone-slot");
-  if (el) {
-    el.scrollIntoView({ behavior: "smooth" });
-  }
-}
 function openFullAnalysis() {
   // Shared chat is already loaded in useSharedChat
   analyticsTools.ctaClick("inactivity", "full_analyzer");

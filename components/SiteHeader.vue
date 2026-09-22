@@ -150,9 +150,9 @@ const supportLinks = computed(() => {
 
   return [
     {
-      to: onWrapped
-        ? localePath("/wrapped/subscription/verify")
-        : localePath("/subscribe"),
+      // /subscribe serves both products. Wrapped used to link at a page of
+      // its own that did nothing but redirect here.
+      to: localePath("/subscribe"),
       label: t("nav.subscription"),
       icon: isVerified.value
         ? "mdi-check-circle-outline"

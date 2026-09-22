@@ -58,7 +58,7 @@ import { useStatsStore } from "~/stores/wrapped/stats";
 import { useUserDataStore } from "~/stores/wrapped/userDataStore";
 import { parseShareInfo } from "~/utils/wrapped/sharing/param";
 import { useI18n } from "vue-i18n";
-import { CATEGORY_WRAPPED, GTAG_RESULTS, gtagEvent } from "~/utils/gtagValues";
+import { analyticsWrapped } from "~/composables/useAnalytics";
 
 definePageMeta({
   layout: "wrapped",
@@ -142,13 +142,7 @@ watch(
 );
 
 onMounted(() => {
-  const isShared = !!buildSearchFromQuery();
-  gtagEvent(
-    isShared ? "viewed_shared" : "viewed",
-    GTAG_RESULTS,
-    1,
-    CATEGORY_WRAPPED
-  );
+  analyticsWrapped.resultsViewed(!!buildSearchFromQuery());
 });
 </script>
 

@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { GTAG_INTERACTION, gtagEvent } from "~/utils/gtagValues";
+import { analyticsSite } from "~/composables/useAnalytics";
 import chatImage from "~/assets/my-chat.jpg";
 import { scrollTo } from "~/utils/scroll";
 
@@ -49,17 +49,18 @@ export default {
   data() {
     return {
       chatImage,
-      GTAG_INTERACTION,
     };
   },
   methods: {
     clickHandler() {
       if (!this.to) {
-        gtagEvent("jump_to_filehandler_cta", GTAG_INTERACTION, 0);
-        scrollTo(".filehandler", { offset: 300 });
+        analyticsSite.jumpToUpload("cta");
+        // Same selector as ExportExplainer: `.filehandler` matched nothing
+        // once the upload box moved to BEM class names, so this CTA scrolled
+        // nowhere.
+        scrollTo("#dropzone-slot, .file-handler", { offset: 100 });
       }
     },
-    gtagEvent,
   },
 };
 </script>
