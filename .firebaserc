@@ -1,7 +1,6 @@
 {
   "projects": {
     "default": "whatsanalyze-80665",
-    "dev": "whatsanalyze-wrapped",
-    "wrapped-prod": "whatsanalyze-wrapped-prod"
+    "dev": "whatsanalyze-wrapped"
   }
 }

@@ -22,11 +22,11 @@ echo "2) Production (prod)"
 read -p "Enter choice [1-2]: " env_choice
 
 if [ "$env_choice" = "1" ]; then
-    PROJECT="wrapped-dev"
+    PROJECT="dev"
     ENV_FILE=".env.whatsanalyze-wrapped"
 elif [ "$env_choice" = "2" ]; then
-    PROJECT="wrapped-prod"
-    ENV_FILE=".env.whatsanalyze-wrapped-prod"
+    PROJECT="default"
+    ENV_FILE=".env.whatsanalyze-80665"
 else
     echo "❌ Invalid choice"
     exit 1

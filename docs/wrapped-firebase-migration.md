@@ -112,9 +112,9 @@ What came back was open at the wildcard in both projects, so the committed rules
 are not a copy of production — see the commit that added them.
 
 They are deployed to `whatsanalyze-80665` and to `dev`; the live ruleset there
-matches `firestore.rules` in this repository. `whatsanalyze-wrapped-prod` still
-has its original open rules and keeps them, because it is only a rollback target
-now. Note that nothing in CI deploys rules — `firebase deploy --only
+matches `firestore.rules` in this repository. `whatsanalyze-wrapped-prod` kept
+its original open rules to the end and was deleted with them; see Phase 5.
+Note that nothing in CI deploys rules — `firebase deploy --only
 firestore:rules` is manual, so a change to `firestore.rules` does not reach
 production by merging it. Exercise upload, share, open-link and the feedback
 form against `dev` before deploying, because a mistake here locks real users out
@@ -234,13 +234,31 @@ Deploy the frontend against main-project Firestore, then verify in this order:
   `functions-wrapped/README.md`, refunded immediately afterwards
 - the confirmation email arrives through the main project's extension
 
-### Phase 5: decommission
+### Phase 5: decommission (done)
 
-Delete the wrapped functions, uninstall the extension, and remove the
-`FIREBASE_SERVICE_ACCOUNT_WHATSANALYZE_WRAPPED` GitHub secret.
+`whatsanalyze-wrapped-prod` was deleted on 2026-09-22, after 25 sampled `data`
+documents were confirmed byte-identical against `whatsanalyze-80665`. GCP holds
+a deleted project recoverable for roughly 30 days — `gcloud projects undelete
+whatsanalyze-wrapped-prod` — and after that it is gone, along with
+`gs://whatsanalyze-migration-eur3`, which belonged to it and held both export
+snapshots.
 
-Keep both Firebase projects in read-only limbo for a billing cycle or two before
-deleting them. They are the rollback.
+`wrapped.whatsanalyze.com` now serves a static redirect to
+`whatsanalyze.com/wrapped` out of the old repository, tagged
+`utm_source=wrapped_legacy` so the arrivals are attributable in GA4. That closed
+the last write path into the old project.
+
+Two Firebase projects remain, and the names are the confusing part — the one
+whose id says "wrapped" is the development project. The display names now say
+which is which:
+
+| Project id | Display name | Role |
+| --- | --- | --- |
+| `whatsanalyze-80665` | whatsanalyze prod | production |
+| `whatsanalyze-wrapped` | whatsanalyze dev | development; id frozen from when Wrapped was separate |
+
+Still outstanding: remove the `FIREBASE_SERVICE_ACCOUNT_WHATSANALYZE_WRAPPED`
+GitHub secret if nothing references it.
 
 ## Open decision: analytics
 
