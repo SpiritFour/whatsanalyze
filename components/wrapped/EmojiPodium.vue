@@ -37,7 +37,7 @@ import { onMounted, ref } from "vue";
 import { animate } from "motion";
 import type { EmojiStats } from "~/utils/wrapped/parsing/types";
 
-const props = defineProps<{
+defineProps<{
   topThreeEmojies: EmojiStats[];
 }>();
 

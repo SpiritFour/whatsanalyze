@@ -1,8 +1,9 @@
 <template>
   <div class="landing-cards">
-    <template v-for="item in items" :key="item.title">
+    <template v-for="item in items">
       <NuxtLink
         v-if="item.to"
+        :key="item.title"
         :to="item.to"
         class="landing-card landing-card--link"
       >
@@ -17,7 +18,7 @@
         </span>
       </NuxtLink>
 
-      <div v-else class="landing-card">
+      <div v-else :key="item.title" class="landing-card">
         <v-icon v-if="item.icon" class="landing-card__icon" size="32">
           {{ item.icon }}
         </v-icon>
