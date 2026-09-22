@@ -3,7 +3,14 @@
  * change somewhere else cannot quietly take a page down without anyone
  * noticing, and every one of them also fails on an uncaught runtime error.
  */
-const { analyzeChat, EXAMPLE_CHAT, expect, test } = require("./fixtures");
+const {
+  analyzeChat,
+  EXAMPLE_CHAT,
+  expect,
+  expectAnalysis,
+  test,
+  zipExport,
+} = require("./fixtures");
 
 test.describe("the analyzer", () => {
   test("renders the landing page", async ({ page }) => {
@@ -35,6 +42,22 @@ test.describe("the analyzer", () => {
     });
     expect(leaked).toEqual([]);
   });
+
+  // A .zip is what WhatsApp produces whenever the export includes media, so
+  // it is at least as common as the .txt every other test here uses — and it
+  // goes down a different branch of the parser, which nothing covered.
+  for (const shape of ["ios", "android"]) {
+    test(`analyzes a ${shape}-shaped zip export`, async ({ page }) => {
+      await page.goto("/");
+      await page
+        .locator("#uploadmytextfile")
+        .setInputFiles(await zipExport(shape));
+      await expectAnalysis(page);
+      await expect(
+        page.getByText("Messages per Day", { exact: true })
+      ).toBeVisible();
+    });
+  }
 
   // The three below cover the results-page QA round (#411). Nothing failed
   // these when they were filed, because nothing was watching those numbers.

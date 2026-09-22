@@ -257,8 +257,8 @@ test.describe("returning from a Wrapped checkout", () => {
 });
 
 // Customers who subscribed before the move to Stripe still log in on the same
-// page with their PayPal subscription id. Those subscriptions live in the old
-// project and are unknown to verifySubscription.
+// page with their PayPal subscription id. Those were never written to the
+// Stripe collection verifySubscription reads, so they go to PayPal directly.
 test.describe("verifying a legacy PayPal subscription", () => {
   const logIn = async (page, email, subscriptionId) => {
     await page.goto("/subscribe");
@@ -268,15 +268,12 @@ test.describe("verifying a legacy PayPal subscription", () => {
   };
 
   test("checks it against PayPal, never against Stripe", async ({ page }) => {
-    const paypalCalls = await stubCallable(page, "checksubscriberstatus", {
+    const paypalCalls = await stubCallable(page, "verifyPaypalSubscription", {
       isValid: true,
-      data: {
-        subscriptionId: "I-XBCXVY6FXX47",
-        status: "ACTIVE",
-        email: "legacy@example.com",
-        name: { given_name: "Legacy", surname: "Subscriber" },
-        expirationTimestamp: new Date(Date.now() + 20 * 86400000).toISOString(),
-      },
+      subscriptionId: "I-XBCXVY6FXX47",
+      email: "legacy@example.com",
+      customerName: "Legacy Subscriber",
+      expiresAt: new Date(Date.now() + 20 * 86400000).toISOString(),
     });
     const stripeCalls = await stubCallable(page, "verifySubscription", {
       isValid: false,
@@ -293,15 +290,15 @@ test.describe("verifying a legacy PayPal subscription", () => {
     expect(stripeCalls).toHaveLength(0);
     const payload = paypalCalls[0].postDataJSON().data;
     expect(payload.subscriptionId).toBe("I-XBCXVY6FXX47");
-    expect(payload.client_id).toBeTruthy();
-    // Looking up by email instead would resolve a different subscription.
+    // By id only. Looking up by email would resolve a different subscription,
+    // and the backend now reads the authoritative one off PayPal anyway.
     expect(payload.email).toBeUndefined();
   });
 
   test("reports a cancelled one as not found", async ({ page }) => {
-    await stubCallable(page, "checksubscriberstatus", {
+    await stubCallable(page, "verifyPaypalSubscription", {
       isValid: false,
-      data: {},
+      message: "Subscription not found",
     });
 
     await logIn(page, "lapsed@example.com", "I-CANCELLED123");

@@ -5,23 +5,20 @@
     is the pricing table the subscriber just paid to get rid of.
   -->
   <UiButton
-    to="/subscribe"
+    :to="localePath('/subscribe')"
     variant="secondary"
     block
     class="mt-3"
-    @click="gtagEvent('subscription_pressed', GTAG_PAYMENT)"
+    @click="analyticsEcommerce.viewPricing('subscribe_btn')"
   >
     {{ $t("chooseSubscription") }}
   </UiButton>
 </template>
 
-<script>
-import { GTAG_PAYMENT, gtagEvent } from "~/utils/gtagValues";
+<script setup>
+import { analyticsEcommerce } from "~/composables/useAnalytics";
 
-export default {
-  data() {
-    return { GTAG_PAYMENT };
-  },
-  methods: { gtagEvent },
-};
+// Without this the German and French pages sent their visitors to the English
+// /subscribe.
+const localePath = useLocalePath();
 </script>

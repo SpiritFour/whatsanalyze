@@ -5,7 +5,7 @@
  * single table came to show "7,99 Euro", "7.99 EUR" and "€10/month" at once.
  *
  * These are the amounts the Stripe prices are configured with — PRO_PRICE_ID
- * and ONE_TIME_PRICE_ID in functions-wrapped/.env.*, sent from
+ * and ONE_TIME_PRICE_ID in functions/.env.*, sent from
  * nuxt.config.js. A Stripe price cannot be edited, so changing one of these
  * means a new price id in all three.
  */

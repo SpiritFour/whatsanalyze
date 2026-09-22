@@ -147,7 +147,7 @@ import img5 from "@/assets/img/Android/5.png";
 import img5_lazy from "@/assets/img/Android/5copy.png";
 import img6 from "@/assets/img/Android/6.png";
 import img6_lazy from "@/assets/img/Android/6copy.png";
-import { GTAG_INSTALL, GTAG_INTERACTION, gtagEvent } from "~/utils/gtagValues";
+import { analyticsSite } from "~/composables/useAnalytics";
 import { scrollTo } from "~/utils/scroll";
 
 let apple = () => false;
@@ -175,7 +175,6 @@ export default {
   },
   data() {
     return {
-      GTAG_INTERACTION,
       deferredPrompt: null,
       installButtonStatus: false,
       tabStatus: [0, 0],
@@ -355,7 +354,9 @@ export default {
   },
   methods: {
     clickHandler() {
-      gtagEvent("jump_to_filehandler_" + this.tab, GTAG_INTERACTION, 0);
+      analyticsSite.jumpToUpload(
+        this.tab === 0 ? "export_guide_ios" : "export_guide_android"
+      );
       scrollTo("#dropzone-slot, .file-handler", { offset: 100 });
     },
     goToStep(index) {
@@ -375,7 +376,7 @@ export default {
           // Wait for the user to respond to the prompt
           const { outcome } = await this.deferredPrompt.userChoice;
           // Optionally, send analytics event with outcome of user choice
-          gtagEvent("pwa_" + outcome, GTAG_INSTALL, 2);
+          analyticsSite.pwaInstall(outcome);
 
           // We've used the prompt, and can't use it again, throw it away
           this.deferredPrompt = null;
@@ -400,7 +401,6 @@ export default {
         });
       }
     },
-    gtagEvent,
   },
 };
 </script>

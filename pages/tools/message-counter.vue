@@ -223,11 +223,7 @@ function onBottomCtaClick() {
 // The last crumb is the tool's name from the shared catalogue
 // (composables/useSiteNav.ts), the same string the /tools index, the footer
 // and the header use. Each page used to name itself differently here.
-const breadcrumbs = computed(() => [
-  { label: "WhatsAnalyze", to: localePath("/") },
-  { label: t("toolsHub.headerTools"), to: localePath("/tools") },
-  { label: t("toolsHub.toolCounterTitle") },
-]);
+const breadcrumbs = useToolBreadcrumbs("toolsHub.toolCounterTitle");
 
 useSeoMeta({
   title: () => t("toolsMessageCounter.seoTitle"),
@@ -270,13 +266,6 @@ const linesPerMessageCaption = computed(() =>
         avg: linesPerMessage.value.toLocaleString(locale.value),
       })
 );
-
-function scrollToDropzone() {
-  const el = document.getElementById("dropzone-slot");
-  if (el) {
-    el.scrollIntoView({ behavior: "smooth" });
-  }
-}
 
 const hookFeatures = computed(() => [
   {
@@ -335,38 +324,13 @@ const faqItems = computed(() => [
   },
 ]);
 
-useHead(() => ({
-  script: [
-    {
-      type: "application/ld+json",
-      innerHTML: JSON.stringify({
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "SoftwareApplication",
-            name: t("toolsMessageCounter.seoTitle"),
-            operatingSystem: "All (Web-based)",
-            applicationCategory: "UtilitiesApplication",
-            offers: {
-              "@type": "Offer",
-              price: "0",
-              priceCurrency: "USD",
-            },
-            description: t("toolsMessageCounter.seoDescription"),
-          },
-          {
-            "@type": "FAQPage",
-            mainEntity: faqItems.value.map((item) => ({
-              "@type": "Question",
-              name: item.q,
-              acceptedAnswer: { "@type": "Answer", text: item.a },
-            })),
-          },
-        ],
-      }),
-    },
-  ],
-}));
+useToolSchema({
+  faqItems,
+  app: {
+    nameKey: "toolsMessageCounter.seoTitle",
+    descriptionKey: "toolsMessageCounter.seoDescription",
+  },
+});
 </script>
 
 <style scoped lang="scss">

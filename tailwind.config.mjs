@@ -19,7 +19,7 @@ export default {
     "./components/GroupOthers.vue",
     "./layouts/wrapped.vue",
     "./pages/wrapped/**/*.{js,vue,ts}",
-    "./assets/wrapped/**/*.{css,scss}",
+    "./assets/**/*.{css,scss}",
   ],
   theme: {
     extend: {

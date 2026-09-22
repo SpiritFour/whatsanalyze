@@ -52,16 +52,10 @@
 <script lang="ts" setup>
 import { ref, watch } from "vue";
 import { storeToRefs } from "pinia";
-import { sendFile } from "~/assets/wrapped/workers";
+import { sendFile } from "~/assets/workers";
 import { useStatsStore } from "~/stores/wrapped/stats";
 import { useSubscriptionStore } from "~/stores/subscription";
 import { useUploadAccessStore } from "~/stores/wrapped/uploadAccessStore";
-import {
-  CATEGORY_WRAPPED,
-  GTAG_FILE,
-  GTAG_PAYMENT,
-  gtagEvent,
-} from "~/utils/gtagValues";
 import { analyticsChat, analyticsWrapped } from "~/composables/useAnalytics";
 const localePath = useLocalePath();
 
@@ -87,14 +81,13 @@ const handleFile = async (e: Event): Promise<void> => {
 
   if (!hasFreeUploadRemaining.value && !isSubscriptionValid.value) {
     showPaywall.value = true;
-    gtagEvent("paywall_shown", GTAG_PAYMENT, 0, CATEGORY_WRAPPED);
     analyticsWrapped.paywallViewed("upload_gate");
     input.value = "";
     return;
   }
 
   const fileType = file.name.endsWith(".zip") ? "zip" : "txt";
-  gtagEvent(`upload_${fileType}`, GTAG_FILE, 1, CATEGORY_WRAPPED);
+  analyticsChat.uploadStarted(fileType, "picker");
 
   statsStore.$reset();
   isLoading.value = true;
@@ -104,7 +97,6 @@ const handleFile = async (e: Event): Promise<void> => {
 
     if (result.value) {
       const count = result.value.getWordUsage.totalMessagesCount ?? 0;
-      gtagEvent("parsed", GTAG_FILE, count, CATEGORY_WRAPPED);
       analyticsChat.parsedSuccess(count);
     }
 

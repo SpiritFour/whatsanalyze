@@ -127,59 +127,49 @@ export const useSubscriptionStore = defineStore("subscription", {
     },
     /**
      * Verify a subscription that was taken out through PayPal, before the move
-     * to Stripe. Those live in the old project's Firestore and are unknown to
-     * verifySubscription, so they are checked against PayPal directly.
+     * to Stripe. Those were never written to the Stripe collection that
+     * verifySubscription reads, so they are checked against PayPal directly.
      */
     async verifyPaypal(email: string, subscriptionId: string) {
       this.setLoading(true);
       try {
         const nuxtApp = useNuxtApp();
-        const config = useRuntimeConfig();
         const callable = httpsCallable(
           nuxtApp.$functions as any,
-          "checksubscriberstatus"
+          "verifyPaypalSubscription"
         );
-        // Look up by id only: passing an email makes the endpoint resolve the
-        // subscription from the email instead, ignoring the id we were given.
-        const res = await callable({
-          subscriptionId,
-          client_id: config.public.paypalClientId,
-        });
-        const payload = res.data as {
-          isValid?: boolean;
-          data?: {
-            subscriptionId?: string;
-            email?: string;
-            name?: { given_name?: string; surname?: string } | string;
-            expirationTimestamp?: string | number;
-          };
+        // By id only. The email is what the visitor typed; the authoritative
+        // one comes back from PayPal.
+        const res = await callable({ subscriptionId });
+        const data = res.data as {
+          isValid: boolean;
+          message?: string;
+          subscriptionId?: string;
+          email?: string;
+          customerName?: string;
+          expiresAt?: string;
         };
 
-        if (!payload?.isValid) {
+        if (!data?.isValid) {
           this.clearSubscription();
-          return { isValid: false, message: "Subscription not found" };
+          return {
+            isValid: false,
+            message: data?.message || "Subscription not found",
+          };
         }
-
-        const paypalName = payload.data?.name;
-        const customerName =
-          typeof paypalName === "string"
-            ? paypalName
-            : [paypalName?.given_name, paypalName?.surname]
-                .filter(Boolean)
-                .join(" ") || undefined;
 
         // PayPal reports the next billing date. When it is missing we still
         // let an active subscriber in, on the same 30 day window the Stripe
         // webhook grants, rather than locking out someone who is paying.
-        const nextBilling = new Date(payload.data?.expirationTimestamp ?? "");
+        const nextBilling = new Date(data.expiresAt ?? "");
         const expiresAt = Number.isNaN(nextBilling.getTime())
           ? new Date(Date.now() + 30 * 24 * 3600 * 1000)
           : nextBilling;
 
         this.setSubscription({
-          email: payload.data?.email || email,
-          subscriptionId: payload.data?.subscriptionId || subscriptionId,
-          customerName,
+          email: data.email || email,
+          subscriptionId: data.subscriptionId || subscriptionId,
+          customerName: data.customerName,
           expiresAt: expiresAt.toISOString(),
         });
 

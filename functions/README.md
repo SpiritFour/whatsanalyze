@@ -1,3 +1,9 @@
+# Cloud Functions
+
+Every function the site runs, in one codebase. `functions/` used to be the
+PayPal-era JavaScript and `functions-wrapped/` the Stripe TypeScript; they are
+merged here. See `../docs/firebase-and-payments.md` for what is deployed.
+
 # Project switching
 firebase use dev # whatsanalyze-wrapped
 firebase use default # whatsanalyze-80665
@@ -59,12 +65,17 @@ Functions target **Node 22** (latest LTS supported by Firebase Functions runtime
 There are some values which are different between dev and prod. For that we use environment files (`.env.FIREBASE_PROJECT_NAME`). It is possible to overwrite those when running locally by creating a `.env.local` file and adding the values there. This file takes precedence over the `.env.FIREBASE_PROJECT_NAME` file. There are also some values that are sensitive, so we treat them as secrets.
 
 ### Secrets 
-`STRIPE_WEBHOOK_SECRET` and `STRIPE_SECRET_KEY` are secrets which we can not simply put in the `.env.FIREBASE_PROJECT_NAME` files. For that reason we create and manage secrets via the firebase cli:
+`STRIPE_WEBHOOK_SECRET`, `STRIPE_SECRET_KEY`, `PAYPAL_SECRET` and `GA_API_SECRET` are secrets which we can not simply put in the `.env.FIREBASE_PROJECT_NAME` files. For that reason we create and manage secrets via the firebase cli:
 
 ```bash
 firebase --project $PROJECT functions:secrets:set STRIPE_SECRET_KEY
 firebase --project $PROJECT functions:secrets:set STRIPE_WEBHOOK_SECRET
+firebase --project $PROJECT functions:secrets:set PAYPAL_SECRET
+firebase --project $PROJECT functions:secrets:set GA_API_SECRET
 ```
+
+`PAYPAL_SECRET` only serves `verifyPaypalSubscription`, the read-only login
+left over from before the move to Stripe. See `docs/firebase-and-payments.md`.
 You can use the `scripts/setup-stripe.sh` file for that. Make sure that there are no whitespaces in the secrets stored. You can access the secret with `firebase --project $PROJECT functions:secrets:access STRIPE_SECRET_KEY`.
 
 ## Init mail templates

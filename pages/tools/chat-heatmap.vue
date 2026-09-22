@@ -260,11 +260,7 @@ function onBottomCtaClick() {
 // The last crumb is the tool's name from the shared catalogue
 // (composables/useSiteNav.ts), the same string the /tools index, the footer
 // and the header use. Each page used to name itself differently here.
-const breadcrumbs = computed(() => [
-  { label: "WhatsAnalyze", to: localePath("/") },
-  { label: t("toolsHub.headerTools"), to: localePath("/tools") },
-  { label: t("toolsHub.toolHeatmapTitle") },
-]);
+const breadcrumbs = useToolBreadcrumbs("toolsHub.toolHeatmapTitle");
 
 useSeoMeta({
   title: () => t("toolsChatHeatmap.seoTitle"),
@@ -313,13 +309,6 @@ function heatColor(pct: number) {
   const intensity = Math.min(1, Math.max(0, (pct || 0) / 100));
   const lightness = 84 - intensity * 48;
   return `hsl(200, 82%, ${lightness}%)`;
-}
-
-function scrollToDropzone() {
-  const el = document.getElementById("dropzone-slot");
-  if (el) {
-    el.scrollIntoView({ behavior: "smooth" });
-  }
 }
 
 const hookFeatures = computed(() => [
@@ -379,38 +368,13 @@ const faqItems = computed(() => [
   },
 ]);
 
-useHead(() => ({
-  script: [
-    {
-      type: "application/ld+json",
-      innerHTML: JSON.stringify({
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "SoftwareApplication",
-            name: t("toolsChatHeatmap.seoTitle"),
-            operatingSystem: "All (Web-based)",
-            applicationCategory: "UtilitiesApplication",
-            offers: {
-              "@type": "Offer",
-              price: "0",
-              priceCurrency: "USD",
-            },
-            description: t("toolsChatHeatmap.seoDescription"),
-          },
-          {
-            "@type": "FAQPage",
-            mainEntity: faqItems.value.map((item) => ({
-              "@type": "Question",
-              name: item.q,
-              acceptedAnswer: { "@type": "Answer", text: item.a },
-            })),
-          },
-        ],
-      }),
-    },
-  ],
-}));
+useToolSchema({
+  faqItems,
+  app: {
+    nameKey: "toolsChatHeatmap.seoTitle",
+    descriptionKey: "toolsChatHeatmap.seoDescription",
+  },
+});
 </script>
 
 <style scoped lang="scss">

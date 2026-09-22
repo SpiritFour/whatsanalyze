@@ -63,7 +63,7 @@
             size="lg"
             class="mt-6"
             v-bind="activatorProps"
-            @click="gtagEvent('full_pdf_pressed', GTAG_PAYMENT)"
+            @click="trackFullPdfInterest('pdf_full_button')"
           >
             <IconDownload />
             <span v-html="$t('downloadFullChatPDF')"></span>
@@ -181,7 +181,7 @@
               block
               @click="
                 showDownloadPopup = true;
-                gtagEvent('full_pdf_pressed', GTAG_PAYMENT);
+                trackFullPdfInterest('pdf_full_card');
               "
             >
               <IconDownload />
@@ -227,7 +227,6 @@
 <script>
 import { saveAs } from "file-saver";
 import { markRaw, toRaw } from "vue";
-import { GTAG_PAYMENT, GTAG_PDF, gtagEvent } from "~/utils/gtagValues";
 import { analyticsChat, analyticsEcommerce } from "~/composables/useAnalytics";
 import { fetchOneTimeCheckoutUrl } from "~/utils/subscription";
 import {
@@ -258,8 +257,6 @@ export default {
       showDownloadPopup: false,
       isLoading: false,
       isOneTimeLoading: false,
-      GTAG_PAYMENT,
-      GTAG_PDF,
       discountPercent: ONE_TIME_DISCOUNT_PERCENT,
       progress: 0,
       pdfWorker: null,
@@ -335,24 +332,24 @@ export default {
       this.$nextTick(() => scrollToSettled("#payButton", { offset: 100 }));
       this.$nextTick(() => this.downloadFull());
     },
+    /** Someone reached for the paid PDF: the pricing card is what they see. */
+    trackFullPdfInterest(source) {
+      analyticsEcommerce.viewPricing(source, "one_time");
+    },
     handleFreePdfClick() {
       this.downloadSample();
-      this.gtagEvent("free_pdf_pressed", GTAG_PAYMENT);
       analyticsChat.download("pdf_sample");
     },
     downloadFull() {
-      gtagEvent("full_download", GTAG_PDF, 3);
       analyticsChat.download("pdf_full");
       this.download(false);
       this.showDownloadPopup = false;
     },
     async payOneTimeStripe() {
       if (this.isOneTimeLoading) return;
-      gtagEvent("created", GTAG_PAYMENT, 0);
       analyticsEcommerce.beginCheckout({
         checkoutType: "one_time",
         source: "pdf_download_popup",
-        value: 2.99,
       });
       this.isOneTimeLoading = true;
       try {
@@ -409,7 +406,6 @@ export default {
       }
     },
     downloadSample() {
-      gtagEvent("sample_download", GTAG_PDF, 2);
       const query = (this.$route && this.$route.query) || {};
       this.download(!("free" in query));
     },
@@ -441,7 +437,6 @@ export default {
       this.pdfWorker.terminate();
       this.pdfWorker = null;
     },
-    gtagEvent,
   },
 };
 </script>
