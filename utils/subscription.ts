@@ -1,4 +1,5 @@
 import { httpsCallable } from "firebase/functions";
+import { getAnalyticsIds } from "~/utils/gtagValues";
 
 export const getSubscriptionParams = () => {
   if (typeof window === "undefined") return { id: null, email: null };
@@ -48,6 +49,9 @@ export const fetchSubscriptionCheckoutUrl = async (options?: {
     mode: options?.mode || "subscription",
     successUrl: options?.successUrl,
     cancelUrl: options?.cancelUrl,
+    // Sent along so the webhook can attribute the sale it reports. This is the
+    // last moment the browser and the payment are in the same place.
+    analytics: getAnalyticsIds(),
   });
   const { url } = response.data as { url?: string };
 

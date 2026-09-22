@@ -138,11 +138,7 @@ import {
   GTAG_PAYMENT,
   gtagEvent,
 } from "~/utils/gtagValues";
-import {
-  analyticsChat,
-  analyticsEcommerce,
-  trackEvent,
-} from "~/composables/useAnalytics";
+import { analyticsChat, trackEvent } from "~/composables/useAnalytics";
 import { useSubscriptionStore } from "~/stores/subscription";
 import { storeToRefs } from "pinia";
 import {
@@ -348,13 +344,9 @@ export default {
         }
 
         gtagEvent("approved", GTAG_PAYMENT, 10);
-        analyticsEcommerce.purchase({
-          transactionId: session?.id || sessionId,
-          value: session?.amount_total ? session.amount_total / 100 : 2.99,
-          currency: session?.currency?.toUpperCase() || "USD",
-          paymentType: "one_time",
-          source: "one_time_pdf",
-        });
+        // The `purchase` event itself comes from the Stripe webhook, which sees
+        // the sales this page never does: ad blockers, and buyers who close the
+        // tab before it loads.
         useOneTimePurchase().value = persistOneTimePurchase(sessionId);
       } catch (err) {
         console.error("Could not confirm the one-time payment:", err);

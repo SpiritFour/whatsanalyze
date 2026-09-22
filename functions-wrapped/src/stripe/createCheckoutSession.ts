@@ -15,7 +15,31 @@ interface CreateCheckoutSessionRequest {
   mode?: "subscription" | "payment";
   successUrl?: string;
   cancelUrl?: string;
+  /** GA identifiers of the browser starting this checkout, see below. */
+  analytics?: { clientId?: string; sessionId?: string };
 }
+
+/**
+ * The purchase is reported from the webhook, which knows the money but not the
+ * visitor. Pinning the browser's GA identifiers to the Stripe objects here is
+ * the only moment both are in the same place, and it is what keeps the sale
+ * attributed to the campaign that brought the buyer in. Stripe metadata values
+ * have to be strings, and are capped well above what these need.
+ */
+const analyticsMetadata = (data: CreateCheckoutSessionRequest) => {
+  const metadata: Record<string, string> = {};
+  const clientId = data.analytics?.clientId;
+  const sessionId = data.analytics?.sessionId;
+
+  if (typeof clientId === "string" && clientId) {
+    metadata.ga_client_id = clientId.slice(0, 100);
+  }
+  if (typeof sessionId === "string" && sessionId) {
+    metadata.ga_session_id = sessionId.slice(0, 100);
+  }
+
+  return metadata;
+};
 
 export const createCheckoutSession = onCall(
   { secrets: [stripeSecretKey] },
@@ -70,6 +94,8 @@ export const createCheckoutSession = onCall(
     const cancel_url =
       ensureSameOrigin(data.cancelUrl, origin, "cancelUrl") || defaultCancelUrl;
 
+    const metadata = analyticsMetadata(data);
+
     try {
       const session = await stripe.checkout.sessions.create({
         mode,
@@ -82,6 +108,10 @@ export const createCheckoutSession = onCall(
         discounts: introCoupon ? [{ coupon: introCoupon }] : undefined,
         success_url,
         cancel_url,
+        metadata,
+        // Renewals arrive as invoices months later, long after the checkout
+        // session is gone, so the subscription has to carry its own copy.
+        subscription_data: mode === "subscription" ? { metadata } : undefined,
       });
 
       // ❗ onCall cannot redirect → return the URL.

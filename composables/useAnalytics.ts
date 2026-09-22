@@ -156,23 +156,10 @@ export const analyticsEcommerce = {
     });
   },
 
-  purchase(options: {
-    transactionId: string;
-    value: number;
-    currency?: string;
-    paymentType: "subscription" | "one_time";
-    subscriptionId?: string;
-    source?: string;
-  }) {
-    trackEvent("purchase", {
-      transaction_id: options.transactionId,
-      value: options.value,
-      currency: options.currency || "USD",
-      payment_type: options.paymentType,
-      subscription_id: options.subscriptionId,
-      source: options.source,
-    });
-  },
+  // No `purchase` here on purpose. It is sent from the Stripe webhook
+  // (`functions-wrapped/src/analytics/measurementProtocol.ts`), which sees every
+  // paid cent plus the renewals no browser is around for. GA4 does not
+  // deduplicate by transaction id, so exactly one sender may exist.
 
   checkoutCancelled(source: string) {
     trackEvent("checkout_cancelled", { source });
