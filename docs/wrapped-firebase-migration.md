@@ -109,9 +109,15 @@ curl -s -H "Authorization: Bearer $T" -H "x-goog-user-project: $PROJECT" \
 ```
 
 What came back was open at the wildcard in both projects, so the committed rules
-are not a copy of production — see the commit that added them. They have not
-been deployed; deploy them to `dev` and exercise upload, share, open-link and
-the feedback form before promoting, because a mistake here locks real users out
+are not a copy of production — see the commit that added them.
+
+They are deployed to `whatsanalyze-80665` and to `dev`; the live ruleset there
+matches `firestore.rules` in this repository. `whatsanalyze-wrapped-prod` still
+has its original open rules and keeps them, because it is only a rollback target
+now. Note that nothing in CI deploys rules — `firebase deploy --only
+firestore:rules` is manual, so a change to `firestore.rules` does not reach
+production by merging it. Exercise upload, share, open-link and the feedback
+form against `dev` before deploying, because a mistake here locks real users out
 of sharing rather than failing loudly.
 
 ### Phase 1: repoint code at the main project
@@ -132,42 +138,36 @@ default alias, clean up `.firebaserc`, and move the values from
 `.env.whatsanalyze-wrapped*` onto the main project, dropping the wrapped-only
 entries from `ALLOWED_ORIGINS`.
 
-### Phase 2: Stripe rewiring (overlap window open)
+### Phase 2: Stripe rewiring (done)
 
 The Stripe account itself does not change. Customers, subscriptions, prices and
 the intro coupon all stay where they are. What changes is where Stripe delivers
 webhooks.
 
-Steps 1 to 4 are done. Both endpoints are registered and enabled, so every
-`checkout.session.completed` and `invoice.payment_succeeded` is delivered twice:
+**Closed on 2026-09-19.** One endpoint remains:
 
 | Endpoint | Project | Behaviour |
 | --- | --- | --- |
-| `we_1SeeXYL4rDqbYflolVUjE6OD` | `whatsanalyze-wrapped-prod` | unchanged; still the only one emailing customers |
-| `we_1UFoB1L4rDqbYflosczPlQXS` | `whatsanalyze-80665` | verifies signatures, writes `subscriptions`, sends no mail |
+| `we_1UFoB1L4rDqbYflosczPlQXS` | `whatsanalyze-80665` | verifies signatures, writes `subscriptions`, mails the confirmation |
+| ~~`we_1SeeXYL4rDqbYflolVUjE6OD`~~ | ~~`whatsanalyze-wrapped-prod`~~ | deleted |
 
-`whatsanalyze-80665` runs with `SEND_CONFIRMATION_EMAIL=false`, confirmed on the
-deployed service and not only in the env file. Its `subscriptions` mirror has
-been current since the second endpoint was registered, so the Phase 3 import
-only has to backfill what existed before that point.
+The overlap ran with `SEND_CONFIRMATION_EMAIL=false` on `whatsanalyze-80665`, so
+only the old deployment mailed while both endpoints were live. Its
+`subscriptions` mirror was current from the moment the second endpoint was
+registered, which is why the Phase 3 import only had to backfill what existed
+before that point.
 
-Nothing forces this state to end. Every day in it is another day of
-subscriptions written to both projects, and the handover is undone by deleting
-the new endpoint.
-
-What remains, once the mirror has been seen working against real traffic:
-
-5. Delete the old endpoint.
-6. Flip `SEND_CONFIRMATION_EMAIL` to true on `whatsanalyze-80665` and redeploy.
-
-That order matters. Reversed, every customer subscribing in between gets two
-identical confirmation emails, because nothing downstream deduplicates.
+Closing it was ordered: the old endpoint was deleted first, then
+`SEND_CONFIRMATION_EMAIL` flipped to true and the functions redeployed.
+Reversed, every customer subscribing in between gets two identical confirmation
+emails, because nothing downstream deduplicates. The same order applies to any
+future second endpoint on this Stripe account.
 
 Deploy the wrapped codebase explicitly — `firebase deploy --only functions:wrapped`.
 The bare `--only functions` the CLI suggests after a secret change also deploys
 the PayPal codebase that shares the project.
 
-### Phase 3: data migration
+### Phase 3: data migration (done)
 
 `subscriptions`, `mail` and `mailTemplates` are small, and during the
 dual-webhook window `subscriptions` repairs itself. `data` is the real payload
@@ -218,7 +218,14 @@ already there is a genuine no-op, so the second pass can only add.
 Timing still helps. Wrapped peaks in December and is close to idle the rest of
 the year, so the gap between passes 1 and 3 is cheapest outside the season.
 
-### Phase 4: cutover
+Both passes ran on 2026-09-19, either side of the #398 merge, through
+`gs://whatsanalyze-migration-eur3/cutover-2026-09-19{,-pass2}`. 1905 documents
+each time — nothing was created in the gap. Note the bucket belongs to
+`whatsanalyze-wrapped-prod`, so the import needed `whatsanalyze-80665`'s
+Firestore service agent granted read on it first; a cross-project import fails
+without that.
+
+### Phase 4: cutover (done)
 
 Deploy the frontend against main-project Firestore, then verify in this order:
 
