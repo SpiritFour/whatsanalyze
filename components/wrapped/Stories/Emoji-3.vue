@@ -42,7 +42,6 @@ import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useI18n } from "vue-i18n";
 import { useStatsStore } from "~/stores/wrapped/stats";
-import SoftOrbs from "~/components/wrapped/Style/SoftOrbs.vue";
 import type { EmojiOverTimeAnalysis } from "~/utils/wrapped/parsing/types";
 
 const statsStore = useStatsStore();

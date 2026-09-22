@@ -26,7 +26,7 @@ import * as logger from "firebase-functions/logger";
 // this will be the maximum concurrent request count.
 setGlobalOptions({ maxInstances: 1 });
 
-export const hello = onCall({ cors: true }, async (request: any) => {
+export const hello = onCall({ cors: true }, async () => {
   return {
     message: "Hello from Firebase Functions!",
     timestamp: new Date().toISOString(),

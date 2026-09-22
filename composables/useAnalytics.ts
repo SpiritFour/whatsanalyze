@@ -5,12 +5,14 @@
  * (Property 262743198 / G-XYC2EWGZZ3). GTM/Bing Ads is not used.
  */
 
+/* eslint-disable no-unused-vars -- ambient type declaration, not a real binding */
 declare global {
   interface Window {
     dataLayer?: unknown[];
     gtag?: (...args: unknown[]) => void;
   }
 }
+/* eslint-enable no-unused-vars */
 
 export interface EventParams {
   [key: string]: string | number | boolean | null | undefined;
@@ -45,7 +47,7 @@ export function sanitizeEventName(rawName: string): string {
   // Replace spaces, dashes, dots with underscores
   let name = rawName
     .trim()
-    .replace(/[\s\-\.]+/g, "_")
+    .replace(/[\s\-.]+/g, "_")
     // Remove any character that is not alphanumeric or underscore
     .replace(/[^a-zA-Z0-9_]/g, "")
     .toLowerCase();
@@ -79,7 +81,7 @@ export function sanitizeParams(
     // Clean key
     const cleanKey = key
       .trim()
-      .replace(/[\s\-\.]+/g, "_")
+      .replace(/[\s\-.]+/g, "_")
       .replace(/[^a-zA-Z0-9_]/g, "")
       .toLowerCase()
       .slice(0, 40);

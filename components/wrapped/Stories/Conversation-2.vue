@@ -85,7 +85,6 @@ import {
 } from "chart.js";
 import { useI18n } from "vue-i18n";
 import { useStatsStore } from "~/stores/wrapped/stats";
-import SoftOrbs from "~/components/wrapped/Style/SoftOrbs.vue";
 
 ChartJS.register(
   CategoryScale,

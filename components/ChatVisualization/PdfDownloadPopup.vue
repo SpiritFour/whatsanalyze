@@ -232,6 +232,7 @@ import { analyticsChat, analyticsEcommerce } from "~/composables/useAnalytics";
 import { fetchOneTimeCheckoutUrl } from "~/utils/subscription";
 import {
   INTRO_PRICE,
+  ONE_TIME_DISCOUNT_PERCENT,
   ONE_TIME_LIST_PRICE,
   ONE_TIME_PRICE,
   SUBSCRIPTION_PRICE,
