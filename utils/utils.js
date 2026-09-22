@@ -151,11 +151,30 @@ export const getImgSizes = function (imgUrl) {
   });
 };
 
+/**
+ * The canvas a chart draws into, once it exists. The PDF is built from the
+ * charts already on the page, and asking for one the moment the results
+ * appear used to throw: Chart.js needs a frame or two to mount, and the
+ * download that starts by itself on the way back from a paid checkout beat
+ * it. The failure was silent — the spinner stopped and no file arrived.
+ */
+const chartCanvas = (selector, timeoutMs = 10000) =>
+  new Promise((resolve, reject) => {
+    const deadline = Date.now() + timeoutMs;
+    const look = () => {
+      const canvas = document.querySelector(`${selector} canvas`);
+      if (canvas instanceof HTMLCanvasElement) return resolve(canvas);
+      if (Date.now() > deadline)
+        return reject(
+          new Error(`Could not find chart canvas in "${selector}"`),
+        );
+      requestAnimationFrame(look);
+    };
+    look();
+  });
+
 export const loadImage = async function (selector) {
-  const canvas = document.querySelector(`${selector} canvas`);
-  if (!(canvas instanceof HTMLCanvasElement)) {
-    throw new Error(`Could not find chart canvas in "${selector}"`);
-  }
+  const canvas = await chartCanvas(selector);
 
   const imgUrl = canvas.toDataURL("image/png");
   const sizes = await getImgSizes(imgUrl);

@@ -161,7 +161,13 @@ export default defineNuxtConfig({
   ],
 
   tailwindcss: {
-    cssPath: "~/assets/tailwind.css",
+    // Not injected globally: Tailwind's utilities are only used by the
+    // results, the tools and /wrapped, and 37 KB gzipped of render-blocking
+    // CSS on the landing page for components nobody has opened yet was the
+    // single biggest thing left in front of the first paint. The components
+    // that opt in (.wa-scope / .wrapped-scope) import it themselves, so it
+    // travels in their chunk.
+    cssPath: false,
     configPath: "tailwind.config.mjs",
     exposeConfig: false,
     viewer: false,
