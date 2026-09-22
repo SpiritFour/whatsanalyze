@@ -80,7 +80,11 @@ export const verifyPaypalSubscription = onCall(
       );
 
       // A subscription id nobody recognises is a failed login, not an outage.
-      if (response.status === 404) {
+      // PayPal says 404 for a well-formed id it cannot find and 400
+      // (INVALID_RESOURCE_ID) for one that is not shaped like an id at all —
+      // a typo in the form produces the second, and answering it with a 500
+      // tells the customer the site is broken rather than that the id is.
+      if (response.status === 404 || response.status === 400) {
         return { isValid: false, message: "Subscription not found" };
       }
 
