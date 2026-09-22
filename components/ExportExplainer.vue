@@ -151,7 +151,7 @@ import { analyticsSite } from "~/composables/useAnalytics";
 import { scrollTo } from "~/utils/scroll";
 
 let apple = () => false;
-// eslint-disable-next-line no-undef
+
 if (import.meta.client) {
   apple = () => {
     return (
@@ -383,12 +383,11 @@ export default {
         }
       }
     },
-    // eslint-disable-next-line no-unused-vars
+
     showInstallPromotion(status) {
       this.installButtonStatus = status;
     },
     catchPWA() {
-      // eslint-disable-next-line no-undef
       if (import.meta.client) {
         window.addEventListener("beforeinstallprompt", (e) => {
           // Prevent the mini-infobar from appearing on mobile

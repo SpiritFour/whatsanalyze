@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import { chatDurationInDays, participantMessages } from "./utils";
 
 describe("chatDurationInDays", () => {

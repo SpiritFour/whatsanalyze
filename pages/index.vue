@@ -245,7 +245,6 @@ export default {
     },
   },
   created() {
-    // eslint-disable-next-line no-undef
     if (import.meta.client) {
       const query = this.$route.query;
       const ref = query.ref || query.affiliate || query.partner || query.source;

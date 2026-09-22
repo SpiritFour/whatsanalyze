@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import { Chat } from "./transformChatData";
 
 describe("Chat.removeSystemMessages", () => {

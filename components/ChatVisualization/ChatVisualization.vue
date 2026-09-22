@@ -12,7 +12,7 @@
       />
     </v-row>
     <v-row>
-      <Chat :attachments="attachments" :chat="chat" @setEgo="setEgo" />
+      <Chat :attachments="attachments" :chat="chat" @set-ego="setEgo" />
     </v-row>
   </v-col>
 </template>
