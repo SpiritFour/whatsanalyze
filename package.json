@@ -27,14 +27,14 @@
     "deploy-sebi": "nuxt generate && rm dist/CNAME && push-dir --remote=https://github.com/fellnerse/fellnerse.github.io.git --dir=dist --branch=gh-pages --cleanup",
     "format": "prettier . --write --ignore-unknown",
     "format:check": "prettier . --check --ignore-unknown",
-    "lint": "eslint . --cache",
-    "lint:fix": "eslint . --cache --fix",
+    "lint": "eslint . --ext .js,.vue,.ts --cache",
+    "lint:fix": "eslint . --ext .js,.vue,.ts --cache --fix",
     "prepare": "husky",
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown",
-    "*.{js,vue}": "eslint --cache --fix",
+    "*.{js,vue,ts}": "eslint --cache --fix",
     "*.{js,css,md,vue}": "prettier --write"
   },
   "dependencies": {

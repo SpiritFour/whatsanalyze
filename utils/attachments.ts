@@ -1,12 +1,16 @@
-import * as JSZip from "jszip";
 import pako from "pako";
 
+// eslint's no-unused-vars doesn't understand TS enum members (the config only
+// wires up @typescript-eslint/parser, not its lint rules) — these are used
+// throughout this file as MimeTypeGroup.image etc.
+/* eslint-disable no-unused-vars */
 export enum MimeTypeGroup {
   image,
   video,
   audio,
   other,
 }
+/* eslint-enable no-unused-vars */
 
 interface MimeTypeData {
   mimeType: string | undefined;
@@ -137,6 +141,32 @@ export async function getAttachment(
   }
 
   return renderAttachment(fileName, decompressedData);
+}
+
+// JSZip stores an entry's raw bytes as-is when the zip's DEFLATE pass decided
+// they wouldn't shrink (common for already-compressed media, e.g. iOS export
+// zips full of JPEGs). Only entries actually compressed with DEFLATE need
+// inflating — running STORE bytes through pako throws "invalid block type".
+const STORE_MAGIC = "\x00\x00";
+
+// builds an attachment record from a raw JSZip entry, routing stored bytes
+// straight through and compressed bytes to the lazy inflate path
+export function zipFileToAttachment(file: {
+  name: string;
+  _data?: {
+    compressedContent?: Uint8Array;
+    compression?: { magic: string };
+  };
+}): {
+  name: string;
+  compressedContent?: Uint8Array;
+  decompressedData?: Uint8Array;
+} {
+  const bytes = file._data?.compressedContent;
+  const isStored = file._data?.compression?.magic === STORE_MAGIC;
+  return isStored
+    ? { name: file.name, decompressedData: bytes }
+    : { name: file.name, compressedContent: bytes };
 }
 
 // this functions inflates ziped files
