@@ -1,4 +1,4 @@
-import pako from "pako";
+import { Inflate } from "pako";
 
 // eslint's no-unused-vars doesn't understand TS enum members (the config only
 // wires up @typescript-eslint/parser, not its lint rules) — these are used
@@ -171,7 +171,7 @@ export function zipFileToAttachment(file: {
 
 // this functions inflates ziped files
 function inflate(data: any) {
-  const inflater = new pako.Inflate({ raw: true });
+  const inflater = new Inflate({ raw: true });
   const chunkSize = 1024; // adjust as needed
   let offset = 0;
 
