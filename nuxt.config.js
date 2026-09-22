@@ -177,10 +177,9 @@ export default defineNuxtConfig({
       styles: true,
     },
     vuetifyOptions: {
-      icons: {
-        defaultSet: "mdi",
-        sets: "mdi",
-      },
+      // The set itself is registered in plugins/vuetify-icons.js: naming one
+      // here is what makes the module inject @mdi/font's stylesheet.
+      icons: false,
       theme: {
         defaultTheme: "light",
         themes: {
