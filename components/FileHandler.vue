@@ -80,6 +80,7 @@ import JSZip from "jszip";
 import { GTAG_FILE, gtagEvent } from "~/utils/gtagValues";
 import { analyticsChat } from "~/composables/useAnalytics";
 import { markSystemMessages } from "~/utils/systemMessages";
+import { zipFileToAttachment } from "~/utils/attachments";
 export default {
   name: "FileHandler",
   data() {
@@ -128,12 +129,9 @@ export default {
             return {
               messages: messages,
               // we just pass a list of filenames with compressed contents here
-              attachments: Object.values(zipData.files).map((file) => {
-                return {
-                  name: file.name,
-                  compressedContent: file._data.compressedContent,
-                };
-              }),
+              attachments: Object.values(zipData.files).map(
+                zipFileToAttachment
+              ),
             };
           });
         })

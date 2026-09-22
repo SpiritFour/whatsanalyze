@@ -14,7 +14,6 @@
 <script lang="ts" setup>
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
-import BlueSlider from "~/components/wrapped/Style/BlueSlider.vue";
 import { getTargetYear } from "~/utils/wrapped/dateUtils";
 
 const { t } = useI18n();

@@ -35,7 +35,6 @@
 import { storeToRefs } from "pinia";
 import { useI18n } from "vue-i18n";
 import { useStatsStore } from "~/stores/wrapped/stats";
-import BlueSlider from "~/components/wrapped/Style/BlueSlider.vue";
 
 const statsStore = useStatsStore();
 const { result } = storeToRefs(statsStore);

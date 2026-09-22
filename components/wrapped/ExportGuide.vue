@@ -32,56 +32,50 @@
       </div>
 
       <ol class="mt-4">
-        <template
+        <li
           v-for="(instruction, idx) in instructions[selectedSystem]"
           :key="`${selectedSystem}-${idx}`"
+          :class="{
+            'bg-gradient-red': selectedStep === idx,
+            'font-bold': selectedStep === idx,
+          }"
+          class="p-2 rounded-xl cursor-pointer"
+          @mouseover="selectedStep = idx"
+          @click="selectedStep = idx"
         >
-          <li
-            :class="{
-              'bg-gradient-red': selectedStep === idx,
-              'font-bold': selectedStep === idx,
-            }"
-            class="p-2 rounded-xl cursor-pointer"
-            @mouseover="selectedStep = idx"
-            @click="selectedStep = idx"
-          >
-            <div class="flex items-center">
-              <span
-                class="w-8 h-8 border-2 text-center rounded-full inline-block mr-2"
-              >
-                {{ idx + 1 }}
-              </span>
-              <div>
-                {{ instruction.text }}
-              </div>
-            </div>
-            <div
-              v-if="isMobile && selectedStep === idx"
-              class="mb-2 mt-4 pl-10"
+          <div class="flex items-center">
+            <span
+              class="w-8 h-8 border-2 text-center rounded-full inline-block mr-2"
             >
-              <div class="relative max-w-[320px]" :style="frameWrapperStyle">
-                <span
-                  aria-hidden="true"
-                  class="absolute z-20 text-4xl drop-shadow pointer-events-none animate-bounce"
-                  :style="pointerStyle(instruction.pointer)"
-                >
-                  👇
-                </span>
-                <img
-                  :src="`/img/instructions/frame${selectedSystem}.png`"
-                  :alt="`${selectedSystem} frame overlay`"
-                  class="pointer-events-none absolute inset-0 z-10 w-full select-none"
-                />
-                <img
-                  :src="instruction.img"
-                  :alt="`Step ${idx + 1} screenshot for ${selectedSystem}`"
-                  class="relative z-0 w-full rounded-2xl shadow-lg"
-                  :style="screenStyle(selectedSystem)"
-                />
-              </div>
+              {{ idx + 1 }}
+            </span>
+            <div>
+              {{ instruction.text }}
             </div>
-          </li>
-        </template>
+          </div>
+          <div v-if="isMobile && selectedStep === idx" class="mb-2 mt-4 pl-10">
+            <div class="relative max-w-[320px]" :style="frameWrapperStyle">
+              <span
+                aria-hidden="true"
+                class="absolute z-20 text-4xl drop-shadow pointer-events-none animate-bounce"
+                :style="pointerStyle(instruction.pointer)"
+              >
+                👇
+              </span>
+              <img
+                :src="`/img/instructions/frame${selectedSystem}.png`"
+                :alt="`${selectedSystem} frame overlay`"
+                class="pointer-events-none absolute inset-0 z-10 w-full select-none"
+              />
+              <img
+                :src="instruction.img"
+                :alt="`Step ${idx + 1} screenshot for ${selectedSystem}`"
+                class="relative z-0 w-full rounded-2xl shadow-lg"
+                :style="screenStyle(selectedSystem)"
+              />
+            </div>
+          </div>
+        </li>
       </ol>
 
       <div
@@ -136,24 +130,106 @@
 import {
   ArrowLeftCircleIcon,
   ArrowRightCircleIcon,
-  CalendarIcon,
-  ChatBubbleLeftIcon,
-  LightBulbIcon,
 } from "@heroicons/vue/24/solid";
 import type { CSSProperties } from "vue";
-import Gradient from "~/components/wrapped/Gradient.vue";
 
 type System = "iOS" | "Android";
 type PointerStyle = CSSProperties | null;
 
 export default {
   components: {
-    Gradient,
-    ChatBubbleLeftIcon,
-    CalendarIcon,
-    LightBulbIcon,
     ArrowRightCircleIcon,
     ArrowLeftCircleIcon,
+  },
+  data() {
+    return {
+      selectedSystem: "iOS" as "iOS" | "Android",
+      selectedStep: 0,
+      isMobile: false,
+      mobileQuery: null as MediaQueryList | null,
+      // Adjust these coordinates to move the 👇 overlay for specific steps.
+      pointerLayouts: {
+        iOS: [
+          { top: "20%", left: "20%" },
+          { top: "3%" },
+          { top: "77%", left: "20%" },
+          { top: "83%", left: "40%" },
+          { top: "45%", left: "53%" },
+          { top: "40%", left: "20%" },
+          { top: "60%" },
+        ] as PointerStyle[],
+        Android: [
+          { top: "50%", left: "70%" },
+          { top: "7%", left: "80%" },
+          { top: "32%" },
+          { top: "22%" },
+          { top: "45%", left: "20%" },
+          { top: "75%", left: "10%" },
+        ] as PointerStyle[],
+      } as Record<System, PointerStyle[]>,
+      screenStyles: {
+        iOS: {
+          width: "88%",
+          marginTop: "5.3%",
+        },
+        Android: {
+          width: "100%",
+          marginTop: "0%",
+        },
+      } as Record<System, CSSProperties | undefined>,
+      screenStylesMobile: {
+        iOS: {
+          width: "88%",
+          transform: "translateY(2.8%)",
+        },
+        Android: undefined,
+      } as Record<System, CSSProperties | undefined>,
+    };
+  },
+  computed: {
+    activeInstructions() {
+      return this.instructions[this.selectedSystem][this.selectedStep];
+    },
+    shouldShowMobileInfo() {
+      return this.isMobile;
+    },
+    infoContent() {
+      return {
+        title: this.$t("exportGuide.info.title") as string,
+        description: this.$t("exportGuide.info.description") as string,
+      };
+    },
+    frameWrapperStyle(): CSSProperties {
+      return {
+        width: "100%",
+        aspectRatio: "854 / 1716",
+      };
+    },
+    instructions() {
+      // iOS: 7 steps, Android: 6 steps
+      const iosSteps = Array.from({ length: 7 }, (_, idx) => ({
+        text: this.$t(`exportGuide.iosSteps.${idx}`) as string,
+        img: `/img/instructions/iOS/Frame${idx + 1}.png`,
+        pointer: this.pointerLayouts.iOS[idx],
+      }));
+
+      const androidSteps = Array.from({ length: 6 }, (_, idx) => ({
+        text: this.$t(`exportGuide.androidSteps.${idx}`) as string,
+        img: `/img/instructions/Android/${idx + 1}.png`,
+        pointer: this.pointerLayouts.Android[idx],
+      }));
+
+      return {
+        iOS: iosSteps,
+        Android: androidSteps,
+      };
+    },
+  },
+  mounted() {
+    this.registerBreakpointListener();
+  },
+  beforeUnmount() {
+    this.unregisterBreakpointListener();
   },
   methods: {
     changeSystemTo(system: System) {
@@ -237,96 +313,6 @@ export default {
         ...style,
       };
     },
-  },
-  mounted() {
-    this.registerBreakpointListener();
-  },
-  beforeUnmount() {
-    this.unregisterBreakpointListener();
-  },
-  computed: {
-    activeInstructions() {
-      return this.instructions[this.selectedSystem][this.selectedStep];
-    },
-    shouldShowMobileInfo() {
-      return this.isMobile;
-    },
-    infoContent() {
-      return {
-        title: this.$t("exportGuide.info.title") as string,
-        description: this.$t("exportGuide.info.description") as string,
-      };
-    },
-    frameWrapperStyle(): CSSProperties {
-      return {
-        width: "100%",
-        aspectRatio: "854 / 1716",
-      };
-    },
-    instructions() {
-      // iOS: 7 steps, Android: 6 steps
-      const iosSteps = Array.from({ length: 7 }, (_, idx) => ({
-        text: this.$t(`exportGuide.iosSteps.${idx}`) as string,
-        img: `/img/instructions/iOS/Frame${idx + 1}.png`,
-        pointer: this.pointerLayouts.iOS[idx],
-      }));
-
-      const androidSteps = Array.from({ length: 6 }, (_, idx) => ({
-        text: this.$t(`exportGuide.androidSteps.${idx}`) as string,
-        img: `/img/instructions/Android/${idx + 1}.png`,
-        pointer: this.pointerLayouts.Android[idx],
-      }));
-
-      return {
-        iOS: iosSteps,
-        Android: androidSteps,
-      };
-    },
-  },
-  data() {
-    return {
-      selectedSystem: "iOS" as "iOS" | "Android",
-      selectedStep: 0,
-      isMobile: false,
-      mobileQuery: null as MediaQueryList | null,
-      // Adjust these coordinates to move the 👇 overlay for specific steps.
-      pointerLayouts: {
-        iOS: [
-          { top: "20%", left: "20%" },
-          { top: "3%" },
-          { top: "77%", left: "20%" },
-          { top: "83%", left: "40%" },
-          { top: "45%", left: "53%" },
-          { top: "40%", left: "20%" },
-          { top: "60%" },
-        ] as PointerStyle[],
-        Android: [
-          { top: "50%", left: "70%" },
-          { top: "7%", left: "80%" },
-          { top: "32%" },
-          { top: "22%" },
-          { top: "45%", left: "20%" },
-          { top: "75%", left: "10%" },
-        ] as PointerStyle[],
-      } as Record<System, PointerStyle[]>,
-      screenStyles: {
-        iOS: {
-          width: "88%",
-          marginTop: "5.3%",
-        },
-        Android: {
-          width: "100%",
-          marginTop: "0%",
-        },
-      } as Record<System, CSSProperties | undefined>,
-      screenStylesMobile: {
-        iOS: {
-          width: "88%",
-          transform: "translateY(2.8%)",
-        },
-        Android: undefined,
-      } as Record<System, CSSProperties | undefined>,
-    };
   },
 };
 </script>

@@ -47,5 +47,8 @@ globals:
   withDefaults: readonly
   onMounted: readonly
   useToolsNav: readonly
+  storeToRefs: readonly
+  defineEventHandler: readonly
+  setHeader: readonly
 rules:
   vue/no-multiple-template-root: "off"
