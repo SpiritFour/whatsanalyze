@@ -9,6 +9,12 @@ import {
   sendSubscriptionConfirmationEmail,
 } from "../mail";
 import { db } from "../firebase";
+import {
+  ITEM_FULL_PDF,
+  ITEM_PRO_SUBSCRIPTION,
+  gaApiSecret,
+  sendPurchaseEvent,
+} from "../analytics/measurementProtocol";
 
 // Stripe fans an event out to every registered endpoint. While the move to the
 // site's project runs, two deployments receive the same invoice and each would
@@ -20,7 +26,10 @@ const sendConfirmationEmail = defineBoolean("SEND_CONFIRMATION_EMAIL", {
 });
 
 export const stripeWebhook = onRequest(
-  { cors: false, secrets: [stripeSecretKey, stripeWebhookSecret] },
+  {
+    cors: false,
+    secrets: [stripeSecretKey, stripeWebhookSecret, gaApiSecret],
+  },
   async (req, res) => {
     if (req.method !== "POST") {
       res.status(405).send("Method Not Allowed");
@@ -62,9 +71,13 @@ export const stripeWebhook = onRequest(
           invoice,
           sendConfirmationEmail.value()
         );
+        await reportInvoicePurchase(invoice);
       } else if (invoice.billing_reason === "subscription_cycle") {
         logger.info("Reoccurring payment for Subscription!");
         await handleInvoiceForSubscription(invoice, false);
+        // Renewals are revenue too, and this is the only place they surface:
+        // nobody opens a browser to be charged for month two.
+        await reportInvoicePurchase(invoice);
       } else {
         logger.info("Unknown billing reason", invoice.billing_reason);
       }
@@ -74,12 +87,88 @@ export const stripeWebhook = onRequest(
       const session = event.data.object;
       if (session.mode === "payment") {
         logger.info("One time payment successfully!");
+        // `completed` fires for unpaid sessions too, e.g. a delayed bank debit.
+        if (session.payment_status === "paid") {
+          await reportPurchase({
+            transactionId: session.id,
+            amountMinorUnits: session.amount_total,
+            currency: session.currency,
+            item: ITEM_FULL_PDF,
+            metadata: session.metadata,
+          });
+        }
       }
     }
 
     res.sendStatus(200);
   }
 );
+
+/**
+ * Report a paid Stripe object as a GA4 purchase, using the GA identifiers the
+ * checkout pinned to it. The flag decides whether this deployment is the one
+ * that speaks.
+ */
+async function reportPurchase({
+  transactionId,
+  amountMinorUnits,
+  currency,
+  item,
+  metadata,
+}: {
+  transactionId: string | null;
+  amountMinorUnits: number | null;
+  currency: string | null;
+  item: { id: string; name: string };
+  metadata?: Stripe.Metadata | null;
+}) {
+  if (!transactionId) return;
+
+  await sendPurchaseEvent({
+    transactionId,
+    amountMinorUnits,
+    currency,
+    item,
+    clientId: metadata?.ga_client_id,
+    sessionId: metadata?.ga_session_id,
+  });
+}
+
+/**
+ * Renewals carry the GA identifiers on the subscription, not on the invoice,
+ * because the checkout session they came from is long gone.
+ */
+async function reportInvoicePurchase(invoice: Stripe.Invoice) {
+  const subscriptionDetails = invoice.parent?.subscription_details;
+  let metadata = subscriptionDetails?.metadata;
+
+  // Stripe only copies the subscription's metadata onto the invoice for some
+  // billing reasons, so fall back to asking the subscription itself.
+  if (!metadata?.ga_client_id && subscriptionDetails?.subscription) {
+    const subscriptionId =
+      typeof subscriptionDetails.subscription === "string"
+        ? subscriptionDetails.subscription
+        : subscriptionDetails.subscription.id;
+    try {
+      const subscription = await getStripe().subscriptions.retrieve(
+        subscriptionId
+      );
+      metadata = subscription.metadata;
+    } catch (err) {
+      logger.warn("Could not read GA ids off the subscription", err);
+    }
+  }
+
+  await reportPurchase({
+    transactionId: invoice.id ?? null,
+    // What the customer actually paid, so the intro month reports as the
+    // reduced price and the renewals as the full one.
+    amountMinorUnits: invoice.amount_paid,
+    currency: invoice.currency,
+    item: ITEM_PRO_SUBSCRIPTION,
+    metadata,
+  });
+}
 
 function calculateExpirationDate(): Date {
   const date = new Date();

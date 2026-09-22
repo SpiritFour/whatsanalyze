@@ -343,16 +343,8 @@ export default {
           if (session?.customer_details?.email) {
             this.email = session.customer_details.email;
           }
-          if (session?.payment_status === "paid") {
-            analyticsEcommerce.purchase({
-              transactionId: session.id || sessionId,
-              value: session.amount_total ? session.amount_total / 100 : 4.99,
-              currency: session.currency?.toUpperCase() || "USD",
-              paymentType: "subscription",
-              subscriptionId: session.subscription,
-              source: "subscribe_page",
-            });
-          }
+          // No `purchase` event here: the Stripe webhook reports it off the
+          // paid invoice, which is also the only place a renewal shows up.
         } catch (err) {
           console.warn("Could not retrieve checkout session details:", err);
         } finally {

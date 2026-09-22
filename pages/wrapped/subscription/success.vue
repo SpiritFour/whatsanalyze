@@ -100,7 +100,6 @@ import { httpsCallable } from "firebase/functions";
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/vue/24/solid";
 import { useSubscriptionStore } from "~/stores/subscription";
 import { CATEGORY_WRAPPED, GTAG_PAYMENT, gtagEvent } from "~/utils/gtagValues";
-import { analyticsEcommerce } from "~/composables/useAnalytics";
 
 definePageMeta({
   layout: "wrapped",
@@ -191,14 +190,8 @@ const getCheckoutSessionData = async (id: string) => {
 
     result.value = session;
     gtagEvent("approved_stripe", GTAG_PAYMENT, 10, CATEGORY_WRAPPED);
-    analyticsEcommerce.purchase({
-      transactionId: session.id || id,
-      value: session.amount_total ? session.amount_total / 100 : 4.99,
-      currency: session.currency?.toUpperCase() || "USD",
-      paymentType: "subscription",
-      subscriptionId: session.subscription,
-      source: "wrapped",
-    });
+    // The `purchase` event belongs to the webhook — see `analytics/
+    // measurementProtocol.ts`. Reporting it here too would double the revenue.
     const subId = session.subscription;
     const email = session.customer_details?.email;
     if (subId && email) {

@@ -163,6 +163,12 @@ Reversed, every customer subscribing in between gets two identical confirmation
 emails, because nothing downstream deduplicates. The same order applies to any
 future second endpoint on this Stripe account.
 
+The single endpoint is also what makes the GA4 `purchase` reporting safe to run
+from the webhook: GA4 does not deduplicate by transaction id, so a second
+deployment answering the same invoice would be a second sale in the revenue
+reports. Anyone adding one back owes the reporting the same mute switch the
+email had.
+
 Deploy the wrapped codebase explicitly — `firebase deploy --only functions:wrapped`.
 The bare `--only functions` the CLI suggests after a secret change also deploys
 the PayPal codebase that shares the project.

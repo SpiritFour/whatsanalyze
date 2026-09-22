@@ -50,6 +50,24 @@ const expectPaywall = async (page) => {
   ).toHaveCount(0);
 };
 
+/**
+ * Plant the cookies gtag would have written. GA itself is blocked in the
+ * suite, so without these there is nothing for the client to read.
+ */
+const setGaCookies = (page) =>
+  page.context().addCookies([
+    {
+      name: "_ga",
+      value: "GA1.1.1234567890.1700000000",
+      url: "http://localhost:4173",
+    },
+    {
+      name: "_ga_XYC2EWGZZ3",
+      value: "GS2.1.s1700000123$o3$g1$t1700000456$j49$l0$h0",
+      url: "http://localhost:4173",
+    },
+  ]);
+
 test.describe("buying the full PDF once", () => {
   test("asks Stripe to charge the one-time price for the chat on screen", async ({
     page,
@@ -101,6 +119,36 @@ test.describe("buying the full PDF once", () => {
     // The full PDF stays unlocked for the session instead of showing the
     // pricing table again.
     await expect(page.getByText("Choose Your Plan")).toHaveCount(0);
+  });
+
+  test("hands the GA identifiers to checkout, so the sale can be attributed", async ({
+    page,
+  }) => {
+    // The purchase itself is reported by the Stripe webhook, which sees the
+    // money but not the visitor. These ids are the whole link between the two.
+    const checkout = await stubStripeCheckout(page);
+    await setGaCookies(page);
+
+    await page.goto("/");
+    await analyzeChat(page);
+    await startOneTimeCheckout(page);
+
+    expect(checkout[0].postDataJSON().data.analytics).toEqual({
+      clientId: "1234567890.1700000000",
+      sessionId: "1700000123",
+    });
+  });
+
+  test("still starts checkout when GA never loaded", async ({ page }) => {
+    // An ad blocker, or analytics cookies declined: no ids to send, and buying
+    // must work exactly the same.
+    const checkout = await stubStripeCheckout(page);
+
+    await page.goto("/");
+    await analyzeChat(page);
+    await startOneTimeCheckout(page);
+
+    expect(checkout[0].postDataJSON().data.analytics).toEqual({});
   });
 
   test("locks the full PDF again when a different chat is uploaded", async ({
