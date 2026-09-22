@@ -88,12 +88,12 @@ export default {
       ogUrl: "https://www.whatsanalyze.com/how-to-export-your-whatsapp-chat",
     });
 
+    const localePath = useLocalePath();
     const { data: page } = await useAsyncData("content-export-guide", () =>
       queryCollection("pages")
         .path("/how-to-export-your-whatsapp-chat")
         .first(),
     );
-    const localePath = useLocalePath();
     return {
       page,
       localePath,

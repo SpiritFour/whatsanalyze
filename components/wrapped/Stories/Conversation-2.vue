@@ -70,6 +70,7 @@
 import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import { Line } from "vue-chartjs";
+import "~/utils/chartSetup";
 import {
   CategoryScale,
   Chart as ChartJS,

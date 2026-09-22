@@ -36,10 +36,10 @@ export default {
       ogUrl: "https://www.whatsanalyze.com/switch-from-whatsapp-to-signal",
     });
 
+    const localePath = useLocalePath();
     const { data: page } = await useAsyncData("content-whatsapp-signal", () =>
       queryCollection("pages").path("/whatsapp-signal").first(),
     );
-    const localePath = useLocalePath();
     return {
       page,
       localePath,

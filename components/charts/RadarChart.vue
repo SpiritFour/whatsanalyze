@@ -6,6 +6,7 @@
 
 <script>
 import { Radar } from "vue-chartjs";
+import "~/utils/chartSetup";
 import { Chat } from "~/utils/transformChatData";
 import { updateAlpha } from "~/utils/colors";
 import { radarOptions } from "~/utils/chartTheme";

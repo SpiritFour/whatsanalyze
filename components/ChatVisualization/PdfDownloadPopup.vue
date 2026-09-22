@@ -225,7 +225,9 @@
 </template>
 
 <script>
-import { saveAs } from "file-saver";
+// file-saver is CJS: the named import resolves to undefined when Nitro
+// renders this component on the server, which 500s the whole prerender.
+import FileSaver from "file-saver";
 import { markRaw, toRaw } from "vue";
 import { analyticsChat, analyticsEcommerce } from "~/composables/useAnalytics";
 import { fetchOneTimeCheckoutUrl } from "~/utils/subscription";
@@ -414,7 +416,7 @@ export default {
       if (data.type === "pdf") {
         // service workers can not save files
         const blob = new Blob([data.data], { type: "application/pdf" });
-        saveAs(blob, `WhatsAnalyze - ${String(this.ego).trim()}.pdf`);
+        FileSaver.saveAs(blob, `WhatsAnalyze - ${String(this.ego).trim()}.pdf`);
         this.isLoading = false;
         this.closePdfWorker();
       }

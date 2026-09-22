@@ -30,6 +30,19 @@ const test = base.test.extend({
       await page.route(pattern, (route) => route.abort());
     }
 
+    // The pages are prerendered, so their markup is on screen and clickable
+    // before Vue hydrates it, and anything a test does in that window reaches
+    // no handler. Every test here means "once the page is up", so wait for
+    // hydration rather than for the load event.
+    const goto = page.goto.bind(page);
+    page.goto = async (url, options) => {
+      const response = await goto(url, options);
+      await page.waitForFunction(
+        () => document.documentElement.dataset.hydrated === "true",
+      );
+      return response;
+    };
+
     // An uncaught exception means the page is broken even when the thing the
     // test looked for happened to render. Every test checks for them.
     const runtimeErrors = [];

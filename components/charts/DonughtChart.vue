@@ -6,6 +6,7 @@
 
 <script>
 import { Doughnut } from "vue-chartjs";
+import "~/utils/chartSetup";
 import { Chat } from "~/utils/transformChatData";
 import { doughnutOptions, separateSegments } from "~/utils/chartTheme";
 

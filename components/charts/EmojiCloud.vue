@@ -37,8 +37,9 @@ export default {
       deep: true,
     },
   },
-  mounted() {
-    let { am4core, am4themes_animated, am4plugins_wordCloud } = this.$am4core();
+  async mounted() {
+    let { am4core, am4themes_animated, am4plugins_wordCloud } =
+      await this.$am4core();
     am4core.useTheme(am4themes_animated);
     // Not onlyShowOnViewport: a cloud that has never been scrolled past does
     // not exist yet, and came out as an empty box in the downloaded summary
@@ -73,7 +74,8 @@ export default {
   },
   beforeUnmount: function () {
     if (this.$refs.chartdiv) delete this.$refs.chartdiv.exportChartImage;
-    this.chart.dispose();
+    // amCharts now loads on demand, so an unmount can beat the mount.
+    this.chart?.dispose();
   },
   methods: {
     updateGraph() {

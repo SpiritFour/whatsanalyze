@@ -6,6 +6,7 @@
 
 <script>
 import { Line } from "vue-chartjs";
+import "~/utils/chartSetup";
 import { Chat } from "~/utils/transformChatData";
 import { lineOptions } from "~/utils/chartTheme";
 import { accentColor, hexToRgbA } from "~/utils/colors";

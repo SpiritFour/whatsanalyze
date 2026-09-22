@@ -57,7 +57,7 @@
         :title="$t('homeLanding.previewTitle')"
         :text="$t('homeLanding.previewText')"
       >
-        <ChartsExampleGraphs class="home-preview" />
+        <LazyChartsExampleGraphs class="home-preview" />
       </LandingSection>
 
       <!--      PDF -->
@@ -149,7 +149,7 @@ import { scrollToSettled } from "~/utils/scroll";
 import pdfExampleImage from "~/assets/img/whatsapp export pdf.png";
 
 export default {
-  async setup() {
+  setup() {
     const { locale, t } = useI18n();
 
     useSeoMeta({
@@ -163,13 +163,9 @@ export default {
 
     const localePath = useLocalePath();
     const { allTools } = useToolsNav();
-    const { data: page } = await useAsyncData("content-home", () =>
-      queryCollection("pages").path("/home").first(),
-    );
     return {
       locale,
       localePath,
-      page,
       allTools,
       isSubscriptionValid: storeToRefs(useSubscriptionStore())
         .isSubscriptionValid,
