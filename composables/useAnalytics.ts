@@ -1,9 +1,8 @@
 /**
  * Unified Analytics Engine for WhatsAnalyze
  *
- * Dispatches to both:
- * 1. window.gtag('event', name, params) -> Google Analytics 4 (Property 262743198 / G-XYC2EWGZZ3)
- * 2. window.dataLayer.push({ event: name, ...params }) -> Google Tag Manager (GTM-W32PNH3) / Bing Ads
+ * Dispatches window.gtag('event', name, params) -> Google Analytics 4
+ * (Property 262743198 / G-XYC2EWGZZ3). GTM/Bing Ads is not used.
  */
 
 declare global {
@@ -103,7 +102,7 @@ export function sanitizeParams(
 }
 
 /**
- * Core event tracking function with dual dispatch.
+ * Core event tracking function.
  */
 export function trackEvent(name: string, params?: EventParams): void {
   if (!ensureGtag()) return;
@@ -112,17 +111,9 @@ export function trackEvent(name: string, params?: EventParams): void {
   const cleanParams = sanitizeParams(params);
 
   try {
-    // 1. Direct GA4 dispatch via gtag()
     if (typeof window.gtag === "function") {
       window.gtag("event", eventName, cleanParams);
     }
-
-    // 2. GTM / Bing Ads dispatch via dataLayer.push()
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      event: eventName,
-      ...cleanParams,
-    });
   } catch (err) {
     if (process.env.NODE_ENV !== "production") {
       console.warn("[Analytics] Failed to track event:", eventName, err);
