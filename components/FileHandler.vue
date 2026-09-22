@@ -71,6 +71,7 @@ import { parseString } from "whatsapp-chat-parser";
 import JSZip from "jszip";
 import { GTAG_FILE, gtagEvent } from "~/utils/gtagValues";
 import { sha256Hex } from "~/utils/courtEvidence";
+import { zipFileToAttachment } from "~/utils/attachments";
 
 export default {
   name: "FileHandler",
@@ -139,12 +140,9 @@ export default {
             return {
               messages: messages,
               // we just pass a list of filenames with compressed contents here
-              attachments: Object.values(zipData.files).map((file) => {
-                return {
-                  name: file.name,
-                  compressedContent: file._data.compressedContent,
-                };
-              }),
+              attachments: Object.values(zipData.files).map(
+                zipFileToAttachment
+              ),
             };
           });
         })
