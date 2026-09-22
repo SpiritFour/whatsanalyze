@@ -37,7 +37,7 @@ export async function render(
   webworker: any,
 ) {
   // Default export is a4 paper, portrait, using millimeters for units
-  // eslint-disable-next-line new-cap
+
   const doc = new jsPDF();
   // doc specifications
   const width = 210;

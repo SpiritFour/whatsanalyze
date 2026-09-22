@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import { isSystemMessage, markSystemMessages } from "./systemMessages";
 
 describe("isSystemMessage", () => {

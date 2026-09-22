@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import { analyzeMessages } from "./messageCounter";
 
 describe("analyzeMessages", () => {

@@ -26,7 +26,6 @@ export default {
     };
   },
   created() {
-    // eslint-disable-next-line no-undef
     if (import.meta.client) {
       fetch("/example-results.json")
         .then((response) => response.text())

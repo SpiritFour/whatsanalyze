@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import { analyzeWords } from "./wordCounter";
 
 describe("analyzeWords", () => {

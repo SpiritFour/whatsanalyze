@@ -504,7 +504,7 @@ export class Chat {
 
   getLineGraphXAxis(maxDate, minDate) {
     var diffDate = new Date(maxDate - minDate);
-    var unit = "";
+    var unit;
     if (diffDate.getFullYear() > 1971) unit = "year";
     else if (diffDate.getFullYear() > 1970 && diffDate.getMonth() > 0)
       unit = "month";

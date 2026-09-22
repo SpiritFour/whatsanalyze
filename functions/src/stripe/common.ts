@@ -22,7 +22,7 @@ const allowedOrigins = defineString("ALLOWED_ORIGINS");
 
 export const getStripe = () =>
   new Stripe(stripeSecretKey.value(), {
-    apiVersion: "2026-02-25.clover",
+    apiVersion: "2026-08-26.dahlia",
     appInfo: {
       name: appName.value(),
       version: "0.0.1",
