@@ -61,7 +61,7 @@ export default {
   methods: {
     async updateGraph() {
       this.graphData = separateSegments(
-        await this.chartdata.getShareOfSpeech()
+        await this.chartdata.getShareOfSpeech(),
       );
     },
   },

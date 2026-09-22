@@ -113,7 +113,7 @@ export default {
       if (!multiple) {
         analyticsChat.uploadStarted(
           isZipFile(files[0]) ? "zip" : "txt",
-          wasDragged ? "drop" : "picker"
+          wasDragged ? "drop" : "picker",
         );
       }
 
@@ -138,7 +138,7 @@ export default {
         // Participants, counted off the parsed messages. The transformed chat
         // knows this too, but it does not exist yet at this point.
         new Set(chatObject.messages?.map((message) => message.author)).size,
-        chatObject.durationMs
+        chatObject.durationMs,
       );
     },
 
@@ -255,7 +255,9 @@ input[type="file"] {
   font-size: 0.95rem;
   font-weight: 600;
   box-shadow: $wa-shadow-accent;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .file-handler__drop:hover .file-handler__button {

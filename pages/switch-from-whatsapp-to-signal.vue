@@ -37,7 +37,7 @@ export default {
     });
 
     const { data: page } = await useAsyncData("content-whatsapp-signal", () =>
-      queryCollection("pages").path("/whatsapp-signal").first()
+      queryCollection("pages").path("/whatsapp-signal").first(),
     );
     const localePath = useLocalePath();
     return {

@@ -3,8 +3,9 @@
 
 .wrapped-scope {
   color-scheme: dark;
-  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+  font-family:
+    ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji" !important;
 }
 
 /* Tailwind's utilities lean on these defaults, which normally come from the

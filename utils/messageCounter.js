@@ -8,7 +8,7 @@ export function analyzeMessages(messages, parseDurationMs = 0) {
   }
 
   const sorted = [...validMessages].sort(
-    (a, b) => a.date.getTime() - b.date.getTime()
+    (a, b) => a.date.getTime() - b.date.getTime(),
   );
 
   const startDate = sorted[0].date;

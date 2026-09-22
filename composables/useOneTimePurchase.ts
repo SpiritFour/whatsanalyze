@@ -83,7 +83,7 @@ export const persistOneTimePurchase = (sessionId: string): OneTimePurchase => {
 /** Does this purchase unlock the chat currently on screen? */
 export const unlocksChat = (
   purchase: OneTimePurchase | null,
-  fingerprint: string | null
+  fingerprint: string | null,
 ): boolean => {
   // A purchase that names no chat unlocks no chat. Anything else would hand
   // the full PDF to whatever is open, which is the hole this exists to close.

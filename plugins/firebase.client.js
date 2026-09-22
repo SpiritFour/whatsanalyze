@@ -20,7 +20,7 @@ export default defineNuxtPlugin(() => {
     connectFunctionsEmulator(
       functions,
       "127.0.0.1",
-      config.public.firebase.functionsEmulatorPort
+      config.public.firebase.functionsEmulatorPort,
     );
   }
   return {

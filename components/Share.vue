@@ -93,7 +93,7 @@ export default {
         "chat-timeline": this.$t("messagesPerDay"),
         "messages-per-person": `${this.$t("messagesPer")} ${this.$t("person")}`,
         "messages-per-time-of-day": `${this.$t("messagesPer")} ${this.$t(
-          "hour"
+          "hour",
         )}`,
         "radar-month": `${this.$t("messagesPer")} ${this.$t("month")}`,
         "radar-day": `${this.$t("messagesPer")} ${this.$t("weekday")}`,
@@ -196,7 +196,7 @@ export default {
           return this.createBrandedChartCanvas(
             chartCanvas,
             title,
-            this.subtitle
+            this.subtitle,
           );
         }
       }
@@ -205,7 +205,7 @@ export default {
       if (this.$refs.content) {
         const contentEl = this.$refs.content;
         const ignored = Array.from(
-          contentEl.querySelectorAll("[data-html2canvas-ignore]")
+          contentEl.querySelectorAll("[data-html2canvas-ignore]"),
         );
         if (contentEl.hasAttribute("data-html2canvas-ignore")) {
           ignored.push(contentEl);
@@ -222,11 +222,11 @@ export default {
           return this.createBrandedChartCanvas(
             renderedCanvas,
             title,
-            this.subtitle
+            this.subtitle,
           );
         } finally {
           ignored.forEach((el) =>
-            el.setAttribute("data-html2canvas-ignore", "")
+            el.setAttribute("data-html2canvas-ignore", ""),
           );
         }
       }
@@ -252,8 +252,8 @@ export default {
           new Promise((_resolve, reject) =>
             setTimeout(
               () => reject(new Error("Rendering the image timed out")),
-              20000
-            )
+              20000,
+            ),
           ),
         ]);
       } catch (err) {
@@ -268,7 +268,7 @@ export default {
 
       const title = this.getTitle(chartName);
       const shareText = `${title}\n${this.$t(
-        "haveALook"
+        "haveALook",
       )}\nhttps://whatsanalyze.com`;
       const fileName = `${chartName}-${this.imageName}`;
 

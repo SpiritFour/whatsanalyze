@@ -37,7 +37,7 @@ export default {
           // so the colours are replaced with today's on the way in.
           Object.assign(instance, {
             _lineGraphData: Promise.resolve(
-              recolorChartData(serializedObject[0])
+              recolorChartData(serializedObject[0]),
             ),
             _funfacts: Promise.resolve(serializedObject[1]),
             _allWords: Promise.resolve(serializedObject[2]),
@@ -45,7 +45,7 @@ export default {
             _dailyData: Promise.resolve(recolorChartData(serializedObject[4])),
             _weeklyData: Promise.resolve(recolorChartData(serializedObject[5])),
             _shareOfSpeech: Promise.resolve(
-              recolorChartData(serializedObject[6])
+              recolorChartData(serializedObject[6]),
             ),
           });
           this.chat = instance;

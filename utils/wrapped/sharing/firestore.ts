@@ -47,7 +47,7 @@ export async function retrieveResult({
       encryptedKey.key,
       "AES-GCM",
       true,
-      ["decrypt"]
+      ["decrypt"],
     );
     const document = docSnap.data();
     return await decryptData(document.data, {

@@ -70,7 +70,7 @@ export function recolorChartData(data) {
       // Per-point colours (the doughnut): one entry per slice.
       if (Array.isArray(dataset.backgroundColor)) {
         const colors = dataset.backgroundColor.map(
-          (_, i) => chatColors[i % chatColors.length]
+          (_, i) => chatColors[i % chatColors.length],
         );
         return { ...dataset, backgroundColor: colors, borderColor: colors };
       }

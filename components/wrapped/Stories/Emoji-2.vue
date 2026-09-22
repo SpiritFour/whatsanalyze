@@ -84,7 +84,7 @@ const setupCornerGlow = () => {
         delay: i * 0.2,
         repeat: Infinity,
         easing: "ease-in-out",
-      }
+      },
     );
   });
 };
@@ -118,7 +118,7 @@ const setupAutoScroll = () => {
       direction: "alternate",
       easing: "linear",
       delay: 0.8,
-    }
+    },
   );
 };
 
@@ -134,6 +134,6 @@ watch(
   async () => {
     await nextTick();
     setupAutoScroll();
-  }
+  },
 );
 </script>

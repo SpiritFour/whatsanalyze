@@ -30,7 +30,7 @@ export const SUBSCRIPTION_PRICE = 9.99;
 
 /** Rounded from the real prices, so the badge cannot drift from them. */
 export const ONE_TIME_DISCOUNT_PERCENT = Math.round(
-  (1 - ONE_TIME_PRICE / ONE_TIME_LIST_PRICE) * 100
+  (1 - ONE_TIME_PRICE / ONE_TIME_LIST_PRICE) * 100,
 );
 
 /**

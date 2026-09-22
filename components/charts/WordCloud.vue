@@ -41,10 +41,10 @@ export default {
 
     this.chart = am4core.create(
       this.$refs.chartdiv,
-      am4plugins_wordCloud.WordCloud
+      am4plugins_wordCloud.WordCloud,
     );
     this.series = this.chart.series.push(
-      new am4plugins_wordCloud.WordCloudSeries()
+      new am4plugins_wordCloud.WordCloudSeries(),
     );
     this.series.dataFields.word = "word";
     this.series.dataFields.value = "freq";

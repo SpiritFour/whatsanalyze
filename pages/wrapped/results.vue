@@ -81,13 +81,13 @@ useSeoMeta({
 const shareLoading = ref(false);
 const shareErrorKey = ref<string | null>(null);
 const shareErrorMessage = computed(() =>
-  shareErrorKey.value ? t(shareErrorKey.value) : ""
+  shareErrorKey.value ? t(shareErrorKey.value) : "",
 );
 
 // Nothing to tell a story about: no analysis in the store, and no share link
 // still on its way in.
 const isEmpty = computed(
-  () => !result.value && !shareLoading.value && !shareErrorKey.value
+  () => !result.value && !shareLoading.value && !shareErrorKey.value,
 );
 
 const buildSearchFromQuery = () => {
@@ -138,7 +138,7 @@ watch(
   () => {
     loadSharedStory();
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 onMounted(() => {

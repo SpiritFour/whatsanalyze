@@ -77,7 +77,7 @@ export const useSubscriptionStore = defineStore("subscription", {
     },
     async verify(
       email: string,
-      subscriptionId: string
+      subscriptionId: string,
     ): Promise<{
       isValid: boolean;
       message?: string;
@@ -136,7 +136,7 @@ export const useSubscriptionStore = defineStore("subscription", {
         const nuxtApp = useNuxtApp();
         const callable = httpsCallable(
           nuxtApp.$functions as any,
-          "verifyPaypalSubscription"
+          "verifyPaypalSubscription",
         );
         // By id only. The email is what the visitor typed; the authoritative
         // one comes back from PayPal.
@@ -196,7 +196,7 @@ export const useSubscriptionStore = defineStore("subscription", {
       email: string,
       subscriptionId: string,
       attempts = 6,
-      delayMs = 2500
+      delayMs = 2500,
     ) {
       const isFinalAnswer = (result: { isValid: boolean; message?: string }) =>
         result.isValid || /expired/i.test(result.message || "");

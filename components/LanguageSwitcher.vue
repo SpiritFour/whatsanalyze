@@ -88,7 +88,9 @@ const onChange = (event) => {
   border: 1px solid $wa-border-invert;
   background: $wa-surface-dark-raised;
   color: $wa-ink-invert;
-  transition: border-color 0.2s ease, background 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
 
   &:hover {
     border-color: rgba(245, 245, 247, 0.28);

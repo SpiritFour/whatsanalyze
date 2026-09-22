@@ -101,13 +101,13 @@ class Parser {
       if (isSystemMessage(msg.message)) return false;
       const normalizedMessage = msg.message.replace(/\u200e/g, "").trim();
       return !ignoredMessagePatterns.some((pattern) =>
-        pattern.test(normalizedMessage)
+        pattern.test(normalizedMessage),
       );
     });
 
     const targetYear = getTargetYear();
     const inTargetYear = nonIgnored.filter(
-      (msg) => msg.date.getFullYear() === targetYear
+      (msg) => msg.date.getFullYear() === targetYear,
     );
 
     if (inTargetYear.length > 0) {

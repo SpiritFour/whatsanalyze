@@ -157,7 +157,7 @@ const supportMailto = computed(() => {
     ? `Checkout session: ${sessionId.value}`
     : "I could not confirm my subscription.";
   return `mailto:info@whatsanalyze.com?subject=${encodeURIComponent(
-    subject
+    subject,
   )}&body=${encodeURIComponent(body)}`;
 });
 

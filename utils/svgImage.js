@@ -17,7 +17,7 @@ export const SVG_CHART_CLASS = "js-svg-chart";
  */
 export function largestSvg(element) {
   return Array.from(element?.querySelectorAll?.("svg") || []).sort(
-    (a, b) => b.getBoundingClientRect().width - a.getBoundingClientRect().width
+    (a, b) => b.getBoundingClientRect().width - a.getBoundingClientRect().width,
   )[0];
 }
 
@@ -114,7 +114,7 @@ export async function chartToCanvas(element) {
  */
 export async function snapshotSvgCharts(root) {
   const charts = Array.from(
-    root?.querySelectorAll(`.${SVG_CHART_CLASS}`) || []
+    root?.querySelectorAll(`.${SVG_CHART_CLASS}`) || [],
   );
 
   return Promise.all(
@@ -134,7 +134,7 @@ export async function snapshotSvgCharts(root) {
         console.error("Could not snapshot an SVG chart", error);
         return null;
       }
-    })
+    }),
   );
 }
 
@@ -145,7 +145,7 @@ export async function snapshotSvgCharts(root) {
  */
 export function applySvgChartSnapshots(clonedRoot, snapshots) {
   const charts = Array.from(
-    clonedRoot?.querySelectorAll(`.${SVG_CHART_CLASS}`) || []
+    clonedRoot?.querySelectorAll(`.${SVG_CHART_CLASS}`) || [],
   );
 
   charts.forEach((chart, index) => {

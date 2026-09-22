@@ -159,14 +159,14 @@ const { t, tm, locale } = useI18n();
 const freePrice = computed(() => formatPrice(0, locale.value));
 const introPrice = computed(() => formatPrice(INTRO_PRICE, locale.value));
 const subscriptionPrice = computed(() =>
-  formatPrice(SUBSCRIPTION_PRICE, locale.value)
+  formatPrice(SUBSCRIPTION_PRICE, locale.value),
 );
 
 const freeFeatures = computed(
-  () => tm("home.subscriptionAd.free.features") as string[]
+  () => tm("home.subscriptionAd.free.features") as string[],
 );
 const proFeatures = computed(
-  () => tm("home.subscriptionAd.pro.features") as string[]
+  () => tm("home.subscriptionAd.pro.features") as string[],
 );
 
 const startSubscription = async () => {

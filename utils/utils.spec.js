@@ -10,8 +10,8 @@ describe("chatDurationInDays", () => {
     expect(
       chatDurationInDays(
         new Date("2019-08-26T18:47:00"),
-        new Date("2021-02-16T17:47:00")
-      )
+        new Date("2021-02-16T17:47:00"),
+      ),
     ).toBe(540);
   });
 
@@ -19,8 +19,8 @@ describe("chatDurationInDays", () => {
     expect(
       chatDurationInDays(
         new Date("2026-01-01T18:00:00"),
-        new Date("2026-01-03T09:00:00")
-      )
+        new Date("2026-01-03T09:00:00"),
+      ),
     ).toBe(2);
   });
 
@@ -28,8 +28,8 @@ describe("chatDurationInDays", () => {
     expect(
       chatDurationInDays(
         new Date("2026-01-01T08:00:00"),
-        new Date("2026-01-01T23:00:00")
-      )
+        new Date("2026-01-01T23:00:00"),
+      ),
     ).toBe(0);
   });
 

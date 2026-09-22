@@ -11,7 +11,7 @@ describe("analyzeMessages", () => {
           author: "System",
           message: "Messages and calls are end-to-end encrypted.",
         },
-      ])
+      ]),
     ).toBeNull();
   });
 

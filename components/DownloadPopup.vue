@@ -136,8 +136,8 @@ export default {
           .querySelectorAll("[remove-height-in-html2-canvas]")
           .forEach((a) => (negativeHeight -= a.clientHeight));
 
-        let normalHeight = document.querySelector("#download-graphs")
-          .clientHeight;
+        let normalHeight =
+          document.querySelector("#download-graphs").clientHeight;
 
         //wordcloud
         let canvas = html2canvas(document.querySelector("#download-graphs"), {
@@ -150,12 +150,12 @@ export default {
           backgroundColor: "#ffffff",
           onclone: function (clonedDoc) {
             let nonVisibleStuff = clonedDoc.querySelectorAll(
-              ".only-visible-to-html2canvas"
+              ".only-visible-to-html2canvas",
             );
             nonVisibleStuff.forEach((y) => (y.style.display = "block"));
             applySvgChartSnapshots(
               clonedDoc.querySelector("#download-graphs"),
-              svgSnapshots
+              svgSnapshots,
             );
             return clonedDoc;
           },
@@ -168,7 +168,7 @@ export default {
         canvas.then((renderedCanvas) => {
           downloadBase64File(
             renderedCanvas,
-            "whatsanalyze.com-results-" + names + ".png"
+            "whatsanalyze.com-results-" + names + ".png",
           );
           this.loading = false;
         });

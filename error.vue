@@ -40,10 +40,10 @@ const localePath = useLocalePath();
 
 const isNotFound = computed(() => props.error?.statusCode === 404);
 const title = computed(() =>
-  t(isNotFound.value ? "errorPage.notFoundTitle" : "errorPage.genericTitle")
+  t(isNotFound.value ? "errorPage.notFoundTitle" : "errorPage.genericTitle"),
 );
 const description = computed(() =>
-  t(isNotFound.value ? "errorPage.notFoundText" : "errorPage.genericText")
+  t(isNotFound.value ? "errorPage.notFoundText" : "errorPage.genericText"),
 );
 
 const homePath = computed(() => localePath("/"));

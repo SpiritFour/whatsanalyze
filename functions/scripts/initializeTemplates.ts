@@ -52,7 +52,7 @@ try {
     .then(() => {
       console.log(
         "✅ Email template 'subscription-confirmation' initialized for project:",
-        project
+        project,
       );
       process.exit(0);
     })

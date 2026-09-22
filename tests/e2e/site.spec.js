@@ -18,7 +18,7 @@ test.describe("the analyzer", () => {
 
     await expect(page).toHaveTitle(/WhatsAnalyze/);
     await expect(
-      page.getByText("Analyze your WhatsApp Chat in Seconds", { exact: true })
+      page.getByText("Analyze your WhatsApp Chat in Seconds", { exact: true }),
     ).toBeVisible();
     await expect(page.locator("#uploadmytextfile")).toBeAttached();
   });
@@ -32,7 +32,7 @@ test.describe("the analyzer", () => {
     await page.goto("/");
     await analyzeChat(page);
     await expect(
-      page.getByText("Messages per Day", { exact: true })
+      page.getByText("Messages per Day", { exact: true }),
     ).toBeVisible();
 
     // The whole promise of the product: the chat is analyzed in the browser.
@@ -54,7 +54,7 @@ test.describe("the analyzer", () => {
         .setInputFiles(await zipExport(shape));
       await expectAnalysis(page);
       await expect(
-        page.getByText("Messages per Day", { exact: true })
+        page.getByText("Messages per Day", { exact: true }),
       ).toBeVisible();
     });
   }
@@ -83,10 +83,10 @@ test.describe("the analyzer", () => {
     // sent", while the doughnut beside it left it out — 537 against 535.
     await expect(page.getByText("Messages in total")).toBeVisible();
     await expect(
-      page.locator("#download-graphs").getByText("536", { exact: true })
+      page.locator("#download-graphs").getByText("536", { exact: true }),
     ).toBeVisible();
     await expect(
-      page.locator("#download-graphs").getByText("540", { exact: true })
+      page.locator("#download-graphs").getByText("540", { exact: true }),
     ).toBeVisible();
 
     // The same file, counted again by a tool that reached it another way.
@@ -144,7 +144,7 @@ test.describe("the analyzer", () => {
     await expect(
       page.getByText("Analysiere dein WhatsApp Chat in Sekunden", {
         exact: true,
-      })
+      }),
     ).toBeVisible();
   });
 
@@ -158,12 +158,12 @@ test.describe("the analyzer", () => {
       page.getByRole("heading", {
         name: "Export WhatsApp Chat: The Ultimate Guide",
         level: 1,
-      })
+      }),
     ).toBeVisible();
     await expect(
       page.getByRole("heading", {
         name: "Option 1: iPhone (iOS) - Export as a .txt File",
-      })
+      }),
     ).toBeVisible();
   });
 });
@@ -175,7 +175,7 @@ test.describe("wrapped", () => {
     await expect(page).toHaveTitle(/WhatsApp Wrapped/);
     await expect(page.locator("label[for='dropzone-file']")).toBeVisible();
     await expect(
-      page.getByText("Your Chat, Told Like a Story", { exact: false })
+      page.getByText("Your Chat, Told Like a Story", { exact: false }),
     ).toBeVisible();
   });
 
@@ -207,10 +207,10 @@ test.describe("tools and footer", () => {
     await page.waitForSelector(".site-footer");
 
     await expect(
-      page.locator(".site-footer a[href*='whatsapp-wrapped-year-review']")
+      page.locator(".site-footer a[href*='whatsapp-wrapped-year-review']"),
     ).toHaveCount(0);
     await expect(page.locator(".site-footer a[href='/wrapped']")).toHaveCount(
-      1
+      1,
     );
   });
 
@@ -251,7 +251,7 @@ test.describe("tools and footer", () => {
     const courtCards = groups.nth(1).locator(".tool-card");
     await expect(courtCards).toHaveCount(2);
     await expect(
-      courtCards.first().locator(".tool-card__court-badge")
+      courtCards.first().locator(".tool-card__court-badge"),
     ).toHaveText("PDF");
   });
 
@@ -270,7 +270,7 @@ test.describe("tools and footer", () => {
     await page.waitForURL(/.*#results/);
     await expect(page.locator("#results")).toBeVisible();
     await expect(
-      page.getByText("Chat Timeline", { exact: true })
+      page.getByText("Chat Timeline", { exact: true }),
     ).toBeVisible();
     // The upload hero stays on the page, so another chat can be dropped in
     // without leaving the results.
@@ -328,7 +328,7 @@ test.describe("the error page", () => {
     await expect(page).toHaveTitle("Diese Seite gibt es nicht");
     await expect(page.locator(".error-page__primary")).toHaveAttribute(
       "href",
-      "/de"
+      "/de",
     );
   });
 });

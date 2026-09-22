@@ -39,5 +39,5 @@ export const getCheckoutSession = onCall(
       logger.error("Error retrieving checkout session:", error);
       throw new HttpsError("internal", error.message);
     }
-  }
+  },
 );

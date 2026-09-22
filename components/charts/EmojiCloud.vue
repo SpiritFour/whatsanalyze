@@ -47,10 +47,10 @@ export default {
 
     this.chart = am4core.create(
       this.$refs.chartdiv,
-      am4plugins_wordCloud.WordCloud
+      am4plugins_wordCloud.WordCloud,
     );
     this.series = this.chart.series.push(
-      new am4plugins_wordCloud.WordCloudSeries()
+      new am4plugins_wordCloud.WordCloudSeries(),
     );
     this.series.dataFields.word = "word";
     this.series.dataFields.value = "freq";
@@ -80,7 +80,8 @@ export default {
       this.chartdata.getEmojiCloudData().then((words) => {
         // Currency amounts ("24,95€") and bare currency signs both come back
         // from onlyEmoji as if they were emoji. They are not.
-        const filterPattern = /^(?:€|\$|R\$|₹)$|(?:€|\$|R\$|₹)?\d+[,.]?\d*(?:€|\$|R\$|₹)?|[!?]|^\.$/;
+        const filterPattern =
+          /^(?:€|\$|R\$|₹)$|(?:€|\$|R\$|₹)?\d+[,.]?\d*(?:€|\$|R\$|₹)?|[!?]|^\.$/;
 
         const wordData = words.filter((wordObj) => {
           // Check if the word matches the currency pattern

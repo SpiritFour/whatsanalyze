@@ -125,7 +125,9 @@ const graphs = [
 .calc-float {
   opacity: 0;
   color: #ffffff;
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.85), 0 1px 2px rgba(0, 0, 0, 0.9);
+  text-shadow:
+    0 0 10px rgba(0, 0, 0, 0.85),
+    0 1px 2px rgba(0, 0, 0, 0.9);
   animation: calc-float 10s ease-in-out infinite;
 }
 
