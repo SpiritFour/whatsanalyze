@@ -85,7 +85,7 @@ export function participantMessages(messages) {
     (message) =>
       message.author &&
       message.author.trim().length > 0 &&
-      message.author.trim().toLowerCase() !== "system"
+      message.author.trim().toLowerCase() !== "system",
   );
 }
 

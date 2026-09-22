@@ -228,7 +228,7 @@ export const doughnutCenterText = {
     const radius =
       Math.min(
         chartArea.right - chartArea.left,
-        chartArea.bottom - chartArea.top
+        chartArea.bottom - chartArea.top,
       ) / 2;
 
     ctx.save();
@@ -239,7 +239,7 @@ export const doughnutCenterText = {
     ctx.fillText(
       String(options.value),
       x,
-      options.label ? y - radius * 0.08 : y
+      options.label ? y - radius * 0.08 : y,
     );
 
     if (options.label) {

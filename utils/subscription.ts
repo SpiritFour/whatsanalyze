@@ -35,7 +35,7 @@ export const fetchSubscriptionCheckoutUrl = async (options?: {
   const functions = nuxtApp.$functions as any;
   const createCheckoutSession = httpsCallable(
     functions,
-    "createCheckoutSession"
+    "createCheckoutSession",
   );
 
   const config = useRuntimeConfig();
@@ -72,7 +72,7 @@ export const fetchWrappedCheckoutUrl = async (): Promise<
 
   return fetchSubscriptionCheckoutUrl({
     successUrl: `${origin}${localePath(
-      "/wrapped/subscription/success"
+      "/wrapped/subscription/success",
     )}?session_id={CHECKOUT_SESSION_ID}`,
     cancelUrl: `${origin}${localePath("/wrapped/subscription/canceled")}`,
   });

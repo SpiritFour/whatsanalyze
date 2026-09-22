@@ -81,7 +81,7 @@ export default {
           .split(/<br\s*\/?>/i)
           .map(
             (part) =>
-              `<span class="landing-hero__title-line">${part.trim()}</span>`
+              `<span class="landing-hero__title-line">${part.trim()}</span>`,
           )
           .join("");
       }
@@ -113,7 +113,9 @@ export default {
 .landing-reveal {
   opacity: 0;
   transform: translateY(28px);
-  transition: opacity 0.9s ease, transform 0.9s ease;
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s ease;
 
   &.is-visible {
     opacity: 1;

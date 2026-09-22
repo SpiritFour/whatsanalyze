@@ -45,7 +45,7 @@ export const createCustomerPortal = onCall(
       }
 
       const defaultReturnUrl = `${origin}/subscribe?token=${subscriptionId}&email=${encodeURIComponent(
-        email
+        email,
       )}`;
 
       const portalSession = await stripe.billingPortal.sessions.create({
@@ -61,5 +61,5 @@ export const createCustomerPortal = onCall(
       }
       throw new HttpsError("internal", error.message);
     }
-  }
+  },
 );

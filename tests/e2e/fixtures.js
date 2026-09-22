@@ -106,7 +106,7 @@ const STRIPE_CHECKOUT = "https://checkout.stripe.test/c/pay/cs_test_session";
 const stubStripeCheckout = async (page, url = STRIPE_CHECKOUT) => {
   const calls = await stubCallable(page, "createCheckoutSession", { url });
   await page.route("https://checkout.stripe.test/**", (route) =>
-    route.fulfill({ contentType: "text/html", body: "Stripe Checkout Mock" })
+    route.fulfill({ contentType: "text/html", body: "Stripe Checkout Mock" }),
   );
   return calls;
 };
@@ -136,7 +136,7 @@ const expectAnalysis = async (page) => {
   // still green.
   await expect(page.locator("#results .landing-reveal")).toHaveCSS(
     "opacity",
-    "1"
+    "1",
   );
 };
 
@@ -184,7 +184,7 @@ const otherChatFile = () => {
   for (let i = 0; i < 40; i++) {
     const author = i % 2 ? "Alice Smith" : "Bob Jones";
     lines.push(
-      `1/${2 + (i % 20)}/21, ${9 + (i % 10)}:15 - ${author}: message ${i} 🎉`
+      `1/${2 + (i % 20)}/21, ${9 + (i % 10)}:15 - ${author}: message ${i} 🎉`,
     );
   }
   return {

@@ -21,16 +21,22 @@
 
 <style scoped>
 .animate-wiggle-pulse {
-  animation: pulse 8s infinite linear, wiggle 6s ease-in-out infinite;
+  animation:
+    pulse 8s infinite linear,
+    wiggle 6s ease-in-out infinite;
 }
 
 .animate-wiggle-pulse-1 {
-  animation: pulse 10s infinite linear, wiggle 5s ease-in-out infinite;
+  animation:
+    pulse 10s infinite linear,
+    wiggle 5s ease-in-out infinite;
   animation-direction: reverse;
 }
 
 .animate-wiggle-pulse-2 {
-  animation: pulse 7s infinite linear, wiggle2 10s ease-in-out infinite;
+  animation:
+    pulse 7s infinite linear,
+    wiggle2 10s ease-in-out infinite;
   animation-direction: reverse;
 }
 

@@ -298,7 +298,7 @@ export default {
       });
       try {
         const returnPath = `${window.location.origin}${this.localePath(
-          "/subscribe"
+          "/subscribe",
         )}`;
         const url = await fetchSubscriptionCheckoutUrl({
           successUrl: `${returnPath}?session_id={CHECKOUT_SESSION_ID}`,
@@ -333,7 +333,7 @@ export default {
           const functions = this.$functions;
           const getCheckoutSession = httpsCallable(
             functions,
-            "getCheckoutSession"
+            "getCheckoutSession",
           );
           const res = await getCheckoutSession({ sessionId });
           const session = res.data;
@@ -377,11 +377,11 @@ export default {
         const result = afterCheckout
           ? await this.subscriptionStore.verifyAfterCheckout(
               this.email,
-              this.subscriptionId
+              this.subscriptionId,
             )
           : await this.subscriptionStore.verify(
               this.email,
-              this.subscriptionId
+              this.subscriptionId,
             );
         if (result.isValid) {
           this.successMessage = this.$t("subscribePage.verifySuccess");
@@ -389,19 +389,19 @@ export default {
             afterCheckout
               ? "auto_param"
               : fromLink
-              ? "email_link"
-              : "manual_code"
+                ? "email_link"
+                : "manual_code",
           );
         } else {
           this.reportFailure(
             result.message || this.$t("subscribePage.errorVerifyFailed"),
-            fromLink
+            fromLink,
           );
         }
       } catch (err) {
         this.reportFailure(
           err?.message || this.$t("subscribePage.errorUnexpected"),
-          fromLink
+          fromLink,
         );
       } finally {
         this.loading = false;
@@ -433,7 +433,7 @@ export default {
         const functions = this.$functions;
         const createCustomerPortal = httpsCallable(
           functions,
-          "createCustomerPortal"
+          "createCustomerPortal",
         );
 
         const res = await createCustomerPortal({
@@ -475,8 +475,9 @@ export default {
   background-color: #f5f5f7;
   color: #1d1d1f;
   padding: 3rem 1.5rem 5rem;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
-    "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 .sub-page__container {
@@ -522,7 +523,9 @@ export default {
   background: #ffffff;
   border-radius: 24px;
   padding: 2rem;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.04),
+    0 1px 2px rgba(0, 0, 0, 0.02);
   border: 1px solid rgba(0, 0, 0, 0.06);
   margin-bottom: 1.75rem;
 }
@@ -800,7 +803,9 @@ export default {
   background: #ffffff;
   color: #111827;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
 .apple-input:focus {

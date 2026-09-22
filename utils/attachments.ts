@@ -68,7 +68,7 @@ function getMimeType(fileName: string): MimeTypeData {
 
 async function renderAttachment(
   fileName: string,
-  attachmentData?: Uint8Array
+  attachmentData?: Uint8Array,
 ): Promise<Attachment> {
   // if the attachmentData is null (because we were not able to find the file)
   // we set the mimetype to the same format as an unknown file
@@ -93,7 +93,7 @@ async function renderAttachment(
     // fall back to renderInPDF=false so the message still renders as text.
     try {
       const bitmap = await createImageBitmap(blob);
-      (width = bitmap.width), (height = bitmap.height);
+      ((width = bitmap.width), (height = bitmap.height));
     } catch (error) {
       console.error("Attachment image decode failed for", fileName, error);
       mimeTypeData.renderInPDF = false;
@@ -116,14 +116,14 @@ export async function getAttachment(
     name: string;
     compressedContent?: Uint8Array;
     decompressedData?: Uint8Array;
-  }>
+  }>,
 ): Promise<Attachment> {
   // potentially this finds files that are a false match
   // but there is the case that the images are in the "zip" folder, so we need
   // to be sure to find em
 
   const data: any = attachments.filter((file) =>
-    RegExp(".*" + fileName).test(file.name)
+    RegExp(".*" + fileName).test(file.name),
   );
 
   if (data.length === 0) {

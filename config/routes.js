@@ -46,7 +46,7 @@ const notIndexable = new Set([
 ]);
 
 export const indexablePages = localizedPages.filter(
-  (page) => !notIndexable.has(page)
+  (page) => !notIndexable.has(page),
 );
 
 /**
@@ -74,5 +74,5 @@ export const retiredRedirects = Object.fromEntries(
       `${prefix}/${from}`,
       `${prefix}/${to}`,
     ]);
-  })
+  }),
 );

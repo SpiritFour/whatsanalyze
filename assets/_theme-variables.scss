@@ -145,21 +145,34 @@ $wa-shell-width: 1180px;
     width: 100%;
     max-width: 100%;
     -webkit-overflow-scrolling: touch;
-    background-image: linear-gradient(
+    background-image:
+      linear-gradient(
         to right,
         #{$wa-surface-white} 30%,
         rgba(255, 255, 255, 0)
       ),
-      linear-gradient(to left, #{$wa-surface-white} 30%, rgba(255, 255, 255, 0)),
+      linear-gradient(
+        to left,
+        #{$wa-surface-white} 30%,
+        rgba(255, 255, 255, 0)
+      ),
       radial-gradient(farthest-side at 0 50%, rgba(0, 0, 0, 0.16), transparent),
       radial-gradient(
         farthest-side at 100% 50%,
         rgba(0, 0, 0, 0.16),
         transparent
       );
-    background-position: left center, right center, left center, right center;
+    background-position:
+      left center,
+      right center,
+      left center,
+      right center;
     background-repeat: no-repeat;
-    background-size: 44px 100%, 44px 100%, 16px 100%, 16px 100%;
+    background-size:
+      44px 100%,
+      44px 100%,
+      16px 100%,
+      16px 100%;
     background-attachment: local, local, scroll, scroll;
 
     // Touch browsers hide the scrollbar until you already scroll, which is the
@@ -187,8 +200,8 @@ $wa-shell-width: 1180px;
     th {
       padding: 12px 14px;
       font-size: 0.74rem;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-        monospace;
+      font-family:
+        ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       font-weight: 700;
       color: $wa-ink-muted;
       background: $wa-surface-light;
@@ -235,8 +248,8 @@ $wa-shell-width: 1180px;
 
   // Numbers and time ranges are the cells that wrapped to three lines.
   .mono-cell {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-      monospace;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 0.84rem;
     white-space: nowrap;
   }

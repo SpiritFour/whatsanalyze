@@ -161,8 +161,8 @@ devDependencies:
     specifier: ^10.5.4
     version: 10.5.4
   prettier:
-    specifier: 2.2.1
-    version: 2.2.1
+    specifier: 3.9.8
+    version: 3.9.8
   serve:
     specifier: ^14.2.6
     version: 14.2.6
@@ -17790,9 +17790,9 @@ packages:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
 
-  /prettier@2.2.1:
-    resolution: {integrity: sha512-PqyhM2yCjg/oKkFPtTGUojv7gnZAoG80ttl45O6x2Ug/rMJw4wcc9k6aaf2hibP7BGVCCM33gZoGjyvt9mm16Q==}
-    engines: {node: '>=10.13.0'}
+  /prettier@3.9.8:
+    resolution: {integrity: sha512-WRFq3Wn3WId7LLROfMLdH7xaFr2jR62wU8nLO6rQUOLOxNZUviyJQs1M0iIhLexSFy+L+w0ch66wtoO2jRjG0A==}
+    engines: {node: '>=14'}
     hasBin: true
     dev: true
 

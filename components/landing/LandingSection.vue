@@ -54,7 +54,7 @@ export default {
       // section taller than about seven viewports can never show 15% of
       // itself, and would stay at opacity 0 for good. Pulling the bottom of
       // the root up keeps the reveal feeling the same for short sections.
-      { threshold: 0, rootMargin: "0px 0px -10% 0px" }
+      { threshold: 0, rootMargin: "0px 0px -10% 0px" },
     );
     this.observer.observe(this.$refs.inner);
   },
@@ -108,7 +108,9 @@ export default {
 .landing-reveal {
   opacity: 0;
   transform: translateY(28px);
-  transition: opacity 0.9s ease, transform 0.9s ease;
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s ease;
 
   &.is-visible {
     opacity: 1;

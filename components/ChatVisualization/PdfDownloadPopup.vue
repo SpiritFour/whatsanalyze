@@ -376,7 +376,7 @@ export default {
         // the graphs need to be converted to an image beforehand, as the web worker has no access to document
         const chatTimeline = await loadImage("#chat-timeline");
         const messagesPerTimeOfDay = await loadImage(
-          "#messages-per-time-of-day"
+          "#messages-per-time-of-day",
         );
         const messagesPerPerson = await loadImage("#messages-per-person");
         const radarMonth = await loadImage("#radar-month");

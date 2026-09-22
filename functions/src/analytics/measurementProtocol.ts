@@ -86,7 +86,7 @@ export async function sendPurchaseEvent(event: PurchaseEvent): Promise<void> {
   try {
     const res = await fetch(
       `${MP_ENDPOINT}?measurement_id=${encodeURIComponent(
-        measurementId
+        measurementId,
       )}&api_secret=${encodeURIComponent(apiSecret)}`,
       {
         method: "POST",
@@ -94,7 +94,7 @@ export async function sendPurchaseEvent(event: PurchaseEvent): Promise<void> {
           client_id: event.clientId || syntheticClientId(),
           events: [{ name: "purchase", params }],
         }),
-      }
+      },
     );
 
     // The Measurement Protocol answers 2xx even for a payload it then drops,

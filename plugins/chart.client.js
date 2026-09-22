@@ -29,7 +29,7 @@ ChartJS.register(
   TimeScale,
   Title,
   Tooltip,
-  doughnutCenterText
+  doughnutCenterText,
 );
 
 // The site's type on the canvas too, so a chart does not fall back to the

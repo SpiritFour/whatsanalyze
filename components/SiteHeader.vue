@@ -105,7 +105,7 @@ const PRODUCT_ROOTS = {
 const atProductRoot = computed(
   () =>
     route.path.replace(/\/$/, "") ===
-    PRODUCT_ROOTS[currentProduct.value]().replace(/\/$/, "")
+    PRODUCT_ROOTS[currentProduct.value]().replace(/\/$/, ""),
 );
 
 const PRODUCT_ORDER = ["analyzer", "wrapped", "tools"];
@@ -134,7 +134,7 @@ const otherProducts = computed(() => {
   };
 
   return PRODUCT_ORDER.filter(
-    (key) => key !== currentProduct.value || !atProductRoot.value
+    (key) => key !== currentProduct.value || !atProductRoot.value,
   ).map((key) => products[key]);
 });
 
@@ -178,7 +178,7 @@ watch(
   () => route.fullPath,
   () => {
     menuOpen.value = false;
-  }
+  },
 );
 </script>
 
@@ -268,7 +268,9 @@ watch(
   color: $wa-ink-invert-muted;
   text-decoration: none;
   white-space: nowrap;
-  transition: color 0.2s ease, background 0.2s ease;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
 
   &:hover {
     color: $wa-ink-invert;

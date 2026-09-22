@@ -28,7 +28,14 @@
         src="https://www.youtube.com/embed/Mq5ZvyerA8E"
         title="YouTube video player"
         frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allow="
+          accelerometer;
+          autoplay;
+          clipboard-write;
+          encrypted-media;
+          gyroscope;
+          picture-in-picture;
+        "
         allowfullscreen
       ></iframe>
       <ul>
@@ -82,7 +89,9 @@ export default {
     });
 
     const { data: page } = await useAsyncData("content-export-guide", () =>
-      queryCollection("pages").path("/how-to-export-your-whatsapp-chat").first()
+      queryCollection("pages")
+        .path("/how-to-export-your-whatsapp-chat")
+        .first(),
     );
     const localePath = useLocalePath();
     return {

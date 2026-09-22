@@ -23,7 +23,7 @@ self.onmessage = async (event) => {
     messagesPerPerson,
     radarMonth,
     radarDay,
-    self
+    self,
   );
 
   // we can not transfer functions from web worker to main thread thus we serialize it

@@ -50,7 +50,7 @@ export const stripeWebhook = onRequest(
       event = stripe.webhooks.constructEvent(
         req.rawBody,
         signature,
-        stripeWebhookSecret.value()
+        stripeWebhookSecret.value(),
       );
     } catch (err: any) {
       logger.error("Webhook signature verification failed:", err.message);
@@ -69,7 +69,7 @@ export const stripeWebhook = onRequest(
         // store user data in db and send them an email with the login link
         await handleInvoiceForSubscription(
           invoice,
-          sendConfirmationEmail.value()
+          sendConfirmationEmail.value(),
         );
         await reportInvoicePurchase(invoice);
       } else if (invoice.billing_reason === "subscription_cycle") {
@@ -101,7 +101,7 @@ export const stripeWebhook = onRequest(
     }
 
     res.sendStatus(200);
-  }
+  },
 );
 
 /**
@@ -150,9 +150,8 @@ async function reportInvoicePurchase(invoice: Stripe.Invoice) {
         ? subscriptionDetails.subscription
         : subscriptionDetails.subscription.id;
     try {
-      const subscription = await getStripe().subscriptions.retrieve(
-        subscriptionId
-      );
+      const subscription =
+        await getStripe().subscriptions.retrieve(subscriptionId);
       metadata = subscription.metadata;
     } catch (err) {
       logger.warn("Could not read GA ids off the subscription", err);
@@ -177,13 +176,13 @@ function calculateExpirationDate(): Date {
 }
 
 async function getCustomer(
-  invoice: Stripe.Invoice
+  invoice: Stripe.Invoice,
 ): Promise<Customer | undefined> {
   const stripe = getStripe();
   const customerId = invoice.customer as string;
 
   const customer = (await stripe.customers.retrieve(
-    customerId
+    customerId,
   )) as Stripe.Customer;
 
   const customerEmail = customer.email;
@@ -194,14 +193,14 @@ async function getCustomer(
   if (!customerEmail) {
     logger.error(
       "We need a customer email, otherwise we can not contact them",
-      customer
+      customer,
     );
     return;
   }
   if (!subscriptionId) {
     logger.error(
       "This invoice seems to have been triggered not by a subscription?",
-      invoice
+      invoice,
     );
     return;
   }
@@ -251,7 +250,7 @@ async function persistCustomer(customer: Customer) {
 
 export async function handleInvoiceForSubscription(
   invoice: Stripe.Invoice,
-  sendSubscriptionConfirmationMail: Boolean = false
+  sendSubscriptionConfirmationMail: Boolean = false,
 ) {
   const invoiceId = invoice.id;
   logger.info("🔔Payment for Subscription received!", {
@@ -273,7 +272,7 @@ export async function handleInvoiceForSubscription(
       // Send subscription confirmation email
       await sendSubscriptionConfirmationEmail(
         customer,
-        summarizeBilling(invoice)
+        summarizeBilling(invoice),
       );
     }
   } else {

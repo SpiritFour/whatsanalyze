@@ -30,6 +30,6 @@ export default defineI18nConfig(() => ({
         ...localeMessages,
         ...(wrappedMessages[locale] || wrappedMessages.en),
       },
-    ])
+    ]),
   ),
 }));

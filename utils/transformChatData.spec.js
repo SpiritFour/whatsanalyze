@@ -122,7 +122,7 @@ describe("Chat.getAllWords", () => {
       expect.arrayContaining([
         { word: "❤️", freq: 4 },
         { word: "😂", freq: 4 },
-      ])
+      ]),
     );
   });
 });

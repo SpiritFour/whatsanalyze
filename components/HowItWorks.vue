@@ -98,8 +98,7 @@ export default {
         {
           color: "teal lighten-1",
           icon: "mdi-chart-box",
-          text:
-            "Learn who you really are and how you communicate with your friends. Reveal never know facts!. ",
+          text: "Learn who you really are and how you communicate with your friends. Reveal never know facts!. ",
           title: "Enjoy beautiful visualizations",
           imageSrc: img3,
           imageSrcLazy: img3Lazy,
@@ -108,8 +107,7 @@ export default {
         {
           color: "amber",
           icon: "mdi-share",
-          text:
-            "Impress your friends with real data. Stun them with data, who writes the most messages, what emojis are most used and much more. ",
+          text: "Impress your friends with real data. Stun them with data, who writes the most messages, what emojis are most used and much more. ",
           title: "Share the results with your friends",
           imageSrc: img4,
           imageSrcLazy: img4Lazy,

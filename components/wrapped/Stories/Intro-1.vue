@@ -19,6 +19,6 @@ import { getTargetYear } from "~/utils/wrapped/dateUtils";
 const { t } = useI18n();
 const currentYear = getTargetYear();
 const headline = computed(() =>
-  t("results.intro.headline", { year: currentYear })
+  t("results.intro.headline", { year: currentYear }),
 );
 </script>

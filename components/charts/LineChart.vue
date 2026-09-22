@@ -60,7 +60,7 @@ export default {
         0,
         chartArea.top,
         0,
-        chartArea.bottom
+        chartArea.bottom,
       );
       gradient.addColorStop(0, hexToRgbA(accentColor, 0.28));
       gradient.addColorStop(1, hexToRgbA(accentColor, 0));

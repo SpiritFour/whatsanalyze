@@ -69,13 +69,13 @@ export function validateOrigin(origin?: string): string {
 export function ensureSameOrigin(
   url: string | undefined,
   origin: string,
-  field: string
+  field: string,
 ): string | undefined {
   if (!url) return undefined;
   if (url !== origin && !url.startsWith(`${origin}/`)) {
     throw new HttpsError(
       "invalid-argument",
-      `${field} must match the request origin.`
+      `${field} must match the request origin.`,
     );
   }
   return url;

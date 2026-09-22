@@ -65,7 +65,7 @@ export const createCheckoutSession = onCall(
     if (data.priceId && data.priceId !== price) {
       throw new HttpsError(
         "invalid-argument",
-        `priceId is not the configured ${mode} price.`
+        `priceId is not the configured ${mode} price.`,
       );
     }
 
@@ -78,7 +78,7 @@ export const createCheckoutSession = onCall(
 
     if (mode === "subscription" && !introCoupon) {
       logger.error(
-        "INTRO_COUPON_ID is not set: subscribing at full price while the site advertises a reduced first month."
+        "INTRO_COUPON_ID is not set: subscribing at full price while the site advertises a reduced first month.",
       );
     }
 
@@ -120,5 +120,5 @@ export const createCheckoutSession = onCall(
       logger.error("Error creating checkout session:", error);
       throw new HttpsError("internal", error.message);
     }
-  }
+  },
 );

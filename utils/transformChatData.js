@@ -103,7 +103,7 @@ export class Chat {
   static getTotalNumberOfWords(chatObject) {
     return chatObject.reduce(
       (n, { message }) => n + message.split(" ").length,
-      0
+      0,
     );
   }
 
@@ -145,7 +145,7 @@ export class Chat {
   static createSortedFreqDict(chatObject) {
     let message_string = chatObject.reduce(
       (n, { message }) => n + " " + message,
-      " "
+      " ",
     );
     message_string = message_string.replace(/\u200E/gi, "");
     let message_array = message_string
@@ -160,7 +160,7 @@ export class Chat {
       distribution[item] = (distribution[item] || 0) + 1;
     });
     let sorted_distribution = Object.entries(distribution).sort(
-      (a, b) => b[1] - a[1]
+      (a, b) => b[1] - a[1],
     );
     return sorted_distribution;
   }
@@ -204,7 +204,7 @@ export class Chat {
     // rather than sharing a colour with someone else.
     groupAfter = 8,
     maxWordsWordCloud = 150,
-    maxWordsEmojiCloud = 150
+    maxWordsEmojiCloud = 150,
   ) {
     // this one is the complete input
     this.chatObject = chatObject;
@@ -219,7 +219,7 @@ export class Chat {
     this.filterdChatObject = Chat.removeSystemMessages(this.chatObject);
     //number of persons in chat
     const messagesTemp = Object.entries(
-      Chat.getMessagesPerPerson(this.filterdChatObject)
+      Chat.getMessagesPerPerson(this.filterdChatObject),
     );
     this.numPersonsInChat = messagesTemp.length;
     // All persons
@@ -281,7 +281,7 @@ export class Chat {
 
   _getMessagesPerPerson() {
     let persons = Object.entries(
-      Chat.getMessagesPerPerson(this.filterdChatObject)
+      Chat.getMessagesPerPerson(this.filterdChatObject),
     );
     persons = persons.sort((a, b) => b[1].length - a[1].length);
 
@@ -308,7 +308,7 @@ export class Chat {
       enrichedPersons[this._groupAfter].name = "Others";
       enrichedPersons[this._groupAfter].color = othersColor;
       enrichedPersons[this._groupAfter].messages.sort(
-        (a, b) => a.absolute_id - b.absolute_id
+        (a, b) => a.absolute_id - b.absolute_id,
       );
     }
     return enrichedPersons;
@@ -327,7 +327,7 @@ export class Chat {
         {
           label: "Share of Speech",
           backgroundColor: this.messagesPerPerson.map((person) =>
-            hexToRgbA(person.color, opacity)
+            hexToRgbA(person.color, opacity),
           ),
           borderColor: this.messagesPerPerson.map((person) => person.color),
           data: this.messagesPerPerson.map((person) => person.messages.length),

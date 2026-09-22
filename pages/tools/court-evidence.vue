@@ -121,7 +121,7 @@ export default {
         ][i - 1],
         title: t(`courtEvidence.pillar${i}Title`),
         text: t(`courtEvidence.pillar${i}Text`),
-      }))
+      })),
     );
 
     const docFeatures = computed(() =>
@@ -134,7 +134,7 @@ export default {
         ][i - 1],
         title: t(`courtEvidence.docCard${i}Title`),
         text: t(`courtEvidence.docCard${i}Text`),
-      }))
+      })),
     );
 
     const useCases = computed(() =>
@@ -149,21 +149,21 @@ export default {
         text: t(`courtEvidence.case${i}Text`),
         to: i === 3 ? localePath("/tools/proof-of-relationship") : undefined,
         linkText: i === 3 ? t("courtEvidence.caseLinkText") : undefined,
-      }))
+      })),
     );
 
     const steps = computed(() =>
       [1, 2, 3].map((i) => ({
         title: t(`courtEvidence.step${i}Title`),
         text: t(`courtEvidence.step${i}Text`),
-      }))
+      })),
     );
 
     const quotes = computed(() =>
       [1, 2].map((i) => ({
         text: t(`courtEvidence.quote${i}Text`),
         attribution: t(`courtEvidence.quote${i}Attribution`),
-      }))
+      })),
     );
 
     // The last crumb is the tool's name from the shared catalogue
@@ -178,10 +178,10 @@ export default {
       // land on the analyzer's upload area rather than the top of the
       // homepage — step 2 tells people to drop a file there.
       analyzerPath: computed(() =>
-        localePath({ path: "/", hash: "#dropzone-slot" })
+        localePath({ path: "/", hash: "#dropzone-slot" }),
       ),
       exportGuidePath: computed(() =>
-        localePath("how-to-export-your-whatsapp-chat")
+        localePath("how-to-export-your-whatsapp-chat"),
       ),
       pillars,
       docFeatures,

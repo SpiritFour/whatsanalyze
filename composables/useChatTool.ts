@@ -153,7 +153,7 @@ async function findChatFileInZip(zip: JSZip): Promise<string> {
   // Some exports name the file after the contact alone. Any .txt beats
   // failing outright.
   const anyText = Object.values(zip.files).find(
-    (f) => !f.dir && f.name.toLowerCase().endsWith(".txt")
+    (f) => !f.dir && f.name.toLowerCase().endsWith(".txt"),
   );
   if (anyText) return anyText.async("string");
 
@@ -169,12 +169,12 @@ async function findChatFileInZip(zip: JSZip): Promise<string> {
  * of them opens on all of them.
  */
 export async function parseChatFile(
-  fileOrText: File | string
+  fileOrText: File | string,
 ): Promise<ParsedChat> {
   const startTime = performance.now();
   const done = (
     messages: ChatMessage[],
-    attachments: ChatAttachment[] = []
+    attachments: ChatAttachment[] = [],
   ): ParsedChat => ({
     messages,
     attachments,
@@ -211,7 +211,7 @@ export async function parseChatFile(
  * the browser rather than packed in an archive.
  */
 export async function parseSharedFiles(
-  fileList: FileList | File[]
+  fileList: FileList | File[],
 ): Promise<ParsedChat> {
   const startTime = performance.now();
   const files = Array.from(fileList);
@@ -233,7 +233,7 @@ export async function parseSharedFiles(
       .map(async (file) => ({
         name: file.name,
         decompressedData: new Uint8Array(await file.arrayBuffer()),
-      }))
+      })),
   );
 
   return {

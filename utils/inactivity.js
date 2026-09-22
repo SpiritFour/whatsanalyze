@@ -52,7 +52,7 @@ export function analyzeInactivity(messages, parseDurationMs = 0) {
   }
 
   const sorted = [...validMessages].sort(
-    (a, b) => a.date.getTime() - b.date.getTime()
+    (a, b) => a.date.getTime() - b.date.getTime(),
   );
 
   const now = new Date();
@@ -151,7 +151,7 @@ export function analyzeInactivity(messages, parseDurationMs = 0) {
         p.responseTimesMs.length > 0
           ? Math.round(
               p.responseTimesMs.reduce((sum, v) => sum + v, 0) /
-                p.responseTimesMs.length
+                p.responseTimesMs.length,
             )
           : 0;
 
@@ -187,7 +187,7 @@ export function analyzeInactivity(messages, parseDurationMs = 0) {
   // Same calendar-day span the analyzer reports, so every page agrees.
   const totalDays = Math.max(
     1,
-    chatDurationInDays(firstMsg.date, lastMsg.date)
+    chatDurationInDays(firstMsg.date, lastMsg.date),
   );
 
   return {
