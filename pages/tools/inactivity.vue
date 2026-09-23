@@ -297,7 +297,7 @@ useSeoMeta({
   ogTitle: () => t("toolsInactivity.ogTitle"),
   ogDescription: () => t("toolsInactivity.ogDescription"),
   ogType: "website",
-  ogUrl: "https://www.whatsanalyze.com/tools/inactivity",
+  ogUrl: "https://whatsanalyze.com/tools/inactivity",
 });
 
 const localizedStatusText = computed(() => {

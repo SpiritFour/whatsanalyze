@@ -231,7 +231,7 @@ useSeoMeta({
   ogTitle: () => t("toolsMessageCounter.ogTitle"),
   ogDescription: () => t("toolsMessageCounter.ogDescription"),
   ogType: "website",
-  ogUrl: "https://www.whatsanalyze.com/tools/message-counter",
+  ogUrl: "https://whatsanalyze.com/tools/message-counter",
 });
 
 const analysis = ref<any>(null);

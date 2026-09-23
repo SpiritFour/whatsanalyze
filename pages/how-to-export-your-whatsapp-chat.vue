@@ -85,7 +85,7 @@ export default {
       ogTitle: () => t("seo.exportGuideTitle"),
       ogSiteName: () => t("seo.exportGuideTitle"),
       ogDescription: () => t("seo.exportGuideDescription"),
-      ogUrl: "https://www.whatsanalyze.com/how-to-export-your-whatsapp-chat",
+      ogUrl: "https://whatsanalyze.com/how-to-export-your-whatsapp-chat",
     });
 
     const localePath = useLocalePath();

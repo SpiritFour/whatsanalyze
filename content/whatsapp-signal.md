@@ -3,7 +3,7 @@ title: Switch from WhatsApp to Signal
 description: Move to Signal, take your group chats with you, and keep your WhatsApp history as a PDF.
 ---
 
-![](https://www.whatsanalyze.com/whatsapp-vs-signal.jpg)
+![](https://whatsanalyze.com/whatsapp-vs-signal.jpg)
 
 Ready to use a real privacy-focused messenger? Signal is the way to go. Even [Edward Snowden uses it every day](https://www.signal.org/)!
 

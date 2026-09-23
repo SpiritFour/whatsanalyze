@@ -158,7 +158,7 @@ export default {
       ogTitle: () => t("seo.homeTitle"),
       ogSiteName: () => t("seo.homeTitle"),
       ogDescription: () => t("seo.homeDescription"),
-      ogUrl: "https://www.whatsanalyze.com",
+      ogUrl: "https://whatsanalyze.com",
     });
 
     const localePath = useLocalePath();
