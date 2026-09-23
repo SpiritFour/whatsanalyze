@@ -27,7 +27,7 @@ function serveShareTarget(event, wait = true) {
       if (wait) await nextMessage("SHARE_READY");
 
       const client = await self.clients.get(
-        event.resultingClientId || event.clientId
+        event.resultingClientId || event.clientId,
       );
       console.log("client in wait until", client);
       const data = await dataPromise;
@@ -38,7 +38,7 @@ function serveShareTarget(event, wait = true) {
       const file = data.getAll("file");
       console.log("files in wait until", file);
       client.postMessage({ file });
-    })()
+    })(),
   );
 }
 

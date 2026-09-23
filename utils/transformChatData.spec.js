@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import { Chat } from "./transformChatData";
 
 describe("Chat.removeSystemMessages", () => {
@@ -122,7 +121,7 @@ describe("Chat.getAllWords", () => {
       expect.arrayContaining([
         { word: "❤️", freq: 4 },
         { word: "😂", freq: 4 },
-      ])
+      ]),
     );
   });
 });

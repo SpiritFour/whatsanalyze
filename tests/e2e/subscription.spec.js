@@ -18,7 +18,7 @@ test.describe("verifying a Stripe subscription", () => {
     await page.goto("/subscribe?email=test@example.com&token=sub_test123");
 
     await expect(
-      page.getByRole("heading", { name: /your subscription is active/i })
+      page.getByRole("heading", { name: /your subscription is active/i }),
     ).toBeVisible();
     await expect(page.getByText("test@example.com")).toBeVisible();
     await expect(page.getByText("sub_test123")).toBeVisible();
@@ -30,15 +30,15 @@ test.describe("verifying a Stripe subscription", () => {
     await stubCallable(
       page,
       "verifySubscription",
-      activeSubscription({ customerName: "Sam Subscriber" })
+      activeSubscription({ customerName: "Sam Subscriber" }),
     );
 
     await page.goto(
-      "/subscribe?email=sam@example.com&subscription_id=sub_test_home"
+      "/subscribe?email=sam@example.com&subscription_id=sub_test_home",
     );
 
     await expect(
-      page.getByRole("heading", { name: "Your subscription is Active" })
+      page.getByRole("heading", { name: "Your subscription is Active" }),
     ).toBeVisible();
     await expect(page.getByText("sub_test_home")).toBeVisible();
   });
@@ -49,19 +49,19 @@ test.describe("verifying a Stripe subscription", () => {
     const calls = await stubCallable(
       page,
       "verifySubscription",
-      activeSubscription()
+      activeSubscription(),
     );
 
     await page.goto("/subscribe?email=test@example.com&token=sub_test123");
     await expect(
-      page.getByRole("heading", { name: /your subscription is active/i })
+      page.getByRole("heading", { name: /your subscription is active/i }),
     ).toBeVisible();
 
     // Straight to /subscribe without the credentials in the URL: the stored
     // subscription has to carry access on its own.
     await page.goto("/subscribe");
     await expect(
-      page.getByRole("heading", { name: /your subscription is active/i })
+      page.getByRole("heading", { name: /your subscription is active/i }),
     ).toBeVisible();
     expect(calls).toHaveLength(1);
   });
@@ -72,19 +72,19 @@ test.describe("verifying a Stripe subscription", () => {
 
     await page.goto("/subscribe?email=test@example.com&token=sub_test123");
     await expect(
-      page.getByRole("heading", { name: /your subscription is active/i })
+      page.getByRole("heading", { name: /your subscription is active/i }),
     ).toBeVisible();
 
     await page.getByRole("button", { name: /logout/i }).click();
     await expect(
-      page.getByRole("heading", { name: /restore or verify existing access/i })
+      page.getByRole("heading", { name: /restore or verify existing access/i }),
     ).toBeVisible();
 
     // Logging out has to outlive the reload: the stored copy is written on a
     // later tick, and navigating away used to beat it.
     await page.goto("/subscribe");
     await expect(
-      page.getByRole("heading", { name: /your subscription is active/i })
+      page.getByRole("heading", { name: /your subscription is active/i }),
     ).toHaveCount(0);
   });
 
@@ -97,13 +97,13 @@ test.describe("verifying a Stripe subscription", () => {
     });
 
     await page.goto(
-      "/subscribe?email=expired@example.com&token=sub_expired123"
+      "/subscribe?email=expired@example.com&token=sub_expired123",
     );
 
     await expect(
       page.getByText(
-        /subscription has expired|subscription could not be verified/i
-      )
+        /subscription has expired|subscription could not be verified/i,
+      ),
     ).toBeVisible();
   });
 
@@ -119,7 +119,7 @@ test.describe("verifying a Stripe subscription", () => {
     });
 
     await page.goto(
-      "/subscribe?email=expired@example.com&token=sub_expired123"
+      "/subscribe?email=expired@example.com&token=sub_expired123",
     );
 
     await expect(page.getByText(/subscription has expired/i)).toBeInViewport();
@@ -141,7 +141,7 @@ test.describe("verifying a Stripe subscription", () => {
     await page.goto("/subscribe?session_id=cs_test_subscription");
 
     await expect(
-      page.getByRole("heading", { name: /your subscription is active/i })
+      page.getByRole("heading", { name: /your subscription is active/i }),
     ).toBeVisible();
     await expect(page).not.toHaveURL(/session_id/);
   });
@@ -155,13 +155,13 @@ test.describe("verifying a Stripe subscription", () => {
 
     await page.goto("/subscribe?email=test@example.com&token=sub_test123");
     await expect(
-      page.getByRole("heading", { name: /your subscription is active/i })
+      page.getByRole("heading", { name: /your subscription is active/i }),
     ).toBeVisible();
 
     const boxes = await Promise.all(
       [0, 1, 2].map((index) =>
-        page.locator(".meta-item").nth(index).boundingBox()
-      )
+        page.locator(".meta-item").nth(index).boundingBox(),
+      ),
     );
     const overlaps = (a, b) =>
       a.x < b.x + b.width &&
@@ -191,7 +191,7 @@ test.describe("returning from a Wrapped checkout", () => {
     await page.goto("/wrapped/subscription/success?session_id=cs_test_paid");
 
     await expect(
-      page.getByRole("heading", { name: /payment successful/i })
+      page.getByRole("heading", { name: /payment successful/i }),
     ).toBeVisible();
     await expect(page.getByText("sub_wrapped")).toBeVisible();
   });
@@ -204,10 +204,10 @@ test.describe("returning from a Wrapped checkout", () => {
     await page.goto("/wrapped/subscription/success");
 
     await expect(
-      page.getByRole("heading", { name: /nothing to confirm here/i })
+      page.getByRole("heading", { name: /nothing to confirm here/i }),
     ).toBeVisible();
     await expect(
-      page.getByRole("link", { name: /back to whatsapp wrapped/i })
+      page.getByRole("link", { name: /back to whatsapp wrapped/i }),
     ).toBeVisible();
   });
 
@@ -215,26 +215,26 @@ test.describe("returning from a Wrapped checkout", () => {
     await stubCallableFailure(
       page,
       "getCheckoutSession",
-      "No such checkout.session: cs_test_abc"
+      "No such checkout.session: cs_test_abc",
     );
 
     await page.goto("/wrapped/subscription/success?session_id=cs_test_abc");
 
     await expect(
-      page.getByRole("heading", { name: /could not confirm your payment/i })
+      page.getByRole("heading", { name: /could not confirm your payment/i }),
     ).toBeVisible();
     await expect(page.getByText(/No such checkout\.session/)).toHaveCount(0);
 
     // A dead end is what made this page a support ticket: there has to be a
     // retry, somewhere to go, and someone to ask.
     await expect(
-      page.getByRole("button", { name: /try again/i })
+      page.getByRole("button", { name: /try again/i }),
     ).toBeVisible();
     await expect(
-      page.getByRole("link", { name: /manage your subscription/i })
+      page.getByRole("link", { name: /manage your subscription/i }),
     ).toBeVisible();
     await expect(
-      page.getByRole("link", { name: "info@whatsanalyze.com" })
+      page.getByRole("link", { name: "info@whatsanalyze.com" }),
     ).toBeVisible();
   });
 
@@ -248,10 +248,10 @@ test.describe("returning from a Wrapped checkout", () => {
     await page.goto("/wrapped/subscription/success?session_id=cs_test_unpaid");
 
     await expect(
-      page.getByRole("heading", { name: /did not go through/i })
+      page.getByRole("heading", { name: /did not go through/i }),
     ).toBeVisible();
     await expect(
-      page.getByRole("heading", { name: /payment successful/i })
+      page.getByRole("heading", { name: /payment successful/i }),
     ).toHaveCount(0);
   });
 });
@@ -282,7 +282,7 @@ test.describe("verifying a legacy PayPal subscription", () => {
     await logIn(page, "legacy@example.com", "I-XBCXVY6FXX47");
 
     await expect(
-      page.getByRole("heading", { name: /your subscription is active/i })
+      page.getByRole("heading", { name: /your subscription is active/i }),
     ).toBeVisible();
     await expect(page.getByText("I-XBCXVY6FXX47")).toBeVisible();
 
@@ -304,7 +304,7 @@ test.describe("verifying a legacy PayPal subscription", () => {
     await logIn(page, "lapsed@example.com", "I-CANCELLED123");
 
     await expect(
-      page.getByText(/subscription not found|could not be verified/i)
+      page.getByText(/subscription not found|could not be verified/i),
     ).toBeVisible();
   });
 });

@@ -242,7 +242,7 @@ export default {
     incrementIdx(): void {
       this.selectedStep = Math.min(
         this.selectedStep + 1,
-        this.instructions[this.selectedSystem].length - 1
+        this.instructions[this.selectedSystem].length - 1,
       );
     },
     handleBreakpointChange(event: MediaQueryListEvent) {
@@ -257,7 +257,7 @@ export default {
       if (this.mobileQuery.addEventListener) {
         this.mobileQuery.addEventListener(
           "change",
-          this.handleBreakpointChange
+          this.handleBreakpointChange,
         );
       } else {
         this.mobileQuery.addListener(this.handleBreakpointChange);
@@ -270,7 +270,7 @@ export default {
       if (this.mobileQuery.removeEventListener) {
         this.mobileQuery.removeEventListener(
           "change",
-          this.handleBreakpointChange
+          this.handleBreakpointChange,
         );
       } else {
         this.mobileQuery.removeListener(this.handleBreakpointChange);

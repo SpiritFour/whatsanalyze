@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import { analyzeHeatmap } from "./chatHeatmap";
 
 describe("analyzeHeatmap", () => {

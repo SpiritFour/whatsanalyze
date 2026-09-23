@@ -6,6 +6,7 @@
 
 <script>
 import { Doughnut } from "vue-chartjs";
+import "~/utils/chartSetup";
 import { Chat } from "~/utils/transformChatData";
 import { doughnutOptions, separateSegments } from "~/utils/chartTheme";
 
@@ -61,7 +62,7 @@ export default {
   methods: {
     async updateGraph() {
       this.graphData = separateSegments(
-        await this.chartdata.getShareOfSpeech()
+        await this.chartdata.getShareOfSpeech(),
       );
     },
   },

@@ -89,7 +89,7 @@ export function useToolSchema(options: {
           innerHTML: JSON.stringify(
             graph.length === 1
               ? { "@context": "https://schema.org", ...graph[0] }
-              : { "@context": "https://schema.org", "@graph": graph }
+              : { "@context": "https://schema.org", "@graph": graph },
           ),
         },
       ],

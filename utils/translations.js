@@ -445,8 +445,7 @@ export const messages = {
       "Analyze your chats and\n      <strong> get first hand data insights</strong>",
     jennifer:
       "Visualizing my friends chat revealed a lot about our relationship. I always though that I was the one sending more messages. Really nice to see all those fun facts about our history. Keep it going and add more beautiful visuals.",
-    lara:
-      "Amazing to see a whole WhatsApp history at a glance. I have chats going back multiple years seeing how the relationship is mirrored in the chat is amazing. I love that my files are not uploaded and that it runs directly in my browser.",
+    lara: "Amazing to see a whole WhatsApp history at a glance. I have chats going back multiple years seeing how the relationship is mirrored in the chat is amazing. I love that my files are not uploaded and that it runs directly in my browser.",
     says: "says",
     about: "About us",
     impressumLanguageNote:
@@ -1425,8 +1424,7 @@ export const messages = {
       "Analysiere deine Chats und\n      <strong> erhalte Dateneinblicke aus erster Hand</strong>",
     jennifer:
       "Die Visualisierung der Chats meiner Freunde hat viel über unsere Beziehung enthüllt. Ich dachte immer, dass ich diejenige bin, die mehr Nachrichten verschickt. Wirklich schön, all diese lustigen Fakten über unsere Geschichte zu sehen. Mache weiter so und füge mehr schöne Visualisierungen hinzu.",
-    lara:
-      "Erstaunlich, eine ganze WhatsApp-Historie auf einen Blick zu sehen. Ich habe Chats, die mehrere Jahre zurückreichen, zu sehen, wie sich die Beziehung im Chat widerspiegelt, ist erstaunlich. Ich liebe es, dass meine Dateien nicht hochgeladen werden und dass es direkt in meinem Browser läuft.",
+    lara: "Erstaunlich, eine ganze WhatsApp-Historie auf einen Blick zu sehen. Ich habe Chats, die mehrere Jahre zurückreichen, zu sehen, wie sich die Beziehung im Chat widerspiegelt, ist erstaunlich. Ich liebe es, dass meine Dateien nicht hochgeladen werden und dass es direkt in meinem Browser läuft.",
     says: "sagt",
     about: "Über die Macher",
     impressumLanguageNote:
@@ -2380,8 +2378,7 @@ export const messages = {
       "Analiza tus chats y\n      <strong> obtener información de primera mano sobre datos</strong>",
     jennifer:
       "Visualizar el chat de mis amigos reveló mucho sobre nuestra relación. Siempre pensé que yo era el que enviaba más mensajes. Realmente agradable ver todos esos datos divertidos sobre nuestra historia. Continúe y agregue imágenes más hermosas.",
-    lara:
-      "Increíble ver un historial completo de WhatsApp de un vistazo. Tengo chats que se remontan a varios años y ver cómo la relación se refleja en el chat es increíble. Me encanta que mis archivos no se carguen y que se ejecute directamente en mi navegador.",
+    lara: "Increíble ver un historial completo de WhatsApp de un vistazo. Tengo chats que se remontan a varios años y ver cómo la relación se refleja en el chat es increíble. Me encanta que mis archivos no se carguen y que se ejecute directamente en mi navegador.",
     says: "dice",
     about: "Sobre nosotras",
     impressumLanguageNote:
@@ -2400,8 +2397,7 @@ export const messages = {
     weekday: "Día de la Semana",
     wordCloud: "Nube de Palabras",
     downloadAllGraphs: "¡Descarga todos los gráficos a la vez!",
-    shareWithFriends:
-      "Compártelos con tus amigos, todo gratis sólo para ti ❤️️",
+    shareWithFriends: "Compártelos con tus amigos, todo gratis sólo para ti ❤️️",
     downloadResults: "Descargar resultados",
     lookingFor: "Buscando",
     pdfDownload: "Descarga de PDF",
@@ -3145,8 +3141,7 @@ export const messages = {
       "Analise seus chats <strong> obtenha insights diretos dos dados</strong>",
     jennifer:
       "Visualizar o chat com meus amigos revelou muito sobre nosso relacionamento. Sempre pensei que eu era quem enviava mais mensagens. Muito legal ver todos esses fatos divertidos sobre nossa história. Continuem assim e adicionem mais visuais bonitos.",
-    lara:
-      "Incrível ver um histórico completo do WhatsApp de relance. Tenho chats de vários anos e ver como o relacionamento é refletido no chat é incrível. Adoro que meus arquivos não sejam carregados e que tudo funcione diretamente no meu navegador.",
+    lara: "Incrível ver um histórico completo do WhatsApp de relance. Tenho chats de vários anos e ver como o relacionamento é refletido no chat é incrível. Adoro que meus arquivos não sejam carregados e que tudo funcione diretamente no meu navegador.",
     says: "diz",
     about: "Sobre nós",
     impressumLanguageNote:
@@ -3986,8 +3981,7 @@ export const messages = {
     analyzeYourChatLong:
       "Analysez votre chat, révélez des faits inconnus et surprenez vos amis en leur donnant un aperçu d'une conversation d'un an.",
     didWeMake: "On t'a fait partir 🥳 ?",
-    buyUsCoffee:
-      "Achetez-nous un ☕️ et obtenez vos résultats gratuitement !!!",
+    buyUsCoffee: "Achetez-nous un ☕️ et obtenez vos résultats gratuitement !!!",
     getResults:
       "Vous obtiendrez tous les résultats sous la forme d'une image exactement telle qu'elle est présentée sur votre appareil. La génération peut prendre un certain temps.",
     headerTextFeaturesTable:
@@ -4098,8 +4092,7 @@ export const messages = {
       "Analysez vos chats et\n      <strong> obtenir des informations sur les données</strong>",
     jennifer:
       "La visualisation du chat de mes amis a révélé beaucoup de choses sur notre relation. J'ai toujours pensé que c'était moi qui envoyais le plus de messages. C'est vraiment sympa de voir tous ces faits amusants sur notre histoire. Je pense qu'il faut continuer et ajouter d'autres belles images.",
-    lara:
-      "C'est incroyable de voir tout l'historique de WhatsApp en un coup d'œil. J'ai des chats qui remontent à plusieurs années et voir comment la relation est reflétée dans le chat est incroyable. J'aime le fait que mes fichiers ne soient pas téléchargés et que l'application fonctionne directement dans mon navigateur.",
+    lara: "C'est incroyable de voir tout l'historique de WhatsApp en un coup d'œil. J'ai des chats qui remontent à plusieurs années et voir comment la relation est reflétée dans le chat est incroyable. J'aime le fait que mes fichiers ne soient pas téléchargés et que l'application fonctionne directement dans mon navigateur.",
     says: "says",
     about: "A propos",
     impressumLanguageNote:
@@ -5045,8 +5038,7 @@ export const messages = {
       "Analizza le tue chat e\n<strong> ottieni intuizioni sui dati di prima mano</strong>",
     jennifer:
       "Visualizzare la chat dei miei amici ha rivelato molto sulla nostra relazione. Ho sempre pensato di essere io a inviare più messaggi. È davvero bello vedere tutti questi fatti divertenti sulla nostra storia. Continuate così e aggiungete più grafici belli.",
-    lara:
-      "Incredibile vedere un'intera storia di WhatsApp a colpo d'occhio. Ho chat che risalgono a molti anni fa e vedere come la relazione si rifletta nella chat è sorprendente. Amo che i miei file non vengano caricati e che tutto funzioni direttamente nel mio browser.",
+    lara: "Incredibile vedere un'intera storia di WhatsApp a colpo d'occhio. Ho chat che risalgono a molti anni fa e vedere come la relazione si rifletta nella chat è sorprendente. Amo che i miei file non vengano caricati e che tutto funzioni direttamente nel mio browser.",
     says: "dice",
     about: "Chi siamo",
     impressumLanguageNote:

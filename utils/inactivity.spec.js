@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import { analyzeInactivity, formatDuration, formatTimeAgo } from "./inactivity";
 
 describe("useChatTool inactivity analysis", () => {
@@ -57,7 +56,7 @@ describe("useChatTool inactivity analysis", () => {
 
     // Check initiator tracking (gap > 6h)
     const bobInitiation = result.conversationInitiations.breakdown.find(
-      (b) => b.author === "Bob"
+      (b) => b.author === "Bob",
     );
     expect(bobInitiation).toBeDefined();
     expect(bobInitiation.count).toBe(1);

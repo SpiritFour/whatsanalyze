@@ -22,7 +22,7 @@ const allowedOrigins = defineString("ALLOWED_ORIGINS");
 
 export const getStripe = () =>
   new Stripe(stripeSecretKey.value(), {
-    apiVersion: "2026-02-25.clover",
+    apiVersion: "2026-08-26.dahlia",
     appInfo: {
       name: appName.value(),
       version: "0.0.1",
@@ -69,13 +69,13 @@ export function validateOrigin(origin?: string): string {
 export function ensureSameOrigin(
   url: string | undefined,
   origin: string,
-  field: string
+  field: string,
 ): string | undefined {
   if (!url) return undefined;
   if (url !== origin && !url.startsWith(`${origin}/`)) {
     throw new HttpsError(
       "invalid-argument",
-      `${field} must match the request origin.`
+      `${field} must match the request origin.`,
     );
   }
   return url;

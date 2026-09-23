@@ -30,6 +30,19 @@ const test = base.test.extend({
       await page.route(pattern, (route) => route.abort());
     }
 
+    // The pages are prerendered, so their markup is on screen and clickable
+    // before Vue hydrates it, and anything a test does in that window reaches
+    // no handler. Every test here means "once the page is up", so wait for
+    // hydration rather than for the load event.
+    const goto = page.goto.bind(page);
+    page.goto = async (url, options) => {
+      const response = await goto(url, options);
+      await page.waitForFunction(
+        () => document.documentElement.dataset.hydrated === "true",
+      );
+      return response;
+    };
+
     // An uncaught exception means the page is broken even when the thing the
     // test looked for happened to render. Every test checks for them.
     const runtimeErrors = [];
@@ -106,7 +119,7 @@ const STRIPE_CHECKOUT = "https://checkout.stripe.test/c/pay/cs_test_session";
 const stubStripeCheckout = async (page, url = STRIPE_CHECKOUT) => {
   const calls = await stubCallable(page, "createCheckoutSession", { url });
   await page.route("https://checkout.stripe.test/**", (route) =>
-    route.fulfill({ contentType: "text/html", body: "Stripe Checkout Mock" })
+    route.fulfill({ contentType: "text/html", body: "Stripe Checkout Mock" }),
   );
   return calls;
 };
@@ -136,7 +149,7 @@ const expectAnalysis = async (page) => {
   // still green.
   await expect(page.locator("#results .landing-reveal")).toHaveCSS(
     "opacity",
-    "1"
+    "1",
   );
 };
 
@@ -184,7 +197,7 @@ const otherChatFile = () => {
   for (let i = 0; i < 40; i++) {
     const author = i % 2 ? "Alice Smith" : "Bob Jones";
     lines.push(
-      `1/${2 + (i % 20)}/21, ${9 + (i % 10)}:15 - ${author}: message ${i} 🎉`
+      `1/${2 + (i % 20)}/21, ${9 + (i % 10)}:15 - ${author}: message ${i} 🎉`,
     );
   }
   return {

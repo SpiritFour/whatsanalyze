@@ -20,7 +20,7 @@
           <div class="text-3xl font-bold leading-none text-emerald-300">
             {{
               Math.round(
-                data.relativeWords * result.getWordUsage.totalWordCount
+                data.relativeWords * result.getWordUsage.totalWordCount,
               )
             }}
           </div>
@@ -33,7 +33,7 @@
           <div class="text-3xl font-bold leading-none text-white">
             {{
               Math.round(
-                data.relativeMessages * result.getWordUsage.totalMessagesCount
+                data.relativeMessages * result.getWordUsage.totalMessagesCount,
               )
             }}
           </div>

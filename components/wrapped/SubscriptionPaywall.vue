@@ -75,7 +75,7 @@ watch(
       analyticsEcommerce.viewPricing("wrapped_paywall");
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 const emit = defineEmits<{
   close: [];

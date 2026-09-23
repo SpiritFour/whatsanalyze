@@ -26,7 +26,7 @@
       <v-row
         v-for="(data, idx) in chat.chatObject.slice(
           startIdx,
-          startIdx + offset
+          startIdx + offset,
         )"
         :key="idx"
         class="scroll-stop"
@@ -122,7 +122,7 @@ export default {
           "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
           "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
           "(\\#[-a-z\\d_]*)?",
-        "i"
+        "i",
       );
 
       // "<media omitted>", "<Medien ausgeschlossen>", ... — WhatsApp's own

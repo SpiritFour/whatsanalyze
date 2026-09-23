@@ -51,7 +51,7 @@ function buildSubscriptionLoginUrl(customer: Customer): string {
 
 export async function sendSubscriptionConfirmationEmail(
   customer: Customer,
-  billing: SubscriptionBilling
+  billing: SubscriptionBilling,
 ): Promise<void> {
   const { email, name } = customer;
   try {
@@ -68,7 +68,7 @@ export async function sendSubscriptionConfirmationEmail(
           amountPaid: formatAmount(billing.amountPaidCents, billing.currency),
           renewalAmount: formatAmount(
             billing.renewalAmountCents,
-            billing.currency
+            billing.currency,
           ),
           renewalDate: formatDate(billing.renewsAt),
         },

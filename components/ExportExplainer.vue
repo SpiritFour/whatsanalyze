@@ -151,7 +151,7 @@ import { analyticsSite } from "~/composables/useAnalytics";
 import { scrollTo } from "~/utils/scroll";
 
 let apple = () => false;
-// eslint-disable-next-line no-undef
+
 if (import.meta.client) {
   apple = () => {
     return (
@@ -336,7 +336,7 @@ export default {
     activeStep() {
       return Math.min(
         this.tabStatus[this.tab],
-        this.activeTab.carouselItems.length - 1
+        this.activeTab.carouselItems.length - 1,
       );
     },
     activeSlide() {
@@ -355,7 +355,7 @@ export default {
   methods: {
     clickHandler() {
       analyticsSite.jumpToUpload(
-        this.tab === 0 ? "export_guide_ios" : "export_guide_android"
+        this.tab === 0 ? "export_guide_ios" : "export_guide_android",
       );
       scrollTo("#dropzone-slot, .file-handler", { offset: 100 });
     },
@@ -383,12 +383,11 @@ export default {
         }
       }
     },
-    // eslint-disable-next-line no-unused-vars
+
     showInstallPromotion(status) {
       this.installButtonStatus = status;
     },
     catchPWA() {
-      // eslint-disable-next-line no-undef
       if (import.meta.client) {
         window.addEventListener("beforeinstallprompt", (e) => {
           // Prevent the mini-infobar from appearing on mobile
@@ -432,7 +431,9 @@ export default {
   font-weight: 600;
   color: $wa-ink-muted;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
 
   &.is-active {
     background: $wa-accent;
@@ -472,7 +473,9 @@ export default {
   background: transparent;
   text-align: left;
   cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
 
   &:hover {
     background: $wa-surface-white;
@@ -497,7 +500,9 @@ export default {
   font-weight: 700;
   color: $wa-ink-faint;
   background: $wa-surface-light;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
 
   .export-explainer__step.is-active & {
     background: $wa-accent;
@@ -664,7 +669,9 @@ export default {
   border-radius: 50%;
   background: $wa-border;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 
   &.is-active {
     background: $wa-accent;
@@ -689,7 +696,10 @@ export default {
   text-decoration: none;
   cursor: pointer;
   box-shadow: 0 10px 30px rgba(33, 166, 141, 0.35);
-  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
 
   &:hover {
     background: $wa-accent-light;

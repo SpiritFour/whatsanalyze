@@ -90,11 +90,10 @@ export function getWordUsage(messages: Message[]): WordUsageAnalysis {
   > = {};
 
   for (const author in authorStats) {
-    const { messageCount, wordCount, freqMap, longestMessage } = authorStats[
-      author
-    ];
+    const { messageCount, wordCount, freqMap, longestMessage } =
+      authorStats[author];
     const sortedAuthorWords = [...freqMap.entries()].sort(
-      (a, b) => b[1] - a[1]
+      (a, b) => b[1] - a[1],
     );
     const top5Words = sortedAuthorWords
       .slice(0, 5)
@@ -111,7 +110,7 @@ export function getWordUsage(messages: Message[]): WordUsageAnalysis {
   }
 
   const sortedGlobalWords = [...globalWordFreq.entries()].sort(
-    (a, b) => b[1] - a[1]
+    (a, b) => b[1] - a[1],
   );
   const globalTop5Words = sortedGlobalWords
     .slice(0, 5)

@@ -34,10 +34,10 @@ export async function render(
   messagesPerPerson: any,
   radarMonth: any,
   radarDay: any,
-  webworker: any
+  webworker: any,
 ) {
   // Default export is a4 paper, portrait, using millimeters for units
-  // eslint-disable-next-line new-cap
+
   const doc = new jsPDF();
   // doc specifications
   const width = 210;
@@ -76,7 +76,7 @@ export async function render(
   const calcMessageBodyHeight = function (
     numLines: number,
     attachmentHeight: number,
-    isSystem: boolean
+    isSystem: boolean,
   ) {
     let messageY = marginTop + usedYSpace;
     const messageYSpace = numLines * lineHeight + authorHeight + timeHeight; // Height of Messages
@@ -166,7 +166,7 @@ export async function render(
   const getScale = function (
     width: number,
     height: number,
-    desiredWidth: number
+    desiredWidth: number,
   ) {
     const yScale = (0.5 * pageYSpace) / height;
     const xScale = desiredWidth / width;
@@ -182,7 +182,7 @@ export async function render(
     const [rescaledWidth, rescaledHeight] = getScale(
       graph.width,
       graph.height,
-      width - 2 * marginLeft
+      width - 2 * marginLeft,
     );
 
     if (usedYSpace + 10 + 50 > pageYSpace) {
@@ -198,7 +198,7 @@ export async function render(
       marginLeft,
       usedYSpace,
       rescaledWidth,
-      rescaledHeight
+      rescaledHeight,
     );
     usedYSpace += rescaledHeight + 25;
   };
@@ -324,7 +324,7 @@ export async function render(
       attachmentSize = getScale(
         attachmentSize[0],
         attachmentSize[1],
-        (width - 2 * marginLeft) * 0.7
+        (width - 2 * marginLeft) * 0.7,
       );
     }
 
@@ -335,15 +335,15 @@ export async function render(
     const messageY = calcMessageBodyHeight(
       numLines,
       attachmentSize[1],
-      isSystem
+      isSystem,
     ); // get start Y Coordinate of Message
 
     const singleLineTextWidth = doc.getTextWidth(data.message);
     let messageWidth = hasAttachment
       ? attachmentSize[0]
       : singleLineTextWidth > 120
-      ? 120
-      : singleLineTextWidth;
+        ? 120
+        : singleLineTextWidth;
     // It might be needed to adjust to author width!
     doc.setFontSize(fontSize / 1.3);
     doc.setFont("myFont", "bold");
@@ -384,7 +384,7 @@ export async function render(
         : messageHeight + authorHeight + timeHeight,
       2,
       2,
-      "F"
+      "F",
     );
 
     // draw author
@@ -395,7 +395,7 @@ export async function render(
         doc.setTextColor(
           personRgbColor[0],
           personRgbColor[1],
-          personRgbColor[2]
+          personRgbColor[2],
         );
       }
       doc.setFontSize(fontSize / 1.3);
@@ -403,7 +403,7 @@ export async function render(
       doc.text(
         data.author,
         messageX + paddingMessage,
-        messageY + paddingMessage
+        messageY + paddingMessage,
       );
     }
 
@@ -416,7 +416,7 @@ export async function render(
         messageX + paddingMessage,
         messageY + authorHeight,
         attachmentSize[0],
-        attachmentSize[1]
+        attachmentSize[1],
       );
       usedYSpace += attachmentSize[1];
     }
@@ -435,7 +435,7 @@ export async function render(
         isSystem ? messageX + 65 : messageX + paddingMessage,
         isSystem ? messageY + 2 * paddingMessage : messageY + authorHeight,
         // .map((m) => m.replace(asciRegex, "")),
-        { align: isSystem ? "center" : "left" }
+        { align: isSystem ? "center" : "left" },
       );
     }
 
@@ -447,7 +447,7 @@ export async function render(
       doc.text(
         dateString,
         messageX + messageWidth - dateWidth + paddingMessage,
-        messageY + authorHeight + messageHeight
+        messageY + authorHeight + messageHeight,
       );
     }
   }

@@ -92,6 +92,16 @@ export default {
       isSuccess: false,
     };
   },
+  mounted() {
+    // The page is prerendered, so this input is on screen and clickable
+    // before Vue hydrates it. A file picked in that window fires its change
+    // event into nothing, and the drop zone just sits there — so take
+    // whatever is already selected once the handler is live.
+    const input = this.$el.querySelector("#uploadmytextfile");
+    if (input && input.files && input.files.length) {
+      this.processFileList(input.files);
+    }
+  },
   methods: {
     /**
      * Parsing happens in composables/useChatTool, which is also what the
@@ -113,7 +123,7 @@ export default {
       if (!multiple) {
         analyticsChat.uploadStarted(
           isZipFile(files[0]) ? "zip" : "txt",
-          wasDragged ? "drop" : "picker"
+          wasDragged ? "drop" : "picker",
         );
       }
 
@@ -138,7 +148,7 @@ export default {
         // Participants, counted off the parsed messages. The transformed chat
         // knows this too, but it does not exist yet at this point.
         new Set(chatObject.messages?.map((message) => message.author)).size,
-        chatObject.durationMs
+        chatObject.durationMs,
       );
     },
 
@@ -255,7 +265,9 @@ input[type="file"] {
   font-size: 0.95rem;
   font-weight: 600;
   box-shadow: $wa-shadow-accent;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .file-handler__drop:hover .file-handler__button {

@@ -10,7 +10,15 @@
       class="language-switcher__select"
       @change="onChange"
     >
-      <option v-for="l in locales" :key="l.code" :value="l.code">
+      <!-- `value` on a <select> is not a real attribute, so the prerendered
+           markup showed the first flag whatever the page's language was
+           until Vue hydrated it. The option carries the choice instead. -->
+      <option
+        v-for="l in locales"
+        :key="l.code"
+        :value="l.code"
+        :selected="l.code === locale"
+      >
         {{ isWide ? `${flags[l.code]} ${l.name}` : flags[l.code] }}
       </option>
     </select>
@@ -21,7 +29,7 @@
 </template>
 
 <script setup>
-import { onBeforeUnmount, onMounted, ref } from "vue";
+import { onBeforeMount, onBeforeUnmount, onMounted, ref } from "vue";
 import { analyticsSite } from "~/composables/useAnalytics";
 
 const { locale, locales } = useI18n();
@@ -42,6 +50,16 @@ let mediaQuery = null;
 const onMediaChange = (event) => {
   isWide.value = event.matches;
 };
+
+// The header is prerendered, so this select is usable before Vue hydrates it
+// and a language picked in that window never fires `onChange`. Hydration
+// resets the select to `locale`, so the choice has to be read before it.
+onBeforeMount(() => {
+  const picked = document.getElementById("language-select")?.value;
+  if (picked && picked !== locale.value) {
+    navigateTo(switchLocalePath(picked));
+  }
+});
 
 onMounted(() => {
   if (typeof window.matchMedia !== "function") return;
@@ -88,7 +106,9 @@ const onChange = (event) => {
   border: 1px solid $wa-border-invert;
   background: $wa-surface-dark-raised;
   color: $wa-ink-invert;
-  transition: border-color 0.2s ease, background 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
 
   &:hover {
     border-color: rgba(245, 245, 247, 0.28);

@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import { analyzeMessages } from "./messageCounter";
 
 describe("analyzeMessages", () => {
@@ -11,7 +10,7 @@ describe("analyzeMessages", () => {
           author: "System",
           message: "Messages and calls are end-to-end encrypted.",
         },
-      ])
+      ]),
     ).toBeNull();
   });
 

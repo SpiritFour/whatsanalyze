@@ -25,8 +25,8 @@ export default defineEventHandler((event) => {
             (alt) =>
               `    <xhtml:link rel="alternate" hreflang="${alt}" href="${pathFor(
                 alt,
-                page
-              )}"/>`
+                page,
+              )}"/>`,
           )
           .join("\n");
         return [
@@ -35,7 +35,7 @@ export default defineEventHandler((event) => {
           alternates,
           "  </url>",
         ].join("\n");
-      })
+      }),
     )
     .join("\n");
 

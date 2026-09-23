@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import { analyzeWords } from "./wordCounter";
 
 describe("analyzeWords", () => {
@@ -50,7 +49,7 @@ describe("analyzeWords", () => {
     expect(topWords).not.toContain("https");
     expect(topWords).not.toContain("example");
     expect(topWords).toEqual(
-      expect.not.arrayContaining(["yes", "is", "can", "this"])
+      expect.not.arrayContaining(["yes", "is", "can", "this"]),
     );
   });
 });

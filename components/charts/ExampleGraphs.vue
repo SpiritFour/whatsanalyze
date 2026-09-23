@@ -26,7 +26,6 @@ export default {
     };
   },
   created() {
-    // eslint-disable-next-line no-undef
     if (import.meta.client) {
       fetch("/example-results.json")
         .then((response) => response.text())
@@ -37,7 +36,7 @@ export default {
           // so the colours are replaced with today's on the way in.
           Object.assign(instance, {
             _lineGraphData: Promise.resolve(
-              recolorChartData(serializedObject[0])
+              recolorChartData(serializedObject[0]),
             ),
             _funfacts: Promise.resolve(serializedObject[1]),
             _allWords: Promise.resolve(serializedObject[2]),
@@ -45,7 +44,7 @@ export default {
             _dailyData: Promise.resolve(recolorChartData(serializedObject[4])),
             _weeklyData: Promise.resolve(recolorChartData(serializedObject[5])),
             _shareOfSpeech: Promise.resolve(
-              recolorChartData(serializedObject[6])
+              recolorChartData(serializedObject[6]),
             ),
           });
           this.chat = instance;
@@ -54,3 +53,9 @@ export default {
   },
 };
 </script>
+
+<style>
+/* Tailwind is not loaded globally (see nuxt.config): the parts of the
+   site that opt into it pull it in themselves. */
+@import "~/assets/tailwind.css";
+</style>

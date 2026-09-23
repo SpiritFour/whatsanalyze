@@ -6,6 +6,7 @@
 
 <script>
 import { Line } from "vue-chartjs";
+import "~/utils/chartSetup";
 import { Chat } from "~/utils/transformChatData";
 import { lineOptions } from "~/utils/chartTheme";
 import { accentColor, hexToRgbA } from "~/utils/colors";
@@ -60,7 +61,7 @@ export default {
         0,
         chartArea.top,
         0,
-        chartArea.bottom
+        chartArea.bottom,
       );
       gradient.addColorStop(0, hexToRgbA(accentColor, 0.28));
       gradient.addColorStop(1, hexToRgbA(accentColor, 0));

@@ -28,7 +28,7 @@ async function getAccessToken(): Promise<string> {
   // one in on the command line produces — corrupts the header and turns every
   // legacy login into a 401.
   const credentials = Buffer.from(
-    `${paypalClientId.value().trim()}:${paypalSecret.value().trim()}`
+    `${paypalClientId.value().trim()}:${paypalSecret.value().trim()}`,
   ).toString("base64");
 
   const response = await fetch(`${paypalApiBase.value()}/v1/oauth2/token`, {
@@ -69,14 +69,14 @@ export const verifyPaypalSubscription = onCall(
     try {
       const response = await fetch(
         `${paypalApiBase.value()}/v1/billing/subscriptions/${encodeURIComponent(
-          subscriptionId
+          subscriptionId,
         )}`,
         {
           headers: {
             Authorization: `Bearer ${await getAccessToken()}`,
             Accept: "application/json",
           },
-        }
+        },
       );
 
       // A subscription id nobody recognises is a failed login, not an outage.
@@ -90,7 +90,7 @@ export const verifyPaypalSubscription = onCall(
 
       if (!response.ok) {
         throw new Error(
-          `PayPal subscription lookup failed (${response.status})`
+          `PayPal subscription lookup failed (${response.status})`,
         );
       }
 
@@ -136,5 +136,5 @@ export const verifyPaypalSubscription = onCall(
       });
       throw new HttpsError("internal", "Error verifying subscription");
     }
-  }
+  },
 );

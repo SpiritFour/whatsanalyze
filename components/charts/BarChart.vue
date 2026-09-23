@@ -6,6 +6,7 @@
 
 <script>
 import { Bar } from "vue-chartjs";
+import "~/utils/chartSetup";
 import { Chat } from "~/utils/transformChatData";
 import { barOptions } from "~/utils/chartTheme";
 

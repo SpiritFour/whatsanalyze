@@ -37,7 +37,7 @@ const returnFromCheckout = (page, sessionId) =>
 const expectPaywall = async (page) => {
   await expect(page.getByText("Choose Your Plan")).toBeVisible();
   await expect(
-    page.getByRole("button", { name: /^Download now$/i })
+    page.getByRole("button", { name: /^Download now$/i }),
   ).toHaveCount(0);
 
   await page
@@ -46,7 +46,7 @@ const expectPaywall = async (page) => {
     .click();
   await expect(page.getByRole("button", { name: /Buy Now/i })).toBeVisible();
   await expect(
-    page.getByRole("button", { name: /^Download now$/i })
+    page.getByRole("button", { name: /^Download now$/i }),
   ).toHaveCount(0);
 };
 
@@ -171,7 +171,7 @@ test.describe("buying the full PDF once", () => {
     await analyzeChat(page, otherChatFile());
     await expectPaywall(page);
     await expect(
-      page.getByText("Your full chat PDF is paid for")
+      page.getByText("Your full chat PDF is paid for"),
     ).toBeVisible();
   });
 
@@ -183,7 +183,7 @@ test.describe("buying the full PDF once", () => {
     await page.addInitScript(() => {
       sessionStorage.setItem(
         "whatsanalyze_one_time_purchase",
-        JSON.stringify({ sessionId: "cs_test_without_chat" })
+        JSON.stringify({ sessionId: "cs_test_without_chat" }),
       );
     });
 
@@ -239,7 +239,7 @@ test.describe("starting a subscription", () => {
 
     const payload = checkout[0].postDataJSON().data;
     expect(payload.successUrl).toMatch(
-      /\/wrapped\/subscription\/success\?session_id=\{CHECKOUT_SESSION_ID\}$/
+      /\/wrapped\/subscription\/success\?session_id=\{CHECKOUT_SESSION_ID\}$/,
     );
     expect(payload.cancelUrl).toMatch(/\/wrapped\/subscription\/canceled$/);
   });
@@ -261,7 +261,7 @@ test.describe("starting a subscription", () => {
     await page.getByRole("link", { name: "Subscribe Now" }).click();
     await page.waitForURL(/\/subscribe$/);
     await expect(
-      page.getByRole("button", { name: "Subscribe Now" })
+      page.getByRole("button", { name: "Subscribe Now" }),
     ).toBeVisible();
   });
 
@@ -300,7 +300,7 @@ test.describe("starting a subscription", () => {
     for (const path of ["/subscribe", "/wrapped"]) {
       await page.goto(path);
       await expect(
-        page.getByRole("button", { name: "Subscribe Now", exact: true })
+        page.getByRole("button", { name: "Subscribe Now", exact: true }),
       ).toBeVisible();
     }
   });
@@ -321,12 +321,12 @@ test.describe("quoting prices", () => {
     // two have to be quoted 5 € apart or checkout contradicts the table.
     await expect(prices.nth(2)).toHaveText("€4.99 First Month");
     await expect(page.locator(".pricing-card__was--block")).toHaveText(
-      "then €9.99/month"
+      "then €9.99/month",
     );
 
     // No "7,99 Euro" next to "7.99 EUR" next to "€9.99/month".
     await expect(
-      page.locator(".pricing-card").getByText(/EUR|Euro/)
+      page.locator(".pricing-card").getByText(/EUR|Euro/),
     ).toHaveCount(0);
   });
 
@@ -364,7 +364,7 @@ test.describe("quoting prices", () => {
       // is the one place the recurring price can be checked as it is read.
       await expect(page.locator(".plan-price .follow-on")).toHaveText(follow);
       await expect(page.locator(".sub-page__container")).not.toContainText(
-        "Everything Unlocked"
+        "Everything Unlocked",
       );
     }
   });

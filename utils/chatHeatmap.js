@@ -51,7 +51,7 @@ export function analyzeHeatmap(messages, parseDurationMs = 0) {
   const total = validMessages.length;
   const maxHourlyCount = Math.max(...hourly, 1);
   const hourlyPercentages = hourly.map((c) =>
-    Math.round((c / maxHourlyCount) * 100)
+    Math.round((c / maxHourlyCount) * 100),
   );
 
   let peakHour = 0;
@@ -97,7 +97,7 @@ export function analyzeHeatmap(messages, parseDurationMs = 0) {
         nightPct: p.total > 0 ? Math.round((p.nightCount / p.total) * 100) : 0,
         peakHour: pPeakH,
         peakHourLabel: `${formatHour(pPeakH)} – ${formatHour(
-          (pPeakH + 1) % 24
+          (pPeakH + 1) % 24,
         )}`,
       };
     })

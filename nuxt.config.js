@@ -17,12 +17,28 @@ const localizedRoutes = localeCodes
 export default defineNuxtConfig({
   compatibilityDate: "2026-03-01",
   srcDir: ".",
-  ssr: false,
+  // Prerendered, so every page ships real HTML and paints before its JS has
+  // run. Without this the hero was invisible until the whole bundle had
+  // hydrated: 16 s to the largest paint on a phone.
+  ssr: true,
 
   dir: {
     public: "static",
   },
   ignore:[".delta"],
+
+  hooks: {
+    // Nuxt puts a <link rel="prefetch"> in the document head for every
+    // dynamic chunk and every image those chunks reference — here 30 images
+    // and 8 scripts, ~1.5 MB, all requested before the page had painted. On
+    // a phone that is the entire downlink, and the first paint sat waiting
+    // for the pipe to clear. Those routes load when they are navigated to.
+    "build:manifest"(manifest) {
+      for (const entry of Object.values(manifest)) {
+        entry.prefetch = false;
+      }
+    },
+  },
 
   nitro: {
     preset: "static",
@@ -145,7 +161,13 @@ export default defineNuxtConfig({
   ],
 
   tailwindcss: {
-    cssPath: "~/assets/tailwind.css",
+    // Not injected globally: Tailwind's utilities are only used by the
+    // results, the tools and /wrapped, and 37 KB gzipped of render-blocking
+    // CSS on the landing page for components nobody has opened yet was the
+    // single biggest thing left in front of the first paint. The components
+    // that opt in (.wa-scope / .wrapped-scope) import it themselves, so it
+    // travels in their chunk.
+    cssPath: false,
     configPath: "tailwind.config.mjs",
     exposeConfig: false,
     viewer: false,
@@ -161,10 +183,9 @@ export default defineNuxtConfig({
       styles: true,
     },
     vuetifyOptions: {
-      icons: {
-        defaultSet: "mdi",
-        sets: "mdi",
-      },
+      // The set itself is registered in plugins/vuetify-icons.js: naming one
+      // here is what makes the module inject @mdi/font's stylesheet.
+      icons: false,
       theme: {
         defaultTheme: "light",
         themes: {
