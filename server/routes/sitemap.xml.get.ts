@@ -9,12 +9,14 @@ import { indexablePages, localeCodes, siteBaseUrl } from "../../config/routes";
  *
  * Every page is listed once per locale, with the alternates cross-linked the
  * way `prefix_except_default` serves them: English at the root, the rest
- * behind their code.
+ * behind their code. Each path ends in a slash because GitHub Pages serves the
+ * prerendered `page/index.html` there and 301s the bare path — a sitemap of
+ * redirects is one Search Console will not index.
  */
 export default defineEventHandler((event) => {
   const pathFor = (locale: string, page: string) => {
     const prefix = locale === "en" ? "" : `/${locale}`;
-    return `${siteBaseUrl}${prefix}/${page}`.replace(/\/$/, page ? "" : "/");
+    return `${siteBaseUrl}${prefix}/${page ? `${page}/` : ""}`;
   };
 
   const urls = indexablePages

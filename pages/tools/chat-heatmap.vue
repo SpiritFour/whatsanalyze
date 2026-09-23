@@ -268,7 +268,7 @@ useSeoMeta({
   ogTitle: () => t("toolsChatHeatmap.ogTitle"),
   ogDescription: () => t("toolsChatHeatmap.ogDescription"),
   ogType: "website",
-  ogUrl: "https://www.whatsanalyze.com/tools/chat-heatmap",
+  ogUrl: "https://whatsanalyze.com/tools/chat-heatmap",
 });
 
 const analysis = ref<any>(null);

@@ -57,14 +57,15 @@ export default defineNuxtConfig({
       "utils/**",
     ],
     prerender: {
-      // /sitemap.xml is a server route; prerendering it writes a real sitemap
-      // into dist instead of letting the SPA shell answer for it.
+      // /sitemap.xml and /robots.txt are server routes; prerendering writes them
+      // into dist instead of letting the SPA shell answer for them.
       // The retired paths have no page of their own, so they are only written
       // into dist if the prerenderer is told to visit them.
       routes: [
         ...localizedRoutes,
         ...Object.keys(retiredRedirects),
         "/sitemap.xml",
+        "/robots.txt",
       ],
     },
   },
