@@ -260,7 +260,7 @@ useSeoMeta({
   ogTitle: () => t("toolsWordCounter.ogTitle"),
   ogDescription: () => t("toolsWordCounter.ogDescription"),
   ogType: "website",
-  ogUrl: "https://www.whatsanalyze.com/tools/word-counter",
+  ogUrl: "https://whatsanalyze.com/tools/word-counter",
 });
 
 const analysis = ref<any>(null);

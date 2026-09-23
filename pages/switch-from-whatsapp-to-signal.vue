@@ -33,7 +33,7 @@ export default {
       ogTitle: () => t("seo.signalTitle"),
       ogSiteName: () => t("seo.signalTitle"),
       ogDescription: () => t("seo.signalDescription"),
-      ogUrl: "https://www.whatsanalyze.com/switch-from-whatsapp-to-signal",
+      ogUrl: "https://whatsanalyze.com/switch-from-whatsapp-to-signal",
     });
 
     const localePath = useLocalePath();

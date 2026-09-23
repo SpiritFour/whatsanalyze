@@ -153,7 +153,7 @@ useSeoMeta({
   ogTitle: () => t("toolsHub.ogTitle"),
   ogDescription: () => t("toolsHub.ogDescription"),
   ogType: "website",
-  ogUrl: "https://www.whatsanalyze.com/tools",
+  ogUrl: "https://whatsanalyze.com/tools",
 });
 
 // JSON-LD ItemList Schema
@@ -166,7 +166,7 @@ useHead(() => ({
         "@type": "CollectionPage",
         name: t("toolsHub.seoTitle"),
         description: t("toolsHub.seoDescription"),
-        url: "https://www.whatsanalyze.com/tools",
+        url: "https://whatsanalyze.com/tools",
         mainEntity: {
           "@type": "ItemList",
           itemListElement: [
@@ -174,42 +174,42 @@ useHead(() => ({
               "@type": "SoftwareApplication",
               position: 1,
               name: t("toolsHub.toolInactivityTitle"),
-              url: "https://www.whatsanalyze.com/tools/inactivity",
+              url: "https://whatsanalyze.com/tools/inactivity",
               applicationCategory: "UtilitiesApplication",
             },
             {
               "@type": "SoftwareApplication",
               position: 2,
               name: t("toolsHub.toolCourtTitle"),
-              url: "https://www.whatsanalyze.com/tools/court-evidence",
+              url: "https://whatsanalyze.com/tools/court-evidence",
               applicationCategory: "UtilitiesApplication",
             },
             {
               "@type": "SoftwareApplication",
               position: 3,
               name: t("toolsHub.toolRelationshipTitle"),
-              url: "https://www.whatsanalyze.com/tools/proof-of-relationship",
+              url: "https://whatsanalyze.com/tools/proof-of-relationship",
               applicationCategory: "UtilitiesApplication",
             },
             {
               "@type": "SoftwareApplication",
               position: 4,
               name: t("toolsHub.toolCounterTitle"),
-              url: "https://www.whatsanalyze.com/tools/message-counter",
+              url: "https://whatsanalyze.com/tools/message-counter",
               applicationCategory: "UtilitiesApplication",
             },
             {
               "@type": "SoftwareApplication",
               position: 5,
               name: t("toolsHub.toolVocabularyTitle"),
-              url: "https://www.whatsanalyze.com/tools/word-counter",
+              url: "https://whatsanalyze.com/tools/word-counter",
               applicationCategory: "UtilitiesApplication",
             },
             {
               "@type": "SoftwareApplication",
               position: 6,
               name: t("toolsHub.toolHeatmapTitle"),
-              url: "https://www.whatsanalyze.com/tools/chat-heatmap",
+              url: "https://whatsanalyze.com/tools/chat-heatmap",
               applicationCategory: "UtilitiesApplication",
             },
           ],

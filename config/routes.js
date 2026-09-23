@@ -3,7 +3,7 @@
  * the sitemap route so the two can never disagree about what exists.
  */
 export const siteBaseUrl = (
-  process.env.BASE_URL || "https://www.whatsanalyze.com"
+  process.env.BASE_URL || "https://whatsanalyze.com"
 ).replace("http:", "https:");
 
 export const defaultLocale = "en";
