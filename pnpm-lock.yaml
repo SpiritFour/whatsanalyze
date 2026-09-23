@@ -11,7 +11,7 @@ dependencies:
   '@heroicons/vue':
     specifier: ^2.2.0
     version: 2.2.0(vue@3.5.43)
-  '@mdi/font':
+  '@mdi/js':
     specifier: ^7.4.47
     version: 7.4.47
   '@nuxt/content':
@@ -3564,8 +3564,8 @@ packages:
       - supports-color
     dev: false
 
-  /@mdi/font@7.4.47:
-    resolution: {integrity: sha512-43MtGpd585SNzHZPcYowu/84Vz2a2g31TvPMTm9uTiCSWzaheQySUcSyUH/46fPnuPQWof2yd0pGBtzee/IQWw==}
+  /@mdi/js@7.4.47:
+    resolution: {integrity: sha512-KPnNOtm5i2pMabqZxpUz7iQf+mfrYZyKCZ8QNz85czgEt7cuHcGorWfdzUMWYA0SD+a6Hn4FmJ+YhzzzjkTZrQ==}
     dev: false
 
   /@miyaneee/rollup-plugin-json5@1.2.0(rollup@4.63.4):

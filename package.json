@@ -26,7 +26,7 @@
     "deploy-sebi": "nuxt generate && rm dist/CNAME && push-dir --remote=https://github.com/fellnerse/fellnerse.github.io.git --dir=dist --branch=gh-pages --cleanup",
     "format": "prettier . --write --ignore-unknown",
     "format:check": "prettier . --check --ignore-unknown",
-    "lint": "eslint . --cache",
+    "lint": "eslint . --cache && node scripts/check-mdi-icons.mjs",
     "lint:fix": "eslint . --cache --fix",
     "prepare": "husky",
     "lint-staged": "lint-staged"
@@ -39,7 +39,7 @@
   "dependencies": {
     "@amcharts/amcharts4": "^4.10.40",
     "@heroicons/vue": "^2.2.0",
-    "@mdi/font": "^7.4.47",
+    "@mdi/js": "^7.4.47",
     "@nuxt/content": "3.16.1",
     "@nuxt/scripts": "1.3.9",
     "@nuxtjs/i18n": "10.6.0",
