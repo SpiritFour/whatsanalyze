@@ -2,11 +2,10 @@
   <header
     :class="['landing-hero', align === 'left' ? 'landing-hero--left' : '']"
   >
-    <div
-      ref="inner"
-      class="landing-hero__inner landing-reveal"
-      :class="{ 'is-visible': visible }"
-    >
+    <!-- No reveal animation here, unlike the sections below: the hero is the
+         LCP element, and starting it at opacity 0 meant the largest paint
+         waited for hydration instead of for the prerendered HTML. -->
+    <div ref="inner" class="landing-hero__inner">
       <nav
         v-if="breadcrumbs && breadcrumbs.length"
         class="landing-hero__breadcrumbs"
@@ -67,9 +66,6 @@ export default {
     ctaTo: { type: [String, Object], default: "/" },
     note: { type: String, default: "" },
   },
-  data() {
-    return { visible: false };
-  },
   computed: {
     renderedTitle() {
       if (!this.title) return "";
@@ -88,11 +84,6 @@ export default {
       return this.title;
     },
   },
-  mounted() {
-    requestAnimationFrame(() => {
-      this.visible = true;
-    });
-  },
 };
 </script>
 
@@ -110,26 +101,6 @@ export default {
   margin: 0 auto;
 }
 
-.landing-reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition:
-    opacity 0.9s ease,
-    transform 0.9s ease;
-
-  &.is-visible {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .landing-reveal {
-    transition: none;
-    opacity: 1;
-    transform: none;
-  }
-}
 .landing-hero__breadcrumbs {
   display: flex;
   align-items: center;

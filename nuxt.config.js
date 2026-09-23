@@ -17,12 +17,28 @@ const localizedRoutes = localeCodes
 export default defineNuxtConfig({
   compatibilityDate: "2026-03-01",
   srcDir: ".",
-  ssr: false,
+  // Prerendered, so every page ships real HTML and paints before its JS has
+  // run. Without this the hero was invisible until the whole bundle had
+  // hydrated: 16 s to the largest paint on a phone.
+  ssr: true,
 
   dir: {
     public: "static",
   },
   ignore:[".delta"],
+
+  hooks: {
+    // Nuxt puts a <link rel="prefetch"> in the document head for every
+    // dynamic chunk and every image those chunks reference — here 30 images
+    // and 8 scripts, ~1.5 MB, all requested before the page had painted. On
+    // a phone that is the entire downlink, and the first paint sat waiting
+    // for the pipe to clear. Those routes load when they are navigated to.
+    "build:manifest"(manifest) {
+      for (const entry of Object.values(manifest)) {
+        entry.prefetch = false;
+      }
+    },
+  },
 
   nitro: {
     preset: "static",

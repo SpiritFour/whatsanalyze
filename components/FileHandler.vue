@@ -92,6 +92,16 @@ export default {
       isSuccess: false,
     };
   },
+  mounted() {
+    // The page is prerendered, so this input is on screen and clickable
+    // before Vue hydrates it. A file picked in that window fires its change
+    // event into nothing, and the drop zone just sits there — so take
+    // whatever is already selected once the handler is live.
+    const input = this.$el.querySelector("#uploadmytextfile");
+    if (input && input.files && input.files.length) {
+      this.processFileList(input.files);
+    }
+  },
   methods: {
     /**
      * Parsing happens in composables/useChatTool, which is also what the

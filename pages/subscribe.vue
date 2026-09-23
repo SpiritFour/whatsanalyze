@@ -247,6 +247,19 @@ export default {
       return formatPrice(SUBSCRIPTION_PRICE, this.$i18n.locale);
     },
   },
+  // The form is prerendered, so it can be typed into before Vue hydrates it,
+  // and hydrating an input with `v-model` writes the component's state over
+  // whatever is in the DOM. This runs before that patch — after it, the
+  // typed text is already gone.
+  beforeMount() {
+    for (const [id, key] of [
+      ["sub-email", "email"],
+      ["sub-id", "subscriptionId"],
+    ]) {
+      const typed = document.getElementById(id)?.value;
+      if (typed) this[key] = typed;
+    }
+  },
   async mounted() {
     const queryEmail = this.$route.query.email || "";
     const queryId =
@@ -255,6 +268,7 @@ export default {
       this.$route.query.session_id ||
       "";
 
+    let fromParams = Boolean(queryEmail || queryId);
     if (queryEmail) this.email = queryEmail;
     if (queryId) this.subscriptionId = queryId;
 
@@ -262,12 +276,16 @@ export default {
       const legacy = getSubscriptionParams();
       if (legacy.email) this.email = legacy.email;
       if (legacy.id) this.subscriptionId = legacy.id;
+      fromParams = fromParams || Boolean(legacy.email || legacy.id);
     }
 
-    // Automatically verify on arrival if parameters are present in URL
+    // Automatically verify on arrival if parameters are present in URL.
+    // Only those — an id the visitor is halfway through typing arrives the
+    // same way since beforeMount picks it up, and must not fire a lookup.
     if (
+      fromParams &&
       !this.subscriptionStore.isSubscriptionValid &&
-      (this.subscriptionId || (this.email && this.subscriptionId))
+      this.subscriptionId
     ) {
       await this.autoVerifyFromParams();
     }

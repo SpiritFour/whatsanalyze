@@ -35,10 +35,10 @@ export default {
       ogDescription: () => t("seo.pdfGuideDescription"),
     });
 
+    const localePath = useLocalePath();
     const { data: page } = await useAsyncData("content-whatsapp-to-pdf", () =>
       queryCollection("pages").path("/whatsapp-to-pdf").first(),
     );
-    const localePath = useLocalePath();
     return {
       page,
       localePath,

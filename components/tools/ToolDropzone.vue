@@ -238,10 +238,20 @@ async function processInput(
   }
 }
 
+// The page is prerendered, so this input accepts a file before Vue hydrates
+// it and that change event reaches no handler. Pick up whatever is already
+// selected once there is one.
+onMounted(() => {
+  if (fileInput.value?.files?.length) void handleFile(fileInput.value.files[0]);
+});
+
 async function onFileSelected(event: Event) {
   const target = event.target as HTMLInputElement;
   if (!target.files || target.files.length === 0) return;
-  const file = target.files[0];
+  await handleFile(target.files[0]);
+}
+
+async function handleFile(file: File) {
   const fileType = file.name.endsWith(".zip") ? "zip" : "txt";
   analyticsTools.fileUploaded(props.toolType, fileType, "picker");
   await processInput(file, file.name);
