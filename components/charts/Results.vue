@@ -144,3 +144,9 @@ export default {
   props: ["chat", "attachments", "isValidSubscription"],
 };
 </script>
+
+<style>
+/* Tailwind is not loaded globally (see nuxt.config): the parts of the
+   site that opt into it pull it in themselves. */
+@import "~/assets/tailwind.css";
+</style>

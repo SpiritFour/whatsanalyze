@@ -42,7 +42,7 @@
       theme="light"
       :reveal="false"
     >
-      <ChartsResults
+      <LazyChartsResults
         ref="results"
         :attachments="attachments"
         :chat="chat"
