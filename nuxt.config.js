@@ -146,7 +146,13 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ["~/assets/variables.scss"],
+  css: ["~/assets/vuetify-v3/reset.css", "~/assets/variables.scss"],
+
+  postcss: {
+    plugins: {
+      "./config/postcss-vuetify-v3-cascade.mjs": {},
+    },
+  },
 
   modules: [
     "@pinia/nuxt",
@@ -180,12 +186,17 @@ export default defineNuxtConfig({
   vuetify: {
     moduleOptions: {
       prefixComposables: true,
-      styles: true,
+      styles: { configFile: "assets/vuetify-settings.scss" },
     },
     vuetifyOptions: {
       // The set itself is registered in plugins/vuetify-icons.js: naming one
       // here is what makes the module inject @mdi/font's stylesheet.
       icons: false,
+      // Vuetify 4's defaults are smaller; these are v3's, matching the Sass
+      // breakpoints in assets/vuetify-settings.scss.
+      display: {
+        thresholds: { md: 960, lg: 1280, xl: 1920, xxl: 2560 },
+      },
       theme: {
         defaultTheme: "light",
         themes: {
