@@ -59,6 +59,25 @@ test.describe("the analyzer", () => {
     });
   }
 
+  // The PDF worker gets attachments over postMessage, which drops anything
+  // that isn't plain data — a JSZip entry's `.async()` lives on its
+  // prototype, so a naive structured clone silently breaks the PDF for any
+  // chat with media in its zip.
+  test("builds the free preview PDF for a zip export with a stored attachment", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await page.locator("#uploadmytextfile").setInputFiles(await zipExport());
+    await expectAnalysis(page);
+
+    const downloadPromise = page.waitForEvent("download");
+    await page
+      .getByRole("button", { name: /Download free preview PDF/i })
+      .click();
+    const download = await downloadPromise;
+    expect(download.suggestedFilename()).toMatch(/\.pdf$/i);
+  });
+
   // The three below cover the results-page QA round (#411). Nothing failed
   // these when they were filed, because nothing was watching those numbers.
   test("takes the visitor to the analysis it just built", async ({ page }) => {

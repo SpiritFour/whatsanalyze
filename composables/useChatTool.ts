@@ -1,7 +1,6 @@
 import { parseString } from "whatsapp-chat-parser";
 import JSZip from "jszip";
 import { markSystemMessages } from "~/utils/systemMessages";
-import { zipFileToAttachment } from "~/utils/attachments";
 export interface ChatMessage {
   date: Date;
   author: string;
@@ -67,8 +66,10 @@ export interface ChatInactivityAnalysis {
 
 export interface ChatAttachment {
   name: string;
-  compressedContent?: unknown;
-  decompressedData?: unknown;
+  // The JSZip entry itself, so media is only decompressed once it is rendered.
+  zipEntry?: JSZip.JSZipObject;
+  // Set instead of `zipEntry` when a plain list of files was uploaded.
+  decompressedData?: Uint8Array;
 }
 
 export interface SharedChatState {
@@ -200,7 +201,7 @@ export async function parseChatFile(
   const messages = await parseChatText(await findChatFileInZip(zip));
   const attachments: ChatAttachment[] = Object.values(zip.files)
     .filter((f) => !f.dir && !f.name.toLowerCase().endsWith(".txt"))
-    .map((f) => zipFileToAttachment(f as any));
+    .map((f) => ({ name: f.name, zipEntry: f }));
 
   return done(messages, attachments);
 }
