@@ -1,4 +1,4 @@
-import { Inflate } from "pako";
+import * as JSZip from "jszip";
 
 // eslint's no-unused-vars doesn't understand TS enum members (the config only
 // wires up @typescript-eslint/parser, not its lint rules) — these are used
@@ -24,6 +24,14 @@ export interface Attachment {
   fileName: string;
   width?: number;
   height?: number;
+}
+
+export interface AttachmentSource {
+  name: string;
+  // The JSZip entry itself, so media is only decompressed once it is rendered.
+  zipEntry?: JSZip.JSZipObject;
+  // Set instead of `zipEntry` when a plain list of files was uploaded.
+  decompressedData?: Uint8Array;
 }
 
 function getMimeType(fileName: string): MimeTypeData {
@@ -112,17 +120,13 @@ async function renderAttachment(
 // gets attachment mimeType, src, and filename from attachments
 export async function getAttachment(
   fileName: string,
-  attachments: Array<{
-    name: string;
-    compressedContent?: Uint8Array;
-    decompressedData?: Uint8Array;
-  }>,
+  attachments: AttachmentSource[],
 ): Promise<Attachment> {
   // potentially this finds files that are a false match
   // but there is the case that the images are in the "zip" folder, so we need
   // to be sure to find em
 
-  const data: any = attachments.filter((file) =>
+  const data = attachments.filter((file) =>
     RegExp(".*" + fileName).test(file.name),
   );
 
@@ -130,65 +134,15 @@ export async function getAttachment(
     // sometimes we can not find the attachment
     return renderAttachment(fileName);
   }
-  let decompressedData;
 
-  if (data[0].compressedContent) {
-    // this means we have a zip file and have to inflate it frrst
-    decompressedData = inflate(data[0]);
-  } else {
-    // this means a list of files was uploaded
-    decompressedData = data[0].decompressedData;
-  }
+  // `async` reads both deflated and stored entries through JSZip's own
+  // decompressor, rather than a hand-rolled pako inflate over its private
+  // `_data.compressedContent` — which threw "invalid block type" on media
+  // WhatsApp stores uncompressed, and "invalid distance too far back" on
+  // some iOS-generated zips even after that case was special-cased.
+  const decompressedData = data[0].zipEntry
+    ? await data[0].zipEntry.async("uint8array")
+    : data[0].decompressedData;
 
   return renderAttachment(fileName, decompressedData);
-}
-
-// JSZip stores an entry's raw bytes as-is when the zip's DEFLATE pass decided
-// they wouldn't shrink (common for already-compressed media, e.g. iOS export
-// zips full of JPEGs). Only entries actually compressed with DEFLATE need
-// inflating — running STORE bytes through pako throws "invalid block type".
-const STORE_MAGIC = "\x00\x00";
-
-// builds an attachment record from a raw JSZip entry, routing stored bytes
-// straight through and compressed bytes to the lazy inflate path
-export function zipFileToAttachment(file: {
-  name: string;
-  _data?: {
-    compressedContent?: Uint8Array;
-    compression?: { magic: string };
-  };
-}): {
-  name: string;
-  compressedContent?: Uint8Array;
-  decompressedData?: Uint8Array;
-} {
-  const bytes = file._data?.compressedContent;
-  const isStored = file._data?.compression?.magic === STORE_MAGIC;
-  return isStored
-    ? { name: file.name, decompressedData: bytes }
-    : { name: file.name, compressedContent: bytes };
-}
-
-// this functions inflates ziped files
-function inflate(data: any) {
-  const inflater = new Inflate({ raw: true });
-  const chunkSize = 1024; // adjust as needed
-  let offset = 0;
-
-  // needed to unkompress this by hand
-  const compressedData = data.compressedContent;
-  while (offset < compressedData.length) {
-    const end = Math.min(offset + chunkSize, compressedData.length);
-    const chunk = compressedData.subarray(offset, end);
-    inflater.push(chunk);
-    offset = end;
-  }
-
-  if (inflater.err) {
-    throw Error(`Error inflating data: ${inflater.msg}`);
-  } else {
-    const decompressedData = inflater.result;
-    // use uint8 array instead, the width and height can be calculated in the render attachment function
-    return decompressedData;
-  }
 }

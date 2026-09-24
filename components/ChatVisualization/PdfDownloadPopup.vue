@@ -392,9 +392,24 @@ export default {
         const chat = objectToDictionary(this.chat); // remove functions
         chat.funFacts = await this.chat.getFunFacts(); // set funfacts beforehand instead of using function call
 
+        // A JSZip entry's `.async()` method lives on its prototype, so it
+        // does not survive postMessage's structured clone into the worker —
+        // resolve every attachment to plain bytes on the main thread first.
+        const attachments = await Promise.all(
+          this.attachments.map(async (attachment) =>
+            attachment.zipEntry
+              ? {
+                  name: attachment.name,
+                  decompressedData:
+                    await attachment.zipEntry.async("uint8array"),
+                }
+              : attachment,
+          ),
+        );
+
         this.pdfWorker.postMessage({
           chat: chat,
-          attachments: objectToDictionary(this.attachments),
+          attachments: objectToDictionary(attachments),
           ego: this.ego,
           isSample,
           chatTimeline,
