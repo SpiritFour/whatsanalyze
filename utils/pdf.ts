@@ -8,7 +8,11 @@ import {
   getDateString,
   lastDate,
 } from "~/utils/utils";
-import { Attachment, getAttachment } from "~/utils/attachments";
+import {
+  Attachment,
+  AttachmentSource,
+  getAttachment,
+} from "~/utils/attachments";
 
 // eslint-disable-next-line no-unused-vars -- TS `this` parameter, not a real binding
 const callAddFont = function (this: any) {
@@ -22,11 +26,7 @@ jsPDF.API.events.push(["addFonts", callAddFont]);
 
 export async function render(
   chat: any,
-  attachments: Array<{
-    name: string;
-    compressedContent?: Uint8Array;
-    decompressedData?: Uint8Array;
-  }>,
+  attachments: AttachmentSource[],
   ego: string,
   isSample = false,
   chatTimeline: any,
