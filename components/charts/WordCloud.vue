@@ -34,6 +34,9 @@ export default {
   async mounted() {
     let { am4core, am4themes_animated, am4plugins_wordCloud } =
       await this.$am4core();
+    // The component can unmount while $am4core() is loading (fast nav, tab
+    // switch), which clears $refs.chartdiv before we get here.
+    if (!this.$refs.chartdiv) return;
     am4core.useTheme(am4themes_animated);
     // Not onlyShowOnViewport: a cloud that has never been scrolled past does
     // not exist yet, and came out as an empty box in the downloaded summary
