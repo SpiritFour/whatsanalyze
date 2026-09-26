@@ -334,70 +334,7 @@ useToolSchema({
 </script>
 
 <style scoped lang="scss">
-.metrics-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.25rem;
-  margin-bottom: 2.5rem;
-
-  @media (max-width: 960px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: 600px) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.metric-card {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 1.4rem 1.2rem;
-  display: flex;
-  // Top-aligned, not centred: the grid stretches every card to the tallest
-  // one, so a centred card whose sub-label wraps to two lines sat about 10px
-  // off its neighbours. From the top they all start on the same line.
-  align-items: flex-start;
-  gap: 1.1rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-.metric-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  background: #f8fafc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.metric-meta {
-  display: flex;
-  flex-direction: column;
-}
-
-.metric-label {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #64748b;
-  margin-bottom: 0.2rem;
-}
-
-.metric-value {
-  font-size: 1.45rem;
-  font-weight: 800;
-  color: #0f172a;
-  line-height: 1.15;
-}
-
-.metric-caption {
-  font-size: 0.8rem;
-  color: #94a3b8;
-  margin-top: 0.25rem;
-}
+@include wa-metric-cards;
 
 .participants-section {
   background: #ffffff;

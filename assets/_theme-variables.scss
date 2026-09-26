@@ -93,6 +93,83 @@ $wa-content-width: 1080px;
 $wa-shell-width: 1180px;
 
 // ---------------------------------------------------------------------------
+// The row of key-metric cards above the participant table.
+//
+// Three of the four tools drew these the same way and the fourth stacked its
+// icon above the text at a different size, radius and padding — so moving
+// between two tools looked like moving between two products. They share the
+// majority layout now: icon beside the text, top-aligned so a sub-label that
+// wraps to two lines cannot shift the card off its neighbours.
+// ---------------------------------------------------------------------------
+@mixin wa-metric-cards {
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 2.4rem;
+
+    @media (max-width: 960px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .metric-card {
+    background: $wa-surface-white;
+    border-radius: $wa-radius-lg;
+    padding: 1.4rem 1.2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.1rem;
+    text-align: left;
+    box-shadow: $wa-shadow-sm;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .metric-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: $wa-radius-md;
+    background: $wa-surface-light;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .metric-meta {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .metric-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: $wa-ink-muted;
+    margin-bottom: 0.2rem;
+  }
+
+  .metric-value {
+    font-size: 1.45rem;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: $wa-ink;
+  }
+
+  .metric-caption {
+    font-size: 0.8rem;
+    color: $wa-ink-faint;
+    margin-top: 0.25rem;
+  }
+}
+
+// ---------------------------------------------------------------------------
 // The participant table shared by the four free tool pages.
 //
 // Each tool had its own copy of these rules, which is how they drifted apart

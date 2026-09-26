@@ -597,58 +597,7 @@ const exportSteps = computed(() => [
   white-space: pre-wrap;
 }
 
-.metrics-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.2rem;
-  margin-bottom: 2.4rem;
-}
-
-.metric-card {
-  background: #ffffff;
-  border-radius: 20px;
-  padding: 1.6rem;
-  box-shadow: 0 4px 22px rgba(0, 0, 0, 0.06);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  text-align: left;
-}
-
-.metric-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: #f5f5f7;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.metric-meta {
-  display: flex;
-  flex-direction: column;
-}
-
-.metric-label {
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-  color: rgba(29, 29, 31, 0.55);
-  margin-bottom: 4px;
-}
-
-.metric-value {
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: #1d1d1f;
-  letter-spacing: -0.02em;
-  margin-bottom: 2px;
-}
-
-.metric-caption {
-  font-size: 0.8rem;
-  color: rgba(29, 29, 31, 0.65);
-}
+@include wa-metric-cards;
 
 .participants-section,
 .gaps-section {

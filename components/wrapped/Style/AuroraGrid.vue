@@ -151,13 +151,37 @@ const graphs = [
   rotate: -10deg;
 }
 
-/* Graph lines being drawn */
+/* Graph lines being drawn.
+
+   The line used to draw and then undraw (`alternate`) at full opacity, so it
+   spent a good part of every cycle as a round-capped ~1px stub of path with
+   nothing around it — the "stray comma floating alone mid-slide". It fades in
+   once enough of the line exists to read as a line, holds, and fades out
+   drawn. */
 @keyframes draw-line {
   0% {
     stroke-dashoffset: 260;
+    opacity: 0;
+  }
+  /* Held transparent until the path is long enough to read as a line: the
+     dash offset is still easing in over this stretch. */
+  12% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.9;
+  }
+  60% {
+    stroke-dashoffset: 0;
+    opacity: 0.9;
+  }
+  90% {
+    stroke-dashoffset: 0;
+    opacity: 0.9;
   }
   100% {
     stroke-dashoffset: 0;
+    opacity: 0;
   }
 }
 
@@ -167,8 +191,17 @@ const graphs = [
   stroke-linecap: round;
   stroke-dasharray: 260;
   stroke-dashoffset: 260;
+  opacity: 0;
   filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.7));
-  animation: draw-line 6s ease-in-out infinite alternate;
+  animation: draw-line 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .graph-line {
+    opacity: 0.9;
+    stroke-dashoffset: 0;
+    animation: none;
+  }
 }
 
 .graph-line-delay {
