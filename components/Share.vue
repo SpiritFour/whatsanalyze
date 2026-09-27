@@ -299,6 +299,9 @@ export default {
 
           navigator
             .share(payload)
+            .then(() => {
+              analyticsChat.share("native_share", chartName);
+            })
             .catch((error) => {
               if (
                 error &&
@@ -306,13 +309,16 @@ export default {
                 !error.message?.startsWith?.("AbortError:")
               ) {
                 this.$sentry?.captureException?.(error);
+                // Slow chart rendering can outlast the browser's user-gesture
+                // window for navigator.share(), which then rejects with
+                // NotAllowedError. Fall back to a download so the click
+                // isn't a dead end.
+                downloadBase64File(canvas, fileName);
+                analyticsChat.share("image_download", chartName);
               }
             })
             .finally(() => {
               this.loading = false;
-            })
-            .then(() => {
-              analyticsChat.share("native_share", chartName);
             });
         });
       } else {
