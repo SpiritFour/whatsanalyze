@@ -70,8 +70,8 @@
     "uuid": "^14.0.2",
     "vue": "3.5.43",
     "vue-chartjs": "^5.3.4",
-    "vuetify": "3.13.3",
-    "vuetify-nuxt-module": "0.19.5",
+    "vuetify": "4.2.1",
+    "vuetify-nuxt-module": "1.0.0-rc.6",
     "whatsapp-chat-parser": "^4.0.2",
     "zod": "^4.6.5"
   },
