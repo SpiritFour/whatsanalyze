@@ -9,7 +9,7 @@
     variant="secondary"
     block
     class="mt-3"
-    @click="analyticsEcommerce.viewPricing('subscribe_btn')"
+    @click="analyticsEcommerce.pricingCtaClick('subscribe_btn')"
   >
     {{ $t("chooseSubscription") }}
   </UiButton>

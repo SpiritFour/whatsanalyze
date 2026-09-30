@@ -96,7 +96,8 @@ const buildShareUrl = (queryString: string) => {
   const normalizedBase = base.endsWith("/") ? base.slice(0, -1) : base;
   const path = localePath("/wrapped/results");
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
-  return `${normalizedBase}${normalizedPath}?${queryString}`;
+  // Tagged so the people who open it show up as their own traffic source.
+  return `${normalizedBase}${normalizedPath}?${queryString}&utm_source=wrapped_share&utm_medium=social`;
 };
 
 const copyToClipboard = async (text: string) => {

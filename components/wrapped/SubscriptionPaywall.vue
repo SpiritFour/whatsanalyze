@@ -62,7 +62,10 @@
 import { ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
 import { fetchWrappedCheckoutUrl } from "~/utils/subscription";
-import { analyticsEcommerce } from "~/composables/useAnalytics";
+import {
+  analyticsEcommerce,
+  ITEM_PRO_SUBSCRIPTION,
+} from "~/composables/useAnalytics";
 
 const props = defineProps<{
   open: boolean;
@@ -72,7 +75,7 @@ watch(
   () => props.open,
   (isOpen) => {
     if (isOpen) {
-      analyticsEcommerce.viewPricing("wrapped_paywall");
+      analyticsEcommerce.viewItem("wrapped_paywall", ITEM_PRO_SUBSCRIPTION);
     }
   },
   { immediate: true },
