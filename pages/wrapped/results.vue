@@ -65,6 +65,7 @@ definePageMeta({
 });
 
 const route = useRoute();
+const router = useRouter();
 
 const statsStore = useStatsStore();
 const { result } = storeToRefs(statsStore);
@@ -90,28 +91,44 @@ const isEmpty = computed(
   () => !result.value && !shareLoading.value && !shareErrorKey.value,
 );
 
-const buildSearchFromQuery = () => {
-  const params = new URLSearchParams();
-  const uuidParam = route.query.uuid;
-  const ivParam = route.query.iv;
-  const keyParam = route.query.key;
+/** The share link's uuid/iv/key, which live in the URL fragment. */
+const buildSearchFromHash = () => {
+  const params = new URLSearchParams(route.hash.replace(/^#/, ""));
+  return params.get("uuid") && params.get("iv") && params.get("key")
+    ? params.toString()
+    : null;
+};
 
+/**
+ * Links shared before the key moved to the fragment carry it in the query,
+ * where analytics and error reporting would record it. Move it over before
+ * anything reads the URL.
+ */
+const moveLegacyKeyToHash = () => {
+  const { uuid, iv, key, ...rest } = route.query;
   if (
-    typeof uuidParam !== "string" ||
-    typeof ivParam !== "string" ||
-    typeof keyParam !== "string"
+    typeof uuid !== "string" ||
+    typeof iv !== "string" ||
+    typeof key !== "string"
   ) {
-    return null;
+    return false;
   }
-
-  params.set("uuid", uuidParam);
-  params.set("iv", ivParam);
-  params.set("key", keyParam);
-  return params.toString();
+  router.replace({
+    query: rest,
+    // Raw values: the router percent-encodes the hash itself, and encoding
+    // them here too would double it.
+    hash: `#uuid=${uuid}&iv=${iv}&key=${key}`,
+  });
+  return true;
 };
 
 const loadSharedStory = async () => {
-  const queryString = buildSearchFromQuery();
+  // The replace re-triggers the watcher with the key in the hash.
+  if (moveLegacyKeyToHash()) {
+    shareLoading.value = true;
+    return;
+  }
+  const queryString = buildSearchFromHash();
   if (!queryString) {
     shareErrorKey.value = null;
     shareLoading.value = false;
@@ -134,7 +151,7 @@ const loadSharedStory = async () => {
 };
 
 watch(
-  () => ({ ...route.query }),
+  () => route.fullPath,
   () => {
     loadSharedStory();
   },
@@ -142,7 +159,8 @@ watch(
 );
 
 onMounted(() => {
-  analyticsWrapped.resultsViewed(!!buildSearchFromQuery());
+  // A legacy link may still be on its way from the query to the hash.
+  analyticsWrapped.resultsViewed(!!(buildSearchFromHash() || route.query.key));
 });
 </script>
 

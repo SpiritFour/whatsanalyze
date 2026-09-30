@@ -278,18 +278,8 @@ export default defineNuxtConfig({
     },
   },
 
-  scripts: {
-    registry: {
-      googleAnalytics: local
-        ? false
-        : {
-            id: "G-XYC2EWGZZ3",
-            trigger: "onNuxtReady",
-            bundle: false,
-            proxy: false,
-          },
-    },
-  },
+  // Google Analytics is bootstrapped in plugins/google-analytics.client.ts
+  // rather than @nuxt/scripts' registry, whose `config` call takes no params.
 
   sentry: process.env.SENTRY_AUTH_TOKEN
     ? {

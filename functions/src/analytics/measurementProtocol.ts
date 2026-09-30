@@ -31,6 +31,8 @@ export interface PurchaseEvent {
    */
   clientId?: string;
   sessionId?: string;
+  /** wrapped/analyzer/tools — GA4's Content group, set where checkout began. */
+  contentGroup?: string;
 }
 
 /**
@@ -82,6 +84,7 @@ export async function sendPurchaseEvent(event: PurchaseEvent): Promise<void> {
   };
 
   if (!event.sessionId) delete params.session_id;
+  if (event.contentGroup) params.content_group = event.contentGroup;
 
   try {
     const res = await fetch(

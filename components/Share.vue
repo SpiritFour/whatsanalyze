@@ -269,7 +269,7 @@ export default {
       const title = this.getTitle(chartName);
       const shareText = `${title}\n${this.$t(
         "haveALook",
-      )}\nhttps://whatsanalyze.com`;
+      )}\nhttps://whatsanalyze.com/?utm_source=chart_share&utm_medium=social`;
       const fileName = `${chartName}-${this.imageName}`;
 
       if (this.canShare) {

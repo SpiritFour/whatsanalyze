@@ -229,7 +229,11 @@
 // renders this component on the server, which 500s the whole prerender.
 import FileSaver from "file-saver";
 import { markRaw, toRaw } from "vue";
-import { analyticsChat, analyticsEcommerce } from "~/composables/useAnalytics";
+import {
+  analyticsChat,
+  analyticsEcommerce,
+  ITEM_FULL_PDF,
+} from "~/composables/useAnalytics";
 import { fetchOneTimeCheckoutUrl } from "~/utils/subscription";
 import {
   INTRO_PRICE,
@@ -336,7 +340,7 @@ export default {
     },
     /** Someone reached for the paid PDF: the pricing card is what they see. */
     trackFullPdfInterest(source) {
-      analyticsEcommerce.viewPricing(source, "one_time");
+      analyticsEcommerce.viewItem(source, ITEM_FULL_PDF);
     },
     handleFreePdfClick() {
       this.downloadSample();

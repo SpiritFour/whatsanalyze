@@ -16,7 +16,7 @@ interface CreateCheckoutSessionRequest {
   successUrl?: string;
   cancelUrl?: string;
   /** GA identifiers of the browser starting this checkout, see below. */
-  analytics?: { clientId?: string; sessionId?: string };
+  analytics?: { clientId?: string; sessionId?: string; contentGroup?: string };
 }
 
 /**
@@ -30,12 +30,17 @@ const analyticsMetadata = (data: CreateCheckoutSessionRequest) => {
   const metadata: Record<string, string> = {};
   const clientId = data.analytics?.clientId;
   const sessionId = data.analytics?.sessionId;
+  const contentGroup = data.analytics?.contentGroup;
 
   if (typeof clientId === "string" && clientId) {
     metadata.ga_client_id = clientId.slice(0, 100);
   }
   if (typeof sessionId === "string" && sessionId) {
     metadata.ga_session_id = sessionId.slice(0, 100);
+  }
+  // Which product sold it (wrapped/analyzer/tools), so revenue splits by it.
+  if (typeof contentGroup === "string" && contentGroup) {
+    metadata.ga_content_group = contentGroup.slice(0, 40);
   }
 
   return metadata;

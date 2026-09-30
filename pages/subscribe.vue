@@ -214,7 +214,10 @@ import {
   fetchSubscriptionCheckoutUrl,
 } from "~/utils/subscription";
 import { INTRO_PRICE, SUBSCRIPTION_PRICE, formatPrice } from "~/utils/pricing";
-import { analyticsEcommerce } from "~/composables/useAnalytics";
+import {
+  analyticsEcommerce,
+  ITEM_PRO_SUBSCRIPTION,
+} from "~/composables/useAnalytics";
 export default {
   name: "Subscriptions",
   setup() {
@@ -293,7 +296,7 @@ export default {
     if (this.$route.query.canceled) {
       analyticsEcommerce.checkoutCancelled("subscribe_page");
     } else {
-      analyticsEcommerce.viewPricing("subscribe_page");
+      analyticsEcommerce.viewItem("subscribe_page", ITEM_PRO_SUBSCRIPTION);
     }
   },
   methods: {
@@ -311,8 +314,6 @@ export default {
       analyticsEcommerce.beginCheckout({
         checkoutType: "subscription",
         source: "subscribe_page",
-        value: 4.99,
-        currency: "USD",
       });
       try {
         const returnPath = `${window.location.origin}${this.localePath(
