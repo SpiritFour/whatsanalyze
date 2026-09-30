@@ -136,6 +136,7 @@ test.describe("buying the full PDF once", () => {
     expect(checkout[0].postDataJSON().data.analytics).toEqual({
       clientId: "1234567890.1700000000",
       sessionId: "1700000123",
+      contentGroup: "analyzer",
     });
   });
 
@@ -148,7 +149,10 @@ test.describe("buying the full PDF once", () => {
     await analyzeChat(page);
     await startOneTimeCheckout(page);
 
-    expect(checkout[0].postDataJSON().data.analytics).toEqual({});
+    // Only the product the sale came from, which needs no cookie.
+    expect(checkout[0].postDataJSON().data.analytics).toEqual({
+      contentGroup: "analyzer",
+    });
   });
 
   test("locks the full PDF again when a different chat is uploaded", async ({

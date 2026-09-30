@@ -96,7 +96,10 @@ const buildShareUrl = (queryString: string) => {
   const normalizedBase = base.endsWith("/") ? base.slice(0, -1) : base;
   const path = localePath("/wrapped/results");
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
-  return `${normalizedBase}${normalizedPath}?${queryString}`;
+  // The key goes in the fragment, which browsers never send anywhere: not to
+  // our server, not in a Referer, not in the page URL analytics records. The
+  // UTM tags stay in the query so the visit shows up as its own source.
+  return `${normalizedBase}${normalizedPath}?utm_source=wrapped_share&utm_medium=social#${queryString}`;
 };
 
 const copyToClipboard = async (text: string) => {

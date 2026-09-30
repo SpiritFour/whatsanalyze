@@ -2,7 +2,7 @@
  * Every analytics event the site sends.
  *
  * Dispatches window.gtag('event', name, params) -> Google Analytics 4
- * (Property 262743198 / G-XYC2EWGZZ3). GTM/Bing Ads is not used.
+ * (Property 262743198 / GA_MEASUREMENT_ID). GTM/Bing Ads is not used.
  *
  * Events go through the typed helpers below rather than `trackEvent` directly,
  * so the set of event names is the set of methods here. There used to be a
@@ -34,8 +34,10 @@ function ensureGtag(): boolean {
 
   window.dataLayer = window.dataLayer || [];
   if (typeof window.gtag !== "function") {
-    window.gtag = function (...args: unknown[]) {
-      window.dataLayer?.push(args);
+    // `arguments`, not a rest array: gtag.js only replays Arguments objects
+    // off the dataLayer and silently skips plain arrays.
+    window.gtag = function () {
+      window.dataLayer?.push(arguments);
     };
   }
   return true;
@@ -110,14 +112,71 @@ export function sanitizeParams(
   return clean;
 }
 
+/** A GA4 ecommerce item. Ids match what the Stripe webhook reports. */
+export interface AnalyticsItem {
+  item_id: string;
+  item_name: string;
+  price: number;
+  quantity: number;
+}
+
+export const ITEM_FULL_PDF: AnalyticsItem = {
+  item_id: "full_chat_pdf",
+  item_name: "Full Chat PDF",
+  price: ONE_TIME_PRICE,
+  quantity: 1,
+};
+
+// Priced at the intro month, which is what checkout charges.
+export const ITEM_PRO_SUBSCRIPTION: AnalyticsItem = {
+  item_id: "pro_subscription",
+  item_name: "WhatsAnalyze Pro Subscription",
+  price: INTRO_PRICE,
+  quantity: 1,
+};
+
+export type ContentGroup = "wrapped" | "tools" | "analyzer";
+
 /**
- * Core event tracking function.
+ * Which product a path belongs to, reported as GA4's built-in Content group
+ * so every report can be split into Wrapped vs the rest. Locale prefixes
+ * (/de/wrapped) are why this matches a segment rather than the start.
  */
-export function trackEvent(name: string, params?: EventParams): void {
+export function contentGroupFor(path: string): ContentGroup {
+  if (/(^|\/)wrapped(\/|$)/.test(path)) return "wrapped";
+  if (/(^|\/)tools(\/|$)/.test(path)) return "tools";
+  return "analyzer";
+}
+
+export const GA_MEASUREMENT_ID = "G-XYC2EWGZZ3";
+
+/**
+ * Tags every following page_view and event with the product. It has to go
+ * through `config`: gtag drops content_group given to `set`. Without
+ * send_page_view:false every call would add a page_view of its own.
+ */
+export function setContentGroup(path: string): void {
+  if (!ensureGtag()) return;
+  window.gtag?.("config", GA_MEASUREMENT_ID, {
+    content_group: contentGroupFor(path),
+    send_page_view: false,
+  });
+}
+
+/**
+ * Core event tracking function. `items` bypasses sanitizeParams, which would
+ * stringify the array.
+ */
+export function trackEvent(
+  name: string,
+  params?: EventParams,
+  items?: AnalyticsItem[],
+): void {
   if (!ensureGtag()) return;
 
   const eventName = sanitizeEventName(name);
-  const cleanParams = sanitizeParams(params);
+  const cleanParams: Record<string, unknown> = sanitizeParams(params);
+  if (items) cleanParams.items = items;
 
   try {
     if (typeof window.gtag === "function") {
@@ -138,38 +197,43 @@ export function trackEvent(name: string, params?: EventParams): void {
  * E-Commerce & Subscriptions
  */
 export const analyticsEcommerce = {
-  viewPricing(source: string, planType: string = "pro_monthly") {
-    trackEvent("view_pricing", {
-      source,
-      plan_type: planType,
-    });
+  /**
+   * The price of something was put in front of the visitor: a paywall, the
+   * pricing card, the subscribe page. First step of GA's Purchase journey.
+   */
+  viewItem(source: string, item: AnalyticsItem) {
+    trackEvent("view_item", { source, currency: CURRENCY, value: item.price }, [
+      item,
+    ]);
+  },
+
+  /** A click on a "subscribe"/"get Pro" link that leads to the pricing. */
+  pricingCtaClick(source: string) {
+    trackEvent("pricing_cta_click", { source });
   },
 
   /**
-   * The amounts come from utils/pricing.ts, which is what the pages quote and
-   * what the Stripe prices are configured with. Spelling them out here is how
-   * begin_checkout came to report $4.99 for a €7.99 sale, so the funnel
-   * disagreed with the purchase events the webhook sends.
+   * The visitor picked a plan and is sent to Stripe. There is no cart, so
+   * add_to_cart and begin_checkout are the same click; both are sent because
+   * GA's Purchase and Checkout journeys each start from one of them. Amounts
+   * come from utils/pricing.ts, which the Stripe prices are configured with.
    */
   beginCheckout(options: {
     checkoutType: "subscription" | "one_time";
-    priceId?: string;
-    value?: number;
-    currency?: string;
-    source?: string;
+    source: string;
   }) {
-    trackEvent("begin_checkout", {
+    const item =
+      options.checkoutType === "subscription"
+        ? ITEM_PRO_SUBSCRIPTION
+        : ITEM_FULL_PDF;
+    const params = {
       checkout_type: options.checkoutType,
-      price_id: options.priceId || "default",
-      // A subscription is charged the discounted first month at checkout.
-      value:
-        options.value ??
-        (options.checkoutType === "subscription"
-          ? INTRO_PRICE
-          : ONE_TIME_PRICE),
-      currency: options.currency || CURRENCY,
-      source: options.source || "unknown",
-    });
+      source: options.source,
+      currency: CURRENCY,
+      value: item.price,
+    };
+    trackEvent("add_to_cart", params, [item]);
+    trackEvent("begin_checkout", params, [item]);
   },
 
   // No `purchase` here on purpose. It is sent from the Stripe webhook
@@ -376,7 +440,11 @@ export const analyticsSite = {
  * declined the analytics cookies. The webhook still books the revenue, and it
  * stays unattributed — which is what declining is supposed to mean.
  */
-export function getAnalyticsIds(): { clientId?: string; sessionId?: string } {
+export function getAnalyticsIds(): {
+  clientId?: string;
+  sessionId?: string;
+  contentGroup?: ContentGroup;
+} {
   const cookies = new Map<string, string>();
   if (typeof document !== "undefined") {
     for (const entry of document.cookie.split(";")) {
@@ -404,6 +472,9 @@ export function getAnalyticsIds(): { clientId?: string; sessionId?: string } {
   return {
     ...(clientId ? { clientId } : {}),
     ...(sessionId ? { sessionId } : {}),
+    ...(typeof window !== "undefined"
+      ? { contentGroup: contentGroupFor(window.location.pathname) }
+      : {}),
   };
 }
 

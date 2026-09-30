@@ -131,6 +131,7 @@ async function reportPurchase({
     item,
     clientId: metadata?.ga_client_id,
     sessionId: metadata?.ga_session_id,
+    contentGroup: metadata?.ga_content_group,
   });
 }
 
