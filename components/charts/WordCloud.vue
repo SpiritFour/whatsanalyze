@@ -87,6 +87,12 @@ export default {
           // Remove Emojis
           return withoutEmoji(wordObj.word).length > 0;
         });
+
+        // chartdata can change (triggering this via the watcher) before
+        // mounted()'s await on $am4core() has assigned this.series, or after
+        // the component has unmounted.
+        if (!this.series) return;
+
         this.series.data = wordData;
       });
     },
