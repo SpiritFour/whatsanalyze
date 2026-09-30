@@ -93,6 +93,12 @@ export default defineNuxtConfig({
           name: "msvalidate.01",
           content: "E04DE33CC93C0FF892248C9E70A9A918",
         },
+        // Search Console ownership. It used to verify through the GA snippet,
+        // which stopped counting once GA was loaded after hydration.
+        {
+          name: "google-site-verification",
+          content: "Gaakq2LQGLFwM3Owtab9R1xYBbT50f8k-i0GkTPFjMk",
+        },
         {
           property: "og:image",
           content: `${baseUrl}/sharePreview.png`,
