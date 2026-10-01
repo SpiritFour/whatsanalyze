@@ -51,42 +51,51 @@ export function parseSharePayload(bytes) {
   return snapshot;
 }
 
+const ID_BYTES = 16;
+const IV_BYTES = 12;
+const KEY_BYTES = 32;
+
+/** The document id, the nonce and the key, in that order. */
+export const SHARE_TOKEN_BYTES = ID_BYTES + IV_BYTES + KEY_BYTES;
+
 /**
- * The uuid, iv and key go in the URL fragment, which browsers never send: not
- * to the host, not in a Referer, not in the page URL analytics records. Only
- * the UTM tags stay in the query, so the visit still counts as its own source.
+ * One opaque token in the URL fragment, which browsers never send: not to the
+ * host, not in a Referer, not in the page URL analytics records.
+ *
+ * The three pieces used to travel as named query parameters holding JSON
+ * arrays of decimal numbers, percent-encoded -- which spent 245 characters on
+ * 60 bytes. Concatenated and written as base64url they take 80, and the link
+ * reads as one blob rather than as a form submission.
  */
-export function serializeShareInfo({ uuid, encryptedKey }) {
-  const params = new URLSearchParams();
-  params.set("uuid", uuid);
-  params.set("iv", JSON.stringify(encryptedKey.iv));
-  params.set(
-    "key",
-    JSON.stringify(Array.from(new Uint8Array(encryptedKey.key))),
-  );
-  return params.toString();
+export function encodeShareToken({ id, iv, key }) {
+  const token = new Uint8Array(SHARE_TOKEN_BYTES);
+  token.set(new Uint8Array(id), 0);
+  token.set(new Uint8Array(iv), ID_BYTES);
+  token.set(new Uint8Array(key), ID_BYTES + IV_BYTES);
+  return bytesToBase64Url(token);
 }
 
-export function parseShareInfo(fragment) {
-  const params = new URLSearchParams(String(fragment).replace(/^#/, ""));
-  const uuid = params.get("uuid");
-  const iv = params.get("iv");
-  const key = params.get("key");
-  if (!uuid || !iv || !key) throw new Error("Incomplete share link");
-
+export function decodeShareToken(fragment) {
+  const bytes = base64UrlToBytes(String(fragment).replace(/^#/, ""));
+  if (bytes.length !== SHARE_TOKEN_BYTES) {
+    throw new Error("Incomplete share link");
+  }
   return {
-    uuid,
-    encryptedKey: {
-      iv: JSON.parse(iv),
-      key: new Uint8Array(JSON.parse(key)).buffer,
-    },
+    id: bytes.slice(0, ID_BYTES),
+    iv: bytes.slice(ID_BYTES, ID_BYTES + IV_BYTES),
+    key: bytes.slice(ID_BYTES + IV_BYTES).buffer,
   };
 }
 
-export function buildShareLinkUrl(origin, path, fragment) {
+/**
+ * No UTM tags: /s exists for nothing but share links, so the visit is already
+ * known to be one by the time the page reports it, and 38 characters of query
+ * string bought nothing the page could not say itself.
+ */
+export function buildShareLinkUrl(origin, path, token) {
   const base = String(origin).replace(/\/$/, "");
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
-  return `${base}${normalizedPath}?utm_source=user_share&utm_medium=link#${fragment}`;
+  return `${base}${normalizedPath}#${token}`;
 }
 
 /**
@@ -107,4 +116,17 @@ export function base64ToBytes(base64) {
   const bytes = new Uint8Array(binary.length);
   for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
   return bytes;
+}
+
+/** base64url: the URL-safe alphabet, and no `=` padding to percent-encode. */
+export function bytesToBase64Url(bytes) {
+  return bytesToBase64(bytes)
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/, "");
+}
+
+export function base64UrlToBytes(text) {
+  const base64 = text.replace(/-/g, "+").replace(/_/g, "/");
+  return base64ToBytes(base64 + "=".repeat((4 - (base64.length % 4)) % 4));
 }

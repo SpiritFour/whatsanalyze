@@ -91,7 +91,7 @@ export default {
           this.shareUrl ||
           buildShareLinkUrl(
             window.location.origin,
-            this.localePath("/shared"),
+            this.localePath("/s"),
             await storeSharedAnalysis(await captureAnalysis(this.chat)),
           );
         this.shareUrl = url;

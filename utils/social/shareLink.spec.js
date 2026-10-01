@@ -3,9 +3,9 @@ import {
   SHARE_PAYLOAD_VERSION,
   buildShareLinkUrl,
   buildSharePayload,
-  parseShareInfo,
+  decodeShareToken,
+  encodeShareToken,
   parseSharePayload,
-  serializeShareInfo,
 } from "./shareLink";
 
 const SNAPSHOT = {
@@ -49,51 +49,61 @@ describe("share payload", () => {
   });
 });
 
-describe("share info", () => {
-  const shareInfo = {
-    uuid: "3f7c1b6e",
-    encryptedKey: { iv: [1, 2, 3], key: new Uint8Array([9, 8, 7]).buffer },
+describe("share token", () => {
+  const parts = {
+    id: new Uint8Array(16).fill(7),
+    iv: new Uint8Array(12).fill(9),
+    key: new Uint8Array(32).fill(3).buffer,
   };
 
-  it("round-trips through the URL fragment", () => {
-    const parsed = parseShareInfo(`#${serializeShareInfo(shareInfo)}`);
+  it("round-trips the id, nonce and key through one blob", () => {
+    const decoded = decodeShareToken(`#${encodeShareToken(parts)}`);
 
-    expect(parsed.uuid).toBe("3f7c1b6e");
-    expect(parsed.encryptedKey.iv).toEqual([1, 2, 3]);
-    expect(Array.from(new Uint8Array(parsed.encryptedKey.key))).toEqual([
-      9, 8, 7,
-    ]);
-  });
-
-  it("reads a fragment that still carries its leading hash", () => {
-    const serialized = serializeShareInfo(shareInfo);
-
-    expect(parseShareInfo(serialized).uuid).toBe(
-      parseShareInfo(`#${serialized}`).uuid,
+    expect(Array.from(decoded.id)).toEqual(Array.from(parts.id));
+    expect(Array.from(decoded.iv)).toEqual(Array.from(parts.iv));
+    expect(Array.from(new Uint8Array(decoded.key))).toEqual(
+      Array.from(new Uint8Array(parts.key)),
     );
   });
 
-  it("rejects a link missing part of the key", () => {
-    expect(() => parseShareInfo("#uuid=3f7c1b6e&iv=[1,2]")).toThrow(
-      "Incomplete share link",
+  it("reads a token that still carries its leading hash", () => {
+    const token = encodeShareToken(parts);
+
+    expect(Array.from(decodeShareToken(token).id)).toEqual(
+      Array.from(decodeShareToken(`#${token}`).id),
     );
+  });
+
+  it("needs no percent-encoding in a URL", () => {
+    const token = encodeShareToken(parts);
+
+    // base64url only, so the link carries no %5B and no padding to escape.
+    expect(token).toMatch(/^[A-Za-z0-9_-]+$/);
+    expect(encodeURIComponent(token)).toBe(token);
+  });
+
+  it("rejects a truncated link", () => {
+    expect(() =>
+      decodeShareToken(`#${encodeShareToken(parts).slice(0, 40)}`),
+    ).toThrow("Incomplete share link");
   });
 });
 
 describe("buildShareLinkUrl", () => {
-  it("keeps the key in the fragment and the UTM tags in the query", () => {
-    const url = buildShareLinkUrl(
-      "https://whatsanalyze.com/",
-      "/de/shared",
-      "uuid=abc&key=%5B1%5D",
-    );
+  it("is a path and a fragment, and nothing else", () => {
+    const token = encodeShareToken({
+      id: new Uint8Array(16).fill(7),
+      iv: new Uint8Array(12).fill(9),
+      key: new Uint8Array(32).fill(3).buffer,
+    });
+    const url = buildShareLinkUrl("https://whatsanalyze.com/", "/de/s", token);
 
     // Everything before the hash is what the server and any Referer header
-    // get to see, so the key must not appear in it.
+    // get to see, so the key must not appear in it -- and there is no query
+    // string left to carry anything else either.
     const [sent, fragment] = url.split("#");
-    expect(sent).toBe(
-      "https://whatsanalyze.com/de/shared?utm_source=user_share&utm_medium=link",
-    );
-    expect(fragment).toBe("uuid=abc&key=%5B1%5D");
+    expect(sent).toBe("https://whatsanalyze.com/de/s");
+    expect(fragment).toBe(token);
+    expect(url.length).toBeLessThan(115);
   });
 });
