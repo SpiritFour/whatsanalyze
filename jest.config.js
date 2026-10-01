@@ -13,5 +13,6 @@ module.exports = {
     "<rootDir>/utils/transformChatData.js",
     "<rootDir>/utils/social/cardData.js",
     "<rootDir>/utils/social/shareLink.js",
+    "<rootDir>/utils/social/analysisSnapshot.js",
   ],
 };

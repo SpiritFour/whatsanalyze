@@ -1,4 +1,4 @@
-import { deflate, inflate } from "pako";
+import { deflate } from "pako";
 import {
   SHARE_PAYLOAD_VERSION,
   buildShareLinkUrl,
@@ -8,84 +8,44 @@ import {
   serializeShareInfo,
 } from "./shareLink";
 
-const MESSAGES = [
-  {
-    author: "Alex Morgan",
-    date: new Date("2024-01-01T23:30:00.000Z"),
-    message: "hey there",
-    absolute_id: 0,
+const SNAPSHOT = {
+  version: SHARE_PAYLOAD_VERSION,
+  totalMessages: 2,
+  firstDate: new Date("2024-01-01T23:30:00.000Z"),
+  lastDate: new Date("2024-01-02T07:10:00.000Z"),
+  numPersonsInChat: 2,
+  people: [{ name: "Alex Morgan", color: "#21a68d" }],
+  socialStats: {
+    start: new Date("2024-01-01T23:30:00.000Z"),
+    end: new Date("2024-01-02T07:10:00.000Z"),
+    people: [],
   },
-  {
-    author: "System",
-    date: new Date("2024-01-01T23:31:00.000Z"),
-    message: "Messages are end-to-end encrypted",
-    absolute_id: 1,
-  },
-  {
-    author: "Jordan Blake",
-    date: new Date("2024-01-02T07:10:00.000Z"),
-    message: "servus 👍",
-    absolute_id: 2,
-    attachment: { fileName: "PTT-20240102.opus" },
-  },
-];
+};
 
 describe("share payload", () => {
-  it("round-trips every message unchanged", () => {
-    expect(parseSharePayload(buildSharePayload(MESSAGES))).toEqual(MESSAGES);
-  });
+  it("revives the dates the charts call Date methods on", () => {
+    const restored = parseSharePayload(buildSharePayload(SNAPSHOT));
 
-  it("keeps the dates as Dates", () => {
-    const [first] = parseSharePayload(buildSharePayload(MESSAGES));
-
-    // JSON has no date type, and everything downstream calls Date methods on
-    // this, so a string here would throw on the first chart.
-    expect(first.date).toBeInstanceOf(Date);
-    expect(first.date.toISOString()).toBe("2024-01-01T23:30:00.000Z");
-  });
-
-  it("stores no more than the source", () => {
-    // The payload has to be the messages and nothing derived from them, so
-    // that the other side recomputes the analysis rather than trusting one.
-    const packed = JSON.parse(
-      new TextDecoder().decode(inflate(buildSharePayload(MESSAGES))),
+    expect(restored.firstDate).toBeInstanceOf(Date);
+    expect(restored.lastDate).toBeInstanceOf(Date);
+    expect(restored.socialStats.start).toBeInstanceOf(Date);
+    expect(restored.firstDate.toISOString()).toBe(
+      SNAPSHOT.firstDate.toISOString(),
     );
-
-    expect(Object.keys(packed).sort()).toEqual([
-      "attachments",
-      "authors",
-      "base",
-      "gaps",
-      "texts",
-      "version",
-      "who",
-    ]);
-  });
-
-  it("packs a long chat far smaller than one object per message", () => {
-    const many = Array.from({ length: 5000 }, (_, index) => ({
-      author: index % 2 ? "Alex Morgan" : "Jordan Blake",
-      date: new Date(Date.UTC(2024, 0, 1) + index * 60000),
-      message: "thanks, see you tomorrow",
-      absolute_id: index,
-    }));
-
-    const naive = new TextEncoder().encode(JSON.stringify(many)).length;
-    expect(buildSharePayload(many).length).toBeLessThan(naive / 50);
   });
 
   it("refuses a payload from a version it cannot read", () => {
-    const stale = deflate(JSON.stringify({ version: 99, texts: [] }));
+    const stale = deflate(JSON.stringify({ ...SNAPSHOT, version: 99 }));
 
     expect(() => parseSharePayload(stale)).toThrow("version 99");
   });
 
-  it("refuses a payload with no messages", () => {
+  it("refuses a payload carrying no analysis", () => {
     const empty = deflate(
-      JSON.stringify({ version: SHARE_PAYLOAD_VERSION, texts: [] }),
+      JSON.stringify({ version: SHARE_PAYLOAD_VERSION, people: [] }),
     );
 
-    expect(() => parseSharePayload(empty)).toThrow("no messages");
+    expect(() => parseSharePayload(empty)).toThrow("no analysis");
   });
 });
 

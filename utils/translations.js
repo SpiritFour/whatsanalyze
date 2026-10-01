@@ -472,7 +472,8 @@ export const messages = {
     downloadResults: "Download Results",
     shareLinkCtaTitle: "Share your results with a link",
     shareLinkCtaSubtitle:
-      "Whoever opens it sees this whole analysis. Your chat is uploaded encrypted, and the key to read it stays in the link, never on our servers.",
+      "Only the charts on this page are shared. Your messages are not uploaded and cannot be read from the link.",
+    shareLinkOnlyResults: "Shares the charts only — never your messages.",
     shareLinkTitle: "My WhatsApp chat analysis",
     shareLinkCreateAndShare: "Create link and share",
     shareLinkCreateAndCopy: "Create link and copy",
@@ -480,16 +481,16 @@ export const messages = {
     shareLinkShared: "Link shared",
     shareLinkError: "The link could not be created. Please try again.",
     shareLinkTooLarge:
-      "This chat is too large to share as a link. You can still share the charts as images.",
+      "These results are too large to share as a link. You can still share the charts as images.",
     shareLinkInviteText:
       "Look what our chat looks like! Analyze yours too — it never leaves your phone.",
-    sharedHighlightsLoading: "Opening the shared analysis…",
-    sharedHighlightsMissing: "This analysis is not available",
+    sharedHighlightsLoading: "Opening the shared results…",
+    sharedHighlightsMissing: "These results are not available",
     sharedHighlightsErrorText:
-      "The link may be incomplete or the analysis may have been removed.",
+      "The link may be incomplete or the results may have been removed.",
     sharedHighlightsCtaTitle: "Curious about your own chat?",
     sharedHighlightsCtaText:
-      "Analyze it right in your browser. Your chat is never uploaded unless you share a link.",
+      "Analyze it right in your browser. Your messages are never uploaded.",
     sharedHighlightsCtaButton: "Analyze my chat",
     socialCardOverviewKicker: "Our chat",
     socialCardOverviewTitle: "The whole story in numbers",
@@ -1490,7 +1491,8 @@ export const messages = {
     downloadResults: "Ergebnisse herunterladen",
     shareLinkCtaTitle: "Teile Deine Auswertung per Link",
     shareLinkCtaSubtitle:
-      "Wer ihn öffnet, sieht diese ganze Auswertung. Dein Chat wird verschlüsselt hochgeladen, und der Schlüssel bleibt im Link – nie auf unseren Servern.",
+      "Geteilt werden nur die Grafiken auf dieser Seite. Deine Nachrichten werden nicht hochgeladen und lassen sich aus dem Link nicht lesen.",
+    shareLinkOnlyResults: "Teilt nur die Grafiken – niemals Deine Nachrichten.",
     shareLinkTitle: "Meine WhatsApp-Chat-Auswertung",
     shareLinkCreateAndShare: "Link erstellen und teilen",
     shareLinkCreateAndCopy: "Link erstellen und kopieren",
@@ -1499,7 +1501,7 @@ export const messages = {
     shareLinkError:
       "Der Link konnte nicht erstellt werden. Bitte versuche es erneut.",
     shareLinkTooLarge:
-      "Dieser Chat ist zu groß für einen Link. Du kannst die Grafiken weiterhin als Bilder teilen.",
+      "Diese Auswertung ist zu groß für einen Link. Du kannst die Grafiken weiterhin als Bilder teilen.",
     shareLinkInviteText:
       "Schau mal, wie unser Chat aussieht! Analysiere Deinen auch – er verlässt Dein Handy nie.",
     sharedHighlightsLoading: "Geteilte Auswertung wird geöffnet…",
@@ -1508,7 +1510,7 @@ export const messages = {
       "Der Link ist vielleicht unvollständig oder die Auswertung wurde entfernt.",
     sharedHighlightsCtaTitle: "Neugierig auf Deinen eigenen Chat?",
     sharedHighlightsCtaText:
-      "Analysiere ihn direkt im Browser. Dein Chat wird nie hochgeladen, außer Du teilst einen Link.",
+      "Analysiere ihn direkt im Browser. Deine Nachrichten werden nie hochgeladen.",
     sharedHighlightsCtaButton: "Meinen Chat analysieren",
     socialCardOverviewKicker: "Unser Chat",
     socialCardOverviewTitle: "Die ganze Geschichte in Zahlen",
@@ -2478,7 +2480,8 @@ export const messages = {
     downloadResults: "Descargar resultados",
     shareLinkCtaTitle: "Comparte tu análisis con un enlace",
     shareLinkCtaSubtitle:
-      "Quien lo abra verá todo este análisis. Tu chat se sube cifrado y la clave para leerlo se queda en el enlace, nunca en nuestros servidores.",
+      "Solo se comparten los gráficos de esta página. Tus mensajes no se suben y no pueden leerse desde el enlace.",
+    shareLinkOnlyResults: "Comparte solo los gráficos, nunca tus mensajes.",
     shareLinkTitle: "Mi análisis de chat de WhatsApp",
     shareLinkCreateAndShare: "Crear enlace y compartir",
     shareLinkCreateAndCopy: "Crear enlace y copiar",
@@ -2486,7 +2489,7 @@ export const messages = {
     shareLinkShared: "Enlace compartido",
     shareLinkError: "No se pudo crear el enlace. Inténtalo de nuevo.",
     shareLinkTooLarge:
-      "Este chat es demasiado grande para compartirlo como enlace. Puedes compartir los gráficos como imágenes.",
+      "Este análisis es demasiado grande para compartirlo como enlace. Puedes compartir los gráficos como imágenes.",
     shareLinkInviteText:
       "¡Mira cómo es nuestro chat! Analiza el tuyo también: nunca sale de tu teléfono.",
     sharedHighlightsLoading: "Abriendo el análisis compartido…",
@@ -2495,7 +2498,7 @@ export const messages = {
       "Puede que el enlace esté incompleto o que el análisis se haya eliminado.",
     sharedHighlightsCtaTitle: "¿Tienes curiosidad por tu propio chat?",
     sharedHighlightsCtaText:
-      "Analízalo en tu navegador. Tu chat nunca se sube, salvo que compartas un enlace.",
+      "Analízalo en tu navegador. Tus mensajes nunca se suben.",
     sharedHighlightsCtaButton: "Analizar mi chat",
     socialCardOverviewKicker: "Nuestro chat",
     socialCardOverviewTitle: "Toda la historia en números",
@@ -3284,7 +3287,8 @@ export const messages = {
     downloadResults: "Download Results",
     shareLinkCtaTitle: "Compartilhe sua análise por link",
     shareLinkCtaSubtitle:
-      "Quem abrir vê toda esta análise. Sua conversa é enviada criptografada e a chave para lê-la fica no link, nunca nos nossos servidores.",
+      "Só os gráficos desta página são compartilhados. Suas mensagens não são enviadas e não podem ser lidas pelo link.",
+    shareLinkOnlyResults: "Compartilha só os gráficos — nunca suas mensagens.",
     shareLinkTitle: "Minha análise de conversa do WhatsApp",
     shareLinkCreateAndShare: "Criar link e compartilhar",
     shareLinkCreateAndCopy: "Criar link e copiar",
@@ -3292,7 +3296,7 @@ export const messages = {
     shareLinkShared: "Link compartilhado",
     shareLinkError: "Não foi possível criar o link. Tente novamente.",
     shareLinkTooLarge:
-      "Esta conversa é grande demais para compartilhar por link. Você ainda pode compartilhar os gráficos como imagens.",
+      "Esta análise é grande demais para compartilhar por link. Você ainda pode compartilhar os gráficos como imagens.",
     shareLinkInviteText:
       "Olha como é a nossa conversa! Analise a sua também — ela nunca sai do seu celular.",
     sharedHighlightsLoading: "Abrindo a análise compartilhada…",
@@ -3301,7 +3305,7 @@ export const messages = {
       "O link pode estar incompleto ou a análise pode ter sido removida.",
     sharedHighlightsCtaTitle: "Curioso sobre a sua própria conversa?",
     sharedHighlightsCtaText:
-      "Analise direto no navegador. Sua conversa nunca é enviada, a menos que você compartilhe um link.",
+      "Analise direto no navegador. Suas mensagens nunca são enviadas.",
     sharedHighlightsCtaButton: "Analisar minha conversa",
     socialCardOverviewKicker: "Nosso chat",
     socialCardOverviewTitle: "A história toda em números",
@@ -4272,7 +4276,9 @@ export const messages = {
     downloadResults: "Télécharger les résultats",
     shareLinkCtaTitle: "Partagez votre analyse avec un lien",
     shareLinkCtaSubtitle:
-      "Qui l'ouvre voit toute cette analyse. Votre conversation est envoyée chiffrée, et la clé de lecture reste dans le lien, jamais sur nos serveurs.",
+      "Seuls les graphiques de cette page sont partagés. Vos messages ne sont pas envoyés et ne peuvent pas être lus depuis le lien.",
+    shareLinkOnlyResults:
+      "Partage les graphiques uniquement, jamais vos messages.",
     shareLinkTitle: "Mon analyse de conversation WhatsApp",
     shareLinkCreateAndShare: "Créer le lien et partager",
     shareLinkCreateAndCopy: "Créer le lien et copier",
@@ -4280,7 +4286,7 @@ export const messages = {
     shareLinkShared: "Lien partagé",
     shareLinkError: "Le lien n'a pas pu être créé. Veuillez réessayer.",
     shareLinkTooLarge:
-      "Cette conversation est trop grande pour être partagée par lien. Vous pouvez toujours partager les graphiques en images.",
+      "Cette analyse est trop grande pour être partagée par lien. Vous pouvez toujours partager les graphiques en images.",
     shareLinkInviteText:
       "Regarde à quoi ressemble notre conversation ! Analyse la tienne aussi — elle ne quitte jamais ton téléphone.",
     sharedHighlightsLoading: "Ouverture de l'analyse partagée…",
@@ -4289,7 +4295,7 @@ export const messages = {
       "Le lien est peut-être incomplet ou l'analyse a été supprimée.",
     sharedHighlightsCtaTitle: "Curieux de votre propre conversation ?",
     sharedHighlightsCtaText:
-      "Analysez-la directement dans votre navigateur. Elle n'est jamais envoyée, sauf si vous partagez un lien.",
+      "Analysez-la directement dans votre navigateur. Vos messages ne sont jamais envoyés.",
     sharedHighlightsCtaButton: "Analyser ma conversation",
     socialCardOverviewKicker: "Notre conversation",
     socialCardOverviewTitle: "Toute l'histoire en chiffres",
@@ -5257,7 +5263,8 @@ export const messages = {
     downloadResults: "Scarica i risultati",
     shareLinkCtaTitle: "Condividi la tua analisi con un link",
     shareLinkCtaSubtitle:
-      "Chi lo apre vede tutta questa analisi. La tua chat viene caricata cifrata e la chiave per leggerla resta nel link, mai sui nostri server.",
+      "Vengono condivisi solo i grafici di questa pagina. I tuoi messaggi non vengono caricati e non si possono leggere dal link.",
+    shareLinkOnlyResults: "Condivide solo i grafici, mai i tuoi messaggi.",
     shareLinkTitle: "La mia analisi della chat WhatsApp",
     shareLinkCreateAndShare: "Crea il link e condividi",
     shareLinkCreateAndCopy: "Crea il link e copia",
@@ -5265,7 +5272,7 @@ export const messages = {
     shareLinkShared: "Link condiviso",
     shareLinkError: "Non è stato possibile creare il link. Riprova.",
     shareLinkTooLarge:
-      "Questa chat è troppo grande per essere condivisa con un link. Puoi comunque condividere i grafici come immagini.",
+      "Questa analisi è troppo grande per essere condivisa con un link. Puoi comunque condividere i grafici come immagini.",
     shareLinkInviteText:
       "Guarda com'è la nostra chat! Analizza anche la tua — non lascia mai il tuo telefono.",
     sharedHighlightsLoading: "Apertura dell'analisi condivisa…",
@@ -5274,7 +5281,7 @@ export const messages = {
       "Il link potrebbe essere incompleto o l'analisi potrebbe essere stata rimossa.",
     sharedHighlightsCtaTitle: "Curioso della tua chat?",
     sharedHighlightsCtaText:
-      "Analizzala direttamente nel browser. La tua chat non viene mai caricata, a meno che tu non condivida un link.",
+      "Analizzala direttamente nel browser. I tuoi messaggi non vengono mai caricati.",
     sharedHighlightsCtaButton: "Analizza la mia chat",
     socialCardOverviewKicker: "La nostra chat",
     socialCardOverviewTitle: "Tutta la storia in numeri",

@@ -20,7 +20,7 @@
       <!-- Off when this analysis arrived through a link: the reader is looking
            at someone else's chat and has no business passing it on. -->
       <ChartsCard
-        v-if="shareable"
+        v-if="!shared"
         :title="$t('shareLinkCtaTitle')"
         :subtitle="$t('shareLinkCtaSubtitle')"
         data-html2canvas-ignore
@@ -53,7 +53,10 @@
         </Share>
       </ChartsCard>
 
+      <!-- Regrouping participants recounts every message, and a shared
+           analysis has none to recount. -->
       <GroupOthers
+        v-if="!shared"
         :chat-object="chat"
         data-html2canvas-ignore
         remove-height-in-html2-canvas
@@ -136,12 +139,16 @@
 
       <DownloadPopup
         :chat="chat"
+        :hide-pdf-link="shared"
         data-html2canvas-ignore
         remove-height-in-html2-canvas
         :is-valid-subscription="isValidSubscription"
       />
 
+      <!-- The chat itself and the PDF built from it. A share link carries the
+           charts only, so there is nothing here to show. -->
       <ChatVisualization
+        v-if="!shared"
         data-html2canvas-ignore
         remove-height-in-html2-canvas
         :chat="chat"
@@ -159,8 +166,11 @@ export default {
     chat: { type: Object, default: null },
     attachments: { type: Array, default: () => [] },
     isValidSubscription: { type: Boolean, default: false },
-    // Only a chat the reader uploaded themselves may be shared on.
-    shareable: { type: Boolean, default: true },
+    /**
+     * This analysis came from a share link: charts only, with no messages
+     * behind them. Everything that needs the chat itself is left out.
+     */
+    shared: { type: Boolean, default: false },
   },
 };
 </script>

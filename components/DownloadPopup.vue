@@ -81,7 +81,9 @@
         </v-card>
       </v-dialog>
 
-      <div v-if="!isSimple" class="mt-8">
+      <!-- Hidden on a shared analysis: the PDF is built from the chat, and
+           the section this jumps to is not on that page. -->
+      <div v-if="!isSimple && !hidePdfLink" class="mt-8">
         <p class="m-0 mb-3 text-sm text-wa-ink-muted">
           {{ $t("lookingFor") }}
           <b class="text-wa-ink">{{ $t("pdfDownload") }}</b
@@ -108,6 +110,7 @@ export default {
   props: {
     chat: { type: Object },
     isSimple: { default: false, type: Boolean },
+    hidePdfLink: { type: Boolean, default: false },
   },
   data() {
     return {
