@@ -1,4 +1,4 @@
-import { deflate } from "pako";
+import { deflate, inflate } from "pako";
 import {
   SHARE_PAYLOAD_VERSION,
   buildShareLinkUrl,
@@ -16,46 +16,73 @@ const MESSAGES = [
     absolute_id: 0,
   },
   {
+    author: "System",
+    date: new Date("2024-01-01T23:31:00.000Z"),
+    message: "Messages are end-to-end encrypted",
+    absolute_id: 1,
+  },
+  {
     author: "Jordan Blake",
     date: new Date("2024-01-02T07:10:00.000Z"),
     message: "servus 👍",
-    absolute_id: 1,
+    absolute_id: 2,
+    attachment: { fileName: "PTT-20240102.opus" },
   },
 ];
 
 describe("share payload", () => {
-  it("round-trips the messages with their dates intact", () => {
-    const messages = parseSharePayload(buildSharePayload(MESSAGES));
-
-    expect(messages).toHaveLength(2);
-    expect(messages[0].author).toBe("Alex Morgan");
-    expect(messages[1].message).toBe("servus 👍");
-    // JSON has no date type, and everything downstream calls Date methods on
-    // this, so a string here would throw on the first chart.
-    expect(messages[0].date).toBeInstanceOf(Date);
-    expect(messages[0].date.toISOString()).toBe("2024-01-01T23:30:00.000Z");
+  it("round-trips every message unchanged", () => {
+    expect(parseSharePayload(buildSharePayload(MESSAGES))).toEqual(MESSAGES);
   });
 
-  it("compresses, which is what keeps a chat inside a Firestore document", () => {
-    const many = Array.from({ length: 2000 }, (_, index) => ({
-      ...MESSAGES[0],
+  it("keeps the dates as Dates", () => {
+    const [first] = parseSharePayload(buildSharePayload(MESSAGES));
+
+    // JSON has no date type, and everything downstream calls Date methods on
+    // this, so a string here would throw on the first chart.
+    expect(first.date).toBeInstanceOf(Date);
+    expect(first.date.toISOString()).toBe("2024-01-01T23:30:00.000Z");
+  });
+
+  it("stores no more than the source", () => {
+    // The payload has to be the messages and nothing derived from them, so
+    // that the other side recomputes the analysis rather than trusting one.
+    const packed = JSON.parse(
+      new TextDecoder().decode(inflate(buildSharePayload(MESSAGES))),
+    );
+
+    expect(Object.keys(packed).sort()).toEqual([
+      "attachments",
+      "authors",
+      "base",
+      "gaps",
+      "texts",
+      "version",
+      "who",
+    ]);
+  });
+
+  it("packs a long chat far smaller than one object per message", () => {
+    const many = Array.from({ length: 5000 }, (_, index) => ({
+      author: index % 2 ? "Alex Morgan" : "Jordan Blake",
+      date: new Date(Date.UTC(2024, 0, 1) + index * 60000),
+      message: "thanks, see you tomorrow",
       absolute_id: index,
     }));
 
-    expect(buildSharePayload(many).length).toBeLessThan(
-      JSON.stringify(many).length / 5,
-    );
+    const naive = new TextEncoder().encode(JSON.stringify(many)).length;
+    expect(buildSharePayload(many).length).toBeLessThan(naive / 50);
   });
 
   it("refuses a payload from a version it cannot read", () => {
-    const stale = deflate(JSON.stringify({ version: 99, messages: [] }));
+    const stale = deflate(JSON.stringify({ version: 99, texts: [] }));
 
     expect(() => parseSharePayload(stale)).toThrow("version 99");
   });
 
   it("refuses a payload with no messages", () => {
     const empty = deflate(
-      JSON.stringify({ version: SHARE_PAYLOAD_VERSION, messages: [] }),
+      JSON.stringify({ version: SHARE_PAYLOAD_VERSION, texts: [] }),
     );
 
     expect(() => parseSharePayload(empty)).toThrow("no messages");

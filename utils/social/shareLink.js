@@ -1,6 +1,6 @@
 import { deflate, inflate } from "pako";
 
-export const SHARE_PAYLOAD_VERSION = 2;
+export const SHARE_PAYLOAD_VERSION = 3;
 
 /**
  * A Firestore document holds a megabyte. The payload below is base64, so this
@@ -20,18 +20,50 @@ export class ChatTooLargeError extends Error {
 }
 
 /**
- * What a share link carries: the parsed messages, exactly as they came back
- * from the upload. The page behind the link builds its Chat from these and
- * renders the ordinary analysis, so a shared link and an upload cannot drift.
+ * What a share link carries: the source messages, and only the source. Every
+ * chart, every fun fact and every highlight is derived from these on the other
+ * side, exactly as it is after an upload, so the two cannot drift.
  *
- * Deflated before encryption rather than after -- ciphertext is noise and does
- * not compress -- which is the difference between a chat of forty thousand
- * messages fitting in a document and not.
+ * Stored column by column rather than as one object per message. A message is
+ * mostly repetition -- the same four field names, the same handful of authors,
+ * timestamps a few minutes apart -- and spelling that out per message made the
+ * payload twice the size of the chat export it came from. Here each field name
+ * appears once in the whole document, authors become an index into a table,
+ * and timestamps are the gap since the previous message. `absolute_id` is not
+ * stored at all: it is the position in the export, which is the array index.
+ *
+ * Deflated before encryption, because ciphertext is noise and will not
+ * compress afterwards.
  */
 export function buildSharePayload(messages) {
+  const authors = [...new Set(messages.map((message) => message.author))];
+  const authorIndex = new Map(authors.map((author, index) => [author, index]));
+
+  const base = messages.length ? messages[0].date.getTime() : 0;
+  let previous = base;
+  const gaps = [];
+  const attachments = {};
+
+  messages.forEach((message, index) => {
+    const time = message.date.getTime();
+    gaps.push(time - previous);
+    previous = time;
+    if (message.attachment?.fileName) {
+      attachments[index] = message.attachment.fileName;
+    }
+  });
+
   return deflate(
     new TextEncoder().encode(
-      JSON.stringify({ version: SHARE_PAYLOAD_VERSION, messages }),
+      JSON.stringify({
+        version: SHARE_PAYLOAD_VERSION,
+        authors,
+        who: messages.map((message) => authorIndex.get(message.author)),
+        base,
+        gaps,
+        texts: messages.map((message) => message.message),
+        attachments,
+      }),
     ),
   );
 }
@@ -43,15 +75,24 @@ export function parseSharePayload(bytes) {
   if (payload.version !== SHARE_PAYLOAD_VERSION) {
     throw new Error(`Unsupported share payload version ${payload.version}`);
   }
-  if (!Array.isArray(payload.messages) || !payload.messages.length) {
+  if (!Array.isArray(payload.texts) || !payload.texts.length) {
     throw new Error("Share payload has no messages");
   }
-  // JSON has no date type. Everything downstream calls Date methods on this,
-  // and a string would throw on the first chart.
-  return payload.messages.map((message) => ({
-    ...message,
-    date: new Date(message.date),
-  }));
+
+  let time = payload.base;
+  return payload.texts.map((message, index) => {
+    time += payload.gaps[index];
+    const fileName = payload.attachments?.[index];
+    return {
+      // A real Date: everything downstream calls Date methods on this, and a
+      // string would throw on the first chart.
+      date: new Date(time),
+      author: payload.authors[payload.who[index]],
+      message,
+      absolute_id: index,
+      ...(fileName ? { attachment: { fileName } } : {}),
+    };
+  });
 }
 
 /**
