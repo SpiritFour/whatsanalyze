@@ -15,9 +15,10 @@
         </p>
       </div>
 
-      <!-- The same component the home page renders after an upload, so a
-           shared link and an upload cannot show different analyses. -->
-      <ChartsResults v-else :chat="chat" :shareable="false" />
+      <!-- The same component the home page renders after an upload, drawing
+           the same charts from the sender's finished numbers rather than from
+           their messages. -->
+      <ChartsResults v-else :chat="analysis" shared />
     </LandingSection>
 
     <LandingSection theme="white">
@@ -38,24 +39,24 @@
 
 <script setup>
 import { onMounted, ref, shallowRef } from "vue";
-import { Chat } from "~/utils/transformChatData";
-import { loadSharedChat } from "~/utils/social/shareLinkStore";
+import { SharedAnalysis } from "~/utils/social/analysisSnapshot";
+import { loadSharedAnalysis } from "~/utils/social/shareLinkStore";
 import { analyticsChat } from "~/composables/useAnalytics";
 
 const localePath = useLocalePath();
 const route = useRoute();
 const router = useRouter();
 
-// shallowRef: Chat holds every message and caches derived tables on itself,
-// and making all of that reactive costs seconds on a long chat for nothing.
-const chat = shallowRef(null);
+// shallowRef: the charts read whole arrays off this and never mutate them, so
+// there is nothing to gain from making every entry reactive.
+const analysis = shallowRef(null);
 const loading = ref(true);
 const errorKey = ref(null);
 
 // The preview a link gets when it is pasted into a chat. It says only that
-// somebody shared an analysis: the chat is decrypted in the reader's browser,
-// and whatever is in it must not end up in a preview card that WhatsApp,
-// Telegram and every link scraper in between will happily cache.
+// somebody shared an analysis: the numbers are decrypted in the reader's
+// browser, and none of them belong in a preview card that WhatsApp, Telegram
+// and every link scraper in between will happily cache.
 useHead({
   title: "A shared WhatsApp chat analysis - WhatsAnalyze",
   meta: [
@@ -89,10 +90,10 @@ onMounted(async () => {
   }
 
   try {
-    chat.value = new Chat(await loadSharedChat(fragment));
+    analysis.value = new SharedAnalysis(await loadSharedAnalysis(fragment));
     analyticsChat.sharedHighlightsOpened();
   } catch (error) {
-    console.error("Could not open the shared chat", error);
+    console.error("Could not open the shared analysis", error);
     errorKey.value = "sharedHighlightsMissing";
   } finally {
     loading.value = false;

@@ -164,6 +164,10 @@ const STATS_BY_CHAT = new WeakMap();
  * chat locked the page up for long enough that clicks were simply lost.
  */
 export function socialStatsFor(chat) {
+  // A shared analysis arrives with these already computed, and has no messages
+  // behind it to compute them from.
+  if (chat.socialStats) return chat.socialStats;
+
   if (!STATS_BY_CHAT.has(chat)) {
     STATS_BY_CHAT.set(chat, collectSocialStats(chat));
   }

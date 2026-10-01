@@ -71,7 +71,7 @@ test.describe("share link", () => {
     await page.goto("/shared");
 
     await expect(
-      page.getByText("This analysis is not available"),
+      page.getByText("These results are not available"),
     ).toBeVisible();
     await expect(
       page.getByRole("link", { name: "Analyze my chat" }),
@@ -91,7 +91,7 @@ test.describe("share link", () => {
       "/shared?utm_source=user_share&utm_medium=link#uuid=e2e&iv=%5B1%5D&key=%5B2%5D",
     );
     await expect(
-      page.getByText("This analysis is not available"),
+      page.getByText("These results are not available"),
     ).toBeVisible();
 
     expect(sent).toEqual([]);

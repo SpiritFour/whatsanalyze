@@ -4,6 +4,10 @@
       {{ shareLabel }}
     </UiButton>
 
+    <p class="m-0 mt-3 text-sm text-wa-ink-faint">
+      {{ $t("shareLinkOnlyResults") }}
+    </p>
+
     <div
       v-if="shareUrl"
       class="mx-auto mt-5 max-w-xl break-words rounded-token-lg bg-wa-surface-muted p-4 text-left text-xs text-wa-ink-muted"
@@ -22,7 +26,8 @@
 
 <script>
 import { ChatTooLargeError, buildShareLinkUrl } from "~/utils/social/shareLink";
-import { storeSharedChat } from "~/utils/social/shareLinkStore";
+import { captureAnalysis } from "~/utils/social/analysisSnapshot";
+import { storeSharedAnalysis } from "~/utils/social/shareLinkStore";
 import { analyticsChat } from "~/composables/useAnalytics";
 
 export default {
@@ -80,14 +85,14 @@ export default {
       this.errorKey = null;
       this.messageKey = null;
       try {
-        // The whole chat goes into the link -- the same messages this page's
-        // analysis was built from, so the page behind the link is this page.
+        // The finished charts, not the chat they were drawn from. Nothing
+        // that could be read back as a conversation leaves the browser.
         const url =
           this.shareUrl ||
           buildShareLinkUrl(
             window.location.origin,
             this.localePath("/shared"),
-            await storeSharedChat(this.chat.chatObject),
+            await storeSharedAnalysis(await captureAnalysis(this.chat)),
           );
         this.shareUrl = url;
 

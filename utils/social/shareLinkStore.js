@@ -57,9 +57,9 @@ async function decryptBytes(data, { iv, key }) {
   return new Uint8Array(plaintext);
 }
 
-export async function storeSharedChat(messages) {
+export async function storeSharedAnalysis(snapshot) {
   const { data, encryptedKey } = await encryptBytes(
-    buildSharePayload(messages),
+    buildSharePayload(snapshot),
   );
   // Checked before the write so a chat that cannot fit is reported as such,
   // rather than coming back as a Firestore error about document size.
@@ -71,7 +71,7 @@ export async function storeSharedChat(messages) {
   return serializeShareInfo({ uuid, encryptedKey });
 }
 
-export async function loadSharedChat(fragment) {
+export async function loadSharedAnalysis(fragment) {
   const { uuid, encryptedKey } = parseShareInfo(fragment);
   const snapshot = await getDoc(doc(useNuxtApp().$firestore, "data", uuid));
   if (!snapshot.exists()) throw new Error("No such share link");

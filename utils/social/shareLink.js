@@ -1,98 +1,54 @@
 import { deflate, inflate } from "pako";
 
-export const SHARE_PAYLOAD_VERSION = 3;
+import { SNAPSHOT_VERSION } from "~/utils/social/analysisSnapshot";
+
+export const SHARE_PAYLOAD_VERSION = SNAPSHOT_VERSION;
 
 /**
- * A Firestore document holds a megabyte. The payload below is base64, so this
- * is the budget the compressed chat has to come in under, with a little room
- * left for the field name and the document path.
+ * A Firestore document holds a megabyte, and the payload below is base64, so
+ * this is the budget it has to come in under. A snapshot is a few tens of
+ * kilobytes whatever the chat's size, so nothing real comes near it -- the
+ * check is here to fail clearly rather than as a Firestore error if some
+ * pathological chat ever did.
  */
 export const SHARE_SIZE_LIMIT = 1_000_000;
 
 export class ChatTooLargeError extends Error {
   constructor(size) {
     super(
-      `Chat is ${size} bytes once packed, over the ${SHARE_SIZE_LIMIT} limit`,
+      `Analysis is ${size} bytes once packed, over the ${SHARE_SIZE_LIMIT} limit`,
     );
     this.name = "ChatTooLargeError";
     this.size = size;
   }
 }
 
-/**
- * What a share link carries: the source messages, and only the source. Every
- * chart, every fun fact and every highlight is derived from these on the other
- * side, exactly as it is after an upload, so the two cannot drift.
- *
- * Stored column by column rather than as one object per message. A message is
- * mostly repetition -- the same four field names, the same handful of authors,
- * timestamps a few minutes apart -- and spelling that out per message made the
- * payload twice the size of the chat export it came from. Here each field name
- * appears once in the whole document, authors become an index into a table,
- * and timestamps are the gap since the previous message. `absolute_id` is not
- * stored at all: it is the position in the export, which is the array index.
- *
- * Deflated before encryption, because ciphertext is noise and will not
- * compress afterwards.
- */
-export function buildSharePayload(messages) {
-  const authors = [...new Set(messages.map((message) => message.author))];
-  const authorIndex = new Map(authors.map((author, index) => [author, index]));
+/** Dates do not survive JSON, and the charts call Date methods on these. */
+const DATE_FIELDS = ["firstDate", "lastDate"];
 
-  const base = messages.length ? messages[0].date.getTime() : 0;
-  let previous = base;
-  const gaps = [];
-  const attachments = {};
-
-  messages.forEach((message, index) => {
-    const time = message.date.getTime();
-    gaps.push(time - previous);
-    previous = time;
-    if (message.attachment?.fileName) {
-      attachments[index] = message.attachment.fileName;
-    }
-  });
-
-  return deflate(
-    new TextEncoder().encode(
-      JSON.stringify({
-        version: SHARE_PAYLOAD_VERSION,
-        authors,
-        who: messages.map((message) => authorIndex.get(message.author)),
-        base,
-        gaps,
-        texts: messages.map((message) => message.message),
-        attachments,
-      }),
-    ),
-  );
+export function buildSharePayload(snapshot) {
+  return deflate(new TextEncoder().encode(JSON.stringify(snapshot)));
 }
 
 export function parseSharePayload(bytes) {
   // Decoded here rather than through pako's `to: "string"`, which hands back
   // raw bytes on this version and would mangle every emoji even if it did not.
-  const payload = JSON.parse(new TextDecoder().decode(inflate(bytes)));
-  if (payload.version !== SHARE_PAYLOAD_VERSION) {
-    throw new Error(`Unsupported share payload version ${payload.version}`);
+  const snapshot = JSON.parse(new TextDecoder().decode(inflate(bytes)));
+
+  if (snapshot.version !== SHARE_PAYLOAD_VERSION) {
+    throw new Error(`Unsupported share payload version ${snapshot.version}`);
   }
-  if (!Array.isArray(payload.texts) || !payload.texts.length) {
-    throw new Error("Share payload has no messages");
+  if (!snapshot.socialStats || !Array.isArray(snapshot.people)) {
+    throw new Error("Share payload has no analysis");
   }
 
-  let time = payload.base;
-  return payload.texts.map((message, index) => {
-    time += payload.gaps[index];
-    const fileName = payload.attachments?.[index];
-    return {
-      // A real Date: everything downstream calls Date methods on this, and a
-      // string would throw on the first chart.
-      date: new Date(time),
-      author: payload.authors[payload.who[index]],
-      message,
-      absolute_id: index,
-      ...(fileName ? { attachment: { fileName } } : {}),
-    };
+  DATE_FIELDS.forEach((field) => {
+    if (snapshot[field]) snapshot[field] = new Date(snapshot[field]);
   });
+  snapshot.socialStats.start = new Date(snapshot.socialStats.start);
+  snapshot.socialStats.end = new Date(snapshot.socialStats.end);
+
+  return snapshot;
 }
 
 /**
