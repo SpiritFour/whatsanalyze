@@ -42,28 +42,25 @@ test.describe("chat highlights", () => {
 });
 
 test.describe("share link", () => {
-  test("offers the privacy choices before creating a link", async ({
-    page,
-  }) => {
+  test("offers one button and no options", async ({ page }) => {
     await page.goto("/");
     await analyzeChat(page);
-    await page.getByRole("button", { name: "Create a share link" }).click();
 
-    const dialog = page.getByRole("dialog");
-    await expect(dialog.getByText("Share your highlights")).toBeVisible();
-
-    // First names are the default: the safe option, not the revealing one.
+    // A link carries the whole analysis, so there is nothing to choose.
     await expect(
-      dialog.getByRole("button", { name: "First names" }),
-    ).toHaveClass(/bg-wa-accent/);
+      page.getByRole("button", { name: "Create link and copy" }),
+    ).toBeVisible();
+    await expect(page.getByText("Full names")).toHaveCount(0);
     await expect(
-      dialog.getByLabel("Show percentages only, no totals"),
-    ).not.toBeChecked();
+      page.getByText("Show percentages only, no totals"),
+    ).toHaveCount(0);
+  });
 
-    await dialog.getByRole("button", { name: "Hidden" }).click();
-    await expect(dialog.getByRole("button", { name: "Hidden" })).toHaveClass(
-      /bg-wa-accent/,
-    );
+  test("does not offer to pass someone else's chat on", async ({ page }) => {
+    await page.goto("/shared");
+    await expect(
+      page.getByRole("button", { name: /Create link and/ }),
+    ).toHaveCount(0);
   });
 
   test("tells the visitor when a share link carries no key", async ({
@@ -74,7 +71,7 @@ test.describe("share link", () => {
     await page.goto("/shared");
 
     await expect(
-      page.getByText("These highlights are not available"),
+      page.getByText("This analysis is not available"),
     ).toBeVisible();
     await expect(
       page.getByRole("link", { name: "Analyze my chat" }),
@@ -94,7 +91,7 @@ test.describe("share link", () => {
       "/shared?utm_source=user_share&utm_medium=link#uuid=e2e&iv=%5B1%5D&key=%5B2%5D",
     );
     await expect(
-      page.getByText("These highlights are not available"),
+      page.getByText("This analysis is not available"),
     ).toBeVisible();
 
     expect(sent).toEqual([]);

@@ -1,3 +1,4 @@
+import { deflate } from "pako";
 import {
   SHARE_PAYLOAD_VERSION,
   buildShareLinkUrl,
@@ -7,30 +8,57 @@ import {
   serializeShareInfo,
 } from "./shareLink";
 
-const CARDS = [
-  { id: "duel", type: "duel", title: "Who talks more?" },
-  { id: "clock", type: "clock", title: "Night owl vs. early bird" },
+const MESSAGES = [
+  {
+    author: "Alex Morgan",
+    date: new Date("2024-01-01T23:30:00.000Z"),
+    message: "hey there",
+    absolute_id: 0,
+  },
+  {
+    author: "Jordan Blake",
+    date: new Date("2024-01-02T07:10:00.000Z"),
+    message: "servus 👍",
+    absolute_id: 1,
+  },
 ];
 
 describe("share payload", () => {
-  it("round-trips the cards and the locale", () => {
-    const payload = parseSharePayload(buildSharePayload(CARDS, "de"));
+  it("round-trips the messages with their dates intact", () => {
+    const messages = parseSharePayload(buildSharePayload(MESSAGES));
 
-    expect(payload.version).toBe(SHARE_PAYLOAD_VERSION);
-    expect(payload.locale).toBe("de");
-    expect(payload.cards).toEqual(CARDS);
+    expect(messages).toHaveLength(2);
+    expect(messages[0].author).toBe("Alex Morgan");
+    expect(messages[1].message).toBe("servus 👍");
+    // JSON has no date type, and everything downstream calls Date methods on
+    // this, so a string here would throw on the first chart.
+    expect(messages[0].date).toBeInstanceOf(Date);
+    expect(messages[0].date.toISOString()).toBe("2024-01-01T23:30:00.000Z");
+  });
+
+  it("compresses, which is what keeps a chat inside a Firestore document", () => {
+    const many = Array.from({ length: 2000 }, (_, index) => ({
+      ...MESSAGES[0],
+      absolute_id: index,
+    }));
+
+    expect(buildSharePayload(many).length).toBeLessThan(
+      JSON.stringify(many).length / 5,
+    );
   });
 
   it("refuses a payload from a version it cannot read", () => {
-    const stale = JSON.stringify({ version: 99, cards: [] });
+    const stale = deflate(JSON.stringify({ version: 99, messages: [] }));
 
     expect(() => parseSharePayload(stale)).toThrow("version 99");
   });
 
-  it("refuses a payload without cards", () => {
-    const empty = JSON.stringify({ version: SHARE_PAYLOAD_VERSION });
+  it("refuses a payload with no messages", () => {
+    const empty = deflate(
+      JSON.stringify({ version: SHARE_PAYLOAD_VERSION, messages: [] }),
+    );
 
-    expect(() => parseSharePayload(empty)).toThrow("no cards");
+    expect(() => parseSharePayload(empty)).toThrow("no messages");
   });
 });
 

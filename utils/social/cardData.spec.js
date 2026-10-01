@@ -1,12 +1,5 @@
 import { Chat } from "~/utils/transformChatData";
-import {
-  NAME_MODE_ANONYMOUS,
-  NAME_MODE_FIRST,
-  NAME_MODE_FULL,
-  buildSocialCards,
-  collectSocialStats,
-  maskName,
-} from "./cardData";
+import { buildSocialCards, collectSocialStats } from "./cardData";
 
 // The card builder only ever asks for keys, so echoing them back keeps the
 // assertions readable.
@@ -32,25 +25,6 @@ const FIXTURE = [
   message("Jordan Blake", "2024-01-02T07:10:00", "servus 👍 PTT-20240102.opus"),
   message("Jordan Blake", "2024-01-03T07:20:00", "servus servus 👍"),
 ];
-
-describe("maskName", () => {
-  it("keeps the full name when nothing should be hidden", () => {
-    expect(maskName("Alex Morgan", NAME_MODE_FULL, 0)).toBe("Alex Morgan");
-  });
-
-  it("shortens to the first name", () => {
-    expect(maskName("Alex Morgan", NAME_MODE_FIRST, 0)).toBe("Alex");
-  });
-
-  it("replaces the name with a stable pseudonym", () => {
-    expect(maskName("Alex Morgan", NAME_MODE_ANONYMOUS, 0)).toBe("Person A");
-    expect(maskName("Jordan Blake", NAME_MODE_ANONYMOUS, 1)).toBe("Person B");
-  });
-
-  it("falls back to a pseudonym when there is no usable first name", () => {
-    expect(maskName("   ", NAME_MODE_FIRST, 2)).toBe("Person C");
-  });
-});
 
 describe("collectSocialStats", () => {
   it("returns null for a chat without messages", () => {
@@ -96,14 +70,12 @@ describe("buildSocialCards", () => {
   const stats = collectSocialStats(buildChat(FIXTURE));
 
   it("returns nothing without stats", () => {
-    expect(buildSocialCards(null, { t, nameMode: NAME_MODE_FULL })).toEqual([]);
+    expect(buildSocialCards(null, { t })).toEqual([]);
   });
 
   it("builds the full set of highlight cards", () => {
     const cards = buildSocialCards(stats, {
       t,
-      nameMode: NAME_MODE_FULL,
-      hideCounts: false,
       locale: "en",
     });
 
@@ -119,8 +91,6 @@ describe("buildSocialCards", () => {
   it("splits the duel into percentages and includes voice notes", () => {
     const [, duel] = buildSocialCards(stats, {
       t,
-      nameMode: NAME_MODE_FULL,
-      hideCounts: false,
       locale: "en",
     });
 
@@ -137,8 +107,6 @@ describe("buildSocialCards", () => {
   it("labels the late and the early person", () => {
     const clock = buildSocialCards(stats, {
       t,
-      nameMode: NAME_MODE_FULL,
-      hideCounts: false,
       locale: "en",
     }).find((card) => card.id === "clock");
 
@@ -150,30 +118,14 @@ describe("buildSocialCards", () => {
     expect(clock.people[1].badge).toBe("socialCardEarlyBird");
   });
 
-  it("drops absolute numbers when only percentages may be shown", () => {
-    const cards = buildSocialCards(stats, {
-      t,
-      nameMode: NAME_MODE_ANONYMOUS,
-      hideCounts: true,
-      locale: "en",
-    });
+  it("puts the whole overview on the first card", () => {
+    const [overview] = buildSocialCards(stats, { t, locale: "en" });
 
-    const overview = cards.find((card) => card.id === "overview");
     expect(overview.stats.map((stat) => stat.label)).toEqual([
+      "socialCardMessages",
       "socialCardDays",
       "socialCardPeople",
+      "socialCardPerDay",
     ]);
-
-    const duel = cards.find((card) => card.id === "duel");
-    expect(duel.contenders.map((person) => person.name)).toEqual([
-      "Person A",
-      "Person B",
-    ]);
-    expect(duel.rows.every((row) => row.values === null)).toBe(true);
-
-    const emoji = cards.find((card) => card.id === "emoji");
-    expect(emoji.people[0].emojis.every((entry) => entry.count === null)).toBe(
-      true,
-    );
   });
 });

@@ -17,7 +17,10 @@
         />
       </div>
 
+      <!-- Off when this analysis arrived through a link: the reader is looking
+           at someone else's chat and has no business passing it on. -->
       <ChartsCard
+        v-if="shareable"
         :title="$t('shareLinkCtaTitle')"
         :subtitle="$t('shareLinkCtaSubtitle')"
         data-html2canvas-ignore
@@ -152,7 +155,13 @@
 
 <script>
 export default {
-  props: ["chat", "attachments", "isValidSubscription"],
+  props: {
+    chat: { type: Object, default: null },
+    attachments: { type: Array, default: () => [] },
+    isValidSubscription: { type: Boolean, default: false },
+    // Only a chat the reader uploaded themselves may be shared on.
+    shareable: { type: Boolean, default: true },
+  },
 };
 </script>
 

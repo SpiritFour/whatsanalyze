@@ -2,10 +2,6 @@ import { onlyEmoji } from "emoji-aware";
 import moment from "moment";
 import { Chat, isNoiseWord } from "~/utils/transformChatData";
 
-export const NAME_MODE_FULL = "full";
-export const NAME_MODE_FIRST = "first";
-export const NAME_MODE_ANONYMOUS = "anonymous";
-
 // WhatsApp exports reference voice notes either by attachment file name or by
 // a localised "audio omitted" placeholder. Catching both keeps the duel card
 // honest across locales without parsing the attachment archive.
@@ -13,23 +9,6 @@ const VOICE_NOTE_PATTERN =
   /\.(opus|m4a|mp3|aac|ogg)\b|\b(ptt|audio)\b[^\n]*\b(omitted|weggelassen|omesso|omitido|omis|ausgeschlossen)\b/i;
 
 const EMOJI_PRESENTATION = /\p{Emoji_Presentation}/u;
-
-function anonymousName(index) {
-  // Person A, Person B, ... and AA, AB, ... once we run past Z.
-  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  if (index < letters.length) return `Person ${letters[index]}`;
-  const first = letters[Math.floor(index / letters.length) - 1];
-  return `Person ${first}${letters[index % letters.length]}`;
-}
-
-export function maskName(name, mode, index) {
-  if (mode === NAME_MODE_ANONYMOUS) return anonymousName(index);
-  if (mode === NAME_MODE_FIRST) {
-    const firstName = String(name).trim().split(/\s+/)[0];
-    return firstName || anonymousName(index);
-  }
-  return name;
-}
 
 /**
  * Counted off the word frequencies rather than the messages themselves.
@@ -202,13 +181,10 @@ function percentSplit(values) {
  * choices (name masking, hiding absolute counts) on the way. Cards without
  * enough data to be interesting are left out entirely.
  */
-export function buildSocialCards(stats, { t, nameMode, hideCounts, locale }) {
+export function buildSocialCards(stats, { t, locale }) {
   if (!stats) return [];
 
-  const people = stats.people.map((person, index) => ({
-    ...person,
-    name: maskName(person.name, nameMode, index),
-  }));
+  const people = stats.people;
   const [first, second] = people;
   const formatNumber = (value) => {
     // A chat that runs for years can average well under one message a day, and
@@ -225,19 +201,14 @@ export function buildSocialCards(stats, { t, nameMode, hideCounts, locale }) {
   const cards = [];
 
   const overviewStats = [
-    { label: t("socialCardDays"), value: formatNumber(stats.totalDays) },
-    { label: t("socialCardPeople"), value: formatNumber(people.length) },
-  ];
-  if (!hideCounts) {
-    overviewStats.unshift({
+    {
       label: t("socialCardMessages"),
       value: formatNumber(stats.totalMessages),
-    });
-    overviewStats.push({
-      label: t("socialCardPerDay"),
-      value: formatNumber(stats.averagePerDay),
-    });
-  }
+    },
+    { label: t("socialCardDays"), value: formatNumber(stats.totalDays) },
+    { label: t("socialCardPeople"), value: formatNumber(people.length) },
+    { label: t("socialCardPerDay"), value: formatNumber(stats.averagePerDay) },
+  ];
   cards.push({
     id: "overview",
     type: "stats",
@@ -273,7 +244,7 @@ export function buildSocialCards(stats, { t, nameMode, hideCounts, locale }) {
       rows: rows.map((row) => ({
         label: row.label,
         percents: percentSplit(row.values),
-        values: hideCounts ? null : row.values.map(formatNumber),
+        values: row.values.map(formatNumber),
       })),
       accent: first.color,
     });
@@ -331,7 +302,7 @@ export function buildSocialCards(stats, { t, nameMode, hideCounts, locale }) {
         color: person.color,
         emojis: person.emojis.map((entry) => ({
           emoji: entry.emoji,
-          count: hideCounts ? null : formatNumber(entry.count),
+          count: formatNumber(entry.count),
         })),
       })),
       accent: emojiPeople[0].color,
@@ -352,7 +323,7 @@ export function buildSocialCards(stats, { t, nameMode, hideCounts, locale }) {
         color: person.color,
         words: person.signatureWords.map((entry) => ({
           word: entry.word,
-          count: hideCounts ? null : formatNumber(entry.freq),
+          count: formatNumber(entry.freq),
         })),
       })),
       accent: wordPeople[0].color,
