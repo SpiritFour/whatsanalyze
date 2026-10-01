@@ -52,11 +52,26 @@ const chat = shallowRef(null);
 const loading = ref(true);
 const errorKey = ref(null);
 
+// The preview a link gets when it is pasted into a chat. It says only that
+// somebody shared an analysis: the chat is decrypted in the reader's browser,
+// and whatever is in it must not end up in a preview card that WhatsApp,
+// Telegram and every link scraper in between will happily cache.
 useHead({
-  title: "Shared chat analysis - WhatsAnalyze",
-  // A share link holds someone's chat. Keeping it out of search results
-  // matters more than the traffic an indexed one would bring.
-  meta: [{ name: "robots", content: "noindex, nofollow" }],
+  title: "A shared WhatsApp chat analysis - WhatsAnalyze",
+  meta: [
+    // A share link holds someone's chat. Keeping it out of search results
+    // matters more than the traffic an indexed one would bring.
+    { name: "robots", content: "noindex, nofollow" },
+    {
+      property: "og:title",
+      content: "Someone shared their WhatsApp chat analysis",
+    },
+    {
+      property: "og:description",
+      content:
+        "Open the link to see the charts. Want the same for your own chat? It takes one file and never leaves your browser.",
+    },
+  ],
 });
 
 onMounted(async () => {
