@@ -81,6 +81,13 @@
         </v-card>
       </v-dialog>
 
+      <!-- The other way of sharing results. It sits here rather than in a card
+           of its own: both answers to "how do I show someone this" belong in
+           the same place. -->
+      <div v-if="$slots.secondary && !isSimple" class="mt-6">
+        <slot name="secondary" />
+      </div>
+
       <!-- Hidden on a shared analysis: the PDF is built from the chat, and
            the section this jumps to is not on that page. -->
       <div v-if="!isSimple && !hidePdfLink" class="mt-8">

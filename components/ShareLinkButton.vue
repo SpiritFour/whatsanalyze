@@ -4,10 +4,6 @@
       {{ shareLabel }}
     </UiButton>
 
-    <p class="m-0 mt-3 text-sm text-wa-ink-faint">
-      {{ $t("shareLinkOnlyResults") }}
-    </p>
-
     <div
       v-if="shareUrl"
       class="mx-auto mt-5 max-w-xl break-words rounded-token-lg bg-wa-surface-muted p-4 text-left text-xs text-wa-ink-muted"
