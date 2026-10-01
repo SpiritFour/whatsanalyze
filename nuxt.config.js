@@ -115,7 +115,12 @@ export default defineNuxtConfig({
         { name: "twitter:card", content: "summary_large_image" },
         {
           property: "og:image",
-          content: `${baseUrl}/sharePreview.png`,
+          // ?v=2 because link scrapers cache a preview against its exact URL.
+          // WhatsApp and Telegram have been handing out the old image for as
+          // long as they have known this path, and would go on doing so after
+          // the file behind it changed. The query is enough to make it a new
+          // URL to them; static hosting ignores it and serves the same file.
+          content: `${baseUrl}/sharePreview.png?v=2`,
         },
         { property: "og:image:width", content: "1200" },
         { property: "og:image:height", content: "630" },
