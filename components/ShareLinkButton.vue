@@ -97,7 +97,7 @@ import {
   NAME_MODE_FIRST,
   NAME_MODE_FULL,
   buildSocialCards,
-  collectSocialStats,
+  socialStatsFor,
 } from "~/utils/social/cardData";
 import { buildShareLinkUrl } from "~/utils/social/shareLink";
 import { storeSharedCards } from "~/utils/social/shareLinkStore";
@@ -134,7 +134,7 @@ export default {
     },
     cards() {
       if (!this.dialog) return [];
-      return buildSocialCards(collectSocialStats(this.chat), {
+      return buildSocialCards(socialStatsFor(this.chat), {
         t: this.$t.bind(this),
         nameMode: this.nameMode,
         hideCounts: this.hideCounts,

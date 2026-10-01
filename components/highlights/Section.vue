@@ -17,7 +17,7 @@
 import {
   NAME_MODE_FULL,
   buildSocialCards,
-  collectSocialStats,
+  socialStatsFor,
 } from "~/utils/social/cardData";
 
 /**
@@ -37,8 +37,7 @@ export default {
   },
   computed: {
     cards() {
-      const stats = collectSocialStats(this.chat);
-      return buildSocialCards(stats, {
+      return buildSocialCards(socialStatsFor(this.chat), {
         t: this.$t.bind(this),
         nameMode: NAME_MODE_FULL,
         hideCounts: false,
