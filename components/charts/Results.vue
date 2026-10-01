@@ -4,7 +4,10 @@
       id="download-graphs"
       class="mx-auto flex max-w-[1080px] flex-col gap-6 md:gap-8"
     >
-      <div class="flex justify-between">
+      <!-- Wraps because on a narrow phone the title and the download button
+           do not fit on one line, and without this the button is pushed off
+           the right edge of the screen. -->
+      <div class="flex flex-wrap items-center justify-between gap-4">
         <div class="text-4xl font-bold">
           {{ $t("homeLanding.resultsTitle") }}
         </div>
@@ -16,18 +19,6 @@
           remove-height-in-html2-canvas
         />
       </div>
-
-      <!-- Off when this analysis arrived through a link: the reader is looking
-           at someone else's chat and has no business passing it on. -->
-      <ChartsCard
-        v-if="!shared"
-        :title="$t('shareLinkCtaTitle')"
-        :subtitle="$t('shareLinkCtaSubtitle')"
-        data-html2canvas-ignore
-        remove-height-in-html2-canvas
-      >
-        <ShareLinkButton :chat="chat" />
-      </ChartsCard>
 
       <ChartsCard :title="$t('chatTimeline')" :subtitle="$t('messagesPerDay')">
         <Share
@@ -143,7 +134,24 @@
         data-html2canvas-ignore
         remove-height-in-html2-canvas
         :is-valid-subscription="isValidSubscription"
-      />
+      >
+        <!-- Off when this analysis arrived through a link: the reader is
+             looking at someone else's results and has no business passing
+             them on. -->
+        <template v-if="!shared" #secondary>
+          <div
+            class="border-0 border-t border-solid border-[rgba(29,29,31,0.08)] pt-6"
+          >
+            <p class="m-0 text-base font-bold text-wa-ink">
+              {{ $t("shareLinkCtaTitle") }}
+            </p>
+            <p class="m-0 mb-5 mt-1 text-sm text-wa-ink-muted">
+              {{ $t("shareLinkCtaSubtitle") }}
+            </p>
+            <ShareLinkButton :chat="chat" />
+          </div>
+        </template>
+      </DownloadPopup>
 
       <!-- The chat itself and the PDF built from it. A share link carries the
            charts only, so there is nothing here to show. -->

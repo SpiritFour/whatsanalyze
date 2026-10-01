@@ -1,6 +1,12 @@
 <template>
+  <!--
+    min-w-0: a grid and flex item is min-width:auto by default, so a card
+    refuses to shrink below the intrinsic width of the chart inside it. On a
+    phone that pushed the card past the right edge of the screen, where it was
+    cut off rather than scrollable.
+  -->
   <section
-    class="wa-scope rounded-token-lg border border-solid border-[rgba(29,29,31,0.08)] bg-wa-surface-white p-5 text-left shadow-card md:p-6"
+    class="wa-scope min-w-0 rounded-token-lg border border-solid border-[rgba(29,29,31,0.08)] bg-wa-surface-white p-5 text-left shadow-card md:p-6"
   >
     <header v-if="title" class="mb-5 flex items-start justify-between gap-3">
       <div>

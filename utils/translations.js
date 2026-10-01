@@ -473,7 +473,6 @@ export const messages = {
     shareLinkCtaTitle: "Share your results with a link",
     shareLinkCtaSubtitle:
       "Only the charts on this page are shared. Your messages are not uploaded and cannot be read from the link.",
-    shareLinkOnlyResults: "Shares the charts only — never your messages.",
     shareLinkTitle: "My WhatsApp chat analysis",
     shareLinkCreateAndShare: "Create link and share",
     shareLinkCreateAndCopy: "Create link and copy",
@@ -1492,7 +1491,6 @@ export const messages = {
     shareLinkCtaTitle: "Teile Deine Auswertung per Link",
     shareLinkCtaSubtitle:
       "Geteilt werden nur die Grafiken auf dieser Seite. Deine Nachrichten werden nicht hochgeladen und lassen sich aus dem Link nicht lesen.",
-    shareLinkOnlyResults: "Teilt nur die Grafiken – niemals Deine Nachrichten.",
     shareLinkTitle: "Meine WhatsApp-Chat-Auswertung",
     shareLinkCreateAndShare: "Link erstellen und teilen",
     shareLinkCreateAndCopy: "Link erstellen und kopieren",
@@ -2481,7 +2479,6 @@ export const messages = {
     shareLinkCtaTitle: "Comparte tu análisis con un enlace",
     shareLinkCtaSubtitle:
       "Solo se comparten los gráficos de esta página. Tus mensajes no se suben y no pueden leerse desde el enlace.",
-    shareLinkOnlyResults: "Comparte solo los gráficos, nunca tus mensajes.",
     shareLinkTitle: "Mi análisis de chat de WhatsApp",
     shareLinkCreateAndShare: "Crear enlace y compartir",
     shareLinkCreateAndCopy: "Crear enlace y copiar",
@@ -3288,7 +3285,6 @@ export const messages = {
     shareLinkCtaTitle: "Compartilhe sua análise por link",
     shareLinkCtaSubtitle:
       "Só os gráficos desta página são compartilhados. Suas mensagens não são enviadas e não podem ser lidas pelo link.",
-    shareLinkOnlyResults: "Compartilha só os gráficos — nunca suas mensagens.",
     shareLinkTitle: "Minha análise de conversa do WhatsApp",
     shareLinkCreateAndShare: "Criar link e compartilhar",
     shareLinkCreateAndCopy: "Criar link e copiar",
@@ -4277,8 +4273,6 @@ export const messages = {
     shareLinkCtaTitle: "Partagez votre analyse avec un lien",
     shareLinkCtaSubtitle:
       "Seuls les graphiques de cette page sont partagés. Vos messages ne sont pas envoyés et ne peuvent pas être lus depuis le lien.",
-    shareLinkOnlyResults:
-      "Partage les graphiques uniquement, jamais vos messages.",
     shareLinkTitle: "Mon analyse de conversation WhatsApp",
     shareLinkCreateAndShare: "Créer le lien et partager",
     shareLinkCreateAndCopy: "Créer le lien et copier",
@@ -5264,7 +5258,6 @@ export const messages = {
     shareLinkCtaTitle: "Condividi la tua analisi con un link",
     shareLinkCtaSubtitle:
       "Vengono condivisi solo i grafici di questa pagina. I tuoi messaggi non vengono caricati e non si possono leggere dal link.",
-    shareLinkOnlyResults: "Condivide solo i grafici, mai i tuoi messaggi.",
     shareLinkTitle: "La mia analisi della chat WhatsApp",
     shareLinkCreateAndShare: "Crea il link e condividi",
     shareLinkCreateAndCopy: "Crea il link e copia",

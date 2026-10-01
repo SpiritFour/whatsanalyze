@@ -66,7 +66,10 @@ export default {
 
 <style lang="scss" scoped>
 .landing-section {
-  padding: clamp(4rem, 10vw, 4rem) 1.5rem;
+  /* The min and the max used to both be 4rem, so this clamp could only
+     ever return 4rem and the 10vw never did anything. On a phone that spent
+     64px above the fold on nothing. */
+  padding: clamp(2.5rem, 10vw, 4rem) 1.5rem;
   text-align: center;
 
   &--light {
