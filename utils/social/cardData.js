@@ -31,15 +31,22 @@ export function maskName(name, mode, index) {
   return name;
 }
 
-function countEmojis(messages) {
+/**
+ * Counted off the word frequencies rather than the messages themselves.
+ *
+ * `onlyEmoji` costs around 4ms per call, so running it over 30,000 messages
+ * took two minutes and froze the page; over the few thousand distinct words
+ * behind them it is instant, and it is also how the emoji cloud counts, so the
+ * two cannot disagree about who used what.
+ */
+function countEmojis(freqDict) {
   const counts = {};
-  messages.forEach(({ message }) => {
-    if (!message) return;
-    onlyEmoji(message).forEach((emoji) => {
+  Object.entries(freqDict).forEach(([word, freq]) => {
+    onlyEmoji(word).forEach((emoji) => {
       // Skip text-presentation glyphs (©, ™, digits with keycaps) which read as
       // noise on a share card.
       if (!EMOJI_PRESENTATION.test(emoji)) return;
-      counts[emoji] = (counts[emoji] || 0) + 1;
+      counts[emoji] = (counts[emoji] || 0) + freq;
     });
   });
   return Object.entries(counts)
@@ -95,39 +102,57 @@ function freqDictOf(messages) {
 }
 
 /**
- * Derives everything the share cards need from a parsed chat. This walks the
- * messages a few times, so callers should run it once and re-use the result
- * while the user flips through privacy options and formats.
+ * Derives everything the highlights need from a parsed chat. This walks every
+ * message several times and builds a word frequency table per person, so it is
+ * the expensive half; buildSocialCards below is only formatting.
+ *
+ * Call socialStatsFor instead unless you want the work done again.
  */
 export function collectSocialStats(chat) {
   const messages = chat.filterdChatObject;
   if (!messages.length) return null;
 
-  const people = chat.messagesPerPerson;
-  const overallFreq = freqDictOf(messages);
-
-  const dates = messages.map((message) => message.date);
-  const start = new Date(Math.min(...dates));
-  const end = new Date(Math.max(...dates));
+  // One pass for the span and the days that saw a message. Spreading the dates
+  // into Math.min would throw on a chat past about 65,000 messages, and
+  // formatting each one through moment cost a second on its own.
+  let first = messages[0].date.getTime();
+  let last = first;
+  const activeDays = new Set();
+  messages.forEach(({ date }) => {
+    const time = date.getTime();
+    if (time < first) first = time;
+    if (time > last) last = time;
+    activeDays.add(
+      `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`,
+    );
+  });
+  const start = new Date(first);
+  const end = new Date(last);
   const totalDays = Math.max(1, moment(end).diff(moment(start), "days") + 1);
 
-  const perDay = {};
-  messages.forEach((message) => {
-    const day = moment(message.date).format("YYYY-MM-DD");
-    perDay[day] = (perDay[day] || 0) + 1;
+  // Every message belongs to exactly one entry here (extra participants are
+  // collapsed into "Others"), so merging these is the whole chat's word count
+  // and saves walking all the messages a third time to get it.
+  const perPersonFreq = chat.messagesPerPerson.map((person) =>
+    freqDictOf(person.messages),
+  );
+  const overallFreq = {};
+  perPersonFreq.forEach((freqDict) => {
+    Object.entries(freqDict).forEach(([word, freq]) => {
+      overallFreq[word] = (overallFreq[word] || 0) + freq;
+    });
   });
-  const busiest = Object.entries(perDay).sort((a, b) => b[1] - a[1])[0];
 
-  const enrichedPeople = people.map((person) => {
+  const enrichedPeople = chat.messagesPerPerson.map((person, index) => {
     const hourly = Chat.hourlyDataFromChat(person.messages);
-    const personFreq = freqDictOf(person.messages);
+    const personFreq = perPersonFreq[index];
     return {
       name: person.name,
       color: person.color,
       messages: person.messages.length,
       words: Chat.getTotalNumberOfWords(person.messages),
       voiceNotes: countVoiceNotes(person.messages),
-      emojis: countEmojis(person.messages).slice(0, 5),
+      emojis: countEmojis(personFreq).slice(0, 5),
       hourly,
       peakHour: peakHourOf(hourly),
       // Late evening and the small hours both count as "up late", which a plain
@@ -141,13 +166,29 @@ export function collectSocialStats(chat) {
   return {
     totalMessages: messages.length,
     totalDays,
-    activeDays: Object.keys(perDay).length,
+    activeDays: activeDays.size,
     averagePerDay: messages.length / totalDays,
     start,
     end,
-    busiestDay: busiest ? { day: busiest[0], count: busiest[1] } : null,
     people: enrichedPeople,
   };
+}
+
+const STATS_BY_CHAT = new WeakMap();
+
+/**
+ * The stats for a chat, computed once.
+ *
+ * The highlights on the results page and the share dialog both need them, and
+ * the dialog rebuilds its cards every time a privacy option changes. Without
+ * this the whole chat was walked again each of those times, which on a long
+ * chat locked the page up for long enough that clicks were simply lost.
+ */
+export function socialStatsFor(chat) {
+  if (!STATS_BY_CHAT.has(chat)) {
+    STATS_BY_CHAT.set(chat, collectSocialStats(chat));
+  }
+  return STATS_BY_CHAT.get(chat);
 }
 
 function percentSplit(values) {
