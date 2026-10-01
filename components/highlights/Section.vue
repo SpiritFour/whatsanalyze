@@ -14,19 +14,12 @@
 </template>
 
 <script>
-import {
-  NAME_MODE_FULL,
-  buildSocialCards,
-  socialStatsFor,
-} from "~/utils/social/cardData";
+import { buildSocialCards, socialStatsFor } from "~/utils/social/cardData";
 
 /**
  * The per-person highlights on the results page: who talks more, who is up
  * late, the emoji podium and the words only one person uses. Each sits in the
  * same card frame as every chart and shares through the same button.
- *
- * Names are shown in full here — this is the reader's own chat. Masking only
- * applies to what leaves the browser, which is the share link's job.
  */
 export default {
   name: "HighlightsSection",
@@ -39,8 +32,6 @@ export default {
     cards() {
       return buildSocialCards(socialStatsFor(this.chat), {
         t: this.$t.bind(this),
-        nameMode: NAME_MODE_FULL,
-        hideCounts: false,
         locale: this.$i18n.locale,
       }).filter((card) => !this.exclude.includes(card.id));
     },
