@@ -1,9 +1,16 @@
 <template>
   <section :class="['landing-section', `landing-section--${theme}`]">
+    <!--
+      A section that does not reveal carries none of the reveal classes at all.
+      `landing-reveal` is opacity:0 until `is-visible` is added, and that only
+      happens in mounted() -- so the markup was prerendered into the HTML and
+      then sat invisible until the JS had downloaded and hydrated. On a phone
+      that was a second or two of a blank body under a painted header.
+    -->
     <div
       ref="inner"
-      class="landing-section__inner landing-reveal"
-      :class="{ 'is-visible': visible }"
+      class="landing-section__inner"
+      :class="reveal ? ['landing-reveal', { 'is-visible': visible }] : null"
     >
       <p v-if="eyebrow" class="landing-section__eyebrow">{{ eyebrow }}</p>
       <h2 v-if="title" class="landing-section__title">{{ title }}</h2>

@@ -147,7 +147,11 @@ const expectAnalysis = async (page) => {
   // about whether the analysis was painted. A reveal animation that never
   // fires leaves the whole thing at opacity 0 and every assertion above
   // still green.
-  await expect(page.locator("#results .landing-reveal")).toHaveCSS(
+  //
+  // Matched on the section rather than on `.landing-reveal`: a section that
+  // does not animate carries no reveal class at all now, and a selector that
+  // only exists while the bug is possible cannot guard against it.
+  await expect(page.locator("#results .landing-section__inner")).toHaveCSS(
     "opacity",
     "1",
   );
