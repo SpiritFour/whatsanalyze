@@ -4,7 +4,10 @@
       id="download-graphs"
       class="mx-auto flex max-w-[1080px] flex-col gap-6 md:gap-8"
     >
-      <div class="flex justify-between">
+      <!-- Wraps because on a narrow phone the title and the download button
+           do not fit on one line, and without this the button is pushed off
+           the right edge of the screen. -->
+      <div class="flex flex-wrap items-center justify-between gap-4">
         <div class="text-4xl font-bold">
           {{ $t("homeLanding.resultsTitle") }}
         </div>
@@ -31,6 +34,8 @@
 
       <ChartsTextStats :chat="chat" />
 
+      <HighlightsSection :chat="chat" :exclude="['overview']" />
+
       <ChartsCard title="Fun Facts">
         <Share id="fun-facts" title="Fun Facts">
           <!-- No html2canvas-ignore here: the fun facts belong in the
@@ -39,7 +44,10 @@
         </Share>
       </ChartsCard>
 
+      <!-- Regrouping participants recounts every message, and a shared
+           analysis has none to recount. -->
       <GroupOthers
+        v-if="!shared"
         :chat-object="chat"
         data-html2canvas-ignore
         remove-height-in-html2-canvas
@@ -122,12 +130,33 @@
 
       <DownloadPopup
         :chat="chat"
+        :hide-pdf-link="shared"
         data-html2canvas-ignore
         remove-height-in-html2-canvas
         :is-valid-subscription="isValidSubscription"
-      />
+      >
+        <!-- Off when this analysis arrived through a link: the reader is
+             looking at someone else's results and has no business passing
+             them on. -->
+        <template v-if="!shared" #secondary>
+          <div
+            class="border-0 border-t border-solid border-[rgba(29,29,31,0.08)] pt-6"
+          >
+            <p class="m-0 text-base font-bold text-wa-ink">
+              {{ $t("shareLinkCtaTitle") }}
+            </p>
+            <p class="m-0 mb-5 mt-1 text-sm text-wa-ink-muted">
+              {{ $t("shareLinkCtaSubtitle") }}
+            </p>
+            <ShareLinkButton :chat="chat" />
+          </div>
+        </template>
+      </DownloadPopup>
 
+      <!-- The chat itself and the PDF built from it. A share link carries the
+           charts only, so there is nothing here to show. -->
       <ChatVisualization
+        v-if="!shared"
         data-html2canvas-ignore
         remove-height-in-html2-canvas
         :chat="chat"
@@ -141,7 +170,16 @@
 
 <script>
 export default {
-  props: ["chat", "attachments", "isValidSubscription"],
+  props: {
+    chat: { type: Object, default: null },
+    attachments: { type: Array, default: () => [] },
+    isValidSubscription: { type: Boolean, default: false },
+    /**
+     * This analysis came from a share link: charts only, with no messages
+     * behind them. Everything that needs the chat itself is left out.
+     */
+    shared: { type: Boolean, default: false },
+  },
 };
 </script>
 

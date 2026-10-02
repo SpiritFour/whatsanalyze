@@ -99,10 +99,31 @@ export default defineNuxtConfig({
           name: "google-site-verification",
           content: "Gaakq2LQGLFwM3Owtab9R1xYBbT50f8k-i0GkTPFjMk",
         },
+        // Without an og:title and og:description of its own, a link pasted
+        // into WhatsApp fell back to the page <title> and showed no text at
+        // all underneath it. Pages that want their own set these again.
+        {
+          property: "og:title",
+          content: "WhatsAnalyze - The WhatsApp Chat Analyzer",
+        },
+        {
+          property: "og:description",
+          content:
+            "Drop in a WhatsApp export and see who talks most, when you write and what you write about. Everything runs in your browser.",
+        },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
         {
           property: "og:image",
-          content: `${baseUrl}/sharePreview.png`,
+          // ?v=2 because link scrapers cache a preview against its exact URL.
+          // WhatsApp and Telegram have been handing out the old image for as
+          // long as they have known this path, and would go on doing so after
+          // the file behind it changed. The query is enough to make it a new
+          // URL to them; static hosting ignores it and serves the same file.
+          content: `${baseUrl}/sharePreview.png?v=2`,
         },
+        { property: "og:image:width", content: "1200" },
+        { property: "og:image:height", content: "630" },
       ],
       link: [
         { rel: "icon", href: "/favicon.ico" },

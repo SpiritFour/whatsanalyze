@@ -370,6 +370,11 @@ export const analyticsChat = {
     });
   },
 
+  /** Someone opened a highlights share link instead of analyzing a chat. */
+  sharedHighlightsOpened() {
+    trackEvent("shared_highlights_view");
+  },
+
   download(
     fileType: "pdf_sample" | "pdf_full" | "chart_image",
     chartName?: string,

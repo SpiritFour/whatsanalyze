@@ -1,9 +1,16 @@
 <template>
   <section :class="['landing-section', `landing-section--${theme}`]">
+    <!--
+      A section that does not reveal carries none of the reveal classes at all.
+      `landing-reveal` is opacity:0 until `is-visible` is added, and that only
+      happens in mounted() -- so the markup was prerendered into the HTML and
+      then sat invisible until the JS had downloaded and hydrated. On a phone
+      that was a second or two of a blank body under a painted header.
+    -->
     <div
       ref="inner"
-      class="landing-section__inner landing-reveal"
-      :class="{ 'is-visible': visible }"
+      class="landing-section__inner"
+      :class="reveal ? ['landing-reveal', { 'is-visible': visible }] : null"
     >
       <p v-if="eyebrow" class="landing-section__eyebrow">{{ eyebrow }}</p>
       <h2 v-if="title" class="landing-section__title">{{ title }}</h2>
@@ -66,7 +73,10 @@ export default {
 
 <style lang="scss" scoped>
 .landing-section {
-  padding: clamp(4rem, 10vw, 4rem) 1.5rem;
+  /* The min and the max used to both be 4rem, so this clamp could only
+     ever return 4rem and the 10vw never did anything. On a phone that spent
+     64px above the fold on nothing. */
+  padding: clamp(2.5rem, 10vw, 4rem) 1.5rem;
   text-align: center;
 
   &--light {

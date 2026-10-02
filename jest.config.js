@@ -9,5 +9,10 @@ module.exports = {
   },
   testPathIgnorePatterns: ["/node_modules/", "/tests/e2e/", "/.delta/"],
   collectCoverage: true,
-  collectCoverageFrom: ["<rootDir>/utils/transformChatData.js"],
+  collectCoverageFrom: [
+    "<rootDir>/utils/transformChatData.js",
+    "<rootDir>/utils/social/cardData.js",
+    "<rootDir>/utils/social/shareLink.js",
+    "<rootDir>/utils/social/analysisSnapshot.js",
+  ],
 };

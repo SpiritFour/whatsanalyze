@@ -81,7 +81,16 @@
         </v-card>
       </v-dialog>
 
-      <div v-if="!isSimple" class="mt-8">
+      <!-- The other way of sharing results. It sits here rather than in a card
+           of its own: both answers to "how do I show someone this" belong in
+           the same place. -->
+      <div v-if="$slots.secondary && !isSimple" class="mt-6">
+        <slot name="secondary" />
+      </div>
+
+      <!-- Hidden on a shared analysis: the PDF is built from the chat, and
+           the section this jumps to is not on that page. -->
+      <div v-if="!isSimple && !hidePdfLink" class="mt-8">
         <p class="m-0 mb-3 text-sm text-wa-ink-muted">
           {{ $t("lookingFor") }}
           <b class="text-wa-ink">{{ $t("pdfDownload") }}</b
@@ -108,6 +117,7 @@ export default {
   props: {
     chat: { type: Object },
     isSimple: { default: false, type: Boolean },
+    hidePdfLink: { type: Boolean, default: false },
   },
   data() {
     return {
