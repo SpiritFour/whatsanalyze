@@ -1,13 +1,29 @@
 <template>
   <div class="landing-page">
     <LandingSection theme="light" :reveal="false">
-      <p v-if="loading" class="wa-scope m-0 text-center text-wa-ink-muted">
-        {{ $t("sharedHighlightsLoading") }}
-      </p>
+      <!--
+        The link has to be fetched and decrypted before there is anything to
+        draw, and on a slow connection that is a few seconds of a page that
+        would otherwise look broken. The min-height is what the error card
+        occupies, so neither state makes the page jump when it replaces this.
+      -->
+      <div
+        v-if="loading"
+        class="wa-scope flex min-h-[220px] flex-col items-center justify-center gap-4"
+        role="status"
+        aria-live="polite"
+      >
+        <span
+          class="block h-10 w-10 animate-spin rounded-full border-4 border-solid border-[rgba(29,29,31,0.12)] border-t-wa-accent"
+        ></span>
+        <p class="m-0 text-center text-wa-ink-muted">
+          {{ $t("sharedHighlightsLoading") }}
+        </p>
+      </div>
 
       <div
         v-else-if="errorKey"
-        class="wa-scope mx-auto max-w-lg rounded-token-lg border border-solid border-[rgba(29,29,31,0.08)] bg-wa-surface-white p-8 text-center shadow-card"
+        class="wa-scope mx-auto flex min-h-[220px] max-w-lg flex-col items-center justify-center rounded-token-lg border border-solid border-[rgba(29,29,31,0.08)] bg-wa-surface-white p-8 text-center shadow-card"
       >
         <p class="m-0 text-lg font-bold text-wa-ink">{{ $t(errorKey) }}</p>
         <p class="m-0 mt-2 text-sm text-wa-ink-muted">
