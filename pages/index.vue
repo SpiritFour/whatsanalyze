@@ -52,14 +52,10 @@
 
     <template v-else>
       <!--      Charts -->
-      <!-- reveal off: this is the first thing under the upload box, and
-           fading it in on scroll left the bottom half of a phone screen blank,
-           which reads as the page having ended. -->
       <LandingSection
         theme="light"
         :title="$t('homeLanding.previewTitle')"
         :text="$t('homeLanding.previewText')"
-        :reveal="false"
       >
         <LazyChartsExampleGraphs class="home-preview" />
       </LandingSection>
