@@ -351,3 +351,58 @@ test.describe("the error page", () => {
     );
   });
 });
+
+test.describe("painting before hydration", () => {
+  // The site is prerendered so a page is readable before its JavaScript has
+  // run. With scripting off the browser is held in exactly that state for as
+  // long as we like, which is the only way to assert on it that cannot pass
+  // by accident once hydration catches up.
+  const withoutJavaScript = async (browser, testInfo, path) => {
+    const context = await browser.newContext({
+      baseURL: testInfo.project.use.baseURL,
+      javaScriptEnabled: false,
+    });
+    const page = await context.newPage();
+    await page.goto(path);
+    return { context, page };
+  };
+
+  for (const path of ["/", "/tools", "/tools/word-counter"]) {
+    test(`${path} is readable with no JavaScript at all`, async ({
+      browser,
+    }, testInfo) => {
+      const { context, page } = await withoutJavaScript(
+        browser,
+        testInfo,
+        path,
+      );
+
+      const section = page.locator(".landing-section__inner").first();
+      await expect(section).toBeVisible();
+      // The reveal animation used to ship its hidden half in the markup, so
+      // every section arrived at opacity 0 and stayed there until mounted()
+      // ran -- three and a half seconds of a blank page on a phone.
+      await expect(section).toHaveCSS("opacity", "1");
+      expect((await section.innerText()).trim().length).toBeGreaterThan(0);
+
+      await context.close();
+    });
+  }
+
+  test("reserves the space the example charts will fill", async ({
+    browser,
+  }, testInfo) => {
+    const { context, page } = await withoutJavaScript(browser, testInfo, "/");
+
+    // The example charts fetch their data in the browser, so with scripting
+    // off they can never arrive. The block they will occupy is still the full
+    // height, which is what stops the page jumping when they do.
+    const preview = page.locator(".home-preview").first();
+    await expect(preview).toBeVisible();
+    const box = await preview.boundingBox();
+    expect(box.height).toBeGreaterThan(300);
+    await expect(preview.locator(".v-skeleton-loader").first()).toBeVisible();
+
+    await context.close();
+  });
+});

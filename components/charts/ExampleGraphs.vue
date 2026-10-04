@@ -1,14 +1,29 @@
 <template>
-  <div v-if="chat" class="wa-scope grid gap-4 md:grid-cols-2 md:gap-6">
+  <div class="wa-scope grid gap-4 md:grid-cols-2 md:gap-6">
     <ChartsCard :title="$t('exampleGraphSubtitle1')">
       <div class="h-[260px]">
-        <ChartsBarChart :chartdata="chat" data-grouping="hourly" compact />
+        <ChartsBarChart
+          v-if="chat"
+          :chartdata="chat"
+          data-grouping="hourly"
+          compact
+        />
+        <v-skeleton-loader v-else type="ossein" class="h-full" />
       </div>
     </ChartsCard>
 
     <ChartsCard :title="$t('exampleGraphSubtitle2')">
-      <div class="mx-auto max-w-[260px]">
-        <ChartsDonughtChart :chartdata="chat" compact />
+      <div class="mx-auto h-[260px] max-w-[260px]">
+        <ChartsDonughtChart v-if="chat" :chartdata="chat" compact />
+        <!--
+          The cards, their titles and their heights are rendered whether or not
+          the data has arrived. This component fetches its example chat in the
+          browser, so `v-if="chat"` on the whole thing left the section empty
+          for three seconds after its heading had painted -- a hole the page
+          then jumped to fill. The skeleton occupies exactly what the chart
+          will, so nothing moves when it does arrive.
+        -->
+        <v-skeleton-loader v-else type="ossein" class="h-full" />
       </div>
     </ChartsCard>
   </div>
