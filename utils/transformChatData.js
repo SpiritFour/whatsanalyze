@@ -70,7 +70,7 @@ export function isLink(word) {
   return /^(?:https?:\/\/|www\.)/i.test(word) || word.includes("://");
 }
 
-function isNoiseWord(word) {
+export function isNoiseWord(word) {
   const lower = String(word).toLowerCase();
   return (
     lower.startsWith("<") ||
