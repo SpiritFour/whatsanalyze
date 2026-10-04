@@ -243,9 +243,9 @@ test.describe("starting a subscription", () => {
 
     const payload = checkout[0].postDataJSON().data;
     expect(payload.successUrl).toMatch(
-      /\/wrapped\/subscription\/success\?session_id=\{CHECKOUT_SESSION_ID\}$/,
+      /\/wrapped\/subscription\/success\/\?session_id=\{CHECKOUT_SESSION_ID\}$/,
     );
-    expect(payload.cancelUrl).toMatch(/\/wrapped\/subscription\/canceled$/);
+    expect(payload.cancelUrl).toMatch(/\/wrapped\/subscription\/canceled\/$/);
   });
 
   /**
@@ -263,7 +263,7 @@ test.describe("starting a subscription", () => {
     await expect(page.locator("nuxtlink")).toHaveCount(0);
 
     await page.getByRole("link", { name: "Subscribe Now" }).click();
-    await page.waitForURL(/\/subscribe$/);
+    await page.waitForURL(/\/subscribe\/?$/);
     await expect(
       page.getByRole("button", { name: "Subscribe Now" }),
     ).toBeVisible();
@@ -281,7 +281,7 @@ test.describe("starting a subscription", () => {
       .click();
     await page.getByRole("link", { name: /Open Subscription Page/i }).click();
 
-    await page.waitForURL(/\/subscribe$/);
+    await page.waitForURL(/\/subscribe\/?$/);
   });
 
   test("sends a subscriber from /subscribe to Stripe checkout", async ({

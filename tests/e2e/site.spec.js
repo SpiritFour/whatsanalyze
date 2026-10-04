@@ -205,7 +205,7 @@ test.describe("wrapped", () => {
 
   test("is reachable from the home page banner", async ({ page }) => {
     await page.goto("/");
-    await expect(page.locator("a[href='/wrapped']").first()).toBeVisible();
+    await expect(page.locator("a[href='/wrapped/']").first()).toBeVisible();
   });
 });
 
@@ -228,7 +228,7 @@ test.describe("tools and footer", () => {
     await expect(
       page.locator(".site-footer a[href*='whatsapp-wrapped-year-review']"),
     ).toHaveCount(0);
-    await expect(page.locator(".site-footer a[href='/wrapped']")).toHaveCount(
+    await expect(page.locator(".site-footer a[href='/wrapped/']")).toHaveCount(
       1,
     );
   });
@@ -309,18 +309,18 @@ test.describe("tools and footer", () => {
     // action — the homepage header has none.
     await expect(page.locator(".site-header__cta")).toHaveCount(0);
 
-    await nav.locator("a[href='/tools']").click();
-    await page.waitForURL(/.*\/tools$/);
+    await nav.locator("a[href='/tools/']").click();
+    await page.waitForURL(/.*\/tools\/$/);
     await expect(page.locator(".tools-directory")).toBeVisible();
 
     // The product you are in drops out of the bar and the analyzer takes its
     // slot, so there are always two ways on to the other two.
     await expect(nav.locator("a")).toHaveCount(2);
-    await expect(nav.locator("a[href='/tools']")).toHaveCount(0);
+    await expect(nav.locator("a[href='/tools/']")).toHaveCount(0);
     await expect(nav.locator("a[href='/']")).toHaveCount(1);
 
-    await nav.locator("a[href='/wrapped']").click();
-    await page.waitForURL(/.*\/wrapped$/);
+    await nav.locator("a[href='/wrapped/']").click();
+    await page.waitForURL(/.*\/wrapped\/$/);
     await expect(page.locator("label[for='dropzone-file']")).toBeVisible();
   });
 });
@@ -347,7 +347,7 @@ test.describe("the error page", () => {
     await expect(page).toHaveTitle("Diese Seite gibt es nicht");
     await expect(page.locator(".error-page__primary")).toHaveAttribute(
       "href",
-      "/de",
+      "/de/",
     );
   });
 });
