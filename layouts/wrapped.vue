@@ -13,11 +13,13 @@
 </template>
 
 <script lang="ts" setup>
-import { useLocaleHeadLinks } from "~/composables/useLocaleHeadLinks";
+import { useLocaleHead } from "#i18n";
 
 // Same reason as layouts/default.vue: the lang attribute, hreflang alternates
 // and canonical have to follow the route's locale, not nuxt.config's "en".
-const { localeHead, links } = useLocaleHeadLinks();
+// i18n.trailingSlash in nuxt.config.js already matches the slash form
+// GitHub Pages serves, so no extra rewriting here.
+const localeHead = useLocaleHead();
 
 useHead(() => ({
   meta: [
@@ -30,7 +32,7 @@ useHead(() => ({
     { name: "theme-color", content: "#0d1418" },
     ...(localeHead.value.meta || []),
   ],
-  link: links.value,
+  link: localeHead.value.link,
   htmlAttrs: {
     ...localeHead.value.htmlAttrs,
     style: "background-color: #0d1418;",
