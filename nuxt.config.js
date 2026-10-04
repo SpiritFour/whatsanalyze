@@ -217,6 +217,14 @@ export default defineNuxtConfig({
     baseUrl,
     defaultLocale: "en",
     strategy: "prefix_except_default",
+    // GitHub Pages serves each prerendered page/index.html at page/ and 301s
+    // the bare page. Without this, i18n's own router treats the slash-less
+    // form as canonical and corrects every landing on page/ back to page,
+    // which GitHub Pages then 301s back to page/ — an infinite redirect
+    // bounce (visible in Sentry as chart/DOM races mid-bounce, and in Search
+    // Console as canonicals pointing at a redirect). This makes the slash
+    // form canonical everywhere instead of patching the symptom in one place.
+    trailingSlash: true,
     locales: [
       { code: "en", language: "en-US", name: "English" },
       { code: "de", language: "de-DE", name: "Deutsch" },
