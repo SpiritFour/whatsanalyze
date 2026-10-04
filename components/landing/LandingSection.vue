@@ -1,9 +1,18 @@
 <template>
   <section :class="['landing-section', `landing-section--${theme}`]">
+    <!--
+      `landing-reveal` is the hidden half of the animation, and it is added
+      here by script rather than shipped in the markup. The site is
+      prerendered precisely so a page paints before its JavaScript runs, and a
+      class that hides everything until mounted() gave that away again: the
+      content was in the document within 400ms and invisible for three and a
+      half seconds. Nothing is hidden until there is something able to show it
+      again.
+    -->
     <div
       ref="inner"
-      class="landing-section__inner landing-reveal"
-      :class="{ 'is-visible': visible }"
+      class="landing-section__inner"
+      :class="{ 'landing-reveal': pending, 'is-visible': visible }"
     >
       <p v-if="eyebrow" class="landing-section__eyebrow">{{ eyebrow }}</p>
       <h2 v-if="title" class="landing-section__title">{{ title }}</h2>
@@ -34,15 +43,23 @@ export default {
   },
   data() {
     return {
+      // Whether this section is waiting to be revealed. False until mounted
+      // decides it should be, so the prerendered markup is never hidden.
+      pending: false,
       visible: false,
       observer: null,
     };
   },
   mounted() {
-    if (!this.reveal || !("IntersectionObserver" in window)) {
-      this.visible = true;
-      return;
-    }
+    if (!this.reveal || !("IntersectionObserver" in window)) return;
+
+    // A section the reader is already looking at is not animated in. Fading
+    // something that is on screen means hiding it first, which is the flash
+    // this whole arrangement exists to avoid.
+    const box = this.$refs.inner.getBoundingClientRect();
+    if (box.top < window.innerHeight && box.bottom > 0) return;
+
+    this.pending = true;
     this.observer = new IntersectionObserver(
       (entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
@@ -66,7 +83,10 @@ export default {
 
 <style lang="scss" scoped>
 .landing-section {
-  padding: clamp(4rem, 10vw, 4rem) 1.5rem;
+  /* The min and the max were both 4rem, so this clamp could only ever return
+     4rem and the 10vw never did anything. On a phone it spent 64px above the
+     fold on nothing, which is most of why the first section started below it. */
+  padding: clamp(2.5rem, 10vw, 4rem) 1.5rem;
   text-align: center;
 
   &--light {
