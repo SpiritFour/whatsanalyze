@@ -110,13 +110,32 @@ export default {
       const paddingTop = subtitle ? 90 : 70;
       const paddingBottom = 60;
 
-      const width = chartCanvas.width + paddingX * 2;
-      const height = chartCanvas.height + paddingTop + paddingBottom;
+      const BRAND = "WhatsAnalyze.com";
+      const BRAND_FONT =
+        "bold 16px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+      const TAGLINE = "100% Private WhatsApp Chat Analyzer";
+      const TAGLINE_FONT =
+        "14px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
 
       const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+
+      // The footer puts the brand hard left and the tagline hard right. A
+      // narrow chart -- the donut is 440px -- left them less room than they
+      // need and printed one on top of the other, so the image is widened to
+      // fit them and the chart is centred in what is left.
+      ctx.font = BRAND_FONT;
+      const brandWidth = ctx.measureText(BRAND).width;
+      ctx.font = TAGLINE_FONT;
+      const taglineWidth = ctx.measureText(TAGLINE).width;
+      const footerWidth = paddingX * 2 + brandWidth + 24 + taglineWidth;
+
+      const width = Math.max(chartCanvas.width + paddingX * 2, footerWidth);
+      const height = chartCanvas.height + paddingTop + paddingBottom;
+      const chartX = Math.round((width - chartCanvas.width) / 2);
+
       canvas.width = width;
       canvas.height = height;
-      const ctx = canvas.getContext("2d");
 
       // Solid white background
       ctx.fillStyle = "#ffffff";
@@ -149,7 +168,7 @@ export default {
       ctx.stroke();
 
       // Chart content
-      ctx.drawImage(chartCanvas, paddingX, paddingTop);
+      ctx.drawImage(chartCanvas, chartX, paddingTop);
 
       // Footer separator line
       const footerY = paddingTop + chartCanvas.height + 16;
@@ -160,17 +179,13 @@ export default {
 
       // Footer branding
       ctx.fillStyle = "#07bc4c";
-      ctx.font =
-        "bold 16px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+      ctx.font = BRAND_FONT;
       ctx.textBaseline = "middle";
-      ctx.fillText("WhatsAnalyze.com", paddingX, footerY + 24);
+      ctx.fillText(BRAND, paddingX, footerY + 24);
 
       ctx.fillStyle = "#9ca3af";
-      ctx.font =
-        "14px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
-      const tagline = "100% Private WhatsApp Chat Analyzer";
-      const taglineWidth = ctx.measureText(tagline).width;
-      ctx.fillText(tagline, width - paddingX - taglineWidth, footerY + 24);
+      ctx.font = TAGLINE_FONT;
+      ctx.fillText(TAGLINE, width - paddingX - taglineWidth, footerY + 24);
 
       return canvas;
     },
