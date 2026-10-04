@@ -388,4 +388,21 @@ test.describe("painting before hydration", () => {
       await context.close();
     });
   }
+
+  test("reserves the space the example charts will fill", async ({
+    browser,
+  }, testInfo) => {
+    const { context, page } = await withoutJavaScript(browser, testInfo, "/");
+
+    // The example charts fetch their data in the browser, so with scripting
+    // off they can never arrive. The block they will occupy is still the full
+    // height, which is what stops the page jumping when they do.
+    const preview = page.locator(".home-preview").first();
+    await expect(preview).toBeVisible();
+    const box = await preview.boundingBox();
+    expect(box.height).toBeGreaterThan(300);
+    await expect(preview.locator(".v-skeleton-loader").first()).toBeVisible();
+
+    await context.close();
+  });
 });
