@@ -65,7 +65,6 @@ const uploadAccessStore = useUploadAccessStore();
 
 const { result, isLoading } = storeToRefs(statsStore);
 const { isSubscriptionValid } = storeToRefs(subscriptionStore);
-const { hasFreeUploadRemaining } = storeToRefs(uploadAccessStore);
 const showPaywall = ref(false);
 
 watch(isSubscriptionValid, (isValid) => {
@@ -79,7 +78,8 @@ const handleFile = async (e: Event): Promise<void> => {
   if (!input.files || !input.files.length) return;
   const file = input.files[0];
 
-  if (!hasFreeUploadRemaining.value && !isSubscriptionValid.value) {
+  const isFreeUpload = !isSubscriptionValid.value;
+  if (isFreeUpload && !uploadAccessStore.hasFreeUploadToday()) {
     showPaywall.value = true;
     analyticsWrapped.paywallViewed("upload_gate");
     input.value = "";
@@ -100,7 +100,7 @@ const handleFile = async (e: Event): Promise<void> => {
       analyticsChat.parsedSuccess(count);
     }
 
-    if (hasFreeUploadRemaining.value) {
+    if (isFreeUpload) {
       uploadAccessStore.markFreeUploadUsed();
     }
 

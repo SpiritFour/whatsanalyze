@@ -203,6 +203,72 @@ test.describe("wrapped", () => {
     await expect(page.locator(".wrapped-scope")).toBeVisible();
   });
 
+  test("gives one free analysis per day, then asks to come back tomorrow", async ({
+    page,
+  }) => {
+    const setLastFreeDay = (day) =>
+      page.evaluate(
+        (d) =>
+          localStorage.setItem(
+            "uploadAccess",
+            JSON.stringify({ lastFreeUploadDay: d }),
+          ),
+        day,
+      );
+    const upload = async () => {
+      await page.goto("/wrapped");
+      await page.locator("#dropzone-file").setInputFiles(EXAMPLE_CHAT);
+    };
+    const today = new Date().toLocaleDateString("sv"); // YYYY-MM-DD
+
+    await page.goto("/wrapped");
+    await setLastFreeDay(today);
+    await upload();
+    await expect(
+      page.getByText("Your free analysis for today is used up"),
+    ).toBeVisible();
+    await expect(page.getByPlaceholder("you@example.com")).toBeVisible();
+    // The wrapped CSS reset used to outrank background utilities, leaving
+    // buttons like this one (and the story's share button) without one.
+    await expect(
+      page.locator("[role=dialog] button.bg-green-600"),
+    ).not.toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
+
+    // A new day brings the free analysis back, and using it closes it again.
+    await setLastFreeDay("2000-01-01");
+    await upload();
+    await page.waitForURL(/wrapped\/results/);
+    expect(
+      await page.evaluate(() => localStorage.getItem("uploadAccess")),
+    ).toContain(today);
+  });
+
+  test.describe("with the service worker installed", () => {
+    test.use({ serviceWorkers: "allow" });
+
+    // The worker used to answer every page it had not precached under its
+    // exact URL with the home page, and the router then followed it to "/".
+    test("lands every page on itself, not the home page", async ({ page }) => {
+      await page.goto("/");
+      await page.waitForFunction(
+        () => navigator.serviceWorker.controller !== null,
+        null,
+        { timeout: 30_000 },
+      );
+      for (const path of [
+        "/wrapped/",
+        "/wrapped/results/",
+        "/wrapped/",
+        "/de/wrapped/",
+        "/tools/word-counter/",
+        "/subscribe/",
+      ]) {
+        await page.goto(path);
+        await expect(page).toHaveURL(new RegExp(`${path}$`));
+      }
+    });
+  });
+
   test("is reachable from the home page banner", async ({ page }) => {
     await page.goto("/");
     await expect(page.locator("a[href='/wrapped/']").first()).toBeVisible();

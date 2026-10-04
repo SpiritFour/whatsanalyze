@@ -54,6 +54,43 @@
       <p v-if="checkoutError" class="text-xs text-red-200 text-center mt-4">
         {{ checkoutError }}
       </p>
+
+      <div class="mt-6 border-t border-gray-700/60 pt-6">
+        <p class="text-sm font-semibold text-white">
+          {{ t("upload.paywall.reminder.title") }}
+        </p>
+        <p
+          v-if="reminderSent"
+          class="mt-3 text-sm text-green-300"
+          data-testid="reminder-confirmation"
+        >
+          {{ t("upload.paywall.reminder.success") }}
+        </p>
+        <form
+          v-else
+          class="mt-3 flex flex-col gap-2 sm:flex-row"
+          @submit.prevent="requestReminder"
+        >
+          <input
+            v-model="reminderEmail"
+            type="email"
+            required
+            autocomplete="email"
+            :placeholder="t('upload.paywall.reminder.placeholder')"
+            class="min-w-0 flex-1 rounded-xl border border-gray-700 bg-gray-800 px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-green-500 focus:outline-none"
+          />
+          <button
+            type="submit"
+            :disabled="isSavingReminder"
+            class="rounded-xl border border-green-600 px-4 py-3 text-sm font-semibold text-green-300 hover:bg-green-600/20 transition disabled:opacity-60 disabled:cursor-wait"
+          >
+            {{ t("upload.paywall.reminder.cta") }}
+          </button>
+        </form>
+        <p v-if="reminderError" class="mt-2 text-xs text-red-200">
+          {{ t("upload.paywall.reminder.error") }}
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -62,8 +99,10 @@
 import { ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
 import { fetchWrappedCheckoutUrl } from "~/utils/subscription";
+import { requestFreeUploadReminder } from "~/utils/wrapped/reminder";
 import {
   analyticsEcommerce,
+  analyticsWrapped,
   ITEM_PRO_SUBSCRIPTION,
 } from "~/composables/useAnalytics";
 
@@ -86,7 +125,28 @@ const emit = defineEmits<{
 
 const isStarting = ref(false);
 const checkoutError = ref("");
-const { t } = useI18n();
+const { t, locale } = useI18n();
+
+const reminderEmail = ref("");
+const isSavingReminder = ref(false);
+const reminderSent = ref(false);
+const reminderError = ref(false);
+
+const requestReminder = async () => {
+  if (isSavingReminder.value) return;
+  reminderError.value = false;
+  try {
+    isSavingReminder.value = true;
+    await requestFreeUploadReminder(reminderEmail.value.trim(), locale.value);
+    reminderSent.value = true;
+    analyticsWrapped.reminderRequested();
+  } catch (err) {
+    reminderError.value = true;
+    console.error("Reminder signup failed:", err);
+  } finally {
+    isSavingReminder.value = false;
+  }
+};
 
 const handleClose = () => {
   if (isStarting.value) return;

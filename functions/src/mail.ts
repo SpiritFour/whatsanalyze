@@ -1,7 +1,7 @@
 import * as logger from "firebase-functions/logger";
 import { defineString } from "firebase-functions/params";
 import { db } from "./firebase";
-const emailBaseUrl = defineString("EMAIL_BASE_URL");
+export const emailBaseUrl = defineString("EMAIL_BASE_URL");
 
 export type Customer = {
   email: string;

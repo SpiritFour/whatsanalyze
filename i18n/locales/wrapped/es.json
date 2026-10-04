@@ -297,9 +297,16 @@
     "processingYourData": "Procesando tus datos...",
     "selectChatFile": "Selecciona tu archivo de chat de WhatsApp",
     "paywall": {
-      "title": "Desbloquea análisis ilimitados",
-      "description": "Ya has analizado un chat gratis. Suscríbete para seguir generando nuevas historias Wrapped al instante.",
-      "secondary": "Quizás después"
+      "title": "Ya usaste tu análisis gratuito de hoy",
+      "description": "Tienes un análisis Wrapped gratuito al día. Vuelve mañana para el siguiente o suscríbete para analizar todos los chats que quieras ahora mismo.",
+      "secondary": "Quizás después",
+      "reminder": {
+        "title": "Avísame por e-mail cuando vuelva mi análisis gratuito",
+        "placeholder": "tu{'@'}ejemplo.es",
+        "cta": "Recuérdamelo",
+        "success": "¡Listo! Te escribiremos en cuanto el análisis gratuito de mañana esté disponible.",
+        "error": "No funcionó. Revisa la dirección e inténtalo de nuevo."
+      }
     }
   },
   "exportGuide": {
