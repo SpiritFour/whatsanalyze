@@ -305,7 +305,8 @@
         "placeholder": "toi{'@'}exemple.fr",
         "cta": "Me le rappeler",
         "success": "C'est noté ! On t'écrit demain matin, quand ta prochaine analyse gratuite sera prête.",
-        "error": "Ça n'a pas marché. Vérifie l'adresse et réessaie."
+        "error": "Ça n'a pas marché. Vérifie l'adresse et réessaie.",
+        "note": "Un seul e-mail, puis on supprime ton adresse."
       }
     }
   },

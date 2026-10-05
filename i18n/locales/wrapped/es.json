@@ -305,7 +305,8 @@
         "placeholder": "tu{'@'}ejemplo.es",
         "cta": "Recuérdamelo",
         "success": "¡Listo! Te escribiremos mañana por la mañana, cuando tu próximo análisis gratuito esté disponible.",
-        "error": "No funcionó. Revisa la dirección e inténtalo de nuevo."
+        "error": "No funcionó. Revisa la dirección e inténtalo de nuevo.",
+        "note": "Un solo e-mail y después borramos tu dirección."
       }
     }
   },

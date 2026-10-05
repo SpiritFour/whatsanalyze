@@ -305,7 +305,8 @@
         "placeholder": "voce{'@'}exemplo.com",
         "cta": "Me lembre",
         "success": "Pronto! Vamos te enviar um e-mail amanhã de manhã, quando sua próxima análise gratuita estiver liberada.",
-        "error": "Não deu certo. Confira o endereço e tente de novo."
+        "error": "Não deu certo. Confira o endereço e tente de novo.",
+        "note": "Um único e-mail, depois apagamos seu endereço."
       }
     }
   },

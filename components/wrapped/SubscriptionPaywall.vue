@@ -87,6 +87,9 @@
             {{ t("upload.paywall.reminder.cta") }}
           </button>
         </form>
+        <p v-if="!reminderSent" class="mt-2 text-xs text-gray-500">
+          {{ t("upload.paywall.reminder.note") }}
+        </p>
         <p v-if="reminderError" class="mt-2 text-xs text-red-200">
           {{ t("upload.paywall.reminder.error") }}
         </p>

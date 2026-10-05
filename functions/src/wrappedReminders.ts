@@ -4,36 +4,51 @@ import { Timestamp } from "firebase-admin/firestore";
 import { db } from "./firebase";
 import { emailBaseUrl } from "./mail";
 
-const COPY: Record<string, { subject: string; body: string; cta: string }> = {
+const COPY: Record<
+  string,
+  { subject: string; body: string; cta: string; footer: string }
+> = {
   en: {
     subject: "Your free WhatsApp Wrapped analysis is back",
     body: "A new day, a new free analysis. Which chat is next?",
     cta: "Analyze a chat",
+    footer:
+      "You're getting this email once because you asked for it. We've already deleted your address.",
   },
   de: {
     subject: "Deine kostenlose WhatsApp-Wrapped-Analyse ist wieder da",
     body: "Neuer Tag, neue Gratis-Analyse. Welcher Chat ist als Nächstes dran?",
     cta: "Chat analysieren",
+    footer:
+      "Du bekommst diese E-Mail einmalig, weil du darum gebeten hast. Deine Adresse haben wir bereits gelöscht.",
   },
   fr: {
     subject: "Ton analyse WhatsApp Wrapped gratuite est de retour",
     body: "Nouveau jour, nouvelle analyse gratuite. Quelle discussion ensuite ?",
     cta: "Analyser une discussion",
+    footer:
+      "Tu reçois cet e-mail une seule fois parce que tu l'as demandé. Nous avons déjà supprimé ton adresse.",
   },
   it: {
     subject: "La tua analisi gratuita di WhatsApp Wrapped è tornata",
     body: "Nuovo giorno, nuova analisi gratuita. Quale chat analizzi adesso?",
     cta: "Analizza una chat",
+    footer:
+      "Ricevi questa e-mail una sola volta perché l'hai richiesta. Abbiamo già cancellato il tuo indirizzo.",
   },
   es: {
     subject: "Tu análisis gratuito de WhatsApp Wrapped ha vuelto",
     body: "Nuevo día, nuevo análisis gratuito. ¿Qué chat toca ahora?",
     cta: "Analizar un chat",
+    footer:
+      "Recibes este e-mail una sola vez porque lo pediste. Ya hemos borrado tu dirección.",
   },
   pt: {
     subject: "Sua análise gratuita do WhatsApp Wrapped voltou",
     body: "Novo dia, nova análise gratuita. Qual conversa vem agora?",
     cta: "Analisar uma conversa",
+    footer:
+      "Você recebe este e-mail uma única vez porque pediu. Já apagamos seu endereço.",
   },
 };
 
@@ -73,8 +88,8 @@ export const sendWrappedReminders = onSchedule(
           to: email,
           message: {
             subject: copy.subject,
-            text: `${copy.body}\n\n${url}`,
-            html: `<p>${copy.body}</p><p><a href="${url}">${copy.cta}</a></p>`,
+            text: `${copy.body}\n\n${url}\n\n${copy.footer}`,
+            html: `<p>${copy.body}</p><p><a href="${url}">${copy.cta}</a></p><p style="color:#888;font-size:12px">${copy.footer}</p>`,
           },
         });
         batch.delete(reminder.ref);

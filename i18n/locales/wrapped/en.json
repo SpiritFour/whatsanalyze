@@ -305,7 +305,8 @@
         "placeholder": "you{'@'}example.com",
         "cta": "Remind me",
         "success": "Done! We'll email you tomorrow morning, when your next free analysis is ready.",
-        "error": "That didn't work. Please check the address and try again."
+        "error": "That didn't work. Please check the address and try again.",
+        "note": "One email, then we delete your address."
       }
     }
   },

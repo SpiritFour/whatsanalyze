@@ -305,7 +305,8 @@
         "placeholder": "tu{'@'}esempio.it",
         "cta": "Ricordamelo",
         "success": "Fatto! Ti scriveremo domani mattina, quando la tua prossima analisi gratuita sarà pronta.",
-        "error": "Non ha funzionato. Controlla l'indirizzo e riprova."
+        "error": "Non ha funzionato. Controlla l'indirizzo e riprova.",
+        "note": "Una sola e-mail, poi cancelliamo il tuo indirizzo."
       }
     }
   },
