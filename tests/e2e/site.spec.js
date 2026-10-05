@@ -203,6 +203,27 @@ test.describe("wrapped", () => {
     await expect(page.locator(".wrapped-scope")).toBeVisible();
   });
 
+  test("sends 'Analyze another chat' back to the Wrapped upload", async ({
+    page,
+  }) => {
+    await page.goto("/wrapped/");
+    await page.locator("#dropzone-file").setInputFiles(EXAMPLE_CHAT);
+    await page.waitForURL(/wrapped\/results/);
+
+    const again = page.getByRole("button", { name: "Analyze another chat" });
+    const story = page.locator(".story-progress + div");
+    // Tap through to the last slide.
+    while (!(await again.isVisible())) {
+      const box = await story.boundingBox();
+      await page.mouse.click(box.x + box.width - 10, box.y + box.height / 2);
+    }
+
+    // Near the left edge, where a "previous slide" overlay used to sit.
+    const box = await again.boundingBox();
+    await page.mouse.click(box.x + 12, box.y + box.height / 2);
+    await expect(page).toHaveURL(/\/wrapped\/$/);
+  });
+
   test("gives one free analysis per day, then asks to come back tomorrow", async ({
     page,
   }) => {
