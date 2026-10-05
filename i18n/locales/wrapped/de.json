@@ -304,7 +304,7 @@
         "title": "Schick mir eine E-Mail, wenn meine Gratis-Analyse wieder da ist",
         "placeholder": "du{'@'}beispiel.de",
         "cta": "Erinnere mich",
-        "success": "Erledigt! Wir schreiben dir, sobald die Gratis-Analyse von morgen bereit ist.",
+        "success": "Erledigt! Wir schreiben dir morgen früh, wenn deine nächste Gratis-Analyse bereit ist.",
         "error": "Das hat nicht geklappt. Bitte prüfe die Adresse und versuche es erneut."
       }
     }

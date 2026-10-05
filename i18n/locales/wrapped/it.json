@@ -304,7 +304,7 @@
         "title": "Avvisami via e-mail quando l'analisi gratuita è di nuovo disponibile",
         "placeholder": "tu{'@'}esempio.it",
         "cta": "Ricordamelo",
-        "success": "Fatto! Ti scriveremo appena l'analisi gratuita di domani sarà pronta.",
+        "success": "Fatto! Ti scriveremo domani mattina, quando la tua prossima analisi gratuita sarà pronta.",
         "error": "Non ha funzionato. Controlla l'indirizzo e riprova."
       }
     }

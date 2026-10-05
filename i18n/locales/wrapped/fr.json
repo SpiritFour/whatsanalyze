@@ -304,7 +304,7 @@
         "title": "Préviens-moi par e-mail quand mon analyse gratuite revient",
         "placeholder": "toi{'@'}exemple.fr",
         "cta": "Me le rappeler",
-        "success": "C'est noté ! On t'écrit dès que l'analyse gratuite de demain est prête.",
+        "success": "C'est noté ! On t'écrit demain matin, quand ta prochaine analyse gratuite sera prête.",
         "error": "Ça n'a pas marché. Vérifie l'adresse et réessaie."
       }
     }

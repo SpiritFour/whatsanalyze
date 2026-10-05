@@ -304,7 +304,7 @@
         "title": "Me avise por e-mail quando a análise gratuita voltar",
         "placeholder": "voce{'@'}exemplo.com",
         "cta": "Me lembre",
-        "success": "Pronto! Vamos te enviar um e-mail assim que a análise gratuita de amanhã estiver liberada.",
+        "success": "Pronto! Vamos te enviar um e-mail amanhã de manhã, quando sua próxima análise gratuita estiver liberada.",
         "error": "Não deu certo. Confira o endereço e tente de novo."
       }
     }

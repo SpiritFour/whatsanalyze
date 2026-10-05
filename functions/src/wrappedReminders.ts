@@ -45,31 +45,44 @@ const wrappedUrl = (locale: string): string => {
 /**
  * Mails everyone whose free daily analysis is back, then deletes their
  * signup: the address is only kept until this one email goes out.
+ *
+ * Once a morning rather than at each signup's midnight: nobody needs the
+ * email at 1 am. 08:00 Berlin, since most users are in Europe; whoever's
+ * midnight falls later (the Americas' west) gets it the next morning.
  */
-export const sendWrappedReminders = onSchedule("every 60 minutes", async () => {
-  const due = await db
-    .collection("wrappedReminders")
-    .where("notifyAt", "<=", Timestamp.now())
-    .limit(200)
-    .get();
-  if (due.empty) return;
+export const sendWrappedReminders = onSchedule(
+  { schedule: "0 8 * * *", timeZone: "Europe/Berlin" },
+  async () => {
+    let sent = 0;
+    // 200 per batch keeps each commit (a create and a delete per reminder)
+    // under Firestore's 500-write limit.
+    for (;;) {
+      const due = await db
+        .collection("wrappedReminders")
+        .where("notifyAt", "<=", Timestamp.now())
+        .limit(200)
+        .get();
+      if (due.empty) break;
 
-  const batch = db.batch();
-  for (const reminder of due.docs) {
-    const { email, locale } = reminder.data();
-    const copy = COPY[locale] ?? COPY.en;
-    const url = wrappedUrl(COPY[locale] ? locale : "en");
-    batch.create(db.collection("mail").doc(), {
-      to: email,
-      message: {
-        subject: copy.subject,
-        text: `${copy.body}\n\n${url}`,
-        html: `<p>${copy.body}</p><p><a href="${url}">${copy.cta}</a></p>`,
-      },
-    });
-    batch.delete(reminder.ref);
-  }
-  await batch.commit();
+      const batch = db.batch();
+      for (const reminder of due.docs) {
+        const { email, locale } = reminder.data();
+        const copy = COPY[locale] ?? COPY.en;
+        const url = wrappedUrl(COPY[locale] ? locale : "en");
+        batch.create(db.collection("mail").doc(), {
+          to: email,
+          message: {
+            subject: copy.subject,
+            text: `${copy.body}\n\n${url}`,
+            html: `<p>${copy.body}</p><p><a href="${url}">${copy.cta}</a></p>`,
+          },
+        });
+        batch.delete(reminder.ref);
+      }
+      await batch.commit();
+      sent += due.size;
+    }
 
-  logger.info("✉️ Wrapped reminders queued", { count: due.size });
-});
+    if (sent) logger.info("✉️ Wrapped reminders queued", { count: sent });
+  },
+);
