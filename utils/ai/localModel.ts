@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { splitParts } from "~/utils/ai/digest";
 import {
+  buildAnswerPrompt,
   buildNotesPrompt,
   buildPrompt,
   insightsSchema,
@@ -237,17 +238,6 @@ async function step<T>(
   }
 }
 
-/** Drops the exact repeats a small model likes to produce. */
-const unique = <T>(items: T[], key: (_item: T) => string) => {
-  const seen = new Set<string>();
-  return items.filter((item) => {
-    const k = key(item).trim().toLowerCase();
-    if (seen.has(k)) return false;
-    seen.add(k);
-    return true;
-  });
-};
-
 export async function analyzeLocally(
   model: LocalModel,
   digest: ChatDigest,
@@ -314,7 +304,13 @@ export async function analyzeLocally(
   onProgress(current);
 
   const schema = JSON.stringify(z.toJSONSchema(insightsSchema));
-  const { system, prompt } = buildPrompt(digest, language, notes, ask);
+  // The report without the answer: the question gets its own call below.
+  const { system, prompt } = buildPrompt(
+    digest,
+    language,
+    notes,
+    ask?.me ? { me: ask.me } : undefined,
+  );
   const insights = await step(async () => {
     const content = await complete(
       model,
@@ -348,13 +344,28 @@ export async function analyzeLocally(
     return parsed.data;
   }, true);
 
-  return {
-    insights: {
-      ...insights,
-      topics: unique(insights.topics, (t) => t.description),
-      dynamics: unique(insights.dynamics, (d) => d.description),
-      highlights: unique(insights.highlights, (h) => h),
-    },
-    parts,
-  };
+  if (ask?.question) {
+    const answer = buildAnswerPrompt(digest, language, notes, {
+      ...ask,
+      question: ask.question,
+    });
+    insights.answer = await step(() =>
+      complete(
+        model,
+        {
+          messages: [
+            { role: "system", content: answer.system },
+            { role: "user", content: answer.prompt },
+          ],
+          max_tokens: 300,
+          temperature: 0.5,
+          frequency_penalty: 0.5,
+          ...thinkingOff(model),
+        },
+        onLoad,
+      ),
+    );
+  }
+
+  return { insights, parts };
 }

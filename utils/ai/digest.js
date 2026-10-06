@@ -205,3 +205,53 @@ export function splitParts(transcript, maxChars) {
 /** Messages in a transcript (or part), not counting the "…" between excerpts. */
 export const countLines = (transcript) =>
   transcript.split("\n").filter((line) => line && line !== "…").length;
+
+/**
+ * What a report can show: blanks dropped, repeats dropped, lists capped. A
+ * small model leaves empty items and says the same thing twice; a big one
+ * occasionally does too, and an empty card reads as broken either way.
+ */
+export function tidyInsights(insights) {
+  const text = (value) => (typeof value === "string" ? value.trim() : "");
+  const unique = (items, key, max) => {
+    const seen = new Set();
+    return items
+      .filter((item) => {
+        const k = key(item).toLowerCase();
+        if (!k || seen.has(k)) return false;
+        seen.add(k);
+        return true;
+      })
+      .slice(0, max);
+  };
+  const items = (list, max) =>
+    unique(
+      (list ?? [])
+        .map((i) => ({
+          title: text(i.title),
+          description: text(i.description),
+        }))
+        .filter((i) => i.description),
+      (i) => i.description,
+      max,
+    );
+  return {
+    answer: text(insights.answer),
+    summary: text(insights.summary),
+    vibe: text(insights.vibe),
+    topics: items(insights.topics, 5),
+    people: unique(
+      (insights.people ?? [])
+        .map((p) => ({
+          name: text(p.name),
+          role: text(p.role),
+          style: text(p.style),
+        }))
+        .filter((p) => p.name),
+      (p) => p.name,
+      8,
+    ),
+    dynamics: items(insights.dynamics, 4),
+    highlights: unique((insights.highlights ?? []).map(text), (h) => h, 3),
+  };
+}

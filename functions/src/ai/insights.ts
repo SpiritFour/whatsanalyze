@@ -72,15 +72,11 @@ export const insightsSchema = z.object({
     .describe(
       "2-3 sentences: what this chat is about and its overall tone. No message counts or dates.",
     ),
-  vibe: z
-    .string()
-    .describe(
-      'A playful label for the chat, 2-4 words, e.g. "Chaotic travel buddies"',
-    ),
+  vibe: z.string().describe("A playful label for this chat, 2-4 words"),
   topics: z
     .array(item)
     .describe(
-      '3-5 distinct subjects they talk about, named concretely (e.g. "The Lisbon trip", "Anna\'s new job"). A topic is a subject, never one person\'s messages.',
+      "3-5 distinct subjects they talk about, each named after what it is about. A topic is a subject, never one person's messages.",
     ),
   people: z
     .array(
@@ -88,11 +84,7 @@ export const insightsSchema = z.object({
         name: z
           .string()
           .describe('The participant\'s placeholder exactly, e.g. "Person A"'),
-        role: z
-          .string()
-          .describe(
-            'Their role in this chat, 2-4 words, e.g. "The planner", "Meme supplier"',
-          ),
+        role: z.string().describe("Their role in this chat, 2-4 words"),
         style: z
           .string()
           .describe(
@@ -199,5 +191,27 @@ export function buildNotesPrompt(
     part,
   ].join("\n\n");
 
+  return { system, prompt };
+}
+
+/**
+ * The reader's question on its own, as plain text. A 1B model asked for the
+ * answer inside the full report filled it with the rest of the report, so
+ * on device the answer is a separate, simpler call.
+ */
+export function buildAnswerPrompt(
+  digest: ChatDigest,
+  language: AiLanguage,
+  notes: string[] | undefined,
+  ask: AiAsk & { question: string },
+): { system: string; prompt: string } {
+  const { prompt } = buildPrompt(digest, language, notes);
+  const system = [
+    "You answer one question about an exported WhatsApp chat for someone who took part in it.",
+    "Answer in 3-6 sentences: direct, honest and kind, backed by specific moments from the chat. If the chat doesn't give enough to go on, say so.",
+    'Refer to participants only by their placeholder ("Person A", "Person B", ...), exactly as written and untranslated.',
+    ...askLines(ask),
+    `Write the answer in ${AI_LANGUAGES[language]}, as plain text without headings.`,
+  ].join("\n");
   return { system, prompt };
 }

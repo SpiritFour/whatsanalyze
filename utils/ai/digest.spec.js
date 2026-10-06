@@ -1,7 +1,13 @@
 import fs from "node:fs";
 import { parseString } from "whatsapp-chat-parser";
 import { markSystemMessages } from "../systemMessages";
-import { buildDigest, restoreNames, sample, splitParts } from "./digest";
+import {
+  buildDigest,
+  restoreNames,
+  sample,
+  splitParts,
+  tidyInsights,
+} from "./digest";
 
 const at = (minute) => new Date(2026, 0, 1, 12, minute);
 const msg = (author, message, minute = 0, extra = {}) => ({
@@ -165,5 +171,28 @@ describe("splitParts", () => {
 
   test("a short transcript stays one part", () => {
     expect(splitParts("a\nb", 1_000)).toEqual(["a\nb"]);
+  });
+});
+
+describe("tidyInsights", () => {
+  test("drops blanks and repeats, and caps the lists", () => {
+    const tidy = tidyInsights({
+      answer: "  yes ",
+      summary: "s",
+      vibe: "v",
+      topics: [
+        { title: "Trip", description: "Lisbon" },
+        { title: "Trip again", description: "lisbon " },
+        { title: "", description: "" },
+      ],
+      people: [{ name: "Person A", role: "r", style: "s" }, { name: "" }],
+      dynamics: [{ title: "x", description: "" }],
+      highlights: ["a", "", "a", "b", "c", "d"],
+    });
+    expect(tidy.answer).toBe("yes");
+    expect(tidy.topics).toEqual([{ title: "Trip", description: "Lisbon" }]);
+    expect(tidy.people).toHaveLength(1);
+    expect(tidy.dynamics).toEqual([]);
+    expect(tidy.highlights).toEqual(["a", "b", "c"]);
   });
 });

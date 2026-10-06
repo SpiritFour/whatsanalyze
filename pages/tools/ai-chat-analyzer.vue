@@ -224,8 +224,10 @@
           </p>
         </div>
 
-        <h3 class="report-heading">{{ t("toolsAi.peopleTitle") }}</h3>
-        <div class="report-grid">
+        <h3 v-if="insights.people.length" class="report-heading">
+          {{ t("toolsAi.peopleTitle") }}
+        </h3>
+        <div v-if="insights.people.length" class="report-grid">
           <div v-for="p in insights.people" :key="p.name" class="report-card">
             <div class="person-head">
               <span class="avatar-circle">{{ p.name.charAt(0) }}</span>
@@ -238,10 +240,12 @@
           </div>
         </div>
 
-        <h3 class="report-heading">{{ t("toolsAi.dynamicsTitle") }}</h3>
-        <div class="report-grid">
+        <h3 v-if="insights.dynamics.length" class="report-heading">
+          {{ t("toolsAi.dynamicsTitle") }}
+        </h3>
+        <div v-if="insights.dynamics.length" class="report-grid">
           <div
-            v-for="d in insights.dynamics.slice(0, 4)"
+            v-for="d in insights.dynamics"
             :key="d.title"
             class="report-card"
           >
@@ -250,10 +254,12 @@
           </div>
         </div>
 
-        <h3 class="report-heading">{{ t("toolsAi.topicsTitle") }}</h3>
-        <div class="report-grid">
+        <h3 v-if="insights.topics.length" class="report-heading">
+          {{ t("toolsAi.topicsTitle") }}
+        </h3>
+        <div v-if="insights.topics.length" class="report-grid">
           <div
-            v-for="tp in insights.topics.slice(0, 5)"
+            v-for="tp in insights.topics"
             :key="tp.title"
             class="report-card"
           >
@@ -262,9 +268,11 @@
           </div>
         </div>
 
-        <h3 class="report-heading">{{ t("toolsAi.highlightsTitle") }}</h3>
-        <ul class="report-card highlights">
-          <li v-for="h in insights.highlights.slice(0, 3)" :key="h">{{ h }}</li>
+        <h3 v-if="insights.highlights.length" class="report-heading">
+          {{ t("toolsAi.highlightsTitle") }}
+        </h3>
+        <ul v-if="insights.highlights.length" class="report-card highlights">
+          <li v-for="h in insights.highlights" :key="h">{{ h }}</li>
         </ul>
 
         <p class="report-disclaimer">{{ t("toolsAi.reportDisclaimer") }}</p>
@@ -330,7 +338,12 @@ import ToolDropzone from "~/components/tools/ToolDropzone.vue";
 import type { ChatMessage } from "~/composables/useChatTool";
 import { analyticsTools } from "~/composables/useAnalytics";
 import { useSubscriptionStore } from "~/stores/subscription";
-import { buildDigest, countLines, restoreNames } from "~/utils/ai/digest";
+import {
+  buildDigest,
+  countLines,
+  restoreNames,
+  tidyInsights,
+} from "~/utils/ai/digest";
 import { participantMessages } from "~/utils/utils";
 // WebLLM itself is only fetched inside analyzeLocally, once someone asks.
 import {
@@ -648,7 +661,7 @@ async function run(mode: Mode) {
       parts = local.parts.length;
     }
     if (mode === "local") modelDownloaded.value = true;
-    insights.value = restoreNames(result, names);
+    insights.value = tidyInsights(restoreNames(result, names));
     coverage.value = {
       total: digest.totalMessages,
       from: digest.firstDate,
