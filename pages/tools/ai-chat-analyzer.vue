@@ -65,7 +65,7 @@
             type="button"
             class="mode-card__btn"
             :disabled="running !== null"
-            @click="run(mode.id)"
+            @click="mode.id === 'local' ? startLocal() : run(mode.id)"
           >
             {{ mode.button }}
           </button>
@@ -83,20 +83,53 @@
 
       <div v-if="running" class="ai-progress" role="status">
         <v-progress-linear
-          :model-value="
-            running === 'local' && progress < 1 ? progress * 100 : undefined
-          "
-          :indeterminate="running === 'cloud' || progress >= 1"
+          :model-value="loading ? progress.progress * 100 : undefined"
+          :indeterminate="!loading"
           color="#21a68d"
           rounded
         />
         <p>{{ progressText }}</p>
+        <p v-if="etaText" class="ai-progress__eta mono-label">{{ etaText }}</p>
       </div>
       <p v-if="errorKey" class="ai-error" role="alert">
         <v-icon size="18">mdi-alert-circle-outline</v-icon>
         {{ t(`toolsAi.error_${errorKey}`) }}
       </p>
     </LandingSection>
+
+    <!-- A 1.3 GB download on a phone that may be on mobile data: ask first -->
+    <v-dialog v-model="dataWarning" width="460">
+      <div class="data-dialog">
+        <v-icon size="32" color="#ff8f00">mdi-alert-circle-outline</v-icon>
+        <h3>{{ t("toolsAi.dataTitle", { gb: downloadGb }) }}</h3>
+        <p>
+          {{
+            t(
+              meteredReason === "cellular"
+                ? "toolsAi.dataTextCellular"
+                : "toolsAi.dataTextUnknown",
+              { gb: downloadGb },
+            )
+          }}
+        </p>
+        <div class="data-dialog__actions">
+          <button
+            type="button"
+            class="mode-card__btn"
+            @click="dataWarning = false"
+          >
+            {{ t("toolsAi.dataCancel") }}
+          </button>
+          <button
+            type="button"
+            class="data-dialog__continue"
+            @click="confirmDownload"
+          >
+            {{ t("toolsAi.dataContinue") }}
+          </button>
+        </div>
+      </div>
+    </v-dialog>
 
     <!-- The answer, the same shape whichever model wrote it -->
     <LandingSection
@@ -226,10 +259,13 @@ import { useSubscriptionStore } from "~/stores/subscription";
 import { buildDigest, restoreNames } from "~/utils/ai/digest";
 // WebLLM itself is only fetched inside analyzeLocally, once someone asks.
 import {
-  LOCAL_DOWNLOAD_GB,
+  LOCAL_DOWNLOAD_MB,
   LOCAL_TRANSCRIPT_CHARS,
   analyzeLocally,
+  isModelDownloaded,
+  meteredConnection,
   supportsLocalModel,
+  type LoadProgress,
 } from "~/utils/ai/localModel";
 import { analyzeInCloud } from "~/utils/ai/cloudModel";
 import {
@@ -261,9 +297,16 @@ const messages = ref<ChatMessage[] | null>(null);
 const insights = ref<ChatInsights | null>(null);
 const ranOn = ref<Mode | null>(null);
 const running = ref<Mode | null>(null);
-const progress = ref(0);
+const progress = ref<LoadProgress>({ progress: 0, elapsed: 0 });
 const errorKey = ref<string | null>(null);
 const localSupported = ref<boolean | null>(null);
+const modelDownloaded = ref(false);
+const dataWarning = ref(false);
+const meteredReason = ref<"cellular" | "unknown" | null>(null);
+
+const downloadGb = computed(() =>
+  (LOCAL_DOWNLOAD_MB / 1000).toLocaleString(locale.value),
+);
 
 const language = computed<AiLanguage>(() =>
   locale.value in AI_LANGUAGES ? (locale.value as AiLanguage) : "en",
@@ -274,6 +317,8 @@ async function onChatLoaded(payload: { analysis: unknown }) {
   insights.value = null;
   errorKey.value = null;
   localSupported.value = await supportsLocalModel();
+  modelDownloaded.value =
+    localSupported.value === true && (await isModelDownloaded());
   await nextTick();
   document
     .getElementById("ai-choose")
@@ -297,19 +342,59 @@ const cloudPreview = computed(() => {
   }
 });
 
+const loading = computed(
+  () => running.value === "local" && progress.value.progress < 1,
+);
+
 const progressText = computed(() => {
   if (running.value === "cloud") return t("toolsAi.progressCloud");
-  if (progress.value < 1)
-    return t("toolsAi.progressDownload", {
-      pct: Math.round(progress.value * 100),
-    });
-  return t("toolsAi.progressLocal");
+  if (!loading.value) return t("toolsAi.progressLocal");
+  if (modelDownloaded.value) return t("toolsAi.progressLoading");
+  const mb = (n: number) => Math.round(n).toLocaleString(locale.value);
+  return t("toolsAi.progressDownload", {
+    done: mb(progress.value.progress * LOCAL_DOWNLOAD_MB),
+    total: mb(LOCAL_DOWNLOAD_MB),
+  });
 });
+
+/** Time left at the rate so far; held back until the rate means something. */
+const etaText = computed(() => {
+  if (!loading.value) return "";
+  const { progress: done, elapsed } = progress.value;
+  if (done < 0.02 || elapsed < 3) return t("toolsAi.progressEtaPending");
+  const seconds = (elapsed * (1 - done)) / done;
+  const [value, unit] =
+    seconds < 60
+      ? [Math.max(5, Math.ceil(seconds / 5) * 5), "second"]
+      : [Math.ceil(seconds / 60), "minute"];
+  const time = new Intl.NumberFormat(locale.value, {
+    style: "unit",
+    unit,
+    unitDisplay: "long",
+  }).format(value);
+  return t("toolsAi.progressEta", { time });
+});
+
+/** On-device on a phone that may be on mobile data: confirm the download. */
+function startLocal() {
+  meteredReason.value = modelDownloaded.value ? null : meteredConnection();
+  if (meteredReason.value) {
+    dataWarning.value = true;
+    analyticsTools.aiDataWarning(meteredReason.value);
+  } else {
+    run("local");
+  }
+}
+
+function confirmDownload() {
+  dataWarning.value = false;
+  run("local");
+}
 
 async function run(mode: Mode) {
   if (!messages.value) return;
   running.value = mode;
-  progress.value = 0;
+  progress.value = { progress: 0, elapsed: 0 };
   errorKey.value = null;
   analyticsTools.aiStarted(mode);
   const startedAt = performance.now();
@@ -335,6 +420,7 @@ async function run(mode: Mode) {
         progress.value = p;
       });
     }
+    if (mode === "local") modelDownloaded.value = true;
     insights.value = restoreNames(result, names);
     ranOn.value = mode;
     analyticsTools.aiFinished(mode, performance.now() - startedAt);
@@ -368,11 +454,12 @@ const modes = computed(() => [
       t("toolsAi.localPro1"),
       t("toolsAi.localPro2"),
       t("toolsAi.localPro3"),
+      ...(modelDownloaded.value ? [t("toolsAi.localDownloaded")] : []),
     ],
     cons: [
-      t("toolsAi.localCon1", {
-        gb: LOCAL_DOWNLOAD_GB.toLocaleString(locale.value),
-      }),
+      ...(modelDownloaded.value
+        ? []
+        : [t("toolsAi.localCon1", { gb: downloadGb.value })]),
       t("toolsAi.localCon2"),
       t("toolsAi.localCon3"),
     ],
@@ -542,6 +629,44 @@ useToolSchema({
   margin-top: 1.5rem;
   display: grid;
   gap: 0.5rem;
+}
+
+.ai-progress__eta {
+  font-size: 0.78rem;
+  color: rgba(29, 29, 31, 0.55);
+}
+
+.data-dialog {
+  background: #fff;
+  border-radius: 20px;
+  padding: 1.8rem;
+  display: grid;
+  gap: 0.8rem;
+  color: #1d1d1f;
+
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  p {
+    line-height: 1.5;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+  }
+
+  &__continue {
+    padding: 0.8rem 1.4rem;
+    border-radius: 100px;
+    font-weight: 600;
+    color: #1d1d1f;
+    border: 1px solid rgba(29, 29, 31, 0.2);
+  }
 }
 
 .ai-error {

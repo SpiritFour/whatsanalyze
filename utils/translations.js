@@ -689,6 +689,19 @@ export const messages = {
       dismiss: "Dismiss",
     },
     toolsAi: {
+      progressDownload:
+        "Downloading the AI model (only once): {done} of {total} MB",
+      progressEta: "About {time} left",
+      progressEtaPending: "Estimating time left…",
+      progressLoading: "Loading the AI model…",
+      localDownloaded: "Already downloaded on this device",
+      dataTitle: "Download {gb} GB on mobile data?",
+      dataTextCellular:
+        "You seem to be on mobile data. The on-device AI needs a one-time download of about {gb} GB, which can use up your data plan or cost extra. Connect to Wi-Fi first if you can.",
+      dataTextUnknown:
+        "We can't tell whether you're on Wi-Fi. The on-device AI needs a one-time download of about {gb} GB — on mobile data that can use up your data plan or cost extra.",
+      dataContinue: "Download anyway",
+      dataCancel: "Wait for Wi-Fi",
       seoTitle:
         "AI WhatsApp Chat Analyzer – Private AI Insights | WhatsAnalyze",
       seoDescription:
@@ -734,8 +747,6 @@ export const messages = {
       previewToggle: "See exactly what the cloud AI would receive",
       previewText:
         "This is everything that is sent. Real names are swapped back in on your device once the answer arrives.",
-      progressDownload:
-        "Downloading the AI model… {pct}% (only the first time)",
       progressLocal: "The AI is reading your chat on your device…",
       progressCloud: "The AI is reading your chat…",
       error_local:
@@ -1802,6 +1813,19 @@ export const messages = {
       dismiss: "Schließen",
     },
     toolsAi: {
+      progressDownload:
+        "KI-Modell wird geladen (nur einmal): {done} von {total} MB",
+      progressEta: "Noch etwa {time}",
+      progressEtaPending: "Restzeit wird berechnet …",
+      progressLoading: "KI-Modell wird gestartet …",
+      localDownloaded: "Auf diesem Gerät schon heruntergeladen",
+      dataTitle: "{gb} GB über mobile Daten laden?",
+      dataTextCellular:
+        "Du scheinst mobile Daten zu nutzen. Die KI auf dem Gerät braucht einen einmaligen Download von etwa {gb} GB – das kann dein Datenvolumen aufbrauchen oder extra kosten. Verbinde dich wenn möglich zuerst mit WLAN.",
+      dataTextUnknown:
+        "Wir können nicht erkennen, ob du im WLAN bist. Die KI auf dem Gerät braucht einen einmaligen Download von etwa {gb} GB – über mobile Daten kann das dein Datenvolumen aufbrauchen oder extra kosten.",
+      dataContinue: "Trotzdem laden",
+      dataCancel: "Auf WLAN warten",
       seoTitle:
         "KI WhatsApp Chat Analyse – Private KI-Auswertung | WhatsAnalyze",
       seoDescription:
@@ -1848,8 +1872,6 @@ export const messages = {
       previewToggle: "Genau ansehen, was die Cloud-KI bekommen würde",
       previewText:
         "Das ist alles, was gesendet wird. Die echten Namen werden erst auf deinem Gerät wieder eingesetzt, wenn die Antwort da ist.",
-      progressDownload:
-        "KI-Modell wird geladen … {pct} % (nur beim ersten Mal)",
       progressLocal: "Die KI liest deinen Chat auf deinem Gerät …",
       progressCloud: "Die KI liest deinen Chat …",
       error_local:
@@ -2909,6 +2931,19 @@ export const messages = {
       dismiss: "Cerrar",
     },
     toolsAi: {
+      progressDownload:
+        "Descargando el modelo de IA (solo una vez): {done} de {total} MB",
+      progressEta: "Quedan unos {time}",
+      progressEtaPending: "Calculando el tiempo restante…",
+      progressLoading: "Cargando el modelo de IA…",
+      localDownloaded: "Ya descargado en este dispositivo",
+      dataTitle: "¿Descargar {gb} GB con datos móviles?",
+      dataTextCellular:
+        "Parece que estás usando datos móviles. La IA en tu dispositivo necesita una descarga única de unos {gb} GB, que puede agotar tu tarifa de datos o costarte dinero. Si puedes, conéctate antes a una red wifi.",
+      dataTextUnknown:
+        "No podemos saber si estás conectado a una red wifi. La IA en tu dispositivo necesita una descarga única de unos {gb} GB; con datos móviles puede agotar tu tarifa o costarte dinero.",
+      dataContinue: "Descargar de todos modos",
+      dataCancel: "Esperar a tener wifi",
       seoTitle:
         "Analizador de chats de WhatsApp con IA – Privado | WhatsAnalyze",
       seoDescription:
@@ -2955,8 +2990,6 @@ export const messages = {
       previewToggle: "Ver exactamente lo que recibiría la IA en la nube",
       previewText:
         "Esto es todo lo que se envía. Los nombres reales se vuelven a poner en tu dispositivo cuando llega la respuesta.",
-      progressDownload:
-        "Descargando el modelo de IA… {pct}% (solo la primera vez)",
       progressLocal: "La IA está leyendo tu chat en tu dispositivo…",
       progressCloud: "La IA está leyendo tu chat…",
       error_local:
@@ -3837,6 +3870,19 @@ export const messages = {
       dismiss: "Fechar",
     },
     toolsAi: {
+      progressDownload:
+        "A transferir o modelo de IA (só uma vez): {done} de {total} MB",
+      progressEta: "Faltam cerca de {time}",
+      progressEtaPending: "A calcular o tempo restante…",
+      progressLoading: "A carregar o modelo de IA…",
+      localDownloaded: "Já transferido neste dispositivo",
+      dataTitle: "Transferir {gb} GB com dados móveis?",
+      dataTextCellular:
+        "Parece estar a usar dados móveis. A IA no dispositivo precisa de uma transferência única de cerca de {gb} GB, que pode esgotar o seu plano de dados ou ter custos extra. Se puder, ligue-se primeiro a uma rede Wi-Fi.",
+      dataTextUnknown:
+        "Não conseguimos saber se está ligado a uma rede Wi-Fi. A IA no dispositivo precisa de uma transferência única de cerca de {gb} GB; com dados móveis pode esgotar o seu plano ou ter custos extra.",
+      dataContinue: "Transferir na mesma",
+      dataCancel: "Esperar pelo Wi-Fi",
       seoTitle:
         "Analisador de conversas do WhatsApp com IA – Privado | WhatsAnalyze",
       seoDescription:
@@ -3884,8 +3930,6 @@ export const messages = {
       previewToggle: "Ver exatamente o que a IA na nuvem receberia",
       previewText:
         "Isto é tudo o que é enviado. Os nomes reais são repostos no seu dispositivo quando chega a resposta.",
-      progressDownload:
-        "A transferir o modelo de IA… {pct}% (só na primeira vez)",
       progressLocal: "A IA está a ler a sua conversa no seu dispositivo…",
       progressCloud: "A IA está a ler a sua conversa…",
       error_local:
@@ -4950,6 +4994,19 @@ export const messages = {
       dismiss: "Fermer",
     },
     toolsAi: {
+      progressDownload:
+        "Téléchargement du modèle d'IA (une seule fois) : {done} sur {total} Mo",
+      progressEta: "Encore environ {time}",
+      progressEtaPending: "Estimation du temps restant…",
+      progressLoading: "Chargement du modèle d'IA…",
+      localDownloaded: "Déjà téléchargé sur cet appareil",
+      dataTitle: "Télécharger {gb} Go en données mobiles ?",
+      dataTextCellular:
+        "Vous semblez être en données mobiles. L'IA sur l'appareil nécessite un téléchargement unique d'environ {gb} Go, qui peut épuiser votre forfait ou entraîner des frais. Connectez-vous d'abord au Wi-Fi si possible.",
+      dataTextUnknown:
+        "Nous ne pouvons pas savoir si vous êtes en Wi-Fi. L'IA sur l'appareil nécessite un téléchargement unique d'environ {gb} Go ; en données mobiles, cela peut épuiser votre forfait ou entraîner des frais.",
+      dataContinue: "Télécharger quand même",
+      dataCancel: "Attendre le Wi-Fi",
       seoTitle:
         "Analyse de conversation WhatsApp par IA – Privée | WhatsAnalyze",
       seoDescription:
@@ -4997,8 +5054,6 @@ export const messages = {
       previewToggle: "Voir exactement ce que recevrait l'IA dans le cloud",
       previewText:
         "Voici tout ce qui est envoyé. Les vrais noms sont remis en place sur votre appareil à l'arrivée de la réponse.",
-      progressDownload:
-        "Téléchargement du modèle d'IA… {pct} % (seulement la première fois)",
       progressLocal: "L'IA lit votre conversation sur votre appareil…",
       progressCloud: "L'IA lit votre conversation…",
       error_local:
@@ -6059,6 +6114,19 @@ export const messages = {
       dismiss: "Chiudi",
     },
     toolsAi: {
+      progressDownload:
+        "Download del modello di IA (una sola volta): {done} di {total} MB",
+      progressEta: "Ancora circa {time}",
+      progressEtaPending: "Calcolo del tempo rimanente…",
+      progressLoading: "Caricamento del modello di IA…",
+      localDownloaded: "Già scaricato su questo dispositivo",
+      dataTitle: "Scaricare {gb} GB con i dati mobili?",
+      dataTextCellular:
+        "Sembra che tu stia usando i dati mobili. L'IA sul dispositivo richiede un download una tantum di circa {gb} GB, che può esaurire il tuo piano dati o costare extra. Se puoi, collegati prima al Wi-Fi.",
+      dataTextUnknown:
+        "Non possiamo sapere se sei connesso al Wi-Fi. L'IA sul dispositivo richiede un download una tantum di circa {gb} GB: con i dati mobili può esaurire il tuo piano o costare extra.",
+      dataContinue: "Scarica comunque",
+      dataCancel: "Aspetta il Wi-Fi",
       seoTitle: "Analisi chat WhatsApp con IA – Privata | WhatsAnalyze",
       seoDescription:
         "Analizza la tua chat WhatsApp con l'IA: personalità, dinamiche della relazione, argomenti ricorrenti e momenti migliori. Esegui l'IA in privato sul tuo dispositivo, o nel cloud per un'analisi più approfondita.",
@@ -6104,8 +6172,6 @@ export const messages = {
       previewToggle: "Vedi esattamente cosa riceverebbe l'IA nel cloud",
       previewText:
         "Questo è tutto ciò che viene inviato. I nomi reali vengono rimessi sul tuo dispositivo quando arriva la risposta.",
-      progressDownload:
-        "Download del modello di IA… {pct}% (solo la prima volta)",
       progressLocal: "L'IA sta leggendo la tua chat sul tuo dispositivo…",
       progressCloud: "L'IA sta leggendo la tua chat…",
       error_local:

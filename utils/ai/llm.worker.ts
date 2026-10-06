@@ -11,7 +11,11 @@ self.onmessage = async ({ data }: MessageEvent) => {
   try {
     engine ??= CreateMLCEngine(model, {
       initProgressCallback: (report) =>
-        self.postMessage({ type: "progress", progress: report.progress }),
+        self.postMessage({
+          type: "progress",
+          progress: report.progress,
+          elapsed: report.timeElapsed,
+        }),
     });
     const reply = await (await engine).chat.completions.create(request);
     self.postMessage({

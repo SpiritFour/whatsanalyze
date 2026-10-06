@@ -304,6 +304,11 @@ export const analyticsTools = {
     trackEvent("ai_analysis_started", { ai_mode: mode });
   },
 
+  /** The mobile-data warning before the on-device model download. */
+  aiDataWarning(reason: "cellular" | "unknown") {
+    trackEvent("ai_data_warning", { reason });
+  },
+
   aiFinished(mode: "local" | "cloud", durationMs: number) {
     trackEvent("ai_analysis_finished", {
       ai_mode: mode,

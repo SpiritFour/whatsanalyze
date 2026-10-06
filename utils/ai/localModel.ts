@@ -21,7 +21,20 @@ import {
 
 /** ~1.7k tokens of transcript, leaving room for the prompt and the answer. */
 export const LOCAL_TRANSCRIPT_CHARS = 5_000;
-export const LOCAL_DOWNLOAD_GB = 1.3;
+export const LOCAL_DOWNLOAD_MB = 1_300;
+
+/** How far the model load is: 0–1, and seconds since it started. */
+export interface LoadProgress {
+  progress: number;
+  elapsed: number;
+}
+
+/**
+ * Set once the model has loaded here, so a returning visitor isn't warned
+ * about a download that won't happen. WebLLM keeps the weights in Cache
+ * Storage; clearing site data clears both.
+ */
+const DOWNLOADED_KEY = "whatsanalyze_ai_model";
 
 const MODEL_F16 = "Qwen3.5-2B-q4f16_1-MLC";
 const MODEL_F32 = "Qwen3.5-2B-q4f32_1-MLC";
@@ -48,7 +61,7 @@ async function pickModel(): Promise<string> {
 function complete(
   model: string,
   request: object,
-  onProgress: (_progress: number) => void,
+  onProgress: (_progress: LoadProgress) => void,
 ): Promise<string> {
   worker ??= new Worker(new URL("./llm.worker.ts", import.meta.url), {
     type: "module",
@@ -56,8 +69,16 @@ function complete(
   const w = worker;
   return new Promise((resolve, reject) => {
     w.onmessage = ({ data }) => {
-      if (data.type === "progress") onProgress(data.progress);
-      else if (data.type === "done") resolve(data.content);
+      if (data.type === "progress") {
+        onProgress(data);
+        if (data.progress >= 1) {
+          try {
+            localStorage.setItem(DOWNLOADED_KEY, model);
+          } catch {
+            // Private mode: the next visit just warns once more.
+          }
+        }
+      } else if (data.type === "done") resolve(data.content);
       else reject(new Error(data.message));
     };
     w.onerror = (event) => reject(new Error(event.message));
@@ -65,10 +86,38 @@ function complete(
   });
 }
 
+/** Has the model already been downloaded into this browser? */
+export async function isModelDownloaded(): Promise<boolean> {
+  try {
+    return localStorage.getItem(DOWNLOADED_KEY) === (await pickModel());
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Why a phone should think twice before a 1.3 GB download: "cellular" when
+ * the browser says so (or Data Saver is on), "unknown" on a phone that won't
+ * say — Safari never does — and null on Wi-Fi, cable or a computer.
+ */
+export function meteredConnection(): "cellular" | "unknown" | null {
+  const connection = (navigator as any).connection;
+  if (connection?.type === "wifi" || connection?.type === "ethernet") {
+    return null;
+  }
+  if (connection?.type === "cellular" || connection?.saveData) {
+    return "cellular";
+  }
+  const mobile =
+    (navigator as any).userAgentData?.mobile ??
+    /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+  return mobile ? "unknown" : null;
+}
+
 export async function analyzeLocally(
   digest: ChatDigest,
   language: AiLanguage,
-  onProgress: (_progress: number) => void,
+  onProgress: (_progress: LoadProgress) => void,
 ): Promise<ChatInsights> {
   const schema = JSON.stringify(z.toJSONSchema(insightsSchema));
   const { system, prompt } = buildPrompt(digest, language);
