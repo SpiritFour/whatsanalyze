@@ -143,6 +143,13 @@
             <v-icon size="18">mdi-alert-circle-outline</v-icon>
             {{ mode.crashed }}
           </p>
+          <!-- Required by the Llama 3.2 licence wherever it is offered -->
+          <p
+            v-if="mode.id === 'local' && localModel?.id.startsWith('Llama')"
+            class="mode-card__fineprint"
+          >
+            Built with Llama
+          </p>
           <p v-if="mode.id === 'cloud'" class="mode-card__fineprint">
             {{ t("toolsAi.cloudConsent") }}
           </p>
