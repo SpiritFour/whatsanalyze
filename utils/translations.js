@@ -689,6 +689,19 @@ export const messages = {
       dismiss: "Dismiss",
     },
     toolsAi: {
+      askTitle: "Make it personal (optional)",
+      askMeLabel: "Which one is you?",
+      askLabel: "What do you want to know?",
+      ask_into: "Is the other person into me?",
+      ask_arguments: "Who has the more convincing arguments?",
+      ask_worried: "Is there anything I should be worried about?",
+      ask_gift: "What would be a good gift for the other person?",
+      ask_effort: "Who puts more effort into this chat?",
+      ask_better: "How could we communicate better?",
+      askCustom: "Ask your own question",
+      askCustomPlaceholder: "e.g. Why do our conversations always die out?",
+      askNeedsMe: "Pick which one is you first, so the AI knows who's asking.",
+      progressKeepOpen: "Keep this page open — switching apps pauses the AI.",
       reportCoverage:
         "{total} messages, {from} – {to} · the AI read {read} of them",
       reportCoverageParts:
@@ -1823,6 +1836,20 @@ export const messages = {
       dismiss: "Schließen",
     },
     toolsAi: {
+      askTitle: "Persönlicher machen (optional)",
+      askMeLabel: "Wer davon bist du?",
+      askLabel: "Was willst du wissen?",
+      ask_into: "Steht die andere Person auf mich?",
+      ask_arguments: "Wer hat die überzeugenderen Argumente?",
+      ask_worried: "Gibt es etwas, worüber ich mir Sorgen machen sollte?",
+      ask_gift: "Was wäre ein gutes Geschenk für die andere Person?",
+      ask_effort: "Wer gibt sich in diesem Chat mehr Mühe?",
+      ask_better: "Wie könnten wir besser kommunizieren?",
+      askCustom: "Eigene Frage stellen",
+      askCustomPlaceholder: "z. B. Warum schlafen unsere Gespräche immer ein?",
+      askNeedsMe: "Wähl zuerst aus, wer du bist, damit die KI weiß, wer fragt.",
+      progressKeepOpen:
+        "Lass diese Seite offen – beim App-Wechsel pausiert die KI.",
       reportCoverage:
         "{total} Nachrichten, {from} – {to} · die KI hat {read} davon gelesen",
       reportCoverageParts:
@@ -2951,6 +2978,22 @@ export const messages = {
       dismiss: "Cerrar",
     },
     toolsAi: {
+      askTitle: "Hazlo personal (opcional)",
+      askMeLabel: "¿Quién de ellos eres tú?",
+      askLabel: "¿Qué quieres saber?",
+      ask_into: "¿Le gusto a la otra persona?",
+      ask_arguments: "¿Quién tiene los argumentos más convincentes?",
+      ask_worried: "¿Hay algo que deba preocuparme?",
+      ask_gift: "¿Qué sería un buen regalo para la otra persona?",
+      ask_effort: "¿Quién pone más empeño en este chat?",
+      ask_better: "¿Cómo podríamos comunicarnos mejor?",
+      askCustom: "Haz tu propia pregunta",
+      askCustomPlaceholder:
+        "p. ej. ¿Por qué nuestras conversaciones siempre se apagan?",
+      askNeedsMe:
+        "Elige primero quién eres, para que la IA sepa quién pregunta.",
+      progressKeepOpen:
+        "Mantén esta página abierta: si cambias de app, la IA se pausa.",
       reportCoverage: "{total} mensajes, {from} – {to} · la IA leyó {read}",
       reportCoverageParts:
         "{total} mensajes, {from} – {to} · la IA leyó {read} en {parts} partes",
@@ -3899,6 +3942,22 @@ export const messages = {
       dismiss: "Fechar",
     },
     toolsAi: {
+      askTitle: "Torne-o pessoal (opcional)",
+      askMeLabel: "Qual deles é você?",
+      askLabel: "O que quer saber?",
+      ask_into: "A outra pessoa gosta de mim?",
+      ask_arguments: "Quem tem os argumentos mais convincentes?",
+      ask_worried: "Há algo com que me deva preocupar?",
+      ask_gift: "Qual seria um bom presente para a outra pessoa?",
+      ask_effort: "Quem se esforça mais nesta conversa?",
+      ask_better: "Como poderíamos comunicar melhor?",
+      askCustom: "Fazer a sua própria pergunta",
+      askCustomPlaceholder:
+        "p. ex. Porque é que as nossas conversas morrem sempre?",
+      askNeedsMe:
+        "Escolha primeiro quem é você, para a IA saber quem pergunta.",
+      progressKeepOpen:
+        "Mantenha esta página aberta — mudar de app pausa a IA.",
       reportCoverage: "{total} mensagens, {from} – {to} · a IA leu {read}",
       reportCoverageParts:
         "{total} mensagens, {from} – {to} · a IA leu {read} em {parts} partes",
@@ -5032,6 +5091,22 @@ export const messages = {
       dismiss: "Fermer",
     },
     toolsAi: {
+      askTitle: "Personnalisez (facultatif)",
+      askMeLabel: "Lequel est vous ?",
+      askLabel: "Que voulez-vous savoir ?",
+      ask_into: "L'autre personne est-elle intéressée par moi ?",
+      ask_arguments: "Qui a les arguments les plus convaincants ?",
+      ask_worried: "Y a-t-il quelque chose qui devrait m'inquiéter ?",
+      ask_gift: "Quel serait un bon cadeau pour l'autre personne ?",
+      ask_effort: "Qui fait le plus d'efforts dans cette conversation ?",
+      ask_better: "Comment pourrions-nous mieux communiquer ?",
+      askCustom: "Poser votre propre question",
+      askCustomPlaceholder:
+        "p. ex. Pourquoi nos conversations s'essoufflent-elles toujours ?",
+      askNeedsMe:
+        "Choisissez d'abord qui vous êtes, pour que l'IA sache qui pose la question.",
+      progressKeepOpen:
+        "Gardez cette page ouverte : changer d'app met l'IA en pause.",
       reportCoverage: "{total} messages, {from} – {to} · l'IA en a lu {read}",
       reportCoverageParts:
         "{total} messages, {from} – {to} · l'IA en a lu {read} en {parts} parties",
@@ -6161,6 +6236,21 @@ export const messages = {
       dismiss: "Chiudi",
     },
     toolsAi: {
+      askTitle: "Rendila personale (facoltativo)",
+      askMeLabel: "Chi di loro sei tu?",
+      askLabel: "Cosa vuoi sapere?",
+      ask_into: "Piaccio all'altra persona?",
+      ask_arguments: "Chi ha gli argomenti più convincenti?",
+      ask_worried: "C'è qualcosa di cui dovrei preoccuparmi?",
+      ask_gift: "Quale sarebbe un bel regalo per l'altra persona?",
+      ask_effort: "Chi si impegna di più in questa chat?",
+      ask_better: "Come potremmo comunicare meglio?",
+      askCustom: "Fai la tua domanda",
+      askCustomPlaceholder:
+        "es. Perché le nostre conversazioni si spengono sempre?",
+      askNeedsMe: "Scegli prima chi sei, così l'IA sa chi sta chiedendo.",
+      progressKeepOpen:
+        "Tieni aperta questa pagina: cambiando app l'IA si mette in pausa.",
       reportCoverage:
         "{total} messaggi, {from} – {to} · l'IA ne ha letti {read}",
       reportCoverageParts:

@@ -1,5 +1,6 @@
 import { httpsCallable } from "firebase/functions";
 import type {
+  AiAsk,
   AiLanguage,
   ChatDigest,
   ChatInsights,
@@ -16,11 +17,12 @@ export async function analyzeInCloud(
   credentials: { email: string; subscriptionId: string },
   digest: ChatDigest,
   language: AiLanguage,
+  ask?: AiAsk,
 ): Promise<ChatInsights> {
   const callable = httpsCallable<
     unknown,
     { insights: ChatInsights; model: string }
   >(functions as any, "analyzeChatAi", { timeout: 540_000 });
-  const { data } = await callable({ ...credentials, digest, language });
+  const { data } = await callable({ ...credentials, digest, language, ask });
   return data.insights;
 }

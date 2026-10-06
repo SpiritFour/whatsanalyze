@@ -82,6 +82,16 @@ describe("buildDigest", () => {
     expect(digest.transcript).toBe("2026-01-01 12:03 Person A: real text");
   });
 
+  test("anonymizes other text the same way", () => {
+    const { anonymize } = buildDigest(
+      [msg("Anna Schmidt", "x", 1), msg("Tom", "y", 2)],
+      10_000,
+    );
+    expect(anonymize("Is Anna into Tom? Ask anna@x.org")).toBe(
+      "Is Person A into Person B? Ask [email]",
+    );
+  });
+
   test("throws when nobody said anything", () => {
     expect(() => buildDigest([msg("System", "x")], 100)).toThrow("no_messages");
   });

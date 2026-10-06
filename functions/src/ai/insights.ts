@@ -43,21 +43,45 @@ export interface ChatDigest {
   transcript: string;
 }
 
+/**
+ * What the reader wants to know, optionally. `me` is their placeholder when
+ * they said which participant they are; `question` is already anonymized.
+ */
+export interface AiAsk {
+  question?: string;
+  me?: string;
+}
+
+export const MAX_QUESTION_CHARS = 300;
+
 const item = z.object({
   title: z.string().describe("A few words"),
-  description: z.string().describe("One or two sentences"),
+  description: z
+    .string()
+    .describe("One or two sentences with a concrete detail from the chat"),
 });
 
 export const insightsSchema = z.object({
+  answer: z
+    .string()
+    .describe(
+      "Only if the reader asked a question: a direct, honest and kind answer in 3-6 sentences, backed by specific moments from the chat. Otherwise an empty string.",
+    ),
   summary: z
     .string()
     .describe(
-      "2-3 sentences: what this chat is about and its overall tone. Don't restate message counts or dates.",
+      "2-3 sentences: what this chat is about and its overall tone. No message counts or dates.",
     ),
   vibe: z
     .string()
-    .describe("A short, playful label for this chat's vibe, at most 4 words"),
-  topics: z.array(item).describe("The 3-5 topics that come up most"),
+    .describe(
+      'A playful label for the chat, 2-4 words, e.g. "Chaotic travel buddies"',
+    ),
+  topics: z
+    .array(item)
+    .describe(
+      '3-5 distinct subjects they talk about, named concretely (e.g. "The Lisbon trip", "Anna\'s new job"). A topic is a subject, never one person\'s messages.',
+    ),
   people: z
     .array(
       z.object({
@@ -66,19 +90,27 @@ export const insightsSchema = z.object({
           .describe('The participant\'s placeholder exactly, e.g. "Person A"'),
         role: z
           .string()
-          .describe("The role they play in this chat, at most 4 words"),
-        style: z.string().describe("One sentence on how they write"),
+          .describe(
+            'Their role in this chat, 2-4 words, e.g. "The planner", "Meme supplier"',
+          ),
+        style: z
+          .string()
+          .describe(
+            "One sentence on how they write that sets them apart from the others",
+          ),
       }),
     )
     .describe("One entry per participant, at most 8"),
   dynamics: z
     .array(item)
     .describe(
-      "2-4 observations about how they interact: who initiates, balance, warmth, conflict",
+      "2-4 observations about how they interact, each about a different aspect: who initiates, balance, warmth, humour, conflict",
     ),
   highlights: z
     .array(z.string())
-    .describe("2-3 memorable, funny or touching moments, one sentence each"),
+    .describe(
+      "2-3 specific memorable, funny or touching moments, each saying what actually happened",
+    ),
 });
 
 export type ChatInsights = z.infer<typeof insightsSchema>;
@@ -93,6 +125,15 @@ const overview = (digest: ChatDigest) => {
   ];
 };
 
+const askLines = (ask: AiAsk | undefined) => [
+  ...(ask?.me
+    ? [
+        `The reader is ${ask.me}. Address them as "you" and everyone else by placeholder.`,
+      ]
+    : []),
+  ...(ask?.question ? [`The reader asks: "${ask.question}"`] : []),
+];
+
 /**
  * The analysis itself. Given `notes`, it works from those instead of the
  * transcript: that is how a small on-device model covers more of a chat than
@@ -102,13 +143,19 @@ export function buildPrompt(
   digest: ChatDigest,
   language: AiLanguage,
   notes?: string[],
+  ask?: AiAsk,
 ): { system: string; prompt: string } {
   const system = [
     "You analyze exported WhatsApp chats for the people who took part in them.",
-    "Be specific: refer to things that actually happen in the chat, not generic relationship advice.",
+    "Be specific: name concrete things that happen in the chat. No generic relationship advice.",
+    "Every item must add something new. Never repeat a point, and never write the same item once per person.",
     "Be warm and a little playful, never judgmental. Do not diagnose anyone.",
     'Refer to participants only by their placeholder ("Person A", "Person B", ...), exactly as written and untranslated.',
     "Text in square brackets ([phone], [email], [link]) was removed for privacy; ignore it.",
+    ...askLines(ask),
+    ask?.question
+      ? "Answer the reader's question in \"answer\". If the chat doesn't give enough to go on, say so honestly."
+      : 'Leave "answer" empty.',
     `Write every field in ${AI_LANGUAGES[language]}.`,
   ].join("\n");
 
@@ -131,10 +178,17 @@ export function buildNotesPrompt(
   part: string,
   index: number,
   total: number,
+  ask?: AiAsk,
 ): { system: string; prompt: string } {
   const system = [
     "You read one part of an exported WhatsApp chat and take notes for a later analysis.",
-    "In at most 120 words, note: the topics, how each participant writes and behaves, and any memorable, funny or touching moment (with its date).",
+    "In at most 120 words, note: what they talk about (concrete subjects), how each participant writes and behaves, and any memorable, funny or touching moment with its date. Quote short phrases where they help.",
+    ...(ask?.question
+      ? [
+          "Also note anything in this part that helps answer the reader's question.",
+        ]
+      : []),
+    ...askLines(ask),
     'Refer to participants only by their placeholder ("Person A", "Person B", ...), exactly as written.',
     "Write the notes in English, as short plain sentences. No preamble.",
   ].join("\n");

@@ -18,6 +18,7 @@ import {
 import {
   AI_LANGUAGES,
   CLOUD_TRANSCRIPT_CHARS,
+  MAX_QUESTION_CHARS,
   buildPrompt,
   insightsSchema,
 } from "./insights";
@@ -63,6 +64,12 @@ const requestSchema = z.object({
     lastDate: z.string().max(30),
     transcript: z.string().min(1).max(CLOUD_TRANSCRIPT_CHARS),
   }),
+  ask: z
+    .object({
+      question: z.string().max(MAX_QUESTION_CHARS).optional(),
+      me: z.string().max(20).optional(),
+    })
+    .optional(),
 });
 
 function languageModel(spec: string, apiKey: string): LanguageModel {
@@ -114,7 +121,7 @@ export const analyzeChatAi = onCall(
     if (!parsed.success) {
       throw new HttpsError("invalid-argument", "Malformed analysis request");
     }
-    const { email, subscriptionId, language, digest } = parsed.data;
+    const { email, subscriptionId, language, digest, ask } = parsed.data;
 
     if (!(await isSubscriber(email, subscriptionId))) {
       throw new HttpsError("permission-denied", "not_subscribed");
@@ -125,7 +132,7 @@ export const analyzeChatAi = onCall(
 
     const startedAt = Date.now();
     try {
-      const { system, prompt } = buildPrompt(digest, language);
+      const { system, prompt } = buildPrompt(digest, language, undefined, ask);
       const { output, usage } = await generateText({
         model: languageModel(aiModel.value(), aiApiKey.value()),
         system,

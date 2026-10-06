@@ -50,8 +50,9 @@ const day = (d) => stamp(d).slice(0, 10);
  * @param {import("~/composables/useChatTool").ChatMessage[]} messages
  * @param {number} maxChars transcript budget
  * @returns {{ digest: import("~/functions/src/ai/insights").ChatDigest,
- *   names: Record<string, string> }} `names` maps placeholder → real name,
- *   to undo the renaming in the answer.
+ *   names: Record<string, string>, anonymize: (text: string) => string }}
+ *   `names` maps placeholder → real name, to undo the renaming in the
+ *   answer; `anonymize` applies the same renaming to any other text.
  */
 export function buildDigest(messages, maxChars) {
   const spoken = participantMessages(messages);
@@ -86,7 +87,8 @@ export function buildDigest(messages, maxChars) {
   });
   replacements.push(...firstNames);
 
-  const scrub = (text) => {
+  // Also used on the reader's own question, which can name people too.
+  const anonymize = (text) => {
     let out = text
       .replace(/\u200e/g, "")
       .replace(/https?:\/\/\S+|www\.\S+/gi, "[link]")
@@ -96,7 +98,10 @@ export function buildDigest(messages, maxChars) {
         m.replace(/\D/g, "").length >= 9 ? "[phone]" : m,
       );
     for (const [pattern, a] of replacements) out = out.replace(pattern, a);
-    out = out.replace(/\s+/g, " ").trim();
+    return out.replace(/\s+/g, " ").trim();
+  };
+  const scrub = (text) => {
+    const out = anonymize(text);
     return out.length > MAX_MESSAGE_CHARS
       ? `${out.slice(0, MAX_MESSAGE_CHARS)}…`
       : out;
@@ -124,6 +129,7 @@ export function buildDigest(messages, maxChars) {
       transcript: sample(lines, maxChars),
     },
     names,
+    anonymize,
   };
 }
 

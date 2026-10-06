@@ -21,6 +21,52 @@
       :title="t('toolsAi.chooseTitle')"
       :text="t('toolsAi.chooseText')"
     >
+      <!-- Optional: who the reader is and what they want to know -->
+      <div class="ask">
+        <h3 class="ask__title">{{ t("toolsAi.askTitle") }}</h3>
+        <div v-if="people.length > 1" class="ask__group">
+          <p class="ask__label">{{ t("toolsAi.askMeLabel") }}</p>
+          <div class="ask__chips">
+            <button
+              v-for="person in people"
+              :key="person"
+              type="button"
+              class="chip"
+              :class="{ 'chip--on': me === person }"
+              @click="me = me === person ? null : person"
+            >
+              {{ person }}
+            </button>
+          </div>
+        </div>
+        <div class="ask__group">
+          <p class="ask__label">{{ t("toolsAi.askLabel") }}</p>
+          <div class="ask__chips">
+            <button
+              v-for="preset in presets"
+              :key="preset.id"
+              type="button"
+              class="chip"
+              :class="{ 'chip--on': question === preset.id }"
+              @click="question = question === preset.id ? null : preset.id"
+            >
+              {{ preset.label }}
+            </button>
+          </div>
+          <textarea
+            v-if="question === 'custom'"
+            v-model="customQuestion"
+            class="ask__input"
+            rows="2"
+            :maxlength="MAX_QUESTION_CHARS"
+            :placeholder="t('toolsAi.askCustomPlaceholder')"
+          />
+          <p v-if="askBlocked" class="ask__hint">
+            {{ t("toolsAi.askNeedsMe") }}
+          </p>
+        </div>
+      </div>
+
       <div class="mode-grid">
         <div
           v-for="mode in modes"
@@ -64,7 +110,7 @@
             v-else
             type="button"
             class="mode-card__btn"
-            :disabled="running !== null"
+            :disabled="running !== null || askBlocked"
             @click="mode.id === 'local' ? startLocal() : run(mode.id)"
           >
             {{ mode.button }}
@@ -78,6 +124,9 @@
               rounded
             />
             <p>{{ progressText }}</p>
+            <p v-if="running === 'local'" class="ai-progress__eta">
+              {{ t("toolsAi.progressKeepOpen") }}
+            </p>
             <p v-if="etaText" class="ai-progress__eta mono-label">
               {{ etaText }}
             </p>
@@ -152,6 +201,11 @@
       :title="t('toolsAi.reportTitle')"
     >
       <div class="report">
+        <div v-if="insights.answer?.trim()" class="report-card report-answer">
+          <span class="mono-label report-answer__q">{{ askedQuestion }}</span>
+          <p>{{ insights.answer }}</p>
+        </div>
+
         <div class="report-card report-summary">
           <span class="vibe-pill">
             <v-icon size="16">mdi-creation-outline</v-icon>
@@ -180,7 +234,7 @@
         <h3 class="report-heading">{{ t("toolsAi.dynamicsTitle") }}</h3>
         <div class="report-grid">
           <div
-            v-for="d in insights.dynamics"
+            v-for="d in insights.dynamics.slice(0, 4)"
             :key="d.title"
             class="report-card"
           >
@@ -192,7 +246,7 @@
         <h3 class="report-heading">{{ t("toolsAi.topicsTitle") }}</h3>
         <div class="report-grid">
           <div
-            v-for="tp in insights.topics"
+            v-for="tp in insights.topics.slice(0, 5)"
             :key="tp.title"
             class="report-card"
           >
@@ -203,7 +257,7 @@
 
         <h3 class="report-heading">{{ t("toolsAi.highlightsTitle") }}</h3>
         <ul class="report-card highlights">
-          <li v-for="h in insights.highlights" :key="h">{{ h }}</li>
+          <li v-for="h in insights.highlights.slice(0, 3)" :key="h">{{ h }}</li>
         </ul>
 
         <p class="report-disclaimer">{{ t("toolsAi.reportDisclaimer") }}</p>
@@ -270,6 +324,7 @@ import type { ChatMessage } from "~/composables/useChatTool";
 import { analyticsTools } from "~/composables/useAnalytics";
 import { useSubscriptionStore } from "~/stores/subscription";
 import { buildDigest, countLines, restoreNames } from "~/utils/ai/digest";
+import { participantMessages } from "~/utils/utils";
 // WebLLM itself is only fetched inside analyzeLocally, once someone asks.
 import {
   analyzeLocally,
@@ -286,6 +341,8 @@ import { analyzeInCloud } from "~/utils/ai/cloudModel";
 import {
   AI_LANGUAGES,
   CLOUD_TRANSCRIPT_CHARS,
+  MAX_QUESTION_CHARS,
+  type AiAsk,
   type AiLanguage,
   type ChatInsights,
 } from "~/functions/src/ai/insights";
@@ -317,6 +374,49 @@ const errorKey = ref<string | null>(null);
 const errorMode = ref<Mode | null>(null);
 const localModel = ref<LocalModel | null>(null);
 const localCrashed = ref(false);
+
+/** Participants by message count, for "which one is you?". */
+const people = computed<string[]>(() => {
+  if (!messages.value) return [];
+  const counts = new Map<string, number>();
+  for (const m of participantMessages(messages.value) as ChatMessage[]) {
+    counts.set(m.author, (counts.get(m.author) ?? 0) + 1);
+  }
+  return [...counts.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 8)
+    .map(([name]) => name);
+});
+const me = ref<string | null>(null);
+const question = ref<string | null>(null);
+const customQuestion = ref("");
+
+/** Ready-made questions; some only make sense once we know who "I" is. */
+const presets = computed(() => [
+  ...[
+    { id: "into", needsMe: true },
+    { id: "arguments", needsMe: false },
+    { id: "worried", needsMe: true },
+    { id: "gift", needsMe: true },
+    { id: "effort", needsMe: false },
+    { id: "better", needsMe: false },
+  ].map((p) => ({ ...p, label: t(`toolsAi.ask_${p.id}`) })),
+  { id: "custom", needsMe: false, label: t("toolsAi.askCustom") },
+]);
+
+const askBlocked = computed(
+  () =>
+    !me.value &&
+    people.value.length > 1 &&
+    !!presets.value.find((p) => p.id === question.value)?.needsMe,
+);
+
+/** The question as the reader sees it, for the top of the report. */
+const askedQuestion = computed(() =>
+  question.value === "custom"
+    ? customQuestion.value.trim()
+    : (presets.value.find((p) => p.id === question.value)?.label ?? ""),
+);
 /** What the report is based on, counted by us rather than said by the model. */
 const coverage = ref<{
   total: number;
@@ -380,6 +480,9 @@ async function onChatLoaded(payload: { analysis: unknown }) {
 
 function reset() {
   messages.value = null;
+  me.value = null;
+  question.value = null;
+  customQuestion.value = "";
   insights.value = null;
   errorKey.value = null;
 }
@@ -483,7 +586,11 @@ async function run(mode: Mode) {
   errorKey.value = null;
   errorMode.value = null;
   localCrashed.value = false;
-  analyticsTools.aiStarted(mode);
+  analyticsTools.aiStarted(mode, question.value ?? "none");
+  // Keep the screen on: a phone that dims and locks pauses the on-device AI.
+  const wakeLock = await (navigator as any).wakeLock
+    ?.request("screen")
+    .catch(() => null);
   // On a phone the button sits near the bottom edge; bring the progress up.
   nextTick(() =>
     document
@@ -493,12 +600,18 @@ async function run(mode: Mode) {
   const startedAt = performance.now();
 
   try {
-    const { digest, names } = buildDigest(
+    const { digest, names, anonymize } = buildDigest(
       messages.value,
       mode === "cloud"
         ? CLOUD_TRANSCRIPT_CHARS
         : localTranscriptChars(localModel.value!),
     );
+    const alias = Object.keys(names).find((a) => names[a] === me.value);
+    const asked = askedQuestion.value
+      ? anonymize(askedQuestion.value).slice(0, MAX_QUESTION_CHARS)
+      : undefined;
+    const ask: AiAsk | undefined =
+      alias || asked ? { me: alias, question: asked } : undefined;
     let result: ChatInsights;
     let read = countLines(digest.transcript);
     let parts = 1;
@@ -511,6 +624,7 @@ async function run(mode: Mode) {
         },
         digest,
         language.value,
+        ask,
       );
     } else {
       const local = await analyzeLocally(
@@ -520,6 +634,7 @@ async function run(mode: Mode) {
         (p) => {
           progress.value = p;
         },
+        ask,
       );
       result = local.insights;
       read = local.parts.reduce((sum, part) => sum + countLines(part), 0);
@@ -552,6 +667,7 @@ async function run(mode: Mode) {
     errorMode.value = mode;
     analyticsTools.error("ai", `${mode}:${err?.message ?? "unknown"}`);
   } finally {
+    wakeLock?.release().catch(() => {});
     running.value = null;
   }
 }
@@ -824,6 +940,83 @@ useToolSchema({
   p {
     margin-top: 0.4rem;
     line-height: 1.5;
+  }
+}
+
+.ask {
+  text-align: left;
+  background: #fff;
+  border-radius: 20px;
+  padding: clamp(1.2rem, 3vw, 1.6rem);
+  margin-bottom: 1.25rem;
+  box-shadow: 0 4px 22px rgba(0, 0, 0, 0.06);
+  display: grid;
+  gap: 1rem;
+
+  &__title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1d1d1f;
+  }
+
+  &__group {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  &__label {
+    font-size: 0.9rem;
+    color: rgba(29, 29, 31, 0.7);
+  }
+
+  &__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  &__input {
+    width: 100%;
+    border: 1px solid rgba(29, 29, 31, 0.2);
+    border-radius: 12px;
+    padding: 0.7rem 0.9rem;
+    font: inherit;
+    color: #1d1d1f;
+    background: #fff;
+  }
+
+  &__hint {
+    font-size: 0.85rem;
+    color: #b45309;
+  }
+}
+
+.chip {
+  border: 1px solid rgba(29, 29, 31, 0.18);
+  border-radius: 100px;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.9rem;
+  color: #1d1d1f;
+  background: #fff;
+  overflow-wrap: anywhere;
+
+  &--on {
+    background: #1d1d1f;
+    border-color: #1d1d1f;
+    color: #fff;
+  }
+}
+
+.report-answer {
+  border: 2px solid rgba(33, 166, 141, 0.45);
+
+  &__q {
+    font-size: 0.78rem;
+    color: #157a67;
+  }
+
+  p {
+    font-size: 1.05rem;
   }
 }
 

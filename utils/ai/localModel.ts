@@ -4,6 +4,7 @@ import {
   buildNotesPrompt,
   buildPrompt,
   insightsSchema,
+  type AiAsk,
   type AiLanguage,
   type ChatDigest,
   type ChatInsights,
@@ -197,11 +198,62 @@ const thinkingOff = (model: LocalModel) =>
   // be sent it.
   model.qwen ? { extra_body: { enable_thinking: false } } : {};
 
+/** Resolves once the page is in the foreground. */
+const whenVisible = () =>
+  new Promise<void>((resolve) => {
+    if (!document.hidden) return resolve();
+    const onChange = () => {
+      if (document.hidden) return;
+      document.removeEventListener("visibilitychange", onChange);
+      resolve();
+    };
+    document.addEventListener("visibilitychange", onChange);
+  });
+
+/**
+ * One step, retried once if it failed while the page was in the background:
+ * iOS stops the GPU when the visitor switches apps, and the step comes back
+ * broken. `retryInvalid` also retries an answer that wasn't valid, which a
+ * small model produces now and then in the foreground too.
+ */
+async function step<T>(
+  run: () => Promise<T>,
+  retryInvalid = false,
+): Promise<T> {
+  let wasHidden = document.hidden;
+  const note = () => {
+    if (document.hidden) wasHidden = true;
+  };
+  document.addEventListener("visibilitychange", note);
+  try {
+    return await run();
+  } catch (error: any) {
+    const invalid = error?.message === "local_invalid";
+    if (!wasHidden && !(retryInvalid && invalid)) throw error;
+    await whenVisible();
+    return await run();
+  } finally {
+    document.removeEventListener("visibilitychange", note);
+  }
+}
+
+/** Drops the exact repeats a small model likes to produce. */
+const unique = <T>(items: T[], key: (_item: T) => string) => {
+  const seen = new Set<string>();
+  return items.filter((item) => {
+    const k = key(item).trim().toLowerCase();
+    if (seen.has(k)) return false;
+    seen.add(k);
+    return true;
+  });
+};
+
 export async function analyzeLocally(
   model: LocalModel,
   digest: ChatDigest,
   language: AiLanguage,
   onProgress: (_progress: AiProgress) => void,
+  ask?: AiAsk,
 ): Promise<{ insights: ChatInsights; parts: string[] }> {
   // Line boundaries can leave one part over; the oldest goes, not the latest.
   const parts = splitParts(digest.transcript, model.partChars).slice(
@@ -237,19 +289,23 @@ export async function analyzeLocally(
         part,
         i,
         parts.length,
+        ask,
       );
-      const note = await complete(
-        model,
-        {
-          messages: [
-            { role: "system", content: system },
-            { role: "user", content: prompt },
-          ],
-          max_tokens: 180,
-          temperature: 0.3,
-          ...thinkingOff(model),
-        },
-        onLoad,
+      const note = await step(() =>
+        complete(
+          model,
+          {
+            messages: [
+              { role: "system", content: system },
+              { role: "user", content: prompt },
+            ],
+            max_tokens: 180,
+            temperature: 0.3,
+            frequency_penalty: 0.4,
+            ...thinkingOff(model),
+          },
+          onLoad,
+        ),
       );
       notes.push(note.trim());
     }
@@ -258,32 +314,47 @@ export async function analyzeLocally(
   onProgress(current);
 
   const schema = JSON.stringify(z.toJSONSchema(insightsSchema));
-  const { system, prompt } = buildPrompt(digest, language, notes);
-  const content = await complete(
-    model,
-    {
-      messages: [
-        {
-          role: "system",
-          content: `${system}\nAnswer with JSON matching this schema:\n${schema}`,
-        },
-        { role: "user", content: prompt },
-      ],
-      response_format: { type: "json_object", schema },
-      max_tokens: 1000,
-      temperature: 0.6,
-      ...thinkingOff(model),
-    },
-    onLoad,
-  );
+  const { system, prompt } = buildPrompt(digest, language, notes, ask);
+  const insights = await step(async () => {
+    const content = await complete(
+      model,
+      {
+        messages: [
+          {
+            role: "system",
+            content: `${system}\nAnswer with JSON matching this schema:\n${schema}`,
+          },
+          { role: "user", content: prompt },
+        ],
+        response_format: { type: "json_object", schema },
+        max_tokens: 1000,
+        temperature: 0.6,
+        // The first phone report said "travel plans" once per person, three
+        // times over. Penalising repeats is cheap and helps a 1B model most.
+        frequency_penalty: 0.5,
+        presence_penalty: 0.3,
+        ...thinkingOff(model),
+      },
+      onLoad,
+    );
+    let json: unknown;
+    try {
+      json = JSON.parse(content);
+    } catch {
+      throw new Error("local_invalid");
+    }
+    const parsed = insightsSchema.safeParse(json);
+    if (!parsed.success) throw new Error("local_invalid");
+    return parsed.data;
+  }, true);
 
-  let json: unknown;
-  try {
-    json = JSON.parse(content);
-  } catch {
-    throw new Error("local_invalid");
-  }
-  const parsed = insightsSchema.safeParse(json);
-  if (!parsed.success) throw new Error("local_invalid");
-  return { insights: parsed.data, parts };
+  return {
+    insights: {
+      ...insights,
+      topics: unique(insights.topics, (t) => t.description),
+      dynamics: unique(insights.dynamics, (d) => d.description),
+      highlights: unique(insights.highlights, (h) => h),
+    },
+    parts,
+  };
 }
