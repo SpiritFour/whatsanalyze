@@ -22,10 +22,14 @@
         </div>
       </div>
 
-      <div class="relative flex-1 flex items-stretch justify-stretch">
-        <div class="absolute inset-y-0 left-0 w-1/3 z-20" @click="prev" />
-        <div class="absolute inset-y-0 right-0 w-1/3 z-20" @click="next" />
-
+      <!-- Tapping the left or right third steps through the story. A click
+           handler instead of overlays: overlays covered the outer thirds of
+           every button on a slide, so tapping the edge of "Share" went back a
+           slide instead. -->
+      <div
+        class="relative flex-1 flex items-stretch justify-stretch"
+        @click="onTap"
+      >
         <transition mode="out-in" name="fade">
           <div :key="activeIndex" class="w-full h-full">
             <component :is="stories[activeIndex]" />
@@ -116,6 +120,17 @@ function prev() {
   activeIndex.value =
     (activeIndex.value - 1 + storyCount.value) % storyCount.value;
   resetProgress();
+}
+
+function onTap(event: MouseEvent) {
+  const target = event.target as HTMLElement;
+  if (target.closest("button, a, input, select, textarea, label")) return;
+
+  const area = event.currentTarget as HTMLElement;
+  const { left, width } = area.getBoundingClientRect();
+  const x = event.clientX - left;
+  if (x < width / 3) prev();
+  else if (x > (width * 2) / 3) next();
 }
 
 function onMouseEnter() {

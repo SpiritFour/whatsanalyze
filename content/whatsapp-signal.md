@@ -47,6 +47,6 @@ Signal has recently tweeted a tutorial it is actually super easy and works in 4 
 
 Signal offers no functionality to import any data. You need to start with a blank state and can not have your old WhatsApp chats in Signal.
 
-If you, however, want to back up your data you [export your WhatsApp data](https://whatsanalyze.com/how-to-export-your-whatsapp-chat) and then run it through our tool and save it as a PDF!
+If you, however, want to back up your data you [export your WhatsApp data](https://whatsanalyze.com/how-to-export-your-whatsapp-chat/) and then run it through our tool and save it as a PDF!
 
 In that way, you can keep your chats as a PDF and have a secure, privacy-focused messenger!

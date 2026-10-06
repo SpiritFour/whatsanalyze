@@ -69,10 +69,12 @@
   --tw-contain-style: ;
 }
 
-/* Scoped Tailwind Preflight resets so wrapped renders identically to standalone */
-.wrapped-scope *,
-.wrapped-scope *::before,
-.wrapped-scope *::after {
+/* Scoped Tailwind Preflight resets so wrapped renders identically to standalone.
+   :where() keeps them at zero specificity, like the real preflight: scoped
+   with a plain class they outrank every border and background utility. */
+:where(.wrapped-scope) *,
+:where(.wrapped-scope) *::before,
+:where(.wrapped-scope) *::after {
   box-sizing: border-box;
   border-width: 0;
   border-style: solid;
@@ -83,14 +85,13 @@
 .wrapped-scope .blur-3xl {
   filter: blur(64px) !important;
 }
-/* Scoped: unscoped, this lands in the base layer — which this file emits
-   after the utilities — and a plain `button` selector then beats every
-   background utility on every button on the site. */
+/* Scoped, because unscoped this would reset every button on the site. And
+   zero-specificity, because this file emits the base layer after the
+   utilities: `.wrapped-scope button` beat `bg-emerald-400` and left the
+   share button as black text on a black card. */
 @layer base {
-  .wrapped-scope button,
-  .wrapped-scope [type="button"],
-  .wrapped-scope [type="reset"],
-  .wrapped-scope [type="submit"] {
+  :where(.wrapped-scope)
+    :where(button, [type="button"], [type="reset"], [type="submit"]) {
     background-color: transparent;
     color: inherit;
   }

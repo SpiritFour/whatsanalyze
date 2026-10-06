@@ -35,6 +35,22 @@ service cloud.firestore {
       allow read, update, delete: if false;
     }
 
+    // "Email me when my free analysis is back" signups, mailed and deleted by
+    // the sendWrappedReminders function. Create-only, and notifyAt has to be
+    // within two days, so nobody can read the addresses back or park mail
+    // far in the future.
+    match /wrappedReminders/{id} {
+      allow create: if request.resource.data.keys().hasOnly(['email', 'locale', 'notifyAt'])
+                    && request.resource.data.email is string
+                    && request.resource.data.email.size() <= 254
+                    && request.resource.data.email.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$')
+                    && request.resource.data.locale is string
+                    && request.resource.data.locale.size() <= 5
+                    && request.resource.data.notifyAt is timestamp
+                    && request.resource.data.notifyAt < request.time + duration.value(2, 'd');
+      allow read, update, delete: if false;
+    }
+
     // Written by the Stripe webhook, read by verifySubscription. Both run in
     // Cloud Functions through the Admin SDK, which bypasses these rules, so
     // nothing client-side has any business here: a forged document in
