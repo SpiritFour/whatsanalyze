@@ -174,3 +174,24 @@ export function restoreNames(insights, names) {
     typeof value === "string" ? restore(value) : value,
   );
 }
+
+/**
+ * Cut a transcript into consecutive parts of at most `maxChars`, on line
+ * boundaries, for a model that cannot read it in one go.
+ */
+export function splitParts(transcript, maxChars) {
+  const parts = [];
+  let current = [];
+  let size = 0;
+  for (const line of transcript.split("\n")) {
+    if (size + line.length + 1 > maxChars && current.length) {
+      parts.push(current.join("\n"));
+      current = [];
+      size = 0;
+    }
+    current.push(line);
+    size += line.length + 1;
+  }
+  if (current.length) parts.push(current.join("\n"));
+  return parts;
+}

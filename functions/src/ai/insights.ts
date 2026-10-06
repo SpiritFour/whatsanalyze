@@ -81,28 +81,66 @@ export const insightsSchema = z.object({
 
 export type ChatInsights = z.infer<typeof insightsSchema>;
 
+const overview = (digest: ChatDigest) => {
+  const participants = digest.participants
+    .map((p) => `- ${p.alias}: ${p.messages} messages`)
+    .join("\n");
+  return [
+    `The chat runs from ${digest.firstDate} to ${digest.lastDate} with ${digest.totalMessages} messages.`,
+    `Participants:\n${participants}`,
+  ];
+};
+
+/**
+ * The analysis itself. Given `notes`, it works from those instead of the
+ * transcript: that is how a small on-device model covers more of a chat than
+ * fits in its context (see buildNotesPrompt).
+ */
 export function buildPrompt(
   digest: ChatDigest,
   language: AiLanguage,
+  notes?: string[],
 ): { system: string; prompt: string } {
   const system = [
     "You analyze exported WhatsApp chats for the people who took part in them.",
-    "Be specific: refer to things that actually happen in the excerpts, not generic relationship advice.",
+    "Be specific: refer to things that actually happen in the chat, not generic relationship advice.",
     "Be warm and a little playful, never judgmental. Do not diagnose anyone.",
     'Refer to participants only by their placeholder ("Person A", "Person B", ...), exactly as written and untranslated.',
     "Text in square brackets ([phone], [email], [link]) was removed for privacy; ignore it.",
     `Write every field in ${AI_LANGUAGES[language]}.`,
   ].join("\n");
 
-  const participants = digest.participants
-    .map((p) => `- ${p.alias}: ${p.messages} messages`)
-    .join("\n");
+  const body = notes
+    ? [
+        `Notes taken while reading the chat in ${notes.length} parts, oldest first:`,
+        notes.map((n, i) => `Part ${i + 1}:\n${n}`).join("\n\n"),
+      ]
+    : [
+        "Excerpts sampled across the whole chat, oldest first:",
+        digest.transcript,
+      ];
+
+  return { system, prompt: [...overview(digest), ...body].join("\n\n") };
+}
+
+/** One part of a chunked read: short notes for buildPrompt to work from. */
+export function buildNotesPrompt(
+  digest: ChatDigest,
+  part: string,
+  index: number,
+  total: number,
+): { system: string; prompt: string } {
+  const system = [
+    "You read one part of an exported WhatsApp chat and take notes for a later analysis.",
+    "In at most 120 words, note: the topics, how each participant writes and behaves, and any memorable, funny or touching moment (with its date).",
+    'Refer to participants only by their placeholder ("Person A", "Person B", ...), exactly as written.',
+    "Write the notes in English, as short plain sentences. No preamble.",
+  ].join("\n");
 
   const prompt = [
-    `The chat runs from ${digest.firstDate} to ${digest.lastDate} with ${digest.totalMessages} messages.`,
-    `Participants:\n${participants}`,
-    "Excerpts sampled across the whole chat, oldest first:",
-    digest.transcript,
+    ...overview(digest),
+    `Part ${index + 1} of ${total}, oldest first:`,
+    part,
   ].join("\n\n");
 
   return { system, prompt };

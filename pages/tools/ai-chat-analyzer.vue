@@ -72,8 +72,8 @@
           <!-- Right under the button that started it, not off-screen -->
           <div v-if="running === mode.id" class="ai-progress" role="status">
             <v-progress-linear
-              :model-value="loading ? progress.progress * 100 : undefined"
-              :indeterminate="!loading"
+              :model-value="barValue ?? 0"
+              :indeterminate="barValue === undefined"
               color="#21a68d"
               rounded
             />
@@ -275,7 +275,8 @@ import {
   pickLocalModel,
   supportsLocalModel,
   takeCrashedRun,
-  type LoadProgress,
+  localTranscriptChars,
+  type AiProgress,
   type LocalModel,
 } from "~/utils/ai/localModel";
 import { analyzeInCloud } from "~/utils/ai/cloudModel";
@@ -308,7 +309,7 @@ const messages = ref<ChatMessage[] | null>(null);
 const insights = ref<ChatInsights | null>(null);
 const ranOn = ref<Mode | null>(null);
 const running = ref<Mode | null>(null);
-const progress = ref<LoadProgress>({ progress: 0, elapsed: 0 });
+const progress = ref<AiProgress | null>(null);
 const errorKey = ref<string | null>(null);
 const errorMode = ref<Mode | null>(null);
 const localModel = ref<LocalModel | null>(null);
@@ -362,37 +363,69 @@ const cloudPreview = computed(() => {
   }
 });
 
-const loading = computed(
-  () => running.value === "local" && progress.value.progress < 1,
-);
-
-const progressText = computed(() => {
-  if (running.value === "cloud") return t("toolsAi.progressCloud");
-  if (!loading.value) return t("toolsAi.progressLocal");
-  if (modelDownloaded.value) return t("toolsAi.progressLoading");
-  const mb = (n: number) => Math.round(n).toLocaleString(locale.value);
-  return t("toolsAi.progressDownload", {
-    done: mb(progress.value.progress * (localModel.value?.downloadMb ?? 0)),
-    total: mb(localModel.value?.downloadMb ?? 0),
-  });
-});
-
-/** Time left at the rate so far; held back until the rate means something. */
-const etaText = computed(() => {
-  if (!loading.value) return "";
-  const { progress: done, elapsed } = progress.value;
-  if (done < 0.02 || elapsed < 3) return t("toolsAi.progressEtaPending");
-  const seconds = (elapsed * (1 - done)) / done;
+const formatDuration = (seconds: number) => {
   const [value, unit] =
     seconds < 60
       ? [Math.max(5, Math.ceil(seconds / 5) * 5), "second"]
       : [Math.ceil(seconds / 60), "minute"];
-  const time = new Intl.NumberFormat(locale.value, {
+  return new Intl.NumberFormat(locale.value, {
     style: "unit",
     unit,
     unitDisplay: "long",
   }).format(value);
-  return t("toolsAi.progressEta", { time });
+};
+
+/**
+ * One bar for the whole on-device run: the download, then each part read,
+ * then writing the report. Undefined means "no measure", so it animates.
+ */
+const barValue = computed<number | undefined>(() => {
+  const p = progress.value;
+  if (running.value !== "local" || !p) return undefined;
+  if (p.phase === "download")
+    return p.progress < 1 ? p.progress * 100 : undefined;
+  if (p.phase === "read") return (p.done / (p.total + 1)) * 100;
+  return p.total > 1 ? (p.total / (p.total + 1)) * 100 : undefined;
+});
+
+const progressText = computed(() => {
+  const p = progress.value;
+  if (running.value === "cloud") return t("toolsAi.progressCloud");
+  if (p?.phase === "download" && p.progress < 1) {
+    if (modelDownloaded.value) return t("toolsAi.progressLoading");
+    const mb = (n: number) => Math.round(n).toLocaleString(locale.value);
+    const total = localModel.value?.downloadMb ?? 0;
+    return t("toolsAi.progressDownload", {
+      done: mb(p.progress * total),
+      total: mb(total),
+    });
+  }
+  if (p?.phase === "read") {
+    return t("toolsAi.progressRead", { part: p.done + 1, total: p.total });
+  }
+  if (p?.phase === "write" && p.total > 1) return t("toolsAi.progressWrite");
+  return t("toolsAi.progressLocal");
+});
+
+/** Time left at the rate so far; held back until the rate means something. */
+const etaText = computed(() => {
+  const p = progress.value;
+  if (running.value !== "local" || !p) return "";
+  if (p.phase === "download") {
+    if (p.progress >= 1) return "";
+    if (p.progress < 0.02 || p.elapsed < 3)
+      return t("toolsAi.progressEtaPending");
+    const seconds = (p.elapsed * (1 - p.progress)) / p.progress;
+    return t("toolsAi.progressEta", { time: formatDuration(seconds) });
+  }
+  if (p.phase === "read") {
+    if (p.done === 0) return t("toolsAi.progressEtaPending");
+    // The parts left, plus the report, which takes about as long as a part.
+    const perPart = p.elapsed / p.done;
+    const seconds = perPart * (p.total - p.done + 1);
+    return t("toolsAi.progressEta", { time: formatDuration(seconds) });
+  }
+  return "";
 });
 
 /** On-device on a phone that may be on mobile data: confirm the download. */
@@ -414,7 +447,7 @@ function confirmDownload() {
 async function run(mode: Mode) {
   if (!messages.value) return;
   running.value = mode;
-  progress.value = { progress: 0, elapsed: 0 };
+  progress.value = null;
   errorKey.value = null;
   errorMode.value = null;
   localCrashed.value = false;
@@ -432,7 +465,7 @@ async function run(mode: Mode) {
       messages.value,
       mode === "cloud"
         ? CLOUD_TRANSCRIPT_CHARS
-        : localModel.value!.transcriptChars,
+        : localTranscriptChars(localModel.value!),
     );
     let result: ChatInsights;
     if (mode === "cloud") {

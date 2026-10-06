@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import { parseString } from "whatsapp-chat-parser";
 import { markSystemMessages } from "../systemMessages";
-import { buildDigest, restoreNames, sample } from "./digest";
+import { buildDigest, restoreNames, sample, splitParts } from "./digest";
 
 const at = (minute) => new Date(2026, 0, 1, 12, minute);
 const msg = (author, message, minute = 0, extra = {}) => ({
@@ -142,5 +142,18 @@ describe("restoreNames", () => {
         { "Person A": "Ana", "Person B": "Luc" },
       ),
     ).toEqual({ summary: "Ana y Luc, Ana, Person C" });
+  });
+});
+
+describe("splitParts", () => {
+  test("cuts on line boundaries, in order, within the limit", () => {
+    const lines = Array.from({ length: 50 }, (_, i) => `line ${i}`);
+    const parts = splitParts(lines.join("\n"), 60);
+    expect(parts.join("\n")).toBe(lines.join("\n"));
+    for (const part of parts) expect(part.length).toBeLessThanOrEqual(60);
+  });
+
+  test("a short transcript stays one part", () => {
+    expect(splitParts("a\nb", 1_000)).toEqual(["a\nb"]);
   });
 });

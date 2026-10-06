@@ -689,6 +689,8 @@ export const messages = {
       dismiss: "Dismiss",
     },
     toolsAi: {
+      progressRead: "Reading your chat: part {part} of {total}",
+      progressWrite: "Writing your report…",
       localCrashed:
         "Last time, this device ran out of memory running the on-device AI and the page reloaded. You can try again after closing other apps and tabs, or use the cloud AI, which works on any phone.",
       progressDownload:
@@ -729,7 +731,7 @@ export const messages = {
       localCon1: "One-time download of about {gb} GB",
       localCon2: "Needs a recent phone or computer and can take a few minutes",
       localCon3:
-        "Small model: simpler insights from a short sample of your chat",
+        "Small model: simpler insights, and a long chat is read in parts, which takes a few minutes",
       localButton: "Analyze on this device",
       localUnsupported:
         "Your browser doesn't support WebGPU, which the on-device AI needs. Try the latest Chrome, Edge or Safari, or use the cloud AI.",
@@ -737,7 +739,8 @@ export const messages = {
       cloudTag: "BEST QUALITY · SUBSCRIBERS",
       cloudPro1:
         "A state-of-the-art AI model: much deeper, more accurate insights",
-      cloudPro2: "Reads about 10 times more of your chat",
+      cloudPro2:
+        "Reads a large part of your chat in one go, so it sees the big picture",
       cloudPro3: "Works on any phone, ready in about 30 seconds",
       cloudCon1:
         "Anonymized excerpts are sent to our AI provider (Anthropic or OpenAI) for processing",
@@ -1815,6 +1818,8 @@ export const messages = {
       dismiss: "Schließen",
     },
     toolsAi: {
+      progressRead: "Dein Chat wird gelesen: Teil {part} von {total}",
+      progressWrite: "Dein Bericht wird geschrieben …",
       localCrashed:
         "Beim letzten Mal ist diesem Gerät mit der KI auf dem Gerät der Speicher ausgegangen, und die Seite wurde neu geladen. Schließ andere Apps und Tabs und versuch es noch einmal – oder nutze die Cloud-KI, die auf jedem Handy läuft.",
       progressDownload:
@@ -1856,7 +1861,7 @@ export const messages = {
       localCon2:
         "Braucht ein aktuelles Handy oder einen Computer und kann ein paar Minuten dauern",
       localCon3:
-        "Kleines Modell: einfachere Einblicke aus einem kurzen Auszug deines Chats",
+        "Kleines Modell: einfachere Einblicke, und ein langer Chat wird in Teilen gelesen, was ein paar Minuten dauert",
       localButton: "Auf diesem Gerät analysieren",
       localUnsupported:
         "Dein Browser unterstützt kein WebGPU, das die KI auf dem Gerät braucht. Probier die neueste Version von Chrome, Edge oder Safari oder nutze die Cloud-KI.",
@@ -1864,7 +1869,8 @@ export const messages = {
       cloudTag: "BESTE QUALITÄT · ABONNENTEN",
       cloudPro1:
         "Ein KI-Modell auf dem neuesten Stand: deutlich tiefere, genauere Einblicke",
-      cloudPro2: "Liest etwa 10-mal mehr von deinem Chat",
+      cloudPro2:
+        "Liest einen großen Teil deines Chats auf einmal und sieht so das große Ganze",
       cloudPro3: "Funktioniert auf jedem Handy, fertig in etwa 30 Sekunden",
       cloudCon1:
         "Anonymisierte Auszüge werden zur Verarbeitung an unseren KI-Anbieter (Anthropic oder OpenAI) gesendet",
@@ -2935,6 +2941,8 @@ export const messages = {
       dismiss: "Cerrar",
     },
     toolsAi: {
+      progressRead: "Leyendo tu chat: parte {part} de {total}",
+      progressWrite: "Escribiendo tu informe…",
       localCrashed:
         "La última vez, este dispositivo se quedó sin memoria con la IA local y la página se recargó. Puedes volver a intentarlo cerrando otras apps y pestañas, o usar la IA en la nube, que funciona en cualquier móvil.",
       progressDownload:
@@ -2976,7 +2984,7 @@ export const messages = {
       localCon2:
         "Necesita un móvil u ordenador reciente y puede tardar unos minutos",
       localCon3:
-        "Modelo pequeño: análisis más sencillo a partir de una muestra corta del chat",
+        "Modelo pequeño: análisis más sencillo, y un chat largo se lee por partes, lo que tarda unos minutos",
       localButton: "Analizar en este dispositivo",
       localUnsupported:
         "Tu navegador no admite WebGPU, que la IA local necesita. Prueba la última versión de Chrome, Edge o Safari, o usa la IA en la nube.",
@@ -2984,7 +2992,8 @@ export const messages = {
       cloudTag: "MÁXIMA CALIDAD · SUSCRIPTORES",
       cloudPro1:
         "Un modelo de IA de última generación: análisis mucho más profundo y preciso",
-      cloudPro2: "Lee unas 10 veces más de tu chat",
+      cloudPro2:
+        "Lee una gran parte de tu chat de una vez, así ve el panorama completo",
       cloudPro3: "Funciona en cualquier móvil, listo en unos 30 segundos",
       cloudCon1:
         "Se envían fragmentos anonimizados a nuestro proveedor de IA (Anthropic u OpenAI) para procesarlos",
@@ -3876,6 +3885,8 @@ export const messages = {
       dismiss: "Fechar",
     },
     toolsAi: {
+      progressRead: "A ler a sua conversa: parte {part} de {total}",
+      progressWrite: "A escrever o seu relatório…",
       localCrashed:
         "Da última vez, este dispositivo ficou sem memória com a IA local e a página foi recarregada. Pode tentar novamente depois de fechar outras apps e separadores, ou usar a IA na nuvem, que funciona em qualquer telemóvel.",
       progressDownload:
@@ -3917,7 +3928,7 @@ export const messages = {
       localCon2:
         "Precisa de um telemóvel ou computador recente e pode demorar alguns minutos",
       localCon3:
-        "Modelo pequeno: análise mais simples a partir de um excerto curto da conversa",
+        "Modelo pequeno: análise mais simples, e uma conversa longa é lida por partes, o que demora alguns minutos",
       localButton: "Analisar neste dispositivo",
       localUnsupported:
         "O seu navegador não suporta WebGPU, que a IA local precisa. Experimente a versão mais recente do Chrome, Edge ou Safari, ou use a IA na nuvem.",
@@ -3925,7 +3936,8 @@ export const messages = {
       cloudTag: "MELHOR QUALIDADE · SUBSCRITORES",
       cloudPro1:
         "Um modelo de IA de ponta: análise muito mais profunda e precisa",
-      cloudPro2: "Lê cerca de 10 vezes mais da sua conversa",
+      cloudPro2:
+        "Lê uma grande parte da sua conversa de uma só vez, vendo o quadro completo",
       cloudPro3:
         "Funciona em qualquer telemóvel, pronto em cerca de 30 segundos",
       cloudCon1:
@@ -5002,6 +5014,8 @@ export const messages = {
       dismiss: "Fermer",
     },
     toolsAi: {
+      progressRead: "Lecture de votre conversation : partie {part} sur {total}",
+      progressWrite: "Rédaction de votre rapport…",
       localCrashed:
         "La dernière fois, cet appareil a manqué de mémoire avec l'IA locale et la page s'est rechargée. Vous pouvez réessayer après avoir fermé d'autres applications et onglets, ou utiliser l'IA dans le cloud, qui fonctionne sur tous les téléphones.",
       progressDownload:
@@ -5043,7 +5057,7 @@ export const messages = {
       localCon2:
         "Nécessite un téléphone ou un ordinateur récent et peut prendre quelques minutes",
       localCon3:
-        "Petit modèle : analyse plus simple, à partir d'un court extrait de la conversation",
+        "Petit modèle : analyse plus simple, et une longue conversation est lue en plusieurs parties, ce qui prend quelques minutes",
       localButton: "Analyser sur cet appareil",
       localUnsupported:
         "Votre navigateur ne prend pas en charge WebGPU, nécessaire à l'IA locale. Essayez la dernière version de Chrome, Edge ou Safari, ou utilisez l'IA dans le cloud.",
@@ -5051,7 +5065,8 @@ export const messages = {
       cloudTag: "MEILLEURE QUALITÉ · ABONNÉS",
       cloudPro1:
         "Un modèle d'IA de pointe : une analyse bien plus fine et plus juste",
-      cloudPro2: "Lit environ 10 fois plus de votre conversation",
+      cloudPro2:
+        "Lit une grande partie de votre conversation d'un coup, pour une vue d'ensemble",
       cloudPro3:
         "Fonctionne sur n'importe quel téléphone, prêt en 30 secondes environ",
       cloudCon1:
@@ -6124,6 +6139,8 @@ export const messages = {
       dismiss: "Chiudi",
     },
     toolsAi: {
+      progressRead: "Lettura della chat: parte {part} di {total}",
+      progressWrite: "Scrittura del report…",
       localCrashed:
         "L'ultima volta questo dispositivo ha esaurito la memoria con l'IA locale e la pagina si è ricaricata. Puoi riprovare dopo aver chiuso altre app e schede, oppure usare l'IA nel cloud, che funziona su qualsiasi smartphone.",
       progressDownload:
@@ -6164,7 +6181,7 @@ export const messages = {
       localCon2:
         "Serve uno smartphone o un computer recente e può richiedere qualche minuto",
       localCon3:
-        "Modello piccolo: analisi più semplice da un breve estratto della chat",
+        "Modello piccolo: analisi più semplice, e una chat lunga viene letta a parti, il che richiede qualche minuto",
       localButton: "Analizza su questo dispositivo",
       localUnsupported:
         "Il tuo browser non supporta WebGPU, necessario per l'IA locale. Prova l'ultima versione di Chrome, Edge o Safari, oppure usa l'IA nel cloud.",
@@ -6172,7 +6189,8 @@ export const messages = {
       cloudTag: "MASSIMA QUALITÀ · ABBONATI",
       cloudPro1:
         "Un modello di IA all'avanguardia: analisi molto più profonda e precisa",
-      cloudPro2: "Legge circa 10 volte di più della tua chat",
+      cloudPro2:
+        "Legge una grande parte della chat in una volta sola, cogliendo il quadro d'insieme",
       cloudPro3: "Funziona su qualsiasi smartphone, pronto in circa 30 secondi",
       cloudCon1:
         "Estratti anonimizzati vengono inviati al nostro fornitore di IA (Anthropic o OpenAI) per l'elaborazione",

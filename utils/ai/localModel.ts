@@ -1,5 +1,7 @@
 import { z } from "zod";
+import { splitParts } from "~/utils/ai/digest";
 import {
+  buildNotesPrompt,
   buildPrompt,
   insightsSchema,
   type AiLanguage,
@@ -14,17 +16,24 @@ import {
  * less perceptive than the cloud one.
  *
  * Same prompt and schema as the cloud (functions/src/ai/insights.ts). The
- * models' context is 4k tokens, so they get a much shorter transcript, and the
- * schema is spelled out in the prompt because a model this size needs telling
- * what each field is for — the grammar alone only keeps the JSON valid.
+ * models' context is 4k tokens — a few hundred messages — so a longer sample
+ * is read in parts: the model takes short notes on each, then writes the
+ * report from the notes. The schema is spelled out in the prompt because a
+ * model this size needs telling what each field is for; the grammar alone
+ * only keeps the JSON valid.
  */
 
 export interface LocalModel {
   id: string;
   /** Download size, measured from the files on Hugging Face. */
   downloadMb: number;
-  /** Transcript budget: what fits the 4k context next to prompt and answer. */
-  transcriptChars: number;
+  /** One part: what fits the 4k context next to the notes prompt and notes. */
+  partChars: number;
+  /**
+   * Parts read at most. Each is a model call (tens of seconds on a phone),
+   * and all their notes plus the schema must fit the final call's context.
+   */
+  maxParts: number;
   /** Qwen thinks out loud unless told not to; other models have no switch. */
   qwen: boolean;
 }
@@ -38,7 +47,8 @@ export interface LocalModel {
 const DESKTOP = (f16: boolean): LocalModel => ({
   id: f16 ? "Qwen3.5-2B-q4f16_1-MLC" : "Qwen3.5-2B-q4f32_1-MLC",
   downloadMb: 1_083,
-  transcriptChars: 5_000,
+  partChars: 6_000,
+  maxParts: 8,
   qwen: true,
 });
 const MOBILE = (f16: boolean): LocalModel => ({
@@ -46,15 +56,20 @@ const MOBILE = (f16: boolean): LocalModel => ({
     ? "Llama-3.2-1B-Instruct-q4f16_1-MLC"
     : "Llama-3.2-1B-Instruct-q4f32_1-MLC",
   downloadMb: 705,
-  transcriptChars: 4_000,
+  partChars: 5_000,
+  maxParts: 6,
   qwen: false,
 });
 
-/** How far the model load is: 0–1, and seconds since it started. */
-export interface LoadProgress {
-  progress: number;
-  elapsed: number;
-}
+/** Where an on-device analysis is. `elapsed` is seconds into that phase. */
+export type AiProgress =
+  | { phase: "download"; progress: number; elapsed: number }
+  | { phase: "read"; done: number; total: number; elapsed: number }
+  | { phase: "write"; total: number };
+
+/** How much transcript to sample for this model: every part it will read. */
+export const localTranscriptChars = (model: LocalModel) =>
+  model.partChars * model.maxParts;
 
 /**
  * Set once the model has loaded here, so a returning visitor isn't warned
@@ -145,7 +160,7 @@ export function meteredConnection(): "cellular" | "unknown" | null {
 function complete(
   model: LocalModel,
   request: object,
-  onProgress: (_progress: LoadProgress) => void,
+  onProgress: (_progress: AiProgress) => void,
 ): Promise<string> {
   worker ??= new Worker(new URL("./llm.worker.ts", import.meta.url), {
     type: "module",
@@ -159,7 +174,11 @@ function complete(
   return new Promise<string>((resolve, reject) => {
     w.onmessage = ({ data }) => {
       if (data.type === "progress") {
-        onProgress(data);
+        onProgress({
+          phase: "download",
+          progress: data.progress,
+          elapsed: data.elapsed,
+        });
         if (data.progress >= 1) storage.set(DOWNLOADED_KEY, model.id);
       } else if (data.type === "done") resolve(data.content);
       else reject(new Error(data.message));
@@ -172,15 +191,74 @@ function complete(
   });
 }
 
+const thinkingOff = (model: LocalModel) =>
+  // On a 4k context, thinking out loud spends the answer's budget before it
+  // starts. WebLLM prepends an empty think block for this, so only Qwen may
+  // be sent it.
+  model.qwen ? { extra_body: { enable_thinking: false } } : {};
+
 export async function analyzeLocally(
   model: LocalModel,
   digest: ChatDigest,
   language: AiLanguage,
-  onProgress: (_progress: LoadProgress) => void,
+  onProgress: (_progress: AiProgress) => void,
 ): Promise<ChatInsights> {
-  const schema = JSON.stringify(z.toJSONSchema(insightsSchema));
-  const { system, prompt } = buildPrompt(digest, language);
+  // Line boundaries can leave one part over; the oldest goes, not the latest.
+  const parts = splitParts(digest.transcript, model.partChars).slice(
+    -model.maxParts,
+  );
 
+  // The first call also loads the model (a download, the first time). Report
+  // that as such, and start the clock for the reading estimate once it's done.
+  let readStart = performance.now();
+  let current: AiProgress = { phase: "write", total: parts.length };
+  const onLoad = (p: AiProgress) => {
+    onProgress(p);
+    if (p.phase === "download" && p.progress >= 1) {
+      readStart = performance.now();
+      onProgress(current);
+    }
+  };
+
+  // A chat that fits in one part is analyzed straight from the transcript.
+  let notes: string[] | undefined;
+  if (parts.length > 1) {
+    notes = [];
+    for (const [i, part] of parts.entries()) {
+      current = {
+        phase: "read",
+        done: i,
+        total: parts.length,
+        elapsed: (performance.now() - readStart) / 1000,
+      };
+      onProgress(current);
+      const { system, prompt } = buildNotesPrompt(
+        digest,
+        part,
+        i,
+        parts.length,
+      );
+      const note = await complete(
+        model,
+        {
+          messages: [
+            { role: "system", content: system },
+            { role: "user", content: prompt },
+          ],
+          max_tokens: 180,
+          temperature: 0.3,
+          ...thinkingOff(model),
+        },
+        onLoad,
+      );
+      notes.push(note.trim());
+    }
+  }
+  current = { phase: "write", total: parts.length };
+  onProgress(current);
+
+  const schema = JSON.stringify(z.toJSONSchema(insightsSchema));
+  const { system, prompt } = buildPrompt(digest, language, notes);
   const content = await complete(
     model,
     {
@@ -192,14 +270,11 @@ export async function analyzeLocally(
         { role: "user", content: prompt },
       ],
       response_format: { type: "json_object", schema },
-      max_tokens: 1200,
+      max_tokens: 1000,
       temperature: 0.6,
-      // On a 4k context, thinking out loud spends the answer's budget before
-      // it starts. WebLLM prepends an empty think block for this, so only
-      // Qwen may be sent it.
-      ...(model.qwen ? { extra_body: { enable_thinking: false } } : {}),
+      ...thinkingOff(model),
     },
-    onProgress,
+    onLoad,
   );
 
   let json: unknown;
