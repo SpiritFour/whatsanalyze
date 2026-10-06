@@ -158,6 +158,9 @@
             {{ insights.vibe }}
           </span>
           <p>{{ insights.summary }}</p>
+          <p v-if="coverageText" class="report-coverage mono-label">
+            {{ coverageText }}
+          </p>
         </div>
 
         <h3 class="report-heading">{{ t("toolsAi.peopleTitle") }}</h3>
@@ -266,7 +269,7 @@ import ToolDropzone from "~/components/tools/ToolDropzone.vue";
 import type { ChatMessage } from "~/composables/useChatTool";
 import { analyticsTools } from "~/composables/useAnalytics";
 import { useSubscriptionStore } from "~/stores/subscription";
-import { buildDigest, restoreNames } from "~/utils/ai/digest";
+import { buildDigest, countLines, restoreNames } from "~/utils/ai/digest";
 // WebLLM itself is only fetched inside analyzeLocally, once someone asks.
 import {
   analyzeLocally,
@@ -314,6 +317,35 @@ const errorKey = ref<string | null>(null);
 const errorMode = ref<Mode | null>(null);
 const localModel = ref<LocalModel | null>(null);
 const localCrashed = ref(false);
+/** What the report is based on, counted by us rather than said by the model. */
+const coverage = ref<{
+  total: number;
+  from: string;
+  to: string;
+  read: number;
+  parts: number;
+} | null>(null);
+
+const coverageText = computed(() => {
+  const c = coverage.value;
+  if (!c) return "";
+  const n = (v: number) => v.toLocaleString(locale.value);
+  const date = (iso: string) =>
+    new Date(iso).toLocaleDateString(locale.value, {
+      month: "short",
+      year: "numeric",
+    });
+  return t(
+    c.parts > 1 ? "toolsAi.reportCoverageParts" : "toolsAi.reportCoverage",
+    {
+      total: n(c.total),
+      from: date(c.from),
+      to: date(c.to),
+      read: n(Math.min(c.read, c.total)),
+      parts: c.parts,
+    },
+  );
+});
 const localSupported = ref<boolean | null>(null);
 const modelDownloaded = ref(false);
 const dataWarning = ref(false);
@@ -468,6 +500,8 @@ async function run(mode: Mode) {
         : localTranscriptChars(localModel.value!),
     );
     let result: ChatInsights;
+    let read = countLines(digest.transcript);
+    let parts = 1;
     if (mode === "cloud") {
       result = await analyzeInCloud(
         useNuxtApp().$functions,
@@ -479,7 +513,7 @@ async function run(mode: Mode) {
         language.value,
       );
     } else {
-      result = await analyzeLocally(
+      const local = await analyzeLocally(
         localModel.value!,
         digest,
         language.value,
@@ -487,9 +521,19 @@ async function run(mode: Mode) {
           progress.value = p;
         },
       );
+      result = local.insights;
+      read = local.parts.reduce((sum, part) => sum + countLines(part), 0);
+      parts = local.parts.length;
     }
     if (mode === "local") modelDownloaded.value = true;
     insights.value = restoreNames(result, names);
+    coverage.value = {
+      total: digest.totalMessages,
+      from: digest.firstDate,
+      to: digest.lastDate,
+      read,
+      parts,
+    };
     ranOn.value = mode;
     analyticsTools.aiFinished(mode, performance.now() - startedAt);
     await nextTick();
@@ -781,6 +825,11 @@ useToolSchema({
     margin-top: 0.4rem;
     line-height: 1.5;
   }
+}
+
+.report-coverage {
+  font-size: 0.78rem !important;
+  color: rgba(29, 29, 31, 0.55);
 }
 
 .report-summary p {

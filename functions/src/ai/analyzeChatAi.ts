@@ -29,16 +29,20 @@ import {
  * "<provider>:<model id>" and `AI_API_KEY` is that provider's key, so moving
  * between Anthropic and OpenAI is a config change and a redeploy:
  *
- *   AI_MODEL=anthropic:claude-sonnet-5
- *   AI_MODEL=openai:gpt-5-mini
+ *   AI_MODEL=openai:gpt-6-luna         (~3 cents an analysis at max effort)
+ *   AI_MODEL=anthropic:claude-sonnet-5 (~25 cents: priced for 10x the input)
+ *
+ * AI_REASONING_EFFORT is passed to whichever provider runs: OpenAI's
+ * reasoningEffort, Anthropic's effort. Both take low…max.
  *
  * The browser never sends the raw chat, only the digest built in
  * utils/ai/digest.js: excerpts with names, numbers, emails and links already
  * replaced. Nothing here stores it.
  */
 
-const aiModel = defineString("AI_MODEL", {
-  default: "anthropic:claude-sonnet-5",
+const aiModel = defineString("AI_MODEL", { default: "openai:gpt-6-luna" });
+const aiReasoningEffort = defineString("AI_REASONING_EFFORT", {
+  default: "max",
 });
 const aiApiKey = defineSecret("AI_API_KEY");
 /** Analyses per subscriber per UTC day. The cost ceiling, not a feature. */
@@ -99,8 +103,8 @@ export const analyzeChatAi = onCall(
   {
     cors: true,
     secrets: [aiApiKey, paypalSecret],
-    // A long chat can take the model the better part of a minute.
-    timeoutSeconds: 180,
+    // Up to ~130k tokens of chat at max reasoning effort can take minutes.
+    timeoutSeconds: 540,
     // Several visitors waiting on a model at once is normal here, and each
     // one costs a container nothing while it waits.
     maxInstances: 3,
@@ -127,10 +131,15 @@ export const analyzeChatAi = onCall(
         system,
         prompt,
         output: Output.object({ schema: insightsSchema }),
+        providerOptions: {
+          openai: { reasoningEffort: aiReasoningEffort.value() },
+          anthropic: { effort: aiReasoningEffort.value() },
+        },
       });
       logger.info("AI analysis done", {
         model: aiModel.value(),
         durationMs: Date.now() - startedAt,
+        effort: aiReasoningEffort.value(),
         inputTokens: usage.inputTokens,
         outputTokens: usage.outputTokens,
       });

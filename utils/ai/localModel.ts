@@ -202,7 +202,7 @@ export async function analyzeLocally(
   digest: ChatDigest,
   language: AiLanguage,
   onProgress: (_progress: AiProgress) => void,
-): Promise<ChatInsights> {
+): Promise<{ insights: ChatInsights; parts: string[] }> {
   // Line boundaries can leave one part over; the oldest goes, not the latest.
   const parts = splitParts(digest.transcript, model.partChars).slice(
     -model.maxParts,
@@ -285,5 +285,5 @@ export async function analyzeLocally(
   }
   const parsed = insightsSchema.safeParse(json);
   if (!parsed.success) throw new Error("local_invalid");
-  return parsed.data;
+  return { insights: parsed.data, parts };
 }

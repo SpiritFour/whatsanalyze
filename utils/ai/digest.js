@@ -195,3 +195,7 @@ export function splitParts(transcript, maxChars) {
   if (current.length) parts.push(current.join("\n"));
   return parts;
 }
+
+/** Messages in a transcript (or part), not counting the "…" between excerpts. */
+export const countLines = (transcript) =>
+  transcript.split("\n").filter((line) => line && line !== "…").length;

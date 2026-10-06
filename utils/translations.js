@@ -689,6 +689,10 @@ export const messages = {
       dismiss: "Dismiss",
     },
     toolsAi: {
+      reportCoverage:
+        "{total} messages, {from} – {to} · the AI read {read} of them",
+      reportCoverageParts:
+        "{total} messages, {from} – {to} · the AI read {read} of them in {parts} parts",
       progressRead: "Reading your chat: part {part} of {total}",
       progressWrite: "Writing your report…",
       localCrashed:
@@ -740,7 +744,7 @@ export const messages = {
       cloudPro1:
         "A state-of-the-art AI model: much deeper, more accurate insights",
       cloudPro2:
-        "Reads a large part of your chat in one go, so it sees the big picture",
+        "Reads up to about 10,000 messages in one go — all of most chats",
       cloudPro3: "Works on any phone, ready in about 30 seconds",
       cloudCon1:
         "Anonymized excerpts are sent to our AI provider (Anthropic or OpenAI) for processing",
@@ -753,7 +757,8 @@ export const messages = {
       previewText:
         "This is everything that is sent. Real names are swapped back in on your device once the answer arrives.",
       progressLocal: "The AI is reading your chat on your device…",
-      progressCloud: "The AI is reading your chat…",
+      progressCloud:
+        "The AI is reading your chat… this can take a minute or two.",
       error_local:
         "The on-device AI couldn't run. Your device may not have enough memory — try the cloud AI or a computer.",
       error_cloud:
@@ -1818,6 +1823,10 @@ export const messages = {
       dismiss: "Schließen",
     },
     toolsAi: {
+      reportCoverage:
+        "{total} Nachrichten, {from} – {to} · die KI hat {read} davon gelesen",
+      reportCoverageParts:
+        "{total} Nachrichten, {from} – {to} · die KI hat {read} davon in {parts} Teilen gelesen",
       progressRead: "Dein Chat wird gelesen: Teil {part} von {total}",
       progressWrite: "Dein Bericht wird geschrieben …",
       localCrashed:
@@ -1870,7 +1879,7 @@ export const messages = {
       cloudPro1:
         "Ein KI-Modell auf dem neuesten Stand: deutlich tiefere, genauere Einblicke",
       cloudPro2:
-        "Liest einen großen Teil deines Chats auf einmal und sieht so das große Ganze",
+        "Liest bis zu etwa 10.000 Nachrichten auf einmal – bei den meisten Chats alles",
       cloudPro3: "Funktioniert auf jedem Handy, fertig in etwa 30 Sekunden",
       cloudCon1:
         "Anonymisierte Auszüge werden zur Verarbeitung an unseren KI-Anbieter (Anthropic oder OpenAI) gesendet",
@@ -1883,7 +1892,8 @@ export const messages = {
       previewText:
         "Das ist alles, was gesendet wird. Die echten Namen werden erst auf deinem Gerät wieder eingesetzt, wenn die Antwort da ist.",
       progressLocal: "Die KI liest deinen Chat auf deinem Gerät …",
-      progressCloud: "Die KI liest deinen Chat …",
+      progressCloud:
+        "Die KI liest deinen Chat … das kann ein, zwei Minuten dauern.",
       error_local:
         "Die KI auf dem Gerät konnte nicht starten. Vielleicht hat dein Gerät nicht genug Speicher – probier die Cloud-KI oder einen Computer.",
       error_cloud:
@@ -2941,6 +2951,9 @@ export const messages = {
       dismiss: "Cerrar",
     },
     toolsAi: {
+      reportCoverage: "{total} mensajes, {from} – {to} · la IA leyó {read}",
+      reportCoverageParts:
+        "{total} mensajes, {from} – {to} · la IA leyó {read} en {parts} partes",
       progressRead: "Leyendo tu chat: parte {part} de {total}",
       progressWrite: "Escribiendo tu informe…",
       localCrashed:
@@ -2993,7 +3006,7 @@ export const messages = {
       cloudPro1:
         "Un modelo de IA de última generación: análisis mucho más profundo y preciso",
       cloudPro2:
-        "Lee una gran parte de tu chat de una vez, así ve el panorama completo",
+        "Lee hasta unos 10.000 mensajes de una vez: la mayoría de los chats, enteros",
       cloudPro3: "Funciona en cualquier móvil, listo en unos 30 segundos",
       cloudCon1:
         "Se envían fragmentos anonimizados a nuestro proveedor de IA (Anthropic u OpenAI) para procesarlos",
@@ -3006,7 +3019,8 @@ export const messages = {
       previewText:
         "Esto es todo lo que se envía. Los nombres reales se vuelven a poner en tu dispositivo cuando llega la respuesta.",
       progressLocal: "La IA está leyendo tu chat en tu dispositivo…",
-      progressCloud: "La IA está leyendo tu chat…",
+      progressCloud:
+        "La IA está leyendo tu chat… puede tardar un par de minutos.",
       error_local:
         "La IA local no ha podido ejecutarse. Puede que tu dispositivo no tenga memoria suficiente: prueba la IA en la nube o un ordenador.",
       error_cloud:
@@ -3885,6 +3899,9 @@ export const messages = {
       dismiss: "Fechar",
     },
     toolsAi: {
+      reportCoverage: "{total} mensagens, {from} – {to} · a IA leu {read}",
+      reportCoverageParts:
+        "{total} mensagens, {from} – {to} · a IA leu {read} em {parts} partes",
       progressRead: "A ler a sua conversa: parte {part} de {total}",
       progressWrite: "A escrever o seu relatório…",
       localCrashed:
@@ -3937,7 +3954,7 @@ export const messages = {
       cloudPro1:
         "Um modelo de IA de ponta: análise muito mais profunda e precisa",
       cloudPro2:
-        "Lê uma grande parte da sua conversa de uma só vez, vendo o quadro completo",
+        "Lê até cerca de 10 000 mensagens de uma só vez — a maioria das conversas, por inteiro",
       cloudPro3:
         "Funciona em qualquer telemóvel, pronto em cerca de 30 segundos",
       cloudCon1:
@@ -3951,7 +3968,8 @@ export const messages = {
       previewText:
         "Isto é tudo o que é enviado. Os nomes reais são repostos no seu dispositivo quando chega a resposta.",
       progressLocal: "A IA está a ler a sua conversa no seu dispositivo…",
-      progressCloud: "A IA está a ler a sua conversa…",
+      progressCloud:
+        "A IA está a ler a sua conversa… pode demorar um ou dois minutos.",
       error_local:
         "A IA local não conseguiu arrancar. O seu dispositivo pode não ter memória suficiente: experimente a IA na nuvem ou um computador.",
       error_cloud:
@@ -5014,6 +5032,9 @@ export const messages = {
       dismiss: "Fermer",
     },
     toolsAi: {
+      reportCoverage: "{total} messages, {from} – {to} · l'IA en a lu {read}",
+      reportCoverageParts:
+        "{total} messages, {from} – {to} · l'IA en a lu {read} en {parts} parties",
       progressRead: "Lecture de votre conversation : partie {part} sur {total}",
       progressWrite: "Rédaction de votre rapport…",
       localCrashed:
@@ -5066,7 +5087,7 @@ export const messages = {
       cloudPro1:
         "Un modèle d'IA de pointe : une analyse bien plus fine et plus juste",
       cloudPro2:
-        "Lit une grande partie de votre conversation d'un coup, pour une vue d'ensemble",
+        "Lit jusqu'à environ 10 000 messages d'un coup, soit la plupart des conversations en entier",
       cloudPro3:
         "Fonctionne sur n'importe quel téléphone, prêt en 30 secondes environ",
       cloudCon1:
@@ -5080,7 +5101,8 @@ export const messages = {
       previewText:
         "Voici tout ce qui est envoyé. Les vrais noms sont remis en place sur votre appareil à l'arrivée de la réponse.",
       progressLocal: "L'IA lit votre conversation sur votre appareil…",
-      progressCloud: "L'IA lit votre conversation…",
+      progressCloud:
+        "L'IA lit votre conversation… cela peut prendre une ou deux minutes.",
       error_local:
         "L'IA locale n'a pas pu démarrer. Votre appareil manque peut-être de mémoire : essayez l'IA dans le cloud ou un ordinateur.",
       error_cloud:
@@ -6139,6 +6161,10 @@ export const messages = {
       dismiss: "Chiudi",
     },
     toolsAi: {
+      reportCoverage:
+        "{total} messaggi, {from} – {to} · l'IA ne ha letti {read}",
+      reportCoverageParts:
+        "{total} messaggi, {from} – {to} · l'IA ne ha letti {read} in {parts} parti",
       progressRead: "Lettura della chat: parte {part} di {total}",
       progressWrite: "Scrittura del report…",
       localCrashed:
@@ -6190,7 +6216,7 @@ export const messages = {
       cloudPro1:
         "Un modello di IA all'avanguardia: analisi molto più profonda e precisa",
       cloudPro2:
-        "Legge una grande parte della chat in una volta sola, cogliendo il quadro d'insieme",
+        "Legge fino a circa 10.000 messaggi in una volta: la maggior parte delle chat, per intero",
       cloudPro3: "Funziona su qualsiasi smartphone, pronto in circa 30 secondi",
       cloudCon1:
         "Estratti anonimizzati vengono inviati al nostro fornitore di IA (Anthropic o OpenAI) per l'elaborazione",
@@ -6203,7 +6229,8 @@ export const messages = {
       previewText:
         "Questo è tutto ciò che viene inviato. I nomi reali vengono rimessi sul tuo dispositivo quando arriva la risposta.",
       progressLocal: "L'IA sta leggendo la tua chat sul tuo dispositivo…",
-      progressCloud: "L'IA sta leggendo la tua chat…",
+      progressCloud:
+        "L'IA sta leggendo la tua chat… può volerci un minuto o due.",
       error_local:
         "L'IA locale non è riuscita ad avviarsi. Forse il tuo dispositivo non ha memoria sufficiente: prova l'IA nel cloud o un computer.",
       error_cloud:

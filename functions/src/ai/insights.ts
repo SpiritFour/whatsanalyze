@@ -22,11 +22,11 @@ export const AI_LANGUAGES = {
 export type AiLanguage = keyof typeof AI_LANGUAGES;
 
 /**
- * The most transcript the cloud accepts. ~20k tokens: enough for a few hundred
- * messages sampled across the whole chat, and keeps one analysis at a few
- * cents whichever provider runs it.
+ * The most transcript the cloud accepts: ~130k tokens, roughly 10,000
+ * messages, which is all of most chats. Kept under the 272k-token mark where
+ * OpenAI's long-context pricing doubles the input rate.
  */
-export const CLOUD_TRANSCRIPT_CHARS = 60_000;
+export const CLOUD_TRANSCRIPT_CHARS = 400_000;
 
 /**
  * What the browser has already reduced the chat to. Participants are
@@ -51,7 +51,9 @@ const item = z.object({
 export const insightsSchema = z.object({
   summary: z
     .string()
-    .describe("2-3 sentences: what this chat is about and its overall tone"),
+    .describe(
+      "2-3 sentences: what this chat is about and its overall tone. Don't restate message counts or dates.",
+    ),
   vibe: z
     .string()
     .describe("A short, playful label for this chat's vibe, at most 4 words"),
