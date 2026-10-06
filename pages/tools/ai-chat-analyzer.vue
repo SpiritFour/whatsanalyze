@@ -69,6 +69,31 @@
           >
             {{ mode.button }}
           </button>
+          <!-- Right under the button that started it, not off-screen -->
+          <div v-if="running === mode.id" class="ai-progress" role="status">
+            <v-progress-linear
+              :model-value="loading ? progress.progress * 100 : undefined"
+              :indeterminate="!loading"
+              color="#21a68d"
+              rounded
+            />
+            <p>{{ progressText }}</p>
+            <p v-if="etaText" class="ai-progress__eta mono-label">
+              {{ etaText }}
+            </p>
+          </div>
+          <p
+            v-if="errorKey && errorMode === mode.id"
+            class="ai-error"
+            role="alert"
+          >
+            <v-icon size="18">mdi-alert-circle-outline</v-icon>
+            {{ t(`toolsAi.error_${errorKey}`) }}
+          </p>
+          <p v-if="mode.crashed" class="ai-error" role="alert">
+            <v-icon size="18">mdi-alert-circle-outline</v-icon>
+            {{ mode.crashed }}
+          </p>
           <p v-if="mode.id === 'cloud'" class="mode-card__fineprint">
             {{ t("toolsAi.cloudConsent") }}
           </p>
@@ -80,24 +105,9 @@
         <p>{{ t("toolsAi.previewText") }}</p>
         <pre>{{ cloudPreview }}</pre>
       </details>
-
-      <div v-if="running" class="ai-progress" role="status">
-        <v-progress-linear
-          :model-value="loading ? progress.progress * 100 : undefined"
-          :indeterminate="!loading"
-          color="#21a68d"
-          rounded
-        />
-        <p>{{ progressText }}</p>
-        <p v-if="etaText" class="ai-progress__eta mono-label">{{ etaText }}</p>
-      </div>
-      <p v-if="errorKey" class="ai-error" role="alert">
-        <v-icon size="18">mdi-alert-circle-outline</v-icon>
-        {{ t(`toolsAi.error_${errorKey}`) }}
-      </p>
     </LandingSection>
 
-    <!-- A 1.3 GB download on a phone that may be on mobile data: ask first -->
+    <!-- A model download on a phone that may be on mobile data: ask first -->
     <v-dialog v-model="dataWarning" width="460">
       <div class="data-dialog">
         <v-icon size="32" color="#ff8f00">mdi-alert-circle-outline</v-icon>
@@ -259,13 +269,14 @@ import { useSubscriptionStore } from "~/stores/subscription";
 import { buildDigest, restoreNames } from "~/utils/ai/digest";
 // WebLLM itself is only fetched inside analyzeLocally, once someone asks.
 import {
-  LOCAL_DOWNLOAD_MB,
-  LOCAL_TRANSCRIPT_CHARS,
   analyzeLocally,
   isModelDownloaded,
   meteredConnection,
+  pickLocalModel,
   supportsLocalModel,
+  takeCrashedRun,
   type LoadProgress,
+  type LocalModel,
 } from "~/utils/ai/localModel";
 import { analyzeInCloud } from "~/utils/ai/cloudModel";
 import {
@@ -299,13 +310,18 @@ const ranOn = ref<Mode | null>(null);
 const running = ref<Mode | null>(null);
 const progress = ref<LoadProgress>({ progress: 0, elapsed: 0 });
 const errorKey = ref<string | null>(null);
+const errorMode = ref<Mode | null>(null);
+const localModel = ref<LocalModel | null>(null);
+const localCrashed = ref(false);
 const localSupported = ref<boolean | null>(null);
 const modelDownloaded = ref(false);
 const dataWarning = ref(false);
 const meteredReason = ref<"cellular" | "unknown" | null>(null);
 
 const downloadGb = computed(() =>
-  (LOCAL_DOWNLOAD_MB / 1000).toLocaleString(locale.value),
+  ((localModel.value?.downloadMb ?? 0) / 1000).toLocaleString(locale.value, {
+    maximumFractionDigits: 1,
+  }),
 );
 
 const language = computed<AiLanguage>(() =>
@@ -317,8 +333,12 @@ async function onChatLoaded(payload: { analysis: unknown }) {
   insights.value = null;
   errorKey.value = null;
   localSupported.value = await supportsLocalModel();
-  modelDownloaded.value =
-    localSupported.value === true && (await isModelDownloaded());
+  if (localSupported.value) {
+    localModel.value = await pickLocalModel();
+    modelDownloaded.value = isModelDownloaded(localModel.value);
+    localCrashed.value = takeCrashedRun();
+    if (localCrashed.value) analyticsTools.error("ai", "local:crashed");
+  }
   await nextTick();
   document
     .getElementById("ai-choose")
@@ -352,8 +372,8 @@ const progressText = computed(() => {
   if (modelDownloaded.value) return t("toolsAi.progressLoading");
   const mb = (n: number) => Math.round(n).toLocaleString(locale.value);
   return t("toolsAi.progressDownload", {
-    done: mb(progress.value.progress * LOCAL_DOWNLOAD_MB),
-    total: mb(LOCAL_DOWNLOAD_MB),
+    done: mb(progress.value.progress * (localModel.value?.downloadMb ?? 0)),
+    total: mb(localModel.value?.downloadMb ?? 0),
   });
 });
 
@@ -396,13 +416,23 @@ async function run(mode: Mode) {
   running.value = mode;
   progress.value = { progress: 0, elapsed: 0 };
   errorKey.value = null;
+  errorMode.value = null;
+  localCrashed.value = false;
   analyticsTools.aiStarted(mode);
+  // On a phone the button sits near the bottom edge; bring the progress up.
+  nextTick(() =>
+    document
+      .querySelector(".ai-progress")
+      ?.scrollIntoView({ behavior: "smooth", block: "center" }),
+  );
   const startedAt = performance.now();
 
   try {
     const { digest, names } = buildDigest(
       messages.value,
-      mode === "cloud" ? CLOUD_TRANSCRIPT_CHARS : LOCAL_TRANSCRIPT_CHARS,
+      mode === "cloud"
+        ? CLOUD_TRANSCRIPT_CHARS
+        : localModel.value!.transcriptChars,
     );
     let result: ChatInsights;
     if (mode === "cloud") {
@@ -416,9 +446,14 @@ async function run(mode: Mode) {
         language.value,
       );
     } else {
-      result = await analyzeLocally(digest, language.value, (p) => {
-        progress.value = p;
-      });
+      result = await analyzeLocally(
+        localModel.value!,
+        digest,
+        language.value,
+        (p) => {
+          progress.value = p;
+        },
+      );
     }
     if (mode === "local") modelDownloaded.value = true;
     insights.value = restoreNames(result, names);
@@ -437,6 +472,7 @@ async function run(mode: Mode) {
       "no_messages",
     ];
     errorKey.value = known.includes(err?.message) ? err.message : mode;
+    errorMode.value = mode;
     analyticsTools.error("ai", `${mode}:${err?.message ?? "unknown"}`);
   } finally {
     running.value = null;
@@ -466,6 +502,7 @@ const modes = computed(() => [
     button: t("toolsAi.localButton"),
     unavailable:
       localSupported.value === false ? t("toolsAi.localUnsupported") : "",
+    crashed: localCrashed.value ? t("toolsAi.localCrashed") : "",
   },
   {
     id: "cloud" as Mode,
@@ -479,6 +516,7 @@ const modes = computed(() => [
       t("toolsAi.cloudPro3"),
     ],
     cons: [t("toolsAi.cloudCon1"), t("toolsAi.cloudCon2")],
+    crashed: "",
     button: t("toolsAi.cloudButton"),
     unavailable: "",
   },

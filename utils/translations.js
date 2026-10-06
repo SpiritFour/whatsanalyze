@@ -689,6 +689,8 @@ export const messages = {
       dismiss: "Dismiss",
     },
     toolsAi: {
+      localCrashed:
+        "Last time, this device ran out of memory running the on-device AI and the page reloaded. You can try again after closing other apps and tabs, or use the cloud AI, which works on any phone.",
       progressDownload:
         "Downloading the AI model (only once): {done} of {total} MB",
       progressEta: "About {time} left",
@@ -805,13 +807,13 @@ export const messages = {
         "With on-device AI, nothing is uploaded at all. With cloud AI, only anonymized excerpts are sent: your browser replaces names with placeholders and removes phone numbers, emails and links first, and you can see exactly what is sent before you start. We don't store it, and our AI provider doesn't use it for training.",
       faq3Q: "Which AI models do you use?",
       faq3A:
-        "On your device: Qwen 3.5 (2B), an open model that runs in your browser through WebGPU. In the cloud: a current model from Anthropic (Claude) or OpenAI (GPT), whichever gives the best results at the time.",
+        "On your device: a small open model that runs in your browser through WebGPU — Qwen 3.5 (2B) on computers, Llama 3.2 (1B) on phones. In the cloud: a current model from Anthropic (Claude) or OpenAI (GPT), whichever gives the best results at the time.",
       faq4Q: "What does the AI tell me about my chat?",
       faq4A:
         "A summary and the overall vibe, each person's role and writing style, how you interact (who initiates, balance, warmth), your recurring topics and a few memorable moments.",
       faq5Q: "Why doesn't the on-device AI work on my phone?",
       faq5A:
-        "It needs WebGPU and about 2 GB of free graphics memory. Recent iPhones (iOS 26 or later) and most recent Android phones with Chrome can run it; older devices can't. The cloud AI works everywhere.",
+        "It needs WebGPU and roughly 1 GB of free memory for the AI model. Recent iPhones (iOS 26 or later) and most recent Android phones with Chrome can run it; older devices can't, and closing other apps helps. The cloud AI works everywhere.",
       ctaTitle: "Ready to see your chat through the eyes of AI?",
       ctaButton: "Upload your chat",
       ctaNote: "Private by design · You choose where the AI runs",
@@ -1813,6 +1815,8 @@ export const messages = {
       dismiss: "Schließen",
     },
     toolsAi: {
+      localCrashed:
+        "Beim letzten Mal ist diesem Gerät mit der KI auf dem Gerät der Speicher ausgegangen, und die Seite wurde neu geladen. Schließ andere Apps und Tabs und versuch es noch einmal – oder nutze die Cloud-KI, die auf jedem Handy läuft.",
       progressDownload:
         "KI-Modell wird geladen (nur einmal): {done} von {total} MB",
       progressEta: "Noch etwa {time}",
@@ -1931,13 +1935,13 @@ export const messages = {
         "Mit der KI auf deinem Gerät wird gar nichts hochgeladen. Mit der Cloud-KI werden nur anonymisierte Auszüge gesendet: Dein Browser ersetzt vorher Namen durch Platzhalter und entfernt Telefonnummern, E-Mails und Links, und du kannst vor dem Start genau sehen, was gesendet wird. Wir speichern nichts davon, und unser KI-Anbieter nutzt es nicht zum Training.",
       faq3Q: "Welche KI-Modelle nutzt ihr?",
       faq3A:
-        "Auf deinem Gerät: Qwen 3.5 (2B), ein offenes Modell, das per WebGPU in deinem Browser läuft. In der Cloud: ein aktuelles Modell von Anthropic (Claude) oder OpenAI (GPT), je nachdem, welches gerade die besten Ergebnisse liefert.",
+        "Auf deinem Gerät: ein kleines offenes Modell, das per WebGPU in deinem Browser läuft – Qwen 3.5 (2B) auf Computern, Llama 3.2 (1B) auf Handys. In der Cloud: ein aktuelles Modell von Anthropic (Claude) oder OpenAI (GPT), je nachdem, welches gerade die besten Ergebnisse liefert.",
       faq4Q: "Was sagt mir die KI über meinen Chat?",
       faq4A:
         "Eine Zusammenfassung und die Grundstimmung, Rolle und Schreibstil jeder Person, wie ihr miteinander umgeht (wer anfängt, Ausgewogenheit, Nähe), eure wiederkehrenden Themen und ein paar unvergessliche Momente.",
       faq5Q: "Warum läuft die KI auf meinem Handy nicht?",
       faq5A:
-        "Sie braucht WebGPU und etwa 2 GB freien Grafikspeicher. Aktuelle iPhones (ab iOS 26) und die meisten neueren Android-Handys mit Chrome schaffen das, ältere Geräte nicht. Die Cloud-KI funktioniert überall.",
+        "Sie braucht WebGPU und etwa 1 GB freien Speicher für das KI-Modell. Aktuelle iPhones (ab iOS 26) und die meisten neueren Android-Handys mit Chrome schaffen das, ältere Geräte nicht; andere Apps zu schließen hilft. Die Cloud-KI funktioniert überall.",
       ctaTitle: "Bereit, deinen Chat mit den Augen der KI zu sehen?",
       ctaButton: "Chat hochladen",
       ctaNote: "Privat by Design · Du entscheidest, wo die KI läuft",
@@ -2931,6 +2935,8 @@ export const messages = {
       dismiss: "Cerrar",
     },
     toolsAi: {
+      localCrashed:
+        "La última vez, este dispositivo se quedó sin memoria con la IA local y la página se recargó. Puedes volver a intentarlo cerrando otras apps y pestañas, o usar la IA en la nube, que funciona en cualquier móvil.",
       progressDownload:
         "Descargando el modelo de IA (solo una vez): {done} de {total} MB",
       progressEta: "Quedan unos {time}",
@@ -3049,13 +3055,13 @@ export const messages = {
         "Con la IA en tu dispositivo no se sube nada. Con la IA en la nube solo se envían fragmentos anonimizados: tu navegador sustituye antes los nombres por marcadores y elimina teléfonos, correos y enlaces, y puedes ver exactamente qué se envía antes de empezar. No lo guardamos y nuestro proveedor de IA no lo usa para entrenar.",
       faq3Q: "¿Qué modelos de IA usáis?",
       faq3A:
-        "En tu dispositivo: Qwen 3.5 (2B), un modelo abierto que se ejecuta en tu navegador mediante WebGPU. En la nube: un modelo actual de Anthropic (Claude) u OpenAI (GPT), el que dé mejores resultados en cada momento.",
+        "En tu dispositivo: un modelo abierto pequeño que se ejecuta en tu navegador mediante WebGPU: Qwen 3.5 (2B) en ordenadores y Llama 3.2 (1B) en móviles. En la nube: un modelo actual de Anthropic (Claude) u OpenAI (GPT), el que dé mejores resultados en cada momento.",
       faq4Q: "¿Qué me dice la IA sobre mi chat?",
       faq4A:
         "Un resumen y el ambiente general, el papel y el estilo de escritura de cada persona, cómo os relacionáis (quién inicia, equilibrio, cercanía), vuestros temas recurrentes y algunos momentos memorables.",
       faq5Q: "¿Por qué la IA local no funciona en mi móvil?",
       faq5A:
-        "Necesita WebGPU y unos 2 GB de memoria gráfica libre. Los iPhone recientes (iOS 26 o posterior) y la mayoría de móviles Android recientes con Chrome pueden ejecutarla; los dispositivos antiguos no. La IA en la nube funciona en todas partes.",
+        "Necesita WebGPU y alrededor de 1 GB de memoria libre para el modelo de IA. Los iPhone recientes (iOS 26 o posterior) y la mayoría de móviles Android recientes con Chrome pueden ejecutarla; los dispositivos antiguos no, y cerrar otras apps ayuda. La IA en la nube funciona en todas partes.",
       ctaTitle: "¿Listo para ver tu chat con los ojos de la IA?",
       ctaButton: "Sube tu chat",
       ctaNote: "Privado por diseño · Tú eliges dónde se ejecuta la IA",
@@ -3870,6 +3876,8 @@ export const messages = {
       dismiss: "Fechar",
     },
     toolsAi: {
+      localCrashed:
+        "Da última vez, este dispositivo ficou sem memória com a IA local e a página foi recarregada. Pode tentar novamente depois de fechar outras apps e separadores, ou usar a IA na nuvem, que funciona em qualquer telemóvel.",
       progressDownload:
         "A transferir o modelo de IA (só uma vez): {done} de {total} MB",
       progressEta: "Faltam cerca de {time}",
@@ -3989,13 +3997,13 @@ export const messages = {
         "Com a IA no seu dispositivo, nada é enviado. Com a IA na nuvem, só são enviados excertos anonimizados: o seu navegador substitui primeiro os nomes por marcadores e remove números, e-mails e links, e pode ver exatamente o que é enviado antes de começar. Não o guardamos e o nosso fornecedor de IA não o usa para treino.",
       faq3Q: "Que modelos de IA usam?",
       faq3A:
-        "No seu dispositivo: Qwen 3.5 (2B), um modelo aberto que corre no seu navegador através de WebGPU. Na nuvem: um modelo atual da Anthropic (Claude) ou da OpenAI (GPT), o que der melhores resultados no momento.",
+        "No seu dispositivo: um pequeno modelo aberto que corre no seu navegador através de WebGPU — Qwen 3.5 (2B) em computadores, Llama 3.2 (1B) em telemóveis. Na nuvem: um modelo atual da Anthropic (Claude) ou da OpenAI (GPT), o que der melhores resultados no momento.",
       faq4Q: "O que me diz a IA sobre a minha conversa?",
       faq4A:
         "Um resumo e o ambiente geral, o papel e o estilo de escrita de cada pessoa, como interagem (quem inicia, equilíbrio, proximidade), os vossos temas recorrentes e alguns momentos memoráveis.",
       faq5Q: "Porque é que a IA local não funciona no meu telemóvel?",
       faq5A:
-        "Precisa de WebGPU e de cerca de 2 GB de memória gráfica livre. iPhones recentes (iOS 26 ou posterior) e a maioria dos telemóveis Android recentes com Chrome conseguem; dispositivos mais antigos não. A IA na nuvem funciona em todo o lado.",
+        "Precisa de WebGPU e de cerca de 1 GB de memória livre para o modelo de IA. iPhones recentes (iOS 26 ou posterior) e a maioria dos telemóveis Android recentes com Chrome conseguem; dispositivos mais antigos não, e fechar outras apps ajuda. A IA na nuvem funciona em todo o lado.",
       ctaTitle: "Pronto para ver a sua conversa pelos olhos da IA?",
       ctaButton: "Carregar a conversa",
       ctaNote: "Privado por conceção · Escolhe onde a IA corre",
@@ -4994,6 +5002,8 @@ export const messages = {
       dismiss: "Fermer",
     },
     toolsAi: {
+      localCrashed:
+        "La dernière fois, cet appareil a manqué de mémoire avec l'IA locale et la page s'est rechargée. Vous pouvez réessayer après avoir fermé d'autres applications et onglets, ou utiliser l'IA dans le cloud, qui fonctionne sur tous les téléphones.",
       progressDownload:
         "Téléchargement du modèle d'IA (une seule fois) : {done} sur {total} Mo",
       progressEta: "Encore environ {time}",
@@ -5114,14 +5124,14 @@ export const messages = {
         "Avec l'IA sur votre appareil, rien n'est envoyé. Avec l'IA dans le cloud, seuls des extraits anonymisés le sont : votre navigateur remplace d'abord les noms par des repères et supprime numéros, e-mails et liens, et vous pouvez voir exactement ce qui est envoyé avant de commencer. Nous ne le conservons pas et notre fournisseur d'IA ne s'en sert pas pour l'entraînement.",
       faq3Q: "Quels modèles d'IA utilisez-vous ?",
       faq3A:
-        "Sur votre appareil : Qwen 3.5 (2B), un modèle ouvert qui tourne dans votre navigateur via WebGPU. Dans le cloud : un modèle récent d'Anthropic (Claude) ou d'OpenAI (GPT), celui qui donne les meilleurs résultats du moment.",
+        "Sur votre appareil : un petit modèle ouvert qui tourne dans votre navigateur via WebGPU — Qwen 3.5 (2B) sur ordinateur, Llama 3.2 (1B) sur téléphone. Dans le cloud : un modèle récent d'Anthropic (Claude) ou d'OpenAI (GPT), celui qui donne les meilleurs résultats du moment.",
       faq4Q: "Que me dit l'IA sur ma conversation ?",
       faq4A:
         "Un résumé et l'ambiance générale, le rôle et le style d'écriture de chacun, votre façon d'échanger (qui relance, équilibre, chaleur), vos sujets récurrents et quelques moments mémorables.",
       faq5Q:
         "Pourquoi l'IA locale ne fonctionne-t-elle pas sur mon téléphone ?",
       faq5A:
-        "Elle a besoin de WebGPU et d'environ 2 Go de mémoire graphique libre. Les iPhone récents (iOS 26 ou plus) et la plupart des téléphones Android récents avec Chrome en sont capables, les appareils plus anciens non. L'IA dans le cloud fonctionne partout.",
+        "Elle a besoin de WebGPU et d'environ 1 Go de mémoire libre pour le modèle d'IA. Les iPhone récents (iOS 26 ou plus) et la plupart des téléphones Android récents avec Chrome en sont capables, les appareils plus anciens non ; fermer d'autres applications aide. L'IA dans le cloud fonctionne partout.",
       ctaTitle: "Prêt à voir votre conversation avec les yeux de l'IA ?",
       ctaButton: "Importer votre conversation",
       ctaNote: "Confidentiel par conception · Vous choisissez où tourne l'IA",
@@ -6114,6 +6124,8 @@ export const messages = {
       dismiss: "Chiudi",
     },
     toolsAi: {
+      localCrashed:
+        "L'ultima volta questo dispositivo ha esaurito la memoria con l'IA locale e la pagina si è ricaricata. Puoi riprovare dopo aver chiuso altre app e schede, oppure usare l'IA nel cloud, che funziona su qualsiasi smartphone.",
       progressDownload:
         "Download del modello di IA (una sola volta): {done} di {total} MB",
       progressEta: "Ancora circa {time}",
@@ -6231,13 +6243,13 @@ export const messages = {
         "Con l'IA sul dispositivo non viene caricato nulla. Con l'IA nel cloud vengono inviati solo estratti anonimizzati: il browser sostituisce prima i nomi con dei segnaposto e rimuove numeri, e-mail e link, e puoi vedere esattamente cosa viene inviato prima di iniziare. Non lo conserviamo e il nostro fornitore di IA non lo usa per l'addestramento.",
       faq3Q: "Quali modelli di IA usate?",
       faq3A:
-        "Sul dispositivo: Qwen 3.5 (2B), un modello aperto che gira nel browser tramite WebGPU. Nel cloud: un modello recente di Anthropic (Claude) o OpenAI (GPT), quello che dà i risultati migliori in quel momento.",
+        "Sul dispositivo: un piccolo modello aperto che gira nel browser tramite WebGPU — Qwen 3.5 (2B) sui computer, Llama 3.2 (1B) sugli smartphone. Nel cloud: un modello recente di Anthropic (Claude) o OpenAI (GPT), quello che dà i risultati migliori in quel momento.",
       faq4Q: "Cosa mi dice l'IA sulla mia chat?",
       faq4A:
         "Un riassunto e l'atmosfera generale, il ruolo e lo stile di scrittura di ciascuno, come interagite (chi inizia, equilibrio, calore), gli argomenti ricorrenti e alcuni momenti memorabili.",
       faq5Q: "Perché l'IA locale non funziona sul mio telefono?",
       faq5A:
-        "Richiede WebGPU e circa 2 GB di memoria grafica libera. Gli iPhone recenti (iOS 26 o successivo) e la maggior parte degli Android recenti con Chrome ce la fanno, i dispositivi più vecchi no. L'IA nel cloud funziona ovunque.",
+        "Richiede WebGPU e circa 1 GB di memoria libera per il modello di IA. Gli iPhone recenti (iOS 26 o successivo) e la maggior parte degli Android recenti con Chrome ce la fanno, i dispositivi più vecchi no; chiudere altre app aiuta. L'IA nel cloud funziona ovunque.",
       ctaTitle: "Pronto a vedere la tua chat con gli occhi dell'IA?",
       ctaButton: "Carica la tua chat",
       ctaNote: "Privata per progettazione · Scegli tu dove gira l'IA",
