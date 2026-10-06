@@ -8,12 +8,12 @@
     "redirects": [
       {
         "source": "/whatsapp-wrapped-year-review",
-        "destination": "/wrapped",
+        "destination": "/wrapped/",
         "type": 301
       },
       {
         "source": "/:locale/whatsapp-wrapped-year-review",
-        "destination": "/:locale/wrapped",
+        "destination": "/:locale/wrapped/",
         "type": 301
       }
     ]

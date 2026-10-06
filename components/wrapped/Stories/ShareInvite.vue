@@ -169,6 +169,7 @@ const handleShare = async () => {
 
 const handleAnalyzeAnother = async () => {
   statsStore.$reset();
-  await navigateTo("/");
+  // Back to the Wrapped upload, not the analyzer's home page.
+  await navigateTo(localePath("/wrapped"));
 };
 </script>

@@ -74,7 +74,9 @@ export const retiredRedirects = Object.fromEntries(
     const prefix = locale === defaultLocale ? "" : `/${locale}`;
     return Object.entries(retiredPages).map(([from, to]) => [
       `${prefix}/${from}`,
-      `${prefix}/${to}`,
+      // The slash form, which is what both hosts serve: without it every
+      // redirect costs a second hop.
+      `${prefix}/${to}/`,
     ]);
   }),
 );

@@ -20,3 +20,5 @@ export { createCustomerPortal } from "./stripe/createCustomerPortal";
 export { verifySubscription } from "./stripe/verifySubscription";
 
 export { verifyPaypalSubscription } from "./paypal/verifyPaypalSubscription";
+
+export { sendWrappedReminders } from "./wrappedReminders";

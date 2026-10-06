@@ -5,7 +5,7 @@ self.addEventListener("fetch", (event) => {
   if (url.origin !== location.origin) return;
 
   if (
-    url.pathname === "/pwa-results" &&
+    url.pathname === "/pwa-results/" &&
     url.searchParams.has("share-target") &&
     event.request.method === "POST"
   ) {
@@ -18,7 +18,7 @@ function serveShareTarget(event, wait = true) {
   const dataPromise = event.request.formData();
 
   // Redirect so the user can refresh the page without resending data.
-  event.respondWith(Response.redirect("/pwa-results?receiving-file-share=1"));
+  event.respondWith(Response.redirect("/pwa-results/?receiving-file-share=1"));
 
   event.waitUntil(
     (async function () {

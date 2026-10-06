@@ -297,9 +297,17 @@
     "processingYourData": "Processing your data...",
     "selectChatFile": "Select your WhatsApp chat file",
     "paywall": {
-      "title": "Unlock unlimited chat analyses",
-      "description": "You've already analyzed one chat for free. Subscribe to continue generating new WhatsApp Wrapped stories instantly.",
-      "secondary": "Maybe later"
+      "title": "Your free analysis for today is used up",
+      "description": "You get one free Wrapped analysis per day. Come back tomorrow for the next one, or subscribe to analyze as many chats as you like right now.",
+      "secondary": "Maybe later",
+      "reminder": {
+        "title": "Email me when my free analysis is back",
+        "placeholder": "you{'@'}example.com",
+        "cta": "Remind me",
+        "success": "Done! We'll email you tomorrow morning, when your next free analysis is ready.",
+        "error": "That didn't work. Please check the address and try again.",
+        "note": "One email, then we delete your address."
+      }
     }
   },
   "exportGuide": {

@@ -401,6 +401,10 @@ export const analyticsWrapped = {
     trackEvent("paywall_viewed", { source });
   },
 
+  reminderRequested() {
+    trackEvent("free_reminder_requested");
+  },
+
   storyShared(method: "native" | "copy") {
     trackEvent("story_shared", { method });
   },

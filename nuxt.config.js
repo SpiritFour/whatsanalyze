@@ -284,7 +284,7 @@ export default defineNuxtConfig({
         },
       ],
       share_target: {
-        action: "/pwa-results?share-target=1",
+        action: "/pwa-results/?share-target=1",
         method: "POST",
         enctype: "multipart/form-data",
         params: {
@@ -304,9 +304,18 @@ export default defineNuxtConfig({
       importScripts: ["custom-sw.js"],
       // @vite-pwa/nuxt overrides workbox's default globPatterns (["**/*.{js,wasm,css,html}"])
       // with its own narrow list when payloadExtraction/appManifest kick in, which left
-      // index.html and all _nuxt assets out of the precache manifest and made the
-      // NavigationRoute fallback "/" throw "non-precached-url". Restore the default set.
+      // the pages and all _nuxt assets out of the precache. Restore the default set.
       globPatterns: ["**/*.{js,wasm,css,html}"],
+      // Every URL on the site ends in a slash (see i18n.trailingSlash), and
+      // every page is prerendered to page/index.html. Workbox resolves page/
+      // to page/index.html on its own (directoryIndex), so precache the files
+      // under their real names: the module's default transform renames them
+      // to the slash-less "page", which no request ever matches.
+      manifestTransforms: [],
+      // And with every page precached there is nothing left for an SPA
+      // fallback to do. The default "/" answered each navigation that missed
+      // the precache with the home page, and the router followed it there.
+      navigateFallback: null,
     },
     devOptions: {
       enabled: false,
