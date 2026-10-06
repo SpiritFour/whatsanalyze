@@ -1,0 +1,87 @@
+# Cloud Functions and Firestore rules, deployed after the frontend they belong
+# to: the reverse order has a new backend serving an old frontend, which is how
+# GA4 purchases got double-counted once. PR previews share the dev project, so
+# they are not deployed from here — deploy those by hand when testing a
+# backend change on a preview.
+
+name: Deploy functions
+
+on:
+  workflow_call:
+    inputs:
+      project:
+        description: Firebase project alias from .firebaserc
+        required: true
+        type: string
+      before:
+        description: Commit the push started from. Empty deploys unconditionally.
+        required: false
+        type: string
+        default: ""
+      wait_for_build_url:
+        description: URL of the frontend's builds/latest.json to wait on
+        required: false
+        type: string
+        default: ""
+      build_id:
+        description: Build id the URL above has to report before deploying
+        required: false
+        type: string
+        default: ""
+    secrets:
+      credentials:
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Anything to deploy?
+        id: changes
+        run: |
+          before="${{ inputs.before }}"
+          if [ -z "$before" ] || ! git cat-file -e "$before^{commit}" 2>/dev/null \
+            || ! git diff --quiet "$before" HEAD -- functions firestore.rules; then
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "No changes under functions/ or firestore.rules."
+          fi
+
+      - name: Wait for the frontend to go live
+        if: steps.changes.outputs.deploy && inputs.wait_for_build_url != ''
+        run: |
+          for _ in $(seq 60); do
+            live=$(curl -sf "${{ inputs.wait_for_build_url }}" | jq -r .id || true)
+            [ "$live" = "${{ inputs.build_id }}" ] && exit 0
+            sleep 10
+          done
+          echo "Frontend build ${{ inputs.build_id }} never went live." >&2
+          exit 1
+
+      - uses: actions/setup-node@v4
+        if: steps.changes.outputs.deploy
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: functions/package-lock.json
+
+      - uses: google-github-actions/auth@v2
+        if: steps.changes.outputs.deploy
+        with:
+          credentials_json: ${{ secrets.credentials }}
+
+      - name: Deploy
+        if: steps.changes.outputs.deploy
+        run: |
+          npm --prefix functions ci
+          npm --prefix functions run build
+          # --force: answers the prompts a terminal would get (the container
+          # image cleanup policy, deleting a function removed from the source).
+          npx -y firebase-tools@latest deploy \
+            --only functions,firestore:rules \
+            --project "${{ inputs.project }}" \
+            --non-interactive --force

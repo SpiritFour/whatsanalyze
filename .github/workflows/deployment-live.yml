@@ -8,6 +8,8 @@ on:
 jobs:
   deploy-live:
     runs-on: ubuntu-latest
+    outputs:
+      build_id: ${{ steps.build.outputs.build_id }}
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v4
@@ -17,9 +19,11 @@ jobs:
           node-version: 22
           cache: pnpm
       - name: Install and Build 🔧
+        id: build
         run: |
           pnpm install --frozen-lockfile
           pnpm generate
+          echo "build_id=$(jq -r .id dist/_nuxt/builds/latest.json)" >> "$GITHUB_OUTPUT"
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
       - name: Deploy 🚀
@@ -36,3 +40,16 @@ jobs:
         with:
           environment: live
           sourcemaps: "./dist"
+
+  # GitHub Pages publishes a minute or so after the push to gh-pages, so this
+  # waits until the site reports the build above before touching the backend.
+  deploy-functions:
+    needs: deploy-live
+    uses: ./.github/workflows/deploy-functions.yml
+    with:
+      project: default
+      before: ${{ github.event.before }}
+      wait_for_build_url: https://whatsanalyze.com/_nuxt/builds/latest.json
+      build_id: ${{ needs.deploy-live.outputs.build_id }}
+    secrets:
+      credentials: ${{ secrets.FUNCTIONS_DEPLOYER_WHATSANALYZE_80665 }}
