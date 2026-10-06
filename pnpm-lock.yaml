@@ -14,6 +14,9 @@ dependencies:
   '@mdi/js':
     specifier: ^7.4.47
     version: 7.4.47
+  '@mlc-ai/web-llm':
+    specifier: 0.2.85
+    version: 0.2.85
   '@nuxt/content':
     specifier: 3.16.1
     version: 3.16.1(@electric-sql/pglite@0.3.16)(better-sqlite3@12.11.1)(esbuild@0.25.12)(oxc-parser@0.141.0)(rolldown@1.2.9)(rollup@4.63.4)(vite@8.3.0)
@@ -3576,6 +3579,12 @@ packages:
       '@rollup/pluginutils': 5.4.0(rollup@4.63.4)
       json5: 2.2.3
       rollup: 4.63.4
+    dev: false
+
+  /@mlc-ai/web-llm@0.2.85:
+    resolution: {integrity: sha512-CwUiSAvDCYnmAZlpPMkurPHDfBLq6fvdRB3vRgoA894hRG/V/BSeY9bmMm6iIIU5VpjJxfb/dLPpJX2at0L9rw==}
+    dependencies:
+      loglevel: 1.9.2
     dev: false
 
   /@modelcontextprotocol/sdk@1.30.0(zod@4.6.5):
@@ -13359,6 +13368,11 @@ packages:
       safe-stable-stringify: 2.5.0
       triple-beam: 1.4.1
     dev: true
+
+  /loglevel@1.9.2:
+    resolution: {integrity: sha512-HgMmCqIJSAKqo68l0rS2AanEWfkxaZ5wNiEFb5ggm08lDs9Xl2KxBlX3PTcaD2chBM1gXAYf491/M2Rv8Jwayg==}
+    engines: {node: '>= 0.6.0'}
+    dev: false
 
   /long@5.3.2:
     resolution: {integrity: sha512-mNAgZ1GmyNhD7AuqnTG3/VQ26o760+ZYBPKjPvugO8+nLbYfX6TVpJPseBvopbdY+qpZ/lKUnmEc1LeZYS3QAA==}

@@ -119,7 +119,7 @@ import { analyzeMessages } from "~/utils/messageCounter";
 import { analyzeWords } from "~/utils/wordCounter";
 import { analyzeHeatmap } from "~/utils/chatHeatmap";
 interface Props {
-  toolType?: "inactivity" | "messages" | "words" | "heatmap";
+  toolType?: "inactivity" | "messages" | "words" | "heatmap" | "ai";
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -186,7 +186,10 @@ async function processInput(
     }
 
     let analysis: unknown = null;
-    if (props.toolType === "messages") {
+    if (props.toolType === "ai") {
+      // The AI page analyzes on demand, once the visitor has picked where.
+      analysis = { messages };
+    } else if (props.toolType === "messages") {
       analysis = analyzeMessages(messages, durationMs);
     } else if (props.toolType === "words") {
       analysis = analyzeWords(messages, durationMs);

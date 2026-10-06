@@ -17,7 +17,7 @@ import * as logger from "firebase-functions/logger";
  */
 
 const paypalClientId = defineString("PAYPAL_CLIENT_ID");
-const paypalSecret = defineSecret("PAYPAL_SECRET");
+export const paypalSecret = defineSecret("PAYPAL_SECRET");
 /** Sandbox on the dev project, live on production. */
 const paypalApiBase = defineString("PAYPAL_API_BASE", {
   default: "https://api-m.paypal.com",
@@ -50,6 +50,89 @@ async function getAccessToken(): Promise<string> {
   return accessToken;
 }
 
+export interface PaypalLookup {
+  isValid: boolean;
+  message?: string;
+  subscriptionId?: string;
+  email?: string;
+  customerName?: string;
+  expiresAt?: string;
+}
+
+/**
+ * Ask PayPal whether a subscription is still being paid for. Throws when
+ * PayPal cannot be reached; an unknown or lapsed id is an answer, not an error.
+ * Used by the login below and by every paid feature that has to check a
+ * legacy subscriber.
+ */
+export async function lookupPaypalSubscription(
+  subscriptionId: string,
+): Promise<PaypalLookup> {
+  if (!paypalClientId.value()) {
+    logger.warn("PayPal is not configured, cannot verify", { subscriptionId });
+    return { isValid: false, message: "Subscription not found" };
+  }
+
+  const response = await fetch(
+    `${paypalApiBase.value()}/v1/billing/subscriptions/${encodeURIComponent(
+      subscriptionId,
+    )}`,
+    {
+      headers: {
+        Authorization: `Bearer ${await getAccessToken()}`,
+        Accept: "application/json",
+      },
+    },
+  );
+
+  // A subscription id nobody recognises is a failed login, not an outage.
+  // PayPal says 404 for a well-formed id it cannot find and 400
+  // (INVALID_RESOURCE_ID) for one that is not shaped like an id at all —
+  // a typo in the form produces the second, and answering it with a 500
+  // tells the customer the site is broken rather than that the id is.
+  if (response.status === 404 || response.status === 400) {
+    return { isValid: false, message: "Subscription not found" };
+  }
+
+  if (!response.ok) {
+    throw new Error(`PayPal subscription lookup failed (${response.status})`);
+  }
+
+  const subscription = (await response.json()) as {
+    id?: string;
+    status?: string;
+    subscriber?: {
+      email_address?: string;
+      name?: { given_name?: string; surname?: string };
+    };
+    billing_info?: { next_billing_time?: string };
+  };
+
+  if (subscription.status !== "ACTIVE") {
+    return {
+      isValid: false,
+      message:
+        subscription.status === "EXPIRED"
+          ? "Subscription has expired"
+          : "Subscription not found",
+    };
+  }
+
+  const name = subscription.subscriber?.name;
+  const customerName =
+    [name?.given_name, name?.surname].filter(Boolean).join(" ") || undefined;
+
+  return {
+    isValid: true,
+    subscriptionId: subscription.id ?? subscriptionId,
+    email: subscription.subscriber?.email_address,
+    customerName,
+    // PayPal reports when it will next charge. The caller decides what to
+    // do when it is missing.
+    expiresAt: subscription.billing_info?.next_billing_time,
+  };
+}
+
 export const verifyPaypalSubscription = onCall(
   { cors: true, secrets: [paypalSecret] },
   async (request) => {
@@ -59,77 +142,12 @@ export const verifyPaypalSubscription = onCall(
       throw new HttpsError("invalid-argument", "subscriptionId is required");
     }
 
-    if (!paypalClientId.value()) {
-      logger.warn("PayPal is not configured, cannot verify", {
-        subscriptionId,
-      });
-      return { isValid: false, message: "Subscription not found" };
-    }
-
     try {
-      const response = await fetch(
-        `${paypalApiBase.value()}/v1/billing/subscriptions/${encodeURIComponent(
-          subscriptionId,
-        )}`,
-        {
-          headers: {
-            Authorization: `Bearer ${await getAccessToken()}`,
-            Accept: "application/json",
-          },
-        },
-      );
-
-      // A subscription id nobody recognises is a failed login, not an outage.
-      // PayPal says 404 for a well-formed id it cannot find and 400
-      // (INVALID_RESOURCE_ID) for one that is not shaped like an id at all —
-      // a typo in the form produces the second, and answering it with a 500
-      // tells the customer the site is broken rather than that the id is.
-      if (response.status === 404 || response.status === 400) {
-        return { isValid: false, message: "Subscription not found" };
+      const result = await lookupPaypalSubscription(subscriptionId);
+      if (result.isValid) {
+        logger.info("✅ PayPal subscription verified", { subscriptionId });
       }
-
-      if (!response.ok) {
-        throw new Error(
-          `PayPal subscription lookup failed (${response.status})`,
-        );
-      }
-
-      const subscription = (await response.json()) as {
-        id?: string;
-        status?: string;
-        subscriber?: {
-          email_address?: string;
-          name?: { given_name?: string; surname?: string };
-        };
-        billing_info?: { next_billing_time?: string };
-      };
-
-      if (subscription.status !== "ACTIVE") {
-        return {
-          isValid: false,
-          message:
-            subscription.status === "EXPIRED"
-              ? "Subscription has expired"
-              : "Subscription not found",
-        };
-      }
-
-      const name = subscription.subscriber?.name;
-      const customerName =
-        [name?.given_name, name?.surname].filter(Boolean).join(" ") ||
-        undefined;
-
-      logger.info("✅ PayPal subscription verified", { subscriptionId });
-
-      return {
-        isValid: true,
-        subscriptionId: subscription.id ?? subscriptionId,
-        email: subscription.subscriber?.email_address,
-        customerName,
-        // PayPal reports when it will next charge. The caller decides what to
-        // do when it is missing.
-        expiresAt: subscription.billing_info?.next_billing_time,
-      };
+      return result;
     } catch (error: any) {
       logger.error("Error verifying PayPal subscription", {
         error: error.message,
