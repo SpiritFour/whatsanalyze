@@ -117,7 +117,7 @@ export default {
     parseMessage(message) {
       const validUrl = new RegExp(
         "(https?:\\/\\/)?" + // protocol
-          "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
+          "((?:[a-z\\d]+(?:-[a-z\\d]+)*\\.)+[a-z]{2,}|" + // domain name
           "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
           "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
           "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
@@ -140,7 +140,9 @@ export default {
       let htmlMessage = "";
       words.forEach((word) => {
         const safeWord = this.escapeHtml(word);
-        if (validUrl.test(word)) {
+        // No real URL is this long; skip the regex so a pathological word
+        // (e.g. a long hash with no spaces) can't stall it on backtracking.
+        if (word.length <= 2048 && validUrl.test(word)) {
           // Always an absolute http(s) link: a bare "example.com" used to
           // become a link to a page on whatsanalyze.com, and anything else a
           // message can carry ("javascript:...") must never end up in an href.
