@@ -27,6 +27,8 @@ export const messages = {
       emailLabel: "Linked Email",
       validUntilLabel: "Valid Until",
       openAnalyzer: "Open Chat Analyzer",
+      continueBack: "Continue where you left off",
+      returning: "You're all set — taking you back…",
       openWrapped: "Open WhatsApp Wrapped",
       managePortal: "Manage Subscription",
       openingPortal: "Opening...",
@@ -770,8 +772,7 @@ export const messages = {
       previewText:
         "This is everything that is sent. Real names are swapped back in on your device once the answer arrives.",
       progressLocal: "The AI is reading your chat on your device…",
-      progressCloud:
-        "The AI is reading your chat… this can take a minute or two.",
+      progressCloud: "The AI is reading your chat… this takes a few minutes.",
       error_local:
         "The on-device AI couldn't run. Your device may not have enough memory — try the cloud AI or a computer.",
       error_cloud:
@@ -1190,6 +1191,8 @@ export const messages = {
       emailLabel: "Verknüpfte E-Mail",
       validUntilLabel: "Gültig bis",
       openAnalyzer: "Chat-Analyse öffnen",
+      continueBack: "Weiter, wo du warst",
+      returning: "Alles bereit – du wirst zurückgebracht …",
       openWrapped: "WhatsApp Wrapped öffnen",
       managePortal: "Abo verwalten",
       openingPortal: "Wird geöffnet …",
@@ -1919,8 +1922,7 @@ export const messages = {
       previewText:
         "Das ist alles, was gesendet wird. Die echten Namen werden erst auf deinem Gerät wieder eingesetzt, wenn die Antwort da ist.",
       progressLocal: "Die KI liest deinen Chat auf deinem Gerät …",
-      progressCloud:
-        "Die KI liest deinen Chat … das kann ein, zwei Minuten dauern.",
+      progressCloud: "Die KI liest deinen Chat … das dauert ein paar Minuten.",
       error_local:
         "Die KI auf dem Gerät konnte nicht starten. Vielleicht hat dein Gerät nicht genug Speicher – probier die Cloud-KI oder einen Computer.",
       error_cloud:
@@ -2348,6 +2350,8 @@ export const messages = {
       emailLabel: "Correo vinculado",
       validUntilLabel: "Válida hasta",
       openAnalyzer: "Abrir el analizador de chats",
+      continueBack: "Volver a donde estabas",
+      returning: "Todo listo: te llevamos de vuelta…",
       openWrapped: "Abrir WhatsApp Wrapped",
       managePortal: "Gestionar suscripción",
       openingPortal: "Abriendo…",
@@ -3062,8 +3066,7 @@ export const messages = {
       previewText:
         "Esto es todo lo que se envía. Los nombres reales se vuelven a poner en tu dispositivo cuando llega la respuesta.",
       progressLocal: "La IA está leyendo tu chat en tu dispositivo…",
-      progressCloud:
-        "La IA está leyendo tu chat… puede tardar un par de minutos.",
+      progressCloud: "La IA está leyendo tu chat… tarda unos minutos.",
       error_local:
         "La IA local no ha podido ejecutarse. Puede que tu dispositivo no tenga memoria suficiente: prueba la IA en la nube o un ordenador.",
       error_cloud:
@@ -3490,6 +3493,8 @@ export const messages = {
       emailLabel: "E-mail vinculado",
       validUntilLabel: "Válida até",
       openAnalyzer: "Abrir o analisador de conversas",
+      continueBack: "Voltar onde estava",
+      returning: "Tudo pronto — a levá-lo de volta…",
       openWrapped: "Abrir o WhatsApp Wrapped",
       managePortal: "Gerenciar assinatura",
       openingPortal: "Abrindo…",
@@ -4027,8 +4032,7 @@ export const messages = {
       previewText:
         "Isto é tudo o que é enviado. Os nomes reais são repostos no seu dispositivo quando chega a resposta.",
       progressLocal: "A IA está a ler a sua conversa no seu dispositivo…",
-      progressCloud:
-        "A IA está a ler a sua conversa… pode demorar um ou dois minutos.",
+      progressCloud: "A IA está a ler a sua conversa… demora alguns minutos.",
       error_local:
         "A IA local não conseguiu arrancar. O seu dispositivo pode não ter memória suficiente: experimente a IA na nuvem ou um computador.",
       error_cloud:
@@ -4634,6 +4638,8 @@ export const messages = {
       emailLabel: "E-mail associé",
       validUntilLabel: "Valable jusqu'au",
       openAnalyzer: "Ouvrir l'analyseur de conversations",
+      continueBack: "Reprendre là où vous étiez",
+      returning: "C'est prêt — retour à votre page…",
       openWrapped: "Ouvrir WhatsApp Wrapped",
       managePortal: "Gérer l'abonnement",
       openingPortal: "Ouverture…",
@@ -5177,7 +5183,7 @@ export const messages = {
         "Voici tout ce qui est envoyé. Les vrais noms sont remis en place sur votre appareil à l'arrivée de la réponse.",
       progressLocal: "L'IA lit votre conversation sur votre appareil…",
       progressCloud:
-        "L'IA lit votre conversation… cela peut prendre une ou deux minutes.",
+        "L'IA lit votre conversation… cela prend quelques minutes.",
       error_local:
         "L'IA locale n'a pas pu démarrer. Votre appareil manque peut-être de mémoire : essayez l'IA dans le cloud ou un ordinateur.",
       error_cloud:
@@ -5787,6 +5793,8 @@ export const messages = {
       emailLabel: "Email collegata",
       validUntilLabel: "Valido fino al",
       openAnalyzer: "Apri l'analizzatore di chat",
+      continueBack: "Torna dove eri",
+      returning: "Tutto pronto: ti riportiamo indietro…",
       openWrapped: "Apri WhatsApp Wrapped",
       managePortal: "Gestisci abbonamento",
       openingPortal: "Apertura…",
@@ -6319,8 +6327,7 @@ export const messages = {
       previewText:
         "Questo è tutto ciò che viene inviato. I nomi reali vengono rimessi sul tuo dispositivo quando arriva la risposta.",
       progressLocal: "L'IA sta leggendo la tua chat sul tuo dispositivo…",
-      progressCloud:
-        "L'IA sta leggendo la tua chat… può volerci un minuto o due.",
+      progressCloud: "L'IA sta leggendo la tua chat… ci vuole qualche minuto.",
       error_local:
         "L'IA locale non è riuscita ad avviarsi. Forse il tuo dispositivo non ha memoria sufficiente: prova l'IA nel cloud o un computer.",
       error_cloud:

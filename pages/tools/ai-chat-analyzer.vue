@@ -124,7 +124,7 @@
               rounded
             />
             <p>{{ progressText }}</p>
-            <p v-if="running === 'local'" class="ai-progress__eta">
+            <p class="ai-progress__eta">
               {{ t("toolsAi.progressKeepOpen") }}
             </p>
             <p v-if="etaText" class="ai-progress__eta mono-label">

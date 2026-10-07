@@ -108,8 +108,14 @@ import { analyticsTools } from "~/composables/useAnalytics";
 
 const { t } = useI18n();
 import {
+  clearChatSession,
+  loadChatSession,
+  saveChatSession,
+} from "~/utils/chatSession";
+import {
   parseChatFile,
   useSharedChat,
+  type ParsedChat,
   type ChatMessage,
   type ChatAttachment,
 } from "~/composables/useChatTool";
@@ -176,53 +182,12 @@ async function processInput(
   errorMessage.value = null;
 
   try {
-    const { messages, attachments, durationMs } =
-      await parseChatFile(fileOrText);
-
-    if (!messages || messages.length === 0) {
-      throw new Error(
-        "No messages found. Please ensure this is a valid WhatsApp chat export (.txt or .zip).",
-      );
-    }
-
-    let analysis: unknown = null;
-    if (props.toolType === "ai") {
-      // The AI page analyzes on demand, once the visitor has picked where.
-      analysis = { messages };
-    } else if (props.toolType === "messages") {
-      analysis = analyzeMessages(messages, durationMs);
-    } else if (props.toolType === "words") {
-      analysis = analyzeWords(messages, durationMs);
-    } else if (props.toolType === "heatmap") {
-      analysis = analyzeHeatmap(messages, durationMs);
-    } else {
-      analysis = analyzeInactivity(messages, durationMs);
-    }
-
-    if (!analysis) {
-      throw new Error(
-        "Could not compute metrics: Chat contains no participant messages.",
-      );
-    }
-    hasLoadedFile.value = true;
-    loadedFileName.value = fileName;
-    // What the report below counts, not the raw line count: WhatsApp's own
-    // notices are in `messages` but are nobody's message.
-    parsedMessageCount.value = participantMessages(messages).length;
-    parseDurationMs.value = durationMs;
-
-    // Cache in shared state for seamless transition to full analysis
-    sharedChat.value = {
-      messages,
-      attachments,
-      sourceName: fileName,
-    };
-
-    emit("analyzed", {
-      analysis,
-      messages,
-      attachments,
-    });
+    const parsed = await parseChatFile(fileOrText);
+    showChat(parsed, fileName);
+    // Kept for the tab, like the home page does: a full page load (the
+    // round trip through Stripe Checkout, a reload) used to lose the chat on
+    // every /tools page while the analyzer still had it.
+    saveChatSession(parsed);
     analyticsTools.analyzed(
       props.toolType,
       parsedMessageCount.value,
@@ -241,11 +206,85 @@ async function processInput(
   }
 }
 
+/** Analyze a parsed chat for this tool and hand it to the page. */
+function showChat(
+  { messages, attachments, durationMs }: ParsedChat,
+  fileName: string,
+) {
+  if (!messages || messages.length === 0) {
+    throw new Error(
+      "No messages found. Please ensure this is a valid WhatsApp chat export (.txt or .zip).",
+    );
+  }
+
+  let analysis: unknown;
+  if (props.toolType === "ai") {
+    // The AI page analyzes on demand, once the visitor has picked where.
+    analysis = { messages };
+  } else if (props.toolType === "messages") {
+    analysis = analyzeMessages(messages, durationMs);
+  } else if (props.toolType === "words") {
+    analysis = analyzeWords(messages, durationMs);
+  } else if (props.toolType === "heatmap") {
+    analysis = analyzeHeatmap(messages, durationMs);
+  } else {
+    analysis = analyzeInactivity(messages, durationMs);
+  }
+
+  if (!analysis) {
+    throw new Error(
+      "Could not compute metrics: Chat contains no participant messages.",
+    );
+  }
+  hasLoadedFile.value = true;
+  loadedFileName.value = fileName;
+  // What the report below counts, not the raw line count: WhatsApp's own
+  // notices are in `messages` but are nobody's message.
+  parsedMessageCount.value = participantMessages(messages).length;
+  parseDurationMs.value = durationMs;
+
+  // Cache in shared state for seamless transition to full analysis
+  sharedChat.value = {
+    messages,
+    attachments,
+    sourceName: fileName,
+  };
+
+  emit("analyzed", {
+    analysis,
+    messages,
+    attachments,
+  });
+}
+
 // The page is prerendered, so this input accepts a file before Vue hydrates
 // it and that change event reaches no handler. Pick up whatever is already
 // selected once there is one.
 onMounted(() => {
-  if (fileInput.value?.files?.length) void handleFile(fileInput.value.files[0]);
+  if (fileInput.value?.files?.length) {
+    void handleFile(fileInput.value.files[0]);
+    return;
+  }
+  // The chat this visitor already uploaded — on another tool page in this
+  // visit, or before a full page load in this tab — so they don't have to
+  // upload it again.
+  const restored = sharedChat.value?.messages?.length
+    ? sharedChat.value
+    : loadChatSession();
+  if (!restored?.messages?.length) return;
+  try {
+    showChat(
+      {
+        messages: restored.messages,
+        attachments: (restored.attachments ?? []) as ChatAttachment[],
+        durationMs: 0,
+      },
+      (restored as { sourceName?: string }).sourceName ?? "WhatsApp Chat",
+    );
+  } catch (err) {
+    console.warn("Could not restore the previous chat:", err);
+    clearChatSession();
+  }
 });
 
 async function onFileSelected(event: Event) {
