@@ -42,3 +42,12 @@ jobs:
         with:
           environment: dev
           sourcemaps: "./dist"
+
+  deploy-functions:
+    needs: deploy-firebase-dev
+    uses: ./.github/workflows/deploy-functions.yml
+    with:
+      project: dev
+      before: ${{ github.event.before }}
+    secrets:
+      credentials: ${{ secrets.FUNCTIONS_DEPLOYER_WHATSANALYZE_WRAPPED }}
