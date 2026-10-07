@@ -30,7 +30,7 @@ import {
  * "<provider>:<model id>" and `AI_API_KEY` is that provider's key, so moving
  * between Anthropic and OpenAI is a config change and a redeploy:
  *
- *   AI_MODEL=openai:gpt-6-luna         (~3 cents an analysis at max effort)
+ *   AI_MODEL=openai:gpt-6-luna         (~1 cent, ~12 s for 30k tokens at low)
  *   AI_MODEL=anthropic:claude-sonnet-5 (~25 cents: priced for 10x the input)
  *
  * AI_REASONING_EFFORT is passed to whichever provider runs: OpenAI's
@@ -42,8 +42,10 @@ import {
  */
 
 const aiModel = defineString("AI_MODEL", { default: "openai:gpt-6-luna" });
+// "low": max took over 3 minutes on a 34k-token chat, low takes ~12 s with
+// answers just as specific. Raise it only with the wait in mind.
 const aiReasoningEffort = defineString("AI_REASONING_EFFORT", {
-  default: "max",
+  default: "low",
 });
 const aiApiKey = defineSecret("AI_API_KEY");
 /** Analyses per subscriber per UTC day. The cost ceiling, not a feature. */
@@ -110,8 +112,8 @@ export const analyzeChatAi = onCall(
   {
     cors: true,
     secrets: [aiApiKey, paypalSecret],
-    // Up to ~130k tokens of chat at max reasoning effort can take minutes.
-    timeoutSeconds: 540,
+    // ~12 s typically; the headroom is for a slow provider or a higher effort.
+    timeoutSeconds: 300,
     // Several visitors waiting on a model at once is normal here, and each
     // one costs a container nothing while it waits.
     maxInstances: 3,

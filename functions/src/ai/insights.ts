@@ -143,7 +143,7 @@ export function buildPrompt(
     "Every item must add something new. Never repeat a point, and never write the same item once per person.",
     "Be warm and a little playful, never judgmental. Do not diagnose anyone.",
     'Refer to participants only by their placeholder ("Person A", "Person B", ...), exactly as written and untranslated.',
-    "Text in square brackets ([phone], [email], [link]) was removed for privacy; ignore it.",
+    "Text in square brackets ([phone], [email], [link], [iban]) was removed for privacy; ignore it.",
     ...askLines(ask),
     ask?.question
       ? "Answer the reader's question in \"answer\". If the chat doesn't give enough to go on, say so honestly."

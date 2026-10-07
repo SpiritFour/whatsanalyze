@@ -60,6 +60,14 @@ describe("buildDigest", () => {
     expect(digest.transcript).toContain("user Person A92, pw Person AStreet");
   });
 
+  test("blanks IBANs", () => {
+    const { digest } = buildDigest(
+      [msg("Al", "DE89 3704 0044 0532 0130 00 and DE89370400440532013000")],
+      10_000,
+    );
+    expect(digest.transcript).toContain("[iban] and [iban]");
+  });
+
   test("blanks links, emails and phone numbers but keeps dates", () => {
     const { digest } = buildDigest(
       [

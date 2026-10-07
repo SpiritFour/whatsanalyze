@@ -691,6 +691,9 @@ export const messages = {
       dismiss: "Dismiss",
     },
     toolsAi: {
+      faq6Q: "Should I remove anything before using the cloud AI?",
+      faq6A:
+        'Names, phone numbers, emails, links and bank account numbers (IBANs) are replaced automatically before anything is sent. Passwords, PINs and other secrets typed into a chat can\'t be recognised reliably, though. If your chat contains any, use the on-device AI, or open "See exactly what the cloud AI would receive" and check first.',
       askTitle: "Make it personal (optional)",
       askMeLabel: "Which one is you?",
       askLabel: "What do you want to know?",
@@ -772,7 +775,8 @@ export const messages = {
       previewText:
         "This is everything that is sent. Real names are swapped back in on your device once the answer arrives.",
       progressLocal: "The AI is reading your chat on your device…",
-      progressCloud: "The AI is reading your chat… this takes a few minutes.",
+      progressCloud:
+        "The AI is reading your chat… this takes about 15 seconds.",
       error_local:
         "The on-device AI couldn't run. Your device may not have enough memory — try the cloud AI or a computer.",
       error_cloud:
@@ -1839,6 +1843,9 @@ export const messages = {
       dismiss: "Schließen",
     },
     toolsAi: {
+      faq6Q: "Sollte ich vor der Cloud-KI etwas aus dem Chat entfernen?",
+      faq6A:
+        "Namen, Telefonnummern, E-Mails, Links und Kontonummern (IBANs) werden vor dem Senden automatisch ersetzt. Passwörter, PINs und andere Geheimnisse, die im Chat stehen, lassen sich aber nicht zuverlässig erkennen. Wenn dein Chat so etwas enthält, nutze die KI auf dem Gerät – oder öffne vorher „Genau ansehen, was die Cloud-KI bekommen würde“ und prüfe es.",
       askTitle: "Persönlicher machen (optional)",
       askMeLabel: "Wer davon bist du?",
       askLabel: "Was willst du wissen?",
@@ -1922,7 +1929,7 @@ export const messages = {
       previewText:
         "Das ist alles, was gesendet wird. Die echten Namen werden erst auf deinem Gerät wieder eingesetzt, wenn die Antwort da ist.",
       progressLocal: "Die KI liest deinen Chat auf deinem Gerät …",
-      progressCloud: "Die KI liest deinen Chat … das dauert ein paar Minuten.",
+      progressCloud: "Die KI liest deinen Chat … das dauert etwa 15 Sekunden.",
       error_local:
         "Die KI auf dem Gerät konnte nicht starten. Vielleicht hat dein Gerät nicht genug Speicher – probier die Cloud-KI oder einen Computer.",
       error_cloud:
@@ -2982,6 +2989,9 @@ export const messages = {
       dismiss: "Cerrar",
     },
     toolsAi: {
+      faq6Q: "¿Debo quitar algo antes de usar la IA en la nube?",
+      faq6A:
+        "Los nombres, teléfonos, correos, enlaces y números de cuenta (IBAN) se sustituyen automáticamente antes de enviar nada. Pero las contraseñas, PIN y otros datos secretos escritos en un chat no se pueden detectar de forma fiable. Si tu chat contiene alguno, usa la IA en tu dispositivo, o abre antes «Ver exactamente lo que recibiría la IA en la nube» y revísalo.",
       askTitle: "Hazlo personal (opcional)",
       askMeLabel: "¿Quién de ellos eres tú?",
       askLabel: "¿Qué quieres saber?",
@@ -3066,7 +3076,7 @@ export const messages = {
       previewText:
         "Esto es todo lo que se envía. Los nombres reales se vuelven a poner en tu dispositivo cuando llega la respuesta.",
       progressLocal: "La IA está leyendo tu chat en tu dispositivo…",
-      progressCloud: "La IA está leyendo tu chat… tarda unos minutos.",
+      progressCloud: "La IA está leyendo tu chat… tarda unos 15 segundos.",
       error_local:
         "La IA local no ha podido ejecutarse. Puede que tu dispositivo no tenga memoria suficiente: prueba la IA en la nube o un ordenador.",
       error_cloud:
@@ -3947,6 +3957,9 @@ export const messages = {
       dismiss: "Fechar",
     },
     toolsAi: {
+      faq6Q: "Devo remover algo antes de usar a IA na nuvem?",
+      faq6A:
+        "Nomes, números de telefone, e-mails, links e números de conta (IBAN) são substituídos automaticamente antes de qualquer envio. Mas palavras-passe, PIN e outros segredos escritos numa conversa não podem ser detetados de forma fiável. Se a sua conversa tiver algum, use a IA no dispositivo, ou abra antes «Ver exatamente o que a IA na nuvem receberia» e verifique.",
       askTitle: "Torne-o pessoal (opcional)",
       askMeLabel: "Qual deles é você?",
       askLabel: "O que quer saber?",
@@ -4032,7 +4045,8 @@ export const messages = {
       previewText:
         "Isto é tudo o que é enviado. Os nomes reais são repostos no seu dispositivo quando chega a resposta.",
       progressLocal: "A IA está a ler a sua conversa no seu dispositivo…",
-      progressCloud: "A IA está a ler a sua conversa… demora alguns minutos.",
+      progressCloud:
+        "A IA está a ler a sua conversa… demora cerca de 15 segundos.",
       error_local:
         "A IA local não conseguiu arrancar. O seu dispositivo pode não ter memória suficiente: experimente a IA na nuvem ou um computador.",
       error_cloud:
@@ -5097,6 +5111,10 @@ export const messages = {
       dismiss: "Fermer",
     },
     toolsAi: {
+      faq6Q:
+        "Dois-je retirer quelque chose avant d'utiliser l'IA dans le cloud ?",
+      faq6A:
+        "Les noms, numéros de téléphone, e-mails, liens et numéros de compte (IBAN) sont remplacés automatiquement avant tout envoi. En revanche, les mots de passe, codes PIN et autres secrets écrits dans une conversation ne peuvent pas être détectés de façon fiable. Si votre conversation en contient, utilisez l'IA sur l'appareil, ou ouvrez d'abord « Voir exactement ce que recevrait l'IA dans le cloud » pour vérifier.",
       askTitle: "Personnalisez (facultatif)",
       askMeLabel: "Lequel est vous ?",
       askLabel: "Que voulez-vous savoir ?",
@@ -5183,7 +5201,7 @@ export const messages = {
         "Voici tout ce qui est envoyé. Les vrais noms sont remis en place sur votre appareil à l'arrivée de la réponse.",
       progressLocal: "L'IA lit votre conversation sur votre appareil…",
       progressCloud:
-        "L'IA lit votre conversation… cela prend quelques minutes.",
+        "L'IA lit votre conversation… cela prend environ 15 secondes.",
       error_local:
         "L'IA locale n'a pas pu démarrer. Votre appareil manque peut-être de mémoire : essayez l'IA dans le cloud ou un ordinateur.",
       error_cloud:
@@ -6244,6 +6262,9 @@ export const messages = {
       dismiss: "Chiudi",
     },
     toolsAi: {
+      faq6Q: "Devo rimuovere qualcosa prima di usare l'IA nel cloud?",
+      faq6A:
+        "Nomi, numeri di telefono, e-mail, link e numeri di conto (IBAN) vengono sostituiti automaticamente prima di qualsiasi invio. Password, PIN e altri dati segreti scritti in una chat però non si possono riconoscere in modo affidabile. Se la tua chat ne contiene, usa l'IA sul dispositivo, oppure apri prima «Vedi esattamente cosa riceverebbe l'IA nel cloud» e controlla.",
       askTitle: "Rendila personale (facoltativo)",
       askMeLabel: "Chi di loro sei tu?",
       askLabel: "Cosa vuoi sapere?",
@@ -6327,7 +6348,8 @@ export const messages = {
       previewText:
         "Questo è tutto ciò che viene inviato. I nomi reali vengono rimessi sul tuo dispositivo quando arriva la risposta.",
       progressLocal: "L'IA sta leggendo la tua chat sul tuo dispositivo…",
-      progressCloud: "L'IA sta leggendo la tua chat… ci vuole qualche minuto.",
+      progressCloud:
+        "L'IA sta leggendo la tua chat… ci vogliono circa 15 secondi.",
       error_local:
         "L'IA locale non è riuscita ad avviarsi. Forse il tuo dispositivo non ha memoria sufficiente: prova l'IA nel cloud o un computer.",
       error_cloud:

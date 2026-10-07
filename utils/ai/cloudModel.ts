@@ -22,7 +22,7 @@ export async function analyzeInCloud(
   const callable = httpsCallable<
     unknown,
     { insights: ChatInsights; model: string }
-  >(functions as any, "analyzeChatAi", { timeout: 540_000 });
+  >(functions as any, "analyzeChatAi", { timeout: 300_000 });
   const { data } = await callable({ ...credentials, digest, language, ask });
   return data.insights;
 }

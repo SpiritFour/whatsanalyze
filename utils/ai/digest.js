@@ -93,6 +93,11 @@ export function buildDigest(messages, maxChars) {
       .replace(/\u200e/g, "")
       .replace(/https?:\/\/\S+|www\.\S+/gi, "[link]")
       .replace(/[\w.+-]+@[\w-]+\.[\w.-]+/g, "[email]")
+      // Before phone numbers: an IBAN's digits would otherwise half match.
+      .replace(
+        /\b[A-Z]{2}\d{2}(?: ?[A-Z0-9]{4}){2,7}(?: ?[A-Z0-9]{1,3})?\b/g,
+        "[iban]",
+      )
       // Nine digits or more: a phone number, not a date like 12.10.2026.
       .replace(/\+?\d[\d\s\-/().]{6,}\d/g, (m) =>
         m.replace(/\D/g, "").length >= 9 ? "[phone]" : m,

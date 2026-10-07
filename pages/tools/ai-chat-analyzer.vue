@@ -760,7 +760,7 @@ const exportSteps = computed(() => [
 ]);
 
 const faqItems = computed(() =>
-  [1, 2, 3, 4, 5].map((n) => ({
+  [1, 2, 3, 4, 5, 6].map((n) => ({
     q: t(`toolsAi.faq${n}Q`),
     a: t(`toolsAi.faq${n}A`),
   })),
