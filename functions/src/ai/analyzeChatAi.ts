@@ -202,7 +202,13 @@ export const analyzeChatAi = onCall(
         output: Output.object({ schema: insightsSchema }),
         maxOutputTokens: MAX_OUTPUT_TOKENS,
         providerOptions: {
-          openai: { reasoningEffort: aiReasoningEffort.value() },
+          openai: {
+            reasoningEffort: aiReasoningEffort.value(),
+            // The AI SDK defaults to store: true, which keeps every request
+            // as retrievable application state in our OpenAI project for 30+
+            // days. Nothing here needs it back: one call, no follow-ups.
+            store: false,
+          },
           anthropic: { effort: aiReasoningEffort.value() },
         },
       });
