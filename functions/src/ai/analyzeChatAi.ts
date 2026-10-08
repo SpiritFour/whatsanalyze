@@ -51,6 +51,20 @@ const aiReasoningEffort = defineString("AI_REASONING_EFFORT", {
 const aiApiKey = defineSecret("AI_API_KEY");
 /** Analyses per subscriber per UTC day. The cost ceiling, not a feature. */
 const aiDailyLimit = defineInt("AI_DAILY_LIMIT", { default: 10 });
+/**
+ * Analyses per UTC day across everyone: the circuit breaker if subscriptions
+ * themselves are abused (free test-mode ones on dev, or a leaked login
+ * passed around). At ~1 cent typical and ~7 cents worst case per analysis,
+ * this bounds a bad day.
+ */
+const aiGlobalDailyLimit = defineInt("AI_GLOBAL_DAILY_LIMIT", {
+  default: 500,
+});
+/**
+ * Output, reasoning included. A normal report at low effort is a few
+ * thousand tokens; this stops a chat crafted to make the model write on.
+ */
+const MAX_OUTPUT_TOKENS = 8_000;
 
 const PAYPAL_SUBSCRIPTION_ID = /^I-[A-Z0-9]+$/i;
 
@@ -103,17 +117,23 @@ const usedToday = (data: DocumentData | undefined) =>
   data?.day === today() ? (data?.count ?? 0) : 0;
 
 /**
- * Count this analysis against today's allowance. Returns what is left after
- * it, or null once the allowance is used up.
+ * Count this analysis against today's allowance, the subscriber's and
+ * everyone's. Returns what the subscriber has left after it, null once their
+ * allowance is used up, or "global" when the day's overall cap is reached.
  */
 async function takeFromAllowance(
   subscriptionId: string,
-): Promise<number | null> {
+): Promise<number | null | "global"> {
   const ref = usageRef(subscriptionId);
+  const globalRef = db.collection("aiUsageGlobal").doc("total");
   return db.runTransaction(async (tx) => {
-    const used = usedToday((await tx.get(ref)).data());
+    const [mine, all] = await Promise.all([tx.get(ref), tx.get(globalRef)]);
+    const used = usedToday(mine.data());
+    const usedByAll = usedToday(all.data());
     if (used >= aiDailyLimit.value()) return null;
+    if (usedByAll >= aiGlobalDailyLimit.value()) return "global";
     tx.set(ref, { day: today(), count: used + 1 });
+    tx.set(globalRef, { day: today(), count: usedByAll + 1 });
     return aiDailyLimit.value() - used - 1;
   });
 }
@@ -165,6 +185,12 @@ export const analyzeChatAi = onCall(
     if (remaining === null) {
       throw new HttpsError("resource-exhausted", "daily_limit");
     }
+    if (remaining === "global") {
+      logger.error("Global AI daily limit reached", {
+        limit: aiGlobalDailyLimit.value(),
+      });
+      throw new HttpsError("unavailable", "analysis_failed");
+    }
 
     const startedAt = Date.now();
     try {
@@ -174,6 +200,7 @@ export const analyzeChatAi = onCall(
         system,
         prompt,
         output: Output.object({ schema: insightsSchema }),
+        maxOutputTokens: MAX_OUTPUT_TOKENS,
         providerOptions: {
           openai: { reasoningEffort: aiReasoningEffort.value() },
           anthropic: { effort: aiReasoningEffort.value() },
