@@ -691,6 +691,9 @@ export const messages = {
       dismiss: "Dismiss",
     },
     toolsAi: {
+      cloudAllowance: "{remaining} of {limit} cloud analyses left today",
+      cloudAllowanceOut:
+        "You've used today's cloud analyses — new ones tomorrow.",
       faq6Q: "Should I remove anything before using the cloud AI?",
       faq6A:
         'Names, phone numbers, emails, links and bank account numbers (IBANs) are replaced automatically before anything is sent. Passwords, PINs and other secrets typed into a chat can\'t be recognised reliably, though. If your chat contains any, use the on-device AI, or open "See exactly what the cloud AI would receive" and check first.',
@@ -1843,6 +1846,9 @@ export const messages = {
       dismiss: "Schließen",
     },
     toolsAi: {
+      cloudAllowance: "Heute noch {remaining} von {limit} Cloud-Analysen",
+      cloudAllowanceOut:
+        "Die heutigen Cloud-Analysen sind aufgebraucht – morgen gibt's neue.",
       faq6Q: "Sollte ich vor der Cloud-KI etwas aus dem Chat entfernen?",
       faq6A:
         "Namen, Telefonnummern, E-Mails, Links und Kontonummern (IBANs) werden vor dem Senden automatisch ersetzt. Passwörter, PINs und andere Geheimnisse, die im Chat stehen, lassen sich aber nicht zuverlässig erkennen. Wenn dein Chat so etwas enthält, nutze die KI auf dem Gerät – oder öffne vorher „Genau ansehen, was die Cloud-KI bekommen würde“ und prüfe es.",
@@ -2989,6 +2995,10 @@ export const messages = {
       dismiss: "Cerrar",
     },
     toolsAi: {
+      cloudAllowance:
+        "Te quedan {remaining} de {limit} análisis en la nube hoy",
+      cloudAllowanceOut:
+        "Has usado los análisis en la nube de hoy: mañana tendrás nuevos.",
       faq6Q: "¿Debo quitar algo antes de usar la IA en la nube?",
       faq6A:
         "Los nombres, teléfonos, correos, enlaces y números de cuenta (IBAN) se sustituyen automáticamente antes de enviar nada. Pero las contraseñas, PIN y otros datos secretos escritos en un chat no se pueden detectar de forma fiable. Si tu chat contiene alguno, usa la IA en tu dispositivo, o abre antes «Ver exactamente lo que recibiría la IA en la nube» y revísalo.",
@@ -3957,6 +3967,10 @@ export const messages = {
       dismiss: "Fechar",
     },
     toolsAi: {
+      cloudAllowance:
+        "Restam-lhe {remaining} de {limit} análises na nuvem hoje",
+      cloudAllowanceOut:
+        "Já usou as análises na nuvem de hoje — amanhã há novas.",
       faq6Q: "Devo remover algo antes de usar a IA na nuvem?",
       faq6A:
         "Nomes, números de telefone, e-mails, links e números de conta (IBAN) são substituídos automaticamente antes de qualquer envio. Mas palavras-passe, PIN e outros segredos escritos numa conversa não podem ser detetados de forma fiável. Se a sua conversa tiver algum, use a IA no dispositivo, ou abra antes «Ver exatamente o que a IA na nuvem receberia» e verifique.",
@@ -5111,6 +5125,10 @@ export const messages = {
       dismiss: "Fermer",
     },
     toolsAi: {
+      cloudAllowance:
+        "Encore {remaining} analyses cloud sur {limit} aujourd'hui",
+      cloudAllowanceOut:
+        "Vous avez utilisé les analyses cloud du jour — nouvelles demain.",
       faq6Q:
         "Dois-je retirer quelque chose avant d'utiliser l'IA dans le cloud ?",
       faq6A:
@@ -6262,6 +6280,10 @@ export const messages = {
       dismiss: "Chiudi",
     },
     toolsAi: {
+      cloudAllowance:
+        "Ti restano {remaining} analisi nel cloud su {limit} oggi",
+      cloudAllowanceOut:
+        "Hai usato le analisi nel cloud di oggi: domani ne avrai di nuove.",
       faq6Q: "Devo rimuovere qualcosa prima di usare l'IA nel cloud?",
       faq6A:
         "Nomi, numeri di telefono, e-mail, link e numeri di conto (IBAN) vengono sostituiti automaticamente prima di qualsiasi invio. Password, PIN e altri dati segreti scritti in una chat però non si possono riconoscere in modo affidabile. Se la tua chat ne contiene, usa l'IA sul dispositivo, oppure apri prima «Vedi esattamente cosa riceverebbe l'IA nel cloud» e controlla.",

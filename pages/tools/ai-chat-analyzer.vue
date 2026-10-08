@@ -110,7 +110,11 @@
             v-else
             type="button"
             class="mode-card__btn"
-            :disabled="running !== null || askBlocked"
+            :disabled="
+              running !== null ||
+              askBlocked ||
+              (mode.id === 'cloud' && allowance?.remaining === 0)
+            "
             @click="mode.id === 'local' ? startLocal() : run(mode.id)"
           >
             {{ mode.button }}
@@ -149,6 +153,18 @@
             class="mode-card__fineprint"
           >
             Built with Llama
+          </p>
+          <!-- Today's allowance, so the limit is no surprise -->
+          <p
+            v-if="mode.id === 'cloud' && isSubscriptionValid && allowance"
+            class="mode-card__allowance"
+            :class="{ 'mode-card__allowance--out': !allowance.remaining }"
+          >
+            {{
+              allowance.remaining
+                ? t("toolsAi.cloudAllowance", allowance)
+                : t("toolsAi.cloudAllowanceOut")
+            }}
           </p>
           <p v-if="mode.id === 'cloud'" class="mode-card__fineprint">
             {{ t("toolsAi.cloudConsent") }}
@@ -269,7 +285,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, ref } from "vue";
+import { computed, nextTick, onMounted, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
 import ToolDropzone from "~/components/tools/ToolDropzone.vue";
 import AiReport from "~/components/ai/AiReport.vue";
@@ -296,7 +312,11 @@ import {
   type AiProgress,
   type LocalModel,
 } from "~/utils/ai/localModel";
-import { analyzeInCloud } from "~/utils/ai/cloudModel";
+import {
+  analyzeInCloud,
+  getCloudAllowance,
+  type CloudAllowance,
+} from "~/utils/ai/cloudModel";
 import {
   AI_LANGUAGES,
   CLOUD_TRANSCRIPT_CHARS,
@@ -323,6 +343,31 @@ useSeoMeta({
 
 const subscriptionStore = useSubscriptionStore();
 const { isSubscriptionValid } = storeToRefs(subscriptionStore);
+
+const cloudCredentials = () => ({
+  email: subscriptionStore.getEmail!,
+  subscriptionId: subscriptionStore.getSubscriptionId!,
+});
+
+/** Cloud analyses left today; shown on the cloud card for subscribers. */
+const allowance = ref<CloudAllowance | null>(null);
+async function refreshAllowance() {
+  if (!isSubscriptionValid.value) return;
+  try {
+    allowance.value = await getCloudAllowance(
+      useNuxtApp().$functions,
+      cloudCredentials(),
+    );
+  } catch (err) {
+    // Only a hint: the analysis itself still enforces the limit.
+    console.warn("Could not load the AI allowance:", err);
+  }
+}
+watch(isSubscriptionValid, (valid) => {
+  if (valid) void refreshAllowance();
+  else allowance.value = null;
+});
+onMounted(() => void refreshAllowance());
 
 const messages = ref<ChatMessage[] | null>(null);
 const insights = ref<ChatInsights | null>(null);
@@ -569,16 +614,15 @@ async function run(mode: Mode) {
     let read = countLines(digest.transcript);
     let parts = 1;
     if (mode === "cloud") {
-      result = await analyzeInCloud(
+      const cloud = await analyzeInCloud(
         useNuxtApp().$functions,
-        {
-          email: subscriptionStore.getEmail!,
-          subscriptionId: subscriptionStore.getSubscriptionId!,
-        },
+        cloudCredentials(),
         digest,
         language.value,
         ask,
       );
+      result = cloud.insights;
+      allowance.value = cloud.allowance;
     } else {
       const local = await analyzeLocally(
         localModel.value!,
@@ -619,6 +663,9 @@ async function run(mode: Mode) {
     ];
     errorKey.value = known.includes(err?.message) ? err.message : mode;
     errorMode.value = mode;
+    if (err?.message === "daily_limit") {
+      allowance.value = { remaining: 0, limit: allowance.value?.limit ?? 10 };
+    }
     analyticsTools.error("ai", `${mode}:${err?.message ?? "unknown"}`);
   } finally {
     wakeLock?.release().catch(() => {});
@@ -779,6 +826,16 @@ useToolSchema({
     &:disabled {
       opacity: 0.5;
       cursor: progress;
+    }
+  }
+
+  &__allowance {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #4f46e5;
+
+    &--out {
+      color: #b45309;
     }
   }
 

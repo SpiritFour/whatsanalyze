@@ -9,6 +9,7 @@ import { generateText, Output, type LanguageModel } from "ai";
 import { createAnthropic } from "@ai-sdk/anthropic";
 import { createOpenAI } from "@ai-sdk/openai";
 import { z } from "zod";
+import type { DocumentData } from "firebase-admin/firestore";
 import { db } from "../firebase";
 import { lookupSubscription } from "../stripe/verifySubscription";
 import {
@@ -95,18 +96,50 @@ async function isSubscriber(email: string, subscriptionId: string) {
   return result.isValid;
 }
 
-/** Count this analysis against today's allowance; false once it is used up. */
-async function takeFromAllowance(subscriptionId: string): Promise<boolean> {
-  const today = new Date().toISOString().slice(0, 10);
-  const ref = db.collection("aiUsage").doc(subscriptionId);
+const today = () => new Date().toISOString().slice(0, 10);
+const usageRef = (subscriptionId: string) =>
+  db.collection("aiUsage").doc(subscriptionId);
+const usedToday = (data: DocumentData | undefined) =>
+  data?.day === today() ? (data?.count ?? 0) : 0;
+
+/**
+ * Count this analysis against today's allowance. Returns what is left after
+ * it, or null once the allowance is used up.
+ */
+async function takeFromAllowance(
+  subscriptionId: string,
+): Promise<number | null> {
+  const ref = usageRef(subscriptionId);
   return db.runTransaction(async (tx) => {
-    const doc = await tx.get(ref);
-    const used = doc.data()?.day === today ? (doc.data()?.count ?? 0) : 0;
-    if (used >= aiDailyLimit.value()) return false;
-    tx.set(ref, { day: today, count: used + 1 });
-    return true;
+    const used = usedToday((await tx.get(ref)).data());
+    if (used >= aiDailyLimit.value()) return null;
+    tx.set(ref, { day: today(), count: used + 1 });
+    return aiDailyLimit.value() - used - 1;
   });
 }
+
+const credentialsSchema = z.object({
+  email: z.string().min(1),
+  subscriptionId: z.string().min(1),
+});
+
+/** How many cloud analyses a subscriber has left today, for the page to show. */
+export const getAiAllowance = onCall(
+  { cors: true, secrets: [paypalSecret] },
+  async (request) => {
+    const parsed = credentialsSchema.safeParse(request.data);
+    if (!parsed.success) {
+      throw new HttpsError("invalid-argument", "Malformed request");
+    }
+    const { email, subscriptionId } = parsed.data;
+    if (!(await isSubscriber(email, subscriptionId))) {
+      throw new HttpsError("permission-denied", "not_subscribed");
+    }
+    const used = usedToday((await usageRef(subscriptionId).get()).data());
+    const limit = aiDailyLimit.value();
+    return { remaining: Math.max(0, limit - used), limit };
+  },
+);
 
 export const analyzeChatAi = onCall(
   {
@@ -128,7 +161,8 @@ export const analyzeChatAi = onCall(
     if (!(await isSubscriber(email, subscriptionId))) {
       throw new HttpsError("permission-denied", "not_subscribed");
     }
-    if (!(await takeFromAllowance(subscriptionId))) {
+    const remaining = await takeFromAllowance(subscriptionId);
+    if (remaining === null) {
       throw new HttpsError("resource-exhausted", "daily_limit");
     }
 
@@ -152,7 +186,12 @@ export const analyzeChatAi = onCall(
         inputTokens: usage.inputTokens,
         outputTokens: usage.outputTokens,
       });
-      return { insights: output, model: aiModel.value() };
+      return {
+        insights: output,
+        model: aiModel.value(),
+        remaining,
+        limit: aiDailyLimit.value(),
+      };
     } catch (error: any) {
       logger.error("AI analysis failed", {
         model: aiModel.value(),
