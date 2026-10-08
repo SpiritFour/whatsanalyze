@@ -101,7 +101,7 @@
           </p>
           <LandingButton
             v-else-if="mode.id === 'cloud' && !isSubscriptionValid"
-            :to="localePath('/subscribe')"
+            :to="subscribeLink"
             @click="analyticsTools.ctaClick('ai', 'subscribe')"
           >
             {{ t("toolsAi.cloudSubscribe") }}
@@ -330,6 +330,7 @@ type Mode = "local" | "cloud";
 
 const { t, locale } = useI18n();
 const localePath = useLocalePath();
+const subscribeLink = useSubscribeLink();
 const breadcrumbs = useToolBreadcrumbs("toolsHub.toolAiTitle");
 
 useSeoMeta({

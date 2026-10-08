@@ -255,6 +255,16 @@ function rememberOrigin(candidate) {
   }
 }
 
+/** The previous page, when it was ours and arrived here by a full load. */
+function sameSiteReferrer() {
+  try {
+    const url = new URL(document.referrer);
+    return url.origin === window.location.origin ? url.pathname : "";
+  } catch {
+    return "";
+  }
+}
+
 function forgetOrigin() {
   try {
     sessionStorage.removeItem(ORIGIN_KEY);
@@ -316,7 +326,9 @@ export default {
   async mounted() {
     this.returningFromCheckout = Boolean(this.$route.query.session_id);
     this.origin = rememberOrigin(
-      this.$route.query.from || window.history.state?.back,
+      this.$route.query.from ||
+        window.history.state?.back ||
+        sameSiteReferrer(),
     );
 
     const queryEmail = this.$route.query.email || "";
@@ -374,9 +386,14 @@ export default {
         const returnPath = `${window.location.origin}${this.localePath(
           "/subscribe",
         )}`;
+        // The origin rides along in Stripe's return URL too, so getting
+        // back to it does not depend on this tab's storage surviving Checkout.
+        const from = this.origin
+          ? `&from=${encodeURIComponent(this.origin)}`
+          : "";
         const url = await fetchSubscriptionCheckoutUrl({
-          successUrl: `${returnPath}?session_id={CHECKOUT_SESSION_ID}`,
-          cancelUrl: `${returnPath}?canceled=true`,
+          successUrl: `${returnPath}?session_id={CHECKOUT_SESSION_ID}${from}`,
+          cancelUrl: `${returnPath}?canceled=true${from}`,
         });
         if (!url) throw new Error("No checkout URL returned");
         window.location.assign(url);

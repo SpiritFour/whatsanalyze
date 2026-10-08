@@ -5,7 +5,7 @@
     is the pricing table the subscriber just paid to get rid of.
   -->
   <UiButton
-    :to="localePath('/subscribe')"
+    :to="subscribeLink"
     variant="secondary"
     block
     class="mt-3"
@@ -18,7 +18,7 @@
 <script setup>
 import { analyticsEcommerce } from "~/composables/useAnalytics";
 
-// Without this the German and French pages sent their visitors to the English
-// /subscribe.
-const localePath = useLocalePath();
+// Localized (the German and French pages used to send their visitors to the
+// English /subscribe) and carrying this page, to come back to after paying.
+const subscribeLink = useSubscribeLink();
 </script>

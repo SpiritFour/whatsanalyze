@@ -115,7 +115,7 @@
               >
                 <span v-html="$t('subscriptionHint')"></span>
                 <UiButton
-                  to="/subscribe"
+                  :to="subscribeLink"
                   variant="secondary"
                   size="sm"
                   class="mt-3"
@@ -256,7 +256,10 @@ export default {
     isValidSubscription: { type: Boolean, default: false },
   },
   setup() {
-    return { oneTimePurchase: useOneTimePurchase() };
+    return {
+      oneTimePurchase: useOneTimePurchase(),
+      subscribeLink: useSubscribeLink(),
+    };
   },
   data() {
     return {
