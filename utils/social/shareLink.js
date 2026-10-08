@@ -30,11 +30,19 @@ export function buildSharePayload(snapshot) {
   return deflate(new TextEncoder().encode(JSON.stringify(snapshot)));
 }
 
-export function parseSharePayload(bytes) {
+/** Whatever was shared, as stored: an analysis snapshot or an AI report. */
+export function parseSharedJson(bytes) {
   // Decoded here rather than through pako's `to: "string"`, which hands back
   // raw bytes on this version and would mangle every emoji even if it did not.
-  const snapshot = JSON.parse(new TextDecoder().decode(inflate(bytes)));
+  return JSON.parse(new TextDecoder().decode(inflate(bytes)));
+}
 
+export function parseSharePayload(bytes) {
+  return reviveSnapshot(parseSharedJson(bytes));
+}
+
+/** An analysis snapshot, checked and with its dates turned back into Dates. */
+export function reviveSnapshot(snapshot) {
   if (snapshot.version !== SHARE_PAYLOAD_VERSION) {
     throw new Error(`Unsupported share payload version ${snapshot.version}`);
   }

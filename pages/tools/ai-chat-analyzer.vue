@@ -207,75 +207,12 @@
       "
       :title="t('toolsAi.reportTitle')"
     >
-      <div class="report">
-        <div v-if="insights.answer?.trim()" class="report-card report-answer">
-          <span class="mono-label report-answer__q">{{ askedQuestion }}</span>
-          <p>{{ insights.answer }}</p>
-        </div>
+      <div class="report-wrap">
+        <AiReport v-if="report" :report="report" />
 
-        <div class="report-card report-summary">
-          <span class="vibe-pill">
-            <v-icon size="16">mdi-creation-outline</v-icon>
-            {{ insights.vibe }}
-          </span>
-          <p>{{ insights.summary }}</p>
-          <p v-if="coverageText" class="report-coverage mono-label">
-            {{ coverageText }}
-          </p>
-        </div>
+        <!-- The same encrypted share link as the analyzer's results -->
+        <ShareLinkButton :capture="() => report" source="ai_report" />
 
-        <h3 v-if="insights.people.length" class="report-heading">
-          {{ t("toolsAi.peopleTitle") }}
-        </h3>
-        <div v-if="insights.people.length" class="report-grid">
-          <div v-for="p in insights.people" :key="p.name" class="report-card">
-            <div class="person-head">
-              <span class="avatar-circle">{{ p.name.charAt(0) }}</span>
-              <div>
-                <strong>{{ p.name }}</strong>
-                <span class="mono-label person-role">{{ p.role }}</span>
-              </div>
-            </div>
-            <p>{{ p.style }}</p>
-          </div>
-        </div>
-
-        <h3 v-if="insights.dynamics.length" class="report-heading">
-          {{ t("toolsAi.dynamicsTitle") }}
-        </h3>
-        <div v-if="insights.dynamics.length" class="report-grid">
-          <div
-            v-for="d in insights.dynamics"
-            :key="d.title"
-            class="report-card"
-          >
-            <strong>{{ d.title }}</strong>
-            <p>{{ d.description }}</p>
-          </div>
-        </div>
-
-        <h3 v-if="insights.topics.length" class="report-heading">
-          {{ t("toolsAi.topicsTitle") }}
-        </h3>
-        <div v-if="insights.topics.length" class="report-grid">
-          <div
-            v-for="tp in insights.topics"
-            :key="tp.title"
-            class="report-card"
-          >
-            <strong>{{ tp.title }}</strong>
-            <p>{{ tp.description }}</p>
-          </div>
-        </div>
-
-        <h3 v-if="insights.highlights.length" class="report-heading">
-          {{ t("toolsAi.highlightsTitle") }}
-        </h3>
-        <ul v-if="insights.highlights.length" class="report-card highlights">
-          <li v-for="h in insights.highlights" :key="h">{{ h }}</li>
-        </ul>
-
-        <p class="report-disclaimer">{{ t("toolsAi.reportDisclaimer") }}</p>
         <div class="report-actions">
           <button
             v-if="ranOn === 'local'"
@@ -335,6 +272,8 @@
 import { computed, nextTick, ref } from "vue";
 import { storeToRefs } from "pinia";
 import ToolDropzone from "~/components/tools/ToolDropzone.vue";
+import AiReport from "~/components/ai/AiReport.vue";
+import type { AiReport as AiReportData } from "~/utils/ai/report";
 import type { ChatMessage } from "~/composables/useChatTool";
 import { analyticsTools } from "~/composables/useAnalytics";
 import { useSubscriptionStore } from "~/stores/subscription";
@@ -446,26 +385,20 @@ const coverage = ref<{
   parts: number;
 } | null>(null);
 
-const coverageText = computed(() => {
-  const c = coverage.value;
-  if (!c) return "";
-  const n = (v: number) => v.toLocaleString(locale.value);
-  const date = (iso: string) =>
-    new Date(iso).toLocaleDateString(locale.value, {
-      month: "short",
-      year: "numeric",
-    });
-  return t(
-    c.parts > 1 ? "toolsAi.reportCoverageParts" : "toolsAi.reportCoverage",
-    {
-      total: n(c.total),
-      from: date(c.from),
-      to: date(c.to),
-      read: n(Math.min(c.read, c.total)),
-      parts: c.parts,
-    },
-  );
-});
+/** The report as shown, and as a share link carries it. */
+const reportQuestion = ref("");
+const report = computed<AiReportData | null>(() =>
+  insights.value
+    ? {
+        kind: "ai",
+        version: 1,
+        insights: insights.value,
+        question: reportQuestion.value,
+        ranOn: ranOn.value ?? "local",
+        coverage: coverage.value,
+      }
+    : null,
+);
 const localSupported = ref<boolean | null>(null);
 const modelDownloaded = ref(false);
 const dataWarning = ref(false);
@@ -661,6 +594,7 @@ async function run(mode: Mode) {
       parts = local.parts.length;
     }
     if (mode === "local") modelDownloaded.value = true;
+    reportQuestion.value = askedQuestion.value;
     insights.value = tidyInsights(restoreNames(result, names));
     coverage.value = {
       total: digest.totalMessages,
@@ -929,40 +863,6 @@ useToolSchema({
   justify-content: center;
 }
 
-.report {
-  text-align: left;
-  display: grid;
-  gap: 1rem;
-}
-
-.report-heading {
-  margin-top: 1rem;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #1d1d1f;
-}
-
-.report-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-  gap: 1rem;
-}
-
-.report-card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 1.2rem 1.4rem;
-  box-shadow: 0 4px 22px rgba(0, 0, 0, 0.05);
-  color: #1d1d1f;
-  min-width: 0;
-  overflow-wrap: anywhere;
-
-  p {
-    margin-top: 0.4rem;
-    line-height: 1.5;
-  }
-}
-
 .ask {
   text-align: left;
   background: #fff;
@@ -1027,82 +927,16 @@ useToolSchema({
   }
 }
 
-.report-answer {
-  border: 2px solid rgba(33, 166, 141, 0.45);
-
-  &__q {
-    font-size: 0.78rem;
-    color: #157a67;
-  }
-
-  p {
-    font-size: 1.05rem;
-  }
-}
-
-.report-coverage {
-  font-size: 0.78rem !important;
-  color: rgba(29, 29, 31, 0.55);
-}
-
-.report-summary p {
-  font-size: 1.1rem;
-}
-
-.vibe-pill {
-  display: inline-flex;
-  gap: 0.35rem;
-  align-items: center;
-  background: rgba(33, 166, 141, 0.12);
-  color: #157a67;
-  font-weight: 700;
-  padding: 4px 12px;
-  border-radius: 100px;
-}
-
-.person-head {
-  display: flex;
-  gap: 0.7rem;
-  align-items: center;
-
-  strong {
-    display: block;
-  }
-}
-
-.person-role {
-  font-size: 0.72rem;
-  color: rgba(29, 29, 31, 0.55);
-}
-
-.avatar-circle {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #21a68d;
-  color: #fff;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  flex-shrink: 0;
-}
-
-.highlights {
-  padding-left: 2.4rem;
-  display: grid;
-  gap: 0.5rem;
-}
-
-.report-disclaimer {
-  font-size: 0.82rem;
-  color: rgba(29, 29, 31, 0.55);
-}
-
 .report-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   align-items: center;
+}
+
+.report-wrap {
+  text-align: left;
+  display: grid;
+  gap: 1.5rem;
 }
 </style>
