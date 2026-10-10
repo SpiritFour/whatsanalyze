@@ -379,6 +379,60 @@
     <xhtml:link rel="alternate" hreflang="it" href="https://whatsanalyze.com/it/tools/"/>
   </url>
   <url>
+    <loc>https://whatsanalyze.com/tools/ai-chat-analyzer/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://whatsanalyze.com/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://whatsanalyze.com/de/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://whatsanalyze.com/es/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://whatsanalyze.com/fr/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://whatsanalyze.com/pt/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://whatsanalyze.com/it/tools/ai-chat-analyzer/"/>
+  </url>
+  <url>
+    <loc>https://whatsanalyze.com/de/tools/ai-chat-analyzer/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://whatsanalyze.com/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://whatsanalyze.com/de/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://whatsanalyze.com/es/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://whatsanalyze.com/fr/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://whatsanalyze.com/pt/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://whatsanalyze.com/it/tools/ai-chat-analyzer/"/>
+  </url>
+  <url>
+    <loc>https://whatsanalyze.com/es/tools/ai-chat-analyzer/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://whatsanalyze.com/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://whatsanalyze.com/de/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://whatsanalyze.com/es/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://whatsanalyze.com/fr/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://whatsanalyze.com/pt/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://whatsanalyze.com/it/tools/ai-chat-analyzer/"/>
+  </url>
+  <url>
+    <loc>https://whatsanalyze.com/fr/tools/ai-chat-analyzer/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://whatsanalyze.com/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://whatsanalyze.com/de/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://whatsanalyze.com/es/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://whatsanalyze.com/fr/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://whatsanalyze.com/pt/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://whatsanalyze.com/it/tools/ai-chat-analyzer/"/>
+  </url>
+  <url>
+    <loc>https://whatsanalyze.com/pt/tools/ai-chat-analyzer/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://whatsanalyze.com/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://whatsanalyze.com/de/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://whatsanalyze.com/es/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://whatsanalyze.com/fr/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://whatsanalyze.com/pt/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://whatsanalyze.com/it/tools/ai-chat-analyzer/"/>
+  </url>
+  <url>
+    <loc>https://whatsanalyze.com/it/tools/ai-chat-analyzer/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://whatsanalyze.com/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://whatsanalyze.com/de/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://whatsanalyze.com/es/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://whatsanalyze.com/fr/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://whatsanalyze.com/pt/tools/ai-chat-analyzer/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://whatsanalyze.com/it/tools/ai-chat-analyzer/"/>
+  </url>
+  <url>
     <loc>https://whatsanalyze.com/tools/court-evidence/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://whatsanalyze.com/tools/court-evidence/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://whatsanalyze.com/de/tools/court-evidence/"/>
