@@ -306,6 +306,10 @@ export default defineNuxtConfig({
       // with its own narrow list when payloadExtraction/appManifest kick in, which left
       // the pages and all _nuxt assets out of the precache. Restore the default set.
       globPatterns: ["**/*.{js,wasm,css,html}"],
+      // The on-device AI model's runtime (WebLLM, 6 MB). Only fetched by the
+      // AI page once a visitor picks on-device analysis, and too big to make
+      // every visitor's service worker download it up front.
+      globIgnores: ["**/llm.worker-*.js"],
       // Every URL on the site ends in a slash (see i18n.trailingSlash), and
       // every page is prerendered to page/index.html. Workbox resolves page/
       // to page/index.html on its own (directoryIndex), so precache the files

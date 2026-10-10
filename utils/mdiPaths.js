@@ -80,9 +80,15 @@ import {
   mdiTrayArrowDown,
   mdiWeatherNight,
   mdiWhiteBalanceSunny,
+  mdiCloudOutline,
+  mdiCreationOutline,
+  mdiMinusCircleOutline,
 } from "@mdi/js";
 
 export const mdiPaths = {
+  "mdi-minus-circle-outline": mdiMinusCircleOutline,
+  "mdi-creation-outline": mdiCreationOutline,
+  "mdi-cloud-outline": mdiCloudOutline,
   "mdi-account-clock-outline": mdiAccountClockOutline,
   "mdi-account-multiple-outline": mdiAccountMultipleOutline,
   "mdi-alert-circle-outline": mdiAlertCircleOutline,

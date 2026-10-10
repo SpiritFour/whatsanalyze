@@ -34,11 +34,24 @@
       <!-- The same component the home page renders after an upload, drawing
            the same charts from the sender's finished numbers rather than from
            their messages. -->
+      <AiReport v-else-if="aiReport" :report="aiReport" />
       <ChartsResults v-else :chat="analysis" shared />
     </LandingSection>
 
     <LandingSection theme="white">
-      <div class="wa-scope text-center">
+      <!-- An AI report invites the reader to the AI analyzer, not the charts -->
+      <div v-if="aiReport" class="wa-scope text-center">
+        <p class="m-0 text-xl font-bold text-wa-ink">
+          {{ $t("toolsAi.ctaTitle") }}
+        </p>
+        <p class="m-0 mb-6 mt-2 text-sm text-wa-ink-muted">
+          {{ $t("toolsAi.ctaNote") }}
+        </p>
+        <UiButton :to="localePath('/tools/ai-chat-analyzer')" size="lg">
+          {{ $t("toolsAi.ctaButton") }}
+        </UiButton>
+      </div>
+      <div v-else class="wa-scope text-center">
         <p class="m-0 text-xl font-bold text-wa-ink">
           {{ $t("sharedHighlightsCtaTitle") }}
         </p>
@@ -55,8 +68,11 @@
 
 <script setup>
 import { onMounted, ref, shallowRef } from "vue";
+import AiReport from "~/components/ai/AiReport.vue";
 import { SharedAnalysis } from "~/utils/social/analysisSnapshot";
-import { loadSharedAnalysis } from "~/utils/social/shareLinkStore";
+import { reviveSnapshot } from "~/utils/social/shareLink";
+import { loadSharedPayload } from "~/utils/social/shareLinkStore";
+import { isAiReport } from "~/utils/ai/report";
 import { analyticsChat } from "~/composables/useAnalytics";
 
 const localePath = useLocalePath();
@@ -66,6 +82,8 @@ const router = useRouter();
 // shallowRef: the charts read whole arrays off this and never mutate them, so
 // there is nothing to gain from making every entry reactive.
 const analysis = shallowRef(null);
+// Or an AI report: same link format, told apart by the payload's `kind`.
+const aiReport = shallowRef(null);
 const loading = ref(true);
 const errorKey = ref(null);
 
@@ -106,7 +124,9 @@ onMounted(async () => {
   }
 
   try {
-    analysis.value = new SharedAnalysis(await loadSharedAnalysis(fragment));
+    const payload = await loadSharedPayload(fragment);
+    if (isAiReport(payload)) aiReport.value = payload;
+    else analysis.value = new SharedAnalysis(reviveSnapshot(payload));
     analyticsChat.sharedHighlightsOpened();
   } catch (error) {
     console.error("Could not open the shared analysis", error);
