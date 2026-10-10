@@ -263,7 +263,7 @@ test.describe("starting a subscription", () => {
     await expect(page.locator("nuxtlink")).toHaveCount(0);
 
     await page.getByRole("link", { name: "Subscribe Now" }).click();
-    await page.waitForURL(/\/subscribe\/?$/);
+    await page.waitForURL(/\/subscribe\/?\?from=(\/|%2F)$/);
     await expect(
       page.getByRole("button", { name: "Subscribe Now" }),
     ).toBeVisible();
@@ -281,7 +281,7 @@ test.describe("starting a subscription", () => {
       .click();
     await page.getByRole("link", { name: /Open Subscription Page/i }).click();
 
-    await page.waitForURL(/\/subscribe\/?$/);
+    await page.waitForURL(/\/subscribe\/?\?from=(\/|%2F)$/);
   });
 
   test("sends a subscriber from /subscribe to Stripe checkout", async ({
