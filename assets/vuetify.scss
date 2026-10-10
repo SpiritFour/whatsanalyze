@@ -1,0 +1,120 @@
+// Vuetify generates every utility class at every breakpoint: 249 KB of CSS
+// that blocks the first paint on every page, of which ~180 classes are used.
+// Groups nothing uses are switched off, and responsive variants are kept only
+// where one is used (mx-md-10, text-md-h1). Before using a Vuetify utility
+// class that renders unstyled, check whether its group is switched off here.
+//
+// Loaded in place of the module's prebuilt vuetify/styles. Its configFile
+// option would do the same, but it also turns off Nuxt's inlined component
+// styles, which put more CSS in front of the first paint than this saves.
+@use "vuetify/styles" with (
+  $utilities: (
+    "overflow-x": false,
+    "overflow-y": false,
+    "display": false,
+    "float": false,
+    "flex": false,
+    "flex-direction": (
+      responsive: false,
+    ),
+    "flex-grow": false,
+    "flex-shrink": false,
+    "flex-wrap": (
+      responsive: false,
+    ),
+    "justify-content": (
+      responsive: false,
+    ),
+    "justify-items": (
+      responsive: false,
+    ),
+    "align-items": (
+      responsive: false,
+    ),
+    "align-content": false,
+    "align-self": false,
+    "order": false,
+    "gap": false,
+    "gap-row": false,
+    "gap-column": false,
+    "margin": (
+      responsive: false,
+    ),
+    "margin-y": (
+      responsive: false,
+    ),
+    "margin-top": (
+      responsive: false,
+    ),
+    "margin-right": (
+      responsive: false,
+    ),
+    "margin-bottom": (
+      responsive: false,
+    ),
+    "margin-left": (
+      responsive: false,
+    ),
+    "margin-start": false,
+    "margin-end": false,
+    "negative-margin": false,
+    "negative-margin-x": false,
+    "negative-margin-y": false,
+    "negative-margin-top": false,
+    "negative-margin-right": false,
+    "negative-margin-bottom": false,
+    "negative-margin-left": false,
+    "negative-margin-start": false,
+    "negative-margin-end": false,
+    "padding": (
+      responsive: false,
+    ),
+    "padding-x": (
+      responsive: false,
+    ),
+    "padding-y": (
+      responsive: false,
+    ),
+    "padding-top": (
+      responsive: false,
+    ),
+    "padding-right": (
+      responsive: false,
+    ),
+    "padding-bottom": (
+      responsive: false,
+    ),
+    "padding-left": (
+      responsive: false,
+    ),
+    "padding-start": false,
+    "padding-end": false,
+    "rounded-top": false,
+    "rounded-end": false,
+    "rounded-bottom": false,
+    "rounded-start": false,
+    "rounded-top-start": false,
+    "rounded-top-end": false,
+    "rounded-bottom-end": false,
+    "rounded-bottom-start": false,
+    "border-end": false,
+    "border-bottom": false,
+    "border-start": false,
+    "text-align": (
+      responsive: false,
+    ),
+    "text-decoration": false,
+    "overflow-wrap": false,
+    "text-opacity": false,
+    "text-overflow": false,
+    "text-transform": false,
+    "font-italic": false,
+    "text-mono": false,
+    "position": false,
+    "fill-height": false,
+    "height": false,
+    "width": (
+      responsive: false,
+    ),
+  )
+);
