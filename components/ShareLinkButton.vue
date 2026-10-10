@@ -29,7 +29,15 @@ import { analyticsChat } from "~/composables/useAnalytics";
 export default {
   name: "ShareLinkButton",
   props: {
-    chat: { type: Object, required: true },
+    /** The analyzed chat, for the analyzer's results. */
+    chat: { type: Object, default: null },
+    /**
+     * Or anything else to share: returns the payload to encrypt. The AI
+     * report passes itself here; /s tells the two apart by `kind`.
+     */
+    capture: { type: Function, default: null },
+    /** Where the link was made, for analytics. */
+    source: { type: String, default: "results_link" },
   },
   setup() {
     // Options API gets no `this.localePath` from @nuxtjs/i18n v10.
@@ -88,7 +96,11 @@ export default {
           buildShareLinkUrl(
             window.location.origin,
             this.localePath("/s"),
-            await storeSharedAnalysis(await captureAnalysis(this.chat)),
+            await storeSharedAnalysis(
+              this.capture
+                ? await this.capture()
+                : await captureAnalysis(this.chat),
+            ),
           );
         this.shareUrl = url;
 
@@ -99,11 +111,11 @@ export default {
             url,
           });
           this.messageKey = "shareLinkShared";
-          analyticsChat.share("native_share", "results_link");
+          analyticsChat.share("native_share", this.source);
         } else {
           await this.copy(url);
           this.messageKey = "shareLinkCopied";
-          analyticsChat.share("clipboard", "results_link");
+          analyticsChat.share("clipboard", this.source);
         }
       } catch (error) {
         if (error instanceof ChatTooLargeError) {

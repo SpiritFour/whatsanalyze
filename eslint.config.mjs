@@ -70,6 +70,7 @@ export default [
         onMounted: "readonly",
         useToolsNav: "readonly",
         useToolBreadcrumbs: "readonly",
+        useSubscribeLink: "readonly",
         useToolSchema: "readonly",
         scrollToDropzone: "readonly",
         storeToRefs: "readonly",

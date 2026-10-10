@@ -299,6 +299,24 @@ export const analyticsTools = {
     });
   },
 
+  /** An AI analysis was started, on the device or in the cloud. */
+  aiStarted(mode: "local" | "cloud", question: string) {
+    // The preset's id or "custom", never what was typed.
+    trackEvent("ai_analysis_started", { ai_mode: mode, ai_question: question });
+  },
+
+  /** The mobile-data warning before the on-device model download. */
+  aiDataWarning(reason: "cellular" | "unknown") {
+    trackEvent("ai_data_warning", { reason });
+  },
+
+  aiFinished(mode: "local" | "cloud", durationMs: number) {
+    trackEvent("ai_analysis_finished", {
+      ai_mode: mode,
+      duration_ms: Math.round(durationMs),
+    });
+  },
+
   error(toolName: string, errorCode: string) {
     trackEvent("tool_error", {
       tool_name: toolName,

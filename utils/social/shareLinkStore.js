@@ -9,6 +9,7 @@ import {
   decodeShareToken,
   encodeShareToken,
   parseSharePayload,
+  parseSharedJson,
 } from "~/utils/social/shareLink";
 
 /**
@@ -79,12 +80,23 @@ export async function storeSharedAnalysis(snapshot) {
   return encodeShareToken({ id, ...encryptedKey });
 }
 
-export async function loadSharedAnalysis(fragment) {
+async function loadSharedBytes(fragment) {
   const { id, iv, key } = decodeShareToken(fragment);
   const stored = await getDoc(
     doc(useNuxtApp().$firestore, "data", documentIdFor(id)),
   );
   if (!stored.exists()) throw new Error("No such share link");
+  return decryptBytes(stored.data().data, { iv, key });
+}
 
-  return parseSharePayload(await decryptBytes(stored.data().data, { iv, key }));
+export async function loadSharedAnalysis(fragment) {
+  return parseSharePayload(await loadSharedBytes(fragment));
+}
+
+/**
+ * Whatever a link holds, unchecked: /s opens analysis snapshots and AI
+ * reports alike and decides by the payload's own `kind`.
+ */
+export async function loadSharedPayload(fragment) {
+  return parseSharedJson(await loadSharedBytes(fragment));
 }

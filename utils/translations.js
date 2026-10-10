@@ -27,6 +27,8 @@ export const messages = {
       emailLabel: "Linked Email",
       validUntilLabel: "Valid Until",
       openAnalyzer: "Open Chat Analyzer",
+      continueBack: "Continue where you left off",
+      returning: "You're all set — taking you back…",
       openWrapped: "Open WhatsApp Wrapped",
       managePortal: "Manage Subscription",
       openingPortal: "Opening...",
@@ -594,6 +596,9 @@ export const messages = {
       toolInactivityTitle: "Inactivity & Last Message Tracker",
       toolInactivityText:
         "Find out who sent the last message, calculate elapsed silence duration, measure reply latencies, and pinpoint historical chat gaps.",
+      toolAiTitle: "AI Chat Analyzer",
+      toolAiText:
+        "Let AI describe your chat: each person's role, how you interact, your topics and best moments. On your device or in the cloud.",
       toolCourtTitle: "Court & Legal Evidence PDF",
       toolCourtText:
         "Format WhatsApp chats into court-admissible, tamper-evident PDF transcripts with exact timestamps and sender verification.",
@@ -684,6 +689,163 @@ export const messages = {
       switchFile: "Switch File",
       messagesAnalyzedIn: "{count} messages • analyzed in {time}ms",
       dismiss: "Dismiss",
+    },
+    toolsAi: {
+      cloudAllowance: "{remaining} of {limit} cloud analyses left today",
+      cloudAllowanceOut:
+        "You've used today's cloud analyses — new ones tomorrow.",
+      faq6Q: "Should I remove anything before using the cloud AI?",
+      faq6A:
+        'Names, phone numbers, emails, links and bank account numbers (IBANs) are replaced automatically before anything is sent. Passwords, PINs and other secrets typed into a chat can\'t be recognised reliably, though. If your chat contains any, use the on-device AI, or open "See exactly what the cloud AI would receive" and check first.',
+      askTitle: "Make it personal (optional)",
+      askMeLabel: "Which one is you?",
+      askLabel: "What do you want to know?",
+      ask_into: "Is the other person into me?",
+      ask_arguments: "Who has the more convincing arguments?",
+      ask_worried: "Is there anything I should be worried about?",
+      ask_gift: "What would be a good gift for the other person?",
+      ask_effort: "Who puts more effort into this chat?",
+      ask_better: "How could we communicate better?",
+      askCustom: "Ask your own question",
+      askCustomPlaceholder: "e.g. Why do our conversations always die out?",
+      askNeedsMe: "Pick which one is you first, so the AI knows who's asking.",
+      progressKeepOpen: "Keep this page open — switching apps pauses the AI.",
+      reportCoverage:
+        "{total} messages, {from} – {to} · the AI read {read} of them",
+      reportCoverageParts:
+        "{total} messages, {from} – {to} · the AI read {read} of them in {parts} parts",
+      progressRead: "Reading your chat: part {part} of {total}",
+      progressWrite: "Writing your report…",
+      localCrashed:
+        "Last time, this device ran out of memory running the on-device AI and the page reloaded. You can try again after closing other apps and tabs, or use the cloud AI, which works on any phone.",
+      progressDownload:
+        "Downloading the AI model (only once): {done} of {total} MB",
+      progressEta: "About {time} left",
+      progressEtaPending: "Estimating time left…",
+      progressLoading: "Loading the AI model…",
+      localDownloaded: "Already downloaded on this device",
+      dataTitle: "Download {gb} GB on mobile data?",
+      dataTextCellular:
+        "You seem to be on mobile data. The on-device AI needs a one-time download of about {gb} GB, which can use up your data plan or cost extra. Connect to Wi-Fi first if you can.",
+      dataTextUnknown:
+        "We can't tell whether you're on Wi-Fi. The on-device AI needs a one-time download of about {gb} GB — on mobile data that can use up your data plan or cost extra.",
+      dataContinue: "Download anyway",
+      dataCancel: "Wait for Wi-Fi",
+      seoTitle:
+        "AI WhatsApp Chat Analyzer – Private AI Insights | WhatsAnalyze",
+      seoDescription:
+        "Analyze your WhatsApp chat with AI: personalities, relationship dynamics, recurring topics and best moments. Run the AI privately on your own device, or in the cloud for deeper insights.",
+      ogTitle: "AI WhatsApp Chat Analyzer",
+      ogDescription:
+        "Let AI read your WhatsApp chat and tell you who is who, how you interact and what you talk about — privately on your device or in the cloud.",
+      heroEyebrow: "AI Chat Analysis",
+      heroTitle: "AI WhatsApp Chat Analyzer",
+      heroSubtitle:
+        "Upload your exported chat and let AI describe your conversation: the vibe, each person's role and style, how you interact, your recurring topics and best moments.",
+      heroNote:
+        "You choose where the AI runs · On your device or in the cloud · Names never leave your device",
+      chooseEyebrow: "Step 2 · Choose your AI",
+      chooseTitle: "Where should the AI run?",
+      chooseText:
+        "Both read anonymized excerpts of your chat and produce the same kind of report. They differ in privacy, quality and what your device needs.",
+      localTitle: "On your device",
+      localTag: "MAXIMUM PRIVACY · FREE",
+      localPro1: "Nothing leaves your device — not even anonymized",
+      localPro2: "Free, no account needed",
+      localPro3: "Works offline once the model is downloaded",
+      localCon1: "One-time download of about {gb} GB",
+      localCon2: "Needs a recent phone or computer and can take a few minutes",
+      localCon3:
+        "Small model: simpler insights, and a long chat is read in parts, which takes a few minutes",
+      localButton: "Analyze on this device",
+      localUnsupported:
+        "Your browser doesn't support WebGPU, which the on-device AI needs. Try the latest Chrome, Edge or Safari, or use the cloud AI.",
+      cloudTitle: "In the cloud",
+      cloudTag: "BEST QUALITY · SUBSCRIBERS",
+      cloudPro1:
+        "A state-of-the-art AI model: much deeper, more accurate insights",
+      cloudPro2:
+        "Reads up to about 10,000 messages in one go — all of most chats",
+      cloudPro3: "Works on any phone, ready in about 30 seconds",
+      cloudCon1:
+        "Anonymized excerpts are sent to our AI provider (Anthropic or OpenAI) for processing",
+      cloudCon2: "Included in the WhatsAnalyze subscription",
+      cloudButton: "Analyze in the cloud",
+      cloudSubscribe: "Subscribe to unlock cloud AI",
+      cloudConsent:
+        "Names, phone numbers, emails and links are replaced before sending. We don't store your chat, and the provider doesn't train on it.",
+      previewToggle: "See exactly what the cloud AI would receive",
+      previewText:
+        "This is everything that is sent. Real names are swapped back in on your device once the answer arrives.",
+      progressLocal: "The AI is reading your chat on your device…",
+      progressCloud:
+        "The AI is reading your chat… this takes about 15 seconds.",
+      error_local:
+        "The on-device AI couldn't run. Your device may not have enough memory — try the cloud AI or a computer.",
+      error_cloud:
+        "The cloud AI is unavailable right now. Please try again in a minute.",
+      error_not_subscribed:
+        "Your subscription couldn't be verified. Please log in again on the subscription page.",
+      error_daily_limit:
+        "You've reached today's limit for cloud analyses. Please try again tomorrow.",
+      error_local_invalid:
+        "The on-device AI got confused by this chat. Try again, or use the cloud AI for better results.",
+      error_no_messages:
+        "We couldn't find any text messages to analyze in this chat.",
+      reportCloud: "ANALYZED BY CLOUD AI",
+      reportLocal: "ANALYZED ON YOUR DEVICE",
+      reportTitle: "What the AI sees in your chat",
+      peopleTitle: "Who's who",
+      dynamicsTitle: "How you interact",
+      topicsTitle: "What you talk about",
+      highlightsTitle: "Memorable moments",
+      reportDisclaimer:
+        "AI can misread context and irony. Take this as a fun perspective, not a verdict.",
+      tryCloud: "Compare with the cloud AI",
+      fullAnalyzer: "See all statistics and charts →",
+      howEyebrow: "How it works",
+      howTitle: "AI insights without handing over your chat",
+      howText:
+        "Your chat is read in your browser. An AI only ever sees a short, anonymized digest.",
+      how1Title: "Anonymized on your device",
+      how1Text:
+        "Before any AI sees your chat, names become “Person A”, “Person B”, and phone numbers, emails and links are removed. Real names are restored only on your screen.",
+      how2Title: "Your choice of AI",
+      how2Text:
+        "Run a compact open model entirely in your browser, or a leading cloud model for the most perceptive analysis.",
+      how3Title: "Made for any chat",
+      how3Text:
+        "Couples, best friends, family groups or work chats — the AI describes roles, dynamics, topics and highlights in your language.",
+      stepsEyebrow: "Step by step",
+      stepsTitle: "How to export your WhatsApp chat",
+      step1Title: "Open the chat",
+      step1Text:
+        "In WhatsApp, open the chat or group and tap its name at the top.",
+      step2Title: "Export without media",
+      step2Text: "Scroll down, tap “Export chat” and choose “Without media”.",
+      step3Title: "Upload it here",
+      step3Text:
+        "Save the file and drop it into the box above. It is read in your browser.",
+      guideLink: "Detailed export guide for iPhone and Android",
+      faqTitle: "Frequently asked questions",
+      faq1Q: "Is there a free AI WhatsApp chat analyzer?",
+      faq1A:
+        "Yes. The on-device mode is free and needs no account: a small AI model downloads once into your browser and analyzes the chat locally. The cloud mode, with a much stronger model, is part of the WhatsAnalyze subscription.",
+      faq2Q: "Is my chat uploaded when I use AI?",
+      faq2A:
+        "With on-device AI, nothing is uploaded at all. With cloud AI, only anonymized excerpts are sent: your browser replaces names with placeholders and removes phone numbers, emails and links first, and you can see exactly what is sent before you start. We don't store it, and our AI provider doesn't use it for training.",
+      faq3Q: "Which AI models do you use?",
+      faq3A:
+        "On your device: a small open model that runs in your browser through WebGPU — Qwen 3.5 (2B) on computers, Llama 3.2 (1B) on phones. In the cloud: a current model from Anthropic (Claude) or OpenAI (GPT), whichever gives the best results at the time.",
+      faq4Q: "What does the AI tell me about my chat?",
+      faq4A:
+        "A summary and the overall vibe, each person's role and writing style, how you interact (who initiates, balance, warmth), your recurring topics and a few memorable moments.",
+      faq5Q: "Why doesn't the on-device AI work on my phone?",
+      faq5A:
+        "It needs WebGPU and roughly 1 GB of free memory for the AI model. Recent iPhones (iOS 26 or later) and most recent Android phones with Chrome can run it; older devices can't, and closing other apps helps. The cloud AI works everywhere.",
+      ctaTitle: "Ready to see your chat through the eyes of AI?",
+      ctaButton: "Upload your chat",
+      ctaNote: "Private by design · You choose where the AI runs",
     },
     toolsInactivity: {
       breadcrumbHome: "WhatsAnalyze",
@@ -1036,6 +1198,8 @@ export const messages = {
       emailLabel: "Verknüpfte E-Mail",
       validUntilLabel: "Gültig bis",
       openAnalyzer: "Chat-Analyse öffnen",
+      continueBack: "Weiter, wo du warst",
+      returning: "Alles bereit – du wirst zurückgebracht …",
       openWrapped: "WhatsApp Wrapped öffnen",
       managePortal: "Abo verwalten",
       openingPortal: "Wird geöffnet …",
@@ -1587,6 +1751,9 @@ export const messages = {
       toolInactivityTitle: "Inaktivität & Letzte Nachricht",
       toolInactivityText:
         "Finde heraus, wer zuletzt geschrieben hat, berechne Antwortzeiten und erkenne historische Funkstille-Phasen.",
+      toolAiTitle: "KI-Chat-Analyse",
+      toolAiText:
+        "Lass die KI deinen Chat beschreiben: die Rolle jeder Person, wie ihr miteinander umgeht, eure Themen und besten Momente. Auf deinem Gerät oder in der Cloud.",
       toolCourtTitle: "Gerichtsfester Beweis-PDF",
       toolCourtText:
         "Formatiere WhatsApp-Chats in gerichtsfeste, manipulationssichere PDF-Protokolle mit exakten Zeitstempeln.",
@@ -1677,6 +1844,165 @@ export const messages = {
       switchFile: "Datei wechseln",
       messagesAnalyzedIn: "{count} Nachrichten • analysiert in {time} ms",
       dismiss: "Schließen",
+    },
+    toolsAi: {
+      cloudAllowance: "Heute noch {remaining} von {limit} Cloud-Analysen",
+      cloudAllowanceOut:
+        "Die heutigen Cloud-Analysen sind aufgebraucht – morgen gibt's neue.",
+      faq6Q: "Sollte ich vor der Cloud-KI etwas aus dem Chat entfernen?",
+      faq6A:
+        "Namen, Telefonnummern, E-Mails, Links und Kontonummern (IBANs) werden vor dem Senden automatisch ersetzt. Passwörter, PINs und andere Geheimnisse, die im Chat stehen, lassen sich aber nicht zuverlässig erkennen. Wenn dein Chat so etwas enthält, nutze die KI auf dem Gerät – oder öffne vorher „Genau ansehen, was die Cloud-KI bekommen würde“ und prüfe es.",
+      askTitle: "Persönlicher machen (optional)",
+      askMeLabel: "Wer davon bist du?",
+      askLabel: "Was willst du wissen?",
+      ask_into: "Steht die andere Person auf mich?",
+      ask_arguments: "Wer hat die überzeugenderen Argumente?",
+      ask_worried: "Gibt es etwas, worüber ich mir Sorgen machen sollte?",
+      ask_gift: "Was wäre ein gutes Geschenk für die andere Person?",
+      ask_effort: "Wer gibt sich in diesem Chat mehr Mühe?",
+      ask_better: "Wie könnten wir besser kommunizieren?",
+      askCustom: "Eigene Frage stellen",
+      askCustomPlaceholder: "z. B. Warum schlafen unsere Gespräche immer ein?",
+      askNeedsMe: "Wähl zuerst aus, wer du bist, damit die KI weiß, wer fragt.",
+      progressKeepOpen:
+        "Lass diese Seite offen – beim App-Wechsel pausiert die KI.",
+      reportCoverage:
+        "{total} Nachrichten, {from} – {to} · die KI hat {read} davon gelesen",
+      reportCoverageParts:
+        "{total} Nachrichten, {from} – {to} · die KI hat {read} davon in {parts} Teilen gelesen",
+      progressRead: "Dein Chat wird gelesen: Teil {part} von {total}",
+      progressWrite: "Dein Bericht wird geschrieben …",
+      localCrashed:
+        "Beim letzten Mal ist diesem Gerät mit der KI auf dem Gerät der Speicher ausgegangen, und die Seite wurde neu geladen. Schließ andere Apps und Tabs und versuch es noch einmal – oder nutze die Cloud-KI, die auf jedem Handy läuft.",
+      progressDownload:
+        "KI-Modell wird geladen (nur einmal): {done} von {total} MB",
+      progressEta: "Noch etwa {time}",
+      progressEtaPending: "Restzeit wird berechnet …",
+      progressLoading: "KI-Modell wird gestartet …",
+      localDownloaded: "Auf diesem Gerät schon heruntergeladen",
+      dataTitle: "{gb} GB über mobile Daten laden?",
+      dataTextCellular:
+        "Du scheinst mobile Daten zu nutzen. Die KI auf dem Gerät braucht einen einmaligen Download von etwa {gb} GB – das kann dein Datenvolumen aufbrauchen oder extra kosten. Verbinde dich wenn möglich zuerst mit WLAN.",
+      dataTextUnknown:
+        "Wir können nicht erkennen, ob du im WLAN bist. Die KI auf dem Gerät braucht einen einmaligen Download von etwa {gb} GB – über mobile Daten kann das dein Datenvolumen aufbrauchen oder extra kosten.",
+      dataContinue: "Trotzdem laden",
+      dataCancel: "Auf WLAN warten",
+      seoTitle:
+        "KI WhatsApp Chat Analyse – Private KI-Auswertung | WhatsAnalyze",
+      seoDescription:
+        "Analysiere deinen WhatsApp-Chat mit KI: Persönlichkeiten, Beziehungsdynamik, wiederkehrende Themen und die besten Momente. Lass die KI privat auf deinem eigenen Gerät laufen oder in der Cloud für tiefere Einblicke.",
+      ogTitle: "KI WhatsApp Chat Analyse",
+      ogDescription:
+        "Lass die KI deinen WhatsApp-Chat lesen und dir sagen, wer wer ist, wie ihr miteinander umgeht und worüber ihr redet – privat auf deinem Gerät oder in der Cloud.",
+      heroEyebrow: "KI-Chat-Analyse",
+      heroTitle: "WhatsApp Chat Analyse mit KI",
+      heroSubtitle:
+        "Lade deinen exportierten Chat hoch und lass die KI euer Gespräch beschreiben: die Stimmung, Rolle und Stil jeder Person, wie ihr miteinander umgeht, eure wiederkehrenden Themen und besten Momente.",
+      heroNote:
+        "Du entscheidest, wo die KI läuft · Auf deinem Gerät oder in der Cloud · Namen verlassen nie dein Gerät",
+      chooseEyebrow: "Schritt 2 · Wähle deine KI",
+      chooseTitle: "Wo soll die KI laufen?",
+      chooseText:
+        "Beide lesen anonymisierte Auszüge deines Chats und erstellen denselben Bericht. Sie unterscheiden sich in Privatsphäre, Qualität und darin, was dein Gerät können muss.",
+      localTitle: "Auf deinem Gerät",
+      localTag: "MAXIMALE PRIVATSPHÄRE · KOSTENLOS",
+      localPro1: "Nichts verlässt dein Gerät – nicht einmal anonymisiert",
+      localPro2: "Kostenlos, kein Konto nötig",
+      localPro3: "Funktioniert offline, sobald das Modell geladen ist",
+      localCon1: "Einmaliger Download von etwa {gb} GB",
+      localCon2:
+        "Braucht ein aktuelles Handy oder einen Computer und kann ein paar Minuten dauern",
+      localCon3:
+        "Kleines Modell: einfachere Einblicke, und ein langer Chat wird in Teilen gelesen, was ein paar Minuten dauert",
+      localButton: "Auf diesem Gerät analysieren",
+      localUnsupported:
+        "Dein Browser unterstützt kein WebGPU, das die KI auf dem Gerät braucht. Probier die neueste Version von Chrome, Edge oder Safari oder nutze die Cloud-KI.",
+      cloudTitle: "In der Cloud",
+      cloudTag: "BESTE QUALITÄT · ABONNENTEN",
+      cloudPro1:
+        "Ein KI-Modell auf dem neuesten Stand: deutlich tiefere, genauere Einblicke",
+      cloudPro2:
+        "Liest bis zu etwa 10.000 Nachrichten auf einmal – bei den meisten Chats alles",
+      cloudPro3: "Funktioniert auf jedem Handy, fertig in etwa 30 Sekunden",
+      cloudCon1:
+        "Anonymisierte Auszüge werden zur Verarbeitung an unseren KI-Anbieter (Anthropic oder OpenAI) gesendet",
+      cloudCon2: "Im WhatsAnalyze-Abo enthalten",
+      cloudButton: "In der Cloud analysieren",
+      cloudSubscribe: "Abonnieren und Cloud-KI freischalten",
+      cloudConsent:
+        "Namen, Telefonnummern, E-Mails und Links werden vor dem Senden ersetzt. Wir speichern deinen Chat nicht, und der Anbieter trainiert nicht damit.",
+      previewToggle: "Genau ansehen, was die Cloud-KI bekommen würde",
+      previewText:
+        "Das ist alles, was gesendet wird. Die echten Namen werden erst auf deinem Gerät wieder eingesetzt, wenn die Antwort da ist.",
+      progressLocal: "Die KI liest deinen Chat auf deinem Gerät …",
+      progressCloud: "Die KI liest deinen Chat … das dauert etwa 15 Sekunden.",
+      error_local:
+        "Die KI auf dem Gerät konnte nicht starten. Vielleicht hat dein Gerät nicht genug Speicher – probier die Cloud-KI oder einen Computer.",
+      error_cloud:
+        "Die Cloud-KI ist gerade nicht erreichbar. Bitte versuch es in einer Minute noch einmal.",
+      error_not_subscribed:
+        "Dein Abo konnte nicht bestätigt werden. Bitte melde dich auf der Abo-Seite erneut an.",
+      error_daily_limit:
+        "Du hast das heutige Limit für Cloud-Analysen erreicht. Bitte versuch es morgen wieder.",
+      error_local_invalid:
+        "Die KI auf dem Gerät ist bei diesem Chat durcheinandergekommen. Versuch es noch einmal oder nutze die Cloud-KI für bessere Ergebnisse.",
+      error_no_messages:
+        "In diesem Chat haben wir keine Textnachrichten zum Analysieren gefunden.",
+      reportCloud: "VON DER CLOUD-KI ANALYSIERT",
+      reportLocal: "AUF DEINEM GERÄT ANALYSIERT",
+      reportTitle: "Was die KI in deinem Chat sieht",
+      peopleTitle: "Wer ist wer",
+      dynamicsTitle: "Wie ihr miteinander umgeht",
+      topicsTitle: "Worüber ihr redet",
+      highlightsTitle: "Unvergessliche Momente",
+      reportDisclaimer:
+        "KI kann Zusammenhänge und Ironie falsch verstehen. Nimm das als unterhaltsame Perspektive, nicht als Urteil.",
+      tryCloud: "Mit der Cloud-KI vergleichen",
+      fullAnalyzer: "Alle Statistiken und Diagramme ansehen →",
+      howEyebrow: "So funktioniert's",
+      howTitle: "KI-Einblicke, ohne deinen Chat herzugeben",
+      howText:
+        "Dein Chat wird in deinem Browser gelesen. Eine KI sieht immer nur einen kurzen, anonymisierten Auszug.",
+      how1Title: "Auf deinem Gerät anonymisiert",
+      how1Text:
+        "Bevor eine KI deinen Chat sieht, werden Namen zu „Person A“, „Person B“, und Telefonnummern, E-Mails und Links werden entfernt. Die echten Namen erscheinen nur auf deinem Bildschirm wieder.",
+      how2Title: "Du wählst die KI",
+      how2Text:
+        "Lass ein kompaktes offenes Modell komplett in deinem Browser laufen oder ein führendes Cloud-Modell für die scharfsinnigste Analyse.",
+      how3Title: "Für jeden Chat",
+      how3Text:
+        "Paare, beste Freunde, Familiengruppen oder Arbeitschats – die KI beschreibt Rollen, Dynamik, Themen und Highlights in deiner Sprache.",
+      stepsEyebrow: "Schritt für Schritt",
+      stepsTitle: "So exportierst du deinen WhatsApp-Chat",
+      step1Title: "Chat öffnen",
+      step1Text:
+        "Öffne in WhatsApp den Chat oder die Gruppe und tippe oben auf den Namen.",
+      step2Title: "Ohne Medien exportieren",
+      step2Text:
+        "Scroll nach unten, tippe auf „Chat exportieren“ und wähle „Ohne Medien“.",
+      step3Title: "Hier hochladen",
+      step3Text:
+        "Speichere die Datei und zieh sie in das Feld oben. Sie wird in deinem Browser gelesen.",
+      guideLink: "Ausführliche Export-Anleitung für iPhone und Android",
+      faqTitle: "Häufige Fragen",
+      faq1Q: "Gibt es eine kostenlose KI-Analyse für WhatsApp-Chats?",
+      faq1A:
+        "Ja. Der Modus auf deinem Gerät ist kostenlos und braucht kein Konto: Ein kleines KI-Modell wird einmal in deinen Browser geladen und analysiert den Chat lokal. Der Cloud-Modus mit einem deutlich stärkeren Modell ist Teil des WhatsAnalyze-Abos.",
+      faq2Q: "Wird mein Chat hochgeladen, wenn ich die KI nutze?",
+      faq2A:
+        "Mit der KI auf deinem Gerät wird gar nichts hochgeladen. Mit der Cloud-KI werden nur anonymisierte Auszüge gesendet: Dein Browser ersetzt vorher Namen durch Platzhalter und entfernt Telefonnummern, E-Mails und Links, und du kannst vor dem Start genau sehen, was gesendet wird. Wir speichern nichts davon, und unser KI-Anbieter nutzt es nicht zum Training.",
+      faq3Q: "Welche KI-Modelle nutzt ihr?",
+      faq3A:
+        "Auf deinem Gerät: ein kleines offenes Modell, das per WebGPU in deinem Browser läuft – Qwen 3.5 (2B) auf Computern, Llama 3.2 (1B) auf Handys. In der Cloud: ein aktuelles Modell von Anthropic (Claude) oder OpenAI (GPT), je nachdem, welches gerade die besten Ergebnisse liefert.",
+      faq4Q: "Was sagt mir die KI über meinen Chat?",
+      faq4A:
+        "Eine Zusammenfassung und die Grundstimmung, Rolle und Schreibstil jeder Person, wie ihr miteinander umgeht (wer anfängt, Ausgewogenheit, Nähe), eure wiederkehrenden Themen und ein paar unvergessliche Momente.",
+      faq5Q: "Warum läuft die KI auf meinem Handy nicht?",
+      faq5A:
+        "Sie braucht WebGPU und etwa 1 GB freien Speicher für das KI-Modell. Aktuelle iPhones (ab iOS 26) und die meisten neueren Android-Handys mit Chrome schaffen das, ältere Geräte nicht; andere Apps zu schließen hilft. Die Cloud-KI funktioniert überall.",
+      ctaTitle: "Bereit, deinen Chat mit den Augen der KI zu sehen?",
+      ctaButton: "Chat hochladen",
+      ctaNote: "Privat by Design · Du entscheidest, wo die KI läuft",
     },
     toolsInactivity: {
       breadcrumbHome: "WhatsAnalyze",
@@ -2037,6 +2363,8 @@ export const messages = {
       emailLabel: "Correo vinculado",
       validUntilLabel: "Válida hasta",
       openAnalyzer: "Abrir el analizador de chats",
+      continueBack: "Volver a donde estabas",
+      returning: "Todo listo: te llevamos de vuelta…",
       openWrapped: "Abrir WhatsApp Wrapped",
       managePortal: "Gestionar suscripción",
       openingPortal: "Abriendo…",
@@ -2572,6 +2900,9 @@ export const messages = {
       toolInactivityTitle: "Inactividad y última respuesta",
       toolInactivityText:
         "Descubre quién envió el último mensaje, calcula el tiempo de silencio, las respuestas y las pausas.",
+      toolAiTitle: "Analizador de chats con IA",
+      toolAiText:
+        "Deja que la IA describa tu chat: el papel de cada persona, cómo os relacionáis, vuestros temas y mejores momentos. En tu dispositivo o en la nube.",
       toolCourtTitle: "PDF de prueba judicial",
       toolCourtText:
         "Formatea chats de WhatsApp en transcripciones PDF válidas en juicio con marcas de tiempo exactas.",
@@ -2662,6 +2993,167 @@ export const messages = {
       switchFile: "Cambiar archivo",
       messagesAnalyzedIn: "{count} mensajes • analizados en {time} ms",
       dismiss: "Cerrar",
+    },
+    toolsAi: {
+      cloudAllowance:
+        "Te quedan {remaining} de {limit} análisis en la nube hoy",
+      cloudAllowanceOut:
+        "Has usado los análisis en la nube de hoy: mañana tendrás nuevos.",
+      faq6Q: "¿Debo quitar algo antes de usar la IA en la nube?",
+      faq6A:
+        "Los nombres, teléfonos, correos, enlaces y números de cuenta (IBAN) se sustituyen automáticamente antes de enviar nada. Pero las contraseñas, PIN y otros datos secretos escritos en un chat no se pueden detectar de forma fiable. Si tu chat contiene alguno, usa la IA en tu dispositivo, o abre antes «Ver exactamente lo que recibiría la IA en la nube» y revísalo.",
+      askTitle: "Hazlo personal (opcional)",
+      askMeLabel: "¿Quién de ellos eres tú?",
+      askLabel: "¿Qué quieres saber?",
+      ask_into: "¿Le gusto a la otra persona?",
+      ask_arguments: "¿Quién tiene los argumentos más convincentes?",
+      ask_worried: "¿Hay algo que deba preocuparme?",
+      ask_gift: "¿Qué sería un buen regalo para la otra persona?",
+      ask_effort: "¿Quién pone más empeño en este chat?",
+      ask_better: "¿Cómo podríamos comunicarnos mejor?",
+      askCustom: "Haz tu propia pregunta",
+      askCustomPlaceholder:
+        "p. ej. ¿Por qué nuestras conversaciones siempre se apagan?",
+      askNeedsMe:
+        "Elige primero quién eres, para que la IA sepa quién pregunta.",
+      progressKeepOpen:
+        "Mantén esta página abierta: si cambias de app, la IA se pausa.",
+      reportCoverage: "{total} mensajes, {from} – {to} · la IA leyó {read}",
+      reportCoverageParts:
+        "{total} mensajes, {from} – {to} · la IA leyó {read} en {parts} partes",
+      progressRead: "Leyendo tu chat: parte {part} de {total}",
+      progressWrite: "Escribiendo tu informe…",
+      localCrashed:
+        "La última vez, este dispositivo se quedó sin memoria con la IA local y la página se recargó. Puedes volver a intentarlo cerrando otras apps y pestañas, o usar la IA en la nube, que funciona en cualquier móvil.",
+      progressDownload:
+        "Descargando el modelo de IA (solo una vez): {done} de {total} MB",
+      progressEta: "Quedan unos {time}",
+      progressEtaPending: "Calculando el tiempo restante…",
+      progressLoading: "Cargando el modelo de IA…",
+      localDownloaded: "Ya descargado en este dispositivo",
+      dataTitle: "¿Descargar {gb} GB con datos móviles?",
+      dataTextCellular:
+        "Parece que estás usando datos móviles. La IA en tu dispositivo necesita una descarga única de unos {gb} GB, que puede agotar tu tarifa de datos o costarte dinero. Si puedes, conéctate antes a una red wifi.",
+      dataTextUnknown:
+        "No podemos saber si estás conectado a una red wifi. La IA en tu dispositivo necesita una descarga única de unos {gb} GB; con datos móviles puede agotar tu tarifa o costarte dinero.",
+      dataContinue: "Descargar de todos modos",
+      dataCancel: "Esperar a tener wifi",
+      seoTitle:
+        "Analizador de chats de WhatsApp con IA – Privado | WhatsAnalyze",
+      seoDescription:
+        "Analiza tu chat de WhatsApp con IA: personalidades, dinámica de la relación, temas recurrentes y mejores momentos. Ejecuta la IA de forma privada en tu propio dispositivo o en la nube para un análisis más profundo.",
+      ogTitle: "Analizador de chats de WhatsApp con IA",
+      ogDescription:
+        "Deja que la IA lea tu chat de WhatsApp y te diga quién es quién, cómo os relacionáis y de qué habláis — en privado en tu dispositivo o en la nube.",
+      heroEyebrow: "Análisis de chats con IA",
+      heroTitle: "Analizador de chats de WhatsApp con IA",
+      heroSubtitle:
+        "Sube tu chat exportado y deja que la IA describa vuestra conversación: el ambiente, el papel y el estilo de cada persona, cómo os relacionáis, vuestros temas recurrentes y mejores momentos.",
+      heroNote:
+        "Tú eliges dónde se ejecuta la IA · En tu dispositivo o en la nube · Los nombres nunca salen de tu dispositivo",
+      chooseEyebrow: "Paso 2 · Elige tu IA",
+      chooseTitle: "¿Dónde quieres que se ejecute la IA?",
+      chooseText:
+        "Ambas leen fragmentos anonimizados de tu chat y generan el mismo tipo de informe. Se diferencian en privacidad, calidad y en lo que necesita tu dispositivo.",
+      localTitle: "En tu dispositivo",
+      localTag: "MÁXIMA PRIVACIDAD · GRATIS",
+      localPro1: "Nada sale de tu dispositivo, ni siquiera anonimizado",
+      localPro2: "Gratis, sin cuenta",
+      localPro3: "Funciona sin conexión una vez descargado el modelo",
+      localCon1: "Descarga única de unos {gb} GB",
+      localCon2:
+        "Necesita un móvil u ordenador reciente y puede tardar unos minutos",
+      localCon3:
+        "Modelo pequeño: análisis más sencillo, y un chat largo se lee por partes, lo que tarda unos minutos",
+      localButton: "Analizar en este dispositivo",
+      localUnsupported:
+        "Tu navegador no admite WebGPU, que la IA local necesita. Prueba la última versión de Chrome, Edge o Safari, o usa la IA en la nube.",
+      cloudTitle: "En la nube",
+      cloudTag: "MÁXIMA CALIDAD · SUSCRIPTORES",
+      cloudPro1:
+        "Un modelo de IA de última generación: análisis mucho más profundo y preciso",
+      cloudPro2:
+        "Lee hasta unos 10.000 mensajes de una vez: la mayoría de los chats, enteros",
+      cloudPro3: "Funciona en cualquier móvil, listo en unos 30 segundos",
+      cloudCon1:
+        "Se envían fragmentos anonimizados a nuestro proveedor de IA (Anthropic u OpenAI) para procesarlos",
+      cloudCon2: "Incluido en la suscripción de WhatsAnalyze",
+      cloudButton: "Analizar en la nube",
+      cloudSubscribe: "Suscríbete para usar la IA en la nube",
+      cloudConsent:
+        "Los nombres, teléfonos, correos y enlaces se sustituyen antes del envío. No guardamos tu chat y el proveedor no lo usa para entrenar.",
+      previewToggle: "Ver exactamente lo que recibiría la IA en la nube",
+      previewText:
+        "Esto es todo lo que se envía. Los nombres reales se vuelven a poner en tu dispositivo cuando llega la respuesta.",
+      progressLocal: "La IA está leyendo tu chat en tu dispositivo…",
+      progressCloud: "La IA está leyendo tu chat… tarda unos 15 segundos.",
+      error_local:
+        "La IA local no ha podido ejecutarse. Puede que tu dispositivo no tenga memoria suficiente: prueba la IA en la nube o un ordenador.",
+      error_cloud:
+        "La IA en la nube no está disponible ahora mismo. Inténtalo de nuevo en un minuto.",
+      error_not_subscribed:
+        "No hemos podido verificar tu suscripción. Vuelve a iniciar sesión en la página de suscripción.",
+      error_daily_limit:
+        "Has alcanzado el límite diario de análisis en la nube. Vuelve a intentarlo mañana.",
+      error_local_invalid:
+        "La IA local se ha confundido con este chat. Inténtalo de nuevo o usa la IA en la nube para mejores resultados.",
+      error_no_messages:
+        "No hemos encontrado mensajes de texto que analizar en este chat.",
+      reportCloud: "ANALIZADO CON IA EN LA NUBE",
+      reportLocal: "ANALIZADO EN TU DISPOSITIVO",
+      reportTitle: "Lo que la IA ve en tu chat",
+      peopleTitle: "Quién es quién",
+      dynamicsTitle: "Cómo os relacionáis",
+      topicsTitle: "De qué habláis",
+      highlightsTitle: "Momentos memorables",
+      reportDisclaimer:
+        "La IA puede malinterpretar el contexto y la ironía. Tómalo como una perspectiva divertida, no como un veredicto.",
+      tryCloud: "Comparar con la IA en la nube",
+      fullAnalyzer: "Ver todas las estadísticas y gráficos →",
+      howEyebrow: "Cómo funciona",
+      howTitle: "Análisis con IA sin entregar tu chat",
+      howText:
+        "Tu chat se lee en tu navegador. Una IA solo ve un resumen corto y anonimizado.",
+      how1Title: "Anonimizado en tu dispositivo",
+      how1Text:
+        "Antes de que ninguna IA vea tu chat, los nombres pasan a ser «Person A», «Person B», y se eliminan teléfonos, correos y enlaces. Los nombres reales solo vuelven a aparecer en tu pantalla.",
+      how2Title: "Tú eliges la IA",
+      how2Text:
+        "Ejecuta un modelo abierto compacto directamente en tu navegador, o un modelo líder en la nube para el análisis más perspicaz.",
+      how3Title: "Para cualquier chat",
+      how3Text:
+        "Parejas, mejores amigos, grupos familiares o chats de trabajo: la IA describe papeles, dinámicas, temas y momentos destacados en tu idioma.",
+      stepsEyebrow: "Paso a paso",
+      stepsTitle: "Cómo exportar tu chat de WhatsApp",
+      step1Title: "Abre el chat",
+      step1Text:
+        "En WhatsApp, abre el chat o grupo y toca su nombre en la parte superior.",
+      step2Title: "Exporta sin archivos",
+      step2Text:
+        "Desplázate hacia abajo, toca «Exportar chat» y elige «Sin archivos».",
+      step3Title: "Súbelo aquí",
+      step3Text:
+        "Guarda el archivo y arrástralo a la casilla de arriba. Se lee en tu navegador.",
+      guideLink: "Guía detallada de exportación para iPhone y Android",
+      faqTitle: "Preguntas frecuentes",
+      faq1Q: "¿Existe un analizador de chats de WhatsApp con IA gratis?",
+      faq1A:
+        "Sí. El modo en tu dispositivo es gratuito y no necesita cuenta: un pequeño modelo de IA se descarga una vez en tu navegador y analiza el chat localmente. El modo en la nube, con un modelo mucho más potente, forma parte de la suscripción de WhatsAnalyze.",
+      faq2Q: "¿Se sube mi chat cuando uso la IA?",
+      faq2A:
+        "Con la IA en tu dispositivo no se sube nada. Con la IA en la nube solo se envían fragmentos anonimizados: tu navegador sustituye antes los nombres por marcadores y elimina teléfonos, correos y enlaces, y puedes ver exactamente qué se envía antes de empezar. No lo guardamos y nuestro proveedor de IA no lo usa para entrenar.",
+      faq3Q: "¿Qué modelos de IA usáis?",
+      faq3A:
+        "En tu dispositivo: un modelo abierto pequeño que se ejecuta en tu navegador mediante WebGPU: Qwen 3.5 (2B) en ordenadores y Llama 3.2 (1B) en móviles. En la nube: un modelo actual de Anthropic (Claude) u OpenAI (GPT), el que dé mejores resultados en cada momento.",
+      faq4Q: "¿Qué me dice la IA sobre mi chat?",
+      faq4A:
+        "Un resumen y el ambiente general, el papel y el estilo de escritura de cada persona, cómo os relacionáis (quién inicia, equilibrio, cercanía), vuestros temas recurrentes y algunos momentos memorables.",
+      faq5Q: "¿Por qué la IA local no funciona en mi móvil?",
+      faq5A:
+        "Necesita WebGPU y alrededor de 1 GB de memoria libre para el modelo de IA. Los iPhone recientes (iOS 26 o posterior) y la mayoría de móviles Android recientes con Chrome pueden ejecutarla; los dispositivos antiguos no, y cerrar otras apps ayuda. La IA en la nube funciona en todas partes.",
+      ctaTitle: "¿Listo para ver tu chat con los ojos de la IA?",
+      ctaButton: "Sube tu chat",
+      ctaNote: "Privado por diseño · Tú eliges dónde se ejecuta la IA",
     },
     toolsInactivity: {
       breadcrumbHome: "WhatsAnalyze",
@@ -3021,6 +3513,8 @@ export const messages = {
       emailLabel: "E-mail vinculado",
       validUntilLabel: "Válida até",
       openAnalyzer: "Abrir o analisador de conversas",
+      continueBack: "Voltar onde estava",
+      returning: "Tudo pronto — a levá-lo de volta…",
       openWrapped: "Abrir o WhatsApp Wrapped",
       managePortal: "Gerenciar assinatura",
       openingPortal: "Abrindo…",
@@ -3378,6 +3872,9 @@ export const messages = {
       toolInactivityTitle: "Inatividade e última mensagem",
       toolInactivityText:
         "Descubra quem enviou a última mensagem, meça a latência de resposta e veja pausas históricas.",
+      toolAiTitle: "Analisador de conversas com IA",
+      toolAiText:
+        "Deixe a IA descrever a sua conversa: o papel de cada pessoa, como interagem, os vossos temas e melhores momentos. No seu dispositivo ou na nuvem.",
       toolCourtTitle: "PDF de prova jurídica",
       toolCourtText:
         "Formate conversas em relatórios PDF para processos com carimbos de data/hora exatos.",
@@ -3468,6 +3965,169 @@ export const messages = {
       switchFile: "Trocar arquivo",
       messagesAnalyzedIn: "{count} mensagens • analisadas em {time} ms",
       dismiss: "Fechar",
+    },
+    toolsAi: {
+      cloudAllowance:
+        "Restam-lhe {remaining} de {limit} análises na nuvem hoje",
+      cloudAllowanceOut:
+        "Já usou as análises na nuvem de hoje — amanhã há novas.",
+      faq6Q: "Devo remover algo antes de usar a IA na nuvem?",
+      faq6A:
+        "Nomes, números de telefone, e-mails, links e números de conta (IBAN) são substituídos automaticamente antes de qualquer envio. Mas palavras-passe, PIN e outros segredos escritos numa conversa não podem ser detetados de forma fiável. Se a sua conversa tiver algum, use a IA no dispositivo, ou abra antes «Ver exatamente o que a IA na nuvem receberia» e verifique.",
+      askTitle: "Torne-o pessoal (opcional)",
+      askMeLabel: "Qual deles é você?",
+      askLabel: "O que quer saber?",
+      ask_into: "A outra pessoa gosta de mim?",
+      ask_arguments: "Quem tem os argumentos mais convincentes?",
+      ask_worried: "Há algo com que me deva preocupar?",
+      ask_gift: "Qual seria um bom presente para a outra pessoa?",
+      ask_effort: "Quem se esforça mais nesta conversa?",
+      ask_better: "Como poderíamos comunicar melhor?",
+      askCustom: "Fazer a sua própria pergunta",
+      askCustomPlaceholder:
+        "p. ex. Porque é que as nossas conversas morrem sempre?",
+      askNeedsMe:
+        "Escolha primeiro quem é você, para a IA saber quem pergunta.",
+      progressKeepOpen:
+        "Mantenha esta página aberta — mudar de app pausa a IA.",
+      reportCoverage: "{total} mensagens, {from} – {to} · a IA leu {read}",
+      reportCoverageParts:
+        "{total} mensagens, {from} – {to} · a IA leu {read} em {parts} partes",
+      progressRead: "A ler a sua conversa: parte {part} de {total}",
+      progressWrite: "A escrever o seu relatório…",
+      localCrashed:
+        "Da última vez, este dispositivo ficou sem memória com a IA local e a página foi recarregada. Pode tentar novamente depois de fechar outras apps e separadores, ou usar a IA na nuvem, que funciona em qualquer telemóvel.",
+      progressDownload:
+        "A transferir o modelo de IA (só uma vez): {done} de {total} MB",
+      progressEta: "Faltam cerca de {time}",
+      progressEtaPending: "A calcular o tempo restante…",
+      progressLoading: "A carregar o modelo de IA…",
+      localDownloaded: "Já transferido neste dispositivo",
+      dataTitle: "Transferir {gb} GB com dados móveis?",
+      dataTextCellular:
+        "Parece estar a usar dados móveis. A IA no dispositivo precisa de uma transferência única de cerca de {gb} GB, que pode esgotar o seu plano de dados ou ter custos extra. Se puder, ligue-se primeiro a uma rede Wi-Fi.",
+      dataTextUnknown:
+        "Não conseguimos saber se está ligado a uma rede Wi-Fi. A IA no dispositivo precisa de uma transferência única de cerca de {gb} GB; com dados móveis pode esgotar o seu plano ou ter custos extra.",
+      dataContinue: "Transferir na mesma",
+      dataCancel: "Esperar pelo Wi-Fi",
+      seoTitle:
+        "Analisador de conversas do WhatsApp com IA – Privado | WhatsAnalyze",
+      seoDescription:
+        "Analise a sua conversa do WhatsApp com IA: personalidades, dinâmica da relação, temas recorrentes e melhores momentos. Execute a IA de forma privada no seu próprio dispositivo ou na nuvem para uma análise mais profunda.",
+      ogTitle: "Analisador de conversas do WhatsApp com IA",
+      ogDescription:
+        "Deixe a IA ler a sua conversa do WhatsApp e dizer-lhe quem é quem, como interagem e sobre o que falam — em privado no seu dispositivo ou na nuvem.",
+      heroEyebrow: "Análise de conversas com IA",
+      heroTitle: "Analisador de conversas do WhatsApp com IA",
+      heroSubtitle:
+        "Carregue a sua conversa exportada e deixe a IA descrevê-la: o ambiente, o papel e o estilo de cada pessoa, como interagem, os vossos temas recorrentes e melhores momentos.",
+      heroNote:
+        "Escolhe onde a IA corre · No seu dispositivo ou na nuvem · Os nomes nunca saem do seu dispositivo",
+      chooseEyebrow: "Passo 2 · Escolha a sua IA",
+      chooseTitle: "Onde deve correr a IA?",
+      chooseText:
+        "Ambas leem excertos anonimizados da sua conversa e produzem o mesmo tipo de relatório. Diferem na privacidade, na qualidade e no que o seu dispositivo precisa.",
+      localTitle: "No seu dispositivo",
+      localTag: "PRIVACIDADE MÁXIMA · GRÁTIS",
+      localPro1: "Nada sai do seu dispositivo, nem sequer anonimizado",
+      localPro2: "Grátis, sem conta",
+      localPro3: "Funciona offline depois de transferir o modelo",
+      localCon1: "Transferência única de cerca de {gb} GB",
+      localCon2:
+        "Precisa de um telemóvel ou computador recente e pode demorar alguns minutos",
+      localCon3:
+        "Modelo pequeno: análise mais simples, e uma conversa longa é lida por partes, o que demora alguns minutos",
+      localButton: "Analisar neste dispositivo",
+      localUnsupported:
+        "O seu navegador não suporta WebGPU, que a IA local precisa. Experimente a versão mais recente do Chrome, Edge ou Safari, ou use a IA na nuvem.",
+      cloudTitle: "Na nuvem",
+      cloudTag: "MELHOR QUALIDADE · SUBSCRITORES",
+      cloudPro1:
+        "Um modelo de IA de ponta: análise muito mais profunda e precisa",
+      cloudPro2:
+        "Lê até cerca de 10 000 mensagens de uma só vez — a maioria das conversas, por inteiro",
+      cloudPro3:
+        "Funciona em qualquer telemóvel, pronto em cerca de 30 segundos",
+      cloudCon1:
+        "São enviados excertos anonimizados ao nosso fornecedor de IA (Anthropic ou OpenAI) para processamento",
+      cloudCon2: "Incluído na subscrição do WhatsAnalyze",
+      cloudButton: "Analisar na nuvem",
+      cloudSubscribe: "Subscreva para desbloquear a IA na nuvem",
+      cloudConsent:
+        "Nomes, números de telefone, e-mails e links são substituídos antes do envio. Não guardamos a sua conversa e o fornecedor não a usa para treino.",
+      previewToggle: "Ver exatamente o que a IA na nuvem receberia",
+      previewText:
+        "Isto é tudo o que é enviado. Os nomes reais são repostos no seu dispositivo quando chega a resposta.",
+      progressLocal: "A IA está a ler a sua conversa no seu dispositivo…",
+      progressCloud:
+        "A IA está a ler a sua conversa… demora cerca de 15 segundos.",
+      error_local:
+        "A IA local não conseguiu arrancar. O seu dispositivo pode não ter memória suficiente: experimente a IA na nuvem ou um computador.",
+      error_cloud:
+        "A IA na nuvem não está disponível neste momento. Tente novamente dentro de um minuto.",
+      error_not_subscribed:
+        "Não foi possível verificar a sua subscrição. Inicie sessão novamente na página de subscrição.",
+      error_daily_limit:
+        "Atingiu o limite diário de análises na nuvem. Tente novamente amanhã.",
+      error_local_invalid:
+        "A IA local baralhou-se com esta conversa. Tente novamente ou use a IA na nuvem para melhores resultados.",
+      error_no_messages:
+        "Não encontrámos mensagens de texto para analisar nesta conversa.",
+      reportCloud: "ANALISADO PELA IA NA NUVEM",
+      reportLocal: "ANALISADO NO SEU DISPOSITIVO",
+      reportTitle: "O que a IA vê na sua conversa",
+      peopleTitle: "Quem é quem",
+      dynamicsTitle: "Como interagem",
+      topicsTitle: "Sobre o que falam",
+      highlightsTitle: "Momentos memoráveis",
+      reportDisclaimer:
+        "A IA pode interpretar mal o contexto e a ironia. Veja isto como uma perspetiva divertida, não como um veredito.",
+      tryCloud: "Comparar com a IA na nuvem",
+      fullAnalyzer: "Ver todas as estatísticas e gráficos →",
+      howEyebrow: "Como funciona",
+      howTitle: "Análise com IA sem entregar a sua conversa",
+      howText:
+        "A sua conversa é lida no seu navegador. Uma IA só vê um resumo curto e anonimizado.",
+      how1Title: "Anonimizado no seu dispositivo",
+      how1Text:
+        "Antes de qualquer IA ver a sua conversa, os nomes passam a «Person A», «Person B», e números de telefone, e-mails e links são removidos. Os nomes reais só reaparecem no seu ecrã.",
+      how2Title: "Escolhe a IA",
+      how2Text:
+        "Corra um modelo aberto compacto inteiramente no seu navegador, ou um modelo de topo na nuvem para a análise mais perspicaz.",
+      how3Title: "Para qualquer conversa",
+      how3Text:
+        "Casais, melhores amigos, grupos de família ou conversas de trabalho: a IA descreve papéis, dinâmicas, temas e destaques no seu idioma.",
+      stepsEyebrow: "Passo a passo",
+      stepsTitle: "Como exportar a sua conversa do WhatsApp",
+      step1Title: "Abra a conversa",
+      step1Text:
+        "No WhatsApp, abra a conversa ou o grupo e toque no nome no topo.",
+      step2Title: "Exporte sem multimédia",
+      step2Text:
+        "Desça, toque em «Exportar conversa» e escolha «Sem multimédia».",
+      step3Title: "Carregue-a aqui",
+      step3Text:
+        "Guarde o ficheiro e arraste-o para a caixa acima. É lido no seu navegador.",
+      guideLink: "Guia de exportação detalhado para iPhone e Android",
+      faqTitle: "Perguntas frequentes",
+      faq1Q: "Existe um analisador de conversas do WhatsApp com IA grátis?",
+      faq1A:
+        "Sim. O modo no seu dispositivo é grátis e não precisa de conta: um pequeno modelo de IA é transferido uma vez para o seu navegador e analisa a conversa localmente. O modo na nuvem, com um modelo muito mais potente, faz parte da subscrição do WhatsAnalyze.",
+      faq2Q: "A minha conversa é enviada quando uso a IA?",
+      faq2A:
+        "Com a IA no seu dispositivo, nada é enviado. Com a IA na nuvem, só são enviados excertos anonimizados: o seu navegador substitui primeiro os nomes por marcadores e remove números, e-mails e links, e pode ver exatamente o que é enviado antes de começar. Não o guardamos e o nosso fornecedor de IA não o usa para treino.",
+      faq3Q: "Que modelos de IA usam?",
+      faq3A:
+        "No seu dispositivo: um pequeno modelo aberto que corre no seu navegador através de WebGPU — Qwen 3.5 (2B) em computadores, Llama 3.2 (1B) em telemóveis. Na nuvem: um modelo atual da Anthropic (Claude) ou da OpenAI (GPT), o que der melhores resultados no momento.",
+      faq4Q: "O que me diz a IA sobre a minha conversa?",
+      faq4A:
+        "Um resumo e o ambiente geral, o papel e o estilo de escrita de cada pessoa, como interagem (quem inicia, equilíbrio, proximidade), os vossos temas recorrentes e alguns momentos memoráveis.",
+      faq5Q: "Porque é que a IA local não funciona no meu telemóvel?",
+      faq5A:
+        "Precisa de WebGPU e de cerca de 1 GB de memória livre para o modelo de IA. iPhones recentes (iOS 26 ou posterior) e a maioria dos telemóveis Android recentes com Chrome conseguem; dispositivos mais antigos não, e fechar outras apps ajuda. A IA na nuvem funciona em todo o lado.",
+      ctaTitle: "Pronto para ver a sua conversa pelos olhos da IA?",
+      ctaButton: "Carregar a conversa",
+      ctaNote: "Privado por conceção · Escolhe onde a IA corre",
     },
     toolsInactivity: {
       breadcrumbHome: "WhatsAnalyze",
@@ -4006,6 +4666,8 @@ export const messages = {
       emailLabel: "E-mail associé",
       validUntilLabel: "Valable jusqu'au",
       openAnalyzer: "Ouvrir l'analyseur de conversations",
+      continueBack: "Reprendre là où vous étiez",
+      returning: "C'est prêt — retour à votre page…",
       openWrapped: "Ouvrir WhatsApp Wrapped",
       managePortal: "Gérer l'abonnement",
       openingPortal: "Ouverture…",
@@ -4366,6 +5028,9 @@ export const messages = {
       toolInactivityTitle: "Inactivité et dernier message",
       toolInactivityText:
         "Découvrez qui a envoyé le dernier message, calculez le temps de réponse et repérez les pauses historiques.",
+      toolAiTitle: "Analyseur de chats IA",
+      toolAiText:
+        "Laissez l'IA décrire votre conversation : le rôle de chacun, votre façon d'échanger, vos sujets et vos meilleurs moments. Sur votre appareil ou dans le cloud.",
       toolCourtTitle: "PDF pour preuve juridique",
       toolCourtText:
         "Mettez en forme vos conversations en transcriptions PDF recevables avec horodatages précis.",
@@ -4458,6 +5123,172 @@ export const messages = {
       switchFile: "Changer de fichier",
       messagesAnalyzedIn: "{count} messages • analysés en {time} ms",
       dismiss: "Fermer",
+    },
+    toolsAi: {
+      cloudAllowance:
+        "Encore {remaining} analyses cloud sur {limit} aujourd'hui",
+      cloudAllowanceOut:
+        "Vous avez utilisé les analyses cloud du jour — nouvelles demain.",
+      faq6Q:
+        "Dois-je retirer quelque chose avant d'utiliser l'IA dans le cloud ?",
+      faq6A:
+        "Les noms, numéros de téléphone, e-mails, liens et numéros de compte (IBAN) sont remplacés automatiquement avant tout envoi. En revanche, les mots de passe, codes PIN et autres secrets écrits dans une conversation ne peuvent pas être détectés de façon fiable. Si votre conversation en contient, utilisez l'IA sur l'appareil, ou ouvrez d'abord « Voir exactement ce que recevrait l'IA dans le cloud » pour vérifier.",
+      askTitle: "Personnalisez (facultatif)",
+      askMeLabel: "Lequel est vous ?",
+      askLabel: "Que voulez-vous savoir ?",
+      ask_into: "L'autre personne est-elle intéressée par moi ?",
+      ask_arguments: "Qui a les arguments les plus convaincants ?",
+      ask_worried: "Y a-t-il quelque chose qui devrait m'inquiéter ?",
+      ask_gift: "Quel serait un bon cadeau pour l'autre personne ?",
+      ask_effort: "Qui fait le plus d'efforts dans cette conversation ?",
+      ask_better: "Comment pourrions-nous mieux communiquer ?",
+      askCustom: "Poser votre propre question",
+      askCustomPlaceholder:
+        "p. ex. Pourquoi nos conversations s'essoufflent-elles toujours ?",
+      askNeedsMe:
+        "Choisissez d'abord qui vous êtes, pour que l'IA sache qui pose la question.",
+      progressKeepOpen:
+        "Gardez cette page ouverte : changer d'app met l'IA en pause.",
+      reportCoverage: "{total} messages, {from} – {to} · l'IA en a lu {read}",
+      reportCoverageParts:
+        "{total} messages, {from} – {to} · l'IA en a lu {read} en {parts} parties",
+      progressRead: "Lecture de votre conversation : partie {part} sur {total}",
+      progressWrite: "Rédaction de votre rapport…",
+      localCrashed:
+        "La dernière fois, cet appareil a manqué de mémoire avec l'IA locale et la page s'est rechargée. Vous pouvez réessayer après avoir fermé d'autres applications et onglets, ou utiliser l'IA dans le cloud, qui fonctionne sur tous les téléphones.",
+      progressDownload:
+        "Téléchargement du modèle d'IA (une seule fois) : {done} sur {total} Mo",
+      progressEta: "Encore environ {time}",
+      progressEtaPending: "Estimation du temps restant…",
+      progressLoading: "Chargement du modèle d'IA…",
+      localDownloaded: "Déjà téléchargé sur cet appareil",
+      dataTitle: "Télécharger {gb} Go en données mobiles ?",
+      dataTextCellular:
+        "Vous semblez être en données mobiles. L'IA sur l'appareil nécessite un téléchargement unique d'environ {gb} Go, qui peut épuiser votre forfait ou entraîner des frais. Connectez-vous d'abord au Wi-Fi si possible.",
+      dataTextUnknown:
+        "Nous ne pouvons pas savoir si vous êtes en Wi-Fi. L'IA sur l'appareil nécessite un téléchargement unique d'environ {gb} Go ; en données mobiles, cela peut épuiser votre forfait ou entraîner des frais.",
+      dataContinue: "Télécharger quand même",
+      dataCancel: "Attendre le Wi-Fi",
+      seoTitle:
+        "Analyse de conversation WhatsApp par IA – Privée | WhatsAnalyze",
+      seoDescription:
+        "Analysez votre conversation WhatsApp avec l'IA : personnalités, dynamique de la relation, sujets récurrents et meilleurs moments. Lancez l'IA en privé sur votre propre appareil, ou dans le cloud pour une analyse plus fine.",
+      ogTitle: "Analyse de conversation WhatsApp par IA",
+      ogDescription:
+        "Laissez l'IA lire votre conversation WhatsApp et vous dire qui est qui, comment vous échangez et de quoi vous parlez — en privé sur votre appareil ou dans le cloud.",
+      heroEyebrow: "Analyse de chat par IA",
+      heroTitle: "Analyse de conversation WhatsApp par IA",
+      heroSubtitle:
+        "Importez votre conversation exportée et laissez l'IA la décrire : l'ambiance, le rôle et le style de chacun, votre façon d'échanger, vos sujets récurrents et vos meilleurs moments.",
+      heroNote:
+        "Vous choisissez où tourne l'IA · Sur votre appareil ou dans le cloud · Les noms ne quittent jamais votre appareil",
+      chooseEyebrow: "Étape 2 · Choisissez votre IA",
+      chooseTitle: "Où l'IA doit-elle tourner ?",
+      chooseText:
+        "Les deux lisent des extraits anonymisés de votre conversation et produisent le même type de rapport. Elles diffèrent par la confidentialité, la qualité et ce dont votre appareil a besoin.",
+      localTitle: "Sur votre appareil",
+      localTag: "CONFIDENTIALITÉ MAXIMALE · GRATUIT",
+      localPro1: "Rien ne quitte votre appareil, même pas anonymisé",
+      localPro2: "Gratuit, sans compte",
+      localPro3: "Fonctionne hors ligne une fois le modèle téléchargé",
+      localCon1: "Téléchargement unique d'environ {gb} Go",
+      localCon2:
+        "Nécessite un téléphone ou un ordinateur récent et peut prendre quelques minutes",
+      localCon3:
+        "Petit modèle : analyse plus simple, et une longue conversation est lue en plusieurs parties, ce qui prend quelques minutes",
+      localButton: "Analyser sur cet appareil",
+      localUnsupported:
+        "Votre navigateur ne prend pas en charge WebGPU, nécessaire à l'IA locale. Essayez la dernière version de Chrome, Edge ou Safari, ou utilisez l'IA dans le cloud.",
+      cloudTitle: "Dans le cloud",
+      cloudTag: "MEILLEURE QUALITÉ · ABONNÉS",
+      cloudPro1:
+        "Un modèle d'IA de pointe : une analyse bien plus fine et plus juste",
+      cloudPro2:
+        "Lit jusqu'à environ 10 000 messages d'un coup, soit la plupart des conversations en entier",
+      cloudPro3:
+        "Fonctionne sur n'importe quel téléphone, prêt en 30 secondes environ",
+      cloudCon1:
+        "Des extraits anonymisés sont envoyés à notre fournisseur d'IA (Anthropic ou OpenAI) pour traitement",
+      cloudCon2: "Inclus dans l'abonnement WhatsAnalyze",
+      cloudButton: "Analyser dans le cloud",
+      cloudSubscribe: "S'abonner pour débloquer l'IA dans le cloud",
+      cloudConsent:
+        "Les noms, numéros de téléphone, e-mails et liens sont remplacés avant l'envoi. Nous ne conservons pas votre conversation et le fournisseur ne s'en sert pas pour l'entraînement.",
+      previewToggle: "Voir exactement ce que recevrait l'IA dans le cloud",
+      previewText:
+        "Voici tout ce qui est envoyé. Les vrais noms sont remis en place sur votre appareil à l'arrivée de la réponse.",
+      progressLocal: "L'IA lit votre conversation sur votre appareil…",
+      progressCloud:
+        "L'IA lit votre conversation… cela prend environ 15 secondes.",
+      error_local:
+        "L'IA locale n'a pas pu démarrer. Votre appareil manque peut-être de mémoire : essayez l'IA dans le cloud ou un ordinateur.",
+      error_cloud:
+        "L'IA dans le cloud est indisponible pour le moment. Réessayez dans une minute.",
+      error_not_subscribed:
+        "Votre abonnement n'a pas pu être vérifié. Reconnectez-vous sur la page d'abonnement.",
+      error_daily_limit:
+        "Vous avez atteint la limite quotidienne d'analyses dans le cloud. Réessayez demain.",
+      error_local_invalid:
+        "L'IA locale s'est embrouillée avec cette conversation. Réessayez, ou utilisez l'IA dans le cloud pour de meilleurs résultats.",
+      error_no_messages:
+        "Nous n'avons trouvé aucun message texte à analyser dans cette conversation.",
+      reportCloud: "ANALYSÉ PAR L'IA DANS LE CLOUD",
+      reportLocal: "ANALYSÉ SUR VOTRE APPAREIL",
+      reportTitle: "Ce que l'IA voit dans votre conversation",
+      peopleTitle: "Qui est qui",
+      dynamicsTitle: "Votre façon d'échanger",
+      topicsTitle: "Vos sujets de conversation",
+      highlightsTitle: "Moments mémorables",
+      reportDisclaimer:
+        "L'IA peut mal interpréter le contexte et l'ironie. Voyez-y un regard amusant, pas un verdict.",
+      tryCloud: "Comparer avec l'IA dans le cloud",
+      fullAnalyzer: "Voir toutes les statistiques et graphiques →",
+      howEyebrow: "Comment ça marche",
+      howTitle: "L'analyse par IA sans livrer votre conversation",
+      howText:
+        "Votre conversation est lue dans votre navigateur. Une IA ne voit jamais qu'un court résumé anonymisé.",
+      how1Title: "Anonymisé sur votre appareil",
+      how1Text:
+        "Avant qu'une IA ne voie votre conversation, les noms deviennent « Person A », « Person B », et les numéros de téléphone, e-mails et liens sont supprimés. Les vrais noms ne réapparaissent que sur votre écran.",
+      how2Title: "Vous choisissez l'IA",
+      how2Text:
+        "Faites tourner un modèle ouvert compact directement dans votre navigateur, ou un modèle cloud de premier plan pour l'analyse la plus fine.",
+      how3Title: "Pour toutes les conversations",
+      how3Text:
+        "Couples, meilleurs amis, groupes de famille ou discussions de travail : l'IA décrit les rôles, la dynamique, les sujets et les temps forts dans votre langue.",
+      stepsEyebrow: "Étape par étape",
+      stepsTitle: "Comment exporter votre conversation WhatsApp",
+      step1Title: "Ouvrez la conversation",
+      step1Text:
+        "Dans WhatsApp, ouvrez la conversation ou le groupe et touchez son nom en haut.",
+      step2Title: "Exportez sans médias",
+      step2Text:
+        "Faites défiler, touchez « Exporter la discussion » et choisissez « Sans médias ».",
+      step3Title: "Importez-la ici",
+      step3Text:
+        "Enregistrez le fichier et déposez-le dans le cadre ci-dessus. Il est lu dans votre navigateur.",
+      guideLink: "Guide d'export détaillé pour iPhone et Android",
+      faqTitle: "Questions fréquentes",
+      faq1Q:
+        "Existe-t-il un analyseur de conversations WhatsApp par IA gratuit ?",
+      faq1A:
+        "Oui. Le mode sur votre appareil est gratuit et sans compte : un petit modèle d'IA se télécharge une fois dans votre navigateur et analyse la conversation localement. Le mode cloud, avec un modèle bien plus puissant, fait partie de l'abonnement WhatsAnalyze.",
+      faq2Q: "Ma conversation est-elle envoyée quand j'utilise l'IA ?",
+      faq2A:
+        "Avec l'IA sur votre appareil, rien n'est envoyé. Avec l'IA dans le cloud, seuls des extraits anonymisés le sont : votre navigateur remplace d'abord les noms par des repères et supprime numéros, e-mails et liens, et vous pouvez voir exactement ce qui est envoyé avant de commencer. Nous ne le conservons pas et notre fournisseur d'IA ne s'en sert pas pour l'entraînement.",
+      faq3Q: "Quels modèles d'IA utilisez-vous ?",
+      faq3A:
+        "Sur votre appareil : un petit modèle ouvert qui tourne dans votre navigateur via WebGPU — Qwen 3.5 (2B) sur ordinateur, Llama 3.2 (1B) sur téléphone. Dans le cloud : un modèle récent d'Anthropic (Claude) ou d'OpenAI (GPT), celui qui donne les meilleurs résultats du moment.",
+      faq4Q: "Que me dit l'IA sur ma conversation ?",
+      faq4A:
+        "Un résumé et l'ambiance générale, le rôle et le style d'écriture de chacun, votre façon d'échanger (qui relance, équilibre, chaleur), vos sujets récurrents et quelques moments mémorables.",
+      faq5Q:
+        "Pourquoi l'IA locale ne fonctionne-t-elle pas sur mon téléphone ?",
+      faq5A:
+        "Elle a besoin de WebGPU et d'environ 1 Go de mémoire libre pour le modèle d'IA. Les iPhone récents (iOS 26 ou plus) et la plupart des téléphones Android récents avec Chrome en sont capables, les appareils plus anciens non ; fermer d'autres applications aide. L'IA dans le cloud fonctionne partout.",
+      ctaTitle: "Prêt à voir votre conversation avec les yeux de l'IA ?",
+      ctaButton: "Importer votre conversation",
+      ctaNote: "Confidentiel par conception · Vous choisissez où tourne l'IA",
     },
     toolsInactivity: {
       breadcrumbHome: "WhatsAnalyze",
@@ -4998,6 +5829,8 @@ export const messages = {
       emailLabel: "Email collegata",
       validUntilLabel: "Valido fino al",
       openAnalyzer: "Apri l'analizzatore di chat",
+      continueBack: "Torna dove eri",
+      returning: "Tutto pronto: ti riportiamo indietro…",
       openWrapped: "Apri WhatsApp Wrapped",
       managePortal: "Gestisci abbonamento",
       openingPortal: "Apertura…",
@@ -5351,6 +6184,9 @@ export const messages = {
       toolInactivityTitle: "Inattività e ultimo messaggio",
       toolInactivityText:
         "Scopri chi ha inviato l'ultimo messaggio, calcola i tempi di risposta e individua le pause storiche.",
+      toolAiTitle: "Analisi chat con IA",
+      toolAiText:
+        "Lascia che l'IA descriva la tua chat: il ruolo di ciascuno, come interagite, i vostri argomenti e i momenti migliori. Sul tuo dispositivo o nel cloud.",
       toolCourtTitle: "PDF di prova legale",
       toolCourtText:
         "Formatta le chat di WhatsApp in trascrizioni PDF legali con timestamp precisi e verifica del mittente.",
@@ -5442,6 +6278,167 @@ export const messages = {
       switchFile: "Cambia file",
       messagesAnalyzedIn: "{count} messaggi • analizzati in {time} ms",
       dismiss: "Chiudi",
+    },
+    toolsAi: {
+      cloudAllowance:
+        "Ti restano {remaining} analisi nel cloud su {limit} oggi",
+      cloudAllowanceOut:
+        "Hai usato le analisi nel cloud di oggi: domani ne avrai di nuove.",
+      faq6Q: "Devo rimuovere qualcosa prima di usare l'IA nel cloud?",
+      faq6A:
+        "Nomi, numeri di telefono, e-mail, link e numeri di conto (IBAN) vengono sostituiti automaticamente prima di qualsiasi invio. Password, PIN e altri dati segreti scritti in una chat però non si possono riconoscere in modo affidabile. Se la tua chat ne contiene, usa l'IA sul dispositivo, oppure apri prima «Vedi esattamente cosa riceverebbe l'IA nel cloud» e controlla.",
+      askTitle: "Rendila personale (facoltativo)",
+      askMeLabel: "Chi di loro sei tu?",
+      askLabel: "Cosa vuoi sapere?",
+      ask_into: "Piaccio all'altra persona?",
+      ask_arguments: "Chi ha gli argomenti più convincenti?",
+      ask_worried: "C'è qualcosa di cui dovrei preoccuparmi?",
+      ask_gift: "Quale sarebbe un bel regalo per l'altra persona?",
+      ask_effort: "Chi si impegna di più in questa chat?",
+      ask_better: "Come potremmo comunicare meglio?",
+      askCustom: "Fai la tua domanda",
+      askCustomPlaceholder:
+        "es. Perché le nostre conversazioni si spengono sempre?",
+      askNeedsMe: "Scegli prima chi sei, così l'IA sa chi sta chiedendo.",
+      progressKeepOpen:
+        "Tieni aperta questa pagina: cambiando app l'IA si mette in pausa.",
+      reportCoverage:
+        "{total} messaggi, {from} – {to} · l'IA ne ha letti {read}",
+      reportCoverageParts:
+        "{total} messaggi, {from} – {to} · l'IA ne ha letti {read} in {parts} parti",
+      progressRead: "Lettura della chat: parte {part} di {total}",
+      progressWrite: "Scrittura del report…",
+      localCrashed:
+        "L'ultima volta questo dispositivo ha esaurito la memoria con l'IA locale e la pagina si è ricaricata. Puoi riprovare dopo aver chiuso altre app e schede, oppure usare l'IA nel cloud, che funziona su qualsiasi smartphone.",
+      progressDownload:
+        "Download del modello di IA (una sola volta): {done} di {total} MB",
+      progressEta: "Ancora circa {time}",
+      progressEtaPending: "Calcolo del tempo rimanente…",
+      progressLoading: "Caricamento del modello di IA…",
+      localDownloaded: "Già scaricato su questo dispositivo",
+      dataTitle: "Scaricare {gb} GB con i dati mobili?",
+      dataTextCellular:
+        "Sembra che tu stia usando i dati mobili. L'IA sul dispositivo richiede un download una tantum di circa {gb} GB, che può esaurire il tuo piano dati o costare extra. Se puoi, collegati prima al Wi-Fi.",
+      dataTextUnknown:
+        "Non possiamo sapere se sei connesso al Wi-Fi. L'IA sul dispositivo richiede un download una tantum di circa {gb} GB: con i dati mobili può esaurire il tuo piano o costare extra.",
+      dataContinue: "Scarica comunque",
+      dataCancel: "Aspetta il Wi-Fi",
+      seoTitle: "Analisi chat WhatsApp con IA – Privata | WhatsAnalyze",
+      seoDescription:
+        "Analizza la tua chat WhatsApp con l'IA: personalità, dinamiche della relazione, argomenti ricorrenti e momenti migliori. Esegui l'IA in privato sul tuo dispositivo, o nel cloud per un'analisi più approfondita.",
+      ogTitle: "Analisi chat WhatsApp con IA",
+      ogDescription:
+        "Lascia che l'IA legga la tua chat WhatsApp e ti dica chi è chi, come interagite e di cosa parlate — in privato sul tuo dispositivo o nel cloud.",
+      heroEyebrow: "Analisi chat con IA",
+      heroTitle: "Analisi chat WhatsApp con IA",
+      heroSubtitle:
+        "Carica la chat esportata e lascia che l'IA descriva la vostra conversazione: l'atmosfera, il ruolo e lo stile di ciascuno, come interagite, gli argomenti ricorrenti e i momenti migliori.",
+      heroNote:
+        "Scegli tu dove gira l'IA · Sul tuo dispositivo o nel cloud · I nomi non lasciano mai il tuo dispositivo",
+      chooseEyebrow: "Passo 2 · Scegli la tua IA",
+      chooseTitle: "Dove deve girare l'IA?",
+      chooseText:
+        "Entrambe leggono estratti anonimizzati della tua chat e producono lo stesso tipo di report. Si differenziano per privacy, qualità e requisiti del dispositivo.",
+      localTitle: "Sul tuo dispositivo",
+      localTag: "MASSIMA PRIVACY · GRATIS",
+      localPro1: "Niente lascia il tuo dispositivo, nemmeno in forma anonima",
+      localPro2: "Gratis, senza account",
+      localPro3: "Funziona offline una volta scaricato il modello",
+      localCon1: "Download una tantum di circa {gb} GB",
+      localCon2:
+        "Serve uno smartphone o un computer recente e può richiedere qualche minuto",
+      localCon3:
+        "Modello piccolo: analisi più semplice, e una chat lunga viene letta a parti, il che richiede qualche minuto",
+      localButton: "Analizza su questo dispositivo",
+      localUnsupported:
+        "Il tuo browser non supporta WebGPU, necessario per l'IA locale. Prova l'ultima versione di Chrome, Edge o Safari, oppure usa l'IA nel cloud.",
+      cloudTitle: "Nel cloud",
+      cloudTag: "MASSIMA QUALITÀ · ABBONATI",
+      cloudPro1:
+        "Un modello di IA all'avanguardia: analisi molto più profonda e precisa",
+      cloudPro2:
+        "Legge fino a circa 10.000 messaggi in una volta: la maggior parte delle chat, per intero",
+      cloudPro3: "Funziona su qualsiasi smartphone, pronto in circa 30 secondi",
+      cloudCon1:
+        "Estratti anonimizzati vengono inviati al nostro fornitore di IA (Anthropic o OpenAI) per l'elaborazione",
+      cloudCon2: "Incluso nell'abbonamento WhatsAnalyze",
+      cloudButton: "Analizza nel cloud",
+      cloudSubscribe: "Abbonati per sbloccare l'IA nel cloud",
+      cloudConsent:
+        "Nomi, numeri di telefono, e-mail e link vengono sostituiti prima dell'invio. Non conserviamo la tua chat e il fornitore non la usa per l'addestramento.",
+      previewToggle: "Vedi esattamente cosa riceverebbe l'IA nel cloud",
+      previewText:
+        "Questo è tutto ciò che viene inviato. I nomi reali vengono rimessi sul tuo dispositivo quando arriva la risposta.",
+      progressLocal: "L'IA sta leggendo la tua chat sul tuo dispositivo…",
+      progressCloud:
+        "L'IA sta leggendo la tua chat… ci vogliono circa 15 secondi.",
+      error_local:
+        "L'IA locale non è riuscita ad avviarsi. Forse il tuo dispositivo non ha memoria sufficiente: prova l'IA nel cloud o un computer.",
+      error_cloud:
+        "L'IA nel cloud al momento non è disponibile. Riprova tra un minuto.",
+      error_not_subscribed:
+        "Non è stato possibile verificare il tuo abbonamento. Accedi di nuovo dalla pagina dell'abbonamento.",
+      error_daily_limit:
+        "Hai raggiunto il limite giornaliero di analisi nel cloud. Riprova domani.",
+      error_local_invalid:
+        "L'IA locale si è confusa con questa chat. Riprova, oppure usa l'IA nel cloud per risultati migliori.",
+      error_no_messages:
+        "Non abbiamo trovato messaggi di testo da analizzare in questa chat.",
+      reportCloud: "ANALIZZATO DALL'IA NEL CLOUD",
+      reportLocal: "ANALIZZATO SUL TUO DISPOSITIVO",
+      reportTitle: "Cosa vede l'IA nella tua chat",
+      peopleTitle: "Chi è chi",
+      dynamicsTitle: "Come interagite",
+      topicsTitle: "Di cosa parlate",
+      highlightsTitle: "Momenti memorabili",
+      reportDisclaimer:
+        "L'IA può fraintendere contesto e ironia. Prendila come una prospettiva divertente, non come un verdetto.",
+      tryCloud: "Confronta con l'IA nel cloud",
+      fullAnalyzer: "Vedi tutte le statistiche e i grafici →",
+      howEyebrow: "Come funziona",
+      howTitle: "Analisi con IA senza consegnare la tua chat",
+      howText:
+        "La tua chat viene letta nel tuo browser. Un'IA vede sempre e solo un breve riassunto anonimizzato.",
+      how1Title: "Anonimizzata sul tuo dispositivo",
+      how1Text:
+        "Prima che un'IA veda la tua chat, i nomi diventano «Person A», «Person B», e numeri di telefono, e-mail e link vengono rimossi. I nomi reali ricompaiono solo sul tuo schermo.",
+      how2Title: "Scegli tu l'IA",
+      how2Text:
+        "Esegui un modello aperto compatto interamente nel browser, oppure un modello cloud di punta per l'analisi più acuta.",
+      how3Title: "Per qualsiasi chat",
+      how3Text:
+        "Coppie, migliori amici, gruppi di famiglia o chat di lavoro: l'IA descrive ruoli, dinamiche, argomenti e momenti salienti nella tua lingua.",
+      stepsEyebrow: "Passo dopo passo",
+      stepsTitle: "Come esportare la tua chat WhatsApp",
+      step1Title: "Apri la chat",
+      step1Text:
+        "In WhatsApp, apri la chat o il gruppo e tocca il nome in alto.",
+      step2Title: "Esporta senza media",
+      step2Text:
+        "Scorri verso il basso, tocca «Esporta chat» e scegli «Senza media».",
+      step3Title: "Caricala qui",
+      step3Text:
+        "Salva il file e trascinalo nel riquadro qui sopra. Viene letto nel tuo browser.",
+      guideLink: "Guida dettagliata all'esportazione per iPhone e Android",
+      faqTitle: "Domande frequenti",
+      faq1Q: "Esiste un'analisi gratuita delle chat WhatsApp con IA?",
+      faq1A:
+        "Sì. La modalità sul dispositivo è gratuita e senza account: un piccolo modello di IA viene scaricato una volta nel browser e analizza la chat in locale. La modalità cloud, con un modello molto più potente, è inclusa nell'abbonamento WhatsAnalyze.",
+      faq2Q: "La mia chat viene caricata quando uso l'IA?",
+      faq2A:
+        "Con l'IA sul dispositivo non viene caricato nulla. Con l'IA nel cloud vengono inviati solo estratti anonimizzati: il browser sostituisce prima i nomi con dei segnaposto e rimuove numeri, e-mail e link, e puoi vedere esattamente cosa viene inviato prima di iniziare. Non lo conserviamo e il nostro fornitore di IA non lo usa per l'addestramento.",
+      faq3Q: "Quali modelli di IA usate?",
+      faq3A:
+        "Sul dispositivo: un piccolo modello aperto che gira nel browser tramite WebGPU — Qwen 3.5 (2B) sui computer, Llama 3.2 (1B) sugli smartphone. Nel cloud: un modello recente di Anthropic (Claude) o OpenAI (GPT), quello che dà i risultati migliori in quel momento.",
+      faq4Q: "Cosa mi dice l'IA sulla mia chat?",
+      faq4A:
+        "Un riassunto e l'atmosfera generale, il ruolo e lo stile di scrittura di ciascuno, come interagite (chi inizia, equilibrio, calore), gli argomenti ricorrenti e alcuni momenti memorabili.",
+      faq5Q: "Perché l'IA locale non funziona sul mio telefono?",
+      faq5A:
+        "Richiede WebGPU e circa 1 GB di memoria libera per il modello di IA. Gli iPhone recenti (iOS 26 o successivo) e la maggior parte degli Android recenti con Chrome ce la fanno, i dispositivi più vecchi no; chiudere altre app aiuta. L'IA nel cloud funziona ovunque.",
+      ctaTitle: "Pronto a vedere la tua chat con gli occhi dell'IA?",
+      ctaButton: "Carica la tua chat",
+      ctaNote: "Privata per progettazione · Scegli tu dove gira l'IA",
     },
     toolsInactivity: {
       breadcrumbHome: "WhatsAnalyze",

@@ -24,6 +24,14 @@ export function useToolsNav() {
 
   const analyticsTools = computed<SiteNavLink[]>(() => [
     {
+      to: localePath("/tools/ai-chat-analyzer"),
+      title: t("toolsHub.toolAiTitle"),
+      text: t("toolsHub.toolAiText"),
+      icon: "mdi-creation-outline",
+      color: "#a78bfa",
+      bg: "rgba(167, 139, 250, 0.15)",
+    },
+    {
       to: localePath("/tools/inactivity"),
       title: t("toolsHub.toolInactivityTitle"),
       text: t("toolsHub.toolInactivityText"),

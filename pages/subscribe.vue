@@ -64,10 +64,17 @@
 
         <p v-if="portalError" class="error-banner">{{ portalError }}</p>
 
+        <p v-if="redirecting" class="success-banner">
+          {{ $t("subscribePage.returning") }}
+        </p>
+
         <div class="actions-row">
+          <NuxtLink v-if="origin" :to="origin" class="primary-btn">
+            {{ $t("subscribePage.continueBack") }}
+          </NuxtLink>
           <NuxtLink
             :to="localePath({ path: '/', hash: '#payButton' })"
-            class="primary-btn"
+            :class="origin ? 'secondary-btn' : 'primary-btn'"
           >
             {{ $t("subscribePage.openAnalyzer") }}
           </NuxtLink>
@@ -91,12 +98,18 @@
         </div>
       </div>
 
+      <!--
+        Back from Stripe, waiting for the subscription to exist. Only this:
+        with the pricing still on screen it looked as if the payment had not
+        gone through, and the "activating" note sat below the fold.
+      -->
+      <div v-else-if="returningFromCheckout" class="apple-card activating-card">
+        <v-progress-circular indeterminate color="#21a68d" size="36" />
+        <p class="card-subtext">{{ $t("subscribePage.activating") }}</p>
+      </div>
+
       <!-- State: No Active Subscription -->
       <div v-else class="space-y-8">
-        <p v-if="subscriptionStore.isActivating" class="activating-banner">
-          {{ $t("subscribePage.activating") }}
-        </p>
-
         <!--
           Why the link they clicked did not let them in. It belongs above the
           sales pitch: at the bottom of the page, next to the restore form,
@@ -218,6 +231,48 @@ import {
   analyticsEcommerce,
   ITEM_PRO_SUBSCRIPTION,
 } from "~/composables/useAnalytics";
+const ORIGIN_KEY = "whatsanalyze_subscribe_from";
+
+/** A path on this site, other than this page. */
+const isOrigin = (path) =>
+  typeof path === "string" &&
+  path.startsWith("/") &&
+  !path.startsWith("//") &&
+  !/\/subscribe\/?([?#]|$)/.test(path);
+
+/**
+ * Where the visitor came from, kept for the tab: arriving inside the app it
+ * is the router's previous page (or ?from=), and it has to survive the full
+ * page load that is the round trip through Stripe Checkout.
+ */
+function rememberOrigin(candidate) {
+  try {
+    if (isOrigin(candidate)) sessionStorage.setItem(ORIGIN_KEY, candidate);
+    const stored = sessionStorage.getItem(ORIGIN_KEY);
+    return isOrigin(stored) ? stored : "";
+  } catch {
+    return isOrigin(candidate) ? candidate : "";
+  }
+}
+
+/** The previous page, when it was ours and arrived here by a full load. */
+function sameSiteReferrer() {
+  try {
+    const url = new URL(document.referrer);
+    return url.origin === window.location.origin ? url.pathname : "";
+  } catch {
+    return "";
+  }
+}
+
+function forgetOrigin() {
+  try {
+    sessionStorage.removeItem(ORIGIN_KEY);
+  } catch {
+    // Nothing stored, nothing to forget.
+  }
+}
+
 export default {
   name: "Subscriptions",
   setup() {
@@ -237,6 +292,11 @@ export default {
       successMessage: "",
       isPortalLoading: false,
       portalError: "",
+      /** Back from Stripe and not verified yet: show only the progress. */
+      returningFromCheckout: false,
+      /** The page the visitor came to subscribe from, to send them back to. */
+      origin: "",
+      redirecting: false,
     };
   },
   computed: {
@@ -264,6 +324,13 @@ export default {
     }
   },
   async mounted() {
+    this.returningFromCheckout = Boolean(this.$route.query.session_id);
+    this.origin = rememberOrigin(
+      this.$route.query.from ||
+        window.history.state?.back ||
+        sameSiteReferrer(),
+    );
+
     const queryEmail = this.$route.query.email || "";
     const queryId =
       this.$route.query.token ||
@@ -319,9 +386,14 @@ export default {
         const returnPath = `${window.location.origin}${this.localePath(
           "/subscribe",
         )}`;
+        // The origin rides along in Stripe's return URL too, so getting
+        // back to it does not depend on this tab's storage surviving Checkout.
+        const from = this.origin
+          ? `&from=${encodeURIComponent(this.origin)}`
+          : "";
         const url = await fetchSubscriptionCheckoutUrl({
-          successUrl: `${returnPath}?session_id={CHECKOUT_SESSION_ID}`,
-          cancelUrl: `${returnPath}?canceled=true`,
+          successUrl: `${returnPath}?session_id={CHECKOUT_SESSION_ID}${from}`,
+          cancelUrl: `${returnPath}?canceled=true${from}`,
         });
         if (!url) throw new Error("No checkout URL returned");
         window.location.assign(url);
@@ -404,6 +476,14 @@ export default {
             );
         if (result.isValid) {
           this.successMessage = this.$t("subscribePage.verifySuccess");
+          // Just paid: take them back to what they wanted to unlock, after a
+          // moment on the confirmation so they see it worked.
+          if (afterCheckout && this.origin) {
+            this.redirecting = true;
+            const origin = this.origin;
+            forgetOrigin();
+            setTimeout(() => this.$router.push(origin), 1500);
+          }
           analyticsEcommerce.subscriptionVerified(
             afterCheckout
               ? "auto_param"
@@ -424,6 +504,7 @@ export default {
         );
       } finally {
         this.loading = false;
+        this.returningFromCheckout = false;
       }
     },
     /**
@@ -862,5 +943,14 @@ export default {
 
 .w-full {
   width: 100%;
+}
+
+.activating-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  padding-block: 2.5rem;
 }
 </style>
