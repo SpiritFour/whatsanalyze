@@ -1,16 +1,18 @@
 <template>
   <div>
-    <p style="font-size: 3em" class="text-h2 text-center">How it works</p>
+    <p style="font-size: 3em" class="text-display-large text-center">
+      How it works
+    </p>
     <v-row class="explainer-list my-10">
-      <v-col cols="4" class="text-h5 text-center">
+      <v-col cols="4" class="text-headline-small text-center">
         <v-icon color="teal" size="large"> mdi-file-export </v-icon>
         Export your chat
       </v-col>
-      <v-col cols="4" class="text-h5 text-center">
+      <v-col cols="4" class="text-headline-small text-center">
         <v-icon color="light-blue-darken-3" size="large"> mdi-cog </v-icon>
         Drag chat file into box above
       </v-col>
-      <v-col cols="4" class="text-h5 text-center">
+      <v-col cols="4" class="text-headline-small text-center">
         <v-icon color="amber-darken-2" size="large">
           mdi-emoticon-happy-outline
         </v-icon>
@@ -37,9 +39,11 @@
         fill-dot
       >
         <v-card :color="item.color">
-          <v-card-title class="text-h6"> {{ item.title }} </v-card-title>
+          <v-card-title class="text-title-large">
+            {{ item.title }}
+          </v-card-title>
           <v-card-text style="float: left; text-align: left" class="text-white">
-            <p class="text-body-1">
+            <p class="text-body-large">
               <v-img
                 :lazy-src="item.imageSrcLazy"
                 :src="item.imageSrc"

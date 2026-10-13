@@ -69,7 +69,7 @@
           ></div>
 
           <div
-            class="text-caption text-right date pt-2"
+            class="text-body-small text-right date pt-2"
             style="color: rgb(204, 204, 204)"
           >
             {{ _getDateString(data.date) }}

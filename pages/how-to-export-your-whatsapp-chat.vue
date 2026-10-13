@@ -221,16 +221,6 @@ export default {
 .youtube-video {
   max-width: 100%;
 }
-.mt-5,
-.my-5,
-.mb-2,
-.py-5 {
-  margin-top: 20px; /* Adjust top margin */
-  margin-bottom: 20px; /* Adjust bottom margin */
-  padding-top: 20px; /* Adjust top padding */
-  padding-bottom: 20px; /* Adjust bottom padding */
-}
-
 .styled-table {
   width: 100%;
   border-collapse: collapse;

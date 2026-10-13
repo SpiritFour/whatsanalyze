@@ -1,0 +1,26 @@
+/* The parts of Vuetify 3's reset (ress.css) that v4 dropped and the site's
+   spacing is built on. Inside Vuetify's own reset layer, so every component
+   style still wins over it. */
+@layer vuetify-core.reset {
+  * {
+    padding: 0;
+    margin: 0;
+  }
+
+  html {
+    overflow-y: scroll;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    background-color: transparent;
+    border-style: none;
+  }
+
+  button,
+  select {
+    text-transform: none;
+  }
+}

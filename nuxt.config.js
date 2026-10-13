@@ -174,7 +174,7 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ["~/assets/vuetify.scss", "~/assets/variables.scss"],
+  css: ["~/assets/reset.css", "~/assets/vuetify.scss", "~/assets/variables.scss"],
 
   modules: [
     "@pinia/nuxt",
@@ -208,7 +208,7 @@ export default defineNuxtConfig({
   vuetify: {
     moduleOptions: {
       prefixComposables: true,
-      disableVuetifyStyles: true,
+      styles: { utilities: false },
     },
     vuetifyOptions: {
       // The set itself is registered in plugins/vuetify-icons.js: naming one

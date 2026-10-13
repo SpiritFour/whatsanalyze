@@ -1,6 +1,6 @@
 <template>
   <v-container class="cta pt-7 my-5 text-center">
-    <div class="text-h2 font-weight-bold mb-7">{{ $t(title) }}</div>
+    <div class="text-display-large font-weight-bold mb-7">{{ $t(title) }}</div>
 
     <v-row v-if="showImage">
       <v-img
@@ -10,7 +10,7 @@
         max-width="250"
       />
     </v-row>
-    <span class="text-body-1"> {{ $t(text) }}</span>
+    <span class="text-body-large"> {{ $t(text) }}</span>
     <br />
     <UiButton :to="to || null" size="lg" class="mt-5" @click="clickHandler">
       {{ $t(buttonTxt) }}

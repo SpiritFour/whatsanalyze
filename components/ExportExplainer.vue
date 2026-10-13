@@ -407,7 +407,7 @@ export default {
 <style lang="scss" scoped>
 .export-explainer {
   max-width: 900px;
-  margin: 0 auto;
+  margin-inline: auto;
   text-align: left;
 }
 
