@@ -22,7 +22,7 @@ export default {
   props: ["page"],
   computed: {
     toc() {
-      return this.page.body?.toc?.links || this.page.toc || [];
+      return this.page?.body?.toc?.links || this.page?.toc || [];
     },
   },
 };
