@@ -1,8 +1,9 @@
 // Every WhatsApp export opens with the end-to-end-encryption notice. Android exports it
-// without an author, so whatsapp-chat-parser labels it "System". iOS attributes it to the
-// chat partner instead, which made it render as the first person's first message (#406).
-// Everything downstream already skips the "System" author, so we relabel these messages
-// once, right after parsing, instead of filtering them in every analysis.
+// without an author, like every other system line ("X added Y", "You changed the group
+// name"), and whatsapp-chat-parser gives those `author: null`. iOS attributes the notice
+// to the chat partner instead, which made it render as the first person's first message
+// (#406). Everything downstream already skips the "System" author, so we relabel these
+// messages once, right after parsing, instead of filtering them in every analysis.
 export const SYSTEM_AUTHOR = "System";
 
 // The notice is exported in the language of the phone that created it, so match the
@@ -26,7 +27,8 @@ export function isSystemMessage(message) {
 
 export function markSystemMessages(messages) {
   messages.forEach((message) => {
-    if (isSystemMessage(message.message)) {
+    // A null author crashed the PDF export (jsPDF measures the author's name).
+    if (message.author == null || isSystemMessage(message.message)) {
       message.author = SYSTEM_AUTHOR;
     }
   });
