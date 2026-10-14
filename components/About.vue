@@ -1,7 +1,7 @@
 <template>
   <section class="about-surface">
     <v-container class="px-5 py-10">
-      <v-row class="ma-10 text-body-1" justify="center">
+      <v-row class="ma-10 text-body-large" justify="center">
         <v-col
           align="center"
           cols="12"
@@ -27,13 +27,13 @@
               style="height: 120px; max-width: 120px; border-radius: 60px"
             />
           </v-row>
-          <v-row class="text-h5 font-weight-bold" justify="center">
+          <v-row class="text-headline-small font-weight-bold" justify="center">
             {{ person.name }}
           </v-row>
           <v-row
             v-for="d in person.description"
             :key="d"
-            class="text-body-1"
+            class="text-body-large"
             justify="center"
           >
             {{ d }}

@@ -44,4 +44,15 @@ describe("markSystemMessages", () => {
       "Sebastian Fellner",
     ]);
   });
+
+  it("relabels every message the parser leaves without an author", () => {
+    const messages = [
+      { author: null, message: 'John Doe changed the group name to "Test"' },
+      { author: "John Doe", message: "Hi" },
+    ];
+
+    markSystemMessages(messages);
+
+    expect(messages.map((m) => m.author)).toEqual(["System", "John Doe"]);
+  });
 });
