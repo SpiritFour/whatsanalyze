@@ -300,9 +300,13 @@ export const analyticsTools = {
   },
 
   /** An AI analysis was started, on the device or in the cloud. */
-  aiStarted(mode: "local" | "cloud", question: string) {
+  aiStarted(mode: "local" | "cloud", question: string, lens: string | null) {
     // The preset's id or "custom", never what was typed.
-    trackEvent("ai_analysis_started", { ai_mode: mode, ai_question: question });
+    trackEvent("ai_analysis_started", {
+      ai_mode: mode,
+      ai_question: question,
+      ai_lens: lens ?? "none",
+    });
   },
 
   /** The mobile-data warning before the on-device model download. */

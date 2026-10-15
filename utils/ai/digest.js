@@ -1,4 +1,5 @@
 import { participantMessages } from "~/utils/utils";
+import { analyzeInactivity } from "~/utils/inactivity";
 
 /**
  * Reduce a chat to what an AI analysis is allowed to see.
@@ -122,12 +123,31 @@ export function buildDigest(messages, maxChars) {
   }
   if (!lines.length) throw new Error("no_messages");
 
+  // The analyzer's own numbers, so a finding can cite them instead of guessing.
+  const behaviour = new Map(
+    analyzeInactivity(spoken).participants.map((p) => [p.name, p]),
+  );
+  const words = new Map();
+  for (const m of spoken) {
+    const n = String(m.message ?? "")
+      .split(/\s+/)
+      .filter(Boolean).length;
+    words.set(m.author, (words.get(m.author) ?? 0) + n);
+  }
+
   return {
     digest: {
-      participants: authors.map(([author, count]) => ({
-        alias: aliasOf.get(author),
-        messages: count,
-      })),
+      participants: authors.map(([author, count]) => {
+        const p = behaviour.get(author);
+        return {
+          alias: aliasOf.get(author),
+          messages: count,
+          startsPct: p.conversationStartersPct,
+          replyMinutes: Math.round(p.avgResponseTimeMs / 60_000),
+          avgWords: Math.round((words.get(author) / count) * 10) / 10,
+        };
+      }),
+      monthly: monthly(spoken),
       totalMessages: spoken.length,
       firstDate: day(spoken[0].date),
       lastDate: day(spoken[spoken.length - 1].date),
@@ -136,6 +156,24 @@ export function buildDigest(messages, maxChars) {
     names,
     anonymize,
   };
+}
+
+/** Messages per calendar month, the six months up to the last message. */
+export function monthly(spoken) {
+  const last = spoken[spoken.length - 1].date;
+  const first = day(spoken[0].date).slice(0, 7);
+  const counts = new Map();
+  for (let i = 0; i < 6; i++) {
+    const d = new Date(last.getFullYear(), last.getMonth() - 5 + i, 1);
+    const month = `${d.getFullYear()}-${pad(d.getMonth() + 1)}`;
+    // Months before the chat began aren't a quiet spell; leave them out.
+    if (month >= first) counts.set(month, 0);
+  }
+  for (const m of spoken) {
+    const month = day(m.date).slice(0, 7);
+    if (counts.has(month)) counts.set(month, counts.get(month) + 1);
+  }
+  return [...counts].map(([month, messages]) => ({ month, messages }));
 }
 
 /**
@@ -257,6 +295,7 @@ export function tidyInsights(insights) {
       8,
     ),
     dynamics: items(insights.dynamics, 4),
+    findings: items(insights.findings, 5),
     highlights: unique((insights.highlights ?? []).map(text), (h) => h, 3),
   };
 }

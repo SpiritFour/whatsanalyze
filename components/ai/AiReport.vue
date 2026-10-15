@@ -18,6 +18,24 @@
       </p>
     </div>
 
+    <!-- The lens the reader picked: findings with a number and a quote each -->
+    <template v-if="report.lens && insights.findings?.length">
+      <h3 class="report-heading">
+        {{ t(`toolsAi.lensFindings_${report.lens}`) }}
+      </h3>
+      <div class="report-grid">
+        <div
+          v-for="item in insights.findings"
+          :key="item.title"
+          class="report-card"
+        >
+          <strong>{{ item.title }}</strong>
+          <p>{{ item.description }}</p>
+        </div>
+      </div>
+      <p class="report-disclaimer">{{ t("toolsAi.lensSafety") }}</p>
+    </template>
+
     <template v-if="insights.people.length">
       <h3 class="report-heading">{{ t("toolsAi.peopleTitle") }}</h3>
       <div class="report-grid">

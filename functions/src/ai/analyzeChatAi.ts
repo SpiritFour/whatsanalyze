@@ -18,6 +18,7 @@ import {
 } from "../paypal/verifyPaypalSubscription";
 import {
   AI_LANGUAGES,
+  AI_LENSES,
   CLOUD_TRANSCRIPT_CHARS,
   MAX_QUESTION_CHARS,
   buildPrompt,
@@ -74,8 +75,20 @@ const requestSchema = z.object({
   language: z.enum(Object.keys(AI_LANGUAGES) as [keyof typeof AI_LANGUAGES]),
   digest: z.object({
     participants: z
-      .array(z.object({ alias: z.string().max(20), messages: z.number() }))
+      .array(
+        z.object({
+          alias: z.string().max(20),
+          messages: z.number(),
+          startsPct: z.number().optional(),
+          replyMinutes: z.number().optional(),
+          avgWords: z.number().optional(),
+        }),
+      )
       .max(50),
+    monthly: z
+      .array(z.object({ month: z.string().max(10), messages: z.number() }))
+      .max(6)
+      .optional(),
     totalMessages: z.number(),
     firstDate: z.string().max(30),
     lastDate: z.string().max(30),
@@ -85,6 +98,9 @@ const requestSchema = z.object({
     .object({
       question: z.string().max(MAX_QUESTION_CHARS).optional(),
       me: z.string().max(20).optional(),
+      lens: z
+        .enum(Object.keys(AI_LENSES) as [keyof typeof AI_LENSES])
+        .optional(),
     })
     .optional(),
 });

@@ -309,7 +309,7 @@ export async function analyzeLocally(
     digest,
     language,
     notes,
-    ask?.me ? { me: ask.me } : undefined,
+    ask ? { me: ask.me, lens: ask.lens } : undefined,
   );
   const insights = await step(async () => {
     const content = await complete(
@@ -323,7 +323,8 @@ export async function analyzeLocally(
           { role: "user", content: prompt },
         ],
         response_format: { type: "json_object", schema },
-        max_tokens: 1000,
+        // A lens adds 3-5 findings on top of the usual report.
+        max_tokens: ask?.lens ? 1400 : 1000,
         temperature: 0.6,
         // The first phone report said "travel plans" once per person, three
         // times over. Penalising repeats is cheap and helps a 1B model most.

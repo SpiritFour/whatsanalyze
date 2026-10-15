@@ -40,6 +40,21 @@
           </div>
         </div>
         <div class="ask__group">
+          <p class="ask__label">{{ t("toolsAi.lensLabel") }}</p>
+          <div class="ask__chips">
+            <button
+              v-for="id in lenses"
+              :key="id"
+              type="button"
+              class="chip"
+              :class="{ 'chip--on': lens === id }"
+              @click="lens = lens === id ? null : id"
+            >
+              {{ t(`toolsAi.lens_${id}`) }}
+            </button>
+          </div>
+        </div>
+        <div class="ask__group">
           <p class="ask__label">{{ t("toolsAi.askLabel") }}</p>
           <div class="ask__chips">
             <button
@@ -319,10 +334,12 @@ import {
 } from "~/utils/ai/cloudModel";
 import {
   AI_LANGUAGES,
+  AI_LENSES,
   CLOUD_TRANSCRIPT_CHARS,
   MAX_QUESTION_CHARS,
   type AiAsk,
   type AiLanguage,
+  type AiLens,
   type ChatInsights,
 } from "~/functions/src/ai/insights";
 
@@ -395,6 +412,8 @@ const people = computed<string[]>(() => {
 const me = ref<string | null>(null);
 const question = ref<string | null>(null);
 const customQuestion = ref("");
+const lenses = Object.keys(AI_LENSES) as AiLens[];
+const lens = ref<AiLens | null>(null);
 
 /** Ready-made questions; some only make sense once we know who "I" is. */
 const presets = computed(() => [
@@ -433,6 +452,7 @@ const coverage = ref<{
 
 /** The report as shown, and as a share link carries it. */
 const reportQuestion = ref("");
+const reportLens = ref<AiLens | undefined>();
 const report = computed<AiReportData | null>(() =>
   insights.value
     ? {
@@ -440,6 +460,7 @@ const report = computed<AiReportData | null>(() =>
         version: 1,
         insights: insights.value,
         question: reportQuestion.value,
+        lens: reportLens.value,
         ranOn: ranOn.value ?? "local",
         coverage: coverage.value,
       }
@@ -482,6 +503,7 @@ function reset() {
   me.value = null;
   question.value = null;
   customQuestion.value = "";
+  lens.value = null;
   insights.value = null;
   errorKey.value = null;
 }
@@ -585,7 +607,7 @@ async function run(mode: Mode) {
   errorKey.value = null;
   errorMode.value = null;
   localCrashed.value = false;
-  analyticsTools.aiStarted(mode, question.value ?? "none");
+  analyticsTools.aiStarted(mode, question.value ?? "none", lens.value);
   // Keep the screen on: a phone that dims and locks pauses the on-device AI.
   const wakeLock = await (navigator as any).wakeLock
     ?.request("screen")
@@ -610,7 +632,9 @@ async function run(mode: Mode) {
       ? anonymize(askedQuestion.value).slice(0, MAX_QUESTION_CHARS)
       : undefined;
     const ask: AiAsk | undefined =
-      alias || asked ? { me: alias, question: asked } : undefined;
+      alias || asked || lens.value
+        ? { me: alias, question: asked, lens: lens.value ?? undefined }
+        : undefined;
     let result: ChatInsights;
     let read = countLines(digest.transcript);
     let parts = 1;
@@ -640,6 +664,7 @@ async function run(mode: Mode) {
     }
     if (mode === "local") modelDownloaded.value = true;
     reportQuestion.value = askedQuestion.value;
+    reportLens.value = lens.value ?? undefined;
     insights.value = tidyInsights(restoreNames(result, names));
     coverage.value = {
       total: digest.totalMessages,
