@@ -167,6 +167,74 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze is an analysis and formatting tool, not a law firm. Nothing on this page is legal advice, and admissibility varies by jurisdiction — always confirm requirements with your lawyer or court.",
     },
+    brandonAlt: {
+      navLabel: "What Brandon Thinks alternative",
+      seoTitle:
+        "Free What Brandon Thinks Alternative – Private AI Chat Analysis | WhatsAnalyze",
+      seoDescription:
+        "Looking for a free What Brandon Thinks alternative? WhatsAnalyze analyzes your WhatsApp chat with AI that runs on your own device — free, no account, and your chat is never uploaded.",
+      heroEyebrow: "What Brandon Thinks alternative",
+      heroTitle: "The free, private alternative to What Brandon Thinks",
+      heroSubtitle:
+        "Get an AI read of your WhatsApp chat — the vibe, each person's role, who puts in the effort, your recurring topics — without paying per report and without uploading your chat to anyone's server.",
+      heroCta: "Try the free AI analysis",
+      heroNote:
+        "Free on-device AI · No account · Your chat never leaves your device",
+      compareEyebrow: "Side by side",
+      compareTitle: "WhatsAnalyze vs. What Brandon Thinks",
+      compareText:
+        "Both read an exported chat and tell you what it says about the relationship. They differ in what it costs and where your chat goes.",
+      row1Label: "Price",
+      row1Us:
+        "Free statistics and free on-device AI. Pro for the deeper cloud AI: {price}/month",
+      row1Them: "Free preview; full reports from €9.99 each or €29.99/month",
+      row2Label: "Where the AI runs",
+      row2Us:
+        "In your browser, on your device (free) — or in the cloud if you choose",
+      row2Them: "On their servers",
+      row3Label: "Chat upload",
+      row3Us: "Not needed: on-device mode reads the file locally",
+      row3Them: "Required: you upload your WhatsApp or iMessage export",
+      row4Label: "Stored chats",
+      row4Us: "None. We never store your chat",
+      row4Them: "Deleted within 7 days of your latest report",
+      row5Label: "Account",
+      row5Us: "Not needed",
+      row5Them: "Needed to see your reports",
+      compareSource:
+        "What Brandon Thinks details are taken from its public websites as of October 2026 and may have changed since.",
+      privacyEyebrow: "Is it safe?",
+      privacyTitle: "Your chat holds someone else's messages too",
+      privacyText:
+        "An exported chat contains the other person's words, not just yours. The safest place to analyze it is a place it never leaves.",
+      pillar1Title: "Runs on your device",
+      pillar1Text:
+        "The free AI model downloads once and runs in your browser. Your chat is read in memory and nothing is uploaded.",
+      pillar2Title: "Anonymized for the cloud",
+      pillar2Text:
+        'If you pick the cloud AI, names become "Person A" and "Person B" and phone numbers, emails and links are removed first. Names are restored only on your device.',
+      pillar3Title: "Nothing kept",
+      pillar3Text:
+        "We don't store your chat and don't train models on it. There is nothing to delete because nothing was saved.",
+      faqTitle: "Questions about switching",
+      faq1Q: "Is there a free version of What Brandon Thinks?",
+      faq1A:
+        "What Brandon Thinks shows a free preview and charges for the full report. WhatsAnalyze's statistics and its on-device AI analysis are completely free, with no account and no limit on how many chats you analyze.",
+      faq2Q: "Is What Brandon Thinks safe?",
+      faq2A:
+        "According to its website, What Brandon Thinks needs you to upload your chat to its servers and deletes it within 7 days of your latest report. If you'd rather not upload a chat at all, WhatsAnalyze's on-device AI reads it inside your browser and sends nothing anywhere.",
+      faq3Q: "Is WhatsAnalyze really free?",
+      faq3A:
+        "Yes. Chat statistics and the on-device AI are free. Pro ({price}/month) adds the deeper cloud AI analysis and unlimited PDF exports — you only need it if you want those.",
+      faq4Q: "Which chats can I analyze?",
+      faq4A:
+        "Any WhatsApp chat you export, from iPhone or Android, one-on-one or group, in any language. Export it without media and drop the .zip or .txt file into the analyzer.",
+      ctaTitle: "Analyze your chat privately, for free",
+      ctaButton: "Start the AI analysis",
+      ctaNote: "No account · No upload in on-device mode",
+      disclaimer:
+        "What Brandon Thinks is a trademark of its respective owner. WhatsAnalyze is not affiliated with or endorsed by it. AI analyses are for reflection, not professional advice.",
+    },
     relationshipProof: {
       seoTitle:
         "Prove Your Relationship with WhatsApp Chats – Visa & Immigration Evidence",
@@ -732,9 +800,9 @@ export const messages = {
       dataContinue: "Download anyway",
       dataCancel: "Wait for Wi-Fi",
       seoTitle:
-        "AI WhatsApp Chat Analyzer – Private AI Insights | WhatsAnalyze",
+        "Private AI WhatsApp Chat Analyzer – Free, On Your Device | WhatsAnalyze",
       seoDescription:
-        "Analyze your WhatsApp chat with AI: personalities, relationship dynamics, recurring topics and best moments. Run the AI privately on your own device, or in the cloud for deeper insights.",
+        "Private AI chat analysis that never leaves your device: a free AI runs in your browser and reads your WhatsApp chat — personalities, relationship dynamics, recurring topics, best moments. No upload, no account. Cloud AI with anonymized excerpts for deeper insights.",
       ogTitle: "AI WhatsApp Chat Analyzer",
       ogDescription:
         "Let AI read your WhatsApp chat and tell you who is who, how you interact and what you talk about — privately on your device or in the cloud.",
@@ -743,7 +811,7 @@ export const messages = {
       heroSubtitle:
         "Upload your exported chat and let AI describe your conversation: the vibe, each person's role and style, how you interact, your recurring topics and best moments.",
       heroNote:
-        "You choose where the AI runs · On your device or in the cloud · Names never leave your device",
+        "Free on-device AI: your chat never leaves your device · Or anonymized cloud AI for subscribers",
       chooseEyebrow: "Step 2 · Choose your AI",
       chooseTitle: "Where should the AI run?",
       chooseText:
@@ -1340,6 +1408,77 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze ist ein Analyse- und Formatierungs-Tool, keine Rechtsberatung. Ob ein Beweis zugelassen wird, hängt von Gericht und Land ab – kläre die Anforderungen immer mit Anwalt oder Gericht.",
     },
+    brandonAlt: {
+      navLabel: "What Brandon Thinks Alternative",
+      seoTitle:
+        "Kostenlose What Brandon Thinks Alternative – Private KI-Chat-Analyse | WhatsAnalyze",
+      seoDescription:
+        "Du suchst eine kostenlose Alternative zu What Brandon Thinks? WhatsAnalyze analysiert deinen WhatsApp-Chat mit einer KI, die auf deinem eigenen Gerät läuft – kostenlos, ohne Konto, und dein Chat wird nie hochgeladen.",
+      heroEyebrow: "What Brandon Thinks Alternative",
+      heroTitle: "Die kostenlose, private Alternative zu What Brandon Thinks",
+      heroSubtitle:
+        "Lass die KI deinen WhatsApp-Chat lesen – die Stimmung, die Rolle jeder Person, wer sich mehr Mühe gibt, eure wiederkehrenden Themen – ohne pro Bericht zu zahlen und ohne deinen Chat auf fremde Server hochzuladen.",
+      heroCta: "Kostenlose KI-Analyse starten",
+      heroNote:
+        "Kostenlose KI auf deinem Gerät · Kein Konto · Dein Chat verlässt nie dein Gerät",
+      compareEyebrow: "Im Vergleich",
+      compareTitle: "WhatsAnalyze vs. What Brandon Thinks",
+      compareText:
+        "Beide lesen einen exportierten Chat und sagen dir, was er über die Beziehung verrät. Der Unterschied: was es kostet und wohin dein Chat geht.",
+      row1Label: "Preis",
+      row1Us:
+        "Kostenlose Statistiken und kostenlose KI auf dem Gerät. Pro für die tiefere Cloud-KI: {price}/Monat",
+      row1Them:
+        "Kostenlose Vorschau; vollständige Berichte ab 9,99 € pro Stück oder 29,99 €/Monat",
+      row2Label: "Wo die KI läuft",
+      row2Us:
+        "In deinem Browser, auf deinem Gerät (kostenlos) – oder in der Cloud, wenn du willst",
+      row2Them: "Auf deren Servern",
+      row3Label: "Chat hochladen",
+      row3Us: "Nicht nötig: Der Gerätemodus liest die Datei lokal",
+      row3Them:
+        "Erforderlich: Du lädst deinen WhatsApp- oder iMessage-Export hoch",
+      row4Label: "Gespeicherte Chats",
+      row4Us: "Keine. Wir speichern deinen Chat nie",
+      row4Them: "Gelöscht innerhalb von 7 Tagen nach deinem letzten Bericht",
+      row5Label: "Konto",
+      row5Us: "Nicht nötig",
+      row5Them: "Nötig, um deine Berichte zu sehen",
+      compareSource:
+        "Angaben zu What Brandon Thinks stammen von dessen öffentlichen Websites, Stand Oktober 2026, und können sich seitdem geändert haben.",
+      privacyEyebrow: "Ist das sicher?",
+      privacyTitle:
+        "Dein Chat enthält auch die Nachrichten einer anderen Person",
+      privacyText:
+        "Ein exportierter Chat enthält nicht nur deine Worte, sondern auch die des anderen. Am sichersten analysierst du ihn dort, wo er nie weggeht.",
+      pillar1Title: "Läuft auf deinem Gerät",
+      pillar1Text:
+        "Das kostenlose KI-Modell wird einmal geladen und läuft in deinem Browser. Dein Chat wird im Speicher gelesen, nichts wird hochgeladen.",
+      pillar2Title: "Anonymisiert für die Cloud",
+      pillar2Text:
+        "Wählst du die Cloud-KI, werden Namen zu „Person A“ und „Person B“, Telefonnummern, E-Mails und Links werden vorher entfernt. Die Namen werden nur auf deinem Gerät wieder eingesetzt.",
+      pillar3Title: "Nichts wird gespeichert",
+      pillar3Text:
+        "Wir speichern deinen Chat nicht und trainieren keine Modelle damit. Es gibt nichts zu löschen, weil nichts gespeichert wurde.",
+      faqTitle: "Fragen zum Wechsel",
+      faq1Q: "Gibt es eine kostenlose Version von What Brandon Thinks?",
+      faq1A:
+        "What Brandon Thinks zeigt eine kostenlose Vorschau und verlangt Geld für den vollständigen Bericht. Die Statistiken und die KI-Analyse auf dem Gerät von WhatsAnalyze sind komplett kostenlos, ohne Konto und ohne Limit, wie viele Chats du analysierst.",
+      faq2Q: "Ist What Brandon Thinks sicher?",
+      faq2A:
+        "Laut eigener Website musst du deinen Chat bei What Brandon Thinks auf deren Server hochladen; er wird innerhalb von 7 Tagen nach deinem letzten Bericht gelöscht. Wenn du gar keinen Chat hochladen möchtest: Die KI von WhatsAnalyze liest ihn auf deinem Gerät in deinem Browser und schickt nichts weg.",
+      faq3Q: "Ist WhatsAnalyze wirklich kostenlos?",
+      faq3A:
+        "Ja. Chat-Statistiken und die KI auf dem Gerät sind kostenlos. Pro ({price}/Monat) bringt die tiefere Cloud-KI-Analyse und unbegrenzte PDF-Exporte – das brauchst du nur, wenn du das willst.",
+      faq4Q: "Welche Chats kann ich analysieren?",
+      faq4A:
+        "Jeden WhatsApp-Chat, den du exportierst, von iPhone oder Android, Einzel- oder Gruppenchat, in jeder Sprache. Exportiere ihn ohne Medien und zieh die .zip- oder .txt-Datei in den Analyzer.",
+      ctaTitle: "Analysiere deinen Chat privat und kostenlos",
+      ctaButton: "KI-Analyse starten",
+      ctaNote: "Kein Konto · Kein Upload im Gerätemodus",
+      disclaimer:
+        "What Brandon Thinks ist eine Marke des jeweiligen Inhabers. WhatsAnalyze ist damit weder verbunden noch wird es davon unterstützt. KI-Analysen dienen der Reflexion, nicht als professionelle Beratung.",
+    },
     relationshipProof: {
       seoTitle:
         "Beziehung nachweisen mit WhatsApp-Chats – Beweise für Visum & Behörden",
@@ -1888,9 +2027,9 @@ export const messages = {
       dataContinue: "Trotzdem laden",
       dataCancel: "Auf WLAN warten",
       seoTitle:
-        "KI WhatsApp Chat Analyse – Private KI-Auswertung | WhatsAnalyze",
+        "Private KI WhatsApp Chat Analyse – Kostenlos auf deinem Gerät | WhatsAnalyze",
       seoDescription:
-        "Analysiere deinen WhatsApp-Chat mit KI: Persönlichkeiten, Beziehungsdynamik, wiederkehrende Themen und die besten Momente. Lass die KI privat auf deinem eigenen Gerät laufen oder in der Cloud für tiefere Einblicke.",
+        "Private KI-Chat-Analyse, die dein Gerät nie verlässt: Eine kostenlose KI läuft in deinem Browser und liest deinen WhatsApp-Chat – Persönlichkeiten, Beziehungsdynamik, wiederkehrende Themen, beste Momente. Kein Upload, kein Konto. Cloud-KI mit anonymisierten Auszügen für tiefere Einblicke.",
       ogTitle: "KI WhatsApp Chat Analyse",
       ogDescription:
         "Lass die KI deinen WhatsApp-Chat lesen und dir sagen, wer wer ist, wie ihr miteinander umgeht und worüber ihr redet – privat auf deinem Gerät oder in der Cloud.",
@@ -1899,7 +2038,7 @@ export const messages = {
       heroSubtitle:
         "Lade deinen exportierten Chat hoch und lass die KI euer Gespräch beschreiben: die Stimmung, Rolle und Stil jeder Person, wie ihr miteinander umgeht, eure wiederkehrenden Themen und besten Momente.",
       heroNote:
-        "Du entscheidest, wo die KI läuft · Auf deinem Gerät oder in der Cloud · Namen verlassen nie dein Gerät",
+        "Kostenlose KI auf deinem Gerät: Dein Chat verlässt es nie · Oder anonymisierte Cloud-KI für Abonnenten",
       chooseEyebrow: "Schritt 2 · Wähle deine KI",
       chooseTitle: "Wo soll die KI laufen?",
       chooseText:
@@ -2503,6 +2642,76 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze es una herramienta de análisis y formato, no un despacho de abogados. Nada en esta página es asesoramiento legal y la admisibilidad varía según la jurisdicción: confirma siempre los requisitos con tu abogado o el juzgado.",
     },
+    brandonAlt: {
+      navLabel: "Alternativa a What Brandon Thinks",
+      seoTitle:
+        "Alternativa gratis a What Brandon Thinks – Análisis de chat con IA privado | WhatsAnalyze",
+      seoDescription:
+        "¿Buscas una alternativa gratis a What Brandon Thinks? WhatsAnalyze analiza tu chat de WhatsApp con una IA que se ejecuta en tu propio dispositivo: gratis, sin cuenta y sin subir nunca tu chat.",
+      heroEyebrow: "Alternativa a What Brandon Thinks",
+      heroTitle: "La alternativa gratis y privada a What Brandon Thinks",
+      heroSubtitle:
+        "Obtén una lectura de tu chat de WhatsApp con IA (el ambiente, el papel de cada persona, quién pone más esfuerzo, vuestros temas recurrentes) sin pagar por informe y sin subir tu chat al servidor de nadie.",
+      heroCta: "Probar el análisis con IA gratis",
+      heroNote:
+        "IA gratis en tu dispositivo · Sin cuenta · Tu chat nunca sale de tu dispositivo",
+      compareEyebrow: "Comparación",
+      compareTitle: "WhatsAnalyze vs. What Brandon Thinks",
+      compareText:
+        "Ambos leen un chat exportado y te dicen qué revela sobre la relación. Se diferencian en lo que cuesta y adónde va tu chat.",
+      row1Label: "Precio",
+      row1Us:
+        "Estadísticas gratis e IA gratis en el dispositivo. Pro para la IA en la nube más profunda: {price}/mes",
+      row1Them:
+        "Vista previa gratis; informes completos desde 9,99 € cada uno o 29,99 €/mes",
+      row2Label: "Dónde se ejecuta la IA",
+      row2Us:
+        "En tu navegador, en tu dispositivo (gratis), o en la nube si lo eliges",
+      row2Them: "En sus servidores",
+      row3Label: "Subir el chat",
+      row3Us:
+        "No hace falta: el modo en el dispositivo lee el archivo localmente",
+      row3Them: "Obligatorio: subes tu exportación de WhatsApp o iMessage",
+      row4Label: "Chats guardados",
+      row4Us: "Ninguno. Nunca guardamos tu chat",
+      row4Them: "Se borran en los 7 días siguientes a tu último informe",
+      row5Label: "Cuenta",
+      row5Us: "No hace falta",
+      row5Them: "Necesaria para ver tus informes",
+      compareSource:
+        "Los datos de What Brandon Thinks proceden de sus webs públicas a octubre de 2026 y pueden haber cambiado.",
+      privacyEyebrow: "¿Es seguro?",
+      privacyTitle: "Tu chat también contiene los mensajes de otra persona",
+      privacyText:
+        "Un chat exportado contiene las palabras de la otra persona, no solo las tuyas. El lugar más seguro para analizarlo es uno del que nunca sale.",
+      pillar1Title: "Se ejecuta en tu dispositivo",
+      pillar1Text:
+        "El modelo de IA gratis se descarga una vez y funciona en tu navegador. Tu chat se lee en memoria y no se sube nada.",
+      pillar2Title: "Anonimizado para la nube",
+      pillar2Text:
+        "Si eliges la IA en la nube, los nombres pasan a ser «Persona A» y «Persona B» y antes se eliminan teléfonos, correos y enlaces. Los nombres solo se restauran en tu dispositivo.",
+      pillar3Title: "No se guarda nada",
+      pillar3Text:
+        "No guardamos tu chat ni entrenamos modelos con él. No hay nada que borrar porque no se guardó nada.",
+      faqTitle: "Preguntas sobre el cambio",
+      faq1Q: "¿Hay una versión gratis de What Brandon Thinks?",
+      faq1A:
+        "What Brandon Thinks muestra una vista previa gratis y cobra por el informe completo. Las estadísticas y el análisis con IA en el dispositivo de WhatsAnalyze son totalmente gratis, sin cuenta y sin límite de chats.",
+      faq2Q: "¿Es seguro What Brandon Thinks?",
+      faq2A:
+        "Según su web, What Brandon Thinks necesita que subas tu chat a sus servidores y lo borra en los 7 días siguientes a tu último informe. Si prefieres no subir ningún chat, la IA en el dispositivo de WhatsAnalyze lo lee dentro de tu navegador y no envía nada.",
+      faq3Q: "¿WhatsAnalyze es realmente gratis?",
+      faq3A:
+        "Sí. Las estadísticas del chat y la IA en el dispositivo son gratis. Pro ({price}/mes) añade el análisis más profundo con IA en la nube y exportaciones PDF ilimitadas; solo lo necesitas si quieres eso.",
+      faq4Q: "¿Qué chats puedo analizar?",
+      faq4A:
+        "Cualquier chat de WhatsApp que exportes, desde iPhone o Android, individual o de grupo, en cualquier idioma. Expórtalo sin archivos multimedia y suelta el .zip o .txt en el analizador.",
+      ctaTitle: "Analiza tu chat en privado y gratis",
+      ctaButton: "Empezar el análisis con IA",
+      ctaNote: "Sin cuenta · Sin subir nada en el modo en el dispositivo",
+      disclaimer:
+        "What Brandon Thinks es una marca de su respectivo titular. WhatsAnalyze no está afiliado ni respaldado por él. Los análisis con IA sirven para reflexionar, no son asesoramiento profesional.",
+    },
     relationshipProof: {
       seoTitle:
         "Demuestra tu relación con chats de WhatsApp – Prueba para visados e inmigración",
@@ -3039,9 +3248,9 @@ export const messages = {
       dataContinue: "Descargar de todos modos",
       dataCancel: "Esperar a tener wifi",
       seoTitle:
-        "Analizador de chats de WhatsApp con IA – Privado | WhatsAnalyze",
+        "Analizador de chats de WhatsApp con IA privada – Gratis en tu dispositivo | WhatsAnalyze",
       seoDescription:
-        "Analiza tu chat de WhatsApp con IA: personalidades, dinámica de la relación, temas recurrentes y mejores momentos. Ejecuta la IA de forma privada en tu propio dispositivo o en la nube para un análisis más profundo.",
+        "Análisis de chats con IA privada que nunca sale de tu dispositivo: una IA gratis funciona en tu navegador y lee tu chat de WhatsApp (personalidades, dinámica de la relación, temas recurrentes, mejores momentos). Sin subir nada, sin cuenta. IA en la nube con extractos anonimizados para ir más a fondo.",
       ogTitle: "Analizador de chats de WhatsApp con IA",
       ogDescription:
         "Deja que la IA lea tu chat de WhatsApp y te diga quién es quién, cómo os relacionáis y de qué habláis — en privado en tu dispositivo o en la nube.",
@@ -3050,7 +3259,7 @@ export const messages = {
       heroSubtitle:
         "Sube tu chat exportado y deja que la IA describa vuestra conversación: el ambiente, el papel y el estilo de cada persona, cómo os relacionáis, vuestros temas recurrentes y mejores momentos.",
       heroNote:
-        "Tú eliges dónde se ejecuta la IA · En tu dispositivo o en la nube · Los nombres nunca salen de tu dispositivo",
+        "IA gratis en tu dispositivo: tu chat nunca sale de él · O IA en la nube anonimizada para suscriptores",
       chooseEyebrow: "Paso 2 · Elige tu IA",
       chooseTitle: "¿Dónde quieres que se ejecute la IA?",
       chooseText:
@@ -4011,9 +4220,9 @@ export const messages = {
       dataContinue: "Transferir na mesma",
       dataCancel: "Esperar pelo Wi-Fi",
       seoTitle:
-        "Analisador de conversas do WhatsApp com IA – Privado | WhatsAnalyze",
+        "Analisador de conversas do WhatsApp com IA privada – Grátis no seu dispositivo | WhatsAnalyze",
       seoDescription:
-        "Analise a sua conversa do WhatsApp com IA: personalidades, dinâmica da relação, temas recorrentes e melhores momentos. Execute a IA de forma privada no seu próprio dispositivo ou na nuvem para uma análise mais profunda.",
+        "Análise de conversas com IA privada que nunca sai do seu dispositivo: uma IA grátis corre no seu navegador e lê a sua conversa do WhatsApp (personalidades, dinâmica da relação, temas recorrentes, melhores momentos). Sem envio, sem conta. IA na nuvem com excertos anonimizados para ir mais fundo.",
       ogTitle: "Analisador de conversas do WhatsApp com IA",
       ogDescription:
         "Deixe a IA ler a sua conversa do WhatsApp e dizer-lhe quem é quem, como interagem e sobre o que falam — em privado no seu dispositivo ou na nuvem.",
@@ -4022,7 +4231,7 @@ export const messages = {
       heroSubtitle:
         "Carregue a sua conversa exportada e deixe a IA descrevê-la: o ambiente, o papel e o estilo de cada pessoa, como interagem, os vossos temas recorrentes e melhores momentos.",
       heroNote:
-        "Escolhe onde a IA corre · No seu dispositivo ou na nuvem · Os nomes nunca saem do seu dispositivo",
+        "IA grátis no seu dispositivo: a conversa nunca sai dele · Ou IA na nuvem anonimizada para subscritores",
       chooseEyebrow: "Passo 2 · Escolha a sua IA",
       chooseTitle: "Onde deve correr a IA?",
       chooseText:
@@ -4335,6 +4544,75 @@ export const messages = {
         "100% seguro no navegador · Sem cadastro · Pré-visualização grátis",
       disclaimer:
         "O WhatsAnalyze é um projeto de código aberto independente e não possui vínculo com o WhatsApp ou a Meta.",
+    },
+    brandonAlt: {
+      navLabel: "Alternativa ao What Brandon Thinks",
+      seoTitle:
+        "Alternativa gratuita ao What Brandon Thinks – Análise de conversas com IA privada | WhatsAnalyze",
+      seoDescription:
+        "Procura uma alternativa gratuita ao What Brandon Thinks? O WhatsAnalyze analisa a sua conversa do WhatsApp com uma IA que corre no seu próprio dispositivo: grátis, sem conta e sem nunca enviar a conversa.",
+      heroEyebrow: "Alternativa ao What Brandon Thinks",
+      heroTitle: "A alternativa gratuita e privada ao What Brandon Thinks",
+      heroSubtitle:
+        "Obtenha uma leitura da sua conversa do WhatsApp com IA (o ambiente, o papel de cada pessoa, quem se esforça mais, os temas recorrentes) sem pagar por relatório e sem enviar a conversa para o servidor de ninguém.",
+      heroCta: "Experimentar a análise com IA grátis",
+      heroNote:
+        "IA grátis no seu dispositivo · Sem conta · A sua conversa nunca sai do seu dispositivo",
+      compareEyebrow: "Lado a lado",
+      compareTitle: "WhatsAnalyze vs. What Brandon Thinks",
+      compareText:
+        "Ambos leem uma conversa exportada e dizem-lhe o que revela sobre a relação. Diferem no preço e no destino da sua conversa.",
+      row1Label: "Preço",
+      row1Us:
+        "Estatísticas grátis e IA grátis no dispositivo. Pro para a IA na nuvem mais profunda: {price}/mês",
+      row1Them:
+        "Pré-visualização grátis; relatórios completos a partir de 9,99 € cada ou 29,99 €/mês",
+      row2Label: "Onde corre a IA",
+      row2Us:
+        "No seu navegador, no seu dispositivo (grátis), ou na nuvem se preferir",
+      row2Them: "Nos servidores deles",
+      row3Label: "Envio da conversa",
+      row3Us: "Não é preciso: o modo no dispositivo lê o ficheiro localmente",
+      row3Them: "Obrigatório: envia a sua exportação do WhatsApp ou iMessage",
+      row4Label: "Conversas guardadas",
+      row4Us: "Nenhuma. Nunca guardamos a sua conversa",
+      row4Them: "Apagadas até 7 dias após o seu último relatório",
+      row5Label: "Conta",
+      row5Us: "Não é precisa",
+      row5Them: "Necessária para ver os seus relatórios",
+      compareSource:
+        "Os dados do What Brandon Thinks vêm dos seus sites públicos em outubro de 2026 e podem ter mudado entretanto.",
+      privacyEyebrow: "É seguro?",
+      privacyTitle: "A sua conversa também tem as mensagens de outra pessoa",
+      privacyText:
+        "Uma conversa exportada contém as palavras da outra pessoa, não só as suas. O sítio mais seguro para a analisar é um de onde ela nunca sai.",
+      pillar1Title: "Corre no seu dispositivo",
+      pillar1Text:
+        "O modelo de IA gratuito é descarregado uma vez e corre no seu navegador. A conversa é lida em memória e nada é enviado.",
+      pillar2Title: "Anonimizada para a nuvem",
+      pillar2Text:
+        "Se escolher a IA na nuvem, os nomes passam a «Pessoa A» e «Pessoa B» e números de telefone, e-mails e links são removidos antes. Os nomes só são repostos no seu dispositivo.",
+      pillar3Title: "Nada é guardado",
+      pillar3Text:
+        "Não guardamos a sua conversa nem treinamos modelos com ela. Não há nada para apagar porque nada foi guardado.",
+      faqTitle: "Perguntas sobre a mudança",
+      faq1Q: "Existe uma versão gratuita do What Brandon Thinks?",
+      faq1A:
+        "O What Brandon Thinks mostra uma pré-visualização grátis e cobra pelo relatório completo. As estatísticas e a análise com IA no dispositivo do WhatsAnalyze são totalmente grátis, sem conta e sem limite de conversas.",
+      faq2Q: "O What Brandon Thinks é seguro?",
+      faq2A:
+        "Segundo o site, o What Brandon Thinks exige que envie a conversa para os servidores deles e apaga-a até 7 dias após o seu último relatório. Se preferir não enviar nenhuma conversa, a IA no dispositivo do WhatsAnalyze lê-a no seu navegador e não envia nada.",
+      faq3Q: "O WhatsAnalyze é mesmo grátis?",
+      faq3A:
+        "Sim. As estatísticas e a IA no dispositivo são grátis. O Pro ({price}/mês) acrescenta a análise mais profunda com IA na nuvem e exportações PDF ilimitadas; só precisa dele se quiser isso.",
+      faq4Q: "Que conversas posso analisar?",
+      faq4A:
+        "Qualquer conversa do WhatsApp que exporte, de iPhone ou Android, individual ou de grupo, em qualquer idioma. Exporte-a sem multimédia e largue o ficheiro .zip ou .txt no analisador.",
+      ctaTitle: "Analise a sua conversa em privado, grátis",
+      ctaButton: "Iniciar a análise com IA",
+      ctaNote: "Sem conta · Sem envio no modo no dispositivo",
+      disclaimer:
+        "What Brandon Thinks é uma marca do respetivo titular. O WhatsAnalyze não tem qualquer afiliação nem é apoiado por ele. As análises com IA servem para reflexão, não são aconselhamento profissional.",
     },
     relationshipProof: {
       seoTitle:
@@ -5170,9 +5448,9 @@ export const messages = {
       dataContinue: "Télécharger quand même",
       dataCancel: "Attendre le Wi-Fi",
       seoTitle:
-        "Analyse de conversation WhatsApp par IA – Privée | WhatsAnalyze",
+        "Analyse de conversation WhatsApp par IA privée – Gratuite sur votre appareil | WhatsAnalyze",
       seoDescription:
-        "Analysez votre conversation WhatsApp avec l'IA : personnalités, dynamique de la relation, sujets récurrents et meilleurs moments. Lancez l'IA en privé sur votre propre appareil, ou dans le cloud pour une analyse plus fine.",
+        "Analyse de conversation par IA privée qui ne quitte jamais votre appareil : une IA gratuite tourne dans votre navigateur et lit votre conversation WhatsApp (personnalités, dynamique de la relation, sujets récurrents, meilleurs moments). Aucun envoi, aucun compte. IA cloud avec extraits anonymisés pour aller plus loin.",
       ogTitle: "Analyse de conversation WhatsApp par IA",
       ogDescription:
         "Laissez l'IA lire votre conversation WhatsApp et vous dire qui est qui, comment vous échangez et de quoi vous parlez — en privé sur votre appareil ou dans le cloud.",
@@ -5181,7 +5459,7 @@ export const messages = {
       heroSubtitle:
         "Importez votre conversation exportée et laissez l'IA la décrire : l'ambiance, le rôle et le style de chacun, votre façon d'échanger, vos sujets récurrents et vos meilleurs moments.",
       heroNote:
-        "Vous choisissez où tourne l'IA · Sur votre appareil ou dans le cloud · Les noms ne quittent jamais votre appareil",
+        "IA gratuite sur votre appareil : votre conversation ne le quitte jamais · Ou IA cloud anonymisée pour les abonnés",
       chooseEyebrow: "Étape 2 · Choisissez votre IA",
       chooseTitle: "Où l'IA doit-elle tourner ?",
       chooseText:
@@ -5497,6 +5775,76 @@ export const messages = {
         "100 % confidentiel dans votre navigateur · Sans compte · Aperçu gratuit",
       disclaimer:
         "WhatsAnalyze est un projet indépendant et open source, sans lien avec WhatsApp ou Meta.",
+    },
+    brandonAlt: {
+      navLabel: "Alternative à What Brandon Thinks",
+      seoTitle:
+        "Alternative gratuite à What Brandon Thinks – Analyse de conversation par IA privée | WhatsAnalyze",
+      seoDescription:
+        "Vous cherchez une alternative gratuite à What Brandon Thinks ? WhatsAnalyze analyse votre conversation WhatsApp avec une IA qui tourne sur votre propre appareil : gratuit, sans compte, et votre conversation n'est jamais envoyée.",
+      heroEyebrow: "Alternative à What Brandon Thinks",
+      heroTitle: "L'alternative gratuite et privée à What Brandon Thinks",
+      heroSubtitle:
+        "Obtenez une lecture de votre conversation WhatsApp par l'IA (l'ambiance, le rôle de chacun, qui fait le plus d'efforts, vos sujets récurrents) sans payer par rapport et sans envoyer votre conversation sur le serveur de qui que ce soit.",
+      heroCta: "Essayer l'analyse IA gratuite",
+      heroNote:
+        "IA gratuite sur votre appareil · Sans compte · Votre conversation ne quitte jamais votre appareil",
+      compareEyebrow: "Comparaison",
+      compareTitle: "WhatsAnalyze vs. What Brandon Thinks",
+      compareText:
+        "Les deux lisent une conversation exportée et vous disent ce qu'elle révèle de la relation. Ils diffèrent par le prix et par l'endroit où part votre conversation.",
+      row1Label: "Prix",
+      row1Us:
+        "Statistiques gratuites et IA gratuite sur l'appareil. Pro pour l'IA cloud plus poussée : {price}/mois",
+      row1Them:
+        "Aperçu gratuit ; rapports complets à partir de 9,99 € l'unité ou 29,99 €/mois",
+      row2Label: "Où tourne l'IA",
+      row2Us:
+        "Dans votre navigateur, sur votre appareil (gratuit), ou dans le cloud si vous le choisissez",
+      row2Them: "Sur leurs serveurs",
+      row3Label: "Envoi de la conversation",
+      row3Us: "Inutile : le mode sur l'appareil lit le fichier localement",
+      row3Them: "Obligatoire : vous envoyez votre export WhatsApp ou iMessage",
+      row4Label: "Conversations conservées",
+      row4Us: "Aucune. Nous ne conservons jamais votre conversation",
+      row4Them: "Supprimées dans les 7 jours suivant votre dernier rapport",
+      row5Label: "Compte",
+      row5Us: "Inutile",
+      row5Them: "Nécessaire pour voir vos rapports",
+      compareSource:
+        "Les informations sur What Brandon Thinks proviennent de ses sites publics en octobre 2026 et ont pu changer depuis.",
+      privacyEyebrow: "Est-ce sûr ?",
+      privacyTitle:
+        "Votre conversation contient aussi les messages de quelqu'un d'autre",
+      privacyText:
+        "Une conversation exportée contient les mots de l'autre personne, pas seulement les vôtres. L'endroit le plus sûr pour l'analyser est un endroit qu'elle ne quitte jamais.",
+      pillar1Title: "Tourne sur votre appareil",
+      pillar1Text:
+        "Le modèle d'IA gratuit se télécharge une fois et tourne dans votre navigateur. Votre conversation est lue en mémoire et rien n'est envoyé.",
+      pillar2Title: "Anonymisée pour le cloud",
+      pillar2Text:
+        "Si vous choisissez l'IA cloud, les noms deviennent « Personne A » et « Personne B » et les numéros, e-mails et liens sont retirés d'abord. Les noms ne sont rétablis que sur votre appareil.",
+      pillar3Title: "Rien n'est conservé",
+      pillar3Text:
+        "Nous ne conservons pas votre conversation et n'entraînons aucun modèle avec. Il n'y a rien à supprimer, car rien n'a été enregistré.",
+      faqTitle: "Questions sur le changement",
+      faq1Q: "Existe-t-il une version gratuite de What Brandon Thinks ?",
+      faq1A:
+        "What Brandon Thinks affiche un aperçu gratuit et fait payer le rapport complet. Les statistiques et l'analyse IA sur l'appareil de WhatsAnalyze sont entièrement gratuites, sans compte et sans limite de conversations.",
+      faq2Q: "What Brandon Thinks est-il sûr ?",
+      faq2A:
+        "D'après son site, What Brandon Thinks vous demande d'envoyer votre conversation sur ses serveurs et la supprime dans les 7 jours suivant votre dernier rapport. Si vous préférez ne rien envoyer du tout, l'IA sur l'appareil de WhatsAnalyze la lit dans votre navigateur et n'envoie rien.",
+      faq3Q: "WhatsAnalyze est-il vraiment gratuit ?",
+      faq3A:
+        "Oui. Les statistiques et l'IA sur l'appareil sont gratuites. Pro ({price}/mois) ajoute l'analyse IA cloud plus poussée et des exports PDF illimités ; vous n'en avez besoin que si vous voulez cela.",
+      faq4Q: "Quelles conversations puis-je analyser ?",
+      faq4A:
+        "Toute conversation WhatsApp que vous exportez, depuis iPhone ou Android, individuelle ou de groupe, dans n'importe quelle langue. Exportez-la sans médias et déposez le fichier .zip ou .txt dans l'analyseur.",
+      ctaTitle: "Analysez votre conversation en privé, gratuitement",
+      ctaButton: "Lancer l'analyse IA",
+      ctaNote: "Sans compte · Aucun envoi en mode sur l'appareil",
+      disclaimer:
+        "What Brandon Thinks est une marque de son propriétaire respectif. WhatsAnalyze n'y est pas affilié et n'est pas approuvé par lui. Les analyses IA servent à la réflexion et ne constituent pas un conseil professionnel.",
     },
     relationshipProof: {
       seoTitle:
@@ -6323,9 +6671,10 @@ export const messages = {
         "Non possiamo sapere se sei connesso al Wi-Fi. L'IA sul dispositivo richiede un download una tantum di circa {gb} GB: con i dati mobili può esaurire il tuo piano o costare extra.",
       dataContinue: "Scarica comunque",
       dataCancel: "Aspetta il Wi-Fi",
-      seoTitle: "Analisi chat WhatsApp con IA – Privata | WhatsAnalyze",
+      seoTitle:
+        "Analisi chat WhatsApp con IA privata – Gratis sul tuo dispositivo | WhatsAnalyze",
       seoDescription:
-        "Analizza la tua chat WhatsApp con l'IA: personalità, dinamiche della relazione, argomenti ricorrenti e momenti migliori. Esegui l'IA in privato sul tuo dispositivo, o nel cloud per un'analisi più approfondita.",
+        "Analisi chat con IA privata che non lascia mai il tuo dispositivo: un'IA gratuita gira nel browser e legge la tua chat WhatsApp (personalità, dinamiche della relazione, argomenti ricorrenti, momenti migliori). Nessun caricamento, nessun account. IA nel cloud con estratti anonimizzati per andare più a fondo.",
       ogTitle: "Analisi chat WhatsApp con IA",
       ogDescription:
         "Lascia che l'IA legga la tua chat WhatsApp e ti dica chi è chi, come interagite e di cosa parlate — in privato sul tuo dispositivo o nel cloud.",
@@ -6334,7 +6683,7 @@ export const messages = {
       heroSubtitle:
         "Carica la chat esportata e lascia che l'IA descriva la vostra conversazione: l'atmosfera, il ruolo e lo stile di ciascuno, come interagite, gli argomenti ricorrenti e i momenti migliori.",
       heroNote:
-        "Scegli tu dove gira l'IA · Sul tuo dispositivo o nel cloud · I nomi non lasciano mai il tuo dispositivo",
+        "IA gratuita sul tuo dispositivo: la chat non lo lascia mai · Oppure IA nel cloud anonimizzata per gli abbonati",
       chooseEyebrow: "Passo 2 · Scegli la tua IA",
       chooseTitle: "Dove deve girare l'IA?",
       chooseText:
@@ -6646,6 +6995,75 @@ export const messages = {
       ctaNote: "100% sicuro nel browser · Nessun account · Anteprima gratuita",
       disclaimer:
         "WhatsAnalyze è un progetto indipendente e open source e non è collegato a WhatsApp o Meta.",
+    },
+    brandonAlt: {
+      navLabel: "Alternativa a What Brandon Thinks",
+      seoTitle:
+        "Alternativa gratuita a What Brandon Thinks – Analisi chat con IA privata | WhatsAnalyze",
+      seoDescription:
+        "Cerchi un'alternativa gratuita a What Brandon Thinks? WhatsAnalyze analizza la tua chat WhatsApp con un'IA che gira sul tuo dispositivo: gratis, senza account e la chat non viene mai caricata.",
+      heroEyebrow: "Alternativa a What Brandon Thinks",
+      heroTitle: "L'alternativa gratuita e privata a What Brandon Thinks",
+      heroSubtitle:
+        "Ottieni una lettura della tua chat WhatsApp con l'IA (l'atmosfera, il ruolo di ciascuno, chi si impegna di più, gli argomenti ricorrenti) senza pagare a report e senza caricare la chat sul server di nessuno.",
+      heroCta: "Prova l'analisi IA gratuita",
+      heroNote:
+        "IA gratuita sul tuo dispositivo · Nessun account · La tua chat non lascia mai il dispositivo",
+      compareEyebrow: "A confronto",
+      compareTitle: "WhatsAnalyze vs. What Brandon Thinks",
+      compareText:
+        "Entrambi leggono una chat esportata e ti dicono cosa rivela sulla relazione. Cambiano il prezzo e il luogo dove finisce la tua chat.",
+      row1Label: "Prezzo",
+      row1Us:
+        "Statistiche gratuite e IA gratuita sul dispositivo. Pro per l'IA cloud più approfondita: {price}/mese",
+      row1Them:
+        "Anteprima gratuita; report completi da 9,99 € l'uno o 29,99 €/mese",
+      row2Label: "Dove gira l'IA",
+      row2Us:
+        "Nel tuo browser, sul tuo dispositivo (gratis), o nel cloud se preferisci",
+      row2Them: "Sui loro server",
+      row3Label: "Caricamento della chat",
+      row3Us: "Non serve: la modalità sul dispositivo legge il file in locale",
+      row3Them: "Obbligatorio: carichi l'esportazione di WhatsApp o iMessage",
+      row4Label: "Chat conservate",
+      row4Us: "Nessuna. Non conserviamo mai la tua chat",
+      row4Them: "Eliminate entro 7 giorni dall'ultimo report",
+      row5Label: "Account",
+      row5Us: "Non serve",
+      row5Them: "Necessario per vedere i tuoi report",
+      compareSource:
+        "Le informazioni su What Brandon Thinks provengono dai suoi siti pubblici a ottobre 2026 e potrebbero essere cambiate.",
+      privacyEyebrow: "È sicuro?",
+      privacyTitle: "La tua chat contiene anche i messaggi di un'altra persona",
+      privacyText:
+        "Una chat esportata contiene le parole dell'altra persona, non solo le tue. Il posto più sicuro per analizzarla è uno da cui non esce mai.",
+      pillar1Title: "Gira sul tuo dispositivo",
+      pillar1Text:
+        "Il modello di IA gratuito si scarica una volta e gira nel browser. La chat viene letta in memoria e non viene caricato nulla.",
+      pillar2Title: "Anonimizzata per il cloud",
+      pillar2Text:
+        "Se scegli l'IA nel cloud, i nomi diventano «Persona A» e «Persona B» e numeri di telefono, email e link vengono rimossi prima. I nomi vengono ripristinati solo sul tuo dispositivo.",
+      pillar3Title: "Nulla viene conservato",
+      pillar3Text:
+        "Non conserviamo la tua chat e non addestriamo modelli con essa. Non c'è nulla da eliminare perché non è stato salvato nulla.",
+      faqTitle: "Domande sul passaggio",
+      faq1Q: "Esiste una versione gratuita di What Brandon Thinks?",
+      faq1A:
+        "What Brandon Thinks mostra un'anteprima gratuita e fa pagare il report completo. Le statistiche e l'analisi IA sul dispositivo di WhatsAnalyze sono completamente gratuite, senza account e senza limiti di chat.",
+      faq2Q: "What Brandon Thinks è sicuro?",
+      faq2A:
+        "Secondo il suo sito, What Brandon Thinks richiede di caricare la chat sui suoi server e la elimina entro 7 giorni dall'ultimo report. Se preferisci non caricare nessuna chat, l'IA sul dispositivo di WhatsAnalyze la legge nel tuo browser e non invia nulla.",
+      faq3Q: "WhatsAnalyze è davvero gratuito?",
+      faq3A:
+        "Sì. Le statistiche e l'IA sul dispositivo sono gratuite. Pro ({price}/mese) aggiunge l'analisi IA nel cloud più approfondita ed esportazioni PDF illimitate; ti serve solo se vuoi queste funzioni.",
+      faq4Q: "Quali chat posso analizzare?",
+      faq4A:
+        "Qualsiasi chat WhatsApp che esporti, da iPhone o Android, singola o di gruppo, in qualsiasi lingua. Esportala senza media e trascina il file .zip o .txt nell'analizzatore.",
+      ctaTitle: "Analizza la tua chat in privato, gratis",
+      ctaButton: "Avvia l'analisi IA",
+      ctaNote: "Nessun account · Nessun caricamento in modalità dispositivo",
+      disclaimer:
+        "What Brandon Thinks è un marchio del rispettivo titolare. WhatsAnalyze non è affiliato né approvato da esso. Le analisi IA servono alla riflessione, non sono una consulenza professionale.",
     },
     relationshipProof: {
       seoTitle:

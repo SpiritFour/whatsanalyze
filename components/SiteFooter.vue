@@ -110,6 +110,10 @@ const guides = computed(() => [
     label: t("pageNameSignal"),
   },
   { to: localePath("/wrapped"), label: t("nav.appTitle") },
+  {
+    to: localePath("/what-brandon-thinks-alternative"),
+    label: t("brandonAlt.navLabel"),
+  },
 ]);
 
 const company = computed(() => [
