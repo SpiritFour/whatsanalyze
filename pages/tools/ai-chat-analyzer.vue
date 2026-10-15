@@ -229,6 +229,19 @@
         <!-- The same encrypted share link as the analyzer's results -->
         <ShareLinkButton :capture="() => report" source="ai_report" />
 
+        <!-- Keep talking: follow-up questions and reply help -->
+        <AiCoach
+          v-if="messages && ranOn"
+          :key="report?.insights.summary"
+          :chat="messages"
+          :mode="ranOn"
+          :language="language"
+          :local-model="localModel"
+          :me="me"
+          :summary="insights.summary"
+          @allowance="allowance = $event"
+        />
+
         <div class="report-actions">
           <button
             v-if="ranOn === 'local'"
@@ -289,6 +302,7 @@ import { computed, nextTick, onMounted, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
 import ToolDropzone from "~/components/tools/ToolDropzone.vue";
 import AiReport from "~/components/ai/AiReport.vue";
+import AiCoach from "~/components/ai/AiCoach.vue";
 import type { AiReport as AiReportData } from "~/utils/ai/report";
 import type { ChatMessage } from "~/composables/useChatTool";
 import { analyticsTools } from "~/composables/useAnalytics";

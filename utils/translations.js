@@ -802,6 +802,22 @@ export const messages = {
       reportDisclaimer:
         "AI can misread context and irony. Take this as a fun perspective, not a verdict.",
       tryCloud: "Compare with the cloud AI",
+      coachTitle: "Keep talking",
+      coachText:
+        "Ask anything about this chat, or paste a message you're about to send and get a calmer, clearer version.",
+      coach_ask: "Ask a question",
+      coach_reply: "Help me reply",
+      coachPlaceholder_ask: "e.g. Why do our arguments always escalate?",
+      coachPlaceholder_reply: "Paste the message you want to send…",
+      coachSend: "Send",
+      coachThinking: "Thinking about your chat…",
+      coachNoteLocal:
+        "Runs on your device and remembers the last few messages.",
+      coachNoteCloud: "Each message uses one of today's cloud analyses.",
+      coachSupportTitle:
+        "This sounds serious. You don't have to handle it alone.",
+      coachSupportText:
+        "If you or someone else is in danger, call your local emergency number now. For free, confidential support from a trained person, find a helpline in your country at findahelpline.com.",
       fullAnalyzer: "See all statistics and charts →",
       howEyebrow: "How it works",
       howTitle: "AI insights without handing over your chat",
@@ -1958,6 +1974,22 @@ export const messages = {
       reportDisclaimer:
         "KI kann Zusammenhänge und Ironie falsch verstehen. Nimm das als unterhaltsame Perspektive, nicht als Urteil.",
       tryCloud: "Mit der Cloud-KI vergleichen",
+      coachTitle: "Weiterreden",
+      coachText:
+        "Frag alles zu diesem Chat oder füge eine Nachricht ein, die du senden willst, und erhalte eine ruhigere, klarere Version.",
+      coach_ask: "Frage stellen",
+      coach_reply: "Hilf mir beim Antworten",
+      coachPlaceholder_ask: "z. B. Warum eskalieren unsere Streits immer?",
+      coachPlaceholder_reply: "Füge die Nachricht ein, die du senden willst…",
+      coachSend: "Senden",
+      coachThinking: "Denke über euren Chat nach…",
+      coachNoteLocal:
+        "Läuft auf deinem Gerät und merkt sich die letzten Nachrichten.",
+      coachNoteCloud:
+        "Jede Nachricht zählt als eine deiner heutigen Cloud-Analysen.",
+      coachSupportTitle: "Das klingt ernst. Damit musst du nicht allein sein.",
+      coachSupportText:
+        "Wenn du oder jemand anderes in Gefahr ist, ruf sofort den Notruf (112). Kostenlose, vertrauliche Hilfe bekommst du z. B. bei der Telefonseelsorge (0800 111 0 111) oder über findahelpline.com für dein Land.",
       fullAnalyzer: "Alle Statistiken und Diagramme ansehen →",
       howEyebrow: "So funktioniert's",
       howTitle: "KI-Einblicke, ohne deinen Chat herzugeben",
@@ -3109,6 +3141,22 @@ export const messages = {
       reportDisclaimer:
         "La IA puede malinterpretar el contexto y la ironía. Tómalo como una perspectiva divertida, no como un veredicto.",
       tryCloud: "Comparar con la IA en la nube",
+      coachTitle: "Sigue hablando",
+      coachText:
+        "Pregunta lo que quieras sobre este chat, o pega un mensaje que vas a enviar y recibe una versión más tranquila y clara.",
+      coach_ask: "Hacer una pregunta",
+      coach_reply: "Ayúdame a responder",
+      coachPlaceholder_ask:
+        "p. ej. ¿Por qué nuestras discusiones siempre van a más?",
+      coachPlaceholder_reply: "Pega el mensaje que quieres enviar…",
+      coachSend: "Enviar",
+      coachThinking: "Pensando en vuestro chat…",
+      coachNoteLocal:
+        "Funciona en tu dispositivo y recuerda los últimos mensajes.",
+      coachNoteCloud: "Cada mensaje usa uno de tus análisis en la nube de hoy.",
+      coachSupportTitle: "Esto suena serio. No tienes que afrontarlo solo/a.",
+      coachSupportText:
+        "Si tú u otra persona estáis en peligro, llama ahora al número de emergencias local (112 en Europa). Para apoyo gratuito y confidencial, busca una línea de ayuda de tu país en findahelpline.com (en España: 024).",
       fullAnalyzer: "Ver todas las estadísticas y gráficos →",
       howEyebrow: "Cómo funciona",
       howTitle: "Análisis con IA sin entregar tu chat",
@@ -4083,6 +4131,22 @@ export const messages = {
       reportDisclaimer:
         "A IA pode interpretar mal o contexto e a ironia. Veja isto como uma perspetiva divertida, não como um veredito.",
       tryCloud: "Comparar com a IA na nuvem",
+      coachTitle: "Continue a conversa",
+      coachText:
+        "Pergunte o que quiser sobre este chat, ou cole uma mensagem que vai enviar e receba uma versão mais calma e clara.",
+      coach_ask: "Fazer uma pergunta",
+      coach_reply: "Ajude-me a responder",
+      coachPlaceholder_ask: "ex.: Por que nossas discussões sempre pioram?",
+      coachPlaceholder_reply: "Cole a mensagem que você quer enviar…",
+      coachSend: "Enviar",
+      coachThinking: "Pensando na sua conversa…",
+      coachNoteLocal: "Roda no seu dispositivo e lembra as últimas mensagens.",
+      coachNoteCloud:
+        "Cada mensagem usa uma das suas análises na nuvem de hoje.",
+      coachSupportTitle:
+        "Isso parece sério. Você não precisa lidar com isso sozinho(a).",
+      coachSupportText:
+        "Se você ou outra pessoa estiver em perigo, ligue agora para o número de emergência local. Para apoio gratuito e confidencial, encontre uma linha de ajuda no seu país em findahelpline.com (no Brasil, CVV: 188).",
       fullAnalyzer: "Ver todas as estatísticas e gráficos →",
       howEyebrow: "Como funciona",
       howTitle: "Análise com IA sem entregar a sua conversa",
@@ -5242,6 +5306,23 @@ export const messages = {
       reportDisclaimer:
         "L'IA peut mal interpréter le contexte et l'ironie. Voyez-y un regard amusant, pas un verdict.",
       tryCloud: "Comparer avec l'IA dans le cloud",
+      coachTitle: "Continuer la conversation",
+      coachText:
+        "Pose n'importe quelle question sur ce chat, ou colle un message que tu t'apprêtes à envoyer pour en obtenir une version plus calme et plus claire.",
+      coach_ask: "Poser une question",
+      coach_reply: "Aide-moi à répondre",
+      coachPlaceholder_ask:
+        "ex. Pourquoi nos disputes dégénèrent-elles toujours ?",
+      coachPlaceholder_reply: "Colle le message que tu veux envoyer…",
+      coachSend: "Envoyer",
+      coachThinking: "Je réfléchis à votre conversation…",
+      coachNoteLocal:
+        "Fonctionne sur ton appareil et se souvient des derniers messages.",
+      coachNoteCloud:
+        "Chaque message utilise une de tes analyses cloud du jour.",
+      coachSupportTitle: "Cela semble sérieux. Tu n'as pas à gérer ça seul·e.",
+      coachSupportText:
+        "Si toi ou quelqu'un d'autre êtes en danger, appelle tout de suite le numéro d'urgence local (112). Pour un soutien gratuit et confidentiel, trouve une ligne d'écoute dans ton pays sur findahelpline.com (en France : 3114).",
       fullAnalyzer: "Voir toutes les statistiques et graphiques →",
       howEyebrow: "Comment ça marche",
       howTitle: "L'analyse par IA sans livrer votre conversation",
@@ -6394,6 +6475,23 @@ export const messages = {
       reportDisclaimer:
         "L'IA può fraintendere contesto e ironia. Prendila come una prospettiva divertente, non come un verdetto.",
       tryCloud: "Confronta con l'IA nel cloud",
+      coachTitle: "Continua a parlare",
+      coachText:
+        "Chiedi qualsiasi cosa su questa chat, oppure incolla un messaggio che stai per inviare e ricevi una versione più calma e chiara.",
+      coach_ask: "Fai una domanda",
+      coach_reply: "Aiutami a rispondere",
+      coachPlaceholder_ask:
+        "es. Perché le nostre discussioni degenerano sempre?",
+      coachPlaceholder_reply: "Incolla il messaggio che vuoi inviare…",
+      coachSend: "Invia",
+      coachThinking: "Sto pensando alla vostra chat…",
+      coachNoteLocal:
+        "Funziona sul tuo dispositivo e ricorda gli ultimi messaggi.",
+      coachNoteCloud: "Ogni messaggio usa una delle tue analisi cloud di oggi.",
+      coachSupportTitle:
+        "Sembra una cosa seria. Non devi affrontarla da solo/a.",
+      coachSupportText:
+        "Se tu o qualcun altro siete in pericolo, chiama subito il numero di emergenza locale (112). Per un supporto gratuito e riservato, trova una linea d'ascolto nel tuo paese su findahelpline.com (in Italia: Telefono Amico 02 2327 2327).",
       fullAnalyzer: "Vedi tutte le statistiche e i grafici →",
       howEyebrow: "Come funziona",
       howTitle: "Analisi con IA senza consegnare la tua chat",
