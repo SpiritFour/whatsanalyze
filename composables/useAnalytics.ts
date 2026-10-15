@@ -21,6 +21,9 @@ declare global {
 }
 /* eslint-enable no-unused-vars */
 
+/** Where an AI analysis was asked for: the AI tool page or the analyzer's results. */
+export type AiSource = "tool" | "results";
+
 export interface EventParams {
   [key: string]: string | number | boolean | null | undefined;
 }
@@ -300,9 +303,13 @@ export const analyticsTools = {
   },
 
   /** An AI analysis was started, on the device or in the cloud. */
-  aiStarted(mode: "local" | "cloud", question: string) {
+  aiStarted(mode: "local" | "cloud", question: string, source: AiSource) {
     // The preset's id or "custom", never what was typed.
-    trackEvent("ai_analysis_started", { ai_mode: mode, ai_question: question });
+    trackEvent("ai_analysis_started", {
+      ai_mode: mode,
+      ai_question: question,
+      source,
+    });
   },
 
   /** The mobile-data warning before the on-device model download. */
@@ -310,9 +317,10 @@ export const analyticsTools = {
     trackEvent("ai_data_warning", { reason });
   },
 
-  aiFinished(mode: "local" | "cloud", durationMs: number) {
+  aiFinished(mode: "local" | "cloud", durationMs: number, source: AiSource) {
     trackEvent("ai_analysis_finished", {
       ai_mode: mode,
+      source,
       duration_ms: Math.round(durationMs),
     });
   },
@@ -326,7 +334,7 @@ export const analyticsTools = {
 
   ctaClick(
     toolName: string,
-    ctaType: "full_analyzer" | "export_guide" | "subscribe" | "other",
+    ctaType: "full_analyzer" | "export_guide" | "subscribe" | "ai" | "other",
   ) {
     trackEvent("tool_cta_click", {
       tool_name: toolName,
