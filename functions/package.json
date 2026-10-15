@@ -9,6 +9,7 @@
     "deploy:dev": "npm run build && firebase deploy --only functions --project dev",
     "deploy:prod": "npm run build && firebase deploy --only functions --project default",
     "logs": "firebase functions:log",
+    "test": "node --test test/*.test.mjs",
     "secrets:set:dev": "firebase --project dev functions:secrets:set",
     "secrets:set:prod": "firebase --project default functions:secrets:set",
     "init:templates:dev": "ts-node scripts/initializeTemplates.ts dev",
