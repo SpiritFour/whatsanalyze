@@ -19,7 +19,11 @@ import {
 import {
   AI_LANGUAGES,
   CLOUD_TRANSCRIPT_CHARS,
+  MAX_COACH_CHARS,
+  MAX_COACH_REPLY_CHARS,
+  MAX_COACH_TURNS,
   MAX_QUESTION_CHARS,
+  buildCoachPrompt,
   buildPrompt,
   insightsSchema,
 } from "./insights";
@@ -68,19 +72,24 @@ const MAX_OUTPUT_TOKENS = 8_000;
 
 const PAYPAL_SUBSCRIPTION_ID = /^I-[A-Z0-9]+$/i;
 
+const digestSchema = z.object({
+  participants: z
+    .array(z.object({ alias: z.string().max(20), messages: z.number() }))
+    .max(50),
+  totalMessages: z.number(),
+  firstDate: z.string().max(30),
+  lastDate: z.string().max(30),
+  transcript: z.string().min(1).max(CLOUD_TRANSCRIPT_CHARS),
+});
+const languageSchema = z.enum(
+  Object.keys(AI_LANGUAGES) as [keyof typeof AI_LANGUAGES],
+);
+
 const requestSchema = z.object({
   email: z.string().min(1),
   subscriptionId: z.string().min(1),
-  language: z.enum(Object.keys(AI_LANGUAGES) as [keyof typeof AI_LANGUAGES]),
-  digest: z.object({
-    participants: z
-      .array(z.object({ alias: z.string().max(20), messages: z.number() }))
-      .max(50),
-    totalMessages: z.number(),
-    firstDate: z.string().max(30),
-    lastDate: z.string().max(30),
-    transcript: z.string().min(1).max(CLOUD_TRANSCRIPT_CHARS),
-  }),
+  language: languageSchema,
+  digest: digestSchema,
   ask: z
     .object({
       question: z.string().max(MAX_QUESTION_CHARS).optional(),
@@ -161,6 +170,24 @@ export const getAiAllowance = onCall(
   },
 );
 
+/**
+ * Take one from today's allowance or throw what the page shows for it.
+ * Shared by the report and every coach turn: both cost a model call.
+ */
+async function spendAllowance(subscriptionId: string): Promise<number> {
+  const remaining = await takeFromAllowance(subscriptionId);
+  if (remaining === null) {
+    throw new HttpsError("resource-exhausted", "daily_limit");
+  }
+  if (remaining === "global") {
+    logger.error("Global AI daily limit reached", {
+      limit: aiGlobalDailyLimit.value(),
+    });
+    throw new HttpsError("unavailable", "analysis_failed");
+  }
+  return remaining;
+}
+
 export const analyzeChatAi = onCall(
   {
     cors: true,
@@ -181,16 +208,7 @@ export const analyzeChatAi = onCall(
     if (!(await isSubscriber(email, subscriptionId))) {
       throw new HttpsError("permission-denied", "not_subscribed");
     }
-    const remaining = await takeFromAllowance(subscriptionId);
-    if (remaining === null) {
-      throw new HttpsError("resource-exhausted", "daily_limit");
-    }
-    if (remaining === "global") {
-      logger.error("Global AI daily limit reached", {
-        limit: aiGlobalDailyLimit.value(),
-      });
-      throw new HttpsError("unavailable", "analysis_failed");
-    }
+    const remaining = await spendAllowance(subscriptionId);
 
     const startedAt = Date.now();
     try {
@@ -227,6 +245,92 @@ export const analyzeChatAi = onCall(
       };
     } catch (error: any) {
       logger.error("AI analysis failed", {
+        model: aiModel.value(),
+        error: error.message,
+      });
+      throw new HttpsError("internal", "analysis_failed");
+    }
+  },
+);
+
+const coachRequestSchema = z.object({
+  email: z.string().min(1),
+  subscriptionId: z.string().min(1),
+  language: languageSchema,
+  digest: digestSchema,
+  kind: z.enum(["ask", "reply"]),
+  me: z.string().max(20).optional(),
+  context: z.string().max(MAX_COACH_REPLY_CHARS).optional(),
+  history: z
+    .array(
+      z.object({
+        role: z.enum(["user", "assistant"]),
+        content: z.string().min(1).max(MAX_COACH_REPLY_CHARS),
+      }),
+    )
+    .min(1)
+    .max(MAX_COACH_TURNS)
+    .refine((turns) => {
+      const last = turns[turns.length - 1];
+      return last.role === "user" && last.content.length <= MAX_COACH_CHARS;
+    }),
+});
+
+/**
+ * Follow-up questions and reply help after a report, one turn per call. The
+ * browser sends the same anonymized digest plus the conversation so far,
+ * already in placeholders; nothing is kept between calls.
+ */
+export const coachChatAi = onCall(
+  {
+    cors: true,
+    secrets: [aiApiKey, paypalSecret],
+    timeoutSeconds: 120,
+    maxInstances: 3,
+  },
+  async (request) => {
+    const parsed = coachRequestSchema.safeParse(request.data);
+    if (!parsed.success) {
+      throw new HttpsError("invalid-argument", "Malformed coach request");
+    }
+    const { email, subscriptionId, language, digest, kind, me, context } =
+      parsed.data;
+
+    if (!(await isSubscriber(email, subscriptionId))) {
+      throw new HttpsError("permission-denied", "not_subscribed");
+    }
+    const remaining = await spendAllowance(subscriptionId);
+
+    const startedAt = Date.now();
+    try {
+      const { system, messages } = buildCoachPrompt(
+        digest,
+        language,
+        kind,
+        parsed.data.history,
+        { me, context },
+      );
+      const { text, usage } = await generateText({
+        model: languageModel(aiModel.value(), aiApiKey.value()),
+        system,
+        messages,
+        // A few paragraphs at most; the rest is reasoning headroom.
+        maxOutputTokens: 4_000,
+        providerOptions: {
+          openai: { reasoningEffort: aiReasoningEffort.value(), store: false },
+          anthropic: { effort: aiReasoningEffort.value() },
+        },
+      });
+      logger.info("AI coach turn done", {
+        model: aiModel.value(),
+        kind,
+        durationMs: Date.now() - startedAt,
+        inputTokens: usage.inputTokens,
+        outputTokens: usage.outputTokens,
+      });
+      return { reply: text, remaining, limit: aiDailyLimit.value() };
+    } catch (error: any) {
+      logger.error("AI coach turn failed", {
         model: aiModel.value(),
         error: error.message,
       });

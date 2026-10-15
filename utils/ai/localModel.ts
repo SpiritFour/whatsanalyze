@@ -2,6 +2,7 @@ import { z } from "zod";
 import { splitParts } from "~/utils/ai/digest";
 import {
   buildAnswerPrompt,
+  buildCoachPrompt,
   buildNotesPrompt,
   buildPrompt,
   insightsSchema,
@@ -9,6 +10,8 @@ import {
   type AiLanguage,
   type ChatDigest,
   type ChatInsights,
+  type CoachKind,
+  type CoachTurn,
 } from "~/functions/src/ai/insights";
 
 /**
@@ -368,4 +371,49 @@ export async function analyzeLocally(
   }
 
   return { insights, parts };
+}
+
+/**
+ * Excerpt budget for a coach turn: half a part, leaving the rest of the 4k
+ * context to the instructions, the report summary and the conversation.
+ */
+export const localCoachChars = (model: LocalModel) =>
+  Math.floor(model.partChars / 2);
+
+/** One coach turn on the device: short context, so only the latest turns. */
+export async function coachLocally(
+  model: LocalModel,
+  digest: ChatDigest,
+  language: AiLanguage,
+  kind: CoachKind,
+  history: CoachTurn[],
+  options: { me?: string; context?: string },
+  onProgress: (_progress: AiProgress) => void,
+): Promise<string> {
+  // shortcut: the last 5 turns at 600 chars each is what fits next to the
+  // excerpt; earlier turns are forgotten. Upgrade if models get more context.
+  const recent = history
+    .slice(-5)
+    .map((turn) => ({ ...turn, content: turn.content.slice(0, 600) }));
+  const { system, messages } = buildCoachPrompt(
+    digest,
+    language,
+    kind,
+    recent,
+    options,
+  );
+  const reply = await step(() =>
+    complete(
+      model,
+      {
+        messages: [{ role: "system", content: system }, ...messages],
+        max_tokens: 350,
+        temperature: 0.5,
+        frequency_penalty: 0.5,
+        ...thinkingOff(model),
+      },
+      onProgress,
+    ),
+  );
+  return reply.trim();
 }
