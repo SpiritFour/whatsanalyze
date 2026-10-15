@@ -68,6 +68,13 @@ const MAX_OUTPUT_TOKENS = 8_000;
 
 const PAYPAL_SUBSCRIPTION_ID = /^I-[A-Z0-9]+$/i;
 
+/**
+ * Firebase's callable SDK sends an `undefined` field as `null`, so an omitted
+ * optional field arrives as null and must read as "not given".
+ */
+const optional = <T extends z.ZodType>(schema: T) =>
+  schema.nullish().transform((value) => value ?? undefined);
+
 const requestSchema = z.object({
   email: z.string().min(1),
   subscriptionId: z.string().min(1),
@@ -81,12 +88,12 @@ const requestSchema = z.object({
     lastDate: z.string().max(30),
     transcript: z.string().min(1).max(CLOUD_TRANSCRIPT_CHARS),
   }),
-  ask: z
-    .object({
-      question: z.string().max(MAX_QUESTION_CHARS).optional(),
-      me: z.string().max(20).optional(),
-    })
-    .optional(),
+  ask: optional(
+    z.object({
+      question: optional(z.string().max(MAX_QUESTION_CHARS)),
+      me: optional(z.string().max(20)),
+    }),
+  ),
 });
 
 function languageModel(spec: string, apiKey: string): LanguageModel {
