@@ -3,6 +3,7 @@ import { parseString } from "whatsapp-chat-parser";
 import { markSystemMessages } from "../systemMessages";
 import {
   buildDigest,
+  monthly,
   restoreNames,
   sample,
   splitParts,
@@ -28,9 +29,22 @@ describe("buildDigest", () => {
       10_000,
     );
     expect(digest.participants).toEqual([
-      { alias: "Person A", messages: 2 },
-      { alias: "Person B", messages: 1 },
+      {
+        alias: "Person A",
+        messages: 2,
+        startsPct: 0,
+        replyMinutes: 1,
+        avgWords: 2.5,
+      },
+      {
+        alias: "Person B",
+        messages: 1,
+        startsPct: 100,
+        replyMinutes: 0,
+        avgWords: 1,
+      },
     ]);
+    expect(digest.monthly).toEqual([{ month: "2026-01", messages: 3 }]);
     expect(names).toEqual({ "Person A": "Anna Schmidt", "Person B": "Bob" });
     expect(digest.transcript).toContain("Person A: hey Person B");
     expect(digest.transcript).not.toMatch(/Anna|Bob/);
@@ -124,6 +138,26 @@ describe("buildDigest", () => {
   });
 });
 
+describe("monthly", () => {
+  test("counts the six months up to the last message, quiet ones as 0", () => {
+    const on = (y, m) => ({
+      author: "A",
+      message: "x",
+      date: new Date(y, m, 15),
+    });
+    expect(
+      monthly([on(2025, 6), on(2025, 10), on(2025, 10), on(2026, 1)]),
+    ).toEqual([
+      { month: "2025-09", messages: 0 },
+      { month: "2025-10", messages: 0 },
+      { month: "2025-11", messages: 2 },
+      { month: "2025-12", messages: 0 },
+      { month: "2026-01", messages: 0 },
+      { month: "2026-02", messages: 1 },
+    ]);
+  });
+});
+
 describe("sample", () => {
   const lines = Array.from({ length: 200 }, (_, i) => `line ${i}`);
 
@@ -195,8 +229,13 @@ describe("tidyInsights", () => {
       ],
       people: [{ name: "Person A", role: "r", style: "s" }, { name: "" }],
       dynamics: [{ title: "x", description: "" }],
+      findings: [
+        { title: "Repair", description: "Anna says sorry first" },
+        { title: "Repair", description: "anna says sorry first" },
+      ],
       highlights: ["a", "", "a", "b", "c", "d"],
     });
+    expect(tidy.findings).toHaveLength(1);
     expect(tidy.answer).toBe("yes");
     expect(tidy.topics).toEqual([{ title: "Trip", description: "Lisbon" }]);
     expect(tidy.people).toHaveLength(1);

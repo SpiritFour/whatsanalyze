@@ -34,7 +34,20 @@ export const CLOUD_TRANSCRIPT_CHARS = 400_000;
  * device and are put back into the answer there.
  */
 export interface ChatDigest {
-  participants: { alias: string; messages: number }[];
+  /**
+   * Counted on the device, so findings can cite real numbers. `startsPct`:
+   * share of conversations (after 6 h quiet) they opened; `replyMinutes`:
+   * average reply time within a day; `avgWords`: words per message.
+   */
+  participants: {
+    alias: string;
+    messages: number;
+    startsPct?: number;
+    replyMinutes?: number;
+    avgWords?: number;
+  }[];
+  /** Messages per calendar month, the last six months of the chat. */
+  monthly?: { month: string; messages: number }[];
   totalMessages: number;
   /** ISO dates of the first and last message. */
   firstDate: string;
@@ -50,7 +63,25 @@ export interface ChatDigest {
 export interface AiAsk {
   question?: string;
   me?: string;
+  lens?: AiLens;
 }
+
+/**
+ * A relationship lens: what the analysis focuses on, and what goes into
+ * "findings". Without one, findings stay empty and the report is the general one.
+ */
+export const AI_LENSES = {
+  conflict:
+    "conflict: what triggers tension, how each person reacts (escalates, withdraws, apologizes), repair attempts and whether they land, and how blame is shared",
+  dating:
+    "romantic interest: the balance of interest and effort (who starts conversations, reply speed, message length), mixed signals, and green and red flags",
+  friendship:
+    "the friendship: reciprocity, support in hard moments, shared jokes and rituals, and whether one side carries it",
+  family:
+    "family dynamics: roles (organizer, peacemaker, quiet one), care and check-ins, recurring friction, and who gets left out",
+} as const;
+
+export type AiLens = keyof typeof AI_LENSES;
 
 export const MAX_QUESTION_CHARS = 300;
 
@@ -98,6 +129,11 @@ export const insightsSchema = z.object({
     .describe(
       "2-4 observations about how they interact, each about a different aspect: who initiates, balance, warmth, humour, conflict",
     ),
+  findings: z
+    .array(item)
+    .describe(
+      "Only if a lens is given: 3-5 findings for that lens. Each cites one number from the statistics and a short quote from the chat, then ends with one concrete suggestion. Otherwise an empty list.",
+    ),
   highlights: z
     .array(z.string())
     .describe(
@@ -109,13 +145,41 @@ export type ChatInsights = z.infer<typeof insightsSchema>;
 
 const overview = (digest: ChatDigest) => {
   const participants = digest.participants
-    .map((p) => `- ${p.alias}: ${p.messages} messages`)
+    .map((p) =>
+      [
+        `- ${p.alias}: ${p.messages} messages`,
+        ...(p.startsPct !== undefined
+          ? [`starts ${p.startsPct}% of conversations`]
+          : []),
+        ...(p.replyMinutes
+          ? [`replies in ~${p.replyMinutes} min on average`]
+          : []),
+        ...(p.avgWords ? [`~${p.avgWords} words per message`] : []),
+      ].join(", "),
+    )
     .join("\n");
   return [
     `The chat runs from ${digest.firstDate} to ${digest.lastDate} with ${digest.totalMessages} messages.`,
     `Participants:\n${participants}`,
+    ...(digest.monthly?.length
+      ? [
+          `Messages per month, most recent last: ${digest.monthly
+            .map((m) => `${m.month}: ${m.messages}`)
+            .join(", ")}`,
+        ]
+      : []),
   ];
 };
+
+/** The lens part of a system prompt, including the line on abuse. */
+const lensLines = (lens: AiLens | undefined) =>
+  lens
+    ? [
+        `Focus the whole analysis on ${AI_LENSES[lens]}.`,
+        'Fill "findings" with 3-5 findings for this focus. Each cites one number from the statistics above and a short quote from the chat, and ends with one concrete, kind suggestion.',
+        "If the chat shows threats, control, intimidation, humiliation or violence, say so plainly in the first finding and suggest talking to someone they trust or a support service. Never suggest they fix that alone.",
+      ]
+    : ['Leave "findings" empty.'];
 
 const askLines = (ask: AiAsk | undefined) => [
   ...(ask?.me
@@ -145,6 +209,7 @@ export function buildPrompt(
     'Refer to participants only by their placeholder ("Person A", "Person B", ...), exactly as written and untranslated.',
     "Text in square brackets ([phone], [email], [link], [iban]) was removed for privacy; ignore it.",
     ...askLines(ask),
+    ...lensLines(ask?.lens),
     ask?.question
       ? "Answer the reader's question in \"answer\". If the chat doesn't give enough to go on, say so honestly."
       : 'Leave "answer" empty.',
@@ -179,6 +244,9 @@ export function buildNotesPrompt(
       ? [
           "Also note anything in this part that helps answer the reader's question.",
         ]
+      : []),
+    ...(ask?.lens
+      ? [`Also note moments about ${AI_LENSES[ask.lens]}, with short quotes.`]
       : []),
     ...askLines(ask),
     'Refer to participants only by their placeholder ("Person A", "Person B", ...), exactly as written.',

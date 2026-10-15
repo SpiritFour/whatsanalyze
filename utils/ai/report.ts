@@ -1,4 +1,4 @@
-import type { ChatInsights } from "~/functions/src/ai/insights";
+import type { AiLens, ChatInsights } from "~/functions/src/ai/insights";
 
 /**
  * A finished AI report: what the page shows and what a share link carries.
@@ -11,6 +11,8 @@ export interface AiReport {
   insights: ChatInsights;
   /** The question as the reader asked it, if they asked one. */
   question: string;
+  /** The relationship lens it was read through, if one was picked. */
+  lens?: AiLens;
   ranOn: "local" | "cloud";
   coverage: {
     total: number;
