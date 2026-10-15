@@ -357,6 +357,16 @@ export const analyticsTools = {
     });
   },
 
+  /** A follow-up sent to the AI coach after a report. Never its text. */
+  aiCoachMessage(mode: "local" | "cloud", kind: "ask" | "reply") {
+    trackEvent("ai_coach_message", { ai_mode: mode, coach_kind: kind });
+  },
+
+  /** The coach showed support resources instead of an answer. */
+  aiCoachSafety(source: "keywords" | "model") {
+    trackEvent("ai_coach_safety", { source });
+  },
+
   error(toolName: string, errorCode: string) {
     trackEvent("tool_error", {
       tool_name: toolName,
