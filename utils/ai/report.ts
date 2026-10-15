@@ -1,4 +1,5 @@
 import type { ChatInsights } from "~/functions/src/ai/insights";
+import type { PreviewLocked } from "~/functions/src/ai/preview";
 
 /**
  * A finished AI report: what the page shows and what a share link carries.
@@ -12,6 +13,8 @@ export interface AiReport {
   /** The question as the reader asked it, if they asked one. */
   question: string;
   ranOn: "local" | "cloud";
+  /** Set on a free cloud preview: what the full report would add. */
+  locked?: PreviewLocked | null;
   coverage: {
     total: number;
     from: string;

@@ -57,6 +57,21 @@
       </ul>
     </template>
 
+    <!-- A free preview: what the full report adds, and how to get it -->
+    <div v-if="report.locked" class="report-card report-locked">
+      <v-icon size="28" color="#818cf8">mdi-lock-outline</v-icon>
+      <strong>{{ t("toolsAi.lockedTitle") }}</strong>
+      <ul>
+        <li v-for="line in lockedLines" :key="line">{{ line }}</li>
+      </ul>
+      <LandingButton
+        :to="subscribeLink"
+        @click="analyticsTools.ctaClick('ai', 'subscribe')"
+      >
+        {{ t("toolsAi.lockedButton") }}
+      </LandingButton>
+    </div>
+
     <p class="report-disclaimer">{{ t("toolsAi.reportDisclaimer") }}</p>
   </div>
 </template>
@@ -64,6 +79,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import type { AiReport } from "~/utils/ai/report";
+import { analyticsTools } from "~/composables/useAnalytics";
 
 /**
  * An AI chat report, as the analyzer shows it and as a share link opens it
@@ -71,6 +87,16 @@ import type { AiReport } from "~/utils/ai/report";
  */
 const props = defineProps<{ report: AiReport }>();
 const { t, locale } = useI18n();
+const subscribeLink = useSubscribeLink();
+
+/** "4 more observations" etc., for what the free preview left out. */
+const lockedLines = computed(() => {
+  const locked = props.report.locked;
+  if (!locked) return [];
+  return (["people", "dynamics", "topics", "highlights"] as const)
+    .filter((key) => locked[key] > 0)
+    .map((key) => t(`toolsAi.locked_${key}`, { n: locked[key] }));
+});
 
 const insights = computed(() => props.report.insights);
 
@@ -195,6 +221,19 @@ const coverageText = computed(() => {
   padding-left: 2.4rem;
   display: grid;
   gap: 0.5rem;
+}
+.report-locked {
+  display: grid;
+  justify-items: center;
+  gap: 0.6rem;
+  text-align: center;
+  border: 2px dashed rgba(129, 140, 248, 0.5);
+
+  ul {
+    list-style: none;
+    padding: 0;
+    color: rgba(29, 29, 31, 0.7);
+  }
 }
 .report-disclaimer {
   font-size: 0.82rem;
