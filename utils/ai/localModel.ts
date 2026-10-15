@@ -114,7 +114,9 @@ export async function supportsLocalModel(): Promise<boolean> {
   const gpu = (navigator as any).gpu;
   if (!gpu) return false;
   try {
-    return !!(await gpu.requestAdapter());
+    return !!(await gpu.requestAdapter({
+      powerPreference: "high-performance",
+    }));
   } catch {
     return false;
   }
@@ -122,7 +124,10 @@ export async function supportsLocalModel(): Promise<boolean> {
 
 /** The model this device should run. */
 export async function pickLocalModel(): Promise<LocalModel> {
-  const adapter = await (navigator as any).gpu?.requestAdapter();
+  const adapter = await (navigator as any).gpu?.requestAdapter({
+    // What WebLLM asks for: a dual-GPU Mac may answer each differently.
+    powerPreference: "high-performance",
+  });
   const f16 = !!adapter?.features?.has("shader-f16");
   return isMobile() ? MOBILE(f16) : DESKTOP(f16);
 }
