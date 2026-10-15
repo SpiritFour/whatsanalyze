@@ -289,6 +289,7 @@
 import { computed, nextTick, onMounted, ref, watch } from "vue";
 import { chatFingerprint } from "~/utils/chatFingerprint";
 import { storeToRefs } from "pinia";
+import * as Sentry from "@sentry/nuxt";
 import ToolDropzone from "~/components/tools/ToolDropzone.vue";
 import AiReport from "~/components/ai/AiReport.vue";
 import type { AiReport as AiReportData } from "~/utils/ai/report";
@@ -314,6 +315,7 @@ import {
   type AiProgress,
   type LocalModel,
 } from "~/utils/ai/localModel";
+import { localErrorKey } from "~/utils/ai/localErrors";
 import {
   analyzeInCloud,
   getCloudAllowance,
@@ -745,13 +747,26 @@ async function run(mode: Mode) {
       "local_invalid",
       "no_messages",
     ];
-    errorKey.value = known.includes(err?.message) ? err.message : mode;
+    const message = String(err?.message ?? "unknown");
+    errorKey.value = known.includes(message)
+      ? message
+      : mode === "local"
+        ? localErrorKey(message)
+        : mode;
     errorMode.value = mode;
+    if (mode === "local" && !known.includes(message)) {
+      // A message, not an exception: exceptions open the user report dialog.
+      Sentry.captureMessage(`On-device AI failed: ${message}`, {
+        level: "warning",
+        fingerprint: ["local-ai", errorKey.value],
+        tags: { ai_model: localModel.value?.id },
+      });
+    }
     if (err?.message === "daily_limit") {
       allowance.value = { remaining: 0, limit: allowance.value?.limit ?? 10 };
     }
-    analyticsTools.error("ai", `${mode}:${err?.message ?? "unknown"}`);
-    analyticsTools.aiFailed(trackedMode, String(err?.message ?? "unknown"));
+    analyticsTools.error("ai", `${mode}:${message}`);
+    analyticsTools.aiFailed(trackedMode, message);
   } finally {
     window.removeEventListener("pagehide", onLeave);
     wakeLock?.release().catch(() => {});
