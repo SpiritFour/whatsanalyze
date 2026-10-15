@@ -115,6 +115,26 @@ test.describe("the analyzer", () => {
     await expect(page.getByText(/540 total days/)).toBeVisible();
   });
 
+  test("hands the analyzed chat to the AI without a new upload", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await analyzeChat(page);
+
+    await page
+      .getByRole("link", { name: "Who puts more effort into this chat?" })
+      .click();
+
+    await expect(page).toHaveURL(/\/tools\/ai-chat-analyzer\/?\?/);
+    // The chat is already there and the question already picked.
+    await expect(page.locator("#ai-choose")).toBeVisible();
+    await expect(
+      page.getByRole("button", {
+        name: "Who puts more effort into this chat?",
+      }),
+    ).toHaveClass(/chip--on/);
+  });
+
   test("names the thing each chart counts", async ({ page }) => {
     await page.goto("/");
     await analyzeChat(page);
