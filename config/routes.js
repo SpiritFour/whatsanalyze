@@ -27,6 +27,7 @@ export const localizedPages = [
   "tools/message-counter",
   "tools/word-counter",
   "tools/chat-heatmap",
+  "what-brandon-thinks-alternative",
   "whatsapp-to-pdf",
   "wrapped",
   "wrapped/results",
