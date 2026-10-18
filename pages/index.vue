@@ -48,6 +48,11 @@
         :chat="chat"
         :is-valid-subscription="isSubscriptionValid"
       />
+      <LazyAiAskAiCard
+        v-if="chat"
+        :messages="chat.chatObject"
+        :attachments="attachments"
+      />
     </LandingSection>
 
     <template v-else>
