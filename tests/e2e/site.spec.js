@@ -121,6 +121,12 @@ test.describe("the analyzer", () => {
     await page.goto("/");
     await analyzeChat(page);
 
+    // The top button next to "Download Results" scrolls down to the AI card
+    const topAiButton = page.getByRole("button", { name: "Ask AI" });
+    await expect(topAiButton).toBeVisible();
+    await topAiButton.click();
+    await expect(page.locator("#ask-ai")).toBeInViewport();
+
     await page
       .getByRole("link", { name: "Who puts more effort into this chat?" })
       .click();
