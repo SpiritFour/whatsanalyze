@@ -1,5 +1,5 @@
 <template>
-  <div class="ask-ai">
+  <div id="ask-ai" class="ask-ai">
     <div class="ask-ai__head">
       <v-icon size="28" color="#21a68d">mdi-creation-outline</v-icon>
       <div>
@@ -51,12 +51,11 @@ function handOver() {
 
 <style scoped lang="scss">
 .ask-ai {
-  margin: 2rem auto 0;
-  max-width: 760px;
   padding: 1.5rem;
   border-radius: 20px;
   background: #fff;
   border: 1px solid rgba(33, 166, 141, 0.35);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
 
   &__head {
     display: flex;
