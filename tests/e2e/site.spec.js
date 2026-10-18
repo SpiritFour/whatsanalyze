@@ -8,6 +8,7 @@ const {
   EXAMPLE_CHAT,
   expect,
   expectAnalysis,
+  stubCallable,
   test,
   zipExport,
 } = require("./fixtures");
@@ -139,6 +140,114 @@ test.describe("the analyzer", () => {
         name: "Who puts more effort into this chat?",
       }),
     ).toHaveClass(/chip--on/);
+  });
+
+  test("completes the full flow: upload chat, click follow-up question, and run AI analysis", async ({
+    page,
+  }) => {
+    // Subscriber credentials so cloud analysis is unlocked
+    await page.addInitScript(() => {
+      localStorage.setItem(
+        "subscription",
+        JSON.stringify({
+          subscription: {
+            email: "subscriber@example.com",
+            subscriptionId: "sub_test_subscriber",
+            expiresAt: new Date(Date.now() + 30 * 86400000).toISOString(),
+          },
+          isVerified: true,
+        }),
+      );
+    });
+
+    await stubCallable(page, "getAiAllowance", { remaining: 5, limit: 10 });
+    const aiCalls = await stubCallable(page, "analyzeChatAi", {
+      insights: {
+        answer:
+          "Both participants communicate actively, with Alex initiating conversations slightly more often.",
+        summary:
+          "A close, friendly exchange discussing daily plans and shared interests.",
+        vibe: "Warm and cheerful",
+        topics: [
+          {
+            title: "Weekend plans",
+            description: "Coordinating dinners and weekend activities.",
+          },
+        ],
+        people: [
+          {
+            name: "Person A",
+            role: "Initiator",
+            style: "Outgoing and prompt to respond",
+          },
+          {
+            name: "Person B",
+            role: "Responder",
+            style: "Thoughtful and enthusiastic",
+          },
+        ],
+        dynamics: [
+          {
+            title: "Balanced interaction",
+            description: "Quick turnaround times and reciprocal questions.",
+          },
+        ],
+        highlights: [
+          "Planning the weekend trip",
+          "Sharing funny stories from work",
+        ],
+      },
+      remaining: 4,
+      limit: 10,
+    });
+
+    // 1. Upload chat on main analyzer
+    await page.goto("/");
+    await analyzeChat(page);
+
+    // 2. Click follow-up question chip on the Ask AI card
+    const questionLink = page.getByRole("link", {
+      name: "Who puts more effort into this chat?",
+    });
+    await expect(questionLink).toBeVisible();
+    await questionLink.click();
+
+    // 3. Confirm hand-off to AI chat analyzer with preset selected
+    await expect(page).toHaveURL(/\/tools\/ai-chat-analyzer\/?\?/);
+    await expect(page.locator("#ai-choose")).toBeVisible();
+    await expect(
+      page.getByRole("button", {
+        name: "Who puts more effort into this chat?",
+      }),
+    ).toHaveClass(/chip--on/);
+
+    // 4. Click "Analyze in the cloud"
+    const runButton = page.getByRole("button", {
+      name: "Analyze in the cloud",
+    });
+    await expect(runButton).toBeVisible();
+    await runButton.click();
+
+    // 5. Verify the report renders the answers, summary, vibe, and topics
+    await expect(page.locator("#ai-report")).toBeVisible();
+    await expect(
+      page.getByText(
+        "Both participants communicate actively, with Alex initiating conversations slightly more often.",
+      ),
+    ).toBeVisible();
+    await expect(page.getByText("Warm and cheerful")).toBeVisible();
+    await expect(
+      page.getByText(
+        "A close, friendly exchange discussing daily plans and shared interests.",
+      ),
+    ).toBeVisible();
+    await expect(page.getByText("Weekend plans")).toBeVisible();
+
+    // Verify backend callable was sent the digest and the question
+    expect(aiCalls.length).toBe(1);
+    const sentData = JSON.parse(aiCalls[0].postData()).data;
+    expect(sentData.ask.question).toBe("Who puts more effort into this chat?");
+    expect(sentData.digest.totalMessages).toBe(536);
   });
 
   test("names the thing each chart counts", async ({ page }) => {
