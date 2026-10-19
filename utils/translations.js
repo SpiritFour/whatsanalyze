@@ -786,7 +786,11 @@ export const messages = {
       progressCloud:
         "The AI is reading your chat… this takes about 15 seconds.",
       error_local:
-        "The on-device AI couldn't run. Your device may not have enough memory — try the cloud AI or a computer.",
+        "The on-device AI couldn't run. Try again, or use the cloud AI.",
+      error_local_unsupported:
+        "This browser can't run the on-device AI yet. Try the latest Chrome or Edge, or use the cloud AI.",
+      error_local_memory:
+        "The on-device AI ran out of memory. Close other tabs and try again, or use the cloud AI.",
       error_cloud:
         "The cloud AI is unavailable right now. Please try again in a minute.",
       error_not_subscribed:
@@ -1947,7 +1951,11 @@ export const messages = {
       progressLocal: "Die KI liest deinen Chat auf deinem Gerät …",
       progressCloud: "Die KI liest deinen Chat … das dauert etwa 15 Sekunden.",
       error_local:
-        "Die KI auf dem Gerät konnte nicht starten. Vielleicht hat dein Gerät nicht genug Speicher – probier die Cloud-KI oder einen Computer.",
+        "Die KI auf dem Gerät konnte nicht starten. Versuch es noch einmal oder nutz die Cloud-KI.",
+      error_local_unsupported:
+        "Dieser Browser kann die KI auf dem Gerät noch nicht ausführen. Probier das aktuelle Chrome oder Edge oder nutz die Cloud-KI.",
+      error_local_memory:
+        "Der KI auf dem Gerät ist der Speicher ausgegangen. Schließ andere Tabs und versuch es noch einmal oder nutz die Cloud-KI.",
       error_cloud:
         "Die Cloud-KI ist gerade nicht erreichbar. Bitte versuch es in einer Minute noch einmal.",
       error_not_subscribed:
@@ -3103,7 +3111,11 @@ export const messages = {
       progressLocal: "La IA está leyendo tu chat en tu dispositivo…",
       progressCloud: "La IA está leyendo tu chat… tarda unos 15 segundos.",
       error_local:
-        "La IA local no ha podido ejecutarse. Puede que tu dispositivo no tenga memoria suficiente: prueba la IA en la nube o un ordenador.",
+        "La IA local no ha podido ejecutarse. Vuelve a intentarlo o usa la IA en la nube.",
+      error_local_unsupported:
+        "Este navegador todavía no puede ejecutar la IA local. Prueba la última versión de Chrome o Edge, o usa la IA en la nube.",
+      error_local_memory:
+        "La IA local se ha quedado sin memoria. Cierra otras pestañas y vuelve a intentarlo, o usa la IA en la nube.",
       error_cloud:
         "La IA en la nube no está disponible ahora mismo. Inténtalo de nuevo en un minuto.",
       error_not_subscribed:
@@ -4082,7 +4094,11 @@ export const messages = {
       progressCloud:
         "A IA está a ler a sua conversa… demora cerca de 15 segundos.",
       error_local:
-        "A IA local não conseguiu arrancar. O seu dispositivo pode não ter memória suficiente: experimente a IA na nuvem ou um computador.",
+        "A IA local não conseguiu arrancar. Tente novamente ou use a IA na nuvem.",
+      error_local_unsupported:
+        "Este navegador ainda não consegue executar a IA local. Experimente a versão mais recente do Chrome ou do Edge, ou use a IA na nuvem.",
+      error_local_memory:
+        "A IA local ficou sem memória. Feche outros separadores e tente novamente, ou use a IA na nuvem.",
       error_cloud:
         "A IA na nuvem não está disponível neste momento. Tente novamente dentro de um minuto.",
       error_not_subscribed:
@@ -5246,7 +5262,11 @@ export const messages = {
       progressCloud:
         "L'IA lit votre conversation… cela prend environ 15 secondes.",
       error_local:
-        "L'IA locale n'a pas pu démarrer. Votre appareil manque peut-être de mémoire : essayez l'IA dans le cloud ou un ordinateur.",
+        "L'IA locale n'a pas pu démarrer. Réessayez, ou utilisez l'IA dans le cloud.",
+      error_local_unsupported:
+        "Ce navigateur ne peut pas encore faire tourner l'IA locale. Essayez la dernière version de Chrome ou d'Edge, ou utilisez l'IA dans le cloud.",
+      error_local_memory:
+        "L'IA locale a manqué de mémoire. Fermez d'autres onglets et réessayez, ou utilisez l'IA dans le cloud.",
       error_cloud:
         "L'IA dans le cloud est indisponible pour le moment. Réessayez dans une minute.",
       error_not_subscribed:
@@ -6403,7 +6423,11 @@ export const messages = {
       progressCloud:
         "L'IA sta leggendo la tua chat… ci vogliono circa 15 secondi.",
       error_local:
-        "L'IA locale non è riuscita ad avviarsi. Forse il tuo dispositivo non ha memoria sufficiente: prova l'IA nel cloud o un computer.",
+        "L'IA locale non è riuscita ad avviarsi. Riprova, oppure usa l'IA nel cloud.",
+      error_local_unsupported:
+        "Questo browser non può ancora eseguire l'IA locale. Prova l'ultima versione di Chrome o Edge, oppure usa l'IA nel cloud.",
+      error_local_memory:
+        "L'IA locale ha esaurito la memoria. Chiudi le altre schede e riprova, oppure usa l'IA nel cloud.",
       error_cloud:
         "L'IA nel cloud al momento non è disponibile. Riprova tra un minuto.",
       error_not_subscribed:
