@@ -291,7 +291,7 @@ import ToolDropzone from "~/components/tools/ToolDropzone.vue";
 import AiReport from "~/components/ai/AiReport.vue";
 import type { AiReport as AiReportData } from "~/utils/ai/report";
 import type { ChatMessage } from "~/composables/useChatTool";
-import { analyticsTools } from "~/composables/useAnalytics";
+import { analyticsTools, type AiSource } from "~/composables/useAnalytics";
 import { useSubscriptionStore } from "~/stores/subscription";
 import {
   buildDigest,
@@ -408,6 +408,13 @@ const presets = computed(() => [
   ].map((p) => ({ ...p, label: t(`toolsAi.ask_${p.id}`) })),
   { id: "custom", needsMe: false, label: t("toolsAi.askCustom") },
 ]);
+
+// Arriving from the analyzer's "Ask AI about this chat" card.
+const route = useRoute();
+const source: AiSource = route.query.source === "results" ? "results" : "tool";
+if (presets.value.some((p) => p.id === route.query.ask)) {
+  question.value = route.query.ask as string;
+}
 
 const askBlocked = computed(
   () =>
@@ -585,7 +592,7 @@ async function run(mode: Mode) {
   errorKey.value = null;
   errorMode.value = null;
   localCrashed.value = false;
-  analyticsTools.aiStarted(mode, question.value ?? "none");
+  analyticsTools.aiStarted(mode, question.value ?? "none", source);
   // Keep the screen on: a phone that dims and locks pauses the on-device AI.
   const wakeLock = await (navigator as any).wakeLock
     ?.request("screen")
@@ -649,7 +656,7 @@ async function run(mode: Mode) {
       parts,
     };
     ranOn.value = mode;
-    analyticsTools.aiFinished(mode, performance.now() - startedAt);
+    analyticsTools.aiFinished(mode, performance.now() - startedAt, source);
     await nextTick();
     document
       .getElementById("ai-report")

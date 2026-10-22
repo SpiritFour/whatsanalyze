@@ -10,6 +10,15 @@ import { participantMessages } from "~/utils/utils";
 import { COMMON_STOPWORDS, normalizeWord } from "~/utils/stopwords";
 
 /**
+ * `onlyEmoji` returns `false` (not an array) when parsing fails on unpaired
+ * surrogates or unhandled Unicode characters. Normalize to an array.
+ */
+function safeOnlyEmoji(text) {
+  const emojis = typeof text === "string" ? onlyEmoji(text) : [];
+  return Array.isArray(emojis) ? emojis : [];
+}
+
+/**
  * Words that say nothing about the conversation.
  *
  * Everything here is lowercase and compared lowercase — the list used to hold
@@ -122,7 +131,7 @@ export class Chat {
       if (mostUsedEmojis.size === terminationCondition) {
         return mostUsedEmojis;
       }
-      let emojis = onlyEmoji(entry[0]);
+      let emojis = safeOnlyEmoji(entry[0]);
       if (emojis.length !== 0 && emojis[0].match(regexpEmojiPresentation)) {
         mostUsedEmojis.add(emojis[0]);
       }
@@ -529,7 +538,7 @@ export class Chat {
       const emojiFrequencies = {};
 
       words.forEach(({ word, freq }) => {
-        onlyEmoji(word).forEach((emoji) => {
+        safeOnlyEmoji(word).forEach((emoji) => {
           emojiFrequencies[emoji] = (emojiFrequencies[emoji] || 0) + freq;
         });
       });
