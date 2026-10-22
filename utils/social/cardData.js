@@ -21,7 +21,9 @@ const EMOJI_PRESENTATION = /\p{Emoji_Presentation}/u;
 function countEmojis(freqDict) {
   const counts = {};
   Object.entries(freqDict).forEach(([word, freq]) => {
-    onlyEmoji(word).forEach((emoji) => {
+    const emojis = onlyEmoji(word);
+    if (!Array.isArray(emojis)) return;
+    emojis.forEach((emoji) => {
       // Skip text-presentation glyphs (©, ™, digits with keycaps) which read as
       // noise on a share card.
       if (!EMOJI_PRESENTATION.test(emoji)) return;
