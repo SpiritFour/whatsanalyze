@@ -20,6 +20,7 @@
     "notFoundText": "Der Link ist wahrscheinlich veraltet oder vertippt. Alles andere ist weiterhin da.",
     "genericTitle": "Etwas ist schiefgelaufen",
     "genericText": "Diese Seite konnte nicht geladen werden. Neu laden hilft meistens — sonst nimm einen der Links unten.",
+    "reload": "Seite neu laden",
     "backHome": "Zurück zum Chat-Analyzer",
     "toWrapped": "WhatsApp Wrapped öffnen"
   },

@@ -48,6 +48,7 @@ export default [
         useSwitchLocalePath: "readonly",
         navigateTo: "readonly",
         clearError: "readonly",
+        reloadNuxtApp: "readonly",
         computed: "readonly",
         ref: "readonly",
         useHead: "readonly",
