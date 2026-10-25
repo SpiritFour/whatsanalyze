@@ -11,10 +11,9 @@ export const getSubscriptionParams = () => {
     queryParams.get("session_id");
 
   if (id) return { id, email: queryParams.get("email") };
-  const data = localStorage.getItem("subscription");
-  // local Storage
-  if (!data) return { id: null, email: null };
   try {
+    const data = localStorage.getItem("subscription");
+    if (!data) return { id: null, email: null };
     const subscription = JSON.parse(data);
     return { email: subscription.email, id: subscription.subscriptionId };
   } catch {

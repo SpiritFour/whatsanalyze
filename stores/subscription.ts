@@ -70,7 +70,11 @@ export const useSubscriptionStore = defineStore("subscription", {
      */
     logout() {
       this.clearSubscription();
-      if (import.meta.client) localStorage.removeItem("subscription");
+      try {
+        localStorage.removeItem("subscription");
+      } catch {
+        // Storage access denied
+      }
     },
     setLoading(loading: boolean) {
       this.isLoading = loading;
@@ -218,6 +222,6 @@ export const useSubscriptionStore = defineStore("subscription", {
     // Only the subscription itself outlives the tab. Persisting the transient
     // flags brings a page back stuck mid-verification after a reload.
     pick: ["subscription", "isVerified"],
-    storage: import.meta.client ? localStorage : undefined,
+    storage: piniaPluginPersistedstate.localStorage(),
   },
 });
