@@ -23,11 +23,11 @@ test("toPreview keeps the verdict and a taste of each section, and counts the re
   assert.equal(insights.summary, full.summary);
   assert.equal(insights.vibe, full.vibe);
   assert.deepEqual(insights.dynamics, full.dynamics.slice(0, 2));
-  assert.deepEqual(insights.people, []);
+  assert.deepEqual(insights.people, full.people.slice(0, 1));
   assert.deepEqual(insights.topics, full.topics.slice(0, 2));
   assert.deepEqual(insights.highlights, full.highlights.slice(0, 1));
   assert.deepEqual(locked, {
-    people: 2,
+    people: 1,
     dynamics: 1,
     topics: 1,
     highlights: 1,
@@ -37,10 +37,12 @@ test("toPreview keeps the verdict and a taste of each section, and counts the re
 test("toPreview never reports negative locked findings", () => {
   const { locked } = toPreview({
     ...full,
+    people: [],
     dynamics: [item("Only one")],
     topics: [],
     highlights: [],
   });
+  assert.equal(locked.people, 0);
   assert.equal(locked.dynamics, 0);
   assert.equal(locked.topics, 0);
   assert.equal(locked.highlights, 0);

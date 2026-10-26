@@ -11,8 +11,13 @@ import type { ChatInsights } from "./insights";
  * (preview.test.ts).
  */
 
-/** How many of each section the preview keeps; people are all locked. */
-export const PREVIEW_KEEP = { dynamics: 2, topics: 2, highlights: 1 };
+/** How many of each section the preview keeps. */
+export const PREVIEW_KEEP = {
+  people: 1,
+  dynamics: 2,
+  topics: 2,
+  highlights: 1,
+};
 
 export interface PreviewLocked {
   people: number;
@@ -25,17 +30,17 @@ export function toPreview(insights: ChatInsights): {
   insights: ChatInsights;
   locked: PreviewLocked;
 } {
-  const { dynamics, topics, highlights } = PREVIEW_KEEP;
+  const { people, dynamics, topics, highlights } = PREVIEW_KEEP;
   return {
     insights: {
       ...insights,
-      people: [],
+      people: insights.people.slice(0, people),
       dynamics: insights.dynamics.slice(0, dynamics),
       topics: insights.topics.slice(0, topics),
       highlights: insights.highlights.slice(0, highlights),
     },
     locked: {
-      people: insights.people.length,
+      people: Math.max(0, insights.people.length - people),
       dynamics: Math.max(0, insights.dynamics.length - dynamics),
       topics: Math.max(0, insights.topics.length - topics),
       highlights: Math.max(0, insights.highlights.length - highlights),
