@@ -181,7 +181,8 @@ export const messages = {
       seoDescription:
         "Looking for a free What Brandon Thinks alternative? WhatsAnalyze analyzes your WhatsApp chat with AI that runs on your own device — free, no account, and your chat is never uploaded.",
       heroEyebrow: "What Brandon Thinks alternative",
-      heroTitle: "The free, private alternative to What Brandon Thinks",
+      heroTitle:
+        "Brandon reads your chat on his servers. We read it on your phone, for free.",
       heroSubtitle:
         "Get an AI read of your WhatsApp chat — the vibe, each person's role, who puts in the effort, your recurring topics — without paying per report and without uploading your chat to anyone's server.",
       heroCta: "Try the free AI analysis",
@@ -1434,7 +1435,8 @@ export const messages = {
       seoDescription:
         "Du suchst eine kostenlose Alternative zu What Brandon Thinks? WhatsAnalyze analysiert deinen WhatsApp-Chat mit einer KI, die auf deinem eigenen Gerät läuft – kostenlos, ohne Konto, und dein Chat wird nie hochgeladen.",
       heroEyebrow: "What Brandon Thinks Alternative",
-      heroTitle: "Die kostenlose, private Alternative zu What Brandon Thinks",
+      heroTitle:
+        "Brandon liest deinen Chat auf seinen Servern. Wir lesen ihn auf deinem Handy, kostenlos.",
       heroSubtitle:
         "Lass die KI deinen WhatsApp-Chat lesen – die Stimmung, die Rolle jeder Person, wer sich mehr Mühe gibt, eure wiederkehrenden Themen – ohne pro Bericht zu zahlen und ohne deinen Chat auf fremde Server hochzuladen.",
       heroCta: "Kostenlose KI-Analyse starten",
@@ -2680,7 +2682,8 @@ export const messages = {
       seoDescription:
         "¿Buscas una alternativa gratis a What Brandon Thinks? WhatsAnalyze analiza tu chat de WhatsApp con una IA que se ejecuta en tu propio dispositivo: gratis, sin cuenta y sin subir nunca tu chat.",
       heroEyebrow: "Alternativa a What Brandon Thinks",
-      heroTitle: "La alternativa gratis y privada a What Brandon Thinks",
+      heroTitle:
+        "Brandon lee tu chat en sus servidores. Nosotros lo leemos en tu móvil, gratis.",
       heroSubtitle:
         "Obtén una lectura de tu chat de WhatsApp con IA (el ambiente, el papel de cada persona, quién pone más esfuerzo, vuestros temas recurrentes) sin pagar por informe y sin subir tu chat al servidor de nadie.",
       heroCta: "Probar el análisis con IA gratis",
@@ -4600,7 +4603,8 @@ export const messages = {
       seoDescription:
         "Procura uma alternativa gratuita ao What Brandon Thinks? O WhatsAnalyze analisa a sua conversa do WhatsApp com uma IA que corre no seu próprio dispositivo: grátis, sem conta e sem nunca enviar a conversa.",
       heroEyebrow: "Alternativa ao What Brandon Thinks",
-      heroTitle: "A alternativa gratuita e privada ao What Brandon Thinks",
+      heroTitle:
+        "O Brandon lê a sua conversa nos servidores dele. Nós lemo-la no seu telemóvel, grátis.",
       heroSubtitle:
         "Obtenha uma leitura da sua conversa do WhatsApp com IA (o ambiente, o papel de cada pessoa, quem se esforça mais, os temas recorrentes) sem pagar por relatório e sem enviar a conversa para o servidor de ninguém.",
       heroCta: "Experimentar a análise com IA grátis",
@@ -5843,7 +5847,8 @@ export const messages = {
       seoDescription:
         "Vous cherchez une alternative gratuite à What Brandon Thinks ? WhatsAnalyze analyse votre conversation WhatsApp avec une IA qui tourne sur votre propre appareil : gratuit, sans compte, et votre conversation n'est jamais envoyée.",
       heroEyebrow: "Alternative à What Brandon Thinks",
-      heroTitle: "L'alternative gratuite et privée à What Brandon Thinks",
+      heroTitle:
+        "Brandon lit votre conversation sur ses serveurs. Nous la lisons sur votre téléphone, gratuitement.",
       heroSubtitle:
         "Obtenez une lecture de votre conversation WhatsApp par l'IA (l'ambiance, le rôle de chacun, qui fait le plus d'efforts, vos sujets récurrents) sans payer par rapport et sans envoyer votre conversation sur le serveur de qui que ce soit.",
       heroCta: "Essayer l'analyse IA gratuite",
@@ -7075,7 +7080,8 @@ export const messages = {
       seoDescription:
         "Cerchi un'alternativa gratuita a What Brandon Thinks? WhatsAnalyze analizza la tua chat WhatsApp con un'IA che gira sul tuo dispositivo: gratis, senza account e la chat non viene mai caricata.",
       heroEyebrow: "Alternativa a What Brandon Thinks",
-      heroTitle: "L'alternativa gratuita e privata a What Brandon Thinks",
+      heroTitle:
+        "Brandon legge la tua chat sui suoi server. Noi la leggiamo sul tuo telefono, gratis.",
       heroSubtitle:
         "Ottieni una lettura della tua chat WhatsApp con l'IA (l'atmosfera, il ruolo di ciascuno, chi si impegna di più, gli argomenti ricorrenti) senza pagare a report e senza caricare la chat sul server di nessuno.",
       heroCta: "Prova l'analisi IA gratuita",

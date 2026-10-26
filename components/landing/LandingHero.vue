@@ -42,7 +42,9 @@
         <h1 class="landing-hero__title" v-html="renderedTitle"></h1>
         <p v-if="subtitle" class="landing-hero__subtitle">{{ subtitle }}</p>
         <div v-if="ctaText" class="landing-hero__actions">
-          <LandingButton :to="ctaTo">{{ ctaText }}</LandingButton>
+          <LandingButton :to="ctaTo" @click="$emit('click')">{{
+            ctaText
+          }}</LandingButton>
         </div>
         <p v-if="note" class="landing-hero__note">{{ note }}</p>
       </div>
@@ -66,6 +68,9 @@ export default {
     ctaTo: { type: [String, Object], default: "/" },
     note: { type: String, default: "" },
   },
+  // Declared so the listener lands on the button rather than falling through
+  // to the whole header, which made every click in the hero count as one.
+  emits: ["click"],
   computed: {
     renderedTitle() {
       if (!this.title) return "";

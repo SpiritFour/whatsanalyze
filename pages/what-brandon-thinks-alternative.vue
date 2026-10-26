@@ -7,9 +7,9 @@
       :title="t('brandonAlt.heroTitle')"
       :subtitle="t('brandonAlt.heroSubtitle')"
       :cta-text="t('brandonAlt.heroCta')"
-      :cta-to="aiPath"
+      cta-to="#dropzone-slot"
       :note="t('brandonAlt.heroNote')"
-      @click="trackCta"
+      @click="onCtaClick"
     >
       <!-- What the AI gives you, shown with the real report cards rather than
            described: the competitor pages all lead with a picture of theirs. -->
@@ -31,6 +31,25 @@
       </figure>
     </LandingHero>
 
+    <!-- Upload right here rather than on the next page. A chat restored from
+         earlier in this visit only offers the button, so coming back to this
+         page does not bounce anyone straight to the analyzer. -->
+    <LandingSection theme="white" :title="t('brandonAlt.ctaTitle')">
+      <div
+        id="dropzone-slot"
+        @change.capture="acted = true"
+        @drop.capture="acted = true"
+        @click.capture="acted = true"
+      >
+        <ToolDropzone tool-type="ai" @analyzed="onAnalyzed" />
+      </div>
+      <div v-if="chatReady" class="upload__next">
+        <LandingButton :to="aiPath" @click="trackCta">
+          {{ t("brandonAlt.ctaButton") }}
+        </LandingButton>
+      </div>
+    </LandingSection>
+
     <LandingSection
       theme="light"
       :eyebrow="t('brandonAlt.compareEyebrow')"
@@ -49,8 +68,16 @@
           <tbody>
             <tr v-for="row in rows" :key="row.label">
               <th scope="row">{{ row.label }}</th>
-              <td>{{ row.us }}</td>
-              <td>{{ row.them }}</td>
+              <td>
+                <v-icon size="18" class="compare__mark">
+                  mdi-check-circle-outline
+                </v-icon>
+                {{ row.us }}
+              </td>
+              <td>
+                <v-icon size="18" class="compare__mark">mdi-close</v-icon>
+                {{ row.them }}
+              </td>
             </tr>
           </tbody>
         </table>
@@ -74,10 +101,10 @@
     <LandingCta
       :title="t('brandonAlt.ctaTitle')"
       :cta-text="t('brandonAlt.ctaButton')"
-      :cta-to="aiPath"
+      cta-to="#dropzone-slot"
       :note="t('brandonAlt.ctaNote')"
       :disclaimer="t('brandonAlt.disclaimer')"
-      @click="trackCta"
+      @click="onCtaClick"
     />
   </div>
 </template>
@@ -86,9 +113,11 @@
 import { SUBSCRIPTION_PRICE, formatPrice } from "~/utils/pricing";
 import { analyticsTools } from "~/composables/useAnalytics";
 import AiReport from "~/components/ai/AiReport.vue";
+import ToolDropzone from "~/components/tools/ToolDropzone.vue";
+import { scrollToDropzone } from "~/composables/useToolPage";
 
 export default {
-  components: { AiReport },
+  components: { AiReport, ToolDropzone },
   setup() {
     const { t, locale } = useI18n();
     const localePath = useLocalePath();
@@ -148,18 +177,35 @@ export default {
 
     useToolSchema({ faqItems: faq });
 
+    const aiPath = computed(() => localePath("/tools/ai-chat-analyzer"));
+    const trackCta = () =>
+      analyticsTools.ctaClick("brandon_alternative", "other");
+    const acted = ref(false);
+    const chatReady = ref(false);
+
     return {
       t,
       breadcrumbs: computed(() => [
         { label: "WhatsAnalyze", to: localePath("/") },
         { label: t("brandonAlt.navLabel") },
       ]),
-      aiPath: computed(() => localePath("/tools/ai-chat-analyzer")),
+      aiPath,
+      acted,
+      chatReady,
+      // The analyzer page picks the parsed chat up from shared state.
+      onAnalyzed: () => {
+        chatReady.value = true;
+        if (acted.value) navigateTo(aiPath.value);
+      },
+      onCtaClick: () => {
+        scrollToDropzone();
+        analyticsTools.ctaClick("brandon_alternative", "scroll_to_dropzone");
+      },
       rows,
       exampleReport,
       pillars,
       faq,
-      trackCta: () => analyticsTools.ctaClick("brandon_alternative", "other"),
+      trackCta,
     };
   },
 };
@@ -259,6 +305,16 @@ export default {
   td:nth-child(3) {
     color: rgba(29, 29, 31, 0.6);
   }
+}
+
+.compare__mark {
+  margin: -0.15em 0.35rem 0 0;
+  opacity: 0.85;
+}
+
+.upload__next {
+  margin-top: 1.5rem;
+  text-align: center;
 }
 
 .compare__source {
