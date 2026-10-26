@@ -42,7 +42,9 @@
         <h1 class="landing-hero__title" v-html="renderedTitle"></h1>
         <p v-if="subtitle" class="landing-hero__subtitle">{{ subtitle }}</p>
         <div v-if="ctaText" class="landing-hero__actions">
-          <LandingButton :to="ctaTo">{{ ctaText }}</LandingButton>
+          <LandingButton :to="ctaTo" @click="$emit('click')">{{
+            ctaText
+          }}</LandingButton>
         </div>
         <p v-if="note" class="landing-hero__note">{{ note }}</p>
       </div>
@@ -66,6 +68,9 @@ export default {
     ctaTo: { type: [String, Object], default: "/" },
     note: { type: String, default: "" },
   },
+  // Declared so the listener lands on the button rather than falling through
+  // to the whole header, which made every click in the hero count as one.
+  emits: ["click"],
   computed: {
     renderedTitle() {
       if (!this.title) return "";
@@ -109,7 +114,9 @@ export default {
   font-size: 0.85rem;
   color: rgba(245, 245, 247, 0.6);
   margin-bottom: 1.5rem;
-  flex-wrap: wrap;
+  // One line, the last crumb cut short if need be: wrapping broke a long one
+  // onto its own line after a dangling "/".
+  white-space: nowrap;
 }
 
 .landing-hero__breadcrumb-link {
@@ -125,6 +132,9 @@ export default {
 .landing-hero__breadcrumb-current {
   color: #f5f5f7;
   font-weight: 500;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .landing-hero__breadcrumb-sep {
@@ -244,14 +254,16 @@ export default {
   }
 }
 
+// Only titles with designed lines need this: each line refuses to wrap, so
+// it has to shrink to fit a phone. A plain title wraps and keeps its size.
 @media (max-width: 600px) {
-  .landing-hero--left .landing-hero__title {
+  .landing-hero--left .landing-hero__title:has(.landing-hero__title-line) {
     font-size: clamp(1.35rem, 5.2vw, 2rem);
   }
 }
 
 @media (max-width: 380px) {
-  .landing-hero--left .landing-hero__title {
+  .landing-hero--left .landing-hero__title:has(.landing-hero__title-line) {
     font-size: clamp(1.15rem, 5vw, 1.5rem);
   }
 }
