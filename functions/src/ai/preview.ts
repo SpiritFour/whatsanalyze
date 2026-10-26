@@ -2,15 +2,17 @@ import type { ChatInsights } from "./insights";
 
 /**
  * The free cloud preview for visitors without a subscription: the verdict
- * (summary, vibe, the answer to their question) and two findings. The rest
- * is cut here, on the server, so it never reaches the browser; only how much
- * was cut goes back, for the "unlock" teaser.
+ * (summary, vibe, the answer to their question) plus a taste of each section,
+ * enough to feel real. The rest is cut here, on the server, so it never
+ * reaches the browser; only how much was cut goes back, so the page can show
+ * that many blurred cards.
  *
  * Kept free of Firebase imports so it can be tested on its own
  * (preview.test.ts).
  */
 
-export const PREVIEW_FINDINGS = 2;
+/** How many of each section the preview keeps; people are all locked. */
+export const PREVIEW_KEEP = { dynamics: 2, topics: 2, highlights: 1 };
 
 export interface PreviewLocked {
   people: number;
@@ -23,19 +25,20 @@ export function toPreview(insights: ChatInsights): {
   insights: ChatInsights;
   locked: PreviewLocked;
 } {
+  const { dynamics, topics, highlights } = PREVIEW_KEEP;
   return {
     insights: {
       ...insights,
-      dynamics: insights.dynamics.slice(0, PREVIEW_FINDINGS),
       people: [],
-      topics: [],
-      highlights: [],
+      dynamics: insights.dynamics.slice(0, dynamics),
+      topics: insights.topics.slice(0, topics),
+      highlights: insights.highlights.slice(0, highlights),
     },
     locked: {
       people: insights.people.length,
-      topics: insights.topics.length,
-      dynamics: Math.max(0, insights.dynamics.length - PREVIEW_FINDINGS),
-      highlights: insights.highlights.length,
+      dynamics: Math.max(0, insights.dynamics.length - dynamics),
+      topics: Math.max(0, insights.topics.length - topics),
+      highlights: Math.max(0, insights.highlights.length - highlights),
     },
   };
 }

@@ -18,7 +18,7 @@
       </p>
     </div>
 
-    <template v-if="insights.people.length">
+    <template v-if="insights.people.length || locked.people">
       <h3 class="report-heading">{{ t("toolsAi.peopleTitle") }}</h3>
       <div class="report-grid">
         <div v-for="p in insights.people" :key="p.name" class="report-card">
@@ -31,11 +31,23 @@
           </div>
           <p>{{ p.style }}</p>
         </div>
+        <NuxtLink
+          v-for="n in locked.people"
+          :key="`locked-${n}`"
+          v-bind="lockedLink"
+        >
+          <div class="person-head" aria-hidden="true">
+            <span class="avatar-circle">?</span>
+            <strong>{{ FILLER_TITLE }}</strong>
+          </div>
+          <p aria-hidden="true">{{ FILLER_TEXT }}</p>
+          <v-icon class="report-locked__icon">mdi-lock-outline</v-icon>
+        </NuxtLink>
       </div>
     </template>
 
     <template v-for="section in sections" :key="section.key">
-      <template v-if="section.items.length">
+      <template v-if="section.items.length || locked[section.key]">
         <h3 class="report-heading">{{ t(section.title) }}</h3>
         <div class="report-grid">
           <div
@@ -46,24 +58,36 @@
             <strong>{{ item.title }}</strong>
             <p>{{ item.description }}</p>
           </div>
+          <NuxtLink
+            v-for="n in locked[section.key]"
+            :key="`locked-${n}`"
+            v-bind="lockedLink"
+          >
+            <strong aria-hidden="true">{{ FILLER_TITLE }}</strong>
+            <p aria-hidden="true">{{ FILLER_TEXT }}</p>
+            <v-icon class="report-locked__icon">mdi-lock-outline</v-icon>
+          </NuxtLink>
         </div>
       </template>
     </template>
 
-    <template v-if="insights.highlights.length">
+    <template v-if="insights.highlights.length || locked.highlights">
       <h3 class="report-heading">{{ t("toolsAi.highlightsTitle") }}</h3>
-      <ul class="report-card highlights">
+      <ul v-if="insights.highlights.length" class="report-card highlights">
         <li v-for="h in insights.highlights" :key="h">{{ h }}</li>
       </ul>
+      <NuxtLink v-if="locked.highlights" v-bind="lockedLink">
+        <ul class="highlights" aria-hidden="true">
+          <li v-for="n in locked.highlights" :key="n">{{ FILLER_TITLE }}</li>
+        </ul>
+        <v-icon class="report-locked__icon">mdi-lock-outline</v-icon>
+      </NuxtLink>
     </template>
 
     <!-- A free preview: what the full report adds, and how to get it -->
     <div v-if="report.locked" class="report-card report-locked">
       <v-icon size="28" color="#818cf8">mdi-lock-outline</v-icon>
       <strong>{{ t("toolsAi.lockedTitle") }}</strong>
-      <ul>
-        <li v-for="line in lockedLines" :key="line">{{ line }}</li>
-      </ul>
       <LandingButton
         :to="subscribeLink"
         @click="analyticsTools.ctaClick('ai', 'subscribe')"
@@ -89,24 +113,35 @@ const props = defineProps<{ report: AiReport }>();
 const { t, locale } = useI18n();
 const subscribeLink = useSubscribeLink();
 
-/** "4 more observations" etc., for what the free preview left out. */
-const lockedLines = computed(() => {
-  const locked = props.report.locked;
-  if (!locked) return [];
-  return (["people", "dynamics", "topics", "highlights"] as const)
-    .filter((key) => locked[key] > 0)
-    .map((key) => t(`toolsAi.locked_${key}`, { n: locked[key] }));
-});
+/** What the free preview left out: that many blurred cards per section. */
+const locked = computed(
+  () =>
+    props.report.locked ?? { people: 0, dynamics: 0, topics: 0, highlights: 0 },
+);
+// Blurred stand-ins: the real text never reaches a preview's browser.
+const FILLER_TITLE = "Something only the full report shows";
+const FILLER_TEXT =
+  "A closer look at this chat, with the moments that show it and what it says about the two of you.";
+const lockedLink = computed(() => ({
+  to: subscribeLink.value,
+  class: "report-card report-card--locked",
+  "aria-label": t("toolsAi.lockedButton"),
+  onClick: () => analyticsTools.ctaClick("ai", "subscribe"),
+}));
 
 const insights = computed(() => props.report.insights);
 
 const sections = computed(() => [
   {
-    key: "dynamics",
+    key: "dynamics" as const,
     title: "toolsAi.dynamicsTitle",
     items: insights.value.dynamics,
   },
-  { key: "topics", title: "toolsAi.topicsTitle", items: insights.value.topics },
+  {
+    key: "topics" as const,
+    title: "toolsAi.topicsTitle",
+    items: insights.value.topics,
+  },
 ]);
 
 /** What the report is based on, counted by the page rather than the model. */
@@ -228,12 +263,23 @@ const coverageText = computed(() => {
   gap: 0.6rem;
   text-align: center;
   border: 2px dashed rgba(129, 140, 248, 0.5);
+}
+.report-card--locked {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
 
-  ul {
-    list-style: none;
-    padding: 0;
-    color: rgba(29, 29, 31, 0.7);
+  > :not(.report-locked__icon) {
+    filter: blur(5px);
+    user-select: none;
   }
+}
+.report-locked__icon {
+  position: absolute !important;
+  inset: 0;
+  margin: auto;
+  color: #818cf8 !important;
 }
 .report-disclaimer {
   font-size: 0.82rem;

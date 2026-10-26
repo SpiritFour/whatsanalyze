@@ -17,26 +17,33 @@ const full = {
   highlights: ["The lost passport", "The birthday cake"],
 };
 
-test("toPreview keeps the verdict and two findings, and counts the rest", () => {
+test("toPreview keeps the verdict and a taste of each section, and counts the rest", () => {
   const { insights, locked } = toPreview(full);
   assert.equal(insights.answer, full.answer);
   assert.equal(insights.summary, full.summary);
   assert.equal(insights.vibe, full.vibe);
   assert.deepEqual(insights.dynamics, full.dynamics.slice(0, 2));
   assert.deepEqual(insights.people, []);
-  assert.deepEqual(insights.topics, []);
-  assert.deepEqual(insights.highlights, []);
+  assert.deepEqual(insights.topics, full.topics.slice(0, 2));
+  assert.deepEqual(insights.highlights, full.highlights.slice(0, 1));
   assert.deepEqual(locked, {
     people: 2,
-    topics: 3,
     dynamics: 1,
-    highlights: 2,
+    topics: 1,
+    highlights: 1,
   });
 });
 
 test("toPreview never reports negative locked findings", () => {
-  const { locked } = toPreview({ ...full, dynamics: [item("Only one")] });
+  const { locked } = toPreview({
+    ...full,
+    dynamics: [item("Only one")],
+    topics: [],
+    highlights: [],
+  });
   assert.equal(locked.dynamics, 0);
+  assert.equal(locked.topics, 0);
+  assert.equal(locked.highlights, 0);
 });
 
 test("clientIp takes the hop Google appended, not a spoofed one", () => {
