@@ -114,7 +114,9 @@ export default {
   font-size: 0.85rem;
   color: rgba(245, 245, 247, 0.6);
   margin-bottom: 1.5rem;
-  flex-wrap: wrap;
+  // One line, the last crumb cut short if need be: wrapping broke a long one
+  // onto its own line after a dangling "/".
+  white-space: nowrap;
 }
 
 .landing-hero__breadcrumb-link {
@@ -130,6 +132,9 @@ export default {
 .landing-hero__breadcrumb-current {
   color: #f5f5f7;
   font-weight: 500;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .landing-hero__breadcrumb-sep {
@@ -249,14 +254,16 @@ export default {
   }
 }
 
+// Only titles with designed lines need this: each line refuses to wrap, so
+// it has to shrink to fit a phone. A plain title wraps and keeps its size.
 @media (max-width: 600px) {
-  .landing-hero--left .landing-hero__title {
+  .landing-hero--left .landing-hero__title:has(.landing-hero__title-line) {
     font-size: clamp(1.35rem, 5.2vw, 2rem);
   }
 }
 
 @media (max-width: 380px) {
-  .landing-hero--left .landing-hero__title {
+  .landing-hero--left .landing-hero__title:has(.landing-hero__title-line) {
     font-size: clamp(1.15rem, 5vw, 1.5rem);
   }
 }

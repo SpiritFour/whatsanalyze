@@ -3,7 +3,6 @@
     <LandingHero
       align="left"
       :breadcrumbs="breadcrumbs"
-      :eyebrow="t('brandonAlt.heroEyebrow')"
       :title="t('brandonAlt.heroTitle')"
       :subtitle="t('brandonAlt.heroSubtitle')"
       :cta-text="t('brandonAlt.heroCta')"
