@@ -17,6 +17,6 @@ export const useStatsStore = defineStore("stats", {
     },
   },
   persist: {
-    storage: import.meta.client ? sessionStorage : undefined,
+    storage: piniaPluginPersistedstate.sessionStorage(),
   },
 });

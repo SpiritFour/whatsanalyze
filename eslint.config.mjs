@@ -77,6 +77,7 @@ export default [
         storeToRefs: "readonly",
         defineEventHandler: "readonly",
         setHeader: "readonly",
+        piniaPluginPersistedstate: "readonly",
       },
     },
     rules: {
