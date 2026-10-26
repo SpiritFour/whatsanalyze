@@ -287,6 +287,7 @@
 
 <script setup lang="ts">
 import { computed, nextTick, onMounted, ref, watch } from "vue";
+import { chatFingerprint } from "~/utils/chatFingerprint";
 import { storeToRefs } from "pinia";
 import ToolDropzone from "~/components/tools/ToolDropzone.vue";
 import AiReport from "~/components/ai/AiReport.vue";
@@ -472,10 +473,44 @@ const language = computed<AiLanguage>(() =>
   locale.value in AI_LANGUAGES ? (locale.value as AiLanguage) : "en",
 );
 
+// The last report, per tab, so leaving the page and coming back doesn't
+// lose it, and a free preview isn't spent twice on the same chat.
+const REPORT_KEY = "ai-report";
+
+function saveReport() {
+  try {
+    sessionStorage.setItem(
+      REPORT_KEY,
+      JSON.stringify({
+        chat: chatFingerprint({ chatObject: messages.value }),
+        report: report.value,
+      }),
+    );
+  } catch {
+    // Storage blocked or full: the report just won't survive a reload.
+  }
+}
+
+function restoreReport() {
+  try {
+    const saved = JSON.parse(sessionStorage.getItem(REPORT_KEY) ?? "null");
+    if (saved?.chat !== chatFingerprint({ chatObject: messages.value })) return;
+    const r: AiReportData = saved.report;
+    insights.value = r.insights;
+    reportQuestion.value = r.question;
+    ranOn.value = r.ranOn;
+    coverage.value = r.coverage ?? null;
+    locked.value = r.locked ?? null;
+  } catch {
+    // Unreadable or blocked: start without it.
+  }
+}
+
 async function onChatLoaded(payload: { analysis: unknown }) {
   messages.value = (payload.analysis as { messages: ChatMessage[] }).messages;
   insights.value = null;
   errorKey.value = null;
+  restoreReport();
   localSupported.value = await supportsLocalModel();
   if (localSupported.value) {
     localModel.value = await pickLocalModel();
@@ -488,7 +523,7 @@ async function onChatLoaded(payload: { analysis: unknown }) {
   }
   await nextTick();
   document
-    .getElementById("ai-choose")
+    .getElementById(insights.value ? "ai-report" : "ai-choose")
     ?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
@@ -683,6 +718,7 @@ async function run(mode: Mode) {
       parts,
     };
     ranOn.value = mode;
+    saveReport();
     analyticsTools.aiFinished(
       trackedMode,
       performance.now() - startedAt,
