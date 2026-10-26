@@ -141,6 +141,17 @@ const usedToday = (data: DocumentData | undefined) =>
  * everyone's. Returns what the subscriber has left after it, null once their
  * allowance is used up, or "global" when the day's overall cap is reached.
  */
+/**
+ * Logs once per day when a global cap is 80% used, so a Cloud Monitoring
+ * alert on "AI cap nearly reached" can say "raise it" before anyone is
+ * turned away.
+ */
+function warnNearCap(cap: string, count: number, limit: number) {
+  if (count === Math.ceil(limit * 0.8)) {
+    logger.warn("AI cap nearly reached", { cap, count, limit });
+  }
+}
+
 async function takeFromAllowance(
   subscriptionId: string,
 ): Promise<number | null | "global"> {
@@ -154,6 +165,11 @@ async function takeFromAllowance(
     if (usedByAll >= aiGlobalDailyLimit.value()) return "global";
     tx.set(ref, { day: today(), count: used + 1 });
     tx.set(globalRef, { day: today(), count: usedByAll + 1 });
+    warnNearCap(
+      "AI_GLOBAL_DAILY_LIMIT",
+      usedByAll + 1,
+      aiGlobalDailyLimit.value(),
+    );
     return aiDailyLimit.value() - used - 1;
   });
 }
@@ -181,6 +197,11 @@ async function takePreview(ip: string): Promise<"ok" | "used" | "global"> {
     expireAt.setUTCDate(expireAt.getUTCDate() + 2);
     tx.set(ref, { count: used + 1, expireAt });
     tx.set(globalRef, { day, count: usedByAll + 1 });
+    warnNearCap(
+      "AI_PREVIEW_DAILY_LIMIT",
+      usedByAll + 1,
+      aiPreviewDailyLimit.value(),
+    );
     return "ok";
   });
 }
