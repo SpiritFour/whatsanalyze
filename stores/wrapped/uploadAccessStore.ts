@@ -31,6 +31,6 @@ export const useUploadAccessStore = defineStore("uploadAccess", {
     },
   },
   persist: {
-    storage: import.meta.client ? localStorage : undefined,
+    storage: piniaPluginPersistedstate.localStorage(),
   },
 });
