@@ -683,7 +683,11 @@ async function run(mode: Mode) {
       parts,
     };
     ranOn.value = mode;
-    analyticsTools.aiFinished(trackedMode, performance.now() - startedAt, source);
+    analyticsTools.aiFinished(
+      trackedMode,
+      performance.now() - startedAt,
+      source,
+    );
     await nextTick();
     document
       .getElementById("ai-report")
