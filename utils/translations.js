@@ -758,6 +758,11 @@ export const messages = {
       messagesAnalyzedIn: "{count} messages • analyzed in {time}ms",
       dismiss: "Dismiss",
     },
+    askAiCard: {
+      title: "Ask AI about this chat",
+      text: "Go beyond the numbers: let AI read this chat and answer your question — privately on your device, no new upload.",
+      button: "Ask AI",
+    },
     toolsAi: {
       cloudAllowance: "{remaining} of {limit} cloud analyses left today",
       cloudAllowanceOut:
@@ -1984,6 +1989,11 @@ export const messages = {
       messagesAnalyzedIn: "{count} Nachrichten • analysiert in {time} ms",
       dismiss: "Schließen",
     },
+    askAiCard: {
+      title: "Frag die KI zu diesem Chat",
+      text: "Mehr als Zahlen: Lass die KI diesen Chat lesen und deine Frage beantworten – privat auf deinem Gerät, ohne neuen Upload.",
+      button: "Frag die KI",
+    },
     toolsAi: {
       cloudAllowance: "Heute noch {remaining} von {limit} Cloud-Analysen",
       cloudAllowanceOut:
@@ -3203,6 +3213,11 @@ export const messages = {
       messagesAnalyzedIn: "{count} mensajes • analizados en {time} ms",
       dismiss: "Cerrar",
     },
+    askAiCard: {
+      title: "Pregúntale a la IA sobre este chat",
+      text: "Más allá de los números: deja que la IA lea este chat y responda tu pregunta, en privado en tu dispositivo y sin volver a subirlo.",
+      button: "Preguntar a la IA",
+    },
     toolsAi: {
       cloudAllowance:
         "Te quedan {remaining} de {limit} análisis en la nube hoy",
@@ -4174,6 +4189,11 @@ export const messages = {
       switchFile: "Trocar arquivo",
       messagesAnalyzedIn: "{count} mensagens • analisadas em {time} ms",
       dismiss: "Fechar",
+    },
+    askAiCard: {
+      title: "Pergunte à IA sobre esta conversa",
+      text: "Para além dos números: deixe a IA ler esta conversa e responder à sua pergunta, em privado no seu dispositivo e sem novo envio.",
+      button: "Perguntar à IA",
     },
     toolsAi: {
       cloudAllowance:
@@ -5402,6 +5422,11 @@ export const messages = {
       messagesAnalyzedIn: "{count} messages • analysés en {time} ms",
       dismiss: "Fermer",
     },
+    askAiCard: {
+      title: "Interrogez l'IA sur cette conversation",
+      text: "Au-delà des chiffres : laissez l'IA lire cette conversation et répondre à votre question, en privé sur votre appareil, sans nouvel envoi.",
+      button: "Demander à l'IA",
+    },
     toolsAi: {
       cloudAllowance:
         "Encore {remaining} analyses cloud sur {limit} aujourd'hui",
@@ -6626,6 +6651,11 @@ export const messages = {
       switchFile: "Cambia file",
       messagesAnalyzedIn: "{count} messaggi • analizzati in {time} ms",
       dismiss: "Chiudi",
+    },
+    askAiCard: {
+      title: "Chiedi all'IA di questa chat",
+      text: "Oltre i numeri: lascia che l'IA legga questa chat e risponda alla tua domanda, in privato sul tuo dispositivo e senza un nuovo caricamento.",
+      button: "Chiedi all'IA",
     },
     toolsAi: {
       cloudAllowance:

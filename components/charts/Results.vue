@@ -12,12 +12,20 @@
           {{ $t("homeLanding.resultsTitle") }}
         </div>
 
-        <DownloadPopup
-          :chat="chat"
-          is-simple
-          data-html2canvas-ignore
-          remove-height-in-html2-canvas
-        />
+        <div class="flex flex-wrap items-center gap-3" data-html2canvas-ignore>
+          <UiButton
+            v-if="!shared && chat?.chatObject"
+            variant="secondary"
+            size="lg"
+            remove-height-in-html2-canvas
+            @click="scrollToAiCard"
+          >
+            <v-icon size="20" color="#21a68d">mdi-creation-outline</v-icon>
+            {{ $t("askAiCard.button") }}
+          </UiButton>
+
+          <DownloadPopup :chat="chat" is-simple remove-height-in-html2-canvas />
+        </div>
       </div>
 
       <ChartsCard :title="$t('chatTimeline')" :subtitle="$t('messagesPerDay')">
@@ -128,6 +136,14 @@
         </Share>
       </ChartsCard>
 
+      <LazyAiAskAiCard
+        v-if="!shared && chat?.chatObject"
+        :messages="chat.chatObject"
+        :attachments="attachments"
+        data-html2canvas-ignore
+        remove-height-in-html2-canvas
+      />
+
       <DownloadPopup
         :chat="chat"
         :hide-pdf-link="shared"
@@ -169,6 +185,9 @@
 </template>
 
 <script>
+import { scrollToSettled } from "~/utils/scroll";
+import { analyticsTools } from "~/composables/useAnalytics";
+
 export default {
   props: {
     chat: { type: Object, default: null },
@@ -179,6 +198,12 @@ export default {
      * behind them. Everything that needs the chat itself is left out.
      */
     shared: { type: Boolean, default: false },
+  },
+  methods: {
+    scrollToAiCard() {
+      analyticsTools.ctaClick("results", "ai");
+      scrollToSettled("#ask-ai", { offset: 80 });
+    },
   },
 };
 </script>

@@ -32,6 +32,45 @@ describe("Chat.getEmojiCloudData", () => {
       { word: "👋", freq: 2 },
     ]);
   });
+
+  it("ignores words where onlyEmoji returns false due to invalid unicode", async () => {
+    const chat = Object.create(Chat.prototype);
+    chat._maxWordsEmojiCloud = 2;
+    chat._allWords = Promise.resolve([
+      { word: "\ud83d", freq: 10 },
+      { word: "wave👋", freq: 2 },
+    ]);
+
+    await expect(chat.getEmojiCloudData()).resolves.toEqual([
+      { word: "👋", freq: 2 },
+    ]);
+  });
+});
+
+describe("Chat.match_emojys", () => {
+  it("extracts most used emojis up to the termination limit", () => {
+    const distribution = [
+      ["hello", 10],
+      ["😂", 5],
+      ["world", 4],
+      ["🎉", 3],
+      ["🔥", 2],
+      ["👍", 1],
+    ];
+    const emojis = Chat.match_emojys(distribution, 2);
+    expect([...emojis]).toEqual(["😂", "🎉"]);
+  });
+
+  it("handles malformed Unicode and unpaired surrogates where onlyEmoji returns false", () => {
+    const distribution = [
+      ["\ud83d", 10],
+      ["\ud7a0", 8],
+      ["😂", 5],
+      ["test", 3],
+    ];
+    const emojis = Chat.match_emojys(distribution, 3);
+    expect([...emojis]).toEqual(["😂"]);
+  });
 });
 
 describe("Chat message counting", () => {

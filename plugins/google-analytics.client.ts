@@ -20,8 +20,10 @@ export default defineNuxtPlugin(() => {
     window.dataLayer?.push(arguments);
   };
   window.gtag("js", new Date());
+  const initialPath = contentGroupFor(window.location.pathname);
   window.gtag("config", GA_MEASUREMENT_ID, {
-    content_group: contentGroupFor(window.location.pathname),
+    content_group: initialPath,
+    clean_path: initialPath,
   });
 
   useScript(

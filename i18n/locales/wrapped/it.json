@@ -20,6 +20,7 @@
     "notFoundText": "Il link è probabilmente vecchio o scritto male. Tutto il resto è ancora qui.",
     "genericTitle": "Qualcosa è andato storto",
     "genericText": "Questa pagina non è stata caricata. Ricaricare di solito risolve — altrimenti usa uno dei link qui sotto.",
+    "reload": "Ricarica pagina",
     "backHome": "Torna all'analizzatore di chat",
     "toWrapped": "Apri WhatsApp Wrapped"
   },

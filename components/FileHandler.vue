@@ -16,6 +16,7 @@
     >
       <input
         id="uploadmytextfile"
+        ref="fileInput"
         multiple
         type="file"
         accept=".txt, .zip"
@@ -97,7 +98,11 @@ export default {
     // before Vue hydrates it. A file picked in that window fires its change
     // event into nothing, and the drop zone just sits there — so take
     // whatever is already selected once the handler is live.
-    const input = this.$el.querySelector("#uploadmytextfile");
+    const input =
+      (this.$el?.querySelector &&
+        this.$el.querySelector("#uploadmytextfile")) ||
+      this.$refs.fileInput ||
+      document.getElementById("uploadmytextfile");
     if (input && input.files && input.files.length) {
       this.processFileList(input.files);
     }
@@ -172,8 +177,14 @@ export default {
       this.processFileList(e.dataTransfer.files);
     },
 
-    requestUploadFile() {
-      this.processFileList(this.$el.querySelector("#uploadmytextfile").files);
+    requestUploadFile(e) {
+      const files =
+        e?.target?.files ||
+        this.$refs.fileInput?.files ||
+        (this.$el?.querySelector &&
+          this.$el.querySelector("#uploadmytextfile")?.files) ||
+        document.getElementById("uploadmytextfile")?.files;
+      this.processFileList(files || []);
     },
   },
 };

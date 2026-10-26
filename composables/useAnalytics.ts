@@ -11,7 +11,9 @@
  * ten components fired both and every action was counted twice.
  */
 import { CURRENCY, INTRO_PRICE, ONE_TIME_PRICE } from "~/utils/pricing";
+import { cleanPath, contentGroupFor } from "~/utils/cleanPath";
 
+export { cleanPath, contentGroupFor };
 /* eslint-disable no-unused-vars -- ambient type declaration, not a real binding */
 declare global {
   interface Window {
@@ -20,6 +22,9 @@ declare global {
   }
 }
 /* eslint-enable no-unused-vars */
+
+/** Where an AI analysis was asked for: the AI tool page or the analyzer's results. */
+export type AiSource = "tool" | "results";
 
 export interface EventParams {
   [key: string]: string | number | boolean | null | undefined;
@@ -135,30 +140,24 @@ export const ITEM_PRO_SUBSCRIPTION: AnalyticsItem = {
   quantity: 1,
 };
 
-export type ContentGroup = "wrapped" | "tools" | "analyzer";
+export type ContentGroup = string;
 
 /**
- * Which product a path belongs to, reported as GA4's built-in Content group
- * so every report can be split into Wrapped vs the rest. Locale prefixes
- * (/de/wrapped) are why this matches a segment rather than the start.
+ * Re-exported for backwards compatibility and single-source canonical pathing.
  */
-export function contentGroupFor(path: string): ContentGroup {
-  if (/(^|\/)wrapped(\/|$)/.test(path)) return "wrapped";
-  if (/(^|\/)tools(\/|$)/.test(path)) return "tools";
-  return "analyzer";
-}
 
 export const GA_MEASUREMENT_ID = "G-XYC2EWGZZ3";
 
 /**
- * Tags every following page_view and event with the product. It has to go
- * through `config`: gtag drops content_group given to `set`. Without
- * send_page_view:false every call would add a page_view of its own.
+ * Tags every following page_view and event with the canonical page path.
+ * Without send_page_view:false every call would add a page_view of its own.
  */
 export function setContentGroup(path: string): void {
   if (!ensureGtag()) return;
+  const clean = contentGroupFor(path);
   window.gtag?.("config", GA_MEASUREMENT_ID, {
-    content_group: contentGroupFor(path),
+    content_group: clean,
+    clean_path: clean,
     send_page_view: false,
   });
 }
@@ -177,7 +176,9 @@ export function trackEvent(
   const eventName = sanitizeEventName(name);
   const cleanParams: Record<string, unknown> = sanitizeParams(params);
   if (items) cleanParams.items = items;
-
+  if (!cleanParams.clean_path && typeof window !== "undefined") {
+    cleanParams.clean_path = cleanPath(window.location.pathname);
+  }
   try {
     if (typeof window.gtag === "function") {
       window.gtag("event", eventName, cleanParams);
@@ -280,10 +281,21 @@ export const analyticsTools = {
     fileType: "txt" | "zip" | "other",
     source: "drop" | "picker" = "picker",
   ) {
+    const sourcePage =
+      typeof window !== "undefined"
+        ? cleanPath(window.location.pathname)
+        : `/tools/${toolName}/`;
     trackEvent("tool_file_uploaded", {
       tool_name: toolName,
       file_type: fileType,
       upload_source: source,
+      source_page: sourcePage,
+    });
+    trackEvent("file_upload_started", {
+      file_type: fileType,
+      upload_method: source,
+      tool_name: toolName,
+      source_page: sourcePage,
     });
   },
 
@@ -300,9 +312,13 @@ export const analyticsTools = {
   },
 
   /** An AI analysis was started, on the device or in the cloud. */
-  aiStarted(mode: "local" | "cloud", question: string) {
+  aiStarted(mode: "local" | "cloud", question: string, source: AiSource) {
     // The preset's id or "custom", never what was typed.
-    trackEvent("ai_analysis_started", { ai_mode: mode, ai_question: question });
+    trackEvent("ai_analysis_started", {
+      ai_mode: mode,
+      ai_question: question,
+      source,
+    });
   },
 
   /** The mobile-data warning before the on-device model download. */
@@ -310,9 +326,10 @@ export const analyticsTools = {
     trackEvent("ai_data_warning", { reason });
   },
 
-  aiFinished(mode: "local" | "cloud", durationMs: number) {
+  aiFinished(mode: "local" | "cloud", durationMs: number, source: AiSource) {
     trackEvent("ai_analysis_finished", {
       ai_mode: mode,
+      source,
       duration_ms: Math.round(durationMs),
     });
   },
@@ -326,7 +343,7 @@ export const analyticsTools = {
 
   ctaClick(
     toolName: string,
-    ctaType: "full_analyzer" | "export_guide" | "subscribe" | "other",
+    ctaType: "full_analyzer" | "export_guide" | "subscribe" | "ai" | "other",
   ) {
     trackEvent("tool_cta_click", {
       tool_name: toolName,
@@ -342,10 +359,16 @@ export const analyticsChat = {
   uploadStarted(
     fileType: "txt" | "zip" | "other",
     uploadMethod: "drop" | "picker" | "shared" = "picker",
+    sourcePage?: string,
   ) {
     trackEvent("file_upload_started", {
       file_type: fileType,
       upload_method: uploadMethod,
+      source_page:
+        sourcePage ||
+        (typeof window !== "undefined"
+          ? cleanPath(window.location.pathname)
+          : undefined),
     });
   },
 

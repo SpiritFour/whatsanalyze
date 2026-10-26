@@ -8,9 +8,19 @@
       <p class="error-page__text">{{ description }}</p>
 
       <div class="error-page__actions">
+        <!-- Most non-404s that land here are a chunk that failed to download, so a
+             reload is the thing that actually fixes it. -->
+        <button
+          v-if="!isNotFound"
+          type="button"
+          class="error-page__primary"
+          @click="retry"
+        >
+          {{ $t("errorPage.reload") }}
+        </button>
         <NuxtLink
           :to="homePath"
-          class="error-page__primary"
+          :class="isNotFound ? 'error-page__primary' : 'error-page__secondary'"
           @click.prevent="goTo(homePath)"
         >
           {{ $t("errorPage.backHome") }}
@@ -52,6 +62,12 @@ const wrappedPath = computed(() => localePath("/wrapped"));
 // A NuxtLink on its own leaves the error in place and the user on this page,
 // so every way out of here has to clear it first.
 const goTo = (path) => clearError({ redirect: path });
+
+// `force` because Nuxt otherwise skips a reload it already did for this path
+// within the last 10 seconds, which is exactly when someone clicks this.
+function retry() {
+  reloadNuxtApp({ force: true });
+}
 
 useSeoMeta({ title, robots: "noindex" });
 </script>
@@ -101,6 +117,11 @@ useSeoMeta({ title, robots: "noindex" });
   font-weight: 600;
   text-decoration: none;
   box-shadow: 0 10px 30px rgba(33, 166, 141, 0.35);
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
 
   &:hover {
     background: $wa-accent-light;
