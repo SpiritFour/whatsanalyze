@@ -10,7 +10,26 @@
       :cta-to="aiPath"
       :note="t('brandonAlt.heroNote')"
       @click="trackCta"
-    />
+    >
+      <!-- What the AI gives you, shown with the real report cards rather than
+           described: the competitor pages all lead with a picture of theirs. -->
+      <figure class="preview">
+        <div class="preview__back">
+          <LandingStatsMock
+            :days-label="t('days')"
+            :messages-label="t('messages')"
+            :people-label="t('people')"
+            :example-label="t('exampleDataLabel')"
+          />
+        </div>
+        <div class="preview__front">
+          <AiReport :report="exampleReport" />
+        </div>
+        <figcaption class="preview__caption mono-label">
+          {{ t("brandonAlt.exampleBadge") }}
+        </figcaption>
+      </figure>
+    </LandingHero>
 
     <LandingSection
       theme="light"
@@ -66,8 +85,10 @@
 <script>
 import { SUBSCRIPTION_PRICE, formatPrice } from "~/utils/pricing";
 import { analyticsTools } from "~/composables/useAnalytics";
+import AiReport from "~/components/ai/AiReport.vue";
 
 export default {
+  components: { AiReport },
   setup() {
     const { t, locale } = useI18n();
     const localePath = useLocalePath();
@@ -88,6 +109,23 @@ export default {
         them: t(`brandonAlt.row${i}Them`),
       })),
     );
+
+    const exampleReport = computed(() => ({
+      kind: "ai",
+      version: 1,
+      question: t("brandonAlt.exampleQuestion"),
+      ranOn: "local",
+      coverage: null,
+      insights: {
+        answer: t("brandonAlt.exampleAnswer"),
+        vibe: t("brandonAlt.exampleVibe"),
+        summary: t("brandonAlt.exampleSummary"),
+        people: [],
+        dynamics: [],
+        topics: [],
+        highlights: [],
+      },
+    }));
 
     const pillars = computed(() =>
       [1, 2, 3].map((i) => ({
@@ -118,6 +156,7 @@ export default {
       ]),
       aiPath: computed(() => localePath("/tools/ai-chat-analyzer")),
       rows,
+      exampleReport,
       pillars,
       faq,
       trackCta: () => analyticsTools.ctaClick("brandon_alternative", "other"),
@@ -127,6 +166,53 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.preview {
+  position: relative;
+  max-width: 560px;
+  margin: 2.5rem auto 0;
+  padding-bottom: 2rem;
+}
+
+.preview__back {
+  transform: rotate(2deg);
+}
+
+.preview__front {
+  position: relative;
+  width: 88%;
+  margin-top: -5rem;
+  transform: rotate(-1.5deg);
+
+  :deep(.report-card) {
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.45);
+  }
+
+  // The example needs no "this is AI, double-check it" note; the caption
+  // already says it is made up.
+  :deep(.report-disclaimer) {
+    display: none;
+  }
+}
+
+.preview__caption {
+  margin-top: 1.4rem;
+  text-align: center;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(245, 245, 247, 0.5);
+}
+
+@media (min-width: 1000px) {
+  .preview {
+    margin-top: 0;
+  }
+
+  .preview__front {
+    margin-left: -1rem;
+  }
+}
+
 .compare {
   overflow-x: auto;
   margin-top: 2rem;
@@ -152,9 +238,26 @@ export default {
     font-weight: 600;
   }
 
+  // Our column reads as one highlighted card running down the table.
+  thead th:nth-child(2),
   td:nth-child(2) {
+    background: rgba(33, 166, 141, 0.08);
     color: $c-blue-accent-dark;
     font-weight: 600;
+    padding-inline: 1rem;
+  }
+
+  thead th:nth-child(2) {
+    border-radius: 14px 14px 0 0;
+    color: $c-blue-accent-dark;
+  }
+
+  tbody tr:last-child td:nth-child(2) {
+    border-radius: 0 0 14px 14px;
+  }
+
+  td:nth-child(3) {
+    color: rgba(29, 29, 31, 0.6);
   }
 }
 

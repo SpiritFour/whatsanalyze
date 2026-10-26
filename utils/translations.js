@@ -168,6 +168,13 @@ export const messages = {
         "WhatsAnalyze is an analysis and formatting tool, not a law firm. Nothing on this page is legal advice, and admissibility varies by jurisdiction — always confirm requirements with your lawyer or court.",
     },
     brandonAlt: {
+      exampleBadge: "Example report · Anna & Ben are fictional",
+      exampleQuestion: "Who puts more effort into this chat?",
+      exampleAnswer:
+        "Mostly Anna. She starts about two thirds of your conversations and asks most of the follow-up questions. Ben replies warmly and quickly, though, and plans most of your meetups, so the effort is real on both sides, just in different ways.",
+      exampleVibe: "Plans & inside jokes",
+      exampleSummary:
+        "Anna and Ben keep each other up to date all day, mixing weekend plans with running jokes. The tone is warm and teasing, with quick make-ups after small disagreements.",
       navLabel: "What Brandon Thinks alternative",
       seoTitle:
         "Free What Brandon Thinks Alternative – Private AI Chat Analysis | WhatsAnalyze",
@@ -1414,6 +1421,13 @@ export const messages = {
         "WhatsAnalyze ist ein Analyse- und Formatierungs-Tool, keine Rechtsberatung. Ob ein Beweis zugelassen wird, hängt von Gericht und Land ab – kläre die Anforderungen immer mit Anwalt oder Gericht.",
     },
     brandonAlt: {
+      exampleBadge: "Beispielbericht · Anna & Ben sind fiktiv",
+      exampleQuestion: "Wer steckt mehr Mühe in diesen Chat?",
+      exampleAnswer:
+        "Vor allem Anna. Sie beginnt etwa zwei Drittel eurer Gespräche und stellt die meisten Nachfragen. Ben antwortet aber herzlich und schnell und plant die meisten Treffen, die Mühe ist also auf beiden Seiten echt, nur unterschiedlich verteilt.",
+      exampleVibe: "Pläne & Insider-Witze",
+      exampleSummary:
+        "Anna und Ben halten sich den ganzen Tag auf dem Laufenden und mischen Wochenendpläne mit Running Gags. Der Ton ist herzlich und neckisch, kleine Meinungsverschiedenheiten sind schnell vergessen.",
       navLabel: "What Brandon Thinks Alternative",
       seoTitle:
         "Kostenlose What Brandon Thinks Alternative – Private KI-Chat-Analyse | WhatsAnalyze",
@@ -2653,6 +2667,13 @@ export const messages = {
         "WhatsAnalyze es una herramienta de análisis y formato, no un despacho de abogados. Nada en esta página es asesoramiento legal y la admisibilidad varía según la jurisdicción: confirma siempre los requisitos con tu abogado o el juzgado.",
     },
     brandonAlt: {
+      exampleBadge: "Informe de ejemplo · Anna y Ben son ficticios",
+      exampleQuestion: "¿Quién se esfuerza más en este chat?",
+      exampleAnswer:
+        "Sobre todo Anna. Empieza unos dos tercios de vuestras conversaciones y hace la mayoría de las preguntas. Pero Ben responde rápido y con cariño, y organiza la mayoría de los planes, así que el esfuerzo es real por ambas partes, solo que de forma distinta.",
+      exampleVibe: "Planes y bromas internas",
+      exampleSummary:
+        "Anna y Ben se cuentan todo a lo largo del día, mezclando planes de fin de semana con bromas recurrentes. El tono es cálido y bromista, y los pequeños desacuerdos se arreglan rápido.",
       navLabel: "Alternativa a What Brandon Thinks",
       seoTitle:
         "Alternativa gratis a What Brandon Thinks – Análisis de chat con IA privado | WhatsAnalyze",
@@ -4566,6 +4587,13 @@ export const messages = {
         "O WhatsAnalyze é um projeto de código aberto independente e não possui vínculo com o WhatsApp ou a Meta.",
     },
     brandonAlt: {
+      exampleBadge: "Relatório de exemplo · Anna e Ben são fictícios",
+      exampleQuestion: "Quem se esforça mais neste chat?",
+      exampleAnswer:
+        "Principalmente a Anna. Ela começa cerca de dois terços das conversas e faz a maioria das perguntas. Mas o Ben responde rápido e com carinho e organiza a maioria dos encontros, então o esforço é real dos dois lados, só que de jeitos diferentes.",
+      exampleVibe: "Planos e piadas internas",
+      exampleSummary:
+        "Anna e Ben se atualizam o dia todo, misturando planos de fim de semana com piadas recorrentes. O tom é carinhoso e brincalhão, e pequenas discordâncias se resolvem rápido.",
       navLabel: "Alternativa ao What Brandon Thinks",
       seoTitle:
         "Alternativa gratuita ao What Brandon Thinks – Análise de conversas com IA privada | WhatsAnalyze",
@@ -5802,6 +5830,13 @@ export const messages = {
         "WhatsAnalyze est un projet indépendant et open source, sans lien avec WhatsApp ou Meta.",
     },
     brandonAlt: {
+      exampleBadge: "Exemple de rapport · Anna et Ben sont fictifs",
+      exampleQuestion: "Qui s'investit le plus dans ce chat ?",
+      exampleAnswer:
+        "Surtout Anna. Elle lance environ deux tiers de vos conversations et pose la plupart des questions. Mais Ben répond vite et chaleureusement, et organise la plupart de vos sorties : l'effort est réel des deux côtés, simplement différent.",
+      exampleVibe: "Projets & blagues internes",
+      exampleSummary:
+        "Anna et Ben se tiennent au courant toute la journée, entre projets du week-end et blagues récurrentes. Le ton est chaleureux et taquin, et les petits désaccords se règlent vite.",
       navLabel: "Alternative à What Brandon Thinks",
       seoTitle:
         "Alternative gratuite à What Brandon Thinks – Analyse de conversation par IA privée | WhatsAnalyze",
@@ -7027,6 +7062,13 @@ export const messages = {
         "WhatsAnalyze è un progetto indipendente e open source e non è collegato a WhatsApp o Meta.",
     },
     brandonAlt: {
+      exampleBadge: "Report di esempio · Anna e Ben sono fittizi",
+      exampleQuestion: "Chi si impegna di più in questa chat?",
+      exampleAnswer:
+        "Soprattutto Anna. Inizia circa due terzi delle vostre conversazioni e fa la maggior parte delle domande. Ben però risponde in fretta e con calore e organizza quasi tutti gli incontri, quindi l'impegno è reale da entrambe le parti, solo in modi diversi.",
+      exampleVibe: "Piani e battute interne",
+      exampleSummary:
+        "Anna e Ben si aggiornano tutto il giorno, tra piani per il weekend e battute ricorrenti. Il tono è affettuoso e scherzoso, e i piccoli disaccordi si risolvono subito.",
       navLabel: "Alternativa a What Brandon Thinks",
       seoTitle:
         "Alternativa gratuita a What Brandon Thinks – Analisi chat con IA privata | WhatsAnalyze",
