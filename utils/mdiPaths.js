@@ -2,7 +2,7 @@
 //
 // Vuetify's `mdi` icon set is the Material Design webfont: 300 KB of
 // render-blocking CSS declaring all 7,462 icon classes, plus a 393 KB woff2,
-// for the 72 icons below. plugins/vuetify-icons.js swaps it for an SVG set
+// for the 77 icons below. plugins/vuetify-icons.js swaps it for an SVG set
 // that reads this map, so `<v-icon>mdi-...</v-icon>` keeps working unchanged.
 //
 // Adding an icon to a template means adding it here. scripts/check-mdi-icons.js
@@ -37,6 +37,7 @@ import {
   mdiCodeTags,
   mdiCog,
   mdiCounter,
+  mdiDeleteClock,
   mdiEmoticonHappyOutline,
   mdiEmoticonOutline,
   mdiFile,
@@ -51,6 +52,7 @@ import {
   mdiGithub,
   mdiHeartOutline,
   mdiHomeHeart,
+  mdiIncognito,
   mdiInformationOutline,
   mdiLightningBoltOutline,
   mdiLockOpenOutline,
@@ -118,6 +120,7 @@ export const mdiPaths = {
   "mdi-code-tags": mdiCodeTags,
   "mdi-cog": mdiCog,
   "mdi-counter": mdiCounter,
+  "mdi-delete-clock": mdiDeleteClock,
   "mdi-emoticon-happy-outline": mdiEmoticonHappyOutline,
   "mdi-emoticon-outline": mdiEmoticonOutline,
   "mdi-file": mdiFile,
@@ -132,6 +135,7 @@ export const mdiPaths = {
   "mdi-github": mdiGithub,
   "mdi-heart-outline": mdiHeartOutline,
   "mdi-home-heart": mdiHomeHeart,
+  "mdi-incognito": mdiIncognito,
   "mdi-information-outline": mdiInformationOutline,
   "mdi-lightning-bolt-outline": mdiLightningBoltOutline,
   "mdi-lock-open-outline": mdiLockOpenOutline,
