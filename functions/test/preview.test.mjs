@@ -39,8 +39,8 @@ test("toPreview never reports negative locked findings", () => {
   assert.equal(locked.dynamics, 0);
 });
 
-test("clientIp takes the first forwarded hop, else the socket", () => {
-  assert.equal(clientIp("1.2.3.4, 10.0.0.1", "9.9.9.9"), "1.2.3.4");
+test("clientIp takes the hop Google appended, not a spoofed one", () => {
+  assert.equal(clientIp("6.6.6.6, 1.2.3.4", "9.9.9.9"), "1.2.3.4");
   assert.equal(clientIp(["5.6.7.8"], undefined), "5.6.7.8");
   assert.equal(clientIp(undefined, "9.9.9.9"), "9.9.9.9");
   assert.equal(clientIp("", undefined), "unknown");

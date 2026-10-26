@@ -41,13 +41,16 @@ export function toPreview(insights: ChatInsights): {
 }
 
 /**
- * The visitor's IP: the first X-Forwarded-For hop, which Google's front end
- * sets, else the socket's. Only ever stored hashed (see analyzeChatAi.ts).
+ * The visitor's IP: the last X-Forwarded-For hop, the one Google's front end
+ * appends (earlier hops are whatever the caller sent, so they'd let anyone
+ * reset the per-IP cap), else the socket's. Only ever stored hashed.
  */
 export function clientIp(
   forwardedFor: string | string[] | undefined,
   fallback: string | undefined,
 ): string {
-  const header = Array.isArray(forwardedFor) ? forwardedFor[0] : forwardedFor;
-  return header?.split(",")[0].trim() || fallback || "unknown";
+  const header = Array.isArray(forwardedFor)
+    ? forwardedFor[forwardedFor.length - 1]
+    : forwardedFor;
+  return header?.split(",").pop()?.trim() || fallback || "unknown";
 }
