@@ -99,13 +99,6 @@
           <p v-if="mode.unavailable" class="mode-card__note">
             {{ mode.unavailable }}
           </p>
-          <LandingButton
-            v-else-if="mode.id === 'cloud' && !isSubscriptionValid"
-            :to="subscribeLink"
-            @click="analyticsTools.ctaClick('ai', 'subscribe')"
-          >
-            {{ t("toolsAi.cloudSubscribe") }}
-          </LandingButton>
           <button
             v-else
             type="button"
@@ -119,6 +112,14 @@
           >
             {{ mode.button }}
           </button>
+          <!-- Not subscribed: the button above runs the free preview -->
+          <LandingButton
+            v-if="mode.id === 'cloud' && !isSubscriptionValid"
+            :to="subscribeLink"
+            @click="analyticsTools.ctaClick('ai', 'subscribe')"
+          >
+            {{ t("toolsAi.cloudSubscribe") }}
+          </LandingButton>
           <!-- Right under the button that started it, not off-screen -->
           <div v-if="running === mode.id" class="ai-progress" role="status">
             <v-progress-linear
@@ -286,6 +287,7 @@
 
 <script setup lang="ts">
 import { computed, nextTick, onMounted, ref, watch } from "vue";
+import { chatFingerprint } from "~/utils/chatFingerprint";
 import { storeToRefs } from "pinia";
 import ToolDropzone from "~/components/tools/ToolDropzone.vue";
 import AiReport from "~/components/ai/AiReport.vue";
@@ -325,6 +327,7 @@ import {
   type AiLanguage,
   type ChatInsights,
 } from "~/functions/src/ai/insights";
+import type { PreviewLocked } from "~/functions/src/ai/preview";
 
 type Mode = "local" | "cloud";
 
@@ -440,6 +443,8 @@ const coverage = ref<{
 
 /** The report as shown, and as a share link carries it. */
 const reportQuestion = ref("");
+/** Set when the report is the free cloud preview. */
+const locked = ref<PreviewLocked | null>(null);
 const report = computed<AiReportData | null>(() =>
   insights.value
     ? {
@@ -449,6 +454,7 @@ const report = computed<AiReportData | null>(() =>
         question: reportQuestion.value,
         ranOn: ranOn.value ?? "local",
         coverage: coverage.value,
+        locked: locked.value,
       }
     : null,
 );
@@ -467,20 +473,57 @@ const language = computed<AiLanguage>(() =>
   locale.value in AI_LANGUAGES ? (locale.value as AiLanguage) : "en",
 );
 
+// The last report, per tab, so leaving the page and coming back doesn't
+// lose it, and a free preview isn't spent twice on the same chat.
+const REPORT_KEY = "ai-report";
+
+function saveReport() {
+  try {
+    sessionStorage.setItem(
+      REPORT_KEY,
+      JSON.stringify({
+        chat: chatFingerprint({ chatObject: messages.value }),
+        report: report.value,
+      }),
+    );
+  } catch {
+    // Storage blocked or full: the report just won't survive a reload.
+  }
+}
+
+function restoreReport() {
+  try {
+    const saved = JSON.parse(sessionStorage.getItem(REPORT_KEY) ?? "null");
+    if (saved?.chat !== chatFingerprint({ chatObject: messages.value })) return;
+    const r: AiReportData = saved.report;
+    insights.value = r.insights;
+    reportQuestion.value = r.question;
+    ranOn.value = r.ranOn;
+    coverage.value = r.coverage ?? null;
+    locked.value = r.locked ?? null;
+  } catch {
+    // Unreadable or blocked: start without it.
+  }
+}
+
 async function onChatLoaded(payload: { analysis: unknown }) {
   messages.value = (payload.analysis as { messages: ChatMessage[] }).messages;
   insights.value = null;
   errorKey.value = null;
+  restoreReport();
   localSupported.value = await supportsLocalModel();
   if (localSupported.value) {
     localModel.value = await pickLocalModel();
     modelDownloaded.value = isModelDownloaded(localModel.value);
     localCrashed.value = takeCrashedRun();
-    if (localCrashed.value) analyticsTools.error("ai", "local:crashed");
+    if (localCrashed.value) {
+      analyticsTools.error("ai", "local:crashed");
+      analyticsTools.aiFailed("local", "crashed");
+    }
   }
   await nextTick();
   document
-    .getElementById("ai-choose")
+    .getElementById(insights.value ? "ai-report" : "ai-choose")
     ?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
@@ -585,6 +628,13 @@ function confirmDownload() {
   run("local");
 }
 
+// Closed without "continue" (cancel, backdrop, Esc): run() hasn't started.
+watch(dataWarning, (open) => {
+  if (!open && running.value === null) {
+    analyticsTools.aiAbandoned("local", "data_warning");
+  }
+});
+
 async function run(mode: Mode) {
   if (!messages.value) return;
   running.value = mode;
@@ -592,7 +642,18 @@ async function run(mode: Mode) {
   errorKey.value = null;
   errorMode.value = null;
   localCrashed.value = false;
-  analyticsTools.aiStarted(mode, question.value ?? "none", source);
+  const preview = mode === "cloud" && !isSubscriptionValid.value;
+  const trackedMode = preview ? "preview" : mode;
+  const startedAt = performance.now();
+  analyticsTools.aiStarted(trackedMode, question.value ?? "none", source);
+  // Leaving mid-run used to vanish from the funnel: started, never finished.
+  const onLeave = () =>
+    analyticsTools.aiAbandoned(
+      trackedMode,
+      mode === "cloud" ? "cloud" : (progress.value?.phase ?? "download"),
+      performance.now() - startedAt,
+    );
+  window.addEventListener("pagehide", onLeave);
   // Keep the screen on: a phone that dims and locks pauses the on-device AI.
   const wakeLock = await (navigator as any).wakeLock
     ?.request("screen")
@@ -603,7 +664,6 @@ async function run(mode: Mode) {
       .querySelector(".ai-progress")
       ?.scrollIntoView({ behavior: "smooth", block: "center" }),
   );
-  const startedAt = performance.now();
 
   try {
     const { digest, names, anonymize } = buildDigest(
@@ -624,13 +684,14 @@ async function run(mode: Mode) {
     if (mode === "cloud") {
       const cloud = await analyzeInCloud(
         useNuxtApp().$functions,
-        cloudCredentials(),
+        preview ? null : cloudCredentials(),
         digest,
         language.value,
         ask,
       );
       result = cloud.insights;
-      allowance.value = cloud.allowance;
+      if (cloud.allowance) allowance.value = cloud.allowance;
+      locked.value = cloud.locked;
     } else {
       const local = await analyzeLocally(
         localModel.value!,
@@ -642,6 +703,7 @@ async function run(mode: Mode) {
         ask,
       );
       result = local.insights;
+      locked.value = null;
       read = local.parts.reduce((sum, part) => sum + countLines(part), 0);
       parts = local.parts.length;
     }
@@ -656,7 +718,12 @@ async function run(mode: Mode) {
       parts,
     };
     ranOn.value = mode;
-    analyticsTools.aiFinished(mode, performance.now() - startedAt, source);
+    saveReport();
+    analyticsTools.aiFinished(
+      trackedMode,
+      performance.now() - startedAt,
+      source,
+    );
     await nextTick();
     document
       .getElementById("ai-report")
@@ -666,6 +733,7 @@ async function run(mode: Mode) {
     const known = [
       "not_subscribed",
       "daily_limit",
+      "preview_used",
       "local_invalid",
       "no_messages",
     ];
@@ -675,7 +743,9 @@ async function run(mode: Mode) {
       allowance.value = { remaining: 0, limit: allowance.value?.limit ?? 10 };
     }
     analyticsTools.error("ai", `${mode}:${err?.message ?? "unknown"}`);
+    analyticsTools.aiFailed(trackedMode, String(err?.message ?? "unknown"));
   } finally {
+    window.removeEventListener("pagehide", onLeave);
     wakeLock?.release().catch(() => {});
     running.value = null;
   }
@@ -719,7 +789,9 @@ const modes = computed(() => [
     ],
     cons: [t("toolsAi.cloudCon1"), t("toolsAi.cloudCon2")],
     crashed: "",
-    button: t("toolsAi.cloudButton"),
+    button: isSubscriptionValid.value
+      ? t("toolsAi.cloudButton")
+      : t("toolsAi.cloudPreviewButton"),
     unavailable: "",
   },
 ]);

@@ -250,6 +250,44 @@ test.describe("the analyzer", () => {
     expect(sentData.digest.totalMessages).toBe(536);
   });
 
+  test("keeps the free preview after a reload instead of spending another", async ({
+    page,
+  }) => {
+    const item = (title) => ({ title, description: `${title} in detail` });
+    const aiCalls = await stubCallable(page, "analyzeChatAi", {
+      insights: {
+        answer: "",
+        summary: "Two friends planning trips.",
+        vibe: "Travel buddies",
+        people: [{ name: "Person A", role: "Planner", style: "Long messages" }],
+        dynamics: [item("Quick replies")],
+        topics: [item("Weekend plans")],
+        highlights: ["The lost passport"],
+      },
+      locked: { people: 1, dynamics: 2, topics: 3, highlights: 2 },
+    });
+
+    await page.goto("/tools/ai-chat-analyzer/");
+    await page.locator("input.hidden-file-input").setInputFiles(EXAMPLE_CHAT);
+    await page
+      .getByRole("button", { name: "Try a free cloud preview" })
+      .click();
+
+    const report = page.locator("#ai-report");
+    await expect(
+      report.getByText("Weekend plans", { exact: true }),
+    ).toBeVisible();
+    // The locked rest shows as blurred cards: 1 + 2 + 3, and one for moments.
+    await expect(report.locator(".report-card--locked")).toHaveCount(7);
+    expect(JSON.parse(aiCalls[0].postData()).data.email).toBeUndefined();
+
+    await page.reload();
+    await expect(
+      report.getByText("Weekend plans", { exact: true }),
+    ).toBeVisible();
+    expect(aiCalls.length).toBe(1);
+  });
+
   test("names the thing each chart counts", async ({ page }) => {
     await page.goto("/");
     await analyzeChat(page);
