@@ -322,6 +322,7 @@ import {
 import {
   AI_LANGUAGES,
   CLOUD_TRANSCRIPT_CHARS,
+  PREVIEW_TRANSCRIPT_CHARS,
   MAX_QUESTION_CHARS,
   type AiAsk,
   type AiLanguage,
@@ -540,7 +541,12 @@ function reset() {
 const cloudPreview = computed(() => {
   if (!messages.value) return "";
   try {
-    const { digest } = buildDigest(messages.value, CLOUD_TRANSCRIPT_CHARS);
+    const { digest } = buildDigest(
+      messages.value,
+      isSubscriptionValid.value
+        ? CLOUD_TRANSCRIPT_CHARS
+        : PREVIEW_TRANSCRIPT_CHARS,
+    );
     return JSON.stringify({ ...digest, language: language.value }, null, 2);
   } catch {
     return "";
@@ -668,9 +674,11 @@ async function run(mode: Mode) {
   try {
     const { digest, names, anonymize } = buildDigest(
       messages.value,
-      mode === "cloud"
-        ? CLOUD_TRANSCRIPT_CHARS
-        : localTranscriptChars(localModel.value!),
+      preview
+        ? PREVIEW_TRANSCRIPT_CHARS
+        : mode === "cloud"
+          ? CLOUD_TRANSCRIPT_CHARS
+          : localTranscriptChars(localModel.value!),
     );
     const alias = Object.keys(names).find((a) => names[a] === me.value);
     const asked = askedQuestion.value
