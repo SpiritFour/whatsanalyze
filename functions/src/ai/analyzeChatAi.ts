@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { HttpsError, onCall } from "firebase-functions/https";
 import {
   defineInt,
@@ -23,9 +24,11 @@ import {
   buildPrompt,
   insightsSchema,
 } from "./insights";
+import { clientIp, toPreview } from "./preview";
 
 /**
- * The cloud half of the AI chat analysis: subscribers only.
+ * The cloud half of the AI chat analysis: the full report for subscribers,
+ * and a short free preview (preview.ts) for everyone else, limited per IP.
  *
  * Provider-agnostic on purpose. `AI_MODEL` names the model as
  * "<provider>:<model id>" and `AI_API_KEY` is that provider's key, so moving
@@ -60,6 +63,15 @@ const aiDailyLimit = defineInt("AI_DAILY_LIMIT", { default: 10 });
 const aiGlobalDailyLimit = defineInt("AI_GLOBAL_DAILY_LIMIT", {
   default: 500,
 });
+/** Free previews per visitor (by IP) per UTC day. */
+const aiPreviewPerIp = defineInt("AI_PREVIEW_PER_IP", { default: 2 });
+/**
+ * Free previews per UTC day across everyone, counted apart from the
+ * subscribers' cap so a rush of previews never locks a paying user out.
+ */
+const aiPreviewDailyLimit = defineInt("AI_PREVIEW_DAILY_LIMIT", {
+  default: 200,
+});
 /**
  * Output, reasoning included. A normal report at low effort is a few
  * thousand tokens; this stops a chat crafted to make the model write on.
@@ -76,8 +88,9 @@ const optional = <T extends z.ZodType>(schema: T) =>
   schema.nullish().transform((value) => value ?? undefined);
 
 const requestSchema = z.object({
-  email: z.string().min(1),
-  subscriptionId: z.string().min(1),
+  // Both missing means a free preview.
+  email: z.string().min(1).optional(),
+  subscriptionId: z.string().min(1).optional(),
   language: z.enum(Object.keys(AI_LANGUAGES) as [keyof typeof AI_LANGUAGES]),
   digest: z.object({
     participants: z
@@ -128,6 +141,17 @@ const usedToday = (data: DocumentData | undefined) =>
  * everyone's. Returns what the subscriber has left after it, null once their
  * allowance is used up, or "global" when the day's overall cap is reached.
  */
+/**
+ * Logs once per day when a global cap is 80% used, so a Cloud Monitoring
+ * alert on "AI cap nearly reached" can say "raise it" before anyone is
+ * turned away.
+ */
+function warnNearCap(cap: string, count: number, limit: number) {
+  if (count === Math.ceil(limit * 0.8)) {
+    logger.warn("AI cap nearly reached", { cap, count, limit });
+  }
+}
+
 async function takeFromAllowance(
   subscriptionId: string,
 ): Promise<number | null | "global"> {
@@ -141,7 +165,44 @@ async function takeFromAllowance(
     if (usedByAll >= aiGlobalDailyLimit.value()) return "global";
     tx.set(ref, { day: today(), count: used + 1 });
     tx.set(globalRef, { day: today(), count: usedByAll + 1 });
+    warnNearCap(
+      "AI_GLOBAL_DAILY_LIMIT",
+      usedByAll + 1,
+      aiGlobalDailyLimit.value(),
+    );
     return aiDailyLimit.value() - used - 1;
+  });
+}
+
+/**
+ * Count a free preview against the visitor's and everyone's daily allowance.
+ * The IP is hashed with the day, so nothing stored can be tied back to an
+ * address or followed across days.
+ */
+async function takePreview(ip: string): Promise<"ok" | "used" | "global"> {
+  const day = today();
+  const ref = db
+    .collection("aiPreviewUsage")
+    .doc(createHash("sha256").update(`${day}:${ip}`).digest("hex"));
+  const globalRef = db.collection("aiUsageGlobal").doc("preview");
+  return db.runTransaction(async (tx) => {
+    const [mine, all] = await Promise.all([tx.get(ref), tx.get(globalRef)]);
+    const used = mine.data()?.count ?? 0;
+    const usedByAll = usedToday(all.data());
+    if (used >= aiPreviewPerIp.value()) return "used";
+    if (usedByAll >= aiPreviewDailyLimit.value()) return "global";
+    // For a Firestore TTL policy on aiPreviewUsage.expireAt: a day's counts
+    // are worthless the day after.
+    const expireAt = new Date(`${day}T00:00:00Z`);
+    expireAt.setUTCDate(expireAt.getUTCDate() + 2);
+    tx.set(ref, { count: used + 1, expireAt });
+    tx.set(globalRef, { day, count: usedByAll + 1 });
+    warnNearCap(
+      "AI_PREVIEW_DAILY_LIMIT",
+      usedByAll + 1,
+      aiPreviewDailyLimit.value(),
+    );
+    return "ok";
   });
 }
 
@@ -184,19 +245,36 @@ export const analyzeChatAi = onCall(
       throw new HttpsError("invalid-argument", "Malformed analysis request");
     }
     const { email, subscriptionId, language, digest, ask } = parsed.data;
+    const preview = !email || !subscriptionId;
 
-    if (!(await isSubscriber(email, subscriptionId))) {
-      throw new HttpsError("permission-denied", "not_subscribed");
-    }
-    const remaining = await takeFromAllowance(subscriptionId);
-    if (remaining === null) {
-      throw new HttpsError("resource-exhausted", "daily_limit");
-    }
-    if (remaining === "global") {
-      logger.error("Global AI daily limit reached", {
-        limit: aiGlobalDailyLimit.value(),
-      });
-      throw new HttpsError("unavailable", "analysis_failed");
+    let remaining: number | null | "global" = null;
+    if (preview) {
+      const raw = request.rawRequest;
+      const taken = await takePreview(
+        clientIp(raw.headers["x-forwarded-for"], raw.ip),
+      );
+      if (taken === "global") {
+        logger.warn("AI preview daily limit reached", {
+          limit: aiPreviewDailyLimit.value(),
+        });
+      }
+      if (taken !== "ok") {
+        throw new HttpsError("resource-exhausted", "preview_used");
+      }
+    } else {
+      if (!(await isSubscriber(email, subscriptionId))) {
+        throw new HttpsError("permission-denied", "not_subscribed");
+      }
+      remaining = await takeFromAllowance(subscriptionId);
+      if (remaining === null) {
+        throw new HttpsError("resource-exhausted", "daily_limit");
+      }
+      if (remaining === "global") {
+        logger.error("Global AI daily limit reached", {
+          limit: aiGlobalDailyLimit.value(),
+        });
+        throw new HttpsError("unavailable", "analysis_failed");
+      }
     }
 
     const startedAt = Date.now();
@@ -221,11 +299,13 @@ export const analyzeChatAi = onCall(
       });
       logger.info("AI analysis done", {
         model: aiModel.value(),
+        preview,
         durationMs: Date.now() - startedAt,
         effort: aiReasoningEffort.value(),
         inputTokens: usage.inputTokens,
         outputTokens: usage.outputTokens,
       });
+      if (preview) return { model: aiModel.value(), ...toPreview(output) };
       return {
         insights: output,
         model: aiModel.value(),

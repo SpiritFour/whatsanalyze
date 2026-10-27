@@ -268,6 +268,9 @@ export const analyticsEcommerce = {
   },
 };
 
+/** Where an AI analysis ran; "preview" is the free, shortened cloud run. */
+type AiMode = "local" | "cloud" | "preview";
+
 /**
  * Standalone Tools (/tools/* and ToolDropzone)
  */
@@ -312,7 +315,7 @@ export const analyticsTools = {
   },
 
   /** An AI analysis was started, on the device or in the cloud. */
-  aiStarted(mode: "local" | "cloud", question: string, source: AiSource) {
+  aiStarted(mode: AiMode, question: string, source: AiSource) {
     // The preset's id or "custom", never what was typed.
     trackEvent("ai_analysis_started", {
       ai_mode: mode,
@@ -326,10 +329,30 @@ export const analyticsTools = {
     trackEvent("ai_data_warning", { reason });
   },
 
-  aiFinished(mode: "local" | "cloud", durationMs: number, source: AiSource) {
+  aiFinished(mode: AiMode, durationMs: number, source: AiSource) {
     trackEvent("ai_analysis_finished", {
       ai_mode: mode,
       source,
+      duration_ms: Math.round(durationMs),
+    });
+  },
+
+  /** An AI analysis ended in an error: a known code or the raw message. */
+  aiFailed(mode: AiMode, reason: string) {
+    trackEvent("ai_analysis_failed", {
+      ai_mode: mode,
+      reason: reason.slice(0, 100),
+    });
+  },
+
+  /**
+   * The visitor gave up: left the page mid-run, or turned down the mobile-data
+   * download. `phase` is where: data_warning, download, read, write or cloud.
+   */
+  aiAbandoned(mode: AiMode, phase: string, durationMs = 0) {
+    trackEvent("ai_analysis_abandoned", {
+      ai_mode: mode,
+      phase,
       duration_ms: Math.round(durationMs),
     });
   },
