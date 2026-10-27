@@ -232,7 +232,7 @@
 
         <!-- Keep talking: follow-up questions and reply help -->
         <AiCoach
-          v-if="messages && ranOn"
+          v-if="messages && ranOn && !locked"
           :key="report?.insights.summary"
           :chat="messages"
           :mode="ranOn"
