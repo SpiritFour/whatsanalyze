@@ -28,6 +28,9 @@ export type AiLanguage = keyof typeof AI_LANGUAGES;
  */
 export const CLOUD_TRANSCRIPT_CHARS = 400_000;
 
+/** The free preview shows one profile, which needs far less: input is ~all of its cost. */
+export const PREVIEW_TRANSCRIPT_CHARS = 100_000;
+
 /**
  * What the browser has already reduced the chat to. Participants are
  * placeholders ("Person A"), never real names: the real ones stay on the

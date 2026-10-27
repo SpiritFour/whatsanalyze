@@ -20,6 +20,7 @@ import {
 import {
   AI_LANGUAGES,
   CLOUD_TRANSCRIPT_CHARS,
+  PREVIEW_TRANSCRIPT_CHARS,
   MAX_QUESTION_CHARS,
   buildPrompt,
   insightsSchema,
@@ -246,6 +247,10 @@ export const analyzeChatAi = onCall(
     }
     const { email, subscriptionId, language, digest, ask } = parsed.data;
     const preview = !email || !subscriptionId;
+    // The page already sends this much; this holds for a client that doesn't.
+    if (preview) {
+      digest.transcript = digest.transcript.slice(-PREVIEW_TRANSCRIPT_CHARS);
+    }
 
     let remaining: number | null | "global" = null;
     if (preview) {
