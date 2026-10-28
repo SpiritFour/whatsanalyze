@@ -118,6 +118,7 @@ import {
   type ParsedChat,
   type ChatMessage,
   type ChatAttachment,
+  type ChatSource,
 } from "~/composables/useChatTool";
 import { participantMessages } from "~/utils/utils";
 import { analyzeInactivity } from "~/utils/inactivity";
@@ -125,7 +126,7 @@ import { analyzeMessages } from "~/utils/messageCounter";
 import { analyzeWords } from "~/utils/wordCounter";
 import { analyzeHeatmap } from "~/utils/chatHeatmap";
 interface Props {
-  toolType?: "inactivity" | "messages" | "words" | "heatmap" | "ai";
+  toolType?: "inactivity" | "messages" | "words" | "heatmap" | "ai" | "court";
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -144,6 +145,7 @@ const emit = defineEmits<{
       analysis: unknown;
       messages: ChatMessage[];
       attachments: ChatAttachment[];
+      source?: ChatSource;
     },
   ): void;
   (e: "reset"): void;
@@ -208,7 +210,7 @@ async function processInput(
 
 /** Analyze a parsed chat for this tool and hand it to the page. */
 function showChat(
-  { messages, attachments, durationMs }: ParsedChat,
+  { messages, attachments, durationMs, source }: ParsedChat,
   fileName: string,
 ) {
   if (!messages || messages.length === 0) {
@@ -218,8 +220,9 @@ function showChat(
   }
 
   let analysis: unknown;
-  if (props.toolType === "ai") {
-    // The AI page analyzes on demand, once the visitor has picked where.
+  if (props.toolType === "ai" || props.toolType === "court") {
+    // These pages analyze on demand: the AI once the visitor has picked
+    // where, the court PDF once it is downloaded.
     analysis = { messages };
   } else if (props.toolType === "messages") {
     analysis = analyzeMessages(messages, durationMs);
@@ -248,12 +251,14 @@ function showChat(
     messages,
     attachments,
     sourceName: fileName,
+    source,
   };
 
   emit("analyzed", {
     analysis,
     messages,
     attachments,
+    source,
   });
 }
 
@@ -278,6 +283,7 @@ onMounted(() => {
         messages: restored.messages,
         attachments: (restored.attachments ?? []) as ChatAttachment[],
         durationMs: 0,
+        source: restored.source ?? undefined,
       },
       (restored as { sourceName?: string }).sourceName ?? "WhatsApp Chat",
     );

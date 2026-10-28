@@ -100,6 +100,28 @@ test.describe("the analyzer", () => {
     );
   });
 
+  test("builds the court evidence PDF on the court evidence page", async ({
+    page,
+  }) => {
+    await page.goto("/tools/court-evidence");
+    await page
+      .locator("#dropzone-slot input[type=file]")
+      .setInputFiles(await zipExport());
+
+    // court only: the visual style is not offered here
+    await expect(
+      page.getByRole("button", { name: "Visual story" }),
+    ).toHaveCount(0);
+    const downloadPromise = page.waitForEvent("download");
+    await page
+      .getByRole("button", { name: /Download free preview PDF/i })
+      .click();
+    const download = await downloadPromise;
+    expect(download.suggestedFilename()).toMatch(
+      /^WhatsAnalyze Court Transcript.*\.pdf$/,
+    );
+  });
+
   // The three below cover the results-page QA round (#411). Nothing failed
   // these when they were filed, because nothing was watching those numbers.
   test("takes the visitor to the analysis it just built", async ({ page }) => {

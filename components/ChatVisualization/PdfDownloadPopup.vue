@@ -9,10 +9,10 @@
     ></h2>
 
     <!-- Export style -->
-    <p class="m-0 mt-6 text-base font-semibold text-wa-ink">
+    <p v-if="!courtOnly" class="m-0 mt-6 text-base font-semibold text-wa-ink">
       {{ $t("pdfStyleTitle") }}
     </p>
-    <div class="mt-3 flex flex-wrap justify-center gap-2">
+    <div v-if="!courtOnly" class="mt-3 flex flex-wrap justify-center gap-2">
       <UiButton
         v-for="option in pdfStyles"
         :key="option"
@@ -292,6 +292,8 @@ export default {
     // name, size and SHA-256 of the uploaded export, for the court PDF
     source: { type: Object, default: null },
     isValidSubscription: { type: Boolean, default: false },
+    // the court evidence page offers only that style, without the switcher
+    courtOnly: { type: Boolean, default: false },
   },
   setup() {
     return {
@@ -308,7 +310,10 @@ export default {
       progress: 0,
       pdfWorker: null,
       // ?style=court: the visitor came from the court evidence landing page
-      pdfStyle: this.$route?.query?.style === "court" ? "court" : "visual",
+      pdfStyle:
+        this.courtOnly || this.$route?.query?.style === "court"
+          ? "court"
+          : "visual",
       pdfStyles: ["visual", "court"],
     };
   },
@@ -413,7 +418,9 @@ export default {
       try {
         rememberOneTimeCheckoutChat(this.currentChatFingerprint);
         const url = await fetchOneTimeCheckoutUrl({
-          successUrl: `${window.location.origin}/?session_id={CHECKOUT_SESSION_ID}&payment_success=true`,
+          // the homepage confirms the payment and downloads the PDF; style
+          // tells it which one was bought
+          successUrl: `${window.location.origin}/?session_id={CHECKOUT_SESSION_ID}&payment_success=true${this.isCourtStyle ? "&style=court" : ""}`,
           cancelUrl: window.location.href,
         });
         if (!url) throw new Error("No checkout URL returned");

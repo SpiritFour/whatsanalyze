@@ -77,6 +77,7 @@ export interface SharedChatState {
   messages: ChatMessage[];
   attachments: ChatAttachment[];
   sourceName?: string;
+  source?: ChatSource;
 }
 
 export const useSharedChat = () => {

@@ -1,17 +1,31 @@
 <template>
   <div class="landing-page">
     <LandingHero
-      align="left"
       :breadcrumbs="breadcrumbs"
       :eyebrow="t('courtEvidence.heroEyebrow')"
       :title="t('courtEvidence.heroTitle')"
       :subtitle="t('courtEvidence.heroSubtitle')"
-      :cta-text="t('courtEvidence.heroCta')"
-      :cta-to="analyzerPath"
       :note="t('courtEvidence.heroNote')"
-      @click="trackHeroCta"
     >
+      <div id="dropzone-slot">
+        <ToolDropzone
+          tool-type="court"
+          @analyzed="onChatAnalyzed"
+          @reset="chat = null"
+        />
+      </div>
     </LandingHero>
+
+    <LandingSection v-if="chat" id="court-pdf" theme="light">
+      <PdfDownloadPopup
+        :chat="chat"
+        :attachments="attachments"
+        :ego="ego"
+        :source="source"
+        :is-valid-subscription="isSubscriptionValid"
+        court-only
+      />
+    </LandingSection>
 
     <LandingSection theme="white">
       <LandingCards :items="pillars" />
@@ -62,7 +76,7 @@
     <LandingCta
       :title="t('courtEvidence.ctaTitle')"
       :cta-text="t('courtEvidence.ctaButton')"
-      :cta-to="analyzerPath"
+      cta-to="#dropzone-slot"
       :note="t('courtEvidence.ctaNote')"
       :disclaimer="t('courtEvidence.disclaimer')"
       @click="trackBottomCta"
@@ -73,18 +87,38 @@
 <script>
 import { ONE_TIME_PRICE, formatPrice } from "~/utils/pricing";
 import { analyticsTools } from "~/composables/useAnalytics";
+import ToolDropzone from "~/components/tools/ToolDropzone.vue";
+import PdfDownloadPopup from "~/components/ChatVisualization/PdfDownloadPopup.vue";
+import { Chat } from "~/utils/transformChatData";
+import { useSubscriptionStore } from "~/stores/subscription";
+import { storeToRefs } from "pinia";
+import { markRaw, nextTick, shallowRef } from "vue";
+import { scrollToSettled } from "~/utils/scroll";
 
 export default {
+  components: { ToolDropzone, PdfDownloadPopup },
   setup() {
     const { t, locale } = useI18n();
     const localePath = useLocalePath();
 
-    function trackHeroCta() {
-      analyticsTools.ctaClick("court_evidence", "hero_analyzer");
+    function trackBottomCta() {
+      scrollToDropzone();
+      analyticsTools.ctaClick("court_evidence", "scroll_to_dropzone");
     }
 
-    function trackBottomCta() {
-      analyticsTools.ctaClick("court_evidence", "full_analyzer");
+    // kept out of Vue's deep reactivity: Chat caches its lazy getters on
+    // itself, and proxying a whole chat is slow
+    const chat = shallowRef(null);
+    const attachments = shallowRef([]);
+    const source = shallowRef(null);
+    const ego = computed(() => chat.value?.messagesPerPerson[0]?.name || "");
+    const { isSubscriptionValid } = storeToRefs(useSubscriptionStore());
+
+    function onChatAnalyzed(payload) {
+      chat.value = markRaw(new Chat(payload.messages));
+      attachments.value = payload.attachments || [];
+      source.value = payload.source || null;
+      nextTick(() => scrollToSettled("#court-pdf", { offset: 80 }));
     }
     useSeoMeta({
       title: () => t("courtEvidence.seoTitle"),
@@ -174,17 +208,12 @@ export default {
     return {
       t,
       breadcrumbs,
-      // These pages carry no dropzone of their own, so the CTA has to
-      // land on the analyzer's upload area rather than the top of the
-      // homepage — step 2 tells people to drop a file there. The court
-      // evidence style is what the visitor came for, so preselect it.
-      analyzerPath: computed(() =>
-        localePath({
-          path: "/",
-          hash: "#dropzone-slot",
-          query: { style: "court" },
-        }),
-      ),
+      chat,
+      attachments,
+      source,
+      ego,
+      isSubscriptionValid,
+      onChatAnalyzed,
       exportGuidePath: computed(() =>
         localePath("how-to-export-your-whatsapp-chat"),
       ),
@@ -194,7 +223,6 @@ export default {
       steps,
       quotes,
       faq,
-      trackHeroCta,
       trackBottomCta,
     };
   },
