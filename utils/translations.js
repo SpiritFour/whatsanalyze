@@ -255,23 +255,21 @@ export const messages = {
       heroSubtitle:
         "For visa applications and immigration interviews: turn your chat history into clear evidence of a genuine, ongoing relationship.",
       heroCta: "Create your PDF",
-      heroNote: "Free preview · No account · No upload",
-      mockDays: "days",
-      mockMessages: "messages",
-      mockPeople: "people",
+      heroNote: "Free preview · No account · No server upload",
+      uploadTitle: "Drop your export. Download your evidence.",
       statsEyebrow: "The full picture",
       statsTitle: "Consistency you can't fake.",
       statsText:
         "Officers look for regular, natural contact over a long period. Your chat statistics show exactly that — at a glance.",
       stat1Title: "Messages over time",
       stat1Text:
-        "Activity charts show contact month after month, year after year.",
+        "A month-by-month count of your messages shows contact year after year.",
       stat2Title: "First to last message",
       stat2Text:
         "The document shows when your conversation started — and that it never stopped.",
       stat3Title: "Both sides talking",
       stat3Text:
-        "Per-person statistics show a real dialogue — not a one-way street.",
+        "Message counts per person show a real dialogue, not a one-way street.",
       stat4Title: "Everyday life, documented",
       stat4Text:
         "The full transcript shows what no certificate can: daily routines, plans, and care.",
@@ -302,7 +300,7 @@ export const messages = {
         "In WhatsApp, open the chat and choose “Export chat”. “Without media” is fine.",
       step2Title: "Drop the file",
       step2Text:
-        "Drag the .txt or .zip export onto whatsanalyze.com. It stays on your device.",
+        "Drop the .txt or .zip export into the box on this page. It stays on your device.",
       step3Title: "Download the PDF",
       step3Text:
         "Preview the document for free and download the complete chat as a PDF.",
@@ -1528,23 +1526,21 @@ export const messages = {
       heroSubtitle:
         "Für Visumsanträge und Behördentermine: Verwandle euren Chatverlauf in einen klaren Nachweis einer echten, gelebten Beziehung.",
       heroCta: "PDF erstellen",
-      heroNote: "Kostenlose Vorschau · Kein Konto · Kein Upload",
-      mockDays: "Tage",
-      mockMessages: "Nachrichten",
-      mockPeople: "Personen",
+      heroNote: "Kostenlose Vorschau · Kein Konto · Kein Server-Upload",
+      uploadTitle: "Export ablegen. Nachweis herunterladen.",
       statsEyebrow: "Das ganze Bild",
       statsTitle: "Beständigkeit kann man nicht faken.",
       statsText:
         "Behörden achten auf regelmäßigen, natürlichen Kontakt über lange Zeit. Genau das zeigen eure Chat-Statistiken – auf einen Blick.",
       stat1Title: "Nachrichten im Zeitverlauf",
       stat1Text:
-        "Aktivitäts-Charts zeigen Kontakt, Monat für Monat, Jahr für Jahr.",
+        "Eine Aufstellung eurer Nachrichten Monat für Monat zeigt Kontakt, Jahr für Jahr.",
       stat2Title: "Von der ersten bis zur letzten Nachricht",
       stat2Text:
         "Das Dokument zeigt, wann euer Gespräch begann – und dass es nie aufgehört hat.",
       stat3Title: "Beide Seiten schreiben",
       stat3Text:
-        "Statistiken pro Person zeigen einen echten Dialog – keine Einbahnstraße.",
+        "Nachrichtenzahlen pro Person zeigen einen echten Dialog – keine Einbahnstraße.",
       stat4Title: "Dokumentierter Alltag",
       stat4Text:
         "Das vollständige Protokoll zeigt, was keine Urkunde kann: Alltag, Pläne und Fürsorge.",
@@ -1575,7 +1571,7 @@ export const messages = {
         "Öffnet den Chat in WhatsApp und wählt „Chat exportieren“. „Ohne Medien“ reicht.",
       step2Title: "Datei ablegen",
       step2Text:
-        "Zieht die .txt- oder .zip-Datei auf whatsanalyze.com. Sie bleibt auf eurem Gerät.",
+        "Zieht die .txt- oder .zip-Datei in das Feld auf dieser Seite. Sie bleibt auf eurem Gerät.",
       step3Title: "PDF herunterladen",
       step3Text:
         "Seht euch das Dokument kostenlos in der Vorschau an und ladet den kompletten Chat als PDF.",
@@ -2790,23 +2786,21 @@ export const messages = {
       heroSubtitle:
         "Para solicitudes de visado y entrevistas de inmigración: convierte tu historial de chat en una prueba clara de una relación genuina y continua.",
       heroCta: "Crear tu PDF",
-      heroNote: "Vista previa gratis · Sin cuenta · Sin subida",
-      mockDays: "días",
-      mockMessages: "mensajes",
-      mockPeople: "personas",
+      heroNote: "Vista previa gratis · Sin cuenta · Sin subida a servidores",
+      uploadTitle: "Suelta tu exportación. Descarga tu prueba.",
       statsEyebrow: "El panorama completo",
       statsTitle: "Constancia que no se puede falsificar.",
       statsText:
         "Los oficiales buscan contacto regular y natural durante mucho tiempo. Tus estadísticas de chat muestran exactamente eso, de un vistazo.",
       stat1Title: "Mensajes a lo largo del tiempo",
       stat1Text:
-        "Los gráficos de actividad muestran contacto mes a mes, año a año.",
+        "Un recuento de mensajes mes a mes muestra contacto año tras año.",
       stat2Title: "Del primer al último mensaje",
       stat2Text:
         "El documento muestra cuándo empezó vuestra conversación, y que nunca se detuvo.",
       stat3Title: "Ambos lados escribiendo",
       stat3Text:
-        "Las estadísticas por persona muestran un diálogo real, no una calle de un solo sentido.",
+        "Los mensajes por persona muestran un diálogo real, no una calle de un solo sentido.",
       stat4Title: "La vida cotidiana, documentada",
       stat4Text:
         "La transcripción completa muestra lo que ningún certificado puede: rutinas, planes y cuidado diario.",
@@ -2837,7 +2831,7 @@ export const messages = {
         "En WhatsApp, abre el chat y elige «Exportar chat». «Sin multimedia» está bien.",
       step2Title: "Suelta el archivo",
       step2Text:
-        "Arrastra la exportación .txt o .zip a whatsanalyze.com. Se queda en tu dispositivo.",
+        "Arrastra la exportación .txt o .zip al recuadro de esta página. Se queda en tu dispositivo.",
       step3Title: "Descarga el PDF",
       step3Text:
         "Vista previa gratuita del documento y descarga del chat completo en PDF.",
@@ -4741,17 +4735,16 @@ export const messages = {
       heroSubtitle:
         "Para pedidos de visto e entrevistas de imigração: transforme o histórico da sua conversa em prova clara de um relacionamento genuíno e contínuo.",
       heroCta: "Criar seu PDF",
-      heroNote: "Pré-visualização gratuita · Sem cadastro · Sem upload",
-      mockDays: "dias",
-      mockMessages: "mensagens",
-      mockPeople: "pessoas",
+      heroNote:
+        "Pré-visualização gratuita · Sem cadastro · Sem upload para servidores",
+      uploadTitle: "Solte a exportação. Baixe a sua prova.",
       statsEyebrow: "A visão completa",
       statsTitle: "Consistência que não dá para forjar.",
       statsText:
         "Os agentes consulares buscam contato regular e natural ao longo do tempo. As estatísticas da sua conversa mostram exatamente isso — num relance.",
       stat1Title: "Mensagens ao longo do tempo",
       stat1Text:
-        "Gráficos de atividade mostram contato mês a mês, ano após ano.",
+        "Uma contagem de mensagens mês a mês mostra contato ano após ano.",
       stat2Title: "Da primeira à última mensagem",
       stat2Text:
         "O documento comprova quando a conversa começou — e que nunca parou.",
@@ -4784,7 +4777,7 @@ export const messages = {
         "Abra a conversa do casal, selecione 'Exportar conversa' e escolha 'Sem mídia'.",
       step2Title: "Processar no navegador",
       step2Text:
-        "Solte o arquivo exportado para calcular as linhas do tempo de contato instantaneamente.",
+        "Solte o arquivo exportado no quadro desta página. O processamento ocorre no seu aparelho.",
       step3Title: "Baixar relatório em PDF",
       step3Text:
         "Receba um documento PDF organizado e cronológico pronto para anexar ao seu processo.",
@@ -6001,17 +5994,15 @@ export const messages = {
       heroSubtitle:
         "Pour vos demandes de visa et entretiens d'immigration : transformez votre historique de chat en une preuve évidente d'une relation sincère et continue.",
       heroCta: "Créer votre PDF",
-      heroNote: "Aperçu gratuit · Sans compte · Aucun téléversement",
-      mockDays: "jours",
-      mockMessages: "messages",
-      mockPeople: "personnes",
+      heroNote: "Aperçu gratuit · Sans compte · Sans envoi sur un serveur",
+      uploadTitle: "Déposez votre export. Téléchargez votre preuve.",
       statsEyebrow: "La vue d'ensemble",
       statsTitle: "Une constance impossible à inventer.",
       statsText:
         "Les officiers d'immigration recherchent des contacts réguliers et naturels sur la durée. Vos statistiques de chat le prouvent d'un coup d'œil.",
       stat1Title: "Échanges au fil du temps",
       stat1Text:
-        "Des graphiques clairs montrent des contacts mois après mois, année après année.",
+        "Un décompte des messages mois par mois montre des contacts année après année.",
       stat2Title: "Du premier au dernier message",
       stat2Text:
         "Le document prouve la date exacte de vos premiers échanges et leur continuité ininterrompue.",
@@ -6044,7 +6035,7 @@ export const messages = {
         "Ouvrez la discussion du couple, choisissez 'Exporter la discussion' et sélectionnez 'Sans médias'.",
       step2Title: "Analyser dans le navigateur",
       step2Text:
-        "Déposez votre fichier pour générer automatiquement la chronologie et les statistiques de contact.",
+        "Déposez votre fichier dans le cadre de cette page. Le traitement s'effectue sur votre appareil.",
       step3Title: "Télécharger le rapport PDF",
       step3Text:
         "Obtenez un document PDF soigné et probant, prêt à être joint à votre dossier d'immigration.",
@@ -7248,17 +7239,15 @@ export const messages = {
       heroSubtitle:
         "Per domande di visto e colloqui di immigrazione: trasforma la tua chat in una prova inequivocabile di una relazione autentica e continua.",
       heroCta: "Crea il tuo PDF",
-      heroNote: "Anteprima gratuita · Nessun account · Nessun upload",
-      mockDays: "giorni",
-      mockMessages: "messaggi",
-      mockPeople: "persone",
+      heroNote: "Anteprima gratuita · Nessun account · Nessun upload su server",
+      uploadTitle: "Trascina l'esportazione. Scarica la tua prova.",
       statsEyebrow: "Il quadro completo",
       statsTitle: "Una costanza che non si può fingere.",
       statsText:
         "I funzionari cercano contatti regolari e spontanei nel tempo. Le statistiche della tua chat mostrano esattamente questo a prima vista.",
       stat1Title: "Messaggi nel tempo",
       stat1Text:
-        "Grafici di attività mostrano contatti mese dopo mese, anno dopo anno.",
+        "Un conteggio dei messaggi mese per mese mostra contatti anno dopo anno.",
       stat2Title: "Dal primo all'ultimo messaggio",
       stat2Text:
         "Il documento attesta quando è iniziata la conversazione e che non si è mai interrotta.",
@@ -7291,7 +7280,7 @@ export const messages = {
         "Apri la conversazione di coppia, seleziona 'Esporta chat' e scegli 'Senza file multimediali'.",
       step2Title: "Elabora nel browser",
       step2Text:
-        "Rilascia il file per calcolare subito le linee temporali e la frequenza dei contatti.",
+        "Rilascia il file nel riquadro di questa pagina. L'elaborazione avverrà sul tuo dispositivo.",
       step3Title: "Scarica il report PDF",
       step3Text:
         "Ottieni un documento PDF accurato e professionale pronto per la pratica di immigrazione.",

@@ -2,51 +2,59 @@
   <!-- Two pages of the court transcript (utils/pdfCourt.ts) as they print:
        the cover's integrity record behind a page of the transcript. English
        in every locale, like the PDF itself. -->
-  <div class="doc-mock" aria-hidden="true">
-    <div class="doc-mock__sheet doc-mock__sheet--back">
-      <div class="doc-mock__running">
-        <span>WhatsApp chat transcript — Alex, Sam</span>
-        <span>SHA-256 4f2a91c0e7d3b58a…</span>
+  <figure class="doc-mock">
+    <div aria-hidden="true">
+      <div class="doc-mock__sheet doc-mock__sheet--back">
+        <div class="doc-mock__running">
+          <span>WhatsApp chat transcript — Alex, Sam</span>
+          <span>SHA-256 4f2a91c0e7d3b58a…</span>
+        </div>
+        <p class="doc-mock__title">WhatsApp chat transcript</p>
+        <p class="doc-mock__heading">
+          1. Document integrity &amp; audit record
+        </p>
+        <dl class="doc-mock__record">
+          <template v-for="[label, value] in record" :key="label">
+            <dt>{{ label }}</dt>
+            <dd>{{ value }}</dd>
+          </template>
+        </dl>
       </div>
-      <p class="doc-mock__title">WhatsApp chat transcript</p>
-      <p class="doc-mock__heading">1. Document integrity &amp; audit record</p>
-      <dl class="doc-mock__record">
-        <template v-for="[label, value] in record" :key="label">
-          <dt>{{ label }}</dt>
-          <dd>{{ value }}</dd>
-        </template>
-      </dl>
-    </div>
 
-    <div class="doc-mock__sheet">
-      <div class="doc-mock__running">
-        <span>WhatsApp chat transcript — Alex, Sam</span>
-        <span>SHA-256 4f2a91c0e7d3b58a…</span>
-      </div>
-      <p class="doc-mock__heading">4. Transcript</p>
-      <div class="doc-mock__row doc-mock__row--head">
-        <span>No.</span>
-        <span>Date &amp; time</span>
-        <span>Sender</span>
-        <span>Message</span>
-      </div>
-      <div v-for="row in rows" :key="row[0]" class="doc-mock__row">
-        <span>{{ row[0] }}</span>
-        <span>{{ row[1] }}</span>
-        <span class="doc-mock__sender">{{ row[2] }}</span>
-        <span>{{ row[3] }}</span>
-      </div>
-      <div class="doc-mock__footer">
-        <span>Generated client-side with whatsanalyze.com</span>
-        <span>Page 3 of 24</span>
+      <div class="doc-mock__sheet">
+        <div class="doc-mock__running">
+          <span>WhatsApp chat transcript — Alex, Sam</span>
+          <span>SHA-256 4f2a91c0e7d3b58a…</span>
+        </div>
+        <p class="doc-mock__heading">4. Transcript</p>
+        <div class="doc-mock__row doc-mock__row--head">
+          <span>No.</span>
+          <span>Date &amp; time</span>
+          <span>Sender</span>
+          <span>Message</span>
+        </div>
+        <div v-for="row in rows" :key="row[0]" class="doc-mock__row">
+          <span>{{ row[0] }}</span>
+          <span>{{ row[1] }}</span>
+          <span class="doc-mock__sender">{{ row[2] }}</span>
+          <span>{{ row[3] }}</span>
+        </div>
+        <div class="doc-mock__footer">
+          <span>Generated client-side with whatsanalyze.com</span>
+          <span>Page 3 of 24</span>
+        </div>
       </div>
     </div>
-  </div>
+    <figcaption class="doc-mock__caption mono-label">{{ caption }}</figcaption>
+  </figure>
 </template>
 
 <script>
 export default {
   name: "LandingDocMock",
+  props: {
+    caption: { type: String, required: true },
+  },
   data() {
     return {
       record: [
@@ -86,9 +94,24 @@ export default {
 .doc-mock {
   position: relative;
   max-width: 520px;
-  margin: 0 auto;
-  padding-top: 3.5rem;
+  margin: 2.5rem auto 0;
+  padding: 3.5rem 0 1rem;
   font-family: Helvetica, Arial, sans-serif;
+}
+
+.doc-mock__caption {
+  margin-top: 1.6rem;
+  text-align: center;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(245, 245, 247, 0.5);
+}
+
+@media (min-width: 1000px) {
+  .doc-mock {
+    margin-top: 0;
+  }
 }
 
 .doc-mock__sheet {

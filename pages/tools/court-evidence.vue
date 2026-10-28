@@ -1,7 +1,5 @@
 <template>
   <div class="landing-page">
-    <OneTimePurchaseReturn :chat="chat" checkout-source="court_evidence_pdf" />
-
     <LandingHero
       align="left"
       :breadcrumbs="breadcrumbs"
@@ -13,36 +11,13 @@
       :note="t('courtEvidence.heroNote')"
       @click="trackHeroCta"
     >
-      <figure class="preview">
-        <LandingDocMock />
-        <figcaption class="preview__caption mono-label">
-          {{ t("courtEvidence.exampleBadge") }}
-        </figcaption>
-      </figure>
+      <LandingDocMock :caption="t('courtEvidence.exampleBadge')" />
     </LandingHero>
 
-    <!-- Upload and download right here: the court PDF is what this page is
-         for, so it is not buried under the analyzer's charts. -->
-    <LandingSection theme="white" :title="t('courtEvidence.uploadTitle')">
-      <div id="dropzone-slot">
-        <ToolDropzone
-          tool-type="court"
-          @analyzed="onChatAnalyzed"
-          @reset="chat = null"
-        />
-      </div>
-      <!-- #payButton: where PdfDownloadPopup scrolls a returning buyer -->
-      <div v-if="chat" id="payButton" class="court-pdf">
-        <PdfDownloadPopup
-          :chat="chat"
-          :attachments="attachments"
-          :ego="ego"
-          :source="source"
-          :is-valid-subscription="isSubscriptionValid"
-          court
-        />
-      </div>
-    </LandingSection>
+    <CourtPdfSection
+      :title="t('courtEvidence.uploadTitle')"
+      checkout-source="court_evidence_pdf"
+    />
 
     <LandingSection theme="white">
       <LandingCards :items="pillars" />
@@ -104,17 +79,10 @@
 <script>
 import { ONE_TIME_PRICE, formatPrice } from "~/utils/pricing";
 import { analyticsTools } from "~/composables/useAnalytics";
-import ToolDropzone from "~/components/tools/ToolDropzone.vue";
-import PdfDownloadPopup from "~/components/ChatVisualization/PdfDownloadPopup.vue";
-import OneTimePurchaseReturn from "~/components/ChatVisualization/OneTimePurchaseReturn.vue";
-import { Chat } from "~/utils/transformChatData";
-import { useSubscriptionStore } from "~/stores/subscription";
-import { storeToRefs } from "pinia";
-import { markRaw, nextTick, shallowRef } from "vue";
-import { scrollToSettled } from "~/utils/scroll";
+import CourtPdfSection from "~/components/tools/CourtPdfSection.vue";
 
 export default {
-  components: { ToolDropzone, PdfDownloadPopup, OneTimePurchaseReturn },
+  components: { CourtPdfSection },
   setup() {
     const { t, locale } = useI18n();
     const localePath = useLocalePath();
@@ -128,20 +96,6 @@ export default {
       analyticsTools.ctaClick("court_evidence", "scroll_to_dropzone");
     }
 
-    // kept out of Vue's deep reactivity: Chat caches its lazy getters on
-    // itself, and proxying a whole chat is slow
-    const chat = shallowRef(null);
-    const attachments = shallowRef([]);
-    const source = shallowRef(null);
-    const ego = computed(() => chat.value?.messagesPerPerson[0]?.name || "");
-    const { isSubscriptionValid } = storeToRefs(useSubscriptionStore());
-
-    function onChatAnalyzed(payload) {
-      chat.value = markRaw(new Chat(payload.messages));
-      attachments.value = payload.attachments || [];
-      source.value = payload.source || null;
-      nextTick(() => scrollToSettled("#payButton", { offset: 80 }));
-    }
     useSeoMeta({
       title: () => t("courtEvidence.seoTitle"),
       description: () => t("courtEvidence.seoDescription"),
@@ -230,12 +184,6 @@ export default {
     return {
       t,
       breadcrumbs,
-      chat,
-      attachments,
-      source,
-      ego,
-      isSubscriptionValid,
-      onChatAnalyzed,
       exportGuidePath: computed(() =>
         localePath("how-to-export-your-whatsapp-chat"),
       ),
@@ -253,37 +201,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.preview {
-  margin: 2.5rem auto 0;
-  padding-bottom: 1rem;
-}
-
-.preview__caption {
-  margin-top: 1.6rem;
-  text-align: center;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(245, 245, 247, 0.5);
-}
-
-@media (min-width: 1000px) {
-  .preview {
-    margin-top: 0;
-  }
-}
-
-#dropzone-slot {
-  margin-top: 2.5rem;
-  scroll-margin-top: 6rem;
-}
-
-.court-pdf {
-  max-width: 960px;
-  margin: 3rem auto 0;
-  scroll-margin-top: 6rem;
-}
-
 .landing-page__guide-link {
   margin-top: 2rem;
 

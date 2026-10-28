@@ -79,23 +79,25 @@ test.describe("the analyzer", () => {
     expect(download.suggestedFilename()).toMatch(/\.pdf$/i);
   });
 
-  test("builds the court evidence PDF on the court evidence page", async ({
-    page,
-  }) => {
-    await page.goto("/tools/court-evidence");
-    await page
-      .locator("#dropzone-slot input[type=file]")
-      .setInputFiles(await zipExport());
+  for (const page of ["court-evidence", "proof-of-relationship"]) {
+    test(`builds the court evidence PDF on /tools/${page}`, async ({
+      page: tab,
+    }) => {
+      await tab.goto(`/tools/${page}`);
+      await tab
+        .locator("#dropzone-slot input[type=file]")
+        .setInputFiles(await zipExport());
 
-    const downloadPromise = page.waitForEvent("download");
-    await page
-      .getByRole("button", { name: /Download free preview PDF/i })
-      .click();
-    const download = await downloadPromise;
-    expect(download.suggestedFilename()).toMatch(
-      /^WhatsAnalyze Court Transcript.*\.pdf$/,
-    );
-  });
+      const downloadPromise = tab.waitForEvent("download");
+      await tab
+        .getByRole("button", { name: /Download free preview PDF/i })
+        .click();
+      const download = await downloadPromise;
+      expect(download.suggestedFilename()).toMatch(
+        /^WhatsAnalyze Court Transcript.*\.pdf$/,
+      );
+    });
+  }
 
   // The three below cover the results-page QA round (#411). Nothing failed
   // these when they were filed, because nothing was watching those numbers.
