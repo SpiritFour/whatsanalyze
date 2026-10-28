@@ -95,6 +95,7 @@ describe("message classification", () => {
   });
 
   it("drops WhatsApp's control characters but keeps the wording", () => {
+    expect(normalizeMessageText("last message\n")).toBe("last message");
     expect(normalizeMessageText("‎Guten Tag\r\nwie geht's?")).toBe(
       "Guten Tag\nwie geht's?",
     );

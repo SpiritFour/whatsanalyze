@@ -97,9 +97,13 @@ export function formatFileSize(bytes) {
  * reproduce the message as exported.
  */
 export function normalizeMessageText(text) {
-  return String(text ?? "")
-    .replace(/‎|‏/g, "")
-    .replace(/\r\n?/g, "\n");
+  return (
+    String(text ?? "")
+      .replace(/‎|‏/g, "")
+      .replace(/\r\n?/g, "\n")
+      // the export file's final line break ends up on its last message
+      .replace(/\n+$/, "")
+  );
 }
 
 /**

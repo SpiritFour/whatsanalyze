@@ -96,6 +96,12 @@ export async function renderCourtEvidence(
     doc.setLineWidth(lineWidth);
     doc.line(MARGIN_LEFT, atY, PAGE_W - MARGIN_RIGHT, atY);
   };
+  // Separator between table rows. jsPDF places text by its baseline, and y is
+  // already the next row's baseline here, so the rule goes a line height up:
+  // in the gap between the previous row's descenders and the next row's caps.
+  const rowRule = function () {
+    if (y < bottom) rule(y - LINE + 0.6, 215, 0.1);
+  };
   // jsPDF spaces array text by its own line height factor — keep control of it
   // so columns stay aligned with the line numbers next to them.
   const drawLines = function (lines: string[], x: number, startY: number) {
@@ -274,7 +280,7 @@ export async function renderCourtEvidence(
     doc.text(person.first, rosterCols.first, y);
     doc.text(person.last, rosterCols.last, y);
     y += nameLines.length * LINE + 1;
-    rule(y - 2.4, 215, 0.1);
+    rowRule();
   });
 
   y += 4;
@@ -353,7 +359,7 @@ export async function renderCourtEvidence(
     } while (drawn < lines.length);
 
     y += ROW_GAP;
-    if (y < bottom) rule(y - ROW_GAP / 2, 215, 0.1);
+    rowRule();
   });
 
   //   ----- ANNEX A: MEDIA EXHIBITS
@@ -364,6 +370,12 @@ export async function renderCourtEvidence(
       if (bytes) {
         exhibit.size = bytes.length;
         exhibit.sha256 = await sha256Hex(bytes);
+      } else if (
+        attachments.some((file) => file.name.includes(exhibit.fileName))
+      ) {
+        // a chat restored from the browser session keeps the file names of
+        // its export but not the files themselves
+        exhibit.notLoaded = true;
       }
       progress(80 + ((index + 1) / exhibits.length) * 20);
     }
@@ -374,7 +386,9 @@ export async function renderCourtEvidence(
       "Every file referenced in the transcript, in the order of its first appearance. " +
         "Hashes are computed over the file as it is contained in the export. " +
         '"not contained in the export" means the chat text refers to a file that ' +
-        "the export did not include — most often because it was exported without media.",
+        "the export did not include — most often because it was exported without media. " +
+        '"not loaded" means the export contains the file, but it was not available when ' +
+        "this document was generated, so it could not be hashed.",
       8.5,
       90,
     );
@@ -404,7 +418,9 @@ export async function renderCourtEvidence(
         `${exhibit.fileType || "unknown type"} · ` +
         (exhibit.sha256
           ? `${formatFileSize(exhibit.size ?? NaN)} · SHA-256 ${exhibit.sha256}`
-          : "not contained in the export · SHA-256 —");
+          : exhibit.notLoaded
+            ? "contained in the export, not loaded · SHA-256 —"
+            : "not contained in the export · SHA-256 —");
       const detailLines = wrap(
         detail,
         PAGE_W - MARGIN_RIGHT - exhibitCols.line,
@@ -433,7 +449,7 @@ export async function renderCourtEvidence(
       drawLines(detailLines, exhibitCols.line, detailY);
 
       y += height;
-      if (y < bottom) rule(y - ROW_GAP / 2, 215, 0.1);
+      rowRule();
     });
   }
 

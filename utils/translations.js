@@ -70,6 +70,8 @@ export const messages = {
       errorPortalFailed: "Failed to open customer portal.",
     },
     courtEvidence: {
+      mediaNotLoaded:
+        "Your media files are not loaded: the chat was restored from this browser session, which keeps only the messages. Drop the .zip export again so the exhibit index can include and hash them.",
       seoTitle:
         "WhatsApp Chat as Court Evidence – Clean PDF Export | WhatsAnalyze",
       seoDescription:
@@ -773,6 +775,7 @@ export const messages = {
         "Computing timestamps, response latencies, and participant inactivity",
       switchFile: "Switch File",
       messagesAnalyzedIn: "{count} messages • analyzed in {time}ms",
+      messagesRestored: "{count} messages • restored from this session",
       dismiss: "Dismiss",
     },
     askAiCard: {
@@ -1338,6 +1341,8 @@ export const messages = {
       errorPortalFailed: "Das Kundenportal konnte nicht geöffnet werden.",
     },
     courtEvidence: {
+      mediaNotLoaded:
+        "Deine Mediendateien sind nicht geladen: Der Chat wurde aus dieser Browser-Sitzung wiederhergestellt, die nur die Nachrichten behält. Zieh den .zip-Export noch einmal hinein, damit das Beweismittelverzeichnis sie aufnehmen und prüfen kann.",
       seoTitle:
         "WhatsApp-Chat als Beweismittel vor Gericht – sauberes PDF | WhatsAnalyze",
       seoDescription:
@@ -2025,6 +2030,8 @@ export const messages = {
         "Berechne Zeitstempel, Antwortzeiten und Aktivitätsmuster",
       switchFile: "Datei wechseln",
       messagesAnalyzedIn: "{count} Nachrichten • analysiert in {time} ms",
+      messagesRestored:
+        "{count} Nachrichten • aus dieser Sitzung wiederhergestellt",
       dismiss: "Schließen",
     },
     askAiCard: {
@@ -2599,6 +2606,8 @@ export const messages = {
       errorPortalFailed: "No se ha podido abrir el portal de clientes.",
     },
     courtEvidence: {
+      mediaNotLoaded:
+        "Tus archivos multimedia no están cargados: el chat se restauró de esta sesión del navegador, que solo guarda los mensajes. Vuelve a soltar la exportación .zip para que el índice de anexos los incluya y calcule su hash.",
       seoTitle:
         "Chat de WhatsApp como prueba en juicio – PDF limpio | WhatsAnalyze",
       seoDescription:
@@ -3272,6 +3281,7 @@ export const messages = {
         "Calculando marcas de tiempo, latencias y patrones de actividad",
       switchFile: "Cambiar archivo",
       messagesAnalyzedIn: "{count} mensajes • analizados en {time} ms",
+      messagesRestored: "{count} mensajes • restaurados de esta sesión",
       dismiss: "Cerrar",
     },
     askAiCard: {
@@ -4263,6 +4273,7 @@ export const messages = {
         "Calculando horários, tempos de resposta e padrões de inatividade",
       switchFile: "Trocar arquivo",
       messagesAnalyzedIn: "{count} mensagens • analisadas em {time} ms",
+      messagesRestored: "{count} mensagens • restauradas desta sessão",
       dismiss: "Fechar",
     },
     askAiCard: {
@@ -4551,6 +4562,8 @@ export const messages = {
         "Transforme sua conversa em uma retrospectiva interativa para compartilhar com amigos.",
     },
     courtEvidence: {
+      mediaNotLoaded:
+        "Seus arquivos de mídia não estão carregados: a conversa foi restaurada desta sessão do navegador, que guarda apenas as mensagens. Solte a exportação .zip novamente para que o índice de anexos os inclua e calcule o hash.",
       seoTitle:
         "Conversa do WhatsApp como prova judicial – Exportação em PDF limpo | WhatsAnalyze",
       seoDescription:
@@ -5519,6 +5532,7 @@ export const messages = {
         "Calcul des horodatages, temps de réponse et temps d'inactivité",
       switchFile: "Changer de fichier",
       messagesAnalyzedIn: "{count} messages • analysés en {time} ms",
+      messagesRestored: "{count} messages • restaurés depuis cette session",
       dismiss: "Fermer",
     },
     askAiCard: {
@@ -5810,6 +5824,8 @@ export const messages = {
         "Transformez vos échanges en une rétrospective interactive prête à être partagée.",
     },
     courtEvidence: {
+      mediaNotLoaded:
+        "Vos fichiers multimédias ne sont pas chargés : la discussion a été restaurée depuis cette session du navigateur, qui ne conserve que les messages. Déposez à nouveau l'export .zip pour que l'index des pièces les inclue et calcule leur empreinte.",
       seoTitle:
         "Conversation WhatsApp comme preuve en justice – Export PDF clair | WhatsAnalyze",
       seoDescription:
@@ -6769,6 +6785,7 @@ export const messages = {
       analyzingSubtitle: "Calcolo di timestamp, tempi di risposta e inattività",
       switchFile: "Cambia file",
       messagesAnalyzedIn: "{count} messaggi • analizzati in {time} ms",
+      messagesRestored: "{count} messaggi • ripristinati da questa sessione",
       dismiss: "Chiudi",
     },
     askAiCard: {
@@ -7057,6 +7074,8 @@ export const messages = {
         "Trasforma la tua chat in una retrospettiva interattiva in stile storia da condividere.",
     },
     courtEvidence: {
+      mediaNotLoaded:
+        "I tuoi file multimediali non sono caricati: la chat è stata ripristinata da questa sessione del browser, che conserva solo i messaggi. Trascina di nuovo l'esportazione .zip perché l'indice degli allegati li includa e ne calcoli l'hash.",
       seoTitle:
         "Chat di WhatsApp come prova legale – Esportazione PDF pulita | WhatsAnalyze",
       seoDescription:

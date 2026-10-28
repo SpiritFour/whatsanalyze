@@ -71,11 +71,16 @@
           <div class="file-info">
             <span class="file-name">{{ loadedFileName }}</span>
             <span class="file-meta mono-label">
+              <!-- a restored chat was not parsed now, so it has no time -->
               {{
-                t("toolDropzone.messagesAnalyzedIn", {
-                  count: parsedMessageCount.toLocaleString(),
-                  time: parseDurationMs,
-                })
+                parseDurationMs
+                  ? t("toolDropzone.messagesAnalyzedIn", {
+                      count: parsedMessageCount.toLocaleString(),
+                      time: parseDurationMs,
+                    })
+                  : t("toolDropzone.messagesRestored", {
+                      count: parsedMessageCount.toLocaleString(),
+                    })
               }}
             </span>
           </div>
@@ -285,7 +290,9 @@ onMounted(() => {
         durationMs: 0,
         source: restored.source ?? undefined,
       },
-      (restored as { sourceName?: string }).sourceName ?? "WhatsApp Chat",
+      (restored as { sourceName?: string }).sourceName ??
+        restored.source?.name ??
+        "WhatsApp Chat",
     );
   } catch (err) {
     console.warn("Could not restore the previous chat:", err);
@@ -393,7 +400,7 @@ async function loadSampleChat() {
   padding: clamp(2rem, 5vw, 3rem) clamp(1.2rem, 3vw, 2rem);
   text-align: center;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
 
   &:hover {
     border-color: #21a68d;
