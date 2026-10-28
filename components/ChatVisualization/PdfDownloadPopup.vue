@@ -3,164 +3,212 @@
   <div
     class="wa-scope rounded-token-lg border border-solid border-[rgba(29,29,31,0.08)] bg-wa-surface-white p-6 text-center shadow-card md:p-8"
   >
-    <h2
-      class="m-0 text-2xl font-bold text-wa-ink md:text-3xl"
-      v-html="$t('downloadPDF')"
-    ></h2>
-
-    <p v-if="court" class="m-0 mt-2 text-sm text-wa-ink-muted">
-      {{ $t("pdfStyleCourtHint") }}
-    </p>
-
-    <img
-      v-if="!court"
-      src="/pdf-example.jpg"
-      alt=""
-      class="mx-auto mt-6 w-full max-w-[560px] rounded-token border border-solid border-[rgba(29,29,31,0.08)]"
-      loading="lazy"
-    />
-    <!-- The example image shows the visual style, so the court style gets its
-         own summary instead of a misleading preview. -->
-    <ul
-      v-else
-      class="m-0 mx-auto mt-6 max-w-[520px] list-none space-y-2 p-0 text-left text-sm text-wa-ink"
+    <!-- Court: what the document contains on the left, the file it will be
+         made from and the button on the right. -->
+    <div
+      :class="
+        court &&
+        'grid gap-8 text-left md:grid-cols-[1.15fr_1fr] md:items-center'
+      "
     >
-      <li
-        v-for="feature in courtFeatures"
-        :key="feature"
-        class="flex items-start gap-2"
-      >
-        <span class="font-bold text-wa-accent" aria-hidden="true">✓</span>
-        <span>{{ feature }}</span>
-      </li>
-    </ul>
+      <div>
+        <h2
+          class="m-0 text-2xl font-bold text-wa-ink md:text-3xl"
+          v-html="$t('downloadPDF')"
+        ></h2>
 
-    <!-- Building the PDF takes a while on a long chat, so say what is
+        <p
+          v-if="court"
+          class="m-0 mt-2 text-sm leading-relaxed text-wa-ink-muted"
+        >
+          {{ $t("pdfStyleCourtHint") }}
+        </p>
+
+        <img
+          v-if="!court"
+          src="/pdf-example.jpg"
+          alt=""
+          class="mx-auto mt-6 w-full max-w-[560px] rounded-token border border-solid border-[rgba(29,29,31,0.08)]"
+          loading="lazy"
+        />
+        <!-- The example image shows the visual style, so the court style gets its
+         own summary instead of a misleading preview. -->
+        <ul v-else class="m-0 mt-6 list-none space-y-3 p-0 text-sm text-wa-ink">
+          <li
+            v-for="feature in courtFeatures"
+            :key="feature"
+            class="flex items-start gap-3"
+          >
+            <span
+              class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[rgba(33,166,141,0.12)] text-xs font-bold text-wa-accent"
+              aria-hidden="true"
+              >✓</span
+            >
+            <span>{{ feature }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <!-- The file the transcript is made from, as its cover page will state it. -->
+        <dl
+          v-if="court"
+          class="m-0 rounded-token border border-solid border-[rgba(29,29,31,0.1)] bg-[#fafafa] p-5 font-mono text-xs leading-relaxed text-wa-ink"
+        >
+          <dt class="sr-only">File</dt>
+          <dd class="m-0 break-all font-sans text-base font-semibold">
+            {{ source?.name || "WhatsApp chat" }}
+          </dd>
+          <dt class="sr-only">Contents</dt>
+          <dd class="m-0 mt-1 text-wa-ink-muted">
+            <template v-for="(part, index) in fileSummary" :key="part">
+              <span v-if="index"> · </span>
+              <span class="whitespace-nowrap">{{ part }}</span>
+            </template>
+          </dd>
+          <template v-if="source?.sha256">
+            <dt
+              class="mt-4 font-sans text-[0.7rem] font-semibold uppercase tracking-wider text-wa-ink-faint"
+            >
+              SHA-256
+            </dt>
+            <dd v-for="line in sourceHashLines" :key="line" class="m-0">
+              {{ line }}
+            </dd>
+          </template>
+        </dl>
+
+        <!-- Building the PDF takes a while on a long chat, so say what is
          happening: first while the media is still being read, then with a
          real percentage once the pages start rendering. -->
-    <div v-show="isLoading" class="mx-auto mt-6 max-w-[420px]">
-      <p class="m-0 text-sm text-wa-ink-muted" v-html="$t('waitingForPDF')"></p>
+        <div v-show="isLoading" class="mx-auto mt-6 max-w-[420px]">
+          <p
+            class="m-0 text-sm text-wa-ink-muted"
+            v-html="$t('waitingForPDF')"
+          ></p>
 
-      <p
-        v-show="!progress"
-        class="m-0 mt-2 flex items-center justify-center gap-2 text-sm text-wa-ink-faint"
-      >
-        <span
-          class="block h-4 w-4 animate-spin rounded-full border-2 border-solid border-[rgba(29,29,31,0.15)] border-t-wa-accent"
-        ></span>
-        <span v-html="$t('loadingMedia')"></span>
-      </p>
-
-      <div
-        v-show="progress"
-        class="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-[rgba(29,29,31,0.08)]"
-        role="progressbar"
-        :aria-valuenow="progress"
-        aria-valuemin="0"
-        aria-valuemax="100"
-      >
-        <div
-          class="h-full rounded-full bg-wa-accent transition-all"
-          :style="{ width: progress + '%' }"
-        ></div>
-      </div>
-    </div>
-
-    <!-- Download dialog -->
-    <div class="mt-6 flex justify-center">
-      <v-dialog v-model="showDownloadPopup" width="550">
-        <template #activator="{ props: activatorProps }">
-          <UiButton
-            v-if="hasFullAccess"
-            size="lg"
-            v-bind="activatorProps"
-            @click="downloadFull"
+          <p
+            v-show="!progress"
+            class="m-0 mt-2 flex items-center justify-center gap-2 text-sm text-wa-ink-faint"
           >
-            <span v-html="$t('downloadNow')"></span>
-          </UiButton>
-          <UiButton
-            v-else
-            size="lg"
-            class="mt-6"
-            v-bind="activatorProps"
-            @click="trackFullPdfInterest('pdf_full_button')"
-          >
-            <IconDownload />
-            <span v-html="$t('downloadFullChatPDF')"></span>
-          </UiButton>
-        </template>
+            <span
+              class="block h-4 w-4 animate-spin rounded-full border-2 border-solid border-[rgba(29,29,31,0.15)] border-t-wa-accent"
+            ></span>
+            <span v-html="$t('loadingMedia')"></span>
+          </p>
 
-        <v-card class="wa-scope overflow-hidden rounded-token-lg">
-          <!-- Popup title + subtitle -->
-          <div class="bg-wa-accent px-6 py-5 text-white">
-            <p class="m-0 text-xl font-bold" v-html="$t('popupTitle')"></p>
-            <p
-              class="m-0 mt-1 text-sm opacity-90"
-              v-html="$t('popupSubtitle')"
-            ></p>
+          <div
+            v-show="progress"
+            class="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-[rgba(29,29,31,0.08)]"
+            role="progressbar"
+            :aria-valuenow="progress"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
+            <div
+              class="h-full rounded-full bg-wa-accent transition-all"
+              :style="{ width: progress + '%' }"
+            ></div>
           </div>
+        </div>
 
-          <div class="px-6 py-5 text-center">
-            <p
-              class="m-0 text-sm font-semibold text-wa-ink"
-              v-html="$t('popupInfo')"
-            ></p>
-
-            <div v-if="isLoading" class="loading my-4" />
-
-            <!-- Download button if subscribed -->
-            <UiButton
-              v-if="hasFullAccess"
-              size="lg"
-              class="mt-5"
-              @click="downloadFull"
-            >
-              <span v-html="$t('downloadNow')"></span>
-            </UiButton>
-
-            <!-- Payment section if the full PDF is not unlocked yet -->
-            <template v-else>
+        <!-- Download dialog -->
+        <div class="mt-6 flex justify-center">
+          <v-dialog v-model="showDownloadPopup" width="550">
+            <template #activator="{ props: activatorProps }">
               <UiButton
+                v-if="hasFullAccess"
                 size="lg"
-                class="mt-5"
-                :loading="isOneTimeLoading"
-                @click="payOneTimeStripe"
+                v-bind="activatorProps"
+                @click="downloadFull"
               >
-                <IconCard v-if="!isOneTimeLoading" />
-                <span>{{ $t("chooseOneTime") }} ({{ oneTimePrice }})</span>
+                <span v-html="$t('downloadNow')"></span>
               </UiButton>
-
-              <div
-                class="mt-5 rounded-token bg-[rgba(33,166,141,0.08)] p-4 text-sm text-wa-ink-muted"
+              <UiButton
+                v-else
+                size="lg"
+                class="mt-6"
+                v-bind="activatorProps"
+                @click="trackFullPdfInterest('pdf_full_button')"
               >
-                <span v-html="$t('subscriptionHint')"></span>
+                <IconDownload />
+                <span v-html="$t('downloadFullChatPDF')"></span>
+              </UiButton>
+            </template>
+
+            <v-card class="wa-scope overflow-hidden rounded-token-lg">
+              <!-- Popup title + subtitle -->
+              <div class="bg-wa-accent px-6 py-5 text-white">
+                <p class="m-0 text-xl font-bold" v-html="$t('popupTitle')"></p>
+                <p
+                  class="m-0 mt-1 text-sm opacity-90"
+                  v-html="$t('popupSubtitle')"
+                ></p>
+              </div>
+
+              <div class="px-6 py-5 text-center">
+                <p
+                  class="m-0 text-sm font-semibold text-wa-ink"
+                  v-html="$t('popupInfo')"
+                ></p>
+
+                <div v-if="isLoading" class="loading my-4" />
+
+                <!-- Download button if subscribed -->
                 <UiButton
-                  :to="subscribeLink"
-                  variant="secondary"
-                  size="sm"
-                  class="mt-3"
-                  block
+                  v-if="hasFullAccess"
+                  size="lg"
+                  class="mt-5"
+                  @click="downloadFull"
                 >
-                  <span v-html="$t('openSubscriptionPage')"></span>
+                  <span v-html="$t('downloadNow')"></span>
+                </UiButton>
+
+                <!-- Payment section if the full PDF is not unlocked yet -->
+                <template v-else>
+                  <UiButton
+                    size="lg"
+                    class="mt-5"
+                    :loading="isOneTimeLoading"
+                    @click="payOneTimeStripe"
+                  >
+                    <IconCard v-if="!isOneTimeLoading" />
+                    <span>{{ $t("chooseOneTime") }} ({{ oneTimePrice }})</span>
+                  </UiButton>
+
+                  <div
+                    class="mt-5 rounded-token bg-[rgba(33,166,141,0.08)] p-4 text-sm text-wa-ink-muted"
+                  >
+                    <span v-html="$t('subscriptionHint')"></span>
+                    <UiButton
+                      :to="subscribeLink"
+                      variant="secondary"
+                      size="sm"
+                      class="mt-3"
+                      block
+                    >
+                      <span v-html="$t('openSubscriptionPage')"></span>
+                    </UiButton>
+                  </div>
+                </template>
+              </div>
+
+              <!-- Close button -->
+              <div
+                class="flex justify-end border-0 border-t border-solid border-[rgba(29,29,31,0.08)] px-4 py-3"
+              >
+                <UiButton
+                  variant="danger"
+                  size="sm"
+                  @click="showDownloadPopup = false"
+                >
+                  <span v-html="$t('closeButton')"></span>
                 </UiButton>
               </div>
-            </template>
-          </div>
-
-          <!-- Close button -->
-          <div
-            class="flex justify-end border-0 border-t border-solid border-[rgba(29,29,31,0.08)] px-4 py-3"
-          >
-            <UiButton
-              variant="danger"
-              size="sm"
-              @click="showDownloadPopup = false"
-            >
-              <span v-html="$t('closeButton')"></span>
-            </UiButton>
-          </div>
-        </v-card>
-      </v-dialog>
+            </v-card>
+          </v-dialog>
+        </div>
+      </div>
     </div>
 
     <!-- Pricing Section -->
@@ -267,6 +315,11 @@ import { chatFingerprint } from "~/utils/chatFingerprint";
 import { scrollToSettled } from "~/utils/scroll";
 import PDFWorker from "~/assets/js/pdf.worker.js?worker";
 import { loadImage, objectToDictionary } from "~/utils/utils";
+import {
+  formatExactTimestamp,
+  formatFileSize,
+  formatHash,
+} from "~/utils/courtEvidence";
 
 export default {
   props: {
@@ -314,6 +367,19 @@ export default {
     },
     subscriptionPrice() {
       return formatPrice(SUBSCRIPTION_PRICE, this.$i18n.locale);
+    },
+    /** ["2.4 MB", "536 Messages", "2019-08-26 – 2021-02-16"] */
+    fileSummary() {
+      const messages = toRaw(this.chat).chatObject || [];
+      const day = (message) => formatExactTimestamp(message?.date).slice(0, 10);
+      return [
+        this.source?.size && formatFileSize(this.source.size),
+        `${messages.length.toLocaleString()} ${this.$t("messages")}`,
+        messages.length && `${day(messages[0])} – ${day(messages.at(-1))}`,
+      ].filter(Boolean);
+    },
+    sourceHashLines() {
+      return formatHash(this.source?.sha256, 2);
     },
     courtFeatures() {
       return [1, 2, 3, 4].map((index) =>

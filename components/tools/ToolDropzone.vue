@@ -117,6 +117,7 @@ import {
   loadChatSession,
   saveChatSession,
 } from "~/utils/chatSession";
+import { clearUpload, loadUpload, saveUpload } from "~/utils/uploadStore";
 import {
   parseChatFile,
   useSharedChat,
@@ -184,6 +185,8 @@ function onDragLeave() {
 async function processInput(
   fileOrText: File | string,
   fileName = "WhatsApp Chat",
+  // false when re-reading the export kept for this tab, which is no new upload
+  track = true,
 ) {
   loading.value = true;
   errorMessage.value = null;
@@ -195,6 +198,14 @@ async function processInput(
     // round trip through Stripe Checkout, a reload) used to lose the chat on
     // every /tools page while the analyzer still had it.
     saveChatSession(parsed);
+    // The court PDF hashes every attachment, so its pages keep the export
+    // itself too; the sample chat replaces whatever was kept.
+    if (props.toolType === "court") {
+      void (typeof fileOrText === "string"
+        ? clearUpload()
+        : saveUpload(fileOrText));
+    }
+    if (!track) return;
     analyticsTools.analyzed(
       props.toolType,
       parsedMessageCount.value,
@@ -270,7 +281,7 @@ function showChat(
 // The page is prerendered, so this input accepts a file before Vue hydrates
 // it and that change event reaches no handler. Pick up whatever is already
 // selected once there is one.
-onMounted(() => {
+onMounted(async () => {
   if (fileInput.value?.files?.length) {
     void handleFile(fileInput.value.files[0]);
     return;
@@ -281,6 +292,22 @@ onMounted(() => {
   const restored = sharedChat.value?.messages?.length
     ? sharedChat.value
     : loadChatSession();
+
+  // After a full page load the session has the messages but not the media.
+  // The export kept for this tab has both, if it is the chat the session
+  // remembers (not one since uploaded somewhere else).
+  if (props.toolType === "court" && restored !== sharedChat.value) {
+    const kept = await loadUpload();
+    const source = restored?.source;
+    if (
+      kept &&
+      (!source || (source.name === kept.name && source.size === kept.size))
+    ) {
+      await processInput(kept, kept.name, false);
+      return;
+    }
+  }
+
   if (!restored?.messages?.length) return;
   try {
     showChat(

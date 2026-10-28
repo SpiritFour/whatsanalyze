@@ -99,6 +99,25 @@ test.describe("the analyzer", () => {
     });
   }
 
+  // A reload, like every return from Stripe, used to bring the chat back
+  // without its media, and the paid PDF then listed every photo as missing.
+  test("keeps the media of a court upload across a reload", async ({
+    page,
+  }) => {
+    await page.goto("/tools/court-evidence");
+    await page
+      .locator("#dropzone-slot input[type=file]")
+      .setInputFiles(await zipExport());
+    await expect(page.locator("#payButton")).toBeVisible();
+
+    await page.reload();
+    await expect(page.getByText(/messages • analyzed in/)).toBeVisible();
+    await expect(page.locator("#payButton")).toBeVisible();
+    await expect(page.getByText("Your media files are not loaded")).toHaveCount(
+      0,
+    );
+  });
+
   // The three below cover the results-page QA round (#411). Nothing failed
   // these when they were filed, because nothing was watching those numbers.
   test("takes the visitor to the analysis it just built", async ({ page }) => {
