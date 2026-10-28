@@ -352,7 +352,10 @@ async function loadSampleChat() {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.74rem;
   letter-spacing: 0.08em;
-  color: rgba(245, 245, 247, 0.65);
+  // the section's own text colour, so it reads on the dark hero and on a
+  // white section alike
+  color: inherit;
+  opacity: 0.65;
   text-transform: uppercase;
 }
 
@@ -378,7 +381,7 @@ async function loadSampleChat() {
 }
 
 .separator {
-  color: rgba(245, 245, 247, 0.35);
+  opacity: 0.55;
 }
 
 .tool-dropzone {

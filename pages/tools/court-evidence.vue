@@ -276,11 +276,6 @@ export default {
 #dropzone-slot {
   margin-top: 2.5rem;
   scroll-margin-top: 6rem;
-
-  // the dropzone's banner is styled for the dark hero it usually sits in
-  :deep(.tech-spec-bar) {
-    color: rgba(29, 29, 31, 0.55);
-  }
 }
 
 .court-pdf {

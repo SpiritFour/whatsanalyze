@@ -311,6 +311,10 @@ export default {
   opacity: 0.85;
 }
 
+#dropzone-slot {
+  margin-top: 2.5rem;
+}
+
 .upload__next {
   margin-top: 1.5rem;
   text-align: center;
