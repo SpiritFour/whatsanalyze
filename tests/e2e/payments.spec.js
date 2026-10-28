@@ -5,6 +5,7 @@
  * over afterwards.
  */
 const {
+  EXAMPLE_CHAT,
   STRIPE_CHECKOUT,
   analyzeChat,
   expect,
@@ -119,6 +120,32 @@ test.describe("buying the full PDF once", () => {
     // The full PDF stays unlocked for the session instead of showing the
     // pricing table again.
     await expect(page.getByText("Choose Your Plan")).toHaveCount(0);
+  });
+
+  test("brings a buyer on the court evidence page back there with the court PDF", async ({
+    page,
+  }) => {
+    await stubCallable(page, "getCheckoutSession", paidSession);
+    const checkout = await stubStripeCheckout(page);
+
+    await page.goto("/tools/court-evidence");
+    await page
+      .locator("#dropzone-slot input[type=file]")
+      .setInputFiles(EXAMPLE_CHAT);
+    await startOneTimeCheckout(page);
+
+    const { successUrl } = checkout[0].postDataJSON().data;
+    expect(successUrl).toMatch(/\/tools\/court-evidence\/?\?session_id=/);
+
+    const downloadPromise = page.waitForEvent("download");
+    await page.goto(
+      `/tools/court-evidence?session_id=cs_test_paid&payment_success=true`,
+    );
+    const download = await downloadPromise;
+    expect(download.suggestedFilename()).toMatch(
+      /^WhatsAnalyze Court Transcript.*\.pdf$/,
+    );
+    await expect(page).toHaveURL(/\/tools\/court-evidence\/?$/);
   });
 
   test("hands the GA identifiers to checkout, so the sale can be attributed", async ({

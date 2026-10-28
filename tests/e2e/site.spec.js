@@ -79,27 +79,6 @@ test.describe("the analyzer", () => {
     expect(download.suggestedFilename()).toMatch(/\.pdf$/i);
   });
 
-  // ?style=court is how the court evidence landing page hands visitors over.
-  test("builds the court evidence PDF when arriving with ?style=court", async ({
-    page,
-  }) => {
-    await page.goto("/?style=court");
-    await page.locator("#uploadmytextfile").setInputFiles(await zipExport());
-    await expectAnalysis(page);
-
-    await expect(
-      page.getByRole("button", { name: "Court evidence" }),
-    ).toHaveAttribute("aria-pressed", "true");
-    const downloadPromise = page.waitForEvent("download");
-    await page
-      .getByRole("button", { name: /Download free preview PDF/i })
-      .click();
-    const download = await downloadPromise;
-    expect(download.suggestedFilename()).toMatch(
-      /^WhatsAnalyze Court Transcript.*\.pdf$/,
-    );
-  });
-
   test("builds the court evidence PDF on the court evidence page", async ({
     page,
   }) => {
@@ -108,10 +87,6 @@ test.describe("the analyzer", () => {
       .locator("#dropzone-slot input[type=file]")
       .setInputFiles(await zipExport());
 
-    // court only: the visual style is not offered here
-    await expect(
-      page.getByRole("button", { name: "Visual story" }),
-    ).toHaveCount(0);
     const downloadPromise = page.waitForEvent("download");
     await page
       .getByRole("button", { name: /Download free preview PDF/i })

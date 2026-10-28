@@ -80,7 +80,9 @@ export const messages = {
       heroSubtitle:
         "Turn a WhatsApp export into a clean, chronological PDF — every message, every sender, every timestamp. Created entirely on your device.",
       heroCta: "Create your PDF",
-      heroNote: "Free preview · No account · No upload",
+      heroNote: "Free preview · No account · No server upload",
+      exampleBadge: "Example document · Alex and Sam are fictional",
+      uploadTitle: "Drop your export. Download the PDF.",
       pillar1Title: "Nothing leaves your device",
       pillar1Text:
         "Your chat is processed locally in your browser. Your messages are never sent to a server.",
@@ -99,13 +101,13 @@ export const messages = {
         "Messages appear exactly as they happened, from the first day to the last.",
       docCard2Title: "Sender and time on every message",
       docCard2Text:
-        "Each entry is attributed and timestamped, down to the minute.",
+        "Each entry is numbered, attributed and timestamped, down to the second.",
       docCard3Title: "Print-ready A4 pages",
       docCard3Text:
         "A paginated PDF that is easy to print, file, and reference in a hearing.",
-      docCard4Title: "Statistics included",
+      docCard4Title: "Verifiable with SHA-256",
       docCard4Text:
-        "Message counts and activity charts summarize years of contact at a glance.",
+        "The cover page fingerprints your export file and every attachment, so anyone can check that nothing was changed.",
       casesEyebrow: "Built for serious situations",
       casesTitle: "When a chat becomes evidence.",
       casesText:
@@ -133,7 +135,7 @@ export const messages = {
         "In WhatsApp, open the chat and choose “Export chat”. “Without media” is fine.",
       step2Title: "Drop the file",
       step2Text:
-        "Drag the .txt or .zip export onto whatsanalyze.com. It stays on your device.",
+        "Drop the .txt or .zip export into the box on this page. It stays on your device.",
       step3Title: "Download the PDF",
       step3Text:
         "Preview the document for free and download the complete chat as a PDF.",
@@ -425,11 +427,6 @@ export const messages = {
     headerTextFeaturesTable: "Features & Solutions  of PDF export tools",
     goToPDF: "Go to PDF download",
     downloadPDF: "Download your Chat as PDF",
-    pdfStyleTitle: "PDF style",
-    pdfStyleVisual: "Visual story",
-    pdfStyleCourt: "Court evidence",
-    pdfStyleVisualHint:
-      "Colourful chat bubbles, charts and fun facts — made to be read and shared.",
     pdfStyleCourtHint:
       "Sober black-and-white transcript with integrity hash, exhibit index and signature page — made for courts and authorities.",
     pdfStyleCourtFeature1:
@@ -1353,7 +1350,9 @@ export const messages = {
       heroSubtitle:
         "Mach aus deinem WhatsApp-Export ein sauberes, chronologisches PDF – jede Nachricht, jeder Absender, jeder Zeitstempel. Erstellt komplett auf deinem Gerät.",
       heroCta: "PDF erstellen",
-      heroNote: "Kostenlose Vorschau · Kein Konto · Kein Upload",
+      heroNote: "Kostenlose Vorschau · Kein Konto · Kein Server-Upload",
+      exampleBadge: "Beispieldokument · Alex und Sam sind erfunden",
+      uploadTitle: "Export ablegen. PDF herunterladen.",
       pillar1Title: "Nichts verlässt dein Gerät",
       pillar1Text:
         "Dein Chat wird lokal in deinem Browser verarbeitet. Deine Nachrichten werden nie an einen Server geschickt.",
@@ -1372,13 +1371,13 @@ export const messages = {
         "Nachrichten erscheinen genau so, wie sie passiert sind – vom ersten bis zum letzten Tag.",
       docCard2Title: "Absender und Uhrzeit an jeder Nachricht",
       docCard2Text:
-        "Jeder Eintrag ist minutengenau zugeordnet und mit Zeitstempel versehen.",
+        "Jeder Eintrag ist nummeriert, zugeordnet und sekundengenau mit Zeitstempel versehen.",
       docCard3Title: "Druckfertige A4-Seiten",
       docCard3Text:
         "Ein paginiertes PDF, das sich leicht drucken, abheften und in einer Verhandlung zitieren lässt.",
-      docCard4Title: "Statistiken inklusive",
+      docCard4Title: "Prüfbar per SHA-256",
       docCard4Text:
-        "Nachrichtenzahlen und Aktivitäts-Charts fassen Jahre an Kontakt auf einen Blick zusammen.",
+        "Das Deckblatt enthält Prüfsummen deiner Exportdatei und jedes Anhangs – so kann jeder nachprüfen, dass nichts verändert wurde.",
       casesEyebrow: "Für ernste Situationen gebaut",
       casesTitle: "Wenn ein Chat zum Beweis wird.",
       casesText:
@@ -1406,7 +1405,7 @@ export const messages = {
         "Öffne den Chat in WhatsApp und wähle „Chat exportieren“. „Ohne Medien“ reicht.",
       step2Title: "Datei ablegen",
       step2Text:
-        "Zieh die .txt- oder .zip-Datei auf whatsanalyze.com. Sie bleibt auf deinem Gerät.",
+        "Zieh die .txt- oder .zip-Datei in das Feld auf dieser Seite. Sie bleibt auf deinem Gerät.",
       step3Title: "PDF herunterladen",
       step3Text:
         "Sieh dir das Dokument kostenlos in der Vorschau an und lade den kompletten Chat als PDF.",
@@ -1703,11 +1702,6 @@ export const messages = {
     headerTextFeaturesTable: "Eigenschaften und Lösungen der PDF-Export-Tools",
     goToPDF: "Gehe zum PDF-Download",
     downloadPDF: "Den Chat als PDF herunterladen",
-    pdfStyleTitle: "PDF-Stil",
-    pdfStyleVisual: "Visuelle Story",
-    pdfStyleCourt: "Gerichtsfest",
-    pdfStyleVisualHint:
-      "Bunte Chat-Blasen, Diagramme und Fun Facts – zum Lesen und Teilen.",
     pdfStyleCourtHint:
       "Nüchternes Schwarz-Weiß-Protokoll mit Integritäts-Hash, Beweismittelverzeichnis und Unterschriftenfeld – für Gerichte und Behörden.",
     pdfStyleCourtFeature1:
@@ -2619,7 +2613,9 @@ export const messages = {
       heroSubtitle:
         "Convierte tu exportación de WhatsApp en un PDF limpio y cronológico: cada mensaje, cada remitente, cada marca de tiempo. Creado íntegramente en tu dispositivo.",
       heroCta: "Crear tu PDF",
-      heroNote: "Vista previa gratis · Sin cuenta · Sin subida",
+      heroNote: "Vista previa gratis · Sin cuenta · Sin subida a servidores",
+      exampleBadge: "Documento de ejemplo · Alex y Sam son ficticios",
+      uploadTitle: "Suelta tu exportación. Descarga el PDF.",
       pillar1Title: "Nada sale de tu dispositivo",
       pillar1Text:
         "Tu chat se procesa localmente en tu navegador. Tus mensajes nunca se envían a un servidor.",
@@ -2637,13 +2633,14 @@ export const messages = {
       docCard1Text:
         "Los mensajes aparecen tal y como ocurrieron, del primer día al último.",
       docCard2Title: "Remitente y hora en cada mensaje",
-      docCard2Text: "Cada entrada está atribuida y fechada, minuto a minuto.",
+      docCard2Text:
+        "Cada entrada está numerada, atribuida y fechada al segundo.",
       docCard3Title: "Páginas A4 listas para imprimir",
       docCard3Text:
         "Un PDF paginado, fácil de imprimir, archivar y citar en una audiencia.",
-      docCard4Title: "Estadísticas incluidas",
+      docCard4Title: "Verificable con SHA-256",
       docCard4Text:
-        "Conteos de mensajes y gráficos de actividad resumen años de contacto de un vistazo.",
+        "La portada incluye la huella de tu archivo de exportación y de cada adjunto, para que cualquiera compruebe que nada se ha modificado.",
       casesEyebrow: "Hecho para situaciones serias",
       casesTitle: "Cuando un chat se convierte en prueba.",
       casesText:
@@ -2671,7 +2668,7 @@ export const messages = {
         "En WhatsApp, abre el chat y elige «Exportar chat». «Sin multimedia» está bien.",
       step2Title: "Suelta el archivo",
       step2Text:
-        "Arrastra la exportación .txt o .zip a whatsanalyze.com. Se queda en tu dispositivo.",
+        "Arrastra la exportación .txt o .zip al recuadro de esta página. Se queda en tu dispositivo.",
       step3Title: "Descarga el PDF",
       step3Text:
         "Vista previa gratuita del documento y descarga del chat completo en PDF.",
@@ -2956,11 +2953,6 @@ export const messages = {
       "Características y soluciones de las herramientas de exportación de PDF",
     goToPDF: "ir a la descarga del PDF",
     downloadPDF: "Descargue su Chat como PDF",
-    pdfStyleTitle: "Estilo del PDF",
-    pdfStyleVisual: "Historia visual",
-    pdfStyleCourt: "Prueba judicial",
-    pdfStyleVisualHint:
-      "Burbujas de chat en color, gráficos y datos curiosos: para leer y compartir.",
     pdfStyleCourtHint:
       "Transcripción sobria en blanco y negro con hash de integridad, índice de anexos y espacio para la firma: para juzgados y autoridades.",
     pdfStyleCourtFeature1:
@@ -3951,11 +3943,6 @@ export const messages = {
       "Recursos e soluções de ferramentas de exportação de PDF",
     goToPDF: "Ir para o download do PDF",
     downloadPDF: "Baixe seu Chat em PDF",
-    pdfStyleTitle: "Estilo do PDF",
-    pdfStyleVisual: "História visual",
-    pdfStyleCourt: "Prova judicial",
-    pdfStyleVisualHint:
-      "Balões de conversa coloridos, gráficos e curiosidades: para ler e partilhar.",
     pdfStyleCourtHint:
       "Transcrição sóbria a preto e branco com hash de integridade, índice de anexos e campo de assinatura: para tribunais e autoridades.",
     pdfStyleCourtFeature1:
@@ -4580,7 +4567,10 @@ export const messages = {
       heroSubtitle:
         "Transforme uma exportação do WhatsApp em um PDF cronológico e claro: cada mensagem, cada remetente, cada horário. Gerado diretamente no seu aparelho.",
       heroCta: "Criar seu PDF",
-      heroNote: "Pré-visualização gratuita · Sem cadastro · Sem upload",
+      heroNote:
+        "Pré-visualização gratuita · Sem cadastro · Sem upload para servidores",
+      exampleBadge: "Documento de exemplo · Alex e Sam são fictícios",
+      uploadTitle: "Solte a exportação. Baixe o PDF.",
       pillar1Title: "Nada sai do seu aparelho",
       pillar1Text:
         "Sua conversa é processada localmente no seu navegador. As mensagens nunca são enviadas para um servidor.",
@@ -4599,13 +4589,13 @@ export const messages = {
         "As mensagens aparecem exatamente como ocorreram, do primeiro ao último dia.",
       docCard2Title: "Remetente e horário em cada mensagem",
       docCard2Text:
-        "Identificação clara de quem enviou cada mensagem com data e hora exatas.",
+        "Cada entrada é numerada, com remetente e data e hora exatas ao segundo.",
       docCard3Title: "Estrutura limpa e legível",
       docCard3Text:
         "Sem balões de conversa confusos — um relatório profissional pronto para impressão.",
-      docCard4Title: "Completo e sem lacunas",
+      docCard4Title: "Verificável com SHA-256",
       docCard4Text:
-        "A conversa inteira em um único documento, sem recortes ou omissões.",
+        "A capa traz a impressão digital do arquivo exportado e de cada anexo, para que qualquer pessoa confirme que nada foi alterado.",
       casesEyebrow: "Casos de uso",
       casesTitle: "Para quando você precisa de provas claras.",
       casesText:
@@ -4629,7 +4619,7 @@ export const messages = {
         "Abra a conversa no WhatsApp, toque no nome do contato, selecione 'Exportar conversa' e escolha 'Sem mídia'.",
       step2Title: "Carregar no WhatsAnalyze",
       step2Text:
-        "Solte o arquivo .txt ou .zip exportado diretamente no navegador. O processamento ocorre no seu aparelho.",
+        "Solte o arquivo .txt ou .zip exportado no quadro desta página. O processamento ocorre no seu aparelho.",
       step3Title: "Gerar e baixar o PDF",
       step3Text:
         "Verifique a transcrição cronológica e baixe o documento em PDF formatado para apresentação.",
@@ -5207,11 +5197,6 @@ export const messages = {
       "Caractéristiques et solutions des outils d'exportation PDF",
     goToPDF: "Télécharger le PDF",
     downloadPDF: "Téléchargez votre Chat au format PDF",
-    pdfStyleTitle: "Style du PDF",
-    pdfStyleVisual: "Récit visuel",
-    pdfStyleCourt: "Preuve judiciaire",
-    pdfStyleVisualHint:
-      "Bulles de discussion colorées, graphiques et anecdotes : à lire et à partager.",
     pdfStyleCourtHint:
       "Transcription sobre en noir et blanc avec empreinte d'intégrité, index des pièces et bloc de signature : pour les tribunaux et les administrations.",
     pdfStyleCourtFeature1:
@@ -5842,8 +5827,9 @@ export const messages = {
       heroSubtitle:
         "Transformez votre export WhatsApp en un PDF clair et chronologique : chaque message, chaque expéditeur, chaque horodatage. Créé entièrement sur votre appareil.",
       heroCta: "Créer votre PDF",
-      heroNote:
-        "Aperçu gratuit · Sans inscription · Sans téléchargement serveur",
+      heroNote: "Aperçu gratuit · Sans inscription · Sans envoi sur un serveur",
+      exampleBadge: "Document d'exemple · Alex et Sam sont fictifs",
+      uploadTitle: "Déposez votre export. Téléchargez le PDF.",
       pillar1Title: "Rien ne quitte votre appareil",
       pillar1Text:
         "Votre discussion est traitée localement dans votre navigateur. Vos messages ne sont jamais envoyés sur un serveur.",
@@ -5862,13 +5848,13 @@ export const messages = {
         "Les messages apparaissent exactement dans leur ordre d'envoi, du premier au dernier jour.",
       docCard2Title: "Expéditeur et heure sur chaque message",
       docCard2Text:
-        "Chaque intervention mentionne précisément le nom de l'expéditeur ainsi que la date et l'heure.",
+        "Chaque intervention est numérotée et mentionne l'expéditeur ainsi que la date et l'heure à la seconde près.",
       docCard3Title: "Présentation sobre et lisible",
       docCard3Text:
         "Pas de bulles de discussion encombrantes : une mise en page d'acte prête à être imprimée.",
-      docCard4Title: "Intégral et sans coupure",
+      docCard4Title: "Vérifiable par SHA-256",
       docCard4Text:
-        "Toute la discussion réunie dans un seul document sans omissions ni raccourcis douteux.",
+        "La page de garde contient l'empreinte de votre fichier d'export et de chaque pièce jointe : chacun peut vérifier que rien n'a été modifié.",
       casesEyebrow: "Cas d'usage",
       casesTitle: "Quand vous avez besoin de faits indiscutables.",
       casesText:
@@ -5892,7 +5878,7 @@ export const messages = {
         "Ouvrez la discussion, appuyez sur le nom du contact, choisissez 'Exporter la discussion' et sélectionnez 'Sans médias'.",
       step2Title: "Déposer sur WhatsAnalyze",
       step2Text:
-        "Glissez le fichier .txt ou .zip exporté directement dans votre navigateur. Le traitement s'effectue sur votre appareil.",
+        "Glissez le fichier .txt ou .zip exporté dans le cadre de cette page. Le traitement s'effectue sur votre appareil.",
       step3Title: "Générer et télécharger le PDF",
       step3Text:
         "Vérifiez l'aperçu chronologique et téléchargez votre dossier PDF prêt à être remis à votre avocat ou au juge.",
@@ -6471,11 +6457,6 @@ export const messages = {
       "Caratteristiche e soluzioni degli strumenti di esportazione PDF",
     goToPDF: "Vai al download PDF",
     downloadPDF: "Scarica la tua chat in PDF",
-    pdfStyleTitle: "Stile del PDF",
-    pdfStyleVisual: "Racconto visivo",
-    pdfStyleCourt: "Prova giudiziaria",
-    pdfStyleVisualHint:
-      "Fumetti colorati, grafici e curiosità: da leggere e condividere.",
     pdfStyleCourtHint:
       "Trascrizione sobria in bianco e nero con hash di integrità, indice degli allegati e spazio per la firma: per tribunali e autorità.",
     pdfStyleCourtFeature1:
@@ -7095,7 +7076,9 @@ export const messages = {
       heroSubtitle:
         "Trasforma la tua esportazione di WhatsApp in un PDF pulito e cronologico: ogni messaggio, ogni mittente, ogni orario. Creato interamente sul tuo dispositivo.",
       heroCta: "Crea il tuo PDF",
-      heroNote: "Anteprima gratuita · Nessun account · Nessun upload",
+      heroNote: "Anteprima gratuita · Nessun account · Nessun upload su server",
+      exampleBadge: "Documento di esempio · Alex e Sam sono di fantasia",
+      uploadTitle: "Trascina l'esportazione. Scarica il PDF.",
       pillar1Title: "Nulla lascia il tuo dispositivo",
       pillar1Text:
         "La tua chat viene elaborata localmente nel tuo browser. I messaggi non vengono mai inviati a un server.",
@@ -7114,13 +7097,13 @@ export const messages = {
         "I messaggi compaiono esattamente come sono stati inviati, dal primo all'ultimo giorno.",
       docCard2Title: "Mittente e data/ora su ogni messaggio",
       docCard2Text:
-        "Identificazione inequivocabile di chi ha scritto ciascun testo con orario preciso al minuto.",
+        "Ogni voce è numerata, attribuita e con orario preciso al secondo.",
       docCard3Title: "Struttura sobria e leggibile",
       docCard3Text:
         "Senza fumetti caotici: un'impaginazione professionale pronta per la stampa o la produzione in giudizio.",
-      docCard4Title: "Completo e senza omissioni",
+      docCard4Title: "Verificabile con SHA-256",
       docCard4Text:
-        "L'intera conversazione raccolta in un unico documento continuo, senza tagli o frammenti isolati.",
+        "La copertina riporta l'impronta del file esportato e di ogni allegato, così chiunque può verificare che nulla è stato modificato.",
       casesEyebrow: "Casi d'uso",
       casesTitle: "Per quando hai bisogno di prove certe.",
       casesText:
@@ -7144,7 +7127,7 @@ export const messages = {
         "Apri la chat, tocca il nome del contatto in alto, seleziona 'Esporta chat' e scegli 'Senza file multimediali'.",
       step2Title: "Rilascia su WhatsAnalyze",
       step2Text:
-        "Trascina il file .txt o .zip esportato direttamente nel browser. L'elaborazione avverrà sul tuo dispositivo.",
+        "Trascina il file .txt o .zip esportato nel riquadro di questa pagina. L'elaborazione avverrà sul tuo dispositivo.",
       step3Title: "Genera e scarica il PDF",
       step3Text:
         "Verifica l'anteprima cronologica e scarica il documento PDF impaginato per l'avvocato o il giudice.",

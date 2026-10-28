@@ -8,28 +8,12 @@
       v-html="$t('downloadPDF')"
     ></h2>
 
-    <!-- Export style -->
-    <p v-if="!courtOnly" class="m-0 mt-6 text-base font-semibold text-wa-ink">
-      {{ $t("pdfStyleTitle") }}
-    </p>
-    <div v-if="!courtOnly" class="mt-3 flex flex-wrap justify-center gap-2">
-      <UiButton
-        v-for="option in pdfStyles"
-        :key="option"
-        size="sm"
-        :variant="pdfStyle === option ? 'primary' : 'secondary'"
-        :aria-pressed="pdfStyle === option"
-        @click="pdfStyle = option"
-      >
-        {{ $t(option === "court" ? "pdfStyleCourt" : "pdfStyleVisual") }}
-      </UiButton>
-    </div>
-    <p class="m-0 mt-2 text-sm text-wa-ink-muted">
-      {{ isCourtStyle ? $t("pdfStyleCourtHint") : $t("pdfStyleVisualHint") }}
+    <p v-if="court" class="m-0 mt-2 text-sm text-wa-ink-muted">
+      {{ $t("pdfStyleCourtHint") }}
     </p>
 
     <img
-      v-if="!isCourtStyle"
+      v-if="!court"
       src="/pdf-example.jpg"
       alt=""
       class="mx-auto mt-6 w-full max-w-[560px] rounded-token border border-solid border-[rgba(29,29,31,0.08)]"
@@ -292,8 +276,8 @@ export default {
     // name, size and SHA-256 of the uploaded export, for the court PDF
     source: { type: Object, default: null },
     isValidSubscription: { type: Boolean, default: false },
-    // the court evidence page offers only that style, without the switcher
-    courtOnly: { type: Boolean, default: false },
+    // the court evidence transcript instead of the visual story
+    court: { type: Boolean, default: false },
   },
   setup() {
     return {
@@ -309,12 +293,6 @@ export default {
       discountPercent: ONE_TIME_DISCOUNT_PERCENT,
       progress: 0,
       pdfWorker: null,
-      // ?style=court: the visitor came from the court evidence landing page
-      pdfStyle:
-        this.courtOnly || this.$route?.query?.style === "court"
-          ? "court"
-          : "visual",
-      pdfStyles: ["visual", "court"],
     };
   },
   computed: {
@@ -336,9 +314,6 @@ export default {
     },
     subscriptionPrice() {
       return formatPrice(SUBSCRIPTION_PRICE, this.$i18n.locale);
-    },
-    isCourtStyle() {
-      return this.pdfStyle === "court";
     },
     courtFeatures() {
       return [1, 2, 3, 4].map((index) =>
@@ -404,7 +379,7 @@ export default {
       analyticsChat.download("pdf_sample");
     },
     downloadFull() {
-      analyticsChat.download(this.isCourtStyle ? "pdf_full_court" : "pdf_full");
+      analyticsChat.download(this.court ? "pdf_full_court" : "pdf_full");
       this.download(false);
       this.showDownloadPopup = false;
     },
@@ -418,9 +393,8 @@ export default {
       try {
         rememberOneTimeCheckoutChat(this.currentChatFingerprint);
         const url = await fetchOneTimeCheckoutUrl({
-          // the homepage confirms the payment and downloads the PDF; style
-          // tells it which one was bought
-          successUrl: `${window.location.origin}/?session_id={CHECKOUT_SESSION_ID}&payment_success=true${this.isCourtStyle ? "&style=court" : ""}`,
+          // back to this page, where OneTimePurchaseReturn confirms it
+          successUrl: `${window.location.origin}${this.$route.path}?session_id={CHECKOUT_SESSION_ID}&payment_success=true`,
           cancelUrl: window.location.href,
         });
         if (!url) throw new Error("No checkout URL returned");
@@ -440,7 +414,7 @@ export default {
       try {
         // the graphs need to be converted to an image beforehand, as the web worker has no access to document
         // the court transcript shows no charts, so it skips rasterising them
-        const graphs = this.isCourtStyle ? {} : await this.loadGraphs();
+        const graphs = this.court ? {} : await this.loadGraphs();
         this.pdfWorker = markRaw(new PDFWorker());
         // markRaw: never wrap the Worker in reactive proxies — proxied receivers break
         // native postMessage/addEventListener calls.
@@ -470,7 +444,7 @@ export default {
           attachments: objectToDictionary(attachments),
           ego: this.ego,
           isSample,
-          style: this.pdfStyle,
+          style: this.court ? "court" : "visual",
           source: objectToDictionary(this.source),
           ...graphs,
         });
@@ -499,7 +473,7 @@ export default {
         const blob = new Blob([data.data], { type: "application/pdf" });
         FileSaver.saveAs(
           blob,
-          `${this.isCourtStyle ? "WhatsAnalyze Court Transcript" : "WhatsAnalyze"} - ${String(this.ego).trim()}.pdf`,
+          `${this.court ? "WhatsAnalyze Court Transcript" : "WhatsAnalyze"} - ${String(this.ego).trim()}.pdf`,
         );
         this.isLoading = false;
         this.closePdfWorker();
