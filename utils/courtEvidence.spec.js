@@ -5,6 +5,7 @@ import { webcrypto } from "crypto";
 import {
   SYSTEM_SPEAKER,
   buildCanonicalTranscript,
+  buildMonthlyCounts,
   buildRoster,
   buildTranscript,
   exhibitLabel,
@@ -135,6 +136,32 @@ describe("buildTranscript", () => {
       start: "2023-04-01 10:00:00",
       end: "2023-04-03 09:30:00",
     });
+  });
+});
+
+describe("buildMonthlyCounts", () => {
+  it("counts per month and person, keeping months without contact", () => {
+    const { people, months } = buildMonthlyCounts(
+      [
+        message("System", "Messages are end-to-end encrypted.", "2023-01-01"),
+        message("Alice", "Hi", "2023-01-05T10:00:00"),
+        message("Bob", "Hey", "2023-01-31T23:59:59"),
+        message("Alice", "Still there?", "2023-01-20T10:00:00"),
+        message("Alice", "Back", "2023-03-02T08:00:00"),
+      ],
+      ["Alice", "Bob"],
+    );
+
+    expect(people).toEqual(["Alice", "Bob"]);
+    expect(months).toEqual([
+      { month: "2023-01", perPerson: [2, 1], total: 3 },
+      { month: "2023-02", perPerson: [0, 0], total: 0 },
+      { month: "2023-03", perPerson: [1, 0], total: 1 },
+    ]);
+  });
+
+  it("returns no months for a chat without participant messages", () => {
+    expect(buildMonthlyCounts([], []).months).toEqual([]);
   });
 });
 

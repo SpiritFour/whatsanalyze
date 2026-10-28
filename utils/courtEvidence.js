@@ -186,6 +186,48 @@ export function buildRoster(messages, participants = []) {
 }
 
 /**
+ * Messages per calendar month and person, from the first month of the chat to
+ * the last. Months without a message are kept as zero rows: a gap in contact
+ * is part of the record, and dropping it would hide it.
+ */
+export function buildMonthlyCounts(messages, participants = []) {
+  const known = new Set(participants);
+  const counts = new Map();
+  const people = [];
+
+  messages.forEach((message) => {
+    if (isSystemMessage(message, known)) return;
+    const date = toDate(message.date);
+    if (Number.isNaN(date.getTime())) return;
+    const month = moment(date).format("YYYY-MM");
+    if (!people.includes(message.author)) people.push(message.author);
+    const row = counts.get(month) || {};
+    row[message.author] = (row[message.author] || 0) + 1;
+    counts.set(month, row);
+  });
+
+  const keys = [...counts.keys()].sort();
+  if (!keys.length) return { people, months: [] };
+
+  const months = [];
+  for (
+    let cursor = moment(keys[0], "YYYY-MM");
+    cursor.format("YYYY-MM") <= keys[keys.length - 1];
+    cursor.add(1, "month")
+  ) {
+    const month = cursor.format("YYYY-MM");
+    const row = counts.get(month) || {};
+    const perPerson = people.map((person) => row[person] || 0);
+    months.push({
+      month,
+      perPerson,
+      total: perPerson.reduce((sum, count) => sum + count, 0),
+    });
+  }
+  return { people, months };
+}
+
+/**
  * The exact text the fallback hash is computed over, so a recipient can
  * reproduce it from the printed transcript when the source file is gone.
  */

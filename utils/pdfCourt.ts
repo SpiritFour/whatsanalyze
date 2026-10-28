@@ -4,6 +4,7 @@ import "~/utils/pdfFont";
 import { AttachmentSource, getAttachmentBytes } from "~/utils/attachments";
 import {
   buildCanonicalTranscript,
+  buildMonthlyCounts,
   buildRoster,
   buildTranscript,
   formatExtractionTimestamp,
@@ -436,9 +437,74 @@ export async function renderCourtEvidence(
     });
   }
 
+  //   ----- ANNEX B: MESSAGES PER MONTH
+  const { people, months } = buildMonthlyCounts(messages, participants);
+  if (months.length) {
+    newPage();
+    heading("Annex B — messages per month");
+    // shortcut: per-person columns stop at four people, group chats get the
+    // total only; a wider table would need landscape pages
+    const perPerson = people.length <= 4;
+    paragraph(
+      "Messages sent per calendar month, counted from the transcript above. " +
+        "System notices are not counted. Months without any message are listed with 0." +
+        (perPerson ? "" : " Per-person totals are in the participant roster."),
+      8.5,
+      90,
+    );
+    y += 4;
+
+    const personWidth = 26;
+    const monthCols = {
+      month: MARGIN_LEFT,
+      total: MARGIN_LEFT + 40,
+      person: (index: number) => MARGIN_LEFT + 40 + (index + 1) * personWidth,
+    };
+    const drawMonthHeader = function () {
+      setFont(META_SIZE, "bold");
+      const nameLines = perPerson
+        ? people.map((person) => wrap(person, personWidth - 3).slice(0, 2))
+        : [];
+      const height = Math.max(1, ...nameLines.map((l) => l.length)) * LINE;
+      ensure(height + LINE);
+      doc.text("Month", monthCols.month, y);
+      doc.text("Total", monthCols.total, y, { align: "right" });
+      nameLines.forEach((lines, index) =>
+        lines.forEach((line, row) =>
+          doc.text(line, monthCols.person(index), y + row * LINE, {
+            align: "right",
+          }),
+        ),
+      );
+      y += height - LINE + 1.5;
+      rule(y, 0, 0.3);
+      y += LINE;
+    };
+    drawMonthHeader();
+
+    months.forEach((row) => {
+      if (y + LINE > bottom) {
+        newPage();
+        drawMonthHeader();
+      }
+      // empty months in gray, so gaps stand out
+      setFont(META_SIZE, "normal", row.total ? 0 : 120);
+      doc.text(row.month, monthCols.month, y);
+      doc.text(String(row.total), monthCols.total, y, { align: "right" });
+      if (perPerson) {
+        row.perPerson.forEach((count, index) =>
+          doc.text(String(count), monthCols.person(index), y, {
+            align: "right",
+          }),
+        );
+      }
+      y += LINE;
+    });
+  }
+
   //   ----- DECLARATION / SIGNATURE PAGE
   newPage();
-  heading("Annex B — declaration of authenticity");
+  heading("Annex C — declaration of authenticity");
   paragraph(
     "I declare that the transcript in this document was produced by me from the WhatsApp chat " +
       "export identified on the cover page, using whatsanalyze.com in my own web browser. " +
