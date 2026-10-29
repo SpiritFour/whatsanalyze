@@ -71,11 +71,16 @@
           <div class="file-info">
             <span class="file-name">{{ loadedFileName }}</span>
             <span class="file-meta mono-label">
+              <!-- a restored chat was not parsed now, so it has no time -->
               {{
-                t("toolDropzone.messagesAnalyzedIn", {
-                  count: parsedMessageCount.toLocaleString(),
-                  time: parseDurationMs,
-                })
+                parseDurationMs
+                  ? t("toolDropzone.messagesAnalyzedIn", {
+                      count: parsedMessageCount.toLocaleString(),
+                      time: parseDurationMs,
+                    })
+                  : t("toolDropzone.messagesRestored", {
+                      count: parsedMessageCount.toLocaleString(),
+                    })
               }}
             </span>
           </div>
@@ -112,12 +117,14 @@ import {
   loadChatSession,
   saveChatSession,
 } from "~/utils/chatSession";
+import { clearUpload, loadUpload, saveUpload } from "~/utils/uploadStore";
 import {
   parseChatFile,
   useSharedChat,
   type ParsedChat,
   type ChatMessage,
   type ChatAttachment,
+  type ChatSource,
 } from "~/composables/useChatTool";
 import { participantMessages } from "~/utils/utils";
 import { analyzeInactivity } from "~/utils/inactivity";
@@ -125,7 +132,7 @@ import { analyzeMessages } from "~/utils/messageCounter";
 import { analyzeWords } from "~/utils/wordCounter";
 import { analyzeHeatmap } from "~/utils/chatHeatmap";
 interface Props {
-  toolType?: "inactivity" | "messages" | "words" | "heatmap" | "ai";
+  toolType?: "inactivity" | "messages" | "words" | "heatmap" | "ai" | "court";
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -144,6 +151,7 @@ const emit = defineEmits<{
       analysis: unknown;
       messages: ChatMessage[];
       attachments: ChatAttachment[];
+      source?: ChatSource;
     },
   ): void;
   (e: "reset"): void;
@@ -177,6 +185,8 @@ function onDragLeave() {
 async function processInput(
   fileOrText: File | string,
   fileName = "WhatsApp Chat",
+  // false when re-reading the export kept for this tab, which is no new upload
+  track = true,
 ) {
   loading.value = true;
   errorMessage.value = null;
@@ -188,6 +198,14 @@ async function processInput(
     // round trip through Stripe Checkout, a reload) used to lose the chat on
     // every /tools page while the analyzer still had it.
     saveChatSession(parsed);
+    // The court PDF hashes every attachment, so its pages keep the export
+    // itself too; the sample chat replaces whatever was kept.
+    if (props.toolType === "court") {
+      void (typeof fileOrText === "string"
+        ? clearUpload()
+        : saveUpload(fileOrText));
+    }
+    if (!track) return;
     analyticsTools.analyzed(
       props.toolType,
       parsedMessageCount.value,
@@ -208,7 +226,7 @@ async function processInput(
 
 /** Analyze a parsed chat for this tool and hand it to the page. */
 function showChat(
-  { messages, attachments, durationMs }: ParsedChat,
+  { messages, attachments, durationMs, source }: ParsedChat,
   fileName: string,
 ) {
   if (!messages || messages.length === 0) {
@@ -218,8 +236,9 @@ function showChat(
   }
 
   let analysis: unknown;
-  if (props.toolType === "ai") {
-    // The AI page analyzes on demand, once the visitor has picked where.
+  if (props.toolType === "ai" || props.toolType === "court") {
+    // These pages analyze on demand: the AI once the visitor has picked
+    // where, the court PDF once it is downloaded.
     analysis = { messages };
   } else if (props.toolType === "messages") {
     analysis = analyzeMessages(messages, durationMs);
@@ -248,19 +267,21 @@ function showChat(
     messages,
     attachments,
     sourceName: fileName,
+    source,
   };
 
   emit("analyzed", {
     analysis,
     messages,
     attachments,
+    source,
   });
 }
 
 // The page is prerendered, so this input accepts a file before Vue hydrates
 // it and that change event reaches no handler. Pick up whatever is already
 // selected once there is one.
-onMounted(() => {
+onMounted(async () => {
   if (fileInput.value?.files?.length) {
     void handleFile(fileInput.value.files[0]);
     return;
@@ -271,6 +292,22 @@ onMounted(() => {
   const restored = sharedChat.value?.messages?.length
     ? sharedChat.value
     : loadChatSession();
+
+  // After a full page load the session has the messages but not the media.
+  // The export kept for this tab has both, if it is the chat the session
+  // remembers (not one since uploaded somewhere else).
+  if (props.toolType === "court" && restored !== sharedChat.value) {
+    const kept = await loadUpload();
+    const source = restored?.source;
+    if (
+      kept &&
+      (!source || (source.name === kept.name && source.size === kept.size))
+    ) {
+      await processInput(kept, kept.name, false);
+      return;
+    }
+  }
+
   if (!restored?.messages?.length) return;
   try {
     showChat(
@@ -278,8 +315,11 @@ onMounted(() => {
         messages: restored.messages,
         attachments: (restored.attachments ?? []) as ChatAttachment[],
         durationMs: 0,
+        source: restored.source ?? undefined,
       },
-      (restored as { sourceName?: string }).sourceName ?? "WhatsApp Chat",
+      (restored as { sourceName?: string }).sourceName ??
+        restored.source?.name ??
+        "WhatsApp Chat",
     );
   } catch (err) {
     console.warn("Could not restore the previous chat:", err);
@@ -346,7 +386,10 @@ async function loadSampleChat() {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.74rem;
   letter-spacing: 0.08em;
-  color: rgba(245, 245, 247, 0.65);
+  // the section's own text colour, so it reads on the dark hero and on a
+  // white section alike
+  color: inherit;
+  opacity: 0.65;
   text-transform: uppercase;
 }
 
@@ -372,7 +415,7 @@ async function loadSampleChat() {
 }
 
 .separator {
-  color: rgba(245, 245, 247, 0.35);
+  opacity: 0.55;
 }
 
 .tool-dropzone {
@@ -384,7 +427,7 @@ async function loadSampleChat() {
   padding: clamp(2rem, 5vw, 3rem) clamp(1.2rem, 3vw, 2rem);
   text-align: center;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
 
   &:hover {
     border-color: #21a68d;

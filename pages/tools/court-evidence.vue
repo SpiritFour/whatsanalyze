@@ -7,11 +7,17 @@
       :title="t('courtEvidence.heroTitle')"
       :subtitle="t('courtEvidence.heroSubtitle')"
       :cta-text="t('courtEvidence.heroCta')"
-      :cta-to="analyzerPath"
+      cta-to="#dropzone-slot"
       :note="t('courtEvidence.heroNote')"
       @click="trackHeroCta"
     >
+      <LandingDocMock :caption="t('courtEvidence.exampleBadge')" />
     </LandingHero>
+
+    <CourtPdfSection
+      :title="t('courtEvidence.uploadTitle')"
+      checkout-source="court_evidence_pdf"
+    />
 
     <LandingSection theme="white">
       <LandingCards :items="pillars" />
@@ -62,7 +68,7 @@
     <LandingCta
       :title="t('courtEvidence.ctaTitle')"
       :cta-text="t('courtEvidence.ctaButton')"
-      :cta-to="analyzerPath"
+      cta-to="#dropzone-slot"
       :note="t('courtEvidence.ctaNote')"
       :disclaimer="t('courtEvidence.disclaimer')"
       @click="trackBottomCta"
@@ -73,19 +79,23 @@
 <script>
 import { ONE_TIME_PRICE, formatPrice } from "~/utils/pricing";
 import { analyticsTools } from "~/composables/useAnalytics";
+import CourtPdfSection from "~/components/tools/CourtPdfSection.vue";
 
 export default {
+  components: { CourtPdfSection },
   setup() {
     const { t, locale } = useI18n();
     const localePath = useLocalePath();
 
     function trackHeroCta() {
-      analyticsTools.ctaClick("court_evidence", "hero_analyzer");
+      analyticsTools.ctaClick("court_evidence", "hero_dropzone");
     }
 
     function trackBottomCta() {
-      analyticsTools.ctaClick("court_evidence", "full_analyzer");
+      scrollToDropzone();
+      analyticsTools.ctaClick("court_evidence", "scroll_to_dropzone");
     }
+
     useSeoMeta({
       title: () => t("courtEvidence.seoTitle"),
       description: () => t("courtEvidence.seoDescription"),
@@ -130,7 +140,7 @@ export default {
           "mdi-sort-clock-ascending-outline",
           "mdi-account-clock-outline",
           "mdi-file-document-outline",
-          "mdi-chart-bar",
+          "mdi-shield-check-outline",
         ][i - 1],
         title: t(`courtEvidence.docCard${i}Title`),
         text: t(`courtEvidence.docCard${i}Text`),
@@ -174,12 +184,6 @@ export default {
     return {
       t,
       breadcrumbs,
-      // These pages carry no dropzone of their own, so the CTA has to
-      // land on the analyzer's upload area rather than the top of the
-      // homepage — step 2 tells people to drop a file there.
-      analyzerPath: computed(() =>
-        localePath({ path: "/", hash: "#dropzone-slot" }),
-      ),
       exportGuidePath: computed(() =>
         localePath("how-to-export-your-whatsapp-chat"),
       ),

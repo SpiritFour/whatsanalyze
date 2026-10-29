@@ -1,14 +1,18 @@
+import type { ChatSource } from "~/composables/useChatTool";
+
 const CHAT_SESSION_KEY = "whatsanalyze_active_chat";
 
 export interface PersistedChatSession {
   messages: any[];
   attachments?: any[];
+  source?: ChatSource | null;
   updatedAt: number;
 }
 
 export const saveChatSession = (chatObject: {
   messages: any[];
   attachments?: any[];
+  source?: ChatSource | null;
 }) => {
   if (typeof window === "undefined" || !chatObject?.messages?.length) return;
   try {
@@ -20,6 +24,8 @@ export const saveChatSession = (chatObject: {
     const session: PersistedChatSession = {
       messages: chatObject.messages,
       attachments: safeAttachments,
+      // tiny, and the court PDF loses its source fingerprint without it
+      source: chatObject.source || null,
       updatedAt: Date.now(),
     };
     sessionStorage.setItem(CHAT_SESSION_KEY, JSON.stringify(session));
