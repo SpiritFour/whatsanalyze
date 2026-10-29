@@ -420,8 +420,10 @@ export const messages = {
     analyzeYourChatTitle: "Chat Example - Now also Supporting group chats",
     analyzeYourChatLong:
       "Analyze your chat, reveal unknown facts and surprise your friends with insights into year long conversation.",
-    didWeMake: "Did we make you go 🥳?",
-    buyUsCoffee: "Buy us a ☕️ and get your results for free!!!",
+    donateWithPaypal: "Donate with PayPal",
+    didWeMake: "Your image is being created",
+    buyUsCoffee:
+      "WhatsAnalyze is free to use. If it helped you, a donation keeps it running.",
     getResults:
       "You will get all results as an image exactly as presented on your device. Generating may take a while.",
     headerTextFeaturesTable: "Features & Solutions  of PDF export tools",
@@ -1700,9 +1702,10 @@ export const messages = {
       "Chat Beispiel Analyse - Jetzt auch für Gruppen Chats",
     analyzeYourChatLong:
       "Analysiere deinen Chat, decken unbekannte Fakten auf und überraschen deine Freunde mit Einblicken in deine Kommunikation.",
-    didWeMake: "Haben wir dich dazu gebracht 🥳?",
+    donateWithPaypal: "Mit PayPal spenden",
+    didWeMake: "Dein Bild wird erstellt",
     buyUsCoffee:
-      "Kaufe uns einen ☕️ und erhalten deine Ergebnisse kostenlos!!!",
+      "WhatsAnalyze ist kostenlos. Wenn es dir geholfen hat, hält eine Spende es am Laufen.",
     getResults:
       "Du erhältst alle Ergebnisse als Bild, genau wie auf deinem Gerät dargestellt. Die Generierung kann eine Weile dauern.",
     headerTextFeaturesTable: "Eigenschaften und Lösungen der PDF-Export-Tools",
@@ -2955,8 +2958,10 @@ export const messages = {
       "Ejemplo de chat - Ahora también soporta chats de grupo",
     analyzeYourChatLong:
       "Analiza tu chat, desvela datos desconocidos y sorprende a tus amigos con las perspectivas de la conversación de todo el año",
-    didWeMake: "¿Te hemos hecho ir 🥳?",
-    buyUsCoffee: "¡¡¡Cómpranos un ☕️ y obtén tus resultados gratis!!!",
+    donateWithPaypal: "Donar con PayPal",
+    didWeMake: "Estamos creando tu imagen",
+    buyUsCoffee:
+      "WhatsAnalyze es gratuito. Si te ha ayudado, una donación lo mantiene en marcha.",
     getResults:
       "Obtendrá todos los resultados como una imagen exactamente como se presenta en su dispositivo. La generación puede tardar un poco",
     headerTextFeaturesTable:
@@ -3950,8 +3955,10 @@ export const messages = {
       "Exemplo de bate-papo - Agora também oferece suporte a bate-papos em grupo",
     analyseYourChatLong:
       "Analise seu bate-papo, revele fatos desconhecidos e surpreenda seus amigos com insights sobre conversas de um ano inteiro",
-    didWeMake: "Fizemos você se divertir 🥳?",
-    buyUsCoffee: "Compre-nos um ☕️ e obtenha seus resultados gratuitamente!!!",
+    donateWithPaypal: "Doar com PayPal",
+    didWeMake: "A sua imagem está a ser criada",
+    buyUsCoffee:
+      "O WhatsAnalyze é gratuito. Se ajudou você, uma doação o mantém funcionando.",
     getResults:
       "Você receberá todos os resultados como uma imagem exatamente como apresentada em seu dispositivo. A geração pode demorar um pouco.",
     headerTextFeaturesTable:
@@ -5211,8 +5218,10 @@ export const messages = {
       "Exemple de chat - Désormais, les chats de groupe sont également pris en charge",
     analyzeYourChatLong:
       "Analysez votre chat, révélez des faits inconnus et surprenez vos amis en leur donnant un aperçu d'une conversation d'un an.",
-    didWeMake: "On t'a fait partir 🥳 ?",
-    buyUsCoffee: "Achetez-nous un ☕️ et obtenez vos résultats gratuitement !!!",
+    donateWithPaypal: "Faire un don avec PayPal",
+    didWeMake: "Votre image est en cours de création",
+    buyUsCoffee:
+      "WhatsAnalyze est gratuit. S'il vous a aidé, un don le fait vivre.",
     getResults:
       "Vous obtiendrez tous les résultats sous la forme d'une image exactement telle qu'elle est présentée sur votre appareil. La génération peut prendre un certain temps.",
     headerTextFeaturesTable:
@@ -6476,8 +6485,10 @@ export const messages = {
       "Esempio di chat - Ora supporta anche le chat di gruppo",
     analyzeYourChatLong:
       "Analizza la tua chat, rivela fatti sconosciuti e sorprendi i tuoi amici con intuizioni su anni di conversazioni.",
-    didWeMake: "Ti abbiamo fatto andare 🥳?",
-    buyUsCoffee: "Offrici un ☕️ e ottieni i tuoi risultati gratuitamente!!!",
+    donateWithPaypal: "Dona con PayPal",
+    didWeMake: "Stiamo creando la tua immagine",
+    buyUsCoffee:
+      "WhatsAnalyze è gratuito. Se ti è stato utile, una donazione lo tiene in vita.",
     getResults:
       "Riceverai tutti i risultati come immagine esattamente come presentati sul tuo dispositivo. La generazione potrebbe richiedere del tempo.",
     headerTextFeaturesTable:
