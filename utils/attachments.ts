@@ -117,11 +117,11 @@ async function renderAttachment(
   };
 }
 
-// gets attachment mimeType, src, and filename from attachments
-export async function getAttachment(
+// raw bytes of an attachment, or undefined when the file is not part of the upload
+export async function getAttachmentBytes(
   fileName: string,
   attachments: AttachmentSource[],
-): Promise<Attachment> {
+): Promise<Uint8Array | undefined> {
   // potentially this finds files that are a false match
   // but there is the case that the images are in the "zip" folder, so we need
   // to be sure to find em
@@ -130,19 +130,26 @@ export async function getAttachment(
     RegExp(".*" + fileName).test(file.name),
   );
 
-  if (data.length === 0) {
-    // sometimes we can not find the attachment
-    return renderAttachment(fileName);
-  }
+  if (data.length === 0) return undefined;
 
   // `async` reads both deflated and stored entries through JSZip's own
   // decompressor, rather than a hand-rolled pako inflate over its private
   // `_data.compressedContent` — which threw "invalid block type" on media
   // WhatsApp stores uncompressed, and "invalid distance too far back" on
   // some iOS-generated zips even after that case was special-cased.
-  const decompressedData = data[0].zipEntry
+  return data[0].zipEntry
     ? await data[0].zipEntry.async("uint8array")
     : data[0].decompressedData;
+}
 
-  return renderAttachment(fileName, decompressedData);
+// gets attachment mimeType, src, and filename from attachments
+export async function getAttachment(
+  fileName: string,
+  attachments: AttachmentSource[],
+): Promise<Attachment> {
+  // sometimes we can not find the attachment, renderAttachment handles that
+  return renderAttachment(
+    fileName,
+    await getAttachmentBytes(fileName, attachments),
+  );
 }

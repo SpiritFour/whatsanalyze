@@ -637,8 +637,10 @@ export default {
 
 .plan-header {
   display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: flex-end;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid #f3f4f6;
   margin-bottom: 1.5rem;
@@ -668,6 +670,7 @@ export default {
   font-size: 0.95rem;
   color: #6b7280;
   margin-left: 4px;
+  white-space: nowrap;
 }
 
 .activating-banner {

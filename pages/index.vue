@@ -1,15 +1,6 @@
 <template>
   <div class="landing-page">
-    <div v-if="oneTimePaymentError || showReuploadHint" class="home-notice">
-      <v-alert v-if="oneTimePaymentError" density="compact" type="warning">
-        We could not confirm your payment. If you were charged, please contact
-        us and we will sort it out.
-      </v-alert>
-      <v-alert v-else density="compact" type="success">
-        Your full chat PDF is paid for. Upload the chat again to download it —
-        it never left your device, so we cannot restore it for you.
-      </v-alert>
-    </div>
+    <OneTimePurchaseReturn :chat="chat" checkout-source="home_pdf" />
 
     <LandingHero
       :title="$t('analyzeInSeconds')"
@@ -46,6 +37,7 @@
         ref="results"
         :attachments="attachments"
         :chat="chat"
+        :source="source"
         :is-valid-subscription="isSubscriptionValid"
       />
     </LandingSection>
@@ -130,13 +122,9 @@
 </template>
 
 <script>
-import { httpsCallable } from "firebase/functions";
 import { Chat } from "~/utils/transformChatData";
-import {
-  analyticsChat,
-  analyticsEcommerce,
-  trackEvent,
-} from "~/composables/useAnalytics";
+import OneTimePurchaseReturn from "~/components/ChatVisualization/OneTimePurchaseReturn.vue";
+import { analyticsChat, trackEvent } from "~/composables/useAnalytics";
 import { useSubscriptionStore } from "~/stores/subscription";
 import { storeToRefs } from "pinia";
 import {
@@ -144,11 +132,11 @@ import {
   loadChatSession,
   clearChatSession,
 } from "~/utils/chatSession";
-import { chatFingerprint } from "~/utils/chatFingerprint";
 import { scrollToSettled } from "~/utils/scroll";
 import pdfExampleImage from "~/assets/img/whatsapp export pdf.png";
 
 export default {
+  components: { OneTimePurchaseReturn },
   setup() {
     const { locale, t } = useI18n();
 
@@ -169,7 +157,6 @@ export default {
       allTools,
       isSubscriptionValid: storeToRefs(useSubscriptionStore())
         .isSubscriptionValid,
-      oneTimePurchase: useOneTimePurchase(),
     };
   },
   data() {
@@ -177,22 +164,13 @@ export default {
       isShowingChats: false,
       chat: undefined,
       attachments: undefined,
+      source: undefined,
       loading: false,
-      oneTimePaymentError: false,
       pdfExampleImage,
       currentYear: new Date().getFullYear(),
     };
   },
   computed: {
-    showReuploadHint() {
-      // Paid for the full PDF, but the chat it was bought for is not the one
-      // on screen: it is gone (tab closed, too large to keep in
-      // sessionStorage) or a different chat was uploaded since.
-      return (
-        Boolean(this.oneTimePurchase) &&
-        !unlocksChat(this.oneTimePurchase, chatFingerprint(toRaw(this.chat)))
-      );
-    },
     toolCards() {
       return this.allTools.map((tool) => ({
         icon: tool.icon,
@@ -275,6 +253,7 @@ export default {
           this.newMessages({
             messages: savedSession.messages,
             attachments: savedSession.attachments || [],
+            source: savedSession.source || null,
           });
         } catch (err) {
           // A chat we cannot rebuild must not take the whole page down with
@@ -287,9 +266,6 @@ export default {
       }
     }
 
-    useOneTimePurchase().value = restoreOneTimePurchase();
-    this.confirmOneTimePayment();
-
     // Arriving from "Open Chat Analyzer" on the subscribe page: they came for
     // their download, so take them to it rather than to the hero.
     if (this.$route.hash === "#payButton" && this.isShowingChats) {
@@ -298,52 +274,6 @@ export default {
   },
   methods: {
     Chat,
-    /**
-     * Stripe sends the buyer back here after a one-time PDF payment. Confirm
-     * the session really was paid, then unlock the full PDF and let it
-     * download on its own — the buyer already clicked "buy", asking them to
-     * find the button again is not a delivery.
-     */
-    async confirmOneTimePayment() {
-      const { payment_success: paymentSuccess, session_id: sessionId } =
-        this.$route.query;
-
-      if (paymentSuccess !== "true" || !sessionId) return;
-
-      // Never leave the ids in the URL: a reload or a shared link would
-      // re-run this, and the session id is the proof of payment.
-      const query = { ...this.$route.query };
-      delete query.payment_success;
-      delete query.session_id;
-      this.$router.replace({ query });
-
-      try {
-        const functions = this.$functions;
-        const getCheckoutSession = httpsCallable(
-          functions,
-          "getCheckoutSession",
-        );
-        const res = await getCheckoutSession({ sessionId });
-        const session = res.data;
-
-        if (session?.payment_status !== "paid") {
-          console.warn(
-            "Checkout session is not paid:",
-            session?.payment_status,
-          );
-          return;
-        }
-
-        analyticsEcommerce.checkoutCompleted("one_time", "home_pdf");
-        // The `purchase` event itself comes from the Stripe webhook, which sees
-        // the sales this page never does: ad blockers, and buyers who close the
-        // tab before it loads.
-        useOneTimePurchase().value = persistOneTimePurchase(sessionId);
-      } catch (err) {
-        console.error("Could not confirm the one-time payment:", err);
-        this.oneTimePaymentError = true;
-      }
-    },
     /**
      * A chat that was just dropped on the page. The results render ~700px
      * below the hero, so without this the upload looks like it did nothing —
@@ -357,6 +287,7 @@ export default {
       // we only update with default chat object if chat_ is undefined
       if (!chatObject.default || this.chat === undefined) {
         this.attachments = chatObject.attachments;
+        this.source = chatObject.source || null;
         this.chat = new Chat(chatObject.messages);
         analyticsChat.chatAnalyzed(
           this.chat.numPersonsInChat,
@@ -370,12 +301,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.home-notice {
-  padding: 1rem 1.5rem 0;
-  max-width: $wa-shell-width;
-  margin: 0 auto;
-}
-
 .home-upload {
   max-width: 640px;
   margin: 0 auto;

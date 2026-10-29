@@ -79,6 +79,71 @@ test.describe("the analyzer", () => {
     expect(download.suggestedFilename()).toMatch(/\.pdf$/i);
   });
 
+  for (const page of ["court-evidence", "proof-of-relationship"]) {
+    test(`builds the court evidence PDF on /tools/${page}`, async ({
+      page: tab,
+    }) => {
+      await tab.goto(`/tools/${page}`);
+      await tab
+        .locator("#dropzone-slot input[type=file]")
+        .setInputFiles(await zipExport());
+
+      const downloadPromise = tab.waitForEvent("download");
+      await tab
+        .getByRole("button", { name: /Download free preview PDF/i })
+        .click();
+      const download = await downloadPromise;
+      expect(download.suggestedFilename()).toMatch(
+        /^WhatsAnalyze Court Transcript.*\.pdf$/,
+      );
+    });
+  }
+
+  // The PDF can only show what the export contains: say so before anyone pays.
+  test("tells a court buyer which media the export is missing", async ({
+    page,
+  }) => {
+    const JSZip = require("jszip");
+    const zip = new JSZip();
+    zip.file(
+      "_chat.txt",
+      "[01.02.24, 10:00:00] Alice: Hi\n" +
+        "[01.02.24, 10:01:00] Bob: <attached: 00000001-PHOTO.jpg>\n" +
+        "[01.02.24, 10:02:00] Bob: <attached: 00000002-PHOTO.jpg>\n",
+    );
+    zip.file("00000001-PHOTO.jpg", Buffer.from([0xff, 0xd8, 0xff, 0xe0]));
+    await page.goto("/tools/court-evidence");
+    await page.locator("#dropzone-slot input[type=file]").setInputFiles({
+      name: "WhatsApp Chat - Bob.zip",
+      mimeType: "application/zip",
+      buffer: await zip.generateAsync({ type: "nodebuffer" }),
+    });
+
+    await expect(page.getByText("1 of 2 media files included")).toBeVisible();
+    await expect(
+      page.getByText(/Missing from your export: 1 of/),
+    ).toBeVisible();
+  });
+
+  // A reload, like every return from Stripe, used to bring the chat back
+  // without its media, and the paid PDF then listed every photo as missing.
+  test("keeps the media of a court upload across a reload", async ({
+    page,
+  }) => {
+    await page.goto("/tools/court-evidence");
+    await page
+      .locator("#dropzone-slot input[type=file]")
+      .setInputFiles(await zipExport());
+    await expect(page.locator("#payButton")).toBeVisible();
+
+    await page.reload();
+    await expect(page.getByText(/messages • analyzed in/)).toBeVisible();
+    await expect(page.locator("#payButton")).toBeVisible();
+    await expect(page.getByText("Your media files are not loaded")).toHaveCount(
+      0,
+    );
+  });
+
   // The three below cover the results-page QA round (#411). Nothing failed
   // these when they were filed, because nothing was watching those numbers.
   test("takes the visitor to the analysis it just built", async ({ page }) => {

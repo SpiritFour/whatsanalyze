@@ -30,53 +30,46 @@
           </UiButton>
         </template>
 
-        <v-card class="wa-scope overflow-hidden rounded-token-lg">
-          <div class="bg-wa-accent px-6 py-5 text-white">
-            <p class="m-0 text-xl font-bold">{{ $t("didWeMake") }}</p>
-            <p class="m-0 mt-1 text-sm opacity-90">{{ $t("buyUsCoffee") }}</p>
-          </div>
-
-          <div class="px-6 py-5 text-center">
-            <p class="m-0 text-sm text-wa-ink-muted">{{ $t("getResults") }}</p>
-
-            <form
-              action="https://www.paypal.com/donate"
-              method="post"
-              target="_blank"
-              class="mt-5"
-              @click="paypalButtonPressed"
-            >
-              <input
-                name="hosted_button_id"
-                type="hidden"
-                value="EPCYG8WEF289G"
-              />
-              <input
-                alt="Donate with PayPal button"
-                border="0"
-                name="submit"
-                src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"
-                title="PayPal - The safer, easier way to pay online!"
-                type="image"
-              />
-              <img
-                alt=""
-                border="0"
-                height="1"
-                src="https://www.paypal.com/en_US/i/scr/pixel.gif"
-                width="1"
-              />
-            </form>
-
-            <div v-if="loading" class="loading mt-4" />
-          </div>
-
-          <div
-            class="flex justify-end border-0 border-t border-solid border-[rgba(29,29,31,0.08)] px-4 py-3"
+        <v-card class="wa-scope relative rounded-token-lg">
+          <button
+            type="button"
+            class="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full text-lg text-wa-ink-faint hover:bg-[rgba(29,29,31,0.06)] hover:text-wa-ink"
+            :aria-label="$t('closeButton')"
+            @click="dialog = false"
           >
-            <UiButton variant="danger" size="sm" @click="dialog = false">
-              Close
-            </UiButton>
+            ✕
+          </button>
+
+          <div class="px-7 py-7 text-left">
+            <h3 class="m-0 pr-8 text-xl font-bold text-wa-ink">
+              {{ $t("didWeMake") }}
+            </h3>
+            <p class="m-0 mt-1 text-sm text-wa-ink-muted">
+              {{ $t("getResults") }}
+            </p>
+            <div v-if="loading" class="loading mt-4" />
+
+            <!-- Optional: the image is free, a donation is a thank-you. -->
+            <div
+              class="mt-6 flex flex-wrap items-center justify-between gap-3 border-0 border-t border-solid border-[rgba(29,29,31,0.08)] pt-5 text-sm text-wa-ink-muted"
+            >
+              <span>{{ $t("buyUsCoffee") }}</span>
+              <form
+                ref="paypalForm"
+                action="https://www.paypal.com/donate"
+                method="post"
+                target="_blank"
+              >
+                <input
+                  name="hosted_button_id"
+                  type="hidden"
+                  value="EPCYG8WEF289G"
+                />
+                <UiButton variant="secondary" size="sm" @click="donate">
+                  {{ $t("donateWithPaypal") }}
+                </UiButton>
+              </form>
+            </div>
           </div>
         </v-card>
       </v-dialog>
@@ -183,6 +176,10 @@ export default {
           this.loading = false;
         });
       }, 250);
+    },
+    donate() {
+      this.paypalButtonPressed();
+      this.$refs.paypalForm.submit();
     },
     paypalButtonPressed() {
       analyticsSite.donateClicked("results_download");

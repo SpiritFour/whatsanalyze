@@ -70,6 +70,8 @@ export const messages = {
       errorPortalFailed: "Failed to open customer portal.",
     },
     courtEvidence: {
+      mediaNotLoaded:
+        "Your media files are not loaded: the chat was restored from this browser session, which keeps only the messages. Drop the .zip export again so the exhibit index can include and hash them.",
       seoTitle:
         "WhatsApp Chat as Court Evidence – Clean PDF Export | WhatsAnalyze",
       seoDescription:
@@ -80,7 +82,9 @@ export const messages = {
       heroSubtitle:
         "Turn a WhatsApp export into a clean, chronological PDF — every message, every sender, every timestamp. Created entirely on your device.",
       heroCta: "Create your PDF",
-      heroNote: "Free preview · No account · No upload",
+      heroNote: "Free preview · No account · No server upload",
+      exampleBadge: "Example document · Alex and Sam are fictional",
+      uploadTitle: "Drop your export. Download the PDF.",
       pillar1Title: "Nothing leaves your device",
       pillar1Text:
         "Your chat is processed locally in your browser. Your messages are never sent to a server.",
@@ -99,13 +103,13 @@ export const messages = {
         "Messages appear exactly as they happened, from the first day to the last.",
       docCard2Title: "Sender and time on every message",
       docCard2Text:
-        "Each entry is attributed and timestamped, down to the minute.",
+        "Each entry is numbered, attributed and timestamped, down to the second.",
       docCard3Title: "Print-ready A4 pages",
       docCard3Text:
         "A paginated PDF that is easy to print, file, and reference in a hearing.",
-      docCard4Title: "Statistics included",
+      docCard4Title: "Verifiable with SHA-256",
       docCard4Text:
-        "Message counts and activity charts summarize years of contact at a glance.",
+        "The cover page fingerprints your export file and every attachment, so anyone can check that nothing was changed.",
       casesEyebrow: "Built for serious situations",
       casesTitle: "When a chat becomes evidence.",
       casesText:
@@ -133,7 +137,7 @@ export const messages = {
         "In WhatsApp, open the chat and choose “Export chat”. “Without media” is fine.",
       step2Title: "Drop the file",
       step2Text:
-        "Drag the .txt or .zip export onto whatsanalyze.com. It stays on your device.",
+        "Drop the .txt or .zip export into the box on this page. It stays on your device.",
       step3Title: "Download the PDF",
       step3Text:
         "Preview the document for free and download the complete chat as a PDF.",
@@ -253,23 +257,21 @@ export const messages = {
       heroSubtitle:
         "For visa applications and immigration interviews: turn your chat history into clear evidence of a genuine, ongoing relationship.",
       heroCta: "Create your PDF",
-      heroNote: "Free preview · No account · No upload",
-      mockDays: "days",
-      mockMessages: "messages",
-      mockPeople: "people",
+      heroNote: "Free preview · No account · No server upload",
+      uploadTitle: "Drop your export. Download your evidence.",
       statsEyebrow: "The full picture",
       statsTitle: "Consistency you can't fake.",
       statsText:
         "Officers look for regular, natural contact over a long period. Your chat statistics show exactly that — at a glance.",
       stat1Title: "Messages over time",
       stat1Text:
-        "Activity charts show contact month after month, year after year.",
+        "A month-by-month count of your messages shows contact year after year.",
       stat2Title: "First to last message",
       stat2Text:
         "The document shows when your conversation started — and that it never stopped.",
       stat3Title: "Both sides talking",
       stat3Text:
-        "Per-person statistics show a real dialogue — not a one-way street.",
+        "Message counts per person show a real dialogue, not a one-way street.",
       stat4Title: "Everyday life, documented",
       stat4Text:
         "The full transcript shows what no certificate can: daily routines, plans, and care.",
@@ -300,7 +302,7 @@ export const messages = {
         "In WhatsApp, open the chat and choose “Export chat”. “Without media” is fine.",
       step2Title: "Drop the file",
       step2Text:
-        "Drag the .txt or .zip export onto whatsanalyze.com. It stays on your device.",
+        "Drop the .txt or .zip export into the box on this page. It stays on your device.",
       step3Title: "Download the PDF",
       step3Text:
         "Preview the document for free and download the complete chat as a PDF.",
@@ -418,13 +420,28 @@ export const messages = {
     analyzeYourChatTitle: "Chat Example - Now also Supporting group chats",
     analyzeYourChatLong:
       "Analyze your chat, reveal unknown facts and surprise your friends with insights into year long conversation.",
-    didWeMake: "Did we make you go 🥳?",
-    buyUsCoffee: "Buy us a ☕️ and get your results for free!!!",
+    donateWithPaypal: "Donate with PayPal",
+    didWeMake: "Your image is being created",
+    buyUsCoffee:
+      "WhatsAnalyze is free to use. If it helped you, a donation keeps it running.",
     getResults:
       "You will get all results as an image exactly as presented on your device. Generating may take a while.",
     headerTextFeaturesTable: "Features & Solutions  of PDF export tools",
     goToPDF: "Go to PDF download",
     downloadPDF: "Download your Chat as PDF",
+    pdfMediaIncluded: "{found} of {total} media files included",
+    pdfMediaMissing:
+      "Missing from your export: {missing} of the files this chat refers to. The PDF can list them but not show them. To include them, export the chat again in WhatsApp with “Include media”.",
+    pdfStyleCourtHint:
+      "Sober black-and-white transcript with integrity hash, exhibit index and signature page — made for courts and authorities.",
+    pdfStyleCourtFeature1:
+      "Numbered lines with exact timestamps (YYYY-MM-DD HH:mm:ss)",
+    pdfStyleCourtFeature2:
+      "SHA-256 fingerprint of your export file on the cover page",
+    pdfStyleCourtFeature3:
+      "Exhibit index listing every attachment with its own hash",
+    pdfStyleCourtFeature4:
+      "Binding margin, “Page X of Y” and a signature block",
     fullChat: "Your Full Chat",
     tabItemiOS1:
       "<span>On iPhone <b>open</b> WhatsApp and the <b>chat</b> or <b>group chat</b> you would like to export > at the top <b>tap on</b> the <b>name</b> of the chat.</span>",
@@ -591,12 +608,14 @@ export const messages = {
       "Loading your <span>images</span>, <span>videos</span> and <span>documents</span>",
     downloadFreePreviewPDF: "Download <b>free preview</b> PDF",
     downloadFullChatPDF: "Download <b>full chat</b> PDF",
-    popupTitle: "<span>Nice!!</span>",
-    popupSubtitle: "You are just a step away from your PDF!",
-    popupInfo: "<b>Supporting us</b> keeps the 💻 running 🎉",
+    popupTitle: "Unlock the full PDF",
+    popupSubtitle:
+      "One-time payment for this chat. No account, no subscription.",
+    popupInfo:
+      "Secure checkout with Stripe. The PDF downloads as soon as the payment is confirmed.",
     downloadNow: "Download now",
     subscriptionHint:
-      "You can also get a <span>subscription</span> for unlimited PDFs here",
+      "Need PDFs of more chats? A subscription covers all of them.",
     openSubscriptionPage: "Open <span>Subscription Page</span>",
     closeButton: "Close",
     pricingTitle: "Choose Your Plan",
@@ -763,6 +782,7 @@ export const messages = {
         "Computing timestamps, response latencies, and participant inactivity",
       switchFile: "Switch File",
       messagesAnalyzedIn: "{count} messages • analyzed in {time}ms",
+      messagesRestored: "{count} messages • restored from this session",
       dismiss: "Dismiss",
     },
     askAiCard: {
@@ -1328,6 +1348,8 @@ export const messages = {
       errorPortalFailed: "Das Kundenportal konnte nicht geöffnet werden.",
     },
     courtEvidence: {
+      mediaNotLoaded:
+        "Deine Mediendateien sind nicht geladen: Der Chat wurde aus dieser Browser-Sitzung wiederhergestellt, die nur die Nachrichten behält. Zieh den .zip-Export noch einmal hinein, damit das Beweismittelverzeichnis sie aufnehmen und prüfen kann.",
       seoTitle:
         "WhatsApp-Chat als Beweismittel vor Gericht – sauberes PDF | WhatsAnalyze",
       seoDescription:
@@ -1338,7 +1360,9 @@ export const messages = {
       heroSubtitle:
         "Mach aus deinem WhatsApp-Export ein sauberes, chronologisches PDF – jede Nachricht, jeder Absender, jeder Zeitstempel. Erstellt komplett auf deinem Gerät.",
       heroCta: "PDF erstellen",
-      heroNote: "Kostenlose Vorschau · Kein Konto · Kein Upload",
+      heroNote: "Kostenlose Vorschau · Kein Konto · Kein Server-Upload",
+      exampleBadge: "Beispieldokument · Alex und Sam sind erfunden",
+      uploadTitle: "Export ablegen. PDF herunterladen.",
       pillar1Title: "Nichts verlässt dein Gerät",
       pillar1Text:
         "Dein Chat wird lokal in deinem Browser verarbeitet. Deine Nachrichten werden nie an einen Server geschickt.",
@@ -1357,13 +1381,13 @@ export const messages = {
         "Nachrichten erscheinen genau so, wie sie passiert sind – vom ersten bis zum letzten Tag.",
       docCard2Title: "Absender und Uhrzeit an jeder Nachricht",
       docCard2Text:
-        "Jeder Eintrag ist minutengenau zugeordnet und mit Zeitstempel versehen.",
+        "Jeder Eintrag ist nummeriert, zugeordnet und sekundengenau mit Zeitstempel versehen.",
       docCard3Title: "Druckfertige A4-Seiten",
       docCard3Text:
         "Ein paginiertes PDF, das sich leicht drucken, abheften und in einer Verhandlung zitieren lässt.",
-      docCard4Title: "Statistiken inklusive",
+      docCard4Title: "Prüfbar per SHA-256",
       docCard4Text:
-        "Nachrichtenzahlen und Aktivitäts-Charts fassen Jahre an Kontakt auf einen Blick zusammen.",
+        "Das Deckblatt enthält Prüfsummen deiner Exportdatei und jedes Anhangs – so kann jeder nachprüfen, dass nichts verändert wurde.",
       casesEyebrow: "Für ernste Situationen gebaut",
       casesTitle: "Wenn ein Chat zum Beweis wird.",
       casesText:
@@ -1391,7 +1415,7 @@ export const messages = {
         "Öffne den Chat in WhatsApp und wähle „Chat exportieren“. „Ohne Medien“ reicht.",
       step2Title: "Datei ablegen",
       step2Text:
-        "Zieh die .txt- oder .zip-Datei auf whatsanalyze.com. Sie bleibt auf deinem Gerät.",
+        "Zieh die .txt- oder .zip-Datei in das Feld auf dieser Seite. Sie bleibt auf deinem Gerät.",
       step3Title: "PDF herunterladen",
       step3Text:
         "Sieh dir das Dokument kostenlos in der Vorschau an und lade den kompletten Chat als PDF.",
@@ -1514,23 +1538,21 @@ export const messages = {
       heroSubtitle:
         "Für Visumsanträge und Behördentermine: Verwandle euren Chatverlauf in einen klaren Nachweis einer echten, gelebten Beziehung.",
       heroCta: "PDF erstellen",
-      heroNote: "Kostenlose Vorschau · Kein Konto · Kein Upload",
-      mockDays: "Tage",
-      mockMessages: "Nachrichten",
-      mockPeople: "Personen",
+      heroNote: "Kostenlose Vorschau · Kein Konto · Kein Server-Upload",
+      uploadTitle: "Export ablegen. Nachweis herunterladen.",
       statsEyebrow: "Das ganze Bild",
       statsTitle: "Beständigkeit kann man nicht faken.",
       statsText:
         "Behörden achten auf regelmäßigen, natürlichen Kontakt über lange Zeit. Genau das zeigen eure Chat-Statistiken – auf einen Blick.",
       stat1Title: "Nachrichten im Zeitverlauf",
       stat1Text:
-        "Aktivitäts-Charts zeigen Kontakt, Monat für Monat, Jahr für Jahr.",
+        "Eine Aufstellung eurer Nachrichten Monat für Monat zeigt Kontakt, Jahr für Jahr.",
       stat2Title: "Von der ersten bis zur letzten Nachricht",
       stat2Text:
         "Das Dokument zeigt, wann euer Gespräch begann – und dass es nie aufgehört hat.",
       stat3Title: "Beide Seiten schreiben",
       stat3Text:
-        "Statistiken pro Person zeigen einen echten Dialog – keine Einbahnstraße.",
+        "Nachrichtenzahlen pro Person zeigen einen echten Dialog – keine Einbahnstraße.",
       stat4Title: "Dokumentierter Alltag",
       stat4Text:
         "Das vollständige Protokoll zeigt, was keine Urkunde kann: Alltag, Pläne und Fürsorge.",
@@ -1561,7 +1583,7 @@ export const messages = {
         "Öffnet den Chat in WhatsApp und wählt „Chat exportieren“. „Ohne Medien“ reicht.",
       step2Title: "Datei ablegen",
       step2Text:
-        "Zieht die .txt- oder .zip-Datei auf whatsanalyze.com. Sie bleibt auf eurem Gerät.",
+        "Zieht die .txt- oder .zip-Datei in das Feld auf dieser Seite. Sie bleibt auf eurem Gerät.",
       step3Title: "PDF herunterladen",
       step3Text:
         "Seht euch das Dokument kostenlos in der Vorschau an und ladet den kompletten Chat als PDF.",
@@ -1680,14 +1702,27 @@ export const messages = {
       "Chat Beispiel Analyse - Jetzt auch für Gruppen Chats",
     analyzeYourChatLong:
       "Analysiere deinen Chat, decken unbekannte Fakten auf und überraschen deine Freunde mit Einblicken in deine Kommunikation.",
-    didWeMake: "Haben wir dich dazu gebracht 🥳?",
+    donateWithPaypal: "Mit PayPal spenden",
+    didWeMake: "Dein Bild wird erstellt",
     buyUsCoffee:
-      "Kaufe uns einen ☕️ und erhalten deine Ergebnisse kostenlos!!!",
+      "WhatsAnalyze ist kostenlos. Wenn es dir geholfen hat, hält eine Spende es am Laufen.",
     getResults:
       "Du erhältst alle Ergebnisse als Bild, genau wie auf deinem Gerät dargestellt. Die Generierung kann eine Weile dauern.",
     headerTextFeaturesTable: "Eigenschaften und Lösungen der PDF-Export-Tools",
     goToPDF: "Gehe zum PDF-Download",
     downloadPDF: "Den Chat als PDF herunterladen",
+    pdfMediaIncluded: "{found} von {total} Mediendateien enthalten",
+    pdfMediaMissing:
+      "In deinem Export fehlen {missing} der Dateien, auf die der Chat verweist. Das PDF kann sie nur auflisten, nicht zeigen. Um sie aufzunehmen, exportiere den Chat in WhatsApp erneut mit „Medien einbeziehen“.",
+    pdfStyleCourtHint:
+      "Nüchternes Schwarz-Weiß-Protokoll mit Integritäts-Hash, Beweismittelverzeichnis und Unterschriftenfeld – für Gerichte und Behörden.",
+    pdfStyleCourtFeature1:
+      "Nummerierte Zeilen mit exakten Zeitstempeln (JJJJ-MM-TT HH:mm:ss)",
+    pdfStyleCourtFeature2:
+      "SHA-256-Prüfsumme deiner Exportdatei auf dem Deckblatt",
+    pdfStyleCourtFeature3:
+      "Beweismittelverzeichnis mit eigener Prüfsumme je Anhang",
+    pdfStyleCourtFeature4: "Heftrand, „Seite X von Y“ und Unterschriftenfeld",
     fullChat: "Dein vollständiger Chat",
     tabItemiOS1:
       "<span>Auf dem iPhone öffne <b>WhatsApp</b> und den <b>Chat</b> oder <b>Gruppenchat</b>, den Du exportieren möchtest > oben <b>tippe auf</b> den <b>Name</b> des Chats.</span>",
@@ -1860,13 +1895,12 @@ export const messages = {
       "Wir laden deine <span>Bilder</span>, <span>Videos</span> und <span>Dokumente</span>",
     downloadFreePreviewPDF: "Kostenlose <b>PDF-Vorschau</b> herunterladen",
     downloadFullChatPDF: "<b>Vollständiges</b> Chat-PDF herunterladen",
-    popupTitle: "<span>Toll!!</span>",
-    popupSubtitle: "Sie sind nur einen Schritt von Ihrem PDF entfernt!",
+    popupTitle: "Vollständiges PDF freischalten",
+    popupSubtitle: "Einmalzahlung für diesen Chat. Kein Konto, kein Abo.",
     popupInfo:
-      "<b>Indem Sie uns unterstützen</b>, bleibt der Rechner am Laufen 🎉",
+      "Sichere Zahlung über Stripe. Das PDF wird heruntergeladen, sobald die Zahlung bestätigt ist.",
     downloadNow: "Jetzt herunterladen",
-    subscriptionHint:
-      "Sie können hier auch ein <span>Abo</span> für unbegrenzte PDF-Downloads abschließen",
+    subscriptionHint: "PDFs für mehrere Chats? Ein Abo deckt alle ab.",
     openSubscriptionPage: "<span>Aboseite</span> öffnen",
     closeButton: "Schließen",
     pricingTitle: "Wählen Sie Ihren Plan",
@@ -2006,6 +2040,8 @@ export const messages = {
         "Berechne Zeitstempel, Antwortzeiten und Aktivitätsmuster",
       switchFile: "Datei wechseln",
       messagesAnalyzedIn: "{count} Nachrichten • analysiert in {time} ms",
+      messagesRestored:
+        "{count} Nachrichten • aus dieser Sitzung wiederhergestellt",
       dismiss: "Schließen",
     },
     askAiCard: {
@@ -2580,6 +2616,8 @@ export const messages = {
       errorPortalFailed: "No se ha podido abrir el portal de clientes.",
     },
     courtEvidence: {
+      mediaNotLoaded:
+        "Tus archivos multimedia no están cargados: el chat se restauró de esta sesión del navegador, que solo guarda los mensajes. Vuelve a soltar la exportación .zip para que el índice de anexos los incluya y calcule su hash.",
       seoTitle:
         "Chat de WhatsApp como prueba en juicio – PDF limpio | WhatsAnalyze",
       seoDescription:
@@ -2590,7 +2628,9 @@ export const messages = {
       heroSubtitle:
         "Convierte tu exportación de WhatsApp en un PDF limpio y cronológico: cada mensaje, cada remitente, cada marca de tiempo. Creado íntegramente en tu dispositivo.",
       heroCta: "Crear tu PDF",
-      heroNote: "Vista previa gratis · Sin cuenta · Sin subida",
+      heroNote: "Vista previa gratis · Sin cuenta · Sin subida a servidores",
+      exampleBadge: "Documento de ejemplo · Alex y Sam son ficticios",
+      uploadTitle: "Suelta tu exportación. Descarga el PDF.",
       pillar1Title: "Nada sale de tu dispositivo",
       pillar1Text:
         "Tu chat se procesa localmente en tu navegador. Tus mensajes nunca se envían a un servidor.",
@@ -2608,13 +2648,14 @@ export const messages = {
       docCard1Text:
         "Los mensajes aparecen tal y como ocurrieron, del primer día al último.",
       docCard2Title: "Remitente y hora en cada mensaje",
-      docCard2Text: "Cada entrada está atribuida y fechada, minuto a minuto.",
+      docCard2Text:
+        "Cada entrada está numerada, atribuida y fechada al segundo.",
       docCard3Title: "Páginas A4 listas para imprimir",
       docCard3Text:
         "Un PDF paginado, fácil de imprimir, archivar y citar en una audiencia.",
-      docCard4Title: "Estadísticas incluidas",
+      docCard4Title: "Verificable con SHA-256",
       docCard4Text:
-        "Conteos de mensajes y gráficos de actividad resumen años de contacto de un vistazo.",
+        "La portada incluye la huella de tu archivo de exportación y de cada adjunto, para que cualquiera compruebe que nada se ha modificado.",
       casesEyebrow: "Hecho para situaciones serias",
       casesTitle: "Cuando un chat se convierte en prueba.",
       casesText:
@@ -2642,7 +2683,7 @@ export const messages = {
         "En WhatsApp, abre el chat y elige «Exportar chat». «Sin multimedia» está bien.",
       step2Title: "Suelta el archivo",
       step2Text:
-        "Arrastra la exportación .txt o .zip a whatsanalyze.com. Se queda en tu dispositivo.",
+        "Arrastra la exportación .txt o .zip al recuadro de esta página. Se queda en tu dispositivo.",
       step3Title: "Descarga el PDF",
       step3Text:
         "Vista previa gratuita del documento y descarga del chat completo en PDF.",
@@ -2764,23 +2805,21 @@ export const messages = {
       heroSubtitle:
         "Para solicitudes de visado y entrevistas de inmigración: convierte tu historial de chat en una prueba clara de una relación genuina y continua.",
       heroCta: "Crear tu PDF",
-      heroNote: "Vista previa gratis · Sin cuenta · Sin subida",
-      mockDays: "días",
-      mockMessages: "mensajes",
-      mockPeople: "personas",
+      heroNote: "Vista previa gratis · Sin cuenta · Sin subida a servidores",
+      uploadTitle: "Suelta tu exportación. Descarga tu prueba.",
       statsEyebrow: "El panorama completo",
       statsTitle: "Constancia que no se puede falsificar.",
       statsText:
         "Los oficiales buscan contacto regular y natural durante mucho tiempo. Tus estadísticas de chat muestran exactamente eso, de un vistazo.",
       stat1Title: "Mensajes a lo largo del tiempo",
       stat1Text:
-        "Los gráficos de actividad muestran contacto mes a mes, año a año.",
+        "Un recuento de mensajes mes a mes muestra contacto año tras año.",
       stat2Title: "Del primer al último mensaje",
       stat2Text:
         "El documento muestra cuándo empezó vuestra conversación, y que nunca se detuvo.",
       stat3Title: "Ambos lados escribiendo",
       stat3Text:
-        "Las estadísticas por persona muestran un diálogo real, no una calle de un solo sentido.",
+        "Los mensajes por persona muestran un diálogo real, no una calle de un solo sentido.",
       stat4Title: "La vida cotidiana, documentada",
       stat4Text:
         "La transcripción completa muestra lo que ningún certificado puede: rutinas, planes y cuidado diario.",
@@ -2811,7 +2850,7 @@ export const messages = {
         "En WhatsApp, abre el chat y elige «Exportar chat». «Sin multimedia» está bien.",
       step2Title: "Suelta el archivo",
       step2Text:
-        "Arrastra la exportación .txt o .zip a whatsanalyze.com. Se queda en tu dispositivo.",
+        "Arrastra la exportación .txt o .zip al recuadro de esta página. Se queda en tu dispositivo.",
       step3Title: "Descarga el PDF",
       step3Text:
         "Vista previa gratuita del documento y descarga del chat completo en PDF.",
@@ -2919,14 +2958,29 @@ export const messages = {
       "Ejemplo de chat - Ahora también soporta chats de grupo",
     analyzeYourChatLong:
       "Analiza tu chat, desvela datos desconocidos y sorprende a tus amigos con las perspectivas de la conversación de todo el año",
-    didWeMake: "¿Te hemos hecho ir 🥳?",
-    buyUsCoffee: "¡¡¡Cómpranos un ☕️ y obtén tus resultados gratis!!!",
+    donateWithPaypal: "Donar con PayPal",
+    didWeMake: "Estamos creando tu imagen",
+    buyUsCoffee:
+      "WhatsAnalyze es gratuito. Si te ha ayudado, una donación lo mantiene en marcha.",
     getResults:
       "Obtendrá todos los resultados como una imagen exactamente como se presenta en su dispositivo. La generación puede tardar un poco",
     headerTextFeaturesTable:
       "Características y soluciones de las herramientas de exportación de PDF",
     goToPDF: "ir a la descarga del PDF",
     downloadPDF: "Descargue su Chat como PDF",
+    pdfMediaIncluded: "{found} de {total} archivos multimedia incluidos",
+    pdfMediaMissing:
+      "Faltan en tu exportación: {missing} de los archivos a los que se refiere el chat. El PDF puede listarlos, pero no mostrarlos. Para incluirlos, vuelve a exportar el chat en WhatsApp con «Incluir archivos».",
+    pdfStyleCourtHint:
+      "Transcripción sobria en blanco y negro con hash de integridad, índice de anexos y espacio para la firma: para juzgados y autoridades.",
+    pdfStyleCourtFeature1:
+      "Líneas numeradas con marcas de tiempo exactas (AAAA-MM-DD HH:mm:ss)",
+    pdfStyleCourtFeature2:
+      "Huella SHA-256 de tu archivo de exportación en la portada",
+    pdfStyleCourtFeature3:
+      "Índice de anexos con el hash de cada archivo adjunto",
+    pdfStyleCourtFeature4:
+      "Margen para encuadernar, «Página X de Y» y bloque de firma",
     fullChat: "Tu charla completa",
     tabItemiOS1:
       "<span>En el iPhone <b>abre</b> WhatsApp y el <b>chat</b> o <b>chat de grupo</b> que deseas exportar> en la parte superior <b>toca </b> el <b>nombre</b> del chat.</span>",
@@ -3098,12 +3152,13 @@ export const messages = {
       "Cargando tus <span>imágenes</span>, <span>videos</span> y <span>documentos</span>",
     downloadFreePreviewPDF: "Descargar <b>vista previa gratuita</b> del PDF",
     downloadFullChatPDF: "Descargar <b>PDF completo</b> del chat",
-    popupTitle: "<span>¡Genial!</span>",
-    popupSubtitle: "¡Estás a un paso de tu PDF!",
-    popupInfo: "<b>Apoyarnos</b> mantiene la 💻 funcionando 🎉",
+    popupTitle: "Desbloquea el PDF completo",
+    popupSubtitle: "Pago único para este chat. Sin cuenta ni suscripción.",
+    popupInfo:
+      "Pago seguro con Stripe. El PDF se descarga en cuanto se confirma el pago.",
     downloadNow: "Descargar ahora",
     subscriptionHint:
-      "También puedes obtener una <span>suscripción</span> para descargas ilimitadas de PDFs aquí",
+      "¿Necesitas PDFs de más chats? Una suscripción los cubre todos.",
     openSubscriptionPage: "Abrir <span>página de suscripción</span>",
     closeButton: "Cerrar",
     pricingTitle: "Elige tu plan",
@@ -3242,6 +3297,7 @@ export const messages = {
         "Calculando marcas de tiempo, latencias y patrones de actividad",
       switchFile: "Cambiar archivo",
       messagesAnalyzedIn: "{count} mensajes • analizados en {time} ms",
+      messagesRestored: "{count} mensajes • restaurados de esta sesión",
       dismiss: "Cerrar",
     },
     askAiCard: {
@@ -3899,14 +3955,28 @@ export const messages = {
       "Exemplo de bate-papo - Agora também oferece suporte a bate-papos em grupo",
     analyseYourChatLong:
       "Analise seu bate-papo, revele fatos desconhecidos e surpreenda seus amigos com insights sobre conversas de um ano inteiro",
-    didWeMake: "Fizemos você se divertir 🥳?",
-    buyUsCoffee: "Compre-nos um ☕️ e obtenha seus resultados gratuitamente!!!",
+    donateWithPaypal: "Doar com PayPal",
+    didWeMake: "A sua imagem está a ser criada",
+    buyUsCoffee:
+      "O WhatsAnalyze é gratuito. Se ajudou você, uma doação o mantém funcionando.",
     getResults:
       "Você receberá todos os resultados como uma imagem exatamente como apresentada em seu dispositivo. A geração pode demorar um pouco.",
     headerTextFeaturesTable:
       "Recursos e soluções de ferramentas de exportação de PDF",
     goToPDF: "Ir para o download do PDF",
     downloadPDF: "Baixe seu Chat em PDF",
+    pdfMediaIncluded: "{found} de {total} arquivos de mídia incluídos",
+    pdfMediaMissing:
+      "Faltam na sua exportação: {missing} dos arquivos a que a conversa se refere. O PDF pode listá-los, mas não mostrá-los. Para incluí-los, exporte a conversa novamente no WhatsApp com “Incluir mídia”.",
+    pdfStyleCourtHint:
+      "Transcrição sóbria a preto e branco com hash de integridade, índice de anexos e campo de assinatura: para tribunais e autoridades.",
+    pdfStyleCourtFeature1:
+      "Linhas numeradas com data e hora exatas (AAAA-MM-DD HH:mm:ss)",
+    pdfStyleCourtFeature2:
+      "Impressão SHA-256 do seu ficheiro de exportação na capa",
+    pdfStyleCourtFeature3: "Índice de anexos com o hash de cada ficheiro",
+    pdfStyleCourtFeature4:
+      "Margem para encadernação, «Página X de Y» e bloco de assinatura",
     fullChat: "Seu Chat Completo",
     tabItemiOS1:
       "<span>No iPhone <b>abra</b> o WhatsApp e o <b>chat</b> ou <b>grupo de chat</b> que você deseja exportar > no topo <b>toque no</b> nome do chat.</span>",
@@ -4080,12 +4150,14 @@ export const messages = {
       "Carregando suas <span>imagens</span>, <span>vídeos</span> e <span>documentos</span>",
     downloadFreePreviewPDF: "Baixar <b>prévia gratuita</b> do PDF",
     downloadFullChatPDF: "Baixar <b>PDF completo</b> do chat",
-    popupTitle: "<span>Ótimo!!</span>",
-    popupSubtitle: "Você está a um passo do seu PDF!",
-    popupInfo: "<b>Ao nos apoiar</b>, você mantém o computador funcionando 🎉",
+    popupTitle: "Desbloqueie o PDF completo",
+    popupSubtitle:
+      "Pagamento único para esta conversa. Sem conta, sem assinatura.",
+    popupInfo:
+      "Pagamento seguro com Stripe. O PDF é baixado assim que o pagamento for confirmado.",
     downloadNow: "Baixar agora",
     subscriptionHint:
-      "Você também pode obter uma <span>assinatura</span> para PDFs ilimitados aqui",
+      "Precisa de PDFs de mais conversas? Uma assinatura cobre todas.",
     openSubscriptionPage: "Abrir <span>página de assinatura</span>",
     closeButton: "Fechar",
     pricingTitle: "Escolha o Seu Plano",
@@ -4224,6 +4296,7 @@ export const messages = {
         "Calculando horários, tempos de resposta e padrões de inatividade",
       switchFile: "Trocar arquivo",
       messagesAnalyzedIn: "{count} mensagens • analisadas em {time} ms",
+      messagesRestored: "{count} mensagens • restauradas desta sessão",
       dismiss: "Fechar",
     },
     askAiCard: {
@@ -4512,6 +4585,8 @@ export const messages = {
         "Transforme sua conversa em uma retrospectiva interativa para compartilhar com amigos.",
     },
     courtEvidence: {
+      mediaNotLoaded:
+        "Seus arquivos de mídia não estão carregados: a conversa foi restaurada desta sessão do navegador, que guarda apenas as mensagens. Solte a exportação .zip novamente para que o índice de anexos os inclua e calcule o hash.",
       seoTitle:
         "Conversa do WhatsApp como prova judicial – Exportação em PDF limpo | WhatsAnalyze",
       seoDescription:
@@ -4522,7 +4597,10 @@ export const messages = {
       heroSubtitle:
         "Transforme uma exportação do WhatsApp em um PDF cronológico e claro: cada mensagem, cada remetente, cada horário. Gerado diretamente no seu aparelho.",
       heroCta: "Criar seu PDF",
-      heroNote: "Pré-visualização gratuita · Sem cadastro · Sem upload",
+      heroNote:
+        "Pré-visualização gratuita · Sem cadastro · Sem upload para servidores",
+      exampleBadge: "Documento de exemplo · Alex e Sam são fictícios",
+      uploadTitle: "Solte a exportação. Baixe o PDF.",
       pillar1Title: "Nada sai do seu aparelho",
       pillar1Text:
         "Sua conversa é processada localmente no seu navegador. As mensagens nunca são enviadas para um servidor.",
@@ -4541,13 +4619,13 @@ export const messages = {
         "As mensagens aparecem exatamente como ocorreram, do primeiro ao último dia.",
       docCard2Title: "Remetente e horário em cada mensagem",
       docCard2Text:
-        "Identificação clara de quem enviou cada mensagem com data e hora exatas.",
+        "Cada entrada é numerada, com remetente e data e hora exatas ao segundo.",
       docCard3Title: "Estrutura limpa e legível",
       docCard3Text:
         "Sem balões de conversa confusos — um relatório profissional pronto para impressão.",
-      docCard4Title: "Completo e sem lacunas",
+      docCard4Title: "Verificável com SHA-256",
       docCard4Text:
-        "A conversa inteira em um único documento, sem recortes ou omissões.",
+        "A capa traz a impressão digital do arquivo exportado e de cada anexo, para que qualquer pessoa confirme que nada foi alterado.",
       casesEyebrow: "Casos de uso",
       casesTitle: "Para quando você precisa de provas claras.",
       casesText:
@@ -4571,7 +4649,7 @@ export const messages = {
         "Abra a conversa no WhatsApp, toque no nome do contato, selecione 'Exportar conversa' e escolha 'Sem mídia'.",
       step2Title: "Carregar no WhatsAnalyze",
       step2Text:
-        "Solte o arquivo .txt ou .zip exportado diretamente no navegador. O processamento ocorre no seu aparelho.",
+        "Solte o arquivo .txt ou .zip exportado no quadro desta página. O processamento ocorre no seu aparelho.",
       step3Title: "Gerar e baixar o PDF",
       step3Text:
         "Verifique a transcrição cronológica e baixe o documento em PDF formatado para apresentação.",
@@ -4693,17 +4771,16 @@ export const messages = {
       heroSubtitle:
         "Para pedidos de visto e entrevistas de imigração: transforme o histórico da sua conversa em prova clara de um relacionamento genuíno e contínuo.",
       heroCta: "Criar seu PDF",
-      heroNote: "Pré-visualização gratuita · Sem cadastro · Sem upload",
-      mockDays: "dias",
-      mockMessages: "mensagens",
-      mockPeople: "pessoas",
+      heroNote:
+        "Pré-visualização gratuita · Sem cadastro · Sem upload para servidores",
+      uploadTitle: "Solte a exportação. Baixe a sua prova.",
       statsEyebrow: "A visão completa",
       statsTitle: "Consistência que não dá para forjar.",
       statsText:
         "Os agentes consulares buscam contato regular e natural ao longo do tempo. As estatísticas da sua conversa mostram exatamente isso — num relance.",
       stat1Title: "Mensagens ao longo do tempo",
       stat1Text:
-        "Gráficos de atividade mostram contato mês a mês, ano após ano.",
+        "Uma contagem de mensagens mês a mês mostra contato ano após ano.",
       stat2Title: "Da primeira à última mensagem",
       stat2Text:
         "O documento comprova quando a conversa começou — e que nunca parou.",
@@ -4736,7 +4813,7 @@ export const messages = {
         "Abra a conversa do casal, selecione 'Exportar conversa' e escolha 'Sem mídia'.",
       step2Title: "Processar no navegador",
       step2Text:
-        "Solte o arquivo exportado para calcular as linhas do tempo de contato instantaneamente.",
+        "Solte o arquivo exportado no quadro desta página. O processamento ocorre no seu aparelho.",
       step3Title: "Baixar relatório em PDF",
       step3Text:
         "Receba um documento PDF organizado e cronológico pronto para anexar ao seu processo.",
@@ -5141,14 +5218,29 @@ export const messages = {
       "Exemple de chat - Désormais, les chats de groupe sont également pris en charge",
     analyzeYourChatLong:
       "Analysez votre chat, révélez des faits inconnus et surprenez vos amis en leur donnant un aperçu d'une conversation d'un an.",
-    didWeMake: "On t'a fait partir 🥳 ?",
-    buyUsCoffee: "Achetez-nous un ☕️ et obtenez vos résultats gratuitement !!!",
+    donateWithPaypal: "Faire un don avec PayPal",
+    didWeMake: "Votre image est en cours de création",
+    buyUsCoffee:
+      "WhatsAnalyze est gratuit. S'il vous a aidé, un don le fait vivre.",
     getResults:
       "Vous obtiendrez tous les résultats sous la forme d'une image exactement telle qu'elle est présentée sur votre appareil. La génération peut prendre un certain temps.",
     headerTextFeaturesTable:
       "Caractéristiques et solutions des outils d'exportation PDF",
     goToPDF: "Télécharger le PDF",
     downloadPDF: "Téléchargez votre Chat au format PDF",
+    pdfMediaIncluded: "{found} fichiers multimédias sur {total} inclus",
+    pdfMediaMissing:
+      "Absents de votre export : {missing} des fichiers auxquels la discussion fait référence. Le PDF peut les lister, mais pas les montrer. Pour les inclure, exportez à nouveau la discussion dans WhatsApp avec « Inclure les médias ».",
+    pdfStyleCourtHint:
+      "Transcription sobre en noir et blanc avec empreinte d'intégrité, index des pièces et bloc de signature : pour les tribunaux et les administrations.",
+    pdfStyleCourtFeature1:
+      "Lignes numérotées avec horodatage exact (AAAA-MM-JJ HH:mm:ss)",
+    pdfStyleCourtFeature2:
+      "Empreinte SHA-256 de votre fichier d'export sur la page de garde",
+    pdfStyleCourtFeature3:
+      "Index des pièces listant chaque fichier joint avec son empreinte",
+    pdfStyleCourtFeature4:
+      "Marge de reliure, « Page X sur Y » et bloc de signature",
     fullChat: "Votre chat complet",
     tabItemiOS1:
       "<span>Sur l'iPhone, <b>ouvrez</b> WhatsApp et le <b>chat</b> ou le <b>groupe de chat</b> que vous souhaitez exporter > en haut, <b>tapez</b> sur le <b>nom</b> du chat.</span>",
@@ -5322,13 +5414,14 @@ export const messages = {
       "Chargement de vos <span>images</span>, <span>vidéos</span> et <span>documents</span>",
     downloadFreePreviewPDF: "Télécharger un <b>aperçu gratuit</b> du PDF",
     downloadFullChatPDF: "Télécharger le <b>PDF complet</b> de la conversation",
-    popupTitle: "<span>Génial !!</span>",
-    popupSubtitle: "Vous n’êtes plus qu’à un pas de votre PDF !",
+    popupTitle: "Débloquer le PDF complet",
+    popupSubtitle:
+      "Paiement unique pour cette discussion. Sans compte ni abonnement.",
     popupInfo:
-      "<b>En nous soutenant</b>, vous maintenez l’ordinateur en marche 🎉",
+      "Paiement sécurisé avec Stripe. Le PDF se télécharge dès que le paiement est confirmé.",
     downloadNow: "Télécharger maintenant",
     subscriptionHint:
-      "Vous pouvez également souscrire un <span>abonnement</span> pour des PDFs illimités ici",
+      "Besoin de PDF pour d'autres discussions ? Un abonnement les couvre toutes.",
     openSubscriptionPage: "Ouvrir la <span>page d’abonnement</span>",
     closeButton: "Fermer",
     pricingTitle: "Choisissez votre plan",
@@ -5468,6 +5561,7 @@ export const messages = {
         "Calcul des horodatages, temps de réponse et temps d'inactivité",
       switchFile: "Changer de fichier",
       messagesAnalyzedIn: "{count} messages • analysés en {time} ms",
+      messagesRestored: "{count} messages • restaurés depuis cette session",
       dismiss: "Fermer",
     },
     askAiCard: {
@@ -5759,6 +5853,8 @@ export const messages = {
         "Transformez vos échanges en une rétrospective interactive prête à être partagée.",
     },
     courtEvidence: {
+      mediaNotLoaded:
+        "Vos fichiers multimédias ne sont pas chargés : la discussion a été restaurée depuis cette session du navigateur, qui ne conserve que les messages. Déposez à nouveau l'export .zip pour que l'index des pièces les inclue et calcule leur empreinte.",
       seoTitle:
         "Conversation WhatsApp comme preuve en justice – Export PDF clair | WhatsAnalyze",
       seoDescription:
@@ -5769,8 +5865,9 @@ export const messages = {
       heroSubtitle:
         "Transformez votre export WhatsApp en un PDF clair et chronologique : chaque message, chaque expéditeur, chaque horodatage. Créé entièrement sur votre appareil.",
       heroCta: "Créer votre PDF",
-      heroNote:
-        "Aperçu gratuit · Sans inscription · Sans téléchargement serveur",
+      heroNote: "Aperçu gratuit · Sans inscription · Sans envoi sur un serveur",
+      exampleBadge: "Document d'exemple · Alex et Sam sont fictifs",
+      uploadTitle: "Déposez votre export. Téléchargez le PDF.",
       pillar1Title: "Rien ne quitte votre appareil",
       pillar1Text:
         "Votre discussion est traitée localement dans votre navigateur. Vos messages ne sont jamais envoyés sur un serveur.",
@@ -5789,13 +5886,13 @@ export const messages = {
         "Les messages apparaissent exactement dans leur ordre d'envoi, du premier au dernier jour.",
       docCard2Title: "Expéditeur et heure sur chaque message",
       docCard2Text:
-        "Chaque intervention mentionne précisément le nom de l'expéditeur ainsi que la date et l'heure.",
+        "Chaque intervention est numérotée et mentionne l'expéditeur ainsi que la date et l'heure à la seconde près.",
       docCard3Title: "Présentation sobre et lisible",
       docCard3Text:
         "Pas de bulles de discussion encombrantes : une mise en page d'acte prête à être imprimée.",
-      docCard4Title: "Intégral et sans coupure",
+      docCard4Title: "Vérifiable par SHA-256",
       docCard4Text:
-        "Toute la discussion réunie dans un seul document sans omissions ni raccourcis douteux.",
+        "La page de garde contient l'empreinte de votre fichier d'export et de chaque pièce jointe : chacun peut vérifier que rien n'a été modifié.",
       casesEyebrow: "Cas d'usage",
       casesTitle: "Quand vous avez besoin de faits indiscutables.",
       casesText:
@@ -5819,7 +5916,7 @@ export const messages = {
         "Ouvrez la discussion, appuyez sur le nom du contact, choisissez 'Exporter la discussion' et sélectionnez 'Sans médias'.",
       step2Title: "Déposer sur WhatsAnalyze",
       step2Text:
-        "Glissez le fichier .txt ou .zip exporté directement dans votre navigateur. Le traitement s'effectue sur votre appareil.",
+        "Glissez le fichier .txt ou .zip exporté dans le cadre de cette page. Le traitement s'effectue sur votre appareil.",
       step3Title: "Générer et télécharger le PDF",
       step3Text:
         "Vérifiez l'aperçu chronologique et téléchargez votre dossier PDF prêt à être remis à votre avocat ou au juge.",
@@ -5942,17 +6039,15 @@ export const messages = {
       heroSubtitle:
         "Pour vos demandes de visa et entretiens d'immigration : transformez votre historique de chat en une preuve évidente d'une relation sincère et continue.",
       heroCta: "Créer votre PDF",
-      heroNote: "Aperçu gratuit · Sans compte · Aucun téléversement",
-      mockDays: "jours",
-      mockMessages: "messages",
-      mockPeople: "personnes",
+      heroNote: "Aperçu gratuit · Sans compte · Sans envoi sur un serveur",
+      uploadTitle: "Déposez votre export. Téléchargez votre preuve.",
       statsEyebrow: "La vue d'ensemble",
       statsTitle: "Une constance impossible à inventer.",
       statsText:
         "Les officiers d'immigration recherchent des contacts réguliers et naturels sur la durée. Vos statistiques de chat le prouvent d'un coup d'œil.",
       stat1Title: "Échanges au fil du temps",
       stat1Text:
-        "Des graphiques clairs montrent des contacts mois après mois, année après année.",
+        "Un décompte des messages mois par mois montre des contacts année après année.",
       stat2Title: "Du premier au dernier message",
       stat2Text:
         "Le document prouve la date exacte de vos premiers échanges et leur continuité ininterrompue.",
@@ -5985,7 +6080,7 @@ export const messages = {
         "Ouvrez la discussion du couple, choisissez 'Exporter la discussion' et sélectionnez 'Sans médias'.",
       step2Title: "Analyser dans le navigateur",
       step2Text:
-        "Déposez votre fichier pour générer automatiquement la chronologie et les statistiques de contact.",
+        "Déposez votre fichier dans le cadre de cette page. Le traitement s'effectue sur votre appareil.",
       step3Title: "Télécharger le rapport PDF",
       step3Text:
         "Obtenez un document PDF soigné et probant, prêt à être joint à votre dossier d'immigration.",
@@ -6390,14 +6485,28 @@ export const messages = {
       "Esempio di chat - Ora supporta anche le chat di gruppo",
     analyzeYourChatLong:
       "Analizza la tua chat, rivela fatti sconosciuti e sorprendi i tuoi amici con intuizioni su anni di conversazioni.",
-    didWeMake: "Ti abbiamo fatto andare 🥳?",
-    buyUsCoffee: "Offrici un ☕️ e ottieni i tuoi risultati gratuitamente!!!",
+    donateWithPaypal: "Dona con PayPal",
+    didWeMake: "Stiamo creando la tua immagine",
+    buyUsCoffee:
+      "WhatsAnalyze è gratuito. Se ti è stato utile, una donazione lo tiene in vita.",
     getResults:
       "Riceverai tutti i risultati come immagine esattamente come presentati sul tuo dispositivo. La generazione potrebbe richiedere del tempo.",
     headerTextFeaturesTable:
       "Caratteristiche e soluzioni degli strumenti di esportazione PDF",
     goToPDF: "Vai al download PDF",
     downloadPDF: "Scarica la tua chat in PDF",
+    pdfMediaIncluded: "{found} di {total} file multimediali inclusi",
+    pdfMediaMissing:
+      "Mancano nella tua esportazione: {missing} dei file a cui la chat fa riferimento. Il PDF può elencarli, ma non mostrarli. Per includerli, esporta di nuovo la chat in WhatsApp con «Includi media».",
+    pdfStyleCourtHint:
+      "Trascrizione sobria in bianco e nero con hash di integrità, indice degli allegati e spazio per la firma: per tribunali e autorità.",
+    pdfStyleCourtFeature1:
+      "Righe numerate con marche temporali esatte (AAAA-MM-GG HH:mm:ss)",
+    pdfStyleCourtFeature2:
+      "Impronta SHA-256 del file esportato sulla copertina",
+    pdfStyleCourtFeature3: "Indice degli allegati con l'hash di ogni file",
+    pdfStyleCourtFeature4:
+      "Margine per la rilegatura, «Pagina X di Y» e blocco firma",
     fullChat: "L'intera tua chat",
     tabItemiOS1:
       "<span>Su iPhone <b>apri</b> WhatsApp e la <b>chat</b> o <b>chat di gruppo</b> che desideri esportare > in alto <b>tocca</b> il <b>nome</b> della chat.</span>",
@@ -6565,12 +6674,14 @@ export const messages = {
       "Caricamento dei tuoi <span>immagini</span>, <span>video</span> e <span>documenti</span>",
     downloadFreePreviewPDF: "Scarica <b>anteprima gratuita</b> PDF",
     downloadFullChatPDF: "Scarica <b>l'intera chat</b> in PDF",
-    popupTitle: "<span>Fantastico!!</span>",
-    popupSubtitle: "Sei a un passo dal tuo PDF!",
-    popupInfo: "<b>Supportarci</b> mantiene il 💻 funzionante 🎉",
+    popupTitle: "Sblocca il PDF completo",
+    popupSubtitle:
+      "Pagamento unico per questa chat. Nessun account, nessun abbonamento.",
+    popupInfo:
+      "Pagamento sicuro con Stripe. Il PDF si scarica non appena il pagamento è confermato.",
     downloadNow: "Scarica ora",
     subscriptionHint:
-      "Puoi anche ottenere un <span>abbonamento</span> per PDF illimitati qui",
+      "Ti servono PDF di altre chat? Un abbonamento le copre tutte.",
     openSubscriptionPage: "Apri la <span>pagina di abbonamento</span>",
     closeButton: "Chiudi",
     pricingTitle: "Scegli il tuo piano",
@@ -6710,6 +6821,7 @@ export const messages = {
       analyzingSubtitle: "Calcolo di timestamp, tempi di risposta e inattività",
       switchFile: "Cambia file",
       messagesAnalyzedIn: "{count} messaggi • analizzati in {time} ms",
+      messagesRestored: "{count} messaggi • ripristinati da questa sessione",
       dismiss: "Chiudi",
     },
     askAiCard: {
@@ -6998,6 +7110,8 @@ export const messages = {
         "Trasforma la tua chat in una retrospettiva interattiva in stile storia da condividere.",
     },
     courtEvidence: {
+      mediaNotLoaded:
+        "I tuoi file multimediali non sono caricati: la chat è stata ripristinata da questa sessione del browser, che conserva solo i messaggi. Trascina di nuovo l'esportazione .zip perché l'indice degli allegati li includa e ne calcoli l'hash.",
       seoTitle:
         "Chat di WhatsApp come prova legale – Esportazione PDF pulita | WhatsAnalyze",
       seoDescription:
@@ -7008,7 +7122,9 @@ export const messages = {
       heroSubtitle:
         "Trasforma la tua esportazione di WhatsApp in un PDF pulito e cronologico: ogni messaggio, ogni mittente, ogni orario. Creato interamente sul tuo dispositivo.",
       heroCta: "Crea il tuo PDF",
-      heroNote: "Anteprima gratuita · Nessun account · Nessun upload",
+      heroNote: "Anteprima gratuita · Nessun account · Nessun upload su server",
+      exampleBadge: "Documento di esempio · Alex e Sam sono di fantasia",
+      uploadTitle: "Trascina l'esportazione. Scarica il PDF.",
       pillar1Title: "Nulla lascia il tuo dispositivo",
       pillar1Text:
         "La tua chat viene elaborata localmente nel tuo browser. I messaggi non vengono mai inviati a un server.",
@@ -7027,13 +7143,13 @@ export const messages = {
         "I messaggi compaiono esattamente come sono stati inviati, dal primo all'ultimo giorno.",
       docCard2Title: "Mittente e data/ora su ogni messaggio",
       docCard2Text:
-        "Identificazione inequivocabile di chi ha scritto ciascun testo con orario preciso al minuto.",
+        "Ogni voce è numerata, attribuita e con orario preciso al secondo.",
       docCard3Title: "Struttura sobria e leggibile",
       docCard3Text:
         "Senza fumetti caotici: un'impaginazione professionale pronta per la stampa o la produzione in giudizio.",
-      docCard4Title: "Completo e senza omissioni",
+      docCard4Title: "Verificabile con SHA-256",
       docCard4Text:
-        "L'intera conversazione raccolta in un unico documento continuo, senza tagli o frammenti isolati.",
+        "La copertina riporta l'impronta del file esportato e di ogni allegato, così chiunque può verificare che nulla è stato modificato.",
       casesEyebrow: "Casi d'uso",
       casesTitle: "Per quando hai bisogno di prove certe.",
       casesText:
@@ -7057,7 +7173,7 @@ export const messages = {
         "Apri la chat, tocca il nome del contatto in alto, seleziona 'Esporta chat' e scegli 'Senza file multimediali'.",
       step2Title: "Rilascia su WhatsAnalyze",
       step2Text:
-        "Trascina il file .txt o .zip esportato direttamente nel browser. L'elaborazione avverrà sul tuo dispositivo.",
+        "Trascina il file .txt o .zip esportato nel riquadro di questa pagina. L'elaborazione avverrà sul tuo dispositivo.",
       step3Title: "Genera e scarica il PDF",
       step3Text:
         "Verifica l'anteprima cronologica e scarica il documento PDF impaginato per l'avvocato o il giudice.",
@@ -7178,17 +7294,15 @@ export const messages = {
       heroSubtitle:
         "Per domande di visto e colloqui di immigrazione: trasforma la tua chat in una prova inequivocabile di una relazione autentica e continua.",
       heroCta: "Crea il tuo PDF",
-      heroNote: "Anteprima gratuita · Nessun account · Nessun upload",
-      mockDays: "giorni",
-      mockMessages: "messaggi",
-      mockPeople: "persone",
+      heroNote: "Anteprima gratuita · Nessun account · Nessun upload su server",
+      uploadTitle: "Trascina l'esportazione. Scarica la tua prova.",
       statsEyebrow: "Il quadro completo",
       statsTitle: "Una costanza che non si può fingere.",
       statsText:
         "I funzionari cercano contatti regolari e spontanei nel tempo. Le statistiche della tua chat mostrano esattamente questo a prima vista.",
       stat1Title: "Messaggi nel tempo",
       stat1Text:
-        "Grafici di attività mostrano contatti mese dopo mese, anno dopo anno.",
+        "Un conteggio dei messaggi mese per mese mostra contatti anno dopo anno.",
       stat2Title: "Dal primo all'ultimo messaggio",
       stat2Text:
         "Il documento attesta quando è iniziata la conversazione e che non si è mai interrotta.",
@@ -7221,7 +7335,7 @@ export const messages = {
         "Apri la conversazione di coppia, seleziona 'Esporta chat' e scegli 'Senza file multimediali'.",
       step2Title: "Elabora nel browser",
       step2Text:
-        "Rilascia il file per calcolare subito le linee temporali e la frequenza dei contatti.",
+        "Rilascia il file nel riquadro di questa pagina. L'elaborazione avverrà sul tuo dispositivo.",
       step3Title: "Scarica il report PDF",
       step3Text:
         "Ottieni un documento PDF accurato e professionale pronto per la pratica di immigrazione.",

@@ -1,6 +1,7 @@
 import { parseString } from "whatsapp-chat-parser";
 import JSZip from "jszip";
 import { markSystemMessages } from "~/utils/systemMessages";
+import { sha256Hex } from "~/utils/courtEvidence";
 export interface ChatMessage {
   date: Date;
   author: string;
@@ -76,6 +77,7 @@ export interface SharedChatState {
   messages: ChatMessage[];
   attachments: ChatAttachment[];
   sourceName?: string;
+  source?: ChatSource;
 }
 
 export const useSharedChat = () => {
@@ -95,6 +97,38 @@ export interface ParsedChat {
   messages: ChatMessage[];
   attachments: ChatAttachment[];
   durationMs: number;
+  /** Identifies the uploaded file for the court evidence PDF. */
+  source?: ChatSource;
+}
+
+export interface ChatSource {
+  name: string;
+  size: number;
+  sha256: string | null;
+}
+
+/**
+ * SHA-256 over the bytes the user handed us, so the court evidence PDF can
+ * state a fingerprint the recipient reproduces with `shasum -a 256`.
+ */
+async function fingerprint(
+  file: File,
+  bytes?: ArrayBuffer,
+): Promise<ChatSource> {
+  try {
+    return {
+      name: file.name,
+      size: file.size,
+      sha256: await sha256Hex(
+        new Uint8Array(bytes || (await file.arrayBuffer())),
+      ),
+    };
+  } catch (err) {
+    // Losing the fingerprint only costs the court PDF its strongest hash;
+    // it must never stop someone from analysing their chat.
+    console.warn("Could not fingerprint the uploaded file:", err);
+    return { name: file.name, size: file.size, sha256: null };
+  }
 }
 
 /** Names a file the way WhatsApp names its chat export. */
@@ -176,9 +210,11 @@ export async function parseChatFile(
   const done = (
     messages: ChatMessage[],
     attachments: ChatAttachment[] = [],
+    source?: ChatSource,
   ): ParsedChat => ({
     messages,
     attachments,
+    source,
     durationMs: Math.round(performance.now() - startTime),
   });
 
@@ -187,7 +223,11 @@ export async function parseChatFile(
   }
 
   if (!isZipFile(fileOrText)) {
-    return done(await parseChatText(await fileOrText.text()));
+    return done(
+      await parseChatText(await fileOrText.text()),
+      [],
+      await fingerprint(fileOrText),
+    );
   }
 
   const arrayBuffer = await fileOrText.arrayBuffer();
@@ -203,7 +243,11 @@ export async function parseChatFile(
     .filter((f) => !f.dir && !f.name.toLowerCase().endsWith(".txt"))
     .map((f) => ({ name: f.name, zipEntry: f }));
 
-  return done(messages, attachments);
+  return done(
+    messages,
+    attachments,
+    await fingerprint(fileOrText, arrayBuffer),
+  );
 }
 
 /**
@@ -240,6 +284,7 @@ export async function parseSharedFiles(
   return {
     messages,
     attachments,
+    source: await fingerprint(chatFile),
     durationMs: Math.round(performance.now() - startTime),
   };
 }

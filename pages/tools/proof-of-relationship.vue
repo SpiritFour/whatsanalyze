@@ -7,15 +7,17 @@
       :title="t('relationshipProof.heroTitle')"
       :subtitle="t('relationshipProof.heroSubtitle')"
       :cta-text="t('relationshipProof.heroCta')"
-      :cta-to="analyzerPath"
+      cta-to="#dropzone-slot"
       :note="t('relationshipProof.heroNote')"
       @click="trackHeroCta"
     >
-      :days-label="t('relationshipProof.mockDays')"
-      :messages-label="t('relationshipProof.mockMessages')"
-      :people-label="t('relationshipProof.mockPeople')"
-      :example-label="t('exampleDataLabel')" />
+      <LandingDocMock :caption="t('courtEvidence.exampleBadge')" />
     </LandingHero>
+
+    <CourtPdfSection
+      :title="t('relationshipProof.uploadTitle')"
+      checkout-source="proof_of_relationship_pdf"
+    />
 
     <LandingSection
       theme="light"
@@ -58,7 +60,7 @@
     <LandingCta
       :title="t('relationshipProof.ctaTitle')"
       :cta-text="t('relationshipProof.ctaButton')"
-      :cta-to="analyzerPath"
+      cta-to="#dropzone-slot"
       :note="t('relationshipProof.ctaNote')"
       :disclaimer="t('relationshipProof.disclaimer')"
       @click="trackBottomCta"
@@ -69,18 +71,21 @@
 <script>
 import { ONE_TIME_PRICE, formatPrice } from "~/utils/pricing";
 import { analyticsTools } from "~/composables/useAnalytics";
+import CourtPdfSection from "~/components/tools/CourtPdfSection.vue";
 
 export default {
+  components: { CourtPdfSection },
   setup() {
     const { t, locale } = useI18n();
     const localePath = useLocalePath();
 
     function trackHeroCta() {
-      analyticsTools.ctaClick("proof_of_relationship", "hero_analyzer");
+      analyticsTools.ctaClick("proof_of_relationship", "hero_dropzone");
     }
 
     function trackBottomCta() {
-      analyticsTools.ctaClick("proof_of_relationship", "full_analyzer");
+      scrollToDropzone();
+      analyticsTools.ctaClick("proof_of_relationship", "scroll_to_dropzone");
     }
     useSeoMeta({
       title: () => t("relationshipProof.seoTitle"),
@@ -150,12 +155,6 @@ export default {
     return {
       t,
       breadcrumbs,
-      // These pages carry no dropzone of their own, so the CTA has to
-      // land on the analyzer's upload area rather than the top of the
-      // homepage — step 2 tells people to drop a file there.
-      analyzerPath: computed(() =>
-        localePath({ path: "/", hash: "#dropzone-slot" }),
-      ),
       exportGuidePath: computed(() =>
         localePath("how-to-export-your-whatsapp-chat"),
       ),

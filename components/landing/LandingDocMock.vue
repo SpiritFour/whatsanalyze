@@ -1,277 +1,91 @@
 <template>
-  <div class="doc-mock" aria-hidden="true">
-    <div class="doc-mock__sheet doc-mock__sheet--back"></div>
-    <div class="doc-mock__sheet">
-      <div class="doc-mock__header">
-        <span class="doc-mock__kicker">{{ content.kicker }}</span>
-        <span class="doc-mock__meta">{{ content.metaParticipants }}</span>
-        <span class="doc-mock__meta">{{ content.metaDateRange }}</span>
+  <!-- Two pages of the court transcript (utils/pdfCourt.ts) as they print:
+       the cover's integrity record behind a page of the transcript. English
+       in every locale, like the PDF itself. -->
+  <figure class="doc-mock">
+    <div aria-hidden="true">
+      <div class="doc-mock__sheet doc-mock__sheet--back">
+        <div class="doc-mock__running">
+          <span>WhatsApp chat transcript — Alex, Sam</span>
+          <span>SHA-256 4f2a91c0e7d3b58a…</span>
+        </div>
+        <p class="doc-mock__title">WhatsApp chat transcript</p>
+        <p class="doc-mock__heading">
+          1. Document integrity &amp; audit record
+        </p>
+        <dl class="doc-mock__record">
+          <template v-for="[label, value] in record" :key="label">
+            <dt>{{ label }}</dt>
+            <dd>{{ value }}</dd>
+          </template>
+        </dl>
       </div>
-      <div class="doc-mock__divider">{{ content.dividerDate }}</div>
-      <div
-        v-for="row in content.rows"
-        :key="row.time + row.text"
-        class="doc-mock__row"
-      >
-        <span class="doc-mock__time">{{ row.time }}</span>
-        <span class="doc-mock__body">
-          <span class="doc-mock__name">{{ row.name }}</span>
-          {{ row.text }}
-        </span>
-      </div>
-      <div class="doc-mock__footer">
-        <span>whatsanalyze.com</span>
-        <span>{{ content.pageText }}</span>
+
+      <div class="doc-mock__sheet">
+        <div class="doc-mock__running">
+          <span>WhatsApp chat transcript — Alex, Sam</span>
+          <span>SHA-256 4f2a91c0e7d3b58a…</span>
+        </div>
+        <p class="doc-mock__heading">4. Transcript</p>
+        <div class="doc-mock__row doc-mock__row--head">
+          <span>No.</span>
+          <span>Date &amp; time</span>
+          <span>Sender</span>
+          <span>Message</span>
+        </div>
+        <div v-for="row in rows" :key="row[0]" class="doc-mock__row">
+          <span>{{ row[0] }}</span>
+          <span>{{ row[1] }}</span>
+          <span class="doc-mock__sender">{{ row[2] }}</span>
+          <span>{{ row[3] }}</span>
+        </div>
+        <div class="doc-mock__footer">
+          <span>Generated client-side with whatsanalyze.com</span>
+          <span>Page 3 of 24</span>
+        </div>
       </div>
     </div>
-  </div>
+    <figcaption class="doc-mock__caption mono-label">{{ caption }}</figcaption>
+  </figure>
 </template>
 
 <script>
 export default {
   name: "LandingDocMock",
-  computed: {
-    content() {
-      const locale = this.$i18n?.locale || "en";
-      const translations = {
-        de: {
-          kicker: "Chat-Protokoll",
-          metaParticipants: "WhatsApp-Export · 2 Teilnehmer",
-          metaDateRange: "26. Aug. 2019 – 16. Feb. 2021 · 537 Nachrichten",
-          dividerDate: "14. Jan. 2021",
-          pageText: "Seite 3 von 24",
-          rows: [
-            {
-              time: "09:14",
-              name: "Alex",
-              text: "Hast du meine Nachrichten von gestern bekommen?",
-            },
-            {
-              time: "09:16",
-              name: "Sam",
-              text: "Ja, alle. Ich habe alles aufgehoben.",
-            },
-            {
-              time: "09:17",
-              name: "Alex",
-              text: "Gut. Die brauchen wir vielleicht noch.",
-            },
-            {
-              time: "12:02",
-              name: "Sam",
-              text: "Ich habe heute früh den ganzen Chat exportiert.",
-            },
-            {
-              time: "12:05",
-              name: "Alex",
-              text: "Jede Nachricht, mit Datum und Uhrzeit.",
-            },
-            {
-              time: "12:06",
-              name: "Sam",
-              text: "Genau. Schwarz auf weiß.",
-            },
-          ],
-        },
-        es: {
-          kicker: "Transcripción del chat",
-          metaParticipants: "Exportación de WhatsApp · 2 participantes",
-          metaDateRange: "26 ago 2019 – 16 feb 2021 · 537 mensajes",
-          dividerDate: "14 ene 2021",
-          pageText: "Página 3 de 24",
-          rows: [
-            {
-              time: "09:14",
-              name: "Alex",
-              text: "¿Recibiste mis mensajes de ayer?",
-            },
-            {
-              time: "09:16",
-              name: "Sam",
-              text: "Sí, todos. Lo guardé todo.",
-            },
-            {
-              time: "09:17",
-              name: "Alex",
-              text: "Bien. Quizás los necesitemos más tarde.",
-            },
-            {
-              time: "12:02",
-              name: "Sam",
-              text: "Exporté todo el chat esta mañana.",
-            },
-            {
-              time: "12:05",
-              name: "Alex",
-              text: "Cada mensaje, con fecha y hora.",
-            },
-            {
-              time: "12:06",
-              name: "Sam",
-              text: "Exacto. En blanco y negro.",
-            },
-          ],
-        },
-        fr: {
-          kicker: "Transcription du chat",
-          metaParticipants: "Export WhatsApp · 2 participants",
-          metaDateRange: "26 août 2019 – 16 févr. 2021 · 537 messages",
-          dividerDate: "14 janv. 2021",
-          pageText: "Page 3 sur 24",
-          rows: [
-            {
-              time: "09:14",
-              name: "Alex",
-              text: "Tu as reçu mes messages d'hier ?",
-            },
-            {
-              time: "09:16",
-              name: "Sam",
-              text: "Oui, tous. J'ai tout gardé.",
-            },
-            {
-              time: "09:17",
-              name: "Alex",
-              text: "Bien. On en aura peut-être besoin plus tard.",
-            },
-            {
-              time: "12:02",
-              name: "Sam",
-              text: "J'ai exporté tout le chat ce matin.",
-            },
-            {
-              time: "12:05",
-              name: "Alex",
-              text: "Chaque message, avec date et heure.",
-            },
-            {
-              time: "12:06",
-              name: "Sam",
-              text: "Exactement. Noir sur blanc.",
-            },
-          ],
-        },
-        pt: {
-          kicker: "Transcrição da conversa",
-          metaParticipants: "Exportação do WhatsApp · 2 participantes",
-          metaDateRange:
-            "26 de ago. de 2019 – 16 de fev. de 2021 · 537 mensagens",
-          dividerDate: "14 de jan. de 2021",
-          pageText: "Página 3 de 24",
-          rows: [
-            {
-              time: "09:14",
-              name: "Alex",
-              text: "Você recebeu minhas mensagens de ontem?",
-            },
-            {
-              time: "09:16",
-              name: "Sam",
-              text: "Sim, todas. Guardei tudo.",
-            },
-            {
-              time: "09:17",
-              name: "Alex",
-              text: "Ótimo. Podemos precisar delas mais tarde.",
-            },
-            {
-              time: "12:02",
-              name: "Sam",
-              text: "Exporteirei toda a conversa hoje cedo.",
-            },
-            {
-              time: "12:05",
-              name: "Alex",
-              text: "Cada mensagem, com data e hora.",
-            },
-            {
-              time: "12:06",
-              name: "Sam",
-              text: "Exato. Preto no branco.",
-            },
-          ],
-        },
-        it: {
-          kicker: "Trascrizione della chat",
-          metaParticipants: "Esportazione WhatsApp · 2 partecipanti",
-          metaDateRange: "26 ago 2019 – 16 feb 2021 · 537 messaggi",
-          dividerDate: "14 gen 2021",
-          pageText: "Pagina 3 di 24",
-          rows: [
-            {
-              time: "09:14",
-              name: "Alex",
-              text: "Hai ricevuto i miei messaggi di ieri?",
-            },
-            {
-              time: "09:16",
-              name: "Sam",
-              text: "Sì, tutti. Ho tenuto tutto.",
-            },
-            {
-              time: "09:17",
-              name: "Alex",
-              text: "Bene. Potrebbero servirci più tardi.",
-            },
-            {
-              time: "12:02",
-              name: "Sam",
-              text: "Ho esportato tutta la chat stamattina.",
-            },
-            {
-              time: "12:05",
-              name: "Alex",
-              text: "Ogni messaggio, con data e ora.",
-            },
-            {
-              time: "12:06",
-              name: "Sam",
-              text: "Esatto. Nero su bianco.",
-            },
-          ],
-        },
-        en: {
-          kicker: "Chat Transcript",
-          metaParticipants: "WhatsApp export · 2 participants",
-          metaDateRange: "Aug 26, 2019 – Feb 16, 2021 · 537 messages",
-          dividerDate: "Jan 14, 2021",
-          pageText: "Page 3 of 24",
-          rows: [
-            {
-              time: "09:14",
-              name: "Alex",
-              text: "Did you get my messages yesterday?",
-            },
-            {
-              time: "09:16",
-              name: "Sam",
-              text: "Yes, all of them. I kept everything.",
-            },
-            {
-              time: "09:17",
-              name: "Alex",
-              text: "Good. We might need them later.",
-            },
-            {
-              time: "12:02",
-              name: "Sam",
-              text: "I exported the whole chat this morning.",
-            },
-            {
-              time: "12:05",
-              name: "Alex",
-              text: "Every message, with date and time.",
-            },
-            {
-              time: "12:06",
-              name: "Sam",
-              text: "Exactly. In black and white.",
-            },
-          ],
-        },
-      };
-      return translations[locale] || translations.en;
-    },
+  props: {
+    caption: { type: String, required: true },
+  },
+  data() {
+    return {
+      record: [
+        ["Source file", "WhatsApp Chat with Sam.zip"],
+        ["SHA-256", "4f2a91c0 e7d3b58a 0c6e1f92 d84b7a35"],
+        ["Transcript period", "2019-08-26 to 2021-02-16"],
+        ["Messages", "537 (including 4 system notices)"],
+      ],
+      rows: [
+        ["0412", "2021-01-14 09:14:02", "Alex", "Did you get my messages?"],
+        ["0413", "2021-01-14 09:16:47", "Sam", "Yes, all of them."],
+        [
+          "0414",
+          "2021-01-14 09:17:05",
+          "[SYSTEM]",
+          "Alex changed their phone number.",
+        ],
+        [
+          "0415",
+          "2021-01-14 12:02:31",
+          "Sam",
+          "<attached: 00000415-PHOTO.jpg> [Exhibit A-07]",
+        ],
+        [
+          "0416",
+          "2021-01-14 12:05:12",
+          "Alex",
+          "Every message, to the second.",
+        ],
+      ],
+    };
   },
 };
 </script>
@@ -280,86 +94,134 @@ export default {
 .doc-mock {
   position: relative;
   max-width: 520px;
-  margin: 0 auto;
+  margin: 2.5rem auto 0;
+  padding: 3.5rem 0 1rem;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.doc-mock__caption {
+  margin-top: 1.6rem;
+  text-align: center;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(245, 245, 247, 0.5);
+}
+
+@media (min-width: 1000px) {
+  .doc-mock {
+    margin-top: 0;
+  }
 }
 
 .doc-mock__sheet {
   position: relative;
   background: #ffffff;
   color: #1d1d1f;
-  border-radius: 14px;
-  padding: clamp(1.6rem, 4vw, 2.6rem);
+  border-radius: 6px;
+  padding: clamp(1.1rem, 3vw, 1.6rem);
   text-align: left;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+  transform: rotate(-1.5deg);
 
   &--back {
     position: absolute;
-    inset: 0;
-    transform: rotate(-3deg) translateY(10px);
-    background: rgba(255, 255, 255, 0.35);
-    box-shadow: none;
+    top: 0;
+    left: 8%;
+    right: -4%;
+    transform: rotate(2.5deg);
+    background: #f4f4f4;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
   }
 }
 
-.doc-mock__header {
+.doc-mock__running {
   display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  border-bottom: 2px solid #1d1d1f;
-  padding-bottom: 0.9rem;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid rgba(29, 29, 31, 0.25);
+  font-size: 0.6rem;
+  color: rgba(29, 29, 31, 0.55);
 }
 
-.doc-mock__kicker {
+.doc-mock__title {
+  margin: 0.9rem 0 0;
   font-size: 0.95rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
-.doc-mock__meta {
-  font-size: 0.75rem;
-  color: rgba(29, 29, 31, 0.6);
+.doc-mock__heading {
+  margin: 0.8rem 0 0.4rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
-.doc-mock__divider {
-  margin: 1.1rem 0 0.7rem;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(29, 29, 31, 0.45);
+.doc-mock__record {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.15rem 1rem;
+  margin: 0;
+  font-size: 0.66rem;
+
+  dt {
+    color: rgba(29, 29, 31, 0.55);
+  }
+
+  dd {
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+  }
 }
 
 .doc-mock__row {
-  display: flex;
-  gap: 0.8rem;
-  padding: 0.35rem 0;
-  font-size: 0.85rem;
-  line-height: 1.45;
-}
-
-.doc-mock__time {
-  flex-shrink: 0;
+  display: grid;
+  grid-template-columns: 2.2rem 7.6rem 3.6rem 1fr;
+  gap: 0.5rem;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid rgba(29, 29, 31, 0.08);
+  font-size: 0.68rem;
+  line-height: 1.4;
   font-variant-numeric: tabular-nums;
-  color: rgba(29, 29, 31, 0.45);
+
+  &--head {
+    font-weight: 700;
+    border-bottom-color: rgba(29, 29, 31, 0.4);
+  }
+
+  > span:nth-child(-n + 2) {
+    color: rgba(29, 29, 31, 0.6);
+  }
 }
 
-.doc-mock__name {
+.doc-mock__sender {
   font-weight: 700;
-  margin-right: 0.35rem;
-
-  &::after {
-    content: ":";
-  }
 }
 
 .doc-mock__footer {
   display: flex;
   justify-content: space-between;
-  margin-top: 1.3rem;
-  padding-top: 0.8rem;
-  border-top: 1px solid rgba(29, 29, 31, 0.15);
-  font-size: 0.72rem;
-  color: rgba(29, 29, 31, 0.45);
+  gap: 1rem;
+  margin-top: 0.9rem;
+  font-size: 0.6rem;
+  color: rgba(29, 29, 31, 0.5);
+}
+
+@media (max-width: 480px) {
+  .doc-mock__row {
+    grid-template-columns: 2rem 1fr;
+
+    > span:not(:first-child) {
+      grid-column: 2;
+    }
+  }
+
+  .doc-mock__row--head {
+    display: none;
+  }
 }
 </style>
