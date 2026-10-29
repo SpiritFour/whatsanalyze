@@ -1,7 +1,11 @@
 import jsPDF from "jspdf";
 
 import "~/utils/pdfFont";
-import { AttachmentSource, getAttachmentBytes } from "~/utils/attachments";
+import {
+  Attachment,
+  AttachmentSource,
+  getAttachment,
+} from "~/utils/attachments";
 import {
   buildCanonicalTranscript,
   buildMonthlyCounts,
@@ -51,8 +55,9 @@ const COL_W = {
 /**
  * Renders the chat as a sober, high-contrast transcript for courts and
  * authorities: numbered lines, exact timestamps, SHA-256 fingerprints, an
- * exhibit index and a signature page. Everything is grayscale so it survives
- * photocopying, scanning and monochrome printing.
+ * exhibit index with the images themselves, and a signature page. Everything
+ * but those images is grayscale so it survives photocopying, scanning and
+ * monochrome printing.
  */
 export async function renderCourtEvidence(
   chat: any,
@@ -363,10 +368,15 @@ export async function renderCourtEvidence(
   });
 
   //   ----- ANNEX A: MEDIA EXHIBITS
+  // images to reproduce after the index, by exhibit label
+  const images = new Map<string, Attachment>();
   if (exhibits.length) {
     for (let index = 0; index < exhibits.length; index++) {
       const exhibit = exhibits[index];
-      const bytes = await getAttachmentBytes(exhibit.fileName, attachments);
+      const attachment = await getAttachment(exhibit.fileName, attachments);
+      const bytes = attachment.src;
+      if (attachment.mimeTypeData.renderInPDF)
+        images.set(exhibit.label, attachment);
       if (bytes) {
         exhibit.size = bytes.length;
         exhibit.sha256 = await sha256Hex(bytes);
@@ -388,7 +398,8 @@ export async function renderCourtEvidence(
         '"not contained in the export" means the chat text refers to a file that ' +
         "the export did not include — most often because it was exported without media. " +
         '"not loaded" means the export contains the file, but it was not available when ' +
-        "this document was generated, so it could not be hashed.",
+        "this document was generated, so it could not be hashed. JPEG and PNG images are " +
+        "reproduced after the index; other media is listed only.",
       8.5,
       90,
     );
@@ -451,6 +462,60 @@ export async function renderCourtEvidence(
       y += height;
       rowRule();
     });
+
+    // The photos themselves, as contained in the export: JPEGs are embedded
+    // byte for byte, so the image in the PDF is the file the hash identifies.
+    if (images.size) {
+      newPage();
+      heading("Annex A — exhibit images");
+      const maxHeight = 115;
+      exhibits.forEach((exhibit) => {
+        const image = images.get(exhibit.label);
+        if (!image?.src || !image.width || !image.height) return;
+        const scale = Math.min(
+          CONTENT_W / image.width,
+          maxHeight / image.height,
+        );
+        const width = image.width * scale;
+        const height = image.height * scale;
+        ensure(LINE * 2 + height + 8);
+
+        setFont(META_SIZE, "bold");
+        doc.text(exhibit.label, MARGIN_LEFT, y);
+        setFont(META_SIZE, "normal", 90);
+        // one line: the index above has the full details
+        const caption = doc.splitTextToSize(
+          `line ${String(exhibit.lineNumber).padStart(4, "0")} · ${exhibit.timestamp} · ${exhibit.sender} · ${exhibit.fileName}`,
+          CONTENT_W - 14,
+        )[0];
+        doc.text(caption, MARGIN_LEFT + 14, y);
+        y += LINE * 0.6;
+        try {
+          doc.addImage(
+            image.src,
+            image.mimeTypeData.mimeTypeEnding === "png" ? "PNG" : "JPEG",
+            MARGIN_LEFT,
+            y,
+            width,
+            height,
+          );
+        } catch (error) {
+          // a file the PDF cannot embed must not cost the whole document
+          console.error(
+            "Could not embed exhibit image",
+            exhibit.fileName,
+            error,
+          );
+          setFont(META_SIZE, "normal", 90);
+          doc.text(
+            "This image could not be reproduced.",
+            MARGIN_LEFT,
+            y + LINE,
+          );
+        }
+        y += height + 8;
+      });
+    }
   }
 
   //   ----- ANNEX B: MESSAGES PER MONTH

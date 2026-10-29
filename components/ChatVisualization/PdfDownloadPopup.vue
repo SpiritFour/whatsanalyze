@@ -7,8 +7,7 @@
          made from and the button on the right. -->
     <div
       :class="
-        court &&
-        'grid gap-8 text-left md:grid-cols-[1.15fr_1fr] md:items-center'
+        court && 'grid gap-8 text-left md:grid-cols-[1.15fr_1fr] md:items-start'
       "
     >
       <div>
@@ -76,7 +75,21 @@
               {{ line }}
             </dd>
           </template>
+          <template v-if="media.total">
+            <dt class="sr-only">Media</dt>
+            <dd class="m-0 mt-4 font-sans text-sm text-wa-ink">
+              {{ $t("pdfMediaIncluded", media) }}
+            </dd>
+          </template>
         </dl>
+        <!-- Before anyone pays: a chat exported without media gives a PDF
+             that can list its photos but not show them. -->
+        <p
+          v-if="court && media.found < media.total"
+          class="m-0 mt-3 rounded-token bg-[rgba(217,119,6,0.08)] p-4 text-left text-sm leading-relaxed text-wa-ink"
+        >
+          {{ $t("pdfMediaMissing", { missing: media.total - media.found }) }}
+        </p>
 
         <!-- Building the PDF takes a while on a long chat, so say what is
          happening: first while the media is still being read, then with a
@@ -136,20 +149,24 @@
               </UiButton>
             </template>
 
-            <v-card class="wa-scope overflow-hidden rounded-token-lg">
-              <!-- Popup title + subtitle -->
-              <div class="bg-wa-accent px-6 py-5 text-white">
-                <p class="m-0 text-xl font-bold" v-html="$t('popupTitle')"></p>
-                <p
-                  class="m-0 mt-1 text-sm opacity-90"
-                  v-html="$t('popupSubtitle')"
-                ></p>
-              </div>
+            <v-card class="wa-scope relative rounded-token-lg">
+              <button
+                type="button"
+                class="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full text-lg text-wa-ink-faint hover:bg-[rgba(29,29,31,0.06)] hover:text-wa-ink"
+                :aria-label="$t('closeButton')"
+                @click="showDownloadPopup = false"
+              >
+                ✕
+              </button>
 
-              <div class="px-6 py-5 text-center">
+              <div class="px-7 pb-7 pt-7 text-left">
+                <h3
+                  class="m-0 pr-8 text-xl font-bold text-wa-ink"
+                  v-html="$t('popupTitle')"
+                ></h3>
                 <p
-                  class="m-0 text-sm font-semibold text-wa-ink"
-                  v-html="$t('popupInfo')"
+                  class="m-0 mt-1 text-sm text-wa-ink-muted"
+                  v-html="$t('popupSubtitle')"
                 ></p>
 
                 <div v-if="isLoading" class="loading my-4" />
@@ -158,7 +175,8 @@
                 <UiButton
                   v-if="hasFullAccess"
                   size="lg"
-                  class="mt-5"
+                  class="mt-6"
+                  block
                   @click="downloadFull"
                 >
                   <span v-html="$t('downloadNow')"></span>
@@ -166,44 +184,46 @@
 
                 <!-- Payment section if the full PDF is not unlocked yet -->
                 <template v-else>
+                  <div
+                    class="mt-6 flex items-baseline justify-between gap-4 border-0 border-y border-solid border-[rgba(29,29,31,0.08)] py-4"
+                  >
+                    <span class="text-sm font-semibold text-wa-ink">
+                      {{ $t("oneTimeTitle") }}
+                    </span>
+                    <span class="whitespace-nowrap">
+                      <s class="mr-2 text-sm text-wa-ink-faint">{{
+                        oneTimeListPrice
+                      }}</s>
+                      <strong class="text-2xl text-wa-ink">{{
+                        oneTimePrice
+                      }}</strong>
+                    </span>
+                  </div>
+
                   <UiButton
                     size="lg"
                     class="mt-5"
+                    block
                     :loading="isOneTimeLoading"
                     @click="payOneTimeStripe"
                   >
                     <IconCard v-if="!isOneTimeLoading" />
                     <span>{{ $t("chooseOneTime") }} ({{ oneTimePrice }})</span>
                   </UiButton>
+                  <p
+                    class="m-0 mt-3 text-center text-xs text-wa-ink-faint"
+                    v-html="$t('popupInfo')"
+                  ></p>
 
                   <div
-                    class="mt-5 rounded-token bg-[rgba(33,166,141,0.08)] p-4 text-sm text-wa-ink-muted"
+                    class="mt-6 flex flex-wrap items-center justify-between gap-3 border-0 border-t border-solid border-[rgba(29,29,31,0.08)] pt-5 text-sm text-wa-ink-muted"
                   >
                     <span v-html="$t('subscriptionHint')"></span>
-                    <UiButton
-                      :to="subscribeLink"
-                      variant="secondary"
-                      size="sm"
-                      class="mt-3"
-                      block
-                    >
+                    <UiButton :to="subscribeLink" variant="secondary" size="sm">
                       <span v-html="$t('openSubscriptionPage')"></span>
                     </UiButton>
                   </div>
                 </template>
-              </div>
-
-              <!-- Close button -->
-              <div
-                class="flex justify-end border-0 border-t border-solid border-[rgba(29,29,31,0.08)] px-4 py-3"
-              >
-                <UiButton
-                  variant="danger"
-                  size="sm"
-                  @click="showDownloadPopup = false"
-                >
-                  <span v-html="$t('closeButton')"></span>
-                </UiButton>
               </div>
             </v-card>
           </v-dialog>
@@ -377,6 +397,18 @@ export default {
         `${messages.length.toLocaleString()} ${this.$t("messages")}`,
         messages.length && `${day(messages[0])} – ${day(messages.at(-1))}`,
       ].filter(Boolean);
+    },
+    /** Files the chat refers to, and how many of them the upload contains. */
+    media() {
+      const names = new Set(
+        (toRaw(this.chat).chatObject || [])
+          .map((message) => message.attachment?.fileName)
+          .filter(Boolean),
+      );
+      const found = [...names].filter((name) =>
+        this.attachments.some((file) => file.name.includes(name)),
+      ).length;
+      return { found, total: names.size };
     },
     sourceHashLines() {
       return formatHash(this.source?.sha256, 2);

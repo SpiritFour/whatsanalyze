@@ -427,6 +427,9 @@ export const messages = {
     headerTextFeaturesTable: "Features & Solutions  of PDF export tools",
     goToPDF: "Go to PDF download",
     downloadPDF: "Download your Chat as PDF",
+    pdfMediaIncluded: "{found} of {total} media files included",
+    pdfMediaMissing:
+      "Missing from your export: {missing} of the files this chat refers to. The PDF can list them but not show them. To include them, export the chat again in WhatsApp with “Include media”.",
     pdfStyleCourtHint:
       "Sober black-and-white transcript with integrity hash, exhibit index and signature page — made for courts and authorities.",
     pdfStyleCourtFeature1:
@@ -603,12 +606,14 @@ export const messages = {
       "Loading your <span>images</span>, <span>videos</span> and <span>documents</span>",
     downloadFreePreviewPDF: "Download <b>free preview</b> PDF",
     downloadFullChatPDF: "Download <b>full chat</b> PDF",
-    popupTitle: "<span>Nice!!</span>",
-    popupSubtitle: "You are just a step away from your PDF!",
-    popupInfo: "<b>Supporting us</b> keeps the 💻 running 🎉",
+    popupTitle: "Unlock the full PDF",
+    popupSubtitle:
+      "One-time payment for this chat. No account, no subscription.",
+    popupInfo:
+      "Secure checkout with Stripe. The PDF downloads as soon as the payment is confirmed.",
     downloadNow: "Download now",
     subscriptionHint:
-      "You can also get a <span>subscription</span> for unlimited PDFs here",
+      "Need PDFs of more chats? A subscription covers all of them.",
     openSubscriptionPage: "Open <span>Subscription Page</span>",
     closeButton: "Close",
     pricingTitle: "Choose Your Plan",
@@ -1703,6 +1708,9 @@ export const messages = {
     headerTextFeaturesTable: "Eigenschaften und Lösungen der PDF-Export-Tools",
     goToPDF: "Gehe zum PDF-Download",
     downloadPDF: "Den Chat als PDF herunterladen",
+    pdfMediaIncluded: "{found} von {total} Mediendateien enthalten",
+    pdfMediaMissing:
+      "In deinem Export fehlen {missing} der Dateien, auf die der Chat verweist. Das PDF kann sie nur auflisten, nicht zeigen. Um sie aufzunehmen, exportiere den Chat in WhatsApp erneut mit „Medien einbeziehen“.",
     pdfStyleCourtHint:
       "Nüchternes Schwarz-Weiß-Protokoll mit Integritäts-Hash, Beweismittelverzeichnis und Unterschriftenfeld – für Gerichte und Behörden.",
     pdfStyleCourtFeature1:
@@ -1884,13 +1892,12 @@ export const messages = {
       "Wir laden deine <span>Bilder</span>, <span>Videos</span> und <span>Dokumente</span>",
     downloadFreePreviewPDF: "Kostenlose <b>PDF-Vorschau</b> herunterladen",
     downloadFullChatPDF: "<b>Vollständiges</b> Chat-PDF herunterladen",
-    popupTitle: "<span>Toll!!</span>",
-    popupSubtitle: "Sie sind nur einen Schritt von Ihrem PDF entfernt!",
+    popupTitle: "Vollständiges PDF freischalten",
+    popupSubtitle: "Einmalzahlung für diesen Chat. Kein Konto, kein Abo.",
     popupInfo:
-      "<b>Indem Sie uns unterstützen</b>, bleibt der Rechner am Laufen 🎉",
+      "Sichere Zahlung über Stripe. Das PDF wird heruntergeladen, sobald die Zahlung bestätigt ist.",
     downloadNow: "Jetzt herunterladen",
-    subscriptionHint:
-      "Sie können hier auch ein <span>Abo</span> für unbegrenzte PDF-Downloads abschließen",
+    subscriptionHint: "PDFs für mehrere Chats? Ein Abo deckt alle ab.",
     openSubscriptionPage: "<span>Aboseite</span> öffnen",
     closeButton: "Schließen",
     pricingTitle: "Wählen Sie Ihren Plan",
@@ -2956,6 +2963,9 @@ export const messages = {
       "Características y soluciones de las herramientas de exportación de PDF",
     goToPDF: "ir a la descarga del PDF",
     downloadPDF: "Descargue su Chat como PDF",
+    pdfMediaIncluded: "{found} de {total} archivos multimedia incluidos",
+    pdfMediaMissing:
+      "Faltan en tu exportación: {missing} de los archivos a los que se refiere el chat. El PDF puede listarlos, pero no mostrarlos. Para incluirlos, vuelve a exportar el chat en WhatsApp con «Incluir archivos».",
     pdfStyleCourtHint:
       "Transcripción sobria en blanco y negro con hash de integridad, índice de anexos y espacio para la firma: para juzgados y autoridades.",
     pdfStyleCourtFeature1:
@@ -3137,12 +3147,13 @@ export const messages = {
       "Cargando tus <span>imágenes</span>, <span>videos</span> y <span>documentos</span>",
     downloadFreePreviewPDF: "Descargar <b>vista previa gratuita</b> del PDF",
     downloadFullChatPDF: "Descargar <b>PDF completo</b> del chat",
-    popupTitle: "<span>¡Genial!</span>",
-    popupSubtitle: "¡Estás a un paso de tu PDF!",
-    popupInfo: "<b>Apoyarnos</b> mantiene la 💻 funcionando 🎉",
+    popupTitle: "Desbloquea el PDF completo",
+    popupSubtitle: "Pago único para este chat. Sin cuenta ni suscripción.",
+    popupInfo:
+      "Pago seguro con Stripe. El PDF se descarga en cuanto se confirma el pago.",
     downloadNow: "Descargar ahora",
     subscriptionHint:
-      "También puedes obtener una <span>suscripción</span> para descargas ilimitadas de PDFs aquí",
+      "¿Necesitas PDFs de más chats? Una suscripción los cubre todos.",
     openSubscriptionPage: "Abrir <span>página de suscripción</span>",
     closeButton: "Cerrar",
     pricingTitle: "Elige tu plan",
@@ -3947,6 +3958,9 @@ export const messages = {
       "Recursos e soluções de ferramentas de exportação de PDF",
     goToPDF: "Ir para o download do PDF",
     downloadPDF: "Baixe seu Chat em PDF",
+    pdfMediaIncluded: "{found} de {total} arquivos de mídia incluídos",
+    pdfMediaMissing:
+      "Faltam na sua exportação: {missing} dos arquivos a que a conversa se refere. O PDF pode listá-los, mas não mostrá-los. Para incluí-los, exporte a conversa novamente no WhatsApp com “Incluir mídia”.",
     pdfStyleCourtHint:
       "Transcrição sóbria a preto e branco com hash de integridade, índice de anexos e campo de assinatura: para tribunais e autoridades.",
     pdfStyleCourtFeature1:
@@ -4129,12 +4143,14 @@ export const messages = {
       "Carregando suas <span>imagens</span>, <span>vídeos</span> e <span>documentos</span>",
     downloadFreePreviewPDF: "Baixar <b>prévia gratuita</b> do PDF",
     downloadFullChatPDF: "Baixar <b>PDF completo</b> do chat",
-    popupTitle: "<span>Ótimo!!</span>",
-    popupSubtitle: "Você está a um passo do seu PDF!",
-    popupInfo: "<b>Ao nos apoiar</b>, você mantém o computador funcionando 🎉",
+    popupTitle: "Desbloqueie o PDF completo",
+    popupSubtitle:
+      "Pagamento único para esta conversa. Sem conta, sem assinatura.",
+    popupInfo:
+      "Pagamento seguro com Stripe. O PDF é baixado assim que o pagamento for confirmado.",
     downloadNow: "Baixar agora",
     subscriptionHint:
-      "Você também pode obter uma <span>assinatura</span> para PDFs ilimitados aqui",
+      "Precisa de PDFs de mais conversas? Uma assinatura cobre todas.",
     openSubscriptionPage: "Abrir <span>página de assinatura</span>",
     closeButton: "Fechar",
     pricingTitle: "Escolha o Seu Plano",
@@ -5203,6 +5219,9 @@ export const messages = {
       "Caractéristiques et solutions des outils d'exportation PDF",
     goToPDF: "Télécharger le PDF",
     downloadPDF: "Téléchargez votre Chat au format PDF",
+    pdfMediaIncluded: "{found} fichiers multimédias sur {total} inclus",
+    pdfMediaMissing:
+      "Absents de votre export : {missing} des fichiers auxquels la discussion fait référence. Le PDF peut les lister, mais pas les montrer. Pour les inclure, exportez à nouveau la discussion dans WhatsApp avec « Inclure les médias ».",
     pdfStyleCourtHint:
       "Transcription sobre en noir et blanc avec empreinte d'intégrité, index des pièces et bloc de signature : pour les tribunaux et les administrations.",
     pdfStyleCourtFeature1:
@@ -5386,13 +5405,14 @@ export const messages = {
       "Chargement de vos <span>images</span>, <span>vidéos</span> et <span>documents</span>",
     downloadFreePreviewPDF: "Télécharger un <b>aperçu gratuit</b> du PDF",
     downloadFullChatPDF: "Télécharger le <b>PDF complet</b> de la conversation",
-    popupTitle: "<span>Génial !!</span>",
-    popupSubtitle: "Vous n’êtes plus qu’à un pas de votre PDF !",
+    popupTitle: "Débloquer le PDF complet",
+    popupSubtitle:
+      "Paiement unique pour cette discussion. Sans compte ni abonnement.",
     popupInfo:
-      "<b>En nous soutenant</b>, vous maintenez l’ordinateur en marche 🎉",
+      "Paiement sécurisé avec Stripe. Le PDF se télécharge dès que le paiement est confirmé.",
     downloadNow: "Télécharger maintenant",
     subscriptionHint:
-      "Vous pouvez également souscrire un <span>abonnement</span> pour des PDFs illimités ici",
+      "Besoin de PDF pour d'autres discussions ? Un abonnement les couvre toutes.",
     openSubscriptionPage: "Ouvrir la <span>page d’abonnement</span>",
     closeButton: "Fermer",
     pricingTitle: "Choisissez votre plan",
@@ -6464,6 +6484,9 @@ export const messages = {
       "Caratteristiche e soluzioni degli strumenti di esportazione PDF",
     goToPDF: "Vai al download PDF",
     downloadPDF: "Scarica la tua chat in PDF",
+    pdfMediaIncluded: "{found} di {total} file multimediali inclusi",
+    pdfMediaMissing:
+      "Mancano nella tua esportazione: {missing} dei file a cui la chat fa riferimento. Il PDF può elencarli, ma non mostrarli. Per includerli, esporta di nuovo la chat in WhatsApp con «Includi media».",
     pdfStyleCourtHint:
       "Trascrizione sobria in bianco e nero con hash di integrità, indice degli allegati e spazio per la firma: per tribunali e autorità.",
     pdfStyleCourtFeature1:
@@ -6640,12 +6663,14 @@ export const messages = {
       "Caricamento dei tuoi <span>immagini</span>, <span>video</span> e <span>documenti</span>",
     downloadFreePreviewPDF: "Scarica <b>anteprima gratuita</b> PDF",
     downloadFullChatPDF: "Scarica <b>l'intera chat</b> in PDF",
-    popupTitle: "<span>Fantastico!!</span>",
-    popupSubtitle: "Sei a un passo dal tuo PDF!",
-    popupInfo: "<b>Supportarci</b> mantiene il 💻 funzionante 🎉",
+    popupTitle: "Sblocca il PDF completo",
+    popupSubtitle:
+      "Pagamento unico per questa chat. Nessun account, nessun abbonamento.",
+    popupInfo:
+      "Pagamento sicuro con Stripe. Il PDF si scarica non appena il pagamento è confermato.",
     downloadNow: "Scarica ora",
     subscriptionHint:
-      "Puoi anche ottenere un <span>abbonamento</span> per PDF illimitati qui",
+      "Ti servono PDF di altre chat? Un abbonamento le copre tutte.",
     openSubscriptionPage: "Apri la <span>pagina di abbonamento</span>",
     closeButton: "Chiudi",
     pricingTitle: "Scegli il tuo piano",

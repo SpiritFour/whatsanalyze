@@ -82,7 +82,7 @@ test.describe("buying the full PDF once", () => {
       .getByRole("button", { name: /Download full chat PDF/i })
       .first()
       .click();
-    await expect(page.getByText("Nice!!", { exact: true })).toBeVisible();
+    await expect(page.getByText("Unlock the full PDF")).toBeVisible();
     await page.getByRole("button", { name: /Buy Now \(€7\.99\)/i }).click();
 
     await expect(page).toHaveURL(STRIPE_CHECKOUT);
