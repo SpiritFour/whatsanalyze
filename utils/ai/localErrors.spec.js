@@ -1,4 +1,4 @@
-import { localErrorKey } from "./localErrors";
+import { localErrorCause, localErrorKey } from "./localErrors";
 
 // Messages as WebLLM 0.2.85 words them.
 describe("localErrorKey", () => {
@@ -26,4 +26,41 @@ describe("localErrorKey", () => {
       expect(localErrorKey(message)).toBe("local");
     },
   );
+});
+
+describe("localErrorCause", () => {
+  it("groups the same cause across sizes, codes and labels", () => {
+    expect(
+      localErrorCause(
+        "Cannot initialize runtime because of requested maxStorageBufferBindingSize exceeds limit. requested=128MB, limit=64MB. ",
+      ),
+    ).toBe(
+      localErrorCause(
+        "Cannot initialize runtime because of requested maxStorageBufferBindingSize exceeds limit. requested=256MB, limit=128MB.",
+      ),
+    );
+    expect(
+      localErrorCause(
+        "Failed to execute 'mapAsync' on 'GPUBuffer': [Buffer \"a\"] was unmapped before mapping was resolved.",
+      ),
+    ).toBe(
+      localErrorCause(
+        "Failed to execute 'mapAsync' on 'GPUBuffer': [Buffer \"b 2\"] was unmapped before mapping was resolved.",
+      ),
+    );
+    expect(localErrorCause("D3D12 failed with 0x887A0005")).toBe(
+      localErrorCause("D3D12 failed with 0x887A0006"),
+    );
+  });
+
+  it("keeps different causes apart", () => {
+    expect(
+      localErrorCause("requested maxComputeWorkgroupStorageSize exceeds limit"),
+    ).not.toBe(
+      localErrorCause("requested maxStorageBufferBindingSize exceeds limit"),
+    );
+    expect(localErrorCause("Quota exceeded.")).not.toBe(
+      localErrorCause("Load failed"),
+    );
+  });
 });

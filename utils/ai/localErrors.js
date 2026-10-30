@@ -21,3 +21,19 @@ export function localErrorKey(message) {
   }
   return "local";
 }
+
+/**
+ * One Sentry issue per cause: WebLLM's text carries sizes, addresses and
+ * buffer labels that would otherwise split a cause into an issue each.
+ *
+ * @param {string} message
+ * @returns {string}
+ */
+export function localErrorCause(message) {
+  return message
+    .replace(/0x[0-9a-f]+/gi, "0x?")
+    .replace(/\[[^\]]*\]|"[^"]*"/g, "?")
+    .replace(/\d+(\.\d+)?/g, "#")
+    .trim()
+    .slice(0, 120);
+}

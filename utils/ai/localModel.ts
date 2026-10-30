@@ -80,8 +80,9 @@ export const localTranscriptChars = (model: LocalModel) =>
  */
 const DOWNLOADED_KEY = "whatsanalyze_ai_model";
 /**
- * Set while the model runs. A tab the OS kills for memory gets no chance to
- * clear it, so finding it on the next visit means the last attempt crashed.
+ * Set while the model runs, to the model and phase. A tab the OS kills for
+ * memory gets no chance to clear it, so finding it on the next visit means
+ * the last attempt crashed there.
  */
 const RUNNING_KEY = "whatsanalyze_ai_running";
 
@@ -122,6 +123,30 @@ export async function supportsLocalModel(): Promise<boolean> {
   }
 }
 
+/** The adapter WebLLM runs on: what Sentry needs to tell GPUs apart. */
+export async function gpuInfo(): Promise<Record<string, unknown>> {
+  try {
+    const adapter = await (navigator as any).gpu?.requestAdapter({
+      powerPreference: "high-performance",
+    });
+    if (!adapter) return { adapter: "none" };
+    const { vendor, architecture, device, description } = adapter.info ?? {};
+    const { limits } = adapter;
+    return {
+      vendor,
+      architecture,
+      device,
+      description,
+      shaderF16: adapter.features.has("shader-f16"),
+      maxBufferSize: limits.maxBufferSize,
+      maxStorageBufferBindingSize: limits.maxStorageBufferBindingSize,
+      maxComputeWorkgroupStorageSize: limits.maxComputeWorkgroupStorageSize,
+    };
+  } catch (error: any) {
+    return { adapter: String(error?.message ?? error) };
+  }
+}
+
 /** The model this device should run. */
 export async function pickLocalModel(): Promise<LocalModel> {
   const adapter = await (navigator as any).gpu?.requestAdapter({
@@ -138,13 +163,18 @@ export function isModelDownloaded(model: LocalModel): boolean {
 }
 
 /**
- * Did the last on-device run die with the tab? Reading the answer clears it,
- * so one crash is reported once.
+ * Did the last on-device run die with the tab, and where? Reading the answer
+ * clears it, so one crash is reported once.
  */
-export function takeCrashedRun(): boolean {
-  const crashed = storage.get(RUNNING_KEY) !== null;
+export function takeCrashedRun(): { model?: string; phase?: string } | null {
+  const running = storage.get(RUNNING_KEY);
   storage.set(RUNNING_KEY, null);
-  return crashed;
+  if (running === null) return null;
+  try {
+    return JSON.parse(running);
+  } catch {
+    return {};
+  }
 }
 
 /**
@@ -166,6 +196,7 @@ export function meteredConnection(): "cellular" | "unknown" | null {
 /** One request to the worker; the model stays loaded there between calls. */
 function complete(
   model: LocalModel,
+  phase: "read" | "write",
   request: object,
   onProgress: (_progress: AiProgress) => void,
 ): Promise<string> {
@@ -175,7 +206,9 @@ function complete(
   const w = worker;
   // Leaving the page normally is not a crash.
   const clearRunning = () => storage.set(RUNNING_KEY, null);
-  storage.set(RUNNING_KEY, model.id);
+  const markRunning = (at: AiProgress["phase"]) =>
+    storage.set(RUNNING_KEY, JSON.stringify({ model: model.id, phase: at }));
+  markRunning(phase);
   window.addEventListener("pagehide", clearRunning);
 
   return new Promise<string>((resolve, reject) => {
@@ -186,6 +219,7 @@ function complete(
           progress: data.progress,
           elapsed: data.elapsed,
         });
+        markRunning(data.progress < 1 ? "download" : phase);
         if (data.progress >= 1) storage.set(DOWNLOADED_KEY, model.id);
       } else if (data.type === "done") resolve(data.content);
       else reject(new Error(data.message));
@@ -289,6 +323,7 @@ export async function analyzeLocally(
       const note = await step(() =>
         complete(
           model,
+          "read",
           {
             messages: [
               { role: "system", content: system },
@@ -319,6 +354,7 @@ export async function analyzeLocally(
   const insights = await step(async () => {
     const content = await complete(
       model,
+      "write",
       {
         messages: [
           {
@@ -357,6 +393,7 @@ export async function analyzeLocally(
     insights.answer = await step(() =>
       complete(
         model,
+        "write",
         {
           messages: [
             { role: "system", content: answer.system },
