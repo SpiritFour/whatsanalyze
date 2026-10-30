@@ -462,6 +462,21 @@ const coverage = ref<{
 const reportQuestion = ref("");
 /** Set when the report is the free cloud preview. */
 const locked = ref<PreviewLocked | null>(null);
+// Back from subscribing with the preview still shown: get the full report.
+watch(
+  // Not after an error: that would retry in a loop.
+  () =>
+    !!locked.value &&
+    isSubscriptionValid.value &&
+    !running.value &&
+    !errorKey.value,
+  (upgrade) => {
+    if (!upgrade) return;
+    // Back to the cards, where the progress and any error show.
+    insights.value = null;
+    void run("cloud");
+  },
+);
 const report = computed<AiReportData | null>(() =>
   insights.value
     ? {
