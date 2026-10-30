@@ -302,7 +302,6 @@
 import { computed, nextTick, onMounted, ref, watch } from "vue";
 import { chatFingerprint } from "~/utils/chatFingerprint";
 import { storeToRefs } from "pinia";
-import * as Sentry from "@sentry/nuxt";
 import ToolDropzone from "~/components/tools/ToolDropzone.vue";
 import AiReport from "~/components/ai/AiReport.vue";
 import AiCoach from "~/components/ai/AiCoach.vue";
@@ -325,12 +324,12 @@ import {
   pickLocalModel,
   supportsLocalModel,
   takeCrashedRun,
-  gpuInfo,
+  reportLocalFailure,
   localTranscriptChars,
   type AiProgress,
   type LocalModel,
 } from "~/utils/ai/localModel";
-import { localErrorCause, localErrorKey } from "~/utils/ai/localErrors";
+import { localErrorKey } from "~/utils/ai/localErrors";
 import {
   analyzeInCloud,
   getCloudAllowance,
@@ -659,28 +658,6 @@ watch(dataWarning, (open) => {
     analyticsTools.aiAbandoned("local", "data_warning");
   }
 });
-
-/**
- * On-device failures to Sentry, with what tells GPUs apart. A message, not
- * an exception: beforeSend opens the user report dialog for exceptions.
- */
-async function reportLocalFailure(
-  message: string,
-  model?: string,
-  phase?: string,
-) {
-  const gpu = await gpuInfo();
-  Sentry.captureMessage(`On-device AI failed: ${message}`, {
-    level: "warning",
-    fingerprint: ["local-ai", localErrorCause(message)],
-    tags: {
-      ai_model: model,
-      ai_phase: phase,
-      gpu_vendor: gpu.vendor as string | undefined,
-    },
-    contexts: { webgpu: gpu },
-  });
-}
 
 async function run(mode: Mode) {
   if (!messages.value) return;

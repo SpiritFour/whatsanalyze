@@ -1,4 +1,6 @@
 import { z } from "zod";
+import * as Sentry from "@sentry/nuxt";
+import { localErrorCause } from "~/utils/ai/localErrors";
 import { splitParts } from "~/utils/ai/digest";
 import {
   buildAnswerPrompt,
@@ -126,6 +128,28 @@ export async function supportsLocalModel(): Promise<boolean> {
   }
 }
 
+/**
+ * On-device failures to Sentry, with what tells GPUs apart. A message, not
+ * an exception: beforeSend opens the user report dialog for exceptions.
+ */
+export async function reportLocalFailure(
+  message: string,
+  model?: string,
+  phase?: string,
+) {
+  const gpu = await gpuInfo();
+  Sentry.captureMessage(`On-device AI failed: ${message}`, {
+    level: "warning",
+    fingerprint: ["local-ai", localErrorCause(message)],
+    tags: {
+      ai_model: model,
+      ai_phase: phase,
+      gpu_vendor: gpu.vendor as string | undefined,
+    },
+    contexts: { webgpu: gpu },
+  });
+}
+
 /** The adapter WebLLM runs on: what Sentry needs to tell GPUs apart. */
 export async function gpuInfo(): Promise<Record<string, unknown>> {
   try {
@@ -199,7 +223,7 @@ export function meteredConnection(): "cellular" | "unknown" | null {
 /** One request to the worker; the model stays loaded there between calls. */
 function complete(
   model: LocalModel,
-  phase: "read" | "write",
+  phase: "read" | "write" | "coach",
   request: object,
   onProgress: (_progress: AiProgress) => void,
 ): Promise<string> {
@@ -209,7 +233,7 @@ function complete(
   const w = worker;
   // Leaving the page normally is not a crash.
   const clearRunning = () => storage.set(RUNNING_KEY, null);
-  const markRunning = (at: AiProgress["phase"]) =>
+  const markRunning = (at: AiProgress["phase"] | "coach") =>
     storage.set(RUNNING_KEY, JSON.stringify({ model: model.id, phase: at }));
   markRunning(phase);
   window.addEventListener("pagehide", clearRunning);
@@ -447,6 +471,7 @@ export async function coachLocally(
   const reply = await step(() =>
     complete(
       model,
+      "coach",
       {
         messages: [{ role: "system", content: system }, ...messages],
         max_tokens: 350,
