@@ -79,6 +79,7 @@ import { isSafetyReply, needsSupport } from "~/utils/ai/coach";
 import {
   coachLocally,
   localCoachChars,
+  reportLocalFailure,
   type LocalModel,
 } from "~/utils/ai/localModel";
 import { coachInCloud, type CloudAllowance } from "~/utils/ai/cloudModel";
@@ -221,6 +222,13 @@ async function send() {
       "ai",
       `coach_${props.mode}:${err?.message ?? "unknown"}`,
     );
+    if (props.mode === "local") {
+      reportLocalFailure(
+        String(err?.message ?? "unknown"),
+        props.localModel?.id,
+        "coach",
+      );
+    }
   } finally {
     thinking.value = false;
   }
