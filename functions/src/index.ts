@@ -23,4 +23,4 @@ export { verifyPaypalSubscription } from "./paypal/verifyPaypalSubscription";
 
 export { sendWrappedReminders } from "./wrappedReminders";
 
-export { analyzeChatAi, getAiAllowance } from "./ai/analyzeChatAi";
+export { analyzeChatAi, coachChatAi, getAiAllowance } from "./ai/analyzeChatAi";

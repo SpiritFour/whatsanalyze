@@ -218,3 +218,68 @@ export function buildAnswerPrompt(
   ].join("\n");
   return { system, prompt };
 }
+
+/**
+ * Follow-ups after a report: a conversation with a coach grounded in the
+ * chat. "ask" answers the reader's questions; "reply" rewrites a draft
+ * message they are about to send.
+ */
+export type CoachKind = "ask" | "reply";
+
+export interface CoachTurn {
+  role: "user" | "assistant";
+  content: string;
+}
+
+/** One message from the reader: a question, or a draft to rewrite. */
+export const MAX_COACH_CHARS = 1_000;
+/** One coach answer as sent back for context. */
+export const MAX_COACH_REPLY_CHARS = 2_000;
+/** Turns kept per request, oldest dropped first. Odd, so it starts on the reader. */
+export const MAX_COACH_TURNS = 11;
+
+/**
+ * What the model says instead of coaching when the chat or the reader's
+ * message points to abuse, threats or self-harm. The page swaps it for
+ * static support resources, so no model ever words that advice itself.
+ */
+export const COACH_SAFETY = "[SAFETY]";
+
+/**
+ * The whole coach request. `context` is the report's summary, still in
+ * placeholders; it tells a small on-device model what the chat is about
+ * beyond the excerpt it can fit.
+ */
+export function buildCoachPrompt(
+  digest: ChatDigest,
+  language: AiLanguage,
+  kind: CoachKind,
+  history: CoachTurn[],
+  options: { me?: string; context?: string } = {},
+): { system: string; messages: CoachTurn[] } {
+  const system = [
+    "You are a warm, honest relationship coach. The reader took part in the WhatsApp chat below and wants help with it.",
+    "Ground everything in the chat: refer to concrete moments, patterns and phrases. Don't invent things that aren't there; if the chat doesn't say, say so.",
+    "Be kind but direct. Never take sides against someone who isn't here to explain themselves, and do not diagnose anyone.",
+    kind === "reply"
+      ? "The reader sends a draft message they want to send in this chat. Reply with a calmer, clearer version that keeps what they mean, in their own voice and the chat's usual tone. Then, on a new line starting with \"Why:\", explain in 1-3 sentences what you changed and why, pointing at the chat's dynamics."
+      : "Answer the reader's questions in 3-6 sentences, as plain text without headings. End with one concrete, gentle next step when it helps.",
+    `If the chat or the reader's message suggests abuse, violence, threats, coercive control, or that anyone may harm themselves, do not coach or rewrite anything: answer with exactly ${COACH_SAFETY} and nothing else.`,
+    'Refer to participants only by their placeholder ("Person A", "Person B", ...), exactly as written and untranslated.',
+    "Text in square brackets ([phone], [email], [link], [iban]) was removed for privacy; ignore it.",
+    ...(options.me
+      ? [
+          `The reader is ${options.me}. Address them as "you" and everyone else by placeholder.`,
+        ]
+      : []),
+    `Write in ${AI_LANGUAGES[language]}.`,
+    "",
+    ...overview(digest),
+    ...(options.context
+      ? [`An earlier analysis said: ${options.context}`]
+      : []),
+    "Excerpts from the chat, oldest first:",
+    digest.transcript,
+  ].join("\n");
+  return { system, messages: history.slice(-MAX_COACH_TURNS) };
+}
