@@ -289,6 +289,7 @@
 import { computed, nextTick, onMounted, ref, watch } from "vue";
 import { chatFingerprint } from "~/utils/chatFingerprint";
 import { storeToRefs } from "pinia";
+import * as Sentry from "@sentry/nuxt";
 import ToolDropzone from "~/components/tools/ToolDropzone.vue";
 import AiReport from "~/components/ai/AiReport.vue";
 import type { AiReport as AiReportData } from "~/utils/ai/report";
@@ -310,10 +311,12 @@ import {
   pickLocalModel,
   supportsLocalModel,
   takeCrashedRun,
+  gpuInfo,
   localTranscriptChars,
   type AiProgress,
   type LocalModel,
 } from "~/utils/ai/localModel";
+import { localErrorCause, localErrorKey } from "~/utils/ai/localErrors";
 import {
   analyzeInCloud,
   getCloudAllowance,
@@ -516,10 +519,12 @@ async function onChatLoaded(payload: { analysis: unknown }) {
   if (localSupported.value) {
     localModel.value = await pickLocalModel();
     modelDownloaded.value = isModelDownloaded(localModel.value);
-    localCrashed.value = takeCrashedRun();
-    if (localCrashed.value) {
+    const crash = takeCrashedRun();
+    localCrashed.value = !!crash;
+    if (crash) {
       analyticsTools.error("ai", "local:crashed");
       analyticsTools.aiFailed("local", "crashed");
+      reportLocalFailure("crashed", crash.model, crash.phase);
     }
   }
   await nextTick();
@@ -641,6 +646,28 @@ watch(dataWarning, (open) => {
   }
 });
 
+/**
+ * On-device failures to Sentry, with what tells GPUs apart. A message, not
+ * an exception: beforeSend opens the user report dialog for exceptions.
+ */
+async function reportLocalFailure(
+  message: string,
+  model?: string,
+  phase?: string,
+) {
+  const gpu = await gpuInfo();
+  Sentry.captureMessage(`On-device AI failed: ${message}`, {
+    level: "warning",
+    fingerprint: ["local-ai", localErrorCause(message)],
+    tags: {
+      ai_model: model,
+      ai_phase: phase,
+      gpu_vendor: gpu.vendor as string | undefined,
+    },
+    contexts: { webgpu: gpu },
+  });
+}
+
 async function run(mode: Mode) {
   if (!messages.value) return;
   running.value = mode;
@@ -745,13 +772,25 @@ async function run(mode: Mode) {
       "local_invalid",
       "no_messages",
     ];
-    errorKey.value = known.includes(err?.message) ? err.message : mode;
+    const message = String(err?.message ?? "unknown");
+    errorKey.value = known.includes(message)
+      ? message
+      : mode === "local"
+        ? localErrorKey(message)
+        : mode;
     errorMode.value = mode;
+    if (mode === "local" && message !== "no_messages") {
+      reportLocalFailure(
+        message,
+        localModel.value?.id,
+        progress.value?.phase ?? "download",
+      );
+    }
     if (err?.message === "daily_limit") {
       allowance.value = { remaining: 0, limit: allowance.value?.limit ?? 10 };
     }
-    analyticsTools.error("ai", `${mode}:${err?.message ?? "unknown"}`);
-    analyticsTools.aiFailed(trackedMode, String(err?.message ?? "unknown"));
+    analyticsTools.error("ai", `${mode}:${message}`);
+    analyticsTools.aiFailed(trackedMode, message);
   } finally {
     window.removeEventListener("pagehide", onLeave);
     wakeLock?.release().catch(() => {});
