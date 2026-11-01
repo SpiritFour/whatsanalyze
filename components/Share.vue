@@ -233,6 +233,14 @@ export default {
             scale: 2,
             logging: false,
             useCORS: true,
+            onclone: (clonedDoc) => {
+              if (clonedDoc.documentElement) {
+                clonedDoc.documentElement.style.backgroundColor = "#ffffff";
+              }
+              if (clonedDoc.body) {
+                clonedDoc.body.style.backgroundColor = "#ffffff";
+              }
+            },
           });
           return this.createBrandedChartCanvas(
             renderedCanvas,
