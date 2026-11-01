@@ -1,3 +1,5 @@
+import { patchAmchartsEventDispatcher } from "~/utils/amcharts";
+
 // amCharts 4 is ~500 KB and only the two word clouds in the results use it.
 // Importing it here statically put it in the entry graph of every page,
 // including the landing page nobody has uploaded a chat on yet, so it is
@@ -10,11 +12,14 @@ const loadAmcharts = () => {
       import("@amcharts/amcharts4/core"),
       import("@amcharts/amcharts4/themes/animated"),
       import("@amcharts/amcharts4/plugins/wordCloud"),
-    ]).then(([am4core, animated, am4plugins_wordCloud]) => ({
-      am4core,
-      am4themes_animated: animated.default,
-      am4plugins_wordCloud,
-    }));
+    ]).then(([am4core, animated, am4plugins_wordCloud]) => {
+      patchAmchartsEventDispatcher(am4core);
+      return {
+        am4core,
+        am4themes_animated: animated.default,
+        am4plugins_wordCloud,
+      };
+    });
   }
   return loading;
 };
