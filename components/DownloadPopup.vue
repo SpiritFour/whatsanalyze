@@ -152,6 +152,12 @@ export default {
           useCORS: true,
           backgroundColor: "#ffffff",
           onclone: function (clonedDoc) {
+            if (clonedDoc.documentElement) {
+              clonedDoc.documentElement.style.backgroundColor = "#ffffff";
+            }
+            if (clonedDoc.body) {
+              clonedDoc.body.style.backgroundColor = "#ffffff";
+            }
             let nonVisibleStuff = clonedDoc.querySelectorAll(
               ".only-visible-to-html2canvas",
             );
@@ -168,13 +174,19 @@ export default {
           .slice(0, 2)
           .map((person) => person.name)
           .join("-");
-        canvas.then((renderedCanvas) => {
-          downloadBase64File(
-            renderedCanvas,
-            "whatsanalyze.com-results-" + names + ".png",
-          );
-          this.loading = false;
-        });
+        canvas
+          .then((renderedCanvas) => {
+            downloadBase64File(
+              renderedCanvas,
+              "whatsanalyze.com-results-" + names + ".png",
+            );
+          })
+          .catch((err) => {
+            console.error("Failed to render download canvas", err);
+          })
+          .finally(() => {
+            this.loading = false;
+          });
       }, 250);
     },
     donate() {

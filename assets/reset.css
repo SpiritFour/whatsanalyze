@@ -9,6 +9,11 @@
 
   html {
     overflow-y: scroll;
+    background-color: #ffffff;
+  }
+
+  body {
+    background-color: #ffffff;
   }
 
   button,
