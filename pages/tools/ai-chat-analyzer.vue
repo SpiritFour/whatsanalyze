@@ -230,6 +230,19 @@
         <!-- The same encrypted share link as the analyzer's results -->
         <ShareLinkButton :capture="() => report" source="ai_report" />
 
+        <!-- Keep talking: follow-up questions and reply help -->
+        <AiCoach
+          v-if="messages && ranOn && !locked"
+          :key="report?.insights.summary"
+          :chat="messages"
+          :mode="ranOn"
+          :language="language"
+          :local-model="localModel"
+          :me="me"
+          :summary="insights.summary"
+          @allowance="allowance = $event"
+        />
+
         <div class="report-actions">
           <button
             v-if="ranOn === 'local'"
@@ -289,9 +302,9 @@
 import { computed, nextTick, onMounted, ref, watch } from "vue";
 import { chatFingerprint } from "~/utils/chatFingerprint";
 import { storeToRefs } from "pinia";
-import * as Sentry from "@sentry/nuxt";
 import ToolDropzone from "~/components/tools/ToolDropzone.vue";
 import AiReport from "~/components/ai/AiReport.vue";
+import AiCoach from "~/components/ai/AiCoach.vue";
 import type { AiReport as AiReportData } from "~/utils/ai/report";
 import type { ChatMessage } from "~/composables/useChatTool";
 import { analyticsTools, type AiSource } from "~/composables/useAnalytics";
@@ -311,12 +324,12 @@ import {
   pickLocalModel,
   supportsLocalModel,
   takeCrashedRun,
-  gpuInfo,
+  reportLocalFailure,
   localTranscriptChars,
   type AiProgress,
   type LocalModel,
 } from "~/utils/ai/localModel";
-import { localErrorCause, localErrorKey } from "~/utils/ai/localErrors";
+import { localErrorKey } from "~/utils/ai/localErrors";
 import {
   analyzeInCloud,
   getCloudAllowance,
@@ -449,6 +462,21 @@ const coverage = ref<{
 const reportQuestion = ref("");
 /** Set when the report is the free cloud preview. */
 const locked = ref<PreviewLocked | null>(null);
+// Back from subscribing with the preview still shown: get the full report.
+watch(
+  // Not after an error: that would retry in a loop.
+  () =>
+    !!locked.value &&
+    isSubscriptionValid.value &&
+    !running.value &&
+    !errorKey.value,
+  (upgrade) => {
+    if (!upgrade) return;
+    // Back to the cards, where the progress and any error show.
+    insights.value = null;
+    void run("cloud");
+  },
+);
 const report = computed<AiReportData | null>(() =>
   insights.value
     ? {
@@ -645,28 +673,6 @@ watch(dataWarning, (open) => {
     analyticsTools.aiAbandoned("local", "data_warning");
   }
 });
-
-/**
- * On-device failures to Sentry, with what tells GPUs apart. A message, not
- * an exception: beforeSend opens the user report dialog for exceptions.
- */
-async function reportLocalFailure(
-  message: string,
-  model?: string,
-  phase?: string,
-) {
-  const gpu = await gpuInfo();
-  Sentry.captureMessage(`On-device AI failed: ${message}`, {
-    level: "warning",
-    fingerprint: ["local-ai", localErrorCause(message)],
-    tags: {
-      ai_model: model,
-      ai_phase: phase,
-      gpu_vendor: gpu.vendor as string | undefined,
-    },
-    contexts: { webgpu: gpu },
-  });
-}
 
 async function run(mode: Mode) {
   if (!messages.value) return;
