@@ -4,6 +4,8 @@ import type {
   AiLanguage,
   ChatDigest,
   ChatInsights,
+  CoachKind,
+  CoachTurn,
 } from "~/functions/src/ai/insights";
 import type { PreviewLocked } from "~/functions/src/ai/preview";
 
@@ -50,6 +52,33 @@ export async function analyzeInCloud(
       ? null
       : { remaining: data.remaining!, limit: data.limit! },
     locked: data.locked ?? null,
+  };
+}
+
+/**
+ * One coach turn in the cloud (coachChatAi), counted against the same daily
+ * allowance as a report. `history` is already in placeholders.
+ */
+export async function coachInCloud(
+  functions: unknown,
+  credentials: Credentials,
+  request: {
+    digest: ChatDigest;
+    language: AiLanguage;
+    kind: CoachKind;
+    history: CoachTurn[];
+    me?: string;
+    context?: string;
+  },
+): Promise<{ reply: string; allowance: CloudAllowance }> {
+  const callable = httpsCallable<
+    unknown,
+    { reply: string; remaining: number; limit: number }
+  >(functions as any, "coachChatAi", { timeout: 120_000 });
+  const { data } = await callable({ ...credentials, ...request });
+  return {
+    reply: data.reply,
+    allowance: { remaining: data.remaining, limit: data.limit },
   };
 }
 

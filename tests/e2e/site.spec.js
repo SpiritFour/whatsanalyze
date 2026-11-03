@@ -4,6 +4,7 @@
  * noticing, and every one of them also fails on an uncaught runtime error.
  */
 const {
+  activeSubscription,
   analyzeChat,
   EXAMPLE_CHAT,
   expect,
@@ -351,6 +352,59 @@ test.describe("the analyzer", () => {
       report.getByText("Weekend plans", { exact: true }),
     ).toBeVisible();
     expect(aiCalls.length).toBe(1);
+  });
+
+  test("runs the full report on coming back from subscribing", async ({
+    page,
+  }) => {
+    const item = (title) => ({ title, description: `${title} in detail` });
+    const insights = {
+      answer: "",
+      summary: "Two friends planning trips.",
+      vibe: "Travel buddies",
+      people: [{ name: "Person A", role: "Planner", style: "Long messages" }],
+      dynamics: [item("Quick replies")],
+      topics: [item("Weekend plans")],
+      highlights: ["The lost passport"],
+    };
+    await stubCallable(page, "analyzeChatAi", {
+      insights,
+      locked: { people: 1, dynamics: 2, topics: 3, highlights: 2 },
+    });
+
+    await page.goto("/tools/ai-chat-analyzer/");
+    await page.locator("input.hidden-file-input").setInputFiles(EXAMPLE_CHAT);
+    await page
+      .getByRole("button", { name: "Try a free cloud preview" })
+      .click();
+    const report = page.locator("#ai-report");
+    await expect(report.locator(".report-card--locked")).toHaveCount(7);
+
+    // Checkout done: Stripe returns to /subscribe, which sends them back.
+    await stubCallable(page, "getCheckoutSession", {
+      mode: "subscription",
+      payment_status: "paid",
+      subscription: "sub_test123",
+      customer_details: { email: "test@example.com" },
+    });
+    await stubCallable(page, "verifySubscription", activeSubscription());
+    await stubCallable(page, "getAiAllowance", { remaining: 5, limit: 10 });
+    const fullCalls = await stubCallable(page, "analyzeChatAi", {
+      insights: { ...insights, topics: [item("Weekend plans"), item("Food")] },
+      remaining: 4,
+      limit: 10,
+    });
+    await page.goto(
+      `/subscribe?session_id=cs_test_subscription&from=${encodeURIComponent("/tools/ai-chat-analyzer/")}`,
+    );
+
+    await page.waitForURL((url) => url.pathname.includes("/ai-chat-analyzer"));
+    await expect(report.getByText("Food", { exact: true })).toBeVisible();
+    await expect(report.locator(".report-card--locked")).toHaveCount(0);
+    expect(fullCalls.length).toBe(1);
+    expect(JSON.parse(fullCalls[0].postData()).data.subscriptionId).toBe(
+      "sub_test123",
+    );
   });
 
   test("names the thing each chart counts", async ({ page }) => {
