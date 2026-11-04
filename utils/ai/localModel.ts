@@ -1,6 +1,8 @@
 import { z } from "zod";
 import * as Sentry from "@sentry/nuxt";
-import { localErrorCause } from "~/utils/ai/localErrors";
+import { isContextOverflow, localErrorCause } from "~/utils/ai/localErrors";
+import { checkLocalDevice } from "~/utils/ai/localCheck";
+import { readLocalReport } from "~/utils/ai/localReport";
 import { splitParts } from "~/utils/ai/digest";
 import {
   buildAnswerPrompt,
@@ -43,6 +45,8 @@ export interface LocalModel {
   maxParts: number;
   /** Qwen thinks out loud unless told not to; other models have no switch. */
   qwen: boolean;
+  /** The 1B model: what phones run, and computers the 2B one ran out of memory on. */
+  small: boolean;
 }
 
 /**
@@ -57,6 +61,7 @@ const DESKTOP = (f16: boolean): LocalModel => ({
   partChars: 6_000,
   maxParts: 8,
   qwen: true,
+  small: false,
 });
 const MOBILE = (f16: boolean): LocalModel => ({
   id: f16
@@ -66,11 +71,15 @@ const MOBILE = (f16: boolean): LocalModel => ({
   partChars: 5_000,
   maxParts: 6,
   qwen: false,
+  small: true,
 });
 
-/** Where an on-device analysis is. `elapsed` is seconds into that phase. */
+/**
+ * Where an on-device analysis is. `elapsed` is seconds into that phase;
+ * `retry` is set while an interrupted download waits to pick up again.
+ */
 export type AiProgress =
-  | { phase: "download"; progress: number; elapsed: number }
+  | { phase: "download"; progress: number; elapsed: number; retry?: number }
   | { phase: "read"; done: number; total: number; elapsed: number }
   | { phase: "write"; total: number };
 
@@ -90,6 +99,12 @@ const DOWNLOADED_KEY = "whatsanalyze_ai_model";
  * the last attempt crashed there.
  */
 const RUNNING_KEY = "whatsanalyze_ai_running";
+/**
+ * Set once the 2B model ran this computer out of GPU memory (or crashed the
+ * tab), so from then on it gets the 1B model phones run: less perceptive,
+ * but it needs ~0.9 GB instead of ~2.2 GB.
+ */
+const SMALL_KEY = "whatsanalyze_ai_small";
 
 const storage = {
   get: (key: string) => {
@@ -115,27 +130,60 @@ const isMobile = () =>
   (navigator as any).userAgentData?.mobile ??
   /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
 
-/** Can this browser run a model at all? WebGPU is the whole requirement. */
-export async function supportsLocalModel(): Promise<boolean> {
-  const gpu = (navigator as any).gpu;
-  if (!gpu) return false;
-  try {
-    return !!(await gpu.requestAdapter({
-      powerPreference: "high-performance",
-    }));
-  } catch {
-    return false;
-  }
+/** Why the on-device AI isn't offered on this device. */
+export type LocalUnavailable =
+  "no_webgpu" | "no_adapter" | "gpu_limits" | "gpu_device" | "storage";
+
+/** The model this device runs: see SMALL_KEY. */
+const modelFor = (f16: boolean): LocalModel =>
+  isMobile() || storage.get(SMALL_KEY) ? MOBILE(f16) : DESKTOP(f16);
+
+/**
+ * Can this device run the on-device model, and which one? Asked when a chat
+ * is loaded, so a device that can't is pointed at the cloud before anyone
+ * clicks; utils/ai/localCheck.js has what is checked and why. `model` is
+ * null only without a GPU to pick one for.
+ */
+export async function checkLocalModel(): Promise<{
+  model: LocalModel | null;
+  unavailable: LocalUnavailable | null;
+  detail?: string;
+}> {
+  const result = await checkLocalDevice(
+    { gpu: (navigator as any).gpu, storage: navigator.storage },
+    modelFor,
+    isModelDownloaded,
+  );
+  return result.ok
+    ? { model: result.model, unavailable: null }
+    : {
+        model: result.model,
+        unavailable: result.reason,
+        detail: result.detail,
+      };
+}
+
+/**
+ * After the 2B model ran out of memory here: the 1B one, from now on. Null
+ * when this already was the small model, which has nothing smaller to try.
+ */
+export function smallerModel(model: LocalModel): LocalModel | null {
+  if (model.small) return null;
+  storage.set(SMALL_KEY, "1");
+  return MOBILE(model.id.includes("q4f16"));
 }
 
 /**
  * On-device failures to Sentry, with what tells GPUs apart. A message, not
  * an exception: beforeSend opens the user report dialog for exceptions.
+ * `extra` is anything else that tells causes apart, such as why the model
+ * stopped writing.
  */
 export async function reportLocalFailure(
   message: string,
   model?: string,
   phase?: string,
+  extra?: Record<string, unknown>,
 ) {
   const gpu = await gpuInfo();
   Sentry.captureMessage(`On-device AI failed: ${message}`, {
@@ -146,7 +194,7 @@ export async function reportLocalFailure(
       ai_phase: phase,
       gpu_vendor: gpu.vendor as string | undefined,
     },
-    contexts: { webgpu: gpu },
+    contexts: { webgpu: gpu, ...(extra ? { ai: extra } : {}) },
   });
 }
 
@@ -172,16 +220,6 @@ export async function gpuInfo(): Promise<Record<string, unknown>> {
   } catch (error: any) {
     return { adapter: String(error?.message ?? error) };
   }
-}
-
-/** The model this device should run. */
-export async function pickLocalModel(): Promise<LocalModel> {
-  const adapter = await (navigator as any).gpu?.requestAdapter({
-    // What WebLLM asks for: a dual-GPU Mac may answer each differently.
-    powerPreference: "high-performance",
-  });
-  const f16 = !!adapter?.features?.has("shader-f16");
-  return isMobile() ? MOBILE(f16) : DESKTOP(f16);
 }
 
 /** Has this model already been downloaded into this browser? */
@@ -220,13 +258,22 @@ export function meteredConnection(): "cellular" | "unknown" | null {
   return isMobile() ? "unknown" : null;
 }
 
+/** The request in flight, so stopLocalModel can end it. */
+let stopPending: ((_error: Error) => void) | null = null;
+
+/** What the model wrote, and why it stopped ("length" means cut off). */
+interface Completion {
+  content: string;
+  finish?: string;
+}
+
 /** One request to the worker; the model stays loaded there between calls. */
 function complete(
   model: LocalModel,
   phase: "read" | "write" | "coach",
   request: object,
   onProgress: (_progress: AiProgress) => void,
-): Promise<string> {
+): Promise<Completion> {
   worker ??= new Worker(new URL("./llm.worker.ts", import.meta.url), {
     type: "module",
   });
@@ -237,26 +284,40 @@ function complete(
     storage.set(RUNNING_KEY, JSON.stringify({ model: model.id, phase: at }));
   markRunning(phase);
   window.addEventListener("pagehide", clearRunning);
+  let download = { progress: 0, elapsed: 0 };
 
-  return new Promise<string>((resolve, reject) => {
+  return new Promise<Completion>((resolve, reject) => {
+    stopPending = reject;
     w.onmessage = ({ data }) => {
       if (data.type === "progress") {
-        onProgress({
-          phase: "download",
-          progress: data.progress,
-          elapsed: data.elapsed,
-        });
+        download = { progress: data.progress, elapsed: data.elapsed };
+        onProgress({ phase: "download", ...download });
         markRunning(data.progress < 1 ? "download" : phase);
         if (data.progress >= 1) storage.set(DOWNLOADED_KEY, model.id);
-      } else if (data.type === "done") resolve(data.content);
-      else reject(new Error(data.message));
+      } else if (data.type === "retry") {
+        onProgress({ phase: "download", ...download, retry: data.attempt });
+      } else if (data.type === "done") {
+        resolve({ content: data.content, finish: data.finish });
+      } else reject(new Error(data.message));
     };
     w.onerror = (event) => reject(new Error(event.message));
     w.postMessage({ model: model.id, request });
   }).finally(() => {
+    stopPending = null;
     clearRunning();
     window.removeEventListener("pagehide", clearRunning);
   });
+}
+
+/**
+ * Leaving the page mid-run: end the model rather than leave it busy on the
+ * GPU behind whatever page comes next. What was in flight rejects with
+ * "stopped", which is not a failure.
+ */
+export function stopLocalModel() {
+  worker?.terminate();
+  worker = null;
+  stopPending?.(new Error("stopped"));
 }
 
 const thinkingOff = (model: LocalModel) =>
@@ -264,6 +325,20 @@ const thinkingOff = (model: LocalModel) =>
   // starts. WebLLM prepends an empty think block for this, so only Qwen may
   // be sent it.
   model.qwen ? { extra_body: { enable_thinking: false } } : {};
+
+/**
+ * A prompt the model's 4k context can't hold after all, which happens with
+ * scripts and emoji that cost a token or more per character: run it again on
+ * the latest 60% of the text. Over the limit was never by more than 15%.
+ */
+async function fitted<T>(run: (_cut: (_text: string) => string) => Promise<T>) {
+  try {
+    return await run((text) => text);
+  } catch (error: any) {
+    if (!isContextOverflow(String(error?.message))) throw error;
+    return run((text) => text.slice(-Math.floor(text.length * 0.6)));
+  }
+}
 
 /** Resolves once the page is in the foreground. */
 const whenVisible = () =>
@@ -328,9 +403,11 @@ export async function analyzeLocally(
     }
   };
 
-  // A chat that fits in one part is analyzed straight from the transcript.
+  // A short chat is analyzed straight from the transcript. Up to half a
+  // part: with the schema in the same prompt, a full part left the report
+  // a few hundred tokens, and in German or Spanish it was cut off mid-list.
   let notes: string[] | undefined;
-  if (parts.length > 1) {
+  if (parts.length > 1 || parts[0].length > model.partChars / 2) {
     notes = [];
     for (const [i, part] of parts.entries()) {
       current = {
@@ -340,100 +417,114 @@ export async function analyzeLocally(
         elapsed: (performance.now() - readStart) / 1000,
       };
       onProgress(current);
-      const { system, prompt } = buildNotesPrompt(
-        digest,
-        part,
-        i,
-        parts.length,
-        ask,
-      );
       const note = await step(() =>
-        complete(
-          model,
-          "read",
-          {
-            messages: [
-              { role: "system", content: system },
-              { role: "user", content: prompt },
-            ],
-            max_tokens: 180,
-            temperature: 0.3,
-            frequency_penalty: 0.4,
-            ...thinkingOff(model),
-          },
-          onLoad,
-        ),
+        fitted((cut) => {
+          const { system, prompt } = buildNotesPrompt(
+            digest,
+            cut(part),
+            i,
+            parts.length,
+            ask,
+          );
+          return complete(
+            model,
+            "read",
+            {
+              messages: [
+                { role: "system", content: system },
+                { role: "user", content: prompt },
+              ],
+              max_tokens: 180,
+              temperature: 0.3,
+              frequency_penalty: 0.4,
+              ...thinkingOff(model),
+            },
+            onLoad,
+          );
+        }),
       );
-      notes.push(note.trim());
+      notes.push(note.content.trim());
     }
   }
   current = { phase: "write", total: parts.length };
   onProgress(current);
 
   const schema = JSON.stringify(z.toJSONSchema(insightsSchema));
+  // Shortened only if the context can't hold it: notes never get that long.
+  const shortened = (cut: (_text: string) => string) => ({
+    ...digest,
+    transcript: cut(digest.transcript),
+  });
   // The report without the answer: the question gets its own call below.
-  const { system, prompt } = buildPrompt(
-    digest,
-    language,
-    notes,
-    ask?.me ? { me: ask.me } : undefined,
-  );
   const insights = await step(async () => {
-    const content = await complete(
-      model,
-      "write",
-      {
-        messages: [
-          {
-            role: "system",
-            content: `${system}\nAnswer with JSON matching this schema:\n${schema}`,
-          },
-          { role: "user", content: prompt },
-        ],
-        response_format: { type: "json_object", schema },
-        max_tokens: 1000,
-        temperature: 0.6,
-        // The first phone report said "travel plans" once per person, three
-        // times over. Penalising repeats is cheap and helps a 1B model most.
-        frequency_penalty: 0.5,
-        presence_penalty: 0.3,
-        ...thinkingOff(model),
-      },
-      onLoad,
-    );
-    let json: unknown;
-    try {
-      json = JSON.parse(content);
-    } catch {
-      throw new Error("local_invalid");
-    }
-    const parsed = insightsSchema.safeParse(json);
-    if (!parsed.success) throw new Error("local_invalid");
-    return parsed.data;
-  }, true);
-
-  if (ask?.question) {
-    const answer = buildAnswerPrompt(digest, language, notes, {
-      ...ask,
-      question: ask.question,
-    });
-    insights.answer = await step(() =>
-      complete(
+    const { content, finish } = await fitted((cut) => {
+      const { system, prompt } = buildPrompt(
+        shortened(cut),
+        language,
+        notes,
+        ask?.me ? { me: ask.me } : undefined,
+      );
+      return complete(
         model,
         "write",
         {
           messages: [
-            { role: "system", content: answer.system },
-            { role: "user", content: answer.prompt },
+            {
+              role: "system",
+              content: `${system}\nAnswer with JSON matching this schema:\n${schema}`,
+            },
+            { role: "user", content: prompt },
           ],
-          max_tokens: 300,
-          temperature: 0.5,
+          response_format: { type: "json_object", schema },
+          // A report in German or Spanish runs to ~1,000 tokens, which is
+          // where this used to cut it off. Past what the context has left,
+          // WebLLM stops on its own; readLocalReport keeps what's complete.
+          max_tokens: 1600,
+          temperature: 0.6,
+          // The first phone report said "travel plans" once per person, three
+          // times over. Penalising repeats is cheap and helps a 1B model most.
           frequency_penalty: 0.5,
+          presence_penalty: 0.3,
           ...thinkingOff(model),
         },
         onLoad,
-      ),
+      );
+    });
+    const parsed = insightsSchema.safeParse(readLocalReport(content));
+    if (!parsed.success) {
+      throw Object.assign(new Error("local_invalid"), {
+        finish,
+        chars: content.length,
+      });
+    }
+    return parsed.data;
+  }, true);
+
+  if (ask?.question) {
+    const reply = await step(() =>
+      fitted((cut) => {
+        const answer = buildAnswerPrompt(shortened(cut), language, notes, {
+          ...ask,
+          question: ask.question!,
+        });
+        return complete(
+          model,
+          "write",
+          {
+            messages: [
+              { role: "system", content: answer.system },
+              { role: "user", content: answer.prompt },
+            ],
+            max_tokens: 300,
+            temperature: 0.5,
+            frequency_penalty: 0.5,
+            ...thinkingOff(model),
+          },
+          onLoad,
+        );
+      }),
     );
+    insights.answer = reply.content;
   }
 
   return { insights, parts };
@@ -461,26 +552,28 @@ export async function coachLocally(
   const recent = history
     .slice(-5)
     .map((turn) => ({ ...turn, content: turn.content.slice(0, 600) }));
-  const { system, messages } = buildCoachPrompt(
-    digest,
-    language,
-    kind,
-    recent,
-    options,
-  );
   const reply = await step(() =>
-    complete(
-      model,
-      "coach",
-      {
-        messages: [{ role: "system", content: system }, ...messages],
-        max_tokens: 350,
-        temperature: 0.5,
-        frequency_penalty: 0.5,
-        ...thinkingOff(model),
-      },
-      onProgress,
-    ),
+    fitted((cut) => {
+      const { system, messages } = buildCoachPrompt(
+        { ...digest, transcript: cut(digest.transcript) },
+        language,
+        kind,
+        recent,
+        options,
+      );
+      return complete(
+        model,
+        "coach",
+        {
+          messages: [{ role: "system", content: system }, ...messages],
+          max_tokens: 350,
+          temperature: 0.5,
+          frequency_penalty: 0.5,
+          ...thinkingOff(model),
+        },
+        onProgress,
+      );
+    }),
   );
-  return reply.trim();
+  return reply.content.trim();
 }

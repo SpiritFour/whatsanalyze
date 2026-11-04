@@ -106,6 +106,7 @@
             :disabled="
               running !== null ||
               askBlocked ||
+              (mode.id === 'local' && !localModel) ||
               (mode.id === 'cloud' && allowance?.remaining === 0)
             "
             @click="mode.id === 'local' ? startLocal() : run(mode.id)"
@@ -148,6 +149,22 @@
             <v-icon size="18">mdi-alert-circle-outline</v-icon>
             {{ mode.crashed }}
           </p>
+          <!-- On-device failed: the cloud is a click away, not a card away -->
+          <div v-if="mode.offerCloud" class="mode-card__fallback">
+            <button
+              type="button"
+              class="mode-card__btn"
+              :disabled="running !== null || askBlocked || cloudSpent"
+              @click="run('cloud', 'fallback')"
+            >
+              {{
+                isSubscriptionValid
+                  ? t("toolsAi.fallbackCloud")
+                  : t("toolsAi.fallbackPreview")
+              }}
+            </button>
+            <p class="mode-card__fineprint">{{ t("toolsAi.cloudConsent") }}</p>
+          </div>
           <!-- Required by the Llama 3.2 licence wherever it is offered -->
           <p
             v-if="mode.id === 'local' && localModel?.id.startsWith('Llama')"
@@ -210,7 +227,16 @@
           >
             {{ t("toolsAi.dataContinue") }}
           </button>
+          <button
+            type="button"
+            class="data-dialog__continue"
+            :disabled="askBlocked || cloudSpent"
+            @click="cloudInstead"
+          >
+            {{ t("toolsAi.dataUseCloud") }}
+          </button>
         </div>
+        <p class="data-dialog__fineprint">{{ t("toolsAi.cloudConsent") }}</p>
       </div>
     </v-dialog>
 
@@ -232,7 +258,9 @@
 
         <!-- Keep talking: follow-up questions and reply help -->
         <AiCoach
-          v-if="messages && ranOn && !locked"
+          v-if="
+            messages && ranOn && !locked && (ranOn === 'cloud' || localModel)
+          "
           :key="report?.insights.summary"
           :chat="messages"
           :mode="ranOn"
@@ -299,7 +327,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, onMounted, ref, watch } from "vue";
+import {
+  computed,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  watch,
+} from "vue";
 import { chatFingerprint } from "~/utils/chatFingerprint";
 import { storeToRefs } from "pinia";
 import ToolDropzone from "~/components/tools/ToolDropzone.vue";
@@ -319,17 +354,20 @@ import { participantMessages } from "~/utils/utils";
 // WebLLM itself is only fetched inside analyzeLocally, once someone asks.
 import {
   analyzeLocally,
+  checkLocalModel,
   isModelDownloaded,
   meteredConnection,
-  pickLocalModel,
-  supportsLocalModel,
+  smallerModel,
+  stopLocalModel,
   takeCrashedRun,
   reportLocalFailure,
   localTranscriptChars,
   type AiProgress,
   type LocalModel,
+  type LocalUnavailable,
 } from "~/utils/ai/localModel";
 import { localErrorKey } from "~/utils/ai/localErrors";
+import { callableErrorCode } from "~/utils/ai/cloudErrors";
 import {
   analyzeInCloud,
   getCloudAllowance,
@@ -490,13 +528,22 @@ const report = computed<AiReportData | null>(() =>
       }
     : null,
 );
-const localSupported = ref<boolean | null>(null);
+/** Why this device can't run the on-device AI, once checked; null if it can. */
+const localUnavailable = ref<LocalUnavailable | null>(null);
+/** The model it would have run there: how big a download it can't take. */
+const unavailableModel = ref<LocalModel | null>(null);
 const modelDownloaded = ref(false);
+/** Today's cloud analyses are used up: nothing to fall back to. */
+const cloudSpent = computed(
+  () => isSubscriptionValid.value && allowance.value?.remaining === 0,
+);
 const dataWarning = ref(false);
 const meteredReason = ref<"cellular" | "unknown" | null>(null);
 
 const downloadGb = computed(() =>
-  ((localModel.value?.downloadMb ?? 0) / 1000).toLocaleString(locale.value, {
+  (
+    ((localModel.value ?? unavailableModel.value)?.downloadMb ?? 0) / 1000
+  ).toLocaleString(locale.value, {
     maximumFractionDigits: 1,
   }),
 );
@@ -543,22 +590,33 @@ async function onChatLoaded(payload: { analysis: unknown }) {
   insights.value = null;
   errorKey.value = null;
   restoreReport();
-  localSupported.value = await supportsLocalModel();
-  if (localSupported.value) {
-    localModel.value = await pickLocalModel();
-    modelDownloaded.value = isModelDownloaded(localModel.value);
-    const crash = takeCrashedRun();
-    localCrashed.value = !!crash;
-    if (crash) {
-      analyticsTools.error("ai", "local:crashed");
-      analyticsTools.aiFailed("local", "crashed");
-      reportLocalFailure("crashed", crash.model, crash.phase);
-    }
+  // requestDevice can take a moment on some drivers: scroll first.
+  void nextTick(() =>
+    document
+      .getElementById(insights.value ? "ai-report" : "ai-choose")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" }),
+  );
+  // Before anyone clicks: a device that can't run it is pointed at the cloud
+  // now, not after a download (utils/ai/localCheck.js).
+  const check = await checkLocalModel();
+  localUnavailable.value = check.unavailable;
+  localModel.value = check.unavailable ? null : check.model;
+  unavailableModel.value = check.unavailable ? check.model : null;
+  if (check.unavailable) analyticsTools.aiLocalUnavailable(check.unavailable);
+  const crash = takeCrashedRun();
+  if (crash) {
+    analyticsTools.error("ai", "local:crashed");
+    analyticsTools.aiFailed("local", "crashed", crash.phase);
+    reportLocalFailure("crashed", crash.model, crash.phase);
   }
-  await nextTick();
-  document
-    .getElementById(insights.value ? "ai-report" : "ai-choose")
-    ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  if (localModel.value) {
+    localCrashed.value = !!crash;
+    // The tab died running the 2B model: next time, the 1B one.
+    if (crash?.model === localModel.value.id) {
+      localModel.value = smallerModel(localModel.value) ?? localModel.value;
+    }
+    modelDownloaded.value = isModelDownloaded(localModel.value);
+  }
 }
 
 function reset() {
@@ -614,6 +672,7 @@ const barValue = computed<number | undefined>(() => {
 const progressText = computed(() => {
   const p = progress.value;
   if (running.value === "cloud") return t("toolsAi.progressCloud");
+  if (p?.phase === "download" && p.retry) return t("toolsAi.progressRetry");
   if (p?.phase === "download" && p.progress < 1) {
     if (modelDownloaded.value) return t("toolsAi.progressLoading");
     const mb = (n: number) => Math.round(n).toLocaleString(locale.value);
@@ -667,6 +726,12 @@ function confirmDownload() {
   run("local");
 }
 
+/** No download at all: the anonymized cloud run instead. */
+function cloudInstead() {
+  dataWarning.value = false;
+  run("cloud", "fallback");
+}
+
 // Closed without "continue" (cancel, backdrop, Esc): run() hasn't started.
 watch(dataWarning, (open) => {
   if (!open && running.value === null) {
@@ -674,7 +739,18 @@ watch(dataWarning, (open) => {
   }
 });
 
-async function run(mode: Mode) {
+/** Set by a run in progress: reports it abandoned when the page goes. */
+let leaving: (() => void) | null = null;
+let unmounted = false;
+onBeforeUnmount(() => {
+  // Leaving for another page of the site fires no pagehide.
+  unmounted = true;
+  leaving?.();
+  stopLocalModel();
+});
+
+/** `via` "fallback": the cloud, offered when the on-device AI couldn't. */
+async function run(mode: Mode, via?: "fallback") {
   if (!messages.value) return;
   running.value = mode;
   progress.value = null;
@@ -684,15 +760,19 @@ async function run(mode: Mode) {
   const preview = mode === "cloud" && !isSubscriptionValid.value;
   const trackedMode = preview ? "preview" : mode;
   const startedAt = performance.now();
-  analyticsTools.aiStarted(trackedMode, question.value ?? "none", source);
+  const from = via ?? source;
+  analyticsTools.aiStarted(trackedMode, question.value ?? "none", from);
+  const phase = () =>
+    mode === "cloud" ? "cloud" : (progress.value?.phase ?? "download");
   // Leaving mid-run used to vanish from the funnel: started, never finished.
   const onLeave = () =>
     analyticsTools.aiAbandoned(
       trackedMode,
-      mode === "cloud" ? "cloud" : (progress.value?.phase ?? "download"),
+      phase(),
       performance.now() - startedAt,
     );
   window.addEventListener("pagehide", onLeave);
+  leaving = onLeave;
   // Keep the screen on: a phone that dims and locks pauses the on-device AI.
   const wakeLock = await (navigator as any).wakeLock
     ?.request("screen")
@@ -760,49 +840,83 @@ async function run(mode: Mode) {
     };
     ranOn.value = mode;
     saveReport();
-    analyticsTools.aiFinished(
-      trackedMode,
-      performance.now() - startedAt,
-      source,
-    );
+    // Already counted as abandoned; the report is kept for coming back.
+    if (unmounted) return;
+    analyticsTools.aiFinished(trackedMode, performance.now() - startedAt, from);
     await nextTick();
     document
       .getElementById("ai-report")
       ?.scrollIntoView({ behavior: "smooth", block: "start" });
   } catch (err: any) {
+    const message = String(err?.message ?? "unknown");
+    // The page went mid-run and stopped the model: abandoned, not failed.
+    if (unmounted || message === "stopped") return;
     // Callable errors carry the function's message; everything else is ours.
     const known = [
       "not_subscribed",
       "daily_limit",
       "preview_used",
+      "preview_cap",
       "local_invalid",
       "no_messages",
     ];
-    const message = String(err?.message ?? "unknown");
-    errorKey.value = known.includes(message)
-      ? message
+    const code = callableErrorCode(message);
+    errorKey.value = known.includes(code)
+      ? code
       : mode === "local"
         ? localErrorKey(message)
         : mode;
     errorMode.value = mode;
-    if (mode === "local" && message !== "no_messages") {
+    if (mode === "local" && code !== "no_messages") {
       reportLocalFailure(
         message,
         localModel.value?.id,
-        progress.value?.phase ?? "download",
+        phase(),
+        err?.finish ? { finish: err.finish, chars: err.chars } : undefined,
       );
+      // Out of GPU memory on the 2B model: "try again" runs the 1B one.
+      const smaller =
+        errorKey.value === "local_memory" && localModel.value
+          ? smallerModel(localModel.value)
+          : null;
+      if (smaller) {
+        localModel.value = smaller;
+        modelDownloaded.value = isModelDownloaded(smaller);
+      }
     }
-    if (err?.message === "daily_limit") {
+    if (code === "daily_limit") {
       allowance.value = { remaining: 0, limit: allowance.value?.limit ?? 10 };
     }
     analyticsTools.error("ai", `${mode}:${message}`);
-    analyticsTools.aiFailed(trackedMode, message);
+    analyticsTools.aiFailed(trackedMode, message, phase());
   } finally {
+    leaving = null;
     window.removeEventListener("pagehide", onLeave);
     wakeLock?.release().catch(() => {});
     running.value = null;
   }
 }
+
+/** What the local card says instead of its button, if this device can't. */
+const unavailableText = computed(() => {
+  switch (localUnavailable.value) {
+    case null:
+      return "";
+    case "gpu_device":
+      return t("toolsAi.localUnsupportedGpu");
+    case "storage":
+      return t("toolsAi.localUnsupportedStorage", { gb: downloadGb.value });
+    default:
+      return t("toolsAi.localUnsupported");
+  }
+});
+
+/** On-device failed or crashed: offer the cloud right there. */
+const offerCloud = computed(
+  () =>
+    localCrashed.value ||
+    (errorMode.value === "local" && errorKey.value !== "no_messages"),
+);
 
 const modes = computed(() => [
   {
@@ -825,9 +939,9 @@ const modes = computed(() => [
       t("toolsAi.localCon3"),
     ],
     button: t("toolsAi.localButton"),
-    unavailable:
-      localSupported.value === false ? t("toolsAi.localUnsupported") : "",
+    unavailable: unavailableText.value,
     crashed: localCrashed.value ? t("toolsAi.localCrashed") : "",
+    offerCloud: offerCloud.value,
   },
   {
     id: "cloud" as Mode,
@@ -842,6 +956,7 @@ const modes = computed(() => [
     ],
     cons: [t("toolsAi.cloudCon1"), t("toolsAi.cloudCon2")],
     crashed: "",
+    offerCloud: false,
     button: isSubscriptionValid.value
       ? t("toolsAi.cloudButton")
       : t("toolsAi.cloudPreviewButton"),
@@ -1011,6 +1126,11 @@ useToolSchema({
   color: rgba(29, 29, 31, 0.55);
 }
 
+.mode-card__fallback {
+  display: grid;
+  gap: 0.5rem;
+}
+
 .data-dialog {
   background: #fff;
   border-radius: 20px;
@@ -1041,6 +1161,15 @@ useToolSchema({
     font-weight: 600;
     color: #1d1d1f;
     border: 1px solid rgba(29, 29, 31, 0.2);
+
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
+
+  &__fineprint {
+    font-size: 0.82rem;
+    color: rgba(29, 29, 31, 0.6);
   }
 }
 

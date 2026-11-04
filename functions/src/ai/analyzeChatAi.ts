@@ -289,6 +289,8 @@ export const analyzeChatAi = onCall(
         logger.warn("AI preview daily limit reached", {
           limit: aiPreviewDailyLimit.value(),
         });
+        // Not "preview_used": this visitor may not have had one yet.
+        throw new HttpsError("resource-exhausted", "preview_cap");
       }
       if (taken !== "ok") {
         throw new HttpsError("resource-exhausted", "preview_used");

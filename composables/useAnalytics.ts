@@ -23,8 +23,11 @@ declare global {
 }
 /* eslint-enable no-unused-vars */
 
-/** Where an AI analysis was asked for: the AI tool page or the analyzer's results. */
-export type AiSource = "tool" | "results";
+/**
+ * Where an AI analysis was asked for: the AI tool page, the analyzer's
+ * results, or the cloud offered after the on-device AI couldn't run.
+ */
+export type AiSource = "tool" | "results" | "fallback";
 
 export interface EventParams {
   [key: string]: string | number | boolean | null | undefined;
@@ -337,12 +340,24 @@ export const analyticsTools = {
     });
   },
 
-  /** An AI analysis ended in an error: a known code or the raw message. */
-  aiFailed(mode: AiMode, reason: string) {
+  /**
+   * An AI analysis ended in an error: a known code or the raw message.
+   * `phase` is where, as for aiAbandoned: download, read, write or cloud.
+   */
+  aiFailed(mode: AiMode, reason: string, phase?: string) {
     trackEvent("ai_analysis_failed", {
       ai_mode: mode,
       reason: reason.slice(0, 100),
+      phase,
     });
+  },
+
+  /**
+   * The on-device AI isn't offered on this device, and why: no_webgpu,
+   * no_adapter, gpu_limits, gpu_device or storage (utils/ai/localCheck.js).
+   */
+  aiLocalUnavailable(reason: string) {
+    trackEvent("ai_local_unavailable", { reason });
   },
 
   /**

@@ -15,6 +15,12 @@ import { participantMessages } from "~/utils/utils";
 const WINDOW = 20;
 /** A single message is cut here, so one wall of text can't eat the budget. */
 const MAX_MESSAGE_CHARS = 280;
+/**
+ * Participants listed, the most active first: what the cloud function's
+ * digestSchema accepts. A bigger group was sent whole and turned away as
+ * "Malformed analysis request". The rest still appear in the transcript.
+ */
+const MAX_PARTICIPANTS = 50;
 
 /** WhatsApp's stand-ins for media, in the languages it exports. */
 const MEDIA_PLACEHOLDER =
@@ -124,10 +130,12 @@ export function buildDigest(messages, maxChars) {
 
   return {
     digest: {
-      participants: authors.map(([author, count]) => ({
-        alias: aliasOf.get(author),
-        messages: count,
-      })),
+      participants: authors
+        .slice(0, MAX_PARTICIPANTS)
+        .map(([author, count]) => ({
+          alias: aliasOf.get(author),
+          messages: count,
+        })),
       totalMessages: spoken.length,
       firstDate: day(spoken[0].date),
       lastDate: day(spoken[spoken.length - 1].date),
