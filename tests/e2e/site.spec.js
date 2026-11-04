@@ -498,11 +498,11 @@ test.describe("the analyzer", () => {
 
     // The breadcrumb trail Google shows leads to this locale's pages, not the
     // English ones.
-    const graphs = await page
+    const blocks = await page
       .locator('script[type="application/ld+json"]')
       .allTextContents();
-    const trail = graphs
-      .flatMap((text) => JSON.parse(text)["@graph"] || [])
+    const trail = blocks
+      .map((text) => JSON.parse(text))
       .find((node) => node["@type"] === "BreadcrumbList");
     expect(trail.itemListElement.map((crumb) => crumb.item)).toEqual([
       expect.stringMatching(/\/de\/$/),
@@ -528,6 +528,32 @@ test.describe("the analyzer", () => {
 
     await expect(page).toHaveURL(/#results$/);
     await expectAnalysis(page);
+  });
+
+  test("offers the PDF page to search and takes a dropped chat to the download", async ({
+    page,
+  }) => {
+    await page.goto("/whatsapp-to-pdf");
+
+    await expect(
+      page.getByRole("heading", {
+        name: "Export a WhatsApp chat to PDF",
+        level: 1,
+      }),
+    ).toBeVisible();
+    // It was noindex and left out of the sitemap while it was three
+    // sentences long.
+    await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
+    const sitemap = await (await page.request.get("/sitemap.xml")).text();
+    expect(sitemap).toContain("/whatsapp-to-pdf/</loc>");
+
+    await page
+      .locator('#dropzone-slot input[type="file"]')
+      .setInputFiles(EXAMPLE_CHAT);
+
+    // The PDF is made under the analysis on the home page.
+    await expect(page).toHaveURL(/#payButton$/);
+    await expect(page.locator("#payButton")).toBeInViewport();
   });
 });
 

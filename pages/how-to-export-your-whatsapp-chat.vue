@@ -76,7 +76,10 @@
 import { ONE_TIME_PRICE, formatPrice } from "~/utils/pricing";
 import { analyticsTools } from "~/composables/useAnalytics";
 import ToolDropzone from "~/components/tools/ToolDropzone.vue";
-import { scrollToDropzone } from "~/composables/useToolPage";
+import {
+  scrollToDropzone,
+  useBreadcrumbSchema,
+} from "~/composables/useToolPage";
 
 const GUIDE_PATH = "/how-to-export-your-whatsapp-chat";
 
@@ -132,44 +135,29 @@ export default {
     // trail, and the article's title and date. HowTo and FAQ rich results no
     // longer appear at all (FAQ since May 2026), so the steps are not marked
     // up as either.
+    useBreadcrumbSchema(
+      computed(() => [
+        { name: "WhatsAnalyze", url: homeUrl },
+        { name: title.value, url: pageUrl },
+      ]),
+    );
     useHead(() => ({
       script: [
         {
           type: "application/ld+json",
           innerHTML: JSON.stringify({
             "@context": "https://schema.org",
-            "@graph": [
-              {
-                "@type": "BreadcrumbList",
-                itemListElement: [
-                  {
-                    "@type": "ListItem",
-                    position: 1,
-                    name: "WhatsAnalyze",
-                    item: homeUrl,
-                  },
-                  {
-                    "@type": "ListItem",
-                    position: 2,
-                    name: title.value,
-                    item: pageUrl,
-                  },
-                ],
-              },
-              {
-                "@type": "Article",
-                headline: title.value,
-                description: t("seo.exportGuideDescription"),
-                inLanguage: localeProperties.value.language,
-                dateModified: `${STEPS_CHECKED}T00:00:00Z`,
-                author: {
-                  "@type": "Organization",
-                  name: "WhatsAnalyze",
-                  url: `${baseUrl}/`,
-                },
-                mainEntityOfPage: pageUrl,
-              },
-            ],
+            "@type": "Article",
+            headline: title.value,
+            description: t("seo.exportGuideDescription"),
+            inLanguage: localeProperties.value.language,
+            dateModified: `${STEPS_CHECKED}T00:00:00Z`,
+            author: {
+              "@type": "Organization",
+              name: "WhatsAnalyze",
+              url: `${baseUrl}/`,
+            },
+            mainEntityOfPage: pageUrl,
           }),
         },
       ],
@@ -219,9 +207,12 @@ export default {
           text: t("exportGuidePage.cardPdfText", {
             price: formatPrice(ONE_TIME_PRICE, locale.value),
           }),
-          // The download sits under the analysis on the home page.
+          // With a chat: straight to the download under the analysis on the
+          // home page. Without one: the PDF page, which explains it first.
           to: localePath(
-            chatReady.value ? { path: "/", hash: "#payButton" } : "/",
+            chatReady.value
+              ? { path: "/", hash: "#payButton" }
+              : "/whatsapp-to-pdf",
           ),
           linkText,
         },

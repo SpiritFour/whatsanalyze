@@ -53,7 +53,7 @@ The Mac app works like the iPhone: click the contact's or group's name, then **E
 
 WhatsApp has no PDF export of its own. [Open your export here](#dropzone-slot) and WhatsAnalyze turns it into one:
 
-- **Chat PDF**: the whole conversation, ready to print or keep, with the photos if you exported with media. The preview is free; the full PDF is a one-time purchase.
+- **[Chat PDF](/whatsapp-to-pdf/)**: the whole conversation, ready to print or keep, with the photos if you exported with media. The preview is free; the full PDF is a one-time purchase.
 - **[Court evidence PDF](/tools/court-evidence/)**: numbered lines, exact timestamps, a SHA-256 fingerprint of your export and an exhibit list, made for lawyers, courts and authorities.
 
 Both are made in your browser: your chat isn't uploaded.

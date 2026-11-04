@@ -139,7 +139,8 @@ interface Props {
     | "heatmap"
     | "ai"
     | "court"
-    | "export_guide";
+    | "export_guide"
+    | "pdf";
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -246,11 +247,12 @@ function showChat(
   if (
     props.toolType === "ai" ||
     props.toolType === "court" ||
-    props.toolType === "export_guide"
+    props.toolType === "export_guide" ||
+    props.toolType === "pdf"
   ) {
     // These pages analyze on demand: the AI once the visitor has picked
-    // where, the court PDF once it is downloaded. The export guide only
-    // hands the chat on to whichever of those the visitor picks next.
+    // where, the court PDF once it is downloaded. The export guide and the
+    // PDF page only hand the chat on to the page that does the work.
     analysis = { messages };
   } else if (props.toolType === "messages") {
     analysis = analyzeMessages(messages, durationMs);

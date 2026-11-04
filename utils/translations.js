@@ -10,9 +10,9 @@ export const messages = {
         "How to Export a WhatsApp Chat: iPhone, Android, Web & PDF",
       exportGuideDescription:
         "Step by step: export any WhatsApp chat or group on iPhone, Android, WhatsApp Web, Windows or Mac, with or without media. Then turn it into a PDF or stats.",
-      pdfGuideTitle: "WhatsAnalyze - How to Export your WhatsApp Chat to PDF",
+      pdfGuideTitle: "Export WhatsApp Chat to PDF – with Photos, Free Preview",
       pdfGuideDescription:
-        "Export your WhatsApp chat to PDF in seconds without sending chat data to a server.",
+        "Turn an exported WhatsApp chat into a PDF with every message, the photos and chat statistics. Made in your browser, nothing uploaded. Free preview.",
       signalTitle: "WhatsAnalyze - How to switch from WhatsApp to Signal",
       signalDescription:
         "Switch from WhatsApp to Signal, transfer group chats, and create backups.",
@@ -46,6 +46,65 @@ export const messages = {
       ctaTitle: "Got your export? Open it here",
       ctaButton: "Open my chat file",
       ctaNote: "Read in your browser · .zip or .txt · Free statistics",
+    },
+    pdfPage: {
+      navLabel: "WhatsApp chat to PDF",
+      heroTitle: "Export a WhatsApp chat to PDF",
+      heroSubtitle:
+        "Every message, the photos and your chat statistics in one PDF to print, keep or send. Made in your browser from your chat export, nothing uploaded.",
+      heroCta: "Make my PDF",
+      heroNote: "Free preview · Full PDF {price} once · No account",
+      exampleAlt: "Pages of a PDF made from an example WhatsApp chat",
+      uploadTitle: "Drop your export, get the PDF",
+      uploadText:
+        "Open the .zip or .txt file WhatsApp gave you. It is read in your browser, not uploaded.",
+      createButton: "Create my PDF",
+      guideLink: "No export yet? How to export a WhatsApp chat",
+      contentsEyebrow: "What's inside",
+      contentsTitle: "More than a printout of the chat",
+      card1Title: "The whole conversation",
+      card1Text:
+        "Every message with its sender, date and time, in order, and the photos next to them if you exported with media.",
+      card2Title: "Your chat in numbers",
+      card2Text:
+        "A cover with your first and last message, days, messages and people, then charts: timeline, by hour, by person, by month and by weekday.",
+      card3Title: "Fun facts about each person",
+      card3Text:
+        "Words written, longest message, vocabulary, favourite emojis and average message length.",
+      stepsTitle: "Three steps",
+      step1Title: "Export the chat",
+      step1Text:
+        "In WhatsApp, open the chat and choose Export chat. Include media if the PDF should show the photos.",
+      step2Title: "Drop it here",
+      step2Text:
+        "The .zip or .txt opens in your browser, and nothing is uploaded.",
+      step3Title: "Download the PDF",
+      step3Text:
+        "The preview with the first 100 messages is free. The whole chat is {price}, once.",
+      courtEyebrow: "For lawyers and courts",
+      courtTitle: "Need the chat as evidence?",
+      courtText:
+        "The court evidence PDF is a plain black-and-white transcript: numbered lines, exact timestamps, a SHA-256 fingerprint of your export and an exhibit list.",
+      courtButton: "Court evidence PDF",
+      faqTitle: "Questions about the PDF",
+      faq1Q: "Can WhatsApp export a chat as a PDF?",
+      faq1A:
+        "No. WhatsApp exports a chat as a .zip or .txt file. WhatsAnalyze turns that file into a PDF, right in your browser.",
+      faq2Q: "Is it free?",
+      faq2A:
+        "The preview with the first 100 messages is free. The full PDF of the whole chat costs {price} once, and Pro subscribers download as many as they like.",
+      faq3Q: "Is my chat uploaded anywhere?",
+      faq3A:
+        "No. The file is read and the PDF is built in your browser. Paying for the full PDF goes through Stripe, and your chat is not part of it.",
+      faq4Q: "Are photos included?",
+      faq4A:
+        "Yes, if you export the chat with media: the photos appear in the PDF next to their messages. Without media you get a PDF of the text.",
+      faq5Q: "Does it work for group chats and on iPhone?",
+      faq5A:
+        "Yes. Any one-on-one or group chat works, exported from iPhone, Android, WhatsApp Web, Windows or Mac.",
+      ctaTitle: "Your chat, as a PDF",
+      ctaButton: "Make my PDF",
+      ctaNote: "Free preview · Made in your browser",
     },
     subscribePage: {
       title: "One Subscription. Everything Unlocked.",
@@ -1337,9 +1396,9 @@ export const messages = {
         "WhatsApp-Chat exportieren: iPhone, Android, PC, Web & PDF",
       exportGuideDescription:
         "Schritt für Schritt: WhatsApp-Chat oder Gruppe exportieren – auf iPhone, Android, WhatsApp Web, Windows oder Mac, mit oder ohne Medien. Danach als PDF oder Statistik.",
-      pdfGuideTitle: "WhatsAnalyze - WhatsApp-Chat als PDF exportieren",
+      pdfGuideTitle: "WhatsApp-Chat als PDF exportieren – mit Fotos",
       pdfGuideDescription:
-        "Exportiere deinen WhatsApp-Chat in Sekunden als PDF, ohne Chat-Daten an einen Server zu senden.",
+        "Mach aus einem exportierten WhatsApp-Chat ein PDF mit allen Nachrichten, Fotos und Statistiken. Direkt im Browser, ohne Upload. Vorschau kostenlos.",
       signalTitle: "WhatsAnalyze - Von WhatsApp zu Signal wechseln",
       signalDescription:
         "Wechsle von WhatsApp zu Signal, übertrage Gruppenchats und erstelle Backups.",
@@ -1373,6 +1432,66 @@ export const messages = {
       ctaButton: "Meine Chat-Datei öffnen",
       ctaNote:
         "Wird im Browser gelesen · .zip oder .txt · Statistiken kostenlos",
+    },
+    pdfPage: {
+      navLabel: "WhatsApp-Chat als PDF",
+      heroTitle: "WhatsApp-Chat als PDF exportieren",
+      heroSubtitle:
+        "Alle Nachrichten, die Fotos und eure Chat-Statistiken in einem PDF zum Ausdrucken, Aufbewahren oder Verschicken. Direkt im Browser aus deinem Chat-Export erstellt, ohne Upload.",
+      heroCta: "PDF erstellen",
+      heroNote:
+        "Vorschau kostenlos · Vollständiges PDF einmalig {price} · Kein Konto",
+      exampleAlt: "Seiten eines PDFs aus einem Beispiel-WhatsApp-Chat",
+      uploadTitle: "Export hineinziehen, PDF bekommen",
+      uploadText:
+        "Öffne die .zip- oder .txt-Datei, die WhatsApp erstellt hat. Sie wird in deinem Browser gelesen, nicht hochgeladen.",
+      createButton: "Mein PDF erstellen",
+      guideLink: "Noch kein Export? So exportierst du einen WhatsApp-Chat",
+      contentsEyebrow: "Was drinsteht",
+      contentsTitle: "Mehr als ein Ausdruck des Chats",
+      card1Title: "Das ganze Gespräch",
+      card1Text:
+        "Jede Nachricht mit Absender, Datum und Uhrzeit, in der richtigen Reihenfolge – und die Fotos daneben, wenn du mit Medien exportiert hast.",
+      card2Title: "Euer Chat in Zahlen",
+      card2Text:
+        "Ein Deckblatt mit erster und letzter Nachricht, Tagen, Nachrichten und Personen, dann Diagramme: Verlauf, nach Uhrzeit, nach Person, nach Monat und nach Wochentag.",
+      card3Title: "Fun Facts zu jeder Person",
+      card3Text:
+        "Geschriebene Wörter, längste Nachricht, Wortschatz, Lieblings-Emojis und durchschnittliche Nachrichtenlänge.",
+      stepsTitle: "In drei Schritten",
+      step1Title: "Chat exportieren",
+      step1Text:
+        "Öffne den Chat in WhatsApp und wähle „Chat exportieren“. Mit Medien, wenn das PDF die Fotos zeigen soll.",
+      step2Title: "Hier hineinziehen",
+      step2Text:
+        "Die .zip- oder .txt-Datei öffnet sich in deinem Browser, nichts wird hochgeladen.",
+      step3Title: "PDF herunterladen",
+      step3Text:
+        "Die Vorschau mit den ersten 100 Nachrichten ist kostenlos. Der ganze Chat kostet einmalig {price}.",
+      courtEyebrow: "Für Anwälte und Gerichte",
+      courtTitle: "Brauchst du den Chat als Beweis?",
+      courtText:
+        "Das Beweis-PDF ist ein schlichtes Schwarz-Weiß-Protokoll: nummerierte Zeilen, genaue Zeitstempel, ein SHA-256-Fingerabdruck deines Exports und ein Anlagenverzeichnis.",
+      courtButton: "Zum Beweis-PDF",
+      faqTitle: "Fragen zum PDF",
+      faq1Q: "Kann WhatsApp einen Chat als PDF exportieren?",
+      faq1A:
+        "Nein. WhatsApp exportiert einen Chat als .zip- oder .txt-Datei. WhatsAnalyze macht daraus ein PDF, direkt in deinem Browser.",
+      faq2Q: "Ist es kostenlos?",
+      faq2A:
+        "Die Vorschau mit den ersten 100 Nachrichten ist kostenlos. Das vollständige PDF des ganzen Chats kostet einmalig {price}, und mit Pro lädst du so viele herunter, wie du willst.",
+      faq3Q: "Wird mein Chat irgendwo hochgeladen?",
+      faq3A:
+        "Nein. Die Datei wird in deinem Browser gelesen und das PDF dort erstellt. Bezahlt wird das vollständige PDF über Stripe, dein Chat ist daran nicht beteiligt.",
+      faq4Q: "Sind Fotos dabei?",
+      faq4A:
+        "Ja, wenn du den Chat mit Medien exportierst: Die Fotos stehen im PDF neben ihren Nachrichten. Ohne Medien bekommst du ein PDF des Textes.",
+      faq5Q: "Geht das auch mit Gruppenchats und auf dem iPhone?",
+      faq5A:
+        "Ja. Jeder Einzel- oder Gruppenchat geht, exportiert auf iPhone, Android, WhatsApp Web, Windows oder Mac.",
+      ctaTitle: "Dein Chat als PDF",
+      ctaButton: "PDF erstellen",
+      ctaNote: "Vorschau kostenlos · Im Browser erstellt",
     },
     subscribePage: {
       title: "Ein Abo. Alles freigeschaltet.",
@@ -2656,9 +2775,9 @@ export const messages = {
       exportGuideTitle: "Exportar chat de WhatsApp: iPhone, Android, Web y PDF",
       exportGuideDescription:
         "Paso a paso: exporta cualquier chat o grupo de WhatsApp en iPhone, Android, WhatsApp Web, Windows o Mac, con o sin archivos. Después, conviértelo en PDF o estadísticas.",
-      pdfGuideTitle: "WhatsAnalyze - Cómo exportar tu chat de WhatsApp a PDF",
+      pdfGuideTitle: "Exportar chat de WhatsApp a PDF, con fotos",
       pdfGuideDescription:
-        "Exporta tu chat de WhatsApp a PDF en segundos sin enviar los datos a ningún servidor.",
+        "Convierte un chat de WhatsApp exportado en un PDF con todos los mensajes, las fotos y estadísticas. Se crea en tu navegador, sin subir nada. Vista previa gratis.",
       signalTitle: "WhatsAnalyze - Cómo pasar de WhatsApp a Signal",
       signalDescription:
         "Pasa de WhatsApp a Signal, transfiere chats de grupo y crea copias de seguridad.",
@@ -2691,6 +2810,67 @@ export const messages = {
       ctaTitle: "¿Ya tienes tu exportación? Ábrela aquí",
       ctaButton: "Abrir mi archivo de chat",
       ctaNote: "Se lee en tu navegador · .zip o .txt · Estadísticas gratis",
+    },
+    pdfPage: {
+      navLabel: "Chat de WhatsApp a PDF",
+      heroTitle: "Exportar un chat de WhatsApp a PDF",
+      heroSubtitle:
+        "Todos los mensajes, las fotos y las estadísticas del chat en un PDF para imprimir, guardar o enviar. Se crea en tu navegador a partir de tu exportación, sin subir nada.",
+      heroCta: "Crear mi PDF",
+      heroNote:
+        "Vista previa gratis · PDF completo por {price}, pago único · Sin cuenta",
+      exampleAlt:
+        "Páginas de un PDF creado a partir de un chat de WhatsApp de ejemplo",
+      uploadTitle: "Suelta tu exportación y obtén el PDF",
+      uploadText:
+        "Abre el archivo .zip o .txt que te dio WhatsApp. Se lee en tu navegador, no se sube.",
+      createButton: "Crear mi PDF",
+      guideLink:
+        "¿Aún no tienes la exportación? Cómo exportar un chat de WhatsApp",
+      contentsEyebrow: "Qué incluye",
+      contentsTitle: "Más que una copia impresa del chat",
+      card1Title: "Toda la conversación",
+      card1Text:
+        "Cada mensaje con su remitente, fecha y hora, en orden, y las fotos al lado si exportaste con archivos multimedia.",
+      card2Title: "Tu chat en cifras",
+      card2Text:
+        "Una portada con el primer y el último mensaje, días, mensajes y personas, y luego gráficos: evolución, por hora, por persona, por mes y por día de la semana.",
+      card3Title: "Curiosidades de cada persona",
+      card3Text:
+        "Palabras escritas, mensaje más largo, vocabulario, emojis favoritos y longitud media de los mensajes.",
+      stepsTitle: "En tres pasos",
+      step1Title: "Exporta el chat",
+      step1Text:
+        "En WhatsApp, abre el chat y elige «Exportar chat». Incluye los archivos multimedia si quieres que el PDF muestre las fotos.",
+      step2Title: "Suéltalo aquí",
+      step2Text: "El .zip o el .txt se abre en tu navegador y no se sube nada.",
+      step3Title: "Descarga el PDF",
+      step3Text:
+        "La vista previa con los 100 primeros mensajes es gratis. El chat completo cuesta {price}, en un único pago.",
+      courtEyebrow: "Para abogados y juzgados",
+      courtTitle: "¿Necesitas el chat como prueba?",
+      courtText:
+        "El PDF de prueba judicial es una transcripción sobria en blanco y negro: líneas numeradas, marcas de tiempo exactas, una huella SHA-256 de tu exportación y un índice de anexos.",
+      courtButton: "PDF de prueba judicial",
+      faqTitle: "Preguntas sobre el PDF",
+      faq1Q: "¿Puede WhatsApp exportar un chat en PDF?",
+      faq1A:
+        "No. WhatsApp exporta un chat como archivo .zip o .txt. WhatsAnalyze lo convierte en PDF, en tu navegador.",
+      faq2Q: "¿Es gratis?",
+      faq2A:
+        "La vista previa con los 100 primeros mensajes es gratis. El PDF completo de todo el chat cuesta {price} en un único pago, y con Pro descargas todos los que quieras.",
+      faq3Q: "¿Se sube mi chat a algún sitio?",
+      faq3A:
+        "No. El archivo se lee y el PDF se crea en tu navegador. El pago del PDF completo se hace con Stripe, y tu chat no forma parte de él.",
+      faq4Q: "¿Incluye las fotos?",
+      faq4A:
+        "Sí, si exportas el chat con archivos multimedia: las fotos aparecen en el PDF junto a sus mensajes. Sin ellos obtienes un PDF del texto.",
+      faq5Q: "¿Funciona con chats de grupo y en iPhone?",
+      faq5A:
+        "Sí. Cualquier chat individual o de grupo, exportado desde iPhone, Android, WhatsApp Web, Windows o Mac.",
+      ctaTitle: "Tu chat, en PDF",
+      ctaButton: "Crear mi PDF",
+      ctaNote: "Vista previa gratis · Se crea en tu navegador",
     },
     subscribePage: {
       title: "Una suscripción. Todo desbloqueado.",
@@ -3960,10 +4140,9 @@ export const messages = {
         "Exportar conversa do WhatsApp: iPhone, Android, Web e PDF",
       exportGuideDescription:
         "Passo a passo para exportar qualquer conversa ou grupo do WhatsApp no iPhone, Android, WhatsApp Web, Windows ou Mac, com ou sem fotos. Depois, gere um PDF ou estatísticas.",
-      pdfGuideTitle:
-        "WhatsAnalyze - Como exportar a tua conversa do WhatsApp para PDF",
+      pdfGuideTitle: "Exportar conversa do WhatsApp para PDF, com fotos",
       pdfGuideDescription:
-        "Exporta a tua conversa do WhatsApp para PDF em segundos, sem enviar dados para um servidor.",
+        "Transforme uma conversa exportada do WhatsApp em um PDF com todas as mensagens, as fotos e estatísticas. Criado no seu navegador, sem upload. Prévia grátis.",
       signalTitle: "WhatsAnalyze - Como mudar do WhatsApp para o Signal",
       signalDescription:
         "Muda do WhatsApp para o Signal, transfere conversas de grupo e cria cópias de segurança.",
@@ -3996,6 +4175,66 @@ export const messages = {
       ctaTitle: "Exportação pronta? Abra aqui",
       ctaButton: "Abrir meu arquivo",
       ctaNote: "Lido no seu navegador · .zip ou .txt · Estatísticas grátis",
+    },
+    pdfPage: {
+      navLabel: "Conversa do WhatsApp em PDF",
+      heroTitle: "Exportar uma conversa do WhatsApp para PDF",
+      heroSubtitle:
+        "Todas as mensagens, as fotos e as estatísticas da conversa em um PDF para imprimir, guardar ou enviar. Criado no seu navegador a partir da sua exportação, sem upload.",
+      heroCta: "Criar meu PDF",
+      heroNote:
+        "Prévia grátis · PDF completo por {price}, pagamento único · Sem conta",
+      exampleAlt:
+        "Páginas de um PDF criado a partir de uma conversa de exemplo do WhatsApp",
+      uploadTitle: "Solte sua exportação e receba o PDF",
+      uploadText:
+        "Abra o arquivo .zip ou .txt que o WhatsApp criou. Ele é lido no seu navegador, não é enviado.",
+      createButton: "Criar meu PDF",
+      guideLink: "Ainda não exportou? Como exportar uma conversa do WhatsApp",
+      contentsEyebrow: "O que tem dentro",
+      contentsTitle: "Mais do que uma impressão da conversa",
+      card1Title: "A conversa inteira",
+      card1Text:
+        "Cada mensagem com remetente, data e hora, em ordem, e as fotos ao lado se você exportou com mídia.",
+      card2Title: "Sua conversa em números",
+      card2Text:
+        "Uma capa com a primeira e a última mensagem, dias, mensagens e pessoas, e depois gráficos: linha do tempo, por hora, por pessoa, por mês e por dia da semana.",
+      card3Title: "Curiosidades de cada pessoa",
+      card3Text:
+        "Palavras escritas, mensagem mais longa, vocabulário, emojis favoritos e tamanho médio das mensagens.",
+      stepsTitle: "Em três passos",
+      step1Title: "Exporte a conversa",
+      step1Text:
+        "No WhatsApp, abra a conversa e escolha “Exportar conversa”. Inclua a mídia se o PDF deve mostrar as fotos.",
+      step2Title: "Solte aqui",
+      step2Text: "O .zip ou o .txt abre no seu navegador, e nada é enviado.",
+      step3Title: "Baixe o PDF",
+      step3Text:
+        "A prévia com as 100 primeiras mensagens é grátis. A conversa inteira custa {price}, em pagamento único.",
+      courtEyebrow: "Para advogados e tribunais",
+      courtTitle: "Precisa da conversa como prova?",
+      courtText:
+        "O PDF de prova judicial é uma transcrição sóbria em preto e branco: linhas numeradas, horários exatos, uma impressão digital SHA-256 da sua exportação e uma lista de anexos.",
+      courtButton: "PDF de prova judicial",
+      faqTitle: "Perguntas sobre o PDF",
+      faq1Q: "O WhatsApp exporta conversas em PDF?",
+      faq1A:
+        "Não. O WhatsApp exporta uma conversa como arquivo .zip ou .txt. O WhatsAnalyze transforma esse arquivo em PDF, no seu navegador.",
+      faq2Q: "É grátis?",
+      faq2A:
+        "A prévia com as 100 primeiras mensagens é grátis. O PDF completo da conversa inteira custa {price} em pagamento único, e com o Pro você baixa quantos quiser.",
+      faq3Q: "Minha conversa é enviada para algum lugar?",
+      faq3A:
+        "Não. O arquivo é lido e o PDF é criado no seu navegador. O pagamento do PDF completo é feito pelo Stripe, e sua conversa não faz parte dele.",
+      faq4Q: "As fotos vêm junto?",
+      faq4A:
+        "Sim, se você exportar a conversa com mídia: as fotos aparecem no PDF ao lado das mensagens. Sem mídia, você recebe um PDF do texto.",
+      faq5Q: "Funciona com grupos e no iPhone?",
+      faq5A:
+        "Sim. Qualquer conversa individual ou em grupo, exportada do iPhone, Android, WhatsApp Web, Windows ou Mac.",
+      ctaTitle: "Sua conversa em PDF",
+      ctaButton: "Criar meu PDF",
+      ctaNote: "Prévia grátis · Criado no seu navegador",
     },
     subscribePage: {
       title: "Uma assinatura. Tudo liberado.",
@@ -5269,10 +5508,9 @@ export const messages = {
         "Exporter une discussion WhatsApp : iPhone, Android, Web, PDF",
       exportGuideDescription:
         "Pas à pas : exportez une discussion ou un groupe WhatsApp sur iPhone, Android, WhatsApp Web, Windows ou Mac, avec ou sans médias. Puis obtenez un PDF ou des statistiques.",
-      pdfGuideTitle:
-        "WhatsAnalyze - Comment exporter votre conversation WhatsApp en PDF",
+      pdfGuideTitle: "Exporter une discussion WhatsApp en PDF, avec photos",
       pdfGuideDescription:
-        "Exportez votre conversation WhatsApp en PDF en quelques secondes, sans envoyer vos données à un serveur.",
+        "Transformez une discussion WhatsApp exportée en PDF avec tous les messages, les photos et des statistiques. Créé dans votre navigateur, sans envoi. Aperçu gratuit.",
       signalTitle: "WhatsAnalyze - Comment passer de WhatsApp à Signal",
       signalDescription:
         "Passez de WhatsApp à Signal, transférez vos groupes et créez des sauvegardes.",
@@ -5306,6 +5544,68 @@ export const messages = {
       ctaButton: "Ouvrir mon fichier",
       ctaNote:
         "Lu dans votre navigateur · .zip ou .txt · Statistiques gratuites",
+    },
+    pdfPage: {
+      navLabel: "Discussion WhatsApp en PDF",
+      heroTitle: "Exporter une discussion WhatsApp en PDF",
+      heroSubtitle:
+        "Tous les messages, les photos et les statistiques de la discussion dans un PDF à imprimer, garder ou envoyer. Créé dans votre navigateur à partir de votre export, sans rien envoyer.",
+      heroCta: "Créer mon PDF",
+      heroNote:
+        "Aperçu gratuit · PDF complet {price} en achat unique · Sans compte",
+      exampleAlt:
+        "Pages d'un PDF créé à partir d'une discussion WhatsApp d'exemple",
+      uploadTitle: "Déposez votre export, obtenez le PDF",
+      uploadText:
+        "Ouvrez le fichier .zip ou .txt créé par WhatsApp. Il est lu dans votre navigateur, pas envoyé.",
+      createButton: "Créer mon PDF",
+      guideLink:
+        "Pas encore d'export ? Comment exporter une discussion WhatsApp",
+      contentsEyebrow: "Ce qu'il contient",
+      contentsTitle: "Plus qu'une impression de la discussion",
+      card1Title: "Toute la conversation",
+      card1Text:
+        "Chaque message avec son expéditeur, sa date et son heure, dans l'ordre, et les photos à côté si vous avez exporté avec les médias.",
+      card2Title: "Votre discussion en chiffres",
+      card2Text:
+        "Une couverture avec le premier et le dernier message, les jours, les messages et les participants, puis des graphiques : chronologie, par heure, par personne, par mois et par jour de la semaine.",
+      card3Title: "Anecdotes sur chaque personne",
+      card3Text:
+        "Mots écrits, message le plus long, vocabulaire, emojis préférés et longueur moyenne des messages.",
+      stepsTitle: "En trois étapes",
+      step1Title: "Exportez la discussion",
+      step1Text:
+        "Dans WhatsApp, ouvrez la discussion et choisissez « Exporter la discussion ». Joignez les médias si le PDF doit montrer les photos.",
+      step2Title: "Déposez-la ici",
+      step2Text:
+        "Le .zip ou le .txt s'ouvre dans votre navigateur, rien n'est envoyé.",
+      step3Title: "Téléchargez le PDF",
+      step3Text:
+        "L'aperçu avec les 100 premiers messages est gratuit. La discussion complète coûte {price}, en achat unique.",
+      courtEyebrow: "Pour les avocats et les tribunaux",
+      courtTitle: "Besoin de la discussion comme preuve ?",
+      courtText:
+        "Le PDF de preuve judiciaire est une transcription sobre en noir et blanc : lignes numérotées, horodatages exacts, empreinte SHA-256 de votre export et liste des pièces.",
+      courtButton: "PDF de preuve judiciaire",
+      faqTitle: "Questions sur le PDF",
+      faq1Q: "WhatsApp peut-il exporter une discussion en PDF ?",
+      faq1A:
+        "Non. WhatsApp exporte une discussion sous forme de fichier .zip ou .txt. WhatsAnalyze en fait un PDF, dans votre navigateur.",
+      faq2Q: "Est-ce gratuit ?",
+      faq2A:
+        "L'aperçu avec les 100 premiers messages est gratuit. Le PDF complet de toute la discussion coûte {price} en achat unique, et avec Pro vous en téléchargez autant que vous voulez.",
+      faq3Q: "Ma discussion est-elle envoyée quelque part ?",
+      faq3A:
+        "Non. Le fichier est lu et le PDF créé dans votre navigateur. Le paiement du PDF complet passe par Stripe, et votre discussion n'en fait pas partie.",
+      faq4Q: "Les photos sont-elles incluses ?",
+      faq4A:
+        "Oui, si vous exportez la discussion avec les médias : les photos apparaissent dans le PDF à côté de leurs messages. Sans médias, vous obtenez un PDF du texte.",
+      faq5Q: "Ça marche avec les groupes et sur iPhone ?",
+      faq5A:
+        "Oui. Toute discussion individuelle ou de groupe, exportée depuis iPhone, Android, WhatsApp Web, Windows ou Mac.",
+      ctaTitle: "Votre discussion en PDF",
+      ctaButton: "Créer mon PDF",
+      ctaNote: "Aperçu gratuit · Créé dans votre navigateur",
     },
     subscribePage: {
       title: "Un abonnement. Tout est débloqué.",
@@ -6589,10 +6889,9 @@ export const messages = {
         "Esportare una chat WhatsApp: iPhone, Android, Web e PDF",
       exportGuideDescription:
         "Passo per passo: esporta qualsiasi chat o gruppo WhatsApp su iPhone, Android, WhatsApp Web, Windows o Mac, con o senza media. Poi trasformala in PDF o statistiche.",
-      pdfGuideTitle:
-        "WhatsAnalyze - Come esportare la tua chat WhatsApp in PDF",
+      pdfGuideTitle: "Esportare una chat WhatsApp in PDF, con le foto",
       pdfGuideDescription:
-        "Esporta la tua chat WhatsApp in PDF in pochi secondi, senza inviare i dati a un server.",
+        "Trasforma una chat WhatsApp esportata in un PDF con tutti i messaggi, le foto e le statistiche. Creato nel tuo browser, senza caricare nulla. Anteprima gratuita.",
       signalTitle: "WhatsAnalyze - Come passare da WhatsApp a Signal",
       signalDescription:
         "Passa da WhatsApp a Signal, trasferisci le chat di gruppo e crea backup.",
@@ -6625,6 +6924,67 @@ export const messages = {
       ctaTitle: "Esportazione pronta? Aprila qui",
       ctaButton: "Apri il mio file",
       ctaNote: "Letto nel tuo browser · .zip o .txt · Statistiche gratuite",
+    },
+    pdfPage: {
+      navLabel: "Chat WhatsApp in PDF",
+      heroTitle: "Esportare una chat WhatsApp in PDF",
+      heroSubtitle:
+        "Tutti i messaggi, le foto e le statistiche della chat in un PDF da stampare, conservare o inviare. Creato nel tuo browser dalla tua esportazione, senza caricare nulla.",
+      heroCta: "Crea il mio PDF",
+      heroNote:
+        "Anteprima gratuita · PDF completo a {price} una tantum · Nessun account",
+      exampleAlt: "Pagine di un PDF creato da una chat WhatsApp di esempio",
+      uploadTitle: "Trascina l'esportazione, ottieni il PDF",
+      uploadText:
+        "Apri il file .zip o .txt creato da WhatsApp. Viene letto nel tuo browser, non caricato.",
+      createButton: "Crea il mio PDF",
+      guideLink:
+        "Non hai ancora l'esportazione? Come esportare una chat WhatsApp",
+      contentsEyebrow: "Cosa contiene",
+      contentsTitle: "Più di una stampa della chat",
+      card1Title: "Tutta la conversazione",
+      card1Text:
+        "Ogni messaggio con mittente, data e ora, in ordine, e le foto accanto se hai esportato con i media.",
+      card2Title: "La chat in numeri",
+      card2Text:
+        "Una copertina con il primo e l'ultimo messaggio, giorni, messaggi e persone, poi i grafici: andamento, per ora, per persona, per mese e per giorno della settimana.",
+      card3Title: "Curiosità su ogni persona",
+      card3Text:
+        "Parole scritte, messaggio più lungo, vocabolario, emoji preferite e lunghezza media dei messaggi.",
+      stepsTitle: "In tre passaggi",
+      step1Title: "Esporta la chat",
+      step1Text:
+        "In WhatsApp apri la chat e scegli «Esporta chat». Includi i media se il PDF deve mostrare le foto.",
+      step2Title: "Trascinala qui",
+      step2Text:
+        "Lo .zip o il .txt si apre nel tuo browser e non viene caricato nulla.",
+      step3Title: "Scarica il PDF",
+      step3Text:
+        "L'anteprima con i primi 100 messaggi è gratuita. La chat completa costa {price}, una tantum.",
+      courtEyebrow: "Per avvocati e tribunali",
+      courtTitle: "Ti serve la chat come prova?",
+      courtText:
+        "Il PDF come prova in tribunale è una trascrizione sobria in bianco e nero: righe numerate, orari esatti, un'impronta SHA-256 della tua esportazione e un elenco degli allegati.",
+      courtButton: "PDF come prova in tribunale",
+      faqTitle: "Domande sul PDF",
+      faq1Q: "WhatsApp può esportare una chat in PDF?",
+      faq1A:
+        "No. WhatsApp esporta una chat come file .zip o .txt. WhatsAnalyze lo trasforma in PDF, nel tuo browser.",
+      faq2Q: "È gratis?",
+      faq2A:
+        "L'anteprima con i primi 100 messaggi è gratuita. Il PDF completo di tutta la chat costa {price} una tantum, e con Pro ne scarichi quanti ne vuoi.",
+      faq3Q: "La mia chat viene caricata da qualche parte?",
+      faq3A:
+        "No. Il file viene letto e il PDF creato nel tuo browser. Il pagamento del PDF completo passa da Stripe, e la tua chat non ne fa parte.",
+      faq4Q: "Le foto sono incluse?",
+      faq4A:
+        "Sì, se esporti la chat con i media: le foto compaiono nel PDF accanto ai loro messaggi. Senza media ottieni un PDF del testo.",
+      faq5Q: "Funziona con le chat di gruppo e su iPhone?",
+      faq5A:
+        "Sì. Qualsiasi chat singola o di gruppo, esportata da iPhone, Android, WhatsApp Web, Windows o Mac.",
+      ctaTitle: "La tua chat in PDF",
+      ctaButton: "Crea il mio PDF",
+      ctaNote: "Anteprima gratuita · Creato nel tuo browser",
     },
     subscribePage: {
       title: "Un abbonamento. Tutto sbloccato.",

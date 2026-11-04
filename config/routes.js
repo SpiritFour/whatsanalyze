@@ -38,15 +38,14 @@ export const localizedPages = [
 /**
  * What belongs in the sitemap: the pages a search engine should land someone
  * on. The payment callbacks and the results view only mean anything with state
- * the visitor brought with them. whatsapp-to-pdf is noindex, and a sitemap
- * entry Google is told not to index is reported as an error.
+ * the visitor brought with them. A page marked noindex must not be listed
+ * either: Search Console reports that as an error.
  */
 const notIndexable = new Set([
   "pwa-results",
   "wrapped/results",
   "wrapped/subscription/success",
   "wrapped/subscription/canceled",
-  "whatsapp-to-pdf",
 ]);
 
 export const indexablePages = localizedPages.filter(

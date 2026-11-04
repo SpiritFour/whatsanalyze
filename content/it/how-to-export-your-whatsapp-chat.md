@@ -53,7 +53,7 @@ L'app per Mac funziona come su iPhone: clicca sul nome del contatto o del gruppo
 
 WhatsApp non esporta in PDF. [Apri qui la tua esportazione](#dropzone-slot) e WhatsAnalyze crea il PDF:
 
-- **PDF della chat**: tutta la conversazione, pronta da stampare o conservare, con le foto se hai esportato con i media. L'anteprima è gratuita; il PDF completo è un acquisto una tantum.
+- **[PDF della chat](/it/whatsapp-to-pdf/)**: tutta la conversazione, pronta da stampare o conservare, con le foto se hai esportato con i media. L'anteprima è gratuita; il PDF completo è un acquisto una tantum.
 - **[PDF come prova in tribunale](/it/tools/court-evidence/)**: righe numerate, orari esatti, un'impronta SHA-256 della tua esportazione e un elenco degli allegati, pensato per avvocati, tribunali e autorità.
 
 Entrambi vengono creati nel tuo browser: la tua chat non viene caricata su nessun server.
