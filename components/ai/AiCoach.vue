@@ -70,8 +70,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import type { ChatMessage } from "~/composables/useChatTool";
+import { useLibrary } from "~/composables/useLibrary";
+import { rememberLocalAiFailure } from "~/utils/library/device";
+import { localErrorKey } from "~/utils/ai/localErrors";
 import { analyticsTools } from "~/composables/useAnalytics";
 import { useSubscriptionStore } from "~/stores/subscription";
 import { buildDigest, restoreNames } from "~/utils/ai/digest";
@@ -128,6 +131,16 @@ interface Turn {
 }
 const turns = ref<Turn[]>([]);
 
+// A saved chat keeps the conversation that goes with each reading, so it is
+// still here after a reload or on the next visit.
+const library = useLibrary();
+onMounted(async () => {
+  const kept = await library.coachTurns(props.chat, props.summary);
+  if (kept?.length && !turns.value.length) turns.value = kept as Turn[];
+});
+const keepTurns = () =>
+  void library.keepCoachTurns(props.chat, props.summary, turns.value);
+
 // Built once per chat: the same excerpts and placeholders every turn.
 const anonymized = computed(() =>
   buildDigest(
@@ -150,6 +163,7 @@ async function send() {
       sent: "",
       support: true,
     });
+    keepTurns();
     draft.value = "";
     analyticsTools.aiCoachSafety("keywords");
     return;
@@ -214,6 +228,7 @@ async function send() {
       turn.answer = restoreNames(reply, names);
     }
     turns.value.push(turn);
+    keepTurns();
     draft.value = "";
   } catch (err: any) {
     const known = ["not_subscribed", "daily_limit"];
@@ -228,6 +243,11 @@ async function send() {
         props.localModel?.id,
         "coach",
       );
+      rememberLocalAiFailure({
+        reason: localErrorKey(String(err?.message ?? "")),
+        model: props.localModel?.id,
+        phase: "coach",
+      });
     }
   } finally {
     thinking.value = false;

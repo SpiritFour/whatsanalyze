@@ -243,6 +243,14 @@
           @allowance="allowance = $event"
         />
 
+        <!-- A saved chat's earlier readings, with their dates -->
+        <LibraryReadings
+          v-if="readings.length > 1"
+          :readings="readings"
+          :current="readingId"
+          @select="showReading"
+        />
+
         <div class="report-actions">
           <button
             v-if="ranOn === 'local'"
@@ -345,6 +353,11 @@ import {
   type ChatInsights,
 } from "~/functions/src/ai/insights";
 import type { PreviewLocked } from "~/functions/src/ai/preview";
+import { useLibrary, type SavedReading } from "~/composables/useLibrary";
+import {
+  forgetLocalAiFailure,
+  rememberLocalAiFailure,
+} from "~/utils/library/device";
 
 type Mode = "local" | "cloud";
 
@@ -464,12 +477,14 @@ const reportQuestion = ref("");
 const locked = ref<PreviewLocked | null>(null);
 // Back from subscribing with the preview still shown: get the full report.
 watch(
-  // Not after an error: that would retry in a loop.
+  // Not after an error: that would retry in a loop. Not for an earlier
+  // reading picked from a saved chat's history, either: that's a look back.
   () =>
     !!locked.value &&
     isSubscriptionValid.value &&
     !running.value &&
-    !errorKey.value,
+    !errorKey.value &&
+    !lookingBack.value,
   (upgrade) => {
     if (!upgrade) return;
     // Back to the cards, where the progress and any error show.
@@ -505,11 +520,65 @@ const language = computed<AiLanguage>(() =>
   locale.value in AI_LANGUAGES ? (locale.value as AiLanguage) : "en",
 );
 
-// The last report, per tab, so leaving the page and coming back doesn't
-// lose it, and a free preview isn't spent twice on the same chat.
+// A saved chat keeps every reading with it (composables/useLibrary.ts), so
+// coming back, even days later, shows the last one and never runs it again.
+const library = useLibrary();
+/** The saved chat on screen, if it is one. */
+const savedId = ref<string | null>(null);
+/** Its readings, newest first, and which of them is shown. */
+const readings = ref<SavedReading[]>([]);
+const readingId = ref<string | null>(null);
+
+function showReport(r: AiReportData) {
+  insights.value = r.insights;
+  reportQuestion.value = r.question;
+  ranOn.value = r.ranOn;
+  coverage.value = r.coverage ?? null;
+  locked.value = r.locked ?? null;
+}
+
+function showReading(reading: SavedReading) {
+  readingId.value = reading.id;
+  showReport(reading.report);
+}
+/** An earlier reading than the newest is on screen. */
+const lookingBack = computed(
+  () => !!readingId.value && readingId.value !== readings.value[0]?.id,
+);
+
+// Which participant is "me", so the AI never asks twice.
+watch(me, (name) => {
+  if (savedId.value) void library.setMe(savedId.value, name);
+});
+
+// "Don't keep" or "Forget" while the reading is on screen: from here on it
+// is an unsaved chat, whose reading the tab keeps.
+watch(
+  () =>
+    !!savedId.value && library.ready.value && !library.chatById(savedId.value),
+  (gone) => {
+    if (!gone) return;
+    savedId.value = null;
+    readings.value = [];
+    readingId.value = null;
+    if (insights.value) saveReport();
+  },
+);
+
+// The last report of a chat that isn't saved, per tab, so leaving the page
+// and coming back doesn't lose it, and a free preview isn't spent twice on
+// the same chat.
 const REPORT_KEY = "ai-report";
 
 function saveReport() {
+  if (savedId.value && report.value) {
+    void library.addReading(savedId.value, report.value).then((reading) => {
+      if (!reading) return;
+      readings.value = [reading, ...readings.value];
+      readingId.value = reading.id;
+    });
+    return;
+  }
   try {
     sessionStorage.setItem(
       REPORT_KEY,
@@ -523,26 +592,43 @@ function saveReport() {
   }
 }
 
-function restoreReport() {
+async function restoreReport() {
+  const chat = messages.value;
+  savedId.value = await library.savedIdFor(chat);
+  if (messages.value !== chat) return;
+  readings.value = [];
+  readingId.value = null;
+  if (savedId.value) {
+    const remembered = library.chatById(savedId.value)?.me;
+    if (remembered && people.value.includes(remembered)) me.value = remembered;
+    readings.value = await library.readings(savedId.value);
+    if (readings.value.length) showReading(readings.value[0]);
+    return;
+  }
   try {
     const saved = JSON.parse(sessionStorage.getItem(REPORT_KEY) ?? "null");
     if (saved?.chat !== chatFingerprint({ chatObject: messages.value })) return;
-    const r: AiReportData = saved.report;
-    insights.value = r.insights;
-    reportQuestion.value = r.question;
-    ranOn.value = r.ranOn;
-    coverage.value = r.coverage ?? null;
-    locked.value = r.locked ?? null;
+    showReport(saved.report);
   } catch {
     // Unreadable or blocked: start without it.
   }
+}
+
+/**
+ * A free preview this saved chat already had: shown again rather than
+ * spending another, e.g. after picking an earlier on-device reading.
+ */
+function showKeptPreview() {
+  const preview = readings.value.find((r) => r.report.locked);
+  if (preview) showReading(preview);
+  return !!preview;
 }
 
 async function onChatLoaded(payload: { analysis: unknown }) {
   messages.value = (payload.analysis as { messages: ChatMessage[] }).messages;
   insights.value = null;
   errorKey.value = null;
-  restoreReport();
+  await restoreReport();
   localSupported.value = await supportsLocalModel();
   if (localSupported.value) {
     localModel.value = await pickLocalModel();
@@ -553,6 +639,7 @@ async function onChatLoaded(payload: { analysis: unknown }) {
       analyticsTools.error("ai", "local:crashed");
       analyticsTools.aiFailed("local", "crashed");
       reportLocalFailure("crashed", crash.model, crash.phase);
+      rememberLocalAiFailure({ reason: "crashed", ...crash });
     }
   }
   await nextTick();
@@ -676,6 +763,9 @@ watch(dataWarning, (open) => {
 
 async function run(mode: Mode) {
   if (!messages.value) return;
+  if (mode === "cloud" && !isSubscriptionValid.value && showKeptPreview()) {
+    return;
+  }
   running.value = mode;
   progress.value = null;
   errorKey.value = null;
@@ -748,7 +838,11 @@ async function run(mode: Mode) {
       read = local.parts.reduce((sum, part) => sum + countLines(part), 0);
       parts = local.parts.length;
     }
-    if (mode === "local") modelDownloaded.value = true;
+    if (mode === "local") {
+      modelDownloaded.value = true;
+      // It works here after all: stop steering this browser away from it.
+      forgetLocalAiFailure();
+    }
     reportQuestion.value = askedQuestion.value;
     insights.value = tidyInsights(restoreNames(result, names));
     coverage.value = {
@@ -791,6 +885,14 @@ async function run(mode: Mode) {
         localModel.value?.id,
         progress.value?.phase ?? "download",
       );
+      // An answer that wasn't valid says nothing about the device.
+      if (errorKey.value !== "local_invalid") {
+        rememberLocalAiFailure({
+          reason: errorKey.value,
+          model: localModel.value?.id,
+          phase: progress.value?.phase ?? "download",
+        });
+      }
     }
     if (err?.message === "daily_limit") {
       allowance.value = { remaining: 0, limit: allowance.value?.limit ?? 10 };
