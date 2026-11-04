@@ -224,9 +224,9 @@ export const messages = {
       pillar2Title: "Anonymized for the cloud",
       pillar2Text:
         'If you pick the cloud AI, names become "Person A" and "Person B" and phone numbers, emails and links are removed first. Names are restored only on your device.',
-      pillar3Title: "Nothing kept",
+      pillar3Title: "Kept on your device only",
       pillar3Text:
-        "We don't store your chat and don't train models on it. There is nothing to delete because nothing was saved.",
+        "Your chat is saved in your browser so you can come back to it, never on our servers, and we don't train models on it. Forget it with one tap whenever you like.",
       faqTitle: "Questions about switching",
       faq1Q: "Is there a free version of What Brandon Thinks?",
       faq1A:
@@ -479,7 +479,7 @@ export const messages = {
     faqWhatsapp: "FAQs about WhatsApp chats",
     privacyFAQTitle: "Is My Chat Data Really Private?",
     privacyFAQContent:
-      "Yes, absolutely. All chat processing occurs locally in your browser. No data is ever sent to a server. You can even inspect the open-source code on GitHub to verify.",
+      "Yes. The statistics are worked out in your browser, and your chat is saved on this device only, so you can come back to it. It is never stored on our servers. Only two things ever leave your device, and only when you choose them: the cloud AI receives an anonymized excerpt (names replaced, phone numbers, emails and links removed), and a share link stores an encrypted copy of the results, never the chat itself. You can forget saved chats at any time, and inspect the open-source code on GitHub.",
     howToExport: "How to export your WhatsApp chat",
     howToExportLong:
       "          Everyone can easily export his WhatsApp chat or group chat. Open\n          WhatsApp on the device you are currently logged in with > Tap on the\n          chat > Go to the chats settings > Scroll down and tap on Export chat >\n          Choose to export with or without media.",
@@ -782,8 +782,72 @@ export const messages = {
         "Computing timestamps, response latencies, and participant inactivity",
       switchFile: "Switch File",
       messagesAnalyzedIn: "{count} messages • analyzed in {time}ms",
-      messagesRestored: "{count} messages • restored from this session",
+      messagesRestored: "{count} messages • no new upload needed",
       dismiss: "Dismiss",
+    },
+    library: {
+      saved: "Saved on this device",
+      dontKeep: "Don't keep",
+      notKept: "Not kept on this device",
+      keep: "Keep it",
+      notKeptUnavailable:
+        "This browser doesn't allow it here, in a private window for example. The chat stays open until you close this tab.",
+      notKeptFull:
+        "This device's storage is full. The chat stays open until you close this tab.",
+      panelOpen: "What's kept on this device",
+      yourChats: "Your chats",
+      open: "Open",
+      continueIn: "Continue in {tool}",
+      forget: "Forget",
+      forgetConfirm: "Forget “{name}” on this device?",
+      cancel: "Cancel",
+      showAll: "Show all ({count})",
+      peopleMore: "{names} and {count} more",
+      openedAgo: "opened {time}",
+      useSaved: "Use a saved chat",
+      useAnother: "Use another saved chat",
+      runOnChat: "Run this on your chat with {name}",
+      runOnGroup: "Run this on {name}",
+      offerNote: "Saved on this device · no new upload",
+      headerButton: "Your chats on this device",
+      panelTitle: "Saved on this device",
+      panelIntro:
+        "Your chats are kept in this browser so you can come back to them without uploading again. They never leave this device and are never stored on our servers.",
+      panelShared:
+        "Anyone who uses this browser can open them. On a shared device, forget them when you're done.",
+      forgetThis: "Forget this chat",
+      storageTitle: "Storage",
+      storageChats: "Your saved chats take up {size}.",
+      storageSite:
+        "Everything this site keeps here: {used} of {quota} available.",
+      persisted: "This browser keeps them reliably.",
+      notPersisted:
+        "This browser may clear them when it runs low on space, or after weeks without a visit.",
+      persistButton: "Ask the browser to keep them",
+      persistDenied:
+        "The browser decided not to. A backup file is the copy that is always safe.",
+      iosHint:
+        "On iPhone and iPad, Safari clears a site's data after a few weeks without a visit. To keep your chats, add WhatsAnalyze to your Home Screen: tap Share, then “Add to Home Screen”.",
+      backupTitle: "Backup",
+      backupText:
+        "Download all your saved chats as one file. To restore them, drop the file on this panel or on any upload box.",
+      backupDownload: "Download backup",
+      backupRestore: "Restore a backup",
+      backupDownloaded: "Chats in the backup: {count}",
+      backupRestored: "Chats restored from the backup: {count}",
+      backupInvalid: "This file isn't a WhatsAnalyze backup.",
+      forgetTitle: "Forgetting",
+      autoForget: "Forget chats not opened in 90 days",
+      autoForgetText:
+        "Checked each time you come back. A browser can't delete anything while the site is closed.",
+      forgetAll: "Forget everything",
+      forgetAllConfirm:
+        "Forget every saved chat, reading and conversation on this device? This can't be undone.",
+      readingsTitle: "Earlier readings",
+      readingGeneral: "General reading",
+      ranLocal: "On this device",
+      ranCloud: "Cloud",
+      ranPreview: "Cloud preview",
     },
     askAiCard: {
       title: "Ask AI about this chat",
@@ -1525,9 +1589,9 @@ export const messages = {
       pillar2Title: "Anonymisiert für die Cloud",
       pillar2Text:
         "Wählst du die Cloud-KI, werden Namen zu „Person A“ und „Person B“, Telefonnummern, E-Mails und Links werden vorher entfernt. Die Namen werden nur auf deinem Gerät wieder eingesetzt.",
-      pillar3Title: "Nichts wird gespeichert",
+      pillar3Title: "Nur auf deinem Gerät",
       pillar3Text:
-        "Wir speichern deinen Chat nicht und trainieren keine Modelle damit. Es gibt nichts zu löschen, weil nichts gespeichert wurde.",
+        "Dein Chat wird in deinem Browser gespeichert, damit du zu ihm zurückkommen kannst, nie auf unseren Servern, und wir trainieren keine Modelle damit. Vergiss ihn mit einem Tipp, wann immer du willst.",
       faqTitle: "Fragen zum Wechsel",
       faq1Q: "Gibt es eine kostenlose Version von What Brandon Thinks?",
       faq1A:
@@ -1780,7 +1844,7 @@ export const messages = {
     faqWhatsapp: "FAQs zu WhatsApp-Chats",
     privacyFAQTitle: "Sind meine Chat-Daten wirklich privat?",
     privacyFAQContent:
-      "Ja, absolut. Die gesamte Chat-Verarbeitung erfolgt lokal in Ihrem Browser. Es werden keinerlei Daten an einen Server gesendet. Sie können sogar den Open-Source-Code auf GitHub einsehen, um dies zu überprüfen.",
+      "Ja. Die Statistiken werden in Ihrem Browser berechnet, und Ihr Chat wird nur auf diesem Gerät gespeichert, damit Sie zu ihm zurückkehren können. Auf unseren Servern wird er nie gespeichert. Nur zwei Dinge verlassen Ihr Gerät, und nur wenn Sie sie wählen: Die Cloud-KI erhält einen anonymisierten Auszug (Namen ersetzt, Telefonnummern, E-Mail-Adressen und Links entfernt), und ein Teilen-Link speichert eine verschlüsselte Kopie der Ergebnisse, nie den Chat selbst. Gespeicherte Chats können Sie jederzeit vergessen, und den Open-Source-Code können Sie auf GitHub einsehen.",
     howToExport: "Wie man seinen WhatsApp-Chat exportiert",
     howToExportOn: "Exportiere deinen Chat",
     howToExportLong:
@@ -2060,9 +2124,72 @@ export const messages = {
         "Berechne Zeitstempel, Antwortzeiten und Aktivitätsmuster",
       switchFile: "Datei wechseln",
       messagesAnalyzedIn: "{count} Nachrichten • analysiert in {time} ms",
-      messagesRestored:
-        "{count} Nachrichten • aus dieser Sitzung wiederhergestellt",
+      messagesRestored: "{count} Nachrichten • kein neuer Upload nötig",
       dismiss: "Schließen",
+    },
+    library: {
+      saved: "Auf diesem Gerät gespeichert",
+      dontKeep: "Nicht behalten",
+      notKept: "Nicht auf diesem Gerät gespeichert",
+      keep: "Behalten",
+      notKeptUnavailable:
+        "Dieser Browser erlaubt es hier nicht, zum Beispiel in einem privaten Fenster. Der Chat bleibt offen, bis du diesen Tab schließt.",
+      notKeptFull:
+        "Der Speicher dieses Geräts ist voll. Der Chat bleibt offen, bis du diesen Tab schließt.",
+      panelOpen: "Was auf diesem Gerät gespeichert ist",
+      yourChats: "Deine Chats",
+      open: "Öffnen",
+      continueIn: "Weiter in {tool}",
+      forget: "Vergessen",
+      forgetConfirm: "„{name}“ auf diesem Gerät vergessen?",
+      cancel: "Abbrechen",
+      showAll: "Alle anzeigen ({count})",
+      peopleMore: "{names} und {count} weitere",
+      openedAgo: "geöffnet {time}",
+      useSaved: "Gespeicherten Chat verwenden",
+      useAnother: "Anderen gespeicherten Chat verwenden",
+      runOnChat: "Für deinen Chat mit {name} ausprobieren",
+      runOnGroup: "Für {name} ausprobieren",
+      offerNote: "Auf diesem Gerät gespeichert · kein neuer Upload",
+      headerButton: "Deine Chats auf diesem Gerät",
+      panelTitle: "Auf diesem Gerät gespeichert",
+      panelIntro:
+        "Deine Chats bleiben in diesem Browser, damit du ohne neuen Upload zu ihnen zurückkommen kannst. Sie verlassen dieses Gerät nie und werden nie auf unseren Servern gespeichert.",
+      panelShared:
+        "Jeder, der diesen Browser benutzt, kann sie öffnen. Auf einem geteilten Gerät vergiss sie, wenn du fertig bist.",
+      forgetThis: "Diesen Chat vergessen",
+      storageTitle: "Speicher",
+      storageChats: "Deine gespeicherten Chats belegen {size}.",
+      storageSite:
+        "Alles, was diese Website hier speichert: {used} von {quota} verfügbar.",
+      persisted: "Dieser Browser bewahrt sie zuverlässig auf.",
+      notPersisted:
+        "Dieser Browser kann sie löschen, wenn der Speicher knapp wird oder nach Wochen ohne Besuch.",
+      persistButton: "Browser bitten, sie zu behalten",
+      persistDenied:
+        "Der Browser hat sich dagegen entschieden. Eine Sicherungsdatei ist die Kopie, die immer sicher ist.",
+      iosHint:
+        "Auf iPhone und iPad löscht Safari die Daten einer Website nach einigen Wochen ohne Besuch. Damit deine Chats bleiben, füge WhatsAnalyze zum Home-Bildschirm hinzu: Tippe auf Teilen und dann auf „Zum Home-Bildschirm“.",
+      backupTitle: "Sicherung",
+      backupText:
+        "Lade alle gespeicherten Chats als eine Datei herunter. Zum Wiederherstellen zieh die Datei auf dieses Fenster oder auf ein Upload-Feld.",
+      backupDownload: "Sicherung herunterladen",
+      backupRestore: "Sicherung wiederherstellen",
+      backupDownloaded: "Chats in der Sicherung: {count}",
+      backupRestored: "Aus der Sicherung wiederhergestellte Chats: {count}",
+      backupInvalid: "Diese Datei ist keine WhatsAnalyze-Sicherung.",
+      forgetTitle: "Vergessen",
+      autoForget: "Chats vergessen, die 90 Tage nicht geöffnet wurden",
+      autoForgetText:
+        "Wird bei jedem Besuch geprüft. Ein Browser kann nichts löschen, während die Website geschlossen ist.",
+      forgetAll: "Alles vergessen",
+      forgetAllConfirm:
+        "Alle gespeicherten Chats, Auswertungen und Gespräche auf diesem Gerät vergessen? Das lässt sich nicht rückgängig machen.",
+      readingsTitle: "Frühere Auswertungen",
+      readingGeneral: "Allgemeine Auswertung",
+      ranLocal: "Auf diesem Gerät",
+      ranCloud: "Cloud",
+      ranPreview: "Cloud-Vorschau",
     },
     askAiCard: {
       title: "Frag die KI zu diesem Chat",
@@ -2812,9 +2939,9 @@ export const messages = {
       pillar2Title: "Anonimizado para la nube",
       pillar2Text:
         "Si eliges la IA en la nube, los nombres pasan a ser «Persona A» y «Persona B» y antes se eliminan teléfonos, correos y enlaces. Los nombres solo se restauran en tu dispositivo.",
-      pillar3Title: "No se guarda nada",
+      pillar3Title: "Solo en tu dispositivo",
       pillar3Text:
-        "No guardamos tu chat ni entrenamos modelos con él. No hay nada que borrar porque no se guardó nada.",
+        "Tu chat se guarda en tu navegador para que puedas volver a él, nunca en nuestros servidores, y no entrenamos modelos con él. Olvídalo con un toque cuando quieras.",
       faqTitle: "Preguntas sobre el cambio",
       faq1Q: "¿Hay una versión gratis de What Brandon Thinks?",
       faq1A:
@@ -3059,7 +3186,7 @@ export const messages = {
     faqWhatsapp: "Preguntas frecuentes sobre los chats de WhatsApp",
     privacyFAQTitle: "¿Mis datos de chat son realmente privados?",
     privacyFAQContent:
-      "Sí, absolutamente. Todo el procesamiento del chat ocurre localmente en tu navegador. No se envía ningún dato a un servidor. Incluso puedes inspeccionar el código abierto en GitHub para verificarlo.",
+      "Sí. Las estadísticas se calculan en tu navegador, y tu chat se guarda solo en este dispositivo para que puedas volver a él. Nunca se guarda en nuestros servidores. Solo dos cosas salen de tu dispositivo, y solo si tú lo eliges: la IA en la nube recibe un extracto anonimizado (nombres sustituidos y sin teléfonos, correos ni enlaces), y un enlace para compartir guarda una copia cifrada de los resultados, nunca el chat. Puedes olvidar los chats guardados cuando quieras e inspeccionar el código abierto en GitHub.",
     howToExport: "Cómo exportar tu chat de WhatsApp",
     howToExportLong:
       "          Todos pueden exportar fácilmente su chat de WhatsApp o chat grupal. Abierto\n          WhatsApp en el dispositivo con el que está conectado actualmente> Toque en el\n          chat> Vaya a la configuración de chats> Desplácese hacia abajo y toque Exportar chat>\n          Elija exportar con o sin medios.",
@@ -3337,8 +3464,73 @@ export const messages = {
         "Calculando marcas de tiempo, latencias y patrones de actividad",
       switchFile: "Cambiar archivo",
       messagesAnalyzedIn: "{count} mensajes • analizados en {time} ms",
-      messagesRestored: "{count} mensajes • restaurados de esta sesión",
+      messagesRestored: "{count} mensajes • sin volver a subirlo",
       dismiss: "Cerrar",
+    },
+    library: {
+      saved: "Guardado en este dispositivo",
+      dontKeep: "No guardar",
+      notKept: "No guardado en este dispositivo",
+      keep: "Guardarlo",
+      notKeptUnavailable:
+        "Este navegador no lo permite aquí, por ejemplo en una ventana privada. El chat sigue abierto hasta que cierres esta pestaña.",
+      notKeptFull:
+        "El almacenamiento de este dispositivo está lleno. El chat sigue abierto hasta que cierres esta pestaña.",
+      panelOpen: "Qué se guarda en este dispositivo",
+      yourChats: "Tus chats",
+      open: "Abrir",
+      continueIn: "Seguir en {tool}",
+      forget: "Olvidar",
+      forgetConfirm: "¿Olvidar «{name}» en este dispositivo?",
+      cancel: "Cancelar",
+      showAll: "Ver todos ({count})",
+      peopleMore: "{names} y {count} más",
+      openedAgo: "abierto {time}",
+      useSaved: "Usar un chat guardado",
+      useAnother: "Usar otro chat guardado",
+      runOnChat: "Pruébalo con tu chat con {name}",
+      runOnGroup: "Pruébalo con {name}",
+      offerNote: "Guardado en este dispositivo · sin volver a subirlo",
+      headerButton: "Tus chats en este dispositivo",
+      panelTitle: "Guardado en este dispositivo",
+      panelIntro:
+        "Tus chats se guardan en este navegador para que puedas volver a ellos sin subirlos de nuevo. Nunca salen de este dispositivo y nunca se guardan en nuestros servidores.",
+      panelShared:
+        "Cualquiera que use este navegador puede abrirlos. En un dispositivo compartido, olvídalos cuando termines.",
+      forgetThis: "Olvidar este chat",
+      storageTitle: "Almacenamiento",
+      storageChats: "Tus chats guardados ocupan {size}.",
+      storageSite:
+        "Todo lo que este sitio guarda aquí: {used} de {quota} disponibles.",
+      persisted: "Este navegador los conserva de forma fiable.",
+      notPersisted:
+        "Este navegador puede borrarlos si se queda sin espacio o tras semanas sin visitas.",
+      persistButton: "Pedir al navegador que los conserve",
+      persistDenied:
+        "El navegador ha decidido no hacerlo. Un archivo de copia de seguridad es la copia que siempre está a salvo.",
+      iosHint:
+        "En iPhone y iPad, Safari borra los datos de un sitio tras unas semanas sin visitas. Para conservar tus chats, añade WhatsAnalyze a la pantalla de inicio: toca Compartir y luego «Añadir a pantalla de inicio».",
+      backupTitle: "Copia de seguridad",
+      backupText:
+        "Descarga todos tus chats guardados en un solo archivo. Para restaurarlos, suelta el archivo en este panel o en cualquier casilla de subida.",
+      backupDownload: "Descargar copia",
+      backupRestore: "Restaurar una copia",
+      backupDownloaded: "Chats en la copia: {count}",
+      backupRestored: "Chats restaurados de la copia: {count}",
+      backupInvalid:
+        "Este archivo no es una copia de seguridad de WhatsAnalyze.",
+      forgetTitle: "Olvidar",
+      autoForget: "Olvidar los chats que no se abran en 90 días",
+      autoForgetText:
+        "Se comprueba cada vez que vuelves. Un navegador no puede borrar nada mientras el sitio está cerrado.",
+      forgetAll: "Olvidarlo todo",
+      forgetAllConfirm:
+        "¿Olvidar todos los chats, análisis y conversaciones guardados en este dispositivo? No se puede deshacer.",
+      readingsTitle: "Análisis anteriores",
+      readingGeneral: "Análisis general",
+      ranLocal: "En este dispositivo",
+      ranCloud: "Nube",
+      ranPreview: "Vista previa en la nube",
     },
     askAiCard: {
       title: "Pregúntale a la IA sobre este chat",
@@ -4074,7 +4266,7 @@ export const messages = {
     faqWhatsapp: "FAQs sobre chats do WhatsApp",
     privacyFAQTitle: "Meus dados de chat são realmente privados?",
     privacyFAQContent:
-      "Sim, com certeza. Todo o processamento do chat ocorre localmente em seu navegador. Nenhum dado é enviado para um servidor. Você pode até mesmo inspecionar o código-fonte aberto no GitHub para verificar.",
+      "Sim. As estatísticas são calculadas no seu navegador, e a sua conversa fica guardada apenas neste dispositivo para que possa voltar a ela. Nunca é guardada nos nossos servidores. Só duas coisas saem do seu dispositivo, e só se as escolher: a IA na nuvem recebe um excerto anonimizado (nomes substituídos e sem números de telefone, emails nem links), e um link de partilha guarda uma cópia encriptada dos resultados, nunca a conversa. Pode esquecer as conversas guardadas quando quiser e consultar o código aberto no GitHub.",
     howToExport: "Como exportar seu chat do WhatsApp",
     howToExportLong:
       " Todos podem exportar facilmente seu chat ou grupo de chat do WhatsApp. Abra\n o WhatsApp no dispositivo em que você está atualmente logado > Toque no\n chat > Vá para as configurações do chat > Role para baixo e toque em Exportar chat >\n Escolha exportar com ou sem mídia.",
@@ -4356,8 +4548,73 @@ export const messages = {
         "Calculando horários, tempos de resposta e padrões de inatividade",
       switchFile: "Trocar arquivo",
       messagesAnalyzedIn: "{count} mensagens • analisadas em {time} ms",
-      messagesRestored: "{count} mensagens • restauradas desta sessão",
+      messagesRestored: "{count} mensagens • sem novo carregamento",
       dismiss: "Fechar",
+    },
+    library: {
+      saved: "Guardado neste dispositivo",
+      dontKeep: "Não guardar",
+      notKept: "Não guardado neste dispositivo",
+      keep: "Guardar",
+      notKeptUnavailable:
+        "Este navegador não o permite aqui, por exemplo numa janela privada. A conversa fica aberta até fechar este separador.",
+      notKeptFull:
+        "O armazenamento deste dispositivo está cheio. A conversa fica aberta até fechar este separador.",
+      panelOpen: "O que fica guardado neste dispositivo",
+      yourChats: "As suas conversas",
+      open: "Abrir",
+      continueIn: "Continuar em {tool}",
+      forget: "Esquecer",
+      forgetConfirm: "Esquecer “{name}” neste dispositivo?",
+      cancel: "Cancelar",
+      showAll: "Ver todas ({count})",
+      peopleMore: "{names} e mais {count}",
+      openedAgo: "aberta {time}",
+      useSaved: "Usar uma conversa guardada",
+      useAnother: "Usar outra conversa guardada",
+      runOnChat: "Experimente com a sua conversa com {name}",
+      runOnGroup: "Experimente com {name}",
+      offerNote: "Guardada neste dispositivo · sem novo carregamento",
+      headerButton: "As suas conversas neste dispositivo",
+      panelTitle: "Guardado neste dispositivo",
+      panelIntro:
+        "As suas conversas ficam guardadas neste navegador para que possa voltar a elas sem as carregar de novo. Nunca saem deste dispositivo e nunca são guardadas nos nossos servidores.",
+      panelShared:
+        "Qualquer pessoa que use este navegador pode abri-las. Num dispositivo partilhado, esqueça-as quando terminar.",
+      forgetThis: "Esquecer esta conversa",
+      storageTitle: "Armazenamento",
+      storageChats: "As suas conversas guardadas ocupam {size}.",
+      storageSite:
+        "Tudo o que este site guarda aqui: {used} de {quota} disponíveis.",
+      persisted: "Este navegador guarda-as de forma fiável.",
+      notPersisted:
+        "Este navegador pode apagá-las quando ficar sem espaço ou após semanas sem visitas.",
+      persistButton: "Pedir ao navegador que as guarde",
+      persistDenied:
+        "O navegador decidiu que não. Um ficheiro de cópia de segurança é a cópia que está sempre a salvo.",
+      iosHint:
+        "No iPhone e no iPad, o Safari apaga os dados de um site após algumas semanas sem visitas. Para guardar as suas conversas, adicione o WhatsAnalyze ao ecrã principal: toque em Partilhar e depois em “Adicionar ao ecrã principal”.",
+      backupTitle: "Cópia de segurança",
+      backupText:
+        "Descarregue todas as conversas guardadas num só ficheiro. Para as restaurar, largue o ficheiro neste painel ou em qualquer caixa de carregamento.",
+      backupDownload: "Descarregar cópia",
+      backupRestore: "Restaurar uma cópia",
+      backupDownloaded: "Conversas na cópia: {count}",
+      backupRestored: "Conversas restauradas da cópia: {count}",
+      backupInvalid:
+        "Este ficheiro não é uma cópia de segurança do WhatsAnalyze.",
+      forgetTitle: "Esquecer",
+      autoForget: "Esquecer conversas não abertas há 90 dias",
+      autoForgetText:
+        "Verificado sempre que volta. Um navegador não consegue apagar nada enquanto o site está fechado.",
+      forgetAll: "Esquecer tudo",
+      forgetAllConfirm:
+        "Esquecer todas as conversas, análises e diálogos guardados neste dispositivo? Não é possível desfazer.",
+      readingsTitle: "Análises anteriores",
+      readingGeneral: "Análise geral",
+      ranLocal: "Neste dispositivo",
+      ranCloud: "Nuvem",
+      ranPreview: "Pré-visualização na nuvem",
     },
     askAiCard: {
       title: "Pergunte à IA sobre esta conversa",
@@ -4818,9 +5075,9 @@ export const messages = {
       pillar2Title: "Anonimizada para a nuvem",
       pillar2Text:
         "Se escolher a IA na nuvem, os nomes passam a «Pessoa A» e «Pessoa B» e números de telefone, e-mails e links são removidos antes. Os nomes só são repostos no seu dispositivo.",
-      pillar3Title: "Nada é guardado",
+      pillar3Title: "Só no seu dispositivo",
       pillar3Text:
-        "Não guardamos a sua conversa nem treinamos modelos com ela. Não há nada para apagar porque nada foi guardado.",
+        "A sua conversa fica guardada no seu navegador para que possa voltar a ela, nunca nos nossos servidores, e não treinamos modelos com ela. Esqueça-a com um toque quando quiser.",
       faqTitle: "Perguntas sobre a mudança",
       faq1Q: "Existe uma versão gratuita do What Brandon Thinks?",
       faq1A:
@@ -5359,7 +5616,7 @@ export const messages = {
     faqWhatsapp: "FAQ sur les chats WhatsApp",
     privacyFAQTitle: "Mes données de chat sont-elles vraiment privées ?",
     privacyFAQContent:
-      "Oui, absolument. Tout le traitement du chat s’effectue localement dans votre navigateur. Aucune donnée n’est jamais envoyée à un serveur. Vous pouvez même inspecter le code source ouvert sur GitHub pour le vérifier.",
+      "Oui. Les statistiques sont calculées dans votre navigateur, et votre conversation est enregistrée uniquement sur cet appareil pour que vous puissiez y revenir. Elle n’est jamais stockée sur nos serveurs. Seules deux choses quittent votre appareil, et seulement si vous le choisissez : l’IA dans le cloud reçoit un extrait anonymisé (noms remplacés, numéros de téléphone, e-mails et liens retirés), et un lien de partage conserve une copie chiffrée des résultats, jamais la conversation elle-même. Vous pouvez oublier les conversations enregistrées à tout moment et inspecter le code source ouvert sur GitHub.",
     howToExport: "Comment exporter votre chat WhatsApp",
     howToExportLong:
       "          Tout le monde peut facilement exporter son chat WhatsApp ou son chat de groupe. Ouvrir\n          WhatsApp sur l'appareil avec lequel vous êtes actuellement connecté > Cliquee sur le\n          chat > Allez dans les paramètres des chats > Faites défiler vers le bas et appuyez sur Exporter le chat. >\n          Choisir d'exporter avec ou sans support.",
@@ -5641,8 +5898,72 @@ export const messages = {
         "Calcul des horodatages, temps de réponse et temps d'inactivité",
       switchFile: "Changer de fichier",
       messagesAnalyzedIn: "{count} messages • analysés en {time} ms",
-      messagesRestored: "{count} messages • restaurés depuis cette session",
+      messagesRestored: "{count} messages • sans nouvel import",
       dismiss: "Fermer",
+    },
+    library: {
+      saved: "Enregistré sur cet appareil",
+      dontKeep: "Ne pas garder",
+      notKept: "Non enregistré sur cet appareil",
+      keep: "Le garder",
+      notKeptUnavailable:
+        "Ce navigateur ne le permet pas ici, dans une fenêtre privée par exemple. La conversation reste ouverte jusqu'à la fermeture de cet onglet.",
+      notKeptFull:
+        "Le stockage de cet appareil est plein. La conversation reste ouverte jusqu'à la fermeture de cet onglet.",
+      panelOpen: "Ce qui est enregistré sur cet appareil",
+      yourChats: "Vos conversations",
+      open: "Ouvrir",
+      continueIn: "Continuer dans {tool}",
+      forget: "Oublier",
+      forgetConfirm: "Oublier « {name} » sur cet appareil ?",
+      cancel: "Annuler",
+      showAll: "Tout afficher ({count})",
+      peopleMore: "{names} et {count} de plus",
+      openedAgo: "ouverte {time}",
+      useSaved: "Utiliser une conversation enregistrée",
+      useAnother: "Utiliser une autre conversation enregistrée",
+      runOnChat: "Essayez avec votre conversation avec {name}",
+      runOnGroup: "Essayez avec {name}",
+      offerNote: "Enregistrée sur cet appareil · sans nouvel import",
+      headerButton: "Vos conversations sur cet appareil",
+      panelTitle: "Enregistré sur cet appareil",
+      panelIntro:
+        "Vos conversations restent dans ce navigateur pour que vous puissiez y revenir sans les importer à nouveau. Elles ne quittent jamais cet appareil et ne sont jamais stockées sur nos serveurs.",
+      panelShared:
+        "Toute personne qui utilise ce navigateur peut les ouvrir. Sur un appareil partagé, oubliez-les quand vous avez terminé.",
+      forgetThis: "Oublier cette conversation",
+      storageTitle: "Stockage",
+      storageChats: "Vos conversations enregistrées occupent {size}.",
+      storageSite:
+        "Tout ce que ce site conserve ici : {used} sur {quota} disponibles.",
+      persisted: "Ce navigateur les conserve de manière fiable.",
+      notPersisted:
+        "Ce navigateur peut les effacer s'il manque de place ou après des semaines sans visite.",
+      persistButton: "Demander au navigateur de les conserver",
+      persistDenied:
+        "Le navigateur a refusé. Un fichier de sauvegarde est la copie toujours en sécurité.",
+      iosHint:
+        "Sur iPhone et iPad, Safari efface les données d'un site après quelques semaines sans visite. Pour garder vos conversations, ajoutez WhatsAnalyze à l'écran d'accueil : touchez Partager, puis « Sur l'écran d'accueil ».",
+      backupTitle: "Sauvegarde",
+      backupText:
+        "Téléchargez toutes vos conversations enregistrées dans un seul fichier. Pour les restaurer, déposez le fichier sur ce panneau ou sur une zone d'import.",
+      backupDownload: "Télécharger la sauvegarde",
+      backupRestore: "Restaurer une sauvegarde",
+      backupDownloaded: "Conversations dans la sauvegarde : {count}",
+      backupRestored: "Conversations restaurées depuis la sauvegarde : {count}",
+      backupInvalid: "Ce fichier n'est pas une sauvegarde WhatsAnalyze.",
+      forgetTitle: "Oublier",
+      autoForget: "Oublier les conversations non ouvertes depuis 90 jours",
+      autoForgetText:
+        "Vérifié à chaque retour. Un navigateur ne peut rien effacer tant que le site est fermé.",
+      forgetAll: "Tout oublier",
+      forgetAllConfirm:
+        "Oublier toutes les conversations, analyses et échanges enregistrés sur cet appareil ? C'est irréversible.",
+      readingsTitle: "Analyses précédentes",
+      readingGeneral: "Analyse générale",
+      ranLocal: "Sur cet appareil",
+      ranCloud: "Cloud",
+      ranPreview: "Aperçu cloud",
     },
     askAiCard: {
       title: "Interrogez l'IA sur cette conversation",
@@ -6107,9 +6428,9 @@ export const messages = {
       pillar2Title: "Anonymisée pour le cloud",
       pillar2Text:
         "Si vous choisissez l'IA cloud, les noms deviennent « Personne A » et « Personne B » et les numéros, e-mails et liens sont retirés d'abord. Les noms ne sont rétablis que sur votre appareil.",
-      pillar3Title: "Rien n'est conservé",
+      pillar3Title: "Seulement sur votre appareil",
       pillar3Text:
-        "Nous ne conservons pas votre conversation et n'entraînons aucun modèle avec. Il n'y a rien à supprimer, car rien n'a été enregistré.",
+        "Votre conversation est enregistrée dans votre navigateur pour que vous puissiez y revenir, jamais sur nos serveurs, et nous n'entraînons aucun modèle avec. Oubliez-la d'un geste quand vous voulez.",
       faqTitle: "Questions sur le changement",
       faq1Q: "Existe-t-il une version gratuite de What Brandon Thinks ?",
       faq1A:
@@ -6645,7 +6966,7 @@ export const messages = {
     faqWhatsapp: "FAQ sulle chat WhatsApp",
     privacyFAQTitle: "I miei dati chat sono davvero privati?",
     privacyFAQContent:
-      "Sì, assolutamente. Tutti i processi di chat avvengono localmente nel tuo browser. Nessun dato viene mai inviato a un server. Puoi anche ispezionare il codice open-source su GitHub per verificare.",
+      "Sì. Le statistiche vengono calcolate nel tuo browser e la tua chat viene salvata solo su questo dispositivo, così puoi tornarci. Non viene mai salvata sui nostri server. Solo due cose lasciano il tuo dispositivo, e solo se lo scegli tu: l’IA nel cloud riceve un estratto anonimizzato (nomi sostituiti, numeri di telefono, email e link rimossi) e un link di condivisione conserva una copia cifrata dei risultati, mai la chat. Puoi dimenticare le chat salvate in qualsiasi momento e controllare il codice open-source su GitHub.",
     howToExport: "Come esportare la tua chat WhatsApp",
     howToExportLong:
       "Chiunque può facilmente esportare la propria chat WhatsApp o chat di gruppo. Apri\nWhatsApp sul dispositivo con cui sei attualmente connesso > Tocca sulla\nchat > Vai alle impostazioni della chat > Scorri verso il basso e tocca su Esporta chat >\nScegli di esportare con o senza media.",
@@ -6922,8 +7243,72 @@ export const messages = {
       analyzingSubtitle: "Calcolo di timestamp, tempi di risposta e inattività",
       switchFile: "Cambia file",
       messagesAnalyzedIn: "{count} messaggi • analizzati in {time} ms",
-      messagesRestored: "{count} messaggi • ripristinati da questa sessione",
+      messagesRestored: "{count} messaggi • senza nuovo caricamento",
       dismiss: "Chiudi",
+    },
+    library: {
+      saved: "Salvata su questo dispositivo",
+      dontKeep: "Non salvare",
+      notKept: "Non salvata su questo dispositivo",
+      keep: "Salvala",
+      notKeptUnavailable:
+        "Questo browser non lo consente qui, per esempio in una finestra privata. La chat resta aperta finché non chiudi questa scheda.",
+      notKeptFull:
+        "La memoria di questo dispositivo è piena. La chat resta aperta finché non chiudi questa scheda.",
+      panelOpen: "Cosa resta salvato su questo dispositivo",
+      yourChats: "Le tue chat",
+      open: "Apri",
+      continueIn: "Continua in {tool}",
+      forget: "Dimentica",
+      forgetConfirm: "Dimenticare «{name}» su questo dispositivo?",
+      cancel: "Annulla",
+      showAll: "Mostra tutte ({count})",
+      peopleMore: "{names} e {count} in più",
+      openedAgo: "aperta {time}",
+      useSaved: "Usa una chat salvata",
+      useAnother: "Usa un'altra chat salvata",
+      runOnChat: "Provalo sulla tua chat con {name}",
+      runOnGroup: "Provalo su {name}",
+      offerNote: "Salvata su questo dispositivo · senza nuovo caricamento",
+      headerButton: "Le tue chat su questo dispositivo",
+      panelTitle: "Salvate su questo dispositivo",
+      panelIntro:
+        "Le tue chat restano in questo browser, così puoi tornarci senza caricarle di nuovo. Non lasciano mai questo dispositivo e non vengono mai salvate sui nostri server.",
+      panelShared:
+        "Chiunque usi questo browser può aprirle. Su un dispositivo condiviso, dimenticale quando hai finito.",
+      forgetThis: "Dimentica questa chat",
+      storageTitle: "Memoria",
+      storageChats: "Le tue chat salvate occupano {size}.",
+      storageSite:
+        "Tutto ciò che questo sito conserva qui: {used} di {quota} disponibili.",
+      persisted: "Questo browser le conserva in modo affidabile.",
+      notPersisted:
+        "Questo browser può cancellarle quando lo spazio scarseggia o dopo settimane senza visite.",
+      persistButton: "Chiedi al browser di conservarle",
+      persistDenied:
+        "Il browser ha deciso di no. Un file di backup è la copia sempre al sicuro.",
+      iosHint:
+        "Su iPhone e iPad, Safari cancella i dati di un sito dopo alcune settimane senza visite. Per conservare le tue chat, aggiungi WhatsAnalyze alla schermata Home: tocca Condividi e poi «Aggiungi alla schermata Home».",
+      backupTitle: "Backup",
+      backupText:
+        "Scarica tutte le chat salvate in un unico file. Per ripristinarle, trascina il file su questo pannello o su un riquadro di caricamento.",
+      backupDownload: "Scarica il backup",
+      backupRestore: "Ripristina un backup",
+      backupDownloaded: "Chat nel backup: {count}",
+      backupRestored: "Chat ripristinate dal backup: {count}",
+      backupInvalid: "Questo file non è un backup di WhatsAnalyze.",
+      forgetTitle: "Dimenticare",
+      autoForget: "Dimentica le chat non aperte da 90 giorni",
+      autoForgetText:
+        "Verificato ogni volta che torni. Un browser non può cancellare nulla mentre il sito è chiuso.",
+      forgetAll: "Dimentica tutto",
+      forgetAllConfirm:
+        "Dimenticare tutte le chat, le analisi e le conversazioni salvate su questo dispositivo? Non si può annullare.",
+      readingsTitle: "Analisi precedenti",
+      readingGeneral: "Analisi generale",
+      ranLocal: "Su questo dispositivo",
+      ranCloud: "Cloud",
+      ranPreview: "Anteprima cloud",
     },
     askAiCard: {
       title: "Chiedi all'IA di questa chat",
@@ -7383,9 +7768,9 @@ export const messages = {
       pillar2Title: "Anonimizzata per il cloud",
       pillar2Text:
         "Se scegli l'IA nel cloud, i nomi diventano «Persona A» e «Persona B» e numeri di telefono, email e link vengono rimossi prima. I nomi vengono ripristinati solo sul tuo dispositivo.",
-      pillar3Title: "Nulla viene conservato",
+      pillar3Title: "Solo sul tuo dispositivo",
       pillar3Text:
-        "Non conserviamo la tua chat e non addestriamo modelli con essa. Non c'è nulla da eliminare perché non è stato salvato nulla.",
+        "La tua chat viene salvata nel tuo browser per poterci tornare, mai sui nostri server, e non addestriamo modelli con essa. Dimenticala con un tocco quando vuoi.",
       faqTitle: "Domande sul passaggio",
       faq1Q: "Esiste una versione gratuita di What Brandon Thinks?",
       faq1A:
