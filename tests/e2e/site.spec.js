@@ -462,20 +462,72 @@ test.describe("the analyzer", () => {
   test("renders migrated markdown content", async ({ page }) => {
     await page.goto("/how-to-export-your-whatsapp-chat");
 
-    await expect(page).toHaveTitle(/How to Export your WhatsApp Chat/);
+    await expect(page).toHaveTitle(/How to Export a WhatsApp Chat/);
     // By role, not by text: the page title is also the last breadcrumb now, so
     // a plain text match finds two nodes.
     await expect(
       page.getByRole("heading", {
-        name: "Export WhatsApp Chat: The Ultimate Guide",
+        name: "How to export a WhatsApp chat",
         level: 1,
       }),
     ).toBeVisible();
     await expect(
       page.getByRole("heading", {
-        name: "Option 1: iPhone (iOS) - Export as a .txt File",
+        name: "On a computer: WhatsApp Web, Windows and Mac",
       }),
     ).toBeVisible();
+  });
+
+  test("serves the export guide in the locale's own language", async ({
+    page,
+  }) => {
+    await page.goto("/de/how-to-export-your-whatsapp-chat/");
+
+    await expect(page).toHaveTitle(/WhatsApp-Chat exportieren/);
+    await expect(
+      page.getByRole("heading", {
+        name: "WhatsApp-Chat exportieren",
+        level: 1,
+      }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", {
+        name: "Am Computer: WhatsApp Web, Windows und Mac",
+      }),
+    ).toBeVisible();
+
+    // The breadcrumb trail Google shows leads to this locale's pages, not the
+    // English ones.
+    const graphs = await page
+      .locator('script[type="application/ld+json"]')
+      .allTextContents();
+    const trail = graphs
+      .flatMap((text) => JSON.parse(text)["@graph"] || [])
+      .find((node) => node["@type"] === "BreadcrumbList");
+    expect(trail.itemListElement.map((crumb) => crumb.item)).toEqual([
+      expect.stringMatching(/\/de\/$/),
+      expect.stringMatching(/\/de\/how-to-export-your-whatsapp-chat\/$/),
+    ]);
+  });
+
+  test("hands an export dropped on the guide to the analyzer", async ({
+    page,
+  }) => {
+    await page.goto("/how-to-export-your-whatsapp-chat");
+    await page
+      .locator('#dropzone-slot input[type="file"]')
+      .setInputFiles(EXAMPLE_CHAT);
+
+    // With the chat loaded, every next step carries on with it rather than
+    // asking for the file again.
+    const stats = page
+      .locator(".landing-cards")
+      .getByRole("link", { name: /Chat statistics/ });
+    await expect(stats).toContainText("Continue with this chat");
+    await stats.click();
+
+    await expect(page).toHaveURL(/#results$/);
+    await expectAnalysis(page);
   });
 });
 

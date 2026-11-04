@@ -1,53 +1,51 @@
 <template>
   <div>
     <LandingHero
-      :breadcrumbs="[
-        { label: 'WhatsAnalyze', to: localePath('/') },
-        { label: page?.title || 'How to export your WhatsApp chat' },
-      ]"
-      :title="page?.title || 'How to export your WhatsApp chat'"
+      :breadcrumbs="breadcrumbs"
+      :title="title"
       :subtitle="page?.description || ''"
+      :cta-text="t('exportGuidePage.heroCta')"
+      cta-to="#dropzone-slot"
+      :note="checkedNote"
+      @click="trackHeroCta"
     />
-    <v-container>
-      <ExportExplainer class="mt-10" cta="exportAsPDF" to="/" />
-      <PdfExample />
-    </v-container>
-    <Content :page="page" />
-    <v-container>
-      <div class="additional-resources mt-5">
-        <h2>Additional Resources</h2>
-        <ul>
-          <li>YouTube tutorials for export</li>
-        </ul>
+
+    <LandingSection theme="light" :title="t('exportGuidePage.phoneTitle')">
+      <!-- No `to`: its button scrolls down to the upload box below instead
+           of sending the reader off to the home page. -->
+      <ExportExplainer
+        class="export-guide__explainer"
+        cta="exportGuidePage.explainerCta"
+      />
+      <p class="export-guide__computer">
+        <a href="#computer">{{ t("exportGuidePage.computerLink") }} ↓</a>
+      </p>
+    </LandingSection>
+
+    <!-- Everyone reading this is about to have a chat file, so the next step
+         is right here rather than on another page. The chat is handed on
+         through shared state: whichever card they pick opens it without
+         asking for the file again. -->
+    <LandingSection
+      theme="white"
+      :eyebrow="t('exportGuidePage.nextEyebrow')"
+      :title="t('exportGuidePage.nextTitle')"
+      :text="t('exportGuidePage.nextText')"
+    >
+      <div id="dropzone-slot" class="export-guide__dropzone">
+        <ToolDropzone tool-type="export_guide" @analyzed="chatReady = true" />
       </div>
-      <!-- YouTube Video Embed -->
-      <iframe
-        class="youtube-video my-5"
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/Mq5ZvyerA8E"
-        title="YouTube video player"
-        frameborder="0"
-        allow="
-          accelerometer;
-          autoplay;
-          clipboard-write;
-          encrypted-media;
-          gyroscope;
-          picture-in-picture;
-        "
-        allowfullscreen
-      ></iframe>
-      <ul>
-        <li class="mb-2">
-          FAQs: Common questions and troubleshooting tips. <br />
-          <a href="/#faq">Read our FAQs</a>
-        </li>
-        <li>
-          User Stories: Experiences and tips from users. <br />
-          <a href="/#stories">Discover User Stories</a>
-        </li>
-      </ul>
+      <LandingCards
+        class="export-guide__cards"
+        :items="nextSteps"
+        @select="trackNextStep"
+      />
+    </LandingSection>
+
+    <Content :page="page" />
+
+    <v-container class="export-guide__extras">
+      <PdfExample />
       <div class="comparison-section my-5">
         <h2>Comparison of different tools available</h2>
         <p>
@@ -62,41 +60,205 @@
         :headers="headers"
         :items="desserts"
       ></v-data-table>
-      <Cta
-        to="/"
-        class="cta-sectionpy-5"
-        title="analyzeYourOwnWhatsapp"
-        button-txt="analyzeMyChat"
-        text="interestedAbout"
-      />
     </v-container>
+
+    <LandingCta
+      :title="t('exportGuidePage.ctaTitle')"
+      :cta-text="t('exportGuidePage.ctaButton')"
+      cta-to="#dropzone-slot"
+      :note="t('exportGuidePage.ctaNote')"
+      @click="trackBottomCta"
+    />
   </div>
 </template>
 
 <script>
+import { ONE_TIME_PRICE, formatPrice } from "~/utils/pricing";
+import { analyticsTools } from "~/composables/useAnalytics";
+import ToolDropzone from "~/components/tools/ToolDropzone.vue";
+import { scrollToDropzone } from "~/composables/useToolPage";
+
+const GUIDE_PATH = "/how-to-export-your-whatsapp-chat";
+
+// The day the steps were last checked against WhatsApp's own help page
+// (faq.whatsapp.com/1180414079177245). It is printed under the title and is
+// the article's dateModified, so only move it after checking them again.
+const STEPS_CHECKED = "2026-11-03";
+
 export default {
   name: "HowToExportYourWhatsappChat",
+  components: { ToolDropzone },
   async setup() {
-    const { t } = useI18n();
+    const { t, locale, localeProperties } = useI18n();
+    const localePath = useLocalePath();
+    const { baseUrl } = useRuntimeConfig().public;
+
+    // One copy of the guide per language, under content/<locale>/ like the
+    // routes, English at the root. A language without its own copy shows the
+    // English one rather than nothing.
+    //
+    // Awaited only at the end of setup: this is not <script setup>, so
+    // nothing restores the Nuxt instance after an await, and useSeoMeta and
+    // useHead below need it (NUXT_E1001 otherwise).
+    const content = useAsyncData(
+      `content-export-guide-${locale.value}`,
+      async () => {
+        const path =
+          locale.value === "en" ? GUIDE_PATH : `/${locale.value}${GUIDE_PATH}`;
+        return (
+          (await queryCollection("pages").path(path).first()) ??
+          queryCollection("pages").path(GUIDE_PATH).first()
+        );
+      },
+    );
+    const page = content.data;
+
+    const title = computed(
+      () => page.value?.title || t("seo.exportGuideTitle"),
+    );
+    const homeUrl = `${baseUrl}${localePath("/")}`;
+    const pageUrl = `${baseUrl}${localePath(GUIDE_PATH)}`;
 
     useSeoMeta({
       title: () => t("seo.exportGuideTitle"),
       description: () => t("seo.exportGuideDescription"),
       ogTitle: () => t("seo.exportGuideTitle"),
-      ogSiteName: () => t("seo.exportGuideTitle"),
+      ogSiteName: "WhatsAnalyze",
       ogDescription: () => t("seo.exportGuideDescription"),
-      ogUrl: "https://whatsanalyze.com/how-to-export-your-whatsapp-chat/",
+      ogUrl: pageUrl,
     });
 
-    const localePath = useLocalePath();
-    const { data: page } = await useAsyncData("content-export-guide", () =>
-      queryCollection("pages")
-        .path("/how-to-export-your-whatsapp-chat")
-        .first(),
+    // Only what Google still shows for a page like this: the breadcrumb
+    // trail, and the article's title and date. HowTo and FAQ rich results no
+    // longer appear at all (FAQ since May 2026), so the steps are not marked
+    // up as either.
+    useHead(() => ({
+      script: [
+        {
+          type: "application/ld+json",
+          innerHTML: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "WhatsAnalyze",
+                    item: homeUrl,
+                  },
+                  {
+                    "@type": "ListItem",
+                    position: 2,
+                    name: title.value,
+                    item: pageUrl,
+                  },
+                ],
+              },
+              {
+                "@type": "Article",
+                headline: title.value,
+                description: t("seo.exportGuideDescription"),
+                inLanguage: localeProperties.value.language,
+                dateModified: `${STEPS_CHECKED}T00:00:00Z`,
+                author: {
+                  "@type": "Organization",
+                  name: "WhatsAnalyze",
+                  url: `${baseUrl}/`,
+                },
+                mainEntityOfPage: pageUrl,
+              },
+            ],
+          }),
+        },
+      ],
+    }));
+
+    const checkedNote = computed(() =>
+      t("exportGuidePage.checkedNote", {
+        // UTC on both ends, or a reader west of Greenwich is told the day
+        // before.
+        date: new Intl.DateTimeFormat(localeProperties.value.language, {
+          dateStyle: "long",
+          timeZone: "UTC",
+        }).format(new Date(`${STEPS_CHECKED}T00:00:00Z`)),
+      }),
     );
+
+    // Set once the dropzone holds a chat, dropped here or restored from
+    // earlier in this tab. The cards then lead straight into that chat.
+    const chatReady = ref(false);
+    const nextSteps = computed(() => {
+      const linkText = chatReady.value
+        ? t("exportGuidePage.cardContinue")
+        : t("exportGuidePage.cardOpen");
+      return [
+        {
+          cta: "full_analyzer",
+          icon: "mdi-chart-box-outline",
+          title: t("exportGuidePage.cardStatsTitle"),
+          text: t("exportGuidePage.cardStatsText"),
+          to: localePath(
+            chatReady.value ? { path: "/", hash: "#results" } : "/",
+          ),
+          linkText,
+        },
+        {
+          cta: "ai",
+          icon: "mdi-creation-outline",
+          title: t("exportGuidePage.cardAiTitle"),
+          text: t("exportGuidePage.cardAiText"),
+          to: localePath("/tools/ai-chat-analyzer"),
+          linkText,
+        },
+        {
+          cta: "pdf",
+          icon: "mdi-file-document-outline",
+          title: t("exportGuidePage.cardPdfTitle"),
+          text: t("exportGuidePage.cardPdfText", {
+            price: formatPrice(ONE_TIME_PRICE, locale.value),
+          }),
+          // The download sits under the analysis on the home page.
+          to: localePath(
+            chatReady.value ? { path: "/", hash: "#payButton" } : "/",
+          ),
+          linkText,
+        },
+        {
+          cta: "court_pdf",
+          icon: "mdi-scale-balance",
+          title: t("exportGuidePage.cardCourtTitle"),
+          text: t("exportGuidePage.cardCourtText"),
+          to: localePath("/tools/court-evidence"),
+          linkText,
+        },
+      ];
+    });
+
+    const breadcrumbs = computed(() => [
+      { label: "WhatsAnalyze", to: localePath("/") },
+      { label: title.value },
+    ]);
+
+    await content;
+
     return {
+      t,
       page,
-      localePath,
+      title,
+      breadcrumbs,
+      checkedNote,
+      chatReady,
+      nextSteps,
+      trackHeroCta: () =>
+        analyticsTools.ctaClick("export_guide", "hero_dropzone"),
+      trackNextStep: (item) =>
+        analyticsTools.ctaClick("export_guide", item.cta),
+      trackBottomCta: () => {
+        scrollToDropzone();
+        analyticsTools.ctaClick("export_guide", "scroll_to_dropzone");
+      },
     };
   },
   data() {
@@ -217,10 +379,46 @@ export default {
   },
 };
 </script>
-<style>
-.youtube-video {
-  max-width: 100%;
+<style lang="scss" scoped>
+.export-guide__computer {
+  margin-top: 2rem;
+
+  a {
+    color: $c-blue-accent-dark;
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
+
+.export-guide__explainer,
+.export-guide__dropzone {
+  margin-top: clamp(2rem, 5vw, 3rem);
+}
+
+// Four cards: two by two, or all four in a row on a wide screen, rather than
+// the three and a stray one that auto-fit makes of them.
+.export-guide__cards.landing-cards {
+  @media (min-width: 600px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (min-width: 1000px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+// The table used to end on the old CTA's margin; the dark section now
+// follows it directly.
+.export-guide__extras {
+  padding-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+</style>
+
+<style>
 .styled-table {
   width: 100%;
   border-collapse: collapse;

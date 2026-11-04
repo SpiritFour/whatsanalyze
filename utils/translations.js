@@ -6,15 +6,46 @@ export const messages = {
       homeTitle: "WhatsAnalyze - The WhatsApp Chat Analyzer",
       homeDescription:
         "Most Popular WhatsApp Analyzer. Reveal chat statistics and export your chat as a PDF without uploading your data.",
-      exportGuideTitle: "WhatsAnalyze - How to Export your WhatsApp Chat",
+      exportGuideTitle:
+        "How to Export a WhatsApp Chat: iPhone, Android, Web & PDF",
       exportGuideDescription:
-        "Export your WhatsApp Chat. iOS tutorial and Android guide.",
+        "Step by step: export any WhatsApp chat or group on iPhone, Android, WhatsApp Web, Windows or Mac, with or without media. Then turn it into a PDF or stats.",
       pdfGuideTitle: "WhatsAnalyze - How to Export your WhatsApp Chat to PDF",
       pdfGuideDescription:
         "Export your WhatsApp chat to PDF in seconds without sending chat data to a server.",
       signalTitle: "WhatsAnalyze - How to switch from WhatsApp to Signal",
       signalDescription:
         "Switch from WhatsApp to Signal, transfer group chats, and create backups.",
+    },
+    // Not `exportGuide`: Wrapped's messages have a block of that name, and
+    // i18n/i18n.config.js spreads them over these, which replaced this one.
+    exportGuidePage: {
+      heroCta: "Already exported? Open your chat",
+      checkedNote: "Steps checked against WhatsApp's Help Center on {date}",
+      phoneTitle: "Step by step on iPhone and Android",
+      explainerCta: "Got the file? Open it here",
+      computerLink: "On a computer? Steps for WhatsApp Web, Windows and Mac",
+      nextEyebrow: "Next step",
+      nextTitle: "Open your export right here",
+      nextText:
+        "Drop the .zip or .txt file below. It is read in your browser, not uploaded. Then pick what you want to see.",
+      cardOpen: "Open",
+      cardContinue: "Continue with this chat",
+      cardStatsTitle: "Chat statistics",
+      cardStatsText:
+        "Who writes the most, when you text, your top words and emojis. Free.",
+      cardAiTitle: "AI reading",
+      cardAiText:
+        "AI answers your question about the chat: who makes more effort, the vibe, recurring topics. On your device or anonymized in the cloud.",
+      cardPdfTitle: "Chat as PDF",
+      cardPdfText:
+        "The whole conversation as a printable PDF, with photos if you exported them. Free preview, full PDF {price} one-time.",
+      cardCourtTitle: "Court evidence PDF",
+      cardCourtText:
+        "Numbered lines, exact timestamps and a SHA-256 fingerprint, for lawyers and courts.",
+      ctaTitle: "Got your export? Open it here",
+      ctaButton: "Open my chat file",
+      ctaNote: "Read in your browser · .zip or .txt · Free statistics",
     },
     subscribePage: {
       title: "One Subscription. Everything Unlocked.",
@@ -1302,15 +1333,46 @@ export const messages = {
       homeTitle: "WhatsAnalyze - Die WhatsApp-Chat-Analyse",
       homeDescription:
         "Die beliebteste WhatsApp-Analyse. Entdecke deine Chat-Statistiken und exportiere deinen Chat als PDF, ohne deine Daten hochzuladen.",
-      exportGuideTitle: "WhatsAnalyze - WhatsApp-Chat exportieren",
+      exportGuideTitle:
+        "WhatsApp-Chat exportieren: iPhone, Android, PC, Web & PDF",
       exportGuideDescription:
-        "Exportiere deinen WhatsApp-Chat. Anleitung für iOS und Android.",
+        "Schritt für Schritt: WhatsApp-Chat oder Gruppe exportieren – auf iPhone, Android, WhatsApp Web, Windows oder Mac, mit oder ohne Medien. Danach als PDF oder Statistik.",
       pdfGuideTitle: "WhatsAnalyze - WhatsApp-Chat als PDF exportieren",
       pdfGuideDescription:
         "Exportiere deinen WhatsApp-Chat in Sekunden als PDF, ohne Chat-Daten an einen Server zu senden.",
       signalTitle: "WhatsAnalyze - Von WhatsApp zu Signal wechseln",
       signalDescription:
         "Wechsle von WhatsApp zu Signal, übertrage Gruppenchats und erstelle Backups.",
+    },
+    exportGuidePage: {
+      heroCta: "Schon exportiert? Chat hier öffnen",
+      checkedNote:
+        "Schritte am {date} mit dem WhatsApp-Hilfebereich abgeglichen",
+      phoneTitle: "Schritt für Schritt auf iPhone und Android",
+      explainerCta: "Datei da? Hier öffnen",
+      computerLink: "Am Computer? Schritte für WhatsApp Web, Windows und Mac",
+      nextEyebrow: "Nächster Schritt",
+      nextTitle: "Öffne deinen Export direkt hier",
+      nextText:
+        "Zieh die .zip- oder .txt-Datei hierher. Sie wird in deinem Browser gelesen, nicht hochgeladen. Dann wähle, was du sehen willst.",
+      cardOpen: "Öffnen",
+      cardContinue: "Mit diesem Chat weiter",
+      cardStatsTitle: "Chat-Statistiken",
+      cardStatsText:
+        "Wer am meisten schreibt, wann ihr schreibt, eure häufigsten Wörter und Emojis. Kostenlos.",
+      cardAiTitle: "KI-Auswertung",
+      cardAiText:
+        "Die KI beantwortet deine Frage zum Chat: wer sich mehr Mühe gibt, die Stimmung, wiederkehrende Themen. Auf deinem Gerät oder anonymisiert in der Cloud.",
+      cardPdfTitle: "Chat als PDF",
+      cardPdfText:
+        "Das ganze Gespräch als druckbares PDF, mit Fotos, wenn du sie mitexportiert hast. Vorschau kostenlos, vollständiges PDF einmalig {price}.",
+      cardCourtTitle: "Beweis-PDF fürs Gericht",
+      cardCourtText:
+        "Nummerierte Zeilen, genaue Zeitstempel und ein SHA-256-Fingerabdruck – für Anwälte und Gerichte.",
+      ctaTitle: "Export fertig? Öffne ihn hier",
+      ctaButton: "Meine Chat-Datei öffnen",
+      ctaNote:
+        "Wird im Browser gelesen · .zip oder .txt · Statistiken kostenlos",
     },
     subscribePage: {
       title: "Ein Abo. Alles freigeschaltet.",
@@ -1762,9 +1824,9 @@ export const messages = {
     tabItemAndroid3: "<span>Tippe im neuen Menü auf <b>Mehr</b>.</span>",
     tabItemAndroid4: "<span>Tippe auf <b>Chat exportieren</b>.</span>",
     tabItemAndroid5:
-      "<span>Wähle <b>Ohne Medien</b> oder <b>Medien einbeziehen</b>, wenn Du deine Bilder und andere Dateien in den Export einbeziehen möchten.</span>",
+      "<span>Wähle <b>Ohne Medien</b> oder <b>Einschließlich Medien</b>, wenn du deine Bilder und andere Dateien mitexportieren möchtest.</span>",
     tabItemAndroid6:
-      "<span>Nun tippen in der Freigabeansicht auf <b>WhatsAnalyze</b> oder alternativ, wenn Du Schritt 1 übersprungen haben, senden es per <b>E-Mail</b> an dich selbst oder speichern es in <b>Google Drive</b>.</span>",
+      "<span>Tippe jetzt in der Teilen-Ansicht auf <b>WhatsAnalyze</b>. Hast du Schritt 1 übersprungen, schick die Datei per <b>E-Mail</b> an dich selbst oder speichere sie in <b>Google Drive</b>.</span>",
     selectFile: "Datei über obige Box auswählen.",
     messages: "Messages",
     totalWords: "Total words:",
@@ -2591,15 +2653,44 @@ export const messages = {
       homeTitle: "WhatsAnalyze - El analizador de chats de WhatsApp",
       homeDescription:
         "El analizador de WhatsApp más popular. Descubre las estadísticas de tus chats y exporta tu conversación en PDF sin subir tus datos.",
-      exportGuideTitle: "WhatsAnalyze - Cómo exportar tu chat de WhatsApp",
+      exportGuideTitle: "Exportar chat de WhatsApp: iPhone, Android, Web y PDF",
       exportGuideDescription:
-        "Exporta tu chat de WhatsApp. Tutorial para iOS y guía para Android.",
+        "Paso a paso: exporta cualquier chat o grupo de WhatsApp en iPhone, Android, WhatsApp Web, Windows o Mac, con o sin archivos. Después, conviértelo en PDF o estadísticas.",
       pdfGuideTitle: "WhatsAnalyze - Cómo exportar tu chat de WhatsApp a PDF",
       pdfGuideDescription:
         "Exporta tu chat de WhatsApp a PDF en segundos sin enviar los datos a ningún servidor.",
       signalTitle: "WhatsAnalyze - Cómo pasar de WhatsApp a Signal",
       signalDescription:
         "Pasa de WhatsApp a Signal, transfiere chats de grupo y crea copias de seguridad.",
+    },
+    exportGuidePage: {
+      heroCta: "¿Ya lo exportaste? Abre tu chat",
+      checkedNote:
+        "Pasos comprobados con el Servicio de ayuda de WhatsApp el {date}",
+      phoneTitle: "Paso a paso en iPhone y Android",
+      explainerCta: "¿Tienes el archivo? Ábrelo aquí",
+      computerLink: "¿En el ordenador? Pasos para WhatsApp Web, Windows y Mac",
+      nextEyebrow: "Siguiente paso",
+      nextTitle: "Abre tu exportación aquí mismo",
+      nextText:
+        "Suelta aquí el archivo .zip o .txt. Se lee en tu navegador, no se sube a ningún sitio. Luego elige qué quieres ver.",
+      cardOpen: "Abrir",
+      cardContinue: "Seguir con este chat",
+      cardStatsTitle: "Estadísticas del chat",
+      cardStatsText:
+        "Quién escribe más, a qué horas, las palabras y emojis más usados. Gratis.",
+      cardAiTitle: "Lectura con IA",
+      cardAiText:
+        "La IA responde a tu pregunta sobre el chat: quién se esfuerza más, el ambiente, los temas recurrentes. En tu dispositivo o anonimizado en la nube.",
+      cardPdfTitle: "Chat en PDF",
+      cardPdfText:
+        "Toda la conversación en un PDF para imprimir, con fotos si las exportaste. Vista previa gratis, PDF completo por {price} en un único pago.",
+      cardCourtTitle: "PDF de prueba judicial",
+      cardCourtText:
+        "Líneas numeradas, marcas de tiempo exactas y huella SHA-256, para abogados y juzgados.",
+      ctaTitle: "¿Ya tienes tu exportación? Ábrela aquí",
+      ctaButton: "Abrir mi archivo de chat",
+      ctaNote: "Se lee en tu navegador · .zip o .txt · Estadísticas gratis",
     },
     subscribePage: {
       title: "Una suscripción. Todo desbloqueado.",
@@ -3024,26 +3115,25 @@ export const messages = {
     fullChat: "Tu charla completa",
     tabItemiOS1:
       "<span>En el iPhone <b>abre</b> WhatsApp y el <b>chat</b> o <b>chat de grupo</b> que deseas exportar> en la parte superior <b>toca </b> el <b>nombre</b> del chat.</span>",
-    tabItemiOS2:
-      "<span>En la información del chat, desplácese hasta el final.</span>",
+    tabItemiOS2: "<span>En la info del chat, desplázate hasta el final.</span>",
     tabItemiOS3: "<span>Toca <b>Exportar chat</b>.</span>",
-    tabItemiOS4: "<span>Elija <b>Sin medios</b>.</span>",
+    tabItemiOS4: "<span>Elige <b>Sin archivos multimedia</b>.</span>",
     tabItemiOS5:
-      "<span>Toque <b>Guardar en archivos</b> para guardarlo en su iPhone.</span>",
+      "<span>Toca <b>Guardar en Archivos</b> para guardarlo en tu iPhone.</span>",
     tabItemiOS6:
-      "<span>Finalmente seleccione <b >En mi iPhone</b> y <b >guardar</b> para guardarlo localmente.</span>",
+      "<span>Por último, elige <b>En mi iPhone</b> y toca <b>Guardar</b>.</span>",
     tabItemiOS7:
-      "<span>Por fin puede seleccionar su .zip exportado para analizarlo.</span>",
+      "<span>Ya puedes seleccionar tu .zip exportado para analizarlo.</span>",
     tabItemAndroid1:
-      "<span>En su teléfono Android, abra este sitio web en <b>Chrome</b> y toque el botón <b>agregar a la pantalla de inicio</b> y presione instalar</span>",
+      "<span>En tu móvil Android, abre esta web en <b>Chrome</b>, toca <b>Añadir a pantalla de inicio</b> y pulsa Instalar.</span>",
     tabItemAndroid2:
       "<span>Abre <b>WhatsApp</b> y toca el chat que te gustaría exportar > toca los <b>tres puntos</b> en la esquina superior derecha.</span>",
-    tabItemAndroid3: "<span>En el nuevo menú, toque <b>Más</b>.</span>",
+    tabItemAndroid3: "<span>En el menú, toca <b>Más</b>.</span>",
     tabItemAndroid4: "<span>Toca <b>Exportar chat</b>.</span>",
     tabItemAndroid5:
-      "<span>Elija Sin medios o <b>Incluir medios</b> si desea incluir sus imágenes y otros archivos en la exportación.</span>",
+      "<span>Elige <b>Sin archivos</b> o <b>Incluir archivos</b> si quieres incluir tus imágenes y otros archivos en la exportación.</span>",
     tabItemAndroid6:
-      "<span>Ahora, en la vista para compartir, toque <b>WhatsAnalyze</b> o, alternativamente, si omitió el paso 1, envíeselo a usted mismo por <b>correo electrónico</b> o guárdelo en <b>Google Conducir</b>.</span>",
+      "<span>Ahora, en la vista para compartir, toca <b>WhatsAnalyze</b> o, si te saltaste el paso 1, envíatelo por <b>correo electrónico</b> o guárdalo en <b>Google Drive</b>.</span>",
     selectFile: "Exportación completada, ahora seleccione su archivo de chat",
     messages: "Mensajes",
     totalWords: "Palabras totales:",
@@ -3867,9 +3957,9 @@ export const messages = {
       homeDescription:
         "O analisador de WhatsApp mais popular. Descobre as estatísticas das tuas conversas e exporta o teu chat em PDF sem carregar os teus dados.",
       exportGuideTitle:
-        "WhatsAnalyze - Como exportar a tua conversa do WhatsApp",
+        "Exportar conversa do WhatsApp: iPhone, Android, Web e PDF",
       exportGuideDescription:
-        "Exporta a tua conversa do WhatsApp. Tutorial para iOS e guia para Android.",
+        "Passo a passo para exportar qualquer conversa ou grupo do WhatsApp no iPhone, Android, WhatsApp Web, Windows ou Mac, com ou sem fotos. Depois, gere um PDF ou estatísticas.",
       pdfGuideTitle:
         "WhatsAnalyze - Como exportar a tua conversa do WhatsApp para PDF",
       pdfGuideDescription:
@@ -3877,6 +3967,35 @@ export const messages = {
       signalTitle: "WhatsAnalyze - Como mudar do WhatsApp para o Signal",
       signalDescription:
         "Muda do WhatsApp para o Signal, transfere conversas de grupo e cria cópias de segurança.",
+    },
+    exportGuidePage: {
+      heroCta: "Já exportou? Abra sua conversa",
+      checkedNote:
+        "Passos conferidos na Central de Ajuda do WhatsApp em {date}",
+      phoneTitle: "Passo a passo no iPhone e no Android",
+      explainerCta: "Já tem o arquivo? Abra aqui",
+      computerLink: "No computador? Passos para WhatsApp Web, Windows e Mac",
+      nextEyebrow: "Próximo passo",
+      nextTitle: "Abra sua exportação aqui mesmo",
+      nextText:
+        "Solte aqui o arquivo .zip ou .txt. Ele é lido no seu navegador, não é enviado para lugar nenhum. Depois escolha o que quer ver.",
+      cardOpen: "Abrir",
+      cardContinue: "Continuar com esta conversa",
+      cardStatsTitle: "Estatísticas da conversa",
+      cardStatsText:
+        "Quem escreve mais, em que horários, as palavras e emojis mais usados. Grátis.",
+      cardAiTitle: "Leitura com IA",
+      cardAiText:
+        "A IA responde sua pergunta sobre a conversa: quem se esforça mais, o clima, os assuntos recorrentes. No seu aparelho ou anonimizada na nuvem.",
+      cardPdfTitle: "Conversa em PDF",
+      cardPdfText:
+        "A conversa inteira em um PDF para imprimir, com as fotos se você as exportou. Prévia grátis, PDF completo por {price} em pagamento único.",
+      cardCourtTitle: "PDF de prova judicial",
+      cardCourtText:
+        "Linhas numeradas, horários exatos e impressão digital SHA-256, para advogados e tribunais.",
+      ctaTitle: "Exportação pronta? Abra aqui",
+      ctaButton: "Abrir meu arquivo",
+      ctaNote: "Lido no seu navegador · .zip ou .txt · Estatísticas grátis",
     },
     subscribePage: {
       title: "Uma assinatura. Tudo liberado.",
@@ -5147,9 +5266,9 @@ export const messages = {
       homeDescription:
         "L'analyseur WhatsApp le plus populaire. Découvrez les statistiques de vos conversations et exportez votre chat en PDF sans envoyer vos données.",
       exportGuideTitle:
-        "WhatsAnalyze - Comment exporter votre conversation WhatsApp",
+        "Exporter une discussion WhatsApp : iPhone, Android, Web, PDF",
       exportGuideDescription:
-        "Exportez votre conversation WhatsApp. Tutoriel iOS et guide Android.",
+        "Pas à pas : exportez une discussion ou un groupe WhatsApp sur iPhone, Android, WhatsApp Web, Windows ou Mac, avec ou sans médias. Puis obtenez un PDF ou des statistiques.",
       pdfGuideTitle:
         "WhatsAnalyze - Comment exporter votre conversation WhatsApp en PDF",
       pdfGuideDescription:
@@ -5157,6 +5276,36 @@ export const messages = {
       signalTitle: "WhatsAnalyze - Comment passer de WhatsApp à Signal",
       signalDescription:
         "Passez de WhatsApp à Signal, transférez vos groupes et créez des sauvegardes.",
+    },
+    exportGuidePage: {
+      heroCta: "Déjà exporté ? Ouvrez votre discussion",
+      checkedNote: "Étapes vérifiées le {date} sur les Pages d'aide WhatsApp",
+      phoneTitle: "Pas à pas sur iPhone et Android",
+      explainerCta: "Vous avez le fichier ? Ouvrez-le ici",
+      computerLink:
+        "Sur ordinateur ? Les étapes pour WhatsApp Web, Windows et Mac",
+      nextEyebrow: "Étape suivante",
+      nextTitle: "Ouvrez votre export ici même",
+      nextText:
+        "Déposez ci-dessous le fichier .zip ou .txt. Il est lu dans votre navigateur, pas envoyé. Choisissez ensuite ce que vous voulez voir.",
+      cardOpen: "Ouvrir",
+      cardContinue: "Continuer avec cette discussion",
+      cardStatsTitle: "Statistiques de la discussion",
+      cardStatsText:
+        "Qui écrit le plus, à quelles heures, les mots et emojis les plus utilisés. Gratuit.",
+      cardAiTitle: "Lecture par IA",
+      cardAiText:
+        "L'IA répond à votre question sur la discussion : qui fait le plus d'efforts, l'ambiance, les sujets récurrents. Sur votre appareil ou anonymisée dans le cloud.",
+      cardPdfTitle: "Discussion en PDF",
+      cardPdfText:
+        "Toute la conversation dans un PDF à imprimer, avec les photos si vous les avez exportées. Aperçu gratuit, PDF complet {price} en achat unique.",
+      cardCourtTitle: "PDF de preuve judiciaire",
+      cardCourtText:
+        "Lignes numérotées, horodatages exacts et empreinte SHA-256, pour les avocats et les tribunaux.",
+      ctaTitle: "Votre export est prêt ? Ouvrez-le ici",
+      ctaButton: "Ouvrir mon fichier",
+      ctaNote:
+        "Lu dans votre navigateur · .zip ou .txt · Statistiques gratuites",
     },
     subscribePage: {
       title: "Un abonnement. Tout est débloqué.",
@@ -5326,8 +5475,8 @@ export const messages = {
       "<span>Sur l'iPhone, <b>ouvrez</b> WhatsApp et le <b>chat</b> ou le <b>groupe de chat</b> que vous souhaitez exporter > en haut, <b>tapez</b> sur le <b>nom</b> du chat.</span>",
     tabItemiOS2:
       "<span>Dans les informations sur le chat, faites défiler la page jusqu'en bas.</span>",
-    tabItemiOS3: "<span>Tapez sur <b>Exporter le chat Tap on</b>.</span>",
-    tabItemiOS4: "<span>Choisir <b >sans media</b>.</span>",
+    tabItemiOS3: "<span>Appuyez sur <b>Exporter la discussion</b>.</span>",
+    tabItemiOS4: "<span>Choisissez <b>Sans médias</b>.</span>",
     tabItemiOS5:
       "<span>Cliquez sur <b>Enregistrer dans les fichiers</b> pour l'enregistrer sur votre iPhone.</span>",
     tabItemiOS6:
@@ -5339,9 +5488,9 @@ export const messages = {
     tabItemAndroid2:
       "<span>Ouvrez <b>WhatsApp</b> et tapez sur la discussion que vous souhaitez exporter > tapez sur les <b>trois points</b> dans le coin supérieur droit.</span>",
     tabItemAndroid3: "<span>Dans le nouveau menu, tapez sur <b>Plus</b></span>",
-    tabItemAndroid4: "<span>Cliquez sur <b>Exporter discussion</b>.</span>",
+    tabItemAndroid4: "<span>Appuyez sur <b>Exporter la discussion</b>.</span>",
     tabItemAndroid5:
-      "<span>Choisissez <b>Sans média</b> ou <b>Inclure média</b> si vous souhaitez inclure vos images et autres fichiers dans l'exportation.</span>",
+      "<span>Choisissez <b>Sans médias</b> ou <b>Joindre médias</b> si vous souhaitez inclure vos images et autres fichiers dans l'exportation.</span>",
     tabItemAndroid6:
       "<span>Dans la vue de partage, appuyez sur <b>WhatsAnalyze</b> ou, si vous avez sauté l'étape 1, envoyez-le à vous-même par <b>e-mail</b> ou sauvegardez-le sur <b>Google Drive</b>.</span>",
     selectFile: "Sélectionner le fichier dans la boîte ci-dessus",
@@ -6436,9 +6585,10 @@ export const messages = {
       homeTitle: "WhatsAnalyze - L'analizzatore di chat WhatsApp",
       homeDescription:
         "L'analizzatore WhatsApp più popolare. Scopri le statistiche delle tue chat ed esporta la conversazione in PDF senza caricare i tuoi dati.",
-      exportGuideTitle: "WhatsAnalyze - Come esportare la tua chat WhatsApp",
+      exportGuideTitle:
+        "Esportare una chat WhatsApp: iPhone, Android, Web e PDF",
       exportGuideDescription:
-        "Esporta la tua chat WhatsApp. Tutorial per iOS e guida per Android.",
+        "Passo per passo: esporta qualsiasi chat o gruppo WhatsApp su iPhone, Android, WhatsApp Web, Windows o Mac, con o senza media. Poi trasformala in PDF o statistiche.",
       pdfGuideTitle:
         "WhatsAnalyze - Come esportare la tua chat WhatsApp in PDF",
       pdfGuideDescription:
@@ -6446,6 +6596,35 @@ export const messages = {
       signalTitle: "WhatsAnalyze - Come passare da WhatsApp a Signal",
       signalDescription:
         "Passa da WhatsApp a Signal, trasferisci le chat di gruppo e crea backup.",
+    },
+    exportGuidePage: {
+      heroCta: "Già esportata? Apri la tua chat",
+      checkedNote:
+        "Passaggi verificati sul Centro assistenza di WhatsApp il {date}",
+      phoneTitle: "Passo per passo su iPhone e Android",
+      explainerCta: "Hai il file? Aprilo qui",
+      computerLink: "Dal computer? I passaggi per WhatsApp Web, Windows e Mac",
+      nextEyebrow: "Passo successivo",
+      nextTitle: "Apri qui la tua esportazione",
+      nextText:
+        "Trascina qui il file .zip o .txt. Viene letto nel tuo browser, non caricato. Poi scegli cosa vuoi vedere.",
+      cardOpen: "Apri",
+      cardContinue: "Continua con questa chat",
+      cardStatsTitle: "Statistiche della chat",
+      cardStatsText:
+        "Chi scrive di più, a che ore, le parole e le emoji più usate. Gratis.",
+      cardAiTitle: "Lettura con l'IA",
+      cardAiText:
+        "L'IA risponde alla tua domanda sulla chat: chi si impegna di più, l'atmosfera, i temi ricorrenti. Sul tuo dispositivo o anonimizzata nel cloud.",
+      cardPdfTitle: "Chat in PDF",
+      cardPdfText:
+        "Tutta la conversazione in un PDF da stampare, con le foto se le hai esportate. Anteprima gratuita, PDF completo a {price} una tantum.",
+      cardCourtTitle: "PDF come prova in tribunale",
+      cardCourtText:
+        "Righe numerate, orari esatti e impronta SHA-256, per avvocati e tribunali.",
+      ctaTitle: "Esportazione pronta? Aprila qui",
+      ctaButton: "Apri il mio file",
+      ctaNote: "Letto nel tuo browser · .zip o .txt · Statistiche gratuite",
     },
     subscribePage: {
       title: "Un abbonamento. Tutto sbloccato.",
@@ -6613,7 +6792,7 @@ export const messages = {
       "<span>Su iPhone <b>apri</b> WhatsApp e la <b>chat</b> o <b>chat di gruppo</b> che desideri esportare > in alto <b>tocca</b> il <b>nome</b> della chat.</span>",
     tabItemiOS2: "<span>Nel dettaglio della chat, scorri fino in fondo.</span>",
     tabItemiOS3: "<span>Tocca su <b>Esporta chat</b>.</span>",
-    tabItemiOS4: "<span>Scegli <b>senza media</b>.</span>",
+    tabItemiOS4: "<span>Scegli <b>Senza media</b>.</span>",
     tabItemiOS5:
       "<span>Tocca su <b>Salva su File</b> per salvarlo sul tuo iPhone.</span>",
     tabItemiOS6:
@@ -6627,7 +6806,7 @@ export const messages = {
     tabItemAndroid3: "<span>Nel nuovo menu tocca su <b>Altro</b>.</span>",
     tabItemAndroid4: "<span>Tocca su <b>Esporta chat</b>.</span>",
     tabItemAndroid5:
-      "<span>Scegli Senza Media o <b>Includi Media</b> se desideri includere le immagini e altri file nell'esportazione.</span>",
+      "<span>Scegli <b>Senza file multimediali</b> o <b>Includi file multimediali</b> se desideri includere le immagini e altri file nell'esportazione.</span>",
     tabItemAndroid6:
       "<span>Ora nella vista di condivisione tocca su <b>WhatsAnalyze</b> o, in alternativa, se hai saltato il passaggio 1 invialo a te stesso tramite <b>E-Mail</b> o salvalo su <b>Google Drive</b>.</span>",
     selectFile: "Seleziona file tramite il box sopra",
