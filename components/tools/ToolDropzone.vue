@@ -53,6 +53,8 @@
             {{ t("toolDropzone.trySample") }}
           </button>
         </div>
+
+        <LibraryPicker @open="openSaved" />
       </div>
 
       <!-- Loading / Parsing State -->
@@ -95,6 +97,11 @@
           {{ t("toolDropzone.switchFile") }}
         </button>
       </div>
+      <LibraryPicker
+        v-if="hasLoadedFile && !loading"
+        :exclude="library.idFor(shownChat?.messages)"
+        @open="openSaved"
+      />
 
       <!-- Error message if parsing fails -->
       <div v-if="errorMessage" class="dropzone-error" @click.stop>
@@ -103,12 +110,22 @@
         >
         <span>{{ errorMessage }}</span>
       </div>
+      <p v-if="notice" class="dropzone-notice" role="status">{{ notice }}</p>
     </div>
+
+    <LibraryStatus
+      v-if="hasLoadedFile && shownChat"
+      :messages="shownChat.messages"
+      :source="shownChat.source"
+      :source-name="shownChat.sourceName"
+      :sample="shownChat.sample"
+      :surface="surface"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, shallowRef } from "vue";
 import { analyticsTools } from "~/composables/useAnalytics";
 
 const { t } = useI18n();
@@ -127,6 +144,8 @@ import {
   type ChatSource,
 } from "~/composables/useChatTool";
 import { participantMessages } from "~/utils/utils";
+import { cleanPath } from "~/utils/cleanPath";
+import { useLibrary, type OpenedChat } from "~/composables/useLibrary";
 import { analyzeInactivity } from "~/utils/inactivity";
 import { analyzeMessages } from "~/utils/messageCounter";
 import { analyzeWords } from "~/utils/wordCounter";
@@ -166,8 +185,28 @@ const loadedFileName = ref("");
 const parsedMessageCount = ref(0);
 const parseDurationMs = ref(0);
 const errorMessage = ref<string | null>(null);
+/** A line about something other than a chat: a restored backup. */
+const notice = ref<string | null>(null);
+/** The chat on screen, for the saved-chat line under the box. */
+const shownChat = shallowRef<{
+  messages: ChatMessage[];
+  source?: ChatSource;
+  sourceName: string;
+  sample: boolean;
+} | null>(null);
 
 const sharedChat = useSharedChat();
+const library = useLibrary();
+// This tool, as a saved chat remembers it ("/tools/inactivity/").
+const toolPath = cleanPath(useRoute().path);
+const surface = `tool_${props.toolType}`;
+
+/** A saved chat on screen here: remember this tool as the last one used. */
+function noteShown(messages: ChatMessage[]) {
+  void library.adopt(messages).then((id) => {
+    if (id) void library.setLastTool(id, toolPath);
+  });
+}
 
 function triggerFileDialog() {
   errorMessage.value = null;
@@ -187,17 +226,36 @@ async function processInput(
   fileName = "WhatsApp Chat",
   // false when re-reading the export kept for this tab, which is no new upload
   track = true,
+  sample = false,
 ) {
   loading.value = true;
   errorMessage.value = null;
+  notice.value = null;
 
   try {
     const parsed = await parseChatFile(fileOrText);
-    showChat(parsed, fileName);
+    showChat(parsed, fileName, {
+      sample,
+      // Saved on this device by default, the sample never. Started before
+      // the page is handed the chat, so a page asking whether it's saved
+      // (the AI page, for its readings) waits for the answer.
+      beforeShow: () => {
+        if (sample) {
+          // It replaces whatever this tab had open.
+          library.clearActive();
+          return;
+        }
+        void library
+          .keep({ ...parsed, sourceName: fileName }, { source: surface })
+          .then((id) => {
+            if (id) void library.setLastTool(id, toolPath);
+          });
+      },
+    });
     // Kept for the tab, like the home page does: a full page load (the
     // round trip through Stripe Checkout, a reload) used to lose the chat on
     // every /tools page while the analyzer still had it.
-    saveChatSession(parsed);
+    saveChatSession(sample ? { ...parsed, sample } : parsed);
     // The court PDF hashes every attachment, so its pages keep the export
     // itself too; the sample chat replaces whatever was kept.
     if (props.toolType === "court") {
@@ -228,6 +286,10 @@ async function processInput(
 function showChat(
   { messages, attachments, durationMs, source }: ParsedChat,
   fileName: string,
+  {
+    sample = false,
+    beforeShow,
+  }: { sample?: boolean; beforeShow?: () => void } = {},
 ) {
   if (!messages || messages.length === 0) {
     throw new Error(
@@ -255,12 +317,14 @@ function showChat(
       "Could not compute metrics: Chat contains no participant messages.",
     );
   }
+  beforeShow?.();
   hasLoadedFile.value = true;
   loadedFileName.value = fileName;
   // What the report below counts, not the raw line count: WhatsApp's own
   // notices are in `messages` but are nobody's message.
   parsedMessageCount.value = participantMessages(messages).length;
   parseDurationMs.value = durationMs;
+  shownChat.value = { messages, source, sourceName: fileName, sample };
 
   // Cache in shared state for seamless transition to full analysis
   sharedChat.value = {
@@ -268,6 +332,7 @@ function showChat(
     attachments,
     sourceName: fileName,
     source,
+    ...(sample ? { sample } : {}),
   };
 
   emit("analyzed", {
@@ -286,22 +351,34 @@ onMounted(async () => {
     void handleFile(fileInput.value.files[0]);
     return;
   }
-  // The chat this visitor already uploaded — on another tool page in this
-  // visit, or before a full page load in this tab — so they don't have to
-  // upload it again.
-  const restored = sharedChat.value?.messages?.length
+  // The chat this visitor already has open, so they don't have to upload it
+  // again: handed over in memory by another page in this visit, then the
+  // tab's saved chat, then the copy kept for the tab (a chat that isn't
+  // saved, or one from before a full page load where storage is refused).
+  const restored: {
+    messages: ChatMessage[];
+    attachments?: unknown[];
+    source?: ChatSource | null;
+    sourceName?: string | null;
+    sample?: boolean;
+    chat?: OpenedChat["chat"];
+  } | null = sharedChat.value?.messages?.length
     ? sharedChat.value
-    : loadChatSession();
+    : ((await library.restoreActive()) ?? loadChatSession());
 
-  // After a full page load the session has the messages but not the media.
-  // The export kept for this tab has both, if it is the chat the session
-  // remembers (not one since uploaded somewhere else).
+  // After a full page load the restored chat has the messages but not the
+  // media. The export kept for this tab has both, if it is that chat's
+  // export (not one since uploaded somewhere else).
   if (props.toolType === "court" && restored !== sharedChat.value) {
     const kept = await loadUpload();
-    const source = restored?.source;
+    const sources = restored?.chat?.sources ?? [restored?.source];
     if (
       kept &&
-      (!source || (source.name === kept.name && source.size === kept.size))
+      (!restored ||
+        sources.some(
+          (source) =>
+            !source || (source.name === kept.name && source.size === kept.size),
+        ))
     ) {
       await processInput(kept, kept.name, false);
       return;
@@ -317,15 +394,50 @@ onMounted(async () => {
         durationMs: 0,
         source: restored.source ?? undefined,
       },
-      (restored as { sourceName?: string }).sourceName ??
-        restored.source?.name ??
-        "WhatsApp Chat",
+      restored.sourceName ?? restored.source?.name ?? "WhatsApp Chat",
+      { sample: !!restored.sample },
     );
+    if (!restored.sample) noteShown(restored.messages);
   } catch (err) {
     console.warn("Could not restore the previous chat:", err);
     clearChatSession();
   }
 });
+
+/** A saved chat picked in "Use a saved chat". */
+async function openSaved(id: string) {
+  errorMessage.value = null;
+  notice.value = null;
+  const opened = await library.open(id, { source: "picker" });
+  if (!opened) return;
+  try {
+    showChat(
+      {
+        messages: opened.messages,
+        attachments: opened.attachments,
+        durationMs: 0,
+        source: opened.source ?? undefined,
+      },
+      opened.sourceName ?? opened.chat.title ?? "WhatsApp Chat",
+    );
+    saveChatSession(opened);
+    void library.setLastTool(id, toolPath);
+  } catch (err) {
+    errorMessage.value = err instanceof Error ? err.message : String(err);
+  }
+}
+
+/** A backup of the saved chats, dropped on the box. */
+async function restoreBackup(file: File) {
+  errorMessage.value = null;
+  try {
+    const { added, merged } = await library.restoreBackup(file);
+    notice.value = t("library.backupRestored", { count: added + merged });
+  } catch (err) {
+    console.warn("Could not restore the backup:", err);
+    notice.value = t("library.backupInvalid");
+  }
+}
 
 async function onFileSelected(event: Event) {
   const target = event.target as HTMLInputElement;
@@ -344,6 +456,7 @@ async function onDrop(event: DragEvent) {
   if (!event.dataTransfer?.files || event.dataTransfer.files.length === 0)
     return;
   const file = event.dataTransfer.files[0];
+  if (library.isBackupFile(file)) return restoreBackup(file);
   const fileType = file.name.endsWith(".zip") ? "zip" : "txt";
   analyticsTools.fileUploaded(props.toolType, fileType, "drop");
   await processInput(file, file.name);
@@ -358,7 +471,7 @@ async function loadSampleChat() {
       throw new Error("Failed to load sample chat file.");
     }
     const text = await response.text();
-    await processInput(text, "Sample WhatsApp Chat (Jane & John)");
+    await processInput(text, "Sample WhatsApp Chat (Jane & John)", true, true);
   } catch (err) {
     const msg =
       err instanceof Error ? err.message : "Failed to load sample chat.";
@@ -621,6 +734,13 @@ async function loadSampleChat() {
     background: #f5f5f7;
     color: #1d1d1f;
   }
+}
+
+.dropzone-notice {
+  margin-top: 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #0f766e;
 }
 
 .dropzone-error {

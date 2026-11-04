@@ -71,6 +71,9 @@
         class="file-handler__error"
         v-html="$t('fileWrong')"
       ></p>
+      <p v-if="notice" class="file-handler__notice" role="status">
+        {{ notice }}
+      </p>
     </label>
   </div>
 </template>
@@ -82,15 +85,26 @@ import {
   parseChatFile,
   parseSharedFiles,
 } from "~/composables/useChatTool";
+import { useLibrary } from "~/composables/useLibrary";
 
 export default {
   name: "FileHandler",
+  props: {
+    // Where the upload happened, for analytics: "home", "pwa".
+    source: { type: String, default: "home" },
+  },
+  emits: ["new_messages", "hide_explanation"],
+  setup() {
+    return { library: useLibrary() };
+  },
   data() {
     return {
       isDragging: false,
       wrongFile: false,
       processing: false,
       isSuccess: false,
+      // A line about something other than a chat: a restored backup.
+      notice: "",
     };
   },
   mounted() {
@@ -121,8 +135,14 @@ export default {
       this.processing = true;
       this.isSuccess = false;
       this.wrongFile = false;
+      this.notice = "";
 
       if (!files.length) return this.showErrorMessage("_undefined_shared_file");
+
+      // A backup of the saved chats is restored by dropping it here too.
+      if (files.length === 1 && this.library.isBackupFile(files[0])) {
+        return this.restoreBackup(files[0]);
+      }
 
       const multiple = shared || files.length > 1;
       if (!multiple) {
@@ -136,6 +156,12 @@ export default {
         const chatObject = multiple
           ? await parseSharedFiles(files)
           : await parseChatFile(files[0]);
+        // Saved on this device by default. Started before the page is handed
+        // the chat, so anything there that asks whether it is saved waits for
+        // the answer instead of seeing an unsaved chat.
+        void this.library.keep(chatObject, {
+          source: shared ? "share_target" : this.source,
+        });
         this.updateMessages(chatObject);
       } catch (error) {
         console.error("Chat parsing failed", error);
@@ -155,6 +181,20 @@ export default {
         new Set(chatObject.messages?.map((message) => message.author)).size,
         chatObject.durationMs,
       );
+    },
+
+    async restoreBackup(file) {
+      try {
+        const { added, merged } = await this.library.restoreBackup(file);
+        this.notice = this.$t("library.backupRestored", {
+          count: added + merged,
+        });
+      } catch (error) {
+        console.warn("Could not restore the backup:", error);
+        this.notice = this.$t("library.backupInvalid");
+      } finally {
+        this.processing = false;
+      }
     },
 
     showErrorMessage(text = undefined) {
@@ -325,6 +365,13 @@ input[type="file"] {
   to {
     transform: rotate(360deg);
   }
+}
+
+.file-handler__notice {
+  margin: 1rem 0 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: $wa-accent-dark;
 }
 
 .file-handler__error {

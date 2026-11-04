@@ -39,6 +39,11 @@
     </label>
   </div>
 
+  <!-- A chat saved on this device: its Wrapped without a new upload -->
+  <ClientOnly>
+    <LibraryPicker :busy="isLoading" @open="openSaved" />
+  </ClientOnly>
+
   <div v-if="isLoading" class="bg-blue-500">
     <pre>{{ $t("upload.loading") }}</pre>
   </div>
@@ -52,12 +57,16 @@
 <script lang="ts" setup>
 import { ref, watch } from "vue";
 import { storeToRefs } from "pinia";
-import { sendFile } from "~/assets/workers";
+import { sendFile, sendMessages } from "~/assets/workers";
 import { useStatsStore } from "~/stores/wrapped/stats";
 import { useSubscriptionStore } from "~/stores/subscription";
 import { useUploadAccessStore } from "~/stores/wrapped/uploadAccessStore";
 import { analyticsChat, analyticsWrapped } from "~/composables/useAnalytics";
+import { parseChatFile } from "~/composables/useChatTool";
+import { useLibrary, type SavedChat } from "~/composables/useLibrary";
+import { getTargetYear } from "~/utils/wrapped/dateUtils";
 const localePath = useLocalePath();
+const library = useLibrary();
 
 const statsStore = useStatsStore();
 const subscriptionStore = useSubscriptionStore();
@@ -107,6 +116,7 @@ const handleFile = async (e: Event): Promise<void> => {
     navigateTo({
       path: localePath("/wrapped/results"),
     });
+    if (result.value) void keepUpload(file);
   } catch (err) {
     console.error("Failed to process chat upload:", err);
   } finally {
@@ -114,4 +124,54 @@ const handleFile = async (e: Event): Promise<void> => {
     input.value = "";
   }
 };
+
+/**
+ * Saved on this device by default, like every upload. The story above came
+ * from Wrapped's own parser; what is saved is the chat as every other page
+ * reads it, so it opens in all of them.
+ */
+async function keepUpload(file: File) {
+  try {
+    const parsed = await parseChatFile(file);
+    const id = await library.keep(parsed, { source: "wrapped" });
+    // Unwrapped for this year: opening it again is no new free analysis.
+    if (id) await library.markWrapped(id, getTargetYear());
+    if (id) await library.setLastTool(id, "/wrapped/");
+  } catch (err) {
+    console.warn("Could not keep the Wrapped upload:", err);
+  }
+}
+
+/**
+ * A saved chat's Wrapped. One that was unwrapped for this year already
+ * opens without spending the day's free analysis, which counts new chats.
+ */
+async function openSaved(id: string) {
+  const chat: SavedChat | null = library.chatById(id);
+  const year = getTargetYear();
+  const unwrapped = !!chat?.wrappedYears?.includes(year);
+  const isFreeUpload = !isSubscriptionValid.value && !unwrapped;
+  if (isFreeUpload && !uploadAccessStore.hasFreeUploadToday()) {
+    showPaywall.value = true;
+    analyticsWrapped.paywallViewed("upload_gate");
+    return;
+  }
+
+  statsStore.$reset();
+  isLoading.value = true;
+  try {
+    const opened = await library.open(id, { source: "wrapped" });
+    if (!opened) return;
+    result.value = (await sendMessages(opened.messages)) ?? undefined;
+    if (!result.value) return;
+    if (isFreeUpload) uploadAccessStore.markFreeUploadUsed();
+    await library.markWrapped(id, year);
+    void library.setLastTool(id, "/wrapped/");
+    navigateTo({ path: localePath("/wrapped/results") });
+  } catch (err) {
+    console.error("Failed to open the saved chat:", err);
+  } finally {
+    isLoading.value = false;
+  }
+}
 </script>

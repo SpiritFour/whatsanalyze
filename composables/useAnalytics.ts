@@ -490,6 +490,58 @@ export const analyticsWrapped = {
   },
 };
 
+/** Why a chat was not saved on the device. */
+export type LibraryNotKeptReason =
+  "opt_out" | "unavailable" | "quota" | "error";
+
+/**
+ * Saved chats (docs/saved-chats.md). Kinds and counts only: never a chat's
+ * name, its people or a word of what it says. `source` is where it happened:
+ * an upload surface ("home", "tool_ai", "wrapped", …) or where a saved chat
+ * was opened from ("home_list", "picker", a landing page's name).
+ */
+export const analyticsLibrary = {
+  /** A chat was saved on this device, as every upload is by default. */
+  saved(
+    source: string,
+    chat: { isGroup: boolean; isNew: boolean; savedChats: number },
+  ) {
+    trackEvent("library_saved", {
+      source,
+      chat_type: chat.isGroup ? "group" : "pair",
+      // false when the upload was a chat already saved
+      is_new: chat.isNew,
+      saved_chats: chat.savedChats,
+    });
+  },
+
+  /**
+   * Not saved: "Don't keep" (opt_out), or the browser refused (a private
+   * window or blocked storage: unavailable; a full disk: quota).
+   */
+  notKept(reason: LibraryNotKeptReason, source: string) {
+    trackEvent("library_not_kept", { reason, source });
+  },
+
+  /** A saved chat was opened, and how many days since it last was. */
+  opened(source: string, daysSinceOpened: number) {
+    trackEvent("library_opened", {
+      source,
+      days_since_opened: daysSinceOpened,
+    });
+  },
+
+  /** One chat or everything forgotten by hand, or old chats after 90 days. */
+  forgotten(scope: "chat" | "all" | "expired", count: number) {
+    trackEvent("library_forgotten", { scope, chat_count: count });
+  },
+
+  /** A backup file was downloaded, or one was restored. */
+  backup(action: "download" | "restore", count: number) {
+    trackEvent("library_backup", { action, chat_count: count });
+  },
+};
+
 /**
  * Site-wide interactions that belong to no single product.
  */
@@ -571,6 +623,7 @@ export function useAnalytics() {
     tools: analyticsTools,
     chat: analyticsChat,
     wrapped: analyticsWrapped,
+    library: analyticsLibrary,
     site: analyticsSite,
   };
 }

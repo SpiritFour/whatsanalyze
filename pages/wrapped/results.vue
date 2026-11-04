@@ -12,6 +12,15 @@
     {{ t("results.status.loadingSharedStory") }}
   </div>
 
+  <!-- The visitor's own chat, saved on this device: say so, with the way
+       out (a shared story is someone else's, and isn't saved here). -->
+  <LibraryStatus
+    v-if="result && !shareLoading && !isSharedStory"
+    :chat-id="activeId"
+    surface="wrapped"
+    class="mb-4"
+  />
+
   <WrappedStoryCarousel v-if="result" :duration="6000">
     <WrappedStoriesIntro1 />
     <WrappedStoriesIntro2 />
@@ -59,6 +68,7 @@ import { useUserDataStore } from "~/stores/wrapped/userDataStore";
 import { parseShareInfo } from "~/utils/wrapped/sharing/param";
 import { useI18n } from "vue-i18n";
 import { analyticsWrapped } from "~/composables/useAnalytics";
+import { useLibrary } from "~/composables/useLibrary";
 
 definePageMeta({
   layout: "wrapped",
@@ -70,6 +80,7 @@ const router = useRouter();
 const statsStore = useStatsStore();
 const { result } = storeToRefs(statsStore);
 const userDataStore = useUserDataStore();
+const { activeId } = useLibrary();
 
 const { t } = useI18n();
 const localePath = useLocalePath();
@@ -89,6 +100,10 @@ const shareErrorMessage = computed(() =>
 // still on its way in.
 const isEmpty = computed(
   () => !result.value && !shareLoading.value && !shareErrorKey.value,
+);
+
+const isSharedStory = computed(
+  () => !!buildSearchFromHash() || !!route.query.key,
 );
 
 /** The share link's uuid/iv/key, which live in the URL fragment. */
