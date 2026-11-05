@@ -83,6 +83,7 @@ import {
   type LocalModel,
 } from "~/utils/ai/localModel";
 import { coachInCloud, type CloudAllowance } from "~/utils/ai/cloudModel";
+import { callableErrorCode } from "~/utils/ai/cloudErrors";
 import {
   CLOUD_TRANSCRIPT_CHARS,
   MAX_COACH_CHARS,
@@ -217,7 +218,8 @@ async function send() {
     draft.value = "";
   } catch (err: any) {
     const known = ["not_subscribed", "daily_limit"];
-    errorKey.value = known.includes(err?.message) ? err.message : props.mode;
+    const code = callableErrorCode(err?.message);
+    errorKey.value = known.includes(code) ? code : props.mode;
     analyticsTools.error(
       "ai",
       `coach_${props.mode}:${err?.message ?? "unknown"}`,

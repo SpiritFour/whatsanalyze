@@ -91,9 +91,15 @@ const stubCallable = async (page, name, body) => {
 
 /**
  * Answer a Firebase callable the way a failing backend does, so a test can
- * check what the customer is shown when it does.
+ * check what the customer is shown when it does. `status` and `code` are the
+ * HTTP status and the HttpsError code, e.g. 429 and "RESOURCE_EXHAUSTED".
  */
-const stubCallableFailure = async (page, name, message) => {
+const stubCallableFailure = async (
+  page,
+  name,
+  message,
+  { status = 500, code = "INTERNAL" } = {},
+) => {
   await page.route(`**/${name}`, async (route) => {
     if (route.request().method() === "OPTIONS") {
       await route.fulfill(CORS_PREFLIGHT);
@@ -101,10 +107,10 @@ const stubCallableFailure = async (page, name, message) => {
     }
 
     await route.fulfill({
-      status: 500,
+      status,
       contentType: "application/json",
       headers: { "access-control-allow-origin": "*" },
-      body: JSON.stringify({ error: { status: "INTERNAL", message } }),
+      body: JSON.stringify({ error: { status: code, message } }),
     });
   });
 };

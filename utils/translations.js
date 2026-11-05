@@ -903,6 +903,23 @@ export const messages = {
         "The on-device AI got confused by this chat. Try again, or use the cloud AI for better results.",
       error_no_messages:
         "We couldn't find any text messages to analyze in this chat.",
+      error_local_gpu:
+        "Your graphics driver wouldn't start the on-device AI. Restarting the browser often helps, or use the cloud AI.",
+      error_local_network:
+        "The connection dropped while downloading the AI model. Check your connection and try again: the download continues where it stopped. Or use the cloud AI.",
+      error_local_storage:
+        "There isn't enough free storage on this device for the AI model. Free up some space and try again, or use the cloud AI.",
+      error_preview_cap:
+        "All of today's free cloud previews have been used. Subscribe for the full report, or try again tomorrow.",
+      localUnsupportedGpu:
+        "Your graphics driver wouldn't start the on-device AI. Restarting the browser can help; the cloud AI works right away.",
+      localUnsupportedStorage:
+        "The on-device AI needs about {gb} GB of free storage, and this device doesn't have that right now. Free up space, or use the cloud AI.",
+      fallbackPreview: "Try the free cloud preview instead",
+      fallbackCloud: "Analyze in the cloud instead",
+      dataUseCloud: "Use the cloud AI instead",
+      progressRetry:
+        "The connection dropped. Picking up the download where it stopped…",
       reportCloud: "ANALYZED BY CLOUD AI",
       reportLocal: "ANALYZED ON YOUR DEVICE",
       reportTitle: "What the AI sees in your chat",
@@ -2185,6 +2202,23 @@ export const messages = {
         "Die KI auf dem Gerät ist bei diesem Chat durcheinandergekommen. Versuch es noch einmal oder nutze die Cloud-KI für bessere Ergebnisse.",
       error_no_messages:
         "In diesem Chat haben wir keine Textnachrichten zum Analysieren gefunden.",
+      error_local_gpu:
+        "Dein Grafiktreiber konnte die KI auf dem Gerät nicht starten. Ein Neustart des Browsers hilft oft – oder nutz die Cloud-KI.",
+      error_local_network:
+        "Beim Herunterladen des KI-Modells ist die Verbindung abgebrochen. Prüf deine Verbindung und versuch es noch einmal: Der Download macht da weiter, wo er aufgehört hat. Oder nutz die Cloud-KI.",
+      error_local_storage:
+        "Auf diesem Gerät ist nicht genug Speicherplatz für das KI-Modell frei. Schaff etwas Platz und versuch es noch einmal oder nutz die Cloud-KI.",
+      error_preview_cap:
+        "Die kostenlosen Cloud-Vorschauen für heute sind alle vergeben. Abonniere für den vollständigen Bericht oder versuch es morgen wieder.",
+      localUnsupportedGpu:
+        "Dein Grafiktreiber konnte die KI auf dem Gerät nicht starten. Ein Neustart des Browsers kann helfen – die Cloud-KI funktioniert sofort.",
+      localUnsupportedStorage:
+        "Die KI auf dem Gerät braucht etwa {gb} GB freien Speicherplatz, und so viel ist auf diesem Gerät gerade nicht frei. Schaff Platz oder nutz die Cloud-KI.",
+      fallbackPreview: "Stattdessen die kostenlose Cloud-Vorschau testen",
+      fallbackCloud: "Stattdessen in der Cloud analysieren",
+      dataUseCloud: "Stattdessen die Cloud-KI nutzen",
+      progressRetry:
+        "Die Verbindung ist abgebrochen. Der Download macht gleich da weiter, wo er aufgehört hat …",
       reportCloud: "VON DER CLOUD-KI ANALYSIERT",
       reportLocal: "AUF DEINEM GERÄT ANALYSIERT",
       reportTitle: "Was die KI in deinem Chat sieht",
@@ -3465,6 +3499,23 @@ export const messages = {
         "La IA local se ha confundido con este chat. Inténtalo de nuevo o usa la IA en la nube para mejores resultados.",
       error_no_messages:
         "No hemos encontrado mensajes de texto que analizar en este chat.",
+      error_local_gpu:
+        "El controlador gráfico no pudo iniciar la IA local. Reiniciar el navegador suele ayudar; si no, usa la IA en la nube.",
+      error_local_network:
+        "La conexión se cortó durante la descarga del modelo de IA. Comprueba tu conexión y vuelve a intentarlo: la descarga sigue donde se quedó. O usa la IA en la nube.",
+      error_local_storage:
+        "No hay suficiente espacio libre en este dispositivo para el modelo de IA. Libera espacio y vuelve a intentarlo, o usa la IA en la nube.",
+      error_preview_cap:
+        "Ya se han agotado las vistas previas gratuitas en la nube de hoy. Suscríbete para ver el informe completo o vuelve a intentarlo mañana.",
+      localUnsupportedGpu:
+        "El controlador gráfico no pudo iniciar la IA local. Reiniciar el navegador puede ayudar; la IA en la nube funciona al momento.",
+      localUnsupportedStorage:
+        "La IA local necesita unos {gb} GB de espacio libre y ahora mismo este dispositivo no los tiene. Libera espacio o usa la IA en la nube.",
+      fallbackPreview: "Probar la vista previa gratis en la nube",
+      fallbackCloud: "Analizar en la nube en su lugar",
+      dataUseCloud: "Usar la IA en la nube en su lugar",
+      progressRetry:
+        "Se cortó la conexión. Retomando la descarga donde se quedó…",
       reportCloud: "ANALIZADO CON IA EN LA NUBE",
       reportLocal: "ANALIZADO EN TU DISPOSITIVO",
       reportTitle: "Lo que la IA ve en tu chat",
@@ -4488,6 +4539,22 @@ export const messages = {
         "A IA local baralhou-se com esta conversa. Tente novamente ou use a IA na nuvem para melhores resultados.",
       error_no_messages:
         "Não encontrámos mensagens de texto para analisar nesta conversa.",
+      error_local_gpu:
+        "O controlador gráfico não conseguiu arrancar a IA local. Reiniciar o navegador costuma ajudar; caso contrário, use a IA na nuvem.",
+      error_local_network:
+        "A ligação caiu durante a transferência do modelo de IA. Verifique a ligação e tente novamente: a transferência continua onde parou. Ou use a IA na nuvem.",
+      error_local_storage:
+        "Não há espaço livre suficiente neste dispositivo para o modelo de IA. Liberte espaço e tente novamente, ou use a IA na nuvem.",
+      error_preview_cap:
+        "As pré-visualizações grátis na nuvem de hoje já se esgotaram. Subscreva para ver o relatório completo ou tente novamente amanhã.",
+      localUnsupportedGpu:
+        "O controlador gráfico não conseguiu arrancar a IA local. Reiniciar o navegador pode ajudar; a IA na nuvem funciona de imediato.",
+      localUnsupportedStorage:
+        "A IA local precisa de cerca de {gb} GB de espaço livre, que este dispositivo não tem neste momento. Liberte espaço ou use a IA na nuvem.",
+      fallbackPreview: "Experimentar a pré-visualização grátis na nuvem",
+      fallbackCloud: "Analisar na nuvem em alternativa",
+      dataUseCloud: "Usar a IA na nuvem em alternativa",
+      progressRetry: "A ligação caiu. A retomar a transferência onde parou…",
       reportCloud: "ANALISADO PELA IA NA NUVEM",
       reportLocal: "ANALISADO NO SEU DISPOSITIVO",
       reportTitle: "O que a IA vê na sua conversa",
@@ -5776,6 +5843,23 @@ export const messages = {
         "L'IA locale s'est embrouillée avec cette conversation. Réessayez, ou utilisez l'IA dans le cloud pour de meilleurs résultats.",
       error_no_messages:
         "Nous n'avons trouvé aucun message texte à analyser dans cette conversation.",
+      error_local_gpu:
+        "Le pilote graphique n'a pas pu démarrer l'IA locale. Redémarrer le navigateur aide souvent ; sinon, utilisez l'IA dans le cloud.",
+      error_local_network:
+        "La connexion a été coupée pendant le téléchargement du modèle d'IA. Vérifiez votre connexion et réessayez : le téléchargement reprend là où il s'est arrêté. Ou utilisez l'IA dans le cloud.",
+      error_local_storage:
+        "Il n'y a pas assez d'espace libre sur cet appareil pour le modèle d'IA. Libérez de l'espace et réessayez, ou utilisez l'IA dans le cloud.",
+      error_preview_cap:
+        "Tous les aperçus gratuits dans le cloud du jour ont été utilisés. Abonnez-vous pour le rapport complet, ou réessayez demain.",
+      localUnsupportedGpu:
+        "Le pilote graphique n'a pas pu démarrer l'IA locale. Redémarrer le navigateur peut aider ; l'IA dans le cloud fonctionne tout de suite.",
+      localUnsupportedStorage:
+        "L'IA locale a besoin d'environ {gb} Go d'espace libre, et cet appareil ne les a pas pour le moment. Libérez de l'espace, ou utilisez l'IA dans le cloud.",
+      fallbackPreview: "Essayer plutôt l'aperçu gratuit dans le cloud",
+      fallbackCloud: "Analyser plutôt dans le cloud",
+      dataUseCloud: "Utiliser plutôt l'IA dans le cloud",
+      progressRetry:
+        "La connexion a été coupée. Reprise du téléchargement là où il s'est arrêté…",
       reportCloud: "ANALYSÉ PAR L'IA DANS LE CLOUD",
       reportLocal: "ANALYSÉ SUR VOTRE APPAREIL",
       reportTitle: "Ce que l'IA voit dans votre conversation",
@@ -7057,6 +7141,23 @@ export const messages = {
         "L'IA locale si è confusa con questa chat. Riprova, oppure usa l'IA nel cloud per risultati migliori.",
       error_no_messages:
         "Non abbiamo trovato messaggi di testo da analizzare in questa chat.",
+      error_local_gpu:
+        "Il driver grafico non è riuscito ad avviare l'IA locale. Riavviare il browser spesso aiuta, oppure usa l'IA nel cloud.",
+      error_local_network:
+        "La connessione si è interrotta durante il download del modello di IA. Controlla la connessione e riprova: il download riprende da dove si era fermato. Oppure usa l'IA nel cloud.",
+      error_local_storage:
+        "Su questo dispositivo non c'è abbastanza spazio libero per il modello di IA. Libera spazio e riprova, oppure usa l'IA nel cloud.",
+      error_preview_cap:
+        "Le anteprime gratuite nel cloud di oggi sono esaurite. Abbonati per il report completo o riprova domani.",
+      localUnsupportedGpu:
+        "Il driver grafico non è riuscito ad avviare l'IA locale. Riavviare il browser può aiutare; l'IA nel cloud funziona subito.",
+      localUnsupportedStorage:
+        "L'IA locale richiede circa {gb} GB di spazio libero, che al momento questo dispositivo non ha. Libera spazio oppure usa l'IA nel cloud.",
+      fallbackPreview: "Prova invece l'anteprima gratuita nel cloud",
+      fallbackCloud: "Analizza invece nel cloud",
+      dataUseCloud: "Usa invece l'IA nel cloud",
+      progressRetry:
+        "La connessione si è interrotta. Il download riprende da dove si era fermato…",
       reportCloud: "ANALIZZATO DALL'IA NEL CLOUD",
       reportLocal: "ANALIZZATO SUL TUO DISPOSITIVO",
       reportTitle: "Cosa vede l'IA nella tua chat",
