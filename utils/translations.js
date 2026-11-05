@@ -1724,6 +1724,136 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze is an independent open-source project and is not affiliated with, endorsed by, or sponsored by WhatsApp or Meta.",
     },
+    situationWhatToReply: {
+      navLabel: "What should I reply?",
+      seoTitle:
+        "What Should I Reply? AI Reply Help for WhatsApp | WhatsAnalyze",
+      seoDescription:
+        "Not sure how to respond to this text, or what to text back? An AI that has read your WhatsApp chat turns your rough draft into a calmer, clearer reply in your own voice. Free on supported devices.",
+      ogTitle: "What should I reply? Help with your WhatsApp reply",
+      ogDescription:
+        "Drop your WhatsApp chat and get help with the reply: a calmer, clearer version of what you want to say, from an AI that has read your chat.",
+      heroEyebrow: "Help with a reply",
+      heroTitle: "What should I reply?",
+      heroSubtitle:
+        "The message is open and you don't know how to answer. Drop your chat, and an AI that has read it helps you find the words: write what you want to say and get a calmer, clearer version in your voice, with a note on why.",
+      heroNote:
+        "Free on your device, where your browser can run it · The cloud coach comes with Pro",
+      continueButton: "Get help replying with this chat",
+      offerChat: "Get help replying to {name}",
+      offerGroup: "Get help replying in {name}",
+      exampleEyebrow: "An example",
+      exampleTitle: "What the help looks like",
+      exampleText:
+        "Tom finally writes back after a quiet week. Mia's first draft says how she feels, with a jab. The coach keeps the feeling and drops the jab.",
+      exampleBadge: "Example · Mia and Tom are fictional",
+      exampleIncoming:
+        "Sorry I went quiet this week, work was a lot. Still on for Saturday?",
+      exampleDraft: "Oh, so you're alive. Sure, whatever.",
+      exampleReply:
+        "Good to hear from you! Honestly, I missed you this week. Saturday works, same place as always?",
+      exampleWhy:
+        "Why: your draft says you felt left out, and that's worth saying. In your chat, Tom opens up when you say how you feel, while sarcasm has usually been followed by a quiet day. This keeps your point and gives him something to answer.",
+      showEyebrow: "What your chat can show",
+      showTitle: "Help that knows how you two talk",
+      showText:
+        "The AI coach works from your chat, not from a template: anonymized excerpts, and the AI reading it opens under.",
+      show1Title: "The way you write",
+      show1Text:
+        "The reading describes your chat's tone and how each of you writes, so a suggestion can sound like your chat.",
+      show2Title: "Your draft, calmer and clearer",
+      show2Text:
+        "Write what you want to say. The coach keeps what you mean and gives it back calmer and clearer, in your voice.",
+      show3Title: "A note on why",
+      show3Text:
+        "Every suggestion comes with a short note on what changed and why, pointing at how your chat usually goes.",
+      show4Title: "Questions about the message",
+      show4Text:
+        "Not sure what a message means? Ask. The coach points at moments in your chat, and it's built to say so when the chat doesn't tell.",
+      stepsEyebrow: "How to get there",
+      stepsTitle: "From your chat to a reply",
+      step1Title: "Drop your chat",
+      step1Text:
+        "Export the chat from WhatsApp without media, after the message you want to answer has arrived, and drop it above. It's read in your browser.",
+      step2Title: "Get a reading",
+      step2Text:
+        "The coach opens under an AI reading of your chat. Run it free on your device, if your browser can, or in the cloud with Pro.",
+      step3Title: "Ask, or draft your reply",
+      step3Text:
+        "Under the reading, pick “{reply}”, write what you'd like to say and get a calmer, clearer version. Or pick “{ask}” to talk the message through first.",
+      plansTitle: "What's free, and what needs Pro",
+      plan1Title: "On your device: free",
+      plan1Text:
+        "The reading and the coach run in your browser after a one-time model download, and nothing leaves your device. It needs WebGPU: a recent computer, most recent Android phones with Chrome, or an iPhone on iOS 26 or later. The model is small, so its answers are simpler.",
+      plan2Title: "Free cloud preview",
+      plan2Text:
+        "A taste of the reading from a stronger AI, made from anonymized excerpts. The coach isn't part of the preview.",
+      plan3Title: "Pro: {price} a month",
+      plan3Text:
+        "The full cloud reading and the coach in the cloud, on any phone. Each message to the coach uses one of the day's cloud analyses.",
+      ownWordsEyebrow: "Your words",
+      ownWordsTitle: "Send it in your own words",
+      ownWordsText:
+        "A suggestion is a starting point, not a script. People notice when a message doesn't sound like the person who sent it, and a reply that reads as machine-written can land differently. Keep what helps, change what doesn't, and send it the way you'd say it.",
+      limitsEyebrow: "Honest limits",
+      limitsTitle: "What it can't do",
+      limit1Title: "Patterns, not verdicts",
+      limit1Text:
+        "The coach can say how your chat usually goes. It can't know what the other person feels, or what they'll do next.",
+      limit2Title: "Only what was written",
+      limit2Text:
+        "The AI reads excerpts from across your chat, always including the latest messages. Voice notes, photos and stickers aren't read, and the on-device model reads less than the cloud one.",
+      limit3Title: "A short chat says little",
+      limit3Text:
+        "With only a few messages there isn't much to go on, and suggestions come closer to general advice.",
+      limit4Title: "AI gets things wrong",
+      limit4Text:
+        "It can miss irony, inside jokes or anything that happened outside the chat. You know your situation best.",
+      privacyEyebrow: "Private by default",
+      privacyTitle: "Your chat stays yours",
+      privacyText:
+        "An exported chat holds the other person's messages too, so it's handled with care.",
+      privacy1Title: "Saved only on this device",
+      privacy1Text:
+        "Your chat is saved in this browser so you can come back to it, never on our servers. Don't want that? Choose “{dontKeep}” under the upload box.",
+      privacy2Title: "On-device AI stays on the device",
+      privacy2Text:
+        "With the free on-device AI, your chat, its reading and what you write to the coach never leave your device.",
+      privacy3Title: "Anonymized for the cloud",
+      privacy3Text:
+        "The cloud AI gets only anonymized excerpts and what you write to the coach: the chat's names are replaced, and phone numbers, emails, links and IBANs removed. The AI provider doesn't train on them.",
+      supportEyebrow: "When it's serious",
+      supportTitle: "Some messages need more than a good reply",
+      supportText:
+        "If your chat or your question points to abuse, threats or self-harm, the coach doesn't write a reply. It shows support resources instead. It can't catch everything, so if you feel unsafe, reach out now.",
+      supportDevice:
+        "On a shared device, choose “{dontKeep}” under the upload box so the chat isn't kept in this browser. A saved chat can be forgotten at any time from “{saved}”.",
+      faqTitle: "Questions about getting help with a reply",
+      faq1Q: "Can AI tell me what to reply?",
+      faq1A:
+        "It can help you get there. Write a rough version of what you want to say, and the coach gives it back calmer and clearer, in your voice and your chat's usual tone, with a short note on what changed. Or ask it about the message first. The reply is still yours: change anything that doesn't sound like you before you send it.",
+      faq2Q: "Is it free?",
+      faq2A:
+        "On your device, yes: the reading and the coach run free in your browser, if it supports WebGPU. The free cloud preview shows part of a reading but doesn't include the coach. With Pro ({price} a month), the full reading and the coach run in the cloud, on any phone.",
+      faq3Q: "Does the AI see the message I just got?",
+      faq3A:
+        "Only if it's in your export, so export the chat after the message arrived. The AI reads excerpts from across the chat and always includes the most recent messages. If you saved the chat before the message came in, export it again. You can also paste the message into your question.",
+      faq4Q: "Is my chat uploaded?",
+      faq4A:
+        "Your chat is read in your browser and saved only on this device, which you can undo. With the on-device AI, nothing leaves your device. With the cloud AI, only anonymized excerpts and what you write to the coach are sent: the chat's names are replaced, and phone numbers, emails, links and IBANs removed. The AI provider doesn't train on them.",
+      faq5Q: "Will the coach remember our conversation?",
+      faq5A:
+        "If the chat is saved on this device, the conversation is kept with the reading it followed, so it's still there when you come back. Forget the chat, and the conversation goes with it.",
+      faq6Q: "What if the message is about something serious?",
+      faq6A:
+        "If your chat or your question points to abuse, threats or self-harm, the coach doesn't write a reply; it shows support resources instead. If you or someone else is in danger, call your local emergency number now.",
+      ctaTitle: "Find the words, then make them yours",
+      ctaButton: "Drop your chat",
+      ctaNote:
+        "Read in your browser · Saved only on this device, unless you say no",
+      disclaimer:
+        "WhatsAnalyze is an independent project, not affiliated with WhatsApp or Meta. The coach's suggestions are for reflection, not professional advice.",
+    },
     pageNameMessages: "WhatsApp Message & Line Counter",
     pageNameWords: "WhatsApp Word & Vocabulary Counter",
     pageNameHeatmap: "WhatsApp Peak Chat Hours & 24h Heatmap",
@@ -3453,6 +3583,136 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze ist ein unabhängiges Open-Source-Projekt und steht in keiner Verbindung zu WhatsApp oder Meta.",
     },
+    situationWhatToReply: {
+      navLabel: "Was soll ich antworten?",
+      seoTitle:
+        "Was soll ich antworten? KI-Hilfe für deine WhatsApp-Antwort | WhatsAnalyze",
+      seoDescription:
+        "Was antworte ich darauf? Eine KI, die euren WhatsApp-Chat gelesen hat, macht aus deinem Entwurf eine ruhigere, klarere Antwort in deinem Ton. Kostenlos auf unterstützten Geräten.",
+      ogTitle: "Was soll ich antworten? Hilfe bei deiner WhatsApp-Antwort",
+      ogDescription:
+        "Lade deinen WhatsApp-Chat und hol dir Hilfe bei der Antwort: eine ruhigere, klarere Fassung von dem, was du sagen willst, von einer KI, die euren Chat gelesen hat.",
+      heroEyebrow: "Hilfe beim Antworten",
+      heroTitle: "Was soll ich antworten?",
+      heroSubtitle:
+        "Die Nachricht ist offen, und dir fehlen die Worte. Lade euren Chat, und eine KI, die ihn gelesen hat, hilft dir weiter: Schreib, was du sagen willst, und bekomm eine ruhigere, klarere Fassung in deinem Ton, mit einer kurzen Erklärung.",
+      heroNote:
+        "Kostenlos auf deinem Gerät, wenn dein Browser es kann · Der Coach in der Cloud mit Pro",
+      continueButton: "Mit diesem Chat Hilfe beim Antworten holen",
+      offerChat: "Hilfe beim Antworten an {name}",
+      offerGroup: "Hilfe beim Antworten in {name}",
+      exampleEyebrow: "Ein Beispiel",
+      exampleTitle: "So sieht die Hilfe aus",
+      exampleText:
+        "Tom meldet sich nach einer stillen Woche. Mias erster Entwurf sagt, wie es ihr geht, mit einem Seitenhieb. Der Coach behält das Gefühl und lässt den Seitenhieb weg.",
+      exampleBadge: "Beispiel · Mia und Tom sind erfunden",
+      exampleIncoming:
+        "Sorry, dass ich diese Woche so still war, auf der Arbeit war viel los. Steht Samstag noch?",
+      exampleDraft: "Ach, du lebst ja noch. Klar, von mir aus.",
+      exampleReply:
+        "Schön, von dir zu hören! Ehrlich gesagt hast du mir diese Woche gefehlt. Samstag passt, am üblichen Ort?",
+      exampleWhy:
+        "Warum: Dein Entwurf sagt, dass du dich vergessen gefühlt hast, und das darf ruhig gesagt werden. In eurem Chat geht Tom darauf ein, wenn du sagst, wie es dir geht, während auf Sarkasmus meist ein stiller Tag folgte. So bleibt deine Botschaft, und er hat etwas, worauf er antworten kann.",
+      showEyebrow: "Was dein Chat zeigen kann",
+      showTitle: "Hilfe, die weiß, wie ihr miteinander schreibt",
+      showText:
+        "Der KI-Coach arbeitet mit eurem Chat, nicht mit einer Vorlage: mit anonymisierten Ausschnitten und der KI-Auswertung, unter der er sich öffnet.",
+      show1Title: "Wie ihr schreibt",
+      show1Text:
+        "Die Auswertung beschreibt den Ton eures Chats und den Schreibstil jeder Person, damit ein Vorschlag nach eurem Chat klingt.",
+      show2Title: "Dein Entwurf, ruhiger und klarer",
+      show2Text:
+        "Schreib, was du sagen willst. Der Coach behält, was du meinst, und gibt es dir ruhiger und klarer zurück, in deinem Ton.",
+      show3Title: "Eine kurze Erklärung",
+      show3Text:
+        "Zu jedem Vorschlag sagt er kurz, was sich geändert hat und warum, mit Blick darauf, wie euer Chat meistens läuft.",
+      show4Title: "Fragen zur Nachricht",
+      show4Text:
+        "Du weißt nicht, wie eine Nachricht gemeint ist? Frag. Der Coach verweist auf Momente in eurem Chat und soll es sagen, wenn der Chat darauf keine Antwort gibt.",
+      stepsEyebrow: "So kommst du hin",
+      stepsTitle: "Vom Chat zur Antwort",
+      step1Title: "Chat hochladen",
+      step1Text:
+        "Exportiere den Chat in WhatsApp ohne Medien, nachdem die Nachricht da ist, auf die du antworten willst, und zieh ihn oben in das Feld. Er wird in deinem Browser gelesen.",
+      step2Title: "Auswertung holen",
+      step2Text:
+        "Der Coach öffnet sich unter einer KI-Auswertung eures Chats. Lass sie kostenlos auf deinem Gerät laufen, wenn dein Browser das kann, oder mit Pro in der Cloud.",
+      step3Title: "Fragen oder Antwort entwerfen",
+      step3Text:
+        "Wähl unter der Auswertung „{reply}“, schreib, was du sagen möchtest, und bekomm eine ruhigere, klarere Fassung. Oder wähl „{ask}“, um die Nachricht erst einmal durchzusprechen.",
+      plansTitle: "Was kostenlos ist und was Pro braucht",
+      plan1Title: "Auf deinem Gerät: kostenlos",
+      plan1Text:
+        "Auswertung und Coach laufen nach einem einmaligen Modell-Download in deinem Browser, und nichts verlässt dein Gerät. Dafür braucht es WebGPU: einen aktuellen Computer, die meisten neueren Android-Handys mit Chrome oder ein iPhone ab iOS 26. Das Modell ist klein, seine Antworten fallen einfacher aus.",
+      plan2Title: "Kostenlose Cloud-Vorschau",
+      plan2Text:
+        "Ein Vorgeschmack auf die Auswertung von einer stärkeren KI, erstellt aus anonymisierten Ausschnitten. Der Coach gehört nicht zur Vorschau.",
+      plan3Title: "Pro: {price} im Monat",
+      plan3Text:
+        "Die volle Auswertung und der Coach in der Cloud, auf jedem Handy. Jede Nachricht an den Coach zählt als eine der Cloud-Analysen des Tages.",
+      ownWordsEyebrow: "Deine Worte",
+      ownWordsTitle: "Schick es in deinen eigenen Worten",
+      ownWordsText:
+        "Ein Vorschlag ist ein Anfang, kein Drehbuch. Menschen merken, wenn eine Nachricht nicht nach der Person klingt, die sie schickt, und eine Antwort, die nach Maschine klingt, kann anders ankommen. Behalte, was hilft, ändere, was nicht passt, und schick es so, wie du es sagen würdest.",
+      limitsEyebrow: "Ehrliche Grenzen",
+      limitsTitle: "Was es nicht kann",
+      limit1Title: "Muster, keine Urteile",
+      limit1Text:
+        "Der Coach kann sagen, wie euer Chat meistens läuft. Was die andere Person fühlt oder als Nächstes tut, kann er nicht wissen.",
+      limit2Title: "Nur, was geschrieben wurde",
+      limit2Text:
+        "Die KI liest Ausschnitte aus dem ganzen Chat, immer mit den neuesten Nachrichten. Sprachnachrichten, Fotos und Sticker liest sie nicht, und das Modell auf dem Gerät liest weniger als das in der Cloud.",
+      limit3Title: "Ein kurzer Chat sagt wenig",
+      limit3Text:
+        "Bei wenigen Nachrichten hat der Coach wenig, woran er sich halten kann, und Vorschläge werden allgemeiner.",
+      limit4Title: "KI liegt auch mal daneben",
+      limit4Text:
+        "Sie kann Ironie, Insider-Witze oder alles übersehen, was außerhalb des Chats passiert ist. Deine Situation kennst du am besten.",
+      privacyEyebrow: "Privat von Anfang an",
+      privacyTitle: "Dein Chat bleibt deiner",
+      privacyText:
+        "Ein exportierter Chat enthält auch die Nachrichten der anderen Person. Deshalb wird er sorgsam behandelt.",
+      privacy1Title: "Nur auf diesem Gerät gespeichert",
+      privacy1Text:
+        "Dein Chat wird in diesem Browser gespeichert, damit du wiederkommen kannst, nie auf unseren Servern. Willst du das nicht? Wähl unter dem Upload-Feld „{dontKeep}“.",
+      privacy2Title: "KI auf dem Gerät bleibt auf dem Gerät",
+      privacy2Text:
+        "Mit der kostenlosen KI auf deinem Gerät verlassen dein Chat, die Auswertung und was du dem Coach schreibst nie dein Gerät.",
+      privacy3Title: "Anonymisiert für die Cloud",
+      privacy3Text:
+        "Die Cloud-KI bekommt nur anonymisierte Ausschnitte und was du dem Coach schreibst: Die Namen aus dem Chat werden ersetzt, Telefonnummern, E-Mails, Links und IBANs entfernt. Der KI-Anbieter trainiert nicht damit.",
+      supportEyebrow: "Wenn es ernst ist",
+      supportTitle: "Manche Nachrichten brauchen mehr als eine gute Antwort",
+      supportText:
+        "Wenn dein Chat oder deine Frage auf Gewalt, Drohungen oder Selbstverletzung hindeutet, schreibt der Coach keine Antwort, sondern zeigt Hilfsangebote. Er erkennt nicht alles. Wenn du dich nicht sicher fühlst, hol dir jetzt Hilfe.",
+      supportDevice:
+        "Auf einem geteilten Gerät wählst du unter dem Upload-Feld „{dontKeep}“, dann wird der Chat in diesem Browser nicht behalten. Einen gespeicherten Chat kannst du jederzeit über „{saved}“ vergessen.",
+      faqTitle: "Fragen zur Hilfe beim Antworten",
+      faq1Q: "Kann mir eine KI sagen, was ich antworten soll?",
+      faq1A:
+        "Sie kann dir helfen, dahin zu kommen. Schreib grob, was du sagen willst, und der Coach gibt es dir ruhiger und klarer zurück, in deinem Ton und dem üblichen Ton eures Chats, mit einer kurzen Erklärung, was sich geändert hat. Oder frag ihn zuerst zur Nachricht. Die Antwort bleibt deine: Ändere alles, was nicht nach dir klingt, bevor du sie abschickst.",
+      faq2Q: "Ist das kostenlos?",
+      faq2A:
+        "Auf deinem Gerät ja: Auswertung und Coach laufen kostenlos in deinem Browser, wenn er WebGPU unterstützt. Die kostenlose Cloud-Vorschau zeigt einen Teil der Auswertung, aber ohne Coach. Mit Pro ({price} im Monat) laufen die volle Auswertung und der Coach in der Cloud, auf jedem Handy.",
+      faq3Q: "Sieht die KI die Nachricht, die ich gerade bekommen habe?",
+      faq3A:
+        "Nur wenn sie in deinem Export steckt. Exportiere den Chat also, nachdem die Nachricht angekommen ist. Die KI liest Ausschnitte aus dem ganzen Chat und nimmt die neuesten Nachrichten immer mit. Hast du den Chat gespeichert, bevor die Nachricht kam, exportiere ihn neu. Du kannst die Nachricht auch in deine Frage kopieren.",
+      faq4Q: "Wird mein Chat hochgeladen?",
+      faq4A:
+        "Dein Chat wird in deinem Browser gelesen und nur auf diesem Gerät gespeichert, und das kannst du rückgängig machen. Mit der KI auf dem Gerät verlässt nichts dein Gerät. Mit der Cloud-KI werden nur anonymisierte Ausschnitte und deine Nachrichten an den Coach gesendet: Die Namen aus dem Chat werden ersetzt, Telefonnummern, E-Mails, Links und IBANs entfernt. Der KI-Anbieter trainiert nicht damit.",
+      faq5Q: "Merkt sich der Coach unser Gespräch?",
+      faq5A:
+        "Wenn der Chat auf diesem Gerät gespeichert ist, wird das Gespräch mit der Auswertung aufbewahrt, auf die es folgte. Es ist also noch da, wenn du wiederkommst. Vergisst du den Chat, verschwindet auch das Gespräch.",
+      faq6Q: "Und wenn es in der Nachricht um etwas Ernstes geht?",
+      faq6A:
+        "Wenn dein Chat oder deine Frage auf Gewalt, Drohungen oder Selbstverletzung hindeutet, schreibt der Coach keine Antwort, sondern zeigt Hilfsangebote. Wenn du oder jemand anderes in Gefahr ist, ruf sofort den Notruf (112) an.",
+      ctaTitle: "Finde die Worte, und mach sie zu deinen",
+      ctaButton: "Chat hochladen",
+      ctaNote:
+        "Gelesen in deinem Browser · Nur auf diesem Gerät gespeichert, wenn du willst",
+      disclaimer:
+        "WhatsAnalyze ist ein unabhängiges Projekt und nicht mit WhatsApp oder Meta verbunden. Die Vorschläge des Coaches sind zum Nachdenken gedacht, nicht als professionelle Beratung.",
+    },
     pageNameMessages: "WhatsApp Nachrichten- & Zeilenzähler",
     pageNameWords: "WhatsApp Wort- & Wortschatzzähler",
     pageNameHeatmap: "WhatsApp Aktivitätszeiten & 24h-Heatmap",
@@ -5165,6 +5425,136 @@ export const messages = {
       ctaNote: "100 % privado · Sin subida a servidores · Sin registro",
       disclaimer:
         "WhatsAnalyze es un proyecto de código abierto independiente y no está afiliado, respaldado ni patrocinado por WhatsApp o Meta.",
+    },
+    situationWhatToReply: {
+      navLabel: "¿Qué le respondo?",
+      seoTitle:
+        "¿Qué le respondo? Ayuda con tu respuesta de WhatsApp | WhatsAnalyze",
+      seoDescription:
+        "¿No sabes qué responder a ese mensaje? Una IA que ha leído tu chat de WhatsApp convierte tu borrador en una respuesta más tranquila y clara, con tu propia voz. Gratis en dispositivos compatibles.",
+      ogTitle: "¿Qué le respondo? Ayuda con tu respuesta de WhatsApp",
+      ogDescription:
+        "Sube tu chat de WhatsApp y recibe ayuda con la respuesta: una versión más tranquila y clara de lo que quieres decir, de una IA que ha leído tu chat.",
+      heroEyebrow: "Ayuda para responder",
+      heroTitle: "¿Qué le respondo?",
+      heroSubtitle:
+        "Tienes el mensaje delante y no sabes cómo contestar. Sube tu chat y una IA que lo ha leído te ayuda a encontrar las palabras: escribe lo que quieres decir y recibe una versión más tranquila y clara, con tu voz y una nota sobre el porqué.",
+      heroNote:
+        "Gratis en tu dispositivo, si tu navegador puede ejecutarlo · El coach en la nube viene con Pro",
+      continueButton: "Pedir ayuda para responder con este chat",
+      offerChat: "Ayuda para responder a {name}",
+      offerGroup: "Ayuda para responder en {name}",
+      exampleEyebrow: "Un ejemplo",
+      exampleTitle: "Así es la ayuda",
+      exampleText:
+        "Tom vuelve a escribir tras una semana en silencio. El primer borrador de Mia dice cómo se siente, con una pulla. El coach conserva el sentimiento y quita la pulla.",
+      exampleBadge: "Ejemplo · Mia y Tom son ficticios",
+      exampleIncoming:
+        "Perdona que haya estado tan callado esta semana, el trabajo me ha desbordado. ¿Seguimos con lo del sábado?",
+      exampleDraft: "Vaya, sigues vivo. Vale, lo que sea.",
+      exampleReply:
+        "¡Qué bien saber de ti! La verdad es que te he echado de menos esta semana. El sábado me va bien, ¿en el sitio de siempre?",
+      exampleWhy:
+        "Por qué: tu borrador dice que te sentiste de lado, y eso vale la pena decirlo. En vuestro chat, Tom se abre cuando dices cómo te sientes, mientras que tras el sarcasmo solía venir un día de silencio. Así mantienes tu mensaje y le das algo a lo que responder.",
+      showEyebrow: "Lo que tu chat puede mostrar",
+      showTitle: "Ayuda que conoce vuestra forma de hablar",
+      showText:
+        "El coach de IA trabaja con tu chat, no con una plantilla: fragmentos anonimizados y la lectura de IA bajo la que se abre.",
+      show1Title: "Cómo escribís",
+      show1Text:
+        "La lectura describe el tono de vuestro chat y cómo escribe cada uno, para que una sugerencia suene a vuestro chat.",
+      show2Title: "Tu borrador, más tranquilo y claro",
+      show2Text:
+        "Escribe lo que quieres decir. El coach mantiene lo que quieres transmitir y te lo devuelve más tranquilo y claro, con tu voz.",
+      show3Title: "Una nota sobre el porqué",
+      show3Text:
+        "Cada sugerencia trae una nota breve sobre qué cambió y por qué, señalando cómo suele ir vuestro chat.",
+      show4Title: "Preguntas sobre el mensaje",
+      show4Text:
+        "¿No sabes qué quiere decir un mensaje? Pregunta. El coach señala momentos de tu chat y está hecho para decírtelo cuando el chat no da la respuesta.",
+      stepsEyebrow: "Cómo llegar",
+      stepsTitle: "De tu chat a una respuesta",
+      step1Title: "Sube tu chat",
+      step1Text:
+        "Exporta el chat desde WhatsApp sin archivos multimedia, cuando ya haya llegado el mensaje que quieres responder, y arrástralo arriba. Se lee en tu navegador.",
+      step2Title: "Obtén una lectura",
+      step2Text:
+        "El coach se abre bajo una lectura de IA de tu chat. Hazla gratis en tu dispositivo, si tu navegador puede, o en la nube con Pro.",
+      step3Title: "Pregunta o escribe tu borrador",
+      step3Text:
+        "Bajo la lectura, elige «{reply}», escribe lo que te gustaría decir y recibe una versión más tranquila y clara. O elige «{ask}» para hablar antes del mensaje.",
+      plansTitle: "Qué es gratis y qué necesita Pro",
+      plan1Title: "En tu dispositivo: gratis",
+      plan1Text:
+        "La lectura y el coach funcionan en tu navegador tras una descarga única del modelo, y nada sale de tu dispositivo. Necesita WebGPU: un ordenador reciente, la mayoría de los Android recientes con Chrome o un iPhone con iOS 26 o posterior. El modelo es pequeño, así que sus respuestas son más sencillas.",
+      plan2Title: "Vista previa gratis en la nube",
+      plan2Text:
+        "Un adelanto de la lectura de una IA más potente, hecho con fragmentos anonimizados. El coach no forma parte de la vista previa.",
+      plan3Title: "Pro: {price} al mes",
+      plan3Text:
+        "La lectura completa y el coach en la nube, en cualquier móvil. Cada mensaje al coach usa uno de los análisis en la nube del día.",
+      ownWordsEyebrow: "Tus palabras",
+      ownWordsTitle: "Envíalo con tus propias palabras",
+      ownWordsText:
+        "Una sugerencia es un punto de partida, no un guion. La gente nota cuando un mensaje no suena a quien lo envía, y una respuesta que parece escrita por una máquina puede sentar distinto. Quédate con lo que te sirva, cambia lo que no, y envíalo como tú lo dirías.",
+      limitsEyebrow: "Límites honestos",
+      limitsTitle: "Lo que no puede hacer",
+      limit1Title: "Patrones, no veredictos",
+      limit1Text:
+        "El coach puede decir cómo suele ir vuestro chat. No puede saber qué siente la otra persona ni qué hará después.",
+      limit2Title: "Solo lo que está escrito",
+      limit2Text:
+        "La IA lee fragmentos de todo el chat, siempre con los mensajes más recientes. No lee notas de voz, fotos ni stickers, y el modelo del dispositivo lee menos que el de la nube.",
+      limit3Title: "Un chat corto dice poco",
+      limit3Text:
+        "Con pocos mensajes hay poco en qué apoyarse, y las sugerencias se acercan a consejos generales.",
+      limit4Title: "La IA se equivoca",
+      limit4Text:
+        "Puede pasar por alto la ironía, las bromas internas o cualquier cosa que pasara fuera del chat. Tu situación la conoces tú mejor que nadie.",
+      privacyEyebrow: "Privado por defecto",
+      privacyTitle: "Tu chat sigue siendo tuyo",
+      privacyText:
+        "Un chat exportado también contiene los mensajes de la otra persona, así que se trata con cuidado.",
+      privacy1Title: "Guardado solo en este dispositivo",
+      privacy1Text:
+        "Tu chat se guarda en este navegador para que puedas volver, nunca en nuestros servidores. ¿No quieres? Elige «{dontKeep}» bajo la zona de subida.",
+      privacy2Title: "La IA del dispositivo se queda en el dispositivo",
+      privacy2Text:
+        "Con la IA gratuita en tu dispositivo, tu chat, su lectura y lo que escribes al coach nunca salen de tu dispositivo.",
+      privacy3Title: "Anonimizado para la nube",
+      privacy3Text:
+        "La IA en la nube solo recibe fragmentos anonimizados y lo que escribes al coach: se sustituyen los nombres del chat y se eliminan teléfonos, correos, enlaces e IBAN. El proveedor de IA no entrena con ellos.",
+      supportEyebrow: "Cuando es serio",
+      supportTitle: "Algunos mensajes necesitan más que una buena respuesta",
+      supportText:
+        "Si tu chat o tu pregunta apuntan a maltrato, amenazas o autolesiones, el coach no escribe una respuesta: muestra recursos de ayuda. No lo detecta todo, así que si no te sientes a salvo, busca ayuda ahora.",
+      supportDevice:
+        "En un dispositivo compartido, elige «{dontKeep}» bajo la zona de subida para que el chat no se guarde en este navegador. Un chat guardado se puede olvidar en cualquier momento desde «{saved}».",
+      faqTitle: "Preguntas sobre la ayuda para responder",
+      faq1Q: "¿Puede una IA decirme qué responder?",
+      faq1A:
+        "Puede ayudarte a llegar. Escribe una versión aproximada de lo que quieres decir y el coach te la devuelve más tranquila y clara, con tu voz y el tono habitual de vuestro chat, y una nota breve sobre qué cambió. O pregúntale primero por el mensaje. La respuesta sigue siendo tuya: cambia lo que no suene a ti antes de enviarla.",
+      faq2Q: "¿Es gratis?",
+      faq2A:
+        "En tu dispositivo, sí: la lectura y el coach funcionan gratis en tu navegador si es compatible con WebGPU. La vista previa gratis en la nube muestra parte de una lectura, pero no incluye el coach. Con Pro ({price} al mes), la lectura completa y el coach funcionan en la nube, en cualquier móvil.",
+      faq3Q: "¿Ve la IA el mensaje que me acaba de llegar?",
+      faq3A:
+        "Solo si está en tu exportación, así que exporta el chat después de que llegue el mensaje. La IA lee fragmentos de todo el chat e incluye siempre los mensajes más recientes. Si guardaste el chat antes de que llegara, expórtalo de nuevo. También puedes pegar el mensaje en tu pregunta.",
+      faq4Q: "¿Se sube mi chat?",
+      faq4A:
+        "Tu chat se lee en tu navegador y se guarda solo en este dispositivo, y puedes deshacerlo. Con la IA del dispositivo, nada sale de él. Con la IA en la nube, solo se envían fragmentos anonimizados y lo que escribes al coach: se sustituyen los nombres del chat y se eliminan teléfonos, correos, enlaces e IBAN. El proveedor de IA no entrena con ellos.",
+      faq5Q: "¿Recuerda el coach nuestra conversación?",
+      faq5A:
+        "Si el chat está guardado en este dispositivo, la conversación se guarda junto a la lectura a la que siguió, así que sigue ahí cuando vuelves. Si olvidas el chat, la conversación se va con él.",
+      faq6Q: "¿Y si el mensaje trata de algo serio?",
+      faq6A:
+        "Si tu chat o tu pregunta apuntan a maltrato, amenazas o autolesiones, el coach no escribe una respuesta, sino que muestra recursos de ayuda. Si tú u otra persona estáis en peligro, llama ahora al número de emergencias (112 en Europa).",
+      ctaTitle: "Encuentra las palabras y hazlas tuyas",
+      ctaButton: "Sube tu chat",
+      ctaNote:
+        "Se lee en tu navegador · Guardado solo en este dispositivo, si quieres",
+      disclaimer:
+        "WhatsAnalyze es un proyecto independiente, sin relación con WhatsApp ni Meta. Las sugerencias del coach son para reflexionar, no asesoramiento profesional.",
     },
     pageNameMessages: "Contador de mensajes y líneas de WhatsApp",
     pageNameWords: "Contador de palabras y vocabulario de WhatsApp",
@@ -6883,6 +7273,137 @@ export const messages = {
       ctaNote: "100% privado · Zero upload para servidor · Sem cadastro",
       disclaimer:
         "O WhatsAnalyze é um projeto de código aberto independente e não tem vínculo com o WhatsApp ou a Meta.",
+    },
+    situationWhatToReply: {
+      navLabel: "O que responder?",
+      seoTitle:
+        "O que responder? Ajuda com a sua resposta no WhatsApp | WhatsAnalyze",
+      seoDescription:
+        "Não sabe o que responder a esta mensagem? Uma IA que leu a sua conversa do WhatsApp transforma o seu rascunho numa resposta mais calma e clara, com a sua voz. Grátis em dispositivos compatíveis.",
+      ogTitle: "O que responder? Ajuda com a sua resposta no WhatsApp",
+      ogDescription:
+        "Carregue a sua conversa do WhatsApp e receba ajuda com a resposta: uma versão mais calma e clara do que quer dizer, de uma IA que leu a conversa.",
+      heroEyebrow: "Ajuda para responder",
+      heroTitle: "O que responder?",
+      heroSubtitle:
+        "A mensagem está aberta e não sabe como responder. Carregue a conversa e uma IA que a leu ajuda a encontrar as palavras: escreva o que quer dizer e receba uma versão mais calma e clara, com a sua voz e uma nota sobre o porquê.",
+      heroNote:
+        "Grátis no seu dispositivo, se o navegador o conseguir executar · O coach na nuvem vem com o Pro",
+      continueButton: "Pedir ajuda para responder com esta conversa",
+      offerChat: "Ajuda para responder a {name}",
+      offerGroup: "Ajuda para responder em {name}",
+      exampleEyebrow: "Um exemplo",
+      exampleTitle: "Como é a ajuda",
+      exampleText:
+        "O Tom volta a escrever depois de uma semana calado. O primeiro rascunho da Mia diz como ela se sente, com uma alfinetada. O coach mantém o sentimento e tira a alfinetada.",
+      exampleBadge: "Exemplo · Mia e Tom são fictícios",
+      exampleIncoming:
+        "Desculpa ter andado tão calado esta semana, o trabalho foi demais. Sábado ainda está de pé?",
+      exampleDraft: "Olha quem apareceu. Pode ser, tanto faz.",
+      exampleReply:
+        "Que bom ter notícias! Para ser sincera, senti saudades esta semana. Sábado dá, no lugar de sempre?",
+      exampleWhy:
+        "Porquê: o seu rascunho diz que se sentiu posta de lado, e isso merece ser dito. Na conversa, o Tom abre-se quando diz como se sente, enquanto depois do sarcasmo costumava vir um dia de silêncio. Assim a sua mensagem fica, e ele tem algo a que responder.",
+      showEyebrow: "O que a sua conversa pode mostrar",
+      showTitle: "Ajuda que conhece o tom da vossa conversa",
+      showText:
+        "O coach de IA trabalha com a sua conversa, não com um modelo pronto: excertos anonimizados e a leitura da IA sob a qual se abre.",
+      show1Title: "Como escrevem",
+      show1Text:
+        "A leitura descreve o tom da conversa e como cada pessoa escreve, para que uma sugestão soe como a sua conversa.",
+      show2Title: "O seu rascunho, mais calmo e claro",
+      show2Text:
+        "Escreva o que quer dizer. O coach mantém a sua intenção e responde com uma versão mais calma e clara, com a sua voz.",
+      show3Title: "Uma nota sobre o porquê",
+      show3Text:
+        "Cada sugestão vem com uma nota breve sobre o que mudou e porquê, com base no rumo habitual da conversa.",
+      show4Title: "Perguntas sobre a mensagem",
+      show4Text:
+        "Não sabe o que uma mensagem quer dizer? Pergunte. O coach aponta para momentos da conversa e foi feito para avisar quando a conversa não dá a resposta.",
+      stepsEyebrow: "Como chegar lá",
+      stepsTitle: "Da conversa à resposta",
+      step1Title: "Carregue a conversa",
+      step1Text:
+        "Exporte a conversa no WhatsApp sem mídia, depois de chegar a mensagem a que quer responder, e arraste-a para a caixa acima. É lida no seu navegador.",
+      step2Title: "Obtenha uma leitura",
+      step2Text:
+        "O coach abre-se sob uma leitura da conversa feita pela IA. Faça-a grátis no seu dispositivo, se o navegador conseguir, ou na nuvem com o Pro.",
+      step3Title: "Pergunte ou escreva o rascunho",
+      step3Text:
+        "Sob a leitura, escolha “{reply}”, escreva o que gostaria de dizer e receba uma versão mais calma e clara. Ou escolha “{ask}” para falar primeiro sobre a mensagem.",
+      plansTitle: "O que é grátis e o que precisa do Pro",
+      plan1Title: "No seu dispositivo: grátis",
+      plan1Text:
+        "A leitura e o coach funcionam no seu navegador após um download único do modelo, e nada sai do seu dispositivo. Precisa de WebGPU: um computador recente, a maioria dos Android recentes com Chrome ou um iPhone com iOS 26 ou posterior. O modelo é pequeno, por isso as respostas são mais simples.",
+      plan2Title: "Pré-visualização grátis na nuvem",
+      plan2Text:
+        "Uma amostra da leitura de uma IA mais forte, feita a partir de excertos anonimizados. O coach não faz parte da pré-visualização.",
+      plan3Title: "Pro: {price} por mês",
+      plan3Text:
+        "A leitura completa e o coach na nuvem, em qualquer telefone. Cada mensagem ao coach conta como uma das análises na nuvem do dia.",
+      ownWordsEyebrow: "As suas palavras",
+      ownWordsTitle: "Envie-a com as suas próprias palavras",
+      ownWordsText:
+        "Uma sugestão é um ponto de partida, não uma fórmula. As pessoas notam quando uma mensagem não soa a quem a envia, e uma resposta que parece escrita por uma máquina pode ser recebida de outra forma. Fique com o que ajuda, mude o que não serve e envie-a como a diria.",
+      limitsEyebrow: "Limites honestos",
+      limitsTitle: "O que não consegue fazer",
+      limit1Title: "Padrões, não veredictos",
+      limit1Text:
+        "O coach pode dizer como a conversa costuma decorrer. Não consegue saber o que a outra pessoa sente nem o que vai fazer a seguir.",
+      limit2Title: "Só o que foi escrito",
+      limit2Text:
+        "A IA lê excertos de toda a conversa, sempre com as mensagens mais recentes. Não lê mensagens de voz, fotos nem stickers, e o modelo do dispositivo lê menos do que o da nuvem.",
+      limit3Title: "Uma conversa curta diz pouco",
+      limit3Text:
+        "Com poucas mensagens há pouco em que se apoiar, e as sugestões ficam mais próximas de conselhos gerais.",
+      limit4Title: "A IA também erra",
+      limit4Text:
+        "Pode não perceber ironia, piadas internas ou tudo o que aconteceu fora da conversa. Quem conhece melhor a sua situação é você.",
+      privacyEyebrow: "Privado desde o início",
+      privacyTitle: "A sua conversa continua sua",
+      privacyText:
+        "Uma conversa exportada também contém as mensagens da outra pessoa, por isso é tratada com cuidado.",
+      privacy1Title: "Guardada só neste dispositivo",
+      privacy1Text:
+        "A sua conversa fica guardada neste navegador para que possa voltar, nunca nos nossos servidores. Não quer? Escolha “{dontKeep}” por baixo da caixa de upload.",
+      privacy2Title: "A IA no dispositivo fica no dispositivo",
+      privacy2Text:
+        "Com a IA grátis no seu dispositivo, a conversa, a leitura e o que escreve ao coach nunca saem do seu dispositivo.",
+      privacy3Title: "Anonimizado para a nuvem",
+      privacy3Text:
+        "A IA na nuvem só recebe excertos anonimizados e o que escreve ao coach: os nomes da conversa são substituídos e os números de telefone, e-mails, links e IBANs removidos. O fornecedor de IA não os usa para treino.",
+      supportEyebrow: "Quando é sério",
+      supportTitle:
+        "Algumas mensagens precisam de mais do que uma boa resposta",
+      supportText:
+        "Se a conversa ou a sua pergunta apontarem para abuso, ameaças ou automutilação, o coach não escreve uma resposta: mostra recursos de apoio. Não reconhece tudo, por isso, se não se sente em segurança, procure ajuda agora.",
+      supportDevice:
+        "Num dispositivo que outras pessoas usam, escolha “{dontKeep}” por baixo da caixa de upload para que a conversa não fique guardada neste navegador. Uma conversa guardada pode ser esquecida a qualquer momento em “{saved}”.",
+      faqTitle: "Perguntas sobre a ajuda para responder",
+      faq1Q: "A IA consegue dizer o que devo responder?",
+      faq1A:
+        "Pode ajudar a chegar lá. Escreva uma versão aproximada do que quer dizer e o coach responde com uma versão mais calma e clara, com a sua voz e o tom habitual da conversa, e uma nota breve sobre o que mudou. Ou pergunte-lhe primeiro sobre a mensagem. A resposta continua a ser sua: mude o que não soar a si antes de a enviar.",
+      faq2Q: "É grátis?",
+      faq2A:
+        "No seu dispositivo, sim: a leitura e o coach funcionam grátis no navegador, se ele suportar WebGPU. A pré-visualização grátis na nuvem mostra parte de uma leitura, mas não inclui o coach. Com o Pro ({price} por mês), a leitura completa e o coach funcionam na nuvem, em qualquer telefone.",
+      faq3Q: "A IA vê a mensagem que acabei de receber?",
+      faq3A:
+        "Só se ela estiver na sua exportação, por isso exporte a conversa depois de a mensagem chegar. A IA lê excertos de toda a conversa e inclui sempre as mensagens mais recentes. Se guardou a conversa antes de a mensagem chegar, exporte-a de novo. Também pode colar a mensagem na sua pergunta.",
+      faq4Q: "A minha conversa é enviada para algum servidor?",
+      faq4A:
+        "A conversa é lida no seu navegador e guardada só neste dispositivo, o que pode desfazer. Com a IA no dispositivo, nada sai dele. Com a IA na nuvem, só são enviados excertos anonimizados e o que escreve ao coach: os nomes da conversa são substituídos e os números de telefone, e-mails, links e IBANs removidos. O fornecedor de IA não os usa para treino.",
+      faq5Q: "O coach lembra-se do que lhe escrevi?",
+      faq5A:
+        "Se a conversa estiver guardada neste dispositivo, o que escreveu ao coach fica guardado com a leitura a que se seguiu, por isso continua lá quando voltar. Se esquecer a conversa, isso também desaparece.",
+      faq6Q: "E se a mensagem for sobre algo sério?",
+      faq6A:
+        "Se a conversa ou a sua pergunta apontarem para abuso, ameaças ou automutilação, o coach não escreve uma resposta: mostra recursos de apoio. Se você ou outra pessoa estiver em perigo, ligue agora para o número de emergência local.",
+      ctaTitle: "Encontre as palavras e torne-as suas",
+      ctaButton: "Carregar a conversa",
+      ctaNote:
+        "Lida no seu navegador · Guardada só neste dispositivo, se quiser",
+      disclaimer:
+        "O WhatsAnalyze é um projeto independente, sem ligação ao WhatsApp nem à Meta. As sugestões do coach servem para refletir e não são aconselhamento profissional.",
     },
     pageNameMessages: "Contador de mensagens e linhas do WhatsApp",
     pageNameWords: "Contador de palavras e vocabulário do WhatsApp",
@@ -8614,6 +9135,136 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze est un projet open source indépendant sans affiliation, approbation ou parrainage par WhatsApp ou Meta.",
     },
+    situationWhatToReply: {
+      navLabel: "Quoi répondre ?",
+      seoTitle:
+        "Quoi répondre ? De l'aide pour votre réponse WhatsApp | WhatsAnalyze",
+      seoDescription:
+        "Vous ne savez pas quoi répondre à ce message ? Une IA qui a lu votre conversation WhatsApp transforme votre brouillon en une réponse plus calme et plus claire, dans votre style. Gratuit sur les appareils compatibles.",
+      ogTitle: "Quoi répondre ? De l'aide pour votre réponse WhatsApp",
+      ogDescription:
+        "Importez votre conversation WhatsApp et obtenez de l'aide pour répondre : une version plus calme et plus claire de ce que vous voulez dire, par une IA qui a lu votre conversation.",
+      heroEyebrow: "De l'aide pour répondre",
+      heroTitle: "Quoi répondre ?",
+      heroSubtitle:
+        "Le message est là et vous ne savez pas comment répondre. Importez votre conversation : une IA qui l'a lue vous aide à trouver les mots. Écrivez ce que vous voulez dire et recevez une version plus calme et plus claire, dans votre style, avec une note qui explique pourquoi.",
+      heroNote:
+        "Gratuit sur votre appareil, si votre navigateur le permet · Le coach dans le cloud avec Pro",
+      continueButton: "Obtenir de l'aide pour répondre avec cette conversation",
+      offerChat: "De l'aide pour répondre à {name}",
+      offerGroup: "De l'aide pour répondre dans {name}",
+      exampleEyebrow: "Un exemple",
+      exampleTitle: "À quoi ressemble l'aide",
+      exampleText:
+        "Tom réécrit après une semaine de silence. Le premier brouillon de Mia dit ce qu'elle ressent, avec une pique. Le coach garde le ressenti et enlève la pique.",
+      exampleBadge: "Exemple · Mia et Tom sont fictifs",
+      exampleIncoming:
+        "Désolé d'avoir été si silencieux cette semaine, le travail m'a débordé. Toujours partante pour samedi ?",
+      exampleDraft: "Ah, tu es encore en vie. Ouais, si tu veux.",
+      exampleReply:
+        "Contente d'avoir de tes nouvelles ! Honnêtement, tu m'as manqué cette semaine. Samedi, ça me va, au même endroit que d'habitude ?",
+      exampleWhy:
+        "Pourquoi : ton brouillon dit que tu t'es sentie mise de côté, et ça mérite d'être dit. Dans votre conversation, Tom s'ouvre quand tu dis ce que tu ressens, alors que le sarcasme a souvent été suivi d'une journée de silence. Ainsi, ton message reste, et il a quelque chose à quoi répondre.",
+      showEyebrow: "Ce que votre conversation peut montrer",
+      showTitle: "Une aide qui sait comment vous vous parlez",
+      showText:
+        "Le coach IA s'appuie sur votre conversation, pas sur un modèle tout fait : des extraits anonymisés et la lecture de l'IA sous laquelle il s'ouvre.",
+      show1Title: "Votre façon d'écrire",
+      show1Text:
+        "La lecture décrit le ton de votre conversation et la façon dont chacun écrit, pour qu'une suggestion ressemble à votre conversation.",
+      show2Title: "Votre brouillon, plus calme et plus clair",
+      show2Text:
+        "Écrivez ce que vous voulez dire. Le coach garde ce que vous voulez exprimer et vous le rend plus calme et plus clair, dans votre style.",
+      show3Title: "Une note sur le pourquoi",
+      show3Text:
+        "Chaque suggestion est suivie d'une courte note sur ce qui a changé et pourquoi, d'après la façon dont votre conversation se passe d'habitude.",
+      show4Title: "Des questions sur le message",
+      show4Text:
+        "Vous ne savez pas ce qu'un message veut dire ? Demandez. Le coach renvoie à des moments de votre conversation, et il est conçu pour le dire quand la conversation ne répond pas.",
+      stepsEyebrow: "Comment y arriver",
+      stepsTitle: "De votre conversation à une réponse",
+      step1Title: "Importez votre conversation",
+      step1Text:
+        "Exportez la conversation depuis WhatsApp sans médias, une fois arrivé le message auquel vous voulez répondre, puis déposez-la ci-dessus. Elle est lue dans votre navigateur.",
+      step2Title: "Obtenez une lecture",
+      step2Text:
+        "Le coach s'ouvre sous une lecture de votre conversation par l'IA. Lancez-la gratuitement sur votre appareil, si votre navigateur le permet, ou dans le cloud avec Pro.",
+      step3Title: "Posez une question ou écrivez un brouillon",
+      step3Text:
+        "Sous la lecture, choisissez « {reply} », écrivez ce que vous aimeriez dire et recevez une version plus calme et plus claire. Ou choisissez « {ask} » pour parler d'abord du message.",
+      plansTitle: "Ce qui est gratuit, et ce qui demande Pro",
+      plan1Title: "Sur votre appareil : gratuit",
+      plan1Text:
+        "La lecture et le coach tournent dans votre navigateur après un téléchargement unique du modèle, et rien ne quitte votre appareil. Il faut WebGPU : un ordinateur récent, la plupart des Android récents avec Chrome, ou un iPhone sous iOS 26 ou plus récent. Le modèle est petit, ses réponses sont donc plus simples.",
+      plan2Title: "Aperçu gratuit dans le cloud",
+      plan2Text:
+        "Un avant-goût de la lecture par une IA plus puissante, à partir d'extraits anonymisés. Le coach ne fait pas partie de l'aperçu.",
+      plan3Title: "Pro : {price} par mois",
+      plan3Text:
+        "La lecture complète et le coach dans le cloud, sur n'importe quel téléphone. Chaque message au coach compte pour une des analyses cloud du jour.",
+      ownWordsEyebrow: "Vos mots",
+      ownWordsTitle: "Envoyez-la avec vos propres mots",
+      ownWordsText:
+        "Une suggestion est un point de départ, pas un texte à recopier. On remarque quand un message ne ressemble pas à la personne qui l'envoie, et une réponse qui semble écrite par une machine peut être reçue autrement. Gardez ce qui aide, changez ce qui ne vous ressemble pas, et envoyez-la comme vous la diriez.",
+      limitsEyebrow: "Des limites honnêtes",
+      limitsTitle: "Ce qu'il ne peut pas faire",
+      limit1Title: "Des tendances, pas des verdicts",
+      limit1Text:
+        "Le coach peut dire comment votre conversation se passe d'habitude. Il ne peut pas savoir ce que l'autre personne ressent, ni ce qu'elle fera ensuite.",
+      limit2Title: "Seulement ce qui a été écrit",
+      limit2Text:
+        "L'IA lit des extraits de toute la conversation, toujours avec les messages les plus récents. Elle ne lit ni les messages vocaux, ni les photos, ni les stickers, et le modèle sur l'appareil lit moins que celui du cloud.",
+      limit3Title: "Une conversation courte en dit peu",
+      limit3Text:
+        "Avec peu de messages, il y a peu sur quoi s'appuyer, et les suggestions se rapprochent de conseils généraux.",
+      limit4Title: "L'IA se trompe aussi",
+      limit4Text:
+        "Elle peut passer à côté de l'ironie, des blagues entre vous ou de tout ce qui s'est passé en dehors de la conversation. C'est vous qui connaissez le mieux votre situation.",
+      privacyEyebrow: "Privé par défaut",
+      privacyTitle: "Votre conversation reste la vôtre",
+      privacyText:
+        "Une conversation exportée contient aussi les messages de l'autre personne, elle est donc traitée avec soin.",
+      privacy1Title: "Enregistrée uniquement sur cet appareil",
+      privacy1Text:
+        "Votre conversation est enregistrée dans ce navigateur pour que vous puissiez y revenir, jamais sur nos serveurs. Vous n'en voulez pas ? Choisissez « {dontKeep} » sous la zone d'import.",
+      privacy2Title: "L'IA sur l'appareil reste sur l'appareil",
+      privacy2Text:
+        "Avec l'IA gratuite sur votre appareil, votre conversation, sa lecture et ce que vous écrivez au coach ne quittent jamais votre appareil.",
+      privacy3Title: "Anonymisé pour le cloud",
+      privacy3Text:
+        "L'IA dans le cloud ne reçoit que des extraits anonymisés et ce que vous écrivez au coach : les noms de la conversation sont remplacés, les numéros de téléphone, e-mails, liens et IBAN supprimés. Le fournisseur d'IA ne s'en sert pas pour l'entraînement.",
+      supportEyebrow: "Quand c'est grave",
+      supportTitle: "Certains messages demandent plus qu'une bonne réponse",
+      supportText:
+        "Si votre conversation ou votre question évoque des violences, des menaces ou l'automutilation, le coach n'écrit pas de réponse : il affiche des ressources d'aide. Il ne repère pas tout, alors si vous ne vous sentez pas en sécurité, demandez de l'aide maintenant.",
+      supportDevice:
+        "Sur un appareil partagé, choisissez « {dontKeep} » sous la zone d'import pour que la conversation ne soit pas gardée dans ce navigateur. Une conversation enregistrée peut être oubliée à tout moment depuis « {saved} ».",
+      faqTitle: "Questions sur l'aide pour répondre",
+      faq1Q: "Une IA peut-elle me dire quoi répondre ?",
+      faq1A:
+        "Elle peut vous aider à y arriver. Écrivez une première version de ce que vous voulez dire, et le coach vous la rend plus calme et plus claire, dans votre style et le ton habituel de votre conversation, avec une courte note sur ce qui a changé. Ou interrogez-le d'abord sur le message. La réponse reste la vôtre : changez ce qui ne vous ressemble pas avant de l'envoyer.",
+      faq2Q: "Est-ce gratuit ?",
+      faq2A:
+        "Sur votre appareil, oui : la lecture et le coach tournent gratuitement dans votre navigateur, s'il prend en charge WebGPU. L'aperçu gratuit dans le cloud montre une partie d'une lecture, sans le coach. Avec Pro ({price} par mois), la lecture complète et le coach tournent dans le cloud, sur n'importe quel téléphone.",
+      faq3Q: "L'IA voit-elle le message que je viens de recevoir ?",
+      faq3A:
+        "Seulement s'il est dans votre export : exportez donc la conversation après l'arrivée du message. L'IA lit des extraits de toute la conversation et inclut toujours les messages les plus récents. Si vous avez enregistré la conversation avant l'arrivée du message, exportez-la à nouveau. Vous pouvez aussi coller le message dans votre question.",
+      faq4Q: "Ma conversation est-elle envoyée quelque part ?",
+      faq4A:
+        "Votre conversation est lue dans votre navigateur et enregistrée uniquement sur cet appareil, ce que vous pouvez annuler. Avec l'IA sur l'appareil, rien ne le quitte. Avec l'IA dans le cloud, seuls des extraits anonymisés et ce que vous écrivez au coach sont envoyés : les noms de la conversation sont remplacés, les numéros de téléphone, e-mails, liens et IBAN supprimés. Le fournisseur d'IA ne s'en sert pas pour l'entraînement.",
+      faq5Q: "Le coach se souvient-il de notre échange ?",
+      faq5A:
+        "Si la conversation est enregistrée sur cet appareil, l'échange est gardé avec la lecture qu'il suivait, et il est encore là quand vous revenez. Si vous oubliez la conversation, l'échange part avec elle.",
+      faq6Q: "Et si le message parle de quelque chose de grave ?",
+      faq6A:
+        "Si votre conversation ou votre question évoque des violences, des menaces ou l'automutilation, le coach n'écrit pas de réponse : il affiche des ressources d'aide. Si vous ou quelqu'un d'autre êtes en danger, appelez tout de suite le numéro d'urgence local (112).",
+      ctaTitle: "Trouvez les mots, puis faites-les vôtres",
+      ctaButton: "Importer ma conversation",
+      ctaNote:
+        "Lue dans votre navigateur · Enregistrée uniquement sur cet appareil, si vous le voulez",
+      disclaimer:
+        "WhatsAnalyze est un projet indépendant, sans lien avec WhatsApp ni Meta. Les suggestions du coach servent à réfléchir et ne sont pas un conseil professionnel.",
+    },
     pageNameMessages: "Compteur de messages et de lignes WhatsApp",
     pageNameWords: "Compteur de mots et de vocabulaire WhatsApp",
     pageNameHeatmap: "Heures de pointe et carte thermique 24h WhatsApp",
@@ -10326,6 +10977,136 @@ export const messages = {
         "100% privato · Nessun caricamento su server · Nessuna registrazione",
       disclaimer:
         "WhatsAnalyze è un progetto open source indipendente e non è affiliato, approvato o sponsorizzato da WhatsApp o Meta.",
+    },
+    situationWhatToReply: {
+      navLabel: "Cosa rispondere?",
+      seoTitle:
+        "Cosa rispondere? Aiuto per la tua risposta su WhatsApp | WhatsAnalyze",
+      seoDescription:
+        "Non sai cosa rispondere a questo messaggio? Un'IA che ha letto la tua chat WhatsApp trasforma la tua bozza in una risposta più calma e chiara, con il tuo stile. Gratis sui dispositivi compatibili.",
+      ogTitle: "Cosa rispondere? Aiuto per la tua risposta su WhatsApp",
+      ogDescription:
+        "Carica la tua chat WhatsApp e fatti aiutare con la risposta: una versione più calma e chiara di quello che vuoi dire, da un'IA che ha letto la chat.",
+      heroEyebrow: "Aiuto per rispondere",
+      heroTitle: "Cosa rispondere?",
+      heroSubtitle:
+        "Il messaggio è lì e non sai come rispondere. Carica la chat: un'IA che l'ha letta ti aiuta a trovare le parole. Scrivi quello che vuoi dire e ricevi una versione più calma e chiara, con il tuo stile e una nota sul perché.",
+      heroNote:
+        "Gratis sul tuo dispositivo, se il browser lo supporta · Il coach nel cloud con Pro",
+      continueButton: "Fatti aiutare a rispondere con questa chat",
+      offerChat: "Aiuto per rispondere a {name}",
+      offerGroup: "Aiuto per rispondere in {name}",
+      exampleEyebrow: "Un esempio",
+      exampleTitle: "Ecco com'è l'aiuto",
+      exampleText:
+        "Tom si rifà vivo dopo una settimana di silenzio. La prima bozza di Mia dice come si sente, con una frecciatina. Il coach tiene il sentimento e toglie la frecciatina.",
+      exampleBadge: "Esempio · Mia e Tom sono inventati",
+      exampleIncoming:
+        "Scusa se questa settimana sono sparito, il lavoro mi ha travolto. Sabato vale ancora?",
+      exampleDraft: "Ah, allora sei vivo. Sì, come ti pare.",
+      exampleReply:
+        "Che bello sentirti! A dire il vero questa settimana mi sei mancato. Sabato va bene, al solito posto?",
+      exampleWhy:
+        "Perché: la tua bozza dice che ti sei sentita messa da parte, e vale la pena dirlo. Nella vostra chat Tom si apre quando dici come ti senti, mentre dopo il sarcasmo di solito arrivava un giorno di silenzio. Così il tuo messaggio resta e lui ha qualcosa a cui rispondere.",
+      showEyebrow: "Cosa può mostrare la tua chat",
+      showTitle: "Un aiuto che sa come vi scrivete",
+      showText:
+        "Il coach IA lavora sulla tua chat, non su un modello preconfezionato: estratti anonimizzati e la lettura dell'IA sotto cui si apre.",
+      show1Title: "Come scrivete",
+      show1Text:
+        "La lettura descrive il tono della chat e come scrive ciascuno, così un suggerimento può suonare come la vostra chat.",
+      show2Title: "La tua bozza, più calma e chiara",
+      show2Text:
+        "Scrivi quello che vuoi dire. Il coach mantiene il senso e te lo restituisce più calmo e chiaro, con il tuo stile.",
+      show3Title: "Una nota sul perché",
+      show3Text:
+        "Ogni suggerimento arriva con una breve nota su cosa è cambiato e perché, guardando a come va di solito la vostra chat.",
+      show4Title: "Domande sul messaggio",
+      show4Text:
+        "Non sai cosa vuol dire un messaggio? Chiedi. Il coach rimanda a momenti della tua chat ed è pensato per dirtelo quando la chat non dà la risposta.",
+      stepsEyebrow: "Come arrivarci",
+      stepsTitle: "Dalla chat alla risposta",
+      step1Title: "Carica la chat",
+      step1Text:
+        "Esporta la chat da WhatsApp senza media, dopo che è arrivato il messaggio a cui vuoi rispondere, e trascinala qui sopra. Viene letta nel tuo browser.",
+      step2Title: "Ottieni una lettura",
+      step2Text:
+        "Il coach si apre sotto una lettura della chat fatta dall'IA. Avviala gratis sul tuo dispositivo, se il browser lo supporta, o nel cloud con Pro.",
+      step3Title: "Chiedi o scrivi la bozza",
+      step3Text:
+        "Sotto la lettura, scegli «{reply}», scrivi quello che vorresti dire e ricevi una versione più calma e chiara. Oppure scegli «{ask}» per parlare prima del messaggio.",
+      plansTitle: "Cosa è gratis e cosa richiede Pro",
+      plan1Title: "Sul tuo dispositivo: gratis",
+      plan1Text:
+        "La lettura e il coach girano nel tuo browser dopo un download unico del modello, e nulla lascia il tuo dispositivo. Serve WebGPU: un computer recente, la maggior parte degli Android recenti con Chrome o un iPhone con iOS 26 o successivo. Il modello è piccolo, quindi le risposte sono più semplici.",
+      plan2Title: "Anteprima gratuita nel cloud",
+      plan2Text:
+        "Un assaggio della lettura di un'IA più potente, ricavata da estratti anonimizzati. Il coach non fa parte dell'anteprima.",
+      plan3Title: "Pro: {price} al mese",
+      plan3Text:
+        "La lettura completa e il coach nel cloud, su qualsiasi telefono. Ogni messaggio al coach conta come una delle analisi cloud del giorno.",
+      ownWordsEyebrow: "Le tue parole",
+      ownWordsTitle: "Mandala con parole tue",
+      ownWordsText:
+        "Un suggerimento è un punto di partenza, non un copione. Le persone si accorgono quando un messaggio non sembra di chi lo manda, e una risposta che sembra scritta da una macchina può arrivare in modo diverso. Tieni quello che aiuta, cambia quello che non ti somiglia e mandala come la diresti tu.",
+      limitsEyebrow: "Limiti onesti",
+      limitsTitle: "Cosa non può fare",
+      limit1Title: "Tendenze, non verdetti",
+      limit1Text:
+        "Il coach può dire come va di solito la vostra chat. Non può sapere cosa prova l'altra persona né cosa farà dopo.",
+      limit2Title: "Solo ciò che è scritto",
+      limit2Text:
+        "L'IA legge estratti da tutta la chat, sempre con i messaggi più recenti. Non legge messaggi vocali, foto né sticker, e il modello sul dispositivo legge meno di quello nel cloud.",
+      limit3Title: "Una chat corta dice poco",
+      limit3Text:
+        "Con pochi messaggi c'è poco su cui basarsi, e i suggerimenti si avvicinano a consigli generici.",
+      limit4Title: "L'IA sbaglia",
+      limit4Text:
+        "Può non cogliere l'ironia, le battute tra voi o tutto ciò che è successo fuori dalla chat. La tua situazione la conosci meglio tu.",
+      privacyEyebrow: "Privato fin dall'inizio",
+      privacyTitle: "La tua chat resta tua",
+      privacyText:
+        "Una chat esportata contiene anche i messaggi dell'altra persona, quindi viene trattata con cura.",
+      privacy1Title: "Salvata solo su questo dispositivo",
+      privacy1Text:
+        "La tua chat viene salvata in questo browser per poterci tornare, mai sui nostri server. Non vuoi? Scegli «{dontKeep}» sotto il riquadro di caricamento.",
+      privacy2Title: "L'IA sul dispositivo resta sul dispositivo",
+      privacy2Text:
+        "Con l'IA gratuita sul tuo dispositivo, la chat, la sua lettura e quello che scrivi al coach non lasciano mai il tuo dispositivo.",
+      privacy3Title: "Anonimizzata per il cloud",
+      privacy3Text:
+        "L'IA nel cloud riceve solo estratti anonimizzati e quello che scrivi al coach: i nomi della chat vengono sostituiti, numeri di telefono, e-mail, link e IBAN rimossi. Il fornitore di IA non li usa per l'addestramento.",
+      supportEyebrow: "Quando è una cosa seria",
+      supportTitle: "Alcuni messaggi richiedono più di una buona risposta",
+      supportText:
+        "Se la tua chat o la tua domanda fanno pensare a violenza, minacce o autolesionismo, il coach non scrive una risposta: mostra risorse di supporto. Non riconosce tutto, quindi se non ti senti al sicuro, chiedi aiuto adesso.",
+      supportDevice:
+        "Su un dispositivo condiviso, scegli «{dontKeep}» sotto il riquadro di caricamento perché la chat non resti in questo browser. Una chat salvata si può dimenticare in qualsiasi momento da «{saved}».",
+      faqTitle: "Domande sull'aiuto per rispondere",
+      faq1Q: "Un'IA può dirmi cosa rispondere?",
+      faq1A:
+        "Può aiutarti ad arrivarci. Scrivi una versione grezza di quello che vuoi dire e il coach te la restituisce più calma e chiara, con il tuo stile e il tono abituale della chat, insieme a una breve nota su cosa è cambiato. Oppure chiedigli prima del messaggio. La risposta resta tua: cambia quello che non ti somiglia prima di mandarla.",
+      faq2Q: "È gratis?",
+      faq2A:
+        "Sul tuo dispositivo sì: la lettura e il coach girano gratis nel browser, se supporta WebGPU. L'anteprima gratuita nel cloud mostra una parte della lettura, ma non include il coach. Con Pro ({price} al mese), la lettura completa e il coach girano nel cloud, su qualsiasi telefono.",
+      faq3Q: "L'IA vede il messaggio che ho appena ricevuto?",
+      faq3A:
+        "Solo se è nella tua esportazione, quindi esporta la chat dopo che il messaggio è arrivato. L'IA legge estratti da tutta la chat e include sempre i messaggi più recenti. Se hai salvato la chat prima che arrivasse il messaggio, esportala di nuovo. Puoi anche incollare il messaggio nella tua domanda.",
+      faq4Q: "La mia chat viene caricata da qualche parte?",
+      faq4A:
+        "La chat viene letta nel tuo browser e salvata solo su questo dispositivo, e puoi annullarlo. Con l'IA sul dispositivo, nulla lo lascia. Con l'IA nel cloud vengono inviati solo estratti anonimizzati e quello che scrivi al coach: i nomi della chat vengono sostituiti, numeri di telefono, e-mail, link e IBAN rimossi. Il fornitore di IA non li usa per l'addestramento.",
+      faq5Q: "Il coach si ricorda la nostra conversazione?",
+      faq5A:
+        "Se la chat è salvata su questo dispositivo, la conversazione resta insieme alla lettura a cui seguiva, quindi la ritrovi quando torni. Se dimentichi la chat, se ne va anche la conversazione.",
+      faq6Q: "E se il messaggio riguarda qualcosa di serio?",
+      faq6A:
+        "Se la tua chat o la tua domanda fanno pensare a violenza, minacce o autolesionismo, il coach non scrive una risposta: mostra risorse di supporto. Se tu o qualcun altro siete in pericolo, chiama subito il numero di emergenza (112).",
+      ctaTitle: "Trova le parole, poi falle tue",
+      ctaButton: "Carica la chat",
+      ctaNote:
+        "Letta nel tuo browser · Salvata solo su questo dispositivo, se vuoi",
+      disclaimer:
+        "WhatsAnalyze è un progetto indipendente, non affiliato a WhatsApp o Meta. I suggerimenti del coach servono a riflettere e non sono una consulenza professionale.",
     },
     pageNameMessages: "Contatore di messaggi e righe WhatsApp",
     pageNameWords: "Contatore di parole e vocabolario WhatsApp",

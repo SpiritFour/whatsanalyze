@@ -30,6 +30,7 @@ export const localizedPages = [
   "tools/losing-interest",
   "tools/word-counter",
   "tools/chat-heatmap",
+  "tools/what-to-reply",
   "what-brandon-thinks-alternative",
   "whatsapp-to-pdf",
   "wrapped",
