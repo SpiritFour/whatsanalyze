@@ -27,6 +27,7 @@ export const localizedPages = [
   "tools/always-texting-first",
   "tools/proof-of-relationship",
   "tools/message-counter",
+  "tools/losing-interest",
   "tools/word-counter",
   "tools/chat-heatmap",
   "what-brandon-thinks-alternative",

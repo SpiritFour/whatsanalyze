@@ -1527,6 +1527,133 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze is an independent open-source project and is not affiliated with, endorsed by, or sponsored by WhatsApp or Meta.",
     },
+    situationLosingInterest: {
+      navLabel: "Are they losing interest?",
+      appName: "WhatsApp reply time and silence check",
+      seoTitle: "Losing Interest or Just Busy? Check Your WhatsApp Reply Times",
+      seoDescription:
+        "Replies getting slower? Texting less than before? See each person's average WhatsApp reply time, the longest silences and who writes first. Free and private, on your device.",
+      heroEyebrow: "Replies getting slower?",
+      heroTitle: "Are they losing interest?",
+      heroSubtitle:
+        "Slower replies, fewer messages, longer silences: it's easy to fear the worst. Your chat's own timestamps show what actually changed, and when, so you can look at it calmly before drawing conclusions.",
+      heroNote: "Free · No account · The numbers are worked out on your device",
+      offerLabel: "Ask the AI about your chat with {name}",
+      resultEyebrow: "Your chat",
+      resultTitle: "What your chat shows",
+      resultText:
+        "Counted on your device from when each message was sent. Patterns, not a verdict.",
+      resultNowLabel: "Where things stand",
+      resultNow: "The last message was {time}, from {name}.",
+      resultNowNote:
+        "Counted up to today. If you exported the chat a while ago, it will look quieter than it is.",
+      status_active: "There have been messages in the last two days.",
+      status_dormant:
+        "It's been quiet for a few days, which is common in a busy week.",
+      status_inactive: "It's been quiet for more than a week.",
+      status_ghosted: "It's been quiet for more than a month.",
+      resultPeopleTitle: "Person by person",
+      resultReply: "Average reply",
+      resultReplyNone: "Too few replies",
+      resultStarted: "Wrote first",
+      resultMessages: "Messages",
+      resultMorePeople: "And {count} more people in this group.",
+      resultPeopleNote:
+        "Average reply: how long someone takes to answer the other, counting only replies within a day. Wrote first: how often someone picked the chat back up after six hours or more of quiet.",
+      resultGapsTitle: "The longest quiet stretches",
+      resultGapEnded: "{name} wrote first afterwards",
+      resultSpan: "{count} messages over {days} days",
+      resultAiButton: "Ask the AI about this chat",
+      resultAiNote:
+        "It answers “Is there anything I should be worried about?” and asks which one is you first. You won't need to add the chat again.",
+      resultTimelineLink: "See your messages over time",
+      showEyebrow: "What your chat can show",
+      showTitle: "The facts behind the feeling",
+      showText:
+        "Everything here is counted from your export. Nothing is guessed.",
+      show1Title: "Reply times, for each of you",
+      show1Text:
+        "How long each of you takes on average to answer the other. Only replies within a day count, so one long silence doesn't skew it.",
+      show2Title: "The longest quiet stretches",
+      show2Text:
+        "The three longest silences in the chat, when they happened, and who wrote first afterwards.",
+      show3Title: "Who writes first",
+      show3Text:
+        "After six hours or more without a message, who picks the conversation back up, as a share for each of you.",
+      show4Title: "Where things stand today",
+      show4Text: "When the last message was sent, and by whom.",
+      show5Title: "Messages over time",
+      show5Text:
+        "The full analyzer draws your messages day by day, from the first to the last, so you can see whether things changed, and when.",
+      show5Link: "Open the analyzer",
+      exampleEyebrow: "An example",
+      exampleTitle: "How Sam and Alex's chat reads",
+      exampleText:
+        "Made-up numbers for two fictional people, shown the way your own chat will be.",
+      exampleBadge: "Example · Sam and Alex are fictional",
+      exampleReadingTitle: "Reading it calmly",
+      exampleNote1:
+        "Alex takes longer to reply on average, and still starts almost half of their conversations. Slower and less interested aren't the same thing.",
+      exampleNote2:
+        "The longest silence was four days in August. A trip? A busy week? The numbers can't say, and they don't pretend to.",
+      exampleNote3:
+        "Nothing here says how either of them feels. If Sam is wondering, talking to Alex will tell them more than any chart.",
+      limitsEyebrow: "Before you read too much into it",
+      limitsTitle: "Slower replies usually have ordinary reasons",
+      limitsText:
+        "A busy month at work, exams, a holiday, a stressful week, a new habit like muting notifications: all of them show up in a chat as slower replies and longer pauses.",
+      limit1Title: "Patterns, not verdicts",
+      limit1Text:
+        "The numbers show when and how often there were messages, never why. They can't tell you what anyone feels or intends.",
+      limit2Title: "A short chat says little",
+      limit2Text:
+        "With only a few weeks of messages, one busy week moves every average. The longer the chat, the more the numbers mean.",
+      limit3Title: "A chat isn't the whole picture",
+      limit3Text:
+        "Calls, time spent together and other apps don't appear in an export. Texting less can simply mean talking more somewhere else.",
+      limit4Title: "Talking beats counting",
+      limit4Text:
+        "If something feels different, a kind “Is everything OK? I've missed talking to you” usually tells you more than any statistic, and it lands better without the numbers as evidence.",
+      supportTitle: "If this is weighing on you, or you don't feel safe",
+      aiEyebrow: "A second read",
+      aiTitle: "Ask the AI what it sees",
+      aiText:
+        "Timestamps only go so far. The AI reads the messages themselves and answers one question: “Is there anything I should be worried about?” It asks which one is you first, and remembers it for next time.",
+      aiCard1Title: "Free, on your device",
+      aiCard1Text:
+        "The on-device AI runs in your browser. Your chat doesn't leave your device.",
+      aiCard2Title: "Or a free cloud preview",
+      aiCard2Text:
+        "Only anonymized excerpts are sent: names are replaced, and phone numbers, emails, links and bank account numbers (IBANs) are removed. The AI provider doesn't train on them.",
+      aiCard3Title: "There when you come back",
+      aiCard3Text:
+        "Your chat is saved on this device, so you can open it again later without a new upload. Choose “Don't keep” if you'd rather it wasn't.",
+      aiButton: "Ask the AI",
+      faqTitle: "Questions people ask",
+      faq1Q: "Do slower replies mean someone is losing interest?",
+      faq1A:
+        "Not on their own. Replies slow down for all kinds of reasons: work, exams, travel, health, stress, or simply a new phone habit. The numbers show what changed and when. Only the other person can tell you why.",
+      faq2Q: "How is the average reply time worked out?",
+      faq2A:
+        "Each time one of you answers the other within 24 hours, the time between the two messages counts as a reply, and the average of those is shown for each person. Pauses longer than a day count as quiet stretches instead.",
+      faq3Q: "Can I see whether replies got slower recently?",
+      faq3A:
+        "This page shows averages for the whole chat, plus when the longest silences were. To see how the number of messages changed over time, open the full analyzer: its timeline shows your messages day by day, from the first to the last.",
+      faq4Q: "Is my chat uploaded anywhere?",
+      faq4A:
+        "No. The numbers on this page are worked out in your browser, on your device. The chat is saved on this device so you can open it again later, and you can choose not to keep it, or forget it, at any time. Only if you choose the cloud AI, its free preview included, are anonymized excerpts sent: names replaced, and phone numbers, emails, links and bank account numbers (IBANs) removed. The AI provider doesn't train on them.",
+      faq5Q: "Should I show them these numbers?",
+      faq5A:
+        "We'd suggest starting with how you feel instead. Statistics can sound like an accusation, while a simple “I've missed talking to you, is everything OK?” invites an honest answer.",
+      faq6Q: "Which chats work?",
+      faq6A:
+        "Any WhatsApp chat you export, from iPhone or Android, one-on-one or group, in any language. Export it without media and drop the .zip or .txt file into the box at the top of this page.",
+      ctaTitle: "See what actually changed",
+      ctaButton: "Check your chat",
+      ctaNote: "Free · No account · Worked out on your device",
+      disclaimer:
+        "WhatsAnalyze is an independent project and isn't affiliated with WhatsApp or Meta. The numbers describe patterns in a chat. They can't tell you what anyone feels or intends, and they're no substitute for talking to each other.",
+    },
     toolsChatHeatmap: {
       seoTitle: "WhatsApp Peak Chat Hours & 24h Heatmap | WhatsAnalyze",
       seoDescription:
@@ -3122,6 +3249,138 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze ist ein unabhängiges Open-Source-Projekt und steht in keiner Verbindung zu WhatsApp oder Meta.",
     },
+    situationLosingInterest: {
+      navLabel: "Lässt das Interesse nach?",
+      appName: "WhatsApp-Antwortzeiten und Funkstille prüfen",
+      seoTitle:
+        "Verliert er oder sie das Interesse? WhatsApp-Antwortzeiten ansehen",
+      seoDescription:
+        "Antwortet die andere Person immer später oder schreibt weniger als früher? Sieh dir an, wie schnell jede Person im Schnitt antwortet, die längsten Funkstillen und wer zuerst schreibt. Kostenlos und privat auf deinem Gerät.",
+      heroEyebrow: "Antworten kommen immer später?",
+      heroTitle: "Lässt das Interesse nach?",
+      heroSubtitle:
+        "Längere Antwortzeiten, weniger Nachrichten, längere Funkstille: Da denkt man schnell das Schlimmste. Die Zeitstempel deines Chats zeigen, was sich wirklich verändert hat und wann, damit du es dir in Ruhe ansehen kannst, bevor du Schlüsse ziehst.",
+      heroNote:
+        "Kostenlos · Kein Konto · Die Zahlen werden auf deinem Gerät berechnet",
+      offerLabel: "Frag die KI zu deinem Chat mit {name}",
+      resultEyebrow: "Dein Chat",
+      resultTitle: "Was dein Chat zeigt",
+      resultText:
+        "Auf deinem Gerät aus den Sendezeiten der Nachrichten berechnet. Muster, kein Urteil.",
+      resultNowLabel: "Stand heute",
+      resultNow: "Die letzte Nachricht kam {time} von {name}.",
+      resultNowNote:
+        "Bis heute gerechnet. Wenn du den Chat schon vor einer Weile exportiert hast, wirkt er ruhiger, als er ist.",
+      status_active: "In den letzten zwei Tagen gab es Nachrichten.",
+      status_dormant:
+        "Seit ein paar Tagen ist es ruhig, in einer vollen Woche ganz normal.",
+      status_inactive: "Seit über einer Woche ist es ruhig.",
+      status_ghosted: "Seit über einem Monat ist es ruhig.",
+      resultPeopleTitle: "Person für Person",
+      resultReply: "Antwortzeit im Schnitt",
+      resultReplyNone: "Zu wenige Antworten",
+      resultStarted: "Hat zuerst geschrieben",
+      resultMessages: "Nachrichten",
+      resultMorePeople: "Und {count} weitere Personen in dieser Gruppe.",
+      resultPeopleNote:
+        "Antwortzeit im Schnitt: wie lange jemand braucht, um der anderen Person zu antworten. Gezählt werden nur Antworten innerhalb eines Tages. Hat zuerst geschrieben: wie oft jemand den Chat nach sechs Stunden oder mehr Ruhe wieder aufgenommen hat.",
+      resultGapsTitle: "Die längsten Funkstillen",
+      resultGapEnded: "Danach hat {name} zuerst geschrieben",
+      resultSpan: "{count} Nachrichten über {days} Tage",
+      resultAiButton: "Frag die KI zu diesem Chat",
+      resultAiNote:
+        "Sie beantwortet „Gibt es etwas, worüber ich mir Sorgen machen sollte?“ und fragt vorher, wer von euch du bist. Du musst den Chat nicht noch einmal hinzufügen.",
+      resultTimelineLink: "Deine Nachrichten im Zeitverlauf ansehen",
+      showEyebrow: "Was dein Chat zeigen kann",
+      showTitle: "Die Fakten hinter dem Gefühl",
+      showText:
+        "Alles hier wird aus deinem Export gezählt. Nichts wird geraten.",
+      show1Title: "Antwortzeiten, für jede Person",
+      show1Text:
+        "Wie lange jede Person im Schnitt braucht, um der anderen zu antworten. Es zählen nur Antworten innerhalb eines Tages, damit eine einzelne lange Pause das Bild nicht verzerrt.",
+      show2Title: "Die längsten Funkstillen",
+      show2Text:
+        "Die drei längsten Pausen im Chat, wann sie waren und wer danach zuerst geschrieben hat.",
+      show3Title: "Wer zuerst schreibt",
+      show3Text:
+        "Wer das Gespräch nach sechs Stunden oder mehr ohne Nachricht wieder aufnimmt, als Anteil für jede Person.",
+      show4Title: "Wo ihr gerade steht",
+      show4Text: "Wann die letzte Nachricht kam und von wem.",
+      show5Title: "Nachrichten im Zeitverlauf",
+      show5Text:
+        "Die vollständige Analyse zeigt deine Nachrichten Tag für Tag, von der ersten bis zur letzten. So siehst du, ob sich etwas verändert hat und wann.",
+      show5Link: "Zur Analyse",
+      exampleEyebrow: "Ein Beispiel",
+      exampleTitle: "So liest sich der Chat von Sam und Alex",
+      exampleText:
+        "Ausgedachte Zahlen für zwei erfundene Personen, so dargestellt wie später dein eigener Chat.",
+      exampleBadge: "Beispiel · Sam und Alex sind erfunden",
+      exampleReadingTitle: "In Ruhe gelesen",
+      exampleNote1:
+        "Alex antwortet im Schnitt langsamer und beginnt trotzdem fast die Hälfte der Gespräche. Langsamer heißt nicht weniger interessiert.",
+      exampleNote2:
+        "Die längste Funkstille dauerte im August vier Tage. Ein Urlaub? Eine stressige Woche? Die Zahlen können es nicht sagen, und sie tun auch nicht so.",
+      exampleNote3:
+        "Nichts davon sagt, wie sich die beiden fühlen. Wenn Sam sich Gedanken macht, bringt ein Gespräch mit Alex mehr als jedes Diagramm.",
+      limitsEyebrow: "Bevor du zu viel hineinliest",
+      limitsTitle: "Langsamere Antworten haben meist ganz normale Gründe",
+      limitsText:
+        "Ein voller Monat im Job, Prüfungen, Urlaub, eine stressige Woche, eine neue Gewohnheit wie stummgeschaltete Benachrichtigungen: All das zeigt sich im Chat als langsamere Antworten und längere Pausen.",
+      limit1Title: "Muster, keine Urteile",
+      limit1Text:
+        "Die Zahlen zeigen, wann und wie oft es Nachrichten gab, aber nie, warum. Was jemand fühlt oder vorhat, können sie nicht sagen.",
+      limit2Title: "Ein kurzer Chat sagt wenig",
+      limit2Text:
+        "Bei nur ein paar Wochen Nachrichten verschiebt eine volle Woche jeden Durchschnitt. Je länger der Chat, desto mehr bedeuten die Zahlen.",
+      limit3Title: "Ein Chat ist nicht das ganze Bild",
+      limit3Text:
+        "Anrufe, gemeinsame Zeit und andere Apps tauchen in einem Export nicht auf. Weniger schreiben kann auch heißen, woanders mehr zu reden.",
+      limit4Title: "Reden hilft mehr als Zählen",
+      limit4Text:
+        "Wenn sich etwas anders anfühlt, sagt ein freundliches „Ist alles okay? Ich vermisse unsere Gespräche“ meist mehr als jede Statistik, und es kommt ohne Zahlen als Beweis besser an.",
+      supportTitle:
+        "Wenn dich das sehr belastet oder du dich nicht sicher fühlst",
+      aiEyebrow: "Ein zweiter Blick",
+      aiTitle: "Frag die KI, was sie sieht",
+      aiText:
+        "Zeitstempel verraten nur so viel. Die KI liest die Nachrichten selbst und beantwortet eine Frage: „Gibt es etwas, worüber ich mir Sorgen machen sollte?“ Vorher fragt sie, wer von euch du bist, und merkt es sich fürs nächste Mal.",
+      aiCard1Title: "Kostenlos, auf deinem Gerät",
+      aiCard1Text:
+        "Die KI auf dem Gerät läuft in deinem Browser. Dein Chat verlässt dein Gerät nicht.",
+      aiCard2Title: "Oder eine kostenlose Cloud-Vorschau",
+      aiCard2Text:
+        "Gesendet werden nur anonymisierte Auszüge: Namen werden ersetzt, Telefonnummern, E-Mail-Adressen, Links und Kontonummern (IBAN) entfernt. Der KI-Anbieter trainiert nicht damit.",
+      aiCard3Title: "Da, wenn du wiederkommst",
+      aiCard3Text:
+        "Dein Chat wird auf diesem Gerät gespeichert, damit du ihn später ohne neuen Upload wieder öffnen kannst. Wähle „Nicht behalten“, wenn du das nicht möchtest.",
+      aiButton: "KI fragen",
+      faqTitle: "Häufige Fragen",
+      faq1Q:
+        "Heißt eine langsamere Antwort, dass jemand das Interesse verliert?",
+      faq1A:
+        "Für sich allein nicht. Antworten werden aus allen möglichen Gründen langsamer: Arbeit, Prüfungen, Reisen, Gesundheit, Stress oder einfach eine neue Handy-Gewohnheit. Die Zahlen zeigen, was sich verändert hat und wann. Warum, kann dir nur die andere Person sagen.",
+      faq2Q: "Wie wird die durchschnittliche Antwortzeit berechnet?",
+      faq2A:
+        "Jedes Mal, wenn eine Person der anderen innerhalb von 24 Stunden antwortet, zählt die Zeit zwischen den beiden Nachrichten als Antwort. Der Durchschnitt davon wird für jede Person angezeigt. Pausen von mehr als einem Tag zählen stattdessen als Funkstille.",
+      faq3Q:
+        "Sehe ich, ob die Antworten in letzter Zeit langsamer geworden sind?",
+      faq3A:
+        "Diese Seite zeigt Durchschnitte für den ganzen Chat und wann die längsten Funkstillen waren. Wie sich die Zahl der Nachrichten über die Zeit verändert hat, zeigt die vollständige Analyse: Ihr Zeitstrahl zeigt deine Nachrichten Tag für Tag, von der ersten bis zur letzten.",
+      faq4Q: "Wird mein Chat irgendwo hochgeladen?",
+      faq4A:
+        "Nein. Die Zahlen auf dieser Seite werden in deinem Browser berechnet, auf deinem Gerät. Der Chat wird auf diesem Gerät gespeichert, damit du ihn später wieder öffnen kannst. Du kannst jederzeit festlegen, dass er nicht behalten wird, oder ihn vergessen. Nur wenn du die Cloud-KI wählst, auch ihre kostenlose Vorschau, werden anonymisierte Auszüge gesendet: Namen ersetzt, Telefonnummern, E-Mail-Adressen, Links und Kontonummern (IBAN) entfernt. Der KI-Anbieter trainiert nicht damit.",
+      faq5Q: "Soll ich der Person die Zahlen zeigen?",
+      faq5A:
+        "Wir würden eher damit anfangen, wie es dir geht. Statistiken klingen schnell nach Vorwurf, ein einfaches „Ich vermisse unsere Gespräche, ist alles okay?“ lädt dagegen zu einer ehrlichen Antwort ein.",
+      faq6Q: "Welche Chats funktionieren?",
+      faq6A:
+        "Jeder WhatsApp-Chat, den du exportierst, von iPhone oder Android, Einzel- oder Gruppenchat, in jeder Sprache. Exportiere ihn ohne Medien und zieh die .zip- oder .txt-Datei in das Feld oben auf dieser Seite.",
+      ctaTitle: "Sieh dir an, was sich wirklich verändert hat",
+      ctaButton: "Chat prüfen",
+      ctaNote: "Kostenlos · Kein Konto · Auf deinem Gerät berechnet",
+      disclaimer:
+        "WhatsAnalyze ist ein unabhängiges Projekt und steht in keiner Verbindung zu WhatsApp oder Meta. Die Zahlen beschreiben Muster in einem Chat. Was jemand fühlt oder vorhat, können sie nicht sagen, und sie ersetzen kein Gespräch miteinander.",
+    },
     toolsChatHeatmap: {
       seoTitle: "WhatsApp Aktivitätszeiten & 24h-Heatmap | WhatsAnalyze",
       seoDescription:
@@ -4707,6 +4966,136 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze es un proyecto de código abierto independiente y no está afiliado, respaldado ni patrocinado por WhatsApp o Meta.",
     },
+    situationLosingInterest: {
+      navLabel: "¿Está perdiendo el interés?",
+      appName: "Tiempos de respuesta y silencios en WhatsApp",
+      seoTitle:
+        "¿Está perdiendo el interés? Mira los tiempos de respuesta en WhatsApp",
+      seoDescription:
+        "¿Tarda cada vez más en contestar o te escribe menos que antes? Mira el tiempo medio de respuesta de cada persona, los silencios más largos y quién escribe primero. Gratis y privado, en tu dispositivo.",
+      heroEyebrow: "¿Tarda cada vez más en contestar?",
+      heroTitle: "¿Está perdiendo el interés?",
+      heroSubtitle:
+        "Respuestas más lentas, menos mensajes, silencios más largos: es fácil pensar lo peor. Las horas de los mensajes de tu chat muestran qué ha cambiado de verdad y cuándo, para que puedas mirarlo con calma antes de sacar conclusiones.",
+      heroNote:
+        "Gratis · Sin cuenta · Los números se calculan en tu dispositivo",
+      offerLabel: "Pregúntale a la IA por tu chat con {name}",
+      resultEyebrow: "Tu chat",
+      resultTitle: "Lo que muestra tu chat",
+      resultText:
+        "Calculado en tu dispositivo a partir de la hora de cada mensaje. Patrones, no un veredicto.",
+      resultNowLabel: "Cómo están las cosas",
+      resultNow: "El último mensaje fue {time}, de {name}.",
+      resultNowNote:
+        "Contado hasta hoy. Si exportaste el chat hace tiempo, parecerá más tranquilo de lo que es.",
+      status_active: "Ha habido mensajes en los últimos dos días.",
+      status_dormant:
+        "Lleva unos días en calma, algo habitual en una semana ajetreada.",
+      status_inactive: "Lleva más de una semana en calma.",
+      status_ghosted: "Lleva más de un mes en calma.",
+      resultPeopleTitle: "Persona a persona",
+      resultReply: "Respuesta media",
+      resultReplyNone: "Muy pocas respuestas",
+      resultStarted: "Escribió primero",
+      resultMessages: "Mensajes",
+      resultMorePeople: "Y {count} personas más en este grupo.",
+      resultPeopleNote:
+        "Respuesta media: cuánto tarda alguien en contestar a la otra persona, contando solo las respuestas en menos de un día. Escribió primero: con qué frecuencia alguien retomó el chat tras seis horas o más de silencio.",
+      resultGapsTitle: "Los silencios más largos",
+      resultGapEnded: "Después, {name} escribió primero",
+      resultSpan: "{count} mensajes en {days} días",
+      resultAiButton: "Pregúntale a la IA por este chat",
+      resultAiNote:
+        "Responde a «¿Hay algo que deba preocuparme?» y antes te pregunta quién eres tú. No hace falta volver a añadir el chat.",
+      resultTimelineLink: "Ver tus mensajes a lo largo del tiempo",
+      showEyebrow: "Lo que tu chat puede mostrar",
+      showTitle: "Los hechos detrás de la sensación",
+      showText: "Todo se cuenta a partir de tu exportación. Nada se adivina.",
+      show1Title: "Tiempos de respuesta, de cada persona",
+      show1Text:
+        "Cuánto tarda de media cada persona en contestar a la otra. Solo cuentan las respuestas en menos de un día, para que un silencio largo no lo distorsione.",
+      show2Title: "Los silencios más largos",
+      show2Text:
+        "Los tres silencios más largos del chat, cuándo fueron y quién escribió primero después.",
+      show3Title: "Quién escribe primero",
+      show3Text:
+        "Tras seis horas o más sin mensajes, quién retoma la conversación, como porcentaje para cada persona.",
+      show4Title: "Cómo están las cosas hoy",
+      show4Text: "Cuándo se envió el último mensaje y quién lo envió.",
+      show5Title: "Mensajes a lo largo del tiempo",
+      show5Text:
+        "El análisis completo dibuja tus mensajes día a día, del primero al último, para que veas si algo cambió y cuándo.",
+      show5Link: "Abrir el análisis",
+      exampleEyebrow: "Un ejemplo",
+      exampleTitle: "Así se lee el chat de Sam y Alex",
+      exampleText:
+        "Números inventados de dos personas ficticias, presentados igual que se verá tu propio chat.",
+      exampleBadge: "Ejemplo · Sam y Alex son ficticios",
+      exampleReadingTitle: "Leerlo con calma",
+      exampleNote1:
+        "Alex tarda más de media en contestar y aun así empieza casi la mitad de las conversaciones. Tardar más no significa tener menos interés.",
+      exampleNote2:
+        "El silencio más largo duró cuatro días en agosto. ¿Un viaje? ¿Una semana complicada? Los números no lo saben, y no fingen saberlo.",
+      exampleNote3:
+        "Nada de esto dice cómo se siente cada uno. Si Sam tiene dudas, hablar con Alex le dirá más que cualquier gráfico.",
+      limitsEyebrow: "Antes de sacar conclusiones",
+      limitsTitle: "Las respuestas lentas suelen tener motivos normales",
+      limitsText:
+        "Un mes de mucho trabajo, exámenes, unas vacaciones, una semana de estrés, una costumbre nueva como silenciar las notificaciones: todo eso aparece en un chat como respuestas más lentas y pausas más largas.",
+      limit1Title: "Patrones, no veredictos",
+      limit1Text:
+        "Los números muestran cuándo y con qué frecuencia hubo mensajes, nunca por qué. No pueden decirte qué siente o qué pretende nadie.",
+      limit2Title: "Un chat corto dice poco",
+      limit2Text:
+        "Con solo unas semanas de mensajes, una semana ajetreada mueve todas las medias. Cuanto más largo es el chat, más significan los números.",
+      limit3Title: "Un chat no lo es todo",
+      limit3Text:
+        "Las llamadas, el tiempo juntos y otras apps no aparecen en una exportación. Escribir menos puede significar simplemente hablar más por otro lado.",
+      limit4Title: "Hablar ayuda más que contar",
+      limit4Text:
+        "Si algo se siente distinto, un amable «¿Va todo bien? Echo de menos hablar contigo» suele decirte más que cualquier estadística, y se recibe mejor sin los números como prueba.",
+      supportTitle: "Si esto te pesa mucho o no te sientes a salvo",
+      aiEyebrow: "Una segunda lectura",
+      aiTitle: "Pregúntale a la IA qué ve",
+      aiText:
+        "Las horas de los mensajes solo dicen hasta cierto punto. La IA lee los propios mensajes y responde a una pregunta: «¿Hay algo que deba preocuparme?». Antes te pregunta quién eres tú y lo recuerda para la próxima vez.",
+      aiCard1Title: "Gratis, en tu dispositivo",
+      aiCard1Text:
+        "La IA en el dispositivo funciona en tu navegador. Tu chat no sale de tu dispositivo.",
+      aiCard2Title: "O una vista previa gratuita en la nube",
+      aiCard2Text:
+        "Solo se envían fragmentos anonimizados: los nombres se sustituyen y se eliminan teléfonos, correos, enlaces y números de cuenta (IBAN). El proveedor de IA no entrena con ellos.",
+      aiCard3Title: "Ahí cuando vuelvas",
+      aiCard3Text:
+        "Tu chat se guarda en este dispositivo para que puedas abrirlo de nuevo más tarde sin volver a subirlo. Elige «No guardar» si prefieres que no.",
+      aiButton: "Preguntar a la IA",
+      faqTitle: "Preguntas frecuentes",
+      faq1Q:
+        "Si tarda más en contestar, ¿significa que está perdiendo el interés?",
+      faq1A:
+        "Por sí solo, no. Las respuestas se vuelven más lentas por muchos motivos: trabajo, exámenes, viajes, salud, estrés o simplemente un nuevo hábito con el teléfono. Los números muestran qué cambió y cuándo. El porqué solo te lo puede decir la otra persona.",
+      faq2Q: "¿Cómo se calcula el tiempo medio de respuesta?",
+      faq2A:
+        "Cada vez que una persona contesta a la otra en menos de 24 horas, el tiempo entre ambos mensajes cuenta como una respuesta, y se muestra la media para cada persona. Las pausas de más de un día cuentan como silencios.",
+      faq3Q:
+        "¿Puedo ver si las respuestas se han vuelto más lentas últimamente?",
+      faq3A:
+        "Esta página muestra las medias de todo el chat y cuándo fueron los silencios más largos. Para ver cómo cambió el número de mensajes con el tiempo, abre el análisis completo: su cronología muestra tus mensajes día a día, del primero al último.",
+      faq4Q: "¿Se sube mi chat a algún sitio?",
+      faq4A:
+        "No. Los números de esta página se calculan en tu navegador, en tu dispositivo. El chat se guarda en este dispositivo para que puedas volver a abrirlo, y puedes decidir no guardarlo u olvidarlo cuando quieras. Solo si eliges la IA en la nube, incluida su vista previa gratuita, se envían fragmentos anonimizados: nombres sustituidos y teléfonos, correos, enlaces y números de cuenta (IBAN) eliminados. El proveedor de IA no entrena con ellos.",
+      faq5Q: "¿Debería enseñarle estos números?",
+      faq5A:
+        "Te sugerimos empezar por cómo te sientes. Las estadísticas pueden sonar a reproche, mientras que un sencillo «Echo de menos hablar contigo, ¿va todo bien?» invita a una respuesta sincera.",
+      faq6Q: "¿Con qué chats funciona?",
+      faq6A:
+        "Con cualquier chat de WhatsApp que exportes, desde iPhone o Android, individual o de grupo, en cualquier idioma. Expórtalo sin archivos multimedia y suelta el archivo .zip o .txt en el recuadro de arriba.",
+      ctaTitle: "Mira qué ha cambiado de verdad",
+      ctaButton: "Revisar tu chat",
+      ctaNote: "Gratis · Sin cuenta · Calculado en tu dispositivo",
+      disclaimer:
+        "WhatsAnalyze es un proyecto independiente y no está afiliado a WhatsApp ni a Meta. Los números describen patrones en un chat. No pueden decirte qué siente o qué pretende nadie, y no sustituyen una buena conversación.",
+    },
     toolsChatHeatmap: {
       seoTitle: "Horas pico y mapa de calor 24h de WhatsApp | WhatsAnalyze",
       seoDescription:
@@ -6291,6 +6680,137 @@ export const messages = {
       ctaNote: "100% privado · Zero upload para servidor · Sem cadastro",
       disclaimer:
         "O WhatsAnalyze é um projeto de código aberto independente e não tem vínculo com o WhatsApp ou a Meta.",
+    },
+    situationLosingInterest: {
+      navLabel: "Está perdendo o interesse?",
+      appName: "Tempos de resposta e silêncios no WhatsApp",
+      seoTitle:
+        "Está perdendo o interesse? Veja o tempo de resposta no WhatsApp",
+      seoDescription:
+        "Está demorando cada vez mais para responder ou mandando menos mensagens? Veja o tempo médio de resposta de cada pessoa, os silêncios mais longos e quem escreve primeiro. Grátis e privado, no seu dispositivo.",
+      heroEyebrow: "As respostas estão demorando mais?",
+      heroTitle: "Está perdendo o interesse?",
+      heroSubtitle:
+        "Respostas mais lentas, menos mensagens, silêncios mais longos: é fácil pensar no pior. Os horários das mensagens da sua conversa mostram o que realmente mudou e quando, para você olhar com calma antes de tirar conclusões.",
+      heroNote:
+        "Grátis · Sem conta · Os números são calculados no seu dispositivo",
+      offerLabel: "Pergunte à IA sobre sua conversa com {name}",
+      resultEyebrow: "Sua conversa",
+      resultTitle: "O que sua conversa mostra",
+      resultText:
+        "Calculado no seu dispositivo a partir do horário de cada mensagem. Padrões, não um veredito.",
+      resultNowLabel: "Como estão as coisas",
+      resultNow: "A última mensagem foi {time}, de {name}.",
+      resultNowNote:
+        "Contado até hoje. Se você exportou a conversa há algum tempo, ela vai parecer mais parada do que está.",
+      status_active: "Houve mensagens nos últimos dois dias.",
+      status_dormant:
+        "Está tudo quieto há alguns dias, o que é comum numa semana corrida.",
+      status_inactive: "Está tudo quieto há mais de uma semana.",
+      status_ghosted: "Está tudo quieto há mais de um mês.",
+      resultPeopleTitle: "Pessoa por pessoa",
+      resultReply: "Resposta média",
+      resultReplyNone: "Poucas respostas",
+      resultStarted: "Escreveu primeiro",
+      resultMessages: "Mensagens",
+      resultMorePeople: "E mais {count} pessoas neste grupo.",
+      resultPeopleNote:
+        "Resposta média: quanto tempo alguém leva para responder à outra pessoa, contando só respostas em menos de um dia. Escreveu primeiro: com que frequência alguém retomou a conversa depois de seis horas ou mais de silêncio.",
+      resultGapsTitle: "Os silêncios mais longos",
+      resultGapEnded: "Depois, {name} escreveu primeiro",
+      resultSpan: "{count} mensagens em {days} dias",
+      resultAiButton: "Pergunte à IA sobre esta conversa",
+      resultAiNote:
+        "Ela responde a “Há algo com que me deva preocupar?” e antes pergunta quem é você. Não precisa adicionar a conversa de novo.",
+      resultTimelineLink: "Ver suas mensagens ao longo do tempo",
+      showEyebrow: "O que sua conversa pode mostrar",
+      showTitle: "Os fatos por trás da sensação",
+      showText:
+        "Tudo aqui é contado a partir da sua exportação. Nada é adivinhado.",
+      show1Title: "Tempo de resposta de cada pessoa",
+      show1Text:
+        "Quanto tempo cada pessoa leva, em média, para responder à outra. Só contam respostas em menos de um dia, para que um silêncio longo não distorça o resultado.",
+      show2Title: "Os silêncios mais longos",
+      show2Text:
+        "Os três silêncios mais longos da conversa, quando aconteceram e quem escreveu primeiro depois.",
+      show3Title: "Quem escreve primeiro",
+      show3Text:
+        "Depois de seis horas ou mais sem mensagens, quem retoma a conversa, em porcentagem para cada pessoa.",
+      show4Title: "Como estão as coisas hoje",
+      show4Text: "Quando a última mensagem foi enviada, e por quem.",
+      show5Title: "Mensagens ao longo do tempo",
+      show5Text:
+        "A análise completa mostra suas mensagens dia a dia, da primeira à última, para você ver se algo mudou e quando.",
+      show5Link: "Abrir a análise",
+      exampleEyebrow: "Um exemplo",
+      exampleTitle: "Como fica a conversa de Sam e Alex",
+      exampleText:
+        "Números inventados de duas pessoas fictícias, mostrados do jeito que a sua própria conversa vai aparecer.",
+      exampleBadge: "Exemplo · Sam e Alex são fictícios",
+      exampleReadingTitle: "Lendo com calma",
+      exampleNote1:
+        "Alex demora mais para responder, em média, e mesmo assim começa quase metade das conversas. Demorar mais não quer dizer ter menos interesse.",
+      exampleNote2:
+        "O silêncio mais longo durou quatro dias em agosto. Uma viagem? Uma semana corrida? Os números não sabem dizer, e nem fingem saber.",
+      exampleNote3:
+        "Nada aqui diz como cada um se sente. Se Sam está com dúvidas, conversar com Alex vai dizer mais do que qualquer gráfico.",
+      limitsEyebrow: "Antes de tirar conclusões",
+      limitsTitle: "Respostas mais lentas costumam ter motivos comuns",
+      limitsText:
+        "Um mês puxado no trabalho, provas, férias, uma semana estressante, um hábito novo como silenciar as notificações: tudo isso aparece na conversa como respostas mais lentas e pausas mais longas.",
+      limit1Title: "Padrões, não vereditos",
+      limit1Text:
+        "Os números mostram quando e com que frequência houve mensagens, nunca o porquê. Eles não podem dizer o que alguém sente ou pretende.",
+      limit2Title: "Uma conversa curta diz pouco",
+      limit2Text:
+        "Com só algumas semanas de mensagens, uma semana corrida mexe em todas as médias. Quanto mais longa a conversa, mais os números significam.",
+      limit3Title: "A conversa não é tudo",
+      limit3Text:
+        "Ligações, o tempo juntos e outros apps não aparecem numa exportação. Escrever menos pode simplesmente significar conversar mais em outro lugar.",
+      limit4Title: "Conversar ajuda mais do que contar",
+      limit4Text:
+        "Se algo parece diferente, um gentil “Está tudo bem? Sinto falta das nossas conversas” costuma dizer mais do que qualquer estatística, e é mais bem recebido sem os números como prova.",
+      supportTitle:
+        "Se isso está pesando muito em você ou se você não se sente em segurança",
+      aiEyebrow: "Uma segunda leitura",
+      aiTitle: "Pergunte à IA o que ela vê",
+      aiText:
+        "Os horários só dizem até certo ponto. A IA lê as próprias mensagens e responde a uma pergunta: “Há algo com que me deva preocupar?” Antes, ela pergunta quem é você e lembra disso na próxima vez.",
+      aiCard1Title: "Grátis, no seu dispositivo",
+      aiCard1Text:
+        "A IA no dispositivo roda no seu navegador. Sua conversa não sai do seu dispositivo.",
+      aiCard2Title: "Ou uma prévia grátis na nuvem",
+      aiCard2Text:
+        "Só trechos anonimizados são enviados: os nomes são substituídos e telefones, e-mails, links e números de conta bancária (IBAN) são removidos. O provedor de IA não treina com eles.",
+      aiCard3Title: "Lá quando você voltar",
+      aiCard3Text:
+        "Sua conversa fica guardada neste dispositivo, para você abrir de novo depois sem um novo envio. Escolha “Não guardar” se preferir que não fique.",
+      aiButton: "Perguntar à IA",
+      faqTitle: "Perguntas frequentes",
+      faq1Q:
+        "Responder mais devagar quer dizer que a pessoa está perdendo o interesse?",
+      faq1A:
+        "Por si só, não. As respostas ficam mais lentas por vários motivos: trabalho, provas, viagens, saúde, estresse ou só um novo hábito com o celular. Os números mostram o que mudou e quando. O porquê, só a outra pessoa pode dizer.",
+      faq2Q: "Como é calculado o tempo médio de resposta?",
+      faq2A:
+        "Cada vez que uma pessoa responde à outra em menos de 24 horas, o tempo entre as duas mensagens conta como uma resposta, e a média disso aparece para cada pessoa. Pausas de mais de um dia contam como silêncios.",
+      faq3Q: "Dá para ver se as respostas ficaram mais lentas ultimamente?",
+      faq3A:
+        "Esta página mostra as médias da conversa inteira e quando foram os silêncios mais longos. Para ver como o número de mensagens mudou ao longo do tempo, abra a análise completa: a linha do tempo mostra suas mensagens dia a dia, da primeira à última.",
+      faq4Q: "Minha conversa é enviada para algum lugar?",
+      faq4A:
+        "Não. Os números desta página são calculados no seu navegador, no seu dispositivo. A conversa fica guardada neste dispositivo para você abrir de novo depois, e você pode escolher não guardá-la ou esquecê-la quando quiser. Só se você escolher a IA na nuvem, incluindo a prévia grátis, são enviados trechos anonimizados: nomes substituídos e telefones, e-mails, links e números de conta bancária (IBAN) removidos. O provedor de IA não treina com eles.",
+      faq5Q: "Devo mostrar esses números para a pessoa?",
+      faq5A:
+        "Sugerimos começar pelo que você sente. Estatísticas podem soar como acusação, enquanto um simples “Sinto falta das nossas conversas, está tudo bem?” convida a uma resposta sincera.",
+      faq6Q: "Quais conversas funcionam?",
+      faq6A:
+        "Qualquer conversa do WhatsApp que você exportar, do iPhone ou Android, individual ou em grupo, em qualquer idioma. Exporte sem mídia e solte o arquivo .zip ou .txt na caixa no topo desta página.",
+      ctaTitle: "Veja o que realmente mudou",
+      ctaButton: "Verificar sua conversa",
+      ctaNote: "Grátis · Sem conta · Calculado no seu dispositivo",
+      disclaimer:
+        "O WhatsAnalyze é um projeto independente, sem vínculo com o WhatsApp ou a Meta. Os números descrevem padrões numa conversa. Eles não podem dizer o que alguém sente ou pretende, e não substituem uma boa conversa.",
     },
     toolsChatHeatmap: {
       seoTitle:
@@ -7892,6 +8412,135 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze est un projet open source indépendant sans affiliation, approbation ou parrainage par WhatsApp ou Meta.",
     },
+    situationLosingInterest: {
+      navLabel: "Son intérêt pour vous diminue ?",
+      appName: "Temps de réponse et silences sur WhatsApp",
+      seoTitle: "Il ou elle perd intérêt ? Vos temps de réponse sur WhatsApp",
+      seoDescription:
+        "Des réponses de plus en plus lentes, moins de messages qu'avant ? Voyez le temps de réponse moyen de chacun, les plus longs silences et qui écrit en premier. Gratuit et privé, sur votre appareil.",
+      heroEyebrow: "Des réponses de plus en plus lentes ?",
+      heroTitle: "Son intérêt pour vous diminue ?",
+      heroSubtitle:
+        "Réponses plus lentes, moins de messages, silences plus longs : on imagine vite le pire. Les horodatages de votre conversation montrent ce qui a vraiment changé, et quand, pour que vous puissiez le regarder calmement avant de tirer des conclusions.",
+      heroNote:
+        "Gratuit · Sans compte · Les chiffres sont calculés sur votre appareil",
+      offerLabel: "Interrogez l'IA sur votre conversation avec {name}",
+      resultEyebrow: "Votre conversation",
+      resultTitle: "Ce que montre votre conversation",
+      resultText:
+        "Calculé sur votre appareil à partir de l'heure de chaque message. Des constats, pas un verdict.",
+      resultNowLabel: "Où en sont les choses",
+      resultNow: "Dernier message envoyé {time} par {name}.",
+      resultNowNote:
+        "Compté jusqu'à aujourd'hui. Si vous avez exporté la conversation il y a un moment, elle paraîtra plus calme qu'elle ne l'est.",
+      status_active: "Il y a eu des messages ces deux derniers jours.",
+      status_dormant:
+        "C'est calme depuis quelques jours, ce qui est courant pendant une semaine chargée.",
+      status_inactive: "C'est calme depuis plus d'une semaine.",
+      status_ghosted: "C'est calme depuis plus d'un mois.",
+      resultPeopleTitle: "Personne par personne",
+      resultReply: "Réponse moyenne",
+      resultReplyNone: "Trop peu de réponses",
+      resultStarted: "A écrit en premier",
+      resultMessages: "Messages",
+      resultMorePeople: "Et {count} autres personnes dans ce groupe.",
+      resultPeopleNote:
+        "Réponse moyenne : le temps que met quelqu'un à répondre à l'autre, en ne comptant que les réponses en moins d'un jour. A écrit en premier : combien de fois quelqu'un a relancé la conversation après six heures de silence ou plus.",
+      resultGapsTitle: "Les plus longs silences",
+      resultGapEnded: "Ensuite, {name} a écrit en premier",
+      resultSpan: "{count} messages sur {days} jours",
+      resultAiButton: "Interroger l'IA sur cette conversation",
+      resultAiNote:
+        "Elle répond à « Y a-t-il quelque chose qui devrait m'inquiéter ? » et vous demande d'abord lequel des participants vous êtes. Inutile d'ajouter à nouveau la conversation.",
+      resultTimelineLink: "Voir vos messages au fil du temps",
+      showEyebrow: "Ce que votre conversation peut montrer",
+      showTitle: "Les faits derrière l'impression",
+      showText: "Tout est compté à partir de votre export. Rien n'est deviné.",
+      show1Title: "Le temps de réponse de chacun",
+      show1Text:
+        "Le temps que met chacun, en moyenne, à répondre à l'autre. Seules les réponses en moins d'un jour comptent, pour qu'un long silence ne fausse pas tout.",
+      show2Title: "Les plus longs silences",
+      show2Text:
+        "Les trois plus longs silences de la conversation, quand ils ont eu lieu, et qui a écrit en premier ensuite.",
+      show3Title: "Qui écrit en premier",
+      show3Text:
+        "Après six heures ou plus sans message, qui relance la conversation, en pourcentage pour chacun.",
+      show4Title: "Où vous en êtes aujourd'hui",
+      show4Text: "Quand le dernier message a été envoyé, et par qui.",
+      show5Title: "Les messages au fil du temps",
+      show5Text:
+        "L'analyse complète trace vos messages jour après jour, du premier au dernier, pour voir si quelque chose a changé, et quand.",
+      show5Link: "Ouvrir l'analyse",
+      exampleEyebrow: "Un exemple",
+      exampleTitle: "La conversation de Sam et Alex, en chiffres",
+      exampleText:
+        "Des chiffres inventés pour deux personnes fictives, présentés comme le sera votre propre conversation.",
+      exampleBadge: "Exemple · Sam et Alex sont fictifs",
+      exampleReadingTitle: "À lire avec calme",
+      exampleNote1:
+        "Alex met plus de temps à répondre en moyenne, et lance pourtant presque la moitié des conversations. Répondre plus lentement ne veut pas dire avoir moins d'intérêt.",
+      exampleNote2:
+        "Le plus long silence a duré quatre jours en août. Un voyage ? Une semaine chargée ? Les chiffres ne peuvent pas le dire, et ne prétendent pas le savoir.",
+      exampleNote3:
+        "Rien ici ne dit ce que l'un ou l'autre ressent. Si Sam se pose des questions, en parler avec Alex en apprendra plus que n'importe quel graphique.",
+      limitsEyebrow: "Avant d'en tirer des conclusions",
+      limitsTitle:
+        "Des réponses plus lentes ont souvent des raisons ordinaires",
+      limitsText:
+        "Un mois chargé au travail, des examens, des vacances, une semaine stressante, une nouvelle habitude comme couper les notifications : tout cela se voit dans une conversation sous forme de réponses plus lentes et de pauses plus longues.",
+      limit1Title: "Des constats, pas des verdicts",
+      limit1Text:
+        "Les chiffres montrent quand et à quelle fréquence il y a eu des messages, jamais pourquoi. Ils ne peuvent pas dire ce que quelqu'un ressent ou veut.",
+      limit2Title: "Une courte conversation en dit peu",
+      limit2Text:
+        "Avec seulement quelques semaines de messages, une semaine chargée fait bouger toutes les moyennes. Plus la conversation est longue, plus les chiffres ont du sens.",
+      limit3Title: "Une conversation n'est pas tout",
+      limit3Text:
+        "Les appels, le temps passé ensemble et les autres applis n'apparaissent pas dans un export. Écrire moins peut simplement vouloir dire se parler davantage ailleurs.",
+      limit4Title: "Parler plutôt que compter",
+      limit4Text:
+        "Si quelque chose semble différent, un simple « Tout va bien ? Nos discussions me manquent » vous en dira souvent plus que n'importe quelle statistique, et passera mieux sans les chiffres comme preuve.",
+      supportTitle:
+        "Quand l'inquiétude pèse trop, ou quand on ne se sent pas en sécurité",
+      aiEyebrow: "Un second regard",
+      aiTitle: "Demandez à l'IA ce qu'elle voit",
+      aiText:
+        "Les horodatages ne disent pas tout. L'IA lit les messages eux-mêmes et répond à une question : « Y a-t-il quelque chose qui devrait m'inquiéter ? » Elle vous demande d'abord lequel des participants vous êtes, et s'en souvient pour la prochaine fois.",
+      aiCard1Title: "Gratuite, sur votre appareil",
+      aiCard1Text:
+        "L'IA sur l'appareil fonctionne dans votre navigateur. Votre conversation ne quitte pas votre appareil.",
+      aiCard2Title: "Ou un aperçu gratuit dans le cloud",
+      aiCard2Text:
+        "Seuls des extraits anonymisés sont envoyés : les noms sont remplacés, et les numéros de téléphone, e-mails, liens et numéros de compte (IBAN) sont supprimés. Le fournisseur d'IA ne s'en sert pas pour entraîner ses modèles.",
+      aiCard3Title: "Là quand vous revenez",
+      aiCard3Text:
+        "Votre conversation est enregistrée sur cet appareil, pour que vous puissiez la rouvrir plus tard sans nouvel import. Choisissez « Ne pas garder » si vous préférez.",
+      aiButton: "Interroger l'IA",
+      faqTitle: "Questions fréquentes",
+      faq1Q: "Des réponses plus lentes veulent-elles dire qu'on perd intérêt ?",
+      faq1A:
+        "Pas à elles seules. Les réponses ralentissent pour toutes sortes de raisons : le travail, les examens, un voyage, la santé, le stress, ou simplement une nouvelle habitude avec le téléphone. Les chiffres montrent ce qui a changé et quand. Le pourquoi, seule l'autre personne peut vous le dire.",
+      faq2Q: "Comment le temps de réponse moyen est-il calculé ?",
+      faq2A:
+        "Chaque fois qu'une personne répond à l'autre en moins de 24 heures, le temps entre les deux messages compte comme une réponse, et la moyenne est affichée pour chacun. Les pauses de plus d'un jour comptent comme des silences.",
+      faq3Q: "Puis-je voir si les réponses ont ralenti récemment ?",
+      faq3A:
+        "Cette page montre les moyennes sur toute la conversation, et quand ont eu lieu les plus longs silences. Pour voir comment le nombre de messages a évolué, ouvrez l'analyse complète : sa chronologie montre vos messages jour après jour, du premier au dernier.",
+      faq4Q: "Ma conversation est-elle envoyée quelque part ?",
+      faq4A:
+        "Non. Les chiffres de cette page sont calculés dans votre navigateur, sur votre appareil. La conversation est enregistrée sur cet appareil pour que vous puissiez la rouvrir plus tard, et vous pouvez choisir de ne pas la garder, ou l'oublier, à tout moment. Ce n'est que si vous choisissez l'IA dans le cloud, aperçu gratuit compris, que des extraits anonymisés sont envoyés : noms remplacés, numéros de téléphone, e-mails, liens et numéros de compte (IBAN) supprimés. Le fournisseur d'IA ne s'en sert pas pour entraîner ses modèles.",
+      faq5Q: "Dois-je montrer ces chiffres à l'autre personne ?",
+      faq5A:
+        "Nous vous suggérons plutôt de commencer par ce que vous ressentez. Les statistiques peuvent sonner comme un reproche, alors qu'un simple « Nos discussions me manquent, tout va bien ? » invite à une réponse sincère.",
+      faq6Q: "Quelles conversations fonctionnent ?",
+      faq6A:
+        "Toute conversation WhatsApp que vous exportez, depuis un iPhone ou un Android, à deux ou en groupe, dans n'importe quelle langue. Exportez-la sans médias et déposez le fichier .zip ou .txt dans la zone en haut de cette page.",
+      ctaTitle: "Voyez ce qui a vraiment changé",
+      ctaButton: "Vérifier votre conversation",
+      ctaNote: "Gratuit · Sans compte · Calculé sur votre appareil",
+      disclaimer:
+        "WhatsAnalyze est un projet indépendant, sans lien avec WhatsApp ni Meta. Les chiffres décrivent des schémas dans une conversation. Ils ne peuvent pas dire ce que quelqu'un ressent ou veut, et ne remplacent pas une vraie discussion.",
+    },
     toolsChatHeatmap: {
       seoTitle:
         "Heures de pointe et carte thermique 24h WhatsApp | WhatsAnalyze",
@@ -9475,6 +10124,136 @@ export const messages = {
         "100% privato · Nessun caricamento su server · Nessuna registrazione",
       disclaimer:
         "WhatsAnalyze è un progetto open source indipendente e non è affiliato, approvato o sponsorizzato da WhatsApp o Meta.",
+    },
+    situationLosingInterest: {
+      navLabel: "Sta perdendo interesse?",
+      appName: "Tempi di risposta e silenzi su WhatsApp",
+      seoTitle:
+        "Sta perdendo interesse? Guarda i tempi di risposta su WhatsApp",
+      seoDescription:
+        "Risponde sempre più tardi o ti scrive meno di prima? Guarda il tempo medio di risposta di ciascuno, i silenzi più lunghi e chi riapre la conversazione. Gratis e privato, sul tuo dispositivo.",
+      heroEyebrow: "Risponde sempre più tardi?",
+      heroTitle: "Sta perdendo interesse?",
+      heroSubtitle:
+        "Risposte più lente, meno messaggi, silenzi più lunghi: è facile pensare al peggio. Gli orari dei messaggi della tua chat mostrano cosa è cambiato davvero, e quando, così puoi guardarlo con calma prima di trarre conclusioni.",
+      heroNote:
+        "Gratis · Nessun account · I numeri vengono calcolati sul tuo dispositivo",
+      offerLabel: "Chiedi all'IA della tua chat con {name}",
+      resultEyebrow: "La tua chat",
+      resultTitle: "Cosa mostra la tua chat",
+      resultText:
+        "Calcolato sul tuo dispositivo dall'orario di ogni messaggio. Schemi, non un verdetto.",
+      resultNowLabel: "A che punto siete",
+      resultNow: "L'ultimo messaggio è arrivato {time} da {name}.",
+      resultNowNote:
+        "Contato fino a oggi. Se hai esportato la chat tempo fa, sembrerà più silenziosa di quanto sia.",
+      status_active: "Ci sono stati messaggi negli ultimi due giorni.",
+      status_dormant:
+        "È tutto tranquillo da qualche giorno, cosa normale in una settimana piena.",
+      status_inactive: "È tutto tranquillo da più di una settimana.",
+      status_ghosted: "È tutto tranquillo da più di un mese.",
+      resultPeopleTitle: "Persona per persona",
+      resultReply: "Risposta media",
+      resultReplyNone: "Troppo poche risposte",
+      resultStarted: "Ha riaperto la chat",
+      resultMessages: "Messaggi",
+      resultMorePeople: "E altre {count} persone in questo gruppo.",
+      resultPeopleNote:
+        "Risposta media: quanto tempo impiega qualcuno a rispondere all'altra persona, contando solo le risposte entro un giorno. Ha riaperto la chat: quante volte qualcuno ha ripreso la conversazione dopo sei ore o più di silenzio.",
+      resultGapsTitle: "I silenzi più lunghi",
+      resultGapEnded: "A rompere il silenzio: {name}",
+      resultSpan: "{count} messaggi in {days} giorni",
+      resultAiButton: "Chiedi all'IA di questa chat",
+      resultAiNote:
+        "Risponde a «C'è qualcosa di cui dovrei preoccuparmi?» e prima ti chiede chi sei tu tra i partecipanti. Non serve aggiungere di nuovo la chat.",
+      resultTimelineLink: "Guarda i tuoi messaggi nel tempo",
+      showEyebrow: "Cosa può mostrare la tua chat",
+      showTitle: "I fatti dietro la sensazione",
+      showText:
+        "Tutto viene contato dalla tua esportazione. Niente è indovinato.",
+      show1Title: "Tempi di risposta, per ciascuno",
+      show1Text:
+        "Quanto impiega in media ciascuno a rispondere all'altro. Contano solo le risposte entro un giorno, così un lungo silenzio non falsa il risultato.",
+      show2Title: "I silenzi più lunghi",
+      show2Text:
+        "I tre silenzi più lunghi della chat, quando ci sono stati e chi li ha interrotti.",
+      show3Title: "Chi riapre la conversazione",
+      show3Text:
+        "Dopo sei ore o più senza messaggi, chi riprende la conversazione, in percentuale per ciascuno.",
+      show4Title: "A che punto siete oggi",
+      show4Text: "Quando è stato inviato l'ultimo messaggio, e da chi.",
+      show5Title: "I messaggi nel tempo",
+      show5Text:
+        "L'analisi completa mostra i tuoi messaggi giorno per giorno, dal primo all'ultimo, così puoi vedere se qualcosa è cambiato, e quando.",
+      show5Link: "Apri l'analisi",
+      exampleEyebrow: "Un esempio",
+      exampleTitle: "Come si legge la chat di Sam e Alex",
+      exampleText:
+        "Numeri inventati per due persone immaginarie, mostrati come apparirà la tua chat.",
+      exampleBadge: "Esempio · Sam e Alex sono inventati",
+      exampleReadingTitle: "Leggerla con calma",
+      exampleNote1:
+        "Alex risponde in media più lentamente, eppure avvia quasi metà delle conversazioni. Rispondere più lentamente non vuol dire avere meno interesse.",
+      exampleNote2:
+        "Il silenzio più lungo è durato quattro giorni ad agosto. Un viaggio? Una settimana piena? I numeri non possono dirlo, e non fingono di saperlo.",
+      exampleNote3:
+        "Niente qui dice cosa provano. Se Sam ha dei dubbi, parlarne con Alex dirà di più di qualsiasi grafico.",
+      limitsEyebrow: "Prima di leggerci troppo",
+      limitsTitle: "Le risposte più lente hanno spesso motivi normalissimi",
+      limitsText:
+        "Un mese pieno di lavoro, gli esami, una vacanza, una settimana stressante, una nuova abitudine come silenziare le notifiche: tutto questo appare in una chat come risposte più lente e pause più lunghe.",
+      limit1Title: "Schemi, non verdetti",
+      limit1Text:
+        "I numeri mostrano quando e quanto spesso ci sono stati messaggi, mai il perché. Non possono dirti cosa prova o cosa vuole qualcuno.",
+      limit2Title: "Una chat breve dice poco",
+      limit2Text:
+        "Con poche settimane di messaggi, una settimana piena sposta tutte le medie. Più lunga è la chat, più i numeri significano qualcosa.",
+      limit3Title: "Una chat non è tutto",
+      limit3Text:
+        "Chiamate, tempo passato insieme e altre app non compaiono in un'esportazione. Scrivere meno può voler dire semplicemente parlarsi di più altrove.",
+      limit4Title: "Parlare aiuta più che contare",
+      limit4Text:
+        "Se qualcosa sembra diverso, un gentile «Va tutto bene? Mi mancano le nostre chiacchierate» di solito dice più di qualsiasi statistica, e arriva meglio senza i numeri come prova.",
+      supportTitle: "Se ti pesa molto, o se non ti senti al sicuro",
+      aiEyebrow: "Una seconda lettura",
+      aiTitle: "Chiedi all'IA cosa vede",
+      aiText:
+        "Gli orari dicono solo fino a un certo punto. L'IA legge i messaggi stessi e risponde a una domanda: «C'è qualcosa di cui dovrei preoccuparmi?» Prima ti chiede chi sei tu tra i partecipanti, e se lo ricorda per la volta successiva.",
+      aiCard1Title: "Gratis, sul tuo dispositivo",
+      aiCard1Text:
+        "L'IA sul dispositivo funziona nel tuo browser. La tua chat non lascia il tuo dispositivo.",
+      aiCard2Title: "Oppure un'anteprima gratuita nel cloud",
+      aiCard2Text:
+        "Vengono inviati solo estratti anonimizzati: i nomi vengono sostituiti e numeri di telefono, email, link e numeri di conto (IBAN) vengono rimossi. Il fornitore dell'IA non li usa per l'addestramento.",
+      aiCard3Title: "Lì quando torni",
+      aiCard3Text:
+        "La tua chat viene salvata su questo dispositivo, così puoi riaprirla più tardi senza caricarla di nuovo. Scegli «Non salvare» se preferisci di no.",
+      aiButton: "Chiedi all'IA",
+      faqTitle: "Domande frequenti",
+      faq1Q:
+        "Se risponde più lentamente, vuol dire che sta perdendo interesse?",
+      faq1A:
+        "Da solo, no. Le risposte rallentano per tanti motivi: lavoro, esami, viaggi, salute, stress o semplicemente una nuova abitudine con il telefono. I numeri mostrano cosa è cambiato e quando. Il perché può dirtelo solo l'altra persona.",
+      faq2Q: "Come viene calcolato il tempo medio di risposta?",
+      faq2A:
+        "Ogni volta che una persona risponde all'altra entro 24 ore, il tempo tra i due messaggi conta come una risposta, e la media viene mostrata per ciascuno. Le pause di più di un giorno contano invece come silenzi.",
+      faq3Q: "Posso vedere se le risposte sono diventate più lente di recente?",
+      faq3A:
+        "Questa pagina mostra le medie dell'intera chat e quando ci sono stati i silenzi più lunghi. Per vedere come è cambiato il numero di messaggi nel tempo, apri l'analisi completa: la sua cronologia mostra i tuoi messaggi giorno per giorno, dal primo all'ultimo.",
+      faq4Q: "La mia chat viene caricata da qualche parte?",
+      faq4A:
+        "No. I numeri di questa pagina vengono calcolati nel tuo browser, sul tuo dispositivo. La chat viene salvata su questo dispositivo per poterla riaprire in seguito, e puoi scegliere di non salvarla, o di dimenticarla, in qualsiasi momento. Solo se scegli l'IA nel cloud, compresa l'anteprima gratuita, vengono inviati estratti anonimizzati: nomi sostituiti, numeri di telefono, email, link e numeri di conto (IBAN) rimossi. Il fornitore dell'IA non li usa per l'addestramento.",
+      faq5Q: "Dovrei mostrare questi numeri all'altra persona?",
+      faq5A:
+        "Ti suggeriamo di partire da come ti senti. Le statistiche possono sembrare un'accusa, mentre un semplice «Mi mancano le nostre chiacchierate, va tutto bene?» invita a una risposta sincera.",
+      faq6Q: "Con quali chat funziona?",
+      faq6A:
+        "Con qualsiasi chat di WhatsApp che esporti, da iPhone o Android, a due o di gruppo, in qualsiasi lingua. Esportala senza media e trascina il file .zip o .txt nel riquadro in cima a questa pagina.",
+      ctaTitle: "Guarda cosa è cambiato davvero",
+      ctaButton: "Controlla la tua chat",
+      ctaNote: "Gratis · Nessun account · Calcolato sul tuo dispositivo",
+      disclaimer:
+        "WhatsAnalyze è un progetto indipendente, non affiliato a WhatsApp o Meta. I numeri descrivono schemi in una chat. Non possono dirti cosa prova o cosa vuole qualcuno, e non sostituiscono una vera conversazione.",
     },
     toolsChatHeatmap: {
       seoTitle: "Orari di punta e mappa termica 24h WhatsApp | WhatsAnalyze",
