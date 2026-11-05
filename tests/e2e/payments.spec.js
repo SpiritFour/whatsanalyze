@@ -15,6 +15,7 @@ const {
   stubStripeCheckout,
   test,
 } = require("./fixtures");
+const { WRAPPED_PAYWALL_ENABLED } = require("../../config/wrapped.js");
 
 /** Walk through the paywall the way a buyer does, up to leaving for Stripe. */
 const startOneTimeCheckout = async (page) => {
@@ -244,6 +245,7 @@ test.describe("starting a subscription", () => {
   test("charges the full subscription price from /wrapped", async ({
     page,
   }) => {
+    test.skip(!WRAPPED_PAYWALL_ENABLED, "no pricing card on a free /wrapped");
     const checkout = await stubStripeCheckout(page);
 
     await page.goto("/wrapped");
@@ -262,6 +264,7 @@ test.describe("starting a subscription", () => {
   test("brings a subscriber who paid inside Wrapped back into Wrapped", async ({
     page,
   }) => {
+    test.skip(!WRAPPED_PAYWALL_ENABLED, "no pricing card on a free /wrapped");
     const checkout = await stubStripeCheckout(page);
 
     await page.goto("/wrapped");
@@ -328,7 +331,10 @@ test.describe("starting a subscription", () => {
   test("calls starting a subscription the same thing everywhere", async ({
     page,
   }) => {
-    for (const path of ["/subscribe", "/wrapped"]) {
+    const paths = WRAPPED_PAYWALL_ENABLED
+      ? ["/subscribe", "/wrapped"]
+      : ["/subscribe"];
+    for (const path of paths) {
       await page.goto(path);
       await expect(
         page.getByRole("button", { name: "Subscribe Now", exact: true }),

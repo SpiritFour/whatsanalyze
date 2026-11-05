@@ -40,6 +40,9 @@
     >
       {{ shareUrl }}
     </div>
+
+    <!-- After the story, never in front of it: the way on to the AI. -->
+    <WrappedAskAiTeaser />
   </WrappedStoryContainer>
 </template>
 
