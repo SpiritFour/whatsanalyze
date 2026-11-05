@@ -24,6 +24,7 @@ export const localizedPages = [
   "tools/same-fight-again",
   "tools/court-evidence",
   "tools/inactivity",
+  "tools/always-texting-first",
   "tools/proof-of-relationship",
   "tools/message-counter",
   "tools/word-counter",

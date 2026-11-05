@@ -1336,6 +1336,128 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze is an independent open-source project and is not affiliated with, endorsed by, or sponsored by WhatsApp or Meta.",
     },
+    situationTextingFirst: {
+      navLabel: "Always texting first?",
+      seoTitle: "Always Texting First? See Who Starts Your WhatsApp Chats",
+      seoDescription:
+        "Am I always the one texting first? See who starts your WhatsApp conversations and how fast each of you replies, side by side. Free, and counted on your device.",
+      heroEyebrow: "Who starts the conversation",
+      heroTitle: "Always the one texting first?",
+      heroSubtitle:
+        "When it feels like every conversation starts with you, your chat can show how it really goes: who starts, and how quickly each of you replies. Side by side, counted on your device.",
+      heroNote: "Free · No account · The numbers never leave your device",
+      offerLabel: "Ask who puts in more effort in your chat with {name}",
+      resultsEyebrow: "Your chat in numbers",
+      resultsTitle: "Who starts, and how fast each of you replies",
+      resultsText:
+        "Read the two together. Starting fewer conversations but replying within minutes is effort too.",
+      resultsFew:
+        "Conversations so far: {count}. That's too few to read much into yet.",
+      resultsHow:
+        "A conversation counts as started by whoever writes first after at least six hours of quiet. Reply time is the average time each person takes to answer someone else, counting answers within a day.",
+      numbersStarted: "of conversations started",
+      numbersStartedOf: "{count} of {total} conversations",
+      numbersReply: "Average reply",
+      numbersNoReplies: "No replies yet",
+      numbersLast: "Last message",
+      numbersMessages: "Messages",
+      numbersMore: "Others in this chat: {count}",
+      nextTitle: "Want more than the timestamps?",
+      nextText:
+        "The AI can read the messages themselves and answer “Who puts more effort into this chat?” Your chat is already open, so there's nothing to upload again.",
+      nextButton: "Ask who puts in more effort",
+      nextNote:
+        "Free on your device, or as a free cloud preview that sends only anonymized excerpts.",
+      showEyebrow: "What your chat can show",
+      showTitle: "The numbers behind the feeling",
+      showText:
+        "All of it is counted from your exported chat, in your browser.",
+      show1Title: "Who starts conversations",
+      show1Text:
+        "Each person's share of the conversations and how many they started. A new conversation begins after six hours of quiet.",
+      show2Title: "How fast each of you replies",
+      show2Text:
+        "Each person's average reply time, right next to their share, so starting less and answering quickly both show.",
+      show3Title: "Who wrote last, and when",
+      show3Text:
+        "When each of you last sent a message, and how many messages each of you has written.",
+      show4Title: "What the messages say",
+      show4Text:
+        "If you want more, the AI reads the chat itself and answers “Who puts more effort into this chat?” in plain words.",
+      exampleEyebrow: "An example",
+      exampleTitle: "Mia starts more. Leo replies faster.",
+      exampleText:
+        "Two made-up people, to show how to read the numbers. Mia starts about two thirds of their conversations; Leo usually answers within minutes. Neither number says who cares more.",
+      exampleCaption: "Example · Mia and Leo are made up",
+      exampleVibe: "Easy, everyday back-and-forth",
+      exampleSummary:
+        "Mia and Leo write most days: weekend plans, stories from work and a running joke about Leo's houseplants.",
+      exampleAnswer:
+        "Both, in different ways. Mia opens most conversations, often with a plan or a question about Leo's day. Leo starts fewer, but answers within minutes and asks the follow-up questions that keep a conversation going. If Mia would like Leo to reach out first more often, that's worth saying. The chat can't settle it for them.",
+      limitsEyebrow: "Honest limits",
+      limitsTitle: "Who texts first isn't the whole story",
+      limitsText:
+        "The numbers show a pattern in one chat. They can't measure how much someone cares, and they can't tell you whether a friendship or relationship is one-sided.",
+      limit1Title: "People have different styles",
+      limit1Text:
+        "Some people plan and reach out. Others rarely start but reply quickly and warmly. Both are part of keeping in touch.",
+      limit2Title: "Life happens outside the chat",
+      limit2Text:
+        "Work hours, time zones, calls and time spent together don't show up in a WhatsApp export.",
+      limit3Title: "Patterns, not verdicts",
+      limit3Text:
+        "A share of 70% describes what happened in this chat. What it means is yours to decide, and maybe to talk about.",
+      limit4Title: "A short chat says little",
+      limit4Text:
+        "A few weeks or a few dozen conversations can tip either way. The longer the chat, the more the numbers mean.",
+      supportTitle: "When it's about more than a chat",
+      privacyEyebrow: "Private by design",
+      privacyTitle: "Your chat stays yours",
+      privacy1Title: "Counted on your device",
+      privacy1Text:
+        "The numbers are worked out in your browser. Your chat isn't sent anywhere to count them.",
+      privacy2Title: "Saved here, if you like",
+      privacy2Text:
+        "By default your chat is saved only on this device, so you can come back without a new upload. Tap “Don't keep” to undo that, or forget it whenever you like.",
+      privacy3Title: "AI on your terms",
+      privacy3Text:
+        "With the on-device AI, your chat never leaves your device. The free cloud preview sends only anonymized excerpts (names replaced; phone numbers, emails, links and IBANs removed), and the AI provider doesn't train on them.",
+      stepsTitle: "How to check your chat",
+      step1Title: "Export the chat",
+      step1Text:
+        "In WhatsApp, open the chat, tap its name at the top, then “Export chat” and “Without media”.",
+      step2Title: "Drop it in",
+      step2Text:
+        "Drop the file into the box at the top of this page, or pick it. It's read in your browser.",
+      step3Title: "Read both numbers",
+      step3Text:
+        "Look at who starts and how fast each of you replies together. Ask the AI for the story behind them if you like.",
+      stepsGuide: "Detailed export guide for iPhone and Android",
+      faqTitle: "Frequently asked questions",
+      faq1Q: "How can I tell if I'm always the one texting first?",
+      faq1A:
+        "Export the WhatsApp chat and drop it into the box on this page. It counts who wrote first in each conversation and shows each person's share next to how quickly they reply. A new conversation starts whenever someone writes after at least six hours of quiet.",
+      faq2Q: "Does always texting first mean it's a one-sided friendship?",
+      faq2A:
+        "Not on its own. Some people like to start conversations, others are better at answering, and work, time zones and time spent together matter too. The numbers help you see a pattern. Whether it feels fair is something only the two of you can work out.",
+      faq3Q: "What counts as starting a conversation?",
+      faq3A:
+        "The first message of the chat, and every message sent after at least six hours without any messages. Reply time is the average time each person takes to answer someone else, counting answers within a day.",
+      faq4Q: "Is my chat uploaded?",
+      faq4A:
+        "Not for the numbers: they're counted in your browser. Your chat is saved only on this device by default, and you can undo that. If you ask the AI, the on-device AI keeps everything on your device, and the free cloud preview sends only anonymized excerpts (names replaced; phone numbers, emails, links and IBANs removed). The AI provider doesn't train on them.",
+      faq5Q: "Does it work with friends, family and group chats?",
+      faq5A:
+        "Yes, with any WhatsApp chat you can export. In a group, everyone gets their own share of conversations started and their own reply time.",
+      faq6Q: "Is it free?",
+      faq6A:
+        "The numbers on this page are free and need no account. The AI reading is free on your device, and the cloud AI has a free preview. The full cloud report is part of WhatsAnalyze Pro ({price}/month).",
+      ctaTitle: "See who starts the conversations in your chat",
+      ctaButton: "Check my chat",
+      ctaNote: "Free · No account · Counted on your device",
+      disclaimer:
+        "WhatsAnalyze shows patterns in a chat, not verdicts about people or relationships. It is an independent open-source project and is not affiliated with, endorsed by, or sponsored by WhatsApp or Meta.",
+    },
     toolsWordCounter: {
       seoTitle: "WhatsApp Word & Vocabulary Counter | WhatsAnalyze",
       seoDescription:
@@ -2805,6 +2927,130 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze ist ein unabhängiges Open-Source-Projekt und steht in keiner Verbindung zu WhatsApp oder Meta.",
     },
+    situationTextingFirst: {
+      navLabel: "Schreibst du immer zuerst?",
+      seoTitle: "Schreibst du immer zuerst? Wer im WhatsApp-Chat anfängt",
+      seoDescription:
+        "Ich schreibe immer zuerst – ist die Freundschaft einseitig? Sieh, wer in deinem WhatsApp-Chat Gespräche beginnt und wie schnell ihr antwortet. Kostenlos, auf deinem Gerät.",
+      heroEyebrow: "Wer das Gespräch beginnt",
+      heroTitle: "Schreibst du immer zuerst?",
+      heroSubtitle:
+        "Wenn es sich anfühlt, als ginge jedes Gespräch von dir aus, zeigt dein Chat, wie es wirklich ist: wer anfängt und wie schnell ihr jeweils antwortet. Nebeneinander, auf deinem Gerät gezählt.",
+      heroNote:
+        "Kostenlos · Ohne Konto · Die Zahlen verlassen dein Gerät nicht",
+      offerLabel: "Frag, wer sich in deinem Chat mit {name} mehr Mühe gibt",
+      resultsEyebrow: "Dein Chat in Zahlen",
+      resultsTitle: "Wer anfängt und wie schnell ihr antwortet",
+      resultsText:
+        "Lies beides zusammen. Wer seltener anfängt, aber innerhalb von Minuten antwortet, gibt sich auch Mühe.",
+      resultsFew:
+        "Bisher gezählte Gespräche: {count}. Das ist noch zu wenig, um viel daraus zu lesen.",
+      resultsHow:
+        "Ein Gespräch beginnt, wer nach mindestens sechs Stunden Ruhe als Erstes schreibt. Die Antwortzeit ist der Durchschnitt, wie lange jemand braucht, um jemand anderem zu antworten. Gezählt werden Antworten innerhalb eines Tages.",
+      numbersStarted: "der Gespräche begonnen",
+      numbersStartedOf: "{count} von {total} Gesprächen",
+      numbersReply: "Ø Antwortzeit",
+      numbersNoReplies: "Noch keine Antworten",
+      numbersLast: "Letzte Nachricht",
+      numbersMessages: "Nachrichten",
+      numbersMore: "Weitere Personen in diesem Chat: {count}",
+      nextTitle: "Mehr als nur Uhrzeiten?",
+      nextText:
+        "Die KI kann die Nachrichten selbst lesen und beantworten: „Wer gibt sich in diesem Chat mehr Mühe?“ Dein Chat ist schon geöffnet, du musst nichts neu hochladen.",
+      nextButton: "Fragen, wer sich mehr Mühe gibt",
+      nextNote:
+        "Kostenlos auf deinem Gerät oder als kostenlose Cloud-Vorschau, die nur anonymisierte Auszüge sendet.",
+      showEyebrow: "Was dein Chat zeigen kann",
+      showTitle: "Die Zahlen hinter dem Gefühl",
+      showText:
+        "Alles wird aus deinem exportierten Chat gezählt, in deinem Browser.",
+      show1Title: "Wer Gespräche beginnt",
+      show1Text:
+        "Der Anteil jeder Person an den Gesprächen und wie viele sie begonnen hat. Ein neues Gespräch beginnt nach sechs Stunden Ruhe.",
+      show2Title: "Wie schnell ihr antwortet",
+      show2Text:
+        "Die durchschnittliche Antwortzeit jeder Person direkt neben ihrem Anteil. So sieht man beides: seltener anfangen und schnell antworten.",
+      show3Title: "Wer zuletzt geschrieben hat",
+      show3Text:
+        "Wann ihr jeweils zuletzt geschrieben habt und wie viele Nachrichten von jeder Person stammen.",
+      show4Title: "Was in den Nachrichten steht",
+      show4Text:
+        "Wenn du mehr willst, liest die KI den Chat selbst und beantwortet „Wer gibt sich in diesem Chat mehr Mühe?“ in klaren Worten.",
+      exampleEyebrow: "Ein Beispiel",
+      exampleTitle: "Mia fängt öfter an. Leo antwortet schneller.",
+      exampleText:
+        "Zwei ausgedachte Personen, um zu zeigen, wie man die Zahlen liest. Mia beginnt etwa zwei Drittel der Gespräche, Leo antwortet meist innerhalb von Minuten. Keine der beiden Zahlen sagt, wem mehr am anderen liegt.",
+      exampleCaption: "Beispiel · Mia und Leo sind ausgedacht",
+      exampleVibe: "Entspanntes Hin und Her im Alltag",
+      exampleSummary:
+        "Mia und Leo schreiben sich fast täglich: Pläne fürs Wochenende, Geschichten von der Arbeit und ein Running Gag über Leos Zimmerpflanzen.",
+      exampleAnswer:
+        "Beide, nur auf verschiedene Weise. Mia beginnt die meisten Gespräche, oft mit einem Plan oder einer Frage zu Leos Tag. Leo fängt seltener an, antwortet aber innerhalb von Minuten und stellt die Rückfragen, die ein Gespräch am Laufen halten. Wenn Mia sich wünscht, dass Leo öfter zuerst schreibt, lohnt es sich, das anzusprechen. Der Chat kann das nicht für die beiden entscheiden.",
+      limitsEyebrow: "Ehrliche Grenzen",
+      limitsTitle: "Wer zuerst schreibt, ist nicht die ganze Geschichte",
+      limitsText:
+        "Die Zahlen zeigen ein Muster in einem Chat. Sie messen nicht, wie viel jemandem an dir liegt, und sie sagen dir nicht, ob eine Freundschaft oder Beziehung einseitig ist.",
+      limit1Title: "Menschen sind verschieden",
+      limit1Text:
+        "Manche planen und melden sich. Andere fangen selten an, antworten aber schnell und herzlich. Beides gehört dazu, wenn man in Kontakt bleibt.",
+      limit2Title: "Das Leben passiert auch außerhalb des Chats",
+      limit2Text:
+        "Arbeitszeiten, Zeitzonen, Anrufe und gemeinsame Zeit tauchen in einem WhatsApp-Export nicht auf.",
+      limit3Title: "Muster, keine Urteile",
+      limit3Text:
+        "Ein Anteil von 70 % beschreibt, was in diesem Chat passiert ist. Was das bedeutet, entscheidest du, und vielleicht sprecht ihr darüber.",
+      limit4Title: "Ein kurzer Chat sagt wenig",
+      limit4Text:
+        "Ein paar Wochen oder ein paar Dutzend Gespräche können in jede Richtung kippen. Je länger der Chat, desto mehr sagen die Zahlen.",
+      supportTitle: "Wenn es um mehr geht als einen Chat",
+      privacyEyebrow: "Privat von Anfang an",
+      privacyTitle: "Dein Chat bleibt deiner",
+      privacy1Title: "Auf deinem Gerät gezählt",
+      privacy1Text:
+        "Die Zahlen werden in deinem Browser berechnet. Dein Chat wird dafür nirgendwohin gesendet.",
+      privacy2Title: "Hier gespeichert, wenn du willst",
+      privacy2Text:
+        "Standardmäßig wird dein Chat nur auf diesem Gerät gespeichert, damit du ohne neuen Upload zurückkommen kannst. Mit „Nicht behalten“ machst du das rückgängig, und vergessen kannst du ihn jederzeit.",
+      privacy3Title: "KI zu deinen Bedingungen",
+      privacy3Text:
+        "Mit der KI auf deinem Gerät verlässt dein Chat das Gerät nicht. Die kostenlose Cloud-Vorschau sendet nur anonymisierte Auszüge (Namen ersetzt; Telefonnummern, E-Mails, Links und IBANs entfernt), und der KI-Anbieter trainiert nicht damit.",
+      stepsTitle: "So prüfst du deinen Chat",
+      step1Title: "Chat exportieren",
+      step1Text:
+        "Öffne in WhatsApp den Chat, tippe oben auf den Namen, dann auf „Chat exportieren“ und „Ohne Medien“.",
+      step2Title: "Hier ablegen",
+      step2Text:
+        "Zieh die Datei in das Feld oben auf dieser Seite oder wähle sie aus. Sie wird in deinem Browser gelesen.",
+      step3Title: "Beide Zahlen lesen",
+      step3Text:
+        "Schau dir zusammen an, wer anfängt und wie schnell ihr antwortet. Wenn du magst, frag die KI nach der Geschichte dahinter.",
+      stepsGuide: "Ausführliche Export-Anleitung für iPhone und Android",
+      faqTitle: "Häufige Fragen",
+      faq1Q: "Wie finde ich heraus, ob ich immer zuerst schreibe?",
+      faq1A:
+        "Exportiere den WhatsApp-Chat und zieh ihn in das Feld auf dieser Seite. Die Seite zählt, wer in jedem Gespräch zuerst geschrieben hat, und zeigt den Anteil jeder Person neben ihrer Antwortzeit. Ein neues Gespräch beginnt, sobald jemand nach mindestens sechs Stunden Ruhe schreibt.",
+      faq2Q:
+        "Ich schreibe immer zuerst – ist das eine einseitige Freundschaft?",
+      faq2A:
+        "Nicht für sich allein. Manche fangen gern Gespräche an, andere können besser antworten, und Arbeit, Zeitzonen und gemeinsame Zeit spielen auch mit. Die Zahlen helfen dir, ein Muster zu sehen. Ob es sich fair anfühlt, könnt nur ihr beide klären.",
+      faq3Q: "Was zählt als Beginn eines Gesprächs?",
+      faq3A:
+        "Die erste Nachricht des Chats und jede Nachricht nach mindestens sechs Stunden ohne Nachrichten. Die Antwortzeit ist der Durchschnitt, wie lange jemand braucht, um jemand anderem zu antworten. Gezählt werden Antworten innerhalb eines Tages.",
+      faq4Q: "Wird mein Chat hochgeladen?",
+      faq4A:
+        "Nicht für die Zahlen: Die werden in deinem Browser gezählt. Dein Chat wird standardmäßig nur auf diesem Gerät gespeichert, und das kannst du rückgängig machen. Wenn du die KI fragst, bleibt mit der KI auf deinem Gerät alles auf deinem Gerät, und die kostenlose Cloud-Vorschau sendet nur anonymisierte Auszüge (Namen ersetzt; Telefonnummern, E-Mails, Links und IBANs entfernt). Der KI-Anbieter trainiert nicht damit.",
+      faq5Q: "Funktioniert das auch mit Freunden, Familie und Gruppenchats?",
+      faq5A:
+        "Ja, mit jedem WhatsApp-Chat, den du exportieren kannst. In einer Gruppe bekommt jede Person ihren eigenen Anteil an begonnenen Gesprächen und ihre eigene Antwortzeit.",
+      faq6Q: "Ist das kostenlos?",
+      faq6A:
+        "Die Zahlen auf dieser Seite sind kostenlos und brauchen kein Konto. Die KI-Auswertung ist auf deinem Gerät kostenlos, und für die Cloud-KI gibt es eine kostenlose Vorschau. Der vollständige Cloud-Bericht ist Teil von WhatsAnalyze Pro ({price}/Monat).",
+      ctaTitle: "Sieh, wer in deinem Chat die Gespräche beginnt",
+      ctaButton: "Meinen Chat prüfen",
+      ctaNote: "Kostenlos · Ohne Konto · Auf deinem Gerät gezählt",
+      disclaimer:
+        "WhatsAnalyze zeigt Muster in einem Chat, keine Urteile über Menschen oder Beziehungen. Es ist ein unabhängiges Open-Source-Projekt und steht in keiner Verbindung zu WhatsApp oder Meta.",
+    },
     toolsWordCounter: {
       seoTitle: "WhatsApp Wort- & Wortschatzzähler | WhatsAnalyze",
       seoDescription:
@@ -4269,6 +4515,128 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze es un proyecto de código abierto independiente y no está afiliado, respaldado ni patrocinado por WhatsApp o Meta.",
     },
+    situationTextingFirst: {
+      navLabel: "¿Siempre escribes tú primero?",
+      seoTitle: "¿Siempre escribes tú primero? Quién empieza en WhatsApp",
+      seoDescription:
+        "¿Siempre escribo yo primero? Mira quién empieza las conversaciones en tu chat de WhatsApp y lo rápido que responde cada uno. Gratis y en tu dispositivo.",
+      heroEyebrow: "Quién empieza la conversación",
+      heroTitle: "¿Siempre escribes tú primero?",
+      heroSubtitle:
+        "Si sientes que todas las conversaciones empiezan por ti, tu chat puede mostrar cómo es de verdad: quién empieza y lo rápido que responde cada uno. Lado a lado, contado en tu dispositivo.",
+      heroNote: "Gratis · Sin cuenta · Los números no salen de tu dispositivo",
+      offerLabel: "Pregunta quién pone más empeño en tu chat con {name}",
+      resultsEyebrow: "Tu chat en números",
+      resultsTitle: "Quién empieza y lo rápido que responde cada uno",
+      resultsText:
+        "Léelos juntos. Empezar menos conversaciones pero responder en minutos también es esfuerzo.",
+      resultsFew:
+        "Conversaciones hasta ahora: {count}. Todavía son pocas para sacar conclusiones.",
+      resultsHow:
+        "Una conversación la empieza quien escribe primero tras al menos seis horas de silencio. El tiempo de respuesta es el promedio de lo que tarda cada persona en contestar a otra, contando las respuestas dentro de un día.",
+      numbersStarted: "de las conversaciones iniciadas",
+      numbersStartedOf: "{count} de {total} conversaciones",
+      numbersReply: "Respuesta media",
+      numbersNoReplies: "Aún sin respuestas",
+      numbersLast: "Último mensaje",
+      numbersMessages: "Mensajes",
+      numbersMore: "Otras personas en este chat: {count}",
+      nextTitle: "¿Quieres algo más que horas y minutos?",
+      nextText:
+        "La IA puede leer los propios mensajes y responder a «¿Quién pone más empeño en este chat?». Tu chat ya está abierto, así que no hay que subir nada de nuevo.",
+      nextButton: "Preguntar quién pone más empeño",
+      nextNote:
+        "Gratis en tu dispositivo, o como vista previa gratuita en la nube, que solo envía fragmentos anonimizados.",
+      showEyebrow: "Lo que tu chat puede mostrar",
+      showTitle: "Los números detrás de la sensación",
+      showText:
+        "Todo se cuenta a partir de tu chat exportado, en tu navegador.",
+      show1Title: "Quién empieza las conversaciones",
+      show1Text:
+        "La parte de las conversaciones que inicia cada persona y cuántas son. Una conversación nueva empieza tras seis horas de silencio.",
+      show2Title: "Lo rápido que responde cada uno",
+      show2Text:
+        "El tiempo medio de respuesta de cada persona, justo al lado de su porcentaje: así se ve tanto empezar menos como responder rápido.",
+      show3Title: "Quién escribió el último, y cuándo",
+      show3Text:
+        "Cuándo escribió cada uno por última vez y cuántos mensajes ha enviado cada persona.",
+      show4Title: "Lo que dicen los mensajes",
+      show4Text:
+        "Si quieres más, la IA lee el propio chat y responde a «¿Quién pone más empeño en este chat?» con palabras claras.",
+      exampleEyebrow: "Un ejemplo",
+      exampleTitle: "Mia empieza más. Leo responde más rápido.",
+      exampleText:
+        "Dos personas inventadas, para mostrar cómo leer los números. Mia inicia unas dos terceras partes de sus conversaciones; Leo suele responder en pocos minutos. Ninguno de los dos números dice a quién le importa más.",
+      exampleCaption: "Ejemplo · Mia y Leo son inventados",
+      exampleVibe: "Un ir y venir tranquilo, de cada día",
+      exampleSummary:
+        "Mia y Leo se escriben casi a diario: planes para el fin de semana, historias del trabajo y una broma recurrente sobre las plantas de Leo.",
+      exampleAnswer:
+        "Los dos, de maneras distintas. Mia abre la mayoría de las conversaciones, a menudo con un plan o una pregunta sobre el día de Leo. Leo empieza menos, pero responde en minutos y hace las preguntas que mantienen viva la conversación. Si a Mia le gustaría que Leo escribiera primero más a menudo, vale la pena decírselo. El chat no puede decidirlo por ellos.",
+      limitsEyebrow: "Límites honestos",
+      limitsTitle: "Quién escribe primero no lo es todo",
+      limitsText:
+        "Los números muestran un patrón en un chat. No miden cuánto le importas a alguien ni te dicen si una amistad o una relación es unilateral.",
+      limit1Title: "Cada persona tiene su estilo",
+      limit1Text:
+        "Algunas personas planean y escriben. Otras casi nunca empiezan, pero responden rápido y con cariño. Las dos cosas forman parte de mantener el contacto.",
+      limit2Title: "La vida pasa fuera del chat",
+      limit2Text:
+        "Los horarios de trabajo, las zonas horarias, las llamadas y el tiempo juntos no aparecen en una exportación de WhatsApp.",
+      limit3Title: "Patrones, no veredictos",
+      limit3Text:
+        "Un 70 % describe lo que pasó en este chat. Lo que significa lo decides tú, y quizá valga la pena hablarlo.",
+      limit4Title: "Un chat corto dice poco",
+      limit4Text:
+        "Unas pocas semanas o unas decenas de conversaciones pueden inclinarse hacia cualquier lado. Cuanto más largo es el chat, más dicen los números.",
+      supportTitle: "Cuando se trata de algo más que un chat",
+      privacyEyebrow: "Privado por diseño",
+      privacyTitle: "Tu chat sigue siendo tuyo",
+      privacy1Title: "Contado en tu dispositivo",
+      privacy1Text:
+        "Los números se calculan en tu navegador. Tu chat no se envía a ningún sitio para contarlos.",
+      privacy2Title: "Guardado aquí, si quieres",
+      privacy2Text:
+        "Por defecto, tu chat se guarda solo en este dispositivo, para que puedas volver sin subirlo de nuevo. Toca «No guardar» para deshacerlo, u olvídalo cuando quieras.",
+      privacy3Title: "La IA, a tu manera",
+      privacy3Text:
+        "Con la IA en tu dispositivo, tu chat nunca sale de él. La vista previa gratuita en la nube solo envía fragmentos anonimizados (nombres sustituidos; teléfonos, correos, enlaces e IBAN eliminados), y el proveedor de IA no entrena con ellos.",
+      stepsTitle: "Cómo revisar tu chat",
+      step1Title: "Exporta el chat",
+      step1Text:
+        "En WhatsApp, abre el chat, toca su nombre arriba y luego «Exportar chat» y «Sin archivos».",
+      step2Title: "Suéltalo aquí",
+      step2Text:
+        "Suelta el archivo en el recuadro de arriba de esta página, o elígelo. Se lee en tu navegador.",
+      step3Title: "Lee los dos números",
+      step3Text:
+        "Mira juntos quién empieza y lo rápido que responde cada uno. Si quieres, pregúntale a la IA por la historia que hay detrás.",
+      stepsGuide: "Guía detallada de exportación para iPhone y Android",
+      faqTitle: "Preguntas frecuentes",
+      faq1Q: "¿Cómo sé si siempre escribo yo primero?",
+      faq1A:
+        "Exporta el chat de WhatsApp y suéltalo en el recuadro de esta página. La página cuenta quién escribió primero en cada conversación y muestra el porcentaje de cada persona junto a lo rápido que responde. Una conversación nueva empieza cuando alguien escribe tras al menos seis horas de silencio.",
+      faq2Q: "Si siempre escribo yo primero, ¿es una amistad unilateral?",
+      faq2A:
+        "No por sí solo. A algunas personas les gusta empezar conversaciones y otras responden mejor; el trabajo, las zonas horarias y el tiempo juntos también cuentan. Los números te ayudan a ver un patrón. Si te parece justo, eso solo se aclara hablando entre los dos.",
+      faq3Q: "¿Qué cuenta como empezar una conversación?",
+      faq3A:
+        "El primer mensaje del chat y cada mensaje enviado tras al menos seis horas sin mensajes. El tiempo de respuesta es el promedio de lo que tarda cada persona en contestar a otra, contando las respuestas dentro de un día.",
+      faq4Q: "¿Se sube mi chat?",
+      faq4A:
+        "No para los números: se cuentan en tu navegador. Por defecto, tu chat se guarda solo en este dispositivo, y puedes deshacerlo. Si preguntas a la IA, con la IA en tu dispositivo todo se queda en tu dispositivo, y la vista previa gratuita en la nube solo envía fragmentos anonimizados (nombres sustituidos; teléfonos, correos, enlaces e IBAN eliminados). El proveedor de IA no entrena con ellos.",
+      faq5Q: "¿Funciona con amigos, familia y grupos?",
+      faq5A:
+        "Sí, con cualquier chat de WhatsApp que puedas exportar. En un grupo, cada persona tiene su propio porcentaje de conversaciones iniciadas y su propio tiempo de respuesta.",
+      faq6Q: "¿Es gratis?",
+      faq6A:
+        "Los números de esta página son gratis y no necesitan cuenta. La lectura con IA es gratis en tu dispositivo, y la IA en la nube tiene una vista previa gratuita. El informe completo en la nube forma parte de WhatsAnalyze Pro ({price}/mes).",
+      ctaTitle: "Mira quién empieza las conversaciones en tu chat",
+      ctaButton: "Revisar mi chat",
+      ctaNote: "Gratis · Sin cuenta · Contado en tu dispositivo",
+      disclaimer:
+        "WhatsAnalyze muestra patrones en un chat, no veredictos sobre personas ni relaciones. Es un proyecto de código abierto independiente y no está afiliado, respaldado ni patrocinado por WhatsApp o Meta.",
+    },
     toolsWordCounter: {
       seoTitle: "Contador de palabras y vocabulario de WhatsApp | WhatsAnalyze",
       seoDescription:
@@ -5731,6 +6099,128 @@ export const messages = {
       ctaNote: "100% privado · Zero upload para servidor · Sem cadastro",
       disclaimer:
         "O WhatsAnalyze é um projeto de código aberto independente e não tem vínculo com o WhatsApp ou a Meta.",
+    },
+    situationTextingFirst: {
+      navLabel: "Sempre manda mensagem primeiro?",
+      seoTitle: "Sempre manda mensagem primeiro? Quem começa no WhatsApp",
+      seoDescription:
+        "Sempre mando mensagem primeiro? Veja quem começa as conversas no seu WhatsApp e com que rapidez cada um responde, lado a lado. Grátis e no seu dispositivo.",
+      heroEyebrow: "Quem começa a conversa",
+      heroTitle: "Você sempre manda mensagem primeiro?",
+      heroSubtitle:
+        "Quando parece que é sempre você quem puxa assunto, a conversa do WhatsApp pode mostrar como as coisas realmente são: quem começa e com que rapidez cada um responde. Lado a lado, contado no seu dispositivo.",
+      heroNote: "Grátis · Sem conta · Os números não saem do seu dispositivo",
+      offerLabel: "Pergunte quem se esforça mais na sua conversa com {name}",
+      resultsEyebrow: "A sua conversa em números",
+      resultsTitle: "Quem começa e com que rapidez cada um responde",
+      resultsText:
+        "Leia os dois juntos. Começar menos conversas, mas responder em minutos, também é esforço.",
+      resultsFew:
+        "Conversas até agora: {count}. Ainda é pouco para tirar conclusões.",
+      resultsHow:
+        "Uma conversa é iniciada por quem escreve primeiro depois de pelo menos seis horas de silêncio. O tempo de resposta é a média de quanto cada pessoa leva para responder a outra, contando respostas dentro de um dia.",
+      numbersStarted: "das conversas iniciadas",
+      numbersStartedOf: "{count} de {total} conversas",
+      numbersReply: "Resposta média",
+      numbersNoReplies: "Nenhuma resposta ainda",
+      numbersLast: "Última mensagem",
+      numbersMessages: "Mensagens",
+      numbersMore: "Outras pessoas nesta conversa: {count}",
+      nextTitle: "Quer mais do que horários?",
+      nextText:
+        "A IA pode ler as próprias mensagens e responder: “Quem se esforça mais nesta conversa?” A sua conversa já está aberta, então não é preciso enviar nada de novo.",
+      nextButton: "Perguntar quem se esforça mais",
+      nextNote:
+        "Grátis no seu dispositivo, ou como prévia grátis na nuvem, que envia só trechos anonimizados.",
+      showEyebrow: "O que a sua conversa pode mostrar",
+      showTitle: "Os números por trás da sensação",
+      showText:
+        "Tudo é contado a partir da conversa exportada, no seu navegador.",
+      show1Title: "Quem começa as conversas",
+      show1Text:
+        "A parte das conversas que cada pessoa inicia e quantas são. Uma nova conversa começa depois de seis horas de silêncio.",
+      show2Title: "Com que rapidez cada um responde",
+      show2Text:
+        "O tempo médio de resposta de cada pessoa, logo ao lado da sua porcentagem: assim aparecem tanto começar menos quanto responder rápido.",
+      show3Title: "Quem escreveu por último, e quando",
+      show3Text:
+        "Quando cada um mandou a última mensagem e quantas mensagens cada pessoa escreveu.",
+      show4Title: "O que as mensagens dizem",
+      show4Text:
+        "Se quiser mais, a IA lê a própria conversa e responde “Quem se esforça mais nesta conversa?” em palavras simples.",
+      exampleEyebrow: "Um exemplo",
+      exampleTitle: "Mia começa mais. Leo responde mais rápido.",
+      exampleText:
+        "Duas pessoas inventadas, para mostrar como ler os números. Mia inicia cerca de dois terços das conversas; Leo costuma responder em poucos minutos. Nenhum dos dois números diz quem se importa mais.",
+      exampleCaption: "Exemplo · Mia e Leo são inventados",
+      exampleVibe: "Um vaivém leve, do dia a dia",
+      exampleSummary:
+        "Mia e Leo se falam quase todo dia: planos para o fim de semana, histórias do trabalho e uma piada recorrente sobre as plantas do Leo.",
+      exampleAnswer:
+        "Os dois, de jeitos diferentes. Mia abre a maioria das conversas, muitas vezes com um plano ou uma pergunta sobre o dia do Leo. Leo começa menos, mas responde em minutos e faz as perguntas que mantêm a conversa viva. Se a Mia gostaria que o Leo mandasse mensagem primeiro mais vezes, vale a pena dizer isso. A conversa não pode decidir isso por eles.",
+      limitsEyebrow: "Limites honestos",
+      limitsTitle: "Quem manda mensagem primeiro não é a história toda",
+      limitsText:
+        "Os números mostram um padrão numa conversa. Eles não medem o quanto alguém se importa com você, nem dizem se uma amizade ou um relacionamento é unilateral.",
+      limit1Title: "Cada pessoa tem seu jeito",
+      limit1Text:
+        "Algumas pessoas planejam e puxam assunto. Outras quase nunca começam, mas respondem rápido e com carinho. As duas coisas fazem parte de manter contato.",
+      limit2Title: "A vida acontece fora da conversa",
+      limit2Text:
+        "Horários de trabalho, fusos horários, ligações e o tempo juntos não aparecem numa exportação do WhatsApp.",
+      limit3Title: "Padrões, não veredictos",
+      limit3Text:
+        "Uma parcela de 70% descreve o que aconteceu nesta conversa. O que isso significa é você quem decide, e talvez valha a pena conversar sobre isso.",
+      limit4Title: "Uma conversa curta diz pouco",
+      limit4Text:
+        "Algumas semanas ou algumas dezenas de conversas podem pender para qualquer lado. Quanto mais longa a conversa, mais os números dizem.",
+      supportTitle: "Quando é mais do que uma conversa",
+      privacyEyebrow: "Privado desde o início",
+      privacyTitle: "A sua conversa continua sua",
+      privacy1Title: "Contado no seu dispositivo",
+      privacy1Text:
+        "Os números são calculados no seu navegador. A sua conversa não é enviada a lugar nenhum para contá-los.",
+      privacy2Title: "Guardada aqui, se você quiser",
+      privacy2Text:
+        "Por padrão, a sua conversa fica guardada só neste dispositivo, para você voltar sem enviá-la de novo. Toque em “Não guardar” para desfazer isso, ou esqueça-a quando quiser.",
+      privacy3Title: "IA do seu jeito",
+      privacy3Text:
+        "Com a IA no dispositivo, a sua conversa nunca sai dele. A prévia grátis na nuvem envia só trechos anonimizados (nomes substituídos; telefones, e-mails, links e IBANs removidos), e o provedor de IA não treina com eles.",
+      stepsTitle: "Como verificar a sua conversa",
+      step1Title: "Exporte a conversa",
+      step1Text:
+        "No WhatsApp, abra a conversa, toque no nome no topo e depois em “Exportar conversa” e “Sem mídia”.",
+      step2Title: "Solte aqui",
+      step2Text:
+        "Solte o arquivo no quadro no topo desta página, ou escolha-o. Ele é lido no seu navegador.",
+      step3Title: "Leia os dois números",
+      step3Text:
+        "Veja juntos quem começa e com que rapidez cada um responde. Se quiser, pergunte à IA a história por trás deles.",
+      stepsGuide: "Guia detalhado de exportação para iPhone e Android",
+      faqTitle: "Perguntas frequentes",
+      faq1Q: "Como saber se sou sempre eu quem manda mensagem primeiro?",
+      faq1A:
+        "Exporte a conversa do WhatsApp e solte-a no quadro desta página. A página conta quem escreveu primeiro em cada conversa e mostra a porcentagem de cada pessoa ao lado da rapidez com que responde. Uma nova conversa começa quando alguém escreve depois de pelo menos seis horas de silêncio.",
+      faq2Q: "Sempre mando mensagem primeiro. É uma amizade unilateral?",
+      faq2A:
+        "Não só por isso. Algumas pessoas gostam de puxar assunto, outras são melhores em responder, e trabalho, fusos horários e o tempo juntos também contam. Os números ajudam a ver um padrão. Se isso parece justo, só vocês dois podem resolver conversando.",
+      faq3Q: "O que conta como começar uma conversa?",
+      faq3A:
+        "A primeira mensagem da conversa e toda mensagem enviada depois de pelo menos seis horas sem mensagens. O tempo de resposta é a média de quanto cada pessoa leva para responder a outra, contando respostas dentro de um dia.",
+      faq4Q: "A minha conversa é enviada para algum lugar?",
+      faq4A:
+        "Não para os números: eles são contados no seu navegador. Por padrão, a sua conversa fica guardada só neste dispositivo, e você pode desfazer isso. Se perguntar à IA, com a IA no dispositivo tudo fica no seu dispositivo, e a prévia grátis na nuvem envia só trechos anonimizados (nomes substituídos; telefones, e-mails, links e IBANs removidos). O provedor de IA não treina com eles.",
+      faq5Q: "Funciona com amigos, família e grupos?",
+      faq5A:
+        "Sim, com qualquer conversa do WhatsApp que você possa exportar. Num grupo, cada pessoa tem a sua própria porcentagem de conversas iniciadas e o seu próprio tempo de resposta.",
+      faq6Q: "É grátis?",
+      faq6A:
+        "Os números desta página são grátis e não precisam de conta. A leitura por IA é grátis no seu dispositivo, e a IA na nuvem tem uma prévia grátis. O relatório completo na nuvem faz parte do WhatsAnalyze Pro ({price}/mês).",
+      ctaTitle: "Veja quem começa as conversas no seu WhatsApp",
+      ctaButton: "Verificar minha conversa",
+      ctaNote: "Grátis · Sem conta · Contado no seu dispositivo",
+      disclaimer:
+        "O WhatsAnalyze mostra padrões numa conversa, não veredictos sobre pessoas ou relacionamentos. É um projeto de código aberto independente e não tem vínculo com o WhatsApp ou a Meta.",
     },
     toolsWordCounter: {
       seoTitle: "Contador de palavras e vocabulário do WhatsApp | WhatsAnalyze",
@@ -7207,6 +7697,131 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze est un projet open source indépendant sans affiliation, approbation ou parrainage par WhatsApp ou Meta.",
     },
+    situationTextingFirst: {
+      navLabel: "Toujours vous qui écrivez en premier ?",
+      seoTitle: "C'est toujours vous qui écrivez en premier sur WhatsApp ?",
+      seoDescription:
+        "C'est toujours moi qui écris en premier ? Voyez qui lance les conversations dans votre discussion WhatsApp et à quelle vitesse chacun répond. Gratuit, sur votre appareil.",
+      heroEyebrow: "Qui lance la conversation",
+      heroTitle: "C'est toujours vous qui écrivez en premier ?",
+      heroSubtitle:
+        "Quand on a l'impression que chaque conversation part de soi, la discussion peut montrer ce qu'il en est vraiment : qui commence, et à quelle vitesse chacun répond. Côte à côte, calculé sur votre appareil.",
+      heroNote:
+        "Gratuit · Sans compte · Les chiffres ne quittent pas votre appareil",
+      offerLabel:
+        "Demander qui fait le plus d'efforts dans votre conversation avec {name}",
+      resultsEyebrow: "Votre discussion en chiffres",
+      resultsTitle: "Qui commence, et à quelle vitesse chacun répond",
+      resultsText:
+        "Lisez les deux ensemble. Lancer moins de conversations mais répondre en quelques minutes, c'est aussi un effort.",
+      resultsFew:
+        "Conversations jusqu'ici : {count}. C'est encore trop peu pour en tirer grand-chose.",
+      resultsHow:
+        "Une conversation est lancée par la personne qui écrit en premier après au moins six heures de silence. Le temps de réponse est la moyenne du temps que met chaque personne à répondre à quelqu'un d'autre, en comptant les réponses arrivées en moins de 24 heures.",
+      numbersStarted: "des conversations lancées",
+      numbersStartedOf: "{count} conversations sur {total}",
+      numbersReply: "Réponse moyenne",
+      numbersNoReplies: "Pas encore de réponse",
+      numbersLast: "Dernier message",
+      numbersMessages: "Messages",
+      numbersMore: "Autres personnes dans cette discussion : {count}",
+      nextTitle: "Envie d'aller au-delà des horaires ?",
+      nextText:
+        "L'IA peut lire les messages eux-mêmes et répondre à « Qui fait le plus d'efforts dans cette conversation ? ». Votre discussion est déjà ouverte : rien à importer à nouveau.",
+      nextButton: "Demander qui fait le plus d'efforts",
+      nextNote:
+        "Gratuit sur votre appareil, ou en aperçu cloud gratuit qui n'envoie que des extraits anonymisés.",
+      showEyebrow: "Ce que votre discussion peut montrer",
+      showTitle: "Les chiffres derrière l'impression",
+      showText:
+        "Tout est calculé à partir de votre discussion exportée, dans votre navigateur.",
+      show1Title: "Qui lance les conversations",
+      show1Text:
+        "La part des conversations lancées par chaque personne, et leur nombre. Une nouvelle conversation commence après six heures de silence.",
+      show2Title: "À quelle vitesse chacun répond",
+      show2Text:
+        "Le temps de réponse moyen de chaque personne, juste à côté de sa part : lancer moins et répondre vite apparaissent tous les deux.",
+      show3Title: "Qui a écrit en dernier, et quand",
+      show3Text:
+        "Quand chacun a envoyé son dernier message, et combien de messages chaque personne a écrits.",
+      show4Title: "Ce que disent les messages",
+      show4Text:
+        "Pour aller plus loin, l'IA lit la discussion elle-même et répond à « Qui fait le plus d'efforts dans cette conversation ? » avec des mots simples.",
+      exampleEyebrow: "Un exemple",
+      exampleTitle: "Mia commence plus souvent. Leo répond plus vite.",
+      exampleText:
+        "Deux personnes inventées, pour montrer comment lire les chiffres. Mia lance environ deux tiers de leurs conversations ; Leo répond le plus souvent en quelques minutes. Aucun de ces chiffres ne dit qui tient le plus à l'autre.",
+      exampleCaption: "Exemple · Mia et Leo sont inventés",
+      exampleVibe: "Des échanges simples, au quotidien",
+      exampleSummary:
+        "Mia et Leo s'écrivent presque tous les jours : projets pour le week-end, histoires de boulot et une blague récurrente sur les plantes de Leo.",
+      exampleAnswer:
+        "Les deux, chacun à sa manière. Mia ouvre la plupart des conversations, souvent avec un projet ou une question sur la journée de Leo. Leo en lance moins, mais répond en quelques minutes et pose les questions qui font durer la conversation. Si Mia aimerait que Leo écrive en premier plus souvent, ça vaut la peine de le lui dire. La discussion ne peut pas trancher à leur place.",
+      limitsEyebrow: "Des limites honnêtes",
+      limitsTitle: "Qui écrit en premier, ce n'est pas toute l'histoire",
+      limitsText:
+        "Les chiffres montrent une tendance dans une discussion. Ils ne mesurent pas à quel point quelqu'un tient à vous, et ne disent pas si une amitié ou une relation est à sens unique.",
+      limit1Title: "Chacun son style",
+      limit1Text:
+        "Certains organisent et prennent des nouvelles. D'autres lancent rarement la conversation, mais répondent vite et chaleureusement. Les deux font partie du lien.",
+      limit2Title: "La vie se passe aussi hors de la discussion",
+      limit2Text:
+        "Les horaires de travail, les fuseaux horaires, les appels et le temps passé ensemble n'apparaissent pas dans un export WhatsApp.",
+      limit3Title: "Des tendances, pas des verdicts",
+      limit3Text:
+        "Une part de 70 % décrit ce qui s'est passé dans cette discussion. Ce que ça signifie, c'est à vous d'en décider, et peut-être d'en parler.",
+      limit4Title: "Une discussion courte en dit peu",
+      limit4Text:
+        "Quelques semaines ou quelques dizaines de conversations peuvent pencher d'un côté comme de l'autre. Plus la discussion est longue, plus les chiffres ont de sens.",
+      supportTitle: "Quand il s'agit de plus qu'une discussion",
+      privacyEyebrow: "Privé dès la conception",
+      privacyTitle: "Votre discussion reste la vôtre",
+      privacy1Title: "Calculé sur votre appareil",
+      privacy1Text:
+        "Les chiffres sont calculés dans votre navigateur. Votre discussion n'est envoyée nulle part pour les obtenir.",
+      privacy2Title: "Enregistrée ici, si vous le souhaitez",
+      privacy2Text:
+        "Par défaut, votre discussion est enregistrée uniquement sur cet appareil, pour que vous puissiez y revenir sans nouvel import. Touchez « Ne pas garder » pour annuler, ou oubliez-la quand vous voulez.",
+      privacy3Title: "L'IA, selon vos choix",
+      privacy3Text:
+        "Avec l'IA sur l'appareil, votre discussion ne quitte jamais votre appareil. L'aperçu cloud gratuit n'envoie que des extraits anonymisés (noms remplacés ; numéros de téléphone, e-mails, liens et IBAN supprimés), et le fournisseur d'IA ne s'en sert pas pour entraîner ses modèles.",
+      stepsTitle: "Comment vérifier votre discussion",
+      step1Title: "Exportez la discussion",
+      step1Text:
+        "Dans WhatsApp, ouvrez la discussion, touchez son nom en haut, puis « Exporter la discussion » et « Sans médias ».",
+      step2Title: "Déposez-la ici",
+      step2Text:
+        "Glissez le fichier dans le cadre en haut de cette page, ou choisissez-le. Il est lu dans votre navigateur.",
+      step3Title: "Lisez les deux chiffres",
+      step3Text:
+        "Regardez ensemble qui commence et à quelle vitesse chacun répond. Si vous le souhaitez, demandez à l'IA l'histoire qui se cache derrière.",
+      stepsGuide: "Guide d'export détaillé pour iPhone et Android",
+      faqTitle: "Questions fréquentes",
+      faq1Q: "Comment savoir si c'est toujours moi qui écris en premier ?",
+      faq1A:
+        "Exportez la discussion WhatsApp et déposez-la dans le cadre de cette page. La page compte qui a écrit en premier dans chaque conversation et affiche la part de chaque personne à côté de sa vitesse de réponse. Une nouvelle conversation commence dès que quelqu'un écrit après au moins six heures de silence.",
+      faq2Q:
+        "C'est toujours moi qui écris en premier : est-ce une amitié à sens unique ?",
+      faq2A:
+        "Pas forcément. Certaines personnes aiment lancer la conversation, d'autres savent mieux répondre, et le travail, les fuseaux horaires et le temps passé ensemble comptent aussi. Les chiffres aident à repérer une tendance ; savoir si elle vous semble juste, c'est une question à aborder ensemble.",
+      faq3Q: "Qu'est-ce qui compte comme lancer une conversation ?",
+      faq3A:
+        "Le premier message de la discussion, et chaque message envoyé après au moins six heures sans aucun message. Le temps de réponse est la moyenne du temps que met chaque personne à répondre à quelqu'un d'autre, en comptant les réponses arrivées en moins de 24 heures.",
+      faq4Q: "Ma discussion est-elle envoyée quelque part ?",
+      faq4A:
+        "Pas pour les chiffres : ils sont calculés dans votre navigateur. Par défaut, votre discussion est enregistrée uniquement sur cet appareil, et vous pouvez annuler cela. Si vous interrogez l'IA, avec l'IA sur l'appareil tout reste sur votre appareil, et l'aperçu cloud gratuit n'envoie que des extraits anonymisés (noms remplacés ; numéros de téléphone, e-mails, liens et IBAN supprimés). Le fournisseur d'IA ne s'en sert pas pour l'entraînement.",
+      faq5Q: "Ça marche avec les amis, la famille et les groupes ?",
+      faq5A:
+        "Oui, avec toute discussion WhatsApp que vous pouvez exporter. Dans un groupe, chaque personne a sa propre part de conversations lancées et son propre temps de réponse.",
+      faq6Q: "Est-ce gratuit ?",
+      faq6A:
+        "Les chiffres de cette page sont gratuits et sans compte. La lecture par IA est gratuite sur votre appareil, et l'IA cloud propose un aperçu gratuit. Le rapport cloud complet fait partie de WhatsAnalyze Pro ({price}/mois).",
+      ctaTitle: "Voyez qui lance les conversations dans votre discussion",
+      ctaButton: "Vérifier ma discussion",
+      ctaNote: "Gratuit · Sans compte · Calculé sur votre appareil",
+      disclaimer:
+        "WhatsAnalyze montre des tendances dans une discussion, pas des verdicts sur des personnes ou des relations. C'est un projet open source indépendant sans affiliation, approbation ou parrainage par WhatsApp ou Meta.",
+    },
     toolsWordCounter: {
       seoTitle: "Compteur de mots et de vocabulaire WhatsApp | WhatsAnalyze",
       seoDescription:
@@ -8667,6 +9282,128 @@ export const messages = {
         "100% privato · Nessun caricamento su server · Nessuna registrazione",
       disclaimer:
         "WhatsAnalyze è un progetto open source indipendente e non è affiliato, approvato o sponsorizzato da WhatsApp o Meta.",
+    },
+    situationTextingFirst: {
+      navLabel: "Scrivi sempre tu per primo?",
+      seoTitle: "Scrivi sempre tu per primo? Scopri chi inizia su WhatsApp",
+      seoDescription:
+        "Scrivo sempre io per primo? Scopri chi inizia le conversazioni nella tua chat WhatsApp e quanto velocemente risponde ciascuno. Gratis, sul tuo dispositivo.",
+      heroEyebrow: "Chi inizia la conversazione",
+      heroTitle: "Scrivi sempre tu per primo?",
+      heroSubtitle:
+        "Se ti sembra che ogni conversazione parta da te, la chat può mostrare come stanno davvero le cose: chi inizia e quanto velocemente risponde ciascuno. Fianco a fianco, calcolato sul tuo dispositivo.",
+      heroNote:
+        "Gratis · Senza account · I numeri non lasciano il tuo dispositivo",
+      offerLabel: "Chiedi chi si impegna di più nella tua chat con {name}",
+      resultsEyebrow: "La tua chat in numeri",
+      resultsTitle: "Chi inizia e quanto velocemente risponde ciascuno",
+      resultsText:
+        "Leggili insieme. Iniziare meno conversazioni ma rispondere in pochi minuti è comunque impegno.",
+      resultsFew:
+        "Conversazioni finora: {count}. Sono ancora troppo poche per trarne molto.",
+      resultsHow:
+        "Una conversazione la inizia chi scrive per primo dopo almeno sei ore di silenzio. Il tempo di risposta è la media di quanto ciascuno impiega a rispondere a qualcun altro, contando le risposte entro un giorno.",
+      numbersStarted: "delle conversazioni iniziate",
+      numbersStartedOf: "{count} conversazioni su {total}",
+      numbersReply: "Risposta media",
+      numbersNoReplies: "Ancora nessuna risposta",
+      numbersLast: "Ultimo messaggio",
+      numbersMessages: "Messaggi",
+      numbersMore: "Altre persone in questa chat: {count}",
+      nextTitle: "Vuoi più degli orari?",
+      nextText:
+        "L'IA può leggere i messaggi stessi e rispondere a «Chi si impegna di più in questa chat?». La tua chat è già aperta, quindi non devi caricare nulla di nuovo.",
+      nextButton: "Chiedi chi si impegna di più",
+      nextNote:
+        "Gratis sul tuo dispositivo, o come anteprima cloud gratuita che invia solo estratti anonimizzati.",
+      showEyebrow: "Cosa può mostrare la tua chat",
+      showTitle: "I numeri dietro la sensazione",
+      showText: "Tutto viene contato dalla chat esportata, nel tuo browser.",
+      show1Title: "Chi inizia le conversazioni",
+      show1Text:
+        "La quota di conversazioni iniziate da ciascuno e quante sono. Una nuova conversazione inizia dopo sei ore di silenzio.",
+      show2Title: "Quanto velocemente risponde ciascuno",
+      show2Text:
+        "Il tempo medio di risposta di ciascuno, proprio accanto alla sua quota: così si vede sia chi inizia meno sia chi risponde in fretta.",
+      show3Title: "Chi ha scritto per ultimo, e quando",
+      show3Text:
+        "Quando ciascuno ha scritto l'ultima volta e quanti messaggi ha scritto ogni persona.",
+      show4Title: "Cosa dicono i messaggi",
+      show4Text:
+        "Se vuoi di più, l'IA legge la chat stessa e risponde a «Chi si impegna di più in questa chat?» con parole semplici.",
+      exampleEyebrow: "Un esempio",
+      exampleTitle: "Mia inizia più spesso. Leo risponde più in fretta.",
+      exampleText:
+        "Due persone inventate, per mostrare come leggere i numeri. Mia inizia circa due terzi delle loro conversazioni; Leo di solito risponde in pochi minuti. Nessuno dei due numeri dice a chi importa di più.",
+      exampleCaption: "Esempio · Mia e Leo sono inventati",
+      exampleVibe: "Uno scambio tranquillo, di tutti i giorni",
+      exampleSummary:
+        "Mia e Leo si scrivono quasi ogni giorno: piani per il weekend, storie di lavoro e una battuta ricorrente sulle piante di Leo.",
+      exampleAnswer:
+        "Tutti e due, in modi diversi. Mia apre la maggior parte delle conversazioni, spesso con un programma o una domanda sulla giornata di Leo. Leo inizia meno spesso, ma risponde in pochi minuti e fa le domande che tengono viva la conversazione. Se Mia vorrebbe che Leo scrivesse per primo più spesso, vale la pena dirglielo. La chat non può deciderlo al posto loro.",
+      limitsEyebrow: "Limiti onesti",
+      limitsTitle: "Chi scrive per primo non è tutta la storia",
+      limitsText:
+        "I numeri mostrano uno schema in una chat. Non misurano quanto qualcuno tenga a te e non dicono se un'amicizia o una relazione è a senso unico.",
+      limit1Title: "Ognuno ha il suo stile",
+      limit1Text:
+        "Alcune persone organizzano e si fanno sentire. Altre iniziano di rado, ma rispondono in fretta e con calore. Entrambe le cose fanno parte del restare in contatto.",
+      limit2Title: "La vita succede anche fuori dalla chat",
+      limit2Text:
+        "Orari di lavoro, fusi orari, chiamate e tempo passato insieme non compaiono in un'esportazione di WhatsApp.",
+      limit3Title: "Schemi, non verdetti",
+      limit3Text:
+        "Una quota del 70% descrive cosa è successo in questa chat. Cosa significa lo decidi tu, e magari ne parli.",
+      limit4Title: "Una chat breve dice poco",
+      limit4Text:
+        "Poche settimane o qualche decina di conversazioni possono pendere da una parte o dall'altra. Più la chat è lunga, più i numeri dicono qualcosa.",
+      supportTitle: "Quando è qualcosa di più di una chat",
+      privacyEyebrow: "Privato per scelta",
+      privacyTitle: "La tua chat resta tua",
+      privacy1Title: "Calcolato sul tuo dispositivo",
+      privacy1Text:
+        "I numeri vengono calcolati nel tuo browser. La tua chat non viene inviata da nessuna parte per contarli.",
+      privacy2Title: "Salvata qui, se vuoi",
+      privacy2Text:
+        "Di base la tua chat viene salvata solo su questo dispositivo, così puoi tornarci senza caricarla di nuovo. Tocca «Non salvare» per annullare, oppure dimenticala quando vuoi.",
+      privacy3Title: "L'IA alle tue condizioni",
+      privacy3Text:
+        "Con l'IA sul dispositivo, la tua chat non lascia mai il tuo dispositivo. L'anteprima cloud gratuita invia solo estratti anonimizzati (nomi sostituiti; numeri di telefono, email, link e IBAN rimossi), e il fornitore di IA non li usa per l'addestramento.",
+      stepsTitle: "Come controllare la tua chat",
+      step1Title: "Esporta la chat",
+      step1Text:
+        "In WhatsApp, apri la chat, tocca il nome in alto, poi «Esporta chat» e «Senza media».",
+      step2Title: "Trascinala qui",
+      step2Text:
+        "Trascina il file nel riquadro in cima a questa pagina, oppure sceglilo. Viene letto nel tuo browser.",
+      step3Title: "Leggi i due numeri",
+      step3Text:
+        "Guarda insieme chi inizia e quanto velocemente risponde ciascuno. Se vuoi, chiedi all'IA la storia che c'è dietro.",
+      stepsGuide: "Guida dettagliata all'esportazione per iPhone e Android",
+      faqTitle: "Domande frequenti",
+      faq1Q: "Come faccio a sapere se scrivo sempre io per primo?",
+      faq1A:
+        "Esporta la chat WhatsApp e trascinala nel riquadro di questa pagina. La pagina conta chi ha scritto per primo in ogni conversazione e mostra la quota di ciascuno accanto a quanto velocemente risponde. Una nuova conversazione inizia quando qualcuno scrive dopo almeno sei ore di silenzio.",
+      faq2Q: "Scrivo sempre io per primo: è un'amicizia a senso unico?",
+      faq2A:
+        "Non di per sé. Ad alcune persone piace iniziare le conversazioni, altre sono più brave a rispondere, e anche lavoro, fusi orari e tempo passato insieme contano. I numeri ti aiutano a vedere uno schema; se ti sembra equo è qualcosa da chiarire parlandone insieme.",
+      faq3Q: "Cosa conta come iniziare una conversazione?",
+      faq3A:
+        "Il primo messaggio della chat e ogni messaggio inviato dopo almeno sei ore senza messaggi. Il tempo di risposta è la media di quanto ciascuno impiega a rispondere a qualcun altro, contando le risposte entro un giorno.",
+      faq4Q: "La mia chat viene caricata?",
+      faq4A:
+        "Non per i numeri: vengono contati nel tuo browser. Di base la tua chat viene salvata solo su questo dispositivo, e puoi annullarlo. Se chiedi all'IA, con l'IA sul dispositivo tutto resta sul tuo dispositivo, e l'anteprima cloud gratuita invia solo estratti anonimizzati (nomi sostituiti; numeri di telefono, email, link e IBAN rimossi). Il fornitore di IA non li usa per l'addestramento.",
+      faq5Q: "Funziona con amici, famiglia e gruppi?",
+      faq5A:
+        "Sì, con qualsiasi chat WhatsApp che puoi esportare. In un gruppo, ogni persona ha la sua quota di conversazioni iniziate e il suo tempo di risposta.",
+      faq6Q: "È gratis?",
+      faq6A:
+        "I numeri di questa pagina sono gratis e senza account. La lettura con l'IA è gratuita sul tuo dispositivo, e l'IA cloud ha un'anteprima gratuita. Il report cloud completo fa parte di WhatsAnalyze Pro ({price}/mese).",
+      ctaTitle: "Scopri chi inizia le conversazioni nella tua chat",
+      ctaButton: "Controlla la mia chat",
+      ctaNote: "Gratis · Senza account · Calcolato sul tuo dispositivo",
+      disclaimer:
+        "WhatsAnalyze mostra schemi in una chat, non verdetti su persone o relazioni. È un progetto open source indipendente e non è affiliato, approvato o sponsorizzato da WhatsApp o Meta.",
     },
     toolsWordCounter: {
       seoTitle: "Contatore di parole e vocabolario WhatsApp | WhatsAnalyze",
