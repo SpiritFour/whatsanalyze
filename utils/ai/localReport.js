@@ -7,6 +7,47 @@
  */
 
 /**
+ * What the model said, without the think block Qwen opens with. Thinking is
+ * switched off, but Qwen 3.5 still starts every answer with an empty
+ * `<think></think>`, and WebLLM passes it on: the report's JSON began with
+ * "<think>", never parsed, and every run on a computer ended in
+ * "local_invalid". A block cut off before it closes leaves nothing to keep.
+ *
+ * @param {string} text
+ * @returns {string}
+ */
+export function withoutThinking(text) {
+  const s = String(text ?? "");
+  if (!/^\s*<think>/.test(s)) return s;
+  const end = s.indexOf("</think>");
+  return end === -1 ? "" : s.slice(end + "</think>".length).trimStart();
+}
+
+/**
+ * People named by the placeholders the model was given. A small model
+ * sometimes takes a nickname from the chat instead ("Adri" for Person B),
+ * which then shows up next to the real names as a stranger. An entry whose
+ * name is no placeholder takes the first placeholder nobody has yet.
+ *
+ * @template {{ people: { name: string }[] }} R
+ * @param {R} report
+ * @param {string[]} aliases the placeholders, in the order they were given
+ * @returns {R}
+ */
+export function namePeopleByAlias(report, aliases) {
+  const known = new Set(aliases);
+  const free = aliases.filter((a) => !report.people.some((p) => p.name === a));
+  return {
+    ...report,
+    people: report.people.map((person) =>
+      known.has(person.name) || !free.length
+        ? person
+        : { ...person, name: free.shift() },
+    ),
+  };
+}
+
+/**
  * JSON.parse that survives a truncated end: cut back to the last complete
  * value and close what is still open. Null if nothing complete is left.
  *

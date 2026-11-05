@@ -111,7 +111,7 @@
           <h3 class="support__title">
             {{ t("situationLosingInterest.supportTitle") }}
           </h3>
-          <p class="support__text">{{ t("toolsAi.coachSupportText") }}</p>
+          <p class="support__text">{{ t("toolsHub.supportText") }}</p>
         </div>
       </aside>
     </LandingSection>

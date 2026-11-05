@@ -1,7 +1,9 @@
 import {
   completeReport,
+  namePeopleByAlias,
   parseTruncatedJson,
   readLocalReport,
+  withoutThinking,
 } from "./localReport";
 
 /** A report as the model writes it, in the schema's field order. */
@@ -101,5 +103,55 @@ describe("readLocalReport", () => {
     expect(readLocalReport(cutAfter('"summary": "Zwei'))).toBeNull();
     expect(readLocalReport("not json")).toBeNull();
     expect(readLocalReport('"just a string"')).toBeNull();
+  });
+});
+
+describe("withoutThinking", () => {
+  test("drops the empty think block Qwen opens every answer with", () => {
+    const json = JSON.stringify(REPORT);
+    expect(withoutThinking(`<think>\n\n</think>\n\n${json}`)).toBe(json);
+    expect(
+      readLocalReport(withoutThinking(`<think>\n\n</think>\n\n${json}`)),
+    ).not.toBeNull();
+  });
+
+  test("drops a think block with something in it", () => {
+    expect(withoutThinking("<think>Let me see.</think>Answer")).toBe("Answer");
+  });
+
+  test("leaves an answer without one alone", () => {
+    expect(withoutThinking("  Answer <think>later</think>")).toBe(
+      "  Answer <think>later</think>",
+    );
+  });
+
+  test("keeps nothing of a think block cut off before it closes", () => {
+    expect(withoutThinking("<think>Still thinking about")).toBe("");
+  });
+});
+
+describe("namePeopleByAlias", () => {
+  const people = (...names) =>
+    names.map((name) => ({ name, role: "r", style: "s" }));
+
+  test("gives a nickname the placeholder nobody has", () => {
+    const fixed = namePeopleByAlias({ people: people("Person A", "Adri") }, [
+      "Person A",
+      "Person B",
+    ]);
+    expect(fixed.people.map((p) => p.name)).toEqual(["Person A", "Person B"]);
+  });
+
+  test("leaves people already named by placeholder alone", () => {
+    const report = { people: people("Person B", "Person A") };
+    expect(namePeopleByAlias(report, ["Person A", "Person B"])).toEqual(report);
+  });
+
+  test("keeps a stray name when every placeholder is taken", () => {
+    const fixed = namePeopleByAlias(
+      { people: people("Person A", "Person B", "Someone") },
+      ["Person A", "Person B"],
+    );
+    expect(fixed.people[2].name).toBe("Someone");
   });
 });

@@ -111,8 +111,8 @@
           >mdi-shield-alert-outline</v-icon
         >
         <div>
-          <strong>{{ t("toolsAi.coachSupportTitle") }}</strong>
-          <p>{{ t("toolsAi.coachSupportText") }}</p>
+          <strong>{{ t("toolsHub.supportTitle") }}</strong>
+          <p>{{ t("toolsHub.supportText") }}</p>
         </div>
       </div>
       <p class="support__device">
@@ -153,9 +153,10 @@ import { SUBSCRIPTION_PRICE, formatPrice } from "~/utils/pricing";
 const SOURCE = "landing_what_to_reply";
 /**
  * The AI page with "How could we communicate better?" picked, the preset
- * closest to finding a reply. The coach opens under that reading.
+ * closest to finding a reply. The coach opens under that reading, already
+ * set to reply help, and the page goes straight to it (coach=reply).
  */
-const COACH_QUERY = { ask: "better" };
+const COACH_QUERY = { ask: "better", coach: "reply" };
 
 const { t, locale } = useI18n();
 const localePath = useLocalePath();

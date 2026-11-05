@@ -306,6 +306,7 @@
           :me="me"
           :summary="insights.summary"
           :free="!!locked"
+          :initial-kind="coachFirst ? 'reply' : 'ask'"
           @allowance="allowance = $event"
         />
 
@@ -518,12 +519,26 @@ const presets = computed(() => [
   { id: "custom", needsMe: false, label: t("toolsAi.askCustom") },
 ]);
 
-// Arriving from the analyzer's "Ask AI about this chat" card.
-const route = useRoute();
-const source: AiSource = route.query.source === "results" ? "results" : "tool";
-if (presets.value.some((p) => p.id === route.query.ask)) {
-  question.value = route.query.ask as string;
-}
+// Arriving from the analyzer's "Ask AI about this chat" card, or from a
+// landing page with its question picked. The page is prerendered and
+// hydrates with the route it was rendered with, which had no query, so
+// ?ask= and ?source= are read once it is mounted: read in setup, every
+// question a link picked was dropped.
+const router = useRouter();
+let source: AiSource = "tool";
+/**
+ * ?coach=reply, from "What should I reply?": the reader came for reply help,
+ * so once there's a reading the page goes to the coach, set to reply.
+ */
+const coachFirst = ref(false);
+onMounted(() => {
+  const { ask, source: from, coach } = router.currentRoute.value.query;
+  if (from === "results") source = "results";
+  coachFirst.value = coach === "reply";
+  if (!question.value && presets.value.some((p) => p.id === ask)) {
+    question.value = ask as string;
+  }
+});
 
 const askBlocked = computed(
   () =>
@@ -709,6 +724,17 @@ function showKeptPreview() {
   return !!preview;
 }
 
+/** A reading is on screen: show it, or the coach for whoever came for it. */
+function showWhereNext() {
+  const target = coachFirst.value
+    ? document.querySelector(".coach")
+    : document.getElementById("ai-report");
+  (target ?? document.getElementById("ai-report"))?.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+}
+
 async function onChatLoaded(payload: { analysis: unknown }) {
   messages.value = (payload.analysis as { messages: ChatMessage[] }).messages;
   insights.value = null;
@@ -716,9 +742,11 @@ async function onChatLoaded(payload: { analysis: unknown }) {
   await restoreReport();
   // requestDevice can take a moment on some drivers: scroll first.
   void nextTick(() =>
-    document
-      .getElementById(insights.value ? "ai-report" : "ai-choose")
-      ?.scrollIntoView({ behavior: "smooth", block: "start" }),
+    insights.value
+      ? showWhereNext()
+      : document
+          .getElementById("ai-choose")
+          ?.scrollIntoView({ behavior: "smooth", block: "start" }),
   );
   // Before anyone clicks: a device that can't run it is pointed at the cloud
   // now, not after a download (utils/ai/localCheck.js).
@@ -976,9 +1004,7 @@ async function run(mode: Mode, via?: "fallback") {
     if (unmounted) return;
     analyticsTools.aiFinished(trackedMode, performance.now() - startedAt, from);
     await nextTick();
-    document
-      .getElementById("ai-report")
-      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    showWhereNext();
   } catch (err: any) {
     const message = String(err?.message ?? "unknown");
     // The page went mid-run and stopped the model: abandoned, not failed.

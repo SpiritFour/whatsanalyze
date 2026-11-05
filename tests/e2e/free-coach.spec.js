@@ -28,7 +28,7 @@ async function previewReport(page) {
   });
   await page.goto("/tools/ai-chat-analyzer/");
   await page.locator("input.hidden-file-input").setInputFiles(EXAMPLE_CHAT);
-  await page.getByRole("button", { name: "Try a free cloud preview" }).click();
+  await page.getByRole("button", { name: "Get my free AI preview" }).click();
   const report = page.locator("#ai-report");
   await expect(
     report.getByText("Weekend plans", { exact: true }),
@@ -75,4 +75,27 @@ test.describe("free coach replies after a preview", () => {
       "used today's free replies",
     );
   });
+});
+
+test("from What should I reply?, the coach starts on reply help", async ({
+  page,
+}) => {
+  await stubCallable(page, "analyzeChatAi", {
+    insights: {
+      answer: "",
+      summary: "Two friends planning trips.",
+      vibe: "Travel buddies",
+      people: [{ name: "Person A", role: "Planner", style: "Long messages" }],
+      dynamics: [],
+      topics: [],
+      highlights: [],
+    },
+    locked: { people: 1, dynamics: 0, topics: 0, highlights: 0 },
+  });
+  await page.goto("/tools/ai-chat-analyzer/?ask=better&coach=reply");
+  await page.locator("input.hidden-file-input").setInputFiles(EXAMPLE_CHAT);
+  await page.getByRole("button", { name: "Get my free AI preview" }).click();
+  const coach = page.locator(".coach");
+  await expect(coach.locator(".chip--on")).toHaveText("Help me reply");
+  await expect(coach).toBeInViewport();
 });

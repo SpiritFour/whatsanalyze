@@ -129,7 +129,7 @@
           <strong class="support__title">
             {{ t("situationTextingFirst.supportTitle") }}
           </strong>
-          <p class="support__text">{{ t("toolsAi.coachSupportText") }}</p>
+          <p class="support__text">{{ t("toolsHub.supportText") }}</p>
         </div>
       </aside>
     </LandingSection>

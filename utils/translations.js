@@ -759,6 +759,9 @@ export const messages = {
       busiestDay: "📅 The busiest WhatsApp day of the year: New Year's Eve.",
     },
     toolsHub: {
+      supportTitle: "This sounds serious. You don't have to handle it alone.",
+      supportText:
+        "If you or someone else is in danger, call your local emergency number now. For free, confidential support from a trained person, find a helpline in your country at findahelpline.com.",
       headerTools: "Tools",
       seoTitle: "WhatsApp Tools & Utilities Suite – WhatsAnalyze",
       seoDescription:
@@ -1123,6 +1126,8 @@ export const messages = {
         "{n} free cloud replies left today. Pro gives you more.",
       error_coach_free_used:
         "You have used today's free replies. Come back tomorrow, or get Pro for more replies each day.",
+      error_coach_local_unchanged:
+        "On this device the AI couldn't rewrite this draft. Try saying a little more about what you want to get across, or use the cloud coach.",
       coachSupportTitle:
         "This sounds serious. You don't have to handle it alone.",
       coachSupportText:
@@ -2735,6 +2740,9 @@ export const messages = {
     chooseSubscription: "Jetzt abonnieren",
     then: "dann",
     toolsHub: {
+      supportTitle: "Das klingt ernst. Damit musst du nicht allein sein.",
+      supportText:
+        "Wenn du oder jemand anderes in Gefahr ist, ruf sofort den Notruf (112). Kostenlose, vertrauliche Hilfe bekommst du z. B. bei der Telefonseelsorge (0800 111 0 111) oder über findahelpline.com für dein Land.",
       headerTools: "Tools",
       seoTitle: "WhatsApp Tools & Dienstprogramme – WhatsAnalyze",
       seoDescription:
@@ -3101,6 +3109,8 @@ export const messages = {
         "Heute noch {n} kostenlose Cloud-Antworten. Mit Pro bekommst du mehr.",
       error_coach_free_used:
         "Deine kostenlosen Antworten für heute sind aufgebraucht. Komm morgen wieder oder hol dir Pro für mehr Antworten pro Tag.",
+      error_coach_local_unchanged:
+        "Auf diesem Gerät konnte die KI den Entwurf nicht umschreiben. Schreib etwas genauer, was du sagen willst, oder nutze den Coach in der Cloud.",
       coachSupportTitle: "Das klingt ernst. Damit musst du nicht allein sein.",
       coachSupportText:
         "Wenn du oder jemand anderes in Gefahr ist, ruf sofort den Notruf (112). Kostenlose, vertrauliche Hilfe bekommst du z. B. bei der Telefonseelsorge (0800 111 0 111) oder über findahelpline.com für dein Land.",
@@ -4715,6 +4725,9 @@ export const messages = {
     chooseSubscription: "Suscríbete ahora",
     then: "luego",
     toolsHub: {
+      supportTitle: "Esto suena serio. No tienes que afrontarlo solo/a.",
+      supportText:
+        "Si tú u otra persona estáis en peligro, llama ahora al número de emergencias local (112 en Europa). Para apoyo gratuito y confidencial, busca una línea de ayuda de tu país en findahelpline.com (en España: 024).",
       headerTools: "Herramientas",
       seoTitle: "Herramientas y utilidades para WhatsApp – WhatsAnalyze",
       seoDescription:
@@ -5085,6 +5098,8 @@ export const messages = {
         "Hoy te quedan {n} respuestas gratis en la nube. Con Pro tienes más.",
       error_coach_free_used:
         "Ya has usado las respuestas gratis de hoy. Vuelve mañana o hazte Pro para tener más cada día.",
+      error_coach_local_unchanged:
+        "En este dispositivo la IA no ha podido reescribir el borrador. Prueba a explicar un poco más lo que quieres decir, o usa el coach en la nube.",
       coachSupportTitle: "Esto suena serio. No tienes que afrontarlo solo/a.",
       coachSupportText:
         "Si tú u otra persona estáis en peligro, llama ahora al número de emergencias local (112 en Europa). Para apoyo gratuito y confidencial, busca una línea de ayuda de tu país en findahelpline.com (en España: 024).",
@@ -6435,6 +6450,10 @@ export const messages = {
     chooseSubscription: "Assinar Agora",
     then: "depois",
     toolsHub: {
+      supportTitle:
+        "Isso parece sério. Você não precisa lidar com isso sozinho(a).",
+      supportText:
+        "Se você ou outra pessoa estiver em perigo, ligue agora para o número de emergência local. Para apoio gratuito e confidencial, encontre uma linha de ajuda no seu país em findahelpline.com (no Brasil, CVV: 188).",
       headerTools: "Ferramentas",
       seoTitle: "Ferramentas e utilitários para WhatsApp – WhatsAnalyze",
       seoDescription:
@@ -6804,6 +6823,8 @@ export const messages = {
         "Hoje restam {n} respostas grátis na nuvem. Com o Pro, você recebe mais.",
       error_coach_free_used:
         "Você já usou as respostas grátis de hoje. Volte amanhã ou assine o Pro para ter mais respostas por dia.",
+      error_coach_local_unchanged:
+        "Neste dispositivo, a IA não conseguiu reescrever o rascunho. Tente explicar um pouco mais o que você quer dizer, ou use o coach na nuvem.",
       coachSupportTitle:
         "Isso parece sério. Você não precisa lidar com isso sozinho(a).",
       coachSupportText:
@@ -6979,7 +7000,7 @@ export const messages = {
       heroSubtitle:
         "Adicione a sua conversa do WhatsApp e a IA responde a uma pergunta: como poderíamos comunicar melhor? Aponta momentos das suas próprias mensagens e sugere o que ambos podem experimentar, sem decidir quem tem razão.",
       heroNote:
-        "Grátis no seu dispositivo · Sem conta · A IA na nuvem só vê excertos anonimizados",
+        "Grátis no seu dispositivo · Sem conta · A IA na nuvem só vê trechos anonimizados",
       continueButton: "Continuar com esta conversa",
       exportGuide: "Como exportar uma conversa do WhatsApp?",
       showEyebrow: "O que a sua conversa pode mostrar",
@@ -7052,20 +7073,20 @@ export const messages = {
         "As estatísticas e a IA no dispositivo funcionam no seu navegador. Nada do que leem sai do seu dispositivo.",
       privacy3Title: "Anonimizada para a nuvem",
       privacy3Text:
-        "Se escolher a IA na nuvem, incluindo a pré-visualização grátis, só são enviados excertos anonimizados: nomes substituídos e números de telefone, e-mails, links e IBAN removidos. O fornecedor de IA não treina com eles.",
+        "Se você escolher a IA na nuvem, incluindo a prévia grátis, só são enviados trechos anonimizados: nomes substituídos e números de telefone, e-mails, links e IBAN removidos. O provedor de IA não treina com eles.",
       supportEyebrow: "Quando é mais do que uma discussão",
       supportTitle: "Quando as discussões dão medo",
       supportText:
-        "Se alguém faz ameaças, controla os seus passos ou faz com que não se sinta em segurança, uma análise da conversa não é a ajuda de que precisa, e não tem de lidar com isso sozinho(a). Quando uma conversa ou uma mensagem aponta para abuso, ameaças ou automutilação, o coach de IA foi feito para parar e indicar onde pedir ajuda.",
+        "Se alguém faz ameaças, controla seus passos ou faz você se sentir inseguro(a), uma análise da conversa não é a ajuda de que você precisa, e você não precisa lidar com isso sozinho(a). Quando uma conversa ou mensagem aponta para abuso, ameaças ou automutilação, o coach de IA foi feito para parar e indicar onde pedir ajuda.",
       supportLink: "Encontrar uma linha de apoio no seu país",
       faqTitle: "Perguntas frequentes",
       faq1Q: "Porque é que discutimos sempre pelas mesmas coisas?",
       faq1A:
-        "Muitas vezes o tema muda, mas a forma como tudo se desenrola não: o mesmo tipo de momento dá início à discussão e cada um responde como da última vez. Esta página não consegue dizer com certeza porquê, mas a conversa pode mostrar quando costuma acontecer e como correm as mensagens, e isso dá-vos algo concreto de que falar juntos.",
+        "Muitas vezes o assunto muda, mas o jeito como tudo acontece não: o mesmo tipo de momento começa a discussão e cada um responde como da última vez. Esta página não consegue dizer com certeza por quê, mas a conversa pode mostrar quando isso costuma acontecer e como as mensagens correm, e isso dá a vocês algo concreto para conversar.",
       faq2Q: "Vai dizer-me quem tem razão?",
       faq2A:
         "Não. Foi pensado para mostrar o padrão, não para escolher um vencedor. A IA recebe a pergunta de como poderiam comunicar melhor e responde com momentos da conversa e ideias para os dois. Não julga ninguém e pode interpretar mal o contexto.",
-      faq3Q: "Ajuda-me a escrever a próxima mensagem?",
+      faq3Q: "A IA me ajuda a escrever a próxima mensagem?",
       faq3A:
         "Sim. Abaixo de uma análise, “Ajude-me a responder” pega uma mensagem que você está prestes a enviar e sugere uma versão mais calma e clara, que mantém o que você quer dizer, com uma nota curta sobre o que mudou. Você decide o que enviar. Depois de uma análise no seu dispositivo, isso roda lá de graça; depois da prévia grátis na nuvem, você tem algumas respostas grátis por dia, e com o Pro mais.",
       faq4Q: "É grátis?",
@@ -7073,7 +7094,7 @@ export const messages = {
         "As estatísticas e a análise com IA no dispositivo são grátis e sem conta, assim como as perguntas de acompanhamento depois de uma análise no dispositivo. Sem assinatura, você também pode testar uma breve prévia grátis na nuvem, com algumas respostas grátis do coach por dia. A análise completa na nuvem e mais respostas na nuvem por dia fazem parte do Pro ({price}/mês).",
       faq5Q: "A minha conversa é enviada?",
       faq5A:
-        "Não para as estatísticas nem para a IA no dispositivo: funcionam no seu navegador e nada do que leem sai do seu dispositivo. Por padrão, a conversa fica guardada neste navegador para poder voltar a ela; pode escolher não a guardar ou esquecê-la a qualquer momento. Se escolher a IA na nuvem, só são enviados excertos anonimizados (nomes substituídos; números de telefone, e-mails, links e IBAN removidos), e o nosso fornecedor de IA não treina com eles. Antes de começar, pode ver exatamente o que seria enviado.",
+        "Não para as estatísticas nem para a IA no dispositivo: elas funcionam no seu navegador e nada do que leem sai do seu dispositivo. Por padrão, a conversa fica salva neste navegador para você voltar a ela; você pode escolher não salvar ou apagá-la a qualquer momento. Se escolher a IA na nuvem, só são enviados trechos anonimizados (nomes substituídos; números de telefone, e-mails, links e IBAN removidos), e nosso provedor de IA não treina com eles. Antes de começar, você pode ver exatamente o que seria enviado.",
       faq6Q: "Também funciona com discussões com amigos ou família?",
       faq6A:
         "Sim. Funciona com qualquer conversa do WhatsApp que exporte, seja com o seu parceiro ou parceira, um amigo, os seus pais ou os seus irmãos, e também com grupos. A IA descreve como as pessoas nela falam umas com as outras, sejam quem forem.",
@@ -7818,11 +7839,11 @@ export const messages = {
         "Não sabe o que responder a esta mensagem? Uma IA que leu a sua conversa do WhatsApp transforma o seu rascunho numa resposta mais calma e clara, com a sua voz. Grátis em dispositivos compatíveis.",
       ogTitle: "O que responder? Ajuda com a sua resposta no WhatsApp",
       ogDescription:
-        "Carregue a sua conversa do WhatsApp e receba ajuda com a resposta: uma versão mais calma e clara do que quer dizer, de uma IA que leu a conversa.",
+        "Envie sua conversa do WhatsApp e receba ajuda com a resposta: uma versão mais calma e clara do que você quer dizer, de uma IA que leu a conversa.",
       heroEyebrow: "Ajuda para responder",
       heroTitle: "O que responder?",
       heroSubtitle:
-        "A mensagem está aberta e não sabe como responder. Carregue a conversa e uma IA que a leu ajuda a encontrar as palavras: escreva o que quer dizer e receba uma versão mais calma e clara, com a sua voz e uma nota sobre o porquê.",
+        "A mensagem está aberta e você não sabe como responder. Envie a conversa e uma IA que a leu ajuda você a encontrar as palavras: escreva o que quer dizer e receba uma versão mais calma e clara, com a sua voz e uma nota sobre o porquê.",
       heroNote:
         "Grátis no seu dispositivo, se o navegador conseguir executar · Algumas respostas grátis na nuvem por dia · Mais com o Pro",
       continueButton: "Pedir ajuda para responder com esta conversa",
@@ -7831,7 +7852,7 @@ export const messages = {
       exampleEyebrow: "Um exemplo",
       exampleTitle: "Como é a ajuda",
       exampleText:
-        "O Tom volta a escrever depois de uma semana calado. O primeiro rascunho da Mia diz como ela se sente, com uma alfinetada. O coach mantém o sentimento e tira a alfinetada.",
+        "Tom volta a escrever depois de uma semana calado. O primeiro rascunho da Mia diz como ela se sente, com uma alfinetada. O coach mantém o sentimento e tira a alfinetada.",
       exampleBadge: "Exemplo · Mia e Tom são fictícios",
       exampleIncoming:
         "Desculpa ter andado tão calado esta semana, o trabalho foi demais. Sábado ainda está de pé?",
@@ -7843,7 +7864,7 @@ export const messages = {
       showEyebrow: "O que a sua conversa pode mostrar",
       showTitle: "Ajuda que conhece o tom da vossa conversa",
       showText:
-        "O coach de IA trabalha com a sua conversa, não com um modelo pronto: excertos anonimizados e a leitura da IA sob a qual se abre.",
+        "O coach de IA trabalha com a sua conversa, não com um modelo pronto: trechos anonimizados e a leitura da IA logo acima dele.",
       show1Title: "Como escrevem",
       show1Text:
         "A leitura descreve o tom da conversa e como cada pessoa escreve, para que uma sugestão soe como a sua conversa.",
@@ -7858,7 +7879,7 @@ export const messages = {
         "Não sabe o que uma mensagem quer dizer? Pergunte. O coach aponta para momentos da conversa e foi feito para avisar quando a conversa não dá a resposta.",
       stepsEyebrow: "Como chegar lá",
       stepsTitle: "Da conversa à resposta",
-      step1Title: "Carregue a conversa",
+      step1Title: "Envie a conversa",
       step1Text:
         "Exporte a conversa no WhatsApp sem mídia, depois de chegar a mensagem a que quer responder, e arraste-a para a caixa acima. É lida no seu navegador.",
       step2Title: "Obtenha uma leitura",
@@ -7882,19 +7903,19 @@ export const messages = {
       ownWordsText:
         "Uma sugestão é um ponto de partida, não uma fórmula. As pessoas notam quando uma mensagem não soa a quem a envia, e uma resposta que parece escrita por uma máquina pode ser recebida de outra forma. Fique com o que ajuda, mude o que não serve e envie-a como a diria.",
       limitsEyebrow: "Limites honestos",
-      limitsTitle: "O que não consegue fazer",
+      limitsTitle: "O que ele não consegue fazer",
       limit1Title: "Padrões, não veredictos",
       limit1Text:
-        "O coach pode dizer como a conversa costuma decorrer. Não consegue saber o que a outra pessoa sente nem o que vai fazer a seguir.",
+        "O coach pode dizer como a conversa costuma acontecer. Ele não tem como saber o que a outra pessoa sente nem o que ela vai fazer em seguida.",
       limit2Title: "Só o que foi escrito",
       limit2Text:
-        "A IA lê excertos de toda a conversa, sempre com as mensagens mais recentes. Não lê mensagens de voz, fotos nem stickers, e o modelo do dispositivo lê menos do que o da nuvem.",
+        "A IA lê trechos da conversa inteira, sempre com as mensagens mais recentes. Ela não lê mensagens de voz, fotos nem figurinhas, e o modelo do dispositivo lê menos do que o da nuvem.",
       limit3Title: "Uma conversa curta diz pouco",
       limit3Text:
         "Com poucas mensagens há pouco em que se apoiar, e as sugestões ficam mais próximas de conselhos gerais.",
       limit4Title: "A IA também erra",
       limit4Text:
-        "Pode não perceber ironia, piadas internas ou tudo o que aconteceu fora da conversa. Quem conhece melhor a sua situação é você.",
+        "Ela pode não entender ironia, piadas internas ou tudo o que aconteceu fora da conversa. Quem conhece melhor a sua situação é você.",
       privacyEyebrow: "Privado desde o início",
       privacyTitle: "A sua conversa continua sua",
       privacyText:
@@ -7907,7 +7928,7 @@ export const messages = {
         "Com a IA grátis no seu dispositivo, a conversa, a leitura e o que escreve ao coach nunca saem do seu dispositivo.",
       privacy3Title: "Anonimizado para a nuvem",
       privacy3Text:
-        "A IA na nuvem só recebe excertos anonimizados e o que escreve ao coach: os nomes da conversa são substituídos e os números de telefone, e-mails, links e IBANs removidos. O fornecedor de IA não os usa para treino.",
+        "A IA na nuvem só recebe trechos anonimizados e o que você escreve para o coach: os nomes da conversa são substituídos e os números de telefone, e-mails, links e IBANs são removidos. O provedor de IA não os usa para treino.",
       supportEyebrow: "Quando é sério",
       supportTitle:
         "Algumas mensagens precisam de mais do que uma boa resposta",
@@ -7916,7 +7937,7 @@ export const messages = {
       supportDevice:
         "Num dispositivo que outras pessoas usam, escolha “{dontKeep}” por baixo da caixa de upload para que a conversa não fique guardada neste navegador. Uma conversa guardada pode ser esquecida a qualquer momento em “{saved}”.",
       faqTitle: "Perguntas sobre a ajuda para responder",
-      faq1Q: "A IA consegue dizer o que devo responder?",
+      faq1Q: "A IA consegue me dizer o que responder?",
       faq1A:
         "Pode ajudar a chegar lá. Escreva uma versão aproximada do que quer dizer e o coach responde com uma versão mais calma e clara, com a sua voz e o tom habitual da conversa, e uma nota breve sobre o que mudou. Ou pergunte-lhe primeiro sobre a mensagem. A resposta continua a ser sua: mude o que não soar a si antes de a enviar.",
       faq2Q: "É grátis?",
@@ -7924,10 +7945,10 @@ export const messages = {
         "Sim. No seu dispositivo, a análise e o coach rodam grátis no navegador, se ele suportar WebGPU. Na nuvem, a prévia grátis mostra parte da análise e vem com algumas respostas grátis do coach por dia, em qualquer celular. Com o Pro ({price} por mês), você recebe a análise completa e mais respostas do coach por dia.",
       faq3Q: "A IA vê a mensagem que acabei de receber?",
       faq3A:
-        "Só se ela estiver na sua exportação, por isso exporte a conversa depois de a mensagem chegar. A IA lê excertos de toda a conversa e inclui sempre as mensagens mais recentes. Se guardou a conversa antes de a mensagem chegar, exporte-a de novo. Também pode colar a mensagem na sua pergunta.",
+        "Só se ela estiver na sua exportação, então exporte a conversa depois que a mensagem chegar. A IA lê trechos da conversa inteira e sempre inclui as mensagens mais recentes. Se você salvou a conversa antes de a mensagem chegar, exporte de novo. Você também pode colar a mensagem na sua pergunta.",
       faq4Q: "A minha conversa é enviada para algum servidor?",
       faq4A:
-        "A conversa é lida no seu navegador e guardada só neste dispositivo, o que pode desfazer. Com a IA no dispositivo, nada sai dele. Com a IA na nuvem, só são enviados excertos anonimizados e o que escreve ao coach: os nomes da conversa são substituídos e os números de telefone, e-mails, links e IBANs removidos. O fornecedor de IA não os usa para treino.",
+        "A conversa é lida no seu navegador e salva só neste dispositivo, o que você pode desfazer. Com a IA no dispositivo, nada sai dele. Com a IA na nuvem, só são enviados trechos anonimizados e o que você escreve para o coach: os nomes da conversa são substituídos e os números de telefone, e-mails, links e IBANs são removidos. O provedor de IA não os usa para treino.",
       faq5Q: "O coach lembra-se do que lhe escrevi?",
       faq5A:
         "Se a conversa estiver guardada neste dispositivo, o que escreveu ao coach fica guardado com a leitura a que se seguiu, por isso continua lá quando voltar. Se esquecer a conversa, isso também desaparece.",
@@ -8421,6 +8442,9 @@ export const messages = {
     chooseSubscription: "Abonnez-vous maintenant",
     then: "puis",
     toolsHub: {
+      supportTitle: "Cela semble sérieux. Vous n’avez pas à gérer cela seul·e.",
+      supportText:
+        "Si vous ou quelqu’un d’autre êtes en danger, appelez tout de suite le numéro d’urgence local (112). Pour un soutien gratuit et confidentiel, trouvez une ligne d’écoute dans votre pays sur findahelpline.com (en France : 3114).",
       headerTools: "Outils",
       seoTitle: "Outils et utilitaires WhatsApp – WhatsAnalyze",
       seoDescription:
@@ -8795,6 +8819,8 @@ export const messages = {
         "Encore {n} réponses cloud gratuites aujourd’hui. Avec Pro, tu en as plus.",
       error_coach_free_used:
         "Tu as utilisé tes réponses gratuites du jour. Reviens demain, ou passe à Pro pour en avoir plus chaque jour.",
+      error_coach_local_unchanged:
+        "Sur cet appareil, l’IA n’a pas réussi à réécrire ce brouillon. Précise un peu ce que tu veux faire passer, ou utilise le coach dans le cloud.",
       coachSupportTitle: "Cela semble sérieux. Tu n'as pas à gérer ça seul·e.",
       coachSupportText:
         "Si toi ou quelqu'un d'autre êtes en danger, appelle tout de suite le numéro d'urgence local (112). Pour un soutien gratuit et confidentiel, trouve une ligne d'écoute dans ton pays sur findahelpline.com (en France : 3114).",
@@ -10407,6 +10433,9 @@ export const messages = {
     chooseSubscription: "Abbonati ora",
     then: "poi",
     toolsHub: {
+      supportTitle: "Sembra una cosa seria. Non devi affrontarla da solo/a.",
+      supportText:
+        "Se tu o qualcun altro siete in pericolo, chiama subito il numero di emergenza locale (112). Per un supporto gratuito e riservato, trova una linea d'ascolto nel tuo paese su findahelpline.com (in Italia: Telefono Amico 02 2327 2327).",
       headerTools: "Strumenti",
       seoTitle: "Strumenti e utilità per WhatsApp – WhatsAnalyze",
       seoDescription:
@@ -10777,6 +10806,8 @@ export const messages = {
         "Oggi ti restano {n} risposte cloud gratuite. Con Pro ne hai di più.",
       error_coach_free_used:
         "Hai usato le risposte gratuite di oggi. Torna domani, o passa a Pro per averne di più ogni giorno.",
+      error_coach_local_unchanged:
+        "Su questo dispositivo l’IA non è riuscita a riscrivere la bozza. Prova a spiegare meglio cosa vuoi dire, o usa il coach nel cloud.",
       coachSupportTitle:
         "Sembra una cosa seria. Non devi affrontarla da solo/a.",
       coachSupportText:

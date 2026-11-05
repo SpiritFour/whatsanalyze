@@ -2,7 +2,11 @@ import { z } from "zod";
 import * as Sentry from "@sentry/nuxt";
 import { isContextOverflow, localErrorCause } from "~/utils/ai/localErrors";
 import { checkLocalDevice } from "~/utils/ai/localCheck";
-import { readLocalReport } from "~/utils/ai/localReport";
+import {
+  namePeopleByAlias,
+  readLocalReport,
+  withoutThinking,
+} from "~/utils/ai/localReport";
 import { splitParts } from "~/utils/ai/digest";
 import {
   buildAnswerPrompt,
@@ -297,7 +301,10 @@ function complete(
       } else if (data.type === "retry") {
         onProgress({ phase: "download", ...download, retry: data.attempt });
       } else if (data.type === "done") {
-        resolve({ content: data.content, finish: data.finish });
+        resolve({
+          content: withoutThinking(data.content),
+          finish: data.finish,
+        });
       } else reject(new Error(data.message));
     };
     w.onerror = (event) => reject(new Error(event.message));
@@ -322,8 +329,8 @@ export function stopLocalModel() {
 
 const thinkingOff = (model: LocalModel) =>
   // On a 4k context, thinking out loud spends the answer's budget before it
-  // starts. WebLLM prepends an empty think block for this, so only Qwen may
-  // be sent it.
+  // starts. Only Qwen may be sent this; it still opens each answer with an
+  // empty think block, which complete() strips (withoutThinking).
   model.qwen ? { extra_body: { enable_thinking: false } } : {};
 
 /**
@@ -497,7 +504,10 @@ export async function analyzeLocally(
         chars: content.length,
       });
     }
-    return parsed.data;
+    return namePeopleByAlias(
+      parsed.data,
+      digest.participants.map((p) => p.alias),
+    );
   }, true);
 
   if (ask?.question) {

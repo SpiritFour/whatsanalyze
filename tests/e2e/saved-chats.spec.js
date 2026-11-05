@@ -251,9 +251,7 @@ test.describe("continue where you left off", () => {
     });
     await page.goto("/tools/ai-chat-analyzer/");
     await page.locator("input.hidden-file-input").setInputFiles(EXAMPLE_CHAT);
-    await page
-      .getByRole("button", { name: "Try a free cloud preview" })
-      .click();
+    await page.getByRole("button", { name: "Get my free AI preview" }).click();
     const report = page.locator("#ai-report");
     await expect(report.locator(".report-card--locked")).toHaveCount(7);
 

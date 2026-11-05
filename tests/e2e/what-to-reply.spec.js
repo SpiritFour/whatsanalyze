@@ -12,7 +12,7 @@ const {
 
 const PAGE = "/tools/what-to-reply";
 /** The AI page with the preset this page picks. */
-const COACH_URL = /\/tools\/ai-chat-analyzer\/?\?ask=better$/;
+const COACH_URL = /\/tools\/ai-chat-analyzer\/?\?ask=better&coach=reply$/;
 
 test.describe("what to reply", () => {
   test("renders in English and German @mobile", async ({ page }) => {

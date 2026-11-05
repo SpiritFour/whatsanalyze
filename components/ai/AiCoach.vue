@@ -72,7 +72,11 @@ import { localErrorKey } from "~/utils/ai/localErrors";
 import { analyticsTools } from "~/composables/useAnalytics";
 import { useSubscriptionStore } from "~/stores/subscription";
 import { buildDigest, restoreNames } from "~/utils/ai/digest";
-import { isSafetyReply, needsSupport } from "~/utils/ai/coach";
+import {
+  isSafetyReply,
+  isUnchangedRewrite,
+  needsSupport,
+} from "~/utils/ai/coach";
 import {
   coachLocally,
   localCoachChars,
@@ -109,6 +113,8 @@ const props = defineProps<{
    * of the few free ones a visitor gets a day.
    */
   free?: boolean;
+  /** Which kind is picked to start with: reply help, for "What should I reply?". */
+  initialKind?: CoachKind;
 }>();
 const emit = defineEmits<{ allowance: [CloudAllowance] }>();
 
@@ -126,7 +132,7 @@ const note = computed(() => {
 });
 
 const kinds: CoachKind[] = ["ask", "reply"];
-const kind = ref<CoachKind>("ask");
+const kind = ref<CoachKind>(props.initialKind ?? "ask");
 const draft = ref("");
 const thinking = ref(false);
 const errorKey = ref<string | null>(null);
@@ -232,6 +238,17 @@ async function send() {
         options,
         () => {},
       );
+      // The small model can hand the draft back word for word and explain a
+      // change it never made: say so, and keep the draft to try again.
+      if (
+        kind.value === "reply" &&
+        !isSafetyReply(reply) &&
+        isUnchangedRewrite(reply, turn.sent)
+      ) {
+        errorKey.value = "coach_local_unchanged";
+        analyticsTools.error("ai", "coach_local:unchanged");
+        return;
+      }
     }
     if (isSafetyReply(reply)) {
       turn.support = true;

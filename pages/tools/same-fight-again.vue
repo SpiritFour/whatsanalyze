@@ -111,7 +111,7 @@
         <v-icon size="28" class="support__icon">
           mdi-shield-alert-outline
         </v-icon>
-        <p>{{ t("toolsAi.coachSupportText") }}</p>
+        <p>{{ t("toolsHub.supportText") }}</p>
         <a
           class="support__link"
           href="https://findahelpline.com"
