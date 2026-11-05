@@ -167,11 +167,15 @@ watch(
   { immediate: true },
 );
 
+// In the order pages/wrapped/results.vue lists the slides. Emoji3 was
+// missing, so every slide from it on was reported under the next one's name
+// and ShareInvite came through as "Slide10".
 const slideNames = [
   "Intro1",
   "Intro2",
   "Emoji1",
   "Emoji2",
+  "Emoji3",
   "Words1",
   "Words2",
   "Words3",
