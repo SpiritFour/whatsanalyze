@@ -21,6 +21,7 @@ export const localizedPages = [
   "switch-from-whatsapp-to-signal",
   "tools",
   "tools/ai-chat-analyzer",
+  "tools/same-fight-again",
   "tools/court-evidence",
   "tools/inactivity",
   "tools/proof-of-relationship",

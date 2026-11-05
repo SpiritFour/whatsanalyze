@@ -1146,6 +1146,123 @@ export const messages = {
       hookCard4Text:
         "Turn your chat into an Instagram-story style retrospective to share with friends.",
     },
+    situationSameFight: {
+      navLabel: "Same fight again?",
+      seoTitle:
+        "Same Fight Over and Over? Understand Your WhatsApp Chat | WhatsAnalyze",
+      seoDescription:
+        "Why do we keep having the same fight? Let AI read your WhatsApp chat, point to the moments that repeat and suggest how to talk differently. No blame, no verdicts, free on your device.",
+      ogTitle: "Why do we keep having the same fight?",
+      ogDescription:
+        "Let AI read your WhatsApp chat and show the pattern behind the argument you keep having, without deciding who's right.",
+      heroEyebrow: "Fighting over text?",
+      heroTitle: "Why do we keep having the same fight?",
+      heroSubtitle:
+        "Drop in your WhatsApp chat and the AI answers one question: how could we communicate better? It points to moments from your own messages and suggests what you could both try, without deciding who's right.",
+      heroNote:
+        "Free on your device · No account · The cloud AI only ever sees anonymized excerpts",
+      continueButton: "Continue with this chat",
+      exportGuide: "How do I export a WhatsApp chat?",
+      showEyebrow: "What your chat can show",
+      showTitle: "You remember how it felt. Your chat remembers how it went.",
+      showText:
+        "When you wrote, who wrote first, how long the replies took: these are things WhatsAnalyze really reads and counts in your export.",
+      show1Title: "A reading of how you talk",
+      show1Text:
+        "The AI answers “How could we communicate better?” in a few sentences, pointing to moments from your chat and suggesting what each of you could try.",
+      show2Title: "When you write to each other",
+      show2Text:
+        "A 24-hour heatmap of your chat, and how much of each person's writing happens at night. If your hardest conversations happen late, you'll see how much of your chat runs then.",
+      show2Link: "Open the heatmap",
+      show3Title: "Who starts the conversations",
+      show3Text:
+        "After six hours or more of quiet, who writes first? Counted for each of you, as a share of all your conversations.",
+      show3Link: "See who starts",
+      show4Title: "Reply times and silences",
+      show4Text:
+        "How long each of you takes to reply on average, and the longest silences in your chat with who broke them.",
+      show4Link: "See reply times",
+      show5Title: "Help with the next message",
+      show5Text:
+        "After a full reading, ask follow-up questions about your chat, or paste a message you're about to send and get a calmer, clearer version in your own voice.",
+      exampleEyebrow: "An example",
+      exampleTitle: "What a reading can look like",
+      exampleText:
+        "Made up for this page so you can see the shape of it: the AI names a pattern, points to moments and suggests a next step for both of you.",
+      exampleBadge: "Example · Nora and Tom are fictional",
+      exampleVibe: "Close, with one recurring snag",
+      exampleSummary:
+        "Nora and Tom write to each other all day, mostly about plans, dinner and friends. The tone is warm and teasing, with one tension that keeps coming back: last-minute changes of plan. It usually settles by the next morning.",
+      exampleAnswer:
+        "Your disagreements tend to start the same way: a plan changes late in the day, one of you hears about it by text, and the replies get shorter from there. Nora usually asks a direct question and Tom answers with a joke, which each of you seems to read differently. The exchanges that settle quickly are the ones where someone says how it felt (“I was looking forward to tonight”) rather than what went wrong. You could agree to settle plans earlier in the day, and when a thread starts repeating itself, suggest a call instead.",
+      exampleDynamic1Title: "Evenings run hot",
+      exampleDynamic1Text:
+        "The back-and-forth that goes in circles mostly happens after 11 pm, when you both reply in short bursts.",
+      exampleDynamic2Title: "Both of you reach back out",
+      exampleDynamic2Text:
+        "After a quiet day, Tom usually writes first with a joke, and Nora picks it up with a question about his day.",
+      exampleDraft: "Forget it. You always do this.",
+      exampleRewrite:
+        "I was really looking forward to tonight, so I'm disappointed. Can we pick another evening this week?",
+      exampleWhy:
+        "Why: “You always” tends to restart the same argument in this chat. Saying how you feel and offering a next step gives Tom something to answer.",
+      limitsEyebrow: "Honest limits",
+      limitsTitle: "What it can and can't tell you",
+      limit1Title: "Patterns, not verdicts",
+      limit1Text:
+        "The AI points to moments and suggests what to try. It doesn't decide who's right or who's to blame, and it isn't therapy or professional advice.",
+      limit2Title: "Only what's in the chat",
+      limit2Text:
+        "Calls, tone of voice and what happened in person aren't in an export, and AI can misread irony or context. Take it as one perspective and check it against what you know.",
+      limit3Title: "A short chat says little",
+      limit3Text:
+        "A few dozen messages or one bad week isn't a pattern. The more history your export covers, the more there is to go on. When there isn't enough, the AI is asked to say so.",
+      privacyEyebrow: "Private by default",
+      privacyTitle: "Their messages are in there too",
+      privacyText:
+        "A chat holds the other person's words as well as yours, so here is exactly where it goes.",
+      privacy1Title: "Saved on this device only",
+      privacy1Text:
+        "By default your chat is kept in this browser, on this device, so you can come back to it. You can choose not to keep it, or forget it whenever you like.",
+      privacy2Title: "Stats and on-device AI stay here",
+      privacy2Text:
+        "The statistics and the on-device AI run in your browser. Nothing they read leaves your device.",
+      privacy3Title: "Anonymized for the cloud",
+      privacy3Text:
+        "If you choose the cloud AI, the free preview included, only anonymized excerpts are sent: names replaced; phone numbers, emails, links and IBANs removed. The AI provider doesn't train on them.",
+      supportEyebrow: "When it's more than an argument",
+      supportTitle: "If arguments leave you afraid",
+      supportText:
+        "If someone threatens you, controls you or makes you feel unsafe, a chat analysis isn't the help you need, and you don't have to deal with it alone. When a chat or a message points to abuse, threats or self-harm, the AI coach is built to stop and point you to support instead.",
+      supportLink: "Find a helpline in your country",
+      faqTitle: "Frequently asked questions",
+      faq1Q: "Why do we keep having the same fight?",
+      faq1A:
+        "Often the topic changes but the way it unfolds doesn't: the same kind of moment sets it off, and each of you answers the way you did last time. This page can't tell you why for certain, but your chat can show when it tends to happen and how the messages go, which gives you something concrete to talk about together.",
+      faq2Q: "Will it tell me who's right?",
+      faq2A:
+        "No. It's built to show the pattern, not to pick a winner. The AI is asked how you could communicate better, and it answers with moments from your chat and ideas for both of you. It doesn't judge anyone, and it can misread context.",
+      faq3Q: "Can it help me write the next message?",
+      faq3A:
+        "Yes. Below a full reading, “Help me reply” takes a message you're about to send and suggests a calmer, clearer version that keeps what you mean, with a short note on what changed. You decide what to send. After an on-device reading this runs on your device for free; after a cloud reading it's part of Pro. The free cloud preview doesn't include it.",
+      faq4Q: "Is it free?",
+      faq4A:
+        "The statistics and the on-device AI reading are free, with no account, and so are the follow-up questions after an on-device reading. Without a subscription you can also try a short free cloud preview. The full cloud reading and the cloud follow-ups are part of Pro ({price}/month).",
+      faq5Q: "Is my chat uploaded?",
+      faq5A:
+        "Not for the statistics or the on-device AI: they run in your browser, and nothing they read leaves your device. By default the chat is saved in this browser so you can come back to it; you can choose not to keep it, or forget it at any time. If you choose the cloud AI, only anonymized excerpts are sent (names replaced; phone numbers, emails, links and IBANs removed), and our AI provider doesn't train on them. You can see exactly what would be sent before you start.",
+      faq6Q: "Does it work for fights with friends or family too?",
+      faq6A:
+        "Yes. Any WhatsApp chat you export works, whether it's with a partner, a friend, a parent or a sibling, and group chats too. The AI describes how the people in it talk to each other, whoever they are.",
+      faq7Q: "How much chat does it need?",
+      faq7A:
+        "The more history, the better. A few dozen messages or a single rough week won't show a pattern. Export the whole chat without media; a long chat is fine.",
+      ctaTitle: "See the pattern, then talk about it together",
+      ctaButton: "Read my chat",
+      ctaNote: "Free on your device · No account · No verdicts",
+      disclaimer:
+        "WhatsAnalyze is independent and not affiliated with WhatsApp or Meta. An AI reading is one perspective to reflect on, not therapy or professional advice.",
+    },
     pageNameInactivity: "WhatsApp Inactivity & Last Message Tracker",
     toolsMessageCounter: {
       seoTitle: "WhatsApp Message & Line Counter | WhatsAnalyze",
@@ -2492,6 +2609,124 @@ export const messages = {
       hookCard4Text:
         "Verwandle deinen Chat in einen interaktiven Jahresrückblick zum Teilen mit Freunden.",
     },
+    situationSameFight: {
+      navLabel: "Immer der gleiche Streit?",
+      seoTitle:
+        "Immer der gleiche Streit? Euren WhatsApp-Chat verstehen | WhatsAnalyze",
+      seoDescription:
+        "Immer wieder Streit über WhatsApp, und immer um dasselbe? Eine KI liest euren Chat, zeigt Momente, die sich wiederholen, und schlägt vor, wie ihr anders reden könnt. Ohne Schuldfrage, kostenlos auf deinem Gerät.",
+      ogTitle: "Warum streiten wir immer wieder über dasselbe?",
+      ogDescription:
+        "Lass eine KI euren WhatsApp-Chat lesen und das Muster hinter dem Streit zeigen, den ihr immer wieder habt, ohne zu entscheiden, wer recht hat.",
+      heroEyebrow: "Streit über WhatsApp?",
+      heroTitle: "Warum streiten wir immer wieder über dasselbe?",
+      heroSubtitle:
+        "Leg deinen WhatsApp-Chat hier ab, und die KI beantwortet eine Frage: Wie könnten wir besser kommunizieren? Sie zeigt auf Momente aus euren eigenen Nachrichten und schlägt vor, was ihr beide versuchen könntet, ohne zu entscheiden, wer recht hat.",
+      heroNote:
+        "Kostenlos auf deinem Gerät · Ohne Konto · Die Cloud-KI sieht nur anonymisierte Auszüge",
+      continueButton: "Mit diesem Chat weiter",
+      exportGuide: "Wie exportiere ich einen WhatsApp-Chat?",
+      showEyebrow: "Was dein Chat zeigen kann",
+      showTitle:
+        "Du weißt noch, wie es sich angefühlt hat. Dein Chat weiß, wie es gelaufen ist.",
+      showText:
+        "Wann ihr geschrieben habt, wer zuerst geschrieben hat, wie lange die Antworten gedauert haben: Das liest und zählt WhatsAnalyze wirklich in deinem Export.",
+      show1Title: "Eine Auswertung, wie ihr miteinander redet",
+      show1Text:
+        "Die KI beantwortet „Wie könnten wir besser kommunizieren?“ in ein paar Sätzen, zeigt auf Momente aus eurem Chat und schlägt vor, was ihr beide versuchen könntet.",
+      show2Title: "Wann ihr euch schreibt",
+      show2Text:
+        "Eine 24-Stunden-Heatmap eures Chats und wie viel jede Person nachts schreibt. Wenn eure schwierigsten Gespräche spät stattfinden, siehst du, wie viel von eurem Chat dann läuft.",
+      show2Link: "Heatmap öffnen",
+      show3Title: "Wer das Gespräch anfängt",
+      show3Text:
+        "Wer schreibt nach sechs Stunden Ruhe oder mehr zuerst? Für jede Person gezählt, als Anteil an all euren Gesprächen.",
+      show3Link: "Sehen, wer anfängt",
+      show4Title: "Antwortzeiten und Funkstille",
+      show4Text:
+        "Wie lange jede Person im Schnitt zum Antworten braucht, und die längsten Pausen in eurem Chat und wer sie beendet hat.",
+      show4Link: "Antwortzeiten ansehen",
+      show5Title: "Hilfe bei der nächsten Nachricht",
+      show5Text:
+        "Nach einer vollständigen Auswertung kannst du Fragen zu eurem Chat stellen oder eine Nachricht einfügen, die du gleich schicken willst, und bekommst eine ruhigere, klarere Version in deinen eigenen Worten.",
+      exampleEyebrow: "Ein Beispiel",
+      exampleTitle: "So kann eine Auswertung aussehen",
+      exampleText:
+        "Für diese Seite erfunden, damit du siehst, wie es aussieht: Die KI benennt ein Muster, zeigt auf Momente und schlägt euch beiden einen nächsten Schritt vor.",
+      exampleBadge: "Beispiel · Nora und Tom sind erfunden",
+      exampleVibe: "Eng verbunden, mit einem Dauerthema",
+      exampleSummary:
+        "Nora und Tom schreiben sich den ganzen Tag, meistens über Pläne, Abendessen und Freunde. Der Ton ist herzlich und neckisch, mit einer Spannung, die immer wiederkommt: kurzfristig geänderte Pläne. Meist ist sie am nächsten Morgen verflogen.",
+      exampleAnswer:
+        "Eure Meinungsverschiedenheiten fangen meist gleich an: Ein Plan ändert sich spät am Tag, einer von euch erfährt es per Nachricht, und ab da werden die Antworten kürzer. Nora stellt meist eine direkte Frage, und Tom antwortet mit einem Witz, was ihr offenbar unterschiedlich versteht. Schnell wieder gut wird es, wenn jemand sagt, wie es sich angefühlt hat („Ich hatte mich auf heute Abend gefreut“), statt was schiefgelaufen ist. Ihr könntet Pläne früher am Tag festmachen und, wenn sich ein Gespräch im Kreis dreht, lieber vorschlagen zu telefonieren.",
+      exampleDynamic1Title: "Abends wird es hitzig",
+      exampleDynamic1Text:
+        "Das Hin und Her, das sich im Kreis dreht, passiert meist nach 23 Uhr, wenn ihr beide mit kurzen Nachrichten in schneller Folge antwortet.",
+      exampleDynamic2Title: "Beide gehen wieder aufeinander zu",
+      exampleDynamic2Text:
+        "Nach einem stillen Tag schreibt meist Tom zuerst, mit einem Witz, und Nora greift ihn mit einer Frage nach seinem Tag auf.",
+      exampleDraft: "Vergiss es. Das machst du immer so.",
+      exampleRewrite:
+        "Ich hatte mich wirklich auf heute Abend gefreut und bin enttäuscht. Können wir uns einen anderen Abend diese Woche aussuchen?",
+      exampleWhy:
+        "Warum: „Das machst du immer“ startet in diesem Chat oft denselben Streit neu. Wenn du sagst, wie es dir geht, und einen nächsten Schritt anbietest, hat Tom etwas, worauf er antworten kann.",
+      limitsEyebrow: "Ehrliche Grenzen",
+      limitsTitle: "Was es dir sagen kann und was nicht",
+      limit1Title: "Muster, keine Urteile",
+      limit1Text:
+        "Die KI zeigt auf Momente und schlägt vor, was ihr versuchen könntet. Sie entscheidet nicht, wer recht hat oder schuld ist, und sie ist keine Therapie und keine professionelle Beratung.",
+      limit2Title: "Nur, was im Chat steht",
+      limit2Text:
+        "Anrufe, Tonfall und was ihr persönlich erlebt habt, stehen in keinem Export, und eine KI kann Ironie oder Zusammenhänge falsch verstehen. Nimm es als eine Sichtweise und gleich sie mit dem ab, was du weißt.",
+      limit3Title: "Ein kurzer Chat sagt wenig",
+      limit3Text:
+        "Ein paar Dutzend Nachrichten oder eine schlechte Woche sind noch kein Muster. Je mehr Verlauf dein Export abdeckt, desto mehr gibt es, worauf sie sich stützen kann. Reicht es nicht, soll die KI das auch sagen.",
+      privacyEyebrow: "Standardmäßig privat",
+      privacyTitle: "Die Nachrichten der anderen Person stecken auch drin",
+      privacyText:
+        "Ein Chat enthält nicht nur deine Worte, sondern auch die der anderen Person. Darum hier genau, wo er landet.",
+      privacy1Title: "Nur auf diesem Gerät gespeichert",
+      privacy1Text:
+        "Standardmäßig wird dein Chat in diesem Browser auf diesem Gerät gespeichert, damit du zurückkommen kannst. Du kannst dich dagegen entscheiden oder ihn jederzeit vergessen.",
+      privacy2Title: "Statistiken und KI auf dem Gerät bleiben hier",
+      privacy2Text:
+        "Die Statistiken und die KI auf dem Gerät laufen in deinem Browser. Nichts, was sie lesen, verlässt dein Gerät.",
+      privacy3Title: "Anonymisiert für die Cloud",
+      privacy3Text:
+        "Wenn du die Cloud-KI wählst, auch die kostenlose Vorschau, werden nur anonymisierte Auszüge gesendet: Namen ersetzt, Telefonnummern, E-Mails, Links und IBANs entfernt. Der KI-Anbieter trainiert nicht damit.",
+      supportEyebrow: "Wenn es mehr ist als Streit",
+      supportTitle: "Wenn dir Streit Angst macht",
+      supportText:
+        "Wenn dich jemand bedroht, kontrolliert oder dir das Gefühl gibt, nicht sicher zu sein, ist eine Chat-Analyse nicht die Hilfe, die du brauchst, und du musst damit nicht allein sein. Wenn ein Chat oder eine Nachricht auf Missbrauch, Drohungen oder Selbstverletzung hindeutet, ist der KI-Coach darauf ausgelegt, aufzuhören und dich stattdessen an Hilfe zu verweisen.",
+      supportLink: "Hilfe in deinem Land finden",
+      faqTitle: "Häufige Fragen",
+      faq1Q: "Warum haben wir immer wieder den gleichen Streit?",
+      faq1A:
+        "Oft wechselt das Thema, aber der Ablauf bleibt: Die gleiche Art von Moment löst ihn aus, und ihr reagiert beide so wie beim letzten Mal. Woran das bei euch liegt, kann diese Seite nicht sicher sagen. Dein Chat kann aber zeigen, wann es meist passiert und wie die Nachrichten verlaufen, und das gibt euch etwas Konkretes, über das ihr gemeinsam reden könnt.",
+      faq2Q: "Sagt mir die KI, wer recht hat?",
+      faq2A:
+        "Nein. Es geht um das Muster, nicht darum, wer gewinnt. Die KI wird gefragt, wie ihr besser kommunizieren könntet, und antwortet mit Momenten aus eurem Chat und Ideen für euch beide. Sie urteilt über niemanden und kann Zusammenhänge falsch verstehen.",
+      faq3Q: "Hilft sie mir, die nächste Nachricht zu schreiben?",
+      faq3A:
+        "Ja. Unter einer vollständigen Auswertung nimmt „Hilf mir beim Antworten“ eine Nachricht, die du schicken willst, und schlägt eine ruhigere, klarere Version vor, die bei dem bleibt, was du meinst, mit einer kurzen Erklärung, was sich geändert hat. Was du schickst, entscheidest du. Nach einer Auswertung auf dem Gerät läuft das kostenlos auf deinem Gerät; nach einer Cloud-Auswertung gehört es zu Pro. In der kostenlosen Cloud-Vorschau ist es nicht dabei.",
+      faq4Q: "Ist das kostenlos?",
+      faq4A:
+        "Die Statistiken und die KI-Auswertung auf dem Gerät sind kostenlos und ohne Konto, ebenso die Rückfragen nach einer Auswertung auf dem Gerät. Ohne Abo kannst du außerdem eine kurze kostenlose Cloud-Vorschau ausprobieren. Die vollständige Cloud-Auswertung und die Rückfragen in der Cloud gehören zu Pro ({price}/Monat).",
+      faq5Q: "Wird mein Chat hochgeladen?",
+      faq5A:
+        "Nicht für die Statistiken und die KI auf dem Gerät: Sie laufen in deinem Browser, und nichts, was sie lesen, verlässt dein Gerät. Standardmäßig wird der Chat in diesem Browser gespeichert, damit du zurückkommen kannst; du kannst dich dagegen entscheiden oder ihn jederzeit vergessen. Wenn du die Cloud-KI wählst, werden nur anonymisierte Auszüge gesendet (Namen ersetzt; Telefonnummern, E-Mails, Links und IBANs entfernt), und unser KI-Anbieter trainiert nicht damit. Bevor du startest, kannst du genau sehen, was gesendet würde.",
+      faq6Q: "Funktioniert das auch bei Streit mit Freunden oder Familie?",
+      faq6A:
+        "Ja. Jeder WhatsApp-Chat, den du exportierst, funktioniert: mit Partner oder Partnerin, Freunden, Eltern oder Geschwistern, auch Gruppenchats. Die KI beschreibt, wie die Leute darin miteinander reden, wer auch immer sie sind.",
+      faq7Q: "Wie viel Chat braucht es?",
+      faq7A:
+        "Je mehr Verlauf, desto besser. Ein paar Dutzend Nachrichten oder eine einzige schwierige Woche zeigen noch kein Muster. Exportiere den ganzen Chat ohne Medien; auch ein langer Chat ist kein Problem.",
+      ctaTitle: "Erst das Muster sehen, dann gemeinsam darüber reden",
+      ctaButton: "Meinen Chat auswerten",
+      ctaNote: "Kostenlos auf deinem Gerät · Ohne Konto · Ohne Urteil",
+      disclaimer:
+        "WhatsAnalyze ist unabhängig und nicht mit WhatsApp oder Meta verbunden. Eine KI-Auswertung ist eine Sichtweise zum Nachdenken, keine Therapie und keine professionelle Beratung.",
+    },
     pageNameInactivity: "WhatsApp Inaktivität & Letzte Nachricht",
     toolsMessageCounter: {
       seoTitle: "WhatsApp Nachrichten- & Zeilenzähler | WhatsAnalyze",
@@ -3836,6 +4071,123 @@ export const messages = {
       hookCard4Text:
         "Convierte tu chat en una retrospectiva estilo historia de Instagram para compartir.",
     },
+    situationSameFight: {
+      navLabel: "¿Siempre la misma discusión?",
+      seoTitle:
+        "¿Siempre discutimos por lo mismo? Entiende tu chat de WhatsApp | WhatsAnalyze",
+      seoDescription:
+        "¿Por qué siempre discutimos por lo mismo? Deja que una IA lea vuestro chat de WhatsApp, señale los momentos que se repiten y sugiera cómo hablar de otra forma. Sin culpas ni veredictos, gratis en tu dispositivo.",
+      ogTitle: "¿Por qué siempre discutimos por lo mismo?",
+      ogDescription:
+        "Deja que una IA lea tu chat de WhatsApp y muestre el patrón detrás de esa discusión que se repite, sin decidir quién tiene razón.",
+      heroEyebrow: "¿Discusiones por WhatsApp?",
+      heroTitle: "¿Por qué siempre discutimos por lo mismo?",
+      heroSubtitle:
+        "Añade tu chat de WhatsApp y la IA responde a una pregunta: ¿cómo podríamos comunicarnos mejor? Señala momentos de vuestros propios mensajes y sugiere qué podríais probar los dos, sin decidir quién tiene razón.",
+      heroNote:
+        "Gratis en tu dispositivo · Sin cuenta · La IA en la nube solo ve extractos anonimizados",
+      continueButton: "Seguir con este chat",
+      exportGuide: "¿Cómo exporto un chat de WhatsApp?",
+      showEyebrow: "Lo que tu chat puede mostrar",
+      showTitle: "Tú recuerdas cómo te sentiste. Tu chat recuerda cómo fue.",
+      showText:
+        "Cuándo escribisteis, quién escribió primero, cuánto tardaron las respuestas: eso es lo que WhatsAnalyze lee y cuenta de verdad en tu exportación.",
+      show1Title: "Un análisis de cómo habláis",
+      show1Text:
+        "La IA responde a «¿Cómo podríamos comunicarnos mejor?» en unas pocas frases, señalando momentos de vuestro chat y sugiriendo qué podría probar cada uno.",
+      show2Title: "Cuándo os escribís",
+      show2Text:
+        "Un mapa de calor de 24 horas de vuestro chat y cuánto escribe cada persona de noche. Si vuestras conversaciones más difíciles son tarde, verás cuánto de vuestro chat ocurre a esas horas.",
+      show2Link: "Abrir el mapa de calor",
+      show3Title: "Quién empieza las conversaciones",
+      show3Text:
+        "Después de seis horas o más de silencio, ¿quién escribe primero? Contado para cada persona, como porcentaje de todas vuestras conversaciones.",
+      show3Link: "Ver quién empieza",
+      show4Title: "Tiempos de respuesta y silencios",
+      show4Text:
+        "Cuánto tarda cada uno en responder de media, y los silencios más largos de vuestro chat con quién los rompió.",
+      show4Link: "Ver tiempos de respuesta",
+      show5Title: "Ayuda con el próximo mensaje",
+      show5Text:
+        "Tras un análisis completo, puedes hacer preguntas sobre vuestro chat o pegar un mensaje que vas a enviar y recibir una versión más tranquila y clara, con tus propias palabras.",
+      exampleEyebrow: "Un ejemplo",
+      exampleTitle: "Así puede ser un análisis",
+      exampleText:
+        "Inventado para esta página, para que veas cómo es: la IA nombra un patrón, señala momentos y os sugiere un siguiente paso a los dos.",
+      exampleBadge: "Ejemplo · Nora y Tom son ficticios",
+      exampleVibe: "Muy unidos, con un roce recurrente",
+      exampleSummary:
+        "Nora y Tom se escriben todo el día, sobre todo de planes, cenas y amigos. El tono es cariñoso y bromista, con una tensión que vuelve una y otra vez: los cambios de plan de última hora. Normalmente se pasa a la mañana siguiente.",
+      exampleAnswer:
+        "Vuestros desacuerdos suelen empezar igual: un plan cambia a última hora, uno de los dos se entera por mensaje y, a partir de ahí, las respuestas se acortan. Nora suele hacer una pregunta directa y Tom responde con una broma, y cada uno parece leerlo de forma distinta. Las conversaciones que se calman rápido son aquellas en las que alguien dice cómo se sintió («Me hacía ilusión lo de esta noche») en lugar de qué salió mal. Podríais cerrar los planes antes durante el día y, cuando una conversación empiece a dar vueltas, proponer una llamada.",
+      exampleDynamic1Title: "Las noches se calientan",
+      exampleDynamic1Text:
+        "El ir y venir que da vueltas pasa sobre todo después de las 23:00, cuando los dos respondéis con mensajes cortos y seguidos.",
+      exampleDynamic2Title: "Los dos vuelven a acercarse",
+      exampleDynamic2Text:
+        "Tras un día en silencio, Tom suele escribir primero con una broma, y Nora le sigue con una pregunta sobre su día.",
+      exampleDraft: "Déjalo. Siempre haces lo mismo.",
+      exampleRewrite:
+        "Me hacía mucha ilusión lo de esta noche y estoy decepcionada. ¿Podemos buscar otra noche esta semana?",
+      exampleWhy:
+        "Por qué: «Siempre haces lo mismo» suele reabrir la misma discusión en este chat. Decir cómo te sientes y proponer un siguiente paso le da a Tom algo a lo que responder.",
+      limitsEyebrow: "Límites honestos",
+      limitsTitle: "Lo que puede decirte y lo que no",
+      limit1Title: "Patrones, no veredictos",
+      limit1Text:
+        "La IA señala momentos y sugiere qué probar. No decide quién tiene razón ni quién tiene la culpa, y no es terapia ni asesoramiento profesional.",
+      limit2Title: "Solo lo que hay en el chat",
+      limit2Text:
+        "Las llamadas, el tono de voz y lo que pasó en persona no están en una exportación, y la IA puede malinterpretar la ironía o el contexto. Tómalo como una perspectiva y contrástalo con lo que sabes.",
+      limit3Title: "Un chat corto dice poco",
+      limit3Text:
+        "Unas pocas docenas de mensajes o una mala semana no son un patrón. Cuanto más historial cubra tu exportación, más hay en lo que basarse. Si no hay suficiente, a la IA se le pide que lo diga.",
+      privacyEyebrow: "Privado por defecto",
+      privacyTitle: "Sus mensajes también están ahí",
+      privacyText:
+        "Un chat contiene las palabras de la otra persona además de las tuyas, así que aquí tienes exactamente adónde va.",
+      privacy1Title: "Guardado solo en este dispositivo",
+      privacy1Text:
+        "Por defecto, tu chat se guarda en este navegador, en este dispositivo, para que puedas volver a él. Puedes elegir no guardarlo u olvidarlo cuando quieras.",
+      privacy2Title: "Las estadísticas y la IA del dispositivo se quedan aquí",
+      privacy2Text:
+        "Las estadísticas y la IA en tu dispositivo funcionan en tu navegador. Nada de lo que leen sale de tu dispositivo.",
+      privacy3Title: "Anonimizado para la nube",
+      privacy3Text:
+        "Si eliges la IA en la nube, incluida la vista previa gratis, solo se envían extractos anonimizados: nombres sustituidos y teléfonos, correos, enlaces e IBAN eliminados. El proveedor de IA no entrena con ellos.",
+      supportEyebrow: "Cuando es más que una discusión",
+      supportTitle: "Si las discusiones te dan miedo",
+      supportText:
+        "Si alguien te amenaza, te controla o te hace sentir en peligro, un análisis de chat no es la ayuda que necesitas, y no tienes que afrontarlo solo/a. Cuando un chat o un mensaje apunta a abuso, amenazas o autolesiones, el coach de IA está hecho para parar e indicarte dónde pedir ayuda.",
+      supportLink: "Encontrar una línea de ayuda en tu país",
+      faqTitle: "Preguntas frecuentes",
+      faq1Q: "¿Por qué siempre discutimos por lo mismo?",
+      faq1A:
+        "A menudo cambia el tema, pero no cómo se desarrolla: el mismo tipo de momento lo desencadena y cada uno responde como la última vez. Esta página no puede decirte con certeza por qué, pero tu chat puede mostrar cuándo suele pasar y cómo van los mensajes, y eso os da algo concreto de lo que hablar juntos.",
+      faq2Q: "¿Me dirá quién tiene razón?",
+      faq2A:
+        "No. Está pensado para mostrar el patrón, no para elegir un ganador. A la IA se le pregunta cómo podríais comunicaros mejor, y responde con momentos de vuestro chat e ideas para los dos. No juzga a nadie y puede malinterpretar el contexto.",
+      faq3Q: "¿Me ayuda a escribir el próximo mensaje?",
+      faq3A:
+        "Sí. Debajo de un análisis completo, «Ayúdame a responder» toma un mensaje que vas a enviar y sugiere una versión más tranquila y clara que mantiene lo que quieres decir, con una breve nota sobre qué ha cambiado. Tú decides qué envías. Tras un análisis en tu dispositivo funciona gratis en tu dispositivo; tras un análisis en la nube forma parte de Pro. La vista previa gratis en la nube no lo incluye.",
+      faq4Q: "¿Es gratis?",
+      faq4A:
+        "Las estadísticas y el análisis con IA en tu dispositivo son gratis y sin cuenta, igual que las preguntas de seguimiento tras un análisis en el dispositivo. Sin suscripción también puedes probar una breve vista previa gratis en la nube. El análisis completo en la nube y las preguntas de seguimiento en la nube forman parte de Pro ({price}/mes).",
+      faq5Q: "¿Se sube mi chat?",
+      faq5A:
+        "No para las estadísticas ni para la IA en tu dispositivo: funcionan en tu navegador y nada de lo que leen sale de tu dispositivo. Por defecto, el chat se guarda en este navegador para que puedas volver a él; puedes elegir no guardarlo u olvidarlo cuando quieras. Si eliges la IA en la nube, solo se envían extractos anonimizados (nombres sustituidos; teléfonos, correos, enlaces e IBAN eliminados), y nuestro proveedor de IA no entrena con ellos. Antes de empezar puedes ver exactamente qué se enviaría.",
+      faq6Q: "¿Funciona también con discusiones con amigos o familia?",
+      faq6A:
+        "Sí. Sirve cualquier chat de WhatsApp que exportes, ya sea con tu pareja, un amigo, tus padres o tus hermanos, y también los chats de grupo. La IA describe cómo se hablan las personas que hay en él, sean quienes sean.",
+      faq7Q: "¿Cuánto chat necesita?",
+      faq7A:
+        "Cuanto más historial, mejor. Unas pocas docenas de mensajes o una sola semana difícil no muestran un patrón. Exporta el chat entero sin archivos multimedia; un chat largo no es problema.",
+      ctaTitle: "Primero, ver el patrón. Después, hablarlo juntos.",
+      ctaButton: "Analizar mi chat",
+      ctaNote: "Gratis en tu dispositivo · Sin cuenta · Sin veredictos",
+      disclaimer:
+        "WhatsAnalyze es independiente y no está afiliado a WhatsApp ni a Meta. Un análisis con IA es una perspectiva para reflexionar, no terapia ni asesoramiento profesional.",
+    },
     pageNameInactivity: "Inactividad y última respuesta en WhatsApp",
     toolsMessageCounter: {
       seoTitle: "Contador de mensajes y líneas de WhatsApp | WhatsAnalyze",
@@ -4920,6 +5272,123 @@ export const messages = {
       hookCard4Title: "História WhatsApp Wrapped",
       hookCard4Text:
         "Transforme sua conversa em uma retrospectiva interativa para compartilhar com amigos.",
+    },
+    situationSameFight: {
+      navLabel: "Sempre a mesma briga?",
+      seoTitle:
+        "Sempre a mesma briga? Entenda a sua conversa do WhatsApp | WhatsAnalyze",
+      seoDescription:
+        "Discutem sempre pela mesma coisa? Deixe uma IA ler a sua conversa do WhatsApp, apontar os momentos que se repetem e sugerir como falar de outra forma. Sem culpas nem veredictos, grátis no seu dispositivo.",
+      ogTitle: "Sempre a mesma briga?",
+      ogDescription:
+        "Deixe uma IA ler a sua conversa do WhatsApp e mostrar o padrão por trás da discussão que se repete, sem decidir quem tem razão.",
+      heroEyebrow: "Discussões por mensagem?",
+      heroTitle: "Sempre a mesma briga?",
+      heroSubtitle:
+        "Adicione a sua conversa do WhatsApp e a IA responde a uma pergunta: como poderíamos comunicar melhor? Aponta momentos das suas próprias mensagens e sugere o que ambos podem experimentar, sem decidir quem tem razão.",
+      heroNote:
+        "Grátis no seu dispositivo · Sem conta · A IA na nuvem só vê excertos anonimizados",
+      continueButton: "Continuar com esta conversa",
+      exportGuide: "Como exportar uma conversa do WhatsApp?",
+      showEyebrow: "O que a sua conversa pode mostrar",
+      showTitle: "A memória guarda o que sentiu. A conversa guarda como foi.",
+      showText:
+        "Quando escreveram, quem escreveu primeiro, quanto tempo demoraram as respostas: é isto que o WhatsAnalyze realmente lê e conta na sua exportação.",
+      show1Title: "Uma análise de como falam",
+      show1Text:
+        "A IA responde a «Como poderíamos comunicar melhor?» em poucas frases, apontando momentos da sua conversa e sugerindo o que cada um pode experimentar.",
+      show2Title: "Quando escrevem um ao outro",
+      show2Text:
+        "Um mapa de calor de 24 horas da conversa e quanto cada pessoa escreve à noite. Se as conversas mais difíceis acontecem tarde, vê quanto da conversa acontece a essas horas.",
+      show2Link: "Abrir o mapa de calor",
+      show3Title: "Quem começa as conversas",
+      show3Text:
+        "Depois de seis horas ou mais de silêncio, quem escreve primeiro? Contado para cada pessoa, como proporção de todas as conversas.",
+      show3Link: "Ver quem começa",
+      show4Title: "Tempos de resposta e silêncios",
+      show4Text:
+        "Quanto tempo cada pessoa demora, em média, a responder, e os silêncios mais longos da conversa, com quem os quebrou.",
+      show4Link: "Ver tempos de resposta",
+      show5Title: "Ajuda com a próxima mensagem",
+      show5Text:
+        "Depois de uma análise completa, faça perguntas sobre a conversa ou cole uma mensagem que vai enviar e receba uma versão mais calma e clara, com as suas próprias palavras.",
+      exampleEyebrow: "Um exemplo",
+      exampleTitle: "Como pode ser uma análise",
+      exampleText:
+        "Inventado para esta página, para ver como é: a IA identifica um padrão, aponta momentos e sugere um próximo passo para os dois.",
+      exampleBadge: "Exemplo · Nora e Tom são fictícios",
+      exampleVibe: "Muito próximos, com um atrito recorrente",
+      exampleSummary:
+        "Nora e Tom escrevem um ao outro o dia todo, sobretudo sobre planos, jantares e amigos. O tom é carinhoso e brincalhão, com uma tensão que volta sempre: as mudanças de planos em cima da hora. Normalmente, na manhã seguinte já passou.",
+      exampleAnswer:
+        "As discordâncias entre vocês costumam começar da mesma forma: um plano muda ao fim do dia, um de vocês descobre por mensagem e, a partir daí, as respostas ficam mais curtas. A Nora costuma fazer uma pergunta direta e o Tom responde com uma piada, e cada um parece interpretar isso de forma diferente. As conversas que acalmam depressa são aquelas em que alguém diz como se sentiu («Estava com muita vontade desta noite») em vez do que correu mal. Podem combinar os planos mais cedo no dia e, quando uma conversa começar a andar em círculos, propor uma chamada.",
+      exampleDynamic1Title: "As noites aquecem",
+      exampleDynamic1Text:
+        "O vaivém que anda em círculos acontece sobretudo depois das 23h, quando ambos respondem com mensagens curtas e seguidas.",
+      exampleDynamic2Title: "Ambos estendem a mão",
+      exampleDynamic2Text:
+        "Depois de um dia em silêncio, o Tom costuma escrever primeiro com uma piada, e a Nora continua com uma pergunta sobre o dia dele.",
+      exampleDraft: "Deixa para lá. É sempre a mesma coisa.",
+      exampleRewrite:
+        "Estava mesmo com vontade desta noite e fiquei triste. Podemos escolher outra noite esta semana?",
+      exampleWhy:
+        "Motivo: «É sempre a mesma coisa» costuma reabrir a mesma discussão nesta conversa. Dizer como se sente e propor um próximo passo dá ao Tom algo a que responder.",
+      limitsEyebrow: "Limites honestos",
+      limitsTitle: "O que consegue mostrar e o que não consegue",
+      limit1Title: "Padrões, não veredictos",
+      limit1Text:
+        "A IA aponta momentos e sugere o que experimentar. Não decide quem tem razão nem de quem é a culpa, e não é terapia nem aconselhamento profissional.",
+      limit2Title: "Só o que está na conversa",
+      limit2Text:
+        "Chamadas, tom de voz e o que aconteceu pessoalmente não estão numa exportação, e a IA pode interpretar mal a ironia ou o contexto. Veja-o como uma perspetiva e compare com o que sabe.",
+      limit3Title: "Uma conversa curta diz pouco",
+      limit3Text:
+        "Umas dezenas de mensagens ou uma semana má não são um padrão. Quanto mais histórico a exportação cobrir, mais há em que se basear. Se não houver o suficiente, pede-se à IA que o diga.",
+      privacyEyebrow: "Privacidade em primeiro lugar",
+      privacyTitle: "As mensagens da outra pessoa também estão lá",
+      privacyText:
+        "Uma conversa tem as palavras da outra pessoa além das suas, por isso aqui fica exatamente para onde vai.",
+      privacy1Title: "Guardada só neste dispositivo",
+      privacy1Text:
+        "Por padrão, a sua conversa fica guardada neste navegador, neste dispositivo, para poder voltar a ela. Pode escolher não a guardar ou esquecê-la quando quiser.",
+      privacy2Title: "Estatísticas e IA no dispositivo ficam aqui",
+      privacy2Text:
+        "As estatísticas e a IA no dispositivo funcionam no seu navegador. Nada do que leem sai do seu dispositivo.",
+      privacy3Title: "Anonimizada para a nuvem",
+      privacy3Text:
+        "Se escolher a IA na nuvem, incluindo a pré-visualização grátis, só são enviados excertos anonimizados: nomes substituídos e números de telefone, e-mails, links e IBAN removidos. O fornecedor de IA não treina com eles.",
+      supportEyebrow: "Quando é mais do que uma discussão",
+      supportTitle: "Quando as discussões dão medo",
+      supportText:
+        "Se alguém faz ameaças, controla os seus passos ou faz com que não se sinta em segurança, uma análise da conversa não é a ajuda de que precisa, e não tem de lidar com isso sozinho(a). Quando uma conversa ou uma mensagem aponta para abuso, ameaças ou automutilação, o coach de IA foi feito para parar e indicar onde pedir ajuda.",
+      supportLink: "Encontrar uma linha de apoio no seu país",
+      faqTitle: "Perguntas frequentes",
+      faq1Q: "Porque é que discutimos sempre pelas mesmas coisas?",
+      faq1A:
+        "Muitas vezes o tema muda, mas a forma como tudo se desenrola não: o mesmo tipo de momento dá início à discussão e cada um responde como da última vez. Esta página não consegue dizer com certeza porquê, mas a conversa pode mostrar quando costuma acontecer e como correm as mensagens, e isso dá-vos algo concreto de que falar juntos.",
+      faq2Q: "Vai dizer-me quem tem razão?",
+      faq2A:
+        "Não. Foi pensado para mostrar o padrão, não para escolher um vencedor. A IA recebe a pergunta de como poderiam comunicar melhor e responde com momentos da conversa e ideias para os dois. Não julga ninguém e pode interpretar mal o contexto.",
+      faq3Q: "Ajuda-me a escrever a próxima mensagem?",
+      faq3A:
+        "Sim. Por baixo de uma análise completa, «Ajude-me a responder» pega numa mensagem que vai enviar e sugere uma versão mais calma e clara que mantém o que quer dizer, com uma nota curta sobre o que mudou. Quem decide o que envia é você. Depois de uma análise no dispositivo, funciona grátis no seu dispositivo; depois de uma análise na nuvem, faz parte do Pro. A pré-visualização grátis na nuvem não a inclui.",
+      faq4Q: "É grátis?",
+      faq4A:
+        "As estatísticas e a análise com IA no dispositivo são grátis e sem conta, tal como as perguntas de seguimento depois de uma análise no dispositivo. Sem assinatura, também pode experimentar uma breve pré-visualização grátis na nuvem. A análise completa na nuvem e as perguntas de seguimento na nuvem fazem parte do Pro ({price}/mês).",
+      faq5Q: "A minha conversa é enviada?",
+      faq5A:
+        "Não para as estatísticas nem para a IA no dispositivo: funcionam no seu navegador e nada do que leem sai do seu dispositivo. Por padrão, a conversa fica guardada neste navegador para poder voltar a ela; pode escolher não a guardar ou esquecê-la a qualquer momento. Se escolher a IA na nuvem, só são enviados excertos anonimizados (nomes substituídos; números de telefone, e-mails, links e IBAN removidos), e o nosso fornecedor de IA não treina com eles. Antes de começar, pode ver exatamente o que seria enviado.",
+      faq6Q: "Também funciona com discussões com amigos ou família?",
+      faq6A:
+        "Sim. Funciona com qualquer conversa do WhatsApp que exporte, seja com o seu parceiro ou parceira, um amigo, os seus pais ou os seus irmãos, e também com grupos. A IA descreve como as pessoas nela falam umas com as outras, sejam quem forem.",
+      faq7Q: "De quanta conversa precisa?",
+      faq7A:
+        "Quanto mais histórico, melhor. Umas dezenas de mensagens ou uma única semana difícil não mostram um padrão. Exporte a conversa inteira sem multimédia; uma conversa longa não é problema.",
+      ctaTitle: "Primeiro ver o padrão, depois falar sobre ele juntos",
+      ctaButton: "Analisar a minha conversa",
+      ctaNote: "Grátis no seu dispositivo · Sem conta · Sem veredictos",
+      disclaimer:
+        "O WhatsAnalyze é independente e não está associado ao WhatsApp nem à Meta. Uma análise com IA é uma perspetiva para refletir, não terapia nem aconselhamento profissional.",
     },
     courtEvidence: {
       mediaNotLoaded:
@@ -6274,6 +6743,124 @@ export const messages = {
       hookCard4Text:
         "Transformez vos échanges en une rétrospective interactive prête à être partagée.",
     },
+    situationSameFight: {
+      navLabel: "Toujours la même dispute ?",
+      seoTitle:
+        "Toujours la même dispute ? Comprendre votre conversation WhatsApp | WhatsAnalyze",
+      seoDescription:
+        "Pourquoi se dispute-t-on toujours pour les mêmes choses ? Laissez une IA lire votre conversation WhatsApp, repérer les moments qui se répètent et suggérer comment en parler autrement. Sans reproches ni verdict, gratuit sur votre appareil.",
+      ogTitle: "Toujours la même dispute ?",
+      ogDescription:
+        "Laissez une IA lire votre conversation WhatsApp et montrer le schéma derrière la dispute qui revient sans cesse, sans décider qui a raison.",
+      heroEyebrow: "Des disputes par message ?",
+      heroTitle: "Toujours la même dispute ?",
+      heroSubtitle:
+        "Déposez votre conversation WhatsApp et l'IA répond à une question : comment pourrions-nous mieux communiquer ? Elle s'appuie sur des moments de vos propres messages et suggère ce que vous pourriez essayer tous les deux, sans décider qui a raison.",
+      heroNote:
+        "Gratuit sur votre appareil · Sans compte · L'IA dans le cloud ne voit que des extraits anonymisés",
+      continueButton: "Continuer avec cette conversation",
+      exportGuide: "Comment exporter une conversation WhatsApp ?",
+      showEyebrow: "Ce que votre conversation peut montrer",
+      showTitle:
+        "Vous vous souvenez du ressenti. Votre conversation, du déroulé.",
+      showText:
+        "Quand vous avez écrit, qui a écrit en premier, combien de temps les réponses ont pris : voilà ce que WhatsAnalyze lit et compte vraiment dans votre export.",
+      show1Title: "Une analyse de votre façon de parler",
+      show1Text:
+        "L'IA répond à « Comment pourrions-nous mieux communiquer ? » en quelques phrases, en s'appuyant sur des moments de votre conversation et en suggérant ce que chacun pourrait essayer.",
+      show2Title: "Quand vous vous écrivez",
+      show2Text:
+        "Une carte thermique sur 24 heures de votre conversation, et la part des messages que chacun écrit la nuit. Si vos conversations les plus difficiles ont lieu tard, vous verrez quelle part de vos échanges se passe à ces heures-là.",
+      show2Link: "Ouvrir la carte thermique",
+      show3Title: "Qui lance les conversations",
+      show3Text:
+        "Après six heures de silence ou plus, qui écrit en premier ? Compté pour chacun, en part de toutes vos conversations.",
+      show3Link: "Voir qui commence",
+      show4Title: "Temps de réponse et silences",
+      show4Text:
+        "Le temps que chacun met en moyenne à répondre, et les plus longs silences de votre conversation, avec qui les a rompus.",
+      show4Link: "Voir les temps de réponse",
+      show5Title: "De l'aide pour le prochain message",
+      show5Text:
+        "Après une analyse complète, posez des questions sur votre conversation, ou collez un message que vous vous apprêtez à envoyer pour en obtenir une version plus calme et plus claire, avec vos propres mots.",
+      exampleEyebrow: "Un exemple",
+      exampleTitle: "À quoi peut ressembler une analyse",
+      exampleText:
+        "Inventé pour cette page, pour que vous voyiez à quoi ça ressemble : l'IA nomme un schéma, s'appuie sur des moments précis et vous suggère une prochaine étape à tous les deux.",
+      exampleBadge: "Exemple · Nora et Tom sont fictifs",
+      exampleVibe: "Très proches, avec un point de friction",
+      exampleSummary:
+        "Nora et Tom s'écrivent toute la journée, surtout à propos de projets, de dîners et d'amis. Le ton est tendre et taquin, avec une tension qui revient sans cesse : les changements de programme de dernière minute. En général, c'est oublié le lendemain matin.",
+      exampleAnswer:
+        "Vos désaccords commencent souvent de la même façon : un projet change en fin de journée, l'un de vous l'apprend par message, et les réponses raccourcissent à partir de là. Nora pose souvent une question directe et Tom répond par une blague, ce que chacun de vous semble interpréter différemment. Les échanges qui s'apaisent vite sont ceux où quelqu'un dit ce qu'il a ressenti (« J'avais hâte d'être à ce soir ») plutôt que ce qui n'a pas marché. Vous pourriez fixer vos projets plus tôt dans la journée et, quand une conversation commence à tourner en rond, proposer de vous appeler.",
+      exampleDynamic1Title: "Les soirées s'échauffent",
+      exampleDynamic1Text:
+        "Les échanges qui tournent en rond ont surtout lieu après 23 h, quand vous répondez tous les deux par messages courts et rapides.",
+      exampleDynamic2Title: "Chacun fait un pas vers l'autre",
+      exampleDynamic2Text:
+        "Après une journée de silence, Tom écrit généralement en premier avec une blague, et Nora enchaîne en lui demandant comment s'est passée sa journée.",
+      exampleDraft: "Laisse tomber. Tu fais toujours ça.",
+      exampleRewrite:
+        "J'avais vraiment hâte d'être à ce soir, alors je suis déçue. On peut choisir une autre soirée cette semaine ?",
+      exampleWhy:
+        "Pourquoi : « Tu fais toujours ça » relance souvent la même dispute dans cette conversation. Dire ce que vous ressentez et proposer une prochaine étape donne à Tom quelque chose à quoi répondre.",
+      limitsEyebrow: "Des limites honnêtes",
+      limitsTitle: "Ce qu'elle peut vous dire, et ce qu'elle ne peut pas",
+      limit1Title: "Des schémas, pas des verdicts",
+      limit1Text:
+        "L'IA s'appuie sur des moments précis et suggère des pistes. Elle ne décide ni qui a raison ni qui est en tort, et ce n'est ni une thérapie ni un conseil professionnel.",
+      limit2Title: "Seulement ce qui est dans la conversation",
+      limit2Text:
+        "Les appels, le ton de la voix et ce qui s'est passé en vrai ne figurent pas dans un export, et l'IA peut mal comprendre l'ironie ou le contexte. Prenez-la comme un point de vue et confrontez-la à ce que vous savez.",
+      limit3Title: "Une conversation courte en dit peu",
+      limit3Text:
+        "Quelques dizaines de messages ou une mauvaise semaine ne font pas un schéma. Plus votre export couvre d'historique, plus il y a d'éléments sur lesquels s'appuyer. S'il n'y en a pas assez, l'IA a pour consigne de le dire.",
+      privacyEyebrow: "Privé par défaut",
+      privacyTitle: "Les messages de l'autre y sont aussi",
+      privacyText:
+        "Une conversation contient les mots de l'autre personne autant que les vôtres. Voici donc exactement où elle va.",
+      privacy1Title: "Enregistrée sur cet appareil uniquement",
+      privacy1Text:
+        "Par défaut, votre conversation est conservée dans ce navigateur, sur cet appareil, pour que vous puissiez y revenir. Vous pouvez choisir de ne pas la garder, ou l'oublier quand vous voulez.",
+      privacy2Title: "Les statistiques et l'IA sur l'appareil restent ici",
+      privacy2Text:
+        "Les statistiques et l'IA sur l'appareil fonctionnent dans votre navigateur. Rien de ce qu'elles lisent ne quitte votre appareil.",
+      privacy3Title: "Anonymisée pour le cloud",
+      privacy3Text:
+        "Si vous choisissez l'IA dans le cloud, aperçu gratuit compris, seuls des extraits anonymisés sont envoyés : noms remplacés ; numéros de téléphone, e-mails, liens et IBAN supprimés. Le fournisseur d'IA ne s'en sert pas pour entraîner ses modèles.",
+      supportEyebrow: "Quand c'est plus qu'une dispute",
+      supportTitle: "Si les disputes vous font peur",
+      supportText:
+        "Si quelqu'un vous menace, vous contrôle ou vous fait sentir en danger, une analyse de conversation n'est pas l'aide qu'il vous faut, et vous n'avez pas à affronter ça seul·e. Quand une conversation ou un message évoque des violences, des menaces ou l'automutilation, le coach IA est conçu pour s'arrêter et vous orienter vers de l'aide.",
+      supportLink: "Trouver une ligne d'écoute dans votre pays",
+      faqTitle: "Questions fréquentes",
+      faq1Q: "Pourquoi se dispute-t-on toujours pour les mêmes choses ?",
+      faq1A:
+        "Souvent, le sujet change mais le déroulé reste le même : le même genre de moment déclenche la dispute, et chacun réagit comme la dernière fois. Cette page ne peut pas vous dire pourquoi avec certitude, mais votre conversation peut montrer quand ça arrive le plus souvent et comment les messages s'enchaînent, ce qui vous donne quelque chose de concret dont parler ensemble.",
+      faq2Q: "Va-t-elle me dire qui a raison ?",
+      faq2A:
+        "Non. Elle est faite pour montrer le schéma, pas pour désigner un gagnant. On demande à l'IA comment vous pourriez mieux communiquer, et elle répond avec des moments de votre conversation et des idées pour vous deux. Elle ne juge personne et peut mal interpréter le contexte.",
+      faq3Q: "Peut-elle m'aider à écrire le prochain message ?",
+      faq3A:
+        "Oui. Sous une analyse complète, « Aide-moi à répondre » prend un message que vous vous apprêtez à envoyer et propose une version plus calme et plus claire qui garde ce que vous voulez dire, avec une courte note sur ce qui a changé. C'est vous qui décidez quoi envoyer. Après une analyse sur l'appareil, cela fonctionne gratuitement sur votre appareil ; après une analyse dans le cloud, cela fait partie de Pro. L'aperçu gratuit dans le cloud ne l'inclut pas.",
+      faq4Q: "Est-ce gratuit ?",
+      faq4A:
+        "Les statistiques et l'analyse IA sur l'appareil sont gratuites et sans compte, tout comme les questions de suivi après une analyse sur l'appareil. Sans abonnement, vous pouvez aussi essayer un court aperçu gratuit dans le cloud. L'analyse complète dans le cloud et les questions de suivi dans le cloud font partie de Pro ({price}/mois).",
+      faq5Q: "Ma conversation est-elle envoyée ?",
+      faq5A:
+        "Pas pour les statistiques ni pour l'IA sur l'appareil : elles fonctionnent dans votre navigateur et rien de ce qu'elles lisent ne quitte votre appareil. Par défaut, la conversation est conservée dans ce navigateur pour que vous puissiez y revenir ; vous pouvez choisir de ne pas la garder, ou l'oublier à tout moment. Si vous choisissez l'IA dans le cloud, seuls des extraits anonymisés sont envoyés (noms remplacés ; numéros de téléphone, e-mails, liens et IBAN supprimés), et notre fournisseur d'IA ne s'en sert pas pour l'entraînement. Avant de commencer, vous pouvez voir exactement ce qui serait envoyé.",
+      faq6Q: "Ça marche aussi pour les disputes entre amis ou en famille ?",
+      faq6A:
+        "Oui. N'importe quelle conversation WhatsApp exportée fonctionne, avec votre partenaire, un ami, vos parents ou vos frères et sœurs, et aussi les groupes. L'IA décrit comment les personnes qui y participent se parlent, quelles qu'elles soient.",
+      faq7Q: "Combien de messages faut-il ?",
+      faq7A:
+        "Plus il y a d'historique, mieux c'est. Quelques dizaines de messages ou une seule semaine difficile ne montrent pas de schéma. Exportez toute la conversation sans médias ; une longue conversation ne pose pas de problème.",
+      ctaTitle: "Voir le schéma, puis en parler ensemble",
+      ctaButton: "Analyser ma conversation",
+      ctaNote: "Gratuit sur votre appareil · Sans compte · Sans verdict",
+      disclaimer:
+        "WhatsAnalyze est indépendant et n'est pas affilié à WhatsApp ni à Meta. Une analyse par IA est un point de vue pour prendre du recul, pas une thérapie ni un conseil professionnel.",
+    },
     courtEvidence: {
       mediaNotLoaded:
         "Vos fichiers multimédias ne sont pas chargés : la discussion a été restaurée depuis cette session du navigateur, qui ne conserve que les messages. Déposez à nouveau l'export .zip pour que l'index des pièces les inclue et calcule leur empreinte.",
@@ -7615,6 +8202,123 @@ export const messages = {
       hookCard4Title: "Storia WhatsApp Wrapped",
       hookCard4Text:
         "Trasforma la tua chat in una retrospettiva interattiva in stile storia da condividere.",
+    },
+    situationSameFight: {
+      navLabel: "Sempre la stessa lite?",
+      seoTitle:
+        "Litighiamo sempre per le stesse cose? Capisci la tua chat WhatsApp | WhatsAnalyze",
+      seoDescription:
+        "Perché litighiamo sempre per le stesse cose? Lascia che un'IA legga la vostra chat WhatsApp, indichi i momenti che si ripetono e suggerisca come parlarne in modo diverso. Senza colpe né verdetti, gratis sul tuo dispositivo.",
+      ogTitle: "Perché litighiamo sempre per le stesse cose?",
+      ogDescription:
+        "Lascia che un'IA legga la tua chat WhatsApp e mostri lo schema dietro la lite che si ripete, senza decidere chi ha ragione.",
+      heroEyebrow: "Litigi via messaggio?",
+      heroTitle: "Perché litighiamo sempre per le stesse cose?",
+      heroSubtitle:
+        "Aggiungi la tua chat WhatsApp e l'IA risponde a una domanda: come potremmo comunicare meglio? Indica momenti dei vostri messaggi e suggerisce cosa potreste provare entrambi, senza decidere chi ha ragione.",
+      heroNote:
+        "Gratis sul tuo dispositivo · Senza account · L'IA nel cloud vede solo estratti anonimizzati",
+      continueButton: "Continua con questa chat",
+      exportGuide: "Come si esporta una chat WhatsApp?",
+      showEyebrow: "Cosa può mostrare la tua chat",
+      showTitle: "Tu ricordi le emozioni. La tua chat ricorda com'è andata.",
+      showText:
+        "Quando vi siete scritti, chi ha scritto per primo, quanto ci hanno messo le risposte: è questo che WhatsAnalyze legge e conta davvero nella tua esportazione.",
+      show1Title: "Un'analisi di come vi parlate",
+      show1Text:
+        "L'IA risponde a «Come potremmo comunicare meglio?» in poche frasi, indicando momenti della vostra chat e suggerendo cosa potrebbe provare ciascuno di voi.",
+      show2Title: "Quando vi scrivete",
+      show2Text:
+        "Una mappa termica delle 24 ore della vostra chat e quanto scrive di notte ciascuno. Se le conversazioni più difficili arrivano tardi, vedrai quanta parte della vostra chat si svolge a quell'ora.",
+      show2Link: "Apri la mappa termica",
+      show3Title: "Chi inizia le conversazioni",
+      show3Text:
+        "Dopo sei ore o più di silenzio, chi scrive per primo? Contato per ciascuno, come quota di tutte le vostre conversazioni.",
+      show3Link: "Scopri chi inizia",
+      show4Title: "Tempi di risposta e silenzi",
+      show4Text:
+        "Quanto tempo ci mette in media ciascuno a rispondere, e i silenzi più lunghi della vostra chat, con chi li ha interrotti.",
+      show4Link: "Vedi i tempi di risposta",
+      show5Title: "Aiuto con il prossimo messaggio",
+      show5Text:
+        "Dopo un'analisi completa, fai domande sulla vostra chat oppure incolla un messaggio che stai per inviare e ricevi una versione più calma e chiara, con parole tue.",
+      exampleEyebrow: "Un esempio",
+      exampleTitle: "Come può essere un'analisi",
+      exampleText:
+        "Inventato per questa pagina, così vedi com'è fatto: l'IA dà un nome a uno schema, indica dei momenti e suggerisce a entrambi un passo successivo.",
+      exampleBadge: "Esempio · Nora e Tom sono inventati",
+      exampleVibe: "Molto vicini, con un punto dolente",
+      exampleSummary:
+        "Nora e Tom si scrivono tutto il giorno, soprattutto di programmi, cene e amici. Il tono è affettuoso e scherzoso, con una tensione che torna sempre: i cambi di programma all'ultimo minuto. Di solito passa entro la mattina dopo.",
+      exampleAnswer:
+        "I vostri disaccordi tendono a iniziare allo stesso modo: un programma cambia a fine giornata, uno dei due lo scopre per messaggio e da lì le risposte si accorciano. Nora di solito fa una domanda diretta e Tom risponde con una battuta, cosa che ciascuno di voi sembra leggere in modo diverso. Gli scambi che si calmano in fretta sono quelli in cui qualcuno dice come si è sentito («Non vedevo l'ora che arrivasse stasera») invece di cosa è andato storto. Potreste fissare i programmi prima durante la giornata e, quando una conversazione inizia a girare in tondo, proporre una telefonata.",
+      exampleDynamic1Title: "La sera si scalda",
+      exampleDynamic1Text:
+        "Il botta e risposta che gira in tondo avviene soprattutto dopo le 23, quando rispondete entrambi con messaggi brevi e a raffica.",
+      exampleDynamic2Title: "Entrambi fanno un passo verso l'altro",
+      exampleDynamic2Text:
+        "Dopo una giornata di silenzio, di solito Tom scrive per primo con una battuta, e Nora prosegue chiedendogli com'è andata la giornata.",
+      exampleDraft: "Lascia stare. Fai sempre così.",
+      exampleRewrite:
+        "Non vedevo l'ora che arrivasse stasera, quindi ci sono rimasta male. Possiamo scegliere un'altra sera questa settimana?",
+      exampleWhy:
+        "Perché: «Fai sempre così» tende a far ripartire la stessa lite in questa chat. Dire come ti senti e proporre un passo successivo dà a Tom qualcosa a cui rispondere.",
+      limitsEyebrow: "Limiti onesti",
+      limitsTitle: "Cosa può dirti e cosa no",
+      limit1Title: "Schemi, non verdetti",
+      limit1Text:
+        "L'IA indica dei momenti e suggerisce cosa provare. Non decide chi ha ragione o di chi è la colpa, e non è terapia né una consulenza professionale.",
+      limit2Title: "Solo ciò che c'è nella chat",
+      limit2Text:
+        "Chiamate, tono di voce e ciò che è successo di persona non sono in un'esportazione, e l'IA può fraintendere ironia e contesto. Prendila come una prospettiva e confrontala con ciò che sai.",
+      limit3Title: "Una chat breve dice poco",
+      limit3Text:
+        "Qualche decina di messaggi o una brutta settimana non sono uno schema. Più storia copre la tua esportazione, più c'è su cui basarsi. Se non basta, all'IA viene chiesto di dirlo.",
+      privacyEyebrow: "Privata per impostazione predefinita",
+      privacyTitle: "Dentro ci sono anche i suoi messaggi",
+      privacyText:
+        "Una chat contiene le parole dell'altra persona oltre alle tue, quindi ecco esattamente dove va.",
+      privacy1Title: "Salvata solo su questo dispositivo",
+      privacy1Text:
+        "Per impostazione predefinita la tua chat viene conservata in questo browser, su questo dispositivo, così puoi tornarci. Puoi scegliere di non salvarla, o dimenticarla quando vuoi.",
+      privacy2Title: "Statistiche e IA sul dispositivo restano qui",
+      privacy2Text:
+        "Le statistiche e l'IA sul dispositivo funzionano nel tuo browser. Niente di ciò che leggono lascia il tuo dispositivo.",
+      privacy3Title: "Anonimizzata per il cloud",
+      privacy3Text:
+        "Se scegli l'IA nel cloud, anteprima gratuita compresa, vengono inviati solo estratti anonimizzati: nomi sostituiti; numeri di telefono, e-mail, link e IBAN rimossi. Il fornitore di IA non li usa per l'addestramento.",
+      supportEyebrow: "Quando è più di una lite",
+      supportTitle: "Se i litigi ti fanno paura",
+      supportText:
+        "Se qualcuno ti minaccia, ti controlla o ti fa sentire in pericolo, un'analisi della chat non è l'aiuto di cui hai bisogno, e non devi affrontarlo da solo/a. Quando una chat o un messaggio fa pensare ad abusi, minacce o autolesionismo, il coach IA è fatto per fermarsi e indicarti dove trovare aiuto.",
+      supportLink: "Trova una linea d'ascolto nel tuo paese",
+      faqTitle: "Domande frequenti",
+      faq1Q: "Perché litighiamo sempre per le stesse cose?",
+      faq1A:
+        "Spesso l'argomento cambia ma il modo in cui si svolge no: lo stesso tipo di momento fa scattare la lite e ciascuno risponde come l'ultima volta. Questa pagina non può dirti con certezza perché, ma la tua chat può mostrare quando succede di solito e come vanno i messaggi, e questo vi dà qualcosa di concreto di cui parlare insieme.",
+      faq2Q: "Mi dirà chi ha ragione?",
+      faq2A:
+        "No. È fatta per mostrare lo schema, non per scegliere un vincitore. All'IA viene chiesto come potreste comunicare meglio, e risponde con momenti della vostra chat e idee per entrambi. Non giudica nessuno e può fraintendere il contesto.",
+      faq3Q: "Mi aiuta a scrivere il prossimo messaggio?",
+      faq3A:
+        "Sì. Sotto un'analisi completa, «Aiutami a rispondere» prende un messaggio che stai per inviare e suggerisce una versione più calma e chiara che mantiene quello che vuoi dire, con una breve nota su cosa è cambiato. Cosa inviare lo decidi tu. Dopo un'analisi sul dispositivo funziona gratis sul tuo dispositivo; dopo un'analisi nel cloud fa parte di Pro. L'anteprima gratuita nel cloud non lo include.",
+      faq4Q: "È gratis?",
+      faq4A:
+        "Le statistiche e l'analisi con IA sul dispositivo sono gratuite e senza account, così come le domande di approfondimento dopo un'analisi sul dispositivo. Senza abbonamento puoi anche provare una breve anteprima gratuita nel cloud. L'analisi completa nel cloud e le domande di approfondimento nel cloud fanno parte di Pro ({price}/mese).",
+      faq5Q: "La mia chat viene caricata?",
+      faq5A:
+        "Non per le statistiche né per l'IA sul dispositivo: funzionano nel tuo browser e niente di ciò che leggono lascia il tuo dispositivo. Per impostazione predefinita la chat viene conservata in questo browser così puoi tornarci; puoi scegliere di non salvarla, o dimenticarla in qualsiasi momento. Se scegli l'IA nel cloud, vengono inviati solo estratti anonimizzati (nomi sostituiti; numeri di telefono, e-mail, link e IBAN rimossi), e il nostro fornitore di IA non li usa per l'addestramento. Prima di iniziare puoi vedere esattamente cosa verrebbe inviato.",
+      faq6Q: "Funziona anche per i litigi con amici o familiari?",
+      faq6A:
+        "Sì. Va bene qualsiasi chat WhatsApp che esporti, con il partner, un amico, i tuoi genitori o i tuoi fratelli, e anche le chat di gruppo. L'IA descrive come si parlano le persone che ne fanno parte, chiunque siano.",
+      faq7Q: "Quanta chat serve?",
+      faq7A:
+        "Più storia c'è, meglio è. Qualche decina di messaggi o una sola settimana difficile non mostrano uno schema. Esporta l'intera chat senza media; una chat lunga non è un problema.",
+      ctaTitle: "Prima vedere lo schema, poi parlarne insieme",
+      ctaButton: "Analizza la mia chat",
+      ctaNote: "Gratis sul tuo dispositivo · Senza account · Senza verdetti",
+      disclaimer:
+        "WhatsAnalyze è indipendente e non è affiliato a WhatsApp o Meta. Un'analisi con IA è una prospettiva su cui riflettere, non terapia né consulenza professionale.",
     },
     courtEvidence: {
       mediaNotLoaded:
