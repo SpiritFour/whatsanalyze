@@ -1727,7 +1727,7 @@ export const messages = {
     situationWhatToReply: {
       navLabel: "What should I reply?",
       seoTitle:
-        "What Should I Reply? AI Reply Help for WhatsApp | WhatsAnalyze",
+        "What Should I Reply? AI Reply Help for WhatsApp – WhatsAnalyze",
       seoDescription:
         "Not sure how to respond to this text, or what to text back? An AI that has read your WhatsApp chat turns your rough draft into a calmer, clearer reply in your own voice. Free on supported devices.",
       ogTitle: "What should I reply? Help with your WhatsApp reply",
@@ -3586,7 +3586,7 @@ export const messages = {
     situationWhatToReply: {
       navLabel: "Was soll ich antworten?",
       seoTitle:
-        "Was soll ich antworten? KI-Hilfe für deine WhatsApp-Antwort | WhatsAnalyze",
+        "Was soll ich antworten? KI-Hilfe für deine WhatsApp-Antwort – WhatsAnalyze",
       seoDescription:
         "Was antworte ich darauf? Eine KI, die euren WhatsApp-Chat gelesen hat, macht aus deinem Entwurf eine ruhigere, klarere Antwort in deinem Ton. Kostenlos auf unterstützten Geräten.",
       ogTitle: "Was soll ich antworten? Hilfe bei deiner WhatsApp-Antwort",
@@ -5429,7 +5429,7 @@ export const messages = {
     situationWhatToReply: {
       navLabel: "¿Qué le respondo?",
       seoTitle:
-        "¿Qué le respondo? Ayuda con tu respuesta de WhatsApp | WhatsAnalyze",
+        "¿Qué le respondo? Ayuda con tu respuesta de WhatsApp – WhatsAnalyze",
       seoDescription:
         "¿No sabes qué responder a ese mensaje? Una IA que ha leído tu chat de WhatsApp convierte tu borrador en una respuesta más tranquila y clara, con tu propia voz. Gratis en dispositivos compatibles.",
       ogTitle: "¿Qué le respondo? Ayuda con tu respuesta de WhatsApp",
@@ -7277,7 +7277,7 @@ export const messages = {
     situationWhatToReply: {
       navLabel: "O que responder?",
       seoTitle:
-        "O que responder? Ajuda com a sua resposta no WhatsApp | WhatsAnalyze",
+        "O que responder? Ajuda com a sua resposta no WhatsApp – WhatsAnalyze",
       seoDescription:
         "Não sabe o que responder a esta mensagem? Uma IA que leu a sua conversa do WhatsApp transforma o seu rascunho numa resposta mais calma e clara, com a sua voz. Grátis em dispositivos compatíveis.",
       ogTitle: "O que responder? Ajuda com a sua resposta no WhatsApp",
@@ -9138,7 +9138,7 @@ export const messages = {
     situationWhatToReply: {
       navLabel: "Quoi répondre ?",
       seoTitle:
-        "Quoi répondre ? De l'aide pour votre réponse WhatsApp | WhatsAnalyze",
+        "Quoi répondre ? De l'aide pour votre réponse WhatsApp – WhatsAnalyze",
       seoDescription:
         "Vous ne savez pas quoi répondre à ce message ? Une IA qui a lu votre conversation WhatsApp transforme votre brouillon en une réponse plus calme et plus claire, dans votre style. Gratuit sur les appareils compatibles.",
       ogTitle: "Quoi répondre ? De l'aide pour votre réponse WhatsApp",
@@ -10981,7 +10981,7 @@ export const messages = {
     situationWhatToReply: {
       navLabel: "Cosa rispondere?",
       seoTitle:
-        "Cosa rispondere? Aiuto per la tua risposta su WhatsApp | WhatsAnalyze",
+        "Cosa rispondere? Aiuto per la tua risposta su WhatsApp – WhatsAnalyze",
       seoDescription:
         "Non sai cosa rispondere a questo messaggio? Un'IA che ha letto la tua chat WhatsApp trasforma la tua bozza in una risposta più calma e chiara, con il tuo stile. Gratis sui dispositivi compatibili.",
       ogTitle: "Cosa rispondere? Aiuto per la tua risposta su WhatsApp",

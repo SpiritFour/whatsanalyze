@@ -25,8 +25,9 @@
           {{ t("situationWhatToReply.continueButton") }}
         </LandingButton>
       </div>
-      <!-- A chat saved on an earlier visit: one tap to its reading and the
-           coach conversation kept with it. -->
+      <!-- A chat saved on an earlier visit: one tap to the AI page, which
+           shows the chat's last reading and its coach conversation, if it
+           had one. -->
       <ClientOnly v-else>
         <LibraryOffer
           class="hero-next"
