@@ -330,6 +330,10 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze is not an immigration adviser or law firm. Requirements vary by country and case — always confirm them with your lawyer or the relevant authority.",
     },
+    // The closing slide of /wrapped/results, leading on to the AI analyzer.
+    wrappedAiTeaser: {
+      text: "Pick a question, then add the same chat export on the next page.",
+    },
     wrapped: {
       heroTitle: "WhatsApp Wrapped {currentYear}",
       heroSubtitle:
@@ -1631,6 +1635,9 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze ist keine Migrationsberatung und keine Kanzlei. Die Anforderungen unterscheiden sich je nach Land und Fall – klärt sie immer mit eurer Anwältin, eurem Anwalt oder der zuständigen Behörde.",
     },
+    wrappedAiTeaser: {
+      text: "Wähle eine Frage und lade auf der nächsten Seite denselben Chat-Export hoch.",
+    },
     wrapped: {
       heroTitle: "WhatsApp Wrapped {currentYear}",
       heroSubtitle:
@@ -2918,6 +2925,9 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze no es un asesor de inmigración ni un despacho de abogados. Los requisitos varían según el país y el caso: confírmalos siempre con tu abogado o la autoridad correspondiente.",
     },
+    wrappedAiTeaser: {
+      text: "Elige una pregunta y sube la misma exportación del chat en la página siguiente.",
+    },
     wrapped: {
       heroTitle: "WhatsApp Wrapped {currentYear}",
       heroSubtitle:
@@ -3933,6 +3943,9 @@ export const messages = {
       errorPortalFailed: "Não foi possível abrir o portal do cliente.",
     },
     analyzeYourChat: "Começar",
+    wrappedAiTeaser: {
+      text: "Escolha uma pergunta e envie a mesma exportação da conversa na página seguinte.",
+    },
     wrapped: {
       heroTitle: "WhatsApp Wrapped {currentYear}",
       heroSubtitle:
@@ -5212,6 +5225,9 @@ export const messages = {
       errorCheckout: "Impossible de démarrer le paiement. Veuillez réessayer.",
       errorPortalMissing: "E-mail ou ID d'abonnement manquant.",
       errorPortalFailed: "Impossible d'ouvrir le portail client.",
+    },
+    wrappedAiTeaser: {
+      text: "Choisissez une question, puis ajoutez le même export de la conversation à la page suivante.",
     },
     wrapped: {
       heroTitle: "WhatsApp Wrapped {currentYear}",
@@ -6499,6 +6515,9 @@ export const messages = {
       errorCheckout: "Impossibile avviare il pagamento. Riprova.",
       errorPortalMissing: "Email o ID abbonamento mancante.",
       errorPortalFailed: "Impossibile aprire il portale clienti.",
+    },
+    wrappedAiTeaser: {
+      text: "Scegli una domanda e carica la stessa esportazione della chat nella pagina successiva.",
     },
     wrapped: {
       heroTitle: "WhatsApp Wrapped {currentYear}",
