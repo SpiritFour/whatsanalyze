@@ -142,7 +142,15 @@ import { analyzeMessages } from "~/utils/messageCounter";
 import { analyzeWords } from "~/utils/wordCounter";
 import { analyzeHeatmap } from "~/utils/chatHeatmap";
 interface Props {
-  toolType?: "inactivity" | "messages" | "words" | "heatmap" | "ai" | "court";
+  toolType?:
+    | "inactivity"
+    | "messages"
+    | "words"
+    | "heatmap"
+    | "ai"
+    | "court"
+    | "export_guide"
+    | "pdf";
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -246,9 +254,15 @@ function showChat(
   }
 
   let analysis: unknown;
-  if (props.toolType === "ai" || props.toolType === "court") {
+  if (
+    props.toolType === "ai" ||
+    props.toolType === "court" ||
+    props.toolType === "export_guide" ||
+    props.toolType === "pdf"
+  ) {
     // These pages analyze on demand: the AI once the visitor has picked
-    // where, the court PDF once it is downloaded.
+    // where, the court PDF once it is downloaded. The export guide and the
+    // PDF page only hand the chat on to the page that does the work.
     analysis = { messages };
   } else if (props.toolType === "messages") {
     analysis = analyzeMessages(messages, durationMs);

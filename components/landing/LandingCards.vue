@@ -6,6 +6,7 @@
         :key="item.title"
         :to="item.to"
         class="landing-card landing-card--link"
+        @click="$emit('select', item)"
       >
         <v-icon v-if="item.icon" class="landing-card__icon" size="32">
           {{ item.icon }}
@@ -39,6 +40,9 @@ export default {
     // [{ icon, title, text, to?, linkText? }]
     items: { type: Array, required: true },
   },
+  // A linked card was followed, with the item it came from, so a page can
+  // tell which of its cards people pick.
+  emits: ["select"],
 };
 </script>
 
