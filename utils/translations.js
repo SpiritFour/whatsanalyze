@@ -1105,6 +1105,12 @@ export const messages = {
       coachNoteLocal:
         "Runs on your device and remembers the last few messages.",
       coachNoteCloud: "Each message uses one of today's cloud analyses.",
+      coachNoteFree:
+        "Free preview: a few cloud replies a day. Pro gives you more.",
+      coachNoteFreeLeft:
+        "{n} free cloud replies left today. Pro gives you more.",
+      error_coach_free_used:
+        "You have used today's free replies. Come back tomorrow, or get Pro for more replies each day.",
       coachSupportTitle:
         "This sounds serious. You don't have to handle it alone.",
       coachSupportText:
@@ -1365,10 +1371,10 @@ export const messages = {
         "No. It's built to show the pattern, not to pick a winner. The AI is asked how you could communicate better, and it answers with moments from your chat and ideas for both of you. It doesn't judge anyone, and it can misread context.",
       faq3Q: "Can it help me write the next message?",
       faq3A:
-        "Yes. Below a full reading, “Help me reply” takes a message you're about to send and suggests a calmer, clearer version that keeps what you mean, with a short note on what changed. You decide what to send. After an on-device reading this runs on your device for free; after a cloud reading it's part of Pro. The free cloud preview doesn't include it.",
+        "Yes. Below a reading, “Help me reply” takes a message you're about to send and suggests a calmer, clearer version that keeps what you mean, with a short note on what changed. You decide what to send. After an on-device reading it runs on your device for free; after the free cloud preview you get a few free replies a day, and Pro gives you more.",
       faq4Q: "Is it free?",
       faq4A:
-        "The statistics and the on-device AI reading are free, with no account, and so are the follow-up questions after an on-device reading. Without a subscription you can also try a short free cloud preview. The full cloud reading and the cloud follow-ups are part of Pro ({price}/month).",
+        "The statistics and the on-device AI reading are free, with no account, and so are the follow-up questions after an on-device reading. Without a subscription you can also try a short free cloud preview, with a few free coach replies a day. The full cloud reading and more cloud replies each day are part of Pro ({price}/month).",
       faq5Q: "Is my chat uploaded?",
       faq5A:
         "Not for the statistics or the on-device AI: they run in your browser, and nothing they read leaves your device. By default the chat is saved in this browser so you can come back to it; you can choose not to keep it, or forget it at any time. If you choose the cloud AI, only anonymized excerpts are sent (names replaced; phone numbers, emails, links and IBANs removed), and our AI provider doesn't train on them. You can see exactly what would be sent before you start.",
@@ -1856,7 +1862,7 @@ export const messages = {
       heroSubtitle:
         "The message is open and you don't know how to answer. Drop your chat, and an AI that has read it helps you find the words: write what you want to say and get a calmer, clearer version in your voice, with a note on why.",
       heroNote:
-        "Free on your device, where your browser can run it · The cloud coach comes with Pro",
+        "Free on your device · A few free cloud replies a day · More with Pro",
       continueButton: "Get help replying with this chat",
       offerChat: "Get help replying to {name}",
       offerGroup: "Get help replying in {name}",
@@ -1895,7 +1901,7 @@ export const messages = {
         "Export the chat from WhatsApp without media, after the message you want to answer has arrived, and drop it above. It's read in your browser.",
       step2Title: "Get a reading",
       step2Text:
-        "The coach opens under an AI reading of your chat. Run it free on your device, if your browser can, or in the cloud with Pro.",
+        "The coach opens under an AI reading of your chat. Run it free on your device if your browser can, or in the cloud: the free preview comes with a few free coach replies a day, and Pro gives you more.",
       step3Title: "Ask, or draft your reply",
       step3Text:
         "Under the reading, pick “{reply}”, write what you'd like to say and get a calmer, clearer version. Or pick “{ask}” to talk the message through first.",
@@ -1905,7 +1911,7 @@ export const messages = {
         "The reading and the coach run in your browser after a one-time model download, and nothing leaves your device. It needs WebGPU: a recent computer, most recent Android phones with Chrome, or an iPhone on iOS 26 or later. The model is small, so its answers are simpler.",
       plan2Title: "Free cloud preview",
       plan2Text:
-        "A taste of the reading from a stronger AI, made from anonymized excerpts. The coach isn't part of the preview.",
+        "A taste of the reading from a stronger AI, made from anonymized excerpts, plus a few free coach replies a day.",
       plan3Title: "Pro: {price} a month",
       plan3Text:
         "The full cloud reading and the coach in the cloud, on any phone. Each message to the coach uses one of the day's cloud analyses.",
@@ -1952,7 +1958,7 @@ export const messages = {
         "It can help you get there. Write a rough version of what you want to say, and the coach gives it back calmer and clearer, in your voice and your chat's usual tone, with a short note on what changed. Or ask it about the message first. The reply is still yours: change anything that doesn't sound like you before you send it.",
       faq2Q: "Is it free?",
       faq2A:
-        "On your device, yes: the reading and the coach run free in your browser, if it supports WebGPU. The free cloud preview shows part of a reading but doesn't include the coach. With Pro ({price} a month), the full reading and the coach run in the cloud, on any phone.",
+        "Yes. On your device, the reading and the coach run free in your browser, if it supports WebGPU. In the cloud, the free preview shows part of a reading and comes with a few free coach replies a day, on any phone. With Pro ({price} a month) you get the full reading and more coach replies each day.",
       faq3Q: "Does the AI see the message I just got?",
       faq3A:
         "Only if it's in your export, so export the chat after the message arrived. The AI reads excerpts from across the chat and always includes the most recent messages. If you saved the chat before the message came in, export it again. You can also paste the message into your question.",
@@ -3067,6 +3073,12 @@ export const messages = {
         "Läuft auf deinem Gerät und merkt sich die letzten Nachrichten.",
       coachNoteCloud:
         "Jede Nachricht zählt als eine deiner heutigen Cloud-Analysen.",
+      coachNoteFree:
+        "Kostenlose Vorschau: ein paar Cloud-Antworten pro Tag. Mit Pro bekommst du mehr.",
+      coachNoteFreeLeft:
+        "Heute noch {n} kostenlose Cloud-Antworten. Mit Pro bekommst du mehr.",
+      error_coach_free_used:
+        "Deine kostenlosen Antworten für heute sind aufgebraucht. Komm morgen wieder oder hol dir Pro für mehr Antworten pro Tag.",
       coachSupportTitle: "Das klingt ernst. Damit musst du nicht allein sein.",
       coachSupportText:
         "Wenn du oder jemand anderes in Gefahr ist, ruf sofort den Notruf (112). Kostenlose, vertrauliche Hilfe bekommst du z. B. bei der Telefonseelsorge (0800 111 0 111) oder über findahelpline.com für dein Land.",
@@ -3330,10 +3342,10 @@ export const messages = {
         "Nein. Es geht um das Muster, nicht darum, wer gewinnt. Die KI wird gefragt, wie ihr besser kommunizieren könntet, und antwortet mit Momenten aus eurem Chat und Ideen für euch beide. Sie urteilt über niemanden und kann Zusammenhänge falsch verstehen.",
       faq3Q: "Hilft sie mir, die nächste Nachricht zu schreiben?",
       faq3A:
-        "Ja. Unter einer vollständigen Auswertung nimmt „Hilf mir beim Antworten“ eine Nachricht, die du schicken willst, und schlägt eine ruhigere, klarere Version vor, die bei dem bleibt, was du meinst, mit einer kurzen Erklärung, was sich geändert hat. Was du schickst, entscheidest du. Nach einer Auswertung auf dem Gerät läuft das kostenlos auf deinem Gerät; nach einer Cloud-Auswertung gehört es zu Pro. In der kostenlosen Cloud-Vorschau ist es nicht dabei.",
+        "Ja. Unter einer Auswertung macht „Hilf mir beim Antworten“ aus einer Nachricht, die du gleich schicken willst, eine ruhigere, klarere Version, die bei dem bleibt, was du meinst, mit einer kurzen Notiz, was sich geändert hat. Du entscheidest, was du schickst. Nach einer Auswertung auf deinem Gerät läuft das dort kostenlos; nach der kostenlosen Cloud-Vorschau hast du ein paar kostenlose Antworten pro Tag, mit Pro mehr.",
       faq4Q: "Ist das kostenlos?",
       faq4A:
-        "Die Statistiken und die KI-Auswertung auf dem Gerät sind kostenlos und ohne Konto, ebenso die Rückfragen nach einer Auswertung auf dem Gerät. Ohne Abo kannst du außerdem eine kurze kostenlose Cloud-Vorschau ausprobieren. Die vollständige Cloud-Auswertung und die Rückfragen in der Cloud gehören zu Pro ({price}/Monat).",
+        "Die Statistiken und die KI-Auswertung auf dem Gerät sind kostenlos und ohne Konto, ebenso die Rückfragen nach einer Auswertung auf dem Gerät. Ohne Abo kannst du außerdem eine kurze kostenlose Cloud-Vorschau ausprobieren, mit ein paar kostenlosen Coach-Antworten pro Tag. Die vollständige Cloud-Auswertung und mehr Cloud-Antworten pro Tag gehören zu Pro ({price}/Monat).",
       faq5Q: "Wird mein Chat hochgeladen?",
       faq5A:
         "Nicht für die Statistiken und die KI auf dem Gerät: Sie laufen in deinem Browser, und nichts, was sie lesen, verlässt dein Gerät. Standardmäßig wird der Chat in diesem Browser gespeichert, damit du zurückkommen kannst; du kannst dich dagegen entscheiden oder ihn jederzeit vergessen. Wenn du die Cloud-KI wählst, werden nur anonymisierte Auszüge gesendet (Namen ersetzt; Telefonnummern, E-Mails, Links und IBANs entfernt), und unser KI-Anbieter trainiert nicht damit. Bevor du startest, kannst du genau sehen, was gesendet würde.",
@@ -3834,7 +3846,7 @@ export const messages = {
       heroSubtitle:
         "Die Nachricht ist offen, und dir fehlen die Worte. Lade euren Chat, und eine KI, die ihn gelesen hat, hilft dir weiter: Schreib, was du sagen willst, und bekomm eine ruhigere, klarere Fassung in deinem Ton, mit einer kurzen Erklärung.",
       heroNote:
-        "Kostenlos auf deinem Gerät, wenn dein Browser es kann · Der Coach in der Cloud mit Pro",
+        "Kostenlos auf deinem Gerät, wenn dein Browser es kann · Ein paar kostenlose Cloud-Antworten pro Tag · Mehr mit Pro",
       continueButton: "Mit diesem Chat Hilfe beim Antworten holen",
       offerChat: "Hilfe beim Antworten an {name}",
       offerGroup: "Hilfe beim Antworten in {name}",
@@ -3873,7 +3885,7 @@ export const messages = {
         "Exportiere den Chat in WhatsApp ohne Medien, nachdem die Nachricht da ist, auf die du antworten willst, und zieh ihn oben in das Feld. Er wird in deinem Browser gelesen.",
       step2Title: "Auswertung holen",
       step2Text:
-        "Der Coach öffnet sich unter einer KI-Auswertung eures Chats. Lass sie kostenlos auf deinem Gerät laufen, wenn dein Browser das kann, oder mit Pro in der Cloud.",
+        "Der Coach erscheint unter einer KI-Auswertung eures Chats. Lass ihn kostenlos auf deinem Gerät laufen, wenn dein Browser das kann, oder in der Cloud: Zur kostenlosen Vorschau gehören ein paar kostenlose Coach-Antworten pro Tag, mit Pro bekommst du mehr.",
       step3Title: "Fragen oder Antwort entwerfen",
       step3Text:
         "Wähl unter der Auswertung „{reply}“, schreib, was du sagen möchtest, und bekomm eine ruhigere, klarere Fassung. Oder wähl „{ask}“, um die Nachricht erst einmal durchzusprechen.",
@@ -3883,7 +3895,7 @@ export const messages = {
         "Auswertung und Coach laufen nach einem einmaligen Modell-Download in deinem Browser, und nichts verlässt dein Gerät. Dafür braucht es WebGPU: einen aktuellen Computer, die meisten neueren Android-Handys mit Chrome oder ein iPhone ab iOS 26. Das Modell ist klein, seine Antworten fallen einfacher aus.",
       plan2Title: "Kostenlose Cloud-Vorschau",
       plan2Text:
-        "Ein Vorgeschmack auf die Auswertung von einer stärkeren KI, erstellt aus anonymisierten Ausschnitten. Der Coach gehört nicht zur Vorschau.",
+        "Ein Teil der Auswertung von einer stärkeren KI, aus anonymisierten Auszügen, dazu ein paar kostenlose Coach-Antworten pro Tag.",
       plan3Title: "Pro: {price} im Monat",
       plan3Text:
         "Die volle Auswertung und der Coach in der Cloud, auf jedem Handy. Jede Nachricht an den Coach zählt als eine der Cloud-Analysen des Tages.",
@@ -3930,7 +3942,7 @@ export const messages = {
         "Sie kann dir helfen, dahin zu kommen. Schreib grob, was du sagen willst, und der Coach gibt es dir ruhiger und klarer zurück, in deinem Ton und dem üblichen Ton eures Chats, mit einer kurzen Erklärung, was sich geändert hat. Oder frag ihn zuerst zur Nachricht. Die Antwort bleibt deine: Ändere alles, was nicht nach dir klingt, bevor du sie abschickst.",
       faq2Q: "Ist das kostenlos?",
       faq2A:
-        "Auf deinem Gerät ja: Auswertung und Coach laufen kostenlos in deinem Browser, wenn er WebGPU unterstützt. Die kostenlose Cloud-Vorschau zeigt einen Teil der Auswertung, aber ohne Coach. Mit Pro ({price} im Monat) laufen die volle Auswertung und der Coach in der Cloud, auf jedem Handy.",
+        "Ja. Auf deinem Gerät laufen Auswertung und Coach kostenlos im Browser, wenn er WebGPU unterstützt. In der Cloud zeigt die kostenlose Vorschau einen Teil der Auswertung und bringt ein paar kostenlose Coach-Antworten pro Tag mit, auf jedem Handy. Mit Pro ({price} im Monat) bekommst du die vollständige Auswertung und mehr Coach-Antworten pro Tag.",
       faq3Q: "Sieht die KI die Nachricht, die ich gerade bekommen habe?",
       faq3A:
         "Nur wenn sie in deinem Export steckt. Exportiere den Chat also, nachdem die Nachricht angekommen ist. Die KI liest Ausschnitte aus dem ganzen Chat und nimmt die neuesten Nachrichten immer mit. Hast du den Chat gespeichert, bevor die Nachricht kam, exportiere ihn neu. Du kannst die Nachricht auch in deine Frage kopieren.",
@@ -5034,6 +5046,12 @@ export const messages = {
       coachNoteLocal:
         "Funciona en tu dispositivo y recuerda los últimos mensajes.",
       coachNoteCloud: "Cada mensaje usa uno de tus análisis en la nube de hoy.",
+      coachNoteFree:
+        "Vista previa gratis: unas pocas respuestas en la nube al día. Con Pro tienes más.",
+      coachNoteFreeLeft:
+        "Hoy te quedan {n} respuestas gratis en la nube. Con Pro tienes más.",
+      error_coach_free_used:
+        "Ya has usado las respuestas gratis de hoy. Vuelve mañana o hazte Pro para tener más cada día.",
       coachSupportTitle: "Esto suena serio. No tienes que afrontarlo solo/a.",
       coachSupportText:
         "Si tú u otra persona estáis en peligro, llama ahora al número de emergencias local (112 en Europa). Para apoyo gratuito y confidencial, busca una línea de ayuda de tu país en findahelpline.com (en España: 024).",
@@ -5298,10 +5316,10 @@ export const messages = {
         "No. Está pensado para mostrar el patrón, no para elegir un ganador. A la IA se le pregunta cómo podríais comunicaros mejor, y responde con momentos de vuestro chat e ideas para los dos. No juzga a nadie y puede malinterpretar el contexto.",
       faq3Q: "¿Me ayuda a escribir el próximo mensaje?",
       faq3A:
-        "Sí. Debajo de un análisis completo, «Ayúdame a responder» toma un mensaje que vas a enviar y sugiere una versión más tranquila y clara que mantiene lo que quieres decir, con una breve nota sobre qué ha cambiado. Tú decides qué envías. Tras un análisis en tu dispositivo funciona gratis en tu dispositivo; tras un análisis en la nube forma parte de Pro. La vista previa gratis en la nube no lo incluye.",
+        "Sí. Debajo de un análisis, «Ayúdame a responder» toma un mensaje que estás a punto de enviar y te sugiere una versión más tranquila y clara que mantiene lo que quieres decir, con una nota breve sobre lo que ha cambiado. Tú decides qué envías. Tras un análisis en tu dispositivo funciona allí gratis; tras la vista previa gratis en la nube tienes algunas respuestas gratis al día, y con Pro más.",
       faq4Q: "¿Es gratis?",
       faq4A:
-        "Las estadísticas y el análisis con IA en tu dispositivo son gratis y sin cuenta, igual que las preguntas de seguimiento tras un análisis en el dispositivo. Sin suscripción también puedes probar una breve vista previa gratis en la nube. El análisis completo en la nube y las preguntas de seguimiento en la nube forman parte de Pro ({price}/mes).",
+        "Las estadísticas y el análisis con IA en tu dispositivo son gratis y sin cuenta, igual que las preguntas de seguimiento tras un análisis en el dispositivo. Sin suscripción también puedes probar una breve vista previa gratis en la nube, con algunas respuestas gratis del coach al día. El análisis completo en la nube y más respuestas en la nube cada día forman parte de Pro ({price}/mes).",
       faq5Q: "¿Se sube mi chat?",
       faq5A:
         "No para las estadísticas ni para la IA en tu dispositivo: funcionan en tu navegador y nada de lo que leen sale de tu dispositivo. Por defecto, el chat se guarda en este navegador para que puedas volver a él; puedes elegir no guardarlo u olvidarlo cuando quieras. Si eliges la IA en la nube, solo se envían extractos anonimizados (nombres sustituidos; teléfonos, correos, enlaces e IBAN eliminados), y nuestro proveedor de IA no entrena con ellos. Antes de empezar puedes ver exactamente qué se enviaría.",
@@ -5794,7 +5812,7 @@ export const messages = {
       heroSubtitle:
         "Tienes el mensaje delante y no sabes cómo contestar. Sube tu chat y una IA que lo ha leído te ayuda a encontrar las palabras: escribe lo que quieres decir y recibe una versión más tranquila y clara, con tu voz y una nota sobre el porqué.",
       heroNote:
-        "Gratis en tu dispositivo, si tu navegador puede ejecutarlo · El coach en la nube viene con Pro",
+        "Gratis en tu dispositivo, si tu navegador puede ejecutarlo · Algunas respuestas gratis en la nube al día · Más con Pro",
       continueButton: "Pedir ayuda para responder con este chat",
       offerChat: "Ayuda para responder a {name}",
       offerGroup: "Ayuda para responder en {name}",
@@ -5833,7 +5851,7 @@ export const messages = {
         "Exporta el chat desde WhatsApp sin archivos multimedia, cuando ya haya llegado el mensaje que quieres responder, y arrástralo arriba. Se lee en tu navegador.",
       step2Title: "Obtén una lectura",
       step2Text:
-        "El coach se abre bajo una lectura de IA de tu chat. Hazla gratis en tu dispositivo, si tu navegador puede, o en la nube con Pro.",
+        "El coach aparece debajo de un análisis con IA de vuestro chat. Úsalo gratis en tu dispositivo, si tu navegador puede, o en la nube: la vista previa gratis incluye algunas respuestas gratis del coach al día, y con Pro tienes más.",
       step3Title: "Pregunta o escribe tu borrador",
       step3Text:
         "Bajo la lectura, elige «{reply}», escribe lo que te gustaría decir y recibe una versión más tranquila y clara. O elige «{ask}» para hablar antes del mensaje.",
@@ -5843,7 +5861,7 @@ export const messages = {
         "La lectura y el coach funcionan en tu navegador tras una descarga única del modelo, y nada sale de tu dispositivo. Necesita WebGPU: un ordenador reciente, la mayoría de los Android recientes con Chrome o un iPhone con iOS 26 o posterior. El modelo es pequeño, así que sus respuestas son más sencillas.",
       plan2Title: "Vista previa gratis en la nube",
       plan2Text:
-        "Un adelanto de la lectura de una IA más potente, hecho con fragmentos anonimizados. El coach no forma parte de la vista previa.",
+        "Una muestra del análisis de una IA más potente, hecha con fragmentos anonimizados, más algunas respuestas gratis del coach al día.",
       plan3Title: "Pro: {price} al mes",
       plan3Text:
         "La lectura completa y el coach en la nube, en cualquier móvil. Cada mensaje al coach usa uno de los análisis en la nube del día.",
@@ -5890,7 +5908,7 @@ export const messages = {
         "Puede ayudarte a llegar. Escribe una versión aproximada de lo que quieres decir y el coach te la devuelve más tranquila y clara, con tu voz y el tono habitual de vuestro chat, y una nota breve sobre qué cambió. O pregúntale primero por el mensaje. La respuesta sigue siendo tuya: cambia lo que no suene a ti antes de enviarla.",
       faq2Q: "¿Es gratis?",
       faq2A:
-        "En tu dispositivo, sí: la lectura y el coach funcionan gratis en tu navegador si es compatible con WebGPU. La vista previa gratis en la nube muestra parte de una lectura, pero no incluye el coach. Con Pro ({price} al mes), la lectura completa y el coach funcionan en la nube, en cualquier móvil.",
+        "Sí. En tu dispositivo, el análisis y el coach funcionan gratis en el navegador, si admite WebGPU. En la nube, la vista previa gratis muestra parte del análisis e incluye algunas respuestas gratis del coach al día, en cualquier móvil. Con Pro ({price} al mes) tienes el análisis completo y más respuestas del coach cada día.",
       faq3Q: "¿Ve la IA el mensaje que me acaba de llegar?",
       faq3A:
         "Solo si está en tu exportación, así que exporta el chat después de que llegue el mensaje. La IA lee fragmentos de todo el chat e incluye siempre los mensajes más recientes. Si guardaste el chat antes de que llegara, expórtalo de nuevo. También puedes pegar el mensaje en tu pregunta.",
@@ -6737,6 +6755,12 @@ export const messages = {
       coachNoteLocal: "Roda no seu dispositivo e lembra as últimas mensagens.",
       coachNoteCloud:
         "Cada mensagem usa uma das suas análises na nuvem de hoje.",
+      coachNoteFree:
+        "Pré-visualização grátis: algumas respostas na nuvem por dia. Com o Pro, você recebe mais.",
+      coachNoteFreeLeft:
+        "Hoje restam {n} respostas grátis na nuvem. Com o Pro, você recebe mais.",
+      error_coach_free_used:
+        "Você já usou as respostas grátis de hoje. Volte amanhã ou assine o Pro para ter mais respostas por dia.",
       coachSupportTitle:
         "Isso parece sério. Você não precisa lidar com isso sozinho(a).",
       coachSupportText:
@@ -7000,10 +7024,10 @@ export const messages = {
         "Não. Foi pensado para mostrar o padrão, não para escolher um vencedor. A IA recebe a pergunta de como poderiam comunicar melhor e responde com momentos da conversa e ideias para os dois. Não julga ninguém e pode interpretar mal o contexto.",
       faq3Q: "Ajuda-me a escrever a próxima mensagem?",
       faq3A:
-        "Sim. Por baixo de uma análise completa, «Ajude-me a responder» pega numa mensagem que vai enviar e sugere uma versão mais calma e clara que mantém o que quer dizer, com uma nota curta sobre o que mudou. Quem decide o que envia é você. Depois de uma análise no dispositivo, funciona grátis no seu dispositivo; depois de uma análise na nuvem, faz parte do Pro. A pré-visualização grátis na nuvem não a inclui.",
+        "Sim. Abaixo de uma análise, “Ajude-me a responder” pega uma mensagem que você está prestes a enviar e sugere uma versão mais calma e clara, que mantém o que você quer dizer, com uma nota curta sobre o que mudou. Você decide o que enviar. Depois de uma análise no seu dispositivo, isso roda lá de graça; depois da prévia grátis na nuvem, você tem algumas respostas grátis por dia, e com o Pro mais.",
       faq4Q: "É grátis?",
       faq4A:
-        "As estatísticas e a análise com IA no dispositivo são grátis e sem conta, tal como as perguntas de seguimento depois de uma análise no dispositivo. Sem assinatura, também pode experimentar uma breve pré-visualização grátis na nuvem. A análise completa na nuvem e as perguntas de seguimento na nuvem fazem parte do Pro ({price}/mês).",
+        "As estatísticas e a análise com IA no dispositivo são grátis e sem conta, assim como as perguntas de acompanhamento depois de uma análise no dispositivo. Sem assinatura, você também pode testar uma breve prévia grátis na nuvem, com algumas respostas grátis do coach por dia. A análise completa na nuvem e mais respostas na nuvem por dia fazem parte do Pro ({price}/mês).",
       faq5Q: "A minha conversa é enviada?",
       faq5A:
         "Não para as estatísticas nem para a IA no dispositivo: funcionam no seu navegador e nada do que leem sai do seu dispositivo. Por padrão, a conversa fica guardada neste navegador para poder voltar a ela; pode escolher não a guardar ou esquecê-la a qualquer momento. Se escolher a IA na nuvem, só são enviados excertos anonimizados (nomes substituídos; números de telefone, e-mails, links e IBAN removidos), e o nosso fornecedor de IA não treina com eles. Antes de começar, pode ver exatamente o que seria enviado.",
@@ -7757,7 +7781,7 @@ export const messages = {
       heroSubtitle:
         "A mensagem está aberta e não sabe como responder. Carregue a conversa e uma IA que a leu ajuda a encontrar as palavras: escreva o que quer dizer e receba uma versão mais calma e clara, com a sua voz e uma nota sobre o porquê.",
       heroNote:
-        "Grátis no seu dispositivo, se o navegador o conseguir executar · O coach na nuvem vem com o Pro",
+        "Grátis no seu dispositivo, se o navegador conseguir executar · Algumas respostas grátis na nuvem por dia · Mais com o Pro",
       continueButton: "Pedir ajuda para responder com esta conversa",
       offerChat: "Ajuda para responder a {name}",
       offerGroup: "Ajuda para responder em {name}",
@@ -7796,7 +7820,7 @@ export const messages = {
         "Exporte a conversa no WhatsApp sem mídia, depois de chegar a mensagem a que quer responder, e arraste-a para a caixa acima. É lida no seu navegador.",
       step2Title: "Obtenha uma leitura",
       step2Text:
-        "O coach abre-se sob uma leitura da conversa feita pela IA. Faça-a grátis no seu dispositivo, se o navegador conseguir, ou na nuvem com o Pro.",
+        "O coach aparece abaixo de uma análise com IA da sua conversa. Use grátis no seu dispositivo, se o navegador conseguir, ou na nuvem: a prévia grátis vem com algumas respostas grátis do coach por dia, e com o Pro você recebe mais.",
       step3Title: "Pergunte ou escreva o rascunho",
       step3Text:
         "Sob a leitura, escolha “{reply}”, escreva o que gostaria de dizer e receba uma versão mais calma e clara. Ou escolha “{ask}” para falar primeiro sobre a mensagem.",
@@ -7806,7 +7830,7 @@ export const messages = {
         "A leitura e o coach funcionam no seu navegador após um download único do modelo, e nada sai do seu dispositivo. Precisa de WebGPU: um computador recente, a maioria dos Android recentes com Chrome ou um iPhone com iOS 26 ou posterior. O modelo é pequeno, por isso as respostas são mais simples.",
       plan2Title: "Pré-visualização grátis na nuvem",
       plan2Text:
-        "Uma amostra da leitura de uma IA mais forte, feita a partir de excertos anonimizados. O coach não faz parte da pré-visualização.",
+        "Uma amostra da análise de uma IA mais poderosa, feita com trechos anonimizados, mais algumas respostas grátis do coach por dia.",
       plan3Title: "Pro: {price} por mês",
       plan3Text:
         "A leitura completa e o coach na nuvem, em qualquer telefone. Cada mensagem ao coach conta como uma das análises na nuvem do dia.",
@@ -7854,7 +7878,7 @@ export const messages = {
         "Pode ajudar a chegar lá. Escreva uma versão aproximada do que quer dizer e o coach responde com uma versão mais calma e clara, com a sua voz e o tom habitual da conversa, e uma nota breve sobre o que mudou. Ou pergunte-lhe primeiro sobre a mensagem. A resposta continua a ser sua: mude o que não soar a si antes de a enviar.",
       faq2Q: "É grátis?",
       faq2A:
-        "No seu dispositivo, sim: a leitura e o coach funcionam grátis no navegador, se ele suportar WebGPU. A pré-visualização grátis na nuvem mostra parte de uma leitura, mas não inclui o coach. Com o Pro ({price} por mês), a leitura completa e o coach funcionam na nuvem, em qualquer telefone.",
+        "Sim. No seu dispositivo, a análise e o coach rodam grátis no navegador, se ele suportar WebGPU. Na nuvem, a prévia grátis mostra parte da análise e vem com algumas respostas grátis do coach por dia, em qualquer celular. Com o Pro ({price} por mês), você recebe a análise completa e mais respostas do coach por dia.",
       faq3Q: "A IA vê a mensagem que acabei de receber?",
       faq3A:
         "Só se ela estiver na sua exportação, por isso exporte a conversa depois de a mensagem chegar. A IA lê excertos de toda a conversa e inclui sempre as mensagens mais recentes. Se guardou a conversa antes de a mensagem chegar, exporte-a de novo. Também pode colar a mensagem na sua pergunta.",
@@ -8712,6 +8736,12 @@ export const messages = {
         "Fonctionne sur ton appareil et se souvient des derniers messages.",
       coachNoteCloud:
         "Chaque message utilise une de tes analyses cloud du jour.",
+      coachNoteFree:
+        "Aperçu gratuit : quelques réponses cloud par jour. Avec Pro, tu en as plus.",
+      coachNoteFreeLeft:
+        "Encore {n} réponses cloud gratuites aujourd’hui. Avec Pro, tu en as plus.",
+      error_coach_free_used:
+        "Tu as utilisé tes réponses gratuites du jour. Reviens demain, ou passe à Pro pour en avoir plus chaque jour.",
       coachSupportTitle: "Cela semble sérieux. Tu n'as pas à gérer ça seul·e.",
       coachSupportText:
         "Si toi ou quelqu'un d'autre êtes en danger, appelle tout de suite le numéro d'urgence local (112). Pour un soutien gratuit et confidentiel, trouve une ligne d'écoute dans ton pays sur findahelpline.com (en France : 3114).",
@@ -8978,10 +9008,10 @@ export const messages = {
         "Non. Elle est faite pour montrer le schéma, pas pour désigner un gagnant. On demande à l'IA comment vous pourriez mieux communiquer, et elle répond avec des moments de votre conversation et des idées pour vous deux. Elle ne juge personne et peut mal interpréter le contexte.",
       faq3Q: "Peut-elle m'aider à écrire le prochain message ?",
       faq3A:
-        "Oui. Sous une analyse complète, « Aide-moi à répondre » prend un message que vous vous apprêtez à envoyer et propose une version plus calme et plus claire qui garde ce que vous voulez dire, avec une courte note sur ce qui a changé. C'est vous qui décidez quoi envoyer. Après une analyse sur l'appareil, cela fonctionne gratuitement sur votre appareil ; après une analyse dans le cloud, cela fait partie de Pro. L'aperçu gratuit dans le cloud ne l'inclut pas.",
+        "Oui. Sous une analyse, « Aide-moi à répondre » prend un message que vous êtes sur le point d'envoyer et propose une version plus calme et plus claire qui garde ce que vous voulez dire, avec une courte note sur ce qui a changé. C'est vous qui décidez quoi envoyer. Après une analyse sur votre appareil, cela fonctionne gratuitement sur place ; après l'aperçu gratuit dans le cloud, vous avez quelques réponses gratuites par jour, et Pro vous en donne plus.",
       faq4Q: "Est-ce gratuit ?",
       faq4A:
-        "Les statistiques et l'analyse IA sur l'appareil sont gratuites et sans compte, tout comme les questions de suivi après une analyse sur l'appareil. Sans abonnement, vous pouvez aussi essayer un court aperçu gratuit dans le cloud. L'analyse complète dans le cloud et les questions de suivi dans le cloud font partie de Pro ({price}/mois).",
+        "Les statistiques et l'analyse IA sur l'appareil sont gratuites et sans compte, tout comme les questions de suivi après une analyse sur l'appareil. Sans abonnement, vous pouvez aussi essayer un court aperçu gratuit dans le cloud, avec quelques réponses gratuites du coach par jour. L'analyse complète dans le cloud et plus de réponses dans le cloud chaque jour font partie de Pro ({price}/mois).",
       faq5Q: "Ma conversation est-elle envoyée ?",
       faq5A:
         "Pas pour les statistiques ni pour l'IA sur l'appareil : elles fonctionnent dans votre navigateur et rien de ce qu'elles lisent ne quitte votre appareil. Par défaut, la conversation est conservée dans ce navigateur pour que vous puissiez y revenir ; vous pouvez choisir de ne pas la garder, ou l'oublier à tout moment. Si vous choisissez l'IA dans le cloud, seuls des extraits anonymisés sont envoyés (noms remplacés ; numéros de téléphone, e-mails, liens et IBAN supprimés), et notre fournisseur d'IA ne s'en sert pas pour l'entraînement. Avant de commencer, vous pouvez voir exactement ce qui serait envoyé.",
@@ -9737,7 +9767,7 @@ export const messages = {
       heroSubtitle:
         "Le message est là et vous ne savez pas comment répondre. Importez votre conversation : une IA qui l'a lue vous aide à trouver les mots. Écrivez ce que vous voulez dire et recevez une version plus calme et plus claire, dans votre style, avec une note qui explique pourquoi.",
       heroNote:
-        "Gratuit sur votre appareil, si votre navigateur le permet · Le coach dans le cloud avec Pro",
+        "Gratuit sur votre appareil, si votre navigateur le permet · Quelques réponses cloud gratuites par jour · Plus avec Pro",
       continueButton: "Obtenir de l'aide pour répondre avec cette conversation",
       offerChat: "De l'aide pour répondre à {name}",
       offerGroup: "De l'aide pour répondre dans {name}",
@@ -9776,7 +9806,7 @@ export const messages = {
         "Exportez la conversation depuis WhatsApp sans médias, une fois arrivé le message auquel vous voulez répondre, puis déposez-la ci-dessus. Elle est lue dans votre navigateur.",
       step2Title: "Obtenez une lecture",
       step2Text:
-        "Le coach s'ouvre sous une lecture de votre conversation par l'IA. Lancez-la gratuitement sur votre appareil, si votre navigateur le permet, ou dans le cloud avec Pro.",
+        "Le coach s'affiche sous une analyse IA de votre conversation. Utilisez-le gratuitement sur votre appareil, si votre navigateur le permet, ou dans le cloud : l'aperçu gratuit inclut quelques réponses gratuites du coach par jour, et Pro vous en donne plus.",
       step3Title: "Posez une question ou écrivez un brouillon",
       step3Text:
         "Sous la lecture, choisissez « {reply} », écrivez ce que vous aimeriez dire et recevez une version plus calme et plus claire. Ou choisissez « {ask} » pour parler d'abord du message.",
@@ -9786,7 +9816,7 @@ export const messages = {
         "La lecture et le coach tournent dans votre navigateur après un téléchargement unique du modèle, et rien ne quitte votre appareil. Il faut WebGPU : un ordinateur récent, la plupart des Android récents avec Chrome, ou un iPhone sous iOS 26 ou plus récent. Le modèle est petit, ses réponses sont donc plus simples.",
       plan2Title: "Aperçu gratuit dans le cloud",
       plan2Text:
-        "Un avant-goût de la lecture par une IA plus puissante, à partir d'extraits anonymisés. Le coach ne fait pas partie de l'aperçu.",
+        "Un aperçu de l'analyse par une IA plus puissante, à partir d'extraits anonymisés, avec quelques réponses gratuites du coach par jour.",
       plan3Title: "Pro : {price} par mois",
       plan3Text:
         "La lecture complète et le coach dans le cloud, sur n'importe quel téléphone. Chaque message au coach compte pour une des analyses cloud du jour.",
@@ -9833,7 +9863,7 @@ export const messages = {
         "Elle peut vous aider à y arriver. Écrivez une première version de ce que vous voulez dire, et le coach vous la rend plus calme et plus claire, dans votre style et le ton habituel de votre conversation, avec une courte note sur ce qui a changé. Ou interrogez-le d'abord sur le message. La réponse reste la vôtre : changez ce qui ne vous ressemble pas avant de l'envoyer.",
       faq2Q: "Est-ce gratuit ?",
       faq2A:
-        "Sur votre appareil, oui : la lecture et le coach tournent gratuitement dans votre navigateur, s'il prend en charge WebGPU. L'aperçu gratuit dans le cloud montre une partie d'une lecture, sans le coach. Avec Pro ({price} par mois), la lecture complète et le coach tournent dans le cloud, sur n'importe quel téléphone.",
+        "Oui. Sur votre appareil, l'analyse et le coach fonctionnent gratuitement dans le navigateur, s'il prend en charge WebGPU. Dans le cloud, l'aperçu gratuit montre une partie de l'analyse et inclut quelques réponses gratuites du coach par jour, sur n'importe quel téléphone. Avec Pro ({price} par mois), vous avez l'analyse complète et plus de réponses du coach chaque jour.",
       faq3Q: "L'IA voit-elle le message que je viens de recevoir ?",
       faq3A:
         "Seulement s'il est dans votre export : exportez donc la conversation après l'arrivée du message. L'IA lit des extraits de toute la conversation et inclut toujours les messages les plus récents. Si vous avez enregistré la conversation avant l'arrivée du message, exportez-la à nouveau. Vous pouvez aussi coller le message dans votre question.",
@@ -10678,6 +10708,12 @@ export const messages = {
       coachNoteLocal:
         "Funziona sul tuo dispositivo e ricorda gli ultimi messaggi.",
       coachNoteCloud: "Ogni messaggio usa una delle tue analisi cloud di oggi.",
+      coachNoteFree:
+        "Anteprima gratuita: qualche risposta cloud al giorno. Con Pro ne hai di più.",
+      coachNoteFreeLeft:
+        "Oggi ti restano {n} risposte cloud gratuite. Con Pro ne hai di più.",
+      error_coach_free_used:
+        "Hai usato le risposte gratuite di oggi. Torna domani, o passa a Pro per averne di più ogni giorno.",
       coachSupportTitle:
         "Sembra una cosa seria. Non devi affrontarla da solo/a.",
       coachSupportText:
@@ -10943,10 +10979,10 @@ export const messages = {
         "No. È fatta per mostrare lo schema, non per scegliere un vincitore. All'IA viene chiesto come potreste comunicare meglio, e risponde con momenti della vostra chat e idee per entrambi. Non giudica nessuno e può fraintendere il contesto.",
       faq3Q: "Mi aiuta a scrivere il prossimo messaggio?",
       faq3A:
-        "Sì. Sotto un'analisi completa, «Aiutami a rispondere» prende un messaggio che stai per inviare e suggerisce una versione più calma e chiara che mantiene quello che vuoi dire, con una breve nota su cosa è cambiato. Cosa inviare lo decidi tu. Dopo un'analisi sul dispositivo funziona gratis sul tuo dispositivo; dopo un'analisi nel cloud fa parte di Pro. L'anteprima gratuita nel cloud non lo include.",
+        "Sì. Sotto un'analisi, «Aiutami a rispondere» prende un messaggio che stai per inviare e ti suggerisce una versione più calma e chiara che mantiene quello che vuoi dire, con una breve nota su cosa è cambiato. Decidi tu cosa inviare. Dopo un'analisi sul tuo dispositivo funziona lì gratis; dopo l'anteprima gratuita nel cloud hai qualche risposta gratuita al giorno, e con Pro di più.",
       faq4Q: "È gratis?",
       faq4A:
-        "Le statistiche e l'analisi con IA sul dispositivo sono gratuite e senza account, così come le domande di approfondimento dopo un'analisi sul dispositivo. Senza abbonamento puoi anche provare una breve anteprima gratuita nel cloud. L'analisi completa nel cloud e le domande di approfondimento nel cloud fanno parte di Pro ({price}/mese).",
+        "Le statistiche e l'analisi con IA sul dispositivo sono gratuite e senza account, così come le domande di approfondimento dopo un'analisi sul dispositivo. Senza abbonamento puoi anche provare una breve anteprima gratuita nel cloud, con qualche risposta gratuita del coach al giorno. L'analisi completa nel cloud e più risposte nel cloud ogni giorno fanno parte di Pro ({price}/mese).",
       faq5Q: "La mia chat viene caricata?",
       faq5A:
         "Non per le statistiche né per l'IA sul dispositivo: funzionano nel tuo browser e niente di ciò che leggono lascia il tuo dispositivo. Per impostazione predefinita la chat viene conservata in questo browser così puoi tornarci; puoi scegliere di non salvarla, o dimenticarla in qualsiasi momento. Se scegli l'IA nel cloud, vengono inviati solo estratti anonimizzati (nomi sostituiti; numeri di telefono, e-mail, link e IBAN rimossi), e il nostro fornitore di IA non li usa per l'addestramento. Prima di iniziare puoi vedere esattamente cosa verrebbe inviato.",
@@ -11698,7 +11734,7 @@ export const messages = {
       heroSubtitle:
         "Il messaggio è lì e non sai come rispondere. Carica la chat: un'IA che l'ha letta ti aiuta a trovare le parole. Scrivi quello che vuoi dire e ricevi una versione più calma e chiara, con il tuo stile e una nota sul perché.",
       heroNote:
-        "Gratis sul tuo dispositivo, se il browser lo supporta · Il coach nel cloud con Pro",
+        "Gratis sul tuo dispositivo, se il browser lo supporta · Qualche risposta gratuita nel cloud al giorno · Di più con Pro",
       continueButton: "Fatti aiutare a rispondere con questa chat",
       offerChat: "Aiuto per rispondere a {name}",
       offerGroup: "Aiuto per rispondere in {name}",
@@ -11737,7 +11773,7 @@ export const messages = {
         "Esporta la chat da WhatsApp senza media, dopo che è arrivato il messaggio a cui vuoi rispondere, e trascinala qui sopra. Viene letta nel tuo browser.",
       step2Title: "Ottieni una lettura",
       step2Text:
-        "Il coach si apre sotto una lettura della chat fatta dall'IA. Avviala gratis sul tuo dispositivo, se il browser lo supporta, o nel cloud con Pro.",
+        "Il coach compare sotto un'analisi con IA della vostra chat. Usalo gratis sul tuo dispositivo, se il browser lo supporta, o nel cloud: l'anteprima gratuita include qualche risposta gratuita del coach al giorno, e con Pro ne hai di più.",
       step3Title: "Chiedi o scrivi la bozza",
       step3Text:
         "Sotto la lettura, scegli «{reply}», scrivi quello che vorresti dire e ricevi una versione più calma e chiara. Oppure scegli «{ask}» per parlare prima del messaggio.",
@@ -11747,7 +11783,7 @@ export const messages = {
         "La lettura e il coach girano nel tuo browser dopo un download unico del modello, e nulla lascia il tuo dispositivo. Serve WebGPU: un computer recente, la maggior parte degli Android recenti con Chrome o un iPhone con iOS 26 o successivo. Il modello è piccolo, quindi le risposte sono più semplici.",
       plan2Title: "Anteprima gratuita nel cloud",
       plan2Text:
-        "Un assaggio della lettura di un'IA più potente, ricavata da estratti anonimizzati. Il coach non fa parte dell'anteprima.",
+        "Un assaggio dell'analisi di un'IA più potente, fatta con estratti anonimizzati, più qualche risposta gratuita del coach al giorno.",
       plan3Title: "Pro: {price} al mese",
       plan3Text:
         "La lettura completa e il coach nel cloud, su qualsiasi telefono. Ogni messaggio al coach conta come una delle analisi cloud del giorno.",
@@ -11794,7 +11830,7 @@ export const messages = {
         "Può aiutarti ad arrivarci. Scrivi una versione grezza di quello che vuoi dire e il coach te la restituisce più calma e chiara, con il tuo stile e il tono abituale della chat, insieme a una breve nota su cosa è cambiato. Oppure chiedigli prima del messaggio. La risposta resta tua: cambia quello che non ti somiglia prima di mandarla.",
       faq2Q: "È gratis?",
       faq2A:
-        "Sul tuo dispositivo sì: la lettura e il coach girano gratis nel browser, se supporta WebGPU. L'anteprima gratuita nel cloud mostra una parte della lettura, ma non include il coach. Con Pro ({price} al mese), la lettura completa e il coach girano nel cloud, su qualsiasi telefono.",
+        "Sì. Sul tuo dispositivo, l'analisi e il coach funzionano gratis nel browser, se supporta WebGPU. Nel cloud, l'anteprima gratuita mostra parte dell'analisi e include qualche risposta gratuita del coach al giorno, su qualsiasi telefono. Con Pro ({price} al mese) hai l'analisi completa e più risposte del coach ogni giorno.",
       faq3Q: "L'IA vede il messaggio che ho appena ricevuto?",
       faq3A:
         "Solo se è nella tua esportazione, quindi esporta la chat dopo che il messaggio è arrivato. L'IA legge estratti da tutta la chat e include sempre i messaggi più recenti. Se hai salvato la chat prima che arrivasse il messaggio, esportala di nuovo. Puoi anche incollare il messaggio nella tua domanda.",

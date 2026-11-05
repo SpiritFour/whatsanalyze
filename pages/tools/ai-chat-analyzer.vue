@@ -256,11 +256,10 @@
         <!-- The same encrypted share link as the analyzer's results -->
         <ShareLinkButton :capture="() => report" source="ai_report" />
 
-        <!-- Keep talking: follow-up questions and reply help -->
+        <!-- Keep talking: follow-up questions and reply help. After a free
+             preview it runs in the cloud on a few free replies a day. -->
         <AiCoach
-          v-if="
-            messages && ranOn && !locked && (ranOn === 'cloud' || localModel)
-          "
+          v-if="messages && ranOn && (ranOn === 'cloud' || localModel)"
           :key="report?.insights.summary"
           :chat="messages"
           :mode="ranOn"
@@ -268,6 +267,7 @@
           :local-model="localModel"
           :me="me"
           :summary="insights.summary"
+          :free="!!locked"
           @allowance="allowance = $event"
         />
 

@@ -58,13 +58,7 @@
       </button>
     </form>
     <p class="coach__note mono-label">
-      {{
-        t(
-          mode === "cloud"
-            ? "toolsAi.coachNoteCloud"
-            : "toolsAi.coachNoteLocal",
-        )
-      }}
+      {{ note }}
     </p>
   </div>
 </template>
@@ -110,11 +104,26 @@ const props = defineProps<{
   me: string | null;
   /** The report's summary, with real names; anonymized before sending. */
   summary: string;
+  /**
+   * After a free cloud preview: no subscription, so each cloud reply is one
+   * of the few free ones a visitor gets a day.
+   */
+  free?: boolean;
 }>();
 const emit = defineEmits<{ allowance: [CloudAllowance] }>();
 
 const { t } = useI18n();
 const subscriptionStore = useSubscriptionStore();
+
+/** Free replies left today, once the first free reply has said. */
+const freeLeft = ref<number | null>(null);
+const note = computed(() => {
+  if (props.mode !== "cloud") return t("toolsAi.coachNoteLocal");
+  if (!props.free) return t("toolsAi.coachNoteCloud");
+  return freeLeft.value === null
+    ? t("toolsAi.coachNoteFree")
+    : t("toolsAi.coachNoteFreeLeft", { n: freeLeft.value });
+});
 
 const kinds: CoachKind[] = ["ask", "reply"];
 const kind = ref<CoachKind>("ask");
@@ -196,10 +205,12 @@ async function send() {
     if (props.mode === "cloud") {
       const cloud = await coachInCloud(
         useNuxtApp().$functions,
-        {
-          email: subscriptionStore.getEmail!,
-          subscriptionId: subscriptionStore.getSubscriptionId!,
-        },
+        props.free
+          ? null
+          : {
+              email: subscriptionStore.getEmail!,
+              subscriptionId: subscriptionStore.getSubscriptionId!,
+            },
         {
           digest,
           language: props.language,
@@ -209,7 +220,8 @@ async function send() {
         },
       );
       reply = cloud.reply;
-      emit("allowance", cloud.allowance);
+      if (cloud.free) freeLeft.value = cloud.allowance.remaining;
+      else emit("allowance", cloud.allowance);
     } else {
       reply = await coachLocally(
         props.localModel!,
@@ -232,9 +244,15 @@ async function send() {
     keepTurns();
     draft.value = "";
   } catch (err: any) {
-    const known = ["not_subscribed", "daily_limit"];
+    const known = [
+      "not_subscribed",
+      "daily_limit",
+      "coach_free_used",
+      "preview_cap",
+    ];
     const code = callableErrorCode(err?.message);
     errorKey.value = known.includes(code) ? code : props.mode;
+    if (code === "coach_free_used") freeLeft.value = 0;
     analyticsTools.error(
       "ai",
       `coach_${props.mode}:${err?.message ?? "unknown"}`,

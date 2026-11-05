@@ -57,11 +57,13 @@ export async function analyzeInCloud(
 
 /**
  * One coach turn in the cloud (coachChatAi), counted against the same daily
- * allowance as a report. `history` is already in placeholders.
+ * allowance as a report. Without credentials it is one of the few free
+ * replies a visitor gets after a free preview, counted apart (`free`).
+ * `history` is already in placeholders.
  */
 export async function coachInCloud(
   functions: unknown,
-  credentials: Credentials,
+  credentials: Credentials | null,
   request: {
     digest: ChatDigest;
     language: AiLanguage;
@@ -70,15 +72,16 @@ export async function coachInCloud(
     me?: string;
     context?: string;
   },
-): Promise<{ reply: string; allowance: CloudAllowance }> {
+): Promise<{ reply: string; allowance: CloudAllowance; free: boolean }> {
   const callable = httpsCallable<
     unknown,
-    { reply: string; remaining: number; limit: number }
+    { reply: string; remaining: number; limit: number; free?: boolean }
   >(functions as any, "coachChatAi", { timeout: 120_000 });
   const { data } = await callable({ ...credentials, ...request });
   return {
     reply: data.reply,
     allowance: { remaining: data.remaining, limit: data.limit },
+    free: !!data.free,
   };
 }
 

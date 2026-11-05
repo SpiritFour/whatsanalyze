@@ -78,6 +78,15 @@ const aiPreviewDailyLimit = defineInt("AI_PREVIEW_DAILY_LIMIT", {
   default: 200,
 });
 /**
+ * Free coach replies per visitor (by IP) per UTC day, after a free preview:
+ * enough to try asking about the chat and to get one draft made calmer.
+ */
+const aiFreeCoachPerIp = defineInt("AI_FREE_COACH_PER_IP", { default: 3 });
+/** Free coach replies per UTC day across everyone, apart from the previews. */
+const aiFreeCoachDailyLimit = defineInt("AI_FREE_COACH_DAILY_LIMIT", {
+  default: 600,
+});
+/**
  * Output, reasoning included. A normal report at low effort is a few
  * thousand tokens; this stops a chat crafted to make the model write on.
  */
@@ -184,35 +193,54 @@ async function takeFromAllowance(
   });
 }
 
+/** The free uses there are, each counted on its own. */
+const FREE_USES = {
+  preview: {
+    collection: "aiPreviewUsage",
+    perIp: aiPreviewPerIp,
+    daily: aiPreviewDailyLimit,
+    cap: "AI_PREVIEW_DAILY_LIMIT",
+  },
+  coach: {
+    collection: "aiFreeCoachUsage",
+    perIp: aiFreeCoachPerIp,
+    daily: aiFreeCoachDailyLimit,
+    cap: "AI_FREE_COACH_DAILY_LIMIT",
+  },
+};
+
 /**
- * Count a free preview against the visitor's and everyone's daily allowance.
- * The IP is hashed with the day, so nothing stored can be tied back to an
- * address or followed across days.
+ * Count a free use against the visitor's and everyone's daily allowance, and
+ * say how many the visitor has left. The IP is hashed with the day, so
+ * nothing stored can be tied back to an address or followed across days.
  */
-async function takePreview(ip: string): Promise<"ok" | "used" | "global"> {
+async function takeFree(
+  kind: keyof typeof FREE_USES,
+  ip: string,
+): Promise<{ taken: "ok" | "used" | "global"; left: number }> {
+  const use = FREE_USES[kind];
   const day = today();
   const ref = db
-    .collection("aiPreviewUsage")
+    .collection(use.collection)
     .doc(createHash("sha256").update(`${day}:${ip}`).digest("hex"));
-  const globalRef = db.collection("aiUsageGlobal").doc("preview");
+  const globalRef = db.collection("aiUsageGlobal").doc(kind);
   return db.runTransaction(async (tx) => {
     const [mine, all] = await Promise.all([tx.get(ref), tx.get(globalRef)]);
     const used = mine.data()?.count ?? 0;
     const usedByAll = usedToday(all.data());
-    if (used >= aiPreviewPerIp.value()) return "used";
-    if (usedByAll >= aiPreviewDailyLimit.value()) return "global";
-    // For a Firestore TTL policy on aiPreviewUsage.expireAt: a day's counts
-    // are worthless the day after.
+    const perIp = use.perIp.value();
+    if (used >= perIp) return { taken: "used", left: 0 };
+    if (usedByAll >= use.daily.value()) {
+      return { taken: "global", left: perIp - used };
+    }
+    // For a Firestore TTL policy on expireAt: a day's counts are worthless
+    // the day after.
     const expireAt = new Date(`${day}T00:00:00Z`);
     expireAt.setUTCDate(expireAt.getUTCDate() + 2);
     tx.set(ref, { count: used + 1, expireAt });
     tx.set(globalRef, { day, count: usedByAll + 1 });
-    warnNearCap(
-      "AI_PREVIEW_DAILY_LIMIT",
-      usedByAll + 1,
-      aiPreviewDailyLimit.value(),
-    );
-    return "ok";
+    warnNearCap(use.cap, usedByAll + 1, use.daily.value());
+    return { taken: "ok", left: perIp - used - 1 };
   });
 }
 
@@ -282,7 +310,8 @@ export const analyzeChatAi = onCall(
     let remaining: number | null = null;
     if (preview) {
       const raw = request.rawRequest;
-      const taken = await takePreview(
+      const { taken } = await takeFree(
+        "preview",
         clientIp(raw.headers["x-forwarded-for"], raw.ip),
       );
       if (taken === "global") {
@@ -348,8 +377,9 @@ export const analyzeChatAi = onCall(
 );
 
 const coachRequestSchema = z.object({
-  email: z.string().min(1),
-  subscriptionId: z.string().min(1),
+  // Both missing means a free reply after a free preview.
+  email: z.string().min(1).optional(),
+  subscriptionId: z.string().min(1).optional(),
   language: languageSchema,
   digest: digestSchema,
   kind: z.enum(["ask", "reply"]),
@@ -389,11 +419,36 @@ export const coachChatAi = onCall(
     }
     const { email, subscriptionId, language, digest, kind, me, context } =
       parsed.data;
+    const free = !email || !subscriptionId;
 
-    if (!(await isSubscriber(email, subscriptionId))) {
-      throw new HttpsError("permission-denied", "not_subscribed");
+    let remaining: number;
+    let limit: number;
+    if (free) {
+      // A free reply reads what a free preview reads, no more.
+      digest.transcript = digest.transcript.slice(-PREVIEW_TRANSCRIPT_CHARS);
+      const raw = request.rawRequest;
+      const { taken, left } = await takeFree(
+        "coach",
+        clientIp(raw.headers["x-forwarded-for"], raw.ip),
+      );
+      if (taken === "global") {
+        logger.warn("AI free coach daily limit reached", {
+          limit: aiFreeCoachDailyLimit.value(),
+        });
+        throw new HttpsError("resource-exhausted", "preview_cap");
+      }
+      if (taken !== "ok") {
+        throw new HttpsError("resource-exhausted", "coach_free_used");
+      }
+      remaining = left;
+      limit = aiFreeCoachPerIp.value();
+    } else {
+      if (!(await isSubscriber(email, subscriptionId))) {
+        throw new HttpsError("permission-denied", "not_subscribed");
+      }
+      remaining = await spendAllowance(subscriptionId);
+      limit = aiDailyLimit.value();
     }
-    const remaining = await spendAllowance(subscriptionId);
 
     const startedAt = Date.now();
     try {
@@ -418,11 +473,12 @@ export const coachChatAi = onCall(
       logger.info("AI coach turn done", {
         model: aiModel.value(),
         kind,
+        free,
         durationMs: Date.now() - startedAt,
         inputTokens: usage.inputTokens,
         outputTokens: usage.outputTokens,
       });
-      return { reply: text, remaining, limit: aiDailyLimit.value() };
+      return { reply: text, remaining, limit, free };
     } catch (error: any) {
       logger.error("AI coach turn failed", {
         model: aiModel.value(),
