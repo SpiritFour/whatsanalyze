@@ -130,15 +130,20 @@ test.describe("AI chat analyzer: getting to a report", () => {
     const aiCalls = await stubCallable(page, "analyzeChatAi", PREVIEW);
     await openWithChat(page);
 
-    const local = cards(page).first();
-    await expect(local).toContainText("One-time download of about 1.1 GB");
+    // The cloud card comes first; on-device is the alternative below it.
+    const local = cards(page).last();
+    await expect(local).toContainText(
+      "A large one-time download: about 1.1 GB",
+    );
     await page.getByRole("button", { name: "Analyze on this device" }).click();
 
     await expect(
       page.getByText("The on-device AI ran out of memory."),
     ).toBeVisible();
     // "Try again" now means the 1B model, which needs half the memory.
-    await expect(local).toContainText("One-time download of about 0.7 GB");
+    await expect(local).toContainText(
+      "A large one-time download: about 0.7 GB",
+    );
     await expect(local).toContainText("Built with Llama");
 
     await page
@@ -185,9 +190,7 @@ test.describe("AI chat analyzer: getting to a report", () => {
     });
     await openWithChat(page);
 
-    await page
-      .getByRole("button", { name: "Try a free cloud preview" })
-      .click();
+    await page.getByRole("button", { name: "Get my free AI preview" }).click();
     await expect(
       page.getByText("You've used today's free preview."),
     ).toBeVisible();
@@ -201,11 +204,39 @@ test.describe("AI chat analyzer: getting to a report", () => {
     });
     await openWithChat(page);
 
-    await page
-      .getByRole("button", { name: "Try a free cloud preview" })
-      .click();
+    await page.getByRole("button", { name: "Get my free AI preview" }).click();
     await expect(
       page.getByText("All of today's free cloud previews have been used."),
     ).toBeVisible();
   });
+
+  for (const code of ["preview_used", "preview_cap"]) {
+    test(`offers the on-device AI when the cloud says ${code}`, async ({
+      page,
+    }) => {
+      await fakeGpu(page);
+      await freeStorage(page, 50 * GB);
+      await stubCallableFailure(page, "analyzeChatAi", code, {
+        status: 429,
+        code: "RESOURCE_EXHAUSTED",
+      });
+      await openWithChat(page);
+
+      // The anonymized cloud AI is the first choice, for everyone.
+      await expect(cards(page).first()).toContainText("Anonymized cloud AI");
+      await page
+        .getByRole("button", { name: "Get my free AI preview" })
+        .click();
+
+      // Not a dead end: the device can still do it, or a subscription can.
+      const fallback = page.locator(".ai-fallback");
+      await expect(fallback).toContainText("run it on this device instead");
+      await expect(
+        fallback.getByRole("button", { name: "Analyze on this device" }),
+      ).toBeEnabled();
+      await expect(
+        fallback.getByRole("link", { name: "Subscribe for the full report" }),
+      ).toBeVisible();
+    });
+  }
 });
