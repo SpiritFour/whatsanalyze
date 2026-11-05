@@ -78,6 +78,21 @@ export default defineNuxtConfig({
         "/robots.txt",
       ],
     },
+    hooks: {
+      // h3 writes each redirect stub as a bare meta refresh. GitHub Pages
+      // serves that with a 200, so nothing in it told a search engine where
+      // the page went for good. The canonical does, which is what moves last
+      // December's rankings for /whatsapp-wrapped-year-review over to /wrapped.
+      "prerender:generate"(route) {
+        const to = retiredRedirects[route.route];
+        if (!to) return;
+        route.contents =
+          "<!DOCTYPE html><html><head>" +
+          `<link rel="canonical" href="${baseUrl}${to}">` +
+          `<meta http-equiv="refresh" content="0; url=${to}">` +
+          "</head></html>";
+      },
+    },
   },
 
   // Retired URLs, prerendered as redirect stubs so they survive on GitHub
