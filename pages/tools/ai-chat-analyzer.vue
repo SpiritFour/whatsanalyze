@@ -12,7 +12,8 @@
       </div>
     </LandingHero>
 
-    <!-- Where to run it: the visitor's call, with the trade-offs spelled out -->
+    <!-- Where to run it: the anonymized cloud AI first, the device as the
+         alternative, with the trade-offs of both spelled out -->
     <LandingSection
       v-if="messages && !insights"
       id="ai-choose"
@@ -72,7 +73,9 @@
           v-for="mode in modes"
           :key="mode.id"
           class="mode-card"
-          :class="{ 'mode-card--featured': mode.id === 'cloud' }"
+          :class="
+            mode.id === 'cloud' ? 'mode-card--featured' : 'mode-card--alt'
+          "
         >
           <div class="mode-card__head">
             <v-icon size="28" :color="mode.color">{{ mode.icon }}</v-icon>
@@ -103,6 +106,7 @@
             v-else
             type="button"
             class="mode-card__btn"
+            :class="{ 'mode-card__btn--secondary': mode.id === 'local' }"
             :disabled="
               running !== null ||
               askBlocked ||
@@ -114,13 +118,14 @@
             {{ mode.button }}
           </button>
           <!-- Not subscribed: the button above runs the free preview -->
-          <LandingButton
-            v-if="mode.id === 'cloud' && !isSubscriptionValid"
+          <NuxtLink
+            v-if="mode.id === 'cloud' && !isSubscriptionValid && !cloudFallback"
             :to="subscribeLink"
+            class="mode-card__link"
             @click="analyticsTools.ctaClick('ai', 'subscribe')"
           >
             {{ t("toolsAi.cloudSubscribe") }}
-          </LandingButton>
+          </NuxtLink>
           <!-- Right under the button that started it, not off-screen -->
           <div v-if="running === mode.id" class="ai-progress" role="status">
             <v-progress-linear
@@ -138,13 +143,48 @@
             </p>
           </div>
           <p
-            v-if="errorKey && errorMode === mode.id"
+            v-if="
+              errorKey &&
+              errorMode === mode.id &&
+              !(mode.id === 'cloud' && cloudFallback)
+            "
             class="ai-error"
             role="alert"
           >
             <v-icon size="18">mdi-alert-circle-outline</v-icon>
             {{ t(`toolsAi.error_${errorKey}`) }}
           </p>
+          <!-- No cloud run right now: not a dead end, the device can still -->
+          <div
+            v-if="mode.id === 'cloud' && cloudFallback"
+            class="ai-fallback"
+            role="alert"
+          >
+            <p class="ai-fallback__text">
+              <v-icon size="18" color="#b45309">mdi-information-outline</v-icon>
+              {{ t(cloudFallback) }}
+            </p>
+            <p v-if="localModel">{{ t("toolsAi.fallbackLocal") }}</p>
+            <div class="ai-fallback__actions">
+              <button
+                v-if="localModel"
+                type="button"
+                class="mode-card__btn"
+                :disabled="running !== null || askBlocked"
+                @click="startLocal"
+              >
+                {{ t("toolsAi.localButton") }}
+              </button>
+              <NuxtLink
+                v-if="!isSubscriptionValid"
+                :to="subscribeLink"
+                class="mode-card__link"
+                @click="analyticsTools.ctaClick('ai', 'subscribe')"
+              >
+                {{ t("toolsAi.cloudSubscribe") }}
+              </NuxtLink>
+            </div>
+          </div>
           <p v-if="mode.crashed" class="ai-error" role="alert">
             <v-icon size="18">mdi-alert-circle-outline</v-icon>
             {{ mode.crashed }}
@@ -172,17 +212,15 @@
           >
             Built with Llama
           </p>
-          <!-- Today's allowance, so the limit is no surprise -->
+          <!-- Today's allowance, so the limit is no surprise; none left is
+               the fallback above -->
           <p
-            v-if="mode.id === 'cloud' && isSubscriptionValid && allowance"
+            v-if="
+              mode.id === 'cloud' && isSubscriptionValid && allowance?.remaining
+            "
             class="mode-card__allowance"
-            :class="{ 'mode-card__allowance--out': !allowance.remaining }"
           >
-            {{
-              allowance.remaining
-                ? t("toolsAi.cloudAllowance", allowance)
-                : t("toolsAi.cloudAllowanceOut")
-            }}
+            {{ t("toolsAi.cloudAllowance", allowance) }}
           </p>
           <p v-if="mode.id === 'cloud'" class="mode-card__fineprint">
             {{ t("toolsAi.cloudConsent") }}
@@ -918,7 +956,40 @@ const offerCloud = computed(
     (errorMode.value === "local" && errorKey.value !== "no_messages"),
 );
 
+/**
+ * The anonymized cloud AI comes first, for everyone: subscribers get the full
+ * report, everyone else the free preview. On-device only runs when picked:
+ * it finished 8% of its runs, the preview 70% (GA4, November 2026).
+ */
 const modes = computed(() => [
+  {
+    id: "cloud" as Mode,
+    icon: "mdi-cloud-outline",
+    color: "#818cf8",
+    title: t("toolsAi.cloudTitle"),
+    tag: isSubscriptionValid.value
+      ? t("toolsAi.cloudTag")
+      : t("toolsAi.cloudTagPreview"),
+    pros: [
+      t("toolsAi.cloudPro1"),
+      t("toolsAi.cloudPro2"),
+      t("toolsAi.cloudPro3"),
+      // The preview reads a quarter of what the full report does.
+      isSubscriptionValid.value
+        ? t("toolsAi.cloudPro4")
+        : t("toolsAi.cloudPro4Preview"),
+    ],
+    cons: [
+      ...(isSubscriptionValid.value ? [] : [t("toolsAi.cloudCon2")]),
+      t("toolsAi.cloudCon1"),
+    ],
+    crashed: "",
+    offerCloud: false,
+    button: isSubscriptionValid.value
+      ? t("toolsAi.cloudButton")
+      : t("toolsAi.cloudPreviewButton"),
+    unavailable: "",
+  },
   {
     id: "local" as Mode,
     icon: "mdi-cellphone-lock",
@@ -943,26 +1014,32 @@ const modes = computed(() => [
     crashed: localCrashed.value ? t("toolsAi.localCrashed") : "",
     offerCloud: offerCloud.value,
   },
-  {
-    id: "cloud" as Mode,
-    icon: "mdi-cloud-outline",
-    color: "#818cf8",
-    title: t("toolsAi.cloudTitle"),
-    tag: t("toolsAi.cloudTag"),
-    pros: [
-      t("toolsAi.cloudPro1"),
-      t("toolsAi.cloudPro2"),
-      t("toolsAi.cloudPro3"),
-    ],
-    cons: [t("toolsAi.cloudCon1"), t("toolsAi.cloudCon2")],
-    crashed: "",
-    offerCloud: false,
-    button: isSubscriptionValid.value
-      ? t("toolsAi.cloudButton")
-      : t("toolsAi.cloudPreviewButton"),
-    unavailable: "",
-  },
 ]);
+
+/** The cloud's "not today" answers, as the function throws them. */
+const CLOUD_LIMITS = [
+  "preview_used",
+  "preview_cap",
+  "daily_limit",
+  "not_subscribed",
+];
+
+/**
+ * Why the cloud won't run this one now, as a translation key: this visitor's
+ * free previews used up, everyone's, today's analyses used up, or the
+ * subscription not verified. Shown with the on-device AI as the way on, not
+ * as a dead end.
+ */
+const cloudFallback = computed<string | null>(() => {
+  if (
+    errorMode.value === "cloud" &&
+    CLOUD_LIMITS.includes(errorKey.value ?? "")
+  ) {
+    return `toolsAi.error_${errorKey.value}`;
+  }
+  if (cloudSpent.value) return "toolsAi.cloudAllowanceOut";
+  return null;
+});
 
 const howCards = computed(() => [
   {
@@ -1005,9 +1082,9 @@ useToolSchema({
 </script>
 
 <style scoped lang="scss">
+// One column: the cloud card is the way, the device card the alternative.
 .mode-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: 1.25rem;
   text-align: left;
 }
@@ -1024,6 +1101,20 @@ useToolSchema({
 
   &--featured {
     border-color: rgba(129, 140, 248, 0.5);
+  }
+
+  &--alt {
+    box-shadow: none;
+    border: 1px solid rgba(29, 29, 31, 0.12);
+    gap: 0.8rem;
+
+    .mode-card__title {
+      font-size: 1.1rem;
+    }
+
+    .mode-card__list li {
+      font-size: 0.92rem;
+    }
   }
 
   &__head {
@@ -1075,16 +1166,26 @@ useToolSchema({
       opacity: 0.5;
       cursor: progress;
     }
+
+    &--secondary {
+      background: #fff;
+      color: #1d1d1f;
+      border: 1px solid rgba(29, 29, 31, 0.25);
+    }
+  }
+
+  &__link {
+    align-self: center;
+    font-weight: 600;
+    color: $c-blue-accent-dark;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
   &__allowance {
     font-size: 0.85rem;
     font-weight: 600;
     color: #4f46e5;
-
-    &--out {
-      color: #b45309;
-    }
   }
 
   &__note,
@@ -1170,6 +1271,30 @@ useToolSchema({
   &__fineprint {
     font-size: 0.82rem;
     color: rgba(29, 29, 31, 0.6);
+  }
+}
+
+.ai-fallback {
+  display: grid;
+  gap: 0.6rem;
+  padding: 1rem 1.1rem;
+  border-radius: 14px;
+  background: #fffbeb;
+  color: #1d1d1f;
+  line-height: 1.45;
+
+  &__text {
+    display: flex;
+    gap: 0.4rem;
+    align-items: flex-start;
+    font-weight: 600;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem 1.2rem;
+    align-items: center;
   }
 }
 

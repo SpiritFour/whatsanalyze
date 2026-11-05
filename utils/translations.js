@@ -787,7 +787,7 @@ export const messages = {
     },
     askAiCard: {
       title: "Ask AI about this chat",
-      text: "Go beyond the numbers: let AI read this chat and answer your question — privately on your device, no new upload.",
+      text: "Go beyond the numbers: let AI read this chat and answer your question. It's anonymized on your device first, with no new upload.",
       button: "Ask AI",
     },
     toolsAi: {
@@ -843,38 +843,46 @@ export const messages = {
       heroSubtitle:
         "Upload your exported chat and let AI describe your conversation: the vibe, each person's role and style, how you interact, your recurring topics and best moments.",
       heroNote:
-        "Free on-device AI: your chat never leaves your device · Or anonymized cloud AI for subscribers",
-      chooseEyebrow: "Step 2 · Choose your AI",
-      chooseTitle: "Where should the AI run?",
+        "Anonymized on your device before any AI sees it · Free preview, no account · Or keep it all on your device",
+      chooseEyebrow: "Step 2 · Your AI report",
+      chooseTitle: "Let the AI read your chat",
       chooseText:
-        "Both read anonymized excerpts of your chat and produce the same kind of report. They differ in privacy, quality and what your device needs.",
-      localTitle: "On your device",
-      localTag: "MAXIMUM PRIVACY · FREE",
+        "Your browser anonymizes the chat before anything is sent. The cloud AI works on any phone and gives the deepest answers. Prefer that nothing leaves your device? Run it on this device instead.",
+      localTitle: "Run on this device instead",
+      localTag: "MAXIMUM PRIVACY · WORKS OFFLINE",
       localPro1: "Nothing leaves your device — not even anonymized",
       localPro2: "Free, no account needed",
       localPro3: "Works offline once the model is downloaded",
-      localCon1: "One-time download of about {gb} GB",
-      localCon2: "Needs a recent phone or computer and can take a few minutes",
+      localCon1: "A large one-time download: about {gb} GB",
+      localCon2:
+        "Needs a recent phone or computer, and may not work on every device",
       localCon3:
         "Small model: simpler insights, and a long chat is read in parts, which takes a few minutes",
       localButton: "Analyze on this device",
       localUnsupported:
         "Your browser doesn't support WebGPU, which the on-device AI needs. Try the latest Chrome, Edge or Safari, or use the cloud AI.",
-      cloudTitle: "In the cloud",
-      cloudTag: "BEST QUALITY · SUBSCRIBERS",
+      cloudTitle: "Anonymized cloud AI",
+      cloudTag: "RECOMMENDED · BEST QUALITY",
+      cloudTagPreview: "RECOMMENDED · FREE PREVIEW",
       cloudPro1:
-        "A state-of-the-art AI model: much deeper, more accurate insights",
+        "Anonymized on your device first: everyone in the chat becomes “Person A”, “Person B”…, and phone numbers, emails, links and IBANs are removed before anything is sent",
       cloudPro2:
-        "Reads up to about 10,000 messages in one go — all of most chats",
+        "A state-of-the-art AI model: much deeper, more accurate insights",
       cloudPro3: "Works on any phone, ready in about 30 seconds",
+      cloudPro4:
+        "Reads up to about 10,000 messages in one go — all of most chats",
+      cloudPro4Preview:
+        "Free, no account needed: the summary, the answer to your question and a first look at each section",
       cloudCon1:
-        "Anonymized excerpts are sent to our AI provider (Anthropic or OpenAI) for processing",
-      cloudCon2: "Included in the WhatsAnalyze subscription",
-      cloudButton: "Analyze in the cloud",
-      cloudSubscribe: "Subscribe to unlock cloud AI",
-      cloudPreviewButton: "Try a free cloud preview",
+        "The anonymized excerpts leave your device: our AI provider (Anthropic or OpenAI) processes them",
+      cloudCon2: "The full report is part of the WhatsAnalyze subscription",
+      cloudButton: "Get my AI report",
+      cloudSubscribe: "Subscribe for the full report",
+      cloudPreviewButton: "Get my free AI preview",
       error_preview_used:
         "You've used today's free preview. Subscribe for the full report, or try again tomorrow.",
+      fallbackLocal:
+        "No need to wait: run it on this device instead. It's free, and nothing leaves your device.",
       lockedTitle: "The full report has more",
       lockedButton: "Unlock the full report",
       cloudConsent:
@@ -972,7 +980,7 @@ export const messages = {
       faqTitle: "Frequently asked questions",
       faq1Q: "Is there a free AI WhatsApp chat analyzer?",
       faq1A:
-        "Yes. The on-device mode is free and needs no account: a small AI model downloads once into your browser and analyzes the chat locally. The cloud mode, with a much stronger model, is part of the WhatsAnalyze subscription.",
+        "Yes. The cloud AI gives you a free preview without an account: the summary, the answer to your question and a first look at each section. The full cloud report is part of the WhatsAnalyze subscription. The on-device mode is free in full and needs no account: a small AI model downloads once into your browser and analyzes the chat locally, on devices that can run it.",
       faq2Q: "Is my chat uploaded when I use AI?",
       faq2A:
         "With on-device AI, nothing is uploaded at all. With cloud AI, only anonymized excerpts are sent: your browser replaces names with placeholders and removes phone numbers, emails and links first, and you can see exactly what is sent before you start. We don't store it, and our AI provider doesn't use it for training.",
@@ -2083,7 +2091,7 @@ export const messages = {
     },
     askAiCard: {
       title: "Frag die KI zu diesem Chat",
-      text: "Mehr als Zahlen: Lass die KI diesen Chat lesen und deine Frage beantworten – privat auf deinem Gerät, ohne neuen Upload.",
+      text: "Mehr als Zahlen: Lass die KI diesen Chat lesen und deine Frage beantworten. Er wird vorher auf deinem Gerät anonymisiert, ohne neuen Upload.",
       button: "Frag die KI",
     },
     toolsAi: {
@@ -2140,39 +2148,46 @@ export const messages = {
       heroSubtitle:
         "Lade deinen exportierten Chat hoch und lass die KI euer Gespräch beschreiben: die Stimmung, Rolle und Stil jeder Person, wie ihr miteinander umgeht, eure wiederkehrenden Themen und besten Momente.",
       heroNote:
-        "Kostenlose KI auf deinem Gerät: Dein Chat verlässt es nie · Oder anonymisierte Cloud-KI für Abonnenten",
-      chooseEyebrow: "Schritt 2 · Wähle deine KI",
-      chooseTitle: "Wo soll die KI laufen?",
+        "Auf deinem Gerät anonymisiert, bevor eine KI ihn sieht · Kostenlose Vorschau, ohne Konto · Oder alles auf deinem Gerät behalten",
+      chooseEyebrow: "Schritt 2 · Dein KI-Bericht",
+      chooseTitle: "Lass die KI deinen Chat lesen",
       chooseText:
-        "Beide lesen anonymisierte Auszüge deines Chats und erstellen denselben Bericht. Sie unterscheiden sich in Privatsphäre, Qualität und darin, was dein Gerät können muss.",
-      localTitle: "Auf deinem Gerät",
-      localTag: "MAXIMALE PRIVATSPHÄRE · KOSTENLOS",
+        "Dein Browser anonymisiert den Chat, bevor irgendetwas gesendet wird. Die Cloud-KI läuft auf jedem Handy und liefert die tiefsten Antworten. Soll gar nichts dein Gerät verlassen? Dann führ sie stattdessen auf diesem Gerät aus.",
+      localTitle: "Stattdessen auf diesem Gerät ausführen",
+      localTag: "MAXIMALE PRIVATSPHÄRE · FUNKTIONIERT OFFLINE",
       localPro1: "Nichts verlässt dein Gerät – nicht einmal anonymisiert",
       localPro2: "Kostenlos, kein Konto nötig",
       localPro3: "Funktioniert offline, sobald das Modell geladen ist",
-      localCon1: "Einmaliger Download von etwa {gb} GB",
+      localCon1: "Ein großer einmaliger Download: etwa {gb} GB",
       localCon2:
-        "Braucht ein aktuelles Handy oder einen Computer und kann ein paar Minuten dauern",
+        "Braucht ein aktuelles Handy oder einen Computer und läuft eventuell nicht auf jedem Gerät",
       localCon3:
         "Kleines Modell: einfachere Einblicke, und ein langer Chat wird in Teilen gelesen, was ein paar Minuten dauert",
       localButton: "Auf diesem Gerät analysieren",
       localUnsupported:
         "Dein Browser unterstützt kein WebGPU, das die KI auf dem Gerät braucht. Probier die neueste Version von Chrome, Edge oder Safari oder nutze die Cloud-KI.",
-      cloudTitle: "In der Cloud",
-      cloudTag: "BESTE QUALITÄT · ABONNENTEN",
+      cloudTitle: "Anonymisierte Cloud-KI",
+      cloudTag: "EMPFOHLEN · BESTE QUALITÄT",
+      cloudTagPreview: "EMPFOHLEN · KOSTENLOSE VORSCHAU",
       cloudPro1:
-        "Ein KI-Modell auf dem neuesten Stand: deutlich tiefere, genauere Einblicke",
+        "Erst auf deinem Gerät anonymisiert: Alle im Chat werden zu „Person A“, „Person B“ …, und Telefonnummern, E-Mails, Links und IBANs werden entfernt, bevor irgendetwas gesendet wird",
       cloudPro2:
-        "Liest bis zu etwa 10.000 Nachrichten auf einmal – bei den meisten Chats alles",
+        "Ein KI-Modell auf dem neuesten Stand: deutlich tiefere, genauere Einblicke",
       cloudPro3: "Funktioniert auf jedem Handy, fertig in etwa 30 Sekunden",
+      cloudPro4:
+        "Liest bis zu etwa 10.000 Nachrichten auf einmal – bei den meisten Chats alles",
+      cloudPro4Preview:
+        "Kostenlos, ohne Konto: die Zusammenfassung, die Antwort auf deine Frage und ein erster Blick auf jeden Abschnitt",
       cloudCon1:
-        "Anonymisierte Auszüge werden zur Verarbeitung an unseren KI-Anbieter (Anthropic oder OpenAI) gesendet",
-      cloudCon2: "Im WhatsAnalyze-Abo enthalten",
-      cloudButton: "In der Cloud analysieren",
-      cloudSubscribe: "Abonnieren und Cloud-KI freischalten",
-      cloudPreviewButton: "Kostenlose Cloud-Vorschau testen",
+        "Die anonymisierten Auszüge verlassen dein Gerät: Unser KI-Anbieter (Anthropic oder OpenAI) verarbeitet sie",
+      cloudCon2: "Der vollständige Bericht ist Teil des WhatsAnalyze-Abos",
+      cloudButton: "Meinen KI-Bericht erstellen",
+      cloudSubscribe: "Für den vollständigen Bericht abonnieren",
+      cloudPreviewButton: "Kostenlose KI-Vorschau erstellen",
       error_preview_used:
         "Du hast die kostenlose Vorschau für heute schon genutzt. Abonniere für den vollständigen Bericht oder versuch es morgen wieder.",
+      fallbackLocal:
+        "Du musst nicht warten: Führ die Analyse stattdessen auf diesem Gerät aus. Das ist kostenlos, und nichts verlässt dein Gerät.",
       lockedTitle: "Der vollständige Bericht enthält mehr",
       lockedButton: "Vollständigen Bericht freischalten",
       cloudConsent:
@@ -2270,7 +2285,7 @@ export const messages = {
       faqTitle: "Häufige Fragen",
       faq1Q: "Gibt es eine kostenlose KI-Analyse für WhatsApp-Chats?",
       faq1A:
-        "Ja. Der Modus auf deinem Gerät ist kostenlos und braucht kein Konto: Ein kleines KI-Modell wird einmal in deinen Browser geladen und analysiert den Chat lokal. Der Cloud-Modus mit einem deutlich stärkeren Modell ist Teil des WhatsAnalyze-Abos.",
+        "Ja. Die Cloud-KI gibt dir eine kostenlose Vorschau ohne Konto: die Zusammenfassung, die Antwort auf deine Frage und einen ersten Blick auf jeden Abschnitt. Der vollständige Cloud-Bericht ist Teil des WhatsAnalyze-Abos. Der Modus auf deinem Gerät ist komplett kostenlos und braucht kein Konto: Ein kleines KI-Modell wird einmal in deinen Browser geladen und analysiert den Chat lokal, auf Geräten, die das schaffen.",
       faq2Q: "Wird mein Chat hochgeladen, wenn ich die KI nutze?",
       faq2A:
         "Mit der KI auf deinem Gerät wird gar nichts hochgeladen. Mit der Cloud-KI werden nur anonymisierte Auszüge gesendet: Dein Browser ersetzt vorher Namen durch Platzhalter und entfernt Telefonnummern, E-Mails und Links, und du kannst vor dem Start genau sehen, was gesendet wird. Wir speichern nichts davon, und unser KI-Anbieter nutzt es nicht zum Training.",
@@ -3376,7 +3391,7 @@ export const messages = {
     },
     askAiCard: {
       title: "Pregúntale a la IA sobre este chat",
-      text: "Más allá de los números: deja que la IA lea este chat y responda tu pregunta, en privado en tu dispositivo y sin volver a subirlo.",
+      text: "Más allá de los números: deja que la IA lea este chat y responda tu pregunta. Primero se anonimiza en tu dispositivo, sin volver a subirlo.",
       button: "Preguntar a la IA",
     },
     toolsAi: {
@@ -3435,39 +3450,47 @@ export const messages = {
       heroSubtitle:
         "Sube tu chat exportado y deja que la IA describa vuestra conversación: el ambiente, el papel y el estilo de cada persona, cómo os relacionáis, vuestros temas recurrentes y mejores momentos.",
       heroNote:
-        "IA gratis en tu dispositivo: tu chat nunca sale de él · O IA en la nube anonimizada para suscriptores",
-      chooseEyebrow: "Paso 2 · Elige tu IA",
-      chooseTitle: "¿Dónde quieres que se ejecute la IA?",
+        "Anonimizado en tu dispositivo antes de que lo vea una IA · Vista previa gratis, sin cuenta · O todo en tu dispositivo",
+      chooseEyebrow: "Paso 2 · Tu informe de IA",
+      chooseTitle: "Deja que la IA lea tu chat",
       chooseText:
-        "Ambas leen fragmentos anonimizados de tu chat y generan el mismo tipo de informe. Se diferencian en privacidad, calidad y en lo que necesita tu dispositivo.",
-      localTitle: "En tu dispositivo",
-      localTag: "MÁXIMA PRIVACIDAD · GRATIS",
+        "Tu navegador anonimiza el chat antes de enviar nada. La IA en la nube funciona en cualquier móvil y da las respuestas más profundas. ¿Prefieres que nada salga de tu dispositivo? Ejecútala en este dispositivo.",
+      localTitle: "O ejecútala en este dispositivo",
+      localTag: "MÁXIMA PRIVACIDAD · FUNCIONA SIN CONEXIÓN",
       localPro1: "Nada sale de tu dispositivo, ni siquiera anonimizado",
       localPro2: "Gratis, sin cuenta",
       localPro3: "Funciona sin conexión una vez descargado el modelo",
-      localCon1: "Descarga única de unos {gb} GB",
+      localCon1: "Una descarga única grande: unos {gb} GB",
       localCon2:
-        "Necesita un móvil u ordenador reciente y puede tardar unos minutos",
+        "Necesita un móvil u ordenador reciente y puede que no funcione en todos los dispositivos",
       localCon3:
         "Modelo pequeño: análisis más sencillo, y un chat largo se lee por partes, lo que tarda unos minutos",
       localButton: "Analizar en este dispositivo",
       localUnsupported:
         "Tu navegador no admite WebGPU, que la IA local necesita. Prueba la última versión de Chrome, Edge o Safari, o usa la IA en la nube.",
-      cloudTitle: "En la nube",
-      cloudTag: "MÁXIMA CALIDAD · SUSCRIPTORES",
+      cloudTitle: "IA en la nube anonimizada",
+      cloudTag: "RECOMENDADO · MÁXIMA CALIDAD",
+      cloudTagPreview: "RECOMENDADO · VISTA PREVIA GRATIS",
       cloudPro1:
-        "Un modelo de IA de última generación: análisis mucho más profundo y preciso",
+        "Anonimizado primero en tu dispositivo: cada persona del chat pasa a ser «Person A», «Person B»…, y se eliminan teléfonos, correos, enlaces e IBAN antes de enviar nada",
       cloudPro2:
-        "Lee hasta unos 10.000 mensajes de una vez: la mayoría de los chats, enteros",
+        "Un modelo de IA de última generación: análisis mucho más profundo y preciso",
       cloudPro3: "Funciona en cualquier móvil, listo en unos 30 segundos",
+      cloudPro4:
+        "Lee hasta unos 10.000 mensajes de una vez: la mayoría de los chats, enteros",
+      cloudPro4Preview:
+        "Gratis y sin cuenta: el resumen, la respuesta a tu pregunta y un primer vistazo a cada sección",
       cloudCon1:
-        "Se envían fragmentos anonimizados a nuestro proveedor de IA (Anthropic u OpenAI) para procesarlos",
-      cloudCon2: "Incluido en la suscripción de WhatsAnalyze",
-      cloudButton: "Analizar en la nube",
-      cloudSubscribe: "Suscríbete para usar la IA en la nube",
-      cloudPreviewButton: "Prueba la vista previa gratis en la nube",
+        "Los fragmentos anonimizados salen de tu dispositivo: los procesa nuestro proveedor de IA (Anthropic u OpenAI)",
+      cloudCon2:
+        "El informe completo forma parte de la suscripción de WhatsAnalyze",
+      cloudButton: "Obtener mi informe de IA",
+      cloudSubscribe: "Suscríbete para ver el informe completo",
+      cloudPreviewButton: "Obtener mi vista previa gratis",
       error_preview_used:
         "Ya usaste la vista previa gratuita de hoy. Suscríbete para ver el informe completo o vuelve a intentarlo mañana.",
+      fallbackLocal:
+        "No hace falta esperar: ejecuta el análisis en este dispositivo. Es gratis y nada sale de tu dispositivo.",
       lockedTitle: "El informe completo tiene más",
       lockedButton: "Desbloquear el informe completo",
       cloudConsent:
@@ -3565,7 +3588,7 @@ export const messages = {
       faqTitle: "Preguntas frecuentes",
       faq1Q: "¿Existe un analizador de chats de WhatsApp con IA gratis?",
       faq1A:
-        "Sí. El modo en tu dispositivo es gratuito y no necesita cuenta: un pequeño modelo de IA se descarga una vez en tu navegador y analiza el chat localmente. El modo en la nube, con un modelo mucho más potente, forma parte de la suscripción de WhatsAnalyze.",
+        "Sí. La IA en la nube te da una vista previa gratis sin cuenta: el resumen, la respuesta a tu pregunta y un primer vistazo a cada sección. El informe completo en la nube forma parte de la suscripción de WhatsAnalyze. El modo en tu dispositivo es totalmente gratis y no necesita cuenta: un pequeño modelo de IA se descarga una vez en tu navegador y analiza el chat localmente, en los dispositivos que pueden ejecutarlo.",
       faq2Q: "¿Se sube mi chat cuando uso la IA?",
       faq2A:
         "Con la IA en tu dispositivo no se sube nada. Con la IA en la nube solo se envían fragmentos anonimizados: tu navegador sustituye antes los nombres por marcadores y elimina teléfonos, correos y enlaces, y puedes ver exactamente qué se envía antes de empezar. No lo guardamos y nuestro proveedor de IA no lo usa para entrenar.",
@@ -4412,7 +4435,7 @@ export const messages = {
     },
     askAiCard: {
       title: "Pergunte à IA sobre esta conversa",
-      text: "Para além dos números: deixe a IA ler esta conversa e responder à sua pergunta, em privado no seu dispositivo e sem novo envio.",
+      text: "Para além dos números: deixe a IA ler esta conversa e responder à sua pergunta. Primeiro é anonimizada no seu dispositivo, sem novo envio.",
       button: "Perguntar à IA",
     },
     toolsAi: {
@@ -4471,40 +4494,47 @@ export const messages = {
       heroSubtitle:
         "Carregue a sua conversa exportada e deixe a IA descrevê-la: o ambiente, o papel e o estilo de cada pessoa, como interagem, os vossos temas recorrentes e melhores momentos.",
       heroNote:
-        "IA grátis no seu dispositivo: a conversa nunca sai dele · Ou IA na nuvem anonimizada para subscritores",
-      chooseEyebrow: "Passo 2 · Escolha a sua IA",
-      chooseTitle: "Onde deve correr a IA?",
+        "Anonimizada no seu dispositivo antes de qualquer IA a ver · Pré-visualização grátis, sem conta · Ou tudo no seu dispositivo",
+      chooseEyebrow: "Passo 2 · O seu relatório de IA",
+      chooseTitle: "Deixe a IA ler a sua conversa",
       chooseText:
-        "Ambas leem excertos anonimizados da sua conversa e produzem o mesmo tipo de relatório. Diferem na privacidade, na qualidade e no que o seu dispositivo precisa.",
-      localTitle: "No seu dispositivo",
-      localTag: "PRIVACIDADE MÁXIMA · GRÁTIS",
+        "O seu navegador anonimiza a conversa antes de enviar seja o que for. A IA na nuvem funciona em qualquer telemóvel e dá as respostas mais profundas. Prefere que nada saia do seu dispositivo? Execute-a neste dispositivo.",
+      localTitle: "Ou execute-a neste dispositivo",
+      localTag: "PRIVACIDADE MÁXIMA · FUNCIONA OFFLINE",
       localPro1: "Nada sai do seu dispositivo, nem sequer anonimizado",
       localPro2: "Grátis, sem conta",
       localPro3: "Funciona offline depois de transferir o modelo",
-      localCon1: "Transferência única de cerca de {gb} GB",
+      localCon1: "Uma transferência única grande: cerca de {gb} GB",
       localCon2:
-        "Precisa de um telemóvel ou computador recente e pode demorar alguns minutos",
+        "Precisa de um telemóvel ou computador recente e pode não funcionar em todos os dispositivos",
       localCon3:
         "Modelo pequeno: análise mais simples, e uma conversa longa é lida por partes, o que demora alguns minutos",
       localButton: "Analisar neste dispositivo",
       localUnsupported:
         "O seu navegador não suporta WebGPU, que a IA local precisa. Experimente a versão mais recente do Chrome, Edge ou Safari, ou use a IA na nuvem.",
-      cloudTitle: "Na nuvem",
-      cloudTag: "MELHOR QUALIDADE · SUBSCRITORES",
+      cloudTitle: "IA na nuvem anonimizada",
+      cloudTag: "RECOMENDADO · MELHOR QUALIDADE",
+      cloudTagPreview: "RECOMENDADO · PRÉ-VISUALIZAÇÃO GRÁTIS",
       cloudPro1:
-        "Um modelo de IA de ponta: análise muito mais profunda e precisa",
+        "Anonimizada primeiro no seu dispositivo: cada pessoa da conversa passa a «Person A», «Person B»…, e números de telefone, e-mails, links e IBAN são removidos antes de qualquer envio",
       cloudPro2:
-        "Lê até cerca de 10 000 mensagens de uma só vez — a maioria das conversas, por inteiro",
+        "Um modelo de IA de ponta: análise muito mais profunda e precisa",
       cloudPro3:
         "Funciona em qualquer telemóvel, pronto em cerca de 30 segundos",
+      cloudPro4:
+        "Lê até cerca de 10 000 mensagens de uma só vez — a maioria das conversas, por inteiro",
+      cloudPro4Preview:
+        "Grátis e sem conta: o resumo, a resposta à sua pergunta e um primeiro olhar sobre cada secção",
       cloudCon1:
-        "São enviados excertos anonimizados ao nosso fornecedor de IA (Anthropic ou OpenAI) para processamento",
-      cloudCon2: "Incluído na subscrição do WhatsAnalyze",
-      cloudButton: "Analisar na nuvem",
-      cloudSubscribe: "Subscreva para desbloquear a IA na nuvem",
-      cloudPreviewButton: "Experimente a pré-visualização grátis na nuvem",
+        "Os excertos anonimizados saem do seu dispositivo: são processados pelo nosso fornecedor de IA (Anthropic ou OpenAI)",
+      cloudCon2: "O relatório completo faz parte da subscrição do WhatsAnalyze",
+      cloudButton: "Obter o meu relatório de IA",
+      cloudSubscribe: "Subscreva para ver o relatório completo",
+      cloudPreviewButton: "Obter a minha pré-visualização grátis",
       error_preview_used:
         "Já usou a pré-visualização grátis de hoje. Subscreva para ver o relatório completo ou tente novamente amanhã.",
+      fallbackLocal:
+        "Não precisa de esperar: execute a análise neste dispositivo. É grátis e nada sai do seu dispositivo.",
       lockedTitle: "O relatório completo tem mais",
       lockedButton: "Desbloquear o relatório completo",
       cloudConsent:
@@ -4602,7 +4632,7 @@ export const messages = {
       faqTitle: "Perguntas frequentes",
       faq1Q: "Existe um analisador de conversas do WhatsApp com IA grátis?",
       faq1A:
-        "Sim. O modo no seu dispositivo é grátis e não precisa de conta: um pequeno modelo de IA é transferido uma vez para o seu navegador e analisa a conversa localmente. O modo na nuvem, com um modelo muito mais potente, faz parte da subscrição do WhatsAnalyze.",
+        "Sim. A IA na nuvem dá-lhe uma pré-visualização grátis sem conta: o resumo, a resposta à sua pergunta e um primeiro olhar sobre cada secção. O relatório completo na nuvem faz parte da subscrição do WhatsAnalyze. O modo no seu dispositivo é totalmente grátis e não precisa de conta: um pequeno modelo de IA é transferido uma vez para o seu navegador e analisa a conversa localmente, nos dispositivos que o conseguem executar.",
       faq2Q: "A minha conversa é enviada quando uso a IA?",
       faq2A:
         "Com a IA no seu dispositivo, nada é enviado. Com a IA na nuvem, só são enviados excertos anonimizados: o seu navegador substitui primeiro os nomes por marcadores e remove números, e-mails e links, e pode ver exatamente o que é enviado antes de começar. Não o guardamos e o nosso fornecedor de IA não o usa para treino.",
@@ -5713,7 +5743,7 @@ export const messages = {
     },
     askAiCard: {
       title: "Interrogez l'IA sur cette conversation",
-      text: "Au-delà des chiffres : laissez l'IA lire cette conversation et répondre à votre question, en privé sur votre appareil, sans nouvel envoi.",
+      text: "Au-delà des chiffres : laissez l'IA lire cette conversation et répondre à votre question. Elle est d'abord anonymisée sur votre appareil, sans nouvel envoi.",
       button: "Demander à l'IA",
     },
     toolsAi: {
@@ -5773,40 +5803,47 @@ export const messages = {
       heroSubtitle:
         "Importez votre conversation exportée et laissez l'IA la décrire : l'ambiance, le rôle et le style de chacun, votre façon d'échanger, vos sujets récurrents et vos meilleurs moments.",
       heroNote:
-        "IA gratuite sur votre appareil : votre conversation ne le quitte jamais · Ou IA cloud anonymisée pour les abonnés",
-      chooseEyebrow: "Étape 2 · Choisissez votre IA",
-      chooseTitle: "Où l'IA doit-elle tourner ?",
+        "Anonymisée sur votre appareil avant qu'une IA ne la voie · Aperçu gratuit, sans compte · Ou tout sur votre appareil",
+      chooseEyebrow: "Étape 2 · Votre rapport IA",
+      chooseTitle: "Laissez l'IA lire votre conversation",
       chooseText:
-        "Les deux lisent des extraits anonymisés de votre conversation et produisent le même type de rapport. Elles diffèrent par la confidentialité, la qualité et ce dont votre appareil a besoin.",
-      localTitle: "Sur votre appareil",
-      localTag: "CONFIDENTIALITÉ MAXIMALE · GRATUIT",
+        "Votre navigateur anonymise la conversation avant tout envoi. L'IA dans le cloud fonctionne sur n'importe quel téléphone et donne les réponses les plus fines. Vous préférez que rien ne quitte votre appareil ? Lancez-la plutôt sur cet appareil.",
+      localTitle: "Ou lancez-la sur cet appareil",
+      localTag: "CONFIDENTIALITÉ MAXIMALE · FONCTIONNE HORS LIGNE",
       localPro1: "Rien ne quitte votre appareil, même pas anonymisé",
       localPro2: "Gratuit, sans compte",
       localPro3: "Fonctionne hors ligne une fois le modèle téléchargé",
-      localCon1: "Téléchargement unique d'environ {gb} Go",
+      localCon1: "Un gros téléchargement unique : environ {gb} Go",
       localCon2:
-        "Nécessite un téléphone ou un ordinateur récent et peut prendre quelques minutes",
+        "Nécessite un téléphone ou un ordinateur récent, et peut ne pas fonctionner sur tous les appareils",
       localCon3:
         "Petit modèle : analyse plus simple, et une longue conversation est lue en plusieurs parties, ce qui prend quelques minutes",
       localButton: "Analyser sur cet appareil",
       localUnsupported:
         "Votre navigateur ne prend pas en charge WebGPU, nécessaire à l'IA locale. Essayez la dernière version de Chrome, Edge ou Safari, ou utilisez l'IA dans le cloud.",
-      cloudTitle: "Dans le cloud",
-      cloudTag: "MEILLEURE QUALITÉ · ABONNÉS",
+      cloudTitle: "IA cloud anonymisée",
+      cloudTag: "RECOMMANDÉ · MEILLEURE QUALITÉ",
+      cloudTagPreview: "RECOMMANDÉ · APERÇU GRATUIT",
       cloudPro1:
-        "Un modèle d'IA de pointe : une analyse bien plus fine et plus juste",
+        "Anonymisée d'abord sur votre appareil : chaque personne de la conversation devient « Person A », « Person B »…, et les numéros de téléphone, e-mails, liens et IBAN sont supprimés avant tout envoi",
       cloudPro2:
-        "Lit jusqu'à environ 10 000 messages d'un coup, soit la plupart des conversations en entier",
+        "Un modèle d'IA de pointe : une analyse bien plus fine et plus juste",
       cloudPro3:
         "Fonctionne sur n'importe quel téléphone, prêt en 30 secondes environ",
+      cloudPro4:
+        "Lit jusqu'à environ 10 000 messages d'un coup, soit la plupart des conversations en entier",
+      cloudPro4Preview:
+        "Gratuit, sans compte : le résumé, la réponse à votre question et un premier aperçu de chaque section",
       cloudCon1:
-        "Des extraits anonymisés sont envoyés à notre fournisseur d'IA (Anthropic ou OpenAI) pour traitement",
-      cloudCon2: "Inclus dans l'abonnement WhatsAnalyze",
-      cloudButton: "Analyser dans le cloud",
-      cloudSubscribe: "S'abonner pour débloquer l'IA dans le cloud",
-      cloudPreviewButton: "Essayer l'aperçu gratuit dans le cloud",
+        "Les extraits anonymisés quittent votre appareil : notre fournisseur d'IA (Anthropic ou OpenAI) les traite",
+      cloudCon2: "Le rapport complet fait partie de l'abonnement WhatsAnalyze",
+      cloudButton: "Obtenir mon rapport IA",
+      cloudSubscribe: "S'abonner pour le rapport complet",
+      cloudPreviewButton: "Obtenir mon aperçu IA gratuit",
       error_preview_used:
         "Vous avez déjà utilisé l'aperçu gratuit du jour. Abonnez-vous pour le rapport complet, ou réessayez demain.",
+      fallbackLocal:
+        "Inutile d'attendre : lancez plutôt l'analyse sur cet appareil. C'est gratuit, et rien ne quitte votre appareil.",
       lockedTitle: "Le rapport complet contient plus",
       lockedButton: "Débloquer le rapport complet",
       cloudConsent:
@@ -5907,7 +5944,7 @@ export const messages = {
       faq1Q:
         "Existe-t-il un analyseur de conversations WhatsApp par IA gratuit ?",
       faq1A:
-        "Oui. Le mode sur votre appareil est gratuit et sans compte : un petit modèle d'IA se télécharge une fois dans votre navigateur et analyse la conversation localement. Le mode cloud, avec un modèle bien plus puissant, fait partie de l'abonnement WhatsAnalyze.",
+        "Oui. L'IA dans le cloud vous offre un aperçu gratuit sans compte : le résumé, la réponse à votre question et un premier aperçu de chaque section. Le rapport complet dans le cloud fait partie de l'abonnement WhatsAnalyze. Le mode sur votre appareil est entièrement gratuit et sans compte : un petit modèle d'IA se télécharge une fois dans votre navigateur et analyse la conversation localement, sur les appareils capables de le faire tourner.",
       faq2Q: "Ma conversation est-elle envoyée quand j'utilise l'IA ?",
       faq2A:
         "Avec l'IA sur votre appareil, rien n'est envoyé. Avec l'IA dans le cloud, seuls des extraits anonymisés le sont : votre navigateur remplace d'abord les noms par des repères et supprime numéros, e-mails et liens, et vous pouvez voir exactement ce qui est envoyé avant de commencer. Nous ne le conservons pas et notre fournisseur d'IA ne s'en sert pas pour l'entraînement.",
@@ -7011,7 +7048,7 @@ export const messages = {
     },
     askAiCard: {
       title: "Chiedi all'IA di questa chat",
-      text: "Oltre i numeri: lascia che l'IA legga questa chat e risponda alla tua domanda, in privato sul tuo dispositivo e senza un nuovo caricamento.",
+      text: "Oltre i numeri: lascia che l'IA legga questa chat e risponda alla tua domanda. Prima viene anonimizzata sul tuo dispositivo, senza un nuovo caricamento.",
       button: "Chiedi all'IA",
     },
     toolsAi: {
@@ -7070,39 +7107,46 @@ export const messages = {
       heroSubtitle:
         "Carica la chat esportata e lascia che l'IA descriva la vostra conversazione: l'atmosfera, il ruolo e lo stile di ciascuno, come interagite, gli argomenti ricorrenti e i momenti migliori.",
       heroNote:
-        "IA gratuita sul tuo dispositivo: la chat non lo lascia mai · Oppure IA nel cloud anonimizzata per gli abbonati",
-      chooseEyebrow: "Passo 2 · Scegli la tua IA",
-      chooseTitle: "Dove deve girare l'IA?",
+        "Anonimizzata sul tuo dispositivo prima che un'IA la veda · Anteprima gratuita, senza account · Oppure tutto sul tuo dispositivo",
+      chooseEyebrow: "Passo 2 · Il tuo report IA",
+      chooseTitle: "Lascia che l'IA legga la tua chat",
       chooseText:
-        "Entrambe leggono estratti anonimizzati della tua chat e producono lo stesso tipo di report. Si differenziano per privacy, qualità e requisiti del dispositivo.",
-      localTitle: "Sul tuo dispositivo",
-      localTag: "MASSIMA PRIVACY · GRATIS",
+        "Il tuo browser anonimizza la chat prima di inviare qualsiasi cosa. L'IA nel cloud funziona su qualsiasi smartphone e dà le risposte più profonde. Preferisci che nulla lasci il tuo dispositivo? Avviala invece su questo dispositivo.",
+      localTitle: "Oppure avviala su questo dispositivo",
+      localTag: "MASSIMA PRIVACY · FUNZIONA OFFLINE",
       localPro1: "Niente lascia il tuo dispositivo, nemmeno in forma anonima",
       localPro2: "Gratis, senza account",
       localPro3: "Funziona offline una volta scaricato il modello",
-      localCon1: "Download una tantum di circa {gb} GB",
+      localCon1: "Un download una tantum di grandi dimensioni: circa {gb} GB",
       localCon2:
-        "Serve uno smartphone o un computer recente e può richiedere qualche minuto",
+        "Serve uno smartphone o un computer recente, e potrebbe non funzionare su tutti i dispositivi",
       localCon3:
         "Modello piccolo: analisi più semplice, e una chat lunga viene letta a parti, il che richiede qualche minuto",
       localButton: "Analizza su questo dispositivo",
       localUnsupported:
         "Il tuo browser non supporta WebGPU, necessario per l'IA locale. Prova l'ultima versione di Chrome, Edge o Safari, oppure usa l'IA nel cloud.",
-      cloudTitle: "Nel cloud",
-      cloudTag: "MASSIMA QUALITÀ · ABBONATI",
+      cloudTitle: "IA nel cloud anonimizzata",
+      cloudTag: "CONSIGLIATO · MASSIMA QUALITÀ",
+      cloudTagPreview: "CONSIGLIATO · ANTEPRIMA GRATUITA",
       cloudPro1:
-        "Un modello di IA all'avanguardia: analisi molto più profonda e precisa",
+        "Anonimizzata prima sul tuo dispositivo: ogni persona della chat diventa «Person A», «Person B»…, e numeri di telefono, e-mail, link e IBAN vengono rimossi prima di qualsiasi invio",
       cloudPro2:
-        "Legge fino a circa 10.000 messaggi in una volta: la maggior parte delle chat, per intero",
+        "Un modello di IA all'avanguardia: analisi molto più profonda e precisa",
       cloudPro3: "Funziona su qualsiasi smartphone, pronto in circa 30 secondi",
+      cloudPro4:
+        "Legge fino a circa 10.000 messaggi in una volta: la maggior parte delle chat, per intero",
+      cloudPro4Preview:
+        "Gratis, senza account: il riassunto, la risposta alla tua domanda e un primo sguardo a ogni sezione",
       cloudCon1:
-        "Estratti anonimizzati vengono inviati al nostro fornitore di IA (Anthropic o OpenAI) per l'elaborazione",
-      cloudCon2: "Incluso nell'abbonamento WhatsAnalyze",
-      cloudButton: "Analizza nel cloud",
-      cloudSubscribe: "Abbonati per sbloccare l'IA nel cloud",
-      cloudPreviewButton: "Prova l'anteprima gratuita nel cloud",
+        "Gli estratti anonimizzati lasciano il tuo dispositivo: li elabora il nostro fornitore di IA (Anthropic o OpenAI)",
+      cloudCon2: "Il report completo è incluso nell'abbonamento WhatsAnalyze",
+      cloudButton: "Ottieni il mio report IA",
+      cloudSubscribe: "Abbonati per il report completo",
+      cloudPreviewButton: "Ottieni la mia anteprima IA gratuita",
       error_preview_used:
         "Hai già usato l'anteprima gratuita di oggi. Abbonati per il report completo o riprova domani.",
+      fallbackLocal:
+        "Non serve aspettare: avvia l'analisi su questo dispositivo. È gratis e nulla lascia il tuo dispositivo.",
       lockedTitle: "Il report completo contiene di più",
       lockedButton: "Sblocca il report completo",
       cloudConsent:
@@ -7202,7 +7246,7 @@ export const messages = {
       faqTitle: "Domande frequenti",
       faq1Q: "Esiste un'analisi gratuita delle chat WhatsApp con IA?",
       faq1A:
-        "Sì. La modalità sul dispositivo è gratuita e senza account: un piccolo modello di IA viene scaricato una volta nel browser e analizza la chat in locale. La modalità cloud, con un modello molto più potente, è inclusa nell'abbonamento WhatsAnalyze.",
+        "Sì. L'IA nel cloud ti offre un'anteprima gratuita senza account: il riassunto, la risposta alla tua domanda e un primo sguardo a ogni sezione. Il report completo nel cloud è incluso nell'abbonamento WhatsAnalyze. La modalità sul dispositivo è completamente gratuita e senza account: un piccolo modello di IA viene scaricato una volta nel browser e analizza la chat in locale, sui dispositivi in grado di eseguirlo.",
       faq2Q: "La mia chat viene caricata quando uso l'IA?",
       faq2A:
         "Con l'IA sul dispositivo non viene caricato nulla. Con l'IA nel cloud vengono inviati solo estratti anonimizzati: il browser sostituisce prima i nomi con dei segnaposto e rimuove numeri, e-mail e link, e puoi vedere esattamente cosa viene inviato prima di iniziare. Non lo conserviamo e il nostro fornitore di IA non lo usa per l'addestramento.",
