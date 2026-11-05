@@ -376,7 +376,14 @@ export const analyticsTools = {
 
   ctaClick(
     toolName: string,
-    ctaType: "full_analyzer" | "export_guide" | "subscribe" | "ai" | "other",
+    ctaType:
+      | "full_analyzer"
+      | "export_guide"
+      | "subscribe"
+      | "ai"
+      | "scroll_to_dropzone"
+      | "hero_dropzone"
+      | "other",
   ) {
     trackEvent("tool_cta_click", {
       tool_name: toolName,

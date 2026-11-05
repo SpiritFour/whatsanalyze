@@ -73,7 +73,7 @@ export const messages = {
       mediaNotLoaded:
         "Your media files are not loaded: the chat was restored from this browser session, which keeps only the messages. Drop the .zip export again so the exhibit index can include and hash them.",
       seoTitle:
-        "WhatsApp Chat as Court Evidence – Clean PDF Export | WhatsAnalyze",
+        "WhatsApp Chat as Court Evidence – Clean PDF Export – WhatsAnalyze",
       seoDescription:
         "Turn a WhatsApp chat into a clean, chronological PDF with every message and timestamp. Processed 100% in your browser — no upload, no account.",
       heroEyebrow: "Court-ready chat export",
@@ -181,7 +181,7 @@ export const messages = {
         "Anna and Ben keep each other up to date all day, mixing weekend plans with running jokes. The tone is warm and teasing, with quick make-ups after small disagreements.",
       navLabel: "What Brandon Thinks alternative",
       seoTitle:
-        "Free What Brandon Thinks Alternative – Private AI Chat Analysis | WhatsAnalyze",
+        "Free What Brandon Thinks Alternative – Private AI Chat Analysis – WhatsAnalyze",
       seoDescription:
         "Looking for a free What Brandon Thinks alternative? WhatsAnalyze analyzes your WhatsApp chat with AI that runs on your own device — free, no account, and your chat is never uploaded.",
       heroTitle:
@@ -666,10 +666,10 @@ export const messages = {
     },
     toolsHub: {
       headerTools: "Tools",
-      seoTitle: "WhatsApp Tools & Utilities Suite | WhatsAnalyze",
+      seoTitle: "WhatsApp Tools & Utilities Suite – WhatsAnalyze",
       seoDescription:
         "Explore individual, fast, and 100% private WhatsApp chat tools. From inactivity tracking and message counting to response latencies — processed entirely in your browser.",
-      ogTitle: "WhatsApp Tools & Utilities Suite | WhatsAnalyze",
+      ogTitle: "WhatsApp Tools & Utilities Suite – WhatsAnalyze",
       ogDescription:
         "Single-purpose, fast WhatsApp tools. Check who texted last, count messages, and inspect silence gaps without uploading data.",
       heroEyebrow: "WhatsApp Tools & Utilities",
@@ -773,6 +773,8 @@ export const messages = {
       localEngine: "LOCAL CLIENT ENGINE",
       zeroCloud: "ZERO CLOUD TRANSMISSION",
       private: "100% PRIVATE",
+      aiCloud: "CLOUD AI: ANONYMIZED ONLY",
+      aiTraining: "NOT USED FOR TRAINING",
       dropTitle: "Drop your WhatsApp chat export here",
       dropSubtitle: "Accepts exported .txt or .zip chat files",
       selectFile: "Select Chat File",
@@ -832,7 +834,7 @@ export const messages = {
       dataContinue: "Download anyway",
       dataCancel: "Wait for Wi-Fi",
       seoTitle:
-        "Private AI WhatsApp Chat Analyzer – Free, On Your Device | WhatsAnalyze",
+        "Private AI WhatsApp Chat Analyzer – Free, On Your Device – WhatsAnalyze",
       seoDescription:
         "Private AI chat analysis that never leaves your device: a free AI runs in your browser and reads your WhatsApp chat — personalities, relationship dynamics, recurring topics, best moments. No upload, no account. Cloud AI with anonymized excerpts for deeper insights.",
       ogTitle: "AI WhatsApp Chat Analyzer",
@@ -977,7 +979,7 @@ export const messages = {
       breadcrumbTools: "Tools",
       breadcrumbCurrent: "Inactivity Tracker",
       seoTitle:
-        "Who Texted Last? WhatsApp Inactivity & Gap Tracker | WhatsAnalyze",
+        "Who Texted Last? WhatsApp Inactivity & Gap Tracker – WhatsAnalyze",
       seoDescription:
         "Free WhatsApp inactivity checker. Find out who sent the last message, calculate chat silence duration, detect ghosting, and analyze reply latency 100% privately in your browser.",
       ogTitle: "Who Texted Last? WhatsApp Inactivity & Gap Tracker",
@@ -1013,7 +1015,7 @@ export const messages = {
       colParticipant: "Participant",
       colMessages: "Messages",
       colShare: "Share",
-      colMedianReply: "Median Reply",
+      colAverageReply: "Average Reply",
       colLastActive: "Last Active",
       colLastMessage: "Last Message",
       gapsTitle: "Longest Silence Periods (Chat Gaps)",
@@ -1084,10 +1086,10 @@ export const messages = {
     },
     pageNameInactivity: "WhatsApp Inactivity & Last Message Tracker",
     toolsMessageCounter: {
-      seoTitle: "WhatsApp Message & Line Counter | WhatsAnalyze",
+      seoTitle: "WhatsApp Message & Line Counter – WhatsAnalyze",
       seoDescription:
         "Count total messages, lines, and characters in your WhatsApp chat. Inspect speech shares and busiest chat days 100% privately in your browser.",
-      ogTitle: "WhatsApp Message & Line Counter | WhatsAnalyze",
+      ogTitle: "WhatsApp Message & Line Counter – WhatsAnalyze",
       ogDescription:
         "Fast, 100% private WhatsApp message and line counter. Discover who texts more and your all-time busiest chat days.",
       heroEyebrow: "Free WhatsApp Tool",
@@ -1153,10 +1155,10 @@ export const messages = {
         "WhatsAnalyze is an independent open-source project and is not affiliated with, endorsed by, or sponsored by WhatsApp or Meta.",
     },
     toolsWordCounter: {
-      seoTitle: "WhatsApp Word & Vocabulary Counter | WhatsAnalyze",
+      seoTitle: "WhatsApp Word & Vocabulary Counter – WhatsAnalyze",
       seoDescription:
         "Discover total word counts, vocabulary richness, average message lengths, and top used words in your WhatsApp chats 100% privately in your browser.",
-      ogTitle: "WhatsApp Word & Vocabulary Counter | WhatsAnalyze",
+      ogTitle: "WhatsApp Word & Vocabulary Counter – WhatsAnalyze",
       ogDescription:
         "Analyze word counts, unique vocabulary, and most frequent words in your WhatsApp chats without uploading data.",
       heroEyebrow: "Free WhatsApp Tool",
@@ -1222,10 +1224,10 @@ export const messages = {
         "WhatsAnalyze is an independent open-source project and is not affiliated with, endorsed by, or sponsored by WhatsApp or Meta.",
     },
     toolsChatHeatmap: {
-      seoTitle: "WhatsApp Peak Chat Hours & 24h Heatmap | WhatsAnalyze",
+      seoTitle: "WhatsApp Peak Chat Hours & 24h Heatmap – WhatsAnalyze",
       seoDescription:
         "Analyze when your WhatsApp chats peak throughout 24 hours. Compare day vs night talk patterns and busiest days 100% privately in your browser.",
-      ogTitle: "WhatsApp Peak Chat Hours & 24h Heatmap | WhatsAnalyze",
+      ogTitle: "WhatsApp Peak Chat Hours & 24h Heatmap – WhatsAnalyze",
       ogDescription:
         "Discover peak chat hours and day vs night messaging distribution in your WhatsApp conversations without uploading data.",
       heroEyebrow: "Free WhatsApp Tool",
@@ -1371,7 +1373,7 @@ export const messages = {
       mediaNotLoaded:
         "Deine Mediendateien sind nicht geladen: Der Chat wurde aus dieser Browser-Sitzung wiederhergestellt, die nur die Nachrichten behält. Zieh den .zip-Export noch einmal hinein, damit das Beweismittelverzeichnis sie aufnehmen und prüfen kann.",
       seoTitle:
-        "WhatsApp-Chat als Beweismittel vor Gericht – sauberes PDF | WhatsAnalyze",
+        "WhatsApp-Chat als Beweismittel vor Gericht – sauberes PDF – WhatsAnalyze",
       seoDescription:
         "Verwandle deinen WhatsApp-Chat in ein sauberes, chronologisches PDF – jede Nachricht mit Absender und Zeitstempel. 100 % im Browser, ohne Upload.",
       heroEyebrow: "Gerichtsfester Chat-Export",
@@ -1479,7 +1481,7 @@ export const messages = {
         "Anna und Ben halten sich den ganzen Tag auf dem Laufenden und mischen Wochenendpläne mit Running Gags. Der Ton ist herzlich und neckisch, kleine Meinungsverschiedenheiten sind schnell vergessen.",
       navLabel: "What Brandon Thinks Alternative",
       seoTitle:
-        "Kostenlose What Brandon Thinks Alternative – Private KI-Chat-Analyse | WhatsAnalyze",
+        "Kostenlose What Brandon Thinks Alternative – Private KI-Chat-Analyse – WhatsAnalyze",
       seoDescription:
         "Du suchst eine kostenlose Alternative zu What Brandon Thinks? WhatsAnalyze analysiert deinen WhatsApp-Chat mit einer KI, die auf deinem eigenen Gerät läuft – kostenlos, ohne Konto, und dein Chat wird nie hochgeladen.",
       heroTitle:
@@ -1943,10 +1945,10 @@ export const messages = {
     then: "dann",
     toolsHub: {
       headerTools: "Tools",
-      seoTitle: "WhatsApp Tools & Dienstprogramme | WhatsAnalyze",
+      seoTitle: "WhatsApp Tools & Dienstprogramme – WhatsAnalyze",
       seoDescription:
         "Entdecke einzelne, schnelle und 100 % private WhatsApp-Chat-Tools. Von Inaktivitäts-Tracking und Nachrichtenzählung bis zu Antwortzeiten – komplett im Browser berechnet.",
-      ogTitle: "WhatsApp Tools & Dienstprogramme | WhatsAnalyze",
+      ogTitle: "WhatsApp Tools & Dienstprogramme – WhatsAnalyze",
       ogDescription:
         "Fokussierte WhatsApp-Tools. Prüfe, wer zuletzt geschrieben hat, zähle Nachrichten und analysiere Funkstille ohne Datenupload.",
       heroEyebrow: "WhatsApp Tools & Dienstprogramme",
@@ -2051,6 +2053,8 @@ export const messages = {
       localEngine: "LOKAL IM BROWSER",
       zeroCloud: "KEINE CLOUD-ÜBERTRAGUNG",
       private: "100 % PRIVAT",
+      aiCloud: "CLOUD-KI: NUR ANONYMISIERT",
+      aiTraining: "NICHT FÜRS TRAINING GENUTZT",
       dropTitle: "Ziehe deinen WhatsApp-Chat-Export hierher",
       dropSubtitle: ".txt- oder .zip",
       selectFile: "Chat-Datei auswählen",
@@ -2112,7 +2116,7 @@ export const messages = {
       dataContinue: "Trotzdem laden",
       dataCancel: "Auf WLAN warten",
       seoTitle:
-        "Private KI WhatsApp Chat Analyse – Kostenlos auf deinem Gerät | WhatsAnalyze",
+        "Private KI WhatsApp Chat Analyse – Kostenlos auf deinem Gerät – WhatsAnalyze",
       seoDescription:
         "Private KI-Chat-Analyse, die dein Gerät nie verlässt: Eine kostenlose KI läuft in deinem Browser und liest deinen WhatsApp-Chat – Persönlichkeiten, Beziehungsdynamik, wiederkehrende Themen, beste Momente. Kein Upload, kein Konto. Cloud-KI mit anonymisierten Auszügen für tiefere Einblicke.",
       ogTitle: "KI WhatsApp Chat Analyse",
@@ -2258,7 +2262,7 @@ export const messages = {
       breadcrumbTools: "Tools",
       breadcrumbCurrent: "Inaktivitäts-Tracker",
       seoTitle:
-        "Wer hat zuletzt geschrieben? WhatsApp Inaktivitäts- & Pausen-Tracker | WhatsAnalyze",
+        "Wer hat zuletzt geschrieben? WhatsApp Inaktivitäts- & Pausen-Tracker – WhatsAnalyze",
       seoDescription:
         "Kostenloser WhatsApp-Inaktivitäts-Checker. Finde heraus, wer die letzte Nachricht gesendet hat, berechne Antwortzeiten und erkenne Funkstille 100 % privat im Browser.",
       ogTitle: "Wer hat zuletzt geschrieben? WhatsApp Inaktivitäts-Tracker",
@@ -2295,7 +2299,7 @@ export const messages = {
       colParticipant: "Teilnehmer",
       colMessages: "Nachrichten",
       colShare: "Anteil",
-      colMedianReply: "Median-Antwort",
+      colAverageReply: "Ø Antwortzeit",
       colLastActive: "Zuletzt aktiv",
       colLastMessage: "Letzte Nachricht",
       gapsTitle: "Längste Funkstille-Phasen (Chat-Pausen)",
@@ -2367,10 +2371,10 @@ export const messages = {
     },
     pageNameInactivity: "WhatsApp Inaktivität & Letzte Nachricht",
     toolsMessageCounter: {
-      seoTitle: "WhatsApp Nachrichten- & Zeilenzähler | WhatsAnalyze",
+      seoTitle: "WhatsApp Nachrichten- & Zeilenzähler – WhatsAnalyze",
       seoDescription:
         "Zähle Nachrichten, Zeilen und Zeichen in deinem WhatsApp-Chat. Erfahre, wer mehr schreibt und wann euer aktivster Tag war – 100 % privat im Browser.",
-      ogTitle: "WhatsApp Nachrichten- & Zeilenzähler | WhatsAnalyze",
+      ogTitle: "WhatsApp Nachrichten- & Zeilenzähler – WhatsAnalyze",
       ogDescription:
         "Schneller, 100 % privater WhatsApp-Nachrichtenzähler. Finde heraus, wer mehr schreibt und entdecke euren Rekord-Tag.",
       heroEyebrow: "Kostenloses WhatsApp-Tool",
@@ -2438,10 +2442,10 @@ export const messages = {
         "WhatsAnalyze ist ein unabhängiges Open-Source-Projekt und steht in keiner Verbindung zu WhatsApp oder Meta.",
     },
     toolsWordCounter: {
-      seoTitle: "WhatsApp Wort- & Wortschatzzähler | WhatsAnalyze",
+      seoTitle: "WhatsApp Wort- & Wortschatzzähler – WhatsAnalyze",
       seoDescription:
         "Entdecke Gesamtwortzahlen, Wortschatzvielfalt, durchschnittliche Nachrichtenlängen und die häufigsten Wörter in deinen WhatsApp-Chats 100 % privat.",
-      ogTitle: "WhatsApp Wort- & Wortschatzzähler | WhatsAnalyze",
+      ogTitle: "WhatsApp Wort- & Wortschatzzähler – WhatsAnalyze",
       ogDescription:
         "Analysiere Wortzahlen, Wortschatzvielfalt und die häufigsten Wörter deiner WhatsApp-Chats ohne Datenupload.",
       heroEyebrow: "Kostenloses WhatsApp-Tool",
@@ -2509,10 +2513,10 @@ export const messages = {
         "WhatsAnalyze ist ein unabhängiges Open-Source-Projekt und steht in keiner Verbindung zu WhatsApp oder Meta.",
     },
     toolsChatHeatmap: {
-      seoTitle: "WhatsApp Aktivitätszeiten & 24h-Heatmap | WhatsAnalyze",
+      seoTitle: "WhatsApp Aktivitätszeiten & 24h-Heatmap – WhatsAnalyze",
       seoDescription:
         "Finde heraus, wann deine WhatsApp-Chats im 24-Stunden-Verlauf am aktivsten sind. Vergleiche Tag- und Nachtaktivität 100 % privat im Browser.",
-      ogTitle: "WhatsApp Aktivitätszeiten & 24h-Heatmap | WhatsAnalyze",
+      ogTitle: "WhatsApp Aktivitätszeiten & 24h-Heatmap – WhatsAnalyze",
       ogDescription:
         "Analysiere Spitzenzeiten und Tag- vs. Nachtaktivität deiner WhatsApp-Chats ohne Server-Upload.",
       heroEyebrow: "Kostenloses WhatsApp-Tool",
@@ -2659,7 +2663,7 @@ export const messages = {
       mediaNotLoaded:
         "Tus archivos multimedia no están cargados: el chat se restauró de esta sesión del navegador, que solo guarda los mensajes. Vuelve a soltar la exportación .zip para que el índice de anexos los incluya y calcule su hash.",
       seoTitle:
-        "Chat de WhatsApp como prueba en juicio – PDF limpio | WhatsAnalyze",
+        "Chat de WhatsApp como prueba en juicio – PDF limpio – WhatsAnalyze",
       seoDescription:
         "Convierte un chat de WhatsApp en un PDF limpio y cronológico con cada mensaje y su marca de tiempo. 100 % en tu navegador, sin subir nada.",
       heroEyebrow: "Exportación lista para el juzgado",
@@ -2767,7 +2771,7 @@ export const messages = {
         "Anna y Ben se cuentan todo a lo largo del día, mezclando planes de fin de semana con bromas recurrentes. El tono es cálido y bromista, y los pequeños desacuerdos se arreglan rápido.",
       navLabel: "Alternativa a What Brandon Thinks",
       seoTitle:
-        "Alternativa gratis a What Brandon Thinks – Análisis de chat con IA privado | WhatsAnalyze",
+        "Alternativa gratis a What Brandon Thinks – Análisis de chat con IA privado – WhatsAnalyze",
       seoDescription:
         "¿Buscas una alternativa gratis a What Brandon Thinks? WhatsAnalyze analiza tu chat de WhatsApp con una IA que se ejecuta en tu propio dispositivo: gratis, sin cuenta y sin subir nunca tu chat.",
       heroTitle:
@@ -3220,10 +3224,10 @@ export const messages = {
     then: "luego",
     toolsHub: {
       headerTools: "Herramientas",
-      seoTitle: "Herramientas y utilidades para WhatsApp | WhatsAnalyze",
+      seoTitle: "Herramientas y utilidades para WhatsApp – WhatsAnalyze",
       seoDescription:
         "Explora herramientas individuales, rápidas y 100 % privadas para chats de WhatsApp. Desde inactividad y conteo de mensajes hasta latencias de respuesta en tu navegador.",
-      ogTitle: "Herramientas y utilidades para WhatsApp | WhatsAnalyze",
+      ogTitle: "Herramientas y utilidades para WhatsApp – WhatsAnalyze",
       ogDescription:
         "Herramientas específicas para WhatsApp. Revisa quién envió el último mensaje, cuenta mensajes y analiza pausas sin subir datos.",
       heroEyebrow: "Herramientas y utilidades para WhatsApp",
@@ -3328,6 +3332,8 @@ export const messages = {
       localEngine: "MOTOR LOCAL EN NAVEGADOR",
       zeroCloud: "SIN TRANSMISIÓN A LA NUBE",
       private: "100 % PRIVADO",
+      aiCloud: "IA EN LA NUBE: SOLO ANONIMIZADO",
+      aiTraining: "NO SE USA PARA ENTRENAR",
       dropTitle: "Arrastra aquí tu exportación de WhatsApp",
       dropSubtitle: "Acepta archivos de chat exportados en .txt o .zip",
       selectFile: "Seleccionar archivo de chat",
@@ -3390,7 +3396,7 @@ export const messages = {
       dataContinue: "Descargar de todos modos",
       dataCancel: "Esperar a tener wifi",
       seoTitle:
-        "Analizador de chats de WhatsApp con IA privada – Gratis en tu dispositivo | WhatsAnalyze",
+        "Analizador de chats de WhatsApp con IA privada – Gratis en tu dispositivo – WhatsAnalyze",
       seoDescription:
         "Análisis de chats con IA privada que nunca sale de tu dispositivo: una IA gratis funciona en tu navegador y lee tu chat de WhatsApp (personalidades, dinámica de la relación, temas recurrentes, mejores momentos). Sin subir nada, sin cuenta. IA en la nube con extractos anonimizados para ir más a fondo.",
       ogTitle: "Analizador de chats de WhatsApp con IA",
@@ -3536,7 +3542,7 @@ export const messages = {
       breadcrumbTools: "Herramientas",
       breadcrumbCurrent: "Rastreador de inactividad",
       seoTitle:
-        "¿Quién escribió al final? Rastreador de inactividad de WhatsApp | WhatsAnalyze",
+        "¿Quién escribió al final? Rastreador de inactividad de WhatsApp – WhatsAnalyze",
       seoDescription:
         "Comprobador gratuito de inactividad de WhatsApp. Descubre quién envió el último mensaje, calcula el tiempo de silencio y analiza tiempos de respuesta 100 % privado.",
       ogTitle:
@@ -3574,7 +3580,7 @@ export const messages = {
       colParticipant: "Participante",
       colMessages: "Mensajes",
       colShare: "Porcentaje",
-      colMedianReply: "Respuesta mediana",
+      colAverageReply: "Respuesta media",
       colLastActive: "Última actividad",
       colLastMessage: "Último mensaje",
       gapsTitle: "Pausas más largas de la conversación",
@@ -3646,10 +3652,10 @@ export const messages = {
     },
     pageNameInactivity: "Inactividad y última respuesta en WhatsApp",
     toolsMessageCounter: {
-      seoTitle: "Contador de mensajes y líneas de WhatsApp | WhatsAnalyze",
+      seoTitle: "Contador de mensajes y líneas de WhatsApp – WhatsAnalyze",
       seoDescription:
         "Cuenta mensajes, líneas y caracteres de tu chat de WhatsApp. Descubre quién escribe más y el día más activo 100 % privado en tu navegador.",
-      ogTitle: "Contador de mensajes y líneas de WhatsApp | WhatsAnalyze",
+      ogTitle: "Contador de mensajes y líneas de WhatsApp – WhatsAnalyze",
       ogDescription:
         "Contador rápido y privado para WhatsApp. Descubre quién envía más mensajes y tus récords de conversación.",
       heroEyebrow: "Herramienta gratuita para WhatsApp",
@@ -3716,10 +3722,10 @@ export const messages = {
         "WhatsAnalyze es un proyecto de código abierto independiente y no está afiliado, respaldado ni patrocinado por WhatsApp o Meta.",
     },
     toolsWordCounter: {
-      seoTitle: "Contador de palabras y vocabulario de WhatsApp | WhatsAnalyze",
+      seoTitle: "Contador de palabras y vocabulario de WhatsApp – WhatsAnalyze",
       seoDescription:
         "Descubre el recuento total de palabras, riqueza léxica, longitud media de mensajes y las palabras más usadas en tus chats de WhatsApp 100 % privado.",
-      ogTitle: "Contador de palabras y vocabulario de WhatsApp | WhatsAnalyze",
+      ogTitle: "Contador de palabras y vocabulario de WhatsApp – WhatsAnalyze",
       ogDescription:
         "Analiza el total de palabras, vocabulario único y términos más frecuentes de tus chats de WhatsApp sin subir datos.",
       heroEyebrow: "Herramienta gratuita para WhatsApp",
@@ -3786,10 +3792,10 @@ export const messages = {
         "WhatsAnalyze es un proyecto de código abierto independiente y no está afiliado, respaldado ni patrocinado por WhatsApp o Meta.",
     },
     toolsChatHeatmap: {
-      seoTitle: "Horas pico y mapa de calor 24h de WhatsApp | WhatsAnalyze",
+      seoTitle: "Horas pico y mapa de calor 24h de WhatsApp – WhatsAnalyze",
       seoDescription:
         "Descubre a qué horas alcanza el pico tu chat de WhatsApp a lo largo de 24 horas. Compara día y noche 100 % privado en tu navegador.",
-      ogTitle: "Horas pico y mapa de calor 24h de WhatsApp | WhatsAnalyze",
+      ogTitle: "Horas pico y mapa de calor 24h de WhatsApp – WhatsAnalyze",
       ogDescription:
         "Analiza cuándo se envían más mensajes y compara patrones de día y noche en tus chats de WhatsApp sin subir datos.",
       heroEyebrow: "Herramienta gratuita para WhatsApp",
@@ -4239,10 +4245,10 @@ export const messages = {
     then: "depois",
     toolsHub: {
       headerTools: "Ferramentas",
-      seoTitle: "Ferramentas e utilitários para WhatsApp | WhatsAnalyze",
+      seoTitle: "Ferramentas e utilitários para WhatsApp – WhatsAnalyze",
       seoDescription:
         "Ferramentas individuais, rápidas e 100% privadas para conversas do WhatsApp. De rastreamento de inatividade a contagem de mensagens e tempos de resposta.",
-      ogTitle: "Ferramentas e utilitários para WhatsApp | WhatsAnalyze",
+      ogTitle: "Ferramentas e utilitários para WhatsApp – WhatsAnalyze",
       ogDescription:
         "Ferramentas focadas para WhatsApp. Veja quem mandou a última mensagem e analise pausas sem envio de dados.",
       heroEyebrow: "Ferramentas e utilitários para WhatsApp",
@@ -4347,6 +4353,8 @@ export const messages = {
       localEngine: "MOTOR LOCAL NO NAVEGADOR",
       zeroCloud: "SEM TRANSMISSÃO PARA NUVEM",
       private: "100% PRIVADO",
+      aiCloud: "IA NA NUVEM: SÓ ANONIMIZADO",
+      aiTraining: "NÃO USADO PARA TREINO",
       dropTitle: "Arraste sua exportação do WhatsApp aqui",
       dropSubtitle: "Aceita arquivos de chat em .txt ou .zip",
       selectFile: "Selecionar arquivo de conversa",
@@ -4409,7 +4417,7 @@ export const messages = {
       dataContinue: "Transferir na mesma",
       dataCancel: "Esperar pelo Wi-Fi",
       seoTitle:
-        "Analisador de conversas do WhatsApp com IA privada – Grátis no seu dispositivo | WhatsAnalyze",
+        "Analisador de conversas do WhatsApp com IA privada – Grátis no seu dispositivo – WhatsAnalyze",
       seoDescription:
         "Análise de conversas com IA privada que nunca sai do seu dispositivo: uma IA grátis corre no seu navegador e lê a sua conversa do WhatsApp (personalidades, dinâmica da relação, temas recorrentes, melhores momentos). Sem envio, sem conta. IA na nuvem com excertos anonimizados para ir mais fundo.",
       ogTitle: "Analisador de conversas do WhatsApp com IA",
@@ -4557,7 +4565,7 @@ export const messages = {
       breadcrumbTools: "Ferramentas",
       breadcrumbCurrent: "Rastreador de inatividade",
       seoTitle:
-        "Quem enviou a última mensagem? Rastreador de inatividade do WhatsApp | WhatsAnalyze",
+        "Quem enviou a última mensagem? Rastreador de inatividade do WhatsApp – WhatsAnalyze",
       seoDescription:
         "Verificador gratuito de inatividade do WhatsApp. Saiba quem mandou a última mensagem, calcule o tempo de silêncio e veja tempos de resposta 100% no navegador.",
       ogTitle: "Quem enviou a última mensagem? Rastreador de inatividade",
@@ -4594,7 +4602,7 @@ export const messages = {
       colParticipant: "Participante",
       colMessages: "Mensagens",
       colShare: "Proporção",
-      colMedianReply: "Resposta mediana",
+      colAverageReply: "Resposta média",
       colLastActive: "Última atividade",
       colLastMessage: "Última mensagem",
       gapsTitle: "Maiores períodos de silêncio na conversa",
@@ -4668,7 +4676,7 @@ export const messages = {
       mediaNotLoaded:
         "Seus arquivos de mídia não estão carregados: a conversa foi restaurada desta sessão do navegador, que guarda apenas as mensagens. Solte a exportação .zip novamente para que o índice de anexos os inclua e calcule o hash.",
       seoTitle:
-        "Conversa do WhatsApp como prova judicial – Exportação em PDF limpo | WhatsAnalyze",
+        "Conversa do WhatsApp como prova judicial – Exportação em PDF limpo – WhatsAnalyze",
       seoDescription:
         "Converta uma conversa do WhatsApp em um PDF limpo e cronológico com todas as mensagens e horários. 100% no navegador, sem upload.",
       heroEyebrow: "Exportação de conversa para a justiça",
@@ -4774,7 +4782,7 @@ export const messages = {
         "Anna e Ben se atualizam o dia todo, misturando planos de fim de semana com piadas recorrentes. O tom é carinhoso e brincalhão, e pequenas discordâncias se resolvem rápido.",
       navLabel: "Alternativa ao What Brandon Thinks",
       seoTitle:
-        "Alternativa gratuita ao What Brandon Thinks – Análise de conversas com IA privada | WhatsAnalyze",
+        "Alternativa gratuita ao What Brandon Thinks – Análise de conversas com IA privada – WhatsAnalyze",
       seoDescription:
         "Procura uma alternativa gratuita ao What Brandon Thinks? O WhatsAnalyze analisa a sua conversa do WhatsApp com uma IA que corre no seu próprio dispositivo: grátis, sem conta e sem nunca enviar a conversa.",
       heroTitle:
@@ -4842,7 +4850,7 @@ export const messages = {
     },
     relationshipProof: {
       seoTitle:
-        "Comprove seu relacionamento com conversas do WhatsApp – Visto e Imigração | WhatsAnalyze",
+        "Comprove seu relacionamento com conversas do WhatsApp – Visto e Imigração – WhatsAnalyze",
       seoDescription:
         "Transforme anos de mensagens em um PDF com horários, estatísticas e conversas diárias que comprovam um relacionamento genuíno. 100% privado.",
       heroEyebrow: "Comprovação de relacionamento",
@@ -4924,10 +4932,10 @@ export const messages = {
     pageNameRelationship: "Comprovação de relacionamento com chats",
     pageNameInactivity: "Rastreador de inatividade e última mensagem",
     toolsMessageCounter: {
-      seoTitle: "Contador de mensagens e linhas do WhatsApp | WhatsAnalyze",
+      seoTitle: "Contador de mensagens e linhas do WhatsApp – WhatsAnalyze",
       seoDescription:
         "Conte mensagens, linhas e caracteres da sua conversa do WhatsApp. Veja quem manda mais mensagens 100% no navegador.",
-      ogTitle: "Contador de mensagens e linhas do WhatsApp | WhatsAnalyze",
+      ogTitle: "Contador de mensagens e linhas do WhatsApp – WhatsAnalyze",
       ogDescription:
         "Contador rápido e 100% privado para WhatsApp. Descubra quem fala mais e o dia recorde da conversa.",
       heroEyebrow: "Ferramenta gratuita para WhatsApp",
@@ -4994,10 +5002,10 @@ export const messages = {
         "O WhatsAnalyze é um projeto de código aberto independente e não tem vínculo com o WhatsApp ou a Meta.",
     },
     toolsWordCounter: {
-      seoTitle: "Contador de palavras e vocabulário do WhatsApp | WhatsAnalyze",
+      seoTitle: "Contador de palavras e vocabulário do WhatsApp – WhatsAnalyze",
       seoDescription:
         "Descubra contagem total de palavras, riqueza de vocabulário e palavras mais usadas no WhatsApp 100% no navegador.",
-      ogTitle: "Contador de palavras e vocabulário do WhatsApp | WhatsAnalyze",
+      ogTitle: "Contador de palavras e vocabulário do WhatsApp – WhatsAnalyze",
       ogDescription:
         "Analise o volume de palavras e os termos mais frequentes da conversa sem enviar dados para a nuvem.",
       heroEyebrow: "Ferramenta gratuita para WhatsApp",
@@ -5065,11 +5073,11 @@ export const messages = {
     },
     toolsChatHeatmap: {
       seoTitle:
-        "Horários de pico e mapa de calor 24h do WhatsApp | WhatsAnalyze",
+        "Horários de pico e mapa de calor 24h do WhatsApp – WhatsAnalyze",
       seoDescription:
         "Analise quando suas conversas do WhatsApp atingem o pico nas 24 horas do dia. Compare dia vs noite 100% no navegador.",
       ogTitle:
-        "Horários de pico e mapa de calor 24h do WhatsApp | WhatsAnalyze",
+        "Horários de pico e mapa de calor 24h do WhatsApp – WhatsAnalyze",
       ogDescription:
         "Descubra os horários de pico e a distribuição dia vs noite da sua conversa sem envio de dados.",
       heroEyebrow: "Ferramenta gratuita para WhatsApp",
@@ -5522,10 +5530,10 @@ export const messages = {
     then: "puis",
     toolsHub: {
       headerTools: "Outils",
-      seoTitle: "Outils et utilitaires WhatsApp | WhatsAnalyze",
+      seoTitle: "Outils et utilitaires WhatsApp – WhatsAnalyze",
       seoDescription:
         "Découvrez des outils WhatsApp individuels, rapides et 100 % confidentiels. Du suivi de l'inactivité au comptage des messages et temps de réponse, directement dans votre navigateur.",
-      ogTitle: "Outils et utilitaires WhatsApp | WhatsAnalyze",
+      ogTitle: "Outils et utilitaires WhatsApp – WhatsAnalyze",
       ogDescription:
         "Outils dédiés pour WhatsApp. Découvrez qui a envoyé le dernier message et analysez les temps de pause sans téléversement.",
       heroEyebrow: "Outils et utilitaires WhatsApp",
@@ -5632,6 +5640,8 @@ export const messages = {
       localEngine: "MOTEUR LOCAL DU NAVIGATEUR",
       zeroCloud: "AUCUNE TRANSMISSION CLOUD",
       private: "100 % PRIVÉ",
+      aiCloud: "IA CLOUD : ANONYMISÉ UNIQUEMENT",
+      aiTraining: "NON UTILISÉ POUR L’ENTRAÎNEMENT",
       dropTitle: "Glissez votre export de chat WhatsApp ici",
       dropSubtitle: "Prend en charge les fichiers de chat en .txt ou .zip",
       selectFile: "Sélectionner le fichier",
@@ -5695,7 +5705,7 @@ export const messages = {
       dataContinue: "Télécharger quand même",
       dataCancel: "Attendre le Wi-Fi",
       seoTitle:
-        "Analyse de conversation WhatsApp par IA privée – Gratuite sur votre appareil | WhatsAnalyze",
+        "Analyse de conversation WhatsApp par IA privée – Gratuite sur votre appareil – WhatsAnalyze",
       seoDescription:
         "Analyse de conversation par IA privée qui ne quitte jamais votre appareil : une IA gratuite tourne dans votre navigateur et lit votre conversation WhatsApp (personnalités, dynamique de la relation, sujets récurrents, meilleurs moments). Aucun envoi, aucun compte. IA cloud avec extraits anonymisés pour aller plus loin.",
       ogTitle: "Analyse de conversation WhatsApp par IA",
@@ -5846,7 +5856,7 @@ export const messages = {
       breadcrumbTools: "Outils",
       breadcrumbCurrent: "Suivi d'inactivité",
       seoTitle:
-        "Qui a envoyé le dernier message ? Suivi d'inactivité WhatsApp | WhatsAnalyze",
+        "Qui a envoyé le dernier message ? Suivi d'inactivité WhatsApp – WhatsAnalyze",
       seoDescription:
         "Outil gratuit d'inactivité WhatsApp. Découvrez qui a envoyé le dernier message, calculez la durée du silence et mesurez les temps de réponse en toute confidentialité.",
       ogTitle: "Qui a envoyé le dernier message ? Suivi d'inactivité WhatsApp",
@@ -5884,7 +5894,7 @@ export const messages = {
       colParticipant: "Participant",
       colMessages: "Messages",
       colShare: "Part",
-      colMedianReply: "Temps médian",
+      colAverageReply: "Temps moyen",
       colLastActive: "Dernière activité",
       colLastMessage: "Dernier message",
       gapsTitle: "Plus longues périodes de silence (pauses)",
@@ -5957,7 +5967,7 @@ export const messages = {
       mediaNotLoaded:
         "Vos fichiers multimédias ne sont pas chargés : la discussion a été restaurée depuis cette session du navigateur, qui ne conserve que les messages. Déposez à nouveau l'export .zip pour que l'index des pièces les inclue et calcule leur empreinte.",
       seoTitle:
-        "Conversation WhatsApp comme preuve en justice – Export PDF clair | WhatsAnalyze",
+        "Conversation WhatsApp comme preuve en justice – Export PDF clair – WhatsAnalyze",
       seoDescription:
         "Transformez un échange WhatsApp en un PDF chronologique propre avec chaque message et horodatage. 100 % dans le navigateur, sans envoi.",
       heroEyebrow: "Export de discussion certifié",
@@ -6062,7 +6072,7 @@ export const messages = {
         "Anna et Ben se tiennent au courant toute la journée, entre projets du week-end et blagues récurrentes. Le ton est chaleureux et taquin, et les petits désaccords se règlent vite.",
       navLabel: "Alternative à What Brandon Thinks",
       seoTitle:
-        "Alternative gratuite à What Brandon Thinks – Analyse de conversation par IA privée | WhatsAnalyze",
+        "Alternative gratuite à What Brandon Thinks – Analyse de conversation par IA privée – WhatsAnalyze",
       seoDescription:
         "Vous cherchez une alternative gratuite à What Brandon Thinks ? WhatsAnalyze analyse votre conversation WhatsApp avec une IA qui tourne sur votre propre appareil : gratuit, sans compte, et votre conversation n'est jamais envoyée.",
       heroTitle:
@@ -6131,7 +6141,7 @@ export const messages = {
     },
     relationshipProof: {
       seoTitle:
-        "Prouvez votre relation avec vos chats WhatsApp – Visa et immigration | WhatsAnalyze",
+        "Prouvez votre relation avec vos chats WhatsApp – Visa et immigration – WhatsAnalyze",
       seoDescription:
         "Transformez des années de messages WhatsApp en un PDF clair : horodatages, statistiques et échanges quotidiens qui attestent d'une relation authentique. 100 % privé.",
       heroEyebrow: "Preuve de relation",
@@ -6213,10 +6223,10 @@ export const messages = {
     pageNameRelationship: "Prouver votre relation avec vos chats",
     pageNameInactivity: "Suivi d'inactivité et dernier message",
     toolsMessageCounter: {
-      seoTitle: "Compteur de messages et de lignes WhatsApp | WhatsAnalyze",
+      seoTitle: "Compteur de messages et de lignes WhatsApp – WhatsAnalyze",
       seoDescription:
         "Comptez les messages, lignes et caractères de votre chat WhatsApp. Découvrez qui écrit le plus et votre jour le plus actif, 100 % privé.",
-      ogTitle: "Compteur de messages et de lignes WhatsApp | WhatsAnalyze",
+      ogTitle: "Compteur de messages et de lignes WhatsApp – WhatsAnalyze",
       ogDescription:
         "Compteur WhatsApp rapide et 100 % privé. Découvrez qui envoie le plus de messages et vos records de discussion.",
       heroEyebrow: "Outil WhatsApp gratuit",
@@ -6283,10 +6293,10 @@ export const messages = {
         "WhatsAnalyze est un projet open source indépendant sans affiliation, approbation ou parrainage par WhatsApp ou Meta.",
     },
     toolsWordCounter: {
-      seoTitle: "Compteur de mots et de vocabulaire WhatsApp | WhatsAnalyze",
+      seoTitle: "Compteur de mots et de vocabulaire WhatsApp – WhatsAnalyze",
       seoDescription:
         "Découvrez le nombre de mots, la richesse du vocabulaire, la taille moyenne des messages et les mots les plus utilisés sur WhatsApp. 100 % privé.",
-      ogTitle: "Compteur de mots et de vocabulaire WhatsApp | WhatsAnalyze",
+      ogTitle: "Compteur de mots et de vocabulaire WhatsApp – WhatsAnalyze",
       ogDescription:
         "Analysez le nombre de mots et les termes récurrents de vos conversations WhatsApp sans aucun transfert de données.",
       heroEyebrow: "Outil WhatsApp gratuit",
@@ -6354,11 +6364,11 @@ export const messages = {
     },
     toolsChatHeatmap: {
       seoTitle:
-        "Heures de pointe et carte thermique 24h WhatsApp | WhatsAnalyze",
+        "Heures de pointe et carte thermique 24h WhatsApp – WhatsAnalyze",
       seoDescription:
         "Analysez les heures les plus actives de vos chats WhatsApp sur 24h. Comparez jour et nuit 100 % confidentiel dans votre navigateur.",
       ogTitle:
-        "Heures de pointe et carte thermique 24h WhatsApp | WhatsAnalyze",
+        "Heures de pointe et carte thermique 24h WhatsApp – WhatsAnalyze",
       ogDescription:
         "Découvrez les heures les plus actives et la répartition jour/nuit de vos échanges sans téléversement.",
       heroEyebrow: "Outil WhatsApp gratuit",
@@ -6804,10 +6814,10 @@ export const messages = {
     then: "poi",
     toolsHub: {
       headerTools: "Strumenti",
-      seoTitle: "Strumenti e utilità per WhatsApp | WhatsAnalyze",
+      seoTitle: "Strumenti e utilità per WhatsApp – WhatsAnalyze",
       seoDescription:
         "Scopri singoli strumenti veloci e al 100% privati per WhatsApp. Dal monitoraggio dell'inattività al conteggio dei messaggi e tempi di risposta, tutto nel browser.",
-      ogTitle: "Strumenti e utilità per WhatsApp | WhatsAnalyze",
+      ogTitle: "Strumenti e utilità per WhatsApp – WhatsAnalyze",
       ogDescription:
         "Strumenti dedicati per WhatsApp. Scopri chi ha inviato l'ultimo messaggio e analizza le pause senza inviare dati.",
       heroEyebrow: "Strumenti e utilità per WhatsApp",
@@ -6914,6 +6924,8 @@ export const messages = {
       localEngine: "MOTORE LOCALE NEL BROWSER",
       zeroCloud: "NESSUN INVIO AL CLOUD",
       private: "100% PRIVATO",
+      aiCloud: "IA CLOUD: SOLO ANONIMIZZATO",
+      aiTraining: "NON USATO PER L’ADDESTRAMENTO",
       dropTitle: "Trascina qui l'esportazione della tua chat WhatsApp",
       dropSubtitle: "Accetta file di chat esportati in .txt o .zip",
       selectFile: "Seleziona file di chat",
@@ -6975,7 +6987,7 @@ export const messages = {
       dataContinue: "Scarica comunque",
       dataCancel: "Aspetta il Wi-Fi",
       seoTitle:
-        "Analisi chat WhatsApp con IA privata – Gratis sul tuo dispositivo | WhatsAnalyze",
+        "Analisi chat WhatsApp con IA privata – Gratis sul tuo dispositivo – WhatsAnalyze",
       seoDescription:
         "Analisi chat con IA privata che non lascia mai il tuo dispositivo: un'IA gratuita gira nel browser e legge la tua chat WhatsApp (personalità, dinamiche della relazione, argomenti ricorrenti, momenti migliori). Nessun caricamento, nessun account. IA nel cloud con estratti anonimizzati per andare più a fondo.",
       ogTitle: "Analisi chat WhatsApp con IA",
@@ -7123,7 +7135,7 @@ export const messages = {
       breadcrumbTools: "Strumenti",
       breadcrumbCurrent: "Tracker di inattività",
       seoTitle:
-        "Chi ha scritto per ultimo? Tracker di inattività WhatsApp | WhatsAnalyze",
+        "Chi ha scritto per ultimo? Tracker di inattività WhatsApp – WhatsAnalyze",
       seoDescription:
         "Verificatore gratuito di inattività WhatsApp. Scopri chi ha inviato l'ultimo messaggio, calcola la durata del silenzio e misura i tempi di risposta nel browser in totale privacy.",
       ogTitle: "Chi ha scritto per ultimo? Tracker di inattività WhatsApp",
@@ -7161,7 +7173,7 @@ export const messages = {
       colParticipant: "Partecipante",
       colMessages: "Messaggi",
       colShare: "Percentuale",
-      colMedianReply: "Risposta mediana",
+      colAverageReply: "Risposta media",
       colLastActive: "Ultima attività",
       colLastMessage: "Ultimo messaggio",
       gapsTitle: "Pause più lunghe nella conversazione",
@@ -7235,7 +7247,7 @@ export const messages = {
       mediaNotLoaded:
         "I tuoi file multimediali non sono caricati: la chat è stata ripristinata da questa sessione del browser, che conserva solo i messaggi. Trascina di nuovo l'esportazione .zip perché l'indice degli allegati li includa e ne calcoli l'hash.",
       seoTitle:
-        "Chat di WhatsApp come prova legale – Esportazione PDF pulita | WhatsAnalyze",
+        "Chat di WhatsApp come prova legale – Esportazione PDF pulita – WhatsAnalyze",
       seoDescription:
         "Trasforma una chat di WhatsApp in un PDF cronologico e chiaro con ogni messaggio e timestamp. 100% nel browser, nessun caricamento.",
       heroEyebrow: "Esportazione chat per uso legale",
@@ -7339,7 +7351,7 @@ export const messages = {
         "Anna e Ben si aggiornano tutto il giorno, tra piani per il weekend e battute ricorrenti. Il tono è affettuoso e scherzoso, e i piccoli disaccordi si risolvono subito.",
       navLabel: "Alternativa a What Brandon Thinks",
       seoTitle:
-        "Alternativa gratuita a What Brandon Thinks – Analisi chat con IA privata | WhatsAnalyze",
+        "Alternativa gratuita a What Brandon Thinks – Analisi chat con IA privata – WhatsAnalyze",
       seoDescription:
         "Cerchi un'alternativa gratuita a What Brandon Thinks? WhatsAnalyze analizza la tua chat WhatsApp con un'IA che gira sul tuo dispositivo: gratis, senza account e la chat non viene mai caricata.",
       heroTitle:
@@ -7407,7 +7419,7 @@ export const messages = {
     },
     relationshipProof: {
       seoTitle:
-        "Dimostra la tua relazione con le chat di WhatsApp – Visti e Immigrazione | WhatsAnalyze",
+        "Dimostra la tua relazione con le chat di WhatsApp – Visti e Immigrazione – WhatsAnalyze",
       seoDescription:
         "Trasforma anni di messaggi in un PDF chiaro: orari, statistiche e conversazioni quotidiane che dimostrano un legame autentico e duraturo. 100% privato.",
       heroEyebrow: "Prova di relazione",
@@ -7488,10 +7500,10 @@ export const messages = {
     pageNameRelationship: "Dimostra la tua relazione con le chat",
     pageNameInactivity: "Tracker di inattività e ultimo messaggio",
     toolsMessageCounter: {
-      seoTitle: "Contatore di messaggi e righe WhatsApp | WhatsAnalyze",
+      seoTitle: "Contatore di messaggi e righe WhatsApp – WhatsAnalyze",
       seoDescription:
         "Conta messaggi, righe e caratteri della tua chat di WhatsApp. Scopri chi scrive di più e il giorno più attivo, 100% privato nel browser.",
-      ogTitle: "Contatore di messaggi e righe WhatsApp | WhatsAnalyze",
+      ogTitle: "Contatore di messaggi e righe WhatsApp – WhatsAnalyze",
       ogDescription:
         "Contatore rapido e privato per WhatsApp. Scopri chi invia più messaggi e i tuoi record di conversazione.",
       heroEyebrow: "Strumento WhatsApp gratuito",
@@ -7559,10 +7571,10 @@ export const messages = {
         "WhatsAnalyze è un progetto open source indipendente e non è affiliato, approvato o sponsorizzato da WhatsApp o Meta.",
     },
     toolsWordCounter: {
-      seoTitle: "Contatore di parole e vocabolario WhatsApp | WhatsAnalyze",
+      seoTitle: "Contatore di parole e vocabolario WhatsApp – WhatsAnalyze",
       seoDescription:
         "Scopri il conteggio totale delle parole, la varietà del vocabolario e i termini più usati nelle tue chat di WhatsApp 100% nel browser.",
-      ogTitle: "Contatore di parole e vocabolario WhatsApp | WhatsAnalyze",
+      ogTitle: "Contatore di parole e vocabolario WhatsApp – WhatsAnalyze",
       ogDescription:
         "Analizza il volume di parole, il vocabolario unico e i termini più usati nelle chat di WhatsApp senza caricare dati.",
       heroEyebrow: "Strumento WhatsApp gratuito",
@@ -7630,10 +7642,10 @@ export const messages = {
         "WhatsAnalyze è un progetto open source indipendente e non è affiliato, approvato o sponsorizzato da WhatsApp o Meta.",
     },
     toolsChatHeatmap: {
-      seoTitle: "Orari di punta e mappa termica 24h WhatsApp | WhatsAnalyze",
+      seoTitle: "Orari di punta e mappa termica 24h WhatsApp – WhatsAnalyze",
       seoDescription:
         "Analizza quando le tue chat di WhatsApp raggiungono il picco nelle 24 ore. Confronta giorno e notte 100% nel browser in totale privacy.",
-      ogTitle: "Orari di punta e mappa termica 24h WhatsApp | WhatsAnalyze",
+      ogTitle: "Orari di punta e mappa termica 24h WhatsApp – WhatsAnalyze",
       ogDescription:
         "Scopri le fasce orarie più attive e la distribuzione giorno/notte delle tue conversazioni senza caricare file.",
       heroEyebrow: "Strumento WhatsApp gratuito",

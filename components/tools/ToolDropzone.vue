@@ -1,13 +1,23 @@
 <template>
   <div class="tool-dropzone-wrapper">
-    <!-- Technical Security Banner -->
+    <!-- Technical Security Banner. The AI pages offer a cloud reading, so
+         "zero cloud transmission" would be untrue there: they say what the
+         cloud gets instead. -->
     <div class="tech-spec-bar">
       <span class="pulse-dot"></span>
       <span class="mono-label">{{ t("toolDropzone.localEngine") }}</span>
       <span class="separator">•</span>
-      <span class="mono-label">{{ t("toolDropzone.zeroCloud") }}</span>
+      <span class="mono-label">{{
+        t(toolType === "ai" ? "toolDropzone.aiCloud" : "toolDropzone.zeroCloud")
+      }}</span>
       <span class="separator">•</span>
-      <span class="mono-label">{{ t("toolDropzone.private") }}</span>
+      <span class="mono-label">{{
+        t(
+          toolType === "ai"
+            ? "toolDropzone.aiTraining"
+            : "toolDropzone.private",
+        )
+      }}</span>
     </div>
 
     <!-- Drop Container Card (Styled like LandingDocMock / LandingStatsMock) -->
