@@ -60,6 +60,11 @@ test.describe("same fight again", () => {
   }) => {
     await page.goto("/");
     await analyzeChat(page);
+    // Kept once it says so, not when the analysis paints: a tab opened
+    // before then finds no saved chat to offer.
+    await expect(page.locator(".library-status")).toContainText(
+      "Saved on this device",
+    );
 
     // A new tab has no chat open, so the offer is the way in.
     const fresh = await context.newPage();
