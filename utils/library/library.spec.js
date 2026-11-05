@@ -26,6 +26,7 @@ import {
   readChat,
   readSettings,
   revive,
+  sameStream,
   saveChat,
   streamKey,
   toStored,
@@ -260,6 +261,43 @@ describe("the same chat again", () => {
     expect(messages[2].attachment).toEqual({
       fileName: "00000012-PHOTO-2019-05-01-12-01-10.jpg",
     });
+  });
+
+  test("reopens it when the other export's clock reads a minute off", async () => {
+    // Two real exports of one chat disagreed by a minute on some messages.
+    const messages = syntheticChat({ count: 60 });
+    const shifted = messages.map((m, i) =>
+      i % 7 === 3 ? { ...m, date: new Date(m.date.getTime() + 61_000) } : m,
+    );
+    expect(streamKey(shifted)).not.toBe(streamKey(messages));
+    expect(sameStream(messages.map(toStored), shifted.map(toStored))).toBe(
+      true,
+    );
+
+    const first = await saveChat(
+      { messages, source: source("text-only.zip") },
+      { now: NOW - DAY },
+    );
+    const again = await saveChat(
+      { messages: shifted, source: source("with-media.zip") },
+      { now: NOW },
+    );
+    expect(again.chat.id).toBe(first.chat.id);
+    expect(await listChats()).toHaveLength(1);
+    // The record now describes the copy on screen, so it's found by it.
+    expect(again.chat.streamKey).toBe(streamKey(shifted));
+  });
+
+  test("tells apart chats that only look alike", () => {
+    const messages = syntheticChat({ count: 20 }).map(toStored);
+    const later = messages.map((m) => ({ ...m, date: m.date + 3 * 60_000 }));
+    const swapped = messages.map((m, i) =>
+      i === 5 ? { ...m, author: messages[6].author } : m,
+    );
+    expect(sameStream(messages, later)).toBe(false);
+    expect(sameStream(messages, swapped)).toBe(false);
+    expect(sameStream(messages, messages.slice(1))).toBe(false);
+    expect(sameStream([], [])).toBe(false);
   });
 
   test("the very same file again only counts as opening it", async () => {

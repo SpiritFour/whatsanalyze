@@ -14,6 +14,7 @@ import {
   unpackMonths,
 } from "./months";
 import { chatTitle, summarize } from "./identity";
+import { SYSTEM_AUTHOR } from "~/utils/systemMessages";
 
 export const DAY = 86_400_000;
 
@@ -77,14 +78,57 @@ export async function listChats() {
 /**
  * Which saved chat an incoming set of messages already is, if any.
  *
- * For now that is an identical message stream (identity.js): the same export
- * dropped again, or the same chat exported once with media and once without.
+ * This is the quick answer, from the records alone: an identical message
+ * stream (identity.js), as the same export dropped again has. findSavedChat
+ * below also catches the same chat in an export whose clock reads differ.
+ */
+export function matchSavedChat(chats, summary) {
+  return chats.find((chat) => chat.streamKey === summary.streamKey) ?? null;
+}
+
+const MINUTE = 60_000;
+
+/**
+ * Are these two lists the same messages? The same people wrote them in the
+ * same order, at the same times give or take `toleranceMs`: two exports of one
+ * chat can disagree by a minute on some messages (seen on 44 of 15,000 in a
+ * real pair of iOS exports), which a per-minute key can't absorb. Text is left
+ * out, as in streamKey: media and "image omitted" read differently.
+ */
+export function sameStream(a, b, { toleranceMs = 2 * MINUTE } = {}) {
+  const spoken = (list) =>
+    list.filter((m) => m.author !== SYSTEM_AUTHOR && Number.isFinite(m.date));
+  const left = spoken(a);
+  const right = spoken(b);
+  if (!left.length || left.length !== right.length) return false;
+  return left.every(
+    (message, i) =>
+      message.author === right[i].author &&
+      Math.abs(message.date - right[i].date) <= toleranceMs,
+  );
+}
+
+/**
+ * The saved chat these stored messages already are: an identical stream
+ * (matchSavedChat), or failing that, a chat with the same people and the same
+ * number of messages whose messages turn out to be the same ones (sameStream),
+ * e.g. the same chat exported once with media and once without.
+ *
  * Step 3 widens this to a newer export of a saved chat (the same export name,
  * or mostly the same people) and merges the two with mergeMessages, where this
  * step replaces what was saved with the identical copy.
  */
-export function matchSavedChat(chats, summary) {
-  return chats.find((chat) => chat.streamKey === summary.streamKey) ?? null;
+export async function findSavedChat(chats, summary, stored) {
+  const exact = matchSavedChat(chats, summary);
+  if (exact) return exact;
+  const people = [...summary.participants].sort().join("\n");
+  for (const chat of chats) {
+    if (chat.counts?.messages !== summary.messages) continue;
+    if ([...chat.participants].sort().join("\n") !== people) continue;
+    const saved = await readStored(chat.id);
+    if (saved && sameStream(saved.stored, stored)) return chat;
+  }
+  return null;
 }
 
 /**
@@ -134,7 +178,7 @@ export async function saveChat(
   const summary = summarize(stored);
   if (!summary.messages) throw new Error("no_messages");
 
-  const existing = matchSavedChat(await listChats(), summary);
+  const existing = await findSavedChat(await listChats(), summary, stored);
   const sameFile =
     existing &&
     source?.sha256 &&
