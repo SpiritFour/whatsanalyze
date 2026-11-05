@@ -13,6 +13,7 @@ const {
   test,
   zipExport,
 } = require("./fixtures");
+const { WRAPPED_PAYWALL_ENABLED } = require("../../config/wrapped.js");
 
 test.describe("the analyzer", () => {
   test("renders the landing page", async ({ page }) => {
@@ -516,9 +517,36 @@ test.describe("wrapped", () => {
     await expect(page).toHaveURL(/\/wrapped\/$/);
   });
 
+  test("tells a second story the same day without a paywall", async ({
+    page,
+  }) => {
+    test.skip(WRAPPED_PAYWALL_ENABLED, "config/wrapped.js gates Wrapped");
+    const today = new Date().toLocaleDateString("sv"); // YYYY-MM-DD
+
+    await page.goto("/wrapped");
+    await page.evaluate(
+      (d) =>
+        localStorage.setItem(
+          "uploadAccess",
+          JSON.stringify({ lastFreeUploadDay: d }),
+        ),
+      today,
+    );
+    await page.goto("/wrapped");
+    // No pricing card either: its Free vs Pro is the daily limit.
+    await expect(
+      page.getByRole("button", { name: "Subscribe Now" }),
+    ).toHaveCount(0);
+
+    await page.locator("#dropzone-file").setInputFiles(EXAMPLE_CHAT);
+    await page.waitForURL(/wrapped\/results/);
+    await expect(page.locator("[role=dialog]")).toHaveCount(0);
+  });
+
   test("gives one free analysis per day, then asks to come back tomorrow", async ({
     page,
   }) => {
+    test.skip(!WRAPPED_PAYWALL_ENABLED, "config/wrapped.js leaves it free");
     const setLastFreeDay = (day) =>
       page.evaluate(
         (d) =>

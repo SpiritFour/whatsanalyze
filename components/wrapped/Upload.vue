@@ -57,6 +57,7 @@ import { useStatsStore } from "~/stores/wrapped/stats";
 import { useSubscriptionStore } from "~/stores/subscription";
 import { useUploadAccessStore } from "~/stores/wrapped/uploadAccessStore";
 import { analyticsChat, analyticsWrapped } from "~/composables/useAnalytics";
+import { WRAPPED_PAYWALL_ENABLED } from "~/config/wrapped";
 const localePath = useLocalePath();
 
 const statsStore = useStatsStore();
@@ -79,7 +80,11 @@ const handleFile = async (e: Event): Promise<void> => {
   const file = input.files[0];
 
   const isFreeUpload = !isSubscriptionValid.value;
-  if (isFreeUpload && !uploadAccessStore.hasFreeUploadToday()) {
+  if (
+    WRAPPED_PAYWALL_ENABLED &&
+    isFreeUpload &&
+    !uploadAccessStore.hasFreeUploadToday()
+  ) {
     showPaywall.value = true;
     analyticsWrapped.paywallViewed("upload_gate");
     input.value = "";
@@ -100,6 +105,7 @@ const handleFile = async (e: Event): Promise<void> => {
       analyticsChat.parsedSuccess(count);
     }
 
+    // Recorded with the gate off too, so switching it back on counts today.
     if (isFreeUpload) {
       uploadAccessStore.markFreeUploadUsed();
     }

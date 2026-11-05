@@ -170,7 +170,8 @@
       </article>
     </div>
   </section>
-  <WrappedSubscriptionAd />
+  <!-- Its Free vs Pro comparison is the daily limit, so it goes with it. -->
+  <WrappedSubscriptionAd v-if="WRAPPED_PAYWALL_ENABLED" />
 
   <section id="privacy" class="container card">
     <div class="text-center mb-12">
@@ -201,6 +202,7 @@ import {
   LockClosedIcon,
 } from "@heroicons/vue/24/solid";
 import { getTargetYear } from "~/utils/wrapped/dateUtils";
+import { WRAPPED_PAYWALL_ENABLED } from "~/config/wrapped";
 
 definePageMeta({
   layout: "wrapped",
