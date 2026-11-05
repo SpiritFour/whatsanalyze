@@ -20,15 +20,22 @@ const THIRD_PARTY = [
   "**://firebase-settings.crashlytics.com/**",
 ];
 
+/** Keep a page (or a whole context) off the third parties above. */
+const blockThirdParty = async (target) => {
+  for (const pattern of THIRD_PARTY) {
+    await target.route(pattern, (route) => route.abort());
+  }
+};
+
 const test = base.test.extend({
   page: async ({ page }, use) => {
     // Without this the suite reads whatever language the browser asks for.
     await page.addInitScript(() => {
       localStorage.setItem("i18n_redirected", "en");
     });
-    for (const pattern of THIRD_PARTY) {
-      await page.route(pattern, (route) => route.abort());
-    }
+    // The context too, for the tests that open a second tab in it.
+    await blockThirdParty(page.context());
+    await blockThirdParty(page);
 
     // The pages are prerendered, so their markup is on screen and clickable
     // before Vue hydrates it, and anything a test does in that window reaches

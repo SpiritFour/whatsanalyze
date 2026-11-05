@@ -34,6 +34,22 @@
             {{ link.label }}
           </NuxtLink>
         </nav>
+        <!-- Chats saved on this device, and "Forget everything", one tap
+             away on every page (docs/saved-chats.md, "Safety"). Only for a
+             visitor who has some, so only ever in the browser. -->
+        <ClientOnly>
+          <button
+            v-if="savedChats.length"
+            type="button"
+            class="site-header__library"
+            :aria-label="$t('library.headerButton')"
+            :title="$t('library.headerButton')"
+            @click="openPanel()"
+          >
+            <v-icon size="20">mdi-shield-lock-outline</v-icon>
+          </button>
+          <LazyLibraryPanel v-if="libraryPanel.open" />
+        </ClientOnly>
         <LanguageSwitcher />
         <button
           type="button"
@@ -75,11 +91,18 @@ import { computed, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
 import LanguageSwitcher from "~/components/LanguageSwitcher.vue";
 import { useSubscriptionStore } from "~/stores/subscription";
+import { useLibrary } from "~/composables/useLibrary";
 
 const { t } = useI18n();
 const localePath = useLocalePath();
 const route = useRoute();
 const { isVerified } = storeToRefs(useSubscriptionStore());
+const {
+  chats: savedChats,
+  panel: libraryPanel,
+  openPanel,
+  closePanel,
+} = useLibrary();
 
 const menuOpen = ref(false);
 
@@ -178,6 +201,7 @@ watch(
   () => route.fullPath,
   () => {
     menuOpen.value = false;
+    closePanel();
   },
 );
 </script>
@@ -292,6 +316,24 @@ watch(
   align-items: center;
   gap: 0.6rem;
   margin-left: auto;
+}
+
+.site-header__library {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: $wa-radius-sm;
+  border: 1px solid $wa-border-invert;
+  color: $wa-ink-invert;
+  background: transparent;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    border-color: $wa-accent;
+  }
 }
 
 .site-header__burger {

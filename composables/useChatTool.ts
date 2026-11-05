@@ -78,6 +78,8 @@ export interface SharedChatState {
   attachments: ChatAttachment[];
   sourceName?: string;
   source?: ChatSource;
+  /** The sample chat, which is never saved on the device. */
+  sample?: boolean;
 }
 
 export const useSharedChat = () => {
