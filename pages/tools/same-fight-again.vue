@@ -50,7 +50,7 @@
       :title="t('situationSameFight.showTitle')"
       :text="t('situationSameFight.showText')"
     >
-      <LandingCards :items="shows" />
+      <LandingCards class="shows" :items="shows" />
     </LandingSection>
 
     <!-- Made up, and said to be: never anything from a real chat. -->
@@ -175,6 +175,7 @@ export default {
           to: localePath("/tools/inactivity"),
         },
         { icon: "mdi-clock-fast", to: localePath("/tools/inactivity") },
+        { icon: "mdi-timer-sand", to: localePath("/tools/inactivity") },
         { icon: "mdi-chat-processing-outline" },
       ].map((card, i) => ({
         ...card,
@@ -280,6 +281,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// Six cards: three across, two across or one, never a row with a gap in it.
+.landing-cards.shows {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+}
+
 .upload__next {
   margin-top: 1.5rem;
   text-align: center;

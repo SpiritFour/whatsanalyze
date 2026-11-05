@@ -1148,8 +1148,7 @@ export const messages = {
     },
     situationSameFight: {
       navLabel: "Same fight again?",
-      seoTitle:
-        "Same Fight Over and Over? Understand Your WhatsApp Chat | WhatsAnalyze",
+      seoTitle: "Same Fight Over and Over? Understand Your WhatsApp Chat",
       seoDescription:
         "Why do we keep having the same fight? Let AI read your WhatsApp chat, point to the moments that repeat and suggest how to talk differently. No blame, no verdicts, free on your device.",
       ogTitle: "Why do we keep having the same fight?",
@@ -1178,12 +1177,16 @@ export const messages = {
       show3Text:
         "After six hours or more of quiet, who writes first? Counted for each of you, as a share of all your conversations.",
       show3Link: "See who starts",
-      show4Title: "Reply times and silences",
+      show4Title: "How quickly you reply",
       show4Text:
-        "How long each of you takes to reply on average, and the longest silences in your chat with who broke them.",
+        "How long each of you takes to reply on average, and who tends to answer faster.",
       show4Link: "See reply times",
-      show5Title: "Help with the next message",
+      show5Title: "The longest silences",
       show5Text:
+        "The three longest quiet stretches in your chat, when they happened and who wrote first afterwards.",
+      show5Link: "See the silences",
+      show6Title: "Help with the next message",
+      show6Text:
         "After a full reading, ask follow-up questions about your chat, or paste a message you're about to send and get a calmer, clearer version in your own voice.",
       exampleEyebrow: "An example",
       exampleTitle: "What a reading can look like",
@@ -2611,8 +2614,7 @@ export const messages = {
     },
     situationSameFight: {
       navLabel: "Immer der gleiche Streit?",
-      seoTitle:
-        "Immer der gleiche Streit? Euren WhatsApp-Chat verstehen | WhatsAnalyze",
+      seoTitle: "Immer der gleiche Streit? Euren WhatsApp-Chat verstehen",
       seoDescription:
         "Immer wieder Streit über WhatsApp, und immer um dasselbe? Eine KI liest euren Chat, zeigt Momente, die sich wiederholen, und schlägt vor, wie ihr anders reden könnt. Ohne Schuldfrage, kostenlos auf deinem Gerät.",
       ogTitle: "Warum streiten wir immer wieder über dasselbe?",
@@ -2642,12 +2644,16 @@ export const messages = {
       show3Text:
         "Wer schreibt nach sechs Stunden Ruhe oder mehr zuerst? Für jede Person gezählt, als Anteil an all euren Gesprächen.",
       show3Link: "Sehen, wer anfängt",
-      show4Title: "Antwortzeiten und Funkstille",
+      show4Title: "Wie schnell ihr antwortet",
       show4Text:
-        "Wie lange jede Person im Schnitt zum Antworten braucht, und die längsten Pausen in eurem Chat und wer sie beendet hat.",
+        "Wie lange jede Person im Schnitt zum Antworten braucht und wer meist schneller antwortet.",
       show4Link: "Antwortzeiten ansehen",
-      show5Title: "Hilfe bei der nächsten Nachricht",
+      show5Title: "Die längste Funkstille",
       show5Text:
+        "Die drei längsten stillen Phasen in eurem Chat, wann sie waren und wer danach zuerst geschrieben hat.",
+      show5Link: "Funkstille ansehen",
+      show6Title: "Hilfe bei der nächsten Nachricht",
+      show6Text:
         "Nach einer vollständigen Auswertung kannst du Fragen zu eurem Chat stellen oder eine Nachricht einfügen, die du gleich schicken willst, und bekommst eine ruhigere, klarere Version in deinen eigenen Worten.",
       exampleEyebrow: "Ein Beispiel",
       exampleTitle: "So kann eine Auswertung aussehen",
@@ -4074,7 +4080,7 @@ export const messages = {
     situationSameFight: {
       navLabel: "¿Siempre la misma discusión?",
       seoTitle:
-        "¿Siempre discutimos por lo mismo? Entiende tu chat de WhatsApp | WhatsAnalyze",
+        "¿Siempre discutimos por lo mismo? Entiende tu chat de WhatsApp",
       seoDescription:
         "¿Por qué siempre discutimos por lo mismo? Deja que una IA lea vuestro chat de WhatsApp, señale los momentos que se repiten y sugiera cómo hablar de otra forma. Sin culpas ni veredictos, gratis en tu dispositivo.",
       ogTitle: "¿Por qué siempre discutimos por lo mismo?",
@@ -4103,12 +4109,16 @@ export const messages = {
       show3Text:
         "Después de seis horas o más de silencio, ¿quién escribe primero? Contado para cada persona, como porcentaje de todas vuestras conversaciones.",
       show3Link: "Ver quién empieza",
-      show4Title: "Tiempos de respuesta y silencios",
+      show4Title: "Lo rápido que respondéis",
       show4Text:
-        "Cuánto tarda cada uno en responder de media, y los silencios más largos de vuestro chat con quién los rompió.",
+        "Cuánto tarda cada uno en responder de media y quién suele contestar antes.",
       show4Link: "Ver tiempos de respuesta",
-      show5Title: "Ayuda con el próximo mensaje",
+      show5Title: "Los silencios más largos",
       show5Text:
+        "Los tres periodos de silencio más largos de vuestro chat, cuándo fueron y quién escribió primero después.",
+      show5Link: "Ver los silencios",
+      show6Title: "Ayuda con el próximo mensaje",
+      show6Text:
         "Tras un análisis completo, puedes hacer preguntas sobre vuestro chat o pegar un mensaje que vas a enviar y recibir una versión más tranquila y clara, con tus propias palabras.",
       exampleEyebrow: "Un ejemplo",
       exampleTitle: "Así puede ser un análisis",
@@ -5275,8 +5285,7 @@ export const messages = {
     },
     situationSameFight: {
       navLabel: "Sempre a mesma briga?",
-      seoTitle:
-        "Sempre a mesma briga? Entenda a sua conversa do WhatsApp | WhatsAnalyze",
+      seoTitle: "Sempre a mesma briga? Entenda a sua conversa do WhatsApp",
       seoDescription:
         "Discutem sempre pela mesma coisa? Deixe uma IA ler a sua conversa do WhatsApp, apontar os momentos que se repetem e sugerir como falar de outra forma. Sem culpas nem veredictos, grátis no seu dispositivo.",
       ogTitle: "Sempre a mesma briga?",
@@ -5305,12 +5314,16 @@ export const messages = {
       show3Text:
         "Depois de seis horas ou mais de silêncio, quem escreve primeiro? Contado para cada pessoa, como proporção de todas as conversas.",
       show3Link: "Ver quem começa",
-      show4Title: "Tempos de resposta e silêncios",
+      show4Title: "A rapidez das respostas",
       show4Text:
-        "Quanto tempo cada pessoa demora, em média, a responder, e os silêncios mais longos da conversa, com quem os quebrou.",
+        "Quanto tempo cada pessoa demora, em média, a responder, e quem costuma responder mais depressa.",
       show4Link: "Ver tempos de resposta",
-      show5Title: "Ajuda com a próxima mensagem",
+      show5Title: "Os silêncios mais longos",
       show5Text:
+        "Os três períodos de silêncio mais longos da conversa, quando aconteceram e quem escreveu primeiro a seguir.",
+      show5Link: "Ver os silêncios",
+      show6Title: "Ajuda com a próxima mensagem",
+      show6Text:
         "Depois de uma análise completa, faça perguntas sobre a conversa ou cole uma mensagem que vai enviar e receba uma versão mais calma e clara, com as suas próprias palavras.",
       exampleEyebrow: "Um exemplo",
       exampleTitle: "Como pode ser uma análise",
@@ -6746,7 +6759,7 @@ export const messages = {
     situationSameFight: {
       navLabel: "Toujours la même dispute ?",
       seoTitle:
-        "Toujours la même dispute ? Comprendre votre conversation WhatsApp | WhatsAnalyze",
+        "Toujours la même dispute ? Comprendre votre conversation WhatsApp",
       seoDescription:
         "Pourquoi se dispute-t-on toujours pour les mêmes choses ? Laissez une IA lire votre conversation WhatsApp, repérer les moments qui se répètent et suggérer comment en parler autrement. Sans reproches ni verdict, gratuit sur votre appareil.",
       ogTitle: "Toujours la même dispute ?",
@@ -6776,12 +6789,16 @@ export const messages = {
       show3Text:
         "Après six heures de silence ou plus, qui écrit en premier ? Compté pour chacun, en part de toutes vos conversations.",
       show3Link: "Voir qui commence",
-      show4Title: "Temps de réponse et silences",
+      show4Title: "La rapidité de vos réponses",
       show4Text:
-        "Le temps que chacun met en moyenne à répondre, et les plus longs silences de votre conversation, avec qui les a rompus.",
+        "Le temps que chacun met en moyenne à répondre, et qui répond le plus vite.",
       show4Link: "Voir les temps de réponse",
-      show5Title: "De l'aide pour le prochain message",
+      show5Title: "Les plus longs silences",
       show5Text:
+        "Les trois plus longues périodes de silence de votre conversation, quand elles ont eu lieu et qui a écrit en premier ensuite.",
+      show5Link: "Voir les silences",
+      show6Title: "De l'aide pour le prochain message",
+      show6Text:
         "Après une analyse complète, posez des questions sur votre conversation, ou collez un message que vous vous apprêtez à envoyer pour en obtenir une version plus calme et plus claire, avec vos propres mots.",
       exampleEyebrow: "Un exemple",
       exampleTitle: "À quoi peut ressembler une analyse",
@@ -8206,7 +8223,7 @@ export const messages = {
     situationSameFight: {
       navLabel: "Sempre la stessa lite?",
       seoTitle:
-        "Litighiamo sempre per le stesse cose? Capisci la tua chat WhatsApp | WhatsAnalyze",
+        "Litighiamo sempre per le stesse cose? Capisci la tua chat WhatsApp",
       seoDescription:
         "Perché litighiamo sempre per le stesse cose? Lascia che un'IA legga la vostra chat WhatsApp, indichi i momenti che si ripetono e suggerisca come parlarne in modo diverso. Senza colpe né verdetti, gratis sul tuo dispositivo.",
       ogTitle: "Perché litighiamo sempre per le stesse cose?",
@@ -8235,12 +8252,16 @@ export const messages = {
       show3Text:
         "Dopo sei ore o più di silenzio, chi scrive per primo? Contato per ciascuno, come quota di tutte le vostre conversazioni.",
       show3Link: "Scopri chi inizia",
-      show4Title: "Tempi di risposta e silenzi",
+      show4Title: "Quanto in fretta rispondete",
       show4Text:
-        "Quanto tempo ci mette in media ciascuno a rispondere, e i silenzi più lunghi della vostra chat, con chi li ha interrotti.",
+        "Quanto tempo ci mette in media ciascuno a rispondere, e chi tende a rispondere prima.",
       show4Link: "Vedi i tempi di risposta",
-      show5Title: "Aiuto con il prossimo messaggio",
+      show5Title: "I silenzi più lunghi",
       show5Text:
+        "I tre periodi di silenzio più lunghi della vostra chat, quando ci sono stati e chi ha scritto per primo dopo.",
+      show5Link: "Vedi i silenzi",
+      show6Title: "Aiuto con il prossimo messaggio",
+      show6Text:
         "Dopo un'analisi completa, fai domande sulla vostra chat oppure incolla un messaggio che stai per inviare e ricevi una versione più calma e chiara, con parole tue.",
       exampleEyebrow: "Un esempio",
       exampleTitle: "Come può essere un'analisi",
