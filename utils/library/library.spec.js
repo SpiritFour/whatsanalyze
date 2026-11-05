@@ -553,10 +553,16 @@ describe("titles", () => {
     expect(chatTitle(name)).toBe(title);
   });
 
-  test.each(["_chat.txt", "WhatsApp Chat.txt", "chat.zip", "", null])(
-    "%s names nobody",
-    (name) => expect(chatTitle(name)).toBeNull(),
-  );
+  test.each([
+    "_chat.txt",
+    "WhatsApp Chat.txt",
+    "chat.zip",
+    "chat_example.txt",
+    "chat-export-2024.zip",
+    "WhatsApp Chat export (3).txt",
+    "",
+    null,
+  ])("%s names nobody", (name) => expect(chatTitle(name)).toBeNull());
 
   test("an Android export saves under its contact's name", async () => {
     const lines = [

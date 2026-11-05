@@ -82,8 +82,10 @@ test.describe("what to reply", () => {
     const later = await context.newPage();
     await later.goto(PAGE);
     const offer = later.locator(".library-offer");
-    // Named after the export, as a saved chat is.
-    await expect(offer).toContainText("Get help replying to chat_example");
+    // "chat_example.txt" names nobody, so the saved chat goes by its people.
+    await expect(offer).toContainText(
+      "Get help replying to John Doe and Jane Doe",
+    );
     await expect(offer).toContainText("Saved on this device · no new upload");
     await offer.getByRole("button").click();
     await later.waitForURL(COACH_URL);

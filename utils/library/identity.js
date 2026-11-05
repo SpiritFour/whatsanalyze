@@ -120,8 +120,13 @@ export function summarize(messages) {
 const EXPORT_NAME =
   /^(?:whatsapp[ -]?chat|chat de whatsapp|conversa d[eo] whatsapp|discussion whatsapp|chat (?:di |de )?whatsapp)\s*(?:-|–|with|mit|con|com|avec)\s+/i;
 
-/** Names that say nothing about who the chat is with. */
-const GENERIC_NAME = /^(?:_?chat|whatsapp[ -]?chat|chat)$/i;
+/**
+ * Names that say nothing about who the chat is with: "_chat", or a file named
+ * only with words like these ("chat_example", "chat-export-2024"), which
+ * would otherwise turn up on a landing page as "your chat with chat_example".
+ */
+const GENERIC_NAME =
+  /^[\s_.-]*(?:(?:whatsapp|chat|export|example|backup|\d+)[\s_.-]*)+$/i;
 
 /**
  * What a chat is called in "Your chats": the contact or group the export is

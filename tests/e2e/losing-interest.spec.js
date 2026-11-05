@@ -95,9 +95,9 @@ test.describe("are they losing interest?", () => {
     const later = await context.newPage();
     await later.goto(PAGE);
     const offer = later.locator(".library-offer");
-    // Named after the uploaded file, as the saved chat is.
+    // "chat_example.txt" names nobody, so the saved chat goes by its people.
     await expect(offer).toContainText(
-      "Ask the AI about your chat with chat_example",
+      "Ask the AI about your chat with John Doe and Jane Doe",
     );
     await offer.getByRole("button").click();
     await later.waitForURL(

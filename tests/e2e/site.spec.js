@@ -635,18 +635,20 @@ test.describe("tools and footer", () => {
     }
   });
 
-  test("shows two separated groups and all 7 tools in the directory", async ({
+  test("shows three separated groups and all 11 tools in the directory", async ({
     page,
   }) => {
     await page.goto("/tools");
     await page.waitForSelector(".tools-directory");
 
     const groups = page.locator(".tools-group");
-    await expect(groups).toHaveCount(2);
+    await expect(groups).toHaveCount(3);
+    // The situation pages
+    await expect(groups.nth(0).locator(".tool-card")).toHaveCount(4);
     // Chat Analytics, the AI analyzer included
-    await expect(groups.nth(0).locator(".tool-card")).toHaveCount(5);
+    await expect(groups.nth(1).locator(".tool-card")).toHaveCount(5);
     // Court Documentation
-    const courtCards = groups.nth(1).locator(".tool-card");
+    const courtCards = groups.nth(2).locator(".tool-card");
     await expect(courtCards).toHaveCount(2);
     await expect(
       courtCards.first().locator(".tool-card__court-badge"),

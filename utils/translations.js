@@ -747,6 +747,15 @@ export const messages = {
       courtGroupTitle: "Official Documentation & Legal Proof",
       courtGroupDesc:
         "Court-admissible PDF transcripts and verified relationship timelines formatted for legal proceedings and immigration petitions.",
+      situationsGroupTitle: "Understand What's Going On",
+      toolSameFightText:
+        "See what keeps coming back in your arguments, and get ideas to talk differently.",
+      toolTextingFirstText:
+        "Who starts your conversations, and how fast each of you replies.",
+      toolLosingInterestText:
+        "Reply times, the longest silences and where things stand, laid out calmly.",
+      toolWhatToReplyText:
+        "Turn your draft into a calmer, clearer reply that still sounds like you.",
     },
     homeLanding: {
       wrappedButton: "See Your Story",
@@ -2588,6 +2597,15 @@ export const messages = {
       courtGroupTitle: "Offizielle Dokumentation & Gerichtsfeste Nachweise",
       courtGroupDesc:
         "Gerichtsfeste PDF-Protokolle und verifizierte Kommunikationszeitachsen für Justiz und Behörden.",
+      situationsGroupTitle: "Verstehen, was los ist",
+      toolSameFightText:
+        "Sieh, was in euren Streits immer wiederkommt, und hol dir Ideen, anders zu reden.",
+      toolTextingFirstText:
+        "Wer eure Gespräche beginnt und wie schnell ihr jeweils antwortet.",
+      toolLosingInterestText:
+        "Antwortzeiten, die längsten Funkstillen und wo ihr gerade steht, in Ruhe aufbereitet.",
+      toolWhatToReplyText:
+        "Mach aus deinem Entwurf eine ruhigere, klarere Antwort, die trotzdem nach dir klingt.",
     },
     homeLanding: {
       wrappedButton: "Zeig mir meine Story",
@@ -4435,6 +4453,15 @@ export const messages = {
       courtGroupTitle: "Documentación oficial y pruebas judiciales",
       courtGroupDesc:
         "Transcripciones en PDF válidas en juicios y cronogramas de relación verificados para visados y tribunales.",
+      situationsGroupTitle: "Entiende qué está pasando",
+      toolSameFightText:
+        "Mira qué se repite en vuestras discusiones y encuentra ideas para hablar de otra forma.",
+      toolTextingFirstText:
+        "Quién empieza vuestras conversaciones y lo rápido que responde cada uno.",
+      toolLosingInterestText:
+        "Tiempos de respuesta, los silencios más largos y en qué punto estáis, con calma.",
+      toolWhatToReplyText:
+        "Convierte tu borrador en una respuesta más tranquila y clara que siga sonando a ti.",
     },
     homeLanding: {
       wrappedButton: "Ver tu historia",
@@ -6022,6 +6049,15 @@ export const messages = {
       courtGroupTitle: "Documentação oficial e comprovações jurídicas",
       courtGroupDesc:
         "Relatórios em PDF para processos judiciais e linhas do tempo verificadas para pedidos de visto.",
+      situationsGroupTitle: "Entenda o que se passa",
+      toolSameFightText:
+        "Veja o que se repete nas suas discussões e encontre ideias para falar de outra forma.",
+      toolTextingFirstText:
+        "Quem começa as conversas e com que rapidez cada um responde.",
+      toolLosingInterestText:
+        "Tempos de resposta, os silêncios mais longos e o ponto em que estão, com calma.",
+      toolWhatToReplyText:
+        "Transforme o seu rascunho numa resposta mais calma e clara, nas suas próprias palavras.",
     },
     homeLanding: {
       wrappedButton: "Ver a sua história",
@@ -7876,6 +7912,15 @@ export const messages = {
       courtGroupTitle: "Documentation officielle et preuves juridiques",
       courtGroupDesc:
         "Transcriptions PDF recevables en justice et chronologies certifiées pour les démarches consulaires et judiciaires.",
+      situationsGroupTitle: "Comprendre ce qui se passe",
+      toolSameFightText:
+        "Voyez ce qui revient dans vos disputes et trouvez des idées pour en parler autrement.",
+      toolTextingFirstText:
+        "Qui lance vos conversations, et à quelle vitesse chacun répond.",
+      toolLosingInterestText:
+        "Temps de réponse, plus longs silences et où vous en êtes, présentés calmement.",
+      toolWhatToReplyText:
+        "Transformez votre brouillon en une réponse plus calme et plus claire, qui vous ressemble.",
     },
     homeLanding: {
       wrappedButton: "Voir votre story",
@@ -9728,6 +9773,15 @@ export const messages = {
       courtGroupTitle: "Documentazione ufficiale e prove legali",
       courtGroupDesc:
         "Trascrizioni PDF legali e cronologie verificate pensate per tribunali e pratiche di visto.",
+      situationsGroupTitle: "Capire cosa sta succedendo",
+      toolSameFightText:
+        "Scopri cosa torna sempre nelle vostre discussioni e trova idee per parlarne in modo diverso.",
+      toolTextingFirstText:
+        "Chi inizia le vostre conversazioni e quanto velocemente risponde ciascuno.",
+      toolLosingInterestText:
+        "Tempi di risposta, i silenzi più lunghi e a che punto siete, con calma.",
+      toolWhatToReplyText:
+        "Trasforma la tua bozza in una risposta più calma e chiara, che suoni ancora come te.",
     },
     homeLanding: {
       wrappedButton: "Guarda la tua storia",

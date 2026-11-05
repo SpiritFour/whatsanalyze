@@ -6,6 +6,47 @@
       :subtitle="t('toolsHub.heroSubtitle')"
     >
       <div class="tools-directory">
+        <!-- Group 0: situations, each leading to the tool that answers it -->
+        <div class="tools-group">
+          <div class="tools-group__header">
+            <span class="tools-group__tag">
+              <v-icon size="14" class="mr-1" color="#fb923c"
+                >mdi-chat-processing-outline</v-icon
+              >
+              {{ t("toolsHub.situationsGroupTitle") }}
+            </span>
+          </div>
+
+          <div class="tools-showcase-grid tools-showcase-grid--4cols">
+            <NuxtLink
+              v-for="tool in situationTools"
+              :key="tool.title"
+              :to="tool.to"
+              class="tool-card"
+              @click="trackToolClick(tool.title)"
+            >
+              <div class="tool-card__header">
+                <div
+                  class="tool-card__icon-wrap"
+                  :style="{ background: tool.bg }"
+                >
+                  <v-icon :color="tool.color" size="22">{{ tool.icon }}</v-icon>
+                </div>
+              </div>
+
+              <h3 class="tool-card__title">{{ tool.title }}</h3>
+              <p class="tool-card__desc">{{ tool.text }}</p>
+
+              <div class="tool-card__footer">
+                <span class="tool-card__action">
+                  {{ openTool }}
+                  <v-icon size="14" class="ml-1">mdi-arrow-right</v-icon>
+                </span>
+              </div>
+            </NuxtLink>
+          </div>
+        </div>
+
         <!-- Group 1: Chat Analytics & Metrics -->
         <div class="tools-group">
           <div class="tools-group__header">
@@ -220,7 +261,7 @@ useHead(() => ({
 }));
 
 // Same catalogue as the header dropdown and the footer.
-const { analyticsTools, courtTools } = useToolsNav();
+const { situationTools, analyticsTools, courtTools } = useToolsNav();
 const openTool = computed(() => t("toolsHub.openTool"));
 
 const pillars = computed(() => [
