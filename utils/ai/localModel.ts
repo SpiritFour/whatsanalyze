@@ -146,7 +146,7 @@ const modelFor = (f16: boolean): LocalModel =>
  * Can this device run the on-device model, and which one? Asked when a chat
  * is loaded, so a device that can't is pointed at the cloud before anyone
  * clicks; utils/ai/localCheck.js has what is checked and why. `model` is
- * null only without a GPU to pick one for.
+ * the one this device would get, even without a GPU to check it on.
  */
 export async function checkLocalModel(): Promise<{
   model: LocalModel | null;
@@ -161,7 +161,10 @@ export async function checkLocalModel(): Promise<{
   return result.ok
     ? { model: result.model, unavailable: null }
     : {
-        model: result.model,
+        // Without a GPU there's no model to check, but the page still
+        // describes the one this device would get: its download read
+        // "about 0 GB" on an iPhone without WebGPU.
+        model: result.model ?? modelFor(false),
         unavailable: result.reason,
         detail: result.detail,
       };

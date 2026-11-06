@@ -1064,7 +1064,7 @@ export const messages = {
         "This is everything that is sent. Real names are swapped back in on your device once the answer arrives.",
       progressLocal: "The AI is reading your chat on your device…",
       progressCloud:
-        "The AI is reading your chat… this takes about 15 seconds.",
+        "The AI is reading your chat… this takes about 20 seconds.",
       error_local:
         "The on-device AI couldn't run. Try again, or use the cloud AI.",
       error_local_unsupported:
@@ -1124,6 +1124,8 @@ export const messages = {
         "Free preview: a few cloud replies a day. Pro gives you more.",
       coachNoteFreeLeft:
         "{n} free cloud replies left today. Pro gives you more.",
+      coachPickMe:
+        "Pick which one is you at the top, so the reply is written from your side.",
       error_coach_free_used:
         "You have used today's free replies. Come back tomorrow, or get Pro for more replies each day.",
       error_coach_local_unchanged:
@@ -3046,7 +3048,7 @@ export const messages = {
       previewText:
         "Das ist alles, was gesendet wird. Die echten Namen werden erst auf deinem Gerät wieder eingesetzt, wenn die Antwort da ist.",
       progressLocal: "Die KI liest deinen Chat auf deinem Gerät …",
-      progressCloud: "Die KI liest deinen Chat … das dauert etwa 15 Sekunden.",
+      progressCloud: "Die KI liest deinen Chat … das dauert etwa 20 Sekunden.",
       error_local:
         "Die KI auf dem Gerät konnte nicht starten. Versuch es noch einmal oder nutz die Cloud-KI.",
       error_local_unsupported:
@@ -3107,6 +3109,8 @@ export const messages = {
         "Kostenlose Vorschau: ein paar Cloud-Antworten pro Tag. Mit Pro bekommst du mehr.",
       coachNoteFreeLeft:
         "Heute noch {n} kostenlose Cloud-Antworten. Mit Pro bekommst du mehr.",
+      coachPickMe:
+        "Wähle oben aus, wer du bist, damit die Antwort aus deiner Sicht geschrieben wird.",
       error_coach_free_used:
         "Deine kostenlosen Antworten für heute sind aufgebraucht. Komm morgen wieder oder hol dir Pro für mehr Antworten pro Tag.",
       error_coach_local_unchanged:
@@ -5035,7 +5039,7 @@ export const messages = {
       previewText:
         "Esto es todo lo que se envía. Los nombres reales se vuelven a poner en tu dispositivo cuando llega la respuesta.",
       progressLocal: "La IA está leyendo tu chat en tu dispositivo…",
-      progressCloud: "La IA está leyendo tu chat… tarda unos 15 segundos.",
+      progressCloud: "La IA está leyendo tu chat… tarda unos 20 segundos.",
       error_local:
         "La IA local no ha podido ejecutarse. Vuelve a intentarlo o usa la IA en la nube.",
       error_local_unsupported:
@@ -5096,6 +5100,8 @@ export const messages = {
         "Vista previa gratis: unas pocas respuestas en la nube al día. Con Pro tienes más.",
       coachNoteFreeLeft:
         "Hoy te quedan {n} respuestas gratis en la nube. Con Pro tienes más.",
+      coachPickMe:
+        "Elige arriba quién eres, para que la respuesta se escriba desde tu lado.",
       error_coach_free_used:
         "Ya has usado las respuestas gratis de hoy. Vuelve mañana o hazte Pro para tener más cada día.",
       error_coach_local_unchanged:
@@ -6762,7 +6768,7 @@ export const messages = {
         "Isto é tudo o que é enviado. Os nomes reais são repostos no seu dispositivo quando chega a resposta.",
       progressLocal: "A IA está a ler a sua conversa no seu dispositivo…",
       progressCloud:
-        "A IA está a ler a sua conversa… demora cerca de 15 segundos.",
+        "A IA está a ler a sua conversa… demora cerca de 20 segundos.",
       error_local:
         "A IA local não conseguiu arrancar. Tente novamente ou use a IA na nuvem.",
       error_local_unsupported:
@@ -6821,6 +6827,8 @@ export const messages = {
         "Pré-visualização grátis: algumas respostas na nuvem por dia. Com o Pro, você recebe mais.",
       coachNoteFreeLeft:
         "Hoje restam {n} respostas grátis na nuvem. Com o Pro, você recebe mais.",
+      coachPickMe:
+        "Escolha lá em cima quem é você, para que a resposta seja escrita do seu lado.",
       error_coach_free_used:
         "Você já usou as respostas grátis de hoje. Volte amanhã ou assine o Pro para ter mais respostas por dia.",
       error_coach_local_unchanged:
@@ -8755,7 +8763,7 @@ export const messages = {
         "Voici tout ce qui est envoyé. Les vrais noms sont remis en place sur votre appareil à l'arrivée de la réponse.",
       progressLocal: "L'IA lit votre conversation sur votre appareil…",
       progressCloud:
-        "L'IA lit votre conversation… cela prend environ 15 secondes.",
+        "L'IA lit votre conversation… cela prend environ 20 secondes.",
       error_local:
         "L'IA locale n'a pas pu démarrer. Réessayez, ou utilisez l'IA dans le cloud.",
       error_local_unsupported:
@@ -8817,6 +8825,8 @@ export const messages = {
         "Aperçu gratuit : quelques réponses cloud par jour. Avec Pro, tu en as plus.",
       coachNoteFreeLeft:
         "Encore {n} réponses cloud gratuites aujourd’hui. Avec Pro, tu en as plus.",
+      coachPickMe:
+        "Choisis en haut qui tu es, pour que la réponse soit écrite de ton point de vue.",
       error_coach_free_used:
         "Tu as utilisé tes réponses gratuites du jour. Reviens demain, ou passe à Pro pour en avoir plus chaque jour.",
       error_coach_local_unchanged:
@@ -10743,7 +10753,7 @@ export const messages = {
         "Questo è tutto ciò che viene inviato. I nomi reali vengono rimessi sul tuo dispositivo quando arriva la risposta.",
       progressLocal: "L'IA sta leggendo la tua chat sul tuo dispositivo…",
       progressCloud:
-        "L'IA sta leggendo la tua chat… ci vogliono circa 15 secondi.",
+        "L'IA sta leggendo la tua chat… ci vogliono circa 20 secondi.",
       error_local:
         "L'IA locale non è riuscita ad avviarsi. Riprova, oppure usa l'IA nel cloud.",
       error_local_unsupported:
@@ -10804,6 +10814,8 @@ export const messages = {
         "Anteprima gratuita: qualche risposta cloud al giorno. Con Pro ne hai di più.",
       coachNoteFreeLeft:
         "Oggi ti restano {n} risposte cloud gratuite. Con Pro ne hai di più.",
+      coachPickMe:
+        "Scegli in alto chi sei, così la risposta viene scritta dal tuo punto di vista.",
       error_coach_free_used:
         "Hai usato le risposte gratuite di oggi. Torna domani, o passa a Pro per averne di più ogni giorno.",
       error_coach_local_unchanged:

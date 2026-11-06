@@ -40,6 +40,9 @@
       {{ t(`toolsAi.error_${errorKey}`) }}
     </p>
 
+    <p v-if="needsMe" class="coach__hint">
+      {{ t("toolsAi.coachPickMe") }}
+    </p>
     <form class="coach__form" @submit.prevent="send">
       <textarea
         v-model="draft"
@@ -120,6 +123,17 @@ const emit = defineEmits<{ allowance: [CloudAllowance] }>();
 
 const { t } = useI18n();
 const subscriptionStore = useSubscriptionStore();
+
+/**
+ * Reply help without knowing who the reader is: the model guesses whose
+ * side the draft is from, and in testing it guessed wrong. Ask instead.
+ */
+const needsMe = computed(
+  () =>
+    kind.value === "reply" &&
+    !props.me &&
+    new Set(props.chat.map((m) => m.author).filter(Boolean)).size > 1,
+);
 
 /** Free replies left today, once the first free reply has said. */
 const freeLeft = ref<number | null>(null);
@@ -344,6 +358,11 @@ async function send() {
   &__note {
     font-size: 0.85rem;
     color: rgba(29, 29, 31, 0.65);
+  }
+
+  &__hint {
+    font-size: 0.9rem;
+    color: #b45309;
   }
 
   &__error {

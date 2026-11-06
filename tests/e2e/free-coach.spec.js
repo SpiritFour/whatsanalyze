@@ -97,5 +97,7 @@ test("from What should I reply?, the coach starts on reply help", async ({
   await page.getByRole("button", { name: "Get my free AI preview" }).click();
   const coach = page.locator(".coach");
   await expect(coach.locator(".chip--on")).toHaveText("Help me reply");
+  // Two people and nobody picked as "me": the coach asks first.
+  await expect(coach.locator(".coach__hint")).toContainText("which one is you");
   await expect(coach).toBeInViewport();
 });
