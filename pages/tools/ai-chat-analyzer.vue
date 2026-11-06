@@ -1167,7 +1167,8 @@ async function run(mode: Mode, via?: "fallback") {
     reportQuestion.value = askedQuestion.value;
     reportAsked.value = {
       preset: askedQuestion.value ? question.value : null,
-      toReader: !!alias,
+      // Told who the reader is, the AI wrote to them as "you".
+      toReader: !!ask?.me,
     };
     insights.value = tidyInsights(restoreNames(result, names));
     coverage.value = {
