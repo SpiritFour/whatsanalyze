@@ -2,7 +2,8 @@ import { chatDurationInDays, participantMessages } from "./utils";
 
 describe("chatDurationInDays", () => {
   it("counts the calendar days the sample chat spans", () => {
-    // static/chat_example.txt, the file every report in #411 was measured
+    // tests/fixtures/chat_example.txt (the sample chat until November 2026),
+    // the file every report in #411 was measured
     // against: 539.96 hours' worth of elapsed time over 540 calendar days.
     // Counting the raw difference truncated it to 539 on the analyzer while
     // the tools pages rounded it to 540.

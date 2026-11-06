@@ -13,6 +13,7 @@ const {
   test,
   zipExport,
 } = require("./fixtures");
+const { WRAPPED_PAYWALL_ENABLED } = require("../../config/wrapped.js");
 
 test.describe("the analyzer", () => {
   test("renders the landing page", async ({ page }) => {
@@ -287,9 +288,9 @@ test.describe("the analyzer", () => {
       }),
     ).toHaveClass(/chip--on/);
 
-    // 4. Click "Analyze in the cloud"
+    // 4. Click "Get my AI report"
     const runButton = page.getByRole("button", {
-      name: "Analyze in the cloud",
+      name: "Get my AI report",
     });
     await expect(runButton).toBeVisible();
     await runButton.click();
@@ -335,9 +336,7 @@ test.describe("the analyzer", () => {
 
     await page.goto("/tools/ai-chat-analyzer/");
     await page.locator("input.hidden-file-input").setInputFiles(EXAMPLE_CHAT);
-    await page
-      .getByRole("button", { name: "Try a free cloud preview" })
-      .click();
+    await page.getByRole("button", { name: "Get my free AI preview" }).click();
 
     const report = page.locator("#ai-report");
     await expect(
@@ -374,9 +373,7 @@ test.describe("the analyzer", () => {
 
     await page.goto("/tools/ai-chat-analyzer/");
     await page.locator("input.hidden-file-input").setInputFiles(EXAMPLE_CHAT);
-    await page
-      .getByRole("button", { name: "Try a free cloud preview" })
-      .click();
+    await page.getByRole("button", { name: "Get my free AI preview" }).click();
     const report = page.locator("#ai-report");
     await expect(report.locator(".report-card--locked")).toHaveCount(7);
 
@@ -462,20 +459,98 @@ test.describe("the analyzer", () => {
   test("renders migrated markdown content", async ({ page }) => {
     await page.goto("/how-to-export-your-whatsapp-chat");
 
-    await expect(page).toHaveTitle(/How to Export your WhatsApp Chat/);
+    await expect(page).toHaveTitle(/How to Export a WhatsApp Chat/);
     // By role, not by text: the page title is also the last breadcrumb now, so
     // a plain text match finds two nodes.
     await expect(
       page.getByRole("heading", {
-        name: "Export WhatsApp Chat: The Ultimate Guide",
+        name: "How to export a WhatsApp chat",
         level: 1,
       }),
     ).toBeVisible();
     await expect(
       page.getByRole("heading", {
-        name: "Option 1: iPhone (iOS) - Export as a .txt File",
+        name: "On a computer: WhatsApp Web, Windows and Mac",
       }),
     ).toBeVisible();
+  });
+
+  test("serves the export guide in the locale's own language", async ({
+    page,
+  }) => {
+    await page.goto("/de/how-to-export-your-whatsapp-chat/");
+
+    await expect(page).toHaveTitle(/WhatsApp-Chat exportieren/);
+    await expect(
+      page.getByRole("heading", {
+        name: "WhatsApp-Chat exportieren",
+        level: 1,
+      }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", {
+        name: "Am Computer: WhatsApp Web, Windows und Mac",
+      }),
+    ).toBeVisible();
+
+    // The breadcrumb trail Google shows leads to this locale's pages, not the
+    // English ones.
+    const blocks = await page
+      .locator('script[type="application/ld+json"]')
+      .allTextContents();
+    const trail = blocks
+      .map((text) => JSON.parse(text))
+      .find((node) => node["@type"] === "BreadcrumbList");
+    expect(trail.itemListElement.map((crumb) => crumb.item)).toEqual([
+      expect.stringMatching(/\/de\/$/),
+      expect.stringMatching(/\/de\/how-to-export-your-whatsapp-chat\/$/),
+    ]);
+  });
+
+  test("hands an export dropped on the guide to the analyzer", async ({
+    page,
+  }) => {
+    await page.goto("/how-to-export-your-whatsapp-chat");
+    await page
+      .locator('#dropzone-slot input[type="file"]')
+      .setInputFiles(EXAMPLE_CHAT);
+
+    // With the chat loaded, every next step carries on with it rather than
+    // asking for the file again.
+    const stats = page
+      .locator(".landing-cards")
+      .getByRole("link", { name: /Chat statistics/ });
+    await expect(stats).toContainText("Continue with this chat");
+    await stats.click();
+
+    await expect(page).toHaveURL(/#results$/);
+    await expectAnalysis(page);
+  });
+
+  test("offers the PDF page to search and takes a dropped chat to the download", async ({
+    page,
+  }) => {
+    await page.goto("/whatsapp-to-pdf");
+
+    await expect(
+      page.getByRole("heading", {
+        name: "Export a WhatsApp chat to PDF",
+        level: 1,
+      }),
+    ).toBeVisible();
+    // It was noindex and left out of the sitemap while it was three
+    // sentences long.
+    await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
+    const sitemap = await (await page.request.get("/sitemap.xml")).text();
+    expect(sitemap).toContain("/whatsapp-to-pdf/</loc>");
+
+    await page
+      .locator('#dropzone-slot input[type="file"]')
+      .setInputFiles(EXAMPLE_CHAT);
+
+    // The PDF is made under the analysis on the home page.
+    await expect(page).toHaveURL(/#payButton$/);
+    await expect(page.locator("#payButton")).toBeInViewport();
   });
 });
 
@@ -516,9 +591,36 @@ test.describe("wrapped", () => {
     await expect(page).toHaveURL(/\/wrapped\/$/);
   });
 
+  test("tells a second story the same day without a paywall", async ({
+    page,
+  }) => {
+    test.skip(WRAPPED_PAYWALL_ENABLED, "config/wrapped.js gates Wrapped");
+    const today = new Date().toLocaleDateString("sv"); // YYYY-MM-DD
+
+    await page.goto("/wrapped");
+    await page.evaluate(
+      (d) =>
+        localStorage.setItem(
+          "uploadAccess",
+          JSON.stringify({ lastFreeUploadDay: d }),
+        ),
+      today,
+    );
+    await page.goto("/wrapped");
+    // No pricing card either: its Free vs Pro is the daily limit.
+    await expect(
+      page.getByRole("button", { name: "Subscribe Now" }),
+    ).toHaveCount(0);
+
+    await page.locator("#dropzone-file").setInputFiles(EXAMPLE_CHAT);
+    await page.waitForURL(/wrapped\/results/);
+    await expect(page.locator("[role=dialog]")).toHaveCount(0);
+  });
+
   test("gives one free analysis per day, then asks to come back tomorrow", async ({
     page,
   }) => {
+    test.skip(!WRAPPED_PAYWALL_ENABLED, "config/wrapped.js leaves it free");
     const setLastFreeDay = (day) =>
       page.evaluate(
         (d) =>
@@ -635,18 +737,20 @@ test.describe("tools and footer", () => {
     }
   });
 
-  test("shows two separated groups and all 7 tools in the directory", async ({
+  test("shows three separated groups and all 11 tools in the directory", async ({
     page,
   }) => {
     await page.goto("/tools");
     await page.waitForSelector(".tools-directory");
 
     const groups = page.locator(".tools-group");
-    await expect(groups).toHaveCount(2);
+    await expect(groups).toHaveCount(3);
+    // The situation pages
+    await expect(groups.nth(0).locator(".tool-card")).toHaveCount(4);
     // Chat Analytics, the AI analyzer included
-    await expect(groups.nth(0).locator(".tool-card")).toHaveCount(5);
+    await expect(groups.nth(1).locator(".tool-card")).toHaveCount(5);
     // Court Documentation
-    const courtCards = groups.nth(1).locator(".tool-card");
+    const courtCards = groups.nth(2).locator(".tool-card");
     await expect(courtCards).toHaveCount(2);
     await expect(
       courtCards.first().locator(".tool-card__court-badge"),

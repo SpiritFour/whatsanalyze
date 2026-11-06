@@ -7,7 +7,17 @@
       :note="$t('toolsHub.heroNote')"
     >
       <div class="pwa-results__upload">
-        <FileHandler ref="filehandler" @new_messages="newMessages" />
+        <FileHandler
+          ref="filehandler"
+          source="pwa"
+          @new_messages="newMessages"
+        />
+        <LibraryStatus
+          v-if="messages"
+          :messages="messages"
+          :source="source"
+          surface="pwa"
+        />
       </div>
     </LandingHero>
     <ChartsResults ref="results" :chat="chat" :attachments="attachments" />
@@ -15,6 +25,7 @@
 </template>
 
 <script>
+import { markRaw } from "vue";
 import { Chat } from "~/utils/transformChatData";
 
 export default {
@@ -32,6 +43,9 @@ export default {
   data() {
     return {
       chat: undefined,
+      // The chat as parsed, for the saved-chat line under the box.
+      messages: undefined,
+      source: undefined,
       attachments: undefined,
     };
   },
@@ -45,6 +59,9 @@ export default {
     newMessages(chatObject) {
       // we only update with default chat object if chatis undefined
       if (!chatObject.default || this.chat === undefined) {
+        // Raw: proxying every message of a long chat buys nothing.
+        this.messages = markRaw(chatObject.messages);
+        this.source = chatObject.source || null;
         this.attachments = chatObject.attachments;
         this.chat = new Chat(chatObject.messages);
       }

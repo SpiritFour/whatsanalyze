@@ -145,7 +145,7 @@
                 <th>{{ t("toolsInactivity.colParticipant") }}</th>
                 <th>{{ t("toolsInactivity.colLastActive") }}</th>
                 <th>{{ t("toolsInactivity.colLastMessage") }}</th>
-                <th>{{ t("toolsInactivity.colMedianReply") }}</th>
+                <th>{{ t("toolsInactivity.colAverageReply") }}</th>
                 <th>{{ t("toolsInactivity.colShare") }}</th>
               </tr>
             </thead>

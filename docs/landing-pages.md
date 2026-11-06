@@ -11,6 +11,16 @@ product. Each page targets a specific search intent, converts to the analyzer
 | `/tools/inactivity` | Inactivity & last message tracker | Client-side dropzone (`ToolDropzone`) |
 | `/tools/court-evidence` | Legal evidence: harassment, divorce/custody, work disputes | CSS transcript mockup (`LandingDocMock`) |
 | `/tools/proof-of-relationship` | Visa/immigration: proving a genuine relationship | CSS stats mockup (`LandingStatsMock`) |
+| `/tools/same-fight-again` | The same argument again and again: understand the pattern | Drop box to the AI reading (`?ask=better`), example `AiReport` |
+| `/tools/always-texting-first` | Always the one who starts: who starts, who replies how fast | Drop box with the numbers on the page (`TextingFirstNumbers`) |
+| `/tools/losing-interest` | Slower replies, longer silences: what changed, calmly | Drop box with the numbers on the page (`LosingInterestResult`) |
+| `/tools/what-to-reply` | A message to answer: help from the AI coach | Drop box to the AI reading, example coach exchange (`ReplyExample`) |
+
+The four situation pages (2026-11) sit in their own group at the top of the
+`/tools` hub (`situationTools` in `composables/useSiteNav.ts`). Each offers a
+saved chat through `LibraryOffer` (see [saved-chats.md](saved-chats.md)) and
+keeps its strings in its own namespace (`situationSameFight`,
+`situationTextingFirst`, `situationLosingInterest`, `situationWhatToReply`).
 
 All tools pages are indexable, carry per-locale SEO meta and JSON-LD, and are cross-linked via the `/tools` hub and breadcrumbs.
 

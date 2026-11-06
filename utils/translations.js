@@ -6,15 +6,105 @@ export const messages = {
       homeTitle: "WhatsAnalyze - The WhatsApp Chat Analyzer",
       homeDescription:
         "Most Popular WhatsApp Analyzer. Reveal chat statistics and export your chat as a PDF without uploading your data.",
-      exportGuideTitle: "WhatsAnalyze - How to Export your WhatsApp Chat",
+      exportGuideTitle:
+        "How to Export a WhatsApp Chat: iPhone, Android, Web & PDF",
       exportGuideDescription:
-        "Export your WhatsApp Chat. iOS tutorial and Android guide.",
-      pdfGuideTitle: "WhatsAnalyze - How to Export your WhatsApp Chat to PDF",
+        "Step by step: export any WhatsApp chat or group on iPhone, Android, WhatsApp Web, Windows or Mac, with or without media. Then turn it into a PDF or stats.",
+      pdfGuideTitle: "Export WhatsApp Chat to PDF – with Photos, Free Preview",
       pdfGuideDescription:
-        "Export your WhatsApp chat to PDF in seconds without sending chat data to a server.",
+        "Turn an exported WhatsApp chat into a PDF with every message, the photos and chat statistics. Made in your browser, nothing uploaded. Free preview.",
       signalTitle: "WhatsAnalyze - How to switch from WhatsApp to Signal",
       signalDescription:
         "Switch from WhatsApp to Signal, transfer group chats, and create backups.",
+    },
+    // Not `exportGuide`: Wrapped's messages have a block of that name, and
+    // i18n/i18n.config.js spreads them over these, which replaced this one.
+    exportGuidePage: {
+      heroCta: "Already exported? Open your chat",
+      checkedNote: "Steps checked against WhatsApp's Help Center on {date}",
+      phoneTitle: "Step by step on iPhone and Android",
+      explainerCta: "Got the file? Open it here",
+      computerLink: "On a computer? Steps for WhatsApp Web, Windows and Mac",
+      nextEyebrow: "Next step",
+      nextTitle: "Open your export right here",
+      nextText:
+        "Drop the .zip or .txt file below. It is read in your browser, not uploaded. Then pick what you want to see.",
+      cardOpen: "Open",
+      cardContinue: "Continue with this chat",
+      cardStatsTitle: "Chat statistics",
+      cardStatsText:
+        "Who writes the most, when you text, your top words and emojis. Free.",
+      cardAiTitle: "AI reading",
+      cardAiText:
+        "AI answers your question about the chat: who makes more effort, the vibe, recurring topics. On your device or anonymized in the cloud.",
+      cardPdfTitle: "Chat as PDF",
+      cardPdfText:
+        "The whole conversation as a printable PDF, with photos if you exported them. Free preview, full PDF {price} one-time.",
+      cardCourtTitle: "Court evidence PDF",
+      cardCourtText:
+        "Numbered lines, exact timestamps and a SHA-256 fingerprint, for lawyers and courts.",
+      ctaTitle: "Got your export? Open it here",
+      ctaButton: "Open my chat file",
+      ctaNote: "Read in your browser · .zip or .txt · Free statistics",
+    },
+    pdfPage: {
+      navLabel: "WhatsApp chat to PDF",
+      heroTitle: "Export a WhatsApp chat to PDF",
+      heroSubtitle:
+        "Every message, the photos and your chat statistics in one PDF to print, keep or send. Made in your browser from your chat export, nothing uploaded.",
+      heroCta: "Make my PDF",
+      heroNote: "Free preview · Full PDF {price} once · No account",
+      exampleAlt: "Pages of a PDF made from an example WhatsApp chat",
+      uploadTitle: "Drop your export, get the PDF",
+      uploadText:
+        "Open the .zip or .txt file WhatsApp gave you. It is read in your browser, not uploaded.",
+      createButton: "Create my PDF",
+      guideLink: "No export yet? How to export a WhatsApp chat",
+      contentsEyebrow: "What's inside",
+      contentsTitle: "More than a printout of the chat",
+      card1Title: "The whole conversation",
+      card1Text:
+        "Every message with its sender, date and time, in order, and the photos next to them if you exported with media.",
+      card2Title: "Your chat in numbers",
+      card2Text:
+        "A cover with your first and last message, days, messages and people, then charts: timeline, by hour, by person, by month and by weekday.",
+      card3Title: "Fun facts about each person",
+      card3Text:
+        "Words written, longest message, vocabulary, favourite emojis and average message length.",
+      stepsTitle: "Three steps",
+      step1Title: "Export the chat",
+      step1Text:
+        "In WhatsApp, open the chat and choose Export chat. Include media if the PDF should show the photos.",
+      step2Title: "Drop it here",
+      step2Text:
+        "The .zip or .txt opens in your browser, and nothing is uploaded.",
+      step3Title: "Download the PDF",
+      step3Text:
+        "The preview with the first 100 messages is free. The whole chat is {price}, once.",
+      courtEyebrow: "For lawyers and courts",
+      courtTitle: "Need the chat as evidence?",
+      courtText:
+        "The court evidence PDF is a plain black-and-white transcript: numbered lines, exact timestamps, a SHA-256 fingerprint of your export and an exhibit list.",
+      courtButton: "Court evidence PDF",
+      faqTitle: "Questions about the PDF",
+      faq1Q: "Can WhatsApp export a chat as a PDF?",
+      faq1A:
+        "No. WhatsApp exports a chat as a .zip or .txt file. WhatsAnalyze turns that file into a PDF, right in your browser.",
+      faq2Q: "Is it free?",
+      faq2A:
+        "The preview with the first 100 messages is free. The full PDF of the whole chat costs {price} once, and Pro subscribers download as many as they like.",
+      faq3Q: "Is my chat uploaded anywhere?",
+      faq3A:
+        "No. The file is read and the PDF is built in your browser. Paying for the full PDF goes through Stripe, and your chat is not part of it.",
+      faq4Q: "Are photos included?",
+      faq4A:
+        "Yes, if you export the chat with media: the photos appear in the PDF next to their messages. Without media you get a PDF of the text.",
+      faq5Q: "Does it work for group chats and on iPhone?",
+      faq5A:
+        "Yes. Any one-on-one or group chat works, exported from iPhone, Android, WhatsApp Web, Windows or Mac.",
+      ctaTitle: "Your chat, as a PDF",
+      ctaButton: "Make my PDF",
+      ctaNote: "Free preview · Made in your browser",
     },
     subscribePage: {
       title: "One Subscription. Everything Unlocked.",
@@ -73,7 +163,7 @@ export const messages = {
       mediaNotLoaded:
         "Your media files are not loaded: the chat was restored from this browser session, which keeps only the messages. Drop the .zip export again so the exhibit index can include and hash them.",
       seoTitle:
-        "WhatsApp Chat as Court Evidence – Clean PDF Export | WhatsAnalyze",
+        "WhatsApp Chat as Court Evidence – Clean PDF Export – WhatsAnalyze",
       seoDescription:
         "Turn a WhatsApp chat into a clean, chronological PDF with every message and timestamp. Processed 100% in your browser — no upload, no account.",
       heroEyebrow: "Court-ready chat export",
@@ -181,7 +271,7 @@ export const messages = {
         "Anna and Ben keep each other up to date all day, mixing weekend plans with running jokes. The tone is warm and teasing, with quick make-ups after small disagreements.",
       navLabel: "What Brandon Thinks alternative",
       seoTitle:
-        "Free What Brandon Thinks Alternative – Private AI Chat Analysis | WhatsAnalyze",
+        "Free What Brandon Thinks Alternative – Private AI Chat Analysis – WhatsAnalyze",
       seoDescription:
         "Looking for a free What Brandon Thinks alternative? WhatsAnalyze analyzes your WhatsApp chat with AI that runs on your own device — free, no account, and your chat is never uploaded.",
       heroTitle:
@@ -224,9 +314,9 @@ export const messages = {
       pillar2Title: "Anonymized for the cloud",
       pillar2Text:
         'If you pick the cloud AI, names become "Person A" and "Person B" and phone numbers, emails and links are removed first. Names are restored only on your device.',
-      pillar3Title: "Nothing kept",
+      pillar3Title: "Kept on your device only",
       pillar3Text:
-        "We don't store your chat and don't train models on it. There is nothing to delete because nothing was saved.",
+        "Your chat is saved in your browser so you can come back to it, never on our servers, and we don't train models on it. Forget it with one tap whenever you like.",
       faqTitle: "Questions about switching",
       faq1Q: "Is there a free version of What Brandon Thinks?",
       faq1A:
@@ -329,6 +419,10 @@ export const messages = {
       ctaNote: "Free preview · 100% private",
       disclaimer:
         "WhatsAnalyze is not an immigration adviser or law firm. Requirements vary by country and case — always confirm them with your lawyer or the relevant authority.",
+    },
+    // The closing slide of /wrapped/results, leading on to the AI analyzer.
+    wrappedAiTeaser: {
+      text: "Pick a question, then add the same chat export on the next page.",
     },
     wrapped: {
       heroTitle: "WhatsApp Wrapped {currentYear}",
@@ -479,7 +573,7 @@ export const messages = {
     faqWhatsapp: "FAQs about WhatsApp chats",
     privacyFAQTitle: "Is My Chat Data Really Private?",
     privacyFAQContent:
-      "Yes, absolutely. All chat processing occurs locally in your browser. No data is ever sent to a server. You can even inspect the open-source code on GitHub to verify.",
+      "Yes. The statistics are worked out in your browser, and your chat is saved on this device only, so you can come back to it. It is never stored on our servers. Only two things ever leave your device, and only when you choose them: the cloud AI receives an anonymized excerpt (names replaced, phone numbers, emails and links removed), and a share link stores an encrypted copy of the results, never the chat itself. You can forget saved chats at any time, and inspect the open-source code on GitHub.",
     howToExport: "How to export your WhatsApp chat",
     howToExportLong:
       "          Everyone can easily export his WhatsApp chat or group chat. Open\n          WhatsApp on the device you are currently logged in with > Tap on the\n          chat > Go to the chats settings > Scroll down and tap on Export chat >\n          Choose to export with or without media.",
@@ -665,11 +759,14 @@ export const messages = {
       busiestDay: "📅 The busiest WhatsApp day of the year: New Year's Eve.",
     },
     toolsHub: {
+      supportTitle: "This sounds serious. You don't have to handle it alone.",
+      supportText:
+        "If you or someone else is in danger, call your local emergency number now. For free, confidential support from a trained person, find a helpline in your country at findahelpline.com.",
       headerTools: "Tools",
-      seoTitle: "WhatsApp Tools & Utilities Suite | WhatsAnalyze",
+      seoTitle: "WhatsApp Tools & Utilities Suite – WhatsAnalyze",
       seoDescription:
         "Explore individual, fast, and 100% private WhatsApp chat tools. From inactivity tracking and message counting to response latencies — processed entirely in your browser.",
-      ogTitle: "WhatsApp Tools & Utilities Suite | WhatsAnalyze",
+      ogTitle: "WhatsApp Tools & Utilities Suite – WhatsAnalyze",
       ogDescription:
         "Single-purpose, fast WhatsApp tools. Check who texted last, count messages, and inspect silence gaps without uploading data.",
       heroEyebrow: "WhatsApp Tools & Utilities",
@@ -747,6 +844,15 @@ export const messages = {
       courtGroupTitle: "Official Documentation & Legal Proof",
       courtGroupDesc:
         "Court-admissible PDF transcripts and verified relationship timelines formatted for legal proceedings and immigration petitions.",
+      situationsGroupTitle: "Understand What's Going On",
+      toolSameFightText:
+        "See what keeps coming back in your arguments, and get ideas to talk differently.",
+      toolTextingFirstText:
+        "Who starts your conversations, and how fast each of you replies.",
+      toolLosingInterestText:
+        "Reply times, the longest silences and where things stand, laid out calmly.",
+      toolWhatToReplyText:
+        "Turn your draft into a calmer, clearer reply that still sounds like you.",
     },
     homeLanding: {
       wrappedButton: "See Your Story",
@@ -773,21 +879,89 @@ export const messages = {
       localEngine: "LOCAL CLIENT ENGINE",
       zeroCloud: "ZERO CLOUD TRANSMISSION",
       private: "100% PRIVATE",
+      aiCloud: "CLOUD AI: ANONYMIZED ONLY",
+      aiTraining: "NOT USED FOR TRAINING",
       dropTitle: "Drop your WhatsApp chat export here",
       dropSubtitle: "Accepts exported .txt or .zip chat files",
       selectFile: "Select Chat File",
       trySample: "Try With Sample Chat",
+      sampleFailed:
+        "Couldn't load the sample chat. Check your connection and try again.",
       analyzingTitle: "Analyzing Conversation Gaps...",
       analyzingSubtitle:
         "Computing timestamps, response latencies, and participant inactivity",
       switchFile: "Switch File",
       messagesAnalyzedIn: "{count} messages • analyzed in {time}ms",
-      messagesRestored: "{count} messages • restored from this session",
+      messagesRestored: "{count} messages • no new upload needed",
       dismiss: "Dismiss",
+    },
+    library: {
+      saved: "Saved on this device",
+      dontKeep: "Don't keep",
+      notKept: "Not kept on this device",
+      keep: "Keep it",
+      notKeptUnavailable:
+        "This browser doesn't allow it here, in a private window for example. The chat stays open until you close this tab.",
+      notKeptFull:
+        "This device's storage is full. The chat stays open until you close this tab.",
+      panelOpen: "What's kept on this device",
+      yourChats: "Your chats",
+      open: "Open",
+      continueIn: "Continue in {tool}",
+      forget: "Forget",
+      forgetConfirm: "Forget “{name}” on this device?",
+      cancel: "Cancel",
+      showAll: "Show all ({count})",
+      peopleMore: "{names} and {count} more",
+      openedAgo: "opened {time}",
+      useSaved: "Use a saved chat",
+      useAnother: "Use another saved chat",
+      runOnChat: "Run this on your chat with {name}",
+      runOnGroup: "Run this on {name}",
+      offerNote: "Saved on this device · no new upload",
+      headerButton: "Your chats on this device",
+      panelTitle: "Saved on this device",
+      panelIntro:
+        "Your chats are kept in this browser so you can come back to them without uploading again. They never leave this device and are never stored on our servers.",
+      panelShared:
+        "Anyone who uses this browser can open them. On a shared device, forget them when you're done.",
+      forgetThis: "Forget this chat",
+      storageTitle: "Storage",
+      storageChats: "Your saved chats take up {size}.",
+      storageSite:
+        "Everything this site keeps here: {used} of {quota} available.",
+      persisted: "This browser keeps them reliably.",
+      notPersisted:
+        "This browser may clear them when it runs low on space, or after weeks without a visit.",
+      persistButton: "Ask the browser to keep them",
+      persistDenied:
+        "The browser decided not to. A backup file is the copy that is always safe.",
+      iosHint:
+        "On iPhone and iPad, Safari clears a site's data after a few weeks without a visit. To keep your chats, add WhatsAnalyze to your Home Screen: tap Share, then “Add to Home Screen”.",
+      backupTitle: "Backup",
+      backupText:
+        "Download all your saved chats as one file. To restore them, drop the file on this panel or on any upload box.",
+      backupDownload: "Download backup",
+      backupRestore: "Restore a backup",
+      backupDownloaded: "Chats in the backup: {count}",
+      backupRestored: "Chats restored from the backup: {count}",
+      backupInvalid: "This file isn't a WhatsAnalyze backup.",
+      forgetTitle: "Forgetting",
+      autoForget: "Forget chats not opened in 90 days",
+      autoForgetText:
+        "Checked each time you come back. A browser can't delete anything while the site is closed.",
+      forgetAll: "Forget everything",
+      forgetAllConfirm:
+        "Forget every saved chat, reading and conversation on this device? This can't be undone.",
+      readingsTitle: "Earlier readings",
+      readingGeneral: "General reading",
+      ranLocal: "On this device",
+      ranCloud: "Cloud",
+      ranPreview: "Cloud preview",
     },
     askAiCard: {
       title: "Ask AI about this chat",
-      text: "Go beyond the numbers: let AI read this chat and answer your question — privately on your device, no new upload.",
+      text: "Go beyond the numbers: let AI read this chat and answer your question. It's anonymized on your device first, with no new upload.",
       button: "Ask AI",
     },
     toolsAi: {
@@ -832,7 +1006,7 @@ export const messages = {
       dataContinue: "Download anyway",
       dataCancel: "Wait for Wi-Fi",
       seoTitle:
-        "Private AI WhatsApp Chat Analyzer – Free, On Your Device | WhatsAnalyze",
+        "Private AI WhatsApp Chat Analyzer – Free, On Your Device – WhatsAnalyze",
       seoDescription:
         "Private AI chat analysis that never leaves your device: a free AI runs in your browser and reads your WhatsApp chat — personalities, relationship dynamics, recurring topics, best moments. No upload, no account. Cloud AI with anonymized excerpts for deeper insights.",
       ogTitle: "AI WhatsApp Chat Analyzer",
@@ -843,38 +1017,46 @@ export const messages = {
       heroSubtitle:
         "Upload your exported chat and let AI describe your conversation: the vibe, each person's role and style, how you interact, your recurring topics and best moments.",
       heroNote:
-        "Free on-device AI: your chat never leaves your device · Or anonymized cloud AI for subscribers",
-      chooseEyebrow: "Step 2 · Choose your AI",
-      chooseTitle: "Where should the AI run?",
+        "Anonymized on your device before any AI sees it · Free preview, no account · Or keep it all on your device",
+      chooseEyebrow: "Step 2 · Your AI report",
+      chooseTitle: "Let the AI read your chat",
       chooseText:
-        "Both read anonymized excerpts of your chat and produce the same kind of report. They differ in privacy, quality and what your device needs.",
-      localTitle: "On your device",
-      localTag: "MAXIMUM PRIVACY · FREE",
+        "Your browser anonymizes the chat before anything is sent. The cloud AI works on any phone and gives the deepest answers. Prefer that nothing leaves your device? Run it on this device instead.",
+      localTitle: "Run on this device instead",
+      localTag: "MAXIMUM PRIVACY · WORKS OFFLINE",
       localPro1: "Nothing leaves your device — not even anonymized",
       localPro2: "Free, no account needed",
       localPro3: "Works offline once the model is downloaded",
-      localCon1: "One-time download of about {gb} GB",
-      localCon2: "Needs a recent phone or computer and can take a few minutes",
+      localCon1: "A large one-time download: about {gb} GB",
+      localCon2:
+        "Needs a recent phone or computer, and may not work on every device",
       localCon3:
         "Small model: simpler insights, and a long chat is read in parts, which takes a few minutes",
       localButton: "Analyze on this device",
       localUnsupported:
         "Your browser doesn't support WebGPU, which the on-device AI needs. Try the latest Chrome, Edge or Safari, or use the cloud AI.",
-      cloudTitle: "In the cloud",
-      cloudTag: "BEST QUALITY · SUBSCRIBERS",
+      cloudTitle: "Anonymized cloud AI",
+      cloudTag: "RECOMMENDED · BEST QUALITY",
+      cloudTagPreview: "RECOMMENDED · FREE PREVIEW",
       cloudPro1:
-        "A state-of-the-art AI model: much deeper, more accurate insights",
+        "Anonymized on your device first: everyone in the chat becomes “Person A”, “Person B”…, and phone numbers, emails, links and IBANs are removed before anything is sent",
       cloudPro2:
-        "Reads up to about 10,000 messages in one go — all of most chats",
+        "A state-of-the-art AI model: much deeper, more accurate insights",
       cloudPro3: "Works on any phone, ready in about 30 seconds",
+      cloudPro4:
+        "Reads up to about 10,000 messages in one go — all of most chats",
+      cloudPro4Preview:
+        "Free, no account needed: the summary, the answer to your question and a first look at each section",
       cloudCon1:
-        "Anonymized excerpts are sent to our AI provider (Anthropic or OpenAI) for processing",
-      cloudCon2: "Included in the WhatsAnalyze subscription",
-      cloudButton: "Analyze in the cloud",
-      cloudSubscribe: "Subscribe to unlock cloud AI",
-      cloudPreviewButton: "Try a free cloud preview",
+        "The anonymized excerpts leave your device: our AI provider (Anthropic or OpenAI) processes them",
+      cloudCon2: "The full report is part of the WhatsAnalyze subscription",
+      cloudButton: "Get my AI report",
+      cloudSubscribe: "Subscribe for the full report",
+      cloudPreviewButton: "Get my free AI preview",
       error_preview_used:
         "You've used today's free preview. Subscribe for the full report, or try again tomorrow.",
+      fallbackLocal:
+        "No need to wait: run it on this device instead. It's free, and nothing leaves your device.",
       lockedTitle: "The full report has more",
       lockedButton: "Unlock the full report",
       cloudConsent:
@@ -884,7 +1066,7 @@ export const messages = {
         "This is everything that is sent. Real names are swapped back in on your device once the answer arrives.",
       progressLocal: "The AI is reading your chat on your device…",
       progressCloud:
-        "The AI is reading your chat… this takes about 15 seconds.",
+        "The AI is reading your chat… this takes about 20 seconds.",
       error_local:
         "The on-device AI couldn't run. Try again, or use the cloud AI.",
       error_local_unsupported:
@@ -901,6 +1083,23 @@ export const messages = {
         "The on-device AI got confused by this chat. Try again, or use the cloud AI for better results.",
       error_no_messages:
         "We couldn't find any text messages to analyze in this chat.",
+      error_local_gpu:
+        "Your graphics driver wouldn't start the on-device AI. Restarting the browser often helps, or use the cloud AI.",
+      error_local_network:
+        "The connection dropped while downloading the AI model. Check your connection and try again: the download continues where it stopped. Or use the cloud AI.",
+      error_local_storage:
+        "There isn't enough free storage on this device for the AI model. Free up some space and try again, or use the cloud AI.",
+      error_preview_cap:
+        "All of today's free cloud previews have been used. Subscribe for the full report, or try again tomorrow.",
+      localUnsupportedGpu:
+        "Your graphics driver wouldn't start the on-device AI. Restarting the browser can help; the cloud AI works right away.",
+      localUnsupportedStorage:
+        "The on-device AI needs about {gb} GB of free storage, and this device doesn't have that right now. Free up space, or use the cloud AI.",
+      fallbackPreview: "Try the free cloud preview instead",
+      fallbackCloud: "Analyze in the cloud instead",
+      dataUseCloud: "Use the cloud AI instead",
+      progressRetry:
+        "The connection dropped. Picking up the download where it stopped…",
       reportCloud: "ANALYZED BY CLOUD AI",
       reportLocal: "ANALYZED ON YOUR DEVICE",
       reportTitle: "What the AI sees in your chat",
@@ -923,6 +1122,34 @@ export const messages = {
       coachNoteLocal:
         "Runs on your device and remembers the last few messages.",
       coachNoteCloud: "Each message uses one of today's cloud analyses.",
+      coachNoteFree:
+        "Free preview: a few cloud replies a day. Pro gives you more.",
+      coachNoteFreeLeft:
+        "{n} free cloud replies left today. Pro gives you more.",
+      coachPickMe:
+        "Pick which one is you at the top, so the reply is written from your side.",
+      sampleButton: "Show the AI reading",
+      sampleNote:
+        "Sample chat: its AI readings were made in advance, so this is free and your free preview stays for your own chat.",
+      sampleCustom:
+        "Your own question needs your own chat. With the sample, pick one of the questions above.",
+      progressSample: "The AI is reading the sample chat…",
+      sampleReport:
+        "This is the sample chat's full reading, prepared in advance.",
+      sampleOwnChat: "Try it with my own chat",
+      sampleYoursTitle: "Your turn: what would your chat say?",
+      sampleYoursText:
+        "Export your chat from WhatsApp in a few taps and pick the file. Your first reading is a free preview, ready in about 20 seconds, and the chat is anonymized on your device before any AI sees it.",
+      sampleYoursButton: "Choose my chat file",
+      sampleYoursGuide: "No export yet? Here's how",
+      coachSampleIntro: "Try one of these:",
+      coachSampleDraft: "Draft from {name}",
+      coachNoteSample:
+        "Sample chat: these answers were made in advance. With your own chat, you can ask anything.",
+      error_coach_free_used:
+        "You have used today's free replies. Come back tomorrow, or get Pro for more replies each day.",
+      error_coach_local_unchanged:
+        "On this device the AI couldn't rewrite this draft. Try saying a little more about what you want to get across, or use the cloud coach.",
       coachSupportTitle:
         "This sounds serious. You don't have to handle it alone.",
       coachSupportText:
@@ -955,7 +1182,7 @@ export const messages = {
       faqTitle: "Frequently asked questions",
       faq1Q: "Is there a free AI WhatsApp chat analyzer?",
       faq1A:
-        "Yes. The on-device mode is free and needs no account: a small AI model downloads once into your browser and analyzes the chat locally. The cloud mode, with a much stronger model, is part of the WhatsAnalyze subscription.",
+        "Yes. The cloud AI gives you a free preview without an account: the summary, the answer to your question and a first look at each section. The full cloud report is part of the WhatsAnalyze subscription. The on-device mode is free in full and needs no account: a small AI model downloads once into your browser and analyzes the chat locally, on devices that can run it.",
       faq2Q: "Is my chat uploaded when I use AI?",
       faq2A:
         "With on-device AI, nothing is uploaded at all. With cloud AI, only anonymized excerpts are sent: your browser replaces names with placeholders and removes phone numbers, emails and links first, and you can see exactly what is sent before you start. We don't store it, and our AI provider doesn't use it for training.",
@@ -977,7 +1204,7 @@ export const messages = {
       breadcrumbTools: "Tools",
       breadcrumbCurrent: "Inactivity Tracker",
       seoTitle:
-        "Who Texted Last? WhatsApp Inactivity & Gap Tracker | WhatsAnalyze",
+        "Who Texted Last? WhatsApp Inactivity & Gap Tracker – WhatsAnalyze",
       seoDescription:
         "Free WhatsApp inactivity checker. Find out who sent the last message, calculate chat silence duration, detect ghosting, and analyze reply latency 100% privately in your browser.",
       ogTitle: "Who Texted Last? WhatsApp Inactivity & Gap Tracker",
@@ -1013,7 +1240,7 @@ export const messages = {
       colParticipant: "Participant",
       colMessages: "Messages",
       colShare: "Share",
-      colMedianReply: "Median Reply",
+      colAverageReply: "Average Reply",
       colLastActive: "Last Active",
       colLastMessage: "Last Message",
       gapsTitle: "Longest Silence Periods (Chat Gaps)",
@@ -1082,12 +1309,132 @@ export const messages = {
       hookCard4Text:
         "Turn your chat into an Instagram-story style retrospective to share with friends.",
     },
+    situationSameFight: {
+      navLabel: "Same fight again?",
+      seoTitle: "Same Fight Over and Over? Understand Your WhatsApp Chat",
+      seoDescription:
+        "Why do we keep having the same fight? Let AI read your WhatsApp chat, point to the moments that repeat and suggest how to talk differently. No blame, no verdicts, free on your device.",
+      ogTitle: "Why do we keep having the same fight?",
+      ogDescription:
+        "Let AI read your WhatsApp chat and show the pattern behind the argument you keep having, without deciding who's right.",
+      heroEyebrow: "Fighting over text?",
+      heroTitle: "Why do we keep having the same fight?",
+      heroSubtitle:
+        "Drop in your WhatsApp chat and the AI answers one question: how could we communicate better? It points to moments from your own messages and suggests what you could both try, without deciding who's right.",
+      heroNote:
+        "Free on your device · No account · The cloud AI only ever sees anonymized excerpts",
+      continueButton: "Continue with this chat",
+      exportGuide: "How do I export a WhatsApp chat?",
+      showEyebrow: "What your chat can show",
+      showTitle: "You remember how it felt. Your chat remembers how it went.",
+      showText:
+        "When you wrote, who wrote first, how long the replies took: these are things WhatsAnalyze really reads and counts in your export.",
+      show1Title: "A reading of how you talk",
+      show1Text:
+        "The AI answers “How could we communicate better?” in a few sentences, pointing to moments from your chat and suggesting what each of you could try.",
+      show2Title: "When you write to each other",
+      show2Text:
+        "A 24-hour heatmap of your chat, and how much of each person's writing happens at night. If your hardest conversations happen late, you'll see how much of your chat runs then.",
+      show2Link: "Open the heatmap",
+      show3Title: "Who starts the conversations",
+      show3Text:
+        "After six hours or more of quiet, who writes first? Counted for each of you, as a share of all your conversations.",
+      show3Link: "See who starts",
+      show4Title: "How quickly you reply",
+      show4Text:
+        "How long each of you takes to reply on average, and who tends to answer faster.",
+      show4Link: "See reply times",
+      show5Title: "The longest silences",
+      show5Text:
+        "The three longest quiet stretches in your chat, when they happened and who wrote first afterwards.",
+      show5Link: "See the silences",
+      show6Title: "Help with the next message",
+      show6Text:
+        "After a full reading, ask follow-up questions about your chat, or paste a message you're about to send and get a calmer, clearer version in your own voice.",
+      exampleEyebrow: "An example",
+      exampleTitle: "What a reading can look like",
+      exampleText:
+        "Made up for this page so you can see the shape of it: the AI names a pattern, points to moments and suggests a next step for both of you.",
+      exampleBadge: "Example · Nora and Tom are fictional",
+      exampleVibe: "Close, with one recurring snag",
+      exampleSummary:
+        "Nora and Tom write to each other all day, mostly about plans, dinner and friends. The tone is warm and teasing, with one tension that keeps coming back: last-minute changes of plan. It usually settles by the next morning.",
+      exampleAnswer:
+        "Your disagreements tend to start the same way: a plan changes late in the day, one of you hears about it by text, and the replies get shorter from there. Nora usually asks a direct question and Tom answers with a joke, which each of you seems to read differently. The exchanges that settle quickly are the ones where someone says how it felt (“I was looking forward to tonight”) rather than what went wrong. You could agree to settle plans earlier in the day, and when a thread starts repeating itself, suggest a call instead.",
+      exampleDynamic1Title: "Evenings run hot",
+      exampleDynamic1Text:
+        "The back-and-forth that goes in circles mostly happens after 11 pm, when you both reply in short bursts.",
+      exampleDynamic2Title: "Both of you reach back out",
+      exampleDynamic2Text:
+        "After a quiet day, Tom usually writes first with a joke, and Nora picks it up with a question about his day.",
+      exampleDraft: "Forget it. You always do this.",
+      exampleRewrite:
+        "I was really looking forward to tonight, so I'm disappointed. Can we pick another evening this week?",
+      exampleWhy:
+        "Why: “You always” tends to restart the same argument in this chat. Saying how you feel and offering a next step gives Tom something to answer.",
+      limitsEyebrow: "Honest limits",
+      limitsTitle: "What it can and can't tell you",
+      limit1Title: "Patterns, not verdicts",
+      limit1Text:
+        "The AI points to moments and suggests what to try. It doesn't decide who's right or who's to blame, and it isn't therapy or professional advice.",
+      limit2Title: "Only what's in the chat",
+      limit2Text:
+        "Calls, tone of voice and what happened in person aren't in an export, and AI can misread irony or context. Take it as one perspective and check it against what you know.",
+      limit3Title: "A short chat says little",
+      limit3Text:
+        "A few dozen messages or one bad week isn't a pattern. The more history your export covers, the more there is to go on. When there isn't enough, the AI is asked to say so.",
+      privacyEyebrow: "Private by default",
+      privacyTitle: "Their messages are in there too",
+      privacyText:
+        "A chat holds the other person's words as well as yours, so here is exactly where it goes.",
+      privacy1Title: "Saved on this device only",
+      privacy1Text:
+        "By default your chat is kept in this browser, on this device, so you can come back to it. You can choose not to keep it, or forget it whenever you like.",
+      privacy2Title: "Stats and on-device AI stay here",
+      privacy2Text:
+        "The statistics and the on-device AI run in your browser. Nothing they read leaves your device.",
+      privacy3Title: "Anonymized for the cloud",
+      privacy3Text:
+        "If you choose the cloud AI, the free preview included, only anonymized excerpts are sent: names replaced; phone numbers, emails, links and IBANs removed. The AI provider doesn't train on them.",
+      supportEyebrow: "When it's more than an argument",
+      supportTitle: "If arguments leave you afraid",
+      supportText:
+        "If someone threatens you, controls you or makes you feel unsafe, a chat analysis isn't the help you need, and you don't have to deal with it alone. When a chat or a message points to abuse, threats or self-harm, the AI coach is built to stop and point you to support instead.",
+      supportLink: "Find a helpline in your country",
+      faqTitle: "Frequently asked questions",
+      faq1Q: "Why do we keep having the same fight?",
+      faq1A:
+        "Often the topic changes but the way it unfolds doesn't: the same kind of moment sets it off, and each of you answers the way you did last time. This page can't tell you why for certain, but your chat can show when it tends to happen and how the messages go, which gives you something concrete to talk about together.",
+      faq2Q: "Will it tell me who's right?",
+      faq2A:
+        "No. It's built to show the pattern, not to pick a winner. The AI is asked how you could communicate better, and it answers with moments from your chat and ideas for both of you. It doesn't judge anyone, and it can misread context.",
+      faq3Q: "Can it help me write the next message?",
+      faq3A:
+        "Yes. Below a reading, “Help me reply” takes a message you're about to send and suggests a calmer, clearer version that keeps what you mean, with a short note on what changed. You decide what to send. After an on-device reading it runs on your device for free; after the free cloud preview you get a few free replies a day, and Pro gives you more.",
+      faq4Q: "Is it free?",
+      faq4A:
+        "The statistics and the on-device AI reading are free, with no account, and so are the follow-up questions after an on-device reading. Without a subscription you can also try a short free cloud preview, with a few free coach replies a day. The full cloud reading and more cloud replies each day are part of Pro ({price}/month).",
+      faq5Q: "Is my chat uploaded?",
+      faq5A:
+        "Not for the statistics or the on-device AI: they run in your browser, and nothing they read leaves your device. By default the chat is saved in this browser so you can come back to it; you can choose not to keep it, or forget it at any time. If you choose the cloud AI, only anonymized excerpts are sent (names replaced; phone numbers, emails, links and IBANs removed), and our AI provider doesn't train on them. You can see exactly what would be sent before you start.",
+      faq6Q: "Does it work for fights with friends or family too?",
+      faq6A:
+        "Yes. Any WhatsApp chat you export works, whether it's with a partner, a friend, a parent or a sibling, and group chats too. The AI describes how the people in it talk to each other, whoever they are.",
+      faq7Q: "How much chat does it need?",
+      faq7A:
+        "The more history, the better. A few dozen messages or a single rough week won't show a pattern. Export the whole chat without media; a long chat is fine.",
+      ctaTitle: "See the pattern, then talk about it together",
+      ctaButton: "Read my chat",
+      ctaNote: "Free on your device · No account · No verdicts",
+      disclaimer:
+        "WhatsAnalyze is independent and not affiliated with WhatsApp or Meta. An AI reading is one perspective to reflect on, not therapy or professional advice.",
+    },
     pageNameInactivity: "WhatsApp Inactivity & Last Message Tracker",
     toolsMessageCounter: {
-      seoTitle: "WhatsApp Message & Line Counter | WhatsAnalyze",
+      seoTitle: "WhatsApp Message & Line Counter – WhatsAnalyze",
       seoDescription:
         "Count total messages, lines, and characters in your WhatsApp chat. Inspect speech shares and busiest chat days 100% privately in your browser.",
-      ogTitle: "WhatsApp Message & Line Counter | WhatsAnalyze",
+      ogTitle: "WhatsApp Message & Line Counter – WhatsAnalyze",
       ogDescription:
         "Fast, 100% private WhatsApp message and line counter. Discover who texts more and your all-time busiest chat days.",
       heroEyebrow: "Free WhatsApp Tool",
@@ -1152,11 +1499,133 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze is an independent open-source project and is not affiliated with, endorsed by, or sponsored by WhatsApp or Meta.",
     },
+    situationTextingFirst: {
+      navLabel: "Always texting first?",
+      seoTitle: "Always Texting First? See Who Starts Your WhatsApp Chats",
+      seoDescription:
+        "Am I always the one texting first? See who starts your WhatsApp conversations and how fast each of you replies, side by side. Free, and counted on your device.",
+      heroEyebrow: "Who starts the conversation",
+      heroTitle: "Always the one texting first?",
+      heroSubtitle:
+        "When it feels like every conversation starts with you, your chat can show how it really goes: who starts, and how quickly each of you replies. Side by side, counted on your device.",
+      heroNote: "Free · No account · The numbers never leave your device",
+      offerLabel: "Ask who puts in more effort in your chat with {name}",
+      resultsEyebrow: "Your chat in numbers",
+      resultsTitle: "Who starts, and how fast each of you replies",
+      resultsText:
+        "Read the two together. Starting fewer conversations but replying within minutes is effort too.",
+      resultsFew:
+        "Conversations so far: {count}. That's too few to read much into yet.",
+      resultsHow:
+        "A conversation counts as started by whoever writes first after at least six hours of quiet. Reply time is the average time each person takes to answer someone else, counting answers within a day.",
+      numbersStarted: "of conversations started",
+      numbersStartedOf: "{count} of {total} conversations",
+      numbersReply: "Average reply",
+      numbersNoReplies: "No replies yet",
+      numbersLast: "Last message",
+      numbersMessages: "Messages",
+      numbersMore: "Others in this chat: {count}",
+      nextTitle: "Want more than the timestamps?",
+      nextText:
+        "The AI can read the messages themselves and answer “Who puts more effort into this chat?” Your chat is already open, so there's nothing to upload again.",
+      nextButton: "Ask who puts in more effort",
+      nextNote:
+        "Free on your device, or as a free cloud preview that sends only anonymized excerpts.",
+      showEyebrow: "What your chat can show",
+      showTitle: "The numbers behind the feeling",
+      showText:
+        "All of it is counted from your exported chat, in your browser.",
+      show1Title: "Who starts conversations",
+      show1Text:
+        "Each person's share of the conversations and how many they started. A new conversation begins after six hours of quiet.",
+      show2Title: "How fast each of you replies",
+      show2Text:
+        "Each person's average reply time, right next to their share, so starting less and answering quickly both show.",
+      show3Title: "Who wrote last, and when",
+      show3Text:
+        "When each of you last sent a message, and how many messages each of you has written.",
+      show4Title: "What the messages say",
+      show4Text:
+        "If you want more, the AI reads the chat itself and answers “Who puts more effort into this chat?” in plain words.",
+      exampleEyebrow: "An example",
+      exampleTitle: "Mia starts more. Leo replies faster.",
+      exampleText:
+        "Two made-up people, to show how to read the numbers. Mia starts about two thirds of their conversations; Leo usually answers within minutes. Neither number says who cares more.",
+      exampleCaption: "Example · Mia and Leo are made up",
+      exampleVibe: "Easy, everyday back-and-forth",
+      exampleSummary:
+        "Mia and Leo write most days: weekend plans, stories from work and a running joke about Leo's houseplants.",
+      exampleAnswer:
+        "Both, in different ways. Mia opens most conversations, often with a plan or a question about Leo's day. Leo starts fewer, but answers within minutes and asks the follow-up questions that keep a conversation going. If Mia would like Leo to reach out first more often, that's worth saying. The chat can't settle it for them.",
+      limitsEyebrow: "Honest limits",
+      limitsTitle: "Who texts first isn't the whole story",
+      limitsText:
+        "The numbers show a pattern in one chat. They can't measure how much someone cares, and they can't tell you whether a friendship or relationship is one-sided.",
+      limit1Title: "People have different styles",
+      limit1Text:
+        "Some people plan and reach out. Others rarely start but reply quickly and warmly. Both are part of keeping in touch.",
+      limit2Title: "Life happens outside the chat",
+      limit2Text:
+        "Work hours, time zones, calls and time spent together don't show up in a WhatsApp export.",
+      limit3Title: "Patterns, not verdicts",
+      limit3Text:
+        "A share of 70% describes what happened in this chat. What it means is yours to decide, and maybe to talk about.",
+      limit4Title: "A short chat says little",
+      limit4Text:
+        "A few weeks or a few dozen conversations can tip either way. The longer the chat, the more the numbers mean.",
+      supportTitle: "When it's about more than a chat",
+      privacyEyebrow: "Private by design",
+      privacyTitle: "Your chat stays yours",
+      privacy1Title: "Counted on your device",
+      privacy1Text:
+        "The numbers are worked out in your browser. Your chat isn't sent anywhere to count them.",
+      privacy2Title: "Saved here, if you like",
+      privacy2Text:
+        "By default your chat is saved only on this device, so you can come back without a new upload. Tap “Don't keep” to undo that, or forget it whenever you like.",
+      privacy3Title: "AI on your terms",
+      privacy3Text:
+        "With the on-device AI, your chat never leaves your device. The free cloud preview sends only anonymized excerpts (names replaced; phone numbers, emails, links and IBANs removed), and the AI provider doesn't train on them.",
+      stepsTitle: "How to check your chat",
+      step1Title: "Export the chat",
+      step1Text:
+        "In WhatsApp, open the chat, tap its name at the top, then “Export chat” and “Without media”.",
+      step2Title: "Drop it in",
+      step2Text:
+        "Drop the file into the box at the top of this page, or pick it. It's read in your browser.",
+      step3Title: "Read both numbers",
+      step3Text:
+        "Look at who starts and how fast each of you replies together. Ask the AI for the story behind them if you like.",
+      stepsGuide: "Detailed export guide for iPhone and Android",
+      faqTitle: "Frequently asked questions",
+      faq1Q: "How can I tell if I'm always the one texting first?",
+      faq1A:
+        "Export the WhatsApp chat and drop it into the box on this page. It counts who wrote first in each conversation and shows each person's share next to how quickly they reply. A new conversation starts whenever someone writes after at least six hours of quiet.",
+      faq2Q: "Does always texting first mean it's a one-sided friendship?",
+      faq2A:
+        "Not on its own. Some people like to start conversations, others are better at answering, and work, time zones and time spent together matter too. The numbers help you see a pattern. Whether it feels fair is something only the two of you can work out.",
+      faq3Q: "What counts as starting a conversation?",
+      faq3A:
+        "The first message of the chat, and every message sent after at least six hours without any messages. Reply time is the average time each person takes to answer someone else, counting answers within a day.",
+      faq4Q: "Is my chat uploaded?",
+      faq4A:
+        "Not for the numbers: they're counted in your browser. Your chat is saved only on this device by default, and you can undo that. If you ask the AI, the on-device AI keeps everything on your device, and the free cloud preview sends only anonymized excerpts (names replaced; phone numbers, emails, links and IBANs removed). The AI provider doesn't train on them.",
+      faq5Q: "Does it work with friends, family and group chats?",
+      faq5A:
+        "Yes, with any WhatsApp chat you can export. In a group, everyone gets their own share of conversations started and their own reply time.",
+      faq6Q: "Is it free?",
+      faq6A:
+        "The numbers on this page are free and need no account. The AI reading is free on your device, and the cloud AI has a free preview. The full cloud report is part of WhatsAnalyze Pro ({price}/month).",
+      ctaTitle: "See who starts the conversations in your chat",
+      ctaButton: "Check my chat",
+      ctaNote: "Free · No account · Counted on your device",
+      disclaimer:
+        "WhatsAnalyze shows patterns in a chat, not verdicts about people or relationships. It is an independent open-source project and is not affiliated with, endorsed by, or sponsored by WhatsApp or Meta.",
+    },
     toolsWordCounter: {
-      seoTitle: "WhatsApp Word & Vocabulary Counter | WhatsAnalyze",
+      seoTitle: "WhatsApp Word & Vocabulary Counter – WhatsAnalyze",
       seoDescription:
         "Discover total word counts, vocabulary richness, average message lengths, and top used words in your WhatsApp chats 100% privately in your browser.",
-      ogTitle: "WhatsApp Word & Vocabulary Counter | WhatsAnalyze",
+      ogTitle: "WhatsApp Word & Vocabulary Counter – WhatsAnalyze",
       ogDescription:
         "Analyze word counts, unique vocabulary, and most frequent words in your WhatsApp chats without uploading data.",
       heroEyebrow: "Free WhatsApp Tool",
@@ -1221,11 +1690,138 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze is an independent open-source project and is not affiliated with, endorsed by, or sponsored by WhatsApp or Meta.",
     },
+    situationLosingInterest: {
+      navLabel: "Are they losing interest?",
+      appName: "WhatsApp reply time and silence check",
+      seoTitle: "Losing Interest or Just Busy? Check Your WhatsApp Reply Times",
+      seoDescription:
+        "Replies getting slower? Texting less than before? See each person's average WhatsApp reply time, the longest silences and who writes first. Free and private, on your device.",
+      heroEyebrow: "Replies getting slower?",
+      heroTitle: "Are they losing interest?",
+      heroSubtitle:
+        "Slower replies, fewer messages, longer silences: it's easy to fear the worst. Your chat's own timestamps show what actually changed, and when, so you can look at it calmly before drawing conclusions.",
+      heroNote: "Free · No account · The numbers are worked out on your device",
+      offerLabel: "Ask the AI about your chat with {name}",
+      resultEyebrow: "Your chat",
+      resultTitle: "What your chat shows",
+      resultText:
+        "Counted on your device from when each message was sent. Patterns, not a verdict.",
+      resultNowLabel: "Where things stand",
+      resultNow: "The last message was {time}, from {name}.",
+      resultNowNote:
+        "Counted up to today. If you exported the chat a while ago, it will look quieter than it is.",
+      status_active: "There have been messages in the last two days.",
+      status_dormant:
+        "It's been quiet for a few days, which is common in a busy week.",
+      status_inactive: "It's been quiet for more than a week.",
+      status_ghosted: "It's been quiet for more than a month.",
+      resultPeopleTitle: "Person by person",
+      resultReply: "Average reply",
+      resultReplyNone: "Too few replies",
+      resultStarted: "Wrote first",
+      resultMessages: "Messages",
+      resultMorePeople: "And {count} more people in this group.",
+      resultPeopleNote:
+        "Average reply: how long someone takes to answer the other, counting only replies within a day. Wrote first: how often someone picked the chat back up after six hours or more of quiet.",
+      resultGapsTitle: "The longest quiet stretches",
+      resultGapEnded: "{name} wrote first afterwards",
+      resultSpan: "{count} messages over {days} days",
+      resultAiButton: "Ask the AI about this chat",
+      resultAiNote:
+        "It answers “Is there anything I should be worried about?” and asks which one is you first. You won't need to add the chat again.",
+      resultTimelineLink: "See your messages over time",
+      showEyebrow: "What your chat can show",
+      showTitle: "The facts behind the feeling",
+      showText:
+        "Everything here is counted from your export. Nothing is guessed.",
+      show1Title: "Reply times, for each of you",
+      show1Text:
+        "How long each of you takes on average to answer the other. Only replies within a day count, so one long silence doesn't skew it.",
+      show2Title: "The longest quiet stretches",
+      show2Text:
+        "The three longest silences in the chat, when they happened, and who wrote first afterwards.",
+      show3Title: "Who writes first",
+      show3Text:
+        "After six hours or more without a message, who picks the conversation back up, as a share for each of you.",
+      show4Title: "Where things stand today",
+      show4Text: "When the last message was sent, and by whom.",
+      show5Title: "Messages over time",
+      show5Text:
+        "The full analyzer draws your messages day by day, from the first to the last, so you can see whether things changed, and when.",
+      show5Link: "Open the analyzer",
+      exampleEyebrow: "An example",
+      exampleTitle: "How Sam and Alex's chat reads",
+      exampleText:
+        "Made-up numbers for two fictional people, shown the way your own chat will be.",
+      exampleBadge: "Example · Sam and Alex are fictional",
+      exampleReadingTitle: "Reading it calmly",
+      exampleNote1:
+        "Alex takes longer to reply on average, and still starts almost half of their conversations. Slower and less interested aren't the same thing.",
+      exampleNote2:
+        "The longest silence was four days in August. A trip? A busy week? The numbers can't say, and they don't pretend to.",
+      exampleNote3:
+        "Nothing here says how either of them feels. If Sam is wondering, talking to Alex will tell them more than any chart.",
+      limitsEyebrow: "Before you read too much into it",
+      limitsTitle: "Slower replies usually have ordinary reasons",
+      limitsText:
+        "A busy month at work, exams, a holiday, a stressful week, a new habit like muting notifications: all of them show up in a chat as slower replies and longer pauses.",
+      limit1Title: "Patterns, not verdicts",
+      limit1Text:
+        "The numbers show when and how often there were messages, never why. They can't tell you what anyone feels or intends.",
+      limit2Title: "A short chat says little",
+      limit2Text:
+        "With only a few weeks of messages, one busy week moves every average. The longer the chat, the more the numbers mean.",
+      limit3Title: "A chat isn't the whole picture",
+      limit3Text:
+        "Calls, time spent together and other apps don't appear in an export. Texting less can simply mean talking more somewhere else.",
+      limit4Title: "Talking beats counting",
+      limit4Text:
+        "If something feels different, a kind “Is everything OK? I've missed talking to you” usually tells you more than any statistic, and it lands better without the numbers as evidence.",
+      supportTitle: "If this is weighing on you, or you don't feel safe",
+      aiEyebrow: "A second read",
+      aiTitle: "Ask the AI what it sees",
+      aiText:
+        "Timestamps only go so far. The AI reads the messages themselves and answers one question: “Is there anything I should be worried about?” It asks which one is you first, and remembers it for next time.",
+      aiCard1Title: "Free, on your device",
+      aiCard1Text:
+        "The on-device AI runs in your browser. Your chat doesn't leave your device.",
+      aiCard2Title: "Or a free cloud preview",
+      aiCard2Text:
+        "Only anonymized excerpts are sent: names are replaced, and phone numbers, emails, links and bank account numbers (IBANs) are removed. The AI provider doesn't train on them.",
+      aiCard3Title: "There when you come back",
+      aiCard3Text:
+        "Your chat is saved on this device, so you can open it again later without a new upload. Choose “Don't keep” if you'd rather it wasn't.",
+      aiButton: "Ask the AI",
+      faqTitle: "Questions people ask",
+      faq1Q: "Do slower replies mean someone is losing interest?",
+      faq1A:
+        "Not on their own. Replies slow down for all kinds of reasons: work, exams, travel, health, stress, or simply a new phone habit. The numbers show what changed and when. Only the other person can tell you why.",
+      faq2Q: "How is the average reply time worked out?",
+      faq2A:
+        "Each time one of you answers the other within 24 hours, the time between the two messages counts as a reply, and the average of those is shown for each person. Pauses longer than a day count as quiet stretches instead.",
+      faq3Q: "Can I see whether replies got slower recently?",
+      faq3A:
+        "This page shows averages for the whole chat, plus when the longest silences were. To see how the number of messages changed over time, open the full analyzer: its timeline shows your messages day by day, from the first to the last.",
+      faq4Q: "Is my chat uploaded anywhere?",
+      faq4A:
+        "No. The numbers on this page are worked out in your browser, on your device. The chat is saved on this device so you can open it again later, and you can choose not to keep it, or forget it, at any time. Only if you choose the cloud AI, its free preview included, are anonymized excerpts sent: names replaced, and phone numbers, emails, links and bank account numbers (IBANs) removed. The AI provider doesn't train on them.",
+      faq5Q: "Should I show them these numbers?",
+      faq5A:
+        "We'd suggest starting with how you feel instead. Statistics can sound like an accusation, while a simple “I've missed talking to you, is everything OK?” invites an honest answer.",
+      faq6Q: "Which chats work?",
+      faq6A:
+        "Any WhatsApp chat you export, from iPhone or Android, one-on-one or group, in any language. Export it without media and drop the .zip or .txt file into the box at the top of this page.",
+      ctaTitle: "See what actually changed",
+      ctaButton: "Check your chat",
+      ctaNote: "Free · No account · Worked out on your device",
+      disclaimer:
+        "WhatsAnalyze is an independent project and isn't affiliated with WhatsApp or Meta. The numbers describe patterns in a chat. They can't tell you what anyone feels or intends, and they're no substitute for talking to each other.",
+    },
     toolsChatHeatmap: {
-      seoTitle: "WhatsApp Peak Chat Hours & 24h Heatmap | WhatsAnalyze",
+      seoTitle: "WhatsApp Peak Chat Hours & 24h Heatmap – WhatsAnalyze",
       seoDescription:
         "Analyze when your WhatsApp chats peak throughout 24 hours. Compare day vs night talk patterns and busiest days 100% privately in your browser.",
-      ogTitle: "WhatsApp Peak Chat Hours & 24h Heatmap | WhatsAnalyze",
+      ogTitle: "WhatsApp Peak Chat Hours & 24h Heatmap – WhatsAnalyze",
       ogDescription:
         "Discover peak chat hours and day vs night messaging distribution in your WhatsApp conversations without uploading data.",
       heroEyebrow: "Free WhatsApp Tool",
@@ -1291,6 +1887,136 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze is an independent open-source project and is not affiliated with, endorsed by, or sponsored by WhatsApp or Meta.",
     },
+    situationWhatToReply: {
+      navLabel: "What should I reply?",
+      seoTitle:
+        "What Should I Reply? AI Reply Help for WhatsApp – WhatsAnalyze",
+      seoDescription:
+        "Not sure how to respond to this text, or what to text back? An AI that has read your WhatsApp chat turns your rough draft into a calmer, clearer reply in your own voice. Free on supported devices.",
+      ogTitle: "What should I reply? Help with your WhatsApp reply",
+      ogDescription:
+        "Drop your WhatsApp chat and get help with the reply: a calmer, clearer version of what you want to say, from an AI that has read your chat.",
+      heroEyebrow: "Help with a reply",
+      heroTitle: "What should I reply?",
+      heroSubtitle:
+        "The message is open and you don't know how to answer. Drop your chat, and an AI that has read it helps you find the words: write what you want to say and get a calmer, clearer version in your voice, with a note on why.",
+      heroNote:
+        "Free on your device · A few free cloud replies a day · More with Pro",
+      continueButton: "Get help replying with this chat",
+      offerChat: "Get help replying to {name}",
+      offerGroup: "Get help replying in {name}",
+      exampleEyebrow: "An example",
+      exampleTitle: "What the help looks like",
+      exampleText:
+        "Tom finally writes back after a quiet week. Mia's first draft says how she feels, with a jab. The coach keeps the feeling and drops the jab.",
+      exampleBadge: "Example · Mia and Tom are fictional",
+      exampleIncoming:
+        "Sorry I went quiet this week, work was a lot. Still on for Saturday?",
+      exampleDraft: "Oh, so you're alive. Sure, whatever.",
+      exampleReply:
+        "Good to hear from you! Honestly, I missed you this week. Saturday works, same place as always?",
+      exampleWhy:
+        "Why: your draft says you felt left out, and that's worth saying. In your chat, Tom opens up when you say how you feel, while sarcasm has usually been followed by a quiet day. This keeps your point and gives him something to answer.",
+      showEyebrow: "What your chat can show",
+      showTitle: "Help that knows how you two talk",
+      showText:
+        "The AI coach works from your chat, not from a template: anonymized excerpts, and the AI reading it opens under.",
+      show1Title: "The way you write",
+      show1Text:
+        "The reading describes your chat's tone and how each of you writes, so a suggestion can sound like your chat.",
+      show2Title: "Your draft, calmer and clearer",
+      show2Text:
+        "Write what you want to say. The coach keeps what you mean and gives it back calmer and clearer, in your voice.",
+      show3Title: "A note on why",
+      show3Text:
+        "Every suggestion comes with a short note on what changed and why, pointing at how your chat usually goes.",
+      show4Title: "Questions about the message",
+      show4Text:
+        "Not sure what a message means? Ask. The coach points at moments in your chat, and it's built to say so when the chat doesn't tell.",
+      stepsEyebrow: "How to get there",
+      stepsTitle: "From your chat to a reply",
+      step1Title: "Drop your chat",
+      step1Text:
+        "Export the chat from WhatsApp without media, after the message you want to answer has arrived, and drop it above. It's read in your browser.",
+      step2Title: "Get a reading",
+      step2Text:
+        "The coach opens under an AI reading of your chat. Run it free on your device if your browser can, or in the cloud: the free preview comes with a few free coach replies a day, and Pro gives you more.",
+      step3Title: "Ask, or draft your reply",
+      step3Text:
+        "Under the reading, pick “{reply}”, write what you'd like to say and get a calmer, clearer version. Or pick “{ask}” to talk the message through first.",
+      plansTitle: "What's free, and what needs Pro",
+      plan1Title: "On your device: free",
+      plan1Text:
+        "The reading and the coach run in your browser after a one-time model download, and nothing leaves your device. It needs WebGPU: a recent computer, most recent Android phones with Chrome, or an iPhone on iOS 26 or later. The model is small, so its answers are simpler.",
+      plan2Title: "Free cloud preview",
+      plan2Text:
+        "A taste of the reading from a stronger AI, made from anonymized excerpts, plus a few free coach replies a day.",
+      plan3Title: "Pro: {price} a month",
+      plan3Text:
+        "The full cloud reading and the coach in the cloud, on any phone. Each message to the coach uses one of the day's cloud analyses.",
+      ownWordsEyebrow: "Your words",
+      ownWordsTitle: "Send it in your own words",
+      ownWordsText:
+        "A suggestion is a starting point, not a script. People notice when a message doesn't sound like the person who sent it, and a reply that reads as machine-written can land differently. Keep what helps, change what doesn't, and send it the way you'd say it.",
+      limitsEyebrow: "Honest limits",
+      limitsTitle: "What it can't do",
+      limit1Title: "Patterns, not verdicts",
+      limit1Text:
+        "The coach can say how your chat usually goes. It can't know what the other person feels, or what they'll do next.",
+      limit2Title: "Only what was written",
+      limit2Text:
+        "The AI reads excerpts from across your chat, always including the latest messages. Voice notes, photos and stickers aren't read, and the on-device model reads less than the cloud one.",
+      limit3Title: "A short chat says little",
+      limit3Text:
+        "With only a few messages there isn't much to go on, and suggestions come closer to general advice.",
+      limit4Title: "AI gets things wrong",
+      limit4Text:
+        "It can miss irony, inside jokes or anything that happened outside the chat. You know your situation best.",
+      privacyEyebrow: "Private by default",
+      privacyTitle: "Your chat stays yours",
+      privacyText:
+        "An exported chat holds the other person's messages too, so it's handled with care.",
+      privacy1Title: "Saved only on this device",
+      privacy1Text:
+        "Your chat is saved in this browser so you can come back to it, never on our servers. Don't want that? Choose “{dontKeep}” under the upload box.",
+      privacy2Title: "On-device AI stays on the device",
+      privacy2Text:
+        "With the free on-device AI, your chat, its reading and what you write to the coach never leave your device.",
+      privacy3Title: "Anonymized for the cloud",
+      privacy3Text:
+        "The cloud AI gets only anonymized excerpts and what you write to the coach: the chat's names are replaced, and phone numbers, emails, links and IBANs removed. The AI provider doesn't train on them.",
+      supportEyebrow: "When it's serious",
+      supportTitle: "Some messages need more than a good reply",
+      supportText:
+        "If your chat or your question points to abuse, threats or self-harm, the coach doesn't write a reply. It shows support resources instead. It can't catch everything, so if you feel unsafe, reach out now.",
+      supportDevice:
+        "On a shared device, choose “{dontKeep}” under the upload box so the chat isn't kept in this browser. A saved chat can be forgotten at any time from “{saved}”.",
+      faqTitle: "Questions about getting help with a reply",
+      faq1Q: "Can AI tell me what to reply?",
+      faq1A:
+        "It can help you get there. Write a rough version of what you want to say, and the coach gives it back calmer and clearer, in your voice and your chat's usual tone, with a short note on what changed. Or ask it about the message first. The reply is still yours: change anything that doesn't sound like you before you send it.",
+      faq2Q: "Is it free?",
+      faq2A:
+        "Yes. On your device, the reading and the coach run free in your browser, if it supports WebGPU. In the cloud, the free preview shows part of a reading and comes with a few free coach replies a day, on any phone. With Pro ({price} a month) you get the full reading and more coach replies each day.",
+      faq3Q: "Does the AI see the message I just got?",
+      faq3A:
+        "Only if it's in your export, so export the chat after the message arrived. The AI reads excerpts from across the chat and always includes the most recent messages. If you saved the chat before the message came in, export it again. You can also paste the message into your question.",
+      faq4Q: "Is my chat uploaded?",
+      faq4A:
+        "Your chat is read in your browser and saved only on this device, which you can undo. With the on-device AI, nothing leaves your device. With the cloud AI, only anonymized excerpts and what you write to the coach are sent: the chat's names are replaced, and phone numbers, emails, links and IBANs removed. The AI provider doesn't train on them.",
+      faq5Q: "Will the coach remember our conversation?",
+      faq5A:
+        "If the chat is saved on this device, the conversation is kept with the reading it followed, so it's still there when you come back. Forget the chat, and the conversation goes with it.",
+      faq6Q: "What if the message is about something serious?",
+      faq6A:
+        "If your chat or your question points to abuse, threats or self-harm, the coach doesn't write a reply; it shows support resources instead. If you or someone else is in danger, call your local emergency number now.",
+      ctaTitle: "Find the words, then make them yours",
+      ctaButton: "Drop your chat",
+      ctaNote:
+        "Read in your browser · Saved only on this device, unless you say no",
+      disclaimer:
+        "WhatsAnalyze is an independent project, not affiliated with WhatsApp or Meta. The coach's suggestions are for reflection, not professional advice.",
+    },
     pageNameMessages: "WhatsApp Message & Line Counter",
     pageNameWords: "WhatsApp Word & Vocabulary Counter",
     pageNameHeatmap: "WhatsApp Peak Chat Hours & 24h Heatmap",
@@ -1302,15 +2028,106 @@ export const messages = {
       homeTitle: "WhatsAnalyze - Die WhatsApp-Chat-Analyse",
       homeDescription:
         "Die beliebteste WhatsApp-Analyse. Entdecke deine Chat-Statistiken und exportiere deinen Chat als PDF, ohne deine Daten hochzuladen.",
-      exportGuideTitle: "WhatsAnalyze - WhatsApp-Chat exportieren",
+      exportGuideTitle:
+        "WhatsApp-Chat exportieren: iPhone, Android, PC, Web & PDF",
       exportGuideDescription:
-        "Exportiere deinen WhatsApp-Chat. Anleitung für iOS und Android.",
-      pdfGuideTitle: "WhatsAnalyze - WhatsApp-Chat als PDF exportieren",
+        "Schritt für Schritt: WhatsApp-Chat oder Gruppe exportieren – auf iPhone, Android, WhatsApp Web, Windows oder Mac, mit oder ohne Medien. Danach als PDF oder Statistik.",
+      pdfGuideTitle: "WhatsApp-Chat als PDF exportieren – mit Fotos",
       pdfGuideDescription:
-        "Exportiere deinen WhatsApp-Chat in Sekunden als PDF, ohne Chat-Daten an einen Server zu senden.",
+        "Mach aus einem exportierten WhatsApp-Chat ein PDF mit allen Nachrichten, Fotos und Statistiken. Direkt im Browser, ohne Upload. Vorschau kostenlos.",
       signalTitle: "WhatsAnalyze - Von WhatsApp zu Signal wechseln",
       signalDescription:
         "Wechsle von WhatsApp zu Signal, übertrage Gruppenchats und erstelle Backups.",
+    },
+    exportGuidePage: {
+      heroCta: "Schon exportiert? Chat hier öffnen",
+      checkedNote:
+        "Schritte am {date} mit dem WhatsApp-Hilfebereich abgeglichen",
+      phoneTitle: "Schritt für Schritt auf iPhone und Android",
+      explainerCta: "Datei da? Hier öffnen",
+      computerLink: "Am Computer? Schritte für WhatsApp Web, Windows und Mac",
+      nextEyebrow: "Nächster Schritt",
+      nextTitle: "Öffne deinen Export direkt hier",
+      nextText:
+        "Zieh die .zip- oder .txt-Datei hierher. Sie wird in deinem Browser gelesen, nicht hochgeladen. Dann wähle, was du sehen willst.",
+      cardOpen: "Öffnen",
+      cardContinue: "Mit diesem Chat weiter",
+      cardStatsTitle: "Chat-Statistiken",
+      cardStatsText:
+        "Wer am meisten schreibt, wann ihr schreibt, eure häufigsten Wörter und Emojis. Kostenlos.",
+      cardAiTitle: "KI-Auswertung",
+      cardAiText:
+        "Die KI beantwortet deine Frage zum Chat: wer sich mehr Mühe gibt, die Stimmung, wiederkehrende Themen. Auf deinem Gerät oder anonymisiert in der Cloud.",
+      cardPdfTitle: "Chat als PDF",
+      cardPdfText:
+        "Das ganze Gespräch als druckbares PDF, mit Fotos, wenn du sie mitexportiert hast. Vorschau kostenlos, vollständiges PDF einmalig {price}.",
+      cardCourtTitle: "Beweis-PDF fürs Gericht",
+      cardCourtText:
+        "Nummerierte Zeilen, genaue Zeitstempel und ein SHA-256-Fingerabdruck – für Anwälte und Gerichte.",
+      ctaTitle: "Export fertig? Öffne ihn hier",
+      ctaButton: "Meine Chat-Datei öffnen",
+      ctaNote:
+        "Wird im Browser gelesen · .zip oder .txt · Statistiken kostenlos",
+    },
+    pdfPage: {
+      navLabel: "WhatsApp-Chat als PDF",
+      heroTitle: "WhatsApp-Chat als PDF exportieren",
+      heroSubtitle:
+        "Alle Nachrichten, die Fotos und eure Chat-Statistiken in einem PDF zum Ausdrucken, Aufbewahren oder Verschicken. Direkt im Browser aus deinem Chat-Export erstellt, ohne Upload.",
+      heroCta: "PDF erstellen",
+      heroNote:
+        "Vorschau kostenlos · Vollständiges PDF einmalig {price} · Kein Konto",
+      exampleAlt: "Seiten eines PDFs aus einem Beispiel-WhatsApp-Chat",
+      uploadTitle: "Export hineinziehen, PDF bekommen",
+      uploadText:
+        "Öffne die .zip- oder .txt-Datei, die WhatsApp erstellt hat. Sie wird in deinem Browser gelesen, nicht hochgeladen.",
+      createButton: "Mein PDF erstellen",
+      guideLink: "Noch kein Export? So exportierst du einen WhatsApp-Chat",
+      contentsEyebrow: "Was drinsteht",
+      contentsTitle: "Mehr als ein Ausdruck des Chats",
+      card1Title: "Das ganze Gespräch",
+      card1Text:
+        "Jede Nachricht mit Absender, Datum und Uhrzeit, in der richtigen Reihenfolge – und die Fotos daneben, wenn du mit Medien exportiert hast.",
+      card2Title: "Euer Chat in Zahlen",
+      card2Text:
+        "Ein Deckblatt mit erster und letzter Nachricht, Tagen, Nachrichten und Personen, dann Diagramme: Verlauf, nach Uhrzeit, nach Person, nach Monat und nach Wochentag.",
+      card3Title: "Fun Facts zu jeder Person",
+      card3Text:
+        "Geschriebene Wörter, längste Nachricht, Wortschatz, Lieblings-Emojis und durchschnittliche Nachrichtenlänge.",
+      stepsTitle: "In drei Schritten",
+      step1Title: "Chat exportieren",
+      step1Text:
+        "Öffne den Chat in WhatsApp und wähle „Chat exportieren“. Mit Medien, wenn das PDF die Fotos zeigen soll.",
+      step2Title: "Hier hineinziehen",
+      step2Text:
+        "Die .zip- oder .txt-Datei öffnet sich in deinem Browser, nichts wird hochgeladen.",
+      step3Title: "PDF herunterladen",
+      step3Text:
+        "Die Vorschau mit den ersten 100 Nachrichten ist kostenlos. Der ganze Chat kostet einmalig {price}.",
+      courtEyebrow: "Für Anwälte und Gerichte",
+      courtTitle: "Brauchst du den Chat als Beweis?",
+      courtText:
+        "Das Beweis-PDF ist ein schlichtes Schwarz-Weiß-Protokoll: nummerierte Zeilen, genaue Zeitstempel, ein SHA-256-Fingerabdruck deines Exports und ein Anlagenverzeichnis.",
+      courtButton: "Zum Beweis-PDF",
+      faqTitle: "Fragen zum PDF",
+      faq1Q: "Kann WhatsApp einen Chat als PDF exportieren?",
+      faq1A:
+        "Nein. WhatsApp exportiert einen Chat als .zip- oder .txt-Datei. WhatsAnalyze macht daraus ein PDF, direkt in deinem Browser.",
+      faq2Q: "Ist es kostenlos?",
+      faq2A:
+        "Die Vorschau mit den ersten 100 Nachrichten ist kostenlos. Das vollständige PDF des ganzen Chats kostet einmalig {price}, und mit Pro lädst du so viele herunter, wie du willst.",
+      faq3Q: "Wird mein Chat irgendwo hochgeladen?",
+      faq3A:
+        "Nein. Die Datei wird in deinem Browser gelesen und das PDF dort erstellt. Bezahlt wird das vollständige PDF über Stripe, dein Chat ist daran nicht beteiligt.",
+      faq4Q: "Sind Fotos dabei?",
+      faq4A:
+        "Ja, wenn du den Chat mit Medien exportierst: Die Fotos stehen im PDF neben ihren Nachrichten. Ohne Medien bekommst du ein PDF des Textes.",
+      faq5Q: "Geht das auch mit Gruppenchats und auf dem iPhone?",
+      faq5A:
+        "Ja. Jeder Einzel- oder Gruppenchat geht, exportiert auf iPhone, Android, WhatsApp Web, Windows oder Mac.",
+      ctaTitle: "Dein Chat als PDF",
+      ctaButton: "PDF erstellen",
+      ctaNote: "Vorschau kostenlos · Im Browser erstellt",
     },
     subscribePage: {
       title: "Ein Abo. Alles freigeschaltet.",
@@ -1371,7 +2188,7 @@ export const messages = {
       mediaNotLoaded:
         "Deine Mediendateien sind nicht geladen: Der Chat wurde aus dieser Browser-Sitzung wiederhergestellt, die nur die Nachrichten behält. Zieh den .zip-Export noch einmal hinein, damit das Beweismittelverzeichnis sie aufnehmen und prüfen kann.",
       seoTitle:
-        "WhatsApp-Chat als Beweismittel vor Gericht – sauberes PDF | WhatsAnalyze",
+        "WhatsApp-Chat als Beweismittel vor Gericht – sauberes PDF – WhatsAnalyze",
       seoDescription:
         "Verwandle deinen WhatsApp-Chat in ein sauberes, chronologisches PDF – jede Nachricht mit Absender und Zeitstempel. 100 % im Browser, ohne Upload.",
       heroEyebrow: "Gerichtsfester Chat-Export",
@@ -1479,7 +2296,7 @@ export const messages = {
         "Anna und Ben halten sich den ganzen Tag auf dem Laufenden und mischen Wochenendpläne mit Running Gags. Der Ton ist herzlich und neckisch, kleine Meinungsverschiedenheiten sind schnell vergessen.",
       navLabel: "What Brandon Thinks Alternative",
       seoTitle:
-        "Kostenlose What Brandon Thinks Alternative – Private KI-Chat-Analyse | WhatsAnalyze",
+        "Kostenlose What Brandon Thinks Alternative – Private KI-Chat-Analyse – WhatsAnalyze",
       seoDescription:
         "Du suchst eine kostenlose Alternative zu What Brandon Thinks? WhatsAnalyze analysiert deinen WhatsApp-Chat mit einer KI, die auf deinem eigenen Gerät läuft – kostenlos, ohne Konto, und dein Chat wird nie hochgeladen.",
       heroTitle:
@@ -1525,9 +2342,9 @@ export const messages = {
       pillar2Title: "Anonymisiert für die Cloud",
       pillar2Text:
         "Wählst du die Cloud-KI, werden Namen zu „Person A“ und „Person B“, Telefonnummern, E-Mails und Links werden vorher entfernt. Die Namen werden nur auf deinem Gerät wieder eingesetzt.",
-      pillar3Title: "Nichts wird gespeichert",
+      pillar3Title: "Nur auf deinem Gerät",
       pillar3Text:
-        "Wir speichern deinen Chat nicht und trainieren keine Modelle damit. Es gibt nichts zu löschen, weil nichts gespeichert wurde.",
+        "Dein Chat wird in deinem Browser gespeichert, damit du zu ihm zurückkommen kannst, nie auf unseren Servern, und wir trainieren keine Modelle damit. Vergiss ihn mit einem Tipp, wann immer du willst.",
       faqTitle: "Fragen zum Wechsel",
       faq1Q: "Gibt es eine kostenlose Version von What Brandon Thinks?",
       faq1A:
@@ -1630,6 +2447,9 @@ export const messages = {
       ctaNote: "Kostenlose Vorschau · 100 % privat",
       disclaimer:
         "WhatsAnalyze ist keine Migrationsberatung und keine Kanzlei. Die Anforderungen unterscheiden sich je nach Land und Fall – klärt sie immer mit eurer Anwältin, eurem Anwalt oder der zuständigen Behörde.",
+    },
+    wrappedAiTeaser: {
+      text: "Wähle eine Frage und lade auf der nächsten Seite denselben Chat-Export hoch.",
     },
     wrapped: {
       heroTitle: "WhatsApp Wrapped {currentYear}",
@@ -1762,9 +2582,9 @@ export const messages = {
     tabItemAndroid3: "<span>Tippe im neuen Menü auf <b>Mehr</b>.</span>",
     tabItemAndroid4: "<span>Tippe auf <b>Chat exportieren</b>.</span>",
     tabItemAndroid5:
-      "<span>Wähle <b>Ohne Medien</b> oder <b>Medien einbeziehen</b>, wenn Du deine Bilder und andere Dateien in den Export einbeziehen möchten.</span>",
+      "<span>Wähle <b>Ohne Medien</b> oder <b>Einschließlich Medien</b>, wenn du deine Bilder und andere Dateien mitexportieren möchtest.</span>",
     tabItemAndroid6:
-      "<span>Nun tippen in der Freigabeansicht auf <b>WhatsAnalyze</b> oder alternativ, wenn Du Schritt 1 übersprungen haben, senden es per <b>E-Mail</b> an dich selbst oder speichern es in <b>Google Drive</b>.</span>",
+      "<span>Tippe jetzt in der Teilen-Ansicht auf <b>WhatsAnalyze</b>. Hast du Schritt 1 übersprungen, schick die Datei per <b>E-Mail</b> an dich selbst oder speichere sie in <b>Google Drive</b>.</span>",
     selectFile: "Datei über obige Box auswählen.",
     messages: "Messages",
     totalWords: "Total words:",
@@ -1780,7 +2600,7 @@ export const messages = {
     faqWhatsapp: "FAQs zu WhatsApp-Chats",
     privacyFAQTitle: "Sind meine Chat-Daten wirklich privat?",
     privacyFAQContent:
-      "Ja, absolut. Die gesamte Chat-Verarbeitung erfolgt lokal in Ihrem Browser. Es werden keinerlei Daten an einen Server gesendet. Sie können sogar den Open-Source-Code auf GitHub einsehen, um dies zu überprüfen.",
+      "Ja. Die Statistiken werden in Ihrem Browser berechnet, und Ihr Chat wird nur auf diesem Gerät gespeichert, damit Sie zu ihm zurückkehren können. Auf unseren Servern wird er nie gespeichert. Nur zwei Dinge verlassen Ihr Gerät, und nur wenn Sie sie wählen: Die Cloud-KI erhält einen anonymisierten Auszug (Namen ersetzt, Telefonnummern, E-Mail-Adressen und Links entfernt), und ein Teilen-Link speichert eine verschlüsselte Kopie der Ergebnisse, nie den Chat selbst. Gespeicherte Chats können Sie jederzeit vergessen, und den Open-Source-Code können Sie auf GitHub einsehen.",
     howToExport: "Wie man seinen WhatsApp-Chat exportiert",
     howToExportOn: "Exportiere deinen Chat",
     howToExportLong:
@@ -1942,11 +2762,14 @@ export const messages = {
     chooseSubscription: "Jetzt abonnieren",
     then: "dann",
     toolsHub: {
+      supportTitle: "Das klingt ernst. Damit musst du nicht allein sein.",
+      supportText:
+        "Wenn du oder jemand anderes in Gefahr ist, ruf sofort den Notruf (112). Kostenlose, vertrauliche Hilfe bekommst du z. B. bei der Telefonseelsorge (0800 111 0 111) oder über findahelpline.com für dein Land.",
       headerTools: "Tools",
-      seoTitle: "WhatsApp Tools & Dienstprogramme | WhatsAnalyze",
+      seoTitle: "WhatsApp Tools & Dienstprogramme – WhatsAnalyze",
       seoDescription:
         "Entdecke einzelne, schnelle und 100 % private WhatsApp-Chat-Tools. Von Inaktivitäts-Tracking und Nachrichtenzählung bis zu Antwortzeiten – komplett im Browser berechnet.",
-      ogTitle: "WhatsApp Tools & Dienstprogramme | WhatsAnalyze",
+      ogTitle: "WhatsApp Tools & Dienstprogramme – WhatsAnalyze",
       ogDescription:
         "Fokussierte WhatsApp-Tools. Prüfe, wer zuletzt geschrieben hat, zähle Nachrichten und analysiere Funkstille ohne Datenupload.",
       heroEyebrow: "WhatsApp Tools & Dienstprogramme",
@@ -2025,6 +2848,15 @@ export const messages = {
       courtGroupTitle: "Offizielle Dokumentation & Gerichtsfeste Nachweise",
       courtGroupDesc:
         "Gerichtsfeste PDF-Protokolle und verifizierte Kommunikationszeitachsen für Justiz und Behörden.",
+      situationsGroupTitle: "Verstehen, was los ist",
+      toolSameFightText:
+        "Sieh, was in euren Streits immer wiederkommt, und hol dir Ideen, anders zu reden.",
+      toolTextingFirstText:
+        "Wer eure Gespräche beginnt und wie schnell ihr jeweils antwortet.",
+      toolLosingInterestText:
+        "Antwortzeiten, die längsten Funkstillen und wo ihr gerade steht, in Ruhe aufbereitet.",
+      toolWhatToReplyText:
+        "Mach aus deinem Entwurf eine ruhigere, klarere Antwort, die trotzdem nach dir klingt.",
     },
     homeLanding: {
       wrappedButton: "Zeig mir meine Story",
@@ -2051,22 +2883,89 @@ export const messages = {
       localEngine: "LOKAL IM BROWSER",
       zeroCloud: "KEINE CLOUD-ÜBERTRAGUNG",
       private: "100 % PRIVAT",
+      aiCloud: "CLOUD-KI: NUR ANONYMISIERT",
+      aiTraining: "NICHT FÜRS TRAINING GENUTZT",
       dropTitle: "Ziehe deinen WhatsApp-Chat-Export hierher",
       dropSubtitle: ".txt- oder .zip",
       selectFile: "Chat-Datei auswählen",
       trySample: "Mit Beispiel-Chat testen",
+      sampleFailed:
+        "Der Beispiel-Chat konnte nicht geladen werden. Prüfe deine Verbindung und versuch es noch einmal.",
       analyzingTitle: "Analysiere Gesprächspausen...",
       analyzingSubtitle:
         "Berechne Zeitstempel, Antwortzeiten und Aktivitätsmuster",
       switchFile: "Datei wechseln",
       messagesAnalyzedIn: "{count} Nachrichten • analysiert in {time} ms",
-      messagesRestored:
-        "{count} Nachrichten • aus dieser Sitzung wiederhergestellt",
+      messagesRestored: "{count} Nachrichten • kein neuer Upload nötig",
       dismiss: "Schließen",
+    },
+    library: {
+      saved: "Auf diesem Gerät gespeichert",
+      dontKeep: "Nicht behalten",
+      notKept: "Nicht auf diesem Gerät gespeichert",
+      keep: "Behalten",
+      notKeptUnavailable:
+        "Dieser Browser erlaubt es hier nicht, zum Beispiel in einem privaten Fenster. Der Chat bleibt offen, bis du diesen Tab schließt.",
+      notKeptFull:
+        "Der Speicher dieses Geräts ist voll. Der Chat bleibt offen, bis du diesen Tab schließt.",
+      panelOpen: "Was auf diesem Gerät gespeichert ist",
+      yourChats: "Deine Chats",
+      open: "Öffnen",
+      continueIn: "Weiter in {tool}",
+      forget: "Vergessen",
+      forgetConfirm: "„{name}“ auf diesem Gerät vergessen?",
+      cancel: "Abbrechen",
+      showAll: "Alle anzeigen ({count})",
+      peopleMore: "{names} und {count} weitere",
+      openedAgo: "geöffnet {time}",
+      useSaved: "Gespeicherten Chat verwenden",
+      useAnother: "Anderen gespeicherten Chat verwenden",
+      runOnChat: "Für deinen Chat mit {name} ausprobieren",
+      runOnGroup: "Für {name} ausprobieren",
+      offerNote: "Auf diesem Gerät gespeichert · kein neuer Upload",
+      headerButton: "Deine Chats auf diesem Gerät",
+      panelTitle: "Auf diesem Gerät gespeichert",
+      panelIntro:
+        "Deine Chats bleiben in diesem Browser, damit du ohne neuen Upload zu ihnen zurückkommen kannst. Sie verlassen dieses Gerät nie und werden nie auf unseren Servern gespeichert.",
+      panelShared:
+        "Jeder, der diesen Browser benutzt, kann sie öffnen. Auf einem geteilten Gerät vergiss sie, wenn du fertig bist.",
+      forgetThis: "Diesen Chat vergessen",
+      storageTitle: "Speicher",
+      storageChats: "Deine gespeicherten Chats belegen {size}.",
+      storageSite:
+        "Alles, was diese Website hier speichert: {used} von {quota} verfügbar.",
+      persisted: "Dieser Browser bewahrt sie zuverlässig auf.",
+      notPersisted:
+        "Dieser Browser kann sie löschen, wenn der Speicher knapp wird oder nach Wochen ohne Besuch.",
+      persistButton: "Browser bitten, sie zu behalten",
+      persistDenied:
+        "Der Browser hat sich dagegen entschieden. Eine Sicherungsdatei ist die Kopie, die immer sicher ist.",
+      iosHint:
+        "Auf iPhone und iPad löscht Safari die Daten einer Website nach einigen Wochen ohne Besuch. Damit deine Chats bleiben, füge WhatsAnalyze zum Home-Bildschirm hinzu: Tippe auf Teilen und dann auf „Zum Home-Bildschirm“.",
+      backupTitle: "Sicherung",
+      backupText:
+        "Lade alle gespeicherten Chats als eine Datei herunter. Zum Wiederherstellen zieh die Datei auf dieses Fenster oder auf ein Upload-Feld.",
+      backupDownload: "Sicherung herunterladen",
+      backupRestore: "Sicherung wiederherstellen",
+      backupDownloaded: "Chats in der Sicherung: {count}",
+      backupRestored: "Aus der Sicherung wiederhergestellte Chats: {count}",
+      backupInvalid: "Diese Datei ist keine WhatsAnalyze-Sicherung.",
+      forgetTitle: "Vergessen",
+      autoForget: "Chats vergessen, die 90 Tage nicht geöffnet wurden",
+      autoForgetText:
+        "Wird bei jedem Besuch geprüft. Ein Browser kann nichts löschen, während die Website geschlossen ist.",
+      forgetAll: "Alles vergessen",
+      forgetAllConfirm:
+        "Alle gespeicherten Chats, Auswertungen und Gespräche auf diesem Gerät vergessen? Das lässt sich nicht rückgängig machen.",
+      readingsTitle: "Frühere Auswertungen",
+      readingGeneral: "Allgemeine Auswertung",
+      ranLocal: "Auf diesem Gerät",
+      ranCloud: "Cloud",
+      ranPreview: "Cloud-Vorschau",
     },
     askAiCard: {
       title: "Frag die KI zu diesem Chat",
-      text: "Mehr als Zahlen: Lass die KI diesen Chat lesen und deine Frage beantworten – privat auf deinem Gerät, ohne neuen Upload.",
+      text: "Mehr als Zahlen: Lass die KI diesen Chat lesen und deine Frage beantworten. Er wird vorher auf deinem Gerät anonymisiert, ohne neuen Upload.",
       button: "Frag die KI",
     },
     toolsAi: {
@@ -2112,7 +3011,7 @@ export const messages = {
       dataContinue: "Trotzdem laden",
       dataCancel: "Auf WLAN warten",
       seoTitle:
-        "Private KI WhatsApp Chat Analyse – Kostenlos auf deinem Gerät | WhatsAnalyze",
+        "Private KI WhatsApp Chat Analyse – Kostenlos auf deinem Gerät – WhatsAnalyze",
       seoDescription:
         "Private KI-Chat-Analyse, die dein Gerät nie verlässt: Eine kostenlose KI läuft in deinem Browser und liest deinen WhatsApp-Chat – Persönlichkeiten, Beziehungsdynamik, wiederkehrende Themen, beste Momente. Kein Upload, kein Konto. Cloud-KI mit anonymisierten Auszügen für tiefere Einblicke.",
       ogTitle: "KI WhatsApp Chat Analyse",
@@ -2123,39 +3022,46 @@ export const messages = {
       heroSubtitle:
         "Lade deinen exportierten Chat hoch und lass die KI euer Gespräch beschreiben: die Stimmung, Rolle und Stil jeder Person, wie ihr miteinander umgeht, eure wiederkehrenden Themen und besten Momente.",
       heroNote:
-        "Kostenlose KI auf deinem Gerät: Dein Chat verlässt es nie · Oder anonymisierte Cloud-KI für Abonnenten",
-      chooseEyebrow: "Schritt 2 · Wähle deine KI",
-      chooseTitle: "Wo soll die KI laufen?",
+        "Auf deinem Gerät anonymisiert, bevor eine KI ihn sieht · Kostenlose Vorschau, ohne Konto · Oder alles auf deinem Gerät behalten",
+      chooseEyebrow: "Schritt 2 · Dein KI-Bericht",
+      chooseTitle: "Lass die KI deinen Chat lesen",
       chooseText:
-        "Beide lesen anonymisierte Auszüge deines Chats und erstellen denselben Bericht. Sie unterscheiden sich in Privatsphäre, Qualität und darin, was dein Gerät können muss.",
-      localTitle: "Auf deinem Gerät",
-      localTag: "MAXIMALE PRIVATSPHÄRE · KOSTENLOS",
+        "Dein Browser anonymisiert den Chat, bevor irgendetwas gesendet wird. Die Cloud-KI läuft auf jedem Handy und liefert die tiefsten Antworten. Soll gar nichts dein Gerät verlassen? Dann führ sie stattdessen auf diesem Gerät aus.",
+      localTitle: "Stattdessen auf diesem Gerät ausführen",
+      localTag: "MAXIMALE PRIVATSPHÄRE · FUNKTIONIERT OFFLINE",
       localPro1: "Nichts verlässt dein Gerät – nicht einmal anonymisiert",
       localPro2: "Kostenlos, kein Konto nötig",
       localPro3: "Funktioniert offline, sobald das Modell geladen ist",
-      localCon1: "Einmaliger Download von etwa {gb} GB",
+      localCon1: "Ein großer einmaliger Download: etwa {gb} GB",
       localCon2:
-        "Braucht ein aktuelles Handy oder einen Computer und kann ein paar Minuten dauern",
+        "Braucht ein aktuelles Handy oder einen Computer und läuft eventuell nicht auf jedem Gerät",
       localCon3:
         "Kleines Modell: einfachere Einblicke, und ein langer Chat wird in Teilen gelesen, was ein paar Minuten dauert",
       localButton: "Auf diesem Gerät analysieren",
       localUnsupported:
         "Dein Browser unterstützt kein WebGPU, das die KI auf dem Gerät braucht. Probier die neueste Version von Chrome, Edge oder Safari oder nutze die Cloud-KI.",
-      cloudTitle: "In der Cloud",
-      cloudTag: "BESTE QUALITÄT · ABONNENTEN",
+      cloudTitle: "Anonymisierte Cloud-KI",
+      cloudTag: "EMPFOHLEN · BESTE QUALITÄT",
+      cloudTagPreview: "EMPFOHLEN · KOSTENLOSE VORSCHAU",
       cloudPro1:
-        "Ein KI-Modell auf dem neuesten Stand: deutlich tiefere, genauere Einblicke",
+        "Erst auf deinem Gerät anonymisiert: Alle im Chat werden zu „Person A“, „Person B“ …, und Telefonnummern, E-Mails, Links und IBANs werden entfernt, bevor irgendetwas gesendet wird",
       cloudPro2:
-        "Liest bis zu etwa 10.000 Nachrichten auf einmal – bei den meisten Chats alles",
+        "Ein KI-Modell auf dem neuesten Stand: deutlich tiefere, genauere Einblicke",
       cloudPro3: "Funktioniert auf jedem Handy, fertig in etwa 30 Sekunden",
+      cloudPro4:
+        "Liest bis zu etwa 10.000 Nachrichten auf einmal – bei den meisten Chats alles",
+      cloudPro4Preview:
+        "Kostenlos, ohne Konto: die Zusammenfassung, die Antwort auf deine Frage und ein erster Blick auf jeden Abschnitt",
       cloudCon1:
-        "Anonymisierte Auszüge werden zur Verarbeitung an unseren KI-Anbieter (Anthropic oder OpenAI) gesendet",
-      cloudCon2: "Im WhatsAnalyze-Abo enthalten",
-      cloudButton: "In der Cloud analysieren",
-      cloudSubscribe: "Abonnieren und Cloud-KI freischalten",
-      cloudPreviewButton: "Kostenlose Cloud-Vorschau testen",
+        "Die anonymisierten Auszüge verlassen dein Gerät: Unser KI-Anbieter (Anthropic oder OpenAI) verarbeitet sie",
+      cloudCon2: "Der vollständige Bericht ist Teil des WhatsAnalyze-Abos",
+      cloudButton: "Meinen KI-Bericht erstellen",
+      cloudSubscribe: "Für den vollständigen Bericht abonnieren",
+      cloudPreviewButton: "Kostenlose KI-Vorschau erstellen",
       error_preview_used:
         "Du hast die kostenlose Vorschau für heute schon genutzt. Abonniere für den vollständigen Bericht oder versuch es morgen wieder.",
+      fallbackLocal:
+        "Du musst nicht warten: Führ die Analyse stattdessen auf diesem Gerät aus. Das ist kostenlos, und nichts verlässt dein Gerät.",
       lockedTitle: "Der vollständige Bericht enthält mehr",
       lockedButton: "Vollständigen Bericht freischalten",
       cloudConsent:
@@ -2164,7 +3070,7 @@ export const messages = {
       previewText:
         "Das ist alles, was gesendet wird. Die echten Namen werden erst auf deinem Gerät wieder eingesetzt, wenn die Antwort da ist.",
       progressLocal: "Die KI liest deinen Chat auf deinem Gerät …",
-      progressCloud: "Die KI liest deinen Chat … das dauert etwa 15 Sekunden.",
+      progressCloud: "Die KI liest deinen Chat … das dauert etwa 20 Sekunden.",
       error_local:
         "Die KI auf dem Gerät konnte nicht starten. Versuch es noch einmal oder nutz die Cloud-KI.",
       error_local_unsupported:
@@ -2181,6 +3087,23 @@ export const messages = {
         "Die KI auf dem Gerät ist bei diesem Chat durcheinandergekommen. Versuch es noch einmal oder nutze die Cloud-KI für bessere Ergebnisse.",
       error_no_messages:
         "In diesem Chat haben wir keine Textnachrichten zum Analysieren gefunden.",
+      error_local_gpu:
+        "Dein Grafiktreiber konnte die KI auf dem Gerät nicht starten. Ein Neustart des Browsers hilft oft – oder nutz die Cloud-KI.",
+      error_local_network:
+        "Beim Herunterladen des KI-Modells ist die Verbindung abgebrochen. Prüf deine Verbindung und versuch es noch einmal: Der Download macht da weiter, wo er aufgehört hat. Oder nutz die Cloud-KI.",
+      error_local_storage:
+        "Auf diesem Gerät ist nicht genug Speicherplatz für das KI-Modell frei. Schaff etwas Platz und versuch es noch einmal oder nutz die Cloud-KI.",
+      error_preview_cap:
+        "Die kostenlosen Cloud-Vorschauen für heute sind alle vergeben. Abonniere für den vollständigen Bericht oder versuch es morgen wieder.",
+      localUnsupportedGpu:
+        "Dein Grafiktreiber konnte die KI auf dem Gerät nicht starten. Ein Neustart des Browsers kann helfen – die Cloud-KI funktioniert sofort.",
+      localUnsupportedStorage:
+        "Die KI auf dem Gerät braucht etwa {gb} GB freien Speicherplatz, und so viel ist auf diesem Gerät gerade nicht frei. Schaff Platz oder nutz die Cloud-KI.",
+      fallbackPreview: "Stattdessen die kostenlose Cloud-Vorschau testen",
+      fallbackCloud: "Stattdessen in der Cloud analysieren",
+      dataUseCloud: "Stattdessen die Cloud-KI nutzen",
+      progressRetry:
+        "Die Verbindung ist abgebrochen. Der Download macht gleich da weiter, wo er aufgehört hat …",
       reportCloud: "VON DER CLOUD-KI ANALYSIERT",
       reportLocal: "AUF DEINEM GERÄT ANALYSIERT",
       reportTitle: "Was die KI in deinem Chat sieht",
@@ -2204,6 +3127,34 @@ export const messages = {
         "Läuft auf deinem Gerät und merkt sich die letzten Nachrichten.",
       coachNoteCloud:
         "Jede Nachricht zählt als eine deiner heutigen Cloud-Analysen.",
+      coachNoteFree:
+        "Kostenlose Vorschau: ein paar Cloud-Antworten pro Tag. Mit Pro bekommst du mehr.",
+      coachNoteFreeLeft:
+        "Heute noch {n} kostenlose Cloud-Antworten. Mit Pro bekommst du mehr.",
+      coachPickMe:
+        "Wähle oben aus, wer du bist, damit die Antwort aus deiner Sicht geschrieben wird.",
+      sampleButton: "KI-Auswertung zeigen",
+      sampleNote:
+        "Beispiel-Chat: Seine KI-Auswertungen wurden vorab erstellt. Das ist kostenlos, und deine kostenlose Vorschau bleibt für deinen eigenen Chat.",
+      sampleCustom:
+        "Eine eigene Frage braucht deinen eigenen Chat. Wähle beim Beispiel eine der Fragen oben.",
+      progressSample: "Die KI liest den Beispiel-Chat …",
+      sampleReport:
+        "Das ist die vollständige Auswertung des Beispiel-Chats, vorab erstellt.",
+      sampleOwnChat: "Mit meinem eigenen Chat ausprobieren",
+      sampleYoursTitle: "Jetzt du: Was würde dein Chat erzählen?",
+      sampleYoursText:
+        "Exportiere deinen Chat mit ein paar Fingertipps aus WhatsApp und wähle die Datei aus. Deine erste Auswertung ist eine kostenlose Vorschau, fertig in etwa 20 Sekunden, und der Chat wird auf deinem Gerät anonymisiert, bevor eine KI ihn sieht.",
+      sampleYoursButton: "Meine Chat-Datei wählen",
+      sampleYoursGuide: "Noch kein Export? So geht's",
+      coachSampleIntro: "Probier eins davon:",
+      coachSampleDraft: "Entwurf von {name}",
+      coachNoteSample:
+        "Beispiel-Chat: Diese Antworten wurden vorab erstellt. Mit deinem eigenen Chat kannst du alles fragen.",
+      error_coach_free_used:
+        "Deine kostenlosen Antworten für heute sind aufgebraucht. Komm morgen wieder oder hol dir Pro für mehr Antworten pro Tag.",
+      error_coach_local_unchanged:
+        "Auf diesem Gerät konnte die KI den Entwurf nicht umschreiben. Schreib etwas genauer, was du sagen willst, oder nutze den Coach in der Cloud.",
       coachSupportTitle: "Das klingt ernst. Damit musst du nicht allein sein.",
       coachSupportText:
         "Wenn du oder jemand anderes in Gefahr ist, ruf sofort den Notruf (112). Kostenlose, vertrauliche Hilfe bekommst du z. B. bei der Telefonseelsorge (0800 111 0 111) oder über findahelpline.com für dein Land.",
@@ -2236,7 +3187,7 @@ export const messages = {
       faqTitle: "Häufige Fragen",
       faq1Q: "Gibt es eine kostenlose KI-Analyse für WhatsApp-Chats?",
       faq1A:
-        "Ja. Der Modus auf deinem Gerät ist kostenlos und braucht kein Konto: Ein kleines KI-Modell wird einmal in deinen Browser geladen und analysiert den Chat lokal. Der Cloud-Modus mit einem deutlich stärkeren Modell ist Teil des WhatsAnalyze-Abos.",
+        "Ja. Die Cloud-KI gibt dir eine kostenlose Vorschau ohne Konto: die Zusammenfassung, die Antwort auf deine Frage und einen ersten Blick auf jeden Abschnitt. Der vollständige Cloud-Bericht ist Teil des WhatsAnalyze-Abos. Der Modus auf deinem Gerät ist komplett kostenlos und braucht kein Konto: Ein kleines KI-Modell wird einmal in deinen Browser geladen und analysiert den Chat lokal, auf Geräten, die das schaffen.",
       faq2Q: "Wird mein Chat hochgeladen, wenn ich die KI nutze?",
       faq2A:
         "Mit der KI auf deinem Gerät wird gar nichts hochgeladen. Mit der Cloud-KI werden nur anonymisierte Auszüge gesendet: Dein Browser ersetzt vorher Namen durch Platzhalter und entfernt Telefonnummern, E-Mails und Links, und du kannst vor dem Start genau sehen, was gesendet wird. Wir speichern nichts davon, und unser KI-Anbieter nutzt es nicht zum Training.",
@@ -2258,7 +3209,7 @@ export const messages = {
       breadcrumbTools: "Tools",
       breadcrumbCurrent: "Inaktivitäts-Tracker",
       seoTitle:
-        "Wer hat zuletzt geschrieben? WhatsApp Inaktivitäts- & Pausen-Tracker | WhatsAnalyze",
+        "Wer hat zuletzt geschrieben? WhatsApp Inaktivitäts- & Pausen-Tracker – WhatsAnalyze",
       seoDescription:
         "Kostenloser WhatsApp-Inaktivitäts-Checker. Finde heraus, wer die letzte Nachricht gesendet hat, berechne Antwortzeiten und erkenne Funkstille 100 % privat im Browser.",
       ogTitle: "Wer hat zuletzt geschrieben? WhatsApp Inaktivitäts-Tracker",
@@ -2295,7 +3246,7 @@ export const messages = {
       colParticipant: "Teilnehmer",
       colMessages: "Nachrichten",
       colShare: "Anteil",
-      colMedianReply: "Median-Antwort",
+      colAverageReply: "Ø Antwortzeit",
       colLastActive: "Zuletzt aktiv",
       colLastMessage: "Letzte Nachricht",
       gapsTitle: "Längste Funkstille-Phasen (Chat-Pausen)",
@@ -2365,12 +3316,133 @@ export const messages = {
       hookCard4Text:
         "Verwandle deinen Chat in einen interaktiven Jahresrückblick zum Teilen mit Freunden.",
     },
+    situationSameFight: {
+      navLabel: "Immer der gleiche Streit?",
+      seoTitle: "Immer der gleiche Streit? Euren WhatsApp-Chat verstehen",
+      seoDescription:
+        "Immer wieder Streit über WhatsApp, und immer um dasselbe? Eine KI liest euren Chat, zeigt Momente, die sich wiederholen, und schlägt vor, wie ihr anders reden könnt. Ohne Schuldfrage, kostenlos auf deinem Gerät.",
+      ogTitle: "Warum streiten wir immer wieder über dasselbe?",
+      ogDescription:
+        "Lass eine KI euren WhatsApp-Chat lesen und das Muster hinter dem Streit zeigen, den ihr immer wieder habt, ohne zu entscheiden, wer recht hat.",
+      heroEyebrow: "Streit über WhatsApp?",
+      heroTitle: "Warum streiten wir immer wieder über dasselbe?",
+      heroSubtitle:
+        "Leg deinen WhatsApp-Chat hier ab, und die KI beantwortet eine Frage: Wie könnten wir besser kommunizieren? Sie zeigt auf Momente aus euren eigenen Nachrichten und schlägt vor, was ihr beide versuchen könntet, ohne zu entscheiden, wer recht hat.",
+      heroNote:
+        "Kostenlos auf deinem Gerät · Ohne Konto · Die Cloud-KI sieht nur anonymisierte Auszüge",
+      continueButton: "Mit diesem Chat weiter",
+      exportGuide: "Wie exportiere ich einen WhatsApp-Chat?",
+      showEyebrow: "Was dein Chat zeigen kann",
+      showTitle:
+        "Du weißt noch, wie es sich angefühlt hat. Dein Chat weiß, wie es gelaufen ist.",
+      showText:
+        "Wann ihr geschrieben habt, wer zuerst geschrieben hat, wie lange die Antworten gedauert haben: Das liest und zählt WhatsAnalyze wirklich in deinem Export.",
+      show1Title: "Eine Auswertung, wie ihr miteinander redet",
+      show1Text:
+        "Die KI beantwortet „Wie könnten wir besser kommunizieren?“ in ein paar Sätzen, zeigt auf Momente aus eurem Chat und schlägt vor, was ihr beide versuchen könntet.",
+      show2Title: "Wann ihr euch schreibt",
+      show2Text:
+        "Eine 24-Stunden-Heatmap eures Chats und wie viel jede Person nachts schreibt. Wenn eure schwierigsten Gespräche spät stattfinden, siehst du, wie viel von eurem Chat dann läuft.",
+      show2Link: "Heatmap öffnen",
+      show3Title: "Wer das Gespräch anfängt",
+      show3Text:
+        "Wer schreibt nach sechs Stunden Ruhe oder mehr zuerst? Für jede Person gezählt, als Anteil an all euren Gesprächen.",
+      show3Link: "Sehen, wer anfängt",
+      show4Title: "Wie schnell ihr antwortet",
+      show4Text:
+        "Wie lange jede Person im Schnitt zum Antworten braucht und wer meist schneller antwortet.",
+      show4Link: "Antwortzeiten ansehen",
+      show5Title: "Die längste Funkstille",
+      show5Text:
+        "Die drei längsten stillen Phasen in eurem Chat, wann sie waren und wer danach zuerst geschrieben hat.",
+      show5Link: "Funkstille ansehen",
+      show6Title: "Hilfe bei der nächsten Nachricht",
+      show6Text:
+        "Nach einer vollständigen Auswertung kannst du Fragen zu eurem Chat stellen oder eine Nachricht einfügen, die du gleich schicken willst, und bekommst eine ruhigere, klarere Version in deinen eigenen Worten.",
+      exampleEyebrow: "Ein Beispiel",
+      exampleTitle: "So kann eine Auswertung aussehen",
+      exampleText:
+        "Für diese Seite erfunden, damit du siehst, wie es aussieht: Die KI benennt ein Muster, zeigt auf Momente und schlägt euch beiden einen nächsten Schritt vor.",
+      exampleBadge: "Beispiel · Nora und Tom sind erfunden",
+      exampleVibe: "Eng verbunden, mit einem Dauerthema",
+      exampleSummary:
+        "Nora und Tom schreiben sich den ganzen Tag, meistens über Pläne, Abendessen und Freunde. Der Ton ist herzlich und neckisch, mit einer Spannung, die immer wiederkommt: kurzfristig geänderte Pläne. Meist ist sie am nächsten Morgen verflogen.",
+      exampleAnswer:
+        "Eure Meinungsverschiedenheiten fangen meist gleich an: Ein Plan ändert sich spät am Tag, einer von euch erfährt es per Nachricht, und ab da werden die Antworten kürzer. Nora stellt meist eine direkte Frage, und Tom antwortet mit einem Witz, was ihr offenbar unterschiedlich versteht. Schnell wieder gut wird es, wenn jemand sagt, wie es sich angefühlt hat („Ich hatte mich auf heute Abend gefreut“), statt was schiefgelaufen ist. Ihr könntet Pläne früher am Tag festmachen und, wenn sich ein Gespräch im Kreis dreht, lieber vorschlagen zu telefonieren.",
+      exampleDynamic1Title: "Abends wird es hitzig",
+      exampleDynamic1Text:
+        "Das Hin und Her, das sich im Kreis dreht, passiert meist nach 23 Uhr, wenn ihr beide mit kurzen Nachrichten in schneller Folge antwortet.",
+      exampleDynamic2Title: "Beide gehen wieder aufeinander zu",
+      exampleDynamic2Text:
+        "Nach einem stillen Tag schreibt meist Tom zuerst, mit einem Witz, und Nora greift ihn mit einer Frage nach seinem Tag auf.",
+      exampleDraft: "Vergiss es. Das machst du immer so.",
+      exampleRewrite:
+        "Ich hatte mich wirklich auf heute Abend gefreut und bin enttäuscht. Können wir uns einen anderen Abend diese Woche aussuchen?",
+      exampleWhy:
+        "Warum: „Das machst du immer“ startet in diesem Chat oft denselben Streit neu. Wenn du sagst, wie es dir geht, und einen nächsten Schritt anbietest, hat Tom etwas, worauf er antworten kann.",
+      limitsEyebrow: "Ehrliche Grenzen",
+      limitsTitle: "Was es dir sagen kann und was nicht",
+      limit1Title: "Muster, keine Urteile",
+      limit1Text:
+        "Die KI zeigt auf Momente und schlägt vor, was ihr versuchen könntet. Sie entscheidet nicht, wer recht hat oder schuld ist, und sie ist keine Therapie und keine professionelle Beratung.",
+      limit2Title: "Nur, was im Chat steht",
+      limit2Text:
+        "Anrufe, Tonfall und was ihr persönlich erlebt habt, stehen in keinem Export, und eine KI kann Ironie oder Zusammenhänge falsch verstehen. Nimm es als eine Sichtweise und gleich sie mit dem ab, was du weißt.",
+      limit3Title: "Ein kurzer Chat sagt wenig",
+      limit3Text:
+        "Ein paar Dutzend Nachrichten oder eine schlechte Woche sind noch kein Muster. Je mehr Verlauf dein Export abdeckt, desto mehr gibt es, worauf sie sich stützen kann. Reicht es nicht, soll die KI das auch sagen.",
+      privacyEyebrow: "Standardmäßig privat",
+      privacyTitle: "Die Nachrichten der anderen Person stecken auch drin",
+      privacyText:
+        "Ein Chat enthält nicht nur deine Worte, sondern auch die der anderen Person. Darum hier genau, wo er landet.",
+      privacy1Title: "Nur auf diesem Gerät gespeichert",
+      privacy1Text:
+        "Standardmäßig wird dein Chat in diesem Browser auf diesem Gerät gespeichert, damit du zurückkommen kannst. Du kannst dich dagegen entscheiden oder ihn jederzeit vergessen.",
+      privacy2Title: "Statistiken und KI auf dem Gerät bleiben hier",
+      privacy2Text:
+        "Die Statistiken und die KI auf dem Gerät laufen in deinem Browser. Nichts, was sie lesen, verlässt dein Gerät.",
+      privacy3Title: "Anonymisiert für die Cloud",
+      privacy3Text:
+        "Wenn du die Cloud-KI wählst, auch die kostenlose Vorschau, werden nur anonymisierte Auszüge gesendet: Namen ersetzt, Telefonnummern, E-Mails, Links und IBANs entfernt. Der KI-Anbieter trainiert nicht damit.",
+      supportEyebrow: "Wenn es mehr ist als Streit",
+      supportTitle: "Wenn dir Streit Angst macht",
+      supportText:
+        "Wenn dich jemand bedroht, kontrolliert oder dir das Gefühl gibt, nicht sicher zu sein, ist eine Chat-Analyse nicht die Hilfe, die du brauchst, und du musst damit nicht allein sein. Wenn ein Chat oder eine Nachricht auf Missbrauch, Drohungen oder Selbstverletzung hindeutet, ist der KI-Coach darauf ausgelegt, aufzuhören und dich stattdessen an Hilfe zu verweisen.",
+      supportLink: "Hilfe in deinem Land finden",
+      faqTitle: "Häufige Fragen",
+      faq1Q: "Warum haben wir immer wieder den gleichen Streit?",
+      faq1A:
+        "Oft wechselt das Thema, aber der Ablauf bleibt: Die gleiche Art von Moment löst ihn aus, und ihr reagiert beide so wie beim letzten Mal. Woran das bei euch liegt, kann diese Seite nicht sicher sagen. Dein Chat kann aber zeigen, wann es meist passiert und wie die Nachrichten verlaufen, und das gibt euch etwas Konkretes, über das ihr gemeinsam reden könnt.",
+      faq2Q: "Sagt mir die KI, wer recht hat?",
+      faq2A:
+        "Nein. Es geht um das Muster, nicht darum, wer gewinnt. Die KI wird gefragt, wie ihr besser kommunizieren könntet, und antwortet mit Momenten aus eurem Chat und Ideen für euch beide. Sie urteilt über niemanden und kann Zusammenhänge falsch verstehen.",
+      faq3Q: "Hilft sie mir, die nächste Nachricht zu schreiben?",
+      faq3A:
+        "Ja. Unter einer Auswertung macht „Hilf mir beim Antworten“ aus einer Nachricht, die du gleich schicken willst, eine ruhigere, klarere Version, die bei dem bleibt, was du meinst, mit einer kurzen Notiz, was sich geändert hat. Du entscheidest, was du schickst. Nach einer Auswertung auf deinem Gerät läuft das dort kostenlos; nach der kostenlosen Cloud-Vorschau hast du ein paar kostenlose Antworten pro Tag, mit Pro mehr.",
+      faq4Q: "Ist das kostenlos?",
+      faq4A:
+        "Die Statistiken und die KI-Auswertung auf dem Gerät sind kostenlos und ohne Konto, ebenso die Rückfragen nach einer Auswertung auf dem Gerät. Ohne Abo kannst du außerdem eine kurze kostenlose Cloud-Vorschau ausprobieren, mit ein paar kostenlosen Coach-Antworten pro Tag. Die vollständige Cloud-Auswertung und mehr Cloud-Antworten pro Tag gehören zu Pro ({price}/Monat).",
+      faq5Q: "Wird mein Chat hochgeladen?",
+      faq5A:
+        "Nicht für die Statistiken und die KI auf dem Gerät: Sie laufen in deinem Browser, und nichts, was sie lesen, verlässt dein Gerät. Standardmäßig wird der Chat in diesem Browser gespeichert, damit du zurückkommen kannst; du kannst dich dagegen entscheiden oder ihn jederzeit vergessen. Wenn du die Cloud-KI wählst, werden nur anonymisierte Auszüge gesendet (Namen ersetzt; Telefonnummern, E-Mails, Links und IBANs entfernt), und unser KI-Anbieter trainiert nicht damit. Bevor du startest, kannst du genau sehen, was gesendet würde.",
+      faq6Q: "Funktioniert das auch bei Streit mit Freunden oder Familie?",
+      faq6A:
+        "Ja. Jeder WhatsApp-Chat, den du exportierst, funktioniert: mit Partner oder Partnerin, Freunden, Eltern oder Geschwistern, auch Gruppenchats. Die KI beschreibt, wie die Leute darin miteinander reden, wer auch immer sie sind.",
+      faq7Q: "Wie viel Chat braucht es?",
+      faq7A:
+        "Je mehr Verlauf, desto besser. Ein paar Dutzend Nachrichten oder eine einzige schwierige Woche zeigen noch kein Muster. Exportiere den ganzen Chat ohne Medien; auch ein langer Chat ist kein Problem.",
+      ctaTitle: "Erst das Muster sehen, dann gemeinsam darüber reden",
+      ctaButton: "Meinen Chat auswerten",
+      ctaNote: "Kostenlos auf deinem Gerät · Ohne Konto · Ohne Urteil",
+      disclaimer:
+        "WhatsAnalyze ist unabhängig und nicht mit WhatsApp oder Meta verbunden. Eine KI-Auswertung ist eine Sichtweise zum Nachdenken, keine Therapie und keine professionelle Beratung.",
+    },
     pageNameInactivity: "WhatsApp Inaktivität & Letzte Nachricht",
     toolsMessageCounter: {
-      seoTitle: "WhatsApp Nachrichten- & Zeilenzähler | WhatsAnalyze",
+      seoTitle: "WhatsApp Nachrichten- & Zeilenzähler – WhatsAnalyze",
       seoDescription:
         "Zähle Nachrichten, Zeilen und Zeichen in deinem WhatsApp-Chat. Erfahre, wer mehr schreibt und wann euer aktivster Tag war – 100 % privat im Browser.",
-      ogTitle: "WhatsApp Nachrichten- & Zeilenzähler | WhatsAnalyze",
+      ogTitle: "WhatsApp Nachrichten- & Zeilenzähler – WhatsAnalyze",
       ogDescription:
         "Schneller, 100 % privater WhatsApp-Nachrichtenzähler. Finde heraus, wer mehr schreibt und entdecke euren Rekord-Tag.",
       heroEyebrow: "Kostenloses WhatsApp-Tool",
@@ -2437,11 +3509,135 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze ist ein unabhängiges Open-Source-Projekt und steht in keiner Verbindung zu WhatsApp oder Meta.",
     },
+    situationTextingFirst: {
+      navLabel: "Schreibst du immer zuerst?",
+      seoTitle: "Schreibst du immer zuerst? Wer im WhatsApp-Chat anfängt",
+      seoDescription:
+        "Ich schreibe immer zuerst – ist die Freundschaft einseitig? Sieh, wer in deinem WhatsApp-Chat Gespräche beginnt und wie schnell ihr antwortet. Kostenlos, auf deinem Gerät.",
+      heroEyebrow: "Wer das Gespräch beginnt",
+      heroTitle: "Schreibst du immer zuerst?",
+      heroSubtitle:
+        "Wenn es sich anfühlt, als ginge jedes Gespräch von dir aus, zeigt dein Chat, wie es wirklich ist: wer anfängt und wie schnell ihr jeweils antwortet. Nebeneinander, auf deinem Gerät gezählt.",
+      heroNote:
+        "Kostenlos · Ohne Konto · Die Zahlen verlassen dein Gerät nicht",
+      offerLabel: "Frag, wer sich in deinem Chat mit {name} mehr Mühe gibt",
+      resultsEyebrow: "Dein Chat in Zahlen",
+      resultsTitle: "Wer anfängt und wie schnell ihr antwortet",
+      resultsText:
+        "Lies beides zusammen. Wer seltener anfängt, aber innerhalb von Minuten antwortet, gibt sich auch Mühe.",
+      resultsFew:
+        "Bisher gezählte Gespräche: {count}. Das ist noch zu wenig, um viel daraus zu lesen.",
+      resultsHow:
+        "Ein Gespräch beginnt, wer nach mindestens sechs Stunden Ruhe als Erstes schreibt. Die Antwortzeit ist der Durchschnitt, wie lange jemand braucht, um jemand anderem zu antworten. Gezählt werden Antworten innerhalb eines Tages.",
+      numbersStarted: "der Gespräche begonnen",
+      numbersStartedOf: "{count} von {total} Gesprächen",
+      numbersReply: "Ø Antwortzeit",
+      numbersNoReplies: "Noch keine Antworten",
+      numbersLast: "Letzte Nachricht",
+      numbersMessages: "Nachrichten",
+      numbersMore: "Weitere Personen in diesem Chat: {count}",
+      nextTitle: "Mehr als nur Uhrzeiten?",
+      nextText:
+        "Die KI kann die Nachrichten selbst lesen und beantworten: „Wer gibt sich in diesem Chat mehr Mühe?“ Dein Chat ist schon geöffnet, du musst nichts neu hochladen.",
+      nextButton: "Fragen, wer sich mehr Mühe gibt",
+      nextNote:
+        "Kostenlos auf deinem Gerät oder als kostenlose Cloud-Vorschau, die nur anonymisierte Auszüge sendet.",
+      showEyebrow: "Was dein Chat zeigen kann",
+      showTitle: "Die Zahlen hinter dem Gefühl",
+      showText:
+        "Alles wird aus deinem exportierten Chat gezählt, in deinem Browser.",
+      show1Title: "Wer Gespräche beginnt",
+      show1Text:
+        "Der Anteil jeder Person an den Gesprächen und wie viele sie begonnen hat. Ein neues Gespräch beginnt nach sechs Stunden Ruhe.",
+      show2Title: "Wie schnell ihr antwortet",
+      show2Text:
+        "Die durchschnittliche Antwortzeit jeder Person direkt neben ihrem Anteil. So sieht man beides: seltener anfangen und schnell antworten.",
+      show3Title: "Wer zuletzt geschrieben hat",
+      show3Text:
+        "Wann ihr jeweils zuletzt geschrieben habt und wie viele Nachrichten von jeder Person stammen.",
+      show4Title: "Was in den Nachrichten steht",
+      show4Text:
+        "Wenn du mehr willst, liest die KI den Chat selbst und beantwortet „Wer gibt sich in diesem Chat mehr Mühe?“ in klaren Worten.",
+      exampleEyebrow: "Ein Beispiel",
+      exampleTitle: "Mia fängt öfter an. Leo antwortet schneller.",
+      exampleText:
+        "Zwei ausgedachte Personen, um zu zeigen, wie man die Zahlen liest. Mia beginnt etwa zwei Drittel der Gespräche, Leo antwortet meist innerhalb von Minuten. Keine der beiden Zahlen sagt, wem mehr am anderen liegt.",
+      exampleCaption: "Beispiel · Mia und Leo sind ausgedacht",
+      exampleVibe: "Entspanntes Hin und Her im Alltag",
+      exampleSummary:
+        "Mia und Leo schreiben sich fast täglich: Pläne fürs Wochenende, Geschichten von der Arbeit und ein Running Gag über Leos Zimmerpflanzen.",
+      exampleAnswer:
+        "Beide, nur auf verschiedene Weise. Mia beginnt die meisten Gespräche, oft mit einem Plan oder einer Frage zu Leos Tag. Leo fängt seltener an, antwortet aber innerhalb von Minuten und stellt die Rückfragen, die ein Gespräch am Laufen halten. Wenn Mia sich wünscht, dass Leo öfter zuerst schreibt, lohnt es sich, das anzusprechen. Der Chat kann das nicht für die beiden entscheiden.",
+      limitsEyebrow: "Ehrliche Grenzen",
+      limitsTitle: "Wer zuerst schreibt, ist nicht die ganze Geschichte",
+      limitsText:
+        "Die Zahlen zeigen ein Muster in einem Chat. Sie messen nicht, wie viel jemandem an dir liegt, und sie sagen dir nicht, ob eine Freundschaft oder Beziehung einseitig ist.",
+      limit1Title: "Menschen sind verschieden",
+      limit1Text:
+        "Manche planen und melden sich. Andere fangen selten an, antworten aber schnell und herzlich. Beides gehört dazu, wenn man in Kontakt bleibt.",
+      limit2Title: "Das Leben passiert auch außerhalb des Chats",
+      limit2Text:
+        "Arbeitszeiten, Zeitzonen, Anrufe und gemeinsame Zeit tauchen in einem WhatsApp-Export nicht auf.",
+      limit3Title: "Muster, keine Urteile",
+      limit3Text:
+        "Ein Anteil von 70 % beschreibt, was in diesem Chat passiert ist. Was das bedeutet, entscheidest du, und vielleicht sprecht ihr darüber.",
+      limit4Title: "Ein kurzer Chat sagt wenig",
+      limit4Text:
+        "Ein paar Wochen oder ein paar Dutzend Gespräche können in jede Richtung kippen. Je länger der Chat, desto mehr sagen die Zahlen.",
+      supportTitle: "Wenn es um mehr geht als einen Chat",
+      privacyEyebrow: "Privat von Anfang an",
+      privacyTitle: "Dein Chat bleibt deiner",
+      privacy1Title: "Auf deinem Gerät gezählt",
+      privacy1Text:
+        "Die Zahlen werden in deinem Browser berechnet. Dein Chat wird dafür nirgendwohin gesendet.",
+      privacy2Title: "Hier gespeichert, wenn du willst",
+      privacy2Text:
+        "Standardmäßig wird dein Chat nur auf diesem Gerät gespeichert, damit du ohne neuen Upload zurückkommen kannst. Mit „Nicht behalten“ machst du das rückgängig, und vergessen kannst du ihn jederzeit.",
+      privacy3Title: "KI zu deinen Bedingungen",
+      privacy3Text:
+        "Mit der KI auf deinem Gerät verlässt dein Chat das Gerät nicht. Die kostenlose Cloud-Vorschau sendet nur anonymisierte Auszüge (Namen ersetzt; Telefonnummern, E-Mails, Links und IBANs entfernt), und der KI-Anbieter trainiert nicht damit.",
+      stepsTitle: "So prüfst du deinen Chat",
+      step1Title: "Chat exportieren",
+      step1Text:
+        "Öffne in WhatsApp den Chat, tippe oben auf den Namen, dann auf „Chat exportieren“ und „Ohne Medien“.",
+      step2Title: "Hier ablegen",
+      step2Text:
+        "Zieh die Datei in das Feld oben auf dieser Seite oder wähle sie aus. Sie wird in deinem Browser gelesen.",
+      step3Title: "Beide Zahlen lesen",
+      step3Text:
+        "Schau dir zusammen an, wer anfängt und wie schnell ihr antwortet. Wenn du magst, frag die KI nach der Geschichte dahinter.",
+      stepsGuide: "Ausführliche Export-Anleitung für iPhone und Android",
+      faqTitle: "Häufige Fragen",
+      faq1Q: "Wie finde ich heraus, ob ich immer zuerst schreibe?",
+      faq1A:
+        "Exportiere den WhatsApp-Chat und zieh ihn in das Feld auf dieser Seite. Die Seite zählt, wer in jedem Gespräch zuerst geschrieben hat, und zeigt den Anteil jeder Person neben ihrer Antwortzeit. Ein neues Gespräch beginnt, sobald jemand nach mindestens sechs Stunden Ruhe schreibt.",
+      faq2Q:
+        "Ich schreibe immer zuerst – ist das eine einseitige Freundschaft?",
+      faq2A:
+        "Nicht für sich allein. Manche fangen gern Gespräche an, andere können besser antworten, und Arbeit, Zeitzonen und gemeinsame Zeit spielen auch mit. Die Zahlen helfen dir, ein Muster zu sehen. Ob es sich fair anfühlt, könnt nur ihr beide klären.",
+      faq3Q: "Was zählt als Beginn eines Gesprächs?",
+      faq3A:
+        "Die erste Nachricht des Chats und jede Nachricht nach mindestens sechs Stunden ohne Nachrichten. Die Antwortzeit ist der Durchschnitt, wie lange jemand braucht, um jemand anderem zu antworten. Gezählt werden Antworten innerhalb eines Tages.",
+      faq4Q: "Wird mein Chat hochgeladen?",
+      faq4A:
+        "Nicht für die Zahlen: Die werden in deinem Browser gezählt. Dein Chat wird standardmäßig nur auf diesem Gerät gespeichert, und das kannst du rückgängig machen. Wenn du die KI fragst, bleibt mit der KI auf deinem Gerät alles auf deinem Gerät, und die kostenlose Cloud-Vorschau sendet nur anonymisierte Auszüge (Namen ersetzt; Telefonnummern, E-Mails, Links und IBANs entfernt). Der KI-Anbieter trainiert nicht damit.",
+      faq5Q: "Funktioniert das auch mit Freunden, Familie und Gruppenchats?",
+      faq5A:
+        "Ja, mit jedem WhatsApp-Chat, den du exportieren kannst. In einer Gruppe bekommt jede Person ihren eigenen Anteil an begonnenen Gesprächen und ihre eigene Antwortzeit.",
+      faq6Q: "Ist das kostenlos?",
+      faq6A:
+        "Die Zahlen auf dieser Seite sind kostenlos und brauchen kein Konto. Die KI-Auswertung ist auf deinem Gerät kostenlos, und für die Cloud-KI gibt es eine kostenlose Vorschau. Der vollständige Cloud-Bericht ist Teil von WhatsAnalyze Pro ({price}/Monat).",
+      ctaTitle: "Sieh, wer in deinem Chat die Gespräche beginnt",
+      ctaButton: "Meinen Chat prüfen",
+      ctaNote: "Kostenlos · Ohne Konto · Auf deinem Gerät gezählt",
+      disclaimer:
+        "WhatsAnalyze zeigt Muster in einem Chat, keine Urteile über Menschen oder Beziehungen. Es ist ein unabhängiges Open-Source-Projekt und steht in keiner Verbindung zu WhatsApp oder Meta.",
+    },
     toolsWordCounter: {
-      seoTitle: "WhatsApp Wort- & Wortschatzzähler | WhatsAnalyze",
+      seoTitle: "WhatsApp Wort- & Wortschatzzähler – WhatsAnalyze",
       seoDescription:
         "Entdecke Gesamtwortzahlen, Wortschatzvielfalt, durchschnittliche Nachrichtenlängen und die häufigsten Wörter in deinen WhatsApp-Chats 100 % privat.",
-      ogTitle: "WhatsApp Wort- & Wortschatzzähler | WhatsAnalyze",
+      ogTitle: "WhatsApp Wort- & Wortschatzzähler – WhatsAnalyze",
       ogDescription:
         "Analysiere Wortzahlen, Wortschatzvielfalt und die häufigsten Wörter deiner WhatsApp-Chats ohne Datenupload.",
       heroEyebrow: "Kostenloses WhatsApp-Tool",
@@ -2508,11 +3704,143 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze ist ein unabhängiges Open-Source-Projekt und steht in keiner Verbindung zu WhatsApp oder Meta.",
     },
+    situationLosingInterest: {
+      navLabel: "Lässt das Interesse nach?",
+      appName: "WhatsApp-Antwortzeiten und Funkstille prüfen",
+      seoTitle:
+        "Verliert er oder sie das Interesse? WhatsApp-Antwortzeiten ansehen",
+      seoDescription:
+        "Antwortet die andere Person immer später oder schreibt weniger als früher? Sieh dir an, wie schnell jede Person im Schnitt antwortet, die längsten Funkstillen und wer zuerst schreibt. Kostenlos und privat auf deinem Gerät.",
+      heroEyebrow: "Antworten kommen immer später?",
+      heroTitle: "Lässt das Interesse nach?",
+      heroSubtitle:
+        "Längere Antwortzeiten, weniger Nachrichten, längere Funkstille: Da denkt man schnell das Schlimmste. Die Zeitstempel deines Chats zeigen, was sich wirklich verändert hat und wann, damit du es dir in Ruhe ansehen kannst, bevor du Schlüsse ziehst.",
+      heroNote:
+        "Kostenlos · Kein Konto · Die Zahlen werden auf deinem Gerät berechnet",
+      offerLabel: "Frag die KI zu deinem Chat mit {name}",
+      resultEyebrow: "Dein Chat",
+      resultTitle: "Was dein Chat zeigt",
+      resultText:
+        "Auf deinem Gerät aus den Sendezeiten der Nachrichten berechnet. Muster, kein Urteil.",
+      resultNowLabel: "Stand heute",
+      resultNow: "Die letzte Nachricht kam {time} von {name}.",
+      resultNowNote:
+        "Bis heute gerechnet. Wenn du den Chat schon vor einer Weile exportiert hast, wirkt er ruhiger, als er ist.",
+      status_active: "In den letzten zwei Tagen gab es Nachrichten.",
+      status_dormant:
+        "Seit ein paar Tagen ist es ruhig, in einer vollen Woche ganz normal.",
+      status_inactive: "Seit über einer Woche ist es ruhig.",
+      status_ghosted: "Seit über einem Monat ist es ruhig.",
+      resultPeopleTitle: "Person für Person",
+      resultReply: "Antwortzeit im Schnitt",
+      resultReplyNone: "Zu wenige Antworten",
+      resultStarted: "Hat zuerst geschrieben",
+      resultMessages: "Nachrichten",
+      resultMorePeople: "Und {count} weitere Personen in dieser Gruppe.",
+      resultPeopleNote:
+        "Antwortzeit im Schnitt: wie lange jemand braucht, um der anderen Person zu antworten. Gezählt werden nur Antworten innerhalb eines Tages. Hat zuerst geschrieben: wie oft jemand den Chat nach sechs Stunden oder mehr Ruhe wieder aufgenommen hat.",
+      resultGapsTitle: "Die längsten Funkstillen",
+      resultGapEnded: "Danach hat {name} zuerst geschrieben",
+      resultSpan: "{count} Nachrichten über {days} Tage",
+      resultAiButton: "Frag die KI zu diesem Chat",
+      resultAiNote:
+        "Sie beantwortet „Gibt es etwas, worüber ich mir Sorgen machen sollte?“ und fragt vorher, wer von euch du bist. Du musst den Chat nicht noch einmal hinzufügen.",
+      resultTimelineLink: "Deine Nachrichten im Zeitverlauf ansehen",
+      showEyebrow: "Was dein Chat zeigen kann",
+      showTitle: "Die Fakten hinter dem Gefühl",
+      showText:
+        "Alles hier wird aus deinem Export gezählt. Nichts wird geraten.",
+      show1Title: "Antwortzeiten, für jede Person",
+      show1Text:
+        "Wie lange jede Person im Schnitt braucht, um der anderen zu antworten. Es zählen nur Antworten innerhalb eines Tages, damit eine einzelne lange Pause das Bild nicht verzerrt.",
+      show2Title: "Die längsten Funkstillen",
+      show2Text:
+        "Die drei längsten Pausen im Chat, wann sie waren und wer danach zuerst geschrieben hat.",
+      show3Title: "Wer zuerst schreibt",
+      show3Text:
+        "Wer das Gespräch nach sechs Stunden oder mehr ohne Nachricht wieder aufnimmt, als Anteil für jede Person.",
+      show4Title: "Wo ihr gerade steht",
+      show4Text: "Wann die letzte Nachricht kam und von wem.",
+      show5Title: "Nachrichten im Zeitverlauf",
+      show5Text:
+        "Die vollständige Analyse zeigt deine Nachrichten Tag für Tag, von der ersten bis zur letzten. So siehst du, ob sich etwas verändert hat und wann.",
+      show5Link: "Zur Analyse",
+      exampleEyebrow: "Ein Beispiel",
+      exampleTitle: "So liest sich der Chat von Sam und Alex",
+      exampleText:
+        "Ausgedachte Zahlen für zwei erfundene Personen, so dargestellt wie später dein eigener Chat.",
+      exampleBadge: "Beispiel · Sam und Alex sind erfunden",
+      exampleReadingTitle: "In Ruhe gelesen",
+      exampleNote1:
+        "Alex antwortet im Schnitt langsamer und beginnt trotzdem fast die Hälfte der Gespräche. Langsamer heißt nicht weniger interessiert.",
+      exampleNote2:
+        "Die längste Funkstille dauerte im August vier Tage. Ein Urlaub? Eine stressige Woche? Die Zahlen können es nicht sagen, und sie tun auch nicht so.",
+      exampleNote3:
+        "Nichts davon sagt, wie sich die beiden fühlen. Wenn Sam sich Gedanken macht, bringt ein Gespräch mit Alex mehr als jedes Diagramm.",
+      limitsEyebrow: "Bevor du zu viel hineinliest",
+      limitsTitle: "Langsamere Antworten haben meist ganz normale Gründe",
+      limitsText:
+        "Ein voller Monat im Job, Prüfungen, Urlaub, eine stressige Woche, eine neue Gewohnheit wie stummgeschaltete Benachrichtigungen: All das zeigt sich im Chat als langsamere Antworten und längere Pausen.",
+      limit1Title: "Muster, keine Urteile",
+      limit1Text:
+        "Die Zahlen zeigen, wann und wie oft es Nachrichten gab, aber nie, warum. Was jemand fühlt oder vorhat, können sie nicht sagen.",
+      limit2Title: "Ein kurzer Chat sagt wenig",
+      limit2Text:
+        "Bei nur ein paar Wochen Nachrichten verschiebt eine volle Woche jeden Durchschnitt. Je länger der Chat, desto mehr bedeuten die Zahlen.",
+      limit3Title: "Ein Chat ist nicht das ganze Bild",
+      limit3Text:
+        "Anrufe, gemeinsame Zeit und andere Apps tauchen in einem Export nicht auf. Weniger schreiben kann auch heißen, woanders mehr zu reden.",
+      limit4Title: "Reden hilft mehr als Zählen",
+      limit4Text:
+        "Wenn sich etwas anders anfühlt, sagt ein freundliches „Ist alles okay? Ich vermisse unsere Gespräche“ meist mehr als jede Statistik, und es kommt ohne Zahlen als Beweis besser an.",
+      supportTitle:
+        "Wenn dich das sehr belastet oder du dich nicht sicher fühlst",
+      aiEyebrow: "Ein zweiter Blick",
+      aiTitle: "Frag die KI, was sie sieht",
+      aiText:
+        "Zeitstempel verraten nur so viel. Die KI liest die Nachrichten selbst und beantwortet eine Frage: „Gibt es etwas, worüber ich mir Sorgen machen sollte?“ Vorher fragt sie, wer von euch du bist, und merkt es sich fürs nächste Mal.",
+      aiCard1Title: "Kostenlos, auf deinem Gerät",
+      aiCard1Text:
+        "Die KI auf dem Gerät läuft in deinem Browser. Dein Chat verlässt dein Gerät nicht.",
+      aiCard2Title: "Oder eine kostenlose Cloud-Vorschau",
+      aiCard2Text:
+        "Gesendet werden nur anonymisierte Auszüge: Namen werden ersetzt, Telefonnummern, E-Mail-Adressen, Links und Kontonummern (IBAN) entfernt. Der KI-Anbieter trainiert nicht damit.",
+      aiCard3Title: "Da, wenn du wiederkommst",
+      aiCard3Text:
+        "Dein Chat wird auf diesem Gerät gespeichert, damit du ihn später ohne neuen Upload wieder öffnen kannst. Wähle „Nicht behalten“, wenn du das nicht möchtest.",
+      aiButton: "KI fragen",
+      faqTitle: "Häufige Fragen",
+      faq1Q:
+        "Heißt eine langsamere Antwort, dass jemand das Interesse verliert?",
+      faq1A:
+        "Für sich allein nicht. Antworten werden aus allen möglichen Gründen langsamer: Arbeit, Prüfungen, Reisen, Gesundheit, Stress oder einfach eine neue Handy-Gewohnheit. Die Zahlen zeigen, was sich verändert hat und wann. Warum, kann dir nur die andere Person sagen.",
+      faq2Q: "Wie wird die durchschnittliche Antwortzeit berechnet?",
+      faq2A:
+        "Jedes Mal, wenn eine Person der anderen innerhalb von 24 Stunden antwortet, zählt die Zeit zwischen den beiden Nachrichten als Antwort. Der Durchschnitt davon wird für jede Person angezeigt. Pausen von mehr als einem Tag zählen stattdessen als Funkstille.",
+      faq3Q:
+        "Sehe ich, ob die Antworten in letzter Zeit langsamer geworden sind?",
+      faq3A:
+        "Diese Seite zeigt Durchschnitte für den ganzen Chat und wann die längsten Funkstillen waren. Wie sich die Zahl der Nachrichten über die Zeit verändert hat, zeigt die vollständige Analyse: Ihr Zeitstrahl zeigt deine Nachrichten Tag für Tag, von der ersten bis zur letzten.",
+      faq4Q: "Wird mein Chat irgendwo hochgeladen?",
+      faq4A:
+        "Nein. Die Zahlen auf dieser Seite werden in deinem Browser berechnet, auf deinem Gerät. Der Chat wird auf diesem Gerät gespeichert, damit du ihn später wieder öffnen kannst. Du kannst jederzeit festlegen, dass er nicht behalten wird, oder ihn vergessen. Nur wenn du die Cloud-KI wählst, auch ihre kostenlose Vorschau, werden anonymisierte Auszüge gesendet: Namen ersetzt, Telefonnummern, E-Mail-Adressen, Links und Kontonummern (IBAN) entfernt. Der KI-Anbieter trainiert nicht damit.",
+      faq5Q: "Soll ich der Person die Zahlen zeigen?",
+      faq5A:
+        "Wir würden eher damit anfangen, wie es dir geht. Statistiken klingen schnell nach Vorwurf, ein einfaches „Ich vermisse unsere Gespräche, ist alles okay?“ lädt dagegen zu einer ehrlichen Antwort ein.",
+      faq6Q: "Welche Chats funktionieren?",
+      faq6A:
+        "Jeder WhatsApp-Chat, den du exportierst, von iPhone oder Android, Einzel- oder Gruppenchat, in jeder Sprache. Exportiere ihn ohne Medien und zieh die .zip- oder .txt-Datei in das Feld oben auf dieser Seite.",
+      ctaTitle: "Sieh dir an, was sich wirklich verändert hat",
+      ctaButton: "Chat prüfen",
+      ctaNote: "Kostenlos · Kein Konto · Auf deinem Gerät berechnet",
+      disclaimer:
+        "WhatsAnalyze ist ein unabhängiges Projekt und steht in keiner Verbindung zu WhatsApp oder Meta. Die Zahlen beschreiben Muster in einem Chat. Was jemand fühlt oder vorhat, können sie nicht sagen, und sie ersetzen kein Gespräch miteinander.",
+    },
     toolsChatHeatmap: {
-      seoTitle: "WhatsApp Aktivitätszeiten & 24h-Heatmap | WhatsAnalyze",
+      seoTitle: "WhatsApp Aktivitätszeiten & 24h-Heatmap – WhatsAnalyze",
       seoDescription:
         "Finde heraus, wann deine WhatsApp-Chats im 24-Stunden-Verlauf am aktivsten sind. Vergleiche Tag- und Nachtaktivität 100 % privat im Browser.",
-      ogTitle: "WhatsApp Aktivitätszeiten & 24h-Heatmap | WhatsAnalyze",
+      ogTitle: "WhatsApp Aktivitätszeiten & 24h-Heatmap – WhatsAnalyze",
       ogDescription:
         "Analysiere Spitzenzeiten und Tag- vs. Nachtaktivität deiner WhatsApp-Chats ohne Server-Upload.",
       heroEyebrow: "Kostenloses WhatsApp-Tool",
@@ -2580,6 +3908,136 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze ist ein unabhängiges Open-Source-Projekt und steht in keiner Verbindung zu WhatsApp oder Meta.",
     },
+    situationWhatToReply: {
+      navLabel: "Was soll ich antworten?",
+      seoTitle:
+        "Was soll ich antworten? KI-Hilfe für deine WhatsApp-Antwort – WhatsAnalyze",
+      seoDescription:
+        "Was antworte ich darauf? Eine KI, die euren WhatsApp-Chat gelesen hat, macht aus deinem Entwurf eine ruhigere, klarere Antwort in deinem Ton. Kostenlos auf unterstützten Geräten.",
+      ogTitle: "Was soll ich antworten? Hilfe bei deiner WhatsApp-Antwort",
+      ogDescription:
+        "Lade deinen WhatsApp-Chat und hol dir Hilfe bei der Antwort: eine ruhigere, klarere Fassung von dem, was du sagen willst, von einer KI, die euren Chat gelesen hat.",
+      heroEyebrow: "Hilfe beim Antworten",
+      heroTitle: "Was soll ich antworten?",
+      heroSubtitle:
+        "Die Nachricht ist offen, und dir fehlen die Worte. Lade euren Chat, und eine KI, die ihn gelesen hat, hilft dir weiter: Schreib, was du sagen willst, und bekomm eine ruhigere, klarere Fassung in deinem Ton, mit einer kurzen Erklärung.",
+      heroNote:
+        "Kostenlos auf deinem Gerät, wenn dein Browser es kann · Ein paar kostenlose Cloud-Antworten pro Tag · Mehr mit Pro",
+      continueButton: "Mit diesem Chat Hilfe beim Antworten holen",
+      offerChat: "Hilfe beim Antworten an {name}",
+      offerGroup: "Hilfe beim Antworten in {name}",
+      exampleEyebrow: "Ein Beispiel",
+      exampleTitle: "So sieht die Hilfe aus",
+      exampleText:
+        "Tom meldet sich nach einer stillen Woche. Mias erster Entwurf sagt, wie es ihr geht, mit einem Seitenhieb. Der Coach behält das Gefühl und lässt den Seitenhieb weg.",
+      exampleBadge: "Beispiel · Mia und Tom sind erfunden",
+      exampleIncoming:
+        "Sorry, dass ich diese Woche so still war, auf der Arbeit war viel los. Steht Samstag noch?",
+      exampleDraft: "Ach, du lebst ja noch. Klar, von mir aus.",
+      exampleReply:
+        "Schön, von dir zu hören! Ehrlich gesagt hast du mir diese Woche gefehlt. Samstag passt, am üblichen Ort?",
+      exampleWhy:
+        "Warum: Dein Entwurf sagt, dass du dich vergessen gefühlt hast, und das darf ruhig gesagt werden. In eurem Chat geht Tom darauf ein, wenn du sagst, wie es dir geht, während auf Sarkasmus meist ein stiller Tag folgte. So bleibt deine Botschaft, und er hat etwas, worauf er antworten kann.",
+      showEyebrow: "Was dein Chat zeigen kann",
+      showTitle: "Hilfe, die weiß, wie ihr miteinander schreibt",
+      showText:
+        "Der KI-Coach arbeitet mit eurem Chat, nicht mit einer Vorlage: mit anonymisierten Ausschnitten und der KI-Auswertung, unter der er sich öffnet.",
+      show1Title: "Wie ihr schreibt",
+      show1Text:
+        "Die Auswertung beschreibt den Ton eures Chats und den Schreibstil jeder Person, damit ein Vorschlag nach eurem Chat klingt.",
+      show2Title: "Dein Entwurf, ruhiger und klarer",
+      show2Text:
+        "Schreib, was du sagen willst. Der Coach behält, was du meinst, und gibt es dir ruhiger und klarer zurück, in deinem Ton.",
+      show3Title: "Eine kurze Erklärung",
+      show3Text:
+        "Zu jedem Vorschlag sagt er kurz, was sich geändert hat und warum, mit Blick darauf, wie euer Chat meistens läuft.",
+      show4Title: "Fragen zur Nachricht",
+      show4Text:
+        "Du weißt nicht, wie eine Nachricht gemeint ist? Frag. Der Coach verweist auf Momente in eurem Chat und soll es sagen, wenn der Chat darauf keine Antwort gibt.",
+      stepsEyebrow: "So kommst du hin",
+      stepsTitle: "Vom Chat zur Antwort",
+      step1Title: "Chat hochladen",
+      step1Text:
+        "Exportiere den Chat in WhatsApp ohne Medien, nachdem die Nachricht da ist, auf die du antworten willst, und zieh ihn oben in das Feld. Er wird in deinem Browser gelesen.",
+      step2Title: "Auswertung holen",
+      step2Text:
+        "Der Coach erscheint unter einer KI-Auswertung eures Chats. Lass ihn kostenlos auf deinem Gerät laufen, wenn dein Browser das kann, oder in der Cloud: Zur kostenlosen Vorschau gehören ein paar kostenlose Coach-Antworten pro Tag, mit Pro bekommst du mehr.",
+      step3Title: "Fragen oder Antwort entwerfen",
+      step3Text:
+        "Wähl unter der Auswertung „{reply}“, schreib, was du sagen möchtest, und bekomm eine ruhigere, klarere Fassung. Oder wähl „{ask}“, um die Nachricht erst einmal durchzusprechen.",
+      plansTitle: "Was kostenlos ist und was Pro braucht",
+      plan1Title: "Auf deinem Gerät: kostenlos",
+      plan1Text:
+        "Auswertung und Coach laufen nach einem einmaligen Modell-Download in deinem Browser, und nichts verlässt dein Gerät. Dafür braucht es WebGPU: einen aktuellen Computer, die meisten neueren Android-Handys mit Chrome oder ein iPhone ab iOS 26. Das Modell ist klein, seine Antworten fallen einfacher aus.",
+      plan2Title: "Kostenlose Cloud-Vorschau",
+      plan2Text:
+        "Ein Teil der Auswertung von einer stärkeren KI, aus anonymisierten Auszügen, dazu ein paar kostenlose Coach-Antworten pro Tag.",
+      plan3Title: "Pro: {price} im Monat",
+      plan3Text:
+        "Die volle Auswertung und der Coach in der Cloud, auf jedem Handy. Jede Nachricht an den Coach zählt als eine der Cloud-Analysen des Tages.",
+      ownWordsEyebrow: "Deine Worte",
+      ownWordsTitle: "Schick es in deinen eigenen Worten",
+      ownWordsText:
+        "Ein Vorschlag ist ein Anfang, kein Drehbuch. Menschen merken, wenn eine Nachricht nicht nach der Person klingt, die sie schickt, und eine Antwort, die nach Maschine klingt, kann anders ankommen. Behalte, was hilft, ändere, was nicht passt, und schick es so, wie du es sagen würdest.",
+      limitsEyebrow: "Ehrliche Grenzen",
+      limitsTitle: "Was es nicht kann",
+      limit1Title: "Muster, keine Urteile",
+      limit1Text:
+        "Der Coach kann sagen, wie euer Chat meistens läuft. Was die andere Person fühlt oder als Nächstes tut, kann er nicht wissen.",
+      limit2Title: "Nur, was geschrieben wurde",
+      limit2Text:
+        "Die KI liest Ausschnitte aus dem ganzen Chat, immer mit den neuesten Nachrichten. Sprachnachrichten, Fotos und Sticker liest sie nicht, und das Modell auf dem Gerät liest weniger als das in der Cloud.",
+      limit3Title: "Ein kurzer Chat sagt wenig",
+      limit3Text:
+        "Bei wenigen Nachrichten hat der Coach wenig, woran er sich halten kann, und Vorschläge werden allgemeiner.",
+      limit4Title: "KI liegt auch mal daneben",
+      limit4Text:
+        "Sie kann Ironie, Insider-Witze oder alles übersehen, was außerhalb des Chats passiert ist. Deine Situation kennst du am besten.",
+      privacyEyebrow: "Privat von Anfang an",
+      privacyTitle: "Dein Chat bleibt deiner",
+      privacyText:
+        "Ein exportierter Chat enthält auch die Nachrichten der anderen Person. Deshalb wird er sorgsam behandelt.",
+      privacy1Title: "Nur auf diesem Gerät gespeichert",
+      privacy1Text:
+        "Dein Chat wird in diesem Browser gespeichert, damit du wiederkommen kannst, nie auf unseren Servern. Willst du das nicht? Wähl unter dem Upload-Feld „{dontKeep}“.",
+      privacy2Title: "KI auf dem Gerät bleibt auf dem Gerät",
+      privacy2Text:
+        "Mit der kostenlosen KI auf deinem Gerät verlassen dein Chat, die Auswertung und was du dem Coach schreibst nie dein Gerät.",
+      privacy3Title: "Anonymisiert für die Cloud",
+      privacy3Text:
+        "Die Cloud-KI bekommt nur anonymisierte Ausschnitte und was du dem Coach schreibst: Die Namen aus dem Chat werden ersetzt, Telefonnummern, E-Mails, Links und IBANs entfernt. Der KI-Anbieter trainiert nicht damit.",
+      supportEyebrow: "Wenn es ernst ist",
+      supportTitle: "Manche Nachrichten brauchen mehr als eine gute Antwort",
+      supportText:
+        "Wenn dein Chat oder deine Frage auf Gewalt, Drohungen oder Selbstverletzung hindeutet, schreibt der Coach keine Antwort, sondern zeigt Hilfsangebote. Er erkennt nicht alles. Wenn du dich nicht sicher fühlst, hol dir jetzt Hilfe.",
+      supportDevice:
+        "Auf einem geteilten Gerät wählst du unter dem Upload-Feld „{dontKeep}“, dann wird der Chat in diesem Browser nicht behalten. Einen gespeicherten Chat kannst du jederzeit über „{saved}“ vergessen.",
+      faqTitle: "Fragen zur Hilfe beim Antworten",
+      faq1Q: "Kann mir eine KI sagen, was ich antworten soll?",
+      faq1A:
+        "Sie kann dir helfen, dahin zu kommen. Schreib grob, was du sagen willst, und der Coach gibt es dir ruhiger und klarer zurück, in deinem Ton und dem üblichen Ton eures Chats, mit einer kurzen Erklärung, was sich geändert hat. Oder frag ihn zuerst zur Nachricht. Die Antwort bleibt deine: Ändere alles, was nicht nach dir klingt, bevor du sie abschickst.",
+      faq2Q: "Ist das kostenlos?",
+      faq2A:
+        "Ja. Auf deinem Gerät laufen Auswertung und Coach kostenlos im Browser, wenn er WebGPU unterstützt. In der Cloud zeigt die kostenlose Vorschau einen Teil der Auswertung und bringt ein paar kostenlose Coach-Antworten pro Tag mit, auf jedem Handy. Mit Pro ({price} im Monat) bekommst du die vollständige Auswertung und mehr Coach-Antworten pro Tag.",
+      faq3Q: "Sieht die KI die Nachricht, die ich gerade bekommen habe?",
+      faq3A:
+        "Nur wenn sie in deinem Export steckt. Exportiere den Chat also, nachdem die Nachricht angekommen ist. Die KI liest Ausschnitte aus dem ganzen Chat und nimmt die neuesten Nachrichten immer mit. Hast du den Chat gespeichert, bevor die Nachricht kam, exportiere ihn neu. Du kannst die Nachricht auch in deine Frage kopieren.",
+      faq4Q: "Wird mein Chat hochgeladen?",
+      faq4A:
+        "Dein Chat wird in deinem Browser gelesen und nur auf diesem Gerät gespeichert, und das kannst du rückgängig machen. Mit der KI auf dem Gerät verlässt nichts dein Gerät. Mit der Cloud-KI werden nur anonymisierte Ausschnitte und deine Nachrichten an den Coach gesendet: Die Namen aus dem Chat werden ersetzt, Telefonnummern, E-Mails, Links und IBANs entfernt. Der KI-Anbieter trainiert nicht damit.",
+      faq5Q: "Merkt sich der Coach unser Gespräch?",
+      faq5A:
+        "Wenn der Chat auf diesem Gerät gespeichert ist, wird das Gespräch mit der Auswertung aufbewahrt, auf die es folgte. Es ist also noch da, wenn du wiederkommst. Vergisst du den Chat, verschwindet auch das Gespräch.",
+      faq6Q: "Und wenn es in der Nachricht um etwas Ernstes geht?",
+      faq6A:
+        "Wenn dein Chat oder deine Frage auf Gewalt, Drohungen oder Selbstverletzung hindeutet, schreibt der Coach keine Antwort, sondern zeigt Hilfsangebote. Wenn du oder jemand anderes in Gefahr ist, ruf sofort den Notruf (112) an.",
+      ctaTitle: "Finde die Worte, und mach sie zu deinen",
+      ctaButton: "Chat hochladen",
+      ctaNote:
+        "Gelesen in deinem Browser · Nur auf diesem Gerät gespeichert, wenn du willst",
+      disclaimer:
+        "WhatsAnalyze ist ein unabhängiges Projekt und nicht mit WhatsApp oder Meta verbunden. Die Vorschläge des Coaches sind zum Nachdenken gedacht, nicht als professionelle Beratung.",
+    },
     pageNameMessages: "WhatsApp Nachrichten- & Zeilenzähler",
     pageNameWords: "WhatsApp Wort- & Wortschatzzähler",
     pageNameHeatmap: "WhatsApp Aktivitätszeiten & 24h-Heatmap",
@@ -2591,15 +4049,105 @@ export const messages = {
       homeTitle: "WhatsAnalyze - El analizador de chats de WhatsApp",
       homeDescription:
         "El analizador de WhatsApp más popular. Descubre las estadísticas de tus chats y exporta tu conversación en PDF sin subir tus datos.",
-      exportGuideTitle: "WhatsAnalyze - Cómo exportar tu chat de WhatsApp",
+      exportGuideTitle: "Exportar chat de WhatsApp: iPhone, Android, Web y PDF",
       exportGuideDescription:
-        "Exporta tu chat de WhatsApp. Tutorial para iOS y guía para Android.",
-      pdfGuideTitle: "WhatsAnalyze - Cómo exportar tu chat de WhatsApp a PDF",
+        "Paso a paso: exporta cualquier chat o grupo de WhatsApp en iPhone, Android, WhatsApp Web, Windows o Mac, con o sin archivos. Después, conviértelo en PDF o estadísticas.",
+      pdfGuideTitle: "Exportar chat de WhatsApp a PDF, con fotos",
       pdfGuideDescription:
-        "Exporta tu chat de WhatsApp a PDF en segundos sin enviar los datos a ningún servidor.",
+        "Convierte un chat de WhatsApp exportado en un PDF con todos los mensajes, las fotos y estadísticas. Se crea en tu navegador, sin subir nada. Vista previa gratis.",
       signalTitle: "WhatsAnalyze - Cómo pasar de WhatsApp a Signal",
       signalDescription:
         "Pasa de WhatsApp a Signal, transfiere chats de grupo y crea copias de seguridad.",
+    },
+    exportGuidePage: {
+      heroCta: "¿Ya lo exportaste? Abre tu chat",
+      checkedNote:
+        "Pasos comprobados con el Servicio de ayuda de WhatsApp el {date}",
+      phoneTitle: "Paso a paso en iPhone y Android",
+      explainerCta: "¿Tienes el archivo? Ábrelo aquí",
+      computerLink: "¿En el ordenador? Pasos para WhatsApp Web, Windows y Mac",
+      nextEyebrow: "Siguiente paso",
+      nextTitle: "Abre tu exportación aquí mismo",
+      nextText:
+        "Suelta aquí el archivo .zip o .txt. Se lee en tu navegador, no se sube a ningún sitio. Luego elige qué quieres ver.",
+      cardOpen: "Abrir",
+      cardContinue: "Seguir con este chat",
+      cardStatsTitle: "Estadísticas del chat",
+      cardStatsText:
+        "Quién escribe más, a qué horas, las palabras y emojis más usados. Gratis.",
+      cardAiTitle: "Lectura con IA",
+      cardAiText:
+        "La IA responde a tu pregunta sobre el chat: quién se esfuerza más, el ambiente, los temas recurrentes. En tu dispositivo o anonimizado en la nube.",
+      cardPdfTitle: "Chat en PDF",
+      cardPdfText:
+        "Toda la conversación en un PDF para imprimir, con fotos si las exportaste. Vista previa gratis, PDF completo por {price} en un único pago.",
+      cardCourtTitle: "PDF de prueba judicial",
+      cardCourtText:
+        "Líneas numeradas, marcas de tiempo exactas y huella SHA-256, para abogados y juzgados.",
+      ctaTitle: "¿Ya tienes tu exportación? Ábrela aquí",
+      ctaButton: "Abrir mi archivo de chat",
+      ctaNote: "Se lee en tu navegador · .zip o .txt · Estadísticas gratis",
+    },
+    pdfPage: {
+      navLabel: "Chat de WhatsApp a PDF",
+      heroTitle: "Exportar un chat de WhatsApp a PDF",
+      heroSubtitle:
+        "Todos los mensajes, las fotos y las estadísticas del chat en un PDF para imprimir, guardar o enviar. Se crea en tu navegador a partir de tu exportación, sin subir nada.",
+      heroCta: "Crear mi PDF",
+      heroNote:
+        "Vista previa gratis · PDF completo por {price}, pago único · Sin cuenta",
+      exampleAlt:
+        "Páginas de un PDF creado a partir de un chat de WhatsApp de ejemplo",
+      uploadTitle: "Suelta tu exportación y obtén el PDF",
+      uploadText:
+        "Abre el archivo .zip o .txt que te dio WhatsApp. Se lee en tu navegador, no se sube.",
+      createButton: "Crear mi PDF",
+      guideLink:
+        "¿Aún no tienes la exportación? Cómo exportar un chat de WhatsApp",
+      contentsEyebrow: "Qué incluye",
+      contentsTitle: "Más que una copia impresa del chat",
+      card1Title: "Toda la conversación",
+      card1Text:
+        "Cada mensaje con su remitente, fecha y hora, en orden, y las fotos al lado si exportaste con archivos multimedia.",
+      card2Title: "Tu chat en cifras",
+      card2Text:
+        "Una portada con el primer y el último mensaje, días, mensajes y personas, y luego gráficos: evolución, por hora, por persona, por mes y por día de la semana.",
+      card3Title: "Curiosidades de cada persona",
+      card3Text:
+        "Palabras escritas, mensaje más largo, vocabulario, emojis favoritos y longitud media de los mensajes.",
+      stepsTitle: "En tres pasos",
+      step1Title: "Exporta el chat",
+      step1Text:
+        "En WhatsApp, abre el chat y elige «Exportar chat». Incluye los archivos multimedia si quieres que el PDF muestre las fotos.",
+      step2Title: "Suéltalo aquí",
+      step2Text: "El .zip o el .txt se abre en tu navegador y no se sube nada.",
+      step3Title: "Descarga el PDF",
+      step3Text:
+        "La vista previa con los 100 primeros mensajes es gratis. El chat completo cuesta {price}, en un único pago.",
+      courtEyebrow: "Para abogados y juzgados",
+      courtTitle: "¿Necesitas el chat como prueba?",
+      courtText:
+        "El PDF de prueba judicial es una transcripción sobria en blanco y negro: líneas numeradas, marcas de tiempo exactas, una huella SHA-256 de tu exportación y un índice de anexos.",
+      courtButton: "PDF de prueba judicial",
+      faqTitle: "Preguntas sobre el PDF",
+      faq1Q: "¿Puede WhatsApp exportar un chat en PDF?",
+      faq1A:
+        "No. WhatsApp exporta un chat como archivo .zip o .txt. WhatsAnalyze lo convierte en PDF, en tu navegador.",
+      faq2Q: "¿Es gratis?",
+      faq2A:
+        "La vista previa con los 100 primeros mensajes es gratis. El PDF completo de todo el chat cuesta {price} en un único pago, y con Pro descargas todos los que quieras.",
+      faq3Q: "¿Se sube mi chat a algún sitio?",
+      faq3A:
+        "No. El archivo se lee y el PDF se crea en tu navegador. El pago del PDF completo se hace con Stripe, y tu chat no forma parte de él.",
+      faq4Q: "¿Incluye las fotos?",
+      faq4A:
+        "Sí, si exportas el chat con archivos multimedia: las fotos aparecen en el PDF junto a sus mensajes. Sin ellos obtienes un PDF del texto.",
+      faq5Q: "¿Funciona con chats de grupo y en iPhone?",
+      faq5A:
+        "Sí. Cualquier chat individual o de grupo, exportado desde iPhone, Android, WhatsApp Web, Windows o Mac.",
+      ctaTitle: "Tu chat, en PDF",
+      ctaButton: "Crear mi PDF",
+      ctaNote: "Vista previa gratis · Se crea en tu navegador",
     },
     subscribePage: {
       title: "Una suscripción. Todo desbloqueado.",
@@ -2659,7 +4207,7 @@ export const messages = {
       mediaNotLoaded:
         "Tus archivos multimedia no están cargados: el chat se restauró de esta sesión del navegador, que solo guarda los mensajes. Vuelve a soltar la exportación .zip para que el índice de anexos los incluya y calcule su hash.",
       seoTitle:
-        "Chat de WhatsApp como prueba en juicio – PDF limpio | WhatsAnalyze",
+        "Chat de WhatsApp como prueba en juicio – PDF limpio – WhatsAnalyze",
       seoDescription:
         "Convierte un chat de WhatsApp en un PDF limpio y cronológico con cada mensaje y su marca de tiempo. 100 % en tu navegador, sin subir nada.",
       heroEyebrow: "Exportación lista para el juzgado",
@@ -2767,7 +4315,7 @@ export const messages = {
         "Anna y Ben se cuentan todo a lo largo del día, mezclando planes de fin de semana con bromas recurrentes. El tono es cálido y bromista, y los pequeños desacuerdos se arreglan rápido.",
       navLabel: "Alternativa a What Brandon Thinks",
       seoTitle:
-        "Alternativa gratis a What Brandon Thinks – Análisis de chat con IA privado | WhatsAnalyze",
+        "Alternativa gratis a What Brandon Thinks – Análisis de chat con IA privado – WhatsAnalyze",
       seoDescription:
         "¿Buscas una alternativa gratis a What Brandon Thinks? WhatsAnalyze analiza tu chat de WhatsApp con una IA que se ejecuta en tu propio dispositivo: gratis, sin cuenta y sin subir nunca tu chat.",
       heroTitle:
@@ -2812,9 +4360,9 @@ export const messages = {
       pillar2Title: "Anonimizado para la nube",
       pillar2Text:
         "Si eliges la IA en la nube, los nombres pasan a ser «Persona A» y «Persona B» y antes se eliminan teléfonos, correos y enlaces. Los nombres solo se restauran en tu dispositivo.",
-      pillar3Title: "No se guarda nada",
+      pillar3Title: "Solo en tu dispositivo",
       pillar3Text:
-        "No guardamos tu chat ni entrenamos modelos con él. No hay nada que borrar porque no se guardó nada.",
+        "Tu chat se guarda en tu navegador para que puedas volver a él, nunca en nuestros servidores, y no entrenamos modelos con él. Olvídalo con un toque cuando quieras.",
       faqTitle: "Preguntas sobre el cambio",
       faq1Q: "¿Hay una versión gratis de What Brandon Thinks?",
       faq1A:
@@ -2917,6 +4465,9 @@ export const messages = {
       ctaNote: "Vista previa gratis · 100 % privado",
       disclaimer:
         "WhatsAnalyze no es un asesor de inmigración ni un despacho de abogados. Los requisitos varían según el país y el caso: confírmalos siempre con tu abogado o la autoridad correspondiente.",
+    },
+    wrappedAiTeaser: {
+      text: "Elige una pregunta y sube la misma exportación del chat en la página siguiente.",
     },
     wrapped: {
       heroTitle: "WhatsApp Wrapped {currentYear}",
@@ -3024,26 +4575,25 @@ export const messages = {
     fullChat: "Tu charla completa",
     tabItemiOS1:
       "<span>En el iPhone <b>abre</b> WhatsApp y el <b>chat</b> o <b>chat de grupo</b> que deseas exportar> en la parte superior <b>toca </b> el <b>nombre</b> del chat.</span>",
-    tabItemiOS2:
-      "<span>En la información del chat, desplácese hasta el final.</span>",
+    tabItemiOS2: "<span>En la info del chat, desplázate hasta el final.</span>",
     tabItemiOS3: "<span>Toca <b>Exportar chat</b>.</span>",
-    tabItemiOS4: "<span>Elija <b>Sin medios</b>.</span>",
+    tabItemiOS4: "<span>Elige <b>Sin archivos multimedia</b>.</span>",
     tabItemiOS5:
-      "<span>Toque <b>Guardar en archivos</b> para guardarlo en su iPhone.</span>",
+      "<span>Toca <b>Guardar en Archivos</b> para guardarlo en tu iPhone.</span>",
     tabItemiOS6:
-      "<span>Finalmente seleccione <b >En mi iPhone</b> y <b >guardar</b> para guardarlo localmente.</span>",
+      "<span>Por último, elige <b>En mi iPhone</b> y toca <b>Guardar</b>.</span>",
     tabItemiOS7:
-      "<span>Por fin puede seleccionar su .zip exportado para analizarlo.</span>",
+      "<span>Ya puedes seleccionar tu .zip exportado para analizarlo.</span>",
     tabItemAndroid1:
-      "<span>En su teléfono Android, abra este sitio web en <b>Chrome</b> y toque el botón <b>agregar a la pantalla de inicio</b> y presione instalar</span>",
+      "<span>En tu móvil Android, abre esta web en <b>Chrome</b>, toca <b>Añadir a pantalla de inicio</b> y pulsa Instalar.</span>",
     tabItemAndroid2:
       "<span>Abre <b>WhatsApp</b> y toca el chat que te gustaría exportar > toca los <b>tres puntos</b> en la esquina superior derecha.</span>",
-    tabItemAndroid3: "<span>En el nuevo menú, toque <b>Más</b>.</span>",
+    tabItemAndroid3: "<span>En el menú, toca <b>Más</b>.</span>",
     tabItemAndroid4: "<span>Toca <b>Exportar chat</b>.</span>",
     tabItemAndroid5:
-      "<span>Elija Sin medios o <b>Incluir medios</b> si desea incluir sus imágenes y otros archivos en la exportación.</span>",
+      "<span>Elige <b>Sin archivos</b> o <b>Incluir archivos</b> si quieres incluir tus imágenes y otros archivos en la exportación.</span>",
     tabItemAndroid6:
-      "<span>Ahora, en la vista para compartir, toque <b>WhatsAnalyze</b> o, alternativamente, si omitió el paso 1, envíeselo a usted mismo por <b>correo electrónico</b> o guárdelo en <b>Google Conducir</b>.</span>",
+      "<span>Ahora, en la vista para compartir, toca <b>WhatsAnalyze</b> o, si te saltaste el paso 1, envíatelo por <b>correo electrónico</b> o guárdalo en <b>Google Drive</b>.</span>",
     selectFile: "Exportación completada, ahora seleccione su archivo de chat",
     messages: "Mensajes",
     totalWords: "Palabras totales:",
@@ -3059,7 +4609,7 @@ export const messages = {
     faqWhatsapp: "Preguntas frecuentes sobre los chats de WhatsApp",
     privacyFAQTitle: "¿Mis datos de chat son realmente privados?",
     privacyFAQContent:
-      "Sí, absolutamente. Todo el procesamiento del chat ocurre localmente en tu navegador. No se envía ningún dato a un servidor. Incluso puedes inspeccionar el código abierto en GitHub para verificarlo.",
+      "Sí. Las estadísticas se calculan en tu navegador, y tu chat se guarda solo en este dispositivo para que puedas volver a él. Nunca se guarda en nuestros servidores. Solo dos cosas salen de tu dispositivo, y solo si tú lo eliges: la IA en la nube recibe un extracto anonimizado (nombres sustituidos y sin teléfonos, correos ni enlaces), y un enlace para compartir guarda una copia cifrada de los resultados, nunca el chat. Puedes olvidar los chats guardados cuando quieras e inspeccionar el código abierto en GitHub.",
     howToExport: "Cómo exportar tu chat de WhatsApp",
     howToExportLong:
       "          Todos pueden exportar fácilmente su chat de WhatsApp o chat grupal. Abierto\n          WhatsApp en el dispositivo con el que está conectado actualmente> Toque en el\n          chat> Vaya a la configuración de chats> Desplácese hacia abajo y toque Exportar chat>\n          Elija exportar con o sin medios.",
@@ -3219,11 +4769,14 @@ export const messages = {
     chooseSubscription: "Suscríbete ahora",
     then: "luego",
     toolsHub: {
+      supportTitle: "Esto suena serio. No tienes que afrontarlo solo/a.",
+      supportText:
+        "Si tú u otra persona estáis en peligro, llama ahora al número de emergencias local (112 en Europa). Para apoyo gratuito y confidencial, busca una línea de ayuda de tu país en findahelpline.com (en España: 024).",
       headerTools: "Herramientas",
-      seoTitle: "Herramientas y utilidades para WhatsApp | WhatsAnalyze",
+      seoTitle: "Herramientas y utilidades para WhatsApp – WhatsAnalyze",
       seoDescription:
         "Explora herramientas individuales, rápidas y 100 % privadas para chats de WhatsApp. Desde inactividad y conteo de mensajes hasta latencias de respuesta en tu navegador.",
-      ogTitle: "Herramientas y utilidades para WhatsApp | WhatsAnalyze",
+      ogTitle: "Herramientas y utilidades para WhatsApp – WhatsAnalyze",
       ogDescription:
         "Herramientas específicas para WhatsApp. Revisa quién envió el último mensaje, cuenta mensajes y analiza pausas sin subir datos.",
       heroEyebrow: "Herramientas y utilidades para WhatsApp",
@@ -3302,6 +4855,15 @@ export const messages = {
       courtGroupTitle: "Documentación oficial y pruebas judiciales",
       courtGroupDesc:
         "Transcripciones en PDF válidas en juicios y cronogramas de relación verificados para visados y tribunales.",
+      situationsGroupTitle: "Entiende qué está pasando",
+      toolSameFightText:
+        "Mira qué se repite en vuestras discusiones y encuentra ideas para hablar de otra forma.",
+      toolTextingFirstText:
+        "Quién empieza vuestras conversaciones y lo rápido que responde cada uno.",
+      toolLosingInterestText:
+        "Tiempos de respuesta, los silencios más largos y en qué punto estáis, con calma.",
+      toolWhatToReplyText:
+        "Convierte tu borrador en una respuesta más tranquila y clara que siga sonando a ti.",
     },
     homeLanding: {
       wrappedButton: "Ver tu historia",
@@ -3328,21 +4890,90 @@ export const messages = {
       localEngine: "MOTOR LOCAL EN NAVEGADOR",
       zeroCloud: "SIN TRANSMISIÓN A LA NUBE",
       private: "100 % PRIVADO",
+      aiCloud: "IA EN LA NUBE: SOLO ANONIMIZADO",
+      aiTraining: "NO SE USA PARA ENTRENAR",
       dropTitle: "Arrastra aquí tu exportación de WhatsApp",
       dropSubtitle: "Acepta archivos de chat exportados en .txt o .zip",
       selectFile: "Seleccionar archivo de chat",
       trySample: "Probar con chat de ejemplo",
+      sampleFailed:
+        "No se ha podido cargar el chat de ejemplo. Comprueba tu conexión e inténtalo de nuevo.",
       analyzingTitle: "Analizando pausas de la conversación...",
       analyzingSubtitle:
         "Calculando marcas de tiempo, latencias y patrones de actividad",
       switchFile: "Cambiar archivo",
       messagesAnalyzedIn: "{count} mensajes • analizados en {time} ms",
-      messagesRestored: "{count} mensajes • restaurados de esta sesión",
+      messagesRestored: "{count} mensajes • sin volver a subirlo",
       dismiss: "Cerrar",
+    },
+    library: {
+      saved: "Guardado en este dispositivo",
+      dontKeep: "No guardar",
+      notKept: "No guardado en este dispositivo",
+      keep: "Guardarlo",
+      notKeptUnavailable:
+        "Este navegador no lo permite aquí, por ejemplo en una ventana privada. El chat sigue abierto hasta que cierres esta pestaña.",
+      notKeptFull:
+        "El almacenamiento de este dispositivo está lleno. El chat sigue abierto hasta que cierres esta pestaña.",
+      panelOpen: "Qué se guarda en este dispositivo",
+      yourChats: "Tus chats",
+      open: "Abrir",
+      continueIn: "Seguir en {tool}",
+      forget: "Olvidar",
+      forgetConfirm: "¿Olvidar «{name}» en este dispositivo?",
+      cancel: "Cancelar",
+      showAll: "Ver todos ({count})",
+      peopleMore: "{names} y {count} más",
+      openedAgo: "abierto {time}",
+      useSaved: "Usar un chat guardado",
+      useAnother: "Usar otro chat guardado",
+      runOnChat: "Pruébalo con tu chat con {name}",
+      runOnGroup: "Pruébalo con {name}",
+      offerNote: "Guardado en este dispositivo · sin volver a subirlo",
+      headerButton: "Tus chats en este dispositivo",
+      panelTitle: "Guardado en este dispositivo",
+      panelIntro:
+        "Tus chats se guardan en este navegador para que puedas volver a ellos sin subirlos de nuevo. Nunca salen de este dispositivo y nunca se guardan en nuestros servidores.",
+      panelShared:
+        "Cualquiera que use este navegador puede abrirlos. En un dispositivo compartido, olvídalos cuando termines.",
+      forgetThis: "Olvidar este chat",
+      storageTitle: "Almacenamiento",
+      storageChats: "Tus chats guardados ocupan {size}.",
+      storageSite:
+        "Todo lo que este sitio guarda aquí: {used} de {quota} disponibles.",
+      persisted: "Este navegador los conserva de forma fiable.",
+      notPersisted:
+        "Este navegador puede borrarlos si se queda sin espacio o tras semanas sin visitas.",
+      persistButton: "Pedir al navegador que los conserve",
+      persistDenied:
+        "El navegador ha decidido no hacerlo. Un archivo de copia de seguridad es la copia que siempre está a salvo.",
+      iosHint:
+        "En iPhone y iPad, Safari borra los datos de un sitio tras unas semanas sin visitas. Para conservar tus chats, añade WhatsAnalyze a la pantalla de inicio: toca Compartir y luego «Añadir a pantalla de inicio».",
+      backupTitle: "Copia de seguridad",
+      backupText:
+        "Descarga todos tus chats guardados en un solo archivo. Para restaurarlos, suelta el archivo en este panel o en cualquier casilla de subida.",
+      backupDownload: "Descargar copia",
+      backupRestore: "Restaurar una copia",
+      backupDownloaded: "Chats en la copia: {count}",
+      backupRestored: "Chats restaurados de la copia: {count}",
+      backupInvalid:
+        "Este archivo no es una copia de seguridad de WhatsAnalyze.",
+      forgetTitle: "Olvidar",
+      autoForget: "Olvidar los chats que no se abran en 90 días",
+      autoForgetText:
+        "Se comprueba cada vez que vuelves. Un navegador no puede borrar nada mientras el sitio está cerrado.",
+      forgetAll: "Olvidarlo todo",
+      forgetAllConfirm:
+        "¿Olvidar todos los chats, análisis y conversaciones guardados en este dispositivo? No se puede deshacer.",
+      readingsTitle: "Análisis anteriores",
+      readingGeneral: "Análisis general",
+      ranLocal: "En este dispositivo",
+      ranCloud: "Nube",
+      ranPreview: "Vista previa en la nube",
     },
     askAiCard: {
       title: "Pregúntale a la IA sobre este chat",
-      text: "Más allá de los números: deja que la IA lea este chat y responda tu pregunta, en privado en tu dispositivo y sin volver a subirlo.",
+      text: "Más allá de los números: deja que la IA lea este chat y responda tu pregunta. Primero se anonimiza en tu dispositivo, sin volver a subirlo.",
       button: "Preguntar a la IA",
     },
     toolsAi: {
@@ -3390,7 +5021,7 @@ export const messages = {
       dataContinue: "Descargar de todos modos",
       dataCancel: "Esperar a tener wifi",
       seoTitle:
-        "Analizador de chats de WhatsApp con IA privada – Gratis en tu dispositivo | WhatsAnalyze",
+        "Analizador de chats de WhatsApp con IA privada – Gratis en tu dispositivo – WhatsAnalyze",
       seoDescription:
         "Análisis de chats con IA privada que nunca sale de tu dispositivo: una IA gratis funciona en tu navegador y lee tu chat de WhatsApp (personalidades, dinámica de la relación, temas recurrentes, mejores momentos). Sin subir nada, sin cuenta. IA en la nube con extractos anonimizados para ir más a fondo.",
       ogTitle: "Analizador de chats de WhatsApp con IA",
@@ -3401,39 +5032,47 @@ export const messages = {
       heroSubtitle:
         "Sube tu chat exportado y deja que la IA describa vuestra conversación: el ambiente, el papel y el estilo de cada persona, cómo os relacionáis, vuestros temas recurrentes y mejores momentos.",
       heroNote:
-        "IA gratis en tu dispositivo: tu chat nunca sale de él · O IA en la nube anonimizada para suscriptores",
-      chooseEyebrow: "Paso 2 · Elige tu IA",
-      chooseTitle: "¿Dónde quieres que se ejecute la IA?",
+        "Anonimizado en tu dispositivo antes de que lo vea una IA · Vista previa gratis, sin cuenta · O todo en tu dispositivo",
+      chooseEyebrow: "Paso 2 · Tu informe de IA",
+      chooseTitle: "Deja que la IA lea tu chat",
       chooseText:
-        "Ambas leen fragmentos anonimizados de tu chat y generan el mismo tipo de informe. Se diferencian en privacidad, calidad y en lo que necesita tu dispositivo.",
-      localTitle: "En tu dispositivo",
-      localTag: "MÁXIMA PRIVACIDAD · GRATIS",
+        "Tu navegador anonimiza el chat antes de enviar nada. La IA en la nube funciona en cualquier móvil y da las respuestas más profundas. ¿Prefieres que nada salga de tu dispositivo? Ejecútala en este dispositivo.",
+      localTitle: "O ejecútala en este dispositivo",
+      localTag: "MÁXIMA PRIVACIDAD · FUNCIONA SIN CONEXIÓN",
       localPro1: "Nada sale de tu dispositivo, ni siquiera anonimizado",
       localPro2: "Gratis, sin cuenta",
       localPro3: "Funciona sin conexión una vez descargado el modelo",
-      localCon1: "Descarga única de unos {gb} GB",
+      localCon1: "Una descarga única grande: unos {gb} GB",
       localCon2:
-        "Necesita un móvil u ordenador reciente y puede tardar unos minutos",
+        "Necesita un móvil u ordenador reciente y puede que no funcione en todos los dispositivos",
       localCon3:
         "Modelo pequeño: análisis más sencillo, y un chat largo se lee por partes, lo que tarda unos minutos",
       localButton: "Analizar en este dispositivo",
       localUnsupported:
         "Tu navegador no admite WebGPU, que la IA local necesita. Prueba la última versión de Chrome, Edge o Safari, o usa la IA en la nube.",
-      cloudTitle: "En la nube",
-      cloudTag: "MÁXIMA CALIDAD · SUSCRIPTORES",
+      cloudTitle: "IA en la nube anonimizada",
+      cloudTag: "RECOMENDADO · MÁXIMA CALIDAD",
+      cloudTagPreview: "RECOMENDADO · VISTA PREVIA GRATIS",
       cloudPro1:
-        "Un modelo de IA de última generación: análisis mucho más profundo y preciso",
+        "Anonimizado primero en tu dispositivo: cada persona del chat pasa a ser «Person A», «Person B»…, y se eliminan teléfonos, correos, enlaces e IBAN antes de enviar nada",
       cloudPro2:
-        "Lee hasta unos 10.000 mensajes de una vez: la mayoría de los chats, enteros",
+        "Un modelo de IA de última generación: análisis mucho más profundo y preciso",
       cloudPro3: "Funciona en cualquier móvil, listo en unos 30 segundos",
+      cloudPro4:
+        "Lee hasta unos 10.000 mensajes de una vez: la mayoría de los chats, enteros",
+      cloudPro4Preview:
+        "Gratis y sin cuenta: el resumen, la respuesta a tu pregunta y un primer vistazo a cada sección",
       cloudCon1:
-        "Se envían fragmentos anonimizados a nuestro proveedor de IA (Anthropic u OpenAI) para procesarlos",
-      cloudCon2: "Incluido en la suscripción de WhatsAnalyze",
-      cloudButton: "Analizar en la nube",
-      cloudSubscribe: "Suscríbete para usar la IA en la nube",
-      cloudPreviewButton: "Prueba la vista previa gratis en la nube",
+        "Los fragmentos anonimizados salen de tu dispositivo: los procesa nuestro proveedor de IA (Anthropic u OpenAI)",
+      cloudCon2:
+        "El informe completo forma parte de la suscripción de WhatsAnalyze",
+      cloudButton: "Obtener mi informe de IA",
+      cloudSubscribe: "Suscríbete para ver el informe completo",
+      cloudPreviewButton: "Obtener mi vista previa gratis",
       error_preview_used:
         "Ya usaste la vista previa gratuita de hoy. Suscríbete para ver el informe completo o vuelve a intentarlo mañana.",
+      fallbackLocal:
+        "No hace falta esperar: ejecuta el análisis en este dispositivo. Es gratis y nada sale de tu dispositivo.",
       lockedTitle: "El informe completo tiene más",
       lockedButton: "Desbloquear el informe completo",
       cloudConsent:
@@ -3442,7 +5081,7 @@ export const messages = {
       previewText:
         "Esto es todo lo que se envía. Los nombres reales se vuelven a poner en tu dispositivo cuando llega la respuesta.",
       progressLocal: "La IA está leyendo tu chat en tu dispositivo…",
-      progressCloud: "La IA está leyendo tu chat… tarda unos 15 segundos.",
+      progressCloud: "La IA está leyendo tu chat… tarda unos 20 segundos.",
       error_local:
         "La IA local no ha podido ejecutarse. Vuelve a intentarlo o usa la IA en la nube.",
       error_local_unsupported:
@@ -3459,6 +5098,23 @@ export const messages = {
         "La IA local se ha confundido con este chat. Inténtalo de nuevo o usa la IA en la nube para mejores resultados.",
       error_no_messages:
         "No hemos encontrado mensajes de texto que analizar en este chat.",
+      error_local_gpu:
+        "El controlador gráfico no pudo iniciar la IA local. Reiniciar el navegador suele ayudar; si no, usa la IA en la nube.",
+      error_local_network:
+        "La conexión se cortó durante la descarga del modelo de IA. Comprueba tu conexión y vuelve a intentarlo: la descarga sigue donde se quedó. O usa la IA en la nube.",
+      error_local_storage:
+        "No hay suficiente espacio libre en este dispositivo para el modelo de IA. Libera espacio y vuelve a intentarlo, o usa la IA en la nube.",
+      error_preview_cap:
+        "Ya se han agotado las vistas previas gratuitas en la nube de hoy. Suscríbete para ver el informe completo o vuelve a intentarlo mañana.",
+      localUnsupportedGpu:
+        "El controlador gráfico no pudo iniciar la IA local. Reiniciar el navegador puede ayudar; la IA en la nube funciona al momento.",
+      localUnsupportedStorage:
+        "La IA local necesita unos {gb} GB de espacio libre y ahora mismo este dispositivo no los tiene. Libera espacio o usa la IA en la nube.",
+      fallbackPreview: "Probar la vista previa gratis en la nube",
+      fallbackCloud: "Analizar en la nube en su lugar",
+      dataUseCloud: "Usar la IA en la nube en su lugar",
+      progressRetry:
+        "Se cortó la conexión. Retomando la descarga donde se quedó…",
       reportCloud: "ANALIZADO CON IA EN LA NUBE",
       reportLocal: "ANALIZADO EN TU DISPOSITIVO",
       reportTitle: "Lo que la IA ve en tu chat",
@@ -3482,6 +5138,34 @@ export const messages = {
       coachNoteLocal:
         "Funciona en tu dispositivo y recuerda los últimos mensajes.",
       coachNoteCloud: "Cada mensaje usa uno de tus análisis en la nube de hoy.",
+      coachNoteFree:
+        "Vista previa gratis: unas pocas respuestas en la nube al día. Con Pro tienes más.",
+      coachNoteFreeLeft:
+        "Hoy te quedan {n} respuestas gratis en la nube. Con Pro tienes más.",
+      coachPickMe:
+        "Elige arriba quién eres, para que la respuesta se escriba desde tu lado.",
+      sampleButton: "Ver el análisis de la IA",
+      sampleNote:
+        "Chat de ejemplo: sus análisis de IA se hicieron de antemano, así que es gratis y tu vista previa gratuita queda para tu propio chat.",
+      sampleCustom:
+        "Tu propia pregunta necesita tu propio chat. Con el ejemplo, elige una de las preguntas de arriba.",
+      progressSample: "La IA está leyendo el chat de ejemplo…",
+      sampleReport:
+        "Este es el análisis completo del chat de ejemplo, preparado de antemano.",
+      sampleOwnChat: "Probar con mi propio chat",
+      sampleYoursTitle: "Te toca: ¿qué contaría tu chat?",
+      sampleYoursText:
+        "Exporta tu chat desde WhatsApp en unos toques y elige el archivo. Tu primer análisis es una vista previa gratuita, lista en unos 20 segundos, y el chat se anonimiza en tu dispositivo antes de que ninguna IA lo vea.",
+      sampleYoursButton: "Elegir mi archivo de chat",
+      sampleYoursGuide: "¿Aún no lo has exportado? Así se hace",
+      coachSampleIntro: "Prueba uno de estos:",
+      coachSampleDraft: "Borrador de {name}",
+      coachNoteSample:
+        "Chat de ejemplo: estas respuestas se prepararon de antemano. Con tu propio chat puedes preguntar lo que quieras.",
+      error_coach_free_used:
+        "Ya has usado las respuestas gratis de hoy. Vuelve mañana o hazte Pro para tener más cada día.",
+      error_coach_local_unchanged:
+        "En este dispositivo la IA no ha podido reescribir el borrador. Prueba a explicar un poco más lo que quieres decir, o usa el coach en la nube.",
       coachSupportTitle: "Esto suena serio. No tienes que afrontarlo solo/a.",
       coachSupportText:
         "Si tú u otra persona estáis en peligro, llama ahora al número de emergencias local (112 en Europa). Para apoyo gratuito y confidencial, busca una línea de ayuda de tu país en findahelpline.com (en España: 024).",
@@ -3514,7 +5198,7 @@ export const messages = {
       faqTitle: "Preguntas frecuentes",
       faq1Q: "¿Existe un analizador de chats de WhatsApp con IA gratis?",
       faq1A:
-        "Sí. El modo en tu dispositivo es gratuito y no necesita cuenta: un pequeño modelo de IA se descarga una vez en tu navegador y analiza el chat localmente. El modo en la nube, con un modelo mucho más potente, forma parte de la suscripción de WhatsAnalyze.",
+        "Sí. La IA en la nube te da una vista previa gratis sin cuenta: el resumen, la respuesta a tu pregunta y un primer vistazo a cada sección. El informe completo en la nube forma parte de la suscripción de WhatsAnalyze. El modo en tu dispositivo es totalmente gratis y no necesita cuenta: un pequeño modelo de IA se descarga una vez en tu navegador y analiza el chat localmente, en los dispositivos que pueden ejecutarlo.",
       faq2Q: "¿Se sube mi chat cuando uso la IA?",
       faq2A:
         "Con la IA en tu dispositivo no se sube nada. Con la IA en la nube solo se envían fragmentos anonimizados: tu navegador sustituye antes los nombres por marcadores y elimina teléfonos, correos y enlaces, y puedes ver exactamente qué se envía antes de empezar. No lo guardamos y nuestro proveedor de IA no lo usa para entrenar.",
@@ -3536,7 +5220,7 @@ export const messages = {
       breadcrumbTools: "Herramientas",
       breadcrumbCurrent: "Rastreador de inactividad",
       seoTitle:
-        "¿Quién escribió al final? Rastreador de inactividad de WhatsApp | WhatsAnalyze",
+        "¿Quién escribió al final? Rastreador de inactividad de WhatsApp – WhatsAnalyze",
       seoDescription:
         "Comprobador gratuito de inactividad de WhatsApp. Descubre quién envió el último mensaje, calcula el tiempo de silencio y analiza tiempos de respuesta 100 % privado.",
       ogTitle:
@@ -3574,7 +5258,7 @@ export const messages = {
       colParticipant: "Participante",
       colMessages: "Mensajes",
       colShare: "Porcentaje",
-      colMedianReply: "Respuesta mediana",
+      colAverageReply: "Respuesta media",
       colLastActive: "Última actividad",
       colLastMessage: "Último mensaje",
       gapsTitle: "Pausas más largas de la conversación",
@@ -3644,12 +5328,133 @@ export const messages = {
       hookCard4Text:
         "Convierte tu chat en una retrospectiva estilo historia de Instagram para compartir.",
     },
+    situationSameFight: {
+      navLabel: "¿Siempre la misma discusión?",
+      seoTitle:
+        "¿Siempre discutimos por lo mismo? Entiende tu chat de WhatsApp",
+      seoDescription:
+        "¿Por qué siempre discutimos por lo mismo? Deja que una IA lea vuestro chat de WhatsApp, señale los momentos que se repiten y sugiera cómo hablar de otra forma. Sin culpas ni veredictos, gratis en tu dispositivo.",
+      ogTitle: "¿Por qué siempre discutimos por lo mismo?",
+      ogDescription:
+        "Deja que una IA lea tu chat de WhatsApp y muestre el patrón detrás de esa discusión que se repite, sin decidir quién tiene razón.",
+      heroEyebrow: "¿Discusiones por WhatsApp?",
+      heroTitle: "¿Por qué siempre discutimos por lo mismo?",
+      heroSubtitle:
+        "Añade tu chat de WhatsApp y la IA responde a una pregunta: ¿cómo podríamos comunicarnos mejor? Señala momentos de vuestros propios mensajes y sugiere qué podríais probar los dos, sin decidir quién tiene razón.",
+      heroNote:
+        "Gratis en tu dispositivo · Sin cuenta · La IA en la nube solo ve extractos anonimizados",
+      continueButton: "Seguir con este chat",
+      exportGuide: "¿Cómo exporto un chat de WhatsApp?",
+      showEyebrow: "Lo que tu chat puede mostrar",
+      showTitle: "Tú recuerdas cómo te sentiste. Tu chat recuerda cómo fue.",
+      showText:
+        "Cuándo escribisteis, quién escribió primero, cuánto tardaron las respuestas: eso es lo que WhatsAnalyze lee y cuenta de verdad en tu exportación.",
+      show1Title: "Un análisis de cómo habláis",
+      show1Text:
+        "La IA responde a «¿Cómo podríamos comunicarnos mejor?» en unas pocas frases, señalando momentos de vuestro chat y sugiriendo qué podría probar cada uno.",
+      show2Title: "Cuándo os escribís",
+      show2Text:
+        "Un mapa de calor de 24 horas de vuestro chat y cuánto escribe cada persona de noche. Si vuestras conversaciones más difíciles son tarde, verás cuánto de vuestro chat ocurre a esas horas.",
+      show2Link: "Abrir el mapa de calor",
+      show3Title: "Quién empieza las conversaciones",
+      show3Text:
+        "Después de seis horas o más de silencio, ¿quién escribe primero? Contado para cada persona, como porcentaje de todas vuestras conversaciones.",
+      show3Link: "Ver quién empieza",
+      show4Title: "Lo rápido que respondéis",
+      show4Text:
+        "Cuánto tarda cada uno en responder de media y quién suele contestar antes.",
+      show4Link: "Ver tiempos de respuesta",
+      show5Title: "Los silencios más largos",
+      show5Text:
+        "Los tres periodos de silencio más largos de vuestro chat, cuándo fueron y quién escribió primero después.",
+      show5Link: "Ver los silencios",
+      show6Title: "Ayuda con el próximo mensaje",
+      show6Text:
+        "Tras un análisis completo, puedes hacer preguntas sobre vuestro chat o pegar un mensaje que vas a enviar y recibir una versión más tranquila y clara, con tus propias palabras.",
+      exampleEyebrow: "Un ejemplo",
+      exampleTitle: "Así puede ser un análisis",
+      exampleText:
+        "Inventado para esta página, para que veas cómo es: la IA nombra un patrón, señala momentos y os sugiere un siguiente paso a los dos.",
+      exampleBadge: "Ejemplo · Nora y Tom son ficticios",
+      exampleVibe: "Muy unidos, con un roce recurrente",
+      exampleSummary:
+        "Nora y Tom se escriben todo el día, sobre todo de planes, cenas y amigos. El tono es cariñoso y bromista, con una tensión que vuelve una y otra vez: los cambios de plan de última hora. Normalmente se pasa a la mañana siguiente.",
+      exampleAnswer:
+        "Vuestros desacuerdos suelen empezar igual: un plan cambia a última hora, uno de los dos se entera por mensaje y, a partir de ahí, las respuestas se acortan. Nora suele hacer una pregunta directa y Tom responde con una broma, y cada uno parece leerlo de forma distinta. Las conversaciones que se calman rápido son aquellas en las que alguien dice cómo se sintió («Me hacía ilusión lo de esta noche») en lugar de qué salió mal. Podríais cerrar los planes antes durante el día y, cuando una conversación empiece a dar vueltas, proponer una llamada.",
+      exampleDynamic1Title: "Las noches se calientan",
+      exampleDynamic1Text:
+        "El ir y venir que da vueltas pasa sobre todo después de las 23:00, cuando los dos respondéis con mensajes cortos y seguidos.",
+      exampleDynamic2Title: "Los dos vuelven a acercarse",
+      exampleDynamic2Text:
+        "Tras un día en silencio, Tom suele escribir primero con una broma, y Nora le sigue con una pregunta sobre su día.",
+      exampleDraft: "Déjalo. Siempre haces lo mismo.",
+      exampleRewrite:
+        "Me hacía mucha ilusión lo de esta noche y estoy decepcionada. ¿Podemos buscar otra noche esta semana?",
+      exampleWhy:
+        "Por qué: «Siempre haces lo mismo» suele reabrir la misma discusión en este chat. Decir cómo te sientes y proponer un siguiente paso le da a Tom algo a lo que responder.",
+      limitsEyebrow: "Límites honestos",
+      limitsTitle: "Lo que puede decirte y lo que no",
+      limit1Title: "Patrones, no veredictos",
+      limit1Text:
+        "La IA señala momentos y sugiere qué probar. No decide quién tiene razón ni quién tiene la culpa, y no es terapia ni asesoramiento profesional.",
+      limit2Title: "Solo lo que hay en el chat",
+      limit2Text:
+        "Las llamadas, el tono de voz y lo que pasó en persona no están en una exportación, y la IA puede malinterpretar la ironía o el contexto. Tómalo como una perspectiva y contrástalo con lo que sabes.",
+      limit3Title: "Un chat corto dice poco",
+      limit3Text:
+        "Unas pocas docenas de mensajes o una mala semana no son un patrón. Cuanto más historial cubra tu exportación, más hay en lo que basarse. Si no hay suficiente, a la IA se le pide que lo diga.",
+      privacyEyebrow: "Privado por defecto",
+      privacyTitle: "Sus mensajes también están ahí",
+      privacyText:
+        "Un chat contiene las palabras de la otra persona además de las tuyas, así que aquí tienes exactamente adónde va.",
+      privacy1Title: "Guardado solo en este dispositivo",
+      privacy1Text:
+        "Por defecto, tu chat se guarda en este navegador, en este dispositivo, para que puedas volver a él. Puedes elegir no guardarlo u olvidarlo cuando quieras.",
+      privacy2Title: "Las estadísticas y la IA del dispositivo se quedan aquí",
+      privacy2Text:
+        "Las estadísticas y la IA en tu dispositivo funcionan en tu navegador. Nada de lo que leen sale de tu dispositivo.",
+      privacy3Title: "Anonimizado para la nube",
+      privacy3Text:
+        "Si eliges la IA en la nube, incluida la vista previa gratis, solo se envían extractos anonimizados: nombres sustituidos y teléfonos, correos, enlaces e IBAN eliminados. El proveedor de IA no entrena con ellos.",
+      supportEyebrow: "Cuando es más que una discusión",
+      supportTitle: "Si las discusiones te dan miedo",
+      supportText:
+        "Si alguien te amenaza, te controla o te hace sentir en peligro, un análisis de chat no es la ayuda que necesitas, y no tienes que afrontarlo solo/a. Cuando un chat o un mensaje apunta a abuso, amenazas o autolesiones, el coach de IA está hecho para parar e indicarte dónde pedir ayuda.",
+      supportLink: "Encontrar una línea de ayuda en tu país",
+      faqTitle: "Preguntas frecuentes",
+      faq1Q: "¿Por qué siempre discutimos por lo mismo?",
+      faq1A:
+        "A menudo cambia el tema, pero no cómo se desarrolla: el mismo tipo de momento lo desencadena y cada uno responde como la última vez. Esta página no puede decirte con certeza por qué, pero tu chat puede mostrar cuándo suele pasar y cómo van los mensajes, y eso os da algo concreto de lo que hablar juntos.",
+      faq2Q: "¿Me dirá quién tiene razón?",
+      faq2A:
+        "No. Está pensado para mostrar el patrón, no para elegir un ganador. A la IA se le pregunta cómo podríais comunicaros mejor, y responde con momentos de vuestro chat e ideas para los dos. No juzga a nadie y puede malinterpretar el contexto.",
+      faq3Q: "¿Me ayuda a escribir el próximo mensaje?",
+      faq3A:
+        "Sí. Debajo de un análisis, «Ayúdame a responder» toma un mensaje que estás a punto de enviar y te sugiere una versión más tranquila y clara que mantiene lo que quieres decir, con una nota breve sobre lo que ha cambiado. Tú decides qué envías. Tras un análisis en tu dispositivo funciona allí gratis; tras la vista previa gratis en la nube tienes algunas respuestas gratis al día, y con Pro más.",
+      faq4Q: "¿Es gratis?",
+      faq4A:
+        "Las estadísticas y el análisis con IA en tu dispositivo son gratis y sin cuenta, igual que las preguntas de seguimiento tras un análisis en el dispositivo. Sin suscripción también puedes probar una breve vista previa gratis en la nube, con algunas respuestas gratis del coach al día. El análisis completo en la nube y más respuestas en la nube cada día forman parte de Pro ({price}/mes).",
+      faq5Q: "¿Se sube mi chat?",
+      faq5A:
+        "No para las estadísticas ni para la IA en tu dispositivo: funcionan en tu navegador y nada de lo que leen sale de tu dispositivo. Por defecto, el chat se guarda en este navegador para que puedas volver a él; puedes elegir no guardarlo u olvidarlo cuando quieras. Si eliges la IA en la nube, solo se envían extractos anonimizados (nombres sustituidos; teléfonos, correos, enlaces e IBAN eliminados), y nuestro proveedor de IA no entrena con ellos. Antes de empezar puedes ver exactamente qué se enviaría.",
+      faq6Q: "¿Funciona también con discusiones con amigos o familia?",
+      faq6A:
+        "Sí. Sirve cualquier chat de WhatsApp que exportes, ya sea con tu pareja, un amigo, tus padres o tus hermanos, y también los chats de grupo. La IA describe cómo se hablan las personas que hay en él, sean quienes sean.",
+      faq7Q: "¿Cuánto chat necesita?",
+      faq7A:
+        "Cuanto más historial, mejor. Unas pocas docenas de mensajes o una sola semana difícil no muestran un patrón. Exporta el chat entero sin archivos multimedia; un chat largo no es problema.",
+      ctaTitle: "Primero, ver el patrón. Después, hablarlo juntos.",
+      ctaButton: "Analizar mi chat",
+      ctaNote: "Gratis en tu dispositivo · Sin cuenta · Sin veredictos",
+      disclaimer:
+        "WhatsAnalyze es independiente y no está afiliado a WhatsApp ni a Meta. Un análisis con IA es una perspectiva para reflexionar, no terapia ni asesoramiento profesional.",
+    },
     pageNameInactivity: "Inactividad y última respuesta en WhatsApp",
     toolsMessageCounter: {
-      seoTitle: "Contador de mensajes y líneas de WhatsApp | WhatsAnalyze",
+      seoTitle: "Contador de mensajes y líneas de WhatsApp – WhatsAnalyze",
       seoDescription:
         "Cuenta mensajes, líneas y caracteres de tu chat de WhatsApp. Descubre quién escribe más y el día más activo 100 % privado en tu navegador.",
-      ogTitle: "Contador de mensajes y líneas de WhatsApp | WhatsAnalyze",
+      ogTitle: "Contador de mensajes y líneas de WhatsApp – WhatsAnalyze",
       ogDescription:
         "Contador rápido y privado para WhatsApp. Descubre quién envía más mensajes y tus récords de conversación.",
       heroEyebrow: "Herramienta gratuita para WhatsApp",
@@ -3715,11 +5520,133 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze es un proyecto de código abierto independiente y no está afiliado, respaldado ni patrocinado por WhatsApp o Meta.",
     },
+    situationTextingFirst: {
+      navLabel: "¿Siempre escribes tú primero?",
+      seoTitle: "¿Siempre escribes tú primero? Quién empieza en WhatsApp",
+      seoDescription:
+        "¿Siempre escribo yo primero? Mira quién empieza las conversaciones en tu chat de WhatsApp y lo rápido que responde cada uno. Gratis y en tu dispositivo.",
+      heroEyebrow: "Quién empieza la conversación",
+      heroTitle: "¿Siempre escribes tú primero?",
+      heroSubtitle:
+        "Si sientes que todas las conversaciones empiezan por ti, tu chat puede mostrar cómo es de verdad: quién empieza y lo rápido que responde cada uno. Lado a lado, contado en tu dispositivo.",
+      heroNote: "Gratis · Sin cuenta · Los números no salen de tu dispositivo",
+      offerLabel: "Pregunta quién pone más empeño en tu chat con {name}",
+      resultsEyebrow: "Tu chat en números",
+      resultsTitle: "Quién empieza y lo rápido que responde cada uno",
+      resultsText:
+        "Léelos juntos. Empezar menos conversaciones pero responder en minutos también es esfuerzo.",
+      resultsFew:
+        "Conversaciones hasta ahora: {count}. Todavía son pocas para sacar conclusiones.",
+      resultsHow:
+        "Una conversación la empieza quien escribe primero tras al menos seis horas de silencio. El tiempo de respuesta es el promedio de lo que tarda cada persona en contestar a otra, contando las respuestas dentro de un día.",
+      numbersStarted: "de las conversaciones iniciadas",
+      numbersStartedOf: "{count} de {total} conversaciones",
+      numbersReply: "Respuesta media",
+      numbersNoReplies: "Aún sin respuestas",
+      numbersLast: "Último mensaje",
+      numbersMessages: "Mensajes",
+      numbersMore: "Otras personas en este chat: {count}",
+      nextTitle: "¿Quieres algo más que horas y minutos?",
+      nextText:
+        "La IA puede leer los propios mensajes y responder a «¿Quién pone más empeño en este chat?». Tu chat ya está abierto, así que no hay que subir nada de nuevo.",
+      nextButton: "Preguntar quién pone más empeño",
+      nextNote:
+        "Gratis en tu dispositivo, o como vista previa gratuita en la nube, que solo envía fragmentos anonimizados.",
+      showEyebrow: "Lo que tu chat puede mostrar",
+      showTitle: "Los números detrás de la sensación",
+      showText:
+        "Todo se cuenta a partir de tu chat exportado, en tu navegador.",
+      show1Title: "Quién empieza las conversaciones",
+      show1Text:
+        "La parte de las conversaciones que inicia cada persona y cuántas son. Una conversación nueva empieza tras seis horas de silencio.",
+      show2Title: "Lo rápido que responde cada uno",
+      show2Text:
+        "El tiempo medio de respuesta de cada persona, justo al lado de su porcentaje: así se ve tanto empezar menos como responder rápido.",
+      show3Title: "Quién escribió el último, y cuándo",
+      show3Text:
+        "Cuándo escribió cada uno por última vez y cuántos mensajes ha enviado cada persona.",
+      show4Title: "Lo que dicen los mensajes",
+      show4Text:
+        "Si quieres más, la IA lee el propio chat y responde a «¿Quién pone más empeño en este chat?» con palabras claras.",
+      exampleEyebrow: "Un ejemplo",
+      exampleTitle: "Mia empieza más. Leo responde más rápido.",
+      exampleText:
+        "Dos personas inventadas, para mostrar cómo leer los números. Mia inicia unas dos terceras partes de sus conversaciones; Leo suele responder en pocos minutos. Ninguno de los dos números dice a quién le importa más.",
+      exampleCaption: "Ejemplo · Mia y Leo son inventados",
+      exampleVibe: "Un ir y venir tranquilo, de cada día",
+      exampleSummary:
+        "Mia y Leo se escriben casi a diario: planes para el fin de semana, historias del trabajo y una broma recurrente sobre las plantas de Leo.",
+      exampleAnswer:
+        "Los dos, de maneras distintas. Mia abre la mayoría de las conversaciones, a menudo con un plan o una pregunta sobre el día de Leo. Leo empieza menos, pero responde en minutos y hace las preguntas que mantienen viva la conversación. Si a Mia le gustaría que Leo escribiera primero más a menudo, vale la pena decírselo. El chat no puede decidirlo por ellos.",
+      limitsEyebrow: "Límites honestos",
+      limitsTitle: "Quién escribe primero no lo es todo",
+      limitsText:
+        "Los números muestran un patrón en un chat. No miden cuánto le importas a alguien ni te dicen si una amistad o una relación es unilateral.",
+      limit1Title: "Cada persona tiene su estilo",
+      limit1Text:
+        "Algunas personas planean y escriben. Otras casi nunca empiezan, pero responden rápido y con cariño. Las dos cosas forman parte de mantener el contacto.",
+      limit2Title: "La vida pasa fuera del chat",
+      limit2Text:
+        "Los horarios de trabajo, las zonas horarias, las llamadas y el tiempo juntos no aparecen en una exportación de WhatsApp.",
+      limit3Title: "Patrones, no veredictos",
+      limit3Text:
+        "Un 70 % describe lo que pasó en este chat. Lo que significa lo decides tú, y quizá valga la pena hablarlo.",
+      limit4Title: "Un chat corto dice poco",
+      limit4Text:
+        "Unas pocas semanas o unas decenas de conversaciones pueden inclinarse hacia cualquier lado. Cuanto más largo es el chat, más dicen los números.",
+      supportTitle: "Cuando se trata de algo más que un chat",
+      privacyEyebrow: "Privado por diseño",
+      privacyTitle: "Tu chat sigue siendo tuyo",
+      privacy1Title: "Contado en tu dispositivo",
+      privacy1Text:
+        "Los números se calculan en tu navegador. Tu chat no se envía a ningún sitio para contarlos.",
+      privacy2Title: "Guardado aquí, si quieres",
+      privacy2Text:
+        "Por defecto, tu chat se guarda solo en este dispositivo, para que puedas volver sin subirlo de nuevo. Toca «No guardar» para deshacerlo, u olvídalo cuando quieras.",
+      privacy3Title: "La IA, a tu manera",
+      privacy3Text:
+        "Con la IA en tu dispositivo, tu chat nunca sale de él. La vista previa gratuita en la nube solo envía fragmentos anonimizados (nombres sustituidos; teléfonos, correos, enlaces e IBAN eliminados), y el proveedor de IA no entrena con ellos.",
+      stepsTitle: "Cómo revisar tu chat",
+      step1Title: "Exporta el chat",
+      step1Text:
+        "En WhatsApp, abre el chat, toca su nombre arriba y luego «Exportar chat» y «Sin archivos».",
+      step2Title: "Suéltalo aquí",
+      step2Text:
+        "Suelta el archivo en el recuadro de arriba de esta página, o elígelo. Se lee en tu navegador.",
+      step3Title: "Lee los dos números",
+      step3Text:
+        "Mira juntos quién empieza y lo rápido que responde cada uno. Si quieres, pregúntale a la IA por la historia que hay detrás.",
+      stepsGuide: "Guía detallada de exportación para iPhone y Android",
+      faqTitle: "Preguntas frecuentes",
+      faq1Q: "¿Cómo sé si siempre escribo yo primero?",
+      faq1A:
+        "Exporta el chat de WhatsApp y suéltalo en el recuadro de esta página. La página cuenta quién escribió primero en cada conversación y muestra el porcentaje de cada persona junto a lo rápido que responde. Una conversación nueva empieza cuando alguien escribe tras al menos seis horas de silencio.",
+      faq2Q: "Si siempre escribo yo primero, ¿es una amistad unilateral?",
+      faq2A:
+        "No por sí solo. A algunas personas les gusta empezar conversaciones y otras responden mejor; el trabajo, las zonas horarias y el tiempo juntos también cuentan. Los números te ayudan a ver un patrón. Si te parece justo, eso solo se aclara hablando entre los dos.",
+      faq3Q: "¿Qué cuenta como empezar una conversación?",
+      faq3A:
+        "El primer mensaje del chat y cada mensaje enviado tras al menos seis horas sin mensajes. El tiempo de respuesta es el promedio de lo que tarda cada persona en contestar a otra, contando las respuestas dentro de un día.",
+      faq4Q: "¿Se sube mi chat?",
+      faq4A:
+        "No para los números: se cuentan en tu navegador. Por defecto, tu chat se guarda solo en este dispositivo, y puedes deshacerlo. Si preguntas a la IA, con la IA en tu dispositivo todo se queda en tu dispositivo, y la vista previa gratuita en la nube solo envía fragmentos anonimizados (nombres sustituidos; teléfonos, correos, enlaces e IBAN eliminados). El proveedor de IA no entrena con ellos.",
+      faq5Q: "¿Funciona con amigos, familia y grupos?",
+      faq5A:
+        "Sí, con cualquier chat de WhatsApp que puedas exportar. En un grupo, cada persona tiene su propio porcentaje de conversaciones iniciadas y su propio tiempo de respuesta.",
+      faq6Q: "¿Es gratis?",
+      faq6A:
+        "Los números de esta página son gratis y no necesitan cuenta. La lectura con IA es gratis en tu dispositivo, y la IA en la nube tiene una vista previa gratuita. El informe completo en la nube forma parte de WhatsAnalyze Pro ({price}/mes).",
+      ctaTitle: "Mira quién empieza las conversaciones en tu chat",
+      ctaButton: "Revisar mi chat",
+      ctaNote: "Gratis · Sin cuenta · Contado en tu dispositivo",
+      disclaimer:
+        "WhatsAnalyze muestra patrones en un chat, no veredictos sobre personas ni relaciones. Es un proyecto de código abierto independiente y no está afiliado, respaldado ni patrocinado por WhatsApp o Meta.",
+    },
     toolsWordCounter: {
-      seoTitle: "Contador de palabras y vocabulario de WhatsApp | WhatsAnalyze",
+      seoTitle: "Contador de palabras y vocabulario de WhatsApp – WhatsAnalyze",
       seoDescription:
         "Descubre el recuento total de palabras, riqueza léxica, longitud media de mensajes y las palabras más usadas en tus chats de WhatsApp 100 % privado.",
-      ogTitle: "Contador de palabras y vocabulario de WhatsApp | WhatsAnalyze",
+      ogTitle: "Contador de palabras y vocabulario de WhatsApp – WhatsAnalyze",
       ogDescription:
         "Analiza el total de palabras, vocabulario único y términos más frecuentes de tus chats de WhatsApp sin subir datos.",
       heroEyebrow: "Herramienta gratuita para WhatsApp",
@@ -3785,11 +5712,141 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze es un proyecto de código abierto independiente y no está afiliado, respaldado ni patrocinado por WhatsApp o Meta.",
     },
+    situationLosingInterest: {
+      navLabel: "¿Está perdiendo el interés?",
+      appName: "Tiempos de respuesta y silencios en WhatsApp",
+      seoTitle:
+        "¿Está perdiendo el interés? Mira los tiempos de respuesta en WhatsApp",
+      seoDescription:
+        "¿Tarda cada vez más en contestar o te escribe menos que antes? Mira el tiempo medio de respuesta de cada persona, los silencios más largos y quién escribe primero. Gratis y privado, en tu dispositivo.",
+      heroEyebrow: "¿Tarda cada vez más en contestar?",
+      heroTitle: "¿Está perdiendo el interés?",
+      heroSubtitle:
+        "Respuestas más lentas, menos mensajes, silencios más largos: es fácil pensar lo peor. Las horas de los mensajes de tu chat muestran qué ha cambiado de verdad y cuándo, para que puedas mirarlo con calma antes de sacar conclusiones.",
+      heroNote:
+        "Gratis · Sin cuenta · Los números se calculan en tu dispositivo",
+      offerLabel: "Pregúntale a la IA por tu chat con {name}",
+      resultEyebrow: "Tu chat",
+      resultTitle: "Lo que muestra tu chat",
+      resultText:
+        "Calculado en tu dispositivo a partir de la hora de cada mensaje. Patrones, no un veredicto.",
+      resultNowLabel: "Cómo están las cosas",
+      resultNow: "El último mensaje fue {time}, de {name}.",
+      resultNowNote:
+        "Contado hasta hoy. Si exportaste el chat hace tiempo, parecerá más tranquilo de lo que es.",
+      status_active: "Ha habido mensajes en los últimos dos días.",
+      status_dormant:
+        "Lleva unos días en calma, algo habitual en una semana ajetreada.",
+      status_inactive: "Lleva más de una semana en calma.",
+      status_ghosted: "Lleva más de un mes en calma.",
+      resultPeopleTitle: "Persona a persona",
+      resultReply: "Respuesta media",
+      resultReplyNone: "Muy pocas respuestas",
+      resultStarted: "Escribió primero",
+      resultMessages: "Mensajes",
+      resultMorePeople: "Y {count} personas más en este grupo.",
+      resultPeopleNote:
+        "Respuesta media: cuánto tarda alguien en contestar a la otra persona, contando solo las respuestas en menos de un día. Escribió primero: con qué frecuencia alguien retomó el chat tras seis horas o más de silencio.",
+      resultGapsTitle: "Los silencios más largos",
+      resultGapEnded: "Después, {name} escribió primero",
+      resultSpan: "{count} mensajes en {days} días",
+      resultAiButton: "Pregúntale a la IA por este chat",
+      resultAiNote:
+        "Responde a «¿Hay algo que deba preocuparme?» y antes te pregunta quién eres tú. No hace falta volver a añadir el chat.",
+      resultTimelineLink: "Ver tus mensajes a lo largo del tiempo",
+      showEyebrow: "Lo que tu chat puede mostrar",
+      showTitle: "Los hechos detrás de la sensación",
+      showText: "Todo se cuenta a partir de tu exportación. Nada se adivina.",
+      show1Title: "Tiempos de respuesta, de cada persona",
+      show1Text:
+        "Cuánto tarda de media cada persona en contestar a la otra. Solo cuentan las respuestas en menos de un día, para que un silencio largo no lo distorsione.",
+      show2Title: "Los silencios más largos",
+      show2Text:
+        "Los tres silencios más largos del chat, cuándo fueron y quién escribió primero después.",
+      show3Title: "Quién escribe primero",
+      show3Text:
+        "Tras seis horas o más sin mensajes, quién retoma la conversación, como porcentaje para cada persona.",
+      show4Title: "Cómo están las cosas hoy",
+      show4Text: "Cuándo se envió el último mensaje y quién lo envió.",
+      show5Title: "Mensajes a lo largo del tiempo",
+      show5Text:
+        "El análisis completo dibuja tus mensajes día a día, del primero al último, para que veas si algo cambió y cuándo.",
+      show5Link: "Abrir el análisis",
+      exampleEyebrow: "Un ejemplo",
+      exampleTitle: "Así se lee el chat de Sam y Alex",
+      exampleText:
+        "Números inventados de dos personas ficticias, presentados igual que se verá tu propio chat.",
+      exampleBadge: "Ejemplo · Sam y Alex son ficticios",
+      exampleReadingTitle: "Leerlo con calma",
+      exampleNote1:
+        "Alex tarda más de media en contestar y aun así empieza casi la mitad de las conversaciones. Tardar más no significa tener menos interés.",
+      exampleNote2:
+        "El silencio más largo duró cuatro días en agosto. ¿Un viaje? ¿Una semana complicada? Los números no lo saben, y no fingen saberlo.",
+      exampleNote3:
+        "Nada de esto dice cómo se siente cada uno. Si Sam tiene dudas, hablar con Alex le dirá más que cualquier gráfico.",
+      limitsEyebrow: "Antes de sacar conclusiones",
+      limitsTitle: "Las respuestas lentas suelen tener motivos normales",
+      limitsText:
+        "Un mes de mucho trabajo, exámenes, unas vacaciones, una semana de estrés, una costumbre nueva como silenciar las notificaciones: todo eso aparece en un chat como respuestas más lentas y pausas más largas.",
+      limit1Title: "Patrones, no veredictos",
+      limit1Text:
+        "Los números muestran cuándo y con qué frecuencia hubo mensajes, nunca por qué. No pueden decirte qué siente o qué pretende nadie.",
+      limit2Title: "Un chat corto dice poco",
+      limit2Text:
+        "Con solo unas semanas de mensajes, una semana ajetreada mueve todas las medias. Cuanto más largo es el chat, más significan los números.",
+      limit3Title: "Un chat no lo es todo",
+      limit3Text:
+        "Las llamadas, el tiempo juntos y otras apps no aparecen en una exportación. Escribir menos puede significar simplemente hablar más por otro lado.",
+      limit4Title: "Hablar ayuda más que contar",
+      limit4Text:
+        "Si algo se siente distinto, un amable «¿Va todo bien? Echo de menos hablar contigo» suele decirte más que cualquier estadística, y se recibe mejor sin los números como prueba.",
+      supportTitle: "Si esto te pesa mucho o no te sientes a salvo",
+      aiEyebrow: "Una segunda lectura",
+      aiTitle: "Pregúntale a la IA qué ve",
+      aiText:
+        "Las horas de los mensajes solo dicen hasta cierto punto. La IA lee los propios mensajes y responde a una pregunta: «¿Hay algo que deba preocuparme?». Antes te pregunta quién eres tú y lo recuerda para la próxima vez.",
+      aiCard1Title: "Gratis, en tu dispositivo",
+      aiCard1Text:
+        "La IA en el dispositivo funciona en tu navegador. Tu chat no sale de tu dispositivo.",
+      aiCard2Title: "O una vista previa gratuita en la nube",
+      aiCard2Text:
+        "Solo se envían fragmentos anonimizados: los nombres se sustituyen y se eliminan teléfonos, correos, enlaces y números de cuenta (IBAN). El proveedor de IA no entrena con ellos.",
+      aiCard3Title: "Ahí cuando vuelvas",
+      aiCard3Text:
+        "Tu chat se guarda en este dispositivo para que puedas abrirlo de nuevo más tarde sin volver a subirlo. Elige «No guardar» si prefieres que no.",
+      aiButton: "Preguntar a la IA",
+      faqTitle: "Preguntas frecuentes",
+      faq1Q:
+        "Si tarda más en contestar, ¿significa que está perdiendo el interés?",
+      faq1A:
+        "Por sí solo, no. Las respuestas se vuelven más lentas por muchos motivos: trabajo, exámenes, viajes, salud, estrés o simplemente un nuevo hábito con el teléfono. Los números muestran qué cambió y cuándo. El porqué solo te lo puede decir la otra persona.",
+      faq2Q: "¿Cómo se calcula el tiempo medio de respuesta?",
+      faq2A:
+        "Cada vez que una persona contesta a la otra en menos de 24 horas, el tiempo entre ambos mensajes cuenta como una respuesta, y se muestra la media para cada persona. Las pausas de más de un día cuentan como silencios.",
+      faq3Q:
+        "¿Puedo ver si las respuestas se han vuelto más lentas últimamente?",
+      faq3A:
+        "Esta página muestra las medias de todo el chat y cuándo fueron los silencios más largos. Para ver cómo cambió el número de mensajes con el tiempo, abre el análisis completo: su cronología muestra tus mensajes día a día, del primero al último.",
+      faq4Q: "¿Se sube mi chat a algún sitio?",
+      faq4A:
+        "No. Los números de esta página se calculan en tu navegador, en tu dispositivo. El chat se guarda en este dispositivo para que puedas volver a abrirlo, y puedes decidir no guardarlo u olvidarlo cuando quieras. Solo si eliges la IA en la nube, incluida su vista previa gratuita, se envían fragmentos anonimizados: nombres sustituidos y teléfonos, correos, enlaces y números de cuenta (IBAN) eliminados. El proveedor de IA no entrena con ellos.",
+      faq5Q: "¿Debería enseñarle estos números?",
+      faq5A:
+        "Te sugerimos empezar por cómo te sientes. Las estadísticas pueden sonar a reproche, mientras que un sencillo «Echo de menos hablar contigo, ¿va todo bien?» invita a una respuesta sincera.",
+      faq6Q: "¿Con qué chats funciona?",
+      faq6A:
+        "Con cualquier chat de WhatsApp que exportes, desde iPhone o Android, individual o de grupo, en cualquier idioma. Expórtalo sin archivos multimedia y suelta el archivo .zip o .txt en el recuadro de arriba.",
+      ctaTitle: "Mira qué ha cambiado de verdad",
+      ctaButton: "Revisar tu chat",
+      ctaNote: "Gratis · Sin cuenta · Calculado en tu dispositivo",
+      disclaimer:
+        "WhatsAnalyze es un proyecto independiente y no está afiliado a WhatsApp ni a Meta. Los números describen patrones en un chat. No pueden decirte qué siente o qué pretende nadie, y no sustituyen una buena conversación.",
+    },
     toolsChatHeatmap: {
-      seoTitle: "Horas pico y mapa de calor 24h de WhatsApp | WhatsAnalyze",
+      seoTitle: "Horas pico y mapa de calor 24h de WhatsApp – WhatsAnalyze",
       seoDescription:
         "Descubre a qué horas alcanza el pico tu chat de WhatsApp a lo largo de 24 horas. Compara día y noche 100 % privado en tu navegador.",
-      ogTitle: "Horas pico y mapa de calor 24h de WhatsApp | WhatsAnalyze",
+      ogTitle: "Horas pico y mapa de calor 24h de WhatsApp – WhatsAnalyze",
       ogDescription:
         "Analiza cuándo se envían más mensajes y compara patrones de día y noche en tus chats de WhatsApp sin subir datos.",
       heroEyebrow: "Herramienta gratuita para WhatsApp",
@@ -3855,6 +5912,136 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze es un proyecto de código abierto independiente y no está afiliado, respaldado ni patrocinado por WhatsApp o Meta.",
     },
+    situationWhatToReply: {
+      navLabel: "¿Qué le respondo?",
+      seoTitle:
+        "¿Qué le respondo? Ayuda con tu respuesta de WhatsApp – WhatsAnalyze",
+      seoDescription:
+        "¿No sabes qué responder a ese mensaje? Una IA que ha leído tu chat de WhatsApp convierte tu borrador en una respuesta más tranquila y clara, con tu propia voz. Gratis en dispositivos compatibles.",
+      ogTitle: "¿Qué le respondo? Ayuda con tu respuesta de WhatsApp",
+      ogDescription:
+        "Sube tu chat de WhatsApp y recibe ayuda con la respuesta: una versión más tranquila y clara de lo que quieres decir, de una IA que ha leído tu chat.",
+      heroEyebrow: "Ayuda para responder",
+      heroTitle: "¿Qué le respondo?",
+      heroSubtitle:
+        "Tienes el mensaje delante y no sabes cómo contestar. Sube tu chat y una IA que lo ha leído te ayuda a encontrar las palabras: escribe lo que quieres decir y recibe una versión más tranquila y clara, con tu voz y una nota sobre el porqué.",
+      heroNote:
+        "Gratis en tu dispositivo, si tu navegador puede ejecutarlo · Algunas respuestas gratis en la nube al día · Más con Pro",
+      continueButton: "Pedir ayuda para responder con este chat",
+      offerChat: "Ayuda para responder a {name}",
+      offerGroup: "Ayuda para responder en {name}",
+      exampleEyebrow: "Un ejemplo",
+      exampleTitle: "Así es la ayuda",
+      exampleText:
+        "Tom vuelve a escribir tras una semana en silencio. El primer borrador de Mia dice cómo se siente, con una pulla. El coach conserva el sentimiento y quita la pulla.",
+      exampleBadge: "Ejemplo · Mia y Tom son ficticios",
+      exampleIncoming:
+        "Perdona que haya estado tan callado esta semana, el trabajo me ha desbordado. ¿Seguimos con lo del sábado?",
+      exampleDraft: "Vaya, sigues vivo. Vale, lo que sea.",
+      exampleReply:
+        "¡Qué bien saber de ti! La verdad es que te he echado de menos esta semana. El sábado me va bien, ¿en el sitio de siempre?",
+      exampleWhy:
+        "Por qué: tu borrador dice que te sentiste de lado, y eso vale la pena decirlo. En vuestro chat, Tom se abre cuando dices cómo te sientes, mientras que tras el sarcasmo solía venir un día de silencio. Así mantienes tu mensaje y le das algo a lo que responder.",
+      showEyebrow: "Lo que tu chat puede mostrar",
+      showTitle: "Ayuda que conoce vuestra forma de hablar",
+      showText:
+        "El coach de IA trabaja con tu chat, no con una plantilla: fragmentos anonimizados y la lectura de IA bajo la que se abre.",
+      show1Title: "Cómo escribís",
+      show1Text:
+        "La lectura describe el tono de vuestro chat y cómo escribe cada uno, para que una sugerencia suene a vuestro chat.",
+      show2Title: "Tu borrador, más tranquilo y claro",
+      show2Text:
+        "Escribe lo que quieres decir. El coach mantiene lo que quieres transmitir y te lo devuelve más tranquilo y claro, con tu voz.",
+      show3Title: "Una nota sobre el porqué",
+      show3Text:
+        "Cada sugerencia trae una nota breve sobre qué cambió y por qué, señalando cómo suele ir vuestro chat.",
+      show4Title: "Preguntas sobre el mensaje",
+      show4Text:
+        "¿No sabes qué quiere decir un mensaje? Pregunta. El coach señala momentos de tu chat y está hecho para decírtelo cuando el chat no da la respuesta.",
+      stepsEyebrow: "Cómo llegar",
+      stepsTitle: "De tu chat a una respuesta",
+      step1Title: "Sube tu chat",
+      step1Text:
+        "Exporta el chat desde WhatsApp sin archivos multimedia, cuando ya haya llegado el mensaje que quieres responder, y arrástralo arriba. Se lee en tu navegador.",
+      step2Title: "Obtén una lectura",
+      step2Text:
+        "El coach aparece debajo de un análisis con IA de vuestro chat. Úsalo gratis en tu dispositivo, si tu navegador puede, o en la nube: la vista previa gratis incluye algunas respuestas gratis del coach al día, y con Pro tienes más.",
+      step3Title: "Pregunta o escribe tu borrador",
+      step3Text:
+        "Bajo la lectura, elige «{reply}», escribe lo que te gustaría decir y recibe una versión más tranquila y clara. O elige «{ask}» para hablar antes del mensaje.",
+      plansTitle: "Qué es gratis y qué necesita Pro",
+      plan1Title: "En tu dispositivo: gratis",
+      plan1Text:
+        "La lectura y el coach funcionan en tu navegador tras una descarga única del modelo, y nada sale de tu dispositivo. Necesita WebGPU: un ordenador reciente, la mayoría de los Android recientes con Chrome o un iPhone con iOS 26 o posterior. El modelo es pequeño, así que sus respuestas son más sencillas.",
+      plan2Title: "Vista previa gratis en la nube",
+      plan2Text:
+        "Una muestra del análisis de una IA más potente, hecha con fragmentos anonimizados, más algunas respuestas gratis del coach al día.",
+      plan3Title: "Pro: {price} al mes",
+      plan3Text:
+        "La lectura completa y el coach en la nube, en cualquier móvil. Cada mensaje al coach usa uno de los análisis en la nube del día.",
+      ownWordsEyebrow: "Tus palabras",
+      ownWordsTitle: "Envíalo con tus propias palabras",
+      ownWordsText:
+        "Una sugerencia es un punto de partida, no un guion. La gente nota cuando un mensaje no suena a quien lo envía, y una respuesta que parece escrita por una máquina puede sentar distinto. Quédate con lo que te sirva, cambia lo que no, y envíalo como tú lo dirías.",
+      limitsEyebrow: "Límites honestos",
+      limitsTitle: "Lo que no puede hacer",
+      limit1Title: "Patrones, no veredictos",
+      limit1Text:
+        "El coach puede decir cómo suele ir vuestro chat. No puede saber qué siente la otra persona ni qué hará después.",
+      limit2Title: "Solo lo que está escrito",
+      limit2Text:
+        "La IA lee fragmentos de todo el chat, siempre con los mensajes más recientes. No lee notas de voz, fotos ni stickers, y el modelo del dispositivo lee menos que el de la nube.",
+      limit3Title: "Un chat corto dice poco",
+      limit3Text:
+        "Con pocos mensajes hay poco en qué apoyarse, y las sugerencias se acercan a consejos generales.",
+      limit4Title: "La IA se equivoca",
+      limit4Text:
+        "Puede pasar por alto la ironía, las bromas internas o cualquier cosa que pasara fuera del chat. Tu situación la conoces tú mejor que nadie.",
+      privacyEyebrow: "Privado por defecto",
+      privacyTitle: "Tu chat sigue siendo tuyo",
+      privacyText:
+        "Un chat exportado también contiene los mensajes de la otra persona, así que se trata con cuidado.",
+      privacy1Title: "Guardado solo en este dispositivo",
+      privacy1Text:
+        "Tu chat se guarda en este navegador para que puedas volver, nunca en nuestros servidores. ¿No quieres? Elige «{dontKeep}» bajo la zona de subida.",
+      privacy2Title: "La IA del dispositivo se queda en el dispositivo",
+      privacy2Text:
+        "Con la IA gratuita en tu dispositivo, tu chat, su lectura y lo que escribes al coach nunca salen de tu dispositivo.",
+      privacy3Title: "Anonimizado para la nube",
+      privacy3Text:
+        "La IA en la nube solo recibe fragmentos anonimizados y lo que escribes al coach: se sustituyen los nombres del chat y se eliminan teléfonos, correos, enlaces e IBAN. El proveedor de IA no entrena con ellos.",
+      supportEyebrow: "Cuando es serio",
+      supportTitle: "Algunos mensajes necesitan más que una buena respuesta",
+      supportText:
+        "Si tu chat o tu pregunta apuntan a maltrato, amenazas o autolesiones, el coach no escribe una respuesta: muestra recursos de ayuda. No lo detecta todo, así que si no te sientes a salvo, busca ayuda ahora.",
+      supportDevice:
+        "En un dispositivo compartido, elige «{dontKeep}» bajo la zona de subida para que el chat no se guarde en este navegador. Un chat guardado se puede olvidar en cualquier momento desde «{saved}».",
+      faqTitle: "Preguntas sobre la ayuda para responder",
+      faq1Q: "¿Puede una IA decirme qué responder?",
+      faq1A:
+        "Puede ayudarte a llegar. Escribe una versión aproximada de lo que quieres decir y el coach te la devuelve más tranquila y clara, con tu voz y el tono habitual de vuestro chat, y una nota breve sobre qué cambió. O pregúntale primero por el mensaje. La respuesta sigue siendo tuya: cambia lo que no suene a ti antes de enviarla.",
+      faq2Q: "¿Es gratis?",
+      faq2A:
+        "Sí. En tu dispositivo, el análisis y el coach funcionan gratis en el navegador, si admite WebGPU. En la nube, la vista previa gratis muestra parte del análisis e incluye algunas respuestas gratis del coach al día, en cualquier móvil. Con Pro ({price} al mes) tienes el análisis completo y más respuestas del coach cada día.",
+      faq3Q: "¿Ve la IA el mensaje que me acaba de llegar?",
+      faq3A:
+        "Solo si está en tu exportación, así que exporta el chat después de que llegue el mensaje. La IA lee fragmentos de todo el chat e incluye siempre los mensajes más recientes. Si guardaste el chat antes de que llegara, expórtalo de nuevo. También puedes pegar el mensaje en tu pregunta.",
+      faq4Q: "¿Se sube mi chat?",
+      faq4A:
+        "Tu chat se lee en tu navegador y se guarda solo en este dispositivo, y puedes deshacerlo. Con la IA del dispositivo, nada sale de él. Con la IA en la nube, solo se envían fragmentos anonimizados y lo que escribes al coach: se sustituyen los nombres del chat y se eliminan teléfonos, correos, enlaces e IBAN. El proveedor de IA no entrena con ellos.",
+      faq5Q: "¿Recuerda el coach nuestra conversación?",
+      faq5A:
+        "Si el chat está guardado en este dispositivo, la conversación se guarda junto a la lectura a la que siguió, así que sigue ahí cuando vuelves. Si olvidas el chat, la conversación se va con él.",
+      faq6Q: "¿Y si el mensaje trata de algo serio?",
+      faq6A:
+        "Si tu chat o tu pregunta apuntan a maltrato, amenazas o autolesiones, el coach no escribe una respuesta, sino que muestra recursos de ayuda. Si tú u otra persona estáis en peligro, llama ahora al número de emergencias (112 en Europa).",
+      ctaTitle: "Encuentra las palabras y hazlas tuyas",
+      ctaButton: "Sube tu chat",
+      ctaNote:
+        "Se lee en tu navegador · Guardado solo en este dispositivo, si quieres",
+      disclaimer:
+        "WhatsAnalyze es un proyecto independiente, sin relación con WhatsApp ni Meta. Las sugerencias del coach son para reflexionar, no asesoramiento profesional.",
+    },
     pageNameMessages: "Contador de mensajes y líneas de WhatsApp",
     pageNameWords: "Contador de palabras y vocabulario de WhatsApp",
     pageNameHeatmap: "Horas pico y mapa de calor 24h de WhatsApp",
@@ -3867,16 +6054,104 @@ export const messages = {
       homeDescription:
         "O analisador de WhatsApp mais popular. Descobre as estatísticas das tuas conversas e exporta o teu chat em PDF sem carregar os teus dados.",
       exportGuideTitle:
-        "WhatsAnalyze - Como exportar a tua conversa do WhatsApp",
+        "Exportar conversa do WhatsApp: iPhone, Android, Web e PDF",
       exportGuideDescription:
-        "Exporta a tua conversa do WhatsApp. Tutorial para iOS e guia para Android.",
-      pdfGuideTitle:
-        "WhatsAnalyze - Como exportar a tua conversa do WhatsApp para PDF",
+        "Passo a passo para exportar qualquer conversa ou grupo do WhatsApp no iPhone, Android, WhatsApp Web, Windows ou Mac, com ou sem fotos. Depois, gere um PDF ou estatísticas.",
+      pdfGuideTitle: "Exportar conversa do WhatsApp para PDF, com fotos",
       pdfGuideDescription:
-        "Exporta a tua conversa do WhatsApp para PDF em segundos, sem enviar dados para um servidor.",
+        "Transforme uma conversa exportada do WhatsApp em um PDF com todas as mensagens, as fotos e estatísticas. Criado no seu navegador, sem upload. Prévia grátis.",
       signalTitle: "WhatsAnalyze - Como mudar do WhatsApp para o Signal",
       signalDescription:
         "Muda do WhatsApp para o Signal, transfere conversas de grupo e cria cópias de segurança.",
+    },
+    exportGuidePage: {
+      heroCta: "Já exportou? Abra sua conversa",
+      checkedNote:
+        "Passos conferidos na Central de Ajuda do WhatsApp em {date}",
+      phoneTitle: "Passo a passo no iPhone e no Android",
+      explainerCta: "Já tem o arquivo? Abra aqui",
+      computerLink: "No computador? Passos para WhatsApp Web, Windows e Mac",
+      nextEyebrow: "Próximo passo",
+      nextTitle: "Abra sua exportação aqui mesmo",
+      nextText:
+        "Solte aqui o arquivo .zip ou .txt. Ele é lido no seu navegador, não é enviado para lugar nenhum. Depois escolha o que quer ver.",
+      cardOpen: "Abrir",
+      cardContinue: "Continuar com esta conversa",
+      cardStatsTitle: "Estatísticas da conversa",
+      cardStatsText:
+        "Quem escreve mais, em que horários, as palavras e emojis mais usados. Grátis.",
+      cardAiTitle: "Leitura com IA",
+      cardAiText:
+        "A IA responde sua pergunta sobre a conversa: quem se esforça mais, o clima, os assuntos recorrentes. No seu aparelho ou anonimizada na nuvem.",
+      cardPdfTitle: "Conversa em PDF",
+      cardPdfText:
+        "A conversa inteira em um PDF para imprimir, com as fotos se você as exportou. Prévia grátis, PDF completo por {price} em pagamento único.",
+      cardCourtTitle: "PDF de prova judicial",
+      cardCourtText:
+        "Linhas numeradas, horários exatos e impressão digital SHA-256, para advogados e tribunais.",
+      ctaTitle: "Exportação pronta? Abra aqui",
+      ctaButton: "Abrir meu arquivo",
+      ctaNote: "Lido no seu navegador · .zip ou .txt · Estatísticas grátis",
+    },
+    pdfPage: {
+      navLabel: "Conversa do WhatsApp em PDF",
+      heroTitle: "Exportar uma conversa do WhatsApp para PDF",
+      heroSubtitle:
+        "Todas as mensagens, as fotos e as estatísticas da conversa em um PDF para imprimir, guardar ou enviar. Criado no seu navegador a partir da sua exportação, sem upload.",
+      heroCta: "Criar meu PDF",
+      heroNote:
+        "Prévia grátis · PDF completo por {price}, pagamento único · Sem conta",
+      exampleAlt:
+        "Páginas de um PDF criado a partir de uma conversa de exemplo do WhatsApp",
+      uploadTitle: "Solte sua exportação e receba o PDF",
+      uploadText:
+        "Abra o arquivo .zip ou .txt que o WhatsApp criou. Ele é lido no seu navegador, não é enviado.",
+      createButton: "Criar meu PDF",
+      guideLink: "Ainda não exportou? Como exportar uma conversa do WhatsApp",
+      contentsEyebrow: "O que tem dentro",
+      contentsTitle: "Mais do que uma impressão da conversa",
+      card1Title: "A conversa inteira",
+      card1Text:
+        "Cada mensagem com remetente, data e hora, em ordem, e as fotos ao lado se você exportou com mídia.",
+      card2Title: "Sua conversa em números",
+      card2Text:
+        "Uma capa com a primeira e a última mensagem, dias, mensagens e pessoas, e depois gráficos: linha do tempo, por hora, por pessoa, por mês e por dia da semana.",
+      card3Title: "Curiosidades de cada pessoa",
+      card3Text:
+        "Palavras escritas, mensagem mais longa, vocabulário, emojis favoritos e tamanho médio das mensagens.",
+      stepsTitle: "Em três passos",
+      step1Title: "Exporte a conversa",
+      step1Text:
+        "No WhatsApp, abra a conversa e escolha “Exportar conversa”. Inclua a mídia se o PDF deve mostrar as fotos.",
+      step2Title: "Solte aqui",
+      step2Text: "O .zip ou o .txt abre no seu navegador, e nada é enviado.",
+      step3Title: "Baixe o PDF",
+      step3Text:
+        "A prévia com as 100 primeiras mensagens é grátis. A conversa inteira custa {price}, em pagamento único.",
+      courtEyebrow: "Para advogados e tribunais",
+      courtTitle: "Precisa da conversa como prova?",
+      courtText:
+        "O PDF de prova judicial é uma transcrição sóbria em preto e branco: linhas numeradas, horários exatos, uma impressão digital SHA-256 da sua exportação e uma lista de anexos.",
+      courtButton: "PDF de prova judicial",
+      faqTitle: "Perguntas sobre o PDF",
+      faq1Q: "O WhatsApp exporta conversas em PDF?",
+      faq1A:
+        "Não. O WhatsApp exporta uma conversa como arquivo .zip ou .txt. O WhatsAnalyze transforma esse arquivo em PDF, no seu navegador.",
+      faq2Q: "É grátis?",
+      faq2A:
+        "A prévia com as 100 primeiras mensagens é grátis. O PDF completo da conversa inteira custa {price} em pagamento único, e com o Pro você baixa quantos quiser.",
+      faq3Q: "Minha conversa é enviada para algum lugar?",
+      faq3A:
+        "Não. O arquivo é lido e o PDF é criado no seu navegador. O pagamento do PDF completo é feito pelo Stripe, e sua conversa não faz parte dele.",
+      faq4Q: "As fotos vêm junto?",
+      faq4A:
+        "Sim, se você exportar a conversa com mídia: as fotos aparecem no PDF ao lado das mensagens. Sem mídia, você recebe um PDF do texto.",
+      faq5Q: "Funciona com grupos e no iPhone?",
+      faq5A:
+        "Sim. Qualquer conversa individual ou em grupo, exportada do iPhone, Android, WhatsApp Web, Windows ou Mac.",
+      ctaTitle: "Sua conversa em PDF",
+      ctaButton: "Criar meu PDF",
+      ctaNote: "Prévia grátis · Criado no seu navegador",
     },
     subscribePage: {
       title: "Uma assinatura. Tudo liberado.",
@@ -3933,6 +6208,9 @@ export const messages = {
       errorPortalFailed: "Não foi possível abrir o portal do cliente.",
     },
     analyzeYourChat: "Começar",
+    wrappedAiTeaser: {
+      text: "Escolha uma pergunta e envie a mesma exportação da conversa na página seguinte.",
+    },
     wrapped: {
       heroTitle: "WhatsApp Wrapped {currentYear}",
       heroSubtitle:
@@ -4074,7 +6352,7 @@ export const messages = {
     faqWhatsapp: "FAQs sobre chats do WhatsApp",
     privacyFAQTitle: "Meus dados de chat são realmente privados?",
     privacyFAQContent:
-      "Sim, com certeza. Todo o processamento do chat ocorre localmente em seu navegador. Nenhum dado é enviado para um servidor. Você pode até mesmo inspecionar o código-fonte aberto no GitHub para verificar.",
+      "Sim. As estatísticas são calculadas no seu navegador, e a sua conversa fica guardada apenas neste dispositivo para que possa voltar a ela. Nunca é guardada nos nossos servidores. Só duas coisas saem do seu dispositivo, e só se as escolher: a IA na nuvem recebe um excerto anonimizado (nomes substituídos e sem números de telefone, emails nem links), e um link de partilha guarda uma cópia encriptada dos resultados, nunca a conversa. Pode esquecer as conversas guardadas quando quiser e consultar o código aberto no GitHub.",
     howToExport: "Como exportar seu chat do WhatsApp",
     howToExportLong:
       " Todos podem exportar facilmente seu chat ou grupo de chat do WhatsApp. Abra\n o WhatsApp no dispositivo em que você está atualmente logado > Toque no\n chat > Vá para as configurações do chat > Role para baixo e toque em Exportar chat >\n Escolha exportar com ou sem mídia.",
@@ -4238,11 +6516,15 @@ export const messages = {
     chooseSubscription: "Assinar Agora",
     then: "depois",
     toolsHub: {
+      supportTitle:
+        "Isso parece sério. Você não precisa lidar com isso sozinho(a).",
+      supportText:
+        "Se você ou outra pessoa estiver em perigo, ligue agora para o número de emergência local. Para apoio gratuito e confidencial, encontre uma linha de ajuda no seu país em findahelpline.com (no Brasil, CVV: 188).",
       headerTools: "Ferramentas",
-      seoTitle: "Ferramentas e utilitários para WhatsApp | WhatsAnalyze",
+      seoTitle: "Ferramentas e utilitários para WhatsApp – WhatsAnalyze",
       seoDescription:
         "Ferramentas individuais, rápidas e 100% privadas para conversas do WhatsApp. De rastreamento de inatividade a contagem de mensagens e tempos de resposta.",
-      ogTitle: "Ferramentas e utilitários para WhatsApp | WhatsAnalyze",
+      ogTitle: "Ferramentas e utilitários para WhatsApp – WhatsAnalyze",
       ogDescription:
         "Ferramentas focadas para WhatsApp. Veja quem mandou a última mensagem e analise pausas sem envio de dados.",
       heroEyebrow: "Ferramentas e utilitários para WhatsApp",
@@ -4321,6 +6603,15 @@ export const messages = {
       courtGroupTitle: "Documentação oficial e comprovações jurídicas",
       courtGroupDesc:
         "Relatórios em PDF para processos judiciais e linhas do tempo verificadas para pedidos de visto.",
+      situationsGroupTitle: "Entenda o que se passa",
+      toolSameFightText:
+        "Veja o que se repete nas suas discussões e encontre ideias para falar de outra forma.",
+      toolTextingFirstText:
+        "Quem começa as conversas e com que rapidez cada um responde.",
+      toolLosingInterestText:
+        "Tempos de resposta, os silêncios mais longos e o ponto em que estão, com calma.",
+      toolWhatToReplyText:
+        "Transforme o seu rascunho numa resposta mais calma e clara, nas suas próprias palavras.",
     },
     homeLanding: {
       wrappedButton: "Ver a sua história",
@@ -4347,21 +6638,90 @@ export const messages = {
       localEngine: "MOTOR LOCAL NO NAVEGADOR",
       zeroCloud: "SEM TRANSMISSÃO PARA NUVEM",
       private: "100% PRIVADO",
+      aiCloud: "IA NA NUVEM: SÓ ANONIMIZADO",
+      aiTraining: "NÃO USADO PARA TREINO",
       dropTitle: "Arraste sua exportação do WhatsApp aqui",
       dropSubtitle: "Aceita arquivos de chat em .txt ou .zip",
       selectFile: "Selecionar arquivo de conversa",
       trySample: "Testar com conversa de exemplo",
+      sampleFailed:
+        "Não foi possível carregar a conversa de exemplo. Verifique a sua ligação e tente novamente.",
       analyzingTitle: "Analisando intervalos da conversa...",
       analyzingSubtitle:
         "Calculando horários, tempos de resposta e padrões de inatividade",
       switchFile: "Trocar arquivo",
       messagesAnalyzedIn: "{count} mensagens • analisadas em {time} ms",
-      messagesRestored: "{count} mensagens • restauradas desta sessão",
+      messagesRestored: "{count} mensagens • sem novo carregamento",
       dismiss: "Fechar",
+    },
+    library: {
+      saved: "Guardado neste dispositivo",
+      dontKeep: "Não guardar",
+      notKept: "Não guardado neste dispositivo",
+      keep: "Guardar",
+      notKeptUnavailable:
+        "Este navegador não o permite aqui, por exemplo numa janela privada. A conversa fica aberta até fechar este separador.",
+      notKeptFull:
+        "O armazenamento deste dispositivo está cheio. A conversa fica aberta até fechar este separador.",
+      panelOpen: "O que fica guardado neste dispositivo",
+      yourChats: "As suas conversas",
+      open: "Abrir",
+      continueIn: "Continuar em {tool}",
+      forget: "Esquecer",
+      forgetConfirm: "Esquecer “{name}” neste dispositivo?",
+      cancel: "Cancelar",
+      showAll: "Ver todas ({count})",
+      peopleMore: "{names} e mais {count}",
+      openedAgo: "aberta {time}",
+      useSaved: "Usar uma conversa guardada",
+      useAnother: "Usar outra conversa guardada",
+      runOnChat: "Experimente com a sua conversa com {name}",
+      runOnGroup: "Experimente com {name}",
+      offerNote: "Guardada neste dispositivo · sem novo carregamento",
+      headerButton: "As suas conversas neste dispositivo",
+      panelTitle: "Guardado neste dispositivo",
+      panelIntro:
+        "As suas conversas ficam guardadas neste navegador para que possa voltar a elas sem as carregar de novo. Nunca saem deste dispositivo e nunca são guardadas nos nossos servidores.",
+      panelShared:
+        "Qualquer pessoa que use este navegador pode abri-las. Num dispositivo partilhado, esqueça-as quando terminar.",
+      forgetThis: "Esquecer esta conversa",
+      storageTitle: "Armazenamento",
+      storageChats: "As suas conversas guardadas ocupam {size}.",
+      storageSite:
+        "Tudo o que este site guarda aqui: {used} de {quota} disponíveis.",
+      persisted: "Este navegador guarda-as de forma fiável.",
+      notPersisted:
+        "Este navegador pode apagá-las quando ficar sem espaço ou após semanas sem visitas.",
+      persistButton: "Pedir ao navegador que as guarde",
+      persistDenied:
+        "O navegador decidiu que não. Um ficheiro de cópia de segurança é a cópia que está sempre a salvo.",
+      iosHint:
+        "No iPhone e no iPad, o Safari apaga os dados de um site após algumas semanas sem visitas. Para guardar as suas conversas, adicione o WhatsAnalyze ao ecrã principal: toque em Partilhar e depois em “Adicionar ao ecrã principal”.",
+      backupTitle: "Cópia de segurança",
+      backupText:
+        "Descarregue todas as conversas guardadas num só ficheiro. Para as restaurar, largue o ficheiro neste painel ou em qualquer caixa de carregamento.",
+      backupDownload: "Descarregar cópia",
+      backupRestore: "Restaurar uma cópia",
+      backupDownloaded: "Conversas na cópia: {count}",
+      backupRestored: "Conversas restauradas da cópia: {count}",
+      backupInvalid:
+        "Este ficheiro não é uma cópia de segurança do WhatsAnalyze.",
+      forgetTitle: "Esquecer",
+      autoForget: "Esquecer conversas não abertas há 90 dias",
+      autoForgetText:
+        "Verificado sempre que volta. Um navegador não consegue apagar nada enquanto o site está fechado.",
+      forgetAll: "Esquecer tudo",
+      forgetAllConfirm:
+        "Esquecer todas as conversas, análises e diálogos guardados neste dispositivo? Não é possível desfazer.",
+      readingsTitle: "Análises anteriores",
+      readingGeneral: "Análise geral",
+      ranLocal: "Neste dispositivo",
+      ranCloud: "Nuvem",
+      ranPreview: "Pré-visualização na nuvem",
     },
     askAiCard: {
       title: "Pergunte à IA sobre esta conversa",
-      text: "Para além dos números: deixe a IA ler esta conversa e responder à sua pergunta, em privado no seu dispositivo e sem novo envio.",
+      text: "Para além dos números: deixe a IA ler esta conversa e responder à sua pergunta. Primeiro é anonimizada no seu dispositivo, sem novo envio.",
       button: "Perguntar à IA",
     },
     toolsAi: {
@@ -4409,7 +6769,7 @@ export const messages = {
       dataContinue: "Transferir na mesma",
       dataCancel: "Esperar pelo Wi-Fi",
       seoTitle:
-        "Analisador de conversas do WhatsApp com IA privada – Grátis no seu dispositivo | WhatsAnalyze",
+        "Analisador de conversas do WhatsApp com IA privada – Grátis no seu dispositivo – WhatsAnalyze",
       seoDescription:
         "Análise de conversas com IA privada que nunca sai do seu dispositivo: uma IA grátis corre no seu navegador e lê a sua conversa do WhatsApp (personalidades, dinâmica da relação, temas recorrentes, melhores momentos). Sem envio, sem conta. IA na nuvem com excertos anonimizados para ir mais fundo.",
       ogTitle: "Analisador de conversas do WhatsApp com IA",
@@ -4420,40 +6780,47 @@ export const messages = {
       heroSubtitle:
         "Carregue a sua conversa exportada e deixe a IA descrevê-la: o ambiente, o papel e o estilo de cada pessoa, como interagem, os vossos temas recorrentes e melhores momentos.",
       heroNote:
-        "IA grátis no seu dispositivo: a conversa nunca sai dele · Ou IA na nuvem anonimizada para subscritores",
-      chooseEyebrow: "Passo 2 · Escolha a sua IA",
-      chooseTitle: "Onde deve correr a IA?",
+        "Anonimizada no seu dispositivo antes de qualquer IA a ver · Pré-visualização grátis, sem conta · Ou tudo no seu dispositivo",
+      chooseEyebrow: "Passo 2 · O seu relatório de IA",
+      chooseTitle: "Deixe a IA ler a sua conversa",
       chooseText:
-        "Ambas leem excertos anonimizados da sua conversa e produzem o mesmo tipo de relatório. Diferem na privacidade, na qualidade e no que o seu dispositivo precisa.",
-      localTitle: "No seu dispositivo",
-      localTag: "PRIVACIDADE MÁXIMA · GRÁTIS",
+        "O seu navegador anonimiza a conversa antes de enviar seja o que for. A IA na nuvem funciona em qualquer telemóvel e dá as respostas mais profundas. Prefere que nada saia do seu dispositivo? Execute-a neste dispositivo.",
+      localTitle: "Ou execute-a neste dispositivo",
+      localTag: "PRIVACIDADE MÁXIMA · FUNCIONA OFFLINE",
       localPro1: "Nada sai do seu dispositivo, nem sequer anonimizado",
       localPro2: "Grátis, sem conta",
       localPro3: "Funciona offline depois de transferir o modelo",
-      localCon1: "Transferência única de cerca de {gb} GB",
+      localCon1: "Uma transferência única grande: cerca de {gb} GB",
       localCon2:
-        "Precisa de um telemóvel ou computador recente e pode demorar alguns minutos",
+        "Precisa de um telemóvel ou computador recente e pode não funcionar em todos os dispositivos",
       localCon3:
         "Modelo pequeno: análise mais simples, e uma conversa longa é lida por partes, o que demora alguns minutos",
       localButton: "Analisar neste dispositivo",
       localUnsupported:
         "O seu navegador não suporta WebGPU, que a IA local precisa. Experimente a versão mais recente do Chrome, Edge ou Safari, ou use a IA na nuvem.",
-      cloudTitle: "Na nuvem",
-      cloudTag: "MELHOR QUALIDADE · SUBSCRITORES",
+      cloudTitle: "IA na nuvem anonimizada",
+      cloudTag: "RECOMENDADO · MELHOR QUALIDADE",
+      cloudTagPreview: "RECOMENDADO · PRÉ-VISUALIZAÇÃO GRÁTIS",
       cloudPro1:
-        "Um modelo de IA de ponta: análise muito mais profunda e precisa",
+        "Anonimizada primeiro no seu dispositivo: cada pessoa da conversa passa a «Person A», «Person B»…, e números de telefone, e-mails, links e IBAN são removidos antes de qualquer envio",
       cloudPro2:
-        "Lê até cerca de 10 000 mensagens de uma só vez — a maioria das conversas, por inteiro",
+        "Um modelo de IA de ponta: análise muito mais profunda e precisa",
       cloudPro3:
         "Funciona em qualquer telemóvel, pronto em cerca de 30 segundos",
+      cloudPro4:
+        "Lê até cerca de 10 000 mensagens de uma só vez — a maioria das conversas, por inteiro",
+      cloudPro4Preview:
+        "Grátis e sem conta: o resumo, a resposta à sua pergunta e um primeiro olhar sobre cada secção",
       cloudCon1:
-        "São enviados excertos anonimizados ao nosso fornecedor de IA (Anthropic ou OpenAI) para processamento",
-      cloudCon2: "Incluído na subscrição do WhatsAnalyze",
-      cloudButton: "Analisar na nuvem",
-      cloudSubscribe: "Subscreva para desbloquear a IA na nuvem",
-      cloudPreviewButton: "Experimente a pré-visualização grátis na nuvem",
+        "Os excertos anonimizados saem do seu dispositivo: são processados pelo nosso fornecedor de IA (Anthropic ou OpenAI)",
+      cloudCon2: "O relatório completo faz parte da subscrição do WhatsAnalyze",
+      cloudButton: "Obter o meu relatório de IA",
+      cloudSubscribe: "Subscreva para ver o relatório completo",
+      cloudPreviewButton: "Obter a minha pré-visualização grátis",
       error_preview_used:
         "Já usou a pré-visualização grátis de hoje. Subscreva para ver o relatório completo ou tente novamente amanhã.",
+      fallbackLocal:
+        "Não precisa de esperar: execute a análise neste dispositivo. É grátis e nada sai do seu dispositivo.",
       lockedTitle: "O relatório completo tem mais",
       lockedButton: "Desbloquear o relatório completo",
       cloudConsent:
@@ -4463,7 +6830,7 @@ export const messages = {
         "Isto é tudo o que é enviado. Os nomes reais são repostos no seu dispositivo quando chega a resposta.",
       progressLocal: "A IA está a ler a sua conversa no seu dispositivo…",
       progressCloud:
-        "A IA está a ler a sua conversa… demora cerca de 15 segundos.",
+        "A IA está a ler a sua conversa… demora cerca de 20 segundos.",
       error_local:
         "A IA local não conseguiu arrancar. Tente novamente ou use a IA na nuvem.",
       error_local_unsupported:
@@ -4480,6 +6847,22 @@ export const messages = {
         "A IA local baralhou-se com esta conversa. Tente novamente ou use a IA na nuvem para melhores resultados.",
       error_no_messages:
         "Não encontrámos mensagens de texto para analisar nesta conversa.",
+      error_local_gpu:
+        "O controlador gráfico não conseguiu arrancar a IA local. Reiniciar o navegador costuma ajudar; caso contrário, use a IA na nuvem.",
+      error_local_network:
+        "A ligação caiu durante a transferência do modelo de IA. Verifique a ligação e tente novamente: a transferência continua onde parou. Ou use a IA na nuvem.",
+      error_local_storage:
+        "Não há espaço livre suficiente neste dispositivo para o modelo de IA. Liberte espaço e tente novamente, ou use a IA na nuvem.",
+      error_preview_cap:
+        "As pré-visualizações grátis na nuvem de hoje já se esgotaram. Subscreva para ver o relatório completo ou tente novamente amanhã.",
+      localUnsupportedGpu:
+        "O controlador gráfico não conseguiu arrancar a IA local. Reiniciar o navegador pode ajudar; a IA na nuvem funciona de imediato.",
+      localUnsupportedStorage:
+        "A IA local precisa de cerca de {gb} GB de espaço livre, que este dispositivo não tem neste momento. Liberte espaço ou use a IA na nuvem.",
+      fallbackPreview: "Experimentar a pré-visualização grátis na nuvem",
+      fallbackCloud: "Analisar na nuvem em alternativa",
+      dataUseCloud: "Usar a IA na nuvem em alternativa",
+      progressRetry: "A ligação caiu. A retomar a transferência onde parou…",
       reportCloud: "ANALISADO PELA IA NA NUVEM",
       reportLocal: "ANALISADO NO SEU DISPOSITIVO",
       reportTitle: "O que a IA vê na sua conversa",
@@ -4502,6 +6885,34 @@ export const messages = {
       coachNoteLocal: "Roda no seu dispositivo e lembra as últimas mensagens.",
       coachNoteCloud:
         "Cada mensagem usa uma das suas análises na nuvem de hoje.",
+      coachNoteFree:
+        "Pré-visualização grátis: algumas respostas na nuvem por dia. Com o Pro, você recebe mais.",
+      coachNoteFreeLeft:
+        "Hoje restam {n} respostas grátis na nuvem. Com o Pro, você recebe mais.",
+      coachPickMe:
+        "Escolha lá em cima quem é você, para que a resposta seja escrita do seu lado.",
+      sampleButton: "Ver a análise da IA",
+      sampleNote:
+        "Conversa de exemplo: as análises da IA foram feitas antecipadamente, por isso é grátis e a sua pré-visualização grátis fica para a sua própria conversa.",
+      sampleCustom:
+        "Uma pergunta sua precisa da sua própria conversa. Com o exemplo, escolha uma das perguntas acima.",
+      progressSample: "A IA está a ler a conversa de exemplo…",
+      sampleReport:
+        "Esta é a análise completa da conversa de exemplo, preparada antecipadamente.",
+      sampleOwnChat: "Experimentar com a minha conversa",
+      sampleYoursTitle: "É a sua vez: o que diria a sua conversa?",
+      sampleYoursText:
+        "Exporte a sua conversa do WhatsApp em poucos toques e escolha o ficheiro. A sua primeira análise é uma pré-visualização grátis, pronta em cerca de 20 segundos, e a conversa é anonimizada no seu dispositivo antes de qualquer IA a ver.",
+      sampleYoursButton: "Escolher o ficheiro da conversa",
+      sampleYoursGuide: "Ainda não exportou? Veja como",
+      coachSampleIntro: "Experimente uma destas:",
+      coachSampleDraft: "Rascunho de {name}",
+      coachNoteSample:
+        "Conversa de exemplo: estas respostas foram preparadas antecipadamente. Com a sua própria conversa, pode perguntar o que quiser.",
+      error_coach_free_used:
+        "Você já usou as respostas grátis de hoje. Volte amanhã ou assine o Pro para ter mais respostas por dia.",
+      error_coach_local_unchanged:
+        "Neste dispositivo, a IA não conseguiu reescrever o rascunho. Tente explicar um pouco mais o que você quer dizer, ou use o coach na nuvem.",
       coachSupportTitle:
         "Isso parece sério. Você não precisa lidar com isso sozinho(a).",
       coachSupportText:
@@ -4535,7 +6946,7 @@ export const messages = {
       faqTitle: "Perguntas frequentes",
       faq1Q: "Existe um analisador de conversas do WhatsApp com IA grátis?",
       faq1A:
-        "Sim. O modo no seu dispositivo é grátis e não precisa de conta: um pequeno modelo de IA é transferido uma vez para o seu navegador e analisa a conversa localmente. O modo na nuvem, com um modelo muito mais potente, faz parte da subscrição do WhatsAnalyze.",
+        "Sim. A IA na nuvem dá-lhe uma pré-visualização grátis sem conta: o resumo, a resposta à sua pergunta e um primeiro olhar sobre cada secção. O relatório completo na nuvem faz parte da subscrição do WhatsAnalyze. O modo no seu dispositivo é totalmente grátis e não precisa de conta: um pequeno modelo de IA é transferido uma vez para o seu navegador e analisa a conversa localmente, nos dispositivos que o conseguem executar.",
       faq2Q: "A minha conversa é enviada quando uso a IA?",
       faq2A:
         "Com a IA no seu dispositivo, nada é enviado. Com a IA na nuvem, só são enviados excertos anonimizados: o seu navegador substitui primeiro os nomes por marcadores e remove números, e-mails e links, e pode ver exatamente o que é enviado antes de começar. Não o guardamos e o nosso fornecedor de IA não o usa para treino.",
@@ -4557,7 +6968,7 @@ export const messages = {
       breadcrumbTools: "Ferramentas",
       breadcrumbCurrent: "Rastreador de inatividade",
       seoTitle:
-        "Quem enviou a última mensagem? Rastreador de inatividade do WhatsApp | WhatsAnalyze",
+        "Quem enviou a última mensagem? Rastreador de inatividade do WhatsApp – WhatsAnalyze",
       seoDescription:
         "Verificador gratuito de inatividade do WhatsApp. Saiba quem mandou a última mensagem, calcule o tempo de silêncio e veja tempos de resposta 100% no navegador.",
       ogTitle: "Quem enviou a última mensagem? Rastreador de inatividade",
@@ -4594,7 +7005,7 @@ export const messages = {
       colParticipant: "Participante",
       colMessages: "Mensagens",
       colShare: "Proporção",
-      colMedianReply: "Resposta mediana",
+      colAverageReply: "Resposta média",
       colLastActive: "Última atividade",
       colLastMessage: "Última mensagem",
       gapsTitle: "Maiores períodos de silêncio na conversa",
@@ -4664,11 +7075,131 @@ export const messages = {
       hookCard4Text:
         "Transforme sua conversa em uma retrospectiva interativa para compartilhar com amigos.",
     },
+    situationSameFight: {
+      navLabel: "Sempre a mesma briga?",
+      seoTitle: "Sempre a mesma briga? Entenda a sua conversa do WhatsApp",
+      seoDescription:
+        "Discutem sempre pela mesma coisa? Deixe uma IA ler a sua conversa do WhatsApp, apontar os momentos que se repetem e sugerir como falar de outra forma. Sem culpas nem veredictos, grátis no seu dispositivo.",
+      ogTitle: "Sempre a mesma briga?",
+      ogDescription:
+        "Deixe uma IA ler a sua conversa do WhatsApp e mostrar o padrão por trás da discussão que se repete, sem decidir quem tem razão.",
+      heroEyebrow: "Discussões por mensagem?",
+      heroTitle: "Sempre a mesma briga?",
+      heroSubtitle:
+        "Adicione a sua conversa do WhatsApp e a IA responde a uma pergunta: como poderíamos comunicar melhor? Aponta momentos das suas próprias mensagens e sugere o que ambos podem experimentar, sem decidir quem tem razão.",
+      heroNote:
+        "Grátis no seu dispositivo · Sem conta · A IA na nuvem só vê trechos anonimizados",
+      continueButton: "Continuar com esta conversa",
+      exportGuide: "Como exportar uma conversa do WhatsApp?",
+      showEyebrow: "O que a sua conversa pode mostrar",
+      showTitle: "A memória guarda o que sentiu. A conversa guarda como foi.",
+      showText:
+        "Quando escreveram, quem escreveu primeiro, quanto tempo demoraram as respostas: é isto que o WhatsAnalyze realmente lê e conta na sua exportação.",
+      show1Title: "Uma análise de como falam",
+      show1Text:
+        "A IA responde a «Como poderíamos comunicar melhor?» em poucas frases, apontando momentos da sua conversa e sugerindo o que cada um pode experimentar.",
+      show2Title: "Quando escrevem um ao outro",
+      show2Text:
+        "Um mapa de calor de 24 horas da conversa e quanto cada pessoa escreve à noite. Se as conversas mais difíceis acontecem tarde, vê quanto da conversa acontece a essas horas.",
+      show2Link: "Abrir o mapa de calor",
+      show3Title: "Quem começa as conversas",
+      show3Text:
+        "Depois de seis horas ou mais de silêncio, quem escreve primeiro? Contado para cada pessoa, como proporção de todas as conversas.",
+      show3Link: "Ver quem começa",
+      show4Title: "A rapidez das respostas",
+      show4Text:
+        "Quanto tempo cada pessoa demora, em média, a responder, e quem costuma responder mais depressa.",
+      show4Link: "Ver tempos de resposta",
+      show5Title: "Os silêncios mais longos",
+      show5Text:
+        "Os três períodos de silêncio mais longos da conversa, quando aconteceram e quem escreveu primeiro a seguir.",
+      show5Link: "Ver os silêncios",
+      show6Title: "Ajuda com a próxima mensagem",
+      show6Text:
+        "Depois de uma análise completa, faça perguntas sobre a conversa ou cole uma mensagem que vai enviar e receba uma versão mais calma e clara, com as suas próprias palavras.",
+      exampleEyebrow: "Um exemplo",
+      exampleTitle: "Como pode ser uma análise",
+      exampleText:
+        "Inventado para esta página, para ver como é: a IA identifica um padrão, aponta momentos e sugere um próximo passo para os dois.",
+      exampleBadge: "Exemplo · Nora e Tom são fictícios",
+      exampleVibe: "Muito próximos, com um atrito recorrente",
+      exampleSummary:
+        "Nora e Tom escrevem um ao outro o dia todo, sobretudo sobre planos, jantares e amigos. O tom é carinhoso e brincalhão, com uma tensão que volta sempre: as mudanças de planos em cima da hora. Normalmente, na manhã seguinte já passou.",
+      exampleAnswer:
+        "As discordâncias entre vocês costumam começar da mesma forma: um plano muda ao fim do dia, um de vocês descobre por mensagem e, a partir daí, as respostas ficam mais curtas. A Nora costuma fazer uma pergunta direta e o Tom responde com uma piada, e cada um parece interpretar isso de forma diferente. As conversas que acalmam depressa são aquelas em que alguém diz como se sentiu («Estava com muita vontade desta noite») em vez do que correu mal. Podem combinar os planos mais cedo no dia e, quando uma conversa começar a andar em círculos, propor uma chamada.",
+      exampleDynamic1Title: "As noites aquecem",
+      exampleDynamic1Text:
+        "O vaivém que anda em círculos acontece sobretudo depois das 23h, quando ambos respondem com mensagens curtas e seguidas.",
+      exampleDynamic2Title: "Ambos estendem a mão",
+      exampleDynamic2Text:
+        "Depois de um dia em silêncio, o Tom costuma escrever primeiro com uma piada, e a Nora continua com uma pergunta sobre o dia dele.",
+      exampleDraft: "Deixa para lá. É sempre a mesma coisa.",
+      exampleRewrite:
+        "Estava mesmo com vontade desta noite e fiquei triste. Podemos escolher outra noite esta semana?",
+      exampleWhy:
+        "Motivo: «É sempre a mesma coisa» costuma reabrir a mesma discussão nesta conversa. Dizer como se sente e propor um próximo passo dá ao Tom algo a que responder.",
+      limitsEyebrow: "Limites honestos",
+      limitsTitle: "O que consegue mostrar e o que não consegue",
+      limit1Title: "Padrões, não veredictos",
+      limit1Text:
+        "A IA aponta momentos e sugere o que experimentar. Não decide quem tem razão nem de quem é a culpa, e não é terapia nem aconselhamento profissional.",
+      limit2Title: "Só o que está na conversa",
+      limit2Text:
+        "Chamadas, tom de voz e o que aconteceu pessoalmente não estão numa exportação, e a IA pode interpretar mal a ironia ou o contexto. Veja-o como uma perspetiva e compare com o que sabe.",
+      limit3Title: "Uma conversa curta diz pouco",
+      limit3Text:
+        "Umas dezenas de mensagens ou uma semana má não são um padrão. Quanto mais histórico a exportação cobrir, mais há em que se basear. Se não houver o suficiente, pede-se à IA que o diga.",
+      privacyEyebrow: "Privacidade em primeiro lugar",
+      privacyTitle: "As mensagens da outra pessoa também estão lá",
+      privacyText:
+        "Uma conversa tem as palavras da outra pessoa além das suas, por isso aqui fica exatamente para onde vai.",
+      privacy1Title: "Guardada só neste dispositivo",
+      privacy1Text:
+        "Por padrão, a sua conversa fica guardada neste navegador, neste dispositivo, para poder voltar a ela. Pode escolher não a guardar ou esquecê-la quando quiser.",
+      privacy2Title: "Estatísticas e IA no dispositivo ficam aqui",
+      privacy2Text:
+        "As estatísticas e a IA no dispositivo funcionam no seu navegador. Nada do que leem sai do seu dispositivo.",
+      privacy3Title: "Anonimizada para a nuvem",
+      privacy3Text:
+        "Se você escolher a IA na nuvem, incluindo a prévia grátis, só são enviados trechos anonimizados: nomes substituídos e números de telefone, e-mails, links e IBAN removidos. O provedor de IA não treina com eles.",
+      supportEyebrow: "Quando é mais do que uma discussão",
+      supportTitle: "Quando as discussões dão medo",
+      supportText:
+        "Se alguém faz ameaças, controla seus passos ou faz você se sentir inseguro(a), uma análise da conversa não é a ajuda de que você precisa, e você não precisa lidar com isso sozinho(a). Quando uma conversa ou mensagem aponta para abuso, ameaças ou automutilação, o coach de IA foi feito para parar e indicar onde pedir ajuda.",
+      supportLink: "Encontrar uma linha de apoio no seu país",
+      faqTitle: "Perguntas frequentes",
+      faq1Q: "Porque é que discutimos sempre pelas mesmas coisas?",
+      faq1A:
+        "Muitas vezes o assunto muda, mas o jeito como tudo acontece não: o mesmo tipo de momento começa a discussão e cada um responde como da última vez. Esta página não consegue dizer com certeza por quê, mas a conversa pode mostrar quando isso costuma acontecer e como as mensagens correm, e isso dá a vocês algo concreto para conversar.",
+      faq2Q: "Vai dizer-me quem tem razão?",
+      faq2A:
+        "Não. Foi pensado para mostrar o padrão, não para escolher um vencedor. A IA recebe a pergunta de como poderiam comunicar melhor e responde com momentos da conversa e ideias para os dois. Não julga ninguém e pode interpretar mal o contexto.",
+      faq3Q: "A IA me ajuda a escrever a próxima mensagem?",
+      faq3A:
+        "Sim. Abaixo de uma análise, “Ajude-me a responder” pega uma mensagem que você está prestes a enviar e sugere uma versão mais calma e clara, que mantém o que você quer dizer, com uma nota curta sobre o que mudou. Você decide o que enviar. Depois de uma análise no seu dispositivo, isso roda lá de graça; depois da prévia grátis na nuvem, você tem algumas respostas grátis por dia, e com o Pro mais.",
+      faq4Q: "É grátis?",
+      faq4A:
+        "As estatísticas e a análise com IA no dispositivo são grátis e sem conta, assim como as perguntas de acompanhamento depois de uma análise no dispositivo. Sem assinatura, você também pode testar uma breve prévia grátis na nuvem, com algumas respostas grátis do coach por dia. A análise completa na nuvem e mais respostas na nuvem por dia fazem parte do Pro ({price}/mês).",
+      faq5Q: "A minha conversa é enviada?",
+      faq5A:
+        "Não para as estatísticas nem para a IA no dispositivo: elas funcionam no seu navegador e nada do que leem sai do seu dispositivo. Por padrão, a conversa fica salva neste navegador para você voltar a ela; você pode escolher não salvar ou apagá-la a qualquer momento. Se escolher a IA na nuvem, só são enviados trechos anonimizados (nomes substituídos; números de telefone, e-mails, links e IBAN removidos), e nosso provedor de IA não treina com eles. Antes de começar, você pode ver exatamente o que seria enviado.",
+      faq6Q: "Também funciona com discussões com amigos ou família?",
+      faq6A:
+        "Sim. Funciona com qualquer conversa do WhatsApp que exporte, seja com o seu parceiro ou parceira, um amigo, os seus pais ou os seus irmãos, e também com grupos. A IA descreve como as pessoas nela falam umas com as outras, sejam quem forem.",
+      faq7Q: "De quanta conversa precisa?",
+      faq7A:
+        "Quanto mais histórico, melhor. Umas dezenas de mensagens ou uma única semana difícil não mostram um padrão. Exporte a conversa inteira sem multimédia; uma conversa longa não é problema.",
+      ctaTitle: "Primeiro ver o padrão, depois falar sobre ele juntos",
+      ctaButton: "Analisar a minha conversa",
+      ctaNote: "Grátis no seu dispositivo · Sem conta · Sem veredictos",
+      disclaimer:
+        "O WhatsAnalyze é independente e não está associado ao WhatsApp nem à Meta. Uma análise com IA é uma perspetiva para refletir, não terapia nem aconselhamento profissional.",
+    },
     courtEvidence: {
       mediaNotLoaded:
         "Seus arquivos de mídia não estão carregados: a conversa foi restaurada desta sessão do navegador, que guarda apenas as mensagens. Solte a exportação .zip novamente para que o índice de anexos os inclua e calcule o hash.",
       seoTitle:
-        "Conversa do WhatsApp como prova judicial – Exportação em PDF limpo | WhatsAnalyze",
+        "Conversa do WhatsApp como prova judicial – Exportação em PDF limpo – WhatsAnalyze",
       seoDescription:
         "Converta uma conversa do WhatsApp em um PDF limpo e cronológico com todas as mensagens e horários. 100% no navegador, sem upload.",
       heroEyebrow: "Exportação de conversa para a justiça",
@@ -4774,7 +7305,7 @@ export const messages = {
         "Anna e Ben se atualizam o dia todo, misturando planos de fim de semana com piadas recorrentes. O tom é carinhoso e brincalhão, e pequenas discordâncias se resolvem rápido.",
       navLabel: "Alternativa ao What Brandon Thinks",
       seoTitle:
-        "Alternativa gratuita ao What Brandon Thinks – Análise de conversas com IA privada | WhatsAnalyze",
+        "Alternativa gratuita ao What Brandon Thinks – Análise de conversas com IA privada – WhatsAnalyze",
       seoDescription:
         "Procura uma alternativa gratuita ao What Brandon Thinks? O WhatsAnalyze analisa a sua conversa do WhatsApp com uma IA que corre no seu próprio dispositivo: grátis, sem conta e sem nunca enviar a conversa.",
       heroTitle:
@@ -4818,9 +7349,9 @@ export const messages = {
       pillar2Title: "Anonimizada para a nuvem",
       pillar2Text:
         "Se escolher a IA na nuvem, os nomes passam a «Pessoa A» e «Pessoa B» e números de telefone, e-mails e links são removidos antes. Os nomes só são repostos no seu dispositivo.",
-      pillar3Title: "Nada é guardado",
+      pillar3Title: "Só no seu dispositivo",
       pillar3Text:
-        "Não guardamos a sua conversa nem treinamos modelos com ela. Não há nada para apagar porque nada foi guardado.",
+        "A sua conversa fica guardada no seu navegador para que possa voltar a ela, nunca nos nossos servidores, e não treinamos modelos com ela. Esqueça-a com um toque quando quiser.",
       faqTitle: "Perguntas sobre a mudança",
       faq1Q: "Existe uma versão gratuita do What Brandon Thinks?",
       faq1A:
@@ -4842,7 +7373,7 @@ export const messages = {
     },
     relationshipProof: {
       seoTitle:
-        "Comprove seu relacionamento com conversas do WhatsApp – Visto e Imigração | WhatsAnalyze",
+        "Comprove seu relacionamento com conversas do WhatsApp – Visto e Imigração – WhatsAnalyze",
       seoDescription:
         "Transforme anos de mensagens em um PDF com horários, estatísticas e conversas diárias que comprovam um relacionamento genuíno. 100% privado.",
       heroEyebrow: "Comprovação de relacionamento",
@@ -4924,10 +7455,10 @@ export const messages = {
     pageNameRelationship: "Comprovação de relacionamento com chats",
     pageNameInactivity: "Rastreador de inatividade e última mensagem",
     toolsMessageCounter: {
-      seoTitle: "Contador de mensagens e linhas do WhatsApp | WhatsAnalyze",
+      seoTitle: "Contador de mensagens e linhas do WhatsApp – WhatsAnalyze",
       seoDescription:
         "Conte mensagens, linhas e caracteres da sua conversa do WhatsApp. Veja quem manda mais mensagens 100% no navegador.",
-      ogTitle: "Contador de mensagens e linhas do WhatsApp | WhatsAnalyze",
+      ogTitle: "Contador de mensagens e linhas do WhatsApp – WhatsAnalyze",
       ogDescription:
         "Contador rápido e 100% privado para WhatsApp. Descubra quem fala mais e o dia recorde da conversa.",
       heroEyebrow: "Ferramenta gratuita para WhatsApp",
@@ -4993,11 +7524,133 @@ export const messages = {
       disclaimer:
         "O WhatsAnalyze é um projeto de código aberto independente e não tem vínculo com o WhatsApp ou a Meta.",
     },
+    situationTextingFirst: {
+      navLabel: "Sempre manda mensagem primeiro?",
+      seoTitle: "Sempre manda mensagem primeiro? Quem começa no WhatsApp",
+      seoDescription:
+        "Sempre mando mensagem primeiro? Veja quem começa as conversas no seu WhatsApp e com que rapidez cada um responde, lado a lado. Grátis e no seu dispositivo.",
+      heroEyebrow: "Quem começa a conversa",
+      heroTitle: "Você sempre manda mensagem primeiro?",
+      heroSubtitle:
+        "Quando parece que é sempre você quem puxa assunto, a conversa do WhatsApp pode mostrar como as coisas realmente são: quem começa e com que rapidez cada um responde. Lado a lado, contado no seu dispositivo.",
+      heroNote: "Grátis · Sem conta · Os números não saem do seu dispositivo",
+      offerLabel: "Pergunte quem se esforça mais na sua conversa com {name}",
+      resultsEyebrow: "A sua conversa em números",
+      resultsTitle: "Quem começa e com que rapidez cada um responde",
+      resultsText:
+        "Leia os dois juntos. Começar menos conversas, mas responder em minutos, também é esforço.",
+      resultsFew:
+        "Conversas até agora: {count}. Ainda é pouco para tirar conclusões.",
+      resultsHow:
+        "Uma conversa é iniciada por quem escreve primeiro depois de pelo menos seis horas de silêncio. O tempo de resposta é a média de quanto cada pessoa leva para responder a outra, contando respostas dentro de um dia.",
+      numbersStarted: "das conversas iniciadas",
+      numbersStartedOf: "{count} de {total} conversas",
+      numbersReply: "Resposta média",
+      numbersNoReplies: "Nenhuma resposta ainda",
+      numbersLast: "Última mensagem",
+      numbersMessages: "Mensagens",
+      numbersMore: "Outras pessoas nesta conversa: {count}",
+      nextTitle: "Quer mais do que horários?",
+      nextText:
+        "A IA pode ler as próprias mensagens e responder: “Quem se esforça mais nesta conversa?” A sua conversa já está aberta, então não é preciso enviar nada de novo.",
+      nextButton: "Perguntar quem se esforça mais",
+      nextNote:
+        "Grátis no seu dispositivo, ou como prévia grátis na nuvem, que envia só trechos anonimizados.",
+      showEyebrow: "O que a sua conversa pode mostrar",
+      showTitle: "Os números por trás da sensação",
+      showText:
+        "Tudo é contado a partir da conversa exportada, no seu navegador.",
+      show1Title: "Quem começa as conversas",
+      show1Text:
+        "A parte das conversas que cada pessoa inicia e quantas são. Uma nova conversa começa depois de seis horas de silêncio.",
+      show2Title: "Com que rapidez cada um responde",
+      show2Text:
+        "O tempo médio de resposta de cada pessoa, logo ao lado da sua porcentagem: assim aparecem tanto começar menos quanto responder rápido.",
+      show3Title: "Quem escreveu por último, e quando",
+      show3Text:
+        "Quando cada um mandou a última mensagem e quantas mensagens cada pessoa escreveu.",
+      show4Title: "O que as mensagens dizem",
+      show4Text:
+        "Se quiser mais, a IA lê a própria conversa e responde “Quem se esforça mais nesta conversa?” em palavras simples.",
+      exampleEyebrow: "Um exemplo",
+      exampleTitle: "Mia começa mais. Leo responde mais rápido.",
+      exampleText:
+        "Duas pessoas inventadas, para mostrar como ler os números. Mia inicia cerca de dois terços das conversas; Leo costuma responder em poucos minutos. Nenhum dos dois números diz quem se importa mais.",
+      exampleCaption: "Exemplo · Mia e Leo são inventados",
+      exampleVibe: "Um vaivém leve, do dia a dia",
+      exampleSummary:
+        "Mia e Leo se falam quase todo dia: planos para o fim de semana, histórias do trabalho e uma piada recorrente sobre as plantas do Leo.",
+      exampleAnswer:
+        "Os dois, de jeitos diferentes. Mia abre a maioria das conversas, muitas vezes com um plano ou uma pergunta sobre o dia do Leo. Leo começa menos, mas responde em minutos e faz as perguntas que mantêm a conversa viva. Se a Mia gostaria que o Leo mandasse mensagem primeiro mais vezes, vale a pena dizer isso. A conversa não pode decidir isso por eles.",
+      limitsEyebrow: "Limites honestos",
+      limitsTitle: "Quem manda mensagem primeiro não é a história toda",
+      limitsText:
+        "Os números mostram um padrão numa conversa. Eles não medem o quanto alguém se importa com você, nem dizem se uma amizade ou um relacionamento é unilateral.",
+      limit1Title: "Cada pessoa tem seu jeito",
+      limit1Text:
+        "Algumas pessoas planejam e puxam assunto. Outras quase nunca começam, mas respondem rápido e com carinho. As duas coisas fazem parte de manter contato.",
+      limit2Title: "A vida acontece fora da conversa",
+      limit2Text:
+        "Horários de trabalho, fusos horários, ligações e o tempo juntos não aparecem numa exportação do WhatsApp.",
+      limit3Title: "Padrões, não veredictos",
+      limit3Text:
+        "Uma parcela de 70% descreve o que aconteceu nesta conversa. O que isso significa é você quem decide, e talvez valha a pena conversar sobre isso.",
+      limit4Title: "Uma conversa curta diz pouco",
+      limit4Text:
+        "Algumas semanas ou algumas dezenas de conversas podem pender para qualquer lado. Quanto mais longa a conversa, mais os números dizem.",
+      supportTitle: "Quando é mais do que uma conversa",
+      privacyEyebrow: "Privado desde o início",
+      privacyTitle: "A sua conversa continua sua",
+      privacy1Title: "Contado no seu dispositivo",
+      privacy1Text:
+        "Os números são calculados no seu navegador. A sua conversa não é enviada a lugar nenhum para contá-los.",
+      privacy2Title: "Guardada aqui, se você quiser",
+      privacy2Text:
+        "Por padrão, a sua conversa fica guardada só neste dispositivo, para você voltar sem enviá-la de novo. Toque em “Não guardar” para desfazer isso, ou esqueça-a quando quiser.",
+      privacy3Title: "IA do seu jeito",
+      privacy3Text:
+        "Com a IA no dispositivo, a sua conversa nunca sai dele. A prévia grátis na nuvem envia só trechos anonimizados (nomes substituídos; telefones, e-mails, links e IBANs removidos), e o provedor de IA não treina com eles.",
+      stepsTitle: "Como verificar a sua conversa",
+      step1Title: "Exporte a conversa",
+      step1Text:
+        "No WhatsApp, abra a conversa, toque no nome no topo e depois em “Exportar conversa” e “Sem mídia”.",
+      step2Title: "Solte aqui",
+      step2Text:
+        "Solte o arquivo no quadro no topo desta página, ou escolha-o. Ele é lido no seu navegador.",
+      step3Title: "Leia os dois números",
+      step3Text:
+        "Veja juntos quem começa e com que rapidez cada um responde. Se quiser, pergunte à IA a história por trás deles.",
+      stepsGuide: "Guia detalhado de exportação para iPhone e Android",
+      faqTitle: "Perguntas frequentes",
+      faq1Q: "Como saber se sou sempre eu quem manda mensagem primeiro?",
+      faq1A:
+        "Exporte a conversa do WhatsApp e solte-a no quadro desta página. A página conta quem escreveu primeiro em cada conversa e mostra a porcentagem de cada pessoa ao lado da rapidez com que responde. Uma nova conversa começa quando alguém escreve depois de pelo menos seis horas de silêncio.",
+      faq2Q: "Sempre mando mensagem primeiro. É uma amizade unilateral?",
+      faq2A:
+        "Não só por isso. Algumas pessoas gostam de puxar assunto, outras são melhores em responder, e trabalho, fusos horários e o tempo juntos também contam. Os números ajudam a ver um padrão. Se isso parece justo, só vocês dois podem resolver conversando.",
+      faq3Q: "O que conta como começar uma conversa?",
+      faq3A:
+        "A primeira mensagem da conversa e toda mensagem enviada depois de pelo menos seis horas sem mensagens. O tempo de resposta é a média de quanto cada pessoa leva para responder a outra, contando respostas dentro de um dia.",
+      faq4Q: "A minha conversa é enviada para algum lugar?",
+      faq4A:
+        "Não para os números: eles são contados no seu navegador. Por padrão, a sua conversa fica guardada só neste dispositivo, e você pode desfazer isso. Se perguntar à IA, com a IA no dispositivo tudo fica no seu dispositivo, e a prévia grátis na nuvem envia só trechos anonimizados (nomes substituídos; telefones, e-mails, links e IBANs removidos). O provedor de IA não treina com eles.",
+      faq5Q: "Funciona com amigos, família e grupos?",
+      faq5A:
+        "Sim, com qualquer conversa do WhatsApp que você possa exportar. Num grupo, cada pessoa tem a sua própria porcentagem de conversas iniciadas e o seu próprio tempo de resposta.",
+      faq6Q: "É grátis?",
+      faq6A:
+        "Os números desta página são grátis e não precisam de conta. A leitura por IA é grátis no seu dispositivo, e a IA na nuvem tem uma prévia grátis. O relatório completo na nuvem faz parte do WhatsAnalyze Pro ({price}/mês).",
+      ctaTitle: "Veja quem começa as conversas no seu WhatsApp",
+      ctaButton: "Verificar minha conversa",
+      ctaNote: "Grátis · Sem conta · Contado no seu dispositivo",
+      disclaimer:
+        "O WhatsAnalyze mostra padrões numa conversa, não veredictos sobre pessoas ou relacionamentos. É um projeto de código aberto independente e não tem vínculo com o WhatsApp ou a Meta.",
+    },
     toolsWordCounter: {
-      seoTitle: "Contador de palavras e vocabulário do WhatsApp | WhatsAnalyze",
+      seoTitle: "Contador de palavras e vocabulário do WhatsApp – WhatsAnalyze",
       seoDescription:
         "Descubra contagem total de palavras, riqueza de vocabulário e palavras mais usadas no WhatsApp 100% no navegador.",
-      ogTitle: "Contador de palavras e vocabulário do WhatsApp | WhatsAnalyze",
+      ogTitle: "Contador de palavras e vocabulário do WhatsApp – WhatsAnalyze",
       ogDescription:
         "Analise o volume de palavras e os termos mais frequentes da conversa sem enviar dados para a nuvem.",
       heroEyebrow: "Ferramenta gratuita para WhatsApp",
@@ -5063,13 +7716,144 @@ export const messages = {
       disclaimer:
         "O WhatsAnalyze é um projeto de código aberto independente e não tem vínculo com o WhatsApp ou a Meta.",
     },
+    situationLosingInterest: {
+      navLabel: "Está perdendo o interesse?",
+      appName: "Tempos de resposta e silêncios no WhatsApp",
+      seoTitle:
+        "Está perdendo o interesse? Veja o tempo de resposta no WhatsApp",
+      seoDescription:
+        "Está demorando cada vez mais para responder ou mandando menos mensagens? Veja o tempo médio de resposta de cada pessoa, os silêncios mais longos e quem escreve primeiro. Grátis e privado, no seu dispositivo.",
+      heroEyebrow: "As respostas estão demorando mais?",
+      heroTitle: "Está perdendo o interesse?",
+      heroSubtitle:
+        "Respostas mais lentas, menos mensagens, silêncios mais longos: é fácil pensar no pior. Os horários das mensagens da sua conversa mostram o que realmente mudou e quando, para você olhar com calma antes de tirar conclusões.",
+      heroNote:
+        "Grátis · Sem conta · Os números são calculados no seu dispositivo",
+      offerLabel: "Pergunte à IA sobre sua conversa com {name}",
+      resultEyebrow: "Sua conversa",
+      resultTitle: "O que sua conversa mostra",
+      resultText:
+        "Calculado no seu dispositivo a partir do horário de cada mensagem. Padrões, não um veredito.",
+      resultNowLabel: "Como estão as coisas",
+      resultNow: "A última mensagem foi {time}, de {name}.",
+      resultNowNote:
+        "Contado até hoje. Se você exportou a conversa há algum tempo, ela vai parecer mais parada do que está.",
+      status_active: "Houve mensagens nos últimos dois dias.",
+      status_dormant:
+        "Está tudo quieto há alguns dias, o que é comum numa semana corrida.",
+      status_inactive: "Está tudo quieto há mais de uma semana.",
+      status_ghosted: "Está tudo quieto há mais de um mês.",
+      resultPeopleTitle: "Pessoa por pessoa",
+      resultReply: "Resposta média",
+      resultReplyNone: "Poucas respostas",
+      resultStarted: "Escreveu primeiro",
+      resultMessages: "Mensagens",
+      resultMorePeople: "E mais {count} pessoas neste grupo.",
+      resultPeopleNote:
+        "Resposta média: quanto tempo alguém leva para responder à outra pessoa, contando só respostas em menos de um dia. Escreveu primeiro: com que frequência alguém retomou a conversa depois de seis horas ou mais de silêncio.",
+      resultGapsTitle: "Os silêncios mais longos",
+      resultGapEnded: "Depois, {name} escreveu primeiro",
+      resultSpan: "{count} mensagens em {days} dias",
+      resultAiButton: "Pergunte à IA sobre esta conversa",
+      resultAiNote:
+        "Ela responde a “Há algo com que me deva preocupar?” e antes pergunta quem é você. Não precisa adicionar a conversa de novo.",
+      resultTimelineLink: "Ver suas mensagens ao longo do tempo",
+      showEyebrow: "O que sua conversa pode mostrar",
+      showTitle: "Os fatos por trás da sensação",
+      showText:
+        "Tudo aqui é contado a partir da sua exportação. Nada é adivinhado.",
+      show1Title: "Tempo de resposta de cada pessoa",
+      show1Text:
+        "Quanto tempo cada pessoa leva, em média, para responder à outra. Só contam respostas em menos de um dia, para que um silêncio longo não distorça o resultado.",
+      show2Title: "Os silêncios mais longos",
+      show2Text:
+        "Os três silêncios mais longos da conversa, quando aconteceram e quem escreveu primeiro depois.",
+      show3Title: "Quem escreve primeiro",
+      show3Text:
+        "Depois de seis horas ou mais sem mensagens, quem retoma a conversa, em porcentagem para cada pessoa.",
+      show4Title: "Como estão as coisas hoje",
+      show4Text: "Quando a última mensagem foi enviada, e por quem.",
+      show5Title: "Mensagens ao longo do tempo",
+      show5Text:
+        "A análise completa mostra suas mensagens dia a dia, da primeira à última, para você ver se algo mudou e quando.",
+      show5Link: "Abrir a análise",
+      exampleEyebrow: "Um exemplo",
+      exampleTitle: "Como fica a conversa de Sam e Alex",
+      exampleText:
+        "Números inventados de duas pessoas fictícias, mostrados do jeito que a sua própria conversa vai aparecer.",
+      exampleBadge: "Exemplo · Sam e Alex são fictícios",
+      exampleReadingTitle: "Lendo com calma",
+      exampleNote1:
+        "Alex demora mais para responder, em média, e mesmo assim começa quase metade das conversas. Demorar mais não quer dizer ter menos interesse.",
+      exampleNote2:
+        "O silêncio mais longo durou quatro dias em agosto. Uma viagem? Uma semana corrida? Os números não sabem dizer, e nem fingem saber.",
+      exampleNote3:
+        "Nada aqui diz como cada um se sente. Se Sam está com dúvidas, conversar com Alex vai dizer mais do que qualquer gráfico.",
+      limitsEyebrow: "Antes de tirar conclusões",
+      limitsTitle: "Respostas mais lentas costumam ter motivos comuns",
+      limitsText:
+        "Um mês puxado no trabalho, provas, férias, uma semana estressante, um hábito novo como silenciar as notificações: tudo isso aparece na conversa como respostas mais lentas e pausas mais longas.",
+      limit1Title: "Padrões, não vereditos",
+      limit1Text:
+        "Os números mostram quando e com que frequência houve mensagens, nunca o porquê. Eles não podem dizer o que alguém sente ou pretende.",
+      limit2Title: "Uma conversa curta diz pouco",
+      limit2Text:
+        "Com só algumas semanas de mensagens, uma semana corrida mexe em todas as médias. Quanto mais longa a conversa, mais os números significam.",
+      limit3Title: "A conversa não é tudo",
+      limit3Text:
+        "Ligações, o tempo juntos e outros apps não aparecem numa exportação. Escrever menos pode simplesmente significar conversar mais em outro lugar.",
+      limit4Title: "Conversar ajuda mais do que contar",
+      limit4Text:
+        "Se algo parece diferente, um gentil “Está tudo bem? Sinto falta das nossas conversas” costuma dizer mais do que qualquer estatística, e é mais bem recebido sem os números como prova.",
+      supportTitle:
+        "Se isso está pesando muito em você ou se você não se sente em segurança",
+      aiEyebrow: "Uma segunda leitura",
+      aiTitle: "Pergunte à IA o que ela vê",
+      aiText:
+        "Os horários só dizem até certo ponto. A IA lê as próprias mensagens e responde a uma pergunta: “Há algo com que me deva preocupar?” Antes, ela pergunta quem é você e lembra disso na próxima vez.",
+      aiCard1Title: "Grátis, no seu dispositivo",
+      aiCard1Text:
+        "A IA no dispositivo roda no seu navegador. Sua conversa não sai do seu dispositivo.",
+      aiCard2Title: "Ou uma prévia grátis na nuvem",
+      aiCard2Text:
+        "Só trechos anonimizados são enviados: os nomes são substituídos e telefones, e-mails, links e números de conta bancária (IBAN) são removidos. O provedor de IA não treina com eles.",
+      aiCard3Title: "Lá quando você voltar",
+      aiCard3Text:
+        "Sua conversa fica guardada neste dispositivo, para você abrir de novo depois sem um novo envio. Escolha “Não guardar” se preferir que não fique.",
+      aiButton: "Perguntar à IA",
+      faqTitle: "Perguntas frequentes",
+      faq1Q:
+        "Responder mais devagar quer dizer que a pessoa está perdendo o interesse?",
+      faq1A:
+        "Por si só, não. As respostas ficam mais lentas por vários motivos: trabalho, provas, viagens, saúde, estresse ou só um novo hábito com o celular. Os números mostram o que mudou e quando. O porquê, só a outra pessoa pode dizer.",
+      faq2Q: "Como é calculado o tempo médio de resposta?",
+      faq2A:
+        "Cada vez que uma pessoa responde à outra em menos de 24 horas, o tempo entre as duas mensagens conta como uma resposta, e a média disso aparece para cada pessoa. Pausas de mais de um dia contam como silêncios.",
+      faq3Q: "Dá para ver se as respostas ficaram mais lentas ultimamente?",
+      faq3A:
+        "Esta página mostra as médias da conversa inteira e quando foram os silêncios mais longos. Para ver como o número de mensagens mudou ao longo do tempo, abra a análise completa: a linha do tempo mostra suas mensagens dia a dia, da primeira à última.",
+      faq4Q: "Minha conversa é enviada para algum lugar?",
+      faq4A:
+        "Não. Os números desta página são calculados no seu navegador, no seu dispositivo. A conversa fica guardada neste dispositivo para você abrir de novo depois, e você pode escolher não guardá-la ou esquecê-la quando quiser. Só se você escolher a IA na nuvem, incluindo a prévia grátis, são enviados trechos anonimizados: nomes substituídos e telefones, e-mails, links e números de conta bancária (IBAN) removidos. O provedor de IA não treina com eles.",
+      faq5Q: "Devo mostrar esses números para a pessoa?",
+      faq5A:
+        "Sugerimos começar pelo que você sente. Estatísticas podem soar como acusação, enquanto um simples “Sinto falta das nossas conversas, está tudo bem?” convida a uma resposta sincera.",
+      faq6Q: "Quais conversas funcionam?",
+      faq6A:
+        "Qualquer conversa do WhatsApp que você exportar, do iPhone ou Android, individual ou em grupo, em qualquer idioma. Exporte sem mídia e solte o arquivo .zip ou .txt na caixa no topo desta página.",
+      ctaTitle: "Veja o que realmente mudou",
+      ctaButton: "Verificar sua conversa",
+      ctaNote: "Grátis · Sem conta · Calculado no seu dispositivo",
+      disclaimer:
+        "O WhatsAnalyze é um projeto independente, sem vínculo com o WhatsApp ou a Meta. Os números descrevem padrões numa conversa. Eles não podem dizer o que alguém sente ou pretende, e não substituem uma boa conversa.",
+    },
     toolsChatHeatmap: {
       seoTitle:
-        "Horários de pico e mapa de calor 24h do WhatsApp | WhatsAnalyze",
+        "Horários de pico e mapa de calor 24h do WhatsApp – WhatsAnalyze",
       seoDescription:
         "Analise quando suas conversas do WhatsApp atingem o pico nas 24 horas do dia. Compare dia vs noite 100% no navegador.",
       ogTitle:
-        "Horários de pico e mapa de calor 24h do WhatsApp | WhatsAnalyze",
+        "Horários de pico e mapa de calor 24h do WhatsApp – WhatsAnalyze",
       ogDescription:
         "Descubra os horários de pico e a distribuição dia vs noite da sua conversa sem envio de dados.",
       heroEyebrow: "Ferramenta gratuita para WhatsApp",
@@ -5135,6 +7919,137 @@ export const messages = {
       disclaimer:
         "O WhatsAnalyze é um projeto de código aberto independente e não tem vínculo com o WhatsApp ou a Meta.",
     },
+    situationWhatToReply: {
+      navLabel: "O que responder?",
+      seoTitle:
+        "O que responder? Ajuda com a sua resposta no WhatsApp – WhatsAnalyze",
+      seoDescription:
+        "Não sabe o que responder a esta mensagem? Uma IA que leu a sua conversa do WhatsApp transforma o seu rascunho numa resposta mais calma e clara, com a sua voz. Grátis em dispositivos compatíveis.",
+      ogTitle: "O que responder? Ajuda com a sua resposta no WhatsApp",
+      ogDescription:
+        "Envie sua conversa do WhatsApp e receba ajuda com a resposta: uma versão mais calma e clara do que você quer dizer, de uma IA que leu a conversa.",
+      heroEyebrow: "Ajuda para responder",
+      heroTitle: "O que responder?",
+      heroSubtitle:
+        "A mensagem está aberta e você não sabe como responder. Envie a conversa e uma IA que a leu ajuda você a encontrar as palavras: escreva o que quer dizer e receba uma versão mais calma e clara, com a sua voz e uma nota sobre o porquê.",
+      heroNote:
+        "Grátis no seu dispositivo, se o navegador conseguir executar · Algumas respostas grátis na nuvem por dia · Mais com o Pro",
+      continueButton: "Pedir ajuda para responder com esta conversa",
+      offerChat: "Ajuda para responder a {name}",
+      offerGroup: "Ajuda para responder em {name}",
+      exampleEyebrow: "Um exemplo",
+      exampleTitle: "Como é a ajuda",
+      exampleText:
+        "Tom volta a escrever depois de uma semana calado. O primeiro rascunho da Mia diz como ela se sente, com uma alfinetada. O coach mantém o sentimento e tira a alfinetada.",
+      exampleBadge: "Exemplo · Mia e Tom são fictícios",
+      exampleIncoming:
+        "Desculpa ter andado tão calado esta semana, o trabalho foi demais. Sábado ainda está de pé?",
+      exampleDraft: "Olha quem apareceu. Pode ser, tanto faz.",
+      exampleReply:
+        "Que bom ter notícias! Para ser sincera, senti saudades esta semana. Sábado dá, no lugar de sempre?",
+      exampleWhy:
+        "Porquê: o seu rascunho diz que se sentiu posta de lado, e isso merece ser dito. Na conversa, o Tom abre-se quando diz como se sente, enquanto depois do sarcasmo costumava vir um dia de silêncio. Assim a sua mensagem fica, e ele tem algo a que responder.",
+      showEyebrow: "O que a sua conversa pode mostrar",
+      showTitle: "Ajuda que conhece o tom da vossa conversa",
+      showText:
+        "O coach de IA trabalha com a sua conversa, não com um modelo pronto: trechos anonimizados e a leitura da IA logo acima dele.",
+      show1Title: "Como escrevem",
+      show1Text:
+        "A leitura descreve o tom da conversa e como cada pessoa escreve, para que uma sugestão soe como a sua conversa.",
+      show2Title: "O seu rascunho, mais calmo e claro",
+      show2Text:
+        "Escreva o que quer dizer. O coach mantém a sua intenção e responde com uma versão mais calma e clara, com a sua voz.",
+      show3Title: "Uma nota sobre o porquê",
+      show3Text:
+        "Cada sugestão vem com uma nota breve sobre o que mudou e porquê, com base no rumo habitual da conversa.",
+      show4Title: "Perguntas sobre a mensagem",
+      show4Text:
+        "Não sabe o que uma mensagem quer dizer? Pergunte. O coach aponta para momentos da conversa e foi feito para avisar quando a conversa não dá a resposta.",
+      stepsEyebrow: "Como chegar lá",
+      stepsTitle: "Da conversa à resposta",
+      step1Title: "Envie a conversa",
+      step1Text:
+        "Exporte a conversa no WhatsApp sem mídia, depois de chegar a mensagem a que quer responder, e arraste-a para a caixa acima. É lida no seu navegador.",
+      step2Title: "Obtenha uma leitura",
+      step2Text:
+        "O coach aparece abaixo de uma análise com IA da sua conversa. Use grátis no seu dispositivo, se o navegador conseguir, ou na nuvem: a prévia grátis vem com algumas respostas grátis do coach por dia, e com o Pro você recebe mais.",
+      step3Title: "Pergunte ou escreva o rascunho",
+      step3Text:
+        "Sob a leitura, escolha “{reply}”, escreva o que gostaria de dizer e receba uma versão mais calma e clara. Ou escolha “{ask}” para falar primeiro sobre a mensagem.",
+      plansTitle: "O que é grátis e o que precisa do Pro",
+      plan1Title: "No seu dispositivo: grátis",
+      plan1Text:
+        "A leitura e o coach funcionam no seu navegador após um download único do modelo, e nada sai do seu dispositivo. Precisa de WebGPU: um computador recente, a maioria dos Android recentes com Chrome ou um iPhone com iOS 26 ou posterior. O modelo é pequeno, por isso as respostas são mais simples.",
+      plan2Title: "Pré-visualização grátis na nuvem",
+      plan2Text:
+        "Uma amostra da análise de uma IA mais poderosa, feita com trechos anonimizados, mais algumas respostas grátis do coach por dia.",
+      plan3Title: "Pro: {price} por mês",
+      plan3Text:
+        "A leitura completa e o coach na nuvem, em qualquer telefone. Cada mensagem ao coach conta como uma das análises na nuvem do dia.",
+      ownWordsEyebrow: "As suas palavras",
+      ownWordsTitle: "Envie-a com as suas próprias palavras",
+      ownWordsText:
+        "Uma sugestão é um ponto de partida, não uma fórmula. As pessoas notam quando uma mensagem não soa a quem a envia, e uma resposta que parece escrita por uma máquina pode ser recebida de outra forma. Fique com o que ajuda, mude o que não serve e envie-a como a diria.",
+      limitsEyebrow: "Limites honestos",
+      limitsTitle: "O que ele não consegue fazer",
+      limit1Title: "Padrões, não veredictos",
+      limit1Text:
+        "O coach pode dizer como a conversa costuma acontecer. Ele não tem como saber o que a outra pessoa sente nem o que ela vai fazer em seguida.",
+      limit2Title: "Só o que foi escrito",
+      limit2Text:
+        "A IA lê trechos da conversa inteira, sempre com as mensagens mais recentes. Ela não lê mensagens de voz, fotos nem figurinhas, e o modelo do dispositivo lê menos do que o da nuvem.",
+      limit3Title: "Uma conversa curta diz pouco",
+      limit3Text:
+        "Com poucas mensagens há pouco em que se apoiar, e as sugestões ficam mais próximas de conselhos gerais.",
+      limit4Title: "A IA também erra",
+      limit4Text:
+        "Ela pode não entender ironia, piadas internas ou tudo o que aconteceu fora da conversa. Quem conhece melhor a sua situação é você.",
+      privacyEyebrow: "Privado desde o início",
+      privacyTitle: "A sua conversa continua sua",
+      privacyText:
+        "Uma conversa exportada também contém as mensagens da outra pessoa, por isso é tratada com cuidado.",
+      privacy1Title: "Guardada só neste dispositivo",
+      privacy1Text:
+        "A sua conversa fica guardada neste navegador para que possa voltar, nunca nos nossos servidores. Não quer? Escolha “{dontKeep}” por baixo da caixa de upload.",
+      privacy2Title: "A IA no dispositivo fica no dispositivo",
+      privacy2Text:
+        "Com a IA grátis no seu dispositivo, a conversa, a leitura e o que escreve ao coach nunca saem do seu dispositivo.",
+      privacy3Title: "Anonimizado para a nuvem",
+      privacy3Text:
+        "A IA na nuvem só recebe trechos anonimizados e o que você escreve para o coach: os nomes da conversa são substituídos e os números de telefone, e-mails, links e IBANs são removidos. O provedor de IA não os usa para treino.",
+      supportEyebrow: "Quando é sério",
+      supportTitle:
+        "Algumas mensagens precisam de mais do que uma boa resposta",
+      supportText:
+        "Se a conversa ou a sua pergunta apontarem para abuso, ameaças ou automutilação, o coach não escreve uma resposta: mostra recursos de apoio. Não reconhece tudo, por isso, se não se sente em segurança, procure ajuda agora.",
+      supportDevice:
+        "Num dispositivo que outras pessoas usam, escolha “{dontKeep}” por baixo da caixa de upload para que a conversa não fique guardada neste navegador. Uma conversa guardada pode ser esquecida a qualquer momento em “{saved}”.",
+      faqTitle: "Perguntas sobre a ajuda para responder",
+      faq1Q: "A IA consegue me dizer o que responder?",
+      faq1A:
+        "Pode ajudar a chegar lá. Escreva uma versão aproximada do que quer dizer e o coach responde com uma versão mais calma e clara, com a sua voz e o tom habitual da conversa, e uma nota breve sobre o que mudou. Ou pergunte-lhe primeiro sobre a mensagem. A resposta continua a ser sua: mude o que não soar a si antes de a enviar.",
+      faq2Q: "É grátis?",
+      faq2A:
+        "Sim. No seu dispositivo, a análise e o coach rodam grátis no navegador, se ele suportar WebGPU. Na nuvem, a prévia grátis mostra parte da análise e vem com algumas respostas grátis do coach por dia, em qualquer celular. Com o Pro ({price} por mês), você recebe a análise completa e mais respostas do coach por dia.",
+      faq3Q: "A IA vê a mensagem que acabei de receber?",
+      faq3A:
+        "Só se ela estiver na sua exportação, então exporte a conversa depois que a mensagem chegar. A IA lê trechos da conversa inteira e sempre inclui as mensagens mais recentes. Se você salvou a conversa antes de a mensagem chegar, exporte de novo. Você também pode colar a mensagem na sua pergunta.",
+      faq4Q: "A minha conversa é enviada para algum servidor?",
+      faq4A:
+        "A conversa é lida no seu navegador e salva só neste dispositivo, o que você pode desfazer. Com a IA no dispositivo, nada sai dele. Com a IA na nuvem, só são enviados trechos anonimizados e o que você escreve para o coach: os nomes da conversa são substituídos e os números de telefone, e-mails, links e IBANs são removidos. O provedor de IA não os usa para treino.",
+      faq5Q: "O coach lembra-se do que lhe escrevi?",
+      faq5A:
+        "Se a conversa estiver guardada neste dispositivo, o que escreveu ao coach fica guardado com a leitura a que se seguiu, por isso continua lá quando voltar. Se esquecer a conversa, isso também desaparece.",
+      faq6Q: "E se a mensagem for sobre algo sério?",
+      faq6A:
+        "Se a conversa ou a sua pergunta apontarem para abuso, ameaças ou automutilação, o coach não escreve uma resposta: mostra recursos de apoio. Se você ou outra pessoa estiver em perigo, ligue agora para o número de emergência local.",
+      ctaTitle: "Encontre as palavras e torne-as suas",
+      ctaButton: "Carregar a conversa",
+      ctaNote:
+        "Lida no seu navegador · Guardada só neste dispositivo, se quiser",
+      disclaimer:
+        "O WhatsAnalyze é um projeto independente, sem ligação ao WhatsApp nem à Meta. As sugestões do coach servem para refletir e não são aconselhamento profissional.",
+    },
     pageNameMessages: "Contador de mensagens e linhas do WhatsApp",
     pageNameWords: "Contador de palavras e vocabulário do WhatsApp",
     pageNameHeatmap: "Horários de pico e mapa de calor 24h do WhatsApp",
@@ -5147,16 +8062,107 @@ export const messages = {
       homeDescription:
         "L'analyseur WhatsApp le plus populaire. Découvrez les statistiques de vos conversations et exportez votre chat en PDF sans envoyer vos données.",
       exportGuideTitle:
-        "WhatsAnalyze - Comment exporter votre conversation WhatsApp",
+        "Exporter une discussion WhatsApp : iPhone, Android, Web, PDF",
       exportGuideDescription:
-        "Exportez votre conversation WhatsApp. Tutoriel iOS et guide Android.",
-      pdfGuideTitle:
-        "WhatsAnalyze - Comment exporter votre conversation WhatsApp en PDF",
+        "Pas à pas : exportez une discussion ou un groupe WhatsApp sur iPhone, Android, WhatsApp Web, Windows ou Mac, avec ou sans médias. Puis obtenez un PDF ou des statistiques.",
+      pdfGuideTitle: "Exporter une discussion WhatsApp en PDF, avec photos",
       pdfGuideDescription:
-        "Exportez votre conversation WhatsApp en PDF en quelques secondes, sans envoyer vos données à un serveur.",
+        "Transformez une discussion WhatsApp exportée en PDF avec tous les messages, les photos et des statistiques. Créé dans votre navigateur, sans envoi. Aperçu gratuit.",
       signalTitle: "WhatsAnalyze - Comment passer de WhatsApp à Signal",
       signalDescription:
         "Passez de WhatsApp à Signal, transférez vos groupes et créez des sauvegardes.",
+    },
+    exportGuidePage: {
+      heroCta: "Déjà exporté ? Ouvrez votre discussion",
+      checkedNote: "Étapes vérifiées le {date} sur les Pages d'aide WhatsApp",
+      phoneTitle: "Pas à pas sur iPhone et Android",
+      explainerCta: "Vous avez le fichier ? Ouvrez-le ici",
+      computerLink:
+        "Sur ordinateur ? Les étapes pour WhatsApp Web, Windows et Mac",
+      nextEyebrow: "Étape suivante",
+      nextTitle: "Ouvrez votre export ici même",
+      nextText:
+        "Déposez ci-dessous le fichier .zip ou .txt. Il est lu dans votre navigateur, pas envoyé. Choisissez ensuite ce que vous voulez voir.",
+      cardOpen: "Ouvrir",
+      cardContinue: "Continuer avec cette discussion",
+      cardStatsTitle: "Statistiques de la discussion",
+      cardStatsText:
+        "Qui écrit le plus, à quelles heures, les mots et emojis les plus utilisés. Gratuit.",
+      cardAiTitle: "Lecture par IA",
+      cardAiText:
+        "L'IA répond à votre question sur la discussion : qui fait le plus d'efforts, l'ambiance, les sujets récurrents. Sur votre appareil ou anonymisée dans le cloud.",
+      cardPdfTitle: "Discussion en PDF",
+      cardPdfText:
+        "Toute la conversation dans un PDF à imprimer, avec les photos si vous les avez exportées. Aperçu gratuit, PDF complet {price} en achat unique.",
+      cardCourtTitle: "PDF de preuve judiciaire",
+      cardCourtText:
+        "Lignes numérotées, horodatages exacts et empreinte SHA-256, pour les avocats et les tribunaux.",
+      ctaTitle: "Votre export est prêt ? Ouvrez-le ici",
+      ctaButton: "Ouvrir mon fichier",
+      ctaNote:
+        "Lu dans votre navigateur · .zip ou .txt · Statistiques gratuites",
+    },
+    pdfPage: {
+      navLabel: "Discussion WhatsApp en PDF",
+      heroTitle: "Exporter une discussion WhatsApp en PDF",
+      heroSubtitle:
+        "Tous les messages, les photos et les statistiques de la discussion dans un PDF à imprimer, garder ou envoyer. Créé dans votre navigateur à partir de votre export, sans rien envoyer.",
+      heroCta: "Créer mon PDF",
+      heroNote:
+        "Aperçu gratuit · PDF complet {price} en achat unique · Sans compte",
+      exampleAlt:
+        "Pages d'un PDF créé à partir d'une discussion WhatsApp d'exemple",
+      uploadTitle: "Déposez votre export, obtenez le PDF",
+      uploadText:
+        "Ouvrez le fichier .zip ou .txt créé par WhatsApp. Il est lu dans votre navigateur, pas envoyé.",
+      createButton: "Créer mon PDF",
+      guideLink:
+        "Pas encore d'export ? Comment exporter une discussion WhatsApp",
+      contentsEyebrow: "Ce qu'il contient",
+      contentsTitle: "Plus qu'une impression de la discussion",
+      card1Title: "Toute la conversation",
+      card1Text:
+        "Chaque message avec son expéditeur, sa date et son heure, dans l'ordre, et les photos à côté si vous avez exporté avec les médias.",
+      card2Title: "Votre discussion en chiffres",
+      card2Text:
+        "Une couverture avec le premier et le dernier message, les jours, les messages et les participants, puis des graphiques : chronologie, par heure, par personne, par mois et par jour de la semaine.",
+      card3Title: "Anecdotes sur chaque personne",
+      card3Text:
+        "Mots écrits, message le plus long, vocabulaire, emojis préférés et longueur moyenne des messages.",
+      stepsTitle: "En trois étapes",
+      step1Title: "Exportez la discussion",
+      step1Text:
+        "Dans WhatsApp, ouvrez la discussion et choisissez « Exporter la discussion ». Joignez les médias si le PDF doit montrer les photos.",
+      step2Title: "Déposez-la ici",
+      step2Text:
+        "Le .zip ou le .txt s'ouvre dans votre navigateur, rien n'est envoyé.",
+      step3Title: "Téléchargez le PDF",
+      step3Text:
+        "L'aperçu avec les 100 premiers messages est gratuit. La discussion complète coûte {price}, en achat unique.",
+      courtEyebrow: "Pour les avocats et les tribunaux",
+      courtTitle: "Besoin de la discussion comme preuve ?",
+      courtText:
+        "Le PDF de preuve judiciaire est une transcription sobre en noir et blanc : lignes numérotées, horodatages exacts, empreinte SHA-256 de votre export et liste des pièces.",
+      courtButton: "PDF de preuve judiciaire",
+      faqTitle: "Questions sur le PDF",
+      faq1Q: "WhatsApp peut-il exporter une discussion en PDF ?",
+      faq1A:
+        "Non. WhatsApp exporte une discussion sous forme de fichier .zip ou .txt. WhatsAnalyze en fait un PDF, dans votre navigateur.",
+      faq2Q: "Est-ce gratuit ?",
+      faq2A:
+        "L'aperçu avec les 100 premiers messages est gratuit. Le PDF complet de toute la discussion coûte {price} en achat unique, et avec Pro vous en téléchargez autant que vous voulez.",
+      faq3Q: "Ma discussion est-elle envoyée quelque part ?",
+      faq3A:
+        "Non. Le fichier est lu et le PDF créé dans votre navigateur. Le paiement du PDF complet passe par Stripe, et votre discussion n'en fait pas partie.",
+      faq4Q: "Les photos sont-elles incluses ?",
+      faq4A:
+        "Oui, si vous exportez la discussion avec les médias : les photos apparaissent dans le PDF à côté de leurs messages. Sans médias, vous obtenez un PDF du texte.",
+      faq5Q: "Ça marche avec les groupes et sur iPhone ?",
+      faq5A:
+        "Oui. Toute discussion individuelle ou de groupe, exportée depuis iPhone, Android, WhatsApp Web, Windows ou Mac.",
+      ctaTitle: "Votre discussion en PDF",
+      ctaButton: "Créer mon PDF",
+      ctaNote: "Aperçu gratuit · Créé dans votre navigateur",
     },
     subscribePage: {
       title: "Un abonnement. Tout est débloqué.",
@@ -5212,6 +8218,9 @@ export const messages = {
       errorCheckout: "Impossible de démarrer le paiement. Veuillez réessayer.",
       errorPortalMissing: "E-mail ou ID d'abonnement manquant.",
       errorPortalFailed: "Impossible d'ouvrir le portail client.",
+    },
+    wrappedAiTeaser: {
+      text: "Choisissez une question, puis ajoutez le même export de la conversation à la page suivante.",
     },
     wrapped: {
       heroTitle: "WhatsApp Wrapped {currentYear}",
@@ -5326,8 +8335,8 @@ export const messages = {
       "<span>Sur l'iPhone, <b>ouvrez</b> WhatsApp et le <b>chat</b> ou le <b>groupe de chat</b> que vous souhaitez exporter > en haut, <b>tapez</b> sur le <b>nom</b> du chat.</span>",
     tabItemiOS2:
       "<span>Dans les informations sur le chat, faites défiler la page jusqu'en bas.</span>",
-    tabItemiOS3: "<span>Tapez sur <b>Exporter le chat Tap on</b>.</span>",
-    tabItemiOS4: "<span>Choisir <b >sans media</b>.</span>",
+    tabItemiOS3: "<span>Appuyez sur <b>Exporter la discussion</b>.</span>",
+    tabItemiOS4: "<span>Choisissez <b>Sans médias</b>.</span>",
     tabItemiOS5:
       "<span>Cliquez sur <b>Enregistrer dans les fichiers</b> pour l'enregistrer sur votre iPhone.</span>",
     tabItemiOS6:
@@ -5339,9 +8348,9 @@ export const messages = {
     tabItemAndroid2:
       "<span>Ouvrez <b>WhatsApp</b> et tapez sur la discussion que vous souhaitez exporter > tapez sur les <b>trois points</b> dans le coin supérieur droit.</span>",
     tabItemAndroid3: "<span>Dans le nouveau menu, tapez sur <b>Plus</b></span>",
-    tabItemAndroid4: "<span>Cliquez sur <b>Exporter discussion</b>.</span>",
+    tabItemAndroid4: "<span>Appuyez sur <b>Exporter la discussion</b>.</span>",
     tabItemAndroid5:
-      "<span>Choisissez <b>Sans média</b> ou <b>Inclure média</b> si vous souhaitez inclure vos images et autres fichiers dans l'exportation.</span>",
+      "<span>Choisissez <b>Sans médias</b> ou <b>Joindre médias</b> si vous souhaitez inclure vos images et autres fichiers dans l'exportation.</span>",
     tabItemAndroid6:
       "<span>Dans la vue de partage, appuyez sur <b>WhatsAnalyze</b> ou, si vous avez sauté l'étape 1, envoyez-le à vous-même par <b>e-mail</b> ou sauvegardez-le sur <b>Google Drive</b>.</span>",
     selectFile: "Sélectionner le fichier dans la boîte ci-dessus",
@@ -5359,7 +8368,7 @@ export const messages = {
     faqWhatsapp: "FAQ sur les chats WhatsApp",
     privacyFAQTitle: "Mes données de chat sont-elles vraiment privées ?",
     privacyFAQContent:
-      "Oui, absolument. Tout le traitement du chat s’effectue localement dans votre navigateur. Aucune donnée n’est jamais envoyée à un serveur. Vous pouvez même inspecter le code source ouvert sur GitHub pour le vérifier.",
+      "Oui. Les statistiques sont calculées dans votre navigateur, et votre conversation est enregistrée uniquement sur cet appareil pour que vous puissiez y revenir. Elle n’est jamais stockée sur nos serveurs. Seules deux choses quittent votre appareil, et seulement si vous le choisissez : l’IA dans le cloud reçoit un extrait anonymisé (noms remplacés, numéros de téléphone, e-mails et liens retirés), et un lien de partage conserve une copie chiffrée des résultats, jamais la conversation elle-même. Vous pouvez oublier les conversations enregistrées à tout moment et inspecter le code source ouvert sur GitHub.",
     howToExport: "Comment exporter votre chat WhatsApp",
     howToExportLong:
       "          Tout le monde peut facilement exporter son chat WhatsApp ou son chat de groupe. Ouvrir\n          WhatsApp sur l'appareil avec lequel vous êtes actuellement connecté > Cliquee sur le\n          chat > Allez dans les paramètres des chats > Faites défiler vers le bas et appuyez sur Exporter le chat. >\n          Choisir d'exporter avec ou sans support.",
@@ -5521,11 +8530,14 @@ export const messages = {
     chooseSubscription: "Abonnez-vous maintenant",
     then: "puis",
     toolsHub: {
+      supportTitle: "Cela semble sérieux. Vous n’avez pas à gérer cela seul·e.",
+      supportText:
+        "Si vous ou quelqu’un d’autre êtes en danger, appelez tout de suite le numéro d’urgence local (112). Pour un soutien gratuit et confidentiel, trouvez une ligne d’écoute dans votre pays sur findahelpline.com (en France : 3114).",
       headerTools: "Outils",
-      seoTitle: "Outils et utilitaires WhatsApp | WhatsAnalyze",
+      seoTitle: "Outils et utilitaires WhatsApp – WhatsAnalyze",
       seoDescription:
         "Découvrez des outils WhatsApp individuels, rapides et 100 % confidentiels. Du suivi de l'inactivité au comptage des messages et temps de réponse, directement dans votre navigateur.",
-      ogTitle: "Outils et utilitaires WhatsApp | WhatsAnalyze",
+      ogTitle: "Outils et utilitaires WhatsApp – WhatsAnalyze",
       ogDescription:
         "Outils dédiés pour WhatsApp. Découvrez qui a envoyé le dernier message et analysez les temps de pause sans téléversement.",
       heroEyebrow: "Outils et utilitaires WhatsApp",
@@ -5606,6 +8618,15 @@ export const messages = {
       courtGroupTitle: "Documentation officielle et preuves juridiques",
       courtGroupDesc:
         "Transcriptions PDF recevables en justice et chronologies certifiées pour les démarches consulaires et judiciaires.",
+      situationsGroupTitle: "Comprendre ce qui se passe",
+      toolSameFightText:
+        "Voyez ce qui revient dans vos disputes et trouvez des idées pour en parler autrement.",
+      toolTextingFirstText:
+        "Qui lance vos conversations, et à quelle vitesse chacun répond.",
+      toolLosingInterestText:
+        "Temps de réponse, plus longs silences et où vous en êtes, présentés calmement.",
+      toolWhatToReplyText:
+        "Transformez votre brouillon en une réponse plus calme et plus claire, qui vous ressemble.",
     },
     homeLanding: {
       wrappedButton: "Voir votre story",
@@ -5632,21 +8653,89 @@ export const messages = {
       localEngine: "MOTEUR LOCAL DU NAVIGATEUR",
       zeroCloud: "AUCUNE TRANSMISSION CLOUD",
       private: "100 % PRIVÉ",
+      aiCloud: "IA CLOUD : ANONYMISÉ UNIQUEMENT",
+      aiTraining: "NON UTILISÉ POUR L’ENTRAÎNEMENT",
       dropTitle: "Glissez votre export de chat WhatsApp ici",
       dropSubtitle: "Prend en charge les fichiers de chat en .txt ou .zip",
       selectFile: "Sélectionner le fichier",
       trySample: "Essayer avec un exemple",
+      sampleFailed:
+        "Impossible de charger l'exemple. Vérifiez votre connexion et réessayez.",
       analyzingTitle: "Analyse des pauses de conversation...",
       analyzingSubtitle:
         "Calcul des horodatages, temps de réponse et temps d'inactivité",
       switchFile: "Changer de fichier",
       messagesAnalyzedIn: "{count} messages • analysés en {time} ms",
-      messagesRestored: "{count} messages • restaurés depuis cette session",
+      messagesRestored: "{count} messages • sans nouvel import",
       dismiss: "Fermer",
+    },
+    library: {
+      saved: "Enregistré sur cet appareil",
+      dontKeep: "Ne pas garder",
+      notKept: "Non enregistré sur cet appareil",
+      keep: "Le garder",
+      notKeptUnavailable:
+        "Ce navigateur ne le permet pas ici, dans une fenêtre privée par exemple. La conversation reste ouverte jusqu'à la fermeture de cet onglet.",
+      notKeptFull:
+        "Le stockage de cet appareil est plein. La conversation reste ouverte jusqu'à la fermeture de cet onglet.",
+      panelOpen: "Ce qui est enregistré sur cet appareil",
+      yourChats: "Vos conversations",
+      open: "Ouvrir",
+      continueIn: "Continuer dans {tool}",
+      forget: "Oublier",
+      forgetConfirm: "Oublier « {name} » sur cet appareil ?",
+      cancel: "Annuler",
+      showAll: "Tout afficher ({count})",
+      peopleMore: "{names} et {count} de plus",
+      openedAgo: "ouverte {time}",
+      useSaved: "Utiliser une conversation enregistrée",
+      useAnother: "Utiliser une autre conversation enregistrée",
+      runOnChat: "Essayez avec votre conversation avec {name}",
+      runOnGroup: "Essayez avec {name}",
+      offerNote: "Enregistrée sur cet appareil · sans nouvel import",
+      headerButton: "Vos conversations sur cet appareil",
+      panelTitle: "Enregistré sur cet appareil",
+      panelIntro:
+        "Vos conversations restent dans ce navigateur pour que vous puissiez y revenir sans les importer à nouveau. Elles ne quittent jamais cet appareil et ne sont jamais stockées sur nos serveurs.",
+      panelShared:
+        "Toute personne qui utilise ce navigateur peut les ouvrir. Sur un appareil partagé, oubliez-les quand vous avez terminé.",
+      forgetThis: "Oublier cette conversation",
+      storageTitle: "Stockage",
+      storageChats: "Vos conversations enregistrées occupent {size}.",
+      storageSite:
+        "Tout ce que ce site conserve ici : {used} sur {quota} disponibles.",
+      persisted: "Ce navigateur les conserve de manière fiable.",
+      notPersisted:
+        "Ce navigateur peut les effacer s'il manque de place ou après des semaines sans visite.",
+      persistButton: "Demander au navigateur de les conserver",
+      persistDenied:
+        "Le navigateur a refusé. Un fichier de sauvegarde est la copie toujours en sécurité.",
+      iosHint:
+        "Sur iPhone et iPad, Safari efface les données d'un site après quelques semaines sans visite. Pour garder vos conversations, ajoutez WhatsAnalyze à l'écran d'accueil : touchez Partager, puis « Sur l'écran d'accueil ».",
+      backupTitle: "Sauvegarde",
+      backupText:
+        "Téléchargez toutes vos conversations enregistrées dans un seul fichier. Pour les restaurer, déposez le fichier sur ce panneau ou sur une zone d'import.",
+      backupDownload: "Télécharger la sauvegarde",
+      backupRestore: "Restaurer une sauvegarde",
+      backupDownloaded: "Conversations dans la sauvegarde : {count}",
+      backupRestored: "Conversations restaurées depuis la sauvegarde : {count}",
+      backupInvalid: "Ce fichier n'est pas une sauvegarde WhatsAnalyze.",
+      forgetTitle: "Oublier",
+      autoForget: "Oublier les conversations non ouvertes depuis 90 jours",
+      autoForgetText:
+        "Vérifié à chaque retour. Un navigateur ne peut rien effacer tant que le site est fermé.",
+      forgetAll: "Tout oublier",
+      forgetAllConfirm:
+        "Oublier toutes les conversations, analyses et échanges enregistrés sur cet appareil ? C'est irréversible.",
+      readingsTitle: "Analyses précédentes",
+      readingGeneral: "Analyse générale",
+      ranLocal: "Sur cet appareil",
+      ranCloud: "Cloud",
+      ranPreview: "Aperçu cloud",
     },
     askAiCard: {
       title: "Interrogez l'IA sur cette conversation",
-      text: "Au-delà des chiffres : laissez l'IA lire cette conversation et répondre à votre question, en privé sur votre appareil, sans nouvel envoi.",
+      text: "Au-delà des chiffres : laissez l'IA lire cette conversation et répondre à votre question. Elle est d'abord anonymisée sur votre appareil, sans nouvel envoi.",
       button: "Demander à l'IA",
     },
     toolsAi: {
@@ -5695,7 +8784,7 @@ export const messages = {
       dataContinue: "Télécharger quand même",
       dataCancel: "Attendre le Wi-Fi",
       seoTitle:
-        "Analyse de conversation WhatsApp par IA privée – Gratuite sur votre appareil | WhatsAnalyze",
+        "Analyse de conversation WhatsApp par IA privée – Gratuite sur votre appareil – WhatsAnalyze",
       seoDescription:
         "Analyse de conversation par IA privée qui ne quitte jamais votre appareil : une IA gratuite tourne dans votre navigateur et lit votre conversation WhatsApp (personnalités, dynamique de la relation, sujets récurrents, meilleurs moments). Aucun envoi, aucun compte. IA cloud avec extraits anonymisés pour aller plus loin.",
       ogTitle: "Analyse de conversation WhatsApp par IA",
@@ -5706,40 +8795,47 @@ export const messages = {
       heroSubtitle:
         "Importez votre conversation exportée et laissez l'IA la décrire : l'ambiance, le rôle et le style de chacun, votre façon d'échanger, vos sujets récurrents et vos meilleurs moments.",
       heroNote:
-        "IA gratuite sur votre appareil : votre conversation ne le quitte jamais · Ou IA cloud anonymisée pour les abonnés",
-      chooseEyebrow: "Étape 2 · Choisissez votre IA",
-      chooseTitle: "Où l'IA doit-elle tourner ?",
+        "Anonymisée sur votre appareil avant qu'une IA ne la voie · Aperçu gratuit, sans compte · Ou tout sur votre appareil",
+      chooseEyebrow: "Étape 2 · Votre rapport IA",
+      chooseTitle: "Laissez l'IA lire votre conversation",
       chooseText:
-        "Les deux lisent des extraits anonymisés de votre conversation et produisent le même type de rapport. Elles diffèrent par la confidentialité, la qualité et ce dont votre appareil a besoin.",
-      localTitle: "Sur votre appareil",
-      localTag: "CONFIDENTIALITÉ MAXIMALE · GRATUIT",
+        "Votre navigateur anonymise la conversation avant tout envoi. L'IA dans le cloud fonctionne sur n'importe quel téléphone et donne les réponses les plus fines. Vous préférez que rien ne quitte votre appareil ? Lancez-la plutôt sur cet appareil.",
+      localTitle: "Ou lancez-la sur cet appareil",
+      localTag: "CONFIDENTIALITÉ MAXIMALE · FONCTIONNE HORS LIGNE",
       localPro1: "Rien ne quitte votre appareil, même pas anonymisé",
       localPro2: "Gratuit, sans compte",
       localPro3: "Fonctionne hors ligne une fois le modèle téléchargé",
-      localCon1: "Téléchargement unique d'environ {gb} Go",
+      localCon1: "Un gros téléchargement unique : environ {gb} Go",
       localCon2:
-        "Nécessite un téléphone ou un ordinateur récent et peut prendre quelques minutes",
+        "Nécessite un téléphone ou un ordinateur récent, et peut ne pas fonctionner sur tous les appareils",
       localCon3:
         "Petit modèle : analyse plus simple, et une longue conversation est lue en plusieurs parties, ce qui prend quelques minutes",
       localButton: "Analyser sur cet appareil",
       localUnsupported:
         "Votre navigateur ne prend pas en charge WebGPU, nécessaire à l'IA locale. Essayez la dernière version de Chrome, Edge ou Safari, ou utilisez l'IA dans le cloud.",
-      cloudTitle: "Dans le cloud",
-      cloudTag: "MEILLEURE QUALITÉ · ABONNÉS",
+      cloudTitle: "IA cloud anonymisée",
+      cloudTag: "RECOMMANDÉ · MEILLEURE QUALITÉ",
+      cloudTagPreview: "RECOMMANDÉ · APERÇU GRATUIT",
       cloudPro1:
-        "Un modèle d'IA de pointe : une analyse bien plus fine et plus juste",
+        "Anonymisée d'abord sur votre appareil : chaque personne de la conversation devient « Person A », « Person B »…, et les numéros de téléphone, e-mails, liens et IBAN sont supprimés avant tout envoi",
       cloudPro2:
-        "Lit jusqu'à environ 10 000 messages d'un coup, soit la plupart des conversations en entier",
+        "Un modèle d'IA de pointe : une analyse bien plus fine et plus juste",
       cloudPro3:
         "Fonctionne sur n'importe quel téléphone, prêt en 30 secondes environ",
+      cloudPro4:
+        "Lit jusqu'à environ 10 000 messages d'un coup, soit la plupart des conversations en entier",
+      cloudPro4Preview:
+        "Gratuit, sans compte : le résumé, la réponse à votre question et un premier aperçu de chaque section",
       cloudCon1:
-        "Des extraits anonymisés sont envoyés à notre fournisseur d'IA (Anthropic ou OpenAI) pour traitement",
-      cloudCon2: "Inclus dans l'abonnement WhatsAnalyze",
-      cloudButton: "Analyser dans le cloud",
-      cloudSubscribe: "S'abonner pour débloquer l'IA dans le cloud",
-      cloudPreviewButton: "Essayer l'aperçu gratuit dans le cloud",
+        "Les extraits anonymisés quittent votre appareil : notre fournisseur d'IA (Anthropic ou OpenAI) les traite",
+      cloudCon2: "Le rapport complet fait partie de l'abonnement WhatsAnalyze",
+      cloudButton: "Obtenir mon rapport IA",
+      cloudSubscribe: "S'abonner pour le rapport complet",
+      cloudPreviewButton: "Obtenir mon aperçu IA gratuit",
       error_preview_used:
         "Vous avez déjà utilisé l'aperçu gratuit du jour. Abonnez-vous pour le rapport complet, ou réessayez demain.",
+      fallbackLocal:
+        "Inutile d'attendre : lancez plutôt l'analyse sur cet appareil. C'est gratuit, et rien ne quitte votre appareil.",
       lockedTitle: "Le rapport complet contient plus",
       lockedButton: "Débloquer le rapport complet",
       cloudConsent:
@@ -5749,7 +8845,7 @@ export const messages = {
         "Voici tout ce qui est envoyé. Les vrais noms sont remis en place sur votre appareil à l'arrivée de la réponse.",
       progressLocal: "L'IA lit votre conversation sur votre appareil…",
       progressCloud:
-        "L'IA lit votre conversation… cela prend environ 15 secondes.",
+        "L'IA lit votre conversation… cela prend environ 20 secondes.",
       error_local:
         "L'IA locale n'a pas pu démarrer. Réessayez, ou utilisez l'IA dans le cloud.",
       error_local_unsupported:
@@ -5766,6 +8862,23 @@ export const messages = {
         "L'IA locale s'est embrouillée avec cette conversation. Réessayez, ou utilisez l'IA dans le cloud pour de meilleurs résultats.",
       error_no_messages:
         "Nous n'avons trouvé aucun message texte à analyser dans cette conversation.",
+      error_local_gpu:
+        "Le pilote graphique n'a pas pu démarrer l'IA locale. Redémarrer le navigateur aide souvent ; sinon, utilisez l'IA dans le cloud.",
+      error_local_network:
+        "La connexion a été coupée pendant le téléchargement du modèle d'IA. Vérifiez votre connexion et réessayez : le téléchargement reprend là où il s'est arrêté. Ou utilisez l'IA dans le cloud.",
+      error_local_storage:
+        "Il n'y a pas assez d'espace libre sur cet appareil pour le modèle d'IA. Libérez de l'espace et réessayez, ou utilisez l'IA dans le cloud.",
+      error_preview_cap:
+        "Tous les aperçus gratuits dans le cloud du jour ont été utilisés. Abonnez-vous pour le rapport complet, ou réessayez demain.",
+      localUnsupportedGpu:
+        "Le pilote graphique n'a pas pu démarrer l'IA locale. Redémarrer le navigateur peut aider ; l'IA dans le cloud fonctionne tout de suite.",
+      localUnsupportedStorage:
+        "L'IA locale a besoin d'environ {gb} Go d'espace libre, et cet appareil ne les a pas pour le moment. Libérez de l'espace, ou utilisez l'IA dans le cloud.",
+      fallbackPreview: "Essayer plutôt l'aperçu gratuit dans le cloud",
+      fallbackCloud: "Analyser plutôt dans le cloud",
+      dataUseCloud: "Utiliser plutôt l'IA dans le cloud",
+      progressRetry:
+        "La connexion a été coupée. Reprise du téléchargement là où il s'est arrêté…",
       reportCloud: "ANALYSÉ PAR L'IA DANS LE CLOUD",
       reportLocal: "ANALYSÉ SUR VOTRE APPAREIL",
       reportTitle: "Ce que l'IA voit dans votre conversation",
@@ -5790,6 +8903,34 @@ export const messages = {
         "Fonctionne sur ton appareil et se souvient des derniers messages.",
       coachNoteCloud:
         "Chaque message utilise une de tes analyses cloud du jour.",
+      coachNoteFree:
+        "Aperçu gratuit : quelques réponses cloud par jour. Avec Pro, tu en as plus.",
+      coachNoteFreeLeft:
+        "Encore {n} réponses cloud gratuites aujourd’hui. Avec Pro, tu en as plus.",
+      coachPickMe:
+        "Choisis en haut qui tu es, pour que la réponse soit écrite de ton point de vue.",
+      sampleButton: "Voir l'analyse de l'IA",
+      sampleNote:
+        "Conversation d'exemple : ses analyses IA ont été faites à l'avance, c'est donc gratuit et votre aperçu gratuit reste pour votre propre conversation.",
+      sampleCustom:
+        "Votre propre question demande votre propre conversation. Avec l'exemple, choisissez l'une des questions ci-dessus.",
+      progressSample: "L'IA lit la conversation d'exemple…",
+      sampleReport:
+        "Voici l'analyse complète de la conversation d'exemple, préparée à l'avance.",
+      sampleOwnChat: "Essayer avec ma propre conversation",
+      sampleYoursTitle: "À vous : que raconterait votre conversation ?",
+      sampleYoursText:
+        "Exportez votre conversation depuis WhatsApp en quelques gestes et choisissez le fichier. Votre première analyse est un aperçu gratuit, prêt en 20 secondes environ, et la conversation est anonymisée sur votre appareil avant qu'une IA ne la voie.",
+      sampleYoursButton: "Choisir mon fichier de conversation",
+      sampleYoursGuide: "Pas encore d'export ? Voici comment faire",
+      coachSampleIntro: "Essaie l'une de celles-ci :",
+      coachSampleDraft: "Brouillon de {name}",
+      coachNoteSample:
+        "Conversation d'exemple : ces réponses ont été préparées à l'avance. Avec ta propre conversation, tu peux tout demander.",
+      error_coach_free_used:
+        "Tu as utilisé tes réponses gratuites du jour. Reviens demain, ou passe à Pro pour en avoir plus chaque jour.",
+      error_coach_local_unchanged:
+        "Sur cet appareil, l’IA n’a pas réussi à réécrire ce brouillon. Précise un peu ce que tu veux faire passer, ou utilise le coach dans le cloud.",
       coachSupportTitle: "Cela semble sérieux. Tu n'as pas à gérer ça seul·e.",
       coachSupportText:
         "Si toi ou quelqu'un d'autre êtes en danger, appelle tout de suite le numéro d'urgence local (112). Pour un soutien gratuit et confidentiel, trouve une ligne d'écoute dans ton pays sur findahelpline.com (en France : 3114).",
@@ -5823,7 +8964,7 @@ export const messages = {
       faq1Q:
         "Existe-t-il un analyseur de conversations WhatsApp par IA gratuit ?",
       faq1A:
-        "Oui. Le mode sur votre appareil est gratuit et sans compte : un petit modèle d'IA se télécharge une fois dans votre navigateur et analyse la conversation localement. Le mode cloud, avec un modèle bien plus puissant, fait partie de l'abonnement WhatsAnalyze.",
+        "Oui. L'IA dans le cloud vous offre un aperçu gratuit sans compte : le résumé, la réponse à votre question et un premier aperçu de chaque section. Le rapport complet dans le cloud fait partie de l'abonnement WhatsAnalyze. Le mode sur votre appareil est entièrement gratuit et sans compte : un petit modèle d'IA se télécharge une fois dans votre navigateur et analyse la conversation localement, sur les appareils capables de le faire tourner.",
       faq2Q: "Ma conversation est-elle envoyée quand j'utilise l'IA ?",
       faq2A:
         "Avec l'IA sur votre appareil, rien n'est envoyé. Avec l'IA dans le cloud, seuls des extraits anonymisés le sont : votre navigateur remplace d'abord les noms par des repères et supprime numéros, e-mails et liens, et vous pouvez voir exactement ce qui est envoyé avant de commencer. Nous ne le conservons pas et notre fournisseur d'IA ne s'en sert pas pour l'entraînement.",
@@ -5846,7 +8987,7 @@ export const messages = {
       breadcrumbTools: "Outils",
       breadcrumbCurrent: "Suivi d'inactivité",
       seoTitle:
-        "Qui a envoyé le dernier message ? Suivi d'inactivité WhatsApp | WhatsAnalyze",
+        "Qui a envoyé le dernier message ? Suivi d'inactivité WhatsApp – WhatsAnalyze",
       seoDescription:
         "Outil gratuit d'inactivité WhatsApp. Découvrez qui a envoyé le dernier message, calculez la durée du silence et mesurez les temps de réponse en toute confidentialité.",
       ogTitle: "Qui a envoyé le dernier message ? Suivi d'inactivité WhatsApp",
@@ -5884,7 +9025,7 @@ export const messages = {
       colParticipant: "Participant",
       colMessages: "Messages",
       colShare: "Part",
-      colMedianReply: "Temps médian",
+      colAverageReply: "Temps moyen",
       colLastActive: "Dernière activité",
       colLastMessage: "Dernier message",
       gapsTitle: "Plus longues périodes de silence (pauses)",
@@ -5953,11 +9094,133 @@ export const messages = {
       hookCard4Text:
         "Transformez vos échanges en une rétrospective interactive prête à être partagée.",
     },
+    situationSameFight: {
+      navLabel: "Toujours la même dispute ?",
+      seoTitle:
+        "Toujours la même dispute ? Comprendre votre conversation WhatsApp",
+      seoDescription:
+        "Pourquoi se dispute-t-on toujours pour les mêmes choses ? Laissez une IA lire votre conversation WhatsApp, repérer les moments qui se répètent et suggérer comment en parler autrement. Sans reproches ni verdict, gratuit sur votre appareil.",
+      ogTitle: "Toujours la même dispute ?",
+      ogDescription:
+        "Laissez une IA lire votre conversation WhatsApp et montrer le schéma derrière la dispute qui revient sans cesse, sans décider qui a raison.",
+      heroEyebrow: "Des disputes par message ?",
+      heroTitle: "Toujours la même dispute ?",
+      heroSubtitle:
+        "Déposez votre conversation WhatsApp et l'IA répond à une question : comment pourrions-nous mieux communiquer ? Elle s'appuie sur des moments de vos propres messages et suggère ce que vous pourriez essayer tous les deux, sans décider qui a raison.",
+      heroNote:
+        "Gratuit sur votre appareil · Sans compte · L'IA dans le cloud ne voit que des extraits anonymisés",
+      continueButton: "Continuer avec cette conversation",
+      exportGuide: "Comment exporter une conversation WhatsApp ?",
+      showEyebrow: "Ce que votre conversation peut montrer",
+      showTitle:
+        "Vous vous souvenez du ressenti. Votre conversation, du déroulé.",
+      showText:
+        "Quand vous avez écrit, qui a écrit en premier, combien de temps les réponses ont pris : voilà ce que WhatsAnalyze lit et compte vraiment dans votre export.",
+      show1Title: "Une analyse de votre façon de parler",
+      show1Text:
+        "L'IA répond à « Comment pourrions-nous mieux communiquer ? » en quelques phrases, en s'appuyant sur des moments de votre conversation et en suggérant ce que chacun pourrait essayer.",
+      show2Title: "Quand vous vous écrivez",
+      show2Text:
+        "Une carte thermique sur 24 heures de votre conversation, et la part des messages que chacun écrit la nuit. Si vos conversations les plus difficiles ont lieu tard, vous verrez quelle part de vos échanges se passe à ces heures-là.",
+      show2Link: "Ouvrir la carte thermique",
+      show3Title: "Qui lance les conversations",
+      show3Text:
+        "Après six heures de silence ou plus, qui écrit en premier ? Compté pour chacun, en part de toutes vos conversations.",
+      show3Link: "Voir qui commence",
+      show4Title: "La rapidité de vos réponses",
+      show4Text:
+        "Le temps que chacun met en moyenne à répondre, et qui répond le plus vite.",
+      show4Link: "Voir les temps de réponse",
+      show5Title: "Les plus longs silences",
+      show5Text:
+        "Les trois plus longues périodes de silence de votre conversation, quand elles ont eu lieu et qui a écrit en premier ensuite.",
+      show5Link: "Voir les silences",
+      show6Title: "De l'aide pour le prochain message",
+      show6Text:
+        "Après une analyse complète, posez des questions sur votre conversation, ou collez un message que vous vous apprêtez à envoyer pour en obtenir une version plus calme et plus claire, avec vos propres mots.",
+      exampleEyebrow: "Un exemple",
+      exampleTitle: "À quoi peut ressembler une analyse",
+      exampleText:
+        "Inventé pour cette page, pour que vous voyiez à quoi ça ressemble : l'IA nomme un schéma, s'appuie sur des moments précis et vous suggère une prochaine étape à tous les deux.",
+      exampleBadge: "Exemple · Nora et Tom sont fictifs",
+      exampleVibe: "Très proches, avec un point de friction",
+      exampleSummary:
+        "Nora et Tom s'écrivent toute la journée, surtout à propos de projets, de dîners et d'amis. Le ton est tendre et taquin, avec une tension qui revient sans cesse : les changements de programme de dernière minute. En général, c'est oublié le lendemain matin.",
+      exampleAnswer:
+        "Vos désaccords commencent souvent de la même façon : un projet change en fin de journée, l'un de vous l'apprend par message, et les réponses raccourcissent à partir de là. Nora pose souvent une question directe et Tom répond par une blague, ce que chacun de vous semble interpréter différemment. Les échanges qui s'apaisent vite sont ceux où quelqu'un dit ce qu'il a ressenti (« J'avais hâte d'être à ce soir ») plutôt que ce qui n'a pas marché. Vous pourriez fixer vos projets plus tôt dans la journée et, quand une conversation commence à tourner en rond, proposer de vous appeler.",
+      exampleDynamic1Title: "Les soirées s'échauffent",
+      exampleDynamic1Text:
+        "Les échanges qui tournent en rond ont surtout lieu après 23 h, quand vous répondez tous les deux par messages courts et rapides.",
+      exampleDynamic2Title: "Chacun fait un pas vers l'autre",
+      exampleDynamic2Text:
+        "Après une journée de silence, Tom écrit généralement en premier avec une blague, et Nora enchaîne en lui demandant comment s'est passée sa journée.",
+      exampleDraft: "Laisse tomber. Tu fais toujours ça.",
+      exampleRewrite:
+        "J'avais vraiment hâte d'être à ce soir, alors je suis déçue. On peut choisir une autre soirée cette semaine ?",
+      exampleWhy:
+        "Pourquoi : « Tu fais toujours ça » relance souvent la même dispute dans cette conversation. Dire ce que vous ressentez et proposer une prochaine étape donne à Tom quelque chose à quoi répondre.",
+      limitsEyebrow: "Des limites honnêtes",
+      limitsTitle: "Ce qu'elle peut vous dire, et ce qu'elle ne peut pas",
+      limit1Title: "Des schémas, pas des verdicts",
+      limit1Text:
+        "L'IA s'appuie sur des moments précis et suggère des pistes. Elle ne décide ni qui a raison ni qui est en tort, et ce n'est ni une thérapie ni un conseil professionnel.",
+      limit2Title: "Seulement ce qui est dans la conversation",
+      limit2Text:
+        "Les appels, le ton de la voix et ce qui s'est passé en vrai ne figurent pas dans un export, et l'IA peut mal comprendre l'ironie ou le contexte. Prenez-la comme un point de vue et confrontez-la à ce que vous savez.",
+      limit3Title: "Une conversation courte en dit peu",
+      limit3Text:
+        "Quelques dizaines de messages ou une mauvaise semaine ne font pas un schéma. Plus votre export couvre d'historique, plus il y a d'éléments sur lesquels s'appuyer. S'il n'y en a pas assez, l'IA a pour consigne de le dire.",
+      privacyEyebrow: "Privé par défaut",
+      privacyTitle: "Les messages de l'autre y sont aussi",
+      privacyText:
+        "Une conversation contient les mots de l'autre personne autant que les vôtres. Voici donc exactement où elle va.",
+      privacy1Title: "Enregistrée sur cet appareil uniquement",
+      privacy1Text:
+        "Par défaut, votre conversation est conservée dans ce navigateur, sur cet appareil, pour que vous puissiez y revenir. Vous pouvez choisir de ne pas la garder, ou l'oublier quand vous voulez.",
+      privacy2Title: "Les statistiques et l'IA sur l'appareil restent ici",
+      privacy2Text:
+        "Les statistiques et l'IA sur l'appareil fonctionnent dans votre navigateur. Rien de ce qu'elles lisent ne quitte votre appareil.",
+      privacy3Title: "Anonymisée pour le cloud",
+      privacy3Text:
+        "Si vous choisissez l'IA dans le cloud, aperçu gratuit compris, seuls des extraits anonymisés sont envoyés : noms remplacés ; numéros de téléphone, e-mails, liens et IBAN supprimés. Le fournisseur d'IA ne s'en sert pas pour entraîner ses modèles.",
+      supportEyebrow: "Quand c'est plus qu'une dispute",
+      supportTitle: "Si les disputes vous font peur",
+      supportText:
+        "Si quelqu'un vous menace, vous contrôle ou vous fait sentir en danger, une analyse de conversation n'est pas l'aide qu'il vous faut, et vous n'avez pas à affronter ça seul·e. Quand une conversation ou un message évoque des violences, des menaces ou l'automutilation, le coach IA est conçu pour s'arrêter et vous orienter vers de l'aide.",
+      supportLink: "Trouver une ligne d'écoute dans votre pays",
+      faqTitle: "Questions fréquentes",
+      faq1Q: "Pourquoi se dispute-t-on toujours pour les mêmes choses ?",
+      faq1A:
+        "Souvent, le sujet change mais le déroulé reste le même : le même genre de moment déclenche la dispute, et chacun réagit comme la dernière fois. Cette page ne peut pas vous dire pourquoi avec certitude, mais votre conversation peut montrer quand ça arrive le plus souvent et comment les messages s'enchaînent, ce qui vous donne quelque chose de concret dont parler ensemble.",
+      faq2Q: "Va-t-elle me dire qui a raison ?",
+      faq2A:
+        "Non. Elle est faite pour montrer le schéma, pas pour désigner un gagnant. On demande à l'IA comment vous pourriez mieux communiquer, et elle répond avec des moments de votre conversation et des idées pour vous deux. Elle ne juge personne et peut mal interpréter le contexte.",
+      faq3Q: "Peut-elle m'aider à écrire le prochain message ?",
+      faq3A:
+        "Oui. Sous une analyse, « Aide-moi à répondre » prend un message que vous êtes sur le point d'envoyer et propose une version plus calme et plus claire qui garde ce que vous voulez dire, avec une courte note sur ce qui a changé. C'est vous qui décidez quoi envoyer. Après une analyse sur votre appareil, cela fonctionne gratuitement sur place ; après l'aperçu gratuit dans le cloud, vous avez quelques réponses gratuites par jour, et Pro vous en donne plus.",
+      faq4Q: "Est-ce gratuit ?",
+      faq4A:
+        "Les statistiques et l'analyse IA sur l'appareil sont gratuites et sans compte, tout comme les questions de suivi après une analyse sur l'appareil. Sans abonnement, vous pouvez aussi essayer un court aperçu gratuit dans le cloud, avec quelques réponses gratuites du coach par jour. L'analyse complète dans le cloud et plus de réponses dans le cloud chaque jour font partie de Pro ({price}/mois).",
+      faq5Q: "Ma conversation est-elle envoyée ?",
+      faq5A:
+        "Pas pour les statistiques ni pour l'IA sur l'appareil : elles fonctionnent dans votre navigateur et rien de ce qu'elles lisent ne quitte votre appareil. Par défaut, la conversation est conservée dans ce navigateur pour que vous puissiez y revenir ; vous pouvez choisir de ne pas la garder, ou l'oublier à tout moment. Si vous choisissez l'IA dans le cloud, seuls des extraits anonymisés sont envoyés (noms remplacés ; numéros de téléphone, e-mails, liens et IBAN supprimés), et notre fournisseur d'IA ne s'en sert pas pour l'entraînement. Avant de commencer, vous pouvez voir exactement ce qui serait envoyé.",
+      faq6Q: "Ça marche aussi pour les disputes entre amis ou en famille ?",
+      faq6A:
+        "Oui. N'importe quelle conversation WhatsApp exportée fonctionne, avec votre partenaire, un ami, vos parents ou vos frères et sœurs, et aussi les groupes. L'IA décrit comment les personnes qui y participent se parlent, quelles qu'elles soient.",
+      faq7Q: "Combien de messages faut-il ?",
+      faq7A:
+        "Plus il y a d'historique, mieux c'est. Quelques dizaines de messages ou une seule semaine difficile ne montrent pas de schéma. Exportez toute la conversation sans médias ; une longue conversation ne pose pas de problème.",
+      ctaTitle: "Voir le schéma, puis en parler ensemble",
+      ctaButton: "Analyser ma conversation",
+      ctaNote: "Gratuit sur votre appareil · Sans compte · Sans verdict",
+      disclaimer:
+        "WhatsAnalyze est indépendant et n'est pas affilié à WhatsApp ni à Meta. Une analyse par IA est un point de vue pour prendre du recul, pas une thérapie ni un conseil professionnel.",
+    },
     courtEvidence: {
       mediaNotLoaded:
         "Vos fichiers multimédias ne sont pas chargés : la discussion a été restaurée depuis cette session du navigateur, qui ne conserve que les messages. Déposez à nouveau l'export .zip pour que l'index des pièces les inclue et calcule leur empreinte.",
       seoTitle:
-        "Conversation WhatsApp comme preuve en justice – Export PDF clair | WhatsAnalyze",
+        "Conversation WhatsApp comme preuve en justice – Export PDF clair – WhatsAnalyze",
       seoDescription:
         "Transformez un échange WhatsApp en un PDF chronologique propre avec chaque message et horodatage. 100 % dans le navigateur, sans envoi.",
       heroEyebrow: "Export de discussion certifié",
@@ -6062,7 +9325,7 @@ export const messages = {
         "Anna et Ben se tiennent au courant toute la journée, entre projets du week-end et blagues récurrentes. Le ton est chaleureux et taquin, et les petits désaccords se règlent vite.",
       navLabel: "Alternative à What Brandon Thinks",
       seoTitle:
-        "Alternative gratuite à What Brandon Thinks – Analyse de conversation par IA privée | WhatsAnalyze",
+        "Alternative gratuite à What Brandon Thinks – Analyse de conversation par IA privée – WhatsAnalyze",
       seoDescription:
         "Vous cherchez une alternative gratuite à What Brandon Thinks ? WhatsAnalyze analyse votre conversation WhatsApp avec une IA qui tourne sur votre propre appareil : gratuit, sans compte, et votre conversation n'est jamais envoyée.",
       heroTitle:
@@ -6107,9 +9370,9 @@ export const messages = {
       pillar2Title: "Anonymisée pour le cloud",
       pillar2Text:
         "Si vous choisissez l'IA cloud, les noms deviennent « Personne A » et « Personne B » et les numéros, e-mails et liens sont retirés d'abord. Les noms ne sont rétablis que sur votre appareil.",
-      pillar3Title: "Rien n'est conservé",
+      pillar3Title: "Seulement sur votre appareil",
       pillar3Text:
-        "Nous ne conservons pas votre conversation et n'entraînons aucun modèle avec. Il n'y a rien à supprimer, car rien n'a été enregistré.",
+        "Votre conversation est enregistrée dans votre navigateur pour que vous puissiez y revenir, jamais sur nos serveurs, et nous n'entraînons aucun modèle avec. Oubliez-la d'un geste quand vous voulez.",
       faqTitle: "Questions sur le changement",
       faq1Q: "Existe-t-il une version gratuite de What Brandon Thinks ?",
       faq1A:
@@ -6131,7 +9394,7 @@ export const messages = {
     },
     relationshipProof: {
       seoTitle:
-        "Prouvez votre relation avec vos chats WhatsApp – Visa et immigration | WhatsAnalyze",
+        "Prouvez votre relation avec vos chats WhatsApp – Visa et immigration – WhatsAnalyze",
       seoDescription:
         "Transformez des années de messages WhatsApp en un PDF clair : horodatages, statistiques et échanges quotidiens qui attestent d'une relation authentique. 100 % privé.",
       heroEyebrow: "Preuve de relation",
@@ -6213,10 +9476,10 @@ export const messages = {
     pageNameRelationship: "Prouver votre relation avec vos chats",
     pageNameInactivity: "Suivi d'inactivité et dernier message",
     toolsMessageCounter: {
-      seoTitle: "Compteur de messages et de lignes WhatsApp | WhatsAnalyze",
+      seoTitle: "Compteur de messages et de lignes WhatsApp – WhatsAnalyze",
       seoDescription:
         "Comptez les messages, lignes et caractères de votre chat WhatsApp. Découvrez qui écrit le plus et votre jour le plus actif, 100 % privé.",
-      ogTitle: "Compteur de messages et de lignes WhatsApp | WhatsAnalyze",
+      ogTitle: "Compteur de messages et de lignes WhatsApp – WhatsAnalyze",
       ogDescription:
         "Compteur WhatsApp rapide et 100 % privé. Découvrez qui envoie le plus de messages et vos records de discussion.",
       heroEyebrow: "Outil WhatsApp gratuit",
@@ -6282,11 +9545,136 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze est un projet open source indépendant sans affiliation, approbation ou parrainage par WhatsApp ou Meta.",
     },
+    situationTextingFirst: {
+      navLabel: "Toujours vous qui écrivez en premier ?",
+      seoTitle: "C'est toujours vous qui écrivez en premier sur WhatsApp ?",
+      seoDescription:
+        "C'est toujours moi qui écris en premier ? Voyez qui lance les conversations dans votre discussion WhatsApp et à quelle vitesse chacun répond. Gratuit, sur votre appareil.",
+      heroEyebrow: "Qui lance la conversation",
+      heroTitle: "C'est toujours vous qui écrivez en premier ?",
+      heroSubtitle:
+        "Quand on a l'impression que chaque conversation part de soi, la discussion peut montrer ce qu'il en est vraiment : qui commence, et à quelle vitesse chacun répond. Côte à côte, calculé sur votre appareil.",
+      heroNote:
+        "Gratuit · Sans compte · Les chiffres ne quittent pas votre appareil",
+      offerLabel:
+        "Demander qui fait le plus d'efforts dans votre conversation avec {name}",
+      resultsEyebrow: "Votre discussion en chiffres",
+      resultsTitle: "Qui commence, et à quelle vitesse chacun répond",
+      resultsText:
+        "Lisez les deux ensemble. Lancer moins de conversations mais répondre en quelques minutes, c'est aussi un effort.",
+      resultsFew:
+        "Conversations jusqu'ici : {count}. C'est encore trop peu pour en tirer grand-chose.",
+      resultsHow:
+        "Une conversation est lancée par la personne qui écrit en premier après au moins six heures de silence. Le temps de réponse est la moyenne du temps que met chaque personne à répondre à quelqu'un d'autre, en comptant les réponses arrivées en moins de 24 heures.",
+      numbersStarted: "des conversations lancées",
+      numbersStartedOf: "{count} conversations sur {total}",
+      numbersReply: "Réponse moyenne",
+      numbersNoReplies: "Pas encore de réponse",
+      numbersLast: "Dernier message",
+      numbersMessages: "Messages",
+      numbersMore: "Autres personnes dans cette discussion : {count}",
+      nextTitle: "Envie d'aller au-delà des horaires ?",
+      nextText:
+        "L'IA peut lire les messages eux-mêmes et répondre à « Qui fait le plus d'efforts dans cette conversation ? ». Votre discussion est déjà ouverte : rien à importer à nouveau.",
+      nextButton: "Demander qui fait le plus d'efforts",
+      nextNote:
+        "Gratuit sur votre appareil, ou en aperçu cloud gratuit qui n'envoie que des extraits anonymisés.",
+      showEyebrow: "Ce que votre discussion peut montrer",
+      showTitle: "Les chiffres derrière l'impression",
+      showText:
+        "Tout est calculé à partir de votre discussion exportée, dans votre navigateur.",
+      show1Title: "Qui lance les conversations",
+      show1Text:
+        "La part des conversations lancées par chaque personne, et leur nombre. Une nouvelle conversation commence après six heures de silence.",
+      show2Title: "À quelle vitesse chacun répond",
+      show2Text:
+        "Le temps de réponse moyen de chaque personne, juste à côté de sa part : lancer moins et répondre vite apparaissent tous les deux.",
+      show3Title: "Qui a écrit en dernier, et quand",
+      show3Text:
+        "Quand chacun a envoyé son dernier message, et combien de messages chaque personne a écrits.",
+      show4Title: "Ce que disent les messages",
+      show4Text:
+        "Pour aller plus loin, l'IA lit la discussion elle-même et répond à « Qui fait le plus d'efforts dans cette conversation ? » avec des mots simples.",
+      exampleEyebrow: "Un exemple",
+      exampleTitle: "Mia commence plus souvent. Leo répond plus vite.",
+      exampleText:
+        "Deux personnes inventées, pour montrer comment lire les chiffres. Mia lance environ deux tiers de leurs conversations ; Leo répond le plus souvent en quelques minutes. Aucun de ces chiffres ne dit qui tient le plus à l'autre.",
+      exampleCaption: "Exemple · Mia et Leo sont inventés",
+      exampleVibe: "Des échanges simples, au quotidien",
+      exampleSummary:
+        "Mia et Leo s'écrivent presque tous les jours : projets pour le week-end, histoires de boulot et une blague récurrente sur les plantes de Leo.",
+      exampleAnswer:
+        "Les deux, chacun à sa manière. Mia ouvre la plupart des conversations, souvent avec un projet ou une question sur la journée de Leo. Leo en lance moins, mais répond en quelques minutes et pose les questions qui font durer la conversation. Si Mia aimerait que Leo écrive en premier plus souvent, ça vaut la peine de le lui dire. La discussion ne peut pas trancher à leur place.",
+      limitsEyebrow: "Des limites honnêtes",
+      limitsTitle: "Qui écrit en premier, ce n'est pas toute l'histoire",
+      limitsText:
+        "Les chiffres montrent une tendance dans une discussion. Ils ne mesurent pas à quel point quelqu'un tient à vous, et ne disent pas si une amitié ou une relation est à sens unique.",
+      limit1Title: "Chacun son style",
+      limit1Text:
+        "Certains organisent et prennent des nouvelles. D'autres lancent rarement la conversation, mais répondent vite et chaleureusement. Les deux font partie du lien.",
+      limit2Title: "La vie se passe aussi hors de la discussion",
+      limit2Text:
+        "Les horaires de travail, les fuseaux horaires, les appels et le temps passé ensemble n'apparaissent pas dans un export WhatsApp.",
+      limit3Title: "Des tendances, pas des verdicts",
+      limit3Text:
+        "Une part de 70 % décrit ce qui s'est passé dans cette discussion. Ce que ça signifie, c'est à vous d'en décider, et peut-être d'en parler.",
+      limit4Title: "Une discussion courte en dit peu",
+      limit4Text:
+        "Quelques semaines ou quelques dizaines de conversations peuvent pencher d'un côté comme de l'autre. Plus la discussion est longue, plus les chiffres ont de sens.",
+      supportTitle: "Quand il s'agit de plus qu'une discussion",
+      privacyEyebrow: "Privé dès la conception",
+      privacyTitle: "Votre discussion reste la vôtre",
+      privacy1Title: "Calculé sur votre appareil",
+      privacy1Text:
+        "Les chiffres sont calculés dans votre navigateur. Votre discussion n'est envoyée nulle part pour les obtenir.",
+      privacy2Title: "Enregistrée ici, si vous le souhaitez",
+      privacy2Text:
+        "Par défaut, votre discussion est enregistrée uniquement sur cet appareil, pour que vous puissiez y revenir sans nouvel import. Touchez « Ne pas garder » pour annuler, ou oubliez-la quand vous voulez.",
+      privacy3Title: "L'IA, selon vos choix",
+      privacy3Text:
+        "Avec l'IA sur l'appareil, votre discussion ne quitte jamais votre appareil. L'aperçu cloud gratuit n'envoie que des extraits anonymisés (noms remplacés ; numéros de téléphone, e-mails, liens et IBAN supprimés), et le fournisseur d'IA ne s'en sert pas pour entraîner ses modèles.",
+      stepsTitle: "Comment vérifier votre discussion",
+      step1Title: "Exportez la discussion",
+      step1Text:
+        "Dans WhatsApp, ouvrez la discussion, touchez son nom en haut, puis « Exporter la discussion » et « Sans médias ».",
+      step2Title: "Déposez-la ici",
+      step2Text:
+        "Glissez le fichier dans le cadre en haut de cette page, ou choisissez-le. Il est lu dans votre navigateur.",
+      step3Title: "Lisez les deux chiffres",
+      step3Text:
+        "Regardez ensemble qui commence et à quelle vitesse chacun répond. Si vous le souhaitez, demandez à l'IA l'histoire qui se cache derrière.",
+      stepsGuide: "Guide d'export détaillé pour iPhone et Android",
+      faqTitle: "Questions fréquentes",
+      faq1Q: "Comment savoir si c'est toujours moi qui écris en premier ?",
+      faq1A:
+        "Exportez la discussion WhatsApp et déposez-la dans le cadre de cette page. La page compte qui a écrit en premier dans chaque conversation et affiche la part de chaque personne à côté de sa vitesse de réponse. Une nouvelle conversation commence dès que quelqu'un écrit après au moins six heures de silence.",
+      faq2Q:
+        "C'est toujours moi qui écris en premier : est-ce une amitié à sens unique ?",
+      faq2A:
+        "Pas forcément. Certaines personnes aiment lancer la conversation, d'autres savent mieux répondre, et le travail, les fuseaux horaires et le temps passé ensemble comptent aussi. Les chiffres aident à repérer une tendance ; savoir si elle vous semble juste, c'est une question à aborder ensemble.",
+      faq3Q: "Qu'est-ce qui compte comme lancer une conversation ?",
+      faq3A:
+        "Le premier message de la discussion, et chaque message envoyé après au moins six heures sans aucun message. Le temps de réponse est la moyenne du temps que met chaque personne à répondre à quelqu'un d'autre, en comptant les réponses arrivées en moins de 24 heures.",
+      faq4Q: "Ma discussion est-elle envoyée quelque part ?",
+      faq4A:
+        "Pas pour les chiffres : ils sont calculés dans votre navigateur. Par défaut, votre discussion est enregistrée uniquement sur cet appareil, et vous pouvez annuler cela. Si vous interrogez l'IA, avec l'IA sur l'appareil tout reste sur votre appareil, et l'aperçu cloud gratuit n'envoie que des extraits anonymisés (noms remplacés ; numéros de téléphone, e-mails, liens et IBAN supprimés). Le fournisseur d'IA ne s'en sert pas pour l'entraînement.",
+      faq5Q: "Ça marche avec les amis, la famille et les groupes ?",
+      faq5A:
+        "Oui, avec toute discussion WhatsApp que vous pouvez exporter. Dans un groupe, chaque personne a sa propre part de conversations lancées et son propre temps de réponse.",
+      faq6Q: "Est-ce gratuit ?",
+      faq6A:
+        "Les chiffres de cette page sont gratuits et sans compte. La lecture par IA est gratuite sur votre appareil, et l'IA cloud propose un aperçu gratuit. Le rapport cloud complet fait partie de WhatsAnalyze Pro ({price}/mois).",
+      ctaTitle: "Voyez qui lance les conversations dans votre discussion",
+      ctaButton: "Vérifier ma discussion",
+      ctaNote: "Gratuit · Sans compte · Calculé sur votre appareil",
+      disclaimer:
+        "WhatsAnalyze montre des tendances dans une discussion, pas des verdicts sur des personnes ou des relations. C'est un projet open source indépendant sans affiliation, approbation ou parrainage par WhatsApp ou Meta.",
+    },
     toolsWordCounter: {
-      seoTitle: "Compteur de mots et de vocabulaire WhatsApp | WhatsAnalyze",
+      seoTitle: "Compteur de mots et de vocabulaire WhatsApp – WhatsAnalyze",
       seoDescription:
         "Découvrez le nombre de mots, la richesse du vocabulaire, la taille moyenne des messages et les mots les plus utilisés sur WhatsApp. 100 % privé.",
-      ogTitle: "Compteur de mots et de vocabulaire WhatsApp | WhatsAnalyze",
+      ogTitle: "Compteur de mots et de vocabulaire WhatsApp – WhatsAnalyze",
       ogDescription:
         "Analysez le nombre de mots et les termes récurrents de vos conversations WhatsApp sans aucun transfert de données.",
       heroEyebrow: "Outil WhatsApp gratuit",
@@ -6352,13 +9740,142 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze est un projet open source indépendant sans affiliation, approbation ou parrainage par WhatsApp ou Meta.",
     },
+    situationLosingInterest: {
+      navLabel: "Son intérêt pour vous diminue ?",
+      appName: "Temps de réponse et silences sur WhatsApp",
+      seoTitle: "Il ou elle perd intérêt ? Vos temps de réponse sur WhatsApp",
+      seoDescription:
+        "Des réponses de plus en plus lentes, moins de messages qu'avant ? Voyez le temps de réponse moyen de chacun, les plus longs silences et qui écrit en premier. Gratuit et privé, sur votre appareil.",
+      heroEyebrow: "Des réponses de plus en plus lentes ?",
+      heroTitle: "Son intérêt pour vous diminue ?",
+      heroSubtitle:
+        "Réponses plus lentes, moins de messages, silences plus longs : on imagine vite le pire. Les horodatages de votre conversation montrent ce qui a vraiment changé, et quand, pour que vous puissiez le regarder calmement avant de tirer des conclusions.",
+      heroNote:
+        "Gratuit · Sans compte · Les chiffres sont calculés sur votre appareil",
+      offerLabel: "Interrogez l'IA sur votre conversation avec {name}",
+      resultEyebrow: "Votre conversation",
+      resultTitle: "Ce que montre votre conversation",
+      resultText:
+        "Calculé sur votre appareil à partir de l'heure de chaque message. Des constats, pas un verdict.",
+      resultNowLabel: "Où en sont les choses",
+      resultNow: "Dernier message envoyé {time} par {name}.",
+      resultNowNote:
+        "Compté jusqu'à aujourd'hui. Si vous avez exporté la conversation il y a un moment, elle paraîtra plus calme qu'elle ne l'est.",
+      status_active: "Il y a eu des messages ces deux derniers jours.",
+      status_dormant:
+        "C'est calme depuis quelques jours, ce qui est courant pendant une semaine chargée.",
+      status_inactive: "C'est calme depuis plus d'une semaine.",
+      status_ghosted: "C'est calme depuis plus d'un mois.",
+      resultPeopleTitle: "Personne par personne",
+      resultReply: "Réponse moyenne",
+      resultReplyNone: "Trop peu de réponses",
+      resultStarted: "A écrit en premier",
+      resultMessages: "Messages",
+      resultMorePeople: "Et {count} autres personnes dans ce groupe.",
+      resultPeopleNote:
+        "Réponse moyenne : le temps que met quelqu'un à répondre à l'autre, en ne comptant que les réponses en moins d'un jour. A écrit en premier : combien de fois quelqu'un a relancé la conversation après six heures de silence ou plus.",
+      resultGapsTitle: "Les plus longs silences",
+      resultGapEnded: "Ensuite, {name} a écrit en premier",
+      resultSpan: "{count} messages sur {days} jours",
+      resultAiButton: "Interroger l'IA sur cette conversation",
+      resultAiNote:
+        "Elle répond à « Y a-t-il quelque chose qui devrait m'inquiéter ? » et vous demande d'abord lequel des participants vous êtes. Inutile d'ajouter à nouveau la conversation.",
+      resultTimelineLink: "Voir vos messages au fil du temps",
+      showEyebrow: "Ce que votre conversation peut montrer",
+      showTitle: "Les faits derrière l'impression",
+      showText: "Tout est compté à partir de votre export. Rien n'est deviné.",
+      show1Title: "Le temps de réponse de chacun",
+      show1Text:
+        "Le temps que met chacun, en moyenne, à répondre à l'autre. Seules les réponses en moins d'un jour comptent, pour qu'un long silence ne fausse pas tout.",
+      show2Title: "Les plus longs silences",
+      show2Text:
+        "Les trois plus longs silences de la conversation, quand ils ont eu lieu, et qui a écrit en premier ensuite.",
+      show3Title: "Qui écrit en premier",
+      show3Text:
+        "Après six heures ou plus sans message, qui relance la conversation, en pourcentage pour chacun.",
+      show4Title: "Où vous en êtes aujourd'hui",
+      show4Text: "Quand le dernier message a été envoyé, et par qui.",
+      show5Title: "Les messages au fil du temps",
+      show5Text:
+        "L'analyse complète trace vos messages jour après jour, du premier au dernier, pour voir si quelque chose a changé, et quand.",
+      show5Link: "Ouvrir l'analyse",
+      exampleEyebrow: "Un exemple",
+      exampleTitle: "La conversation de Sam et Alex, en chiffres",
+      exampleText:
+        "Des chiffres inventés pour deux personnes fictives, présentés comme le sera votre propre conversation.",
+      exampleBadge: "Exemple · Sam et Alex sont fictifs",
+      exampleReadingTitle: "À lire avec calme",
+      exampleNote1:
+        "Alex met plus de temps à répondre en moyenne, et lance pourtant presque la moitié des conversations. Répondre plus lentement ne veut pas dire avoir moins d'intérêt.",
+      exampleNote2:
+        "Le plus long silence a duré quatre jours en août. Un voyage ? Une semaine chargée ? Les chiffres ne peuvent pas le dire, et ne prétendent pas le savoir.",
+      exampleNote3:
+        "Rien ici ne dit ce que l'un ou l'autre ressent. Si Sam se pose des questions, en parler avec Alex en apprendra plus que n'importe quel graphique.",
+      limitsEyebrow: "Avant d'en tirer des conclusions",
+      limitsTitle:
+        "Des réponses plus lentes ont souvent des raisons ordinaires",
+      limitsText:
+        "Un mois chargé au travail, des examens, des vacances, une semaine stressante, une nouvelle habitude comme couper les notifications : tout cela se voit dans une conversation sous forme de réponses plus lentes et de pauses plus longues.",
+      limit1Title: "Des constats, pas des verdicts",
+      limit1Text:
+        "Les chiffres montrent quand et à quelle fréquence il y a eu des messages, jamais pourquoi. Ils ne peuvent pas dire ce que quelqu'un ressent ou veut.",
+      limit2Title: "Une courte conversation en dit peu",
+      limit2Text:
+        "Avec seulement quelques semaines de messages, une semaine chargée fait bouger toutes les moyennes. Plus la conversation est longue, plus les chiffres ont du sens.",
+      limit3Title: "Une conversation n'est pas tout",
+      limit3Text:
+        "Les appels, le temps passé ensemble et les autres applis n'apparaissent pas dans un export. Écrire moins peut simplement vouloir dire se parler davantage ailleurs.",
+      limit4Title: "Parler plutôt que compter",
+      limit4Text:
+        "Si quelque chose semble différent, un simple « Tout va bien ? Nos discussions me manquent » vous en dira souvent plus que n'importe quelle statistique, et passera mieux sans les chiffres comme preuve.",
+      supportTitle:
+        "Quand l'inquiétude pèse trop, ou quand on ne se sent pas en sécurité",
+      aiEyebrow: "Un second regard",
+      aiTitle: "Demandez à l'IA ce qu'elle voit",
+      aiText:
+        "Les horodatages ne disent pas tout. L'IA lit les messages eux-mêmes et répond à une question : « Y a-t-il quelque chose qui devrait m'inquiéter ? » Elle vous demande d'abord lequel des participants vous êtes, et s'en souvient pour la prochaine fois.",
+      aiCard1Title: "Gratuite, sur votre appareil",
+      aiCard1Text:
+        "L'IA sur l'appareil fonctionne dans votre navigateur. Votre conversation ne quitte pas votre appareil.",
+      aiCard2Title: "Ou un aperçu gratuit dans le cloud",
+      aiCard2Text:
+        "Seuls des extraits anonymisés sont envoyés : les noms sont remplacés, et les numéros de téléphone, e-mails, liens et numéros de compte (IBAN) sont supprimés. Le fournisseur d'IA ne s'en sert pas pour entraîner ses modèles.",
+      aiCard3Title: "Là quand vous revenez",
+      aiCard3Text:
+        "Votre conversation est enregistrée sur cet appareil, pour que vous puissiez la rouvrir plus tard sans nouvel import. Choisissez « Ne pas garder » si vous préférez.",
+      aiButton: "Interroger l'IA",
+      faqTitle: "Questions fréquentes",
+      faq1Q: "Des réponses plus lentes veulent-elles dire qu'on perd intérêt ?",
+      faq1A:
+        "Pas à elles seules. Les réponses ralentissent pour toutes sortes de raisons : le travail, les examens, un voyage, la santé, le stress, ou simplement une nouvelle habitude avec le téléphone. Les chiffres montrent ce qui a changé et quand. Le pourquoi, seule l'autre personne peut vous le dire.",
+      faq2Q: "Comment le temps de réponse moyen est-il calculé ?",
+      faq2A:
+        "Chaque fois qu'une personne répond à l'autre en moins de 24 heures, le temps entre les deux messages compte comme une réponse, et la moyenne est affichée pour chacun. Les pauses de plus d'un jour comptent comme des silences.",
+      faq3Q: "Puis-je voir si les réponses ont ralenti récemment ?",
+      faq3A:
+        "Cette page montre les moyennes sur toute la conversation, et quand ont eu lieu les plus longs silences. Pour voir comment le nombre de messages a évolué, ouvrez l'analyse complète : sa chronologie montre vos messages jour après jour, du premier au dernier.",
+      faq4Q: "Ma conversation est-elle envoyée quelque part ?",
+      faq4A:
+        "Non. Les chiffres de cette page sont calculés dans votre navigateur, sur votre appareil. La conversation est enregistrée sur cet appareil pour que vous puissiez la rouvrir plus tard, et vous pouvez choisir de ne pas la garder, ou l'oublier, à tout moment. Ce n'est que si vous choisissez l'IA dans le cloud, aperçu gratuit compris, que des extraits anonymisés sont envoyés : noms remplacés, numéros de téléphone, e-mails, liens et numéros de compte (IBAN) supprimés. Le fournisseur d'IA ne s'en sert pas pour entraîner ses modèles.",
+      faq5Q: "Dois-je montrer ces chiffres à l'autre personne ?",
+      faq5A:
+        "Nous vous suggérons plutôt de commencer par ce que vous ressentez. Les statistiques peuvent sonner comme un reproche, alors qu'un simple « Nos discussions me manquent, tout va bien ? » invite à une réponse sincère.",
+      faq6Q: "Quelles conversations fonctionnent ?",
+      faq6A:
+        "Toute conversation WhatsApp que vous exportez, depuis un iPhone ou un Android, à deux ou en groupe, dans n'importe quelle langue. Exportez-la sans médias et déposez le fichier .zip ou .txt dans la zone en haut de cette page.",
+      ctaTitle: "Voyez ce qui a vraiment changé",
+      ctaButton: "Vérifier votre conversation",
+      ctaNote: "Gratuit · Sans compte · Calculé sur votre appareil",
+      disclaimer:
+        "WhatsAnalyze est un projet indépendant, sans lien avec WhatsApp ni Meta. Les chiffres décrivent des schémas dans une conversation. Ils ne peuvent pas dire ce que quelqu'un ressent ou veut, et ne remplacent pas une vraie discussion.",
+    },
     toolsChatHeatmap: {
       seoTitle:
-        "Heures de pointe et carte thermique 24h WhatsApp | WhatsAnalyze",
+        "Heures de pointe et carte thermique 24h WhatsApp – WhatsAnalyze",
       seoDescription:
         "Analysez les heures les plus actives de vos chats WhatsApp sur 24h. Comparez jour et nuit 100 % confidentiel dans votre navigateur.",
       ogTitle:
-        "Heures de pointe et carte thermique 24h WhatsApp | WhatsAnalyze",
+        "Heures de pointe et carte thermique 24h WhatsApp – WhatsAnalyze",
       ogDescription:
         "Découvrez les heures les plus actives et la répartition jour/nuit de vos échanges sans téléversement.",
       heroEyebrow: "Outil WhatsApp gratuit",
@@ -6425,6 +9942,136 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze est un projet open source indépendant sans affiliation, approbation ou parrainage par WhatsApp ou Meta.",
     },
+    situationWhatToReply: {
+      navLabel: "Quoi répondre ?",
+      seoTitle:
+        "Quoi répondre ? De l'aide pour votre réponse WhatsApp – WhatsAnalyze",
+      seoDescription:
+        "Vous ne savez pas quoi répondre à ce message ? Une IA qui a lu votre conversation WhatsApp transforme votre brouillon en une réponse plus calme et plus claire, dans votre style. Gratuit sur les appareils compatibles.",
+      ogTitle: "Quoi répondre ? De l'aide pour votre réponse WhatsApp",
+      ogDescription:
+        "Importez votre conversation WhatsApp et obtenez de l'aide pour répondre : une version plus calme et plus claire de ce que vous voulez dire, par une IA qui a lu votre conversation.",
+      heroEyebrow: "De l'aide pour répondre",
+      heroTitle: "Quoi répondre ?",
+      heroSubtitle:
+        "Le message est là et vous ne savez pas comment répondre. Importez votre conversation : une IA qui l'a lue vous aide à trouver les mots. Écrivez ce que vous voulez dire et recevez une version plus calme et plus claire, dans votre style, avec une note qui explique pourquoi.",
+      heroNote:
+        "Gratuit sur votre appareil, si votre navigateur le permet · Quelques réponses cloud gratuites par jour · Plus avec Pro",
+      continueButton: "Obtenir de l'aide pour répondre avec cette conversation",
+      offerChat: "De l'aide pour répondre à {name}",
+      offerGroup: "De l'aide pour répondre dans {name}",
+      exampleEyebrow: "Un exemple",
+      exampleTitle: "À quoi ressemble l'aide",
+      exampleText:
+        "Tom réécrit après une semaine de silence. Le premier brouillon de Mia dit ce qu'elle ressent, avec une pique. Le coach garde le ressenti et enlève la pique.",
+      exampleBadge: "Exemple · Mia et Tom sont fictifs",
+      exampleIncoming:
+        "Désolé d'avoir été si silencieux cette semaine, le travail m'a débordé. Toujours partante pour samedi ?",
+      exampleDraft: "Ah, tu es encore en vie. Ouais, si tu veux.",
+      exampleReply:
+        "Contente d'avoir de tes nouvelles ! Honnêtement, tu m'as manqué cette semaine. Samedi, ça me va, au même endroit que d'habitude ?",
+      exampleWhy:
+        "Pourquoi : ton brouillon dit que tu t'es sentie mise de côté, et ça mérite d'être dit. Dans votre conversation, Tom s'ouvre quand tu dis ce que tu ressens, alors que le sarcasme a souvent été suivi d'une journée de silence. Ainsi, ton message reste, et il a quelque chose à quoi répondre.",
+      showEyebrow: "Ce que votre conversation peut montrer",
+      showTitle: "Une aide qui sait comment vous vous parlez",
+      showText:
+        "Le coach IA s'appuie sur votre conversation, pas sur un modèle tout fait : des extraits anonymisés et la lecture de l'IA sous laquelle il s'ouvre.",
+      show1Title: "Votre façon d'écrire",
+      show1Text:
+        "La lecture décrit le ton de votre conversation et la façon dont chacun écrit, pour qu'une suggestion ressemble à votre conversation.",
+      show2Title: "Votre brouillon, plus calme et plus clair",
+      show2Text:
+        "Écrivez ce que vous voulez dire. Le coach garde ce que vous voulez exprimer et vous le rend plus calme et plus clair, dans votre style.",
+      show3Title: "Une note sur le pourquoi",
+      show3Text:
+        "Chaque suggestion est suivie d'une courte note sur ce qui a changé et pourquoi, d'après la façon dont votre conversation se passe d'habitude.",
+      show4Title: "Des questions sur le message",
+      show4Text:
+        "Vous ne savez pas ce qu'un message veut dire ? Demandez. Le coach renvoie à des moments de votre conversation, et il est conçu pour le dire quand la conversation ne répond pas.",
+      stepsEyebrow: "Comment y arriver",
+      stepsTitle: "De votre conversation à une réponse",
+      step1Title: "Importez votre conversation",
+      step1Text:
+        "Exportez la conversation depuis WhatsApp sans médias, une fois arrivé le message auquel vous voulez répondre, puis déposez-la ci-dessus. Elle est lue dans votre navigateur.",
+      step2Title: "Obtenez une lecture",
+      step2Text:
+        "Le coach s'affiche sous une analyse IA de votre conversation. Utilisez-le gratuitement sur votre appareil, si votre navigateur le permet, ou dans le cloud : l'aperçu gratuit inclut quelques réponses gratuites du coach par jour, et Pro vous en donne plus.",
+      step3Title: "Posez une question ou écrivez un brouillon",
+      step3Text:
+        "Sous la lecture, choisissez « {reply} », écrivez ce que vous aimeriez dire et recevez une version plus calme et plus claire. Ou choisissez « {ask} » pour parler d'abord du message.",
+      plansTitle: "Ce qui est gratuit, et ce qui demande Pro",
+      plan1Title: "Sur votre appareil : gratuit",
+      plan1Text:
+        "La lecture et le coach tournent dans votre navigateur après un téléchargement unique du modèle, et rien ne quitte votre appareil. Il faut WebGPU : un ordinateur récent, la plupart des Android récents avec Chrome, ou un iPhone sous iOS 26 ou plus récent. Le modèle est petit, ses réponses sont donc plus simples.",
+      plan2Title: "Aperçu gratuit dans le cloud",
+      plan2Text:
+        "Un aperçu de l'analyse par une IA plus puissante, à partir d'extraits anonymisés, avec quelques réponses gratuites du coach par jour.",
+      plan3Title: "Pro : {price} par mois",
+      plan3Text:
+        "La lecture complète et le coach dans le cloud, sur n'importe quel téléphone. Chaque message au coach compte pour une des analyses cloud du jour.",
+      ownWordsEyebrow: "Vos mots",
+      ownWordsTitle: "Envoyez-la avec vos propres mots",
+      ownWordsText:
+        "Une suggestion est un point de départ, pas un texte à recopier. On remarque quand un message ne ressemble pas à la personne qui l'envoie, et une réponse qui semble écrite par une machine peut être reçue autrement. Gardez ce qui aide, changez ce qui ne vous ressemble pas, et envoyez-la comme vous la diriez.",
+      limitsEyebrow: "Des limites honnêtes",
+      limitsTitle: "Ce qu'il ne peut pas faire",
+      limit1Title: "Des tendances, pas des verdicts",
+      limit1Text:
+        "Le coach peut dire comment votre conversation se passe d'habitude. Il ne peut pas savoir ce que l'autre personne ressent, ni ce qu'elle fera ensuite.",
+      limit2Title: "Seulement ce qui a été écrit",
+      limit2Text:
+        "L'IA lit des extraits de toute la conversation, toujours avec les messages les plus récents. Elle ne lit ni les messages vocaux, ni les photos, ni les stickers, et le modèle sur l'appareil lit moins que celui du cloud.",
+      limit3Title: "Une conversation courte en dit peu",
+      limit3Text:
+        "Avec peu de messages, il y a peu sur quoi s'appuyer, et les suggestions se rapprochent de conseils généraux.",
+      limit4Title: "L'IA se trompe aussi",
+      limit4Text:
+        "Elle peut passer à côté de l'ironie, des blagues entre vous ou de tout ce qui s'est passé en dehors de la conversation. C'est vous qui connaissez le mieux votre situation.",
+      privacyEyebrow: "Privé par défaut",
+      privacyTitle: "Votre conversation reste la vôtre",
+      privacyText:
+        "Une conversation exportée contient aussi les messages de l'autre personne, elle est donc traitée avec soin.",
+      privacy1Title: "Enregistrée uniquement sur cet appareil",
+      privacy1Text:
+        "Votre conversation est enregistrée dans ce navigateur pour que vous puissiez y revenir, jamais sur nos serveurs. Vous n'en voulez pas ? Choisissez « {dontKeep} » sous la zone d'import.",
+      privacy2Title: "L'IA sur l'appareil reste sur l'appareil",
+      privacy2Text:
+        "Avec l'IA gratuite sur votre appareil, votre conversation, sa lecture et ce que vous écrivez au coach ne quittent jamais votre appareil.",
+      privacy3Title: "Anonymisé pour le cloud",
+      privacy3Text:
+        "L'IA dans le cloud ne reçoit que des extraits anonymisés et ce que vous écrivez au coach : les noms de la conversation sont remplacés, les numéros de téléphone, e-mails, liens et IBAN supprimés. Le fournisseur d'IA ne s'en sert pas pour l'entraînement.",
+      supportEyebrow: "Quand c'est grave",
+      supportTitle: "Certains messages demandent plus qu'une bonne réponse",
+      supportText:
+        "Si votre conversation ou votre question évoque des violences, des menaces ou l'automutilation, le coach n'écrit pas de réponse : il affiche des ressources d'aide. Il ne repère pas tout, alors si vous ne vous sentez pas en sécurité, demandez de l'aide maintenant.",
+      supportDevice:
+        "Sur un appareil partagé, choisissez « {dontKeep} » sous la zone d'import pour que la conversation ne soit pas gardée dans ce navigateur. Une conversation enregistrée peut être oubliée à tout moment depuis « {saved} ».",
+      faqTitle: "Questions sur l'aide pour répondre",
+      faq1Q: "Une IA peut-elle me dire quoi répondre ?",
+      faq1A:
+        "Elle peut vous aider à y arriver. Écrivez une première version de ce que vous voulez dire, et le coach vous la rend plus calme et plus claire, dans votre style et le ton habituel de votre conversation, avec une courte note sur ce qui a changé. Ou interrogez-le d'abord sur le message. La réponse reste la vôtre : changez ce qui ne vous ressemble pas avant de l'envoyer.",
+      faq2Q: "Est-ce gratuit ?",
+      faq2A:
+        "Oui. Sur votre appareil, l'analyse et le coach fonctionnent gratuitement dans le navigateur, s'il prend en charge WebGPU. Dans le cloud, l'aperçu gratuit montre une partie de l'analyse et inclut quelques réponses gratuites du coach par jour, sur n'importe quel téléphone. Avec Pro ({price} par mois), vous avez l'analyse complète et plus de réponses du coach chaque jour.",
+      faq3Q: "L'IA voit-elle le message que je viens de recevoir ?",
+      faq3A:
+        "Seulement s'il est dans votre export : exportez donc la conversation après l'arrivée du message. L'IA lit des extraits de toute la conversation et inclut toujours les messages les plus récents. Si vous avez enregistré la conversation avant l'arrivée du message, exportez-la à nouveau. Vous pouvez aussi coller le message dans votre question.",
+      faq4Q: "Ma conversation est-elle envoyée quelque part ?",
+      faq4A:
+        "Votre conversation est lue dans votre navigateur et enregistrée uniquement sur cet appareil, ce que vous pouvez annuler. Avec l'IA sur l'appareil, rien ne le quitte. Avec l'IA dans le cloud, seuls des extraits anonymisés et ce que vous écrivez au coach sont envoyés : les noms de la conversation sont remplacés, les numéros de téléphone, e-mails, liens et IBAN supprimés. Le fournisseur d'IA ne s'en sert pas pour l'entraînement.",
+      faq5Q: "Le coach se souvient-il de notre échange ?",
+      faq5A:
+        "Si la conversation est enregistrée sur cet appareil, l'échange est gardé avec la lecture qu'il suivait, et il est encore là quand vous revenez. Si vous oubliez la conversation, l'échange part avec elle.",
+      faq6Q: "Et si le message parle de quelque chose de grave ?",
+      faq6A:
+        "Si votre conversation ou votre question évoque des violences, des menaces ou l'automutilation, le coach n'écrit pas de réponse : il affiche des ressources d'aide. Si vous ou quelqu'un d'autre êtes en danger, appelez tout de suite le numéro d'urgence local (112).",
+      ctaTitle: "Trouvez les mots, puis faites-les vôtres",
+      ctaButton: "Importer ma conversation",
+      ctaNote:
+        "Lue dans votre navigateur · Enregistrée uniquement sur cet appareil, si vous le voulez",
+      disclaimer:
+        "WhatsAnalyze est un projet indépendant, sans lien avec WhatsApp ni Meta. Les suggestions du coach servent à réfléchir et ne sont pas un conseil professionnel.",
+    },
     pageNameMessages: "Compteur de messages et de lignes WhatsApp",
     pageNameWords: "Compteur de mots et de vocabulaire WhatsApp",
     pageNameHeatmap: "Heures de pointe et carte thermique 24h WhatsApp",
@@ -6436,16 +10083,106 @@ export const messages = {
       homeTitle: "WhatsAnalyze - L'analizzatore di chat WhatsApp",
       homeDescription:
         "L'analizzatore WhatsApp più popolare. Scopri le statistiche delle tue chat ed esporta la conversazione in PDF senza caricare i tuoi dati.",
-      exportGuideTitle: "WhatsAnalyze - Come esportare la tua chat WhatsApp",
+      exportGuideTitle:
+        "Esportare una chat WhatsApp: iPhone, Android, Web e PDF",
       exportGuideDescription:
-        "Esporta la tua chat WhatsApp. Tutorial per iOS e guida per Android.",
-      pdfGuideTitle:
-        "WhatsAnalyze - Come esportare la tua chat WhatsApp in PDF",
+        "Passo per passo: esporta qualsiasi chat o gruppo WhatsApp su iPhone, Android, WhatsApp Web, Windows o Mac, con o senza media. Poi trasformala in PDF o statistiche.",
+      pdfGuideTitle: "Esportare una chat WhatsApp in PDF, con le foto",
       pdfGuideDescription:
-        "Esporta la tua chat WhatsApp in PDF in pochi secondi, senza inviare i dati a un server.",
+        "Trasforma una chat WhatsApp esportata in un PDF con tutti i messaggi, le foto e le statistiche. Creato nel tuo browser, senza caricare nulla. Anteprima gratuita.",
       signalTitle: "WhatsAnalyze - Come passare da WhatsApp a Signal",
       signalDescription:
         "Passa da WhatsApp a Signal, trasferisci le chat di gruppo e crea backup.",
+    },
+    exportGuidePage: {
+      heroCta: "Già esportata? Apri la tua chat",
+      checkedNote:
+        "Passaggi verificati sul Centro assistenza di WhatsApp il {date}",
+      phoneTitle: "Passo per passo su iPhone e Android",
+      explainerCta: "Hai il file? Aprilo qui",
+      computerLink: "Dal computer? I passaggi per WhatsApp Web, Windows e Mac",
+      nextEyebrow: "Passo successivo",
+      nextTitle: "Apri qui la tua esportazione",
+      nextText:
+        "Trascina qui il file .zip o .txt. Viene letto nel tuo browser, non caricato. Poi scegli cosa vuoi vedere.",
+      cardOpen: "Apri",
+      cardContinue: "Continua con questa chat",
+      cardStatsTitle: "Statistiche della chat",
+      cardStatsText:
+        "Chi scrive di più, a che ore, le parole e le emoji più usate. Gratis.",
+      cardAiTitle: "Lettura con l'IA",
+      cardAiText:
+        "L'IA risponde alla tua domanda sulla chat: chi si impegna di più, l'atmosfera, i temi ricorrenti. Sul tuo dispositivo o anonimizzata nel cloud.",
+      cardPdfTitle: "Chat in PDF",
+      cardPdfText:
+        "Tutta la conversazione in un PDF da stampare, con le foto se le hai esportate. Anteprima gratuita, PDF completo a {price} una tantum.",
+      cardCourtTitle: "PDF come prova in tribunale",
+      cardCourtText:
+        "Righe numerate, orari esatti e impronta SHA-256, per avvocati e tribunali.",
+      ctaTitle: "Esportazione pronta? Aprila qui",
+      ctaButton: "Apri il mio file",
+      ctaNote: "Letto nel tuo browser · .zip o .txt · Statistiche gratuite",
+    },
+    pdfPage: {
+      navLabel: "Chat WhatsApp in PDF",
+      heroTitle: "Esportare una chat WhatsApp in PDF",
+      heroSubtitle:
+        "Tutti i messaggi, le foto e le statistiche della chat in un PDF da stampare, conservare o inviare. Creato nel tuo browser dalla tua esportazione, senza caricare nulla.",
+      heroCta: "Crea il mio PDF",
+      heroNote:
+        "Anteprima gratuita · PDF completo a {price} una tantum · Nessun account",
+      exampleAlt: "Pagine di un PDF creato da una chat WhatsApp di esempio",
+      uploadTitle: "Trascina l'esportazione, ottieni il PDF",
+      uploadText:
+        "Apri il file .zip o .txt creato da WhatsApp. Viene letto nel tuo browser, non caricato.",
+      createButton: "Crea il mio PDF",
+      guideLink:
+        "Non hai ancora l'esportazione? Come esportare una chat WhatsApp",
+      contentsEyebrow: "Cosa contiene",
+      contentsTitle: "Più di una stampa della chat",
+      card1Title: "Tutta la conversazione",
+      card1Text:
+        "Ogni messaggio con mittente, data e ora, in ordine, e le foto accanto se hai esportato con i media.",
+      card2Title: "La chat in numeri",
+      card2Text:
+        "Una copertina con il primo e l'ultimo messaggio, giorni, messaggi e persone, poi i grafici: andamento, per ora, per persona, per mese e per giorno della settimana.",
+      card3Title: "Curiosità su ogni persona",
+      card3Text:
+        "Parole scritte, messaggio più lungo, vocabolario, emoji preferite e lunghezza media dei messaggi.",
+      stepsTitle: "In tre passaggi",
+      step1Title: "Esporta la chat",
+      step1Text:
+        "In WhatsApp apri la chat e scegli «Esporta chat». Includi i media se il PDF deve mostrare le foto.",
+      step2Title: "Trascinala qui",
+      step2Text:
+        "Lo .zip o il .txt si apre nel tuo browser e non viene caricato nulla.",
+      step3Title: "Scarica il PDF",
+      step3Text:
+        "L'anteprima con i primi 100 messaggi è gratuita. La chat completa costa {price}, una tantum.",
+      courtEyebrow: "Per avvocati e tribunali",
+      courtTitle: "Ti serve la chat come prova?",
+      courtText:
+        "Il PDF come prova in tribunale è una trascrizione sobria in bianco e nero: righe numerate, orari esatti, un'impronta SHA-256 della tua esportazione e un elenco degli allegati.",
+      courtButton: "PDF come prova in tribunale",
+      faqTitle: "Domande sul PDF",
+      faq1Q: "WhatsApp può esportare una chat in PDF?",
+      faq1A:
+        "No. WhatsApp esporta una chat come file .zip o .txt. WhatsAnalyze lo trasforma in PDF, nel tuo browser.",
+      faq2Q: "È gratis?",
+      faq2A:
+        "L'anteprima con i primi 100 messaggi è gratuita. Il PDF completo di tutta la chat costa {price} una tantum, e con Pro ne scarichi quanti ne vuoi.",
+      faq3Q: "La mia chat viene caricata da qualche parte?",
+      faq3A:
+        "No. Il file viene letto e il PDF creato nel tuo browser. Il pagamento del PDF completo passa da Stripe, e la tua chat non ne fa parte.",
+      faq4Q: "Le foto sono incluse?",
+      faq4A:
+        "Sì, se esporti la chat con i media: le foto compaiono nel PDF accanto ai loro messaggi. Senza media ottieni un PDF del testo.",
+      faq5Q: "Funziona con le chat di gruppo e su iPhone?",
+      faq5A:
+        "Sì. Qualsiasi chat singola o di gruppo, esportata da iPhone, Android, WhatsApp Web, Windows o Mac.",
+      ctaTitle: "La tua chat in PDF",
+      ctaButton: "Crea il mio PDF",
+      ctaNote: "Anteprima gratuita · Creato nel tuo browser",
     },
     subscribePage: {
       title: "Un abbonamento. Tutto sbloccato.",
@@ -6499,6 +10236,9 @@ export const messages = {
       errorCheckout: "Impossibile avviare il pagamento. Riprova.",
       errorPortalMissing: "Email o ID abbonamento mancante.",
       errorPortalFailed: "Impossibile aprire il portale clienti.",
+    },
+    wrappedAiTeaser: {
+      text: "Scegli una domanda e carica la stessa esportazione della chat nella pagina successiva.",
     },
     wrapped: {
       heroTitle: "WhatsApp Wrapped {currentYear}",
@@ -6613,7 +10353,7 @@ export const messages = {
       "<span>Su iPhone <b>apri</b> WhatsApp e la <b>chat</b> o <b>chat di gruppo</b> che desideri esportare > in alto <b>tocca</b> il <b>nome</b> della chat.</span>",
     tabItemiOS2: "<span>Nel dettaglio della chat, scorri fino in fondo.</span>",
     tabItemiOS3: "<span>Tocca su <b>Esporta chat</b>.</span>",
-    tabItemiOS4: "<span>Scegli <b>senza media</b>.</span>",
+    tabItemiOS4: "<span>Scegli <b>Senza media</b>.</span>",
     tabItemiOS5:
       "<span>Tocca su <b>Salva su File</b> per salvarlo sul tuo iPhone.</span>",
     tabItemiOS6:
@@ -6627,7 +10367,7 @@ export const messages = {
     tabItemAndroid3: "<span>Nel nuovo menu tocca su <b>Altro</b>.</span>",
     tabItemAndroid4: "<span>Tocca su <b>Esporta chat</b>.</span>",
     tabItemAndroid5:
-      "<span>Scegli Senza Media o <b>Includi Media</b> se desideri includere le immagini e altri file nell'esportazione.</span>",
+      "<span>Scegli <b>Senza file multimediali</b> o <b>Includi file multimediali</b> se desideri includere le immagini e altri file nell'esportazione.</span>",
     tabItemAndroid6:
       "<span>Ora nella vista di condivisione tocca su <b>WhatsAnalyze</b> o, in alternativa, se hai saltato il passaggio 1 invialo a te stesso tramite <b>E-Mail</b> o salvalo su <b>Google Drive</b>.</span>",
     selectFile: "Seleziona file tramite il box sopra",
@@ -6645,7 +10385,7 @@ export const messages = {
     faqWhatsapp: "FAQ sulle chat WhatsApp",
     privacyFAQTitle: "I miei dati chat sono davvero privati?",
     privacyFAQContent:
-      "Sì, assolutamente. Tutti i processi di chat avvengono localmente nel tuo browser. Nessun dato viene mai inviato a un server. Puoi anche ispezionare il codice open-source su GitHub per verificare.",
+      "Sì. Le statistiche vengono calcolate nel tuo browser e la tua chat viene salvata solo su questo dispositivo, così puoi tornarci. Non viene mai salvata sui nostri server. Solo due cose lasciano il tuo dispositivo, e solo se lo scegli tu: l’IA nel cloud riceve un estratto anonimizzato (nomi sostituiti, numeri di telefono, email e link rimossi) e un link di condivisione conserva una copia cifrata dei risultati, mai la chat. Puoi dimenticare le chat salvate in qualsiasi momento e controllare il codice open-source su GitHub.",
     howToExport: "Come esportare la tua chat WhatsApp",
     howToExportLong:
       "Chiunque può facilmente esportare la propria chat WhatsApp o chat di gruppo. Apri\nWhatsApp sul dispositivo con cui sei attualmente connesso > Tocca sulla\nchat > Vai alle impostazioni della chat > Scorri verso il basso e tocca su Esporta chat >\nScegli di esportare con o senza media.",
@@ -6803,11 +10543,14 @@ export const messages = {
     chooseSubscription: "Abbonati ora",
     then: "poi",
     toolsHub: {
+      supportTitle: "Sembra una cosa seria. Non devi affrontarla da solo/a.",
+      supportText:
+        "Se tu o qualcun altro siete in pericolo, chiama subito il numero di emergenza locale (112). Per un supporto gratuito e riservato, trova una linea d'ascolto nel tuo paese su findahelpline.com (in Italia: Telefono Amico 02 2327 2327).",
       headerTools: "Strumenti",
-      seoTitle: "Strumenti e utilità per WhatsApp | WhatsAnalyze",
+      seoTitle: "Strumenti e utilità per WhatsApp – WhatsAnalyze",
       seoDescription:
         "Scopri singoli strumenti veloci e al 100% privati per WhatsApp. Dal monitoraggio dell'inattività al conteggio dei messaggi e tempi di risposta, tutto nel browser.",
-      ogTitle: "Strumenti e utilità per WhatsApp | WhatsAnalyze",
+      ogTitle: "Strumenti e utilità per WhatsApp – WhatsAnalyze",
       ogDescription:
         "Strumenti dedicati per WhatsApp. Scopri chi ha inviato l'ultimo messaggio e analizza le pause senza inviare dati.",
       heroEyebrow: "Strumenti e utilità per WhatsApp",
@@ -6888,6 +10631,15 @@ export const messages = {
       courtGroupTitle: "Documentazione ufficiale e prove legali",
       courtGroupDesc:
         "Trascrizioni PDF legali e cronologie verificate pensate per tribunali e pratiche di visto.",
+      situationsGroupTitle: "Capire cosa sta succedendo",
+      toolSameFightText:
+        "Scopri cosa torna sempre nelle vostre discussioni e trova idee per parlarne in modo diverso.",
+      toolTextingFirstText:
+        "Chi inizia le vostre conversazioni e quanto velocemente risponde ciascuno.",
+      toolLosingInterestText:
+        "Tempi di risposta, i silenzi più lunghi e a che punto siete, con calma.",
+      toolWhatToReplyText:
+        "Trasforma la tua bozza in una risposta più calma e chiara, che suoni ancora come te.",
     },
     homeLanding: {
       wrappedButton: "Guarda la tua storia",
@@ -6914,20 +10666,88 @@ export const messages = {
       localEngine: "MOTORE LOCALE NEL BROWSER",
       zeroCloud: "NESSUN INVIO AL CLOUD",
       private: "100% PRIVATO",
+      aiCloud: "IA CLOUD: SOLO ANONIMIZZATO",
+      aiTraining: "NON USATO PER L’ADDESTRAMENTO",
       dropTitle: "Trascina qui l'esportazione della tua chat WhatsApp",
       dropSubtitle: "Accetta file di chat esportati in .txt o .zip",
       selectFile: "Seleziona file di chat",
       trySample: "Prova con chat di esempio",
+      sampleFailed:
+        "Impossibile caricare la chat di esempio. Controlla la connessione e riprova.",
       analyzingTitle: "Analisi delle pause nella conversazione...",
       analyzingSubtitle: "Calcolo di timestamp, tempi di risposta e inattività",
       switchFile: "Cambia file",
       messagesAnalyzedIn: "{count} messaggi • analizzati in {time} ms",
-      messagesRestored: "{count} messaggi • ripristinati da questa sessione",
+      messagesRestored: "{count} messaggi • senza nuovo caricamento",
       dismiss: "Chiudi",
+    },
+    library: {
+      saved: "Salvata su questo dispositivo",
+      dontKeep: "Non salvare",
+      notKept: "Non salvata su questo dispositivo",
+      keep: "Salvala",
+      notKeptUnavailable:
+        "Questo browser non lo consente qui, per esempio in una finestra privata. La chat resta aperta finché non chiudi questa scheda.",
+      notKeptFull:
+        "La memoria di questo dispositivo è piena. La chat resta aperta finché non chiudi questa scheda.",
+      panelOpen: "Cosa resta salvato su questo dispositivo",
+      yourChats: "Le tue chat",
+      open: "Apri",
+      continueIn: "Continua in {tool}",
+      forget: "Dimentica",
+      forgetConfirm: "Dimenticare «{name}» su questo dispositivo?",
+      cancel: "Annulla",
+      showAll: "Mostra tutte ({count})",
+      peopleMore: "{names} e {count} in più",
+      openedAgo: "aperta {time}",
+      useSaved: "Usa una chat salvata",
+      useAnother: "Usa un'altra chat salvata",
+      runOnChat: "Provalo sulla tua chat con {name}",
+      runOnGroup: "Provalo su {name}",
+      offerNote: "Salvata su questo dispositivo · senza nuovo caricamento",
+      headerButton: "Le tue chat su questo dispositivo",
+      panelTitle: "Salvate su questo dispositivo",
+      panelIntro:
+        "Le tue chat restano in questo browser, così puoi tornarci senza caricarle di nuovo. Non lasciano mai questo dispositivo e non vengono mai salvate sui nostri server.",
+      panelShared:
+        "Chiunque usi questo browser può aprirle. Su un dispositivo condiviso, dimenticale quando hai finito.",
+      forgetThis: "Dimentica questa chat",
+      storageTitle: "Memoria",
+      storageChats: "Le tue chat salvate occupano {size}.",
+      storageSite:
+        "Tutto ciò che questo sito conserva qui: {used} di {quota} disponibili.",
+      persisted: "Questo browser le conserva in modo affidabile.",
+      notPersisted:
+        "Questo browser può cancellarle quando lo spazio scarseggia o dopo settimane senza visite.",
+      persistButton: "Chiedi al browser di conservarle",
+      persistDenied:
+        "Il browser ha deciso di no. Un file di backup è la copia sempre al sicuro.",
+      iosHint:
+        "Su iPhone e iPad, Safari cancella i dati di un sito dopo alcune settimane senza visite. Per conservare le tue chat, aggiungi WhatsAnalyze alla schermata Home: tocca Condividi e poi «Aggiungi alla schermata Home».",
+      backupTitle: "Backup",
+      backupText:
+        "Scarica tutte le chat salvate in un unico file. Per ripristinarle, trascina il file su questo pannello o su un riquadro di caricamento.",
+      backupDownload: "Scarica il backup",
+      backupRestore: "Ripristina un backup",
+      backupDownloaded: "Chat nel backup: {count}",
+      backupRestored: "Chat ripristinate dal backup: {count}",
+      backupInvalid: "Questo file non è un backup di WhatsAnalyze.",
+      forgetTitle: "Dimenticare",
+      autoForget: "Dimentica le chat non aperte da 90 giorni",
+      autoForgetText:
+        "Verificato ogni volta che torni. Un browser non può cancellare nulla mentre il sito è chiuso.",
+      forgetAll: "Dimentica tutto",
+      forgetAllConfirm:
+        "Dimenticare tutte le chat, le analisi e le conversazioni salvate su questo dispositivo? Non si può annullare.",
+      readingsTitle: "Analisi precedenti",
+      readingGeneral: "Analisi generale",
+      ranLocal: "Su questo dispositivo",
+      ranCloud: "Cloud",
+      ranPreview: "Anteprima cloud",
     },
     askAiCard: {
       title: "Chiedi all'IA di questa chat",
-      text: "Oltre i numeri: lascia che l'IA legga questa chat e risponda alla tua domanda, in privato sul tuo dispositivo e senza un nuovo caricamento.",
+      text: "Oltre i numeri: lascia che l'IA legga questa chat e risponda alla tua domanda. Prima viene anonimizzata sul tuo dispositivo, senza un nuovo caricamento.",
       button: "Chiedi all'IA",
     },
     toolsAi: {
@@ -6975,7 +10795,7 @@ export const messages = {
       dataContinue: "Scarica comunque",
       dataCancel: "Aspetta il Wi-Fi",
       seoTitle:
-        "Analisi chat WhatsApp con IA privata – Gratis sul tuo dispositivo | WhatsAnalyze",
+        "Analisi chat WhatsApp con IA privata – Gratis sul tuo dispositivo – WhatsAnalyze",
       seoDescription:
         "Analisi chat con IA privata che non lascia mai il tuo dispositivo: un'IA gratuita gira nel browser e legge la tua chat WhatsApp (personalità, dinamiche della relazione, argomenti ricorrenti, momenti migliori). Nessun caricamento, nessun account. IA nel cloud con estratti anonimizzati per andare più a fondo.",
       ogTitle: "Analisi chat WhatsApp con IA",
@@ -6986,39 +10806,46 @@ export const messages = {
       heroSubtitle:
         "Carica la chat esportata e lascia che l'IA descriva la vostra conversazione: l'atmosfera, il ruolo e lo stile di ciascuno, come interagite, gli argomenti ricorrenti e i momenti migliori.",
       heroNote:
-        "IA gratuita sul tuo dispositivo: la chat non lo lascia mai · Oppure IA nel cloud anonimizzata per gli abbonati",
-      chooseEyebrow: "Passo 2 · Scegli la tua IA",
-      chooseTitle: "Dove deve girare l'IA?",
+        "Anonimizzata sul tuo dispositivo prima che un'IA la veda · Anteprima gratuita, senza account · Oppure tutto sul tuo dispositivo",
+      chooseEyebrow: "Passo 2 · Il tuo report IA",
+      chooseTitle: "Lascia che l'IA legga la tua chat",
       chooseText:
-        "Entrambe leggono estratti anonimizzati della tua chat e producono lo stesso tipo di report. Si differenziano per privacy, qualità e requisiti del dispositivo.",
-      localTitle: "Sul tuo dispositivo",
-      localTag: "MASSIMA PRIVACY · GRATIS",
+        "Il tuo browser anonimizza la chat prima di inviare qualsiasi cosa. L'IA nel cloud funziona su qualsiasi smartphone e dà le risposte più profonde. Preferisci che nulla lasci il tuo dispositivo? Avviala invece su questo dispositivo.",
+      localTitle: "Oppure avviala su questo dispositivo",
+      localTag: "MASSIMA PRIVACY · FUNZIONA OFFLINE",
       localPro1: "Niente lascia il tuo dispositivo, nemmeno in forma anonima",
       localPro2: "Gratis, senza account",
       localPro3: "Funziona offline una volta scaricato il modello",
-      localCon1: "Download una tantum di circa {gb} GB",
+      localCon1: "Un download una tantum di grandi dimensioni: circa {gb} GB",
       localCon2:
-        "Serve uno smartphone o un computer recente e può richiedere qualche minuto",
+        "Serve uno smartphone o un computer recente, e potrebbe non funzionare su tutti i dispositivi",
       localCon3:
         "Modello piccolo: analisi più semplice, e una chat lunga viene letta a parti, il che richiede qualche minuto",
       localButton: "Analizza su questo dispositivo",
       localUnsupported:
         "Il tuo browser non supporta WebGPU, necessario per l'IA locale. Prova l'ultima versione di Chrome, Edge o Safari, oppure usa l'IA nel cloud.",
-      cloudTitle: "Nel cloud",
-      cloudTag: "MASSIMA QUALITÀ · ABBONATI",
+      cloudTitle: "IA nel cloud anonimizzata",
+      cloudTag: "CONSIGLIATO · MASSIMA QUALITÀ",
+      cloudTagPreview: "CONSIGLIATO · ANTEPRIMA GRATUITA",
       cloudPro1:
-        "Un modello di IA all'avanguardia: analisi molto più profonda e precisa",
+        "Anonimizzata prima sul tuo dispositivo: ogni persona della chat diventa «Person A», «Person B»…, e numeri di telefono, e-mail, link e IBAN vengono rimossi prima di qualsiasi invio",
       cloudPro2:
-        "Legge fino a circa 10.000 messaggi in una volta: la maggior parte delle chat, per intero",
+        "Un modello di IA all'avanguardia: analisi molto più profonda e precisa",
       cloudPro3: "Funziona su qualsiasi smartphone, pronto in circa 30 secondi",
+      cloudPro4:
+        "Legge fino a circa 10.000 messaggi in una volta: la maggior parte delle chat, per intero",
+      cloudPro4Preview:
+        "Gratis, senza account: il riassunto, la risposta alla tua domanda e un primo sguardo a ogni sezione",
       cloudCon1:
-        "Estratti anonimizzati vengono inviati al nostro fornitore di IA (Anthropic o OpenAI) per l'elaborazione",
-      cloudCon2: "Incluso nell'abbonamento WhatsAnalyze",
-      cloudButton: "Analizza nel cloud",
-      cloudSubscribe: "Abbonati per sbloccare l'IA nel cloud",
-      cloudPreviewButton: "Prova l'anteprima gratuita nel cloud",
+        "Gli estratti anonimizzati lasciano il tuo dispositivo: li elabora il nostro fornitore di IA (Anthropic o OpenAI)",
+      cloudCon2: "Il report completo è incluso nell'abbonamento WhatsAnalyze",
+      cloudButton: "Ottieni il mio report IA",
+      cloudSubscribe: "Abbonati per il report completo",
+      cloudPreviewButton: "Ottieni la mia anteprima IA gratuita",
       error_preview_used:
         "Hai già usato l'anteprima gratuita di oggi. Abbonati per il report completo o riprova domani.",
+      fallbackLocal:
+        "Non serve aspettare: avvia l'analisi su questo dispositivo. È gratis e nulla lascia il tuo dispositivo.",
       lockedTitle: "Il report completo contiene di più",
       lockedButton: "Sblocca il report completo",
       cloudConsent:
@@ -7028,7 +10855,7 @@ export const messages = {
         "Questo è tutto ciò che viene inviato. I nomi reali vengono rimessi sul tuo dispositivo quando arriva la risposta.",
       progressLocal: "L'IA sta leggendo la tua chat sul tuo dispositivo…",
       progressCloud:
-        "L'IA sta leggendo la tua chat… ci vogliono circa 15 secondi.",
+        "L'IA sta leggendo la tua chat… ci vogliono circa 20 secondi.",
       error_local:
         "L'IA locale non è riuscita ad avviarsi. Riprova, oppure usa l'IA nel cloud.",
       error_local_unsupported:
@@ -7045,6 +10872,23 @@ export const messages = {
         "L'IA locale si è confusa con questa chat. Riprova, oppure usa l'IA nel cloud per risultati migliori.",
       error_no_messages:
         "Non abbiamo trovato messaggi di testo da analizzare in questa chat.",
+      error_local_gpu:
+        "Il driver grafico non è riuscito ad avviare l'IA locale. Riavviare il browser spesso aiuta, oppure usa l'IA nel cloud.",
+      error_local_network:
+        "La connessione si è interrotta durante il download del modello di IA. Controlla la connessione e riprova: il download riprende da dove si era fermato. Oppure usa l'IA nel cloud.",
+      error_local_storage:
+        "Su questo dispositivo non c'è abbastanza spazio libero per il modello di IA. Libera spazio e riprova, oppure usa l'IA nel cloud.",
+      error_preview_cap:
+        "Le anteprime gratuite nel cloud di oggi sono esaurite. Abbonati per il report completo o riprova domani.",
+      localUnsupportedGpu:
+        "Il driver grafico non è riuscito ad avviare l'IA locale. Riavviare il browser può aiutare; l'IA nel cloud funziona subito.",
+      localUnsupportedStorage:
+        "L'IA locale richiede circa {gb} GB di spazio libero, che al momento questo dispositivo non ha. Libera spazio oppure usa l'IA nel cloud.",
+      fallbackPreview: "Prova invece l'anteprima gratuita nel cloud",
+      fallbackCloud: "Analizza invece nel cloud",
+      dataUseCloud: "Usa invece l'IA nel cloud",
+      progressRetry:
+        "La connessione si è interrotta. Il download riprende da dove si era fermato…",
       reportCloud: "ANALIZZATO DALL'IA NEL CLOUD",
       reportLocal: "ANALIZZATO SUL TUO DISPOSITIVO",
       reportTitle: "Cosa vede l'IA nella tua chat",
@@ -7068,6 +10912,34 @@ export const messages = {
       coachNoteLocal:
         "Funziona sul tuo dispositivo e ricorda gli ultimi messaggi.",
       coachNoteCloud: "Ogni messaggio usa una delle tue analisi cloud di oggi.",
+      coachNoteFree:
+        "Anteprima gratuita: qualche risposta cloud al giorno. Con Pro ne hai di più.",
+      coachNoteFreeLeft:
+        "Oggi ti restano {n} risposte cloud gratuite. Con Pro ne hai di più.",
+      coachPickMe:
+        "Scegli in alto chi sei, così la risposta viene scritta dal tuo punto di vista.",
+      sampleButton: "Mostra l'analisi dell'IA",
+      sampleNote:
+        "Chat di esempio: le sue analisi IA sono state fatte in anticipo, quindi è gratis e la tua anteprima gratuita resta per la tua chat.",
+      sampleCustom:
+        "Una tua domanda richiede la tua chat. Con l'esempio, scegli una delle domande qui sopra.",
+      progressSample: "L'IA sta leggendo la chat di esempio…",
+      sampleReport:
+        "Questa è l'analisi completa della chat di esempio, preparata in anticipo.",
+      sampleOwnChat: "Prova con la mia chat",
+      sampleYoursTitle: "Tocca a te: cosa racconterebbe la tua chat?",
+      sampleYoursText:
+        "Esporta la tua chat da WhatsApp in pochi tocchi e scegli il file. La tua prima analisi è un'anteprima gratuita, pronta in circa 20 secondi, e la chat viene anonimizzata sul tuo dispositivo prima che un'IA la veda.",
+      sampleYoursButton: "Scegli il file della mia chat",
+      sampleYoursGuide: "Non l'hai ancora esportata? Ecco come",
+      coachSampleIntro: "Provane una:",
+      coachSampleDraft: "Bozza di {name}",
+      coachNoteSample:
+        "Chat di esempio: queste risposte sono state preparate in anticipo. Con la tua chat puoi chiedere qualsiasi cosa.",
+      error_coach_free_used:
+        "Hai usato le risposte gratuite di oggi. Torna domani, o passa a Pro per averne di più ogni giorno.",
+      error_coach_local_unchanged:
+        "Su questo dispositivo l’IA non è riuscita a riscrivere la bozza. Prova a spiegare meglio cosa vuoi dire, o usa il coach nel cloud.",
       coachSupportTitle:
         "Sembra una cosa seria. Non devi affrontarla da solo/a.",
       coachSupportText:
@@ -7101,7 +10973,7 @@ export const messages = {
       faqTitle: "Domande frequenti",
       faq1Q: "Esiste un'analisi gratuita delle chat WhatsApp con IA?",
       faq1A:
-        "Sì. La modalità sul dispositivo è gratuita e senza account: un piccolo modello di IA viene scaricato una volta nel browser e analizza la chat in locale. La modalità cloud, con un modello molto più potente, è inclusa nell'abbonamento WhatsAnalyze.",
+        "Sì. L'IA nel cloud ti offre un'anteprima gratuita senza account: il riassunto, la risposta alla tua domanda e un primo sguardo a ogni sezione. Il report completo nel cloud è incluso nell'abbonamento WhatsAnalyze. La modalità sul dispositivo è completamente gratuita e senza account: un piccolo modello di IA viene scaricato una volta nel browser e analizza la chat in locale, sui dispositivi in grado di eseguirlo.",
       faq2Q: "La mia chat viene caricata quando uso l'IA?",
       faq2A:
         "Con l'IA sul dispositivo non viene caricato nulla. Con l'IA nel cloud vengono inviati solo estratti anonimizzati: il browser sostituisce prima i nomi con dei segnaposto e rimuove numeri, e-mail e link, e puoi vedere esattamente cosa viene inviato prima di iniziare. Non lo conserviamo e il nostro fornitore di IA non lo usa per l'addestramento.",
@@ -7123,7 +10995,7 @@ export const messages = {
       breadcrumbTools: "Strumenti",
       breadcrumbCurrent: "Tracker di inattività",
       seoTitle:
-        "Chi ha scritto per ultimo? Tracker di inattività WhatsApp | WhatsAnalyze",
+        "Chi ha scritto per ultimo? Tracker di inattività WhatsApp – WhatsAnalyze",
       seoDescription:
         "Verificatore gratuito di inattività WhatsApp. Scopri chi ha inviato l'ultimo messaggio, calcola la durata del silenzio e misura i tempi di risposta nel browser in totale privacy.",
       ogTitle: "Chi ha scritto per ultimo? Tracker di inattività WhatsApp",
@@ -7161,7 +11033,7 @@ export const messages = {
       colParticipant: "Partecipante",
       colMessages: "Messaggi",
       colShare: "Percentuale",
-      colMedianReply: "Risposta mediana",
+      colAverageReply: "Risposta media",
       colLastActive: "Ultima attività",
       colLastMessage: "Ultimo messaggio",
       gapsTitle: "Pause più lunghe nella conversazione",
@@ -7231,11 +11103,132 @@ export const messages = {
       hookCard4Text:
         "Trasforma la tua chat in una retrospettiva interattiva in stile storia da condividere.",
     },
+    situationSameFight: {
+      navLabel: "Sempre la stessa lite?",
+      seoTitle:
+        "Litighiamo sempre per le stesse cose? Capisci la tua chat WhatsApp",
+      seoDescription:
+        "Perché litighiamo sempre per le stesse cose? Lascia che un'IA legga la vostra chat WhatsApp, indichi i momenti che si ripetono e suggerisca come parlarne in modo diverso. Senza colpe né verdetti, gratis sul tuo dispositivo.",
+      ogTitle: "Perché litighiamo sempre per le stesse cose?",
+      ogDescription:
+        "Lascia che un'IA legga la tua chat WhatsApp e mostri lo schema dietro la lite che si ripete, senza decidere chi ha ragione.",
+      heroEyebrow: "Litigi via messaggio?",
+      heroTitle: "Perché litighiamo sempre per le stesse cose?",
+      heroSubtitle:
+        "Aggiungi la tua chat WhatsApp e l'IA risponde a una domanda: come potremmo comunicare meglio? Indica momenti dei vostri messaggi e suggerisce cosa potreste provare entrambi, senza decidere chi ha ragione.",
+      heroNote:
+        "Gratis sul tuo dispositivo · Senza account · L'IA nel cloud vede solo estratti anonimizzati",
+      continueButton: "Continua con questa chat",
+      exportGuide: "Come si esporta una chat WhatsApp?",
+      showEyebrow: "Cosa può mostrare la tua chat",
+      showTitle: "Tu ricordi le emozioni. La tua chat ricorda com'è andata.",
+      showText:
+        "Quando vi siete scritti, chi ha scritto per primo, quanto ci hanno messo le risposte: è questo che WhatsAnalyze legge e conta davvero nella tua esportazione.",
+      show1Title: "Un'analisi di come vi parlate",
+      show1Text:
+        "L'IA risponde a «Come potremmo comunicare meglio?» in poche frasi, indicando momenti della vostra chat e suggerendo cosa potrebbe provare ciascuno di voi.",
+      show2Title: "Quando vi scrivete",
+      show2Text:
+        "Una mappa termica delle 24 ore della vostra chat e quanto scrive di notte ciascuno. Se le conversazioni più difficili arrivano tardi, vedrai quanta parte della vostra chat si svolge a quell'ora.",
+      show2Link: "Apri la mappa termica",
+      show3Title: "Chi inizia le conversazioni",
+      show3Text:
+        "Dopo sei ore o più di silenzio, chi scrive per primo? Contato per ciascuno, come quota di tutte le vostre conversazioni.",
+      show3Link: "Scopri chi inizia",
+      show4Title: "Quanto in fretta rispondete",
+      show4Text:
+        "Quanto tempo ci mette in media ciascuno a rispondere, e chi tende a rispondere prima.",
+      show4Link: "Vedi i tempi di risposta",
+      show5Title: "I silenzi più lunghi",
+      show5Text:
+        "I tre periodi di silenzio più lunghi della vostra chat, quando ci sono stati e chi ha scritto per primo dopo.",
+      show5Link: "Vedi i silenzi",
+      show6Title: "Aiuto con il prossimo messaggio",
+      show6Text:
+        "Dopo un'analisi completa, fai domande sulla vostra chat oppure incolla un messaggio che stai per inviare e ricevi una versione più calma e chiara, con parole tue.",
+      exampleEyebrow: "Un esempio",
+      exampleTitle: "Come può essere un'analisi",
+      exampleText:
+        "Inventato per questa pagina, così vedi com'è fatto: l'IA dà un nome a uno schema, indica dei momenti e suggerisce a entrambi un passo successivo.",
+      exampleBadge: "Esempio · Nora e Tom sono inventati",
+      exampleVibe: "Molto vicini, con un punto dolente",
+      exampleSummary:
+        "Nora e Tom si scrivono tutto il giorno, soprattutto di programmi, cene e amici. Il tono è affettuoso e scherzoso, con una tensione che torna sempre: i cambi di programma all'ultimo minuto. Di solito passa entro la mattina dopo.",
+      exampleAnswer:
+        "I vostri disaccordi tendono a iniziare allo stesso modo: un programma cambia a fine giornata, uno dei due lo scopre per messaggio e da lì le risposte si accorciano. Nora di solito fa una domanda diretta e Tom risponde con una battuta, cosa che ciascuno di voi sembra leggere in modo diverso. Gli scambi che si calmano in fretta sono quelli in cui qualcuno dice come si è sentito («Non vedevo l'ora che arrivasse stasera») invece di cosa è andato storto. Potreste fissare i programmi prima durante la giornata e, quando una conversazione inizia a girare in tondo, proporre una telefonata.",
+      exampleDynamic1Title: "La sera si scalda",
+      exampleDynamic1Text:
+        "Il botta e risposta che gira in tondo avviene soprattutto dopo le 23, quando rispondete entrambi con messaggi brevi e a raffica.",
+      exampleDynamic2Title: "Entrambi fanno un passo verso l'altro",
+      exampleDynamic2Text:
+        "Dopo una giornata di silenzio, di solito Tom scrive per primo con una battuta, e Nora prosegue chiedendogli com'è andata la giornata.",
+      exampleDraft: "Lascia stare. Fai sempre così.",
+      exampleRewrite:
+        "Non vedevo l'ora che arrivasse stasera, quindi ci sono rimasta male. Possiamo scegliere un'altra sera questa settimana?",
+      exampleWhy:
+        "Perché: «Fai sempre così» tende a far ripartire la stessa lite in questa chat. Dire come ti senti e proporre un passo successivo dà a Tom qualcosa a cui rispondere.",
+      limitsEyebrow: "Limiti onesti",
+      limitsTitle: "Cosa può dirti e cosa no",
+      limit1Title: "Schemi, non verdetti",
+      limit1Text:
+        "L'IA indica dei momenti e suggerisce cosa provare. Non decide chi ha ragione o di chi è la colpa, e non è terapia né una consulenza professionale.",
+      limit2Title: "Solo ciò che c'è nella chat",
+      limit2Text:
+        "Chiamate, tono di voce e ciò che è successo di persona non sono in un'esportazione, e l'IA può fraintendere ironia e contesto. Prendila come una prospettiva e confrontala con ciò che sai.",
+      limit3Title: "Una chat breve dice poco",
+      limit3Text:
+        "Qualche decina di messaggi o una brutta settimana non sono uno schema. Più storia copre la tua esportazione, più c'è su cui basarsi. Se non basta, all'IA viene chiesto di dirlo.",
+      privacyEyebrow: "Privata per impostazione predefinita",
+      privacyTitle: "Dentro ci sono anche i suoi messaggi",
+      privacyText:
+        "Una chat contiene le parole dell'altra persona oltre alle tue, quindi ecco esattamente dove va.",
+      privacy1Title: "Salvata solo su questo dispositivo",
+      privacy1Text:
+        "Per impostazione predefinita la tua chat viene conservata in questo browser, su questo dispositivo, così puoi tornarci. Puoi scegliere di non salvarla, o dimenticarla quando vuoi.",
+      privacy2Title: "Statistiche e IA sul dispositivo restano qui",
+      privacy2Text:
+        "Le statistiche e l'IA sul dispositivo funzionano nel tuo browser. Niente di ciò che leggono lascia il tuo dispositivo.",
+      privacy3Title: "Anonimizzata per il cloud",
+      privacy3Text:
+        "Se scegli l'IA nel cloud, anteprima gratuita compresa, vengono inviati solo estratti anonimizzati: nomi sostituiti; numeri di telefono, e-mail, link e IBAN rimossi. Il fornitore di IA non li usa per l'addestramento.",
+      supportEyebrow: "Quando è più di una lite",
+      supportTitle: "Se i litigi ti fanno paura",
+      supportText:
+        "Se qualcuno ti minaccia, ti controlla o ti fa sentire in pericolo, un'analisi della chat non è l'aiuto di cui hai bisogno, e non devi affrontarlo da solo/a. Quando una chat o un messaggio fa pensare ad abusi, minacce o autolesionismo, il coach IA è fatto per fermarsi e indicarti dove trovare aiuto.",
+      supportLink: "Trova una linea d'ascolto nel tuo paese",
+      faqTitle: "Domande frequenti",
+      faq1Q: "Perché litighiamo sempre per le stesse cose?",
+      faq1A:
+        "Spesso l'argomento cambia ma il modo in cui si svolge no: lo stesso tipo di momento fa scattare la lite e ciascuno risponde come l'ultima volta. Questa pagina non può dirti con certezza perché, ma la tua chat può mostrare quando succede di solito e come vanno i messaggi, e questo vi dà qualcosa di concreto di cui parlare insieme.",
+      faq2Q: "Mi dirà chi ha ragione?",
+      faq2A:
+        "No. È fatta per mostrare lo schema, non per scegliere un vincitore. All'IA viene chiesto come potreste comunicare meglio, e risponde con momenti della vostra chat e idee per entrambi. Non giudica nessuno e può fraintendere il contesto.",
+      faq3Q: "Mi aiuta a scrivere il prossimo messaggio?",
+      faq3A:
+        "Sì. Sotto un'analisi, «Aiutami a rispondere» prende un messaggio che stai per inviare e ti suggerisce una versione più calma e chiara che mantiene quello che vuoi dire, con una breve nota su cosa è cambiato. Decidi tu cosa inviare. Dopo un'analisi sul tuo dispositivo funziona lì gratis; dopo l'anteprima gratuita nel cloud hai qualche risposta gratuita al giorno, e con Pro di più.",
+      faq4Q: "È gratis?",
+      faq4A:
+        "Le statistiche e l'analisi con IA sul dispositivo sono gratuite e senza account, così come le domande di approfondimento dopo un'analisi sul dispositivo. Senza abbonamento puoi anche provare una breve anteprima gratuita nel cloud, con qualche risposta gratuita del coach al giorno. L'analisi completa nel cloud e più risposte nel cloud ogni giorno fanno parte di Pro ({price}/mese).",
+      faq5Q: "La mia chat viene caricata?",
+      faq5A:
+        "Non per le statistiche né per l'IA sul dispositivo: funzionano nel tuo browser e niente di ciò che leggono lascia il tuo dispositivo. Per impostazione predefinita la chat viene conservata in questo browser così puoi tornarci; puoi scegliere di non salvarla, o dimenticarla in qualsiasi momento. Se scegli l'IA nel cloud, vengono inviati solo estratti anonimizzati (nomi sostituiti; numeri di telefono, e-mail, link e IBAN rimossi), e il nostro fornitore di IA non li usa per l'addestramento. Prima di iniziare puoi vedere esattamente cosa verrebbe inviato.",
+      faq6Q: "Funziona anche per i litigi con amici o familiari?",
+      faq6A:
+        "Sì. Va bene qualsiasi chat WhatsApp che esporti, con il partner, un amico, i tuoi genitori o i tuoi fratelli, e anche le chat di gruppo. L'IA descrive come si parlano le persone che ne fanno parte, chiunque siano.",
+      faq7Q: "Quanta chat serve?",
+      faq7A:
+        "Più storia c'è, meglio è. Qualche decina di messaggi o una sola settimana difficile non mostrano uno schema. Esporta l'intera chat senza media; una chat lunga non è un problema.",
+      ctaTitle: "Prima vedere lo schema, poi parlarne insieme",
+      ctaButton: "Analizza la mia chat",
+      ctaNote: "Gratis sul tuo dispositivo · Senza account · Senza verdetti",
+      disclaimer:
+        "WhatsAnalyze è indipendente e non è affiliato a WhatsApp o Meta. Un'analisi con IA è una prospettiva su cui riflettere, non terapia né consulenza professionale.",
+    },
     courtEvidence: {
       mediaNotLoaded:
         "I tuoi file multimediali non sono caricati: la chat è stata ripristinata da questa sessione del browser, che conserva solo i messaggi. Trascina di nuovo l'esportazione .zip perché l'indice degli allegati li includa e ne calcoli l'hash.",
       seoTitle:
-        "Chat di WhatsApp come prova legale – Esportazione PDF pulita | WhatsAnalyze",
+        "Chat di WhatsApp come prova legale – Esportazione PDF pulita – WhatsAnalyze",
       seoDescription:
         "Trasforma una chat di WhatsApp in un PDF cronologico e chiaro con ogni messaggio e timestamp. 100% nel browser, nessun caricamento.",
       heroEyebrow: "Esportazione chat per uso legale",
@@ -7339,7 +11332,7 @@ export const messages = {
         "Anna e Ben si aggiornano tutto il giorno, tra piani per il weekend e battute ricorrenti. Il tono è affettuoso e scherzoso, e i piccoli disaccordi si risolvono subito.",
       navLabel: "Alternativa a What Brandon Thinks",
       seoTitle:
-        "Alternativa gratuita a What Brandon Thinks – Analisi chat con IA privata | WhatsAnalyze",
+        "Alternativa gratuita a What Brandon Thinks – Analisi chat con IA privata – WhatsAnalyze",
       seoDescription:
         "Cerchi un'alternativa gratuita a What Brandon Thinks? WhatsAnalyze analizza la tua chat WhatsApp con un'IA che gira sul tuo dispositivo: gratis, senza account e la chat non viene mai caricata.",
       heroTitle:
@@ -7383,9 +11376,9 @@ export const messages = {
       pillar2Title: "Anonimizzata per il cloud",
       pillar2Text:
         "Se scegli l'IA nel cloud, i nomi diventano «Persona A» e «Persona B» e numeri di telefono, email e link vengono rimossi prima. I nomi vengono ripristinati solo sul tuo dispositivo.",
-      pillar3Title: "Nulla viene conservato",
+      pillar3Title: "Solo sul tuo dispositivo",
       pillar3Text:
-        "Non conserviamo la tua chat e non addestriamo modelli con essa. Non c'è nulla da eliminare perché non è stato salvato nulla.",
+        "La tua chat viene salvata nel tuo browser per poterci tornare, mai sui nostri server, e non addestriamo modelli con essa. Dimenticala con un tocco quando vuoi.",
       faqTitle: "Domande sul passaggio",
       faq1Q: "Esiste una versione gratuita di What Brandon Thinks?",
       faq1A:
@@ -7407,7 +11400,7 @@ export const messages = {
     },
     relationshipProof: {
       seoTitle:
-        "Dimostra la tua relazione con le chat di WhatsApp – Visti e Immigrazione | WhatsAnalyze",
+        "Dimostra la tua relazione con le chat di WhatsApp – Visti e Immigrazione – WhatsAnalyze",
       seoDescription:
         "Trasforma anni di messaggi in un PDF chiaro: orari, statistiche e conversazioni quotidiane che dimostrano un legame autentico e duraturo. 100% privato.",
       heroEyebrow: "Prova di relazione",
@@ -7488,10 +11481,10 @@ export const messages = {
     pageNameRelationship: "Dimostra la tua relazione con le chat",
     pageNameInactivity: "Tracker di inattività e ultimo messaggio",
     toolsMessageCounter: {
-      seoTitle: "Contatore di messaggi e righe WhatsApp | WhatsAnalyze",
+      seoTitle: "Contatore di messaggi e righe WhatsApp – WhatsAnalyze",
       seoDescription:
         "Conta messaggi, righe e caratteri della tua chat di WhatsApp. Scopri chi scrive di più e il giorno più attivo, 100% privato nel browser.",
-      ogTitle: "Contatore di messaggi e righe WhatsApp | WhatsAnalyze",
+      ogTitle: "Contatore di messaggi e righe WhatsApp – WhatsAnalyze",
       ogDescription:
         "Contatore rapido e privato per WhatsApp. Scopri chi invia più messaggi e i tuoi record di conversazione.",
       heroEyebrow: "Strumento WhatsApp gratuito",
@@ -7558,11 +11551,133 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze è un progetto open source indipendente e non è affiliato, approvato o sponsorizzato da WhatsApp o Meta.",
     },
+    situationTextingFirst: {
+      navLabel: "Scrivi sempre tu per primo?",
+      seoTitle: "Scrivi sempre tu per primo? Scopri chi inizia su WhatsApp",
+      seoDescription:
+        "Scrivo sempre io per primo? Scopri chi inizia le conversazioni nella tua chat WhatsApp e quanto velocemente risponde ciascuno. Gratis, sul tuo dispositivo.",
+      heroEyebrow: "Chi inizia la conversazione",
+      heroTitle: "Scrivi sempre tu per primo?",
+      heroSubtitle:
+        "Se ti sembra che ogni conversazione parta da te, la chat può mostrare come stanno davvero le cose: chi inizia e quanto velocemente risponde ciascuno. Fianco a fianco, calcolato sul tuo dispositivo.",
+      heroNote:
+        "Gratis · Senza account · I numeri non lasciano il tuo dispositivo",
+      offerLabel: "Chiedi chi si impegna di più nella tua chat con {name}",
+      resultsEyebrow: "La tua chat in numeri",
+      resultsTitle: "Chi inizia e quanto velocemente risponde ciascuno",
+      resultsText:
+        "Leggili insieme. Iniziare meno conversazioni ma rispondere in pochi minuti è comunque impegno.",
+      resultsFew:
+        "Conversazioni finora: {count}. Sono ancora troppo poche per trarne molto.",
+      resultsHow:
+        "Una conversazione la inizia chi scrive per primo dopo almeno sei ore di silenzio. Il tempo di risposta è la media di quanto ciascuno impiega a rispondere a qualcun altro, contando le risposte entro un giorno.",
+      numbersStarted: "delle conversazioni iniziate",
+      numbersStartedOf: "{count} conversazioni su {total}",
+      numbersReply: "Risposta media",
+      numbersNoReplies: "Ancora nessuna risposta",
+      numbersLast: "Ultimo messaggio",
+      numbersMessages: "Messaggi",
+      numbersMore: "Altre persone in questa chat: {count}",
+      nextTitle: "Vuoi più degli orari?",
+      nextText:
+        "L'IA può leggere i messaggi stessi e rispondere a «Chi si impegna di più in questa chat?». La tua chat è già aperta, quindi non devi caricare nulla di nuovo.",
+      nextButton: "Chiedi chi si impegna di più",
+      nextNote:
+        "Gratis sul tuo dispositivo, o come anteprima cloud gratuita che invia solo estratti anonimizzati.",
+      showEyebrow: "Cosa può mostrare la tua chat",
+      showTitle: "I numeri dietro la sensazione",
+      showText: "Tutto viene contato dalla chat esportata, nel tuo browser.",
+      show1Title: "Chi inizia le conversazioni",
+      show1Text:
+        "La quota di conversazioni iniziate da ciascuno e quante sono. Una nuova conversazione inizia dopo sei ore di silenzio.",
+      show2Title: "Quanto velocemente risponde ciascuno",
+      show2Text:
+        "Il tempo medio di risposta di ciascuno, proprio accanto alla sua quota: così si vede sia chi inizia meno sia chi risponde in fretta.",
+      show3Title: "Chi ha scritto per ultimo, e quando",
+      show3Text:
+        "Quando ciascuno ha scritto l'ultima volta e quanti messaggi ha scritto ogni persona.",
+      show4Title: "Cosa dicono i messaggi",
+      show4Text:
+        "Se vuoi di più, l'IA legge la chat stessa e risponde a «Chi si impegna di più in questa chat?» con parole semplici.",
+      exampleEyebrow: "Un esempio",
+      exampleTitle: "Mia inizia più spesso. Leo risponde più in fretta.",
+      exampleText:
+        "Due persone inventate, per mostrare come leggere i numeri. Mia inizia circa due terzi delle loro conversazioni; Leo di solito risponde in pochi minuti. Nessuno dei due numeri dice a chi importa di più.",
+      exampleCaption: "Esempio · Mia e Leo sono inventati",
+      exampleVibe: "Uno scambio tranquillo, di tutti i giorni",
+      exampleSummary:
+        "Mia e Leo si scrivono quasi ogni giorno: piani per il weekend, storie di lavoro e una battuta ricorrente sulle piante di Leo.",
+      exampleAnswer:
+        "Tutti e due, in modi diversi. Mia apre la maggior parte delle conversazioni, spesso con un programma o una domanda sulla giornata di Leo. Leo inizia meno spesso, ma risponde in pochi minuti e fa le domande che tengono viva la conversazione. Se Mia vorrebbe che Leo scrivesse per primo più spesso, vale la pena dirglielo. La chat non può deciderlo al posto loro.",
+      limitsEyebrow: "Limiti onesti",
+      limitsTitle: "Chi scrive per primo non è tutta la storia",
+      limitsText:
+        "I numeri mostrano uno schema in una chat. Non misurano quanto qualcuno tenga a te e non dicono se un'amicizia o una relazione è a senso unico.",
+      limit1Title: "Ognuno ha il suo stile",
+      limit1Text:
+        "Alcune persone organizzano e si fanno sentire. Altre iniziano di rado, ma rispondono in fretta e con calore. Entrambe le cose fanno parte del restare in contatto.",
+      limit2Title: "La vita succede anche fuori dalla chat",
+      limit2Text:
+        "Orari di lavoro, fusi orari, chiamate e tempo passato insieme non compaiono in un'esportazione di WhatsApp.",
+      limit3Title: "Schemi, non verdetti",
+      limit3Text:
+        "Una quota del 70% descrive cosa è successo in questa chat. Cosa significa lo decidi tu, e magari ne parli.",
+      limit4Title: "Una chat breve dice poco",
+      limit4Text:
+        "Poche settimane o qualche decina di conversazioni possono pendere da una parte o dall'altra. Più la chat è lunga, più i numeri dicono qualcosa.",
+      supportTitle: "Quando è qualcosa di più di una chat",
+      privacyEyebrow: "Privato per scelta",
+      privacyTitle: "La tua chat resta tua",
+      privacy1Title: "Calcolato sul tuo dispositivo",
+      privacy1Text:
+        "I numeri vengono calcolati nel tuo browser. La tua chat non viene inviata da nessuna parte per contarli.",
+      privacy2Title: "Salvata qui, se vuoi",
+      privacy2Text:
+        "Di base la tua chat viene salvata solo su questo dispositivo, così puoi tornarci senza caricarla di nuovo. Tocca «Non salvare» per annullare, oppure dimenticala quando vuoi.",
+      privacy3Title: "L'IA alle tue condizioni",
+      privacy3Text:
+        "Con l'IA sul dispositivo, la tua chat non lascia mai il tuo dispositivo. L'anteprima cloud gratuita invia solo estratti anonimizzati (nomi sostituiti; numeri di telefono, email, link e IBAN rimossi), e il fornitore di IA non li usa per l'addestramento.",
+      stepsTitle: "Come controllare la tua chat",
+      step1Title: "Esporta la chat",
+      step1Text:
+        "In WhatsApp, apri la chat, tocca il nome in alto, poi «Esporta chat» e «Senza media».",
+      step2Title: "Trascinala qui",
+      step2Text:
+        "Trascina il file nel riquadro in cima a questa pagina, oppure sceglilo. Viene letto nel tuo browser.",
+      step3Title: "Leggi i due numeri",
+      step3Text:
+        "Guarda insieme chi inizia e quanto velocemente risponde ciascuno. Se vuoi, chiedi all'IA la storia che c'è dietro.",
+      stepsGuide: "Guida dettagliata all'esportazione per iPhone e Android",
+      faqTitle: "Domande frequenti",
+      faq1Q: "Come faccio a sapere se scrivo sempre io per primo?",
+      faq1A:
+        "Esporta la chat WhatsApp e trascinala nel riquadro di questa pagina. La pagina conta chi ha scritto per primo in ogni conversazione e mostra la quota di ciascuno accanto a quanto velocemente risponde. Una nuova conversazione inizia quando qualcuno scrive dopo almeno sei ore di silenzio.",
+      faq2Q: "Scrivo sempre io per primo: è un'amicizia a senso unico?",
+      faq2A:
+        "Non di per sé. Ad alcune persone piace iniziare le conversazioni, altre sono più brave a rispondere, e anche lavoro, fusi orari e tempo passato insieme contano. I numeri ti aiutano a vedere uno schema; se ti sembra equo è qualcosa da chiarire parlandone insieme.",
+      faq3Q: "Cosa conta come iniziare una conversazione?",
+      faq3A:
+        "Il primo messaggio della chat e ogni messaggio inviato dopo almeno sei ore senza messaggi. Il tempo di risposta è la media di quanto ciascuno impiega a rispondere a qualcun altro, contando le risposte entro un giorno.",
+      faq4Q: "La mia chat viene caricata?",
+      faq4A:
+        "Non per i numeri: vengono contati nel tuo browser. Di base la tua chat viene salvata solo su questo dispositivo, e puoi annullarlo. Se chiedi all'IA, con l'IA sul dispositivo tutto resta sul tuo dispositivo, e l'anteprima cloud gratuita invia solo estratti anonimizzati (nomi sostituiti; numeri di telefono, email, link e IBAN rimossi). Il fornitore di IA non li usa per l'addestramento.",
+      faq5Q: "Funziona con amici, famiglia e gruppi?",
+      faq5A:
+        "Sì, con qualsiasi chat WhatsApp che puoi esportare. In un gruppo, ogni persona ha la sua quota di conversazioni iniziate e il suo tempo di risposta.",
+      faq6Q: "È gratis?",
+      faq6A:
+        "I numeri di questa pagina sono gratis e senza account. La lettura con l'IA è gratuita sul tuo dispositivo, e l'IA cloud ha un'anteprima gratuita. Il report cloud completo fa parte di WhatsAnalyze Pro ({price}/mese).",
+      ctaTitle: "Scopri chi inizia le conversazioni nella tua chat",
+      ctaButton: "Controlla la mia chat",
+      ctaNote: "Gratis · Senza account · Calcolato sul tuo dispositivo",
+      disclaimer:
+        "WhatsAnalyze mostra schemi in una chat, non verdetti su persone o relazioni. È un progetto open source indipendente e non è affiliato, approvato o sponsorizzato da WhatsApp o Meta.",
+    },
     toolsWordCounter: {
-      seoTitle: "Contatore di parole e vocabolario WhatsApp | WhatsAnalyze",
+      seoTitle: "Contatore di parole e vocabolario WhatsApp – WhatsAnalyze",
       seoDescription:
         "Scopri il conteggio totale delle parole, la varietà del vocabolario e i termini più usati nelle tue chat di WhatsApp 100% nel browser.",
-      ogTitle: "Contatore di parole e vocabolario WhatsApp | WhatsAnalyze",
+      ogTitle: "Contatore di parole e vocabolario WhatsApp – WhatsAnalyze",
       ogDescription:
         "Analizza il volume di parole, il vocabolario unico e i termini più usati nelle chat di WhatsApp senza caricare dati.",
       heroEyebrow: "Strumento WhatsApp gratuito",
@@ -7629,11 +11744,141 @@ export const messages = {
       disclaimer:
         "WhatsAnalyze è un progetto open source indipendente e non è affiliato, approvato o sponsorizzato da WhatsApp o Meta.",
     },
+    situationLosingInterest: {
+      navLabel: "Sta perdendo interesse?",
+      appName: "Tempi di risposta e silenzi su WhatsApp",
+      seoTitle:
+        "Sta perdendo interesse? Guarda i tempi di risposta su WhatsApp",
+      seoDescription:
+        "Risponde sempre più tardi o ti scrive meno di prima? Guarda il tempo medio di risposta di ciascuno, i silenzi più lunghi e chi riapre la conversazione. Gratis e privato, sul tuo dispositivo.",
+      heroEyebrow: "Risponde sempre più tardi?",
+      heroTitle: "Sta perdendo interesse?",
+      heroSubtitle:
+        "Risposte più lente, meno messaggi, silenzi più lunghi: è facile pensare al peggio. Gli orari dei messaggi della tua chat mostrano cosa è cambiato davvero, e quando, così puoi guardarlo con calma prima di trarre conclusioni.",
+      heroNote:
+        "Gratis · Nessun account · I numeri vengono calcolati sul tuo dispositivo",
+      offerLabel: "Chiedi all'IA della tua chat con {name}",
+      resultEyebrow: "La tua chat",
+      resultTitle: "Cosa mostra la tua chat",
+      resultText:
+        "Calcolato sul tuo dispositivo dall'orario di ogni messaggio. Schemi, non un verdetto.",
+      resultNowLabel: "A che punto siete",
+      resultNow: "L'ultimo messaggio è arrivato {time} da {name}.",
+      resultNowNote:
+        "Contato fino a oggi. Se hai esportato la chat tempo fa, sembrerà più silenziosa di quanto sia.",
+      status_active: "Ci sono stati messaggi negli ultimi due giorni.",
+      status_dormant:
+        "È tutto tranquillo da qualche giorno, cosa normale in una settimana piena.",
+      status_inactive: "È tutto tranquillo da più di una settimana.",
+      status_ghosted: "È tutto tranquillo da più di un mese.",
+      resultPeopleTitle: "Persona per persona",
+      resultReply: "Risposta media",
+      resultReplyNone: "Troppo poche risposte",
+      resultStarted: "Ha riaperto la chat",
+      resultMessages: "Messaggi",
+      resultMorePeople: "E altre {count} persone in questo gruppo.",
+      resultPeopleNote:
+        "Risposta media: quanto tempo impiega qualcuno a rispondere all'altra persona, contando solo le risposte entro un giorno. Ha riaperto la chat: quante volte qualcuno ha ripreso la conversazione dopo sei ore o più di silenzio.",
+      resultGapsTitle: "I silenzi più lunghi",
+      resultGapEnded: "A rompere il silenzio: {name}",
+      resultSpan: "{count} messaggi in {days} giorni",
+      resultAiButton: "Chiedi all'IA di questa chat",
+      resultAiNote:
+        "Risponde a «C'è qualcosa di cui dovrei preoccuparmi?» e prima ti chiede chi sei tu tra i partecipanti. Non serve aggiungere di nuovo la chat.",
+      resultTimelineLink: "Guarda i tuoi messaggi nel tempo",
+      showEyebrow: "Cosa può mostrare la tua chat",
+      showTitle: "I fatti dietro la sensazione",
+      showText:
+        "Tutto viene contato dalla tua esportazione. Niente è indovinato.",
+      show1Title: "Tempi di risposta, per ciascuno",
+      show1Text:
+        "Quanto impiega in media ciascuno a rispondere all'altro. Contano solo le risposte entro un giorno, così un lungo silenzio non falsa il risultato.",
+      show2Title: "I silenzi più lunghi",
+      show2Text:
+        "I tre silenzi più lunghi della chat, quando ci sono stati e chi li ha interrotti.",
+      show3Title: "Chi riapre la conversazione",
+      show3Text:
+        "Dopo sei ore o più senza messaggi, chi riprende la conversazione, in percentuale per ciascuno.",
+      show4Title: "A che punto siete oggi",
+      show4Text: "Quando è stato inviato l'ultimo messaggio, e da chi.",
+      show5Title: "I messaggi nel tempo",
+      show5Text:
+        "L'analisi completa mostra i tuoi messaggi giorno per giorno, dal primo all'ultimo, così puoi vedere se qualcosa è cambiato, e quando.",
+      show5Link: "Apri l'analisi",
+      exampleEyebrow: "Un esempio",
+      exampleTitle: "Come si legge la chat di Sam e Alex",
+      exampleText:
+        "Numeri inventati per due persone immaginarie, mostrati come apparirà la tua chat.",
+      exampleBadge: "Esempio · Sam e Alex sono inventati",
+      exampleReadingTitle: "Leggerla con calma",
+      exampleNote1:
+        "Alex risponde in media più lentamente, eppure avvia quasi metà delle conversazioni. Rispondere più lentamente non vuol dire avere meno interesse.",
+      exampleNote2:
+        "Il silenzio più lungo è durato quattro giorni ad agosto. Un viaggio? Una settimana piena? I numeri non possono dirlo, e non fingono di saperlo.",
+      exampleNote3:
+        "Niente qui dice cosa provano. Se Sam ha dei dubbi, parlarne con Alex dirà di più di qualsiasi grafico.",
+      limitsEyebrow: "Prima di leggerci troppo",
+      limitsTitle: "Le risposte più lente hanno spesso motivi normalissimi",
+      limitsText:
+        "Un mese pieno di lavoro, gli esami, una vacanza, una settimana stressante, una nuova abitudine come silenziare le notifiche: tutto questo appare in una chat come risposte più lente e pause più lunghe.",
+      limit1Title: "Schemi, non verdetti",
+      limit1Text:
+        "I numeri mostrano quando e quanto spesso ci sono stati messaggi, mai il perché. Non possono dirti cosa prova o cosa vuole qualcuno.",
+      limit2Title: "Una chat breve dice poco",
+      limit2Text:
+        "Con poche settimane di messaggi, una settimana piena sposta tutte le medie. Più lunga è la chat, più i numeri significano qualcosa.",
+      limit3Title: "Una chat non è tutto",
+      limit3Text:
+        "Chiamate, tempo passato insieme e altre app non compaiono in un'esportazione. Scrivere meno può voler dire semplicemente parlarsi di più altrove.",
+      limit4Title: "Parlare aiuta più che contare",
+      limit4Text:
+        "Se qualcosa sembra diverso, un gentile «Va tutto bene? Mi mancano le nostre chiacchierate» di solito dice più di qualsiasi statistica, e arriva meglio senza i numeri come prova.",
+      supportTitle: "Se ti pesa molto, o se non ti senti al sicuro",
+      aiEyebrow: "Una seconda lettura",
+      aiTitle: "Chiedi all'IA cosa vede",
+      aiText:
+        "Gli orari dicono solo fino a un certo punto. L'IA legge i messaggi stessi e risponde a una domanda: «C'è qualcosa di cui dovrei preoccuparmi?» Prima ti chiede chi sei tu tra i partecipanti, e se lo ricorda per la volta successiva.",
+      aiCard1Title: "Gratis, sul tuo dispositivo",
+      aiCard1Text:
+        "L'IA sul dispositivo funziona nel tuo browser. La tua chat non lascia il tuo dispositivo.",
+      aiCard2Title: "Oppure un'anteprima gratuita nel cloud",
+      aiCard2Text:
+        "Vengono inviati solo estratti anonimizzati: i nomi vengono sostituiti e numeri di telefono, email, link e numeri di conto (IBAN) vengono rimossi. Il fornitore dell'IA non li usa per l'addestramento.",
+      aiCard3Title: "Lì quando torni",
+      aiCard3Text:
+        "La tua chat viene salvata su questo dispositivo, così puoi riaprirla più tardi senza caricarla di nuovo. Scegli «Non salvare» se preferisci di no.",
+      aiButton: "Chiedi all'IA",
+      faqTitle: "Domande frequenti",
+      faq1Q:
+        "Se risponde più lentamente, vuol dire che sta perdendo interesse?",
+      faq1A:
+        "Da solo, no. Le risposte rallentano per tanti motivi: lavoro, esami, viaggi, salute, stress o semplicemente una nuova abitudine con il telefono. I numeri mostrano cosa è cambiato e quando. Il perché può dirtelo solo l'altra persona.",
+      faq2Q: "Come viene calcolato il tempo medio di risposta?",
+      faq2A:
+        "Ogni volta che una persona risponde all'altra entro 24 ore, il tempo tra i due messaggi conta come una risposta, e la media viene mostrata per ciascuno. Le pause di più di un giorno contano invece come silenzi.",
+      faq3Q: "Posso vedere se le risposte sono diventate più lente di recente?",
+      faq3A:
+        "Questa pagina mostra le medie dell'intera chat e quando ci sono stati i silenzi più lunghi. Per vedere come è cambiato il numero di messaggi nel tempo, apri l'analisi completa: la sua cronologia mostra i tuoi messaggi giorno per giorno, dal primo all'ultimo.",
+      faq4Q: "La mia chat viene caricata da qualche parte?",
+      faq4A:
+        "No. I numeri di questa pagina vengono calcolati nel tuo browser, sul tuo dispositivo. La chat viene salvata su questo dispositivo per poterla riaprire in seguito, e puoi scegliere di non salvarla, o di dimenticarla, in qualsiasi momento. Solo se scegli l'IA nel cloud, compresa l'anteprima gratuita, vengono inviati estratti anonimizzati: nomi sostituiti, numeri di telefono, email, link e numeri di conto (IBAN) rimossi. Il fornitore dell'IA non li usa per l'addestramento.",
+      faq5Q: "Dovrei mostrare questi numeri all'altra persona?",
+      faq5A:
+        "Ti suggeriamo di partire da come ti senti. Le statistiche possono sembrare un'accusa, mentre un semplice «Mi mancano le nostre chiacchierate, va tutto bene?» invita a una risposta sincera.",
+      faq6Q: "Con quali chat funziona?",
+      faq6A:
+        "Con qualsiasi chat di WhatsApp che esporti, da iPhone o Android, a due o di gruppo, in qualsiasi lingua. Esportala senza media e trascina il file .zip o .txt nel riquadro in cima a questa pagina.",
+      ctaTitle: "Guarda cosa è cambiato davvero",
+      ctaButton: "Controlla la tua chat",
+      ctaNote: "Gratis · Nessun account · Calcolato sul tuo dispositivo",
+      disclaimer:
+        "WhatsAnalyze è un progetto indipendente, non affiliato a WhatsApp o Meta. I numeri descrivono schemi in una chat. Non possono dirti cosa prova o cosa vuole qualcuno, e non sostituiscono una vera conversazione.",
+    },
     toolsChatHeatmap: {
-      seoTitle: "Orari di punta e mappa termica 24h WhatsApp | WhatsAnalyze",
+      seoTitle: "Orari di punta e mappa termica 24h WhatsApp – WhatsAnalyze",
       seoDescription:
         "Analizza quando le tue chat di WhatsApp raggiungono il picco nelle 24 ore. Confronta giorno e notte 100% nel browser in totale privacy.",
-      ogTitle: "Orari di punta e mappa termica 24h WhatsApp | WhatsAnalyze",
+      ogTitle: "Orari di punta e mappa termica 24h WhatsApp – WhatsAnalyze",
       ogDescription:
         "Scopri le fasce orarie più attive e la distribuzione giorno/notte delle tue conversazioni senza caricare file.",
       heroEyebrow: "Strumento WhatsApp gratuito",
@@ -7700,6 +11945,136 @@ export const messages = {
         "100% privato · Nessun caricamento su server · Nessuna registrazione",
       disclaimer:
         "WhatsAnalyze è un progetto open source indipendente e non è affiliato, approvato o sponsorizzato da WhatsApp o Meta.",
+    },
+    situationWhatToReply: {
+      navLabel: "Cosa rispondere?",
+      seoTitle:
+        "Cosa rispondere? Aiuto per la tua risposta su WhatsApp – WhatsAnalyze",
+      seoDescription:
+        "Non sai cosa rispondere a questo messaggio? Un'IA che ha letto la tua chat WhatsApp trasforma la tua bozza in una risposta più calma e chiara, con il tuo stile. Gratis sui dispositivi compatibili.",
+      ogTitle: "Cosa rispondere? Aiuto per la tua risposta su WhatsApp",
+      ogDescription:
+        "Carica la tua chat WhatsApp e fatti aiutare con la risposta: una versione più calma e chiara di quello che vuoi dire, da un'IA che ha letto la chat.",
+      heroEyebrow: "Aiuto per rispondere",
+      heroTitle: "Cosa rispondere?",
+      heroSubtitle:
+        "Il messaggio è lì e non sai come rispondere. Carica la chat: un'IA che l'ha letta ti aiuta a trovare le parole. Scrivi quello che vuoi dire e ricevi una versione più calma e chiara, con il tuo stile e una nota sul perché.",
+      heroNote:
+        "Gratis sul tuo dispositivo, se il browser lo supporta · Qualche risposta gratuita nel cloud al giorno · Di più con Pro",
+      continueButton: "Fatti aiutare a rispondere con questa chat",
+      offerChat: "Aiuto per rispondere a {name}",
+      offerGroup: "Aiuto per rispondere in {name}",
+      exampleEyebrow: "Un esempio",
+      exampleTitle: "Ecco com'è l'aiuto",
+      exampleText:
+        "Tom si rifà vivo dopo una settimana di silenzio. La prima bozza di Mia dice come si sente, con una frecciatina. Il coach tiene il sentimento e toglie la frecciatina.",
+      exampleBadge: "Esempio · Mia e Tom sono inventati",
+      exampleIncoming:
+        "Scusa se questa settimana sono sparito, il lavoro mi ha travolto. Sabato vale ancora?",
+      exampleDraft: "Ah, allora sei vivo. Sì, come ti pare.",
+      exampleReply:
+        "Che bello sentirti! A dire il vero questa settimana mi sei mancato. Sabato va bene, al solito posto?",
+      exampleWhy:
+        "Perché: la tua bozza dice che ti sei sentita messa da parte, e vale la pena dirlo. Nella vostra chat Tom si apre quando dici come ti senti, mentre dopo il sarcasmo di solito arrivava un giorno di silenzio. Così il tuo messaggio resta e lui ha qualcosa a cui rispondere.",
+      showEyebrow: "Cosa può mostrare la tua chat",
+      showTitle: "Un aiuto che sa come vi scrivete",
+      showText:
+        "Il coach IA lavora sulla tua chat, non su un modello preconfezionato: estratti anonimizzati e la lettura dell'IA sotto cui si apre.",
+      show1Title: "Come scrivete",
+      show1Text:
+        "La lettura descrive il tono della chat e come scrive ciascuno, così un suggerimento può suonare come la vostra chat.",
+      show2Title: "La tua bozza, più calma e chiara",
+      show2Text:
+        "Scrivi quello che vuoi dire. Il coach mantiene il senso e te lo restituisce più calmo e chiaro, con il tuo stile.",
+      show3Title: "Una nota sul perché",
+      show3Text:
+        "Ogni suggerimento arriva con una breve nota su cosa è cambiato e perché, guardando a come va di solito la vostra chat.",
+      show4Title: "Domande sul messaggio",
+      show4Text:
+        "Non sai cosa vuol dire un messaggio? Chiedi. Il coach rimanda a momenti della tua chat ed è pensato per dirtelo quando la chat non dà la risposta.",
+      stepsEyebrow: "Come arrivarci",
+      stepsTitle: "Dalla chat alla risposta",
+      step1Title: "Carica la chat",
+      step1Text:
+        "Esporta la chat da WhatsApp senza media, dopo che è arrivato il messaggio a cui vuoi rispondere, e trascinala qui sopra. Viene letta nel tuo browser.",
+      step2Title: "Ottieni una lettura",
+      step2Text:
+        "Il coach compare sotto un'analisi con IA della vostra chat. Usalo gratis sul tuo dispositivo, se il browser lo supporta, o nel cloud: l'anteprima gratuita include qualche risposta gratuita del coach al giorno, e con Pro ne hai di più.",
+      step3Title: "Chiedi o scrivi la bozza",
+      step3Text:
+        "Sotto la lettura, scegli «{reply}», scrivi quello che vorresti dire e ricevi una versione più calma e chiara. Oppure scegli «{ask}» per parlare prima del messaggio.",
+      plansTitle: "Cosa è gratis e cosa richiede Pro",
+      plan1Title: "Sul tuo dispositivo: gratis",
+      plan1Text:
+        "La lettura e il coach girano nel tuo browser dopo un download unico del modello, e nulla lascia il tuo dispositivo. Serve WebGPU: un computer recente, la maggior parte degli Android recenti con Chrome o un iPhone con iOS 26 o successivo. Il modello è piccolo, quindi le risposte sono più semplici.",
+      plan2Title: "Anteprima gratuita nel cloud",
+      plan2Text:
+        "Un assaggio dell'analisi di un'IA più potente, fatta con estratti anonimizzati, più qualche risposta gratuita del coach al giorno.",
+      plan3Title: "Pro: {price} al mese",
+      plan3Text:
+        "La lettura completa e il coach nel cloud, su qualsiasi telefono. Ogni messaggio al coach conta come una delle analisi cloud del giorno.",
+      ownWordsEyebrow: "Le tue parole",
+      ownWordsTitle: "Mandala con parole tue",
+      ownWordsText:
+        "Un suggerimento è un punto di partenza, non un copione. Le persone si accorgono quando un messaggio non sembra di chi lo manda, e una risposta che sembra scritta da una macchina può arrivare in modo diverso. Tieni quello che aiuta, cambia quello che non ti somiglia e mandala come la diresti tu.",
+      limitsEyebrow: "Limiti onesti",
+      limitsTitle: "Cosa non può fare",
+      limit1Title: "Tendenze, non verdetti",
+      limit1Text:
+        "Il coach può dire come va di solito la vostra chat. Non può sapere cosa prova l'altra persona né cosa farà dopo.",
+      limit2Title: "Solo ciò che è scritto",
+      limit2Text:
+        "L'IA legge estratti da tutta la chat, sempre con i messaggi più recenti. Non legge messaggi vocali, foto né sticker, e il modello sul dispositivo legge meno di quello nel cloud.",
+      limit3Title: "Una chat corta dice poco",
+      limit3Text:
+        "Con pochi messaggi c'è poco su cui basarsi, e i suggerimenti si avvicinano a consigli generici.",
+      limit4Title: "L'IA sbaglia",
+      limit4Text:
+        "Può non cogliere l'ironia, le battute tra voi o tutto ciò che è successo fuori dalla chat. La tua situazione la conosci meglio tu.",
+      privacyEyebrow: "Privato fin dall'inizio",
+      privacyTitle: "La tua chat resta tua",
+      privacyText:
+        "Una chat esportata contiene anche i messaggi dell'altra persona, quindi viene trattata con cura.",
+      privacy1Title: "Salvata solo su questo dispositivo",
+      privacy1Text:
+        "La tua chat viene salvata in questo browser per poterci tornare, mai sui nostri server. Non vuoi? Scegli «{dontKeep}» sotto il riquadro di caricamento.",
+      privacy2Title: "L'IA sul dispositivo resta sul dispositivo",
+      privacy2Text:
+        "Con l'IA gratuita sul tuo dispositivo, la chat, la sua lettura e quello che scrivi al coach non lasciano mai il tuo dispositivo.",
+      privacy3Title: "Anonimizzata per il cloud",
+      privacy3Text:
+        "L'IA nel cloud riceve solo estratti anonimizzati e quello che scrivi al coach: i nomi della chat vengono sostituiti, numeri di telefono, e-mail, link e IBAN rimossi. Il fornitore di IA non li usa per l'addestramento.",
+      supportEyebrow: "Quando è una cosa seria",
+      supportTitle: "Alcuni messaggi richiedono più di una buona risposta",
+      supportText:
+        "Se la tua chat o la tua domanda fanno pensare a violenza, minacce o autolesionismo, il coach non scrive una risposta: mostra risorse di supporto. Non riconosce tutto, quindi se non ti senti al sicuro, chiedi aiuto adesso.",
+      supportDevice:
+        "Su un dispositivo condiviso, scegli «{dontKeep}» sotto il riquadro di caricamento perché la chat non resti in questo browser. Una chat salvata si può dimenticare in qualsiasi momento da «{saved}».",
+      faqTitle: "Domande sull'aiuto per rispondere",
+      faq1Q: "Un'IA può dirmi cosa rispondere?",
+      faq1A:
+        "Può aiutarti ad arrivarci. Scrivi una versione grezza di quello che vuoi dire e il coach te la restituisce più calma e chiara, con il tuo stile e il tono abituale della chat, insieme a una breve nota su cosa è cambiato. Oppure chiedigli prima del messaggio. La risposta resta tua: cambia quello che non ti somiglia prima di mandarla.",
+      faq2Q: "È gratis?",
+      faq2A:
+        "Sì. Sul tuo dispositivo, l'analisi e il coach funzionano gratis nel browser, se supporta WebGPU. Nel cloud, l'anteprima gratuita mostra parte dell'analisi e include qualche risposta gratuita del coach al giorno, su qualsiasi telefono. Con Pro ({price} al mese) hai l'analisi completa e più risposte del coach ogni giorno.",
+      faq3Q: "L'IA vede il messaggio che ho appena ricevuto?",
+      faq3A:
+        "Solo se è nella tua esportazione, quindi esporta la chat dopo che il messaggio è arrivato. L'IA legge estratti da tutta la chat e include sempre i messaggi più recenti. Se hai salvato la chat prima che arrivasse il messaggio, esportala di nuovo. Puoi anche incollare il messaggio nella tua domanda.",
+      faq4Q: "La mia chat viene caricata da qualche parte?",
+      faq4A:
+        "La chat viene letta nel tuo browser e salvata solo su questo dispositivo, e puoi annullarlo. Con l'IA sul dispositivo, nulla lo lascia. Con l'IA nel cloud vengono inviati solo estratti anonimizzati e quello che scrivi al coach: i nomi della chat vengono sostituiti, numeri di telefono, e-mail, link e IBAN rimossi. Il fornitore di IA non li usa per l'addestramento.",
+      faq5Q: "Il coach si ricorda la nostra conversazione?",
+      faq5A:
+        "Se la chat è salvata su questo dispositivo, la conversazione resta insieme alla lettura a cui seguiva, quindi la ritrovi quando torni. Se dimentichi la chat, se ne va anche la conversazione.",
+      faq6Q: "E se il messaggio riguarda qualcosa di serio?",
+      faq6A:
+        "Se la tua chat o la tua domanda fanno pensare a violenza, minacce o autolesionismo, il coach non scrive una risposta: mostra risorse di supporto. Se tu o qualcun altro siete in pericolo, chiama subito il numero di emergenza (112).",
+      ctaTitle: "Trova le parole, poi falle tue",
+      ctaButton: "Carica la chat",
+      ctaNote:
+        "Letta nel tuo browser · Salvata solo su questo dispositivo, se vuoi",
+      disclaimer:
+        "WhatsAnalyze è un progetto indipendente, non affiliato a WhatsApp o Meta. I suggerimenti del coach servono a riflettere e non sono una consulenza professionale.",
     },
     pageNameMessages: "Contatore di messaggi e righe WhatsApp",
     pageNameWords: "Contatore di parole e vocabolario WhatsApp",

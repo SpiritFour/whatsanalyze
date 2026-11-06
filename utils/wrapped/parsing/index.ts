@@ -51,6 +51,14 @@ class Parser {
     const messages = await whatsapp.parseString(textData, {
       parseAttachments: true,
     });
+    return this.analyze(messages);
+  }
+
+  /**
+   * The story for messages parsed already: a saved chat reopened from this
+   * device (composables/useLibrary.ts), with no file to read.
+   */
+  analyze(messages: Message[]): ParserResult {
     const validMessages = this.filterValidMessages(messages);
     return {
       getMostUsedEmojis: getMostUsedEmojis(validMessages),
@@ -76,6 +84,10 @@ class Parser {
     if (file.name.endsWith(".zip")) {
       const arrayBuffer = await file.arrayBuffer();
       const zip = await JSZip.loadAsync(arrayBuffer);
+      // iOS names the chat _chat.txt. Any other .txt in the archive can be an
+      // attachment, even another chat's export sent in this one.
+      const chat = zip.file("_chat.txt");
+      if (chat) return await chat.async("text");
       for (const fileName of Object.keys(zip.files)) {
         const entry = zip.files[fileName];
         if (

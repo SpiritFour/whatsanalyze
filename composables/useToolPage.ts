@@ -43,6 +43,33 @@ export function scrollToDropzone() {
 }
 
 /**
+ * The breadcrumb trail a page shows, as structured data: one of the few kinds
+ * Google still turns into something visible (on desktop). Absolute URLs, in
+ * the canonical slash form.
+ */
+export function useBreadcrumbSchema(
+  crumbs: ComputedRef<{ name: string; url: string }[]>,
+) {
+  useHead(() => ({
+    script: [
+      {
+        type: "application/ld+json",
+        innerHTML: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: crumbs.value.map((crumb, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: crumb.name,
+            item: crumb.url,
+          })),
+        }),
+      },
+    ],
+  }));
+}
+
+/**
  * The page's structured data.
  *
  * `app` describes a tool a visitor can use for free and is left off the

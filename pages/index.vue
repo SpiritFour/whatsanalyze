@@ -1,6 +1,12 @@
 <template>
   <div class="landing-page">
-    <OneTimePurchaseReturn :chat="chat" checkout-source="home_pdf" />
+    <!-- After the restore below: until then no chat is on screen, and a
+         buyer's "upload it again" would flash up for a chat that is saved. -->
+    <OneTimePurchaseReturn
+      v-if="restored"
+      :chat="chat"
+      checkout-source="home_pdf"
+    />
 
     <LandingHero
       :title="$t('analyzeInSeconds')"
@@ -14,9 +20,23 @@
           <span class="mono-label">{{ $t("toolDropzone.private") }}</span>
         </p>
 
+        <!-- A returning visitor's saved chats. Browser only: the prerendered
+             page is the same for everyone. -->
+        <ClientOnly>
+          <LazyLibraryChats @open="openSaved" />
+        </ClientOnly>
+
         <FileHandler
           @hide_explanation="isShowingChats = $event"
           @new_messages="uploadedMessages"
+        />
+
+        <LibraryStatus
+          v-if="isShowingChats && messages"
+          :messages="messages"
+          :source="source"
+          :sample="isSample"
+          surface="home"
         />
 
         <p v-if="isSubscriptionValid" class="home-upload__subscriber">
@@ -122,6 +142,7 @@
 </template>
 
 <script>
+import { markRaw } from "vue";
 import { Chat } from "~/utils/transformChatData";
 import OneTimePurchaseReturn from "~/components/ChatVisualization/OneTimePurchaseReturn.vue";
 import { analyticsChat, trackEvent } from "~/composables/useAnalytics";
@@ -133,6 +154,7 @@ import {
   clearChatSession,
 } from "~/utils/chatSession";
 import { scrollToSettled } from "~/utils/scroll";
+import { useLibrary } from "~/composables/useLibrary";
 import pdfExampleImage from "~/assets/img/whatsapp export pdf.png";
 
 export default {
@@ -155,6 +177,7 @@ export default {
       locale,
       localePath,
       allTools,
+      library: useLibrary(),
       isSubscriptionValid: storeToRefs(useSubscriptionStore())
         .isSubscriptionValid,
     };
@@ -163,9 +186,14 @@ export default {
     return {
       isShowingChats: false,
       chat: undefined,
+      // The chat as parsed, which the saved-chat line under the box needs.
+      messages: undefined,
+      isSample: false,
       attachments: undefined,
       source: undefined,
       loading: false,
+      // The chat this tab had open is back on screen, or there was none.
+      restored: false,
       pdfExampleImage,
       currentYear: new Date().getFullYear(),
     };
@@ -230,7 +258,10 @@ export default {
       }
     }
   },
-  mounted() {
+  async mounted() {
+    // The chat this visitor already has open: handed over in memory by a
+    // tool, then the tab's saved chat, then the copy kept for the tab (a chat
+    // that isn't saved, e.g. where the browser refuses storage).
     const sharedChat = useSharedChat();
     if (
       sharedChat.value &&
@@ -241,11 +272,13 @@ export default {
       this.newMessages({
         messages: sharedChat.value.messages,
         attachments: sharedChat.value.attachments || [],
+        sample: sharedChat.value.sample,
       });
+      void this.library.adopt(sharedChat.value.messages);
       this.$nextTick(() => {
         window.scrollTo({ top: 0, behavior: "instant" });
       });
-    } else {
+    } else if (!(await this.restoreSaved())) {
       const savedSession = loadChatSession();
       if (savedSession && savedSession.messages?.length > 0) {
         try {
@@ -254,7 +287,9 @@ export default {
             messages: savedSession.messages,
             attachments: savedSession.attachments || [],
             source: savedSession.source || null,
+            sample: savedSession.sample,
           });
+          void this.library.adopt(savedSession.messages);
         } catch (err) {
           // A chat we cannot rebuild must not take the whole page down with
           // it — drop it and show the upload form instead.
@@ -271,9 +306,31 @@ export default {
     if (this.$route.hash === "#payButton" && this.isShowingChats) {
       this.$nextTick(() => scrollToSettled("#payButton", { offset: 100 }));
     }
+    this.restored = true;
   },
   methods: {
     Chat,
+    /** The saved chat this tab had open, back on screen. */
+    async restoreSaved() {
+      const saved = await this.library.restoreActive();
+      if (!saved) return false;
+      try {
+        this.isShowingChats = true;
+        this.newMessages(saved);
+        return true;
+      } catch (err) {
+        console.error("Could not restore the saved chat:", err);
+        this.isShowingChats = false;
+        this.chat = undefined;
+        return false;
+      }
+    },
+    /** A saved chat opened from "Your chats": straight to its results. */
+    openSaved(saved) {
+      this.isShowingChats = true;
+      this.newMessages(saved);
+      this.$nextTick(() => scrollToSettled("#results", { offset: 80 }));
+    },
     /**
      * A chat that was just dropped on the page. The results render ~700px
      * below the hero, so without this the upload looks like it did nothing —
@@ -286,6 +343,9 @@ export default {
     newMessages(chatObject) {
       // we only update with default chat object if chat_ is undefined
       if (!chatObject.default || this.chat === undefined) {
+        // Raw: proxying every message of a long chat buys nothing.
+        this.messages = markRaw(chatObject.messages);
+        this.isSample = !!chatObject.sample;
         this.attachments = chatObject.attachments;
         this.source = chatObject.source || null;
         this.chat = new Chat(chatObject.messages);

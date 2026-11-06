@@ -110,8 +110,26 @@ describe("buildDigest", () => {
     expect(() => buildDigest([msg("System", "x")], 100)).toThrow("no_messages");
   });
 
+  test("lists at most 50 participants, the cloud's limit, most active first", () => {
+    const members = Array.from(
+      { length: 60 },
+      (_, i) => `Member${String(i + 1).padStart(2, "0")}`,
+    );
+    const { digest } = buildDigest(
+      [
+        msg("Member60", "first!", 0),
+        ...members.map((m, i) => msg(m, "hi", i + 1)),
+      ],
+      100_000,
+    );
+    expect(digest.participants).toHaveLength(50);
+    expect(digest.participants[0]).toEqual({ alias: "Person A", messages: 2 });
+    // Everyone still speaks in the transcript, past the 50th too.
+    expect(digest.transcript).toContain("Person BH: hi");
+  });
+
   test("the sample chat comes out within budget with no real names", async () => {
-    const text = fs.readFileSync("static/chat_example.txt", "utf8");
+    const text = fs.readFileSync("tests/fixtures/chat_example.txt", "utf8");
     const messages = markSystemMessages(await parseString(text)).map((m) => ({
       ...m,
       author: typeof m.author === "string" ? m.author.trim() : m.author,

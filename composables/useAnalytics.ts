@@ -23,8 +23,11 @@ declare global {
 }
 /* eslint-enable no-unused-vars */
 
-/** Where an AI analysis was asked for: the AI tool page or the analyzer's results. */
-export type AiSource = "tool" | "results";
+/**
+ * Where an AI analysis was asked for: the AI tool page, the analyzer's
+ * results, or the cloud offered after the on-device AI couldn't run.
+ */
+export type AiSource = "tool" | "results" | "fallback";
 
 export interface EventParams {
   [key: string]: string | number | boolean | null | undefined;
@@ -268,8 +271,11 @@ export const analyticsEcommerce = {
   },
 };
 
-/** Where an AI analysis ran; "preview" is the free, shortened cloud run. */
-type AiMode = "local" | "cloud" | "preview";
+/**
+ * Where an AI analysis ran; "preview" is the free, shortened cloud run, and
+ * "sample" the sample chat's reading, made in advance (utils/ai/sample.ts).
+ */
+type AiMode = "local" | "cloud" | "preview" | "sample";
 
 /**
  * Standalone Tools (/tools/* and ToolDropzone)
@@ -337,12 +343,24 @@ export const analyticsTools = {
     });
   },
 
-  /** An AI analysis ended in an error: a known code or the raw message. */
-  aiFailed(mode: AiMode, reason: string) {
+  /**
+   * An AI analysis ended in an error: a known code or the raw message.
+   * `phase` is where, as for aiAbandoned: download, read, write or cloud.
+   */
+  aiFailed(mode: AiMode, reason: string, phase?: string) {
     trackEvent("ai_analysis_failed", {
       ai_mode: mode,
       reason: reason.slice(0, 100),
+      phase,
     });
+  },
+
+  /**
+   * The on-device AI isn't offered on this device, and why: no_webgpu,
+   * no_adapter, gpu_limits, gpu_device or storage (utils/ai/localCheck.js).
+   */
+  aiLocalUnavailable(reason: string) {
+    trackEvent("ai_local_unavailable", { reason });
   },
 
   /**
@@ -358,7 +376,7 @@ export const analyticsTools = {
   },
 
   /** A follow-up sent to the AI coach after a report. Never its text. */
-  aiCoachMessage(mode: "local" | "cloud", kind: "ask" | "reply") {
+  aiCoachMessage(mode: "local" | "cloud" | "sample", kind: "ask" | "reply") {
     trackEvent("ai_coach_message", { ai_mode: mode, coach_kind: kind });
   },
 
@@ -376,7 +394,14 @@ export const analyticsTools = {
 
   ctaClick(
     toolName: string,
-    ctaType: "full_analyzer" | "export_guide" | "subscribe" | "ai" | "other",
+    ctaType:
+      | "full_analyzer"
+      | "export_guide"
+      | "subscribe"
+      | "ai"
+      | "scroll_to_dropzone"
+      | "hero_dropzone"
+      | "other",
   ) {
     trackEvent("tool_cta_click", {
       tool_name: toolName,
@@ -490,6 +515,58 @@ export const analyticsWrapped = {
   },
 };
 
+/** Why a chat was not saved on the device. */
+export type LibraryNotKeptReason =
+  "opt_out" | "unavailable" | "quota" | "error";
+
+/**
+ * Saved chats (docs/saved-chats.md). Kinds and counts only: never a chat's
+ * name, its people or a word of what it says. `source` is where it happened:
+ * an upload surface ("home", "tool_ai", "wrapped", …) or where a saved chat
+ * was opened from ("home_list", "picker", a landing page's name).
+ */
+export const analyticsLibrary = {
+  /** A chat was saved on this device, as every upload is by default. */
+  saved(
+    source: string,
+    chat: { isGroup: boolean; isNew: boolean; savedChats: number },
+  ) {
+    trackEvent("library_saved", {
+      source,
+      chat_type: chat.isGroup ? "group" : "pair",
+      // false when the upload was a chat already saved
+      is_new: chat.isNew,
+      saved_chats: chat.savedChats,
+    });
+  },
+
+  /**
+   * Not saved: "Don't keep" (opt_out), or the browser refused (a private
+   * window or blocked storage: unavailable; a full disk: quota).
+   */
+  notKept(reason: LibraryNotKeptReason, source: string) {
+    trackEvent("library_not_kept", { reason, source });
+  },
+
+  /** A saved chat was opened, and how many days since it last was. */
+  opened(source: string, daysSinceOpened: number) {
+    trackEvent("library_opened", {
+      source,
+      days_since_opened: daysSinceOpened,
+    });
+  },
+
+  /** One chat or everything forgotten by hand, or old chats after 90 days. */
+  forgotten(scope: "chat" | "all" | "expired", count: number) {
+    trackEvent("library_forgotten", { scope, chat_count: count });
+  },
+
+  /** A backup file was downloaded, or one was restored. */
+  backup(action: "download" | "restore", count: number) {
+    trackEvent("library_backup", { action, chat_count: count });
+  },
+};
+
 /**
  * Site-wide interactions that belong to no single product.
  */
@@ -571,6 +648,7 @@ export function useAnalytics() {
     tools: analyticsTools,
     chat: analyticsChat,
     wrapped: analyticsWrapped,
+    library: analyticsLibrary,
     site: analyticsSite,
   };
 }

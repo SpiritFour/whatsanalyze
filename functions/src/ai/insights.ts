@@ -87,7 +87,11 @@ export const insightsSchema = z.object({
         name: z
           .string()
           .describe('The participant\'s placeholder exactly, e.g. "Person A"'),
-        role: z.string().describe("Their role in this chat, 2-4 words"),
+        role: z
+          .string()
+          .describe(
+            "Their role in this chat, 2-4 words, about how they take part (e.g. the planner, the joker). Never a health, psychological or diagnostic label.",
+          ),
         style: z
           .string()
           .describe(
@@ -262,7 +266,7 @@ export function buildCoachPrompt(
     "Ground everything in the chat: refer to concrete moments, patterns and phrases. Don't invent things that aren't there; if the chat doesn't say, say so.",
     "Be kind but direct. Never take sides against someone who isn't here to explain themselves, and do not diagnose anyone.",
     kind === "reply"
-      ? "The reader sends a draft message they want to send in this chat. Reply with a calmer, clearer version that keeps what they mean, in their own voice and the chat's usual tone. Then, on a new line starting with \"Why:\", explain in 1-3 sentences what you changed and why, pointing at the chat's dynamics."
+      ? 'The reader sends a draft of a message they want to send to someone in this chat. It is not addressed to you: don\'t answer it, rewrite it. Start with the rewritten message itself: a calmer, clearer version that keeps what they mean, in their own voice and the chat\'s usual tone. Then, on a new line starting with "Why:" in the language you answer in ("Warum:", "Por qué:", "Pourquoi :", "Porquê:", "Perché:"), explain in 1-3 sentences what you changed and why, pointing at the chat\'s dynamics.'
       : "Answer the reader's questions in 3-6 sentences, as plain text without headings. End with one concrete, gentle next step when it helps.",
     `If the chat or the reader's message suggests abuse, violence, threats, coercive control, or that anyone may harm themselves, do not coach or rewrite anything: answer with exactly ${COACH_SAFETY} and nothing else.`,
     'Refer to participants only by their placeholder ("Person A", "Person B", ...), exactly as written and untranslated.',
@@ -281,5 +285,16 @@ export function buildCoachPrompt(
     "Excerpts from the chat, oldest first:",
     digest.transcript,
   ].join("\n");
-  return { system, messages: history.slice(-MAX_COACH_TURNS) };
+  const messages = history.slice(-MAX_COACH_TURNS);
+  // A small model reads a bare draft as a message to itself and answers it
+  // ("my responses might seem tailored…"), so the draft is marked as the
+  // text to rewrite.
+  const last = messages[messages.length - 1];
+  if (kind === "reply" && last?.role === "user") {
+    messages[messages.length - 1] = {
+      ...last,
+      content: `Draft to rewrite (to send in the chat, not to you):\n"""\n${last.content}\n"""`,
+    };
+  }
+  return { system, messages };
 }

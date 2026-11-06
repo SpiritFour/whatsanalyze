@@ -579,6 +579,110 @@
             Corporate Rules
           </p>
           <p></p>
+          <!-- Saved chats (docs/saved-chats.md). Drafted with the feature;
+               legally binding text, so it needs a legal review. -->
+          <h2 id="gespeicherte-chats">Gespeicherte Chats auf Ihrem Gerät</h2>
+          <h3>Art und Zweck der Verarbeitung:</h3>
+          <p>
+            Einen WhatsApp-Chat-Export, den Sie hochladen, verarbeitet unsere
+            Website ausschließlich in Ihrem Browser. Damit Sie später ohne
+            erneutes Hochladen zu Ihrem Chat zurückkehren können, speichert die
+            Website ihn standardmäßig im lokalen Speicher Ihres Browsers
+            (IndexedDB) auf Ihrem Gerät. Direkt nach dem Hochladen weist ein
+            Hinweis darauf hin („Auf diesem Gerät gespeichert“), und mit „Nicht
+            behalten“ können Sie die Speicherung sofort rückgängig machen.
+          </p>
+          <p>Gespeichert werden:</p>
+          <ul>
+            <li>
+              die Nachrichten des Chats mit Datum, Uhrzeit und Absender;
+              Mediendateien werden nicht gespeichert, nur ihre Dateinamen,
+            </li>
+            <li>
+              Name, Teilnehmer, Zeitraum und Umfang des Chats sowie Name, Größe
+              und Prüfsumme (SHA-256) der hochgeladenen Exportdatei,
+            </li>
+            <li>
+              wann der Chat gespeichert und zuletzt geöffnet wurde und in
+              welchem Werkzeug,
+            </li>
+            <li>
+              sofern Sie diese Funktionen nutzen: KI-Auswertungen,
+              Coach-Gespräche und welche Person im Chat Sie sind,
+            </li>
+            <li>
+              Ihre Einstellung, ob nicht geöffnete Chats nach 90 Tagen gelöscht
+              werden sollen.
+            </li>
+          </ul>
+          <p>
+            Diese Daten verlassen Ihr Gerät nicht. Sie werden weder an uns noch
+            an Dritte übertragen und nicht auf unseren Servern gespeichert; wir
+            haben keinen Zugriff darauf. Wer diesen Browser auf Ihrem Gerät
+            benutzt, kann die gespeicherten Chats jedoch öffnen. In einem
+            privaten Fenster speichern die meisten Browser sie nur, bis das
+            Fenster geschlossen wird.
+          </p>
+          <p>
+            Getrennt davon merkt sich die Website im lokalen Speicher Ihres
+            Browsers, ob die KI-Auswertung auf Ihrem Gerät in diesem Browser
+            fehlgeschlagen ist, um Ihnen beim nächsten Mal gleich eine
+            funktionierende Alternative anzubieten. Diese Angabe enthält keine
+            Inhalte Ihrer Chats.
+          </p>
+          <h3>Rechtsgrundlage:</h3>
+          <p>
+            Das Speichern auf Ihrem Endgerät ist unbedingt erforderlich, um die
+            von Ihnen ausdrücklich gewünschte Funktion bereitzustellen, Ihren
+            Chat später fortzusetzen (§ 25 Abs. 2 Nr. 2 TDDDG). Soweit dabei
+            personenbezogene Daten verarbeitet werden, erfolgt dies auf
+            Grundlage unseres berechtigten Interesses, Ihnen diese Funktion
+            anzubieten (Art. 6 Abs. 1 lit. f DSGVO), dem Sie jederzeit mit
+            „Nicht behalten“ oder „Vergessen“ widersprechen können.
+          </p>
+          <h3>Empfänger:</h3>
+          <p>Keine. Die Daten bleiben auf Ihrem Gerät.</p>
+          <h3>Speicherdauer und Löschung:</h3>
+          <p>
+            Die Daten bleiben gespeichert, bis Sie sie löschen. Dafür haben Sie
+            folgende Möglichkeiten:
+          </p>
+          <ul>
+            <li>„Nicht behalten“ direkt unter dem Upload-Feld,</li>
+            <li>„Vergessen“ bei jedem Chat in „Deine Chats“,</li>
+            <li>
+              „Diesen Chat vergessen“ oder „Alles vergessen“ im Bereich „Auf
+              diesem Gerät gespeichert“; „Alles vergessen“ löscht die gesamte
+              Datenbank,
+            </li>
+            <li>
+              die Einstellung „Chats vergessen, die 90 Tage nicht geöffnet
+              wurden“: Ist sie eingeschaltet, werden solche Chats beim nächsten
+              Besuch der Website gelöscht,
+            </li>
+            <li>
+              das Löschen der Websitedaten in den Einstellungen Ihres Browsers.
+            </li>
+          </ul>
+          <p>
+            Browser können gespeicherte Daten auch selbst löschen, etwa wenn der
+            Speicherplatz knapp wird oder die Website längere Zeit nicht besucht
+            wurde.
+          </p>
+          <h3>Sicherungsdatei:</h3>
+          <p>
+            Auf Wunsch können Sie alle gespeicherten Chats als Sicherungsdatei
+            herunterladen. Die Datei ist nicht verschlüsselt und enthält Ihre
+            Chats; sie wird dort gespeichert, wo Sie sie ablegen, und von uns
+            weder empfangen noch gespeichert.
+          </p>
+          <h3>Bereitstellung vorgeschrieben oder erforderlich:</h3>
+          <p>
+            Die Speicherung ist weder gesetzlich noch vertraglich
+            vorgeschrieben. Ohne sie funktioniert die Website wie zuvor; der
+            Chat bleibt dann nur geöffnet, bis Sie den Tab schließen.
+          </p>
+          <p></p>
           <h2>Technisch nicht notwendige Cookies</h2>
           <p>
             Des Weiteren setzen wir Cookies ein, um das Angebot auf unserer
