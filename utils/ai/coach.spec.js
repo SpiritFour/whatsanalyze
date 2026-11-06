@@ -51,6 +51,12 @@ describe("isUnchangedRewrite", () => {
     expect(isUnchangedRewrite("Why: it was too blunt.", draft)).toBe(true);
   });
 
+  test("the explanation is found in every language's word for why", () => {
+    for (const why of ["Porquê:", "Pourquoi :", "Perché:", "Por qué:"]) {
+      expect(isUnchangedRewrite(`${draft}\n${why} calmer.`, draft)).toBe(true);
+    }
+  });
+
   test("a real rewrite is not", () => {
     expect(
       isUnchangedRewrite(

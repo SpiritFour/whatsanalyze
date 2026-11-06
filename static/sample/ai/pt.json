@@ -1,0 +1,659 @@
+{
+  "chat": {
+    "messages": 2069,
+    "from": "2025-09-12",
+    "to": "2026-10-24"
+  },
+  "model": "openai:gpt-6-luna",
+  "readings": {
+    "none": {
+      "answer": "",
+      "summary": "A conversa começa com flerte e piadas sobre pizza com abacaxi, e evolui para uma relação amorosa com rotinas partilhadas, visitas, família e uma viagem a Lisboa. Mais adiante, surgem atritos recorrentes sobre atrasos, planos esquecidos e a sensação de distância, enquanto a ternura e os pequenos rituais continuam presentes.",
+      "vibe": "Romance com Gerald",
+      "topics": [
+        {
+          "title": "Rotina de carinho",
+          "description": "Trocam mensagens de bom dia, perguntam se o outro comeu e combinam jantares, séries e visitas; “dormir mais cinco minutos” vira uma brincadeira recorrente."
+        },
+        {
+          "title": "Trabalho e turnos",
+          "description": "Emma relata turnos noturnos, pausas no hospital, pés doloridos e o caos da enfermaria; Leo costuma oferecer incentivo e lembrá-la de descansar."
+        },
+        {
+          "title": "Planos e viagem a Lisboa",
+          "description": "Reservam voos para maio, montam uma lista de pastelarias e procuram um bar no terraço. A viagem rende a contagem de 11 pastéis de nata e fotos enviadas mesmo sentados lado a lado."
+        },
+        {
+          "title": "Família e vida a dois",
+          "description": "Leo vai passar o Natal com a família de Emma, leva bolo de limão e acaba conversando de futebol com o pai, apesar do aviso para evitar o assunto. Mais tarde, trocam listas de compras e Leo faz uma chave para Emma."
+        },
+        {
+          "title": "Desencontros e reconciliações",
+          "description": "Discussões sobre o jantar perdido por causa de uma reunião e o cinema esquecido expõem uma frustração com atrasos e falta de atenção aos planos. Em setembro, Emma também diz que sentiu a falta de mensagens espontâneas durante cinco dias."
+        }
+      ],
+      "people": [
+        {
+          "name": "Emma",
+          "role": "Quem puxa os planos",
+          "style": "Escreve com afeto, humor e iniciativa: propõe encontros, compartilha músicas e relatos dos turnos, e fala diretamente quando se sente deixada em segundo plano."
+        },
+        {
+          "name": "Leo",
+          "role": "Quem oferece cuidado",
+          "style": "Alterna brincadeiras e gestos práticos — como levar pizza, fazer chá e mandar incentivo —, mas às vezes demora a responder ou perde a noção de compromissos."
+        }
+      ],
+      "dynamics": [
+        {
+          "title": "Afeto em mão dupla",
+          "description": "Os dois iniciam conversas, dizem que sentem saudades e organizam encontros; em novembro, Leo declara amor e Emma responde que também queria dizer isso havia duas semanas."
+        },
+        {
+          "title": "Piadas que viram tradição",
+          "description": "Gerald, o pombo da varanda que julga o café da manhã e derruba o manjericão, ganha atualizações recorrentes e respostas como “Gerald é caos”."
+        },
+        {
+          "title": "O atrito volta ao tema dos planos",
+          "description": "Depois de Leo perder um jantar por uma reunião, Emma aponta que poderia ter recebido uma mensagem; ao esquecer o cinema, diz que pedir desculpas sem mudar não resolve o padrão."
+        },
+        {
+          "title": "Cuidado cotidiano e apoio",
+          "description": "Quando Emma conta que o plantão está puxado ou que está exausta, Leo manda força, pede que ela coma algo e oferece chá; Emma também incentiva Leo nos dias de reuniões e contratempos."
+        }
+      ],
+      "highlights": [
+        "A conversa começa com a disputa sobre pizza com abacaxi: Leo propõe ramen como oferta de paz, mas se recusa a admitir que o abacaxi combina com pizza.",
+        "No primeiro voo para Lisboa, Leo espera Emma na porta de embarque com um croissant de “apoio emocional”; na viagem, Emma manda fotos para backup embora esteja sentada ao lado.",
+        "Quando Emma avisa que um paciente pediu sua mão e diz “estou comprometida”, Leo pergunta se isso foi cedo demais — e admite que gostou muito."
+      ]
+    },
+    "into:Emma": {
+      "answer": "Sim — há sinais fortes de que Leo gosta de você: disse “eu te amo”, chamou você de “minha namorada”, planejou uma viagem a Lisboa com você e quis conhecer sua família no Natal. Também demonstrou carinho em gestos concretos, como levar pizza quando sua comida deu errado e lembrar das flores amarelas de que você gostava. Mas, mais recentemente, as respostas ficaram curtas e espaçadas; você chegou a dizer que sentia Leo distante e que queria ser uma prioridade. A mensagem final, pedindo para conversar pessoalmente sobre “vocês”, não esclarece o que Leo sente agora — então há afeto no histórico, mas o rumo dessa conversa ainda está em aberto.",
+      "summary": "A conversa começa com flerte e encontros em torno de ramen, evolui para declarações de amor, rotina compartilhada, família e uma viagem a Lisboa. Mais adiante, surgem frustrações com atrasos e falta de atenção, e o tom termina incerto, com Leo pedindo uma conversa presencial sobre a relação.",
+      "vibe": "Romance com Gerald",
+      "topics": [
+        {
+          "title": "Flerte e declaração",
+          "description": "A conversa começa com a discussão sobre pizza de abacaxi e um convite para ramen; em novembro, Leo diz que ama você e você responde que também ama."
+        },
+        {
+          "title": "Rotina compartilhada",
+          "description": "Vocês combinam refeições, séries e compras, e trocam mensagens sobre turnos, sono e trabalho. Em janeiro, Leo faz uma chave para você."
+        },
+        {
+          "title": "Família e planos",
+          "description": "Leo vai passar o Natal com sua família, conversa de futebol com seu pai e recebe cumprimentos da sua mãe. Vocês também reservam uma viagem a Lisboa para maio."
+        },
+        {
+          "title": "Atenção e desencontros",
+          "description": "Você fica esperando no restaurante em abril e se aborrece quando Leo esquece o cinema em julho. Em setembro, diz que Leo passou cinco dias sem iniciar conversa e que sente falta de ser lembrada durante o dia."
+        },
+        {
+          "title": "Gerald e piadas internas",
+          "description": "O pombo Gerald aparece repetidamente na varanda, na bicicleta e perto do café da manhã, enquanto vocês brincam que ele derruba o manjericão e julga a torrada."
+        }
+      ],
+      "people": [
+        {
+          "name": "Emma",
+          "role": "a parceira direta",
+          "style": "Você escreve com afeto e humor, compartilha detalhes dos turnos e também nomeia claramente quando atrasos ou distância fazem você se sentir pouco priorizada."
+        },
+        {
+          "name": "Leo",
+          "role": "o parceiro carinhoso",
+          "style": "Leo costuma demonstrar carinho com convites, comida, mensagens de apoio e piadas recorrentes, embora mais tarde passe a responder de forma breve e demorada."
+        }
+      ],
+      "dynamics": [
+        {
+          "title": "Carinho recíproco",
+          "description": "Os dois iniciam conversas e propõem encontros; Leo convida você para ramen, e vocês trocam declarações de amor e mensagens de saudade."
+        },
+        {
+          "title": "Cuidado em pequenos gestos",
+          "description": "Leo oferece chá quando você chega exausta, leva pizza quando a comida dá errado e compra um croissant para você no aeroporto."
+        },
+        {
+          "title": "Desgaste com a disponibilidade",
+          "description": "A repetição de atrasos e planos esquecidos vira um assunto sério: você diz que não quer ser a secretária de Leo, e Leo promete organizar melhor a agenda."
+        },
+        {
+          "title": "Mudança no ritmo",
+          "description": "No fim, você descreve Leo como distante e relata que ficou cinco dias sem receber uma mensagem iniciada por Leo; em 24 de outubro, Leo pede para conversar pessoalmente sobre a relação."
+        }
+      ],
+      "highlights": [
+        "No começo, Leo convida você para ramen como oferta de paz após a discussão sobre abacaxi na pizza — mas se recusa a admitir que abacaxi combina.",
+        "Na viagem a Lisboa, Leo compra um croissant para você como apoio emocional enquanto você enfrenta a fila de segurança; depois, vocês contam 11 pastéis de nata e não se arrependem.",
+        "Quando você diz que está “tomada” ao contar que um paciente pediu você em casamento, Leo pergunta se foi cedo demais — e responde que gostou muito de ouvir isso."
+      ]
+    },
+    "into:Leo": {
+      "answer": "Sim — há sinais muito fortes de que Emma gosta de você: disse “eu te amo também”, chamou você de sua pessoa/parceira, planejou uma viagem a Lisboa com você e quis incluir você no Natal com a família. Também demonstrou saudade e vontade de estar junto em vários momentos. Mas, mais recentemente, Emma disse sentir você distante e sentir falta de ser alguém em quem você pensa durante o dia; sua última mensagem pede uma conversa presencial sobre vocês. Então parece haver afeto, mas o estado atual da relação e o que Emma quer daqui para a frente precisam dessa conversa.",
+      "summary": "A conversa começa com flerte e encontros, evolui para declarações de amor, vida compartilhada, viagens e contato com a família. Mais adiante, aparecem frustrações de Emma com atrasos e pouca atenção, enquanto suas respostas ficam mais breves; o tom termina carinhoso, mas sério, com você pedindo para conversar sobre a relação.",
+      "vibe": "Romance com Gerald",
+      "topics": [
+        {
+          "title": "Começo e namoro",
+          "description": "Vocês passam da discussão sobre pizza com abacaxi e do convite para ramen a encontros frequentes; em novembro, trocam “eu te amo”, e em março você chama Emma de sua namorada."
+        },
+        {
+          "title": "Rotina compartilhada",
+          "description": "A conversa acompanha refeições, compras, episódios de séries e visitas espontâneas. Até Gerald, o pombo que aparece na varanda e na bicicleta, vira personagem recorrente."
+        },
+        {
+          "title": "Família e planos",
+          "description": "Emma convida você para o Natal com a família, e depois relata que a mãe pergunta por você. Vocês também planejam e fazem uma viagem a Lisboa, contando pastéis de nata e escolhendo bares."
+        },
+        {
+          "title": "Atenção e desencontros",
+          "description": "Emma reclama quando você perde um jantar e, depois, uma ida ao cinema; também diz querer sentir que é prioridade. Em setembro, aponta que você passou cinco dias sem iniciar conversa."
+        },
+        {
+          "title": "Conversa sobre o futuro",
+          "description": "No último trecho, você pergunta se Emma está acordada e pede para conversar pessoalmente sobre vocês, dizendo que tem pensado bastante na relação."
+        }
+      ],
+      "people": [
+        {
+          "name": "Emma",
+          "role": "parceira afetuosa",
+          "style": "Escreve com emojis e brincadeiras, compartilha detalhes do trabalho e da rotina, e também expressa diretamente quando se sente deixada de lado."
+        },
+        {
+          "name": "Leo",
+          "role": "parceiro em reflexão",
+          "style": "Você alterna gestos práticos e carinhosos — como levar pizza, fazer uma chave e planejar Lisboa — com períodos de respostas curtas ou atrasadas; no fim, toma a iniciativa de pedir uma conversa presencial."
+        }
+      ],
+      "dynamics": [
+        {
+          "title": "Carinho recíproco",
+          "description": "Vocês trocam declarações de amor, dizem sentir saudade e fazem planos de casal, incluindo uma viagem juntos e a visita à família de Emma."
+        },
+        {
+          "title": "A iniciativa fica desigual",
+          "description": "Emma frequentemente puxa conversa, propõe programas e pergunta do seu dia; Emma chega a dizer que esperou cinco dias para ver se você iniciaria contato."
+        },
+        {
+          "title": "Desencontros viram assunto sério",
+          "description": "Quando você perde o jantar de abril, Emma diz que poderia ter recebido uma mensagem; em julho, perder o cinema provoca a frase de que pedir desculpas sem mudar não resolve."
+        },
+        {
+          "title": "Humor como linguagem comum",
+          "description": "A piada sobre “contar pombos”, o basilisco de manjericão e Gerald ajuda a manter leveza entre tarefas, cansaço e conversas mais tensas."
+        }
+      ],
+      "highlights": [
+        "No início, Leo convida Emma para ramen como oferta de paz após a disputa sobre pizza com abacaxi; Emma aceita com a condição de que você admita que abacaxi combina com pizza.",
+        "Na viagem a Lisboa, Leo compra um croissant para dar apoio emocional a Emma na fila de segurança; depois, Emma envia fotos mesmo estando sentada ao seu lado, “como reserva”.",
+        "No Dia dos Namorados, Leo deixa flores amarelas na porta; Emma percebe que você lembrou justamente das amarelas e responde que isso é uma grande afirmação — e que você pode ser testado."
+      ]
+    },
+    "arguments": {
+      "answer": "Pelos trechos, Emma apresenta os argumentos mais convincentes quando fala do problema recorrente de compromissos esquecidos e atrasos sem aviso. Há exemplos concretos: Leo perdeu o jantar de 9 de abril sem mandar mensagem, chegou depois do brinde de aniversário de Emma em junho e esqueceu o cinema em julho, embora já tivessem combinado. Emma explica que não se trata apenas de um incidente: «dizer desculpa e depois fazer de novo não é mudar» e «não quero ser sua secretária». Leo reconhece que há um padrão e promete mudar, mas os trechos posteriores mostram que Emma ainda sente distância e falta de iniciativa; por isso, a queixa de Emma fica mais bem sustentada do que a resposta de Leo.",
+      "summary": "A conversa começa com flerte e brincadeiras sobre pizza de abacaxi e, ao longo do tempo, registra uma relação afetuosa feita de rotinas, refeições, séries e planos em comum. Mais adiante, aparecem conflitos recorrentes sobre atrasos, compromissos esquecidos e a sensação de afastamento, enquanto o tom passa de caloroso e cúmplice a mais tenso e incerto.",
+      "vibe": "Romance com Gerald",
+      "topics": [
+        {
+          "title": "Planos e compromissos",
+          "description": "Combinam jantares, encontros e saídas; os esquecimentos de Leo viram um ponto de atrito, especialmente no jantar de abril e no cinema de julho."
+        },
+        {
+          "title": "Rotina e cuidado",
+          "description": "Trocam mensagens sobre turnos, refeições, sono e compras, como quando Leo incentiva Emma a comer algo e Emma pede itens para a casa."
+        },
+        {
+          "title": "Viagem a Lisboa",
+          "description": "Planejam uma viagem de maio, reservam voos e fazem listas de lugares; durante a viagem, Leo brinca que o elétrico parece subir na vertical e Emma envia fotos mesmo sentada ao lado."
+        },
+        {
+          "title": "Brincadeiras recorrentes",
+          "description": "Gerald, o pombo que aparece na varanda e derruba o manjericão, vira personagem habitual; também repetem a piada de que o sol já nasceu, então é hora de levantar."
+        },
+        {
+          "title": "Distância e comunicação",
+          "description": "Emma pergunta se está tudo bem e, em setembro, diz que deixou de iniciar conversa para ver se Leo tomaria a iniciativa; Leo responde que estava sobrecarregado de trabalho."
+        }
+      ],
+      "people": [
+        {
+          "name": "Emma",
+          "role": "quem puxa a conversa",
+          "style": "Escreve com afeto e humor, inicia muitos planos e compartilha detalhes dos turnos, mas também formula com clareza o que a incomoda, como ao dizer que não quer ser a secretária de Leo."
+        },
+        {
+          "name": "Leo",
+          "role": "quem oferece apoio",
+          "style": "Costuma responder com incentivo, comida e brincadeiras — incluindo as atualizações sobre Gerald —, mas em trechos posteriores suas respostas ficam mais breves e há vários atrasos ou compromissos esquecidos."
+        }
+      ],
+      "dynamics": [
+        {
+          "title": "Iniciativa cotidiana",
+          "description": "Emma frequentemente abre conversas, propõe programas e compartilha músicas; Leo também organiza convites e, em março, toma a iniciativa de reservar os voos para Lisboa."
+        },
+        {
+          "title": "Carinho em gestos práticos",
+          "description": "O cuidado aparece em ações simples: Leo leva pizza quando a comida de Emma dá errado, e Emma lembra de refeições e compras para a casa."
+        },
+        {
+          "title": "Atrito por falta de consideração percebida",
+          "description": "Emma aponta que os esquecimentos e atrasos se repetem, e Leo inicialmente se defende ou pede desculpas; em junho, reconhece que isso virou um padrão e promete avisar quando estiver atrasado."
+        },
+        {
+          "title": "Humor como idioma compartilhado",
+          "description": "As piadas sobre Gerald, a planta de manjericão e o despertar com o sol ajudam a manter a leveza mesmo entre rotinas de trabalho cansativas."
+        }
+      ],
+      "highlights": [
+        "A discussão sobre pizza de abacaxi rende o primeiro convite para ramen: Leo admite que não cederá na opinião, mas se oferece para pagar.",
+        "No Dia dos Namorados, Emma chama Leo de «dono do meu pombo favorito»; Leo responde que Gerald é livre — e depois entrega flores amarelas que Emma tinha mencionado.",
+        "Depois de Emma dizer que se sentiu deixada esperando no aniversário, Leo admite no dia seguinte que percebe um padrão; os dois combinam conversar melhor no fim de semana."
+      ]
+    },
+    "worried:Emma": {
+      "answer": "Há motivos para prestar atenção, mas os excertos não permitem concluir que esteja a acontecer algo grave ou que haja outra pessoa. O sinal mais concreto é uma mudança na forma como Leo comunica: depois de dizer, em agosto, que o novo projeto seria intenso, passaram a surgir muitas respostas tardias ou muito breves; em 28 de setembro, você disse que tinham passado cinco dias sem contacto e que sentia falta de ser lembrada durante o dia. Também houve conflitos anteriores sobre atrasos e planos esquecidos — como o jantar em que você esperou uma hora, a sua festa de aniversário e o cinema — e, no fim, Leo pediu para conversarem pessoalmente sobre a relação. Isso merece uma conversa clara; ao mesmo tempo, houve sinais de carinho e ligação, como a viagem a Lisboa, o convívio com a sua família e as mensagens afetuosas, por isso o chat não revela por si só qual será o resultado.",
+      "summary": "A conversa começa como um namoro leve e cúmplice, cheio de piadas recorrentes, refeições partilhadas, turnos de trabalho e planos com amigos e família. Com o tempo, surgem atritos repetidos sobre atrasos, compromissos e a sensação de distância, culminando num pedido de Leo para conversarem pessoalmente sobre a relação.",
+      "vibe": "Romance com alerta",
+      "topics": [
+        {
+          "title": "Namoro e carinho",
+          "description": "Trocam mensagens de saudade, apoio e afeto; em novembro de 2025 dizem que se amam, e em março de 2026 Leo chama você de «melhor namorada»."
+        },
+        {
+          "title": "Rotina e turnos",
+          "description": "Você relata turnos no hospital, pausas curtas e noites de trabalho; Leo costuma desejar-lhe boa sorte, lembrar-lhe de comer ou descansar."
+        },
+        {
+          "title": "Planos e vida social",
+          "description": "Organizam jantares, saídas com Jana, Max, Tom e Sophie, além de uma viagem a Lisboa em maio, com lista de pastel de nata e bares no rooftop."
+        },
+        {
+          "title": "Conflitos sobre presença",
+          "description": "Você reclama de esperar uma hora num jantar em abril, de Leo perder o brinde do seu aniversário em junho e de esquecer o cinema em julho; em maio, também discute a possibilidade de Leo trabalhar durante a viagem."
+        },
+        {
+          "title": "Piadas e hábitos partilhados",
+          "description": "Gerald, o pombo da varanda, torna-se uma personagem recorrente; voltam também a piada da planta e do manjericão que não sobreviveu, e a regra de ver só mais um episódio."
+        }
+      ],
+      "people": [
+        {
+          "name": "Emma",
+          "role": "Quem procura proximidade",
+          "style": "Escreve com calor, emojis e humor, inicia muitos contactos e planos, mas também nomeia diretamente quando se sente esquecida ou magoada."
+        },
+        {
+          "name": "Leo",
+          "role": "Quem tenta acompanhar",
+          "style": "Usa humor e gestos carinhosos, como levar pizza ou fazer uma chave, mas mais tarde responde com frequência de forma breve ou tardia e admite que o trabalho tem ocupado muito espaço."
+        }
+      ],
+      "dynamics": [
+        {
+          "title": "Carinho e humor partilhados",
+          "description": "Os dois mantêm brincadeiras internas — sobretudo sobre Gerald, o manjericão e acordar — e expressam afeto com frequência, especialmente no início e durante a viagem a Lisboa."
+        },
+        {
+          "title": "Iniciativa e contacto",
+          "description": "Você inicia muitas conversas, pergunta pela rotina e propõe atividades; em setembro, testa deliberadamente se Leo tomaria a iniciativa e diz que passaram cinco dias sem mensagens."
+        },
+        {
+          "title": "Atritos que voltam",
+          "description": "As desculpas de Leo por atrasos ou planos esquecidos não apagam a frustração: em julho, você diz que pedir desculpa sem mudar não basta e que não quer ser a secretária da relação."
+        },
+        {
+          "title": "Tentativas de reparação",
+          "description": "Depois do conflito de junho, Leo reconhece que é um padrão e promete avisar quando se atrasar; em setembro, explica a distância pelo trabalho, mas a conversa termina em outubro com um pedido de conversa presencial sobre vocês."
+        }
+      ],
+      "highlights": [
+        "Leo leva-lhe um croissant de «apoio emocional» quando você fica presa na fila de segurança, antes do voo para Lisboa.",
+        "A discussão sobre o bolo de limão de Natal acaba por revelar que Leo o comprou na padaria, apesar de o chamar de «segredo de família».",
+        "Em 28 de setembro, você diz que ficou sem escrever primeiro para ver se Leo procurava contacto; Leo responde que isso lhe parece um teste, e você aponta os cinco dias sem mensagem."
+      ]
+    },
+    "worried:Leo": {
+      "answer": "Há motivos para levares a sério uma possível dificuldade na relação, mas as mensagens não permitem concluir o que se passa nem prever o resultado da conversa. Em maio e junho, Emma disse sentir que não era prioridade e que os atrasos e esquecimentos se repetiam; em julho, voltou a dizer que estava cansada de ter a mesma discussão depois de teres esquecido o cinema. Mais tarde, em setembro, Emma notou que estavas distante e disse que sentia falta de ser lembrada durante o dia; as tuas respostas ficaram por vezes curtas ou tardias, embora tenhas atribuído isso à sobrecarga no trabalho. O sinal mais imediato é a tua mensagem de 24 de outubro a pedir para conversarem pessoalmente sobre vocês: pode ser uma conversa séria, mas o chat não revela o que pretendes dizer. Vale a pena ouvires o que Emma tem a dizer e responder com clareza, sem presumir já o pior.",
+      "summary": "A conversa começa com paquera bem-humorada e evolui para uma relação próxima, com rotinas partilhadas, planos de viagem e integração nas famílias. Mais adiante aparecem atritos recorrentes sobre atrasos, esquecimentos e menor disponibilidade, e termina com um pedido teu para conversarem pessoalmente sobre a relação; o tom passa de cúmplice a mais tenso e incerto.",
+      "vibe": "Romance com plot twist",
+      "topics": [
+        {
+          "title": "Início e intimidade",
+          "description": "A relação começa com a discussão sobre pizza de ananás na festa de Jana e um convite para ramen; mais tarde, trocam declarações de amor e Emma chama-te de namorado/a no contexto de um pedido de casamento feito por um paciente."
+        },
+        {
+          "title": "Rotinas e cumplicidade",
+          "description": "Partilham refeições, compras e séries, além de piadas recorrentes sobre o pombo Gerald, a planta de manjericão e as manhãs difíceis."
+        },
+        {
+          "title": "Planos e família",
+          "description": "Organizam saídas com Jana, Tom, Max e Sophie, viajam a Lisboa em maio e passam o Natal com a família de Emma, incluindo bolo de limão e uma conversa de duas horas sobre futebol com o pai."
+        },
+        {
+          "title": "Conflitos sobre presença",
+          "description": "Emma reclama de um jantar à espera durante uma hora, de perderes o brinde de aniversário e de um cinema esquecido; também diz querer sentir-se prioridade e que não quer ser tua secretária."
+        },
+        {
+          "title": "Distância e conversa pendente",
+          "description": "Em agosto, anuncias um projeto de trabalho intenso até outubro; em setembro, Emma diz que pareces distante e que sentiu a falta de iniciativa tua durante cinco dias. A última mensagem tua pede uma conversa presencial sobre vocês."
+        }
+      ],
+      "people": [
+        {
+          "name": "Emma",
+          "role": "A pessoa que procura conexão",
+          "style": "Escreve com afeto e humor, partilha detalhes do trabalho e da vida quotidiana, mas também expressa de forma direta quando se sente esquecida ou pouco priorizada."
+        },
+        {
+          "name": "Leo",
+          "role": "A pessoa que organiza e cuida",
+          "style": "Traz planos, refeições e gestos práticos — como levar pizza ou reservar viagem —, mas por vezes responde tarde ou de forma muito breve, sobretudo nos trechos mais recentes."
+        }
+      ],
+      "dynamics": [
+        {
+          "title": "Iniciativa partilhada",
+          "description": "Ambos iniciam conversas, propõem encontros e cuidam da logística; por exemplo, Leo organiza os voos para Lisboa e Emma encontra um bar no terraço."
+        },
+        {
+          "title": "Afeto em gestos concretos",
+          "description": "O carinho aparece em cuidados quotidianos: tu ofereces chá quando Emma chega exausta e levas flores amarelas de que Emma se lembrava ter falado."
+        },
+        {
+          "title": "Atritos que regressam",
+          "description": "As desculpas após contratempos não dissipam a preocupação de Emma quando situações semelhantes se repetem; em julho, Emma diz explicitamente que pedir desculpa sem mudar não basta."
+        },
+        {
+          "title": "Mudança na comunicação",
+          "description": "No começo há trocas frequentes de mensagens afetuosas e brincadeiras; em agosto e setembro surgem respostas tuas como “busy, later”, “sure” e “👍”, e Emma pergunta se está tudo bem."
+        }
+      ],
+      "highlights": [
+        "O pombo Gerald ganha vida própria: aparece na varanda, senta-se na bicicleta e é acusado de derrubar o manjericão, enquanto ambos lhe atribuem opiniões sobre a torrada.",
+        "Em Lisboa, tu envias fotos a Emma apesar de estarem sentados lado a lado: “backup”; depois, Emma diz que te ama “aqui, assim” e pede para manterem essa proximidade quando voltarem.",
+        "A conversa termina com uma mudança brusca de tom: depois de meses de rotinas partilhadas, és tu que perguntas se Emma está acordada e pedes para falarem em pessoa sobre a relação."
+      ]
+    },
+    "gift:Emma": {
+      "answer": "Pelo que aparece na conversa, eu escolheria algo pessoal e sem pressão: uma foto de vocês em Lisboa, impressa ou num pequeno álbum, junto com um bilhete carinhoso e talvez pastéis de nata — a viagem e a contagem de 11 pastéis viraram uma lembrança especial. Também pode ser um convite simples para fazerem panquecas juntos, algo que já é um ritual de vocês. Como Leo pediu para conversarem pessoalmente sobre a relação, eu evitaria um presente caro ou grandioso: o gesto pode demonstrar carinho, mas não precisa tentar responder por vocês à conversa que vem aí.",
+      "summary": "A conversa acompanha um romance que começa com brincadeiras sobre pizza de abacaxi e se transforma em rotina compartilhada, planos e uma viagem a Lisboa. O tom passa de muito afetuoso e divertido a períodos de desencontro e frustração com atrasos, atenção e trabalho; termina com Leo pedindo uma conversa presencial sobre a relação.",
+      "vibe": "Romance entre altos e baixos",
+      "topics": [
+        {
+          "title": "Comida e pequenos rituais",
+          "description": "Vocês decidem jantares com frequência, trocam listas de compras e brincam com as tentativas culinárias que acabam em pizza. Panquecas e dumplings também aparecem como comidas ligadas a momentos juntos."
+        },
+        {
+          "title": "Trabalho e cuidado cotidiano",
+          "description": "Você menciona plantões caóticos, pés cansados e pausas curtas; Leo costuma desejar força, lembrar você de comer ou oferecer chá e pizza."
+        },
+        {
+          "title": "Viagem a Lisboa",
+          "description": "Vocês reservaram voos para maio, fizeram planos de bares e passeios e brincaram com a lista de pastéis de nata; ao voltarem, você disse que já sentia falta da viagem."
+        },
+        {
+          "title": "Desencontros e prioridades",
+          "description": "A discussão sobre perder o jantar e, depois, esquecer o cinema mostra que atrasos e planos esquecidos viraram um tema sensível. Em setembro, você também disse sentir falta de ser lembrada durante o dia."
+        },
+        {
+          "title": "Piadas e referências recorrentes",
+          "description": "Gerald, o pombo que visita a varanda e julga o café da manhã, volta como personagem da conversa; vocês também repetem brincadeiras sobre acordar e sobre a planta de manjericão que não sobreviveu."
+        }
+      ],
+      "people": [
+        {
+          "name": "Emma",
+          "role": "quem puxa os planos",
+          "style": "Você inicia muitas conversas e convites, compartilha músicas e detalhes dos plantões, e usa humor e carinho para falar tanto da rotina quanto do que sente."
+        },
+        {
+          "name": "Leo",
+          "role": "quem oferece cuidado",
+          "style": "Leo costuma responder com gestos práticos e brincadeiras — como levar pizza, oferecer chá e manter a saga de Gerald —, embora em fases posteriores apareça mais ocupado e breve nas mensagens."
+        }
+      ],
+      "dynamics": [
+        {
+          "title": "Iniciativa compartilhada",
+          "description": "Ambos propõem encontros, refeições e programas, mas você frequentemente abre a conversa ou confirma os detalhes; Leo também planeja, como ao reservar os voos para Lisboa."
+        },
+        {
+          "title": "Carinho em gestos concretos",
+          "description": "O afeto aparece em ações pequenas: Leo levou um croissant para você no aeroporto e você se preocupou em que a outra pessoa comesse algo de verdade."
+        },
+        {
+          "title": "Humor como linguagem comum",
+          "description": "Vocês transformaram Gerald, o despertador e as tentativas de cozinhar em piadas recorrentes, criando referências compartilhadas sem precisar de grandes declarações."
+        },
+        {
+          "title": "Desgaste com planos e atenção",
+          "description": "Você explicou que desculpas sem mudança não bastavam após Leo esquecer o cinema; mais tarde, disse que sentia falta de ser lembrada durante o dia. A conversa termina com um pedido para falarem pessoalmente sobre vocês."
+        }
+      ],
+      "highlights": [
+        "Leo disse que comprou um croissant para você como apoio emocional enquanto você enfrentava a fila de segurança do aeroporto.",
+        "Depois da viagem, vocês contaram 11 pastéis de nata e brincaram sobre a viagem ter deixado saudade quase imediatamente.",
+        "No Dia dos Namorados, Leo deixou flores amarelas na sua porta — e você percebeu que a cor tinha sido lembrada."
+      ]
+    },
+    "gift:Leo": {
+      "answer": "Pelo que aparece na conversa, eu escolheria um buquê das flores amarelas de que Emma gostou no Dia dos Namorados — você já sabe que esse detalhe importa, e Emma ficou emocionada por você ter lembrado. Para deixar o presente mais pessoal, junte um bilhete e marque um programa a dois com horário definido, como panquecas juntos ou uma saída para comer; a conversa mostra que momentos compartilhados e sentir-se uma prioridade têm bastante peso. Eu evitaria apostar só num presente caro: o gesto de prestar atenção e estar presente parece combinar melhor com o que Emma valoriza.",
+      "summary": "A conversa acompanha uma relação amorosa que começa com brincadeiras sobre pizza de abacaxi e se enche de pequenos rituais, planos e demonstrações de carinho. Mais adiante, surgem atritos sobre atrasos e falta de atenção, num tom ainda afetuoso, mas mais frágil.",
+      "vibe": "Carinho com Gerald",
+      "topics": [
+        {
+          "title": "Começo e intimidade",
+          "description": "A aproximação começa depois da festa de Jana, com uma discussão sobre pizza de abacaxi que vira convite para ramen e provocações carinhosas."
+        },
+        {
+          "title": "Rotina a dois",
+          "description": "A dupla combina refeições, episódios de séries e tarefas domésticas; Gerald, o pombo da varanda, vira personagem recorrente das conversas."
+        },
+        {
+          "title": "Viagem a Lisboa",
+          "description": "Vocês planejam a viagem de maio, fazem listas de lugares e contam 11 pastéis de nata ao voltar."
+        },
+        {
+          "title": "Presença e prioridades",
+          "description": "Atrasos e compromissos esquecidos geram conversas difíceis: Emma diz que quer ser prioridade e que não quer precisar atuar como secretária."
+        }
+      ],
+      "people": [
+        {
+          "name": "Emma",
+          "role": "Quem busca proximidade",
+          "style": "Escreve com afeto e humor, compartilha detalhes do trabalho e da rotina e costuma propor programas ou perguntar como você está."
+        },
+        {
+          "name": "Leo",
+          "role": "Quem organiza e cuida",
+          "style": "Costuma resolver planos e pequenas necessidades práticas, manda mensagens de apoio e brinca com Gerald, embora às vezes deixe compromissos ou mensagens passarem."
+        }
+      ],
+      "dynamics": [
+        {
+          "title": "Cuidado no cotidiano",
+          "description": "Há carinho em gestos simples: Leo oferece chá quando Emma chega exausta, leva pizza quando a receita dá errado e pergunta se Emma comeu."
+        },
+        {
+          "title": "Humor como ritual",
+          "description": "Vocês retomam piadas como Gerald julgando o café da manhã, a regra de ver só mais um episódio e o refrão sobre fugir de reuniões."
+        },
+        {
+          "title": "Atrito sobre presença",
+          "description": "Depois de perder um jantar e esquecer uma ida ao cinema, Leo reconhece o padrão; Emma explica que desculpas sem mudança não bastam e que quer sentir vontade genuína de estar junto."
+        }
+      ],
+      "highlights": [
+        "No Dia dos Namorados, Leo deixa flores amarelas na porta; Emma se emociona porque você lembrou que eram as flores de que gostava.",
+        "Na viagem a Lisboa, Leo compra um croissant para Emma como apoio emocional enquanto Emma enfrenta a fila de segurança; depois, vocês celebram os 11 pastéis de nata.",
+        "Quando Emma diz que um paciente pediu sua mão, Leo pergunta surpreso se Emma se considera comprometida; Emma explica que disse que já estava com alguém, e você responde que gostou muito de ouvir isso."
+      ]
+    },
+    "effort": {
+      "answer": "Pelos trechos, Emma parece estar a fazer mais esforço para manter a ligação, sobretudo na fase mais recente: inicia muitos contactos, partilha músicas e novidades, propõe programas e tenta conversar quando sente distância. Leo também demonstra cuidado em momentos concretos — organizou a viagem a Lisboa, levou um croissant, ofereceu flores e propôs fazer chá — e no início a iniciativa era mais equilibrada. Mas, a partir de agosto, várias respostas de Leo ficam muito breves ou atrasadas, e Emma chega a dizer que passou cinco dias sem receber mensagem e que sente falta de ser lembrada durante o dia. Portanto, a impressão geral é que Emma se esforça mais na comunicação e na manutenção quotidiana, embora haja sinais de dedicação dos dois.",
+      "summary": "A conversa começa com flerte e planos partilhados, evoluindo para uma relação próxima, com rotinas, família, viagens e piadas recorrentes sobre Gerald, o pombo. Mais tarde, surgem atritos porque Emma sente que precisa de puxar mais pela comunicação e que compromissos acabam esquecidos; o tom passa de caloroso e brincalhão para mais distante e sério.",
+      "vibe": "Romance com pombo",
+      "topics": [
+        {
+          "title": "Planos e vida a dois",
+          "description": "Combinam refeições, episódios de séries, encontros com amigos e tarefas domésticas; em janeiro, Leo faz uma chave para Emma, e os dois começam a falar de listas de compras e contas."
+        },
+        {
+          "title": "Viagem a Lisboa",
+          "description": "Leo encontra voos para maio e reserva-os rapidamente; Emma pesquisa um bar no terraço, e os dois contam os dias e brincam com os 11 pastéis de nata da viagem."
+        },
+        {
+          "title": "Trabalho e turnos",
+          "description": "Emma relata turnos noturnos, caos na enfermaria e pausas curtas; Leo oferece incentivo, mas também há conflitos quando o trabalho interfere com planos, como o jantar perdido em abril."
+        },
+        {
+          "title": "Humor e pequenos rituais",
+          "description": "Gerald, o pombo que visita a varanda e derruba o manjericão, vira personagem recorrente; também repetem piadas sobre acordar, reuniões inúteis e receitas que correm mal."
+        },
+        {
+          "title": "Distância e prioridades",
+          "description": "Emma diz que quer sentir-se uma prioridade, aponta os compromissos esquecidos e, em setembro, explica que deixou de iniciar conversas para ver se Leo o faria."
+        }
+      ],
+      "people": [
+        {
+          "name": "Emma",
+          "role": "Quem mantém o contacto",
+          "style": "Escreve com frequência, partilha detalhes do trabalho e do dia, propõe programas e usa humor e emojis, mas também expressa diretamente quando se sente deixada de lado."
+        },
+        {
+          "name": "Leo",
+          "role": "Quem cuida em gestos",
+          "style": "Alterna brincadeiras e respostas práticas com gestos carinhosos, como levar comida, organizar a viagem e oferecer flores, embora nas mensagens mais recentes responda muitas vezes de forma curta ou tardia."
+        }
+      ],
+      "dynamics": [
+        {
+          "title": "Iniciativa desigual no fim",
+          "description": "No início, ambos iniciam conversas e encontros; mais tarde, Emma nota que Leo passou cinco dias sem escrever e diz que queria sentir-se lembrada durante o dia."
+        },
+        {
+          "title": "Cuidado prático de ambos",
+          "description": "Leo oferece chá quando Emma chega exausta e leva pizza quando a cozinha corre mal; Emma incentiva Leo a comer e acompanha os turnos difíceis."
+        },
+        {
+          "title": "Atritos que se repetem",
+          "description": "Depois de Leo perder o jantar de abril e o cinema de julho por causa de outros compromissos, Emma insiste que pedir desculpa não basta sem mudança."
+        },
+        {
+          "title": "Afeto com humor partilhado",
+          "description": "As piadas sobre Gerald e o manjericão ajudam a manter leveza, mesmo entre conversas sobre horários, cansaço e tarefas."
+        }
+      ],
+      "highlights": [
+        "Na primeira conversa, o convite para ramen vem como “oferta de paz” depois da discussão sobre pizza com ananás — e Leo ainda se recusa a admitir que o ananás é aceitável.",
+        "No Dia dos Namorados, Leo deixa flores amarelas à porta porque se lembrou da preferência de Emma; Emma responde emocionada por ter sido lembrada.",
+        "Depois de Emma dizer que não queria ser a secretária de Leo e que queria sentir vontade genuína de estar presente, a conversa termina com Leo a pedir para falarem pessoalmente sobre a relação."
+      ]
+    },
+    "better": {
+      "answer": "Pelo chat, vocês se comunicam com carinho e humor, mas os conflitos recorrentes parecem pedir conversas mais diretas e combinados concretos. Quando Leo perdeu o jantar de 9 de abril e o cinema de 22 de julho, Emma explicou que o problema não era só o atraso ou o esquecimento, mas um padrão; vale falar disso num momento calmo e combinar um aviso imediato e um calendário compartilhado. Em 2 de maio, Emma conseguiu dizer claramente que queria se sentir prioridade, e Leo reconheceu que não vinha demonstrando isso — esse tipo de frase específica parece ajudar mais do que deixar a mágoa acumular. Também seria melhor trocar testes por pedidos explícitos: em vez de deixar de escrever para ver se Leo toma a iniciativa, dizer “sinto sua falta; você pode me mandar uma mensagem durante o dia?”. Como Leo mencionou uma fase intensa no trabalho e, em setembro, respondeu muitas vezes de forma breve ou tardia, vocês poderiam combinar uma forma realista de manter contato e reservar um horário para conversar sem pressa; há sinais de afastamento, mas o trecho final não esclarece o que Leo quer discutir pessoalmente.",
+      "summary": "A conversa começa com flerte, brincadeiras sobre pizza de abacaxi e encontros, e evolui para uma relação carinhosa com rotinas compartilhadas, planos e uma viagem a Lisboa. Mais adiante, aparecem frustrações repetidas com atrasos, esquecimentos e menos contato, embora ambos ainda expressem afeto e tentem reparar os desencontros; o tom passa de leve e cúmplice a mais tenso e incerto.",
+      "vibe": "Romance com alarmes",
+      "topics": [
+        {
+          "title": "Afeto e rotina a dois",
+          "description": "Trocam bom-dia, perguntam se comeram e combinam refeições, séries e visitas; Leo também faz chá e leva pizza quando a comida de Emma dá errado."
+        },
+        {
+          "title": "Trabalho e cansaço",
+          "description": "Emma relata plantões caóticos, pausas curtas e noites em claro; Leo menciona reuniões intermináveis e, em agosto, um projeto intenso previsto até outubro."
+        },
+        {
+          "title": "Planos e vida social",
+          "description": "Organizam jantares com Jana, Max, Tom e Sophie, além de encontros e programas em casa; a viagem a Lisboa em maio vira um plano animado, com lista de pastéis de nata e bares."
+        },
+        {
+          "title": "Desencontros e prioridades",
+          "description": "Aparecem conflitos por planos esquecidos ou atrasados, incluindo o jantar de 9 de abril e o cinema de 22 de julho; em setembro, Emma diz que ficou cinco dias sem escrever de propósito para ver se Leo tomaria a iniciativa."
+        },
+        {
+          "title": "Piadas recorrentes e Gerald",
+          "description": "A pomba Gerald vira personagem da conversa: pousa na varanda e na bicicleta, derruba o manjericão e julga o café da manhã."
+        }
+      ],
+      "people": [
+        {
+          "name": "Emma",
+          "role": "quem puxa a conversa",
+          "style": "Escreve com frequência, calor e emojis, compartilha detalhes do trabalho e da rotina e, quando se sente magoada, consegue nomear o padrão e o que gostaria de receber."
+        },
+        {
+          "name": "Leo",
+          "role": "quem cuida e brinca",
+          "style": "Usa humor e pequenas ofertas de cuidado — como levar pizza, fazer chá e lembrar do croissant no aeroporto —, mas mais tarde aparecem respostas curtas ou tardias e falhas em acompanhar alguns planos."
+        }
+      ],
+      "dynamics": [
+        {
+          "title": "Iniciativa repartida",
+          "description": "Os dois iniciam conversas e propõem encontros: Emma costuma perguntar sobre refeições e mandar músicas, enquanto Leo também convida para programas e pergunta como foi o dia."
+        },
+        {
+          "title": "Carinho em gestos cotidianos",
+          "description": "O cuidado aparece em ações práticas: Leo leva um croissant para Emma no aeroporto e oferece chá quando ela chega exausta; Emma lembra Leo de comer algo adequado."
+        },
+        {
+          "title": "O humor amortece, mas não resolve tudo",
+          "description": "Brincadeiras sobre Gerald, o despertador e a comida mantêm a cumplicidade, mas, quando planos importantes falham, o humor não substitui uma conversa sobre o impacto e sobre como evitar repetição."
+        },
+        {
+          "title": "Reparação após atritos",
+          "description": "Depois da discussão de junho sobre atrasos, Leo reconhece que há um padrão; após a conversa de 20 de junho, promete avisar quando estiver atrasado e brinca com lembretes de calendário."
+        }
+      ],
+      "highlights": [
+        "A discussão sobre pizza de abacaxi vira convite para ramen: Leo oferece pagar como “acordo de paz”, mas não concede nada sobre o abacaxi.",
+        "Emma manda fotos de Lisboa para Leo enquanto os dois estão sentados lado a lado no bonde; Leo responde que o veículo parece estar subindo na vertical e que já aceitou o destino.",
+        "No Dia dos Namorados, Emma manda flores amarelas e Leo responde que se lembra de tudo que ela conta; Emma desafia essa afirmação, e Leo diz: “teste-me”."
+      ]
+    }
+  },
+  "coach": [
+    {
+      "id": "plans",
+      "kind": "ask",
+      "me": null,
+      "prompt": "Porque é que os nossos planos estão sempre a falhar?",
+      "reply": "Pelo chat, não parece ser falta de planos ou de carinho: vocês combinam encontros, a viagem a Lisboa e programas com amigos, e continuam a demonstrar afeto. O padrão é que Leo acaba por esquecer, atrasar-se ou deixar mensagens e combinações sem resposta — como no jantar em 9 de abril, no cinema de 22 de julho e na semana sem contacto que Emma descreveu em setembro. O trabalho aparece como motivo em vários momentos, mas Emma diz que o problema é “sempre alguma coisa” e que não quer ser a “secretária” da relação; pedir desculpa ou prometer organizar o calendário ainda não se traduziu numa mudança consistente no que vemos aqui. Também há planos pouco confirmados ou respostas vagas, como “maybe” para o encontro de 10 de maio. Vale conversar amanhã sobre um acordo concreto para confirmar compromissos e avisar assim que houver um imprevisto, e depois observar se isso muda."
+    },
+    {
+      "id": "distance",
+      "kind": "ask",
+      "me": "Emma",
+      "prompt": "O Leo está a afastar-se ou está só stressado?",
+      "reply": "Não dá para saber com certeza só pelas mensagens: Leo disse que o trabalho estava intenso até outubro e, em 30 de agosto, explicou que estava cansado e que o trabalho era “muito”. Mas o padrão parece ir além de uma semana difícil: as respostas ficam frequentemente curtas (“sure”, “yeah”, “ok”), e houve cinco dias sem contacto até Leo perguntar se estavas viva; tu própria disseste que sentias falta de ser alguém em quem Leo pensava durante o dia. Ao mesmo tempo, Leo ainda propõe momentos juntos — como as panquecas de domingo — e agora pediu para conversar pessoalmente sobre “nós”, o que mostra que algo merece ser esclarecido, não necessariamente que a relação esteja a acabar. Na conversa, pergunta diretamente como Leo está a sentir a relação e o que quer fazer, e partilha também do que precisas para te sentires próxima."
+    },
+    {
+      "id": "talk",
+      "kind": "ask",
+      "me": "Emma",
+      "prompt": "Como posso começar bem a conversa de amanhã?",
+      "reply": "Comece com calma e curiosidade, sem tentar adivinhar o que Leo vai dizer: houve um longo período em que as respostas ficaram curtas ou atrasadas, e Leo disse em setembro que o trabalho estava a consumir-lhe as energias; agora pediu para falar pessoalmente porque tem pensado muito em vocês. Você pode dizer: “Quero ouvir o que tens pensado. Também quero partilhar como tenho vivido esta distância e perceber se queremos, e conseguimos, cuidar desta relação juntos.” Depois, dê espaço para Leo falar e peça exemplos concretos do que pretende, sem deixar de dizer com clareza o que você precisa."
+    },
+    {
+      "id": "breakup",
+      "kind": "reply",
+      "me": "Emma",
+      "prompt": "o que é que isso quer dizer?? se queres acabar, diz logo",
+      "reply": "O que queres dizer com isso? Fiquei um bocado ansiosa com essa mensagem. Se estás a pensar acabar, prefiro que me digas com clareza — mas podemos falar amanhã, como sugeriste.\n\nPorquê: “Tenho pensado muito em nós” pode soar preocupante, mas ainda não diz o que Leo decidiu; pedir clareza sem assumir já que quer acabar ajuda a abrir a conversa. Mantive a franqueza do teu rascunho, num tom menos confrontativo."
+    },
+    {
+      "id": "cancel",
+      "kind": "reply",
+      "me": "Emma",
+      "prompt": "estás sempre a cancelar e estou farta de ser a única que se esforça",
+      "reply": "Tenho sentido que os nossos planos e o nosso contacto têm ficado para trás, e estou cansada de sentir que sou eu a puxar mais pela relação. Gostava que falássemos disso com calma amanhã.\n\nPorquê: Troquei “estás sempre a cancelar” por uma descrição do padrão que aparece na conversa — como o cinema esquecido e os planos afetados pelo trabalho — sem generalizar. Mantive a tua frustração e a vontade de mais esforço recíproco, e liguei a mensagem à conversa que Leo propôs para amanhã."
+    }
+  ]
+}

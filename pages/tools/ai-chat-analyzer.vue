@@ -149,7 +149,8 @@
               rounded
             />
             <p>{{ progressText }}</p>
-            <p class="ai-progress__eta">
+            <!-- The sample's reading is already made: nothing to pause -->
+            <p v-if="!sampleReadings" class="ai-progress__eta">
               {{ t("toolsAi.progressKeepOpen") }}
             </p>
             <p v-if="etaText" class="ai-progress__eta mono-label">

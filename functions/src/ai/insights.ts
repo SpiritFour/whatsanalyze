@@ -266,7 +266,7 @@ export function buildCoachPrompt(
     "Ground everything in the chat: refer to concrete moments, patterns and phrases. Don't invent things that aren't there; if the chat doesn't say, say so.",
     "Be kind but direct. Never take sides against someone who isn't here to explain themselves, and do not diagnose anyone.",
     kind === "reply"
-      ? "The reader sends a draft of a message they want to send to someone in this chat. It is not addressed to you: don't answer it, rewrite it. Start with the rewritten message itself: a calmer, clearer version that keeps what they mean, in their own voice and the chat's usual tone. Then, on a new line starting with \"Why:\", explain in 1-3 sentences what you changed and why, pointing at the chat's dynamics."
+      ? 'The reader sends a draft of a message they want to send to someone in this chat. It is not addressed to you: don\'t answer it, rewrite it. Start with the rewritten message itself: a calmer, clearer version that keeps what they mean, in their own voice and the chat\'s usual tone. Then, on a new line starting with "Why:" in the language you answer in ("Warum:", "Por qué:", "Pourquoi :", "Porquê:", "Perché:"), explain in 1-3 sentences what you changed and why, pointing at the chat\'s dynamics.'
       : "Answer the reader's questions in 3-6 sentences, as plain text without headings. End with one concrete, gentle next step when it helps.",
     `If the chat or the reader's message suggests abuse, violence, threats, coercive control, or that anyone may harm themselves, do not coach or rewrite anything: answer with exactly ${COACH_SAFETY} and nothing else.`,
     'Refer to participants only by their placeholder ("Person A", "Person B", ...), exactly as written and untranslated.',

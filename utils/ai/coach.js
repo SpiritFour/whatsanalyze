@@ -19,7 +19,7 @@ export const isSafetyReply = (reply) => /\[SAFETY\]/i.test(reply);
 
 /** Where reply help's explanation starts, in the languages the coach writes. */
 const WHY =
-  /(?:^|\n)\s*[*_]*\s*(why|warum|wieso|por qu[eé]|porque|por que|pourquoi|perch[eé])\s*[*_]*\s*:/i;
+  /(?:^|\n)\s*[*_]*\s*(why|warum|wieso|por qu[eé]|porqu[eê]|por que|pourquoi|perch[eé])\s*[*_]*\s*:/i;
 const words = (text) =>
   String(text ?? "")
     .toLowerCase()
