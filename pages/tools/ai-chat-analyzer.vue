@@ -65,6 +65,9 @@
           <p v-if="askBlocked" class="ask__hint">
             {{ t("toolsAi.askNeedsMe") }}
           </p>
+          <p v-if="sampleNeedsOwnChat" class="ask__hint">
+            {{ t("toolsAi.sampleCustom") }}
+          </p>
         </div>
       </div>
 
@@ -111,12 +114,23 @@
               running !== null ||
               askBlocked ||
               (mode.id === 'local' && !localModel) ||
-              (mode.id === 'cloud' && allowance?.remaining === 0)
+              (mode.id === 'cloud' &&
+                (sampleReadings
+                  ? sampleNeedsOwnChat
+                  : allowance?.remaining === 0))
             "
             @click="mode.id === 'local' ? startLocal() : run(mode.id)"
           >
             {{ mode.button }}
           </button>
+          <!-- The sample's readings were made in advance: free, and the
+               visitor's own free preview stays theirs -->
+          <p
+            v-if="mode.id === 'cloud' && sampleReadings"
+            class="mode-card__sample"
+          >
+            {{ t("toolsAi.sampleNote") }}
+          </p>
           <!-- Not subscribed: the button above runs the free preview -->
           <NuxtLink
             v-if="mode.id === 'cloud' && !isSubscriptionValid && !cloudFallback"
@@ -289,6 +303,14 @@
       :title="t('toolsAi.reportTitle')"
     >
       <div class="report-wrap">
+        <!-- The sample's reading: say it was made in advance, and that the
+             visitor's own chat is next -->
+        <div v-if="sampleReadings && ranOn === 'cloud'" class="sample-note">
+          <p>{{ t("toolsAi.sampleReport") }}</p>
+          <button type="button" class="mode-card__btn" @click="tryOwnChat">
+            {{ t("toolsAi.sampleOwnChat") }}
+          </button>
+        </div>
         <AiReport v-if="report" :report="report" />
 
         <!-- The same encrypted share link as the analyzer's results -->
@@ -306,6 +328,9 @@
           :me="me"
           :summary="insights.summary"
           :free="!!locked"
+          :sample="
+            sampleReadings && ranOn === 'cloud' ? sampleReadings.coach : null
+          "
           :initial-kind="coachFirst ? 'reply' : 'ask'"
           @allowance="allowance = $event"
         />
@@ -380,6 +405,7 @@ import {
   onBeforeUnmount,
   onMounted,
   ref,
+  shallowRef,
   watch,
 } from "vue";
 import { chatFingerprint } from "~/utils/chatFingerprint";
@@ -398,6 +424,14 @@ import {
   tidyInsights,
 } from "~/utils/ai/digest";
 import { participantMessages } from "~/utils/utils";
+import { AI_QUESTIONS } from "~/utils/ai/questions";
+import {
+  SAMPLE_READING_MS,
+  loadSampleReadings,
+  matchesSample,
+  sampleReadingKey,
+  type SampleReadings,
+} from "~/utils/ai/sample";
 // WebLLM itself is only fetched inside analyzeLocally, once someone asks.
 import {
   analyzeLocally,
@@ -508,14 +542,7 @@ const customQuestion = ref("");
 
 /** Ready-made questions; some only make sense once we know who "I" is. */
 const presets = computed(() => [
-  ...[
-    { id: "into", needsMe: true },
-    { id: "arguments", needsMe: false },
-    { id: "worried", needsMe: true },
-    { id: "gift", needsMe: true },
-    { id: "effort", needsMe: false },
-    { id: "better", needsMe: false },
-  ].map((p) => ({ ...p, label: t(`toolsAi.ask_${p.id}`) })),
+  ...AI_QUESTIONS.map((p) => ({ ...p, label: t(`toolsAi.ask_${p.id}`) })),
   { id: "custom", needsMe: false, label: t("toolsAi.askCustom") },
 ]);
 
@@ -618,6 +645,33 @@ const downloadGb = computed(() =>
 
 const language = computed<AiLanguage>(() =>
   locale.value in AI_LANGUAGES ? (locale.value as AiLanguage) : "en",
+);
+
+/** The sample chat is on screen ("Try With Sample Chat"). */
+const isSample = ref(false);
+/**
+ * Its readings, made in advance in this language (utils/ai/sample.ts): while
+ * they're here, the cloud card shows those instead of asking the cloud.
+ * Shallow: they never change, and a reading is copied before it's shown,
+ * which a reactive proxy can't be.
+ */
+const sampleReadings = shallowRef<SampleReadings | null>(null);
+/** Looking them up, so a quick click waits rather than asking the cloud. */
+let sampleLookup: Promise<void> = Promise.resolve();
+function findSampleReadings() {
+  sampleReadings.value = null;
+  const chat = messages.value;
+  if (!isSample.value || !chat) return;
+  sampleLookup = loadSampleReadings(language.value).then((readings) => {
+    if (!readings || messages.value !== chat) return;
+    const { digest } = buildDigest(chat, CLOUD_TRANSCRIPT_CHARS);
+    if (matchesSample(readings, digest)) sampleReadings.value = readings;
+  });
+}
+watch(language, findSampleReadings);
+/** A question of the visitor's own: the sample has no reading for it. */
+const sampleNeedsOwnChat = computed(
+  () => !!sampleReadings.value && question.value === "custom",
 );
 
 // A saved chat keeps every reading with it (composables/useLibrary.ts), so
@@ -735,10 +789,12 @@ function showWhereNext() {
   });
 }
 
-async function onChatLoaded(payload: { analysis: unknown }) {
+async function onChatLoaded(payload: { analysis: unknown; sample?: boolean }) {
   messages.value = (payload.analysis as { messages: ChatMessage[] }).messages;
   insights.value = null;
   errorKey.value = null;
+  isSample.value = !!payload.sample;
+  findSampleReadings();
   await restoreReport();
   // requestDevice can take a moment on some drivers: scroll first.
   void nextTick(() =>
@@ -774,6 +830,8 @@ async function onChatLoaded(payload: { analysis: unknown }) {
 
 function reset() {
   messages.value = null;
+  isSample.value = false;
+  sampleReadings.value = null;
   me.value = null;
   question.value = null;
   customQuestion.value = "";
@@ -824,7 +882,11 @@ const barValue = computed<number | undefined>(() => {
 
 const progressText = computed(() => {
   const p = progress.value;
-  if (running.value === "cloud") return t("toolsAi.progressCloud");
+  if (running.value === "cloud") {
+    return sampleReadings.value
+      ? t("toolsAi.progressSample")
+      : t("toolsAi.progressCloud");
+  }
   if (p?.phase === "download" && p.retry) return t("toolsAi.progressRetry");
   if (p?.phase === "download" && p.progress < 1) {
     if (modelDownloaded.value) return t("toolsAi.progressLoading");
@@ -905,6 +967,8 @@ onBeforeUnmount(() => {
 /** `via` "fallback": the cloud, offered when the on-device AI couldn't. */
 async function run(mode: Mode, via?: "fallback") {
   if (!messages.value) return;
+  if (mode === "cloud" && isSample.value) await sampleLookup;
+  if (mode === "cloud" && sampleReadings.value) return showSampleReading(via);
   if (mode === "cloud" && !isSubscriptionValid.value && showKeptPreview()) {
     return;
   }
@@ -1063,6 +1127,58 @@ async function run(mode: Mode, via?: "fallback") {
   }
 }
 
+/**
+ * The sample chat's reading for the question asked, made in advance: shown
+ * after a wait like the real one, without asking the cloud, so trying it
+ * costs nothing and leaves the visitor's free preview for their own chat.
+ * It is the full reading, the clearest way to show what one holds.
+ */
+async function showSampleReading(via?: "fallback") {
+  const chat = messages.value;
+  const key = sampleReadingKey(question.value, me.value);
+  const reading = key ? sampleReadings.value?.readings[key] : undefined;
+  if (!chat || !reading) return;
+  running.value = "cloud";
+  progress.value = null;
+  errorKey.value = null;
+  errorMode.value = null;
+  const from = via ?? source;
+  const startedAt = performance.now();
+  analyticsTools.aiStarted("sample", question.value ?? "none", from);
+  nextTick(() =>
+    document
+      .querySelector(".ai-progress")
+      ?.scrollIntoView({ behavior: "smooth", block: "center" }),
+  );
+  await new Promise((resolve) => setTimeout(resolve, SAMPLE_READING_MS));
+  running.value = null;
+  if (unmounted || messages.value !== chat) return;
+  const { digest } = buildDigest(chat, CLOUD_TRANSCRIPT_CHARS);
+  reportQuestion.value = askedQuestion.value;
+  insights.value = tidyInsights(structuredClone(reading));
+  coverage.value = {
+    total: digest.totalMessages,
+    from: digest.firstDate,
+    to: digest.lastDate,
+    read: countLines(digest.transcript),
+    parts: 1,
+  };
+  ranOn.value = "cloud";
+  locked.value = null;
+  saveReport();
+  analyticsTools.aiFinished("sample", performance.now() - startedAt, from);
+  await nextTick();
+  showWhereNext();
+}
+
+/** Off to the dropzone, where the sample makes way for the visitor's chat. */
+function tryOwnChat() {
+  analyticsTools.ctaClick("ai_sample", "scroll_to_dropzone");
+  document
+    .getElementById("dropzone-slot")
+    ?.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
 /** What the local card says instead of its button, if this device can't. */
 const unavailableText = computed(() => {
   switch (localUnavailable.value) {
@@ -1113,9 +1229,11 @@ const modes = computed(() => [
     ],
     crashed: "",
     offerCloud: false,
-    button: isSubscriptionValid.value
-      ? t("toolsAi.cloudButton")
-      : t("toolsAi.cloudPreviewButton"),
+    button: sampleReadings.value
+      ? t("toolsAi.sampleButton")
+      : isSubscriptionValid.value
+        ? t("toolsAi.cloudButton")
+        : t("toolsAi.cloudPreviewButton"),
     unavailable: "",
   },
   {
@@ -1321,6 +1439,11 @@ useToolSchema({
     font-size: 0.82rem;
     color: rgba(29, 29, 31, 0.6);
   }
+
+  &__sample {
+    font-size: 0.85rem;
+    color: #047857;
+  }
 }
 
 .sent-preview {
@@ -1510,5 +1633,16 @@ useToolSchema({
   text-align: left;
   display: grid;
   gap: 1.5rem;
+}
+
+.sample-note {
+  display: grid;
+  gap: 0.8rem;
+  justify-items: start;
+  padding: 1rem 1.1rem;
+  border-radius: 14px;
+  background: #ecfdf5;
+  color: #1d1d1f;
+  line-height: 1.5;
 }
 </style>

@@ -271,8 +271,11 @@ export const analyticsEcommerce = {
   },
 };
 
-/** Where an AI analysis ran; "preview" is the free, shortened cloud run. */
-type AiMode = "local" | "cloud" | "preview";
+/**
+ * Where an AI analysis ran; "preview" is the free, shortened cloud run, and
+ * "sample" the sample chat's reading, made in advance (utils/ai/sample.ts).
+ */
+type AiMode = "local" | "cloud" | "preview" | "sample";
 
 /**
  * Standalone Tools (/tools/* and ToolDropzone)
@@ -373,7 +376,7 @@ export const analyticsTools = {
   },
 
   /** A follow-up sent to the AI coach after a report. Never its text. */
-  aiCoachMessage(mode: "local" | "cloud", kind: "ask" | "reply") {
+  aiCoachMessage(mode: "local" | "cloud" | "sample", kind: "ask" | "reply") {
     trackEvent("ai_coach_message", { ai_mode: mode, coach_kind: kind });
   },
 

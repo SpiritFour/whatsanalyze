@@ -55,7 +55,7 @@ const parse = async (text) =>
   );
 
 const sampleChat = () =>
-  parse(fs.readFileSync("static/chat_example.txt", "utf8"));
+  parse(fs.readFileSync("tests/fixtures/chat_example.txt", "utf8"));
 
 /** A synthetic chat: one message every `everyDays` days from `start`, in turns. */
 const syntheticChat = ({

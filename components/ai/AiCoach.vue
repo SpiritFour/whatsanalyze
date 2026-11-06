@@ -40,10 +40,28 @@
       {{ t(`toolsAi.error_${errorKey}`) }}
     </p>
 
-    <p v-if="needsMe" class="coach__hint">
+    <p v-if="needsMe && !sample" class="coach__hint">
       {{ t("toolsAi.coachPickMe") }}
     </p>
-    <form class="coach__form" @submit.prevent="send">
+    <!-- The sample chat: its answers were made in advance, so these instead
+         of a box anything could be typed into -->
+    <div v-if="sample" class="coach__suggestions">
+      <p class="coach__text">{{ t("toolsAi.coachSampleIntro") }}</p>
+      <button
+        v-for="turn in sampleTurns"
+        :key="turn.id"
+        type="button"
+        class="coach__suggestion"
+        :disabled="thinking || asked.has(turn.id)"
+        @click="askSample(turn)"
+      >
+        <span v-if="turn.kind === 'reply' && turn.me" class="mono-label">
+          {{ t("toolsAi.coachSampleDraft", { name: turn.me }) }}
+        </span>
+        {{ turn.prompt }}
+      </button>
+    </div>
+    <form v-else class="coach__form" @submit.prevent="send">
       <textarea
         v-model="draft"
         class="coach__input"
@@ -87,6 +105,7 @@ import {
   type LocalModel,
 } from "~/utils/ai/localModel";
 import { coachInCloud, type CloudAllowance } from "~/utils/ai/cloudModel";
+import { SAMPLE_COACH_MS, type SampleCoachTurn } from "~/utils/ai/sample";
 import { callableErrorCode } from "~/utils/ai/cloudErrors";
 import {
   CLOUD_TRANSCRIPT_CHARS,
@@ -116,6 +135,11 @@ const props = defineProps<{
    * of the few free ones a visitor gets a day.
    */
   free?: boolean;
+  /**
+   * The sample chat's questions and drafts, answered in advance: offered to
+   * try instead of the text box, and shown without asking the AI again.
+   */
+  sample?: SampleCoachTurn[] | null;
   /** Which kind is picked to start with: reply help, for "What should I reply?". */
   initialKind?: CoachKind;
 }>();
@@ -138,6 +162,7 @@ const needsMe = computed(
 /** Free replies left today, once the first free reply has said. */
 const freeLeft = ref<number | null>(null);
 const note = computed(() => {
+  if (props.sample) return t("toolsAi.coachNoteSample");
   if (props.mode !== "cloud") return t("toolsAi.coachNoteLocal");
   if (!props.free) return t("toolsAi.coachNoteCloud");
   return freeLeft.value === null
@@ -180,6 +205,25 @@ const anonymized = computed(() =>
       : localCoachChars(props.localModel!),
   ),
 );
+
+/** The sample's suggestions for the kind picked, and which were tried. */
+const sampleTurns = computed(
+  () => props.sample?.filter((turn) => turn.kind === kind.value) ?? [],
+);
+const asked = ref(new Set<string>());
+
+/** A sample suggestion: asked, a moment to think, its answer. */
+async function askSample(turn: SampleCoachTurn) {
+  if (thinking.value) return;
+  errorKey.value = null;
+  analyticsTools.aiCoachMessage("sample", turn.kind);
+  asked.value.add(turn.id);
+  const index = turns.value.push({ shown: turn.prompt, sent: "" }) - 1;
+  thinking.value = true;
+  await new Promise((resolve) => setTimeout(resolve, SAMPLE_COACH_MS));
+  thinking.value = false;
+  turns.value[index].answer = turn.reply;
+}
 
 async function send() {
   const text = draft.value.trim();
@@ -369,9 +413,25 @@ async function send() {
     color: #b91c1c;
   }
 
-  &__form {
+  &__form,
+  &__suggestions {
     display: grid;
     gap: 0.6rem;
+  }
+
+  &__suggestion {
+    display: grid;
+    gap: 0.2rem;
+    text-align: left;
+    border: 1px solid rgba(29, 29, 31, 0.18);
+    border-radius: 14px;
+    padding: 0.7rem 0.9rem;
+    background: #fff;
+    color: #1d1d1f;
+
+    &:disabled {
+      opacity: 0.5;
+    }
   }
 
   &__input {

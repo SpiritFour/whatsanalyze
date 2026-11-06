@@ -154,6 +154,7 @@ import {
   type ChatSource,
 } from "~/composables/useChatTool";
 import { participantMessages } from "~/utils/utils";
+import { SAMPLE_CHAT_NAME, SAMPLE_CHAT_URL } from "~/utils/ai/sample";
 import { cleanPath } from "~/utils/cleanPath";
 import { useLibrary, type OpenedChat } from "~/composables/useLibrary";
 import { analyzeInactivity } from "~/utils/inactivity";
@@ -189,6 +190,8 @@ const emit = defineEmits<{
       messages: ChatMessage[];
       attachments: ChatAttachment[];
       source?: ChatSource;
+      /** The sample chat, whose AI readings were made in advance. */
+      sample?: boolean;
     },
   ): void;
   (e: "reset"): void;
@@ -364,6 +367,7 @@ function showChat(
     messages,
     attachments,
     source,
+    ...(sample ? { sample } : {}),
   });
 }
 
@@ -490,12 +494,12 @@ async function loadSampleChat() {
   errorMessage.value = null;
   analyticsTools.sampleLoaded(props.toolType);
   try {
-    const response = await fetch("/chat_example.txt");
+    const response = await fetch(SAMPLE_CHAT_URL);
     if (!response.ok) {
       throw new Error("Failed to load sample chat file.");
     }
     const text = await response.text();
-    await processInput(text, "Sample WhatsApp Chat (Jane & John)", true, true);
+    await processInput(text, SAMPLE_CHAT_NAME, true, true);
   } catch (err) {
     const msg =
       err instanceof Error ? err.message : "Failed to load sample chat.";

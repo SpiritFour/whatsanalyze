@@ -1126,6 +1126,19 @@ export const messages = {
         "{n} free cloud replies left today. Pro gives you more.",
       coachPickMe:
         "Pick which one is you at the top, so the reply is written from your side.",
+      sampleButton: "Show the AI reading",
+      sampleNote:
+        "Sample chat: its AI readings were made in advance, so this is free and your free preview stays for your own chat.",
+      sampleCustom:
+        "Your own question needs your own chat. With the sample, pick one of the questions above.",
+      progressSample: "The AI is reading the sample chat…",
+      sampleReport:
+        "This is the sample chat's full reading, made once in advance with the same AI. Your own chat gets its own: the first is a free preview, and the full report comes with the subscription.",
+      sampleOwnChat: "Try it with my own chat",
+      coachSampleIntro: "Try one of these:",
+      coachSampleDraft: "Draft from {name}",
+      coachNoteSample:
+        "Sample chat: these answers were made in advance. With your own chat, you can ask anything.",
       error_coach_free_used:
         "You have used today's free replies. Come back tomorrow, or get Pro for more replies each day.",
       error_coach_local_unchanged:
@@ -3111,6 +3124,19 @@ export const messages = {
         "Heute noch {n} kostenlose Cloud-Antworten. Mit Pro bekommst du mehr.",
       coachPickMe:
         "Wähle oben aus, wer du bist, damit die Antwort aus deiner Sicht geschrieben wird.",
+      sampleButton: "KI-Auswertung zeigen",
+      sampleNote:
+        "Beispiel-Chat: Seine KI-Auswertungen wurden vorab erstellt. Das ist kostenlos, und deine kostenlose Vorschau bleibt für deinen eigenen Chat.",
+      sampleCustom:
+        "Eine eigene Frage braucht deinen eigenen Chat. Wähle beim Beispiel eine der Fragen oben.",
+      progressSample: "Die KI liest den Beispiel-Chat …",
+      sampleReport:
+        "Das ist die vollständige Auswertung des Beispiel-Chats, einmal vorab mit derselben KI erstellt. Dein eigener Chat bekommt seine eigene: Die erste ist eine kostenlose Vorschau, den vollständigen Bericht gibt es mit dem Abo.",
+      sampleOwnChat: "Mit meinem eigenen Chat ausprobieren",
+      coachSampleIntro: "Probier eins davon:",
+      coachSampleDraft: "Entwurf von {name}",
+      coachNoteSample:
+        "Beispiel-Chat: Diese Antworten wurden vorab erstellt. Mit deinem eigenen Chat kannst du alles fragen.",
       error_coach_free_used:
         "Deine kostenlosen Antworten für heute sind aufgebraucht. Komm morgen wieder oder hol dir Pro für mehr Antworten pro Tag.",
       error_coach_local_unchanged:
@@ -5102,6 +5128,19 @@ export const messages = {
         "Hoy te quedan {n} respuestas gratis en la nube. Con Pro tienes más.",
       coachPickMe:
         "Elige arriba quién eres, para que la respuesta se escriba desde tu lado.",
+      sampleButton: "Ver el análisis de la IA",
+      sampleNote:
+        "Chat de ejemplo: sus análisis de IA se hicieron de antemano, así que es gratis y tu vista previa gratuita queda para tu propio chat.",
+      sampleCustom:
+        "Tu propia pregunta necesita tu propio chat. Con el ejemplo, elige una de las preguntas de arriba.",
+      progressSample: "La IA está leyendo el chat de ejemplo…",
+      sampleReport:
+        "Este es el análisis completo del chat de ejemplo, hecho una vez de antemano con la misma IA. Tu propio chat tendrá el suyo: el primero es una vista previa gratuita y el informe completo viene con la suscripción.",
+      sampleOwnChat: "Probar con mi propio chat",
+      coachSampleIntro: "Prueba uno de estos:",
+      coachSampleDraft: "Borrador de {name}",
+      coachNoteSample:
+        "Chat de ejemplo: estas respuestas se prepararon de antemano. Con tu propio chat puedes preguntar lo que quieras.",
       error_coach_free_used:
         "Ya has usado las respuestas gratis de hoy. Vuelve mañana o hazte Pro para tener más cada día.",
       error_coach_local_unchanged:
@@ -6829,6 +6868,19 @@ export const messages = {
         "Hoje restam {n} respostas grátis na nuvem. Com o Pro, você recebe mais.",
       coachPickMe:
         "Escolha lá em cima quem é você, para que a resposta seja escrita do seu lado.",
+      sampleButton: "Ver a análise da IA",
+      sampleNote:
+        "Conversa de exemplo: as análises da IA foram feitas antecipadamente, por isso é grátis e a sua pré-visualização grátis fica para a sua própria conversa.",
+      sampleCustom:
+        "Uma pergunta sua precisa da sua própria conversa. Com o exemplo, escolha uma das perguntas acima.",
+      progressSample: "A IA está a ler a conversa de exemplo…",
+      sampleReport:
+        "Esta é a análise completa da conversa de exemplo, feita uma vez antecipadamente com a mesma IA. A sua própria conversa terá a dela: a primeira é uma pré-visualização grátis e o relatório completo vem com a subscrição.",
+      sampleOwnChat: "Experimentar com a minha conversa",
+      coachSampleIntro: "Experimente uma destas:",
+      coachSampleDraft: "Rascunho de {name}",
+      coachNoteSample:
+        "Conversa de exemplo: estas respostas foram preparadas antecipadamente. Com a sua própria conversa, pode perguntar o que quiser.",
       error_coach_free_used:
         "Você já usou as respostas grátis de hoje. Volte amanhã ou assine o Pro para ter mais respostas por dia.",
       error_coach_local_unchanged:
@@ -8827,6 +8879,19 @@ export const messages = {
         "Encore {n} réponses cloud gratuites aujourd’hui. Avec Pro, tu en as plus.",
       coachPickMe:
         "Choisis en haut qui tu es, pour que la réponse soit écrite de ton point de vue.",
+      sampleButton: "Voir l'analyse de l'IA",
+      sampleNote:
+        "Conversation d'exemple : ses analyses IA ont été faites à l'avance, c'est donc gratuit et votre aperçu gratuit reste pour votre propre conversation.",
+      sampleCustom:
+        "Votre propre question demande votre propre conversation. Avec l'exemple, choisissez l'une des questions ci-dessus.",
+      progressSample: "L'IA lit la conversation d'exemple…",
+      sampleReport:
+        "Voici l'analyse complète de la conversation d'exemple, faite une seule fois à l'avance avec la même IA. Votre propre conversation aura la sienne : la première est un aperçu gratuit, et le rapport complet est inclus dans l'abonnement.",
+      sampleOwnChat: "Essayer avec ma propre conversation",
+      coachSampleIntro: "Essaie l'une de celles-ci :",
+      coachSampleDraft: "Brouillon de {name}",
+      coachNoteSample:
+        "Conversation d'exemple : ces réponses ont été préparées à l'avance. Avec ta propre conversation, tu peux tout demander.",
       error_coach_free_used:
         "Tu as utilisé tes réponses gratuites du jour. Reviens demain, ou passe à Pro pour en avoir plus chaque jour.",
       error_coach_local_unchanged:
@@ -10816,6 +10881,19 @@ export const messages = {
         "Oggi ti restano {n} risposte cloud gratuite. Con Pro ne hai di più.",
       coachPickMe:
         "Scegli in alto chi sei, così la risposta viene scritta dal tuo punto di vista.",
+      sampleButton: "Mostra l'analisi dell'IA",
+      sampleNote:
+        "Chat di esempio: le sue analisi IA sono state fatte in anticipo, quindi è gratis e la tua anteprima gratuita resta per la tua chat.",
+      sampleCustom:
+        "Una tua domanda richiede la tua chat. Con l'esempio, scegli una delle domande qui sopra.",
+      progressSample: "L'IA sta leggendo la chat di esempio…",
+      sampleReport:
+        "Questa è l'analisi completa della chat di esempio, fatta una volta in anticipo con la stessa IA. La tua chat avrà la sua: la prima è un'anteprima gratuita e il report completo è incluso nell'abbonamento.",
+      sampleOwnChat: "Prova con la mia chat",
+      coachSampleIntro: "Provane una:",
+      coachSampleDraft: "Bozza di {name}",
+      coachNoteSample:
+        "Chat di esempio: queste risposte sono state preparate in anticipo. Con la tua chat puoi chiedere qualsiasi cosa.",
       error_coach_free_used:
         "Hai usato le risposte gratuite di oggi. Torna domani, o passa a Pro per averne di più ogni giorno.",
       error_coach_local_unchanged:

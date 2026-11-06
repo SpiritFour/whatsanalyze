@@ -129,7 +129,7 @@ describe("buildDigest", () => {
   });
 
   test("the sample chat comes out within budget with no real names", async () => {
-    const text = fs.readFileSync("static/chat_example.txt", "utf8");
+    const text = fs.readFileSync("tests/fixtures/chat_example.txt", "utf8");
     const messages = markSystemMessages(await parseString(text)).map((m) => ({
       ...m,
       author: typeof m.author === "string" ? m.author.trim() : m.author,

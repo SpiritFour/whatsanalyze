@@ -1,7 +1,7 @@
 const path = require("path");
 const base = require("@playwright/test");
 
-const EXAMPLE_CHAT = path.resolve(__dirname, "../../static/chat_example.txt");
+const EXAMPLE_CHAT = path.resolve(__dirname, "../fixtures/chat_example.txt");
 
 /**
  * Analytics and remote config, which every page load reaches for and which no
