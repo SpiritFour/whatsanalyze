@@ -92,7 +92,7 @@ import { rememberLocalAiFailure } from "~/utils/library/device";
 import { localErrorKey } from "~/utils/ai/localErrors";
 import { analyticsTools } from "~/composables/useAnalytics";
 import { useSubscriptionStore } from "~/stores/subscription";
-import { buildDigest, restoreNames } from "~/utils/ai/digest";
+import { buildDigest, readerText, restoreNames } from "~/utils/ai/digest";
 import {
   isSafetyReply,
   isUnchangedRewrite,
@@ -109,6 +109,7 @@ import { SAMPLE_COACH_MS, type SampleCoachTurn } from "~/utils/ai/sample";
 import { callableErrorCode } from "~/utils/ai/cloudErrors";
 import {
   CLOUD_TRANSCRIPT_CHARS,
+  MAX_BACKGROUND_CHARS,
   MAX_COACH_CHARS,
   MAX_COACH_REPLY_CHARS,
   type AiLanguage,
@@ -130,6 +131,11 @@ const props = defineProps<{
   me: string | null;
   /** The report's summary, with real names; anonymized before sending. */
   summary: string;
+  /**
+   * What the reader said the chat doesn't show, as typed for the report:
+   * the coach is told the same, anonymized the same way.
+   */
+  background?: string;
   /**
    * After a free cloud preview: no subscription, so each cloud reply is one
    * of the few free ones a visitor gets a day.
@@ -216,7 +222,7 @@ const asked = ref(new Set<string>());
 async function askSample(turn: SampleCoachTurn) {
   if (thinking.value) return;
   errorKey.value = null;
-  analyticsTools.aiCoachMessage("sample", turn.kind);
+  analyticsTools.aiCoachMessage("sample", turn.kind, false);
   asked.value.add(turn.id);
   const index = turns.value.push({ shown: turn.prompt, sent: "" }) - 1;
   thinking.value = true;
@@ -229,7 +235,11 @@ async function send() {
   const text = draft.value.trim();
   if (!text || thinking.value) return;
   errorKey.value = null;
-  analyticsTools.aiCoachMessage(props.mode, kind.value);
+  analyticsTools.aiCoachMessage(
+    props.mode,
+    kind.value,
+    !!props.background?.trim(),
+  );
 
   if (needsSupport(text)) {
     turns.value.push({
@@ -261,6 +271,7 @@ async function send() {
   const options = {
     me: Object.keys(names).find((alias) => names[alias] === props.me),
     context: anonymize(props.summary).slice(0, MAX_COACH_REPLY_CHARS),
+    background: readerText(anonymize, props.background, MAX_BACKGROUND_CHARS),
   };
 
   thinking.value = true;

@@ -320,13 +320,22 @@ export const analyticsTools = {
     });
   },
 
-  /** An AI analysis was started, on the device or in the cloud. */
-  aiStarted(mode: AiMode, question: string, source: AiSource) {
-    // The preset's id or "custom", never what was typed.
+  /**
+   * An AI analysis was started, on the device or in the cloud.
+   * `background`: whether the reader said what the chat doesn't show.
+   */
+  aiStarted(
+    mode: AiMode,
+    question: string,
+    source: AiSource,
+    background: boolean,
+  ) {
+    // The preset's id or "custom", never what was typed; nor the background.
     trackEvent("ai_analysis_started", {
       ai_mode: mode,
       ai_question: question,
       source,
+      ai_background: background,
     });
   },
 
@@ -375,9 +384,20 @@ export const analyticsTools = {
     });
   },
 
-  /** A follow-up sent to the AI coach after a report. Never its text. */
-  aiCoachMessage(mode: "local" | "cloud" | "sample", kind: "ask" | "reply") {
-    trackEvent("ai_coach_message", { ai_mode: mode, coach_kind: kind });
+  /**
+   * A follow-up sent to the AI coach after a report. Never its text, nor the
+   * reader's background: only whether there was one.
+   */
+  aiCoachMessage(
+    mode: "local" | "cloud" | "sample",
+    kind: "ask" | "reply",
+    background: boolean,
+  ) {
+    trackEvent("ai_coach_message", {
+      ai_mode: mode,
+      coach_kind: kind,
+      ai_background: background,
+    });
   },
 
   /** The coach showed support resources instead of an answer. */

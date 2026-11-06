@@ -3,6 +3,7 @@ import { parseString } from "whatsapp-chat-parser";
 import { markSystemMessages } from "../systemMessages";
 import {
   buildDigest,
+  readerText,
   restoreNames,
   sample,
   splitParts,
@@ -139,6 +140,37 @@ describe("buildDigest", () => {
     for (const real of Object.values(names)) {
       expect(digest.transcript).not.toContain(real);
     }
+  });
+});
+
+describe("readerText", () => {
+  const { anonymize } = buildDigest(
+    [msg("Anna Schmidt", "x", 1), msg("Tom", "y", 2)],
+    10_000,
+  );
+
+  test("anonymizes what the reader adds like the chat", () => {
+    expect(
+      readerText(
+        anonymize,
+        "Anna is my sister.\nWe fell out in July, call her on +49 170 1234567",
+        500,
+      ),
+    ).toBe("Person A is my sister. We fell out in July, call her on [phone]");
+  });
+
+  test("caps it after the names are replaced, not before", () => {
+    // 60 characters typed; "Anna" comes out as the longer "Person A".
+    const text = readerText(anonymize, "Anna ".repeat(12), 50);
+    expect(text).toHaveLength(50);
+    expect(text).toMatch(/^Person A Person A/);
+    expect(text).not.toContain("Anna");
+  });
+
+  test("sends nothing for an empty box", () => {
+    expect(readerText(anonymize, "   \n ", 500)).toBeUndefined();
+    expect(readerText(anonymize, "", 500)).toBeUndefined();
+    expect(readerText(anonymize, undefined, 500)).toBeUndefined();
   });
 });
 

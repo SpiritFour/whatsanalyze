@@ -21,6 +21,7 @@ import {
   AI_LANGUAGES,
   CLOUD_TRANSCRIPT_CHARS,
   PREVIEW_TRANSCRIPT_CHARS,
+  MAX_BACKGROUND_CHARS,
   MAX_COACH_CHARS,
   MAX_COACH_REPLY_CHARS,
   MAX_COACH_TURNS,
@@ -124,6 +125,8 @@ const requestSchema = z.object({
     z.object({
       question: optional(z.string().max(MAX_QUESTION_CHARS)),
       me: optional(z.string().max(20)),
+      // What the reader says the chat doesn't show, anonymized like it.
+      background: optional(z.string().max(MAX_BACKGROUND_CHARS)),
     }),
   ),
 });
@@ -385,6 +388,7 @@ const coachRequestSchema = z.object({
   kind: z.enum(["ask", "reply"]),
   me: optional(z.string().max(20)),
   context: optional(z.string().max(MAX_COACH_REPLY_CHARS)),
+  background: optional(z.string().max(MAX_BACKGROUND_CHARS)),
   history: z
     .array(
       z.object({
@@ -417,8 +421,16 @@ export const coachChatAi = onCall(
     if (!parsed.success) {
       throw new HttpsError("invalid-argument", "Malformed coach request");
     }
-    const { email, subscriptionId, language, digest, kind, me, context } =
-      parsed.data;
+    const {
+      email,
+      subscriptionId,
+      language,
+      digest,
+      kind,
+      me,
+      context,
+      background,
+    } = parsed.data;
     const free = !email || !subscriptionId;
 
     let remaining: number;
@@ -457,7 +469,7 @@ export const coachChatAi = onCall(
         language,
         kind,
         parsed.data.history,
-        { me, context },
+        { me, context, background },
       );
       const { text, usage } = await generateText({
         model: languageModel(aiModel.value(), aiApiKey.value()),
