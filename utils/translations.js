@@ -885,6 +885,8 @@ export const messages = {
       dropSubtitle: "Accepts exported .txt or .zip chat files",
       selectFile: "Select Chat File",
       trySample: "Try With Sample Chat",
+      sampleFailed:
+        "Couldn't load the sample chat. Check your connection and try again.",
       analyzingTitle: "Analyzing Conversation Gaps...",
       analyzingSubtitle:
         "Computing timestamps, response latencies, and participant inactivity",
@@ -2887,6 +2889,8 @@ export const messages = {
       dropSubtitle: ".txt- oder .zip",
       selectFile: "Chat-Datei auswählen",
       trySample: "Mit Beispiel-Chat testen",
+      sampleFailed:
+        "Der Beispiel-Chat konnte nicht geladen werden. Prüfe deine Verbindung und versuch es noch einmal.",
       analyzingTitle: "Analysiere Gesprächspausen...",
       analyzingSubtitle:
         "Berechne Zeitstempel, Antwortzeiten und Aktivitätsmuster",
@@ -4892,6 +4896,8 @@ export const messages = {
       dropSubtitle: "Acepta archivos de chat exportados en .txt o .zip",
       selectFile: "Seleccionar archivo de chat",
       trySample: "Probar con chat de ejemplo",
+      sampleFailed:
+        "No se ha podido cargar el chat de ejemplo. Comprueba tu conexión e inténtalo de nuevo.",
       analyzingTitle: "Analizando pausas de la conversación...",
       analyzingSubtitle:
         "Calculando marcas de tiempo, latencias y patrones de actividad",
@@ -6638,6 +6644,8 @@ export const messages = {
       dropSubtitle: "Aceita arquivos de chat em .txt ou .zip",
       selectFile: "Selecionar arquivo de conversa",
       trySample: "Testar com conversa de exemplo",
+      sampleFailed:
+        "Não foi possível carregar a conversa de exemplo. Verifique a sua ligação e tente novamente.",
       analyzingTitle: "Analisando intervalos da conversa...",
       analyzingSubtitle:
         "Calculando horários, tempos de resposta e padrões de inatividade",
@@ -8651,6 +8659,8 @@ export const messages = {
       dropSubtitle: "Prend en charge les fichiers de chat en .txt ou .zip",
       selectFile: "Sélectionner le fichier",
       trySample: "Essayer avec un exemple",
+      sampleFailed:
+        "Impossible de charger l'exemple. Vérifiez votre connexion et réessayez.",
       analyzingTitle: "Analyse des pauses de conversation...",
       analyzingSubtitle:
         "Calcul des horodatages, temps de réponse et temps d'inactivité",
@@ -10662,6 +10672,8 @@ export const messages = {
       dropSubtitle: "Accetta file di chat esportati in .txt o .zip",
       selectFile: "Seleziona file di chat",
       trySample: "Prova con chat di esempio",
+      sampleFailed:
+        "Impossibile caricare la chat di esempio. Controlla la connessione e riprova.",
       analyzingTitle: "Analisi delle pause nella conversazione...",
       analyzingSubtitle: "Calcolo di timestamp, tempi di risposta e inattività",
       switchFile: "Cambia file",

@@ -159,3 +159,24 @@ test("a question of one's own needs one's own chat", async ({ page }) => {
   ).toBeDisabled();
   expect(aiCalls).toHaveLength(0);
 });
+
+test("a sample that can't load says so plainly", async ({ page }) => {
+  // Offline, or the server gone: the browser's own "Load failed" told
+  // nobody anything.
+  await page.route("**/sample/chat.txt", (route) => route.abort());
+  await page.goto("/tools/ai-chat-analyzer/");
+  await page.getByRole("button", { name: "Try With Sample Chat" }).click();
+  await expect(
+    page.getByText(
+      "Couldn't load the sample chat. Check your connection and try again.",
+    ),
+  ).toBeVisible();
+});
+
+test("the sample keeps its name after a reload", async ({ page }) => {
+  await openSample(page);
+  await page.reload();
+  await expect(
+    page.getByText("Sample WhatsApp Chat (Emma & Leo)"),
+  ).toBeVisible();
+});

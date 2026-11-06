@@ -278,7 +278,11 @@ async function processInput(
     // Kept for the tab, like the home page does: a full page load (the
     // round trip through Stripe Checkout, a reload) used to lose the chat on
     // every /tools page while the analyzer still had it.
-    saveChatSession(sample ? { ...parsed, sample } : parsed);
+    // The sample keeps its name across a reload; a real export's file name
+    // (often the other person's) stays out of storage.
+    saveChatSession(
+      sample ? { ...parsed, sample, sourceName: fileName } : parsed,
+    );
     // The court PDF hashes every attachment, so its pages keep the export
     // itself too; the sample chat replaces whatever was kept.
     if (props.toolType === "court") {
@@ -498,15 +502,18 @@ async function loadSampleChat() {
   try {
     const response = await fetch(SAMPLE_CHAT_URL);
     if (!response.ok) {
-      throw new Error("Failed to load sample chat file.");
+      throw new Error(`sample_http_${response.status}`);
     }
     const text = await response.text();
     await processInput(text, SAMPLE_CHAT_NAME, true, true);
   } catch (err) {
-    const msg =
-      err instanceof Error ? err.message : "Failed to load sample chat.";
-    errorMessage.value = msg;
-    analyticsTools.error(props.toolType, msg);
+    // The browser's own words for a request that failed ("Load failed",
+    // "Failed to fetch") tell a visitor nothing; say what happened instead.
+    errorMessage.value = t("toolDropzone.sampleFailed");
+    analyticsTools.error(
+      props.toolType,
+      err instanceof Error ? err.message : "sample_failed",
+    );
     loading.value = false;
   }
 }
