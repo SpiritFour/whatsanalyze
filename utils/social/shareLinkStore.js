@@ -1,4 +1,5 @@
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { getApp } from "firebase/app";
+import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore/lite";
 import {
   ChatTooLargeError,
   SHARE_SIZE_LIMIT,
@@ -58,6 +59,15 @@ async function decryptBytes(data, { iv, key }) {
 }
 
 /**
+ * Firestore's lite SDK: one write and one read, each a plain HTTPS request,
+ * where the full SDK opens a streaming channel first. That is less to wait
+ * for on a phone opening a link, and a request the e2e tests can answer
+ * (tests/e2e/fixtures.js) without a Firestore behind them. Same app, same
+ * project, same security rules.
+ */
+const firestore = () => getFirestore(getApp());
+
+/**
  * The document id is 16 random bytes, written as base64url both in the link
  * and as the Firestore path, so the id travels as 16 bytes of the token rather
  * than as a 36 character uuid string.
@@ -73,18 +83,14 @@ export async function storeSharedAnalysis(snapshot) {
   if (data.length > SHARE_SIZE_LIMIT) throw new ChatTooLargeError(data.length);
 
   const id = crypto.getRandomValues(new Uint8Array(16));
-  await setDoc(doc(useNuxtApp().$firestore, "data", documentIdFor(id)), {
-    data,
-  });
+  await setDoc(doc(firestore(), "data", documentIdFor(id)), { data });
 
   return encodeShareToken({ id, ...encryptedKey });
 }
 
 async function loadSharedBytes(fragment) {
   const { id, iv, key } = decodeShareToken(fragment);
-  const stored = await getDoc(
-    doc(useNuxtApp().$firestore, "data", documentIdFor(id)),
-  );
+  const stored = await getDoc(doc(firestore(), "data", documentIdFor(id)));
   if (!stored.exists()) throw new Error("No such share link");
   return decryptBytes(stored.data().data, { iv, key });
 }

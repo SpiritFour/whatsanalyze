@@ -25,9 +25,10 @@ declare global {
 
 /**
  * Where an AI analysis was asked for: the AI tool page, the analyzer's
- * results, or the cloud offered after the on-device AI couldn't run.
+ * results, the cloud offered after the on-device AI couldn't run, or a
+ * reading someone sent (pages/s.vue).
  */
-export type AiSource = "tool" | "results" | "fallback";
+export type AiSource = "tool" | "results" | "fallback" | "shared";
 
 export interface EventParams {
   [key: string]: string | number | boolean | null | undefined;
@@ -385,6 +386,29 @@ export const analyticsTools = {
     trackEvent("ai_coach_safety", { source });
   },
 
+  /*
+   * A reading sent to the other person in the chat (utils/ai/sendReading.js):
+   * previewed, sent through WhatsApp, opened by them, and their own reading
+   * after it. `question` is the preset's id or "none", the only things that
+   * can be sent. Never names, the reading or the link.
+   */
+  aiSharePreviewed(question: string) {
+    trackEvent("ai_share_previewed", { ai_question: question });
+  },
+
+  aiShareSent(question: string) {
+    trackEvent("ai_share_sent", { ai_question: question, method: "whatsapp" });
+  },
+
+  aiShareOpened(question: string) {
+    trackEvent("ai_share_opened", { ai_question: question });
+  },
+
+  /** Whoever opened a sent reading finished one of their own chat. */
+  aiShareConverted(mode: AiMode, question: string) {
+    trackEvent("ai_share_converted", { ai_mode: mode, ai_question: question });
+  },
+
   error(toolName: string, errorCode: string) {
     trackEvent("tool_error", {
       tool_name: toolName,
@@ -401,6 +425,7 @@ export const analyticsTools = {
       | "ai"
       | "scroll_to_dropzone"
       | "hero_dropzone"
+      | "sample"
       | "other",
   ) {
     trackEvent("tool_cta_click", {
