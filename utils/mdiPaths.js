@@ -2,7 +2,7 @@
 //
 // Vuetify's `mdi` icon set is the Material Design webfont: 300 KB of
 // render-blocking CSS declaring all 7,462 icon classes, plus a 393 KB woff2,
-// for the 77 icons below. plugins/vuetify-icons.js swaps it for an SVG set
+// for the 81 icons below. plugins/vuetify-icons.js swaps it for an SVG set
 // that reads this map, so `<v-icon>mdi-...</v-icon>` keeps working unchanged.
 //
 // Adding an icon to a template means adding it here. scripts/check-mdi-icons.js
@@ -49,6 +49,7 @@ import {
   mdiFormatListNumbered,
   mdiFormatQuoteOpen,
   mdiGithub,
+  mdiHeartHalfFull,
   mdiHeartOutline,
   mdiHomeHeart,
   mdiIncognito,
@@ -57,11 +58,14 @@ import {
   mdiLockOpenOutline,
   mdiLockOutline,
   mdiMenu,
+  mdiMessageArrowRightOutline,
+  mdiMessageReplyTextOutline,
   mdiMessageTextOutline,
   mdiPartyPopper,
   mdiPassport,
   mdiPlayCircleOutline,
   mdiPlus,
+  mdiRepeat,
   mdiReplyAllOutline,
   mdiRing,
   mdiScaleBalance,
@@ -132,6 +136,7 @@ export const mdiPaths = {
   "mdi-format-list-numbered": mdiFormatListNumbered,
   "mdi-format-quote-open": mdiFormatQuoteOpen,
   "mdi-github": mdiGithub,
+  "mdi-heart-half-full": mdiHeartHalfFull,
   "mdi-heart-outline": mdiHeartOutline,
   "mdi-home-heart": mdiHomeHeart,
   "mdi-incognito": mdiIncognito,
@@ -140,11 +145,14 @@ export const mdiPaths = {
   "mdi-lock-open-outline": mdiLockOpenOutline,
   "mdi-lock-outline": mdiLockOutline,
   "mdi-menu": mdiMenu,
+  "mdi-message-arrow-right-outline": mdiMessageArrowRightOutline,
+  "mdi-message-reply-text-outline": mdiMessageReplyTextOutline,
   "mdi-message-text-outline": mdiMessageTextOutline,
   "mdi-party-popper": mdiPartyPopper,
   "mdi-passport": mdiPassport,
   "mdi-play-circle-outline": mdiPlayCircleOutline,
   "mdi-plus": mdiPlus,
+  "mdi-repeat": mdiRepeat,
   "mdi-reply-all-outline": mdiReplyAllOutline,
   "mdi-ring": mdiRing,
   "mdi-scale-balance": mdiScaleBalance,

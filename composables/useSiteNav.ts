@@ -84,10 +84,48 @@ export function useToolsNav() {
     },
   ]);
 
+  // The situation pages: each starts from something a person is going through
+  // and leads to the tool that answers it.
+  const situationTools = computed<SiteNavLink[]>(() => [
+    {
+      to: localePath("/tools/same-fight-again"),
+      title: t("situationSameFight.navLabel"),
+      text: t("toolsHub.toolSameFightText"),
+      icon: "mdi-repeat",
+      color: "#fb923c",
+      bg: "rgba(251, 146, 60, 0.15)",
+    },
+    {
+      to: localePath("/tools/always-texting-first"),
+      title: t("situationTextingFirst.navLabel"),
+      text: t("toolsHub.toolTextingFirstText"),
+      icon: "mdi-message-arrow-right-outline",
+      color: "#2dd4bf",
+      bg: "rgba(45, 212, 191, 0.15)",
+    },
+    {
+      to: localePath("/tools/losing-interest"),
+      title: t("situationLosingInterest.navLabel"),
+      text: t("toolsHub.toolLosingInterestText"),
+      icon: "mdi-heart-half-full",
+      color: "#f472b6",
+      bg: "rgba(244, 114, 182, 0.15)",
+    },
+    {
+      to: localePath("/tools/what-to-reply"),
+      title: t("situationWhatToReply.navLabel"),
+      text: t("toolsHub.toolWhatToReplyText"),
+      icon: "mdi-message-reply-text-outline",
+      color: "#60a5fa",
+      bg: "rgba(96, 165, 250, 0.15)",
+    },
+  ]);
+
   const allTools = computed(() => [
+    ...situationTools.value,
     ...analyticsTools.value,
     ...courtTools.value,
   ]);
 
-  return { analyticsTools, courtTools, allTools };
+  return { situationTools, analyticsTools, courtTools, allTools };
 }

@@ -170,7 +170,8 @@
       </article>
     </div>
   </section>
-  <WrappedSubscriptionAd />
+  <!-- Its Free vs Pro comparison is the daily limit, so it goes with it. -->
+  <WrappedSubscriptionAd v-if="WRAPPED_PAYWALL_ENABLED" />
 
   <section id="privacy" class="container card">
     <div class="text-center mb-12">
@@ -201,6 +202,7 @@ import {
   LockClosedIcon,
 } from "@heroicons/vue/24/solid";
 import { getTargetYear } from "~/utils/wrapped/dateUtils";
+import { WRAPPED_PAYWALL_ENABLED } from "~/config/wrapped";
 
 definePageMeta({
   layout: "wrapped",
@@ -210,11 +212,15 @@ const { t, tm } = useI18n();
 // This page is the 301 target for /whatsapp-wrapped-year-review, so it is the
 // one absorbing the existing search traffic — and /de/wrapped and /fr/wrapped
 // were being indexed with an English title over fully localized body copy.
+// The year is what people search for ("WhatsApp Wrapped 2026"), and it is
+// baked into the prerendered HTML, so the site has to be rebuilt once the
+// year flips over in November.
+const seoYear = { year: getTargetYear() };
 useSeoMeta({
-  title: () => t("wrappedSeo.title"),
-  description: () => t("wrappedSeo.description"),
-  ogTitle: () => t("wrappedSeo.title"),
-  ogDescription: () => t("wrappedSeo.description"),
+  title: () => t("wrappedSeo.title", seoYear),
+  description: () => t("wrappedSeo.description", seoYear),
+  ogTitle: () => t("wrappedSeo.title", seoYear),
+  ogDescription: () => t("wrappedSeo.description", seoYear),
 });
 
 interface HeroCopy {

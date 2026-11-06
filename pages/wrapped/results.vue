@@ -1,54 +1,68 @@
 <template>
-  <div
-    v-if="shareErrorMessage"
-    class="mx-auto mt-6 max-w-lg rounded-2xl border border-rose-500/40 bg-rose-500/10 px-4 py-3 text-center text-sm text-rose-100"
-  >
-    {{ shareErrorMessage }}
-  </div>
-  <div
-    v-else-if="shareLoading"
-    class="mx-auto mt-6 max-w-lg rounded-2xl border border-emerald-500/20 bg-emerald-500/5 px-4 py-3 text-center text-sm text-emerald-100"
-  >
-    {{ t("results.status.loadingSharedStory") }}
-  </div>
+  <!-- Only in the browser: the story lives in this tab's storage, so the
+       prerendered page can only be the empty state, and hydrating over it on
+       a phone reload left its styling behind (the story shifted and cut off). -->
+  <ClientOnly>
+    <div
+      v-if="shareErrorMessage"
+      class="mx-auto mt-6 max-w-lg rounded-2xl border border-rose-500/40 bg-rose-500/10 px-4 py-3 text-center text-sm text-rose-100"
+    >
+      {{ shareErrorMessage }}
+    </div>
+    <div
+      v-else-if="shareLoading"
+      class="mx-auto mt-6 max-w-lg rounded-2xl border border-emerald-500/20 bg-emerald-500/5 px-4 py-3 text-center text-sm text-emerald-100"
+    >
+      {{ t("results.status.loadingSharedStory") }}
+    </div>
 
-  <WrappedStoryCarousel v-if="result" :duration="6000">
-    <WrappedStoriesIntro1 />
-    <WrappedStoriesIntro2 />
+    <!-- The visitor's own chat, saved on this device: say so, with the way
+       out (a shared story is someone else's, and isn't saved here). -->
+    <LibraryStatus
+      v-if="result && !shareLoading && !isSharedStory"
+      :chat-id="activeId"
+      surface="wrapped"
+      class="mb-4"
+    />
 
-    <WrappedStoriesEmoji1 />
-    <WrappedStoriesEmoji2 />
-    <WrappedStoriesEmoji3 />
+    <WrappedStoryCarousel v-if="result" :duration="6000">
+      <WrappedStoriesIntro1 />
+      <WrappedStoriesIntro2 />
 
-    <WrappedStoriesWords1 />
-    <WrappedStoriesWords2 />
-    <WrappedStoriesWords3 />
+      <WrappedStoriesEmoji1 />
+      <WrappedStoriesEmoji2 />
+      <WrappedStoriesEmoji3 />
 
-    <WrappedStoriesConversation1 />
-    <WrappedStoriesConversation2 />
-    <WrappedStoriesShareInvite />
-  </WrappedStoryCarousel>
+      <WrappedStoriesWords1 />
+      <WrappedStoriesWords2 />
+      <WrappedStoriesWords3 />
 
-  <!-- Without an analysis the carousel used to play all eleven slides empty —
+      <WrappedStoriesConversation1 />
+      <WrappedStoriesConversation2 />
+      <WrappedStoriesShareInvite />
+    </WrappedStoryCarousel>
+
+    <!-- Without an analysis the carousel used to play all eleven slides empty —
        an emoji card with two quote marks and nothing between them, a dangling
        "from". Send people back to the upload instead. -->
-  <div
-    v-else-if="isEmpty"
-    class="mx-auto mt-16 mb-24 max-w-lg rounded-2xl border border-white/15 bg-white/5 px-6 py-10 text-center"
-  >
-    <p class="text-2xl font-bold text-white">
-      {{ t("results.status.emptyTitle") }}
-    </p>
-    <p class="mt-3 text-sm text-slate-300">
-      {{ t("results.status.emptyText") }}
-    </p>
-    <NuxtLink
-      :to="localePath('/wrapped')"
-      class="mt-8 inline-block rounded-full bg-emerald-400 px-6 py-3 font-semibold text-black no-underline shadow-lg shadow-emerald-500/40 transition-colors hover:bg-emerald-300"
+    <div
+      v-else-if="isEmpty"
+      class="mx-auto mt-16 mb-24 max-w-lg rounded-2xl border border-white/15 bg-white/5 px-6 py-10 text-center"
     >
-      {{ t("results.status.emptyCta") }}
-    </NuxtLink>
-  </div>
+      <p class="text-2xl font-bold text-white">
+        {{ t("results.status.emptyTitle") }}
+      </p>
+      <p class="mt-3 text-sm text-slate-300">
+        {{ t("results.status.emptyText") }}
+      </p>
+      <NuxtLink
+        :to="localePath('/wrapped')"
+        class="mt-8 inline-block rounded-full bg-emerald-400 px-6 py-3 font-semibold text-black no-underline shadow-lg shadow-emerald-500/40 transition-colors hover:bg-emerald-300"
+      >
+        {{ t("results.status.emptyCta") }}
+      </NuxtLink>
+    </div>
+  </ClientOnly>
 </template>
 
 <script lang="ts" setup>
@@ -59,6 +73,7 @@ import { useUserDataStore } from "~/stores/wrapped/userDataStore";
 import { parseShareInfo } from "~/utils/wrapped/sharing/param";
 import { useI18n } from "vue-i18n";
 import { analyticsWrapped } from "~/composables/useAnalytics";
+import { useLibrary } from "~/composables/useLibrary";
 
 definePageMeta({
   layout: "wrapped",
@@ -70,6 +85,7 @@ const router = useRouter();
 const statsStore = useStatsStore();
 const { result } = storeToRefs(statsStore);
 const userDataStore = useUserDataStore();
+const { activeId } = useLibrary();
 
 const { t } = useI18n();
 const localePath = useLocalePath();
@@ -77,6 +93,9 @@ const localePath = useLocalePath();
 useSeoMeta({
   title: () => t("wrappedSeo.resultsTitle"),
   description: () => t("wrappedSeo.resultsDescription"),
+  // Someone's own story, from their own upload: nothing for a search engine.
+  // The sitemap leaves it out already (config/routes.js).
+  robots: "noindex, follow",
 });
 
 const shareLoading = ref(false);
@@ -89,6 +108,10 @@ const shareErrorMessage = computed(() =>
 // still on its way in.
 const isEmpty = computed(
   () => !result.value && !shareLoading.value && !shareErrorKey.value,
+);
+
+const isSharedStory = computed(
+  () => !!buildSearchFromHash() || !!route.query.key,
 );
 
 /** The share link's uuid/iv/key, which live in the URL fragment. */

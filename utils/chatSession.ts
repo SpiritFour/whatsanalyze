@@ -6,6 +6,10 @@ export interface PersistedChatSession {
   messages: any[];
   attachments?: any[];
   source?: ChatSource | null;
+  /** The sample chat, which is never offered to be saved on the device. */
+  sample?: boolean;
+  /** What the dropzone calls it; kept for the sample only. */
+  sourceName?: string;
   updatedAt: number;
 }
 
@@ -13,6 +17,8 @@ export const saveChatSession = (chatObject: {
   messages: any[];
   attachments?: any[];
   source?: ChatSource | null;
+  sample?: boolean;
+  sourceName?: string;
 }) => {
   if (typeof window === "undefined" || !chatObject?.messages?.length) return;
   try {
@@ -26,6 +32,8 @@ export const saveChatSession = (chatObject: {
       attachments: safeAttachments,
       // tiny, and the court PDF loses its source fingerprint without it
       source: chatObject.source || null,
+      ...(chatObject.sample ? { sample: true } : {}),
+      ...(chatObject.sourceName ? { sourceName: chatObject.sourceName } : {}),
       updatedAt: Date.now(),
     };
     sessionStorage.setItem(CHAT_SESSION_KEY, JSON.stringify(session));

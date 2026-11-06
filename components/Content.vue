@@ -79,11 +79,30 @@ export default {
     color: $wa-accent;
   }
 
+  // Every heading is a link to itself. It is there to copy, and read as a
+  // run of underlined link text in the middle of the article.
+  h2,
+  h3,
+  h4 {
+    a:link,
+    a:visited,
+    a:hover {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+
   p,
   li {
     font-size: 1.05rem;
     line-height: 1.65;
     color: $wa-ink-muted;
+  }
+
+  // The reset takes every margin away, which ran consecutive paragraphs
+  // together into one block.
+  p {
+    margin: 1rem 0;
   }
 
   ul,

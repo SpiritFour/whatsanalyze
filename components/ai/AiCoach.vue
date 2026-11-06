@@ -40,7 +40,28 @@
       {{ t(`toolsAi.error_${errorKey}`) }}
     </p>
 
-    <form class="coach__form" @submit.prevent="send">
+    <p v-if="needsMe && !sample" class="coach__hint">
+      {{ t("toolsAi.coachPickMe") }}
+    </p>
+    <!-- The sample chat: its answers were made in advance, so these instead
+         of a box anything could be typed into -->
+    <div v-if="sample" class="coach__suggestions">
+      <p class="coach__text">{{ t("toolsAi.coachSampleIntro") }}</p>
+      <button
+        v-for="turn in sampleTurns"
+        :key="turn.id"
+        type="button"
+        class="coach__suggestion"
+        :disabled="thinking || asked.has(turn.id)"
+        @click="askSample(turn)"
+      >
+        <span v-if="turn.kind === 'reply' && turn.me" class="mono-label">
+          {{ t("toolsAi.coachSampleDraft", { name: turn.me }) }}
+        </span>
+        {{ turn.prompt }}
+      </button>
+    </div>
+    <form v-else class="coach__form" @submit.prevent="send">
       <textarea
         v-model="draft"
         class="coach__input"
@@ -58,24 +79,25 @@
       </button>
     </form>
     <p class="coach__note mono-label">
-      {{
-        t(
-          mode === "cloud"
-            ? "toolsAi.coachNoteCloud"
-            : "toolsAi.coachNoteLocal",
-        )
-      }}
+      {{ note }}
     </p>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import type { ChatMessage } from "~/composables/useChatTool";
+import { useLibrary } from "~/composables/useLibrary";
+import { rememberLocalAiFailure } from "~/utils/library/device";
+import { localErrorKey } from "~/utils/ai/localErrors";
 import { analyticsTools } from "~/composables/useAnalytics";
 import { useSubscriptionStore } from "~/stores/subscription";
 import { buildDigest, restoreNames } from "~/utils/ai/digest";
-import { isSafetyReply, needsSupport } from "~/utils/ai/coach";
+import {
+  isSafetyReply,
+  isUnchangedRewrite,
+  needsSupport,
+} from "~/utils/ai/coach";
 import {
   coachLocally,
   localCoachChars,
@@ -83,6 +105,8 @@ import {
   type LocalModel,
 } from "~/utils/ai/localModel";
 import { coachInCloud, type CloudAllowance } from "~/utils/ai/cloudModel";
+import { SAMPLE_COACH_MS, type SampleCoachTurn } from "~/utils/ai/sample";
+import { callableErrorCode } from "~/utils/ai/cloudErrors";
 import {
   CLOUD_TRANSCRIPT_CHARS,
   MAX_COACH_CHARS,
@@ -106,14 +130,48 @@ const props = defineProps<{
   me: string | null;
   /** The report's summary, with real names; anonymized before sending. */
   summary: string;
+  /**
+   * After a free cloud preview: no subscription, so each cloud reply is one
+   * of the few free ones a visitor gets a day.
+   */
+  free?: boolean;
+  /**
+   * The sample chat's questions and drafts, answered in advance: offered to
+   * try instead of the text box, and shown without asking the AI again.
+   */
+  sample?: SampleCoachTurn[] | null;
+  /** Which kind is picked to start with: reply help, for "What should I reply?". */
+  initialKind?: CoachKind;
 }>();
 const emit = defineEmits<{ allowance: [CloudAllowance] }>();
 
 const { t } = useI18n();
 const subscriptionStore = useSubscriptionStore();
 
+/**
+ * Reply help without knowing who the reader is: the model guesses whose
+ * side the draft is from, and in testing it guessed wrong. Ask instead.
+ */
+const needsMe = computed(
+  () =>
+    kind.value === "reply" &&
+    !props.me &&
+    new Set(props.chat.map((m) => m.author).filter(Boolean)).size > 1,
+);
+
+/** Free replies left today, once the first free reply has said. */
+const freeLeft = ref<number | null>(null);
+const note = computed(() => {
+  if (props.sample) return t("toolsAi.coachNoteSample");
+  if (props.mode !== "cloud") return t("toolsAi.coachNoteLocal");
+  if (!props.free) return t("toolsAi.coachNoteCloud");
+  return freeLeft.value === null
+    ? t("toolsAi.coachNoteFree")
+    : t("toolsAi.coachNoteFreeLeft", { n: freeLeft.value });
+});
+
 const kinds: CoachKind[] = ["ask", "reply"];
-const kind = ref<CoachKind>("ask");
+const kind = ref<CoachKind>(props.initialKind ?? "ask");
 const draft = ref("");
 const thinking = ref(false);
 const errorKey = ref<string | null>(null);
@@ -128,6 +186,16 @@ interface Turn {
 }
 const turns = ref<Turn[]>([]);
 
+// A saved chat keeps the conversation that goes with each reading, so it is
+// still here after a reload or on the next visit.
+const library = useLibrary();
+onMounted(async () => {
+  const kept = await library.coachTurns(props.chat, props.summary);
+  if (kept?.length && !turns.value.length) turns.value = kept as Turn[];
+});
+const keepTurns = () =>
+  void library.keepCoachTurns(props.chat, props.summary, turns.value);
+
 // Built once per chat: the same excerpts and placeholders every turn.
 const anonymized = computed(() =>
   buildDigest(
@@ -137,6 +205,25 @@ const anonymized = computed(() =>
       : localCoachChars(props.localModel!),
   ),
 );
+
+/** The sample's suggestions for the kind picked, and which were tried. */
+const sampleTurns = computed(
+  () => props.sample?.filter((turn) => turn.kind === kind.value) ?? [],
+);
+const asked = ref(new Set<string>());
+
+/** A sample suggestion: asked, a moment to think, its answer. */
+async function askSample(turn: SampleCoachTurn) {
+  if (thinking.value) return;
+  errorKey.value = null;
+  analyticsTools.aiCoachMessage("sample", turn.kind);
+  asked.value.add(turn.id);
+  const index = turns.value.push({ shown: turn.prompt, sent: "" }) - 1;
+  thinking.value = true;
+  await new Promise((resolve) => setTimeout(resolve, SAMPLE_COACH_MS));
+  thinking.value = false;
+  turns.value[index].answer = turn.reply;
+}
 
 async function send() {
   const text = draft.value.trim();
@@ -150,6 +237,7 @@ async function send() {
       sent: "",
       support: true,
     });
+    keepTurns();
     draft.value = "";
     analyticsTools.aiCoachSafety("keywords");
     return;
@@ -181,10 +269,12 @@ async function send() {
     if (props.mode === "cloud") {
       const cloud = await coachInCloud(
         useNuxtApp().$functions,
-        {
-          email: subscriptionStore.getEmail!,
-          subscriptionId: subscriptionStore.getSubscriptionId!,
-        },
+        props.free
+          ? null
+          : {
+              email: subscriptionStore.getEmail!,
+              subscriptionId: subscriptionStore.getSubscriptionId!,
+            },
         {
           digest,
           language: props.language,
@@ -194,7 +284,8 @@ async function send() {
         },
       );
       reply = cloud.reply;
-      emit("allowance", cloud.allowance);
+      if (cloud.free) freeLeft.value = cloud.allowance.remaining;
+      else emit("allowance", cloud.allowance);
     } else {
       reply = await coachLocally(
         props.localModel!,
@@ -205,6 +296,17 @@ async function send() {
         options,
         () => {},
       );
+      // The small model can hand the draft back word for word and explain a
+      // change it never made: say so, and keep the draft to try again.
+      if (
+        kind.value === "reply" &&
+        !isSafetyReply(reply) &&
+        isUnchangedRewrite(reply, turn.sent)
+      ) {
+        errorKey.value = "coach_local_unchanged";
+        analyticsTools.error("ai", "coach_local:unchanged");
+        return;
+      }
     }
     if (isSafetyReply(reply)) {
       turn.support = true;
@@ -214,10 +316,18 @@ async function send() {
       turn.answer = restoreNames(reply, names);
     }
     turns.value.push(turn);
+    keepTurns();
     draft.value = "";
   } catch (err: any) {
-    const known = ["not_subscribed", "daily_limit"];
-    errorKey.value = known.includes(err?.message) ? err.message : props.mode;
+    const known = [
+      "not_subscribed",
+      "daily_limit",
+      "coach_free_used",
+      "preview_cap",
+    ];
+    const code = callableErrorCode(err?.message);
+    errorKey.value = known.includes(code) ? code : props.mode;
+    if (code === "coach_free_used") freeLeft.value = 0;
     analyticsTools.error(
       "ai",
       `coach_${props.mode}:${err?.message ?? "unknown"}`,
@@ -228,6 +338,11 @@ async function send() {
         props.localModel?.id,
         "coach",
       );
+      rememberLocalAiFailure({
+        reason: localErrorKey(String(err?.message ?? "")),
+        model: props.localModel?.id,
+        phase: "coach",
+      });
     }
   } finally {
     thinking.value = false;
@@ -289,13 +404,34 @@ async function send() {
     color: rgba(29, 29, 31, 0.65);
   }
 
+  &__hint {
+    font-size: 0.9rem;
+    color: #b45309;
+  }
+
   &__error {
     color: #b91c1c;
   }
 
-  &__form {
+  &__form,
+  &__suggestions {
     display: grid;
     gap: 0.6rem;
+  }
+
+  &__suggestion {
+    display: grid;
+    gap: 0.2rem;
+    text-align: left;
+    border: 1px solid rgba(29, 29, 31, 0.18);
+    border-radius: 14px;
+    padding: 0.7rem 0.9rem;
+    background: #fff;
+    color: #1d1d1f;
+
+    &:disabled {
+      opacity: 0.5;
+    }
   }
 
   &__input {

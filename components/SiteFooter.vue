@@ -105,6 +105,7 @@ const guides = computed(() => [
     to: localePath("/how-to-export-your-whatsapp-chat"),
     label: t("pageNameExport"),
   },
+  { to: localePath("/whatsapp-to-pdf"), label: t("pdfPage.navLabel") },
   {
     to: localePath("/switch-from-whatsapp-to-signal"),
     label: t("pageNameSignal"),
