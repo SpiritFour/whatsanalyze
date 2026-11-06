@@ -8,7 +8,12 @@
       :note="t('toolsAi.heroNote')"
     >
       <div id="dropzone-slot">
-        <ToolDropzone tool-type="ai" @analyzed="onChatLoaded" @reset="reset" />
+        <ToolDropzone
+          ref="dropzone"
+          tool-type="ai"
+          @analyzed="onChatLoaded"
+          @reset="reset"
+        />
       </div>
     </LandingHero>
 
@@ -335,6 +340,28 @@
           :initial-kind="coachFirst ? 'reply' : 'ask'"
           @allowance="allowance = $event"
         />
+
+        <!-- After the sample: the visitor's own chat, one tap from here -->
+        <div
+          v-if="sampleReadings && ranOn === 'cloud'"
+          id="sample-yours"
+          class="sample-yours"
+        >
+          <h3 class="sample-yours__title">
+            {{ t("toolsAi.sampleYoursTitle") }}
+          </h3>
+          <p>{{ t("toolsAi.sampleYoursText") }}</p>
+          <button type="button" class="mode-card__btn" @click="chooseOwnChat">
+            {{ t("toolsAi.sampleYoursButton") }}
+          </button>
+          <NuxtLink
+            :to="localePath('how-to-export-your-whatsapp-chat')"
+            class="mode-card__link"
+            @click="analyticsTools.ctaClick('ai_sample', 'export_guide')"
+          >
+            {{ t("toolsAi.sampleYoursGuide") }} →
+          </NuxtLink>
+        </div>
 
         <!-- A saved chat's earlier readings, with their dates -->
         <LibraryReadings
@@ -1172,12 +1199,19 @@ async function showSampleReading(via?: "fallback") {
   showWhereNext();
 }
 
-/** Off to the dropzone, where the sample makes way for the visitor's chat. */
+/** From the top of the sample's reading to the "your turn" below it. */
 function tryOwnChat() {
   analyticsTools.ctaClick("ai_sample", "scroll_to_dropzone");
   document
-    .getElementById("dropzone-slot")
+    .getElementById("sample-yours")
     ?.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+const dropzone = ref<{ chooseFile: () => void } | null>(null);
+/** The file picker straight away: the sample makes way for their chat. */
+function chooseOwnChat() {
+  analyticsTools.ctaClick("ai_sample", "hero_dropzone");
+  dropzone.value?.chooseFile();
 }
 
 /** What the local card says instead of its button, if this device can't. */
@@ -1634,6 +1668,30 @@ useToolSchema({
   text-align: left;
   display: grid;
   gap: 1.5rem;
+}
+
+.sample-yours {
+  display: grid;
+  gap: 0.8rem;
+  justify-items: start;
+  padding: 1.4rem 1.3rem;
+  border-radius: 18px;
+  background: #1d1d1f;
+  color: #fff;
+  line-height: 1.5;
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  .mode-card__btn {
+    background: #21a68d;
+  }
+
+  .mode-card__link {
+    color: #9ee6d6;
+  }
 }
 
 .sample-note {

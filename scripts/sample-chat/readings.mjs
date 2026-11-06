@@ -6,7 +6,9 @@
  * and production's model and effort (functions/.env.whatsanalyze-80665).
  *
  * Writes static/sample/ai/<language>.json, which the AI page shows for the
- * sample chat instead of asking the cloud (utils/ai/sample.ts).
+ * sample chat instead of asking the cloud (utils/ai/sample.ts). The site
+ * ships the hand-polished readings instead (polish.mjs, polished/): run
+ * that afterwards, or these replace them.
  *
  * usage: AI_API_KEY=… node scripts/sample-chat/readings.mjs [language…]
  */

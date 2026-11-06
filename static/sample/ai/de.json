@@ -1,625 +1,629 @@
 {
   "chat": {
-    "messages": 2069,
+    "messages": 2389,
     "from": "2025-09-12",
     "to": "2026-10-24"
   },
-  "model": "openai:gpt-6-luna",
+  "model": "claude-opus-5-5 (polished)",
   "readings": {
     "none": {
       "answer": "",
-      "summary": "Der Chat beginnt mit einem spielerischen Kennenlernen über Ananas-Pizza und Ramen und entwickelt sich zu einer liebevollen Beziehung mit gemeinsamen Mahlzeiten, Serienabenden, Familienbesuchen und einer Reise nach Lissabon. Später häufen sich verpasste Verabredungen, knappe Antworten und Gespräche darüber, dass Emma sich nicht genügend beachtet fühlt; am Ende bittet Leo um ein persönliches Gespräch über die Beziehung. Insgesamt ist der Ton zunächst warm und neckisch, wird im Verlauf aber merklich angespannter und unsicherer.",
-      "vibe": "Pigeon mit Beziehungsplot",
+      "summary": "Eine Liebesgeschichte in Nachrichten: Sie beginnt mit einem verlorenen Streit über Pizza mit Ananas und einem Ramen-Date, wächst über einen Schlüssel, Weihnachten bei Emmas Eltern und eine Reise nach Lissabon, und lebt von Insiderwitzen über eine Taube namens Gerald. Dann kehrt derselbe Streit über verspätete und abgesagte Pläne immer wieder, Leos Antworten werden kürzer, und der Chat endet mit einer Nachricht, auf die noch keine Antwort kam.",
+      "vibe": "Tauben, Pancakes & Versprechen",
       "topics": [
         {
-          "title": "Kennenlernen und Zuneigung",
-          "description": "Aus dem Streit über Ananas auf Pizza wird ein Ramen-Date; später sagen sich beide, dass sie sich lieben, und Emma wird als „best girlfriend“ bezeichnet."
+          "title": "Gerald, die Taube",
+          "description": "Die Taube auf Leos Balkon wird zur festen Figur: Sie bewertet das Frühstück, hat Ansprüche an den Kaffee und verschwindet eine Weile, bevor sie im Oktober zurückkommt, „älter aussehend“."
         },
         {
-          "title": "Alltag, Essen und Schichtarbeit",
-          "description": "Emma berichtet oft von Nachtschichten, chaotischen Stationen und müden Füßen. Dazu kommen Essensentscheidungen, Einkaufslisten und wiederkehrende Rettungsaktionen mit Pizza."
+          "title": "Pläne und Pünktlichkeit",
+          "description": "Restaurants, Flüge, Kinokarten und wer zu was zu spät kommt: Das praktischste Thema im Chat ist zugleich das schmerzhafteste."
         },
         {
-          "title": "Gerald und kleine Running Gags",
-          "description": "Die Taube Gerald sitzt auf dem Balkon oder auf Person Bs Fahrrad, urteilt über das Frühstück und kippt Basilikum um. Auch das Aufwachen nach „fünf Minuten“ und die missglückte Pflanze werden zu wiederkehrenden Witzen."
+          "title": "Lissabon",
+          "description": "Im März gebucht, wochenlang heruntergezählt und als ihre schönsten Tage in Erinnerung: elf Pastéis de Nata, eine Tram, die senkrecht fährt, und „Ich liebe dich hier. So.“"
         },
         {
-          "title": "Gemeinsame Pläne und Familie",
-          "description": "Beide verabreden sich mit Freundinnen und Freunden, sehen gemeinsam Serien und planen Lissabon samt Pastel-de-nata-Tour. Leo kommt zu Weihnachten zu Person As Familie – inklusive Zitronenkuchen und der Warnung, mit Person As Vater nicht über Fußball zu reden."
+          "title": "Arbeit und Schichten",
+          "description": "Emmas Nachtschichten auf Station und Leos Pitches und Projekte bestimmen, wann sie reden können, und zuletzt, ob sie es tun."
         },
         {
-          "title": "Verlässlichkeit und Beziehungsspannungen",
-          "description": "Emma ärgert sich über vergessene oder verspätete Verabredungen und sagt, sie wolle nicht Person Bs Sekretärin sein. Später spricht sie an, dass Leo sich fern anfühle und sie vermisse, tagsüber in dessen Gedanken zu sein; zuletzt schlägt Leo ein persönliches Gespräch über „uns“ vor."
+          "title": "Familie und Freunde",
+          "description": "Jana, die die beiden zusammengebracht hat, Weihnachten bei Emmas Eltern (Zitronenkuchen, zu viel Fußball) und Max mit seinem Sofa am Kinoabend."
         }
       ],
       "people": [
         {
           "name": "Emma",
-          "role": "Die fürsorgliche Planerin",
-          "style": "Schreibt herzlich und oft neckisch, teilt Schichtalltag und Zuneigung, organisiert gemeinsame Pläne und spricht zunehmend direkt an, wenn sie sich nicht priorisiert fühlt."
+          "role": "Die, die sich meldet",
+          "style": "Beginnt die meisten Gespräche, sagt klar, was sie braucht („Ich will einfach manchmal Priorität sein“), und hält die Witze am Laufen, auch wenn es angespannt ist."
         },
         {
           "name": "Leo",
-          "role": "Der liebevolle Improvisierer",
-          "style": "Schreibt anfangs verspielt und aufmerksam, bringt Essen oder Tee mit und pflegt Geralds Running Gag; im späteren Verlauf antwortet Leo öfter knapp oder verspätet und räumt schließlich eigene Versäumnisse ein."
+          "role": "Der Warmherzige mit wenig Zeit",
+          "style": "Witzig und zärtlich, wenn er da ist („Ich merke mir alles, was du mir erzählst“), und zuletzt schreibt er viel weniger: oft ein Wort, oft Stunden später."
         }
       ],
       "dynamics": [
         {
-          "title": "Gegenseitige Wärme",
-          "description": "Beide initiieren Kontakt, wünschen einander morgens und abends eine gute Zeit und sagen, dass sie sich vermissen. Leo bietet etwa Tee an, wenn Emma erschöpft nach Hause kommt."
+          "title": "Wer sich meldet",
+          "description": "In den ersten Monaten fangen beide etwa gleich oft ein Gespräch an. Seit August beginnt Emma fast vier von fünf, und Leos typische Antwortzeit ist von ein paar Minuten auf rund drei Stunden gewachsen."
         },
         {
-          "title": "Gemeinsamer Humor",
-          "description": "Sie greifen die Scherze des jeweils anderen auf: Emma nennt die Taube Gerald, Leo berichtet von seinen Eskapaden, und beide machen aus dem wiederholt sterbenden Basilikum einen Running Gag."
+          "title": "Derselbe Streit, viermal",
+          "description": "Das Abendessen am 9. April, der Flug nach Lissabon, Emmas Geburtstagstoast, das Kino im Juli: Jedes Mal platzt ein Plan, Emma sagt, wie es bei ihr ankommt, Leo entschuldigt sich, bis sie es ausspricht: „Das ist wieder derselbe Streit.“"
         },
         {
-          "title": "Ungleichgewicht bei Verabredungen",
-          "description": "Emma wartet im April eine Stunde im Restaurant, weil Leo wegen eines Meetings nicht rechtzeitig Bescheid sagt; im Juli wird ein Kinobesuch vergessen. Emma benennt das als wiederkehrendes Muster, nicht als einzelnes Missgeschick."
+          "title": "Versöhnung mit Pancakes",
+          "description": "Ihre Versöhnungen haben ein Ritual. Nach dem Streit im April heißt es „Pancakes am Sonntag?“, und im Oktober meldet sich Leo mit genau diesem Angebot zurück, über Gerald."
         },
         {
-          "title": "Weniger Verbindung im Spätsommer",
-          "description": "Emma fragt im August, ob alles in Ordnung sei, weil Leo weit weg wirke, und sagt Ende September, sie habe absichtlich nicht zuerst geschrieben. Leo erklärt die Funkstille mit Arbeitsstress, doch die Antworten bleiben in den späteren Ausschnitten oft knapp."
+          "title": "Humor als Kitt",
+          "description": "Gerald, die „noch fünf Minuten“-Morgen und das Ei beim Ramen-Laden tauchen immer wieder auf, und sie sind noch da, als alles andere leiser wird."
         }
       ],
       "highlights": [
-        "Der Streit um Ananas-Pizza endet mit einer diplomatischen Lösung: Ramen auf Kosten von Leo – ohne dass Leo seine Meinung zu Ananas ändert.",
-        "Leo bringt Emma am Valentinstag gelbe Blumen und sagt: „Ich erinnere mich an alles, was du mir erzählst.“ Emma erkennt die Blumen sofort wieder.",
-        "Auf der Lissabon-Reise schickt Emma Leo Fotos, obwohl beide nebeneinandersitzen; Leo kommentiert, dass die Straßenbahn senkrecht fahre und er sich damit abgefunden habe."
-      ]
-    },
-    "into:Emma": {
-      "answer": "Ja – im Chat gibt es sehr deutliche Zeichen, dass Leo auf dich steht und dich liebt: Leo hat dir ausdrücklich „I love you“ geschrieben, dich „best girlfriend“ genannt und mit dir eine Reise nach Lissabon geplant. Ihr habt außerdem Feiertage und Zeit mit euren Familien geteilt, und Leo hat dir zum Valentinstag gelbe Blumen geschenkt, weil Leo sich daran erinnerte. Gleichzeitig wirkt Leo in den letzten Monaten deutlich weniger präsent; du sprichst mehrmals an, dass du dich nicht priorisiert fühlst, und am Schluss möchte Leo persönlich über euch reden. Meine ehrliche Einschätzung: Die früheren Gefühle sind klar belegt, aber was Leo gerade will oder wie es um eure Beziehung steht, lässt sich aus diesem Chat nicht sicher ablesen – das Gespräch, das Leo vorgeschlagen hat, dürfte wichtig sein.",
-      "summary": "Der Chat beginnt mit spielerischem Kennenlernen und wird zu einer innigen Beziehung mit Liebeserklärungen, Alltagsroutinen, Familienbesuchen und einer gemeinsamen Lissabon-Reise. Später treten wiederkehrende Enttäuschungen über Verspätungen und nachlassende Aufmerksamkeit auf; der letzte Eintrag kündigt ein persönliches Gespräch über euch an.",
-      "vibe": "Liebe, Listen & Gerald",
-      "topics": [
-        {
-          "title": "Vom Date zur Beziehung",
-          "description": "Aus der Einladung zum Ramen nach Janas Party werden regelmäßige Treffen, Übernachtungs- und Alltagspläne; am 29. November schreiben beide, dass sie sich lieben."
-        },
-        {
-          "title": "Gemeinsamer Alltag",
-          "description": "Ihr tauscht Einkaufslisten aus, entscheidet über Abendessen und schaut zusammen Serien. Gerald, die Taube auf Person Bs Balkon, wird zum wiederkehrenden Running Gag."
-        },
-        {
-          "title": "Familie und gemeinsame Pläne",
-          "description": "Leo kommt zu Weihnachten zu deiner Familie und plaudert trotz deiner Warnung zwei Stunden mit deinem Vater über Fußball. Im März bucht ihr zusammen Flüge nach Lissabon."
-        },
-        {
-          "title": "Verlässlichkeit und Aufmerksamkeit",
-          "description": "Du sprichst an, dass Leo wiederholt zu spät kommt oder Pläne vergisst, etwa beim verpassten Restauranttermin und dem vergessenen Kinobesuch. Im September sagst du, dass du dich vermisst fühlst, wenn Leo tagelang nicht schreibt."
-        },
-        {
-          "title": "Das angekündigte Gespräch",
-          "description": "Am Ende fragt Leo, ob ihr morgen persönlich reden könnt, weil Leo viel über euch nachgedacht hat. Was Leo sagen möchte, bleibt im Ausschnitt offen."
-        }
-      ],
-      "people": [
-        {
-          "name": "Emma",
-          "role": "direkte, fürsorgliche Partnerperson",
-          "style": "Du schreibst herzlich und verspielt, teilst viele kleine Alltagsmomente und formulierst bei Konflikten klar, was dir fehlt – etwa: „Ich will nicht deine Sekretärin sein.“"
-        },
-        {
-          "name": "Leo",
-          "role": "zärtliche, oft beschäftigte Partnerperson",
-          "style": "Leo zeigt Zuneigung mit Liebeserklärungen, Fürsorge und kleinen Gesten, antwortet später im Verlauf aber häufig knapp oder verspätet."
-        }
-      ],
-      "dynamics": [
-        {
-          "title": "Beidseitige Initiative",
-          "description": "Beide schlagen Treffen und gemeinsame Aktivitäten vor: Leo lädt früh zum Ramen ein, später plant ihr zusammen Serienabende, Essen und die Reise nach Lissabon."
-        },
-        {
-          "title": "Zärtlichkeit im Kleinen",
-          "description": "Fürsorge zeigt sich in konkreten Routinen: Leo erinnert dich nach Nachtschichten ans Schlafen, und du erinnerst Leo daran, richtig zu essen."
-        },
-        {
-          "title": "Wiederkehrender Streitpunkt",
-          "description": "Verspätungen und vergessene Pläne belasten dich mehrfach. Leo entschuldigt sich und verspricht etwa, Kalendererinnerungen einzurichten; im Juli sagst du, dass bloßes Entschuldigen ohne Veränderung nicht reicht."
-        },
-        {
-          "title": "Spürbarer Wandel",
-          "description": "Frühe Nachrichten sind voller Kosenamen und spontaner Zuneigung; im Spätsommer werden Antworten von Leo öfter knapp, und du fragst, ob zwischen euch alles in Ordnung ist."
-        }
-      ],
-      "highlights": [
-        "Der Streit um Ananas auf Pizza wird zum ersten Date: Leo lädt als „Friedensangebot“ zum Ramen ein, obwohl Leo die Ananasfrage nicht zugibt.",
-        "Am Valentinstag schenkt Leo dir gelbe Blumen und sagt: „Ich erinnere mich an alles, was du mir erzählst.“",
-        "Als du sagst, eine Patientin oder ein Patient habe dich heiraten wollen und du seist „taken“, fragt Leo kurz nach – und sagt dann, dass Leo das sehr mag."
-      ]
-    },
-    "into:Leo": {
-      "answer": "Ja – besonders am Anfang ist ziemlich klar, dass Emma auf dich steht: Emma freut sich ausdrücklich über deine erste Nachricht, verabredet sich mit dir, sagt, dass sie dich vermisst und später sogar „Ich liebe dich auch“. Ihr habt euch als Paar bezeichnet, seid zusammen nach Lissabon gereist und Emma hat dich zu Weihnachten mit der Familie eingeplant. Allerdings zeigen die späteren Nachrichten deutlich mehr Distanz und wiederkehrenden Frust darüber, dass du dich zu wenig meldest oder Verabredungen vergisst. Auf die Frage, ob Emma aktuell noch romantische Gefühle hat, lässt sich deshalb aus dem Chat kein sicheres Ja ableiten – die Bitte, persönlich über „uns“ zu sprechen, klingt nach einem wichtigen Klärungsbedarf.",
-      "summary": "Der Chat beginnt mit einem spielerischen Kennenlernen und entwickelt sich zu einer klar liebevollen Beziehung mit gemeinsamen Plänen, Familienkontakt und einer Reise nach Lissabon. Im späteren Verlauf häufen sich aber Enttäuschungen über vergessene Verabredungen und weniger Kontakt; zuletzt bittet Leo um ein persönliches Gespräch über die Beziehung.",
-      "vibe": "Ramen, Rosen, Redebedarf",
-      "topics": [
-        {
-          "title": "Vom Flirt zur Beziehung",
-          "description": "Aus dem Streit um Ananas auf Pizza wird ein Ramen-Date; später sagen sich beide, dass sie sich lieben, und Leo nennt Emma „best girlfriend“."
-        },
-        {
-          "title": "Gemeinsamer Alltag",
-          "description": "Die beiden teilen Essen, Serien und Einkaufslisten – von „Pasta oder Burritos?“ bis zu Kaffee, Avocados und dem nie aufgegebenen Plan für eine kleine Pflanze."
-        },
-        {
-          "title": "Familie und Zukunftspläne",
-          "description": "Emma lädt Leo zu Weihnachten mit der Familie ein; gemeinsam buchen sie außerdem eine Reise nach Lissabon und planen dort etwa eine Pastel-de-nata-Tour."
-        },
-        {
-          "title": "Verlässlichkeit und Streit",
-          "description": "Emma spricht wiederholt an, dass Leo zu spät kommt oder Pläne vergisst; besonders deutlich wird das bei einem verpassten Restauranttermin und einem vergessenen Kinobesuch."
-        },
-        {
-          "title": "Weniger Nähe im Herbst",
-          "description": "Im Spätsommer und Herbst antwortet Leo häufiger knapp oder verspätet. Emma sagt, sie vermisse es, tagsüber in Person Bs Gedanken zu sein; zuletzt bittet Leo um ein Gespräch über „uns“."
-        }
-      ],
-      "people": [
-        {
-          "name": "Emma",
-          "role": "Zuneigungsvolle Planerin",
-          "style": "Schreibt oft herzlich und neckisch, teilt kleine Alltagsbeobachtungen und spricht Enttäuschungen direkt an, wenn gemeinsame Zeit zu kurz kommt."
-        },
-        {
-          "name": "Leo",
-          "role": "Liebevoller, beschäftigter Partner",
-          "style": "Schreibt anfangs verspielt und aufmerksam, übernimmt praktische Dinge und macht liebevolle Gesten; später kommen Antworten häufiger knapp oder mit Verzögerung."
-        }
-      ],
-      "dynamics": [
-        {
-          "title": "Beidseitiger Start",
-          "description": "Leo schlägt das Ramen-Date vor, Emma macht sofort Donnerstag daraus; danach zeigen beide Initiative mit Nachrichten, Einladungen und gemeinsamen Plänen."
-        },
-        {
-          "title": "Vertrautheit im Kleinen",
-          "description": "Insider wie Gerald, der Balkon-Taube, und die Basilikumpflanze tragen den Alltag. Dazu kommen fürsorgliche Gesten wie Tee, Pizza und Person Bs Croissant als „emotionaler Beistand“ am Flughafen."
-        },
-        {
-          "title": "Nähe trifft auf Frust",
-          "description": "Emma benennt konkret, dass wiederholte Verspätungen und vergessene Pläne wehtun; Leo entschuldigt sich und verspricht, den Kalender besser zu nutzen, doch das Thema kehrt wieder."
-        },
-        {
-          "title": "Kontakt wird unausgewogener",
-          "description": "Am Anfang schreiben beide viel und tauschen Zuneigung aus. Später sagt Emma, sie habe absichtlich nicht zuerst geschrieben und fünf Tage auf eine Nachricht gewartet; Leo erklärt den Rückzug mit Arbeitsstress."
-        }
-      ],
-      "highlights": [
-        "Der Ananas-Pizza-Streit endet nicht im Gerichtssaal, sondern mit einem Ramen-Date – und Emma stellt die Versöhnung unter die Bedingung, dass Leo Ananas auf Pizza akzeptiert.",
-        "Zum Valentinstag erinnert sich Leo an die gelben Blumen, die Emma mag; Emma ist gerührt, und Leo sagt: „Ich erinnere mich an alles, was du mir erzählst.“",
-        "Auf der Reise nach Lissabon schickt Emma Leo Fotos, obwohl sie direkt nebeneinandersitzen; Leo nennt das eine „Backup“-Lösung, bevor beide sich gegenseitig sagen, wie sehr sie die gemeinsame Zeit lieben."
-      ]
-    },
-    "arguments": {
-      "answer": "Nach den gezeigten Ausschnitten hat Emma die überzeugenderen Argumente, wenn es um das konkrete Streitthema geht: Leo verpasst oder vergisst wiederholt Verabredungen, etwa das reservierte Dinner am 9. April und den Kinobesuch am 22. Juli, und A benennt nachvollziehbar, dass eine Entschuldigung ohne Veränderung das Muster nicht löst. Besonders klar ist A mit „Ich will nicht deine Sekretärin sein“: Es geht ihr nicht nur um einzelne Termine, sondern darum, dass Leo selbst daran denkt und zuverlässig auftaucht. Leo hat einen plausiblen Einwand — die Arbeit war zeitweise sehr intensiv, und am 9. April kam ein Meeting dazwischen — und erkennt am 14. Juni ausdrücklich an, dass es ein Muster ist; das stützt aber eher A’s Kernpunkt, als ihn zu widerlegen. Insgesamt sprechen die Beispiele daher stärker für A, auch wenn der letzte Ausschnitt zeigt, dass Leo offenbar noch ein ernstes Gespräch über die Beziehung führen möchte.",
-      "summary": "Der Chat beginnt mit leichtem Flirt und entwickelt sich zu einer engen Beziehung mit gemeinsamen Routinen, Familienkontakt und sogar einer Reise nach Lissabon. Später verschieben sich die Nachrichten von neckischem Alltagsgeplänkel zu wiederkehrender Frustration über verpasste Pläne und nachlassende Aufmerksamkeit; der Ton bleibt meist liebevoll, wird an diesen Stellen aber ernst und verletzlich.",
-      "vibe": "Pinguin-Paar mit Kalenderstress",
-      "topics": [
-        {
-          "title": "Verabredungen und Verlässlichkeit",
-          "description": "Emma ärgert sich wiederholt über vergessene oder verspätete Pläne, besonders beim Dinner am 9. April und beim Kinobesuch am 22. Juli; Leo sagt zu, künftig Kalendererinnerungen zu nutzen."
-        },
-        {
-          "title": "Nähe und Beziehungsentwicklung",
-          "description": "Aus dem Ramen-Date nach der Ananas-Pizza-Debatte wird eine feste Beziehung: Leo sagt im November „Ich liebe dich“, und Emma erwidert es."
-        },
-        {
-          "title": "Arbeit und Schichtalltag",
-          "description": "Emma erzählt von chaotischen Schichten und nächtlichen Pausen auf der Station, während Leo von Meetings, einem neuen Projekt und Arbeitsbelastung berichtet."
-        },
-        {
-          "title": "Gemeinsame Routinen und Humor",
-          "description": "Die beiden scherzen über Gerald, die Taube auf dem Balkon, die überlebensschwache Basilikumpflanze und ihre wiederkehrenden Essens- und Serienentscheidungen."
-        },
-        {
-          "title": "Lissabon-Reise",
-          "description": "Leo findet günstige Flüge für Mai, Emma sagt sofort zu, und sie planen unter anderem Dachterrassen und eine Pastel-de-Nata-Tour; in Lissabon zählen sie am Ende elf davon."
-        }
-      ],
-      "people": [
-        {
-          "name": "Emma",
-          "role": "Die direkte Planerin",
-          "style": "Schreibt warm und verspielt, bringt aber bei wiederholten Enttäuschungen sehr klar auf den Punkt, was sie braucht und warum."
-        },
-        {
-          "name": "Leo",
-          "role": "Der fürsorgliche Organisator",
-          "style": "Schickt Zuneigung und kleine Hilfsangebote, etwa Tee oder Pizza, und nimmt oft den humorvollen Ball auf, antwortet in der späteren Phase aber öfter knapp oder verspätet."
-        }
-      ],
-      "dynamics": [
-        {
-          "title": "Gegenseitige Zuneigung",
-          "description": "Beide initiieren Kontakt, verabreden sich regelmäßig und zeigen Zuneigung; besonders deutlich wird das beim gegenseitigen Liebesgeständnis im November."
-        },
-        {
-          "title": "Fürsorge im Alltag",
-          "description": "Sie kümmern sich um Schichten, Essen und Müdigkeit: Leo erinnert Emma ans Trinken und Ausruhen, Emma fragt nach Mahlzeiten und macht Besorgungslisten."
-        },
-        {
-          "title": "Wiederkehrender Konflikt um Aufmerksamkeit",
-          "description": "Emma spricht mehrfach an, dass Leo Pläne vergisst oder sich wenig meldet; nach dem Lissabon-Streit und dem Kinoplan erkennt Leo jeweils an, dass es nicht nur um den einzelnen Vorfall geht."
-        },
-        {
-          "title": "Gemeinsamer Running Gag",
-          "description": "Gerald wird zur kleinen Nebenfigur ihrer Beziehung: Leo berichtet von seinen Balkonbesuchen, und Emma erklärt ihn wiederholt zum Chaos oder schlicht für im Recht."
-        }
-      ],
-      "highlights": [
-        "Die erste Verabredung wird als „Friedensangebot“ für den Streit um Ananas auf Pizza ausgehandelt — Leo zahlt, aber gesteht die Ananas nicht zu.",
-        "Als Emma nachts schreibt, sie denke in der Pause bei Brezeln an Leo, nennt Leo das romantischste, was je über Brezeln gesagt wurde.",
-        "Auf dem Weg zum Flughafen kauft Leo Emma einen Croissant als emotionale Unterstützung für die endlose Sicherheitskontrolle."
-      ]
-    },
-    "worried:Emma": {
-      "answer": "Ja, es gibt etwas, das du ernst nehmen solltest: Ab etwa Mai/Juni häufen sich bei Leo knappe oder verspätete Antworten, verpasste Verabredungen und wenig erkennbare Beteiligung an Alltagsgesprächen. Du sprichst mehrfach an, dass du dich nicht priorisiert fühlst und nicht ständig an Pläne erinnern möchtest; am 28. September sagst du sogar, du hättest absichtlich eine Woche nicht zuerst geschrieben, um zu sehen, ob Leo sich meldet. Besonders das letzte „Können wir morgen persönlich reden? Ich denke viel über uns nach“ klingt nach einem wichtigen, möglicherweise schwierigen Gespräch. Daraus allein lässt sich aber nicht sicher schließen, was Leo vorhat; Arbeitsstress wird wiederholt genannt, und im Chat gibt es auch weiterhin Zuneigung und gemeinsame Pläne. Es wäre daher vernünftig, dich auf ein ehrliches Gespräch einzustellen, ohne das Ergebnis vorwegzunehmen.",
-      "summary": "Der Chat beginnt mit neckischem Flirt, gemeinsamen Essen, Serien und liebevollen Alltagsritualen und entwickelt sich zu einer festen Beziehung mit Familienbesuchen und einer gemeinsamen Reise nach Lissabon. Später werden wiederkehrende Enttäuschungen über vergessene oder verschobene Pläne und zunehmend knappe Antworten zum ernsten Thema; der letzte Ausschnitt kündigt ein persönliches Gespräch über die Beziehung an.",
-      "vibe": "Vom Flirt zum Klärungsgespräch",
-      "topics": [
-        {
-          "title": "Beziehungsbeginn und Zuneigung",
-          "description": "Aus dem Streit um Ananas auf Pizza wird ein Ramen-Date; später sagen beide, dass sie sich lieben, und Leo nennt dich „best girlfriend“."
-        },
-        {
-          "title": "Alltag, Arbeit und Fürsorge",
-          "description": "Du erzählst von chaotischen Stationsdiensten und Nachtschichten; Leo wünscht dir Kraft, erinnert dich ans Essen und bietet Tee an."
-        },
-        {
-          "title": "Gemeinsame Pläne und Lissabon",
-          "description": "Ihr bucht im März Flüge für den 15.–19. Mai; als Leo wegen eines Meetings am Abreisetag umplanen will, sagst du, du möchtest manchmal Priorität haben."
-        },
-        {
-          "title": "Verlässlichkeit und Beziehungsgespräche",
-          "description": "Im April wartest du eine Stunde allein im Restaurant; im Juli vergisst Leo den Kinotermin. Du sagst, Entschuldigungen ohne Veränderung reichten dir nicht, und Ende September sprichst du die ausbleibenden Nachrichten an."
-        },
-        {
-          "title": "Running Gags und gemeinsame Rituale",
-          "description": "Die Taube Gerald richtet wiederholt Unordnung an, und ihr scherzt über eine Pflanze, obwohl schon das Basilikum nicht überlebt hat; dazu kommen Essen bestellen und Serienabende."
-        }
-      ],
-      "people": [
-        {
-          "name": "Emma",
-          "role": "Die ansprechende Planerin",
-          "style": "Du schreibst oft warm und verspielt, bringst viele gemeinsame Pläne und kleine Alltagsnachrichten ein und formulierst bei Enttäuschungen schließlich klar, was dir fehlt."
-        },
-        {
-          "name": "Leo",
-          "role": "Der liebevolle Mitplaner",
-          "style": "Leo nutzt Humor und fürsorgliche Gesten wie Tee, Essen und kleine Überraschungen, antwortet im späteren Verlauf aber häufig knapp oder verspätet und verpasst mehrfach Verabredungen."
-        }
-      ],
-      "dynamics": [
-        {
-          "title": "Beide tragen den Kontakt",
-          "description": "Zu Beginn wechseln sich Einladungen und Gesprächsanstöße ab; später gehen viele Nachrichten und organisatorische Fragen von dir aus, während Leo öfter mit kurzen Antworten reagiert."
-        },
-        {
-          "title": "Wärme bleibt sichtbar",
-          "description": "Auch während der Schwierigkeiten gibt es Zuneigung und gemeinsame Zeit: Leo schenkt dir zum Valentinstag die gemerkten gelben Blumen, und im Oktober verabredet ihr euch noch zu Pfannkuchen."
-        },
-        {
-          "title": "Wiederkehrender Streitpunkt",
-          "description": "Die Konflikte drehen sich nicht nur um einen einzelnen Termin: Du benennst im April und Juli ein Muster aus Verspätungen oder Vergessen und möchtest, dass Leo selbst Verantwortung für Pläne übernimmt."
-        },
-        {
-          "title": "Schwierige Themen werden angesprochen",
-          "description": "Du fragst am 30. August direkt, ob alles in Ordnung ist, und am 28. September erklärst du, warum dich fünf Tage ohne Nachricht verletzen; Leo räumt ein, dass Arbeit viel Raum einnimmt und die Zuneigung schlecht sichtbar wird."
-        }
-      ],
-      "highlights": [
-        "Beim ersten Date wird der Streit um Ananas auf Pizza mit Ramen als „Friedensangebot“ beigelegt.",
-        "Gerald, die Balkon-Taube, wird zum wiederkehrenden Nebencharakter: Er sitzt auf Person Bs Fahrrad, kippt das Basilikum um und beurteilt das Frühstück.",
-        "Auf der Lissabon-Reise schickt ihr euch Fotos, obwohl ihr direkt nebeneinandersitzt; Emma nennt es „Backup“."
-      ]
-    },
-    "worried:Leo": {
-      "answer": "Ja, es gibt einen konkreten Grund, aufmerksam zu sein – aber aus dem Chat lässt sich nicht sicher ableiten, dass eure Beziehung endet oder dass etwas Bestimmtes vorgefallen ist. Auffällig ist, dass Emma wiederholt sagt, du wirkst weit weg und sie vermisse, tagsüber in deinen Gedanken zu sein; am 28. September erwähnt sie sogar, absichtlich nicht zuerst geschrieben zu haben, um zu sehen, ob du dich meldest. Dazu kommen frühere Konflikte darüber, dass du Verabredungen oder gemeinsame Pläne wegen Arbeit beziehungsweise Vergessen verpasst hast, etwa das vergessene Kino am 22. Juli. Die letzte Nachricht von dir – du möchtest persönlich über euch sprechen, weil du viel nachdenkst – klingt ernst, sagt aber noch nicht, worum es geht. Frag im Gespräch offen nach, was sie beschäftigt, und sprich auch darüber, wie eure Arbeitsbelastung und eure Erwartungen an Kontakt und Verlässlichkeit gerade zusammenpassen.",
-      "summary": "Der Chat beginnt mit neckischem Flirt, wird zu einer liebevollen Partnerschaft mit gemeinsamen Routinen, Familienkontakten und einer Reise nach Lissabon. Im späteren Verlauf nehmen knappe Antworten, Arbeitsstress und wiederkehrende Enttäuschungen über verpasste Pläne zu; der Ton bleibt aber nicht durchgehend kalt, und am Ende bittet Leo um ein persönliches Gespräch über euch.",
-      "vibe": "Pärchenalltag mit Fragezeichen",
-      "topics": [
-        {
-          "title": "Vom ersten Date zur Beziehung",
-          "description": "Aus dem Streit über Ananas auf Pizza wird ein Ramen-Date; später sagt ihr euch, dass ihr euch liebt, und Leo nennt Emma am Geburtstag „best girlfriend“."
-        },
-        {
-          "title": "Alltag, Essen und Gerald",
-          "description": "Ihr koordiniert Essen, Einkäufe und Serienfolgen, während Gerald – die wiederkehrende Balkon- beziehungsweise Fahrradtaube – Basilikum umwirft und Frühstück beurteilt."
-        },
-        {
-          "title": "Arbeit und knappe Zeit",
-          "description": "Emma berichtet von Nachtschichten und Chaos auf der Station; Leo hat intensive Projekte und lange Meetings, die wiederholt gemeinsame Pläne beeinflussen."
-        },
-        {
-          "title": "Gemeinsame Pläne und Familie",
-          "description": "Ihr plant einen Lissabon-Trip, trefft Freunde und verbringt Weihnachten mit Person Bs Familie; Emma merkt danach an, dass Person Bs Eltern sie mögen."
-        },
-        {
-          "title": "Nähe, Enttäuschungen und Klärungsbedarf",
-          "description": "Emma spricht mehrfach an, dass Leo weit weg wirke oder Verabredungen nicht zuverlässig einhalte; zuletzt bittet Leo um ein persönliches Gespräch über die Beziehung."
-        }
-      ],
-      "people": [
-        {
-          "name": "Emma",
-          "role": "Die verbindende Planerin",
-          "style": "Schreibt oft liebevolle Check-ins, teilt kleine Alltagsbeobachtungen und bringt wiederholt gemeinsame Pläne oder emotionale Anliegen zur Sprache."
-        },
-        {
-          "name": "Leo",
-          "role": "Der fürsorgliche Mitmacher",
-          "style": "Antwortet oft mit spielerischem Humor und praktischer Fürsorge, wird im späteren Verlauf aber häufiger knapp oder meldet sich verspätet."
-        }
-      ],
-      "dynamics": [
-        {
-          "title": "Viel gegenseitige Zuneigung",
-          "description": "Ihr sagt euch, dass ihr euch liebt und vermisst, macht Insiderwitze über Gerald und plant gemeinsame Ausflüge; Leo bringt etwa am Valentinstag Blumen für Emma."
-        },
-        {
-          "title": "Unterschiedliche Kontaktinitiative",
-          "description": "Emma startet häufig Gespräche und fragt nach dem Befinden; Ende September sagt sie ausdrücklich, sie habe eine Woche lang absichtlich nicht zuerst geschrieben, um zu sehen, ob Leo sich meldet."
-        },
-        {
-          "title": "Wiederkehrender Streit um Verlässlichkeit",
-          "description": "Nach dem verpassten Restaurantabend im April und dem vergessenen Kinotermin im Juli geht es nicht nur um einzelne Verspätungen: Emma sagt, es sei ein Muster und sie wolle nicht Person Bs Sekretärin sein."
-        },
-        {
-          "title": "Stress wird erklärt, aber nicht vollständig aufgelöst",
-          "description": "Leo verweist auf Arbeitsdruck und sagt im August, ein neues Projekt werde bis Oktober intensiv; Emma zeigt zunächst Verständnis, fragt später aber erneut nach der gefühlten Distanz."
-        }
-      ],
-      "highlights": [
-        "Beim ersten Date wird der Streit um Ananas auf Pizza mit Ramen als „Friedensangebot“ beigelegt – ohne dass Leo die Ananas-Position aufgibt.",
-        "Als Emma an Weihnachten vor Person Bs Vater ausdrücklich vor Fußball warnt, reden die beiden anschließend trotzdem zwei Stunden darüber; Emma kommentiert trocken, er habe angefangen.",
-        "Für Lissabon zählt Leo 11 Pastéis de Nata ohne Reue; während des Trips schickt Emma Leo Fotos, obwohl beide direkt nebeneinandersitzen – „zur Sicherheit“."
-      ]
-    },
-    "gift:Emma": {
-      "answer": "Aus dem Chat heraus wäre ein persönliches, eher unkompliziertes Geschenk passend: ein kleines Fotobuch oder ein gerahmtes Lieblingsfoto von eurer Lissabonreise – gern mit einem Gutschein für Pastéis de Nata dazu. Die Reise und eure elf Pastéis de Nata sind gemeinsame schöne Erinnerungen, und Leo hatte sogar eine Liste für die Tour gemacht. Alternativ passen ein Album oder Konzerttickets, weil ihr euch regelmäßig Musik schickt und gemeinsame Playlists habt. Da Leo zuletzt um ein persönliches Gespräch über euch gebeten hat, würde ich das Geschenk klein und ohne Erwartungsdruck halten – nicht als Ersatz für dieses Gespräch.",
-      "summary": "Ihr teilt viel Alltag, Zuneigung und kleine Running Gags – von Gerald, der Taube, bis zu misslungenen Kochversuchen und Serienabenden. Neben schönen gemeinsamen Erinnerungen, besonders der Lissabonreise, tauchen zuletzt auch Spannungen über Verlässlichkeit und Nähe auf; der Ton wird dadurch gegen Ende nachdenklicher.",
-      "vibe": "Taube trifft Pastéis",
-      "topics": [
-        {
-          "title": "Lissabon und gemeinsame Reisen",
-          "description": "Ihr habt Flüge für den Mai gebucht, eine Pastel-de-Nata-Tour geplant und nach der Reise die elf gegessenen Teilchen gezählt."
-        },
-        {
-          "title": "Essen, Kochen und kleine Alltagsdienste",
-          "description": "Ihr entscheidet oft gemeinsam über Abendessen; wenn dein Kochen schiefläuft, bringt Leo Pizza, und Einkaufslisten gehören zum Alltag."
-        },
-        {
-          "title": "Musik und gemeinsame Serien",
-          "description": "Ihr schickt euch regelmäßig Songs und schaut zusammen unter anderem eine dänische Krimiserie, Weltraum- und Kochformate."
-        },
-        {
-          "title": "Verlässlichkeit und Nähe",
-          "description": "Du sprichst wiederholt an, wenn Pläne vergessen werden oder du dich nicht als Priorität fühlst; zuletzt bittet Leo um ein persönliches Gespräch über euch."
-        },
-        {
-          "title": "Running Gags und kleine Rituale",
-          "description": "Gerald, die Taube auf dem Balkon, eure verschlafenen „fünf Minuten“ und der beinahe legendäre Basilikumtopf kehren immer wieder auf."
-        }
-      ],
-      "people": [
-        {
-          "name": "Emma",
-          "role": "Zugewandte Planerin",
-          "style": "Du schreibst herzlich und direkt, teilst Alltag und Zuneigung, schlägst gemeinsame Aktivitäten vor und sprichst Enttäuschungen klar an."
-        },
-        {
-          "name": "Leo",
-          "role": "Fürsorglicher Ideengeber",
-          "style": "Leo bringt Humor und Fürsorge ein – etwa mit Pizza, Tee und Reiseplänen –, antwortet in der späteren Phase aber teils knapp oder verspätet."
-        }
-      ],
-      "dynamics": [
-        {
-          "title": "Zärtlichkeit im Alltag",
-          "description": "Ihr haltet mit morgendlichen Nachrichten, Essensfragen und kleinen Ermutigungen Kontakt; Leo bietet etwa Tee an, wenn du erschöpft nach Hause kommst."
-        },
-        {
-          "title": "Gemeinsame Pläne und Erinnerungen",
-          "description": "Aus einem frühen Ramen-Date werden gemeinsame Abende, soziale Einladungen und die Lissabonreise mit sorgfältig gesammelten Ideen."
-        },
-        {
-          "title": "Wiederkehrende Reibung bei Verabredungen",
-          "description": "Als Leo im April ein Dinner verpasst und im Juli den Kinobesuch vergisst, sagst du deutlich, dass Entschuldigungen ohne Veränderung nicht reichen."
-        },
-        {
-          "title": "Weniger Kontakt sorgt für Unsicherheit",
-          "description": "Im September sagst du, dass du absichtlich nicht zuerst geschrieben hast und Leo fünf Tage nichts von sich hören ließ; du vermisst, tagsüber in dessen Gedanken aufzutauchen."
-        }
-      ],
-      "highlights": [
-        "Zum Valentinstag bringt Leo dir gelbe Blumen, weil du diese Farbe magst, und sagt: „Ich erinnere mich an alles, was du mir erzählst.“",
-        "Auf dem Weg zum Lissabonflug kauft Leo dir am Gate ein Croissant als „emotionale Unterstützung“, während du noch in der Sicherheitskontrolle steckst.",
-        "Euer Balkon-Gast Gerald bekommt eine eigene Handlung: Er sitzt auf dem Fahrrad, kippt den Basilikum um und wird von euch regelmäßig für sein Verhalten beurteilt."
-      ]
-    },
-    "gift:Leo": {
-      "answer": "Ein persönliches Geschenk, das zeigt, dass du zuhörst, wäre vermutlich passend: Emma hat sich am Valentinstag sehr über die gelben Blumen gefreut, weil du dich an ihre Vorliebe erinnert hattest. Du könntest daran anknüpfen – etwa mit gelben Blumen und einem handgeschriebenen Brief, der eine schöne gemeinsame Erinnerung wie eure Lissabonreise aufgreift. Dazu würde ich bewusst gemeinsame Zeit schenken, die du verlässlich einplanst: Emma hat mehrmals gesagt, dass sie sich manchmal nicht priorisiert fühlt und dass vergessene oder verspätete Pläne sie verletzen. Ein großes oder teures Präsent lässt sich aus dem Chat weniger gut ableiten; aufmerksam und verbindlich wirkt hier treffender.",
-      "summary": "Der Chat begleitet eine liebevolle Beziehung mit vielen Alltagsritualen, Insiderwitzen und gemeinsamen Plänen – von Gerald, der Taube, bis zur Lissabonreise. Im späteren Verlauf entstehen Spannungen, weil Emma sich über verpasste Pläne und weniger Aufmerksamkeit sorgt; der Ton bleibt dabei persönlich, wird aber merklich ernster.",
-      "vibe": "Tauben, Tee und Timing",
-      "topics": [
-        {
-          "title": "Alltagsrituale und Insider",
-          "description": "Die beiden necken sich über verschlafene Morgen, kaputte Kaffeemaschinen und Gerald, die Taube, die regelmäßig Basilikum umwirft und das Frühstück beurteilt."
-        },
-        {
-          "title": "Essen und gemeinsames Zuhause",
-          "description": "Sie planen oft Abendessen, teilen Einkaufslisten und Serienabende; wenn Emma mit einem neuen Rezept kämpft, bringt Leo wiederholt Pizza."
-        },
-        {
-          "title": "Gemeinsame Erlebnisse",
-          "description": "Sie planen Ausflüge und Treffen mit Freundinnen und Freunden, gehen bouldern und buchen im März spontan Flüge nach Lissabon für Mai."
-        },
-        {
-          "title": "Aufmerksamkeit und Verlässlichkeit",
-          "description": "Emma spricht mehrfach an, dass Leo Pläne vergisst oder sich wenig meldet. Besonders deutlich wird das nach dem verpassten Restaurantabend und später, als Emma sagt, sie wolle nicht die Sekretärin sein."
-        }
-      ],
-      "people": [
-        {
-          "name": "Emma",
-          "role": "die aufmerksame Planerin",
-          "style": "Emma teilt viele kleine Alltagsmomente, schickt Musik und schlägt gemeinsame Aktivitäten vor; bei Enttäuschungen formuliert sie klar, was ihr fehlt."
-        },
-        {
-          "name": "Leo",
-          "role": "der fürsorgliche Mitmacher",
-          "style": "Leo zeigt Zuneigung oft praktisch – etwa mit Tee, Pizza, Einkäufen und einer Lissabon-Liste – und bringt gern trockene Scherze über Gerald oder Arbeitsmeetings ein."
-        }
-      ],
-      "dynamics": [
-        {
-          "title": "Zärtlicher Alltagskontakt",
-          "description": "Die beiden halten mit Guten-Morgen-Nachrichten, Essensfragen und kleinen Aufmunterungen Verbindung; Leo erinnert Emma nach langen Schichten daran, sich auszuruhen."
-        },
-        {
-          "title": "Gemeinsame Insider",
-          "description": "Gerald, der Basilikum und das gegenseitige „fünf Minuten noch“ werden zu wiederkehrenden Witzen, die auch über Monate hinweg auftauchen."
-        },
-        {
-          "title": "Nähe braucht Verlässlichkeit",
-          "description": "Emma sagt offen, dass verspätete oder vergessene Verabredungen ein Muster seien. Leo entschuldigt sich und verspricht unter anderem, künftig rechtzeitig Bescheid zu geben."
-        },
-        {
-          "title": "Die Gesprächsenergie verändert sich",
-          "description": "Während Emma häufig Gesprächsanlässe und Vorschläge liefert, antwortet Leo gegen Ende öfter knapp oder verspätet; Emma spricht deshalb an, dass sie sich vermisst und Leo als entfernt erlebt."
-        }
-      ],
-      "highlights": [
-        "Zum Valentinstag stellt Leo gelbe Blumen vor die Tür; Emma ist gerührt, weil Leo sich an genau diese Farbe erinnert hat.",
-        "Für Lissabon bucht Leo die Flüge sofort und erstellt eine Pastel-de-Nata-Liste; Emma zählt später stolz elf gegessene Stücke.",
-        "Beim Weihnachtsbesuch bringt Leo einen Zitronenkuchen mit – allerdings aus der Bäckerei – und erklärt ihn gegenüber Person As Mutter scherzhaft zum Familiengeheimnis."
-      ]
-    },
-    "effort": {
-      "answer": "Insgesamt wirkt es so, als gebe sich Emma zuletzt mehr Mühe, den Kontakt und die gemeinsame Zeit am Laufen zu halten: Emma meldet sich häufig, schlägt Unternehmungen vor und spricht an, wenn etwas fehlt. Besonders deutlich wird das, als Emma sagt, fünf Tage Funkstille hätten wehgetan und Emma vermisse es, tagsüber in den Gedanken von Leo vorzukommen. Leo zeigt durchaus Fürsorge – etwa mit Tee, Pizza und dem gebuchten Lissabon-Trip – und übernimmt manches Organisieren; zugleich häufen sich später knappe oder verspätete Antworten und vergessene Verabredungen. Das ist ein Eindruck aus den Ausschnitten, kein vollständiges Maß für alles, was beide füreinander tun.",
-      "summary": "Der Chat beginnt mit flirtendem Geplänkel und entwickelt sich zu einer vertrauten Beziehung mit Alltagsritualen, gemeinsamen Plänen und Familienkontakten. Im späteren Verlauf wird die Wärme von wiederkehrenden Enttäuschungen über knappe Antworten, vergessene Termine und ungleiche Initiative überschattet; zum Schluss bittet Leo um ein persönliches Gespräch.",
-      "vibe": "Pärchenalltag mit Wendung",
-      "topics": [
-        {
-          "title": "Nähe und Zuneigung",
-          "description": "Beide teilen Guten-Morgen-Nachrichten, Vermissen und liebevolle Scherze; am 29. November sagen sie sich erstmals, dass sie sich lieben."
-        },
-        {
-          "title": "Gemeinsame Pläne",
-          "description": "Sie verabreden sich zu Essen, Serienabenden und Treffen mit Freund:innen und buchen im März gemeinsam eine Reise nach Lissabon."
-        },
-        {
-          "title": "Arbeit und Schichtalltag",
-          "description": "Emma schreibt oft aus dem Krankenhaus und von Nachtschichten, während Leo von Meetings und einem zunehmend intensiven Projekt erzählt."
-        },
-        {
-          "title": "Haushalt und kleine Rituale",
-          "description": "Einkaufslisten mit Kaffee, Avocados und „etwas Süßem“ wechseln sich mit Essensentscheidungen, dem misslungenen Basilikum und Gerald, der Taube, ab."
-        },
-        {
-          "title": "Spannungen um Verlässlichkeit",
-          "description": "Emma spricht wiederholt verpasste oder vergessene Pläne an; besonders klar wird der Konflikt nach dem verpassten Kinotermin im Juli und der Funkstille im September."
-        }
-      ],
-      "people": [
-        {
-          "name": "Emma",
-          "role": "Kontakt und Planungsinitiative",
-          "style": "Schreibt häufig zuerst, teilt Alltagsmomente und schlägt Treffen vor; formuliert bei Enttäuschungen zunehmend deutlich, was sich ändern müsste."
-        },
-        {
-          "name": "Leo",
-          "role": "Fürsorglicher Mitplaner",
-          "style": "Bringt oft spielerische Running Gags und konkrete Gesten ein, antwortet im späteren Verlauf aber öfter knapp oder verspätet."
-        }
-      ],
-      "dynamics": [
-        {
-          "title": "Initiative verschiebt sich",
-          "description": "Anfangs stoßen beide Gespräche und Treffen an; später kommen viele Nachrichten und Vorschläge von Emma, während Leo öfter mit kurzen Antworten wie „sure“ oder „busy, later“ reagiert."
-        },
-        {
-          "title": "Fürsorge im Alltag",
-          "description": "Leo bietet Tee an, bringt Pizza und kauft am Valentinstag die gelben Blumen, an die Emma erinnert hatte; Emma erkundigt sich oft nach Essen, Schlaf und anstrengenden Schichten."
-        },
-        {
-          "title": "Wiederkehrende Verlässlichkeitskonflikte",
-          "description": "Nach dem verpassten Restauranttermin im April und dem vergessenen Kinobesuch im Juli macht Emma deutlich, dass Entschuldigungen ohne Veränderung nicht reichen."
-        },
-        {
-          "title": "Humor als gemeinsamer Klebstoff",
-          "description": "Der Taubencharakter Gerald, die beinahe unmögliche Pflanzenpflege und der Spruch „Die Sonne ist aufgegangen, also bist du wach“ kehren als vertraute Neckereien wieder."
-        }
-      ],
-      "highlights": [
-        "Emma erklärt, eine Patientin beziehungsweise ein Patient habe Emma einen Heiratsantrag gemacht und Emma habe mit „Ich bin vergeben“ geantwortet; Leo freut sich darüber sehr.",
-        "Für den Lissabon-Flug kauft Leo Emma am Gate ein Croissant als emotionale Unterstützung, während Emma noch in der Sicherheitskontrolle steckt.",
-        "Gerald, die Taube, wird zum festen Chat-Mitglied: Er sitzt auf dem Fahrrad, beurteilt den Toast und bekommt eine angebliche Freundin."
+        "Leos allererste Nachricht: „Hey, hier ist Leo von Janas Party. Der, der den Ananas-Pizza-Streit verloren hat 🍍“, und Emmas Antwort: „Du hast nicht verloren, du hast aufgegeben.“",
+        "In einer Nachtschicht macht ein Patient Emma einen Antrag. Sie erzählt Leo, sie habe gesagt, sie sei vergeben, fürchtet, das sei zu früh, und er antwortet: „Nein. Mir gefällt das. Sehr ❤️“",
+        "In Lissabon schickt Emma Leo die Fotos, während sie direkt neben ihm sitzt, „als Backup“, und er schreibt: „Ich liebe dich hier. So.“"
       ]
     },
     "better": {
-      "answer": "Ihr könntet wahrscheinlich am meisten gewinnen, wenn ihr Bedürfnisse und konkrete Absprachen früher und direkter ansprecht – statt sie indirekt zu testen oder erst im Streit zu benennen. Emma sagte am 28. September, sie habe absichtlich eine Woche nicht zuerst geschrieben, um zu sehen, ob Leo sich meldet; hilfreicher wäre gewesen, gleich zu sagen: „Ich vermisse es, tagsüber von dir zu hören – können wir eine kleine Check-in-Routine finden?“ Bei Verabredungen lohnt sich eine klare Bestätigung samt sofortiger Nachricht bei Änderungen: Am 9. April wartete Emma eine Stunde im Restaurant, und am 22. Juli wurde der Kinoplan vergessen; Leo erkannte später selbst, dass es um ein wiederkehrendes Muster ging, nicht nur um eine Entschuldigung. Wenn eine Antwort gerade nicht möglich ist, könnte ein kurzes „Bin im Stress, melde mich heute Abend“ viel besser ankommen als knappe oder ausbleibende Reaktionen. Der Ausschnitt zeigt zugleich, dass ihr schwierige Themen grundsätzlich ansprechen und euch wieder annähern könnt – etwa als ihr am 20. Juni nach einem guten Gespräch konkrete Kalender-Erinnerungen vereinbart habt.",
-      "summary": "Der Chat beginnt mit viel Flirt, Alltagsbanter und liebevollen Ritualen rund um Gerald, Essen und gemeinsame Serien; daraus entwickelt sich eine feste Beziehung mit Familienbesuchen und einer Reise nach Lissabon. Später treten wiederkehrende Spannungen um Verlässlichkeit, Arbeitsstress und das Gefühl, aneinander zu denken, deutlicher hervor, während der Ton zwischen warmherzig und zunehmend angespannt wechselt.",
-      "vibe": "Gerald und Gefühle",
+      "answer": "Das Muster, an dem ihr arbeiten könnt, ist klar und lösbar: Ein Plan ändert sich, keiner erfährt es rechtzeitig, und die Entschuldigung kommt erst nach der Enttäuschung. Am 9. April hat Emma eine Stunde gewartet („Du hättest schreiben können“), und im Juni hat Leo genau das versprochen: „Ich schreibe, wenn ich zu spät bin. Wie ein Erwachsener.“ Macht daraus eine Regel, die ihr beide haltet: Sobald ein Plan wackelt, sagt es, bevor der andere wartet. Und sprecht Bedürfnisse aus, statt sie zu testen: Emmas Woche ohne erste Nachricht hat ihr etwas gezeigt, aber „Ich vermisse es, jemand zu sein, an den du tagsüber denkst“ hat Leo viel mehr gesagt. Sein „Können wir morgen reden?“ ist die Gelegenheit; geht mit je einem konkreten Wunsch hinein, nicht mit einer Liste.",
+      "summary": "Eine Liebesgeschichte in Nachrichten: Sie beginnt mit einem verlorenen Streit über Pizza mit Ananas und einem Ramen-Date, wächst über einen Schlüssel, Weihnachten bei Emmas Eltern und eine Reise nach Lissabon, und lebt von Insiderwitzen über eine Taube namens Gerald. Dann kehrt derselbe Streit über verspätete und abgesagte Pläne immer wieder, Leos Antworten werden kürzer, und der Chat endet mit einer Nachricht, auf die noch keine Antwort kam.",
+      "vibe": "Tauben, Pancakes & Versprechen",
       "topics": [
         {
-          "title": "Nähe und Liebesalltag",
-          "description": "Aus dem Ramen-Date und spielerischen Nachrichten wird eine feste Beziehung: Leo sagt „I love you“, Emma erwidert es, später gibt es einen Schlüssel und gemeinsame Besuche bei den Eltern."
+          "title": "Gerald, die Taube",
+          "description": "Die Taube auf Leos Balkon wird zur festen Figur: Sie bewertet das Frühstück, hat Ansprüche an den Kaffee und verschwindet eine Weile, bevor sie im Oktober zurückkommt, „älter aussehend“."
         },
         {
-          "title": "Pläne und gemeinsame Zeit",
-          "description": "Die beiden verabreden sich für Essen, Serien und Freunde, und buchen im März gemeinsam eine Reise nach Lissabon, inklusive Rooftop-Bar- und Pastel-de-nata-Planung."
+          "title": "Pläne und Pünktlichkeit",
+          "description": "Restaurants, Flüge, Kinokarten und wer zu was zu spät kommt: Das praktischste Thema im Chat ist zugleich das schmerzhafteste."
         },
         {
-          "title": "Arbeit und Erschöpfung",
-          "description": "Emma berichtet von chaotischen Stationsdiensten und Nachtschichten, etwa von einer Schicht, in der ein Patient einen Heiratsantrag machte; Leo reagiert oft mit Zuspruch und Erinnerungen ans Essen oder Schlafen."
+          "title": "Lissabon",
+          "description": "Im März gebucht, wochenlang heruntergezählt und als ihre schönsten Tage in Erinnerung: elf Pastéis de Nata, eine Tram, die senkrecht fährt, und „Ich liebe dich hier. So.“"
         },
         {
-          "title": "Verlässlichkeit und Aufmerksamkeit",
-          "description": "Im April wartet Emma eine Stunde im Restaurant, im Juli wird ein Kinoplan vergessen, und im September spricht Emma an, fünf Tage lang nichts von Leo gehört zu haben."
+          "title": "Arbeit und Schichten",
+          "description": "Emmas Nachtschichten auf Station und Leos Pitches und Projekte bestimmen, wann sie reden können, und zuletzt, ob sie es tun."
         },
         {
-          "title": "Running Gags und kleine Rituale",
-          "description": "Gerald, die Taube, kommentiert regelmäßig Person Bs Frühstück und wirft Basilikum um; dazu kommen die wiederkehrenden Witze über „fünf Minuten“ und misslungene Kochversuche."
+          "title": "Familie und Freunde",
+          "description": "Jana, die die beiden zusammengebracht hat, Weihnachten bei Emmas Eltern (Zitronenkuchen, zu viel Fußball) und Max mit seinem Sofa am Kinoabend."
         }
       ],
       "people": [
         {
           "name": "Emma",
-          "role": "Die direkte Planerin",
-          "style": "Schreibt lebhaft und liebevoll, stößt oft Treffen und Gespräche an und benennt bei Frust schließlich klar, dass sie sich mehr Priorität und verlässliche gemeinsame Zeit wünscht."
+          "role": "Die, die sich meldet",
+          "style": "Beginnt die meisten Gespräche, sagt klar, was sie braucht („Ich will einfach manchmal Priorität sein“), und hält die Witze am Laufen, auch wenn es angespannt ist."
         },
         {
           "name": "Leo",
-          "role": "Der humorvolle Kümmerer",
-          "style": "Bringt viele Running Gags und Fürsorge ein – von Gerald-Updates bis zu Tee und Pizza – antwortet in der späteren Phase jedoch öfter knapp oder verspätet."
+          "role": "Der Warmherzige mit wenig Zeit",
+          "style": "Witzig und zärtlich, wenn er da ist („Ich merke mir alles, was du mir erzählst“), und zuletzt schreibt er viel weniger: oft ein Wort, oft Stunden später."
         }
       ],
       "dynamics": [
         {
-          "title": "Viel gegenseitige Zuwendung",
-          "description": "Beide fragen regelmäßig nach Schlaf, Essen und Arbeit, schicken Musik und sagen, dass sie einander vermissen; Leo bietet Emma nach einer anstrengenden Schicht Tee an."
+          "title": "Wer sich meldet",
+          "description": "In den ersten Monaten fangen beide etwa gleich oft ein Gespräch an. Seit August beginnt Emma fast vier von fünf, und Leos typische Antwortzeit ist von ein paar Minuten auf rund drei Stunden gewachsen."
         },
         {
-          "title": "Alltagsorganisation meist locker",
-          "description": "Einkaufslisten und Essensentscheidungen werden oft unkompliziert geklärt, mit kurzen Zusagen wie „on it“ oder einem scherzhaften „you choose“."
+          "title": "Derselbe Streit, viermal",
+          "description": "Das Abendessen am 9. April, der Flug nach Lissabon, Emmas Geburtstagstoast, das Kino im Juli: Jedes Mal platzt ein Plan, Emma sagt, wie es bei ihr ankommt, Leo entschuldigt sich, bis sie es ausspricht: „Das ist wieder derselbe Streit.“"
         },
         {
-          "title": "Unausgesprochene Erwartungen stauen sich",
-          "description": "Emma sagt am 28. September, sie habe bewusst nicht zuerst geschrieben, um zu sehen, ob Leo sich meldet; Leo empfindet das als Test, woraufhin Emma ihr Bedürfnis nach Aufmerksamkeit erklärt."
+          "title": "Versöhnung mit Pancakes",
+          "description": "Ihre Versöhnungen haben ein Ritual. Nach dem Streit im April heißt es „Pancakes am Sonntag?“, und im Oktober meldet sich Leo mit genau diesem Angebot zurück, über Gerald."
         },
         {
-          "title": "Entschuldigungen brauchen sichtbare Veränderung",
-          "description": "Nach dem vergessenen Kinotermin sagt Emma ausdrücklich, dass wiederholtes Entschuldigen nicht dasselbe wie Veränderung ist; Leo stimmt zu, den Kalender zu nutzen. Auch beim Geburtstag spricht Emma ein größeres Muster an, nicht bloß die verspätete Zugfahrt."
+          "title": "Humor als Kitt",
+          "description": "Gerald, die „noch fünf Minuten“-Morgen und das Ei beim Ramen-Laden tauchen immer wieder auf, und sie sind noch da, als alles andere leiser wird."
         }
       ],
       "highlights": [
-        "Der Auftakt ist eine Friedensverhandlung über Ananas auf Pizza, die direkt in eine Einladung zu Ramen mündet – ohne dass Leo das Topping zugibt.",
-        "Die Taube Gerald entwickelt sich zum Nebencharakter: Sie sitzt auf dem Fahrrad, wirft Basilikum um und beurteilt Person Bs Toast und Frühstück.",
-        "Als Emma nachts in der Teeküche Brezeln isst und an Leo denkt, nennt Leo das die romantischste Aussage über Brezeln überhaupt."
+        "Leos allererste Nachricht: „Hey, hier ist Leo von Janas Party. Der, der den Ananas-Pizza-Streit verloren hat 🍍“, und Emmas Antwort: „Du hast nicht verloren, du hast aufgegeben.“",
+        "In einer Nachtschicht macht ein Patient Emma einen Antrag. Sie erzählt Leo, sie habe gesagt, sie sei vergeben, fürchtet, das sei zu früh, und er antwortet: „Nein. Mir gefällt das. Sehr ❤️“",
+        "In Lissabon schickt Emma Leo die Fotos, während sie direkt neben ihm sitzt, „als Backup“, und er schreibt: „Ich liebe dich hier. So.“"
+      ]
+    },
+    "arguments": {
+      "answer": "Keiner gewinnt nach Punkten, weil die beiden über Verschiedenes streiten. Leo argumentiert mit den Umständen („Der Kunde hat wieder alles geändert“, „Der Zug stand wirklich“, „Ich mache das auch für uns“), und jedes davon stimmt. Emma argumentiert mit dem Muster („Es ist immer nur ein Meeting“, „Es geht nicht um den Zug“), und das hält über vier Streits stand. Am überzeugendsten ist Leo, wenn er aufhört, sich zu verteidigen, und zustimmt: „Du hast recht, dass es ein Muster ist. Ich will nicht, dass es eins ist.“ Der stärkste Satz im ganzen Chat ist zugleich der einfachste: „Ich will einfach manchmal Priorität sein.“",
+      "summary": "Eine Liebesgeschichte in Nachrichten: Sie beginnt mit einem verlorenen Streit über Pizza mit Ananas und einem Ramen-Date, wächst über einen Schlüssel, Weihnachten bei Emmas Eltern und eine Reise nach Lissabon, und lebt von Insiderwitzen über eine Taube namens Gerald. Dann kehrt derselbe Streit über verspätete und abgesagte Pläne immer wieder, Leos Antworten werden kürzer, und der Chat endet mit einer Nachricht, auf die noch keine Antwort kam.",
+      "vibe": "Tauben, Pancakes & Versprechen",
+      "topics": [
+        {
+          "title": "Gerald, die Taube",
+          "description": "Die Taube auf Leos Balkon wird zur festen Figur: Sie bewertet das Frühstück, hat Ansprüche an den Kaffee und verschwindet eine Weile, bevor sie im Oktober zurückkommt, „älter aussehend“."
+        },
+        {
+          "title": "Pläne und Pünktlichkeit",
+          "description": "Restaurants, Flüge, Kinokarten und wer zu was zu spät kommt: Das praktischste Thema im Chat ist zugleich das schmerzhafteste."
+        },
+        {
+          "title": "Lissabon",
+          "description": "Im März gebucht, wochenlang heruntergezählt und als ihre schönsten Tage in Erinnerung: elf Pastéis de Nata, eine Tram, die senkrecht fährt, und „Ich liebe dich hier. So.“"
+        },
+        {
+          "title": "Arbeit und Schichten",
+          "description": "Emmas Nachtschichten auf Station und Leos Pitches und Projekte bestimmen, wann sie reden können, und zuletzt, ob sie es tun."
+        },
+        {
+          "title": "Familie und Freunde",
+          "description": "Jana, die die beiden zusammengebracht hat, Weihnachten bei Emmas Eltern (Zitronenkuchen, zu viel Fußball) und Max mit seinem Sofa am Kinoabend."
+        }
+      ],
+      "people": [
+        {
+          "name": "Emma",
+          "role": "Die, die sich meldet",
+          "style": "Beginnt die meisten Gespräche, sagt klar, was sie braucht („Ich will einfach manchmal Priorität sein“), und hält die Witze am Laufen, auch wenn es angespannt ist."
+        },
+        {
+          "name": "Leo",
+          "role": "Der Warmherzige mit wenig Zeit",
+          "style": "Witzig und zärtlich, wenn er da ist („Ich merke mir alles, was du mir erzählst“), und zuletzt schreibt er viel weniger: oft ein Wort, oft Stunden später."
+        }
+      ],
+      "dynamics": [
+        {
+          "title": "Wer sich meldet",
+          "description": "In den ersten Monaten fangen beide etwa gleich oft ein Gespräch an. Seit August beginnt Emma fast vier von fünf, und Leos typische Antwortzeit ist von ein paar Minuten auf rund drei Stunden gewachsen."
+        },
+        {
+          "title": "Derselbe Streit, viermal",
+          "description": "Das Abendessen am 9. April, der Flug nach Lissabon, Emmas Geburtstagstoast, das Kino im Juli: Jedes Mal platzt ein Plan, Emma sagt, wie es bei ihr ankommt, Leo entschuldigt sich, bis sie es ausspricht: „Das ist wieder derselbe Streit.“"
+        },
+        {
+          "title": "Versöhnung mit Pancakes",
+          "description": "Ihre Versöhnungen haben ein Ritual. Nach dem Streit im April heißt es „Pancakes am Sonntag?“, und im Oktober meldet sich Leo mit genau diesem Angebot zurück, über Gerald."
+        },
+        {
+          "title": "Humor als Kitt",
+          "description": "Gerald, die „noch fünf Minuten“-Morgen und das Ei beim Ramen-Laden tauchen immer wieder auf, und sie sind noch da, als alles andere leiser wird."
+        }
+      ],
+      "highlights": [
+        "Leos allererste Nachricht: „Hey, hier ist Leo von Janas Party. Der, der den Ananas-Pizza-Streit verloren hat 🍍“, und Emmas Antwort: „Du hast nicht verloren, du hast aufgegeben.“",
+        "In einer Nachtschicht macht ein Patient Emma einen Antrag. Sie erzählt Leo, sie habe gesagt, sie sei vergeben, fürchtet, das sei zu früh, und er antwortet: „Nein. Mir gefällt das. Sehr ❤️“",
+        "In Lissabon schickt Emma Leo die Fotos, während sie direkt neben ihm sitzt, „als Backup“, und er schreibt: „Ich liebe dich hier. So.“"
+      ]
+    },
+    "effort": {
+      "answer": "In den ersten Monaten ist es ausgeglichen: Beide schreiben ähnlich viel und fangen etwa gleich oft ein Gespräch an. Seit August hat sich das Gewicht verschoben: Emma beginnt fast vier von fünf Gesprächen, und Leos typische Antwort dauert inzwischen rund drei Stunden statt ein paar Minuten. Emma merkt es und sagt es, erst „Du wirkst in letzter Zeit so weit weg“, dann, nach einer Woche, in der sie absichtlich nicht zuerst geschrieben hat, „Ich vermisse es, jemand zu sein, an den du tagsüber denkst.“ Leos Einsatz zeigt sich an anderen Stellen (er hat das Lissabon-Meeting verschoben, ihr einen Schlüssel gemacht, und er ist es, der jetzt reden will), aber im Chat selbst trägt Emma zuletzt mehr.",
+      "summary": "Eine Liebesgeschichte in Nachrichten: Sie beginnt mit einem verlorenen Streit über Pizza mit Ananas und einem Ramen-Date, wächst über einen Schlüssel, Weihnachten bei Emmas Eltern und eine Reise nach Lissabon, und lebt von Insiderwitzen über eine Taube namens Gerald. Dann kehrt derselbe Streit über verspätete und abgesagte Pläne immer wieder, Leos Antworten werden kürzer, und der Chat endet mit einer Nachricht, auf die noch keine Antwort kam.",
+      "vibe": "Tauben, Pancakes & Versprechen",
+      "topics": [
+        {
+          "title": "Gerald, die Taube",
+          "description": "Die Taube auf Leos Balkon wird zur festen Figur: Sie bewertet das Frühstück, hat Ansprüche an den Kaffee und verschwindet eine Weile, bevor sie im Oktober zurückkommt, „älter aussehend“."
+        },
+        {
+          "title": "Pläne und Pünktlichkeit",
+          "description": "Restaurants, Flüge, Kinokarten und wer zu was zu spät kommt: Das praktischste Thema im Chat ist zugleich das schmerzhafteste."
+        },
+        {
+          "title": "Lissabon",
+          "description": "Im März gebucht, wochenlang heruntergezählt und als ihre schönsten Tage in Erinnerung: elf Pastéis de Nata, eine Tram, die senkrecht fährt, und „Ich liebe dich hier. So.“"
+        },
+        {
+          "title": "Arbeit und Schichten",
+          "description": "Emmas Nachtschichten auf Station und Leos Pitches und Projekte bestimmen, wann sie reden können, und zuletzt, ob sie es tun."
+        },
+        {
+          "title": "Familie und Freunde",
+          "description": "Jana, die die beiden zusammengebracht hat, Weihnachten bei Emmas Eltern (Zitronenkuchen, zu viel Fußball) und Max mit seinem Sofa am Kinoabend."
+        }
+      ],
+      "people": [
+        {
+          "name": "Emma",
+          "role": "Die, die sich meldet",
+          "style": "Beginnt die meisten Gespräche, sagt klar, was sie braucht („Ich will einfach manchmal Priorität sein“), und hält die Witze am Laufen, auch wenn es angespannt ist."
+        },
+        {
+          "name": "Leo",
+          "role": "Der Warmherzige mit wenig Zeit",
+          "style": "Witzig und zärtlich, wenn er da ist („Ich merke mir alles, was du mir erzählst“), und zuletzt schreibt er viel weniger: oft ein Wort, oft Stunden später."
+        }
+      ],
+      "dynamics": [
+        {
+          "title": "Wer sich meldet",
+          "description": "In den ersten Monaten fangen beide etwa gleich oft ein Gespräch an. Seit August beginnt Emma fast vier von fünf, und Leos typische Antwortzeit ist von ein paar Minuten auf rund drei Stunden gewachsen."
+        },
+        {
+          "title": "Derselbe Streit, viermal",
+          "description": "Das Abendessen am 9. April, der Flug nach Lissabon, Emmas Geburtstagstoast, das Kino im Juli: Jedes Mal platzt ein Plan, Emma sagt, wie es bei ihr ankommt, Leo entschuldigt sich, bis sie es ausspricht: „Das ist wieder derselbe Streit.“"
+        },
+        {
+          "title": "Versöhnung mit Pancakes",
+          "description": "Ihre Versöhnungen haben ein Ritual. Nach dem Streit im April heißt es „Pancakes am Sonntag?“, und im Oktober meldet sich Leo mit genau diesem Angebot zurück, über Gerald."
+        },
+        {
+          "title": "Humor als Kitt",
+          "description": "Gerald, die „noch fünf Minuten“-Morgen und das Ei beim Ramen-Laden tauchen immer wieder auf, und sie sind noch da, als alles andere leiser wird."
+        }
+      ],
+      "highlights": [
+        "Leos allererste Nachricht: „Hey, hier ist Leo von Janas Party. Der, der den Ananas-Pizza-Streit verloren hat 🍍“, und Emmas Antwort: „Du hast nicht verloren, du hast aufgegeben.“",
+        "In einer Nachtschicht macht ein Patient Emma einen Antrag. Sie erzählt Leo, sie habe gesagt, sie sei vergeben, fürchtet, das sei zu früh, und er antwortet: „Nein. Mir gefällt das. Sehr ❤️“",
+        "In Lissabon schickt Emma Leo die Fotos, während sie direkt neben ihm sitzt, „als Backup“, und er schreibt: „Ich liebe dich hier. So.“"
+      ]
+    },
+    "into:Emma": {
+      "answer": "Ja, der Chat zeigt echte Gefühle von Leo, auch jetzt noch. Er hat zuerst „Ich liebe dich“ gesagt, dir einen Schlüssel gemacht, sich an deine gelben Blumen erinnert und in Lissabon „Ich liebe dich hier. So.“ geschrieben; im Oktober meldet er sich noch mit Gerald und Pancakes. Was sich geändert hat, ist, wie viel davon bei dir ankommt: Seit August antwortet er langsamer und kürzer, und er gibt zu, dass er „gerade schlecht darin ist, es zu zeigen“. Sein „Ich denke in letzter Zeit viel über uns nach“ kann vieles heißen, also frag ihn morgen, was ihm durch den Kopf geht, und sag ihm, was du brauchst, um dich gesehen zu fühlen.",
+      "summary": "Dein Chat mit Leo ist eine Liebesgeschichte in Nachrichten: ein verlorener Streit über Pizza mit Ananas, ein Ramen-Date, ein Schlüssel, Weihnachten bei deinen Eltern und Lissabon, zusammengehalten von einer Taube namens Gerald. Dann kehrt derselbe Streit über verspätete und abgesagte Pläne immer wieder, seine Antworten werden kürzer, und der Chat endet mit seiner Nachricht, die noch auf deine Antwort wartet.",
+      "vibe": "Tauben, Pancakes & Versprechen",
+      "topics": [
+        {
+          "title": "Gerald, die Taube",
+          "description": "Die Taube auf Leos Balkon wird zur festen Figur: Sie bewertet das Frühstück, hat Ansprüche an den Kaffee und verschwindet eine Weile, bevor sie im Oktober zurückkommt, „älter aussehend“."
+        },
+        {
+          "title": "Pläne und Pünktlichkeit",
+          "description": "Restaurants, Flüge, Kinokarten und wer zu was zu spät kommt: Das praktischste Thema in eurem Chat ist zugleich das schmerzhafteste."
+        },
+        {
+          "title": "Lissabon",
+          "description": "Im März gebucht, wochenlang heruntergezählt und als eure schönsten Tage in Erinnerung: elf Pastéis de Nata, eine Tram, die senkrecht fährt, und „Ich liebe dich hier. So.“"
+        },
+        {
+          "title": "Arbeit und Schichten",
+          "description": "Deine Nachtschichten auf Station und Leos Pitches und Projekte bestimmen, wann ihr reden könnt, und zuletzt, ob ihr es tut."
+        },
+        {
+          "title": "Familie und Freunde",
+          "description": "Jana, die euch zusammengebracht hat, Weihnachten bei deinen Eltern (Zitronenkuchen, zu viel Fußball) und Max mit seinem Sofa am Kinoabend."
+        }
+      ],
+      "people": [
+        {
+          "name": "Emma",
+          "role": "Die, die sich meldet",
+          "style": "Du beginnst die meisten Gespräche, sagst klar, was du brauchst („Ich will einfach manchmal Priorität sein“), und hältst die Witze am Leben, auch wenn es angespannt ist."
+        },
+        {
+          "name": "Leo",
+          "role": "Der Warmherzige mit wenig Zeit",
+          "style": "Witzig und zärtlich, wenn er da ist („Ich merke mir alles, was du mir erzählst“), und zuletzt schreibt er viel weniger: oft ein Wort, oft Stunden später."
+        }
+      ],
+      "dynamics": [
+        {
+          "title": "Wer sich meldet",
+          "description": "In den ersten Monaten fangt ihr etwa gleich oft ein Gespräch an. Seit August beginnst du fast vier von fünf, und Leos typische Antwortzeit ist von ein paar Minuten auf rund drei Stunden gewachsen."
+        },
+        {
+          "title": "Derselbe Streit, viermal",
+          "description": "Das Abendessen am 9. April, der Flug nach Lissabon, dein Geburtstagstoast, das Kino im Juli: Jedes Mal platzt ein Plan, du sagst, wie es bei dir ankommt, er entschuldigt sich, bis du es aussprichst: „Das ist wieder derselbe Streit.“"
+        },
+        {
+          "title": "Versöhnung mit Pancakes",
+          "description": "Eure Versöhnungen haben ein Ritual. Nach dem Streit im April fragst du „Pancakes am Sonntag?“, und im Oktober meldet sich Leo mit genau diesem Angebot zurück, über Gerald."
+        },
+        {
+          "title": "Humor als Kitt",
+          "description": "Gerald, die „noch fünf Minuten“-Morgen und das Ei beim Ramen-Laden tauchen immer wieder auf, und sie sind noch da, als alles andere leiser wird."
+        }
+      ],
+      "highlights": [
+        "Leos allererste Nachricht: „Hey, hier ist Leo von Janas Party. Der, der den Ananas-Pizza-Streit verloren hat 🍍“, und deine Antwort: „Du hast nicht verloren, du hast aufgegeben.“",
+        "In einer Nachtschicht macht dir ein Patient einen Antrag. Du erzählst Leo, du hättest gesagt, du seist vergeben, fürchtest, das sei zu früh, und er antwortet: „Nein. Mir gefällt das. Sehr ❤️“",
+        "In Lissabon schickst du Leo die Fotos, während du direkt neben ihm sitzt, „als Backup“, und er schreibt: „Ich liebe dich hier. So.“"
+      ]
+    },
+    "into:Leo": {
+      "answer": "Ganz klar, ja. Emma meldet sich weiter, auch wenn du still wirst: Sie beginnt die meisten eurer Gespräche, fragt „Ist bei uns alles okay?“, und als sie sich eine Woche zurückhält, dann, um zu sehen, ob du auf sie zukommst. Ihre schwersten Nachrichten wollen mehr von dir, nicht weniger: „Ich will einfach manchmal Priorität sein“, „Ich will, dass du da sein willst.“ Als du im Oktober Pancakes angeboten hast, hat sie innerhalb von Minuten Ja gesagt. Das Gespräch morgen ist deine Chance zu zeigen, dass es in beide Richtungen geht: Bring etwas Konkretes mit, nicht nur eine Entschuldigung.",
+      "summary": "Dein Chat mit Emma ist eine Liebesgeschichte in Nachrichten: ein verlorener Streit über Pizza mit Ananas, ein Ramen-Date, ein Schlüssel, Weihnachten bei ihren Eltern und Lissabon, zusammengehalten von deiner Taube Gerald. Dann kehrt derselbe Streit über verspätete und abgesagte Pläne immer wieder, deine Antworten werden kürzer, und der Chat endet mit deiner eigenen Bitte um ein Gespräch.",
+      "vibe": "Tauben, Pancakes & Versprechen",
+      "topics": [
+        {
+          "title": "Gerald, die Taube",
+          "description": "Die Taube auf deinem Balkon wird zur festen Figur: Sie bewertet das Frühstück, hat Ansprüche an den Kaffee und verschwindet eine Weile, bevor sie im Oktober zurückkommt, „älter aussehend“."
+        },
+        {
+          "title": "Pläne und Pünktlichkeit",
+          "description": "Restaurants, Flüge, Kinokarten und wer zu was zu spät kommt: Das praktischste Thema in eurem Chat ist zugleich das schmerzhafteste."
+        },
+        {
+          "title": "Lissabon",
+          "description": "Im März gebucht, wochenlang heruntergezählt und als eure schönsten Tage in Erinnerung: elf Pastéis de Nata, eine Tram, die senkrecht fährt, und „Ich liebe dich hier. So.“"
+        },
+        {
+          "title": "Arbeit und Schichten",
+          "description": "Deine Pitches und Projekte und Emmas Nachtschichten auf Station bestimmen, wann ihr reden könnt, und zuletzt, ob ihr es tut."
+        },
+        {
+          "title": "Familie und Freunde",
+          "description": "Jana, die euch zusammengebracht hat, Weihnachten bei Emmas Eltern (Zitronenkuchen, zu viel Fußball) und Max mit seinem Sofa am Kinoabend."
+        }
+      ],
+      "people": [
+        {
+          "name": "Leo",
+          "role": "Der Warmherzige mit wenig Zeit",
+          "style": "Du bist witzig und zärtlich, wenn du da bist („Ich merke mir alles, was du mir erzählst“), und zuletzt schreibst du viel weniger: oft ein Wort, oft Stunden später."
+        },
+        {
+          "name": "Emma",
+          "role": "Die, die sich meldet",
+          "style": "Sie beginnt die meisten eurer Gespräche, sagt klar, was sie braucht („Ich will einfach manchmal Priorität sein“), und hält die Witze am Laufen, auch wenn es angespannt ist."
+        }
+      ],
+      "dynamics": [
+        {
+          "title": "Wer sich meldet",
+          "description": "In den ersten Monaten fangt ihr etwa gleich oft ein Gespräch an. Seit August beginnt Emma fast vier von fünf, und deine typische Antwortzeit ist von ein paar Minuten auf rund drei Stunden gewachsen."
+        },
+        {
+          "title": "Derselbe Streit, viermal",
+          "description": "Das Abendessen am 9. April, der Flug nach Lissabon, ihr Geburtstagstoast, das Kino im Juli: Jedes Mal platzt einer deiner Pläne, sie sagt, wie es bei ihr ankommt, du entschuldigst dich, bis sie es ausspricht: „Das ist wieder derselbe Streit.“"
+        },
+        {
+          "title": "Versöhnung mit Pancakes",
+          "description": "Eure Versöhnungen haben ein Ritual. Nach dem Streit im April fragt sie „Pancakes am Sonntag?“, und im Oktober meldest du dich mit genau diesem Angebot zurück, über Gerald."
+        },
+        {
+          "title": "Humor als Kitt",
+          "description": "Gerald, die „noch fünf Minuten“-Morgen und das Ei beim Ramen-Laden tauchen immer wieder auf, und sie sind noch da, als alles andere leiser wird."
+        }
+      ],
+      "highlights": [
+        "Deine allererste Nachricht: „Hey, hier ist Leo von Janas Party. Der, der den Ananas-Pizza-Streit verloren hat 🍍“, und Emmas Antwort: „Du hast nicht verloren, du hast aufgegeben.“",
+        "In einer Nachtschicht macht ein Patient Emma einen Antrag. Sie erzählt dir, sie habe gesagt, sie sei vergeben, fürchtet, das sei zu früh, und du antwortest: „Nein. Mir gefällt das. Sehr ❤️“",
+        "In Lissabon schickt Emma dir die Fotos, während sie direkt neben dir sitzt, „als Backup“, und du schreibst: „Ich liebe dich hier. So.“"
+      ]
+    },
+    "worried:Emma": {
+      "answer": "Zum Teil ja, und du hast es schon benannt: Seit August beginnt Leo kaum noch ein Gespräch, seine typische Antwort dauert rund drei Stunden, und im September hast du fünf Tage nichts von ihm gehört. Dazu der Streit, der immer wiederkommt (das Abendessen, Lissabon, dein Geburtstagstoast, das Kino), und sein „Ich denke in letzter Zeit viel über uns nach“: Deine Unruhe ist verständlich. Aber es gibt auch gute Zeichen: Er erkennt das Muster an („Ich will nicht, dass es eins ist“), schiebt es auf seine Arbeit statt auf dich und kommt noch mit Gerald und Pancakes zurück. Was er morgen sagt, kann der Chat dir nicht verraten; geh ruhig hinein, lass ihn zuerst erzählen, was ihn beschäftigt, und sei klar darin, was du brauchst.",
+      "summary": "Dein Chat mit Leo ist eine Liebesgeschichte in Nachrichten: ein verlorener Streit über Pizza mit Ananas, ein Ramen-Date, ein Schlüssel, Weihnachten bei deinen Eltern und Lissabon, zusammengehalten von einer Taube namens Gerald. Dann kehrt derselbe Streit über verspätete und abgesagte Pläne immer wieder, seine Antworten werden kürzer, und der Chat endet mit seiner Nachricht, die noch auf deine Antwort wartet.",
+      "vibe": "Tauben, Pancakes & Versprechen",
+      "topics": [
+        {
+          "title": "Gerald, die Taube",
+          "description": "Die Taube auf Leos Balkon wird zur festen Figur: Sie bewertet das Frühstück, hat Ansprüche an den Kaffee und verschwindet eine Weile, bevor sie im Oktober zurückkommt, „älter aussehend“."
+        },
+        {
+          "title": "Pläne und Pünktlichkeit",
+          "description": "Restaurants, Flüge, Kinokarten und wer zu was zu spät kommt: Das praktischste Thema in eurem Chat ist zugleich das schmerzhafteste."
+        },
+        {
+          "title": "Lissabon",
+          "description": "Im März gebucht, wochenlang heruntergezählt und als eure schönsten Tage in Erinnerung: elf Pastéis de Nata, eine Tram, die senkrecht fährt, und „Ich liebe dich hier. So.“"
+        },
+        {
+          "title": "Arbeit und Schichten",
+          "description": "Deine Nachtschichten auf Station und Leos Pitches und Projekte bestimmen, wann ihr reden könnt, und zuletzt, ob ihr es tut."
+        },
+        {
+          "title": "Familie und Freunde",
+          "description": "Jana, die euch zusammengebracht hat, Weihnachten bei deinen Eltern (Zitronenkuchen, zu viel Fußball) und Max mit seinem Sofa am Kinoabend."
+        }
+      ],
+      "people": [
+        {
+          "name": "Emma",
+          "role": "Die, die sich meldet",
+          "style": "Du beginnst die meisten Gespräche, sagst klar, was du brauchst („Ich will einfach manchmal Priorität sein“), und hältst die Witze am Leben, auch wenn es angespannt ist."
+        },
+        {
+          "name": "Leo",
+          "role": "Der Warmherzige mit wenig Zeit",
+          "style": "Witzig und zärtlich, wenn er da ist („Ich merke mir alles, was du mir erzählst“), und zuletzt schreibt er viel weniger: oft ein Wort, oft Stunden später."
+        }
+      ],
+      "dynamics": [
+        {
+          "title": "Wer sich meldet",
+          "description": "In den ersten Monaten fangt ihr etwa gleich oft ein Gespräch an. Seit August beginnst du fast vier von fünf, und Leos typische Antwortzeit ist von ein paar Minuten auf rund drei Stunden gewachsen."
+        },
+        {
+          "title": "Derselbe Streit, viermal",
+          "description": "Das Abendessen am 9. April, der Flug nach Lissabon, dein Geburtstagstoast, das Kino im Juli: Jedes Mal platzt ein Plan, du sagst, wie es bei dir ankommt, er entschuldigt sich, bis du es aussprichst: „Das ist wieder derselbe Streit.“"
+        },
+        {
+          "title": "Versöhnung mit Pancakes",
+          "description": "Eure Versöhnungen haben ein Ritual. Nach dem Streit im April fragst du „Pancakes am Sonntag?“, und im Oktober meldet sich Leo mit genau diesem Angebot zurück, über Gerald."
+        },
+        {
+          "title": "Humor als Kitt",
+          "description": "Gerald, die „noch fünf Minuten“-Morgen und das Ei beim Ramen-Laden tauchen immer wieder auf, und sie sind noch da, als alles andere leiser wird."
+        }
+      ],
+      "highlights": [
+        "Leos allererste Nachricht: „Hey, hier ist Leo von Janas Party. Der, der den Ananas-Pizza-Streit verloren hat 🍍“, und deine Antwort: „Du hast nicht verloren, du hast aufgegeben.“",
+        "In einer Nachtschicht macht dir ein Patient einen Antrag. Du erzählst Leo, du hättest gesagt, du seist vergeben, fürchtest, das sei zu früh, und er antwortet: „Nein. Mir gefällt das. Sehr ❤️“",
+        "In Lissabon schickst du Leo die Fotos, während du direkt neben ihm sitzt, „als Backup“, und er schreibt: „Ich liebe dich hier. So.“"
+      ]
+    },
+    "worried:Leo": {
+      "answer": "Ja, und das solltest du vor morgen ernst nehmen. Emma hat dir dasselbe auf viele Arten gesagt („Es ist immer irgendwas“, „Ich will, dass du da sein willst“, „Ich vermisse es, jemand zu sein, an den du tagsüber denkst“), und viermal ist einer deiner Pläne in letzter Minute geplatzt. Seit August beginnt sie fast jedes Gespräch, und deine typische Antwort dauert rund drei Stunden; von ihrer Seite aus ist der Chat still geworden. Aufgegeben hat sie nicht: Sie fragt noch „Ist bei uns alles okay?“ und hat innerhalb von Minuten Ja zu Pancakes gesagt. Was auch immer du über „uns“ gedacht hast, bring eine konkrete Veränderung mit in das Gespräch, um das du gebeten hast, nicht nur eine Entschuldigung.",
+      "summary": "Dein Chat mit Emma ist eine Liebesgeschichte in Nachrichten: ein verlorener Streit über Pizza mit Ananas, ein Ramen-Date, ein Schlüssel, Weihnachten bei ihren Eltern und Lissabon, zusammengehalten von deiner Taube Gerald. Dann kehrt derselbe Streit über verspätete und abgesagte Pläne immer wieder, deine Antworten werden kürzer, und der Chat endet mit deiner eigenen Bitte um ein Gespräch.",
+      "vibe": "Tauben, Pancakes & Versprechen",
+      "topics": [
+        {
+          "title": "Gerald, die Taube",
+          "description": "Die Taube auf deinem Balkon wird zur festen Figur: Sie bewertet das Frühstück, hat Ansprüche an den Kaffee und verschwindet eine Weile, bevor sie im Oktober zurückkommt, „älter aussehend“."
+        },
+        {
+          "title": "Pläne und Pünktlichkeit",
+          "description": "Restaurants, Flüge, Kinokarten und wer zu was zu spät kommt: Das praktischste Thema in eurem Chat ist zugleich das schmerzhafteste."
+        },
+        {
+          "title": "Lissabon",
+          "description": "Im März gebucht, wochenlang heruntergezählt und als eure schönsten Tage in Erinnerung: elf Pastéis de Nata, eine Tram, die senkrecht fährt, und „Ich liebe dich hier. So.“"
+        },
+        {
+          "title": "Arbeit und Schichten",
+          "description": "Deine Pitches und Projekte und Emmas Nachtschichten auf Station bestimmen, wann ihr reden könnt, und zuletzt, ob ihr es tut."
+        },
+        {
+          "title": "Familie und Freunde",
+          "description": "Jana, die euch zusammengebracht hat, Weihnachten bei Emmas Eltern (Zitronenkuchen, zu viel Fußball) und Max mit seinem Sofa am Kinoabend."
+        }
+      ],
+      "people": [
+        {
+          "name": "Leo",
+          "role": "Der Warmherzige mit wenig Zeit",
+          "style": "Du bist witzig und zärtlich, wenn du da bist („Ich merke mir alles, was du mir erzählst“), und zuletzt schreibst du viel weniger: oft ein Wort, oft Stunden später."
+        },
+        {
+          "name": "Emma",
+          "role": "Die, die sich meldet",
+          "style": "Sie beginnt die meisten eurer Gespräche, sagt klar, was sie braucht („Ich will einfach manchmal Priorität sein“), und hält die Witze am Laufen, auch wenn es angespannt ist."
+        }
+      ],
+      "dynamics": [
+        {
+          "title": "Wer sich meldet",
+          "description": "In den ersten Monaten fangt ihr etwa gleich oft ein Gespräch an. Seit August beginnt Emma fast vier von fünf, und deine typische Antwortzeit ist von ein paar Minuten auf rund drei Stunden gewachsen."
+        },
+        {
+          "title": "Derselbe Streit, viermal",
+          "description": "Das Abendessen am 9. April, der Flug nach Lissabon, ihr Geburtstagstoast, das Kino im Juli: Jedes Mal platzt einer deiner Pläne, sie sagt, wie es bei ihr ankommt, du entschuldigst dich, bis sie es ausspricht: „Das ist wieder derselbe Streit.“"
+        },
+        {
+          "title": "Versöhnung mit Pancakes",
+          "description": "Eure Versöhnungen haben ein Ritual. Nach dem Streit im April fragt sie „Pancakes am Sonntag?“, und im Oktober meldest du dich mit genau diesem Angebot zurück, über Gerald."
+        },
+        {
+          "title": "Humor als Kitt",
+          "description": "Gerald, die „noch fünf Minuten“-Morgen und das Ei beim Ramen-Laden tauchen immer wieder auf, und sie sind noch da, als alles andere leiser wird."
+        }
+      ],
+      "highlights": [
+        "Deine allererste Nachricht: „Hey, hier ist Leo von Janas Party. Der, der den Ananas-Pizza-Streit verloren hat 🍍“, und Emmas Antwort: „Du hast nicht verloren, du hast aufgegeben.“",
+        "In einer Nachtschicht macht ein Patient Emma einen Antrag. Sie erzählt dir, sie habe gesagt, sie sei vergeben, fürchtet, das sei zu früh, und du antwortest: „Nein. Mir gefällt das. Sehr ❤️“",
+        "In Lissabon schickt Emma dir die Fotos, während sie direkt neben dir sitzt, „als Backup“, und du schreibst: „Ich liebe dich hier. So.“"
+      ]
+    },
+    "gift:Emma": {
+      "answer": "Etwas, das Leo zurück in eure gemeinsame Welt holt, nicht etwas Teures. Ein kleiner Druck oder eine Figur einer Taube (Gerald, natürlich) würde treffen, gerade jetzt, wo „Gerald zurück ist“. Oder ein Erlebnis: ein Pancake-Frühstück am Sonntag, das du komplett planst, oder ein gerahmtes Foto aus Lissabon, der Reise, auf der er „Ich liebe dich hier. So.“ geschrieben hat. Er „ertrinkt in Arbeit“, also zählt alles, was ihm einen entspannten Abend mit dir schenkt, mehr als eine große Überraschung.",
+      "summary": "Dein Chat mit Leo ist eine Liebesgeschichte in Nachrichten: ein verlorener Streit über Pizza mit Ananas, ein Ramen-Date, ein Schlüssel, Weihnachten bei deinen Eltern und Lissabon, zusammengehalten von einer Taube namens Gerald. Dann kehrt derselbe Streit über verspätete und abgesagte Pläne immer wieder, seine Antworten werden kürzer, und der Chat endet mit seiner Nachricht, die noch auf deine Antwort wartet.",
+      "vibe": "Tauben, Pancakes & Versprechen",
+      "topics": [
+        {
+          "title": "Gerald, die Taube",
+          "description": "Die Taube auf Leos Balkon wird zur festen Figur: Sie bewertet das Frühstück, hat Ansprüche an den Kaffee und verschwindet eine Weile, bevor sie im Oktober zurückkommt, „älter aussehend“."
+        },
+        {
+          "title": "Pläne und Pünktlichkeit",
+          "description": "Restaurants, Flüge, Kinokarten und wer zu was zu spät kommt: Das praktischste Thema in eurem Chat ist zugleich das schmerzhafteste."
+        },
+        {
+          "title": "Lissabon",
+          "description": "Im März gebucht, wochenlang heruntergezählt und als eure schönsten Tage in Erinnerung: elf Pastéis de Nata, eine Tram, die senkrecht fährt, und „Ich liebe dich hier. So.“"
+        },
+        {
+          "title": "Arbeit und Schichten",
+          "description": "Deine Nachtschichten auf Station und Leos Pitches und Projekte bestimmen, wann ihr reden könnt, und zuletzt, ob ihr es tut."
+        },
+        {
+          "title": "Familie und Freunde",
+          "description": "Jana, die euch zusammengebracht hat, Weihnachten bei deinen Eltern (Zitronenkuchen, zu viel Fußball) und Max mit seinem Sofa am Kinoabend."
+        }
+      ],
+      "people": [
+        {
+          "name": "Emma",
+          "role": "Die, die sich meldet",
+          "style": "Du beginnst die meisten Gespräche, sagst klar, was du brauchst („Ich will einfach manchmal Priorität sein“), und hältst die Witze am Leben, auch wenn es angespannt ist."
+        },
+        {
+          "name": "Leo",
+          "role": "Der Warmherzige mit wenig Zeit",
+          "style": "Witzig und zärtlich, wenn er da ist („Ich merke mir alles, was du mir erzählst“), und zuletzt schreibt er viel weniger: oft ein Wort, oft Stunden später."
+        }
+      ],
+      "dynamics": [
+        {
+          "title": "Wer sich meldet",
+          "description": "In den ersten Monaten fangt ihr etwa gleich oft ein Gespräch an. Seit August beginnst du fast vier von fünf, und Leos typische Antwortzeit ist von ein paar Minuten auf rund drei Stunden gewachsen."
+        },
+        {
+          "title": "Derselbe Streit, viermal",
+          "description": "Das Abendessen am 9. April, der Flug nach Lissabon, dein Geburtstagstoast, das Kino im Juli: Jedes Mal platzt ein Plan, du sagst, wie es bei dir ankommt, er entschuldigt sich, bis du es aussprichst: „Das ist wieder derselbe Streit.“"
+        },
+        {
+          "title": "Versöhnung mit Pancakes",
+          "description": "Eure Versöhnungen haben ein Ritual. Nach dem Streit im April fragst du „Pancakes am Sonntag?“, und im Oktober meldet sich Leo mit genau diesem Angebot zurück, über Gerald."
+        },
+        {
+          "title": "Humor als Kitt",
+          "description": "Gerald, die „noch fünf Minuten“-Morgen und das Ei beim Ramen-Laden tauchen immer wieder auf, und sie sind noch da, als alles andere leiser wird."
+        }
+      ],
+      "highlights": [
+        "Leos allererste Nachricht: „Hey, hier ist Leo von Janas Party. Der, der den Ananas-Pizza-Streit verloren hat 🍍“, und deine Antwort: „Du hast nicht verloren, du hast aufgegeben.“",
+        "In einer Nachtschicht macht dir ein Patient einen Antrag. Du erzählst Leo, du hättest gesagt, du seist vergeben, fürchtest, das sei zu früh, und er antwortet: „Nein. Mir gefällt das. Sehr ❤️“",
+        "In Lissabon schickst du Leo die Fotos, während du direkt neben ihm sitzt, „als Backup“, und er schreibt: „Ich liebe dich hier. So.“"
+      ]
+    },
+    "gift:Leo": {
+      "answer": "Wieder gelbe Blumen: Sie hat es geliebt, dass du sie dir am Valentinstag gemerkt hast. Noch besser mit etwas, das zeigt, dass du ihr zugehört hast, etwa ein Date im Kalender, das du versprichst nicht zu verschieben, unterschrieben mit deinem eigenen Satz: „Ich bin um Viertel vor acht da. Nicht mal zu spät.“ Ein gerahmtes Lissabon-Foto holt die Tage zurück, die sie „so behalten“ will, und eine Tüte Brezeln für ihre nächste Nachtschicht bringt sie zum Lachen. Was auch immer du wählst: Schenk es nach dem Gespräch morgen, nicht stattdessen.",
+      "summary": "Dein Chat mit Emma ist eine Liebesgeschichte in Nachrichten: ein verlorener Streit über Pizza mit Ananas, ein Ramen-Date, ein Schlüssel, Weihnachten bei ihren Eltern und Lissabon, zusammengehalten von deiner Taube Gerald. Dann kehrt derselbe Streit über verspätete und abgesagte Pläne immer wieder, deine Antworten werden kürzer, und der Chat endet mit deiner eigenen Bitte um ein Gespräch.",
+      "vibe": "Tauben, Pancakes & Versprechen",
+      "topics": [
+        {
+          "title": "Gerald, die Taube",
+          "description": "Die Taube auf deinem Balkon wird zur festen Figur: Sie bewertet das Frühstück, hat Ansprüche an den Kaffee und verschwindet eine Weile, bevor sie im Oktober zurückkommt, „älter aussehend“."
+        },
+        {
+          "title": "Pläne und Pünktlichkeit",
+          "description": "Restaurants, Flüge, Kinokarten und wer zu was zu spät kommt: Das praktischste Thema in eurem Chat ist zugleich das schmerzhafteste."
+        },
+        {
+          "title": "Lissabon",
+          "description": "Im März gebucht, wochenlang heruntergezählt und als eure schönsten Tage in Erinnerung: elf Pastéis de Nata, eine Tram, die senkrecht fährt, und „Ich liebe dich hier. So.“"
+        },
+        {
+          "title": "Arbeit und Schichten",
+          "description": "Deine Pitches und Projekte und Emmas Nachtschichten auf Station bestimmen, wann ihr reden könnt, und zuletzt, ob ihr es tut."
+        },
+        {
+          "title": "Familie und Freunde",
+          "description": "Jana, die euch zusammengebracht hat, Weihnachten bei Emmas Eltern (Zitronenkuchen, zu viel Fußball) und Max mit seinem Sofa am Kinoabend."
+        }
+      ],
+      "people": [
+        {
+          "name": "Leo",
+          "role": "Der Warmherzige mit wenig Zeit",
+          "style": "Du bist witzig und zärtlich, wenn du da bist („Ich merke mir alles, was du mir erzählst“), und zuletzt schreibst du viel weniger: oft ein Wort, oft Stunden später."
+        },
+        {
+          "name": "Emma",
+          "role": "Die, die sich meldet",
+          "style": "Sie beginnt die meisten eurer Gespräche, sagt klar, was sie braucht („Ich will einfach manchmal Priorität sein“), und hält die Witze am Laufen, auch wenn es angespannt ist."
+        }
+      ],
+      "dynamics": [
+        {
+          "title": "Wer sich meldet",
+          "description": "In den ersten Monaten fangt ihr etwa gleich oft ein Gespräch an. Seit August beginnt Emma fast vier von fünf, und deine typische Antwortzeit ist von ein paar Minuten auf rund drei Stunden gewachsen."
+        },
+        {
+          "title": "Derselbe Streit, viermal",
+          "description": "Das Abendessen am 9. April, der Flug nach Lissabon, ihr Geburtstagstoast, das Kino im Juli: Jedes Mal platzt einer deiner Pläne, sie sagt, wie es bei ihr ankommt, du entschuldigst dich, bis sie es ausspricht: „Das ist wieder derselbe Streit.“"
+        },
+        {
+          "title": "Versöhnung mit Pancakes",
+          "description": "Eure Versöhnungen haben ein Ritual. Nach dem Streit im April fragt sie „Pancakes am Sonntag?“, und im Oktober meldest du dich mit genau diesem Angebot zurück, über Gerald."
+        },
+        {
+          "title": "Humor als Kitt",
+          "description": "Gerald, die „noch fünf Minuten“-Morgen und das Ei beim Ramen-Laden tauchen immer wieder auf, und sie sind noch da, als alles andere leiser wird."
+        }
+      ],
+      "highlights": [
+        "Deine allererste Nachricht: „Hey, hier ist Leo von Janas Party. Der, der den Ananas-Pizza-Streit verloren hat 🍍“, und Emmas Antwort: „Du hast nicht verloren, du hast aufgegeben.“",
+        "In einer Nachtschicht macht ein Patient Emma einen Antrag. Sie erzählt dir, sie habe gesagt, sie sei vergeben, fürchtet, das sei zu früh, und du antwortest: „Nein. Mir gefällt das. Sehr ❤️“",
+        "In Lissabon schickt Emma dir die Fotos, während sie direkt neben dir sitzt, „als Backup“, und du schreibst: „Ich liebe dich hier. So.“"
       ]
     }
   },
@@ -629,35 +633,35 @@
       "kind": "ask",
       "me": null,
       "prompt": "Warum platzen unsere Pläne immer wieder?",
-      "reply": "Im Chat wirkt es nicht so, als würden eure Pläne grundsätzlich immer platzen: Oft verabredet ihr euch und trefft euch, aber es gibt wiederholt Ausfälle oder Unsicherheit, die Emma besonders treffen. Konkret verpasste Leo am 9. April das Abendessen, weil ein Meeting länger dauerte, und am 22. Juli wurde der Kinobesuch vergessen, weil Leo Max beim Umzug helfen wollte; dazu kamen Verspätungen und die mögliche Arbeitsverschiebung eurer Lissabonreise. Leo nennt Arbeitsdruck und vergessene Absprachen als Gründe und entschuldigt sich, doch Emma sagt ausdrücklich: „Es ist immer irgendwas“ und „Sich entschuldigen und es dann wieder tun ist nicht dasselbe wie sich ändern.“ Der Chat kann nicht zeigen, warum es innerlich passiert, aber er legt nahe, dass Arbeitsbelastung, Vergessen und fehlende rechtzeitige Nachricht eine Rolle spielen – und dass bisherige Versprechen, etwa Kalender-Erinnerungen zu nutzen, nicht genug Vertrauen zurückgegeben haben. Sprecht morgen konkret darüber, welche Pläne zuletzt geplatzt sind und welche verlässliche Vereinbarung Leo tatsächlich umsetzen kann."
+      "reply": "Weil die Arbeit die Entscheidungen in letzter Minute gewinnt und die Nachricht zu spät kommt. Das Abendessen am 9. April, der Lissabon-Morgen, der Geburtstagstoast und das Kino im Juli folgen derselben Form: Ein Plan steht, bei Leo kommt etwas dazwischen, und Emma erfährt es, wenn sie schon wartet. Jede Entschuldigung ist ernst gemeint („Ich hasse es, wenn wir den Tag so beenden“, „Diesmal meine ich es ernst“), aber die Gewohnheit darunter ändert sich nicht, deshalb fühlt es sich jedes Mal wie derselbe Streit an. Eine kleine Regel würde das durchbrechen: eine Nachricht, sobald ein Plan wackelt, und ein Abend pro Woche, den keiner von euch verschiebt."
     },
     {
       "id": "distance",
       "kind": "ask",
       "me": "Emma",
       "prompt": "Zieht Leo sich zurück, oder ist er nur gestresst?",
-      "reply": "Beides ist möglich, und der Chat kann seine innere Lage nicht eindeutig klären. Für starken Arbeitsstress spricht, dass Leo schon am 12. August ein intensives Projekt bis etwa Oktober ankündigt und am 30. August sagt, die Arbeit sei viel und er sei müde. Gleichzeitig wirkt der Rückzug über die Zeit konkreter: Ende September meldet Leo sich fünf Tage nicht, und im Oktober kommen öfter knappe Antworten wie „ok“, „maybe“ oder „busy, later“, während du meist den Kontakt anstößt. Das ist mehr als nur ein einzelner stressiger Tag, aber es beweist nicht, dass Leo die Beziehung beenden will; die Nachricht am 24. Oktober, dass Leo über euch nachdenkt und persönlich reden möchte, zeigt vor allem, dass ein wichtiges Gespräch ansteht. Geh möglichst offen hinein und frag direkt, was sich für Leo verändert hat und was Leo sich für eure Beziehung wünscht."
+      "reply": "Wahrscheinlich beides, und der Chat kann es nicht ganz trennen. Er hat dir gesagt, dass das neue Projekt bis Oktober intensiv wird, und schreibt, er „ertrinkt in Arbeit“, das ist Stress. Aber der Rückgang geht über die Arbeitszeit hinaus: Seit August beginnt er kaum ein Gespräch, antwortet oft mit einem Wort, und im September hast du fünf Tage keine Nachricht von ihm bekommen. Er meldet sich trotzdem zurück (Gerald, Pancakes, „Ich bin doch hier“), er hat also nicht abgeschlossen; frag ihn morgen, was ihn beschäftigt und ob das Projekt die ganze Geschichte ist."
     },
     {
       "id": "talk",
       "kind": "ask",
       "me": "Emma",
       "prompt": "Wie fange ich das Gespräch morgen gut an?",
-      "reply": "Du könntest ruhig anfangen: „Danke, dass du das Gespräch vorgeschlagen hast. Deine Nachricht macht mich etwas nervös, aber ich möchte verstehen, was dich beschäftigt – magst du erzählen, worüber du nachgedacht hast?“ Danach kannst du auch deine Seite benennen: Seit dem Sommer vermisst du mehr Nähe und Initiative, und am 28. September hast du das angesprochen, als Leo fünf Tage nicht geschrieben hatte. Versuch erst zuzuhören, statt gleich zu erraten, ob Leo über eine Trennung sprechen will. Nimm dir vor dem Treffen kurz Zeit, drei Dinge aufzuschreiben: was du fühlst, was du wissen möchtest und was du dir wünschst."
+      "reply": "Mach es ihm leicht, ehrlich zu sein: „Ich bin froh, dass du reden willst. Erzähl mir, was dich beschäftigt, und dann möchte ich dir erzählen, was mich beschäftigt.“ Lass ihn anfangen, weil er gefragt hat, und hör ihm bis zum Ende zu, bevor du antwortest. Wenn du dran bist, nenne ein oder zwei Dinge, ganz konkret: Du willst von ihm hören, wenn sich ein Plan ändert, und du willst dich tagsüber gesehen fühlen. Lass „immer“ und „nie“ weg; das Konkrete kommt bei euch beiden besser an."
     },
     {
       "id": "breakup",
       "kind": "reply",
       "me": "Emma",
       "prompt": "was soll das denn heißen?? wenn du Schluss machen willst, sag es einfach",
-      "reply": "Was meinst du damit? Ich bin gerade verunsichert und frage mich, ob du über unsere Beziehung sprechen willst. Wenn ja, lass uns morgen in Ruhe persönlich reden.\n\nWarum: „Was soll das denn heißen??“ klingt vorwurfsvoll, und „wenn du Schluss machen willst“ legt Leo bereits eine Absicht in den Mund. Da Leo nur um ein persönliches Gespräch gebeten hat, fragst du klar nach, ohne vorschnell zu unterstellen, worum es geht."
+      "reply": "Okay, morgen passt. Ehrlich gesagt hat mich deine Nachricht nervös gemacht. Kannst du mir grob sagen, worum es geht, oder sollten wir das lieber nur persönlich besprechen?\n\nWarum: Dein Entwurf springt zum schlimmsten Fall und fordert ihn heraus, ihn auszusprechen; das macht eine ehrliche Antwort schwerer. So bleibt dein Gefühl drin („nervös“), und du fragst, was du wirklich wissen willst, ohne ihm etwas vorzuwerfen, das er nicht gesagt hat."
     },
     {
       "id": "cancel",
       "kind": "reply",
       "me": "Emma",
       "prompt": "du sagst ständig ab und ich hab keine Lust mehr, die Einzige zu sein, die sich Mühe gibt",
-      "reply": "Ich merke, dass unsere Pläne in letzter Zeit öfter ausfallen oder offenbleiben, und das macht mich traurig. Ich möchte nicht das Gefühl haben, allein dafür zu sorgen, dass wir Zeit miteinander verbringen. Können wir morgen in Ruhe darüber sprechen?\n\nWarum: „Ständig“ und „die Einzige“ klingen sehr endgültig und könnten die Unterhaltung schnell in eine Verteidigung führen. Die konkrete Sorge bleibt klar: Pläne sind öfter unsicher geworden, und du wünschst dir mehr gemeinsame Initiative — passend zu dem Gespräch, das Leo für morgen vorgeschlagen hat."
+      "reply": "Ich habe mich in letzter Zeit wie die gefühlt, die unsere Pläne zusammenhält, und wenn sie platzen, tut das richtig weh. Können wir darüber reden, wie wir beide unsere Zeit zusammen schützen?\n\nWarum: „Ständig“ und „keine Lust mehr“ laden ihn dazu ein, sich zu verteidigen, statt zuzuhören. So sagst du dasselbe (die Pläne, die Mühe, den Schmerz) auf eine Weise, auf die er antworten kann, und zeigst, was du dir als Nächstes wünschst."
     }
   ]
 }

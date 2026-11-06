@@ -1133,8 +1133,13 @@ export const messages = {
         "Your own question needs your own chat. With the sample, pick one of the questions above.",
       progressSample: "The AI is reading the sample chat…",
       sampleReport:
-        "This is the sample chat's full reading, made once in advance with the same AI. Your own chat gets its own: the first is a free preview, and the full report comes with the subscription.",
+        "This is the sample chat's full reading, prepared in advance.",
       sampleOwnChat: "Try it with my own chat",
+      sampleYoursTitle: "Your turn: what would your chat say?",
+      sampleYoursText:
+        "Export your chat from WhatsApp in a few taps and pick the file. Your first reading is a free preview, ready in about 20 seconds, and the chat is anonymized on your device before any AI sees it.",
+      sampleYoursButton: "Choose my chat file",
+      sampleYoursGuide: "No export yet? Here's how",
       coachSampleIntro: "Try one of these:",
       coachSampleDraft: "Draft from {name}",
       coachNoteSample:
@@ -3131,8 +3136,13 @@ export const messages = {
         "Eine eigene Frage braucht deinen eigenen Chat. Wähle beim Beispiel eine der Fragen oben.",
       progressSample: "Die KI liest den Beispiel-Chat …",
       sampleReport:
-        "Das ist die vollständige Auswertung des Beispiel-Chats, einmal vorab mit derselben KI erstellt. Dein eigener Chat bekommt seine eigene: Die erste ist eine kostenlose Vorschau, den vollständigen Bericht gibt es mit dem Abo.",
+        "Das ist die vollständige Auswertung des Beispiel-Chats, vorab erstellt.",
       sampleOwnChat: "Mit meinem eigenen Chat ausprobieren",
+      sampleYoursTitle: "Jetzt du: Was würde dein Chat erzählen?",
+      sampleYoursText:
+        "Exportiere deinen Chat mit ein paar Fingertipps aus WhatsApp und wähle die Datei aus. Deine erste Auswertung ist eine kostenlose Vorschau, fertig in etwa 20 Sekunden, und der Chat wird auf deinem Gerät anonymisiert, bevor eine KI ihn sieht.",
+      sampleYoursButton: "Meine Chat-Datei wählen",
+      sampleYoursGuide: "Noch kein Export? So geht's",
       coachSampleIntro: "Probier eins davon:",
       coachSampleDraft: "Entwurf von {name}",
       coachNoteSample:
@@ -5135,8 +5145,13 @@ export const messages = {
         "Tu propia pregunta necesita tu propio chat. Con el ejemplo, elige una de las preguntas de arriba.",
       progressSample: "La IA está leyendo el chat de ejemplo…",
       sampleReport:
-        "Este es el análisis completo del chat de ejemplo, hecho una vez de antemano con la misma IA. Tu propio chat tendrá el suyo: el primero es una vista previa gratuita y el informe completo viene con la suscripción.",
+        "Este es el análisis completo del chat de ejemplo, preparado de antemano.",
       sampleOwnChat: "Probar con mi propio chat",
+      sampleYoursTitle: "Te toca: ¿qué contaría tu chat?",
+      sampleYoursText:
+        "Exporta tu chat desde WhatsApp en unos toques y elige el archivo. Tu primer análisis es una vista previa gratuita, lista en unos 20 segundos, y el chat se anonimiza en tu dispositivo antes de que ninguna IA lo vea.",
+      sampleYoursButton: "Elegir mi archivo de chat",
+      sampleYoursGuide: "¿Aún no lo has exportado? Así se hace",
       coachSampleIntro: "Prueba uno de estos:",
       coachSampleDraft: "Borrador de {name}",
       coachNoteSample:
@@ -6875,8 +6890,13 @@ export const messages = {
         "Uma pergunta sua precisa da sua própria conversa. Com o exemplo, escolha uma das perguntas acima.",
       progressSample: "A IA está a ler a conversa de exemplo…",
       sampleReport:
-        "Esta é a análise completa da conversa de exemplo, feita uma vez antecipadamente com a mesma IA. A sua própria conversa terá a dela: a primeira é uma pré-visualização grátis e o relatório completo vem com a subscrição.",
+        "Esta é a análise completa da conversa de exemplo, preparada antecipadamente.",
       sampleOwnChat: "Experimentar com a minha conversa",
+      sampleYoursTitle: "É a sua vez: o que diria a sua conversa?",
+      sampleYoursText:
+        "Exporte a sua conversa do WhatsApp em poucos toques e escolha o ficheiro. A sua primeira análise é uma pré-visualização grátis, pronta em cerca de 20 segundos, e a conversa é anonimizada no seu dispositivo antes de qualquer IA a ver.",
+      sampleYoursButton: "Escolher o ficheiro da conversa",
+      sampleYoursGuide: "Ainda não exportou? Veja como",
       coachSampleIntro: "Experimente uma destas:",
       coachSampleDraft: "Rascunho de {name}",
       coachNoteSample:
@@ -8886,8 +8906,13 @@ export const messages = {
         "Votre propre question demande votre propre conversation. Avec l'exemple, choisissez l'une des questions ci-dessus.",
       progressSample: "L'IA lit la conversation d'exemple…",
       sampleReport:
-        "Voici l'analyse complète de la conversation d'exemple, faite une seule fois à l'avance avec la même IA. Votre propre conversation aura la sienne : la première est un aperçu gratuit, et le rapport complet est inclus dans l'abonnement.",
+        "Voici l'analyse complète de la conversation d'exemple, préparée à l'avance.",
       sampleOwnChat: "Essayer avec ma propre conversation",
+      sampleYoursTitle: "À vous : que raconterait votre conversation ?",
+      sampleYoursText:
+        "Exportez votre conversation depuis WhatsApp en quelques gestes et choisissez le fichier. Votre première analyse est un aperçu gratuit, prêt en 20 secondes environ, et la conversation est anonymisée sur votre appareil avant qu'une IA ne la voie.",
+      sampleYoursButton: "Choisir mon fichier de conversation",
+      sampleYoursGuide: "Pas encore d'export ? Voici comment faire",
       coachSampleIntro: "Essaie l'une de celles-ci :",
       coachSampleDraft: "Brouillon de {name}",
       coachNoteSample:
@@ -10888,8 +10913,13 @@ export const messages = {
         "Una tua domanda richiede la tua chat. Con l'esempio, scegli una delle domande qui sopra.",
       progressSample: "L'IA sta leggendo la chat di esempio…",
       sampleReport:
-        "Questa è l'analisi completa della chat di esempio, fatta una volta in anticipo con la stessa IA. La tua chat avrà la sua: la prima è un'anteprima gratuita e il report completo è incluso nell'abbonamento.",
+        "Questa è l'analisi completa della chat di esempio, preparata in anticipo.",
       sampleOwnChat: "Prova con la mia chat",
+      sampleYoursTitle: "Tocca a te: cosa racconterebbe la tua chat?",
+      sampleYoursText:
+        "Esporta la tua chat da WhatsApp in pochi tocchi e scegli il file. La tua prima analisi è un'anteprima gratuita, pronta in circa 20 secondi, e la chat viene anonimizzata sul tuo dispositivo prima che un'IA la veda.",
+      sampleYoursButton: "Scegli il file della mia chat",
+      sampleYoursGuide: "Non l'hai ancora esportata? Ecco come",
       coachSampleIntro: "Provane una:",
       coachSampleDraft: "Bozza di {name}",
       coachNoteSample:

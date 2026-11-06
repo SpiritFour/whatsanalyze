@@ -15,7 +15,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { QUIET_DAYS, SCENES, TOGETHER_DAYS } from "./scenes.mjs";
-import { EVERYDAY, SHIFT, SLOTS, TERSE } from "./everyday.mjs";
+import { CLOSERS, EVERYDAY, SHIFT, SLOTS, TERSE } from "./everyday.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "../..");
 const OUT = join(ROOT, "static/sample/chat.txt");
@@ -72,7 +72,7 @@ const PHASES = [
   {
     until: "2026-10-24",
     threads: [0, 2],
-    emmaFirst: 0.85,
+    emmaFirst: 0.9,
     // Under five hours: utils/inactivity.js counts a message after six as
     // starting a new conversation, and these are late answers, not that.
     delay: { E: [1, 20], L: [40, 290] },
@@ -192,6 +192,18 @@ function exchange(start, first, item, phase) {
     say(at, who, text);
     prev = who;
     if (ends) break;
+  }
+  // Once Leo answers in a word, Emma tends to have the last one. It's how
+  // these chats go, and it keeps her next morning's first message from
+  // counting as a slow reply to his (utils/inactivity.js counts any answer
+  // within a day as one).
+  const cool = phase.terse >= 0.25;
+  if (prev === "L" && chance(cool ? 0.75 : 0.3)) {
+    const closeAt = at + Math.round(between(phase.delay.E));
+    if (closeAt <= until) {
+      at = closeAt;
+      say(at, "E", pick(cool ? CLOSERS.cool : CLOSERS.warm));
+    }
   }
   // Now and then a photo, or a message thought better of.
   if (chance(phase.warmth * 0.1)) {

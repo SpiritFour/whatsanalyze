@@ -233,6 +233,8 @@ function triggerFileDialog() {
   errorMessage.value = null;
   fileInput.value?.click();
 }
+// For the page: the AI page's "your turn" after the sample's reading.
+defineExpose({ chooseFile: triggerFileDialog });
 
 function onDragOver() {
   isDragging.value = true;

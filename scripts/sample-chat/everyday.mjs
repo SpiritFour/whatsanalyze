@@ -708,3 +708,17 @@ export const TERSE = [
   "sorry, just saw this",
   "maybe",
 ];
+
+/** Emma's last word on an exchange Leo ended: warm early on, cooler later. */
+export const CLOSERS = {
+  warm: ["❤️", "😘", "haha", "deal", "ok ❤️"],
+  cool: [
+    "ok",
+    "ok ❤️",
+    "talk later then",
+    "👍",
+    "love you",
+    "ok, later",
+    "sure",
+  ],
+};

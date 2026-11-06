@@ -1,0 +1,259 @@
+/**
+ * The sample chat's readings in Portuguese; see en.mjs. European
+ * Portuguese, addressing the reader as "você", like the site's own strings.
+ */
+export default {
+  why: "Porquê:",
+  bases: {
+    none: {
+      vibe: "Pombos, panquecas e promessas",
+      summary:
+        "Uma história de amor contada em mensagens: começa com uma discussão perdida sobre pizza com ananás e um encontro de ramen, cresce com uma chave, um Natal com os pais da Emma e uma viagem a Lisboa, e vive de piadas internas sobre um pombo chamado Gerald. Depois, a mesma discussão sobre planos atrasados ou cancelados volta vezes sem conta, as respostas do Leo encurtam e a conversa acaba numa mensagem que ainda não teve resposta.",
+      people: [
+        {
+          name: "Emma",
+          role: "A que escreve primeiro",
+          style:
+            "Começa a maioria das conversas, diz claramente do que precisa («só quero ser uma prioridade às vezes») e mantém as piadas vivas mesmo quando há tensão.",
+        },
+        {
+          name: "Leo",
+          role: "O carinhoso sem tempo",
+          style:
+            "Divertido e terno quando está presente («lembro-me de tudo o que me contas») e, ultimamente, escreve muito menos: muitas vezes uma palavra, muitas vezes horas depois.",
+        },
+      ],
+      dynamics: [
+        {
+          title: "Quem escreve primeiro",
+          description:
+            "Nos primeiros meses, os dois começam as conversas quase por igual. Desde agosto, a Emma começa quase quatro em cada cinco, e a resposta típica do Leo passou de poucos minutos para cerca de três horas.",
+        },
+        {
+          title: "A mesma discussão, quatro vezes",
+          description:
+            "O jantar de 9 de abril, o voo para Lisboa, o brinde de aniversário da Emma, o cinema em julho: sempre que um plano cai, a Emma diz como isso lhe chega e o Leo pede desculpa, até ela dizer o nome da coisa: «esta é outra vez a mesma discussão».",
+        },
+        {
+          title: "Fazer as pazes com panquecas",
+          description:
+            "As reconciliações deles têm um ritual. Depois da discussão de abril vem «panquecas no domingo?», e em outubro o Leo volta a aproximar-se com a mesma oferta, através do Gerald.",
+        },
+        {
+          title: "O humor como cola",
+          description:
+            "O Gerald, as manhãs de «só mais cinco minutos» e o ovo do restaurante de ramen voltam sempre, e continuam lá quando tudo o resto fica mais calado.",
+        },
+      ],
+      topics: [
+        {
+          title: "Gerald, o pombo",
+          description:
+            "O pombo da varanda do Leo torna-se uma personagem fixa: julga os pequenos-almoços, tem padrões para o café e desaparece durante um tempo antes de voltar em outubro, «com ar mais velho».",
+        },
+        {
+          title: "Planos e pontualidade",
+          description:
+            "Restaurantes, voos, bilhetes de cinema e quem se atrasa para quê: o tema mais prático da conversa é também o mais doloroso.",
+        },
+        {
+          title: "Lisboa",
+          description:
+            "Reservada em março, contada ao dia durante semanas e lembrada como os melhores dias deles: onze pastéis de nata, um elétrico que sobe na vertical e «amo-te aqui. assim».",
+        },
+        {
+          title: "Trabalho e turnos",
+          description:
+            "Os turnos da noite da Emma no hospital e as apresentações e projetos do Leo decidem quando podem falar e, ultimamente, se falam.",
+        },
+        {
+          title: "Família e amigos",
+          description:
+            "A Jana, que os apresentou, um Natal com os pais da Emma (bolo de limão, futebol a mais) e o Max com o sofá na noite do cinema.",
+        },
+      ],
+      highlights: [
+        "A primeira mensagem do Leo: «olá, é o Leo da festa da Jana. o que perdeu a discussão da pizza com ananás 🍍», e a resposta da Emma: «não perdeste, desististe».",
+        "Num turno da noite, um doente pede a Emma em casamento. Ela conta ao Leo que lhe disse que estava comprometida, receia que tenha sido cedo demais, e ele responde: «não. gosto disso. muito ❤️».",
+        "Em Lisboa, a Emma envia as fotos ao Leo sentada mesmo ao lado dele, «como cópia de segurança», e ele escreve: «amo-te aqui. assim».",
+      ],
+    },
+    Emma: {
+      vibe: "Pombos, panquecas e promessas",
+      summary:
+        "A sua conversa com o Leo é uma história de amor contada em mensagens: uma discussão perdida sobre pizza com ananás, um encontro de ramen, uma chave, o Natal com os seus pais e Lisboa, tudo unido por um pombo chamado Gerald. Depois, a mesma discussão sobre planos atrasados ou cancelados volta vezes sem conta, as respostas dele encurtam e a conversa acaba na mensagem dele, que ainda espera a sua resposta.",
+      people: [
+        {
+          name: "Emma",
+          role: "A que escreve primeiro",
+          style:
+            "Começa a maioria das conversas, diz claramente do que precisa («só quero ser uma prioridade às vezes») e mantém as piadas vivas mesmo quando há tensão.",
+        },
+        {
+          name: "Leo",
+          role: "O carinhoso sem tempo",
+          style:
+            "Divertido e terno quando está presente («lembro-me de tudo o que me contas») e, ultimamente, escreve muito menos: muitas vezes uma palavra, muitas vezes horas depois.",
+        },
+      ],
+      dynamics: [
+        {
+          title: "Quem escreve primeiro",
+          description:
+            "Nos primeiros meses, os dois começam as conversas quase por igual. Desde agosto, é você que começa quase quatro em cada cinco, e a resposta típica do Leo passou de poucos minutos para cerca de três horas.",
+        },
+        {
+          title: "A mesma discussão, quatro vezes",
+          description:
+            "O jantar de 9 de abril, o voo para Lisboa, o seu brinde de aniversário, o cinema em julho: sempre que um plano cai, você diz como isso lhe chega e ele pede desculpa, até você dizer o nome da coisa: «esta é outra vez a mesma discussão».",
+        },
+        {
+          title: "Fazer as pazes com panquecas",
+          description:
+            "As vossas reconciliações têm um ritual. Depois da discussão de abril, propõe «panquecas no domingo?», e em outubro o Leo volta a aproximar-se com a mesma oferta, através do Gerald.",
+        },
+        {
+          title: "O humor como cola",
+          description:
+            "O Gerald, as manhãs de «só mais cinco minutos» e o ovo do restaurante de ramen voltam sempre, e continuam lá quando tudo o resto fica mais calado.",
+        },
+      ],
+      topics: [
+        {
+          title: "Gerald, o pombo",
+          description:
+            "O pombo da varanda do Leo torna-se uma personagem fixa: julga os pequenos-almoços, tem padrões para o café e desaparece durante um tempo antes de voltar em outubro, «com ar mais velho».",
+        },
+        {
+          title: "Planos e pontualidade",
+          description:
+            "Restaurantes, voos, bilhetes de cinema e quem se atrasa para quê: o tema mais prático da vossa conversa é também o mais doloroso.",
+        },
+        {
+          title: "Lisboa",
+          description:
+            "Reservada em março, contada ao dia durante semanas e lembrada como os vossos melhores dias: onze pastéis de nata, um elétrico que sobe na vertical e «amo-te aqui. assim».",
+        },
+        {
+          title: "Trabalho e turnos",
+          description:
+            "Os seus turnos da noite no hospital e as apresentações e projetos do Leo decidem quando podem falar e, ultimamente, se falam.",
+        },
+        {
+          title: "Família e amigos",
+          description:
+            "A Jana, que vos apresentou, o Natal com os seus pais (bolo de limão, futebol a mais) e o Max com o sofá na noite do cinema.",
+        },
+      ],
+      highlights: [
+        "A primeira mensagem do Leo: «olá, é o Leo da festa da Jana. o que perdeu a discussão da pizza com ananás 🍍», e a sua resposta: «não perdeste, desististe».",
+        "Num turno da noite, um doente pede-a em casamento. Conta ao Leo que lhe disse que estava comprometida, receia que tenha sido cedo demais, e ele responde: «não. gosto disso. muito ❤️».",
+        "Em Lisboa, envia as fotos ao Leo sentada mesmo ao lado dele, «como cópia de segurança», e ele escreve: «amo-te aqui. assim».",
+      ],
+    },
+    Leo: {
+      vibe: "Pombos, panquecas e promessas",
+      summary:
+        "A sua conversa com a Emma é uma história de amor contada em mensagens: uma discussão perdida sobre pizza com ananás, um encontro de ramen, uma chave, o Natal com os pais dela e Lisboa, tudo unido pelo seu pombo Gerald. Depois, a mesma discussão sobre planos atrasados ou cancelados volta vezes sem conta, as suas respostas encurtam e a conversa acaba na sua própria mensagem a pedir para falarem.",
+      people: [
+        {
+          name: "Leo",
+          role: "O carinhoso sem tempo",
+          style:
+            "É divertido e terno quando está presente («lembro-me de tudo o que me contas») e, ultimamente, escreve muito menos: muitas vezes uma palavra, muitas vezes horas depois.",
+        },
+        {
+          name: "Emma",
+          role: "A que escreve primeiro",
+          style:
+            "Começa a maioria das vossas conversas, diz claramente do que precisa («só quero ser uma prioridade às vezes») e mantém as piadas vivas mesmo quando há tensão.",
+        },
+      ],
+      dynamics: [
+        {
+          title: "Quem escreve primeiro",
+          description:
+            "Nos primeiros meses, os dois começam as conversas quase por igual. Desde agosto, a Emma começa quase quatro em cada cinco, e a sua resposta típica passou de poucos minutos para cerca de três horas.",
+        },
+        {
+          title: "A mesma discussão, quatro vezes",
+          description:
+            "O jantar de 9 de abril, o voo para Lisboa, o brinde de aniversário dela, o cinema em julho: sempre que um dos seus planos cai, ela diz como isso lhe chega e você pede desculpa, até ela dizer o nome da coisa: «esta é outra vez a mesma discussão».",
+        },
+        {
+          title: "Fazer as pazes com panquecas",
+          description:
+            "As vossas reconciliações têm um ritual. Depois da discussão de abril, ela propõe «panquecas no domingo?», e em outubro é você que volta a aproximar-se com a mesma oferta, através do Gerald.",
+        },
+        {
+          title: "O humor como cola",
+          description:
+            "O Gerald, as manhãs de «só mais cinco minutos» e o ovo do restaurante de ramen voltam sempre, e continuam lá quando tudo o resto fica mais calado.",
+        },
+      ],
+      topics: [
+        {
+          title: "Gerald, o pombo",
+          description:
+            "O pombo da sua varanda torna-se uma personagem fixa: julga os pequenos-almoços, tem padrões para o café e desaparece durante um tempo antes de voltar em outubro, «com ar mais velho».",
+        },
+        {
+          title: "Planos e pontualidade",
+          description:
+            "Restaurantes, voos, bilhetes de cinema e quem se atrasa para quê: o tema mais prático da vossa conversa é também o mais doloroso.",
+        },
+        {
+          title: "Lisboa",
+          description:
+            "Reservada em março, contada ao dia durante semanas e lembrada como os vossos melhores dias: onze pastéis de nata, um elétrico que sobe na vertical e «amo-te aqui. assim».",
+        },
+        {
+          title: "Trabalho e turnos",
+          description:
+            "As suas apresentações e projetos e os turnos da noite da Emma no hospital decidem quando podem falar e, ultimamente, se falam.",
+        },
+        {
+          title: "Família e amigos",
+          description:
+            "A Jana, que vos apresentou, o Natal com os pais da Emma (bolo de limão, futebol a mais) e o Max com o sofá na noite do cinema.",
+        },
+      ],
+      highlights: [
+        "A sua primeira mensagem: «olá, é o Leo da festa da Jana. o que perdeu a discussão da pizza com ananás 🍍», e a resposta da Emma: «não perdeste, desististe».",
+        "Num turno da noite, um doente pede a Emma em casamento. Ela conta-lhe que disse que estava comprometida, receia que tenha sido cedo demais, e você responde: «não. gosto disso. muito ❤️».",
+        "Em Lisboa, a Emma envia-lhe as fotos sentada mesmo ao seu lado, «como cópia de segurança», e você escreve: «amo-te aqui. assim».",
+      ],
+    },
+  },
+  answers: {
+    better:
+      "O padrão a trabalhar é claro e tem solução: um plano muda, ninguém sabe a tempo e o pedido de desculpa chega depois da mágoa. A 9 de abril a Emma esperou uma hora («podias ter escrito»), e em junho o Leo prometeu exatamente isso: «aviso quando me atrasar. como um adulto». Transformem essa promessa numa regra que os dois cumprem: assim que um plano vacilar, digam-no antes de o outro estar à espera. E digam as necessidades em voz alta em vez de as testar: a semana em que a Emma não escreveu primeiro mostrou-lhe algo a ela, mas «tenho saudades de ser alguém em quem pensas durante o dia» disse muito mais ao Leo. O «podemos falar amanhã?» dele é a abertura; vão com um desejo concreto cada um, não com uma lista.",
+    arguments:
+      "Nenhum ganha aos pontos, porque estão a discutir coisas diferentes. O Leo argumenta com as circunstâncias («o cliente mudou tudo outra vez», «o comboio estava mesmo parado», «também faço isto por nós»), e cada uma é verdade. A Emma argumenta com o padrão («é sempre só uma reunião», «não é por causa do comboio»), e isso aguenta-se ao longo de quatro discussões. O Leo convence mais quando deixa de se defender e lhe dá razão: «tens razão, é um padrão. não quero que seja». A frase mais forte de toda a conversa é também a mais simples: «só quero ser uma prioridade às vezes».",
+    effort:
+      "Nos primeiros meses está equilibrado: escrevem uma quantidade parecida e começam as conversas mais ou menos por igual. Desde agosto a balança inclinou-se: a Emma começa quase quatro em cada cinco conversas, e a resposta típica do Leo demora agora cerca de três horas em vez de poucos minutos. A Emma repara e di-lo, primeiro «ultimamente pareces tão longe», depois, após uma semana sem escrever primeiro de propósito, «tenho saudades de ser alguém em quem pensas durante o dia». O esforço do Leo aparece noutros sítios (mudou a reunião de Lisboa, fez-lhe uma chave e é ele quem pede para falar agora), mas na conversa em si é a Emma quem tem carregado mais ultimamente.",
+    "into:Emma":
+      "Sim, a conversa mostra sentimentos verdadeiros do Leo, mesmo agora. Foi ele quem disse «amo-te» primeiro, fez-lhe uma chave, lembrou-se das suas flores amarelas e escreveu «amo-te aqui. assim» em Lisboa; em outubro ainda se aproxima com o Gerald e panquecas. O que mudou foi quanto disso lhe chega: desde agosto responde mais tarde e mais curto, e admite que agora «não é bom a mostrá-lo». O «ultimamente tenho pensado muito em nós» dele pode querer dizer várias coisas; pergunte-lhe amanhã o que tem pensado e diga-lhe do que precisa para se sentir presente no dia dele.",
+    "into:Leo":
+      "Claramente, sim. A Emma continua a aproximar-se mesmo quando você fica calado: começa a maioria das vossas conversas, pergunta «estamos bem?» e, quando se retrai uma semana, é para ver se é você que vai ter com ela. As mensagens mais difíceis dela pedem mais de si, não menos: «só quero ser uma prioridade às vezes», «quero que tu queiras estar lá». Quando propôs panquecas em outubro, ela disse que sim em minutos. A conversa de amanhã é a sua oportunidade de mostrar que vai nos dois sentidos: leve algo concreto, não só um pedido de desculpa.",
+    "worried:Emma":
+      "Em parte, sim, e já lhe deu nome: desde agosto o Leo quase não começa conversas, a resposta típica dele estendeu-se para cerca de três horas e em setembro passou cinco dias sem notícias dele. Junte a discussão que volta sempre (o jantar, Lisboa, o seu brinde de aniversário, o cinema) e o «ultimamente tenho pensado muito em nós» dele, e a sua inquietação faz sentido. Mas também há bons sinais: ele reconhece o padrão («não quero que seja»), atribui-o ao trabalho e não a si, e continua a voltar com o Gerald e panquecas. A conversa não lhe pode dizer o que ele vai dizer amanhã; vá com calma, deixe-o dizer primeiro o que o preocupa e seja clara sobre aquilo de que precisa.",
+    "worried:Leo":
+      "Sim, e vale a pena levar isto a sério antes de amanhã. A Emma disse-lhe o mesmo de muitas formas («há sempre alguma coisa», «quero que tu queiras estar lá», «tenho saudades de ser alguém em quem pensas durante o dia»), e quatro vezes um dos seus planos caiu à última hora. Desde agosto ela começa quase todas as conversas e a sua resposta típica demora cerca de três horas; do lado dela, a conversa ficou em silêncio. Ela não desistiu: ainda pergunta «estamos bem?» e disse que sim às panquecas em minutos. Pense o que pensar sobre «nós», leve uma mudança concreta para a conversa que você pediu, não só um pedido de desculpa.",
+    "gift:Emma":
+      "Algo que traga o Leo de volta ao vosso mundo, não algo caro. Uma gravura ou uma figura de um pombo (o Gerald, claro) acertaria em cheio, sobretudo agora que «o Gerald voltou». Ou ofereça uma experiência: um pequeno-almoço de panquecas ao domingo planeado por si do início ao fim, ou uma foto emoldurada de Lisboa, a viagem em que ele escreveu «amo-te aqui. assim». Ele está «a afogar-se em trabalho», por isso tudo o que lhe ofereça uma noite tranquila consigo vale mais do que uma grande surpresa.",
+    "gift:Leo":
+      "Flores amarelas outra vez: ela adorou que se lembrasse delas no Dia dos Namorados. Melhor ainda se as juntar a algo que mostre que a ouviu, como um encontro na agenda que promete não mudar, assinado com a sua própria frase: «chego às oito menos um quarto. nem sequer atrasado». Uma foto emoldurada de Lisboa devolve-lhe os dias que ela quer «guardar assim», e um saco de pretzels para o próximo turno da noite dela vai fazê-la rir. Escolha o que escolher, ofereça depois da conversa de amanhã, não em vez dela.",
+  },
+  coach: {
+    plans:
+      "Porque o trabalho ganha as decisões de última hora e o aviso chega tarde. O jantar de 9 de abril, a manhã de Lisboa, o brinde de aniversário e o cinema em julho seguem a mesma forma: há um plano, surge algo ao Leo e a Emma só sabe quando já está à espera. Cada pedido de desculpa é sincero («odeio quando acabamos o dia assim», «desta vez é a sério»), mas o hábito por baixo não muda, e é por isso que parece sempre a mesma discussão. Uma regra pequena quebrava essa forma: uma mensagem assim que um plano estiver em risco, e uma noite por semana que nenhum dos dois muda.",
+    distance:
+      "Provavelmente as duas coisas, e a conversa não as separa por completo. Ele disse-lhe que o novo projeto seria intenso até outubro e escreve que está «a afogar-se em trabalho», e isso é stress. Mas a queda vai além do horário: desde agosto quase não começa conversas, responde muitas vezes com uma palavra e em setembro você passou cinco dias sem uma mensagem dele. Mesmo assim ele volta a aproximar-se (o Gerald, as panquecas, «estou aqui»), por isso não se desligou; pergunte-lhe amanhã o que o preocupa e se o projeto é a história toda.",
+    talk: "Facilite-lhe a honestidade: «ainda bem que queres falar. diz-me o que te anda na cabeça, e depois gostava de te dizer o que anda na minha». Deixe-o começar, já que foi ele quem pediu, e ouça-o até ao fim antes de responder. Quando for a sua vez, diga uma ou duas coisas, em concreto: quer saber dele quando um plano muda, e quer sentir-se presente no dia dele. Deixe de fora o «sempre» e o «nunca»; os dois vão ouvir melhor o que é concreto.",
+    breakup:
+      "Ok, amanhã dá. Para ser sincera, a tua mensagem deixou-me nervosa. Consegues dizer-me mais ou menos do que se trata, ou é algo que é melhor falarmos só pessoalmente?\n\n{why} O seu rascunho salta para o pior cenário e desafia-o a dizê-lo, o que torna uma resposta honesta mais difícil. Assim mantém o seu sentimento («nervosa») e pergunta o que quer mesmo saber, sem o acusar de algo que ele não disse.",
+    cancel:
+      "Ultimamente sinto que sou eu que seguro os nossos planos, e quando caem dói mesmo. Podemos falar sobre como protegemos os dois o nosso tempo juntos?\n\n{why} «Sempre» e «estou farta» convidam-no a defender-se em vez de ouvir. Assim diz o mesmo (os planos, o esforço, a mágoa) de uma forma a que ele consegue responder, e aponta para o que quer a seguir.",
+  },
+};

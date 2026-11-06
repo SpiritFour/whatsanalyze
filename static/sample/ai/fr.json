@@ -1,621 +1,629 @@
 {
   "chat": {
-    "messages": 2069,
+    "messages": 2389,
     "from": "2025-09-12",
     "to": "2026-10-24"
   },
-  "model": "openai:gpt-6-luna",
+  "model": "claude-opus-5-5 (polished)",
   "readings": {
     "none": {
       "answer": "",
-      "summary": "Une relation commence par des taquineries sur la pizza à l’ananas et des rendez-vous ramen, puis devient une histoire amoureuse très quotidienne, avec repas partagés, listes de courses, familles et voyage à Lisbonne. Le ton passe d’abord par la tendresse et les blagues récurrentes, puis se fait plus préoccupé quand les retards, la charge de travail et les silences alimentent des tensions; le dernier message propose d’en parler en personne.",
-      "vibe": "Romance, ramen et Gerald",
+      "summary": "Une histoire d’amour racontée en messages : elle commence par une dispute perdue sur la pizza à l’ananas et un rendez-vous ramen, grandit avec une clé, un Noël chez les parents d’Emma et un voyage à Lisbonne, et vit de blagues internes sur un pigeon nommé Gerald. Puis la même dispute sur des projets en retard ou annulés revient sans cesse, les réponses de Leo raccourcissent, et la conversation s’arrête sur un message resté sans réponse.",
+      "vibe": "Pigeons, pancakes et promesses",
       "topics": [
         {
-          "title": "De la rencontre au couple",
-          "description": "Après leur rencontre à la fête de Jana et leur débat sur l’ananas, Leo propose un ramen; plus tard, Leo dit « je t’aime » et Emma répond qu’elle attendait de le dire depuis deux semaines. Leo appelle ensuite Emma « best girlfriend »."
+          "title": "Gerald, le pigeon",
+          "description": "Le pigeon du balcon de Leo devient un personnage récurrent : il juge les petits-déjeuners, a des exigences sur le café et disparaît un moment avant de revenir en octobre, « l’air plus vieux »."
         },
         {
-          "title": "Le quotidien partagé",
-          "description": "Ils organisent souvent les repas et les courses, se retrouvent chez l’un ou l’autre et regardent ensemble des séries. En janvier, Leo fait une clé à Emma; les listes de courses et les tâches comme payer l’électricité deviennent des repères réguliers."
+          "title": "Projets et ponctualité",
+          "description": "Restaurants, vols, places de cinéma et qui est en retard pour quoi : le sujet le plus pratique de la conversation est aussi le plus douloureux."
         },
         {
-          "title": "Travail, fatigue et petites attentions",
-          "description": "Emma parle de ses gardes et de ses pauses à l’hôpital, parfois au milieu de la nuit; Leo l’encourage à boire de l’eau, manger ou dormir en rentrant. De son côté, Leo évoque les réunions qui auraient pu être des courriels et un projet professionnel intense à partir d’août."
+          "title": "Lisbonne",
+          "description": "Réservé en mars, attendu pendant des semaines et resté leurs plus beaux jours : onze pastéis de nata, un tram qui grimpe à la verticale et « je t’aime ici. comme ça »."
         },
         {
-          "title": "Entourage et projets",
-          "description": "Ils envisagent des sorties avec Jana, Max, Tom et Sophie, ainsi que Noël avec la mère et le père de Emma. Ils réservent aussi un voyage à Lisbonne pour mai, avec une tournée de pastéis de nata et des recherches de bars sur les toits."
+          "title": "Travail et gardes",
+          "description": "Les gardes de nuit d’Emma à l’hôpital et les présentations et projets de Leo décident quand ils peuvent se parler, et ces derniers temps s’ils le font."
         },
         {
-          "title": "Tensions et communication",
-          "description": "Les rendez-vous oubliés ou retardés provoquent des discussions franches : Emma dit ne pas vouloir être la secrétaire de Leo, puis explique avoir besoin de se sentir prioritaire. À la fin de l’été, Emma remarque aussi que Leo semble distant et dit avoir attendu cinq jours avant de reprendre contact."
+          "title": "Famille et amis",
+          "description": "Jana, qui les a présentés, un Noël chez les parents d’Emma (gâteau au citron, trop de foot) et Max avec son canapé le soir du cinéma."
         }
       ],
       "people": [
         {
           "name": "Emma",
-          "role": "L’initiatrice attentionnée",
-          "style": "Écrit souvent avec chaleur et humour, propose des repas et des sorties, partage ses nouvelles de garde et formule clairement ses besoins lorsque des frustrations s’accumulent."
+          "role": "Celle qui écrit d’abord",
+          "style": "Lance la plupart des conversations, dit clairement ce dont elle a besoin (« je veux juste être une priorité de temps en temps ») et entretient les blagues même quand c’est tendu."
         },
         {
           "name": "Leo",
-          "role": "Le partenaire blagueur",
-          "style": "Envoie des encouragements, des chansons et des nouvelles de Gerald le pigeon, mais ses réponses deviennent parfois brèves ou tardives, notamment pendant les périodes de travail chargé."
+          "role": "Le tendre débordé",
+          "style": "Drôle et tendre quand il est là (« je me souviens de tout ce que tu me dis »), et ces derniers temps il écrit beaucoup moins : souvent un mot, souvent des heures plus tard."
         }
       ],
       "dynamics": [
         {
-          "title": "Une complicité faite de rappels",
-          "description": "Leur humour s’appuie sur des refrains communs : les « cinq minutes de plus » au réveil, « compte les pigeons » pour les nuits sans sommeil et Gerald, qui renverse le basilic ou juge le petit-déjeuner."
+          "title": "Qui écrit en premier",
+          "description": "Les premiers mois, ils lancent les conversations presque à parts égales. Depuis août, Emma en lance près de quatre sur cinq, et la réponse habituelle de Leo est passée de quelques minutes à environ trois heures."
         },
         {
-          "title": "Des attentions concrètes",
-          "description": "Ils se soutiennent par des gestes simples : Leo apporte une pizza quand la cuisine de Emma tourne mal, propose du thé après une journée épuisante et achète des croissants à l’aéroport pour réconforter Emma dans la file de sécurité."
+          "title": "La même dispute, quatre fois",
+          "description": "Le dîner du 9 avril, le vol pour Lisbonne, le toast d’anniversaire d’Emma, le cinéma en juillet : chaque fois qu’un projet tombe à l’eau, Emma dit ce que ça lui fait et Leo s’excuse, jusqu’à ce qu’elle le nomme : « c’est encore la même dispute »."
         },
         {
-          "title": "Un déséquilibre qui devient un sujet explicite",
-          "description": "Plusieurs rendez-vous manqués ou changements de programme ravivent la même contrariété; après l’absence de Leo au début de l’anniversaire de Emma, Leo reconnaît le caractère répétitif du problème. En juillet, Emma insiste que présenter des excuses ne suffit pas sans changement."
+          "title": "Se réconcilier avec des pancakes",
+          "description": "Leurs réconciliations ont un rituel. Après la dispute d’avril, c’est « pancakes dimanche ? », et en octobre Leo revient vers elle avec la même proposition, via Gerald."
         },
         {
-          "title": "Une présence moins régulière à la fin",
-          "description": "À partir d’août, les réponses de Leo sont parfois très courtes — « ok », « sure » ou « busy, later » — et Emma demande directement si tout va bien. Le dernier message de Leo, le 24 octobre, demande une conversation en personne sur leur couple, sans préciser encore ce qu’il souhaite décider."
+          "title": "L’humour comme ciment",
+          "description": "Gerald, les matins « encore cinq minutes » et l’œuf du restaurant de ramen reviennent sans cesse, et ils sont toujours là quand tout le reste se tait."
         }
       ],
       "highlights": [
-        "Le débat initial sur la pizza à l’ananas se conclut par une trêve autour d’un ramen, à condition que Leo paie — sans jamais concéder que l’ananas est acceptable.",
-        "Gerald, le pigeon du balcon, devient un personnage récurrent : il s’installe sur le vélo, accueille une compagne et semble même avoir un avis sur le café et les tartines.",
-        "À Lisbonne, Emma envoie des photos à Leo alors qu’ils sont assis côte à côte; Leo remarque l’absurdité, et Emma répond que c’est une sauvegarde."
-      ]
-    },
-    "into:Emma": {
-      "answer": "Oui : les échanges montrent clairement que Leo a été intéressée par toi, et pas seulement de façon amicale. Leo t’a proposé des rendez-vous dès le début, t’a dit « je t’aime », t’a appelée sa petite amie, a organisé un voyage à Lisbonne avec toi et est venue rencontrer ta famille. En revanche, à partir de l’été 2026, ses réponses deviennent souvent brèves ou tardives, et vous avez eu plusieurs disputes sur ses oublis et le manque d’attention. Son dernier message — demander à parler en personne de votre relation — indique qu’il y a quelque chose d’important à éclaircir, mais ne dit pas à lui seul si Leo veut rompre ou continuer.",
-      "summary": "Cette conversation commence par une rencontre taquine autour d’une pizza à l’ananas, puis devient une relation amoureuse avec des habitudes, des projets et des liens familiaux partagés. Le ton est d’abord très tendre et complice, avant que les oublis et la distance de Leo ne créent des tensions, jusqu’à une demande de discussion en personne.",
-      "vibe": "Romance, puis sérieux",
-      "topics": [
-        {
-          "title": "Débuts et complicité",
-          "description": "Après la fête de Jana, Leo propose des ramen comme « offrande de paix » pour clore le débat sur l’ananas. Les taquineries, les petits surnoms et les messages du matin installent vite une connivence."
-        },
-        {
-          "title": "Vie de couple au quotidien",
-          "description": "Vous partagez repas, courses, soirées séries et visites spontanées. Le pigeon Gerald, qui juge les petits-déjeuners et renverse le basilic, devient un personnage récurrent de vos échanges."
-        },
-        {
-          "title": "Amour et projets communs",
-          "description": "Leo dit « je t’aime » en novembre 2025, puis te présente comme sa petite amie. Vous partez à Lisbonne en mai 2026 et Leo accepte de venir à Noël chez ta famille."
-        },
-        {
-          "title": "Attention, retards et disputes",
-          "description": "Tu exprimes plusieurs fois que Leo oublie des rendez-vous ou ne prévient pas, notamment après le dîner manqué d’avril et le cinéma oublié en juillet. En septembre, tu lui dis aussi que tu lui manques et que tu voulais voir s’il prendrait de tes nouvelles."
-        },
-        {
-          "title": "Une conversation à venir",
-          "description": "Le 24 octobre 2026, Leo demande si tu es disponible le lendemain pour parler en personne, en disant avoir beaucoup réfléchi à votre relation. Le contenu de cette discussion n’apparaît pas dans l’extrait."
-        }
-      ],
-      "people": [
-        {
-          "name": "Emma",
-          "role": "partenaire expressive",
-          "style": "Tu écris avec chaleur, humour et beaucoup de petits signes d’affection, tout en nommant franchement tes besoins quand tu te sens reléguée au second plan."
-        },
-        {
-          "name": "Leo",
-          "role": "partenaire attentionnée",
-          "style": "Leo alterne déclarations tendres, gestes pratiques et plaisanteries récurrentes avec des réponses parfois très laconiques, surtout dans les derniers mois."
-        }
-      ],
-      "dynamics": [
-        {
-          "title": "Une affection réciproque",
-          "description": "Vous vous dites que vous vous manquez et que vous vous aimez, et vous entretenez des routines de couple comme les repas ensemble, les nuits chez l’un ou l’autre et les soirées séries."
-        },
-        {
-          "title": "Une complicité faite de rappels",
-          "description": "Les plaisanteries sur Gerald, le basilic et les « cinq minutes de plus » reviennent comme des références partagées qui donnent à vos messages une tonalité familière."
-        },
-        {
-          "title": "Un déséquilibre sur la fiabilité",
-          "description": "Tu soulèves plusieurs fois le problème des rendez-vous oubliés ou des retards sans message. Leo reconnaît le schéma en juin et promet de mieux prévenir, mais le conflit revient autour du cinéma en juillet."
-        },
-        {
-          "title": "Une fin d’extrait incertaine",
-          "description": "Après une période où Leo répond souvent brièvement et tard, Leo propose de parler de votre relation en personne. Cela signale une conversation importante à venir, sans révéler encore sa conclusion."
-        }
-      ],
-      "highlights": [
-        "Au début, Leo propose des ramen pour faire la paix après votre dispute très sérieuse sur la pizza à l’ananas, tout en refusant de concéder que l’ananas est acceptable.",
-        "Pour la Saint-Valentin, Leo te laisse des fleurs jaunes et écrit : « Je me souviens de tout ce que tu me dis. »",
-        "À Lisbonne, tu envoies des photos alors que vous êtes assis côte à côte ; Leo répond que le tram va à la verticale et qu’il a accepté son sort."
-      ]
-    },
-    "into:Leo": {
-      "answer": "Oui, clairement, Emma a été intéressée par toi : dès le début, elle s’est réjouie que tu écrives, a accepté un rendez-vous, puis vous vous êtes dit « je t’aime » et Emma t’a appelée sa « petite amie » dans la conversation. Vous avez aussi partagé des projets et une vie très commune, comme le voyage à Lisbonne et les fêtes de famille. Mais les échanges montrent ensuite une prise de distance : Emma disait se sentir moins présente dans tes pensées, et plusieurs de tes réponses récentes sont brèves ou différées. Son dernier message — te proposer de parler en personne de votre relation — signale surtout qu’elle veut clarifier quelque chose; il ne permet pas de savoir si ses sentiments ont changé ni ce qu’elle souhaite décider.",
-      "summary": "La conversation passe d’un flirt enjoué à une relation amoureuse installée, avec routines partagées, projets et déclarations d’amour. Vers la fin, les oublis et les réponses plus espacées créent une tension; le ton reste affectueux par moments, mais devient incertain, jusqu’à la demande de parler en personne.",
-      "vibe": "Romance, puis nuages",
-      "topics": [
-        {
-          "title": "Débuts et flirt",
-          "description": "Après la fête de Jana, tu proposes des ramen comme « offre de paix » sur le débat de la pizza à l’ananas; les rendez-vous et les taquineries s’enchaînent."
-        },
-        {
-          "title": "Vie de couple au quotidien",
-          "description": "Vous échangez sur les repas, les horaires, les courses et les épisodes à regarder, avec des plaisanteries récurrentes sur le pigeon Gerald et le basilic condamné."
-        },
-        {
-          "title": "Projets et entourage",
-          "description": "Vous réservez un voyage à Lisbonne, préparez une visite de famille à Noël et vous rendez ensemble à des dîners et sorties d’amis."
-        },
-        {
-          "title": "Présence et déceptions",
-          "description": "Emma exprime à plusieurs reprises sa frustration quand tu oublies un rendez-vous ou arrives en retard; en septembre, elle dit avoir attendu cinq jours pour voir si tu écrirais."
-        },
-        {
-          "title": "Conversation à venir",
-          "description": "Le 24 octobre, tu demandes si vous pouvez parler en personne le lendemain, parce que tu réfléchis beaucoup à votre relation; l’extrait ne révèle pas la suite."
-        }
-      ],
-      "people": [
-        {
-          "name": "Emma",
-          "role": "Partenaire expressive",
-          "style": "Emma initie souvent les échanges, partage ses petites nouvelles et exprime directement son affection comme ses déceptions."
-        },
-        {
-          "name": "Leo",
-          "role": "Partenaire organisatrice",
-          "style": "Tu proposes régulièrement des sorties et des attentions concrètes, mais tes réponses deviennent parfois brèves ou tardives dans la dernière partie de l’échange."
-        }
-      ],
-      "dynamics": [
-        {
-          "title": "Une affection réciproque",
-          "description": "Vous avez tous deux dit « je t’aime »; Emma a même confié l’avoir pensé depuis deux semaines, et vous avez ensuite parlé de toi comme de sa petite amie."
-        },
-        {
-          "title": "Des attentions très concrètes",
-          "description": "Tu apportes une pizza quand la cuisine de Emma tourne mal, tandis que Emma se souvient des fleurs jaunes que tu aimes et t’en offre pour la Saint-Valentin."
-        },
-        {
-          "title": "Un déséquilibre autour de la disponibilité",
-          "description": "Les rendez-vous oubliés ou les retards reviennent dans les disputes; Emma dit vouloir être une priorité, puis remarque que tu ne lui écris pas pendant cinq jours."
-        },
-        {
-          "title": "La légèreté côtoie les sujets sérieux",
-          "description": "Les plaisanteries sur Gerald, les repas et le réveil rythment vos échanges, mais elles alternent avec des discussions franches sur la confiance et l’attention."
-        }
-      ],
-      "highlights": [
-        "Après que tu as proposé des ramen, Emma conclut le rendez-vous par « je suis contente que tu m’aies écrit » — avec une petite concession à la pression de Jana.",
-        "Pour la Saint-Valentin, tu déposes les fleurs jaunes dont Emma se souvenait; tu réponds « je me souviens de tout ce que tu me dis » à son étonnement.",
-        "En mai, Emma te met sur sa liste de bagages pour Lisbonne; vous vous promettez ensuite de garder à la maison la tendresse ressentie pendant le voyage."
-      ]
-    },
-    "arguments": {
-      "answer": "Sur les sujets de conflit, Emma avance les arguments les plus convaincants : elle donne des exemples précis et explique leur effet, plutôt que de s’en tenir à un reproche vague. Quand Leo rate le dîner en avril, elle souligne qu’un message aurait évité de l’attendre une heure ; en juillet, elle formule clairement que des excuses répétées sans changement ne suffisent pas et qu’elle ne veut pas jouer la secrétaire. Leo reconnaît d’ailleurs le motif en juin (« tu as raison, c’est un schéma ») et accepte de corriger son agenda en juillet, ce qui renforce le bien-fondé de ces arguments. Cela dit, les extraits ne donnent pas assez de contexte pour trancher tous leurs désaccords, et la plupart de leurs échanges sont affectueux plutôt que des débats.",
-      "summary": "Emma et Leo partagent une relation tendre, faite de routines, de repas, de séries et de plaisanteries autour du pigeon Gerald. Avec le temps, des tensions apparaissent autour des retards, des oublis et d’une présence devenue moins régulière ; le ton reste affectueux, mais ces sujets sont exprimés de plus en plus directement.",
-      "vibe": "Romance et rappels d’agenda",
-      "topics": [
-        {
-          "title": "Retards et engagements",
-          "description": "Emma reproche à Leo de l’avoir laissée attendre au restaurant et d’avoir oublié leur soirée cinéma ; elle distingue explicitement les excuses d’un changement concret."
-        },
-        {
-          "title": "Vie quotidienne à deux",
-          "description": "Ils se coordonnent pour les courses, les repas et les soirées, avec des listes comprenant café, avocats et « quelque chose de sucré »."
-        },
-        {
-          "title": "Travail et horaires décalés",
-          "description": "Emma parle de gardes de nuit et d’un service hospitalier chaotique, tandis que Leo évoque réunions, projets intenses et retards professionnels."
-        },
-        {
-          "title": "Voyage à Lisbonne",
-          "description": "Ils réservent un séjour en mai, cherchent un bar sur le toit et plaisantent sur les onze pastéis de nata de Leo."
-        },
-        {
-          "title": "Rituels et plaisanteries",
-          "description": "Le pigeon Gerald revient régulièrement dans les nouvelles de Leo, et les deux plaisantent aussi sur leur basilic condamné et leurs réveils difficiles."
-        }
-      ],
-      "people": [
-        {
-          "name": "Emma",
-          "role": "La voix directe",
-          "style": "Elle écrit avec affection et humour, mais formule clairement ses attentes lorsqu’un problème se répète, comme après l’attente au restaurant ou le cinéma oublié."
-        },
-        {
-          "name": "Leo",
-          "role": "Le partenaire conciliant",
-          "style": "Il partage des nouvelles et des gestes attentionnés, et répond souvent par des excuses ou une promesse d’ajustement, tout en étant parfois peu réactif dans les extraits tardifs."
-        }
-      ],
-      "dynamics": [
-        {
-          "title": "Une conversation longtemps équilibrée",
-          "description": "Les deux lancent des nouvelles, proposent des sorties et entretiennent des rituels ; par exemple, l’un partage une chanson et l’autre l’ajoute parfois à sa playlist."
-        },
-        {
-          "title": "Tendresse dans les petites attentions",
-          "description": "Leo apporte une pizza quand la cuisine de Emma tourne mal, et lui achète un croissant de soutien à l’aéroport de Lisbonne."
-        },
-        {
-          "title": "Un déséquilibre qui devient un sujet",
-          "description": "Emma évoque les oublis, les retards et le fait de ne pas recevoir de nouvelles ; en septembre, elle dit avoir attendu cinq jours sans message avant que Leo reconnaisse qu’il montre mal son attachement."
-        }
-      ],
-      "highlights": [
-        "Le débat initial sur la pizza à l’ananas se transforme en invitation à manger des ramen : Leo paie, mais refuse toujours de concéder le point.",
-        "Leo rapporte les aventures de Gerald, pigeon qui juge son petit-déjeuner, s’assoit sur son vélo et renverse même le basilic ; Emma traite ce volatile de fauteur de chaos.",
-        "À Lisbonne, Emma envoie des photos à Leo alors qu’ils sont assis côte à côte ; il lui rappelle l’évidence, et elle répond que c’est une sauvegarde."
-      ]
-    },
-    "worried:Emma": {
-      "answer": "Oui, il y a quelque chose à prendre au sérieux, sans conclure d’avance au pire : vers la fin, Leo répond souvent très brièvement ou tardivement, et le 28 septembre tu dis que vous n’avez pas échangé pendant cinq jours et que tu lui manques dans sa vie quotidienne. Cela s’inscrit dans des difficultés déjà nommées : rendez-vous oubliés le 9 avril et le 22 juillet, puis ta frustration que les excuses ne soient pas suivies de changements. En même temps, Leo a reconnu un schéma, promis de mieux gérer son agenda, et vous avez poursuivi des moments tendres et des projets ensemble, notamment Lisbonne. Le dernier message — « parler demain, en personne » après avoir beaucoup réfléchi à votre couple — signale clairement une conversation importante, mais ne dit pas à lui seul quelle sera sa conclusion; le chat ne permet donc pas de savoir s’il y a une rupture en vue.",
-      "summary": "Cette conversation suit une relation qui commence par des rendez-vous pleins de plaisanteries, puis devient une vie de couple très imbriquée, avec repas, famille, routines et voyage à Lisbonne. Le ton reste tendre et complice, mais des absences, des engagements oubliés et une communication devenue plus distante alimentent des tensions, jusqu’à une demande récente de parler en personne.",
-      "vibe": "Romance et signaux d’alarme",
-      "topics": [
-        {
-          "title": "Débuts et complicité",
-          "description": "Vous vous rapprochez autour du ramen, de la dispute sur la pizza à l’ananas, des playlists et des blagues récurrentes sur le réveil et le pigeon Gerald."
-        },
-        {
-          "title": "Vie quotidienne partagée",
-          "description": "Les messages parlent souvent de repas à commander, de listes de courses, de soirées séries et de visites spontanées; en janvier, Leo te fait même une clé."
-        },
-        {
-          "title": "Famille et entourage",
-          "description": "Leo vient à Noël chez ta famille, apporte un gâteau au citron et parle deux heures de football avec ton père malgré ta mise en garde; les amis Jana, Max, Tom et Sophie organisent régulièrement des sorties."
-        },
-        {
-          "title": "Travail et fatigue",
-          "description": "Tes quarts de nuit à l’hôpital reviennent souvent, avec des pauses et des journées épuisantes; le travail chargé de Leo finit aussi par réduire sa disponibilité."
-        },
-        {
-          "title": "Tensions et projets d’avenir",
-          "description": "Vous réservez un voyage à Lisbonne, mais les réunions professionnelles menacent le départ. Des rendez-vous manqués ou oubliés deviennent un sujet récurrent, puis Leo demande le 24 octobre à parler de votre couple en personne."
-        }
-      ],
-      "people": [
-        {
-          "name": "Emma",
-          "role": "La personne qui entretient le lien",
-          "style": "Tu relances souvent avec des nouvelles de tes quarts, des invitations, des chansons et des petites attentions, tout en exprimant assez directement ta déception quand un rendez-vous ou une présence compte pour toi."
-        },
-        {
-          "name": "Leo",
-          "role": "Le partenaire attentionné, débordé",
-          "style": "Leo entretient les routines affectueuses et les blagues, mais répond parfois de façon très brève ou tardive; quand les oublis sont abordés, il s’excuse et reconnaît parfois le problème."
-        }
-      ],
-      "dynamics": [
-        {
-          "title": "Une tendresse bien installée",
-          "description": "Vous vous dites « je t’aime » en novembre, puis les habitudes de couple se renforcent : soirées à la maison, courses communes, rencontre des familles et voyage planifié à deux."
-        },
-        {
-          "title": "L’organisation devient un point sensible",
-          "description": "Le 9 avril, tu attends une heure au restaurant sans message; le 22 juillet, Leo oublie le cinéma prévu et tu dis ne pas vouloir être son « secrétaire ». Ce sont des exemples concrets d’une frustration qui revient."
-        },
-        {
-          "title": "Un déséquilibre de disponibilité apparaît",
-          "description": "Le 28 septembre, tu expliques avoir cessé d’écrire la première pour voir si Leo te contacterait; il répond qu’il est submergé par le travail, tandis que tu dis manquer d’être dans ses pensées pendant la journée."
-        },
-        {
-          "title": "Vous savez parfois réparer après un accroc",
-          "description": "Après le conflit du 9 avril, vous convenez de reparler et de faire des pancakes; après celui du 13 juin, Leo reconnaît le lendemain que les retards forment un schéma, et vous avez ensuite une discussion qui te fait te sentir mieux."
-        }
-      ],
-      "highlights": [
-        "Votre rencontre démarre par un débat sur la pizza à l’ananas, converti en invitation à manger du ramen comme offre de paix.",
-        "Le pigeon Gerald devient presque un personnage du couple : il juge les petits-déjeuners, s’assoit sur le vélo de Leo et renverse le basilic.",
-        "Pour votre voyage à Lisbonne, Leo achète un croissant de soutien émotionnel pendant que tu cours vers la porte d’embarquement; plus tard, il compte vos 11 pastéis de nata."
-      ]
-    },
-    "worried:Leo": {
-      "answer": "Oui, il y a un point à prendre au sérieux, sans que cet échange permette de conclure qu’il y a une crise ou une rupture. À plusieurs reprises, Emma dit se sentir reléguée au second plan ou manquer de signes d’attention : après le rendez-vous oublié du 9 avril, le toast manqué à son anniversaire le 13 juin, puis le cinéma oublié le 22 juillet. Le 28 septembre, Emma dit avoir cessé d’écrire pendant cinq jours pour voir si tu le ferais, et parle de te manquer pendant la journée ; les réponses devenues plus brèves vers la fin renforcent l’impression d’une distance. Ton dernier message — demander à parler en personne parce que tu réfléchis beaucoup à votre couple — est important, mais son contenu reste inconnu : le mieux est donc de ne pas tirer de conclusion avant cette conversation et d’écouter ce que Emma veut dire.",
-      "summary": "Cette conversation raconte une relation amoureuse qui commence dans la taquinerie autour d’une pizza à l’ananas, puis se construit avec des habitudes tendres, des repas, des proches et un voyage à Lisbonne. Au fil du temps, des oublis et une baisse de présence alimentent des discussions sur les priorités et la distance, jusqu’à ta demande finale de parler en personne ; le ton passe du très complice à l’incertain.",
-      "vibe": "Des pigeons aux questions",
-      "topics": [
-        {
-          "title": "Débuts et complicité",
-          "description": "Vous plaisantez sur la pizza à l’ananas, les pigeons et les réveils difficiles, tout en organisant ramen, pancakes et soirées ensemble."
-        },
-        {
-          "title": "Vie quotidienne et famille",
-          "description": "Les listes de courses, les repas improvisés et Gerald le pigeon deviennent des repères récurrents ; Leo rencontre aussi la mère et le père de Emma à Noël."
-        },
-        {
-          "title": "Voyage à Lisbonne",
-          "description": "Vous réservez un séjour du 15 au 19 mai, échangez des idées de bars et partez ensemble ; Leo compte onze pastéis de nata."
-        },
-        {
-          "title": "Oublis et priorités",
-          "description": "Emma exprime sa frustration quand tu manques un dîner, le toast d’anniversaire ou une séance de cinéma déjà prévue, et demande des changements concrets plutôt que de simples excuses."
-        },
-        {
-          "title": "Distance récente",
-          "description": "En août et septembre, Emma dit te sentir distant et remarque cinq jours sans message ; le 24 octobre, tu proposes une discussion en personne sur votre couple."
-        }
-      ],
-      "people": [
-        {
-          "name": "Emma",
-          "role": "La personne qui relance",
-          "style": "Emma envoie souvent des nouvelles, des chansons et des invitations, avec beaucoup de taquineries tendres, puis formule clairement ses déceptions quand les plans ou l’attention lui semblent négligés."
-        },
-        {
-          "name": "Leo",
-          "role": "Le partenaire organisateur",
-          "style": "Tu réponds souvent par des blagues et des gestes pratiques — pizza, courses, listes et réservation de Lisbonne — mais reconnais aussi que le travail t’a parfois empêché de montrer ta présence."
-        }
-      ],
-      "dynamics": [
-        {
-          "title": "Affection réciproque",
-          "description": "Vous échangez des « tu me manques » et des déclarations d’amour ; le 29 novembre, vous vous dites tous les deux « je t’aime », puis Emma invite Leo à Noël."
-        },
-        {
-          "title": "Des routines très partagées",
-          "description": "Les repas choisis à deux, les séries avec la règle « seulement un épisode » et les mises à jour sur Gerald donnent à la relation un rythme domestique et complice."
-        },
-        {
-          "title": "Un conflit récurrent autour de la fiabilité",
-          "description": "Après le dîner oublié du 9 avril, tu reconnais le 14 juin qu’il s’agit d’un schéma ; le 22 juillet, Emma précise qu’elle ne veut pas être ta secrétaire et attend des actes, pas seulement des excuses."
-        },
-        {
-          "title": "Une communication qui s’effiloche",
-          "description": "À partir de la fin août, plusieurs réponses de Leo sont très brèves ou tardives ; Emma demande le 30 août si tout va bien, puis évoque le 28 septembre le silence de cinq jours."
-        }
-      ],
-      "highlights": [
-        "Gerald passe du pigeon sur le balcon à celui qui s’assoit sur le vélo et renverse le basilic ; vous le traitez presque comme un colocataire fautif.",
-        "À Lisbonne, Emma t’envoie des photos alors que vous êtes assis côte à côte, « en sauvegarde », et tu réponds que le tram semble aller à la verticale.",
-        "Pour l’anniversaire de Emma, tu arrives après le toast ; Emma te dit que le problème n’est pas le train, mais le sentiment que « c’est toujours quelque chose », ce qui mène à une discussion sur le motif récurrent."
-      ]
-    },
-    "gift:Emma": {
-      "answer": "Un cadeau personnel et sans pression conviendrait mieux qu’un grand geste : par exemple, un petit album imprimé des photos de Lisbonne, accompagné d’une carte évoquant vos 11 pastéis de nata et les bons moments du voyage. Leo avait aussi retenu que tu aimais les fleurs jaunes et t’en avait offert pour la Saint-Valentin, donc un bouquet de celles-là serait une autre idée très ciblée. Comme Leo propose maintenant de parler de votre relation en personne, je garderais le cadeau simple et je ne le présenterais pas comme une façon de régler cette conversation.",
-      "summary": "Cette conversation suit une histoire d’amour, depuis la dispute sur l’ananas sur la pizza jusqu’aux habitudes partagées, aux projets et au voyage à Lisbonne. Le ton est d’abord tendre et taquin, puis des oublis et des réponses de plus en plus espacées font apparaître une distance que le dernier message veut aborder franchement.",
-      "vibe": "Tendresse et turbulences",
-      "topics": [
-        {
-          "title": "Vos débuts et vos blagues",
-          "description": "Vous vous êtes retrouvés après la fête de Jana grâce à votre débat sur l’ananas, puis avez commencé par un rendez-vous ramen. Gerald, le pigeon du balcon, est devenu un personnage récurrent, notamment quand il juge le petit-déjeuner de Leo."
-        },
-        {
-          "title": "Vie quotidienne et gestes d’attention",
-          "description": "Vous échangez souvent sur les repas, les courses et les horaires de travail. Leo propose du thé quand tu rentres épuisée et apporte parfois une pizza quand ta cuisine tourne mal."
-        },
-        {
-          "title": "Famille et cercle d’amis",
-          "description": "Vous prévoyez des sorties avec Jana, Tom, Max et Sophie, et Leo vient à Noël chez tes parents avec un gâteau au citron. Ton père et Leo ont finalement parlé de football pendant deux heures, malgré ton avertissement."
-        },
-        {
-          "title": "Lisbonne et souvenirs à deux",
-          "description": "Vous avez réservé un voyage à Lisbonne, préparé des listes de visites et plaisanté sur la valise et les pastéis de nata. Leo en a compté onze, sans regret, et vous vous êtes dit que vous vouliez garder à la maison la douceur ressentie là-bas."
-        },
-        {
-          "title": "Oublis et éloignement récent",
-          "description": "Tu as dit que les retards et rendez-vous oubliés se répétaient, puis que tu ne voulais pas être le secrétaire de Leo. Plus tard, tu as exprimé le manque de messages et le sentiment d’être moins présente dans ses pensées; le dernier message propose d’en parler en personne."
-        }
-      ],
-      "people": [
-        {
-          "name": "Emma",
-          "role": "la partenaire expressive",
-          "style": "Tu écris avec affection et humour, proposes souvent des moments ensemble et nommes clairement ta déception quand des engagements sont oubliés."
-        },
-        {
-          "name": "Leo",
-          "role": "le partenaire attentionné",
-          "style": "Leo partage des anecdotes et des idées de sorties, manifeste son affection par des gestes concrets, mais répond parfois tard ou de façon très brève dans les derniers mois."
-        }
-      ],
-      "dynamics": [
-        {
-          "title": "Un quotidien construit à deux",
-          "description": "Les repas, les épisodes de séries, les listes de courses et les petites nouvelles de Gerald donnent à vos échanges un rythme de vie commune, bien au-delà des rendez-vous."
-        },
-        {
-          "title": "L’humour comme langage partagé",
-          "description": "Vous reprenez vos plaisanteries sur le réveil, les réunions inutiles et le basilic condamné; même le pigeon Gerald sert de ressort comique récurrent."
-        },
-        {
-          "title": "Des attentions qui deviennent un enjeu",
-          "description": "Les gestes tendres sont bien présents — comme les fleurs jaunes ou le croissant apporté à l’aéroport — mais tu dis aussi que les retards répétés et le manque d’initiative te font te sentir moins prioritaire."
-        },
-        {
-          "title": "Une distance qui finit par être dite",
-          "description": "Après plusieurs échanges où Leo répond tardivement ou brièvement, tu demandes si tout va bien et expliques que tu manques de signes d’attention. Le dernier message de Leo propose une vraie conversation en personne."
-        }
-      ],
-      "highlights": [
-        "À votre premier rendez-vous ramen, Emma exige une concession sur l’ananas, tandis que Leo refuse toujours mais propose de payer.",
-        "À l’aéroport pour Lisbonne, Leo t’attend avec un croissant « de soutien émotionnel » pendant que tu es coincée dans la file de sécurité.",
-        "Pour la Saint-Valentin, Leo t’offre les fleurs jaunes dont tu avais parlé et te dit : « Je me souviens de tout ce que tu me racontes. »"
-      ]
-    },
-    "gift:Leo": {
-      "answer": "Un cadeau très adapté serait un petit bouquet de fleurs jaunes : tu en as déjà offert à Emma pour la Saint-Valentin, et sa réaction — « tu t’es souvenu des jaunes » — montre que ce détail l’a touché·e. Tu pourrais l’accompagner d’un mot personnel et d’un moment prévu ensemble, comme un petit-déjeuner de pancakes, sans en faire un geste grandiose. Vu que Emma a récemment dit vouloir se sentir davantage prioritaire et que vous avez parlé de rendez-vous oubliés, le plus beau complément au cadeau serait de choisir une date, de la noter et d’être vraiment présent·e. Le dernier message propose une conversation en personne sur votre relation, donc garde le cadeau simple et laisse cette conversation avoir sa place.",
-      "summary": "La conversation raconte une relation qui commence par des plaisanteries sur la pizza à l’ananas et se tisse autour des repas, des horaires décalés, de Gerald le pigeon et d’un voyage à Lisbonne. Le ton est d’abord très tendre et complice, puis des tensions apparaissent autour des retards, du travail et du sentiment de ne plus être une priorité; le dernier message ouvre une discussion importante en personne.",
-      "vibe": "Pigeons et pancakes",
-      "topics": [
-        {
-          "title": "Petites attentions quotidiennes",
-          "description": "Vous échangez souvent des nouvelles sur le sommeil, les repas et les journées de travail; Leo propose aussi du thé ou apporte une pizza quand la cuisine de Emma tourne mal."
-        },
-        {
-          "title": "Humour et rituels partagés",
-          "description": "Gerald, le pigeon du balcon, revient régulièrement dans vos blagues, avec le basilic renversé et les commentaires sur le petit-déjeuner."
-        },
-        {
-          "title": "Sorties et voyage à Lisbonne",
-          "description": "Vous vous organisez pour des dîners, du bouldering et des soirées chez des amis; en mars, Leo réserve des vols pour Lisbonne et prépare une liste de pastel de nata."
-        },
-        {
-          "title": "Présence et rendez-vous manqués",
-          "description": "Emma dit vouloir se sentir parfois prioritaire après un changement de vol envisagé pour le travail, puis exprime sa fatigue face aux rendez-vous oubliés et au manque de nouvelles."
-        },
-        {
-          "title": "Familles et gestes personnels",
-          "description": "Leo vient à Noël chez la famille de Emma avec un gâteau au citron acheté en boulangerie, et offre pour la Saint-Valentin des fleurs jaunes dont Emma se souvenait."
-        }
-      ],
-      "people": [
-        {
-          "name": "Emma",
-          "role": "La partenaire attentionnée",
-          "style": "Écrit avec beaucoup de tendresse et d’humour, partage ses pauses et ses quarts de travail, et formule clairement ses besoins quand la relation la préoccupe."
-        },
-        {
-          "name": "Leo",
-          "role": "Le partenaire organisateur",
-          "style": "Propose souvent des repas et des moments ensemble, envoie des chansons et des blagues, mais reconnaît avoir parfois du mal à montrer son attention ou à respecter les plans."
-        }
-      ],
-      "dynamics": [
-        {
-          "title": "Rituels à deux",
-          "description": "Les réveils « encore cinq minutes », les choix de dîner et les épisodes « juste un » reviennent comme des habitudes complices."
-        },
-        {
-          "title": "Soutien concret",
-          "description": "Vous prenez soin l’un de l’autre par des gestes pratiques : Leo apporte du thé ou de la pizza, tandis que Emma rappelle à Leo de manger et de dormir après ses longues journées."
-        },
-        {
-          "title": "Les absences deviennent un sujet",
-          "description": "Après le dîner manqué où Emma attend une heure, puis le cinéma oublié et les nouvelles moins fréquentes, Emma explique que des excuses seules ne suffisent pas; Leo reconnaît un schéma et promet de mieux suivre son calendrier."
-        }
-      ],
-      "highlights": [
-        "Au début, Leo invite Emma à manger des ramen comme « offre de paix » après leur débat sur la pizza à l’ananas — sans jamais céder sur l’ananas.",
-        "Leo offre des fleurs jaunes pour la Saint-Valentin; Emma est ému·e que ce détail ait été retenu.",
-        "À Lisbonne, Leo envoie les photos à Emma alors qu’ils sont assis côte à côte, « pour les avoir en sauvegarde »; ils comptent ensuite les onze pastel de nata sans regret."
-      ]
-    },
-    "effort": {
-      "answer": "Sur l’ensemble des extraits, Emma semble faire le plus d’efforts pour entretenir le lien au quotidien : Emma lance souvent les conversations, propose des sorties et des soirées, partage des chansons et prend des nouvelles. Emma porte aussi une bonne part de la coordination pratique, par exemple en réservant une table ou en relançant les projets quand ils sont oubliés. Leo fait néanmoins des gestes concrets et affectueux — apporter une pizza, préparer du thé, organiser le voyage à Lisbonne et offrir les fleurs jaunes — donc ce n’est pas une absence d’efforts. Mais surtout à partir de l’été, les réponses de Leo deviennent souvent tardives ou très brèves, tandis que Emma nomme explicitement le déséquilibre et le manque d’initiative; sur ces extraits, l’effort paraît donc plus souvent venir de Emma.",
-      "summary": "La conversation suit une relation amoureuse chaleureuse, des premiers rendez-vous autour du ramen aux projets communs et au voyage à Lisbonne. Avec le temps, les petites attentions et plaisanteries partagées coexistent avec des tensions récurrentes autour des retards, des oublis et d’un investissement qui semble moins équilibré.",
-      "vibe": "Tendresse et rappels calendrier",
-      "topics": [
-        {
-          "title": "Débuts et rituels amoureux",
-          "description": "Les échanges commencent par une dispute taquine sur la pizza à l’ananas, puis les rendez-vous, les bonjours et les clins d’œil deviennent des rituels réguliers."
-        },
-        {
-          "title": "Sorties, repas et vie commune",
-          "description": "Ils choisissent souvent ensemble quoi manger, se retrouvent pour des soirées et échangent des listes de courses; Emma coordonne fréquemment les plans, tandis que Leo accepte ou complète les achats."
-        },
-        {
-          "title": "Voyage à Lisbonne",
-          "description": "Leo repère des vols et réserve le séjour, tandis que Emma cherche des bars sur les toits et compte les jours; à l’approche du départ, un conflit éclate quand le travail menace le voyage."
-        },
-        {
-          "title": "Retards et sentiment de priorité",
-          "description": "Emma reproche à Leo d’avoir manqué un dîner après une heure d’attente, puis un rendez-vous cinéma oublié. Emma dit vouloir être une priorité et ne pas jouer le rôle de secrétaire."
-        },
-        {
-          "title": "Travail et attentions quotidiennes",
-          "description": "Emma raconte souvent ses gardes de nuit et ses pauses difficiles; Leo répond parfois par des encouragements ou en proposant d’apporter une pizza, mais les réponses deviennent plus espacées vers la fin."
-        }
-      ],
-      "people": [
-        {
-          "name": "Emma",
-          "role": "l’initiatrice des échanges",
-          "style": "Écrit souvent pour prendre des nouvelles, partager un détail de sa journée ou lancer un plan, avec beaucoup d’humour tendre et des demandes assez directes quand quelque chose ne va pas."
-        },
-        {
-          "name": "Leo",
-          "role": "le soutien par gestes",
-          "style": "Apporte parfois une aide concrète ou une attention mémorable — pizza, thé, fleurs, billets pour Lisbonne — mais répond de plus en plus brièvement ou tardivement dans les derniers extraits."
-        }
-      ],
-      "dynamics": [
-        {
-          "title": "Une initiative inégale",
-          "description": "Emma lance beaucoup de conversations, d’invitations et de propositions de repas; Leo prend aussi des initiatives, par exemple en proposant Lisbonne, mais le rythme des échanges s’effiloche ensuite."
-        },
-        {
-          "title": "Une tendresse bien installée",
-          "description": "Les surnoms, les « miss you » et les plaisanteries sur Gerald, le pigeon du balcon, créent un langage complice partagé."
-        },
-        {
-          "title": "Des oublis qui s’accumulent",
-          "description": "Les retards et rendez-vous manqués reviennent assez souvent pour que Emma parle d’un schéma répétitif, notamment après le dîner manqué d’avril et le cinéma oublié en juillet."
-        },
-        {
-          "title": "Un effort de réparation, puis du recul",
-          "description": "Leo reconnaît en juin que les retards forment un schéma et promet des rappels de calendrier; en septembre, Emma dit avoir cessé d’écrire en premier pour voir si Leo le ferait."
-        }
-      ],
-      "highlights": [
-        "Après avoir plaisanté sur la pizza à l’ananas, Leo propose un ramen comme « offre de paix »; Emma accepte à condition que le désaccord sur l’ananas reste au menu.",
-        "Pour la Saint-Valentin, Leo dépose les fleurs jaunes préférées de Emma et explique se souvenir de tout ce qu’on lui raconte.",
-        "À Lisbonne, Emma envoie les photos à Leo alors qu’ils sont assis côte à côte, « pour avoir une sauvegarde » — une petite blague très à leur image."
+        "Le tout premier message de Leo : « salut, c’est Leo de la soirée de Jana. celui qui a perdu le débat sur la pizza à l’ananas 🍍 », et la réponse d’Emma : « tu n’as pas perdu, tu as abandonné ».",
+        "Pendant une garde de nuit, un patient demande Emma en mariage. Elle raconte à Leo qu’elle a répondu qu’elle était prise, se demande si c’était trop tôt, et il répond : « non. ça me plaît. beaucoup ❤️ ».",
+        "À Lisbonne, Emma envoie les photos à Leo alors qu’elle est assise juste à côté de lui, « en sauvegarde », et il écrit : « je t’aime ici. comme ça »."
       ]
     },
     "better": {
-      "answer": "Vous semblez mieux vous comprendre quand vous nommez clairement le problème : après le dîner manqué du 9 avril, Emma a expliqué qu’un message aurait compté, et Leo a reconnu ensuite le schéma et promis de prévenir en cas de retard. Vous pourriez reprendre cette approche plus tôt, avec des demandes concrètes — par exemple « si tu vois que tu vas être en retard, préviens-moi dès que possible » — plutôt que d’attendre que la frustration s’accumule. Évitez aussi les mises à l’épreuve indirectes : Emma a dit avoir cessé d’écrire pendant une semaine pour voir si Leo prendrait l’initiative, et Leo a justement vécu cela comme un test ; mieux vaut dire directement « j’aimerais que tu m’écrives davantage pendant la journée ». Enfin, quand le travail de Leo devient intense, convenez d’un petit point de contact réaliste et réservez les sujets importants à une conversation en personne, comme vous l’avez fait après les tensions sur les retards. Le dernier message propose justement de parler en face à face ; le chat ne montre pas encore comment cette conversation s’est passée.",
-      "summary": "Cette conversation suit une relation qui passe de la taquinerie autour de la pizza à une vie partagée, avec des repas, des proches, un voyage à Lisbonne et des petites habitudes comme Gerald le pigeon. Le ton est d’abord très tendre et joueur, puis devient plus tendu quand les retards, les oublis et la baisse de disponibilité de Leo laissent Emma se sentir moins prioritaire.",
-      "vibe": "Tendresse et rappels",
+      "answer": "Le schéma à travailler est clair, et il se corrige : un projet change, personne ne le sait à temps, et les excuses arrivent après la déception. Le 9 avril, Emma a attendu une heure (« tu aurais pu écrire »), et en juin Leo a promis exactement ça : « j’écrirai quand je suis en retard. comme un adulte ». Faites de cette promesse une règle que vous tenez tous les deux : dès qu’un projet vacille, dites-le avant que l’autre attende. Et dites vos besoins au lieu de les tester : la semaine où Emma n’a pas écrit en premier lui a appris quelque chose, mais « ça me manque d’être quelqu’un à qui tu penses dans la journée » en a dit bien plus à Leo. Son « on peut parler demain ? » est l’ouverture ; venez-y avec un souhait concret chacun, pas une liste.",
+      "summary": "Une histoire d’amour racontée en messages : elle commence par une dispute perdue sur la pizza à l’ananas et un rendez-vous ramen, grandit avec une clé, un Noël chez les parents d’Emma et un voyage à Lisbonne, et vit de blagues internes sur un pigeon nommé Gerald. Puis la même dispute sur des projets en retard ou annulés revient sans cesse, les réponses de Leo raccourcissent, et la conversation s’arrête sur un message resté sans réponse.",
+      "vibe": "Pigeons, pancakes et promesses",
       "topics": [
         {
-          "title": "Débuts et plaisanteries",
-          "description": "La discussion commence après une fête chez Jana, avec un débat sur la pizza à l’ananas et une invitation à manger des ramen. Les réveils difficiles et les réponses sur le jazz nourrissent ensuite leurs blagues récurrentes."
+          "title": "Gerald, le pigeon",
+          "description": "Le pigeon du balcon de Leo devient un personnage récurrent : il juge les petits-déjeuners, a des exigences sur le café et disparaît un moment avant de revenir en octobre, « l’air plus vieux »."
         },
         {
-          "title": "Quotidien et petites attentions",
-          "description": "Ils s’échangent des nouvelles sur les journées de travail, les pauses et les repas, et se proposent du thé ou de la pizza quand l’un est épuisé. Gerald, le pigeon qui juge le petit-déjeuner et renverse le basilic, devient un personnage familier."
+          "title": "Projets et ponctualité",
+          "description": "Restaurants, vols, places de cinéma et qui est en retard pour quoi : le sujet le plus pratique de la conversation est aussi le plus douloureux."
         },
         {
-          "title": "Sorties, famille et projets",
-          "description": "Ils organisent des dîners avec Jana, Tom, Max et Sophie, et Leo rencontre la famille de Emma à Noël, avec consigne de ne pas lancer le sujet du football avec son père. En mars, ils réservent un voyage à Lisbonne et comptent les jours avant le départ."
+          "title": "Lisbonne",
+          "description": "Réservé en mars, attendu pendant des semaines et resté leurs plus beaux jours : onze pastéis de nata, un tram qui grimpe à la verticale et « je t’aime ici. comme ça »."
         },
         {
-          "title": "Retards et sentiment de priorité",
-          "description": "Le 9 avril, Emma attend une heure au restaurant sans nouvelles ; le 2 mai, le travail menace le départ pour Lisbonne, et Emma dit vouloir être une priorité parfois. Le 22 juillet, un rendez-vous cinéma oublié ravive le reproche de devoir rappeler les engagements."
+          "title": "Travail et gardes",
+          "description": "Les gardes de nuit d’Emma à l’hôpital et les présentations et projets de Leo décident quand ils peuvent se parler, et ces derniers temps s’ils le font."
         },
         {
-          "title": "Distance et besoin de contact",
-          "description": "Quand les réponses de Leo deviennent plus brèves et espacées, Emma demande le 30 août si tout va bien, puis explique le 28 septembre avoir attendu cinq jours pour voir si Leo écrirait en premier. Leo dit être débordé par son travail, tandis que Emma dit regretter de ne plus se sentir présent dans ses pensées au quotidien."
+          "title": "Famille et amis",
+          "description": "Jana, qui les a présentés, un Noël chez les parents d’Emma (gâteau au citron, trop de foot) et Max avec son canapé le soir du cinéma."
         }
       ],
       "people": [
         {
           "name": "Emma",
-          "role": "l’initiatrice attentionnée",
-          "style": "Emma lance souvent les conversations, propose des sorties et partage des détails de ses gardes de nuit, avec beaucoup d’humour tendre, mais sait aussi formuler précisément ses déceptions."
+          "role": "Celle qui écrit d’abord",
+          "style": "Lance la plupart des conversations, dit clairement ce dont elle a besoin (« je veux juste être une priorité de temps en temps ») et entretient les blagues même quand c’est tendu."
         },
         {
           "name": "Leo",
-          "role": "le partenaire débordé",
-          "style": "Leo répond souvent par des plaisanteries et des gestes pratiques, comme apporter une pizza ou organiser le voyage, mais ses réponses deviennent parfois tardives ou très brèves lorsque le travail s’intensifie."
+          "role": "Le tendre débordé",
+          "style": "Drôle et tendre quand il est là (« je me souviens de tout ce que tu me dis »), et ces derniers temps il écrit beaucoup moins : souvent un mot, souvent des heures plus tard."
         }
       ],
       "dynamics": [
         {
-          "title": "Un quotidien à deux",
-          "description": "Les échanges sont très équilibrés dans les premières périodes : chacun propose des repas, des épisodes à regarder et des sorties. Leurs routines incluent les listes de courses, les chansons du jour et les messages de bon matin."
+          "title": "Qui écrit en premier",
+          "description": "Les premiers mois, ils lancent les conversations presque à parts égales. Depuis août, Emma en lance près de quatre sur cinq, et la réponse habituelle de Leo est passée de quelques minutes à environ trois heures."
         },
         {
-          "title": "L’humour comme langage commun",
-          "description": "Ils reprennent volontiers les blagues de l’autre : « Gerald est le chaos », le basilic condamné et « encore une seule » pour les épisodes. Ce jeu complice sert aussi à se soutenir après une journée pénible."
+          "title": "La même dispute, quatre fois",
+          "description": "Le dîner du 9 avril, le vol pour Lisbonne, le toast d’anniversaire d’Emma, le cinéma en juillet : chaque fois qu’un projet tombe à l’eau, Emma dit ce que ça lui fait et Leo s’excuse, jusqu’à ce qu’elle le nomme : « c’est encore la même dispute »."
         },
         {
-          "title": "Les difficultés se répètent",
-          "description": "Les retards et oublis deviennent une source de conflit : après le rendez-vous manqué d’avril, Emma explique en juillet ne pas vouloir jouer le rôle de secrétaire. Leo reconnaît le problème et promet de mieux utiliser son calendrier, mais le chat montre ensuite encore des rendez-vous incertains ou oubliés."
+          "title": "Se réconcilier avec des pancakes",
+          "description": "Leurs réconciliations ont un rituel. Après la dispute d’avril, c’est « pancakes dimanche ? », et en octobre Leo revient vers elle avec la même proposition, via Gerald."
         },
         {
-          "title": "Une réparation possible, mais inachevée",
-          "description": "Après le désaccord du 9 avril, ils reportent la discussion et renouent autour de pancakes ; après l’épisode du 13 juin, Leo reconnaît le lendemain qu’il s’agit d’un schéma et accepte d’en parler. Le dernier message, le 24 octobre, propose une conversation en personne, sans réponse visible dans l’extrait."
+          "title": "L’humour comme ciment",
+          "description": "Gerald, les matins « encore cinq minutes » et l’œuf du restaurant de ramen reviennent sans cesse, et ils sont toujours là quand tout le reste se tait."
         }
       ],
       "highlights": [
-        "Au début, Leo propose des ramen comme « offre de paix » après leur débat sur l’ananas, mais refuse toujours de reconnaître que l’ananas a sa place sur une pizza.",
-        "Le 29 novembre, Leo écrit qu’il aime Emma ; Emma répond qu’elle voulait le dire depuis deux semaines, et ils plaisantent sur ces deux semaines « perdues ».",
-        "Pour la Saint-Valentin, Leo laisse des fleurs jaunes dont Emma se souvient comme étant celles qu’elle aime ; Leo affirme se souvenir de tout ce qu’elle lui dit."
+        "Le tout premier message de Leo : « salut, c’est Leo de la soirée de Jana. celui qui a perdu le débat sur la pizza à l’ananas 🍍 », et la réponse d’Emma : « tu n’as pas perdu, tu as abandonné ».",
+        "Pendant une garde de nuit, un patient demande Emma en mariage. Elle raconte à Leo qu’elle a répondu qu’elle était prise, se demande si c’était trop tôt, et il répond : « non. ça me plaît. beaucoup ❤️ ».",
+        "À Lisbonne, Emma envoie les photos à Leo alors qu’elle est assise juste à côté de lui, « en sauvegarde », et il écrit : « je t’aime ici. comme ça »."
+      ]
+    },
+    "arguments": {
+      "answer": "Aucun ne gagne aux points, parce qu’ils ne se disputent pas sur la même chose. Leo argumente avec les circonstances (« le client a encore tout changé », « le train était vraiment bloqué », « je fais ça pour nous aussi »), et chacune est vraie. Emma argumente avec le schéma (« c’est toujours juste une réunion », « ce n’est pas une question de train »), et celui-ci tient sur quatre disputes. Leo est le plus convaincant quand il cesse de se défendre et lui donne raison : « tu as raison, c’est un schéma. je ne veux pas que ça en soit un ». La phrase la plus forte de toute la conversation est aussi la plus simple : « je veux juste être une priorité de temps en temps ».",
+      "summary": "Une histoire d’amour racontée en messages : elle commence par une dispute perdue sur la pizza à l’ananas et un rendez-vous ramen, grandit avec une clé, un Noël chez les parents d’Emma et un voyage à Lisbonne, et vit de blagues internes sur un pigeon nommé Gerald. Puis la même dispute sur des projets en retard ou annulés revient sans cesse, les réponses de Leo raccourcissent, et la conversation s’arrête sur un message resté sans réponse.",
+      "vibe": "Pigeons, pancakes et promesses",
+      "topics": [
+        {
+          "title": "Gerald, le pigeon",
+          "description": "Le pigeon du balcon de Leo devient un personnage récurrent : il juge les petits-déjeuners, a des exigences sur le café et disparaît un moment avant de revenir en octobre, « l’air plus vieux »."
+        },
+        {
+          "title": "Projets et ponctualité",
+          "description": "Restaurants, vols, places de cinéma et qui est en retard pour quoi : le sujet le plus pratique de la conversation est aussi le plus douloureux."
+        },
+        {
+          "title": "Lisbonne",
+          "description": "Réservé en mars, attendu pendant des semaines et resté leurs plus beaux jours : onze pastéis de nata, un tram qui grimpe à la verticale et « je t’aime ici. comme ça »."
+        },
+        {
+          "title": "Travail et gardes",
+          "description": "Les gardes de nuit d’Emma à l’hôpital et les présentations et projets de Leo décident quand ils peuvent se parler, et ces derniers temps s’ils le font."
+        },
+        {
+          "title": "Famille et amis",
+          "description": "Jana, qui les a présentés, un Noël chez les parents d’Emma (gâteau au citron, trop de foot) et Max avec son canapé le soir du cinéma."
+        }
+      ],
+      "people": [
+        {
+          "name": "Emma",
+          "role": "Celle qui écrit d’abord",
+          "style": "Lance la plupart des conversations, dit clairement ce dont elle a besoin (« je veux juste être une priorité de temps en temps ») et entretient les blagues même quand c’est tendu."
+        },
+        {
+          "name": "Leo",
+          "role": "Le tendre débordé",
+          "style": "Drôle et tendre quand il est là (« je me souviens de tout ce que tu me dis »), et ces derniers temps il écrit beaucoup moins : souvent un mot, souvent des heures plus tard."
+        }
+      ],
+      "dynamics": [
+        {
+          "title": "Qui écrit en premier",
+          "description": "Les premiers mois, ils lancent les conversations presque à parts égales. Depuis août, Emma en lance près de quatre sur cinq, et la réponse habituelle de Leo est passée de quelques minutes à environ trois heures."
+        },
+        {
+          "title": "La même dispute, quatre fois",
+          "description": "Le dîner du 9 avril, le vol pour Lisbonne, le toast d’anniversaire d’Emma, le cinéma en juillet : chaque fois qu’un projet tombe à l’eau, Emma dit ce que ça lui fait et Leo s’excuse, jusqu’à ce qu’elle le nomme : « c’est encore la même dispute »."
+        },
+        {
+          "title": "Se réconcilier avec des pancakes",
+          "description": "Leurs réconciliations ont un rituel. Après la dispute d’avril, c’est « pancakes dimanche ? », et en octobre Leo revient vers elle avec la même proposition, via Gerald."
+        },
+        {
+          "title": "L’humour comme ciment",
+          "description": "Gerald, les matins « encore cinq minutes » et l’œuf du restaurant de ramen reviennent sans cesse, et ils sont toujours là quand tout le reste se tait."
+        }
+      ],
+      "highlights": [
+        "Le tout premier message de Leo : « salut, c’est Leo de la soirée de Jana. celui qui a perdu le débat sur la pizza à l’ananas 🍍 », et la réponse d’Emma : « tu n’as pas perdu, tu as abandonné ».",
+        "Pendant une garde de nuit, un patient demande Emma en mariage. Elle raconte à Leo qu’elle a répondu qu’elle était prise, se demande si c’était trop tôt, et il répond : « non. ça me plaît. beaucoup ❤️ ».",
+        "À Lisbonne, Emma envoie les photos à Leo alors qu’elle est assise juste à côté de lui, « en sauvegarde », et il écrit : « je t’aime ici. comme ça »."
+      ]
+    },
+    "effort": {
+      "answer": "Les premiers mois sont équilibrés : ils écrivent à peu près autant et lancent les conversations à peu près à parts égales. Depuis août, la balance a basculé : Emma lance près de quatre conversations sur cinq, et la réponse habituelle de Leo prend désormais environ trois heures au lieu de quelques minutes. Emma le remarque et le dit, d’abord « tu as l’air loin ces temps-ci », puis, après une semaine sans écrire en premier exprès, « ça me manque d’être quelqu’un à qui tu penses dans la journée ». L’effort de Leo se voit ailleurs (il a déplacé la réunion de Lisbonne, lui a fait une clé, et c’est lui qui demande à parler maintenant), mais dans la conversation elle-même, c’est Emma qui porte le plus ces derniers temps.",
+      "summary": "Une histoire d’amour racontée en messages : elle commence par une dispute perdue sur la pizza à l’ananas et un rendez-vous ramen, grandit avec une clé, un Noël chez les parents d’Emma et un voyage à Lisbonne, et vit de blagues internes sur un pigeon nommé Gerald. Puis la même dispute sur des projets en retard ou annulés revient sans cesse, les réponses de Leo raccourcissent, et la conversation s’arrête sur un message resté sans réponse.",
+      "vibe": "Pigeons, pancakes et promesses",
+      "topics": [
+        {
+          "title": "Gerald, le pigeon",
+          "description": "Le pigeon du balcon de Leo devient un personnage récurrent : il juge les petits-déjeuners, a des exigences sur le café et disparaît un moment avant de revenir en octobre, « l’air plus vieux »."
+        },
+        {
+          "title": "Projets et ponctualité",
+          "description": "Restaurants, vols, places de cinéma et qui est en retard pour quoi : le sujet le plus pratique de la conversation est aussi le plus douloureux."
+        },
+        {
+          "title": "Lisbonne",
+          "description": "Réservé en mars, attendu pendant des semaines et resté leurs plus beaux jours : onze pastéis de nata, un tram qui grimpe à la verticale et « je t’aime ici. comme ça »."
+        },
+        {
+          "title": "Travail et gardes",
+          "description": "Les gardes de nuit d’Emma à l’hôpital et les présentations et projets de Leo décident quand ils peuvent se parler, et ces derniers temps s’ils le font."
+        },
+        {
+          "title": "Famille et amis",
+          "description": "Jana, qui les a présentés, un Noël chez les parents d’Emma (gâteau au citron, trop de foot) et Max avec son canapé le soir du cinéma."
+        }
+      ],
+      "people": [
+        {
+          "name": "Emma",
+          "role": "Celle qui écrit d’abord",
+          "style": "Lance la plupart des conversations, dit clairement ce dont elle a besoin (« je veux juste être une priorité de temps en temps ») et entretient les blagues même quand c’est tendu."
+        },
+        {
+          "name": "Leo",
+          "role": "Le tendre débordé",
+          "style": "Drôle et tendre quand il est là (« je me souviens de tout ce que tu me dis »), et ces derniers temps il écrit beaucoup moins : souvent un mot, souvent des heures plus tard."
+        }
+      ],
+      "dynamics": [
+        {
+          "title": "Qui écrit en premier",
+          "description": "Les premiers mois, ils lancent les conversations presque à parts égales. Depuis août, Emma en lance près de quatre sur cinq, et la réponse habituelle de Leo est passée de quelques minutes à environ trois heures."
+        },
+        {
+          "title": "La même dispute, quatre fois",
+          "description": "Le dîner du 9 avril, le vol pour Lisbonne, le toast d’anniversaire d’Emma, le cinéma en juillet : chaque fois qu’un projet tombe à l’eau, Emma dit ce que ça lui fait et Leo s’excuse, jusqu’à ce qu’elle le nomme : « c’est encore la même dispute »."
+        },
+        {
+          "title": "Se réconcilier avec des pancakes",
+          "description": "Leurs réconciliations ont un rituel. Après la dispute d’avril, c’est « pancakes dimanche ? », et en octobre Leo revient vers elle avec la même proposition, via Gerald."
+        },
+        {
+          "title": "L’humour comme ciment",
+          "description": "Gerald, les matins « encore cinq minutes » et l’œuf du restaurant de ramen reviennent sans cesse, et ils sont toujours là quand tout le reste se tait."
+        }
+      ],
+      "highlights": [
+        "Le tout premier message de Leo : « salut, c’est Leo de la soirée de Jana. celui qui a perdu le débat sur la pizza à l’ananas 🍍 », et la réponse d’Emma : « tu n’as pas perdu, tu as abandonné ».",
+        "Pendant une garde de nuit, un patient demande Emma en mariage. Elle raconte à Leo qu’elle a répondu qu’elle était prise, se demande si c’était trop tôt, et il répond : « non. ça me plaît. beaucoup ❤️ ».",
+        "À Lisbonne, Emma envoie les photos à Leo alors qu’elle est assise juste à côté de lui, « en sauvegarde », et il écrit : « je t’aime ici. comme ça »."
+      ]
+    },
+    "into:Emma": {
+      "answer": "Oui, la conversation montre de vrais sentiments chez Leo, même maintenant. Il a dit « je t’aime » en premier, vous a fait une clé, s’est souvenu de vos fleurs jaunes et a écrit « je t’aime ici. comme ça » à Lisbonne ; en octobre, il revient encore avec Gerald et des pancakes. Ce qui a changé, c’est la part qui vous parvient : depuis août, il répond plus tard et plus court, et il reconnaît qu’il est « nul pour le montrer en ce moment ». Son « je pense beaucoup à nous ces derniers temps » peut vouloir dire plusieurs choses ; demandez-lui demain à quoi il pense, et dites-lui ce dont vous avez besoin pour vous sentir présente dans ses journées.",
+      "summary": "Votre conversation avec Leo est une histoire d’amour racontée en messages : une dispute perdue sur la pizza à l’ananas, un rendez-vous ramen, une clé, Noël chez vos parents et Lisbonne, le tout tenu par un pigeon nommé Gerald. Puis la même dispute sur des projets en retard ou annulés revient sans cesse, ses réponses raccourcissent, et la conversation s’arrête sur son message, qui attend encore votre réponse.",
+      "vibe": "Pigeons, pancakes et promesses",
+      "topics": [
+        {
+          "title": "Gerald, le pigeon",
+          "description": "Le pigeon du balcon de Leo devient un personnage récurrent : il juge les petits-déjeuners, a des exigences sur le café et disparaît un moment avant de revenir en octobre, « l’air plus vieux »."
+        },
+        {
+          "title": "Projets et ponctualité",
+          "description": "Restaurants, vols, places de cinéma et qui est en retard pour quoi : le sujet le plus pratique de votre conversation est aussi le plus douloureux."
+        },
+        {
+          "title": "Lisbonne",
+          "description": "Réservé en mars, attendu pendant des semaines et resté vos plus beaux jours : onze pastéis de nata, un tram qui grimpe à la verticale et « je t’aime ici. comme ça »."
+        },
+        {
+          "title": "Travail et gardes",
+          "description": "Vos gardes de nuit à l’hôpital et les présentations et projets de Leo décident quand vous pouvez vous parler, et ces derniers temps si vous le faites."
+        },
+        {
+          "title": "Famille et amis",
+          "description": "Jana, qui vous a présentés, Noël chez vos parents (gâteau au citron, trop de foot) et Max avec son canapé le soir du cinéma."
+        }
+      ],
+      "people": [
+        {
+          "name": "Emma",
+          "role": "Celle qui écrit d’abord",
+          "style": "Vous lancez la plupart des conversations, dites clairement ce dont vous avez besoin (« je veux juste être une priorité de temps en temps ») et gardez les blagues vivantes même quand c’est tendu."
+        },
+        {
+          "name": "Leo",
+          "role": "Le tendre débordé",
+          "style": "Drôle et tendre quand il est là (« je me souviens de tout ce que tu me dis »), et ces derniers temps il écrit beaucoup moins : souvent un mot, souvent des heures plus tard."
+        }
+      ],
+      "dynamics": [
+        {
+          "title": "Qui écrit en premier",
+          "description": "Les premiers mois, vous lancez les conversations presque à parts égales. Depuis août, vous en lancez près de quatre sur cinq, et la réponse habituelle de Leo est passée de quelques minutes à environ trois heures."
+        },
+        {
+          "title": "La même dispute, quatre fois",
+          "description": "Le dîner du 9 avril, le vol pour Lisbonne, votre toast d’anniversaire, le cinéma en juillet : chaque fois qu’un projet tombe à l’eau, vous dites ce que ça vous fait et il s’excuse, jusqu’à ce que vous le nommiez : « c’est encore la même dispute »."
+        },
+        {
+          "title": "Se réconcilier avec des pancakes",
+          "description": "Vos réconciliations ont un rituel. Après la dispute d’avril, vous proposez « pancakes dimanche ? », et en octobre Leo revient vers vous avec la même proposition, via Gerald."
+        },
+        {
+          "title": "L’humour comme ciment",
+          "description": "Gerald, les matins « encore cinq minutes » et l’œuf du restaurant de ramen reviennent sans cesse, et ils sont toujours là quand tout le reste se tait."
+        }
+      ],
+      "highlights": [
+        "Le tout premier message de Leo : « salut, c’est Leo de la soirée de Jana. celui qui a perdu le débat sur la pizza à l’ananas 🍍 », et votre réponse : « tu n’as pas perdu, tu as abandonné ».",
+        "Pendant une garde de nuit, un patient vous demande en mariage. Vous racontez à Leo que vous avez répondu être prise, vous demandez si c’était trop tôt, et il répond : « non. ça me plaît. beaucoup ❤️ ».",
+        "À Lisbonne, vous envoyez les photos à Leo alors que vous êtes assise juste à côté de lui, « en sauvegarde », et il écrit : « je t’aime ici. comme ça »."
+      ]
+    },
+    "into:Leo": {
+      "answer": "Clairement, oui. Emma continue de venir vers vous même quand vous vous taisez : elle lance la plupart de vos conversations, demande « ça va entre nous ? », et quand elle se retient une semaine, c’est pour voir si vous viendrez vers elle. Ses messages les plus durs demandent plus de vous, pas moins : « je veux juste être une priorité de temps en temps », « je veux que tu aies envie d’être là ». Quand vous avez proposé des pancakes en octobre, elle a dit oui en quelques minutes. La discussion de demain est l’occasion de montrer que ça va dans les deux sens : venez avec quelque chose de concret, pas seulement des excuses.",
+      "summary": "Votre conversation avec Emma est une histoire d’amour racontée en messages : une dispute perdue sur la pizza à l’ananas, un rendez-vous ramen, une clé, Noël chez ses parents et Lisbonne, le tout tenu par votre pigeon Gerald. Puis la même dispute sur des projets en retard ou annulés revient sans cesse, vos réponses raccourcissent, et la conversation s’arrête sur votre propre message lui demandant de parler.",
+      "vibe": "Pigeons, pancakes et promesses",
+      "topics": [
+        {
+          "title": "Gerald, le pigeon",
+          "description": "Le pigeon de votre balcon devient un personnage récurrent : il juge les petits-déjeuners, a des exigences sur le café et disparaît un moment avant de revenir en octobre, « l’air plus vieux »."
+        },
+        {
+          "title": "Projets et ponctualité",
+          "description": "Restaurants, vols, places de cinéma et qui est en retard pour quoi : le sujet le plus pratique de votre conversation est aussi le plus douloureux."
+        },
+        {
+          "title": "Lisbonne",
+          "description": "Réservé en mars, attendu pendant des semaines et resté vos plus beaux jours : onze pastéis de nata, un tram qui grimpe à la verticale et « je t’aime ici. comme ça »."
+        },
+        {
+          "title": "Travail et gardes",
+          "description": "Vos présentations et projets et les gardes de nuit d’Emma à l’hôpital décident quand vous pouvez vous parler, et ces derniers temps si vous le faites."
+        },
+        {
+          "title": "Famille et amis",
+          "description": "Jana, qui vous a présentés, Noël chez les parents d’Emma (gâteau au citron, trop de foot) et Max avec son canapé le soir du cinéma."
+        }
+      ],
+      "people": [
+        {
+          "name": "Leo",
+          "role": "Le tendre débordé",
+          "style": "Vous êtes drôle et tendre quand vous êtes là (« je me souviens de tout ce que tu me dis »), et ces derniers temps vous écrivez beaucoup moins : souvent un mot, souvent des heures plus tard."
+        },
+        {
+          "name": "Emma",
+          "role": "Celle qui écrit d’abord",
+          "style": "Elle lance la plupart de vos conversations, dit clairement ce dont elle a besoin (« je veux juste être une priorité de temps en temps ») et entretient les blagues même quand c’est tendu."
+        }
+      ],
+      "dynamics": [
+        {
+          "title": "Qui écrit en premier",
+          "description": "Les premiers mois, vous lancez les conversations presque à parts égales. Depuis août, Emma en lance près de quatre sur cinq, et votre réponse habituelle est passée de quelques minutes à environ trois heures."
+        },
+        {
+          "title": "La même dispute, quatre fois",
+          "description": "Le dîner du 9 avril, le vol pour Lisbonne, son toast d’anniversaire, le cinéma en juillet : chaque fois qu’un de vos projets tombe à l’eau, elle dit ce que ça lui fait et vous vous excusez, jusqu’à ce qu’elle le nomme : « c’est encore la même dispute »."
+        },
+        {
+          "title": "Se réconcilier avec des pancakes",
+          "description": "Vos réconciliations ont un rituel. Après la dispute d’avril, elle propose « pancakes dimanche ? », et en octobre vous revenez vers elle avec la même proposition, via Gerald."
+        },
+        {
+          "title": "L’humour comme ciment",
+          "description": "Gerald, les matins « encore cinq minutes » et l’œuf du restaurant de ramen reviennent sans cesse, et ils sont toujours là quand tout le reste se tait."
+        }
+      ],
+      "highlights": [
+        "Votre tout premier message : « salut, c’est Leo de la soirée de Jana. celui qui a perdu le débat sur la pizza à l’ananas 🍍 », et la réponse d’Emma : « tu n’as pas perdu, tu as abandonné ».",
+        "Pendant une garde de nuit, un patient demande Emma en mariage. Elle vous raconte qu’elle a répondu qu’elle était prise, se demande si c’était trop tôt, et vous répondez : « non. ça me plaît. beaucoup ❤️ ».",
+        "À Lisbonne, Emma vous envoie les photos alors qu’elle est assise juste à côté de vous, « en sauvegarde », et vous écrivez : « je t’aime ici. comme ça »."
+      ]
+    },
+    "worried:Emma": {
+      "answer": "En partie, oui, et vous l’avez déjà nommé : depuis août, Leo ne lance presque plus de conversations, sa réponse habituelle s’est allongée à environ trois heures, et en septembre vous êtes restée cinq jours sans nouvelles. Ajoutez la dispute qui revient toujours (le dîner, Lisbonne, votre toast d’anniversaire, le cinéma) et son « je pense beaucoup à nous ces derniers temps », et votre inquiétude se comprend. Mais il y a aussi de bons signes : il reconnaît le schéma (« je ne veux pas que ça en soit un »), met ça sur le compte de son travail plutôt que sur vous, et revient encore avec Gerald et des pancakes. La conversation ne peut pas vous dire ce qu’il dira demain ; allez-y calmement, laissez-le d’abord dire ce qui le préoccupe, et soyez claire sur ce dont vous avez besoin.",
+      "summary": "Votre conversation avec Leo est une histoire d’amour racontée en messages : une dispute perdue sur la pizza à l’ananas, un rendez-vous ramen, une clé, Noël chez vos parents et Lisbonne, le tout tenu par un pigeon nommé Gerald. Puis la même dispute sur des projets en retard ou annulés revient sans cesse, ses réponses raccourcissent, et la conversation s’arrête sur son message, qui attend encore votre réponse.",
+      "vibe": "Pigeons, pancakes et promesses",
+      "topics": [
+        {
+          "title": "Gerald, le pigeon",
+          "description": "Le pigeon du balcon de Leo devient un personnage récurrent : il juge les petits-déjeuners, a des exigences sur le café et disparaît un moment avant de revenir en octobre, « l’air plus vieux »."
+        },
+        {
+          "title": "Projets et ponctualité",
+          "description": "Restaurants, vols, places de cinéma et qui est en retard pour quoi : le sujet le plus pratique de votre conversation est aussi le plus douloureux."
+        },
+        {
+          "title": "Lisbonne",
+          "description": "Réservé en mars, attendu pendant des semaines et resté vos plus beaux jours : onze pastéis de nata, un tram qui grimpe à la verticale et « je t’aime ici. comme ça »."
+        },
+        {
+          "title": "Travail et gardes",
+          "description": "Vos gardes de nuit à l’hôpital et les présentations et projets de Leo décident quand vous pouvez vous parler, et ces derniers temps si vous le faites."
+        },
+        {
+          "title": "Famille et amis",
+          "description": "Jana, qui vous a présentés, Noël chez vos parents (gâteau au citron, trop de foot) et Max avec son canapé le soir du cinéma."
+        }
+      ],
+      "people": [
+        {
+          "name": "Emma",
+          "role": "Celle qui écrit d’abord",
+          "style": "Vous lancez la plupart des conversations, dites clairement ce dont vous avez besoin (« je veux juste être une priorité de temps en temps ») et gardez les blagues vivantes même quand c’est tendu."
+        },
+        {
+          "name": "Leo",
+          "role": "Le tendre débordé",
+          "style": "Drôle et tendre quand il est là (« je me souviens de tout ce que tu me dis »), et ces derniers temps il écrit beaucoup moins : souvent un mot, souvent des heures plus tard."
+        }
+      ],
+      "dynamics": [
+        {
+          "title": "Qui écrit en premier",
+          "description": "Les premiers mois, vous lancez les conversations presque à parts égales. Depuis août, vous en lancez près de quatre sur cinq, et la réponse habituelle de Leo est passée de quelques minutes à environ trois heures."
+        },
+        {
+          "title": "La même dispute, quatre fois",
+          "description": "Le dîner du 9 avril, le vol pour Lisbonne, votre toast d’anniversaire, le cinéma en juillet : chaque fois qu’un projet tombe à l’eau, vous dites ce que ça vous fait et il s’excuse, jusqu’à ce que vous le nommiez : « c’est encore la même dispute »."
+        },
+        {
+          "title": "Se réconcilier avec des pancakes",
+          "description": "Vos réconciliations ont un rituel. Après la dispute d’avril, vous proposez « pancakes dimanche ? », et en octobre Leo revient vers vous avec la même proposition, via Gerald."
+        },
+        {
+          "title": "L’humour comme ciment",
+          "description": "Gerald, les matins « encore cinq minutes » et l’œuf du restaurant de ramen reviennent sans cesse, et ils sont toujours là quand tout le reste se tait."
+        }
+      ],
+      "highlights": [
+        "Le tout premier message de Leo : « salut, c’est Leo de la soirée de Jana. celui qui a perdu le débat sur la pizza à l’ananas 🍍 », et votre réponse : « tu n’as pas perdu, tu as abandonné ».",
+        "Pendant une garde de nuit, un patient vous demande en mariage. Vous racontez à Leo que vous avez répondu être prise, vous demandez si c’était trop tôt, et il répond : « non. ça me plaît. beaucoup ❤️ ».",
+        "À Lisbonne, vous envoyez les photos à Leo alors que vous êtes assise juste à côté de lui, « en sauvegarde », et il écrit : « je t’aime ici. comme ça »."
+      ]
+    },
+    "worried:Leo": {
+      "answer": "Oui, et ça mérite d’être pris au sérieux avant demain. Emma vous a dit la même chose de bien des façons (« il y a toujours quelque chose », « je veux que tu aies envie d’être là », « ça me manque d’être quelqu’un à qui tu penses dans la journée »), et quatre fois un de vos projets est tombé à l’eau à la dernière minute. Depuis août, elle lance presque toutes les conversations et votre réponse habituelle prend environ trois heures : de son côté, la conversation s’est tue. Elle n’a pas renoncé : elle demande encore « ça va entre nous ? » et a dit oui aux pancakes en quelques minutes. Quoi que vous ayez pensé de « nous », apportez un changement concret à la discussion que vous avez demandée, pas seulement des excuses.",
+      "summary": "Votre conversation avec Emma est une histoire d’amour racontée en messages : une dispute perdue sur la pizza à l’ananas, un rendez-vous ramen, une clé, Noël chez ses parents et Lisbonne, le tout tenu par votre pigeon Gerald. Puis la même dispute sur des projets en retard ou annulés revient sans cesse, vos réponses raccourcissent, et la conversation s’arrête sur votre propre message lui demandant de parler.",
+      "vibe": "Pigeons, pancakes et promesses",
+      "topics": [
+        {
+          "title": "Gerald, le pigeon",
+          "description": "Le pigeon de votre balcon devient un personnage récurrent : il juge les petits-déjeuners, a des exigences sur le café et disparaît un moment avant de revenir en octobre, « l’air plus vieux »."
+        },
+        {
+          "title": "Projets et ponctualité",
+          "description": "Restaurants, vols, places de cinéma et qui est en retard pour quoi : le sujet le plus pratique de votre conversation est aussi le plus douloureux."
+        },
+        {
+          "title": "Lisbonne",
+          "description": "Réservé en mars, attendu pendant des semaines et resté vos plus beaux jours : onze pastéis de nata, un tram qui grimpe à la verticale et « je t’aime ici. comme ça »."
+        },
+        {
+          "title": "Travail et gardes",
+          "description": "Vos présentations et projets et les gardes de nuit d’Emma à l’hôpital décident quand vous pouvez vous parler, et ces derniers temps si vous le faites."
+        },
+        {
+          "title": "Famille et amis",
+          "description": "Jana, qui vous a présentés, Noël chez les parents d’Emma (gâteau au citron, trop de foot) et Max avec son canapé le soir du cinéma."
+        }
+      ],
+      "people": [
+        {
+          "name": "Leo",
+          "role": "Le tendre débordé",
+          "style": "Vous êtes drôle et tendre quand vous êtes là (« je me souviens de tout ce que tu me dis »), et ces derniers temps vous écrivez beaucoup moins : souvent un mot, souvent des heures plus tard."
+        },
+        {
+          "name": "Emma",
+          "role": "Celle qui écrit d’abord",
+          "style": "Elle lance la plupart de vos conversations, dit clairement ce dont elle a besoin (« je veux juste être une priorité de temps en temps ») et entretient les blagues même quand c’est tendu."
+        }
+      ],
+      "dynamics": [
+        {
+          "title": "Qui écrit en premier",
+          "description": "Les premiers mois, vous lancez les conversations presque à parts égales. Depuis août, Emma en lance près de quatre sur cinq, et votre réponse habituelle est passée de quelques minutes à environ trois heures."
+        },
+        {
+          "title": "La même dispute, quatre fois",
+          "description": "Le dîner du 9 avril, le vol pour Lisbonne, son toast d’anniversaire, le cinéma en juillet : chaque fois qu’un de vos projets tombe à l’eau, elle dit ce que ça lui fait et vous vous excusez, jusqu’à ce qu’elle le nomme : « c’est encore la même dispute »."
+        },
+        {
+          "title": "Se réconcilier avec des pancakes",
+          "description": "Vos réconciliations ont un rituel. Après la dispute d’avril, elle propose « pancakes dimanche ? », et en octobre vous revenez vers elle avec la même proposition, via Gerald."
+        },
+        {
+          "title": "L’humour comme ciment",
+          "description": "Gerald, les matins « encore cinq minutes » et l’œuf du restaurant de ramen reviennent sans cesse, et ils sont toujours là quand tout le reste se tait."
+        }
+      ],
+      "highlights": [
+        "Votre tout premier message : « salut, c’est Leo de la soirée de Jana. celui qui a perdu le débat sur la pizza à l’ananas 🍍 », et la réponse d’Emma : « tu n’as pas perdu, tu as abandonné ».",
+        "Pendant une garde de nuit, un patient demande Emma en mariage. Elle vous raconte qu’elle a répondu qu’elle était prise, se demande si c’était trop tôt, et vous répondez : « non. ça me plaît. beaucoup ❤️ ».",
+        "À Lisbonne, Emma vous envoie les photos alors qu’elle est assise juste à côté de vous, « en sauvegarde », et vous écrivez : « je t’aime ici. comme ça »."
+      ]
+    },
+    "gift:Emma": {
+      "answer": "Quelque chose qui ramène Leo dans votre monde à deux, pas quelque chose de cher. Une petite affiche ou une figurine de pigeon (Gerald, évidemment) ferait mouche, surtout maintenant que « Gerald est revenu ». Ou offrez une expérience : un brunch pancakes un dimanche que vous organisez entièrement, ou une photo encadrée de Lisbonne, le voyage où il a écrit « je t’aime ici. comme ça ». Il est « noyé sous le travail » : tout ce qui lui offre une soirée tranquille avec vous comptera plus qu’une grande surprise.",
+      "summary": "Votre conversation avec Leo est une histoire d’amour racontée en messages : une dispute perdue sur la pizza à l’ananas, un rendez-vous ramen, une clé, Noël chez vos parents et Lisbonne, le tout tenu par un pigeon nommé Gerald. Puis la même dispute sur des projets en retard ou annulés revient sans cesse, ses réponses raccourcissent, et la conversation s’arrête sur son message, qui attend encore votre réponse.",
+      "vibe": "Pigeons, pancakes et promesses",
+      "topics": [
+        {
+          "title": "Gerald, le pigeon",
+          "description": "Le pigeon du balcon de Leo devient un personnage récurrent : il juge les petits-déjeuners, a des exigences sur le café et disparaît un moment avant de revenir en octobre, « l’air plus vieux »."
+        },
+        {
+          "title": "Projets et ponctualité",
+          "description": "Restaurants, vols, places de cinéma et qui est en retard pour quoi : le sujet le plus pratique de votre conversation est aussi le plus douloureux."
+        },
+        {
+          "title": "Lisbonne",
+          "description": "Réservé en mars, attendu pendant des semaines et resté vos plus beaux jours : onze pastéis de nata, un tram qui grimpe à la verticale et « je t’aime ici. comme ça »."
+        },
+        {
+          "title": "Travail et gardes",
+          "description": "Vos gardes de nuit à l’hôpital et les présentations et projets de Leo décident quand vous pouvez vous parler, et ces derniers temps si vous le faites."
+        },
+        {
+          "title": "Famille et amis",
+          "description": "Jana, qui vous a présentés, Noël chez vos parents (gâteau au citron, trop de foot) et Max avec son canapé le soir du cinéma."
+        }
+      ],
+      "people": [
+        {
+          "name": "Emma",
+          "role": "Celle qui écrit d’abord",
+          "style": "Vous lancez la plupart des conversations, dites clairement ce dont vous avez besoin (« je veux juste être une priorité de temps en temps ») et gardez les blagues vivantes même quand c’est tendu."
+        },
+        {
+          "name": "Leo",
+          "role": "Le tendre débordé",
+          "style": "Drôle et tendre quand il est là (« je me souviens de tout ce que tu me dis »), et ces derniers temps il écrit beaucoup moins : souvent un mot, souvent des heures plus tard."
+        }
+      ],
+      "dynamics": [
+        {
+          "title": "Qui écrit en premier",
+          "description": "Les premiers mois, vous lancez les conversations presque à parts égales. Depuis août, vous en lancez près de quatre sur cinq, et la réponse habituelle de Leo est passée de quelques minutes à environ trois heures."
+        },
+        {
+          "title": "La même dispute, quatre fois",
+          "description": "Le dîner du 9 avril, le vol pour Lisbonne, votre toast d’anniversaire, le cinéma en juillet : chaque fois qu’un projet tombe à l’eau, vous dites ce que ça vous fait et il s’excuse, jusqu’à ce que vous le nommiez : « c’est encore la même dispute »."
+        },
+        {
+          "title": "Se réconcilier avec des pancakes",
+          "description": "Vos réconciliations ont un rituel. Après la dispute d’avril, vous proposez « pancakes dimanche ? », et en octobre Leo revient vers vous avec la même proposition, via Gerald."
+        },
+        {
+          "title": "L’humour comme ciment",
+          "description": "Gerald, les matins « encore cinq minutes » et l’œuf du restaurant de ramen reviennent sans cesse, et ils sont toujours là quand tout le reste se tait."
+        }
+      ],
+      "highlights": [
+        "Le tout premier message de Leo : « salut, c’est Leo de la soirée de Jana. celui qui a perdu le débat sur la pizza à l’ananas 🍍 », et votre réponse : « tu n’as pas perdu, tu as abandonné ».",
+        "Pendant une garde de nuit, un patient vous demande en mariage. Vous racontez à Leo que vous avez répondu être prise, vous demandez si c’était trop tôt, et il répond : « non. ça me plaît. beaucoup ❤️ ».",
+        "À Lisbonne, vous envoyez les photos à Leo alors que vous êtes assise juste à côté de lui, « en sauvegarde », et il écrit : « je t’aime ici. comme ça »."
+      ]
+    },
+    "gift:Leo": {
+      "answer": "Des fleurs jaunes, encore : elle a adoré que vous vous en souveniez à la Saint-Valentin. Encore mieux, accompagnez-les de quelque chose qui montre que vous l’avez écoutée, comme un rendez-vous dans l’agenda que vous promettez de ne pas déplacer, signé de votre propre phrase : « je serai là à 19h45. même pas en retard ». Une photo encadrée de Lisbonne lui rendra les jours qu’elle veut « garder comme ça », et un sachet de bretzels pour sa prochaine garde de nuit la fera rire. Quoi que vous choisissiez, offrez-le après la discussion de demain, pas à sa place.",
+      "summary": "Votre conversation avec Emma est une histoire d’amour racontée en messages : une dispute perdue sur la pizza à l’ananas, un rendez-vous ramen, une clé, Noël chez ses parents et Lisbonne, le tout tenu par votre pigeon Gerald. Puis la même dispute sur des projets en retard ou annulés revient sans cesse, vos réponses raccourcissent, et la conversation s’arrête sur votre propre message lui demandant de parler.",
+      "vibe": "Pigeons, pancakes et promesses",
+      "topics": [
+        {
+          "title": "Gerald, le pigeon",
+          "description": "Le pigeon de votre balcon devient un personnage récurrent : il juge les petits-déjeuners, a des exigences sur le café et disparaît un moment avant de revenir en octobre, « l’air plus vieux »."
+        },
+        {
+          "title": "Projets et ponctualité",
+          "description": "Restaurants, vols, places de cinéma et qui est en retard pour quoi : le sujet le plus pratique de votre conversation est aussi le plus douloureux."
+        },
+        {
+          "title": "Lisbonne",
+          "description": "Réservé en mars, attendu pendant des semaines et resté vos plus beaux jours : onze pastéis de nata, un tram qui grimpe à la verticale et « je t’aime ici. comme ça »."
+        },
+        {
+          "title": "Travail et gardes",
+          "description": "Vos présentations et projets et les gardes de nuit d’Emma à l’hôpital décident quand vous pouvez vous parler, et ces derniers temps si vous le faites."
+        },
+        {
+          "title": "Famille et amis",
+          "description": "Jana, qui vous a présentés, Noël chez les parents d’Emma (gâteau au citron, trop de foot) et Max avec son canapé le soir du cinéma."
+        }
+      ],
+      "people": [
+        {
+          "name": "Leo",
+          "role": "Le tendre débordé",
+          "style": "Vous êtes drôle et tendre quand vous êtes là (« je me souviens de tout ce que tu me dis »), et ces derniers temps vous écrivez beaucoup moins : souvent un mot, souvent des heures plus tard."
+        },
+        {
+          "name": "Emma",
+          "role": "Celle qui écrit d’abord",
+          "style": "Elle lance la plupart de vos conversations, dit clairement ce dont elle a besoin (« je veux juste être une priorité de temps en temps ») et entretient les blagues même quand c’est tendu."
+        }
+      ],
+      "dynamics": [
+        {
+          "title": "Qui écrit en premier",
+          "description": "Les premiers mois, vous lancez les conversations presque à parts égales. Depuis août, Emma en lance près de quatre sur cinq, et votre réponse habituelle est passée de quelques minutes à environ trois heures."
+        },
+        {
+          "title": "La même dispute, quatre fois",
+          "description": "Le dîner du 9 avril, le vol pour Lisbonne, son toast d’anniversaire, le cinéma en juillet : chaque fois qu’un de vos projets tombe à l’eau, elle dit ce que ça lui fait et vous vous excusez, jusqu’à ce qu’elle le nomme : « c’est encore la même dispute »."
+        },
+        {
+          "title": "Se réconcilier avec des pancakes",
+          "description": "Vos réconciliations ont un rituel. Après la dispute d’avril, elle propose « pancakes dimanche ? », et en octobre vous revenez vers elle avec la même proposition, via Gerald."
+        },
+        {
+          "title": "L’humour comme ciment",
+          "description": "Gerald, les matins « encore cinq minutes » et l’œuf du restaurant de ramen reviennent sans cesse, et ils sont toujours là quand tout le reste se tait."
+        }
+      ],
+      "highlights": [
+        "Votre tout premier message : « salut, c’est Leo de la soirée de Jana. celui qui a perdu le débat sur la pizza à l’ananas 🍍 », et la réponse d’Emma : « tu n’as pas perdu, tu as abandonné ».",
+        "Pendant une garde de nuit, un patient demande Emma en mariage. Elle vous raconte qu’elle a répondu qu’elle était prise, se demande si c’était trop tôt, et vous répondez : « non. ça me plaît. beaucoup ❤️ ».",
+        "À Lisbonne, Emma vous envoie les photos alors qu’elle est assise juste à côté de vous, « en sauvegarde », et vous écrivez : « je t’aime ici. comme ça »."
       ]
     }
   },
@@ -625,35 +633,35 @@
       "kind": "ask",
       "me": null,
       "prompt": "Pourquoi nos projets tombent-ils toujours à l'eau ?",
-      "reply": "D’après les échanges, vos projets ne tombent pas tous à l’eau, mais les mêmes difficultés reviennent : Leo est souvent pris·e par le travail, répond tard ou oublie des rendez-vous. Le dîner du 9 avril a laissé Emma attendre une heure sans nouvelles, puis le cinéma du 22 juillet a été oublié au profit d’une aide à Max ; en mai, une réunion menaçait même le voyage à Lisbonne, avant que Leo accepte de la déplacer. Leo reconnaît que les retards sont devenus un « pattern » et promet de mieux gérer son calendrier, mais Emma dit ensuite ne pas vouloir être son « secrétaire », et en septembre souligne cinq jours sans message. La surcharge de travail est évoquée, mais ces épisodes montrent aussi que les excuses et les promesses n’ont pas encore produit une régularité suffisante ; la conversation ne permet pas de savoir tout ce qui se passe hors des messages. Tu pourrais proposer d’en parler demain en vous concentrant sur un accord concret : prévenir dès qu’un plan risque de changer et ne confirmer que les engagements que chacun peut réellement tenir."
+      "reply": "Parce que le travail gagne les décisions de dernière minute, et que la nouvelle arrive tard. Le dîner du 9 avril, le matin de Lisbonne, le toast d’anniversaire et le cinéma en juillet suivent la même forme : un projet est fixé, Leo a un imprévu, et Emma l’apprend quand elle attend déjà. Chaque excuse est sincère (« je déteste quand on finit la journée comme ça », « cette fois je suis sérieux »), mais l’habitude derrière ne change pas, c’est pour ça que ça ressemble chaque fois à la même dispute. Une petite règle casserait cette forme : un message dès qu’un projet est menacé, et une soirée par semaine que personne ne déplace."
     },
     {
       "id": "distance",
       "kind": "ask",
       "me": "Emma",
       "prompt": "Est-ce que Leo prend ses distances, ou est-il juste stressé ?",
-      "reply": "Les deux sont possibles, et le chat ne permet pas de connaître avec certitude ce qui se passe pour Leo. Le stress professionnel est bien évoqué — en août, Leo dit que le nouveau projet sera intense jusqu’en octobre, et le 31 août que le travail pèse beaucoup — mais, depuis la fin août, ses réponses sont souvent très brèves (« sure », « maybe », « can’t talk now »), alors que tu as dit le 28 septembre que le manque de nouvelles te faisait te sentir oubliée. Il y a aussi encore des signes de lien, comme « I miss you » et l’invitation à parler en personne le 24 octobre ; ce dernier message suggère qu’il réfléchit à votre relation, sans dire dans quel sens. Demain, demande-lui calmement ce qu’il veut dire par « thinking a lot about us » et si son éloignement est surtout lié au travail ou à un changement dans ses sentiments."
+      "reply": "Sans doute les deux, et la conversation ne permet pas de les séparer complètement. Il t’a dit que le nouveau projet serait intense jusqu’en octobre et il écrit qu’il est « noyé sous le travail » : ça, c’est du stress. Mais la baisse va au-delà des horaires : depuis août, il ne lance presque plus de conversations, répond souvent en un mot, et en septembre tu es restée cinq jours sans message de lui. Il revient quand même vers toi (Gerald, les pancakes, « je suis là »), donc il n’a pas décroché ; demande-lui demain ce qui le préoccupe, et si le projet explique tout."
     },
     {
       "id": "talk",
       "kind": "ask",
       "me": "Emma",
       "prompt": "Comment bien commencer la discussion de demain ?",
-      "reply": "Tu peux commencer simplement : « Merci de vouloir en parler en personne. Quand tu dis que tu réfléchis beaucoup à nous, qu’est-ce que tu aimerais que je comprenne ? » Écoute d’abord sa réponse sans conclure d’avance à ce qu’elle signifie. Ensuite, tu peux dire franchement que tu as ressenti davantage de distance ces derniers mois, surtout après les rendez-vous oubliés et les échanges où tu disais manquer de te sentir dans ses pensées, tout en reconnaissant que Leo t’a dit que le travail prenait beaucoup de place. Pour demain, essaie de demander une chose à la fois et de laisser un peu de silence pour que chacun puisse répondre."
+      "reply": "Rends-lui l’honnêteté facile : « je suis contente que tu veuilles parler. dis-moi ce qui te trotte dans la tête, et ensuite j’aimerais te dire ce qui me trotte dans la mienne. » Laisse-le commencer, puisque c’est lui qui l’a demandé, et écoute-le jusqu’au bout avant de répondre. Quand c’est ton tour, nomme une ou deux choses, concrètement : tu veux avoir de ses nouvelles quand un projet change, et tu veux te sentir présente dans ses journées. Laisse « toujours » et « jamais » de côté ; le concret passera mieux pour vous deux."
     },
     {
       "id": "breakup",
       "kind": "reply",
       "me": "Emma",
       "prompt": "ça veut dire quoi ça ?? si tu veux rompre, dis-le directement",
-      "reply": "Qu’est-ce que tu voulais dire par là ? Ça m’inquiète un peu. Si tu penses à notre relation ou à la suite, je préfère qu’on en parle franchement demain.\n\nPourquoi : Le « on » de Leo peut faire peur après des mois où tu t’es senti·e moins prioritaire et où ses réponses sont parfois devenues très brèves. Cette version dit clairement que tu es inquiet·ète, sans conclure d’avance que Leo veut rompre ni transformer sa demande de parler en accusation."
+      "reply": "D’accord, demain ça marche. Honnêtement, ton message m’a rendue nerveuse. Tu peux me dire en gros de quoi il s’agit, ou c’est quelque chose dont on doit parler seulement en vrai ?\n\nPourquoi : Ton brouillon saute au pire scénario et le met au défi de le dire, ce qui rend une réponse honnête plus difficile. Ici, tu gardes ton ressenti (« nerveuse ») et tu demandes ce que tu veux vraiment savoir, sans l’accuser de quelque chose qu’il n’a pas dit."
     },
     {
       "id": "cancel",
       "kind": "reply",
       "me": "Emma",
       "prompt": "tu annules tout le temps et j'en ai marre d'être la seule à faire des efforts",
-      "reply": "J’ai l’impression que nos plans tombent souvent à l’eau, et ça me fatigue de sentir que je porte surtout les efforts pour qu’on se voie. J’aimerais qu’on en parle demain et qu’on voie si on peut changer ça.\n\nPourquoi : « Tout le temps » et « la seule » risquent de braquer Leo, même si les oublis et les retards — comme le cinéma oublié le 22 juillet et le dîner où tu as attendu une heure le 9 avril — t’ont déjà blessée. La reformulation décrit ton ressenti et ouvre la discussion que Leo a proposée."
+      "reply": "Ces derniers temps, j’ai l’impression d’être celle qui tient nos projets, et quand ils tombent à l’eau, ça me fait vraiment mal. On peut parler de comment protéger tous les deux notre temps ensemble ?\n\nPourquoi : « Tout le temps » et « j’en ai marre » l’invitent à se défendre au lieu d’écouter. Ici, tu dis la même chose (les projets, les efforts, la peine) d’une façon à laquelle il peut répondre, et tu montres ce que tu veux pour la suite."
     }
   ]
 }

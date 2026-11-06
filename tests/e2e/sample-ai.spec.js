@@ -1,4 +1,4 @@
-const { expect, stubCallable, test } = require("./fixtures");
+const { EXAMPLE_CHAT, expect, stubCallable, test } = require("./fixtures");
 
 /**
  * The sample chat's AI readings were made in advance (utils/ai/sample.ts):
@@ -22,7 +22,7 @@ const reading = (answer) => ({
 // What static/sample/ai/en.json holds, with the sample chat's own numbers
 // (scripts/sample-chat/generate.mjs) so the page takes it for the sample's.
 const SAMPLE_READINGS = {
-  chat: { messages: 2069, from: "2025-09-12", to: "2026-10-24" },
+  chat: { messages: 2389, from: "2025-09-12", to: "2026-10-24" },
   model: "test",
   readings: {
     none: reading(""),
@@ -109,6 +109,22 @@ test("the sample's reading and coach come without asking the cloud", async ({
 
   expect(aiCalls).toHaveLength(0);
   expect(coachCalls).toHaveLength(0);
+
+  // Then their own chat, straight from the end of the sample's reading.
+  await expect(
+    page.getByText("Your turn: what would your chat say?"),
+  ).toBeVisible();
+  const [chooser] = await Promise.all([
+    page.waitForEvent("filechooser"),
+    page.getByRole("button", { name: "Choose my chat file" }).click(),
+  ]);
+  await chooser.setFiles(EXAMPLE_CHAT);
+  await expect(
+    page.getByRole("button", { name: "Get my free AI preview" }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("Your turn: what would your chat say?"),
+  ).toHaveCount(0);
 });
 
 test("on the sample, each side gets its own reading", async ({ page }) => {
