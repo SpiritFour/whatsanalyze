@@ -8,6 +8,9 @@ import { AI_QUESTIONS } from "~/utils/ai/questions";
  * the site. Trying the AI on it costs nothing and leaves the visitor's free
  * preview for their own chat.
  */
+// static/chat_example.txt, the sample before November 2026, stays for a while
+// for copies of the site cached before then: they still fetch it. It can go
+// once those have updated, after January 2027.
 export const SAMPLE_CHAT_URL = "/sample/chat.txt";
 export const SAMPLE_CHAT_NAME = "Sample WhatsApp Chat (Emma & Leo)";
 
