@@ -49,13 +49,18 @@ export interface ChatDigest {
 /**
  * What the reader wants to know, optionally. `me` is their placeholder when
  * they said which participant they are; `question` is already anonymized.
+ * `background` is what they say the chat doesn't show ("we broke up in
+ * July", "she's my sister"), anonymized the same way.
  */
 export interface AiAsk {
   question?: string;
   me?: string;
+  background?: string;
 }
 
 export const MAX_QUESTION_CHARS = 300;
+/** A few sentences: enough for who they are to each other and what happened. */
+export const MAX_BACKGROUND_CHARS = 500;
 
 const item = z.object({
   title: z.string().describe("A few words"),
@@ -124,6 +129,19 @@ const overview = (digest: ChatDigest) => {
   ];
 };
 
+/**
+ * What the reader told us that the chat doesn't show. It helps read the chat,
+ * but it isn't evidence from it: quoted back as a message, it would put words
+ * in someone's mouth that they never wrote.
+ */
+const backgroundLines = (background: string | undefined) =>
+  background
+    ? [
+        `The reader adds background the chat itself doesn't show: "${background}"`,
+        "Use this background to understand the chat. If you refer to it, say it is what the reader told you. It is not part of the chat: never quote it as a message, and never present it as something anyone said or did in the chat. Every quote, moment and highlight must come from the chat itself.",
+      ]
+    : [];
+
 const askLines = (ask: AiAsk | undefined) => [
   ...(ask?.me
     ? [
@@ -131,6 +149,7 @@ const askLines = (ask: AiAsk | undefined) => [
       ]
     : []),
   ...(ask?.question ? [`The reader asks: "${ask.question}"`] : []),
+  ...backgroundLines(ask?.background),
 ];
 
 /**
@@ -252,14 +271,15 @@ export const COACH_SAFETY = "[SAFETY]";
 /**
  * The whole coach request. `context` is the report's summary, still in
  * placeholders; it tells a small on-device model what the chat is about
- * beyond the excerpt it can fit.
+ * beyond the excerpt it can fit. `background` is the reader's own, the same
+ * the report was given (AiAsk).
  */
 export function buildCoachPrompt(
   digest: ChatDigest,
   language: AiLanguage,
   kind: CoachKind,
   history: CoachTurn[],
-  options: { me?: string; context?: string } = {},
+  options: { me?: string; context?: string; background?: string } = {},
 ): { system: string; messages: CoachTurn[] } {
   const system = [
     "You are a warm, honest relationship coach. The reader took part in the WhatsApp chat below and wants help with it.",
@@ -276,6 +296,7 @@ export function buildCoachPrompt(
           `The reader is ${options.me}. Address them as "you" and everyone else by placeholder.`,
         ]
       : []),
+    ...backgroundLines(options.background),
     `Write in ${AI_LANGUAGES[language]}.`,
     "",
     ...overview(digest),

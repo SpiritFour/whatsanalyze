@@ -147,6 +147,24 @@ export function buildDigest(messages, maxChars) {
 }
 
 /**
+ * Something the reader typed for the AI (their question, background the
+ * chat doesn't show) as the model may see it: through the chat's own
+ * `anonymize`, capped after it, since a name can come out longer as its
+ * placeholder. Undefined when there is nothing left to send.
+ *
+ * @param {(text: string) => string} anonymize from buildDigest
+ * @param {string | null | undefined} text
+ * @param {number} maxChars
+ * @returns {string | undefined}
+ */
+export function readerText(anonymize, text, maxChars) {
+  const out = anonymize(String(text ?? ""))
+    .slice(0, maxChars)
+    .trim();
+  return out || undefined;
+}
+
+/**
  * Whole conversations from across the chat rather than its first N lines:
  * evenly spaced windows of consecutive messages, the last one always ending
  * on the most recent message.

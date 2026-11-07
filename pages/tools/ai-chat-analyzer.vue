@@ -74,6 +74,26 @@
             {{ t("toolsAi.sampleCustom") }}
           </p>
         </div>
+        <!-- What the chat doesn't show. Not for the sample: its readings
+             were made in advance, without any. A phone keyboard's
+             dictation covers saying it rather than typing it. -->
+        <div v-if="!isSample" class="ask__group">
+          <label class="ask__label" for="ai-background">
+            {{ t("toolsAi.askBackgroundLabel") }}
+          </label>
+          <textarea
+            id="ai-background"
+            v-model="background"
+            class="ask__input"
+            rows="2"
+            :maxlength="MAX_BACKGROUND_CHARS"
+            :placeholder="t('toolsAi.askBackgroundPlaceholder')"
+            aria-describedby="ai-background-note"
+          />
+          <p id="ai-background-note" class="ask__note">
+            {{ t("toolsAi.askBackgroundNote") }}
+          </p>
+        </div>
       </div>
 
       <div class="mode-grid">
@@ -343,6 +363,7 @@
           :local-model="localModel"
           :me="me"
           :summary="insights.summary"
+          :background="background"
           :free="!!locked"
           :sample="
             sampleReadings && ranOn === 'cloud' ? sampleReadings.coach : null
@@ -459,6 +480,7 @@ import { useSubscriptionStore } from "~/stores/subscription";
 import {
   buildDigest,
   countLines,
+  readerText,
   restoreNames,
   tidyInsights,
 } from "~/utils/ai/digest";
@@ -498,6 +520,7 @@ import {
   AI_LANGUAGES,
   CLOUD_TRANSCRIPT_CHARS,
   PREVIEW_TRANSCRIPT_CHARS,
+  MAX_BACKGROUND_CHARS,
   MAX_QUESTION_CHARS,
   type AiAsk,
   type AiLanguage,
@@ -579,6 +602,12 @@ const people = computed<string[]>(() => {
 const me = ref<string | null>(null);
 const question = ref<string | null>(null);
 const customQuestion = ref("");
+/**
+ * What the reader says the chat doesn't show ("we broke up in July"), as
+ * typed: anonymized only on its way to the model (askFor), and the coach's
+ * too. It belongs to this chat, so another chat starts without it.
+ */
+const background = ref("");
 
 /** Ready-made questions; some only make sense once we know who "I" is. */
 const presets = computed(() => [
@@ -628,6 +657,22 @@ const askedQuestion = computed(() =>
     ? customQuestion.value.trim()
     : (presets.value.find((p) => p.id === question.value)?.label ?? ""),
 );
+
+/**
+ * Who the reader is, what they ask and what they add, as the model gets it:
+ * in the chat's placeholders, and anonymized like the chat (buildDigest).
+ */
+function askFor(
+  names: Record<string, string>,
+  anonymize: (_text: string) => string,
+): AiAsk | undefined {
+  const ask: AiAsk = {
+    me: Object.keys(names).find((alias) => names[alias] === me.value),
+    question: readerText(anonymize, askedQuestion.value, MAX_QUESTION_CHARS),
+    background: readerText(anonymize, background.value, MAX_BACKGROUND_CHARS),
+  };
+  return ask.me || ask.question || ask.background ? ask : undefined;
+}
 /** What the report is based on, counted by us rather than said by the model. */
 const coverage = ref<{
   total: number;
@@ -845,6 +890,7 @@ async function onChatLoaded(payload: { analysis: unknown; sample?: boolean }) {
   messages.value = (payload.analysis as { messages: ChatMessage[] }).messages;
   insights.value = null;
   errorKey.value = null;
+  background.value = "";
   isSample.value = !!payload.sample;
   findSampleReadings();
   await restoreReport();
@@ -887,24 +933,37 @@ function reset() {
   me.value = null;
   question.value = null;
   customQuestion.value = "";
+  background.value = "";
   insights.value = null;
   errorKey.value = null;
 }
 
-/** Exactly what the cloud would receive, so nobody has to take our word. */
-const cloudPreview = computed(() => {
-  if (!messages.value) return "";
+/** The digest the cloud would get; built once per chat, not per keystroke. */
+const previewDigest = computed(() => {
+  if (!messages.value) return null;
   try {
-    const { digest } = buildDigest(
+    return buildDigest(
       messages.value,
       isSubscriptionValid.value
         ? CLOUD_TRANSCRIPT_CHARS
         : PREVIEW_TRANSCRIPT_CHARS,
     );
-    return JSON.stringify({ ...digest, language: language.value }, null, 2);
   } catch {
-    return "";
+    return null;
   }
+});
+/**
+ * Exactly what the cloud would receive, so nobody has to take our word:
+ * the reader's question and background included, as anonymized.
+ */
+const cloudPreview = computed(() => {
+  if (!previewDigest.value) return "";
+  const { digest, names, anonymize } = previewDigest.value;
+  return JSON.stringify(
+    { ...digest, language: language.value, ask: askFor(names, anonymize) },
+    null,
+    2,
+  );
 });
 
 const formatDuration = (seconds: number) => {
@@ -1033,7 +1092,12 @@ async function run(mode: Mode, via?: "fallback") {
   const trackedMode = preview ? "preview" : mode;
   const startedAt = performance.now();
   const from = via ?? source;
-  analyticsTools.aiStarted(trackedMode, question.value ?? "none", from);
+  analyticsTools.aiStarted(
+    trackedMode,
+    question.value ?? "none",
+    from,
+    !!background.value.trim(),
+  );
   const phase = () =>
     mode === "cloud" ? "cloud" : (progress.value?.phase ?? "download");
   // Leaving mid-run used to vanish from the funnel: started, never finished.
@@ -1065,12 +1129,7 @@ async function run(mode: Mode, via?: "fallback") {
           ? CLOUD_TRANSCRIPT_CHARS
           : localTranscriptChars(localModel.value!),
     );
-    const alias = Object.keys(names).find((a) => names[a] === me.value);
-    const asked = askedQuestion.value
-      ? anonymize(askedQuestion.value).slice(0, MAX_QUESTION_CHARS)
-      : undefined;
-    const ask: AiAsk | undefined =
-      alias || asked ? { me: alias, question: asked } : undefined;
+    const ask = askFor(names, anonymize);
     let result: ChatInsights;
     let read = countLines(digest.transcript);
     let parts = 1;
@@ -1204,7 +1263,7 @@ async function showSampleReading(via?: "fallback") {
   errorMode.value = null;
   const from = via ?? source;
   const startedAt = performance.now();
-  analyticsTools.aiStarted("sample", question.value ?? "none", from);
+  analyticsTools.aiStarted("sample", question.value ?? "none", from, false);
   nextTick(() =>
     document
       .querySelector(".ai-progress")
@@ -1678,6 +1737,11 @@ useToolSchema({
   &__hint {
     font-size: 0.85rem;
     color: #b45309;
+  }
+
+  &__note {
+    font-size: 0.82rem;
+    color: rgba(29, 29, 31, 0.6);
   }
 }
 

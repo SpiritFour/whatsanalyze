@@ -71,6 +71,7 @@ export async function coachInCloud(
     history: CoachTurn[];
     me?: string;
     context?: string;
+    background?: string;
   },
 ): Promise<{ reply: string; allowance: CloudAllowance; free: boolean }> {
   const callable = httpsCallable<
