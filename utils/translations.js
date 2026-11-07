@@ -983,6 +983,11 @@ export const messages = {
       askCustom: "Ask your own question",
       askCustomPlaceholder: "e.g. Why do our conversations always die out?",
       askNeedsMe: "Pick which one is you first, so the AI knows who's asking.",
+      askBackgroundLabel: "What should the AI know?",
+      askBackgroundPlaceholder:
+        "e.g. We broke up in July but still talk every day.",
+      askBackgroundNote:
+        "Anything the chat doesn't show, like who you are to each other or what happened outside it. Names, numbers and links are removed, as in the chat.",
       progressKeepOpen: "Keep this page open — switching apps pauses the AI.",
       reportCoverage:
         "{total} messages, {from} – {to} · the AI read {read} of them",
@@ -2987,6 +2992,11 @@ export const messages = {
       askCustom: "Eigene Frage stellen",
       askCustomPlaceholder: "z. B. Warum schlafen unsere Gespräche immer ein?",
       askNeedsMe: "Wähl zuerst aus, wer du bist, damit die KI weiß, wer fragt.",
+      askBackgroundLabel: "Was sollte die KI wissen?",
+      askBackgroundPlaceholder:
+        "z. B. Wir haben uns im Juli getrennt, schreiben aber noch jeden Tag.",
+      askBackgroundNote:
+        "Alles, was der Chat nicht zeigt, etwa was ihr füreinander seid oder was außerhalb passiert ist. Namen, Nummern und Links werden entfernt, wie im Chat.",
       progressKeepOpen:
         "Lass diese Seite offen – beim App-Wechsel pausiert die KI.",
       reportCoverage:
@@ -4998,6 +5008,11 @@ export const messages = {
         "p. ej. ¿Por qué nuestras conversaciones siempre se apagan?",
       askNeedsMe:
         "Elige primero quién eres, para que la IA sepa quién pregunta.",
+      askBackgroundLabel: "¿Qué debería saber la IA?",
+      askBackgroundPlaceholder:
+        "p. ej. Lo dejamos en julio, pero seguimos hablando cada día.",
+      askBackgroundNote:
+        "Lo que el chat no muestra, como vuestra relación o lo que pasó fuera del chat. Los nombres, números y enlaces se eliminan, igual que en el chat.",
       progressKeepOpen:
         "Mantén esta página abierta: si cambias de app, la IA se pausa.",
       reportCoverage: "{total} mensajes, {from} – {to} · la IA leyó {read}",
@@ -6746,6 +6761,10 @@ export const messages = {
         "p. ex. Porque é que as nossas conversas morrem sempre?",
       askNeedsMe:
         "Escolha primeiro quem é você, para a IA saber quem pergunta.",
+      askBackgroundLabel: "O que a IA deveria saber?",
+      askBackgroundPlaceholder: "p. ex. Namoramos à distância há dois anos.",
+      askBackgroundNote:
+        "O que a conversa não mostra, como a relação entre vocês ou o que aconteceu fora dela. Nomes, números e links são removidos, tal como na conversa.",
       progressKeepOpen:
         "Mantenha esta página aberta — mudar de app pausa a IA.",
       reportCoverage: "{total} mensagens, {from} – {to} · a IA leu {read}",
@@ -8761,6 +8780,11 @@ export const messages = {
         "p. ex. Pourquoi nos conversations s'essoufflent-elles toujours ?",
       askNeedsMe:
         "Choisissez d'abord qui vous êtes, pour que l'IA sache qui pose la question.",
+      askBackgroundLabel: "Que devrait savoir l'IA ?",
+      askBackgroundPlaceholder:
+        "p. ex. On s'est séparés en juillet, mais on se parle encore tous les jours.",
+      askBackgroundNote:
+        "Ce que la conversation ne montre pas : ce que vous êtes l'un pour l'autre, ce qui s'est passé en dehors. Les noms, numéros et liens sont retirés, comme dans la conversation.",
       progressKeepOpen:
         "Gardez cette page ouverte : changer d'app met l'IA en pause.",
       reportCoverage: "{total} messages, {from} – {to} · l'IA en a lu {read}",
@@ -10771,6 +10795,11 @@ export const messages = {
       askCustomPlaceholder:
         "es. Perché le nostre conversazioni si spengono sempre?",
       askNeedsMe: "Scegli prima chi sei, così l'IA sa chi sta chiedendo.",
+      askBackgroundLabel: "Cosa dovrebbe sapere l'IA?",
+      askBackgroundPlaceholder:
+        "es. Ci siamo lasciati a luglio, ma ci sentiamo ancora ogni giorno.",
+      askBackgroundNote:
+        "Ciò che la chat non mostra, come chi siete l'uno per l'altro o cosa è successo fuori dalla chat. Nomi, numeri e link vengono rimossi, come nella chat.",
       progressKeepOpen:
         "Tieni aperta questa pagina: cambiando app l'IA si mette in pausa.",
       reportCoverage:

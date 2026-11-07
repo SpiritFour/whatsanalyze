@@ -472,7 +472,8 @@ export async function analyzeLocally(
         shortened(cut),
         language,
         notes,
-        ask?.me ? { me: ask.me } : undefined,
+        // Who they are and the background, without the question.
+        ask ? { me: ask.me, background: ask.background } : undefined,
       );
       return complete(
         model,
@@ -557,7 +558,7 @@ export async function coachLocally(
   language: AiLanguage,
   kind: CoachKind,
   history: CoachTurn[],
-  options: { me?: string; context?: string },
+  options: { me?: string; context?: string; background?: string },
   onProgress: (_progress: AiProgress) => void,
 ): Promise<string> {
   // shortcut: the last 5 turns at 600 chars each is what fits next to the
