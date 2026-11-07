@@ -981,7 +981,7 @@ export const messages = {
       sendDone:
         "WhatsApp is opening: pick your chat with {name} there and send it.",
       sendFineprint:
-        "The link is encrypted, so only someone with the whole link can open it. It holds this reading, not your messages.",
+        "The link is encrypted, so only someone with the whole link can open it. It holds this reading, not the chat itself.",
       sendMessageBetter:
         "I asked an AI how we could communicate better, based on our WhatsApp chat. This is what it said: {link}",
       sendMessageNone:
@@ -3023,7 +3023,7 @@ export const messages = {
       sendDone:
         "WhatsApp öffnet sich: Wähl dort deinen Chat mit {name} und schick sie ab.",
       sendFineprint:
-        "Der Link ist verschlüsselt: Nur wer den ganzen Link hat, kann ihn öffnen. Er enthält diese Auswertung, nicht eure Nachrichten.",
+        "Der Link ist verschlüsselt: Nur wer den ganzen Link hat, kann ihn öffnen. Er enthält diese Auswertung, nicht den Chat selbst.",
       sendMessageBetter:
         "Ich habe eine KI gefragt, wie wir besser kommunizieren könnten, anhand unseres WhatsApp-Chats. Das hat sie gesagt: {link}",
       sendMessageNone:
@@ -5070,7 +5070,7 @@ export const messages = {
       sendDone:
         "Se está abriendo WhatsApp: elige allí tu chat con {name} y envíalo.",
       sendFineprint:
-        "El enlace está cifrado: solo quien tenga el enlace completo puede abrirlo. Contiene este análisis, no vuestros mensajes.",
+        "El enlace está cifrado: solo quien tenga el enlace completo puede abrirlo. Contiene este análisis, no el chat en sí.",
       sendMessageBetter:
         "Le pregunté a una IA cómo podríamos comunicarnos mejor, a partir de nuestro chat de WhatsApp. Esto es lo que dijo: {link}",
       sendMessageNone:
@@ -6857,7 +6857,7 @@ export const messages = {
       sendDone:
         "O WhatsApp está a abrir: escolha lá a sua conversa com {name} e envie.",
       sendFineprint:
-        "O link é encriptado: só quem tiver o link completo o pode abrir. Contém esta análise, não as vossas mensagens.",
+        "O link é encriptado: só quem tiver o link completo o pode abrir. Contém esta análise, não a conversa em si.",
       sendMessageBetter:
         "Perguntei a uma IA como podíamos comunicar melhor, com base na nossa conversa do WhatsApp. Foi isto que disse: {link}",
       sendMessageNone:
@@ -8908,7 +8908,7 @@ export const messages = {
       sendDone:
         "WhatsApp s'ouvre : choisissez-y votre conversation avec {name} et envoyez.",
       sendFineprint:
-        "Le lien est chiffré : seule une personne disposant du lien complet peut l'ouvrir. Il contient cette analyse, pas vos messages.",
+        "Le lien est chiffré : seule une personne disposant du lien complet peut l'ouvrir. Il contient cette analyse, pas la conversation elle-même.",
       sendMessageBetter:
         "J'ai demandé à une IA comment on pourrait mieux communiquer, à partir de notre conversation WhatsApp. Voilà ce qu'elle a dit : {link}",
       sendMessageNone:
@@ -10959,7 +10959,7 @@ export const messages = {
       sendDone:
         "WhatsApp si sta aprendo: scegli lì la tua chat con {name} e invia.",
       sendFineprint:
-        "Il link è cifrato: solo chi ha il link completo può aprirlo. Contiene questa analisi, non i vostri messaggi.",
+        "Il link è cifrato: solo chi ha il link completo può aprirlo. Contiene questa analisi, non la chat stessa.",
       sendMessageBetter:
         "Ho chiesto a un'IA come potremmo comunicare meglio, partendo dalla nostra chat di WhatsApp. Ecco cosa ha detto: {link}",
       sendMessageNone:
