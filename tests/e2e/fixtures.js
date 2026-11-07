@@ -27,36 +27,60 @@ const blockThirdParty = async (target) => {
   }
 };
 
+/**
+ * Set a page up the way every test expects; returns the uncaught exceptions
+ * it throws, which every test checks for.
+ */
+const preparePage = async (page) => {
+  // Without this the suite reads whatever language the browser asks for.
+  await page.addInitScript(() => {
+    localStorage.setItem("i18n_redirected", "en");
+  });
+  // The context too, for the tests that open a second tab in it.
+  await blockThirdParty(page.context());
+  await blockThirdParty(page);
+
+  // The pages are prerendered, so their markup is on screen and clickable
+  // before Vue hydrates it, and anything a test does in that window reaches
+  // no handler. Every test here means "once the page is up", so wait for
+  // hydration rather than for the load event.
+  const goto = page.goto.bind(page);
+  page.goto = async (url, options) => {
+    const response = await goto(url, options);
+    await page.waitForFunction(
+      () => document.documentElement.dataset.hydrated === "true",
+    );
+    return response;
+  };
+
+  // An uncaught exception means the page is broken even when the thing the
+  // test looked for happened to render.
+  const runtimeErrors = [];
+  page.on("pageerror", (error) => runtimeErrors.push(error.message));
+  return runtimeErrors;
+};
+
 const test = base.test.extend({
   page: async ({ page }, use) => {
-    // Without this the suite reads whatever language the browser asks for.
-    await page.addInitScript(() => {
-      localStorage.setItem("i18n_redirected", "en");
-    });
-    // The context too, for the tests that open a second tab in it.
-    await blockThirdParty(page.context());
-    await blockThirdParty(page);
-
-    // The pages are prerendered, so their markup is on screen and clickable
-    // before Vue hydrates it, and anything a test does in that window reaches
-    // no handler. Every test here means "once the page is up", so wait for
-    // hydration rather than for the load event.
-    const goto = page.goto.bind(page);
-    page.goto = async (url, options) => {
-      const response = await goto(url, options);
-      await page.waitForFunction(
-        () => document.documentElement.dataset.hydrated === "true",
-      );
-      return response;
-    };
-
-    // An uncaught exception means the page is broken even when the thing the
-    // test looked for happened to render. Every test checks for them.
-    const runtimeErrors = [];
-    page.on("pageerror", (error) => runtimeErrors.push(error.message));
-
+    const runtimeErrors = await preparePage(page);
     await use(page);
+    base.expect(runtimeErrors).toEqual([]);
+  },
 
+  /**
+   * Someone else, on their own device: a browser context of its own, with
+   * none of `page`'s storage, saved chats or free preview. For what the
+   * other person in a chat sees when a link reaches them.
+   */
+  otherPerson: async ({ browser, baseURL }, use) => {
+    const context = await browser.newContext({
+      baseURL,
+      serviceWorkers: "block",
+    });
+    const page = await context.newPage();
+    const runtimeErrors = await preparePage(page);
+    await use(page);
+    await context.close();
     base.expect(runtimeErrors).toEqual([]);
   },
 });
@@ -121,6 +145,78 @@ const stubCallableFailure = async (
     });
   });
 };
+
+/**
+ * Firestore's share-link documents (utils/social/shareLinkStore.js), kept
+ * here: the lite SDK writes and reads them as plain requests, answered from
+ * `docs` so a link made on one page opens on another, in another context
+ * too when it is given the same `docs`. Returns them by document name, so a
+ * test can check what was written.
+ */
+const stubShareStore = async (target, docs = new Map()) => {
+  const cors = { "access-control-allow-origin": "*" };
+  await target.route("https://firestore.googleapis.com/**", async (route) => {
+    const request = route.request();
+    if (request.method() === "OPTIONS") {
+      await route.fulfill({
+        status: 204,
+        headers: {
+          ...cors,
+          "access-control-allow-headers": "*",
+          "access-control-allow-methods": "POST",
+        },
+      });
+      return;
+    }
+
+    const url = request.url();
+    const body = request.postDataJSON();
+    const now = new Date().toISOString();
+    if (url.includes("/documents:commit")) {
+      for (const { update } of body.writes)
+        docs.set(update.name, update.fields);
+      await route.fulfill({
+        headers: cors,
+        json: {
+          writeResults: body.writes.map(() => ({ updateTime: now })),
+          commitTime: now,
+        },
+      });
+    } else if (url.includes("/documents:batchGet")) {
+      await route.fulfill({
+        headers: cors,
+        json: body.documents.map((name) =>
+          docs.has(name)
+            ? {
+                found: {
+                  name,
+                  fields: docs.get(name),
+                  createTime: now,
+                  updateTime: now,
+                },
+                readTime: now,
+              }
+            : { missing: name, readTime: now },
+        ),
+      });
+    } else {
+      await route.abort();
+    }
+  });
+  return docs;
+};
+
+/**
+ * The GA4 events a page sent, as gtag queued them: `{ name, params }`. The
+ * site's own gtag stub queues them while gtag.js, blocked here, never loads.
+ */
+const gaEvents = (page) =>
+  page.evaluate(() =>
+    (window.dataLayer || [])
+      .map((call) => Array.from(call))
+      .filter(([command]) => command === "event")
+      .map(([, name, params]) => ({ name, params })),
+  );
 
 /** The Stripe Checkout page, served by us, so no test leaves the machine. */
 const STRIPE_CHECKOUT = "https://checkout.stripe.test/c/pay/cs_test_session";
@@ -232,10 +328,12 @@ module.exports = {
   activeSubscription,
   analyzeChat,
   expect,
+  gaEvents,
   otherChatFile,
   paidSession,
   stubCallable,
   stubCallableFailure,
+  stubShareStore,
   stubStripeCheckout,
   test,
 };

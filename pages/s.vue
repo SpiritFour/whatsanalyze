@@ -31,6 +31,13 @@
         </p>
       </div>
 
+      <!-- A reading sent from the other side of the chat: who it's from,
+           the reading, and their own reading next -->
+      <AiSentReading
+        v-else-if="aiReport && sentFrom"
+        :report="aiReport"
+        :from="sentFrom"
+      />
       <!-- The same component the home page renders after an upload, drawing
            the same charts from the sender's finished numbers rather than from
            their messages. -->
@@ -38,7 +45,8 @@
       <ChartsResults v-else :chat="analysis" shared />
     </LandingSection>
 
-    <LandingSection theme="white">
+    <!-- A sent reading ends with its own invitation -->
+    <LandingSection v-if="!sentFrom" theme="white">
       <!-- An AI report invites the reader to the AI analyzer, not the charts -->
       <div v-if="aiReport" class="wa-scope text-center">
         <p class="m-0 text-xl font-bold text-wa-ink">
@@ -67,13 +75,19 @@
 </template>
 
 <script setup>
-import { onMounted, ref, shallowRef } from "vue";
+import { computed, onMounted, ref, shallowRef } from "vue";
 import AiReport from "~/components/ai/AiReport.vue";
+import AiSentReading from "~/components/ai/AiSentReading.vue";
 import { SharedAnalysis } from "~/utils/social/analysisSnapshot";
 import { reviveSnapshot } from "~/utils/social/shareLink";
 import { loadSharedPayload } from "~/utils/social/shareLinkStore";
 import { isAiReport } from "~/utils/ai/report";
-import { analyticsChat } from "~/composables/useAnalytics";
+import {
+  rememberSentOpened,
+  sentQuestion,
+  sentReadingFrom,
+} from "~/utils/ai/sendReading";
+import { analyticsChat, analyticsTools } from "~/composables/useAnalytics";
 
 const localePath = useLocalePath();
 const route = useRoute();
@@ -86,6 +100,10 @@ const analysis = shallowRef(null);
 const aiReport = shallowRef(null);
 const loading = ref(true);
 const errorKey = ref(null);
+/** Who sent it, if it's a reading sent to the other person in the chat. */
+const sentFrom = computed(() =>
+  aiReport.value ? sentReadingFrom(aiReport.value) : null,
+);
 
 // The preview a link gets when it is pasted into a chat. It says only that
 // somebody shared an analysis: the numbers are decrypted in the reader's
@@ -128,6 +146,12 @@ onMounted(async () => {
     if (isAiReport(payload)) aiReport.value = payload;
     else analysis.value = new SharedAnalysis(reviveSnapshot(payload));
     analyticsChat.sharedHighlightsOpened();
+    if (sentFrom.value) {
+      const question = sentQuestion(aiReport.value);
+      analyticsTools.aiShareOpened(question);
+      // So their own reading, whenever it comes, counts as converted
+      rememberSentOpened(question);
+    }
   } catch (error) {
     console.error("Could not open the shared analysis", error);
     errorKey.value = "sharedHighlightsMissing";

@@ -12,6 +12,16 @@ export interface AiReport {
   insights: ChatInsights;
   /** The question as the reader asked it, if they asked one. */
   question: string;
+  /**
+   * What was asked, as the page knew it: the preset's id ("custom" for a
+   * question of the reader's own, null for none), and whether the AI was
+   * told who the reader is and wrote to them as "you". Whether a reading can
+   * be sent to the other person rests on this (utils/ai/sendReading.js).
+   * Missing on readings kept from before it was recorded.
+   */
+  asked?: { preset: string | null; toReader: boolean } | null;
+  /** Set on a reading sent to the other person in the chat: by whom. */
+  sentBy?: { from: string } | null;
   ranOn: "local" | "cloud";
   /** Set on a free cloud preview: what the full report would add. */
   locked?: PreviewLocked | null;

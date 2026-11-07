@@ -965,6 +965,39 @@ export const messages = {
       button: "Ask AI",
     },
     toolsAi: {
+      // A reading sent to the other person in the chat (AiSendReading.vue, AiSentReading.vue)
+      sendTitle: "Send this reading to {name}",
+      sendTitleAnyone: "Send this reading to the other person",
+      sendText:
+        "It's about how you both talk, not about one side, so it's one you can share. They see exactly this reading, and can then get their own.",
+      sendWho: "Which one are you?",
+      sendButton: "Send this to {name}",
+      sendButtonAnyone: "Send this reading",
+      sendPreparing: "Making the private link…",
+      sendPreviewMessage: "Your WhatsApp message to {name}",
+      sendPreviewPage: "What {name} sees when opening the link",
+      sendWhatsApp: "Send in WhatsApp",
+      sendBack: "Back",
+      sendDone:
+        "WhatsApp is opening: pick your chat with {name} there and send it.",
+      sendFineprint:
+        "The link is encrypted, so only someone with the whole link can open it. It holds this reading, not the chat itself.",
+      sendMessageBetter:
+        "I asked an AI how we could communicate better, based on our WhatsApp chat. This is what it said: {link}",
+      sendMessageNone:
+        "I had an AI read our WhatsApp chat. This is what it saw: {link}",
+      sentEyebrow: "Shared with you",
+      sentTitle: "{name} shared a reading of your chat",
+      sentTextBetter:
+        "{name} asked an AI how the two of you could communicate better, based on your WhatsApp chat. This is the reading {name} got, unchanged.",
+      sentTextNone:
+        "{name} had an AI read the WhatsApp chat between the two of you. This is the reading {name} got, unchanged.",
+      sentNote: "It's what an AI read in the chat, not something {name} wrote.",
+      sentCtaTitle: "Get your own reading of this chat",
+      sentCtaText:
+        "You have the same chat on your phone. Export it from WhatsApp and see what the AI reads in it. Your first reading is a free preview, and the chat is anonymized on your device before any AI sees it.",
+      sentCtaUpload: "Try it with my own chat",
+      sentCtaSample: "Try the sample first",
       cloudAllowance: "{remaining} of {limit} cloud analyses left today",
       cloudAllowanceOut:
         "You've used today's cloud analyses — new ones tomorrow.",
@@ -2974,6 +3007,40 @@ export const messages = {
       button: "Frag die KI",
     },
     toolsAi: {
+      // A reading sent to the other person in the chat (AiSendReading.vue, AiSentReading.vue)
+      sendTitle: "Schick diese Auswertung an {name}",
+      sendTitleAnyone: "Schick diese Auswertung an die andere Person",
+      sendText:
+        "Sie handelt davon, wie ihr beide miteinander redet, nicht von einer Seite – deshalb kannst du sie teilen. Die andere Person sieht genau diese Auswertung und kann danach ihre eigene bekommen.",
+      sendWho: "Wer davon bist du?",
+      sendButton: "An {name} schicken",
+      sendButtonAnyone: "Auswertung schicken",
+      sendPreparing: "Privater Link wird erstellt…",
+      sendPreviewMessage: "Deine WhatsApp-Nachricht an {name}",
+      sendPreviewPage: "Was {name} beim Öffnen des Links sieht",
+      sendWhatsApp: "In WhatsApp senden",
+      sendBack: "Zurück",
+      sendDone:
+        "WhatsApp öffnet sich: Wähl dort deinen Chat mit {name} und schick sie ab.",
+      sendFineprint:
+        "Der Link ist verschlüsselt: Nur wer den ganzen Link hat, kann ihn öffnen. Er enthält diese Auswertung, nicht den Chat selbst.",
+      sendMessageBetter:
+        "Ich habe eine KI gefragt, wie wir besser kommunizieren könnten, anhand unseres WhatsApp-Chats. Das hat sie gesagt: {link}",
+      sendMessageNone:
+        "Ich habe eine KI unseren WhatsApp-Chat lesen lassen. Das hat sie darin gesehen: {link}",
+      sentEyebrow: "Mit dir geteilt",
+      sentTitle: "{name} hat eine Auswertung eures Chats geteilt",
+      sentTextBetter:
+        "{name} hat eine KI gefragt, wie ihr beide besser kommunizieren könntet, anhand eures WhatsApp-Chats. Das ist die Auswertung, die {name} bekommen hat, unverändert.",
+      sentTextNone:
+        "{name} hat eine KI euren WhatsApp-Chat lesen lassen. Das ist die Auswertung, die {name} bekommen hat, unverändert.",
+      sentNote:
+        "Das hat eine KI im Chat gelesen – nichts davon hat {name} geschrieben.",
+      sentCtaTitle: "Hol dir deine eigene Auswertung dieses Chats",
+      sentCtaText:
+        "Du hast denselben Chat auf deinem Handy. Exportiere ihn aus WhatsApp und sieh, was die KI darin liest. Deine erste Auswertung ist eine kostenlose Vorschau, und der Chat wird auf deinem Gerät anonymisiert, bevor eine KI ihn sieht.",
+      sentCtaUpload: "Mit meinem eigenen Chat ausprobieren",
+      sentCtaSample: "Erst den Beispiel-Chat ansehen",
       cloudAllowance: "Heute noch {remaining} von {limit} Cloud-Analysen",
       cloudAllowanceOut:
         "Die heutigen Cloud-Analysen sind aufgebraucht – morgen gibt's neue.",
@@ -4987,6 +5054,40 @@ export const messages = {
       button: "Preguntar a la IA",
     },
     toolsAi: {
+      // A reading sent to the other person in the chat (AiSendReading.vue, AiSentReading.vue)
+      sendTitle: "Envía este análisis a {name}",
+      sendTitleAnyone: "Envía este análisis a la otra persona",
+      sendText:
+        "Trata de cómo habláis los dos, no de una sola parte, así que puedes compartirlo. La otra persona ve exactamente este análisis y después puede obtener el suyo.",
+      sendWho: "¿Quién de ellos eres tú?",
+      sendButton: "Enviar a {name}",
+      sendButtonAnyone: "Enviar este análisis",
+      sendPreparing: "Creando el enlace privado…",
+      sendPreviewMessage: "Tu mensaje de WhatsApp para {name}",
+      sendPreviewPage: "Lo que verá {name} al abrir el enlace",
+      sendWhatsApp: "Enviar por WhatsApp",
+      sendBack: "Volver",
+      sendDone:
+        "Se está abriendo WhatsApp: elige allí tu chat con {name} y envíalo.",
+      sendFineprint:
+        "El enlace está cifrado: solo quien tenga el enlace completo puede abrirlo. Contiene este análisis, no el chat en sí.",
+      sendMessageBetter:
+        "Le pregunté a una IA cómo podríamos comunicarnos mejor, a partir de nuestro chat de WhatsApp. Esto es lo que dijo: {link}",
+      sendMessageNone:
+        "Le pedí a una IA que leyera nuestro chat de WhatsApp. Esto es lo que vio: {link}",
+      sentEyebrow: "Compartido contigo",
+      sentTitle: "{name} ha compartido un análisis de vuestro chat",
+      sentTextBetter:
+        "{name} le preguntó a una IA cómo podríais comunicaros mejor los dos, a partir de vuestro chat de WhatsApp. Este es el análisis que recibió {name}, sin cambios.",
+      sentTextNone:
+        "{name} le pidió a una IA que leyera el chat de WhatsApp entre vosotros dos. Este es el análisis que recibió {name}, sin cambios.",
+      sentNote:
+        "Es lo que una IA leyó en el chat, no algo que haya escrito {name}.",
+      sentCtaTitle: "Obtén tu propio análisis de este chat",
+      sentCtaText:
+        "Tienes el mismo chat en tu teléfono. Expórtalo desde WhatsApp y mira lo que la IA lee en él. Tu primer análisis es una vista previa gratuita, y el chat se anonimiza en tu dispositivo antes de que ninguna IA lo vea.",
+      sentCtaUpload: "Probar con mi propio chat",
+      sentCtaSample: "Ver primero el chat de ejemplo",
       cloudAllowance:
         "Te quedan {remaining} de {limit} análisis en la nube hoy",
       cloudAllowanceOut:
@@ -6740,6 +6841,39 @@ export const messages = {
       button: "Perguntar à IA",
     },
     toolsAi: {
+      // A reading sent to the other person in the chat (AiSendReading.vue, AiSentReading.vue)
+      sendTitle: "Envie esta análise a {name}",
+      sendTitleAnyone: "Envie esta análise à outra pessoa",
+      sendText:
+        "Fala de como os dois conversam, não de um só lado, por isso pode partilhá-la. A outra pessoa vê exatamente esta análise e depois pode obter a sua.",
+      sendWho: "Qual deles é você?",
+      sendButton: "Enviar a {name}",
+      sendButtonAnyone: "Enviar esta análise",
+      sendPreparing: "A criar o link privado…",
+      sendPreviewMessage: "A sua mensagem de WhatsApp para {name}",
+      sendPreviewPage: "O que {name} vê ao abrir o link",
+      sendWhatsApp: "Enviar pelo WhatsApp",
+      sendBack: "Voltar",
+      sendDone:
+        "O WhatsApp está a abrir: escolha lá a sua conversa com {name} e envie.",
+      sendFineprint:
+        "O link é encriptado: só quem tiver o link completo o pode abrir. Contém esta análise, não a conversa em si.",
+      sendMessageBetter:
+        "Perguntei a uma IA como podíamos comunicar melhor, com base na nossa conversa do WhatsApp. Foi isto que disse: {link}",
+      sendMessageNone:
+        "Pedi a uma IA que lesse a nossa conversa do WhatsApp. Foi isto que viu: {link}",
+      sentEyebrow: "Partilhado consigo",
+      sentTitle: "{name} partilhou uma análise da vossa conversa",
+      sentTextBetter:
+        "{name} perguntou a uma IA como os dois podiam comunicar melhor, com base na vossa conversa do WhatsApp. Esta é a análise que {name} recebeu, sem alterações.",
+      sentTextNone:
+        "{name} pediu a uma IA que lesse a conversa do WhatsApp entre os dois. Esta é a análise que {name} recebeu, sem alterações.",
+      sentNote: "É o que uma IA leu na conversa, não algo que {name} escreveu.",
+      sentCtaTitle: "Obtenha a sua própria análise desta conversa",
+      sentCtaText:
+        "Tem a mesma conversa no seu telemóvel. Exporte-a do WhatsApp e veja o que a IA lê nela. A sua primeira análise é uma pré-visualização grátis, e a conversa é anonimizada no seu dispositivo antes de qualquer IA a ver.",
+      sentCtaUpload: "Experimentar com a minha conversa",
+      sentCtaSample: "Ver primeiro a conversa de exemplo",
       cloudAllowance:
         "Restam-lhe {remaining} de {limit} análises na nuvem hoje",
       cloudAllowanceOut:
@@ -8758,6 +8892,40 @@ export const messages = {
       button: "Demander à l'IA",
     },
     toolsAi: {
+      // A reading sent to the other person in the chat (AiSendReading.vue, AiSentReading.vue)
+      sendTitle: "Envoyer cette analyse à {name}",
+      sendTitleAnyone: "Envoyer cette analyse à l'autre personne",
+      sendText:
+        "Elle porte sur votre façon de vous parler tous les deux, pas sur un seul côté : vous pouvez donc la partager. L'autre personne voit exactement cette analyse, puis peut obtenir la sienne.",
+      sendWho: "Lequel est vous ?",
+      sendButton: "Envoyer à {name}",
+      sendButtonAnyone: "Envoyer cette analyse",
+      sendPreparing: "Création du lien privé…",
+      sendPreviewMessage: "Votre message WhatsApp à {name}",
+      sendPreviewPage: "Ce que {name} verra en ouvrant le lien",
+      sendWhatsApp: "Envoyer sur WhatsApp",
+      sendBack: "Retour",
+      sendDone:
+        "WhatsApp s'ouvre : choisissez-y votre conversation avec {name} et envoyez.",
+      sendFineprint:
+        "Le lien est chiffré : seule une personne disposant du lien complet peut l'ouvrir. Il contient cette analyse, pas la conversation elle-même.",
+      sendMessageBetter:
+        "J'ai demandé à une IA comment on pourrait mieux communiquer, à partir de notre conversation WhatsApp. Voilà ce qu'elle a dit : {link}",
+      sendMessageNone:
+        "J'ai fait lire notre conversation WhatsApp à une IA. Voilà ce qu'elle y a vu : {link}",
+      sentEyebrow: "Partagé avec vous",
+      sentTitle: "{name} a partagé une analyse de votre conversation",
+      sentTextBetter:
+        "{name} a demandé à une IA comment vous pourriez mieux communiquer tous les deux, à partir de votre conversation WhatsApp. Voici l'analyse que {name} a reçue, sans modification.",
+      sentTextNone:
+        "{name} a fait lire à une IA votre conversation WhatsApp à deux. Voici l'analyse que {name} a reçue, sans modification.",
+      sentNote:
+        "C'est ce qu'une IA a lu dans la conversation, pas quelque chose que {name} a écrit.",
+      sentCtaTitle: "Obtenez votre propre analyse de cette conversation",
+      sentCtaText:
+        "Vous avez la même conversation sur votre téléphone. Exportez-la depuis WhatsApp et voyez ce que l'IA y lit. Votre première analyse est un aperçu gratuit, et la conversation est anonymisée sur votre appareil avant qu'une IA ne la voie.",
+      sentCtaUpload: "Essayer avec ma propre conversation",
+      sentCtaSample: "Voir d'abord la conversation d'exemple",
       cloudAllowance:
         "Encore {remaining} analyses cloud sur {limit} aujourd'hui",
       cloudAllowanceOut:
@@ -10775,6 +10943,40 @@ export const messages = {
       button: "Chiedi all'IA",
     },
     toolsAi: {
+      // A reading sent to the other person in the chat (AiSendReading.vue, AiSentReading.vue)
+      sendTitle: "Invia questa analisi a {name}",
+      sendTitleAnyone: "Invia questa analisi all'altra persona",
+      sendText:
+        "Parla di come vi parlate tutti e due, non di una sola parte, quindi puoi condividerla. L'altra persona vede esattamente questa analisi e poi può ottenere la sua.",
+      sendWho: "Chi di loro sei tu?",
+      sendButton: "Invia a {name}",
+      sendButtonAnyone: "Invia questa analisi",
+      sendPreparing: "Creo il link privato…",
+      sendPreviewMessage: "Il tuo messaggio WhatsApp per {name}",
+      sendPreviewPage: "Cosa vede {name} aprendo il link",
+      sendWhatsApp: "Invia su WhatsApp",
+      sendBack: "Indietro",
+      sendDone:
+        "WhatsApp si sta aprendo: scegli lì la tua chat con {name} e invia.",
+      sendFineprint:
+        "Il link è cifrato: solo chi ha il link completo può aprirlo. Contiene questa analisi, non la chat stessa.",
+      sendMessageBetter:
+        "Ho chiesto a un'IA come potremmo comunicare meglio, partendo dalla nostra chat di WhatsApp. Ecco cosa ha detto: {link}",
+      sendMessageNone:
+        "Ho fatto leggere a un'IA la nostra chat di WhatsApp. Ecco cosa ci ha visto: {link}",
+      sentEyebrow: "Condiviso con te",
+      sentTitle: "{name} ha condiviso un'analisi della vostra chat",
+      sentTextBetter:
+        "{name} ha chiesto a un'IA come potreste comunicare meglio voi due, partendo dalla vostra chat di WhatsApp. Questa è l'analisi che ha ricevuto {name}, senza modifiche.",
+      sentTextNone:
+        "{name} ha fatto leggere a un'IA la chat di WhatsApp tra voi due. Questa è l'analisi che ha ricevuto {name}, senza modifiche.",
+      sentNote:
+        "È ciò che un'IA ha letto nella chat, non qualcosa che ha scritto {name}.",
+      sentCtaTitle: "Ottieni la tua analisi di questa chat",
+      sentCtaText:
+        "Hai la stessa chat sul tuo telefono. Esportala da WhatsApp e guarda cosa ci legge l'IA. La tua prima analisi è un'anteprima gratuita, e la chat viene anonimizzata sul tuo dispositivo prima che un'IA la veda.",
+      sentCtaUpload: "Prova con la mia chat",
+      sentCtaSample: "Prima guarda la chat di esempio",
       cloudAllowance:
         "Ti restano {remaining} analisi nel cloud su {limit} oggi",
       cloudAllowanceOut:

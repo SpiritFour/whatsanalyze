@@ -339,6 +339,16 @@
         </div>
         <AiReport v-if="report" :report="report" />
 
+        <!-- A reading about the two of them, not one side: offered to send
+             to the other person, who can then get their own -->
+        <AiSendReading
+          v-if="report && !isSample && canSendReading(report)"
+          :key="report.insights.summary"
+          :report="report"
+          :people="people"
+          :me="me"
+        />
+
         <!-- The same encrypted share link as the analyzer's results -->
         <ShareLinkButton :capture="() => report" source="ai_report" />
 
@@ -462,6 +472,7 @@ import { storeToRefs } from "pinia";
 import ToolDropzone from "~/components/tools/ToolDropzone.vue";
 import AiReport from "~/components/ai/AiReport.vue";
 import AiCoach from "~/components/ai/AiCoach.vue";
+import AiSendReading from "~/components/ai/AiSendReading.vue";
 import type { AiReport as AiReportData } from "~/utils/ai/report";
 import type { ChatMessage } from "~/composables/useChatTool";
 import { analyticsTools, type AiSource } from "~/composables/useAnalytics";
@@ -475,6 +486,7 @@ import {
 } from "~/utils/ai/digest";
 import { participantMessages } from "~/utils/utils";
 import { AI_QUESTIONS } from "~/utils/ai/questions";
+import { canSendReading, takeSentOpened } from "~/utils/ai/sendReading";
 import {
   SAMPLE_READING_MS,
   loadSampleReadings,
@@ -616,12 +628,20 @@ let source: AiSource = "tool";
  */
 const coachFirst = ref(false);
 onMounted(() => {
-  const { ask, source: from, coach } = router.currentRoute.value.query;
-  if (from === "results") source = "results";
+  const {
+    ask,
+    source: from,
+    coach,
+    try: attempt,
+  } = router.currentRoute.value.query;
+  // "shared": from a reading someone sent them (pages/s.vue)
+  if (from === "results" || from === "shared") source = from;
   coachFirst.value = coach === "reply";
   if (!question.value && presets.value.some((p) => p.id === ask)) {
     question.value = ask as string;
   }
+  // ?try=sample, from a sent reading's "Try the sample first"
+  if (attempt === "sample") dropzone.value?.loadSample();
 });
 
 const askBlocked = computed(
@@ -664,6 +684,8 @@ const coverage = ref<{
 
 /** The report as shown, and as a share link carries it. */
 const reportQuestion = ref("");
+/** What it was asked, for whether it can be sent (utils/ai/sendReading.js). */
+const reportAsked = ref<AiReportData["asked"]>(null);
 /** Set when the report is the free cloud preview. */
 const locked = ref<PreviewLocked | null>(null);
 // Back from subscribing with the preview still shown: get the full report.
@@ -690,6 +712,7 @@ const report = computed<AiReportData | null>(() =>
         version: 1,
         insights: insights.value,
         question: reportQuestion.value,
+        asked: reportAsked.value,
         ranOn: ranOn.value ?? "local",
         coverage: coverage.value,
         locked: locked.value,
@@ -759,6 +782,7 @@ const readingId = ref<string | null>(null);
 function showReport(r: AiReportData) {
   insights.value = r.insights;
   reportQuestion.value = r.question;
+  reportAsked.value = r.asked ?? null;
   ranOn.value = r.ranOn;
   coverage.value = r.coverage ?? null;
   locked.value = r.locked ?? null;
@@ -1141,6 +1165,11 @@ async function run(mode: Mode, via?: "fallback") {
       forgetLocalAiFailure();
     }
     reportQuestion.value = askedQuestion.value;
+    reportAsked.value = {
+      preset: askedQuestion.value ? question.value : null,
+      // Told who the reader is, the AI wrote to them as "you".
+      toReader: !!ask?.me,
+    };
     insights.value = tidyInsights(restoreNames(result, names));
     coverage.value = {
       total: digest.totalMessages,
@@ -1154,6 +1183,10 @@ async function run(mode: Mode, via?: "fallback") {
     // Already counted as abandoned; the report is kept for coming back.
     if (unmounted) return;
     analyticsTools.aiFinished(trackedMode, performance.now() - startedAt, from);
+    // Their own reading, after opening one someone sent them
+    const sentQuestion = takeSentOpened();
+    if (sentQuestion)
+      analyticsTools.aiShareConverted(trackedMode, sentQuestion);
     await nextTick();
     showWhereNext();
   } catch (err: any) {
@@ -1242,6 +1275,11 @@ async function showSampleReading(via?: "fallback") {
   if (unmounted || messages.value !== chat) return;
   const { digest } = buildDigest(chat, CLOUD_TRANSCRIPT_CHARS);
   reportQuestion.value = askedQuestion.value;
+  reportAsked.value = {
+    preset: askedQuestion.value ? question.value : null,
+    // The sample's readings that need a "me" were written to that side
+    toReader: !!presets.value.find((p) => p.id === question.value)?.needsMe,
+  };
   insights.value = tidyInsights(structuredClone(reading));
   coverage.value = {
     total: digest.totalMessages,
@@ -1266,7 +1304,10 @@ function tryOwnChat() {
     ?.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
-const dropzone = ref<{ chooseFile: () => void } | null>(null);
+const dropzone = ref<{
+  chooseFile: () => void;
+  loadSample: () => Promise<void>;
+} | null>(null);
 /** The file picker straight away: the sample makes way for their chat. */
 function chooseOwnChat() {
   analyticsTools.ctaClick("ai_sample", "hero_dropzone");
