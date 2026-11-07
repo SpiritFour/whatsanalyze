@@ -74,6 +74,26 @@
             {{ t("toolsAi.sampleCustom") }}
           </p>
         </div>
+        <!-- What the chat doesn't show. Not for the sample: its readings
+             were made in advance, without any. A phone keyboard's
+             dictation covers saying it rather than typing it. -->
+        <div v-if="!isSample" class="ask__group">
+          <label class="ask__label" for="ai-background">
+            {{ t("toolsAi.askBackgroundLabel") }}
+          </label>
+          <textarea
+            id="ai-background"
+            v-model="background"
+            class="ask__input"
+            rows="2"
+            :maxlength="MAX_BACKGROUND_CHARS"
+            :placeholder="t('toolsAi.askBackgroundPlaceholder')"
+            aria-describedby="ai-background-note"
+          />
+          <p id="ai-background-note" class="ask__note">
+            {{ t("toolsAi.askBackgroundNote") }}
+          </p>
+        </div>
       </div>
 
       <div class="mode-grid">
@@ -319,6 +339,16 @@
         </div>
         <AiReport v-if="report" :report="report" />
 
+        <!-- A reading about the two of them, not one side: offered to send
+             to the other person, who can then get their own -->
+        <AiSendReading
+          v-if="report && !isSample && canSendReading(report)"
+          :key="report.insights.summary"
+          :report="report"
+          :people="people"
+          :me="me"
+        />
+
         <!-- The same encrypted share link as the analyzer's results -->
         <ShareLinkButton :capture="() => report" source="ai_report" />
 
@@ -333,6 +363,7 @@
           :local-model="localModel"
           :me="me"
           :summary="insights.summary"
+          :background="background"
           :free="!!locked"
           :sample="
             sampleReadings && ranOn === 'cloud' ? sampleReadings.coach : null
@@ -441,6 +472,7 @@ import { storeToRefs } from "pinia";
 import ToolDropzone from "~/components/tools/ToolDropzone.vue";
 import AiReport from "~/components/ai/AiReport.vue";
 import AiCoach from "~/components/ai/AiCoach.vue";
+import AiSendReading from "~/components/ai/AiSendReading.vue";
 import type { AiReport as AiReportData } from "~/utils/ai/report";
 import type { ChatMessage } from "~/composables/useChatTool";
 import { analyticsTools, type AiSource } from "~/composables/useAnalytics";
@@ -448,11 +480,13 @@ import { useSubscriptionStore } from "~/stores/subscription";
 import {
   buildDigest,
   countLines,
+  readerText,
   restoreNames,
   tidyInsights,
 } from "~/utils/ai/digest";
 import { participantMessages } from "~/utils/utils";
 import { AI_QUESTIONS } from "~/utils/ai/questions";
+import { canSendReading, takeSentOpened } from "~/utils/ai/sendReading";
 import {
   SAMPLE_READING_MS,
   loadSampleReadings,
@@ -486,6 +520,7 @@ import {
   AI_LANGUAGES,
   CLOUD_TRANSCRIPT_CHARS,
   PREVIEW_TRANSCRIPT_CHARS,
+  MAX_BACKGROUND_CHARS,
   MAX_QUESTION_CHARS,
   type AiAsk,
   type AiLanguage,
@@ -567,6 +602,12 @@ const people = computed<string[]>(() => {
 const me = ref<string | null>(null);
 const question = ref<string | null>(null);
 const customQuestion = ref("");
+/**
+ * What the reader says the chat doesn't show ("we broke up in July"), as
+ * typed: anonymized only on its way to the model (askFor), and the coach's
+ * too. It belongs to this chat, so another chat starts without it.
+ */
+const background = ref("");
 
 /** Ready-made questions; some only make sense once we know who "I" is. */
 const presets = computed(() => [
@@ -587,12 +628,20 @@ let source: AiSource = "tool";
  */
 const coachFirst = ref(false);
 onMounted(() => {
-  const { ask, source: from, coach } = router.currentRoute.value.query;
-  if (from === "results") source = "results";
+  const {
+    ask,
+    source: from,
+    coach,
+    try: attempt,
+  } = router.currentRoute.value.query;
+  // "shared": from a reading someone sent them (pages/s.vue)
+  if (from === "results" || from === "shared") source = from;
   coachFirst.value = coach === "reply";
   if (!question.value && presets.value.some((p) => p.id === ask)) {
     question.value = ask as string;
   }
+  // ?try=sample, from a sent reading's "Try the sample first"
+  if (attempt === "sample") dropzone.value?.loadSample();
 });
 
 const askBlocked = computed(
@@ -608,6 +657,22 @@ const askedQuestion = computed(() =>
     ? customQuestion.value.trim()
     : (presets.value.find((p) => p.id === question.value)?.label ?? ""),
 );
+
+/**
+ * Who the reader is, what they ask and what they add, as the model gets it:
+ * in the chat's placeholders, and anonymized like the chat (buildDigest).
+ */
+function askFor(
+  names: Record<string, string>,
+  anonymize: (_text: string) => string,
+): AiAsk | undefined {
+  const ask: AiAsk = {
+    me: Object.keys(names).find((alias) => names[alias] === me.value),
+    question: readerText(anonymize, askedQuestion.value, MAX_QUESTION_CHARS),
+    background: readerText(anonymize, background.value, MAX_BACKGROUND_CHARS),
+  };
+  return ask.me || ask.question || ask.background ? ask : undefined;
+}
 /** What the report is based on, counted by us rather than said by the model. */
 const coverage = ref<{
   total: number;
@@ -619,6 +684,8 @@ const coverage = ref<{
 
 /** The report as shown, and as a share link carries it. */
 const reportQuestion = ref("");
+/** What it was asked, for whether it can be sent (utils/ai/sendReading.js). */
+const reportAsked = ref<AiReportData["asked"]>(null);
 /** Set when the report is the free cloud preview. */
 const locked = ref<PreviewLocked | null>(null);
 // Back from subscribing with the preview still shown: get the full report.
@@ -645,6 +712,7 @@ const report = computed<AiReportData | null>(() =>
         version: 1,
         insights: insights.value,
         question: reportQuestion.value,
+        asked: reportAsked.value,
         ranOn: ranOn.value ?? "local",
         coverage: coverage.value,
         locked: locked.value,
@@ -714,6 +782,7 @@ const readingId = ref<string | null>(null);
 function showReport(r: AiReportData) {
   insights.value = r.insights;
   reportQuestion.value = r.question;
+  reportAsked.value = r.asked ?? null;
   ranOn.value = r.ranOn;
   coverage.value = r.coverage ?? null;
   locked.value = r.locked ?? null;
@@ -821,6 +890,7 @@ async function onChatLoaded(payload: { analysis: unknown; sample?: boolean }) {
   messages.value = (payload.analysis as { messages: ChatMessage[] }).messages;
   insights.value = null;
   errorKey.value = null;
+  background.value = "";
   isSample.value = !!payload.sample;
   findSampleReadings();
   await restoreReport();
@@ -863,24 +933,37 @@ function reset() {
   me.value = null;
   question.value = null;
   customQuestion.value = "";
+  background.value = "";
   insights.value = null;
   errorKey.value = null;
 }
 
-/** Exactly what the cloud would receive, so nobody has to take our word. */
-const cloudPreview = computed(() => {
-  if (!messages.value) return "";
+/** The digest the cloud would get; built once per chat, not per keystroke. */
+const previewDigest = computed(() => {
+  if (!messages.value) return null;
   try {
-    const { digest } = buildDigest(
+    return buildDigest(
       messages.value,
       isSubscriptionValid.value
         ? CLOUD_TRANSCRIPT_CHARS
         : PREVIEW_TRANSCRIPT_CHARS,
     );
-    return JSON.stringify({ ...digest, language: language.value }, null, 2);
   } catch {
-    return "";
+    return null;
   }
+});
+/**
+ * Exactly what the cloud would receive, so nobody has to take our word:
+ * the reader's question and background included, as anonymized.
+ */
+const cloudPreview = computed(() => {
+  if (!previewDigest.value) return "";
+  const { digest, names, anonymize } = previewDigest.value;
+  return JSON.stringify(
+    { ...digest, language: language.value, ask: askFor(names, anonymize) },
+    null,
+    2,
+  );
 });
 
 const formatDuration = (seconds: number) => {
@@ -1009,7 +1092,12 @@ async function run(mode: Mode, via?: "fallback") {
   const trackedMode = preview ? "preview" : mode;
   const startedAt = performance.now();
   const from = via ?? source;
-  analyticsTools.aiStarted(trackedMode, question.value ?? "none", from);
+  analyticsTools.aiStarted(
+    trackedMode,
+    question.value ?? "none",
+    from,
+    !!background.value.trim(),
+  );
   const phase = () =>
     mode === "cloud" ? "cloud" : (progress.value?.phase ?? "download");
   // Leaving mid-run used to vanish from the funnel: started, never finished.
@@ -1041,12 +1129,7 @@ async function run(mode: Mode, via?: "fallback") {
           ? CLOUD_TRANSCRIPT_CHARS
           : localTranscriptChars(localModel.value!),
     );
-    const alias = Object.keys(names).find((a) => names[a] === me.value);
-    const asked = askedQuestion.value
-      ? anonymize(askedQuestion.value).slice(0, MAX_QUESTION_CHARS)
-      : undefined;
-    const ask: AiAsk | undefined =
-      alias || asked ? { me: alias, question: asked } : undefined;
+    const ask = askFor(names, anonymize);
     let result: ChatInsights;
     let read = countLines(digest.transcript);
     let parts = 1;
@@ -1082,6 +1165,11 @@ async function run(mode: Mode, via?: "fallback") {
       forgetLocalAiFailure();
     }
     reportQuestion.value = askedQuestion.value;
+    reportAsked.value = {
+      preset: askedQuestion.value ? question.value : null,
+      // Told who the reader is, the AI wrote to them as "you".
+      toReader: !!ask?.me,
+    };
     insights.value = tidyInsights(restoreNames(result, names));
     coverage.value = {
       total: digest.totalMessages,
@@ -1095,6 +1183,10 @@ async function run(mode: Mode, via?: "fallback") {
     // Already counted as abandoned; the report is kept for coming back.
     if (unmounted) return;
     analyticsTools.aiFinished(trackedMode, performance.now() - startedAt, from);
+    // Their own reading, after opening one someone sent them
+    const sentQuestion = takeSentOpened();
+    if (sentQuestion)
+      analyticsTools.aiShareConverted(trackedMode, sentQuestion);
     await nextTick();
     showWhereNext();
   } catch (err: any) {
@@ -1172,7 +1264,7 @@ async function showSampleReading(via?: "fallback") {
   errorMode.value = null;
   const from = via ?? source;
   const startedAt = performance.now();
-  analyticsTools.aiStarted("sample", question.value ?? "none", from);
+  analyticsTools.aiStarted("sample", question.value ?? "none", from, false);
   nextTick(() =>
     document
       .querySelector(".ai-progress")
@@ -1183,6 +1275,11 @@ async function showSampleReading(via?: "fallback") {
   if (unmounted || messages.value !== chat) return;
   const { digest } = buildDigest(chat, CLOUD_TRANSCRIPT_CHARS);
   reportQuestion.value = askedQuestion.value;
+  reportAsked.value = {
+    preset: askedQuestion.value ? question.value : null,
+    // The sample's readings that need a "me" were written to that side
+    toReader: !!presets.value.find((p) => p.id === question.value)?.needsMe,
+  };
   insights.value = tidyInsights(structuredClone(reading));
   coverage.value = {
     total: digest.totalMessages,
@@ -1207,7 +1304,10 @@ function tryOwnChat() {
     ?.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
-const dropzone = ref<{ chooseFile: () => void } | null>(null);
+const dropzone = ref<{
+  chooseFile: () => void;
+  loadSample: () => Promise<void>;
+} | null>(null);
 /** The file picker straight away: the sample makes way for their chat. */
 function chooseOwnChat() {
   analyticsTools.ctaClick("ai_sample", "hero_dropzone");
@@ -1638,6 +1738,11 @@ useToolSchema({
   &__hint {
     font-size: 0.85rem;
     color: #b45309;
+  }
+
+  &__note {
+    font-size: 0.82rem;
+    color: rgba(29, 29, 31, 0.6);
   }
 }
 

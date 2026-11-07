@@ -286,7 +286,7 @@ test.describe("continue where you left off", () => {
       limit: 10,
     });
     await report.locator(".coach__input").fill("What should I bring up?");
-    await report.getByRole("button", { name: "Send" }).click();
+    await report.getByRole("button", { name: "Send", exact: true }).click();
     await expect(report.getByText("Bring up the lost passport.")).toBeVisible();
 
     // Another tab, another day: open the saved chat and it's all there,

@@ -25,9 +25,10 @@ declare global {
 
 /**
  * Where an AI analysis was asked for: the AI tool page, the analyzer's
- * results, or the cloud offered after the on-device AI couldn't run.
+ * results, the cloud offered after the on-device AI couldn't run, or a
+ * reading someone sent (pages/s.vue).
  */
-export type AiSource = "tool" | "results" | "fallback";
+export type AiSource = "tool" | "results" | "fallback" | "shared";
 
 export interface EventParams {
   [key: string]: string | number | boolean | null | undefined;
@@ -320,13 +321,22 @@ export const analyticsTools = {
     });
   },
 
-  /** An AI analysis was started, on the device or in the cloud. */
-  aiStarted(mode: AiMode, question: string, source: AiSource) {
-    // The preset's id or "custom", never what was typed.
+  /**
+   * An AI analysis was started, on the device or in the cloud.
+   * `background`: whether the reader said what the chat doesn't show.
+   */
+  aiStarted(
+    mode: AiMode,
+    question: string,
+    source: AiSource,
+    background: boolean,
+  ) {
+    // The preset's id or "custom", never what was typed; nor the background.
     trackEvent("ai_analysis_started", {
       ai_mode: mode,
       ai_question: question,
       source,
+      ai_background: background,
     });
   },
 
@@ -375,14 +385,48 @@ export const analyticsTools = {
     });
   },
 
-  /** A follow-up sent to the AI coach after a report. Never its text. */
-  aiCoachMessage(mode: "local" | "cloud" | "sample", kind: "ask" | "reply") {
-    trackEvent("ai_coach_message", { ai_mode: mode, coach_kind: kind });
+  /**
+   * A follow-up sent to the AI coach after a report. Never its text, nor the
+   * reader's background: only whether there was one.
+   */
+  aiCoachMessage(
+    mode: "local" | "cloud" | "sample",
+    kind: "ask" | "reply",
+    background: boolean,
+  ) {
+    trackEvent("ai_coach_message", {
+      ai_mode: mode,
+      coach_kind: kind,
+      ai_background: background,
+    });
   },
 
   /** The coach showed support resources instead of an answer. */
   aiCoachSafety(source: "keywords" | "model") {
     trackEvent("ai_coach_safety", { source });
+  },
+
+  /*
+   * A reading sent to the other person in the chat (utils/ai/sendReading.js):
+   * previewed, sent through WhatsApp, opened by them, and their own reading
+   * after it. `question` is the preset's id or "none", the only things that
+   * can be sent. Never names, the reading or the link.
+   */
+  aiSharePreviewed(question: string) {
+    trackEvent("ai_share_previewed", { ai_question: question });
+  },
+
+  aiShareSent(question: string) {
+    trackEvent("ai_share_sent", { ai_question: question, method: "whatsapp" });
+  },
+
+  aiShareOpened(question: string) {
+    trackEvent("ai_share_opened", { ai_question: question });
+  },
+
+  /** Whoever opened a sent reading finished one of their own chat. */
+  aiShareConverted(mode: AiMode, question: string) {
+    trackEvent("ai_share_converted", { ai_mode: mode, ai_question: question });
   },
 
   error(toolName: string, errorCode: string) {
@@ -401,6 +445,7 @@ export const analyticsTools = {
       | "ai"
       | "scroll_to_dropzone"
       | "hero_dropzone"
+      | "sample"
       | "other",
   ) {
     trackEvent("tool_cta_click", {

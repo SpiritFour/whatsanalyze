@@ -233,8 +233,12 @@ function triggerFileDialog() {
   errorMessage.value = null;
   fileInput.value?.click();
 }
-// For the page: the AI page's "your turn" after the sample's reading.
-defineExpose({ chooseFile: triggerFileDialog });
+// For the page: the AI page's "your turn" after the sample's reading, and
+// its ?try=sample from a reading someone sent.
+defineExpose({
+  chooseFile: triggerFileDialog,
+  loadSample: () => loadSampleChat(),
+});
 
 function onDragOver() {
   isDragging.value = true;
