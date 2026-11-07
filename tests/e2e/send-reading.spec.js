@@ -323,8 +323,9 @@ test.describe("one-sided readings stay with the reader", () => {
         await page
           .getByRole("button", { name: "Ask your own question" })
           .click();
+        // The question's box, not "What should the AI know?" next to it.
         await page
-          .locator(".ask__input")
+          .getByPlaceholder("e.g. Why do our conversations always die out?")
           .fill("How could we communicate better?");
       },
     },
