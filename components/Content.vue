@@ -1,5 +1,5 @@
 <template>
-  <article class="article">
+  <article v-if="page" class="article">
     <div class="article__inner">
       <!-- toc — only worth showing once there is something to jump between -->
       <nav v-if="toc.length > 1" class="toc" aria-label="On this page">
@@ -12,7 +12,7 @@
         </ol>
       </nav>
       <!-- main content -->
-      <ContentRenderer class="nuxt-content" :value="page" />
+      <ContentRenderer v-if="page" class="nuxt-content" :value="page" />
     </div>
   </article>
 </template>
