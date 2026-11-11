@@ -9,6 +9,7 @@ const {
   STRIPE_CHECKOUT,
   analyzeChat,
   expect,
+  gaEvents,
   otherChatFile,
   paidSession,
   stubCallable,
@@ -373,36 +374,93 @@ test.describe("quoting prices", () => {
   test("sells the subscription in the reader's language", async ({ page }) => {
     const expected = {
       de: {
-        title: "Ein Abo. Alles freigeschaltet.",
+        title: "Sieh alles, was die KI in deinem Chat gefunden hat",
         follow: "danach 9,99 € / Monat",
+        pdf: "7,99 € pro PDF",
       },
       fr: {
-        title: "Un abonnement. Tout est débloqué.",
+        title: "Découvrez tout ce que l'IA a trouvé dans votre conversation",
         follow: "puis 9,99 € / mois",
+        pdf: "7,99 € l'unité",
       },
       it: {
-        title: "Un abbonamento. Tutto sbloccato.",
+        title: "Scopri tutto quello che l'IA ha trovato nella tua chat",
         follow: "poi 9,99 € / mese",
+        pdf: "7,99 € l'uno",
       },
       es: {
-        title: "Una suscripción. Todo desbloqueado.",
+        title: "Descubre todo lo que la IA encontró en tu chat",
         follow: "luego 9,99 € / mes",
+        pdf: "7,99 € cada uno",
       },
       pt: {
-        title: "Uma assinatura. Tudo liberado.",
+        title: "Veja tudo o que a IA encontrou na sua conversa",
         follow: "depois € 9,99 / mês",
+        pdf: "€ 7,99 cada",
       },
     };
 
-    for (const [locale, { title, follow }] of Object.entries(expected)) {
+    for (const [locale, { title, follow, pdf }] of Object.entries(expected)) {
       await page.goto(`/${locale}/subscribe`);
       await expect(page.locator(".sub-title")).toHaveText(title);
       // The symbol position and the decimal comma follow the locale, so this
       // is the one place the recurring price can be checked as it is read.
       await expect(page.locator(".plan-price .follow-on")).toHaveText(follow);
+      await expect(page.locator(".compare")).toContainText(pdf);
       await expect(page.locator(".sub-page__container")).not.toContainText(
-        "Everything Unlocked",
+        "See everything the AI found",
       );
     }
+  });
+});
+
+/*
+ * Most people open the subscribe page from the free preview of an AI
+ * reading, and the page used to sell PDFs and Wrapped without a word about
+ * the AI. Now it leads with it, and says the reading waits for them.
+ */
+test.describe("the subscribe page sells the AI", () => {
+  test("tells someone from their reading that it waits for them", async ({
+    page,
+  }) => {
+    await page.goto("/subscribe?from=/tools/ai-chat-analyzer/");
+
+    await expect(page.getByTestId("from-ai")).toContainText(
+      "Your reading is waiting for you",
+    );
+    await expect(page.locator(".feature-list strong").first()).toHaveText(
+      "The full AI reading",
+    );
+    // The preview's numbers, from what the server cuts it to.
+    const people = page.locator(".compare tr", { hasText: "Who's who" });
+    await expect(people.locator("td")).toHaveText(["1", "All"]);
+    await expect(page.locator(".compare")).toContainText("€7.99 each");
+
+    // Paying still takes them back to the reading afterwards.
+    const checkout = await stubStripeCheckout(page);
+    await page.getByRole("button", { name: "Subscribe Now" }).click();
+    await expect(page).toHaveURL(/^https:\/\/checkout\.stripe\.test\//);
+    expect(checkout[0].postDataJSON().data.successUrl).toContain(
+      "from=%2Ftools%2Fai-chat-analyzer%2F",
+    );
+  });
+
+  test("records the page the visitor came from", async ({ page }) => {
+    await page.goto("/de/subscribe?from=/de/tools/ai-chat-analyzer/");
+    await expect(page.getByTestId("from-ai")).toBeVisible();
+
+    const viewed = (await gaEvents(page)).find((e) => e.name === "view_item");
+    expect(viewed.params).toMatchObject({
+      source: "subscribe_page",
+      source_page: "/tools/ai-chat-analyzer/",
+    });
+  });
+
+  test("says nothing about a reading to anyone else", async ({ page }) => {
+    await page.goto("/subscribe?from=/wrapped/");
+    await expect(page.locator(".feature-list strong").first()).toHaveText(
+      "The full AI reading",
+    );
+    await expect(page.getByTestId("from-ai")).toHaveCount(0);
   });
 });

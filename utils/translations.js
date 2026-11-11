@@ -107,9 +107,9 @@ export const messages = {
       ctaNote: "Free preview · Made in your browser",
     },
     subscribePage: {
-      title: "One Subscription. Everything Unlocked.",
+      title: "See everything the AI found in your chat",
       subtitle:
-        "Enjoy unlimited full PDF exports, WhatsApp Wrapped stories, and advanced chat analytics across every device.",
+        "Pro opens the full AI reading of every chat: every person, every pattern, every moment. With the AI coach and unlimited full chat PDFs.",
       activeTitle: "Your subscription is Active",
       activeSubtext:
         "You have full access to all features and unlimited PDF downloads.",
@@ -131,18 +131,38 @@ export const messages = {
       planTier: "Pro Access",
       firstMonth: "first month",
       followOn: "then {price} / month",
-      feature1Title: "Unlimited Full Chat PDF Exports",
-      feature1Text:
-        "Export whole chat histories with full message logs, media timestamps, and metadata.",
-      feature2Title: "Complete WhatsApp Wrapped Experience",
-      feature2Text:
+      fromAiTitle: "Your reading is waiting for you",
+      fromAiText:
+        "Subscribe and you go straight back to it, and the full report is made right away.",
+      aiReadingTitle: "The full AI reading",
+      aiReadingText:
+        "Every person's profile and all the patterns, topics and moments the free preview keeps back. For every chat you bring.",
+      aiCoachTitle: "The AI coach",
+      aiCoachText:
+        "Ask follow-up questions about your chat and get help with what to reply. Readings and coach answers together: up to {n} a day.",
+      pdfTitle: "Unlimited full chat PDFs",
+      pdfText:
+        "Whole chat histories with every message and its date and time, to keep or print. As many as you need.",
+      wrappedTitle: "Complete WhatsApp Wrapped Experience",
+      wrappedText:
         "Unlock all wrapped slides, emotional analytics, top phrases, and shareable stories.",
-      feature3Title: "Full Privacy Guarantee",
-      feature3Text:
-        "Client-side processing. Your chat files and messages are never stored on our servers.",
-      feature4Title: "Self-Service Billing Portal",
-      feature4Text:
-        "Cancel or pause anytime with 1-click via the secure Stripe Customer Portal.",
+      privacyTitle: "Private by design",
+      privacyText:
+        "Your chat is read in your browser. For the AI, names, phone numbers, emails and links are replaced before anything is sent. We don't store your chat, and the AI provider doesn't train on it.",
+      compareTitle: "Free preview or Pro",
+      compareFree: "Free preview",
+      comparePro: "Pro",
+      compare_people: "Who's who",
+      compare_dynamics: "How you interact",
+      compare_topics: "What you talk about",
+      compare_highlights: "Memorable moments",
+      compare_coach: "AI coach",
+      compare_pdf: "Full chat PDF",
+      compareAll: "All",
+      compareCoachFree: "A few replies a day",
+      compareCoachPro: "Up to {n} a day",
+      comparePdfFree: "{price} each",
+      comparePdfPro: "Unlimited",
       redirecting: "Redirecting to Stripe...",
       secureTag: "🔒 Encrypted Stripe 256-bit checkout. Cancel anytime.",
       restoreTitle: "Restore or Verify Existing Access",
@@ -2168,9 +2188,9 @@ export const messages = {
       ctaNote: "Vorschau kostenlos · Im Browser erstellt",
     },
     subscribePage: {
-      title: "Ein Abo. Alles freigeschaltet.",
+      title: "Sieh alles, was die KI in deinem Chat gefunden hat",
       subtitle:
-        "Unbegrenzte vollständige PDF-Exporte, WhatsApp-Wrapped-Storys und fortgeschrittene Chat-Analysen auf jedem Gerät.",
+        "Pro öffnet die vollständige KI-Auswertung jedes Chats: jede Person, jedes Muster, jeden Moment. Mit dem KI-Coach und unbegrenzten Chat-PDFs.",
       activeTitle: "Dein Abo ist aktiv",
       activeSubtext:
         "Du hast vollen Zugriff auf alle Funktionen und unbegrenzte PDF-Downloads.",
@@ -2192,18 +2212,38 @@ export const messages = {
       planTier: "Pro-Zugang",
       firstMonth: "erster Monat",
       followOn: "danach {price} / Monat",
-      feature1Title: "Unbegrenzte vollständige Chat-PDF-Exporte",
-      feature1Text:
-        "Exportiere ganze Chatverläufe mit allen Nachrichten, Medien-Zeitstempeln und Metadaten.",
-      feature2Title: "Komplettes WhatsApp-Wrapped-Erlebnis",
-      feature2Text:
-        "Schalte alle Wrapped-Slides, Emotionsanalysen, Top-Phrasen und teilbare Storys frei.",
-      feature3Title: "Volle Datenschutzgarantie",
-      feature3Text:
-        "Verarbeitung im Browser. Deine Chat-Dateien und Nachrichten landen nie auf unseren Servern.",
-      feature4Title: "Self-Service-Abrechnungsportal",
-      feature4Text:
-        "Kündige oder pausiere jederzeit mit einem Klick über das sichere Stripe-Kundenportal.",
+      fromAiTitle: "Deine Auswertung wartet auf dich",
+      fromAiText:
+        "Schließ das Abo ab, und du landest direkt wieder dort – der vollständige Bericht wird sofort erstellt.",
+      aiReadingTitle: "Die vollständige KI-Auswertung",
+      aiReadingText:
+        "Das Profil jeder Person und alle Muster, Themen und Momente, die die kostenlose Vorschau zurückhält. Für jeden Chat, den du mitbringst.",
+      aiCoachTitle: "Der KI-Coach",
+      aiCoachText:
+        "Stell Rückfragen zu deinem Chat und hol dir Hilfe bei der Antwort. Auswertungen und Coach-Antworten zusammen: bis zu {n} am Tag.",
+      pdfTitle: "Unbegrenzte vollständige Chat-PDFs",
+      pdfText:
+        "Ganze Chatverläufe mit jeder Nachricht samt Datum und Uhrzeit, zum Aufbewahren oder Ausdrucken. So viele du brauchst.",
+      wrappedTitle: "Das komplette WhatsApp Wrapped",
+      wrappedText:
+        "Alle Wrapped-Folien, Gefühlsanalysen, Top-Sätze und teilbare Storys freischalten.",
+      privacyTitle: "Privat von Grund auf",
+      privacyText:
+        "Dein Chat wird in deinem Browser gelesen. Für die KI werden Namen, Telefonnummern, E-Mails und Links ersetzt, bevor etwas gesendet wird. Wir speichern deinen Chat nicht, und der KI-Anbieter trainiert nicht damit.",
+      compareTitle: "Kostenlose Vorschau oder Pro",
+      compareFree: "Vorschau",
+      comparePro: "Pro",
+      compare_people: "Wer ist wer",
+      compare_dynamics: "Wie ihr miteinander umgeht",
+      compare_topics: "Worüber ihr redet",
+      compare_highlights: "Unvergessliche Momente",
+      compare_coach: "KI-Coach",
+      compare_pdf: "Vollständiges Chat-PDF",
+      compareAll: "Alle",
+      compareCoachFree: "Ein paar Antworten am Tag",
+      compareCoachPro: "Bis zu {n} am Tag",
+      comparePdfFree: "{price} pro PDF",
+      comparePdfPro: "Unbegrenzt",
       redirecting: "Weiterleitung zu Stripe …",
       secureTag:
         "🔒 Verschlüsselter Stripe-Checkout mit 256 Bit. Jederzeit kündbar.",
@@ -4227,9 +4267,9 @@ export const messages = {
       ctaNote: "Vista previa gratis · Se crea en tu navegador",
     },
     subscribePage: {
-      title: "Una suscripción. Todo desbloqueado.",
+      title: "Descubre todo lo que la IA encontró en tu chat",
       subtitle:
-        "Disfruta de exportaciones PDF completas e ilimitadas, historias de WhatsApp Wrapped y análisis de chat avanzados en todos tus dispositivos.",
+        "Pro abre la lectura completa de la IA de cada chat: cada persona, cada patrón, cada momento. Con el coach de IA y PDF completos ilimitados.",
       activeTitle: "Tu suscripción está activa",
       activeSubtext:
         "Tienes acceso completo a todas las funciones y descargas de PDF ilimitadas.",
@@ -4251,18 +4291,38 @@ export const messages = {
       planTier: "Acceso Pro",
       firstMonth: "primer mes",
       followOn: "luego {price} / mes",
-      feature1Title: "Exportaciones PDF completas e ilimitadas",
-      feature1Text:
-        "Exporta historiales de chat enteros con todos los mensajes, marcas de tiempo de los archivos y metadatos.",
-      feature2Title: "Experiencia completa de WhatsApp Wrapped",
-      feature2Text:
-        "Desbloquea todas las diapositivas, el análisis emocional, las frases más usadas y las historias para compartir.",
-      feature3Title: "Garantía total de privacidad",
-      feature3Text:
-        "Procesamiento en tu dispositivo. Tus archivos de chat y tus mensajes nunca se guardan en nuestros servidores.",
-      feature4Title: "Portal de facturación de autoservicio",
-      feature4Text:
-        "Cancela o pausa cuando quieras con un clic desde el portal de clientes seguro de Stripe.",
+      fromAiTitle: "Tu lectura te está esperando",
+      fromAiText:
+        "Suscríbete y vuelves directamente a ella, y el informe completo se crea al momento.",
+      aiReadingTitle: "La lectura completa de la IA",
+      aiReadingText:
+        "El perfil de cada persona y todos los patrones, temas y momentos que la vista previa gratuita se guarda. Para cada chat que traigas.",
+      aiCoachTitle: "El coach de IA",
+      aiCoachText:
+        "Haz preguntas sobre tu chat y recibe ayuda con qué responder. Lecturas y respuestas del coach en total: hasta {n} al día.",
+      pdfTitle: "PDF completos del chat ilimitados",
+      pdfText:
+        "Historiales completos con cada mensaje, su fecha y su hora, para guardar o imprimir. Todos los que necesites.",
+      wrappedTitle: "La experiencia completa de WhatsApp Wrapped",
+      wrappedText:
+        "Desbloquea todas las diapositivas, el análisis emocional, las frases top y las historias para compartir.",
+      privacyTitle: "Privado desde el diseño",
+      privacyText:
+        "Tu chat se lee en tu navegador. Para la IA, los nombres, teléfonos, correos y enlaces se sustituyen antes de enviar nada. No guardamos tu chat y el proveedor de IA no lo usa para entrenar.",
+      compareTitle: "Vista previa gratuita o Pro",
+      compareFree: "Vista previa",
+      comparePro: "Pro",
+      compare_people: "Quién es quién",
+      compare_dynamics: "Cómo os relacionáis",
+      compare_topics: "De qué habláis",
+      compare_highlights: "Momentos memorables",
+      compare_coach: "Coach de IA",
+      compare_pdf: "PDF completo del chat",
+      compareAll: "Todo",
+      compareCoachFree: "Unas pocas respuestas al día",
+      compareCoachPro: "Hasta {n} al día",
+      comparePdfFree: "{price} cada uno",
+      comparePdfPro: "Ilimitados",
       redirecting: "Redirigiendo a Stripe…",
       secureTag:
         "🔒 Pago cifrado de 256 bits con Stripe. Cancela cuando quieras.",
@@ -6270,9 +6330,9 @@ export const messages = {
       ctaNote: "Prévia grátis · Criado no seu navegador",
     },
     subscribePage: {
-      title: "Uma assinatura. Tudo liberado.",
+      title: "Veja tudo o que a IA encontrou na sua conversa",
       subtitle:
-        "Aproveite exportações em PDF completas e ilimitadas, as histórias do WhatsApp Wrapped e análises avançadas de conversas em todos os seus aparelhos.",
+        "O Pro abre a leitura completa da IA de cada conversa: cada pessoa, cada padrão, cada momento. Com o coach de IA e PDFs completos ilimitados.",
       activeTitle: "Sua assinatura está ativa",
       activeSubtext:
         "Você tem acesso completo a todos os recursos e downloads de PDF ilimitados.",
@@ -6294,18 +6354,38 @@ export const messages = {
       planTier: "Acesso Pro",
       firstMonth: "primeiro mês",
       followOn: "depois {price} / mês",
-      feature1Title: "Exportações em PDF completas e ilimitadas",
-      feature1Text:
-        "Exporte conversas inteiras com todas as mensagens, os horários das mídias e os metadados.",
-      feature2Title: "Experiência completa do WhatsApp Wrapped",
-      feature2Text:
-        "Libere todos os slides, as análises emocionais, as frases mais usadas e as histórias para compartilhar.",
-      feature3Title: "Garantia total de privacidade",
-      feature3Text:
-        "Processamento no seu aparelho. Seus arquivos de conversa e suas mensagens nunca ficam nos nossos servidores.",
-      feature4Title: "Portal de cobrança self-service",
-      feature4Text:
-        "Cancele ou pause quando quiser com um clique pelo portal do cliente seguro da Stripe.",
+      fromAiTitle: "Sua leitura está esperando por você",
+      fromAiText:
+        "Assine e você volta direto para ela, e o relatório completo é feito na hora.",
+      aiReadingTitle: "A leitura completa da IA",
+      aiReadingText:
+        "O perfil de cada pessoa e todos os padrões, assuntos e momentos que a prévia gratuita guarda. Para cada conversa que você trouxer.",
+      aiCoachTitle: "O coach de IA",
+      aiCoachText:
+        "Faça perguntas sobre a sua conversa e receba ajuda com o que responder. Leituras e respostas do coach juntas: até {n} por dia.",
+      pdfTitle: "PDFs completos ilimitados",
+      pdfText:
+        "Históricos inteiros com cada mensagem, sua data e hora, para guardar ou imprimir. Quantos você precisar.",
+      wrappedTitle: "A experiência completa do WhatsApp Wrapped",
+      wrappedText:
+        "Libere todos os slides, a análise emocional, as frases mais usadas e os stories para compartilhar.",
+      privacyTitle: "Privado por natureza",
+      privacyText:
+        "Sua conversa é lida no seu navegador. Para a IA, nomes, telefones, e-mails e links são substituídos antes de qualquer envio. Não guardamos sua conversa, e o provedor de IA não a usa para treinamento.",
+      compareTitle: "Prévia gratuita ou Pro",
+      compareFree: "Prévia",
+      comparePro: "Pro",
+      compare_people: "Quem é quem",
+      compare_dynamics: "Como interagem",
+      compare_topics: "Sobre o que falam",
+      compare_highlights: "Momentos memoráveis",
+      compare_coach: "Coach de IA",
+      compare_pdf: "PDF completo da conversa",
+      compareAll: "Tudo",
+      compareCoachFree: "Algumas respostas por dia",
+      compareCoachPro: "Até {n} por dia",
+      comparePdfFree: "{price} cada",
+      comparePdfPro: "Ilimitados",
       redirecting: "Redirecionando para a Stripe…",
       secureTag:
         "🔒 Checkout Stripe criptografado de 256 bits. Cancele quando quiser.",
@@ -8318,9 +8398,9 @@ export const messages = {
       ctaNote: "Aperçu gratuit · Créé dans votre navigateur",
     },
     subscribePage: {
-      title: "Un abonnement. Tout est débloqué.",
+      title: "Découvrez tout ce que l'IA a trouvé dans votre conversation",
       subtitle:
-        "Profitez d'exports PDF complets illimités, des stories WhatsApp Wrapped et d'analyses de conversation avancées sur tous vos appareils.",
+        "Pro ouvre la lecture complète de l'IA pour chaque conversation : chaque personne, chaque schéma, chaque moment. Avec le coach IA et des PDF complets illimités.",
       activeTitle: "Votre abonnement est actif",
       activeSubtext:
         "Vous avez accès à toutes les fonctionnalités et aux téléchargements PDF illimités.",
@@ -8342,18 +8422,38 @@ export const messages = {
       planTier: "Accès Pro",
       firstMonth: "premier mois",
       followOn: "puis {price} / mois",
-      feature1Title: "Exports PDF complets et illimités",
-      feature1Text:
-        "Exportez des conversations entières avec tous les messages, les horodatages des médias et les métadonnées.",
-      feature2Title: "Expérience WhatsApp Wrapped complète",
-      feature2Text:
-        "Débloquez toutes les slides, les analyses émotionnelles, les expressions favorites et les stories à partager.",
-      feature3Title: "Garantie de confidentialité totale",
-      feature3Text:
-        "Traitement dans votre navigateur. Vos fichiers de conversation et vos messages ne sont jamais stockés sur nos serveurs.",
-      feature4Title: "Portail de facturation en libre-service",
-      feature4Text:
-        "Annulez ou mettez en pause à tout moment en un clic via le portail client sécurisé de Stripe.",
+      fromAiTitle: "Votre lecture vous attend",
+      fromAiText:
+        "Abonnez-vous et vous y revenez directement : le rapport complet est créé aussitôt.",
+      aiReadingTitle: "La lecture complète de l'IA",
+      aiReadingText:
+        "Le profil de chaque personne et tous les schémas, sujets et moments que l'aperçu gratuit garde pour lui. Pour chaque conversation que vous apportez.",
+      aiCoachTitle: "Le coach IA",
+      aiCoachText:
+        "Posez des questions sur votre conversation et faites-vous aider pour répondre. Lectures et réponses du coach au total : jusqu'à {n} par jour.",
+      pdfTitle: "PDF complets illimités",
+      pdfText:
+        "Des historiques entiers avec chaque message, sa date et son heure, à garder ou à imprimer. Autant qu'il vous en faut.",
+      wrappedTitle: "L'expérience WhatsApp Wrapped complète",
+      wrappedText:
+        "Débloquez toutes les diapositives, l'analyse des émotions, les phrases favorites et les stories à partager.",
+      privacyTitle: "Privé par conception",
+      privacyText:
+        "Votre conversation est lue dans votre navigateur. Pour l'IA, les noms, numéros, e-mails et liens sont remplacés avant tout envoi. Nous ne stockons pas votre conversation, et le fournisseur d'IA ne s'en sert pas pour s'entraîner.",
+      compareTitle: "Aperçu gratuit ou Pro",
+      compareFree: "Aperçu",
+      comparePro: "Pro",
+      compare_people: "Qui est qui",
+      compare_dynamics: "Votre façon d'échanger",
+      compare_topics: "Vos sujets de conversation",
+      compare_highlights: "Moments mémorables",
+      compare_coach: "Coach IA",
+      compare_pdf: "PDF complet de la conversation",
+      compareAll: "Tout",
+      compareCoachFree: "Quelques réponses par jour",
+      compareCoachPro: "Jusqu'à {n} par jour",
+      comparePdfFree: "{price} l'unité",
+      comparePdfPro: "Illimités",
       redirecting: "Redirection vers Stripe…",
       secureTag:
         "🔒 Paiement Stripe chiffré en 256 bits. Annulable à tout moment.",
@@ -10377,9 +10477,9 @@ export const messages = {
       ctaNote: "Anteprima gratuita · Creato nel tuo browser",
     },
     subscribePage: {
-      title: "Un abbonamento. Tutto sbloccato.",
+      title: "Scopri tutto quello che l'IA ha trovato nella tua chat",
       subtitle:
-        "Esportazioni PDF complete e illimitate, storie di WhatsApp Wrapped e analisi avanzate delle chat su ogni dispositivo.",
+        "Pro apre la lettura completa dell'IA di ogni chat: ogni persona, ogni schema, ogni momento. Con il coach IA e PDF completi illimitati.",
       activeTitle: "Il tuo abbonamento è attivo",
       activeSubtext:
         "Hai accesso completo a tutte le funzioni e download PDF illimitati.",
@@ -10401,18 +10501,38 @@ export const messages = {
       planTier: "Accesso Pro",
       firstMonth: "primo mese",
       followOn: "poi {price} / mese",
-      feature1Title: "Esportazioni PDF complete e illimitate",
-      feature1Text:
-        "Esporta intere cronologie di chat con tutti i messaggi, i timestamp dei media e i metadati.",
-      feature2Title: "Esperienza WhatsApp Wrapped completa",
-      feature2Text:
-        "Sblocca tutte le slide, le analisi emotive, le frasi più usate e le storie da condividere.",
-      feature3Title: "Garanzia di privacy totale",
-      feature3Text:
-        "Elaborazione nel browser. I tuoi file di chat e i tuoi messaggi non finiscono mai sui nostri server.",
-      feature4Title: "Portale di fatturazione self-service",
-      feature4Text:
-        "Disdici o metti in pausa quando vuoi con un clic dal portale clienti sicuro di Stripe.",
+      fromAiTitle: "La tua lettura ti aspetta",
+      fromAiText:
+        "Abbonati e torni subito lì: il report completo viene creato all'istante.",
+      aiReadingTitle: "La lettura completa dell'IA",
+      aiReadingText:
+        "Il profilo di ogni persona e tutti gli schemi, gli argomenti e i momenti che l'anteprima gratuita tiene per sé. Per ogni chat che porti.",
+      aiCoachTitle: "Il coach IA",
+      aiCoachText:
+        "Fai domande sulla tua chat e fatti aiutare su cosa rispondere. Letture e risposte del coach in tutto: fino a {n} al giorno.",
+      pdfTitle: "PDF completi illimitati",
+      pdfText:
+        "Intere cronologie con ogni messaggio, data e ora, da conservare o stampare. Quanti te ne servono.",
+      wrappedTitle: "L'esperienza completa di WhatsApp Wrapped",
+      wrappedText:
+        "Sblocca tutte le slide, l'analisi delle emozioni, le frasi più usate e le storie da condividere.",
+      privacyTitle: "Privato per scelta",
+      privacyText:
+        "La tua chat viene letta nel tuo browser. Per l'IA, nomi, numeri di telefono, email e link vengono sostituiti prima di qualsiasi invio. Non conserviamo la tua chat e il fornitore di IA non la usa per l'addestramento.",
+      compareTitle: "Anteprima gratuita o Pro",
+      compareFree: "Anteprima",
+      comparePro: "Pro",
+      compare_people: "Chi è chi",
+      compare_dynamics: "Come interagite",
+      compare_topics: "Di cosa parlate",
+      compare_highlights: "Momenti memorabili",
+      compare_coach: "Coach IA",
+      compare_pdf: "PDF completo della chat",
+      compareAll: "Tutto",
+      compareCoachFree: "Qualche risposta al giorno",
+      compareCoachPro: "Fino a {n} al giorno",
+      comparePdfFree: "{price} l'uno",
+      comparePdfPro: "Illimitati",
       redirecting: "Reindirizzamento a Stripe…",
       secureTag: "🔒 Checkout Stripe cifrato a 256 bit. Disdici quando vuoi.",
       restoreTitle: "Ripristina o verifica un accesso esistente",

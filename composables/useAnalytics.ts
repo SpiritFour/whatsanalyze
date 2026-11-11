@@ -206,10 +206,18 @@ export const analyticsEcommerce = {
    * The price of something was put in front of the visitor: a paywall, the
    * pricing card, the subscribe page. First step of GA's Purchase journey.
    */
-  viewItem(source: string, item: AnalyticsItem) {
-    trackEvent("view_item", { source, currency: CURRENCY, value: item.price }, [
-      item,
-    ]);
+  viewItem(source: string, item: AnalyticsItem, sourcePage?: string) {
+    trackEvent(
+      "view_item",
+      {
+        source,
+        // Where the visitor came to the price from, e.g. the AI analyzer.
+        source_page: sourcePage ? cleanPath(sourcePage) : undefined,
+        currency: CURRENCY,
+        value: item.price,
+      },
+      [item],
+    );
   },
 
   /** A click on a "subscribe"/"get Pro" link that leads to the pricing. */
@@ -226,6 +234,8 @@ export const analyticsEcommerce = {
   beginCheckout(options: {
     checkoutType: "subscription" | "one_time";
     source: string;
+    /** The page the visitor came to the price from, as for viewItem. */
+    sourcePage?: string;
   }) {
     const item =
       options.checkoutType === "subscription"
@@ -234,6 +244,9 @@ export const analyticsEcommerce = {
     const params = {
       checkout_type: options.checkoutType,
       source: options.source,
+      source_page: options.sourcePage
+        ? cleanPath(options.sourcePage)
+        : undefined,
       currency: CURRENCY,
       value: item.price,
     };
