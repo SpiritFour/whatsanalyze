@@ -120,6 +120,16 @@
           <span>{{ $t("subscribePage.linkErrorHint") }}</span>
         </div>
 
+        <!--
+          Here from the free preview of a reading: it stays on that page, and
+          coming back subscribed makes the full one straight away
+          (ai-chat-analyzer.vue's watch on `locked`).
+        -->
+        <div v-if="fromAi" class="from-ai" data-testid="from-ai">
+          <strong>{{ $t("subscribePage.fromAiTitle") }}</strong>
+          <span>{{ $t("subscribePage.fromAiText") }}</span>
+        </div>
+
         <!-- Pricing / Plan Tier Card -->
         <div class="apple-card highlight-card">
           <div class="plan-header">
@@ -137,11 +147,11 @@
           </div>
 
           <div class="feature-list">
-            <div v-for="n in 4" :key="n" class="feature-item">
+            <div v-for="key in features" :key="key" class="feature-item">
               <div class="check-icon">✓</div>
               <div>
-                <strong>{{ $t(`subscribePage.feature${n}Title`) }}</strong>
-                <p>{{ $t(`subscribePage.feature${n}Text`) }}</p>
+                <strong>{{ $t(`subscribePage.${key}Title`) }}</strong>
+                <p>{{ $t(`subscribePage.${key}Text`, featureParams) }}</p>
               </div>
             </div>
           </div>
@@ -160,6 +170,35 @@
             </button>
             <p class="secure-tag mt-2">{{ $t("subscribePage.secureTag") }}</p>
           </div>
+        </div>
+
+        <!--
+          What the free preview keeps back next to what Pro opens: the
+          visitor has usually just seen the blurred cards. The preview's
+          numbers come from the server's own (functions/src/ai/preview.ts).
+        -->
+        <div class="apple-card compare-card">
+          <h3 class="card-heading">{{ $t("subscribePage.compareTitle") }}</h3>
+          <table class="compare">
+            <thead>
+              <tr>
+                <td></td>
+                <th scope="col">{{ $t("subscribePage.compareFree") }}</th>
+                <th scope="col" class="compare__pro">
+                  {{ $t("subscribePage.comparePro") }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="row in compareRows" :key="row.key">
+                <th scope="row">
+                  {{ $t(`subscribePage.compare_${row.key}`) }}
+                </th>
+                <td>{{ row.free }}</td>
+                <td class="compare__pro">{{ row.pro }}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         <!-- Restore / Login Card -->
@@ -226,12 +265,29 @@ import {
   getSubscriptionParams,
   fetchSubscriptionCheckoutUrl,
 } from "~/utils/subscription";
-import { INTRO_PRICE, SUBSCRIPTION_PRICE, formatPrice } from "~/utils/pricing";
+import {
+  INTRO_PRICE,
+  ONE_TIME_PRICE,
+  SUBSCRIPTION_PRICE,
+  formatPrice,
+} from "~/utils/pricing";
+import { PREVIEW_KEEP } from "~/functions/src/ai/preview";
+import { WRAPPED_PAYWALL_ENABLED } from "~/config/wrapped";
 import {
   analyticsEcommerce,
   ITEM_PRO_SUBSCRIPTION,
 } from "~/composables/useAnalytics";
 const ORIGIN_KEY = "whatsanalyze_subscribe_from";
+
+/**
+ * AI readings and coach answers a subscriber gets per day, together:
+ * AI_DAILY_LIMIT in functions/.env.* (the cost ceiling). Said on the page so
+ * a coach that stops answering is no surprise.
+ */
+const AI_PER_DAY = 10;
+
+/** The AI analyzer, in any language: where the free preview is. */
+const isAiPage = (path) => /\/tools\/ai-chat-analyzer\/?$/.test(path || "");
 
 /** A path on this site, other than this page. */
 const isOrigin = (path) =>
@@ -309,6 +365,48 @@ export default {
     subscriptionPrice() {
       return formatPrice(SUBSCRIPTION_PRICE, this.$i18n.locale);
     },
+    fromAi() {
+      return isAiPage(this.origin);
+    },
+    /**
+     * The AI first: it's what most visitors come here from. Wrapped only
+     * while it's paid for; a free Wrapped sold as a Pro feature would be a
+     * promise of nothing.
+     */
+    features() {
+      return [
+        "aiReading",
+        "aiCoach",
+        "pdf",
+        ...(WRAPPED_PAYWALL_ENABLED ? ["wrapped"] : []),
+        "privacy",
+      ];
+    },
+    featureParams() {
+      return { n: AI_PER_DAY };
+    },
+    compareRows() {
+      const all = this.$t("subscribePage.compareAll");
+      return [
+        ...["people", "dynamics", "topics", "highlights"].map((key) => ({
+          key,
+          free: String(PREVIEW_KEEP[key]),
+          pro: all,
+        })),
+        {
+          key: "coach",
+          free: this.$t("subscribePage.compareCoachFree"),
+          pro: this.$t("subscribePage.compareCoachPro", { n: AI_PER_DAY }),
+        },
+        {
+          key: "pdf",
+          free: this.$t("subscribePage.comparePdfFree", {
+            price: formatPrice(ONE_TIME_PRICE, this.$i18n.locale),
+          }),
+          pro: this.$t("subscribePage.comparePdfPro"),
+        },
+      ];
+    },
   },
   // The form is prerendered, so it can be typed into before Vue hydrates it,
   // and hydrating an input with `v-model` writes the component's state over
@@ -363,7 +461,11 @@ export default {
     if (this.$route.query.canceled) {
       analyticsEcommerce.checkoutCancelled("subscribe_page");
     } else {
-      analyticsEcommerce.viewItem("subscribe_page", ITEM_PRO_SUBSCRIPTION);
+      analyticsEcommerce.viewItem(
+        "subscribe_page",
+        ITEM_PRO_SUBSCRIPTION,
+        this.origin,
+      );
     }
   },
   methods: {
@@ -381,6 +483,7 @@ export default {
       analyticsEcommerce.beginCheckout({
         checkoutType: "subscription",
         source: "subscribe_page",
+        sourcePage: this.origin,
       });
       try {
         const returnPath = `${window.location.origin}${this.localePath(
@@ -932,6 +1035,86 @@ export default {
   gap: 0.25rem;
   font-size: 0.95rem;
   text-align: center;
+}
+
+.from-ai {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.75rem;
+  border-radius: 16px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.from-ai strong {
+  font-size: 1rem;
+}
+
+.compare {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.compare th,
+.compare td {
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid #f3f4f6;
+  text-align: center;
+}
+
+.compare tbody tr:last-child th,
+.compare tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.compare thead th {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6b7280;
+}
+
+.compare tbody th {
+  text-align: left;
+  font-weight: 500;
+  color: #1f2937;
+  padding-left: 0;
+}
+
+.compare td {
+  color: #6b7280;
+}
+
+.compare .compare__pro {
+  color: #1b8a73;
+  font-weight: 600;
+}
+
+/* Three columns in a phone's width: "Unbegrenzt" doesn't wrap. */
+@media (max-width: 480px) {
+  .compare-card {
+    padding: 1.5rem 1.1rem;
+  }
+
+  .compare {
+    font-size: 0.82rem;
+  }
+
+  .compare th,
+  .compare td {
+    padding: 0.55rem 0.25rem;
+  }
+
+  .compare thead th {
+    font-size: 0.7rem;
+  }
 }
 
 .success-banner {
