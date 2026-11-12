@@ -295,6 +295,64 @@ test("a reading with no question can be sent too", async ({ page }) => {
   ).toBeVisible();
 });
 
+/*
+ * Most readers say which one they are before anything else. A reading about
+ * the two of them used to be written to them as "you" then, and so could
+ * never be sent: in its first four days in production, nobody sent one.
+ */
+test("saying who you are still lets a reading about both of you go", async ({
+  page,
+}) => {
+  await stubShareStore(page.context());
+  const calls = await stubCallable(page, "analyzeChatAi", READING);
+  await openWithChat(page);
+  await page.getByRole("button", { name: "Jane Doe" }).click();
+  await page
+    .getByRole("button", { name: "How could we communicate better?" })
+    .click();
+  await expect(
+    page.getByText(
+      "Written about both of you by name, so you can send it to John Doe afterwards.",
+    ),
+  ).toBeVisible();
+  await getReading(page);
+
+  // The AI wasn't told which one is the reader, so nothing says "you"...
+  const { ask } = JSON.parse(calls[0].postData()).data;
+  expect(ask.me ?? null).toBeNull();
+  expect(ask.question).toBe("How could we communicate better?");
+
+  // ...and the reader is already the sender.
+  const send = sendCard(page);
+  await expect(
+    send.getByRole("heading", { name: "Send this reading to John Doe" }),
+  ).toBeVisible();
+  await expect(send.getByRole("radio", { name: "Jane Doe" })).toHaveAttribute(
+    "aria-checked",
+    "true",
+  );
+  await send.getByRole("button", { name: "Send this to John Doe" }).click();
+  await expect(
+    send.getByText("Your WhatsApp message to John Doe"),
+  ).toBeVisible();
+});
+
+test("a one-sided reading is still written to the reader", async ({ page }) => {
+  const calls = await stubCallable(page, "analyzeChatAi", READING);
+  await openWithChat(page);
+  await page.getByRole("button", { name: "Jane Doe" }).click();
+  await page
+    .getByRole("button", {
+      name: "Is there anything I should be worried about?",
+    })
+    .click();
+  await expect(page.getByText(/Written about both of you/)).toHaveCount(0);
+  await getReading(page);
+
+  const { ask } = JSON.parse(calls[0].postData()).data;
+  expect(ask.me).toMatch(/^Person [AB]$/);
+});
+
 test.describe("one-sided readings stay with the reader", () => {
   const cases = [
     {
@@ -305,15 +363,6 @@ test.describe("one-sided readings stay with the reader", () => {
           .getByRole("button", {
             name: "Is there anything I should be worried about?",
           })
-          .click();
-      },
-    },
-    {
-      name: "one written to the reader as you",
-      ask: async (page) => {
-        await page.getByRole("button", { name: "Jane Doe" }).click();
-        await page
-          .getByRole("button", { name: "How could we communicate better?" })
           .click();
       },
     },

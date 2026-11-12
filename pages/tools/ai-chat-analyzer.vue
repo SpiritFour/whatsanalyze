@@ -70,6 +70,10 @@
           <p v-if="askBlocked" class="ask__hint">
             {{ t("toolsAi.askNeedsMe") }}
           </p>
+          <!-- Why it doesn't say "you": so it can go to the other person -->
+          <p v-if="aboutBothOf && !isSample" class="ask__note">
+            {{ t("toolsAi.askAboutBoth", { name: aboutBothOf }) }}
+          </p>
           <p v-if="sampleNeedsOwnChat" class="ask__hint">
             {{ t("toolsAi.sampleCustom") }}
           </p>
@@ -486,7 +490,11 @@ import {
 } from "~/utils/ai/digest";
 import { participantMessages } from "~/utils/utils";
 import { AI_QUESTIONS } from "~/utils/ai/questions";
-import { canSendReading, takeSentOpened } from "~/utils/ai/sendReading";
+import {
+  canSendReading,
+  takeSentOpened,
+  writeToReader,
+} from "~/utils/ai/sendReading";
 import {
   SAMPLE_READING_MS,
   loadSampleReadings,
@@ -657,17 +665,33 @@ const askedQuestion = computed(() =>
     ? customQuestion.value.trim()
     : (presets.value.find((p) => p.id === question.value)?.label ?? ""),
 );
+/** What was asked, as a report keeps it: the preset's id, or null for none. */
+const askedPreset = computed(() =>
+  askedQuestion.value ? question.value : null,
+);
+/**
+ * A reading about the two of them, which they can send to the other person:
+ * written about both by name even once the reader said who they are.
+ */
+const aboutBothOf = computed(() =>
+  me.value && !writeToReader(askedPreset.value, people.value)
+    ? people.value.find((person) => person !== me.value)
+    : null,
+);
 
 /**
  * Who the reader is, what they ask and what they add, as the model gets it:
  * in the chat's placeholders, and anonymized like the chat (buildDigest).
+ * Who they are only when the reading is written to them (writeToReader).
  */
 function askFor(
   names: Record<string, string>,
   anonymize: (_text: string) => string,
 ): AiAsk | undefined {
   const ask: AiAsk = {
-    me: Object.keys(names).find((alias) => names[alias] === me.value),
+    me: writeToReader(askedPreset.value, people.value)
+      ? Object.keys(names).find((alias) => names[alias] === me.value)
+      : undefined,
     question: readerText(anonymize, askedQuestion.value, MAX_QUESTION_CHARS),
     background: readerText(anonymize, background.value, MAX_BACKGROUND_CHARS),
   };
@@ -1166,7 +1190,7 @@ async function run(mode: Mode, via?: "fallback") {
     }
     reportQuestion.value = askedQuestion.value;
     reportAsked.value = {
-      preset: askedQuestion.value ? question.value : null,
+      preset: askedPreset.value,
       // Told who the reader is, the AI wrote to them as "you".
       toReader: !!ask?.me,
     };

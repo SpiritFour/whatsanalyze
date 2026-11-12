@@ -18,6 +18,10 @@ import { AI_QUESTIONS } from "~/utils/ai/questions";
  */
 export const sentQuestion = (report) => report?.asked?.preset ?? "none";
 
+/** No question at all, or one about how the two of them talk. */
+const aboutBoth = (preset) =>
+  preset === null || !!AI_QUESTIONS.find((q) => q.id === preset)?.sendable;
+
 /**
  * Can this reading go to the other person? Only one about the two of them,
  * that the AI didn't write to the reader as "you". A reading from before
@@ -26,9 +30,22 @@ export const sentQuestion = (report) => report?.asked?.preset ?? "none";
 export function canSendReading(report) {
   const asked = report?.asked;
   if (!asked || asked.toReader !== false) return false;
-  if (asked.preset === null) return true;
-  return !!AI_QUESTIONS.find((q) => q.id === asked.preset)?.sendable;
+  return aboutBoth(asked.preset);
 }
+
+/**
+ * Should the AI be told who the reader is, and so write to them as "you"?
+ * Not for a reading that could be sent: in a chat between two, one about the
+ * two of them is written about both by name, even when the reader said which
+ * one they are. Told, it could never go to the other person, and most readers
+ * say who they are first. Who they are still fills in the sender
+ * (AiSendReading.vue); every other reading is written to them.
+ *
+ * @param {string | null} preset the question's id, null for none
+ * @param {string[]} people the chat's participants
+ */
+export const writeToReader = (preset, people) =>
+  !(Array.isArray(people) && people.length === 2 && aboutBoth(preset));
 
 /**
  * Who it goes from and to: a chat between exactly two people, one of them
