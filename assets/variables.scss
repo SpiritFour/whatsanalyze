@@ -36,16 +36,12 @@
 
   --wa-shell-width: #{$wa-shell-width};
 
-  // The sticky header's height. Anything that has to clear it — the Wrapped
-  // story's progress strip, which is drawn inside a full-screen card that
-  // starts at the top of the viewport — offsets itself by this.
-  --wa-header-height: 60px;
-}
-
-@media (max-width: 600px) {
-  :root {
-    --wa-header-height: 52px;
-  }
+  // The sticky header's height, for anything that has to clear it — the
+  // Wrapped story's progress strip, drawn inside a full-screen card that
+  // starts at the top of the viewport. SiteHeader overwrites this with the
+  // measured height once it mounts; these are only the first-paint fallback,
+  // rounded up so the strip never starts underneath the header.
+  --wa-header-height: 64px;
 }
 
 .only-visible-to-html2canvas {
