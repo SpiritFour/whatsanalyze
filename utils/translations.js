@@ -1036,6 +1036,8 @@ export const messages = {
       askCustom: "Ask your own question",
       askCustomPlaceholder: "e.g. Why do our conversations always die out?",
       askNeedsMe: "Pick which one is you first, so the AI knows who's asking.",
+      askAboutBoth:
+        "Written about both of you by name, so you can send it to {name} afterwards.",
       askBackgroundLabel: "What should the AI know?",
       askBackgroundPlaceholder:
         "e.g. We broke up in July but still talk every day.",
@@ -3099,6 +3101,8 @@ export const messages = {
       askCustom: "Eigene Frage stellen",
       askCustomPlaceholder: "z. B. Warum schlafen unsere Gespräche immer ein?",
       askNeedsMe: "Wähl zuerst aus, wer du bist, damit die KI weiß, wer fragt.",
+      askAboutBoth:
+        "Diese Auswertung handelt von euch beiden, mit Namen: So kannst du sie danach an {name} schicken.",
       askBackgroundLabel: "Was sollte die KI wissen?",
       askBackgroundPlaceholder:
         "z. B. Wir haben uns im Juli getrennt, schreiben aber noch jeden Tag.",
@@ -5169,6 +5173,8 @@ export const messages = {
         "p. ej. ¿Por qué nuestras conversaciones siempre se apagan?",
       askNeedsMe:
         "Elige primero quién eres, para que la IA sepa quién pregunta.",
+      askAboutBoth:
+        "Este análisis habla de los dos por vuestro nombre, para que después puedas enviárselo a {name}.",
       askBackgroundLabel: "¿Qué debería saber la IA?",
       askBackgroundPlaceholder:
         "p. ej. Lo dejamos en julio, pero seguimos hablando cada día.",
@@ -6975,6 +6981,8 @@ export const messages = {
         "p. ex. Porque é que as nossas conversas morrem sempre?",
       askNeedsMe:
         "Escolha primeiro quem é você, para a IA saber quem pergunta.",
+      askAboutBoth:
+        "Esta análise fala de vocês dois pelo nome, para que depois você possa enviá-la a {name}.",
       askBackgroundLabel: "O que a IA deveria saber?",
       askBackgroundPlaceholder: "p. ex. Namoramos à distância há dois anos.",
       askBackgroundNote:
@@ -9048,6 +9056,8 @@ export const messages = {
         "p. ex. Pourquoi nos conversations s'essoufflent-elles toujours ?",
       askNeedsMe:
         "Choisissez d'abord qui vous êtes, pour que l'IA sache qui pose la question.",
+      askAboutBoth:
+        "Cette analyse parle de vous deux en vous nommant, pour que vous puissiez ensuite l'envoyer à {name}.",
       askBackgroundLabel: "Que devrait savoir l'IA ?",
       askBackgroundPlaceholder:
         "p. ex. On s'est séparés en juillet, mais on se parle encore tous les jours.",
@@ -11117,6 +11127,8 @@ export const messages = {
       askCustomPlaceholder:
         "es. Perché le nostre conversazioni si spengono sempre?",
       askNeedsMe: "Scegli prima chi sei, così l'IA sa chi sta chiedendo.",
+      askAboutBoth:
+        "Questa analisi parla di voi due per nome, così poi puoi inviarla a {name}.",
       askBackgroundLabel: "Cosa dovrebbe sapere l'IA?",
       askBackgroundPlaceholder:
         "es. Ci siamo lasciati a luglio, ma ci sentiamo ancora ogni giorno.",

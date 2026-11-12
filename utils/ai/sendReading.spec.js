@@ -8,7 +8,42 @@ import {
   sentReadingFrom,
   takeSentOpened,
   whatsAppLink,
+  writeToReader,
 } from "./sendReading";
+
+/**
+ * Who the reader is goes to the AI only for a reading written to them: one
+ * that could be sent stays about both by name, or it never could be.
+ */
+describe("which readings are written to the reader", () => {
+  const two = ["Jane Doe", "John Doe"];
+
+  it("writes a reading about the two of them about both", () => {
+    expect(writeToReader(null, two)).toBe(false);
+    expect(writeToReader("better", two)).toBe(false);
+  });
+
+  it.each(["into", "worried", "gift", "arguments", "effort", "custom"])(
+    "writes a %s reading to the reader",
+    (preset) => {
+      expect(writeToReader(preset, two)).toBe(true);
+    },
+  );
+
+  it("writes to the reader in a group, where there's no one to send it to", () => {
+    expect(writeToReader("better", ["Ann", "Ben", "Cat"])).toBe(true);
+    expect(writeToReader(null, ["Ann", "Ben", "Cat"])).toBe(true);
+  });
+
+  it("keeps to what can be sent", () => {
+    for (const preset of [null, ...AI_QUESTIONS.map((q) => q.id)]) {
+      const sendable = canSendReading({
+        asked: { preset, toReader: writeToReader(preset, two) },
+      });
+      expect(sendable).toBe(!writeToReader(preset, two));
+    }
+  });
+});
 
 /**
  * A reading can go to the other person in the chat only when it is about the
