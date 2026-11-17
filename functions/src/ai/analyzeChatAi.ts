@@ -220,21 +220,26 @@ const FREE_USES = {
 async function takeFree(
   kind: keyof typeof FREE_USES,
   ip: string,
-): Promise<{ taken: "ok" | "used" | "global"; left: number }> {
+): Promise<{
+  taken: "ok" | "used" | "global";
+  left: number;
+  visitor: string;
+}> {
   const use = FREE_USES[kind];
   const day = today();
-  const ref = db
-    .collection(use.collection)
-    .doc(createHash("sha256").update(`${day}:${ip}`).digest("hex"));
+  const id = createHash("sha256").update(`${day}:${ip}`).digest("hex");
+  // Enough to tell visitors apart in the logs, only within the same day.
+  const visitor = id.slice(0, 12);
+  const ref = db.collection(use.collection).doc(id);
   const globalRef = db.collection("aiUsageGlobal").doc(kind);
   return db.runTransaction(async (tx) => {
     const [mine, all] = await Promise.all([tx.get(ref), tx.get(globalRef)]);
     const used = mine.data()?.count ?? 0;
     const usedByAll = usedToday(all.data());
     const perIp = use.perIp.value();
-    if (used >= perIp) return { taken: "used", left: 0 };
+    if (used >= perIp) return { taken: "used", left: 0, visitor };
     if (usedByAll >= use.daily.value()) {
-      return { taken: "global", left: perIp - used };
+      return { taken: "global", left: perIp - used, visitor };
     }
     // For a Firestore TTL policy on expireAt: a day's counts are worthless
     // the day after.
@@ -243,7 +248,7 @@ async function takeFree(
     tx.set(ref, { count: used + 1, expireAt });
     tx.set(globalRef, { day, count: usedByAll + 1 });
     warnNearCap(use.cap, usedByAll + 1, use.daily.value());
-    return { taken: "ok", left: perIp - used - 1 };
+    return { taken: "ok", left: perIp - used - 1, visitor };
   });
 }
 
@@ -313,13 +318,14 @@ export const analyzeChatAi = onCall(
     let remaining: number | null = null;
     if (preview) {
       const raw = request.rawRequest;
-      const { taken } = await takeFree(
+      const { taken, visitor } = await takeFree(
         "preview",
         clientIp(raw.headers["x-forwarded-for"], raw.ip),
       );
       if (taken === "global") {
-        logger.warn("AI preview daily limit reached", {
+        logger.error("AI preview daily limit reached", {
           limit: aiPreviewDailyLimit.value(),
+          visitor,
         });
         // Not "preview_used": this visitor may not have had one yet.
         throw new HttpsError("resource-exhausted", "preview_cap");
@@ -439,13 +445,14 @@ export const coachChatAi = onCall(
       // A free reply reads what a free preview reads, no more.
       digest.transcript = digest.transcript.slice(-PREVIEW_TRANSCRIPT_CHARS);
       const raw = request.rawRequest;
-      const { taken, left } = await takeFree(
+      const { taken, left, visitor } = await takeFree(
         "coach",
         clientIp(raw.headers["x-forwarded-for"], raw.ip),
       );
       if (taken === "global") {
-        logger.warn("AI free coach daily limit reached", {
+        logger.error("AI free coach daily limit reached", {
           limit: aiFreeCoachDailyLimit.value(),
+          visitor,
         });
         throw new HttpsError("resource-exhausted", "preview_cap");
       }
