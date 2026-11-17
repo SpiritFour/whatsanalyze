@@ -51,11 +51,11 @@
       "english": {
         "tagline": "{year} WhatsApp Wrapped ist da",
         "headline": "Dein Chat, erzählt wie eine Geschichte",
-        "descriptionMobile": "WhatsAnalyze verwandelt deine exportierten WhatsApp-Daten in einen privaten Story-Recap. Erlebe deine geschäftigsten Stunden, witzigsten Chats und emotionalsten Peaks - ohne dass deine Nachrichten jemals den Browser verlassen.",
-        "descriptionDesktop": "WhatsAnalyze verwandelt deine exportierten WhatsApp-Daten in einen visuellen Rückblick - wie dein ganz persönliches \"Year in Review\". Sieh deine aktivsten Stunden, lustigsten Unterhaltungen und emotionalen Höhepunkte in einem Story-Format. Alle Insights werden lokal auf deinem Gerät verarbeitet - deine Nachrichten verlassen niemals den Browser.",
+        "descriptionMobile": "Mach aus einem WhatsApp-Export eine Story zum Durchtippen: wer mehr schreibt, euer Texting-Alter, die Rollen im Chat und eine Karte für deinen Status. Deine Nachrichten verlassen nie den Browser.",
+        "descriptionDesktop": "Mach aus einem WhatsApp-Export eine Story zum Durchtippen, wie dein eigener privater Jahresrückblick. Rate, wer mehr schreibt, finde euer Texting-Alter heraus und wer die Nachteule ist, und poste die Karte in deinem Status. Alles wird auf deinem Gerät berechnet; deine Nachrichten verlassen nie den Browser.",
         "highlights": [
           "Privatsphäre by Design",
-          "Unterstützt TXT oder ZIP",
+          "Karten für deinen Status",
           "Verschlüsselte Teil-Links",
           "Nur auf deinem Gerät gespeichert"
         ]
@@ -198,28 +198,28 @@
     },
     "features": [
       {
-        "title": "Chat-Dashboards",
-        "description": "Sieh, wer das Gespräch dominiert, wie sich Dynamiken verschieben und wie aktiv dein Jahr wirklich war."
+        "title": "Texting-Alter",
+        "description": "Schreibst du wie mit 19 oder wie dein Vater? Geschätzt aus Emojis, Satzzeichen und Nachrichtenlänge. Nur zum Spaß."
       },
       {
-        "title": "Sprachnachrichten & Anrufe",
-        "description": "Analysiere Redezeit, längste Aufnahmen und wer am häufigsten anruft."
+        "title": "Eine Rolle für alle",
+        "description": "Die Nachteule, der Geist, das Dauerfeuer: Alle im Chat bekommen den Titel, den sie sich verdient haben."
       },
       {
-        "title": "Zeitreise-Insights",
-        "description": "Finde heraus, wann du am aktivsten warst - und wann Funkstille herrschte."
+        "title": "Erst raten, dann sehen",
+        "description": "Wer schreibt mehr? Wer antwortet schneller? Erst raten, dann die Zahlen sehen, und an dein Gegenüber schicken, um zu sehen, ob es Bescheid weiß."
       },
       {
-        "title": "Wortschatz-Analysen",
-        "description": "Zähle Wörter, Emojis und Lieblingsausdrücke - entdecke den Stil deines Chats."
+        "title": "Rekorde des Jahres",
+        "description": "Eure längste Serie, eure längste Funkstille und der eine Tag, an dem der Chat nicht stillstand."
       },
       {
-        "title": "Medien-Statistiken",
-        "description": "Zähle Bilder, Links und Anhänge - ohne Inhalte offenzulegen."
+        "title": "Eure Chat-Uhr",
+        "description": "Nachteulen oder Frühaufsteher: Sieh, zu welcher Stunde euer Chat am aktivsten ist und wie viel nach Mitternacht geschrieben wird."
       },
       {
-        "title": "Chat-Charaktere",
-        "description": "Erkenne den Emoji-König, den Sprachnachricht-Romanautor oder den Geistertexter anhand von Aktivitätsmustern."
+        "title": "Wörter und Emojis",
+        "description": "Das Emoji-Podium und die Wörter, die ihr nicht lassen konntet."
       }
     ],
     "ai": {
@@ -250,6 +250,10 @@
         {
           "title": "End-to-end verschlüsselter Share-Link",
           "description": "Lass deine Chat Partner an dem Spaß teilhaben und schicke ihnen einen Link für dein WhatsAnalyze Wrapped!"
+        },
+        {
+          "title": "Eine Karte für deinen Status",
+          "description": "Speichere dein Wrapped als Bild im Format für WhatsApp-Status und Instagram-Storys. Du entscheidest, ob Namen darauf stehen."
         }
       ]
     },
@@ -285,8 +289,8 @@
         "description": "Deine Daten sind Ende-zu-Ende-verschlüsselt. Teile deine Wrapped-Ergebnisse sicher."
       },
       {
-        "title": "Ergebnisse herunterladen",
-        "description": "Lade deinen persönlichen Wrapped-Bericht in verschiedenen Formaten herunter"
+        "title": "Karten zum Teilen",
+        "description": "Speichere dein Wrapped als Bild im Format für den WhatsApp-Status oder eine Instagram-Story"
       }
     ]
   },
@@ -309,7 +313,10 @@
         "error": "Das hat nicht geklappt. Bitte prüfe die Adresse und versuche es erneut.",
         "note": "Eine E-Mail, danach löschen wir deine Adresse."
       }
-    }
+    },
+    "sample": "Beispiel-Wrapped ansehen",
+    "sampleFailed": "Das Beispiel konnte nicht geladen werden. Bitte versuch es noch einmal.",
+    "wrapping": "Dein Jahr wird verpackt …"
   },
   "exportGuide": {
     "title": "Wie exportierst du deinen WhatsApp-Chat?",
@@ -434,13 +441,286 @@
       },
       "nativeShareTitle": "WhatsAnalyze Wrapped",
       "nativeShareText": "Öffne unsere verschlüsselte WhatsApp-Wrapped-Story."
+    },
+    "story": {
+      "hint": "Tippen für weiter · halten für Pause",
+      "sampleBadge": "Beispiel-Chat",
+      "cover": {
+        "group": "{count} Leute, ein Chat",
+        "kicker": "Euer Jahr in Nachrichten"
+      },
+      "total": {
+        "eyebrow": "Dieses Jahr waren es",
+        "unit": "Nachrichten",
+        "perDay": "{count} pro Tag",
+        "daysTalked": "{count} Tage geschrieben",
+        "words": "{count} Wörter",
+        "pages": "Gedruckt wäre das ein Buch mit {count} Seiten."
+      },
+      "guess": {
+        "eyebrow": "Erst raten",
+        "skip": "Tippe auf deine Antwort oder rechts zum Überspringen",
+        "right": "Volltreffer 🎯",
+        "wrong": "Knapp daneben 👀",
+        "yours": "dein Tipp",
+        "talker": {
+          "question": "Wer hat die meisten Nachrichten geschickt?",
+          "verdict": "{name} hat {percent} % aller Nachrichten geschickt."
+        },
+        "emoji": {
+          "question": "Welches Emoji regiert diesen Chat?",
+          "verdict": "{emoji} wurde {count}-mal geschickt."
+        },
+        "replier": {
+          "question": "Wer antwortet schneller?",
+          "verdict": "{name} braucht meist {time} für eine Antwort.",
+          "starter": "{name} beginnt {percent} % der Gespräche."
+        },
+        "funny": {
+          "question": "Wer ist lustiger?",
+          "verdict": "{name} hat {other} {count}-mal zum Lachen gebracht.",
+          "verdictGroup": "{name} hat die meisten Lacher: {count}."
+        }
+      },
+      "time": {
+        "underMinute": "unter einer Minute",
+        "minutes": "{count} Min.",
+        "hours": "{count} Std.",
+        "days": "{count} Tage",
+        "hm": "{h} Std. {m} Min."
+      },
+      "clock": {
+        "eyebrow": "Eure Chat-Uhr",
+        "peak": "Hochbetrieb: {hour}",
+        "afterMidnight": "{percent} % zwischen Mitternacht und 5 Uhr",
+        "types": {
+          "nightOwls": "Zertifizierte Nachteulen 🦉",
+          "earlyBirds": "Frühaufsteher 🐦",
+          "lunchBreakers": "Mittagspausen-Tipper 🥪",
+          "eveningCrew": "Die Feierabend-Crew 🌆",
+          "officeHours": "Streng nach Bürozeiten 💼"
+        },
+        "latest": "Späteste Nacht: {time} Uhr am {date} ({name})"
+      },
+      "podium": {
+        "eyebrow": "Das Emoji-Podium"
+      },
+      "age": {
+        "eyebrow": "Texting-Alter",
+        "title": "Ihr schreibt, als wärt ihr …",
+        "older": "{name} ist der erwachsene Part in diesem Chat.",
+        "same": "Praktisch dieselbe Generation.",
+        "note": "Geschätzt aus Emojis, Satzzeichen und Nachrichtenlänge. Nur zum Spaß.",
+        "reasons": {
+          "emojiOld": "hält {emoji} die Treue",
+          "emojiYoung": "spricht fließend {emoji}",
+          "longMessages": "schreibt Absätze",
+          "shortMessages": "kurz und knapp",
+          "fullStops": "setzt einen Punkt am Ende.",
+          "noFullStops": "nie ein Punkt am Ende",
+          "capitals": "achtet auf Großschreibung",
+          "lowercase": "alles klein",
+          "ellipsis": "schreibt… mit… Pünktchen…",
+          "stretched": "heyyyy",
+          "slang": "ngl, fr",
+          "emojiRuns": "😂😂😂"
+        }
+      },
+      "records": {
+        "eyebrow": "Rekorde des Jahres",
+        "streak": {
+          "label": "Längste Serie",
+          "value": "{count} Tage am Stück",
+          "range": "{from} – {to}"
+        },
+        "silence": {
+          "label": "Längste Funkstille",
+          "days": "{count} Tag | {count} Tage",
+          "hours": "{count} Stunden",
+          "note": "Was war nach dem {date} los? 👀"
+        },
+        "busiest": {
+          "label": "Aktivster Tag",
+          "value": "{count} Nachrichten"
+        },
+        "marathon": {
+          "label": "Längstes Gespräch",
+          "note": "{count} Nachrichten am {date}, nie mehr als 20 Min. Pause"
+        }
+      },
+      "roles": {
+        "eyebrow": "Wer ist wer",
+        "title": "Jeder Chat hat seine Rollen",
+        "list": {
+          "nightOwl": {
+            "title": "Die Nachteule",
+            "line": "{value} % der Nachrichten kommen nach 23 Uhr. Schlaf ist optional."
+          },
+          "earlyBird": {
+            "title": "Der frühe Vogel",
+            "line": "{value} % der Nachrichten vor 9 Uhr. Warum?"
+          },
+          "novelist": {
+            "title": "Die Schreibmaschine",
+            "line": "{value} Wörter pro Nachricht. Kapitel statt Nachrichten."
+          },
+          "minimalist": {
+            "title": "Das Ein-Wort-Wunder",
+            "line": "{value} Wörter pro Nachricht. Alles gesagt. Gerade so."
+          },
+          "speedster": {
+            "title": "Der Antwort-Blitz",
+            "line": "Antwortet in {value}. Ist das Handy festgewachsen?"
+          },
+          "ghost": {
+            "title": "Der Geist",
+            "line": "Braucht {value} für eine Antwort. Irgendwann."
+          },
+          "starter": {
+            "title": "Der Eisbrecher",
+            "line": "Beginnt {value} % aller Gespräche."
+          },
+          "emojiPoet": {
+            "title": "Das Emoji-Orakel",
+            "line": "{value} Emojis pro Nachricht. Worte sind optional."
+          },
+          "machineGun": {
+            "title": "Das Dauerfeuer",
+            "line": "{value} Nachrichten am Stück, bevor jemand antworten kann."
+          },
+          "interrogator": {
+            "title": "Die Fragestunde",
+            "line": "{value} % der Nachrichten sind Fragen."
+          },
+          "comedian": {
+            "title": "Der Lachflash",
+            "line": "Lacht in {value} % der Nachrichten."
+          },
+          "paparazzi": {
+            "title": "Team Paparazzi",
+            "line": "{value} % Fotos, Videos und Sprachnachrichten."
+          }
+        }
+      },
+      "words": {
+        "eyebrow": "Lieblingswörter",
+        "title": "Diese Wörter konntet ihr nicht lassen"
+      },
+      "rhythm": {
+        "eyebrow": "Monat für Monat"
+      },
+      "card": {
+        "share": "Diese Karte teilen",
+        "saved": "Bild gespeichert.",
+        "failed": "Das Bild konnte nicht erstellt werden. Bitte versuch es noch einmal.",
+        "footer": "Mach deins kostenlos auf",
+        "messages": "Nachrichten",
+        "tiles": {
+          "daysTalked": "Tage geschrieben",
+          "topEmoji": "Top-Emoji",
+          "peakHour": "Hochbetrieb",
+          "streak": "Längste Serie",
+          "streakValue": "{count} Tage",
+          "topTexter": "Schreibt am meisten",
+          "textingAge": "Texting-Alter",
+          "sync": "Wellenlänge"
+        }
+      },
+      "finale": {
+        "eyebrow": "Das war's",
+        "title": "{year}, verpackt.",
+        "cardAlt": "Deine Wrapped-Karte zum Teilen",
+        "score": "Du hast {right} von {total} richtig geraten.",
+        "shareImage": "Mein Wrapped teilen",
+        "saveImage": "Bild speichern",
+        "hideNames": "Namen auf dem Bild verbergen",
+        "makeYours": "Eigenes Wrapped erstellen",
+        "sampleNote": "Das war ein Beispiel-Chat. Deiner ist nur einen Export entfernt.",
+        "shareText": "Unser WhatsApp Wrapped {year} 👀 Mach deins:",
+        "linkText": "Ich hab unseren Chat gewrapped 👀 Errätst du, wer mehr schreibt?",
+        "linkTextGroup": "Ich hab unseren Gruppenchat gewrapped 👀 Errätst du, wer am meisten schreibt?",
+        "whatsapp": "Story per WhatsApp senden",
+        "copyLink": "Link kopieren",
+        "uploadFailed": "Die Story wurde nicht hochgeladen, der Link öffnet sich deshalb noch nicht.",
+        "retry": "Nochmal versuchen",
+        "uploaded": "Erledigt. Der Link funktioniert jetzt."
+      },
+      "funniest": {
+        "eyebrow": "Der größte Lacher",
+        "title": "Die Nachricht, die den Chat gesprengt hat",
+        "note": "Darüber wurde dieses Jahr am meisten gelacht. Man musste dabei sein."
+      },
+      "chemistry": {
+        "eyebrow": "Chat-Chemie",
+        "title": "{names} sind zu",
+        "unit": "auf einer Wellenlänge",
+        "bands": {
+          "one": "Praktisch ein Gehirn",
+          "strong": "Ein starkes Signal",
+          "good": "Gute Vibes, kleine Verzögerung",
+          "opposites": "Gegensätze ziehen sich an"
+        },
+        "parts": {
+          "balance": "Wer schreibt",
+          "starts": "Wer anfängt",
+          "presence": "Dranbleiben",
+          "reply": "Antworttempo",
+          "laughs": "Zusammen lachen"
+        },
+        "note": "Aus wer schreibt, wer anfängt, Antwortzeiten, Lachern und Tagen im Chat. Nur zum Spaß."
+      },
+      "soft": {
+        "eyebrow": "Mit Gefühl gesagt",
+        "title": "Die weiche Seite",
+        "kinds": {
+          "love": "Ich liebe dich",
+          "miss": "Ich vermisse dich",
+          "sorry": "Sorry",
+          "night": "Gute Nacht",
+          "morning": "Guten Morgen"
+        }
+      },
+      "left": {
+        "eyebrow": "Auf gelesen gelassen",
+        "title": "Warten auf Antwort",
+        "burst": {
+          "label": "Doppeltext-Rekord",
+          "value": "{count} Nachrichten am Stück",
+          "note": "{name} am {date}, bevor jemand antwortete"
+        },
+        "waited": {
+          "label": "Die Frage, die am längsten wartete",
+          "note": "{name} wartete {time} auf eine Antwort von {other}"
+        }
+      },
+      "stuff": {
+        "eyebrow": "Alles andere",
+        "title": "Was ihr außer Worten geschickt habt",
+        "kinds": {
+          "photo": "Fotos",
+          "voice": "Sprachnachrichten",
+          "video": "Videos",
+          "sticker": "Sticker",
+          "gif": "GIFs",
+          "links": "Links",
+          "document": "Dateien",
+          "contact": "Kontakte",
+          "other": "Fotos & Medien"
+        },
+        "deleted": "{count} gelöschte Nachricht | {count} gelöschte Nachrichten",
+        "deletedBy": "{name} hat {count} davon gelöscht.",
+        "deletedAll": "Was gab es zu verbergen? 👀",
+        "edited": "{count} bearbeitete Nachricht | {count} bearbeitete Nachrichten",
+        "deletedOne": "{name} hat sie gelöscht.",
+        "deletedAllBy": "Alle von {name}."
+      }
     }
   },
   "wrappedAbout": "Über uns",
   "wrappedAboutPoints": "<p>Wir sind eine Gruppe von Freunden mit einer gemeinsamen Leidenschaft für Technologie und der Neugier auf menschliche Kommunikation. Nach Jahren intensiver WhatsApp-Nutzung wollten wir verstehen, wie sich unsere Gespräche und Beziehungen im Laufe der Zeit verändert haben.</p><p>Als Informatiker wollten wir mehr als nur rohe Statistiken - wir wollten ein Tool, das Privatsphäre und Neugier vereint. Daraus entstand WhatsAnalyze: eine vollständig lokale, datenschutzfreundliche Lösung, die aussagekräftige Einblicke liefert, ohne persönliche Informationen zu teilen.</p><p>Ein Tool von Nutzern, für Nutzer - transparent, sicher und mit Liebe zum Detail entwickelt.</p>",
   "wrappedSeo": {
     "title": "WhatsApp Wrapped {year} - Dein Jahresrückblick",
-    "description": "Hol dir dein WhatsApp Wrapped {year} kostenlos: überraschende Einblicke in eure Gespräche, Stoßzeiten, das Emoji-Podium und eure Schreibgewohnheiten.",
+    "description": "Dein WhatsApp Wrapped {year}, kostenlos: wer mehr schreibt, euer Texting-Alter, Chat-Rollen, Serien und Top-Emojis als Story mit Karten zum Teilen. Läuft im Browser.",
     "resultsTitle": "Deine WhatsApp-Wrapped-Story",
     "resultsDescription": "Sieh dir deinen persönlichen WhatsApp-Wrapped-Jahresrückblick an."
   }

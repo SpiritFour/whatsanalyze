@@ -39,13 +39,37 @@
     </label>
   </div>
 
+  <!-- No export at hand yet: the whole story, on a made-up chat. -->
+  <div class="mt-4 flex flex-col items-center gap-2">
+    <button
+      type="button"
+      class="sample-button"
+      :disabled="isLoading"
+      data-testid="wrapped-sample"
+      @click="openSample"
+    >
+      ▶ {{ $t("upload.sample") }}
+    </button>
+    <p v-if="sampleFailed" class="text-sm text-rose-300" role="alert">
+      {{ $t("upload.sampleFailed") }}
+    </p>
+  </div>
+
   <!-- A chat saved on this device: its Wrapped without a new upload -->
   <ClientOnly>
     <LibraryPicker :busy="isLoading" @open="openSaved" />
   </ClientOnly>
 
-  <div v-if="isLoading" class="bg-blue-500">
-    <pre>{{ $t("upload.loading") }}</pre>
+  <div
+    v-if="isLoading"
+    class="fixed inset-0 z-[60] flex flex-col items-center justify-center gap-4 bg-black/85 text-center"
+    role="status"
+  >
+    <span class="text-6xl loading-emoji">🎁</span>
+    <p class="text-xl font-extrabold text-white">
+      {{ $t("upload.wrapping") }}
+    </p>
+    <p class="text-sm text-gray-300">{{ $t("upload.noServerUpload") }}</p>
   </div>
 
   <WrappedSubscriptionPaywall
@@ -66,6 +90,7 @@ import { parseChatFile } from "~/composables/useChatTool";
 import { useLibrary, type SavedChat } from "~/composables/useLibrary";
 import { getTargetYear } from "~/utils/wrapped/dateUtils";
 import { WRAPPED_PAYWALL_ENABLED } from "~/config/wrapped";
+import { SAMPLE_CHAT_URL } from "~/utils/ai/sample";
 const localePath = useLocalePath();
 const library = useLibrary();
 
@@ -73,7 +98,8 @@ const statsStore = useStatsStore();
 const subscriptionStore = useSubscriptionStore();
 const uploadAccessStore = useUploadAccessStore();
 
-const { result, isLoading } = storeToRefs(statsStore);
+const { result, isLoading, isSample } = storeToRefs(statsStore);
+const sampleFailed = ref(false);
 const { isSubscriptionValid } = storeToRefs(subscriptionStore);
 const showPaywall = ref(false);
 
@@ -132,6 +158,34 @@ const handleFile = async (e: Event): Promise<void> => {
 };
 
 /**
+ * The sample chat's story (Emma and Leo, made up from start to finish). It
+ * is nobody's upload: it is not saved on the device, and it does not spend
+ * the day's free analysis.
+ */
+async function openSample() {
+  sampleFailed.value = false;
+  statsStore.$reset();
+  isLoading.value = true;
+  analyticsWrapped.sampleOpened();
+  try {
+    const response = await fetch(SAMPLE_CHAT_URL);
+    if (!response.ok) throw new Error(`sample_http_${response.status}`);
+    const file = new File([await response.text()], "sample-chat.txt", {
+      type: "text/plain",
+    });
+    result.value = (await sendFile(file)) ?? undefined;
+    if (!result.value) throw new Error("sample_empty");
+    isSample.value = true;
+    navigateTo({ path: localePath("/wrapped/results") });
+  } catch (err) {
+    console.error("Failed to open the sample story:", err);
+    sampleFailed.value = true;
+  } finally {
+    isLoading.value = false;
+  }
+}
+
+/**
  * Saved on this device by default, like every upload. The story above came
  * from Wrapped's own parser; what is saved is the chat as every other page
  * reads it, so it opens in all of them.
@@ -185,3 +239,39 @@ async function openSaved(id: string) {
   }
 }
 </script>
+
+<style scoped>
+.sample-button {
+  padding: 0.6rem 1.2rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(214, 255, 63, 0.6);
+  background: rgba(214, 255, 63, 0.08);
+  color: #d6ff3f;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.sample-button:hover {
+  background: rgba(214, 255, 63, 0.18);
+}
+
+.sample-button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.loading-emoji {
+  animation: loading-wobble 0.9s ease-in-out infinite alternate;
+}
+
+@keyframes loading-wobble {
+  from {
+    transform: rotate(-12deg) scale(0.95);
+  }
+  to {
+    transform: rotate(12deg) scale(1.1);
+  }
+}
+</style>

@@ -17,30 +17,16 @@
     </div>
 
     <!-- The visitor's own chat, saved on this device: say so, with the way
-       out (a shared story is someone else's, and isn't saved here). -->
+       out (a shared story is someone else's, and isn't saved here; the
+       sample is nobody's). -->
     <LibraryStatus
-      v-if="result && !shareLoading && !isSharedStory"
+      v-if="result && !shareLoading && !isSharedStory && !isSample"
       :chat-id="activeId"
       surface="wrapped"
       class="mb-4"
     />
 
-    <WrappedStoryCarousel v-if="result" :duration="6000">
-      <WrappedStoriesIntro1 />
-      <WrappedStoriesIntro2 />
-
-      <WrappedStoriesEmoji1 />
-      <WrappedStoriesEmoji2 />
-      <WrappedStoriesEmoji3 />
-
-      <WrappedStoriesWords1 />
-      <WrappedStoriesWords2 />
-      <WrappedStoriesWords3 />
-
-      <WrappedStoriesConversation1 />
-      <WrappedStoriesConversation2 />
-      <WrappedStoriesShareInvite />
-    </WrappedStoryCarousel>
+    <WrappedStoryCarousel v-if="result" :slides="slides" :duration="6500" />
 
     <!-- Without an analysis the carousel used to play all eleven slides empty —
        an emoji card with two quote marks and nothing between them, a dangling
@@ -66,14 +52,32 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, onMounted, provide, reactive, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
 import { useStatsStore } from "~/stores/wrapped/stats";
 import { useUserDataStore } from "~/stores/wrapped/userDataStore";
-import { parseShareInfo } from "~/utils/wrapped/sharing/param";
+import { hasShareInfo, parseShareInfo } from "~/utils/wrapped/sharing/param";
 import { useI18n } from "vue-i18n";
 import { analyticsWrapped } from "~/composables/useAnalytics";
 import { useLibrary } from "~/composables/useLibrary";
+import { STORY_CONTEXT, type StorySlide } from "~/utils/wrapped/story";
+import Cover from "~/components/wrapped/Stories/Cover.vue";
+import FirstMessages from "~/components/wrapped/Stories/FirstMessages.vue";
+import Total from "~/components/wrapped/Stories/Total.vue";
+import Guess from "~/components/wrapped/Stories/Guess.vue";
+import Clock from "~/components/wrapped/Stories/Clock.vue";
+import Podium from "~/components/wrapped/Stories/Podium.vue";
+import TextingAge from "~/components/wrapped/Stories/TextingAge.vue";
+import Records from "~/components/wrapped/Stories/Records.vue";
+import Roles from "~/components/wrapped/Stories/Roles.vue";
+import Words from "~/components/wrapped/Stories/Words.vue";
+import Rhythm from "~/components/wrapped/Stories/Rhythm.vue";
+import Funniest from "~/components/wrapped/Stories/Funniest.vue";
+import SoftSide from "~/components/wrapped/Stories/SoftSide.vue";
+import LeftOnRead from "~/components/wrapped/Stories/LeftOnRead.vue";
+import Chemistry from "~/components/wrapped/Stories/Chemistry.vue";
+import Stuff from "~/components/wrapped/Stories/Stuff.vue";
+import Finale from "~/components/wrapped/Stories/Finale.vue";
 
 definePageMeta({
   layout: "wrapped",
@@ -83,7 +87,7 @@ const route = useRoute();
 const router = useRouter();
 
 const statsStore = useStatsStore();
-const { result } = storeToRefs(statsStore);
+const { result, isSample } = storeToRefs(statsStore);
 const userDataStore = useUserDataStore();
 const { activeId } = useLibrary();
 
@@ -114,13 +118,9 @@ const isSharedStory = computed(
   () => !!buildSearchFromHash() || !!route.query.key,
 );
 
-/** The share link's uuid/iv/key, which live in the URL fragment. */
-const buildSearchFromHash = () => {
-  const params = new URLSearchParams(route.hash.replace(/^#/, ""));
-  return params.get("uuid") && params.get("iv") && params.get("key")
-    ? params.toString()
-    : null;
-};
+/** The share link's id and key, which live in the URL fragment. */
+const buildSearchFromHash = () =>
+  hasShareInfo(route.hash) ? route.hash : null;
 
 /**
  * Links shared before the key moved to the fragment carry it in the query,
@@ -145,6 +145,97 @@ const moveLegacyKeyToHash = () => {
   return true;
 };
 
+provide(STORY_CONTEXT, {
+  isShared: isSharedStory,
+  isSample: computed(() => isSample.value),
+  guesses: reactive({}),
+});
+
+/**
+ * The story, built from what this chat has to tell. A slide whose numbers
+ * are missing is left out instead of shown empty: a chat without emoji gets
+ * no podium, a note-to-self no "who texts more", and a story shared before
+ * the 2026 numbers existed plays the slides it has data for.
+ */
+const slides = computed<StorySlide[]>(() => {
+  const data = result.value;
+  if (!data) return [];
+  const highlights = data.getHighlights ?? null;
+  const people = highlights?.people ?? [];
+  const emojis = data.getMostUsedEmojis?.globalTop5Emojis ?? [];
+  const months = Object.values(data.getNumberOfMessagesPerMonth ?? {});
+  const list: StorySlide[] = [{ name: "Cover", component: Cover }];
+  const add = (name: string, component: StorySlide["component"], extra = {}) =>
+    list.push({ name, component, ...extra });
+
+  if (Object.keys(data.getFirstMessages ?? {}).length) {
+    add("FirstMessages", FirstMessages);
+  }
+  if (highlights) {
+    add("Total", Total);
+    if (people.length > 1 && people[0].messages > people[1].messages) {
+      add("GuessTalker", Guess, { props: { kind: "talker" } });
+    }
+    add("Clock", Clock);
+  }
+  if (emojis.length >= 3 && emojis[0].count > emojis[1].count) {
+    add("GuessEmoji", Guess, { props: { kind: "emoji" } });
+  }
+  if (emojis.length) add("Podium", Podium);
+  if (highlights) {
+    // Who's funnier, then the joke: only when the laughs have a clear winner.
+    const laughs = people
+      .map((person) => person.laughsCaused ?? 0)
+      .sort((a, b) => b - a);
+    if (people.length > 1 && laughs[0] >= 5 && laughs[0] > laughs[1]) {
+      add("GuessFunny", Guess, { props: { kind: "funny" } });
+    }
+    if (highlights.funniest) {
+      add("Funniest", Funniest, { duration: 8000 });
+    }
+    if (people.some((person) => person.age !== null)) {
+      // The slides with a card to share get the time to reach for it.
+      add("TextingAge", TextingAge, { duration: 12000 });
+    }
+    const said = people.reduce(
+      (sum, person) =>
+        sum + Object.values(person.phrases ?? {}).reduce((a, b) => a + b, 0),
+      0,
+    );
+    if (said >= 5) add("SoftSide", SoftSide, { duration: 9000 });
+    add("Records", Records, { duration: 9000 });
+    if (people.filter((person) => person.medianReplyMin !== null).length > 1) {
+      add("GuessReplier", Guess, { props: { kind: "replier" } });
+    }
+    if (highlights.burst || highlights.waited) {
+      add("LeftOnRead", LeftOnRead, { duration: 9000 });
+    }
+    if (highlights.chemistry) {
+      add("Chemistry", Chemistry, { duration: 12000 });
+    }
+    if (people.some((person) => person.role)) {
+      add("Roles", Roles, { duration: 12000 });
+    }
+    if (people.some((person) => person.words3.length)) {
+      add("Words", Words, { duration: 8000 });
+    }
+    const stuff = highlights.stuff;
+    if (stuff) {
+      const sent = Object.entries(stuff)
+        .filter(([kind]) => kind !== "deleted" && kind !== "edited")
+        .reduce((sum, [, count]) => sum + count, 0);
+      if (sent >= 5 || stuff.deleted > 0) {
+        add("Stuff", Stuff, { duration: 8000 });
+      }
+    }
+  }
+  if (months.some((perMonth) => Object.keys(perMonth).length)) {
+    add("Rhythm", Rhythm, { duration: 8000 });
+  }
+  add("Finale", Finale);
+  return list;
+});
+
 const loadSharedStory = async () => {
   // The replace re-triggers the watcher with the key in the hash.
   if (moveLegacyKeyToHash()) {
@@ -165,6 +256,8 @@ const loadSharedStory = async () => {
     const shareInfo = parseShareInfo(queryString);
     const loadedData = await userDataStore.loadData(shareInfo);
     result.value = loadedData;
+    // Whatever was open in this tab before, this is somebody's real chat.
+    isSample.value = false;
   } catch (error) {
     console.error("Failed to load shared story", error);
     shareErrorKey.value = "results.status.decryptError";
@@ -186,33 +279,3 @@ onMounted(() => {
   analyticsWrapped.resultsViewed(!!(buildSearchFromHash() || route.query.key));
 });
 </script>
-
-<style scoped>
-.chat-bubble {
-  @apply max-w-md w-fit bg-green-700 bg-opacity-70 p-3 rounded-lg shadow-md flex flex-col;
-}
-
-.chat-bubble .author {
-  @apply text-sm font-semibold text-gray-800 mb-1;
-}
-
-.chat-bubble .time {
-  @apply text-xs text-gray-800;
-}
-
-.chat-bubble .message {
-  @apply text-sm text-gray-900;
-}
-
-h2 {
-  @apply text-8xl;
-}
-
-strong {
-  @apply text-orange-500 italic;
-}
-
-h3 {
-  @apply text-[200px];
-}
-</style>
