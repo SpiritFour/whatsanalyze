@@ -149,6 +149,45 @@ test.describe("the Wrapped story", () => {
     );
   });
 
+  test("still copies the link where the clipboard API is refused", async ({
+    page,
+  }) => {
+    const docs = await stubShareStore(page.context());
+    // As some in-app browsers do.
+    await page.addInitScript(() => {
+      navigator.clipboard.writeText = () =>
+        Promise.reject(
+          new DOMException("Write permission denied.", "NotAllowedError"),
+        );
+    });
+
+    await openOwnStory(page);
+    const copy = page.getByTestId("copy-link");
+    await stepTo(page, copy);
+    // What the older copy command copies: the selected text of its field.
+    await page.evaluate(() => {
+      window.copiedText = new Promise((done) =>
+        document.addEventListener(
+          "copy",
+          (event) => {
+            const field = event.target;
+            done(field.value.slice(field.selectionStart, field.selectionEnd));
+          },
+          { once: true },
+        ),
+      );
+    });
+    await copy.click();
+
+    expect(await page.evaluate(() => window.copiedText)).toMatch(
+      /\/wrapped\/results\/\?.*#s=[\w-]+\.[\w-]+\.[\w-]+$/,
+    );
+    await expect(
+      page.getByText("Secure link copied to your clipboard."),
+    ).toBeVisible();
+    expect(docs.size).toBe(1);
+  });
+
   test("says so when the story could not be uploaded, and tries again", async ({
     page,
   }) => {

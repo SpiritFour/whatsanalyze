@@ -297,20 +297,31 @@ const handleWhatsapp = () => {
   );
 };
 
+/**
+ * The clipboard API first. Some in-app browsers, the ones links from other
+ * apps open in, refuse it; the older copy command still works there, inside
+ * the same tap.
+ */
 const copyToClipboard = async (text: string) => {
   if (!import.meta.client) return;
-  if (navigator.clipboard?.writeText) {
+  try {
     await navigator.clipboard.writeText(text);
     return;
+  } catch (error) {
+    console.warn("Clipboard API refused, copying the older way", error);
   }
   const textarea = document.createElement("textarea");
   textarea.value = text;
+  // Read-only, so iOS does not raise the keyboard for it.
+  textarea.setAttribute("readonly", "");
   textarea.style.position = "fixed";
   textarea.style.opacity = "0";
   document.body.appendChild(textarea);
   textarea.select();
-  document.execCommand("copy");
+  textarea.setSelectionRange(0, text.length);
+  const copied = document.execCommand("copy");
   document.body.removeChild(textarea);
+  if (!copied) throw new Error("The browser refused to copy the link.");
 };
 
 /** Copied first, inside the tap, which Safari asks of the clipboard. */
