@@ -585,9 +585,11 @@ test.describe("wrapped", () => {
       await page.mouse.click(box.x + box.width - 10, box.y + box.height / 2);
     }
 
-    // Near the left edge, where a "previous slide" overlay used to sit.
+    // Near the left edge, where a "previous slide" overlay used to sit. A
+    // locator click, which waits for the button to finish sliding in: the
+    // closing slide's buttons enter one after another.
     const box = await again.boundingBox();
-    await page.mouse.click(box.x + 12, box.y + box.height / 2);
+    await again.click({ position: { x: 12, y: box.height / 2 } });
     await expect(page).toHaveURL(/\/wrapped\/$/);
   });
 

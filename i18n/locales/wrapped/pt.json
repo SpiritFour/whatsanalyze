@@ -51,11 +51,11 @@
       "english": {
         "tagline": "Chegou o WhatsApp Wrapped {year}",
         "headline": "O seu chat, contado como uma história",
-        "descriptionMobile": "Nada como reviver as conversas que marcaram o teu ano. O WhatsAnalyze Wrapped reconstrói os teus chats privados do WhatsApp num resumo imersivo com insights focados na privacidade, comentários com IA e visuais prontos a exportar.",
-        "descriptionDesktop": "Nada como reviver as conversas que marcaram o teu ano. O WhatsAnalyze Wrapped reconstrói os teus chats privados do WhatsApp num resumo imersivo com insights focados na privacidade, comentários com IA e visuais prontos a exportar.",
+        "descriptionMobile": "Transforma uma exportação do WhatsApp numa história para ir tocando: quem escreve mais, a vossa idade a escrever, os papéis da conversa e um cartão para o teu estado. As tuas mensagens nunca saem do navegador.",
+        "descriptionDesktop": "Transforma uma exportação do WhatsApp numa história para ir tocando, como a tua própria retrospetiva privada do ano. Adivinha quem escreve mais, descobre a vossa idade a escrever e quem é a coruja, e publica o cartão no teu estado. Tudo é calculado no teu dispositivo; as tuas mensagens nunca saem do navegador.",
         "highlights": [
           "Privado por conceção",
-          "Suporte a TXT ou ZIP",
+          "Cartões para o teu estado",
           "Links de partilha encriptados",
           "Salvo só no seu dispositivo"
         ]
@@ -198,28 +198,28 @@
     },
     "features": [
       {
-        "title": "Dashboards de resumo do chat",
-        "description": "Vê quem conduz a conversa, a quota de fala e como o impulso muda ao longo do ano."
+        "title": "Idade a escrever",
+        "description": "Escreves como alguém de 19 anos ou como o teu pai? Estimada a partir dos teus emojis, da pontuação e do tamanho das mensagens. Só por diversão."
       },
       {
-        "title": "Notas de voz & chamadas",
-        "description": "Quantifica o tempo de fala, identifica quem grava por mais tempo e destaca quem inicia sempre as chamadas."
+        "title": "Um papel para cada pessoa",
+        "description": "A coruja, o fantasma, a metralhadora: cada pessoa da conversa recebe o título que mereceu."
       },
       {
-        "title": "Insights de máquina do tempo",
-        "description": "Aponta semanas de pico, horas mais movimentadas e pausas inesperadas para reviver os altos (e brincar com os baixos)."
+        "title": "Adivinha antes de ver",
+        "description": "Quem escreve mais? Quem responde mais depressa? Primeiro adivinha, depois vê os números, e envia à outra pessoa para ver se ela sabe."
       },
       {
-        "title": "Mergulhos no vocabulário",
-        "description": "Mostra contagens de palavras, séries de emojis e muletilhas por pessoa para capturar o dialecto único do teu chat."
+        "title": "Recordes do ano",
+        "description": "A vossa maior sequência, o maior silêncio e o dia em que a conversa nunca parou."
       },
       {
-        "title": "Detalhe de média",
-        "description": "Conta cada imagem, anexo e link sem expor o conteúdo — apenas a história que contam."
+        "title": "O relógio da conversa",
+        "description": "Corujas ou madrugadores: vê a hora de ponta da conversa e quanto se envia depois da meia-noite."
       },
       {
-        "title": "Arquétipos de chat",
-        "description": "Rotula o Rei do Emoji, o Romancista das Notas de Voz ou o Fantasma das Mensagens com base em limiares normalizados de atividade."
+        "title": "Palavras e emojis",
+        "description": "O pódio dos emojis e as palavras que cada pessoa não conseguia deixar de dizer."
       }
     ],
     "ai": {
@@ -250,6 +250,10 @@
         {
           "title": "Link de compartilhamento criptografado de ponta a ponta",
           "description": "Deixe seus parceiros de chat participarem da diversão enviando um link para o seu WhatsAnalyze Wrapped!"
+        },
+        {
+          "title": "Um cartão para o teu estado",
+          "description": "Guarda o teu Wrapped como imagem no formato dos estados do WhatsApp e das stories do Instagram. Tu decides se os nomes aparecem."
         }
       ]
     },
@@ -285,8 +289,8 @@
         "description": "Os teus dados são encriptados de ponta a ponta. Partilha o teu Wrapped sem preocupações de privacidade"
       },
       {
-        "title": "Descarregar resultados",
-        "description": "Obtém o teu relatório personalizado em vários formatos para partilha fácil"
+        "title": "Cartões para partilhar",
+        "description": "Guarda o teu Wrapped como imagem feita para um estado do WhatsApp ou uma story do Instagram"
       }
     ]
   },
@@ -309,7 +313,10 @@
         "error": "Não deu certo. Confira o endereço e tente de novo.",
         "note": "Um único e-mail, depois apagamos seu endereço."
       }
-    }
+    },
+    "sample": "Ver um Wrapped de exemplo",
+    "sampleFailed": "Não foi possível carregar o exemplo. Tenta outra vez.",
+    "wrapping": "A embrulhar o teu ano…"
   },
   "exportGuide": {
     "title": "Como exportar o teu chat do WhatsApp?",
@@ -434,13 +441,286 @@
       },
       "nativeShareTitle": "WhatsAnalyze Wrapped",
       "nativeShareText": "Abre a nossa história WhatsApp Wrapped encriptada."
+    },
+    "story": {
+      "hint": "Toca para continuar · mantém premido para pausar",
+      "sampleBadge": "Conversa de exemplo",
+      "cover": {
+        "group": "{count} pessoas, uma conversa",
+        "kicker": "O ano em mensagens"
+      },
+      "total": {
+        "eyebrow": "Este ano foram enviadas",
+        "unit": "mensagens",
+        "perDay": "{count} por dia",
+        "daysTalked": "{count} dias de conversa",
+        "words": "{count} palavras",
+        "pages": "Impresso, daria um livro de {count} páginas."
+      },
+      "guess": {
+        "eyebrow": "Primeiro adivinha",
+        "skip": "Toca na tua resposta, ou na margem direita para saltar",
+        "right": "Em cheio! 🎯",
+        "wrong": "Quase 👀",
+        "yours": "a tua resposta",
+        "talker": {
+          "question": "Quem enviou mais mensagens?",
+          "verdict": "{name} enviou {percent}% das mensagens."
+        },
+        "emoji": {
+          "question": "Que emoji reinou nesta conversa?",
+          "verdict": "{emoji} foi enviado {count} vezes."
+        },
+        "replier": {
+          "question": "Quem responde mais depressa?",
+          "verdict": "{name} costuma demorar {time} a responder.",
+          "starter": "{name} começa {percent}% das conversas."
+        },
+        "funny": {
+          "question": "Quem faz rir mais?",
+          "verdict": "{name} fez {other} rir {count} vezes.",
+          "verdictGroup": "{name} arrancou mais gargalhadas: {count}."
+        }
+      },
+      "time": {
+        "underMinute": "menos de um minuto",
+        "minutes": "{count} min",
+        "hours": "{count} h",
+        "days": "{count} dias",
+        "hm": "{h} h {m} min"
+      },
+      "clock": {
+        "eyebrow": "O relógio da conversa",
+        "peak": "Hora de ponta: {hour}",
+        "afterMidnight": "{percent}% enviadas entre a meia-noite e as 5h",
+        "types": {
+          "nightOwls": "Corujas certificadas 🦉",
+          "earlyBirds": "Madrugadores 🐦",
+          "lunchBreakers": "Conversa da hora de almoço 🥪",
+          "eveningCrew": "A equipa do fim do dia 🌆",
+          "officeHours": "Estritamente em horário de expediente 💼"
+        },
+        "latest": "A noite mais tardia: {time}, {date} ({name})"
+      },
+      "podium": {
+        "eyebrow": "O pódio dos emojis"
+      },
+      "age": {
+        "eyebrow": "Idade a escrever",
+        "title": "Escreves como se tivesses…",
+        "older": "{name} é a pessoa adulta desta conversa.",
+        "same": "A mesma geração, basicamente.",
+        "note": "Estimada a partir de emojis, pontuação e tamanho das mensagens. Só por diversão.",
+        "reasons": {
+          "emojiOld": "ainda fiel a {emoji}",
+          "emojiYoung": "fala {emoji} fluentemente",
+          "longMessages": "escreve parágrafos",
+          "shortMessages": "curto e direto",
+          "fullStops": "termina com ponto final.",
+          "noFullStops": "nunca um ponto final",
+          "capitals": "cuida das maiúsculas",
+          "lowercase": "tudo em minúsculas",
+          "ellipsis": "escreve… assim…",
+          "stretched": "oláááá",
+          "slang": "ngl, fr",
+          "emojiRuns": "😂😂😂"
+        }
+      },
+      "records": {
+        "eyebrow": "Recordes do ano",
+        "streak": {
+          "label": "Maior sequência",
+          "value": "{count} dias seguidos",
+          "range": "{from} – {to}"
+        },
+        "silence": {
+          "label": "Maior silêncio",
+          "days": "{count} dia | {count} dias",
+          "hours": "{count} horas",
+          "note": "O que aconteceu depois de {date}? 👀"
+        },
+        "busiest": {
+          "label": "Dia mais ativo",
+          "value": "{count} mensagens"
+        },
+        "marathon": {
+          "label": "Conversa mais longa",
+          "note": "{count} mensagens a {date}, sem pausas acima de 20 min"
+        }
+      },
+      "roles": {
+        "eyebrow": "Quem é quem",
+        "title": "Toda a conversa tem os seus papéis",
+        "list": {
+          "nightOwl": {
+            "title": "A coruja",
+            "line": "{value}% das mensagens depois das 23h. Dormir é opcional."
+          },
+          "earlyBird": {
+            "title": "O madrugador",
+            "line": "{value}% das mensagens antes das 9h. Porquê?"
+          },
+          "novelist": {
+            "title": "O romance em capítulos",
+            "line": "{value} palavras por mensagem. Capítulos, não mensagens."
+          },
+          "minimalist": {
+            "title": "O monossílabo",
+            "line": "{value} palavras por mensagem. Diz tudo. Por pouco."
+          },
+          "speedster": {
+            "title": "O relâmpago",
+            "line": "Responde em {value}. O telemóvel está colado à mão?"
+          },
+          "ghost": {
+            "title": "O fantasma",
+            "line": "Demora {value} a responder. Um dia."
+          },
+          "starter": {
+            "title": "O quebra-gelo",
+            "line": "Começa {value}% das conversas."
+          },
+          "emojiPoet": {
+            "title": "Poesia em emojis",
+            "line": "{value} emojis por mensagem. As palavras são opcionais."
+          },
+          "machineGun": {
+            "title": "A metralhadora",
+            "line": "{value} mensagens seguidas antes de alguém conseguir responder."
+          },
+          "interrogator": {
+            "title": "O interrogatório",
+            "line": "{value}% das mensagens são perguntas."
+          },
+          "comedian": {
+            "title": "As gargalhadas gravadas",
+            "line": "Ri em {value}% das mensagens."
+          },
+          "paparazzi": {
+            "title": "O paparazzi",
+            "line": "{value}% fotos, vídeos e áudios."
+          }
+        }
+      },
+      "words": {
+        "eyebrow": "Palavras de assinatura",
+        "title": "As palavras que não saíam da conversa"
+      },
+      "rhythm": {
+        "eyebrow": "Mês a mês"
+      },
+      "card": {
+        "share": "Partilhar este cartão",
+        "saved": "Imagem guardada.",
+        "failed": "Não foi possível criar a imagem. Tenta outra vez.",
+        "footer": "Faz o teu grátis em",
+        "messages": "mensagens",
+        "tiles": {
+          "daysTalked": "Dias de conversa",
+          "topEmoji": "Emoji top",
+          "peakHour": "Hora de ponta",
+          "streak": "Maior sequência",
+          "streakValue": "{count} dias",
+          "topTexter": "Quem mais escreve",
+          "textingAge": "Idade a escrever",
+          "sync": "Em sintonia"
+        }
+      },
+      "finale": {
+        "eyebrow": "E é tudo",
+        "title": "{year}, embrulhado.",
+        "cardAlt": "O teu cartão Wrapped, pronto a partilhar",
+        "score": "Acertaste {right} de {total}.",
+        "shareImage": "Partilhar o meu Wrapped",
+        "saveImage": "Guardar imagem",
+        "hideNames": "Ocultar nomes na imagem",
+        "makeYours": "Criar o meu Wrapped",
+        "sampleNote": "Era uma conversa de exemplo. A tua está a uma exportação de distância.",
+        "shareText": "O nosso WhatsApp Wrapped {year} 👀 Faz o teu:",
+        "linkText": "Fiz o Wrapped da nossa conversa 👀 Adivinhas quem escreve mais?",
+        "linkTextGroup": "Fiz o Wrapped do nosso grupo 👀 Adivinhas quem escreve mais?",
+        "whatsapp": "Enviar a história pelo WhatsApp",
+        "copyLink": "Copiar ligação",
+        "uploadFailed": "A história não foi carregada, por isso a ligação ainda não abre.",
+        "retry": "Tentar de novo",
+        "uploaded": "Feito. A ligação já funciona."
+      },
+      "funniest": {
+        "eyebrow": "A maior gargalhada",
+        "title": "A mensagem que rebentou com a conversa",
+        "note": "O que mais fez rir este ano. Era preciso estar lá."
+      },
+      "chemistry": {
+        "eyebrow": "Química da conversa",
+        "title": "{names} estão",
+        "unit": "em sintonia",
+        "bands": {
+          "one": "Praticamente um só cérebro",
+          "strong": "Um sinal forte",
+          "good": "Boa vibe, um pouco de atraso",
+          "opposites": "Os opostos atraem-se"
+        },
+        "parts": {
+          "balance": "Quem escreve",
+          "starts": "Quem começa",
+          "presence": "Estar presente",
+          "reply": "Rapidez",
+          "laughs": "Rir juntos"
+        },
+        "note": "Com base em quem escreve, quem começa, tempos de resposta, gargalhadas e dias de conversa. Só por diversão."
+      },
+      "soft": {
+        "eyebrow": "Dito com o coração",
+        "title": "O lado meigo",
+        "kinds": {
+          "love": "Amo-te",
+          "miss": "Tenho saudades",
+          "sorry": "Desculpa",
+          "night": "Boa noite",
+          "morning": "Bom dia"
+        }
+      },
+      "left": {
+        "eyebrow": "Visto e sem resposta",
+        "title": "À espera de resposta",
+        "burst": {
+          "label": "Recorde de mensagens seguidas",
+          "value": "{count} mensagens seguidas",
+          "note": "{name} a {date}, antes de alguém responder"
+        },
+        "waited": {
+          "label": "A pergunta que mais esperou",
+          "note": "{name} esperou {time} pela resposta de {other}"
+        }
+      },
+      "stuff": {
+        "eyebrow": "Tudo o resto",
+        "title": "O que enviaram além de palavras",
+        "kinds": {
+          "photo": "fotos",
+          "voice": "áudios",
+          "video": "vídeos",
+          "sticker": "stickers",
+          "gif": "GIFs",
+          "links": "links",
+          "document": "ficheiros",
+          "contact": "contactos",
+          "other": "fotos e ficheiros"
+        },
+        "deleted": "{count} mensagem apagada | {count} mensagens apagadas",
+        "deletedBy": "{name} apagou {count}.",
+        "deletedAll": "O que havia a esconder? 👀",
+        "edited": "{count} mensagem editada | {count} mensagens editadas",
+        "deletedOne": "Foi {name} que a apagou.",
+        "deletedAllBy": "Todas apagadas por {name}."
+      }
     }
   },
   "wrappedAbout": "Sobre nós",
   "wrappedAboutPoints": "<p>Somos um grupo de amigos com uma paixão partilhada pela tecnologia e curiosidade sobre a comunicação humana. Depois de anos de uso intenso do WhatsApp, quisemos compreender como as nossas conversas e relações mudaram ao longo do tempo.</p><p>Enquanto informáticos, queríamos mais do que estatísticas brutas — queríamos uma ferramenta que unisse privacidade e curiosidade. Assim nasceu o WhatsAnalyze: uma solução totalmente local, com a privacidade primeiro, que fornece insights relevantes sem partilhar informações pessoais.</p><p>Uma ferramenta feita por utilizadores, para utilizadores — transparente, segura e criada com cuidado.</p>",
   "wrappedSeo": {
     "title": "WhatsApp Wrapped {year} - O teu ano em resumo",
-    "description": "Recebe grátis o teu WhatsApp Wrapped {year}: dados surpreendentes sobre os teus diálogos, horas de pico, pódio de emojis e hábitos de escrita.",
+    "description": "O teu WhatsApp Wrapped {year}, grátis: quem escreve mais, idade a escrever, papéis, sequências e emojis top numa história com cartões para partilhar. No teu navegador.",
     "resultsTitle": "A tua história do WhatsApp Wrapped",
     "resultsDescription": "Vê o teu resumo do ano personalizado do WhatsApp Wrapped."
   }

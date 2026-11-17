@@ -3,6 +3,7 @@ import type {
   EmojiAnalysis,
   EmojiOverTimeAnalysis,
   FirstMessageAnalytics,
+  Highlights,
   Message,
   MessagesPerMonth,
   TimeData,
@@ -20,6 +21,7 @@ import { getFirstMessages } from "~/utils/wrapped/parsing/analyzer/firstMessages
 import { getEmojiOverTime } from "~/utils/wrapped/parsing/analyzer/emojiOverTimeAnalyzer";
 import { getTargetYear } from "~/utils/wrapped/dateUtils";
 import { isSystemMessage } from "~/utils/systemMessages";
+import { getHighlights } from "~/utils/wrapped/highlights";
 
 export interface ParserResult {
   getMostUsedEmojis: EmojiAnalysis;
@@ -29,6 +31,11 @@ export interface ParserResult {
   getActiveDates: ActiveDates;
   getFirstMessages: FirstMessageAnalytics;
   getEmojiOverTime: EmojiOverTimeAnalysis;
+  /**
+   * The 2026 story's numbers. Missing from a story shared before they
+   * existed, which then plays the slides that do without them.
+   */
+  getHighlights?: Highlights | null;
 }
 
 class Parser {
@@ -43,6 +50,7 @@ class Parser {
       getActiveDates: z.custom<ActiveDates>(),
       getFirstMessages: z.custom<FirstMessageAnalytics>(),
       getEmojiOverTime: z.custom<EmojiOverTimeAnalysis>(),
+      getHighlights: z.custom<Highlights | null>().optional(),
     }) as z.ZodType<ParserResult>;
   }
 
@@ -68,6 +76,7 @@ class Parser {
       getActiveDates: getActiveDates(validMessages),
       getFirstMessages: getFirstMessages(validMessages),
       getEmojiOverTime: getEmojiOverTime(validMessages),
+      getHighlights: getHighlights(validMessages) as Highlights | null,
     };
   }
 

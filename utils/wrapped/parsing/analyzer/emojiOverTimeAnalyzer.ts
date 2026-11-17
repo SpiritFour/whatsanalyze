@@ -8,8 +8,8 @@ export function getEmojiOverTime(messages: Message[]): EmojiOverTimeAnalysis {
     if (!date) continue;
 
     const d = new Date(date);
-    const year = d.getUTCFullYear();
-    const month = String(d.getUTCMonth() + 1).padStart(2, "0");
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, "0");
     const key = `${year}-${month}`;
 
     const emojis = text.match(/\p{Extended_Pictographic}/gu);

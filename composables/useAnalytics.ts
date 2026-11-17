@@ -562,8 +562,29 @@ export const analyticsWrapped = {
     trackEvent("free_reminder_requested");
   },
 
-  storyShared(method: "native" | "copy") {
+  storyShared(method: "native" | "copy" | "whatsapp") {
     trackEvent("story_shared", { method });
+  },
+
+  /** A share image left the story: which card, and through what. */
+  cardShared(
+    card: "summary" | "age" | "roles" | "sync",
+    method: "native" | "download",
+  ) {
+    trackEvent("wrapped_card_shared", { card, method });
+  },
+
+  /** A guess before a reveal. Which question and whether it was right. */
+  guessAnswered(
+    question: "talker" | "emoji" | "replier" | "funny",
+    correct: boolean,
+  ) {
+    trackEvent("wrapped_guess", { question, correct });
+  },
+
+  /** The made-up chat's story, opened from the landing page. */
+  sampleOpened() {
+    trackEvent("wrapped_sample_opened");
   },
 
   resultsViewed(isShared: boolean) {
