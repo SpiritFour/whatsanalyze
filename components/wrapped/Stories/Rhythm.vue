@@ -1,59 +1,39 @@
 <template>
   <WrappedStoryContainer
-    class="bg-gradient-to-b from-green-700/20 via-slate-900/20 to-emerald-950 text-4xl"
+    theme="night"
+    :eyebrow="t('results.story.rhythm.eyebrow')"
     :title="t('results.conversation.rhythm.title')"
   >
-    <WrappedStyleSoftOrbs />
-
     <template v-if="summary">
-      <div class="mb-6 mt-12 flex items-start justify-between gap-4">
-        <div class="card1 h-32 text-right">
-          <p
-            class="text-[0.65rem] font-semibold uppercase tracking-[0.1em] text-slate-400"
-          >
+      <div class="mt-1 flex w-full items-stretch justify-center gap-3">
+        <div
+          class="story-card story-in flex-1 px-3 py-2 text-left"
+          style="--i: 2"
+        >
+          <p class="rhythm-label">
             {{ t("results.conversation.rhythm.mostActiveMonth") }}
           </p>
-          <p class="mt-0.5 text-2xl font-semibold leading-none">
-            {{ prettyMonth(summary.maxMonth) }}
-          </p>
-
-          <p class="mt-0.5 text-[0.7rem] text-slate-300">
-            {{ t("results.conversation.rhythm.mostMessages") }}
-          </p>
+          <p class="rhythm-value">{{ prettyMonth(summary.maxMonth) }}</p>
         </div>
-
-        <div class="card-dark h-32">
-          <p
-            class="text-[0.65rem] font-semibold tracking-[0.1em] uppercase text-slate-400"
-          >
+        <div
+          class="story-card story-in flex-1 px-3 py-2 text-left"
+          style="--i: 3"
+        >
+          <p class="rhythm-label">
             {{ t("results.conversation.rhythm.maxMessagesPerMonth") }}
           </p>
-          <p class="mt-0.5 text-2xl font-semibold leading-none">
-            {{ summary.max }}
-          </p>
-          <p class="mt-0.5 text-[0.7rem] text-slate-300">
-            {{
-              t("results.conversation.rhythm.messagesInMonth", {
-                month: prettyMonth(summary.maxMonth),
-              })
-            }}
-          </p>
+          <p class="rhythm-value">{{ summary.max.toLocaleString(locale) }}</p>
         </div>
       </div>
 
-      <p v-if="totalMessagesSinceParts" class="mt-2 text-sm text-slate-300">
-        {{ totalMessagesSinceParts.before }}
-        <span class="font-semibold">
-          {{ prettyMonth(summary.firstMonth) }}
-        </span>
-        {{ totalMessagesSinceParts.after }}
-      </p>
-      <div class="h-64 w-full px-2">
+      <div class="story-in h-56 w-full px-1 lg:h-72" style="--i: 5">
         <Line :data="chartData" :options="chartOptions" />
       </div>
     </template>
 
-    <div class="flex flex-wrap items-center gap-5 text-xs mt-6">
+    <div
+      class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs"
+    >
       <div
         v-for="item in legendMeta"
         :key="item.name"
@@ -86,6 +66,7 @@ import {
 } from "chart.js";
 import { useI18n } from "vue-i18n";
 import { useStatsStore } from "~/stores/wrapped/stats";
+import { shortName } from "~/utils/wrapped/story";
 
 ChartJS.register(
   CategoryScale,
@@ -100,9 +81,13 @@ ChartJS.register(
 
 const statsStore = useStatsStore();
 const { result } = storeToRefs(statsStore);
-const { t } = useI18n();
+const { t, locale } = useI18n();
 
-const authors = computed(() => statsStore.getAuthors ?? []);
+// The busiest few: a group of twenty is a tangle of lines nobody can read.
+const authors = computed(() => {
+  const named = result.value?.getHighlights?.people.map((p) => p.name);
+  return (named ?? statsStore.getAuthors ?? []).slice(0, 4);
+});
 
 const authorColors = [
   {
@@ -140,7 +125,8 @@ const prettyMonth = (value: string) => {
   if (!y || !m) return value; // invalid split → return original
 
   const date = new Date(y, m - 1, 1);
-  return date.toLocaleString(undefined, { month: "short", year: "numeric" });
+  // One year on the axis: the month says it all.
+  return date.toLocaleString(locale.value, { month: "short" });
 };
 
 const chartData = computed<ChartData<"line">>(() => {
@@ -311,28 +297,27 @@ const legendMeta = computed(() =>
   authors.value.map((name, index) => {
     const color = authorColors[index % authorColors.length];
     return {
-      name,
+      name: shortName(name),
       dotClass: color.dotClass,
     };
   }),
 );
-
-const totalMessagesSinceParts = computed(() => {
-  if (!summary.value) return null;
-
-  const text = t("results.conversation.rhythm.totalMessagesSince", {
-    count: summary.value.totalMessages,
-  });
-
-  const placeholder = "<month></month>";
-  if (!text.includes(placeholder)) {
-    return {
-      before: text,
-      after: "",
-    };
-  }
-
-  const [before, after = ""] = text.split(placeholder);
-  return { before, after };
-});
 </script>
+
+<style scoped>
+.rhythm-label {
+  margin: 0;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--s-accent);
+}
+
+.rhythm-value {
+  margin: 0.15rem 0 0;
+  font-size: 1.35rem;
+  font-weight: 900;
+  line-height: 1.1;
+}
+</style>
