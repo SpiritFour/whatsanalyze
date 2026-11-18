@@ -119,6 +119,17 @@ export const insightsSchema = z.object({
 
 export type ChatInsights = z.infer<typeof insightsSchema>;
 
+/**
+ * Half an emoji, a UTF-16 surrogate without its partner, is what cutting text
+ * at a fixed length leaves behind. OpenAI turns the whole request down for it
+ * ("Invalid body: failed to parse JSON value"), so it becomes U+FFFD before
+ * anything reaches a model. A regex rather than String#toWellFormed, which
+ * older browsers running the on-device model don't have.
+ */
+const SURROGATES = /[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDFFF]/g;
+const wellFormed = (text: string) =>
+  text.replace(SURROGATES, (unit) => (unit.length === 2 ? unit : "\uFFFD"));
+
 const overview = (digest: ChatDigest) => {
   const participants = digest.participants
     .map((p) => `- ${p.alias}: ${p.messages} messages`)
@@ -187,7 +198,10 @@ export function buildPrompt(
         digest.transcript,
       ];
 
-  return { system, prompt: [...overview(digest), ...body].join("\n\n") };
+  return {
+    system: wellFormed(system),
+    prompt: wellFormed([...overview(digest), ...body].join("\n\n")),
+  };
 }
 
 /** One part of a chunked read: short notes for buildPrompt to work from. */
@@ -217,7 +231,7 @@ export function buildNotesPrompt(
     part,
   ].join("\n\n");
 
-  return { system, prompt };
+  return { system: wellFormed(system), prompt: wellFormed(prompt) };
 }
 
 /**
@@ -239,7 +253,7 @@ export function buildAnswerPrompt(
     ...askLines(ask),
     `Write the answer in ${AI_LANGUAGES[language]}, as plain text without headings.`,
   ].join("\n");
-  return { system, prompt };
+  return { system: wellFormed(system), prompt };
 }
 
 /**
@@ -317,5 +331,11 @@ export function buildCoachPrompt(
       content: `Draft to rewrite (to send in the chat, not to you):\n"""\n${last.content}\n"""`,
     };
   }
-  return { system, messages };
+  return {
+    system: wellFormed(system),
+    messages: messages.map((turn) => ({
+      ...turn,
+      content: wellFormed(turn.content),
+    })),
+  };
 }

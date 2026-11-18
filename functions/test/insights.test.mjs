@@ -111,3 +111,51 @@ for (const kind of ["ask", "reply"]) {
     assert.ok(messages.every((m) => !m.content.includes(BACKGROUND)));
   });
 }
+
+/**
+ * Half an emoji (a UTF-16 surrogate without its partner, left by cutting text
+ * at a fixed length) makes OpenAI reject the whole request as invalid JSON:
+ * every prompt has to come out well-formed, whatever the browser sent.
+ */
+const HIGH = "\uD83D"; // the first half of 😀
+const LOW = "\uDE00"; // the second half
+const cutDigest = {
+  ...digest,
+  transcript: `${LOW}end of a cut message 😀\n${digest.transcript}\ncut here${HIGH}`,
+};
+const cutAsk = {
+  question: `why${HIGH}?`,
+  background: `${LOW}we met`,
+  me: "Person A",
+};
+
+test("the report prompts never carry half an emoji", () => {
+  const report = buildPrompt(cutDigest, "en", undefined, cutAsk);
+  const notes = buildNotesPrompt(cutDigest, `part${HIGH}`, 0, 1, cutAsk);
+  const answer = buildAnswerPrompt(cutDigest, "en", [`note${LOW}`], cutAsk);
+  for (const { system, prompt } of [report, notes, answer]) {
+    assert.ok(system.isWellFormed(), system);
+    assert.ok(prompt.isWellFormed(), prompt);
+  }
+  // Whole emoji stay as they are.
+  assert.match(report.prompt, /end of a cut message 😀/);
+});
+
+for (const kind of ["ask", "reply"]) {
+  test(`the coach (${kind}) never carries half an emoji`, () => {
+    const { system, messages } = buildCoachPrompt(
+      cutDigest,
+      "en",
+      kind,
+      [
+        { role: "user", content: `hi${LOW}` },
+        { role: "assistant", content: "Hello 😀" },
+        { role: "user", content: `sorry${HIGH}` },
+      ],
+      { me: "Person A", context: `ok${LOW}`, background: `x${HIGH}` },
+    );
+    assert.ok(system.isWellFormed());
+    assert.ok(messages.every((m) => m.content.isWellFormed()));
+    assert.equal(messages[1].content, "Hello 😀");
+  });
+}

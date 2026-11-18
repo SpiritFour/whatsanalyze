@@ -28,6 +28,23 @@ const MEDIA_PLACEHOLDER =
 
 const ESCAPE = /[.*+?^${}()|[\]\\]/g;
 
+/**
+ * Cut to at most `max` UTF-16 units from the start (`head`) or the end
+ * (`tail`) without splitting an emoji in two: half of one makes OpenAI turn
+ * the whole request down as invalid JSON.
+ */
+const isHighSurrogate = (code) => code >= 0xd800 && code <= 0xdbff;
+const isLowSurrogate = (code) => code >= 0xdc00 && code <= 0xdfff;
+const head = (text, max) =>
+  text.length <= max
+    ? text
+    : text.slice(0, isHighSurrogate(text.charCodeAt(max - 1)) ? max - 1 : max);
+const tail = (text, max) => {
+  if (text.length <= max) return text;
+  const start = text.length - max;
+  return text.slice(isLowSurrogate(text.charCodeAt(start)) ? start + 1 : start);
+};
+
 const alias = (index) => {
   let label = "";
   let n = index;
@@ -114,7 +131,7 @@ export function buildDigest(messages, maxChars) {
   const scrub = (text) => {
     const out = anonymize(text);
     return out.length > MAX_MESSAGE_CHARS
-      ? `${out.slice(0, MAX_MESSAGE_CHARS)}…`
+      ? `${head(out, MAX_MESSAGE_CHARS)}…`
       : out;
   };
 
@@ -158,9 +175,7 @@ export function buildDigest(messages, maxChars) {
  * @returns {string | undefined}
  */
 export function readerText(anonymize, text, maxChars) {
-  const out = anonymize(String(text ?? ""))
-    .slice(0, maxChars)
-    .trim();
+  const out = head(anonymize(String(text ?? "")), maxChars).trim();
   return out || undefined;
 }
 
@@ -191,7 +206,7 @@ export function sample(lines, maxChars) {
     used += chunk.length + 2;
   }
   // A single window bigger than the budget still has to say something.
-  if (!chunks.length) return all.slice(all.length - maxChars);
+  if (!chunks.length) return tail(all, maxChars);
   return chunks.join("\n…\n");
 }
 
