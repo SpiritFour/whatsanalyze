@@ -190,6 +190,46 @@ describe("sample", () => {
   });
 });
 
+/**
+ * An emoji is two UTF-16 units. Cut between them, half an emoji is left over,
+ * and OpenAI turns the whole request down as invalid JSON.
+ */
+describe("cutting text never splits an emoji", () => {
+  const emoji = "😀";
+
+  test("a long message cut where an emoji sits drops the emoji whole", () => {
+    // 279 letters, then an emoji across the 280-unit cut.
+    const { digest } = buildDigest(
+      [msg("Anna", `${"a".repeat(279)}${emoji}${"b".repeat(50)}`, 1)],
+      10_000,
+    );
+    expect(digest.transcript.isWellFormed()).toBe(true);
+    expect(digest.transcript).toContain(`: ${"a".repeat(279)}…`);
+  });
+
+  test("an emoji that fits before the cut stays", () => {
+    const { digest } = buildDigest(
+      [msg("Anna", `${"a".repeat(278)}${emoji}${"b".repeat(50)}`, 1)],
+      10_000,
+    );
+    expect(digest.transcript).toContain(`${"a".repeat(278)}${emoji}…`);
+  });
+
+  test("what the reader adds is capped the same way", () => {
+    const { anonymize } = buildDigest([msg("Anna", "x", 1)], 10_000);
+    const text = readerText(anonymize, `${"a".repeat(49)}${emoji}`, 50);
+    expect(text.isWellFormed()).toBe(true);
+    expect(text).toBe("a".repeat(49));
+  });
+
+  test("a window bigger than the budget is cut from the start safely", () => {
+    // 101 units: the last 100 would start in the middle of the emoji.
+    const out = sample([`${emoji}${"x".repeat(99)}`], 100);
+    expect(out.isWellFormed()).toBe(true);
+    expect(out).toBe("x".repeat(99));
+  });
+});
+
 describe("restoreNames", () => {
   test("puts real names back everywhere, longest placeholder first", () => {
     const names = { "Person A": "Anna", "Person AA": "Zoe" };
