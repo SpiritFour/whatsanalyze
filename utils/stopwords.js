@@ -167,15 +167,56 @@ const KEPT = "\\p{L}\\p{N}\\p{Extended_Pictographic}\\uFE0F\\u200D<>_";
 // below guards against tearing emoji apart, which is the very thing keeping
 // them here prevents.
 // eslint-disable-next-line no-misleading-character-class
-const EDGE_PUNCTUATION = new RegExp(`^[^${KEPT}]+|[^${KEPT}]+$`, "gu");
+const KEPT_CHAR = new RegExp(`^[${KEPT}]$`, "u");
 
 /**
  * One spelling per word. "Nice", "nice" and "nice!" are the same thing said
  * three times, and the word cloud used to give each of them its own entry —
  * which also meant none of them ever matched the stopword list.
+ *
+ * Scans inward from both ends one Unicode code point at a time instead of
+ * running `^[^KEPT]+|[^KEPT]+$` with `/gu`: V8 compiles a quantified negated
+ * Unicode property class in UTF-16 mode by pushing backtrack state per
+ * character, which overflows the RegExp backtrack stack on long non-word runs
+ * (WHATSANALYZE-11V) and backtracks quadratically on internal punctuation.
  */
 export function normalizeWord(word) {
-  return String(word).toLowerCase().replace(EDGE_PUNCTUATION, "");
+  const s = String(word).toLowerCase();
+  const len = s.length;
+  let start = 0;
+
+  while (start < len) {
+    const code = s.charCodeAt(start);
+    const step =
+      code >= 0xd800 &&
+      code <= 0xdbff &&
+      start + 1 < len &&
+      s.charCodeAt(start + 1) >= 0xdc00 &&
+      s.charCodeAt(start + 1) <= 0xdfff
+        ? 2
+        : 1;
+    if (KEPT_CHAR.test(s.slice(start, start + step))) break;
+    start += step;
+  }
+
+  if (start === len) return "";
+
+  let end = len;
+  while (end > start) {
+    const code = s.charCodeAt(end - 1);
+    const step =
+      code >= 0xdc00 &&
+      code <= 0xdfff &&
+      end - 2 >= start &&
+      s.charCodeAt(end - 2) >= 0xd800 &&
+      s.charCodeAt(end - 2) <= 0xdbff
+        ? 2
+        : 1;
+    if (KEPT_CHAR.test(s.slice(end - step, end))) break;
+    end -= step;
+  }
+
+  return start === 0 && end === len ? s : s.slice(start, end);
 }
 
 export function isStopword(word) {
