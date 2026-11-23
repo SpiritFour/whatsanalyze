@@ -366,6 +366,7 @@ export default {
       discountPercent: ONE_TIME_DISCOUNT_PERCENT,
       progress: 0,
       pdfWorker: null,
+      pdfFileType: null,
     };
   },
   computed: {
@@ -508,6 +509,11 @@ export default {
 
       this.isLoading = true;
       this.progress = 0;
+      this.pdfFileType = isSample
+        ? "pdf_sample"
+        : this.court
+          ? "pdf_full_court"
+          : "pdf_full";
 
       try {
         // the graphs need to be converted to an image beforehand, as the web worker has no access to document
@@ -573,6 +579,8 @@ export default {
           blob,
           `${this.court ? "WhatsAnalyze Court Transcript" : "WhatsAnalyze"} - ${String(this.ego).trim()}.pdf`,
         );
+        // file_download fires when the build starts; this proves it finished
+        analyticsChat.pdfGenerated(this.pdfFileType);
         this.isLoading = false;
         this.closePdfWorker();
       }
