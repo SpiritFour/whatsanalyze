@@ -541,6 +541,11 @@ export const analyticsChat = {
       chart_name: chartName,
     });
   },
+
+  /** The PDF was built and handed to the browser to save. */
+  pdfGenerated(fileType: "pdf_sample" | "pdf_full" | "pdf_full_court") {
+    trackEvent("pdf_generated", { file_type: fileType });
+  },
 };
 
 /**
