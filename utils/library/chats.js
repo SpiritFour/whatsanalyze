@@ -19,7 +19,7 @@ import { SYSTEM_AUTHOR } from "~/utils/systemMessages";
 export const DAY = 86_400_000;
 
 /** How saved chats are ordered everywhere: the one opened last comes first. */
-const byLastOpened = (a, b) => b.lastOpenedAt - a.lastOpenedAt;
+const byLastOpened = (a, b) => (b.lastOpenedAt ?? 0) - (a.lastOpenedAt ?? 0);
 
 /** When a chat was last in use, for the 90-day rule. */
 const lastUse = (chat) =>
@@ -67,12 +67,25 @@ function described(summary, months) {
   };
 }
 
+/**
+ * WebKit's IndexedDB `getAll()` can return `undefined` slots when a stored
+ * record fails structured-clone deserialization (observed on iOS 18). Drop
+ * anything that is not a readable chat record so one broken row never crashes
+ * rendering or hides valid chats.
+ */
+const isChatRecord = (chat) =>
+  Boolean(
+    chat && typeof chat.id === "string" && Array.isArray(chat.participants),
+  );
+
 /** Every saved chat, the most recently opened first. */
 export async function listChats() {
   const chats = await transact([STORES.chats], "readonly", (tx) =>
     request(tx.objectStore(STORES.chats).getAll()),
   );
-  return chats.sort(byLastOpened);
+  return (Array.isArray(chats) ? chats : [])
+    .filter(isChatRecord)
+    .sort(byLastOpened);
 }
 
 /**
