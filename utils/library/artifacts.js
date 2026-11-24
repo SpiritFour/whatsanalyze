@@ -16,9 +16,9 @@ export async function listArtifacts(chatId, kind) {
   const all = await transact([STORES.artifacts], "readonly", (tx) =>
     request(tx.objectStore(STORES.artifacts).index("chatId").getAll(chatId)),
   );
-  return all
-    .filter((artifact) => !kind || artifact.kind === kind)
-    .sort((a, b) => b.createdAt - a.createdAt);
+  return (Array.isArray(all) ? all : [])
+    .filter((artifact) => artifact && (!kind || artifact.kind === kind))
+    .sort((a, b) => (b.createdAt ?? 0) - (a.createdAt ?? 0));
 }
 
 /**
@@ -57,7 +57,9 @@ export async function keepArtifact(chatId, kind, ref, data, options = {}) {
     if (!chat) return null;
     const store = tx.objectStore(STORES.artifacts);
     const all = await request(store.index("chatId").getAll(chatId));
-    const known = all.find((a) => a.kind === kind && a.ref === ref);
+    const known = (Array.isArray(all) ? all : []).find(
+      (a) => a && a.kind === kind && a.ref === ref,
+    );
     const artifact = known
       ? { ...known, data, updatedAt: now }
       : {

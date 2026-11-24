@@ -190,6 +190,38 @@ describe("saving and opening", () => {
     expect(saved.wrappedYears).toEqual([2026]);
     expect(await updateChat("gone", { me: "x" })).toBeNull();
   });
+
+  test("ignores undefined or malformed entries from IndexedDB getAll()", async () => {
+    const { chat } = await saveChat({ messages: syntheticChat() });
+    await addArtifact(chat.id, "ai-reading", { n: 1 });
+
+    // Simulate WebKit iOS 18 returning [undefined] or sparse entries from getAll().
+    const origStoreGetAll = IDBObjectStore.prototype.getAll;
+    const origIndexGetAll = IDBIndex.prototype.getAll;
+    const fakeReq = (result) => {
+      const req = { result, onsuccess: null, onerror: null };
+      queueMicrotask(() => req.onsuccess?.());
+      return req;
+    };
+
+    try {
+      IDBObjectStore.prototype.getAll = () => fakeReq([undefined]);
+      expect(await listChats()).toEqual([]);
+
+      IDBObjectStore.prototype.getAll = () =>
+        fakeReq([undefined, null, {}, chat]);
+      expect(await listChats()).toEqual([chat]);
+
+      IDBIndex.prototype.getAll = () =>
+        fakeReq([undefined, { id: "a1", kind: "ai-reading", createdAt: 1 }]);
+      expect(await listArtifacts(chat.id, "ai-reading")).toEqual([
+        { id: "a1", kind: "ai-reading", createdAt: 1 },
+      ]);
+    } finally {
+      IDBObjectStore.prototype.getAll = origStoreGetAll;
+      IDBIndex.prototype.getAll = origIndexGetAll;
+    }
+  });
 });
 
 describe("the same chat again", () => {
