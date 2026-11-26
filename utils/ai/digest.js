@@ -184,12 +184,17 @@ export function readerText(anonymize, text, maxChars) {
  * evenly spaced windows of consecutive messages, the last one always ending
  * on the most recent message.
  */
+const SEPARATOR = "\n…\n";
+
 export function sample(lines, maxChars) {
   const all = lines.join("\n");
   if (all.length <= maxChars) return all;
 
   const avgLine = all.length / lines.length;
-  const windows = Math.max(1, Math.floor(maxChars / (avgLine * WINDOW + 2)));
+  const windows = Math.max(
+    1,
+    Math.floor(maxChars / (avgLine * WINDOW + SEPARATOR.length)),
+  );
   const lastStart = Math.max(0, lines.length - WINDOW);
   const starts = Array.from({ length: windows }, (_, i) =>
     windows === 1 ? lastStart : Math.round((lastStart * i) / (windows - 1)),
@@ -201,13 +206,14 @@ export function sample(lines, maxChars) {
   let used = 0;
   for (const start of [...new Set(starts)].reverse()) {
     const chunk = lines.slice(start, start + WINDOW).join("\n");
-    if (used + chunk.length + 2 > maxChars) continue;
+    const need = chunks.length ? chunk.length + SEPARATOR.length : chunk.length;
+    if (used + need > maxChars) continue;
     chunks.unshift(chunk);
-    used += chunk.length + 2;
+    used += need;
   }
   // A single window bigger than the budget still has to say something.
   if (!chunks.length) return tail(all, maxChars);
-  return chunks.join("\n…\n");
+  return chunks.join(SEPARATOR);
 }
 
 /**

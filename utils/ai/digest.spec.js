@@ -188,6 +188,24 @@ describe("sample", () => {
     expect(out.endsWith("line 199")).toBe(true);
     expect(out).toContain("\n…\n");
   });
+
+  test("never exceeds maxChars across many chunks joined by the ellipsis separator", () => {
+    // Regression: counting +2 instead of "\n…\n".length (3) per chunk let large
+    // chats overflow CLOUD_TRANSCRIPT_CHARS (400_000) and fail cloud validation.
+    let seed = 42;
+    const rand = () =>
+      (seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296;
+    for (let trial = 0; trial < 20; trial++) {
+      const chat = Array.from({ length: 15_000 }, () => {
+        const len =
+          rand() < 0.7
+            ? 5 + Math.floor(rand() * 35)
+            : 40 + Math.floor(rand() * 180);
+        return `2026-01-01 12:00 Person A: ${"x".repeat(len)}`;
+      });
+      expect(sample(chat, 400_000).length).toBeLessThanOrEqual(400_000);
+    }
+  });
 });
 
 /**
