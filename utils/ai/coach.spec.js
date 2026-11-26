@@ -1,4 +1,9 @@
-import { isSafetyReply, isUnchangedRewrite, needsSupport } from "./coach";
+import {
+  buildCoachHistory,
+  isSafetyReply,
+  isUnchangedRewrite,
+  needsSupport,
+} from "./coach";
 
 describe("needsSupport", () => {
   it("catches self-harm in each of the site's languages", () => {
@@ -64,5 +69,34 @@ describe("isUnchangedRewrite", () => {
         draft,
       ),
     ).toBe(false);
+  });
+});
+
+describe("buildCoachHistory", () => {
+  const pair = (i) => ({ sent: `q${i}`, reply: `a${i}` });
+
+  test("caps history to maxTurns, dropping oldest first so it starts and ends on user", () => {
+    const turns = Array.from({ length: 7 }, (_, i) => pair(i));
+    const history = buildCoachHistory(turns, "q7", 11);
+    expect(history).toHaveLength(11);
+    expect(history[0]).toEqual({ role: "user", content: "q2" });
+    expect(history[history.length - 1]).toEqual({
+      role: "user",
+      content: "q7",
+    });
+  });
+
+  test("leaves out support handovers and entries without both sent and reply", () => {
+    const turns = [
+      { sent: "", support: true },
+      { sent: "q0", reply: "a0" },
+      { sent: "", reply: "orphan" },
+      { sent: "q1" },
+    ];
+    expect(buildCoachHistory(turns, "q2", 11)).toEqual([
+      { role: "user", content: "q0" },
+      { role: "assistant", content: "a0" },
+      { role: "user", content: "q2" },
+    ]);
   });
 });
