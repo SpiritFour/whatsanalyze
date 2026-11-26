@@ -316,7 +316,7 @@
 // file-saver is CJS: the named import resolves to undefined when Nitro
 // renders this component on the server, which 500s the whole prerender.
 import FileSaver from "file-saver";
-import { markRaw, toRaw } from "vue";
+import { toRaw } from "vue";
 import {
   analyticsChat,
   analyticsEcommerce,
@@ -333,8 +333,8 @@ import {
 } from "~/utils/pricing";
 import { chatFingerprint } from "~/utils/chatFingerprint";
 import { scrollToSettled } from "~/utils/scroll";
-import PDFWorker from "~/assets/js/pdf.worker.js?worker";
-import { loadImage, objectToDictionary } from "~/utils/utils";
+import { renderChatPdf, renderCourtPdf } from "~/utils/pdf";
+import { loadImage } from "~/utils/utils";
 import {
   formatExactTimestamp,
   formatFileSize,
@@ -365,8 +365,10 @@ export default {
       isOneTimeLoading: false,
       discountPercent: ONE_TIME_DISCOUNT_PERCENT,
       progress: 0,
-      pdfWorker: null,
       pdfFileType: null,
+      // The export outlives a navigation away from the page; don't trigger a
+      // download from a component that is already gone.
+      isUnmounted: false,
     };
   },
   computed: {
@@ -449,7 +451,7 @@ export default {
     this.downloadPurchasedPdf();
   },
   beforeUnmount() {
-    this.closePdfWorker();
+    this.isUnmounted = true;
   },
   methods: {
     /**
@@ -506,6 +508,7 @@ export default {
     },
     async download(isSample = false) {
       if (!import.meta.client) return;
+      if (this.isLoading) return;
 
       this.isLoading = true;
       this.progress = 0;
@@ -514,67 +517,36 @@ export default {
         : this.court
           ? "pdf_full_court"
           : "pdf_full";
+      const onProgress = (percent) => {
+        this.progress = percent;
+      };
 
       try {
-        // the graphs need to be converted to an image beforehand, as the web worker has no access to document
-        // the court transcript shows no charts, so it skips rasterising them
-        const graphs = this.court ? {} : await this.loadGraphs();
-        this.pdfWorker = markRaw(new PDFWorker());
-        // markRaw: never wrap the Worker in reactive proxies — proxied receivers break
-        // native postMessage/addEventListener calls.
-        this.pdfWorker.addEventListener("message", this.workerResponseHandler);
-        this.pdfWorker.addEventListener("error", this.pdfErrorHandler);
+        // toRaw: the exporter walks every message, and reading them through
+        // the reactive proxy would make this component depend on all of them.
+        const chat = toRaw(this.chat);
+        const attachments = toRaw(this.attachments);
 
-        const chat = objectToDictionary(this.chat); // remove functions
-        chat.funFacts = await this.chat.getFunFacts(); // set funfacts beforehand instead of using function call
+        const blob = this.court
+          ? await renderCourtPdf({
+              chat,
+              attachments,
+              isSample,
+              source: toRaw(this.source),
+              onProgress,
+            })
+          : await renderChatPdf({
+              chat,
+              attachments,
+              ego: this.ego,
+              isSample,
+              // the court transcript shows no charts, so only this one
+              // rasterises them
+              charts: await this.loadCharts(),
+              onProgress,
+            });
 
-        // A JSZip entry's `.async()` method lives on its prototype, so it
-        // does not survive postMessage's structured clone into the worker —
-        // resolve every attachment to plain bytes on the main thread first.
-        const attachments = await Promise.all(
-          this.attachments.map(async (attachment) =>
-            attachment.zipEntry
-              ? {
-                  name: attachment.name,
-                  decompressedData:
-                    await attachment.zipEntry.async("uint8array"),
-                }
-              : attachment,
-          ),
-        );
-
-        this.pdfWorker.postMessage({
-          chat: chat,
-          attachments: objectToDictionary(attachments),
-          ego: this.ego,
-          isSample,
-          style: this.court ? "court" : "visual",
-          source: objectToDictionary(this.source),
-          ...graphs,
-        });
-      } catch (error) {
-        this.pdfErrorHandler(error);
-      }
-    },
-    /** Chart canvases as images — the worker has no access to the document. */
-    async loadGraphs() {
-      return {
-        chatTimeline: await loadImage("#chat-timeline"),
-        messagesPerTimeOfDay: await loadImage("#messages-per-time-of-day"),
-        messagesPerPerson: await loadImage("#messages-per-person"),
-        radarMonth: await loadImage("#radar-month"),
-        radarDay: await loadImage("#radar-day"),
-      };
-    },
-    downloadSample() {
-      const query = (this.$route && this.$route.query) || {};
-      this.download(!("free" in query));
-    },
-    workerResponseHandler: function (event) {
-      const data = event.data;
-      if (data.type === "pdf") {
-        // service workers can not save files
-        const blob = new Blob([data.data], { type: "application/pdf" });
+        if (this.isUnmounted) return;
         FileSaver.saveAs(
           blob,
           `${this.court ? "WhatsAnalyze Court Transcript" : "WhatsAnalyze"} - ${String(this.ego).trim()}.pdf`,
@@ -582,26 +554,38 @@ export default {
         // file_download fires when the build starts; this proves it finished
         analyticsChat.pdfGenerated(this.pdfFileType);
         this.isLoading = false;
-        this.closePdfWorker();
+      } catch (error) {
+        this.pdfErrorHandler(error);
       }
-      if (data.type === "progress") {
-        this.progress = data.data;
-      }
+    },
+    /**
+     * Snapshot the charts as images first: they are canvases on this page,
+     * and the exporter lays out in its own isolated frame.
+     */
+    async loadCharts() {
+      return [
+        { name: "Chat Timeline", chart: await loadImage("#chat-timeline") },
+        {
+          name: "Time of Day",
+          chart: await loadImage("#messages-per-time-of-day"),
+        },
+        {
+          name: "Messages per Person",
+          chart: await loadImage("#messages-per-person"),
+        },
+        { name: "Messages per Month", chart: await loadImage("#radar-month") },
+        { name: "Messages per Time", chart: await loadImage("#radar-day") },
+      ];
+    },
+    downloadSample() {
+      const query = (this.$route && this.$route.query) || {};
+      this.download(!("free" in query));
     },
     pdfErrorHandler(error) {
       console.error("PDF generation failed", error);
       this.$sentry?.captureException(error);
       this.isLoading = false;
       this.progress = 0;
-      this.closePdfWorker();
-    },
-    closePdfWorker() {
-      if (!this.pdfWorker) return;
-
-      this.pdfWorker.removeEventListener("message", this.workerResponseHandler);
-      this.pdfWorker.removeEventListener("error", this.pdfErrorHandler);
-      this.pdfWorker.terminate();
-      this.pdfWorker = null;
     },
   },
 };

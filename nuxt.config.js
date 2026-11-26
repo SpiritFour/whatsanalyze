@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { execFileSync } from "node:child_process";
 import { resolve } from "node:path";
 import {
   localeCodes,
@@ -37,6 +38,16 @@ export default defineNuxtConfig({
       for (const entry of Object.values(manifest)) {
         entry.prefetch = false;
       }
+    },
+    // The PDF exporter needs the whole Twemoji set as a single asset. Built
+    // here rather than in the npm scripts so every entry point (dev, generate,
+    // build, e2e) gets it without anyone having to remember.
+    "build:before": () => {
+      execFileSync(
+        process.execPath,
+        [resolve("./scripts/build-twemoji-sprite.mjs")],
+        { stdio: "inherit" },
+      );
     },
   },
 

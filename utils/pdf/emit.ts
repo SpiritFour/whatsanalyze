@@ -1,0 +1,420 @@
+import jsPDF from "jspdf";
+import { PDF_FONT_FAMILY, registerPdfFont } from "~/utils/pdf/fonts";
+import { rasterizeEmoji } from "~/utils/pdf/emoji";
+import type { MeasuredBlock, RenderItem } from "~/utils/pdf/measure";
+import { contentHeightPx, mm, pt, px } from "~/utils/pdf/page";
+import type { PageGeometry } from "~/utils/pdf/page";
+
+/**
+ * Turns measured boxes into a real PDF.
+ *
+ * Everything here is vector: text is drawn with `text()` so it stays
+ * selectable, searchable and copyable, and shapes are drawn with `rect()` /
+ * `roundedRect()`. The only raster content is genuine imagery -- attachments,
+ * chart snapshots and emoji artwork.
+ *
+ * Pagination lives here rather than in CSS because the browser's own
+ * fragmentation gives no way to number pages or repeat a table header; owning
+ * it means "Page X of Y" is just arithmetic.
+ */
+
+/**
+ * A split block needs at least this much room left on the page to start
+ * there: a lone line at the bottom of a sheet, its row continuing overleaf, is
+ * unreadable.
+ */
+const MIN_SPLIT_PX = 32;
+
+/**
+ * Colours arrive from two places: `rgb()/rgba()` strings read off computed
+ * styles, and hex literals from a theme. Both have to work -- a hex value
+ * falling through to black here paints whole pages the wrong colour.
+ */
+export function parseColor(color: string): [number, number, number] {
+  const hex = color.trim().match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);
+  if (hex) {
+    const digits =
+      hex[1].length === 3
+        ? hex[1]
+            .split("")
+            .map((digit) => digit + digit)
+            .join("")
+        : hex[1];
+    return [
+      parseInt(digits.slice(0, 2), 16),
+      parseInt(digits.slice(2, 4), 16),
+      parseInt(digits.slice(4, 6), 16),
+    ];
+  }
+
+  const match = color.match(/-?[\d.]+/g);
+  if (!match || match.length < 3) return [0, 0, 0];
+  return [Number(match[0]), Number(match[1]), Number(match[2])];
+}
+
+function normalizeFormat(format: string): string {
+  const upper = format.toUpperCase();
+  if (upper === "JPG" || upper === "JPE") return "JPEG";
+  return upper;
+}
+
+/** Top of an item, for deciding which page slice it falls into. */
+const itemTop = (item: RenderItem) => item.y;
+const itemBottom = (item: RenderItem) => item.y + item.height;
+
+export interface FurnitureContext {
+  doc: jsPDF;
+  page: number;
+  total: number;
+  chapter: string;
+  geometry: PageGeometry;
+  fontFamily: string;
+}
+
+export interface WriterOptions {
+  geometry: PageGeometry;
+  /** Page background per chapter; null leaves the sheet unpainted. */
+  background: (_chapter: string) => string | null;
+}
+
+export class PdfWriter {
+  private doc: jsPDF;
+  private geometry: PageGeometry;
+  private background: WriterOptions["background"];
+  private contentHeight: number;
+  private pageChapters: string[] = [];
+  private cursor = 0;
+  /** Where content starts on the current page (below a repeated header). */
+  private pageStart = 0;
+  private started = false;
+  /** The header of the table whose rows are being placed, repeated per page. */
+  private tableHeader: MeasuredBlock | null = null;
+  private emojiPng = new Map<string, string>();
+
+  constructor({ geometry, background }: WriterOptions) {
+    this.geometry = geometry;
+    this.background = background;
+    this.contentHeight = contentHeightPx(geometry);
+
+    this.doc = new jsPDF({
+      unit: "mm",
+      format: [geometry.widthMm, geometry.heightMm],
+      orientation: "portrait",
+      // Drawing a word at a time means a lot of very repetitive content stream;
+      // uncompressed, a long chat runs to tens of megabytes.
+      compress: true,
+    });
+    registerPdfFont(this.doc);
+  }
+
+  private get chapter(): string | null {
+    return this.pageChapters[this.pageChapters.length - 1] ?? null;
+  }
+
+  private get remaining(): number {
+    return this.contentHeight - this.cursor;
+  }
+
+  private newPage(chapter: string): void {
+    if (this.started) {
+      this.doc.addPage([this.geometry.widthMm, this.geometry.heightMm], "p");
+    }
+    this.started = true;
+
+    this.pageChapters.push(chapter);
+    this.cursor = 0;
+    this.pageStart = 0;
+
+    const background = this.background(chapter);
+    if (background) {
+      const [r, g, b] = parseColor(background);
+      this.doc.setFillColor(r, g, b);
+      this.doc.rect(0, 0, this.geometry.widthMm, this.geometry.heightMm, "F");
+    }
+  }
+
+  /** A page break in the middle of a table: the header comes along. */
+  private continuePage(chapter: string, table: string | null): void {
+    this.newPage(chapter);
+    const header = this.tableHeader;
+    if (header && table && header.tableHeader === table) {
+      this.drawWhole(header);
+    }
+    this.pageStart = this.cursor;
+  }
+
+  /**
+   * How much room a block needs before it may go on this page: itself, plus
+   * whatever it must not be separated from.
+   */
+  private requiredHeight(blocks: MeasuredBlock[], index: number): number {
+    let height = 0;
+    for (let at = index; at < blocks.length; at++) {
+      const block = blocks[at];
+      const isFirst = at === index;
+      const minimum =
+        !isFirst && block.splittable
+          ? Math.min(block.height, MIN_SPLIT_PX)
+          : block.height;
+      height += minimum;
+      if (!block.keepWithNext) break;
+    }
+    return height;
+  }
+
+  /**
+   * Places blocks onto pages. A block is kept whole unless it is splittable or
+   * taller than a page on its own, in which case it is broken at a line
+   * boundary -- a single enormous message still has to go somewhere.
+   */
+  async place(
+    blocks: MeasuredBlock[],
+    sprite: Map<string, string>,
+  ): Promise<void> {
+    await this.preloadEmoji(blocks, sprite);
+
+    blocks.forEach((block, index) => {
+      const table = block.tableHeader || block.table;
+      // Anything that is not part of the current table ends it.
+      if (this.tableHeader && this.tableHeader.tableHeader !== table) {
+        this.tableHeader = null;
+      }
+
+      if (
+        !this.started ||
+        block.breakBefore ||
+        block.chapter !== this.chapter
+      ) {
+        this.tableHeader = null;
+        this.newPage(block.chapter);
+      }
+
+      const required = this.requiredHeight(blocks, index);
+      // On a page with nothing on it yet, moving on would only leave it blank.
+      const isFreshPage = this.cursor === this.pageStart;
+      const fits =
+        required <= this.remaining ||
+        (isFreshPage && block.height <= this.remaining);
+
+      if (block.tableHeader) {
+        if (!fits && this.cursor > 0) this.newPage(block.chapter);
+        this.drawWhole(block);
+        this.tableHeader = block;
+        return;
+      }
+
+      if (fits) {
+        this.drawWhole(block);
+        return;
+      }
+
+      const splitHere =
+        (block.splittable && this.remaining >= MIN_SPLIT_PX) ||
+        // Taller than a fresh page could ever hold: no point moving it first.
+        block.height > this.contentHeight - this.headerHeight(table);
+
+      if (!splitHere) this.continuePage(block.chapter, table);
+
+      if (block.height <= this.remaining) {
+        this.drawWhole(block);
+      } else {
+        this.placeSliced(block, table);
+      }
+    });
+  }
+
+  private headerHeight(table: string | null): number {
+    const header = this.tableHeader;
+    return header && table && header.tableHeader === table ? header.height : 0;
+  }
+
+  private drawWhole(block: MeasuredBlock): void {
+    const offset = this.cursor - block.top;
+    for (const item of block.items) this.draw(item, offset);
+    this.cursor += block.height;
+  }
+
+  /**
+   * Moves a slice boundary up to the nearest line boundary, so no line of text
+   * and no image is cut through the middle. Falls back to a hard cut only for
+   * something taller than the whole slice.
+   */
+  private snapToLine(block: MeasuredBlock, start: number, end: number): number {
+    let snapped = end;
+    let changed = true;
+
+    while (changed) {
+      changed = false;
+      for (const item of block.items) {
+        if (item.kind === "rect") continue;
+        const top = itemTop(item) - block.top;
+        const bottom = itemBottom(item) - block.top;
+        if (top < snapped && bottom > snapped && top > start) {
+          snapped = top;
+          changed = true;
+        }
+      }
+    }
+
+    return snapped > start ? snapped : end;
+  }
+
+  /** Flows one block's items across as many pages as it needs. */
+  private placeSliced(block: MeasuredBlock, table: string | null): void {
+    let consumed = 0;
+
+    while (consumed < block.height) {
+      if (this.remaining < 1) this.continuePage(block.chapter, table);
+
+      let sliceEnd = Math.min(consumed + this.remaining, block.height);
+      if (sliceEnd < block.height) {
+        sliceEnd = this.snapToLine(block, consumed, sliceEnd);
+      }
+      const offset = this.cursor - block.top - consumed;
+
+      for (const item of block.items) {
+        const top = itemTop(item) - block.top;
+
+        if (item.kind === "rect") {
+          // Clip backgrounds and rules to this page so they stop at the margin
+          // instead of running off the sheet.
+          const rectTop = Math.max(top, consumed);
+          const rectBottom = Math.min(top + item.height, sliceEnd);
+          if (rectBottom <= rectTop) continue;
+          this.draw(
+            {
+              ...item,
+              y: block.top + rectTop,
+              height: rectBottom - rectTop,
+              // Only round the corners that are actually on this page.
+              radius:
+                top >= consumed && top + item.height <= sliceEnd
+                  ? item.radius
+                  : 0,
+            },
+            offset,
+          );
+          continue;
+        }
+
+        if (top < consumed || top >= sliceEnd) continue;
+        this.draw(item, offset);
+      }
+
+      if (consumed > 0) {
+        // Continuation markers sit at the top of the block; move them to the
+        // top of this slice.
+        for (const item of block.continuationItems) {
+          this.draw(item, this.cursor - block.top);
+        }
+      }
+
+      this.cursor += sliceEnd - consumed;
+      consumed = sliceEnd;
+
+      if (consumed < block.height) this.continuePage(block.chapter, table);
+    }
+  }
+
+  private async preloadEmoji(
+    blocks: MeasuredBlock[],
+    sprite: Map<string, string>,
+  ): Promise<void> {
+    const ids = new Set<string>();
+    for (const block of blocks) {
+      for (const item of block.items) {
+        if (
+          item.kind === "image" &&
+          item.emojiId &&
+          !this.emojiPng.has(item.emojiId)
+        ) {
+          ids.add(item.emojiId);
+        }
+      }
+    }
+
+    // Rasterising is memoised per icon, so a chat that uses the same emoji
+    // thousands of times pays for it once.
+    await Promise.all(
+      Array.from(ids).map(async (id) => {
+        const png = await rasterizeEmoji(id, sprite);
+        if (png) this.emojiPng.set(id, png);
+      }),
+    );
+  }
+
+  private draw(item: RenderItem, offset: number): void {
+    const left = px(this.geometry.margin.left);
+    const top = px(this.geometry.margin.top) + offset;
+
+    if (item.kind === "rect") {
+      const [r, g, b] = parseColor(item.color);
+      this.doc.setFillColor(r, g, b);
+      const width = mm(item.width);
+      const height = mm(item.height);
+      const x = mm(left + item.x);
+      const y = mm(top + item.y);
+
+      if (item.radius > 0) {
+        const radius = mm(item.radius);
+        this.doc.roundedRect(x, y, width, height, radius, radius, "F");
+      } else {
+        this.doc.rect(x, y, width, height, "F");
+      }
+      return;
+    }
+
+    if (item.kind === "image") {
+      const src = item.emojiId ? this.emojiPng.get(item.emojiId) : item.src;
+      if (!src) return;
+
+      try {
+        this.doc.addImage(
+          src,
+          item.emojiId ? "PNG" : normalizeFormat(item.format),
+          mm(left + item.x),
+          mm(top + item.y),
+          mm(item.width),
+          mm(item.height),
+        );
+      } catch (error) {
+        // One unreadable attachment must not cost the buyer the whole export.
+        console.error("Could not place an image in the PDF", error);
+      }
+      return;
+    }
+
+    const [r, g, b] = parseColor(item.color);
+    this.doc.setTextColor(r, g, b);
+    this.doc.setFont(PDF_FONT_FAMILY, item.bold ? "bold" : "normal");
+    this.doc.setFontSize(pt(item.fontSize));
+    this.doc.text(item.text, mm(left + item.x), mm(top + item.baseline), {
+      baseline: "alphabetic",
+    });
+  }
+
+  /**
+   * Hands every page to the document's own running header and footer. Deferred
+   * to the end because "Page X of Y" needs the total, which is only known once
+   * the last block is placed.
+   */
+  finish(title: string, furniture: (_context: FurnitureContext) => void): Blob {
+    const total = this.pageChapters.length;
+
+    for (let page = 1; page <= total; page++) {
+      this.doc.setPage(page);
+      this.doc.setFont(PDF_FONT_FAMILY, "normal");
+      furniture({
+        doc: this.doc,
+        page,
+        total,
+        chapter: this.pageChapters[page - 1],
+        geometry: this.geometry,
+        fontFamily: PDF_FONT_FAMILY,
+      });
+    }
+
+    this.doc.setProperties({ title });
+    return this.doc.output("blob");
+  }
+}

@@ -62,10 +62,8 @@ test.describe("the analyzer", () => {
     });
   }
 
-  // The PDF worker gets attachments over postMessage, which drops anything
-  // that isn't plain data — a JSZip entry's `.async()` lives on its
-  // prototype, so a naive structured clone silently breaks the PDF for any
-  // chat with media in its zip.
+  // Stored (uncompressed) zip entries used to throw on inflate, and the PDF
+  // has to read every attachment it shows.
   test("builds the free preview PDF for a zip export with a stored attachment", async ({
     page,
   }) => {

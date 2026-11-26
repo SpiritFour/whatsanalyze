@@ -47,6 +47,8 @@
     "@nuxtjs/tailwindcss": "^6.14.0",
     "@pinia/nuxt": "^1.0.2",
     "@sentry/nuxt": "10.75.2",
+    "@twemoji/api": "^17.0.3",
+    "@twemoji/svg": "15",
     "@vite-pwa/nuxt": "1.1.1",
     "chart.js": "^4.5.1",
     "chartjs-adapter-date-fns": "^3.0.0",
