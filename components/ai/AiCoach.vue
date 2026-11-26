@@ -94,6 +94,7 @@ import { analyticsTools } from "~/composables/useAnalytics";
 import { useSubscriptionStore } from "~/stores/subscription";
 import { buildDigest, readerText, restoreNames } from "~/utils/ai/digest";
 import {
+  buildCoachHistory,
   isSafetyReply,
   isUnchangedRewrite,
   needsSupport,
@@ -112,6 +113,8 @@ import {
   MAX_BACKGROUND_CHARS,
   MAX_COACH_CHARS,
   MAX_COACH_REPLY_CHARS,
+  MAX_COACH_TURNS,
+  PREVIEW_TRANSCRIPT_CHARS,
   type AiLanguage,
   type CoachKind,
   type CoachTurn,
@@ -207,7 +210,9 @@ const anonymized = computed(() =>
   buildDigest(
     props.chat,
     props.mode === "cloud"
-      ? CLOUD_TRANSCRIPT_CHARS
+      ? props.free
+        ? PREVIEW_TRANSCRIPT_CHARS
+        : CLOUD_TRANSCRIPT_CHARS
       : localCoachChars(props.localModel!),
   ),
 );
@@ -254,23 +259,18 @@ async function send() {
   }
 
   const { digest, names, anonymize } = anonymized.value;
-  const turn: Turn = {
-    shown: text,
-    sent: anonymize(text).slice(0, MAX_COACH_CHARS),
-  };
+  const sent = readerText(anonymize, text, MAX_COACH_CHARS);
+  if (!sent) return;
+  const turn: Turn = { shown: text, sent };
   // Earlier exchanges that got an answer; a support handover is left out.
-  const history: CoachTurn[] = [
-    ...turns.value
-      .filter((x) => x.reply)
-      .flatMap((x): CoachTurn[] => [
-        { role: "user", content: x.sent },
-        { role: "assistant", content: x.reply! },
-      ]),
-    { role: "user", content: turn.sent },
-  ];
+  const history: CoachTurn[] = buildCoachHistory(
+    turns.value,
+    turn.sent,
+    MAX_COACH_TURNS,
+  ) as CoachTurn[];
   const options = {
     me: Object.keys(names).find((alias) => names[alias] === props.me),
-    context: anonymize(props.summary).slice(0, MAX_COACH_REPLY_CHARS),
+    context: readerText(anonymize, props.summary, MAX_COACH_REPLY_CHARS),
     background: readerText(anonymize, props.background, MAX_BACKGROUND_CHARS),
   };
 

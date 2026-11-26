@@ -35,3 +35,21 @@ export const isUnchangedRewrite = (reply, draft) => {
   const rewrite = words(String(reply ?? "").split(WHY)[0]);
   return !rewrite || rewrite === words(draft);
 };
+
+/**
+ * Earlier answered exchanges plus the new reader message, capped to `maxTurns`
+ * (oldest dropped first, so an odd cap starts and ends on the reader).
+ * Support handovers and blank entries are left out.
+ */
+export const buildCoachHistory = (turns, nextSent, maxTurns) => {
+  const history = [
+    ...turns
+      .filter((x) => x.sent && x.reply)
+      .flatMap((x) => [
+        { role: "user", content: x.sent },
+        { role: "assistant", content: x.reply },
+      ]),
+    { role: "user", content: nextSent },
+  ];
+  return maxTurns ? history.slice(-maxTurns) : history;
+};
