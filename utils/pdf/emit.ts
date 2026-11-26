@@ -208,12 +208,12 @@ export class PdfWriter {
         return;
       }
 
-      const splitHere =
-        (block.splittable && this.remaining >= MIN_SPLIT_PX) ||
-        // Taller than a fresh page could ever hold: no point moving it first.
-        block.height > this.contentHeight - this.headerHeight(table);
+      // A block that may flow across pages starts right here. Anything else
+      // moves to a fresh page first -- even one too tall for any page, which
+      // would otherwise begin as a sliver at the bottom of this one.
+      const splitHere = block.splittable && this.remaining >= MIN_SPLIT_PX;
 
-      if (!splitHere) this.continuePage(block.chapter, table);
+      if (!splitHere && !isFreshPage) this.continuePage(block.chapter, table);
 
       if (block.height <= this.remaining) {
         this.drawWhole(block);
@@ -221,11 +221,6 @@ export class PdfWriter {
         this.placeSliced(block, table);
       }
     });
-  }
-
-  private headerHeight(table: string | null): number {
-    const header = this.tableHeader;
-    return header && table && header.tableHeader === table ? header.height : 0;
   }
 
   private drawWhole(block: MeasuredBlock): void {
