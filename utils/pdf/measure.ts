@@ -1,4 +1,4 @@
-import type { LayoutSurface } from "~/utils/pdf/document";
+import type { Box, LayoutSurface } from "~/utils/pdf/document";
 
 /**
  * Reads the browser's finished layout back out as a flat list of drawing
@@ -90,7 +90,7 @@ function isPainted(color: string): boolean {
   return !alpha || parseFloat(alpha[1]) > 0;
 }
 
-function radiusOf(style: CSSStyleDeclaration, box: DOMRect): number {
+function radiusOf(style: CSSStyleDeclaration, box: Box): number {
   const radius = parseFloat(style.borderTopLeftRadius) || 0;
   // Pill shapes are authored as a huge radius; PDF wants a real one.
   return Math.min(radius, box.width / 2, box.height / 2);
@@ -134,7 +134,7 @@ export function measureBlocks(
 
     const data = element.dataset;
     return {
-      top: box.top,
+      top: box.y,
       height: box.height,
       chapter: data.chapter || "default",
       breakBefore: data.breakBefore === "1",
@@ -161,10 +161,19 @@ function collect(
 
   const isContinuation = inContinuation || "continuation" in element.dataset;
   const target = isContinuation ? continuationItems : items;
-  const box = surface.boxOf(element);
+
+  const background = isPainted(style.backgroundColor);
+  // The shorthand is "none" when no side has a border: one read, not twelve.
+  const bordered = style.borderStyle !== "none";
+  const clips = style.overflowX !== "visible" || style.overflowY !== "visible";
+  const isImage = element.tagName === "IMG";
+  const href = element.tagName === "A" ? element.getAttribute("href") : null;
+  // Only an element that paints, clips or links needs its own box.
+  const box =
+    background || bordered || clips || isImage ? surface.boxOf(element) : null;
 
   // Parents before children, so backgrounds land under their own content.
-  if (isPainted(style.backgroundColor) && box.width && box.height) {
+  if (background && box && box.width && box.height) {
     target.push({
       kind: "rect",
       x: box.x,
@@ -176,10 +185,9 @@ function collect(
     });
   }
 
-  collectBorders(style, box, target);
+  if (bordered && box) collectBorders(style, box, target);
 
   // A link keeps working in the PDF: one clickable area per line it wraps to.
-  const href = element.tagName === "A" ? element.getAttribute("href") : null;
   if (href && /^https?:\/\//.test(href)) {
     for (const rect of surface.rectsOf(element)) {
       target.push({
@@ -195,7 +203,7 @@ function collect(
 
   // The element belongs to the layout frame's realm, so `instanceof` against
   // this window's HTMLImageElement would never match.
-  if (element.tagName === "IMG") {
+  if (isImage && box) {
     const image = element as HTMLImageElement;
     if (
       box.width &&
@@ -219,16 +227,11 @@ function collect(
     return;
   }
 
-  if (element.classList.contains("wa-w")) {
-    collectText(surface, element, style, target, parentClip);
-    return;
-  }
-
   // `overflow: hidden` is how a stylesheet says "at most this much": a clamped
   // column, a one-line caption. The browser still lays out what it hides, so
   // the clip has to be applied here or the hidden lines would be printed.
   let clip = parentClip;
-  if (style.overflowX !== "visible" || style.overflowY !== "visible") {
+  if (clips && box) {
     const own = {
       left: box.x,
       top: box.y,
@@ -245,17 +248,29 @@ function collect(
       : own;
   }
 
-  for (const child of Array.from(element.children)) {
-    collect(
-      surface,
-      child as HTMLElement,
-      items,
-      continuationItems,
-      clip,
-      isContinuation,
-    );
+  // Text and elements in document order, so they are drawn in it too. Text
+  // takes everything it shows from this element's style: one style lookup per
+  // element, not one per word.
+  for (const child of Array.from(element.childNodes)) {
+    if (child.nodeType === TEXT_NODE) {
+      collectText(surface, child as Text, style, target, clip);
+    } else if (child.nodeType === ELEMENT_NODE) {
+      collect(
+        surface,
+        child as HTMLElement,
+        items,
+        continuationItems,
+        clip,
+        isContinuation,
+      );
+    }
   }
 }
+
+// Node types by number: the elements belong to the layout frame's realm.
+const TEXT_NODE = 3;
+const ELEMENT_NODE = 1;
+const WORD = /\S+/g;
 
 /**
  * jsPDF embeds images from data URLs only. A bundled asset arrives as a URL
@@ -296,7 +311,7 @@ function transformText(text: string, transform: string): string {
 /** Solid borders become filled rectangles along each painted edge. */
 function collectBorders(
   style: CSSStyleDeclaration,
-  box: DOMRect,
+  box: Box,
   items: RenderItem[],
 ): void {
   const sides = [
@@ -324,22 +339,22 @@ function collectBorders(
 
 function collectText(
   surface: LayoutSurface,
-  span: HTMLElement,
+  node: Text,
   style: CSSStyleDeclaration,
   items: RenderItem[],
   clip: Clip | null,
 ): void {
-  // The browser lays out the transformed text, so that is what gets drawn.
-  const text = transformText(span.textContent ?? "", style.textTransform);
-  if (!text) return;
+  const data = node.data;
+  if (!/\S/.test(data)) return;
 
   const fontSize = parseFloat(style.fontSize);
   const bold = parseInt(style.fontWeight, 10) >= 600;
   const fontFamily = surface.familyOf(style.fontFamily);
   const { ascent, descent } = surface.metricsFor(fontSize, bold, fontFamily);
   const color = style.color;
+  const transform = style.textTransform;
 
-  const push = (rect: DOMRect, runText: string) => {
+  const push = (rect: Box, runText: string) => {
     if (!runText) return;
     if (!insideClip(clip, rect.x, rect.y, rect.width, rect.height)) return;
     items.push({
@@ -349,7 +364,8 @@ function collectText(
       height: rect.height,
       width: rect.width,
       baseline: rect.y + (rect.height - (ascent + descent)) / 2 + ascent,
-      text: runText,
+      // The browser lays out the transformed text, so that is what is drawn.
+      text: transformText(runText, transform),
       fontSize,
       bold,
       color,
@@ -357,43 +373,56 @@ function collectText(
     });
   };
 
-  const rects = surface.rectsOf(span);
-  if (rects.length === 0) return;
-
-  if (rects.length === 1) {
-    push(rects[0], text);
-    return;
+  const range = surface.range;
+  WORD.lastIndex = 0;
+  for (let match = WORD.exec(data); match; match = WORD.exec(data)) {
+    const start = match.index;
+    const end = start + match[0].length;
+    range.setStart(node, start);
+    range.setEnd(node, end);
+    const rects = surface.rectsOf(range);
+    if (rects.length === 0) continue;
+    if (rects.length === 1) {
+      push(rects[0], match[0]);
+      continue;
+    }
+    // `overflow-wrap: anywhere` can break a long word (a URL, a hash, a wall
+    // of characters) across lines: re-measure that rare word character by
+    // character, so each fragment is drawn on the line it was put on.
+    splitAcrossLines(surface, node, start, end, push);
   }
+}
 
-  // `overflow-wrap: anywhere` can break a long word (a URL, a hash, a wall of
-  // characters) across lines, leaving the span with one box per line.
-  // Re-measure that rare word character by character so each fragment is drawn
-  // on the line the browser actually put it on.
-  const node = span.firstChild;
-  if (!node || node.nodeType !== Node.TEXT_NODE) {
-    push(rects[0], text);
-    return;
-  }
-
+function splitAcrossLines(
+  surface: LayoutSurface,
+  node: Text,
+  start: number,
+  end: number,
+  push: (_rect: Box, _text: string) => void,
+): void {
   const range = surface.document.createRange();
-  let runStart = 0;
-  let runRect: DOMRect | null = null;
+  let runStart = start;
+  let runRect: Box | null = null;
   let runRight = 0;
 
-  const flush = (end: number) => {
+  const flush = (to: number) => {
     if (!runRect) return;
     push(
-      new DOMRect(runRect.x, runRect.y, runRight - runRect.x, runRect.height),
-      text.slice(runStart, end),
+      {
+        x: runRect.x,
+        y: runRect.y,
+        width: runRight - runRect.x,
+        height: runRect.height,
+      },
+      node.data.slice(runStart, to),
     );
   };
 
-  for (let index = 0; index < text.length; index++) {
+  for (let index = start; index < end; index++) {
     range.setStart(node, index);
     range.setEnd(node, index + 1);
     const charRect = surface.rectsOf(range)[0];
     if (!charRect) continue;
-
     if (!runRect || Math.abs(charRect.y - runRect.y) > 0.5) {
       flush(index);
       runRect = charRect;
@@ -401,6 +430,5 @@ function collectText(
     }
     runRight = charRect.x + charRect.width;
   }
-
-  flush(text.length);
+  flush(end);
 }

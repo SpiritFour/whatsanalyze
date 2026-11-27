@@ -4,10 +4,10 @@ import { escapeHtml, messageToHtml } from "~/utils/pdf/emoji";
  * The markup conventions the measuring pass understands.
  *
  * Every block carries `data-block` (the unit pagination works with) and
- * `data-chapter` (which decides the page background). Every piece of text is
- * wrapped in a `.wa-w` span so the measuring pass gets one box per word
- * straight from the browser's line breaker, instead of re-implementing text
- * wrapping the way the old jsPDF code had to.
+ * `data-chapter` (which decides the page background). Text is plain text:
+ * the measuring pass reads one box per word straight from the browser's line
+ * breaker, through a text Range, instead of re-implementing text wrapping the
+ * way the old jsPDF code had to.
  *
  * Optional block attributes, all read by utils/pdf/measure.ts:
  *
@@ -33,20 +33,20 @@ export interface BlockOptions {
   className?: string;
 }
 
-/** Splits already-escaped markup into per-word spans, leaving `<img>` alone. */
+/**
+ * Already-escaped markup, as is. Words used to be wrapped in one span each so
+ * the measuring pass got a box per word; it now measures words with a text
+ * Range instead (utils/pdf/measure.ts), which saves the browser laying out a
+ * million extra elements in a long chat. Kept as the one place that would
+ * change if text ever needs wrapping again.
+ */
 export function wrapWords(html: string): string {
-  return html.replace(/(<img\b[^>]*>)|([^<]+)/g, (match, tag, text) => {
-    if (tag) return tag;
-    return (text as string).replace(
-      /[^\s]+/g,
-      (word: string) => `<span class="wa-w">${word}</span>`,
-    );
-  });
+  return html;
 }
 
-/** Plain text that still needs a measurable box. */
+/** Plain text, escaped for the layout document. */
 export function words(text: string): string {
-  return wrapWords(escapeHtml(text));
+  return escapeHtml(text);
 }
 
 /**

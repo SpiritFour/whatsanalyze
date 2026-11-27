@@ -57,6 +57,14 @@ html, body {
  * It is positioned offscreen rather than hidden, because `display: none` and
  * `visibility: hidden` subtrees have no boxes to measure.
  */
+/** A measured box in CSS px, relative to the flow container. */
+export interface Box {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
 export class LayoutSurface {
   private iframe: HTMLIFrameElement;
   private win!: Window;
@@ -67,6 +75,9 @@ export class LayoutSurface {
 
   private css: string;
   private fonts: PdfFont[];
+  private textRange: Range | null = null;
+  /** The flow's position during the current measuring pass. */
+  private origin: DOMRect | null = null;
 
   private constructor(
     iframe: HTMLIFrameElement,
@@ -152,6 +163,12 @@ export class LayoutSurface {
     return PDF_FONT_FAMILY;
   }
 
+  /** One Range reused for every word of a measuring pass. */
+  get range(): Range {
+    this.textRange ??= this.doc.createRange();
+    return this.textRange;
+  }
+
   get document(): Document {
     return this.doc;
   }
@@ -167,7 +184,12 @@ export class LayoutSurface {
   async render(html: string): Promise<HTMLElement[]> {
     this.flow.innerHTML = html;
 
-    const images = Array.from(this.flow.querySelectorAll("img"));
+    // Emoji are sized by the stylesheet, so their layout does not wait for
+    // them to decode; only pictures sized by their own pixels do. Waiting for
+    // thousands of emoji decodes was a third of a long export's idle time.
+    const images = Array.from(
+      this.flow.querySelectorAll<HTMLImageElement>("img:not([data-emoji])"),
+    );
     await Promise.all(
       images.map((image) =>
         image.complete && image.naturalWidth > 0
@@ -179,35 +201,39 @@ export class LayoutSurface {
     // Force layout so every rect read afterwards is served from one settled
     // layout pass rather than triggering a reflow each time.
     void this.flow.offsetHeight;
+    // Nothing moves while a batch is measured, so the flow's own position is
+    // read once here instead of once per element.
+    this.origin = this.flow.getBoundingClientRect();
 
     return Array.from(this.flow.querySelectorAll<HTMLElement>("[data-block]"));
   }
 
   /** Flow-relative box, i.e. with the flow container's origin at (0, 0). */
-  boxOf(element: Element): DOMRect {
-    const origin = this.flow.getBoundingClientRect();
+  boxOf(element: Element): Box {
+    const origin = this.origin ?? this.flow.getBoundingClientRect();
     const box = element.getBoundingClientRect();
-    return new DOMRect(
-      box.left - origin.left,
-      box.top - origin.top,
-      box.width,
-      box.height,
-    );
+    return {
+      x: box.left - origin.left,
+      y: box.top - origin.top,
+      width: box.width,
+      height: box.height,
+    };
   }
 
-  rectsOf(range: Range | Element): DOMRect[] {
-    const origin = this.flow.getBoundingClientRect();
-    return Array.from(range.getClientRects())
-      .filter((rect) => rect.width > 0 && rect.height > 0)
-      .map(
-        (rect) =>
-          new DOMRect(
-            rect.left - origin.left,
-            rect.top - origin.top,
-            rect.width,
-            rect.height,
-          ),
-      );
+  rectsOf(range: Range | Element): Box[] {
+    const origin = this.origin ?? this.flow.getBoundingClientRect();
+    const out: Box[] = [];
+    for (const rect of range.getClientRects()) {
+      if (rect.width > 0 && rect.height > 0) {
+        out.push({
+          x: rect.left - origin.left,
+          y: rect.top - origin.top,
+          width: rect.width,
+          height: rect.height,
+        });
+      }
+    }
+    return out;
   }
 
   /**

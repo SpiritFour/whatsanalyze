@@ -488,6 +488,10 @@ export class PdfWriter {
           y,
           width,
           height,
+          // An emoji is the same picture every time it appears: a fixed
+          // name lets jsPDF reuse it instead of hashing the whole PNG again
+          // on every one of thousands of uses.
+          item.emojiId ? `emoji-${item.emojiId}` : undefined,
         );
       } catch (error) {
         // One unreadable attachment must not cost the buyer the whole export.
