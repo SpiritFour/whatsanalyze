@@ -5,6 +5,7 @@ import nunitoBold from "@expo-google-fonts/nunito/700Bold/Nunito_700Bold.ttf?url
 import courierRegular from "@expo-google-fonts/courier-prime/400Regular/CourierPrime_400Regular.ttf?url";
 import courierBold from "@expo-google-fonts/courier-prime/700Bold/CourierPrime_700Bold.ttf?url";
 import { PDF_FONT_FAMILY } from "~/utils/pdf/fonts";
+import { FONT_COVERAGE } from "~/utils/pdf/chatFontCoverage";
 import type { PdfFont } from "~/utils/pdf/fonts";
 
 /**
@@ -13,9 +14,9 @@ import type { PdfFont } from "~/utils/pdf/fonts";
  *
  * Each is fetched only when picked (~270 KB for both weights) and then used
  * twice from the same bytes: as an @font-face for layout and preview, and
- * embedded in the PDF. They cover Latin, Cyrillic and Vietnamese like the
- * default font; a script none of them has (Arabic, CJK) falls back for layout
- * and should be printed in the default font.
+ * embedded in the PDF. They cover fewer scripts than a phone does, so the
+ * tool only offers a font that has every letter of the chat: see `fontsFor`
+ * and utils/pdf/chatFontCoverage.ts.
  */
 
 export type ChatFontId = "default" | "serif" | "rounded" | "typewriter";
@@ -109,4 +110,69 @@ export function loadChatFont(
  */
 export function allChatFontFaceCss(): string {
   return CHAT_FONT_IDS.map((id) => chatFontFaceCss(id)).join("");
+}
+
+/**
+ * What a font never has to draw: emoji (they are artwork, see emoji.ts) and
+ * the joiners, selectors and modifiers they are built from, invisible format
+ * marks such as WhatsApp's left-to-right marks, and white space.
+ */
+const NOT_DRAWN = /[\p{Extended_Pictographic}\p{Cf}\p{Z}\s]/u;
+
+/** Emoji parts that are not Extended_Pictographic themselves. */
+function isEmojiPart(point: number): boolean {
+  return (
+    point === 0xfe0e || // text and emoji presentation selectors
+    point === 0xfe0f ||
+    point === 0x20e3 || // keycap
+    (point >= 0x1f3fb && point <= 0x1f3ff) || // skin tones
+    (point >= 0x1f1e6 && point <= 0x1f1ff) || // flag letters
+    (point >= 0xe0020 && point <= 0xe007f) // tag sequences (subdivision flags)
+  );
+}
+
+/** The distinct characters a set of texts asks a font to draw. */
+export function charactersOf(texts: Iterable<string | null | undefined>) {
+  const characters = new Set<number>();
+  for (const text of texts) {
+    if (!text) continue;
+    for (const character of text) {
+      const point = character.codePointAt(0) as number;
+      if (!NOT_DRAWN.test(character) && !isEmojiPart(point)) {
+        characters.add(point);
+      }
+    }
+  }
+  return characters;
+}
+
+function covers(ranges: Array<[number, number]>, point: number): boolean {
+  let low = 0;
+  let high = ranges.length - 1;
+  while (low <= high) {
+    const middle = (low + high) >> 1;
+    const [first, last] = ranges[middle];
+    if (point < first) high = middle - 1;
+    else if (point > last) low = middle + 1;
+    else return true;
+  }
+  return false;
+}
+
+/**
+ * The font choices that can draw every one of these characters. The default
+ * font is always offered: it is what the layout falls back to anyway. A chat
+ * in Arabic, Hebrew, Greek or Chinese gets the default font only, and one in
+ * Russian loses the typewriter, which has no Cyrillic.
+ */
+export function fontsFor(characters: Set<number>): ChatFontId[] {
+  return CHAT_FONT_IDS.filter((id) => {
+    if (id === "default") return true;
+    const ranges = FONT_COVERAGE[id];
+    if (!ranges) return false;
+    for (const point of characters) {
+      if (!covers(ranges, point)) return false;
+    }
+    return true;
+  });
 }

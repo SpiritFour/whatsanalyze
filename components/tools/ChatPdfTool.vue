@@ -344,6 +344,7 @@ import {
 import { getAttachmentBytes } from "~/utils/attachments";
 import logo from "~/assets/whatsanalyze-logo-green-PWA.png";
 import { pdfFontFaceCss } from "~/utils/pdf/fonts";
+import { charactersOf, fontsFor } from "~/utils/pdf/chatFonts";
 
 defineProps({
   title: { type: String, required: true },
@@ -731,8 +732,36 @@ async function collectChatImages() {
 
 const pageColor = computed(() => resolveStyle(options).page);
 
+// ----- fonts that can draw this chat
+// Every letter in the chat, its names and the cover's own words: a font is
+// offered only if it has a glyph for all of them (utils/pdf/chatFonts.ts).
+const chatCharacters = computed(() => {
+  const messages = chat.value?.chatObject || [];
+  return charactersOf([
+    ...messages.map((message) => message.message),
+    ...participants.value,
+  ]);
+});
+
+const usableFonts = computed(() => {
+  const characters = new Set(chatCharacters.value);
+  for (const point of charactersOf([
+    options.cover.title,
+    options.cover.dedication,
+  ])) {
+    characters.add(point);
+  }
+  return fontsFor(characters);
+});
+
+// A font picked for an earlier chat may lack this one's letters.
+watch(usableFonts, (fonts) => {
+  if (!fonts.includes(options.font)) options.font = "default";
+});
+
 provide("chatPdfDesign", {
   options,
+  usableFonts,
   hasFullAccess,
   chatTitle,
   pageColor,

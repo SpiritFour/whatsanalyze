@@ -171,6 +171,12 @@ design can go further (`chatDesign.ts`, controls in
   an `@font-face` in the layout frame from the same bytes, the measuring pass
   records each word's family, and the emitter switches per word. A font is
   fetched only when picked (about 270 KB for both weights).
+  A font is only offered when it has a glyph for every letter of the chat,
+  its names and the cover text: `fontsFor` checks against each font's real
+  character map (`chatFontCoverage.ts`, generated from the TTFs by
+  `scripts/build-font-coverage.mjs`). Russian loses the typewriter; Greek,
+  Arabic, Hebrew and CJK get the default font only. The renderer applies the
+  same check, so a remembered choice can never print gaps.
 - **Book layout.** Every month is its own chapter (`chat-YYYY-MM`): it opens a
   page with the month as a heading, and the footer names the month.
 

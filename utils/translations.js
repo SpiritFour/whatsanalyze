@@ -211,6 +211,8 @@ export const messages = {
         removePhoto: "Remove photo",
         coverPreviewLabel: "Cover",
         fontTitle: "Font",
+        fontsHidden:
+          "Fonts that lack some of this chat's letters are hidden, so nothing prints as gaps.",
         font: {
           default: "Standard",
           serif: "Book",
@@ -2423,6 +2425,8 @@ export const messages = {
         removePhoto: "Foto entfernen",
         coverPreviewLabel: "Titelseite",
         fontTitle: "Schrift",
+        fontsHidden:
+          "Schriften, denen Buchstaben dieses Chats fehlen, sind ausgeblendet, damit nichts als Lücke gedruckt wird.",
         font: {
           default: "Standard",
           serif: "Buch",
@@ -4634,6 +4638,8 @@ export const messages = {
         removePhoto: "Quitar la foto",
         coverPreviewLabel: "Portada",
         fontTitle: "Fuente",
+        fontsHidden:
+          "Las fuentes a las que les faltan letras de este chat están ocultas, para que nada se imprima con huecos.",
         font: {
           default: "Estándar",
           serif: "Libro",
@@ -6829,6 +6835,8 @@ export const messages = {
         removePhoto: "Remover a foto",
         coverPreviewLabel: "Capa",
         fontTitle: "Tipo de letra",
+        fontsHidden:
+          "Os tipos de letra a que faltam letras desta conversa estão ocultos, para que nada seja impresso com falhas.",
         font: {
           default: "Padrão",
           serif: "Livro",
@@ -9029,6 +9037,8 @@ export const messages = {
         removePhoto: "Retirer la photo",
         coverPreviewLabel: "Couverture",
         fontTitle: "Police",
+        fontsHidden:
+          "Les polices auxquelles il manque des lettres de cette discussion sont masquées, pour que rien ne s'imprime avec des trous.",
         font: {
           default: "Standard",
           serif: "Livre",
@@ -11240,6 +11250,8 @@ export const messages = {
         removePhoto: "Rimuovi la foto",
         coverPreviewLabel: "Copertina",
         fontTitle: "Carattere",
+        fontsHidden:
+          "I caratteri a cui mancano lettere di questa chat sono nascosti, così nulla viene stampato con dei vuoti.",
         font: {
           default: "Standard",
           serif: "Libro",

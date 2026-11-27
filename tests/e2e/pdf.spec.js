@@ -422,6 +422,47 @@ test.describe("the WhatsApp to PDF tool", () => {
     expect(pdf).toMatch(/\/MediaBox \[0 0 612(\.\d*)? 792(\.\d*)?\]/);
   });
 
+  test("offers only the fonts that have every letter of the chat", async ({
+    page,
+  }) => {
+    const chatIn = (name, lines) => ({
+      name,
+      mimeType: "text/plain",
+      buffer: Buffer.from(
+        lines
+          .map(
+            (text, i) =>
+              `1/${2 + i}/21, 10:0${i} - ${i % 2 ? "Anna" : "Boris"}: ${text}`,
+          )
+          .join("\n"),
+        "utf-8",
+      ),
+    });
+    const fontChips = page.locator("[data-font]");
+
+    // Russian: the typewriter has no Cyrillic, the other two do.
+    await page.goto("/tools/whatsapp-to-pdf");
+    await page
+      .locator("#dropzone-slot input[type=file]")
+      .setInputFiles(chatIn("russian.txt", ["Привет!", "Как дела? 😂"]));
+    await expect(page.locator("#chat-pdf-tool")).toBeVisible();
+    await expect(page.locator('[data-font="serif"]')).toHaveCount(1);
+    await expect(page.locator('[data-font="typewriter"]')).toHaveCount(0);
+    await expect(page.locator("[data-fonts-hidden]")).toBeVisible();
+
+    // A book font chosen for that chat...
+    await page.locator('label:has([data-font="serif"])').click();
+
+    // ...does not carry over to an Arabic one, which none of them can draw.
+    await page.goto("/tools/whatsapp-to-pdf");
+    await page
+      .locator("#dropzone-slot input[type=file]")
+      .setInputFiles(chatIn("arabic.txt", ["مرحبا", "كيف حالك"]));
+    await expect(page.locator("#chat-pdf-tool")).toBeVisible();
+    await expect(fontChips).toHaveCount(1);
+    await expect(page.locator('[data-font="default"]')).toBeChecked();
+  });
+
   test.describe("Pro designs", () => {
     /** Custom colours, a hearts wallpaper and a titled cover. */
     const designIt = async (page) => {

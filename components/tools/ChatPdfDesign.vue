@@ -84,7 +84,7 @@
       </legend>
       <div class="design__chips" role="radiogroup">
         <label
-          v-for="font in fonts"
+          v-for="font in design.usableFonts.value"
           :key="font"
           class="chip"
           :class="{ 'is-selected': options.font === font }"
@@ -101,6 +101,9 @@
           {{ t(`pdfTool.design.font.${font}`) }}
         </label>
       </div>
+      <p v-if="fontsHidden" class="design__hint" data-fonts-hidden>
+        {{ t("pdfTool.design.fontsHidden") }}
+      </p>
     </fieldset>
 
     <!-- Book layout -->
@@ -214,7 +217,10 @@ const design = inject("chatPdfDesign");
 const options = design.options;
 
 const colorKeys = ["page", "bubbleIn", "bubbleOut", "accent"];
-const fonts = CHAT_FONT_IDS;
+// Only the fonts that have every letter of this chat (see ChatPdfTool).
+const fontsHidden = computed(
+  () => design.usableFonts.value.length < CHAT_FONT_IDS.length,
+);
 // Each chip in its own typeface (declared on the page by ChatPdfTool).
 const fontPreview = (font) => chatFontFamily(font);
 const backgroundChoices = ["none", ...PATTERN_IDS, "photo"];
@@ -300,6 +306,13 @@ function pickCover(event) {
   legend {
     cursor: default;
   }
+}
+
+.design__hint {
+  margin: 0.5rem 0 0;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: $wa-ink-muted;
 }
 
 .design__check {

@@ -12,7 +12,7 @@ import {
   filterChatMessages,
   prepareChatMessages,
 } from "~/utils/pdf/chatView";
-import { loadChatFont } from "~/utils/pdf/chatFonts";
+import { charactersOf, fontsFor, loadChatFont } from "~/utils/pdf/chatFonts";
 import type { ChatViewLabels } from "~/utils/pdf/chatView";
 import {
   COVER_CHAPTER,
@@ -77,7 +77,7 @@ export async function renderChatViewPdf(
   const {
     chat,
     attachments,
-    options,
+    options: requested,
     title,
     labels,
     locale,
@@ -85,6 +85,8 @@ export async function renderChatViewPdf(
     onProgress,
     assets = {},
   } = input;
+  // May fall back to the default font below; never mutates the caller's.
+  let options = requested;
 
   const style = resolveStyle(options);
   const geometry = chatGeometry(options.paper);
@@ -93,7 +95,19 @@ export async function renderChatViewPdf(
   // The content filters first: the sample is the first 100 of what is left.
   const all = filterChatMessages(chat.chatObject, options, participants);
   const messages = isSample ? all.slice(0, CHAT_SAMPLE_COUNT) : all;
-  const font = await loadChatFont(options.font);
+  // A font that lacks some of these letters would print gaps: such a chat is
+  // printed in the default font, whatever was chosen.
+  const fontId = fontsFor(
+    charactersOf([
+      ...messages.map((message: any) => message.message),
+      ...participants,
+      title,
+    ]),
+  ).includes(options.font)
+    ? options.font
+    : "default";
+  if (fontId !== options.font) options = { ...options, font: fontId };
+  const font = await loadChatFont(fontId);
 
   const builder = await PdfBuilder.create({
     geometry,
