@@ -6,8 +6,11 @@
  * style may not rely on gradients, shadows or translucency.
  */
 
-export type ChatStyleId =
+export type PresetStyleId =
   "iphone-light" | "iphone-dark" | "android-light" | "android-dark" | "ink";
+
+/** A preset, or "custom": a palette derived from four chosen colours (Pro). */
+export type ChatStyleId = PresetStyleId | "custom";
 
 export interface ChatStyle {
   id: ChatStyleId;
@@ -36,9 +39,40 @@ export interface ChatStyle {
   colorNames: boolean;
   /** Fallback name colour when colours are off or missing. */
   name: string;
+  /** Text and secondary text on outgoing bubbles, when they differ. */
+  textOut?: string;
+  mutedOut?: string;
+  /** Highlight colour of a custom style (cover, outro). */
+  accent?: string;
 }
 
-export const CHAT_STYLES: Record<ChatStyleId, ChatStyle> = {
+/** The four colours a custom style is made from. */
+export interface CustomColors {
+  page: string;
+  bubbleIn: string;
+  bubbleOut: string;
+  accent: string;
+}
+
+export interface WallpaperChoice {
+  kind: "none" | "pattern" | "photo";
+  pattern: "dots" | "hearts" | "stars" | "grid" | "waves" | "confetti";
+  /** How far a photo is faded towards the page colour, 0–0.9. */
+  dim: number;
+}
+
+export interface CoverChoice {
+  /** Replaces the chat's name on the cover; empty keeps it. */
+  title: string;
+  /** A line or two under the title, e.g. "For our 5th anniversary". */
+  dedication: string;
+  /** Cover background; null uses the style's page colour. */
+  color: string | null;
+  /** Whether a cover photo is set (the image itself is kept separately). */
+  photo: boolean;
+}
+
+export const CHAT_STYLES: Record<PresetStyleId, ChatStyle> = {
   "iphone-light": {
     id: "iphone-light",
     page: "#efeae2",
@@ -143,7 +177,7 @@ export const CHAT_STYLES: Record<ChatStyleId, ChatStyle> = {
   },
 };
 
-export const CHAT_STYLE_IDS = Object.keys(CHAT_STYLES) as ChatStyleId[];
+export const CHAT_STYLE_IDS = Object.keys(CHAT_STYLES) as PresetStyleId[];
 
 export type TextSize = "s" | "m" | "l";
 
@@ -159,6 +193,12 @@ export interface ChatViewOptions {
   showNames: boolean;
   /** The participant whose messages go on the right. */
   me: string;
+  /** The preset a custom style started from, and falls back to without Pro. */
+  baseStyle: PresetStyleId;
+  /** Used when `style` is "custom". */
+  colors: CustomColors;
+  wallpaper: WallpaperChoice;
+  cover: CoverChoice;
 }
 
 export const DEFAULT_CHAT_VIEW_OPTIONS: Omit<ChatViewOptions, "me"> = {
@@ -167,19 +207,51 @@ export const DEFAULT_CHAT_VIEW_OPTIONS: Omit<ChatViewOptions, "me"> = {
   showTimes: true,
   showMedia: true,
   showNames: false,
+  baseStyle: "iphone-light",
+  colors: {
+    page: "#f3e8ff",
+    bubbleIn: "#ffffff",
+    bubbleOut: "#e9d5ff",
+    accent: "#7c3aed",
+  },
+  wallpaper: { kind: "none", pattern: "dots", dim: 0.55 },
+  cover: { title: "", dedication: "", color: null, photo: false },
 };
+
+const PATTERNS = ["dots", "hearts", "stars", "grid", "waves", "confetti"];
 
 /** Validates options read back from storage or a URL. */
 export function normalizeChatViewOptions(
   value: Partial<ChatViewOptions> | null | undefined,
   me: string,
 ): ChatViewOptions {
-  const options = { ...DEFAULT_CHAT_VIEW_OPTIONS, me, ...(value || {}) };
-  if (!CHAT_STYLE_IDS.includes(options.style)) {
-    options.style = DEFAULT_CHAT_VIEW_OPTIONS.style;
+  const defaults = DEFAULT_CHAT_VIEW_OPTIONS;
+  const options: ChatViewOptions = {
+    ...defaults,
+    me,
+    ...(value || {}),
+    colors: { ...defaults.colors, ...(value?.colors || {}) },
+    wallpaper: { ...defaults.wallpaper, ...(value?.wallpaper || {}) },
+    cover: { ...defaults.cover, ...(value?.cover || {}) },
+  };
+  if (options.style !== "custom" && !CHAT_STYLE_IDS.includes(options.style)) {
+    options.style = defaults.style;
+  }
+  if (!CHAT_STYLE_IDS.includes(options.baseStyle)) {
+    options.baseStyle = defaults.baseStyle;
   }
   if (!(options.textSize in TEXT_SIZES)) {
-    options.textSize = DEFAULT_CHAT_VIEW_OPTIONS.textSize;
+    options.textSize = defaults.textSize;
   }
-  return options as ChatViewOptions;
+  if (!["none", "pattern", "photo"].includes(options.wallpaper.kind)) {
+    options.wallpaper.kind = "none";
+  }
+  if (!PATTERNS.includes(options.wallpaper.pattern)) {
+    options.wallpaper.pattern = "dots";
+  }
+  options.wallpaper.dim = Math.max(
+    0,
+    Math.min(0.9, Number(options.wallpaper.dim) || 0),
+  );
+  return options;
 }

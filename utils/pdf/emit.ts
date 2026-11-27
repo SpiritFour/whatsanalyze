@@ -75,12 +75,18 @@ export interface WriterOptions {
   geometry: PageGeometry;
   /** Page background per chapter; null leaves the sheet unpainted. */
   background: (_chapter: string) => string | null;
+  /**
+   * A full-page picture per chapter (a JPEG data URL, A4-shaped), drawn over
+   * the colour. The PDF stores it once however many pages show it.
+   */
+  backgroundImage?: (_chapter: string) => string | null;
 }
 
 export class PdfWriter {
   private doc: jsPDF;
   private geometry: PageGeometry;
   private background: WriterOptions["background"];
+  private backgroundImage: WriterOptions["backgroundImage"];
   private contentHeight: number;
   private pageChapters: string[] = [];
   private cursor = 0;
@@ -91,9 +97,10 @@ export class PdfWriter {
   private tableHeader: MeasuredBlock | null = null;
   private emojiPng = new Map<string, string>();
 
-  constructor({ geometry, background }: WriterOptions) {
+  constructor({ geometry, background, backgroundImage }: WriterOptions) {
     this.geometry = geometry;
     this.background = background;
+    this.backgroundImage = backgroundImage;
     this.contentHeight = contentHeightPx(geometry);
 
     this.doc = new jsPDF({
@@ -130,6 +137,25 @@ export class PdfWriter {
       const [r, g, b] = parseColor(background);
       this.doc.setFillColor(r, g, b);
       this.doc.rect(0, 0, this.geometry.widthMm, this.geometry.heightMm, "F");
+    }
+
+    const image = this.backgroundImage?.(chapter);
+    if (image) {
+      try {
+        this.doc.addImage(
+          image,
+          "JPEG",
+          0,
+          0,
+          this.geometry.widthMm,
+          this.geometry.heightMm,
+          // the same alias for the same picture: embedded once, drawn often
+          `background-${chapter}`,
+        );
+      } catch (error) {
+        // the colour underneath still makes a page
+        console.error("Could not draw the page background", error);
+      }
     }
   }
 

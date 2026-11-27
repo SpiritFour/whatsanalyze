@@ -13,6 +13,8 @@ const props = defineProps({
   html: { type: String, required: true },
   /** chatViewCss(options, "screen"). */
   css: { type: String, required: true },
+  /** An A4-shaped wallpaper (data URL), repeated down the chat like pages. */
+  background: { type: String, default: "" },
 });
 
 const host = ref(null);
@@ -21,6 +23,19 @@ let root = null;
 function render() {
   if (!root) return;
   root.innerHTML = `<style>${props.css}</style><div class="cv-root">${props.html}</div>`;
+  applyBackground();
+}
+
+// Set as a property rather than written into the CSS: a photo is megabytes
+// of data URL, and the stylesheet is rebuilt on every option change.
+function applyBackground() {
+  const chat = root?.querySelector(".cv-root");
+  if (!chat) return;
+  chat.style.backgroundImage = props.background
+    ? `url("${props.background}")`
+    : "";
+  chat.style.backgroundSize = "100% auto";
+  chat.style.backgroundRepeat = "repeat-y";
 }
 
 onMounted(() => {
@@ -29,6 +44,7 @@ onMounted(() => {
 });
 
 watch(() => [props.html, props.css], render);
+watch(() => props.background, applyBackground);
 </script>
 
 <style lang="scss" scoped>

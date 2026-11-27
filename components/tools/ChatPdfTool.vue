@@ -60,8 +60,42 @@
                   {{ t(`pdfTool.style.${style.id.replace("-", "_")}`) }}
                 </span>
               </label>
+              <!-- Pro: a palette of the buyer's own colours -->
+              <label
+                class="style-option"
+                :class="{ 'is-selected': options.style === 'custom' }"
+              >
+                <input
+                  v-model="options.style"
+                  type="radio"
+                  name="chat-style"
+                  value="custom"
+                  class="visually-hidden"
+                  data-style="custom"
+                />
+                <span
+                  class="style-option__swatch"
+                  :style="{ background: options.colors.page }"
+                  aria-hidden="true"
+                >
+                  <span
+                    class="style-option__bubble"
+                    :style="{ background: options.colors.bubbleIn }"
+                  />
+                  <span
+                    class="style-option__bubble is-out"
+                    :style="{ background: options.colors.bubbleOut }"
+                  />
+                </span>
+                <span class="style-option__label">
+                  {{ t("pdfTool.style.custom") }}
+                  <span class="pro-chip">{{ t("pdfTool.design.pro") }}</span>
+                </span>
+              </label>
             </div>
           </fieldset>
+
+          <ChatPdfDesign />
 
           <fieldset class="chat-pdf__group">
             <legend>{{ t("pdfTool.adjustTitle") }}</legend>
@@ -129,10 +163,42 @@
         </form>
 
         <div class="chat-pdf__preview">
-          <p class="chat-pdf__preview-label">
-            {{ t("pdfTool.previewLabel", { count: previewCount }) }}
-          </p>
-          <ChatPreview :html="previewHtml" :css="previewCss" />
+          <div class="chat-pdf__tabs" role="tablist">
+            <button
+              type="button"
+              role="tab"
+              :aria-selected="previewTab === 'chat'"
+              :class="{ 'is-selected': previewTab === 'chat' }"
+              @click="previewTab = 'chat'"
+            >
+              {{ t("pdfTool.previewLabel", { count: previewCount }) }}
+            </button>
+            <button
+              type="button"
+              role="tab"
+              data-tab="cover"
+              :aria-selected="previewTab === 'cover'"
+              :class="{ 'is-selected': previewTab === 'cover' }"
+              @click="previewTab = 'cover'"
+            >
+              {{ t("pdfTool.design.coverPreviewLabel") }}
+            </button>
+          </div>
+          <ChatPreview
+            v-show="previewTab === 'chat'"
+            :html="previewHtml"
+            :css="previewCss"
+            :background="wallpaperUrl"
+          />
+          <CoverPreview
+            v-if="previewTab === 'cover'"
+            :html="coverPreviewHtml"
+            :css="coverPreviewCss"
+            :background="coverPreviewColor"
+            :page-width="pageWidth"
+            :page-height="pageHeight"
+            :margin="pageMargin"
+          />
         </div>
       </div>
 
@@ -158,7 +224,9 @@ import {
   nextTick,
   onBeforeUnmount,
   onMounted,
+  provide,
   reactive,
+  ref,
   shallowRef,
   toRaw,
   watch,
@@ -166,6 +234,8 @@ import {
 import { storeToRefs } from "pinia";
 import ToolDropzone from "~/components/tools/ToolDropzone.vue";
 import ChatPreview from "~/components/tools/ChatPreview.vue";
+import ChatPdfDesign from "~/components/tools/ChatPdfDesign.vue";
+import CoverPreview from "~/components/tools/CoverPreview.vue";
 import PdfDownloadPopup from "~/components/ChatVisualization/PdfDownloadPopup.vue";
 import OneTimePurchaseReturn from "~/components/ChatVisualization/OneTimePurchaseReturn.vue";
 import { Chat } from "~/utils/transformChatData";
@@ -185,7 +255,27 @@ import {
   chatViewHtml,
   prepareChatMessages,
 } from "~/utils/pdf/chatView";
-import { CHAT_SAMPLE_COUNT, renderChatViewPdf } from "~/utils/pdf/chatPdf";
+import {
+  CHAT_GEOMETRY,
+  CHAT_SAMPLE_COUNT,
+  renderChatViewPdf,
+} from "~/utils/pdf/chatPdf";
+import {
+  coverPhoto as prepareCoverPhoto,
+  designForAccess,
+  patternWallpaper,
+  photoWallpaper,
+  resolveStyle,
+} from "~/utils/pdf/chatDesign";
+import { chatCoverHtml, chatPagesCss, coverColor } from "~/utils/pdf/chatPages";
+import { contentHeightPx, pageWidthPx, px } from "~/utils/pdf/page";
+import {
+  clearDesignImage,
+  loadDesignImage,
+  saveDesignImage,
+} from "~/utils/pdf/designStore";
+import { getAttachmentBytes } from "~/utils/attachments";
+import logo from "~/assets/whatsanalyze-logo-green-PWA.png";
 import { pdfFontFaceCss } from "~/utils/pdf/fonts";
 
 defineProps({
@@ -199,6 +289,8 @@ const { t, locale } = useI18n();
 const localePath = useLocalePath();
 const { baseUrl } = useRuntimeConfig().public;
 const STORAGE_KEY = "wa-chat-pdf-style";
+// The cover's words are about this chat: kept for the tab only.
+const COVER_KEY = "wa-chat-pdf-cover";
 
 // kept out of Vue's deep reactivity: Chat caches its lazy getters on itself,
 // and proxying a whole chat is slow
@@ -265,7 +357,7 @@ function pdfLink(path, campaign) {
 
 const count = (value) => Number(value).toLocaleString(locale.value);
 
-function coverContent(printed, total) {
+function coverContent(printed, total, design = options) {
   const messages = chat.value?.chatObject || [];
   const first = messages[0]?.date;
   const last = messages.at(-1)?.date;
@@ -277,7 +369,8 @@ function coverContent(printed, total) {
   return {
     brand: "WhatsAnalyze",
     eyebrow: t("pdfTool.cover.eyebrow"),
-    title: chatTitle.value,
+    title: design.cover?.title?.trim() || chatTitle.value,
+    dedication: design.cover?.dedication || "",
     members,
     period: `${formatDay(first)} – ${formatDay(last)}`,
     stats: [
@@ -346,16 +439,35 @@ function labels(printed, total) {
             total: total.toLocaleString(locale.value),
           })
         : "",
-    cover: coverContent(printed, total),
+    // what may be printed: the Pro cover only with full access
+    cover: coverContent(printed, total, printableOptions.value),
     outro: outroContent(printed, total),
   };
 }
 
+/** The design as the PDF may print it: Pro parts only with full access. */
+const printableOptions = computed(() =>
+  designForAccess(options, hasFullAccess.value),
+);
+
+/** Deep copy: the renderer must not see later edits mid-build. */
+const snapshot = (value) => JSON.parse(JSON.stringify(value));
+
+const printableAssets = computed(() =>
+  hasFullAccess.value
+    ? {
+        wallpaper: wallpaperUrl.value || null,
+        coverPhoto: options.cover.photo ? coverPhotoUrl.value || null : null,
+      }
+    : {},
+);
+
 const chatView = computed(() => ({
-  options: { ...options },
+  options: snapshot(printableOptions.value),
   title: chatTitle.value,
   labels,
   locale: locale.value,
+  assets: printableAssets.value,
 }));
 
 // ----- preview: the free sample's messages, in the chosen look
@@ -380,7 +492,7 @@ watch(
   },
 );
 
-function documentHtml(messages) {
+function documentHtml(messages, design = options) {
   const total = chat.value?.chatObject.length || 0;
   return chatViewHtml(
     {
@@ -390,12 +502,143 @@ function documentHtml(messages) {
       colors: chat.value?.personColorMap || {},
       locale: locale.value,
     },
-    options,
+    design,
   );
 }
 
 const previewHtml = computed(() => documentHtml(previewMessages.value));
 const previewCss = computed(() => chatViewCss(options, "screen"));
+
+// ----- Pro design: wallpaper, cover photo and the cover preview
+// Everyone sees their design in the preview; printableOptions decides what
+// the PDF carries.
+const previewTab = ref("chat");
+const wallpaperUrl = ref("");
+const wallpaperSource = shallowRef(null);
+const coverPhotoUrl = ref("");
+const coverPick = ref(null);
+const chatImages = shallowRef([]);
+
+const pageWidth = pageWidthPx(CHAT_GEOMETRY);
+const pageHeight = px(CHAT_GEOMETRY.heightMm);
+const pageMargin = px(CHAT_GEOMETRY.margin.left);
+
+let wallpaperTimer = null;
+function refreshWallpaper() {
+  clearTimeout(wallpaperTimer);
+  // Debounced: dragging a colour picker or the fade slider fires constantly.
+  wallpaperTimer = setTimeout(async () => {
+    const choice = options.wallpaper;
+    const style = resolveStyle(options);
+    try {
+      if (choice.kind === "pattern") {
+        wallpaperUrl.value = patternWallpaper(choice.pattern, style);
+      } else if (choice.kind === "photo" && wallpaperSource.value) {
+        wallpaperUrl.value = await photoWallpaper(
+          wallpaperSource.value,
+          style.page,
+          choice.dim,
+        );
+      } else {
+        wallpaperUrl.value = "";
+      }
+    } catch (error) {
+      console.error("Could not prepare the background", error);
+      wallpaperUrl.value = "";
+    }
+  }, 120);
+}
+
+watch(
+  () => [
+    options.wallpaper.kind,
+    options.wallpaper.pattern,
+    options.wallpaper.dim,
+    options.style,
+    options.colors.page,
+    options.colors.bubbleIn,
+  ],
+  refreshWallpaper,
+);
+
+async function setWallpaperPhoto(file) {
+  wallpaperSource.value = file;
+  options.wallpaper.kind = "photo";
+  refreshWallpaper();
+  await saveDesignImage("wallpaper", file);
+}
+
+async function setCoverPhoto(blob, fileName = null) {
+  coverPick.value = fileName;
+  if (!blob) {
+    options.cover.photo = false;
+    coverPhotoUrl.value = "";
+    await clearDesignImage("cover");
+    return;
+  }
+  try {
+    coverPhotoUrl.value = await prepareCoverPhoto(blob);
+    options.cover.photo = true;
+    await saveDesignImage("cover", blob);
+  } catch (error) {
+    console.error("Could not read the cover photo", error);
+  }
+}
+
+/** Photos in the chat itself, offered as cover photos. */
+async function collectChatImages() {
+  for (const image of chatImages.value) URL.revokeObjectURL(image.url);
+  chatImages.value = [];
+  const found = [];
+  const seen = new Set();
+  for (const message of chat.value?.chatObject || []) {
+    const fileName = message.attachment?.fileName;
+    if (!fileName || seen.has(fileName) || !/\.(jpe?g|png)$/i.test(fileName)) {
+      continue;
+    }
+    seen.add(fileName);
+    const bytes = await getAttachmentBytes(fileName, toRaw(attachments.value));
+    if (!bytes) continue;
+    const blob = new Blob([bytes], {
+      type: /\.png$/i.test(fileName) ? "image/png" : "image/jpeg",
+    });
+    found.push({ fileName, blob, url: URL.createObjectURL(blob) });
+    if (found.length >= 12) break;
+  }
+  chatImages.value = markRaw(found);
+}
+
+const pageColor = computed(() => resolveStyle(options).page);
+
+provide("chatPdfDesign", {
+  options,
+  hasFullAccess,
+  chatTitle,
+  pageColor,
+  chatImages,
+  coverPick,
+  setWallpaperPhoto,
+  setCoverPhoto,
+});
+
+// The cover as it will print with this design (the full design: this is
+// where it is tried out).
+const coverPreviewHtml = computed(() => {
+  if (!chat.value) return "";
+  const total = chat.value.chatObject.length;
+  const printed = hasFullAccess.value
+    ? total
+    : Math.min(total, CHAT_SAMPLE_COUNT);
+  return chatCoverHtml(
+    coverContent(printed, total, options),
+    logo,
+    options.cover.photo ? coverPhotoUrl.value || null : null,
+  );
+});
+const coverPreviewCss = computed(() =>
+  chatPagesCss(options, contentHeightPx(CHAT_GEOMETRY)),
+);
+const coverPreviewColor = computed(() => coverColor(options));
 
 // ----- printing
 // The Print button prints the PDF itself: the same file the download gives,
@@ -422,10 +665,18 @@ function beforePrint() {
   document.getElementById("cv-print-root")?.remove();
   const root = document.createElement("div");
   root.id = "cv-print-root";
-  root.attachShadow({ mode: "open" }).innerHTML =
-    `<style>${chatViewCss(options, "screen")}</style><div class="cv-root">${
-      previewHtml.value
-    }</div>`;
+  const design = printableOptions.value;
+  const shadow = root.attachShadow({ mode: "open" });
+  shadow.innerHTML = `<style>${chatViewCss(design, "screen")}</style><div class="cv-root">${documentHtml(
+    previewMessages.value,
+    design,
+  )}</div>`;
+  const wallpaper = printableAssets.value.wallpaper;
+  if (wallpaper) {
+    const chatRoot = shadow.querySelector(".cv-root");
+    chatRoot.style.backgroundImage = `url("${wallpaper}")`;
+    chatRoot.style.backgroundSize = "100% auto";
+  }
   document.body.appendChild(root);
   document.documentElement.classList.add("cv-printing");
 }
@@ -485,11 +736,12 @@ async function printChat() {
     const blob = await renderChatViewPdf({
       chat: toRaw(chat.value),
       attachments: toRaw(attachments.value),
-      options: { ...options },
+      options: snapshot(printableOptions.value),
       title: chatTitle.value,
       labels,
       locale: locale.value,
       isSample: !hasFullAccess.value,
+      assets: printableAssets.value,
     });
     releasePrintUrl();
     printUrl = URL.createObjectURL(blob);
@@ -500,6 +752,14 @@ async function printChat() {
     console.error("Could not print the chat", error);
   } finally {
     printing.value = false;
+  }
+}
+
+function loadStoredCover() {
+  try {
+    return JSON.parse(sessionStorage.getItem(COVER_KEY) || "null");
+  } catch {
+    return null;
   }
 }
 
@@ -514,7 +774,15 @@ function loadStoredOptions() {
 }
 
 watch(
-  () => [options.style, options.textSize, options.showTimes, options.showMedia],
+  () => [
+    options.style,
+    options.textSize,
+    options.showTimes,
+    options.showMedia,
+    options.baseStyle,
+    { ...options.colors },
+    { ...options.wallpaper },
+  ],
   () => {
     updateGlobalStyle();
     try {
@@ -525,10 +793,71 @@ watch(
           textSize: options.textSize,
           showTimes: options.showTimes,
           showMedia: options.showMedia,
+          baseStyle: options.baseStyle,
+          colors: options.colors,
+          wallpaper: options.wallpaper,
         }),
       );
     } catch {
       // storage refused (private mode): the choice lasts for this page only
+    }
+  },
+  { deep: true },
+);
+
+watch(
+  () => ({ ...options.cover }),
+  (cover) => {
+    try {
+      sessionStorage.setItem(COVER_KEY, JSON.stringify(cover));
+    } catch {
+      // the cover just has to be filled in again after a reload
+    }
+  },
+);
+
+// A custom palette starts from the preset on screen, and a preset picked
+// later becomes the one a custom palette falls back to.
+watch(
+  () => options.style,
+  (style, previous) => {
+    if (style !== "custom") {
+      options.baseStyle = style;
+      return;
+    }
+    if (previous && previous !== "custom" && !customColorsTouched()) {
+      const preset = resolveStyle({ ...options, style: previous });
+      options.colors = {
+        page: preset.page,
+        bubbleIn: preset.bubbleIn,
+        bubbleOut: preset.bubbleOut,
+        accent: "#21a68d",
+      };
+    }
+  },
+);
+
+function customColorsTouched() {
+  try {
+    return !!JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}")
+      .customTouched;
+  } catch {
+    return false;
+  }
+}
+
+watch(
+  () => ({ ...options.colors }),
+  () => {
+    if (options.style !== "custom") return;
+    try {
+      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({ ...stored, customTouched: true }),
+      );
+    } catch {
+      // nothing to remember without storage
     }
   },
 );
@@ -542,13 +871,36 @@ function onChatAnalyzed(payload) {
     options.me = chat.value.messagesPerPerson[0]?.name || participants.value[0];
   }
   options.showNames = participants.value.length > 2;
+  void collectChatImages();
   nextTick(() => scrollToSettled("#chat-pdf-tool", { offset: 80 }));
+}
+
+/** The design's photos from earlier in this tab (e.g. before checkout). */
+async function restoreDesignImages() {
+  const wallpaper = await loadDesignImage("wallpaper");
+  if (wallpaper) wallpaperSource.value = wallpaper;
+  const cover = await loadDesignImage("cover");
+  if (cover && options.cover.photo) {
+    coverPhotoUrl.value = await prepareCoverPhoto(cover).catch(() => "");
+  } else {
+    options.cover.photo = false;
+  }
+  if (options.wallpaper.kind === "photo" && !wallpaper) {
+    options.wallpaper.kind = "none";
+  }
+  refreshWallpaper();
 }
 
 onMounted(() => {
   const stored = loadStoredOptions();
-  if (stored)
-    Object.assign(options, normalizeChatViewOptions(stored, options.me));
+  const cover = loadStoredCover();
+  if (stored || cover) {
+    Object.assign(
+      options,
+      normalizeChatViewOptions({ ...(stored || {}), cover }, options.me),
+    );
+  }
+  void restoreDesignImages();
 
   globalStyle = document.createElement("style");
   globalStyle.id = "cv-print-style";
@@ -565,6 +917,8 @@ onBeforeUnmount(() => {
   globalStyle?.remove();
   afterPrint();
   releasePrintUrl();
+  clearTimeout(wallpaperTimer);
+  for (const image of chatImages.value) URL.revokeObjectURL(image.url);
 });
 </script>
 
@@ -755,6 +1109,40 @@ onBeforeUnmount(() => {
   margin: 0.5rem 0 0;
   font-size: 0.8rem;
   color: $wa-ink-faint;
+}
+
+.chat-pdf__tabs {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+
+  button {
+    padding: 0.35rem 0.8rem;
+    border: 1px solid $wa-border;
+    border-radius: 999px;
+    background: $wa-surface-white;
+    color: $wa-ink-muted;
+    font-size: 0.82rem;
+    cursor: pointer;
+
+    &.is-selected {
+      border-color: $wa-accent;
+      color: $wa-accent;
+      font-weight: 700;
+    }
+  }
+}
+
+.pro-chip {
+  display: inline-block;
+  margin-left: 0.25rem;
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  background: #7c3aed;
+  color: #ffffff;
+  font-size: 0.6rem;
+  font-weight: 700;
+  vertical-align: middle;
 }
 
 .chat-pdf__preview-label {

@@ -1,6 +1,13 @@
+import {
+  contrast,
+  isDark,
+  mix,
+  mutedOn,
+  resolveStyle,
+  textOn,
+} from "~/utils/pdf/chatDesign";
 import { block, words } from "~/utils/pdf/html";
 import { escapeHtml } from "~/utils/pdf/emoji";
-import { CHAT_STYLES } from "~/utils/pdf/chatStyles";
 import type { ChatViewOptions } from "~/utils/pdf/chatStyles";
 
 /**
@@ -29,6 +36,8 @@ export interface ChatCoverContent {
   period: string;
   /** "Preview · first 100 messages"; empty for the full chat. */
   badge: string;
+  /** A line or two under the title, set by the buyer (Pro). */
+  dedication?: string;
   footer: string;
   link: PdfLink;
 }
@@ -56,7 +65,11 @@ function link({ url, text }: PdfLink, className: string): string {
   return `<a class="${className}" href="${escapeHtml(url)}">${words(text)}</a>`;
 }
 
-export function chatCoverHtml(content: ChatCoverContent, logo: string): string {
+export function chatCoverHtml(
+  content: ChatCoverContent,
+  logo: string,
+  photo: string | null = null,
+): string {
   const stats = content.stats
     .map(
       (stat) =>
@@ -73,9 +86,19 @@ export function chatCoverHtml(content: ChatCoverContent, logo: string): string {
          <img class="cp-logo" src="${logo}" data-format="PNG" alt="">
          <span class="cp-brand-name">${words(content.brand)}</span>
        </div>
+       ${
+         photo
+           ? `<div class="cp-photo"><img src="${photo}" data-format="JPEG" alt=""></div>`
+           : ""
+       }
        <div class="cp-cover-main">
          <div class="cp-eyebrow">${words(content.eyebrow)}</div>
          <div class="cp-title">${words(content.title)}</div>
+         ${
+           content.dedication?.trim()
+             ? `<div class="cp-dedication">${words(content.dedication.trim())}</div>`
+             : ""
+         }
          <div class="cp-members">${words(content.members)}</div>
          <div class="cp-period">${words(content.period)}</div>
          <div class="cp-stats">${stats}</div>
@@ -139,61 +162,87 @@ export function chatOutroHtml(content: ChatOutroContent, logo: string): string {
 /** Brand teal: the logo's own colour, for the call to action. */
 const BRAND = "#21a68d";
 
+/** An accent that stays readable on `background`, or its text colour. */
+function readableAccent(accent: string, background: string): string {
+  return contrast(accent, background) >= 3 ? accent : textOn(background);
+}
+
 /**
- * Styles for both pages, in the chosen chat style's palette. `pageHeight` is
- * the printable height, so the cover can fill its sheet and push its footer
- * to the bottom.
+ * Styles for both pages, in the chosen design. Every text colour is picked
+ * against the background it actually sits on: the cover may have its own
+ * colour, and a custom page colour may be anything. `pageHeight` is the
+ * printable height, so the cover can fill its sheet and push its footer to
+ * the bottom.
  */
 export function chatPagesCss(
   options: ChatViewOptions,
   pageHeight: number,
 ): string {
-  const s = CHAT_STYLES[options.style];
-  // The ink saver keeps to grays and spends no toner on a filled box; every
-  // other style gets the brand colour.
+  const s = resolveStyle(options);
+  // The ink saver keeps to grays and spends no toner on a filled box; a
+  // custom style uses its own accent; the presets get the brand colour.
   const ink = options.style === "ink";
-  const accent = ink ? "#000000" : BRAND;
-  const ctaBackground = ink ? "#eeeeee" : BRAND;
-  const ctaText = ink ? "#000000" : "#ffffff";
-  const ctaButton = ink ? "#000000" : "#ffffff";
-  const ctaButtonText = ink ? "#ffffff" : BRAND;
+  const brand = ink ? "#000000" : (s.accent ?? BRAND);
+
+  const cover = coverColor(options);
+  const coverText = textOn(cover);
+  const coverCard = mix(cover, coverText, isDark(cover) ? 0.14 : 0.08);
+  const coverAccent = readableAccent(brand, cover);
+
+  const page = s.page;
+  const pageText = textOn(page);
+  const pageMuted = mutedOn(page);
+  const card = mix(page, pageText, isDark(page) ? 0.14 : 0.08);
+  const accent = readableAccent(brand, page);
+  const ctaBackground = ink ? "#eeeeee" : brand;
+  const ctaText = textOn(ctaBackground);
+  const ctaButton = ink
+    ? "#000000"
+    : textOn(brand) === "#111b21"
+      ? "#111b21"
+      : "#ffffff";
+  const ctaButtonText = textOn(ctaButton);
 
   return `
-.cp-cover, .cp-outro { color: ${s.text}; font-family: "WaPdf", Helvetica, Arial, sans-serif; }
+.cp-cover, .cp-outro { font-family: "WaPdf", Helvetica, Arial, sans-serif; }
 .cp-cover {
-  height: ${Math.floor(pageHeight)}px;
+  height: ${Math.floor(pageHeight)}px; color: ${coverText};
   display: flex; flex-direction: column; justify-content: space-between;
 }
+.cp-outro { color: ${pageText}; }
 .cp-brand { display: flex; align-items: center; gap: 12px; }
 .cp-logo { width: 44px; height: 44px; border-radius: 10px; }
-.cp-brand-name { font-size: 22px; font-weight: 700; color: ${s.text}; }
+.cp-brand-name { font-size: 22px; font-weight: 700; }
+
+.cp-photo { display: flex; justify-content: center; padding: 18px 0 6px; }
+.cp-photo img { display: block; max-width: 100%; max-height: 320px; border-radius: 16px; }
 
 .cp-cover-main { padding-bottom: 40px; }
-.cp-eyebrow { font-size: 14px; font-weight: 700; color: ${accent}; text-transform: uppercase; }
+.cp-eyebrow { font-size: 14px; font-weight: 700; color: ${coverAccent}; text-transform: uppercase; }
 .cp-title { font-size: 40px; line-height: 1.15; font-weight: 700; padding-top: 10px; overflow-wrap: anywhere; }
-.cp-members { font-size: 15px; color: ${s.muted}; padding-top: 12px; overflow-wrap: anywhere; }
-.cp-period { font-size: 15px; color: ${s.muted}; padding-top: 4px; }
-.cp-stats { display: flex; gap: 14px; padding-top: 34px; }
-.cp-stat {
-  flex: 1; background: ${s.header}; border-radius: 14px; padding: 16px 18px;
-}
-.cp-stat-value { font-size: 28px; font-weight: 700; color: ${s.headerText}; }
-.cp-stat-label { font-size: 13px; color: ${s.headerMuted}; padding-top: 2px; }
+.cp-dedication { font-size: 19px; line-height: 1.45; padding-top: 12px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.cp-members { font-size: 15px; color: ${mutedOn(cover)}; padding-top: 12px; overflow-wrap: anywhere; }
+.cp-period { font-size: 15px; color: ${mutedOn(cover)}; padding-top: 4px; }
+.cp-stats { display: flex; gap: 14px; padding-top: 30px; }
+.cp-stat { flex: 1; background: ${coverCard}; border-radius: 14px; padding: 16px 18px; }
+.cp-stat-value { font-size: 28px; font-weight: 700; color: ${textOn(coverCard)}; }
+.cp-stat-label { font-size: 13px; color: ${mutedOn(coverCard)}; padding-top: 2px; }
 .cp-badge-row { padding-top: 22px; }
 .cp-badge {
-  display: inline-block; background: ${accent}; color: #ffffff;
+  display: inline-block; background: ${coverAccent}; color: ${textOn(coverAccent)};
   font-size: 13px; font-weight: 700; border-radius: 999px; padding: 6px 14px;
 }
-.cp-cover-footer { font-size: 12px; color: ${s.muted}; line-height: 1.5; }
+.cp-cover-footer { font-size: 12px; color: ${mutedOn(cover)}; line-height: 1.5; }
+.cp-cover-footer .cp-link { color: ${coverAccent}; }
 .cp-link { color: ${accent}; font-weight: 700; text-decoration: none; }
 
 .cp-outro-title { font-size: 30px; font-weight: 700; padding-top: 34px; }
 .cp-missing { display: flex; align-items: baseline; gap: 12px; padding-top: 18px; }
 .cp-missing-value { font-size: 52px; font-weight: 700; color: ${accent}; }
-.cp-missing-label { font-size: 17px; color: ${s.text}; }
-.cp-bar { height: 10px; border-radius: 5px; background: ${s.header}; margin-top: 12px; }
+.cp-missing-label { font-size: 17px; }
+.cp-bar { height: 10px; border-radius: 5px; background: ${card}; margin-top: 12px; }
 .cp-bar-fill { height: 10px; border-radius: 5px; background: ${accent}; }
-.cp-progress { font-size: 12px; color: ${s.muted}; padding-top: 6px; }
+.cp-progress { font-size: 12px; color: ${pageMuted}; padding-top: 6px; }
 
 .cp-cta {
   margin-top: 30px; padding: 22px 24px; border-radius: 16px;
@@ -208,10 +257,19 @@ export function chatPagesCss(
 
 .cp-more-title { font-size: 18px; font-weight: 700; padding-top: 30px; }
 .cp-products { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-top: 12px; }
-.cp-product { background: ${s.header}; border-radius: 14px; padding: 14px 16px; }
-.cp-product-title { font-size: 15px; font-weight: 700; color: ${s.headerText}; }
-.cp-product-text { font-size: 12.5px; line-height: 1.45; color: ${s.headerMuted}; padding-top: 4px; }
+.cp-product { background: ${card}; border-radius: 14px; padding: 14px 16px; }
+.cp-product-title { font-size: 15px; font-weight: 700; color: ${textOn(card)}; }
+.cp-product-text { font-size: 12.5px; line-height: 1.45; color: ${mutedOn(card)}; padding-top: 4px; }
+.cp-product .cp-link { color: ${readableAccent(brand, card)}; }
 .cp-product-link { display: inline-block; font-size: 12px; padding-top: 8px; }
-.cp-privacy { font-size: 12px; color: ${s.muted}; padding-top: 24px; }
+.cp-privacy { font-size: 12px; color: ${pageMuted}; padding-top: 24px; }
 `;
+}
+
+/** The cover's background: the buyer's colour, or the style's page. */
+export function coverColor(options: ChatViewOptions): string {
+  const chosen = options.cover?.color;
+  return chosen && /^#[0-9a-f]{6}$/i.test(chosen)
+    ? chosen
+    : resolveStyle(options).page;
 }

@@ -35,6 +35,7 @@ export class PdfBuilder {
     geometry: PageGeometry;
     css: string;
     background: (_chapter: string) => string | null;
+    backgroundImage?: (_chapter: string) => string | null;
     /** Only fetch emoji artwork when there is an emoji to draw. */
     needsEmoji: boolean;
   }): Promise<PdfBuilder> {
@@ -45,6 +46,7 @@ export class PdfBuilder {
     const writer = new PdfWriter({
       geometry: options.geometry,
       background: options.background,
+      backgroundImage: options.backgroundImage,
     });
     return new PdfBuilder(surface, writer, sprite);
   }

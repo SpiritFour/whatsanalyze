@@ -142,6 +142,34 @@ were left out, links to the tool with the price, and lists the other products.
 Its links are clickable, carry `utm_source=chat_pdf` and are printed as plain
 addresses as well, for paper.
 
+### Pro designs
+
+With full access (the one-time purchase for that chat, or a subscription) the
+design can go further (`chatDesign.ts`, controls in
+`components/tools/ChatPdfDesign.vue`):
+
+- **Custom colours.** Four picks (background, their bubbles, your bubbles,
+  accent) become a full palette in `deriveStyle`. No text colour is chosen by
+  hand: `textOn`/`mutedOn` pick each one for at least 4.5:1 contrast against
+  what it sits on, and a participant's name colour is only used where it
+  reads on the bubble.
+- **Background.** Six patterns drawn on a canvas in the palette's own
+  colours (no image files to ship or license), or the buyer's own photo,
+  cropped to A4 and faded towards the page colour. The PDF cannot draw
+  transparency, so the fading is baked into the JPEG. The writer draws it on
+  every chat page under one alias, so it is stored in the file once.
+- **Cover.** Own title, a dedication, a cover colour and a cover photo, picked
+  from the chat's photos or uploaded. The cover tab of the preview shows the
+  PDF's cover from the same markup, scaled to fit.
+
+Everyone can try all of it in the preview. `designForAccess` decides what
+prints: without full access the PDF, the Print button and the browser
+printout fall back to the preset the custom palette started from, with no
+background and the standard cover. The design is remembered so it survives
+the trip through Stripe Checkout: colours and background choice in
+`localStorage`, the cover's words in `sessionStorage`, the photos in
+IndexedDB for the tab (`designStore.ts`, the same rule as the kept export).
+
 The free preview, the printout without a purchase and the sample PDF all stop
 at the first 100 messages. The style choice is remembered in `localStorage`, so
 a buyer back from Stripe gets the PDF they configured.

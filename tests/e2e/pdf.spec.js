@@ -6,7 +6,13 @@
 const fs = require("node:fs/promises");
 const zlib = require("node:zlib");
 const JSZip = require("jszip");
-const { analyzeChat, expect, test } = require("./fixtures");
+const {
+  activeSubscription,
+  analyzeChat,
+  expect,
+  stubCallable,
+  test,
+} = require("./fixtures");
 
 /**
  * The page content streams, inflated. Object dictionaries stay readable in the
@@ -383,5 +389,73 @@ test.describe("the WhatsApp to PDF tool", () => {
     await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
     await expect(page.locator("#cv-print-root")).toHaveCount(0);
     await expect(page.locator("html")).not.toHaveClass(/cv-printing/);
+  });
+
+  test.describe("Pro designs", () => {
+    /** Custom colours, a hearts wallpaper and a titled cover. */
+    const designIt = async (page) => {
+      await page.locator('label:has([data-style="custom"])').click();
+      await page.locator('input[name="chat-color-page"]').fill("#123456");
+      // Both sit in panels that open on demand, as a visitor would open them.
+      await page.locator("summary", { hasText: "Background" }).click();
+      await page.locator('label:has([data-background="hearts"])').click();
+      await page.locator("summary", { hasText: "Cover" }).click();
+      await page.locator('input[name="chat-cover-title"]').fill("Our story");
+    };
+
+    /** JPEG images in the PDF: here only a wallpaper can be one. */
+    const jpegCount = (pdf) =>
+      pdf.toString("latin1").match(/\/DCTDecode/g)?.length ?? 0;
+
+    test("can be tried by anyone, but stay out of the free PDF", async ({
+      page,
+    }) => {
+      test.setTimeout(180_000);
+      await openTool(page);
+      await designIt(page);
+
+      // The preview shows the whole design...
+      await expect.poll(() => previewBackground(page)).toBe("rgb(18, 52, 86)");
+      await expect
+        .poll(() =>
+          page
+            .locator(".chat-preview .cv-root")
+            .evaluate((root) => root.style.backgroundImage),
+        )
+        .toContain("data:image/jpeg");
+      await page.locator('[data-tab="cover"]').click();
+      await expect(page.locator(".cover-preview .cp-title")).toHaveText(
+        "Our story",
+      );
+      // ...and says what it takes to print it.
+      await expect(page.locator(".design__note")).toBeVisible();
+
+      const pdf = await downloadPreview(page);
+      const streams = contentStreams(pdf);
+      expect(streams).not.toContain("0.07 0.2 0.34 rg");
+      expect(jpegCount(pdf)).toBe(0);
+    });
+
+    test("are printed for subscribers", async ({ page }) => {
+      test.setTimeout(180_000);
+      await stubCallable(page, "verifySubscription", activeSubscription());
+      await page.goto("/subscribe?email=test@example.com&token=sub_test123");
+      await expect(
+        page.getByRole("heading", { name: /your subscription is active/i }),
+      ).toBeVisible();
+
+      await openTool(page);
+      await designIt(page);
+      await expect(page.locator(".design__note")).toHaveCount(0);
+
+      // Subscribers get the whole chat, from their own button.
+      const downloadPromise = page.waitForEvent("download");
+      await page.getByRole("button", { name: "Download now" }).click();
+      const pdf = await fs.readFile(await (await downloadPromise).path());
+      // The page colour fills every chat page, and the wallpaper is in the
+      // file once however many pages show it.
+      expect(contentStreams(pdf)).toContain("0.07 0.2 0.34 rg");
+      expect(jpegCount(pdf)).toBe(1);
+    });
   });
 });

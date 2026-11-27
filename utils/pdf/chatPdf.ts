@@ -1,8 +1,8 @@
+import { resolveStyle } from "~/utils/pdf/chatDesign";
 import { PdfBuilder, anyEmoji, nextFrame } from "~/utils/pdf/builder";
 import { parseColor } from "~/utils/pdf/emit";
 import { A4, contentHeightPx, mm } from "~/utils/pdf/page";
 import type { PageGeometry } from "~/utils/pdf/page";
-import { CHAT_STYLES } from "~/utils/pdf/chatStyles";
 import type { ChatViewOptions } from "~/utils/pdf/chatStyles";
 import {
   chatViewCss,
@@ -15,6 +15,7 @@ import {
   chatCoverHtml,
   chatOutroHtml,
   chatPagesCss,
+  coverColor,
 } from "~/utils/pdf/chatPages";
 import logo from "~/assets/whatsanalyze-logo-green-PWA.png";
 import type { AttachmentSource } from "~/utils/attachments";
@@ -44,6 +45,11 @@ export interface RenderChatViewPdfOptions {
   locale: string;
   isSample?: boolean;
   onProgress?: (_percent: number) => void;
+  /**
+   * The design's pictures, prepared on the device: an A4-shaped JPEG behind
+   * every chat page, and a cover photo. Only passed with Pro access.
+   */
+  assets?: { wallpaper?: string | null; coverPhoto?: string | null };
 }
 
 export async function renderChatViewPdf(
@@ -58,9 +64,10 @@ export async function renderChatViewPdf(
     locale,
     isSample = false,
     onProgress,
+    assets = {},
   } = input;
 
-  const style = CHAT_STYLES[options.style];
+  const style = resolveStyle(options);
   const all = chat.chatObject;
   const messages = isSample ? all.slice(0, CHAT_SAMPLE_COUNT) : all;
   const colors = chat.personColorMap || {};
@@ -71,7 +78,12 @@ export async function renderChatViewPdf(
     css:
       chatViewCss(options, "pdf") +
       chatPagesCss(options, contentHeightPx(CHAT_GEOMETRY)),
-    background: () => style.page,
+    background: (chapter) =>
+      chapter === COVER_CHAPTER ? coverColor(options) : style.page,
+    // The wallpaper is behind the chat and the outro; the cover has its own
+    // colour and photo.
+    backgroundImage: (chapter) =>
+      chapter === COVER_CHAPTER ? null : (assets.wallpaper ?? null),
     needsEmoji: anyEmoji(messages.map((message: any) => message.message)),
   });
 
@@ -80,7 +92,9 @@ export async function renderChatViewPdf(
     const state = { previousDay: "", previousAuthor: "" };
 
     if (documentLabels.cover) {
-      await builder.add(chatCoverHtml(documentLabels.cover, logo));
+      await builder.add(
+        chatCoverHtml(documentLabels.cover, logo, assets.coverPhoto ?? null),
+      );
     }
 
     for (let start = 0; start < messages.length; start += MESSAGES_PER_BATCH) {

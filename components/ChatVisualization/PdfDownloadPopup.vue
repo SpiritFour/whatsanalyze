@@ -357,7 +357,8 @@ export default {
     // the court evidence transcript instead of the visual story
     court: { type: Boolean, default: false },
     // the chat as on a phone, in a chosen style, instead of the visual story:
-    // { options, title, labels(printed, total), locale } — see utils/pdf/chatPdf.ts
+    // { options, title, labels(printed, total), locale, assets } — see
+    // utils/pdf/chatPdf.ts
     chatView: { type: Object, default: null },
   },
   setup() {
@@ -552,6 +553,7 @@ export default {
               title: this.chatView.title,
               labels: this.chatView.labels,
               locale: this.chatView.locale,
+              assets: this.chatView.assets,
               isSample,
               onProgress,
             })

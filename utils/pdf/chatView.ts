@@ -1,6 +1,7 @@
+import { contrast, resolveStyle } from "~/utils/pdf/chatDesign";
 import { messageToHtml } from "~/utils/pdf/emoji";
 import { block, words, wrapWords } from "~/utils/pdf/html";
-import { CHAT_STYLES, TEXT_SIZES } from "~/utils/pdf/chatStyles";
+import { TEXT_SIZES } from "~/utils/pdf/chatStyles";
 import type { ChatStyle, ChatViewOptions } from "~/utils/pdf/chatStyles";
 import type { ChatCoverContent, ChatOutroContent } from "~/utils/pdf/chatPages";
 import { getAttachment } from "~/utils/attachments";
@@ -165,9 +166,13 @@ function nameColor(
 ): string {
   if (!style.colorNames) return style.name;
   const color = colors[author];
-  // the site's brand teal is a participant colour too, and unreadable on
-  // the outgoing bubble's green
-  return color && /^#[0-9a-f]{6}$/i.test(color) ? color : style.name;
+  // A participant's colour only where it reads on the incoming bubble: a
+  // custom bubble colour can be anything.
+  return color &&
+    /^#[0-9a-f]{6}$/i.test(color) &&
+    contrast(color, style.bubbleIn) >= 3
+    ? color
+    : style.name;
 }
 
 /**
@@ -188,7 +193,7 @@ export function chatViewHtml(
 ): string {
   const { header = true, state = { previousDay: "", previousAuthor: "" } } =
     part;
-  const style = CHAT_STYLES[options.style];
+  const style = resolveStyle(options);
   const chapter = CHAT_CHAPTER;
   const others = Object.keys(doc.colors).filter((name) => name !== options.me);
   const avatarColor =
@@ -299,7 +304,7 @@ export function chatViewCss(
   options: ChatViewOptions,
   context: Context,
 ): string {
-  const s = CHAT_STYLES[options.style];
+  const s = resolveStyle(options);
   const size = TEXT_SIZES[options.textSize];
   const small = Math.round(size * 0.78 * 10) / 10;
   const tiny = Math.round(size * 0.72 * 10) / 10;
@@ -357,7 +362,8 @@ export function chatViewCss(
   border-radius: ${s.radius}px; padding: 6px 10px 5px;
   background: ${s.bubbleIn};
 }
-.is-out .cv-bubble { background: ${s.bubbleOut}; }
+.is-out .cv-bubble { background: ${s.bubbleOut}; color: ${s.textOut ?? s.text}; }
+.is-out .cv-time { color: ${s.mutedOut ?? s.muted}; }
 
 .cv-name { font-weight: 700; font-size: ${small}px; padding-bottom: 2px; overflow-wrap: anywhere; }
 .cv-text { white-space: pre-wrap; overflow-wrap: anywhere; }
@@ -402,7 +408,7 @@ export function chatPrintGlobalCss(
   options: ChatViewOptions,
   fontFaceCss: string,
 ): string {
-  const s = CHAT_STYLES[options.style];
+  const s = resolveStyle(options);
   return `
 ${fontFaceCss}
 @page chat { size: A4; margin: 12mm; background: ${s.page}; }
