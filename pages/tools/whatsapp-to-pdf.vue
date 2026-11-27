@@ -88,7 +88,10 @@ import {
   useBreadcrumbSchema,
   useToolBreadcrumbs,
 } from "~/composables/useToolPage";
-import pdfExampleImage from "~/assets/img/whatsapp export pdf.png";
+// Pages of this tool's own PDF, from an invented chat: a Romance cover and
+// pages in iPhone light and Midnight. The chart PDF's pages stay on the home
+// page, where that PDF is made.
+import pdfExampleImage from "~/assets/img/whatsapp-to-pdf-example.webp";
 
 export default {
   components: { ChatPdfTool },
@@ -106,6 +109,12 @@ export default {
       ogSiteName: "WhatsAnalyze",
       ogDescription: () => t("seo.pdfGuideDescription"),
       ogUrl: pageUrl,
+      // This page's own preview: what the tool makes, not the site's card.
+      ogImage: `${baseUrl}/whatsapp-to-pdf-preview.jpg`,
+      ogImageWidth: 1200,
+      ogImageHeight: 630,
+      ogImageAlt: () => t("pdfPage.exampleAlt"),
+      twitterImage: `${baseUrl}/whatsapp-to-pdf-preview.jpg`,
     });
 
     // No FAQPage markup for the questions below: Google stopped showing FAQ
