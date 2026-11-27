@@ -138,6 +138,38 @@ export const messages = {
         "Preview: {shown} of {total} messages. The full PDF has them all.",
       mediaNotLoaded:
         "Photos are not shown: this chat was restored without its media. Drop the export again to include them.",
+      cover: {
+        eyebrow: "WhatsApp chat",
+        messages: "messages",
+        days: "days",
+        people: "people",
+        badge: "Free preview · first {count} messages",
+        footer:
+          "Made in your browser with WhatsAnalyze. Your chat was never uploaded.",
+      },
+      outro: {
+        title: "That was the preview",
+        missingLabel: "more messages are not in this preview",
+        progress: "{shown} of {total} messages shown",
+        ctaTitle: "Get the whole chat as a PDF",
+        ctaText:
+          "Every message and every photo, in the style you picked. {price} once, no account, no subscription.",
+        moreTitle: "More from WhatsAnalyze",
+        analysisTitle: "Chat analysis",
+        analysisText:
+          "Who writes more, when you talk, your emojis and favourite words, as charts.",
+        aiTitle: "AI chat analyzer",
+        aiText:
+          "Ask what your chat says about the relationship, and get honest answers.",
+        courtTitle: "Court evidence PDF",
+        courtText:
+          "A numbered transcript with exact timestamps and SHA-256 fingerprints, for lawyers and courts.",
+        wrappedTitle: "WhatsApp Wrapped",
+        wrappedText:
+          "Your year in chat as a story to share with the people in it.",
+        privacy:
+          "Everything at WhatsAnalyze runs in your browser. Your chats are never uploaded.",
+      },
     },
     subscribePage: {
       title: "See everything the AI found in your chat",
@@ -2257,6 +2289,38 @@ export const messages = {
         "Vorschau: {shown} von {total} Nachrichten. Das vollständige PDF enthält alle.",
       mediaNotLoaded:
         "Fotos werden nicht angezeigt: Dieser Chat wurde ohne seine Medien wiederhergestellt. Lege den Export erneut ab, um sie einzubeziehen.",
+      cover: {
+        eyebrow: "WhatsApp-Chat",
+        messages: "Nachrichten",
+        days: "Tage",
+        people: "Personen",
+        badge: "Kostenlose Vorschau · erste {count} Nachrichten",
+        footer:
+          "Mit WhatsAnalyze in deinem Browser erstellt. Dein Chat wurde nie hochgeladen.",
+      },
+      outro: {
+        title: "Das war die Vorschau",
+        missingLabel: "weitere Nachrichten sind nicht in dieser Vorschau",
+        progress: "{shown} von {total} Nachrichten gezeigt",
+        ctaTitle: "Hol dir den ganzen Chat als PDF",
+        ctaText:
+          "Jede Nachricht und jedes Foto, im Stil deiner Wahl. Einmalig {price}, ohne Konto, ohne Abo.",
+        moreTitle: "Mehr von WhatsAnalyze",
+        analysisTitle: "Chat-Analyse",
+        analysisText:
+          "Wer mehr schreibt, wann ihr schreibt, eure Emojis und Lieblingswörter, als Diagramme.",
+        aiTitle: "KI-Chat-Analyse",
+        aiText:
+          "Frag, was dein Chat über eure Beziehung verrät, und bekomm ehrliche Antworten.",
+        courtTitle: "Beweis-PDF für Gerichte",
+        courtText:
+          "Ein nummeriertes Protokoll mit genauen Zeitstempeln und SHA-256-Fingerabdrücken, für Anwälte und Gerichte.",
+        wrappedTitle: "WhatsApp Wrapped",
+        wrappedText:
+          "Dein Chat-Jahr als Story zum Teilen mit den Menschen darin.",
+        privacy:
+          "Bei WhatsAnalyze läuft alles in deinem Browser. Deine Chats werden nie hochgeladen.",
+      },
     },
     subscribePage: {
       title: "Sieh alles, was die KI in deinem Chat gefunden hat",
@@ -4375,6 +4439,38 @@ export const messages = {
         "Vista previa: {shown} de {total} mensajes. El PDF completo los incluye todos.",
       mediaNotLoaded:
         "Las fotos no se muestran: este chat se restauró sin sus archivos. Vuelve a soltar la exportación para incluirlas.",
+      cover: {
+        eyebrow: "Chat de WhatsApp",
+        messages: "mensajes",
+        days: "días",
+        people: "personas",
+        badge: "Vista previa gratuita · primeros {count} mensajes",
+        footer:
+          "Creado en tu navegador con WhatsAnalyze. Tu chat nunca se subió.",
+      },
+      outro: {
+        title: "Esa fue la vista previa",
+        missingLabel: "mensajes más no están en esta vista previa",
+        progress: "{shown} de {total} mensajes mostrados",
+        ctaTitle: "Consigue todo el chat en PDF",
+        ctaText:
+          "Cada mensaje y cada foto, en el estilo que elegiste. {price} una vez, sin cuenta ni suscripción.",
+        moreTitle: "Más de WhatsAnalyze",
+        analysisTitle: "Análisis del chat",
+        analysisText:
+          "Quién escribe más, cuándo habláis, vuestros emojis y palabras favoritas, en gráficos.",
+        aiTitle: "Análisis del chat con IA",
+        aiText:
+          "Pregunta qué dice tu chat de la relación y recibe respuestas sinceras.",
+        courtTitle: "PDF de prueba judicial",
+        courtText:
+          "Una transcripción numerada con horas exactas y huellas SHA-256, para abogados y tribunales.",
+        wrappedTitle: "WhatsApp Wrapped",
+        wrappedText:
+          "Tu año en el chat como una historia para compartir con quienes estuvieron en él.",
+        privacy:
+          "En WhatsAnalyze todo funciona en tu navegador. Tus chats nunca se suben.",
+      },
     },
     subscribePage: {
       title: "Descubre todo lo que la IA encontró en tu chat",
@@ -6477,6 +6573,38 @@ export const messages = {
         "Pré-visualização: {shown} de {total} mensagens. O PDF completo tem todas.",
       mediaNotLoaded:
         "As fotos não são mostradas: esta conversa foi restaurada sem os seus ficheiros. Volte a largar a exportação para as incluir.",
+      cover: {
+        eyebrow: "Conversa do WhatsApp",
+        messages: "mensagens",
+        days: "dias",
+        people: "pessoas",
+        badge: "Pré-visualização gratuita · primeiras {count} mensagens",
+        footer:
+          "Criado no seu navegador com o WhatsAnalyze. A sua conversa nunca foi enviada.",
+      },
+      outro: {
+        title: "Esta foi a pré-visualização",
+        missingLabel: "mensagens a mais não estão nesta pré-visualização",
+        progress: "{shown} de {total} mensagens mostradas",
+        ctaTitle: "Obtenha a conversa inteira em PDF",
+        ctaText:
+          "Cada mensagem e cada foto, no estilo que escolheu. {price} uma vez, sem conta nem subscrição.",
+        moreTitle: "Mais do WhatsAnalyze",
+        analysisTitle: "Análise da conversa",
+        analysisText:
+          "Quem escreve mais, quando falam, os vossos emojis e palavras favoritas, em gráficos.",
+        aiTitle: "Análise da conversa com IA",
+        aiText:
+          "Pergunte o que a conversa diz sobre a relação e receba respostas honestas.",
+        courtTitle: "PDF de prova para tribunal",
+        courtText:
+          "Uma transcrição numerada com horas exatas e impressões SHA-256, para advogados e tribunais.",
+        wrappedTitle: "WhatsApp Wrapped",
+        wrappedText:
+          "O seu ano em conversa como uma história para partilhar com quem esteve nela.",
+        privacy:
+          "No WhatsAnalyze tudo corre no seu navegador. As suas conversas nunca são enviadas.",
+      },
     },
     subscribePage: {
       title: "Veja tudo o que a IA encontrou na sua conversa",
@@ -8584,6 +8712,38 @@ export const messages = {
         "Aperçu : {shown} messages sur {total}. Le PDF complet les contient tous.",
       mediaNotLoaded:
         "Les photos ne s'affichent pas : cette discussion a été restaurée sans ses fichiers. Déposez à nouveau l'export pour les inclure.",
+      cover: {
+        eyebrow: "Discussion WhatsApp",
+        messages: "messages",
+        days: "jours",
+        people: "personnes",
+        badge: "Aperçu gratuit · {count} premiers messages",
+        footer:
+          "Créé dans votre navigateur avec WhatsAnalyze. Votre discussion n'a jamais été envoyée.",
+      },
+      outro: {
+        title: "C'était l'aperçu",
+        missingLabel: "messages de plus ne sont pas dans cet aperçu",
+        progress: "{shown} messages affichés sur {total}",
+        ctaTitle: "Obtenez toute la discussion en PDF",
+        ctaText:
+          "Chaque message et chaque photo, dans le style choisi. {price} une fois, sans compte ni abonnement.",
+        moreTitle: "Plus de WhatsAnalyze",
+        analysisTitle: "Analyse de la discussion",
+        analysisText:
+          "Qui écrit le plus, quand vous parlez, vos emojis et mots préférés, en graphiques.",
+        aiTitle: "Analyse de discussion par IA",
+        aiText:
+          "Demandez ce que votre discussion dit de la relation et obtenez des réponses franches.",
+        courtTitle: "PDF de preuve pour le tribunal",
+        courtText:
+          "Une transcription numérotée avec horodatages exacts et empreintes SHA-256, pour avocats et tribunaux.",
+        wrappedTitle: "WhatsApp Wrapped",
+        wrappedText:
+          "Votre année en discussion, en story à partager avec ceux qui y étaient.",
+        privacy:
+          "Chez WhatsAnalyze, tout fonctionne dans votre navigateur. Vos discussions ne sont jamais envoyées.",
+      },
     },
     subscribePage: {
       title: "Découvrez tout ce que l'IA a trouvé dans votre conversation",
@@ -10702,6 +10862,38 @@ export const messages = {
         "Anteprima: {shown} di {total} messaggi. Il PDF completo li contiene tutti.",
       mediaNotLoaded:
         "Le foto non vengono mostrate: questa chat è stata ripristinata senza i suoi file. Trascina di nuovo l'esportazione per includerle.",
+      cover: {
+        eyebrow: "Chat WhatsApp",
+        messages: "messaggi",
+        days: "giorni",
+        people: "persone",
+        badge: "Anteprima gratuita · primi {count} messaggi",
+        footer:
+          "Creato nel tuo browser con WhatsAnalyze. La tua chat non è mai stata caricata.",
+      },
+      outro: {
+        title: "Questa era l'anteprima",
+        missingLabel: "messaggi in più non sono in questa anteprima",
+        progress: "{shown} di {total} messaggi mostrati",
+        ctaTitle: "Ottieni tutta la chat in PDF",
+        ctaText:
+          "Ogni messaggio e ogni foto, nello stile che hai scelto. {price} una volta, senza account né abbonamento.",
+        moreTitle: "Altro da WhatsAnalyze",
+        analysisTitle: "Analisi della chat",
+        analysisText:
+          "Chi scrive di più, quando vi sentite, le vostre emoji e parole preferite, in grafici.",
+        aiTitle: "Analisi della chat con IA",
+        aiText:
+          "Chiedi cosa dice la tua chat sulla relazione e ricevi risposte sincere.",
+        courtTitle: "PDF di prova per il tribunale",
+        courtText:
+          "Una trascrizione numerata con orari esatti e impronte SHA-256, per avvocati e tribunali.",
+        wrappedTitle: "WhatsApp Wrapped",
+        wrappedText:
+          "Il tuo anno in chat come una storia da condividere con chi c'era.",
+        privacy:
+          "Su WhatsAnalyze tutto funziona nel tuo browser. Le tue chat non vengono mai caricate.",
+      },
     },
     subscribePage: {
       title: "Scopri tutto quello che l'IA ha trovato nella tua chat",

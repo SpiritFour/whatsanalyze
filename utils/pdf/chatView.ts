@@ -2,6 +2,7 @@ import { messageToHtml } from "~/utils/pdf/emoji";
 import { block, words, wrapWords } from "~/utils/pdf/html";
 import { CHAT_STYLES, TEXT_SIZES } from "~/utils/pdf/chatStyles";
 import type { ChatStyle, ChatViewOptions } from "~/utils/pdf/chatStyles";
+import type { ChatCoverContent, ChatOutroContent } from "~/utils/pdf/chatPages";
 import { getAttachment } from "~/utils/attachments";
 import type { AttachmentSource } from "~/utils/attachments";
 
@@ -35,6 +36,10 @@ export interface ChatViewLabels {
   subtitle: string;
   /** Shown after the last message of a preview; empty for the full chat. */
   notice?: string;
+  /** The PDF's first page (utils/pdf/chatPages.ts). */
+  cover?: ChatCoverContent;
+  /** The PDF's last page, on a preview only. */
+  outro?: ChatOutroContent | null;
 }
 
 export interface ChatViewDocument {

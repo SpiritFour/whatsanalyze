@@ -291,6 +291,54 @@ test.describe("the WhatsApp to PDF tool", () => {
     expect(raw.match(/\/Subtype \/Image/g)?.length ?? 0).toBeGreaterThan(10);
   });
 
+  test("puts a cover first and, on a preview, an outro with the rest", async ({
+    page,
+  }) => {
+    test.setTimeout(180_000);
+    // Longer than the 100-message preview, so the preview leaves 50 out.
+    const lines = ["1/2/21, 09:00 - John Doe: hi"];
+    for (let i = 1; i < 150; i++) {
+      lines.push(
+        `1/${2 + (i % 27)}/21, 10:${String(i % 60).padStart(2, "0")} - ${
+          i % 2 ? "Jane Doe" : "John Doe"
+        }: message ${i}`,
+      );
+    }
+    const chat = {
+      name: "long_chat.txt",
+      mimeType: "text/plain",
+      buffer: Buffer.from(lines.join("\n"), "utf-8"),
+    };
+
+    const links = (pdf) =>
+      [...pdf.toString("latin1").matchAll(/\/URI \(([^)]*)\)/g)].map(
+        (match) => match[1],
+      );
+
+    // The free preview: cover, 100 messages, then the outro.
+    await page.goto("/tools/whatsapp-to-pdf");
+    await page.locator("#dropzone-slot input[type=file]").setInputFiles(chat);
+    const preview = links(await downloadPreview(page));
+    expect(preview).toContainEqual(
+      expect.stringMatching(/\/tools\/whatsapp-to-pdf\/\?.*utm_campaign=cover/),
+    );
+    expect(preview).toContainEqual(
+      expect.stringMatching(
+        /\/tools\/whatsapp-to-pdf\/\?.*utm_campaign=preview_outro/,
+      ),
+    );
+    expect(preview).toContainEqual(
+      expect.stringMatching(/\/tools\/court-evidence\/\?utm_source=chat_pdf/),
+    );
+
+    // The whole chat: the cover, but nothing to sell.
+    await page.goto("/tools/whatsapp-to-pdf?free=1");
+    await page.locator("#dropzone-slot input[type=file]").setInputFiles(chat);
+    const full = links(await downloadPreview(page));
+    expect(full).toContainEqual(expect.stringMatching(/utm_campaign=cover/));
+    expect(full.filter((url) => url.includes("preview_outro"))).toEqual([]);
+  });
+
   test("prints the PDF itself from the Print button", async ({ page }) => {
     test.setTimeout(180_000);
     await openTool(page);

@@ -171,6 +171,8 @@ import OneTimePurchaseReturn from "~/components/ChatVisualization/OneTimePurchas
 import { Chat } from "~/utils/transformChatData";
 import { useSubscriptionStore } from "~/stores/subscription";
 import { chatFingerprint } from "~/utils/chatFingerprint";
+import { chatDurationInDays } from "~/utils/utils";
+import { ONE_TIME_PRICE, formatPrice } from "~/utils/pricing";
 import { scrollToSettled } from "~/utils/scroll";
 import {
   CHAT_STYLES,
@@ -194,6 +196,8 @@ defineProps({
 });
 
 const { t, locale } = useI18n();
+const localePath = useLocalePath();
+const { baseUrl } = useRuntimeConfig().public;
 const STORAGE_KEY = "wa-chat-pdf-style";
 
 // kept out of Vue's deep reactivity: Chat caches its lazy getters on itself,
@@ -246,6 +250,86 @@ function formatDay(date) {
   }
 }
 
+/**
+ * A link printed in the PDF: clickable with campaign parameters, so visits
+ * from a PDF show up in analytics, and printed without them, so it can be
+ * typed in from paper.
+ */
+function pdfLink(path, campaign) {
+  const clean = `${baseUrl}${localePath(path)}`;
+  return {
+    url: `${clean}?utm_source=chat_pdf&utm_medium=pdf&utm_campaign=${campaign}`,
+    text: clean.replace(/^https?:\/\//, ""),
+  };
+}
+
+const count = (value) => Number(value).toLocaleString(locale.value);
+
+function coverContent(printed, total) {
+  const messages = chat.value?.chatObject || [];
+  const first = messages[0]?.date;
+  const last = messages.at(-1)?.date;
+  const people = participants.value;
+  const members =
+    people.length > 12
+      ? `${people.slice(0, 12).join(", ")} +${people.length - 12}`
+      : people.join(", ");
+  return {
+    brand: "WhatsAnalyze",
+    eyebrow: t("pdfTool.cover.eyebrow"),
+    title: chatTitle.value,
+    members,
+    period: `${formatDay(first)} – ${formatDay(last)}`,
+    stats: [
+      { value: count(total), label: t("pdfTool.cover.messages") },
+      {
+        value: count(chatDurationInDays(first, last)),
+        label: t("pdfTool.cover.days"),
+      },
+      { value: count(people.length), label: t("pdfTool.cover.people") },
+    ],
+    badge:
+      printed < total
+        ? t("pdfTool.cover.badge", { count: count(printed) })
+        : "",
+    footer: t("pdfTool.cover.footer"),
+    link: pdfLink("/tools/whatsapp-to-pdf", "cover"),
+  };
+}
+
+/** The last page of a preview: what is missing, and where to get it. */
+function outroContent(printed, total) {
+  if (printed >= total) return null;
+  const product = (key, path) => ({
+    title: t(`pdfTool.outro.${key}Title`),
+    text: t(`pdfTool.outro.${key}Text`),
+    link: pdfLink(path, "preview_outro"),
+  });
+  return {
+    title: t("pdfTool.outro.title"),
+    missing: count(total - printed),
+    missingLabel: t("pdfTool.outro.missingLabel"),
+    progress: t("pdfTool.outro.progress", {
+      shown: count(printed),
+      total: count(total),
+    }),
+    shownRatio: printed / total,
+    ctaTitle: t("pdfTool.outro.ctaTitle"),
+    ctaText: t("pdfTool.outro.ctaText", {
+      price: formatPrice(ONE_TIME_PRICE, locale.value),
+    }),
+    ctaLink: pdfLink("/tools/whatsapp-to-pdf", "preview_outro"),
+    moreTitle: t("pdfTool.outro.moreTitle"),
+    products: [
+      product("analysis", "/"),
+      product("ai", "/tools/ai-chat-analyzer"),
+      product("court", "/tools/court-evidence"),
+      product("wrapped", "/wrapped"),
+    ],
+    privacy: t("pdfTool.outro.privacy"),
+  };
+}
+
 /** Labels for a document that prints `printed` of the chat's messages. */
 function labels(printed, total) {
   const messages = chat.value?.chatObject || [];
@@ -262,6 +346,8 @@ function labels(printed, total) {
             total: total.toLocaleString(locale.value),
           })
         : "",
+    cover: coverContent(printed, total),
+    outro: outroContent(printed, total),
   };
 }
 

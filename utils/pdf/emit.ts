@@ -241,7 +241,7 @@ export class PdfWriter {
     while (changed) {
       changed = false;
       for (const item of block.items) {
-        if (item.kind === "rect") continue;
+        if (item.kind === "rect" || item.kind === "link") continue;
         const top = itemTop(item) - block.top;
         const bottom = itemBottom(item) - block.top;
         if (top < snapped && bottom > snapped && top > start) {
@@ -356,6 +356,17 @@ export class PdfWriter {
       } else {
         this.doc.rect(x, y, width, height, "F");
       }
+      return;
+    }
+
+    if (item.kind === "link") {
+      this.doc.link(
+        mm(left + item.x),
+        mm(top + item.y),
+        mm(item.width),
+        mm(item.height),
+        { url: item.url },
+      );
       return;
     }
 

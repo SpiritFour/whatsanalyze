@@ -1,6 +1,6 @@
 import { PdfBuilder, anyEmoji, nextFrame } from "~/utils/pdf/builder";
 import { parseColor } from "~/utils/pdf/emit";
-import { A4, mm } from "~/utils/pdf/page";
+import { A4, contentHeightPx, mm } from "~/utils/pdf/page";
 import type { PageGeometry } from "~/utils/pdf/page";
 import { CHAT_STYLES } from "~/utils/pdf/chatStyles";
 import type { ChatViewOptions } from "~/utils/pdf/chatStyles";
@@ -10,6 +10,13 @@ import {
   prepareChatMessages,
 } from "~/utils/pdf/chatView";
 import type { ChatViewLabels } from "~/utils/pdf/chatView";
+import {
+  COVER_CHAPTER,
+  chatCoverHtml,
+  chatOutroHtml,
+  chatPagesCss,
+} from "~/utils/pdf/chatPages";
+import logo from "~/assets/whatsanalyze-logo-green-PWA.png";
 import type { AttachmentSource } from "~/utils/attachments";
 
 /**
@@ -61,7 +68,9 @@ export async function renderChatViewPdf(
 
   const builder = await PdfBuilder.create({
     geometry: CHAT_GEOMETRY,
-    css: chatViewCss(options, "pdf"),
+    css:
+      chatViewCss(options, "pdf") +
+      chatPagesCss(options, contentHeightPx(CHAT_GEOMETRY)),
     background: () => style.page,
     needsEmoji: anyEmoji(messages.map((message: any) => message.message)),
   });
@@ -69,6 +78,10 @@ export async function renderChatViewPdf(
   try {
     const documentLabels = labels(messages.length, all.length);
     const state = { previousDay: "", previousAuthor: "" };
+
+    if (documentLabels.cover) {
+      await builder.add(chatCoverHtml(documentLabels.cover, logo));
+    }
 
     for (let start = 0; start < messages.length; start += MESSAGES_PER_BATCH) {
       const batch = messages.slice(start, start + MESSAGES_PER_BATCH);
@@ -104,9 +117,16 @@ export async function renderChatViewPdf(
       await nextFrame();
     }
 
+    // What a preview left out, and where to get the rest.
+    if (isSample && documentLabels.outro) {
+      await builder.add(chatOutroHtml(documentLabels.outro, logo));
+    }
+
     onProgress?.(100);
 
-    return builder.finish(title, ({ doc, page, total, geometry }) => {
+    return builder.finish(title, ({ doc, page, total, chapter, geometry }) => {
+      // The cover is the title page; numbering it would be noise.
+      if (chapter === COVER_CHAPTER) return;
       const [r, g, b] = parseColor(style.folio);
       doc.setTextColor(r, g, b);
       doc.setFontSize(7.5);

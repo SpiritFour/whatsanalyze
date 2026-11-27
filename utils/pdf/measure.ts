@@ -54,7 +54,17 @@ export interface ImageItem {
   radius: number;
 }
 
-export type RenderItem = RectItem | TextItem | ImageItem;
+/** A clickable area: becomes a link annotation over whatever is drawn there. */
+export interface LinkItem {
+  kind: "link";
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  url: string;
+}
+
+export type RenderItem = RectItem | TextItem | ImageItem | LinkItem;
 
 export interface MeasuredBlock {
   top: number;
@@ -166,6 +176,21 @@ function collect(
 
   collectBorders(style, box, target);
 
+  // A link keeps working in the PDF: one clickable area per line it wraps to.
+  const href = element.tagName === "A" ? element.getAttribute("href") : null;
+  if (href && /^https?:\/\//.test(href)) {
+    for (const rect of surface.rectsOf(element)) {
+      target.push({
+        kind: "link",
+        x: rect.x,
+        y: rect.y,
+        width: rect.width,
+        height: rect.height,
+        url: href,
+      });
+    }
+  }
+
   // The element belongs to the layout frame's realm, so `instanceof` against
   // this window's HTMLImageElement would never match.
   if (element.tagName === "IMG") {
@@ -181,8 +206,10 @@ function collect(
         y: box.y,
         width: box.width,
         height: box.height,
-        src: image.dataset.emoji ? null : image.src,
-        format: element.dataset.format || "PNG",
+        src: image.dataset.emoji ? null : embeddableSource(image),
+        format: image.src.startsWith("data:")
+          ? element.dataset.format || "PNG"
+          : "PNG",
         emojiId: element.dataset.emoji || null,
         radius: radiusOf(style, box),
       });
@@ -228,6 +255,42 @@ function collect(
   }
 }
 
+/**
+ * jsPDF embeds images from data URLs only. A bundled asset arrives as a URL
+ * (anything Vite did not inline), so it is drawn to a canvas and read back:
+ * it is already decoded and same-origin, so this cannot fail on taint.
+ */
+function embeddableSource(image: HTMLImageElement): string {
+  if (image.src.startsWith("data:")) return image.src;
+  try {
+    const canvas = image.ownerDocument.createElement("canvas");
+    canvas.width = image.naturalWidth;
+    canvas.height = image.naturalHeight;
+    canvas.getContext("2d")?.drawImage(image, 0, 0);
+    return canvas.toDataURL("image/png");
+  } catch (error) {
+    console.error("Could not embed an image in the PDF", error);
+    return image.src;
+  }
+}
+
+/**
+ * `text-transform` changes what the browser shows without changing the DOM
+ * text. Measured from the shown text, drawn from the DOM text, the two would
+ * disagree, so the transform is applied here.
+ */
+function transformText(text: string, transform: string): string {
+  if (transform === "uppercase") return text.toLocaleUpperCase();
+  if (transform === "lowercase") return text.toLocaleLowerCase();
+  if (transform === "capitalize") {
+    return text.replace(
+      /(^|\s)(\S)/gu,
+      (_, space, letter) => space + letter.toLocaleUpperCase(),
+    );
+  }
+  return text;
+}
+
 /** Solid borders become filled rectangles along each painted edge. */
 function collectBorders(
   style: CSSStyleDeclaration,
@@ -264,7 +327,8 @@ function collectText(
   items: RenderItem[],
   clip: Clip | null,
 ): void {
-  const text = span.textContent ?? "";
+  // The browser lays out the transformed text, so that is what gets drawn.
+  const text = transformText(span.textContent ?? "", style.textTransform);
   if (!text) return;
 
   const fontSize = parseFloat(style.fontSize);

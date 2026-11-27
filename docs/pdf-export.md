@@ -81,7 +81,9 @@ the result. Changing a padding is a CSS edit, not an offset recalculation.
 - **No mutation during a measuring pass.** Reads against one settled layout are
   cheap; a single write between them forces a reflow per word.
 - **Only paint the emitter can reproduce.** Solid backgrounds, solid borders,
-  border radii, text and images. Gradients, shadows and filters lay out fine and then go
+  border radii, text, images and links (an `<a href>` becomes a clickable
+  area). `text-transform` is applied when measuring; `letter-spacing` is not
+  reproduced, so do not use it. Gradients, shadows and filters lay out fine and then go
   missing in the PDF.
 
 - **`overflow: hidden` clips.** The browser lays out hidden lines too, so the
@@ -132,6 +134,13 @@ and three things use it unchanged:
    part is injected into `<head>` rather than the shadow root.
 3. **The PDF** (`chatPdf.ts`) lays the same markup out through the shared
    pipeline, with the style's wallpaper as the page background.
+
+The PDF (not the preview or the browser printout) adds two pages around the
+chat, from `chatPages.ts`: a cover with the logo, the chat's name, members,
+period and counts, and, on a preview only, an outro that says how many messages
+were left out, links to the tool with the price, and lists the other products.
+Its links are clickable, carry `utm_source=chat_pdf` and are printed as plain
+addresses as well, for paper.
 
 The free preview, the printout without a purchase and the sample PDF all stop
 at the first 100 messages. The style choice is remembered in `localStorage`, so
