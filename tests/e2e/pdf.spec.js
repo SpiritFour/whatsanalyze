@@ -281,9 +281,10 @@ test.describe("the WhatsApp to PDF tool", () => {
       page.locator(".chat-preview .cv-msg.is-out").first(),
     ).toBeVisible();
 
-    expect(await previewBackground(page)).toBe("rgb(239, 234, 226)");
+    // Polled: the preview redraws on the next tick after a change.
+    await expect.poll(() => previewBackground(page)).toBe("rgb(239, 234, 226)");
     await page.locator('label:has([data-style="android-dark"])').click();
-    expect(await previewBackground(page)).toBe("rgb(11, 20, 26)");
+    await expect.poll(() => previewBackground(page)).toBe("rgb(11, 20, 26)");
 
     // Times off: the bubbles lose their time line.
     await expect(page.locator(".chat-preview .cv-time").first()).toBeVisible();
@@ -294,7 +295,7 @@ test.describe("the WhatsApp to PDF tool", () => {
     // The look is remembered, so a buyer back from checkout gets it.
     await page.reload();
     await expect(page.locator("#chat-pdf-tool")).toBeVisible();
-    expect(await previewBackground(page)).toBe("rgb(11, 20, 26)");
+    await expect.poll(() => previewBackground(page)).toBe("rgb(11, 20, 26)");
   });
 
   test("downloads the PDF in the chosen style", async ({ page }) => {
