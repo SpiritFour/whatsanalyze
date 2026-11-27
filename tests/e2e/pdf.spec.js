@@ -247,6 +247,10 @@ test.describe("the WhatsApp to PDF tool", () => {
     await expect(page.locator("#chat-pdf-tool")).toBeVisible();
   };
 
+  /** The controls come in three tabs: look, design and content. */
+  const openControls = (page, tab) =>
+    page.locator(`[data-controls="${tab}"]`).click();
+
   /** The preview's wallpaper, read inside its shadow root. */
   const previewBackground = (page) =>
     page
@@ -270,6 +274,7 @@ test.describe("the WhatsApp to PDF tool", () => {
 
     // Times off: the bubbles lose their time line.
     await expect(page.locator(".chat-preview .cv-time").first()).toBeVisible();
+    await openControls(page, "content");
     await page.getByLabel("Show times").uncheck();
     await expect(page.locator(".chat-preview .cv-time")).toHaveCount(0);
 
@@ -402,6 +407,7 @@ test.describe("the WhatsApp to PDF tool", () => {
     await expect(page.locator(".chat-preview .cv-system")).not.toHaveCount(0);
 
     // WhatsApp's own notices can go...
+    await openControls(page, "content");
     await page.getByLabel("Hide WhatsApp notices").check();
     await expect(page.locator(".chat-preview .cv-system")).toHaveCount(0);
 
@@ -414,6 +420,7 @@ test.describe("the WhatsApp to PDF tool", () => {
     ).toContainText("February");
 
     // US Letter: 8.5 x 11 in, 612 x 792 pt.
+    await openControls(page, "look");
     await page
       .locator('label:has(input[name="chat-paper"][value="letter"])')
       .click();
@@ -446,6 +453,7 @@ test.describe("the WhatsApp to PDF tool", () => {
       .locator("#dropzone-slot input[type=file]")
       .setInputFiles(chatIn("russian.txt", ["Привет!", "Как дела? 😂"]));
     await expect(page.locator("#chat-pdf-tool")).toBeVisible();
+    await openControls(page, "design");
     await expect(page.locator('[data-font="serif"]')).toHaveCount(1);
     await expect(page.locator('[data-font="typewriter"]')).toHaveCount(0);
     await expect(page.locator("[data-fonts-hidden]")).toBeVisible();
@@ -459,14 +467,49 @@ test.describe("the WhatsApp to PDF tool", () => {
       .locator("#dropzone-slot input[type=file]")
       .setInputFiles(chatIn("arabic.txt", ["مرحبا", "كيف حالك"]));
     await expect(page.locator("#chat-pdf-tool")).toBeVisible();
+    await openControls(page, "design");
     await expect(fontChips).toHaveCount(1);
     await expect(page.locator('[data-font="default"]')).toBeChecked();
+  });
+
+  test("says so when the chosen days have no messages", async ({ page }) => {
+    await openTool(page);
+    await openControls(page, "content");
+    // The emoji chat has nothing in March.
+    await page.locator('input[name="chat-from"]').fill("2021-03-01");
+    await page.locator('input[name="chat-to"]').fill("2021-03-31");
+
+    await expect(page.locator("[data-empty]")).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: "Print", exact: true }),
+    ).toBeDisabled();
+    await expect(
+      page.getByRole("button", { name: /Download free preview PDF/i }),
+    ).toHaveCount(0);
+
+    await page.getByRole("button", { name: "All days" }).click();
+    await expect(page.locator("[data-empty]")).toHaveCount(0);
+    await expect(page.locator(".chat-preview .cv-msg").first()).toBeVisible();
+  });
+
+  test("downloads no font until the design tab is opened", async ({ page }) => {
+    const fonts = [];
+    page.on("request", (request) => {
+      if (/\.ttf(\?|$)/.test(request.url())) fonts.push(request.url());
+    });
+    await openTool(page);
+    await expect(page.locator(".chat-preview .cv-msg").first()).toBeVisible();
+    expect(fonts).toEqual([]);
+
+    await openControls(page, "design");
+    await expect.poll(() => fonts.length).toBeGreaterThan(0);
   });
 
   test.describe("Pro designs", () => {
     /** Custom colours, a hearts wallpaper and a titled cover. */
     const designIt = async (page) => {
       await page.locator('label:has([data-style="custom"])').click();
+      await openControls(page, "design");
       await page.locator('input[name="chat-color-page"]').fill("#123456");
       // Both sit in panels that open on demand, as a visitor would open them.
       await page.locator("summary", { hasText: "Background" }).click();
@@ -499,8 +542,10 @@ test.describe("the WhatsApp to PDF tool", () => {
       await expect(page.locator(".cover-preview .cp-title")).toHaveText(
         "Our story",
       );
-      // ...and says what it takes to print it.
+      // ...and says what it takes to print it, in the design panel and
+      // again where the PDF is downloaded.
       await expect(page.locator(".design__note")).toBeVisible();
+      await expect(page.locator("[data-pro-download-note]")).toBeVisible();
 
       const pdf = await downloadPreview(page);
       const streams = contentStreams(pdf);
@@ -511,6 +556,7 @@ test.describe("the WhatsApp to PDF tool", () => {
     /** A Pro preset and a Pro font. */
     const pickMidnightSerif = async (page) => {
       await page.locator('label:has([data-style="midnight"])').click();
+      await openControls(page, "design");
       await page.locator('label:has([data-font="serif"])').click();
     };
     // #0f172a as jsPDF writes it, and the book font (Lora) as embedded:
@@ -542,6 +588,7 @@ test.describe("the WhatsApp to PDF tool", () => {
       await openTool(page);
       await designIt(page);
       await expect(page.locator(".design__note")).toHaveCount(0);
+      await expect(page.locator("[data-pro-download-note]")).toHaveCount(0);
 
       // Subscribers get the whole chat, from their own button.
       const downloadPromise = page.waitForEvent("download");

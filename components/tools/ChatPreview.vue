@@ -49,7 +49,12 @@ watch(() => props.background, applyBackground);
 
 <style lang="scss" scoped>
 .chat-preview {
-  max-height: 70vh;
+  /* phones: leave room for the controls under it */
+  max-height: 55vh;
+
+  @media (min-width: 900px) {
+    max-height: calc(100vh - 8rem);
+  }
   overflow-y: auto;
   border-radius: 14px;
   box-shadow: 0 12px 32px rgba(17, 27, 33, 0.14);

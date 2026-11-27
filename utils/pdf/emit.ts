@@ -407,18 +407,35 @@ export class PdfWriter {
       const src = item.emojiId ? this.emojiPng.get(item.emojiId) : item.src;
       if (!src) return;
 
+      const x = mm(left + item.x);
+      const y = mm(top + item.y);
+      const width = mm(item.width);
+      const height = mm(item.height);
+      // Rounded corners, as the stylesheet drew them: a clipping path around
+      // the picture, so the image data stays untouched and the file no
+      // bigger.
+      const clipped = !item.emojiId && item.radius > 0;
       try {
+        if (clipped) {
+          const radius = mm(item.radius);
+          this.doc.saveGraphicsState();
+          this.doc.roundedRect(x, y, width, height, radius, radius, null);
+          this.doc.clip();
+          this.doc.discardPath();
+        }
         this.doc.addImage(
           src,
           item.emojiId ? "PNG" : normalizeFormat(item.format),
-          mm(left + item.x),
-          mm(top + item.y),
-          mm(item.width),
-          mm(item.height),
+          x,
+          y,
+          width,
+          height,
         );
       } catch (error) {
         // One unreadable attachment must not cost the buyer the whole export.
         console.error("Could not place an image in the PDF", error);
+      } finally {
+        if (clipped) this.doc.restoreGraphicsState();
       }
       return;
     }

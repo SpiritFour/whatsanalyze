@@ -59,6 +59,18 @@ export interface ChatOutroContent {
   privacy: string;
 }
 
+/**
+ * The cover title's size: large for a name, smaller step by step for a
+ * group's list of members, so a long title takes two lines rather than five.
+ */
+export function titleSize(title: string): number {
+  const length = Array.from(title).length;
+  if (length <= 24) return 40;
+  if (length <= 40) return 32;
+  if (length <= 64) return 26;
+  return 22;
+}
+
 export const COVER_CHAPTER = "cover";
 export const OUTRO_CHAPTER = "outro";
 
@@ -94,7 +106,9 @@ export function chatCoverHtml(
        }
        <div class="cp-cover-main">
          <div class="cp-eyebrow">${words(content.eyebrow)}</div>
-         <div class="cp-title">${words(content.title)}</div>
+         <div class="cp-title" style="font-size:${titleSize(content.title)}px">${words(
+           content.title,
+         )}</div>
          ${
            content.dedication?.trim()
              ? `<div class="cp-dedication">${words(content.dedication.trim())}</div>`

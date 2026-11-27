@@ -19,200 +19,244 @@
 
       <div class="chat-pdf__layout">
         <form class="chat-pdf__controls" @submit.prevent>
-          <fieldset class="chat-pdf__group">
-            <legend>{{ t("pdfTool.styleTitle") }}</legend>
-            <div class="chat-pdf__styles">
-              <label
-                v-for="style in styles"
-                :key="style.id"
-                class="style-option"
-                :class="{ 'is-selected': options.style === style.id }"
-              >
-                <input
-                  v-model="options.style"
-                  type="radio"
-                  name="chat-style"
-                  :value="style.id"
-                  class="visually-hidden"
-                  :data-style="style.id"
-                />
-                <span
-                  class="style-option__swatch"
-                  :style="{ background: style.page }"
-                  aria-hidden="true"
-                >
-                  <span
-                    class="style-option__bubble"
-                    :style="{
-                      background: style.bubbleIn,
-                      borderRadius: style.radius / 2 + 'px',
-                    }"
-                  />
-                  <span
-                    class="style-option__bubble is-out"
-                    :style="{
-                      background: style.bubbleOut,
-                      borderRadius: style.radius / 2 + 'px',
-                    }"
-                  />
-                </span>
-                <span class="style-option__label">
-                  {{ t(`pdfTool.style.${style.id.replace("-", "_")}`) }}
-                  <span v-if="style.pro" class="pro-chip">{{
-                    t("pdfTool.design.pro")
-                  }}</span>
-                </span>
-              </label>
-              <!-- Pro: a palette of the buyer's own colours -->
-              <label
-                class="style-option"
-                :class="{ 'is-selected': options.style === 'custom' }"
-              >
-                <input
-                  v-model="options.style"
-                  type="radio"
-                  name="chat-style"
-                  value="custom"
-                  class="visually-hidden"
-                  data-style="custom"
-                />
-                <span
-                  class="style-option__swatch"
-                  :style="{ background: options.colors.page }"
-                  aria-hidden="true"
-                >
-                  <span
-                    class="style-option__bubble"
-                    :style="{ background: options.colors.bubbleIn }"
-                  />
-                  <span
-                    class="style-option__bubble is-out"
-                    :style="{ background: options.colors.bubbleOut }"
-                  />
-                </span>
-                <span class="style-option__label">
-                  {{ t("pdfTool.style.custom") }}
-                  <span class="pro-chip">{{ t("pdfTool.design.pro") }}</span>
-                </span>
-              </label>
-            </div>
-          </fieldset>
+          <!-- Three short panels instead of one long column, so the preview
+               stays in sight while something is changed. -->
+          <div class="chat-pdf__control-tabs" role="tablist">
+            <button
+              v-for="tab in controlTabs"
+              :key="tab"
+              type="button"
+              role="tab"
+              :data-controls="tab"
+              :aria-selected="controlTab === tab"
+              :class="{ 'is-selected': controlTab === tab }"
+              @click="controlTab = tab"
+            >
+              {{ t(`pdfTool.tabs.${tab}`) }}
+              <span v-if="tab === 'design'" class="pro-chip">{{
+                t("pdfTool.design.pro")
+              }}</span>
+            </button>
+          </div>
 
-          <ChatPdfDesign />
-
-          <fieldset class="chat-pdf__group">
-            <legend>{{ t("pdfTool.adjustTitle") }}</legend>
-
-            <label class="chat-pdf__field">
-              <span>{{ t("pdfTool.me") }}</span>
-              <select v-model="options.me" name="chat-me">
-                <option v-for="name in participants" :key="name" :value="name">
-                  {{ name }}
-                </option>
-              </select>
-            </label>
-
-            <div class="chat-pdf__field" role="radiogroup">
-              <span id="chat-pdf-size">{{ t("pdfTool.textSize") }}</span>
-              <div class="segmented" aria-labelledby="chat-pdf-size">
+          <div
+            v-show="controlTab === 'look'"
+            role="tabpanel"
+            class="chat-pdf__panel"
+          >
+            <fieldset class="chat-pdf__group">
+              <legend>{{ t("pdfTool.styleTitle") }}</legend>
+              <div class="chat-pdf__styles">
                 <label
-                  v-for="size in ['s', 'm', 'l']"
-                  :key="size"
-                  :class="{ 'is-selected': options.textSize === size }"
+                  v-for="style in styles"
+                  :key="style.id"
+                  class="style-option"
+                  :class="{ 'is-selected': options.style === style.id }"
                 >
                   <input
-                    v-model="options.textSize"
+                    v-model="options.style"
                     type="radio"
-                    name="chat-text-size"
-                    :value="size"
+                    name="chat-style"
+                    :value="style.id"
                     class="visually-hidden"
+                    :data-style="style.id"
                   />
-                  {{ t(`pdfTool.size.${size}`) }}
+                  <span
+                    class="style-option__swatch"
+                    :style="{ background: style.page }"
+                    aria-hidden="true"
+                  >
+                    <span
+                      class="style-option__bubble"
+                      :style="{
+                        background: style.bubbleIn,
+                        borderRadius: style.radius / 2 + 'px',
+                      }"
+                    />
+                    <span
+                      class="style-option__bubble is-out"
+                      :style="{
+                        background: style.bubbleOut,
+                        borderRadius: style.radius / 2 + 'px',
+                      }"
+                    />
+                  </span>
+                  <span class="style-option__label">
+                    {{ t(`pdfTool.style.${style.id.replace("-", "_")}`) }}
+                    <span v-if="style.pro" class="pro-chip">{{
+                      t("pdfTool.design.pro")
+                    }}</span>
+                  </span>
                 </label>
-              </div>
-            </div>
-
-            <label class="chat-pdf__check">
-              <input v-model="options.showTimes" type="checkbox" />
-              {{ t("pdfTool.showTimes") }}
-            </label>
-            <label class="chat-pdf__check">
-              <input v-model="options.showMedia" type="checkbox" />
-              {{ t("pdfTool.showMedia") }}
-            </label>
-            <label class="chat-pdf__check">
-              <input v-model="options.showNames" type="checkbox" />
-              {{ t("pdfTool.showNames") }}
-            </label>
-            <label class="chat-pdf__check">
-              <input
-                v-model="options.hideSystem"
-                type="checkbox"
-                name="chat-hide-system"
-              />
-              {{ t("pdfTool.hideSystem") }}
-            </label>
-
-            <div class="chat-pdf__field" role="radiogroup">
-              <span id="chat-pdf-paper">{{ t("pdfTool.paper") }}</span>
-              <div class="segmented" aria-labelledby="chat-pdf-paper">
+                <!-- Pro: a palette of the buyer's own colours -->
                 <label
-                  v-for="paper in ['a4', 'letter', 'a5']"
-                  :key="paper"
-                  :class="{ 'is-selected': options.paper === paper }"
+                  class="style-option"
+                  :class="{ 'is-selected': options.style === 'custom' }"
                 >
                   <input
-                    v-model="options.paper"
+                    v-model="options.style"
                     type="radio"
-                    name="chat-paper"
-                    :value="paper"
+                    name="chat-style"
+                    value="custom"
                     class="visually-hidden"
+                    data-style="custom"
                   />
-                  {{ t(`pdfTool.paperSize.${paper}`) }}
+                  <span
+                    class="style-option__swatch"
+                    :style="{ background: options.colors.page }"
+                    aria-hidden="true"
+                  >
+                    <span
+                      class="style-option__bubble"
+                      :style="{ background: options.colors.bubbleIn }"
+                    />
+                    <span
+                      class="style-option__bubble is-out"
+                      :style="{ background: options.colors.bubbleOut }"
+                    />
+                  </span>
+                  <span class="style-option__label">
+                    {{ t("pdfTool.style.custom") }}
+                    <span class="pro-chip">{{ t("pdfTool.design.pro") }}</span>
+                  </span>
                 </label>
               </div>
-            </div>
+            </fieldset>
 
-            <div class="chat-pdf__field">
-              <span>{{ t("pdfTool.dateRange") }}</span>
-              <div class="chat-pdf__dates">
-                <input
-                  v-model="options.from"
-                  type="date"
-                  name="chat-from"
-                  :min="chatDays.first"
-                  :max="options.to || chatDays.last"
-                  :aria-label="t('pdfTool.dateFrom')"
-                />
-                <span aria-hidden="true">–</span>
-                <input
-                  v-model="options.to"
-                  type="date"
-                  name="chat-to"
-                  :min="options.from || chatDays.first"
-                  :max="chatDays.last"
-                  :aria-label="t('pdfTool.dateTo')"
-                />
+            <fieldset class="chat-pdf__group">
+              <legend>{{ t("pdfTool.layoutTitle") }}</legend>
+              <div class="chat-pdf__field" role="radiogroup">
+                <span id="chat-pdf-size">{{ t("pdfTool.textSize") }}</span>
+                <div class="segmented" aria-labelledby="chat-pdf-size">
+                  <label
+                    v-for="size in ['s', 'm', 'l']"
+                    :key="size"
+                    :class="{ 'is-selected': options.textSize === size }"
+                  >
+                    <input
+                      v-model="options.textSize"
+                      type="radio"
+                      name="chat-text-size"
+                      :value="size"
+                      class="visually-hidden"
+                    />
+                    {{ t(`pdfTool.size.${size}`) }}
+                  </label>
+                </div>
               </div>
-              <button
-                v-if="options.from || options.to"
-                type="button"
-                class="chat-pdf__link"
-                @click="
-                  options.from = '';
-                  options.to = '';
-                "
-              >
-                {{ t("pdfTool.dateReset") }}
-              </button>
-            </div>
-          </fieldset>
+              <div class="chat-pdf__field" role="radiogroup">
+                <span id="chat-pdf-paper">{{ t("pdfTool.paper") }}</span>
+                <div class="segmented" aria-labelledby="chat-pdf-paper">
+                  <label
+                    v-for="paper in ['a4', 'letter', 'a5']"
+                    :key="paper"
+                    :class="{ 'is-selected': options.paper === paper }"
+                  >
+                    <input
+                      v-model="options.paper"
+                      type="radio"
+                      name="chat-paper"
+                      :value="paper"
+                      class="visually-hidden"
+                    />
+                    {{ t(`pdfTool.paperSize.${paper}`) }}
+                  </label>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <!-- v-show keeps the panel's state; while hidden, its font chips
+               are not displayed, so the fonts are not downloaded. -->
+          <div
+            v-show="controlTab === 'design'"
+            role="tabpanel"
+            class="chat-pdf__panel"
+          >
+            <ChatPdfDesign />
+          </div>
+
+          <div
+            v-show="controlTab === 'content'"
+            role="tabpanel"
+            class="chat-pdf__panel"
+          >
+            <fieldset class="chat-pdf__group">
+              <legend>{{ t("pdfTool.adjustTitle") }}</legend>
+              <label class="chat-pdf__field">
+                <span>{{ t("pdfTool.me") }}</span>
+                <select v-model="options.me" name="chat-me">
+                  <option
+                    v-for="name in participants"
+                    :key="name"
+                    :value="name"
+                  >
+                    {{ name }}
+                  </option>
+                </select>
+              </label>
+              <label class="chat-pdf__check">
+                <input v-model="options.showTimes" type="checkbox" />
+                {{ t("pdfTool.showTimes") }}
+              </label>
+              <label class="chat-pdf__check">
+                <input v-model="options.showMedia" type="checkbox" />
+                {{ t("pdfTool.showMedia") }}
+              </label>
+              <label class="chat-pdf__check">
+                <input v-model="options.showNames" type="checkbox" />
+                {{ t("pdfTool.showNames") }}
+              </label>
+              <label class="chat-pdf__check">
+                <input
+                  v-model="options.hideSystem"
+                  type="checkbox"
+                  name="chat-hide-system"
+                />
+                {{ t("pdfTool.hideSystem") }}
+              </label>
+
+              <div class="chat-pdf__field">
+                <span>{{ t("pdfTool.dateRange") }}</span>
+                <div class="chat-pdf__dates">
+                  <input
+                    v-model="options.from"
+                    type="date"
+                    name="chat-from"
+                    :min="chatDays.first"
+                    :max="options.to || chatDays.last"
+                    :aria-label="t('pdfTool.dateFrom')"
+                  />
+                  <span aria-hidden="true">–</span>
+                  <input
+                    v-model="options.to"
+                    type="date"
+                    name="chat-to"
+                    :min="options.from || chatDays.first"
+                    :max="chatDays.last"
+                    :aria-label="t('pdfTool.dateTo')"
+                  />
+                </div>
+                <button
+                  v-if="options.from || options.to"
+                  type="button"
+                  class="chat-pdf__link"
+                  @click="
+                    options.from = '';
+                    options.to = '';
+                  "
+                >
+                  {{ t("pdfTool.dateReset") }}
+                </button>
+              </div>
+            </fieldset>
+          </div>
 
           <div class="chat-pdf__actions">
             <button
               type="button"
               class="chat-pdf__print"
-              :disabled="printing"
+              :disabled="printing || isEmpty"
               @click="printChat"
             >
               {{ printing ? t("pdfTool.printPreparing") : t("pdfTool.print") }}
@@ -249,8 +293,11 @@
               {{ t("pdfTool.design.coverPreviewLabel") }}
             </button>
           </div>
+          <p v-if="isEmpty" class="chat-pdf__empty" data-empty>
+            {{ t("pdfTool.empty") }}
+          </p>
           <ChatPreview
-            v-show="previewTab === 'chat'"
+            v-show="previewTab === 'chat' && !isEmpty"
             :html="previewHtml"
             :css="previewCss"
             :background="wallpaperUrl"
@@ -267,8 +314,21 @@
         </div>
       </div>
 
+      <!-- Said where the decision is made: the free PDF leaves the Pro
+           parts of the design out. -->
+      <p
+        v-if="!hasFullAccess && premiumDesign && !isEmpty"
+        class="chat-pdf__pro-note"
+        data-pro-download-note
+      >
+        <span class="pro-chip">{{ t("pdfTool.design.pro") }}</span>
+        {{ t("pdfTool.design.proDownloadNote") }}
+      </p>
+      <p v-if="isEmpty" class="chat-pdf__empty chat-pdf__download">
+        {{ t("pdfTool.empty") }}
+      </p>
       <!-- #payButton: where PdfDownloadPopup scrolls a returning buyer -->
-      <div id="payButton" class="chat-pdf__download">
+      <div v-else id="payButton" class="chat-pdf__download">
         <PdfDownloadPopup
           :chat="chat"
           :attachments="attachments"
@@ -330,6 +390,7 @@ import {
 import {
   coverPhoto as prepareCoverPhoto,
   designForAccess,
+  isPremiumDesign,
   patternWallpaper,
   photoWallpaper,
   resolveStyle,
@@ -606,6 +667,14 @@ const previewCss = computed(() => chatViewCss(options, "screen"));
 // Everyone sees their design in the preview; printableOptions decides what
 // the PDF carries.
 const previewTab = ref("chat");
+const controlTabs = ["look", "design", "content"];
+const controlTab = ref("look");
+
+/** Nothing left after the content filters, e.g. a range with no messages. */
+const isEmpty = computed(
+  () => !!chat.value && filteredMessages.value.length === 0,
+);
+const premiumDesign = computed(() => isPremiumDesign(options));
 const wallpaperUrl = ref("");
 const wallpaperSource = shallowRef(null);
 const coverPhotoUrl = ref("");
@@ -1130,6 +1199,20 @@ onBeforeUnmount(() => {
   }
 }
 
+/* Phones: the preview first, so a change made in the panel below can be
+   seen by scrolling a little, not a whole column. Desktop: the preview stays
+   in view next to the controls. */
+.chat-pdf__preview {
+  order: -1;
+  min-width: 0;
+
+  @media (min-width: 900px) {
+    order: 0;
+    position: sticky;
+    top: 5.5rem;
+  }
+}
+
 .chat-pdf__controls {
   display: flex;
   flex-direction: column;
@@ -1318,6 +1401,64 @@ onBeforeUnmount(() => {
   font-size: 0.6rem;
   font-weight: 700;
   vertical-align: middle;
+}
+
+.chat-pdf__control-tabs {
+  display: flex;
+  gap: 0.3rem;
+  padding: 0.25rem;
+  border-radius: 999px;
+  background: rgba(17, 27, 33, 0.05);
+
+  button {
+    flex: 1;
+    padding: 0.45rem 0.5rem;
+    border: 0;
+    border-radius: 999px;
+    background: none;
+    color: $wa-ink-muted;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+
+    &.is-selected {
+      background: $wa-surface-white;
+      color: $wa-ink;
+      box-shadow: 0 1px 4px rgba(17, 27, 33, 0.12);
+    }
+  }
+}
+
+.chat-pdf__panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.chat-pdf__empty {
+  margin: 0;
+  padding: 2.5rem 1.5rem;
+  border: 1px dashed $wa-border;
+  border-radius: 14px;
+  color: $wa-ink-muted;
+  text-align: center;
+}
+
+.chat-pdf__pro-note {
+  max-width: 640px;
+  margin: 2.5rem auto -1.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: $wa-radius-md;
+  background: rgba(124, 58, 237, 0.08);
+  color: $wa-ink-muted;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  text-align: center;
+
+  .pro-chip {
+    margin: 0 0.3rem 0 0;
+  }
 }
 
 .chat-pdf__dates {

@@ -211,6 +211,8 @@ export const messages = {
         removePhoto: "Remove photo",
         coverPreviewLabel: "Cover",
         fontTitle: "Font",
+        proDownloadNote:
+          "Your design uses Pro options. The free preview PDF is printed in the standard look; the full PDF has your design.",
         fontsHidden:
           "Fonts that lack some of this chat's letters are hidden, so nothing prints as gaps.",
         font: {
@@ -233,6 +235,14 @@ export const messages = {
       dateFrom: "From",
       dateTo: "To",
       dateReset: "All days",
+      tabs: {
+        look: "Look",
+        design: "Design",
+        content: "Content",
+      },
+      layoutTitle: "Text and paper",
+      empty:
+        "No messages on these days. Choose other days, or all days, to see the chat.",
     },
     subscribePage: {
       title: "See everything the AI found in your chat",
@@ -2425,6 +2435,8 @@ export const messages = {
         removePhoto: "Foto entfernen",
         coverPreviewLabel: "Titelseite",
         fontTitle: "Schrift",
+        proDownloadNote:
+          "Dein Design nutzt Pro-Optionen. Die kostenlose Vorschau wird im Standard-Aussehen gedruckt, das vollständige PDF hat dein Design.",
         fontsHidden:
           "Schriften, denen Buchstaben dieses Chats fehlen, sind ausgeblendet, damit nichts als Lücke gedruckt wird.",
         font: {
@@ -2447,6 +2459,14 @@ export const messages = {
       dateFrom: "Von",
       dateTo: "Bis",
       dateReset: "Alle Tage",
+      tabs: {
+        look: "Aussehen",
+        design: "Design",
+        content: "Inhalt",
+      },
+      layoutTitle: "Text und Papier",
+      empty:
+        "An diesen Tagen gibt es keine Nachrichten. Wähle andere Tage oder alle Tage, um den Chat zu sehen.",
     },
     subscribePage: {
       title: "Sieh alles, was die KI in deinem Chat gefunden hat",
@@ -4638,6 +4658,8 @@ export const messages = {
         removePhoto: "Quitar la foto",
         coverPreviewLabel: "Portada",
         fontTitle: "Fuente",
+        proDownloadNote:
+          "Tu diseño usa opciones Pro. La vista previa gratuita se imprime con el aspecto estándar; el PDF completo lleva tu diseño.",
         fontsHidden:
           "Las fuentes a las que les faltan letras de este chat están ocultas, para que nada se imprima con huecos.",
         font: {
@@ -4660,6 +4682,14 @@ export const messages = {
       dateFrom: "Desde",
       dateTo: "Hasta",
       dateReset: "Todos los días",
+      tabs: {
+        look: "Aspecto",
+        design: "Diseño",
+        content: "Contenido",
+      },
+      layoutTitle: "Texto y papel",
+      empty:
+        "No hay mensajes en estos días. Elige otros días, o todos, para ver el chat.",
     },
     subscribePage: {
       title: "Descubre todo lo que la IA encontró en tu chat",
@@ -6835,6 +6865,8 @@ export const messages = {
         removePhoto: "Remover a foto",
         coverPreviewLabel: "Capa",
         fontTitle: "Tipo de letra",
+        proDownloadNote:
+          "O seu design usa opções Pro. A pré-visualização gratuita é impressa com o aspeto padrão; o PDF completo tem o seu design.",
         fontsHidden:
           "Os tipos de letra a que faltam letras desta conversa estão ocultos, para que nada seja impresso com falhas.",
         font: {
@@ -6857,6 +6889,14 @@ export const messages = {
       dateFrom: "De",
       dateTo: "Até",
       dateReset: "Todos os dias",
+      tabs: {
+        look: "Aspeto",
+        design: "Design",
+        content: "Conteúdo",
+      },
+      layoutTitle: "Texto e papel",
+      empty:
+        "Não há mensagens nestes dias. Escolha outros dias, ou todos, para ver a conversa.",
     },
     subscribePage: {
       title: "Veja tudo o que a IA encontrou na sua conversa",
@@ -9037,6 +9077,8 @@ export const messages = {
         removePhoto: "Retirer la photo",
         coverPreviewLabel: "Couverture",
         fontTitle: "Police",
+        proDownloadNote:
+          "Votre design utilise des options Pro. L'aperçu gratuit est imprimé dans l'apparence standard ; le PDF complet reprend votre design.",
         fontsHidden:
           "Les polices auxquelles il manque des lettres de cette discussion sont masquées, pour que rien ne s'imprime avec des trous.",
         font: {
@@ -9059,6 +9101,14 @@ export const messages = {
       dateFrom: "Du",
       dateTo: "Au",
       dateReset: "Tous les jours",
+      tabs: {
+        look: "Apparence",
+        design: "Design",
+        content: "Contenu",
+      },
+      layoutTitle: "Texte et papier",
+      empty:
+        "Aucun message ces jours-là. Choisissez d'autres jours, ou tous, pour voir la discussion.",
     },
     subscribePage: {
       title: "Découvrez tout ce que l'IA a trouvé dans votre conversation",
@@ -11250,6 +11300,8 @@ export const messages = {
         removePhoto: "Rimuovi la foto",
         coverPreviewLabel: "Copertina",
         fontTitle: "Carattere",
+        proDownloadNote:
+          "Il tuo design usa opzioni Pro. L'anteprima gratuita è stampata con l'aspetto standard; il PDF completo ha il tuo design.",
         fontsHidden:
           "I caratteri a cui mancano lettere di questa chat sono nascosti, così nulla viene stampato con dei vuoti.",
         font: {
@@ -11272,6 +11324,14 @@ export const messages = {
       dateFrom: "Dal",
       dateTo: "Al",
       dateReset: "Tutti i giorni",
+      tabs: {
+        look: "Aspetto",
+        design: "Design",
+        content: "Contenuto",
+      },
+      layoutTitle: "Testo e carta",
+      empty:
+        "Nessun messaggio in questi giorni. Scegli altri giorni, o tutti, per vedere la chat.",
     },
     subscribePage: {
       title: "Scopri tutto quello che l'IA ha trovato nella tua chat",
