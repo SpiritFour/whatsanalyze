@@ -284,8 +284,9 @@ test.describe("the WhatsApp to PDF tool", () => {
 
     expect(raw).toContain("FontFile2");
     expect(streams.match(/Tj/g)?.length ?? 0).toBeGreaterThan(100);
-    // Every page is filled with the style's wallpaper, #0b141a.
-    expect(streams).toContain("0.043 0.078 0.102 rg");
+    // Every page is filled with the style's wallpaper, #0b141a (jsPDF
+    // writes colours to two decimals).
+    expect(streams).toContain("0.04 0.08 0.1 rg");
     // Emoji are artwork here too.
     expect(raw.match(/\/Subtype \/Image/g)?.length ?? 0).toBeGreaterThan(10);
   });
@@ -310,6 +311,9 @@ test.describe("the WhatsApp to PDF tool", () => {
     // Only the chat is on paper: the site around it is not.
     await expect(page.locator("html")).toHaveClass(/cv-printing/);
     await expect(page.locator("#cv-print-root .cv-msg").first()).toBeVisible();
+    // A second beforeprint for the same print must not add a second copy.
+    await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
+    await expect(page.locator("#cv-print-root")).toHaveCount(1);
     await expect(page.locator("#chat-pdf-tool")).toBeHidden();
     await expect(page.locator("footer").first()).toBeHidden();
 

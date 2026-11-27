@@ -326,6 +326,9 @@ function updateGlobalStyle() {
 
 function beforePrint() {
   if (!chat.value) return;
+  // Browsers may fire beforeprint more than once for one print (a preview
+  // re-render, a programmatic print after Ctrl+P): never print two copies.
+  document.getElementById("cv-print-root")?.remove();
   const root = document.createElement("div");
   root.id = "cv-print-root";
   root.attachShadow({ mode: "open" }).innerHTML =

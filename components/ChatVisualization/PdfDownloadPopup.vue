@@ -23,8 +23,10 @@
           {{ $t("pdfStyleCourtHint") }}
         </p>
 
+        <!-- The styled chat PDF has its live preview right above, so the
+             example of the chart-style PDF would only mislead there. -->
         <img
-          v-if="!court"
+          v-if="!court && !chatView"
           src="/pdf-example.jpg"
           alt=""
           class="mx-auto mt-6 w-full max-w-[560px] rounded-token border border-solid border-[rgba(29,29,31,0.08)]"
@@ -32,7 +34,10 @@
         />
         <!-- The example image shows the visual style, so the court style gets its
          own summary instead of a misleading preview. -->
-        <ul v-else class="m-0 mt-6 list-none space-y-3 p-0 text-sm text-wa-ink">
+        <ul
+          v-else-if="court"
+          class="m-0 mt-6 list-none space-y-3 p-0 text-sm text-wa-ink"
+        >
           <li
             v-for="feature in courtFeatures"
             :key="feature"
