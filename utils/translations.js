@@ -126,10 +126,12 @@ export const messages = {
       showTimes: "Show times",
       showMedia: "Show photos",
       showNames: "Show names",
+      printPreparing: "Preparing…",
       print: "Print",
       printHint:
-        "Prints the preview. With the full PDF unlocked, it prints the whole chat.",
-      printHintFull: "Prints the whole chat with your browser's print dialog.",
+        "Prints the free preview: the first 100 messages, exactly as in the PDF. On iPhone and iPad it opens the PDF to print or share.",
+      printHintFull:
+        "Prints the whole chat, exactly as in the PDF. On iPhone and iPad it opens the PDF to print or share.",
       previewLabel: "Preview · first {count} messages",
       subtitle: "{count} messages · {from} – {to}",
       previewNotice:
@@ -2243,11 +2245,12 @@ export const messages = {
       showTimes: "Uhrzeiten anzeigen",
       showMedia: "Fotos anzeigen",
       showNames: "Namen anzeigen",
+      printPreparing: "Wird vorbereitet…",
       print: "Drucken",
       printHint:
-        "Druckt die Vorschau. Mit freigeschaltetem PDF wird der ganze Chat gedruckt.",
+        "Druckt die kostenlose Vorschau: die ersten 100 Nachrichten, genau wie im PDF. Auf iPhone und iPad öffnet sich das PDF zum Drucken oder Teilen.",
       printHintFull:
-        "Druckt den ganzen Chat über den Druckdialog deines Browsers.",
+        "Druckt den ganzen Chat, genau wie im PDF. Auf iPhone und iPad öffnet sich das PDF zum Drucken oder Teilen.",
       previewLabel: "Vorschau · erste {count} Nachrichten",
       subtitle: "{count} Nachrichten · {from} – {to}",
       previewNotice:
@@ -4360,11 +4363,12 @@ export const messages = {
       showTimes: "Mostrar horas",
       showMedia: "Mostrar fotos",
       showNames: "Mostrar nombres",
+      printPreparing: "Preparando…",
       print: "Imprimir",
       printHint:
-        "Imprime la vista previa. Con el PDF completo desbloqueado, imprime todo el chat.",
+        "Imprime la vista previa gratuita: los primeros 100 mensajes, igual que en el PDF. En iPhone y iPad se abre el PDF para imprimirlo o compartirlo.",
       printHintFull:
-        "Imprime todo el chat con el diálogo de impresión de tu navegador.",
+        "Imprime todo el chat, igual que en el PDF. En iPhone y iPad se abre el PDF para imprimirlo o compartirlo.",
       previewLabel: "Vista previa · primeros {count} mensajes",
       subtitle: "{count} mensajes · {from} – {to}",
       previewNotice:
@@ -6461,11 +6465,12 @@ export const messages = {
       showTimes: "Mostrar horas",
       showMedia: "Mostrar fotos",
       showNames: "Mostrar nomes",
+      printPreparing: "A preparar…",
       print: "Imprimir",
       printHint:
-        "Imprime a pré-visualização. Com o PDF completo desbloqueado, imprime a conversa inteira.",
+        "Imprime a pré-visualização gratuita: as primeiras 100 mensagens, tal como no PDF. No iPhone e iPad abre o PDF para imprimir ou partilhar.",
       printHintFull:
-        "Imprime a conversa inteira com a janela de impressão do seu navegador.",
+        "Imprime a conversa inteira, tal como no PDF. No iPhone e iPad abre o PDF para imprimir ou partilhar.",
       previewLabel: "Pré-visualização · primeiras {count} mensagens",
       subtitle: "{count} mensagens · {from} – {to}",
       previewNotice:
@@ -8567,11 +8572,12 @@ export const messages = {
       showTimes: "Afficher les heures",
       showMedia: "Afficher les photos",
       showNames: "Afficher les noms",
+      printPreparing: "Préparation…",
       print: "Imprimer",
       printHint:
-        "Imprime l'aperçu. Une fois le PDF complet débloqué, imprime toute la discussion.",
+        "Imprime l'aperçu gratuit : les 100 premiers messages, exactement comme dans le PDF. Sur iPhone et iPad, le PDF s'ouvre pour être imprimé ou partagé.",
       printHintFull:
-        "Imprime toute la discussion avec la boîte d'impression de votre navigateur.",
+        "Imprime toute la discussion, exactement comme dans le PDF. Sur iPhone et iPad, le PDF s'ouvre pour être imprimé ou partagé.",
       previewLabel: "Aperçu · {count} premiers messages",
       subtitle: "{count} messages · {from} – {to}",
       previewNotice:
@@ -10684,11 +10690,12 @@ export const messages = {
       showTimes: "Mostra orari",
       showMedia: "Mostra foto",
       showNames: "Mostra nomi",
+      printPreparing: "Preparazione…",
       print: "Stampa",
       printHint:
-        "Stampa l'anteprima. Con il PDF completo sbloccato, stampa tutta la chat.",
+        "Stampa l'anteprima gratuita: i primi 100 messaggi, esattamente come nel PDF. Su iPhone e iPad si apre il PDF da stampare o condividere.",
       printHintFull:
-        "Stampa tutta la chat con la finestra di stampa del tuo browser.",
+        "Stampa tutta la chat, esattamente come nel PDF. Su iPhone e iPad si apre il PDF da stampare o condividere.",
       previewLabel: "Anteprima · primi {count} messaggi",
       subtitle: "{count} messaggi · {from} – {to}",
       previewNotice:

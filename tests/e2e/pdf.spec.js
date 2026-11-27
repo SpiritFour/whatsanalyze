@@ -291,31 +291,46 @@ test.describe("the WhatsApp to PDF tool", () => {
     expect(raw.match(/\/Subtype \/Image/g)?.length ?? 0).toBeGreaterThan(10);
   });
 
-  test("prints only the chat with the browser's print dialog", async ({
+  test("prints the PDF itself from the Print button", async ({ page }) => {
+    test.setTimeout(180_000);
+    await openTool(page);
+
+    await page.getByRole("button", { name: "Print", exact: true }).click();
+
+    // The same file the download gives, handed to the browser's PDF printing
+    // in a frame: it looks the same from every browser.
+    const frame = page.locator("#cv-print-frame");
+    await expect(frame).toHaveCount(1, { timeout: 60_000 });
+    expect(await frame.getAttribute("src")).toMatch(/^blob:/);
+    await expect(
+      page.getByRole("button", { name: "Print", exact: true }),
+    ).toBeEnabled();
+  });
+
+  test("prints only the chat with the browser's own print", async ({
     page,
   }) => {
-    // window.print() would block a headed browser; record it instead and
-    // play the events a real print dialog fires around it.
-    await page.addInitScript(() => {
-      window.print = () => {
-        window.__printed = (window.__printed || 0) + 1;
-        window.dispatchEvent(new Event("beforeprint"));
-      };
-    });
     await openTool(page);
     await page.emulateMedia({ media: "print" });
 
-    await page.getByRole("button", { name: "Print", exact: true }).click();
-    await expect.poll(() => page.evaluate(() => window.__printed)).toBe(1);
+    // Ctrl+P, or Share > Print on a phone: the browser fires beforeprint.
+    await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
 
     // Only the chat is on paper: the site around it is not.
     await expect(page.locator("html")).toHaveClass(/cv-printing/);
     await expect(page.locator("#cv-print-root .cv-msg").first()).toBeVisible();
+    await expect(page.locator("#chat-pdf-tool")).toBeHidden();
+    await expect(page.locator("footer").first()).toBeHidden();
     // A second beforeprint for the same print must not add a second copy.
     await page.evaluate(() => window.dispatchEvent(new Event("beforeprint")));
     await expect(page.locator("#cv-print-root")).toHaveCount(1);
-    await expect(page.locator("#chat-pdf-tool")).toBeHidden();
-    await expect(page.locator("footer").first()).toBeHidden();
+
+    // Engines with named pages print on the `chat` page; the padded fallback
+    // for engines without them (Safari) must not apply here as well.
+    const padding = await page
+      .locator("#cv-print-root")
+      .evaluate((root) => getComputedStyle(root).paddingTop);
+    expect(padding).toBe("0px");
 
     await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
     await expect(page.locator("#cv-print-root")).toHaveCount(0);

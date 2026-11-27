@@ -401,6 +401,10 @@ export function chatPrintGlobalCss(
   return `
 ${fontFaceCss}
 @page chat { size: A4; margin: 12mm; background: ${s.page}; }
+/* For engines without named pages (Safari): no page margins at all, so
+   there is no white frame around the wallpaper and no room for the
+   browser's own URL and date; the chat is inset by padding instead. */
+@page { size: A4; margin: 0; }
 #cv-print-root { display: none; }
 @media print {
   html.cv-printing, html.cv-printing body {
@@ -409,6 +413,13 @@ ${fontFaceCss}
   }
   html.cv-printing body > *:not(#cv-print-root) { display: none !important; }
   html.cv-printing #cv-print-root { display: block; page: chat; }
+  @supports not (page: chat) {
+    html.cv-printing #cv-print-root {
+      padding: 12mm;
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+    }
+  }
 }
 `;
 }

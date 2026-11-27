@@ -116,7 +116,7 @@
               :disabled="printing"
               @click="printChat"
             >
-              {{ t("pdfTool.print") }}
+              {{ printing ? t("pdfTool.printPreparing") : t("pdfTool.print") }}
             </button>
             <p class="chat-pdf__hint">
               {{
@@ -183,7 +183,7 @@ import {
   chatViewHtml,
   prepareChatMessages,
 } from "~/utils/pdf/chatView";
-import { CHAT_SAMPLE_COUNT } from "~/utils/pdf/chatPdf";
+import { CHAT_SAMPLE_COUNT, renderChatViewPdf } from "~/utils/pdf/chatPdf";
 import { pdfFontFaceCss } from "~/utils/pdf/fonts";
 
 defineProps({
@@ -311,13 +311,18 @@ function documentHtml(messages) {
 const previewHtml = computed(() => documentHtml(previewMessages.value));
 const previewCss = computed(() => chatViewCss(options, "screen"));
 
-// ----- printing with the browser's own dialog (Print button or Ctrl+P)
-// Only `#cv-print-root` is printed while `html.cv-printing` is set; see
-// chatPrintGlobalCss. Ctrl+P prints the preview; the button prints the whole
-// chat for those who have it.
+// ----- printing
+// The Print button prints the PDF itself: the same file the download gives,
+// so it looks the same from every browser. Printing the page through CSS is
+// at the mercy of each engine (Safari ignores named pages, paints no
+// wallpaper in the margins and adds its own URL and date there).
+//
+// The browser's own print (Ctrl+P, or Share > Print on a phone) still works:
+// only `#cv-print-root` is printed while `html.cv-printing` is set, see
+// chatPrintGlobalCss. That path prints the preview.
 const printing = shallowRef(false);
-let printHtml = null;
 let globalStyle = null;
+let printUrl = null;
 
 function updateGlobalStyle() {
   if (!globalStyle) return;
@@ -333,7 +338,7 @@ function beforePrint() {
   root.id = "cv-print-root";
   root.attachShadow({ mode: "open" }).innerHTML =
     `<style>${chatViewCss(options, "screen")}</style><div class="cv-root">${
-      printHtml || previewHtml.value
+      previewHtml.value
     }</div>`;
   document.body.appendChild(root);
   document.documentElement.classList.add("cv-printing");
@@ -342,17 +347,71 @@ function beforePrint() {
 function afterPrint() {
   document.getElementById("cv-print-root")?.remove();
   document.documentElement.classList.remove("cv-printing");
-  printHtml = null;
+}
+
+/**
+ * Safari (macOS and every browser on iOS) prints a PDF from a frame as a
+ * blank page, if at all. There the PDF opens in a tab instead, where the
+ * system viewer prints and shares it.
+ */
+function opensPdfInTab() {
+  const ua = navigator.userAgent;
+  const iOS =
+    /iP(hone|ad|od)/.test(ua) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  const safari =
+    /Safari/.test(ua) && !/Chrome|Chromium|Edg|OPR|Firefox/.test(ua);
+  return iOS || safari;
+}
+
+function releasePrintUrl() {
+  document.getElementById("cv-print-frame")?.remove();
+  if (printUrl) URL.revokeObjectURL(printUrl);
+  printUrl = null;
+}
+
+function printInFrame(url) {
+  const frame = document.createElement("iframe");
+  frame.id = "cv-print-frame";
+  frame.setAttribute("aria-hidden", "true");
+  // Off screen rather than hidden: a hidden frame never loads the PDF viewer.
+  frame.style.cssText =
+    "position:fixed;right:0;bottom:0;width:0;height:0;border:0;";
+  frame.addEventListener("load", () => {
+    try {
+      frame.contentWindow.focus();
+      frame.contentWindow.print();
+    } catch {
+      window.open(url, "_blank");
+    }
+  });
+  frame.src = url;
+  document.body.appendChild(frame);
 }
 
 async function printChat() {
-  if (printing.value) return;
+  if (printing.value || !chat.value) return;
   printing.value = true;
+  // Opened now, while the click still counts as one: a window opened after
+  // the PDF is built would be blocked as a popup.
+  const tab = opensPdfInTab() ? window.open("", "_blank") : null;
   try {
-    if (hasFullAccess.value) {
-      printHtml = documentHtml(await prepare(chat.value.chatObject.length));
-    }
-    window.print();
+    const blob = await renderChatViewPdf({
+      chat: toRaw(chat.value),
+      attachments: toRaw(attachments.value),
+      options: { ...options },
+      title: chatTitle.value,
+      labels,
+      locale: locale.value,
+      isSample: !hasFullAccess.value,
+    });
+    releasePrintUrl();
+    printUrl = URL.createObjectURL(blob);
+    if (tab) tab.location.href = printUrl;
+    else printInFrame(printUrl);
+  } catch (error) {
+    tab?.close();
+    console.error("Could not print the chat", error);
   } finally {
     printing.value = false;
   }
@@ -419,6 +478,7 @@ onBeforeUnmount(() => {
   window.removeEventListener("afterprint", afterPrint);
   globalStyle?.remove();
   afterPrint();
+  releasePrintUrl();
 });
 </script>
 
