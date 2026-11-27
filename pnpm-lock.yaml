@@ -8,6 +8,15 @@ dependencies:
   '@amcharts/amcharts4':
     specifier: ^4.10.40
     version: 4.10.40
+  '@expo-google-fonts/courier-prime':
+    specifier: 0.4.1
+    version: 0.4.1
+  '@expo-google-fonts/lora':
+    specifier: 0.4.2
+    version: 0.4.2
+  '@expo-google-fonts/nunito':
+    specifier: 0.4.2
+    version: 0.4.2
   '@heroicons/vue':
     specifier: ^2.2.0
     version: 2.2.0(vue@3.5.43)
@@ -2132,6 +2141,18 @@ packages:
     dependencies:
       '@eslint/core': 1.2.1
       levn: 0.4.1
+
+  /@expo-google-fonts/courier-prime@0.4.1:
+    resolution: {integrity: sha512-92Mb2Qi70yvL4XqA8VzM+Q/uFFxVulZXPU5WNTPeDzo1P1q6/bCTsZzE1BnfhYwcsp+PmrB0Ulq3E6zmZSrI6g==}
+    dev: false
+
+  /@expo-google-fonts/lora@0.4.2:
+    resolution: {integrity: sha512-Bnofh2mIOUKp4KUS48VjaBgug4lQOcw/ftU0NFv5OPtiutL422//G1v63xDZEMUEL6ft4fi5q94/uKcpDjbPag==}
+    dev: false
+
+  /@expo-google-fonts/nunito@0.4.2:
+    resolution: {integrity: sha512-1KCWphw/I2ugqfs9iRHUCkPTnomNgGPtF4AvqVquoEKxr0EL+mcLNLgeixsslbaSFevRR6/KJAE3sc8g0VaY0Q==}
+    dev: false
 
   /@firebase/ai@2.16.0(@firebase/app-types@0.9.6)(@firebase/app@0.16.2):
     resolution: {integrity: sha512-WRVxl58B61Orwf7st7949ZIW2L4huV80Gpaum1z8v2eH+m2xaxWtC8mOjQyVAOirr6O/yf89cBjlPvoyBpBfTg==}

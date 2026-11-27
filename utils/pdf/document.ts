@@ -1,4 +1,5 @@
-import { pdfFontFaceCss } from "~/utils/pdf/fonts";
+import { DEFAULT_FONT, PDF_FONT_FAMILY, fontFaceCss } from "~/utils/pdf/fonts";
+import type { PdfFont } from "~/utils/pdf/fonts";
 import { contentWidthPx, pageWidthPx } from "~/utils/pdf/page";
 import type { PageGeometry } from "~/utils/pdf/page";
 
@@ -65,15 +66,22 @@ export class LayoutSurface {
   private ascentCache = new Map<string, { ascent: number; descent: number }>();
 
   private css: string;
+  private fonts: PdfFont[];
 
-  private constructor(iframe: HTMLIFrameElement, css: string) {
+  private constructor(
+    iframe: HTMLIFrameElement,
+    css: string,
+    fonts: PdfFont[],
+  ) {
     this.iframe = iframe;
     this.css = css;
+    this.fonts = fonts;
   }
 
   static async create(
     geometry: PageGeometry,
     css: string,
+    extraFonts: PdfFont[] = [],
   ): Promise<LayoutSurface> {
     const iframe = document.createElement("iframe");
     iframe.setAttribute("aria-hidden", "true");
@@ -93,7 +101,10 @@ export class LayoutSurface {
 
     document.body.appendChild(iframe);
 
-    const surface = new LayoutSurface(iframe, baseCss(geometry) + css);
+    const surface = new LayoutSurface(iframe, baseCss(geometry) + css, [
+      DEFAULT_FONT,
+      ...extraFonts,
+    ]);
     await surface.init();
     return surface;
   }
@@ -108,7 +119,7 @@ export class LayoutSurface {
 
     doc.open();
     doc.write(
-      `<!doctype html><html><head><meta charset="utf-8"><style>${pdfFontFaceCss()}${this.css}</style></head><body><div class="wa-flow"></div></body></html>`,
+      `<!doctype html><html><head><meta charset="utf-8"><style>${fontFaceCss(this.fonts)}${this.css}</style></head><body><div class="wa-flow"></div></body></html>`,
     );
     doc.close();
 
@@ -122,8 +133,23 @@ export class LayoutSurface {
     // Measuring before the webfont is live would produce fallback-font metrics
     // and misplace every word in the document.
     await doc.fonts.ready;
-    await doc.fonts.load('400 14px "WaPdf"');
-    await doc.fonts.load('700 14px "WaPdf"');
+    for (const font of this.fonts) {
+      await doc.fonts.load(`400 14px "${font.family}"`);
+      await doc.fonts.load(`700 14px "${font.family}"`);
+    }
+  }
+
+  /**
+   * The registered family a computed `font-family` resolves to: the first
+   * name in the list that is one of ours. Anything else is drawn in the
+   * default font, which is what the layout fell back to as well.
+   */
+  familyOf(fontFamily: string): string {
+    for (const name of fontFamily.split(",")) {
+      const family = name.trim().replace(/^["']|["']$/g, "");
+      if (this.fonts.some((font) => font.family === family)) return family;
+    }
+    return PDF_FONT_FAMILY;
   }
 
   get document(): Document {
@@ -191,12 +217,13 @@ export class LayoutSurface {
   metricsFor(
     fontSize: number,
     bold: boolean,
+    family: string = PDF_FONT_FAMILY,
   ): { ascent: number; descent: number } {
-    const key = `${bold ? 700 : 400}-${fontSize}`;
+    const key = `${family}-${bold ? 700 : 400}-${fontSize}`;
     const cached = this.ascentCache.get(key);
     if (cached) return cached;
 
-    this.measureContext.font = `${bold ? 700 : 400} ${fontSize}px "WaPdf"`;
+    this.measureContext.font = `${bold ? 700 : 400} ${fontSize}px "${family}"`;
     const metrics = this.measureContext.measureText("Hxg");
     const value = {
       ascent: metrics.fontBoundingBoxAscent ?? fontSize * 0.8,

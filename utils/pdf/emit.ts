@@ -1,5 +1,10 @@
 import jsPDF from "jspdf";
-import { PDF_FONT_FAMILY, registerPdfFont } from "~/utils/pdf/fonts";
+import {
+  DEFAULT_FONT,
+  PDF_FONT_FAMILY,
+  registerPdfFonts,
+} from "~/utils/pdf/fonts";
+import type { PdfFont } from "~/utils/pdf/fonts";
 import { rasterizeEmoji } from "~/utils/pdf/emoji";
 import type { MeasuredBlock, RenderItem } from "~/utils/pdf/measure";
 import { contentHeightPx, mm, pt, px } from "~/utils/pdf/page";
@@ -80,6 +85,8 @@ export interface WriterOptions {
    * the colour. The PDF stores it once however many pages show it.
    */
   backgroundImage?: (_chapter: string) => string | null;
+  /** Fonts beyond the default the document's text uses. */
+  fonts?: PdfFont[];
 }
 
 export class PdfWriter {
@@ -97,7 +104,7 @@ export class PdfWriter {
   private tableHeader: MeasuredBlock | null = null;
   private emojiPng = new Map<string, string>();
 
-  constructor({ geometry, background, backgroundImage }: WriterOptions) {
+  constructor({ geometry, background, backgroundImage, fonts }: WriterOptions) {
     this.geometry = geometry;
     this.background = background;
     this.backgroundImage = backgroundImage;
@@ -111,7 +118,7 @@ export class PdfWriter {
       // uncompressed, a long chat runs to tens of megabytes.
       compress: true,
     });
-    registerPdfFont(this.doc);
+    registerPdfFonts(this.doc, [DEFAULT_FONT, ...(fonts ?? [])]);
   }
 
   private get chapter(): string | null {
@@ -418,7 +425,7 @@ export class PdfWriter {
 
     const [r, g, b] = parseColor(item.color);
     this.doc.setTextColor(r, g, b);
-    this.doc.setFont(PDF_FONT_FAMILY, item.bold ? "bold" : "normal");
+    this.doc.setFont(item.fontFamily, item.bold ? "bold" : "normal");
     this.doc.setFontSize(pt(item.fontSize));
     this.doc.text(item.text, mm(left + item.x), mm(top + item.baseline), {
       baseline: "alphabetic",

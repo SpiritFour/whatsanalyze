@@ -4,6 +4,7 @@ import { PdfWriter } from "~/utils/pdf/emit";
 import type { FurnitureContext } from "~/utils/pdf/emit";
 import { hasEmoji, loadEmojiSprite } from "~/utils/pdf/emoji";
 import type { PageGeometry } from "~/utils/pdf/page";
+import type { PdfFont } from "~/utils/pdf/fonts";
 
 /**
  * The pipeline every PDF document goes through: write a stretch of the
@@ -36,17 +37,24 @@ export class PdfBuilder {
     css: string;
     background: (_chapter: string) => string | null;
     backgroundImage?: (_chapter: string) => string | null;
+    /** Fonts beyond the default, embedded and laid out from the same bytes. */
+    fonts?: PdfFont[];
     /** Only fetch emoji artwork when there is an emoji to draw. */
     needsEmoji: boolean;
   }): Promise<PdfBuilder> {
     const sprite = options.needsEmoji
       ? await loadEmojiSprite()
       : new Map<string, string>();
-    const surface = await LayoutSurface.create(options.geometry, options.css);
+    const surface = await LayoutSurface.create(
+      options.geometry,
+      options.css,
+      options.fonts,
+    );
     const writer = new PdfWriter({
       geometry: options.geometry,
       background: options.background,
       backgroundImage: options.backgroundImage,
+      fonts: options.fonts,
     });
     return new PdfBuilder(surface, writer, sprite);
   }

@@ -391,6 +391,37 @@ test.describe("the WhatsApp to PDF tool", () => {
     await expect(page.locator("html")).not.toHaveClass(/cv-printing/);
   });
 
+  test("prints on the chosen paper, and only the chosen messages", async ({
+    page,
+  }) => {
+    test.setTimeout(180_000);
+    await openTool(page);
+
+    const bubbles = page.locator(".chat-preview .cv-msg");
+    const all = await bubbles.count();
+    await expect(page.locator(".chat-preview .cv-system")).not.toHaveCount(0);
+
+    // WhatsApp's own notices can go...
+    await page.getByLabel("Hide WhatsApp notices").check();
+    await expect(page.locator(".chat-preview .cv-system")).toHaveCount(0);
+
+    // ...and so can every day outside a range: the emoji chat's second
+    // month only.
+    await page.locator('input[name="chat-from"]').fill("2021-02-01");
+    await expect.poll(() => bubbles.count()).toBeLessThan(all);
+    await expect(
+      page.locator(".chat-preview .cv-day-label").first(),
+    ).toContainText("February");
+
+    // US Letter: 8.5 x 11 in, 612 x 792 pt.
+    await page
+      .locator('label:has(input[name="chat-paper"][value="letter"])')
+      .click();
+    const pdf = (await downloadPreview(page)).toString("latin1");
+    // jsPDF writes the width as 612.0000000000001137.
+    expect(pdf).toMatch(/\/MediaBox \[0 0 612(\.\d*)? 792(\.\d*)?\]/);
+  });
+
   test.describe("Pro designs", () => {
     /** Custom colours, a hearts wallpaper and a titled cover. */
     const designIt = async (page) => {
@@ -436,6 +467,29 @@ test.describe("the WhatsApp to PDF tool", () => {
       expect(jpegCount(pdf)).toBe(0);
     });
 
+    /** A Pro preset and a Pro font. */
+    const pickMidnightSerif = async (page) => {
+      await page.locator('label:has([data-style="midnight"])').click();
+      await page.locator('label:has([data-font="serif"])').click();
+    };
+    // #0f172a as jsPDF writes it, and the book font (Lora) as embedded:
+    // jsPDF names it after its family.
+    const MIDNIGHT = "0.06 0.09 0.16 rg";
+    const hasLora = (pdf) =>
+      pdf.toString("latin1").includes("/BaseFont /WaSerif");
+
+    test("keep Pro presets and fonts out of the free PDF", async ({ page }) => {
+      test.setTimeout(180_000);
+      await openTool(page);
+      await pickMidnightSerif(page);
+      // Tried on screen: the preview is in midnight.
+      await expect.poll(() => previewBackground(page)).toBe("rgb(15, 23, 42)");
+
+      const pdf = await downloadPreview(page);
+      expect(contentStreams(pdf)).not.toContain(MIDNIGHT);
+      expect(hasLora(pdf)).toBe(false);
+    });
+
     test("are printed for subscribers", async ({ page }) => {
       test.setTimeout(180_000);
       await stubCallable(page, "verifySubscription", activeSubscription());
@@ -456,6 +510,25 @@ test.describe("the WhatsApp to PDF tool", () => {
       // file once however many pages show it.
       expect(contentStreams(pdf)).toContain("0.07 0.2 0.34 rg");
       expect(jpegCount(pdf)).toBe(1);
+    });
+
+    test("print Pro presets and fonts for subscribers", async ({ page }) => {
+      test.setTimeout(180_000);
+      await stubCallable(page, "verifySubscription", activeSubscription());
+      await page.goto("/subscribe?email=test@example.com&token=sub_test123");
+      await expect(
+        page.getByRole("heading", { name: /your subscription is active/i }),
+      ).toBeVisible();
+
+      await openTool(page);
+      await pickMidnightSerif(page);
+      const downloadPromise = page.waitForEvent("download");
+      await page.getByRole("button", { name: "Download now" }).click();
+      const pdf = await fs.readFile(await (await downloadPromise).path());
+
+      expect(contentStreams(pdf)).toContain(MIDNIGHT);
+      // The font the preview used is the one embedded: same file, same widths.
+      expect(hasLora(pdf)).toBe(true);
     });
   });
 });

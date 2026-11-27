@@ -76,6 +76,43 @@
       </div>
     </details>
 
+    <!-- Font -->
+    <fieldset class="design__group">
+      <legend>
+        {{ t("pdfTool.design.fontTitle") }}
+        <span class="pro-chip">{{ t("pdfTool.design.pro") }}</span>
+      </legend>
+      <div class="design__chips" role="radiogroup">
+        <label
+          v-for="font in fonts"
+          :key="font"
+          class="chip"
+          :class="{ 'is-selected': options.font === font }"
+          :style="{ fontFamily: fontPreview(font) }"
+        >
+          <input
+            v-model="options.font"
+            type="radio"
+            name="chat-font"
+            class="visually-hidden"
+            :value="font"
+            :data-font="font"
+          />
+          {{ t(`pdfTool.design.font.${font}`) }}
+        </label>
+      </div>
+    </fieldset>
+
+    <!-- Book layout -->
+    <label class="design__check">
+      <input v-model="options.book" type="checkbox" name="chat-book" />
+      <span>
+        {{ t("pdfTool.design.book") }}
+        <span class="pro-chip">{{ t("pdfTool.design.pro") }}</span>
+        <small>{{ t("pdfTool.design.bookHint") }}</small>
+      </span>
+    </label>
+
     <!-- Cover -->
     <details class="design__group" :open="customCover">
       <summary>
@@ -170,12 +207,16 @@ import {
   hasCustomCover,
   isPremiumDesign,
 } from "~/utils/pdf/chatDesign";
+import { CHAT_FONT_IDS, chatFontFamily } from "~/utils/pdf/chatFonts";
 
 const { t } = useI18n();
 const design = inject("chatPdfDesign");
 const options = design.options;
 
 const colorKeys = ["page", "bubbleIn", "bubbleOut", "accent"];
+const fonts = CHAT_FONT_IDS;
+// Each chip in its own typeface (declared on the page by ChatPdfTool).
+const fontPreview = (font) => chatFontFamily(font);
 const backgroundChoices = ["none", ...PATTERN_IDS, "photo"];
 
 const premium = computed(() => isPremiumDesign(options));
@@ -258,6 +299,31 @@ function pickCover(event) {
 
   legend {
     cursor: default;
+  }
+}
+
+.design__check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: $wa-ink;
+  cursor: pointer;
+
+  input {
+    width: 1.05rem;
+    height: 1.05rem;
+    margin-top: 0.15rem;
+    accent-color: $wa-accent;
+  }
+
+  small {
+    display: block;
+    margin-top: 0.15rem;
+    font-weight: 400;
+    font-size: 0.8rem;
+    color: $wa-ink-muted;
   }
 }
 

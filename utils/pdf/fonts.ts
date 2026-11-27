@@ -2,49 +2,68 @@ import type jsPDF from "jspdf";
 import myFont from "~/assets/pdf-fonts/Helvetica.js";
 
 /**
- * One font, used by both halves of the pipeline.
+ * Fonts, shared by both halves of the pipeline.
  *
  * The layout pass measures text with the browser and the emit pass draws it
- * with jsPDF. Those two only agree if they are using the same font file, so the
- * same base64 TTF is registered with jsPDF and declared as an @font-face in the
- * layout document.
+ * with jsPDF. Those two only agree if they use the same font file, so each
+ * font's TTF is registered with jsPDF and declared as an @font-face in the
+ * layout document, from the same bytes. Two different files would make every
+ * measured x-position drift against the glyphs actually drawn.
+ *
+ * "WaPdf" is always there; a document can add more (the chat tool's font
+ * choice, utils/pdf/chatFonts.ts).
  */
 
 export const PDF_FONT_FAMILY = "WaPdf";
 
-export function registerPdfFont(doc: jsPDF): void {
-  // Distinct VFS filenames per weight: writing both to one name leaves jsPDF
-  // resolving "normal" to whichever was added last.
-  doc.addFileToVFS("WaPdf-normal.ttf", myFont.normal);
-  doc.addFont("WaPdf-normal.ttf", PDF_FONT_FAMILY, "normal");
+export interface PdfFont {
+  /** The CSS and jsPDF family name. */
+  family: string;
+  /** Base64 TTF data for the 400 and 700 weights. */
+  normal: string;
+  bold: string;
+}
 
-  doc.addFileToVFS("WaPdf-bold.ttf", myFont.bold);
-  doc.addFont("WaPdf-bold.ttf", PDF_FONT_FAMILY, "bold");
+export const DEFAULT_FONT: PdfFont = {
+  family: PDF_FONT_FAMILY,
+  normal: myFont.normal,
+  bold: myFont.bold,
+};
 
+export function registerPdfFonts(doc: jsPDF, fonts: PdfFont[]): void {
+  for (const font of fonts) {
+    // Distinct VFS filenames per weight: writing both to one name leaves
+    // jsPDF resolving "normal" to whichever was added last.
+    doc.addFileToVFS(`${font.family}-normal.ttf`, font.normal);
+    doc.addFont(`${font.family}-normal.ttf`, font.family, "normal");
+    doc.addFileToVFS(`${font.family}-bold.ttf`, font.bold);
+    doc.addFont(`${font.family}-bold.ttf`, font.family, "bold");
+  }
   doc.setFont(PDF_FONT_FAMILY, "normal");
 }
 
-export function pdfFontFaceCss(): string {
-  return fontFaceCss(myFont.normal, myFont.bold);
+/** @font-face rules for the layout document, from the embedded bytes. */
+export function fontFaceCss(fonts: PdfFont[]): string {
+  return fonts
+    .map((font) =>
+      [
+        [400, font.normal],
+        [700, font.bold],
+      ]
+        .map(
+          ([weight, data]) => `
+@font-face {
+  font-family: "${font.family}";
+  font-style: normal;
+  font-weight: ${weight};
+  src: url(data:font/truetype;charset=utf-8;base64,${data}) format("truetype");
+}`,
+        )
+        .join(""),
+    )
+    .join("");
 }
 
-/**
- * Built from the same TTF that jsPDF embeds, so the widths the browser lays out
- * with are the widths the PDF renders with. Two different files here would make
- * every measured x-position drift against the glyphs actually drawn.
- */
-function fontFaceCss(normalBase64: string, boldBase64: string): string {
-  return `
-@font-face {
-  font-family: "WaPdf";
-  font-style: normal;
-  font-weight: 400;
-  src: url(data:font/truetype;charset=utf-8;base64,${normalBase64}) format("truetype");
-}
-@font-face {
-  font-family: "WaPdf";
-  font-style: normal;
-  font-weight: 700;
-  src: url(data:font/truetype;charset=utf-8;base64,${boldBase64}) format("truetype");
-}`;
+export function pdfFontFaceCss(): string {
+  return fontFaceCss([DEFAULT_FONT]);
 }

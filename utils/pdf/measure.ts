@@ -38,6 +38,8 @@ export interface TextItem {
   fontSize: number;
   bold: boolean;
   color: string;
+  /** One of the document's registered font families. */
+  fontFamily: string;
 }
 
 export interface ImageItem {
@@ -333,7 +335,8 @@ function collectText(
 
   const fontSize = parseFloat(style.fontSize);
   const bold = parseInt(style.fontWeight, 10) >= 600;
-  const { ascent, descent } = surface.metricsFor(fontSize, bold);
+  const fontFamily = surface.familyOf(style.fontFamily);
+  const { ascent, descent } = surface.metricsFor(fontSize, bold, fontFamily);
   const color = style.color;
 
   const push = (rect: DOMRect, runText: string) => {
@@ -350,6 +353,7 @@ function collectText(
       fontSize,
       bold,
       color,
+      fontFamily,
     });
   };
 

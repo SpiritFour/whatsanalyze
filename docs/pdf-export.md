@@ -162,6 +162,23 @@ design can go further (`chatDesign.ts`, controls in
   from the chat's photos or uploaded. The cover tab of the preview shows the
   PDF's cover from the same markup, scaled to fit.
 
+- **Mood presets.** Romance, Vintage, Midnight, Pastel and High contrast
+  (`pro: true` in `chatStyles.ts`). Every preset's text passes 4.5:1, the
+  phone presets' timestamps included.
+- **Fonts.** A book serif (Lora), a rounded one (Nunito) and a typewriter
+  (Courier Prime), all SIL OFL TTFs from npm (`chatFonts.ts`). The engine
+  registers any number of families: each is embedded in jsPDF and declared as
+  an `@font-face` in the layout frame from the same bytes, the measuring pass
+  records each word's family, and the emitter switches per word. A font is
+  fetched only when picked (about 270 KB for both weights).
+- **Book layout.** Every month is its own chapter (`chat-YYYY-MM`): it opens a
+  page with the month as a heading, and the footer names the month.
+
+Free for everyone: paper size (A4, US Letter, A5, with wallpapers drawn at
+the sheet's proportions), hiding WhatsApp's own notices, and a date range.
+The filters go through `filterChatMessages`, so the preview, printout, PDF and
+cover count the same messages, and a sample is the first 100 of what is left.
+
 Everyone can try all of it in the preview. `designForAccess` decides what
 prints: without full access the PDF, the Print button and the browser
 printout fall back to the preset the custom palette started from, with no

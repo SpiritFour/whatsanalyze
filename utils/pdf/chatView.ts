@@ -1,4 +1,5 @@
-import { contrast, resolveStyle } from "~/utils/pdf/chatDesign";
+import { contrast, resolveStyle, textOn } from "~/utils/pdf/chatDesign";
+import { allChatFontFaceCss, chatFontFamily } from "~/utils/pdf/chatFonts";
 import { messageToHtml } from "~/utils/pdf/emoji";
 import { block, words, wrapWords } from "~/utils/pdf/html";
 import { TEXT_SIZES } from "~/utils/pdf/chatStyles";
@@ -23,6 +24,13 @@ import type { AttachmentSource } from "~/utils/attachments";
  */
 
 export const CHAT_CHAPTER = "chat";
+
+/** `@page { size }` for each paper. */
+const PAGE_SIZE_CSS: Record<string, string> = {
+  a4: "A4",
+  letter: "letter",
+  a5: "A5",
+};
 
 export interface ChatViewMessage {
   author: string;
@@ -182,6 +190,61 @@ function nameColor(
 export interface ChatViewState {
   previousDay: string;
   previousAuthor: string;
+  /** Book layout: the month the last chapter opened with (YYYY-MM). */
+  previousMonth?: string;
+}
+
+function monthKey(date: Date | string): string {
+  const value = new Date(date);
+  return `${value.getFullYear()}-${String(value.getMonth() + 1).padStart(2, "0")}`;
+}
+
+function monthLabel(date: Date | string, locale: string): string {
+  try {
+    return new Intl.DateTimeFormat(locale, {
+      month: "long",
+      year: "numeric",
+    }).format(new Date(date));
+  } catch {
+    return monthKey(date);
+  }
+}
+
+/** A message's day as YYYY-MM-DD, in the local time zone like the export. */
+function isoDay(date: Date | string): string {
+  const value = new Date(date);
+  return `${monthKey(value)}-${String(value.getDate()).padStart(2, "0")}`;
+}
+
+/**
+ * The messages a document shows, after the content filters: WhatsApp's own
+ * notices left out on request, and only the chosen days. The preview, the
+ * printout and the PDF all go through this, so they count the same messages.
+ */
+export function filterChatMessages<
+  T extends { author?: string; date: Date | string },
+>(
+  messages: T[],
+  options: Pick<ChatViewOptions, "hideSystem" | "from" | "to">,
+  participants: string[],
+): T[] {
+  const known = new Set(participants);
+  const { hideSystem, from, to } = options;
+  if (!hideSystem && !from && !to) return messages;
+  return messages.filter((message) => {
+    if (hideSystem) {
+      const author = message.author;
+      const system =
+        !author ||
+        author.toLowerCase() === "system" ||
+        (known.size > 0 && !known.has(author));
+      if (system) return false;
+    }
+    const day = isoDay(message.date);
+    if (from && day < from) return false;
+    if (to && day > to) return false;
+    return true;
+  });
 }
 
 /** The whole chat view: header, day separators, bubbles, preview notice. */
@@ -194,7 +257,13 @@ export function chatViewHtml(
   const { header = true, state = { previousDay: "", previousAuthor: "" } } =
     part;
   const style = resolveStyle(options);
-  const chapter = CHAT_CHAPTER;
+  // Book layout: every month is its own chapter, so it starts a fresh page
+  // and its pages can say which month they are in.
+  const chapterOf = (date: Date | string) =>
+    options.book ? `${CHAT_CHAPTER}-${monthKey(date)}` : CHAT_CHAPTER;
+  let chapter = doc.messages.length
+    ? chapterOf(doc.messages[0].date)
+    : CHAT_CHAPTER;
   const others = Object.keys(doc.colors).filter((name) => name !== options.me);
   const avatarColor =
     others.length === 1 ? nameColor(style, doc.colors, others[0]) : style.name;
@@ -217,8 +286,24 @@ export function chatViewHtml(
   }
 
   let { previousDay, previousAuthor } = state;
+  let previousMonth = state.previousMonth ?? "";
 
   for (const message of doc.messages) {
+    if (options.book) {
+      const month = monthKey(message.date);
+      if (month !== previousMonth) {
+        chapter = chapterOf(message.date);
+        html += block(
+          chapter,
+          `<div class="cv-month">${words(monthLabel(message.date, doc.locale))}</div>`,
+          // The chat's header shares the first month's page.
+          { keepWithNext: true, breakBefore: !!previousMonth },
+        );
+        previousMonth = month;
+        previousDay = "";
+      }
+    }
+
     const day = dayKey(message.date);
     if (day !== previousDay) {
       html += block(
@@ -284,6 +369,7 @@ export function chatViewHtml(
 
   state.previousDay = previousDay;
   state.previousAuthor = previousAuthor;
+  state.previousMonth = previousMonth;
 
   if (doc.labels.notice) {
     html += block(
@@ -311,7 +397,7 @@ export function chatViewCss(
 
   return `
 .cv-root {
-  font-family: "WaPdf", Helvetica, Arial, sans-serif;
+  font-family: ${chatFontFamily(options.font)};
   color: ${s.text};
   font-size: ${size}px;
   line-height: 1.4;
@@ -338,6 +424,11 @@ export function chatViewCss(
 .cv-header-text { min-width: 0; }
 .cv-title { font-weight: 700; font-size: ${Math.round(size * 1.2)}px; overflow-wrap: anywhere; }
 .cv-subtitle { color: ${s.headerMuted}; font-size: ${small}px; padding-top: 2px; }
+
+.cv-month {
+  font-size: ${Math.round(size * 2.1)}px; font-weight: 700; line-height: 1.2;
+  color: ${textOn(s.page)}; padding: 18px 0 10px;
+}
 
 .cv-day { display: flex; justify-content: center; padding: 10px 0 8px; }
 .cv-day-label {
@@ -409,13 +500,15 @@ export function chatPrintGlobalCss(
   fontFaceCss: string,
 ): string {
   const s = resolveStyle(options);
+  const size = PAGE_SIZE_CSS[options.paper] ?? "A4";
   return `
 ${fontFaceCss}
-@page chat { size: A4; margin: 12mm; background: ${s.page}; }
+${allChatFontFaceCss()}
+@page chat { size: ${size}; margin: 12mm; background: ${s.page}; }
 /* For engines without named pages (Safari): no page margins at all, so
    there is no white frame around the wallpaper and no room for the
    browser's own URL and date; the chat is inset by padding instead. */
-@page { size: A4; margin: 0; }
+@page { size: ${size}; margin: 0; }
 #cv-print-root { display: none; }
 @media print {
   html.cv-printing, html.cv-printing body {

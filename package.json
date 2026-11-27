@@ -38,6 +38,9 @@
   },
   "dependencies": {
     "@amcharts/amcharts4": "^4.10.40",
+    "@expo-google-fonts/courier-prime": "0.4.1",
+    "@expo-google-fonts/lora": "0.4.2",
+    "@expo-google-fonts/nunito": "0.4.2",
     "@heroicons/vue": "^2.2.0",
     "@mdi/js": "^7.4.47",
     "@mlc-ai/web-llm": "0.2.85",

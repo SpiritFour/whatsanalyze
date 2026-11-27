@@ -3,12 +3,16 @@ import { PdfBuilder, anyEmoji, nextFrame } from "~/utils/pdf/builder";
 import { parseColor } from "~/utils/pdf/emit";
 import { A4, contentHeightPx, mm } from "~/utils/pdf/page";
 import type { PageGeometry } from "~/utils/pdf/page";
-import type { ChatViewOptions } from "~/utils/pdf/chatStyles";
+import { PAPER_SIZES } from "~/utils/pdf/chatStyles";
+import type { ChatViewOptions, PaperId } from "~/utils/pdf/chatStyles";
 import {
+  CHAT_CHAPTER,
   chatViewCss,
   chatViewHtml,
+  filterChatMessages,
   prepareChatMessages,
 } from "~/utils/pdf/chatView";
+import { loadChatFont } from "~/utils/pdf/chatFonts";
 import type { ChatViewLabels } from "~/utils/pdf/chatView";
 import {
   COVER_CHAPTER,
@@ -31,6 +35,21 @@ export const CHAT_GEOMETRY: PageGeometry = {
   ...A4,
   margin: { top: 12, right: 12, bottom: 12 + mm(18), left: 12 },
 };
+
+/** The sheet for a paper size; A5 gets slimmer margins for its small page. */
+export function chatGeometry(paper: PaperId = "a4"): PageGeometry {
+  const size = PAPER_SIZES[paper] ?? PAPER_SIZES.a4;
+  const margin = paper === "a5" ? 9 : 12;
+  return {
+    ...size,
+    margin: {
+      top: margin,
+      right: margin,
+      bottom: margin + mm(18),
+      left: margin,
+    },
+  };
+}
 
 const MESSAGES_PER_BATCH = 300;
 export const CHAT_SAMPLE_COUNT = 100;
@@ -68,16 +87,20 @@ export async function renderChatViewPdf(
   } = input;
 
   const style = resolveStyle(options);
-  const all = chat.chatObject;
-  const messages = isSample ? all.slice(0, CHAT_SAMPLE_COUNT) : all;
+  const geometry = chatGeometry(options.paper);
   const colors = chat.personColorMap || {};
   const participants = Object.keys(colors);
+  // The content filters first: the sample is the first 100 of what is left.
+  const all = filterChatMessages(chat.chatObject, options, participants);
+  const messages = isSample ? all.slice(0, CHAT_SAMPLE_COUNT) : all;
+  const font = await loadChatFont(options.font);
 
   const builder = await PdfBuilder.create({
-    geometry: CHAT_GEOMETRY,
+    geometry,
     css:
       chatViewCss(options, "pdf") +
-      chatPagesCss(options, contentHeightPx(CHAT_GEOMETRY)),
+      chatPagesCss(options, contentHeightPx(geometry)),
+    fonts: font ? [font] : [],
     background: (chapter) =>
       chapter === COVER_CHAPTER ? coverColor(options) : style.page,
     // The wallpaper is behind the chat and the outro; the cover has its own
@@ -89,7 +112,7 @@ export async function renderChatViewPdf(
 
   try {
     const documentLabels = labels(messages.length, all.length);
-    const state = { previousDay: "", previousAuthor: "" };
+    const state = { previousDay: "", previousAuthor: "", previousMonth: "" };
 
     if (documentLabels.cover) {
       await builder.add(
@@ -144,8 +167,13 @@ export async function renderChatViewPdf(
       const [r, g, b] = parseColor(style.folio);
       doc.setTextColor(r, g, b);
       doc.setFontSize(7.5);
+      if (font) doc.setFont(font.family, "normal");
       const y = geometry.heightMm - 8;
-      doc.text(title, geometry.margin.left, y);
+      // Book layout: each page says which month of the chat it is in.
+      const month = chapter.startsWith(`${CHAT_CHAPTER}-`)
+        ? monthName(chapter.slice(CHAT_CHAPTER.length + 1), locale)
+        : "";
+      doc.text(month ? `${title} · ${month}` : title, geometry.margin.left, y);
       doc.text(
         `${page} / ${total}`,
         geometry.widthMm - geometry.margin.right,
@@ -157,5 +185,19 @@ export async function renderChatViewPdf(
     });
   } finally {
     builder.destroy();
+  }
+}
+
+/** "2021-03" as "March 2021" in the reader's language. */
+function monthName(key: string, locale: string): string {
+  const [year, month] = key.split("-").map(Number);
+  if (!year || !month) return "";
+  try {
+    return new Intl.DateTimeFormat(locale, {
+      month: "long",
+      year: "numeric",
+    }).format(new Date(year, month - 1, 1));
+  } catch {
+    return key;
   }
 }

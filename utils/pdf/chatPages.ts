@@ -1,3 +1,4 @@
+import { chatFontFamily } from "~/utils/pdf/chatFonts";
 import {
   contrast,
   isDark,
@@ -204,7 +205,7 @@ export function chatPagesCss(
   const ctaButtonText = textOn(ctaButton);
 
   return `
-.cp-cover, .cp-outro { font-family: "WaPdf", Helvetica, Arial, sans-serif; }
+.cp-cover, .cp-outro { font-family: ${chatFontFamily(options.font)}; }
 .cp-cover {
   height: ${Math.floor(pageHeight)}px; color: ${coverText};
   display: flex; flex-direction: column; justify-content: space-between;

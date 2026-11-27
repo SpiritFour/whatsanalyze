@@ -553,7 +553,9 @@ export default {
               title: this.chatView.title,
               labels: this.chatView.labels,
               locale: this.chatView.locale,
-              assets: this.chatView.assets,
+              assets: this.chatView.currentAssets
+                ? await this.chatView.currentAssets()
+                : this.chatView.assets,
               isSample,
               onProgress,
             })

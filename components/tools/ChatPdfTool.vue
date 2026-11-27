@@ -58,6 +58,9 @@
                 </span>
                 <span class="style-option__label">
                   {{ t(`pdfTool.style.${style.id.replace("-", "_")}`) }}
+                  <span v-if="style.pro" class="pro-chip">{{
+                    t("pdfTool.design.pro")
+                  }}</span>
                 </span>
               </label>
               <!-- Pro: a palette of the buyer's own colours -->
@@ -141,6 +144,68 @@
               <input v-model="options.showNames" type="checkbox" />
               {{ t("pdfTool.showNames") }}
             </label>
+            <label class="chat-pdf__check">
+              <input
+                v-model="options.hideSystem"
+                type="checkbox"
+                name="chat-hide-system"
+              />
+              {{ t("pdfTool.hideSystem") }}
+            </label>
+
+            <div class="chat-pdf__field" role="radiogroup">
+              <span id="chat-pdf-paper">{{ t("pdfTool.paper") }}</span>
+              <div class="segmented" aria-labelledby="chat-pdf-paper">
+                <label
+                  v-for="paper in ['a4', 'letter', 'a5']"
+                  :key="paper"
+                  :class="{ 'is-selected': options.paper === paper }"
+                >
+                  <input
+                    v-model="options.paper"
+                    type="radio"
+                    name="chat-paper"
+                    :value="paper"
+                    class="visually-hidden"
+                  />
+                  {{ t(`pdfTool.paperSize.${paper}`) }}
+                </label>
+              </div>
+            </div>
+
+            <div class="chat-pdf__field">
+              <span>{{ t("pdfTool.dateRange") }}</span>
+              <div class="chat-pdf__dates">
+                <input
+                  v-model="options.from"
+                  type="date"
+                  name="chat-from"
+                  :min="chatDays.first"
+                  :max="options.to || chatDays.last"
+                  :aria-label="t('pdfTool.dateFrom')"
+                />
+                <span aria-hidden="true">–</span>
+                <input
+                  v-model="options.to"
+                  type="date"
+                  name="chat-to"
+                  :min="options.from || chatDays.first"
+                  :max="chatDays.last"
+                  :aria-label="t('pdfTool.dateTo')"
+                />
+              </div>
+              <button
+                v-if="options.from || options.to"
+                type="button"
+                class="chat-pdf__link"
+                @click="
+                  options.from = '';
+                  options.to = '';
+                "
+              >
+                {{ t("pdfTool.dateReset") }}
+              </button>
+            </div>
           </fieldset>
 
           <div class="chat-pdf__actions">
@@ -246,6 +311,7 @@ import { ONE_TIME_PRICE, formatPrice } from "~/utils/pricing";
 import { scrollToSettled } from "~/utils/scroll";
 import {
   CHAT_STYLES,
+  isProStyle,
   CHAT_STYLE_IDS,
   normalizeChatViewOptions,
 } from "~/utils/pdf/chatStyles";
@@ -253,11 +319,12 @@ import {
   chatPrintGlobalCss,
   chatViewCss,
   chatViewHtml,
+  filterChatMessages,
   prepareChatMessages,
 } from "~/utils/pdf/chatView";
 import {
-  CHAT_GEOMETRY,
   CHAT_SAMPLE_COUNT,
+  chatGeometry,
   renderChatViewPdf,
 } from "~/utils/pdf/chatPdf";
 import {
@@ -357,8 +424,32 @@ function pdfLink(path, campaign) {
 
 const count = (value) => Number(value).toLocaleString(locale.value);
 
-function coverContent(printed, total, design = options) {
+/** The messages after the content filters: what every output shows. */
+const filteredMessages = computed(() =>
+  markRaw(
+    filterChatMessages(
+      chat.value?.chatObject || [],
+      options,
+      participants.value,
+    ),
+  ),
+);
+
+/** The chat's first and last day, as bounds for the date range. */
+const chatDays = computed(() => {
   const messages = chat.value?.chatObject || [];
+  const iso = (date) => {
+    if (!date) return "";
+    const d = new Date(date);
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  };
+  return { first: iso(messages[0]?.date), last: iso(messages.at(-1)?.date) };
+});
+
+const geometry = computed(() => chatGeometry(options.paper));
+
+function coverContent(printed, total, design = options) {
+  const messages = filteredMessages.value;
   const first = messages[0]?.date;
   const last = messages.at(-1)?.date;
   const people = participants.value;
@@ -425,7 +516,7 @@ function outroContent(printed, total) {
 
 /** Labels for a document that prints `printed` of the chat's messages. */
 function labels(printed, total) {
-  const messages = chat.value?.chatObject || [];
+  const messages = filteredMessages.value;
   return {
     subtitle: t("pdfTool.subtitle", {
       count: total.toLocaleString(locale.value),
@@ -468,6 +559,8 @@ const chatView = computed(() => ({
   labels,
   locale: locale.value,
   assets: printableAssets.value,
+  // the popup awaits this, so a pending background change is included
+  currentAssets,
 }));
 
 // ----- preview: the free sample's messages, in the chosen look
@@ -475,9 +568,8 @@ const previewMessages = shallowRef([]);
 const previewCount = computed(() => previewMessages.value.length);
 
 async function prepare(count) {
-  const all = chat.value?.chatObject || [];
   return await prepareChatMessages(
-    all.slice(0, count),
+    filteredMessages.value.slice(0, count),
     toRaw(attachments.value),
     participants.value,
     { showMedia: options.showMedia },
@@ -485,7 +577,7 @@ async function prepare(count) {
 }
 
 watch(
-  () => [chat.value, options.showMedia],
+  () => [chat.value, options.showMedia, filteredMessages.value],
   async () => {
     if (!chat.value) return;
     previewMessages.value = markRaw(await prepare(CHAT_SAMPLE_COUNT));
@@ -493,7 +585,7 @@ watch(
 );
 
 function documentHtml(messages, design = options) {
-  const total = chat.value?.chatObject.length || 0;
+  const total = filteredMessages.value.length;
   return chatViewHtml(
     {
       title: chatTitle.value,
@@ -519,34 +611,62 @@ const coverPhotoUrl = ref("");
 const coverPick = ref(null);
 const chatImages = shallowRef([]);
 
-const pageWidth = pageWidthPx(CHAT_GEOMETRY);
-const pageHeight = px(CHAT_GEOMETRY.heightMm);
-const pageMargin = px(CHAT_GEOMETRY.margin.left);
+const pageWidth = computed(() => pageWidthPx(geometry.value));
+const pageHeight = computed(() => px(geometry.value.heightMm));
+const pageMargin = computed(() => px(geometry.value.margin.left));
 
 let wallpaperTimer = null;
+/** The wallpaper being drawn right now, if any. */
+let wallpaperWork = Promise.resolve();
+
 function refreshWallpaper() {
   clearTimeout(wallpaperTimer);
   // Debounced: dragging a colour picker or the fade slider fires constantly.
-  wallpaperTimer = setTimeout(async () => {
-    const choice = options.wallpaper;
-    const style = resolveStyle(options);
-    try {
-      if (choice.kind === "pattern") {
-        wallpaperUrl.value = patternWallpaper(choice.pattern, style);
-      } else if (choice.kind === "photo" && wallpaperSource.value) {
-        wallpaperUrl.value = await photoWallpaper(
-          wallpaperSource.value,
-          style.page,
-          choice.dim,
-        );
-      } else {
-        wallpaperUrl.value = "";
-      }
-    } catch (error) {
-      console.error("Could not prepare the background", error);
+  wallpaperTimer = setTimeout(() => {
+    wallpaperTimer = null;
+    wallpaperWork = drawWallpaper();
+  }, 120);
+}
+
+/**
+ * The design's pictures as they are now: a change still waiting out the
+ * debounce is drawn first, so an export started right after a change never
+ * prints the old wallpaper, or none.
+ */
+async function currentAssets() {
+  if (wallpaperTimer) {
+    clearTimeout(wallpaperTimer);
+    wallpaperTimer = null;
+    wallpaperWork = drawWallpaper();
+  }
+  await wallpaperWork;
+  return printableAssets.value;
+}
+
+async function drawWallpaper() {
+  const choice = options.wallpaper;
+  const style = resolveStyle(options);
+  try {
+    if (choice.kind === "pattern") {
+      wallpaperUrl.value = patternWallpaper(
+        choice.pattern,
+        style,
+        geometry.value,
+      );
+    } else if (choice.kind === "photo" && wallpaperSource.value) {
+      wallpaperUrl.value = await photoWallpaper(
+        wallpaperSource.value,
+        style.page,
+        choice.dim,
+        geometry.value,
+      );
+    } else {
       wallpaperUrl.value = "";
     }
-  }, 120);
+  } catch (error) {
+    console.error("Could not prepare the background", error);
+    wallpaperUrl.value = "";
+  }
 }
 
 watch(
@@ -557,6 +677,7 @@ watch(
     options.style,
     options.colors.page,
     options.colors.bubbleIn,
+    options.paper,
   ],
   refreshWallpaper,
 );
@@ -625,7 +746,7 @@ provide("chatPdfDesign", {
 // where it is tried out).
 const coverPreviewHtml = computed(() => {
   if (!chat.value) return "";
-  const total = chat.value.chatObject.length;
+  const total = filteredMessages.value.length;
   const printed = hasFullAccess.value
     ? total
     : Math.min(total, CHAT_SAMPLE_COUNT);
@@ -636,7 +757,7 @@ const coverPreviewHtml = computed(() => {
   );
 });
 const coverPreviewCss = computed(() =>
-  chatPagesCss(options, contentHeightPx(CHAT_GEOMETRY)),
+  chatPagesCss(options, contentHeightPx(geometry.value)),
 );
 const coverPreviewColor = computed(() => coverColor(options));
 
@@ -741,7 +862,7 @@ async function printChat() {
       labels,
       locale: locale.value,
       isSample: !hasFullAccess.value,
-      assets: printableAssets.value,
+      assets: await currentAssets(),
     });
     releasePrintUrl();
     printUrl = URL.createObjectURL(blob);
@@ -782,6 +903,10 @@ watch(
     options.baseStyle,
     { ...options.colors },
     { ...options.wallpaper },
+    options.font,
+    options.paper,
+    options.book,
+    options.hideSystem,
   ],
   () => {
     updateGlobalStyle();
@@ -796,6 +921,10 @@ watch(
           baseStyle: options.baseStyle,
           colors: options.colors,
           wallpaper: options.wallpaper,
+          font: options.font,
+          paper: options.paper,
+          book: options.book,
+          hideSystem: options.hideSystem,
         }),
       );
     } catch {
@@ -805,11 +934,19 @@ watch(
   { deep: true },
 );
 
+// The cover's words and the date range are about this chat: tab only.
 watch(
-  () => ({ ...options.cover }),
-  (cover) => {
+  () => ({ ...options.cover, from: options.from, to: options.to }),
+  () => {
     try {
-      sessionStorage.setItem(COVER_KEY, JSON.stringify(cover));
+      sessionStorage.setItem(
+        COVER_KEY,
+        JSON.stringify({
+          cover: options.cover,
+          from: options.from,
+          to: options.to,
+        }),
+      );
     } catch {
       // the cover just has to be filled in again after a reload
     }
@@ -822,7 +959,8 @@ watch(
   () => options.style,
   (style, previous) => {
     if (style !== "custom") {
-      options.baseStyle = style;
+      // Only a free preset can be what a Pro style falls back to.
+      if (!isProStyle(style)) options.baseStyle = style;
       return;
     }
     if (previous && previous !== "custom" && !customColorsTouched()) {
@@ -893,11 +1031,19 @@ async function restoreDesignImages() {
 
 onMounted(() => {
   const stored = loadStoredOptions();
-  const cover = loadStoredCover();
-  if (stored || cover) {
+  const tab = loadStoredCover();
+  if (stored || tab) {
     Object.assign(
       options,
-      normalizeChatViewOptions({ ...(stored || {}), cover }, options.me),
+      normalizeChatViewOptions(
+        {
+          ...(stored || {}),
+          cover: tab?.cover,
+          from: tab?.from,
+          to: tab?.to,
+        },
+        options.me,
+      ),
     );
   }
   void restoreDesignImages();
@@ -1143,6 +1289,35 @@ onBeforeUnmount(() => {
   font-size: 0.6rem;
   font-weight: 700;
   vertical-align: middle;
+}
+
+.chat-pdf__dates {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  input {
+    flex: 1;
+    min-width: 0;
+    padding: 0.4rem 0.5rem;
+    border: 1px solid $wa-border;
+    border-radius: $wa-radius-md;
+    background: $wa-surface-white;
+    color: $wa-ink;
+    font: inherit;
+    font-size: 0.85rem;
+  }
+}
+
+.chat-pdf__link {
+  align-self: flex-start;
+  border: 0;
+  background: none;
+  padding: 0;
+  color: $wa-accent;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .chat-pdf__preview-label {

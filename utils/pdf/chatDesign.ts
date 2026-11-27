@@ -1,4 +1,8 @@
-import { CHAT_STYLES, DEFAULT_CHAT_VIEW_OPTIONS } from "~/utils/pdf/chatStyles";
+import {
+  CHAT_STYLES,
+  DEFAULT_CHAT_VIEW_OPTIONS,
+  isProStyle,
+} from "~/utils/pdf/chatStyles";
 import type {
   ChatStyle,
   ChatViewOptions,
@@ -173,6 +177,9 @@ export function hasCustomCover(options: ChatViewOptions): boolean {
 export function isPremiumDesign(options: ChatViewOptions): boolean {
   return (
     options.style === "custom" ||
+    isProStyle(options.style) ||
+    (options.font ?? "default") !== "default" ||
+    !!options.book ||
     (options.wallpaper?.kind ?? "none") !== "none" ||
     hasCustomCover(options)
   );
@@ -189,7 +196,12 @@ export function designForAccess(
   if (fullAccess || !isPremiumDesign(options)) return options;
   return {
     ...options,
-    style: options.style === "custom" ? options.baseStyle : options.style,
+    style:
+      options.style === "custom" || isProStyle(options.style)
+        ? options.baseStyle
+        : options.style,
+    font: "default",
+    book: false,
     wallpaper: { kind: "none", pattern: "dots", dim: 0 },
     cover: { title: "", dedication: "", color: null, photo: false },
   };
@@ -210,6 +222,18 @@ export const PATTERN_IDS: PatternId[] = [
 
 /** A4 at 150 dpi: sharp in print, a few hundred KB as JPEG. */
 export const WALLPAPER_SIZE = { width: 1240, height: 1754 };
+
+/** A sheet's size at 150 dpi, so a wallpaper is never stretched. */
+export function wallpaperSize(paper?: { widthMm: number; heightMm: number }): {
+  width: number;
+  height: number;
+} {
+  if (!paper) return WALLPAPER_SIZE;
+  return {
+    width: Math.round((paper.widthMm / 25.4) * 150),
+    height: Math.round((paper.heightMm / 25.4) * 150),
+  };
+}
 
 function drawHeart(
   c: CanvasRenderingContext2D,
@@ -266,10 +290,15 @@ function seeded(seed: number) {
  * Generated rather than shipped: no image files to download or license, and
  * it always matches the palette.
  */
-export function patternWallpaper(pattern: PatternId, style: ChatStyle): string {
+export function patternWallpaper(
+  pattern: PatternId,
+  style: ChatStyle,
+  paper?: { widthMm: number; heightMm: number },
+): string {
+  const size = wallpaperSize(paper);
   const canvas = document.createElement("canvas");
-  canvas.width = WALLPAPER_SIZE.width;
-  canvas.height = WALLPAPER_SIZE.height;
+  canvas.width = size.width;
+  canvas.height = size.height;
   const c = canvas.getContext("2d");
   if (!c) return "";
   const { width, height } = canvas;
@@ -349,11 +378,13 @@ export async function photoWallpaper(
   source: Blob,
   pageColor: string,
   dim: number,
+  paper?: { widthMm: number; heightMm: number },
 ): Promise<string> {
   const bitmap = await createImageBitmap(source);
+  const size = wallpaperSize(paper);
   const canvas = document.createElement("canvas");
-  canvas.width = WALLPAPER_SIZE.width;
-  canvas.height = WALLPAPER_SIZE.height;
+  canvas.width = size.width;
+  canvas.height = size.height;
   const c = canvas.getContext("2d");
   if (!c) return "";
 
