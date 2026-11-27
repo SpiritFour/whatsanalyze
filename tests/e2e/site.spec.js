@@ -713,6 +713,7 @@ test.describe("tools and footer", () => {
     "/tools/message-counter",
     "/tools/word-counter",
     "/tools/chat-heatmap",
+    "/tools/whatsapp-to-pdf",
   ];
 
   test("no longer links to the retired year review page", async ({ page }) => {
@@ -752,7 +753,7 @@ test.describe("tools and footer", () => {
     }
   });
 
-  test("shows three separated groups and all 11 tools in the directory", async ({
+  test("shows three separated groups and all 12 tools in the directory", async ({
     page,
   }) => {
     await page.goto("/tools");
@@ -764,11 +765,15 @@ test.describe("tools and footer", () => {
     await expect(groups.nth(0).locator(".tool-card")).toHaveCount(4);
     // Chat Analytics, the AI analyzer included
     await expect(groups.nth(1).locator(".tool-card")).toHaveCount(5);
-    // Court Documentation
-    const courtCards = groups.nth(2).locator(".tool-card");
-    await expect(courtCards).toHaveCount(2);
+    // The PDF tools: WhatsApp to PDF, then the two court documents
+    const pdfCards = groups.nth(2).locator(".tool-card");
+    await expect(pdfCards).toHaveCount(3);
+    await expect(pdfCards.first()).toHaveAttribute(
+      "href",
+      /\/tools\/whatsapp-to-pdf\/?$/,
+    );
     await expect(
-      courtCards.first().locator(".tool-card__court-badge"),
+      pdfCards.first().locator(".tool-card__court-badge"),
     ).toHaveText("PDF");
   });
 
