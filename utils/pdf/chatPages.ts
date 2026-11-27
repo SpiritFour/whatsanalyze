@@ -7,7 +7,7 @@ import {
   resolveStyle,
   textOn,
 } from "~/utils/pdf/chatDesign";
-import { block, words } from "~/utils/pdf/html";
+import { block, emojiText, words } from "~/utils/pdf/html";
 import { escapeHtml } from "~/utils/pdf/emoji";
 import type { ChatViewOptions } from "~/utils/pdf/chatStyles";
 
@@ -82,6 +82,7 @@ export function chatCoverHtml(
   content: ChatCoverContent,
   logo: string,
   photo: string | null = null,
+  sprite: Map<string, string> = new Map(),
 ): string {
   const stats = content.stats
     .map(
@@ -106,15 +107,13 @@ export function chatCoverHtml(
        }
        <div class="cp-cover-main">
          <div class="cp-eyebrow">${words(content.eyebrow)}</div>
-         <div class="cp-title" style="font-size:${titleSize(content.title)}px">${words(
-           content.title,
-         )}</div>
+         <div class="cp-title" style="font-size:${titleSize(content.title)}px">${emojiText(content.title, sprite)}</div>
          ${
            content.dedication?.trim()
-             ? `<div class="cp-dedication">${words(content.dedication.trim())}</div>`
+             ? `<div class="cp-dedication">${emojiText(content.dedication.trim(), sprite)}</div>`
              : ""
          }
-         <div class="cp-members">${words(content.members)}</div>
+         <div class="cp-members">${emojiText(content.members, sprite)}</div>
          <div class="cp-period">${words(content.period)}</div>
          <div class="cp-stats">${stats}</div>
          ${

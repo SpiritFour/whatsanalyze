@@ -351,11 +351,15 @@ export interface ChatViewOptions {
   paper: PaperId;
   /** Pro: a chapter page per month, and the month on every page. */
   book: boolean;
+  /** With `book`: quiet months continue on the page before. */
+  bookCompact: boolean;
   /** Leave out WhatsApp's own notices (joins, encryption, missed calls). */
   hideSystem: boolean;
   /** Only messages from/to these days (YYYY-MM-DD), empty for no limit. */
   from: string;
   to: string;
+  /** Pro: participants with an uploaded profile picture (kept separately). */
+  avatars: string[];
 }
 
 export type PaperId = "a4" | "letter" | "a5";
@@ -388,9 +392,11 @@ export const DEFAULT_CHAT_VIEW_OPTIONS: Omit<ChatViewOptions, "me"> = {
   font: "default",
   paper: "a4",
   book: false,
+  bookCompact: false,
   hideSystem: false,
   from: "",
   to: "",
+  avatars: [],
 };
 
 const FONTS = ["default", "serif", "rounded", "typewriter"];
@@ -427,7 +433,11 @@ export function normalizeChatViewOptions(
   if (!FONTS.includes(options.font)) options.font = "default";
   if (!(options.paper in PAPER_SIZES)) options.paper = "a4";
   options.book = !!options.book;
+  options.bookCompact = !!options.bookCompact;
   options.hideSystem = !!options.hideSystem;
+  options.avatars = Array.isArray(options.avatars)
+    ? options.avatars.filter((name) => typeof name === "string")
+    : [];
   if (!DAY.test(options.from)) options.from = "";
   if (!DAY.test(options.to)) options.to = "";
   if (!["none", "pattern", "photo"].includes(options.wallpaper.kind)) {

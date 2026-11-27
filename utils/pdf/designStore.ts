@@ -13,7 +13,8 @@ const DB_NAME = "whatsanalyze_pdf_design";
 const STORE = "images";
 const SESSION_KEY = "whatsanalyze_pdf_design_session";
 
-export type DesignImageKey = "wallpaper" | "cover";
+/** The wallpaper photo, the cover photo, and one profile picture per name. */
+export type DesignImageKey = "wallpaper" | "cover" | `avatar:${string}`;
 
 interface StoredImage {
   token: string;

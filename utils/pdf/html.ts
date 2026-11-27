@@ -1,4 +1,4 @@
-import { escapeHtml } from "~/utils/pdf/emoji";
+import { escapeHtml, messageToHtml } from "~/utils/pdf/emoji";
 
 /**
  * The markup conventions the measuring pass understands.
@@ -47,6 +47,15 @@ export function wrapWords(html: string): string {
 /** Plain text that still needs a measurable box. */
 export function words(text: string): string {
   return wrapWords(escapeHtml(text));
+}
+
+/**
+ * Text that may hold emoji (a name like "Mom ❤️", a group called "Family
+ * 🏡", a cover title): measurable word spans, with every emoji as artwork. Plain
+ * `words()` would print an emoji as text, which no PDF font can draw.
+ */
+export function emojiText(text: string, sprite: Map<string, string>): string {
+  return wrapWords(messageToHtml(String(text ?? ""), sprite));
 }
 
 export function block(

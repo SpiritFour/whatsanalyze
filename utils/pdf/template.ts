@@ -1,7 +1,12 @@
 import moment from "moment";
 import { COLORS } from "~/utils/pdf/theme";
 import { messageToHtml } from "~/utils/pdf/emoji";
-import { block as anyBlock, words, wrapWords } from "~/utils/pdf/html";
+import {
+  block as anyBlock,
+  emojiText,
+  words,
+  wrapWords,
+} from "~/utils/pdf/html";
 import type { BlockOptions } from "~/utils/pdf/html";
 
 /**
@@ -55,7 +60,10 @@ export function coverBlocks(options: {
     messages: string;
     people: string;
   };
+  /** Emoji artwork, for names such as "Mom ❤️". */
+  sprite?: Map<string, string>;
 }): string {
+  const sprite = options.sprite ?? new Map<string, string>();
   const {
     title,
     logo,
@@ -78,7 +86,7 @@ export function coverBlocks(options: {
       ([name, color]) =>
         `<div class="wa-participant" style="background:${bubbleColor(
           color,
-        )}">${words(name)}</div>`,
+        )}">${emojiText(name, sprite)}</div>`,
     )
     .join("");
 
@@ -129,6 +137,7 @@ export function chartBlocks(
 export function factBlocks(
   heading: string,
   facts: Array<{ name: string; color: string; lines: string[] }>,
+  sprite: Map<string, string> = new Map(),
 ): string {
   const headingBlock = block(
     "facts",
@@ -145,7 +154,7 @@ export function factBlocks(
         `<div class="wa-fact">
            <div class="wa-participant" style="background:${bubbleColor(
              fact.color,
-           )};display:inline-block">${words(fact.name)}</div>
+           )};display:inline-block">${emojiText(fact.name, sprite)}</div>
            <div class="wa-fact-lines">${fact.lines
              .map((line) => `<div class="wa-fact-line">${words(line)}</div>`)
              .join("")}</div>
@@ -197,7 +206,7 @@ export function messageBlock(
   return block(
     "messages",
     `<div class="wa-bubble">
-       <div class="wa-author"${authorStyle}>${words(message.author)}</div>
+       <div class="wa-author"${authorStyle}>${emojiText(message.author, sprite)}</div>
        ${attachment}
        ${body}
        <div class="wa-time">${words(timeString(message.date))}</div>

@@ -295,6 +295,25 @@ type AiMode = "local" | "cloud" | "preview" | "sample";
  * Standalone Tools (/tools/* and ToolDropzone)
  */
 export const analyticsTools = {
+  /**
+   * A design option changed in the WhatsApp-to-PDF tool: what people try,
+   * and whether it is a Pro option.
+   */
+  pdfDesignChange(option: string, value: string | boolean, pro: boolean) {
+    trackEvent("pdf_design_change", {
+      option,
+      value: String(value),
+      pro,
+    });
+  },
+  /** The "Pro design is in the full PDF" note was shown, and where. */
+  pdfProNote(where: "panel" | "download") {
+    trackEvent("pdf_pro_note_shown", { where });
+  },
+  /** The Print button printed the PDF, the free preview or the whole chat. */
+  pdfPrint(full: boolean) {
+    trackEvent("pdf_print", { full });
+  },
   hubClick(toolName: string) {
     trackEvent("tool_hub_click", { tool_name: toolName });
   },
@@ -550,8 +569,20 @@ export const analyticsChat = {
   /** The PDF was built and handed to the browser to save. */
   pdfGenerated(
     fileType: "pdf_sample" | "pdf_full" | "pdf_full_court" | "pdf_full_chat",
+    /** The chat tool's design, which shows what ends up in real PDFs. */
+    design?: { style: string; font: string; paper: string; pro: boolean },
   ) {
-    trackEvent("pdf_generated", { file_type: fileType });
+    trackEvent("pdf_generated", {
+      file_type: fileType,
+      ...(design
+        ? {
+            pdf_style: design.style,
+            pdf_font: design.font,
+            pdf_paper: design.paper,
+            pdf_pro_design: design.pro,
+          }
+        : {}),
+    });
   },
 };
 

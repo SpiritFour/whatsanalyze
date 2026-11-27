@@ -110,7 +110,10 @@ export async function renderChatPdf(options: RenderPdfOptions): Promise<Blob> {
     geometry: VISUAL_GEOMETRY,
     css: VISUAL_CSS,
     background: (chapter) => CHAPTER_BACKGROUND[chapter as Chapter] ?? null,
-    needsEmoji: anyEmoji(messages.map((message: any) => message.message)),
+    needsEmoji: anyEmoji([
+      ...messages.map((message: any) => message.message),
+      ...Object.keys(chat.personColorMap || {}),
+    ]),
   });
 
   try {
@@ -119,6 +122,7 @@ export async function renderChatPdf(options: RenderPdfOptions): Promise<Blob> {
 
     await builder.add(
       coverBlocks({
+        sprite: builder.sprite,
         title: isSample ? LABELS.sampleTitle : LABELS.fullTitle,
         logo: logoBlack,
         firstDate: first,
@@ -147,7 +151,8 @@ export async function renderChatPdf(options: RenderPdfOptions): Promise<Blob> {
         ],
       }));
 
-    if (facts.length) await builder.add(factBlocks(LABELS.funFacts, facts));
+    if (facts.length)
+      await builder.add(factBlocks(LABELS.funFacts, facts, builder.sprite));
 
     let previousDate: Date | string | null = null;
 

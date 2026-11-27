@@ -339,6 +339,7 @@ import {
 import { chatFingerprint } from "~/utils/chatFingerprint";
 import { scrollToSettled } from "~/utils/scroll";
 import { renderChatPdf, renderChatViewPdf, renderCourtPdf } from "~/utils/pdf";
+import { isPremiumDesign } from "~/utils/pdf/chatDesign";
 import { loadImage } from "~/utils/utils";
 import {
   formatExactTimestamp,
@@ -356,6 +357,8 @@ export default {
     isValidSubscription: { type: Boolean, default: false },
     // the court evidence transcript instead of the visual story
     court: { type: Boolean, default: false },
+    // the court transcript's paper: "a4" or "letter"
+    courtPaper: { type: String, default: "a4" },
     // the chat as on a phone, in a chosen style, instead of the visual story:
     // { options, title, labels(printed, total), locale, assets } — see
     // utils/pdf/chatPdf.ts
@@ -566,6 +569,7 @@ export default {
                 isSample,
                 source: toRaw(this.source),
                 onProgress,
+                paper: this.courtPaper,
               })
             : await renderChatPdf({
                 chat,
@@ -581,7 +585,18 @@ export default {
         if (this.isUnmounted) return;
         FileSaver.saveAs(blob, this.fileName);
         // file_download fires when the build starts; this proves it finished
-        analyticsChat.pdfGenerated(this.pdfFileType);
+        analyticsChat.pdfGenerated(
+          this.pdfFileType,
+          this.chatView
+            ? {
+                style: this.chatView.options.style,
+                font: this.chatView.options.font,
+                paper: this.chatView.options.paper,
+                // what was printed: Pro parts only with full access
+                pro: isPremiumDesign(this.chatView.options),
+              }
+            : undefined,
+        );
         this.isLoading = false;
       } catch (error) {
         this.pdfErrorHandler(error);

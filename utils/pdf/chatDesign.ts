@@ -180,6 +180,7 @@ export function isPremiumDesign(options: ChatViewOptions): boolean {
     isProStyle(options.style) ||
     (options.font ?? "default") !== "default" ||
     !!options.book ||
+    (options.avatars?.length ?? 0) > 0 ||
     (options.wallpaper?.kind ?? "none") !== "none" ||
     hasCustomCover(options)
   );
@@ -202,6 +203,8 @@ export function designForAccess(
         : options.style,
     font: "default",
     book: false,
+    bookCompact: false,
+    avatars: [],
     wallpaper: { kind: "none", pattern: "dots", dim: 0 },
     cover: { title: "", dedication: "", color: null, photo: false },
   };
@@ -417,6 +420,33 @@ export async function coverPhoto(
   canvas.width = Math.round(bitmap.width * scale);
   canvas.height = Math.round(bitmap.height * scale);
   canvas.getContext("2d")?.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+  bitmap.close?.();
+  return canvas.toDataURL("image/jpeg", 0.88);
+}
+
+/**
+ * A profile picture: the middle square of the photo, 256 px, as a JPEG data
+ * URL. Small enough to keep for the tab; the PDF clips it round.
+ */
+export async function avatarPhoto(source: Blob, size = 256): Promise<string> {
+  const bitmap = await createImageBitmap(source);
+  const side = Math.min(bitmap.width, bitmap.height);
+  const canvas = document.createElement("canvas");
+  canvas.width = size;
+  canvas.height = size;
+  canvas
+    .getContext("2d")
+    ?.drawImage(
+      bitmap,
+      (bitmap.width - side) / 2,
+      (bitmap.height - side) / 2,
+      side,
+      side,
+      0,
+      0,
+      size,
+      size,
+    );
   bitmap.close?.();
   return canvas.toDataURL("image/jpeg", 0.88);
 }

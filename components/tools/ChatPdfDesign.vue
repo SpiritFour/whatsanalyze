@@ -115,6 +115,70 @@
         <small>{{ t("pdfTool.design.bookHint") }}</small>
       </span>
     </label>
+    <label v-if="options.book" class="design__check design__check--nested">
+      <input
+        v-model="options.bookCompact"
+        type="checkbox"
+        name="chat-book-compact"
+      />
+      <span>
+        {{ t("pdfTool.design.bookCompact") }}
+        <small>{{ t("pdfTool.design.bookCompactHint") }}</small>
+      </span>
+    </label>
+
+    <!-- Profile pictures -->
+    <details class="design__group" :open="options.avatars.length > 0">
+      <summary>
+        {{ t("pdfTool.design.avatarsTitle") }}
+        <span class="pro-chip">{{ t("pdfTool.design.pro") }}</span>
+      </summary>
+      <p class="design__hint design__hint--top">
+        {{ t("pdfTool.design.avatarsHint") }}
+      </p>
+      <ul class="design__people">
+        <li
+          v-for="name in design.participants.value"
+          :key="name"
+          class="design__person"
+        >
+          <img
+            v-if="design.avatarUrls.value[name]"
+            class="design__face"
+            :src="design.avatarUrls.value[name]"
+            alt=""
+          />
+          <span
+            v-else
+            class="design__face design__face--initials"
+            aria-hidden="true"
+          >
+            {{ initialsOf(name) }}
+          </span>
+          <span class="design__person-name">{{ name }}</span>
+          <label class="design__file design__file--small">
+            <input
+              type="file"
+              accept="image/*"
+              class="visually-hidden"
+              :name="`chat-avatar-${name}`"
+              :aria-label="t('pdfTool.design.avatarUpload', { name })"
+              @change="pickAvatar(name, $event)"
+            />
+            {{ t("pdfTool.design.avatarChoose") }}
+          </label>
+          <button
+            v-if="design.avatarUrls.value[name]"
+            type="button"
+            class="design__link"
+            :aria-label="t('pdfTool.design.avatarRemove', { name })"
+            @click="design.setAvatar(name, null)"
+          >
+            ×
+          </button>
+        </li>
+      </ul>
+    </details>
 
     <!-- Cover -->
     <details class="design__group" :open="customCover">
@@ -248,6 +312,25 @@ function pickWallpaper(event) {
   if (file) design.setWallpaperPhoto(file);
 }
 
+function pickAvatar(name, event) {
+  const file = event.target.files?.[0];
+  if (file) design.setAvatar(name, file);
+  event.target.value = "";
+}
+
+/** Up to two initials, as the chat header shows them. */
+function initialsOf(name) {
+  return (
+    String(name)
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((part) => Array.from(part)[0] || "")
+      .join("")
+      .toUpperCase() || "?"
+  );
+}
+
 function pickCover(event) {
   const file = event.target.files?.[0];
   if (file) design.setCoverPhoto(file, null);
@@ -313,6 +396,63 @@ function pickCover(event) {
   font-size: 0.8rem;
   line-height: 1.4;
   color: $wa-ink-muted;
+}
+
+.design__check--nested {
+  margin: -0.4rem 0 0 1.55rem;
+  font-weight: 600;
+}
+
+.design__hint--top {
+  margin: 0 0 0.6rem;
+}
+
+.design__people {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.design__person {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  color: $wa-ink;
+}
+
+.design__face {
+  flex: none;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.design__face--initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(17, 27, 33, 0.08);
+  color: $wa-ink-muted;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.design__person-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.design__file--small {
+  padding: 0.2rem 0.6rem;
+  font-size: 0.78rem;
 }
 
 .design__check {

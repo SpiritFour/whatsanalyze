@@ -2,7 +2,13 @@
   <!-- The chat view's markup lives in a shadow root: Vuetify, Tailwind's
        preflight and the page's own styles stop at its boundary, so the
        preview looks the way the PDF prints. -->
-  <div ref="host" class="chat-preview" />
+  <!-- A scrolling region: focusable, so it scrolls from the keyboard too. -->
+  <div
+    ref="host"
+    class="chat-preview"
+    tabindex="0"
+    :aria-label="label || undefined"
+  />
 </template>
 
 <script setup>
@@ -15,6 +21,8 @@ const props = defineProps({
   css: { type: String, required: true },
   /** An A4-shaped wallpaper (data URL), repeated down the chat like pages. */
   background: { type: String, default: "" },
+  /** Accessible name of the scrolling region. */
+  label: { type: String, default: "" },
 });
 
 const host = ref(null);
@@ -59,5 +67,10 @@ watch(() => props.background, applyBackground);
   border-radius: 14px;
   box-shadow: 0 12px 32px rgba(17, 27, 33, 0.14);
   overscroll-behavior: contain;
+
+  &:focus-visible {
+    outline: 2px solid $wa-accent;
+    outline-offset: 3px;
+  }
 }
 </style>

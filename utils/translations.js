@@ -211,6 +211,14 @@ export const messages = {
         removePhoto: "Remove photo",
         coverPreviewLabel: "Cover",
         fontTitle: "Font",
+        avatarsTitle: "Profile pictures",
+        avatarsHint:
+          "Shown in the circles at the top of the chat instead of initials.",
+        avatarChoose: "Choose",
+        avatarUpload: "Choose a profile picture for {name}",
+        avatarRemove: "Remove the profile picture of {name}",
+        bookCompact: "Compact",
+        bookCompactHint: "Months with few messages continue on the same page.",
         proDownloadNote:
           "Your design uses Pro options. The free preview PDF is printed in the standard look; the full PDF has your design.",
         fontsHidden:
@@ -243,6 +251,9 @@ export const messages = {
       layoutTitle: "Text and paper",
       empty:
         "No messages on these days. Choose other days, or all days, to see the chat.",
+      tabsLabel: "Settings",
+      previewTabsLabel: "Preview",
+      previewRegion: "Chat preview",
     },
     subscribePage: {
       title: "See everything the AI found in your chat",
@@ -2435,6 +2446,15 @@ export const messages = {
         removePhoto: "Foto entfernen",
         coverPreviewLabel: "Titelseite",
         fontTitle: "Schrift",
+        avatarsTitle: "Profilbilder",
+        avatarsHint:
+          "Erscheinen statt der Initialen in den Kreisen oben im Chat.",
+        avatarChoose: "Auswählen",
+        avatarUpload: "Profilbild für {name} auswählen",
+        avatarRemove: "Profilbild von {name} entfernen",
+        bookCompact: "Kompakt",
+        bookCompactHint:
+          "Monate mit wenigen Nachrichten gehen auf derselben Seite weiter.",
         proDownloadNote:
           "Dein Design nutzt Pro-Optionen. Die kostenlose Vorschau wird im Standard-Aussehen gedruckt, das vollständige PDF hat dein Design.",
         fontsHidden:
@@ -2467,6 +2487,9 @@ export const messages = {
       layoutTitle: "Text und Papier",
       empty:
         "An diesen Tagen gibt es keine Nachrichten. Wähle andere Tage oder alle Tage, um den Chat zu sehen.",
+      tabsLabel: "Einstellungen",
+      previewTabsLabel: "Vorschau",
+      previewRegion: "Chat-Vorschau",
     },
     subscribePage: {
       title: "Sieh alles, was die KI in deinem Chat gefunden hat",
@@ -4658,6 +4681,15 @@ export const messages = {
         removePhoto: "Quitar la foto",
         coverPreviewLabel: "Portada",
         fontTitle: "Fuente",
+        avatarsTitle: "Fotos de perfil",
+        avatarsHint:
+          "Aparecen en los círculos de arriba del chat en lugar de las iniciales.",
+        avatarChoose: "Elegir",
+        avatarUpload: "Elegir una foto de perfil para {name}",
+        avatarRemove: "Quitar la foto de perfil de {name}",
+        bookCompact: "Compacto",
+        bookCompactHint:
+          "Los meses con pocos mensajes siguen en la misma página.",
         proDownloadNote:
           "Tu diseño usa opciones Pro. La vista previa gratuita se imprime con el aspecto estándar; el PDF completo lleva tu diseño.",
         fontsHidden:
@@ -4690,6 +4722,9 @@ export const messages = {
       layoutTitle: "Texto y papel",
       empty:
         "No hay mensajes en estos días. Elige otros días, o todos, para ver el chat.",
+      tabsLabel: "Ajustes",
+      previewTabsLabel: "Vista previa",
+      previewRegion: "Vista previa del chat",
     },
     subscribePage: {
       title: "Descubre todo lo que la IA encontró en tu chat",
@@ -6865,6 +6900,15 @@ export const messages = {
         removePhoto: "Remover a foto",
         coverPreviewLabel: "Capa",
         fontTitle: "Tipo de letra",
+        avatarsTitle: "Fotos de perfil",
+        avatarsHint:
+          "Aparecem nos círculos no topo da conversa em vez das iniciais.",
+        avatarChoose: "Escolher",
+        avatarUpload: "Escolher uma foto de perfil para {name}",
+        avatarRemove: "Remover a foto de perfil de {name}",
+        bookCompact: "Compacto",
+        bookCompactHint:
+          "Os meses com poucas mensagens continuam na mesma página.",
         proDownloadNote:
           "O seu design usa opções Pro. A pré-visualização gratuita é impressa com o aspeto padrão; o PDF completo tem o seu design.",
         fontsHidden:
@@ -6897,6 +6941,9 @@ export const messages = {
       layoutTitle: "Texto e papel",
       empty:
         "Não há mensagens nestes dias. Escolha outros dias, ou todos, para ver a conversa.",
+      tabsLabel: "Definições",
+      previewTabsLabel: "Pré-visualização",
+      previewRegion: "Pré-visualização da conversa",
     },
     subscribePage: {
       title: "Veja tudo o que a IA encontrou na sua conversa",
@@ -9077,6 +9124,15 @@ export const messages = {
         removePhoto: "Retirer la photo",
         coverPreviewLabel: "Couverture",
         fontTitle: "Police",
+        avatarsTitle: "Photos de profil",
+        avatarsHint:
+          "Affichées dans les cercles en haut de la discussion à la place des initiales.",
+        avatarChoose: "Choisir",
+        avatarUpload: "Choisir une photo de profil pour {name}",
+        avatarRemove: "Retirer la photo de profil de {name}",
+        bookCompact: "Compact",
+        bookCompactHint:
+          "Les mois avec peu de messages continuent sur la même page.",
         proDownloadNote:
           "Votre design utilise des options Pro. L'aperçu gratuit est imprimé dans l'apparence standard ; le PDF complet reprend votre design.",
         fontsHidden:
@@ -9109,6 +9165,9 @@ export const messages = {
       layoutTitle: "Texte et papier",
       empty:
         "Aucun message ces jours-là. Choisissez d'autres jours, ou tous, pour voir la discussion.",
+      tabsLabel: "Réglages",
+      previewTabsLabel: "Aperçu",
+      previewRegion: "Aperçu de la discussion",
     },
     subscribePage: {
       title: "Découvrez tout ce que l'IA a trouvé dans votre conversation",
@@ -11300,6 +11359,15 @@ export const messages = {
         removePhoto: "Rimuovi la foto",
         coverPreviewLabel: "Copertina",
         fontTitle: "Carattere",
+        avatarsTitle: "Foto profilo",
+        avatarsHint:
+          "Compaiono nei cerchi in cima alla chat al posto delle iniziali.",
+        avatarChoose: "Scegli",
+        avatarUpload: "Scegli una foto profilo per {name}",
+        avatarRemove: "Rimuovi la foto profilo di {name}",
+        bookCompact: "Compatto",
+        bookCompactHint:
+          "I mesi con pochi messaggi continuano sulla stessa pagina.",
         proDownloadNote:
           "Il tuo design usa opzioni Pro. L'anteprima gratuita è stampata con l'aspetto standard; il PDF completo ha il tuo design.",
         fontsHidden:
@@ -11332,6 +11400,9 @@ export const messages = {
       layoutTitle: "Testo e carta",
       empty:
         "Nessun messaggio in questi giorni. Scegli altri giorni, o tutti, per vedere la chat.",
+      tabsLabel: "Impostazioni",
+      previewTabsLabel: "Anteprima",
+      previewRegion: "Anteprima della chat",
     },
     subscribePage: {
       title: "Scopri tutto quello che l'IA ha trovato nella tua chat",

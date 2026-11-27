@@ -1,7 +1,7 @@
 import { contrast, resolveStyle, textOn } from "~/utils/pdf/chatDesign";
 import { allChatFontFaceCss, chatFontFamily } from "~/utils/pdf/chatFonts";
 import { messageToHtml } from "~/utils/pdf/emoji";
-import { block, words, wrapWords } from "~/utils/pdf/html";
+import { block, emojiText, words, wrapWords } from "~/utils/pdf/html";
 import { TEXT_SIZES } from "~/utils/pdf/chatStyles";
 import type { ChatStyle, ChatViewOptions } from "~/utils/pdf/chatStyles";
 import type { ChatCoverContent, ChatOutroContent } from "~/utils/pdf/chatPages";
@@ -57,6 +57,11 @@ export interface ChatViewDocument {
   messages: ChatViewMessage[];
   colors: Record<string, string>;
   locale: string;
+  /** Profile pictures by participant (data URLs), where uploaded (Pro). */
+  avatars?: Record<string, string>;
+  /** Messages per month in the whole document, for the compact book layout
+   * (a part rendered alone cannot count the months it does not hold). */
+  monthCounts?: Record<string, number>;
 }
 
 type Context = "screen" | "pdf";
@@ -192,6 +197,25 @@ export interface ChatViewState {
   previousAuthor: string;
   /** Book layout: the month the last chapter opened with (YYYY-MM). */
   previousMonth?: string;
+  /** Book layout: the chapter now being written, and each chapter's last
+   * month, for a footer such as "March – April 2021". */
+  chapter?: string;
+  chapterEnds?: Record<string, string>;
+}
+
+/** Compact book layout: a month with fewer messages joins the page before. */
+export const COMPACT_MONTH_LIMIT = 25;
+
+/** Messages per month (YYYY-MM). */
+export function countByMonth(
+  messages: Array<{ date: Date | string }>,
+): Record<string, number> {
+  const counts: Record<string, number> = {};
+  for (const message of messages) {
+    const key = monthKey(message.date);
+    counts[key] = (counts[key] ?? 0) + 1;
+  }
+  return counts;
 }
 
 function monthKey(date: Date | string): string {
@@ -247,6 +271,50 @@ export function filterChatMessages<
   });
 }
 
+/** At most this many circles in a group's header; the rest become "+N". */
+const MAX_AVATARS = 5;
+
+/**
+ * The circles at the start of the chat header: the other person in a
+ * one-on-one chat, every other member of a group. A circle shows the
+ * uploaded picture where there is one, otherwise the initials on the
+ * participant's colour, in whichever text colour reads on it.
+ */
+function avatarsHtml(
+  people: string[],
+  doc: ChatViewDocument,
+  style: ChatStyle,
+  sprite: Map<string, string>,
+): string {
+  if (!people.length) return "";
+  const shown =
+    people.length > MAX_AVATARS ? people.slice(0, MAX_AVATARS - 1) : people;
+  const rest = people.length - shown.length;
+  const group = people.length > 1 ? " is-group" : "";
+
+  const circles = shown.map((name) => {
+    const photo = doc.avatars?.[name];
+    if (photo) {
+      return `<img class="cv-avatar cv-avatar-photo${group}" src="${photo}" data-format="JPEG" alt="">`;
+    }
+    const color =
+      doc.colors[name] && /^#[0-9a-f]{6}$/i.test(doc.colors[name])
+        ? doc.colors[name]
+        : style.name;
+    return `<div class="cv-avatar${group}" style="background:${color};color:${textOn(
+      color,
+    )}">${emojiText(initials(name), sprite)}</div>`;
+  });
+  if (rest > 0) {
+    circles.push(
+      `<div class="cv-avatar is-group" style="background:${style.dayBackground};color:${style.dayText}">${words(
+        `+${rest}`,
+      )}</div>`,
+    );
+  }
+  return `<div class="cv-avatars">${circles.join("")}</div>`;
+}
+
 /** The whole chat view: header, day separators, bubbles, preview notice. */
 export function chatViewHtml(
   doc: ChatViewDocument,
@@ -261,23 +329,21 @@ export function chatViewHtml(
   // and its pages can say which month they are in.
   const chapterOf = (date: Date | string) =>
     options.book ? `${CHAT_CHAPTER}-${monthKey(date)}` : CHAT_CHAPTER;
-  let chapter = doc.messages.length
-    ? chapterOf(doc.messages[0].date)
-    : CHAT_CHAPTER;
+  let chapter =
+    state.chapter ??
+    (doc.messages.length ? chapterOf(doc.messages[0].date) : CHAT_CHAPTER);
+  const chapterEnds = (state.chapterEnds ??= {});
+  const monthCounts = doc.monthCounts ?? countByMonth(doc.messages);
   const others = Object.keys(doc.colors).filter((name) => name !== options.me);
-  const avatarColor =
-    others.length === 1 ? nameColor(style, doc.colors, others[0]) : style.name;
 
   let html = "";
   if (header) {
     html += block(
       chapter,
       `<div class="cv-header">
-       <div class="cv-avatar" style="background:${avatarColor}">${words(
-         initials(doc.title),
-       )}</div>
+       ${avatarsHtml(others, doc, style, sprite)}
        <div class="cv-header-text">
-         <div class="cv-title">${words(doc.title)}</div>
+         <div class="cv-title">${emojiText(doc.title, sprite)}</div>
          <div class="cv-subtitle">${words(doc.labels.subtitle)}</div>
        </div>
      </div>`,
@@ -292,12 +358,19 @@ export function chatViewHtml(
     if (options.book) {
       const month = monthKey(message.date);
       if (month !== previousMonth) {
-        chapter = chapterOf(message.date);
+        // Compact: a quiet month carries on where the last one ended, as
+        // part of its chapter, instead of taking a page for two messages.
+        const joins =
+          options.bookCompact &&
+          !!previousMonth &&
+          (monthCounts[month] ?? 0) < COMPACT_MONTH_LIMIT;
+        if (!joins) chapter = chapterOf(message.date);
+        chapterEnds[chapter] = month;
         html += block(
           chapter,
           `<div class="cv-month">${words(monthLabel(message.date, doc.locale))}</div>`,
           // The chat's header shares the first month's page.
-          { keepWithNext: true, breakBefore: !!previousMonth },
+          { keepWithNext: true, breakBefore: !!previousMonth && !joins },
         );
         previousMonth = month;
         previousDay = "";
@@ -338,7 +411,7 @@ export function chatViewHtml(
             style,
             doc.colors,
             message.author,
-          )}">${words(message.author)}</div>`
+          )}">${emojiText(message.author, sprite)}</div>`
         : "";
     const media = message.media
       ? `<div class="cv-media"><img src="${message.media.dataUrl}" data-format="${message.media.format}" alt=""></div>`
@@ -370,6 +443,7 @@ export function chatViewHtml(
   state.previousDay = previousDay;
   state.previousAuthor = previousAuthor;
   state.previousMonth = previousMonth;
+  state.chapter = chapter;
 
   if (doc.labels.notice) {
     html += block(
@@ -416,11 +490,14 @@ export function chatViewCss(
   background: ${s.header}; color: ${s.headerText};
   border-radius: 12px; padding: 10px 14px; margin-bottom: 10px;
 }
+.cv-avatars { display: flex; flex: none; gap: 4px; }
 .cv-avatar {
   flex: none; width: 38px; height: 38px; border-radius: 19px;
   display: flex; align-items: center; justify-content: center;
   color: #ffffff; font-weight: 700; font-size: 15px; line-height: 1;
 }
+.cv-avatar.is-group { width: 32px; height: 32px; border-radius: 16px; font-size: 12px; }
+img.cv-avatar { display: block; }
 .cv-header-text { min-width: 0; }
 .cv-title { font-weight: 700; font-size: ${Math.round(size * 1.2)}px; overflow-wrap: anywhere; }
 .cv-subtitle { color: ${s.headerMuted}; font-size: ${small}px; padding-top: 2px; }

@@ -7,13 +7,14 @@ import { PAPER_SIZES } from "~/utils/pdf/chatStyles";
 import type { ChatViewOptions, PaperId } from "~/utils/pdf/chatStyles";
 import {
   CHAT_CHAPTER,
+  countByMonth,
   chatViewCss,
   chatViewHtml,
   filterChatMessages,
   prepareChatMessages,
 } from "~/utils/pdf/chatView";
 import { charactersOf, fontsFor, loadChatFont } from "~/utils/pdf/chatFonts";
-import type { ChatViewLabels } from "~/utils/pdf/chatView";
+import type { ChatViewLabels, ChatViewState } from "~/utils/pdf/chatView";
 import {
   COVER_CHAPTER,
   chatCoverHtml,
@@ -68,7 +69,12 @@ export interface RenderChatViewPdfOptions {
    * The design's pictures, prepared on the device: an A4-shaped JPEG behind
    * every chat page, and a cover photo. Only passed with Pro access.
    */
-  assets?: { wallpaper?: string | null; coverPhoto?: string | null };
+  assets?: {
+    wallpaper?: string | null;
+    coverPhoto?: string | null;
+    /** Profile pictures by participant. */
+    avatars?: Record<string, string>;
+  };
 }
 
 export async function renderChatViewPdf(
@@ -121,16 +127,33 @@ export async function renderChatViewPdf(
     // colour and photo.
     backgroundImage: (chapter) =>
       chapter === COVER_CHAPTER ? null : (assets.wallpaper ?? null),
-    needsEmoji: anyEmoji(messages.map((message: any) => message.message)),
+    // Names, titles and the cover's words can hold emoji as well.
+    needsEmoji: anyEmoji([
+      ...messages.map((message: any) => message.message),
+      ...participants,
+      title,
+      options.cover?.title,
+      options.cover?.dedication,
+    ]),
   });
 
   try {
     const documentLabels = labels(messages.length, all.length);
-    const state = { previousDay: "", previousAuthor: "", previousMonth: "" };
+    const state: ChatViewState = {
+      previousDay: "",
+      previousAuthor: "",
+      previousMonth: "",
+    };
+    const monthCounts = countByMonth(messages);
 
     if (documentLabels.cover) {
       await builder.add(
-        chatCoverHtml(documentLabels.cover, logo, assets.coverPhoto ?? null),
+        chatCoverHtml(
+          documentLabels.cover,
+          logo,
+          assets.coverPhoto ?? null,
+          builder.sprite,
+        ),
       );
     }
 
@@ -155,6 +178,8 @@ export async function renderChatViewPdf(
           messages: prepared,
           colors,
           locale,
+          avatars: assets.avatars ?? {},
+          monthCounts,
         },
         options,
         builder.sprite,
@@ -184,9 +209,16 @@ export async function renderChatViewPdf(
       if (font) doc.setFont(font.family, "normal");
       const y = geometry.heightMm - 8;
       // Book layout: each page says which month of the chat it is in.
-      const month = chapter.startsWith(`${CHAT_CHAPTER}-`)
-        ? monthName(chapter.slice(CHAT_CHAPTER.length + 1), locale)
+      // A compact chapter can span quiet months: "March – April 2021".
+      const start = chapter.startsWith(`${CHAT_CHAPTER}-`)
+        ? chapter.slice(CHAT_CHAPTER.length + 1)
         : "";
+      const end = state.chapterEnds?.[chapter] ?? start;
+      const month = !start
+        ? ""
+        : end === start
+          ? monthName(start, locale)
+          : `${monthName(start, locale)} – ${monthName(end, locale)}`;
       doc.text(month ? `${title} · ${month}` : title, geometry.margin.left, y);
       doc.text(
         `${page} / ${total}`,

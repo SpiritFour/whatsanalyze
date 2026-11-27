@@ -228,6 +228,19 @@ test.describe("the court evidence PDF", () => {
     expect(raw.match(/\/Subtype \/Image/g)?.length ?? 0).toBeGreaterThan(10);
   });
 
+  test("is printed on US Letter when chosen", async ({ page }) => {
+    test.setTimeout(180_000);
+    await page.goto("/tools/court-evidence?free=1");
+    await page
+      .locator("#dropzone-slot input[type=file]")
+      .setInputFiles(emojiChat());
+    await page
+      .locator('label:has(input[name="court-paper"][value="letter"])')
+      .click();
+    const pdf = (await downloadPreview(page)).toString("latin1");
+    expect(pdf).toMatch(/\/MediaBox \[0 0 612(\.\d*)? 792(\.\d*)?\]/);
+  });
+
   test("reproduces image exhibits from a zip export", async ({ page }) => {
     test.setTimeout(180_000);
     const pdf = await exportCourtPdf(page, await zipChatWithImage());
@@ -505,6 +518,63 @@ test.describe("the WhatsApp to PDF tool", () => {
     await expect.poll(() => fonts.length).toBeGreaterThan(0);
   });
 
+  /** A chat by these people, one message each, nothing else. */
+  const chatBy = (name, people, text = (i) => `hello ${i}`) => ({
+    name,
+    mimeType: "text/plain",
+    buffer: Buffer.from(
+      people
+        .map(
+          (person, i) => `1/${2 + i}/21, 10:0${i % 10} - ${person}: ${text(i)}`,
+        )
+        .join("\n"),
+      "utf-8",
+    ),
+  });
+
+  test("shows a circle for every group member, then +N", async ({ page }) => {
+    await page.goto("/tools/whatsapp-to-pdf");
+    // Seven people: the one on the right and six others.
+    const people = ["Ana", "Ben", "Cleo", "Dan", "Eve", "Finn", "Gus"];
+    await page
+      .locator("#dropzone-slot input[type=file]")
+      .setInputFiles(chatBy("group.txt", [...people, "Ana", "Ana"]));
+    await expect(page.locator("#chat-pdf-tool")).toBeVisible();
+
+    const circles = page.locator(".chat-preview .cv-header .cv-avatar");
+    await expect(circles).toHaveCount(5);
+    await expect(circles.last()).toHaveText("+2");
+  });
+
+  test("draws emoji in names as artwork, like in messages", async ({
+    page,
+  }) => {
+    await page.goto("/tools/whatsapp-to-pdf");
+    await page
+      .locator("#dropzone-slot input[type=file]")
+      .setInputFiles(chatBy("names.txt", ["Leo", "Mom ❤️", "Leo"]));
+    await expect(page.locator("#chat-pdf-tool")).toBeVisible();
+    // Leo writes most, so the chat is titled after Mom: heart as an image.
+    await expect(
+      page.locator(".chat-preview .cv-title img.wa-emoji"),
+    ).toBeVisible();
+  });
+
+  test("moves between the settings tabs with the arrow keys", async ({
+    page,
+  }) => {
+    await openTool(page);
+    const look = page.locator('[data-controls="look"]');
+    await look.focus();
+    await page.keyboard.press("ArrowRight");
+    const design = page.locator('[data-controls="design"]');
+    await expect(design).toHaveAttribute("aria-selected", "true");
+    await expect(design).toBeFocused();
+    await expect(page.locator("#cv-panel-design")).toBeVisible();
+    await page.keyboard.press("End");
+    await expect(page.locator('[data-controls="content"]')).toBeFocused();
+  });
+
   test.describe("Pro designs", () => {
     /** Custom colours, a hearts wallpaper and a titled cover. */
     const designIt = async (page) => {
@@ -575,6 +645,28 @@ test.describe("the WhatsApp to PDF tool", () => {
       const pdf = await downloadPreview(page);
       expect(contentStreams(pdf)).not.toContain(MIDNIGHT);
       expect(hasLora(pdf)).toBe(false);
+    });
+
+    test("show profile pictures in the preview, not in the free PDF", async ({
+      page,
+    }) => {
+      test.setTimeout(180_000);
+      await openTool(page);
+      await openControls(page, "design");
+      await page.locator("summary", { hasText: "Profile pictures" }).click();
+      // Jane writes most and is on the right; the header shows John.
+      await page.locator('input[name="chat-avatar-John Doe"]').setInputFiles({
+        name: "john.png",
+        mimeType: "image/png",
+        buffer: Buffer.from(PNG_BASE64, "base64"),
+      });
+      await expect(
+        page.locator(".chat-preview .cv-header img.cv-avatar-photo"),
+      ).toHaveCount(1);
+
+      const pdf = await downloadPreview(page);
+      // The picture is a JPEG once cropped: none in the free PDF.
+      expect(jpegCount(pdf)).toBe(0);
     });
 
     test("are printed for subscribers", async ({ page }) => {

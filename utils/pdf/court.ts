@@ -5,7 +5,7 @@ import {
   toDataUrl,
 } from "~/utils/pdf/builder";
 import { messageToHtml } from "~/utils/pdf/emoji";
-import { block, words, wrapWords } from "~/utils/pdf/html";
+import { block, emojiText, words, wrapWords } from "~/utils/pdf/html";
 import type { BlockOptions } from "~/utils/pdf/html";
 import { A4 } from "~/utils/pdf/page";
 import type { PageGeometry } from "~/utils/pdf/page";
@@ -48,6 +48,8 @@ export interface RenderCourtPdfOptions {
   isSample?: boolean;
   source?: ChatSource | null;
   onProgress?: (_percent: number) => void;
+  /** A4 (default) or US Letter, which US courts and lawyers file on. */
+  paper?: "a4" | "letter";
 }
 
 /** Wide left margin: room for two/four-hole punching, binding and stamps. */
@@ -55,6 +57,13 @@ export const COURT_GEOMETRY: PageGeometry = {
   ...A4,
   margin: { top: 26, right: 15, bottom: 22, left: 28 },
 };
+
+/** US Letter: same margins; the message column takes the extra width. */
+const LETTER = { widthMm: 215.9, heightMm: 279.4 };
+
+export function courtGeometry(paper: "a4" | "letter" = "a4"): PageGeometry {
+  return paper === "letter" ? { ...COURT_GEOMETRY, ...LETTER } : COURT_GEOMETRY;
+}
 
 const SAMPLE_MESSAGE_COUNT = 100;
 const ROWS_PER_BATCH = 300;
@@ -222,6 +231,7 @@ export async function renderCourtPdf(
     isSample = false,
     source = null,
     onProgress,
+    paper = "a4",
   } = options;
 
   const participants = Object.keys(chat.personColorMap || {});
@@ -261,10 +271,13 @@ export async function renderCourtPdf(
   }
 
   const builder = await PdfBuilder.create({
-    geometry: COURT_GEOMETRY,
+    geometry: courtGeometry(paper),
     css: COURT_CSS,
     background: () => null,
-    needsEmoji: anyEmoji(rows.map((row: any) => row.text)),
+    needsEmoji: anyEmoji([
+      ...rows.map((row: any) => row.text),
+      ...participants,
+    ]),
   });
 
   try {
@@ -332,7 +345,7 @@ export async function renderCourtPdf(
     for (const person of roster) {
       html += courtBlock(
         `<div class="c-row c-rule c-roster">${cells([
-          { html: words(person.name), className: "c-wrap" },
+          { html: emojiText(person.name, builder.sprite), className: "c-wrap" },
           { html: words(String(person.messages)), className: "c-meta c-right" },
           { html: words(person.first), className: "c-meta c-nowrap" },
           { html: words(person.last), className: "c-meta c-nowrap" },
@@ -377,7 +390,10 @@ export async function renderCourtPdf(
               className: "c-meta c-no c-nowrap",
             },
             { html: words(row.timestamp), className: "c-meta c-time c-nowrap" },
-            { html: words(row.speaker), className: "c-meta c-sender" },
+            {
+              html: emojiText(row.speaker, builder.sprite),
+              className: "c-meta c-sender",
+            },
             {
               html:
                 wrapWords(messageToHtml(row.text, builder.sprite)) + exhibitRef,
@@ -433,7 +449,10 @@ export async function renderCourtPdf(
             { html: words(exhibit.label), className: "c-nowrap" },
             { html: words(pad(exhibit.lineNumber)), className: "c-nowrap" },
             { html: words(exhibit.timestamp), className: "c-nowrap" },
-            { html: words(exhibit.sender), className: "c-wrap" },
+            {
+              html: emojiText(exhibit.sender, builder.sprite),
+              className: "c-wrap",
+            },
             { html: words(exhibit.fileName), className: "c-wrap" },
             { html: words(detail), className: "c-index-detail" },
           ])}</div>`,

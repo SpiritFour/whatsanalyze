@@ -21,16 +21,24 @@
         <form class="chat-pdf__controls" @submit.prevent>
           <!-- Three short panels instead of one long column, so the preview
                stays in sight while something is changed. -->
-          <div class="chat-pdf__control-tabs" role="tablist">
+          <div
+            class="chat-pdf__control-tabs"
+            role="tablist"
+            :aria-label="t('pdfTool.tabsLabel')"
+            @keydown="onTabKey($event, controlTabs, controlTab, setControlTab)"
+          >
             <button
               v-for="tab in controlTabs"
+              :id="`cv-tab-${tab}`"
               :key="tab"
               type="button"
               role="tab"
               :data-controls="tab"
               :aria-selected="controlTab === tab"
+              :aria-controls="`cv-panel-${tab}`"
+              :tabindex="controlTab === tab ? 0 : -1"
               :class="{ 'is-selected': controlTab === tab }"
-              @click="controlTab = tab"
+              @click="setControlTab(tab)"
             >
               {{ t(`pdfTool.tabs.${tab}`) }}
               <span v-if="tab === 'design'" class="pro-chip">{{
@@ -41,7 +49,9 @@
 
           <div
             v-show="controlTab === 'look'"
+            id="cv-panel-look"
             role="tabpanel"
+            aria-labelledby="cv-tab-look"
             class="chat-pdf__panel"
           >
             <fieldset class="chat-pdf__group">
@@ -170,7 +180,9 @@
                are not displayed, so the fonts are not downloaded. -->
           <div
             v-show="controlTab === 'design'"
+            id="cv-panel-design"
             role="tabpanel"
+            aria-labelledby="cv-tab-design"
             class="chat-pdf__panel"
           >
             <ChatPdfDesign />
@@ -178,7 +190,9 @@
 
           <div
             v-show="controlTab === 'content'"
+            id="cv-panel-content"
             role="tabpanel"
+            aria-labelledby="cv-tab-content"
             class="chat-pdf__panel"
           >
             <fieldset class="chat-pdf__group">
@@ -272,38 +286,56 @@
         </form>
 
         <div class="chat-pdf__preview">
-          <div class="chat-pdf__tabs" role="tablist">
+          <div
+            class="chat-pdf__tabs"
+            role="tablist"
+            :aria-label="t('pdfTool.previewTabsLabel')"
+            @keydown="onTabKey($event, previewTabs, previewTab, setPreviewTab)"
+          >
             <button
+              id="cv-ptab-chat"
               type="button"
               role="tab"
+              aria-controls="cv-ppanel-chat"
               :aria-selected="previewTab === 'chat'"
+              :tabindex="previewTab === 'chat' ? 0 : -1"
               :class="{ 'is-selected': previewTab === 'chat' }"
-              @click="previewTab = 'chat'"
+              @click="setPreviewTab('chat')"
             >
               {{ t("pdfTool.previewLabel", { count: previewCount }) }}
             </button>
             <button
+              id="cv-ptab-cover"
               type="button"
               role="tab"
               data-tab="cover"
+              aria-controls="cv-ppanel-cover"
               :aria-selected="previewTab === 'cover'"
+              :tabindex="previewTab === 'cover' ? 0 : -1"
               :class="{ 'is-selected': previewTab === 'cover' }"
-              @click="previewTab = 'cover'"
+              @click="setPreviewTab('cover')"
             >
               {{ t("pdfTool.design.coverPreviewLabel") }}
             </button>
           </div>
-          <p v-if="isEmpty" class="chat-pdf__empty" data-empty>
+          <p v-if="isEmpty" class="chat-pdf__empty" data-empty role="status">
             {{ t("pdfTool.empty") }}
           </p>
           <ChatPreview
             v-show="previewTab === 'chat' && !isEmpty"
+            id="cv-ppanel-chat"
+            role="tabpanel"
+            aria-labelledby="cv-ptab-chat"
+            :label="t('pdfTool.previewRegion')"
             :html="previewHtml"
             :css="previewCss"
             :background="wallpaperUrl"
           />
           <CoverPreview
             v-if="previewTab === 'cover'"
+            id="cv-ppanel-cover"
+            role="tabpanel"
+            aria-labelledby="cv-ptab-cover"
             :html="coverPreviewHtml"
             :css="coverPreviewCss"
             :background="coverPreviewColor"
@@ -389,7 +421,9 @@ import {
 } from "~/utils/pdf/chatPdf";
 import {
   coverPhoto as prepareCoverPhoto,
+  avatarPhoto,
   designForAccess,
+  hasCustomCover,
   isPremiumDesign,
   patternWallpaper,
   photoWallpaper,
@@ -406,6 +440,10 @@ import { getAttachmentBytes } from "~/utils/attachments";
 import logo from "~/assets/whatsanalyze-logo-green-PWA.png";
 import { pdfFontFaceCss } from "~/utils/pdf/fonts";
 import { charactersOf, fontsFor } from "~/utils/pdf/chatFonts";
+import { anyEmoji } from "~/utils/pdf/builder";
+import { defaultPaper } from "~/utils/pdf/paperDefault";
+import { analyticsTools } from "~/composables/useAnalytics";
+import { loadEmojiSprite } from "~/utils/pdf/emoji";
 
 defineProps({
   title: { type: String, required: true },
@@ -611,6 +649,7 @@ const printableAssets = computed(() =>
     ? {
         wallpaper: wallpaperUrl.value || null,
         coverPhoto: options.cover.photo ? coverPhotoUrl.value || null : null,
+        avatars: shownAvatars.value,
       }
     : {},
 );
@@ -627,6 +666,19 @@ const chatView = computed(() => ({
 
 // ----- preview: the free sample's messages, in the chosen look
 const previewMessages = shallowRef([]);
+
+// Emoji as the PDF draws them (Twemoji artwork), not as this device's emoji
+// font: fetched once, in one request, only for a chat that has emoji.
+const emojiSprite = shallowRef(new Map());
+watch(chat, async (current) => {
+  if (!current || emojiSprite.value.size) return;
+  const texts = [
+    ...current.chatObject.map((message) => message.message),
+    ...Object.keys(current.personColorMap || {}),
+  ];
+  if (!anyEmoji(texts)) return;
+  emojiSprite.value = markRaw(await loadEmojiSprite());
+});
 const previewCount = computed(() => previewMessages.value.length);
 
 async function prepare(count) {
@@ -655,8 +707,13 @@ function documentHtml(messages, design = options) {
       messages,
       colors: chat.value?.personColorMap || {},
       locale: locale.value,
+      // the preview shows the whole design; what prints is decided by
+      // printableAssets
+      avatars:
+        design === options ? shownAvatars.value : printableAssets.value.avatars,
     },
     design,
+    emojiSprite.value,
   );
 }
 
@@ -669,16 +726,131 @@ const previewCss = computed(() => chatViewCss(options, "screen"));
 const previewTab = ref("chat");
 const controlTabs = ["look", "design", "content"];
 const controlTab = ref("look");
+const previewTabs = ["chat", "cover"];
+const setControlTab = (tab) => (controlTab.value = tab);
+const setPreviewTab = (tab) => (previewTab.value = tab);
+
+/**
+ * Arrow keys, Home and End move between tabs, and focus follows, as in any
+ * tab list (WAI-ARIA authoring practices). Only the selected tab is in the
+ * Tab order.
+ */
+function onTabKey(event, tabs, current, select) {
+  const index = tabs.indexOf(current);
+  const next = {
+    ArrowRight: (index + 1) % tabs.length,
+    ArrowLeft: (index - 1 + tabs.length) % tabs.length,
+    Home: 0,
+    End: tabs.length - 1,
+  }[event.key];
+  if (next === undefined) return;
+  event.preventDefault();
+  select(tabs[next]);
+  const tabList = event.currentTarget;
+  nextTick(() => tabList.querySelectorAll('[role="tab"]')[next]?.focus());
+}
 
 /** Nothing left after the content filters, e.g. a range with no messages. */
 const isEmpty = computed(
   () => !!chat.value && filteredMessages.value.length === 0,
 );
 const premiumDesign = computed(() => isPremiumDesign(options));
+
+// ----- analytics: what people try, and what the Pro note leads to
+/** The design in coarse terms, one entry per option worth counting. */
+const designSignature = computed(() => ({
+  style: options.style,
+  font: options.font,
+  paper: options.paper,
+  text_size: options.textSize,
+  book: options.book,
+  book_compact: options.bookCompact,
+  background:
+    options.wallpaper.kind === "pattern"
+      ? options.wallpaper.pattern
+      : options.wallpaper.kind,
+  custom_cover: hasCustomCover(options),
+  avatars: options.avatars.length > 0,
+  hide_system: options.hideSystem,
+  date_range: !!(options.from || options.to),
+}));
+const PRO_OPTIONS = new Set([
+  "font",
+  "book",
+  "book_compact",
+  "background",
+  "custom_cover",
+  "avatars",
+]);
+let trackedDesign = null;
+let designTimer = null;
+watch(designSignature, (signature) => {
+  if (!chat.value) return;
+  clearTimeout(designTimer);
+  // Once per burst: a slider or a typed title is one change, not fifty.
+  designTimer = setTimeout(() => {
+    const previous = trackedDesign;
+    trackedDesign = signature;
+    if (!previous) return;
+    for (const [option, value] of Object.entries(signature)) {
+      if (previous[option] === value) continue;
+      const pro =
+        option === "style"
+          ? value === "custom" || isProStyle(value)
+          : PRO_OPTIONS.has(option) &&
+            value !== false &&
+            value !== "default" &&
+            value !== "none";
+      analyticsTools.pdfDesignChange(option, value, pro);
+    }
+  }, 800);
+});
+
+let proNoteTracked = false;
+watch(
+  () => !hasFullAccess.value && premiumDesign.value && !isEmpty.value,
+  (shown) => {
+    if (!shown || proNoteTracked) return;
+    proNoteTracked = true;
+    analyticsTools.pdfProNote("download");
+  },
+);
 const wallpaperUrl = ref("");
 const wallpaperSource = shallowRef(null);
 const coverPhotoUrl = ref("");
 const coverPick = ref(null);
+
+// ----- profile pictures, by participant (Pro)
+const avatarUrls = ref({});
+/** The uploaded pictures of the people still marked as having one. */
+const shownAvatars = computed(() =>
+  Object.fromEntries(
+    options.avatars
+      .filter((name) => avatarUrls.value[name])
+      .map((name) => [name, avatarUrls.value[name]]),
+  ),
+);
+
+async function setAvatar(name, blob) {
+  const key = `avatar:${name}`;
+  if (!blob) {
+    options.avatars = options.avatars.filter((other) => other !== name);
+    const rest = { ...avatarUrls.value };
+    delete rest[name];
+    avatarUrls.value = rest;
+    await clearDesignImage(key);
+    return;
+  }
+  try {
+    avatarUrls.value = { ...avatarUrls.value, [name]: await avatarPhoto(blob) };
+    if (!options.avatars.includes(name)) {
+      options.avatars = [...options.avatars, name];
+    }
+    await saveDesignImage(key, blob);
+  } catch (error) {
+    console.error("Could not read the profile picture", error);
+  }
+}
 const chatImages = shallowRef([]);
 
 const pageWidth = computed(() => pageWidthPx(geometry.value));
@@ -838,6 +1010,9 @@ provide("chatPdfDesign", {
   coverPick,
   setWallpaperPhoto,
   setCoverPhoto,
+  avatarUrls,
+  setAvatar,
+  participants,
 });
 
 // The cover as it will print with this design (the full design: this is
@@ -852,6 +1027,7 @@ const coverPreviewHtml = computed(() => {
     coverContent(printed, total, options),
     logo,
     options.cover.photo ? coverPhotoUrl.value || null : null,
+    emojiSprite.value,
   );
 });
 const coverPreviewCss = computed(() =>
@@ -962,6 +1138,7 @@ async function printChat() {
       isSample: !hasFullAccess.value,
       assets: await currentAssets(),
     });
+    analyticsTools.pdfPrint(hasFullAccess.value);
     releasePrintUrl();
     printUrl = URL.createObjectURL(blob);
     if (tab) tab.location.href = printUrl;
@@ -1004,6 +1181,7 @@ watch(
     options.font,
     options.paper,
     options.book,
+    options.bookCompact,
     options.hideSystem,
   ],
   () => {
@@ -1022,6 +1200,7 @@ watch(
           font: options.font,
           paper: options.paper,
           book: options.book,
+          bookCompact: options.bookCompact,
           hideSystem: options.hideSystem,
         }),
       );
@@ -1034,7 +1213,12 @@ watch(
 
 // The cover's words and the date range are about this chat: tab only.
 watch(
-  () => ({ ...options.cover, from: options.from, to: options.to }),
+  () => ({
+    ...options.cover,
+    from: options.from,
+    to: options.to,
+    avatars: options.avatars.join("\n"),
+  }),
   () => {
     try {
       sessionStorage.setItem(
@@ -1043,6 +1227,7 @@ watch(
           cover: options.cover,
           from: options.from,
           to: options.to,
+          avatars: options.avatars,
         }),
       );
     } catch {
@@ -1099,6 +1284,7 @@ watch(
 );
 
 function onChatAnalyzed(payload) {
+  trackedDesign = null;
   chat.value = markRaw(new Chat(payload.messages));
   attachments.value = payload.attachments || [];
   source.value = payload.source || null;
@@ -1125,6 +1311,14 @@ async function restoreDesignImages() {
     options.wallpaper.kind = "none";
   }
   refreshWallpaper();
+
+  const restored = {};
+  for (const name of options.avatars) {
+    const blob = await loadDesignImage(`avatar:${name}`);
+    if (blob) restored[name] = await avatarPhoto(blob).catch(() => "");
+  }
+  avatarUrls.value = restored;
+  options.avatars = options.avatars.filter((name) => restored[name]);
 }
 
 onMounted(() => {
@@ -1137,6 +1331,7 @@ onMounted(() => {
         {
           ...(stored || {}),
           cover: tab?.cover,
+          avatars: tab?.avatars,
           from: tab?.from,
           to: tab?.to,
         },
@@ -1144,6 +1339,8 @@ onMounted(() => {
       ),
     );
   }
+  // First visit: the paper the visitor's region prints on.
+  if (!stored?.paper) options.paper = defaultPaper();
   void restoreDesignImages();
 
   globalStyle = document.createElement("style");
@@ -1162,6 +1359,7 @@ onBeforeUnmount(() => {
   afterPrint();
   releasePrintUrl();
   clearTimeout(wallpaperTimer);
+  clearTimeout(designTimer);
   for (const image of chatImages.value) URL.revokeObjectURL(image.url);
 });
 </script>
