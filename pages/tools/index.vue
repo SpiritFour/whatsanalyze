@@ -99,7 +99,7 @@
             </span>
           </div>
 
-          <div class="tools-showcase-grid tools-showcase-grid--2cols">
+          <div class="tools-showcase-grid tools-showcase-grid--3cols">
             <NuxtLink
               v-for="tool in courtTools"
               :key="tool.title"
@@ -253,6 +253,13 @@ useHead(() => ({
               url: "https://whatsanalyze.com/tools/chat-heatmap",
               applicationCategory: "UtilitiesApplication",
             },
+            {
+              "@type": "SoftwareApplication",
+              position: 7,
+              name: t("toolsHub.toolPdfTitle"),
+              url: "https://whatsanalyze.com/tools/whatsapp-to-pdf",
+              applicationCategory: "UtilitiesApplication",
+            },
           ],
         },
       }),
@@ -384,9 +391,12 @@ const steps = computed(() => [
     }
   }
 
-  &--2cols {
-    grid-template-columns: repeat(2, 1fr);
+  &--3cols {
+    grid-template-columns: repeat(3, 1fr);
 
+    @media (max-width: 1080px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
     @media (max-width: 700px) {
       grid-template-columns: 1fr;
     }

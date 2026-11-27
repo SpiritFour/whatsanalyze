@@ -525,10 +525,15 @@ test.describe("the analyzer", () => {
     await expectAnalysis(page);
   });
 
-  test("offers the PDF page to search and turns a dropped chat into a PDF there", async ({
+  test("lists the PDF tool with the others and turns a dropped chat into a PDF there", async ({
     page,
   }) => {
-    await page.goto("/whatsapp-to-pdf");
+    await page.goto("/tools");
+    await page
+      .getByRole("link", { name: /WhatsApp Chat to PDF/ })
+      .first()
+      .click();
+    await expect(page).toHaveURL(/\/tools\/whatsapp-to-pdf\/?$/);
 
     await expect(
       page.getByRole("heading", {
@@ -536,22 +541,29 @@ test.describe("the analyzer", () => {
         level: 1,
       }),
     ).toBeVisible();
-    // It was noindex and left out of the sitemap while it was three
-    // sentences long.
     await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
     const sitemap = await (await page.request.get("/sitemap.xml")).text();
-    expect(sitemap).toContain("/whatsapp-to-pdf/</loc>");
+    expect(sitemap).toContain("/tools/whatsapp-to-pdf/</loc>");
+    // The old address is a redirect now, so it is not listed on its own.
+    expect(sitemap).not.toMatch(/\.com\/whatsapp-to-pdf\//);
 
     await page
       .locator('#dropzone-slot input[type="file"]')
       .setInputFiles(EXAMPLE_CHAT);
 
     // The page is the tool: the chat is previewed and downloaded right here.
-    await expect(page).toHaveURL(/\/whatsapp-to-pdf\/?$/);
+    await expect(page).toHaveURL(/\/tools\/whatsapp-to-pdf\/?$/);
     await expect(page.locator("#chat-pdf-tool")).toBeVisible();
     await expect(
       page.getByRole("button", { name: /Download free preview PDF/i }),
     ).toBeVisible();
+  });
+
+  test("sends the old PDF page address on to the tool", async ({ page }) => {
+    await page.goto("/whatsapp-to-pdf/");
+    await expect(page).toHaveURL(/\/tools\/whatsapp-to-pdf\/?$/);
+    await page.goto("/de/whatsapp-to-pdf/");
+    await expect(page).toHaveURL(/\/de\/tools\/whatsapp-to-pdf\/?$/);
   });
 });
 

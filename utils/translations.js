@@ -841,6 +841,9 @@ export const messages = {
       toolAiTitle: "AI Chat Analyzer",
       toolAiText:
         "Let AI describe your chat: each person's role, how you interact, your topics and best moments. On your device or in the cloud.",
+      toolPdfTitle: "WhatsApp Chat to PDF",
+      toolPdfText:
+        "Your chat as it looks on your phone: iPhone or Android, light or dark, or ink-saving for paper. Preview it, print it or download the PDF.",
       toolCourtTitle: "Court & Legal Evidence PDF",
       toolCourtText:
         "Format WhatsApp chats into court-admissible, tamper-evident PDF transcripts with exact timestamps and sender verification.",
@@ -892,7 +895,7 @@ export const messages = {
       analyticsGroupTitle: "Chat Analytics & Metrics",
       analyticsGroupDesc:
         "Fast, focused in-browser tools to measure conversation dynamics, message counts, vocabulary, and activity hours.",
-      courtGroupTitle: "Official Documentation & Legal Proof",
+      courtGroupTitle: "PDF Exports & Legal Proof",
       courtGroupDesc:
         "Court-admissible PDF transcripts and verified relationship timelines formatted for legal proceedings and immigration petitions.",
       situationsGroupTitle: "Understand What's Going On",
@@ -2937,6 +2940,9 @@ export const messages = {
       toolAiTitle: "KI-Chat-Analyse",
       toolAiText:
         "Lass die KI deinen Chat beschreiben: die Rolle jeder Person, wie ihr miteinander umgeht, eure Themen und besten Momente. Auf deinem Gerät oder in der Cloud.",
+      toolPdfTitle: "WhatsApp-Chat als PDF",
+      toolPdfText:
+        "Dein Chat, wie er auf dem Handy aussieht: iPhone oder Android, hell oder dunkel, oder tintensparend für Papier. Vorschau ansehen, drucken oder als PDF laden.",
       toolCourtTitle: "Gerichtsfester Beweis-PDF",
       toolCourtText:
         "Formatiere WhatsApp-Chats in gerichtsfeste, manipulationssichere PDF-Protokolle mit exakten Zeitstempeln.",
@@ -2988,7 +2994,7 @@ export const messages = {
       analyticsGroupTitle: "Gesprächs- & Chat-Analysen",
       analyticsGroupDesc:
         "Fokussierte Tools im Browser für Gesprächsdynamik, Nachrichtenanzahl, Wortschatz und Aktivitätszeiten.",
-      courtGroupTitle: "Offizielle Dokumentation & Gerichtsfeste Nachweise",
+      courtGroupTitle: "PDF-Exporte & rechtliche Nachweise",
       courtGroupDesc:
         "Gerichtsfeste PDF-Protokolle und verifizierte Kommunikationszeitachsen für Justiz und Behörden.",
       situationsGroupTitle: "Verstehen, was los ist",
@@ -5038,6 +5044,9 @@ export const messages = {
       toolAiTitle: "Analizador de chats con IA",
       toolAiText:
         "Deja que la IA describa tu chat: el papel de cada persona, cómo os relacionáis, vuestros temas y mejores momentos. En tu dispositivo o en la nube.",
+      toolPdfTitle: "Chat de WhatsApp a PDF",
+      toolPdfText:
+        "Tu chat tal como se ve en tu móvil: iPhone o Android, claro u oscuro, o ahorrando tinta para papel. Míralo, imprímelo o descarga el PDF.",
       toolCourtTitle: "PDF de prueba judicial",
       toolCourtText:
         "Formatea chats de WhatsApp en transcripciones PDF válidas en juicio con marcas de tiempo exactas.",
@@ -5089,7 +5098,7 @@ export const messages = {
       analyticsGroupTitle: "Análisis y métricas de chat",
       analyticsGroupDesc:
         "Herramientas rápidas y privadas en navegador para medir dinámicas, mensajes, vocabulario y horarios.",
-      courtGroupTitle: "Documentación oficial y pruebas judiciales",
+      courtGroupTitle: "Exportaciones PDF y pruebas legales",
       courtGroupDesc:
         "Transcripciones en PDF válidas en juicios y cronogramas de relación verificados para visados y tribunales.",
       situationsGroupTitle: "Entiende qué está pasando",
@@ -6880,6 +6889,9 @@ export const messages = {
       toolAiTitle: "Analisador de conversas com IA",
       toolAiText:
         "Deixe a IA descrever a sua conversa: o papel de cada pessoa, como interagem, os vossos temas e melhores momentos. No seu dispositivo ou na nuvem.",
+      toolPdfTitle: "Conversa do WhatsApp em PDF",
+      toolPdfText:
+        "A sua conversa como aparece no telemóvel: iPhone ou Android, claro ou escuro, ou a poupar tinta para papel. Pré-visualize, imprima ou descarregue o PDF.",
       toolCourtTitle: "PDF de prova jurídica",
       toolCourtText:
         "Formate conversas em relatórios PDF para processos com carimbos de data/hora exatos.",
@@ -6931,7 +6943,7 @@ export const messages = {
       analyticsGroupTitle: "Análises e métricas de conversa",
       analyticsGroupDesc:
         "Ferramentas focadas no navegador para medir dinâmica, contagem de mensagens, vocabulário e horários.",
-      courtGroupTitle: "Documentação oficial e comprovações jurídicas",
+      courtGroupTitle: "Exportações PDF e provas legais",
       courtGroupDesc:
         "Relatórios em PDF para processos judiciais e linhas do tempo verificadas para pedidos de visto.",
       situationsGroupTitle: "Entenda o que se passa",
@@ -8985,6 +8997,9 @@ export const messages = {
       toolAiTitle: "Analyseur de chats IA",
       toolAiText:
         "Laissez l'IA décrire votre conversation : le rôle de chacun, votre façon d'échanger, vos sujets et vos meilleurs moments. Sur votre appareil ou dans le cloud.",
+      toolPdfTitle: "Discussion WhatsApp en PDF",
+      toolPdfText:
+        "Votre discussion telle qu'elle apparaît sur votre téléphone : iPhone ou Android, clair ou sombre, ou économe en encre pour le papier. Prévisualisez, imprimez ou téléchargez le PDF.",
       toolCourtTitle: "PDF pour preuve juridique",
       toolCourtText:
         "Mettez en forme vos conversations en transcriptions PDF recevables avec horodatages précis.",
@@ -9038,7 +9053,7 @@ export const messages = {
       analyticsGroupTitle: "Analyses et métriques de discussion",
       analyticsGroupDesc:
         "Des outils ciblés dans le navigateur pour mesurer les dynamiques, les volumes de messages, le vocabulaire et les heures d'échange.",
-      courtGroupTitle: "Documentation officielle et preuves juridiques",
+      courtGroupTitle: "Exports PDF et preuves juridiques",
       courtGroupDesc:
         "Transcriptions PDF recevables en justice et chronologies certifiées pour les démarches consulaires et judiciaires.",
       situationsGroupTitle: "Comprendre ce qui se passe",
@@ -11092,6 +11107,9 @@ export const messages = {
       toolAiTitle: "Analisi chat con IA",
       toolAiText:
         "Lascia che l'IA descriva la tua chat: il ruolo di ciascuno, come interagite, i vostri argomenti e i momenti migliori. Sul tuo dispositivo o nel cloud.",
+      toolPdfTitle: "Chat WhatsApp in PDF",
+      toolPdfText:
+        "La tua chat come appare sul telefono: iPhone o Android, chiara o scura, o a risparmio d'inchiostro per la carta. Guardala, stampala o scarica il PDF.",
       toolCourtTitle: "PDF di prova legale",
       toolCourtText:
         "Formatta le chat di WhatsApp in trascrizioni PDF legali con timestamp precisi e verifica del mittente.",
@@ -11145,7 +11163,7 @@ export const messages = {
       analyticsGroupTitle: "Analisi e metriche della chat",
       analyticsGroupDesc:
         "Strumenti mirati nel browser per misurare dinamiche, volumi di messaggi, vocabolario e fasce orarie.",
-      courtGroupTitle: "Documentazione ufficiale e prove legali",
+      courtGroupTitle: "Esportazioni PDF e prove legali",
       courtGroupDesc:
         "Trascrizioni PDF legali e cronologie verificate pensate per tribunali e pratiche di visto.",
       situationsGroupTitle: "Capire cosa sta succedendo",

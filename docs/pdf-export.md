@@ -113,7 +113,7 @@ a yield in between so the progress bar repaints and the tab stays responsive.
 
 ## The WhatsApp-to-PDF tool: one view, three outputs
 
-`/whatsapp-to-pdf` shows the chat the way it looks on a phone and lets the
+`/tools/whatsapp-to-pdf` shows the chat the way it looks on a phone and lets the
 visitor pick a style (iPhone or Android, light or dark, and an ink saver for
 paper) and adjust it (text size, times, photos, names, whose messages go on the
 right). `chatView.ts` writes that view as one piece of HTML and one stylesheet,

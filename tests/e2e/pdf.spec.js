@@ -236,7 +236,7 @@ test.describe("the court evidence PDF", () => {
 
 test.describe("the WhatsApp to PDF tool", () => {
   const openTool = async (page, file = emojiChat()) => {
-    await page.goto("/whatsapp-to-pdf?free=1");
+    await page.goto("/tools/whatsapp-to-pdf?free=1");
     await page.locator("#dropzone-slot input[type=file]").setInputFiles(file);
     await expect(page.locator("#chat-pdf-tool")).toBeVisible();
   };

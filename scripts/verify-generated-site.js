@@ -25,6 +25,8 @@ const expectedFiles = [
   "switch-from-whatsapp-to-signal/index.html",
   "how-to-export-your-whatsapp-chat/index.html",
   "impressum/index.html",
+  "tools/whatsapp-to-pdf/index.html",
+  // the old address, kept as a redirect stub
   "whatsapp-to-pdf/index.html",
   "de/tools/index.html",
   "de/tools/court-evidence/index.html",

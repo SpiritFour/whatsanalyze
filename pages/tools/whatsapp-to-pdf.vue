@@ -86,6 +86,7 @@ import ChatPdfTool from "~/components/tools/ChatPdfTool.vue";
 import {
   scrollToDropzone,
   useBreadcrumbSchema,
+  useToolBreadcrumbs,
 } from "~/composables/useToolPage";
 import pdfExampleImage from "~/assets/img/whatsapp export pdf.png";
 
@@ -96,7 +97,7 @@ export default {
     const localePath = useLocalePath();
     const { baseUrl } = useRuntimeConfig().public;
     const price = computed(() => formatPrice(ONE_TIME_PRICE, locale.value));
-    const pageUrl = `${baseUrl}${localePath("/whatsapp-to-pdf")}`;
+    const pageUrl = `${baseUrl}${localePath("/tools/whatsapp-to-pdf")}`;
 
     useSeoMeta({
       title: () => t("seo.pdfGuideTitle"),
@@ -112,7 +113,11 @@ export default {
     useBreadcrumbSchema(
       computed(() => [
         { name: "WhatsAnalyze", url: `${baseUrl}${localePath("/")}` },
-        { name: t("pdfPage.navLabel"), url: pageUrl },
+        {
+          name: t("toolsHub.headerTools"),
+          url: `${baseUrl}${localePath("/tools")}`,
+        },
+        { name: t("toolsHub.toolPdfTitle"), url: pageUrl },
       ]),
     );
 
@@ -153,10 +158,9 @@ export default {
       localePath,
       price,
       pdfExampleImage,
-      breadcrumbs: computed(() => [
-        { label: "WhatsAnalyze", to: localePath("/") },
-        { label: t("pdfPage.navLabel") },
-      ]),
+      // The last crumb is the tool's name from the shared catalogue
+      // (composables/useSiteNav.ts), as on every other tool page.
+      breadcrumbs: useToolBreadcrumbs("toolsHub.toolPdfTitle"),
       contents,
       steps,
       faq,
