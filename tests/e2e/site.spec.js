@@ -525,7 +525,7 @@ test.describe("the analyzer", () => {
     await expectAnalysis(page);
   });
 
-  test("offers the PDF page to search and takes a dropped chat to the download", async ({
+  test("offers the PDF page to search and turns a dropped chat into a PDF there", async ({
     page,
   }) => {
     await page.goto("/whatsapp-to-pdf");
@@ -546,9 +546,12 @@ test.describe("the analyzer", () => {
       .locator('#dropzone-slot input[type="file"]')
       .setInputFiles(EXAMPLE_CHAT);
 
-    // The PDF is made under the analysis on the home page.
-    await expect(page).toHaveURL(/#payButton$/);
-    await expect(page.locator("#payButton")).toBeInViewport();
+    // The page is the tool: the chat is previewed and downloaded right here.
+    await expect(page).toHaveURL(/\/whatsapp-to-pdf\/?$/);
+    await expect(page.locator("#chat-pdf-tool")).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: /Download free preview PDF/i }),
+    ).toBeVisible();
   });
 });
 

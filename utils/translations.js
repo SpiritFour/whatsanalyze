@@ -51,26 +51,25 @@ export const messages = {
       navLabel: "WhatsApp chat to PDF",
       heroTitle: "Export a WhatsApp chat to PDF",
       heroSubtitle:
-        "Every message, the photos and your chat statistics in one PDF to print, keep or send. Made in your browser from your chat export, nothing uploaded.",
+        "Your chat as it looks on your phone, as a PDF to print, keep or send. Pick iPhone or Android, light or dark, or a style that saves ink. Made in your browser, nothing uploaded.",
       heroCta: "Make my PDF",
       heroNote: "Free preview · Full PDF {price} once · No account",
       exampleAlt: "Pages of a PDF made from an example WhatsApp chat",
       uploadTitle: "Drop your export, get the PDF",
       uploadText:
         "Open the .zip or .txt file WhatsApp gave you. It is read in your browser, not uploaded.",
-      createButton: "Create my PDF",
       guideLink: "No export yet? How to export a WhatsApp chat",
       contentsEyebrow: "What's inside",
-      contentsTitle: "More than a printout of the chat",
+      contentsTitle: "Your chat, the way you know it",
       card1Title: "The whole conversation",
       card1Text:
         "Every message with its sender, date and time, in order, and the photos next to them if you exported with media.",
-      card2Title: "Your chat in numbers",
+      card2Title: "Looks like your phone",
       card2Text:
-        "A cover with your first and last message, days, messages and people, then charts: timeline, by hour, by person, by month and by weekday.",
-      card3Title: "Fun facts about each person",
+        "Pick iPhone or Android, light or dark. Bubbles, day markers and times look the way you know them.",
+      card3Title: "Made for paper",
       card3Text:
-        "Words written, longest message, vocabulary, favourite emojis and average message length.",
+        "An ink-saving style for printing, page numbers on every sheet, and a Print button that sends the chat straight to your printer.",
       stepsTitle: "Three steps",
       step1Title: "Export the chat",
       step1Text:
@@ -105,6 +104,38 @@ export const messages = {
       ctaTitle: "Your chat, as a PDF",
       ctaButton: "Make my PDF",
       ctaNote: "Free preview · Made in your browser",
+      analysisLink: "Want charts and statistics too? Get the analysis PDF",
+    },
+    pdfTool: {
+      styleTitle: "Style",
+      style: {
+        iphone_light: "iPhone light",
+        iphone_dark: "iPhone dark",
+        android_light: "Android light",
+        android_dark: "Android dark",
+        ink: "Ink saver",
+      },
+      adjustTitle: "Adjust",
+      me: "Your messages (right side)",
+      textSize: "Text size",
+      size: {
+        s: "S",
+        m: "M",
+        l: "L",
+      },
+      showTimes: "Show times",
+      showMedia: "Show photos",
+      showNames: "Show names",
+      print: "Print",
+      printHint:
+        "Prints the preview. With the full PDF unlocked, it prints the whole chat.",
+      printHintFull: "Prints the whole chat with your browser's print dialog.",
+      previewLabel: "Preview · first {count} messages",
+      subtitle: "{count} messages · {from} – {to}",
+      previewNotice:
+        "Preview: {shown} of {total} messages. The full PDF has them all.",
+      mediaNotLoaded:
+        "Photos are not shown: this chat was restored without its media. Drop the export again to include them.",
     },
     subscribePage: {
       title: "See everything the AI found in your chat",
@@ -2133,7 +2164,7 @@ export const messages = {
       navLabel: "WhatsApp-Chat als PDF",
       heroTitle: "WhatsApp-Chat als PDF exportieren",
       heroSubtitle:
-        "Alle Nachrichten, die Fotos und eure Chat-Statistiken in einem PDF zum Ausdrucken, Aufbewahren oder Verschicken. Direkt im Browser aus deinem Chat-Export erstellt, ohne Upload.",
+        "Dein Chat, wie er auf deinem Handy aussieht, als PDF zum Ausdrucken, Aufbewahren oder Verschicken. Wähle iPhone oder Android, hell oder dunkel, oder einen tintensparenden Stil. Direkt im Browser erstellt, ohne Upload.",
       heroCta: "PDF erstellen",
       heroNote:
         "Vorschau kostenlos · Vollständiges PDF einmalig {price} · Kein Konto",
@@ -2141,19 +2172,18 @@ export const messages = {
       uploadTitle: "Export hineinziehen, PDF bekommen",
       uploadText:
         "Öffne die .zip- oder .txt-Datei, die WhatsApp erstellt hat. Sie wird in deinem Browser gelesen, nicht hochgeladen.",
-      createButton: "Mein PDF erstellen",
       guideLink: "Noch kein Export? So exportierst du einen WhatsApp-Chat",
       contentsEyebrow: "Was drinsteht",
-      contentsTitle: "Mehr als ein Ausdruck des Chats",
+      contentsTitle: "Dein Chat, wie du ihn kennst",
       card1Title: "Das ganze Gespräch",
       card1Text:
         "Jede Nachricht mit Absender, Datum und Uhrzeit, in der richtigen Reihenfolge – und die Fotos daneben, wenn du mit Medien exportiert hast.",
-      card2Title: "Euer Chat in Zahlen",
+      card2Title: "Sieht aus wie auf dem Handy",
       card2Text:
-        "Ein Deckblatt mit erster und letzter Nachricht, Tagen, Nachrichten und Personen, dann Diagramme: Verlauf, nach Uhrzeit, nach Person, nach Monat und nach Wochentag.",
-      card3Title: "Fun Facts zu jeder Person",
+        "Wähle iPhone oder Android, hell oder dunkel. Sprechblasen, Datumsanzeigen und Uhrzeiten sehen aus wie gewohnt.",
+      card3Title: "Gemacht für Papier",
       card3Text:
-        "Geschriebene Wörter, längste Nachricht, Wortschatz, Lieblings-Emojis und durchschnittliche Nachrichtenlänge.",
+        "Ein tintensparender Stil zum Drucken, Seitenzahlen auf jedem Blatt und ein Drucken-Button, der den Chat direkt an deinen Drucker schickt.",
       stepsTitle: "In drei Schritten",
       step1Title: "Chat exportieren",
       step1Text:
@@ -2188,6 +2218,39 @@ export const messages = {
       ctaTitle: "Dein Chat als PDF",
       ctaButton: "PDF erstellen",
       ctaNote: "Vorschau kostenlos · Im Browser erstellt",
+      analysisLink: "Auch Diagramme und Statistiken? Zum Analyse-PDF",
+    },
+    pdfTool: {
+      styleTitle: "Stil",
+      style: {
+        iphone_light: "iPhone hell",
+        iphone_dark: "iPhone dunkel",
+        android_light: "Android hell",
+        android_dark: "Android dunkel",
+        ink: "Tintensparend",
+      },
+      adjustTitle: "Anpassen",
+      me: "Deine Nachrichten (rechte Seite)",
+      textSize: "Schriftgröße",
+      size: {
+        s: "S",
+        m: "M",
+        l: "L",
+      },
+      showTimes: "Uhrzeiten anzeigen",
+      showMedia: "Fotos anzeigen",
+      showNames: "Namen anzeigen",
+      print: "Drucken",
+      printHint:
+        "Druckt die Vorschau. Mit freigeschaltetem PDF wird der ganze Chat gedruckt.",
+      printHintFull:
+        "Druckt den ganzen Chat über den Druckdialog deines Browsers.",
+      previewLabel: "Vorschau · erste {count} Nachrichten",
+      subtitle: "{count} Nachrichten · {from} – {to}",
+      previewNotice:
+        "Vorschau: {shown} von {total} Nachrichten. Das vollständige PDF enthält alle.",
+      mediaNotLoaded:
+        "Fotos werden nicht angezeigt: Dieser Chat wurde ohne seine Medien wiederhergestellt. Lege den Export erneut ab, um sie einzubeziehen.",
     },
     subscribePage: {
       title: "Sieh alles, was die KI in deinem Chat gefunden hat",
@@ -4213,7 +4276,7 @@ export const messages = {
       navLabel: "Chat de WhatsApp a PDF",
       heroTitle: "Exportar un chat de WhatsApp a PDF",
       heroSubtitle:
-        "Todos los mensajes, las fotos y las estadísticas del chat en un PDF para imprimir, guardar o enviar. Se crea en tu navegador a partir de tu exportación, sin subir nada.",
+        "Tu chat tal como se ve en tu móvil, en un PDF para imprimir, guardar o enviar. Elige iPhone o Android, claro u oscuro, o un estilo que ahorra tinta. Creado en tu navegador, sin subir nada.",
       heroCta: "Crear mi PDF",
       heroNote:
         "Vista previa gratis · PDF completo por {price}, pago único · Sin cuenta",
@@ -4222,20 +4285,19 @@ export const messages = {
       uploadTitle: "Suelta tu exportación y obtén el PDF",
       uploadText:
         "Abre el archivo .zip o .txt que te dio WhatsApp. Se lee en tu navegador, no se sube.",
-      createButton: "Crear mi PDF",
       guideLink:
         "¿Aún no tienes la exportación? Cómo exportar un chat de WhatsApp",
       contentsEyebrow: "Qué incluye",
-      contentsTitle: "Más que una copia impresa del chat",
+      contentsTitle: "Tu chat, tal como lo conoces",
       card1Title: "Toda la conversación",
       card1Text:
         "Cada mensaje con su remitente, fecha y hora, en orden, y las fotos al lado si exportaste con archivos multimedia.",
-      card2Title: "Tu chat en cifras",
+      card2Title: "Como en tu móvil",
       card2Text:
-        "Una portada con el primer y el último mensaje, días, mensajes y personas, y luego gráficos: evolución, por hora, por persona, por mes y por día de la semana.",
-      card3Title: "Curiosidades de cada persona",
+        "Elige iPhone o Android, claro u oscuro. Las burbujas, los separadores de día y las horas se ven como siempre.",
+      card3Title: "Pensado para papel",
       card3Text:
-        "Palabras escritas, mensaje más largo, vocabulario, emojis favoritos y longitud media de los mensajes.",
+        "Un estilo que ahorra tinta para imprimir, números de página en cada hoja y un botón Imprimir que envía el chat directamente a tu impresora.",
       stepsTitle: "En tres pasos",
       step1Title: "Exporta el chat",
       step1Text:
@@ -4269,6 +4331,40 @@ export const messages = {
       ctaTitle: "Tu chat, en PDF",
       ctaButton: "Crear mi PDF",
       ctaNote: "Vista previa gratis · Se crea en tu navegador",
+      analysisLink:
+        "¿También quieres gráficos y estadísticas? Obtén el PDF del análisis",
+    },
+    pdfTool: {
+      styleTitle: "Estilo",
+      style: {
+        iphone_light: "iPhone claro",
+        iphone_dark: "iPhone oscuro",
+        android_light: "Android claro",
+        android_dark: "Android oscuro",
+        ink: "Ahorro de tinta",
+      },
+      adjustTitle: "Ajustes",
+      me: "Tus mensajes (lado derecho)",
+      textSize: "Tamaño del texto",
+      size: {
+        s: "S",
+        m: "M",
+        l: "L",
+      },
+      showTimes: "Mostrar horas",
+      showMedia: "Mostrar fotos",
+      showNames: "Mostrar nombres",
+      print: "Imprimir",
+      printHint:
+        "Imprime la vista previa. Con el PDF completo desbloqueado, imprime todo el chat.",
+      printHintFull:
+        "Imprime todo el chat con el diálogo de impresión de tu navegador.",
+      previewLabel: "Vista previa · primeros {count} mensajes",
+      subtitle: "{count} mensajes · {from} – {to}",
+      previewNotice:
+        "Vista previa: {shown} de {total} mensajes. El PDF completo los incluye todos.",
+      mediaNotLoaded:
+        "Las fotos no se muestran: este chat se restauró sin sus archivos. Vuelve a soltar la exportación para incluirlas.",
     },
     subscribePage: {
       title: "Descubre todo lo que la IA encontró en tu chat",
@@ -6279,7 +6375,7 @@ export const messages = {
       navLabel: "Conversa do WhatsApp em PDF",
       heroTitle: "Exportar uma conversa do WhatsApp para PDF",
       heroSubtitle:
-        "Todas as mensagens, as fotos e as estatísticas da conversa em um PDF para imprimir, guardar ou enviar. Criado no seu navegador a partir da sua exportação, sem upload.",
+        "A sua conversa como aparece no telemóvel, num PDF para imprimir, guardar ou enviar. Escolha iPhone ou Android, claro ou escuro, ou um estilo que poupa tinta. Criado no seu navegador, sem envios.",
       heroCta: "Criar meu PDF",
       heroNote:
         "Prévia grátis · PDF completo por {price}, pagamento único · Sem conta",
@@ -6288,19 +6384,18 @@ export const messages = {
       uploadTitle: "Solte sua exportação e receba o PDF",
       uploadText:
         "Abra o arquivo .zip ou .txt que o WhatsApp criou. Ele é lido no seu navegador, não é enviado.",
-      createButton: "Criar meu PDF",
       guideLink: "Ainda não exportou? Como exportar uma conversa do WhatsApp",
       contentsEyebrow: "O que tem dentro",
-      contentsTitle: "Mais do que uma impressão da conversa",
+      contentsTitle: "A sua conversa, como a conhece",
       card1Title: "A conversa inteira",
       card1Text:
         "Cada mensagem com remetente, data e hora, em ordem, e as fotos ao lado se você exportou com mídia.",
-      card2Title: "Sua conversa em números",
+      card2Title: "Igual ao seu telemóvel",
       card2Text:
-        "Uma capa com a primeira e a última mensagem, dias, mensagens e pessoas, e depois gráficos: linha do tempo, por hora, por pessoa, por mês e por dia da semana.",
-      card3Title: "Curiosidades de cada pessoa",
+        "Escolha iPhone ou Android, claro ou escuro. Os balões, os separadores de dia e as horas aparecem como está habituado.",
+      card3Title: "Feito para papel",
       card3Text:
-        "Palavras escritas, mensagem mais longa, vocabulário, emojis favoritos e tamanho médio das mensagens.",
+        "Um estilo que poupa tinta para imprimir, números de página em cada folha e um botão Imprimir que envia a conversa diretamente para a sua impressora.",
       stepsTitle: "Em três passos",
       step1Title: "Exporte a conversa",
       step1Text:
@@ -6334,6 +6429,40 @@ export const messages = {
       ctaTitle: "Sua conversa em PDF",
       ctaButton: "Criar meu PDF",
       ctaNote: "Prévia grátis · Criado no seu navegador",
+      analysisLink:
+        "Também quer gráficos e estatísticas? Obtenha o PDF da análise",
+    },
+    pdfTool: {
+      styleTitle: "Estilo",
+      style: {
+        iphone_light: "iPhone claro",
+        iphone_dark: "iPhone escuro",
+        android_light: "Android claro",
+        android_dark: "Android escuro",
+        ink: "Poupar tinta",
+      },
+      adjustTitle: "Ajustar",
+      me: "As suas mensagens (lado direito)",
+      textSize: "Tamanho do texto",
+      size: {
+        s: "P",
+        m: "M",
+        l: "G",
+      },
+      showTimes: "Mostrar horas",
+      showMedia: "Mostrar fotos",
+      showNames: "Mostrar nomes",
+      print: "Imprimir",
+      printHint:
+        "Imprime a pré-visualização. Com o PDF completo desbloqueado, imprime a conversa inteira.",
+      printHintFull:
+        "Imprime a conversa inteira com a janela de impressão do seu navegador.",
+      previewLabel: "Pré-visualização · primeiras {count} mensagens",
+      subtitle: "{count} mensagens · {from} – {to}",
+      previewNotice:
+        "Pré-visualização: {shown} de {total} mensagens. O PDF completo tem todas.",
+      mediaNotLoaded:
+        "As fotos não são mostradas: esta conversa foi restaurada sem os seus ficheiros. Volte a largar a exportação para as incluir.",
     },
     subscribePage: {
       title: "Veja tudo o que a IA encontrou na sua conversa",
@@ -8347,7 +8476,7 @@ export const messages = {
       navLabel: "Discussion WhatsApp en PDF",
       heroTitle: "Exporter une discussion WhatsApp en PDF",
       heroSubtitle:
-        "Tous les messages, les photos et les statistiques de la discussion dans un PDF à imprimer, garder ou envoyer. Créé dans votre navigateur à partir de votre export, sans rien envoyer.",
+        "Votre discussion telle qu'elle apparaît sur votre téléphone, en PDF à imprimer, garder ou envoyer. Choisissez iPhone ou Android, clair ou sombre, ou un style qui économise l'encre. Créé dans votre navigateur, rien n'est envoyé.",
       heroCta: "Créer mon PDF",
       heroNote:
         "Aperçu gratuit · PDF complet {price} en achat unique · Sans compte",
@@ -8356,20 +8485,19 @@ export const messages = {
       uploadTitle: "Déposez votre export, obtenez le PDF",
       uploadText:
         "Ouvrez le fichier .zip ou .txt créé par WhatsApp. Il est lu dans votre navigateur, pas envoyé.",
-      createButton: "Créer mon PDF",
       guideLink:
         "Pas encore d'export ? Comment exporter une discussion WhatsApp",
       contentsEyebrow: "Ce qu'il contient",
-      contentsTitle: "Plus qu'une impression de la discussion",
+      contentsTitle: "Votre discussion, telle que vous la connaissez",
       card1Title: "Toute la conversation",
       card1Text:
         "Chaque message avec son expéditeur, sa date et son heure, dans l'ordre, et les photos à côté si vous avez exporté avec les médias.",
-      card2Title: "Votre discussion en chiffres",
+      card2Title: "Comme sur votre téléphone",
       card2Text:
-        "Une couverture avec le premier et le dernier message, les jours, les messages et les participants, puis des graphiques : chronologie, par heure, par personne, par mois et par jour de la semaine.",
-      card3Title: "Anecdotes sur chaque personne",
+        "Choisissez iPhone ou Android, clair ou sombre. Les bulles, les séparateurs de jour et les heures ressemblent à ce que vous connaissez.",
+      card3Title: "Pensé pour le papier",
       card3Text:
-        "Mots écrits, message le plus long, vocabulaire, emojis préférés et longueur moyenne des messages.",
+        "Un style économe en encre pour l'impression, des numéros de page sur chaque feuille et un bouton Imprimer qui envoie la discussion directement à votre imprimante.",
       stepsTitle: "En trois étapes",
       step1Title: "Exportez la discussion",
       step1Text:
@@ -8404,6 +8532,40 @@ export const messages = {
       ctaTitle: "Votre discussion en PDF",
       ctaButton: "Créer mon PDF",
       ctaNote: "Aperçu gratuit · Créé dans votre navigateur",
+      analysisLink:
+        "Vous voulez aussi des graphiques et des statistiques ? Obtenez le PDF de l'analyse",
+    },
+    pdfTool: {
+      styleTitle: "Style",
+      style: {
+        iphone_light: "iPhone clair",
+        iphone_dark: "iPhone sombre",
+        android_light: "Android clair",
+        android_dark: "Android sombre",
+        ink: "Économie d'encre",
+      },
+      adjustTitle: "Ajuster",
+      me: "Vos messages (côté droit)",
+      textSize: "Taille du texte",
+      size: {
+        s: "S",
+        m: "M",
+        l: "L",
+      },
+      showTimes: "Afficher les heures",
+      showMedia: "Afficher les photos",
+      showNames: "Afficher les noms",
+      print: "Imprimer",
+      printHint:
+        "Imprime l'aperçu. Une fois le PDF complet débloqué, imprime toute la discussion.",
+      printHintFull:
+        "Imprime toute la discussion avec la boîte d'impression de votre navigateur.",
+      previewLabel: "Aperçu · {count} premiers messages",
+      subtitle: "{count} messages · {from} – {to}",
+      previewNotice:
+        "Aperçu : {shown} messages sur {total}. Le PDF complet les contient tous.",
+      mediaNotLoaded:
+        "Les photos ne s'affichent pas : cette discussion a été restaurée sans ses fichiers. Déposez à nouveau l'export pour les inclure.",
     },
     subscribePage: {
       title: "Découvrez tout ce que l'IA a trouvé dans votre conversation",
@@ -10429,7 +10591,7 @@ export const messages = {
       navLabel: "Chat WhatsApp in PDF",
       heroTitle: "Esportare una chat WhatsApp in PDF",
       heroSubtitle:
-        "Tutti i messaggi, le foto e le statistiche della chat in un PDF da stampare, conservare o inviare. Creato nel tuo browser dalla tua esportazione, senza caricare nulla.",
+        "La tua chat come appare sul telefono, in un PDF da stampare, conservare o inviare. Scegli iPhone o Android, chiaro o scuro, o uno stile che risparmia inchiostro. Creato nel tuo browser, senza caricare nulla.",
       heroCta: "Crea il mio PDF",
       heroNote:
         "Anteprima gratuita · PDF completo a {price} una tantum · Nessun account",
@@ -10437,20 +10599,19 @@ export const messages = {
       uploadTitle: "Trascina l'esportazione, ottieni il PDF",
       uploadText:
         "Apri il file .zip o .txt creato da WhatsApp. Viene letto nel tuo browser, non caricato.",
-      createButton: "Crea il mio PDF",
       guideLink:
         "Non hai ancora l'esportazione? Come esportare una chat WhatsApp",
       contentsEyebrow: "Cosa contiene",
-      contentsTitle: "Più di una stampa della chat",
+      contentsTitle: "La tua chat, come la conosci",
       card1Title: "Tutta la conversazione",
       card1Text:
         "Ogni messaggio con mittente, data e ora, in ordine, e le foto accanto se hai esportato con i media.",
-      card2Title: "La chat in numeri",
+      card2Title: "Come sul tuo telefono",
       card2Text:
-        "Una copertina con il primo e l'ultimo messaggio, giorni, messaggi e persone, poi i grafici: andamento, per ora, per persona, per mese e per giorno della settimana.",
-      card3Title: "Curiosità su ogni persona",
+        "Scegli iPhone o Android, chiaro o scuro. Fumetti, separatori dei giorni e orari appaiono come sei abituato.",
+      card3Title: "Pensato per la carta",
       card3Text:
-        "Parole scritte, messaggio più lungo, vocabolario, emoji preferite e lunghezza media dei messaggi.",
+        "Uno stile che risparmia inchiostro per la stampa, numeri di pagina su ogni foglio e un pulsante Stampa che invia la chat direttamente alla tua stampante.",
       stepsTitle: "In tre passaggi",
       step1Title: "Esporta la chat",
       step1Text:
@@ -10485,6 +10646,40 @@ export const messages = {
       ctaTitle: "La tua chat in PDF",
       ctaButton: "Crea il mio PDF",
       ctaNote: "Anteprima gratuita · Creato nel tuo browser",
+      analysisLink:
+        "Vuoi anche grafici e statistiche? Ottieni il PDF dell'analisi",
+    },
+    pdfTool: {
+      styleTitle: "Stile",
+      style: {
+        iphone_light: "iPhone chiaro",
+        iphone_dark: "iPhone scuro",
+        android_light: "Android chiaro",
+        android_dark: "Android scuro",
+        ink: "Risparmio inchiostro",
+      },
+      adjustTitle: "Regola",
+      me: "I tuoi messaggi (lato destro)",
+      textSize: "Dimensione del testo",
+      size: {
+        s: "S",
+        m: "M",
+        l: "L",
+      },
+      showTimes: "Mostra orari",
+      showMedia: "Mostra foto",
+      showNames: "Mostra nomi",
+      print: "Stampa",
+      printHint:
+        "Stampa l'anteprima. Con il PDF completo sbloccato, stampa tutta la chat.",
+      printHintFull:
+        "Stampa tutta la chat con la finestra di stampa del tuo browser.",
+      previewLabel: "Anteprima · primi {count} messaggi",
+      subtitle: "{count} messaggi · {from} – {to}",
+      previewNotice:
+        "Anteprima: {shown} di {total} messaggi. Il PDF completo li contiene tutti.",
+      mediaNotLoaded:
+        "Le foto non vengono mostrate: questa chat è stata ripristinata senza i suoi file. Trascina di nuovo l'esportazione per includerle.",
     },
     subscribePage: {
       title: "Scopri tutto quello che l'IA ha trovato nella tua chat",

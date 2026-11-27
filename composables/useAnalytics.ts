@@ -533,7 +533,12 @@ export const analyticsChat = {
   },
 
   download(
-    fileType: "pdf_sample" | "pdf_full" | "pdf_full_court" | "chart_image",
+    fileType:
+      | "pdf_sample"
+      | "pdf_full"
+      | "pdf_full_court"
+      | "pdf_full_chat"
+      | "chart_image",
     chartName?: string,
   ) {
     trackEvent("file_download", {
@@ -543,7 +548,9 @@ export const analyticsChat = {
   },
 
   /** The PDF was built and handed to the browser to save. */
-  pdfGenerated(fileType: "pdf_sample" | "pdf_full" | "pdf_full_court") {
+  pdfGenerated(
+    fileType: "pdf_sample" | "pdf_full" | "pdf_full_court" | "pdf_full_chat",
+  ) {
     trackEvent("pdf_generated", { file_type: fileType });
   },
 };

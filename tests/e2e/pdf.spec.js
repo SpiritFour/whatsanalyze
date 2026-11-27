@@ -233,3 +233,88 @@ test.describe("the court evidence PDF", () => {
     expect(raw).toMatch(/\/Height 24[\s/]/);
   });
 });
+
+test.describe("the WhatsApp to PDF tool", () => {
+  const openTool = async (page, file = emojiChat()) => {
+    await page.goto("/whatsapp-to-pdf?free=1");
+    await page.locator("#dropzone-slot input[type=file]").setInputFiles(file);
+    await expect(page.locator("#chat-pdf-tool")).toBeVisible();
+  };
+
+  /** The preview's wallpaper, read inside its shadow root. */
+  const previewBackground = (page) =>
+    page
+      .locator(".chat-preview .cv-root")
+      .evaluate((root) => getComputedStyle(root).backgroundColor);
+
+  test("previews the chat in the chosen style @mobile", async ({ page }) => {
+    await openTool(page);
+
+    // Playwright's CSS locators reach into the open shadow root.
+    const bubbles = page.locator(".chat-preview .cv-msg");
+    await expect(bubbles.first()).toBeVisible();
+    expect(await bubbles.count()).toBeGreaterThan(20);
+    await expect(
+      page.locator(".chat-preview .cv-msg.is-out").first(),
+    ).toBeVisible();
+
+    expect(await previewBackground(page)).toBe("rgb(239, 234, 226)");
+    await page.locator('label:has([data-style="android-dark"])').click();
+    expect(await previewBackground(page)).toBe("rgb(11, 20, 26)");
+
+    // Times off: the bubbles lose their time line.
+    await expect(page.locator(".chat-preview .cv-time").first()).toBeVisible();
+    await page.getByLabel("Show times").uncheck();
+    await expect(page.locator(".chat-preview .cv-time")).toHaveCount(0);
+
+    // The look is remembered, so a buyer back from checkout gets it.
+    await page.reload();
+    await expect(page.locator("#chat-pdf-tool")).toBeVisible();
+    expect(await previewBackground(page)).toBe("rgb(11, 20, 26)");
+  });
+
+  test("downloads the PDF in the chosen style", async ({ page }) => {
+    test.setTimeout(180_000);
+    await openTool(page);
+    await page.locator('label:has([data-style="android-dark"])').click();
+
+    const pdf = await downloadPreview(page);
+    const raw = pdf.toString("latin1");
+    const streams = contentStreams(pdf);
+
+    expect(raw).toContain("FontFile2");
+    expect(streams.match(/Tj/g)?.length ?? 0).toBeGreaterThan(100);
+    // Every page is filled with the style's wallpaper, #0b141a.
+    expect(streams).toContain("0.043 0.078 0.102 rg");
+    // Emoji are artwork here too.
+    expect(raw.match(/\/Subtype \/Image/g)?.length ?? 0).toBeGreaterThan(10);
+  });
+
+  test("prints only the chat with the browser's print dialog", async ({
+    page,
+  }) => {
+    // window.print() would block a headed browser; record it instead and
+    // play the events a real print dialog fires around it.
+    await page.addInitScript(() => {
+      window.print = () => {
+        window.__printed = (window.__printed || 0) + 1;
+        window.dispatchEvent(new Event("beforeprint"));
+      };
+    });
+    await openTool(page);
+    await page.emulateMedia({ media: "print" });
+
+    await page.getByRole("button", { name: "Print", exact: true }).click();
+    await expect.poll(() => page.evaluate(() => window.__printed)).toBe(1);
+
+    // Only the chat is on paper: the site around it is not.
+    await expect(page.locator("html")).toHaveClass(/cv-printing/);
+    await expect(page.locator("#cv-print-root .cv-msg").first()).toBeVisible();
+    await expect(page.locator("#chat-pdf-tool")).toBeHidden();
+    await expect(page.locator("footer").first()).toBeHidden();
+
+    await page.evaluate(() => window.dispatchEvent(new Event("afterprint")));
+    await expect(page.locator("#cv-print-root")).toHaveCount(0);
+    await expect(page.locator("html")).not.toHaveClass(/cv-printing/);
+  });
+});

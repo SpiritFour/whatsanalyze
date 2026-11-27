@@ -333,7 +333,7 @@ import {
 } from "~/utils/pricing";
 import { chatFingerprint } from "~/utils/chatFingerprint";
 import { scrollToSettled } from "~/utils/scroll";
-import { renderChatPdf, renderCourtPdf } from "~/utils/pdf";
+import { renderChatPdf, renderChatViewPdf, renderCourtPdf } from "~/utils/pdf";
 import { loadImage } from "~/utils/utils";
 import {
   formatExactTimestamp,
@@ -351,6 +351,9 @@ export default {
     isValidSubscription: { type: Boolean, default: false },
     // the court evidence transcript instead of the visual story
     court: { type: Boolean, default: false },
+    // the chat as on a phone, in a chosen style, instead of the visual story:
+    // { options, title, labels(printed, total), locale } — see utils/pdf/chatPdf.ts
+    chatView: { type: Object, default: null },
   },
   setup() {
     return {
@@ -421,6 +424,19 @@ export default {
         this.$t(`pdfStyleCourtFeature${index}`),
       );
     },
+    /** What a full download is reported as. */
+    fullFileType() {
+      if (this.chatView) return "pdf_full_chat";
+      return this.court ? "pdf_full_court" : "pdf_full";
+    },
+    fileName() {
+      if (this.chatView) {
+        // a file name, not a path: no slashes from a group's name
+        const title = String(this.chatView.title).replace(/[\\/:*?"<>|]/g, "-");
+        return `WhatsApp Chat - ${title.trim()}.pdf`;
+      }
+      return `${this.court ? "WhatsAnalyze Court Transcript" : "WhatsAnalyze"} - ${String(this.ego).trim()}.pdf`;
+    },
     /** Identifies the chat on screen, to tie a single payment to it. */
     currentChatFingerprint() {
       // toRaw: reading every message through the reactive proxy would make
@@ -480,7 +496,7 @@ export default {
       analyticsChat.download("pdf_sample");
     },
     downloadFull() {
-      analyticsChat.download(this.court ? "pdf_full_court" : "pdf_full");
+      analyticsChat.download(this.fullFileType);
       this.download(false);
       this.showDownloadPopup = false;
     },
@@ -512,11 +528,7 @@ export default {
 
       this.isLoading = true;
       this.progress = 0;
-      this.pdfFileType = isSample
-        ? "pdf_sample"
-        : this.court
-          ? "pdf_full_court"
-          : "pdf_full";
+      this.pdfFileType = isSample ? "pdf_sample" : this.fullFileType;
       const onProgress = (percent) => {
         this.progress = percent;
       };
@@ -527,30 +539,38 @@ export default {
         const chat = toRaw(this.chat);
         const attachments = toRaw(this.attachments);
 
-        const blob = this.court
-          ? await renderCourtPdf({
+        const blob = this.chatView
+          ? await renderChatViewPdf({
               chat,
               attachments,
+              options: { ...this.chatView.options },
+              title: this.chatView.title,
+              labels: this.chatView.labels,
+              locale: this.chatView.locale,
               isSample,
-              source: toRaw(this.source),
               onProgress,
             })
-          : await renderChatPdf({
-              chat,
-              attachments,
-              ego: this.ego,
-              isSample,
-              // the court transcript shows no charts, so only this one
-              // rasterises them
-              charts: await this.loadCharts(),
-              onProgress,
-            });
+          : this.court
+            ? await renderCourtPdf({
+                chat,
+                attachments,
+                isSample,
+                source: toRaw(this.source),
+                onProgress,
+              })
+            : await renderChatPdf({
+                chat,
+                attachments,
+                ego: this.ego,
+                isSample,
+                // the court transcript shows no charts, so only this one
+                // rasterises them
+                charts: await this.loadCharts(),
+                onProgress,
+              });
 
         if (this.isUnmounted) return;
-        FileSaver.saveAs(
-          blob,
-          `${this.court ? "WhatsAnalyze Court Transcript" : "WhatsAnalyze"} - ${String(this.ego).trim()}.pdf`,
-        );
+        FileSaver.saveAs(blob, this.fileName);
         // file_download fires when the build starts; this proves it finished
         analyticsChat.pdfGenerated(this.pdfFileType);
         this.isLoading = false;

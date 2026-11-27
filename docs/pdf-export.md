@@ -1,7 +1,7 @@
 # PDF export
 
-Every PDF the site produces — the visual chat story and the court evidence
-transcript — is laid out as HTML/CSS by the browser, then transcribed into a
+Every PDF the site produces — the visual chat story, the court evidence
+transcript and the styled chat from the WhatsApp-to-PDF tool — is laid out as HTML/CSS by the browser, then transcribed into a
 vector PDF. This replaced the imperative jsPDF coordinate maths that used to
 live in `utils/pdf.ts` and `utils/pdfCourt.ts`
 ([#391](https://github.com/SpiritFour/whatsanalyze/issues/391)).
@@ -41,7 +41,8 @@ engine writes the file — which removes the main argument for the print dialog.
 | `fonts.ts` | Registers one TTF with both jsPDF and the layout document. |
 | `visual.ts`, `template.ts`, `theme.ts` | The visual export: cover, charts, fun facts, bubbles, outro. |
 | `court.ts` | The court transcript: audit record, roster, numbered transcript, annexes. |
-| `index.ts` | Public entry points: `renderChatPdf`, `renderCourtPdf`. |
+| `chatStyles.ts`, `chatView.ts`, `chatPdf.ts` | The WhatsApp-to-PDF tool: the chat as on a phone, in a chosen style. |
+| `index.ts` | Public entry points: `renderChatPdf`, `renderCourtPdf`, `renderChatViewPdf`. |
 
 ### Pagination
 
@@ -109,6 +110,35 @@ A Worker has no DOM, and the DOM is the layout engine, so the old
 `assets/js/pdf.worker.js` is gone, for both documents. Messages are processed in
 batches of 300 with
 a yield in between so the progress bar repaints and the tab stays responsive.
+
+## The WhatsApp-to-PDF tool: one view, three outputs
+
+`/whatsapp-to-pdf` shows the chat the way it looks on a phone and lets the
+visitor pick a style (iPhone or Android, light or dark, and an ink saver for
+paper) and adjust it (text size, times, photos, names, whose messages go on the
+right). `chatView.ts` writes that view as one piece of HTML and one stylesheet,
+and three things use it unchanged:
+
+1. **The live preview** (`components/tools/ChatPreview.vue`) puts it in a
+   shadow root, so the site's styles cannot reach it.
+2. **The browser's print dialog.** `chatViewCss` has `@media print` rules (no
+   bubble or header split across sheets, a day label never alone at the bottom
+   of a sheet, backgrounds kept with `print-color-adjust: exact`), and
+   `chatPrintGlobalCss` adds a named `@page chat` (A4, 12 mm, the style's
+   wallpaper) plus the rule that only `#cv-print-root` prints while
+   `html.cv-printing` is set. The tool sets that class on `beforeprint` and
+   clears it on `afterprint`, so Ctrl+P and the Print button both print just
+   the chat. Fonts and `@page` only work from the document, which is why that
+   part is injected into `<head>` rather than the shadow root.
+3. **The PDF** (`chatPdf.ts`) lays the same markup out through the shared
+   pipeline, with the style's wallpaper as the page background.
+
+The free preview, the printout without a purchase and the sample PDF all stop
+at the first 100 messages. The style choice is remembered in `localStorage`, so
+a buyer back from Stripe gets the PDF they configured.
+
+Only paint the emitter can reproduce is allowed here too: the styles are solid
+colours and uniform corner radii, without bubble tails or shadows.
 
 ## Cost
 

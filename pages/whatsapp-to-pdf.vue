@@ -20,35 +20,22 @@
       />
     </LandingHero>
 
-    <!-- Upload right here. The PDF itself is made under the analysis on the
-         home page, from the charts drawn there, so a chat dropped here goes
-         on to that. A chat restored from earlier in this visit only offers
-         the button, so coming back to this page does not bounce anyone. -->
-    <LandingSection
-      theme="white"
+    <!-- The tool itself: upload, pick a look, preview, print or download.
+         The chat-with-charts PDF is still made under the analysis on the
+         home page. -->
+    <ChatPdfTool
       :title="t('pdfPage.uploadTitle')"
       :text="t('pdfPage.uploadText')"
-    >
-      <div
-        id="dropzone-slot"
-        class="pdf-page__dropzone"
-        @change.capture="acted = true"
-        @drop.capture="acted = true"
-        @click.capture="acted = true"
-      >
-        <ToolDropzone tool-type="pdf" @analyzed="onAnalyzed" />
-      </div>
-      <div v-if="chatReady" class="pdf-page__next">
-        <LandingButton :to="downloadPath" @click="trackCreate">
-          {{ t("pdfPage.createButton") }}
-        </LandingButton>
-      </div>
-      <p class="pdf-page__link">
-        <NuxtLink :to="localePath('/how-to-export-your-whatsapp-chat')">
-          {{ t("pdfPage.guideLink") }} →
-        </NuxtLink>
-      </p>
-    </LandingSection>
+      checkout-source="whatsapp_to_pdf"
+    />
+    <div class="pdf-page__links">
+      <NuxtLink :to="localePath('/how-to-export-your-whatsapp-chat')">
+        {{ t("pdfPage.guideLink") }} →
+      </NuxtLink>
+      <NuxtLink :to="analysisPath" @click="trackAnalysis">
+        {{ t("pdfPage.analysisLink") }} →
+      </NuxtLink>
+    </div>
 
     <LandingSection
       theme="light"
@@ -95,7 +82,7 @@
 <script>
 import { ONE_TIME_PRICE, formatPrice } from "~/utils/pricing";
 import { analyticsTools } from "~/composables/useAnalytics";
-import ToolDropzone from "~/components/tools/ToolDropzone.vue";
+import ChatPdfTool from "~/components/tools/ChatPdfTool.vue";
 import {
   scrollToDropzone,
   useBreadcrumbSchema,
@@ -103,7 +90,7 @@ import {
 import pdfExampleImage from "~/assets/img/whatsapp export pdf.png";
 
 export default {
-  components: { ToolDropzone },
+  components: { ChatPdfTool },
   setup() {
     const { t, locale } = useI18n();
     const localePath = useLocalePath();
@@ -155,13 +142,11 @@ export default {
       })),
     );
 
-    // The PDF download sits under the analysis on the home page, which picks
-    // the parsed chat up from shared state.
-    const downloadPath = computed(() =>
+    // The PDF with charts sits under the analysis on the home page, which
+    // picks the parsed chat up from shared state.
+    const analysisPath = computed(() =>
       localePath({ path: "/", hash: "#payButton" }),
     );
-    const acted = ref(false);
-    const chatReady = ref(false);
 
     return {
       t,
@@ -175,15 +160,9 @@ export default {
       contents,
       steps,
       faq,
-      downloadPath,
-      acted,
-      chatReady,
-      onAnalyzed: () => {
-        chatReady.value = true;
-        if (acted.value) navigateTo(downloadPath.value);
-      },
+      analysisPath,
       trackHeroCta: () => analyticsTools.ctaClick("pdf", "hero_dropzone"),
-      trackCreate: () => analyticsTools.ctaClick("pdf", "pdf"),
+      trackAnalysis: () => analyticsTools.ctaClick("pdf", "full_analyzer"),
       trackCourt: () => analyticsTools.ctaClick("pdf", "court_pdf"),
       trackBottomCta: () => {
         scrollToDropzone();
@@ -205,17 +184,18 @@ export default {
   box-shadow: 0 24px 50px rgba(0, 0, 0, 0.45);
 }
 
-.pdf-page__dropzone {
-  margin-top: clamp(2rem, 5vw, 3rem);
-}
-
 .pdf-page__next {
   margin-top: 1.5rem;
   text-align: center;
 }
 
-.pdf-page__link {
-  margin-top: 2rem;
+.pdf-page__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 2rem;
+  padding: 0 1rem 3rem;
+  background: #ffffff;
 
   a {
     color: $c-blue-accent-dark;

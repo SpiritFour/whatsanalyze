@@ -7,8 +7,11 @@
  *
  * - renderChatPdf:  the visual chat story (cover, charts, chat bubbles)
  * - renderCourtPdf: the court evidence transcript
+ * - renderChatViewPdf: the chat as on a phone, in a chosen style (WhatsApp to PDF)
  */
 export { renderChatPdf } from "~/utils/pdf/visual";
 export type { RenderPdfOptions } from "~/utils/pdf/visual";
 export { renderCourtPdf } from "~/utils/pdf/court";
 export type { ChatSource, RenderCourtPdfOptions } from "~/utils/pdf/court";
+export { renderChatViewPdf, CHAT_SAMPLE_COUNT } from "~/utils/pdf/chatPdf";
+export type { RenderChatViewPdfOptions } from "~/utils/pdf/chatPdf";
