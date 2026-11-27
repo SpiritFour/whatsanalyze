@@ -2,6 +2,7 @@ import {
   PdfBuilder,
   anyEmoji,
   nextFrame,
+  paintFrame,
   toDataUrl,
 } from "~/utils/pdf/builder";
 import { messageToHtml } from "~/utils/pdf/emoji";
@@ -66,7 +67,7 @@ export function courtGeometry(paper: "a4" | "letter" = "a4"): PageGeometry {
 }
 
 const SAMPLE_MESSAGE_COUNT = 100;
-const ROWS_PER_BATCH = 300;
+const ROWS_PER_BATCH = 150;
 const CHAPTER = "court";
 
 // Grays as the old jsPDF export used them (0–255 levels).
@@ -574,6 +575,7 @@ export async function renderCourtPdf(
     await builder.add(html);
 
     onProgress?.(100);
+    await paintFrame();
 
     //   ----- RUNNING HEADER AND FOOTER ON EVERY SHEET
     const names = roster.map((person) => person.name);

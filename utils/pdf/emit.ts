@@ -6,7 +6,7 @@ import {
 } from "~/utils/pdf/fonts";
 import type { PdfFont } from "~/utils/pdf/fonts";
 import { rasterizeEmoji } from "~/utils/pdf/emoji";
-import type { MeasuredBlock, RenderItem } from "~/utils/pdf/measure";
+import type { MeasuredBlock, RenderItem, TextItem } from "~/utils/pdf/measure";
 import { contentHeightPx, mm, pt, px } from "~/utils/pdf/page";
 import type { PageGeometry } from "~/utils/pdf/page";
 
@@ -205,6 +205,7 @@ export class PdfWriter {
     sprite: Map<string, string>,
   ): Promise<void> {
     await this.preloadEmoji(blocks, sprite);
+    for (const block of blocks) block.items = this.mergeTextRuns(block.items);
 
     blocks.forEach((block, index) => {
       const table = block.tableHeader || block.table;
@@ -342,6 +343,63 @@ export class PdfWriter {
 
       if (consumed < block.height) this.continuePage(block.chapter, table);
     }
+  }
+
+  /**
+   * Joins the words of a line into one text run wherever the PDF would put
+   * each next word exactly where the browser did: same line, same style, and
+   * the run's width plus one space (as jsPDF measures it) lands on the next
+   * word's measured x. Anywhere else, a word keeps its own position, so
+   * nothing moves; it just stops costing a whole text object per word, which
+   * made a long chat's PDF, and the memory to build it, several times bigger.
+   */
+  private mergeTextRuns(items: RenderItem[]): RenderItem[] {
+    const merged: RenderItem[] = [];
+    let run: TextItem | null = null;
+    // Half a CSS pixel: well under a glyph's side bearing.
+    const TOLERANCE = 0.5;
+
+    const sameStyle = (a: TextItem, b: TextItem) =>
+      a.fontFamily === b.fontFamily &&
+      a.fontSize === b.fontSize &&
+      a.bold === b.bold &&
+      a.color === b.color &&
+      Math.abs(a.baseline - b.baseline) < 0.1;
+
+    for (const item of items) {
+      if (item.kind !== "text") {
+        if (run) merged.push(run);
+        run = null;
+        merged.push(item);
+        continue;
+      }
+      if (run && sameStyle(run, item)) {
+        const expected = run.x + this.textWidthPx(`${run.text} `, run);
+        if (Math.abs(expected - item.x) <= TOLERANCE) {
+          run = {
+            ...run,
+            text: `${run.text} ${item.text}`,
+            width: item.x + item.width - run.x,
+            y: Math.min(run.y, item.y),
+            height:
+              Math.max(run.y + run.height, item.y + item.height) -
+              Math.min(run.y, item.y),
+          };
+          continue;
+        }
+      }
+      if (run) merged.push(run);
+      run = { ...item };
+    }
+    if (run) merged.push(run);
+    return merged;
+  }
+
+  /** A string's width in CSS px, as jsPDF will draw it. */
+  private textWidthPx(text: string, style: TextItem): number {
+    this.doc.setFont(style.fontFamily, style.bold ? "bold" : "normal");
+    this.doc.setFontSize(pt(style.fontSize));
+    return px(this.doc.getTextWidth(text));
   }
 
   private async preloadEmoji(

@@ -250,6 +250,13 @@ function onDragLeave() {
   isDragging.value = false;
 }
 
+/**
+ * Set as soon as the visitor picks a chat themselves. Restoring the chat from
+ * earlier in the visit is asynchronous, and a file dropped right after the
+ * page opened must not be replaced by the old chat when the restore lands.
+ */
+let visitorChose = false;
+
 async function processInput(
   fileOrText: File | string,
   fileName = "WhatsApp Chat",
@@ -257,6 +264,7 @@ async function processInput(
   track = true,
   sample = false,
 ) {
+  if (track) visitorChose = true;
   loading.value = true;
   errorMessage.value = null;
   notice.value = null;
@@ -406,12 +414,14 @@ onMounted(async () => {
   } | null = sharedChat.value?.messages?.length
     ? sharedChat.value
     : ((await library.restoreActive()) ?? loadChatSession());
+  if (visitorChose) return;
 
   // After a full page load the restored chat has the messages but not the
   // media. The export kept for this tab has both, if it is that chat's
   // export (not one since uploaded somewhere else).
   if (keepsUpload && restored !== sharedChat.value) {
     const kept = await loadUpload();
+    if (visitorChose) return;
     const sources = restored?.chat?.sources ?? [restored?.source];
     if (
       kept &&
@@ -426,7 +436,7 @@ onMounted(async () => {
     }
   }
 
-  if (!restored?.messages?.length) return;
+  if (!restored?.messages?.length || visitorChose) return;
   try {
     showChat(
       {

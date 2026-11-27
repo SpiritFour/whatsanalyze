@@ -2,6 +2,7 @@ import {
   PdfBuilder,
   anyEmoji,
   nextFrame,
+  paintFrame,
   toDataUrl,
 } from "~/utils/pdf/builder";
 import { parseColor } from "~/utils/pdf/emit";
@@ -33,7 +34,7 @@ import { chatDurationInDays, firstDate, lastDate } from "~/utils/utils";
  * the pipeline and utils/pdf/emoji.ts for why emoji are artwork.
  */
 
-const MESSAGES_PER_BATCH = 300;
+const MESSAGES_PER_BATCH = 150;
 const SAMPLE_MESSAGE_COUNT = 100;
 
 const LABELS = {
@@ -199,6 +200,7 @@ export async function renderChatPdf(options: RenderPdfOptions): Promise<Blob> {
     );
 
     onProgress?.(100);
+    await paintFrame();
 
     const title = `WhatsAnalyze — ${ego}`;
     return builder.finish(title, ({ doc, page, total, chapter, geometry }) => {

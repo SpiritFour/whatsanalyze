@@ -813,6 +813,8 @@ export const messages = {
       "John and Jane probably write the most in the afternoon...",
     exampleGraphSubtitle2:
       "...and John writes a little more overall than Jane.",
+    pdfAssembling:
+      "Putting the pages together… this can take a few seconds for a long chat.",
     waitingForPDF:
       "The generation of the PDF can take some while, sometimes up to 10 minutes, depending on your device. Please be patient.",
     chatTimeline: "Chat Timeline",
@@ -3057,6 +3059,8 @@ export const messages = {
       "John und Jane schreiben wohl am meisten um 4 Uhr Nachmittags...",
     exampleGraphSubtitle2:
       "...und John schreibt insgesamt etwas mehr als Jane.",
+    pdfAssembling:
+      "Die Seiten werden zusammengesetzt … bei einem langen Chat kann das ein paar Sekunden dauern.",
     waitingForPDF:
       "Die Generierung des PDFs kann etwas dauern, manchmal bis zu 10 Minuten, abhängig von Ihrem Gerät. Bitte habe Geduld.",
     chatTimeline: "Chat-Zeitstrahl",
@@ -5281,6 +5285,8 @@ export const messages = {
       "El aviso legal y la política de privacidad que siguen son los originales alemanes jurídicamente vinculantes, tal y como exige la ley alemana. Las condiciones de uso están en inglés.",
     aboutPoints:
       "Somos un grupo de <b>amigos de la universidad</b>. Como hace poco todos dejamos WhatsApp y queríamos analizar cómo evolucionaron los chats a lo largo de los años. <br /> <br /> Como <b>estudiantes de Informática</b> son paranoicos y piensan que pueden hacer todo mejor, naturalmente queríamos construir una solución nosotros mismos, donde <b>ningún dato personal</b> se comparta o se haga público.",
+    pdfAssembling:
+      "Juntando las páginas… en un chat largo puede tardar unos segundos.",
     waitingForPDF:
       "La generación del PDF puede tardar un tiempo, a veces hasta 10 minutos, dependiendo de su dispositivo. Por favor, tenga paciencia.",
     chatTimeline: "Cronología del Chat",
@@ -7241,6 +7247,8 @@ export const messages = {
       "John e Jane provavelmente escrevem mais às 4 da manhã. Tarde...",
     exampleGraphSubtitle2:
       "...e John escreve um pouco mais no geral do que Jane.",
+    pdfAssembling:
+      "A juntar as páginas… numa conversa longa pode demorar alguns segundos.",
     waitingForPDF:
       "A geração do PDF pode demorar um pouco, às vezes até 10 minutos, dependendo do seu dispositivo. Por favor, tenha paciência.",
     chatTimeline: "Linha do Tempo do Chat",
@@ -9469,6 +9477,8 @@ export const messages = {
     exampleGraphSubtitle1:
       "John et Jane sont probablement ceux qui écrivent le plus à 4 heures du matin...",
     exampleGraphSubtitle2: "...et John écrit un peu plus que Jane.",
+    pdfAssembling:
+      "Assemblage des pages… pour une longue discussion, cela peut prendre quelques secondes.",
     waitingForPDF:
       "La génération du PDF peut prendre un certain temps, parfois jusqu'à 10 minutes, en fonction de votre appareil. Veuillez faire preuve de patience.",
     chatTimeline: "Chronologie du Chat",
@@ -11696,6 +11706,8 @@ export const messages = {
       "John e Jane probabilmente scrivono di più alle 4 di mattina...",
     exampleGraphSubtitle2:
       "...e John scrive un po' di più in generale rispetto a Jane.",
+    pdfAssembling:
+      "Unione delle pagine… per una chat lunga può richiedere qualche secondo.",
     waitingForPDF:
       "La generazione del PDF può richiedere un po' di tempo, a volte fino a 10 minuti, a seconda del tuo dispositivo. Per favore, sii paziente.",
     chatTimeline: "Cronologia chat",

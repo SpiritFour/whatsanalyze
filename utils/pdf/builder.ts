@@ -80,6 +80,14 @@ export function anyEmoji(texts: Array<string | null | undefined>): boolean {
   return texts.some((text) => !!text && hasEmoji(text));
 }
 
+/**
+ * Wait until the browser has painted: before the last step, which assembles
+ * and compresses every page in one go and holds the thread for seconds on a
+ * long chat, so the "putting the pages together" state is on screen first.
+ */
+export const paintFrame = () =>
+  new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve, 0)));
+
 /** Hand the thread back so the progress bar can actually repaint. */
 export const nextFrame = () => new Promise((resolve) => setTimeout(resolve, 0));
 

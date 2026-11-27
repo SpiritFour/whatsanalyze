@@ -1,5 +1,10 @@
 import { resolveStyle } from "~/utils/pdf/chatDesign";
-import { PdfBuilder, anyEmoji, nextFrame } from "~/utils/pdf/builder";
+import {
+  PdfBuilder,
+  anyEmoji,
+  nextFrame,
+  paintFrame,
+} from "~/utils/pdf/builder";
 import { parseColor } from "~/utils/pdf/emit";
 import { A4, contentHeightPx, mm } from "~/utils/pdf/page";
 import type { PageGeometry } from "~/utils/pdf/page";
@@ -52,7 +57,7 @@ export function chatGeometry(paper: PaperId = "a4"): PageGeometry {
   };
 }
 
-const MESSAGES_PER_BATCH = 300;
+const MESSAGES_PER_BATCH = 150;
 export const CHAT_SAMPLE_COUNT = 100;
 
 export interface RenderChatViewPdfOptions {
@@ -199,6 +204,7 @@ export async function renderChatViewPdf(
     }
 
     onProgress?.(100);
+    await paintFrame();
 
     return builder.finish(title, ({ doc, page, total, chapter, geometry }) => {
       // The cover is the title page; numbering it would be noise.

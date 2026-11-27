@@ -128,6 +128,15 @@
               :style="{ width: progress + '%' }"
             ></div>
           </div>
+          <!-- The last step holds the page for a few seconds on a long chat:
+               say what is happening, so it does not look stuck. -->
+          <p
+            v-if="progress >= 100"
+            class="m-0 mt-2 text-sm text-wa-ink-faint"
+            role="status"
+          >
+            {{ $t("pdfAssembling") }}
+          </p>
         </div>
 
         <!-- Download dialog -->
