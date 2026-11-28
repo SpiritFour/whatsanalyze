@@ -20,7 +20,8 @@
           <ChartsTextStats :chat="chat" />
         </div>
 
-        <div data-pdf-card="highlights">
+        <!-- Each highlight is a row of its own, like the other cards. -->
+        <div data-pdf-split class="pdf-capture__column">
           <HighlightsSection :chat="chat" :exclude="['overview']" />
         </div>
 
@@ -109,27 +110,59 @@ const root = shallowRef(null);
 
 /** Chart.js animates for 500 ms (utils/chartTheme.js); give it room. */
 const CHART_SETTLE_MS = 900;
-/** amCharts loads on demand and lays its clouds out over a few frames. */
-const CLOUD_TIMEOUT_MS = 8000;
+/** amCharts loads on demand and lays its clouds out over many frames. */
+const CLOUD_TIMEOUT_MS = 20000;
+/** The animated theme fades the words in after they are placed. */
+const CLOUD_FADE_MS = 1200;
 /** 2× on a ~1000 px wide layout: sharp on paper, a few hundred kB a row. */
 const SCALE = 2;
 const QUALITY = 0.85;
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-/** Until every cloud has words in it, or the timeout. */
+/**
+ * Until every cloud has placed its words and finished fading them in, or the
+ * timeout: a cloud with no words at all never says it is done.
+ */
 async function cloudsReady(element) {
   const started = Date.now();
-  while (Date.now() - started < CLOUD_TIMEOUT_MS) {
-    const clouds = Array.from(element.querySelectorAll(`.${SVG_CHART_CLASS}`));
-    const ready = clouds.every(
-      (cloud) =>
-        typeof cloud.exportChartImage === "function" &&
-        cloud.querySelectorAll("text").length > 0,
-    );
-    if (ready) return;
-    await wait(200);
+  const clouds = () =>
+    Array.from(element.querySelectorAll(`.${SVG_CHART_CLASS}`));
+  // amCharts loads on demand: first the clouds have to exist.
+  while (
+    Date.now() - started < CLOUD_TIMEOUT_MS &&
+    !clouds().every((cloud) => cloud.cloudArranged)
+  ) {
+    await wait(100);
   }
+  const left = Math.max(0, CLOUD_TIMEOUT_MS - (Date.now() - started));
+  await Promise.race([
+    Promise.all(clouds().map((cloud) => cloud.cloudArranged)),
+    wait(left),
+  ]);
+  await wait(CLOUD_FADE_MS);
+}
+
+/**
+ * The rows to cut out, in page order: every [data-pdf-card], and every card
+ * inside a [data-pdf-split], looking through wrappers that take no box of
+ * their own (HighlightsSection's root is `display: contents`).
+ */
+function cardsIn(page) {
+  const cards = [];
+  const expand = (element) => {
+    for (const child of element.children) {
+      if (getComputedStyle(child).display === "contents") expand(child);
+      else cards.push(child);
+    }
+  };
+  for (const element of page.querySelectorAll(
+    "[data-pdf-card], [data-pdf-split]",
+  )) {
+    if (element.hasAttribute("data-pdf-split")) expand(element);
+    else cards.push(element);
+  }
+  return cards;
 }
 
 /**
@@ -162,7 +195,7 @@ async function captureAll(element, background) {
 
   const origin = page.getBoundingClientRect();
   const images = [];
-  for (const card of page.querySelectorAll("[data-pdf-card]")) {
+  for (const card of cardsIn(page)) {
     const box = card.getBoundingClientRect();
     // A card with nothing in it (no highlights for a tiny chat) takes no
     // slot in the PDF.
@@ -229,6 +262,12 @@ defineExpose({ capture });
   flex-direction: column;
   gap: 24px;
   background: transparent;
+}
+
+.pdf-capture__column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .pdf-capture__row {

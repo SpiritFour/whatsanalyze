@@ -222,6 +222,13 @@ export function chatPagesCss(
 
   return `
 .cp-cover, .cp-outro { font-family: ${chatFontFamily(options.font)}; }
+/* Emoji are sized here as well as in the layout document's base styles
+   (utils/pdf/document.ts): the cover preview shows this page on its own,
+   where an unsized emoji came out at the artwork's full size. */
+.cp-cover .wa-emoji, .cp-outro .wa-emoji {
+  display: inline-block; height: 1.15em; width: 1.15em;
+  vertical-align: -0.2em; margin: 0 0.05em;
+}
 .cp-cover {
   height: ${Math.floor(pageHeight)}px; color: ${coverText};
   display: flex; flex-direction: column; justify-content: space-between;

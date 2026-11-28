@@ -66,6 +66,12 @@ export default {
     this.series.minFontSize = 26;
     this.series.maxFontSize = 110;
     this.series.minWordLength = 0;
+    // The cloud places its words over many frames. The PDF's capture
+    // (components/pdf/AnalyticsCapture.vue) waits for this, not for the first
+    // word, or a long chat's cloud comes out empty.
+    this.$refs.chartdiv.cloudArranged = new Promise((resolve) => {
+      this.series.events.once("arrangeended", () => resolve());
+    });
     this.updateGraph();
 
     // amCharts renders to SVG, which neither html2canvas nor a hand-rolled
@@ -76,7 +82,10 @@ export default {
       this.chart.exporting.getImage("png");
   },
   beforeUnmount: function () {
-    if (this.$refs.chartdiv) delete this.$refs.chartdiv.exportChartImage;
+    if (this.$refs.chartdiv) {
+      delete this.$refs.chartdiv.exportChartImage;
+      delete this.$refs.chartdiv.cloudArranged;
+    }
     // amCharts now loads on demand, so an unmount can beat the mount.
     this.chart?.dispose();
   },

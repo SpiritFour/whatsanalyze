@@ -680,6 +680,13 @@ test.describe("the WhatsApp to PDF tool", () => {
     await expect(
       page.locator(".chat-preview .cv-title img.wa-emoji"),
     ).toBeVisible();
+
+    // On the cover preview too, at the size of the text around it (it was
+    // once drawn at the artwork's full size there).
+    await page.locator('[data-tab="cover"]').click();
+    const heart = page.locator(".cover-preview .cp-members img.wa-emoji");
+    await expect(heart).toBeVisible();
+    expect((await heart.boundingBox()).height).toBeLessThan(30);
   });
 
   test("moves between the settings tabs with the arrow keys", async ({
