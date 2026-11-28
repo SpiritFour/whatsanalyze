@@ -236,6 +236,23 @@ export const messages = {
         bookHint: "A chapter for each month, with the month on every page.",
       },
       hideSystem: "Hide WhatsApp notices",
+      analysisPages: "Analysis pages: charts and fun facts",
+      analysis: {
+        title: "Your chat in numbers",
+        perDay: "messages per day",
+        busiestDay: "busiest day",
+        busiestHour: "busiest hour",
+        perPerson: "Messages per person",
+        timeline: "Messages over time",
+        timeOfDay: "Messages by time of day",
+        weekdays: "Messages by weekday",
+        funFacts: "Fun facts",
+        words: "words",
+        wordsPerMessage: "words per message",
+        uniqueWords: "different words",
+        longestMessage: "characters in the longest message",
+        others: "Others",
+      },
       paper: "Paper",
       paperSize: {
         a4: "A4",
@@ -816,6 +833,8 @@ export const messages = {
       "John and Jane probably write the most in the afternoon...",
     exampleGraphSubtitle2:
       "...and John writes a little more overall than Jane.",
+    pdfCustomizeTitle: "Want a different look?",
+    pdfCustomizeLink: "Customise this PDF: styles, fonts, cover and more →",
     pdfAssembling:
       "Putting the pages together… this can take a few seconds for a long chat.",
     waitingForPDF:
@@ -2477,6 +2496,23 @@ export const messages = {
         bookHint: "Ein Kapitel pro Monat, mit dem Monat auf jeder Seite.",
       },
       hideSystem: "WhatsApp-Hinweise ausblenden",
+      analysisPages: "Analyse-Seiten: Diagramme und Fun Facts",
+      analysis: {
+        title: "Euer Chat in Zahlen",
+        perDay: "Nachrichten pro Tag",
+        busiestDay: "aktivster Tag",
+        busiestHour: "aktivste Stunde",
+        perPerson: "Nachrichten pro Person",
+        timeline: "Nachrichten im Zeitverlauf",
+        timeOfDay: "Nachrichten nach Tageszeit",
+        weekdays: "Nachrichten nach Wochentag",
+        funFacts: "Fun Facts",
+        words: "Wörter",
+        wordsPerMessage: "Wörter pro Nachricht",
+        uniqueWords: "verschiedene Wörter",
+        longestMessage: "Zeichen in der längsten Nachricht",
+        others: "Andere",
+      },
       paper: "Papier",
       paperSize: {
         a4: "A4",
@@ -3065,6 +3101,8 @@ export const messages = {
       "John und Jane schreiben wohl am meisten um 4 Uhr Nachmittags...",
     exampleGraphSubtitle2:
       "...und John schreibt insgesamt etwas mehr als Jane.",
+    pdfCustomizeTitle: "Lieber ein anderer Look?",
+    pdfCustomizeLink: "PDF anpassen: Stile, Schriften, Titelseite und mehr →",
     pdfAssembling:
       "Die Seiten werden zusammengesetzt … bei einem langen Chat kann das ein paar Sekunden dauern.",
     waitingForPDF:
@@ -4717,6 +4755,23 @@ export const messages = {
         bookHint: "Un capítulo por mes, con el mes en cada página.",
       },
       hideSystem: "Ocultar avisos de WhatsApp",
+      analysisPages: "Páginas de análisis: gráficos y datos curiosos",
+      analysis: {
+        title: "Vuestro chat en cifras",
+        perDay: "mensajes al día",
+        busiestDay: "día más activo",
+        busiestHour: "hora más activa",
+        perPerson: "Mensajes por persona",
+        timeline: "Mensajes a lo largo del tiempo",
+        timeOfDay: "Mensajes por hora del día",
+        weekdays: "Mensajes por día de la semana",
+        funFacts: "Datos curiosos",
+        words: "palabras",
+        wordsPerMessage: "palabras por mensaje",
+        uniqueWords: "palabras distintas",
+        longestMessage: "caracteres en el mensaje más largo",
+        others: "Otros",
+      },
       paper: "Papel",
       paperSize: {
         a4: "A4",
@@ -5294,6 +5349,8 @@ export const messages = {
       "El aviso legal y la política de privacidad que siguen son los originales alemanes jurídicamente vinculantes, tal y como exige la ley alemana. Las condiciones de uso están en inglés.",
     aboutPoints:
       "Somos un grupo de <b>amigos de la universidad</b>. Como hace poco todos dejamos WhatsApp y queríamos analizar cómo evolucionaron los chats a lo largo de los años. <br /> <br /> Como <b>estudiantes de Informática</b> son paranoicos y piensan que pueden hacer todo mejor, naturalmente queríamos construir una solución nosotros mismos, donde <b>ningún dato personal</b> se comparta o se haga público.",
+    pdfCustomizeTitle: "¿Quieres otro estilo?",
+    pdfCustomizeLink: "Personaliza este PDF: estilos, fuentes, portada y más →",
     pdfAssembling:
       "Juntando las páginas… en un chat largo puede tardar unos segundos.",
     waitingForPDF:
@@ -6941,6 +6998,23 @@ export const messages = {
         bookHint: "Um capítulo por mês, com o mês em cada página.",
       },
       hideSystem: "Ocultar avisos do WhatsApp",
+      analysisPages: "Páginas de análise: gráficos e curiosidades",
+      analysis: {
+        title: "A vossa conversa em números",
+        perDay: "mensagens por dia",
+        busiestDay: "dia mais ativo",
+        busiestHour: "hora mais ativa",
+        perPerson: "Mensagens por pessoa",
+        timeline: "Mensagens ao longo do tempo",
+        timeOfDay: "Mensagens por hora do dia",
+        weekdays: "Mensagens por dia da semana",
+        funFacts: "Curiosidades",
+        words: "palavras",
+        wordsPerMessage: "palavras por mensagem",
+        uniqueWords: "palavras diferentes",
+        longestMessage: "caracteres na mensagem mais longa",
+        others: "Outros",
+      },
       paper: "Papel",
       paperSize: {
         a4: "A4",
@@ -7259,6 +7333,9 @@ export const messages = {
       "John e Jane provavelmente escrevem mais às 4 da manhã. Tarde...",
     exampleGraphSubtitle2:
       "...e John escreve um pouco mais no geral do que Jane.",
+    pdfCustomizeTitle: "Queres outro visual?",
+    pdfCustomizeLink:
+      "Personaliza este PDF: estilos, tipos de letra, capa e mais →",
     pdfAssembling:
       "A juntar as páginas… numa conversa longa pode demorar alguns segundos.",
     waitingForPDF:
@@ -9171,6 +9248,23 @@ export const messages = {
         bookHint: "Un chapitre par mois, avec le mois sur chaque page.",
       },
       hideSystem: "Masquer les notifications WhatsApp",
+      analysisPages: "Pages d'analyse : graphiques et anecdotes",
+      analysis: {
+        title: "Votre discussion en chiffres",
+        perDay: "messages par jour",
+        busiestDay: "jour le plus actif",
+        busiestHour: "heure la plus active",
+        perPerson: "Messages par personne",
+        timeline: "Messages au fil du temps",
+        timeOfDay: "Messages selon l'heure",
+        weekdays: "Messages selon le jour",
+        funFacts: "Anecdotes",
+        words: "mots",
+        wordsPerMessage: "mots par message",
+        uniqueWords: "mots différents",
+        longestMessage: "caractères dans le message le plus long",
+        others: "Autres",
+      },
       paper: "Papier",
       paperSize: {
         a4: "A4",
@@ -9493,6 +9587,9 @@ export const messages = {
     exampleGraphSubtitle1:
       "John et Jane sont probablement ceux qui écrivent le plus à 4 heures du matin...",
     exampleGraphSubtitle2: "...et John écrit un peu plus que Jane.",
+    pdfCustomizeTitle: "Envie d'un autre style ?",
+    pdfCustomizeLink:
+      "Personnaliser ce PDF : styles, polices, couverture et plus →",
     pdfAssembling:
       "Assemblage des pages… pour une longue discussion, cela peut prendre quelques secondes.",
     waitingForPDF:
@@ -11411,6 +11508,23 @@ export const messages = {
         bookHint: "Un capitolo per mese, con il mese su ogni pagina.",
       },
       hideSystem: "Nascondi avvisi di WhatsApp",
+      analysisPages: "Pagine di analisi: grafici e curiosità",
+      analysis: {
+        title: "La vostra chat in numeri",
+        perDay: "messaggi al giorno",
+        busiestDay: "giorno più attivo",
+        busiestHour: "ora più attiva",
+        perPerson: "Messaggi per persona",
+        timeline: "Messaggi nel tempo",
+        timeOfDay: "Messaggi per ora del giorno",
+        weekdays: "Messaggi per giorno della settimana",
+        funFacts: "Curiosità",
+        words: "parole",
+        wordsPerMessage: "parole per messaggio",
+        uniqueWords: "parole diverse",
+        longestMessage: "caratteri nel messaggio più lungo",
+        others: "Altri",
+      },
       paper: "Carta",
       paperSize: {
         a4: "A4",
@@ -11725,6 +11839,9 @@ export const messages = {
       "John e Jane probabilmente scrivono di più alle 4 di mattina...",
     exampleGraphSubtitle2:
       "...e John scrive un po' di più in generale rispetto a Jane.",
+    pdfCustomizeTitle: "Vuoi un altro stile?",
+    pdfCustomizeLink:
+      "Personalizza questo PDF: stili, font, copertina e altro →",
     pdfAssembling:
       "Unione delle pagine… per una chat lunga può richiedere qualche secondo.",
     waitingForPDF:

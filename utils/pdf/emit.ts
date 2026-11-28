@@ -178,14 +178,26 @@ export class PdfWriter {
           0,
           this.geometry.widthMm,
           this.geometry.heightMm,
-          // the same alias for the same picture: embedded once, drawn often
-          `background-${chapter}`,
+          // the same alias for the same picture, whichever chapter shows
+          // it: embedded once, drawn often
+          this.backgroundAlias(image),
         );
       } catch (error) {
         // the colour underneath still makes a page
         console.error("Could not draw the page background", error);
       }
     }
+  }
+
+  private backgroundAliases = new Map<string, string>();
+
+  private backgroundAlias(image: string): string {
+    let alias = this.backgroundAliases.get(image);
+    if (!alias) {
+      alias = `background-${this.backgroundAliases.size}`;
+      this.backgroundAliases.set(image, alias);
+    }
+    return alias;
   }
 
   /** A page break in the middle of a table: the header comes along. */

@@ -229,6 +229,14 @@
                 />
                 {{ t("pdfTool.hideSystem") }}
               </label>
+              <label class="chat-pdf__check">
+                <input
+                  v-model="options.analysis"
+                  type="checkbox"
+                  name="chat-analysis"
+                />
+                {{ t("pdfTool.analysisPages") }}
+              </label>
 
               <div class="chat-pdf__field">
                 <span>{{ t("pdfTool.dateRange") }}</span>
@@ -410,7 +418,11 @@ import OneTimePurchaseReturn from "~/components/ChatVisualization/OneTimePurchas
 import { Chat } from "~/utils/transformChatData";
 import { useSubscriptionStore } from "~/stores/subscription";
 import { chatFingerprint } from "~/utils/chatFingerprint";
-import { chatDurationInDays } from "~/utils/utils";
+import {
+  chatCoverContent,
+  chatPdfLabels,
+  chatTitleFor,
+} from "~/utils/pdf/chatLabels";
 import { ONE_TIME_PRICE, formatPrice } from "~/utils/pricing";
 import { scrollToSettled } from "~/utils/scroll";
 import {
@@ -504,23 +516,7 @@ const mediaNotLoaded = computed(
 );
 
 /** The other person in a one-on-one chat, or the group's members. */
-const chatTitle = computed(() => {
-  const others = participants.value.filter((name) => name !== options.me);
-  if (others.length === 0) return options.me || "WhatsApp";
-  if (others.length === 1) return others[0];
-  const shown = others.slice(0, 3).join(", ");
-  return others.length > 3 ? `${shown} +${others.length - 3}` : shown;
-});
-
-function formatDay(date) {
-  try {
-    return new Intl.DateTimeFormat(locale.value, {
-      dateStyle: "medium",
-    }).format(new Date(date));
-  } catch {
-    return "";
-  }
-}
+const chatTitle = computed(() => chatTitleFor(participants.value, options.me));
 
 /**
  * A link printed in the PDF: clickable with campaign parameters, so visits
@@ -534,8 +530,6 @@ function pdfLink(path, campaign) {
     text: clean.replace(/^https?:\/\//, ""),
   };
 }
-
-const count = (value) => Number(value).toLocaleString(locale.value);
 
 /** The messages after the content filters: what every output shows. */
 const filteredMessages = computed(() =>
@@ -561,92 +555,39 @@ const chatDays = computed(() => {
 
 const geometry = computed(() => chatGeometry(options.paper));
 
-function coverContent(printed, total, design = options) {
-  const messages = filteredMessages.value;
-  const first = messages[0]?.date;
-  const last = messages.at(-1)?.date;
-  const people = participants.value;
-  const members =
-    people.length > 12
-      ? `${people.slice(0, 12).join(", ")} +${people.length - 12}`
-      : people.join(", ");
-  return {
-    brand: "WhatsAnalyze",
-    eyebrow: t("pdfTool.cover.eyebrow"),
-    title: design.cover?.title?.trim() || chatTitle.value,
-    dedication: design.cover?.dedication || "",
-    members,
-    period: `${formatDay(first)} – ${formatDay(last)}`,
-    stats: [
-      { value: count(total), label: t("pdfTool.cover.messages") },
-      {
-        value: count(chatDurationInDays(first, last)),
-        label: t("pdfTool.cover.days"),
-      },
-      { value: count(people.length), label: t("pdfTool.cover.people") },
-    ],
-    badge:
-      printed < total
-        ? t("pdfTool.cover.badge", { count: count(printed) })
-        : "",
-    footer: t("pdfTool.cover.footer"),
-    link: pdfLink("/tools/whatsapp-to-pdf", "cover"),
-  };
-}
+// The PDF's words, shared with the analyzer's download (utils/pdf/chatLabels).
+const labelContext = computed(() => ({
+  t,
+  locale: locale.value,
+  link: pdfLink,
+  price: formatPrice(ONE_TIME_PRICE, locale.value),
+}));
+const chatFacts = computed(() => ({
+  participants: participants.value,
+  title: chatTitle.value,
+  messages: filteredMessages.value,
+}));
 
-/** The last page of a preview: what is missing, and where to get it. */
-function outroContent(printed, total) {
-  if (printed >= total) return null;
-  const product = (key, path) => ({
-    title: t(`pdfTool.outro.${key}Title`),
-    text: t(`pdfTool.outro.${key}Text`),
-    link: pdfLink(path, "preview_outro"),
-  });
-  return {
-    title: t("pdfTool.outro.title"),
-    missing: count(total - printed),
-    missingLabel: t("pdfTool.outro.missingLabel"),
-    progress: t("pdfTool.outro.progress", {
-      shown: count(printed),
-      total: count(total),
-    }),
-    shownRatio: printed / total,
-    ctaTitle: t("pdfTool.outro.ctaTitle"),
-    ctaText: t("pdfTool.outro.ctaText", {
-      price: formatPrice(ONE_TIME_PRICE, locale.value),
-    }),
-    ctaLink: pdfLink("/tools/whatsapp-to-pdf", "preview_outro"),
-    moreTitle: t("pdfTool.outro.moreTitle"),
-    products: [
-      product("analysis", "/"),
-      product("ai", "/tools/ai-chat-analyzer"),
-      product("court", "/tools/court-evidence"),
-      product("wrapped", "/wrapped"),
-    ],
-    privacy: t("pdfTool.outro.privacy"),
-  };
+function coverContent(printed, total, design = options) {
+  return chatCoverContent(
+    labelContext.value,
+    chatFacts.value,
+    printed,
+    total,
+    design,
+  );
 }
 
 /** Labels for a document that prints `printed` of the chat's messages. */
 function labels(printed, total) {
-  const messages = filteredMessages.value;
-  return {
-    subtitle: t("pdfTool.subtitle", {
-      count: total.toLocaleString(locale.value),
-      from: formatDay(messages[0]?.date),
-      to: formatDay(messages.at(-1)?.date),
-    }),
-    notice:
-      printed < total
-        ? t("pdfTool.previewNotice", {
-            shown: printed.toLocaleString(locale.value),
-            total: total.toLocaleString(locale.value),
-          })
-        : "",
-    // what may be printed: the Pro cover only with full access
-    cover: coverContent(printed, total, printableOptions.value),
-    outro: outroContent(printed, total),
-  };
+  // what may be printed: the Pro cover only with full access
+  return chatPdfLabels(
+    labelContext.value,
+    chatFacts.value,
+    printableOptions.value,
+    printed,
+    total,
+  );
 }
 
 /** The design as the PDF may print it: Pro parts only with full access. */
@@ -785,6 +726,7 @@ const designSignature = computed(() => ({
   custom_cover: hasCustomCover(options),
   avatars: options.avatars.length > 0,
   hide_system: options.hideSystem,
+  analysis: options.analysis,
   date_range: !!(options.from || options.to),
 }));
 const PRO_OPTIONS = new Set([

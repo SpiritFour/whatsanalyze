@@ -190,11 +190,44 @@ test.describe("the PDF export", () => {
     const raw = pdf.toString("latin1");
 
     // Look for the attachment's own dimensions rather than just "an image":
-    // the charts are images too, so a dropped attachment would go unnoticed.
+    // emoji are images too, so a dropped attachment would go unnoticed.
     // Finding a 24x24 XObject means the zip entry was located, inflated,
     // decoded and placed — each a step that has lost attachments before.
     expect(raw).toMatch(/\/Width 24[\s/]/);
     expect(raw).toMatch(/\/Height 24[\s/]/);
+  });
+});
+
+test.describe("the analyzer's PDF", () => {
+  const pages = (pdf) =>
+    pdf.toString("latin1").match(/\/Type \/Page\b/g)?.length ?? 0;
+
+  test("is the WhatsApp to PDF tool's document, in its default look", async ({
+    page,
+  }) => {
+    test.setTimeout(180_000);
+    await page.goto("/?free=1");
+    const pdf = await exportPdf(page, emojiChat());
+    const raw = pdf.toString("latin1");
+    // The tool's cover, with its link back to the tool.
+    expect(raw).toMatch(/\/URI \([^)]*whatsapp-to-pdf[^)]*utm_campaign=cover/);
+    // Cover, the analysis page, then the chat (68 messages: two pages or more).
+    expect(pages(pdf)).toBeGreaterThanOrEqual(4);
+  });
+
+  test("leads to the tool with the chat, for another look", async ({
+    page,
+  }) => {
+    test.setTimeout(120_000);
+    await page.goto("/");
+    await analyzeChat(page, emojiChat());
+    await page.locator("[data-pdf-customize] a").click();
+    await expect(page).toHaveURL(/\/tools\/whatsapp-to-pdf/);
+    // No second upload: the chat came along.
+    await expect(page.locator("#chat-pdf-tool")).toBeVisible();
+    await expect(
+      page.locator(".chat-preview .cv-bubble").first(),
+    ).toBeVisible();
   });
 });
 
@@ -554,6 +587,18 @@ test.describe("the WhatsApp to PDF tool", () => {
     const circles = page.locator(".chat-preview .cv-header .cv-avatar");
     await expect(circles).toHaveCount(5);
     await expect(circles.last()).toHaveText("+2");
+  });
+
+  test("prints the analysis pages unless turned off", async ({ page }) => {
+    test.setTimeout(180_000);
+    await openTool(page);
+    const pageCount = (pdf) =>
+      pdf.toString("latin1").match(/\/Type \/Page\b/g)?.length ?? 0;
+    const withAnalysis = pageCount(await downloadPreview(page));
+
+    await openControls(page, "content");
+    await page.locator('input[name="chat-analysis"]').uncheck();
+    expect(pageCount(await downloadPreview(page))).toBe(withAnalysis - 1);
   });
 
   test("puts everyone on the cover as a circle, unless turned off", async ({

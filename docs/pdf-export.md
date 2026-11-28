@@ -1,7 +1,8 @@
 # PDF export
 
-Every PDF the site produces — the visual chat story, the court evidence
-transcript and the styled chat from the WhatsApp-to-PDF tool — is laid out as HTML/CSS by the browser, then transcribed into a
+Every PDF the site produces — the chat PDF (from the WhatsApp-to-PDF tool
+and, in its default look, from the analyzer) and the court evidence
+transcript — is laid out as HTML/CSS by the browser, then transcribed into a
 vector PDF. This replaced the imperative jsPDF coordinate maths that used to
 live in `utils/pdf.ts` and `utils/pdfCourt.ts`
 ([#391](https://github.com/SpiritFour/whatsanalyze/issues/391)).
@@ -39,10 +40,10 @@ engine writes the file — which removes the main argument for the print dialog.
 | `emit.ts` | Replays those instructions as vector PDF operators, and paginates. |
 | `emoji.ts` | Twemoji artwork: SVG for layout, rasterised PNG for the PDF. |
 | `fonts.ts` | Registers one TTF with both jsPDF and the layout document. |
-| `visual.ts`, `template.ts`, `theme.ts` | The visual export: cover, charts, fun facts, bubbles, outro. |
 | `court.ts` | The court transcript: audit record, roster, numbered transcript, annexes. |
-| `chatStyles.ts`, `chatView.ts`, `chatPdf.ts` | The WhatsApp-to-PDF tool: the chat as on a phone, in a chosen style. |
-| `index.ts` | Public entry points: `renderChatPdf`, `renderCourtPdf`, `renderChatViewPdf`. |
+| `chatStyles.ts`, `chatView.ts`, `chatPdf.ts` | The chat PDF: the chat as on a phone, in a chosen style. |
+| `chatPages.ts`, `chatAnalysis.ts`, `chatLabels.ts` | Its cover, outro and analysis pages, and their words (shared by the tool and the analyzer). |
+| `index.ts` | Public entry points: `renderCourtPdf`, `renderChatViewPdf`. |
 
 ### Pagination
 
@@ -128,6 +129,22 @@ line breaks. A run whose jsPDF width differs from the browser's by more than
 half a pixel gets character spacing that makes up the difference, inside a
 graphics save/restore. The layout frame turns kerning and ligatures off,
 because jsPDF draws neither.
+
+## One chat PDF, from the analyzer and the tool
+
+The analyzer used to make its own "visual story" PDF (charts as screenshots
+of its canvases, dark bubbles). It now downloads the tool's document in the
+default look (`PdfDownloadPopup.defaultView`), with a link to the tool for
+another; the chat goes along in memory (`useSharedChat`), so it is not
+uploaded twice.
+
+Both include the analysis pages after the cover (`chatAnalysis.ts`): headline
+numbers, messages per person, over time (a column per day, month, quarter or
+year, whichever fits), by hour and by weekday, and fun facts per person. They
+are HTML boxes, not chart images: the tool has no charts on its page to
+capture, and boxes come out as vector shapes in the design's colours. They
+count every message the document is about, also on a preview. The tool can
+turn them off (`options.analysis`).
 
 ## The WhatsApp-to-PDF tool: one view, three outputs
 
@@ -240,7 +257,7 @@ compressed.
 
 ## Testing
 
-`tests/e2e/pdf.spec.js` exports both documents. The visual export test uses a chat covering every emoji shape in the
+`tests/e2e/pdf.spec.js` exports both documents. The analyzer's export test uses a chat covering every emoji shape in the
 acceptance criteria and asserts on the produced bytes: an embedded font program
 plus text operators (the transcript is real, searchable text), image XObjects
 (the emoji artwork is there), a single same-origin request for the sprite, and

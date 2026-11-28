@@ -27,11 +27,27 @@
              example of the chart-style PDF would only mislead there. -->
         <img
           v-if="!court && !chatView"
-          src="/pdf-example.jpg"
+          :src="pdfExampleImage"
           alt=""
           class="mx-auto mt-6 w-full max-w-[560px] rounded-token border border-solid border-[rgba(29,29,31,0.08)]"
           loading="lazy"
         />
+        <!-- The analyzer downloads the chat PDF in its default look; the
+             tool is where it is designed. The chat goes along in memory. -->
+        <p
+          v-if="!court && !chatView"
+          class="m-0 mt-4 text-sm text-wa-ink-muted"
+          data-pdf-customize
+        >
+          {{ $t("pdfCustomizeTitle") }}
+          <NuxtLink
+            :to="localePath('/tools/whatsapp-to-pdf')"
+            class="font-semibold text-wa-accent no-underline hover:underline"
+            @click="handOverToTool"
+          >
+            {{ $t("pdfCustomizeLink") }}
+          </NuxtLink>
+        </p>
         <!-- The example image shows the visual style, so the court style gets its
          own summary instead of a misleading preview. -->
         <ul
@@ -341,6 +357,7 @@ import { toRaw } from "vue";
 import {
   analyticsChat,
   analyticsEcommerce,
+  analyticsTools,
   ITEM_FULL_PDF,
 } from "~/composables/useAnalytics";
 import { fetchOneTimeCheckoutUrl } from "~/utils/subscription";
@@ -354,9 +371,13 @@ import {
 } from "~/utils/pricing";
 import { chatFingerprint } from "~/utils/chatFingerprint";
 import { scrollToSettled } from "~/utils/scroll";
-import { renderChatPdf, renderChatViewPdf, renderCourtPdf } from "~/utils/pdf";
+import { renderChatViewPdf, renderCourtPdf } from "~/utils/pdf";
 import { isPremiumDesign } from "~/utils/pdf/chatDesign";
-import { loadImage } from "~/utils/utils";
+import { chatPdfLabels, chatTitleFor } from "~/utils/pdf/chatLabels";
+import { normalizeChatViewOptions } from "~/utils/pdf/chatStyles";
+import { filterChatMessages } from "~/utils/pdf/chatView";
+import { defaultPaper } from "~/utils/pdf/paperDefault";
+import pdfExampleImage from "~/assets/img/whatsapp-to-pdf-example.webp";
 import {
   formatExactTimestamp,
   formatFileSize,
@@ -375,15 +396,20 @@ export default {
     court: { type: Boolean, default: false },
     // the court transcript's paper: "a4" or "letter"
     courtPaper: { type: String, default: "a4" },
-    // the chat as on a phone, in a chosen style, instead of the visual story:
+    // the chat as on a phone, as designed in the WhatsApp to PDF tool:
     // { options, title, labels(printed, total), locale, assets } — see
-    // utils/pdf/chatPdf.ts
+    // utils/pdf/chatPdf.ts. Without it (the analyzer) the same PDF is made in
+    // its default look.
     chatView: { type: Object, default: null },
   },
   setup() {
     return {
       oneTimePurchase: useOneTimePurchase(),
       subscribeLink: useSubscribeLink(),
+      localePath: useLocalePath(),
+      sharedChat: useSharedChat(),
+      baseUrl: useRuntimeConfig().public.baseUrl,
+      pdfExampleImage,
     };
   },
   data() {
@@ -564,39 +590,29 @@ export default {
         const chat = toRaw(this.chat);
         const attachments = toRaw(this.attachments);
 
-        const blob = this.chatView
+        const view = this.court ? null : this.chatView || this.defaultView();
+        const blob = view
           ? await renderChatViewPdf({
               chat,
               attachments,
-              options: { ...this.chatView.options },
-              title: this.chatView.title,
-              labels: this.chatView.labels,
-              locale: this.chatView.locale,
-              assets: this.chatView.currentAssets
-                ? await this.chatView.currentAssets()
-                : this.chatView.assets,
+              options: { ...view.options },
+              title: view.title,
+              labels: view.labels,
+              locale: view.locale,
+              assets: view.currentAssets
+                ? await view.currentAssets()
+                : view.assets || {},
               isSample,
               onProgress,
             })
-          : this.court
-            ? await renderCourtPdf({
-                chat,
-                attachments,
-                isSample,
-                source: toRaw(this.source),
-                onProgress,
-                paper: this.courtPaper,
-              })
-            : await renderChatPdf({
-                chat,
-                attachments,
-                ego: this.ego,
-                isSample,
-                // the court transcript shows no charts, so only this one
-                // rasterises them
-                charts: await this.loadCharts(),
-                onProgress,
-              });
+          : await renderCourtPdf({
+              chat,
+              attachments,
+              isSample,
+              source: toRaw(this.source),
+              onProgress,
+              paper: this.courtPaper,
+            });
 
         if (this.isUnmounted) return;
         FileSaver.saveAs(blob, this.fileName);
@@ -619,23 +635,49 @@ export default {
       }
     },
     /**
-     * Snapshot the charts as images first: they are canvases on this page,
-     * and the exporter lays out in its own isolated frame.
+     * The analyzer's PDF: the WhatsApp to PDF tool's document in its default
+     * look, with the person chosen on the analyzer on the right.
      */
-    async loadCharts() {
-      return [
-        { name: "Chat Timeline", chart: await loadImage("#chat-timeline") },
-        {
-          name: "Time of Day",
-          chart: await loadImage("#messages-per-time-of-day"),
+    defaultView() {
+      const chat = toRaw(this.chat);
+      const locale = this.$i18n.locale;
+      const options = {
+        ...normalizeChatViewOptions(null, this.ego),
+        paper: defaultPaper(),
+      };
+      const participants = Object.keys(chat.personColorMap || {});
+      const facts = {
+        participants,
+        title: chatTitleFor(participants, this.ego),
+        messages: filterChatMessages(chat.chatObject, options, participants),
+      };
+      const context = {
+        t: (key, params) => this.$t(key, params),
+        locale,
+        link: (path, campaign) => {
+          const clean = `${this.baseUrl}${this.localePath(path)}`;
+          return {
+            url: `${clean}?utm_source=chat_pdf&utm_medium=pdf&utm_campaign=${campaign}`,
+            text: clean.replace(/^https?:\/\//, ""),
+          };
         },
-        {
-          name: "Messages per Person",
-          chart: await loadImage("#messages-per-person"),
-        },
-        { name: "Messages per Month", chart: await loadImage("#radar-month") },
-        { name: "Messages per Time", chart: await loadImage("#radar-day") },
-      ];
+        price: this.oneTimePrice,
+      };
+      return {
+        options,
+        title: facts.title,
+        locale,
+        labels: (printed, total) =>
+          chatPdfLabels(context, facts, options, printed, total),
+      };
+    },
+    /** The tool picks the chat up from memory: no second upload. */
+    handOverToTool() {
+      this.sharedChat = {
+        messages: toRaw(this.chat).chatObject,
+        attachments: toRaw(this.attachments),
+      };
+      analyticsTools.ctaClick("pdf_download", "pdf_tool");
     },
     downloadSample() {
       const query = (this.$route && this.$route.query) || {};

@@ -20,6 +20,11 @@ import {
   prepareChatMessages,
 } from "~/utils/pdf/chatView";
 import { charactersOf, fontsFor, loadChatFont } from "~/utils/pdf/chatFonts";
+import {
+  analyseChat,
+  chatAnalysisCss,
+  chatAnalysisHtml,
+} from "~/utils/pdf/chatAnalysis";
 import type { ChatViewLabels, ChatViewState } from "~/utils/pdf/chatView";
 import {
   COVER_CHAPTER,
@@ -125,7 +130,8 @@ export async function renderChatViewPdf(
     geometry,
     css:
       chatViewCss(options, "pdf") +
-      chatPagesCss(options, contentHeightPx(geometry)),
+      chatPagesCss(options, contentHeightPx(geometry)) +
+      chatAnalysisCss(options),
     fonts: font ? [font] : [],
     background: {
       value: style.page,
@@ -169,6 +175,21 @@ export async function renderChatViewPdf(
             options,
             builder.sprite,
           ),
+        ),
+      );
+    }
+
+    // The analyzer's numbers, from every message the document is about (a
+    // preview leaves messages out, not the overview).
+    if (documentLabels.analysis && options.analysis !== false) {
+      await builder.add(
+        chatAnalysisHtml(
+          analyseChat(all, participants),
+          documentLabels.analysis,
+          colors,
+          locale,
+          options,
+          builder.sprite,
         ),
       );
     }

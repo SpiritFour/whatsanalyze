@@ -180,7 +180,7 @@ export function chatOutroHtml(content: ChatOutroContent, logo: string): string {
 const BRAND = "#21a68d";
 
 /** An accent that stays readable on `background`, or its text colour. */
-function readableAccent(accent: string, background: string): string {
+export function readableAccent(accent: string, background: string): string {
   return contrast(accent, background) >= 3 ? accent : textOn(background);
 }
 

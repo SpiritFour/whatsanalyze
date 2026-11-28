@@ -362,6 +362,8 @@ export interface ChatViewOptions {
   to: string;
   /** Pro: participants with an uploaded profile picture (kept separately). */
   avatars: string[];
+  /** The analysis pages (charts and fun facts) after the cover. */
+  analysis: boolean;
 }
 
 export type PaperId = "a4" | "letter" | "a5";
@@ -399,6 +401,7 @@ export const DEFAULT_CHAT_VIEW_OPTIONS: Omit<ChatViewOptions, "me"> = {
   from: "",
   to: "",
   avatars: [],
+  analysis: true,
 };
 
 const FONTS = ["default", "serif", "rounded", "typewriter"];
@@ -437,6 +440,7 @@ export function normalizeChatViewOptions(
   options.book = !!options.book;
   options.bookCompact = !!options.bookCompact;
   options.hideSystem = !!options.hideSystem;
+  options.analysis = options.analysis !== false;
   options.avatars = Array.isArray(options.avatars)
     ? options.avatars.filter((name) => typeof name === "string")
     : [];

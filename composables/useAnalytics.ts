@@ -478,6 +478,7 @@ export const analyticsTools = {
       | "scroll_to_dropzone"
       | "hero_dropzone"
       | "sample"
+      | "pdf_tool"
       | "other",
   ) {
     trackEvent("tool_cta_click", {

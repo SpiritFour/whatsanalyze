@@ -5,6 +5,7 @@ import { block, emojiText, words, wrapWords } from "~/utils/pdf/html";
 import { TEXT_SIZES } from "~/utils/pdf/chatStyles";
 import type { ChatStyle, ChatViewOptions } from "~/utils/pdf/chatStyles";
 import type { ChatCoverContent, ChatOutroContent } from "~/utils/pdf/chatPages";
+import type { ChatAnalysisLabels } from "~/utils/pdf/chatAnalysis";
 import { getAttachment } from "~/utils/attachments";
 import type { AttachmentSource } from "~/utils/attachments";
 
@@ -49,6 +50,8 @@ export interface ChatViewLabels {
   cover?: ChatCoverContent;
   /** The PDF's last page, on a preview only. */
   outro?: ChatOutroContent | null;
+  /** The analysis pages after the cover (utils/pdf/chatAnalysis.ts). */
+  analysis?: ChatAnalysisLabels;
 }
 
 export interface ChatViewDocument {
