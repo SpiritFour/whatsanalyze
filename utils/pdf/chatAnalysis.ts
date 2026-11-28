@@ -509,6 +509,9 @@ export function chatAnalysisCss(options: ChatViewOptions): string {
   return `
 .ca-title, .ca-section, .ca-heading, .ca-facts, .ca-cards { font-family: ${chatFontFamily(options.font)}; color: ${text}; }
 .ca-title { font-size: 28px; font-weight: 700; padding-top: 6px; }
+.ca-title--shots { padding-bottom: 14px; }
+.ca-shot { display: flex; justify-content: center; padding-bottom: 14px; }
+.ca-shot img { display: block; }
 .ca-facts { display: flex; gap: 12px; padding: 16px 0 6px; }
 .ca-fact { flex: 1; background: ${card}; border-radius: 12px; padding: 12px 14px; }
 .ca-fact-value { font-size: 20px; font-weight: 700; color: ${textOn(card)}; }
@@ -539,4 +542,44 @@ export function chatAnalysisCss(options: ChatViewOptions): string {
 .ca-card-line { font-size: 11px; color: ${mutedOn(card)}; padding-top: 2px; }
 .ca-card-value { font-weight: 700; color: ${textOn(card)}; }
 `;
+}
+
+// ----- the analyzer's own cards ----------------------------------------------
+
+/** A card of the analysis page, captured as a picture (AnalyticsCapture.vue). */
+export interface AnalyticsImage {
+  dataUrl: string;
+  /** CSS px, as laid out on the page. */
+  width: number;
+  height: number;
+}
+
+/**
+ * The analysis page's cards as they look there: Chart.js charts, word and
+ * emoji clouds, highlights and fun facts. Each is as wide as the page allows
+ * and never taller than a page, so a tall one is scaled down rather than cut.
+ */
+export function chatAnalyticsImagesHtml(
+  images: AnalyticsImage[],
+  labels: ChatAnalysisLabels,
+  page: { width: number; height: number },
+): string {
+  if (!images.length) return "";
+  // room for the title above the first, and a little air
+  const maxHeight = page.height - 24;
+  let html = block(
+    ANALYSIS_CHAPTER,
+    `<div class="ca-title ca-title--shots">${words(labels.title)}</div>`,
+    { breakBefore: true, keepWithNext: true },
+  );
+  for (const image of images) {
+    const scale = Math.min(page.width / image.width, maxHeight / image.height);
+    const width = Math.floor(image.width * scale);
+    const height = Math.floor(image.height * scale);
+    html += block(
+      ANALYSIS_CHAPTER,
+      `<div class="ca-shot"><img src="${image.dataUrl}" data-format="JPEG" alt="" style="width:${width}px;height:${height}px"></div>`,
+    );
+  }
+  return html;
 }

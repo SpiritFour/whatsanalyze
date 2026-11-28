@@ -36,13 +36,21 @@ export function hasEmoji(text: string): boolean {
 export function loadEmojiSprite(): Promise<Map<string, string>> {
   if (spritePromise) return spritePromise;
 
-  spritePromise = fetch(SPRITE_URL)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Emoji sprite request failed: ${response.status}`);
-      }
-      return response.json();
-    })
+  const request = async () => {
+    const response = await fetch(SPRITE_URL);
+    if (!response.ok) {
+      throw new Error(`Emoji sprite request failed: ${response.status}`);
+    }
+    return response.json();
+  };
+  // Once more after a moment: a busy connection should not cost the emoji.
+  spritePromise = request()
+    .catch(
+      () =>
+        new Promise((resolve) => setTimeout(resolve, 600)).then(
+          request,
+        ) as Promise<Record<string, string>>,
+    )
     .then((sprite: Record<string, string>) => new Map(Object.entries(sprite)))
     .catch((error) => {
       // A missing sprite must not fail the export: without artwork the emoji

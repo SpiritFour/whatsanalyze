@@ -6,7 +6,7 @@ import {
   paintFrame,
 } from "~/utils/pdf/builder";
 import { parseColor } from "~/utils/pdf/emit";
-import { A4, contentHeightPx, mm } from "~/utils/pdf/page";
+import { A4, contentHeightPx, contentWidthPx, mm } from "~/utils/pdf/page";
 import type { PageGeometry } from "~/utils/pdf/page";
 import { PAPER_SIZES } from "~/utils/pdf/chatStyles";
 import type { ChatViewOptions, PaperId } from "~/utils/pdf/chatStyles";
@@ -24,7 +24,9 @@ import {
   analyseChat,
   chatAnalysisCss,
   chatAnalysisHtml,
+  chatAnalyticsImagesHtml,
 } from "~/utils/pdf/chatAnalysis";
+import type { AnalyticsImage } from "~/utils/pdf/chatAnalysis";
 import type { ChatViewLabels, ChatViewState } from "~/utils/pdf/chatView";
 import {
   COVER_CHAPTER,
@@ -86,6 +88,11 @@ export interface RenderChatViewPdfOptions {
     /** Profile pictures by participant. */
     avatars?: Record<string, string>;
   };
+  /**
+   * The analysis page's cards as pictures (components/pdf/AnalyticsCapture).
+   * Without them the PDF draws its own analysis pages instead.
+   */
+  analytics?: AnalyticsImage[];
 }
 
 export async function renderChatViewPdf(
@@ -101,6 +108,7 @@ export async function renderChatViewPdf(
     isSample = false,
     onProgress,
     assets = {},
+    analytics = [],
   } = input;
   // May fall back to the default font below; never mutates the caller's.
   let options = requested;
@@ -183,14 +191,19 @@ export async function renderChatViewPdf(
     // preview leaves messages out, not the overview).
     if (documentLabels.analysis && options.analysis !== false) {
       await builder.add(
-        chatAnalysisHtml(
-          analyseChat(all, participants),
-          documentLabels.analysis,
-          colors,
-          locale,
-          options,
-          builder.sprite,
-        ),
+        analytics.length
+          ? chatAnalyticsImagesHtml(analytics, documentLabels.analysis, {
+              width: contentWidthPx(geometry),
+              height: contentHeightPx(geometry),
+            })
+          : chatAnalysisHtml(
+              analyseChat(all, participants),
+              documentLabels.analysis,
+              colors,
+              locale,
+              options,
+              builder.sprite,
+            ),
       );
     }
 

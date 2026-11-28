@@ -347,6 +347,8 @@
         </div>
       </div>
     </div>
+    <!-- The analysis page's charts, drawn off screen for the PDF. -->
+    <PdfAnalyticsCapture v-if="!court && !chatView" ref="analyticsCapture" />
   </div>
 </template>
 
@@ -379,6 +381,8 @@ import { normalizeChatViewOptions } from "~/utils/pdf/chatStyles";
 import { filterChatMessages } from "~/utils/pdf/chatView";
 import { defaultPaper } from "~/utils/pdf/paperDefault";
 import pdfExampleImage from "~/assets/img/whatsapp-to-pdf-example.webp";
+import PdfAnalyticsCapture from "~/components/pdf/AnalyticsCapture.vue";
+import { resolveStyle } from "~/utils/pdf/chatDesign";
 import {
   formatExactTimestamp,
   formatFileSize,
@@ -386,6 +390,7 @@ import {
 } from "~/utils/courtEvidence";
 
 export default {
+  components: { PdfAnalyticsCapture },
   props: {
     chat: { type: Object, required: true },
     attachments: { type: Array, default: () => [] },
@@ -592,6 +597,14 @@ export default {
         const attachments = toRaw(this.attachments);
 
         const view = this.court ? null : this.chatView || this.defaultView();
+        // The analysis page's charts, as pictures, for the analysis pages.
+        const analytics =
+          view && view.options.analysis !== false
+            ? await (view.captureAnalytics
+                ? view.captureAnalytics(view.options)
+                : this.captureAnalytics(view.options))
+            : [];
+        if (this.isUnmounted) return;
         const blob = view
           ? await renderChatViewPdf({
               chat,
@@ -605,6 +618,7 @@ export default {
                 : view.assets || {},
               isSample,
               onProgress,
+              analytics,
             })
           : await renderCourtPdf({
               chat,
@@ -671,6 +685,15 @@ export default {
         labels: (printed, total) =>
           chatPdfLabels(context, facts, options, printed, total),
       };
+    },
+    /** The analyzer's charts for its own PDF; see AnalyticsCapture.vue. */
+    async captureAnalytics(options) {
+      return (
+        (await this.$refs.analyticsCapture?.capture({
+          chat: toRaw(this.chat),
+          background: resolveStyle(options).page,
+        })) ?? []
+      );
     },
     /** The tool picks the chat up from memory: no second upload. */
     handOverToTool() {

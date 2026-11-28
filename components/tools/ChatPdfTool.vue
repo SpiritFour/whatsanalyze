@@ -398,6 +398,7 @@
         </PdfDownloadPopup>
       </div>
     </div>
+    <PdfAnalyticsCapture ref="analyticsCapture" />
   </LandingSection>
 </template>
 
@@ -423,6 +424,7 @@ import CoverPreview from "~/components/tools/CoverPreview.vue";
 import PdfDownloadPopup from "~/components/ChatVisualization/PdfDownloadPopup.vue";
 import OneTimePurchaseReturn from "~/components/ChatVisualization/OneTimePurchaseReturn.vue";
 import { Chat } from "~/utils/transformChatData";
+import PdfAnalyticsCapture from "~/components/pdf/AnalyticsCapture.vue";
 import { useSubscriptionStore } from "~/stores/subscription";
 import { chatFingerprint } from "~/utils/chatFingerprint";
 import {
@@ -615,8 +617,29 @@ const printableAssets = computed(() =>
     : {},
 );
 
+/**
+ * The analysis page's charts as pictures, for the PDF's analysis pages: of
+ * the messages the PDF is about, so a date range or hidden notices count
+ * there too.
+ */
+const analyticsCapture = shallowRef(null);
+async function captureAnalytics(design) {
+  if (!chat.value || design.analysis === false) return [];
+  const filtered =
+    options.hideSystem || options.from || options.to
+      ? new Chat(toRaw(filteredMessages.value))
+      : toRaw(chat.value);
+  return (
+    (await analyticsCapture.value?.capture({
+      chat: filtered,
+      background: resolveStyle(design).page,
+    })) ?? []
+  );
+}
+
 const chatView = computed(() => ({
   options: snapshot(printableOptions.value),
+  captureAnalytics,
   title: chatTitle.value,
   labels,
   locale: locale.value,
@@ -1141,10 +1164,13 @@ async function printChat() {
   printing.value = true;
   printProgress.value = 0;
   try {
+    const design = snapshot(printableOptions.value);
+    const analytics = await captureAnalytics(design);
     const blob = await renderChatViewPdf({
       chat: toRaw(chat.value),
       attachments: toRaw(attachments.value),
-      options: snapshot(printableOptions.value),
+      options: design,
+      analytics,
       title: chatTitle.value,
       labels,
       locale: locale.value,

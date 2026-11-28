@@ -211,8 +211,12 @@ test.describe("the analyzer's PDF", () => {
     const raw = pdf.toString("latin1");
     // The tool's cover, with its link back to the tool.
     expect(raw).toMatch(/\/URI \([^)]*whatsapp-to-pdf[^)]*utm_campaign=cover/);
-    // Cover, the analysis page, then the chat (68 messages: two pages or more).
-    expect(pages(pdf)).toBeGreaterThanOrEqual(4);
+    // Cover, the analysis pages, then the chat (68 messages: two pages or
+    // more).
+    expect(pages(pdf)).toBeGreaterThanOrEqual(5);
+    // The analysis page's charts are in it, as pictures: JPEG images, which
+    // this chat has nowhere else.
+    expect(raw.match(/\/DCTDecode/g)?.length ?? 0).toBeGreaterThanOrEqual(5);
   });
 
   test("leads to the tool with the chat, for another look", async ({
@@ -637,7 +641,10 @@ test.describe("the WhatsApp to PDF tool", () => {
 
     await openControls(page, "content");
     await page.locator('input[name="chat-analysis"]').uncheck();
-    expect(pageCount(await downloadPreview(page))).toBe(withAnalysis - 1);
+    // The analysis page's cards take a few pages of their own.
+    expect(pageCount(await downloadPreview(page))).toBeLessThan(
+      withAnalysis - 1,
+    );
   });
 
   test("puts everyone on the cover as a circle, unless turned off", async ({
@@ -707,6 +714,12 @@ test.describe("the WhatsApp to PDF tool", () => {
     const jpegCount = (pdf) =>
       pdf.toString("latin1").match(/\/DCTDecode/g)?.length ?? 0;
 
+    /** The analysis pages' charts are JPEGs too: out of these counts. */
+    const withoutAnalysis = async (page) => {
+      await openControls(page, "content");
+      await page.locator('input[name="chat-analysis"]').uncheck();
+    };
+
     test("can be tried by anyone, but stay out of the free PDF", async ({
       page,
     }) => {
@@ -732,6 +745,7 @@ test.describe("the WhatsApp to PDF tool", () => {
       await expect(page.locator(".design__note")).toBeVisible();
       await expect(page.locator("[data-pro-download-note]")).toBeVisible();
 
+      await withoutAnalysis(page);
       const pdf = await downloadPreview(page);
       const streams = contentStreams(pdf);
       expect(streams).not.toContain("0.07 0.2 0.34 rg");
@@ -779,6 +793,7 @@ test.describe("the WhatsApp to PDF tool", () => {
         page.locator(".chat-preview .cv-header img.cv-avatar.is-photo"),
       ).toHaveCount(1);
 
+      await withoutAnalysis(page);
       const pdf = await downloadPreview(page);
       // The picture is a JPEG once cropped: none in the free PDF.
       expect(jpegCount(pdf)).toBe(0);
@@ -798,6 +813,7 @@ test.describe("the WhatsApp to PDF tool", () => {
       await expect(page.locator("[data-pro-download-note]")).toHaveCount(0);
 
       // Subscribers get the whole chat, from their own button.
+      await withoutAnalysis(page);
       const downloadPromise = page.waitForEvent("download");
       await page.getByRole("button", { name: "Download now" }).click();
       const pdf = await fs.readFile(await (await downloadPromise).path());

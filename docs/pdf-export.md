@@ -138,13 +138,21 @@ default look (`PdfDownloadPopup.defaultView`), with a link to the tool for
 another; the chat goes along in memory (`useSharedChat`), so it is not
 uploaded twice.
 
-Both include the analysis pages after the cover (`chatAnalysis.ts`): headline
-numbers, messages per person, over time (a column per day, month, quarter or
-year, whichever fits), by hour and by weekday, and fun facts per person. They
-are HTML boxes, not chart images: the tool has no charts on its page to
-capture, and boxes come out as vector shapes in the design's colours. They
-count every message the document is about, also on a preview. The tool can
-turn them off (`options.analysis`).
+Both include the analysis pages after the cover: the analyzer's own cards
+(Chart.js timeline, donut, hourly bars and radars, text stats, highlights,
+fun facts, word and emoji clouds). `components/pdf/AnalyticsCapture.vue`
+renders them off screen with the same components, only while a PDF is made,
+and captures them with html2canvas in one pass (the clouds through amCharts'
+own exporter, `utils/svgImage`), cut into one JPEG per row. That pass leaves
+everything outside the cards out of html2canvas's copy of the document; a
+capture per card copied the analyzer's whole chat each time and took a
+second per card on a long one. The tool captures the messages its filters
+keep. On the page the rows are scaled to the page width, never taller than a
+page, around them the page colour.
+
+If the capture yields nothing, `chatAnalysis.ts` draws its own analysis pages
+as vector boxes instead (headline numbers, per person, over time, by hour and
+weekday, fun facts). The tool can turn the analysis off (`options.analysis`).
 
 ## The WhatsApp-to-PDF tool: one view, three outputs
 
