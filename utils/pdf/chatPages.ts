@@ -83,6 +83,8 @@ export function chatCoverHtml(
   logo: string,
   photo: string | null = null,
   sprite: Map<string, string> = new Map(),
+  /** coverFacesHtml(), or nothing. */
+  faces = "",
 ): string {
   const stats = content.stats
     .map(
@@ -106,6 +108,7 @@ export function chatCoverHtml(
            : ""
        }
        <div class="cp-cover-main">
+         ${faces}
          <div class="cp-eyebrow">${words(content.eyebrow)}</div>
          <div class="cp-title" style="font-size:${titleSize(content.title)}px">${emojiText(content.title, sprite)}</div>
          ${
@@ -232,6 +235,15 @@ export function chatPagesCss(
 .cp-photo img { display: block; max-width: 100%; max-height: 320px; border-radius: 16px; }
 
 .cp-cover-main { padding-bottom: 40px; }
+.cp-faces { display: flex; flex-wrap: wrap; gap: 10px; padding-bottom: 22px; }
+.cp-face {
+  flex: none; width: 64px; height: 64px; border-radius: 32px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 24px; line-height: 1;
+}
+img.cp-face { display: block; }
+.cp-face.is-small { width: 48px; height: 48px; border-radius: 24px; font-size: 18px; }
+.cp-face-more { background: ${coverCard}; color: ${textOn(coverCard)}; }
 .cp-eyebrow { font-size: 14px; font-weight: 700; color: ${coverAccent}; text-transform: uppercase; }
 .cp-title { font-size: 40px; line-height: 1.15; font-weight: 700; padding-top: 10px; overflow-wrap: anywhere; }
 .cp-dedication { font-size: 19px; line-height: 1.45; padding-top: 12px; white-space: pre-wrap; overflow-wrap: anywhere; }

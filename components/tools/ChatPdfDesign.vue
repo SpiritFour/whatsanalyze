@@ -128,7 +128,11 @@
     </label>
 
     <!-- Profile pictures -->
-    <details class="design__group" :open="options.avatars.length > 0">
+    <details
+      ref="avatarsGroup"
+      class="design__group"
+      :open="options.avatars.length > 0"
+    >
       <summary>
         {{ t("pdfTool.design.avatarsTitle") }}
         <span class="pro-chip">{{ t("pdfTool.design.pro") }}</span>
@@ -225,6 +229,25 @@
           </button>
         </div>
       </div>
+      <label class="design__check">
+        <input
+          v-model="options.cover.faces"
+          type="checkbox"
+          name="chat-cover-faces"
+        />
+        <span>
+          {{ t("pdfTool.design.coverFaces") }}
+          <small>{{ t("pdfTool.design.coverFacesHint") }}</small>
+        </span>
+      </label>
+      <button
+        v-if="options.cover.faces"
+        type="button"
+        class="design__link design__link--block"
+        @click="openAvatars"
+      >
+        {{ t("pdfTool.design.coverFacesChoose") }}
+      </button>
       <div class="design__field">
         <span>{{ t("pdfTool.design.coverPhoto") }}</span>
         <div class="design__thumbs">
@@ -268,7 +291,7 @@
 </template>
 
 <script setup>
-import { computed, inject } from "vue";
+import { computed, inject, ref } from "vue";
 import {
   PATTERN_IDS,
   hasCustomCover,
@@ -310,6 +333,16 @@ function chooseBackground(choice) {
 function pickWallpaper(event) {
   const file = event.target.files?.[0];
   if (file) design.setWallpaperPhoto(file);
+}
+
+// The cover's circles show the profile pictures: take the buyer to them.
+const avatarsGroup = ref(null);
+function openAvatars() {
+  const group = avatarsGroup.value;
+  if (!group) return;
+  group.open = true;
+  group.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  group.querySelector("input[type=file]")?.focus({ preventScroll: true });
 }
 
 function pickAvatar(name, event) {
@@ -612,6 +645,12 @@ function pickCover(event) {
   font-size: 0.82rem;
   font-weight: 600;
   cursor: pointer;
+}
+
+.design__link--block {
+  display: block;
+  margin: 0.35rem 0 0.75rem 1.6rem;
+  text-align: left;
 }
 
 .design__thumbs {

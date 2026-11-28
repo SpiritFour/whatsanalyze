@@ -170,7 +170,8 @@ export function hasCustomCover(options: ChatViewOptions): boolean {
     cover?.title?.trim() ||
     cover?.dedication?.trim() ||
     cover?.color ||
-    cover?.photo
+    cover?.photo ||
+    cover?.faces === false
   );
 }
 
@@ -206,7 +207,13 @@ export function designForAccess(
     bookCompact: false,
     avatars: [],
     wallpaper: { kind: "none", pattern: "dots", dim: 0 },
-    cover: { title: "", dedication: "", color: null, photo: false },
+    cover: {
+      title: "",
+      dedication: "",
+      color: null,
+      photo: false,
+      faces: true,
+    },
   };
 }
 

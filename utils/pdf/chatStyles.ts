@@ -81,6 +81,8 @@ export interface CoverChoice {
   color: string | null;
   /** Whether a cover photo is set (the image itself is kept separately). */
   photo: boolean;
+  /** A circle for every participant: initials, or their profile picture. */
+  faces: boolean;
 }
 
 export const CHAT_STYLES: Record<PresetStyleId, ChatStyle> = {
@@ -388,7 +390,7 @@ export const DEFAULT_CHAT_VIEW_OPTIONS: Omit<ChatViewOptions, "me"> = {
     accent: "#7c3aed",
   },
   wallpaper: { kind: "none", pattern: "dots", dim: 0.55 },
-  cover: { title: "", dedication: "", color: null, photo: false },
+  cover: { title: "", dedication: "", color: null, photo: false, faces: true },
   font: "default",
   paper: "a4",
   book: false,

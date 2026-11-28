@@ -556,6 +556,27 @@ test.describe("the WhatsApp to PDF tool", () => {
     await expect(circles.last()).toHaveText("+2");
   });
 
+  test("puts everyone on the cover as a circle, unless turned off", async ({
+    page,
+  }) => {
+    await page.goto("/tools/whatsapp-to-pdf");
+    const people = ["Ana", "Ben Bell", "Cleo"];
+    await page
+      .locator("#dropzone-slot input[type=file]")
+      .setInputFiles(chatBy("trio.txt", [...people, "Ana"]));
+    await expect(page.locator("#chat-pdf-tool")).toBeVisible();
+
+    await page.locator('[data-tab="cover"]').click();
+    const faces = page.locator(".cover-preview .cp-face");
+    // Everyone, the person on the right included, by their initials.
+    await expect(faces).toHaveText(["A", "BB", "C"]);
+
+    await openControls(page, "design");
+    await page.locator("summary", { hasText: "Cover" }).click();
+    await page.locator('input[name="chat-cover-faces"]').uncheck();
+    await expect(faces).toHaveCount(0);
+  });
+
   test("draws emoji in names as artwork, like in messages", async ({
     page,
   }) => {
@@ -671,7 +692,7 @@ test.describe("the WhatsApp to PDF tool", () => {
         buffer: Buffer.from(PNG_BASE64, "base64"),
       });
       await expect(
-        page.locator(".chat-preview .cv-header img.cv-avatar-photo"),
+        page.locator(".chat-preview .cv-header img.cv-avatar.is-photo"),
       ).toHaveCount(1);
 
       const pdf = await downloadPreview(page);

@@ -15,6 +15,7 @@ import {
   countByMonth,
   chatViewCss,
   chatViewHtml,
+  coverFacesHtml,
   filterChatMessages,
   prepareChatMessages,
 } from "~/utils/pdf/chatView";
@@ -162,6 +163,12 @@ export async function renderChatViewPdf(
           logo,
           assets.coverPhoto ?? null,
           builder.sprite,
+          coverFacesHtml(
+            participants,
+            { colors, avatars: assets.avatars ?? {} },
+            options,
+            builder.sprite,
+          ),
         ),
       );
     }

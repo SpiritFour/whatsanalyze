@@ -423,6 +423,7 @@ import {
   chatPrintGlobalCss,
   chatViewCss,
   chatViewHtml,
+  coverFacesHtml,
   filterChatMessages,
   prepareChatMessages,
 } from "~/utils/pdf/chatView";
@@ -1040,6 +1041,12 @@ const coverPreviewHtml = computed(() => {
     logo,
     options.cover.photo ? coverPhotoUrl.value || null : null,
     emojiSprite.value,
+    coverFacesHtml(
+      participants.value,
+      { colors: chat.value.personColorMap || {}, avatars: shownAvatars.value },
+      options,
+      emojiSprite.value,
+    ),
   );
 });
 const coverPreviewCss = computed(() =>

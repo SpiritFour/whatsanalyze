@@ -287,32 +287,68 @@ function avatarsHtml(
   sprite: Map<string, string>,
 ): string {
   if (!people.length) return "";
-  const shown =
-    people.length > MAX_AVATARS ? people.slice(0, MAX_AVATARS - 1) : people;
-  const rest = people.length - shown.length;
   const group = people.length > 1 ? " is-group" : "";
+  const circles = faceCircles(people, doc, style, sprite, {
+    max: MAX_AVATARS,
+    className: `cv-avatar${group}`,
+    more: `cv-avatar is-group" style="background:${style.dayBackground};color:${style.dayText}`,
+  });
+  return `<div class="cv-avatars">${circles.join("")}</div>`;
+}
+
+/**
+ * One circle per person, at most `max` of them with the last one a "+N" for
+ * the rest: the uploaded picture where there is one, otherwise the initials
+ * on the participant's colour, in whichever text colour reads on it.
+ */
+function faceCircles(
+  people: string[],
+  faces: Pick<ChatViewDocument, "colors" | "avatars">,
+  style: ChatStyle,
+  sprite: Map<string, string>,
+  { max, className, more }: { max: number; className: string; more: string },
+): string[] {
+  const shown = people.length > max ? people.slice(0, max - 1) : people;
+  const rest = people.length - shown.length;
 
   const circles = shown.map((name) => {
-    const photo = doc.avatars?.[name];
+    const photo = faces.avatars?.[name];
     if (photo) {
-      return `<img class="cv-avatar cv-avatar-photo${group}" src="${photo}" data-format="JPEG" alt="">`;
+      return `<img class="${className} is-photo" src="${photo}" data-format="JPEG" alt="">`;
     }
     const color =
-      doc.colors[name] && /^#[0-9a-f]{6}$/i.test(doc.colors[name])
-        ? doc.colors[name]
+      faces.colors[name] && /^#[0-9a-f]{6}$/i.test(faces.colors[name])
+        ? faces.colors[name]
         : style.name;
-    return `<div class="cv-avatar${group}" style="background:${color};color:${textOn(
+    return `<div class="${className}" style="background:${color};color:${textOn(
       color,
     )}">${emojiText(initials(name), sprite)}</div>`;
   });
-  if (rest > 0) {
-    circles.push(
-      `<div class="cv-avatar is-group" style="background:${style.dayBackground};color:${style.dayText}">${words(
-        `+${rest}`,
-      )}</div>`,
-    );
-  }
-  return `<div class="cv-avatars">${circles.join("")}</div>`;
+  if (rest > 0) circles.push(`<div class="${more}">${words(`+${rest}`)}</div>`);
+  return circles;
+}
+
+/** At most this many circles on the cover; the rest become "+N". */
+const MAX_COVER_FACES = 8;
+
+/**
+ * The cover's row of circles: everyone in the chat, the person printing it
+ * included. Styled by chatPagesCss (utils/pdf/chatPages.ts).
+ */
+export function coverFacesHtml(
+  people: string[],
+  faces: Pick<ChatViewDocument, "colors" | "avatars">,
+  options: ChatViewOptions,
+  sprite: Map<string, string> = new Map(),
+): string {
+  if (!people.length || options.cover?.faces === false) return "";
+  const size = people.length > 4 ? " is-small" : "";
+  const circles = faceCircles(people, faces, resolveStyle(options), sprite, {
+    max: MAX_COVER_FACES,
+    className: `cp-face${size}`,
+    more: `cp-face cp-face-more${size}`,
+  });
+  return `<div class="cp-faces">${circles.join("")}</div>`;
 }
 
 /** The whole chat view: header, day separators, bubbles, preview notice. */
