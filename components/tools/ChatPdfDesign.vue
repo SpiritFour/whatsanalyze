@@ -31,6 +31,23 @@
       <summary>
         {{ t("pdfTool.design.backgroundTitle") }}
         <span class="pro-chip">{{ t("pdfTool.design.pro") }}</span>
+        <!-- What is inside, while it is closed -->
+        <span class="design__peek">
+          <span
+            class="design__peek-art design__peek-art--pattern"
+            :style="{
+              background: design.pageColor.value,
+              color: mutedOn(design.pageColor.value),
+            }"
+            aria-hidden="true"
+            >♥ ★ ● ≈</span
+          >
+          <span>{{
+            backgroundChoice === "none"
+              ? t("pdfTool.design.backgroundPeek")
+              : t(`pdfTool.design.pattern.${backgroundChoice}`)
+          }}</span>
+        </span>
       </summary>
       <div class="design__chips" role="radiogroup">
         <label
@@ -136,6 +153,25 @@
       <summary>
         {{ t("pdfTool.design.avatarsTitle") }}
         <span class="pro-chip">{{ t("pdfTool.design.pro") }}</span>
+        <span class="design__peek">
+          <span class="design__peek-faces" aria-hidden="true">
+            <template
+              v-for="name in design.participants.value.slice(0, 5)"
+              :key="name"
+            >
+              <img
+                v-if="design.avatarUrls.value[name]"
+                class="design__peek-face"
+                :src="design.avatarUrls.value[name]"
+                alt=""
+              />
+              <span v-else class="design__peek-face">{{
+                initialsOf(name)
+              }}</span>
+            </template>
+          </span>
+          <span>{{ t("pdfTool.design.avatarsPeek") }}</span>
+        </span>
       </summary>
       <p class="design__hint design__hint--top">
         {{ t("pdfTool.design.avatarsHint") }}
@@ -189,6 +225,21 @@
       <summary>
         {{ t("pdfTool.design.coverTitle") }}
         <span class="pro-chip">{{ t("pdfTool.design.pro") }}</span>
+        <span class="design__peek">
+          <span
+            class="design__peek-art design__peek-art--cover"
+            :style="{
+              background: options.cover.color || design.pageColor.value,
+              color: mutedOn(options.cover.color || design.pageColor.value),
+            }"
+            aria-hidden="true"
+          >
+            <span></span><span></span><span></span>
+          </span>
+          <span>{{
+            options.cover.title?.trim() || t("pdfTool.design.coverPeek")
+          }}</span>
+        </span>
       </summary>
       <label class="design__field">
         <span>{{ t("pdfTool.design.coverHeading") }}</span>
@@ -296,6 +347,7 @@ import {
   PATTERN_IDS,
   hasCustomCover,
   isPremiumDesign,
+  mutedOn,
 } from "~/utils/pdf/chatDesign";
 import { CHAT_FONT_IDS, chatFontFamily } from "~/utils/pdf/chatFonts";
 
@@ -403,6 +455,81 @@ function pickCover(event) {
 
 .design__note .pro-chip {
   margin: 0 0.35rem 0 0;
+}
+
+/* A closed section says what it holds: a small picture and a line. */
+.design__peek {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.35rem;
+  padding-left: 1.1rem;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: $wa-ink-faint;
+}
+
+details[open] .design__peek {
+  display: none;
+}
+
+.design__peek-art {
+  flex: none;
+  border: 1px solid rgba(29, 29, 31, 0.12);
+  border-radius: 6px;
+}
+
+.design__peek-art--pattern {
+  padding: 0.1rem 0.35rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+}
+
+.design__peek-art--cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 2px;
+  width: 22px;
+  height: 28px;
+  padding: 3px;
+
+  span {
+    display: block;
+    height: 2px;
+    border-radius: 1px;
+    background: currentColor;
+  }
+
+  span:first-child {
+    height: 3px;
+    width: 80%;
+  }
+}
+
+.design__peek-faces {
+  display: flex;
+  flex: none;
+}
+
+.design__peek-face {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-left: -5px;
+  border: 2px solid $wa-surface-white;
+  border-radius: 50%;
+  background: #d9dee2;
+  color: $wa-ink;
+  font-size: 0.55rem;
+  font-weight: 700;
+  object-fit: cover;
+
+  &:first-child {
+    margin-left: 0;
+  }
 }
 
 .design__group {

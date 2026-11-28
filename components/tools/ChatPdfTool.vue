@@ -21,16 +21,22 @@
         <form class="chat-pdf__controls" @submit.prevent>
           <!-- Whose phone the chat is seen on: the first choice, above the
                settings, because it changes every bubble. -->
-          <label class="chat-pdf__pov">
+          <label class="chat-pdf__pov" :title="t('pdfTool.pointOfViewHint')">
             <span class="chat-pdf__pov-label">{{
               t("pdfTool.pointOfView")
             }}</span>
-            <select v-model="options.me" name="chat-me">
+            <select
+              v-model="options.me"
+              name="chat-me"
+              aria-describedby="chat-pov-hint"
+            >
               <option v-for="name in participants" :key="name" :value="name">
                 {{ name }}
               </option>
             </select>
-            <small>{{ t("pdfTool.pointOfViewHint") }}</small>
+            <span id="chat-pov-hint" class="visually-hidden">{{
+              t("pdfTool.pointOfViewHint")
+            }}</span>
           </label>
 
           <!-- Three short panels instead of one long column, so the preview
@@ -261,20 +267,33 @@
                     :aria-label="t('pdfTool.dateTo')"
                   />
                 </div>
-                <button
-                  v-if="options.from || options.to"
-                  type="button"
-                  class="chat-pdf__link"
-                  @click="
-                    options.from = '';
-                    options.to = '';
-                  "
-                >
-                  {{ t("pdfTool.dateReset") }}
-                </button>
+                <!-- The usual choices without typing a date -->
+                <div v-if="dateRanges.length > 1" class="chat-pdf__ranges">
+                  <button
+                    v-for="range in dateRanges"
+                    :key="range.months"
+                    type="button"
+                    class="chat-pdf__range"
+                    :class="{ 'is-selected': isRange(range.months) }"
+                    :aria-pressed="isRange(range.months)"
+                    @click="setRange(range.months)"
+                  >
+                    {{ t(range.label) }}
+                  </button>
+                </div>
               </div>
             </fieldset>
           </div>
+
+          <button
+            v-if="isChanged"
+            type="button"
+            class="chat-pdf__reset"
+            data-reset-design
+            @click="resetDesign"
+          >
+            {{ t("pdfTool.resetDesign") }}
+          </button>
         </form>
 
         <div class="chat-pdf__preview">
@@ -522,6 +541,64 @@ const chatDays = computed(() => {
   };
   return { first: iso(messages[0]?.date), last: iso(messages.at(-1)?.date) };
 });
+
+// ----- reset: everything back to how a new chat starts, the point of view
+// kept. Photos chosen earlier stay stored, unused, until picked again.
+function startingOptions() {
+  return {
+    ...normalizeChatViewOptions(null, options.me),
+    paper: defaultPaper(),
+    showNames: participants.value.length > 2,
+  };
+}
+
+const isChanged = computed(
+  () =>
+    JSON.stringify({ ...options }) !==
+    JSON.stringify({ ...startingOptions(), ...pick(options, ["me"]) }),
+);
+
+function pick(source, keys) {
+  return Object.fromEntries(keys.map((key) => [key, source[key]]));
+}
+
+function resetDesign() {
+  Object.assign(options, startingOptions());
+}
+
+// ----- date shortcuts: the last month, three months or year of the chat
+const RANGES = [
+  { months: 0, label: "pdfTool.dateReset" },
+  { months: 1, label: "pdfTool.dateLastMonth" },
+  { months: 3, label: "pdfTool.dateLast3Months" },
+  { months: 12, label: "pdfTool.dateLastYear" },
+];
+// Only the ones shorter than the chat: "last year" of a five-day chat is
+// the whole chat, and would light up next to "All days".
+const dateRanges = computed(() =>
+  RANGES.filter(
+    (range) => !range.months || rangeStart(range.months) > chatDays.value.first,
+  ),
+);
+
+/** The first day of the last `months` of the chat, as YYYY-MM-DD. */
+function rangeStart(months) {
+  const last = chatDays.value.last;
+  if (!months || !last) return "";
+  const [y, m, d] = last.split("-").map(Number);
+  const start = new Date(y, m - 1 - months, d + 1);
+  const iso = `${start.getFullYear()}-${String(start.getMonth() + 1).padStart(2, "0")}-${String(start.getDate()).padStart(2, "0")}`;
+  return iso < chatDays.value.first ? chatDays.value.first : iso;
+}
+
+function setRange(months) {
+  options.from = rangeStart(months);
+  options.to = "";
+}
+
+function isRange(months) {
+  return options.to === "" && options.from === rangeStart(months);
+}
 
 const geometry = computed(() => chatGeometry(options.paper));
 
@@ -1368,6 +1445,13 @@ onBeforeUnmount(() => {
   }
 }
 
+/* Pro in the same corner of every tile, whatever the name's length */
+.style-option .pro-chip {
+  position: absolute;
+  top: 0.3rem;
+  right: 0.3rem;
+}
+
 .style-option__label {
   font-size: 0.8rem;
   font-weight: 600;
@@ -1421,7 +1505,7 @@ onBeforeUnmount(() => {
 
 .chat-pdf__check {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.5rem;
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
@@ -1429,42 +1513,82 @@ onBeforeUnmount(() => {
   cursor: pointer;
 
   input {
+    flex: none;
     width: 1.05rem;
     height: 1.05rem;
+    margin-top: 0.1rem;
     accent-color: $wa-accent;
   }
 }
 
 .chat-pdf__pov {
   display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  margin-bottom: 1rem;
-  padding: 0.85rem 1rem;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  padding: 0.5rem 0.75rem;
   border: 1px solid rgba(29, 29, 31, 0.08);
   border-radius: $wa-radius-md;
   background: $wa-surface-white;
 
   select {
-    width: 100%;
-    padding: 0.5rem 0.6rem;
+    flex: 1;
+    min-width: 0;
+    padding: 0.4rem 0.6rem;
     border: 1px solid rgba(29, 29, 31, 0.15);
     border-radius: 8px;
     background: #ffffff;
     font: inherit;
     color: $wa-ink;
   }
-
-  small {
-    font-size: 0.78rem;
-    color: $wa-ink-faint;
-  }
 }
 
 .chat-pdf__pov-label {
+  flex: none;
   font-size: 0.9rem;
   font-weight: 700;
   color: $wa-ink;
+}
+
+.chat-pdf__ranges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.15rem;
+}
+
+.chat-pdf__range {
+  padding: 0.25rem 0.65rem;
+  border: 1px solid $wa-border;
+  border-radius: 999px;
+  background: $wa-surface-white;
+  color: $wa-ink;
+  font-size: 0.8rem;
+  cursor: pointer;
+
+  &.is-selected {
+    border-color: $wa-accent;
+    background: $wa-accent;
+    color: #ffffff;
+  }
+}
+
+.chat-pdf__reset {
+  display: block;
+  width: 100%;
+  margin: 1rem 0 0;
+  text-align: left;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: $wa-ink-faint;
+  font-size: 0.82rem;
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:hover {
+    color: $wa-ink;
+  }
 }
 
 .chat-pdf__tabs {

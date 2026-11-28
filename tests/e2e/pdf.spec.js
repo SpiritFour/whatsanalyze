@@ -687,6 +687,45 @@ test.describe("the WhatsApp to PDF tool", () => {
     await expect(page.locator(".chat-preview")).not.toContainText("Anhang");
   });
 
+  test("picks the last month without typing a date", async ({ page }) => {
+    await openTool(page);
+    await openControls(page, "content");
+    // The emoji chat's last line is dated 6 Feb 2021: its last month starts
+    // the day after 6 Jan.
+    await page.getByRole("button", { name: "Last month" }).click();
+    await expect(page.locator('input[name="chat-from"]')).toHaveValue(
+      "2021-01-07",
+    );
+    await expect(
+      page.getByRole("button", { name: "Last month" }),
+    ).toHaveAttribute("aria-pressed", "true");
+    await page.getByRole("button", { name: "All days" }).click();
+    await expect(page.locator('input[name="chat-from"]')).toHaveValue("");
+  });
+
+  test("resets every setting with one click", async ({ page }) => {
+    await openTool(page);
+    const reset = page.locator("[data-reset-design]");
+    // Nothing to reset yet.
+    await expect(reset).toHaveCount(0);
+    await page.locator('label:has([data-style="iphone-dark"])').click();
+    await openControls(page, "content");
+    await page.locator('input[name="chat-analysis"]').uncheck();
+    await reset.click();
+    await expect(page.locator('input[name="chat-analysis"]')).toBeChecked();
+    await expect(page.locator('[data-style="iphone-light"]')).toBeChecked();
+    await expect(reset).toHaveCount(0);
+  });
+
+  test("says what the closed design sections hold", async ({ page }) => {
+    await openTool(page);
+    await openControls(page, "design");
+    await expect(page.locator(".design__peek")).toHaveCount(3);
+    await expect(
+      page.locator("summary", { hasText: "Cover" }).locator(".design__peek"),
+    ).toContainText("Title, dedication");
+  });
+
   test("asks for the point of view above the settings", async ({ page }) => {
     await openTool(page);
     // Visible whichever settings tab is open.
