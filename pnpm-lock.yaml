@@ -86,9 +86,6 @@ dependencies:
   promise-worker:
     specifier: ^2.0.1
     version: 2.0.1
-  push-dir:
-    specifier: ^0.4.1
-    version: 0.4.1
   sass:
     specifier: ^1.105.0
     version: 1.105.0
@@ -16119,14 +16116,6 @@ packages:
   /pure-rand@7.0.1:
     resolution: {integrity: sha512-oTUZM/NAZS8p7ANR3SHh30kXB+zK2r2BPcEn/awJIbOvq82WoMN4p62AWWp3Hhw50G0xMsw1mhIBLqHw64EcNQ==}
     dev: true
-
-  /push-dir@0.4.1:
-    resolution: {integrity: sha512-Nrrsly0c3kCfu725Jnif/s5adHpBwKCGWBttHVxTndF4iyGBSFtNi/pduFxHF5ks0kWtHcbA3XXP5MEra6iiCA==}
-    engines: {node: '>=0.12'}
-    hasBin: true
-    dependencies:
-      minimist: 1.2.8
-    dev: false
 
   /qified@0.10.1:
     resolution: {integrity: sha512-+Owyggi9IxT1ePKGafcI87ubSmxol6smwJ+RAHDQlx9+9cPwFWDiKFFCPuWhr9ignlGpZ9vDQLw67N4dcTVFEA==}
