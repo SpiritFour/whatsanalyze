@@ -15,6 +15,9 @@ export default {
   // stopwords, was never read by anything, and read like the component filtered
   // its own words while it showed whatever it was handed.
   props: {
+    // For the PDF's capture (components/pdf/AnalyticsCapture.vue): a coarser,
+    // faster layout. Placing every word pixel by pixel took seconds there.
+    quick: { type: Boolean, default: false },
     chartdata: new Chat(),
   },
   data() {
@@ -55,6 +58,11 @@ export default {
     this.series.labels.template.tooltipText = "[bold]{freq}[/] x {word}";
     this.series.labels.template.fontFamily = chartFontFamily;
     this.series.accuracy = 4;
+    if (this.quick) {
+      this.series.accuracy = 6;
+      this.series.step = 25;
+      this.series.maxCount = 100;
+    }
     this.series.minFontSize = 10;
     this.series.maxFontSize = 60;
     // The more often a word is used, the deeper the teal: the colour repeats
@@ -66,12 +74,6 @@ export default {
       max: am4core.color("#0f6b5a"),
       dataField: "value",
     });
-    // The cloud places its words over many frames. The PDF's capture
-    // (components/pdf/AnalyticsCapture.vue) waits for this, not for the first
-    // word, or a long chat's cloud comes out empty.
-    this.$refs.chartdiv.cloudArranged = new Promise((resolve) => {
-      this.series.events.once("arrangeended", () => resolve());
-    });
     this.updateGraph();
 
     // amCharts renders to SVG, which neither html2canvas nor a hand-rolled
@@ -82,10 +84,7 @@ export default {
       this.chart.exporting.getImage("png");
   },
   beforeUnmount: function () {
-    if (this.$refs.chartdiv) {
-      delete this.$refs.chartdiv.exportChartImage;
-      delete this.$refs.chartdiv.cloudArranged;
-    }
+    if (this.$refs.chartdiv) delete this.$refs.chartdiv.exportChartImage;
     // amCharts now loads on demand, so an unmount can beat the mount.
     this.chart?.dispose();
   },

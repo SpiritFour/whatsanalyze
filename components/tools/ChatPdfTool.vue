@@ -625,19 +625,33 @@ const printableAssets = computed(() =>
  * there too.
  */
 const analyticsCapture = shallowRef(null);
+const analyticsSource = computed(() => {
+  if (!chat.value) return null;
+  return options.hideSystem || options.from || options.to
+    ? markRaw(new Chat(toRaw(filteredMessages.value)))
+    : toRaw(chat.value);
+});
 async function captureAnalytics(design) {
-  if (!chat.value || design.analysis === false) return [];
-  const filtered =
-    options.hideSystem || options.from || options.to
-      ? new Chat(toRaw(filteredMessages.value))
-      : toRaw(chat.value);
+  if (!analyticsSource.value || design.analysis === false) return [];
   return (
     (await analyticsCapture.value?.capture({
-      chat: filtered,
+      chat: analyticsSource.value,
       background: resolveStyle(design).page,
     })) ?? []
   );
 }
+// Drawn ahead of time, a moment after the chat (or its filters) settle, so
+// a download or print only has to take the picture.
+let warmTimer = null;
+watch(
+  () => [analyticsSource.value, options.analysis],
+  ([source, wanted]) => {
+    clearTimeout(warmTimer);
+    if (!source || wanted === false) return;
+    warmTimer = setTimeout(() => analyticsCapture.value?.warm(source), 1500);
+  },
+);
+onBeforeUnmount(() => clearTimeout(warmTimer));
 
 const chatView = computed(() => ({
   options: snapshot(printableOptions.value),

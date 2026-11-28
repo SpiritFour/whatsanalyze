@@ -150,6 +150,16 @@ second per card on a long one. The tool captures the messages its filters
 keep. On the page the rows are scaled to the page width, never taller than a
 page, around them the page colour.
 
+Drawing the cards takes seconds, mostly the two clouds (amCharts places
+their words one by one), so it happens ahead of time: the tool warms the
+capture up 1.5 s after the chat or its filters change, the analyzer once its
+download section is near the screen (`warm()`). A click then only takes the
+picture. The analyzer does not draw its clouds a second time: it uses
+pictures of the ones on its page (`liveClouds`). A cloud counts as finished
+once its drawing has not changed for half a second; amCharts' own
+"arranged" event does not always come (an empty cloud never sends it), and
+waiting for it cost up to 20 s a PDF.
+
 If the capture yields nothing, `chatAnalysis.ts` draws its own analysis pages
 as vector boxes instead (headline numbers, per person, over time, by hour and
 weekday, fun facts). The tool can turn the analysis off (`options.analysis`).

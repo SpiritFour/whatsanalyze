@@ -74,13 +74,36 @@
 
         <div data-pdf-card="words">
           <ChartsCard :title="$t('wordCloud')">
-            <ChartsWordCloud :chartdata="chat" class="h-[320px]" />
+            <template v-if="liveClouds">
+              <img
+                v-if="cloudPictures.words"
+                class="pdf-capture__cloud h-[320px]"
+                :src="cloudPictures.words"
+                alt=""
+              />
+              <div v-else class="h-[320px]"></div>
+            </template>
+            <ChartsWordCloud v-else :chartdata="chat" quick class="h-[320px]" />
           </ChartsCard>
         </div>
 
         <div data-pdf-card="emojis">
           <ChartsCard title="Emojis">
-            <ChartsEmojiCloud :chartdata="chat" class="h-[260px]" />
+            <template v-if="liveClouds">
+              <img
+                v-if="cloudPictures.emojis"
+                class="pdf-capture__cloud h-[260px]"
+                :src="cloudPictures.emojis"
+                alt=""
+              />
+              <div v-else class="h-[260px]"></div>
+            </template>
+            <ChartsEmojiCloud
+              v-else
+              :chartdata="chat"
+              quick
+              class="h-[260px]"
+            />
           </ChartsCard>
         </div>
       </div>
@@ -105,15 +128,58 @@ import {
  * its own analysis pages (utils/pdf/chatAnalysis.ts).
  */
 
+const props = defineProps({
+  /**
+   * Where the page already shows the clouds, laid out ({ words, emojis }:
+   * selectors of their cards): the analyzer. Their pictures are used then,
+   * instead of laying the same clouds out again, which took seconds there.
+   */
+  liveClouds: { type: Object, default: null },
+});
+
 const chat = shallowRef(null);
+const cloudPictures = shallowRef({ words: "", emojis: "" });
+
+/** The page's own clouds, as amCharts exports them. */
+async function pictureLiveClouds() {
+  const live = (selector) =>
+    document.querySelector(`${selector} .${SVG_CHART_CLASS}`);
+  // A visitor can click before the page's own clouds have finished.
+  await settledClouds(() =>
+    [live(props.liveClouds.words), live(props.liveClouds.emojis)].filter(
+      Boolean,
+    ),
+  );
+  const picture = async (selector) => {
+    const cloud = live(selector);
+    try {
+      return (await cloud?.exportChartImage?.()) || "";
+    } catch {
+      return "";
+    }
+  };
+  cloudPictures.value = {
+    words: await picture(props.liveClouds.words),
+    emojis: await picture(props.liveClouds.emojis),
+  };
+  await nextTick();
+  await Promise.all(
+    Array.from(root.value?.querySelectorAll(".pdf-capture__cloud") || []).map(
+      (image) => image.decode?.().catch(() => undefined),
+    ),
+  );
+}
 const root = shallowRef(null);
 
 /** Chart.js animates for 500 ms (utils/chartTheme.js); give it room. */
 const CHART_SETTLE_MS = 900;
 /** amCharts loads on demand and lays its clouds out over many frames. */
-const CLOUD_TIMEOUT_MS = 20000;
-/** The animated theme fades the words in after they are placed. */
-const CLOUD_FADE_MS = 1200;
+const CLOUD_TIMEOUT_MS = 15000;
+/** A cloud whose drawing has not changed for this long is finished. */
+const STABLE_MS = 500;
+/** Its data arrives a moment after it mounts: never call it done sooner. */
+const MIN_CLOUD_MS = 600;
+const POLL_MS = 100;
 /** 2× on a ~1000 px wide layout: sharp on paper, a few hundred kB a row. */
 const SCALE = 2;
 const QUALITY = 0.85;
@@ -121,26 +187,42 @@ const QUALITY = 0.85;
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 /**
- * Until every cloud has placed its words and finished fading them in, or the
- * timeout: a cloud with no words at all never says it is done.
+ * Until every cloud has stopped changing. amCharts places a cloud's words
+ * over many frames and then fades them in; its "arranged" event does not
+ * always come (an empty cloud never says it is done), and waiting for it
+ * cost up to 20 s a PDF. A drawing that has not changed for STABLE_MS is
+ * finished, words or no words.
  */
 async function cloudsReady(element) {
+  await settledClouds(() =>
+    Array.from(element.querySelectorAll(`.${SVG_CHART_CLASS}`)),
+  );
+}
+
+/** Until the clouds `clouds()` returns have all stopped changing. */
+async function settledClouds(clouds) {
   const started = Date.now();
-  const clouds = () =>
-    Array.from(element.querySelectorAll(`.${SVG_CHART_CLASS}`));
-  // amCharts loads on demand: first the clouds have to exist.
-  while (
-    Date.now() - started < CLOUD_TIMEOUT_MS &&
-    !clouds().every((cloud) => cloud.cloudArranged)
-  ) {
-    await wait(100);
+  let last = "";
+  let stableSince = Date.now();
+  while (Date.now() - started < CLOUD_TIMEOUT_MS) {
+    const all = clouds();
+    // amCharts loads on demand: first the clouds have to exist.
+    const loaded = all.every(
+      (cloud) => typeof cloud.exportChartImage === "function",
+    );
+    const drawing = all.map((cloud) => cloud.innerHTML).join("|");
+    if (drawing !== last) {
+      last = drawing;
+      stableSince = Date.now();
+    } else if (
+      loaded &&
+      Date.now() - stableSince >= STABLE_MS &&
+      Date.now() - started >= MIN_CLOUD_MS
+    ) {
+      return;
+    }
+    await wait(POLL_MS);
   }
-  const left = Math.max(0, CLOUD_TIMEOUT_MS - (Date.now() - started));
-  await Promise.race([
-    Promise.all(clouds().map((cloud) => cloud.cloudArranged)),
-    wait(left),
-  ]);
-  await wait(CLOUD_FADE_MS);
 }
 
 /**
@@ -225,25 +307,51 @@ async function captureAll(element, background) {
   return images;
 }
 
-async function capture({ chat: source, background = "#ffffff" }) {
-  chat.value = markRaw(source);
-  try {
+/** The chat the cards were last drawn for, and when they finished. */
+let drawnFor = null;
+let settled = null;
+
+/** Draw the cards for `source` and wait until they have settled. */
+function draw(source) {
+  if (drawnFor === source && settled) return settled;
+  drawnFor = source;
+  chat.value = source ? markRaw(source) : null;
+  if (!source) return (settled = null);
+  const attempt = (settled = (async () => {
     await nextTick();
     await wait(CHART_SETTLE_MS);
-    const element = root.value;
-    if (!element) return [];
-    await cloudsReady(element);
+    if (root.value) await cloudsReady(root.value);
+  })());
+  return attempt;
+}
 
-    return await captureAll(element, background);
+/**
+ * Drawing the cards takes seconds (the clouds place their words one by
+ * one), so a page can start it ahead of time with `warm(chat)`: the tool
+ * when a chat is loaded, the analyzer when its download comes into view.
+ * capture() then only takes the picture. Without a warm-up it draws first.
+ */
+function warm(source) {
+  void draw(source);
+}
+
+async function capture({ chat: source, background = "#ffffff" }) {
+  const warmed = drawnFor === source;
+  try {
+    await draw(source);
+    if (!root.value) return [];
+    if (props.liveClouds) await pictureLiveClouds();
+    return await captureAll(root.value, background);
   } catch (error) {
     console.error("Could not capture the analysis for the PDF", error);
     return [];
   } finally {
-    chat.value = null;
+    // Not warmed up for: no reason to keep the charts around.
+    if (!warmed) draw(null);
   }
 }
 
-defineExpose({ capture });
+defineExpose({ capture, warm });
 </script>
 
 <style scoped>
@@ -268,6 +376,12 @@ defineExpose({ capture });
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+
+.pdf-capture__cloud {
+  display: block;
+  width: 100%;
+  object-fit: contain;
 }
 
 .pdf-capture__row {

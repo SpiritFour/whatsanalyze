@@ -348,7 +348,11 @@
       </div>
     </div>
     <!-- The analysis page's charts, drawn off screen for the PDF. -->
-    <PdfAnalyticsCapture v-if="!court && !chatView" ref="analyticsCapture" />
+    <PdfAnalyticsCapture
+      v-if="!court && !chatView"
+      ref="analyticsCapture"
+      :live-clouds="{ words: '#wordcloud', emojis: '#emojicloud' }"
+    />
   </div>
 </template>
 
@@ -522,9 +526,11 @@ export default {
   },
   mounted() {
     this.downloadPurchasedPdf();
+    this.warmAnalyticsWhenNear();
   },
   beforeUnmount() {
     this.isUnmounted = true;
+    this.warmObserver?.disconnect();
   },
   methods: {
     /**
@@ -685,6 +691,23 @@ export default {
         labels: (printed, total) =>
           chatPdfLabels(context, facts, options, printed, total),
       };
+    },
+    /**
+     * The analyzer draws its PDF's charts once the download section comes
+     * near the screen, so a click only has to take their picture.
+     */
+    warmAnalyticsWhenNear() {
+      if (this.court || this.chatView) return;
+      if (typeof IntersectionObserver === "undefined") return;
+      this.warmObserver = new IntersectionObserver(
+        (entries) => {
+          if (!entries.some((entry) => entry.isIntersecting)) return;
+          this.warmObserver.disconnect();
+          this.$refs.analyticsCapture?.warm(toRaw(this.chat));
+        },
+        { rootMargin: "600px 0px" },
+      );
+      this.warmObserver.observe(this.$el);
     },
     /** The analyzer's charts for its own PDF; see AnalyticsCapture.vue. */
     async captureAnalytics(options) {
