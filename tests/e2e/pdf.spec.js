@@ -219,6 +219,18 @@ test.describe("the analyzer's PDF", () => {
     expect(raw.match(/\/DCTDecode/g)?.length ?? 0).toBeGreaterThanOrEqual(5);
   });
 
+  test("prints like the tool does", async ({ page }) => {
+    test.setTimeout(180_000);
+    await page.goto("/?free=1");
+    await analyzeChat(page, emojiChat());
+    // The same buttons, in the same order, as in the tool.
+    await expect(page.locator("[data-pdf-print]")).toBeVisible();
+    await page.locator("[data-pdf-print]").click();
+    await expect(page.locator("#pdf-print-frame")).toHaveCount(1, {
+      timeout: 60_000,
+    });
+  });
+
   test("leads to the tool with the chat, for another look", async ({
     page,
   }) => {
@@ -405,20 +417,17 @@ test.describe("the WhatsApp to PDF tool", () => {
     test.setTimeout(180_000);
     await openTool(page);
 
-    const print = page.getByRole("button", { name: "Print", exact: true });
+    const print = page.locator("[data-pdf-print]");
     await print.click();
-    // While the PDF is made, the button says so with a spinner.
-    await expect(page.locator(".chat-pdf__print")).toHaveAttribute(
-      "aria-busy",
-      "true",
-    );
-    await expect(
-      page.locator(".chat-pdf__print .chat-pdf__spinner"),
-    ).toBeVisible();
+    // While the PDF is made, the button says so, the status line says which
+    // step it is on, and the other buttons wait.
+    await expect(print).toHaveAttribute("aria-busy", "true");
+    await expect(page.locator("[data-pdf-status]")).toBeVisible();
+    await expect(page.locator("[data-pdf-sample]")).toBeDisabled();
 
     // The same file the download gives, handed to the browser's PDF printing
     // in a frame: it looks the same from every browser.
-    const frame = page.locator("#cv-print-frame");
+    const frame = page.locator("#pdf-print-frame");
     await expect(frame).toHaveCount(1, { timeout: 60_000 });
     expect(await frame.getAttribute("src")).toMatch(/^blob:/);
     await expect(
@@ -437,7 +446,7 @@ test.describe("the WhatsApp to PDF tool", () => {
     }) => {
       test.setTimeout(180_000);
       await openTool(page);
-      const print = page.locator(".chat-pdf__print");
+      const print = page.locator("[data-pdf-print]");
       await print.click();
       // No blank tab while the PDF is made: the tap only prepares it.
       await expect(print).toHaveText("Open PDF to print", { timeout: 60_000 });

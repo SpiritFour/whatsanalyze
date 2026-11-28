@@ -360,44 +360,7 @@
           :source="source"
           :is-valid-subscription="isSubscriptionValid"
           :chat-view="chatView"
-        >
-          <!-- Printing is the second way out, under the download. -->
-          <template #after-download>
-            <div class="chat-pdf__actions">
-              <button
-                type="button"
-                class="chat-pdf__print"
-                :class="{ 'is-ready': printReady }"
-                :disabled="printing || isEmpty"
-                :aria-busy="printing ? 'true' : null"
-                @click="printChat"
-              >
-                <span
-                  v-if="printing"
-                  class="chat-pdf__spinner"
-                  aria-hidden="true"
-                ></span>
-                <template v-if="printing">
-                  {{ t("pdfTool.printPreparing") }}
-                  <span v-if="printProgress" class="chat-pdf__percent"
-                    >{{ printProgress }}%</span
-                  >
-                </template>
-                <template v-else-if="printReady">{{
-                  t("pdfTool.printOpen")
-                }}</template>
-                <template v-else>{{ t("pdfTool.print") }}</template>
-              </button>
-              <p class="chat-pdf__hint">
-                {{
-                  hasFullAccess
-                    ? t("pdfTool.printHintFull")
-                    : t("pdfTool.printHint")
-                }}
-              </p>
-            </div>
-          </template>
-        </PdfDownloadPopup>
+        />
       </div>
     </div>
     <PdfAnalyticsCapture ref="analyticsCapture" />
@@ -450,11 +413,7 @@ import {
   filterChatMessages,
   prepareChatMessages,
 } from "~/utils/pdf/chatView";
-import {
-  CHAT_SAMPLE_COUNT,
-  chatGeometry,
-  renderChatViewPdf,
-} from "~/utils/pdf/chatPdf";
+import { CHAT_SAMPLE_COUNT, chatGeometry } from "~/utils/pdf/chatPdf";
 import {
   coverPhoto as prepareCoverPhoto,
   avatarPhoto,
@@ -1043,18 +1002,12 @@ const coverPreviewCss = computed(() =>
 const coverPreviewColor = computed(() => coverColor(options));
 
 // ----- printing
-// The Print button prints the PDF itself: the same file the download gives,
-// so it looks the same from every browser. Printing the page through CSS is
-// at the mercy of each engine (Safari ignores named pages, paints no
-// wallpaper in the margins and adds its own URL and date there).
-//
-// The browser's own print (Ctrl+P, or Share > Print on a phone) still works:
-// only `#cv-print-root` is printed while `html.cv-printing` is set, see
-// chatPrintGlobalCss. That path prints the preview.
-const printing = shallowRef(false);
-const printProgress = shallowRef(0);
+// The Print button lives with the download (PdfDownloadPopup) and prints
+// the PDF itself. The browser's own print (Ctrl+P, or Share > Print on a
+// phone) still works: only `#cv-print-root` is printed while
+// `html.cv-printing` is set, see chatPrintGlobalCss. That path prints the
+// preview.
 let globalStyle = null;
-let printUrl = null;
 
 function updateGlobalStyle() {
   if (!globalStyle) return;
@@ -1088,138 +1041,6 @@ function afterPrint() {
   document.getElementById("cv-print-root")?.remove();
   document.documentElement.classList.remove("cv-printing");
 }
-
-/**
- * Safari (macOS and every browser on iOS) prints a PDF from a frame as a
- * blank page, if at all. There the PDF opens in a tab instead, where the
- * system viewer prints and shares it.
- */
-function opensPdfInTab() {
-  const ua = navigator.userAgent;
-  const iOS =
-    /iP(hone|ad|od)/.test(ua) ||
-    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-  const safari =
-    /Safari/.test(ua) && !/Chrome|Chromium|Edg|OPR|Firefox/.test(ua);
-  return iOS || safari;
-}
-
-function releasePrintUrl() {
-  document.getElementById("cv-print-frame")?.remove();
-  if (printUrl) URL.revokeObjectURL(printUrl);
-  printUrl = null;
-}
-
-function printInFrame(url) {
-  const frame = document.createElement("iframe");
-  frame.id = "cv-print-frame";
-  frame.setAttribute("aria-hidden", "true");
-  // Off screen rather than hidden: a hidden frame never loads the PDF viewer.
-  frame.style.cssText =
-    "position:fixed;right:0;bottom:0;width:0;height:0;border:0;";
-  frame.addEventListener("load", () => {
-    try {
-      frame.contentWindow.focus();
-      frame.contentWindow.print();
-    } catch {
-      window.open(url, "_blank");
-    }
-  });
-  frame.src = url;
-  document.body.appendChild(frame);
-}
-
-/**
- * iPhone and iPad: a tab opened before the PDF is made stays blank until
- * the visitor switches away and back, and one opened after it is made is
- * blocked, because the tap no longer counts. So there the first tap makes
- * the PDF and the second, a fresh tap, hands it over: to the share sheet
- * (which has Print) where it takes files, else to a new tab.
- */
-const printReady = shallowRef(false);
-let printBlob = null;
-
-function printFileName() {
-  return `WhatsApp Chat - ${String(chatTitle.value)
-    .replace(/[\\/:*?"<>|]/g, "-")
-    .trim()}.pdf`;
-}
-
-async function openReadyPdf() {
-  const file = new File([printBlob], printFileName(), {
-    type: "application/pdf",
-  });
-  const iOS =
-    /iP(hone|ad|od)/.test(navigator.userAgent) ||
-    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-  if (iOS && navigator.canShare?.({ files: [file] })) {
-    try {
-      await navigator.share({ files: [file] });
-      return;
-    } catch (error) {
-      // dismissed: nothing to do; anything else: open it instead
-      if (error?.name === "AbortError") return;
-    }
-  }
-  window.open(printUrl, "_blank");
-}
-
-/** A new design or chat makes the prepared PDF stale. */
-function forgetPreparedPdf() {
-  printReady.value = false;
-  printBlob = null;
-}
-
-async function printChat() {
-  if (printing.value || !chat.value) return;
-  if (printReady.value && printBlob) {
-    analyticsTools.pdfPrint(hasFullAccess.value);
-    await openReadyPdf();
-    return;
-  }
-  printing.value = true;
-  printProgress.value = 0;
-  try {
-    const design = snapshot(printableOptions.value);
-    const analytics = await captureAnalytics(design);
-    const blob = await renderChatViewPdf({
-      chat: toRaw(chat.value),
-      attachments: toRaw(attachments.value),
-      options: design,
-      analytics,
-      title: chatTitle.value,
-      labels,
-      locale: locale.value,
-      isSample: !hasFullAccess.value,
-      assets: await currentAssets(),
-      onProgress: (percent) => {
-        printProgress.value = Math.round(percent);
-      },
-    });
-    releasePrintUrl();
-    printUrl = URL.createObjectURL(blob);
-    if (opensPdfInTab()) {
-      printBlob = blob;
-      printReady.value = true;
-    } else {
-      analyticsTools.pdfPrint(hasFullAccess.value);
-      printInFrame(printUrl);
-    }
-  } catch (error) {
-    console.error("Could not print the chat", error);
-  } finally {
-    printing.value = false;
-  }
-}
-
-watch(
-  () => [
-    chat.value,
-    hasFullAccess.value,
-    JSON.stringify(printableOptions.value),
-  ],
-  forgetPreparedPdf,
-);
 
 function loadStoredCover() {
   try {
@@ -1427,7 +1248,6 @@ onBeforeUnmount(() => {
   window.removeEventListener("afterprint", afterPrint);
   globalStyle?.remove();
   afterPrint();
-  releasePrintUrl();
   clearTimeout(wallpaperTimer);
   clearTimeout(designTimer);
   for (const image of chatImages.value) URL.revokeObjectURL(image.url);
@@ -1645,78 +1465,6 @@ onBeforeUnmount(() => {
   font-size: 0.9rem;
   font-weight: 700;
   color: $wa-ink;
-}
-
-.chat-pdf__actions {
-  margin-top: 1rem;
-  text-align: center;
-}
-
-.chat-pdf__print {
-  width: auto;
-  min-width: 12rem;
-  padding: 0.7rem 1rem;
-  border: 1px solid $wa-accent;
-  border-radius: 999px;
-  background: $wa-surface-white;
-  color: $wa-accent;
-  font-weight: 700;
-  cursor: pointer;
-
-  &:disabled {
-    opacity: 0.6;
-    cursor: progress;
-  }
-
-  &[aria-busy="true"] {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    opacity: 1;
-  }
-}
-
-.chat-pdf__spinner {
-  width: 1rem;
-  height: 1rem;
-  flex-shrink: 0;
-  border: 2px solid rgba(29, 29, 31, 0.15);
-  border-top-color: $wa-accent;
-  border-radius: 50%;
-  animation: chat-pdf-spin 0.8s linear infinite;
-}
-
-.chat-pdf__percent {
-  font-variant-numeric: tabular-nums;
-}
-
-@keyframes chat-pdf-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .chat-pdf__spinner {
-    animation-duration: 2.4s;
-  }
-}
-
-.chat-pdf__print.is-ready {
-  background: $wa-accent;
-  color: #ffffff;
-}
-
-.chat-pdf__actions .chat-pdf__hint {
-  max-width: 28rem;
-  margin-inline: auto;
-}
-
-.chat-pdf__hint {
-  margin: 0.5rem 0 0;
-  font-size: 0.8rem;
-  color: $wa-ink-faint;
 }
 
 .chat-pdf__tabs {

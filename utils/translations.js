@@ -138,9 +138,8 @@ export const messages = {
       printOpen: "Open PDF to print",
       print: "Print",
       printHint:
-        "Prints the free preview: the first 100 messages, exactly as in the PDF. On iPhone and iPad it opens the PDF to print or share.",
-      printHintFull:
-        "Prints the whole chat, exactly as in the PDF. On iPhone and iPad it opens the PDF to print or share.",
+        "Prints the free preview (first 100 messages), exactly as in the PDF.",
+      printHintFull: "Prints the whole chat, exactly as in the PDF.",
       previewLabel: "Preview · first {count} messages",
       subtitle: "{count} messages · {from} – {to}",
       previewNotice:
@@ -838,6 +837,11 @@ export const messages = {
       "...and John writes a little more overall than Jane.",
     pdfCustomizeTitle: "Want a different look?",
     pdfCustomizeLink: "Customise this PDF: styles, fonts, cover and more →",
+    pdfMadeLocally: "Made on this device: your chat is never uploaded.",
+    pdfStatusCharts: "Drawing your charts…",
+    pdfStatusPreparing: "Getting your messages and photos ready…",
+    pdfStatusPages: "Laying out the pages… {percent}%",
+    pdfPrintReadyHint: "Your PDF is ready: tap again to print or share it.",
     pdfAssembling:
       "Putting the pages together… this can take a few seconds for a long chat.",
     waitingForPDF:
@@ -2400,9 +2404,8 @@ export const messages = {
       printOpen: "PDF zum Drucken öffnen",
       print: "Drucken",
       printHint:
-        "Druckt die kostenlose Vorschau: die ersten 100 Nachrichten, genau wie im PDF. Auf iPhone und iPad öffnet sich das PDF zum Drucken oder Teilen.",
-      printHintFull:
-        "Druckt den ganzen Chat, genau wie im PDF. Auf iPhone und iPad öffnet sich das PDF zum Drucken oder Teilen.",
+        "Druckt die kostenlose Vorschau (erste 100 Nachrichten), genau wie im PDF.",
+      printHintFull: "Druckt den ganzen Chat, genau wie im PDF.",
       previewLabel: "Vorschau · erste {count} Nachrichten",
       subtitle: "{count} Nachrichten · {from} – {to}",
       previewNotice:
@@ -3109,6 +3112,13 @@ export const messages = {
       "...und John schreibt insgesamt etwas mehr als Jane.",
     pdfCustomizeTitle: "Lieber ein anderer Look?",
     pdfCustomizeLink: "PDF anpassen: Stile, Schriften, Titelseite und mehr →",
+    pdfMadeLocally:
+      "Auf diesem Gerät erstellt: dein Chat wird nie hochgeladen.",
+    pdfStatusCharts: "Deine Diagramme werden gezeichnet …",
+    pdfStatusPreparing: "Nachrichten und Fotos werden vorbereitet …",
+    pdfStatusPages: "Seiten werden gesetzt … {percent} %",
+    pdfPrintReadyHint:
+      "Dein PDF ist fertig: tippe noch einmal, um es zu drucken oder zu teilen.",
     pdfAssembling:
       "Die Seiten werden zusammengesetzt … bei einem langen Chat kann das ein paar Sekunden dauern.",
     waitingForPDF:
@@ -4662,9 +4672,8 @@ export const messages = {
       printOpen: "Abrir PDF para imprimir",
       print: "Imprimir",
       printHint:
-        "Imprime la vista previa gratuita: los primeros 100 mensajes, igual que en el PDF. En iPhone y iPad se abre el PDF para imprimirlo o compartirlo.",
-      printHintFull:
-        "Imprime todo el chat, igual que en el PDF. En iPhone y iPad se abre el PDF para imprimirlo o compartirlo.",
+        "Imprime la vista previa gratuita (primeros 100 mensajes), igual que en el PDF.",
+      printHintFull: "Imprime todo el chat, igual que en el PDF.",
       previewLabel: "Vista previa · primeros {count} mensajes",
       subtitle: "{count} mensajes · {from} – {to}",
       previewNotice:
@@ -5360,6 +5369,12 @@ export const messages = {
       "Somos un grupo de <b>amigos de la universidad</b>. Como hace poco todos dejamos WhatsApp y queríamos analizar cómo evolucionaron los chats a lo largo de los años. <br /> <br /> Como <b>estudiantes de Informática</b> son paranoicos y piensan que pueden hacer todo mejor, naturalmente queríamos construir una solución nosotros mismos, donde <b>ningún dato personal</b> se comparta o se haga público.",
     pdfCustomizeTitle: "¿Quieres otro estilo?",
     pdfCustomizeLink: "Personaliza este PDF: estilos, fuentes, portada y más →",
+    pdfMadeLocally: "Creado en este dispositivo: tu chat nunca se sube.",
+    pdfStatusCharts: "Dibujando tus gráficos…",
+    pdfStatusPreparing: "Preparando tus mensajes y fotos…",
+    pdfStatusPages: "Maquetando las páginas… {percent} %",
+    pdfPrintReadyHint:
+      "Tu PDF está listo: toca de nuevo para imprimirlo o compartirlo.",
     pdfAssembling:
       "Juntando las páginas… en un chat largo puede tardar unos segundos.",
     waitingForPDF:
@@ -6908,9 +6923,8 @@ export const messages = {
       printOpen: "Abrir o PDF para imprimir",
       print: "Imprimir",
       printHint:
-        "Imprime a pré-visualização gratuita: as primeiras 100 mensagens, tal como no PDF. No iPhone e iPad abre o PDF para imprimir ou partilhar.",
-      printHintFull:
-        "Imprime a conversa inteira, tal como no PDF. No iPhone e iPad abre o PDF para imprimir ou partilhar.",
+        "Imprime a pré-visualização gratuita (primeiras 100 mensagens), tal como no PDF.",
+      printHintFull: "Imprime a conversa inteira, tal como no PDF.",
       previewLabel: "Pré-visualização · primeiras {count} mensagens",
       subtitle: "{count} mensagens · {from} – {to}",
       previewNotice:
@@ -7348,6 +7362,13 @@ export const messages = {
     pdfCustomizeTitle: "Queres outro visual?",
     pdfCustomizeLink:
       "Personaliza este PDF: estilos, tipos de letra, capa e mais →",
+    pdfMadeLocally:
+      "Criado neste dispositivo: a tua conversa nunca é carregada.",
+    pdfStatusCharts: "A desenhar os teus gráficos…",
+    pdfStatusPreparing: "A preparar as tuas mensagens e fotos…",
+    pdfStatusPages: "A paginar… {percent} %",
+    pdfPrintReadyHint:
+      "O teu PDF está pronto: toca outra vez para o imprimir ou partilhar.",
     pdfAssembling:
       "A juntar as páginas… numa conversa longa pode demorar alguns segundos.",
     waitingForPDF:
@@ -9160,9 +9181,9 @@ export const messages = {
       printOpen: "Ouvrir le PDF pour imprimer",
       print: "Imprimer",
       printHint:
-        "Imprime l'aperçu gratuit : les 100 premiers messages, exactement comme dans le PDF. Sur iPhone et iPad, le PDF s'ouvre pour être imprimé ou partagé.",
+        "Imprime l'aperçu gratuit (100 premiers messages), exactement comme dans le PDF.",
       printHintFull:
-        "Imprime toute la discussion, exactement comme dans le PDF. Sur iPhone et iPad, le PDF s'ouvre pour être imprimé ou partagé.",
+        "Imprime toute la discussion, exactement comme dans le PDF.",
       previewLabel: "Aperçu · {count} premiers messages",
       subtitle: "{count} messages · {from} – {to}",
       previewNotice:
@@ -9605,6 +9626,13 @@ export const messages = {
     pdfCustomizeTitle: "Envie d'un autre style ?",
     pdfCustomizeLink:
       "Personnaliser ce PDF : styles, polices, couverture et plus →",
+    pdfMadeLocally:
+      "Créé sur cet appareil : votre discussion n'est jamais envoyée.",
+    pdfStatusCharts: "Dessin de vos graphiques…",
+    pdfStatusPreparing: "Préparation de vos messages et photos…",
+    pdfStatusPages: "Mise en page… {percent} %",
+    pdfPrintReadyHint:
+      "Votre PDF est prêt : touchez à nouveau pour l'imprimer ou le partager.",
     pdfAssembling:
       "Assemblage des pages… pour une longue discussion, cela peut prendre quelques secondes.",
     waitingForPDF:
@@ -11424,9 +11452,8 @@ export const messages = {
       printOpen: "Apri il PDF da stampare",
       print: "Stampa",
       printHint:
-        "Stampa l'anteprima gratuita: i primi 100 messaggi, esattamente come nel PDF. Su iPhone e iPad si apre il PDF da stampare o condividere.",
-      printHintFull:
-        "Stampa tutta la chat, esattamente come nel PDF. Su iPhone e iPad si apre il PDF da stampare o condividere.",
+        "Stampa l'anteprima gratuita (primi 100 messaggi), esattamente come nel PDF.",
+      printHintFull: "Stampa tutta la chat, esattamente come nel PDF.",
       previewLabel: "Anteprima · primi {count} messaggi",
       subtitle: "{count} messaggi · {from} – {to}",
       previewNotice:
@@ -11860,6 +11887,13 @@ export const messages = {
     pdfCustomizeTitle: "Vuoi un altro stile?",
     pdfCustomizeLink:
       "Personalizza questo PDF: stili, font, copertina e altro →",
+    pdfMadeLocally:
+      "Creato su questo dispositivo: la tua chat non viene mai caricata.",
+    pdfStatusCharts: "Disegno dei tuoi grafici…",
+    pdfStatusPreparing: "Preparazione di messaggi e foto…",
+    pdfStatusPages: "Impaginazione… {percent} %",
+    pdfPrintReadyHint:
+      "Il tuo PDF è pronto: tocca di nuovo per stamparlo o condividerlo.",
     pdfAssembling:
       "Unione delle pagine… per una chat lunga può richiedere qualche secondo.",
     waitingForPDF:

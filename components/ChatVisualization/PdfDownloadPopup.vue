@@ -112,30 +112,30 @@
           {{ $t("pdfMediaMissing", { missing: media.total - media.found }) }}
         </p>
 
-        <!-- Building the PDF takes a while on a long chat, so say what is
-         happening: first while the media is still being read, then with a
-         real percentage once the pages start rendering. -->
-        <div v-show="isLoading" class="mx-auto mt-6 max-w-[420px]">
+        <!-- Building the PDF takes a while on a long chat: say which step it
+             is on, with a real percentage while the pages are laid out. -->
+        <div
+          v-show="isLoading"
+          class="mx-auto mt-6 max-w-[420px]"
+          role="status"
+          aria-live="polite"
+          data-pdf-status
+        >
           <p
-            class="m-0 text-sm text-wa-ink-muted"
-            v-html="$t('waitingForPDF')"
-          ></p>
-
-          <p
-            v-show="!progress"
-            class="m-0 mt-2 flex items-center justify-center gap-2 text-sm text-wa-ink-faint"
+            class="m-0 flex items-center justify-center gap-2 text-sm text-wa-ink-muted"
           >
             <span
-              class="block h-4 w-4 animate-spin rounded-full border-2 border-solid border-[rgba(29,29,31,0.15)] border-t-wa-accent"
+              v-if="!progress || progress >= 100"
+              class="block h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-solid border-[rgba(29,29,31,0.15)] border-t-wa-accent"
+              aria-hidden="true"
             ></span>
-            <span v-html="$t('loadingMedia')"></span>
+            <span>{{ statusText }}</span>
           </p>
-
           <div
             v-show="progress"
             class="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-[rgba(29,29,31,0.08)]"
             role="progressbar"
-            :aria-valuenow="progress"
+            :aria-valuenow="Math.round(progress)"
             aria-valuemin="0"
             aria-valuemax="100"
           >
@@ -144,14 +144,8 @@
               :style="{ width: progress + '%' }"
             ></div>
           </div>
-          <!-- The last step takes a few seconds on a long chat: say what is
-               happening, so it does not look stuck. -->
-          <p
-            v-if="progress >= 100"
-            class="m-0 mt-2 text-sm text-wa-ink-faint"
-            role="status"
-          >
-            {{ $t("pdfAssembling") }}
+          <p class="m-0 mt-2 text-xs text-wa-ink-faint">
+            {{ $t("pdfMadeLocally") }}
           </p>
         </div>
 
@@ -163,7 +157,9 @@
                 v-if="hasFullAccess"
                 size="lg"
                 v-bind="activatorProps"
-                :loading="isLoading"
+                :loading="job === 'full'"
+                :disabled="isLoading"
+                data-pdf-download
                 @click="downloadFull"
               >
                 <span v-html="$t('downloadNow')"></span>
@@ -208,7 +204,8 @@
                   size="lg"
                   class="mt-6"
                   block
-                  :loading="isLoading"
+                  :loading="job === 'full'"
+                  :disabled="isLoading"
                   @click="downloadFull"
                 >
                   <span v-html="$t('downloadNow')"></span>
@@ -260,7 +257,47 @@
             </v-card>
           </v-dialog>
         </div>
-        <slot name="after-download" />
+
+        <!-- Printing: the same PDF, to paper. Under the download on every
+             page that offers the chat PDF; see utils/pdf/printPdf.ts. -->
+        <div v-if="!court" class="mt-3 flex flex-col items-center">
+          <UiButton
+            variant="secondary"
+            size="lg"
+            data-pdf-print
+            :class="{ 'pdf-print--ready': printReady }"
+            :loading="job === 'print'"
+            :disabled="isLoading && job !== 'print'"
+            @click="printPdf"
+          >
+            <svg
+              v-if="job !== 'print'"
+              viewBox="0 0 24 24"
+              class="h-[18px] w-[18px]"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
+              />
+              <rect x="6" y="14" width="12" height="7" rx="1" />
+            </svg>
+            {{ printReady ? $t("pdfTool.printOpen") : $t("pdfTool.print") }}
+          </UiButton>
+          <p class="m-0 mt-2 max-w-[420px] text-xs text-wa-ink-faint">
+            {{
+              printReady
+                ? $t("pdfPrintReadyHint")
+                : hasFullAccess
+                  ? $t("pdfTool.printHintFull")
+                  : $t("pdfTool.printHint")
+            }}
+          </p>
+        </div>
       </div>
     </div>
 
@@ -284,10 +321,12 @@
             <UiButton
               variant="secondary"
               block
-              :loading="isLoading"
+              :loading="job === 'sample'"
+              :disabled="isLoading"
+              data-pdf-sample
               @click="handleFreePdfClick"
             >
-              <IconDownload />
+              <IconDownload v-if="job !== 'sample'" />
               <span v-html="$t('downloadFreePreviewPDF')"></span>
             </UiButton>
             <p class="pricing-card__price">{{ freePrice }}</p>
@@ -379,6 +418,12 @@ import {
 import { chatFingerprint } from "~/utils/chatFingerprint";
 import { scrollToSettled } from "~/utils/scroll";
 import { renderChatViewPdf, renderCourtPdf } from "~/utils/pdf";
+import {
+  openPreparedPdf,
+  opensPdfInTab,
+  printInFrame,
+  removePrintFrame,
+} from "~/utils/pdf/printPdf";
 import { isPremiumDesign } from "~/utils/pdf/chatDesign";
 import { chatPdfLabels, chatTitleFor } from "~/utils/pdf/chatLabels";
 import { normalizeChatViewOptions } from "~/utils/pdf/chatStyles";
@@ -430,12 +475,28 @@ export default {
       discountPercent: ONE_TIME_DISCOUNT_PERCENT,
       progress: 0,
       pdfFileType: null,
+      // which button's PDF is being made: "full", "sample" or "print"
+      job: null,
+      // "charts", "preparing" or "pages": what the status line says
+      phase: null,
+      // Safari and iOS: a PDF made for printing, opened on the next tap
+      printReady: false,
       // The export outlives a navigation away from the page; don't trigger a
       // download from a component that is already gone.
       isUnmounted: false,
     };
   },
   computed: {
+    statusText() {
+      if (this.phase === "charts") return this.$t("pdfStatusCharts");
+      if (this.progress >= 100) return this.$t("pdfAssembling");
+      if (this.progress > 0) {
+        return this.$t("pdfStatusPages", {
+          percent: Math.round(this.progress),
+        });
+      }
+      return this.$t("pdfStatusPreparing");
+    },
     /**
      * Every amount in this table goes through one formatter: it used to quote
      * "7,99 Euro", "7.99 EUR" and "15 EUR" within a single card.
@@ -523,6 +584,16 @@ export default {
     currentChatFingerprint() {
       this.downloadPurchasedPdf();
     },
+    // Another chat, design or access: a PDF made for printing is stale.
+    chat() {
+      this.releasePrint();
+    },
+    chatView() {
+      this.releasePrint();
+    },
+    hasFullAccess() {
+      this.releasePrint();
+    },
   },
   mounted() {
     this.downloadPurchasedPdf();
@@ -531,6 +602,7 @@ export default {
   beforeUnmount() {
     this.isUnmounted = true;
     this.warmObserver?.disconnect();
+    this.releasePrint();
   },
   methods: {
     /**
@@ -585,14 +657,21 @@ export default {
         this.isOneTimeLoading = false;
       }
     },
-    async download(isSample = false) {
-      if (!import.meta.client) return;
-      if (this.isLoading) return;
-
+    /**
+     * Makes the PDF, saying which step it is on: the charts first (the
+     * analysis pages), then the pages with a percentage. Shared by every
+     * button here, so downloading and printing behave the same on the
+     * analyzer and in the tool. Resolves to null when it failed or the page
+     * went away meanwhile.
+     */
+    async buildPdf(isSample, job) {
+      if (!import.meta.client || this.isLoading) return null;
       this.isLoading = true;
+      this.job = job;
       this.progress = 0;
-      this.pdfFileType = isSample ? "pdf_sample" : this.fullFileType;
+      this.phase = "preparing";
       const onProgress = (percent) => {
+        this.phase = "pages";
         this.progress = percent;
       };
 
@@ -604,13 +683,15 @@ export default {
 
         const view = this.court ? null : this.chatView || this.defaultView();
         // The analysis page's charts, as pictures, for the analysis pages.
-        const analytics =
-          view && view.options.analysis !== false
-            ? await (view.captureAnalytics
-                ? view.captureAnalytics(view.options)
-                : this.captureAnalytics(view.options))
-            : [];
-        if (this.isUnmounted) return;
+        let analytics = [];
+        if (view && view.options.analysis !== false) {
+          this.phase = "charts";
+          analytics = await (view.captureAnalytics
+            ? view.captureAnalytics(view.options)
+            : this.captureAnalytics(view.options));
+          this.phase = "preparing";
+        }
+        if (this.isUnmounted) return null;
         const blob = view
           ? await renderChatViewPdf({
               chat,
@@ -634,26 +715,68 @@ export default {
               onProgress,
               paper: this.courtPaper,
             });
-
-        if (this.isUnmounted) return;
-        FileSaver.saveAs(blob, this.fileName);
-        // file_download fires when the build starts; this proves it finished
-        analyticsChat.pdfGenerated(
-          this.pdfFileType,
-          this.chatView
-            ? {
-                style: this.chatView.options.style,
-                font: this.chatView.options.font,
-                paper: this.chatView.options.paper,
-                // what was printed: Pro parts only with full access
-                pro: isPremiumDesign(this.chatView.options),
-              }
-            : undefined,
-        );
-        this.isLoading = false;
+        return this.isUnmounted ? null : blob;
       } catch (error) {
         this.pdfErrorHandler(error);
+        return null;
+      } finally {
+        this.isLoading = false;
+        this.job = null;
+        this.phase = null;
+        this.progress = 0;
       }
+    },
+    async download(isSample = false) {
+      if (this.isLoading) return;
+      this.pdfFileType = isSample ? "pdf_sample" : this.fullFileType;
+      const blob = await this.buildPdf(isSample, isSample ? "sample" : "full");
+      if (!blob) return;
+      FileSaver.saveAs(blob, this.fileName);
+      // file_download fires when the build starts; this proves it finished
+      analyticsChat.pdfGenerated(
+        this.pdfFileType,
+        this.chatView
+          ? {
+              style: this.chatView.options.style,
+              font: this.chatView.options.font,
+              paper: this.chatView.options.paper,
+              // what was printed: Pro parts only with full access
+              pro: isPremiumDesign(this.chatView.options),
+            }
+          : undefined,
+      );
+    },
+    /**
+     * Prints the PDF the download would give: the whole chat with full
+     * access, else the free preview. On iPhone, iPad and Safari the first
+     * tap makes it and a second one opens it (utils/pdf/printPdf.ts).
+     */
+    async printPdf() {
+      if (this.printReady && this.printBlob) {
+        analyticsTools.pdfPrint(this.hasFullAccess);
+        await openPreparedPdf(this.printBlob, this.printUrl, this.fileName);
+        return;
+      }
+      if (this.isLoading) return;
+      const blob = await this.buildPdf(!this.hasFullAccess, "print");
+      if (!blob) return;
+      this.releasePrint();
+      this.printUrl = URL.createObjectURL(blob);
+      if (opensPdfInTab()) {
+        this.printBlob = blob;
+        this.printReady = true;
+      } else {
+        analyticsTools.pdfPrint(this.hasFullAccess);
+        printInFrame(this.printUrl);
+      }
+    },
+    /** A PDF made for printing earlier, no longer what would be printed. */
+    releasePrint() {
+      removePrintFrame();
+      if (this.printUrl) URL.revokeObjectURL(this.printUrl);
+      this.printUrl = null;
+      this.printBlob = null;
+      this.printReady = false;
     },
     /**
      * The analyzer's PDF: the WhatsApp to PDF tool's document in its default
@@ -733,8 +856,6 @@ export default {
     pdfErrorHandler(error) {
       console.error("PDF generation failed", error);
       this.$sentry?.captureException(error);
-      this.isLoading = false;
-      this.progress = 0;
     },
   },
 };
