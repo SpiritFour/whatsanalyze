@@ -274,7 +274,7 @@ export async function renderCourtPdf(
   const builder = await PdfBuilder.create({
     geometry: courtGeometry(paper),
     css: COURT_CSS,
-    background: () => null,
+    background: { value: null },
     needsEmoji: anyEmoji([
       ...rows.map((row: any) => row.text),
       ...participants,
@@ -588,7 +588,7 @@ export async function renderCourtPdf(
       : "";
     const title = `WhatsApp chat transcript — ${participantsLabel}`;
 
-    return builder.finish(title, ({ doc, page, total, geometry }) => {
+    return await builder.finish(title, ({ doc, page, total, geometry }) => {
       const left = geometry.margin.left;
       const right = geometry.widthMm - geometry.margin.right;
       const contentWidth = right - left;

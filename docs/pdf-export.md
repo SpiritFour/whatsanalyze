@@ -106,12 +106,19 @@ access log infer which emoji that chat contains. One request for the whole set
 leaks nothing. It costs ~1.4 MB gzipped, fetched only when a chat actually
 contains emoji, and cached afterwards.
 
-### Main thread, not a worker
+### Layout on the page, writing in a worker
 
-A Worker has no DOM, and the DOM is the layout engine, so the old
-`assets/js/pdf.worker.js` is gone, for both documents. Messages are processed in
-batches of 300 with
-a yield in between so the progress bar repaints and the tab stays responsive.
+Layout and measuring need the DOM, so they run on the page, in batches of 150
+messages with a yield in between. Writing the PDF (pagination, drawing, and
+assembling and compressing the file) runs in a Web Worker
+(`writer.worker.ts`), which removed the multi-second freezes at the end of a
+long export. What crosses over is data: measured blocks per batch, emoji
+rasterised on the page (they need a canvas) once per icon, page backgrounds as
+`ChapterValue` data instead of functions. Each document's header and footer
+callback runs on the page against a `FurnitureRecorder` (`furniture.ts`) that
+writes its drawing calls down and answers its measuring with a local jsPDF;
+the worker replays them. Without Worker support the same writer runs on the
+page.
 
 ## The WhatsApp-to-PDF tool: one view, three outputs
 

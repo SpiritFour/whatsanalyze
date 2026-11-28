@@ -5,7 +5,8 @@ import {
   registerPdfFonts,
 } from "~/utils/pdf/fonts";
 import type { PdfFont } from "~/utils/pdf/fonts";
-import { rasterizeEmoji } from "~/utils/pdf/emoji";
+import { replayFurniture } from "~/utils/pdf/furniture";
+import type { FurnitureDoc, FurnitureOp } from "~/utils/pdf/furniture";
 import type { MeasuredBlock, RenderItem, TextItem } from "~/utils/pdf/measure";
 import { contentHeightPx, mm, pt, px } from "~/utils/pdf/page";
 import type { PageGeometry } from "~/utils/pdf/page";
@@ -68,7 +69,7 @@ const itemTop = (item: RenderItem) => item.y;
 const itemBottom = (item: RenderItem) => item.y + item.height;
 
 export interface FurnitureContext {
-  doc: jsPDF;
+  doc: FurnitureDoc;
   page: number;
   total: number;
   chapter: string;
@@ -76,15 +77,32 @@ export interface FurnitureContext {
   fontFamily: string;
 }
 
+/**
+ * Something per page, by chapter: `value` for every chapter not listed in
+ * `chapters`. Data rather than a function, so it can be sent to the worker
+ * that writes the PDF.
+ */
+export interface ChapterValue {
+  value: string | null;
+  chapters?: Record<string, string | null>;
+}
+
+const valueFor = (spec: ChapterValue | undefined, chapter: string) =>
+  !spec
+    ? null
+    : spec.chapters && chapter in spec.chapters
+      ? spec.chapters[chapter]
+      : spec.value;
+
 export interface WriterOptions {
   geometry: PageGeometry;
-  /** Page background per chapter; null leaves the sheet unpainted. */
-  background: (_chapter: string) => string | null;
+  /** Page background colour per chapter; null leaves the sheet unpainted. */
+  background: ChapterValue;
   /**
-   * A full-page picture per chapter (a JPEG data URL, A4-shaped), drawn over
-   * the colour. The PDF stores it once however many pages show it.
+   * A full-page picture per chapter (a JPEG data URL, sheet-shaped), drawn
+   * over the colour. The PDF stores it once however many pages show it.
    */
-  backgroundImage?: (_chapter: string) => string | null;
+  backgroundImage?: ChapterValue;
   /** Fonts beyond the default the document's text uses. */
   fonts?: PdfFont[];
 }
@@ -139,14 +157,14 @@ export class PdfWriter {
     this.cursor = 0;
     this.pageStart = 0;
 
-    const background = this.background(chapter);
+    const background = valueFor(this.background, chapter);
     if (background) {
       const [r, g, b] = parseColor(background);
       this.doc.setFillColor(r, g, b);
       this.doc.rect(0, 0, this.geometry.widthMm, this.geometry.heightMm, "F");
     }
 
-    const image = this.backgroundImage?.(chapter);
+    const image = valueFor(this.backgroundImage, chapter);
     if (image) {
       try {
         this.doc.addImage(
@@ -200,11 +218,7 @@ export class PdfWriter {
    * taller than a page on its own, in which case it is broken at a line
    * boundary -- a single enormous message still has to go somewhere.
    */
-  async place(
-    blocks: MeasuredBlock[],
-    sprite: Map<string, string>,
-  ): Promise<void> {
-    await this.preloadEmoji(blocks, sprite);
+  place(blocks: MeasuredBlock[]): void {
     for (const block of blocks) block.items = this.mergeTextRuns(block.items);
 
     blocks.forEach((block, index) => {
@@ -373,17 +387,21 @@ export class PdfWriter {
         merged.push(item);
         continue;
       }
-      if (run && sameStyle(run, item)) {
-        const expected = run.x + this.textWidthPx(`${run.text} `, run);
+      // An assertion, not an annotation: TypeScript would narrow `run` to the
+      // null it was last assigned in this loop body and lose the item type.
+      const current = run as TextItem | null;
+      if (current && sameStyle(current, item)) {
+        const expected =
+          current.x + this.textWidthPx(`${current.text} `, current);
         if (Math.abs(expected - item.x) <= TOLERANCE) {
           run = {
-            ...run,
-            text: `${run.text} ${item.text}`,
-            width: item.x + item.width - run.x,
-            y: Math.min(run.y, item.y),
+            ...current,
+            text: `${current.text} ${item.text}`,
+            width: item.x + item.width - current.x,
+            y: Math.min(current.y, item.y),
             height:
-              Math.max(run.y + run.height, item.y + item.height) -
-              Math.min(run.y, item.y),
+              Math.max(current.y + current.height, item.y + item.height) -
+              Math.min(current.y, item.y),
           };
           continue;
         }
@@ -402,31 +420,17 @@ export class PdfWriter {
     return px(this.doc.getTextWidth(text));
   }
 
-  private async preloadEmoji(
-    blocks: MeasuredBlock[],
-    sprite: Map<string, string>,
-  ): Promise<void> {
-    const ids = new Set<string>();
-    for (const block of blocks) {
-      for (const item of block.items) {
-        if (
-          item.kind === "image" &&
-          item.emojiId &&
-          !this.emojiPng.has(item.emojiId)
-        ) {
-          ids.add(item.emojiId);
-        }
-      }
-    }
+  /**
+   * Emoji artwork, rasterised on the page (it needs a canvas) and handed over
+   * once per icon before the blocks that use it.
+   */
+  addEmoji(pngs: Record<string, string>): void {
+    for (const [id, png] of Object.entries(pngs)) this.emojiPng.set(id, png);
+  }
 
-    // Rasterising is memoised per icon, so a chat that uses the same emoji
-    // thousands of times pays for it once.
-    await Promise.all(
-      Array.from(ids).map(async (id) => {
-        const png = await rasterizeEmoji(id, sprite);
-        if (png) this.emojiPng.set(id, png);
-      }),
-    );
+  /** Each page's chapter, in order: what the furniture is drawn from. */
+  get chapters(): string[] {
+    return [...this.pageChapters];
   }
 
   private draw(item: RenderItem, offset: number): void {
@@ -535,4 +539,30 @@ export class PdfWriter {
     this.doc.setProperties({ title });
     return this.doc.output("blob");
   }
+
+  /**
+   * The same, with the furniture recorded on the page beforehand, one list
+   * of drawing calls per page (see utils/pdf/furniture.ts). Returns the file's
+   * bytes, which the worker can hand back without copying.
+   */
+  finishRecorded(title: string, pages: FurnitureOp[][]): ArrayBuffer {
+    pages.forEach((ops, index) => {
+      this.doc.setPage(index + 1);
+      this.doc.setFont(PDF_FONT_FAMILY, "normal");
+      replayFurniture(this.doc, ops);
+    });
+    this.doc.setProperties({ title });
+    return this.doc.output("arraybuffer");
+  }
+}
+
+/** The emoji a batch of blocks draws. */
+export function emojiIdsIn(blocks: MeasuredBlock[]): Set<string> {
+  const ids = new Set<string>();
+  for (const block of blocks) {
+    for (const item of [...block.items, ...block.continuationItems]) {
+      if (item.kind === "image" && item.emojiId) ids.add(item.emojiId);
+    }
+  }
+  return ids;
 }

@@ -126,12 +126,16 @@ export async function renderChatViewPdf(
       chatViewCss(options, "pdf") +
       chatPagesCss(options, contentHeightPx(geometry)),
     fonts: font ? [font] : [],
-    background: (chapter) =>
-      chapter === COVER_CHAPTER ? coverColor(options) : style.page,
+    background: {
+      value: style.page,
+      chapters: { [COVER_CHAPTER]: coverColor(options) },
+    },
     // The wallpaper is behind the chat and the outro; the cover has its own
     // colour and photo.
-    backgroundImage: (chapter) =>
-      chapter === COVER_CHAPTER ? null : (assets.wallpaper ?? null),
+    backgroundImage: {
+      value: assets.wallpaper ?? null,
+      chapters: { [COVER_CHAPTER]: null },
+    },
     // Names, titles and the cover's words can hold emoji as well.
     needsEmoji: anyEmoji([
       ...messages.map((message: any) => message.message),
@@ -206,35 +210,42 @@ export async function renderChatViewPdf(
     onProgress?.(100);
     await paintFrame();
 
-    return builder.finish(title, ({ doc, page, total, chapter, geometry }) => {
-      // The cover is the title page; numbering it would be noise.
-      if (chapter === COVER_CHAPTER) return;
-      const [r, g, b] = parseColor(style.folio);
-      doc.setTextColor(r, g, b);
-      doc.setFontSize(7.5);
-      if (font) doc.setFont(font.family, "normal");
-      const y = geometry.heightMm - 8;
-      // Book layout: each page says which month of the chat it is in.
-      // A compact chapter can span quiet months: "March – April 2021".
-      const start = chapter.startsWith(`${CHAT_CHAPTER}-`)
-        ? chapter.slice(CHAT_CHAPTER.length + 1)
-        : "";
-      const end = state.chapterEnds?.[chapter] ?? start;
-      const month = !start
-        ? ""
-        : end === start
-          ? monthName(start, locale)
-          : `${monthName(start, locale)} – ${monthName(end, locale)}`;
-      doc.text(month ? `${title} · ${month}` : title, geometry.margin.left, y);
-      doc.text(
-        `${page} / ${total}`,
-        geometry.widthMm - geometry.margin.right,
-        y,
-        {
-          align: "right",
-        },
-      );
-    });
+    return await builder.finish(
+      title,
+      ({ doc, page, total, chapter, geometry }) => {
+        // The cover is the title page; numbering it would be noise.
+        if (chapter === COVER_CHAPTER) return;
+        const [r, g, b] = parseColor(style.folio);
+        doc.setTextColor(r, g, b);
+        doc.setFontSize(7.5);
+        if (font) doc.setFont(font.family, "normal");
+        const y = geometry.heightMm - 8;
+        // Book layout: each page says which month of the chat it is in.
+        // A compact chapter can span quiet months: "March – April 2021".
+        const start = chapter.startsWith(`${CHAT_CHAPTER}-`)
+          ? chapter.slice(CHAT_CHAPTER.length + 1)
+          : "";
+        const end = state.chapterEnds?.[chapter] ?? start;
+        const month = !start
+          ? ""
+          : end === start
+            ? monthName(start, locale)
+            : `${monthName(start, locale)} – ${monthName(end, locale)}`;
+        doc.text(
+          month ? `${title} · ${month}` : title,
+          geometry.margin.left,
+          y,
+        );
+        doc.text(
+          `${page} / ${total}`,
+          geometry.widthMm - geometry.margin.right,
+          y,
+          {
+            align: "right",
+          },
+        );
+      },
+    );
   } finally {
     builder.destroy();
   }

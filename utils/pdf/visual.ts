@@ -17,7 +17,7 @@ import {
   messageBlock,
   outroBlock,
 } from "~/utils/pdf/template";
-import type { Chapter, ChartImage, MessageInput } from "~/utils/pdf/template";
+import type { ChartImage, MessageInput } from "~/utils/pdf/template";
 import { COLORS, VISUAL_CSS, VISUAL_GEOMETRY } from "~/utils/pdf/theme";
 import logoBlack from "~/assets/whatsanalyze-logo-black.png";
 import { getAttachment } from "~/utils/attachments";
@@ -110,7 +110,7 @@ export async function renderChatPdf(options: RenderPdfOptions): Promise<Blob> {
   const builder = await PdfBuilder.create({
     geometry: VISUAL_GEOMETRY,
     css: VISUAL_CSS,
-    background: (chapter) => CHAPTER_BACKGROUND[chapter as Chapter] ?? null,
+    background: { value: null, chapters: CHAPTER_BACKGROUND },
     needsEmoji: anyEmoji([
       ...messages.map((message: any) => message.message),
       ...Object.keys(chat.personColorMap || {}),
@@ -203,25 +203,28 @@ export async function renderChatPdf(options: RenderPdfOptions): Promise<Blob> {
     await paintFrame();
 
     const title = `WhatsAnalyze — ${ego}`;
-    return builder.finish(title, ({ doc, page, total, chapter, geometry }) => {
-      // The cover is the title page; numbering it would be noise.
-      if (chapter === "cover") return;
+    return await builder.finish(
+      title,
+      ({ doc, page, total, chapter, geometry }) => {
+        // The cover is the title page; numbering it would be noise.
+        if (chapter === "cover") return;
 
-      const onDark =
-        chapter === "messages" || chapter === "outro" || chapter === "facts";
-      const [r, g, b] = parseColor(onDark ? COLORS.mutedText : "#6b7280");
-      doc.setTextColor(r, g, b);
-      doc.setFontSize(8);
+        const onDark =
+          chapter === "messages" || chapter === "outro" || chapter === "facts";
+        const [r, g, b] = parseColor(onDark ? COLORS.mutedText : "#6b7280");
+        doc.setTextColor(r, g, b);
+        doc.setFontSize(8);
 
-      const margin = geometry.margin.left;
-      doc.text(title, margin, margin / 2 + 2);
-      doc.text(
-        `Page ${page} of ${total}`,
-        geometry.widthMm - margin,
-        geometry.heightMm - margin / 2,
-        { align: "right" },
-      );
-    });
+        const margin = geometry.margin.left;
+        doc.text(title, margin, margin / 2 + 2);
+        doc.text(
+          `Page ${page} of ${total}`,
+          geometry.widthMm - margin,
+          geometry.heightMm - margin / 2,
+          { align: "right" },
+        );
+      },
+    );
   } finally {
     builder.destroy();
   }
