@@ -51,26 +51,25 @@ export const messages = {
       navLabel: "WhatsApp chat to PDF",
       heroTitle: "Export a WhatsApp chat to PDF",
       heroSubtitle:
-        "Every message, the photos and your chat statistics in one PDF to print, keep or send. Made in your browser from your chat export, nothing uploaded.",
+        "Your chat as it looks on your phone, as a PDF to print, keep or send. Pick iPhone or Android, light or dark, or a style that saves ink. Made in your browser, nothing uploaded.",
       heroCta: "Make my PDF",
       heroNote: "Free preview · Full PDF {price} once · No account",
       exampleAlt: "Pages of a PDF made from an example WhatsApp chat",
       uploadTitle: "Drop your export, get the PDF",
       uploadText:
         "Open the .zip or .txt file WhatsApp gave you. It is read in your browser, not uploaded.",
-      createButton: "Create my PDF",
       guideLink: "No export yet? How to export a WhatsApp chat",
       contentsEyebrow: "What's inside",
-      contentsTitle: "More than a printout of the chat",
+      contentsTitle: "Your chat, the way you know it",
       card1Title: "The whole conversation",
       card1Text:
         "Every message with its sender, date and time, in order, and the photos next to them if you exported with media.",
-      card2Title: "Your chat in numbers",
+      card2Title: "Looks like your phone",
       card2Text:
-        "A cover with your first and last message, days, messages and people, then charts: timeline, by hour, by person, by month and by weekday.",
-      card3Title: "Fun facts about each person",
+        "Pick iPhone or Android, light or dark. Bubbles, day markers and times look the way you know them.",
+      card3Title: "Made for paper",
       card3Text:
-        "Words written, longest message, vocabulary, favourite emojis and average message length.",
+        "An ink-saving style for printing, page numbers on every sheet, and a Print button that sends the chat straight to your printer.",
       stepsTitle: "Three steps",
       step1Title: "Export the chat",
       step1Text:
@@ -105,6 +104,185 @@ export const messages = {
       ctaTitle: "Your chat, as a PDF",
       ctaButton: "Make my PDF",
       ctaNote: "Free preview · Made in your browser",
+      analysisLink: "Want charts and statistics too? Get the analysis PDF",
+    },
+    pdfTool: {
+      styleTitle: "Style",
+      style: {
+        iphone_light: "iPhone light",
+        iphone_dark: "iPhone dark",
+        android_light: "Android light",
+        android_dark: "Android dark",
+        ink: "Ink saver",
+        custom: "Custom",
+        romance: "Romance",
+        vintage: "Vintage",
+        midnight: "Midnight",
+        pastel: "Pastel",
+        contrast: "High contrast",
+      },
+      adjustTitle: "Adjust",
+      pointOfView: "Point of view",
+      pointOfViewHint:
+        "Whose phone it is seen on: their messages are on the right.",
+      textSize: "Text size",
+      size: {
+        s: "S",
+        m: "M",
+        l: "L",
+      },
+      showTimes: "Show times",
+      showMedia: "Show photos",
+      showNames: "Names above messages (group chats)",
+      printPreparing: "Preparing…",
+      printOpen: "Open PDF to print",
+      print: "Print",
+      printHint:
+        "Prints the free preview (first 100 messages), exactly as in the PDF.",
+      printHintFull: "Prints the whole chat, exactly as in the PDF.",
+      previewLabel: "Preview · first {count} messages",
+      subtitle: "{count} messages · {from} – {to}",
+      previewNotice:
+        "Preview: {shown} of {total} messages. The full PDF has them all.",
+      mediaNotLoaded:
+        "Photos are not shown: this chat was restored without its media. Drop the export again to include them.",
+      cover: {
+        eyebrow: "WhatsApp chat",
+        messages: "messages",
+        days: "days",
+        people: "people",
+        badge: "Free preview · first {count} messages",
+        footer:
+          "Made in your browser with WhatsAnalyze. Your chat was never uploaded.",
+      },
+      outro: {
+        title: "That was the preview",
+        missingLabel: "more messages are not in this preview",
+        progress: "{shown} of {total} messages shown",
+        ctaTitle: "Get the whole chat as a PDF",
+        ctaText:
+          "Every message and every photo, in the style you picked. {price} once, no account, no subscription.",
+        moreTitle: "More from WhatsAnalyze",
+        analysisTitle: "Chat analysis",
+        analysisText:
+          "Who writes more, when you talk, your emojis and favourite words, as charts.",
+        aiTitle: "AI chat analyzer",
+        aiText:
+          "Ask what your chat says about the relationship, and get honest answers.",
+        courtTitle: "Court evidence PDF",
+        courtText:
+          "A numbered transcript with exact timestamps and SHA-256 fingerprints, for lawyers and courts.",
+        wrappedTitle: "WhatsApp Wrapped",
+        wrappedText:
+          "Your year in chat as a story to share with the people in it.",
+        privacy:
+          "Everything at WhatsAnalyze runs in your browser. Your chats are never uploaded.",
+      },
+      design: {
+        pro: "Pro",
+        proNote:
+          "Pro designs show here so you can try them. Your PDF carries them once you have the full PDF.",
+        colorsTitle: "Your colours",
+        color: {
+          page: "Background",
+          bubbleIn: "Their messages",
+          bubbleOut: "Your messages",
+          accent: "Accent",
+        },
+        backgroundTitle: "Background",
+        pattern: {
+          none: "None",
+          dots: "Dots",
+          hearts: "Hearts",
+          stars: "Stars",
+          grid: "Grid",
+          waves: "Waves",
+          confetti: "Confetti",
+          photo: "Your photo",
+        },
+        choosePhoto: "Choose a photo",
+        dim: "Fade the photo",
+        coverTitle: "Cover",
+        backgroundPeek: "Hearts, stars, waves… or your own photo",
+        avatarsPeek: "Their photos instead of initials",
+        coverPeek: "Title, dedication, colour and photo",
+        coverHeading: "Title",
+        coverDedication: "Dedication",
+        coverDedicationPlaceholder: "For our 5th anniversary",
+        coverColor: "Cover colour",
+        coverColorReset: "Use the style's colour",
+        coverPhoto: "Cover photo",
+        coverPhotoUpload: "Upload a photo",
+        coverFaces: "Profile circles",
+        coverFacesHint: "Initials, or the profile pictures you choose",
+        coverFacesChoose: "Choose profile pictures →",
+        removePhoto: "Remove photo",
+        coverPreviewLabel: "Cover",
+        fontTitle: "Font",
+        avatarsTitle: "Profile pictures",
+        avatarsHint:
+          "Shown in the circles at the top of the chat instead of initials.",
+        avatarChoose: "Choose",
+        avatarUpload: "Choose a profile picture for {name}",
+        avatarRemove: "Remove the profile picture of {name}",
+        bookCompact: "Compact",
+        bookCompactHint: "Months with few messages continue on the same page.",
+        proDownloadNote:
+          "Your design uses Pro options. The free preview PDF is printed in the standard look; the full PDF has your design.",
+        fontsHidden:
+          "Fonts that lack some of this chat's letters are hidden, so nothing prints as gaps.",
+        font: {
+          default: "Standard",
+          serif: "Book",
+          rounded: "Rounded",
+          typewriter: "Typewriter",
+        },
+        book: "Book layout",
+        bookHint: "A chapter for each month, with the month on every page.",
+      },
+      hideSystem: "Hide WhatsApp notices (joins, missed calls, encryption)",
+      analysisPages: "Analysis pages: charts and fun facts",
+      analysis: {
+        title: "Your chat in numbers",
+        perDay: "messages per day",
+        busiestDay: "busiest day",
+        busiestHour: "busiest hour",
+        perPerson: "Messages per person",
+        timeline: "Messages over time",
+        timeOfDay: "Messages by time of day",
+        weekdays: "Messages by weekday",
+        funFacts: "Fun facts",
+        words: "words",
+        wordsPerMessage: "words per message",
+        uniqueWords: "different words",
+        longestMessage: "characters in the longest message",
+        others: "Others",
+      },
+      paper: "Paper",
+      paperSize: {
+        a4: "A4",
+        letter: "Letter",
+        a5: "A5",
+      },
+      dateRange: "Only these days",
+      dateFrom: "From",
+      dateTo: "To",
+      dateReset: "All days",
+      dateLastMonth: "Last month",
+      dateLast3Months: "Last 3 months",
+      dateLastYear: "Last year",
+      resetDesign: "Reset all settings",
+      tabs: {
+        look: "Look",
+        design: "Design",
+        content: "Content",
+      },
+      layoutTitle: "Text and paper",
+      empty:
+        "No messages on these days. Choose other days, or all days, to see the chat.",
+      tabsLabel: "Settings",
+      previewTabsLabel: "Preview",
+      previewRegion: "Chat preview",
     },
     subscribePage: {
       title: "See everything the AI found in your chat",
@@ -664,6 +842,15 @@ export const messages = {
       "John and Jane probably write the most in the afternoon...",
     exampleGraphSubtitle2:
       "...and John writes a little more overall than Jane.",
+    pdfCustomizeTitle: "Want a different look?",
+    pdfCustomizeLink: "Customise this PDF: styles, fonts, cover and more →",
+    pdfMadeLocally: "Made on this device: your chat is never uploaded.",
+    pdfStatusCharts: "Drawing your charts…",
+    pdfStatusPreparing: "Getting your messages and photos ready…",
+    pdfStatusPages: "Laying out the pages… {percent}%",
+    pdfPrintReadyHint: "Your PDF is ready: tap again to print or share it.",
+    pdfAssembling:
+      "Putting the pages together… this can take a few seconds for a long chat.",
     waitingForPDF:
       "The generation of the PDF can take some while, sometimes up to 10 minutes, depending on your device. Please be patient.",
     chatTimeline: "Chat Timeline",
@@ -810,6 +997,9 @@ export const messages = {
       toolAiTitle: "AI Chat Analyzer",
       toolAiText:
         "Let AI describe your chat: each person's role, how you interact, your topics and best moments. On your device or in the cloud.",
+      toolPdfTitle: "WhatsApp Chat to PDF",
+      toolPdfText:
+        "Your chat as it looks on your phone: iPhone or Android, light or dark, or ink-saving for paper. Preview it, print it or download the PDF.",
       toolCourtTitle: "Court & Legal Evidence PDF",
       toolCourtText:
         "Format WhatsApp chats into court-admissible, tamper-evident PDF transcripts with exact timestamps and sender verification.",
@@ -861,7 +1051,7 @@ export const messages = {
       analyticsGroupTitle: "Chat Analytics & Metrics",
       analyticsGroupDesc:
         "Fast, focused in-browser tools to measure conversation dynamics, message counts, vocabulary, and activity hours.",
-      courtGroupTitle: "Official Documentation & Legal Proof",
+      courtGroupTitle: "PDF Exports & Legal Proof",
       courtGroupDesc:
         "Court-admissible PDF transcripts and verified relationship timelines formatted for legal proceedings and immigration petitions.",
       situationsGroupTitle: "Understand What's Going On",
@@ -2133,7 +2323,7 @@ export const messages = {
       navLabel: "WhatsApp-Chat als PDF",
       heroTitle: "WhatsApp-Chat als PDF exportieren",
       heroSubtitle:
-        "Alle Nachrichten, die Fotos und eure Chat-Statistiken in einem PDF zum Ausdrucken, Aufbewahren oder Verschicken. Direkt im Browser aus deinem Chat-Export erstellt, ohne Upload.",
+        "Dein Chat, wie er auf deinem Handy aussieht, als PDF zum Ausdrucken, Aufbewahren oder Verschicken. Wähle iPhone oder Android, hell oder dunkel, oder einen tintensparenden Stil. Direkt im Browser erstellt, ohne Upload.",
       heroCta: "PDF erstellen",
       heroNote:
         "Vorschau kostenlos · Vollständiges PDF einmalig {price} · Kein Konto",
@@ -2141,19 +2331,18 @@ export const messages = {
       uploadTitle: "Export hineinziehen, PDF bekommen",
       uploadText:
         "Öffne die .zip- oder .txt-Datei, die WhatsApp erstellt hat. Sie wird in deinem Browser gelesen, nicht hochgeladen.",
-      createButton: "Mein PDF erstellen",
       guideLink: "Noch kein Export? So exportierst du einen WhatsApp-Chat",
       contentsEyebrow: "Was drinsteht",
-      contentsTitle: "Mehr als ein Ausdruck des Chats",
+      contentsTitle: "Dein Chat, wie du ihn kennst",
       card1Title: "Das ganze Gespräch",
       card1Text:
         "Jede Nachricht mit Absender, Datum und Uhrzeit, in der richtigen Reihenfolge – und die Fotos daneben, wenn du mit Medien exportiert hast.",
-      card2Title: "Euer Chat in Zahlen",
+      card2Title: "Sieht aus wie auf dem Handy",
       card2Text:
-        "Ein Deckblatt mit erster und letzter Nachricht, Tagen, Nachrichten und Personen, dann Diagramme: Verlauf, nach Uhrzeit, nach Person, nach Monat und nach Wochentag.",
-      card3Title: "Fun Facts zu jeder Person",
+        "Wähle iPhone oder Android, hell oder dunkel. Sprechblasen, Datumsanzeigen und Uhrzeiten sehen aus wie gewohnt.",
+      card3Title: "Gemacht für Papier",
       card3Text:
-        "Geschriebene Wörter, längste Nachricht, Wortschatz, Lieblings-Emojis und durchschnittliche Nachrichtenlänge.",
+        "Ein tintensparender Stil zum Drucken, Seitenzahlen auf jedem Blatt und ein Drucken-Button, der den Chat direkt an deinen Drucker schickt.",
       stepsTitle: "In drei Schritten",
       step1Title: "Chat exportieren",
       step1Text:
@@ -2188,6 +2377,187 @@ export const messages = {
       ctaTitle: "Dein Chat als PDF",
       ctaButton: "PDF erstellen",
       ctaNote: "Vorschau kostenlos · Im Browser erstellt",
+      analysisLink: "Auch Diagramme und Statistiken? Zum Analyse-PDF",
+    },
+    pdfTool: {
+      styleTitle: "Stil",
+      style: {
+        iphone_light: "iPhone hell",
+        iphone_dark: "iPhone dunkel",
+        android_light: "Android hell",
+        android_dark: "Android dunkel",
+        ink: "Tintensparend",
+        custom: "Eigene",
+        romance: "Romantik",
+        vintage: "Vintage",
+        midnight: "Mitternacht",
+        pastel: "Pastell",
+        contrast: "Hoher Kontrast",
+      },
+      adjustTitle: "Anpassen",
+      pointOfView: "Perspektive",
+      pointOfViewHint:
+        "Auf wessen Handy der Chat gezeigt wird: deren Nachrichten stehen rechts.",
+      textSize: "Schriftgröße",
+      size: {
+        s: "S",
+        m: "M",
+        l: "L",
+      },
+      showTimes: "Uhrzeiten anzeigen",
+      showMedia: "Fotos anzeigen",
+      showNames: "Namen über den Nachrichten (Gruppenchats)",
+      printPreparing: "Wird vorbereitet…",
+      printOpen: "PDF zum Drucken öffnen",
+      print: "Drucken",
+      printHint:
+        "Druckt die kostenlose Vorschau (erste 100 Nachrichten), genau wie im PDF.",
+      printHintFull: "Druckt den ganzen Chat, genau wie im PDF.",
+      previewLabel: "Vorschau · erste {count} Nachrichten",
+      subtitle: "{count} Nachrichten · {from} – {to}",
+      previewNotice:
+        "Vorschau: {shown} von {total} Nachrichten. Das vollständige PDF enthält alle.",
+      mediaNotLoaded:
+        "Fotos werden nicht angezeigt: Dieser Chat wurde ohne seine Medien wiederhergestellt. Lege den Export erneut ab, um sie einzubeziehen.",
+      cover: {
+        eyebrow: "WhatsApp-Chat",
+        messages: "Nachrichten",
+        days: "Tage",
+        people: "Personen",
+        badge: "Kostenlose Vorschau · erste {count} Nachrichten",
+        footer:
+          "Mit WhatsAnalyze in deinem Browser erstellt. Dein Chat wurde nie hochgeladen.",
+      },
+      outro: {
+        title: "Das war die Vorschau",
+        missingLabel: "weitere Nachrichten sind nicht in dieser Vorschau",
+        progress: "{shown} von {total} Nachrichten gezeigt",
+        ctaTitle: "Hol dir den ganzen Chat als PDF",
+        ctaText:
+          "Jede Nachricht und jedes Foto, im Stil deiner Wahl. Einmalig {price}, ohne Konto, ohne Abo.",
+        moreTitle: "Mehr von WhatsAnalyze",
+        analysisTitle: "Chat-Analyse",
+        analysisText:
+          "Wer mehr schreibt, wann ihr schreibt, eure Emojis und Lieblingswörter, als Diagramme.",
+        aiTitle: "KI-Chat-Analyse",
+        aiText:
+          "Frag, was dein Chat über eure Beziehung verrät, und bekomm ehrliche Antworten.",
+        courtTitle: "Beweis-PDF für Gerichte",
+        courtText:
+          "Ein nummeriertes Protokoll mit genauen Zeitstempeln und SHA-256-Fingerabdrücken, für Anwälte und Gerichte.",
+        wrappedTitle: "WhatsApp Wrapped",
+        wrappedText:
+          "Dein Chat-Jahr als Story zum Teilen mit den Menschen darin.",
+        privacy:
+          "Bei WhatsAnalyze läuft alles in deinem Browser. Deine Chats werden nie hochgeladen.",
+      },
+      design: {
+        pro: "Pro",
+        proNote:
+          "Pro-Designs siehst du hier zum Ausprobieren. Dein PDF bekommt sie mit dem vollständigen PDF.",
+        colorsTitle: "Deine Farben",
+        color: {
+          page: "Hintergrund",
+          bubbleIn: "Ihre Nachrichten",
+          bubbleOut: "Deine Nachrichten",
+          accent: "Akzent",
+        },
+        backgroundTitle: "Hintergrund",
+        pattern: {
+          none: "Keiner",
+          dots: "Punkte",
+          hearts: "Herzen",
+          stars: "Sterne",
+          grid: "Raster",
+          waves: "Wellen",
+          confetti: "Konfetti",
+          photo: "Dein Foto",
+        },
+        choosePhoto: "Foto auswählen",
+        dim: "Foto aufhellen",
+        coverTitle: "Titelseite",
+        backgroundPeek: "Herzen, Sterne, Wellen … oder dein eigenes Foto",
+        avatarsPeek: "Ihre Fotos statt Initialen",
+        coverPeek: "Titel, Widmung, Farbe und Foto",
+        coverHeading: "Titel",
+        coverDedication: "Widmung",
+        coverDedicationPlaceholder: "Zu unserem 5. Jahrestag",
+        coverColor: "Farbe der Titelseite",
+        coverColorReset: "Farbe des Stils verwenden",
+        coverPhoto: "Titelfoto",
+        coverPhotoUpload: "Foto hochladen",
+        coverFaces: "Profilkreise",
+        coverFacesHint: "Initialen oder die Profilbilder, die du wählst",
+        coverFacesChoose: "Profilbilder wählen →",
+        removePhoto: "Foto entfernen",
+        coverPreviewLabel: "Titelseite",
+        fontTitle: "Schrift",
+        avatarsTitle: "Profilbilder",
+        avatarsHint:
+          "Erscheinen statt der Initialen in den Kreisen oben im Chat.",
+        avatarChoose: "Auswählen",
+        avatarUpload: "Profilbild für {name} auswählen",
+        avatarRemove: "Profilbild von {name} entfernen",
+        bookCompact: "Kompakt",
+        bookCompactHint:
+          "Monate mit wenigen Nachrichten gehen auf derselben Seite weiter.",
+        proDownloadNote:
+          "Dein Design nutzt Pro-Optionen. Die kostenlose Vorschau wird im Standard-Aussehen gedruckt, das vollständige PDF hat dein Design.",
+        fontsHidden:
+          "Schriften, denen Buchstaben dieses Chats fehlen, sind ausgeblendet, damit nichts als Lücke gedruckt wird.",
+        font: {
+          default: "Standard",
+          serif: "Buch",
+          rounded: "Rund",
+          typewriter: "Schreibmaschine",
+        },
+        book: "Buch-Layout",
+        bookHint: "Ein Kapitel pro Monat, mit dem Monat auf jeder Seite.",
+      },
+      hideSystem:
+        "WhatsApp-Hinweise ausblenden (Beitritte, verpasste Anrufe, Verschlüsselung)",
+      analysisPages: "Analyse-Seiten: Diagramme und Fun Facts",
+      analysis: {
+        title: "Euer Chat in Zahlen",
+        perDay: "Nachrichten pro Tag",
+        busiestDay: "aktivster Tag",
+        busiestHour: "aktivste Stunde",
+        perPerson: "Nachrichten pro Person",
+        timeline: "Nachrichten im Zeitverlauf",
+        timeOfDay: "Nachrichten nach Tageszeit",
+        weekdays: "Nachrichten nach Wochentag",
+        funFacts: "Fun Facts",
+        words: "Wörter",
+        wordsPerMessage: "Wörter pro Nachricht",
+        uniqueWords: "verschiedene Wörter",
+        longestMessage: "Zeichen in der längsten Nachricht",
+        others: "Andere",
+      },
+      paper: "Papier",
+      paperSize: {
+        a4: "A4",
+        letter: "Letter",
+        a5: "A5",
+      },
+      dateRange: "Nur diese Tage",
+      dateFrom: "Von",
+      dateTo: "Bis",
+      dateReset: "Alle Tage",
+      dateLastMonth: "Letzter Monat",
+      dateLast3Months: "Letzte 3 Monate",
+      dateLastYear: "Letztes Jahr",
+      resetDesign: "Alle Einstellungen zurücksetzen",
+      tabs: {
+        look: "Aussehen",
+        design: "Design",
+        content: "Inhalt",
+      },
+      layoutTitle: "Text und Papier",
+      empty:
+        "An diesen Tagen gibt es keine Nachrichten. Wähle andere Tage oder alle Tage, um den Chat zu sehen.",
+      tabsLabel: "Einstellungen",
+      previewTabsLabel: "Vorschau",
+      previewRegion: "Chat-Vorschau",
     },
     subscribePage: {
       title: "Sieh alles, was die KI in deinem Chat gefunden hat",
@@ -2755,6 +3125,17 @@ export const messages = {
       "John und Jane schreiben wohl am meisten um 4 Uhr Nachmittags...",
     exampleGraphSubtitle2:
       "...und John schreibt insgesamt etwas mehr als Jane.",
+    pdfCustomizeTitle: "Lieber ein anderer Look?",
+    pdfCustomizeLink: "PDF anpassen: Stile, Schriften, Titelseite und mehr →",
+    pdfMadeLocally:
+      "Auf diesem Gerät erstellt: dein Chat wird nie hochgeladen.",
+    pdfStatusCharts: "Deine Diagramme werden gezeichnet …",
+    pdfStatusPreparing: "Nachrichten und Fotos werden vorbereitet …",
+    pdfStatusPages: "Seiten werden gesetzt … {percent} %",
+    pdfPrintReadyHint:
+      "Dein PDF ist fertig: tippe noch einmal, um es zu drucken oder zu teilen.",
+    pdfAssembling:
+      "Die Seiten werden zusammengesetzt … bei einem langen Chat kann das ein paar Sekunden dauern.",
     waitingForPDF:
       "Die Generierung des PDFs kann etwas dauern, manchmal bis zu 10 Minuten, abhängig von Ihrem Gerät. Bitte habe Geduld.",
     chatTimeline: "Chat-Zeitstrahl",
@@ -2874,6 +3255,9 @@ export const messages = {
       toolAiTitle: "KI-Chat-Analyse",
       toolAiText:
         "Lass die KI deinen Chat beschreiben: die Rolle jeder Person, wie ihr miteinander umgeht, eure Themen und besten Momente. Auf deinem Gerät oder in der Cloud.",
+      toolPdfTitle: "WhatsApp-Chat als PDF",
+      toolPdfText:
+        "Dein Chat, wie er auf dem Handy aussieht: iPhone oder Android, hell oder dunkel, oder tintensparend für Papier. Vorschau ansehen, drucken oder als PDF laden.",
       toolCourtTitle: "Gerichtsfester Beweis-PDF",
       toolCourtText:
         "Formatiere WhatsApp-Chats in gerichtsfeste, manipulationssichere PDF-Protokolle mit exakten Zeitstempeln.",
@@ -2925,7 +3309,7 @@ export const messages = {
       analyticsGroupTitle: "Gesprächs- & Chat-Analysen",
       analyticsGroupDesc:
         "Fokussierte Tools im Browser für Gesprächsdynamik, Nachrichtenanzahl, Wortschatz und Aktivitätszeiten.",
-      courtGroupTitle: "Offizielle Dokumentation & Gerichtsfeste Nachweise",
+      courtGroupTitle: "PDF-Exporte & rechtliche Nachweise",
       courtGroupDesc:
         "Gerichtsfeste PDF-Protokolle und verifizierte Kommunikationszeitachsen für Justiz und Behörden.",
       situationsGroupTitle: "Verstehen, was los ist",
@@ -4213,7 +4597,7 @@ export const messages = {
       navLabel: "Chat de WhatsApp a PDF",
       heroTitle: "Exportar un chat de WhatsApp a PDF",
       heroSubtitle:
-        "Todos los mensajes, las fotos y las estadísticas del chat en un PDF para imprimir, guardar o enviar. Se crea en tu navegador a partir de tu exportación, sin subir nada.",
+        "Tu chat tal como se ve en tu móvil, en un PDF para imprimir, guardar o enviar. Elige iPhone o Android, claro u oscuro, o un estilo que ahorra tinta. Creado en tu navegador, sin subir nada.",
       heroCta: "Crear mi PDF",
       heroNote:
         "Vista previa gratis · PDF completo por {price}, pago único · Sin cuenta",
@@ -4222,20 +4606,19 @@ export const messages = {
       uploadTitle: "Suelta tu exportación y obtén el PDF",
       uploadText:
         "Abre el archivo .zip o .txt que te dio WhatsApp. Se lee en tu navegador, no se sube.",
-      createButton: "Crear mi PDF",
       guideLink:
         "¿Aún no tienes la exportación? Cómo exportar un chat de WhatsApp",
       contentsEyebrow: "Qué incluye",
-      contentsTitle: "Más que una copia impresa del chat",
+      contentsTitle: "Tu chat, tal como lo conoces",
       card1Title: "Toda la conversación",
       card1Text:
         "Cada mensaje con su remitente, fecha y hora, en orden, y las fotos al lado si exportaste con archivos multimedia.",
-      card2Title: "Tu chat en cifras",
+      card2Title: "Como en tu móvil",
       card2Text:
-        "Una portada con el primer y el último mensaje, días, mensajes y personas, y luego gráficos: evolución, por hora, por persona, por mes y por día de la semana.",
-      card3Title: "Curiosidades de cada persona",
+        "Elige iPhone o Android, claro u oscuro. Las burbujas, los separadores de día y las horas se ven como siempre.",
+      card3Title: "Pensado para papel",
       card3Text:
-        "Palabras escritas, mensaje más largo, vocabulario, emojis favoritos y longitud media de los mensajes.",
+        "Un estilo que ahorra tinta para imprimir, números de página en cada hoja y un botón Imprimir que envía el chat directamente a tu impresora.",
       stepsTitle: "En tres pasos",
       step1Title: "Exporta el chat",
       step1Text:
@@ -4269,6 +4652,188 @@ export const messages = {
       ctaTitle: "Tu chat, en PDF",
       ctaButton: "Crear mi PDF",
       ctaNote: "Vista previa gratis · Se crea en tu navegador",
+      analysisLink:
+        "¿También quieres gráficos y estadísticas? Obtén el PDF del análisis",
+    },
+    pdfTool: {
+      styleTitle: "Estilo",
+      style: {
+        iphone_light: "iPhone claro",
+        iphone_dark: "iPhone oscuro",
+        android_light: "Android claro",
+        android_dark: "Android oscuro",
+        ink: "Ahorro de tinta",
+        custom: "Personalizado",
+        romance: "Romántico",
+        vintage: "Vintage",
+        midnight: "Medianoche",
+        pastel: "Pastel",
+        contrast: "Alto contraste",
+      },
+      adjustTitle: "Ajustes",
+      pointOfView: "Punto de vista",
+      pointOfViewHint:
+        "En el móvil de quién se ve el chat: sus mensajes van a la derecha.",
+      textSize: "Tamaño del texto",
+      size: {
+        s: "S",
+        m: "M",
+        l: "L",
+      },
+      showTimes: "Mostrar horas",
+      showMedia: "Mostrar fotos",
+      showNames: "Nombres sobre los mensajes (chats de grupo)",
+      printPreparing: "Preparando…",
+      printOpen: "Abrir PDF para imprimir",
+      print: "Imprimir",
+      printHint:
+        "Imprime la vista previa gratuita (primeros 100 mensajes), igual que en el PDF.",
+      printHintFull: "Imprime todo el chat, igual que en el PDF.",
+      previewLabel: "Vista previa · primeros {count} mensajes",
+      subtitle: "{count} mensajes · {from} – {to}",
+      previewNotice:
+        "Vista previa: {shown} de {total} mensajes. El PDF completo los incluye todos.",
+      mediaNotLoaded:
+        "Las fotos no se muestran: este chat se restauró sin sus archivos. Vuelve a soltar la exportación para incluirlas.",
+      cover: {
+        eyebrow: "Chat de WhatsApp",
+        messages: "mensajes",
+        days: "días",
+        people: "personas",
+        badge: "Vista previa gratuita · primeros {count} mensajes",
+        footer:
+          "Creado en tu navegador con WhatsAnalyze. Tu chat nunca se subió.",
+      },
+      outro: {
+        title: "Esa fue la vista previa",
+        missingLabel: "mensajes más no están en esta vista previa",
+        progress: "{shown} de {total} mensajes mostrados",
+        ctaTitle: "Consigue todo el chat en PDF",
+        ctaText:
+          "Cada mensaje y cada foto, en el estilo que elegiste. {price} una vez, sin cuenta ni suscripción.",
+        moreTitle: "Más de WhatsAnalyze",
+        analysisTitle: "Análisis del chat",
+        analysisText:
+          "Quién escribe más, cuándo habláis, vuestros emojis y palabras favoritas, en gráficos.",
+        aiTitle: "Análisis del chat con IA",
+        aiText:
+          "Pregunta qué dice tu chat de la relación y recibe respuestas sinceras.",
+        courtTitle: "PDF de prueba judicial",
+        courtText:
+          "Una transcripción numerada con horas exactas y huellas SHA-256, para abogados y tribunales.",
+        wrappedTitle: "WhatsApp Wrapped",
+        wrappedText:
+          "Tu año en el chat como una historia para compartir con quienes estuvieron en él.",
+        privacy:
+          "En WhatsAnalyze todo funciona en tu navegador. Tus chats nunca se suben.",
+      },
+      design: {
+        pro: "Pro",
+        proNote:
+          "Los diseños Pro se ven aquí para que los pruebes. Tu PDF los incluye cuando tienes el PDF completo.",
+        colorsTitle: "Tus colores",
+        color: {
+          page: "Fondo",
+          bubbleIn: "Sus mensajes",
+          bubbleOut: "Tus mensajes",
+          accent: "Acento",
+        },
+        backgroundTitle: "Fondo",
+        pattern: {
+          none: "Ninguno",
+          dots: "Puntos",
+          hearts: "Corazones",
+          stars: "Estrellas",
+          grid: "Cuadrícula",
+          waves: "Ondas",
+          confetti: "Confeti",
+          photo: "Tu foto",
+        },
+        choosePhoto: "Elegir una foto",
+        dim: "Aclarar la foto",
+        coverTitle: "Portada",
+        backgroundPeek: "Corazones, estrellas, ondas… o tu propia foto",
+        avatarsPeek: "Sus fotos en lugar de iniciales",
+        coverPeek: "Título, dedicatoria, color y foto",
+        coverHeading: "Título",
+        coverDedication: "Dedicatoria",
+        coverDedicationPlaceholder: "Por nuestro 5.º aniversario",
+        coverColor: "Color de la portada",
+        coverColorReset: "Usar el color del estilo",
+        coverPhoto: "Foto de portada",
+        coverPhotoUpload: "Subir una foto",
+        coverFaces: "Círculos de perfil",
+        coverFacesHint: "Iniciales o las fotos de perfil que elijas",
+        coverFacesChoose: "Elegir fotos de perfil →",
+        removePhoto: "Quitar la foto",
+        coverPreviewLabel: "Portada",
+        fontTitle: "Fuente",
+        avatarsTitle: "Fotos de perfil",
+        avatarsHint:
+          "Aparecen en los círculos de arriba del chat en lugar de las iniciales.",
+        avatarChoose: "Elegir",
+        avatarUpload: "Elegir una foto de perfil para {name}",
+        avatarRemove: "Quitar la foto de perfil de {name}",
+        bookCompact: "Compacto",
+        bookCompactHint:
+          "Los meses con pocos mensajes siguen en la misma página.",
+        proDownloadNote:
+          "Tu diseño usa opciones Pro. La vista previa gratuita se imprime con el aspecto estándar; el PDF completo lleva tu diseño.",
+        fontsHidden:
+          "Las fuentes a las que les faltan letras de este chat están ocultas, para que nada se imprima con huecos.",
+        font: {
+          default: "Estándar",
+          serif: "Libro",
+          rounded: "Redondeada",
+          typewriter: "Máquina de escribir",
+        },
+        book: "Diseño de libro",
+        bookHint: "Un capítulo por mes, con el mes en cada página.",
+      },
+      hideSystem:
+        "Ocultar avisos de WhatsApp (uniones, llamadas perdidas, cifrado)",
+      analysisPages: "Páginas de análisis: gráficos y datos curiosos",
+      analysis: {
+        title: "Vuestro chat en cifras",
+        perDay: "mensajes al día",
+        busiestDay: "día más activo",
+        busiestHour: "hora más activa",
+        perPerson: "Mensajes por persona",
+        timeline: "Mensajes a lo largo del tiempo",
+        timeOfDay: "Mensajes por hora del día",
+        weekdays: "Mensajes por día de la semana",
+        funFacts: "Datos curiosos",
+        words: "palabras",
+        wordsPerMessage: "palabras por mensaje",
+        uniqueWords: "palabras distintas",
+        longestMessage: "caracteres en el mensaje más largo",
+        others: "Otros",
+      },
+      paper: "Papel",
+      paperSize: {
+        a4: "A4",
+        letter: "Carta",
+        a5: "A5",
+      },
+      dateRange: "Solo estos días",
+      dateFrom: "Desde",
+      dateTo: "Hasta",
+      dateReset: "Todos los días",
+      dateLastMonth: "Último mes",
+      dateLast3Months: "Últimos 3 meses",
+      dateLastYear: "Último año",
+      resetDesign: "Restablecer todos los ajustes",
+      tabs: {
+        look: "Aspecto",
+        design: "Diseño",
+        content: "Contenido",
+      },
+      layoutTitle: "Texto y papel",
+      empty:
+        "No hay mensajes en estos días. Elige otros días, o todos, para ver el chat.",
+      tabsLabel: "Ajustes",
+      previewTabsLabel: "Vista previa",
+      previewRegion: "Vista previa del chat",
     },
     subscribePage: {
       title: "Descubre todo lo que la IA encontró en tu chat",
@@ -4825,6 +5390,16 @@ export const messages = {
       "El aviso legal y la política de privacidad que siguen son los originales alemanes jurídicamente vinculantes, tal y como exige la ley alemana. Las condiciones de uso están en inglés.",
     aboutPoints:
       "Somos un grupo de <b>amigos de la universidad</b>. Como hace poco todos dejamos WhatsApp y queríamos analizar cómo evolucionaron los chats a lo largo de los años. <br /> <br /> Como <b>estudiantes de Informática</b> son paranoicos y piensan que pueden hacer todo mejor, naturalmente queríamos construir una solución nosotros mismos, donde <b>ningún dato personal</b> se comparta o se haga público.",
+    pdfCustomizeTitle: "¿Quieres otro estilo?",
+    pdfCustomizeLink: "Personaliza este PDF: estilos, fuentes, portada y más →",
+    pdfMadeLocally: "Creado en este dispositivo: tu chat nunca se sube.",
+    pdfStatusCharts: "Dibujando tus gráficos…",
+    pdfStatusPreparing: "Preparando tus mensajes y fotos…",
+    pdfStatusPages: "Maquetando las páginas… {percent} %",
+    pdfPrintReadyHint:
+      "Tu PDF está listo: toca de nuevo para imprimirlo o compartirlo.",
+    pdfAssembling:
+      "Juntando las páginas… en un chat largo puede tardar unos segundos.",
     waitingForPDF:
       "La generación del PDF puede tardar un tiempo, a veces hasta 10 minutos, dependiendo de su dispositivo. Por favor, tenga paciencia.",
     chatTimeline: "Cronología del Chat",
@@ -4942,6 +5517,9 @@ export const messages = {
       toolAiTitle: "Analizador de chats con IA",
       toolAiText:
         "Deja que la IA describa tu chat: el papel de cada persona, cómo os relacionáis, vuestros temas y mejores momentos. En tu dispositivo o en la nube.",
+      toolPdfTitle: "Chat de WhatsApp a PDF",
+      toolPdfText:
+        "Tu chat tal como se ve en tu móvil: iPhone o Android, claro u oscuro, o ahorrando tinta para papel. Míralo, imprímelo o descarga el PDF.",
       toolCourtTitle: "PDF de prueba judicial",
       toolCourtText:
         "Formatea chats de WhatsApp en transcripciones PDF válidas en juicio con marcas de tiempo exactas.",
@@ -4993,7 +5571,7 @@ export const messages = {
       analyticsGroupTitle: "Análisis y métricas de chat",
       analyticsGroupDesc:
         "Herramientas rápidas y privadas en navegador para medir dinámicas, mensajes, vocabulario y horarios.",
-      courtGroupTitle: "Documentación oficial y pruebas judiciales",
+      courtGroupTitle: "Exportaciones PDF y pruebas legales",
       courtGroupDesc:
         "Transcripciones en PDF válidas en juicios y cronogramas de relación verificados para visados y tribunales.",
       situationsGroupTitle: "Entiende qué está pasando",
@@ -6279,7 +6857,7 @@ export const messages = {
       navLabel: "Conversa do WhatsApp em PDF",
       heroTitle: "Exportar uma conversa do WhatsApp para PDF",
       heroSubtitle:
-        "Todas as mensagens, as fotos e as estatísticas da conversa em um PDF para imprimir, guardar ou enviar. Criado no seu navegador a partir da sua exportação, sem upload.",
+        "A sua conversa como aparece no telemóvel, num PDF para imprimir, guardar ou enviar. Escolha iPhone ou Android, claro ou escuro, ou um estilo que poupa tinta. Criado no seu navegador, sem envios.",
       heroCta: "Criar meu PDF",
       heroNote:
         "Prévia grátis · PDF completo por {price}, pagamento único · Sem conta",
@@ -6288,19 +6866,18 @@ export const messages = {
       uploadTitle: "Solte sua exportação e receba o PDF",
       uploadText:
         "Abra o arquivo .zip ou .txt que o WhatsApp criou. Ele é lido no seu navegador, não é enviado.",
-      createButton: "Criar meu PDF",
       guideLink: "Ainda não exportou? Como exportar uma conversa do WhatsApp",
       contentsEyebrow: "O que tem dentro",
-      contentsTitle: "Mais do que uma impressão da conversa",
+      contentsTitle: "A sua conversa, como a conhece",
       card1Title: "A conversa inteira",
       card1Text:
         "Cada mensagem com remetente, data e hora, em ordem, e as fotos ao lado se você exportou com mídia.",
-      card2Title: "Sua conversa em números",
+      card2Title: "Igual ao seu telemóvel",
       card2Text:
-        "Uma capa com a primeira e a última mensagem, dias, mensagens e pessoas, e depois gráficos: linha do tempo, por hora, por pessoa, por mês e por dia da semana.",
-      card3Title: "Curiosidades de cada pessoa",
+        "Escolha iPhone ou Android, claro ou escuro. Os balões, os separadores de dia e as horas aparecem como está habituado.",
+      card3Title: "Feito para papel",
       card3Text:
-        "Palavras escritas, mensagem mais longa, vocabulário, emojis favoritos e tamanho médio das mensagens.",
+        "Um estilo que poupa tinta para imprimir, números de página em cada folha e um botão Imprimir que envia a conversa diretamente para a sua impressora.",
       stepsTitle: "Em três passos",
       step1Title: "Exporte a conversa",
       step1Text:
@@ -6334,6 +6911,188 @@ export const messages = {
       ctaTitle: "Sua conversa em PDF",
       ctaButton: "Criar meu PDF",
       ctaNote: "Prévia grátis · Criado no seu navegador",
+      analysisLink:
+        "Também quer gráficos e estatísticas? Obtenha o PDF da análise",
+    },
+    pdfTool: {
+      styleTitle: "Estilo",
+      style: {
+        iphone_light: "iPhone claro",
+        iphone_dark: "iPhone escuro",
+        android_light: "Android claro",
+        android_dark: "Android escuro",
+        ink: "Poupar tinta",
+        custom: "Personalizado",
+        romance: "Romântico",
+        vintage: "Vintage",
+        midnight: "Meia-noite",
+        pastel: "Pastel",
+        contrast: "Alto contraste",
+      },
+      adjustTitle: "Ajustar",
+      pointOfView: "Ponto de vista",
+      pointOfViewHint:
+        "No telemóvel de quem a conversa é vista: as mensagens dessa pessoa ficam à direita.",
+      textSize: "Tamanho do texto",
+      size: {
+        s: "P",
+        m: "M",
+        l: "G",
+      },
+      showTimes: "Mostrar horas",
+      showMedia: "Mostrar fotos",
+      showNames: "Nomes sobre as mensagens (conversas de grupo)",
+      printPreparing: "A preparar…",
+      printOpen: "Abrir o PDF para imprimir",
+      print: "Imprimir",
+      printHint:
+        "Imprime a pré-visualização gratuita (primeiras 100 mensagens), tal como no PDF.",
+      printHintFull: "Imprime a conversa inteira, tal como no PDF.",
+      previewLabel: "Pré-visualização · primeiras {count} mensagens",
+      subtitle: "{count} mensagens · {from} – {to}",
+      previewNotice:
+        "Pré-visualização: {shown} de {total} mensagens. O PDF completo tem todas.",
+      mediaNotLoaded:
+        "As fotos não são mostradas: esta conversa foi restaurada sem os seus ficheiros. Volte a largar a exportação para as incluir.",
+      cover: {
+        eyebrow: "Conversa do WhatsApp",
+        messages: "mensagens",
+        days: "dias",
+        people: "pessoas",
+        badge: "Pré-visualização gratuita · primeiras {count} mensagens",
+        footer:
+          "Criado no seu navegador com o WhatsAnalyze. A sua conversa nunca foi enviada.",
+      },
+      outro: {
+        title: "Esta foi a pré-visualização",
+        missingLabel: "mensagens a mais não estão nesta pré-visualização",
+        progress: "{shown} de {total} mensagens mostradas",
+        ctaTitle: "Obtenha a conversa inteira em PDF",
+        ctaText:
+          "Cada mensagem e cada foto, no estilo que escolheu. {price} uma vez, sem conta nem subscrição.",
+        moreTitle: "Mais do WhatsAnalyze",
+        analysisTitle: "Análise da conversa",
+        analysisText:
+          "Quem escreve mais, quando falam, os vossos emojis e palavras favoritas, em gráficos.",
+        aiTitle: "Análise da conversa com IA",
+        aiText:
+          "Pergunte o que a conversa diz sobre a relação e receba respostas honestas.",
+        courtTitle: "PDF de prova para tribunal",
+        courtText:
+          "Uma transcrição numerada com horas exatas e impressões SHA-256, para advogados e tribunais.",
+        wrappedTitle: "WhatsApp Wrapped",
+        wrappedText:
+          "O seu ano em conversa como uma história para partilhar com quem esteve nela.",
+        privacy:
+          "No WhatsAnalyze tudo corre no seu navegador. As suas conversas nunca são enviadas.",
+      },
+      design: {
+        pro: "Pro",
+        proNote:
+          "Os designs Pro aparecem aqui para os experimentar. O seu PDF inclui-os quando tiver o PDF completo.",
+        colorsTitle: "As suas cores",
+        color: {
+          page: "Fundo",
+          bubbleIn: "Mensagens deles",
+          bubbleOut: "As suas mensagens",
+          accent: "Destaque",
+        },
+        backgroundTitle: "Fundo",
+        pattern: {
+          none: "Nenhum",
+          dots: "Pontos",
+          hearts: "Corações",
+          stars: "Estrelas",
+          grid: "Grelha",
+          waves: "Ondas",
+          confetti: "Confetes",
+          photo: "A sua foto",
+        },
+        choosePhoto: "Escolher uma foto",
+        dim: "Clarear a foto",
+        coverTitle: "Capa",
+        backgroundPeek: "Corações, estrelas, ondas… ou a tua própria foto",
+        avatarsPeek: "As fotos deles em vez de iniciais",
+        coverPeek: "Título, dedicatória, cor e foto",
+        coverHeading: "Título",
+        coverDedication: "Dedicatória",
+        coverDedicationPlaceholder: "Para o nosso 5.º aniversário",
+        coverColor: "Cor da capa",
+        coverColorReset: "Usar a cor do estilo",
+        coverPhoto: "Foto da capa",
+        coverPhotoUpload: "Carregar uma foto",
+        coverFaces: "Círculos de perfil",
+        coverFacesHint: "Iniciais ou as fotos de perfil que escolheres",
+        coverFacesChoose: "Escolher fotos de perfil →",
+        removePhoto: "Remover a foto",
+        coverPreviewLabel: "Capa",
+        fontTitle: "Tipo de letra",
+        avatarsTitle: "Fotos de perfil",
+        avatarsHint:
+          "Aparecem nos círculos no topo da conversa em vez das iniciais.",
+        avatarChoose: "Escolher",
+        avatarUpload: "Escolher uma foto de perfil para {name}",
+        avatarRemove: "Remover a foto de perfil de {name}",
+        bookCompact: "Compacto",
+        bookCompactHint:
+          "Os meses com poucas mensagens continuam na mesma página.",
+        proDownloadNote:
+          "O seu design usa opções Pro. A pré-visualização gratuita é impressa com o aspeto padrão; o PDF completo tem o seu design.",
+        fontsHidden:
+          "Os tipos de letra a que faltam letras desta conversa estão ocultos, para que nada seja impresso com falhas.",
+        font: {
+          default: "Padrão",
+          serif: "Livro",
+          rounded: "Arredondado",
+          typewriter: "Máquina de escrever",
+        },
+        book: "Formato de livro",
+        bookHint: "Um capítulo por mês, com o mês em cada página.",
+      },
+      hideSystem:
+        "Ocultar avisos do WhatsApp (entradas, chamadas perdidas, encriptação)",
+      analysisPages: "Páginas de análise: gráficos e curiosidades",
+      analysis: {
+        title: "A vossa conversa em números",
+        perDay: "mensagens por dia",
+        busiestDay: "dia mais ativo",
+        busiestHour: "hora mais ativa",
+        perPerson: "Mensagens por pessoa",
+        timeline: "Mensagens ao longo do tempo",
+        timeOfDay: "Mensagens por hora do dia",
+        weekdays: "Mensagens por dia da semana",
+        funFacts: "Curiosidades",
+        words: "palavras",
+        wordsPerMessage: "palavras por mensagem",
+        uniqueWords: "palavras diferentes",
+        longestMessage: "caracteres na mensagem mais longa",
+        others: "Outros",
+      },
+      paper: "Papel",
+      paperSize: {
+        a4: "A4",
+        letter: "Carta",
+        a5: "A5",
+      },
+      dateRange: "Só estes dias",
+      dateFrom: "De",
+      dateTo: "Até",
+      dateReset: "Todos os dias",
+      dateLastMonth: "Último mês",
+      dateLast3Months: "Últimos 3 meses",
+      dateLastYear: "Último ano",
+      resetDesign: "Repor todas as definições",
+      tabs: {
+        look: "Aspeto",
+        design: "Design",
+        content: "Conteúdo",
+      },
+      layoutTitle: "Texto e papel",
+      empty:
+        "Não há mensagens nestes dias. Escolha outros dias, ou todos, para ver a conversa.",
+      tabsLabel: "Definições",
+      previewTabsLabel: "Pré-visualização",
+      previewRegion: "Pré-visualização da conversa",
     },
     subscribePage: {
       title: "Veja tudo o que a IA encontrou na sua conversa",
@@ -6631,6 +7390,18 @@ export const messages = {
       "John e Jane provavelmente escrevem mais às 4 da manhã. Tarde...",
     exampleGraphSubtitle2:
       "...e John escreve um pouco mais no geral do que Jane.",
+    pdfCustomizeTitle: "Queres outro visual?",
+    pdfCustomizeLink:
+      "Personaliza este PDF: estilos, tipos de letra, capa e mais →",
+    pdfMadeLocally:
+      "Criado neste dispositivo: a tua conversa nunca é carregada.",
+    pdfStatusCharts: "A desenhar os teus gráficos…",
+    pdfStatusPreparing: "A preparar as tuas mensagens e fotos…",
+    pdfStatusPages: "A paginar… {percent} %",
+    pdfPrintReadyHint:
+      "O teu PDF está pronto: toca outra vez para o imprimir ou partilhar.",
+    pdfAssembling:
+      "A juntar as páginas… numa conversa longa pode demorar alguns segundos.",
     waitingForPDF:
       "A geração do PDF pode demorar um pouco, às vezes até 10 minutos, dependendo do seu dispositivo. Por favor, tenha paciência.",
     chatTimeline: "Linha do Tempo do Chat",
@@ -6751,6 +7522,9 @@ export const messages = {
       toolAiTitle: "Analisador de conversas com IA",
       toolAiText:
         "Deixe a IA descrever a sua conversa: o papel de cada pessoa, como interagem, os vossos temas e melhores momentos. No seu dispositivo ou na nuvem.",
+      toolPdfTitle: "Conversa do WhatsApp em PDF",
+      toolPdfText:
+        "A sua conversa como aparece no telemóvel: iPhone ou Android, claro ou escuro, ou a poupar tinta para papel. Pré-visualize, imprima ou descarregue o PDF.",
       toolCourtTitle: "PDF de prova jurídica",
       toolCourtText:
         "Formate conversas em relatórios PDF para processos com carimbos de data/hora exatos.",
@@ -6802,7 +7576,7 @@ export const messages = {
       analyticsGroupTitle: "Análises e métricas de conversa",
       analyticsGroupDesc:
         "Ferramentas focadas no navegador para medir dinâmica, contagem de mensagens, vocabulário e horários.",
-      courtGroupTitle: "Documentação oficial e comprovações jurídicas",
+      courtGroupTitle: "Exportações PDF e provas legais",
       courtGroupDesc:
         "Relatórios em PDF para processos judiciais e linhas do tempo verificadas para pedidos de visto.",
       situationsGroupTitle: "Entenda o que se passa",
@@ -8347,7 +9121,7 @@ export const messages = {
       navLabel: "Discussion WhatsApp en PDF",
       heroTitle: "Exporter une discussion WhatsApp en PDF",
       heroSubtitle:
-        "Tous les messages, les photos et les statistiques de la discussion dans un PDF à imprimer, garder ou envoyer. Créé dans votre navigateur à partir de votre export, sans rien envoyer.",
+        "Votre discussion telle qu'elle apparaît sur votre téléphone, en PDF à imprimer, garder ou envoyer. Choisissez iPhone ou Android, clair ou sombre, ou un style qui économise l'encre. Créé dans votre navigateur, rien n'est envoyé.",
       heroCta: "Créer mon PDF",
       heroNote:
         "Aperçu gratuit · PDF complet {price} en achat unique · Sans compte",
@@ -8356,20 +9130,19 @@ export const messages = {
       uploadTitle: "Déposez votre export, obtenez le PDF",
       uploadText:
         "Ouvrez le fichier .zip ou .txt créé par WhatsApp. Il est lu dans votre navigateur, pas envoyé.",
-      createButton: "Créer mon PDF",
       guideLink:
         "Pas encore d'export ? Comment exporter une discussion WhatsApp",
       contentsEyebrow: "Ce qu'il contient",
-      contentsTitle: "Plus qu'une impression de la discussion",
+      contentsTitle: "Votre discussion, telle que vous la connaissez",
       card1Title: "Toute la conversation",
       card1Text:
         "Chaque message avec son expéditeur, sa date et son heure, dans l'ordre, et les photos à côté si vous avez exporté avec les médias.",
-      card2Title: "Votre discussion en chiffres",
+      card2Title: "Comme sur votre téléphone",
       card2Text:
-        "Une couverture avec le premier et le dernier message, les jours, les messages et les participants, puis des graphiques : chronologie, par heure, par personne, par mois et par jour de la semaine.",
-      card3Title: "Anecdotes sur chaque personne",
+        "Choisissez iPhone ou Android, clair ou sombre. Les bulles, les séparateurs de jour et les heures ressemblent à ce que vous connaissez.",
+      card3Title: "Pensé pour le papier",
       card3Text:
-        "Mots écrits, message le plus long, vocabulaire, emojis préférés et longueur moyenne des messages.",
+        "Un style économe en encre pour l'impression, des numéros de page sur chaque feuille et un bouton Imprimer qui envoie la discussion directement à votre imprimante.",
       stepsTitle: "En trois étapes",
       step1Title: "Exportez la discussion",
       step1Text:
@@ -8404,6 +9177,190 @@ export const messages = {
       ctaTitle: "Votre discussion en PDF",
       ctaButton: "Créer mon PDF",
       ctaNote: "Aperçu gratuit · Créé dans votre navigateur",
+      analysisLink:
+        "Vous voulez aussi des graphiques et des statistiques ? Obtenez le PDF de l'analyse",
+    },
+    pdfTool: {
+      styleTitle: "Style",
+      style: {
+        iphone_light: "iPhone clair",
+        iphone_dark: "iPhone sombre",
+        android_light: "Android clair",
+        android_dark: "Android sombre",
+        ink: "Économie d'encre",
+        custom: "Personnalisé",
+        romance: "Romantique",
+        vintage: "Vintage",
+        midnight: "Minuit",
+        pastel: "Pastel",
+        contrast: "Contraste élevé",
+      },
+      adjustTitle: "Ajuster",
+      pointOfView: "Point de vue",
+      pointOfViewHint:
+        "Sur le téléphone de qui la discussion est vue : ses messages sont à droite.",
+      textSize: "Taille du texte",
+      size: {
+        s: "S",
+        m: "M",
+        l: "L",
+      },
+      showTimes: "Afficher les heures",
+      showMedia: "Afficher les photos",
+      showNames: "Noms au-dessus des messages (groupes)",
+      printPreparing: "Préparation…",
+      printOpen: "Ouvrir le PDF pour imprimer",
+      print: "Imprimer",
+      printHint:
+        "Imprime l'aperçu gratuit (100 premiers messages), exactement comme dans le PDF.",
+      printHintFull:
+        "Imprime toute la discussion, exactement comme dans le PDF.",
+      previewLabel: "Aperçu · {count} premiers messages",
+      subtitle: "{count} messages · {from} – {to}",
+      previewNotice:
+        "Aperçu : {shown} messages sur {total}. Le PDF complet les contient tous.",
+      mediaNotLoaded:
+        "Les photos ne s'affichent pas : cette discussion a été restaurée sans ses fichiers. Déposez à nouveau l'export pour les inclure.",
+      cover: {
+        eyebrow: "Discussion WhatsApp",
+        messages: "messages",
+        days: "jours",
+        people: "personnes",
+        badge: "Aperçu gratuit · {count} premiers messages",
+        footer:
+          "Créé dans votre navigateur avec WhatsAnalyze. Votre discussion n'a jamais été envoyée.",
+      },
+      outro: {
+        title: "C'était l'aperçu",
+        missingLabel: "messages de plus ne sont pas dans cet aperçu",
+        progress: "{shown} messages affichés sur {total}",
+        ctaTitle: "Obtenez toute la discussion en PDF",
+        ctaText:
+          "Chaque message et chaque photo, dans le style choisi. {price} une fois, sans compte ni abonnement.",
+        moreTitle: "Plus de WhatsAnalyze",
+        analysisTitle: "Analyse de la discussion",
+        analysisText:
+          "Qui écrit le plus, quand vous parlez, vos emojis et mots préférés, en graphiques.",
+        aiTitle: "Analyse de discussion par IA",
+        aiText:
+          "Demandez ce que votre discussion dit de la relation et obtenez des réponses franches.",
+        courtTitle: "PDF de preuve pour le tribunal",
+        courtText:
+          "Une transcription numérotée avec horodatages exacts et empreintes SHA-256, pour avocats et tribunaux.",
+        wrappedTitle: "WhatsApp Wrapped",
+        wrappedText:
+          "Votre année en discussion, en story à partager avec ceux qui y étaient.",
+        privacy:
+          "Chez WhatsAnalyze, tout fonctionne dans votre navigateur. Vos discussions ne sont jamais envoyées.",
+      },
+      design: {
+        pro: "Pro",
+        proNote:
+          "Les designs Pro s'affichent ici pour que vous les essayiez. Votre PDF les reprend avec le PDF complet.",
+        colorsTitle: "Vos couleurs",
+        color: {
+          page: "Fond",
+          bubbleIn: "Ses messages",
+          bubbleOut: "Vos messages",
+          accent: "Accent",
+        },
+        backgroundTitle: "Fond",
+        pattern: {
+          none: "Aucun",
+          dots: "Points",
+          hearts: "Cœurs",
+          stars: "Étoiles",
+          grid: "Grille",
+          waves: "Vagues",
+          confetti: "Confettis",
+          photo: "Votre photo",
+        },
+        choosePhoto: "Choisir une photo",
+        dim: "Éclaircir la photo",
+        coverTitle: "Couverture",
+        backgroundPeek: "Cœurs, étoiles, vagues… ou votre propre photo",
+        avatarsPeek: "Leurs photos au lieu des initiales",
+        coverPeek: "Titre, dédicace, couleur et photo",
+        coverHeading: "Titre",
+        coverDedication: "Dédicace",
+        coverDedicationPlaceholder: "Pour nos 5 ans",
+        coverColor: "Couleur de la couverture",
+        coverColorReset: "Utiliser la couleur du style",
+        coverPhoto: "Photo de couverture",
+        coverPhotoUpload: "Importer une photo",
+        coverFaces: "Cercles de profil",
+        coverFacesHint:
+          "Initiales, ou les photos de profil que vous choisissez",
+        coverFacesChoose: "Choisir les photos de profil →",
+        removePhoto: "Retirer la photo",
+        coverPreviewLabel: "Couverture",
+        fontTitle: "Police",
+        avatarsTitle: "Photos de profil",
+        avatarsHint:
+          "Affichées dans les cercles en haut de la discussion à la place des initiales.",
+        avatarChoose: "Choisir",
+        avatarUpload: "Choisir une photo de profil pour {name}",
+        avatarRemove: "Retirer la photo de profil de {name}",
+        bookCompact: "Compact",
+        bookCompactHint:
+          "Les mois avec peu de messages continuent sur la même page.",
+        proDownloadNote:
+          "Votre design utilise des options Pro. L'aperçu gratuit est imprimé dans l'apparence standard ; le PDF complet reprend votre design.",
+        fontsHidden:
+          "Les polices auxquelles il manque des lettres de cette discussion sont masquées, pour que rien ne s'imprime avec des trous.",
+        font: {
+          default: "Standard",
+          serif: "Livre",
+          rounded: "Arrondie",
+          typewriter: "Machine à écrire",
+        },
+        book: "Mise en page livre",
+        bookHint: "Un chapitre par mois, avec le mois sur chaque page.",
+      },
+      hideSystem:
+        "Masquer les notifications WhatsApp (arrivées, appels manqués, chiffrement)",
+      analysisPages: "Pages d'analyse : graphiques et anecdotes",
+      analysis: {
+        title: "Votre discussion en chiffres",
+        perDay: "messages par jour",
+        busiestDay: "jour le plus actif",
+        busiestHour: "heure la plus active",
+        perPerson: "Messages par personne",
+        timeline: "Messages au fil du temps",
+        timeOfDay: "Messages selon l'heure",
+        weekdays: "Messages selon le jour",
+        funFacts: "Anecdotes",
+        words: "mots",
+        wordsPerMessage: "mots par message",
+        uniqueWords: "mots différents",
+        longestMessage: "caractères dans le message le plus long",
+        others: "Autres",
+      },
+      paper: "Papier",
+      paperSize: {
+        a4: "A4",
+        letter: "Letter",
+        a5: "A5",
+      },
+      dateRange: "Seulement ces jours",
+      dateFrom: "Du",
+      dateTo: "Au",
+      dateReset: "Tous les jours",
+      dateLastMonth: "Dernier mois",
+      dateLast3Months: "3 derniers mois",
+      dateLastYear: "Dernière année",
+      resetDesign: "Réinitialiser tous les réglages",
+      tabs: {
+        look: "Apparence",
+        design: "Design",
+        content: "Contenu",
+      },
+      layoutTitle: "Texte et papier",
+      empty:
+        "Aucun message ces jours-là. Choisissez d'autres jours, ou tous, pour voir la discussion.",
+      tabsLabel: "Réglages",
+      previewTabsLabel: "Aperçu",
+      previewRegion: "Aperçu de la discussion",
     },
     subscribePage: {
       title: "Découvrez tout ce que l'IA a trouvé dans votre conversation",
@@ -8705,6 +9662,18 @@ export const messages = {
     exampleGraphSubtitle1:
       "John et Jane sont probablement ceux qui écrivent le plus à 4 heures du matin...",
     exampleGraphSubtitle2: "...et John écrit un peu plus que Jane.",
+    pdfCustomizeTitle: "Envie d'un autre style ?",
+    pdfCustomizeLink:
+      "Personnaliser ce PDF : styles, polices, couverture et plus →",
+    pdfMadeLocally:
+      "Créé sur cet appareil : votre discussion n'est jamais envoyée.",
+    pdfStatusCharts: "Dessin de vos graphiques…",
+    pdfStatusPreparing: "Préparation de vos messages et photos…",
+    pdfStatusPages: "Mise en page… {percent} %",
+    pdfPrintReadyHint:
+      "Votre PDF est prêt : touchez à nouveau pour l'imprimer ou le partager.",
+    pdfAssembling:
+      "Assemblage des pages… pour une longue discussion, cela peut prendre quelques secondes.",
     waitingForPDF:
       "La génération du PDF peut prendre un certain temps, parfois jusqu'à 10 minutes, en fonction de votre appareil. Veuillez faire preuve de patience.",
     chatTimeline: "Chronologie du Chat",
@@ -8823,6 +9792,9 @@ export const messages = {
       toolAiTitle: "Analyseur de chats IA",
       toolAiText:
         "Laissez l'IA décrire votre conversation : le rôle de chacun, votre façon d'échanger, vos sujets et vos meilleurs moments. Sur votre appareil ou dans le cloud.",
+      toolPdfTitle: "Discussion WhatsApp en PDF",
+      toolPdfText:
+        "Votre discussion telle qu'elle apparaît sur votre téléphone : iPhone ou Android, clair ou sombre, ou économe en encre pour le papier. Prévisualisez, imprimez ou téléchargez le PDF.",
       toolCourtTitle: "PDF pour preuve juridique",
       toolCourtText:
         "Mettez en forme vos conversations en transcriptions PDF recevables avec horodatages précis.",
@@ -8876,7 +9848,7 @@ export const messages = {
       analyticsGroupTitle: "Analyses et métriques de discussion",
       analyticsGroupDesc:
         "Des outils ciblés dans le navigateur pour mesurer les dynamiques, les volumes de messages, le vocabulaire et les heures d'échange.",
-      courtGroupTitle: "Documentation officielle et preuves juridiques",
+      courtGroupTitle: "Exports PDF et preuves juridiques",
       courtGroupDesc:
         "Transcriptions PDF recevables en justice et chronologies certifiées pour les démarches consulaires et judiciaires.",
       situationsGroupTitle: "Comprendre ce qui se passe",
@@ -10429,7 +11401,7 @@ export const messages = {
       navLabel: "Chat WhatsApp in PDF",
       heroTitle: "Esportare una chat WhatsApp in PDF",
       heroSubtitle:
-        "Tutti i messaggi, le foto e le statistiche della chat in un PDF da stampare, conservare o inviare. Creato nel tuo browser dalla tua esportazione, senza caricare nulla.",
+        "La tua chat come appare sul telefono, in un PDF da stampare, conservare o inviare. Scegli iPhone o Android, chiaro o scuro, o uno stile che risparmia inchiostro. Creato nel tuo browser, senza caricare nulla.",
       heroCta: "Crea il mio PDF",
       heroNote:
         "Anteprima gratuita · PDF completo a {price} una tantum · Nessun account",
@@ -10437,20 +11409,19 @@ export const messages = {
       uploadTitle: "Trascina l'esportazione, ottieni il PDF",
       uploadText:
         "Apri il file .zip o .txt creato da WhatsApp. Viene letto nel tuo browser, non caricato.",
-      createButton: "Crea il mio PDF",
       guideLink:
         "Non hai ancora l'esportazione? Come esportare una chat WhatsApp",
       contentsEyebrow: "Cosa contiene",
-      contentsTitle: "Più di una stampa della chat",
+      contentsTitle: "La tua chat, come la conosci",
       card1Title: "Tutta la conversazione",
       card1Text:
         "Ogni messaggio con mittente, data e ora, in ordine, e le foto accanto se hai esportato con i media.",
-      card2Title: "La chat in numeri",
+      card2Title: "Come sul tuo telefono",
       card2Text:
-        "Una copertina con il primo e l'ultimo messaggio, giorni, messaggi e persone, poi i grafici: andamento, per ora, per persona, per mese e per giorno della settimana.",
-      card3Title: "Curiosità su ogni persona",
+        "Scegli iPhone o Android, chiaro o scuro. Fumetti, separatori dei giorni e orari appaiono come sei abituato.",
+      card3Title: "Pensato per la carta",
       card3Text:
-        "Parole scritte, messaggio più lungo, vocabolario, emoji preferite e lunghezza media dei messaggi.",
+        "Uno stile che risparmia inchiostro per la stampa, numeri di pagina su ogni foglio e un pulsante Stampa che invia la chat direttamente alla tua stampante.",
       stepsTitle: "In tre passaggi",
       step1Title: "Esporta la chat",
       step1Text:
@@ -10485,6 +11456,188 @@ export const messages = {
       ctaTitle: "La tua chat in PDF",
       ctaButton: "Crea il mio PDF",
       ctaNote: "Anteprima gratuita · Creato nel tuo browser",
+      analysisLink:
+        "Vuoi anche grafici e statistiche? Ottieni il PDF dell'analisi",
+    },
+    pdfTool: {
+      styleTitle: "Stile",
+      style: {
+        iphone_light: "iPhone chiaro",
+        iphone_dark: "iPhone scuro",
+        android_light: "Android chiaro",
+        android_dark: "Android scuro",
+        ink: "Risparmio inchiostro",
+        custom: "Personalizzato",
+        romance: "Romantico",
+        vintage: "Vintage",
+        midnight: "Mezzanotte",
+        pastel: "Pastello",
+        contrast: "Alto contrasto",
+      },
+      adjustTitle: "Regola",
+      pointOfView: "Punto di vista",
+      pointOfViewHint:
+        "Sul telefono di chi si vede la chat: i suoi messaggi sono a destra.",
+      textSize: "Dimensione del testo",
+      size: {
+        s: "S",
+        m: "M",
+        l: "L",
+      },
+      showTimes: "Mostra orari",
+      showMedia: "Mostra foto",
+      showNames: "Nomi sopra i messaggi (chat di gruppo)",
+      printPreparing: "Preparazione…",
+      printOpen: "Apri il PDF da stampare",
+      print: "Stampa",
+      printHint:
+        "Stampa l'anteprima gratuita (primi 100 messaggi), esattamente come nel PDF.",
+      printHintFull: "Stampa tutta la chat, esattamente come nel PDF.",
+      previewLabel: "Anteprima · primi {count} messaggi",
+      subtitle: "{count} messaggi · {from} – {to}",
+      previewNotice:
+        "Anteprima: {shown} di {total} messaggi. Il PDF completo li contiene tutti.",
+      mediaNotLoaded:
+        "Le foto non vengono mostrate: questa chat è stata ripristinata senza i suoi file. Trascina di nuovo l'esportazione per includerle.",
+      cover: {
+        eyebrow: "Chat WhatsApp",
+        messages: "messaggi",
+        days: "giorni",
+        people: "persone",
+        badge: "Anteprima gratuita · primi {count} messaggi",
+        footer:
+          "Creato nel tuo browser con WhatsAnalyze. La tua chat non è mai stata caricata.",
+      },
+      outro: {
+        title: "Questa era l'anteprima",
+        missingLabel: "messaggi in più non sono in questa anteprima",
+        progress: "{shown} di {total} messaggi mostrati",
+        ctaTitle: "Ottieni tutta la chat in PDF",
+        ctaText:
+          "Ogni messaggio e ogni foto, nello stile che hai scelto. {price} una volta, senza account né abbonamento.",
+        moreTitle: "Altro da WhatsAnalyze",
+        analysisTitle: "Analisi della chat",
+        analysisText:
+          "Chi scrive di più, quando vi sentite, le vostre emoji e parole preferite, in grafici.",
+        aiTitle: "Analisi della chat con IA",
+        aiText:
+          "Chiedi cosa dice la tua chat sulla relazione e ricevi risposte sincere.",
+        courtTitle: "PDF di prova per il tribunale",
+        courtText:
+          "Una trascrizione numerata con orari esatti e impronte SHA-256, per avvocati e tribunali.",
+        wrappedTitle: "WhatsApp Wrapped",
+        wrappedText:
+          "Il tuo anno in chat come una storia da condividere con chi c'era.",
+        privacy:
+          "Su WhatsAnalyze tutto funziona nel tuo browser. Le tue chat non vengono mai caricate.",
+      },
+      design: {
+        pro: "Pro",
+        proNote:
+          "I design Pro si vedono qui per provarli. Il tuo PDF li include quando hai il PDF completo.",
+        colorsTitle: "I tuoi colori",
+        color: {
+          page: "Sfondo",
+          bubbleIn: "I suoi messaggi",
+          bubbleOut: "I tuoi messaggi",
+          accent: "Accento",
+        },
+        backgroundTitle: "Sfondo",
+        pattern: {
+          none: "Nessuno",
+          dots: "Puntini",
+          hearts: "Cuori",
+          stars: "Stelle",
+          grid: "Griglia",
+          waves: "Onde",
+          confetti: "Coriandoli",
+          photo: "La tua foto",
+        },
+        choosePhoto: "Scegli una foto",
+        dim: "Schiarisci la foto",
+        coverTitle: "Copertina",
+        backgroundPeek: "Cuori, stelle, onde… o la tua foto",
+        avatarsPeek: "Le loro foto al posto delle iniziali",
+        coverPeek: "Titolo, dedica, colore e foto",
+        coverHeading: "Titolo",
+        coverDedication: "Dedica",
+        coverDedicationPlaceholder: "Per il nostro 5° anniversario",
+        coverColor: "Colore della copertina",
+        coverColorReset: "Usa il colore dello stile",
+        coverPhoto: "Foto di copertina",
+        coverPhotoUpload: "Carica una foto",
+        coverFaces: "Cerchi del profilo",
+        coverFacesHint: "Iniziali o le foto profilo che scegli",
+        coverFacesChoose: "Scegli le foto profilo →",
+        removePhoto: "Rimuovi la foto",
+        coverPreviewLabel: "Copertina",
+        fontTitle: "Carattere",
+        avatarsTitle: "Foto profilo",
+        avatarsHint:
+          "Compaiono nei cerchi in cima alla chat al posto delle iniziali.",
+        avatarChoose: "Scegli",
+        avatarUpload: "Scegli una foto profilo per {name}",
+        avatarRemove: "Rimuovi la foto profilo di {name}",
+        bookCompact: "Compatto",
+        bookCompactHint:
+          "I mesi con pochi messaggi continuano sulla stessa pagina.",
+        proDownloadNote:
+          "Il tuo design usa opzioni Pro. L'anteprima gratuita è stampata con l'aspetto standard; il PDF completo ha il tuo design.",
+        fontsHidden:
+          "I caratteri a cui mancano lettere di questa chat sono nascosti, così nulla viene stampato con dei vuoti.",
+        font: {
+          default: "Standard",
+          serif: "Libro",
+          rounded: "Arrotondato",
+          typewriter: "Macchina da scrivere",
+        },
+        book: "Impaginazione libro",
+        bookHint: "Un capitolo per mese, con il mese su ogni pagina.",
+      },
+      hideSystem:
+        "Nascondi avvisi di WhatsApp (ingressi, chiamate perse, crittografia)",
+      analysisPages: "Pagine di analisi: grafici e curiosità",
+      analysis: {
+        title: "La vostra chat in numeri",
+        perDay: "messaggi al giorno",
+        busiestDay: "giorno più attivo",
+        busiestHour: "ora più attiva",
+        perPerson: "Messaggi per persona",
+        timeline: "Messaggi nel tempo",
+        timeOfDay: "Messaggi per ora del giorno",
+        weekdays: "Messaggi per giorno della settimana",
+        funFacts: "Curiosità",
+        words: "parole",
+        wordsPerMessage: "parole per messaggio",
+        uniqueWords: "parole diverse",
+        longestMessage: "caratteri nel messaggio più lungo",
+        others: "Altri",
+      },
+      paper: "Carta",
+      paperSize: {
+        a4: "A4",
+        letter: "Letter",
+        a5: "A5",
+      },
+      dateRange: "Solo questi giorni",
+      dateFrom: "Dal",
+      dateTo: "Al",
+      dateReset: "Tutti i giorni",
+      dateLastMonth: "Ultimo mese",
+      dateLast3Months: "Ultimi 3 mesi",
+      dateLastYear: "Ultimo anno",
+      resetDesign: "Ripristina tutte le impostazioni",
+      tabs: {
+        look: "Aspetto",
+        design: "Design",
+        content: "Contenuto",
+      },
+      layoutTitle: "Testo e carta",
+      empty:
+        "Nessun messaggio in questi giorni. Scegli altri giorni, o tutti, per vedere la chat.",
+      tabsLabel: "Impostazioni",
+      previewTabsLabel: "Anteprima",
+      previewRegion: "Anteprima della chat",
     },
     subscribePage: {
       title: "Scopri tutto quello che l'IA ha trovato nella tua chat",
@@ -10778,6 +11931,18 @@ export const messages = {
       "John e Jane probabilmente scrivono di più alle 4 di mattina...",
     exampleGraphSubtitle2:
       "...e John scrive un po' di più in generale rispetto a Jane.",
+    pdfCustomizeTitle: "Vuoi un altro stile?",
+    pdfCustomizeLink:
+      "Personalizza questo PDF: stili, font, copertina e altro →",
+    pdfMadeLocally:
+      "Creato su questo dispositivo: la tua chat non viene mai caricata.",
+    pdfStatusCharts: "Disegno dei tuoi grafici…",
+    pdfStatusPreparing: "Preparazione di messaggi e foto…",
+    pdfStatusPages: "Impaginazione… {percent} %",
+    pdfPrintReadyHint:
+      "Il tuo PDF è pronto: tocca di nuovo per stamparlo o condividerlo.",
+    pdfAssembling:
+      "Unione delle pagine… per una chat lunga può richiedere qualche secondo.",
     waitingForPDF:
       "La generazione del PDF può richiedere un po' di tempo, a volte fino a 10 minuti, a seconda del tuo dispositivo. Per favore, sii paziente.",
     chatTimeline: "Cronologia chat",
@@ -10897,6 +12062,9 @@ export const messages = {
       toolAiTitle: "Analisi chat con IA",
       toolAiText:
         "Lascia che l'IA descriva la tua chat: il ruolo di ciascuno, come interagite, i vostri argomenti e i momenti migliori. Sul tuo dispositivo o nel cloud.",
+      toolPdfTitle: "Chat WhatsApp in PDF",
+      toolPdfText:
+        "La tua chat come appare sul telefono: iPhone o Android, chiara o scura, o a risparmio d'inchiostro per la carta. Guardala, stampala o scarica il PDF.",
       toolCourtTitle: "PDF di prova legale",
       toolCourtText:
         "Formatta le chat di WhatsApp in trascrizioni PDF legali con timestamp precisi e verifica del mittente.",
@@ -10950,7 +12118,7 @@ export const messages = {
       analyticsGroupTitle: "Analisi e metriche della chat",
       analyticsGroupDesc:
         "Strumenti mirati nel browser per misurare dinamiche, volumi di messaggi, vocabolario e fasce orarie.",
-      courtGroupTitle: "Documentazione ufficiale e prove legali",
+      courtGroupTitle: "Esportazioni PDF e prove legali",
       courtGroupDesc:
         "Trascrizioni PDF legali e cronologie verificate pensate per tribunali e pratiche di visto.",
       situationsGroupTitle: "Capire cosa sta succedendo",

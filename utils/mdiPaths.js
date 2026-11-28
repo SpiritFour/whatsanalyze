@@ -2,7 +2,7 @@
 //
 // Vuetify's `mdi` icon set is the Material Design webfont: 300 KB of
 // render-blocking CSS declaring all 7,462 icon classes, plus a 393 KB woff2,
-// for the 81 icons below. plugins/vuetify-icons.js swaps it for an SVG set
+// for the 82 icons below. plugins/vuetify-icons.js swaps it for an SVG set
 // that reads this map, so `<v-icon>mdi-...</v-icon>` keeps working unchanged.
 //
 // Adding an icon to a template means adding it here. scripts/check-mdi-icons.js
@@ -43,6 +43,7 @@ import {
   mdiFileCertificateOutline,
   mdiFileDocumentOutline,
   mdiFileExport,
+  mdiFilePdfBox,
   mdiFileUploadOutline,
   mdiFormatLetterCase,
   mdiFormatLineSpacing,
@@ -130,6 +131,7 @@ export const mdiPaths = {
   "mdi-file-certificate-outline": mdiFileCertificateOutline,
   "mdi-file-document-outline": mdiFileDocumentOutline,
   "mdi-file-export": mdiFileExport,
+  "mdi-file-pdf-box": mdiFilePdfBox,
   "mdi-file-upload-outline": mdiFileUploadOutline,
   "mdi-format-letter-case": mdiFormatLetterCase,
   "mdi-format-line-spacing": mdiFormatLineSpacing,

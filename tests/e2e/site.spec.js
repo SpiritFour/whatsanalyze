@@ -62,10 +62,8 @@ test.describe("the analyzer", () => {
     });
   }
 
-  // The PDF worker gets attachments over postMessage, which drops anything
-  // that isn't plain data — a JSZip entry's `.async()` lives on its
-  // prototype, so a naive structured clone silently breaks the PDF for any
-  // chat with media in its zip.
+  // Stored (uncompressed) zip entries used to throw on inflate, and the PDF
+  // has to read every attachment it shows.
   test("builds the free preview PDF for a zip export with a stored attachment", async ({
     page,
   }) => {
@@ -527,10 +525,15 @@ test.describe("the analyzer", () => {
     await expectAnalysis(page);
   });
 
-  test("offers the PDF page to search and takes a dropped chat to the download", async ({
+  test("lists the PDF tool with the others and turns a dropped chat into a PDF there", async ({
     page,
   }) => {
-    await page.goto("/whatsapp-to-pdf");
+    await page.goto("/tools");
+    await page
+      .getByRole("link", { name: /WhatsApp Chat to PDF/ })
+      .first()
+      .click();
+    await expect(page).toHaveURL(/\/tools\/whatsapp-to-pdf\/?$/);
 
     await expect(
       page.getByRole("heading", {
@@ -538,19 +541,29 @@ test.describe("the analyzer", () => {
         level: 1,
       }),
     ).toBeVisible();
-    // It was noindex and left out of the sitemap while it was three
-    // sentences long.
     await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
     const sitemap = await (await page.request.get("/sitemap.xml")).text();
-    expect(sitemap).toContain("/whatsapp-to-pdf/</loc>");
+    expect(sitemap).toContain("/tools/whatsapp-to-pdf/</loc>");
+    // The old address is a redirect now, so it is not listed on its own.
+    expect(sitemap).not.toMatch(/\.com\/whatsapp-to-pdf\//);
 
     await page
       .locator('#dropzone-slot input[type="file"]')
       .setInputFiles(EXAMPLE_CHAT);
 
-    // The PDF is made under the analysis on the home page.
-    await expect(page).toHaveURL(/#payButton$/);
-    await expect(page.locator("#payButton")).toBeInViewport();
+    // The page is the tool: the chat is previewed and downloaded right here.
+    await expect(page).toHaveURL(/\/tools\/whatsapp-to-pdf\/?$/);
+    await expect(page.locator("#chat-pdf-tool")).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: /Download free preview PDF/i }),
+    ).toBeVisible();
+  });
+
+  test("sends the old PDF page address on to the tool", async ({ page }) => {
+    await page.goto("/whatsapp-to-pdf/");
+    await expect(page).toHaveURL(/\/tools\/whatsapp-to-pdf\/?$/);
+    await page.goto("/de/whatsapp-to-pdf/");
+    await expect(page).toHaveURL(/\/de\/tools\/whatsapp-to-pdf\/?$/);
   });
 });
 
@@ -700,6 +713,7 @@ test.describe("tools and footer", () => {
     "/tools/message-counter",
     "/tools/word-counter",
     "/tools/chat-heatmap",
+    "/tools/whatsapp-to-pdf",
   ];
 
   test("no longer links to the retired year review page", async ({ page }) => {
@@ -739,7 +753,7 @@ test.describe("tools and footer", () => {
     }
   });
 
-  test("shows three separated groups and all 11 tools in the directory", async ({
+  test("shows three separated groups and all 12 tools in the directory", async ({
     page,
   }) => {
     await page.goto("/tools");
@@ -751,11 +765,15 @@ test.describe("tools and footer", () => {
     await expect(groups.nth(0).locator(".tool-card")).toHaveCount(4);
     // Chat Analytics, the AI analyzer included
     await expect(groups.nth(1).locator(".tool-card")).toHaveCount(5);
-    // Court Documentation
-    const courtCards = groups.nth(2).locator(".tool-card");
-    await expect(courtCards).toHaveCount(2);
+    // The PDF tools: WhatsApp to PDF, then the two court documents
+    const pdfCards = groups.nth(2).locator(".tool-card");
+    await expect(pdfCards).toHaveCount(3);
+    await expect(pdfCards.first()).toHaveAttribute(
+      "href",
+      /\/tools\/whatsapp-to-pdf\/?$/,
+    );
     await expect(
-      courtCards.first().locator(".tool-card__court-badge"),
+      pdfCards.first().locator(".tool-card__court-badge"),
     ).toHaveText("PDF");
   });
 

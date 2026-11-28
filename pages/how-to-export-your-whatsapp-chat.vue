@@ -207,13 +207,9 @@ export default {
           text: t("exportGuidePage.cardPdfText", {
             price: formatPrice(ONE_TIME_PRICE, locale.value),
           }),
-          // With a chat: straight to the download under the analysis on the
-          // home page. Without one: the PDF page, which explains it first.
-          to: localePath(
-            chatReady.value
-              ? { path: "/", hash: "#payButton" }
-              : "/whatsapp-to-pdf",
-          ),
+          // The PDF tool picks up a chat already open in this visit, so it
+          // is the right place with or without one.
+          to: localePath("/tools/whatsapp-to-pdf"),
           linkText,
         },
         {

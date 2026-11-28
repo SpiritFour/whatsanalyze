@@ -23,16 +23,37 @@
           {{ $t("pdfStyleCourtHint") }}
         </p>
 
+        <!-- The styled chat PDF has its live preview right above, so the
+             example of the chart-style PDF would only mislead there. -->
         <img
-          v-if="!court"
-          src="/pdf-example.jpg"
+          v-if="!court && !chatView"
+          :src="pdfExampleImage"
           alt=""
           class="mx-auto mt-6 w-full max-w-[560px] rounded-token border border-solid border-[rgba(29,29,31,0.08)]"
           loading="lazy"
         />
+        <!-- The analyzer downloads the chat PDF in its default look; the
+             tool is where it is designed. The chat goes along in memory. -->
+        <p
+          v-if="!court && !chatView"
+          class="m-0 mt-4 text-sm text-wa-ink-muted"
+          data-pdf-customize
+        >
+          {{ $t("pdfCustomizeTitle") }}
+          <NuxtLink
+            :to="localePath('/tools/whatsapp-to-pdf')"
+            class="font-semibold text-wa-accent no-underline hover:underline"
+            @click="handOverToTool"
+          >
+            {{ $t("pdfCustomizeLink") }}
+          </NuxtLink>
+        </p>
         <!-- The example image shows the visual style, so the court style gets its
          own summary instead of a misleading preview. -->
-        <ul v-else class="m-0 mt-6 list-none space-y-3 p-0 text-sm text-wa-ink">
+        <ul
+          v-else-if="court"
+          class="m-0 mt-6 list-none space-y-3 p-0 text-sm text-wa-ink"
+        >
           <li
             v-for="feature in courtFeatures"
             :key="feature"
@@ -91,30 +112,30 @@
           {{ $t("pdfMediaMissing", { missing: media.total - media.found }) }}
         </p>
 
-        <!-- Building the PDF takes a while on a long chat, so say what is
-         happening: first while the media is still being read, then with a
-         real percentage once the pages start rendering. -->
-        <div v-show="isLoading" class="mx-auto mt-6 max-w-[420px]">
+        <!-- Building the PDF takes a while on a long chat: say which step it
+             is on, with a real percentage while the pages are laid out. -->
+        <div
+          v-show="isLoading"
+          class="mx-auto mt-6 max-w-[420px]"
+          role="status"
+          aria-live="polite"
+          data-pdf-status
+        >
           <p
-            class="m-0 text-sm text-wa-ink-muted"
-            v-html="$t('waitingForPDF')"
-          ></p>
-
-          <p
-            v-show="!progress"
-            class="m-0 mt-2 flex items-center justify-center gap-2 text-sm text-wa-ink-faint"
+            class="m-0 flex items-center justify-center gap-2 text-sm text-wa-ink-muted"
           >
             <span
-              class="block h-4 w-4 animate-spin rounded-full border-2 border-solid border-[rgba(29,29,31,0.15)] border-t-wa-accent"
+              v-if="!progress || progress >= 100"
+              class="block h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-solid border-[rgba(29,29,31,0.15)] border-t-wa-accent"
+              aria-hidden="true"
             ></span>
-            <span v-html="$t('loadingMedia')"></span>
+            <span>{{ statusText }}</span>
           </p>
-
           <div
             v-show="progress"
             class="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-[rgba(29,29,31,0.08)]"
             role="progressbar"
-            :aria-valuenow="progress"
+            :aria-valuenow="Math.round(progress)"
             aria-valuemin="0"
             aria-valuemax="100"
           >
@@ -123,6 +144,9 @@
               :style="{ width: progress + '%' }"
             ></div>
           </div>
+          <p class="m-0 mt-2 text-xs text-wa-ink-faint">
+            {{ $t("pdfMadeLocally") }}
+          </p>
         </div>
 
         <!-- Download dialog -->
@@ -133,6 +157,9 @@
                 v-if="hasFullAccess"
                 size="lg"
                 v-bind="activatorProps"
+                :loading="job === 'full'"
+                :disabled="isLoading"
+                data-pdf-download
                 @click="downloadFull"
               >
                 <span v-html="$t('downloadNow')"></span>
@@ -177,6 +204,8 @@
                   size="lg"
                   class="mt-6"
                   block
+                  :loading="job === 'full'"
+                  :disabled="isLoading"
                   @click="downloadFull"
                 >
                   <span v-html="$t('downloadNow')"></span>
@@ -228,6 +257,47 @@
             </v-card>
           </v-dialog>
         </div>
+
+        <!-- Printing: the same PDF, to paper. Under the download on every
+             page that offers the chat PDF; see utils/pdf/printPdf.ts. -->
+        <div v-if="!court" class="mt-3 flex flex-col items-center">
+          <UiButton
+            variant="secondary"
+            size="lg"
+            data-pdf-print
+            :class="{ 'pdf-print--ready': printReady }"
+            :loading="job === 'print'"
+            :disabled="isLoading && job !== 'print'"
+            @click="printPdf"
+          >
+            <svg
+              v-if="job !== 'print'"
+              viewBox="0 0 24 24"
+              class="h-[18px] w-[18px]"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
+              />
+              <rect x="6" y="14" width="12" height="7" rx="1" />
+            </svg>
+            {{ printReady ? $t("pdfTool.printOpen") : $t("pdfTool.print") }}
+          </UiButton>
+          <p class="m-0 mt-2 max-w-[420px] text-xs text-wa-ink-faint">
+            {{
+              printReady
+                ? $t("pdfPrintReadyHint")
+                : hasFullAccess
+                  ? $t("pdfTool.printHintFull")
+                  : $t("pdfTool.printHint")
+            }}
+          </p>
+        </div>
       </div>
     </div>
 
@@ -248,8 +318,15 @@
             <p class="pricing-card__text">{{ $t("freeTierDescription") }}</p>
           </div>
           <div>
-            <UiButton variant="secondary" block @click="handleFreePdfClick">
-              <IconDownload />
+            <UiButton
+              variant="secondary"
+              block
+              :loading="job === 'sample'"
+              :disabled="isLoading"
+              data-pdf-sample
+              @click="handleFreePdfClick"
+            >
+              <IconDownload v-if="job !== 'sample'" />
               <span v-html="$t('downloadFreePreviewPDF')"></span>
             </UiButton>
             <p class="pricing-card__price">{{ freePrice }}</p>
@@ -309,6 +386,12 @@
         </div>
       </div>
     </div>
+    <!-- The analysis page's charts, drawn off screen for the PDF. -->
+    <PdfAnalyticsCapture
+      v-if="!court && !chatView"
+      ref="analyticsCapture"
+      :live-clouds="{ words: '#wordcloud', emojis: '#emojicloud' }"
+    />
   </div>
 </template>
 
@@ -316,10 +399,11 @@
 // file-saver is CJS: the named import resolves to undefined when Nitro
 // renders this component on the server, which 500s the whole prerender.
 import FileSaver from "file-saver";
-import { markRaw, toRaw } from "vue";
+import { toRaw } from "vue";
 import {
   analyticsChat,
   analyticsEcommerce,
+  analyticsTools,
   ITEM_FULL_PDF,
 } from "~/composables/useAnalytics";
 import { fetchOneTimeCheckoutUrl } from "~/utils/subscription";
@@ -333,8 +417,21 @@ import {
 } from "~/utils/pricing";
 import { chatFingerprint } from "~/utils/chatFingerprint";
 import { scrollToSettled } from "~/utils/scroll";
-import PDFWorker from "~/assets/js/pdf.worker.js?worker";
-import { loadImage, objectToDictionary } from "~/utils/utils";
+import { renderChatViewPdf, renderCourtPdf } from "~/utils/pdf";
+import {
+  openPreparedPdf,
+  opensPdfInTab,
+  printInFrame,
+  removePrintFrame,
+} from "~/utils/pdf/printPdf";
+import { isPremiumDesign } from "~/utils/pdf/chatDesign";
+import { chatPdfLabels, chatTitleFor } from "~/utils/pdf/chatLabels";
+import { normalizeChatViewOptions } from "~/utils/pdf/chatStyles";
+import { filterChatMessages } from "~/utils/pdf/chatView";
+import { defaultPaper } from "~/utils/pdf/paperDefault";
+import pdfExampleImage from "~/assets/img/whatsapp-to-pdf-example.webp";
+import PdfAnalyticsCapture from "~/components/pdf/AnalyticsCapture.vue";
+import { resolveStyle } from "~/utils/pdf/chatDesign";
 import {
   formatExactTimestamp,
   formatFileSize,
@@ -342,6 +439,7 @@ import {
 } from "~/utils/courtEvidence";
 
 export default {
+  components: { PdfAnalyticsCapture },
   props: {
     chat: { type: Object, required: true },
     attachments: { type: Array, default: () => [] },
@@ -351,11 +449,22 @@ export default {
     isValidSubscription: { type: Boolean, default: false },
     // the court evidence transcript instead of the visual story
     court: { type: Boolean, default: false },
+    // the court transcript's paper: "a4" or "letter"
+    courtPaper: { type: String, default: "a4" },
+    // the chat as on a phone, as designed in the WhatsApp to PDF tool:
+    // { options, title, labels(printed, total), locale, assets } — see
+    // utils/pdf/chatPdf.ts. Without it (the analyzer) the same PDF is made in
+    // its default look.
+    chatView: { type: Object, default: null },
   },
   setup() {
     return {
       oneTimePurchase: useOneTimePurchase(),
       subscribeLink: useSubscribeLink(),
+      localePath: useLocalePath(),
+      sharedChat: useSharedChat(),
+      baseUrl: useRuntimeConfig().public.baseUrl,
+      pdfExampleImage,
     };
   },
   data() {
@@ -365,11 +474,29 @@ export default {
       isOneTimeLoading: false,
       discountPercent: ONE_TIME_DISCOUNT_PERCENT,
       progress: 0,
-      pdfWorker: null,
       pdfFileType: null,
+      // which button's PDF is being made: "full", "sample" or "print"
+      job: null,
+      // "charts", "preparing" or "pages": what the status line says
+      phase: null,
+      // Safari and iOS: a PDF made for printing, opened on the next tap
+      printReady: false,
+      // The export outlives a navigation away from the page; don't trigger a
+      // download from a component that is already gone.
+      isUnmounted: false,
     };
   },
   computed: {
+    statusText() {
+      if (this.phase === "charts") return this.$t("pdfStatusCharts");
+      if (this.progress >= 100) return this.$t("pdfAssembling");
+      if (this.progress > 0) {
+        return this.$t("pdfStatusPages", {
+          percent: Math.round(this.progress),
+        });
+      }
+      return this.$t("pdfStatusPreparing");
+    },
     /**
      * Every amount in this table goes through one formatter: it used to quote
      * "7,99 Euro", "7.99 EUR" and "15 EUR" within a single card.
@@ -419,6 +546,19 @@ export default {
         this.$t(`pdfStyleCourtFeature${index}`),
       );
     },
+    /** What a full download is reported as. */
+    fullFileType() {
+      if (this.chatView) return "pdf_full_chat";
+      return this.court ? "pdf_full_court" : "pdf_full";
+    },
+    fileName() {
+      if (this.chatView) {
+        // a file name, not a path: no slashes from a group's name
+        const title = String(this.chatView.title).replace(/[\\/:*?"<>|]/g, "-");
+        return `WhatsApp Chat - ${title.trim()}.pdf`;
+      }
+      return `${this.court ? "WhatsAnalyze Court Transcript" : "WhatsAnalyze"} - ${String(this.ego).trim()}.pdf`;
+    },
     /** Identifies the chat on screen, to tie a single payment to it. */
     currentChatFingerprint() {
       // toRaw: reading every message through the reactive proxy would make
@@ -444,12 +584,25 @@ export default {
     currentChatFingerprint() {
       this.downloadPurchasedPdf();
     },
+    // Another chat, design or access: a PDF made for printing is stale.
+    chat() {
+      this.releasePrint();
+    },
+    chatView() {
+      this.releasePrint();
+    },
+    hasFullAccess() {
+      this.releasePrint();
+    },
   },
   mounted() {
     this.downloadPurchasedPdf();
+    this.warmAnalyticsWhenNear();
   },
   beforeUnmount() {
-    this.closePdfWorker();
+    this.isUnmounted = true;
+    this.warmObserver?.disconnect();
+    this.releasePrint();
   },
   methods: {
     /**
@@ -478,7 +631,7 @@ export default {
       analyticsChat.download("pdf_sample");
     },
     downloadFull() {
-      analyticsChat.download(this.court ? "pdf_full_court" : "pdf_full");
+      analyticsChat.download(this.fullFileType);
       this.download(false);
       this.showDownloadPopup = false;
     },
@@ -504,104 +657,205 @@ export default {
         this.isOneTimeLoading = false;
       }
     },
-    async download(isSample = false) {
-      if (!import.meta.client) return;
-
+    /**
+     * Makes the PDF, saying which step it is on: the charts first (the
+     * analysis pages), then the pages with a percentage. Shared by every
+     * button here, so downloading and printing behave the same on the
+     * analyzer and in the tool. Resolves to null when it failed or the page
+     * went away meanwhile.
+     */
+    async buildPdf(isSample, job) {
+      if (!import.meta.client || this.isLoading) return null;
       this.isLoading = true;
+      this.job = job;
       this.progress = 0;
-      this.pdfFileType = isSample
-        ? "pdf_sample"
-        : this.court
-          ? "pdf_full_court"
-          : "pdf_full";
+      this.phase = "preparing";
+      const onProgress = (percent) => {
+        this.phase = "pages";
+        this.progress = percent;
+      };
 
       try {
-        // the graphs need to be converted to an image beforehand, as the web worker has no access to document
-        // the court transcript shows no charts, so it skips rasterising them
-        const graphs = this.court ? {} : await this.loadGraphs();
-        this.pdfWorker = markRaw(new PDFWorker());
-        // markRaw: never wrap the Worker in reactive proxies — proxied receivers break
-        // native postMessage/addEventListener calls.
-        this.pdfWorker.addEventListener("message", this.workerResponseHandler);
-        this.pdfWorker.addEventListener("error", this.pdfErrorHandler);
+        // toRaw: the exporter walks every message, and reading them through
+        // the reactive proxy would make this component depend on all of them.
+        const chat = toRaw(this.chat);
+        const attachments = toRaw(this.attachments);
 
-        const chat = objectToDictionary(this.chat); // remove functions
-        chat.funFacts = await this.chat.getFunFacts(); // set funfacts beforehand instead of using function call
-
-        // A JSZip entry's `.async()` method lives on its prototype, so it
-        // does not survive postMessage's structured clone into the worker —
-        // resolve every attachment to plain bytes on the main thread first.
-        const attachments = await Promise.all(
-          this.attachments.map(async (attachment) =>
-            attachment.zipEntry
-              ? {
-                  name: attachment.name,
-                  decompressedData:
-                    await attachment.zipEntry.async("uint8array"),
-                }
-              : attachment,
-          ),
-        );
-
-        this.pdfWorker.postMessage({
-          chat: chat,
-          attachments: objectToDictionary(attachments),
-          ego: this.ego,
-          isSample,
-          style: this.court ? "court" : "visual",
-          source: objectToDictionary(this.source),
-          ...graphs,
-        });
+        const view = this.court ? null : this.chatView || this.defaultView();
+        // The analysis page's charts, as pictures, for the analysis pages.
+        let analytics = [];
+        if (view && view.options.analysis !== false) {
+          this.phase = "charts";
+          analytics = await (view.captureAnalytics
+            ? view.captureAnalytics(view.options)
+            : this.captureAnalytics(view.options));
+          this.phase = "preparing";
+        }
+        if (this.isUnmounted) return null;
+        const blob = view
+          ? await renderChatViewPdf({
+              chat,
+              attachments,
+              options: { ...view.options },
+              title: view.title,
+              labels: view.labels,
+              locale: view.locale,
+              assets: view.currentAssets
+                ? await view.currentAssets()
+                : view.assets || {},
+              isSample,
+              onProgress,
+              analytics,
+            })
+          : await renderCourtPdf({
+              chat,
+              attachments,
+              isSample,
+              source: toRaw(this.source),
+              onProgress,
+              paper: this.courtPaper,
+            });
+        return this.isUnmounted ? null : blob;
       } catch (error) {
         this.pdfErrorHandler(error);
+        return null;
+      } finally {
+        this.isLoading = false;
+        this.job = null;
+        this.phase = null;
+        this.progress = 0;
       }
     },
-    /** Chart canvases as images — the worker has no access to the document. */
-    async loadGraphs() {
-      return {
-        chatTimeline: await loadImage("#chat-timeline"),
-        messagesPerTimeOfDay: await loadImage("#messages-per-time-of-day"),
-        messagesPerPerson: await loadImage("#messages-per-person"),
-        radarMonth: await loadImage("#radar-month"),
-        radarDay: await loadImage("#radar-day"),
+    async download(isSample = false) {
+      if (this.isLoading) return;
+      this.pdfFileType = isSample ? "pdf_sample" : this.fullFileType;
+      const blob = await this.buildPdf(isSample, isSample ? "sample" : "full");
+      if (!blob) return;
+      FileSaver.saveAs(blob, this.fileName);
+      // file_download fires when the build starts; this proves it finished
+      analyticsChat.pdfGenerated(
+        this.pdfFileType,
+        this.chatView
+          ? {
+              style: this.chatView.options.style,
+              font: this.chatView.options.font,
+              paper: this.chatView.options.paper,
+              // what was printed: Pro parts only with full access
+              pro: isPremiumDesign(this.chatView.options),
+            }
+          : undefined,
+      );
+    },
+    /**
+     * Prints the PDF the download would give: the whole chat with full
+     * access, else the free preview. On iPhone, iPad and Safari the first
+     * tap makes it and a second one opens it (utils/pdf/printPdf.ts).
+     */
+    async printPdf() {
+      if (this.printReady && this.printBlob) {
+        analyticsTools.pdfPrint(this.hasFullAccess);
+        await openPreparedPdf(this.printBlob, this.printUrl, this.fileName);
+        return;
+      }
+      if (this.isLoading) return;
+      const blob = await this.buildPdf(!this.hasFullAccess, "print");
+      if (!blob) return;
+      this.releasePrint();
+      this.printUrl = URL.createObjectURL(blob);
+      if (opensPdfInTab()) {
+        this.printBlob = blob;
+        this.printReady = true;
+      } else {
+        analyticsTools.pdfPrint(this.hasFullAccess);
+        printInFrame(this.printUrl);
+      }
+    },
+    /** A PDF made for printing earlier, no longer what would be printed. */
+    releasePrint() {
+      removePrintFrame();
+      if (this.printUrl) URL.revokeObjectURL(this.printUrl);
+      this.printUrl = null;
+      this.printBlob = null;
+      this.printReady = false;
+    },
+    /**
+     * The analyzer's PDF: the WhatsApp to PDF tool's document in its default
+     * look, with the person chosen on the analyzer on the right.
+     */
+    defaultView() {
+      const chat = toRaw(this.chat);
+      const locale = this.$i18n.locale;
+      const options = {
+        ...normalizeChatViewOptions(null, this.ego),
+        paper: defaultPaper(),
       };
+      const participants = Object.keys(chat.personColorMap || {});
+      const facts = {
+        participants,
+        title: chatTitleFor(participants, this.ego),
+        messages: filterChatMessages(chat.chatObject, options, participants),
+      };
+      const context = {
+        t: (key, params) => this.$t(key, params),
+        locale,
+        link: (path, campaign) => {
+          const clean = `${this.baseUrl}${this.localePath(path)}`;
+          return {
+            url: `${clean}?utm_source=chat_pdf&utm_medium=pdf&utm_campaign=${campaign}`,
+            text: clean.replace(/^https?:\/\//, ""),
+          };
+        },
+        price: this.oneTimePrice,
+      };
+      return {
+        options,
+        title: facts.title,
+        locale,
+        labels: (printed, total) =>
+          chatPdfLabels(context, facts, options, printed, total),
+      };
+    },
+    /**
+     * The analyzer draws its PDF's charts once the download section comes
+     * near the screen, so a click only has to take their picture.
+     */
+    warmAnalyticsWhenNear() {
+      if (this.court || this.chatView) return;
+      if (typeof IntersectionObserver === "undefined") return;
+      this.warmObserver = new IntersectionObserver(
+        (entries) => {
+          if (!entries.some((entry) => entry.isIntersecting)) return;
+          this.warmObserver.disconnect();
+          this.$refs.analyticsCapture?.warm(toRaw(this.chat));
+        },
+        { rootMargin: "600px 0px" },
+      );
+      this.warmObserver.observe(this.$el);
+    },
+    /** The analyzer's charts for its own PDF; see AnalyticsCapture.vue. */
+    async captureAnalytics(options) {
+      return (
+        (await this.$refs.analyticsCapture?.capture({
+          chat: toRaw(this.chat),
+          background: resolveStyle(options).page,
+        })) ?? []
+      );
+    },
+    /** The tool picks the chat up from memory: no second upload. */
+    handOverToTool() {
+      this.sharedChat = {
+        messages: toRaw(this.chat).chatObject,
+        attachments: toRaw(this.attachments),
+      };
+      analyticsTools.ctaClick("pdf_download", "pdf_tool");
     },
     downloadSample() {
       const query = (this.$route && this.$route.query) || {};
       this.download(!("free" in query));
     },
-    workerResponseHandler: function (event) {
-      const data = event.data;
-      if (data.type === "pdf") {
-        // service workers can not save files
-        const blob = new Blob([data.data], { type: "application/pdf" });
-        FileSaver.saveAs(
-          blob,
-          `${this.court ? "WhatsAnalyze Court Transcript" : "WhatsAnalyze"} - ${String(this.ego).trim()}.pdf`,
-        );
-        // file_download fires when the build starts; this proves it finished
-        analyticsChat.pdfGenerated(this.pdfFileType);
-        this.isLoading = false;
-        this.closePdfWorker();
-      }
-      if (data.type === "progress") {
-        this.progress = data.data;
-      }
-    },
     pdfErrorHandler(error) {
       console.error("PDF generation failed", error);
       this.$sentry?.captureException(error);
-      this.isLoading = false;
-      this.progress = 0;
-      this.closePdfWorker();
-    },
-    closePdfWorker() {
-      if (!this.pdfWorker) return;
-
-      this.pdfWorker.removeEventListener("message", this.workerResponseHandler);
-      this.pdfWorker.removeEventListener("error", this.pdfErrorHandler);
-      this.pdfWorker.terminate();
-      this.pdfWorker = null;
     },
   },
 };

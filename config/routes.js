@@ -31,8 +31,8 @@ export const localizedPages = [
   "tools/word-counter",
   "tools/chat-heatmap",
   "tools/what-to-reply",
+  "tools/whatsapp-to-pdf",
   "what-brandon-thinks-alternative",
-  "whatsapp-to-pdf",
   "wrapped",
   "wrapped/results",
   "wrapped/subscription/success",
@@ -71,6 +71,8 @@ export const retiredPages = {
   // Was a page whose whole job was to redirect to /subscribe. Nothing the
   // backend sends ever pointed at it, so no query string is lost here.
   "wrapped/subscription/verify": "subscribe",
+  // The WhatsApp-to-PDF tool moved in with the other tools.
+  "whatsapp-to-pdf": "tools/whatsapp-to-pdf",
 };
 
 /** Every retired path, per locale, mapped to its destination. */

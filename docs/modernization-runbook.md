@@ -154,18 +154,18 @@ Do not mix both models further.
 
 ## PDF generation
 
-PDF generation runs in `assets/js/pdf.worker.js`, loaded through Vite's native
-`?worker` import.
+PDF generation runs on the main thread (`utils/pdf/`, see
+`docs/pdf-export.md`): both exports are laid out as HTML in an offscreen frame,
+which needs the DOM, so the old `assets/js/pdf.worker.js` is gone.
 
 Two Vue 3 migration details are essential:
 
 1. Chart canvases must be found with a descendant selector such as
    `#chat-timeline canvas`. Vue Chart.js no longer preserves the exact Vue 2 DOM
    nesting.
-2. Vue 3 state is wrapped in reactive proxies. Proxies cannot be sent with
-   `Worker.postMessage`; `objectToDictionary` recursively converts chat and
-   attachment data to cloneable plain structures while preserving dates,
-   buffers, and typed arrays.
+2. Vue 3 state is wrapped in reactive proxies. Pass `toRaw(...)` data to the
+   exporter: it walks every message, and reading them through the proxy would
+   make the component depend on all of them.
 
 More pitfalls discovered the hard way:
 

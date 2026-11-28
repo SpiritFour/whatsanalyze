@@ -1,5 +1,5 @@
 <template>
-  <!-- Two pages of the court transcript (utils/pdfCourt.ts) as they print:
+  <!-- Two pages of the court transcript (utils/pdf/court.ts) as they print:
        the cover's integrity record behind a page of the transcript. English
        in every locale, like the PDF itself. -->
   <figure class="doc-mock">

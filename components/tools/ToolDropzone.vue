@@ -221,6 +221,8 @@ const library = useLibrary();
 // This tool, as a saved chat remembers it ("/tools/inactivity/").
 const toolPath = cleanPath(useRoute().path);
 const surface = `tool_${props.toolType}`;
+/** Pages whose PDF needs the export's media after a reload or checkout. */
+const keepsUpload = props.toolType === "court" || props.toolType === "pdf";
 
 /** A saved chat on screen here: remember this tool as the last one used. */
 function noteShown(messages: ChatMessage[]) {
@@ -248,6 +250,13 @@ function onDragLeave() {
   isDragging.value = false;
 }
 
+/**
+ * Set as soon as the visitor picks a chat themselves. Restoring the chat from
+ * earlier in the visit is asynchronous, and a file dropped right after the
+ * page opened must not be replaced by the old chat when the restore lands.
+ */
+let visitorChose = false;
+
 async function processInput(
   fileOrText: File | string,
   fileName = "WhatsApp Chat",
@@ -255,6 +264,7 @@ async function processInput(
   track = true,
   sample = false,
 ) {
+  if (track) visitorChose = true;
   loading.value = true;
   errorMessage.value = null;
   notice.value = null;
@@ -287,9 +297,10 @@ async function processInput(
     saveChatSession(
       sample ? { ...parsed, sample, sourceName: fileName } : parsed,
     );
-    // The court PDF hashes every attachment, so its pages keep the export
-    // itself too; the sample chat replaces whatever was kept.
-    if (props.toolType === "court") {
+    // The court PDF hashes every attachment and the chat PDF shows the
+    // photos, so their pages keep the export itself too; the sample chat
+    // replaces whatever was kept.
+    if (keepsUpload) {
       void (typeof fileOrText === "string"
         ? clearUpload()
         : saveUpload(fileOrText));
@@ -403,12 +414,14 @@ onMounted(async () => {
   } | null = sharedChat.value?.messages?.length
     ? sharedChat.value
     : ((await library.restoreActive()) ?? loadChatSession());
+  if (visitorChose) return;
 
   // After a full page load the restored chat has the messages but not the
   // media. The export kept for this tab has both, if it is that chat's
   // export (not one since uploaded somewhere else).
-  if (props.toolType === "court" && restored !== sharedChat.value) {
+  if (keepsUpload && restored !== sharedChat.value) {
     const kept = await loadUpload();
+    if (visitorChose) return;
     const sources = restored?.chat?.sources ?? [restored?.source];
     if (
       kept &&
@@ -423,7 +436,7 @@ onMounted(async () => {
     }
   }
 
-  if (!restored?.messages?.length) return;
+  if (!restored?.messages?.length || visitorChose) return;
   try {
     showChat(
       {

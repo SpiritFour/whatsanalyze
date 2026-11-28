@@ -15,6 +15,9 @@ export default {
   // stopwords, was never read by anything, and read like the component filtered
   // its own words while it showed whatever it was handed.
   props: {
+    // For the PDF's capture (components/pdf/AnalyticsCapture.vue): a coarser,
+    // faster layout. Placing every word pixel by pixel took seconds there.
+    quick: { type: Boolean, default: false },
     chartdata: new Chat(),
   },
   data() {
@@ -55,6 +58,11 @@ export default {
     this.series.labels.template.tooltipText = "[bold]{freq}[/] x {word}";
     this.series.labels.template.fontFamily = chartFontFamily;
     this.series.accuracy = 4;
+    if (this.quick) {
+      this.series.accuracy = 6;
+      this.series.step = 25;
+      this.series.maxCount = 100;
+    }
     this.series.minFontSize = 10;
     this.series.maxFontSize = 60;
     // The more often a word is used, the deeper the teal: the colour repeats

@@ -65,7 +65,16 @@ export function useToolsNav() {
     },
   ]);
 
+  // The PDF tools: the chat as a PDF, as on a phone or as evidence.
   const courtTools = computed<SiteNavLink[]>(() => [
+    {
+      to: localePath("/tools/whatsapp-to-pdf"),
+      title: t("toolsHub.toolPdfTitle"),
+      text: t("toolsHub.toolPdfText"),
+      icon: "mdi-file-pdf-box",
+      color: "#34d399",
+      bg: "rgba(52, 211, 153, 0.15)",
+    },
     {
       to: localePath("/tools/court-evidence"),
       title: t("toolsHub.toolCourtTitle"),

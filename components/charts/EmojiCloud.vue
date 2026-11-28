@@ -9,6 +9,9 @@ import { onlyEmoji } from "emoji-aware";
 export default {
   name: "EmojiCloud",
   props: {
+    // For the PDF's capture (components/pdf/AnalyticsCapture.vue): a coarser,
+    // faster layout. Placing every word pixel by pixel took seconds there.
+    quick: { type: Boolean, default: false },
     chartdata: new Chat(),
     minWordLength: {
       type: Number,
@@ -60,6 +63,11 @@ export default {
     this.series.dataFields.value = "freq";
     this.series.labels.template.tooltipText = "[bold]{freq}[/] x {word}";
     this.series.accuracy = 5;
+    if (this.quick) {
+      this.series.accuracy = 6;
+      this.series.step = 25;
+      this.series.maxCount = 100;
+    }
     // Dynamic font scaling based on frequency. Bigger than the word cloud on
     // purpose: most chats use a couple of dozen emoji at most, and at the old
     // sizes they sat as a small huddle in the middle of an empty card.
