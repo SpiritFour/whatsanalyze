@@ -632,6 +632,62 @@ test.describe("the WhatsApp to PDF tool", () => {
     await expect(circles.last()).toHaveText("+2");
   });
 
+  test("draws a voice message like WhatsApp, with its length", async ({
+    page,
+  }) => {
+    // A minimal Ogg Opus file: its last page says 3.2 s (48 kHz, 312
+    // samples pre-skip), which is all the length is read from.
+    const page_ = (granule, payload, seq, flags = 0) => {
+      const header = Buffer.alloc(27);
+      header.write("OggS", 0, "latin1");
+      header[5] = flags;
+      header.writeBigInt64LE(BigInt(granule), 6);
+      header.writeUInt32LE(seq, 18);
+      header[26] = 1;
+      return Buffer.concat([header, Buffer.from([payload.length]), payload]);
+    };
+    const head = Buffer.alloc(19);
+    head.write("OpusHead", 0, "latin1");
+    head[8] = 1;
+    head[9] = 1;
+    head.writeUInt16LE(312, 10);
+    head.writeUInt32LE(48000, 12);
+    const opus = Buffer.concat([
+      page_(0, head, 0, 2),
+      page_(Math.round(48000 * 3.2) + 312, Buffer.alloc(40), 1, 4),
+    ]);
+    const zip = new JSZip();
+    zip.file(
+      "_chat.txt",
+      [
+        "[28.11.26, 15:18:02] Tom Weber: Hast du kurz Zeit?",
+        "[28.11.26, 15:20:54] Mara Brandl: \u200e<Anhang: 00000008-AUDIO-2026-11-28-15-20-54.opus>",
+      ].join("\n"),
+    );
+    zip.file("00000008-AUDIO-2026-11-28-15-20-54.opus", opus);
+
+    await openTool(page, {
+      name: "voice.zip",
+      mimeType: "application/zip",
+      buffer: await zip.generateAsync({ type: "nodebuffer" }),
+    });
+    const voice = page.locator(".chat-preview .cv-voice");
+    await expect(voice).toHaveCount(1);
+    await expect(voice.locator(".cv-voice-meta")).toContainText("0:03");
+    // The file name is not printed as text any more.
+    await expect(page.locator(".chat-preview")).not.toContainText("Anhang");
+  });
+
+  test("asks for the point of view above the settings", async ({ page }) => {
+    await openTool(page);
+    // Visible whichever settings tab is open.
+    for (const tab of ["look", "design", "content"]) {
+      await openControls(page, tab);
+      await expect(page.locator('select[name="chat-me"]')).toBeVisible();
+    }
+    await expect(page.getByText("Point of view")).toBeVisible();
+  });
+
   test("prints the analysis pages unless turned off", async ({ page }) => {
     test.setTimeout(180_000);
     await openTool(page);

@@ -6,7 +6,14 @@ import { TEXT_SIZES } from "~/utils/pdf/chatStyles";
 import type { ChatStyle, ChatViewOptions } from "~/utils/pdf/chatStyles";
 import type { ChatCoverContent, ChatOutroContent } from "~/utils/pdf/chatPages";
 import type { ChatAnalysisLabels } from "~/utils/pdf/chatAnalysis";
-import { getAttachment } from "~/utils/attachments";
+import { getAttachment, getAttachmentBytes } from "~/utils/attachments";
+import {
+  formatDuration,
+  isVoiceFile,
+  voiceDuration,
+  voiceIcon,
+  waveform,
+} from "~/utils/pdf/voiceNote";
 import type { AttachmentSource } from "~/utils/attachments";
 
 /**
@@ -39,6 +46,8 @@ export interface ChatViewMessage {
   date: Date | string;
   isSystem: boolean;
   media?: { dataUrl: string; format: string } | null;
+  /** A voice message: its length in seconds where the export has the file. */
+  voice?: { duration: number | null; seed: string } | null;
 }
 
 export interface ChatViewLabels {
@@ -107,7 +116,22 @@ export async function prepareChatMessages(
     let text: string = message.message || "";
 
     const fileName = message.attachment?.fileName;
-    if (showMedia && fileName) {
+    let voice: ChatViewMessage["voice"] = null;
+    // A voice message is part of the conversation, photos on or off: drawn
+    // as WhatsApp draws it instead of as its file name.
+    if (isVoiceFile(fileName)) {
+      let bytes: Uint8Array | undefined;
+      try {
+        bytes = await getAttachmentBytes(fileName, attachments);
+      } catch {
+        bytes = undefined;
+      }
+      voice = {
+        duration: await voiceDuration(bytes, fileName),
+        seed: fileName,
+      };
+      if (isAttachmentLine(text, fileName)) text = "";
+    } else if (showMedia && fileName) {
       try {
         const attachment = await getAttachment(fileName, attachments);
         if (attachment.mimeTypeData.renderInPDF && attachment.src) {
@@ -133,6 +157,7 @@ export async function prepareChatMessages(
       date: message.date,
       isSystem,
       media,
+      voice,
     });
   }
 
@@ -354,6 +379,52 @@ export function coverFacesHtml(
   return `<div class="cp-faces">${circles.join("")}</div>`;
 }
 
+/**
+ * A voice message as WhatsApp draws it: the sender's picture (or initials)
+ * with a microphone, a play button, a waveform from a dot, and below it the
+ * length on the left and the time on the right.
+ */
+function voiceHtml(
+  message: ChatViewMessage,
+  doc: ChatViewDocument,
+  style: ChatStyle,
+  isOut: boolean,
+  sprite: Map<string, string>,
+  showTime: boolean,
+): string {
+  const voice = message.voice!;
+  const ink = isOut ? (style.mutedOut ?? style.muted) : style.muted;
+  const text = isOut ? (style.textOut ?? style.text) : style.text;
+  const [face] = faceCircles([message.author], doc, style, sprite, {
+    max: 1,
+    className: "cv-voice-face",
+    more: "cv-voice-face",
+  });
+  const mic = voiceIcon("mic", ink);
+  const play = voiceIcon("play", ink);
+  const bars = waveform(voice.seed)
+    .map(
+      (height) =>
+        `<span class="cv-voice-bar" style="height:${height}px;background:${ink}"></span>`,
+    )
+    .join("");
+  return `<div class="cv-voice">
+      <div class="cv-voice-avatar">${face}${
+        mic
+          ? `<img class="cv-voice-mic" src="${mic}" data-format="PNG" alt="">`
+          : ""
+      }</div>
+      ${play ? `<img class="cv-voice-play" src="${play}" data-format="PNG" alt="">` : ""}
+      <div class="cv-voice-main">
+        <div class="cv-voice-wave"><span class="cv-voice-dot" style="background:${text}"></span>${bars}</div>
+        <div class="cv-voice-meta" style="color:${ink}">
+          <span>${voice.duration ? words(formatDuration(voice.duration)) : ""}</span>
+          ${showTime ? `<span>${words(timeLabel(message.date, doc.locale))}</span>` : ""}
+        </div>
+      </div>
+    </div>`;
+}
+
 /** The whole chat view: header, day separators, bubbles, preview notice. */
 export function chatViewHtml(
   doc: ChatViewDocument,
@@ -463,10 +534,15 @@ export function chatViewHtml(
     const time = options.showTimes
       ? `<div class="cv-time">${words(timeLabel(message.date, doc.locale))}</div>`
       : "";
+    const voice = message.voice
+      ? voiceHtml(message, doc, style, isOut, sprite, options.showTimes)
+      : "";
 
     html += block(
       chapter,
-      `<div class="cv-bubble">${name}${media}${text}${time}</div>`,
+      `<div class="cv-bubble${voice ? " is-voice" : ""}">${name}${media}${voice}${text}${
+        voice ? "" : time
+      }</div>`,
       {
         className: [
           "cv-msg",
@@ -580,6 +656,26 @@ img.cv-avatar { display: block; }
     s.radius - 6,
   )}px; }
 .cv-time { color: ${s.muted}; font-size: ${tiny}px; text-align: right; padding-top: 1px; }
+
+.cv-bubble.is-voice { padding: 8px 12px 6px 8px; }
+.cv-voice { display: flex; align-items: center; gap: 10px; width: 270px; max-width: 100%; }
+.cv-voice-avatar { position: relative; flex: none; width: 46px; height: 46px; }
+.cv-voice-face {
+  width: 46px; height: 46px; border-radius: 23px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 16px; line-height: 1;
+}
+img.cv-voice-face { display: block; }
+.cv-voice-mic { position: absolute; right: -5px; bottom: -3px; width: 18px; height: 18px; }
+.cv-voice-play { flex: none; width: 20px; height: 20px; }
+.cv-voice-main { flex: 1; min-width: 0; padding-top: 10px; }
+.cv-voice-wave { display: flex; align-items: center; justify-content: space-between; height: 24px; overflow: hidden; }
+.cv-voice-dot { flex: none; width: 12px; height: 12px; border-radius: 6px; margin-right: 2px; }
+.cv-voice-bar { flex: none; width: 3px; border-radius: 2px; }
+.cv-voice-meta {
+  display: flex; justify-content: space-between;
+  font-size: ${tiny}px; padding-top: 3px;
+}
 
 .cv-notice {
   margin-top: 16px; padding: 10px 14px; border-radius: 10px;

@@ -122,7 +122,9 @@ export const messages = {
         contrast: "High contrast",
       },
       adjustTitle: "Adjust",
-      me: "Your messages (right side)",
+      pointOfView: "Point of view",
+      pointOfViewHint:
+        "Whose phone it is seen on: their messages are on the right.",
       textSize: "Text size",
       size: {
         s: "S",
@@ -2382,7 +2384,9 @@ export const messages = {
         contrast: "Hoher Kontrast",
       },
       adjustTitle: "Anpassen",
-      me: "Deine Nachrichten (rechte Seite)",
+      pointOfView: "Perspektive",
+      pointOfViewHint:
+        "Auf wessen Handy der Chat gezeigt wird: deren Nachrichten stehen rechts.",
       textSize: "Schriftgröße",
       size: {
         s: "S",
@@ -4642,7 +4646,9 @@ export const messages = {
         contrast: "Alto contraste",
       },
       adjustTitle: "Ajustes",
-      me: "Tus mensajes (lado derecho)",
+      pointOfView: "Punto de vista",
+      pointOfViewHint:
+        "En el móvil de quién se ve el chat: sus mensajes van a la derecha.",
       textSize: "Tamaño del texto",
       size: {
         s: "S",
@@ -6886,7 +6892,9 @@ export const messages = {
         contrast: "Alto contraste",
       },
       adjustTitle: "Ajustar",
-      me: "As suas mensagens (lado direito)",
+      pointOfView: "Ponto de vista",
+      pointOfViewHint:
+        "No telemóvel de quem a conversa é vista: as mensagens dessa pessoa ficam à direita.",
       textSize: "Tamanho do texto",
       size: {
         s: "P",
@@ -9136,7 +9144,9 @@ export const messages = {
         contrast: "Contraste élevé",
       },
       adjustTitle: "Ajuster",
-      me: "Vos messages (côté droit)",
+      pointOfView: "Point de vue",
+      pointOfViewHint:
+        "Sur le téléphone de qui la discussion est vue : ses messages sont à droite.",
       textSize: "Taille du texte",
       size: {
         s: "S",
@@ -11398,7 +11408,9 @@ export const messages = {
         contrast: "Alto contrasto",
       },
       adjustTitle: "Regola",
-      me: "I tuoi messaggi (lato destro)",
+      pointOfView: "Punto di vista",
+      pointOfViewHint:
+        "Sul telefono di chi si vede la chat: i suoi messaggi sono a destra.",
       textSize: "Dimensione del testo",
       size: {
         s: "S",

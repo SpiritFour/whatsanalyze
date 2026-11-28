@@ -19,6 +19,20 @@
 
       <div class="chat-pdf__layout">
         <form class="chat-pdf__controls" @submit.prevent>
+          <!-- Whose phone the chat is seen on: the first choice, above the
+               settings, because it changes every bubble. -->
+          <label class="chat-pdf__pov">
+            <span class="chat-pdf__pov-label">{{
+              t("pdfTool.pointOfView")
+            }}</span>
+            <select v-model="options.me" name="chat-me">
+              <option v-for="name in participants" :key="name" :value="name">
+                {{ name }}
+              </option>
+            </select>
+            <small>{{ t("pdfTool.pointOfViewHint") }}</small>
+          </label>
+
           <!-- Three short panels instead of one long column, so the preview
                stays in sight while something is changed. -->
           <div
@@ -197,18 +211,6 @@
           >
             <fieldset class="chat-pdf__group">
               <legend>{{ t("pdfTool.adjustTitle") }}</legend>
-              <label class="chat-pdf__field">
-                <span>{{ t("pdfTool.me") }}</span>
-                <select v-model="options.me" name="chat-me">
-                  <option
-                    v-for="name in participants"
-                    :key="name"
-                    :value="name"
-                  >
-                    {{ name }}
-                  </option>
-                </select>
-              </label>
               <label class="chat-pdf__check">
                 <input v-model="options.showTimes" type="checkbox" />
                 {{ t("pdfTool.showTimes") }}
@@ -1597,6 +1599,38 @@ onBeforeUnmount(() => {
     height: 1.05rem;
     accent-color: $wa-accent;
   }
+}
+
+.chat-pdf__pov {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(29, 29, 31, 0.08);
+  border-radius: $wa-radius-md;
+  background: $wa-surface-white;
+
+  select {
+    width: 100%;
+    padding: 0.5rem 0.6rem;
+    border: 1px solid rgba(29, 29, 31, 0.15);
+    border-radius: 8px;
+    background: #ffffff;
+    font: inherit;
+    color: $wa-ink;
+  }
+
+  small {
+    font-size: 0.78rem;
+    color: $wa-ink-faint;
+  }
+}
+
+.chat-pdf__pov-label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: $wa-ink;
 }
 
 .chat-pdf__actions {
