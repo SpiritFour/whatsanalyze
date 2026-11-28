@@ -92,5 +92,11 @@
     "lint-staged": "^10.5.4",
     "prettier": "3.9.8",
     "serve": "^14.2.6"
+  },
+  "pnpm": {
+    "overrides": {
+      "nuxt>@nuxt/devtools": "3.4.3",
+      "launch-editor>shell-quote": "1.11.0"
+    }
   }
 }
