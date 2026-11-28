@@ -273,36 +273,6 @@
               </div>
             </fieldset>
           </div>
-
-          <div class="chat-pdf__actions">
-            <button
-              type="button"
-              class="chat-pdf__print"
-              :disabled="printing || isEmpty"
-              :aria-busy="printing ? 'true' : null"
-              @click="printChat"
-            >
-              <span
-                v-if="printing"
-                class="chat-pdf__spinner"
-                aria-hidden="true"
-              ></span>
-              <template v-if="printing">
-                {{ t("pdfTool.printPreparing") }}
-                <span v-if="printProgress" class="chat-pdf__percent"
-                  >{{ printProgress }}%</span
-                >
-              </template>
-              <template v-else>{{ t("pdfTool.print") }}</template>
-            </button>
-            <p class="chat-pdf__hint">
-              {{
-                hasFullAccess
-                  ? t("pdfTool.printHintFull")
-                  : t("pdfTool.printHint")
-              }}
-            </p>
-          </div>
         </form>
 
         <div class="chat-pdf__preview">
@@ -388,7 +358,44 @@
           :source="source"
           :is-valid-subscription="isSubscriptionValid"
           :chat-view="chatView"
-        />
+        >
+          <!-- Printing is the second way out, under the download. -->
+          <template #after-download>
+            <div class="chat-pdf__actions">
+              <button
+                type="button"
+                class="chat-pdf__print"
+                :class="{ 'is-ready': printReady }"
+                :disabled="printing || isEmpty"
+                :aria-busy="printing ? 'true' : null"
+                @click="printChat"
+              >
+                <span
+                  v-if="printing"
+                  class="chat-pdf__spinner"
+                  aria-hidden="true"
+                ></span>
+                <template v-if="printing">
+                  {{ t("pdfTool.printPreparing") }}
+                  <span v-if="printProgress" class="chat-pdf__percent"
+                    >{{ printProgress }}%</span
+                  >
+                </template>
+                <template v-else-if="printReady">{{
+                  t("pdfTool.printOpen")
+                }}</template>
+                <template v-else>{{ t("pdfTool.print") }}</template>
+              </button>
+              <p class="chat-pdf__hint">
+                {{
+                  hasFullAccess
+                    ? t("pdfTool.printHintFull")
+                    : t("pdfTool.printHint")
+                }}
+              </p>
+            </div>
+          </template>
+        </PdfDownloadPopup>
       </div>
     </div>
   </LandingSection>
@@ -1083,13 +1090,56 @@ function printInFrame(url) {
   document.body.appendChild(frame);
 }
 
+/**
+ * iPhone and iPad: a tab opened before the PDF is made stays blank until
+ * the visitor switches away and back, and one opened after it is made is
+ * blocked, because the tap no longer counts. So there the first tap makes
+ * the PDF and the second, a fresh tap, hands it over: to the share sheet
+ * (which has Print) where it takes files, else to a new tab.
+ */
+const printReady = shallowRef(false);
+let printBlob = null;
+
+function printFileName() {
+  return `WhatsApp Chat - ${String(chatTitle.value)
+    .replace(/[\\/:*?"<>|]/g, "-")
+    .trim()}.pdf`;
+}
+
+async function openReadyPdf() {
+  const file = new File([printBlob], printFileName(), {
+    type: "application/pdf",
+  });
+  const iOS =
+    /iP(hone|ad|od)/.test(navigator.userAgent) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  if (iOS && navigator.canShare?.({ files: [file] })) {
+    try {
+      await navigator.share({ files: [file] });
+      return;
+    } catch (error) {
+      // dismissed: nothing to do; anything else: open it instead
+      if (error?.name === "AbortError") return;
+    }
+  }
+  window.open(printUrl, "_blank");
+}
+
+/** A new design or chat makes the prepared PDF stale. */
+function forgetPreparedPdf() {
+  printReady.value = false;
+  printBlob = null;
+}
+
 async function printChat() {
   if (printing.value || !chat.value) return;
+  if (printReady.value && printBlob) {
+    analyticsTools.pdfPrint(hasFullAccess.value);
+    await openReadyPdf();
+    return;
+  }
   printing.value = true;
   printProgress.value = 0;
-  // Opened now, while the click still counts as one: a window opened after
-  // the PDF is built would be blocked as a popup.
-  const tab = opensPdfInTab() ? window.open("", "_blank") : null;
   try {
     const blob = await renderChatViewPdf({
       chat: toRaw(chat.value),
@@ -1104,18 +1154,30 @@ async function printChat() {
         printProgress.value = Math.round(percent);
       },
     });
-    analyticsTools.pdfPrint(hasFullAccess.value);
     releasePrintUrl();
     printUrl = URL.createObjectURL(blob);
-    if (tab) tab.location.href = printUrl;
-    else printInFrame(printUrl);
+    if (opensPdfInTab()) {
+      printBlob = blob;
+      printReady.value = true;
+    } else {
+      analyticsTools.pdfPrint(hasFullAccess.value);
+      printInFrame(printUrl);
+    }
   } catch (error) {
-    tab?.close();
     console.error("Could not print the chat", error);
   } finally {
     printing.value = false;
   }
 }
+
+watch(
+  () => [
+    chat.value,
+    hasFullAccess.value,
+    JSON.stringify(printableOptions.value),
+  ],
+  forgetPreparedPdf,
+);
 
 function loadStoredCover() {
   try {
@@ -1511,11 +1573,17 @@ onBeforeUnmount(() => {
   }
 }
 
+.chat-pdf__actions {
+  margin-top: 1rem;
+  text-align: center;
+}
+
 .chat-pdf__print {
-  width: 100%;
+  width: auto;
+  min-width: 12rem;
   padding: 0.7rem 1rem;
   border: 1px solid $wa-accent;
-  border-radius: $wa-radius-md;
+  border-radius: 999px;
   background: $wa-surface-white;
   color: $wa-accent;
   font-weight: 700;
@@ -1559,6 +1627,16 @@ onBeforeUnmount(() => {
   .chat-pdf__spinner {
     animation-duration: 2.4s;
   }
+}
+
+.chat-pdf__print.is-ready {
+  background: $wa-accent;
+  color: #ffffff;
+}
+
+.chat-pdf__actions .chat-pdf__hint {
+  max-width: 28rem;
+  margin-inline: auto;
 }
 
 .chat-pdf__hint {

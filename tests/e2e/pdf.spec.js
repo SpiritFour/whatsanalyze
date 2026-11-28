@@ -422,6 +422,44 @@ test.describe("the WhatsApp to PDF tool", () => {
     ).toBeEnabled();
   });
 
+  test.describe("on an iPhone", () => {
+    test.use({
+      userAgent:
+        "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1",
+    });
+
+    test("makes the PDF first, then opens it on a second tap", async ({
+      page,
+    }) => {
+      test.setTimeout(180_000);
+      await openTool(page);
+      const print = page.locator(".chat-pdf__print");
+      await print.click();
+      // No blank tab while the PDF is made: the tap only prepares it.
+      await expect(print).toHaveText("Open PDF to print", { timeout: 60_000 });
+
+      // The second tap is a fresh one, so the PDF opens straight away (here
+      // in a tab: this browser has no share sheet for files). Headless
+      // Chromium shows no URL for a PDF tab, so the call itself is checked.
+      await page.evaluate(() => {
+        window.__opened = [];
+        window.open = (url) => {
+          window.__opened.push(String(url));
+          return null;
+        };
+      });
+      await print.click();
+      await expect
+        .poll(() => page.evaluate(() => window.__opened))
+        .toEqual([expect.stringMatching(/^blob:/)]);
+
+      // A change to the design makes it stale: the next tap prepares anew.
+      await openControls(page, "content");
+      await page.locator('input[name="chat-analysis"]').uncheck();
+      await expect(print).toHaveText("Print");
+    });
+  });
+
   test("prints only the chat with the browser's own print", async ({
     page,
   }) => {
@@ -536,9 +574,10 @@ test.describe("the WhatsApp to PDF tool", () => {
     await page.locator('input[name="chat-to"]').fill("2021-03-31");
 
     await expect(page.locator("[data-empty]")).toBeVisible();
+    // Nothing to print or download: the buttons go with the download section.
     await expect(
       page.getByRole("button", { name: "Print", exact: true }),
-    ).toBeDisabled();
+    ).toHaveCount(0);
     await expect(
       page.getByRole("button", { name: /Download free preview PDF/i }),
     ).toHaveCount(0);

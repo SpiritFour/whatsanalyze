@@ -133,6 +133,7 @@ export const messages = {
       showMedia: "Show photos",
       showNames: "Show names",
       printPreparing: "Preparing…",
+      printOpen: "Open PDF to print",
       print: "Print",
       printHint:
         "Prints the free preview: the first 100 messages, exactly as in the PDF. On iPhone and iPad it opens the PDF to print or share.",
@@ -2392,6 +2393,7 @@ export const messages = {
       showMedia: "Fotos anzeigen",
       showNames: "Namen anzeigen",
       printPreparing: "Wird vorbereitet…",
+      printOpen: "PDF zum Drucken öffnen",
       print: "Drucken",
       printHint:
         "Druckt die kostenlose Vorschau: die ersten 100 Nachrichten, genau wie im PDF. Auf iPhone und iPad öffnet sich das PDF zum Drucken oder Teilen.",
@@ -4651,6 +4653,7 @@ export const messages = {
       showMedia: "Mostrar fotos",
       showNames: "Mostrar nombres",
       printPreparing: "Preparando…",
+      printOpen: "Abrir PDF para imprimir",
       print: "Imprimir",
       printHint:
         "Imprime la vista previa gratuita: los primeros 100 mensajes, igual que en el PDF. En iPhone y iPad se abre el PDF para imprimirlo o compartirlo.",
@@ -6894,6 +6897,7 @@ export const messages = {
       showMedia: "Mostrar fotos",
       showNames: "Mostrar nomes",
       printPreparing: "A preparar…",
+      printOpen: "Abrir o PDF para imprimir",
       print: "Imprimir",
       printHint:
         "Imprime a pré-visualização gratuita: as primeiras 100 mensagens, tal como no PDF. No iPhone e iPad abre o PDF para imprimir ou partilhar.",
@@ -9143,6 +9147,7 @@ export const messages = {
       showMedia: "Afficher les photos",
       showNames: "Afficher les noms",
       printPreparing: "Préparation…",
+      printOpen: "Ouvrir le PDF pour imprimer",
       print: "Imprimer",
       printHint:
         "Imprime l'aperçu gratuit : les 100 premiers messages, exactement comme dans le PDF. Sur iPhone et iPad, le PDF s'ouvre pour être imprimé ou partagé.",
@@ -11404,6 +11409,7 @@ export const messages = {
       showMedia: "Mostra foto",
       showNames: "Mostra nomi",
       printPreparing: "Preparazione…",
+      printOpen: "Apri il PDF da stampare",
       print: "Stampa",
       printHint:
         "Stampa l'anteprima gratuita: i primi 100 messaggi, esattamente come nel PDF. Su iPhone e iPad si apre il PDF da stampare o condividere.",

@@ -260,6 +260,7 @@
             </v-card>
           </v-dialog>
         </div>
+        <slot name="after-download" />
       </div>
     </div>
 
