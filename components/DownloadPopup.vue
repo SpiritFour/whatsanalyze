@@ -119,74 +119,88 @@ export default {
       suffix: this.isSimple ? "-top" : "",
     };
   },
+  beforeUnmount() {
+    this._unmounted = true;
+    if (this._downloadTimer) {
+      clearTimeout(this._downloadTimer);
+      this._downloadTimer = null;
+    }
+  },
   methods: {
     download: function () {
+      if (this.loading) return;
       this.loading = true;
       analyticsChat.download("chart_image", "graphs");
-      setTimeout(async () => {
-        const graphs = document.querySelector("#download-graphs");
-        // Taken before the capture: html2canvas cannot draw the SVG clouds,
-        // and inside onclone there is no room to wait for anything.
-        const svgSnapshots = await snapshotSvgCharts(graphs);
+      this._downloadTimer = setTimeout(async () => {
+        this._downloadTimer = null;
+        try {
+          const graphs = document.querySelector("#download-graphs");
+          // The user can navigate away during the 250ms delay or while
+          // snapshotSvgCharts() is running, unmounting #download-graphs.
+          if (this._unmounted || !graphs) return;
 
-        let additionalHeight = 0;
-        document
-          .querySelectorAll(".additional-height")
-          .forEach((a) => (additionalHeight += a.clientHeight));
+          // Taken before the capture: html2canvas cannot draw the SVG clouds,
+          // and inside onclone there is no room to wait for anything.
+          const svgSnapshots = await snapshotSvgCharts(graphs);
 
-        let negativeHeight = 0;
-        document
-          .querySelectorAll("[remove-height-in-html2-canvas]")
-          .forEach((a) => (negativeHeight -= a.clientHeight));
+          const target = document.querySelector("#download-graphs");
+          if (this._unmounted || !target) return;
 
-        let normalHeight =
-          document.querySelector("#download-graphs").clientHeight;
+          let additionalHeight = 0;
+          document
+            .querySelectorAll(".additional-height")
+            .forEach((a) => (additionalHeight += a.clientHeight));
 
-        //wordcloud
-        let canvas = html2canvas(document.querySelector("#download-graphs"), {
-          scrollX: 0,
-          scrollY: -window.scrollY,
-          height: normalHeight + additionalHeight + negativeHeight,
-          scale: Math.min(window.devicePixelRatio || 1, 2),
-          logging: false,
-          useCORS: true,
-          backgroundColor: "#ffffff",
-          onclone: function (clonedDoc) {
-            if (clonedDoc.documentElement) {
-              clonedDoc.documentElement.style.backgroundColor = "#ffffff";
-            }
-            if (clonedDoc.body) {
-              clonedDoc.body.style.backgroundColor = "#ffffff";
-            }
-            let nonVisibleStuff = clonedDoc.querySelectorAll(
-              ".only-visible-to-html2canvas",
-            );
-            nonVisibleStuff.forEach((y) => (y.style.display = "block"));
-            applySvgChartSnapshots(
-              clonedDoc.querySelector("#download-graphs"),
-              svgSnapshots,
-            );
-            return clonedDoc;
-          },
-        });
+          let negativeHeight = 0;
+          document
+            .querySelectorAll("[remove-height-in-html2-canvas]")
+            .forEach((a) => (negativeHeight -= a.clientHeight));
 
-        let names = this.chat.messagesPerPerson
-          .slice(0, 2)
-          .map((person) => person.name)
-          .join("-");
-        canvas
-          .then((renderedCanvas) => {
-            downloadBase64File(
-              renderedCanvas,
-              "whatsanalyze.com-results-" + names + ".png",
-            );
-          })
-          .catch((err) => {
-            console.error("Failed to render download canvas", err);
-          })
-          .finally(() => {
-            this.loading = false;
+          let normalHeight = target.clientHeight;
+
+          //wordcloud
+          const renderedCanvas = await html2canvas(target, {
+            scrollX: 0,
+            scrollY: -window.scrollY,
+            height: normalHeight + additionalHeight + negativeHeight,
+            scale: Math.min(window.devicePixelRatio || 1, 2),
+            logging: false,
+            useCORS: true,
+            backgroundColor: "#ffffff",
+            onclone: function (clonedDoc) {
+              if (clonedDoc.documentElement) {
+                clonedDoc.documentElement.style.backgroundColor = "#ffffff";
+              }
+              if (clonedDoc.body) {
+                clonedDoc.body.style.backgroundColor = "#ffffff";
+              }
+              let nonVisibleStuff = clonedDoc.querySelectorAll(
+                ".only-visible-to-html2canvas",
+              );
+              nonVisibleStuff.forEach((y) => (y.style.display = "block"));
+              applySvgChartSnapshots(
+                clonedDoc.querySelector("#download-graphs"),
+                svgSnapshots,
+              );
+              return clonedDoc;
+            },
           });
+
+          if (this._unmounted) return;
+
+          let names = (this.chat?.messagesPerPerson || [])
+            .slice(0, 2)
+            .map((person) => person.name)
+            .join("-");
+          downloadBase64File(
+            renderedCanvas,
+            "whatsanalyze.com-results-" + names + ".png",
+          );
+        } catch (err) {
+          console.error("Failed to render download canvas", err);
+        } finally {
+          this.loading = false;
+        }
       }, 250);
     },
     donate() {
