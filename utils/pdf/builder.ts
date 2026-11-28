@@ -108,8 +108,8 @@ class WorkerWriter implements Writer {
     return this.call<void>("emoji", pngs);
   }
 
-  // Waited for, so the page never runs more than a batch ahead of the
-  // writer and the batches do not pile up in memory.
+  // PdfBuilder keeps at most one of these in flight, so the page lays out
+  // the next batch while this one is drawn.
   place(blocks: MeasuredBlock[]) {
     return this.call<void>("place", blocks);
   }
@@ -177,6 +177,8 @@ export class PdfBuilder {
   readonly sprite: Map<string, string>;
   /** Emoji already rasterised and handed to the writer. */
   private sentEmoji = new Set<string>();
+  /** The batch the writer is still drawing, if any. */
+  private writing: Promise<void> | null = null;
 
   private constructor(
     surface: LayoutSurface,
@@ -230,12 +232,22 @@ export class PdfBuilder {
       const png = await rasterizeEmoji(id, this.sprite);
       if (png) pngs[id] = png;
     }
-    if (Object.keys(pngs).length) await this.writer.addEmoji(pngs);
-
-    await this.writer.place(blocks);
+    // While the writer draws this batch, the page lays out the next one.
+    // One batch in flight at most, so batches never pile up in memory. Messages reach the worker in
+    // order, so the emoji are there before the blocks that use them.
+    await this.writing;
+    const emoji = Object.keys(pngs).length
+      ? this.writer.addEmoji(pngs)
+      : undefined;
+    const placed = this.writer.place(blocks);
+    this.writing = Promise.all([emoji, placed]).then(() => undefined);
+    // Seen by the next add() or finish(); this only stops an export that is
+    // abandoned midway from reporting an unhandled rejection.
+    this.writing.catch(() => {});
   }
 
-  finish(title: string, furniture: Furniture): Promise<Blob> {
+  async finish(title: string, furniture: Furniture): Promise<Blob> {
+    await this.writing;
     return this.writer.finish(title, furniture);
   }
 

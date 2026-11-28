@@ -374,6 +374,25 @@ function collectText(
   };
 
   const range = surface.range;
+
+  // Most text nodes sit on one line: a name, a time, a short message. Such a
+  // node is read with one rect for all of it instead of one per word, which
+  // was a third of the measuring time. A node over several lines (or one a
+  // clip cuts into) still goes word by word, to learn where each line breaks.
+  const first = data.search(/\S/);
+  const last = data.length - (data.match(/\s*$/)?.[0].length ?? 0);
+  range.setStart(node, first);
+  range.setEnd(node, last);
+  const whole = surface.rectsOf(range);
+  if (
+    whole.length === 1 &&
+    insideClip(clip, whole[0].x, whole[0].y, whole[0].width, whole[0].height) &&
+    !/[\n\t]/.test(data.slice(first, last))
+  ) {
+    push(whole[0], data.slice(first, last));
+    return;
+  }
+
   WORD.lastIndex = 0;
   for (let match = WORD.exec(data); match; match = WORD.exec(data)) {
     const start = match.index;

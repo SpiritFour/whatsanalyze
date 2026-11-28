@@ -21,6 +21,11 @@ html, body {
   /* The emitter reads per-word boxes, so the browser must not reflow text
      between measuring and drawing. Nothing here may depend on viewport size. */
   text-rendering: geometricPrecision;
+  /* jsPDF draws neither kerning nor ligatures, so the browser does not lay
+     them out either: its line widths then match the drawn ones, and shaping
+     a long chat is cheaper. */
+  font-kerning: none;
+  font-variant-ligatures: none;
   -webkit-font-smoothing: antialiased;
   /* Mobile browsers inflate text in narrow frames. The document is a fixed
      sheet, not something to be made readable on a phone. */

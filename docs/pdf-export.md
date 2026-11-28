@@ -120,6 +120,15 @@ writes its drawing calls down and answers its measuring with a local jsPDF;
 the worker replays them. Without Worker support the same writer runs on the
 page.
 
+The two sides overlap: while the worker draws one batch, the page lays out
+the next (`PdfBuilder.add`), with at most one batch in flight. A text node
+that sits on one line is measured with a single rect and drawn as one run;
+only text over several lines is measured word by word, to learn where each
+line breaks. A run whose jsPDF width differs from the browser's by more than
+half a pixel gets character spacing that makes up the difference, inside a
+graphics save/restore. The layout frame turns kerning and ligatures off,
+because jsPDF draws neither.
+
 ## The WhatsApp-to-PDF tool: one view, three outputs
 
 `/tools/whatsapp-to-pdf` shows the chat the way it looks on a phone and lets the

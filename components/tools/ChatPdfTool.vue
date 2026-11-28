@@ -271,9 +271,21 @@
               type="button"
               class="chat-pdf__print"
               :disabled="printing || isEmpty"
+              :aria-busy="printing ? 'true' : null"
               @click="printChat"
             >
-              {{ printing ? t("pdfTool.printPreparing") : t("pdfTool.print") }}
+              <span
+                v-if="printing"
+                class="chat-pdf__spinner"
+                aria-hidden="true"
+              ></span>
+              <template v-if="printing">
+                {{ t("pdfTool.printPreparing") }}
+                <span v-if="printProgress" class="chat-pdf__percent"
+                  >{{ printProgress }}%</span
+                >
+              </template>
+              <template v-else>{{ t("pdfTool.print") }}</template>
             </button>
             <p class="chat-pdf__hint">
               {{
@@ -1045,6 +1057,7 @@ const coverPreviewColor = computed(() => coverColor(options));
 // only `#cv-print-root` is printed while `html.cv-printing` is set, see
 // chatPrintGlobalCss. That path prints the preview.
 const printing = shallowRef(false);
+const printProgress = shallowRef(0);
 let globalStyle = null;
 let printUrl = null;
 
@@ -1124,6 +1137,7 @@ function printInFrame(url) {
 async function printChat() {
   if (printing.value || !chat.value) return;
   printing.value = true;
+  printProgress.value = 0;
   // Opened now, while the click still counts as one: a window opened after
   // the PDF is built would be blocked as a popup.
   const tab = opensPdfInTab() ? window.open("", "_blank") : null;
@@ -1137,6 +1151,9 @@ async function printChat() {
       locale: locale.value,
       isSample: !hasFullAccess.value,
       assets: await currentAssets(),
+      onProgress: (percent) => {
+        printProgress.value = Math.round(percent);
+      },
     });
     analyticsTools.pdfPrint(hasFullAccess.value);
     releasePrintUrl();
@@ -1558,6 +1575,40 @@ onBeforeUnmount(() => {
   &:disabled {
     opacity: 0.6;
     cursor: progress;
+  }
+
+  &[aria-busy="true"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    opacity: 1;
+  }
+}
+
+.chat-pdf__spinner {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  border: 2px solid rgba(29, 29, 31, 0.15);
+  border-top-color: $wa-accent;
+  border-radius: 50%;
+  animation: chat-pdf-spin 0.8s linear infinite;
+}
+
+.chat-pdf__percent {
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes chat-pdf-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chat-pdf__spinner {
+    animation-duration: 2.4s;
   }
 }
 

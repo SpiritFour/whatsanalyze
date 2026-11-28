@@ -368,7 +368,16 @@ test.describe("the WhatsApp to PDF tool", () => {
     test.setTimeout(180_000);
     await openTool(page);
 
-    await page.getByRole("button", { name: "Print", exact: true }).click();
+    const print = page.getByRole("button", { name: "Print", exact: true });
+    await print.click();
+    // While the PDF is made, the button says so with a spinner.
+    await expect(page.locator(".chat-pdf__print")).toHaveAttribute(
+      "aria-busy",
+      "true",
+    );
+    await expect(
+      page.locator(".chat-pdf__print .chat-pdf__spinner"),
+    ).toBeVisible();
 
     // The same file the download gives, handed to the browser's PDF printing
     // in a frame: it looks the same from every browser.

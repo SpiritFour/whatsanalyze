@@ -36,6 +36,10 @@ const MIN_SPLIT_PX = 32;
  * styles, and hex literals from a theme. Both have to work -- a hex value
  * falling through to black here paints whole pages the wrong colour.
  */
+
+/** Half a CSS pixel: well under a glyph's side bearing. */
+const TEXT_TOLERANCE_PX = 0.5;
+
 export function parseColor(color: string): [number, number, number] {
   const hex = color.trim().match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);
   if (hex) {
@@ -370,8 +374,6 @@ export class PdfWriter {
   private mergeTextRuns(items: RenderItem[]): RenderItem[] {
     const merged: RenderItem[] = [];
     let run: TextItem | null = null;
-    // Half a CSS pixel: well under a glyph's side bearing.
-    const TOLERANCE = 0.5;
 
     const sameStyle = (a: TextItem, b: TextItem) =>
       a.fontFamily === b.fontFamily &&
@@ -393,7 +395,7 @@ export class PdfWriter {
       if (current && sameStyle(current, item)) {
         const expected =
           current.x + this.textWidthPx(`${current.text} `, current);
-        if (Math.abs(expected - item.x) <= TOLERANCE) {
+        if (Math.abs(expected - item.x) <= TEXT_TOLERANCE_PX) {
           run = {
             ...current,
             text: `${current.text} ${item.text}`,
@@ -510,9 +512,23 @@ export class PdfWriter {
     this.doc.setTextColor(r, g, b);
     this.doc.setFont(item.fontFamily, item.bold ? "bold" : "normal");
     this.doc.setFontSize(pt(item.fontSize));
+
+    // A whole line measured at once (utils/pdf/measure.ts) is drawn as one
+    // run. Where jsPDF's glyph widths differ from the browser's (kerning, a
+    // fallback font), spread the difference over its letters so the line
+    // still ends where the browser ended it. Character spacing is graphics
+    // state, so it is set inside a save/restore pair and leaks nowhere.
+    // A single word keeps jsPDF's own widths, as it always has.
+    const isRun = item.text.includes(" ");
+    const drift = isRun ? item.width - this.textWidthPx(item.text, item) : 0;
+    const letters = item.text.length;
+    const spread = isRun && Math.abs(drift) > TEXT_TOLERANCE_PX;
+    if (spread) this.doc.saveGraphicsState();
     this.doc.text(item.text, mm(left + item.x), mm(top + item.baseline), {
       baseline: "alphabetic",
+      ...(spread ? { charSpace: mm(drift / letters) } : {}),
     });
+    if (spread) this.doc.restoreGraphicsState();
   }
 
   /**
